@@ -144,7 +144,8 @@ export const DRAFT_MODELS = ["@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/me
 export const AUTHOR_MODELS = ["claude-haiku-5-5", "claude-sonnet-5-5"];
 export interface LlmControls {
   enabled: boolean;
-  purposes: { draft: boolean; guard: boolean; embed: boolean; author: boolean; chotu: boolean };
+  /** evaluate: Answer Studio's rubric feedback (answers.ts). */
+  purposes: { draft: boolean; guard: boolean; embed: boolean; author: boolean; chotu: boolean; evaluate: boolean };
   draftModel: string;
   /** Claude model for the desk's Author tab (needs ANTHROPIC_API_KEY). */
   authorModel: string;
@@ -155,7 +156,7 @@ export interface LlmControls {
 }
 export const DEFAULT_LLM: LlmControls = {
   enabled: true,
-  purposes: { draft: true, guard: true, embed: true, author: true, chotu: true },
+  purposes: { draft: true, guard: true, embed: true, author: true, chotu: true, evaluate: true },
   draftModel: DRAFT_MODELS[0],
   authorModel: AUTHOR_MODELS[0],
   dailyCallCap: 300,
@@ -269,6 +270,9 @@ export const ADMIN_SCHEMA = [
   `CREATE TABLE IF NOT EXISTS payments (order_id TEXT PRIMARY KEY, member_id TEXT NOT NULL, amount_inr REAL NOT NULL, founding INTEGER NOT NULL DEFAULT 0,
     status TEXT NOT NULL, mode TEXT NOT NULL, cf_payment_id TEXT, created_at TEXT NOT NULL, paid_at TEXT, refunded_at TEXT, refund_inr REAL, refund_note TEXT)`,
   `CREATE INDEX IF NOT EXISTS payments_member ON payments(member_id, created_at)`,
+  // Open pods (rooms.ts): which pre-set rooms a member joined. A member can be in several.
+  `CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id))`,
+  `CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id)`,
 ];
 
 const ALTERS = [

@@ -5,7 +5,7 @@ import { exportMember, forgetMember } from "./privacy";
 import { type Env, HELPLINES, bad, istDay, json, newId } from "./shared";
 import {
   AUTHOR_MODELS, DEFAULT_FLAGS, DRAFT_MODELS, FLAG_INFO, ROLES, type Role, type Staff, audit, auditDetail, can, ensureSchema, flags,
-  label, llmControls, newKey, permsOf, recordVersion, requireStaff, setSetting, sha256Hex, staffFrom,
+  getSetting, label, llmControls, newKey, permsOf, recordVersion, requireStaff, setSetting, sha256Hex, staffFrom,
 } from "./staff";
 import { COMPONENTS } from "./status";
 import { languageRequests } from "./requests";
@@ -14,6 +14,7 @@ import { activeResult, cleanResults, resultDays } from "./results";
 import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
+import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
 
@@ -338,7 +339,7 @@ route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
   const next = {
     enabled: body.enabled ?? c.enabled,
     purposes: { draft: body.purposes?.draft ?? c.purposes.draft, guard: body.purposes?.guard ?? c.purposes.guard, embed: body.purposes?.embed ?? c.purposes.embed,
-      author: body.purposes?.author ?? c.purposes.author, chotu: body.purposes?.chotu ?? c.purposes.chotu },
+      author: body.purposes?.author ?? c.purposes.author, chotu: body.purposes?.chotu ?? c.purposes.chotu, evaluate: body.purposes?.evaluate ?? c.purposes.evaluate },
     draftModel: DRAFT_MODELS.includes(body.draftModel) ? body.draftModel : c.draftModel,
     authorModel: AUTHOR_MODELS.includes(body.authorModel) ? body.authorModel : c.authorModel,
     dailyCallCap: num(body.dailyCallCap, 0, 100_000, c.dailyCallCap),
@@ -347,7 +348,7 @@ route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
     temperature: num(body.temperature, 0, 1, c.temperature),
   };
   for (const k of ["enabled"] as const) next[k] = !!next[k];
-  for (const k of ["draft", "guard", "embed", "author", "chotu"] as const) next.purposes[k] = !!next.purposes[k];
+  for (const k of ["draft", "guard", "embed", "author", "chotu", "evaluate"] as const) next.purposes[k] = !!next.purposes[k];
   await setSetting(env, "llm", next, label(s));
   return json(next);
 });
@@ -450,6 +451,15 @@ route("POST", /^results$/, "flags", async ({ env, s, body }) => {
   if (!results) return bad("results must be a list of up to 20 { day: YYYY-MM-DD, label }");
   await setSetting(env, "results", results, label(s));
   return json({ results, now: activeResult(results) });
+});
+
+/** Open pods until this many sign-ups, then matched pods switch on (rooms.ts). */
+route("GET", /^growth\/threshold$/, "flags", async ({ env }) => json(await podMode(env)));
+route("POST", /^growth\/threshold$/, "flags", async ({ env, s, body }) => {
+  const t = Math.round(Number(body.signupThreshold));
+  if (!(t >= 0 && t <= 10_000_000)) return bad("signupThreshold must be a number of sign-ups (0 switches matched pods on now)");
+  await setSetting(env, "growth", { ...(await getSetting(env, "growth", DEFAULT_GROWTH)), signupThreshold: t }, label(s));
+  return json(await podMode(env));
 });
 
 // --- Feature flags --------------------------------------------------------------------------

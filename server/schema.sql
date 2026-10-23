@@ -163,3 +163,7 @@ CREATE TABLE IF NOT EXISTS password_logins (
 CREATE TABLE IF NOT EXISTS login_throttle (k TEXT PRIMARY KEY, fails INTEGER NOT NULL, window_start INTEGER NOT NULL);
 -- The key that signs session tokens, made by the Worker on first use. Never sent anywhere.
 CREATE TABLE IF NOT EXISTS server_keys (name TEXT PRIMARY KEY, value TEXT NOT NULL, created_at TEXT NOT NULL);
+
+-- Open pods (src/rooms.ts): which pre-set rooms a member joined. A member can be in several.
+CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id));
+CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id);

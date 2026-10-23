@@ -196,7 +196,8 @@ export function isMemberRoute(path: string): boolean {
   return /^\/pods\/(join|leave|me|choose)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
     || path === "/members/profile" || /^\/commons\/[\w-]+\/ws$/.test(path) || path === "/season/add" || path === "/mocks/band"
     || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
-    || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path);
+    || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)
+    || /^\/rooms\/(list|join|leave)$/.test(path) || /^\/rooms\/[\w-]+\/ws$/.test(path) || path === "/answers/evaluate";
 }
 /** A suspended person can still get or erase their data (DPDP). */
 const OPEN_WHEN_SUSPENDED = /^\/privacy\/(export|delete)$/;

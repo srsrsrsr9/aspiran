@@ -5,12 +5,14 @@ import { type Env, bad, istDay, istNow, json, newId } from "./shared";
 import { activeResult, resultDays } from "./results";
 import { bump, ensureSchema, flags, getSetting } from "./staff";
 import { logEvent } from "./metrics";
+import { OPEN_ROOMS, podMode, roomCounts, roomPost } from "./rooms";
 
 /**
  * Community-first pods (spec §3): honest states, Monday batch matching, merging forming pods, the quiet-pod
  * rule, Chotu's host schedule, the Commons, the community season, and the four matching fields.
  *
- * No fake members, ever. Chotu is a host and the pod friends (friends.ts) are labelled AI; neither is ever counted. "humans" below is always people.
+ * Chotu is a host and the pod friends (friends.ts) are labelled AI; neither is ever counted. "humans" below is always people.
+ * Until the sign-up threshold, the open rooms (rooms.ts) are the pods; they get the same host schedule and friends.
  */
 
 export const POD_CAPACITY = 8;
@@ -263,9 +265,28 @@ export async function hostTick(env: Env, at = new Date()) {
     const fr = await podPost(env, p.id, "friends", { at: at.toISOString(), humans: p.size, on: friendsOn, quiz: friendQuiz }).catch(() => null);
     if (fr?.ok) friendPosts += (await fr.json<{ posted: number }>()).posted || 0;
   }
+  // Open rooms: the same rituals (no shared goal bar, a room is too big for one), never "quiet". The friends get
+  // humans: 0 so they stay at their fullest level: a room is public and should never feel empty to a newcomer.
+  const counts = await roomCounts(env);
+  for (const r of OPEN_ROOMS) {
+    const humans = counts.get(r.id) ?? 0;
+    const jobs: any[] = [{ slot: "check" }];
+    for (const s of due) {
+      if (s.slot === "goal") continue;
+      const job: any = { slot: s.slot, text: await slotText(env, s.slot, humans) };
+      if (s.slot === "quiz") job.quiz = await quizQuestions(env, at.getTime());
+      jobs.unshift(job);
+    }
+    for (const job of jobs) {
+      const res = await roomPost(env, r.id, "host", { ...job, at: at.toISOString(), state: "full", humans }).catch(() => null);
+      if (res?.ok && (await res.json<{ posted: boolean }>()).posted) posted++;
+    }
+    const fr = await roomPost(env, r.id, "friends", { at: at.toISOString(), humans: 0, on: friendsOn, quiz: friendQuiz }).catch(() => null);
+    if (fr?.ok) friendPosts += (await fr.json<{ posted: number }>()).posted || 0;
+  }
   if (posted) await bump(env, "host_posts", posted);
   if (friendPosts) await bump(env, "friend_posts", friendPosts);
-  return { pods: results.length, posted, friendPosts };
+  return { pods: results.length, rooms: OPEN_ROOMS.length, posted, friendPosts };
 }
 
 /** The 07:00 Chai post goes through the same host gate as everything else Chotu says in a pod. */
@@ -276,6 +297,10 @@ export async function postChai(env: Env, at = new Date()) {
   let n = 0;
   for (const p of results) {
     const res = await podPost(env, p.id, "host", { slot: "chai", text, at: at.toISOString(), humans: p.size }).catch(() => null);
+    if (res?.ok && (await res.json<{ posted: boolean }>()).posted) n++;
+  }
+  for (const r of OPEN_ROOMS) {
+    const res = await roomPost(env, r.id, "host", { slot: "chai", text, at: at.toISOString(), humans: 0 }).catch(() => null);
     if (res?.ok && (await res.json<{ posted: boolean }>()).posted) n++;
   }
   return n;
@@ -335,6 +360,9 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     const existing = await env.DB.prepare("SELECT p.* FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(memberId).first<PodRow>();
     if (existing) return json(podSummary(existing));
     if (!(await flags(env)).pod_join) return bad("Joining pods is paused for now. Try again later.", 503);
+    // Open mode (rooms.ts): below the sign-up threshold nobody new is matched; the apps show the open rooms instead.
+    const mode = await podMode(env);
+    if (mode.mode === "open") return json({ ...mode, podId: null, error: "Pods are open rooms for now. Pick one or more from the room list." }, 409);
     const { podId } = await joinPod(env, memberId, matchFields(body));
     await bump(env, "pod_joins");
     await logEvent(env, "pod_joined", { memberId });

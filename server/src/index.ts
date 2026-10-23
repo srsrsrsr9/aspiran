@@ -15,6 +15,8 @@ import { statusData, statusHtml } from "./status";
 import BANK from "../../android/app/src/main/assets/prelims_bank.json";
 import { type Env, bad, istDay, istNow, json } from "./shared";
 import { communityRoute, runJob } from "./community";
+import { podMode, roomsRoute } from "./rooms";
+import { answersRoute } from "./answers";
 import { plusRoute, useAllowance } from "./plus";
 import { paymentsRoute } from "./payments";
 import { activeResult, resultDays } from "./results";
@@ -69,7 +71,7 @@ export default {
         : [];
       // Languages members can pick, and the extra distress phrases the app checks on the device too.
       const results = await resultDays(env);
-      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login) }), { headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" } });
+      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), pods: await podMode(env), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login) }), { headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" } });
     }
 
     // --- Growth metrics (metrics.ts): our own events and one-tap feedback. No third-party trackers, never free text.
@@ -175,6 +177,12 @@ export default {
     // --- Pods (joining, states, moving), the Commons, the season and the matching fields: community.ts
     const community = await communityRoute(req, env, path, url);
     if (community) return community;
+    // --- Open rooms, joined like channels until the sign-up threshold (rooms.ts)
+    const rooms = await roomsRoute(req, env, path, url);
+    if (rooms) return rooms;
+    // --- Answer Studio: rubric feedback on a Mains answer, photo or typed (answers.ts)
+    const answers = await answersRoute(req, env, path);
+    if (answers) return answers;
     // --- Plus, test mode only and behind the "plus" flag: plus.ts
     // Cashfree: orders, the return check, receipts and the signed webhook (payments.ts)
     const pay = await paymentsRoute(req, env, path, url);

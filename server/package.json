@@ -22,7 +22,8 @@
     "import": "node scripts/import-pack.mjs",
     "test:roadmap": "node test/roadmap.mjs",
     "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
-    "test:password": "node test/password.mjs"
+    "test:password": "node test/password.mjs",
+    "test:rooms": "node --import ./test/dev-auth.mjs test/rooms.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260901.0",

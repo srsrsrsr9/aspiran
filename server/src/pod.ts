@@ -108,8 +108,8 @@ export class PodRoom extends DurableObject<Env> {
       const [client, server] = [pair[0], pair[1]];
       this.ctx.acceptWebSocket(server);
       server.serializeAttachment({ memberId, name, studying: false } satisfies Attachment);
-      // The first member to join leads until a moderator changes it (POST /lead).
-      if (memberId && !this.getMeta("lead")) {
+      // The first member to join leads until a moderator changes it (POST /lead). Open rooms (rooms.ts) have no lead.
+      if (memberId && !this.getMeta("lead") && !this.podId.startsWith("room-")) {
         this.setMeta("lead", memberId);
         this.setMeta("leadName", name);
         await this.env.DB.prepare("UPDATE pods SET lead_member = ? WHERE id = ?").bind(memberId, this.podId).run().catch(() => {});
@@ -158,6 +158,14 @@ export class PodRoom extends DurableObject<Env> {
         this.sendTo(member_id, { type: "private", message: m });
       }
       return Response.json({ asked: results.length });
+    }
+    if (url.pathname.endsWith("/activity")) {
+      // The open-room list (rooms.ts): what others posted since the phone last opened this room, and the latest line.
+      const since = Number(url.searchParams.get("since")) || 0;
+      const me = url.searchParams.get("member") ?? "";
+      const unread = this.sql.exec<{ n: number }>(`SELECT COUNT(*) AS n FROM messages WHERE ts > ? AND member_id != ? AND hidden = 0 AND kind != 'system'`, since, me).toArray()[0]?.n ?? 0;
+      const last = this.sql.exec<{ ts: number; name: string; text: string }>(`SELECT ts, name, text FROM messages WHERE hidden = 0 AND kind != 'system' ORDER BY ts DESC LIMIT 1`).toArray()[0];
+      return Response.json({ unread, lastTs: last?.ts ?? null, lastName: last?.name ?? null, lastText: last ? last.text.slice(0, 120) : null, online: this.online().length });
     }
     if (url.pathname.endsWith("/stats")) {
       // For the admin's lurker-to-poster metric: how many different people posted in 14 days. Never who.

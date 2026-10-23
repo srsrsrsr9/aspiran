@@ -85,6 +85,24 @@ export async function useAllowance(env: Env, memberId: string, kind: "feedback" 
   return { ok: true, left: Number.isFinite(limit) ? limit - n - 1 : null, limit: Number.isFinite(limit) ? limit : null };
 }
 
+/**
+ * Answer Studio's feedback allowance (answers.ts), enforced even with the plus flag off: free members get
+ * LIMITS.free.feedbackPerWeek while total sign-ups are under the threshold, Plus is unlimited. Above the threshold
+ * the free allowance is the same until pricing says otherwise. checkFeedback only looks; recordFeedback counts one
+ * use, called once the feedback has actually been given.
+ */
+export async function checkFeedback(env: Env, memberId: string): Promise<{ ok: boolean; left: number | null; limit: number | null; plus: boolean }> {
+  await ensureSchema(env);
+  const isPlus = !!(await entitlement(env, memberId));
+  if (isPlus) return { ok: true, left: null, limit: null, plus: true };
+  const n = (await used(env, memberId)).feedbackThisWeek;
+  const limit = LIMITS.free.feedbackPerWeek;
+  return { ok: n < limit, left: Math.max(0, limit - n), limit, plus: false };
+}
+export async function recordFeedback(env: Env, memberId: string) {
+  await env.DB.prepare("INSERT INTO usage (member_id, day, kind, n) VALUES (?, ?, 'feedback', 1) ON CONFLICT(member_id, day, kind) DO UPDATE SET n = n + 1").bind(memberId, istDay()).run();
+}
+
 export async function grant(env: Env, memberId: string, plan: string, source: string, days: number, trialUsed?: boolean, test = true) {
   const now = new Date();
   const cur = await env.DB.prepare("SELECT * FROM entitlements WHERE member_id = ?").bind(memberId).first<Ent>();

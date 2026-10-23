@@ -1,0 +1,121 @@
+import { type Env, bad, json } from "./shared";
+import { bump, ensureSchema, flags, getSetting } from "./staff";
+import { logEvent } from "./metrics";
+
+/**
+ * Open pods (sell-first plan, W3): pre-set rooms anyone can join on day 1, like Slack channels. A member can be in
+ * several. Each room is a PodRoom Durable Object named by its id ("room-..."), so chat, the study room, Chotu's host
+ * rituals and the AI study friends (still labelled AI) all work as they do in a pod.
+ *
+ * Until the community reaches `signupThreshold` sign-ups (500 by default, setting "growth"), rooms are the only pods:
+ * /pods/join refuses new matched members and the apps show the room list. At or above it the matched 8-person pods
+ * switch on, and the rooms stay as the public layer.
+ */
+
+export interface OpenRoom { id: string; name: string; group: "language" | "attempt" | "goal" | "optional" | "region"; note: string }
+
+export const OPEN_ROOMS: OpenRoom[] = [
+  { id: "room-hindi-medium", name: "Hindi medium", group: "language", note: "हिंदी माध्यम के साथी। Notes, doubts and answer writing in Hindi." },
+  { id: "room-english-medium", name: "English medium", group: "language", note: "Doubts, notes and daily targets in English." },
+  { id: "room-telugu", name: "Telugu", group: "language", note: "తెలుగు మాధ్యమం. Study together in Telugu." },
+  { id: "room-first-attempt", name: "First attempt", group: "attempt", note: "Starting out. Where to begin, what to skip, how to plan." },
+  { id: "room-repeaters", name: "Repeaters", group: "attempt", note: "Second attempt and beyond. Fix what leaked last time." },
+  { id: "room-working", name: "Working aspirants", group: "attempt", note: "Studying around a job. Mornings, commutes and weekends." },
+  { id: "room-prelims-2027", name: "Prelims 2027 sprint", group: "goal", note: "Daily MCQs, PYQ habits and the countdown to Prelims 2027." },
+  { id: "room-mains-writing", name: "Mains answer writing", group: "goal", note: "Post an answer, review two. Answer hour runs here too." },
+  { id: "room-opt-psir", name: "Optional: PSIR", group: "optional", note: "Political Science and International Relations." },
+  { id: "room-opt-sociology", name: "Optional: Sociology", group: "optional", note: "Thinkers, Indian society and answer practice." },
+  { id: "room-opt-geography", name: "Optional: Geography", group: "optional", note: "Maps, models and diagrams." },
+  { id: "room-opt-anthropology", name: "Optional: Anthropology", group: "optional", note: "Physical, social and Indian anthropology." },
+  { id: "room-opt-history", name: "Optional: History", group: "optional", note: "Ancient to modern, with sources and maps." },
+  { id: "room-north", name: "North", group: "region", note: "Delhi, UP, Rajasthan, Punjab, Haryana, the hill states and J&K." },
+  { id: "room-south", name: "South", group: "region", note: "Telangana, AP, Karnataka, Tamil Nadu and Kerala." },
+  { id: "room-east-ne", name: "East and Northeast", group: "region", note: "Bihar, Jharkhand, Odisha, Bengal and the Northeast." },
+  { id: "room-west-central", name: "West and Central", group: "region", note: "Maharashtra, Gujarat, Goa, MP and Chhattisgarh." },
+];
+export const isOpenRoom = (id: string) => OPEN_ROOMS.some((r) => r.id === id);
+
+export const DEFAULT_GROWTH = { signupThreshold: 500 };
+
+/** Total sign-ups: every account ever made on the server. */
+export async function signups(env: Env): Promise<number> {
+  await ensureSchema(env);
+  return (await env.DB.prepare("SELECT COUNT(*) AS n FROM accounts").first<{ n: number }>())?.n ?? 0;
+}
+
+/** "open" below the threshold (rooms only), "matched" at or above it (matched pods on, rooms stay). */
+export async function podMode(env: Env): Promise<{ mode: "open" | "matched"; signups: number; threshold: number }> {
+  const g = await getSetting(env, "growth", DEFAULT_GROWTH);
+  const n = await signups(env);
+  return { mode: n >= g.signupThreshold ? "matched" : "open", signups: n, threshold: g.signupThreshold };
+}
+
+const validId = (v: unknown) => /^[\w-]{16,64}$/.test(String(v ?? ""));
+const roomStub = (env: Env, id: string) => env.POD.get(env.POD.idFromName(id));
+export const roomPost = (env: Env, id: string, what: string, body?: unknown) =>
+  roomStub(env, id).fetch(`https://pod/${what}?pod=${encodeURIComponent(id)}`, { method: "POST", body: body === undefined ? undefined : JSON.stringify(body) });
+
+/** Real members per room (people only; Chotu and the AI friends are never counted). */
+export async function roomCounts(env: Env): Promise<Map<string, number>> {
+  await ensureSchema(env);
+  const { results } = await env.DB.prepare("SELECT room_id, COUNT(*) AS n FROM room_members GROUP BY room_id").all<{ room_id: string; n: number }>();
+  return new Map(results.map((r) => [r.room_id, r.n]));
+}
+
+interface Activity { unread: number; lastTs: number | null; lastName: string | null; lastText: string | null; online: number }
+
+/**
+ * Rooms, open mode, membership, unread counts and recent activity. Routes: /rooms/list, /rooms/join, /rooms/leave
+ * and the socket /rooms/<id>/ws. Returns null for other paths.
+ */
+export async function roomsRoute(req: Request, env: Env, path: string, url: URL): Promise<Response | null> {
+  if (path === "/rooms/list" && req.method === "POST") {
+    const body = await req.json<any>().catch(() => ({}));
+    const memberId = validId(body.memberId) ? String(body.memberId) : "";
+    // seen: { roomId: last-read time in ms } from the phone. Unread is what others posted after it.
+    const seen = (body.seen && typeof body.seen === "object") ? body.seen as Record<string, unknown> : {};
+    await ensureSchema(env);
+    const mine = memberId
+      ? new Set((await env.DB.prepare("SELECT room_id FROM room_members WHERE member_id = ?").bind(memberId).all<{ room_id: string }>()).results.map((r) => r.room_id))
+      : new Set<string>();
+    const counts = await roomCounts(env);
+    const rooms = await Promise.all(OPEN_ROOMS.map(async (r) => {
+      const since = Math.max(0, Number(seen[r.id]) || 0);
+      const res = await roomStub(env, r.id).fetch(`https://pod/activity?pod=${r.id}&since=${since}&member=${encodeURIComponent(memberId)}`).catch(() => null);
+      const a: Activity = res?.ok ? await res.json<Activity>() : { unread: 0, lastTs: null, lastName: null, lastText: null, online: 0 };
+      // Unread only means something in a room you're in, and only once you've opened it.
+      return { ...r, members: counts.get(r.id) ?? 0, joined: mine.has(r.id), ...a, unread: mine.has(r.id) ? a.unread : 0 };
+    }));
+    return json({ ...(await podMode(env)), rooms });
+  }
+  if ((path === "/rooms/join" || path === "/rooms/leave") && req.method === "POST") {
+    const body = await req.json<any>().catch(() => ({}));
+    const roomId = String(body.roomId ?? "");
+    if (!validId(body.memberId) || !isOpenRoom(roomId)) return bad("memberId and a roomId from /rooms/list are required");
+    await ensureSchema(env);
+    if (path === "/rooms/leave") {
+      await env.DB.prepare("DELETE FROM room_members WHERE member_id = ? AND room_id = ?").bind(body.memberId, roomId).run();
+      return json({ ok: true, roomId, joined: false });
+    }
+    if (!(await flags(env)).pod_join) return bad("Joining is paused for now. Try again later.", 503);
+    const r = await env.DB.prepare("INSERT OR IGNORE INTO room_members (member_id, room_id, joined_at) VALUES (?, ?, ?)")
+      .bind(body.memberId, roomId, new Date().toISOString()).run();
+    if (r.meta.changes) { await bump(env, "room_joins"); await logEvent(env, "room_joined", { memberId: body.memberId }, { room: roomId }); }
+    return json({ ok: true, roomId, joined: true, members: (await roomCounts(env)).get(roomId) ?? 1 });
+  }
+  const ws = path.match(/^\/rooms\/([\w-]+)\/ws$/);
+  if (ws) {
+    const memberId = url.searchParams.get("member") ?? "";
+    if (!isOpenRoom(ws[1])) return bad("No such room", 404);
+    await ensureSchema(env);
+    if (!(await env.DB.prepare("SELECT 1 FROM room_members WHERE member_id = ? AND room_id = ?").bind(memberId, ws[1]).first())) return bad("Join this room first", 403);
+    // A moderator's pause on a member covers rooms too.
+    const m = await env.DB.prepare("SELECT suspended_until FROM members WHERE member_id = ?").bind(memberId).first<{ suspended_until: string | null }>();
+    if (m?.suspended_until && m.suspended_until > new Date().toISOString()) return bad("Your chat is paused by a moderator for now.", 403);
+    if (!(await flags(env)).pod_chat) return bad("Pod chat is paused for now.", 503);
+    const fwd = new URL(req.url);
+    fwd.searchParams.set("pod", ws[1]);
+    return roomStub(env, ws[1]).fetch(new Request(fwd.toString(), req));
+  }
+  return null;
+}

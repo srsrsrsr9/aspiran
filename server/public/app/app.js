@@ -1063,6 +1063,8 @@ function podConnect() {
   pod.status = "connecting";
   fetch("/pods/join", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: p.memberId, ...matchBody() }) })
     .then((r) => r.json()).then((summary) => {
+      // Open mode (server rooms.ts): below the sign-up threshold pods are open rooms, in the Android app for now.
+      if (!summary.podId && summary.mode === "open") throw new Error("open: Pods are open rooms in the app for now. Matched pods start once more people have joined.");
       if (!summary.podId) throw new Error(summary.error ?? "no pod");
       pod.podId = summary.podId; pod.summary = summary; store.set("podSummary", summary);
       if (!store.get("podJoinedOn")) { store.set("podJoinedOn", today()); rateAfter("pod_joined", 90_000); }
@@ -1074,7 +1076,7 @@ function podConnect() {
       ws.onopen = () => { pod.status = "online"; pod.error = null; podRedraw(); };
       ws.onclose = () => { if (pod.ws === ws) { pod.status = "off"; pod.ws = null; podRedraw(); } };
       ws.onmessage = (e) => onPodEvent(JSON.parse(e.data));
-    }).catch((e) => { pod.status = "off"; pod.error = /paused/i.test(e.message) ? e.message : "Couldn't reach your pod. Check your connection."; podRedraw(); });
+    }).catch((e) => { pod.status = "off"; pod.error = /^open: /.test(e.message) ? e.message.slice(6) : /paused/i.test(e.message) ? e.message : "Couldn't reach your pod. Check your connection."; podRedraw(); });
 }
 
 function onPodEvent(m) {

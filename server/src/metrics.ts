@@ -44,7 +44,7 @@ const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> 
   // The app says a Chotu chat happened (no text); only the first one per member is kept, as first_chotu_chat.
   chotu_chat: () => ({}),
 };
-const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded"]);
+const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded", "room_joined", "answer_evaluated"]);
 
 /**
  * The Play install referrer arrives as a URL-encoded query string (utm_source=...&utm_campaign=...). Only the utm

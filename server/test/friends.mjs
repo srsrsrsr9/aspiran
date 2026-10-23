@@ -9,6 +9,8 @@ import { friendLevel, friendPosts, isStudyWin, FRIENDS } from "../src/friends.ts
 const BASE = process.env.BASE ?? "http://127.0.0.1:8787";
 const TOKEN = process.env.EDITOR_TOKEN;
 if (!TOKEN) throw new Error("Set EDITOR_TOKEN to the value in your .dev.vars");
+// These suites test matched pods, so switch them on (rooms.ts): below the sign-up threshold /pods/join refuses.
+await fetch(BASE + "/admin/api/growth/threshold", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + TOKEN }, body: JSON.stringify({ signupThreshold: 0 }) });
 const call = async (path, { method = "GET", body, auth = false } = {}) => {
   const res = await fetch(BASE + path, { method, headers: { "content-type": "application/json", ...(auth ? { authorization: "Bearer " + TOKEN } : {}) }, body: body ? JSON.stringify(body) : undefined });
   const text = await res.text();

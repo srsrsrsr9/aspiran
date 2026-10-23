@@ -8,7 +8,7 @@ import { ensureSchema, llmControls } from "./staff";
  * one row per call: purpose, model, status, time taken and tokens. Never the prompt or the output.
  */
 
-export type Purpose = "draft" | "guard" | "embed" | "author" | "chotu";
+export type Purpose = "draft" | "guard" | "embed" | "author" | "chotu" | "evaluate";
 
 export class AiBlocked extends Error {}
 
@@ -110,6 +110,8 @@ export async function callClaude(env: Env, purpose: Purpose, job: ClaudeJob): Pr
 // --- Cloud Chotu: Groq, Google and NVIDIA, routed by language ------------------------------------
 
 export interface ChatTurn { role: "system" | "user" | "assistant"; content: string }
+/** A user turn with a picture (Answer Studio's photo of a handwritten answer), in the OpenAI-compatible shape. */
+export interface VisionTurn { role: "user"; content: ({ type: "text"; text: string } | { type: "image_url"; image_url: { url: string } })[] }
 
 /** The keys are typed by the owner into .dev.vars (local) or `wrangler secret put` (deployed); never logged. */
 type ChatEnv = Env & { GOOGLE_AI_API_KEY?: string; NVIDIA_API_KEY?: string };
@@ -169,7 +171,7 @@ export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
  * One chat reply, trying each hop in turn with the same switches, caps and logging as the others.
  * Error bodies can echo the request, so only the status is kept.
  */
-export async function callChat(env: ChatEnv, purpose: Purpose, messages: ChatTurn[], hops: Hop[]): Promise<{ text: string; model: string }> {
+export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[]): Promise<{ text: string; model: string }> {
   let last = "No AI provider answered";
   let keyed = 0;
   for (const hop of hops) {
