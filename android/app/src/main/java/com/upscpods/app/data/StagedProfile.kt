@@ -86,11 +86,12 @@ class StagedProfile(context: Context) {
     val firstDay: Boolean get() = !startedOn().isBefore(LocalDate.now())
 
     /**
-     * TODO(rework, after slice 1): on day 2 Chotu asks the rubric and persona questions (how answers are judged,
-     * attempt, medium, weakest paper), in the Adda check-in and never in onboarding. This is the hook: true from
-     * day 2 until they've been asked. Nothing reads it yet; set "dayTwoAsked" once Chotu has asked.
+     * Chotu's day-2 chat on the Adda, never in onboarding: true from day 2 until it's been had. It starts with the
+     * ritual picker (W4, ui/NudgeUi.kt). TODO(rework): the rubric and persona questions (how answers are judged,
+     * attempt, medium, weakest paper) join the same chat.
      */
-    val dayTwoAskDue: Boolean get() = startedOn().isBefore(LocalDate.now()) && !prefs.getBoolean("dayTwoAsked", false)
+    var dayTwoAskDue by mutableStateOf(startedOn().isBefore(LocalDate.now()) && !prefs.getBoolean("dayTwoAsked", false)); private set
+    fun markDayTwoAsked() { prefs.edit().putBoolean("dayTwoAsked", true).apply(); dayTwoAskDue = false }
 
     private fun startedOn(): LocalDate = prefs.getString("startedOn", null)?.let { LocalDate.parse(it) }
         ?: LocalDate.now().also { prefs.edit().putString("startedOn", it.toString()).apply() }
@@ -229,6 +230,10 @@ class StagedProfile(context: Context) {
             "pod_week" to StampInfo("pod", "First pod week", "A full week in a pod."),
             "quiz_night" to StampInfo("pod", "Quiz Night", "You played a Pod Quiz Night."),
             "lead" to StampInfo("roles", "Pod lead", "You lead a pod."),
+            // Ritual nudges (data/Rituals.kt): the first time each one is done. Comeback earns "came_back", quiz night "quiz_night".
+            "chai_ritual" to StampInfo("showing", "Morning Chai", "You had Morning Chai at your chai time."),
+            "goal_ritual" to StampInfo("showing", "Fresh-week goal", "You set a goal for the week on a Monday."),
+            "answer_hour" to StampInfo("showing", "Answer hour", "You wrote an answer on an answer-hour day."),
         )
         val FAMILIES = listOf("showing" to "Showing up", "helping" to "Helping", "pod" to "Pod life", "mastery" to "Mastery", "roles" to "Roles")
         fun stampInfo(id: String): StampInfo? =

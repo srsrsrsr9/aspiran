@@ -92,6 +92,10 @@ fun AnswerStudioScreen(
     hindi: Boolean,
     onOpenNeedToTalk: () -> Unit,
     onClose: () -> Unit,
+    /** Opened from the answer-hour or comeback nudge: a line on top, and question 1 (the room's question) picked. */
+    banner: String? = null,
+    /** An answer was finished (the ritual's action). */
+    onAnswered: () -> Unit = {},
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -129,6 +133,7 @@ fun AnswerStudioScreen(
         attemptId?.let { log.finish(it, over) }
         stopFocus()
         step = StudioStep.SUBMIT
+        onAnswered()
     }
     fun abandon() {
         attemptId?.let { log.abandon(it) }
@@ -156,7 +161,7 @@ fun AnswerStudioScreen(
         ) {
             when (step) {
                 StudioStep.PICK -> {
-                    ChotuSays(log.chotuLine(hindi), ChotuMood.CALM)
+                    ChotuSays(banner ?: log.chotuLine(hindi), ChotuMood.CALM)
                     Text("Pick a question", style = MaterialTheme.typography.titleMedium)
                     questions.forEachIndexed { i, q ->
                         FilterChip(

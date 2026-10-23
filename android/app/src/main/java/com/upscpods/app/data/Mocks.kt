@@ -59,10 +59,18 @@ data class ActiveMock(
     val cur: Int = 0,
     /** Questions moved past without an answer; one answered later counts as a second try in Mock Intelligence. */
     val passed: Set<Int> = emptySet(),
+    /** Seconds spent on each question in all, and when the one on screen came up (per-question timing). */
+    val secs: Map<Int, Int> = emptyMap(),
+    val onAt: Long = 0L,
+    /** Seconds into the visit when each answer was picked: a passed question answered fast on return is a guess. */
+    val answerSecs: Map<Int, Int> = emptyMap(),
     val startedAt: Long,
     val endsAt: Long,
     val hideTimer: Boolean = false,
 )
+
+/** A passed question answered this soon after coming back to it reads as a guess (Mock Intelligence). */
+const val FAST_SECS = 15
 
 @Serializable
 data class TopicTally(val right: Int = 0, val wrong: Int = 0, val skipped: Int = 0)
@@ -155,7 +163,7 @@ class Mocks(context: Context) {
 
     /** A count-up paper has no end time: it never submits itself. */
     fun start(p: MockPaper, now: Long = System.currentTimeMillis()): ActiveMock =
-        ActiveMock(p, startedAt = now, endsAt = if (p.countUp) Long.MAX_VALUE else now + p.minutes * 60_000L, hideTimer = p.countUp && p.timerOff).also(::save)
+        ActiveMock(p, onAt = now, startedAt = now, endsAt = if (p.countUp) Long.MAX_VALUE else now + p.minutes * 60_000L, hideTimer = p.countUp && p.timerOff).also(::save)
 
     /** Focus-block length for a paper: its time, or a generous three times the suggestion for a count-up paper. */
     fun focusMinutes(p: MockPaper): Int = if (p.countUp) maxOf(60, p.minutes * 3) else p.minutes
@@ -177,7 +185,10 @@ class Mocks(context: Context) {
             val ok = a == q.en.answerIndex
             if (ok) { right++; topics[key] = t.copy(right = t.right + 1) } else { wrong++; topics[key] = t.copy(wrong = t.wrong + 1) }
             if (i in m.unsure) { unsureTotal++; if (ok) unsureRight++ }
-            if (i in m.unsure || i in m.passed) { val s = shaky[key] ?: TopicTally(); shaky[key] = if (ok) s.copy(right = s.right + 1) else s.copy(wrong = s.wrong + 1) }
+            // Shaky: ticked "Not sure", or passed over and then answered within FAST_SECS of coming back
+            // (a paper started before timing was kept has no answerSecs, so any second try counts).
+            val fastReturn = i in m.passed && (m.answerSecs[i] ?: 0) <= FAST_SECS
+            if (i in m.unsure || fastReturn) { val s = shaky[key] ?: TopicTally(); shaky[key] = if (ok) s.copy(right = s.right + 1) else s.copy(wrong = s.wrong + 1) }
         }
         val maxScore = round2(p.questions.size * p.marking.right)
         val score = round2(right * p.marking.right + wrong * p.marking.wrong)

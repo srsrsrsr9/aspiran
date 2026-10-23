@@ -31,7 +31,14 @@ import java.time.format.DateTimeFormatter
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.upscpods.app.data.Nudge
+import com.upscpods.app.data.Ritual
+import com.upscpods.app.data.Rituals
+import com.upscpods.app.BuildConfig
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
 fun MyPathTab(
     day: DayState,
@@ -100,17 +107,21 @@ fun MyPathTab(
             OutlinedButton(onClick = onOpenFocus) { Text("Open") }
         }
 
-        // One nudge a day at chai time (playbook A11). Off in one tap.
+        // Ritual nudges (W4): Morning Chai and the week's fixed moments. Each one off in one tap.
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             val context = LocalContext.current
-            var nudge by remember { mutableStateOf(Nudge.time(context)) }
-            Text("Morning chai nudge", style = MaterialTheme.typography.titleMedium)
-            Text(
-                nudge?.let { "One nudge at ${Nudge.label(it)}: \u201cChai's ready.\u201d It goes quiet if you skip two in a row." }
-                    ?: "Off. No notifications.",
-                style = MaterialTheme.typography.bodySmall,
-            )
-            ChaiTimePicker(nudge) { nudge = it; Nudge.set(context, it) }
+            var picks by remember { mutableStateOf(Rituals.on(context)) }
+            var chai by remember { mutableStateOf(Nudge.time(context)) }
+            Text("Ritual nudges", style = MaterialTheme.typography.titleMedium)
+            Text(if (picks.isEmpty()) "Off. No notifications." else "Each one opens straight into the thing itself.", style = MaterialTheme.typography.bodySmall)
+            RitualPicker(picks, chai, hindi = false, inPod = Rituals.inPod(context)) { p, t -> picks = p; chai = t; Rituals.set(context, p, t) }
+            if (BuildConfig.DEBUG) {
+                // Debug builds: see each push now, to try where it opens.
+                val scope = rememberCoroutineScope()
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Ritual.PICKABLE.forEach { r -> OutlinedButton(onClick = { scope.launch { Rituals.preview(context, r) } }) { Text("Try: ${r.title}") } }
+                }
+            }
         }
 
         // Pause mode: up to 14 days, no reason asked.

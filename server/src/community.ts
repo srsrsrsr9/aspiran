@@ -6,6 +6,7 @@ import { activeResult, resultDays } from "./results";
 import { bump, ensureSchema, flags, getSetting } from "./staff";
 import { logEvent } from "./metrics";
 import { OPEN_ROOMS, podMode, roomCounts, roomPost } from "./rooms";
+import { ANSWER_DAYS } from "./friends";
 
 /**
  * Community-first pods (spec §3): honest states, Monday batch matching, merging forming pods, the quiet-pod
@@ -191,8 +192,7 @@ export type HostSlot = "goal" | "answer_hour" | "quiz" | "wins";
 /** IST weekday (0 = Sunday) and time of each ritual. */
 export const HOST_SCHEDULE: { slot: HostSlot; day: number; at: string }[] = [
   { slot: "goal", day: 1, at: "08:00" },
-  { slot: "answer_hour", day: 2, at: "19:00" },
-  { slot: "answer_hour", day: 4, at: "19:00" },
+  ...ANSWER_DAYS.map((day) => ({ slot: "answer_hour" as HostSlot, day, at: "19:00" })),
   { slot: "quiz", day: 5, at: "20:00" },
   { slot: "wins", day: 0, at: "18:00" },
 ];

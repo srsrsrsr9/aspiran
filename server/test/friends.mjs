@@ -49,9 +49,9 @@ for (const level of ["full", "light", "rituals"]) for (let wd = 0; wd < 7; wd++)
   assert.ok(posts.every((p) => !/\b(rank|AIR|cut-?off|marks|cleared (prelims|mains|the exam)|selected|result)\b/i.test(p.text)), "never ranks or results");
   assert.ok(posts.every((p) => p.friend.name.endsWith("· AI")));
 }
-assert.ok(allDay("full", 3).length > allDay("light", 3).length && allDay("light", 3).length > allDay("rituals", 3).length, "fewer posts as more people join");
-assert.equal(allDay("rituals", 3).length, 0, "rituals only: nothing on a plain Wednesday");
-assert.ok(allDay("rituals", 2).some((p) => /answer-writing hour|Answer-writing hour|Mains answer/.test(p.text)), "answer hour on Tuesday");
+assert.ok(allDay("full", 4).length > allDay("light", 4).length && allDay("light", 4).length > allDay("rituals", 4).length, "fewer posts as more people join");
+assert.equal(allDay("rituals", 4).length, 0, "rituals only: nothing on a plain Thursday");
+assert.ok(allDay("rituals", 3).some((p) => /answer-writing hour|Answer-writing hour|Mains answer/.test(p.text)), "answer hour on Wednesday");
 assert.ok(isStudyWin("Finished 30 questions on Polity today"));
 for (const t of ["So tired, finished nothing today", "I feel low, wrote one answer", "Got my mock marks, 80", "finished but anxious about the result", "hello all"]) assert.ok(!isStudyWin(t), t);
 step("labels, levels, quiet hours and wording (no ranks or results, no feelings)");
@@ -111,10 +111,10 @@ const ravi = await connect(pod2.podId, six[0], "Ravi");
 await ravi.next((e) => e.type === "history");
 await admin("jobs/run", { job: "host", at: ist(2, "10:30") });
 await assert.rejects(ravi.next(friendMsg, 1200), "no everyday posts with 6 people");
-await admin("jobs/run", { job: "host", at: ist(1, "19:00") });
+await admin("jobs/run", { job: "host", at: ist(2, "19:00") });
 const hour = await ravi.next(friendMsg);
 assert.equal(hour.message.memberId, "friend:meera");
-step("with 6 people, only rituals (Meera starts Tuesday's answer hour)");
+step("with 6 people, only rituals (Meera starts Wednesday's answer hour)");
 
 // The flag switches them off. (The jobs above ran for every pod, so Asha's pod has posts waiting: clear them.)
 for (let quiet = 0; quiet < 3;) { await new Promise((r) => setTimeout(r, 500)); if (asha.events.length) { asha.events.splice(0); quiet = 0; } else quiet++; }

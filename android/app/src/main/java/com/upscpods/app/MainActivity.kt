@@ -76,6 +76,8 @@ import com.upscpods.app.data.NewsItem
 import com.upscpods.app.data.Practice
 import com.upscpods.app.data.PracticeQuestion
 import com.upscpods.app.data.TaskId
+import com.upscpods.app.ui.ChotuMood
+import com.upscpods.app.ui.ChotuSays
 import com.upscpods.app.data.ReadingLanguage
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
@@ -109,6 +111,8 @@ import com.upscpods.app.ui.PrelimsScreen
 import com.upscpods.app.ui.TodayScreen
 import com.upscpods.app.ui.FiveMinutePill
 import com.upscpods.app.data.Nudge
+import com.upscpods.app.data.Ritual
+import com.upscpods.app.data.Rituals
 import com.upscpods.app.data.Recall
 import com.upscpods.app.data.Week
 import com.upscpods.app.data.Focus
@@ -171,16 +175,17 @@ class MainActivity : AppCompatActivity() {
         Auth.init(this)
         enableEdgeToEdge()
         val brief = BriefRepository.loadBundled(this)
-        // Opened from the morning chai nudge: go straight to Today's Chai.
-        val fromNudge = intent?.getBooleanExtra(Nudge.EXTRA_FROM_NUDGE, false) == true
+        // Opened from a ritual nudge (data/Rituals.kt): straight into its action. Morning Chai goes to Today's Chai.
+        val ritual = Ritual.of(intent?.getStringExtra(Rituals.EXTRA))
+        val fromNudge = intent?.getBooleanExtra(Nudge.EXTRA_FROM_NUDGE, false) == true || ritual == Ritual.CHAI
         // After the system splash (the steaming kulhad icon), today's greeting rises from the kulhad for a moment.
         // Members only: someone new gets the full eleven-language welcome as the first onboarding screen.
-        val greet = savedInstanceState == null && !fromNudge && ProfileStore.load(this).onboarded
+        val greet = savedInstanceState == null && !fromNudge && ritual == null && ProfileStore.load(this).onboarded
         setContent {
             PodsTheme {
                 var welcome by rememberSaveable { mutableStateOf(greet) }
                 Box(Modifier.fillMaxSize()) {
-                    AppRoot(brief, fromNudge, onDial = { number ->
+                    AppRoot(brief, fromNudge, ritual.takeIf { savedInstanceState == null }, onDial = { number ->
                         // ACTION_DIAL opens the dialer pre-filled; no call permission needed.
                         startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
                     })
@@ -207,7 +212,7 @@ private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit) {
+private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial: (String) -> Unit) {
     val context = LocalContext.current
     var profile by remember { mutableStateOf(ProfileStore.load(context)) }
     val staged = remember { StagedProfile(context) }
@@ -304,6 +309,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     LaunchedEffect(lifecycleOwner) {
         lifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) { while (true) { rooms.refresh(); delay(60_000) } }
     }
+    // Monday's goal nudge says how many people are starting the week in your biggest room: a real count, kept from here.
+    LaunchedEffect(rooms.joined, pod.summary) {
+        val big = rooms.joined.maxByOrNull { it.members }
+        if (big != null && big.members >= (pod.summary?.humans ?: 0)) Rituals.noteCount(context, big.name, big.members)
+        else pod.summary?.humans?.let { Rituals.noteCount(context, "your pod", it) }
+    }
     // Connected while the app is on screen; the server keeps the pod's history meanwhile.
     LifecycleStartEffect(pod) {
         // Opening the app at all means the last nudge wasn't ignored.
@@ -334,7 +345,18 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     var saved by remember { mutableStateOf(emptyList<NewsItem>()) }
     var archive by remember { mutableStateOf(emptyList<Brief>()) }
     var cardsToRead by remember { mutableStateOf<Brief?>(null) }
-    var overlay by rememberSaveable { mutableStateOf(if (fromNudge) Overlay.CHAI else Overlay.NONE) }
+    var overlay by rememberSaveable {
+        mutableStateOf(when {
+            fromNudge -> Overlay.CHAI
+            ritual == Ritual.ANSWER_HOUR || ritual == Ritual.COMEBACK -> Overlay.ANSWER_STUDIO
+            else -> Overlay.NONE
+        })
+    }
+    // A ritual done: Chotu's reaction, and a stamp the first time (W4).
+    var reward by remember { mutableStateOf<Ritual?>(null) }
+    // The nudge this open came from, until its screen is closed.
+    var arrived by rememberSaveable { mutableStateOf(ritual) }
+    val ritualDone = { r: Ritual -> if (Rituals.finished(context, r)) { reward = r; staged.award(r.stamp) } }
     var yesterdayQ by remember { mutableStateOf<PracticeQuestion?>(null) }
     var monthly by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
     // "Just 5 minutes": when it started, while it runs.
@@ -420,7 +442,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
             if (!day.paused) Week.minutesOf(it).let { (planned, done) -> week.logMinutes(planned, done) }
         }
     }
-    var tab by rememberSaveable { mutableStateOf(Tab.ADDA) }
+    var tab by rememberSaveable { mutableStateOf(when (ritual) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; else -> Tab.ADDA }) }
     // With a matched pod, the open rooms are one tap away on the Pod tab.
     var showRooms by rememberSaveable { mutableStateOf(false) }
     // Me's open page lives here so the top bar can show its title and a back arrow.
@@ -550,7 +572,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
         Overlay.ANSWER_STUDIO -> AnswerStudioScreen(
             Practice.studioQuestions(brief, hindi), community, answerLog, rooms, pod, persona, hindi,
             onOpenNeedToTalk = openNeedToTalk,
-            onClose = { overlay = Overlay.NONE },
+            onClose = { overlay = Overlay.NONE; arrived = null },
+            banner = when (arrived) {
+                Ritual.ANSWER_HOUR -> if (hindi) "आंसर आवर: रूम का आज का प्रश्न चुना हुआ है। तैयार हों तो टाइमर शुरू करें।" else "Answer hour: the room's question for today is picked. Start the timer when you're ready."
+                Ritual.COMEBACK -> if (hindi) "वापसी मुबारक। बस एक 7 मिनट का उत्तर।" else "Welcome back. Just one 7-minute answer."
+                else -> null
+            },
+            onAnswered = { if (arrived == Ritual.COMEBACK) ritualDone(Ritual.COMEBACK); ritualDone(Ritual.ANSWER_HOUR) },
         )
         Overlay.CLOSE_DAY -> CloseTheDayScreen(
             day, onDial, openNeedToTalk,
@@ -743,6 +771,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                                             canShare = pod.status == PodStatus.ONLINE,
                                             onSave = { entry, share ->
                                                 week.saveWoop(entry)
+                                                ritualDone(Ritual.MONDAY_GOAL)
                                                 if (share) pod.say("My wish for this week: ${entry.wish}")
                                                 woop = entry; woopDue = false
                                             },
@@ -869,6 +898,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
         )
     }
     StampToast(staged, Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(top = 72.dp))
+    // The ritual's actions: Today's Chai read, every quiz question answered (the others are hooked where they happen).
+    LaunchedEffect(TaskId.CHAI in day.done) { if (TaskId.CHAI in day.done) ritualDone(Ritual.CHAI) }
+    LaunchedEffect(pod.quiz?.id, pod.quizMine.size) {
+        val q = pod.quiz
+        if (q != null && q.questions.isNotEmpty() && pod.quizMine.size >= q.questions.size) ritualDone(Ritual.QUIZ_NIGHT)
+    }
     // One-tap rating after a key moment; never during a result week.
     if (result == null) RatingSheet(Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 88.dp))
     if (touring && overlay == Overlay.NONE && result == null) ChotuTour(
@@ -880,6 +915,14 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     )
     }
 
+    reward?.let { r ->
+        AlertDialog(
+            onDismissRequest = { reward = null },
+            title = { Text(r.title(hindi)) },
+            text = { ChotuSays(Rituals.rewardLine(r, hindi), ChotuMood.PROUD) },
+            confirmButton = { Button(onClick = { reward = null }) { Text(if (hindi) "बढ़िया" else "Nice") } },
+        )
+    }
     if (mockUsedUp) {
         AlertDialog(
             onDismissRequest = { mockUsedUp = false },

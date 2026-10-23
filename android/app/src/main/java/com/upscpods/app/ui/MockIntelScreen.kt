@@ -36,6 +36,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.upscpods.app.data.FAST_SECS
 import com.upscpods.app.data.Honest
 import com.upscpods.app.data.Marking
 import com.upscpods.app.data.MockIntel
@@ -76,7 +77,7 @@ fun MockIntelligenceSection(
         LuckyCard(intel); StuckCard(intel); NegativeCard(intel); RevisionCard(intel, onOpenNode); BandCard(intel)
     } else {
         NegativeCard(intel)
-        Locked("Where you're getting lucky", "Right answers that were guesses or second tries, by topic", AMBER, quiet, onSeePlus)
+        Locked("Where you're getting lucky", "Right answers that were guesses or quick second tries, by topic", AMBER, quiet, onSeePlus)
         Locked("Where you're stuck", "Topics flat or falling across your last papers", CORAL, quiet, onSeePlus)
         Locked("Your surgical revision list", "The 10 syllabus topics that would move your score most this week", MINT, quiet, onSeePlus)
         Locked("Your progress band", "The score band you're in now, across every paper", SKY, quiet, onSeePlus)
@@ -130,7 +131,7 @@ private fun LuckyCard(intel: MockIntel) = IntelCard(1, "Where you're getting luc
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(l.topic, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
-                    Note("${l.luckyRight} right answers were guesses or second tries (${l.shaky} shaky in all)")
+                    Note("${l.luckyRight} right answers were \"Not sure\" or picked within ${FAST_SECS} s of coming back (${l.shaky} shaky in all)")
                 }
                 Text("${l.luckyRight}", color = AMBER, fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
             }

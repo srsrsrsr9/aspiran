@@ -31,6 +31,9 @@ export const friendLevel = (humans: number): FriendLevel => (humans <= 2 ? "full
 
 export const inQuietHours = (hm: string) => hm >= "23:30" || hm < "07:00";
 
+/** IST weekdays of answer hour (Wed and Sat, as the app's ritual nudges). Chotu's host schedule uses them too. */
+export const ANSWER_DAYS = [3, 6];
+
 export interface QuizQ { topic: string; question: string; options: string[]; answerIndex: number; explanation?: string }
 export interface FriendPost { friend: Friend; text: string; kind: "friend" | "friend_quiz" }
 
@@ -69,7 +72,7 @@ const MEERA_TIPS = [
   "I keep a one-page error log from mocks. Before every test I read only that page.",
 ];
 const PAIRS: [keyof typeof F, string, keyof typeof F, string][] = [
-  ["kabir", "Meera, how do you fit Mains writing into a Prelims month?", "meera", "Two answers a week, Tuesday and Thursday. Small, but it keeps the hand moving."],
+  ["kabir", "Meera, how do you fit Mains writing into a Prelims month?", "meera", "Two answers a week, Wednesday and Saturday. Small, but it keeps the hand moving."],
   ["arjun", "Pooja, any trick for remembering temple styles?", "pooja", "I draw the shapes, badly. Shikhara curves, vimana steps. The drawing sticks better than the words."],
   ["pooja", "Kabir, do you revise from your quiz mistakes?", "kabir", "Every Sunday. I keep the wrong ones in a list and redo only those."],
   ["meera", "Arjun, how do you study on office days?", "arjun", "Mornings only, 6 to 8. Evenings are for light revision if I'm not too tired."],
@@ -105,7 +108,7 @@ export function friendPosts(hm: string, weekday: number, level: FriendLevel, see
   if (inQuietHours(hm)) return [];
   const out: FriendPost[] = [];
   const say = (f: keyof typeof F, text: string, kind: FriendPost["kind"] = "friend") => out.push({ friend: F[f], text, kind });
-  const answerDay = weekday === 2 || weekday === 4;
+  const answerDay = ANSWER_DAYS.includes(weekday);
   // Rituals: every level.
   if (answerDay && hm === "19:00") say("meera", pick(MEERA_ANSWER_HOUR, seed));
   if (weekday === 5 && hm === "20:00") say("kabir", "Quiz night! I'm in. Five questions, one pod score. Good luck everyone.");

@@ -1051,7 +1051,7 @@ function viewFocus() {
 
 const pod = { ws: null, podId: null, summary: store.get("podSummary"), messages: [], online: [], room: null, lead: null, youAreLead: false, priv: [],
   care: false, status: "off", error: null, goal: null, quiz: null, quizMine: {}, quizResults: {}, thanked: new Set(), claims: [] };
-const RITUALS = "Mon goal · Tue and Thu answer hour · Fri Pod Quiz Night · Sun wins";
+const RITUALS = "Mon goal · Wed and Sat answer hour · Fri Pod Quiz Night · Sun wins";
 const isPerson = (m) => !["system", "chotu", "moderator", "choice"].includes(m.memberId) && m.kind !== "system" && !isFriend(m);
 
 /** What the server may know for matching: only the four fields, and only the ones you gave. */
@@ -1508,8 +1508,8 @@ function plusCard(moment) {
 function hostLine() {
   const hr = new Date().getHours(), d = new Date().getDay();
   if (hr >= 23 || hr < 6) return "It's late. If you're still up, keep it gentle: Calm is one tap away, and tomorrow's fine.";
-  const day = ["Sunday's wins thread: one thing that went okay counts.", "New week. Your pod's goal is up.", "Answer hour is today. Bring one answer.", "Midweek. One small thing is enough today.",
-    "Answer hour again today.", "Pod Quiz Night tonight. Five questions, one shared score.", "Saturday. A good day to revise what came back."][d];
+  const day = ["Sunday's wins thread: one thing that went okay counts.", "New week. Your pod's goal is up.", "Tuesday. One small thing is enough today.", "Answer hour is today at 7. Bring one answer.",
+    "Thursday. A good day to revise what came back.", "Pod Quiz Night tonight. Five questions, one shared score.", "Answer hour again today at 7."][d];
   return (hr < 12 ? "Morning. Chai's ready. " : hr < 18 ? "" : "Evening. ") + day;
 }
 

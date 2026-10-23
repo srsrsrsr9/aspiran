@@ -46,6 +46,10 @@ import com.upscpods.app.data.Persona
 import com.upscpods.app.data.PodClient
 import com.upscpods.app.data.Season
 import com.upscpods.app.data.StagedProfile
+import com.upscpods.app.data.ReadingLanguage
+import com.upscpods.app.data.Ritual
+import com.upscpods.app.data.Rituals
+import androidx.compose.ui.platform.LocalContext
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.time.LocalTime
@@ -131,6 +135,8 @@ fun AddaTab(
         // Day 7: two quick questions (ui/Feedback.kt).
         CheckinCard()
         ChotuCheckIn(pod.podId != null, staged, onOpenChotu, onOpenPod, onOpenNeedToTalk)
+        // Day 2: Chotu's chat about rituals (W4). Never in onboarding.
+        if (staged.dayTwoAskDue) DayTwoRituals(staged, pod.podId != null, persona?.language == ReadingLanguage.HINDI)
         TodayCard(brief, day, onOpenChai, onOpenTask, onOpenPrep)
         PodCard(pod, onOpenPod)
         // The three matching questions are why pods exist, so they sit right here until answered.
@@ -180,6 +186,27 @@ private fun ChotuCheckIn(
                 }
                 else -> TextButton(onClick = { onOpenChotu(false) }) { Text("Ask ${Brand.MASCOT_SHORT}") }
             }
+        }
+    }
+}
+
+/** Chotu's day-2 chat: which moments of the week to nudge about. Saved or not, it's asked once; My Path changes it. */
+@Composable
+private fun DayTwoRituals(staged: StagedProfile, inPod: Boolean, hindi: Boolean) {
+    val context = LocalContext.current
+    var picks by remember { mutableStateOf(Rituals.on(context) + Ritual.ANSWER_HOUR) }
+    var chai by remember { mutableStateOf(com.upscpods.app.data.Nudge.time(context)) }
+    ChotuSays(
+        if (hindi) "दूसरा दिन! क्या मैं आपके हफ़्ते की एक लय बना दूँ? चुनिए किन पलों पर मैं आपको याद दिलाऊँ।"
+        else "Day two! Want me to keep a rhythm for your week? Pick the moments I should nudge you about.",
+        ChotuMood.HAPPY,
+    ) {
+        RitualPicker(picks, chai, hindi, inPod) { p, t -> picks = p; chai = t }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { Rituals.set(context, picks, chai); staged.markDayTwoAsked() }) {
+                Text(if (hindi) "मेरी रस्में सेव करें" else "Save my rituals")
+            }
+            TextButton(onClick = { staged.markDayTwoAsked() }) { Text(if (hindi) "अभी नहीं" else "Not now") }
         }
     }
 }

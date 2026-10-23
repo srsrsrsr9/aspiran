@@ -197,7 +197,11 @@ fun MockPaperScreen(start: ActiveMock, onChange: (ActiveMock) -> Unit, onSubmit:
     val go = { i: Int ->
         val to = i.coerceIn(0, n - 1)
         // Leaving a question unanswered marks it passed: answered later, it's a second try (Mock Intelligence).
-        update(m.copy(cur = to, passed = if (to != m.cur && m.answers[m.cur] == null) m.passed + m.cur else m.passed)); paletteOpen = false
+        // Per-question timing: the seconds on the one being left are added up; the next one's clock starts now.
+        val t = System.currentTimeMillis()
+        val spent = if (m.onAt > 0) ((t - m.onAt) / 1000).toInt() else 0
+        update(m.copy(cur = to, passed = if (to != m.cur && m.answers[m.cur] == null) m.passed + m.cur else m.passed,
+            secs = if (to != m.cur) m.secs + (m.cur to (m.secs[m.cur] ?: 0) + spent) else m.secs, onAt = if (to != m.cur || m.onAt == 0L) t else m.onAt)); paletteOpen = false
     }
     Scaffold(
         topBar = {
@@ -258,7 +262,11 @@ fun MockPaperScreen(start: ActiveMock, onChange: (ActiveMock) -> Unit, onSubmit:
                 FilterChip(
                     selected = m.answers[m.cur] == i,
                     // Tapping your answer again clears it: leaving a question scores 0.
-                    onClick = { update(m.copy(answers = if (m.answers[m.cur] == i) m.answers - m.cur else m.answers + (m.cur to i))) },
+                    onClick = {
+                        val into = if (m.onAt > 0) ((System.currentTimeMillis() - m.onAt) / 1000).toInt() else null
+                        update(m.copy(answers = if (m.answers[m.cur] == i) m.answers - m.cur else m.answers + (m.cur to i),
+                            answerSecs = if (m.answers[m.cur] == i || into == null) m.answerSecs else m.answerSecs + (m.cur to into)))
+                    },
                     label = { Text((if (m.answers[m.cur] == i) "✓ " else "") + "${"abcd".getOrElse(i) { '•' }}) $opt", modifier = Modifier.padding(vertical = 8.dp)) },
                     modifier = Modifier.fillMaxWidth(),
                 )

@@ -238,7 +238,7 @@ export default {
       // Publish what the editor approved, then tell the pods (through the host gate).
       ctx.waitUntil(publish(env).then(async (r) => { console.log(JSON.stringify(r)); if (r.published) await postRitual(env, "chai"); }));
     }
-    // Chotu's host schedule (Mon goal, Tue/Thu answer hour, Fri quiz, Sun wins) and the welcome/quiet checks.
+    // Chotu's host schedule (Mon goal, Wed/Sat answer hour, Fri quiz, Sun wins) and the welcome/quiet checks.
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },
 } satisfies ExportedHandler<Env>;
