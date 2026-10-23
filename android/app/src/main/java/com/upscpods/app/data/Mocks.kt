@@ -57,6 +57,8 @@ data class ActiveMock(
     val unsure: Set<Int> = emptySet(),
     val review: Set<Int> = emptySet(),
     val cur: Int = 0,
+    /** Questions moved past without an answer; one answered later counts as a second try in Mock Intelligence. */
+    val passed: Set<Int> = emptySet(),
     val startedAt: Long,
     val endsAt: Long,
     val hideTimer: Boolean = false,
@@ -81,6 +83,8 @@ data class MockRecord(
     val unsureTotal: Int,
     val topics: Map<String, TopicTally>,
     val minutes: Int,
+    /** Per topic, the shaky answers: marked "Not sure", or left and answered on a later visit. Empty in older records. */
+    val shaky: Map<String, TopicTally> = emptyMap(),
 )
 
 /** The last paper with its answers, for going through them on the result screen. */
@@ -164,6 +168,7 @@ class Mocks(context: Context) {
         val p = m.paper
         var right = 0; var wrong = 0; var unsureRight = 0; var unsureTotal = 0
         val topics = mutableMapOf<String, TopicTally>()
+        val shaky = mutableMapOf<String, TopicTally>()
         p.questions.forEachIndexed { i, q ->
             val key = q.topic.ifBlank { "Other" }
             val t = topics[key] ?: TopicTally()
@@ -172,13 +177,14 @@ class Mocks(context: Context) {
             val ok = a == q.en.answerIndex
             if (ok) { right++; topics[key] = t.copy(right = t.right + 1) } else { wrong++; topics[key] = t.copy(wrong = t.wrong + 1) }
             if (i in m.unsure) { unsureTotal++; if (ok) unsureRight++ }
+            if (i in m.unsure || i in m.passed) { val s = shaky[key] ?: TopicTally(); shaky[key] = if (ok) s.copy(right = s.right + 1) else s.copy(wrong = s.wrong + 1) }
         }
         val maxScore = round2(p.questions.size * p.marking.right)
         val score = round2(right * p.marking.right + wrong * p.marking.wrong)
         val rec = MockRecord(
             p.id, p.title, LocalDate.now().toString(), p.marking, score, maxScore,
             max(0, if (maxScore > 0) (score / maxScore * 100).roundToInt() else 0),
-            right + wrong, right, wrong, unsureRight, unsureTotal, topics, ((now - m.startedAt) / 60_000).toInt(),
+            right + wrong, right, wrong, unsureRight, unsureTotal, topics, ((now - m.startedAt) / 60_000).toInt(), shaky,
         )
         write(historyFile, ListSerializer(MockRecord.serializer()), (history() + rec).takeLast(100))
         write(lastFile, MockLast.serializer(), MockLast(p, m.answers, m.unsure))

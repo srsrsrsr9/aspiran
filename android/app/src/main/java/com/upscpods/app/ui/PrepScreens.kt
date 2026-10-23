@@ -115,7 +115,7 @@ import com.upscpods.app.data.subjectName
 
 enum class PrepTool(val title: String, val lead: String) {
     WEEKLY("Weekly Chai test", "This week's Chai questions as one test"),
-    INSIGHTS("Mock insights", "Subject breakdown, trend and error log"),
+    INSIGHTS("Mock insights", "Where you're lucky, where you're stuck, what to revise"),
     REVISE("Revise my misses", "Every question you got wrong, in one go"),
     COMPILE("Monthly compilation", "The month's Chai questions by topic"),
 }
@@ -502,10 +502,12 @@ private fun InsightsBody(hist: List<MockRecord>, misses: List<PrepQ>, sample: Bo
 }
 
 @Composable
-fun InsightsScreen(hist: List<MockRecord>, misses: List<PrepQ>, gate: PlusGate, quiet: Boolean, onRevise: () -> Unit, onMocks: () -> Unit, onSeePlus: () -> Unit, onClose: () -> Unit) =
+fun InsightsScreen(hist: List<MockRecord>, misses: List<PrepQ>, gate: PlusGate, quiet: Boolean, onRevise: () -> Unit, onMocks: () -> Unit, onSeePlus: () -> Unit,
+                   onOpenNode: (paper: String, topic: String) -> Unit, onClose: () -> Unit) =
     PrepPage("Mock insights", onClose) {
         Text("Where your marks come from and where they leak: by topic, over time, and every question you got wrong. Kept on this phone, never on the server.",
             style = MaterialTheme.typography.bodyMedium)
+        if (!gate.loading) MockIntelligenceSection(hist, misses, gate, quiet, onOpenNode, onSeePlus)
         when {
             gate.loading -> Muted("Loading…")
             gate.open -> {

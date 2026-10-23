@@ -148,6 +148,7 @@ fun SevenWays(library: ContentLibrary, prep: Prep, hindi: Boolean, onOpen: (Stri
 fun SyllabusTab(
     modifier: Modifier, library: ContentLibrary, prep: Prep, hindi: Boolean, gate: PlusGate, paper: String?,
     onPaper: (String) -> Unit, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit, onSeePlus: () -> Unit,
+    focus: String? = null,
 ) {
     val pieces = remember(library.items) { prep.pieces(library) }
     val reads = remember(library.items) { prep.reads(library).map { it.first to "read" } }
@@ -162,8 +163,9 @@ fun SyllabusTab(
             SYLLABUS.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
         }
         PaperHeader(current, pieces + reads, subjectOf, learnt, gate, onSeePlus)
-        current.topics.forEach { topic ->
-            TopicCard(topic, topicPieces(topic, pieces, subjectOf), topicPieces(topic, reads, subjectOf), learnt, gate.member, hindi, onOpenItem, onOpenRead)
+        // A topic opened from the revision list (Mock Intelligence) comes first, already open.
+        current.topics.sortedBy { it.name != focus }.forEach { topic ->
+            TopicCard(topic, topicPieces(topic, pieces, subjectOf), topicPieces(topic, reads, subjectOf), learnt, gate.member, hindi, onOpenItem, onOpenRead, startOpen = topic.name == focus)
         }
     }
 }
@@ -210,9 +212,9 @@ private fun Meter(value: Float) {
 @Composable
 private fun TopicCard(
     topic: SyllabusTopic, pieces: List<Pair<LibraryItem, String>>, reads: List<Pair<LibraryItem, String>>, learnt: Map<String, String>,
-    member: Boolean, hindi: Boolean, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit,
+    member: Boolean, hindi: Boolean, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit, startOpen: Boolean = false,
 ) {
-    var open by rememberSaveable(topic.name) { mutableStateOf(false) }
+    var open by rememberSaveable(topic.name, startOpen) { mutableStateOf(startOpen) }
     val n = pieces.size + reads.size
     FlatCard(Modifier.clickable { open = !open }) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {

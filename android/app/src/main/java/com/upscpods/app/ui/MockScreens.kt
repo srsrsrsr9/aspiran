@@ -194,7 +194,11 @@ fun MockPaperScreen(start: ActiveMock, onChange: (ActiveMock) -> Unit, onSubmit:
 
     val left = m.endsAt - now
     val q = p.questions[m.cur.coerceIn(0, n - 1)]
-    val go = { i: Int -> update(m.copy(cur = i.coerceIn(0, n - 1))); paletteOpen = false }
+    val go = { i: Int ->
+        val to = i.coerceIn(0, n - 1)
+        // Leaving a question unanswered marks it passed: answered later, it's a second try (Mock Intelligence).
+        update(m.copy(cur = to, passed = if (to != m.cur && m.answers[m.cur] == null) m.passed + m.cur else m.passed)); paletteOpen = false
+    }
     Scaffold(
         topBar = {
             TopAppBar(

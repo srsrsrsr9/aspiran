@@ -26,6 +26,7 @@ import com.upscpods.app.ui.WeeklyTestScreen
 import com.upscpods.app.data.AppConfig
 import com.upscpods.app.ui.AnnouncementBanner
 import androidx.compose.foundation.layout.Column
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -395,7 +396,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     val openTool = { t: PrepTool -> if (overlay != Overlay.PREP_TOOL) prepBack = overlay; prepTool = t; overlay = Overlay.PREP_TOOL }
     val openPlusInfo = { if (overlay != Overlay.PLUS_INFO) prepBack = overlay; overlay = Overlay.PLUS_INFO }
     var plusMember by remember { mutableStateOf<Boolean?>(null) }
-    val plusGate = PlusGate(member = plusMember == true, loading = plusMember == null)
+    // Debug builds only: a "plus" switch in the "debug" prefs opens the Plus tools for demos and screenshots.
+    val debugPlus = remember { BuildConfig.DEBUG && context.getSharedPreferences("debug", Context.MODE_PRIVATE).getBoolean("plus", false) }
+    val plusGate = if (debugPlus) PlusGate(member = true) else PlusGate(member = plusMember == true, loading = plusMember == null)
     val plusQuiet = prep.quiet(day.paused, result != null) != null
     val bankQs = remember(bank) { bank.map { PrepQ(it.id, it.topic, MockMcq(it.en.question, it.en.options, it.en.answerIndex, it.en.explanation)) } }
     val prepAnswer = { q: PrepQ, right: Boolean -> if (right) prep.clearMiss(q.id) else prep.addMiss(q); misses = prep.misses() }
@@ -428,6 +431,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     var touring by rememberSaveable { mutableStateOf(!staged.toured) }
     var prepSub by rememberSaveable { mutableStateOf(PrepSub.TODAY) }
     var syllabusPaper by rememberSaveable { mutableStateOf<String?>(null) }
+    var syllabusFocus by rememberSaveable { mutableStateOf<String?>(null) }
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
@@ -600,7 +604,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                 PrepTool.COMPILE -> CompilationScreen(monthQs, plusGate, plusQuiet, onSeePlus = openPlusInfo, onClose = back)
                 PrepTool.REVISE -> ReviseScreen(misses, plusGate, plusQuiet, prepAnswer, onSeePlus = openPlusInfo, onPrelims = { overlay = Overlay.PRELIMS }, onClose = back)
                 PrepTool.INSIGHTS -> InsightsScreen(mockHistory, misses, plusGate, plusQuiet, onRevise = { openTool(PrepTool.REVISE) },
-                    onMocks = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS }, onSeePlus = openPlusInfo, onClose = back)
+                    onMocks = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS }, onSeePlus = openPlusInfo,
+                    onOpenNode = { p, t -> syllabusPaper = p; syllabusFocus = t; overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.SYLLABUS }, onClose = back)
             }
         }
         // Reached from a preview's "See what Plus adds". In quiet times the pilot ask goes quiet; the page stays.
@@ -711,8 +716,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                         when (prepSub) {
                             PrepSub.SYLLABUS -> SyllabusTab(
                                 inner, library, prep, hindi, plusGate, syllabusPaper,
-                                onPaper = { syllabusPaper = it }, onOpenItem = openItem,
-                                onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo,
+                                onPaper = { syllabusPaper = it; syllabusFocus = null }, onOpenItem = openItem,
+                                onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo, focus = syllabusFocus,
                             )
                             PrepSub.TODAY -> TodayScreen(
                                 brief, day, persona,

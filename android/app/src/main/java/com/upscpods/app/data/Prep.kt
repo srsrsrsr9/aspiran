@@ -101,18 +101,7 @@ class Prep(context: Context) {
         val p = id.substringBefore('-')
         if (p in SUBJECT_NAME) return p
         val title = runCatching { ContentLibrary.JSON.decodeFromJsonElement<Bi<String>>(item.data["title"]!!).en }.getOrDefault("")
-        val t = "$title $id".lowercase()
-        return when {
-            Regex("constitution|article|parliament|preamble|governor|president|court|amendment|citizenship|election|schedule|federal|defection|bill").containsMatchIn(t) -> "pol"
-            Regex("monsoon|river|cyclone|lake|strait|map|geograph|soil|climate|nino").containsMatchIn(t) -> "geo"
-            Regex("mughal|harappa|vedic|maurya|gupta|ancient|medieval").containsMatchIn(t) -> "anc"
-            Regex("ethic|dilemma|integrity|virtue").containsMatchIn(t) -> "eth"
-            Regex("answer|directive|essay|mains").containsMatchIn(t) -> "mains"
-            Regex("scheme|gdp|inflation|bank|tax|economy|budget").containsMatchIn(t) -> "eco"
-            Regex("forest|tiger|wildlife|biodiversity|pollution|stubble|environment").containsMatchIn(t) -> "env"
-            Regex("1857|congress|gandhi|freedom|reform|british|colonial").containsMatchIn(t) -> "his"
-            else -> "more"
-        }
+        return subjectByWords("$title $id")
     }
 
     fun learnt(): Map<String, String> = read(learntFile, MAP) ?: emptyMap()
@@ -191,4 +180,20 @@ class Prep(context: Context) {
  */
 data class PlusGate(val member: Boolean, val loading: Boolean = false) {
     val open get() = member
+}
+
+/** A subject key for some words (a title and id), by keyword; "more" when none fits. Shared with Mock Intelligence. */
+fun subjectByWords(text: String): String {
+    val t = text.lowercase()
+    return when {
+        Regex("constitution|article|parliament|preamble|governor|president|court|amendment|citizenship|election|schedule|federal|defection|bill").containsMatchIn(t) -> "pol"
+        Regex("monsoon|river|cyclone|lake|strait|map|geograph|soil|climate|nino").containsMatchIn(t) -> "geo"
+        Regex("mughal|harappa|vedic|maurya|gupta|ancient|medieval").containsMatchIn(t) -> "anc"
+        Regex("ethic|dilemma|integrity|virtue").containsMatchIn(t) -> "eth"
+        Regex("answer|directive|essay|mains").containsMatchIn(t) -> "mains"
+        Regex("scheme|gdp|inflation|bank|tax|economy|budget").containsMatchIn(t) -> "eco"
+        Regex("forest|tiger|wildlife|biodiversity|pollution|stubble|environment").containsMatchIn(t) -> "env"
+        Regex("1857|congress|gandhi|freedom|reform|british|colonial").containsMatchIn(t) -> "his"
+        else -> "more"
+    }
 }
