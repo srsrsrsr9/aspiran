@@ -20,10 +20,20 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -75,25 +85,40 @@ fun TabIcon(glyph: TabGlyph, selected: Boolean) {
     }
 }
 
-/** One stop of Chotu's tour: which tab it shows, and what Chotu says there. */
-data class TourStop(val tab: String, val line: String, val mood: ChotuMood)
+/**
+ * One stop of Chotu's tour: which tab it shows (and which Prep chip, for [sub]), and what Chotu says there.
+ * [pitch] is the last stop, the Plus pitch, which shows over whatever tab is open.
+ */
+data class TourStop(val tab: String, val line: String, val mood: ChotuMood, val sub: String? = null, val pitch: Boolean = false)
 
+// The 60-second tour (sell-first plan W1): each stop shows a feature working behind Chotu, and the last one sells Plus.
 val TOUR = listOf(
-    TourStop("ADDA", "This is the Adda, your home. Each day I'll say hello here, and your next step is the big button.", ChotuMood.HAPPY),
-    TourStop("PREP", "Today's Chai lives in Prep: a few short news cards each morning, then 5 Prelims questions and 1 Mains answer. That's a whole day.", ChotuMood.PROUD),
-    TourStop("POD", "Your pods: open rooms for your language, attempt, goal, optional and region. Join as many as help. Nobody does this alone here.", ChotuMood.CALM),
-    TourStop("MASCOT", "And this is my corner. Ask me about the syllabus, plan your week, or just tell me how it's going. Need to talk is always at the top.", ChotuMood.HAPPY),
+    TourStop("ADDA", "Hi, I'm Chotu! Give me one minute and I'll show you why this is the smartest way to crack UPSC.", ChotuMood.HAPPY),
+    TourStop("PREP", "The whole UPSC syllabus, paper by paper, right at the top. And every topic comes many ways: flip it, pair it, sort it, play it. No boring PDFs.", ChotuMood.PROUD, sub = "TODAY"),
+    TourStop("PREP", "Write an answer on paper, snap a photo, and get it marked on 5 areas in about a minute, with a model skeleton. 3 free every week.", ChotuMood.PROUD, sub = "PRACTICE"),
+    TourStop("POD", "Open rooms for your language, attempt, optional and region. Someone's always studying. Jump in, join as many as you like.", ChotuMood.HAPPY),
+    TourStop("MASCOT", "And I'm here all day. Plan your week, clear a doubt, quiz yourself, or just tell me how it's going.", ChotuMood.HAPPY),
+    TourStop("ADDA", "", ChotuMood.PROUD, pitch = true),
 )
 
 /**
- * Chotu's four-stop tour after onboarding. It sits over the bottom of the screen so the tab it describes shows
- * behind it. [onStop] moves the app to that stop's tab; Skip or Done ends it for good.
+ * Chotu's tour after onboarding. It sits over the bottom of the screen so the tab it describes shows behind it.
+ * [onStop] moves the app to that stop's tab; Skip or the last button ends it for good. Chotu's eyes follow your taps.
+ * The last stop pitches Plus with the real prices ([price], from the server) and [onSeePlus] opens the Plus page.
  */
 @Composable
-fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit) {
+fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit, price: String? = null, onSeePlus: (() -> Unit)? = null) {
     var i by rememberSaveable { mutableIntStateOf(0) }
     val stop = TOUR[i]
-    Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.35f)), contentAlignment = Alignment.BottomCenter) {
+    var origin by remember { mutableStateOf(Offset.Zero) }
+    var tap by remember { mutableStateOf<Offset?>(null) }
+    Box(
+        Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.35f))
+            .onGloballyPositioned { origin = it.positionInWindow() }
+            // Watch taps without taking them, so Chotu can look where you touch.
+            .pointerInput(Unit) { awaitPointerEventScope { while (true) { awaitPointerEvent(PointerEventPass.Initial).changes.firstOrNull()?.let { tap = origin + it.position } } } },
+        contentAlignment = Alignment.BottomCenter,
+    ) {
         Surface(
             shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
             color = MaterialTheme.colorScheme.surface,
@@ -101,15 +126,49 @@ fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
         ) {
             Column(Modifier.navigationBarsPadding().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Text("${Brand.MASCOT_SHORT}'s tour · ${i + 1} of ${TOUR.size}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                ChotuSays(stop.line, stop.mood)
+                // A dot per stop, filling in as the tour goes.
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("${Brand.MASCOT_SHORT}'s tour", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                    TOUR.indices.forEach { k ->
+                        Box(Modifier.size(if (k == i) 18.dp else 7.dp, 7.dp).clip(RoundedCornerShape(99.dp))
+                            .background(if (k <= i) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant))
+                    }
+                }
+                if (stop.pitch) PlusPitch(price, tap, puffKey = i)
+                else ChotuSays(stop.line, stop.mood, look = tap, wave = i == 0, puffKey = i)
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                    TextButton(onClick = onFinish) { Text("Skip") }
+                    TextButton(onClick = onFinish) { Text(if (stop.pitch) "Start free" else "Skip") }
                     Button(onClick = {
-                        if (i == TOUR.lastIndex) onFinish() else { i++; onStop(TOUR[i]) }
-                    }) { Text(if (i == TOUR.lastIndex) "Let's start" else "Next") }
+                        when {
+                            stop.pitch -> { onFinish(); onSeePlus?.invoke() }
+                            else -> { i++; onStop(TOUR[i]) }
+                        }
+                    }) { Text(if (stop.pitch) "See Plus" else "Next") }
                 }
             }
+        }
+    }
+}
+
+/** The tour's last stop: Chotu sells Plus with confidence. Only what Plus does today, at the server's prices. */
+@Composable
+private fun PlusPitch(price: String?, look: Offset?, puffKey: Any) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        ChotuSays("One more thing. Free gets you started. Plus shows you exactly where your marks leak, and wins them back.", ChotuMood.PROUD, look = look, puffKey = puffKey)
+        Column(
+            Modifier.fillMaxWidth().clip(RoundedCornerShape(18.dp))
+                .background(Brush.linearGradient(listOf(Color(0xFF1B1030), Color(0xFF3A1A4A), Color(0xFF6A2A2A))))
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Text("UPSC PODS PLUS", color = Color(0xFFFFB547), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
+            listOf(
+                "Every mock analysed: where your marks leak",
+                "Every miss comes back until it sticks",
+                "Unlimited answer reviews",
+                "The weekly Chai test and the monthly compilation",
+            ).forEach { Text("✦  $it", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold) }
+            price?.let { Text(it, color = Color(0xFFFFD08A), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, modifier = Modifier.padding(top = 4.dp)) }
         }
     }
 }

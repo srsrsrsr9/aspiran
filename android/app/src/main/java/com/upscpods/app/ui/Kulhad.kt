@@ -1,5 +1,6 @@
 package com.upscpods.app.ui
 
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -22,12 +23,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
@@ -35,6 +40,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.vector.PathParser
+import androidx.compose.ui.layout.boundsInWindow
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -44,6 +51,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.Brand
 import java.time.LocalTime
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
 
 /** The steam and the face show the tone: quiet in care or result mode, sleepy late, warm by day, calm in the evening. */
 enum class KulhadTone { WARM, CALM, NIGHT, THINKING, QUIET }
@@ -98,9 +109,16 @@ fun Kulhad(tone: KulhadTone, size: Dp = 48.dp) = Kulhad(tone.mood(), size, steam
 /**
  * Chotu with a given expression. The steam rises and fades on a slow loop (still when the phone asks for less
  * motion). Decorative: screen readers skip it; the text beside it carries the meaning.
+ *
+ * [lively] Chotu (the tour, onboarding, anywhere Chotu talks) also glows, bobs, blinks and looks toward [look], a
+ * point in window coordinates such as the last tap. [wave] raises a waving hand; each new [puffKey] lets off a puff
+ * of steam, for a moment of excitement.
  */
 @Composable
-fun Kulhad(mood: ChotuMood, size: Dp = 48.dp, steamTone: KulhadTone = mood.steamTone(), cupColor: Color? = null) {
+fun Kulhad(
+    mood: ChotuMood, size: Dp = 48.dp, steamTone: KulhadTone = mood.steamTone(), cupColor: Color? = null,
+    lively: Boolean = false, look: Offset? = null, wave: Boolean = false, puffKey: Any? = null,
+) {
     val steam = remember(steamTone) { STEAM[steamTone].orEmpty().map { PathParser().parsePathString(it).toPath() } }
     val cup = remember { PathParser().parsePathString("M12 20 L52 20 L46 56 Q32 60 18 56 Z").toPath() }
     val rim = remember { PathParser().parsePathString("M12 20 L52 20 L51 25 L13 25 Z").toPath() }
@@ -112,20 +130,52 @@ fun Kulhad(mood: ChotuMood, size: Dp = 48.dp, steamTone: KulhadTone = mood.steam
         )
         t
     }
-    Canvas(Modifier.size(size).clearAndSetSemantics { }) {
+    val live = lively && !still
+    val loop = rememberInfiniteTransition(label = "chotu")
+    val bob by loop.animateFloat(0f, 1f, infiniteRepeatable(tween(2400, easing = LinearEasing)), label = "bob")
+    val blinkT by loop.animateFloat(0f, 1f, infiniteRepeatable(tween(4300, easing = LinearEasing)), label = "blink")
+    val waveT by loop.animateFloat(-1f, 1f, infiniteRepeatable(tween(380), RepeatMode.Reverse), label = "wave")
+    val puff = remember { Animatable(1f) }
+    LaunchedEffect(puffKey) { if (puffKey != null && !still) { puff.snapTo(0f); puff.animateTo(1f, tween(900, easing = LinearEasing)) } }
+    var centre by remember { mutableStateOf<Offset?>(null) }
+    Canvas(Modifier.size(size).onGloballyPositioned { centre = it.boundsInWindow().center }.clearAndSetSemantics { }) {
+        // Where the eyes turn: up to 2 units toward the point, more the further away it is.
+        val gaze = run {
+            val c = centre; val l = look
+            if (!live || c == null || l == null) Offset.Zero
+            else { val d = l - c; val len = hypot(d.x, d.y); if (len < 1f) Offset.Zero else d / len * (2f * (len / 300f).coerceAtMost(1f)) }
+        }
+        val lift = if (live) sin(bob * 2 * PI).toFloat() * 1.6f else 0f
         scale(this.size.width / 64f, pivot = Offset.Zero) {
+          if (live && cupColor == null) drawCircle(Brush.radialGradient(listOf(Color(0x66FFB547), Color(0x00FFB547)), Offset(32f, 38f), 32f), 32f, Offset(32f, 38f))
+          translate(top = lift) {
             // Steam drifts up about 4 units and fades in and out, then starts again.
             val base = if (steamTone == KulhadTone.NIGHT) 0.45f else 0.8f
             val fade = if (still) 1f else (if (rise < 0.2f) rise / 0.2f else (1f - rise) / 0.8f)
             translate(top = -rise * 4f) {
                 steam.forEach { drawPath(it, Color(0xFFB9AA9C), alpha = base * fade, style = Stroke(2.4f, cap = StrokeCap.Round)) }
             }
-            // The pod friends each have their own cup colour; Chotu keeps the terracotta.
-            drawPath(cup, cupColor ?: Color(0xFFB5562B))
-            drawPath(rim, cupColor ?: Color(0xFF9A4321), alpha = if (cupColor != null) 0.8f else 1f)
+            // A puff: five little clouds burst up and out from the cup, then fade.
+            if (puff.value < 1f) for (k in 0 until 5) {
+                val a = (-150 + k * 30) * PI / 180
+                val r = 6f + puff.value * 16f
+                drawCircle(Color(0xFFE8DCD0), 2.2f + puff.value * 2.6f, Offset(32f + cos(a).toFloat() * r, 12f + sin(a).toFloat() * r), alpha = (1f - puff.value) * 0.9f)
+            }
+            // The pod friends each have their own cup colour; Chotu keeps the terracotta, now glazed and bright.
+            if (cupColor != null) drawPath(cup, cupColor)
+            else drawPath(cup, Brush.verticalGradient(listOf(Color(0xFFF08A4B), Color(0xFFC75A27), Color(0xFFA8461E)), startY = 20f, endY = 58f))
+            drawPath(rim, cupColor ?: Color(0xFFB04A1F), alpha = if (cupColor != null) 0.8f else 1f)
             drawOval(Color(0xFF7A3418), topLeft = Offset(12f, 16.8f), size = Size(40f, 6.4f))
-            drawPath(shine, Color(0xFFCF7448), alpha = 0.6f, style = Stroke(2f, cap = StrokeCap.Round))
-            face(mood)
+            drawPath(shine, if (cupColor == null) Color(0xFFFFC59A) else Color(0xFFCF7448), alpha = if (cupColor == null) 0.75f else 0.6f, style = Stroke(2f, cap = StrokeCap.Round))
+            if (live && wave) {
+                // A little clay hand on the right, waving.
+                val a = (-55 + 22 * waveT) * PI / 180
+                val hand = Offset(50f + cos(a).toFloat() * 11f, 34f + sin(a).toFloat() * 11f)
+                drawLine(cupColor ?: Color(0xFFC75A27), Offset(48.5f, 36f), hand, 3.6f, StrokeCap.Round)
+                drawCircle(cupColor ?: Color(0xFFE07A3F), 3f, hand)
+            }
+            translate(left = gaze.x, top = gaze.y) { face(mood, blink = live && blinkT > 0.955f) }
+          }
         }
     }
 }
@@ -134,7 +184,17 @@ private fun DrawScope.line(d: String, width: Float = 2.2f) =
     drawPath(PathParser().parsePathString(d).toPath(), INK, style = Stroke(width, cap = StrokeCap.Round))
 
 /** Eyes at about (26,36) and (38,36), mouth at about (32,45), on the 64-unit cup. */
-private fun DrawScope.face(mood: ChotuMood) {
+private fun DrawScope.face(mood: ChotuMood, blink: Boolean = false) {
+    // A blink: open dot eyes close to a short line for a moment.
+    if (blink && mood in setOf(ChotuMood.CALM, ChotuMood.THINKING, ChotuMood.GENTLE)) {
+        val y = if (mood == ChotuMood.THINKING) 34.5f else 36.5f
+        val dx = if (mood == ChotuMood.THINKING) 1.5f else 0f
+        line("M${23.5f + dx} $y l5 0", 2f); line("M${35.5f + dx} $y l5 0", 2f)
+        if (mood == ChotuMood.CALM) line("M29.5 44 q2.5 2 5 0", 2f)
+        if (mood == ChotuMood.THINKING) line("M30 45.5 l5.5 -1.2", 2f)
+        if (mood == ChotuMood.GENTLE) { line("M23 32.5 l5 -1.4", 1.6f); line("M41 32.5 l-5 -1.4", 1.6f); line("M29.5 44.5 q2.5 1.5 5 0", 2f) }
+        return
+    }
     when (mood) {
         ChotuMood.HAPPY -> {
             line("M23.5 37 q2.5 -3.5 5 0"); line("M35.5 37 q2.5 -3.5 5 0")
@@ -189,10 +249,13 @@ fun ChotuSays(
     mood: ChotuMood = ChotuMood.HAPPY,
     modifier: Modifier = Modifier,
     size: Dp = 64.dp,
+    look: Offset? = null,
+    wave: Boolean = false,
+    puffKey: Any? = null,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Kulhad(mood, size)
+        Kulhad(mood, size, lively = true, look = look, wave = wave, puffKey = puffKey)
         Surface(
             shape = RoundedCornerShape(topStart = 4.dp, topEnd = 18.dp, bottomEnd = 18.dp, bottomStart = 18.dp),
             color = MaterialTheme.colorScheme.primaryContainer,

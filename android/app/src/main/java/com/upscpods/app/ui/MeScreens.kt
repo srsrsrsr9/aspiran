@@ -253,7 +253,8 @@ private fun PrivacyPage(staged: StagedProfile, adminResult: Boolean) {
         "Your sign-in (phone number or Google email), only to sign you in. Your pod never sees it, and it never goes to ${Brand.MASCOT_SHORT} or any AI service.",
         "Pod messages you send, to your pod.",
         "Four matching fields (stage, attempts, language, study time), to find your pod.",
-        "Questions to the online ${Brand.MASCOT_SHORT}, only until it's on your phone. Not saved.",
+        "Questions to the online ${Brand.MASCOT_SHORT}, sent to an outside AI service (Google, Groq or NVIDIA) to write the reply. We don't save them, but that service may keep them for a while under its own terms, so leave out anything personal.",
+        "An answer you send to Answer Studio (the photo or the text), to the same kind of AI service to mark it. We don't keep the photo.",
         "A reply you report: that reply and your reason. Not the chat.",
         "How many practice questions you answered, added to the season counter with no name.",
     ).forEach { Text("• $it", style = MaterialTheme.typography.bodyMedium) }

@@ -14,7 +14,9 @@ import com.upscpods.app.ui.LearnHubScreen
 import com.upscpods.app.ui.LongReadsScreen
 import com.upscpods.app.ui.PlusInfoScreen
 import com.upscpods.app.ui.PlusBanner
-import com.upscpods.app.ui.PlusTab
+import com.upscpods.app.ui.SevenWays
+import com.upscpods.app.ui.SyllabusStrip
+import com.upscpods.app.ui.SyllabusTab
 import com.upscpods.app.ui.plusWays
 import com.upscpods.app.ui.PrepEntries
 import com.upscpods.app.ui.PrepTool
@@ -197,7 +199,8 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
     ME("Me", TabGlyph.ME),
 }
 
-private enum class PrepSub(val label: String) { PLUS("Plus"), TODAY("Today's 3"), PRACTICE("Practice"), MOCKS("Mocks"), PLAN("My Plan") }
+// Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
+private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
 private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO }
 
@@ -424,9 +427,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     // Chotu's tour runs once, right after onboarding (and again after "Redo the first-run steps").
     var touring by rememberSaveable { mutableStateOf(!staged.toured) }
     var prepSub by rememberSaveable { mutableStateOf(PrepSub.TODAY) }
+    var syllabusPaper by rememberSaveable { mutableStateOf<String?>(null) }
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
-    LaunchedEffect(overlay, tab) {
-        if (tab == Tab.PREP || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO)) community.plusStatus()?.let { plusMember = it.plan != null } ?: run { if (plusMember == null) plusMember = false }
+    // The tour ends on the Plus pitch, with the server's prices.
+    var plusPrice by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(overlay, tab, touring) {
+        if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT))
+            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.priceLine() } ?: run { if (plusMember == null) plusMember = false }
     }
     var tool by rememberSaveable { mutableStateOf(ShelfTool.COMPASS) }
     LaunchedEffect(day.dayClosed) { if (loaded) { closedDays = repo.closedDays(); staged.checkStamps(closedDays, pod.joinedOn) } }
@@ -573,7 +580,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
             if (rec != null && last != null) PrepSpace {
                 MockResultScreen(rec, last, mockHistory, mocks.band(rec), resultWeek = result != null,
                     shareBand = { community.mockBand(rec.id, rec.pct)?.also { mocks.saveBand(rec, it) } },
-                    onClose = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS })
+                    onClose = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS },
+                    onSeePlus = if (plusMember == false && !plusQuiet) openPlusInfo else null)
             } else overlay = Overlay.NONE
         }
         Overlay.TOOL -> Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) { ShelfToolScreen(tool, staged, onClose = { overlay = Overlay.NONE }) }
@@ -688,15 +696,23 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                 Tab.PREP -> PrepSpace {
                     Column(m) {
                         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            PrepSub.entries.forEach { sub -> FilterChip(selected = prepSub == sub, onClick = { prepSub = sub }, label = { Text(sub.label) }) }
+                            PrepSub.entries.filter { it != PrepSub.MOCKS }.forEach { sub ->
+                                FilterChip(selected = prepSub == sub || (sub == PrepSub.PRACTICE && prepSub == PrepSub.MOCKS), onClick = { prepSub = sub }, label = { Text(sub.label) })
+                            }
+                        }
+                        if (prepSub == PrepSub.TODAY) SyllabusStrip { syllabusPaper = it; prepSub = PrepSub.SYLLABUS }
+                        if (prepSub in setOf(PrepSub.PRACTICE, PrepSub.MOCKS)) Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FilterChip(selected = prepSub == PrepSub.PRACTICE, onClick = { prepSub = PrepSub.PRACTICE }, label = { Text("Practice") })
+                            FilterChip(selected = prepSub == PrepSub.MOCKS, onClick = { prepSub = PrepSub.MOCKS }, label = { Text("Mocks") })
                         }
                         // Members without Plus see one line about it on Today's 3 and Practice, never in quiet times.
-                        if (prepSub in setOf(PrepSub.TODAY, PrepSub.PRACTICE) && plusMember == false && !plusQuiet) PlusBanner(hindi) { prepSub = PrepSub.PLUS }
+                        if (prepSub in setOf(PrepSub.TODAY, PrepSub.PRACTICE) && plusMember == false && !plusQuiet) PlusBanner(hindi) { openPlusInfo() }
                         val inner = Modifier.weight(1f)
                         when (prepSub) {
-                            PrepSub.PLUS -> PlusTab(
-                                inner, mocks.papers(library), weekQs, bankQs, misses, mockHistory, prep.pieces(library).size, prep.reads(library).size, plusWays(prep.pieces(library)),
-                                plusGate, plusQuiet, hindi, prepAnswer, onTool = openTool, onMocks = { prepSub = PrepSub.MOCKS },
+                            PrepSub.SYLLABUS -> SyllabusTab(
+                                inner, library, prep, hindi, plusGate, syllabusPaper,
+                                onPaper = { syllabusPaper = it }, onOpenItem = openItem,
+                                onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo,
                             )
                             PrepSub.TODAY -> TodayScreen(
                                 brief, day, persona,
@@ -710,6 +726,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                                 onFiveMinutes = { fiveAt = System.currentTimeMillis() },
                                 onWhy = { openWhy(Guide.WHY_TODAY) },
                                 weekly = {
+                                    // The variety, shown off: today's topic in every format we have for it.
+                                    SevenWays(library, prep, hindi, onOpen = openItem, onSeeAll = { overlay = Overlay.LEARN })
                                     // Week one: target year, Mains medium, working, one a day.
                                     ProfileAskCard(staged, "today", quiet = result != null || day.paused)
                                     // Monday: a fresh week (WOOP). Then the week's line, and once a week the mirror.
@@ -849,8 +867,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     // One-tap rating after a key moment; never during a result week.
     if (result == null) RatingSheet(Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 88.dp))
     if (touring && overlay == Overlay.NONE && result == null) ChotuTour(
-        onStop = { stop -> tab = Tab.valueOf(stop.tab); if (tab == Tab.PREP) prepSub = PrepSub.TODAY },
+        onStop = { stop -> tab = Tab.valueOf(stop.tab); if (tab == Tab.PREP) prepSub = stop.sub?.let { PrepSub.valueOf(it) } ?: PrepSub.TODAY },
         onFinish = { staged.toured = true; touring = false; tab = Tab.ADDA },
+        price = plusPrice,
+        onSeePlus = openPlusInfo,
     )
     }
 

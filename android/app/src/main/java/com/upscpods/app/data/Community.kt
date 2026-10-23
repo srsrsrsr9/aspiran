@@ -88,7 +88,20 @@ data class AnswerFeedback(
 )
 
 @Serializable
-data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null)
+data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap()) {
+    /** "₹299 a month, or ₹2,499 a year", from the server's prices; null when it sent none. */
+    fun priceLine(): String? {
+        val m = prices["monthly"]?.inr; val y = prices["yearly"]?.inr
+        return when {
+            m != null && y != null -> "${Honest.inr(m)} a month, or ${Honest.inr(y)} a year"
+            m != null -> "${Honest.inr(m)} a month"
+            else -> null
+        }
+    }
+}
+
+@Serializable
+data class PlusPrice(val inr: Int = 0, val days: Int = 0)
 
 /**
  * The community parts of the server: pods summary, the Commons, the season, the four matching fields,

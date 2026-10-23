@@ -344,6 +344,8 @@ fun MockResultScreen(
     resultWeek: Boolean,
     shareBand: suspend () -> MockBand?,
     onClose: () -> Unit,
+    /** Members without Plus: Chotu brings it up here, right after the result, when it's most useful. */
+    onSeePlus: (() -> Unit)? = null,
 ) {
     BackHandler(onBack = onClose)
     val scope = rememberCoroutineScope()
@@ -407,6 +409,11 @@ fun MockResultScreen(
                 Text("Worth a look: ${weak.joinToString(", ")}." + if (last.paper.questions.any { it.cardId != null }) " Wrong answers from Chai cards come back in your Prelims questions." else "",
                     style = MaterialTheme.typography.bodyLarge)
             }
+            if (onSeePlus != null && !resultWeek) ChotuSays(
+                if (weak.isNotEmpty()) "Want the full picture? Plus breaks this paper down topic by topic, shows where your marks leak, and brings every miss back until it sticks."
+                else "Nice paper! Plus tracks every mock like this one, shows your trend, and brings each miss back until it sticks.",
+                ChotuMood.PROUD, size = 52.dp,
+            ) { TextButton(onClick = onSeePlus) { Text("See what Plus shows →") } }
             Text("Go through the answers", style = MaterialTheme.typography.titleLarge)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf("wrong" to "Wrong", "skipped" to "Skipped", "all" to "All").forEach { (v, l) ->
