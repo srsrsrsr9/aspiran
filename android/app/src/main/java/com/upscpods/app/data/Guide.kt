@@ -84,7 +84,7 @@ object Guide {
             "My Path's honest numbers and the two-sided Plan B.",
             listOf("factfulness"),
         ),
-        Thinker("sierra", "Kathy Sierra", "Make the person good at the thing, and take away every needless decision and badge.", "One main button per screen. No unread counts on the Pod."),
+        Thinker("sierra", "Kathy Sierra", "Make the person good at the thing, and take away every needless decision and badge.", "One main button per screen."),
         Thinker("duke", "Annie Duke", "Judge a decision by what you knew when you made it, not only by how it turned out.", "Repeater stories without shame; Plan B that never recommends."),
         Thinker("heath", "Chip and Dan Heath", "Ideas stick when they're simple, concrete and told as a story.", "How Chai cards are written."),
         Thinker("cialdini", "Robert Cialdini", "People give back when they're given to first. Honest social proof only.", "Ask a favour and Offer help in the Pod, with nothing counted."),

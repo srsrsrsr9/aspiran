@@ -74,9 +74,13 @@ enum class PodStatus { NO_SERVER, CONNECTING, ONLINE, OFFLINE, PAUSED }
  * Talks to the pod server (server/src/pod.ts) over one WebSocket.
  * Offline first: the last messages are cached on the phone, and anything typed offline waits in an
  * outbox and sends on reconnect. All state is Compose state, updated on the main thread.
+ *
+ * With a [roomId] it talks to one open room (server rooms.ts) instead: same socket and chat, no joining, and its
+ * own cache. The member id and server address are always the pod's.
  */
-class PodClient(context: Context) {
+class PodClient(context: Context, val roomId: String? = null) {
     private val prefs = context.getSharedPreferences("pod", Context.MODE_PRIVATE)
+    private val cachePrefs = if (roomId == null) prefs else context.getSharedPreferences("room_$roomId", Context.MODE_PRIVATE)
     private val json = Json { ignoreUnknownKeys = true }
     // AuthInterceptor adds the sign-in token to /pods/join and the pod socket (Auth.kt).
     private val http = OkHttpClient.Builder().pingInterval(25, TimeUnit.SECONDS).addInterceptor(AuthInterceptor).build()
@@ -128,6 +132,8 @@ class PodClient(context: Context) {
     private var lastPersona: Persona? = null
     /** False while the app can't use the server (not signed in, or access switched off): no joining, no socket. */
     var mayConnect: () -> Boolean = { true }
+    /** Open mode (server rooms.ts): nobody new is matched, so a member without a pod doesn't try to join one. */
+    var roomsOnly: () -> Boolean = { false }
 
     var memberId: String = prefs.getString("memberId", null) ?: UUID.randomUUID().toString().replace("-", "").also {
         prefs.edit().putString("memberId", it).apply()
@@ -154,7 +160,7 @@ class PodClient(context: Context) {
             if (ServerPolicy.check(value) != null) return
             prefs.edit().putString("server", value.trim().trimEnd('/')).remove("podId").apply()
         }
-    val podId: String? get() = prefs.getString("podId", null)
+    val podId: String? get() = roomId ?: prefs.getString("podId", null)
 
     /** Join (or rejoin) a pod and open the socket. Safe to call repeatedly. */
     fun start(persona: Persona?) {
@@ -162,6 +168,7 @@ class PodClient(context: Context) {
         lastPersona = persona
         if (serverUrl.isBlank()) { status = PodStatus.NO_SERVER; return }
         if (!mayConnect()) { retry?.cancel(); status = PodStatus.OFFLINE; return }
+        if (podId == null && roomsOnly()) { retry?.cancel(); status = PodStatus.OFFLINE; return }
         if (!chatOn || (podId == null && !joinOn)) {
             pausedNote = if (!chatOn) "Pod chat is paused for a little while. Your pod and its messages are safe."
                 else "Joining new pods is paused for now. Try again a bit later."
@@ -199,6 +206,7 @@ class PodClient(context: Context) {
     fun forget() {
         stop()
         prefs.edit().remove("cache").remove("podId").remove("summary").remove("joinedOn").apply()
+        if (roomId != null) cachePrefs.edit().remove("cache").apply()
         summary = null; goal = null; quiz = null; quizMine = emptyMap(); quizResults = emptyMap(); thanked = emptySet()
         messages = emptyList()
         outbox = emptyList()
@@ -299,7 +307,7 @@ class PodClient(context: Context) {
 
     private fun open(pod: String, name: String, persona: Persona?) {
         val ws = serverUrl.replaceFirst("http", "ws")
-        val url = "$ws/pods/$pod/ws?member=$memberId&name=${java.net.URLEncoder.encode(name, "UTF-8")}"
+        val url = "$ws/${if (roomId != null) "rooms" else "pods"}/$pod/ws?member=$memberId&name=${java.net.URLEncoder.encode(name, "UTF-8")}"
         socket = http.newWebSocket(Request.Builder().url(url).build(), object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
                 scope.launch {
@@ -323,7 +331,7 @@ class PodClient(context: Context) {
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
                 scope.launch {
                     // 403 means the server no longer knows this pod (e.g. a fresh local database): rejoin.
-                    if (response?.code == 403) prefs.edit().remove("podId").apply()
+                    if (response?.code == 403 && roomId == null) prefs.edit().remove("podId").apply()
                     status = PodStatus.OFFLINE
                     socket = null
                     scheduleRetry(persona)
@@ -370,7 +378,7 @@ class PodClient(context: Context) {
                 val m = json.decodeFromJsonElement<PodMessage>(ev["message"]!!)
                 outbox = outbox.filterNot { it.clientId != null && it.clientId == m.clientId }
                 messages = (messages + m).takeLast(200)
-                // No unread count is shown anywhere (playbook A12); this only marks that something is new.
+                // New since the member last looked: the Pod tab and the room list show it as a badge.
                 if (m.memberId != memberId) unread++
                 saveCache()
             }
@@ -438,10 +446,10 @@ class PodClient(context: Context) {
     }
 
     private fun loadCache(): List<PodMessage> = runCatching {
-        json.decodeFromString(ListSerializer(PodMessage.serializer()), prefs.getString("cache", "[]")!!)
+        json.decodeFromString(ListSerializer(PodMessage.serializer()), cachePrefs.getString("cache", "[]")!!)
     }.getOrDefault(emptyList())
 
     private fun saveCache() {
-        prefs.edit().putString("cache", json.encodeToString(ListSerializer(PodMessage.serializer()), messages.takeLast(100))).apply()
+        cachePrefs.edit().putString("cache", json.encodeToString(ListSerializer(PodMessage.serializer()), messages.takeLast(100))).apply()
     }
 }

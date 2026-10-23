@@ -66,6 +66,8 @@ fun PracticeTab(
     monthly: Int = 0,
     onOpenMonthly: () -> Unit = {},
     prepEntries: (@Composable () -> Unit)? = null,
+    /** Answer Studio: a timed answer with rubric feedback. */
+    onOpenStudio: (() -> Unit)? = null,
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -89,6 +91,15 @@ fun PracticeTab(
             filled = next == TaskId.MAINS,
             onStart = onOpenMains,
         )
+        onOpenStudio?.let {
+            PracticeCard(
+                title = "Answer Studio",
+                detail = "A timed answer, 7 or 11 minutes, on paper. Photograph it for feedback on the directive word, structure, content, examples and conclusion.",
+                done = false,
+                filled = false,
+                onStart = it,
+            )
+        }
 
         // The 30-day loop: once a month, cards from about a month ago.
         if (monthly > 0) {

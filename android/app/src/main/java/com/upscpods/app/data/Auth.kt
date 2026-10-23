@@ -71,7 +71,7 @@ data class AuthSession(val uid: String, val memberId: String, val provider: Stri
 object Auth {
     const val CHECK_EVERY_MS = 6 * 3_600_000L
     const val GRACE_MS = 72 * 3_600_000L
-    private val MEMBER_ROUTE = Regex("^/(pods/(join|leave|me|choose)|pods/[\\w-]+/ws|members/profile|commons/[\\w-]+/ws|season/add|mocks/band|plus(/.*)?|chotu|chotu/report|consent|events|feedback|privacy/(export|delete))$")
+    private val MEMBER_ROUTE = Regex("^/(pods/(join|leave|me|choose)|pods/[\\w-]+/ws|members/profile|commons/[\\w-]+/ws|season/add|mocks/band|plus(/.*)?|chotu|chotu/report|consent|events|feedback|privacy/(export|delete)|rooms/(list|join|leave)|rooms/[\\w-]+/ws|answers/evaluate)$")
     fun isMemberRoute(path: String) = MEMBER_ROUTE.matches(path.trimEnd('/'))
 
     /**

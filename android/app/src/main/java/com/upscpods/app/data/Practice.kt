@@ -78,6 +78,13 @@ object Practice {
         return MainsTask("mains-$date", pick.second, pick.first)
     }
 
+    /** Answer Studio's questions: today's Mains question first, then the sample ones. */
+    fun studioQuestions(today: Brief, hindi: Boolean, date: LocalDate = LocalDate.now()): List<MainsTask> {
+        val todays = mainsTask(today, hindi, date)
+        val samples = (if (hindi) fallbackHi else fallbackEn).mapIndexed { i, (topic, prompt) -> MainsTask("sample-$i", prompt, topic) }
+        return listOf(todays) + samples.filter { it.prompt != todays.prompt }
+    }
+
     private val fallbackEn = listOf(
         "Federalism" to "Discuss the role of the Inter-State Council in strengthening cooperative federalism. (150 words)",
         "Governance" to "How has the Right to Information Act improved accountability in public administration? (150 words)",

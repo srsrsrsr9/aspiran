@@ -85,6 +85,13 @@ class StagedProfile(context: Context) {
     /** True on the day this phone first used the app. Day one stays simple: no weekly card, no rotating extras. */
     val firstDay: Boolean get() = !startedOn().isBefore(LocalDate.now())
 
+    /**
+     * TODO(rework, after slice 1): on day 2 Chotu asks the rubric and persona questions (how answers are judged,
+     * attempt, medium, weakest paper), in the Adda check-in and never in onboarding. This is the hook: true from
+     * day 2 until they've been asked. Nothing reads it yet; set "dayTwoAsked" once Chotu has asked.
+     */
+    val dayTwoAskDue: Boolean get() = startedOn().isBefore(LocalDate.now()) && !prefs.getBoolean("dayTwoAsked", false)
+
     private fun startedOn(): LocalDate = prefs.getString("startedOn", null)?.let { LocalDate.parse(it) }
         ?: LocalDate.now().also { prefs.edit().putString("startedOn", it.toString()).apply() }
 

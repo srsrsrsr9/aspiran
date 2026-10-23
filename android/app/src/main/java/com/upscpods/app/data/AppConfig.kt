@@ -31,6 +31,10 @@ data class ResultDay(val day: String, val label: String = "")
 /** [password]: the server offers username and password sign-in (the password_login flag), next to Google. */
 data class AuthConfig(val mode: String = "unconfigured", val required: Boolean = true, val support: String? = null, val password: Boolean = false)
 
+/** Open rooms until the sign-up threshold, then matched pods too (server rooms.ts). */
+@Serializable
+data class PodsMode(val mode: String = "open", val signups: Int = 0, val threshold: Int = 500)
+
 @Serializable
 private data class ConfigResponse(
     val flags: Map<String, Boolean> = emptyMap(),
@@ -38,6 +42,7 @@ private data class ConfigResponse(
     val distress: List<String> = emptyList(),
     val results: List<ResultDay> = emptyList(),
     val auth: AuthConfig? = null,
+    val pods: PodsMode? = null,
 )
 
 /**
@@ -56,6 +61,8 @@ class AppConfig(context: Context, private val server: () -> String) {
     fun on(flag: String): Boolean = config.flags[flag] ?: true
     val podChat get() = on("pod_chat")
     val podJoin get() = on("pod_join")
+    /** Below the sign-up threshold pods are open rooms only; a server that doesn't say is an older one, matched. */
+    val podsOpen get() = config.pods?.mode == "open"
     /** Plus is the one flag that counts as off until the server says otherwise. */
     val plus get() = config.flags["plus"] == true
 

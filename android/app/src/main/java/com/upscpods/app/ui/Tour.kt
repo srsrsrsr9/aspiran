@@ -81,7 +81,7 @@ data class TourStop(val tab: String, val line: String, val mood: ChotuMood)
 val TOUR = listOf(
     TourStop("ADDA", "This is the Adda, your home. Each day I'll say hello here, and your next step is the big button.", ChotuMood.HAPPY),
     TourStop("PREP", "Today's Chai lives in Prep: a few short news cards each morning, then 5 Prelims questions and 1 Mains answer. That's a whole day.", ChotuMood.PROUD),
-    TourStop("POD", "Your pod: 8 people at your stage, matched every Monday. Nobody does this alone here.", ChotuMood.CALM),
+    TourStop("POD", "Your pods: open rooms for your language, attempt, goal, optional and region. Join as many as help. Nobody does this alone here.", ChotuMood.CALM),
     TourStop("MASCOT", "And this is my corner. Ask me about the syllabus, plan your week, or just tell me how it's going. Need to talk is always at the top.", ChotuMood.HAPPY),
 )
 

@@ -90,6 +90,14 @@ import com.upscpods.app.ui.MascotTab
 import com.upscpods.app.ui.MyPathTab
 import com.upscpods.app.ui.NeedToTalkSheet
 import com.upscpods.app.ui.PodTab
+import com.upscpods.app.ui.RoomsScreen
+import com.upscpods.app.ui.AnswerStudioScreen
+import com.upscpods.app.data.Rooms
+import com.upscpods.app.data.AnswerLog
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.delay
 import com.upscpods.app.ui.RatingSheet
 import com.upscpods.app.ui.PodsTheme
 import com.upscpods.app.ui.MainsScreen
@@ -191,7 +199,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 
 private enum class PrepSub(val label: String) { PLUS("Plus"), TODAY("Today's 3"), PRACTICE("Practice"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -201,6 +209,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     val staged = remember { StagedProfile(context) }
     val pod = remember { PodClient(context) }
     val community = remember { Community({ pod.serverUrl }, { pod.memberId }) }
+    // Open rooms (server rooms.ts) and Answer Studio's attempt log.
+    val rooms = remember { Rooms(context, community, pod) }
+    val answerLog = remember { AnswerLog(context) }
     val roadmap = remember { RoadmapStore(context) { pod.serverUrl } }
     val langRequests = remember { LanguageRequests(context) }
     // Growth counts (data/Metrics.kt): first open with the Play referrer, then one app_open a day. Never any text.
@@ -219,7 +230,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     val authOptional = pod.serverUrl.isBlank() || !Auth.enabled || (authCfg != null && !authCfg.required && !authCfg.password &&
         (authCfg.mode == "unconfigured" || (authCfg.mode == "firebase" && !Auth.firebaseBuilt) || (authCfg.mode == "dev" && !Auth.devAllowed)))
     pod.mayConnect = { Auth.suspended == null && (authOptional || Auth.signedIn) && Auth.access != Access.OFFLINE_EXPIRED }
-    remember(pod) { Auth.onSuspended = { pod.forget() }; true }
+    remember(pod) { Auth.onSuspended = { pod.forget(); rooms.forget() }; true }
     // The access check: on open and whenever the app comes back, at most every 6 hours (Auth.check throttles).
     LifecycleResumeEffect(authOptional) {
         if (!authOptional) scope.launch { Auth.check(pod.serverUrl) }
@@ -282,6 +293,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     val result: String? = config.resultNow?.let { it.label.ifBlank { "It's a result week. No wins posts, no offers, and ${Brand.MASCOT_SHORT} stays quiet." } }
         ?: if (staged.myResultMode) "You switched on result-day mode." else null
     LaunchedEffect(config.podChat, config.podJoin) { pod.gate(config.podChat, config.podJoin, persona) }
+    // Open mode: below the sign-up threshold nobody new is matched; the Pod tab shows the rooms.
+    pod.roomsOnly = { config.podsOpen }
+    // The room list (and the Pod tab's unread badge) refreshes while the app is on screen.
+    val lifecycleOwner = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) { while (true) { rooms.refresh(); delay(60_000) } }
+    }
     // Connected while the app is on screen; the server keeps the pod's history meanwhile.
     LifecycleStartEffect(pod) {
         // Opening the app at all means the last nudge wasn't ignored.
@@ -397,6 +415,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
         }
     }
     var tab by rememberSaveable { mutableStateOf(Tab.ADDA) }
+    // With a matched pod, the open rooms are one tap away on the Pod tab.
+    var showRooms by rememberSaveable { mutableStateOf(false) }
     // Me's open page lives here so the top bar can show its title and a back arrow.
     var mePage by rememberSaveable { mutableStateOf(MePage.HOME) }
     // Each tab keeps its scroll and inputs while you're elsewhere.
@@ -451,6 +471,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
         roadmap.forget()
         scope.launch { repo.deleteJournal() }
         pod.forget()
+        rooms.forget()
         langRequests.clear()
         library.forget()
         mocks.forget(); activeMock = null; mockHistory = emptyList()
@@ -513,6 +534,11 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
             load = { repo.draft(mains.id) },
             save = { text -> scope.launch { repo.saveDraft(mains.id, text) } },
             onDone = { day.markDone(TaskId.MAINS) },
+            onClose = { overlay = Overlay.NONE },
+        )
+        Overlay.ANSWER_STUDIO -> AnswerStudioScreen(
+            Practice.studioQuestions(brief, hindi), community, answerLog, rooms, pod, persona, hindi,
+            onOpenNeedToTalk = openNeedToTalk,
             onClose = { overlay = Overlay.NONE },
         )
         Overlay.CLOSE_DAY -> CloseTheDayScreen(
@@ -605,8 +631,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                             onClick = { tab = t },
                             alwaysShowLabel = true,
                             label = { Text(t.label) },
-                            // No unread counts (playbook A12): the Pod tab shows presence inside, not a number outside.
-                            icon = { TabIcon(t.glyph, selected = tab == t) },
+                            // New messages from others, in your rooms and your pod (sell-first plan W3).
+                            icon = {
+                                val n = if (t == Tab.POD) rooms.unreadTotal + (if (tab != Tab.POD) pod.unread else 0) else 0
+                                if (n > 0) BadgedBox(badge = { Badge { Text(if (n > 99) "99+" else n.toString()) } }) { TabIcon(t.glyph, selected = tab == t) }
+                                else TabIcon(t.glyph, selected = tab == t)
+                            },
                         )
                     }
                 }
@@ -628,9 +658,16 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                     onPodAnswers = { scope.launch { community.syncProfile(staged.synced()) } },
                     modifier = m,
                 )
-                Tab.POD -> PodTab(
+                Tab.POD -> if (showRooms || (pod.podId == null && config.podsOpen)) RoomsScreen(
+                    rooms, persona, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library,
+                    onBackToPod = if (pod.podId != null) ({ showRooms = false }) else null,
+                    resultDay = result,
+                ) else PodTab(
                     pod, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library,
                     top = {
+                        TextButton(onClick = { showRooms = true }, modifier = Modifier.padding(horizontal = 8.dp)) {
+                            Text(if (rooms.unreadTotal > 0) "Open rooms · ${rooms.unreadTotal} new" else "Open rooms")
+                        }
                         // The three matching questions, asked together, once, when they help find a pod.
                         ProfileAskCard(staged, "pod", quiet = result != null || day.paused, onSynced = {
                             scope.launch { community.syncProfile(staged.synced()) }
@@ -703,6 +740,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
                                 day, persona, mains, saved, archive,
                                 onOpenPrelims = { overlay = Overlay.PRELIMS },
                                 onOpenMains = { overlay = Overlay.MAINS },
+                                onOpenStudio = { overlay = Overlay.ANSWER_STUDIO },
                                 onOpenCards = { cardsToRead = it; overlay = Overlay.CARDS },
                                 modifier = inner,
                                 library = library,

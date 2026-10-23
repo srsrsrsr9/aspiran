@@ -229,7 +229,7 @@ private fun PodCard(pod: PodClient, onOpenPod: () -> Unit) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text("Your pod", style = MaterialTheme.typography.titleMedium)
             val s = pod.summary
-            if (s == null) Text("Not in a pod yet: 8 people at your stage, matched every Monday. Answer the three questions below to be matched.", style = MaterialTheme.typography.bodyMedium)
+            if (s == null) Text("Not in a pod yet. Open rooms are live in the Pod tab: Hindi medium, Repeaters, your optional, your region and more. Join as many as help.", style = MaterialTheme.typography.bodyMedium)
             else {
                 Text(s.header, style = MaterialTheme.typography.bodyMedium)
                 if (pod.online.size > 1) Text("${pod.online.size} here now", style = MaterialTheme.typography.bodySmall)

@@ -45,6 +45,48 @@ data class CommonsSummary(val rooms: List<CommonsRoomInfo> = emptyList(), val to
 @Serializable
 data class Season(val title: String = "", val goal: Long = 0, val unit: String = "questions", val endsOn: String = "", val done: Long = 0)
 
+/** One open room (server rooms.ts): real member counts, and unread only in rooms you're in. */
+@Serializable
+data class RoomInfo(
+    val id: String,
+    val name: String = "",
+    /** "language", "attempt", "goal", "optional" or "region". */
+    val group: String = "",
+    val note: String = "",
+    val members: Int = 0,
+    val joined: Boolean = false,
+    val unread: Int = 0,
+    val lastTs: Long? = null,
+    val lastName: String? = null,
+    val lastText: String? = null,
+    val online: Int = 0,
+)
+
+@Serializable
+data class RoomsList(val mode: String = "open", val signups: Int = 0, val threshold: Int = 500, val rooms: List<RoomInfo> = emptyList())
+
+@Serializable
+data class RubricArea(val band: String = "at", val note: String = "", val fix: String = "")
+
+@Serializable
+data class AnswerSkeleton(val intro: String = "", val body: List<String> = emptyList(), val conclusion: String = "")
+
+/** Answer Studio's feedback (server answers.ts). [error] is set instead when it couldn't be given. */
+@Serializable
+data class AnswerFeedback(
+    val wordCount: Int = 0,
+    val words: Int = 150,
+    val overLimit: Boolean = false,
+    val readable: Boolean = true,
+    val areas: Map<String, RubricArea> = emptyMap(),
+    val skeleton: AnswerSkeleton = AnswerSkeleton(),
+    val summary: String = "",
+    /** Free reviews left this week; null on Plus. */
+    val left: Int? = null,
+    val care: Boolean = false,
+    val error: String? = null,
+)
+
 @Serializable
 data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null)
 
@@ -58,6 +100,8 @@ class Community(private val server: () -> String, private val memberId: () -> St
     private val json = Json { ignoreUnknownKeys = true }
     // AuthInterceptor adds the sign-in token to member routes (Auth.kt); public ones (season, Commons list) go without.
     private val http = OkHttpClient.Builder().callTimeout(10, TimeUnit.SECONDS).addInterceptor(AuthInterceptor).build()
+    // Reading a handwritten page takes a vision model a while.
+    private val slowHttp = http.newBuilder().callTimeout(90, TimeUnit.SECONDS).readTimeout(90, TimeUnit.SECONDS).build()
 
     suspend fun podMe(): PodSummary? = post("/pods/me", buildJsonObject { put("memberId", memberId()) })
         ?.let { json.decodeFromJsonElement(PodSummary.serializer(), it) }?.takeIf { it.podId != null }
@@ -100,6 +144,38 @@ class Community(private val server: () -> String, private val memberId: () -> St
     suspend fun useMockAllowance(): Boolean =
         post("/plus/use", buildJsonObject { put("memberId", memberId()); put("kind", "mock") })
             ?.get("ok")?.toString() != "false"
+
+    /** The open rooms, with unread counted from [seen] (room id to the last time this phone opened it, in ms). */
+    suspend fun rooms(seen: Map<String, Long>): RoomsList? =
+        post("/rooms/list", buildJsonObject { put("memberId", memberId()); put("seen", buildJsonObject { seen.forEach { (k, v) -> put(k, v) } }) })
+            ?.let { json.decodeFromJsonElement(RoomsList.serializer(), it) }
+    suspend fun joinRoom(id: String): Boolean = post("/rooms/join", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null
+    suspend fun leaveRoom(id: String): Boolean = post("/rooms/leave", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null
+
+    /**
+     * Answer Studio: rubric feedback on one answer, typed or as a JPEG of the handwritten sheet. The server reads
+     * the photo and doesn't keep it. Error replies (allowance used, offline) come back as [AnswerFeedback.error].
+     */
+    suspend fun evaluate(question: String, words: Int, text: String?, jpeg: ByteArray?): AnswerFeedback = withContext(Dispatchers.IO) {
+        val base = server()
+        if (base.isBlank()) return@withContext AnswerFeedback(error = "Answer review needs the pod server. Set it in Me → My Path.")
+        val body = buildJsonObject {
+            put("memberId", memberId()); put("question", question); put("words", words)
+            text?.takeIf { it.isNotBlank() }?.let { put("text", it) }
+            jpeg?.let { put("image", buildJsonObject { put("mime", "image/jpeg"); put("data", android.util.Base64.encodeToString(it, android.util.Base64.NO_WRAP)) }) }
+        }
+        runCatching {
+            val req = Request.Builder().url("$base/answers/evaluate").post(body.toString().toRequestBody("application/json".toMediaType())).build()
+            slowHttp.newCall(req).execute().use { r ->
+                val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
+                when {
+                    o == null -> AnswerFeedback(error = "Couldn't review the answer just now. Try again in a minute.")
+                    r.isSuccessful -> json.decodeFromJsonElement(AnswerFeedback.serializer(), o)
+                    else -> AnswerFeedback(error = (o["error"] as? kotlinx.serialization.json.JsonPrimitive)?.content ?: "Couldn't review the answer just now.")
+                }
+            }
+        }.getOrElse { AnswerFeedback(error = "No connection. Your answer is saved here; try again when you're online.") }
+    }
 
     /** "Delete my data": erases the pod membership, messages, consent record and sign-in account on the server. */
     suspend fun privacyDelete(): Boolean = post("/privacy/delete", buildJsonObject { put("memberId", memberId()) }) != null
