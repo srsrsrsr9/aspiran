@@ -1,0 +1,82 @@
+{
+  "schema": "upsc-pods/reel@1",
+  "id": "chai-in-60-2026-10-10",
+  "format": {
+    "aspect": "9:16",
+    "export": "1080x1920 MP4, burned-in captions"
+  },
+  "segments": [
+    {
+      "kind": "intro",
+      "seconds": 4,
+      "text": {
+        "en": [
+          "10 October 2026",
+          "Today's Chai, in one minute",
+          "Three cards · no noise"
+        ],
+        "hi": [
+          "10 अक्टूबर 2026",
+          "आज की चाय, एक मिनट में",
+          "तीन कार्ड · कोई शोर नहीं"
+        ]
+      }
+    },
+    {
+      "kind": "card",
+      "seconds": 16,
+      "cardId": "gi-tag",
+      "showTakeawayAtSeconds": 6,
+      "uses": [
+        "illustration",
+        "lensChips[0..1]",
+        "headline",
+        "takeaway"
+      ]
+    },
+    {
+      "kind": "card",
+      "seconds": 16,
+      "cardId": "el-nino",
+      "showTakeawayAtSeconds": 6,
+      "uses": [
+        "illustration",
+        "lensChips[0..1]",
+        "headline",
+        "takeaway"
+      ]
+    },
+    {
+      "kind": "card",
+      "seconds": 16,
+      "cardId": "sendai",
+      "showTakeawayAtSeconds": 6,
+      "uses": [
+        "illustration",
+        "lensChips[0..1]",
+        "headline",
+        "takeaway"
+      ]
+    },
+    {
+      "kind": "outro",
+      "seconds": 6,
+      "text": {
+        "en": [
+          "Read the full Chai in UPSC Pods",
+          "Five cards every morning. Free."
+        ],
+        "hi": [
+          "पूरी चाय पढ़ें, UPSC Pods में",
+          "हर सुबह पाँच कार्ड। मुफ़्त।"
+        ]
+      },
+      "sound": "audio/motif.ogg at 52.4 s"
+    }
+  ],
+  "rules": [
+    "Skip any card whose tone is TRAGIC",
+    "Bed: audio/bed.ogg at gain 0.55, fades out when the motif starts"
+  ],
+  "cards": "cards/chai-2026-10-10.json"
+}

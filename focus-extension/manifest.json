@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "UPSC Pods Focus",
+  "version": "1.0.0",
+  "description": "Closes distracting sites during UPSC Pods focus blocks and mock papers, and keeps daily limits. Nothing leaves this browser.",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "declarativeNetRequest",
+    "alarms",
+    "tabs",
+    "idle"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "UPSC Pods Focus"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "http://127.0.0.1/*",
+        "https://*.workers.dev/*",
+        "https://upsc-pods-production.chotu-aec.workers.dev/*"
+      ],
+      "js": [
+        "config.js",
+        "bridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

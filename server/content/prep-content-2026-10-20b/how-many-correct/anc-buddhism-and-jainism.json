@@ -1,0 +1,169 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "anc-buddhism-and-jainism",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Buddhism and Jainism: how many are correct?",
+    "hi": "बौद्ध और जैन धर्म: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Buddha:",
+        "statements": [
+          "He gave his first sermon at Sarnath, near Varanasi.",
+          "He attained enlightenment at Kushinagar.",
+          "The Tripitaka, the early Buddhist canon, was compiled in Pali."
+        ],
+        "why": "Statement 2 is wrong: the Buddha attained enlightenment at Bodh Gaya. Kushinagar is where he died, the mahaparinirvana."
+      },
+      "hi": {
+        "stem": "बुद्ध के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "उन्होंने अपना पहला उपदेश वाराणसी के पास सारनाथ में दिया।",
+          "उन्हें कुशीनगर में ज्ञान प्राप्त हुआ।",
+          "आरंभिक बौद्ध ग्रंथ-संग्रह त्रिपिटक पालि में संकलित हुआ।"
+        ],
+        "why": "कथन 2 ग़लत है: बुद्ध को बोधगया में ज्ञान मिला। कुशीनगर वह जगह है जहाँ उनका निधन, यानी महापरिनिर्वाण, हुआ।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Jainism:",
+        "statements": [
+          "Mahavira was the 24th tirthankara.",
+          "Rishabhanatha is regarded as the first tirthankara.",
+          "Parshvanatha, the 23rd tirthankara, lived before Mahavira.",
+          "The Jain canon was finally compiled in Sanskrit at the council of Vallabhi."
+        ],
+        "why": "Statement 4 is wrong: the Jain canon compiled at Vallabhi is in Prakrit (Ardhamagadhi), not Sanskrit. Jain teachers wrote in Sanskrit only later."
+      },
+      "hi": {
+        "stem": "जैन धर्म के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "महावीर 24वें तीर्थंकर थे।",
+          "ऋषभनाथ को पहला तीर्थंकर माना जाता है।",
+          "23वें तीर्थंकर पार्श्वनाथ महावीर से पहले हुए।",
+          "जैन आगम अंततः वल्लभी की सभा में संस्कृत में संकलित हुए।"
+        ],
+        "why": "कथन 4 ग़लत है: वल्लभी में संकलित जैन आगम प्राकृत (अर्धमागधी) में हैं, संस्कृत में नहीं। जैन आचार्यों ने संस्कृत में बाद में लिखना शुरू किया।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about sects:",
+        "statements": [
+          "Jainism split into the Digambara and Svetambara sects.",
+          "Digambara monks wear white robes.",
+          "Mahayana Buddhism gave a central place to bodhisattvas and images of the Buddha.",
+          "Theravada Buddhism is the main form followed in Sri Lanka."
+        ],
+        "why": "Statement 2 is wrong: Svetambara means 'white-clad'. Digambara, 'sky-clad', monks traditionally wear no clothes."
+      },
+      "hi": {
+        "stem": "संप्रदायों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "जैन धर्म दिगंबर और श्वेतांबर संप्रदायों में बँटा।",
+          "दिगंबर मुनि सफ़ेद वस्त्र पहनते हैं।",
+          "महायान बौद्ध धर्म ने बोधिसत्वों और बुद्ध की मूर्तियों को केंद्रीय स्थान दिया।",
+          "श्रीलंका में मुख्यतः थेरवाद बौद्ध धर्म माना जाता है।"
+        ],
+        "why": "कथन 2 ग़लत है: श्वेतांबर का मतलब है 'सफ़ेद वस्त्र वाले'। दिगंबर, यानी 'आकाश ही वस्त्र', मुनि परंपरा से वस्त्र नहीं पहनते।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the founders:",
+        "statements": [
+          "Mahavira was born at Lumbini.",
+          "The Buddha belonged to the Shakya clan.",
+          "Both the Buddha and Mahavira preached mainly in Sanskrit."
+        ],
+        "why": "Statement 1 is wrong: Lumbini is the Buddha's birthplace; Mahavira was born at Kundagrama near Vaishali. Statement 3 is wrong: both used Prakrit, the language of ordinary people."
+      },
+      "hi": {
+        "stem": "संस्थापकों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "महावीर का जन्म लुम्बिनी में हुआ।",
+          "बुद्ध शाक्य कुल के थे।",
+          "बुद्ध और महावीर, दोनों ने मुख्यतः संस्कृत में उपदेश दिए।"
+        ],
+        "why": "कथन 1 ग़लत है: लुम्बिनी बुद्ध का जन्मस्थान है; महावीर वैशाली के पास कुंडग्राम में जन्मे। कथन 3 ग़लत है: दोनों ने आम लोगों की भाषा प्राकृत अपनाई।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VI Our Pasts I; NCERT Class XII Themes in Indian History Part I",
+    "hi": "NCERT कक्षा VI हमारे अतीत I; NCERT कक्षा XII भारतीय इतिहास के कुछ विषय भाग I"
+  },
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-viral-video-constable",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A viral video and a constable",
+    "hi": "एक वायरल वीडियो और एक सिपाही"
+  },
+  "en": {
+    "scenario": "You are the superintendent of police of a district. A video goes viral showing a constable slapping a young man at a traffic checkpoint. The clip is short. Your preliminary enquiry suggests the young man had abused and pushed the constable first, which the clip does not show. Public anger is high, a protest is planned for tomorrow, and the police association warns that suspending the constable will hurt morale.",
+    "question": "What would you do, and what values does each choice serve?",
+    "options": [
+      {
+        "label": "Suspend the constable now, pending a full enquiry.",
+        "outcome": "Public anger may cool and the message on use of force is clear. The force may feel its side was ignored.",
+        "values": "Accountability and public trust over force morale"
+      },
+      {
+        "label": "Release full footage; order a time-bound enquiry, no suspension.",
+        "outcome": "The fuller picture reaches the public. Some may see it as defending the police, and the protest may grow.",
+        "values": "Transparency and fairness to the accused"
+      },
+      {
+        "label": "Move the constable to non-public duty and meet protest leaders.",
+        "outcome": "Tension is reduced without a finding of guilt. Both sides may see it as a half-measure.",
+        "values": "Prudence and dialogue; risks looking evasive"
+      }
+    ],
+    "reflect": "How do you stay fair to an individual when public pressure demands a quick and visible response?"
+  },
+  "hi": {
+    "scenario": "आप एक ज़िले के पुलिस अधीक्षक हैं। एक वीडियो वायरल होता है जिसमें एक सिपाही ट्रैफ़िक चेकपॉइंट पर एक युवक को थप्पड़ मारता दिखता है। क्लिप छोटी है। आपकी प्रारंभिक जाँच से पता चलता है कि युवक ने पहले सिपाही को गाली दी और धक्का दिया था, जो क्लिप में नहीं दिखता। जनता में भारी गुस्सा है, कल विरोध प्रदर्शन तय है, और पुलिस एसोसिएशन चेतावनी देती है कि सिपाही को निलंबित करने से मनोबल गिरेगा।",
+    "question": "आप क्या करेंगे, और हर विकल्प किन मूल्यों की सेवा करता है?",
+    "options": [
+      {
+        "label": "पूरी जाँच होने तक सिपाही को अभी निलंबित करें।",
+        "outcome": "जनता का गुस्सा शांत हो सकता है और बल प्रयोग पर स्पष्ट संदेश जाता है। पुलिस बल को लग सकता है कि उसका पक्ष अनसुना रहा।",
+        "values": "बल के मनोबल से ऊपर जवाबदेही और जन-विश्वास"
+      },
+      {
+        "label": "पूरी फुटेज जारी करें और समयबद्ध जाँच का आदेश दें, निलंबन के बिना।",
+        "outcome": "पूरी तस्वीर जनता तक पहुँचती है। कुछ लोग इसे पुलिस का बचाव मान सकते हैं, और प्रदर्शन बढ़ सकता है।",
+        "values": "पारदर्शिता और आरोपी के प्रति निष्पक्षता"
+      },
+      {
+        "label": "सिपाही को गैर-सार्वजनिक ड्यूटी पर भेजें और प्रदर्शन के नेताओं से मिलें।",
+        "outcome": "दोष तय किए बिना तनाव कम होता है। दोनों पक्ष इसे आधा-अधूरा कदम मान सकते हैं।",
+        "values": "विवेक और संवाद; टालमटोल जैसा दिखने का जोखिम"
+      }
+    ],
+    "reflect": "जब जनता का दबाव तुरंत और दिखने वाली कार्रवाई माँगे, तब आप किसी एक व्यक्ति के प्रति निष्पक्ष कैसे रहेंगे?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

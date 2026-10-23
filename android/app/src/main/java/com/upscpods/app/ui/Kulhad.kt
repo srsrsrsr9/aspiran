@@ -1,0 +1,257 @@
+package com.upscpods.app.ui
+
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.scale
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.vector.PathParser
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.upscpods.app.Brand
+import java.time.LocalTime
+
+/** The steam and the face show the tone: quiet in care or result mode, sleepy late, warm by day, calm in the evening. */
+enum class KulhadTone { WARM, CALM, NIGHT, THINKING, QUIET }
+
+fun toneNow(care: Boolean = false, result: Boolean = false, thinking: Boolean = false): KulhadTone {
+    if (care || result) return KulhadTone.QUIET
+    if (thinking) return KulhadTone.THINKING
+    val t = LocalTime.now()
+    val hm = t.hour * 60 + t.minute
+    return when {
+        hm >= 23 * 60 + 30 || hm < 6 * 60 -> KulhadTone.NIGHT
+        hm < 18 * 60 -> KulhadTone.WARM
+        else -> KulhadTone.CALM
+    }
+}
+
+private val STEAM = mapOf(
+    KulhadTone.WARM to listOf("M22 14 q-4 -6 0 -11", "M32 13 q4 -6 0 -12", "M42 14 q-4 -6 0 -11"),
+    KulhadTone.CALM to listOf("M27 14 q-3 -5 0 -10", "M37 14 q3 -5 0 -10"),
+    KulhadTone.NIGHT to listOf("M32 14 q-2 -4 0 -8"),
+    KulhadTone.THINKING to listOf("M24 14 q-4 -6 0 -11", "M32 13 q4 -6 0 -12", "M40 14 q-4 -6 0 -11"),
+    KulhadTone.QUIET to emptyList(),
+)
+
+/** Chotu's face. Six expressions, drawn in code (no image files), so the mascot stays light and works offline. */
+enum class ChotuMood { HAPPY, CALM, THINKING, SLEEPY, PROUD, GENTLE }
+
+/** The face that goes with a tone, so every existing kulhad gets one without changing its callers. */
+fun KulhadTone.mood(): ChotuMood = when (this) {
+    KulhadTone.WARM -> ChotuMood.HAPPY
+    KulhadTone.CALM -> ChotuMood.CALM
+    KulhadTone.NIGHT -> ChotuMood.SLEEPY
+    KulhadTone.THINKING -> ChotuMood.THINKING
+    KulhadTone.QUIET -> ChotuMood.GENTLE
+}
+
+/** How much steam each face gets: proud and happy steam the most, gentle and sleepy barely. */
+private fun ChotuMood.steamTone(): KulhadTone = when (this) {
+    ChotuMood.HAPPY, ChotuMood.PROUD -> KulhadTone.WARM
+    ChotuMood.CALM, ChotuMood.GENTLE -> KulhadTone.CALM
+    ChotuMood.THINKING -> KulhadTone.THINKING
+    ChotuMood.SLEEPY -> KulhadTone.NIGHT
+}
+
+private val INK = Color(0xFF2A1A10)
+private val BLUSH = Color(0xFFE88A6A)
+
+/** Chotu: a small terracotta kulhad with a face. [tone] picks the face and the steam. */
+@Composable
+fun Kulhad(tone: KulhadTone, size: Dp = 48.dp) = Kulhad(tone.mood(), size, steamTone = tone)
+
+/**
+ * Chotu with a given expression. The steam rises and fades on a slow loop (still when the phone asks for less
+ * motion). Decorative: screen readers skip it; the text beside it carries the meaning.
+ */
+@Composable
+fun Kulhad(mood: ChotuMood, size: Dp = 48.dp, steamTone: KulhadTone = mood.steamTone(), cupColor: Color? = null) {
+    val steam = remember(steamTone) { STEAM[steamTone].orEmpty().map { PathParser().parsePathString(it).toPath() } }
+    val cup = remember { PathParser().parsePathString("M12 20 L52 20 L46 56 Q32 60 18 56 Z").toPath() }
+    val rim = remember { PathParser().parsePathString("M12 20 L52 20 L51 25 L13 25 Z").toPath() }
+    val shine = remember { PathParser().parsePathString("M18 30 Q20 44 22 52").toPath() }
+    val still = reducedMotion()
+    val rise = if (still) 0f else {
+        val t by rememberInfiniteTransition(label = "steam").animateFloat(
+            0f, 1f, infiniteRepeatable(tween(2600, easing = LinearEasing), RepeatMode.Restart), label = "rise",
+        )
+        t
+    }
+    Canvas(Modifier.size(size).clearAndSetSemantics { }) {
+        scale(this.size.width / 64f, pivot = Offset.Zero) {
+            // Steam drifts up about 4 units and fades in and out, then starts again.
+            val base = if (steamTone == KulhadTone.NIGHT) 0.45f else 0.8f
+            val fade = if (still) 1f else (if (rise < 0.2f) rise / 0.2f else (1f - rise) / 0.8f)
+            translate(top = -rise * 4f) {
+                steam.forEach { drawPath(it, Color(0xFFB9AA9C), alpha = base * fade, style = Stroke(2.4f, cap = StrokeCap.Round)) }
+            }
+            // The pod friends each have their own cup colour; Chotu keeps the terracotta.
+            drawPath(cup, cupColor ?: Color(0xFFB5562B))
+            drawPath(rim, cupColor ?: Color(0xFF9A4321), alpha = if (cupColor != null) 0.8f else 1f)
+            drawOval(Color(0xFF7A3418), topLeft = Offset(12f, 16.8f), size = Size(40f, 6.4f))
+            drawPath(shine, Color(0xFFCF7448), alpha = 0.6f, style = Stroke(2f, cap = StrokeCap.Round))
+            face(mood)
+        }
+    }
+}
+
+private fun DrawScope.line(d: String, width: Float = 2.2f) =
+    drawPath(PathParser().parsePathString(d).toPath(), INK, style = Stroke(width, cap = StrokeCap.Round))
+
+/** Eyes at about (26,36) and (38,36), mouth at about (32,45), on the 64-unit cup. */
+private fun DrawScope.face(mood: ChotuMood) {
+    when (mood) {
+        ChotuMood.HAPPY -> {
+            line("M23.5 37 q2.5 -3.5 5 0"); line("M35.5 37 q2.5 -3.5 5 0")
+            line("M28 43.5 q4 4 8 0")
+        }
+        ChotuMood.PROUD -> {
+            line("M23.5 37 q2.5 -3.5 5 0"); line("M35.5 37 q2.5 -3.5 5 0")
+            drawPath(PathParser().parsePathString("M27 43 L37 43 Q36.5 49 32 49 Q27.5 49 27 43 Z").toPath(), INK)
+        }
+        ChotuMood.CALM -> {
+            drawCircle(INK, 2.6f, Offset(26f, 36f)); drawCircle(INK, 2.6f, Offset(38f, 36f))
+            line("M29.5 44 q2.5 2 5 0", 2f)
+        }
+        ChotuMood.THINKING -> {
+            // Looking up and to the side, mouth pushed over.
+            drawCircle(INK, 2.6f, Offset(27.5f, 34.5f)); drawCircle(INK, 2.6f, Offset(39.5f, 34.5f))
+            line("M30 45.5 l5.5 -1.2", 2f)
+        }
+        ChotuMood.SLEEPY -> {
+            line("M23.5 36 q2.5 2.6 5 0", 2f); line("M35.5 36 q2.5 2.6 5 0", 2f)
+            drawCircle(INK, 1.6f, Offset(32f, 45f), style = Stroke(1.6f))
+        }
+        ChotuMood.GENTLE -> {
+            // Soft eyes, brows tilted up in the middle: listening, not alarmed.
+            drawCircle(INK, 2.4f, Offset(26f, 37f)); drawCircle(INK, 2.4f, Offset(38f, 37f))
+            line("M23 32.5 l5 -1.4", 1.6f); line("M41 32.5 l-5 -1.4", 1.6f)
+            line("M29.5 44.5 q2.5 1.5 5 0", 2f)
+        }
+    }
+    if (mood == ChotuMood.HAPPY || mood == ChotuMood.PROUD || mood == ChotuMood.GENTLE) {
+        drawCircle(BLUSH, 2.4f, Offset(20.5f, 41f), alpha = 0.55f)
+        drawCircle(BLUSH, 2.4f, Offset(43.5f, 41f), alpha = 0.55f)
+    }
+}
+
+/** The kulhad with its label. Chotu is always shown as an AI. */
+@Composable
+fun ChotuBadge(tone: KulhadTone, size: Dp = 40.dp) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Kulhad(tone, size)
+        Text(Brand.MASCOT, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+    }
+}
+
+/**
+ * Chotu talking: the kulhad beside a speech bubble. Hosts onboarding, the tour and the Adda check-in.
+ * [content] goes under the words (chips, buttons). Screen readers hear the words once when they change.
+ */
+@Composable
+fun ChotuSays(
+    text: String,
+    mood: ChotuMood = ChotuMood.HAPPY,
+    modifier: Modifier = Modifier,
+    size: Dp = 64.dp,
+    content: @Composable ColumnScope.() -> Unit = {},
+) {
+    Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Kulhad(mood, size)
+        Surface(
+            shape = RoundedCornerShape(topStart = 4.dp, topEnd = 18.dp, bottomEnd = 18.dp, bottomStart = 18.dp),
+            color = MaterialTheme.colorScheme.primaryContainer,
+            modifier = Modifier.weight(1f).padding(top = 8.dp),
+        ) {
+            Column(Modifier.padding(horizontal = 14.dp, vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(
+                    text,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite; contentDescription = "${Brand.MASCOT_SHORT} says: $text" },
+                )
+                content()
+            }
+        }
+    }
+}
+
+// Prep is the cool space (study), Adda the warm one (people). Same type and shapes, different palette.
+private val PrepLight = lightColorScheme(
+    primary = Color(0xFF1F5F8B),
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = Color(0xFFD3E6F5),
+    onPrimaryContainer = Color(0xFF0A2236),
+    tertiary = Color(0xFF14696B),
+    surface = Color(0xFFF6F9FC),
+    background = Color(0xFFF6F9FC),
+    onSurface = Color(0xFF181C20),
+    onBackground = Color(0xFF181C20),
+    secondaryContainer = Color(0xFFDCE6EF),
+    onSecondaryContainer = Color(0xFF111D27),
+    surfaceVariant = Color(0xFFDEE5EC),
+    surfaceContainerLow = Color(0xFFEDF3F8),
+    surfaceContainer = Color(0xFFE6EDF3),
+)
+private val PrepDark = darkColorScheme(
+    primary = Color(0xFF9BCBF0),
+    onPrimary = Color(0xFF00324F),
+    primaryContainer = Color(0xFF184A6D),
+    onPrimaryContainer = Color(0xFFD3E6F5),
+    tertiary = Color(0xFF82D3D5),
+    surface = Color(0xFF0F1418),
+    background = Color(0xFF0F1418),
+    onSurface = Color(0xFFDFE3E8),
+    onBackground = Color(0xFFDFE3E8),
+    secondaryContainer = Color(0xFF34424E),
+    onSecondaryContainer = Color(0xFFD7E3EE),
+    surfaceVariant = Color(0xFF3F4850),
+    surfaceContainerLow = Color(0xFF171D22),
+    surfaceContainer = Color(0xFF1B2228),
+)
+
+/** Wraps the Prep tab in the cool palette. */
+@Composable
+fun PrepSpace(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = if (isSystemInDarkTheme()) PrepDark else PrepLight,
+        typography = MaterialTheme.typography,
+        shapes = MaterialTheme.shapes,
+        content = content,
+    )
+}

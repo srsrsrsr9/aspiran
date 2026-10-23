@@ -1,0 +1,974 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "his-sectional-modern-history-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Modern India sectional mock 1",
+    "hi": "आधुनिक भारत सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Modern Indian History",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "his-british-expansion",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which treaty, signed after the Battle of Buxar, gave the East India Company the Diwani of Bengal, Bihar and Orissa?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Treaty of Allahabad",
+          "Treaty of Salbai",
+          "Treaty of Bassein",
+          "Treaty of Seringapatam"
+        ],
+        "why": "The Treaty of Allahabad (1765), with Mughal emperor Shah Alam II, gave the Company the Diwani. The trap is Bassein (1802), where the Peshwa accepted the Subsidiary Alliance."
+      },
+      "hi": {
+        "stem": "बक्सर के युद्ध के बाद हुई किस संधि ने ईस्ट इंडिया कंपनी को बंगाल, बिहार और उड़ीसा की दीवानी दी?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "इलाहाबाद की संधि",
+          "सालबाई की संधि",
+          "बसीन की संधि",
+          "श्रीरंगपट्टनम की संधि"
+        ],
+        "why": "इलाहाबाद की संधि (1765) मुगल बादशाह शाह आलम II के साथ हुई थी, और इसी से कंपनी को दीवानी मिली। जाल बसीन की संधि (1802) है, जिसमें पेशवा ने सहायक संधि मानी थी।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "his-british-expansion",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of Governors-General and the measures associated with them:",
+        "statements": [
+          "Lord Wellesley – Subsidiary Alliance system",
+          "Lord Dalhousie – Doctrine of Lapse",
+          "Lord William Bentinck – Abolition of sati, 1829",
+          "Lord Ripon – Vernacular Press Act, 1878"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Lord Lytton passed the Vernacular Press Act in 1878; Lord Ripon repealed it in 1882. The trap is 'All four', because Ripon is linked to the Act."
+      },
+      "hi": {
+        "stem": "गवर्नर-जनरलों और उनसे जुड़े कदमों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "लॉर्ड वेलेज़ली – सहायक संधि प्रणाली",
+          "लॉर्ड डलहौज़ी – व्यपगत का सिद्धांत (Doctrine of Lapse)",
+          "लॉर्ड विलियम बेंटिंक – सती प्रथा का उन्मूलन, 1829",
+          "लॉर्ड रिपन – वर्नाक्युलर प्रेस एक्ट, 1878"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 3 सही हैं। वर्नाक्युलर प्रेस एक्ट 1878 में लॉर्ड लिटन लाए थे, और लॉर्ड रिपन ने 1882 में इसे रद्द किया। 'सभी चार' का जाल इसलिए लगता है क्योंकि रिपन का नाम इस एक्ट से जुड़ा है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-revolt-of-1857",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Revolt of 1857:",
+        "statements": [
+          "The sepoys at Meerut rose in revolt on 10 May 1857.",
+          "The rebels at Delhi proclaimed Bahadur Shah Zafar as their emperor.",
+          "Kunwar Singh led the revolt in Awadh."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Kunwar Singh of Jagdishpur led the revolt in Bihar, while Begum Hazrat Mahal led it in Awadh. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "1857 के विद्रोह के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "मेरठ के सिपाहियों ने 10 मई 1857 को विद्रोह किया।",
+          "दिल्ली में विद्रोहियों ने बहादुर शाह ज़फ़र को अपना बादशाह घोषित किया।",
+          "कुंवर सिंह ने अवध में विद्रोह का नेतृत्व किया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: जगदीशपुर के कुंवर सिंह ने बिहार में विद्रोह का नेतृत्व किया था, जबकि अवध में बेगम हज़रत महल ने। '1, 2 और 3' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "his-revolt-of-1857",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following pairs of a leader and a centre of the Revolt of 1857 is NOT correctly matched?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Nana Saheb – Kanpur",
+          "Rani Lakshmibai – Jhansi",
+          "Begum Hazrat Mahal – Lucknow",
+          "Khan Bahadur Khan – Gwalior"
+        ],
+        "why": "Khan Bahadur Khan led the revolt at Bareilly, not Gwalior. The trap is Rani Lakshmibai – Jhansi, since she also fought at Gwalior, but Jhansi was her own centre."
+      },
+      "hi": {
+        "stem": "1857 के विद्रोह के नेता और केंद्र का निम्नलिखित में से कौन-सा युग्म सही सुमेलित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "नाना साहब – कानपुर",
+          "रानी लक्ष्मीबाई – झांसी",
+          "बेगम हज़रत महल – लखनऊ",
+          "ख़ान बहादुर ख़ान – ग्वालियर"
+        ],
+        "why": "ख़ान बहादुर ख़ान ने बरेली में विद्रोह का नेतृत्व किया था, ग्वालियर में नहीं। जाल रानी लक्ष्मीबाई – झांसी वाला विकल्प है, क्योंकि वे ग्वालियर में भी लड़ी थीं, पर उनका अपना केंद्र झांसी ही था।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-socio-religious-reform",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about socio-religious reform movements:",
+        "statements": [
+          "Raja Rammohan Roy founded the Brahmo Sabha in 1828, which later came to be known as the Brahmo Samaj.",
+          "Swami Dayanand Saraswati founded the Arya Samaj in 1875.",
+          "Ramakrishna Paramahamsa himself founded the Ramakrishna Mission."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Swami Vivekananda founded the Ramakrishna Mission in 1897, after his guru's death. The trap is '1, 2 and 3', because the Mission carries Ramakrishna's name."
+      },
+      "hi": {
+        "stem": "सामाजिक-धार्मिक सुधार आंदोलनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राजा राममोहन राय ने 1828 में ब्रह्म सभा की स्थापना की, जो बाद में ब्रह्म समाज कहलाई।",
+          "स्वामी दयानंद सरस्वती ने 1875 में आर्य समाज की स्थापना की।",
+          "रामकृष्ण परमहंस ने स्वयं रामकृष्ण मिशन की स्थापना की।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: रामकृष्ण मिशन 1897 में स्वामी विवेकानंद ने बनाया था, अपने गुरु के निधन के बाद। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि मिशन पर रामकृष्ण का नाम है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "his-socio-religious-reform",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following was NOT founded or started by Sir Syed Ahmad Khan?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Darul Uloom at Deoband",
+          "The Muhammadan Anglo-Oriental College at Aligarh",
+          "The Scientific Society",
+          "The journal Tahzib-ul-Akhlaq"
+        ],
+        "why": "The Darul Uloom at Deoband (1866) was founded by Muhammad Qasim Nanautavi and Rashid Ahmad Gangohi, and it opposed Sir Syed's Western-education approach. The trap is the Scientific Society, which is less familiar but was Sir Syed's."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से किसकी स्थापना या शुरुआत सर सैयद अहमद ख़ान ने नहीं की थी?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "देवबंद का दारुल उलूम",
+          "अलीगढ़ का मोहम्मडन एंग्लो-ओरिएंटल कॉलेज",
+          "साइंटिफिक सोसाइटी",
+          "पत्रिका तहज़ीब-उल-अख़लाक़"
+        ],
+        "why": "देवबंद का दारुल उलूम (1866) मुहम्मद क़ासिम नानौतवी और रशीद अहमद गंगोही ने बनाया था, और यह सर सैयद की पश्चिमी शिक्षा वाली सोच के उलट था। जाल साइंटिफिक सोसाइटी है, जो कम सुना हुआ नाम है पर सर सैयद की ही थी।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-socio-religious-reform",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Satyashodhak Samaj, founded in 1873 to fight caste discrimination, is associated with whom?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Gopal Hari Deshmukh",
+          "Jyotirao Phule",
+          "Mahadev Govind Ranade",
+          "Sri Narayana Guru"
+        ],
+        "why": "Jyotirao Phule founded the Satyashodhak Samaj in Maharashtra in 1873. The trap is M.G. Ranade, another Maharashtra reformer, who is linked with the Prarthana Samaj."
+      },
+      "hi": {
+        "stem": "जातिगत भेदभाव के विरुद्ध 1873 में स्थापित सत्यशोधक समाज किससे जुड़ा है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "गोपाल हरि देशमुख",
+          "ज्योतिराव फुले",
+          "महादेव गोविंद रानाडे",
+          "श्री नारायण गुरु"
+        ],
+        "why": "सत्यशोधक समाज ज्योतिराव फुले ने 1873 में महाराष्ट्र में बनाया था। जाल एम.जी. रानाडे हैं, जो महाराष्ट्र के ही सुधारक थे, पर उनका नाम प्रार्थना समाज से जुड़ा है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-early-nationalism-and-congress",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Who presided over the first session of the Indian National Congress, held at Bombay in 1885?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Dadabhai Naoroji",
+          "Surendranath Banerjee",
+          "A.O. Hume",
+          "W.C. Bonnerjee"
+        ],
+        "why": "W.C. Bonnerjee presided over the first session in Bombay in 1885. The trap is A.O. Hume, who helped found the Congress but did not preside over this session."
+      },
+      "hi": {
+        "stem": "1885 में बंबई में हुए भारतीय राष्ट्रीय कांग्रेस के पहले अधिवेशन की अध्यक्षता किसने की?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "दादाभाई नौरोजी",
+          "सुरेंद्रनाथ बनर्जी",
+          "ए.ओ. ह्यूम",
+          "डब्ल्यू.सी. बनर्जी"
+        ],
+        "why": "1885 के बंबई अधिवेशन की अध्यक्षता डब्ल्यू.सी. बनर्जी ने की थी। जाल ए.ओ. ह्यूम हैं, जिन्होंने कांग्रेस बनाने में मदद की, पर इस अधिवेशन की अध्यक्षता उन्होंने नहीं की।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "his-early-nationalism-and-congress",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the early phase of the Indian National Congress:",
+        "statements": [
+          "Dadabhai Naoroji explained the drain of wealth in his book 'Poverty and Un-British Rule in India'.",
+          "The Congress split into Moderates and Extremists at the Surat session of 1907.",
+          "Bal Gangadhar Tilak presided over the Surat session of 1907.",
+          "The first session of the Congress was held in Calcutta."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1 and 2 are correct. Rash Behari Ghosh, a Moderate, presided at Surat, not Tilak, and the first session met in Bombay. The trap is 'Only three', from linking Tilak with Surat."
+      },
+      "hi": {
+        "stem": "भारतीय राष्ट्रीय कांग्रेस के आरंभिक दौर के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "दादाभाई नौरोजी ने अपनी पुस्तक 'पॉवर्टी एंड अन-ब्रिटिश रूल इन इंडिया' में धन की निकासी (drain of wealth) समझाई।",
+          "1907 के सूरत अधिवेशन में कांग्रेस नरमपंथियों और गरमपंथियों में बँट गई।",
+          "1907 के सूरत अधिवेशन की अध्यक्षता बाल गंगाधर तिलक ने की।",
+          "कांग्रेस का पहला अधिवेशन कलकत्ता में हुआ था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1 और 2 सही हैं। सूरत अधिवेशन की अध्यक्षता नरमपंथी रासबिहारी घोष ने की थी, तिलक ने नहीं, और पहला अधिवेशन बंबई में हुआ था। 'केवल तीन' का जाल तिलक को सूरत से जोड़ने से लगता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-partition-of-bengal-and-swadeshi",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Partition of Bengal and the Swadeshi Movement:",
+        "statements": [
+          "The partition, announced under Lord Curzon, came into effect on 16 October 1905.",
+          "The boycott resolution of the Swadeshi Movement was passed at the Calcutta Town Hall on 7 August 1905.",
+          "The partition was annulled in 1911 when Lord Minto was the Viceroy."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the annulment came in 1911 under Lord Hardinge; Minto was Viceroy from 1905 to 1910. The trap is '1, 2 and 3', because Minto is linked with this period."
+      },
+      "hi": {
+        "stem": "बंगाल विभाजन और स्वदेशी आंदोलन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "लॉर्ड कर्ज़न के समय घोषित विभाजन 16 अक्टूबर 1905 को लागू हुआ।",
+          "स्वदेशी आंदोलन का बहिष्कार प्रस्ताव 7 अगस्त 1905 को कलकत्ता टाउन हॉल में पारित हुआ।",
+          "विभाजन 1911 में रद्द हुआ, जब लॉर्ड मिंटो वायसराय थे।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: विभाजन 1911 में लॉर्ड हार्डिंग के समय रद्द हुआ; मिंटो 1905 से 1910 तक वायसराय थे। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि मिंटो इसी दौर से जुड़े हैं।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "his-early-nationalism-and-congress",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Kesari",
+          "B. Amrita Bazar Patrika",
+          "C. Young India",
+          "D. Al-Hilal",
+          "1. Maulana Abul Kalam Azad",
+          "2. Bal Gangadhar Tilak",
+          "3. M.K. Gandhi",
+          "4. Sisir Kumar Ghosh"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-3, C-4, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "Tilak ran Kesari, Sisir Kumar Ghosh started Amrita Bazar Patrika, Gandhi edited Young India and Abul Kalam Azad started Al-Hilal. The trap is (a), which swaps Tilak and Ghosh."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. केसरी",
+          "B. अमृत बाज़ार पत्रिका",
+          "C. यंग इंडिया",
+          "D. अल-हिलाल",
+          "1. मौलाना अबुल कलाम आज़ाद",
+          "2. बाल गंगाधर तिलक",
+          "3. एम.के. गांधी",
+          "4. शिशिर कुमार घोष"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-3, C-4, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "केसरी तिलक का था, अमृत बाज़ार पत्रिका शिशिर कुमार घोष ने शुरू की, यंग इंडिया का संपादन गांधी ने किया और अल-हिलाल अबुल कलाम आज़ाद ने शुरू किया। जाल पहला विकल्प है, जो तिलक और घोष को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-gandhian-era",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which was Mahatma Gandhi's first satyagraha in India after his return from South Africa?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Kheda Satyagraha",
+          "Bardoli Satyagraha",
+          "Champaran Satyagraha",
+          "Ahmedabad mill strike"
+        ],
+        "why": "Champaran (1917), for indigo cultivators in Bihar, came first. The trap is Kheda, which followed in 1918 along with the Ahmedabad mill strike."
+      },
+      "hi": {
+        "stem": "दक्षिण अफ्रीका से लौटने के बाद भारत में महात्मा गांधी का पहला सत्याग्रह कौन-सा था?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "खेड़ा सत्याग्रह",
+          "बारडोली सत्याग्रह",
+          "चंपारण सत्याग्रह",
+          "अहमदाबाद मिल हड़ताल"
+        ],
+        "why": "चंपारण (1917) बिहार के नील किसानों के लिए था, और यही पहला था। जाल खेड़ा है, जो 1918 में अहमदाबाद मिल हड़ताल के साथ हुआ था।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-gandhian-era",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Non-Cooperation Movement:",
+        "statements": [
+          "The Congress approved the programme at its special session in Calcutta in September 1920.",
+          "Gandhi withdrew the movement after the Chauri Chaura incident of February 1922.",
+          "The Dandi March was a part of this movement."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the Dandi March of 1930 began the Civil Disobedience Movement. The trap is '1, 2 and 3', mixing up the two mass movements."
+      },
+      "hi": {
+        "stem": "असहयोग आंदोलन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कांग्रेस ने सितंबर 1920 में कलकत्ता के विशेष अधिवेशन में इस कार्यक्रम को मंज़ूरी दी।",
+          "फरवरी 1922 की चौरी चौरा घटना के बाद गांधी ने आंदोलन वापस ले लिया।",
+          "दांडी मार्च इसी आंदोलन का हिस्सा था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: 1930 के दांडी मार्च से सविनय अवज्ञा आंदोलन शुरू हुआ था। '1, 2 और 3' का जाल दोनों जन आंदोलनों को मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "his-gandhian-era",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of events and years:",
+        "statements": [
+          "Dandi March – 1930",
+          "Gandhi–Irwin Pact – 1931",
+          "Second Round Table Conference – 1932",
+          "Poona Pact – 1932"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 4 are correct. The Second Round Table Conference, which Gandhi attended, was held in 1931; the third was in 1932. The trap is 'All four', since 1932 looks right next to the Poona Pact."
+      },
+      "hi": {
+        "stem": "घटनाओं और वर्षों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "दांडी मार्च – 1930",
+          "गांधी–इरविन समझौता – 1931",
+          "दूसरा गोलमेज़ सम्मेलन – 1932",
+          "पूना समझौता – 1932"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 4 सही हैं। दूसरा गोलमेज़ सम्मेलन, जिसमें गांधी गए थे, 1931 में हुआ; तीसरा 1932 में हुआ। 'सभी चार' का जाल इसलिए लगता है क्योंकि पूना समझौते के साथ 1932 सही लगता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "his-gandhian-era",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "The Civil Disobedience Movement was suspended in March 1931.",
+          "Under the Gandhi–Irwin Pact, the Congress agreed to suspend the movement.",
+          "The Poona Pact was signed between Gandhi and B.R. Ambedkar in March 1931."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Statement II is correct and explains the suspension. Statement III is wrong: the Poona Pact came in September 1932, over separate electorates for the depressed classes. The trap is (a), because the Pact's people are right but its date is not."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "सविनय अवज्ञा आंदोलन मार्च 1931 में स्थगित किया गया।",
+          "गांधी–इरविन समझौते के तहत कांग्रेस आंदोलन स्थगित करने पर सहमत हुई।",
+          "पूना समझौता मार्च 1931 में गांधी और बी.आर. आंबेडकर के बीच हुआ।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और कथन III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "कथन II सही है और स्थगन की वजह बताता है। कथन III गलत है: पूना समझौता सितंबर 1932 में दलित वर्गों के पृथक निर्वाचन के मुद्दे पर हुआ था। पहले विकल्प का जाल इसलिए है क्योंकि समझौते के लोग सही हैं, पर तारीख नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-revolutionaries",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which revolutionary organisation was formed at Feroz Shah Kotla in Delhi in 1928, with Chandrashekhar Azad and Bhagat Singh among its leaders?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Hindustan Socialist Republican Association",
+          "Anushilan Samiti",
+          "Ghadar Party",
+          "Abhinav Bharat"
+        ],
+        "why": "The Hindustan Republican Association was renamed the Hindustan Socialist Republican Association at Feroz Shah Kotla in 1928. The trap is Anushilan Samiti, an older revolutionary group of Bengal."
+      },
+      "hi": {
+        "stem": "1928 में दिल्ली के फ़िरोज़ शाह कोटला में कौन-सा क्रांतिकारी संगठन बना, जिसके नेताओं में चंद्रशेखर आज़ाद और भगत सिंह थे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "हिंदुस्तान सोशलिस्ट रिपब्लिकन एसोसिएशन",
+          "अनुशीलन समिति",
+          "ग़दर पार्टी",
+          "अभिनव भारत"
+        ],
+        "why": "1928 में फ़िरोज़ शाह कोटला में हिंदुस्तान रिपब्लिकन एसोसिएशन का नाम बदलकर हिंदुस्तान सोशलिस्ट रिपब्लिकन एसोसिएशन रखा गया। जाल अनुशीलन समिति है, जो बंगाल का पुराना क्रांतिकारी समूह था।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "his-revolutionaries",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Bhagat Singh and Batukeshwar Dutt threw bombs in the Central Legislative Assembly in 1929 in order to kill its members.",
+          "Their protest was directed against the Public Safety Bill and the Trade Disputes Bill."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is wrong: the bombs were meant to make a noise, not to kill, and the two courted arrest. Statement II is correct. The trap is (a), which accepts the claim about killing."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भगत सिंह और बटुकेश्वर दत्त ने 1929 में केंद्रीय विधान सभा में उसके सदस्यों को मारने के लिए बम फेंके।",
+          "उनका विरोध पब्लिक सेफ़्टी बिल और ट्रेड डिस्प्यूट्स बिल के ख़िलाफ़ था।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I गलत है: बम आवाज़ करने के लिए थे, किसी को मारने के लिए नहीं, और दोनों ने ख़ुद गिरफ़्तारी दी। कथन II सही है। पहले विकल्प का जाल मारने वाली बात मान लेने से लगता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "his-constitutional-developments",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "The Indian Councils Act, 1909 is also known as the Morley–Minto Reforms.",
+          "When it was passed, John Morley was the Secretary of State for India and Lord Minto was the Viceroy."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: the reforms are named after the Secretary of State and the Viceroy of the time. The trap is (b), as if the name had some other origin."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारतीय परिषद अधिनियम, 1909 को मॉर्ले–मिंटो सुधार भी कहा जाता है।",
+          "इसके पारित होने के समय जॉन मॉर्ले भारत के राज्य सचिव और लॉर्ड मिंटो वायसराय थे।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, और II, I की व्याख्या करता है: सुधारों का नाम उस समय के राज्य सचिव और वायसराय पर पड़ा। दूसरे विकल्प का जाल ऐसा मानने से लगता है कि नाम कहीं और से आया।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "his-constitutional-developments",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Government of India Act, 1919:",
+        "statements": [
+          "It introduced dyarchy in the provinces.",
+          "It made the central legislature bicameral.",
+          "It extended separate electorates to Sikhs.",
+          "It provided for the setting up of a Federal Court."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. The Federal Court came under the Government of India Act, 1935 and was set up in 1937. The trap is 'All four', mixing the 1919 and 1935 Acts."
+      },
+      "hi": {
+        "stem": "भारत शासन अधिनियम, 1919 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसने प्रांतों में द्वैध शासन (dyarchy) लागू किया।",
+          "इसने केंद्रीय विधानमंडल को द्विसदनीय बनाया।",
+          "इसने पृथक निर्वाचन का विस्तार सिखों तक किया।",
+          "इसने एक संघीय न्यायालय (Federal Court) की स्थापना का प्रावधान किया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। संघीय न्यायालय भारत शासन अधिनियम, 1935 के तहत आया और 1937 में बना। 'सभी चार' का जाल 1919 और 1935 के अधिनियमों को मिलाने से लगता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-constitutional-developments",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Government of India Act, 1935:",
+        "statements": [
+          "It provided for an All-India Federation, which never came into being.",
+          "It replaced dyarchy in the provinces with provincial autonomy.",
+          "It provided for a Federal Court."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The federation needed princely states to join, and they did not, so it never started. The trap is '2 and 3 only', from thinking a provision that never worked was never made."
+      },
+      "hi": {
+        "stem": "भारत शासन अधिनियम, 1935 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसने एक अखिल भारतीय संघ का प्रावधान किया, जो कभी अस्तित्व में नहीं आया।",
+          "इसने प्रांतों में द्वैध शासन की जगह प्रांतीय स्वायत्तता दी।",
+          "इसने एक संघीय न्यायालय का प्रावधान किया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। संघ के लिए रियासतों का शामिल होना ज़रूरी था, जो नहीं हुआ, इसलिए यह कभी शुरू नहीं हुआ। 'केवल 2 और 3' का जाल यह मानने से लगता है कि जो लागू नहीं हुआ, उसका प्रावधान भी नहीं था।"
+      }
+    },
+    {
+      "format": "select-items",
+      "node": "his-transfer-of-power",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Who among the following were members of the Cabinet Mission that came to India in 1946?",
+        "statements": [
+          "Lord Pethick-Lawrence",
+          "Sir Stafford Cripps",
+          "A.V. Alexander",
+          "Lord Wavell"
+        ],
+        "ask": "Select the correct answer using the code given below.",
+        "options": [
+          "1 and 2 only",
+          "1, 2 and 3 only",
+          "2, 3 and 4 only",
+          "1, 2, 3 and 4"
+        ],
+        "why": "The three Cabinet ministers were Pethick-Lawrence, Cripps and Alexander. The trap is '1, 2, 3 and 4': Lord Wavell, the Viceroy, took part in the talks but was not a member."
+      },
+      "hi": {
+        "stem": "1946 में भारत आए कैबिनेट मिशन के सदस्य निम्नलिखित में से कौन थे?",
+        "statements": [
+          "लॉर्ड पेथिक-लॉरेंस",
+          "सर स्टैफ़र्ड क्रिप्स",
+          "ए.वी. एलेक्ज़ेंडर",
+          "लॉर्ड वेवेल"
+        ],
+        "ask": "नीचे दिए गए कूट का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1, 2 और 3",
+          "केवल 2, 3 और 4",
+          "1, 2, 3 और 4"
+        ],
+        "why": "मिशन में तीन कैबिनेट मंत्री थे: पेथिक-लॉरेंस, क्रिप्स और एलेक्ज़ेंडर। '1, 2, 3 और 4' का जाल है: वायसराय लॉर्ड वेवेल बातचीत में शामिल थे, पर मिशन के सदस्य नहीं थे।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-transfer-of-power",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "What did the Cripps Mission of 1942 offer India?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Immediate complete independence",
+          "Partition into two dominions in 1942 itself",
+          "Immediate transfer of defence to Indian control",
+          "Dominion status after the war, with a body to frame a new constitution"
+        ],
+        "why": "Cripps offered dominion status after the war and a constitution-making body. The trap is defence: the plan kept defence in British hands during the war, which the Congress objected to."
+      },
+      "hi": {
+        "stem": "1942 के क्रिप्स मिशन ने भारत को क्या पेशकश की?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "तत्काल पूर्ण स्वतंत्रता",
+          "1942 में ही दो डोमिनियनों में विभाजन",
+          "रक्षा का तत्काल भारतीय नियंत्रण में हस्तांतरण",
+          "युद्ध के बाद डोमिनियन का दर्जा, और नया संविधान बनाने के लिए एक निकाय"
+        ],
+        "why": "क्रिप्स ने युद्ध के बाद डोमिनियन का दर्जा और संविधान बनाने वाला निकाय देने की बात की थी। जाल रक्षा वाला विकल्प है: योजना में युद्ध के दौरान रक्षा ब्रिटिश हाथों में ही रहनी थी, और कांग्रेस को इसी पर आपत्ति थी।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "his-transfer-of-power",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Indian Independence Act, 1947:",
+        "statements": [
+          "It ended British paramountcy over the princely states.",
+          "It created two independent dominions, India and Pakistan.",
+          "It abolished the office of the Secretary of State for India.",
+          "Lord Mountbatten became the first Governor-General of independent India under it."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. Mountbatten stayed on as India's Governor-General, while Jinnah became Pakistan's. The trap is 'Only three', from doubting that a British official headed independent India."
+      },
+      "hi": {
+        "stem": "भारतीय स्वतंत्रता अधिनियम, 1947 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसने रियासतों पर ब्रिटिश सर्वोच्चता (paramountcy) समाप्त की।",
+          "इसने दो स्वतंत्र डोमिनियन, भारत और पाकिस्तान, बनाए।",
+          "इसने भारत के राज्य सचिव का पद समाप्त किया।",
+          "इसके तहत लॉर्ड माउंटबेटन स्वतंत्र भारत के पहले गवर्नर-जनरल बने।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। माउंटबेटन भारत के गवर्नर-जनरल बने रहे, जबकि पाकिस्तान के गवर्नर-जनरल जिन्ना बने। 'केवल तीन' का जाल इस शक से लगता है कि स्वतंत्र भारत का प्रमुख कोई ब्रिटिश अधिकारी कैसे हो सकता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "his-peasant-and-tribal-movements",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Santhal Hul (1855–56)",
+          "B. Indigo Revolt (1859–60)",
+          "C. Munda Ulgulan (1899–1900)",
+          "D. Moplah uprising (1921)",
+          "1. Birsa Munda",
+          "2. Malabar",
+          "3. Sidhu and Kanhu",
+          "4. Bengal"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-1, C-4, D-2",
+          "A-4, B-3, C-2, D-1"
+        ],
+        "why": "Sidhu and Kanhu led the Santhal Hul, indigo cultivators rose in Bengal, Birsa Munda led the Ulgulan and the Moplah uprising took place in Malabar. The trap is (a), which swaps Santhal and Moplah."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. संथाल हूल (1855–56)",
+          "B. नील विद्रोह (1859–60)",
+          "C. मुंडा उलगुलान (1899–1900)",
+          "D. मोपला विद्रोह (1921)",
+          "1. बिरसा मुंडा",
+          "2. मालाबार",
+          "3. सिद्धू और कान्हू",
+          "4. बंगाल"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-1, C-4, D-2",
+          "A-4, B-3, C-2, D-1"
+        ],
+        "why": "संथाल हूल का नेतृत्व सिद्धू और कान्हू ने किया, नील किसान बंगाल में उठे, उलगुलान बिरसा मुंडा ने चलाया और मोपला विद्रोह मालाबार में हुआ। जाल पहला विकल्प है, जो संथाल और मोपला को बदल देता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "his-peasant-and-tribal-movements",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following pairs of a movement and the leader or region associated with it is NOT correctly matched?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Rampa rebellion (1922–24) – Birsa Munda",
+          "Bardoli Satyagraha (1928) – Vallabhbhai Patel",
+          "Eka movement – Awadh",
+          "Tebhaga movement – Bengal"
+        ],
+        "why": "Alluri Sitarama Raju led the Rampa rebellion in the Andhra region; Birsa Munda died in 1900. The trap is the Eka movement, a lesser-known peasant movement that did take place in Awadh."
+      },
+      "hi": {
+        "stem": "आंदोलन और उससे जुड़े नेता या क्षेत्र का निम्नलिखित में से कौन-सा युग्म सही सुमेलित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "रंपा विद्रोह (1922–24) – बिरसा मुंडा",
+          "बारडोली सत्याग्रह (1928) – वल्लभभाई पटेल",
+          "एका आंदोलन – अवध",
+          "तेभागा आंदोलन – बंगाल"
+        ],
+        "why": "रंपा विद्रोह आंध्र क्षेत्र में अल्लूरी सीताराम राजू ने चलाया था; बिरसा मुंडा का निधन 1900 में हो चुका था। जाल एका आंदोलन है, जो कम सुना हुआ किसान आंदोलन है पर सच में अवध में ही हुआ था।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VIII Our Pasts III; NCERT Class XII Themes in Indian History Part III",
+    "hi": "NCERT कक्षा VIII हमारे अतीत III; NCERT कक्षा XII भारतीय इतिहास के कुछ विषय भाग III"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

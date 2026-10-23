@@ -1,0 +1,95 @@
+{
+  "mood": {
+    "bed": "static",
+    "sfx": true,
+    "motion": "gentle"
+  },
+  "sfx": {
+    "tune": "sfx/tune",
+    "static": "sfx/static",
+    "end": "motif"
+  },
+  "stations": [
+    {
+      "freq": 93,
+      "en": {
+        "callsign": "Naming the storms",
+        "lines": [
+          "The Regional Specialised Meteorological Centre in New Delhi, part of the India Meteorological Department, names them.",
+          "The list comes from 13 member countries of the WMO/ESCAP Panel on Tropical Cyclones."
+        ]
+      },
+      "hi": {
+        "callsign": "नामकरण की व्यवस्था",
+        "lines": [
+          "उत्तरी हिंद महासागर के चक्रवातों के नाम भारत मौसम विज्ञान विभाग (IMD) के नई दिल्ली स्थित क्षेत्रीय केंद्र से आते हैं।",
+          "WMO/ESCAP उष्णकटिबंधीय चक्रवात पैनल के 13 सदस्य देशों ने यह सूची तैयार की है।"
+        ]
+      }
+    },
+    {
+      "freq": 98,
+      "en": {
+        "callsign": "Names never repeat",
+        "lines": [
+          "The list adopted in 2020 has 169 names, 13 from each country, used in order.",
+          "A name is used once and never repeated."
+        ]
+      },
+      "hi": {
+        "callsign": "नाम दोबारा नहीं",
+        "lines": [
+          "2020 में अपनाई गई सूची में 169 नाम हैं, हर देश के 13 नाम, क्रम से इस्तेमाल होते हैं।",
+          "एक नाम एक बार इस्तेमाल होता है और उसे दोबारा कभी नहीं दोहराया जाता।"
+        ]
+      }
+    },
+    {
+      "freq": 103,
+      "en": {
+        "callsign": "Where and when",
+        "lines": [
+          "The Bay of Bengal usually sees more cyclones than the Arabian Sea.",
+          "Cyclones are most frequent in two seasons: April to June, and October to December."
+        ]
+      },
+      "hi": {
+        "callsign": "कहाँ और कब",
+        "lines": [
+          "बंगाल की खाड़ी में आम तौर पर अरब सागर की तुलना में अधिक चक्रवात आते हैं।",
+          "चक्रवात दो मौसमों में सबसे अधिक होते हैं: अप्रैल से जून, और अक्टूबर से दिसंबर।"
+        ]
+      }
+    }
+  ],
+  "id": "cyclone-names-radio",
+  "tone": "SERIOUS",
+  "title": {
+    "en": "Cyclone names on the radio",
+    "hi": "रेडियो पर चक्रवात के नाम"
+  },
+  "desk": {
+    "en": "Cyclone desk",
+    "hi": "चक्रवात डेस्क"
+  },
+  "signoff": {
+    "en": "Thanks for tuning in. Here's to a calm sky.",
+    "hi": "सुनने के लिए धन्यवाद। आसमान शांत रहे।"
+  },
+  "sources": {
+    "en": "India Meteorological Department and WMO/ESCAP Panel on Tropical Cyclones",
+    "hi": "भारत मौसम विज्ञान विभाग और WMO/ESCAP उष्णकटिबंधीय चक्रवात पैनल"
+  },
+  "schema": "upsc-pods/radio@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/radio/",
+    "createdOn": "2026-10-10"
+  }
+}

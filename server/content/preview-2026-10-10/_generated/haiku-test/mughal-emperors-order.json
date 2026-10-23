@@ -1,0 +1,105 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "id": "mughal-emperors-order",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Mughal emperors in order",
+    "hi": "मुगल बादशाह, क्रम से"
+  },
+  "prompt": {
+    "en": "Put the first six Mughal emperors in order",
+    "hi": "पहले छह मुगल बादशाहों को क्रम में लगाएँ"
+  },
+  "pieces": [
+    {
+      "en": {
+        "text": "Babur",
+        "note": "Babur founded the empire after winning the First Battle of Panipat in 1526."
+      },
+      "hi": {
+        "text": "बाबर",
+        "note": "बाबर ने 1526 में पानीपत की पहली लड़ाई जीतकर साम्राज्य की स्थापना की।"
+      }
+    },
+    {
+      "en": {
+        "text": "Humayun",
+        "note": "Humayun lost the throne to Sher Shah Suri and won it back in 1555."
+      },
+      "hi": {
+        "text": "हुमायूँ",
+        "note": "हुमायूँ ने शेर शाह सूरी से गद्दी खोई और 1555 में उसे वापस जीता।"
+      }
+    },
+    {
+      "en": {
+        "text": "Akbar",
+        "note": "Akbar expanded the empire and set up the mansabdari system."
+      },
+      "hi": {
+        "text": "अकबर",
+        "note": "अकबर ने साम्राज्य का विस्तार किया और मनसबदारी व्यवस्था स्थापित की।"
+      }
+    },
+    {
+      "en": {
+        "text": "Jahangir",
+        "note": "Jahangir allowed the English East India Company's envoy Thomas Roe at his court."
+      },
+      "hi": {
+        "text": "जहाँगीर",
+        "note": "जहाँगीर ने अंग्रेज़ी ईस्ट इंडिया कंपनी के दूत थॉमस रो को अपने दरबार में आने दिया।"
+      }
+    },
+    {
+      "en": {
+        "text": "Shah Jahan",
+        "note": "Shah Jahan built the Taj Mahal in Agra."
+      },
+      "hi": {
+        "text": "शाहजहाँ",
+        "note": "शाहजहाँ ने आगरा में ताजमहल बनवाया।"
+      }
+    },
+    {
+      "en": {
+        "text": "Aurangzeb",
+        "note": "Aurangzeb ruled until 1707, when the empire was at its largest."
+      },
+      "hi": {
+        "text": "औरंगज़ेब",
+        "note": "औरंगज़ेब 1707 तक शासन करता रहा, जब साम्राज्य अपने सबसे बड़े आकार में था।"
+      }
+    }
+  ],
+  "explain": {
+    "en": "These six emperors ruled in this order. Babur founded the empire in 1526. Aurangzeb ruled until 1707, when the empire was at its largest.",
+    "hi": "ये छह बादशाह इसी क्रम में हुए। बाबर ने 1526 में साम्राज्य की स्थापना की। औरंगज़ेब 1707 तक शासन करता रहा, जब साम्राज्य अपने सबसे बड़े आकार में था।"
+  },
+  "sources": {
+    "en": "No source document named; facts from the supplied text.",
+    "hi": "कोई स्रोत दस्तावेज़ नहीं बताया गया; तथ्य दिए गए पाठ से।"
+  },
+  "schema": "upsc-pods/assemble@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/assemble/",
+    "createdOn": "2026-10-10"
+  }
+}

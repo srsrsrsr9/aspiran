@@ -1,0 +1,119 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "geo-largest-states-by-area",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "India's largest states by area",
+    "hi": "क्षेत्रफल के अनुसार भारत के सबसे बड़े राज्य"
+  },
+  "prompt": {
+    "en": "Rank these states from largest to smallest by area.",
+    "hi": "इन राज्यों को क्षेत्रफल के अनुसार सबसे बड़े से सबसे छोटे क्रम में लगाएँ।"
+  },
+  "unit": {
+    "en": "sq km",
+    "hi": "वर्ग km"
+  },
+  "items": [
+    {
+      "value": 342239,
+      "en": {
+        "label": "Rajasthan"
+      },
+      "hi": {
+        "label": "राजस्थान"
+      }
+    },
+    {
+      "value": 308252,
+      "en": {
+        "label": "Madhya Pradesh"
+      },
+      "hi": {
+        "label": "मध्य प्रदेश"
+      }
+    },
+    {
+      "value": 307713,
+      "en": {
+        "label": "Maharashtra"
+      },
+      "hi": {
+        "label": "महाराष्ट्र"
+      }
+    },
+    {
+      "value": 240928,
+      "en": {
+        "label": "Uttar Pradesh"
+      },
+      "hi": {
+        "label": "उत्तर प्रदेश"
+      }
+    },
+    {
+      "value": 196244,
+      "en": {
+        "label": "Gujarat"
+      },
+      "hi": {
+        "label": "गुजरात"
+      }
+    },
+    {
+      "value": 191791,
+      "en": {
+        "label": "Karnataka"
+      },
+      "hi": {
+        "label": "कर्नाटक"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The top three each exceed 3 lakh sq km, and Madhya Pradesh beats Maharashtra by only about 500 sq km.",
+    "hi": "शीर्ष तीनों राज्य 3 लाख वर्ग km से बड़े हैं, और मध्य प्रदेश महाराष्ट्र से केवल लगभग 500 वर्ग km बड़ा है।"
+  },
+  "memoryHook": {
+    "en": "Rajasthan became the largest in 2000, when Chhattisgarh was carved out of Madhya Pradesh.",
+    "hi": "2000 में मध्य प्रदेश से छत्तीसगढ़ अलग हुआ, तब राजस्थान सबसे बड़ा राज्य बना।"
+  },
+  "sources": {
+    "en": "Census of India 2011",
+    "hi": "भारत की जनगणना 2011"
+  },
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

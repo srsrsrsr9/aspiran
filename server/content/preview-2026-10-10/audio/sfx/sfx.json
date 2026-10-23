@@ -1,0 +1,133 @@
+{
+  "schema": "upsc-pods/sfx-library@1",
+  "note": "Synthesized in the browser (WebAudio) and rendered offline. Files are peak-normalized (effects to -6 dBFS, beds to -10.5 dBFS); play them at the listed gain. Beds are 40 s seamless loops. Templates refer to effects by id, e.g. \"sfx/stamp\". Only play after the member turns sound on, and never on TRAGIC content.",
+  "format": "Opus .ogg (Android 10+) with AAC .m4a fallback, 48 kHz mono",
+  "effects": {
+    "bed-forest": {
+      "ogg": "sfx/bed-forest.ogg",
+      "m4a": "sfx/bed-forest.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "bed-market": {
+      "ogg": "sfx/bed-market.ogg",
+      "m4a": "sfx/bed-market.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "bed-rain": {
+      "ogg": "sfx/bed-rain.ogg",
+      "m4a": "sfx/bed-rain.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "bed-static": {
+      "ogg": "sfx/bed-static.ogg",
+      "m4a": "sfx/bed-static.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "bed-waves": {
+      "ogg": "sfx/bed-waves.ogg",
+      "m4a": "sfx/bed-waves.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "bed-wind": {
+      "ogg": "sfx/bed-wind.ogg",
+      "m4a": "sfx/bed-wind.m4a",
+      "seconds": 40.0,
+      "loop": true,
+      "gain": 0.5
+    },
+    "chime": {
+      "ogg": "sfx/chime.ogg",
+      "m4a": "sfx/chime.m4a",
+      "seconds": 2.05,
+      "loop": false,
+      "gain": 0.5
+    },
+    "domino": {
+      "ogg": "sfx/domino.ogg",
+      "m4a": "sfx/domino.m4a",
+      "seconds": 0.37,
+      "loop": false,
+      "gain": 0.5
+    },
+    "motif": {
+      "ogg": "sfx/motif.ogg",
+      "m4a": "sfx/motif.m4a",
+      "seconds": 3.05,
+      "loop": false,
+      "gain": 0.6
+    },
+    "nudge": {
+      "ogg": "sfx/nudge.ogg",
+      "m4a": "sfx/nudge.m4a",
+      "seconds": 0.49,
+      "loop": false,
+      "gain": 0.4
+    },
+    "page": {
+      "ogg": "sfx/page.ogg",
+      "m4a": "sfx/page.m4a",
+      "seconds": 0.57,
+      "loop": false,
+      "gain": 0.35
+    },
+    "scrape": {
+      "ogg": "sfx/scrape.ogg",
+      "m4a": "sfx/scrape.m4a",
+      "seconds": 0.85,
+      "loop": false,
+      "gain": 0.4
+    },
+    "snap": {
+      "ogg": "sfx/snap.ogg",
+      "m4a": "sfx/snap.m4a",
+      "seconds": 0.41,
+      "loop": false,
+      "gain": 0.6
+    },
+    "stamp": {
+      "ogg": "sfx/stamp.ogg",
+      "m4a": "sfx/stamp.m4a",
+      "seconds": 0.65,
+      "loop": false,
+      "gain": 0.6
+    },
+    "tap": {
+      "ogg": "sfx/tap.ogg",
+      "m4a": "sfx/tap.m4a",
+      "seconds": 0.37,
+      "loop": false,
+      "gain": 0.45
+    },
+    "tick": {
+      "ogg": "sfx/tick.ogg",
+      "m4a": "sfx/tick.m4a",
+      "seconds": 0.3,
+      "loop": false,
+      "gain": 0.3
+    },
+    "tune": {
+      "ogg": "sfx/tune.ogg",
+      "m4a": "sfx/tune.m4a",
+      "seconds": 0.75,
+      "loop": false,
+      "gain": 0.45
+    },
+    "whoosh": {
+      "ogg": "sfx/whoosh.ogg",
+      "m4a": "sfx/whoosh.m4a",
+      "seconds": 0.7,
+      "loop": false,
+      "gain": 0.4
+    }
+  }
+}

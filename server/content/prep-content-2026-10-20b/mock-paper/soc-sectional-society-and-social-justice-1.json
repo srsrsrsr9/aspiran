@@ -1,0 +1,954 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "soc-sectional-society-and-social-justice-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Society and social justice sectional mock 1",
+    "hi": "समाज और सामाजिक न्याय सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Indian Society and GS2 Social Justice",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "soc-scheduled-castes-and-tribes",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which Article of the Constitution of India abolishes 'untouchability' and forbids its practice in any form?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Article 14",
+          "Article 17",
+          "Article 15",
+          "Article 23"
+        ],
+        "why": "Article 17 abolishes untouchability and makes enforcing any disability arising from it an offence punishable by law. The trap is Article 15, which bans discrimination on grounds such as caste but does not itself abolish untouchability."
+      },
+      "hi": {
+        "stem": "भारत के संविधान का कौन-सा अनुच्छेद 'अस्पृश्यता' का अंत करता है और किसी भी रूप में उसके आचरण को निषिद्ध करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अनुच्छेद 14",
+          "अनुच्छेद 17",
+          "अनुच्छेद 15",
+          "अनुच्छेद 23"
+        ],
+        "why": "अनुच्छेद 17 अस्पृश्यता का अंत करता है और उससे पैदा हुई किसी भी निर्योग्यता को लागू करना क़ानून के तहत दंडनीय अपराध बनाता है। अनुच्छेद 15 जाल है, वह जाति जैसे आधारों पर भेदभाव रोकता है, पर अस्पृश्यता का अंत खुद नहीं करता।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-women-and-children",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which provision of the Constitution expressly allows the State to make special provisions for women and children, despite the general ban on discrimination?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Article 16(4)",
+          "Article 14",
+          "Article 15(3)",
+          "Article 21"
+        ],
+        "why": "Article 15(3) says nothing in Article 15 stops the State from making special provisions for women and children. The trap is Article 16(4), which is about reservation in public jobs for backward classes."
+      },
+      "hi": {
+        "stem": "संविधान का कौन-सा प्रावधान भेदभाव पर सामान्य रोक के बावजूद राज्य को स्त्रियों और बच्चों के लिए विशेष उपबंध करने की साफ़ अनुमति देता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अनुच्छेद 16(4)",
+          "अनुच्छेद 14",
+          "अनुच्छेद 15(3)",
+          "अनुच्छेद 21"
+        ],
+        "why": "अनुच्छेद 15(3) कहता है कि अनुच्छेद 15 की कोई बात राज्य को स्त्रियों और बच्चों के लिए विशेष उपबंध करने से नहीं रोकती। अनुच्छेद 16(4) जाल है, वह पिछड़े वर्गों के लिए सरकारी नौकरियों में आरक्षण से जुड़ा है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-women-and-children",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which Article of the Constitution prohibits the employment of children below 14 years of age in factories, mines or other hazardous work?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Article 39",
+          "Article 23",
+          "Article 24",
+          "Article 45"
+        ],
+        "why": "Article 24, a Fundamental Right, bars children under 14 from factories, mines and other hazardous employment. The trap is Article 23, the neighbouring right that prohibits trafficking in human beings and forced labour."
+      },
+      "hi": {
+        "stem": "संविधान का कौन-सा अनुच्छेद 14 वर्ष से कम आयु के बच्चों को कारख़ानों, खानों या अन्य ख़तरनाक कामों में लगाने पर रोक लगाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अनुच्छेद 39",
+          "अनुच्छेद 23",
+          "अनुच्छेद 24",
+          "अनुच्छेद 45"
+        ],
+        "why": "अनुच्छेद 24, जो एक मौलिक अधिकार है, 14 साल से कम उम्र के बच्चों को कारख़ानों, खानों और ख़तरनाक कामों से रोकता है। अनुच्छेद 23 जाल है, वह पास वाला अधिकार है जो मानव तस्करी और बलात् श्रम पर रोक लगाता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-welfare-provisions-in-constitution",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Article 15(4) enables the State to make special provisions for the advancement of socially and educationally backward classes, Scheduled Castes and Scheduled Tribes.",
+          "Article 16(4) permits reservation in appointments for backward classes not adequately represented in State services.",
+          "Article 46, which asks the State to promote the educational and economic interests of weaker sections, is a Fundamental Right."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1, 2 and 3",
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Article 46 is a Directive Principle in Part IV, not a Fundamental Right, so courts cannot enforce it directly. The trap is '1, 2 and 3', because Article 46 sits close in spirit to 15(4)."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 15(4) राज्य को सामाजिक और शैक्षिक रूप से पिछड़े वर्गों, अनुसूचित जातियों और अनुसूचित जनजातियों की उन्नति के लिए विशेष उपबंध करने में सक्षम बनाता है।",
+          "अनुच्छेद 16(4) राज्य की सेवाओं में पर्याप्त प्रतिनिधित्व न पाने वाले पिछड़े वर्गों के लिए नियुक्तियों में आरक्षण की अनुमति देता है।",
+          "अनुच्छेद 46, जो राज्य से कमज़ोर वर्गों के शैक्षिक और आर्थिक हितों को बढ़ाने को कहता है, एक मौलिक अधिकार है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "1, 2 और 3",
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। अनुच्छेद 46 भाग IV का नीति निदेशक तत्व है, मौलिक अधिकार नहीं, इसलिए अदालत उसे सीधे लागू नहीं कराती। '1, 2 और 3' जाल है, क्योंकि अनुच्छेद 46 की भावना 15(4) से मिलती है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-scheduled-castes-and-tribes",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Article 330 of the Constitution provides for the reservation of seats for Scheduled Castes and Scheduled Tribes in which body?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Council of States (Rajya Sabha)",
+          "The House of the People (Lok Sabha)",
+          "The Supreme Court",
+          "The Union Public Service Commission"
+        ],
+        "why": "Article 330 reserves Lok Sabha seats for SCs and STs; Article 332 does the same for State Legislative Assemblies. The trap is the Rajya Sabha, where the Constitution provides no such reservation."
+      },
+      "hi": {
+        "stem": "संविधान का अनुच्छेद 330 किस निकाय में अनुसूचित जातियों और अनुसूचित जनजातियों के लिए सीटों के आरक्षण का प्रावधान करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राज्यसभा",
+          "लोकसभा",
+          "सर्वोच्च न्यायालय",
+          "संघ लोक सेवा आयोग"
+        ],
+        "why": "अनुच्छेद 330 लोकसभा में SC और ST के लिए सीटें आरक्षित करता है; अनुच्छेद 332 यही राज्य विधानसभाओं के लिए करता है। राज्यसभा जाल है, वहाँ संविधान ऐसा कोई आरक्षण नहीं देता।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "soc-indian-society-and-caste",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I (idea or work) with List II (scholar):",
+        "statements": [
+          "A. Sanskritisation",
+          "B. Homo Hierarchicus",
+          "C. Caste and Race in India",
+          "D. Annihilation of Caste",
+          "1. B.R. Ambedkar",
+          "2. G.S. Ghurye",
+          "3. Louis Dumont",
+          "4. M.N. Srinivas"
+        ],
+        "ask": "Select the correct answer using the code given below:",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-3, C-2, D-1",
+          "A-2, B-3, C-4, D-1"
+        ],
+        "why": "M.N. Srinivas coined 'Sanskritisation', Louis Dumont wrote Homo Hierarchicus, G.S. Ghurye wrote Caste and Race in India, and B.R. Ambedkar wrote Annihilation of Caste. The trap swaps Srinivas and Dumont, both central to the study of caste."
+      },
+      "hi": {
+        "stem": "सूची I (अवधारणा या रचना) को सूची II (विद्वान) से सुमेलित कीजिए:",
+        "statements": [
+          "A. संस्कृतिकरण",
+          "B. होमो हायरार्किकस",
+          "C. कास्ट एंड रेस इन इंडिया",
+          "D. जाति का विनाश (Annihilation of Caste)",
+          "1. बी.आर. आंबेडकर",
+          "2. जी.एस. घुर्ये",
+          "3. लुई ड्यूमों",
+          "4. एम.एन. श्रीनिवास"
+        ],
+        "ask": "नीचे दिए गए कूट का प्रयोग कर सही उत्तर चुनिए:",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-3, C-2, D-1",
+          "A-2, B-3, C-4, D-1"
+        ],
+        "why": "'संस्कृतिकरण' शब्द एम.एन. श्रीनिवास ने दिया, होमो हायरार्किकस लुई ड्यूमों ने लिखी, कास्ट एंड रेस इन इंडिया जी.एस. घुर्ये ने और जाति का विनाश बी.आर. आंबेडकर ने। जाल वाला विकल्प श्रीनिवास और ड्यूमों को बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "soc-welfare-provisions-in-constitution",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following pairs of Articles and their subject matter:",
+        "statements": [
+          "Article 23 – Prohibition of traffic in human beings and forced labour",
+          "Article 29 – Protection of the language, script and culture of minorities",
+          "Article 30 – Abolition of titles"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Pairs 1 and 2 are correct. Article 30 gives minorities the right to establish and administer educational institutions; titles are abolished by Article 18. 'All three' is the trap, as 29 and 30 are usually read together."
+      },
+      "hi": {
+        "stem": "अनुच्छेदों और उनके विषयों के नीचे दिए युग्मों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 23 – मानव तस्करी और बलात् श्रम का निषेध",
+          "अनुच्छेद 29 – अल्पसंख्यकों की भाषा, लिपि और संस्कृति का संरक्षण",
+          "अनुच्छेद 30 – उपाधियों का अंत"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई भी नहीं"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। अनुच्छेद 30 अल्पसंख्यकों को शिक्षा संस्थान स्थापित करने और चलाने का अधिकार देता है; उपाधियों का अंत अनुच्छेद 18 करता है। 'सभी तीन' जाल है, क्योंकि 29 और 30 अक्सर साथ पढ़े जाते हैं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "soc-scheduled-castes-and-tribes",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Sixth Schedule of the Constitution applies to tribal areas in four states. Which one of the following is NOT one of them?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Assam",
+          "Manipur",
+          "Meghalaya",
+          "Tripura"
+        ],
+        "why": "The Sixth Schedule covers tribal areas of Assam, Meghalaya, Tripura and Mizoram, through autonomous district councils. Manipur is the trap: its hill areas have separate arrangements under Article 371C, not the Sixth Schedule."
+      },
+      "hi": {
+        "stem": "संविधान की छठी अनुसूची चार राज्यों के जनजातीय क्षेत्रों पर लागू होती है। निम्नलिखित में से कौन-सा उनमें से नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "असम",
+          "मणिपुर",
+          "मेघालय",
+          "त्रिपुरा"
+        ],
+        "why": "छठी अनुसूची स्वायत्त ज़िला परिषदों के ज़रिए असम, मेघालय, त्रिपुरा और मिज़ोरम के जनजातीय क्षेत्रों पर लागू होती है। मणिपुर जाल है: उसके पहाड़ी क्षेत्रों के लिए अनुच्छेद 371C में अलग व्यवस्था है, छठी अनुसूची नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The National Commission for Backward Classes was given constitutional status by which Constitution Amendment Act?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The 103rd Amendment Act, 2019",
+          "The 101st Amendment Act, 2016",
+          "The 102nd Amendment Act, 2018",
+          "The 104th Amendment Act, 2019"
+        ],
+        "why": "The 102nd Amendment (2018) inserted Article 338B, making the NCBC a constitutional body. The trap is the 103rd Amendment (2019), which is about reservation for economically weaker sections."
+      },
+      "hi": {
+        "stem": "किस संविधान संशोधन अधिनियम ने राष्ट्रीय पिछड़ा वर्ग आयोग को संवैधानिक दर्जा दिया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "103वाँ संशोधन अधिनियम, 2019",
+          "101वाँ संशोधन अधिनियम, 2016",
+          "102वाँ संशोधन अधिनियम, 2018",
+          "104वाँ संशोधन अधिनियम, 2019"
+        ],
+        "why": "102वें संशोधन (2018) ने अनुच्छेद 338B जोड़कर NCBC को संवैधानिक निकाय बनाया। 103वाँ संशोधन (2019) जाल है, वह आर्थिक रूप से कमज़ोर वर्गों के आरक्षण से जुड़ा है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "soc-population-and-census",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: According to Census 2011, India's overall sex ratio was 943 females per 1,000 males.",
+          "Statement II: According to Census 2011, Kerala recorded the highest sex ratio among the states."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct and Statement II explains Statement I",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I",
+          "Statement I is correct, but Statement II is incorrect",
+          "Statement I is incorrect, but Statement II is correct"
+        ],
+        "why": "Both are correct: the national figure was 943, and Kerala's was the highest among states at 1,084. But one state's figure does not explain the national average. The trap is (a), linking two true facts that are not cause and effect."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन-I: जनगणना 2011 के अनुसार भारत का कुल लिंगानुपात प्रति 1,000 पुरुषों पर 943 महिलाएँ था।",
+          "कथन-II: जनगणना 2011 के अनुसार राज्यों में सबसे अधिक लिंगानुपात केरल का था।"
+        ],
+        "ask": "उपर्युक्त कथनों के संबंध में निम्नलिखित में से कौन-सा एक सही है?",
+        "options": [
+          "कथन-I और कथन-II दोनों सही हैं और कथन-II, कथन-I की व्याख्या करता है",
+          "कथन-I और कथन-II दोनों सही हैं, किंतु कथन-II, कथन-I की व्याख्या नहीं करता है",
+          "कथन-I सही है, किंतु कथन-II गलत है",
+          "कथन-I गलत है, किंतु कथन-II सही है"
+        ],
+        "why": "दोनों सही हैं: राष्ट्रीय आँकड़ा 943 था, और राज्यों में सबसे ज़्यादा केरल का 1,084। पर एक राज्य का आँकड़ा राष्ट्रीय औसत की व्याख्या नहीं करता। (a) जाल है, जो दो सही तथ्यों को कारण-परिणाम बना देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-population-and-census",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "According to Census 2011, which state had the lowest sex ratio (females per 1,000 males) in India?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Uttar Pradesh",
+          "Punjab",
+          "Bihar",
+          "Haryana"
+        ],
+        "why": "Haryana had the lowest sex ratio among states in Census 2011, at 879. The trap is Punjab, which was also low (895) and is often grouped with Haryana in discussions of skewed sex ratios."
+      },
+      "hi": {
+        "stem": "जनगणना 2011 के अनुसार भारत में किस राज्य का लिंगानुपात (प्रति 1,000 पुरुषों पर महिलाएँ) सबसे कम था?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "उत्तर प्रदेश",
+          "पंजाब",
+          "बिहार",
+          "हरियाणा"
+        ],
+        "why": "जनगणना 2011 में राज्यों में सबसे कम लिंगानुपात हरियाणा का था, 879। पंजाब जाल है, उसका आँकड़ा भी कम (895) था और बिगड़े लिंगानुपात की चर्चा में उसे अक्सर हरियाणा के साथ रखा जाता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-women-and-children",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the right to education:",
+        "statements": [
+          "Article 21A provides for free and compulsory education for all children aged six to fourteen years.",
+          "Article 21A was inserted by the Constitution (86th Amendment) Act, 2002.",
+          "After the same amendment, Article 45 asks the State to provide early childhood care and education for children below six."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1, 2 and 3",
+          "2 and 3 only",
+          "1 only"
+        ],
+        "why": "All three are correct. The 86th Amendment added Article 21A, rewrote Article 45 for children under six, and also added a duty on parents in Article 51A(k). The trap is '1 and 2 only', missing the change to Article 45."
+      },
+      "hi": {
+        "stem": "शिक्षा के अधिकार के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 21A छह से चौदह वर्ष के सभी बच्चों के लिए निःशुल्क और अनिवार्य शिक्षा का प्रावधान करता है।",
+          "अनुच्छेद 21A संविधान (86वाँ संशोधन) अधिनियम, 2002 द्वारा जोड़ा गया।",
+          "इसी संशोधन के बाद अनुच्छेद 45 राज्य से छह वर्ष से कम आयु के बच्चों की प्रारंभिक बाल्यावस्था देखरेख और शिक्षा की व्यवस्था करने को कहता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "1, 2 और 3",
+          "केवल 2 और 3",
+          "केवल 1"
+        ],
+        "why": "तीनों कथन सही हैं। 86वें संशोधन ने अनुच्छेद 21A जोड़ा, छह साल से कम बच्चों के लिए अनुच्छेद 45 बदला, और अनुच्छेद 51A(k) में माता-पिता का कर्तव्य भी जोड़ा। 'केवल 1 और 2' जाल है, जो अनुच्छेद 45 का बदलाव भूल जाता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "soc-welfare-provisions-in-constitution",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Constitution (103rd Amendment) Act, 2019:",
+        "statements": [
+          "It enables reservation of up to 10% for economically weaker sections (EWS).",
+          "It added new clauses to Articles 15 and 16.",
+          "Its EWS reservation also covers persons from SCs, STs and OBCs who are already covered by existing reservation."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Statements 1 and 2 are correct: clauses 15(6) and 16(6) allow up to 10% EWS reservation. Statement 3 is wrong: the EWS category excludes groups already covered by SC, ST and OBC reservation. 'All three' is the trap."
+      },
+      "hi": {
+        "stem": "संविधान (103वाँ संशोधन) अधिनियम, 2019 के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "यह आर्थिक रूप से कमज़ोर वर्गों (EWS) के लिए 10% तक आरक्षण को संभव बनाता है।",
+          "इसने अनुच्छेद 15 और 16 में नए खंड जोड़े।",
+          "इसका EWS आरक्षण उन SC, ST और OBC व्यक्तियों पर भी लागू होता है जो पहले से मौजूदा आरक्षण में शामिल हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई भी नहीं"
+        ],
+        "why": "कथन 1 और 2 सही हैं: खंड 15(6) और 16(6) 10% तक EWS आरक्षण की अनुमति देते हैं। कथन 3 गलत है: EWS श्रेणी में वे वर्ग शामिल नहीं जो पहले से SC, ST और OBC आरक्षण में आते हैं। 'सभी तीन' जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In which year was the Scheduled Castes and the Scheduled Tribes (Prevention of Atrocities) Act enacted?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1993",
+          "1955",
+          "1976",
+          "1989"
+        ],
+        "why": "The Prevention of Atrocities Act was enacted in 1989. The trap is 1955, the year of the Untouchability (Offences) Act, which was renamed the Protection of Civil Rights Act in 1976."
+      },
+      "hi": {
+        "stem": "अनुसूचित जाति और अनुसूचित जनजाति (अत्याचार निवारण) अधिनियम किस वर्ष बनाया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1993",
+          "1955",
+          "1976",
+          "1989"
+        ],
+        "why": "अत्याचार निवारण अधिनियम 1989 में बना। 1955 जाल है, उस साल अस्पृश्यता (अपराध) अधिनियम बना था, जिसका नाम 1976 में बदलकर नागरिक अधिकार संरक्षण अधिनियम कर दिया गया।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following is NOT a constitutional body?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "National Commission for Women",
+          "National Commission for Scheduled Castes",
+          "National Commission for Scheduled Tribes",
+          "National Commission for Backward Classes"
+        ],
+        "why": "The NCW is a statutory body set up under the National Commission for Women Act, 1990. The others rest on Articles 338, 338A and 338B. The trap is the NCBC, which was statutory until the 102nd Amendment of 2018."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा संवैधानिक निकाय नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राष्ट्रीय महिला आयोग",
+          "राष्ट्रीय अनुसूचित जाति आयोग",
+          "राष्ट्रीय अनुसूचित जनजाति आयोग",
+          "राष्ट्रीय पिछड़ा वर्ग आयोग"
+        ],
+        "why": "राष्ट्रीय महिला आयोग, राष्ट्रीय महिला आयोग अधिनियम, 1990 के तहत बना एक सांविधिक निकाय है। बाकी अनुच्छेद 338, 338A और 338B पर टिके हैं। NCBC जाल है, वह 2018 के 102वें संशोधन तक सांविधिक ही था।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "soc-minorities-and-disability",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Rights of Persons with Disabilities Act, 2016:",
+        "statements": [
+          "It recognises 21 types of disabilities.",
+          "It provides for reservation of not less than 4% of vacancies in government establishments for persons with benchmark disabilities.",
+          "It replaced the Persons with Disabilities Act, 1995."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "All three are correct. The 2016 Act raised the recognised disabilities from 7 to 21 and the job reservation from 3% to 4%, and replaced the 1995 Act. The trap is 'Only two', from remembering the older 3% figure."
+      },
+      "hi": {
+        "stem": "दिव्यांगजन अधिकार अधिनियम, 2016 के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "यह 21 प्रकार की दिव्यांगताओं को मान्यता देता है।",
+          "यह बेंचमार्क दिव्यांगता वाले व्यक्तियों के लिए सरकारी प्रतिष्ठानों की रिक्तियों में कम से कम 4% आरक्षण का प्रावधान करता है।",
+          "इसने निःशक्त व्यक्ति अधिनियम, 1995 का स्थान लिया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई भी नहीं"
+        ],
+        "why": "तीनों कथन सही हैं। 2016 के अधिनियम ने मान्य दिव्यांगताएँ 7 से बढ़ाकर 21 और नौकरी में आरक्षण 3% से 4% किया, और 1995 के अधिनियम की जगह ली। पुराना 3% याद रहे तो 'केवल दो' का जाल लगता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "soc-welfare-provisions-in-constitution",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of Directive Principles and their subject matter:",
+        "statements": [
+          "Article 39A – Equal justice and free legal aid",
+          "Article 42 – Just and humane conditions of work and maternity relief",
+          "Article 47 – Raising the level of nutrition and public health",
+          "Article 41 – Prohibition of cow slaughter"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Article 41 is about the right to work, to education and to public assistance in cases such as old age; cow slaughter is covered by Article 48. 'All four' is the trap."
+      },
+      "hi": {
+        "stem": "नीति निदेशक तत्वों और उनके विषयों के नीचे दिए युग्मों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 39A – समान न्याय और निःशुल्क विधिक सहायता",
+          "अनुच्छेद 42 – काम की न्यायसंगत और मानवोचित दशाएँ तथा प्रसूति सहायता",
+          "अनुच्छेद 47 – पोषाहार स्तर और लोक स्वास्थ्य को ऊँचा उठाना",
+          "अनुच्छेद 41 – गोवध का निषेध"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 3 सही हैं। अनुच्छेद 41 काम, शिक्षा और बुढ़ापे जैसी स्थितियों में लोक सहायता के अधिकार से जुड़ा है; गोवध का विषय अनुच्छेद 48 में है। 'सभी चार' जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-scheduled-castes-and-tribes",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Scheduled Tribes list:",
+        "statements": [
+          "Under Article 342, the President may specify the tribes of a state by public notification, after consulting its Governor.",
+          "Once notified, a community can be added to or removed from the list only by a law made by Parliament.",
+          "Article 341 deals with the specification of Scheduled Tribes."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct: the President notifies the first list, and later changes need a law of Parliament. Article 341 deals with Scheduled Castes, not tribes. The trap is '1 only', assuming the President can also amend the list later."
+      },
+      "hi": {
+        "stem": "अनुसूचित जनजातियों की सूची के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 342 के तहत राष्ट्रपति किसी राज्य के राज्यपाल से परामर्श के बाद लोक अधिसूचना द्वारा उसकी जनजातियाँ विनिर्दिष्ट कर सकते हैं।",
+          "एक बार अधिसूचना जारी होने के बाद किसी समुदाय को सूची में जोड़ना या हटाना केवल संसद द्वारा बनाए क़ानून से हो सकता है।",
+          "अनुच्छेद 341 अनुसूचित जनजातियों को विनिर्दिष्ट करने से संबंधित है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: पहली सूची राष्ट्रपति अधिसूचित करते हैं, और बाद के बदलाव के लिए संसद का क़ानून चाहिए। अनुच्छेद 341 अनुसूचित जातियों से जुड़ा है, जनजातियों से नहीं। 'केवल 1' जाल है, जो मान लेता है कि बाद में भी राष्ट्रपति ही सूची बदल सकते हैं।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I (constitutional provision) with List II (body or office it provides for):",
+        "statements": [
+          "A. Article 338",
+          "B. Article 338A",
+          "C. Article 338B",
+          "D. Article 350B",
+          "1. National Commission for Backward Classes",
+          "2. Special Officer for linguistic minorities",
+          "3. National Commission for Scheduled Tribes",
+          "4. National Commission for Scheduled Castes"
+        ],
+        "ask": "Select the correct answer using the code given below:",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-1, C-3, D-2",
+          "A-4, B-3, C-1, D-2"
+        ],
+        "why": "Article 338 provides for the NCSC, 338A for the NCST, 338B for the NCBC, and 350B for the Special Officer for linguistic minorities. The trap swaps 338 and 338A, the two commissions for SCs and STs."
+      },
+      "hi": {
+        "stem": "सूची I (संवैधानिक प्रावधान) को सूची II (वह निकाय या पद जिसका वह प्रावधान करता है) से सुमेलित कीजिए:",
+        "statements": [
+          "A. अनुच्छेद 338",
+          "B. अनुच्छेद 338A",
+          "C. अनुच्छेद 338B",
+          "D. अनुच्छेद 350B",
+          "1. राष्ट्रीय पिछड़ा वर्ग आयोग",
+          "2. भाषाई अल्पसंख्यकों के लिए विशेष अधिकारी",
+          "3. राष्ट्रीय अनुसूचित जनजाति आयोग",
+          "4. राष्ट्रीय अनुसूचित जाति आयोग"
+        ],
+        "ask": "नीचे दिए गए कूट का प्रयोग कर सही उत्तर चुनिए:",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-1, C-3, D-2",
+          "A-4, B-3, C-1, D-2"
+        ],
+        "why": "अनुच्छेद 338 राष्ट्रीय अनुसूचित जाति आयोग, 338A अनुसूचित जनजाति आयोग, 338B पिछड़ा वर्ग आयोग और 350B भाषाई अल्पसंख्यकों के विशेष अधिकारी का प्रावधान करता है। जाल वाला विकल्प 338 और 338A को बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "soc-population-and-census",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements based on Census 2011:",
+        "statements": [
+          "Scheduled Castes formed about 16.6% of India's population.",
+          "Scheduled Tribes formed about 8.6% of India's population.",
+          "Uttar Pradesh had the highest proportion of Scheduled Castes in its population among the states.",
+          "Mizoram had the highest proportion of Scheduled Tribes in its population among the states."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Uttar Pradesh had the largest number of SCs, but Punjab had the highest proportion, about 32%. 'All four' is the trap, confusing a large number with a high share."
+      },
+      "hi": {
+        "stem": "जनगणना 2011 पर आधारित नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत की जनसंख्या में अनुसूचित जातियाँ लगभग 16.6% थीं।",
+          "भारत की जनसंख्या में अनुसूचित जनजातियाँ लगभग 8.6% थीं।",
+          "राज्यों में अपनी जनसंख्या में अनुसूचित जातियों का सबसे अधिक अनुपात उत्तर प्रदेश में था।",
+          "राज्यों में अपनी जनसंख्या में अनुसूचित जनजातियों का सबसे अधिक अनुपात मिज़ोरम में था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। SC की सबसे बड़ी संख्या उत्तर प्रदेश में थी, पर सबसे ऊँचा अनुपात पंजाब में, लगभग 32%। 'सभी चार' जाल है, जो बड़ी संख्या और ऊँचे हिस्से को एक मान लेता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-population-and-census",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "For Census 2011, a place that is not a statutory town is treated as a census town if it meets certain criteria. Consider the following:",
+        "statements": [
+          "A population of at least 5,000",
+          "A population density of at least 1,000 persons per sq km",
+          "At least 75% of the male main working population engaged in non-agricultural work"
+        ],
+        "ask": "Which of the above are criteria for a census town?",
+        "options": [
+          "1 and 3 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "The three criteria are a population of at least 5,000, a density of at least 400 per sq km, and at least 75% of male main workers outside agriculture. The 1,000 figure in Statement 2 is the trap."
+      },
+      "hi": {
+        "stem": "जनगणना 2011 में जो जगह सांविधिक नगर नहीं है, उसे कुछ मानदंड पूरे करने पर जनगणना नगर माना जाता है। निम्नलिखित पर विचार कीजिए:",
+        "statements": [
+          "कम से कम 5,000 की जनसंख्या",
+          "कम से कम 1,000 व्यक्ति प्रति वर्ग km का जनसंख्या घनत्व",
+          "पुरुष मुख्य कामकाजी जनसंख्या का कम से कम 75% गैर-कृषि कार्य में लगा हो"
+        ],
+        "ask": "उपर्युक्त में से कौन-से जनगणना नगर के मानदंड हैं?",
+        "options": [
+          "केवल 1 और 3",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीन मानदंड हैं: कम से कम 5,000 जनसंख्या, कम से कम 400 प्रति वर्ग km घनत्व, और पुरुष मुख्य कामगारों में कम से कम 75% का खेती से बाहर काम करना। कथन 2 का 1,000 वाला आँकड़ा जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "The National Commission for Protection of Child Rights (NCPCR) was set up under which law?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Commissions for Protection of Child Rights Act, 2005",
+          "The Right of Children to Free and Compulsory Education Act, 2009",
+          "The Protection of Children from Sexual Offences Act, 2012",
+          "The Juvenile Justice (Care and Protection of Children) Act, 2015"
+        ],
+        "why": "The NCPCR is a statutory body under the Commissions for Protection of Child Rights Act, 2005. The trap is the RTE Act, 2009: the NCPCR monitors that Act, but was not created by it."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय बाल अधिकार संरक्षण आयोग (NCPCR) किस क़ानून के तहत स्थापित किया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "बाल अधिकार संरक्षण आयोग अधिनियम, 2005",
+          "निःशुल्क और अनिवार्य बाल शिक्षा का अधिकार अधिनियम, 2009",
+          "लैंगिक अपराधों से बालकों का संरक्षण (POCSO) अधिनियम, 2012",
+          "किशोर न्याय (बालकों की देखरेख और संरक्षण) अधिनियम, 2015"
+        ],
+        "why": "NCPCR, बाल अधिकार संरक्षण आयोग अधिनियम, 2005 के तहत बना सांविधिक निकाय है। RTE अधिनियम, 2009 जाल है: NCPCR उस क़ानून की निगरानी करता है, पर उससे बना नहीं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "soc-minorities-and-disability",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following communities is NOT notified as a minority community at the national level under the National Commission for Minorities Act, 1992?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Buddhists",
+          "Jains",
+          "Parsis (Zoroastrians)",
+          "Jews"
+        ],
+        "why": "Six communities are notified nationally: Muslims, Christians, Sikhs, Buddhists, Parsis and Jains. Jews are not among them. The trap is Jains, who were added only in 2014 and are often left out of older lists."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय अल्पसंख्यक आयोग अधिनियम, 1992 के तहत निम्नलिखित में से कौन-सा समुदाय राष्ट्रीय स्तर पर अल्पसंख्यक समुदाय के रूप में अधिसूचित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "बौद्ध",
+          "जैन",
+          "पारसी (ज़रथुस्त्री)",
+          "यहूदी"
+        ],
+        "why": "राष्ट्रीय स्तर पर छह समुदाय अधिसूचित हैं: मुस्लिम, ईसाई, सिख, बौद्ध, पारसी और जैन। यहूदी इनमें नहीं हैं। जैन जाल हैं, वे 2014 में ही जोड़े गए, इसलिए पुरानी सूचियों में अक्सर छूट जाते हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-women-and-children",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the reservation of seats for women:",
+        "statements": [
+          "Article 243D reserves not less than one-third of the seats in every panchayat for women.",
+          "The Constitution (106th Amendment) Act, 2023 provides for reserving one-third of the seats in the Lok Sabha and State Legislative Assemblies for women.",
+          "The reservation under the 106th Amendment applied from the 2024 Lok Sabha election."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the 106th Amendment reservation takes effect only after delimitation based on the first census held after the Act's commencement. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "महिलाओं के लिए सीटों के आरक्षण के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 243D हर पंचायत में कम से कम एक-तिहाई सीटें महिलाओं के लिए आरक्षित करता है।",
+          "संविधान (106वाँ संशोधन) अधिनियम, 2023 लोकसभा और राज्य विधानसभाओं में एक-तिहाई सीटें महिलाओं के लिए आरक्षित करने का प्रावधान करता है।",
+          "106वें संशोधन के तहत आरक्षण 2024 के लोकसभा चुनाव से लागू हो गया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: 106वें संशोधन का आरक्षण अधिनियम लागू होने के बाद की पहली जनगणना पर आधारित परिसीमन के बाद ही प्रभावी होगा। '1, 2 और 3' जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "soc-welfare-commissions-and-laws",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following laws:",
+        "statements": [
+          "Dowry Prohibition Act",
+          "Protection of Women from Domestic Violence Act",
+          "Protection of Children from Sexual Offences (POCSO) Act",
+          "Rights of Persons with Disabilities Act"
+        ],
+        "ask": "What is the correct chronological order in which they were enacted?",
+        "options": [
+          "1-2-4-3",
+          "2-1-3-4",
+          "1-3-2-4",
+          "1-2-3-4"
+        ],
+        "why": "The Dowry Prohibition Act is from 1961, the Domestic Violence Act from 2005, POCSO from 2012 and the Disabilities Act from 2016. The trap, 1-3-2-4, puts POCSO before the Domestic Violence Act, as both deal with protection from abuse."
+      },
+      "hi": {
+        "stem": "निम्नलिखित क़ानूनों पर विचार कीजिए:",
+        "statements": [
+          "दहेज प्रतिषेध अधिनियम",
+          "घरेलू हिंसा से महिला संरक्षण अधिनियम",
+          "लैंगिक अपराधों से बालकों का संरक्षण (POCSO) अधिनियम",
+          "दिव्यांगजन अधिकार अधिनियम"
+        ],
+        "ask": "इनके बनने का सही कालक्रम क्या है?",
+        "options": [
+          "1-2-4-3",
+          "2-1-3-4",
+          "1-3-2-4",
+          "1-2-3-4"
+        ],
+        "why": "दहेज प्रतिषेध अधिनियम 1961 का, घरेलू हिंसा अधिनियम 2005 का, POCSO 2012 का और दिव्यांगजन अधिकार अधिनियम 2016 का है। जाल वाला विकल्प 1-3-2-4, POCSO को घरेलू हिंसा अधिनियम से पहले रखता है, क्योंकि दोनों दुर्व्यवहार से सुरक्षा के क़ानून हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India; Census of India 2011; NCERT Sociology Classes XI and XII",
+    "hi": "भारत का संविधान; भारत की जनगणना 2011; NCERT समाजशास्त्र कक्षा XI और XII"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

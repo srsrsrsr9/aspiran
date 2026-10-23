@@ -1,0 +1,102 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "clue": "sfx/page",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "id": "who-am-i-ambedkar-patel",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Who am I? Leaders of independent India",
+    "hi": "मैं कौन हूँ? स्वतंत्र भारत के नेता"
+  },
+  "rounds": [
+    {
+      "answer": 1,
+      "en": {
+        "clues": [
+          "I was born in 1891 in Mhow, in present-day Madhya Pradesh.",
+          "I called Article 32 the heart and soul of the Constitution.",
+          "I chaired the Drafting Committee of the Constituent Assembly.",
+          "I was independent India's first Law Minister."
+        ],
+        "options": [
+          "Jawaharlal Nehru",
+          "Dr B.R. Ambedkar",
+          "Rajendra Prasad",
+          "C. Rajagopalachari"
+        ],
+        "reveal": "Dr B.R. Ambedkar chaired the Drafting Committee and called Article 32 the heart and soul of the Constitution."
+      },
+      "hi": {
+        "clues": [
+          "मेरा जन्म 1891 में महू में हुआ था, जो आज के मध्य प्रदेश में है।",
+          "मैंने अनुच्छेद 32 को संविधान का 'हृदय और आत्मा' कहा था।",
+          "मैं संविधान सभा की मसौदा समिति का अध्यक्ष था।",
+          "मैं स्वतंत्र भारत का पहला विधि मंत्री था।"
+        ],
+        "options": [
+          "जवाहरलाल नेहरू",
+          "डॉ. बी.आर. अंबेडकर",
+          "राजेंद्र प्रसाद",
+          "सी. राजगोपालाचारी"
+        ],
+        "reveal": "डॉ. बी.आर. अंबेडकर: उन्होंने मसौदा समिति की अध्यक्षता की और अनुच्छेद 32 को संविधान का हृदय और आत्मा कहा। याद रखें: वे स्वतंत्र भारत के पहले विधि मंत्री थे।"
+      }
+    },
+    {
+      "answer": 2,
+      "en": {
+        "clues": [
+          "I led the integration of more than 500 princely states into the Indian Union.",
+          "The Statue of Unity in Gujarat is dedicated to me.",
+          "I am remembered as the 'Iron Man of India'.",
+          "I was independent India's first Deputy Prime Minister and Home Minister."
+        ],
+        "options": [
+          "Rajendra Prasad",
+          "Jawaharlal Nehru",
+          "Sardar Vallabhbhai Patel",
+          "C. Rajagopalachari"
+        ],
+        "reveal": "Sardar Vallabhbhai Patel led the integration of more than 500 princely states. National Unity Day, 31 October, marks his birth anniversary."
+      },
+      "hi": {
+        "clues": [
+          "मैंने 500 से अधिक रियासतों को भारतीय संघ में मिलाने का नेतृत्व किया।",
+          "गुजरात की स्टैच्यू ऑफ यूनिटी मुझे समर्पित है।",
+          "मुझे 'भारत का लौह पुरुष' के रूप में याद किया जाता है।",
+          "मैं स्वतंत्र भारत का पहला उप-प्रधानमंत्री और गृह मंत्री था।"
+        ],
+        "options": [
+          "राजेंद्र प्रसाद",
+          "जवाहरलाल नेहरू",
+          "सरदार वल्लभभाई पटेल",
+          "सी. राजगोपालाचारी"
+        ],
+        "reveal": "सरदार वल्लभभाई पटेल: उन्होंने 500 से अधिक रियासतों को भारतीय संघ में मिलाने का नेतृत्व किया। राष्ट्रीय एकता दिवस, 31 अक्टूबर, उनकी जयंती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/who-am-i@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/who-am-i/",
+    "createdOn": "2026-10-10"
+  }
+}

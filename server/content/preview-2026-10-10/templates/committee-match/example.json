@@ -1,0 +1,101 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "match": "sfx/tick",
+    "miss": "sfx/nudge"
+  },
+  "id": "committees-and-commissions-match",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Match committees to what they studied",
+    "hi": "समितियों और आयोगों को उनके विषय से मिलाएँ"
+  },
+  "pairs": [
+    {
+      "year": 1957,
+      "en": {
+        "committee": "Balwant Rai Mehta Committee",
+        "subject": "Three-tier Panchayati Raj"
+      },
+      "hi": {
+        "committee": "बलवंत राय मेहता समिति",
+        "subject": "त्रि-स्तरीय पंचायती राज"
+      }
+    },
+    {
+      "year": 1977,
+      "en": {
+        "committee": "Ashok Mehta Committee",
+        "subject": "Two-tier panchayat system"
+      },
+      "hi": {
+        "committee": "अशोक मेहता समिति",
+        "subject": "द्वि-स्तरीय पंचायत व्यवस्था"
+      }
+    },
+    {
+      "year": 1964,
+      "en": {
+        "committee": "Kothari Commission",
+        "subject": "Education"
+      },
+      "hi": {
+        "committee": "कोठारी आयोग",
+        "subject": "शिक्षा"
+      }
+    },
+    {
+      "year": 1976,
+      "en": {
+        "committee": "Swaran Singh Committee",
+        "subject": "Fundamental Duties"
+      },
+      "hi": {
+        "committee": "स्वर्ण सिंह समिति",
+        "subject": "मौलिक कर्तव्य"
+      }
+    },
+    {
+      "year": 1983,
+      "en": {
+        "committee": "Sarkaria Commission",
+        "subject": "Centre-state relations"
+      },
+      "hi": {
+        "committee": "सरकारिया आयोग",
+        "subject": "केंद्र-राज्य संबंध"
+      }
+    },
+    {
+      "year": 1991,
+      "en": {
+        "committee": "Narasimham Committee",
+        "subject": "Banking sector reforms"
+      },
+      "hi": {
+        "committee": "नरसिम्हम समिति",
+        "subject": "बैंकिंग क्षेत्र सुधार"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/committee-match@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/committee-match/",
+    "createdOn": "2026-10-10"
+  }
+}

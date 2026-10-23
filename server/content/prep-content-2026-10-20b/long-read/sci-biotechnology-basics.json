@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": null
+  },
+  "tags": {
+    "stage": [
+      "revision",
+      "mains"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "mains-answer",
+      "mains-both-sides",
+      "pre-current-static"
+    ]
+  },
+  "id": "sci-biotechnology-basics",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Biotechnology basics: tools, uses and rules",
+    "hi": "जैव प्रौद्योगिकी की मूल बातें: उपकरण, उपयोग और नियम"
+  },
+  "node": "sci-biotechnology",
+  "minutes": 7,
+  "en": {
+    "dek": "By the end, you will know how recombinant DNA is made, the tools involved, how biotechnology is used in medicine and farming, and how India regulates it.",
+    "sections": [
+      {
+        "head": "What biotechnology is",
+        "body": "Biotechnology is the use of living organisms, or parts of them such as cells and enzymes, to make products and processes useful to people.\n\nIn its traditional form it is very old. Making curd, bread, wine and vinegar all depend on microbes through fermentation.\n\nModern biotechnology rests on two core techniques. The first is genetic engineering: changing the genetic material, DNA or RNA, of an organism to change what it does. The second is bioprocess engineering: growing large numbers of the desired cells under sterile, controlled conditions to make products such as antibiotics, vaccines and enzymes.\n\nThe key step is making recombinant DNA, that is, DNA built by joining pieces from different sources. In 1972 Stanley Cohen and Herbert Boyer made the first recombinant DNA. They cut out a gene for antibiotic resistance and joined it to a plasmid, a small circular piece of DNA, from a bacterium.\n\nIn India, the Department of Biotechnology (DBT) was set up in 1986 to promote the field."
+      },
+      {
+        "head": "The tools of genetic engineering",
+        "body": "Three tools do most of the work.\n\nRestriction enzymes are the 'molecular scissors'. Each one recognises a particular short sequence of DNA bases, usually a palindrome, a sequence that reads the same on both strands in the same direction. It cuts the DNA at or near that site. Many leave short single-stranded overhangs called 'sticky ends', which can pair with matching ends cut by the same enzyme. EcoRI, from the bacterium Escherichia coli, is a commonly cited example.\n\nDNA ligase is the 'molecular glue'. It joins the cut pieces of DNA together.\n\nVectors carry the foreign DNA into a host cell. Plasmids and bacteriophages are common vectors. A good cloning vector needs an origin of replication (ori), so it can copy itself; a selectable marker, often an antibiotic resistance gene, to pick out cells that took up the vector; and a cloning site where foreign DNA can be inserted.\n\nIn plants, the soil bacterium Agrobacterium tumefaciens is used as a natural vector. Its Ti plasmid can be modified to carry useful genes into plant cells."
+      },
+      {
+        "head": "Copying, separating and selecting DNA",
+        "body": "Some other techniques appear again and again.\n\nThe Polymerase Chain Reaction (PCR), devised by Kary Mullis, makes millions of copies of a chosen DNA segment in a test tube. It runs in repeated cycles of three steps. Denaturation separates the two DNA strands with heat. Annealing lets short primers bind to the target. Extension builds new strands. A heat-stable enzyme, Taq polymerase from the bacterium Thermus aquaticus, survives the high temperatures. PCR is used in diagnosis, forensics and research.\n\nGel electrophoresis separates DNA fragments by size. DNA is negatively charged, so in an electric field it moves towards the positive electrode, the anode. Smaller fragments move faster through the gel. The bands are stained, often with ethidium bromide, and seen under ultraviolet light.\n\nAfter the gene is put into host cells, scientists must find which cells are recombinant. Selectable markers help. In insertional inactivation, the new gene is placed inside a marker gene, switching it off. In a common version, recombinant colonies stay white while others turn blue."
+      },
+      {
+        "head": "Uses in medicine",
+        "body": "Recombinant DNA lets scientists produce human proteins safely and in large amounts.\n\nInsulin is the classic example. Insulin used to be extracted from the pancreas of slaughtered animals, which could trigger allergies in some patients. In 1983, the American company Eli Lilly made human insulin using recombinant DNA. It produced the two chains of insulin, A and B, separately in E. coli and then joined them.\n\nGene therapy aims to correct a genetic disorder by inserting a working gene into a patient's cells. The first clinical gene therapy, in 1990, treated a four-year-old girl with adenosine deaminase (ADA) deficiency, a disorder of the immune system.\n\nMolecular diagnosis finds disease early. PCR can detect very low amounts of a pathogen's genetic material. ELISA works on the principle of antigen-antibody interaction.\n\nNewer tools have widened the field. The CRISPR-Cas9 method lets scientists edit genes precisely at chosen sites. Its developers, Emmanuelle Charpentier and Jennifer Doudna, received the Nobel Prize in Chemistry in 2020.\n\nTransgenic animals are also used to study disease and to test vaccine safety."
+      },
+      {
+        "head": "Uses in agriculture",
+        "body": "Genetically modified (GM) crops carry genes added or changed to give them useful traits, such as pest resistance, tolerance to stress or better nutrition.\n\nBt cotton is the best-known example in India. Bt stands for Bacillus thuringiensis, a soil bacterium. It makes proteins, coded by cry genes, that are toxic to certain insects. The protein exists as an inactive protoxin. In the alkaline gut of the insect larva it becomes active, damages the gut lining and kills the insect. The bacterium itself is not harmed, because it stores the toxin in inactive form. Genes such as cryIAc and cryIIAb were introduced into cotton to protect it against bollworms.\n\nIndia approved Bt cotton for commercial cultivation in 2002. It remains the main GM crop grown commercially in the country.\n\nRNA interference is another tool. It silences a specific gene. It was used to make tobacco plants resistant to a nematode, Meloidogyne incognita, which attacks roots.\n\nGolden Rice is engineered to produce beta-carotene, a source of vitamin A, to address deficiency in rice-eating populations."
+      },
+      {
+        "head": "Rules, ethics and biopiracy",
+        "body": "Because altered organisms can spread or affect health, biotechnology is regulated.\n\nIn India, the Genetic Engineering Appraisal Committee (GEAC), under the Ministry of Environment, Forest and Climate Change, appraises proposals for the large-scale use and environmental release of GM organisms. It works under rules made in 1989 under the Environment (Protection) Act, 1986.\n\nInternationally, the Cartagena Protocol on Biosafety, under the Convention on Biological Diversity, governs the movement of living modified organisms across borders. The Nagoya Protocol deals with access to genetic resources and the fair sharing of benefits from their use.\n\nBiopiracy is the use of biological resources or traditional knowledge without proper permission or benefit sharing. India contested foreign patents on products linked to neem, turmeric and basmati rice. The Biological Diversity Act, 2002 requires approval for access to Indian biological resources and associated knowledge.\n\nEthical questions remain open: the safety of GM food, the welfare of transgenic animals, patents on living material, and limits on editing human genes."
+      }
+    ],
+    "keyFacts": [
+      "Cohen and Boyer made the first recombinant DNA in 1972.",
+      "Restriction enzymes cut DNA; DNA ligase joins it.",
+      "A cloning vector needs an ori, a selectable marker and cloning sites.",
+      "PCR steps: denaturation, annealing and extension, using heat-stable Taq polymerase.",
+      "In gel electrophoresis, DNA moves towards the anode; smaller fragments move faster.",
+      "Eli Lilly produced recombinant human insulin in 1983.",
+      "India approved Bt cotton for commercial cultivation in 2002.",
+      "GEAC appraises GM organisms under 1989 rules of the Environment (Protection) Act, 1986."
+    ],
+    "examAngle": "Prelims tests tools and their functions, PCR and electrophoresis, Bt mechanism, and bodies such as GEAC and protocols like Cartagena. Mains asks you to discuss GM crops' benefits and risks, biopiracy, or ethical questions in biotechnology.",
+    "debate": "Supporters of GM crops say they raise yields, cut pesticide use and can improve nutrition, and that regulation can manage risks. Critics raise concerns about long-term health and ecological effects, gene flow to wild relatives, insect resistance, and farmers' dependence on seed companies. Gene editing raises similar debates, especially for human use.",
+    "selfCheck": [
+      "What are the two core techniques of modern biotechnology?",
+      "Why are restriction enzymes called molecular scissors, and what are sticky ends?",
+      "Name the three steps of PCR and the enzyme that makes it work.",
+      "Why does the Bt toxin kill the insect but not the bacterium?",
+      "What does the GEAC do, and under which Act do its rules fall?"
+    ]
+  },
+  "hi": {
+    "dek": "अंत तक आप जानेंगे कि पुनर्योगज DNA कैसे बनता है, इसमें कौन से उपकरण लगते हैं, चिकित्सा और खेती में जैव प्रौद्योगिकी का उपयोग कैसे होता है, और भारत इसे कैसे नियंत्रित करता है।",
+    "sections": [
+      {
+        "head": "जैव प्रौद्योगिकी क्या है",
+        "body": "जैव प्रौद्योगिकी जीवों, या उनके भागों जैसे कोशिकाओं और एंज़ाइमों, का उपयोग करके लोगों के लिए उपयोगी उत्पाद और प्रक्रियाएँ बनाना है।\n\nअपने पारंपरिक रूप में यह बहुत पुरानी है। दही, ब्रेड, वाइन और सिरका बनाना, सब किण्वन के ज़रिए सूक्ष्मजीवों पर निर्भर है।\n\nआधुनिक जैव प्रौद्योगिकी दो मुख्य तकनीकों पर टिकी है। पहली है आनुवंशिक इंजीनियरिंग: किसी जीव के आनुवंशिक पदार्थ, DNA या RNA, को बदलकर उसके काम को बदलना। दूसरी है जैव प्रक्रम इंजीनियरिंग: एंटीबायोटिक, टीके और एंज़ाइम जैसे उत्पाद बनाने के लिए वांछित कोशिकाओं को रोगाणुरहित, नियंत्रित परिस्थितियों में बड़ी संख्या में उगाना।\n\nमुख्य कदम पुनर्योगज DNA बनाना है, यानी अलग-अलग स्रोतों के टुकड़े जोड़कर बना DNA। 1972 में स्टेनली कोहेन और हर्बर्ट बॉयर ने पहला पुनर्योगज DNA बनाया। उन्होंने एंटीबायोटिक प्रतिरोध का एक जीन काटकर उसे एक जीवाणु के प्लाज़्मिड, यानी DNA के एक छोटे वृत्ताकार टुकड़े, से जोड़ा।\n\nभारत में इस क्षेत्र को बढ़ावा देने के लिए 1986 में जैव प्रौद्योगिकी विभाग (DBT) बनाया गया।"
+      },
+      {
+        "head": "आनुवंशिक इंजीनियरिंग के उपकरण",
+        "body": "तीन उपकरण ज़्यादातर काम करते हैं।\n\nप्रतिबंधन एंज़ाइम 'आणविक कैंची' हैं। हर एक DNA क्षारों के एक खास छोटे अनुक्रम को पहचानता है, आमतौर पर एक पैलिंड्रोम, यानी ऐसा अनुक्रम जो दोनों रज्जुकों पर एक ही दिशा में एक जैसा पढ़ा जाता है। यह उस स्थल पर या उसके पास DNA काटता है। कई एंज़ाइम छोटे एकल-रज्जुक उभार छोड़ते हैं, जिन्हें 'चिपचिपे सिरे' कहते हैं, जो उसी एंज़ाइम से कटे मेल खाते सिरों से जुड़ सकते हैं। जीवाणु एशेरिकिया कोलाई से मिला EcoRI एक आम उदाहरण है।\n\nDNA लाइगेज़ 'आणविक गोंद' है। यह DNA के कटे टुकड़ों को आपस में जोड़ता है।\n\nवाहक बाहरी DNA को मेज़बान कोशिका में ले जाते हैं। प्लाज़्मिड और बैक्टीरियोफ़ेज आम वाहक हैं। एक अच्छे क्लोनिंग वाहक में प्रतिकृतीयन का उद्भव (ori) चाहिए, ताकि वह अपनी प्रतिलिपि बना सके; एक वरण योग्य चिह्नक, अक्सर एंटीबायोटिक प्रतिरोध जीन, ताकि वाहक लेने वाली कोशिकाएँ पहचानी जा सकें; और एक क्लोनिंग स्थल, जहाँ बाहरी DNA डाला जा सके।\n\nपौधों में मिट्टी का जीवाणु एग्रोबैक्टीरियम ट्यूमीफ़ेशियंस प्राकृतिक वाहक के रूप में उपयोग होता है। इसके Ti प्लाज़्मिड को बदलकर उपयोगी जीन पौधों की कोशिकाओं में पहुँचाए जा सकते हैं।"
+      },
+      {
+        "head": "DNA की प्रतिलिपि, पृथक्करण और चयन",
+        "body": "कुछ अन्य तकनीकें बार-बार आती हैं।\n\nकैरी मुलिस द्वारा विकसित पॉलीमरेज़ श्रृंखला अभिक्रिया (PCR) एक परखनली में चुने गए DNA खंड की लाखों प्रतियाँ बनाती है। यह तीन चरणों के बार-बार चलने वाले चक्रों में होती है। विकृतीकरण ऊष्मा से DNA के दोनों रज्जुक अलग करता है। तापानुशीतन छोटे प्राइमरों को लक्ष्य से जुड़ने देता है। प्रसार नए रज्जुक बनाता है। एक ऊष्मा-स्थिर एंज़ाइम, जीवाणु थर्मस एक्वेटिकस से मिला Taq पॉलीमरेज़, ऊँचे तापमान में बचा रहता है। PCR का उपयोग निदान, फ़ॉरेंसिक और शोध में होता है।\n\nजेल वैद्युत कण संचलन DNA खंडों को आकार के अनुसार अलग करता है। DNA ऋणावेशित होता है, इसलिए विद्युत क्षेत्र में वह धनात्मक इलेक्ट्रोड, यानी एनोड, की ओर जाता है। छोटे खंड जेल में तेज़ी से चलते हैं। पट्टियों को अक्सर एथिडियम ब्रोमाइड से रंगा जाता है और पराबैंगनी प्रकाश में देखा जाता है।\n\nजीन को मेज़बान कोशिकाओं में डालने के बाद वैज्ञानिकों को पता करना होता है कि कौन सी कोशिकाएँ पुनर्योगज हैं। वरण योग्य चिह्नक इसमें मदद करते हैं। निवेशी निष्क्रियता में नया जीन एक चिह्नक जीन के भीतर डाला जाता है, जिससे वह बंद हो जाता है। एक आम रूप में पुनर्योगज कॉलोनियाँ सफ़ेद रहती हैं जबकि बाकी नीली हो जाती हैं।"
+      },
+      {
+        "head": "चिकित्सा में उपयोग",
+        "body": "पुनर्योगज DNA से वैज्ञानिक मानव प्रोटीन सुरक्षित रूप से और बड़ी मात्रा में बना सकते हैं।\n\nइंसुलिन इसका क्लासिक उदाहरण है। पहले इंसुलिन मारे गए पशुओं के अग्न्याशय से निकाला जाता था, जिससे कुछ रोगियों में एलर्जी हो सकती थी। 1983 में अमेरिकी कंपनी एली लिली ने पुनर्योगज DNA से मानव इंसुलिन बनाया। इसने इंसुलिन की दो श्रृंखलाएँ, A और B, E. coli में अलग-अलग बनाईं और फिर उन्हें जोड़ा।\n\nजीन चिकित्सा का लक्ष्य रोगी की कोशिकाओं में एक काम करने वाला जीन डालकर आनुवंशिक विकार को ठीक करना है। 1990 में पहली नैदानिक जीन चिकित्सा में एडेनोसिन डीएमिनेज़ (ADA) की कमी वाली चार साल की एक बच्ची का इलाज हुआ, जो प्रतिरक्षा तंत्र का एक विकार है।\n\nआणविक निदान रोग को जल्दी पकड़ता है। PCR किसी रोगजनक के आनुवंशिक पदार्थ की बहुत कम मात्रा भी पहचान सकता है। ELISA प्रतिजन-प्रतिरक्षी अंतःक्रिया के सिद्धांत पर काम करता है।\n\nनए उपकरणों ने क्षेत्र को बढ़ाया है। CRISPR-Cas9 विधि से वैज्ञानिक चुने गए स्थलों पर जीन को सटीकता से संपादित कर सकते हैं। इसके विकासकर्ताओं, इमैनुएल शार्पेंटिए और जेनिफ़र डाउडना, को 2020 में रसायन का नोबेल पुरस्कार मिला।\n\nपारजीनी पशुओं का उपयोग रोगों के अध्ययन और टीकों की सुरक्षा जाँचने में भी होता है।"
+      },
+      {
+        "head": "कृषि में उपयोग",
+        "body": "आनुवंशिक रूप से संशोधित (GM) फ़सलों में उपयोगी गुण देने के लिए जीन जोड़े या बदले जाते हैं, जैसे कीट प्रतिरोध, तनाव सहनशीलता या बेहतर पोषण।\n\nभारत में Bt कपास सबसे प्रसिद्ध उदाहरण है। Bt का अर्थ है बैसिलस थुरिंजिएंसिस, मिट्टी का एक जीवाणु। यह cry जीनों द्वारा कूटित प्रोटीन बनाता है, जो कुछ कीटों के लिए विषैले होते हैं। प्रोटीन एक निष्क्रिय प्राक्-विष के रूप में होता है। कीट के लार्वा की क्षारीय आँत में यह सक्रिय हो जाता है, आँत की परत को नुकसान पहुँचाता है और कीट को मार देता है। जीवाणु को स्वयं नुकसान नहीं होता, क्योंकि वह विष को निष्क्रिय रूप में रखता है। cryIAc और cryIIAb जैसे जीन कपास को बॉलवर्म से बचाने के लिए डाले गए।\n\nभारत ने 2002 में Bt कपास की व्यावसायिक खेती को मंज़ूरी दी। यह देश में व्यावसायिक रूप से उगाई जाने वाली मुख्य GM फ़सल बनी हुई है।\n\nRNA अंतरक्षेप एक और उपकरण है। यह एक खास जीन को शांत कर देता है। इसका उपयोग तंबाकू के पौधों को जड़ों पर हमला करने वाले सूत्रकृमि, मेलॉयडोगाइन इनकॉग्निटा, से प्रतिरोधी बनाने में हुआ।\n\nगोल्डन राइस को चावल खाने वाली आबादी में विटामिन A की कमी दूर करने के लिए बीटा-कैरोटीन बनाने लायक बनाया गया है।"
+      },
+      {
+        "head": "नियम, नैतिकता और जैव चोरी",
+        "body": "चूँकि बदले गए जीव फैल सकते हैं या स्वास्थ्य को प्रभावित कर सकते हैं, इसलिए जैव प्रौद्योगिकी नियंत्रित की जाती है।\n\nभारत में पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय के अधीन जेनेटिक इंजीनियरिंग मूल्यांकन समिति (GEAC) GM जीवों के बड़े पैमाने पर उपयोग और पर्यावरण में छोड़ने के प्रस्तावों का मूल्यांकन करती है। यह पर्यावरण (संरक्षण) अधिनियम, 1986 के तहत 1989 में बने नियमों के अंतर्गत काम करती है।\n\nअंतरराष्ट्रीय स्तर पर जैव विविधता पर कन्वेंशन के तहत जैव सुरक्षा पर कार्टाजेना प्रोटोकॉल जीवित संशोधित जीवों की सीमा-पार आवाजाही को नियंत्रित करता है। नागोया प्रोटोकॉल आनुवंशिक संसाधनों तक पहुँच और उनके उपयोग से मिलने वाले लाभों के उचित बँटवारे से जुड़ा है।\n\nजैव चोरी उचित अनुमति या लाभ बँटवारे के बिना जैविक संसाधनों या पारंपरिक ज्ञान का उपयोग है। भारत ने नीम, हल्दी और बासमती चावल से जुड़े उत्पादों पर विदेशी पेटेंट को चुनौती दी। जैव विविधता अधिनियम, 2002 भारतीय जैविक संसाधनों और संबंधित ज्ञान तक पहुँच के लिए मंज़ूरी ज़रूरी बनाता है।\n\nनैतिक सवाल खुले हैं: GM भोजन की सुरक्षा, पारजीनी पशुओं का कल्याण, जीवित पदार्थ पर पेटेंट, और मानव जीन संपादन की सीमाएँ।"
+      }
+    ],
+    "keyFacts": [
+      "कोहेन और बॉयर ने 1972 में पहला पुनर्योगज DNA बनाया।",
+      "प्रतिबंधन एंज़ाइम DNA काटते हैं; DNA लाइगेज़ उसे जोड़ता है।",
+      "क्लोनिंग वाहक में ori, वरण योग्य चिह्नक और क्लोनिंग स्थल चाहिए।",
+      "PCR के चरण: विकृतीकरण, तापानुशीतन और प्रसार, ऊष्मा-स्थिर Taq पॉलीमरेज़ के साथ।",
+      "जेल वैद्युत कण संचलन में DNA एनोड की ओर जाता है; छोटे खंड तेज़ चलते हैं।",
+      "एली लिली ने 1983 में पुनर्योगज मानव इंसुलिन बनाया।",
+      "भारत ने 2002 में Bt कपास की व्यावसायिक खेती को मंज़ूरी दी।",
+      "GEAC पर्यावरण (संरक्षण) अधिनियम, 1986 के 1989 के नियमों के तहत GM जीवों का मूल्यांकन करती है।"
+    ],
+    "examAngle": "Prelims में उपकरण और उनके कार्य, PCR और वैद्युत कण संचलन, Bt की क्रिया-विधि, और GEAC जैसे निकाय तथा कार्टाजेना जैसे प्रोटोकॉल पूछे जाते हैं। Mains में GM फ़सलों के लाभ और जोखिम, जैव चोरी, या जैव प्रौद्योगिकी के नैतिक सवालों पर चर्चा करने को कहा जाता है।",
+    "debate": "GM फ़सलों के समर्थक कहते हैं कि ये उपज बढ़ाती हैं, कीटनाशकों का उपयोग घटाती हैं और पोषण सुधार सकती हैं, और नियमन जोखिम सँभाल सकता है। आलोचक दीर्घकालिक स्वास्थ्य और पारिस्थितिक प्रभावों, जंगली संबंधियों में जीन प्रवाह, कीट प्रतिरोध, और बीज कंपनियों पर किसानों की निर्भरता को लेकर चिंता जताते हैं। जीन संपादन, खासकर मानव उपयोग में, ऐसी ही बहसें उठाता है।",
+    "selfCheck": [
+      "आधुनिक जैव प्रौद्योगिकी की दो मुख्य तकनीकें कौन सी हैं?",
+      "प्रतिबंधन एंज़ाइमों को आणविक कैंची क्यों कहते हैं, और चिपचिपे सिरे क्या हैं?",
+      "PCR के तीन चरण और उसे संभव बनाने वाला एंज़ाइम बताइए।",
+      "Bt विष कीट को क्यों मारता है पर जीवाणु को क्यों नहीं?",
+      "GEAC क्या करती है, और उसके नियम किस अधिनियम के तहत आते हैं?"
+    ]
+  },
+  "sources": {
+    "en": "NCERT Class XII Biology; Environment (Protection) Act, 1986; Biological Diversity Act, 2002",
+    "hi": "NCERT कक्षा XII जीवविज्ञान; पर्यावरण (संरक्षण) अधिनियम, 1986; जैव विविधता अधिनियम, 2002"
+  },
+  "schema": "upsc-pods/long-read@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

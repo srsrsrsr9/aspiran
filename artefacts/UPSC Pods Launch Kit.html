@@ -1,0 +1,678 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>UPSC Pods Launch Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&family=Martel:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a long working page, sticky section rail on wide screens, each section = one shippable asset with copy buttons. */
+:root {
+  --bg: #F7F2EA;          /* steamed milk */
+  --surface: #FFFDF9;
+  --ink: #2A1B12;         /* strong tea */
+  --muted: #6E5A4C;
+  --line: #E4D8C8;
+  --chai: #6B3A1F;        /* brewed chai */
+  --saffron: #D9822B;     /* accent */
+  --cardamom: #4F6B3E;    /* secondary */
+  --saffron-soft: #F6E2C9;
+  --cardamom-soft: #E3EAD9;
+  --phone: #1E140E;
+  --display: "Yatra One", "Mukta", system-ui, sans-serif;
+  --body: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --read: "Martel", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+    --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; --phone: #0C0805;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+  --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; --phone: #0C0805;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 80px; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; }
+@media (max-width: 860px) { .wrap { grid-template-columns: minmax(0, 1fr); gap: 16px; } .rail { position: static !important; } .rail ol { display: flex; flex-wrap: wrap; gap: 6px 14px; } }
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; font-size: 14px; }
+.rail .brand { font-family: var(--display); font-size: 22px; color: var(--chai); line-height: 1.1; }
+.rail .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.rail ol { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+.rail a { color: var(--ink); text-decoration: none; }
+.rail a:hover, .rail a:focus-visible { color: var(--saffron); }
+.rail .langs { margin-top: 20px; display: flex; gap: 6px; }
+main { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 64px; }
+header.intro h1 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5vw, 48px); line-height: 1.1; margin: 0; text-wrap: balance; color: var(--chai); }
+header.intro p { max-width: 62ch; color: var(--muted); margin: 12px 0 0; }
+.status { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--cardamom-soft); color: var(--cardamom); font-weight: 500; }
+.pill.warn { background: var(--saffron-soft); color: var(--chai); }
+section > h2 { font-family: var(--display); font-weight: 400; font-size: 28px; margin: 0; color: var(--chai); text-wrap: balance; }
+section > .lede { color: var(--muted); max-width: 64ch; margin: 6px 0 20px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--saffron); }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; min-width: 0; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field + .field { margin-top: 18px; }
+.field .label { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; font-size: 13px; color: var(--muted); }
+.count { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums; }
+.count.ok { color: var(--cardamom); }
+.count.over { color: var(--saffron); font-weight: 500; }
+.copytext { font-family: var(--read); font-size: 15px; line-height: 1.7; white-space: pre-wrap; background: var(--bg); border-radius: 10px; padding: 12px 14px; margin: 0; overflow-wrap: anywhere; }
+.copytext.big { font-family: var(--body); font-size: 20px; font-weight: 700; line-height: 1.3; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+button { font: inherit; cursor: pointer; }
+.btn { font-size: 13px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 4px 10px; }
+.btn:hover { border-color: var(--saffron); }
+.btn:focus-visible, .seg button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.seg button { border: 0; background: transparent; color: var(--muted); padding: 3px 12px; border-radius: 999px; font-size: 13px; }
+.seg button[aria-pressed="true"] { background: var(--chai); color: var(--bg); }
+.note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+/* store screenshots */
+.shots { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; }
+.shot { flex: 0 0 216px; scroll-snap-align: start; aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; padding: 16px 14px 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden; position: relative; }
+.shot.s1 { background: #6B3A1F; } .shot.s2 { background: #4F6B3E; } .shot.s3 { background: #2A1B12; } .shot.s4 { background: #3D2A4A; } .shot.s5 { background: #A85A1F; }
+.shot .cap { font-family: var(--display); color: #FFF6EA; font-size: 21px; line-height: 1.15; text-wrap: balance; }
+.shot .cap small { display: block; font-family: var(--body); font-size: 12px; opacity: .8; margin-top: 4px; line-height: 1.3; }
+.device { flex: 1; background: #FFFDF9; border-radius: 16px 16px 0 0; padding: 10px; display: grid; align-content: start; gap: 7px; font-size: 10.5px; color: #2A1B12; line-height: 1.35; }
+.device .bar { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9px; color: #8A7666; }
+.device h4 { margin: 0; font-size: 13px; font-weight: 700; }
+.mini { background: #F7F2EA; border-radius: 8px; padding: 7px 8px; }
+.mini b { font-weight: 700; }
+.task { display: flex; gap: 6px; align-items: center; background: #F7F2EA; border-radius: 8px; padding: 6px 8px; }
+.tick { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #4F6B3E; flex: none; }
+.tick.done { background: #4F6B3E; }
+.seg3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.seg3 i { height: 4px; border-radius: 2px; background: #E4D8C8; }
+.seg3 i.on { background: #D9822B; }
+.avatars { display: flex; }
+.avatars span { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #FFFDF9; margin-left: -5px; display: grid; place-items: center; font-size: 9px; color: #fff; font-weight: 700; }
+.avatars span:first-child { margin-left: 0; }
+.chip { display: inline-block; font-size: 8.5px; padding: 1px 6px; border-radius: 99px; background: #E3EAD9; color: #4F6B3E; margin-right: 3px; }
+.trust { font-size: 8.5px; color: #4F6B3E; border-top: 1px dashed #E4D8C8; padding-top: 5px; }
+.moods { display: flex; gap: 4px; flex-wrap: wrap; }
+.moods span { font-size: 9px; border: 1px solid #E4D8C8; border-radius: 99px; padding: 1px 6px; }
+.moods span.sel { background: #2A1B12; color: #FFF6EA; border-color: #2A1B12; }
+.room { display: flex; justify-content: space-between; align-items: center; background: #F7F2EA; border-radius: 8px; padding: 7px 8px; }
+.live { font-size: 8.5px; color: #4F6B3E; font-weight: 700; }
+
+/* share cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; align-items: start; }
+.sharecard { aspect-ratio: 9 / 16; max-width: 100%; border-radius: 18px; padding: 22px 20px; display: flex; flex-direction: column; justify-content: space-between; color: #FFF6EA; position: relative; overflow: hidden; }
+.sharecard .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .85; }
+.sharecard .big { font-family: var(--display); font-size: 30px; line-height: 1.1; text-wrap: balance; }
+.sharecard .body { font-family: var(--read); font-size: 14px; line-height: 1.6; }
+.sharecard .foot { display: flex; justify-content: space-between; align-items: end; font-size: 12px; gap: 8px; }
+.sharecard .foot .mark { font-family: var(--display); font-size: 17px; }
+.sharecard .foot small { display: block; opacity: .75; font-size: 10px; }
+.wins { background: #4F6B3E; }
+.calc { background: #2A1B12; }
+.steam { position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; border-radius: 50%; border: 22px solid rgba(255,246,234,.07); }
+.timeline { display: grid; gap: 6px; }
+.timeline div { display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,246,234,.25); padding-bottom: 4px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.timeline div:last-child { border-bottom: 0; }
+.form { display: grid; gap: 12px; }
+.form label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.form input, .form select { font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
+
+/* invite flow */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.step { display: grid; gap: 8px; align-content: start; }
+.step .num { font-family: var(--mono); font-size: 12px; color: var(--saffron); }
+.step .screen { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 8px; font-size: 14px; min-height: 180px; align-content: start; }
+.screen .primary { background: var(--chai); color: var(--bg); border-radius: 8px; padding: 7px 10px; text-align: center; font-weight: 500; }
+.screen .ghost { border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; text-align: center; color: var(--muted); }
+.seats { display: flex; gap: 5px; flex-wrap: wrap; }
+.seats i { width: 22px; height: 22px; border-radius: 50%; background: var(--cardamom); }
+.seats i.empty { background: transparent; border: 1.5px dashed var(--muted); }
+
+/* parent page */
+.parent { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px clamp(18px, 4vw, 40px); max-width: 720px; }
+.parent h3 { font-family: var(--display); font-weight: 400; font-size: 30px; color: var(--chai); margin: 0 0 4px; line-height: 1.2; }
+.parent .from { color: var(--muted); font-size: 14px; }
+.parent .read { font-family: var(--read); font-size: 15.5px; line-height: 1.85; max-width: 62ch; }
+.parent .read h4 { font-family: var(--body); font-size: 17px; margin: 22px 0 4px; color: var(--ink); }
+.parent .read p { margin: 0 0 10px; }
+.parent .help { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 12px; font-size: 14px; color: var(--muted); }
+
+/* posts */
+.posts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+.post .head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; }
+.post .where { font-weight: 700; }
+.post .when { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+/* progress table */
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+td.state { white-space: nowrap; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { .btn, .seg button { transition: background .15s, border-color .15s; } }
+</style>
+
+<div class="wrap">
+  <nav class="rail" aria-label="Sections">
+    <div class="brand">UPSC Pods</div>
+    <div class="sub">Launch kit · draft 1 · 10 Oct 2026</div>
+    <ol>
+      <li><a href="#listing">Play Store listing</a></li>
+      <li><a href="#screens">Store screenshots</a></li>
+      <li><a href="#cards">Share cards</a></li>
+      <li><a href="#invite">Pod invite</a></li>
+      <li><a href="#parent">Parent page</a></li>
+      <li><a href="#posts">Week-1 posts</a></li>
+      <li><a href="#authors">Author outreach</a></li>
+      <li><a href="#progress">What's built</a></li>
+    </ol>
+    <div class="langs">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" id="lang-hi" data-lang="hi" aria-pressed="false">हिंदी</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="intro">
+      <span class="eyebrow">Marketing plan · first 10%</span>
+      <h1>Everything we need for launch day, ready to review</h1>
+      <p>These are the first pieces of the marketing plan, built and ready for your edits: the store listing, the screenshots, the share cards members will post, the pod invite, the page members send home, and the first week of posts. Nothing here has been published or posted anywhere. Switch language at the side to see the Hindi versions.</p>
+      <div class="status">
+        <span class="pill">Draft for review</span>
+        <span class="pill warn">Not posted anywhere</span>
+        <a class="pill warn" href="https://claude.ai/artifact/QXBZwcKkxR7TMixYHDU1Hu" style="text-decoration:none">Chai card, chai motif and sample reel: see the content preview</a>
+      </div>
+    </header>
+
+    <!-- LISTING -->
+    <section id="listing">
+      <span class="eyebrow">Channel 3 · Play Store search</span>
+      <h2>Play Store listing</h2>
+      <p class="lede">Copy for the store page, checked against Google Play's limits: 30 characters for the name, 80 for the short description and 4,000 for the full description. The Hindi listing is written in Hindi, not translated word for word.</p>
+      <div class="panel" id="listing-panel"></div>
+      <p class="note">Keywords this copy is written to rank for: UPSC study group, UPSC current affairs Hindi, UPSC daily quiz, IAS preparation, करेंट अफेयर्स हिंदी. The name "UPSC Pods" still needs the legal check flagged in the plan.</p>
+    </section>
+
+    <!-- SCREENS -->
+    <section id="screens">
+      <span class="eyebrow">Channel 3 · Play Store search</span>
+      <h2>Store screenshots</h2>
+      <p class="lede">Five screenshots, in the order people swipe through them. Each one shows how the app feels to use, not a list of features, and none shows a streak, a countdown or a rank.</p>
+      <div class="shots" id="shots"></div>
+      <p class="note">Names and messages in these screenshots are sample data and will be marked that way on the store. Built as layouts at 9:16. The final files are exported at 1080 × 1920 from real app screens once the closed test ends. Scroll sideways to see all five.</p>
+    </section>
+
+    <!-- CARDS -->
+    <section id="cards">
+      <span class="eyebrow">Channel 1 · Product loops</span>
+      <h2>Share cards</h2>
+      <p class="lede">These are the cards members choose to post to WhatsApp status or Instagram stories. Each one carries the app name and a Play link. Members only ever share them by choice, and no card shows a mood, a pod message or a rank. The calculator card on the right is live, so try your own numbers.</p>
+      <div class="cards">
+        <div class="sharecard wins" aria-label="Wins of the week card">
+          <div class="steam" aria-hidden="true"></div>
+          <div>
+            <div class="tag"><span data-t="wins_tag"></span> · <span data-t="example"></span></div>
+            <div class="big" data-t="wins_big" style="margin-top:10px"></div>
+          </div>
+          <div class="body" data-t="wins_body"></div>
+          <div class="foot"><div><span class="mark">UPSC Pods</span><small data-t="na"></small></div><div style="text-align:right" data-t="cta_play"></div></div>
+        </div>
+
+        <div class="sharecard calc" aria-label="Attempts and age calculator card">
+          <div class="steam" aria-hidden="true"></div>
+          <div>
+            <div class="tag" data-t="calc_tag"></div>
+            <div class="big" id="calc-big" style="margin-top:10px"></div>
+          </div>
+          <div class="timeline" id="calc-timeline"></div>
+          <div class="foot"><div><span class="mark">UPSC Pods</span><small data-t="na"></small></div><div style="text-align:right" data-t="cta_calc"></div></div>
+        </div>
+
+        <div class="panel">
+          <span class="eyebrow">Try the calculator</span>
+          <div class="form" style="margin-top:10px">
+            <label for="dob">Year of birth <input id="dob" type="number" min="1985" max="2008" value="1998" inputmode="numeric"></label>
+            <label for="cat">Category
+              <select id="cat">
+                <option value="gen">General / EWS</option>
+                <option value="obc">OBC</option>
+                <option value="scst">SC / ST</option>
+              </select>
+            </label>
+            <label for="used">Attempts already used <input id="used" type="number" min="0" max="9" value="2" inputmode="numeric"></label>
+          </div>
+          <p class="note">Rules used: General 6 attempts to age 32, OBC 9 to 35, SC/ST unlimited to 37, age counted on 1 August of the exam year. Without a birth month it takes the cautious case, so someone born after August may have one more year. These come from the founding brief and must be checked against the official CSE 2027 notice before launch. Disability and other relaxations are not included yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVITE -->
+    <section id="invite">
+      <span class="eyebrow">Channel 1 · Product loops</span>
+      <h2>Pod invite</h2>
+      <p class="lede">A new pod opens with a few matched members and some empty seats. Inviting a study friend fills a seat, and the reward goes to the whole pod. Here are the three screens and the message the friend receives.</p>
+      <div class="flow" id="flow"></div>
+      <div class="panel" style="margin-top:16px">
+        <div class="head row" style="justify-content:space-between"><span class="eyebrow">WhatsApp message the friend gets</span><button class="btn" type="button" data-copy="invite-msg">Copy</button></div>
+        <p class="copytext" id="invite-msg" style="margin-top:10px"></p>
+      </div>
+    </section>
+
+    <!-- PARENT -->
+    <section id="parent">
+      <span class="eyebrow">Channel 1 · Product loops</span>
+      <h2>Parent page</h2>
+      <p class="lede">A one-page note a member can send home in one tap. It explains the year in plain words, gives families a few things to say and a few to avoid, and lists where to find help. It never shows the member's own progress or mood.</p>
+      <article class="parent" id="parent-page"></article>
+    </section>
+
+    <!-- POSTS -->
+    <section id="posts">
+      <span class="eyebrow">Channels 2 and 4 · Video and communities</span>
+      <h2>Week-1 posts</h2>
+      <p class="lede">The first posts for launch week, one per channel. They are written to be posted by a person, the founder or a pod lead, and they follow each platform's habits. Check r/UPSC's self-promotion rules before the Reddit post goes up.</p>
+      <div class="posts" id="posts-grid"></div>
+    </section>
+
+    <!-- AUTHORS -->
+    <section id="authors">
+      <span class="eyebrow">Partnerships · draft only</span>
+      <h2>Author outreach</h2>
+      <p class="lede">A short email to the living authors whose work shaped the app: Barbara Oakley, Kathy Sierra, BJ Fogg, Shiv Khera and Yandamuri Veerendranath. It asks for a 30-second message to aspirants and nothing else, and it has not been sent. Any yes becomes a "Hear it from them" item in the app. We never use their photos or voices without written permission, and never an AI voice.</p>
+      <div class="panel">
+        <div class="row" style="justify-content:space-between"><span class="eyebrow">Email · send only after your review</span><button class="btn" type="button" data-copy="author-mail">Copy</button></div>
+        <p class="copytext" id="author-mail" style="margin-top:10px">Subject: A 30-second message for young people preparing for India's civil services exam?
+
+Dear [Name],
+
+I'm [your name], and I'm building UPSC Pods, a free study app for people preparing for India's Civil Services exam. About 10 lakh (1 million) people apply each year and only around a thousand are selected, so most of them spend years preparing, often alone and far from home.
+
+Your work shaped how the app works. [One specific line, e.g. for Barbara Oakley: "Close the Day asks for one thing you can recall from memory, which comes straight from your writing on retrieval practice."] We credit you by name inside the app, with a link to your book and to free ways to read it.
+
+Would you be willing to record a 30-second message to these aspirants, in your own words, about learning or keeping going? A phone recording is perfect. We would play it in the app with your name and a link to your work.
+
+To be clear, this is not a request to endorse the app, and we won't present it as one. If you'd rather not, no reply is needed, and we'll keep crediting your work either way.
+
+With thanks,
+[Your name]
+[Role, UPSC Pods · email · phone]</p>
+      </div>
+      <p class="note">Before sending: fill in the one line on what came from each author's work, and use each author's official contact page rather than a personal address.</p>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress">
+      <span class="eyebrow">Against the plan</span>
+      <h2>What's built and what's next</h2>
+      <p class="lede">This kit covers the assets the Founding phase and launch day need first. Here's where each piece stands.</p>
+      <div class="tablewrap panel" style="padding:4px 8px">
+        <table>
+          <thead><tr><th>Piece</th><th>Plan channel</th><th>Status</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td>Play Store listing, English and Hindi</td><td>Play Store search</td><td class="state"><span class="pill">Drafted</span></td><td>Your edits, then the legal check on the name</td></tr>
+            <tr><td>5 store screenshots</td><td>Play Store search</td><td class="state"><span class="pill">Layouts done</span></td><td>Swap in real screens after the closed test</td></tr>
+            <tr><td>Wins and calculator share cards</td><td>Product loops</td><td class="state"><span class="pill">Designed, calculator works</span></td><td>Build into the app's share sheet</td></tr>
+            <tr><td>Pod invite screens and message</td><td>Product loops</td><td class="state"><span class="pill">Drafted</span></td><td>Add invite links to the pod server</td></tr>
+            <tr><td>Parent page</td><td>Product loops</td><td class="state"><span class="pill">Drafted</span></td><td>Test-call the helplines, then host it at a public link</td></tr>
+            <tr><td>Week-1 posts on 4 channels, plus a weekly quote post</td><td>Short video, communities</td><td class="state"><span class="pill">Drafted</span></td><td>Pick a launch date; draw the illustrated portraits</td></tr>
+            <tr><td>Author outreach email</td><td>Partnerships</td><td class="state"><span class="pill">Drafted, not sent</span></td><td>Your review, then send from your own email</td></tr>
+            <tr><td>Chai of the Day card, Ek Minute explainers, soundscapes</td><td>Short video</td><td class="state"><span class="pill">Previewed by the content plan</span></td><td>Previewed in the <a href="https://claude.ai/artifact/QXBZwcKkxR7TMixYHDU1Hu" style="color:var(--chai)">content plan preview</a></td></tr>
+            <tr><td>Creators, offline pop-ups, paid ads, PR report</td><td>Later phases</td><td class="state"><span class="pill warn">Not started</span></td><td>From December 2026 onward</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const T = {
+  en: {
+    na: "Not affiliated with UPSC",
+    example: "Example",
+    cta_play: "Find your pod<br>on Google Play",
+    cta_calc: "See your own timeline<br>on Google Play",
+    wins_tag: "Wins of the week",
+    wins_big: "Wrote my first 150-word answer. Pod said the intro was sharp.",
+    wins_body: "Small wins, said out loud, to people who get it. This week: 4 days showed up, 1 answer written, 1 book I finally stopped re-reading.",
+    calc_tag: "My real timeline",
+    calc_big: (n, last) => n === "∞" ? `No attempt limit. Age window open until CSE ${last}.` : `${n} attempts left, through CSE ${last}.`,
+    calc_rows: ["Next exam", "Attempts left", "Last eligible exam", "Plan B date I set"],
+    calc_planb: "Add in app",
+    calc_none: "The age window has closed. Plan B is a real plan.",
+    listing: [
+      ["App name", 30, "UPSC Pods: Study Together", true],
+      ["Short description", 80, "Small study pods, daily current affairs and honest tools. You don't prep alone.", false],
+      ["Full description", 4000,
+`No rank promises. No countdowns. No toppers' secret notes.
+
+Just 5 news cards with your morning chai, about 7 minutes, in Hindi and English, and a small pod of people at your stage. We built UPSC Pods because nobody should prepare alone.
+
+YOUR POD
+Join a pod of 8 to 10 aspirants matched by attempt number, medium and stage, with a human pod lead. See who is studying, share an answer, send a chai ping. No public leaderboards.
+
+TODAY'S 3, THEN YOU'RE DONE
+Every day: 5 Chai cards on the news that matters for the exam, 5 Prelims questions and 1 Mains answer. About 30 minutes. When they're done, the app tells you to stop.
+
+NEWS NOTES YOU CAN TRUST
+Every Chai card lists its sources and is checked by a human editor before it goes out, in English and in Hindi. If we can't confirm a previous-year question link, we say so.
+
+CLOSE THE DAY
+Four quick questions at night to put the day down. Only you can see it, and it stays on your phone.
+
+STUDY ROOMS
+Join a quiet co-study room or a chai-break room with your pod.
+
+HONEST TOOLS
+See your real attempts and age timeline and plan a Plan B with a date, without anyone selling you anything.
+
+WHAT STAYS FREE
+Pods, Today's 3, rooms, calculators and helplines stay free. We never show offers on result days.
+
+IF A DAY GETS HEAVY
+"Need to talk?" is two taps away from anywhere and connects you to Tele-MANAS 14416 and the people you choose.
+
+Works on low-end phones and slow data. Made for Hindi-medium and English-medium aspirants.
+
+Built on research from Daniel Kahneman, Barbara Oakley and other great minds. See the full list, and what to read next, in the app. They have not endorsed UPSC Pods.
+
+UPSC Pods is an independent app and is not affiliated with the Union Public Service Commission.`, false]
+    ],
+    shots: [
+      ["Study with 8 to 10 people at your stage", "A pod matched by attempt, medium and stage"],
+      ["Finish your day's prep in about 30 minutes", "Today's 3. Then you're done."],
+      ["Explain a GI tag in a minute, with sources", "Every card checked by a human editor"],
+      ["Close the day without the 11 pm guilt", "90 seconds. Only you can see it."],
+      ["Never prepare alone, for free", "Pods, rooms and helplines stay free"]
+    ],
+    flow: [
+      ["Your pod has 3 empty seats", "Pods work best full. Invite someone who studies like you do.", "Invite a study friend", "Not now"],
+      ["Pick how to send it", "The link opens your pod, not a sales page. It works for 7 days.", "Send on WhatsApp", "Copy link"],
+      ["Rohit joined your pod", "Your whole pod gets 3 extra answer reviews this week.", "Say hello", "Back to Today"]
+    ],
+    invite: `Hey! I'm preparing for UPSC in a small study pod on an app called UPSC Pods. We do 3 small things a day (news cards, 5 questions, 1 answer) and keep each other going. There's a seat in my pod for you, and it's free.
+
+Join my pod: upscpods.app/i/K7Q2M
+
+(Not affiliated with UPSC.)`,
+    parent: {
+      title: "A note for my family",
+      from: "Sent from UPSC Pods, the study app I use with my pod",
+      body: `<h4>What this year looks like</h4>
+<p>About 10 lakh people apply for the Civil Services exam each year, and around a thousand are selected. Most people who are selected took more than one attempt. A year without a result is normal and does not mean the year was wasted.</p>
+<p>The year has three stages: Prelims in May, Mains in August, then the interview. CSE 2027 Prelims is on 23 May 2027.</p>
+<h4>The numbers, honestly</h4>
+<p>Of every 1,000 people who sat Prelims in 2026, about 24 reached Mains, and there are about 2 posts for them. Effort is in my hands. The cut-off is not.</p>
+<h4>Your role this year</h4>
+<p>Ask about the week, not the rank. "What went well this week?" helps more than "How many marks?"</p>
+<h4>What helps</h4>
+<p>Asking "how are you?" before "how is the preparation?". Regular meals and sleep. Treating one rest day a week as part of the plan.</p>
+<h4>What hurts, even when meant kindly</h4>
+<p>Comparisons with cousins or toppers. Asking about rank or marks on result day. Asking "what's the plan?" every phone call.</p>
+<h4>What I do in the app</h4>
+<p>I study with a small group of 8 to 10 people at my stage, with a human lead. We do three small tasks a day. The app has no ranks or leaderboards.</p>`,
+      help: "Numbers from UPSC's 2026 Prelims result (about 5.49 lakh sat, 13,343 qualified, 1,016 vacancies), to be checked on upsc.gov.in before launch. If you are ever worried about me, or about yourself, Tele-MANAS is free and confidential: call 14416 or 1-800-891-4416. Helpline numbers to be test-called before launch."
+    },
+    posts: [
+      ["Telegram", "Daily Chai channel · Day 1, 7:30", `☕ Today's Chai · 5 cards · about 7 min
+
+1. Governor's assent to state bills: what Art. 200 says
+2. El Niño: what it means for this year's monsoon
+3. GI tags: why a name is protected, not a recipe
+4. Sendai Framework: India's disaster-risk targets
+5. A light one to finish
+
+Every card lists its sources and is checked by an editor.
+Read in the app, with your pod: upscpods.app/chai
+
+Not affiliated with UPSC.`],
+      ["Reddit r/UPSC", "Founder post · launch day", `Title: We built a small-group study app for aspirants. Looking for honest feedback.
+
+I've spent the last few months talking to aspirants about what the grind actually feels like. The two things people asked for most weren't more notes. They were someone to tell them what's wrong with their plan, and someone to study with.
+
+So we built UPSC Pods. You get matched into a pod of 8 to 10 people at your attempt and stage, with a human lead. Each day there are three small tasks (news cards, 5 Prelims questions, 1 Mains answer) and then the app tells you to stop. There's no leaderboard, no streak counter and no countdown.
+
+It's free, and the core stays free. I'd like to hear what's missing, especially from repeaters and Hindi-medium aspirants. Happy to answer anything here.
+
+(Mods: please remove if this breaks the self-promo rule.)`],
+      ["Instagram", "Reel caption · launch day", `You don't have to prep alone. ☕
+
+A pod of 8 to 10 people at your stage. 3 small tasks a day, then you're done. News notes checked by a human editor, in Hindi and English.
+
+Free on Google Play: link in bio.
+
+#UPSC #UPSCPreparation #IAS #StudyWithMe #UPSC2027
+Not affiliated with UPSC.`],
+      ["WhatsApp Channel", "Daily post · Day 1, 20:30", `Good evening. A small reminder before you close the day: 2 of 3 is a real day.
+
+Tomorrow's Chai lands at 7:00. Sleep is part of the prep too. 🌙`],
+      ["Instagram + WhatsApp Channel", "Weekly quote post · Sunday", `"If you know the enemy and know yourself, you need not fear the result of a hundred battles."
+Sun Tzu, The Art of War, ch. 3 (Lionel Giles translation, 1910)
+
+For prep: your "enemy" is the paper, not other aspirants. Spend 20 minutes this week on past papers in your weakest subject, and you'll know both.
+
+Read it free: the Giles translation is in the public domain (Project Gutenberg).
+
+[Slide image: our illustrated portrait, labelled "Artist's impression"]`]
+    ]
+  },
+  hi: {
+    na: "UPSC से संबद्ध नहीं",
+    example: "उदाहरण",
+    cta_play: "अपना पॉड खोजें<br>Google Play पर",
+    cta_calc: "अपनी असली टाइमलाइन देखें<br>Google Play पर",
+    wins_tag: "इस हफ़्ते की जीत",
+    wins_big: "पहला 150 शब्दों का उत्तर लिखा। पॉड ने कहा भूमिका अच्छी थी।",
+    wins_body: "छोटी जीत, उन लोगों के साथ जो समझते हैं। इस हफ़्ते: 4 दिन पढ़ाई, 1 उत्तर लिखा, और एक किताब दोबारा पढ़ना आख़िरकार बंद किया।",
+    calc_tag: "मेरी असली टाइमलाइन",
+    calc_big: (n, last) => n === "∞" ? `प्रयासों की कोई सीमा नहीं। CSE ${last} तक आयु सीमा खुली।` : `${n} प्रयास बाकी, CSE ${last} तक।`,
+    calc_rows: ["अगली परीक्षा", "बाकी प्रयास", "आख़िरी योग्य परीक्षा", "मेरी Plan B तारीख़"],
+    calc_planb: "ऐप में जोड़ें",
+    calc_none: "आयु सीमा पूरी हो चुकी है। Plan B भी एक असली योजना है।",
+    listing: [
+      ["ऐप का नाम", 30, "UPSC Pods: साथ में तैयारी", true],
+      ["छोटा विवरण", 80, "छोटे स्टडी पॉड, रोज़ करेंट अफेयर्स और सच्चे टूल। तैयारी अब अकेले नहीं।", false],
+      ["पूरा विवरण", 4000,
+`रैंक का कोई वादा नहीं। कोई काउंटडाउन नहीं। टॉपर्स के कोई "सीक्रेट नोट्स" नहीं।
+
+बस सुबह की चाय के साथ 5 ख़बर कार्ड, लगभग 7 मिनट, हिंदी और अंग्रेज़ी में, और आपके चरण के लोगों का एक छोटा पॉड। हमने UPSC Pods इसलिए बनाया क्योंकि किसी को भी तैयारी अकेले नहीं करनी चाहिए।
+
+आपका पॉड
+8 से 10 अभ्यर्थियों का पॉड, जो आपके प्रयास, माध्यम और चरण से मेल खाता है, और एक इंसानी पॉड लीड। देखें कौन पढ़ रहा है, उत्तर साझा करें, चाय पिंग भेजें। कोई सार्वजनिक लीडरबोर्ड नहीं।
+
+आज के 3, फिर बस
+रोज़: परीक्षा के लिए ज़रूरी ख़बरों पर 5 चाय कार्ड, प्रीलिम्स के 5 प्रश्न और मेन्स का 1 उत्तर। लगभग 30 मिनट। पूरे होने पर ऐप ख़ुद कहता है, आज के लिए बस।
+
+भरोसेमंद ख़बर नोट्स
+हर चाय कार्ड पर स्रोत लिखे होते हैं, और हिंदी व अंग्रेज़ी दोनों में एक इंसानी संपादक जाँचता है। अगर पिछले वर्ष के प्रश्न का पक्का मिलान नहीं है, तो हम साफ़ बताते हैं।
+
+दिन बंद करें
+रात को चार छोटे सवाल, दिन को समेटने के लिए। इसे सिर्फ़ आप देख सकते हैं, और यह आपके फ़ोन पर ही रहता है।
+
+स्टडी रूम
+पॉड के साथ शांत को-स्टडी रूम या चाय-ब्रेक रूम में जुड़ें।
+
+सच्चे टूल
+अपने प्रयासों और उम्र की असली टाइमलाइन देखें और तारीख़ के साथ Plan B बनाएँ, बिना किसी बिक्री के दबाव के।
+
+जो मुफ़्त रहेगा
+पॉड, आज के 3, रूम, कैलकुलेटर और हेल्पलाइन हमेशा मुफ़्त। रिज़ल्ट के दिन कोई ऑफ़र नहीं।
+
+अगर दिन भारी लगे
+"किसी से बात करनी है?" हर जगह से दो टैप दूर है, और Tele-MANAS 14416 व आपके चुने हुए लोगों से जोड़ता है।
+
+कम क़ीमत वाले फ़ोन और धीमे इंटरनेट पर भी चलता है। हिंदी और अंग्रेज़ी माध्यम दोनों के लिए।
+
+डैनियल काह्नमैन, बारबरा ओकली और कई महान विचारकों के शोध पर आधारित। पूरी सूची और आगे क्या पढ़ें, ऐप में देखें। इन्होंने UPSC Pods का समर्थन नहीं किया है।
+
+UPSC Pods एक स्वतंत्र ऐप है और संघ लोक सेवा आयोग से संबद्ध नहीं है।`, false]
+    ],
+    shots: [
+      ["अपने चरण के 8-10 साथियों के साथ पढ़ें", "प्रयास, माध्यम और चरण से मिलान वाला पॉड"],
+      ["लगभग 30 मिनट में दिन की तैयारी पूरी", "आज के 3. फिर बस।"],
+      ["एक मिनट में GI टैग समझाएँ, स्रोत के साथ", "हर कार्ड इंसानी संपादक से जाँचा"],
+      ["रात 11 बजे के अपराधबोध के बिना दिन बंद करें", "90 सेकंड। सिर्फ़ आप देख सकते हैं।"],
+      ["तैयारी कभी अकेले नहीं, मुफ़्त में", "पॉड, रूम और हेल्पलाइन मुफ़्त"]
+    ],
+    flow: [
+      ["आपके पॉड में 3 सीटें ख़ाली हैं", "भरा पॉड सबसे अच्छा चलता है। किसी ऐसे दोस्त को बुलाएँ जो आपकी तरह पढ़ता है।", "स्टडी दोस्त को बुलाएँ", "अभी नहीं"],
+      ["कैसे भेजें, चुनें", "लिंक सीधे आपके पॉड में खुलता है, किसी सेल्स पेज पर नहीं। 7 दिन तक चलता है।", "WhatsApp पर भेजें", "लिंक कॉपी करें"],
+      ["रोहित आपके पॉड में आ गए", "इस हफ़्ते पूरे पॉड को 3 अतिरिक्त उत्तर रिव्यू मिलेंगे।", "नमस्ते कहें", "आज पर लौटें"]
+    ],
+    invite: `नमस्ते! मैं UPSC Pods नाम के ऐप पर एक छोटे स्टडी पॉड के साथ UPSC की तैयारी कर रहा/रही हूँ। हम रोज़ 3 छोटे काम करते हैं (ख़बर कार्ड, 5 प्रश्न, 1 उत्तर) और एक-दूसरे का साथ देते हैं। मेरे पॉड में तुम्हारे लिए एक सीट है, और यह मुफ़्त है।
+
+मेरे पॉड से जुड़ो: upscpods.app/i/K7Q2M
+
+(UPSC से संबद्ध नहीं।)`,
+    parent: {
+      title: "मेरे परिवार के लिए एक नोट",
+      from: "UPSC Pods से भेजा गया, जिस स्टडी ऐप पर मैं अपने पॉड के साथ पढ़ता/पढ़ती हूँ",
+      body: `<h4>यह साल कैसा होता है</h4>
+<p>हर साल लगभग 10 लाख लोग सिविल सेवा परीक्षा के लिए आवेदन करते हैं, और लगभग एक हज़ार चुने जाते हैं। चुने गए ज़्यादातर लोग एक से ज़्यादा प्रयास में सफल होते हैं। बिना रिज़ल्ट का साल सामान्य है, बेकार नहीं।</p>
+<p>साल के तीन चरण हैं: मई में प्रीलिम्स, अगस्त में मेन्स, फिर इंटरव्यू। CSE 2027 प्रीलिम्स 23 मई 2027 को है।</p>
+<h4>सच्चे आँकड़े</h4>
+<p>2026 में प्रीलिम्स देने वाले हर 1,000 लोगों में से लगभग 24 मेन्स तक पहुँचे, और उनके लिए लगभग 2 पद हैं। मेहनत मेरे हाथ में है। कट-ऑफ़ नहीं।</p>
+<h4>इस साल आपकी भूमिका</h4>
+<p>हफ़्ते के बारे में पूछिए, रैंक के बारे में नहीं। "इस हफ़्ते क्या अच्छा रहा?" पूछना "कितने नंबर आए?" से ज़्यादा मदद करता है।</p>
+<h4>क्या मदद करता है</h4>
+<p>"तैयारी कैसी है?" से पहले "तुम कैसे हो?" पूछना। समय पर खाना और नींद। हफ़्ते में एक आराम का दिन, योजना का हिस्सा मानकर।</p>
+<h4>क्या चुभता है, भले प्यार से कहा जाए</h4>
+<p>रिश्तेदारों या टॉपर्स से तुलना। रिज़ल्ट के दिन रैंक या नंबर पूछना। हर फ़ोन पर "आगे का क्या प्लान है?" पूछना।</p>
+<h4>मैं ऐप में क्या करता/करती हूँ</h4>
+<p>मैं अपने चरण के 8 से 10 लोगों के छोटे समूह के साथ पढ़ता/पढ़ती हूँ, जिसमें एक इंसानी लीड है। हम रोज़ तीन छोटे काम करते हैं। ऐप में कोई रैंक या लीडरबोर्ड नहीं है।</p>`,
+      help: "आँकड़े UPSC के 2026 प्रीलिम्स रिज़ल्ट से (लगभग 5.49 लाख ने परीक्षा दी, 13,343 सफल, 1,016 पद), लॉन्च से पहले upsc.gov.in पर जाँचे जाएँगे। अगर कभी मेरी या अपनी चिंता हो, तो Tele-MANAS मुफ़्त और गोपनीय है: 14416 या 1-800-891-4416 पर कॉल करें। लॉन्च से पहले हेल्पलाइन नंबरों पर टेस्ट कॉल होगी।"
+    },
+    posts: [
+      ["Telegram", "डेली चाय चैनल · दिन 1, 7:30", `☕ आज की चाय · 5 कार्ड · लगभग 7 मिनट
+
+1. राज्य विधेयकों पर राज्यपाल की स्वीकृति: अनुच्छेद 200 क्या कहता है
+2. एल नीनो: इस साल के मानसून पर असर
+3. GI टैग: नाम सुरक्षित होता है, रेसिपी नहीं
+4. सेंडाई फ्रेमवर्क: आपदा जोखिम पर भारत के लक्ष्य
+5. अंत में एक हल्का कार्ड
+
+हर कार्ड पर स्रोत हैं और संपादक ने जाँचा है।
+ऐप में अपने पॉड के साथ पढ़ें: upscpods.app/chai
+
+UPSC से संबद्ध नहीं।`],
+      ["Reddit r/UPSC", "फ़ाउंडर पोस्ट · लॉन्च का दिन", `(Reddit पर यह पोस्ट अंग्रेज़ी में जाएगी, क्योंकि r/UPSC पर ज़्यादातर बातचीत अंग्रेज़ी में होती है। अंग्रेज़ी संस्करण देखें।)`],
+      ["Instagram", "रील कैप्शन · लॉन्च का दिन", `तैयारी अकेले नहीं करनी। ☕
+
+आपके चरण के 8 से 10 लोगों का पॉड। रोज़ 3 छोटे काम, फिर बस। इंसानी संपादक से जाँचे ख़बर नोट्स, हिंदी और अंग्रेज़ी में।
+
+Google Play पर मुफ़्त: लिंक बायो में।
+
+#UPSC #UPSCHindi #IAS #UPSC2027 #हिंदी_माध्यम
+UPSC से संबद्ध नहीं।`],
+      ["WhatsApp Channel", "डेली पोस्ट · दिन 1, 20:30", `शुभ संध्या। दिन बंद करने से पहले याद रखें: 3 में से 2 भी एक असली दिन है।
+
+कल की चाय 7:00 बजे आएगी। नींद भी तैयारी का हिस्सा है। 🌙`],
+      ["Instagram + WhatsApp Channel", "साप्ताहिक उद्धरण पोस्ट · रविवार", `"यदि तुम शत्रु को जानते हो और स्वयं को जानते हो, तो सौ युद्धों के परिणाम से डरने की ज़रूरत नहीं।"
+सुन त्ज़ु, द आर्ट ऑफ़ वॉर, अध्याय 3 (गाइल्स अनुवाद, 1910; हिंदी अनुवाद: हमारे संपादक)
+
+तैयारी के लिए: आपका "शत्रु" पेपर है, दूसरे अभ्यर्थी नहीं। इस हफ़्ते अपने सबसे कमज़ोर विषय के पिछले वर्षों के प्रश्नों पर 20 मिनट दें, दोनों को जान जाएँगे।
+
+मुफ़्त पढ़ें: गाइल्स अनुवाद पब्लिक डोमेन में है (Project Gutenberg)।
+
+[स्लाइड चित्र: हमारा चित्रित पोर्ट्रेट, "कलाकार की कल्पना" लेबल के साथ]`]
+    ]
+  }
+};
+
+let lang = "en";
+try { lang = localStorage.getItem("kit-lang") || "en"; } catch (e) {}
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const len = s => [...s].length;
+
+function renderListing(t) {
+  $("listing-panel").innerHTML = t.listing.map(([label, max, text, big], i) => {
+    const n = len(text), ok = n <= max;
+    return `<div class="field"><div class="label"><span>${label}</span><span class="row"><span class="count ${ok ? "ok" : "over"}">${n} / ${max}</span><button class="btn" type="button" data-copy="lst-${i}">Copy</button></span></div><p class="copytext${big ? " big" : ""}" id="lst-${i}">${esc(text)}</p></div>`;
+  }).join("");
+}
+
+function phoneUI(i, hi) {
+  const bar = `<div class="bar"><span>9:41</span><span>4G ▮▮▮</span></div>`;
+  const av = `<div class="avatars"><span style="background:#D9822B">A</span><span style="background:#4F6B3E">M</span><span style="background:#6B3A1F">S</span><span style="background:#3D2A4A">R</span><span style="background:#A85A1F">K</span></div>`;
+  if (i === 0) return bar + `<h4>${hi ? "पॉड · Attempt 2 · हिंदी" : "Pod · Attempt 2 · Hindi"}</h4>${av}<div class="mini"><b>Aman</b> ${hi ? "ने एक उत्तर साझा किया" : "shared an answer"} · 9:12</div><div class="mini"><b>Sana</b>: ${hi ? "भूमिका छोटी रखो, 2 लाइन काफ़ी" : "Keep the intro to 2 lines"}</div><div class="mini">☕ ${hi ? "मीरा ने चाय पिंग भेजी" : "Meera sent a chai ping"}</div><div class="mini" style="color:#4F6B3E"><b>${hi ? "पॉड लीड: प्रिया" : "Pod lead: Priya"}</b> · ${hi ? "रविवार कॉल 7 बजे" : "Sunday call at 7"}</div>`;
+  if (i === 1) return bar + `<h4>${hi ? "शुभ प्रभात, अर्जुन" : "Good morning, Arjun"}</h4><div class="seg3"><i class="on"></i><i></i><i></i></div><div style="font-size:9.5px;color:#8A7666">${hi ? "3 में से 1 पूरा" : "1 of 3 done"}</div><div class="task"><span class="tick done"></span>${hi ? "आज की चाय · 5 कार्ड" : "Today's Chai · 5 cards"}</div><div class="task"><span class="tick"></span>${hi ? "5 प्रीलिम्स प्रश्न" : "5 Prelims questions"}</div><div class="task"><span class="tick"></span>${hi ? "1 मेन्स उत्तर · 150 शब्द" : "1 Mains answer · 150 words"}</div>${av}`;
+  if (i === 2) return bar + `<div><span class="chip">GS III</span><span class="chip">Economy</span><span class="chip">Prelims</span></div><h4 style="font-family:Martel,serif">${hi ? "GI टैग नाम की रक्षा करता है, रेसिपी की नहीं" : "GI tag protects the name, not the recipe"}</h4><div style="font-family:Martel,serif;font-size:9.5px">${hi ? "भौगोलिक संकेतक बताता है कि उत्पाद किसी ख़ास जगह से आता है…" : "A Geographical Indication tells you a product comes from a specific place…"}</div><div class="mini"><b>${hi ? "UPSC के लिए क्यों" : "Why this matters for UPSC"}</b><br>• ${hi ? "बौद्धिक संपदा, TRIPS" : "Intellectual property, TRIPS"}</div><div class="trust">${hi ? "स्रोत लिखे हैं · संपादक ने जाँचा ✓" : "Sources listed · Checked by editor ✓"}</div>`;
+  if (i === 3) return bar + `<h4>${hi ? "दिन बंद करें" : "Close the day"}</h4><div class="mini">${hi ? "क्या हुआ?" : "What got done?"} <span class="chip">Chai</span><span class="chip">MCQ</span></div><div class="mini">${hi ? "किस चीज़ ने रोका?" : "What got in the way?"} <span class="chip">${hi ? "थकान" : "Tired"}</span></div><div class="moods">${(hi ? ["भारी","उदास","ठीक","अच्छा","हल्का"] : ["Heavy","Low","Okay","Good","Light"]).map((m, k) => `<span class="${k === 2 ? "sel" : ""}">${m}</span>`).join("")}</div><div style="font-size:9px;color:#8A7666">🔒 ${hi ? "इसे सिर्फ़ आप देख सकते हैं।" : "Only you can see this."}</div>`;
+  return bar + `<h4>${hi ? "रूम" : "Rooms"}</h4><div class="room"><span>${hi ? "शांत पढ़ाई · पॉड" : "Quiet study · pod"}</span><span class="live">● 6</span></div><div class="room"><span>${hi ? "चाय ब्रेक · 10 मिनट" : "Chai break · 10 min"}</span><span class="live">● 3</span></div><div class="room"><span>${hi ? "शुक्रवार क्विज़ नाइट" : "Friday quiz night"}</span><span style="font-size:8.5px;color:#8A7666">${hi ? "शुक्र 8 बजे" : "Fri 8 pm"}</span></div><div class="mini" style="font-size:9.5px">${hi ? "किसी से बात करनी है? · Tele-MANAS 14416" : "Need to talk? · Tele-MANAS 14416"}</div>`;
+}
+
+function renderShots(t) {
+  const hi = lang === "hi";
+  $("shots").innerHTML = t.shots.map(([cap, sub], i) => `<div class="shot s${i + 1}" role="img" aria-label="${esc(cap)}"><div class="cap">${esc(cap)}<small>${esc(sub)}</small></div><div class="device">${phoneUI(i, hi)}</div></div>`).join("");
+}
+
+function renderCalc(t) {
+  const dob = Math.max(1980, Math.min(2010, parseInt($("dob").value, 10) || 1998));
+  const cat = $("cat").value;
+  const used = Math.max(0, parseInt($("used").value, 10) || 0);
+  const rule = { gen: [6, 32], obc: [9, 35], scst: [Infinity, 37] }[cat];
+  // must not have reached the upper age on 1 Aug of the exam year; birth month unknown, so assume the earlier (conservative) case
+  const lastByAge = dob + rule[1] - 1;
+  const first = 2027;
+  const left = Math.max(0, rule[0] - used);
+  let last = Math.min(lastByAge, left === Infinity ? lastByAge : first + left - 1);
+  const big = $("calc-big"), tl = $("calc-timeline");
+  if (lastByAge < first || left === 0) {
+    big.textContent = t.calc_none;
+    tl.innerHTML = "";
+    return;
+  }
+  const attemptsLeft = left === Infinity ? "∞" : String(Math.min(left, last - first + 1));
+  big.textContent = t.calc_big(attemptsLeft === "∞" ? "∞" : attemptsLeft, last);
+  const rows = [[t.calc_rows[0], "CSE 2027 · 23 May"], [t.calc_rows[1], attemptsLeft === "∞" ? "No limit" : attemptsLeft], [t.calc_rows[2], "CSE " + last], [t.calc_rows[3], t.calc_planb]];
+  tl.innerHTML = rows.map(([a, b]) => `<div><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join("");
+}
+
+function renderFlow(t) {
+  $("flow").innerHTML = t.flow.map(([h, p, a, b], i) => `<div class="step"><span class="num">Screen ${i + 1}</span><div class="screen"><b>${esc(h)}</b>${i === 0 ? `<div class="seats" aria-label="7 of 10 seats filled">${"<i></i>".repeat(7)}${'<i class="empty"></i>'.repeat(3)}</div>` : ""}<span style="color:var(--muted)">${esc(p)}</span><div class="primary">${esc(a)}</div><div class="ghost">${esc(b)}</div></div></div>`).join("");
+  $("invite-msg").textContent = t.invite;
+}
+
+function renderParent(t) {
+  const p = t.parent;
+  $("parent-page").innerHTML = `<h3>${esc(p.title)}</h3><div class="from">${esc(p.from)}</div><div class="read">${p.body}</div><div class="help">${esc(p.help)}</div><div class="note">${esc(t.na)}</div>`;
+}
+
+function renderPosts(t) {
+  $("posts-grid").innerHTML = t.posts.map(([where, when, text], i) => `<div class="panel post"><div class="head"><div><div class="where">${esc(where)}</div><div class="when">${esc(when)}</div></div><button class="btn" type="button" data-copy="post-${i}">Copy</button></div><p class="copytext" id="post-${i}">${esc(text)}</p></div>`).join("");
+}
+
+function render() {
+  const t = T[lang];
+  document.documentElement.lang = lang === "hi" ? "hi" : "en";
+  document.querySelectorAll("[data-t]").forEach(el => { const v = t[el.dataset.t]; if (typeof v === "string") el.innerHTML = v; });
+  renderListing(t); renderShots(t); renderCalc(t); renderFlow(t); renderParent(t); renderPosts(t);
+  document.querySelectorAll(".seg [data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+}
+
+document.addEventListener("click", e => {
+  const lb = e.target.closest("[data-lang]");
+  if (lb) { lang = lb.dataset.lang; try { localStorage.setItem("kit-lang", lang); } catch (err) {} render(); return; }
+  const cb = e.target.closest("[data-copy]");
+  if (cb) {
+    const el = $(cb.dataset.copy);
+    const show = msg => { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(show.h); show.h = setTimeout(() => t.hidden = true, 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); show("Text selected. Press Ctrl+C to copy."); };
+    try { navigator.clipboard.writeText(el.innerText).then(() => show("Copied"), fallback); } catch (err) { fallback(); }
+  }
+});
+["dob", "cat", "used"].forEach(id => $(id).addEventListener("input", () => renderCalc(T[lang])));
+render();
+</script>
+
+</body></html>

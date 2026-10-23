@@ -1,0 +1,241 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Pods Routine Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: tool page. Left: template picker + editable block list. Right: live phone-wallpaper preview of the day. Stacks on phones. */
+:root {
+  --bg: #F7F2EA; --surface: #FFFDF9; --ink: #2A1B12; --muted: #6E5A4C; --line: #E4D8C8;
+  --chai: #6B3A1F; --saffron: #D9822B; --cardamom: #4F6B3E; --saffron-soft: #F6E2C9; --cardamom-soft: #E3EAD9;
+  --display: "Yatra One", "Mukta", system-ui, sans-serif;
+  --body: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+  --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+  --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.page { max-width: 1080px; margin: 0 auto; padding-inline: 20px; padding-block: 24px 56px; display: grid; gap: 24px; }
+header { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 5vw, 44px); color: var(--chai); margin: 0; line-height: 1.1; }
+header p { margin: 6px 0 0; color: var(--muted); max-width: 58ch; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); flex-wrap: wrap; }
+.seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--muted); padding: 4px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--chai); color: var(--bg); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
+@media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--saffron); }
+.templates { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.chip[aria-pressed="true"] { border-color: var(--chai); background: var(--saffron-soft); }
+.blocks { display: grid; gap: 8px; }
+.block { display: grid; grid-template-columns: 10px 128px minmax(0, 1fr) 96px auto; gap: 8px; align-items: center; background: var(--bg); border-radius: 10px; padding: 6px 8px; }
+@media (max-width: 520px) { .block { grid-template-columns: 10px 122px minmax(0, 1fr) auto; } .block .dur { grid-column: 3; } }
+.swatch { width: 10px; height: 32px; border-radius: 4px; }
+input, select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 5px 8px; width: 100%; min-width: 0; font-variant-numeric: tabular-nums; }
+.icon { font: inherit; border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 8px; width: 32px; height: 32px; cursor: pointer; }
+.add { display: flex; gap: 8px; flex-wrap: wrap; }
+.add button { font: inherit; font-size: 13px; border: 1px dashed var(--line); background: transparent; color: var(--ink); border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+.add button i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+.days { display: flex; gap: 6px; flex-wrap: wrap; }
+.days button { font: inherit; font-size: 13px; width: 44px; height: 32px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer; }
+.days button[aria-pressed="true"] { background: var(--cardamom); color: #FFF6EA; border-color: var(--cardamom); }
+.notes { display: grid; gap: 6px; }
+.notes p { margin: 0; font-size: 14px; background: var(--cardamom-soft); color: var(--ink); border-radius: 8px; padding: 6px 10px; }
+.notes p.warn { background: var(--saffron-soft); }
+/* wallpaper */
+.preview { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); display: grid; gap: 10px; justify-items: center; }
+@media (max-width: 820px) { .preview { position: static; } }
+.wall { width: 100%; max-width: 300px; aspect-ratio: 9 / 19.5; border-radius: 28px; background: #2A1B12; color: #FFF6EA; padding: 34px 18px 18px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 0 0 6px #120B07; overflow: hidden; }
+.wall .title { font-family: var(--display); font-size: 20px; line-height: 1.1; }
+.wall .sub { font-size: 11px; opacity: .7; margin-top: -6px; }
+.track { flex: 1; position: relative; border-left: 1px solid rgba(255,246,234,.18); margin-left: 34px; }
+.track .seg-b { position: absolute; left: 6px; right: 0; border-radius: 6px; padding: 1px 7px; font-size: 10px; line-height: 1.25; overflow: hidden; color: #FFF6EA; }
+.track .hr { position: absolute; left: -34px; font-family: var(--mono); font-size: 9px; opacity: .55; transform: translateY(-50%); }
+.wall .quote { font-size: 10.5px; opacity: .8; border-top: 1px solid rgba(255,246,234,.18); padding-top: 8px; }
+.wall .brand { display: flex; justify-content: space-between; font-size: 10px; opacity: .75; }
+.wall .brand b { font-family: var(--display); font-weight: 400; font-size: 13px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.btn { font: inherit; font-weight: 500; border-radius: 10px; padding: 8px 14px; border: 1px solid var(--chai); cursor: pointer; background: var(--chai); color: var(--bg); }
+.btn.ghost { background: transparent; color: var(--chai); }
+.small { font-size: 13px; color: var(--muted); text-align: center; max-width: 300px; margin: 0; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 14px; max-width: calc(100% - 32px); }
+</style>
+
+<div class="page">
+  <header>
+    <div>
+      <h1 id="t-h1"></h1>
+      <p id="t-lede"></p>
+    </div>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" id="l-en" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" id="l-hi" data-lang="hi" aria-pressed="false">हिंदी</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div style="display:grid;gap:16px;min-width:0">
+      <div class="panel">
+        <span class="label" id="t-start"></span>
+        <div class="templates" id="templates"></div>
+      </div>
+      <div class="panel">
+        <span class="label" id="t-day"></span>
+        <div class="blocks" id="blocks"></div>
+        <div class="add" id="add"></div>
+      </div>
+      <div class="panel">
+        <span class="label" id="t-rest"></span>
+        <div class="days" id="days"></div>
+        <div class="notes" id="notes" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="preview">
+      <div class="wall" id="wall" role="img" aria-label="Routine wallpaper preview">
+        <div class="title" id="w-title"></div>
+        <div class="sub" id="w-sub"></div>
+        <div class="track" id="track"></div>
+        <div class="quote" id="w-quote"></div>
+        <div class="brand"><b>UPSC Pods</b><span id="w-na"></span></div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" id="b-save"></button>
+        <button class="btn ghost" type="button" id="b-copy"></button>
+      </div>
+      <p class="small" id="t-privacy"></p>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const TYPES = {
+  chai:   { c: "#A85A1F", en: "Chai + today's cards", hi: "चाय + आज के कार्ड" },
+  study:  { c: "#6B3A1F", en: "Study block", hi: "पढ़ाई" },
+  revise: { c: "#8A4B2A", en: "Revision", hi: "दोहराव" },
+  answer: { c: "#3D2A4A", en: "Mains answer", hi: "मेन्स उत्तर" },
+  mock:   { c: "#5A3A6B", en: "Mock test", hi: "मॉक टेस्ट" },
+  work:   { c: "#5C5C5C", en: "Work", hi: "नौकरी" },
+  move:   { c: "#4F6B3E", en: "Walk or exercise", hi: "टहलना या व्यायाम" },
+  meal:   { c: "#7A6A3A", en: "Meal", hi: "खाना" },
+  family: { c: "#2F6B6B", en: "Family time", hi: "परिवार का समय" },
+  care:   { c: "#2F6B6B", en: "Home and caring", hi: "घर और देखभाल" },
+  close:  { c: "#8A7666", en: "Close the day", hi: "दिन बंद करें" },
+  sleep:  { c: "#1E2A3A", en: "Sleep", hi: "नींद" }
+};
+const B = (type, at, min) => ({ type, at, min, note: "" });
+const TEMPLATES = {
+  full:  { en: "Full-time", hi: "फ़ुल-टाइम", rest: [6], blocks: [B("chai","06:30",30),B("study","07:15",90),B("move","09:00",30),B("meal","09:30",30),B("study","10:15",90),B("meal","13:00",45),B("revise","14:00",50),B("study","15:15",90),B("move","17:00",45),B("answer","18:00",30),B("family","19:00",60),B("meal","20:00",45),B("close","21:30",15),B("sleep","22:30",450)] },
+  work:  { en: "Working", hi: "नौकरी के साथ", rest: [6], blocks: [B("chai","06:00",25),B("study","06:30",60),B("meal","07:45",30),B("work","09:00",540),B("move","18:15",30),B("meal","19:00",45),B("answer","20:00",30),B("revise","20:40",40),B("close","21:45",15),B("sleep","22:30",450)] },
+  repeat:{ en: "Repeater", hi: "दोबारा प्रयास", rest: [3, 6], blocks: [B("chai","07:00",30),B("revise","07:45",60),B("move","09:00",30),B("study","09:45",90),B("meal","13:00",45),B("mock","14:00",120),B("move","17:00",45),B("answer","18:00",30),B("family","19:00",60),B("close","21:30",15),B("sleep","22:30",480)] },
+  care:  { en: "Home and caring", hi: "घर और देखभाल", rest: [6], blocks: [B("chai","06:00",25),B("care","06:30",150),B("study","09:15",60),B("care","10:30",120),B("meal","13:00",45),B("study","14:00",60),B("move","16:30",30),B("care","17:00",180),B("answer","20:15",30),B("close","21:30",15),B("sleep","22:15",465)] },
+  month: { en: "Exam month", hi: "परीक्षा का महीना", rest: [6], blocks: [B("chai","06:30",30),B("mock","07:15",120),B("meal","09:30",30),B("revise","10:00",90),B("move","12:00",30),B("meal","13:00",45),B("revise","14:00",90),B("move","16:00",30),B("revise","16:45",60),B("family","19:00",60),B("close","21:00",15),B("sleep","22:00",480)] }
+};
+const UI = {
+  en: { h1: "Build your routine", lede: "Like a custom workout plan, for prep. Pick a starting point, change the times, and save it as a phone wallpaper. There's no one right routine.", start: "Start from", day: "Your day", rest: "Rest days (at least one)", wtitle: "My routine", wsub: rest => rest.length ? `Rest: ${rest}` : "No rest day yet", quote: "“Learn thoroughly what should be learnt; then live by that learning.” Tirukkural 391 (our rendering)", na: "Not affiliated with UPSC", save: "Save as wallpaper", copy: "Copy as text", privacy: "Your routine stays in this browser. No login, nothing sent anywhere.", add: "Add", del: "Remove", note: "Note (optional)",
+    days: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+    n_rest: "Pick at least one rest day. Rest is part of prep.", n_sleep: h => `Sleep is about ${h} hours. 7 or more helps memory.`, n_study: h => `About ${h} hours of focused study. That's plenty; more isn't always better.`, n_move: "Add a walk or some exercise. Even 20 minutes helps.", n_ok: "This looks balanced. Try it for a week, then change one thing.", n_overlap: "Two blocks overlap. Check the times.",
+    saved: "Preview only: saving as an image works on the live site.", copied: "Copied. Paste it into WhatsApp or notes.", sel: "Text selected. Press Ctrl+C to copy." },
+  hi: { h1: "अपनी दिनचर्या बनाएँ", lede: "तैयारी के लिए कस्टम वर्कआउट प्लान जैसा। एक शुरुआत चुनें, समय बदलें, और फ़ोन वॉलपेपर बनाएँ। कोई एक सही दिनचर्या नहीं होती।", start: "यहाँ से शुरू करें", day: "आपका दिन", rest: "आराम के दिन (कम से कम एक)", wtitle: "मेरी दिनचर्या", wsub: rest => rest.length ? `आराम: ${rest}` : "अभी कोई आराम का दिन नहीं", quote: "“जो सीखना चाहिए, उसे पूरी तरह सीखो; फिर उस सीख के अनुसार जियो।” तिरुक्कुरल 391 (हमारा अनुवाद)", na: "UPSC से संबद्ध नहीं", save: "वॉलपेपर बनाएँ", copy: "टेक्स्ट कॉपी करें", privacy: "आपकी दिनचर्या इसी ब्राउज़र में रहती है। कोई लॉगिन नहीं, कुछ भी कहीं नहीं भेजा जाता।", add: "जोड़ें", del: "हटाएँ", note: "नोट (वैकल्पिक)",
+    days: ["सोम","मंगल","बुध","गुरु","शुक्र","शनि","रवि"],
+    n_rest: "कम से कम एक आराम का दिन चुनें। आराम भी तैयारी है।", n_sleep: h => `नींद लगभग ${h} घंटे है। 7 या ज़्यादा याददाश्त में मदद करती है।`, n_study: h => `लगभग ${h} घंटे की पढ़ाई। यह काफ़ी है; ज़्यादा हमेशा बेहतर नहीं।`, n_move: "टहलना या व्यायाम जोड़ें। 20 मिनट भी मदद करते हैं।", n_ok: "संतुलित लग रहा है। एक हफ़्ता आज़माएँ, फिर एक चीज़ बदलें।", n_overlap: "दो ब्लॉक एक-दूसरे पर आ रहे हैं। समय जाँचें।",
+    saved: "केवल प्रीव्यू: इमेज सेव करना लाइव साइट पर काम करेगा।", copied: "कॉपी हो गया। WhatsApp या नोट्स में पेस्ट करें।", sel: "टेक्स्ट चुना गया। कॉपी के लिए Ctrl+C दबाएँ।" }
+};
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+const fmt = m => { m = ((m % 1440) + 1440) % 1440; return String(Math.floor(m / 60)).padStart(2, "0") + ":" + String(m % 60).padStart(2, "0"); };
+let state = { lang: "en", tpl: "full", blocks: TEMPLATES.full.blocks.map(b => ({ ...b })), rest: [...TEMPLATES.full.rest] };
+try { const s = JSON.parse(localStorage.getItem("pods-routine") || "null"); if (s && Array.isArray(s.blocks)) state = s; } catch (e) {}
+const save = () => { try { localStorage.setItem("pods-routine", JSON.stringify(state)); } catch (e) {} };
+
+function sortBlocks() { state.blocks.sort((a, b) => toMin(a.at) - toMin(b.at)); }
+function render() {
+  const u = UI[state.lang], L = state.lang;
+  document.documentElement.lang = L;
+  $("t-h1").textContent = u.h1; $("t-lede").textContent = u.lede; $("t-start").textContent = u.start; $("t-day").textContent = u.day; $("t-rest").textContent = u.rest;
+  $("b-save").textContent = u.save; $("b-copy").textContent = u.copy; $("t-privacy").textContent = u.privacy;
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === L)));
+  $("templates").innerHTML = Object.entries(TEMPLATES).map(([k, t]) => `<button type="button" class="chip" data-tpl="${k}" aria-pressed="${state.tpl === k}">${esc(t[L])}</button>`).join("");
+  $("blocks").innerHTML = state.blocks.map((b, i) => `<div class="block">
+      <span class="swatch" style="background:${TYPES[b.type].c}"></span>
+      <input type="time" id="at-${i}" aria-label="Start time" value="${b.at}" data-i="${i}" data-f="at">
+      <input type="text" id="nt-${i}" aria-label="${esc(TYPES[b.type][L])}" value="${esc(b.note)}" placeholder="${esc(TYPES[b.type][L])}" data-i="${i}" data-f="note">
+      <select class="dur" id="du-${i}" aria-label="Length" data-i="${i}" data-f="min">${[15,20,25,30,40,45,50,60,75,90,120,150,180,240,300,360,420,450,465,480,540].map(m => `<option value="${m}"${m === b.min ? " selected" : ""}>${m < 60 ? m + " min" : (m / 60).toFixed(m % 60 ? 2 : 0).replace(/\.?0+$/, "") + " h"}</option>`).join("")}</select>
+      <button type="button" class="icon" data-del="${i}" aria-label="${u.del}">×</button>
+    </div>`).join("");
+  $("add").innerHTML = Object.entries(TYPES).map(([k, t]) => `<button type="button" data-add="${k}"><i style="background:${t.c}"></i>${esc(t[L])}</button>`).join("");
+  $("days").innerHTML = u.days.map((d, i) => `<button type="button" data-day="${i}" aria-pressed="${state.rest.includes(i)}">${d}</button>`).join("");
+  renderWall(); renderNotes();
+}
+function renderWall() {
+  const u = UI[state.lang], L = state.lang;
+  $("w-title").textContent = u.wtitle;
+  $("w-sub").textContent = u.wsub(state.rest.slice().sort().map(i => u.days[i]).join(", "));
+  $("w-quote").textContent = u.quote; $("w-na").textContent = u.na;
+  // show 05:00 to 24:00 (sleep clipped)
+  const start = 5 * 60, end = 24 * 60, span = end - start;
+  let html = "";
+  for (let h = 6; h <= 24; h += 3) html += `<span class="hr" style="top:${((h * 60 - start) / span) * 100}%">${String(h % 24).padStart(2, "0")}:00</span>`;
+  state.blocks.forEach(b => {
+    const s = Math.max(start, toMin(b.at)), e = Math.min(end, toMin(b.at) + b.min);
+    if (e <= s) return;
+    const top = ((s - start) / span) * 100, h = ((e - s) / span) * 100;
+    const label = b.note || TYPES[b.type][L];
+    html += `<div class="seg-b" style="top:${top}%;height:calc(${h}% - 2px);background:${TYPES[b.type].c}">${h > 2.2 ? esc(label) : ""}</div>`;
+  });
+  $("track").innerHTML = html;
+}
+function renderNotes() {
+  const u = UI[state.lang];
+  const sum = types => state.blocks.filter(b => types.includes(b.type)).reduce((s, b) => s + b.min, 0) / 60;
+  const notes = [];
+  const sorted = state.blocks.slice().sort((a, b) => toMin(a.at) - toMin(b.at));
+  for (let i = 1; i < sorted.length; i++) if (toMin(sorted[i - 1].at) + sorted[i - 1].min > toMin(sorted[i].at)) { notes.push(["warn", u.n_overlap]); break; }
+  if (!state.rest.length) notes.push(["warn", u.n_rest]);
+  const sleep = sum(["sleep"]); if (sleep < 7) notes.push(["warn", u.n_sleep(sleep.toFixed(1).replace(/\.0$/, ""))]);
+  const study = sum(["study", "revise", "answer", "mock"]); if (study > 9) notes.push(["warn", u.n_study(study.toFixed(1).replace(/\.0$/, ""))]);
+  if (!sum(["move"])) notes.push(["warn", u.n_move]);
+  if (!notes.length) notes.push(["", u.n_ok]);
+  $("notes").innerHTML = notes.map(([c, t]) => `<p class="${c}">${esc(t)}</p>`).join("");
+}
+function toast(m) { const el = $("toast"); el.textContent = m; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 2200); }
+document.addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.lang) { state.lang = t.dataset.lang; }
+  else if (t.dataset.tpl) { const tp = TEMPLATES[t.dataset.tpl]; state.tpl = t.dataset.tpl; state.blocks = tp.blocks.map(b => ({ ...b })); state.rest = [...tp.rest]; }
+  else if (t.dataset.del) { state.blocks.splice(+t.dataset.del, 1); }
+  else if (t.dataset.add) { const last = state.blocks.filter(b => b.type !== "sleep").slice(-1)[0]; const at = last ? fmt(toMin(last.at) + last.min) : "08:00"; state.blocks.push(B(t.dataset.add, at, 30)); sortBlocks(); }
+  else if (t.dataset.day) { const d = +t.dataset.day; state.rest = state.rest.includes(d) ? state.rest.filter(x => x !== d) : [...state.rest, d]; }
+  else if (t.id === "b-save") { toast(UI[state.lang].saved); return; }
+  else if (t.id === "b-copy") {
+    const u = UI[state.lang], L = state.lang;
+    const text = u.wtitle + "\n" + state.blocks.map(b => `${b.at}  ${b.note || TYPES[b.type][L]} (${b.min} min)`).join("\n") + "\n" + u.wsub(state.rest.slice().sort().map(i => u.days[i]).join(", ")) + "\nupscpods.app/routine";
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents($("wall")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast(u.sel); };
+    try { navigator.clipboard.writeText(text).then(() => toast(u.copied), fallback); } catch (err) { fallback(); }
+    return;
+  } else return;
+  save(); render();
+});
+document.addEventListener("change", e => {
+  const el = e.target; if (el.dataset.i === undefined) return;
+  const b = state.blocks[+el.dataset.i]; if (!b) return;
+  if (el.dataset.f === "at" && el.value) { b.at = el.value; sortBlocks(); save(); render(); return; }
+  if (el.dataset.f === "min") b.min = +el.value;
+  if (el.dataset.f === "note") b.note = el.value.slice(0, 40);
+  save(); renderWall(); renderNotes();
+});
+render();
+</script>
+
+</body></html>

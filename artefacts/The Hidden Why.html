@@ -1,0 +1,406 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Hidden Why</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Mukta:wght@400;600;800&display=swap">
+<style>
+/* Layout: a phone-sized story player beside the proposal; stacks to one column on phones. Colours from the app's tokens.json. */
+:root{
+  --paper:#FFF8F3; --surface:#FFFDFB; --ink:#201B17; --muted:#6B5E54; --line:#EADDD2;
+  --chai:#8D4F01; --chai-soft:#FFDCC0; --teal:#14696B; --teal-soft:#D5ECEB; --mari:#C98A0B;
+  --pill:rgba(255,253,251,.95); --pill-ink:#201B17;
+  --f-read:"Martel", Georgia, "Noto Serif Devanagari", serif;
+  --f-ui:"Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#18120D; --surface:#211912; --ink:#E9E1DB; --muted:#A99B90; --line:#3A2E24;
+  --chai:#FFB876; --chai-soft:#3E2B1A; --teal:#7FD0CF; --teal-soft:#173634; --mari:#F2C14E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#18120D; --surface:#211912; --ink:#E9E1DB; --muted:#A99B90; --line:#3A2E24;
+  --chai:#FFB876; --chai-soft:#3E2B1A; --teal:#7FD0CF; --teal-soft:#173634; --mari:#F2C14E; color-scheme:dark }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:16px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:6px;max-width:62ch}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--chai);font-weight:600}
+h1{font-family:var(--f-read);font-weight:800;font-size:clamp(30px,5vw,44px);line-height:1.15;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:0;font-size:17px}
+.grid{display:grid;grid-template-columns:380px minmax(0,1fr);gap:40px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.left{display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (max-width:860px){.left{position:static}}
+.controls{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;color:var(--muted);font:600 14px var(--f-ui);padding:5px 14px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.picker{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.picker button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:7px 8px;text-align:left;cursor:pointer;font:600 12.5px/1.25 var(--f-ui);min-height:48px}
+.picker button[aria-current="true"]{border-color:var(--chai);background:var(--chai-soft)}
+.picker small{display:block;color:var(--muted);font-weight:400;font-size:11px;margin-top:2px}
+button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* Phone */
+.phone{position:relative;width:100%;max-width:380px;aspect-ratio:9/16;border-radius:26px;overflow:hidden;background:#1d1611;box-shadow:0 18px 40px -18px rgba(0,0,0,.45);user-select:none}
+.bars{position:absolute;top:10px;left:12px;right:12px;display:flex;gap:4px;z-index:5}
+.bars i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
+.bars i b{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+.bars i.done b{width:100%}
+.topline{position:absolute;top:20px;left:14px;right:14px;z-index:5;display:flex;justify-content:space-between;color:#fff;font:600 12px var(--f-ui);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.scene{position:absolute;inset:0;overflow:hidden;background:#F3E6D3}
+.phone::before{content:"";position:absolute;top:0;left:0;right:0;height:64px;background:linear-gradient(rgba(29,22,17,.55),rgba(29,22,17,0));z-index:4;pointer-events:none}
+.phone.cardmode::before{display:none}
+.phone.cardmode .topline{color:var(--muted);text-shadow:none}
+.phone.cardmode .bars i{background:var(--line)}
+.phone.cardmode .bars i b{background:var(--chai)}
+.scene .pan{position:absolute;inset:0;transition:transform 1.3s cubic-bezier(.45,.05,.25,1)}
+.scene .drift{position:absolute;inset:0;animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.04)}}
+.scene svg{width:100%;height:100%;display:block}
+.cap{position:absolute;left:14px;right:14px;bottom:13%;z-index:4;background:var(--pill);color:var(--pill-ink);border-radius:14px;padding:12px 14px;text-align:center;
+  font:800 clamp(17px,4.8vw,21px)/1.18 var(--f-ui);text-transform:uppercase;letter-spacing:.01em;box-shadow:0 6px 18px -8px rgba(0,0,0,.5);text-wrap:balance}
+.cap.hi{text-transform:none;font-weight:700;line-height:1.35}
+.cap.reveal{background:#8D4F01;color:#FFF8F3}
+.tap{position:absolute;top:0;bottom:0;z-index:6;width:38%;background:transparent;border:0;cursor:pointer}
+.tap.prev{left:0}.tap.next{right:0;width:62%}
+.card{position:absolute;inset:0;z-index:3;background:var(--surface);color:var(--ink);padding:52px 22px 22px;display:flex;flex-direction:column;gap:12px;overflow:auto}
+.card h3{margin:0;font:600 12px var(--f-ui);letter-spacing:.09em;text-transform:uppercase;color:var(--chai)}
+.card .term{align-self:flex-start;background:var(--teal-soft);color:var(--teal);border-radius:999px;padding:3px 12px;font:600 13px var(--f-ui)}
+.card blockquote{margin:0;font:400 17px/1.6 var(--f-read)}
+.card p{margin:0}
+.card .q{font:700 16px/1.45 var(--f-read)}
+.card .hint{color:var(--muted)}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.card li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:baseline;font-size:14.5px;line-height:1.45}
+.chip{font:600 11px var(--f-ui);letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);border-radius:6px;padding:1px 6px;color:var(--muted);white-space:nowrap}
+.src{font-size:13px;color:var(--muted)}
+.vf{color:var(--chai);font-weight:600}
+.copy{align-self:flex-start;border:1px solid var(--line);background:transparent;color:var(--ink);font:600 13px var(--f-ui);border-radius:8px;padding:5px 12px;cursor:pointer;position:relative;z-index:7}
+.navrow{display:flex;justify-content:space-between;gap:8px}
+.navrow button{flex:1;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 14px var(--f-ui);border-radius:10px;padding:8px;cursor:pointer}
+.navrow button:disabled{opacity:.4;cursor:default}
+.note{font-size:12.5px;color:var(--muted);margin:0}
+
+/* Proposal */
+.prop{display:flex;flex-direction:column;gap:30px;min-width:0}
+.prop section{display:flex;flex-direction:column;gap:10px;max-width:68ch}
+.prop h2{font-family:var(--f-read);font-weight:700;font-size:23px;line-height:1.3;margin:0;text-wrap:balance}
+.prop p{margin:0}
+.prop ul,.prop ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:7px}
+.prop strong{font-weight:600}
+.anatomy{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;max-width:none}
+.anatomy div{border-top:2px solid var(--chai);padding-top:8px;font-size:14.5px}
+.anatomy b{display:block;font-weight:600}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:var(--surface)}
+tr:last-child td{border-bottom:0}
+code{font-size:.9em;background:var(--chai-soft);padding:0 4px;border-radius:4px;overflow-wrap:anywhere}
+@media (prefers-reduced-motion: reduce){.scene .pan{transition:none}.scene .drift{animation:none}.bars i b{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">New content format · proposal</span>
+    <h1>The Hidden Why</h1>
+    <p class="lede">Short picture stories in the style of the Deepstash ads, with a Freakonomics twist. Each one starts with a claim that sounds wrong, explains it in a few captions, names the idea, and ends with a line an aspirant can say in an interview.</p>
+  </header>
+
+  <div class="grid">
+    <div class="left">
+      <div class="controls">
+        <span class="note" id="hint">Tap the right side to go on, the left to go back.</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button id="lang-en" aria-pressed="true">EN</button><button id="lang-hi" aria-pressed="false">हिन्दी</button>
+        </div>
+      </div>
+      <div class="phone" id="phone" aria-live="polite">
+        <div class="bars" id="bars"></div>
+        <div class="topline"><span id="storyTitle"></span><span id="count"></span></div>
+        <div class="scene"><div class="pan" id="pan"><div class="drift" id="art"></div></div></div>
+        <div class="cap" id="cap"></div>
+        <div class="card" id="card" hidden></div>
+        <button class="tap prev" id="tapPrev" aria-label="Previous"></button>
+        <button class="tap next" id="tapNext" aria-label="Next"></button>
+      </div>
+      <div class="navrow"><button id="prev">Back</button><button id="next">Next</button></div>
+      <div class="picker" id="picker"></div>
+      <p class="note">All six are drafts. Facts marked “check” on the sources card wait for a subject editor, and every Hindi line waits for the Hindi editor.</p>
+    </div>
+
+    <div class="prop">
+      <section>
+        <h2>What we took from Deepstash</h2>
+        <ul>
+          <li><strong>One idea per story.</strong> The cobra ad never tries to teach economics. It tells one story and stops.</li>
+          <li><strong>A hook that sounds wrong.</strong> “If a hospital is ranked on survival rates…” makes you need the next frame.</li>
+          <li><strong>One caption per frame, over one etched drawing.</strong> The camera moves across a single sepia illustration, so a story needs one picture, not six.</li>
+          <li><strong>The name comes last.</strong> “Economists call this the Cobra Effect” lands after you already understand it, which is why it sticks.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>What we added for UPSC</h2>
+        <p>Deepstash stops at the name. An aspirant needs to use it, and needs not to be caught out by it. So every story ends with three cards:</p>
+        <div class="anatomy">
+          <div><b>Say it smart</b>A 40-word line for the interview or an answer opening, in the aspirant's own voice.</div>
+          <div><b>Careful</b>The nuance a board member would raise. The Delhi cobra story in the ad has no archive record; Hanoi's rat bounty does.</div>
+          <div><b>If they ask next</b>The likely follow-up question and how to handle it.</div>
+          <div><b>Use it in</b>Which paper and which kind of answer it fits, plus sources with check flags.</div>
+        </div>
+        <p>The Careful card is what makes someone sound smart rather than glib. Repeating the popular version of a story is easy. Knowing which version is documented, and where the evidence stops, is what a board notices.</p>
+      </section>
+
+      <section>
+        <h2>The Freakonomics part</h2>
+        <p>Freakonomics works because it asks why people do what they do, and answers with incentives and data. Four of the six samples follow that pattern with Indian evidence: Punjab's water law and stubble fires, the panchayat reservation that turned into a natural experiment, ASER's reading numbers, and topper talks as survivorship bias. Two are classics an interviewer may already know, the rat bounty and the day-care fine, told with the documented details.</p>
+      </section>
+
+      <section>
+        <h2>The six samples</h2>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Story</th><th>Idea it names</th><th>Papers</th><th>To check</th></tr></thead>
+          <tbody id="sampleRows"></tbody>
+        </table></div>
+      </section>
+
+      <section>
+        <h2>What it would take to add it to the app</h2>
+        <ol>
+          <li><strong>A template, <code>hidden-why</code>.</strong> Schema, fill schema, brief and config, like the other 55. The six samples already use the pack shape (<code>upsc-pods/hidden-why@1</code>) and sit in <code>content/hidden-why/</code>.</li>
+          <li><strong>No new engine.</strong> It runs on the existing Step-through engine with one new look: a full-screen illustration that pans to a focus point per frame, with the caption pill on top. With motion off, each frame shows a still crop.</li>
+          <li><strong>One tall illustration per story</strong> (360×640) with focus points per frame. The preview uses our own SVG drawings in the app palette. For launch, I'd commission an illustrator for an etched house style; there are no web photos, as with the rest of the pack.</li>
+          <li><strong>Validator rules:</strong> captions of 16 words or fewer, the last frame names the idea, Careful and at least one source are required, and every number must appear in the source text.</li>
+          <li><strong>An “interview” tag.</strong> The interview is listed as “not covered on purpose” in <code>exam-formats.json</code>. This would be the first format aimed at it, so that file needs a new entry.</li>
+          <li><strong>People:</strong> a subject editor checks the flagged facts (the ASER figures, Punjab's free-power year, the Hanoi and Wald details), and the Hindi editor checks every Hindi line.</li>
+          <li><strong>Optional app features:</strong> a “My smart lines” list where the Say-it-smart lines are saved, and a share card for them. Neither is needed to ship the stories.</li>
+        </ol>
+        <p>Haiku can fill this template from a source text, like the other types. The source just has to name the study or record each story stands on.</p>
+      </section>
+
+      <section>
+        <h2>Next stories in the queue</h2>
+        <ul>
+          <li>Elinor Ostrom and Uttarakhand's van panchayats: why the commons don't always end in tragedy.</li>
+          <li>Braess's paradox: why a new road can make traffic slower.</li>
+          <li>Moral hazard and crop insurance: when cover changes what farmers plant.</li>
+          <li>Gresham's law, from Mughal coins to bad money driving out good.</li>
+          <li>The Matthew effect: why early advantages in school compound.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA = [{"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["mains"], "papers": ["interview", "mains-gs2", "mains-gs4", "mains-essay"], "formats": ["interview-talk", "mains-answer"]}, "id": "cobra-effect-hanoi-rats", "tone": "NEUTRAL", "title": {"en": "The bounty that bred more rats", "hi": "इनाम जिसने चूहे बढ़ा दिए"}, "scene": "rats", "frames": [{"en": "Pay people to kill rats, and you can end up with more rats.", "hi": "चूहे मारने पर इनाम दो, और चूहे घटने के बजाय बढ़ सकते हैं।", "focus": [180, 320, 1]}, {"en": "Hanoi, 1902. Fearing plague, French rulers pay a bounty for every rat killed.", "hi": "हनोई, 1902। प्लेग के डर से फ़्रांसीसी शासक हर मरे चूहे पर इनाम देने लगे।", "focus": [180, 130, 1.7]}, {"en": "The proof they ask for: just bring in the tail.", "hi": "सबूत क्या चाहिए? बस चूहे की पूँछ ले आओ।", "focus": [180, 320, 1.9]}, {"en": "Soon, rats without tails are seen running through the city.", "hi": "जल्द ही शहर में बिना पूँछ वाले चूहे घूमते दिखने लगे।", "focus": [150, 500, 1.7]}, {"en": "People cut off tails, let the rats go, and some even farmed them.", "hi": "लोग पूँछ काटकर चूहे छोड़ देते थे, और कुछ ने तो चूहे पालने शुरू कर दिए।", "focus": [270, 560, 2.1]}, {"en": "Economists call this the Cobra Effect.", "hi": "अर्थशास्त्री इसे 'कोबरा इफ़ेक्ट' कहते हैं।", "focus": [180, 320, 1]}], "named": {"en": "Cobra Effect (a perverse incentive)", "hi": "कोबरा इफ़ेक्ट (उल्टा असर करने वाला प्रोत्साहन)"}, "sayItSmart": {"en": "A scheme gets what it pays for, not what it hopes for. In 1902 Hanoi paid for rat tails and ended up breeding rats. So before judging a scheme, I'd ask what exactly its money is tied to.", "hi": "कोई भी योजना उसी चीज़ को बढ़ाती है जिसका वह भुगतान करती है, उसे नहीं जिसकी वह उम्मीद करती है। 1902 में हनोई ने चूहों की पूँछ का पैसा दिया और चूहे पलने लगे। इसलिए मैं पहले देखूँगा कि योजना का पैसा किस चीज़ से बँधा है।"}, "careful": {"en": "The famous Delhi cobra version has no archive record that anyone has found; economist Horst Siebert popularised it in 2001. The Hanoi rat bounty is documented by historian Michael Vann, so quote Hanoi.", "hi": "दिल्ली के कोबरा वाली मशहूर कहानी का कोई सरकारी रिकॉर्ड अब तक नहीं मिला; इसे 2001 में अर्थशास्त्री होर्स्ट ज़ीबर्ट ने लोकप्रिय बनाया। हनोई के चूहों वाला इनाम इतिहासकार माइकल वैन ने दस्तावेज़ों से साबित किया है, इसलिए उदाहरण हनोई का दें।"}, "followUp": {"q": {"en": "Can you give an Indian example?", "hi": "क्या आप कोई भारतीय उदाहरण दे सकते हैं?"}, "hint": {"en": "Pick one you can back with a source, and frame it as a risk to design against, not as an accusation.", "hi": "ऐसा उदाहरण चुनें जिसका स्रोत आप बता सकें, और उसे आरोप की तरह नहीं, बल्कि एक जोखिम की तरह रखें जिससे बचकर योजना बनानी है।"}}, "useItIn": [{"paper": "mains-gs2", "en": "Opening line for answers on scheme design, outcome-based funding or targets for officials.", "hi": "योजना की बनावट, नतीजों पर आधारित फ़ंडिंग या अफ़सरों के लक्ष्यों वाले उत्तरों की पहली पंक्ति।"}, {"paper": "mains-gs4", "en": "Incentives versus intrinsic motivation in public service.", "hi": "लोक सेवा में प्रोत्साहन बनाम भीतर की प्रेरणा।"}, {"paper": "mains-essay", "en": "Any essay on good intentions and unintended consequences.", "hi": "अच्छी नीयत और अनचाहे नतीजों वाला कोई भी निबंध।"}], "linkedPacks": [], "sources": [{"label": "Michael G. Vann, 'Of Rats, Rice, and Race: The Great Hanoi Rat Massacre', French Colonial History, vol. 4 (2003); Vann and Clarke, The Great Hanoi Rat Hunt (2019)", "verify": false}, {"label": "Horst Siebert, Der Kobra-Effekt (2001)", "verify": true}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}, {"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["mains"], "papers": ["interview", "mains-gs2", "mains-essay"], "formats": ["interview-talk", "mains-answer"]}, "id": "goodharts-law-report-cards", "tone": "NEUTRAL", "title": {"en": "When a number becomes a target", "hi": "जब आँकड़ा ही लक्ष्य बन जाए"}, "scene": "goodhart", "frames": [{"en": "Rank hospitals on survival rates, and some very sick patients get turned away.", "hi": "अस्पतालों को बचने की दर पर रैंक करो, तो कुछ गंभीर मरीज़ लौटा दिए जाते हैं।", "focus": [180, 220, 1.2]}, {"en": "Early 1990s: New York publishes each hospital's death rate for heart bypass surgery.", "hi": "1990 के दशक की शुरुआत: न्यूयॉर्क हर अस्पताल में बाईपास सर्जरी की मृत्यु दर छापने लगा।", "focus": [180, 110, 1.8]}, {"en": "The easiest way to look good: operate on healthier patients.", "hi": "अच्छा दिखने का सबसे आसान तरीका: कम बीमार मरीज़ों का ऑपरेशन करो।", "focus": [190, 250, 1.9]}, {"en": "A 2003 study found the sickest patients did worse after the report cards.", "hi": "2003 के एक अध्ययन में पाया गया कि रिपोर्ट कार्ड के बाद सबसे बीमार मरीज़ों का हाल बिगड़ा।", "focus": [180, 220, 1.2]}, {"en": "India counted school enrolment for years, and it crossed 95 percent.", "hi": "भारत बरसों तक स्कूल में दाख़िले गिनता रहा, और यह 95 प्रतिशत के पार पहुँचा।", "focus": [180, 440, 1.5]}, {"en": "Yet in rural government schools, only 45% of Class 5 can read Class 2 text.", "hi": "फिर भी गाँव के सरकारी स्कूलों में कक्षा 5 के सिर्फ़ 45% बच्चे कक्षा 2 का पाठ पढ़ पाते हैं।", "focus": [180, 470, 1.5]}, {"en": "Economists call this Goodhart's Law.", "hi": "अर्थशास्त्री इसे 'गुडहार्ट का नियम' कहते हैं।", "focus": [180, 320, 1]}], "named": {"en": "Goodhart's Law: when a measure becomes a target, it stops being a good measure", "hi": "गुडहार्ट का नियम: जब कोई पैमाना लक्ष्य बन जाता है, तो वह अच्छा पैमाना नहीं रहता"}, "sayItSmart": {"en": "Measure, but audit and rotate what you measure. Report cards in New York pushed surgeons away from the sickest patients. NIPUN Bharat's move from enrolment to foundational reading is a good example of changing the target once the old one stopped telling us much.", "hi": "मापिए ज़रूर, पर जो माप रहे हैं उसकी जाँच भी कीजिए और उसे बदलते रहिए। न्यूयॉर्क के रिपोर्ट कार्ड ने सर्जनों को सबसे बीमार मरीज़ों से दूर कर दिया। दाख़िले से हटकर बुनियादी पढ़ाई पर ध्यान देने वाला निपुण भारत इसका अच्छा उदाहरण है कि पुराना पैमाना बेकार हो जाए तो लक्ष्य बदलना चाहिए।"}, "careful": {"en": "The neat one-line version is anthropologist Marilyn Strathern's 1997 paraphrase, not Goodhart's 1975 wording. Report cards also did some good, so the lesson is to watch for gaming, not to stop measuring.", "hi": "एक पंक्ति वाला मशहूर रूप मानवविज्ञानी मैरिलिन स्ट्रैथर्न का 1997 का सार है, गुडहार्ट के 1975 के शब्द नहीं। रिपोर्ट कार्ड से कुछ फ़ायदे भी हुए, इसलिए सबक यह है कि आँकड़ों से खिलवाड़ पर नज़र रखें, मापना बंद न करें।"}, "followUp": {"q": {"en": "So should we stop ranking colleges and states?", "hi": "तो क्या कॉलेजों और राज्यों की रैंकिंग बंद कर दें?"}, "hint": {"en": "No. Use several indicators, audit them, and check who gets left out of the count.", "hi": "नहीं। कई पैमाने रखें, उनकी जाँच करें, और देखें कि गिनती में कौन छूट रहा है।"}}, "useItIn": [{"paper": "mains-gs2", "en": "Answers on health and education outcomes, state rankings and indices.", "hi": "स्वास्थ्य और शिक्षा के नतीजों, राज्यों की रैंकिंग और सूचकांकों वाले उत्तर।"}, {"paper": "mains-essay", "en": "Essays on 'what gets measured gets managed' or on data in governance.", "hi": "'जो मापा जाता है वही सँभाला जाता है' या शासन में आँकड़ों वाले निबंध।"}], "linkedPacks": [], "sources": [{"label": "Dranove, Kessler, McClellan and Satterthwaite, 'Is More Information Better? The Effects of Report Cards on Health Care Providers', Journal of Political Economy 111(3), 2003", "verify": false}, {"label": "ASER 2024 (Pratham), National findings: enrolment of 6 to 14 year olds above 95% for close to 20 years (98.1% in 2024); 44.8% of Std V children in government schools can read a Std II text", "verify": false}, {"label": "Marilyn Strathern, 'Improving ratings: audit in the British University system', European Review 5(3), 1997", "verify": true}, {"label": "Ministry of Education, NIPUN Bharat guidelines (2021)", "verify": false}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}, {"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["mains"], "papers": ["interview", "mains-gs4", "mains-gs2", "mains-essay"], "formats": ["interview-talk", "mains-answer"]}, "id": "fine-is-a-price", "tone": "LIGHT", "title": {"en": "The fine that made parents later", "hi": "जुर्माना जिससे माता-पिता और देर से आए"}, "scene": "fine", "frames": [{"en": "Fine parents for picking up their kids late, and more of them come late.", "hi": "बच्चों को देर से लेने पर जुर्माना लगाओ, तो और ज़्यादा माता-पिता देर से आते हैं।", "focus": [180, 320, 1]}, {"en": "Haifa, Israel, 1998. Ten day-care centres, all closing at 4 pm.", "hi": "हाइफ़ा, इज़राइल, 1998। दस डे-केयर सेंटर, सब शाम 4 बजे बंद होते थे।", "focus": [180, 140, 1.7]}, {"en": "Six of them start a small fine for picking up ten minutes late or more.", "hi": "इनमें से छह ने दस मिनट से ज़्यादा देर पर छोटा-सा जुर्माना शुरू किया।", "focus": [250, 330, 2]}, {"en": "Late pickups roughly double.", "hi": "देर से आने वाले लगभग दोगुने हो गए।", "focus": [180, 520, 1.6]}, {"en": "The guilt was gone. Parents had simply bought extra time.", "hi": "शर्मिंदगी ख़त्म हो गई। माता-पिता ने बस थोड़ा और समय ख़रीद लिया था।", "focus": [110, 330, 2]}, {"en": "When the fine was dropped, lateness stayed high.", "hi": "जुर्माना हटाने के बाद भी देरी ऊँची ही बनी रही।", "focus": [270, 520, 2]}, {"en": "The researchers' verdict: a fine is a price.", "hi": "शोधकर्ताओं का निष्कर्ष: जुर्माना भी एक क़ीमत है।", "focus": [180, 320, 1]}], "named": {"en": "A fine is a price (crowding out)", "hi": "जुर्माना एक क़ीमत है (क्राउडिंग आउट)"}, "sayItSmart": {"en": "A small fine can turn a moral duty into a purchase. When day-care centres in Haifa fined late parents, lateness doubled and stayed high. So a penalty works best when it is big and sure enough to deter, or when it backs a strong social norm instead of replacing it.", "hi": "छोटा जुर्माना नैतिक ज़िम्मेदारी को ख़रीद-फ़रोख़्त में बदल सकता है। हाइफ़ा के डे-केयर सेंटरों ने देर से आने वालों पर जुर्माना लगाया तो देरी दोगुनी हो गई और वैसी ही बनी रही। इसलिए सज़ा तब कारगर है जब वह इतनी बड़ी और पक्की हो कि डर पैदा करे, या जब वह सामाजिक मानदंड को सहारा दे, उसकी जगह न ले।"}, "careful": {"en": "This is one small field experiment in one city. Other studies find that large, certain fines do deter. The lesson is about small fines replacing a social norm, not that penalties never work.", "hi": "यह एक ही शहर का एक छोटा प्रयोग है। दूसरे अध्ययन बताते हैं कि बड़े और पक्के जुर्माने रोकते हैं। सबक यह है कि छोटा जुर्माना सामाजिक मानदंड की जगह ले सकता है, यह नहीं कि सज़ा कभी काम नहीं करती।"}, "followUp": {"q": {"en": "So should India not raise traffic fines?", "hi": "तो क्या भारत को ट्रैफ़िक जुर्माने नहीं बढ़ाने चाहिए?"}, "hint": {"en": "Size and certainty of enforcement matter more than the rule on paper. Pair fines with campaigns that build the norm.", "hi": "काग़ज़ पर नियम से ज़्यादा जुर्माने का आकार और उसकी वसूली का पक्कापन मायने रखता है। जुर्माने के साथ ऐसे अभियान चलाएँ जो मानदंड मज़बूत करें।"}}, "useItIn": [{"paper": "mains-gs4", "en": "Attitude, social influence and persuasion; intrinsic and extrinsic motivation.", "hi": "अभिवृत्ति, सामाजिक प्रभाव और अनुनय; भीतरी और बाहरी प्रेरणा।"}, {"paper": "mains-gs2", "en": "Regulation and penalties, such as traffic fines or littering rules.", "hi": "नियमन और दंड, जैसे ट्रैफ़िक जुर्माना या कूड़ा फैलाने के नियम।"}, {"paper": "mains-essay", "en": "Essays on law versus morality, or markets and values.", "hi": "क़ानून बनाम नैतिकता, या बाज़ार और मूल्यों पर निबंध।"}], "linkedPacks": [], "sources": [{"label": "Uri Gneezy and Aldo Rustichini, 'A Fine Is a Price', Journal of Legal Studies 29(1), 2000", "verify": false}, {"label": "Steven Levitt and Stephen Dubner, Freakonomics (2005), chapter 1", "verify": false}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}, {"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["mains"], "papers": ["interview", "mains-gs3", "mains-gs2", "mains-essay"], "formats": ["interview-talk", "mains-answer"]}, "id": "punjab-water-and-smoke", "tone": "NEUTRAL", "title": {"en": "How saving water moved Punjab's fires", "hi": "पानी बचाने से पंजाब की आग कैसे खिसकी"}, "scene": "punjab", "frames": [{"en": "A law to save Punjab's water made its smoke season worse.", "hi": "पंजाब का पानी बचाने वाले क़ानून ने धुएँ का मौसम और बिगाड़ दिया।", "focus": [180, 320, 1]}, {"en": "Free farm power since 1997. Pumps run, paddy spreads, groundwater falls.", "hi": "1997 से खेती की बिजली मुफ़्त। पंप चलते रहे, धान फैला, भूजल गिरता गया।", "focus": [110, 270, 1.8]}, {"en": "2009: a law bars transplanting paddy before a set date in June.", "hi": "2009: एक क़ानून ने जून की तय तारीख़ से पहले धान की रोपाई पर रोक लगा दी।", "focus": [270, 100, 2]}, {"en": "The aim: skip the hottest weeks, when water evaporates fastest.", "hi": "मक़सद: सबसे गर्म हफ़्तों से बचना, जब पानी सबसे तेज़ी से भाप बनता है।", "focus": [90, 90, 2]}, {"en": "Later sowing means a later harvest, pushed into late October.", "hi": "देर से रोपाई यानी देर से कटाई, जो अक्टूबर के आख़िर तक खिसक गई।", "focus": [180, 440, 1.7]}, {"en": "That leaves only a short gap before wheat must go in. A match is quickest.", "hi": "गेहूँ बोने से पहले बहुत कम समय बचता है। माचिस सबसे तेज़ रास्ता है।", "focus": [170, 470, 2]}, {"en": "And late autumn's still, cold air traps the smoke over the plains.", "hi": "और देर पतझड़ की ठहरी, ठंडी हवा धुएँ को मैदानों के ऊपर रोक लेती है।", "focus": [250, 565, 1.7]}, {"en": "Economists call this a second-order effect.", "hi": "अर्थशास्त्री इसे 'दूसरे दर्जे का असर' कहते हैं।", "focus": [180, 320, 1]}], "named": {"en": "Second-order effects (a policy trade-off)", "hi": "दूसरे दर्जे का असर (नीति का ट्रेड-ऑफ़)"}, "sayItSmart": {"en": "Punjab traded water for air. The 2009 law that delayed paddy saved groundwater but squeezed the gap before wheat, pushing stubble fires into the weeks when the air is stillest. So stubble burning has to be solved through power pricing, crop choice and the calendar together.", "hi": "पंजाब ने पानी के बदले हवा का सौदा किया। धान की रोपाई टालने वाले 2009 के क़ानून ने भूजल तो बचाया, पर गेहूँ से पहले का समय घटा दिया, और पराली की आग उन हफ़्तों में चली गई जब हवा सबसे ठहरी होती है। इसलिए पराली का हल बिजली के दाम, फ़सल के चुनाव और कैलेंडर को साथ रखकर ही निकलेगा।"}, "careful": {"en": "Stubble fires are one source of Delhi's winter smog, alongside vehicles, industry, dust and weather, and their share swings from day to day. The water law did save groundwater, which is why it stays.", "hi": "पराली की आग दिल्ली की सर्दियों के स्मॉग का एक स्रोत है; गाड़ियाँ, उद्योग, धूल और मौसम भी ज़िम्मेदार हैं, और इसका हिस्सा रोज़ बदलता है। पानी वाले क़ानून ने भूजल बचाया भी है, इसीलिए वह बना हुआ है।"}, "followUp": {"q": {"en": "What would you do about it?", "hi": "आप इसके लिए क्या करेंगे?"}, "hint": {"en": "Name two or three options, such as moving away from paddy, metering farm power, or machines that sow wheat through stubble, and the trade-off each one carries.", "hi": "दो-तीन विकल्प बताइए, जैसे धान से हटना, खेती की बिजली की मीटरिंग, या पराली के बीच गेहूँ बोने वाली मशीनें, और हर एक का ट्रेड-ऑफ़ भी।"}}, "useItIn": [{"paper": "mains-gs3", "en": "Cropping patterns, irrigation, farm subsidies, air pollution.", "hi": "फ़सल चक्र, सिंचाई, कृषि सब्सिडी, वायु प्रदूषण।"}, {"paper": "mains-gs2", "en": "Inter-state issues: one state's policy, another state's air.", "hi": "अंतर-राज्यीय मुद्दे: एक राज्य की नीति, दूसरे राज्य की हवा।"}, {"paper": "mains-essay", "en": "Essays on trade-offs, or why every solution creates new problems.", "hi": "ट्रेड-ऑफ़ पर, या हर समाधान नई समस्या क्यों पैदा करता है, इस पर निबंध।"}], "linkedPacks": ["content/_generated/haiku-test/stubble-burning-chain.json"], "sources": [{"label": "Punjab Preservation of Subsoil Water Act, 2009", "verify": false}, {"label": "Balwinder-Singh, McDonald, Srivastava and Gerard, 'Tradeoffs between groundwater conservation and air pollution from agricultural fires in northwest India', Nature Sustainability 2, 580-583, 2019 (November PM2.5 about 29% higher after the 2009 Acts)", "verify": false}, {"label": "Disha Gupta, Centre for Development Economics, Delhi School of Economics, working paper 316: free farm electricity in Punjab from February 1997", "verify": false}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}, {"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["mains"], "papers": ["interview", "mains-gs2", "mains-gs1", "mains-essay"], "formats": ["interview-talk", "mains-answer"]}, "id": "women-pradhans-natural-experiment", "tone": "NEUTRAL", "title": {"en": "India's accidental experiment on women leaders", "hi": "महिला नेतृत्व पर भारत का अनजाना प्रयोग"}, "scene": "pradhan", "frames": [{"en": "India accidentally ran one of the world's best experiments on women leaders.", "hi": "भारत ने अनजाने में महिला नेतृत्व पर दुनिया का एक बेहतरीन प्रयोग कर डाला।", "focus": [180, 320, 1]}, {"en": "1992: the 73rd Amendment reserves a third of panchayat chief posts for women.", "hi": "1992: 73वें संशोधन ने पंचायत प्रमुख के एक-तिहाई पद महिलाओं के लिए आरक्षित किए।", "focus": [180, 330, 1.7]}, {"en": "Which villages get a reserved post rotates, almost like a lottery.", "hi": "किन गाँवों में पद आरक्षित होगा, यह बारी से तय होता है, लगभग लॉटरी की तरह।", "focus": [180, 135, 1.8]}, {"en": "So researchers could compare reserved and unreserved villages fairly.", "hi": "इसलिए शोधकर्ता आरक्षित और अनारक्षित गाँवों की निष्पक्ष तुलना कर सके।", "focus": [180, 320, 1.1]}, {"en": "Women pradhans invested more in drinking water, a top demand of women.", "hi": "महिला प्रधानों ने पीने के पानी पर ज़्यादा ख़र्च किया, जो महिलाओं की सबसे बड़ी माँग थी।", "focus": [180, 525, 1.8]}, {"en": "Later, men in villages that had a woman pradhan stopped rating women leaders lower.", "hi": "बाद में, जिन गाँवों में महिला प्रधान रहीं, वहाँ के पुरुषों ने महिला नेताओं को कमतर आँकना बंद कर दिया।", "focus": [180, 330, 1.7]}, {"en": "Economists call this a natural experiment.", "hi": "अर्थशास्त्री इसे 'प्राकृतिक प्रयोग' कहते हैं।", "focus": [180, 320, 1]}], "named": {"en": "Natural experiment", "hi": "प्राकृतिक प्रयोग"}, "sayItSmart": {"en": "Because reserved posts rotate almost at random, India gave researchers a clean test. Chattopadhyay and Duflo found women pradhans in West Bengal and Rajasthan put more into drinking water. Representation changed what got built, not just who sat in the chair.", "hi": "आरक्षित पद लगभग लॉटरी की तरह बदलते हैं, इसलिए भारत ने शोधकर्ताओं को एक साफ़ परीक्षण दे दिया। चट्टोपाध्याय और डुफ़्लो ने पाया कि पश्चिम बंगाल और राजस्थान में महिला प्रधानों ने पीने के पानी पर ज़्यादा काम किया। प्रतिनिधित्व से सिर्फ़ कुर्सी पर बैठा व्यक्ति नहीं, बल्कि यह भी बदला कि क्या बना।"}, "careful": {"en": "The study covered one district each in West Bengal and Rajasthan, so call it strong evidence, not a law. In Rajasthan, women pradhans also spent less on roads. 'Sarpanch pati' proxies are a real problem it does not settle.", "hi": "अध्ययन पश्चिम बंगाल और राजस्थान के एक-एक ज़िले पर था, इसलिए इसे पक्का सबूत कहिए, अटल नियम नहीं। राजस्थान में महिला प्रधानों ने सड़कों पर कम ख़र्च भी किया। 'सरपंच पति' वाली समस्या असली है, जिसे यह अध्ययन हल नहीं करता।"}, "followUp": {"q": {"en": "Then why do we keep hearing about 'sarpanch pati'?", "hi": "तो फिर 'सरपंच पति' की बातें क्यों सुनाई देती हैं?"}, "hint": {"en": "Both are true. Give the evidence, admit the proxy problem, and suggest a fix such as training and stronger gram sabha oversight.", "hi": "दोनों बातें सच हैं। सबूत बताइए, प्रॉक्सी की समस्या मानिए, और प्रशिक्षण व ग्राम सभा की मज़बूत निगरानी जैसा उपाय सुझाइए।"}}, "useItIn": [{"paper": "mains-gs2", "en": "Panchayati Raj, the 73rd Amendment, devolution and reservation.", "hi": "पंचायती राज, 73वाँ संशोधन, विकेंद्रीकरण और आरक्षण।"}, {"paper": "mains-gs1", "en": "Women's empowerment and changing social attitudes.", "hi": "महिला सशक्तीकरण और बदलते सामाजिक नज़रिए।"}, {"paper": "mains-essay", "en": "Essays on representation, democracy or women in leadership.", "hi": "प्रतिनिधित्व, लोकतंत्र या नेतृत्व में महिलाओं पर निबंध।"}], "linkedPacks": ["content/jobs/sources/73rd-amendment.txt"], "sources": [{"label": "Raghabendra Chattopadhyay and Esther Duflo, 'Women as Policy Makers: Evidence from a Randomized Policy Experiment in India', Econometrica 72(5), 2004", "verify": false}, {"label": "Beaman, Chattopadhyay, Duflo, Pande and Topalova, 'Powerful Women: Does Exposure Reduce Bias?', Quarterly Journal of Economics 124(4), 2009", "verify": false}, {"label": "Constitution of India, Article 243D(4)", "verify": false}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}, {"schema": "upsc-pods/hidden-why@1", "mood": {"bed": null, "sfx": true, "motion": "gentle"}, "sfx": {"next": "sfx/page", "reveal": "sfx/chime"}, "tags": {"stage": ["prelims", "mains"], "papers": ["interview", "prelims-csat", "mains-gs4", "mains-essay"], "formats": ["interview-talk", "csat-reasoning"]}, "id": "survivorship-bias-toppers", "tone": "LIGHT", "title": {"en": "Why topper talks can mislead you", "hi": "टॉपर की बातें आपको क्यों भटका सकती हैं"}, "scene": "wald", "frames": [{"en": "Want to know how to crack UPSC? Don't ask only the toppers.", "hi": "UPSC कैसे निकालें, यह जानना है? सिर्फ़ टॉपर्स से मत पूछिए।", "focus": [180, 320, 1]}, {"en": "World War Two: bombers come back full of bullet holes.", "hi": "दूसरा विश्व युद्ध: बमवर्षक विमान गोलियों के छेदों से भरे लौटते हैं।", "focus": [180, 160, 1.5]}, {"en": "The obvious idea: add armour where the holes are.", "hi": "सीधा-सा विचार: जहाँ छेद हैं, वहाँ कवच लगाओ।", "focus": [140, 150, 2]}, {"en": "Statistician Abraham Wald's answer: armour where the holes aren't.", "hi": "सांख्यिकीविद अब्राहम वाल्ड का जवाब: कवच वहाँ लगाओ जहाँ छेद नहीं हैं।", "focus": [235, 165, 2]}, {"en": "Planes hit there never came back to be counted.", "hi": "जिन विमानों को वहाँ गोली लगी, वे गिनती के लिए लौटे ही नहीं।", "focus": [180, 160, 1.5]}, {"en": "Topper talks are the planes that came back.", "hi": "टॉपर्स की बातें वही विमान हैं जो लौट आए।", "focus": [180, 450, 1.9]}, {"en": "Thousands who followed the same routine and didn't clear are never on stage.", "hi": "वही दिनचर्या अपनाकर भी जो हज़ारों पास नहीं हुए, वे कभी मंच पर नहीं आते।", "focus": [180, 545, 1.6]}, {"en": "Statisticians call this survivorship bias.", "hi": "सांख्यिकीविद इसे 'सर्वाइवरशिप बायस' कहते हैं।", "focus": [180, 320, 1]}], "named": {"en": "Survivorship bias", "hi": "सर्वाइवरशिप बायस (बचे हुओं से बना भ्रम)"}, "sayItSmart": {"en": "Success stories are a filtered sample. Like Abraham Wald's returning bombers, they show what people survived, not what made them succeed. Before copying a routine, I'd want to hear from people who followed it and didn't make it.", "hi": "सफलता की कहानियाँ छना हुआ नमूना होती हैं। अब्राहम वाल्ड के लौटे विमानों की तरह, वे बताती हैं कि लोग क्या झेलकर बचे, यह नहीं कि सफलता किससे मिली। किसी की दिनचर्या अपनाने से पहले मैं उन लोगों से भी सुनना चाहूँगा जिन्होंने उसे अपनाया और सफल नहीं हुए।"}, "careful": {"en": "Wald's real work was a set of 1943 technical memos on estimating aircraft vulnerability. The red-dot plane drawing is modern, and how his advice was used is less documented. The logic is sound.", "hi": "वाल्ड का असली काम 1943 के तकनीकी नोट्स थे, जिनमें विमानों की कमज़ोर जगहों का अनुमान था। लाल बिंदुओं वाला विमान का चित्र आज का है, और उनकी सलाह कैसे लागू हुई यह कम दर्ज है। पर तर्क सही है।"}, "followUp": {"q": {"en": "Isn't your own preparation biased the same way?", "hi": "क्या आपकी अपनी तैयारी भी इसी तरह पक्षपाती नहीं है?"}, "hint": {"en": "Say yes, then say how you check it: what failed for others, and what you dropped when it didn't work for you.", "hi": "हाँ कहिए, फिर बताइए कि आप इसे कैसे जाँचते हैं: दूसरों के लिए क्या नाकाम रहा, और जो आपके लिए काम नहीं आया उसे आपने कैसे छोड़ा।"}}, "useItIn": [{"paper": "prelims-csat", "en": "Spotting the flaw in an argument built on a biased sample.", "hi": "पक्षपाती नमूने पर टिके तर्क की ख़ामी पकड़ना।"}, {"paper": "mains-essay", "en": "Essays on success, failure or learning from data.", "hi": "सफलता, असफलता या आँकड़ों से सीखने पर निबंध।"}, {"paper": "mains-gs4", "en": "Evaluating evidence before decisions; humility in judgement.", "hi": "फ़ैसलों से पहले सबूत परखना; आँकलन में विनम्रता।"}], "linkedPacks": ["content/honest/coaching-guide.json"], "sources": [{"label": "Abraham Wald, 'A Method of Estimating Plane Vulnerability Based on Damage of Survivors', Statistical Research Group, Columbia University (1943; reprinted by the Center for Naval Analyses, 1980)", "verify": false}, {"label": "Marc Mangel and Francisco Samaniego, 'Abraham Wald's Work on Aircraft Survivability', Journal of the American Statistical Association 79(386), 1984", "verify": false}], "review": {"status": "draft", "checkedBy": null, "checkedOn": null, "note": "Facts checked by Claude against the named sources on 14 Oct 2026 (sources still marked verify could not be opened). A subject editor and a Hindi editor must approve before members see it."}}];
+const PAPER = {"mains-gs1":"GS1","mains-gs2":"GS2","mains-gs3":"GS3","mains-gs4":"GS4","mains-essay":"Essay","prelims-csat":"CSAT","prelims-gs1":"Prelims"};
+const UI = {
+  en:{say:"Say it smart",careful:"Careful",ask:"If they ask next",use:"Use it in",src:"Sources",check:"check",copy:"Copy line",copied:"Copied",back:"Back",next:"Next",again:"Next story",hint:"Tap the right side to go on, the left to go back.",calls:"Idea"},
+  hi:{say:"समझदारी से कहें",careful:"सावधान",ask:"अगर वे आगे पूछें",use:"कहाँ काम आएगा",src:"स्रोत",check:"जाँचें",copy:"पंक्ति कॉपी करें",copied:"कॉपी हो गई",back:"पीछे",next:"आगे",again:"अगली कहानी",hint:"आगे जाने के लिए दाईं ओर, पीछे के लिए बाईं ओर टैप करें।",calls:"विचार"}
+};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- Illustrations: 360x640 scenes in an etched, sepia print style ---------- */
+const P = {paper:"#F3E6D3", p2:"#E8D3B6", ink:"#2A211A", chai:"#8D4F01", rust:"#B4532A", teal:"#14696B", mari:"#C98A0B", grey:"#8A8079", sky:"#EFDCC2"};
+const DEFS = `<defs>
+ <pattern id="h1" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="${P.ink}" stroke-width=".8" opacity=".45"/></pattern>
+ <pattern id="h2" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="4" stroke="${P.ink}" stroke-width=".7" opacity=".35"/></pattern>
+ <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="${P.ink}" opacity=".3"/></pattern>
+ <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .16 0 0 0 0 .12 0 0 0 0 .08 0 0 0 .22 0"/></filter>
+ <radialGradient id="vig" cx="50%" cy="45%" r="75%"><stop offset="60%" stop-color="${P.ink}" stop-opacity="0"/><stop offset="100%" stop-color="${P.ink}" stop-opacity=".35"/></radialGradient>
+</defs>`;
+const S = 'stroke="'+P.ink+'" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"';
+const T = (x,y,t,size=14,w=700,fill=P.ink,anchor="middle",fam="Georgia, serif") => `<text x="${x}" y="${y}" font-family="${fam}" font-size="${size}" font-weight="${w}" fill="${fill}" text-anchor="${anchor}">${t}</text>`;
+const dedupe = s => s.replace(/<([a-zA-Z]+)((?:\s+[\w:-]+="[^"]*")+)\s*(\/?)>/g, (m, tag, attrs, slash) => { const o = new Map(); for (const [, k, v] of attrs.matchAll(/([\w:-]+)="([^"]*)"/g)) { o.delete(k); o.set(k, v); } return "<" + tag + [...o].map(([k, v]) => ` ${k}="${v}"`).join("") + (slash ? "/>" : ">"); });
+const frame = body => dedupe(`<svg viewBox="0 0 360 640" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${DEFS}<rect width="360" height="640" fill="${P.paper}"/>${body}<rect width="360" height="640" filter="url(#grain)"/><rect width="360" height="640" fill="url(#vig)"/></svg>`);
+function person(x,y,s=1,col=P.p2,extra=""){ // standing figure, feet at y
+  return `<g transform="translate(${x},${y}) scale(${s})">
+   <path d="M-11 0 L-9 -40 Q0 -48 9 -40 L11 0 Z" fill="${col}" ${S}/><path d="M-11 0 L-9 -40 Q0 -48 9 -40 L11 0 Z" fill="url(#h2)"/>
+   <circle cx="0" cy="-54" r="9" fill="${P.p2}" ${S}/>${extra}</g>`;
+}
+function rat(x,y,s=1,flip=false,tail=false){
+  return `<g transform="translate(${x},${y}) scale(${flip?-s:s},${s})">
+   ${tail?`<path d="M-18 2 C-34 -2 -38 14 -54 8" fill="none" ${S} stroke-width="1.6"/>`:`<path d="M-19 1 l-4 1" ${S} stroke-width="2"/>`}
+   <ellipse cx="0" cy="0" rx="19" ry="10" fill="${P.grey}" ${S}/><ellipse cx="0" cy="0" rx="19" ry="10" fill="url(#h1)"/>
+   <circle cx="19" cy="-3" r="8" fill="${P.grey}" ${S}/><circle cx="16" cy="-11" r="4" fill="${P.p2}" ${S} stroke-width="1.5"/>
+   <circle cx="22" cy="-4" r="1.4" fill="${P.ink}"/><path d="M-10 9 l-2 6 M8 9 l2 6" ${S} stroke-width="1.6"/></g>`;
+}
+const SCENES = {
+ rats: () => frame(`
+  <rect x="48" y="38" width="264" height="178" fill="${P.p2}" ${S}/><rect x="48" y="38" width="264" height="178" fill="url(#dots)"/>
+  <circle cx="60" cy="50" r="3" fill="${P.ink}"/><circle cx="300" cy="50" r="3" fill="${P.ink}"/>
+  ${T(180,82,"AVIS",28,800)}${T(180,116,"PRIME : 1 CENT",19,700,P.rust)}${T(180,140,"PAR QUEUE DE RAT",15,700)}
+  <line x1="90" y1="156" x2="270" y2="156" ${S} stroke-width="1.2"/>${T(180,184,"HANOI · 1902",14,700,P.ink)}${T(180,202,"Le Résident-Maire",10,400,P.ink)}
+  <rect x="40" y="304" width="280" height="14" fill="${P.chai}" ${S}/><rect x="40" y="304" width="280" height="14" fill="url(#h1)"/>
+  <path d="M60 318 v70 M300 318 v70" ${S} stroke-width="5"/>
+  <ellipse cx="170" cy="296" rx="92" ry="15" fill="${P.p2}" ${S}/>
+  ${[0,1,2,3,4,5,6,7,8].map(i=>`<path d="M${100+i*16} 296 c 6 -14 -6 -22 4 -34" fill="none" ${S} stroke-width="1.8"/>`).join("")}
+  <circle cx="285" cy="292" r="10" fill="${P.mari}" ${S}/><circle cx="298" cy="286" r="10" fill="${P.mari}" ${S}/>${T(298,290,"1¢",9,700)}
+  <path d="M0 610 H360" ${S}/><rect x="0" y="610" width="360" height="30" fill="url(#h1)"/>
+  ${rat(70,470,1.05)}${rat(150,505,1,true)}${rat(95,560,1.15)}${rat(205,455,.9,true)}${rat(175,590,1)}
+  <rect x="226" y="520" width="112" height="86" fill="${P.p2}" ${S}/><path d="M226 548 H338 M226 576 H338" ${S} stroke-width="1.4"/>
+  <rect x="226" y="520" width="112" height="86" fill="url(#h2)"/>${rat(262,512,.75)}${rat(305,512,.75,true)}
+  ${T(282,600,"élevage",11,700,P.rust)}`),
+
+ goodhart: () => frame(`
+  <rect x="0" y="0" width="360" height="300" fill="${P.sky}"/>
+  <rect x="40" y="62" width="280" height="226" fill="${P.p2}" ${S}/><rect x="40" y="62" width="280" height="226" fill="url(#h2)"/>
+  <rect x="80" y="74" width="200" height="34" fill="${P.paper}" ${S}/>${T(180,99,"HOSPITAL",22,800)}
+  <rect x="96" y="118" width="168" height="26" fill="${P.rust}" ${S}/>${T(180,136,"SURVIVAL ★★★★★",13,700,P.paper)}
+  ${[60,100,240,280].map(x=>`<rect x="${x-8}" y="160" width="26" height="32" fill="${P.paper}" ${S} stroke-width="1.6"/>`).join("")}
+  <rect x="150" y="200" width="62" height="88" fill="${P.ink}" ${S}/>
+  ${person(170,286,.8,P.paper,'<path d="M10 -36 l14 -10 M10 -30 l15 -2" '+S+'/>')}${person(196,286,.8,P.paper)}
+  <path d="M210 296 h96" ${S} stroke-width="3"/><circle cx="222" cy="306" r="6" fill="${P.paper}" ${S}/><circle cx="294" cy="306" r="6" fill="${P.paper}" ${S}/>
+  <path d="M214 290 q 40 -14 88 0" fill="${P.p2}" ${S}/>
+  <path d="M300 260 q 30 10 18 40" fill="none" stroke="${P.rust}" stroke-width="3" stroke-dasharray="6 5"/>
+  <rect x="34" y="350" width="292" height="248" rx="6" fill="#2F3A33" ${S} stroke-width="4"/>
+  ${T(54,392,"ENROLLED (age 6–14)",15,700,"#EDE6D6","start")}
+  <rect x="54" y="404" width="221" height="22" fill="#EDE6D6" opacity=".9"/>${T(282,421,"95%+",15,800,"#EDE6D6","start")}
+  ${T(54,486,"CLASS 5 CAN READ",15,700,"#EDE6D6","start")}${T(54,506,"A CLASS 2 TEXT (govt)",15,700,"#EDE6D6","start")}
+  <rect x="54" y="520" width="104" height="22" fill="${P.mari}"/><rect x="54" y="520" width="233" height="22" fill="none" stroke="#EDE6D6" stroke-dasharray="4 4"/>${T(166,537,"45%",15,800,"#EDE6D6","start")}
+  ${T(54,580,"ASER 2024, rural · full bar = 100%",10,400,"#EDE6D6","start","system-ui, sans-serif")}`),
+
+ fine: () => frame(`
+  <circle cx="180" cy="128" r="84" fill="${P.p2}" ${S} stroke-width="4"/><circle cx="180" cy="128" r="84" fill="url(#dots)"/>
+  ${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${180+70*Math.sin(a)}" y1="${128-70*Math.cos(a)}" x2="${180+78*Math.sin(a)}" y2="${128-78*Math.cos(a)}" ${S}/>`}).join("")}
+  <line x1="180" y1="128" x2="${180+42*Math.sin(130*Math.PI/180)}" y2="${128-42*Math.cos(130*Math.PI/180)}" ${S} stroke-width="5"/>
+  <line x1="180" y1="128" x2="${180+62*Math.sin(120*Math.PI/180)}" y2="${128-62*Math.cos(120*Math.PI/180)}" ${S} stroke-width="3"/>
+  <circle cx="180" cy="128" r="5" fill="${P.ink}"/>${T(180,236,"CLOSES 16:00",14,700,P.rust)}
+  <rect x="34" y="252" width="128" height="170" fill="${P.p2}" ${S}/><rect x="56" y="300" width="84" height="122" fill="${P.chai}" ${S}/><rect x="56" y="300" width="84" height="122" fill="url(#h1)"/>
+  <rect x="58" y="264" width="80" height="24" fill="${P.paper}" ${S} stroke-width="1.5"/>${T(98,281,"DAY CARE",12,800)}
+  ${person(112,420,.9,P.teal,'<rect x="10" y="-30" width="16" height="12" fill="'+P.mari+'" '+S+' stroke-width="1.4"/>')}
+  <rect x="190" y="262" width="136" height="140" fill="${P.paper}" ${S}/><path d="M190 262 l68 -16 l68 16" fill="none" ${S} stroke-width="1.4"/>
+  ${T(258,292,"LATE PICKUP",14,800)}${T(258,330,"₪10",32,800,P.rust)}${T(258,354,"per child",12,400)}${T(258,374,"10 min late or more",12,400)}
+  <path d="M40 600 H330" ${S}/><path d="M40 600 V450" ${S}/>
+  ${Array.from({length:20},(_,i)=>{const h=i<4?26:i<8?26+(i-3)*9:i<16?66+(i%2)*4:68+(i%2)*3; const x=46+i*14; return `<rect x="${x}" y="${600-h}" width="10" height="${h}" fill="${i<4?P.grey:P.rust}" ${S} stroke-width="1"/>`}).join("")}
+  <path d="M100 600 V462 M268 600 V462" stroke="${P.ink}" stroke-width="1.4" stroke-dasharray="4 4"/>
+  ${T(104,474,"fine starts",11,700,P.ink,"start","system-ui, sans-serif")}${T(264,474,"fine dropped",11,700,P.ink,"end","system-ui, sans-serif")}
+  ${T(185,622,"late pickups by week, 20 weeks (shape only)",10,400,P.ink,"middle","system-ui, sans-serif")}`),
+
+ punjab: () => frame(`
+  <rect width="360" height="190" fill="${P.sky}"/>
+  ${Array.from({length:12},(_,i)=>{const a=i*Math.PI/6;return `<line x1="${90+48*Math.cos(a)}" y1="${90+48*Math.sin(a)}" x2="${90+64*Math.cos(a)}" y2="${90+64*Math.sin(a)}" stroke="${P.mari}" stroke-width="3" stroke-linecap="round"/>`}).join("")}
+  <circle cx="90" cy="90" r="38" fill="${P.mari}" ${S}/><circle cx="90" cy="90" r="38" fill="url(#h2)"/>
+  <rect x="214" y="44" width="112" height="112" fill="${P.paper}" ${S}/><rect x="214" y="44" width="112" height="28" fill="${P.rust}" ${S}/>${T(270,64,"JUNE",15,800,P.paper)}
+  ${Array.from({length:15},(_,i)=>`<rect x="${222+(i%5)*20}" y="${80+Math.floor(i/5)*24}" width="16" height="18" fill="none" stroke="${P.ink}" stroke-width="1"/>`).join("")}
+  <circle cx="290" cy="113" r="13" fill="none" stroke="${P.rust}" stroke-width="3"/>${T(270,152,"no paddy before this",10,700,P.ink,"middle","system-ui, sans-serif")}
+  <rect x="40" y="200" width="96" height="58" fill="${P.p2}" ${S}/><rect x="40" y="200" width="96" height="58" fill="url(#h1)"/>${T(88,234,"PUMP",13,800)}
+  <path d="M136 230 h40 v18" fill="none" ${S} stroke-width="4"/><path d="M176 252 q 4 14 -2 24 M182 252 q 6 12 2 22" stroke="${P.teal}" stroke-width="2.4" fill="none"/>
+  <rect x="0" y="262" width="360" height="110" fill="${P.p2}"/><rect x="0" y="262" width="360" height="110" fill="url(#h2)"/>
+  <path d="M88 258 V360" ${S} stroke-width="5"/>
+  ${[300,326,352].map((y,i)=>`<path d="M20 ${y} H330" stroke="${P.teal}" stroke-width="${3-i*.6}" stroke-dasharray="${i?'6 6':'0'}" opacity="${1-i*.25}"/>`).join("")}
+  <path d="M300 296 V352" stroke="${P.teal}" stroke-width="2.5"/><path d="M292 344 l8 10 l8 -10" fill="none" stroke="${P.teal}" stroke-width="2.5"/>${T(244,292,"water table",11,700,P.teal,"middle","system-ui, sans-serif")}
+  <rect x="0" y="372" width="360" height="110" fill="${P.paper}"/>
+  ${Array.from({length:30},(_,i)=>{const x=14+(i%10)*14, y=392+Math.floor(i/10)*30;return `<path d="M${x} ${y+18} q -4 -12 -8 -16 M${x} ${y+18} q 0 -14 2 -20 M${x} ${y+18} q 4 -10 9 -14" fill="none" stroke="${P.teal}" stroke-width="1.6"/>`}).join("")}
+  ${Array.from({length:14},(_,i)=>`<path d="M${170+i*13} 478 l3 -12" ${S} stroke-width="1.5"/>`).join("")}
+  <path d="M190 476 q -10 -26 6 -40 q 2 16 12 10 q -4 -22 14 -34 q -2 24 14 30 q 8 -10 6 -20 q 16 18 4 54 Z" fill="${P.rust}" ${S}/>
+  <path d="M206 476 q -4 -16 6 -24 q 4 10 10 6 q 4 10 -2 18 Z" fill="${P.mari}"/>
+  <rect x="268" y="392" width="72" height="26" fill="${P.paper}" ${S} stroke-width="1.5"/>${T(304,410,"LATE OCT",12,800,P.rust)}
+  <path d="M0 482 H360" ${S}/>
+  ${[[205,430,24],[225,400,30],[250,372,26]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.6}" fill="${P.grey}" opacity=".55"/>`).join("")}
+  <rect x="0" y="483" width="360" height="157" fill="${P.sky}"/>
+  ${[[150,540,34],[200,552,40],[255,548,42],[310,556,36]].map(([x,y,r])=>`<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*.45}" fill="${P.grey}" opacity=".6"/>`).join("")}
+  <path d="M90 520 H350" stroke="${P.ink}" stroke-width="2" stroke-dasharray="8 6"/>${T(96,512,"warm layer acts as a lid",10,700,P.ink,"start","system-ui, sans-serif")}
+  ${[[200,590,22,46],[226,600,18,36],[248,580,20,56],[272,596,16,40],[292,586,22,50],[318,598,18,38]].map(([x,b,w,h])=>`<rect x="${x}" y="${b-h+40}" width="${w}" height="${h}" fill="${P.p2}" ${S} stroke-width="1.6"/>`).join("")}
+  <path d="M0 636 H360" ${S}/>`),
+
+ pradhan: () => frame(`
+  <path d="M130 120 q -40 40 -10 96 q 60 34 120 0 q 30 -56 -10 -96 Z" fill="${P.chai}" ${S}/><path d="M130 120 q -40 40 -10 96 q 60 34 120 0 q 30 -56 -10 -96 Z" fill="url(#h1)"/>
+  <rect x="140" y="98" width="80" height="24" rx="4" fill="${P.chai}" ${S}/><path d="M146 156 h68" stroke="${P.mari}" stroke-width="4"/>
+  ${[[150,70,-14],[188,52,6],[226,74,18]].map(([x,y,r])=>`<g transform="translate(${x},${y}) rotate(${r})"><rect x="-14" y="-9" width="28" height="18" fill="${P.paper}" ${S} stroke-width="1.5"/></g>`).join("")}
+  ${T(188,58,"♀",12,700,P.rust)}${T(180,244,"SEATS ROTATE",13,800,P.ink)}
+  <path d="M30 400 V300 L180 262 L330 300 V400 Z" fill="${P.p2}" ${S}/><path d="M30 400 V300 L180 262 L330 300 V400 Z" fill="url(#h2)"/>
+  <rect x="80" y="296" width="200" height="26" fill="${P.paper}" ${S}/>${T(180,314,"GRAM PANCHAYAT",13,800)}
+  <rect x="150" y="332" width="60" height="68" fill="${P.ink}" ${S}/>
+  ${person(180,400,1.05,P.teal,'<path d="M-9 -40 Q 10 -60 12 -20" fill="'+P.mari+'" '+S+' stroke-width="1.4"/>')}
+  ${person(70,400,.75,P.p2)}${person(290,400,.75,P.p2)}
+  <path d="M0 412 H360" ${S}/>
+  <rect x="166" y="452" width="28" height="120" fill="${P.grey}" ${S}/><rect x="166" y="452" width="28" height="120" fill="url(#h1)"/>
+  <path d="M194 470 L262 440" ${S} stroke-width="6"/><path d="M166 486 h-30 v12" fill="none" ${S} stroke-width="7"/>
+  <path d="M136 504 q -2 14 0 22 M140 506 q 2 12 0 20" stroke="${P.teal}" stroke-width="2.4" fill="none"/>
+  <path d="M112 528 h44 l-6 44 h-32 Z" fill="${P.mari}" ${S}/>
+  ${person(270,600,.9,P.rust)}${person(306,600,.8,P.teal)}${person(60,600,.85,P.chai)}
+  <path d="M0 600 H360" ${S}/><rect x="0" y="600" width="360" height="40" fill="url(#h2)"/>`),
+
+ wald: () => frame(`
+  <rect width="360" height="330" fill="${P.sky}"/>
+  <path d="M30 150 L160 132 L200 132 L330 150 L330 166 L200 168 L160 168 L30 166 Z" fill="${P.grey}" ${S}/><path d="M30 150 L160 132 L200 132 L330 150 L330 166 L200 168 L160 168 L30 166 Z" fill="url(#h1)"/>
+  <path d="M168 58 Q180 40 192 58 L196 260 Q180 274 164 260 Z" fill="${P.grey}" ${S}/><path d="M168 58 Q180 40 192 58 L196 260 Q180 274 164 260 Z" fill="url(#h1)"/>
+  <path d="M120 248 L240 248 L240 262 L120 262 Z" fill="${P.grey}" ${S}/>
+  ${[86,128,232,274].map(x=>`<rect x="${x-9}" y="128" width="18" height="34" rx="5" fill="${P.p2}" ${S}/>`).join("")}
+  <circle cx="180" cy="70" r="9" fill="${P.p2}" ${S}/>
+  ${[[50,156],[62,152],[70,160],[104,150],[112,158],[150,146],[150,160],[208,148],[214,160],[248,152],[252,160],[296,154],[310,158],[318,152],[175,110],[184,122],[176,190],[186,204],[178,222],[132,254],[150,256],[214,254],[230,256],[60,162],[300,162]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="3.2" fill="${P.rust}" stroke="${P.ink}" stroke-width=".8"/>`).join("")}
+  ${[86,128,232,274].map(x=>`<rect x="${x-14}" y="122" width="28" height="46" rx="6" fill="none" stroke="${P.teal}" stroke-width="2.4" stroke-dasharray="5 4"/>`).join("")}
+  <rect x="166" y="56" width="28" height="28" rx="6" fill="none" stroke="${P.teal}" stroke-width="2.4" stroke-dasharray="5 4"/>
+  ${T(180,302,"armour where the holes aren't",13,800,P.teal)}
+  <path d="M180 330 L120 492 L240 492 Z" fill="${P.mari}" opacity=".28"/>
+  <rect x="40" y="492" width="280" height="18" fill="${P.chai}" ${S}/><rect x="40" y="492" width="280" height="18" fill="url(#h1)"/>
+  ${person(180,492,1.2,P.rust,'<path d="M12 -44 l10 -18 h10 l-2 10 q -8 6 -10 0" fill="'+P.mari+'" '+S+' stroke-width="1.5"/>')}
+  ${T(180,382,"TOPPER TALK",13,800,P.chai)}
+  ${Array.from({length:22},(_,i)=>`<g opacity=".38">${person(22+(i%11)*32,(i<11?566:620),.6,P.grey)}</g>`).join("")}
+  ${T(180,636,"the ones who didn't clear",11,700,P.ink,"middle","system-ui, sans-serif")}`)
+};
+
+/* ---------- Player ---------- */
+let lang = "en", si = 0, fi = 0, cache = {};
+const $ = id => document.getElementById(id);
+function steps(s){ return s.frames.length + 3; }
+function render(){
+  const s = DATA[si], L = UI[lang], n = steps(s);
+  $("storyTitle").textContent = s.title[lang];
+  $("count").textContent = (fi+1) + " / " + n;
+  $("bars").innerHTML = Array.from({length:n},(_,i)=>`<i class="${i<=fi?'done':''}"><b></b></i>`).join("");
+  if(!cache[s.scene]) cache[s.scene] = SCENES[s.scene]();
+  if($("art").dataset.scene !== s.scene){ $("art").innerHTML = cache[s.scene]; $("art").dataset.scene = s.scene; }
+  const isFrame = fi < s.frames.length;
+  const f = isFrame ? s.frames[fi] : {focus:[180,320,1]};
+  let [fx,fy,z] = f.focus; const hw=180/z, hh=320/z;
+  fx = Math.min(Math.max(fx,hw),360-hw); fy = Math.min(Math.max(fy,hh),640-hh);
+  $("pan").style.transform = `scale(${z}) translate(${(180-fx)/360*100}%, ${(320-fy)/640*100}%)`;
+  const cap = $("cap"), card = $("card");
+  if(isFrame){
+    card.hidden = true; cap.hidden = false; $("tapPrev").hidden = $("tapNext").hidden = false; $("phone").classList.remove("cardmode");
+    cap.textContent = f[lang];
+    cap.className = "cap" + (lang==="hi"?" hi":"") + (fi===s.frames.length-1?" reveal":"");
+  } else {
+    cap.hidden = true; card.hidden = false; $("tapPrev").hidden = $("tapNext").hidden = true; $("phone").classList.add("cardmode");
+    const k = fi - s.frames.length;
+    if(k===0) card.innerHTML = `<h3>${L.say}</h3><span class="term">${esc(s.named[lang])}</span><blockquote>${esc(s.sayItSmart[lang])}</blockquote><button class="copy" id="copyBtn">${L.copy}</button>`;
+    if(k===1) card.innerHTML = `<h3>${L.careful}</h3><p>${esc(s.careful[lang])}</p><h3 style="margin-top:10px">${L.ask}</h3><p class="q">${esc(s.followUp.q[lang])}</p><p class="hint">${esc(s.followUp.hint[lang])}</p>`;
+    if(k===2) card.innerHTML = `<h3>${L.use}</h3><ul>${s.useItIn.map(u=>`<li><span class="chip">${PAPER[u.paper]||u.paper}</span><span>${esc(u[lang])}</span></li>`).join("")}</ul><h3 style="margin-top:10px">${L.src}</h3><ul>${s.sources.map(x=>`<li class="src"><span>${x.verify?`<span class="vf">${L.check}</span>`:"·"}</span><span>${esc(x.label)}</span></li>`).join("")}</ul>`;
+    const cb = $("copyBtn");
+    if(cb) cb.onclick = e => { e.stopPropagation(); const t = s.sayItSmart[lang];
+      const done = () => { cb.textContent = L.copied; };
+      try{ navigator.clipboard.writeText(t).then(done, () => selectText(card.querySelector("blockquote"))); }catch(_){ selectText(card.querySelector("blockquote")); } };
+  }
+  $("prev").textContent = L.back; $("prev").disabled = (si===0 && fi===0);
+  $("next").textContent = fi===n-1 ? L.again : L.next;
+  $("hint").textContent = L.hint;
+  [...$("picker").children].forEach((b,i)=>b.setAttribute("aria-current", i===si));
+}
+function selectText(el){ const r=document.createRange(); r.selectNodeContents(el); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+function go(d){
+  const n = steps(DATA[si]); fi += d;
+  if(fi>=n){ si=(si+1)%DATA.length; fi=0; }
+  if(fi<0){ if(si>0){ si--; fi=steps(DATA[si])-1; } else fi=0; }
+  render();
+}
+function pick(i){ si=i; fi=0; render(); }
+function buildPicker(){
+  $("picker").innerHTML = DATA.map((s,i)=>`<button data-i="${i}">${esc(s.title[lang])}<small>${esc(s.named[lang].split(/[:(]/)[0].trim())}</small></button>`).join("");
+  [...$("picker").children].forEach(b=>b.onclick=()=>pick(+b.dataset.i));
+}
+function setLang(l){ lang=l; $("lang-en").setAttribute("aria-pressed", l==="en"); $("lang-hi").setAttribute("aria-pressed", l==="hi"); buildPicker(); render(); }
+$("tapNext").onclick=()=>go(1); $("card").onclick=e=>{ if(!e.target.closest("button")) go(1); }; $("tapPrev").onclick=()=>go(-1); $("next").onclick=()=>go(1); $("prev").onclick=()=>go(-1);
+$("lang-en").onclick=()=>setLang("en"); $("lang-hi").onclick=()=>setLang("hi");
+document.addEventListener("keydown", e=>{ if(e.key==="ArrowRight") go(1); if(e.key==="ArrowLeft") go(-1); });
+$("sampleRows").innerHTML = DATA.map((s,i)=>`<tr><td><a href="#" data-i="${i}" style="color:var(--teal)">${esc(s.title.en)}</a></td><td>${esc(s.named.en.split(/[:(]/)[0].trim())}</td><td>${[...new Set(s.useItIn.map(u=>PAPER[u.paper]))].join(", ")}</td><td>${s.sources.filter(x=>x.verify).length} of ${s.sources.length} sources</td></tr>`).join("");
+[...document.querySelectorAll("#sampleRows a")].forEach(a=>a.onclick=e=>{e.preventDefault(); pick(+a.dataset.i); $("phone").scrollIntoView({behavior:"smooth",block:"center"});});
+buildPicker(); render();
+</script>
+
+</body></html>

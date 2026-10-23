@@ -1,0 +1,169 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "eco-fiscal-and-monetary-institutions",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "GST, MPC and Finance Commission: how many correct?",
+    "hi": "GST, MPC और वित्त आयोग: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Goods and Services Tax (GST):",
+        "statements": [
+          "GST was introduced through the Constitution (101st Amendment) Act, 2016.",
+          "The GST Council is chaired by the Prime Minister.",
+          "Alcoholic liquor for human consumption is kept outside GST."
+        ],
+        "why": "Only statement 2 is wrong: the GST Council is chaired by the Union Finance Minister, not the Prime Minister. So two are correct."
+      },
+      "hi": {
+        "stem": "वस्तु एवं सेवा कर (GST) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "GST संविधान (101वाँ संशोधन) अधिनियम, 2016 के माध्यम से लाया गया।",
+          "GST परिषद की अध्यक्षता प्रधानमंत्री करते हैं।",
+          "मानव उपभोग वाली मादक शराब GST से बाहर रखी गई है।"
+        ],
+        "why": "सिर्फ़ कथन 2 गलत है: GST परिषद की अध्यक्षता केंद्रीय वित्त मंत्री करते हैं, प्रधानमंत्री नहीं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the GST Council and GST on inter-state trade:",
+        "statements": [
+          "The GST Council is a constitutional body under Article 279A.",
+          "The Union government's vote carries one-third of the total weight.",
+          "Decisions need a three-fourths majority of weighted votes of members present and voting.",
+          "On inter-state supply, IGST is levied and collected by the states."
+        ],
+        "why": "Statement 4 is wrong: under Article 269A, IGST on inter-state supply is levied and collected by the Union, then shared. The other three are correct."
+      },
+      "hi": {
+        "stem": "GST परिषद और अंतर-राज्यीय व्यापार पर GST के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "GST परिषद अनुच्छेद 279A के तहत एक संवैधानिक निकाय है।",
+          "केंद्र सरकार के मत का भार कुल भार का एक-तिहाई होता है।",
+          "निर्णयों के लिए उपस्थित और मतदान करने वाले सदस्यों के भारित मतों का तीन-चौथाई बहुमत चाहिए।",
+          "अंतर-राज्यीय आपूर्ति पर IGST राज्य लगाते और वसूलते हैं।"
+        ],
+        "why": "कथन 4 गलत है: अनुच्छेद 269A के तहत अंतर-राज्यीय आपूर्ति पर IGST केंद्र लगाता और वसूलता है, फिर बँटवारा होता है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Monetary Policy Committee (MPC):",
+        "statements": [
+          "The MPC has six members.",
+          "The Union Finance Minister chairs the MPC.",
+          "India's inflation target is set in terms of the Wholesale Price Index.",
+          "The RBI Governor has a casting vote if the votes are tied."
+        ],
+        "why": "Statement 2 is wrong: the RBI Governor chairs the MPC. Statement 3 is wrong: the target is 4 percent CPI inflation, within a 2 to 6 percent band. So two are correct."
+      },
+      "hi": {
+        "stem": "मौद्रिक नीति समिति (MPC) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "MPC में छह सदस्य होते हैं।",
+          "MPC की अध्यक्षता केंद्रीय वित्त मंत्री करते हैं।",
+          "भारत का मुद्रास्फीति लक्ष्य थोक मूल्य सूचकांक के आधार पर तय होता है।",
+          "मत बराबर होने पर RBI गवर्नर के पास निर्णायक मत होता है।"
+        ],
+        "why": "कथन 2 गलत है: MPC की अध्यक्षता RBI गवर्नर करते हैं। कथन 3 गलत है: लक्ष्य 4 प्रतिशत CPI मुद्रास्फीति है, 2 से 6 प्रतिशत के दायरे में। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Finance Commission:",
+        "statements": [
+          "It is constituted under Article 280 of the Constitution.",
+          "It is constituted every three years.",
+          "Its recommendations are binding on the Union government."
+        ],
+        "why": "Statement 2 is wrong: it is constituted every five years or earlier. Statement 3 is wrong: its recommendations are advisory. Only one is correct."
+      },
+      "hi": {
+        "stem": "वित्त आयोग के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसका गठन संविधान के अनुच्छेद 280 के तहत होता है।",
+          "इसका गठन हर तीन साल में होता है।",
+          "इसकी सिफ़ारिशें केंद्र सरकार पर बाध्यकारी हैं।"
+        ],
+        "why": "कथन 2 गलत है: इसका गठन हर पाँच साल में या उससे पहले होता है। कथन 3 गलत है: इसकी सिफ़ारिशें सलाहकारी होती हैं। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 269A, 279A and 280; RBI Act 1934",
+    "hi": "भारत का संविधान, अनुच्छेद 269A, 279A और 280; RBI अधिनियम 1934"
+  },
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

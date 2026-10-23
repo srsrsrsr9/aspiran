@@ -1,0 +1,93 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "id": "two-truths-president-vp",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Two truths and a lie: top constitutional posts",
+    "hi": "दो सच और एक झूठ: शीर्ष संवैधानिक पद"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Both elections use proportional representation through the single transferable vote.",
+          "State legislators take part in electing the Vice-President.",
+          "Nominated members of Parliament do not vote in the presidential election."
+        ],
+        "fix": "State legislators do not take part; the Vice-President is elected by all members of both Houses, elected and nominated."
+      },
+      "hi": {
+        "statements": [
+          "दोनों चुनाव एकल संक्रमणीय मत के साथ आनुपातिक प्रतिनिधित्व से होते हैं।",
+          "उपराष्ट्रपति के चुनाव में राज्य विधानमंडल के सदस्य भाग लेते हैं।",
+          "राष्ट्रपति के चुनाव में मनोनीत सांसद मतदान नहीं करते।"
+        ],
+        "fix": "राज्य विधानमंडल भाग नहीं लेते; उपराष्ट्रपति को संसद के दोनों सदनों के सभी सदस्य चुनते हैं, चाहे वे निर्वाचित हों या मनोनीत।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Vice-President is elected by all members of both Houses, elected and nominated.",
+          "The President holds office for five years.",
+          "The President, once elected, cannot stand for re-election."
+        ],
+        "fix": "The President holds office for five years and is eligible for re-election."
+      },
+      "hi": {
+        "statements": [
+          "उपराष्ट्रपति को संसद के दोनों सदनों के सभी सदस्य चुनते हैं, चाहे वे निर्वाचित हों या मनोनीत।",
+          "राष्ट्रपति का कार्यकाल पाँच वर्ष का होता है।",
+          "एक बार चुने जाने के बाद राष्ट्रपति दोबारा चुनाव नहीं लड़ सकते।"
+        ],
+        "fix": "राष्ट्रपति का कार्यकाल पाँच वर्ष का होता है और वे पुनर्निर्वाचन के पात्र हैं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Nominated members of Parliament vote in the presidential election.",
+          "Elected members of state assemblies vote in the presidential election.",
+          "Voting in both elections is by secret ballot."
+        ],
+        "fix": "Nominated members of Parliament and of the assemblies do not vote in the presidential election."
+      },
+      "hi": {
+        "statements": [
+          "राष्ट्रपति के चुनाव में मनोनीत संसद सदस्य मतदान करते हैं।",
+          "राज्यों तथा दिल्ली और पुदुचेरी की विधानसभाओं के निर्वाचित सदस्य राष्ट्रपति के चुनाव में मतदान करते हैं।",
+          "दोनों चुनावों में मतदान गुप्त मतपत्र से होता है।"
+        ],
+        "fix": "संसद और विधानसभाओं के मनोनीत सदस्य राष्ट्रपति के चुनाव में मतदान नहीं करते।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/two-truths/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "upsc-pods/assemble@1",
+  "id": "preamble-snap",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Snap the Preamble together",
+    "hi": "प्रस्तावना जोड़िए"
+  },
+  "prompt": {
+    "en": "Put the Preamble's description of India in order.",
+    "hi": "प्रस्तावना में भारत के वर्णन को सही क्रम में रखिए।"
+  },
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "pieces": [
+    {
+      "en": {
+        "text": "Sovereign",
+        "note": "India decides its own affairs, at home and abroad."
+      },
+      "hi": {
+        "text": "संपूर्ण प्रभुत्व-संपन्न",
+        "note": "भारत अपने भीतरी और बाहरी मामले ख़ुद तय करता है।"
+      }
+    },
+    {
+      "en": {
+        "text": "Socialist",
+        "note": "Added by the 42nd Amendment in 1976."
+      },
+      "hi": {
+        "text": "समाजवादी",
+        "note": "1976 में 42वें संशोधन से जोड़ा गया।"
+      }
+    },
+    {
+      "en": {
+        "text": "Secular",
+        "note": "Also added in 1976. The State has no religion of its own."
+      },
+      "hi": {
+        "text": "पंथनिरपेक्ष",
+        "note": "यह भी 1976 में जुड़ा। राज्य का अपना कोई धर्म नहीं है।"
+      }
+    },
+    {
+      "en": {
+        "text": "Democratic",
+        "note": "Power comes from the people, through elections."
+      },
+      "hi": {
+        "text": "लोकतंत्रात्मक",
+        "note": "सत्ता जनता से, चुनावों के ज़रिए आती है।"
+      }
+    },
+    {
+      "en": {
+        "text": "Republic",
+        "note": "The head of state is elected, not hereditary."
+      },
+      "hi": {
+        "text": "गणराज्य",
+        "note": "राष्ट्राध्यक्ष चुना जाता है, वंश से नहीं आता।"
+      }
+    }
+  ],
+  "explain": {
+    "en": "The Preamble declares India a Sovereign Socialist Secular Democratic Republic. 'Socialist' and 'Secular' were added by the 42nd Amendment in 1976, along with 'integrity'.",
+    "hi": "प्रस्तावना भारत को संपूर्ण प्रभुत्व-संपन्न समाजवादी पंथनिरपेक्ष लोकतंत्रात्मक गणराज्य घोषित करती है। 'समाजवादी' और 'पंथनिरपेक्ष' 1976 में 42वें संशोधन से 'अखंडता' के साथ जोड़े गए।"
+  },
+  "sources": {
+    "en": "Constitution of India, Preamble",
+    "hi": "भारत का संविधान, प्रस्तावना"
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Sample for the template preview. Standard reference facts, not yet checked by an editor."
+  }
+}

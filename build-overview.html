@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Overview</title>
+<style>
+:root{
+  --bg:#f6f2ec; --panel:#fffdf9; --ink:#2a2622; --muted:#7a7066; --line:#e6ddd1;
+  --amber:#c9822b; --amber-soft:#f3e1c8; --indigo:#5560a8; --indigo-soft:#e2e4f4;
+  --green:#3f8a5c; --green-soft:#dcefe2; --red:#b5533c; --red-soft:#f4dcd5;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17161a; --panel:#211f25; --ink:#ece6dc; --muted:#a39a8f; --line:#34313a;
+  --amber:#e0a050; --amber-soft:#3a2d1c; --indigo:#8f98e0; --indigo-soft:#262a45;
+  --green:#6cc08b; --green-soft:#1e3326; --red:#e08a73; --red-soft:#3d2520;
+}}
+:root[data-theme="dark"]{
+  --bg:#17161a; --panel:#211f25; --ink:#ece6dc; --muted:#a39a8f; --line:#34313a;
+  --amber:#e0a050; --amber-soft:#3a2d1c; --indigo:#8f98e0; --indigo-soft:#262a45;
+  --green:#6cc08b; --green-soft:#1e3326; --red:#e08a73; --red-soft:#3d2520;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+h1{font:600 30px/1.2 Georgia,serif;margin:0 0 6px}
+h2{font:600 13px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.sub{color:var(--muted);max-width:720px;margin:0 0 24px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;
+  opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.card.in{opacity:1;transform:none}
+.s12{grid-column:span 12}.s8{grid-column:span 8}.s7{grid-column:span 7}.s6{grid-column:span 6}.s5{grid-column:span 5}.s4{grid-column:span 4}
+@media (max-width:860px){.s8,.s7,.s6,.s5,.s4{grid-column:span 12}}
+.thesis{font:italic 20px/1.4 Georgia,serif;margin:0}
+.pill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:99px;background:var(--amber-soft);color:var(--amber);font-weight:600}
+/* funnel */
+.funnel .row{display:flex;align-items:center;gap:12px;margin:10px 0}
+.funnel .lbl{width:150px;font-size:13px;color:var(--muted);flex-shrink:0}
+.funnel .bar{height:26px;border-radius:6px;background:var(--indigo);width:0;transition:width 1.4s cubic-bezier(.2,.8,.2,1);min-width:4px}
+.funnel .num{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+/* phone */
+.phone{width:260px;margin:0 auto;border:8px solid var(--ink);border-radius:32px;padding:16px 14px;background:var(--bg)}
+.phone .top{display:flex;justify-content:space-between;font-size:13px;font-weight:600}
+.phone .calm{font-size:12px;color:var(--muted);margin:2px 0 12px}
+.task{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:13px}
+.box{width:16px;height:16px;border-radius:4px;border:2px solid var(--muted);flex-shrink:0;transition:all .3s}
+.task.done .box{background:var(--green);border-color:var(--green)}
+.task.done span.t{text-decoration:line-through;color:var(--muted)}
+.task .m{margin-left:auto;color:var(--muted);font-size:11px}
+.prog{height:6px;background:var(--line);border-radius:3px;margin:10px 0;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--green);transition:width .5s}
+.podrow{display:flex;gap:4px;margin:8px 0 4px}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--indigo-soft);border:2px solid var(--panel);transition:background .4s}
+.dot.on{background:var(--indigo)}
+.feed{font-size:12px;color:var(--muted);min-height:18px;transition:opacity .3s}
+.nav{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-top:12px}
+.nav b{color:var(--amber)}
+/* surfaces */
+.surf{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media (max-width:860px){.surf{grid-template-columns:1fr 1fr}}
+.sf{border:1px solid var(--line);border-radius:12px;padding:12px;transition:transform .2s,border-color .2s;cursor:default}
+.sf:hover{transform:translateY(-3px);border-color:var(--amber)}
+.sf .ic{font-size:22px}.sf b{display:block;margin:4px 0 2px}.sf small{color:var(--muted);font-size:12px;display:block}
+.sf .em{margin-top:8px;font-size:11px;font-weight:600;color:var(--indigo)}
+/* loop */
+.loop{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.step{padding:8px 12px;border-radius:10px;border:1px solid var(--line);font-size:13px;transition:all .4s}
+.step.lit{background:var(--amber-soft);border-color:var(--amber);color:var(--ink);transform:scale(1.05)}
+.arrow{color:var(--muted)}
+/* emotion map */
+.emo{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:13px}
+@media (max-width:500px){.emo{grid-template-columns:1fr}}
+.emo div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:4px 0}
+.emo span:first-child{font-weight:600}.emo span:last-child{color:var(--muted);text-align:right}
+/* roadmap */
+.road{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding-top:26px}
+@media (max-width:860px){.road{grid-template-columns:1fr}}
+.road:before{content:"";position:absolute;top:10px;left:0;height:3px;width:var(--p,0%);background:var(--amber);border-radius:2px;transition:width 2s ease}
+@media (max-width:860px){.road:before{display:none}}
+.ph{border:1px solid var(--line);border-radius:12px;padding:12px;position:relative}
+.ph.now{border:2px solid var(--amber);background:var(--amber-soft)}
+.ph .when{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.ph b{display:block;margin:4px 0}
+.ph ul{margin:6px 0 0;padding-left:16px;font-size:12px;color:var(--muted)}
+.ph .tag{position:absolute;top:-11px;right:10px;background:var(--amber);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px}
+/* signals */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.k{color:var(--red)}.g{color:var(--green)}
+/* gauge */
+.gauges{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.gauges svg{width:100%;max-width:120px}
+.gauges .gl{font-size:12px;color:var(--muted)}
+.gauges circle.track{stroke:var(--line)} .gauges circle.val{transition:stroke-dashoffset 1.6s ease}
+/* lists */
+.chk{list-style:none;margin:0;padding:0;font-size:13px}
+.chk li{padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:8px}
+.chk li:before{content:"✕";color:var(--red);font-weight:700}
+.chk.free li:before{content:"♥";color:var(--green)}
+/* risks */
+.risk{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.risk .rl{flex:1}
+.risk .rb{display:block;width:110px;height:8px;background:var(--line);border-radius:4px;overflow:hidden;flex-shrink:0}
+.risk .rb i{display:block;height:100%;width:0;transition:width 1.2s ease}
+.hi i{background:var(--red)}.md i{background:var(--amber)}.uk i{background:var(--muted)}
+.risk .sv{width:62px;font-size:11px;font-weight:700;text-align:right}
+.hi .sv{color:var(--red)}.md .sv{color:var(--amber)}.uk .sv{color:var(--muted)}
+.first{border:2px solid var(--amber)}
+.toggle{float:right;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 10px;cursor:pointer}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <button class="toggle" id="theme">Toggle theme</button>
+  <span class="pill">Planned build · draft for discussion</span>
+  <h1>A UPSC community where nobody studies alone</h1>
+  <p class="sub">A one-page summary of the research file: who it's for, what the app would be, how the build is staged, and the test that decides whether to build it at all.</p>
+
+  <div class="grid">
+
+    <div class="card s12">
+      <h2>The thesis</h2>
+      <p class="thesis">"The syllabus is vast, but what breaks people is the multi-year endurance test: isolation, uncertainty, comparison, family pressure and money running out. Content is everywhere. Belonging, honesty and safety are not."</p>
+    </div>
+
+    <div class="card s7 funnel" id="funnel">
+      <h2>The funnel (CSE 2026)</h2>
+      <div class="row"><span class="lbl">Apply</span><div class="bar" data-w="100"></div><span class="num" data-n="819000">0</span></div>
+      <div class="row"><span class="lbl">Sit Prelims</span><div class="bar" data-w="67"></div><span class="num" data-n="549000">0</span></div>
+      <div class="row"><span class="lbl">Qualify for Mains</span><div class="bar" data-w="1.63"></div><span class="num" data-n="13343">0</span></div>
+      <div class="row"><span class="lbl">Vacancies (notified)</span><div class="bar" data-w=".11"></div><span class="num" data-n="933">0</span></div>
+      <p class="note">Over 8 lakh applied (about 8.19 lakh; about 8 to 10 lakh apply each year) and 5.49 lakh sat Prelims (provisional). 933 vacancies were notified on 4 Feb 2026, later revised to about 1,016: about 1 vacancy per 540 to 590 who sat. Vacancies are not selections (2025: 958 recommended against 1,087), and the CSE 2026 final result is due in 2027. About 5.3 lakh restart every year, but the devil's-advocate section warns that isn't the market you can actually reach.</p>
+    </div>
+
+    <div class="card s5">
+      <h2>Who it's for first</h2>
+      <div class="emo" style="grid-template-columns:1fr">
+        <div><span>A · Restarting after Prelims</span><span>launch cohort</span></div>
+        <div><span>C · Fresh starters for 2027</span><span>launch cohort</span></div>
+        <div><span>D · Long-haul repeaters</span><span>protected space, future mentors</span></div>
+        <div><span>B · Awaiting Mains result</span><span>result-week "waiting room"</span></div>
+      </div>
+      <p class="note">Personas: Arjun (Hindi-medium grinder), Meera (urban, attempt 2), Rahul (working professional), Sana (extra social load), Vikram (repeater), Kavya (online-only, Tier 3).</p>
+    </div>
+
+    <div class="card s4">
+      <h2>The home screen, live</h2>
+      <div class="phone">
+        <div class="top"><span>Good evening, Meera</span><span>🔥 <span id="streak">12</span></span></div>
+        <div class="calm">225 days to Prelims 2027 · a fact, not an alarm</div>
+        <div class="task" data-i="0"><i class="box"></i><span class="t">5 Prelims questions</span><span class="m">5m</span></div>
+        <div class="task" data-i="1"><i class="box"></i><span class="t">1 Mains answer</span><span class="m">20m</span></div>
+        <div class="task" data-i="2"><i class="box"></i><span class="t">One-page brief</span><span class="m">12m</span></div>
+        <div class="prog"><i id="pbar"></i></div>
+        <div style="font-size:12px;font-weight:600">Pod · Night Owls</div>
+        <div class="podrow" id="pod"></div>
+        <div class="feed" id="feed">Aman posted his answer</div>
+        <div class="nav"><b>Today</b><span>Pod</span><span>Practice</span><span>Rooms</span><span>Path</span></div>
+      </div>
+    </div>
+
+    <div class="card s8">
+      <h2>Five surfaces, each answering an emotion</h2>
+      <div class="surf">
+        <div class="sf"><div class="ic">☀️</div><b>Today</b><small>3 small tasks, no decisions to make</small><div class="em">Anxiety</div></div>
+        <div class="sf"><div class="ic">👥</div><b>Pod</b><small>8–10 people matched by attempt, medium and stage</small><div class="em">Loneliness · Shame</div></div>
+        <div class="sf"><div class="ic">✍️</div><b>Practice</b><small>Submit answers, kind and specific feedback</small><div class="em">Fear</div></div>
+        <div class="sf"><div class="ic">🎙</div><b>Rooms</b><small>Silent study, chai breaks, quiz nights</small><div class="em">Loneliness · Fun</div></div>
+        <div class="sf"><div class="ic">🧭</div><b>My Path</b><small>Attempt Compass, cost of a year, dated Plan B</small><div class="em">Greed · Desperation</div></div>
+      </div>
+      <h2 style="margin-top:22px">The daily loop</h2>
+      <div class="loop" id="loop">
+        <span class="step">Morning: 3 tasks land</span><span class="arrow">→</span>
+        <span class="step">Study block in a Room</span><span class="arrow">→</span>
+        <span class="step">Midday pod ping</span><span class="arrow">→</span>
+        <span class="step">Evening answer + feedback</span><span class="arrow">→</span>
+        <span class="step">Night: close the day</span><span class="arrow">→</span>
+        <span class="step">Weekly: wins + pod call</span>
+      </div>
+    </div>
+
+    <div class="card s12">
+      <h2>Build roadmap</h2>
+      <div class="road" id="road">
+        <div class="ph"><div class="when">Week 0–8</div><b>Validate</b><ul><li>WhatsApp pods, ~100 people</li><li>Founding-seat pre-sale</li><li>15–20 interviews</li></ul></div>
+        <div class="ph now"><span class="tag">BUILD FIRST</span><div class="when">Phase 0</div><b>Honest Tools page</b><ul><li>Attempt Compass</li><li>Cost of a Year</li><li>Parent Page + share cards</li></ul></div>
+        <div class="ph"><div class="when">Month 2–3</div><b>Phase 1 web app</b><ul><li>Today + Pod + Practice</li><li>Close the day</li><li>Rooms via voice embed</li></ul></div>
+        <div class="ph"><div class="when">Month 4–6</div><b>Phase 2</b><ul><li>Honest Guide, My Path</li><li>Private streaks</li><li>First paid tier</li></ul></div>
+        <div class="ph"><div class="when">Month 6+</div><b>Phase 3</b><ul><li>Cycle sprints</li><li>Mentor marketplace</li><li>Partners</li></ul></div>
+      </div>
+      <p class="note">Phase 0 is my recommended starting point. It doesn't depend on the pod test passing, and it helps recruit for that test. Everything to its right waits for the test results.</p>
+    </div>
+
+    <div class="card s7">
+      <h2>The test that decides everything</h2>
+      <table>
+        <tr><th>Signal</th><th>Kill</th><th>Strong</th></tr>
+        <tr><td>Week-4 active rate in pods</td><td class="k">under 30%</td><td class="g">over 50%</td></tr>
+        <tr><td>Unprompted referrals</td><td class="k">almost none</td><td class="g">a meaningful share</td></tr>
+        <tr><td>Founding seats sold (of 30)</td><td class="k">fewer than 5</td><td class="g">15+</td></tr>
+        <tr><td>Pod leads at week 4</td><td class="k">quit</td><td class="g">ask to continue</td></tr>
+        <tr><td>Distress incidents</td><td class="k">any you can't handle</td><td class="g">handled well</td></tr>
+      </table>
+      <p class="note">If the first three fail, the community-first idea is wrong and no app will fix it.</p>
+    </div>
+
+    <div class="card s5">
+      <h2>Strong-signal targets</h2>
+      <div class="gauges">
+        <div><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="40" fill="none" stroke-width="10"/><circle class="val" data-v="50" cx="50" cy="50" r="40" fill="none" stroke="var(--green)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"/><text x="50" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)">50%</text></svg><div class="gl">active at week 4</div></div>
+        <div><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="40" fill="none" stroke-width="10"/><circle class="val" data-v="50" cx="50" cy="50" r="40" fill="none" stroke="var(--indigo)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"/><text x="50" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)">15/30</text></svg><div class="gl">founding seats</div></div>
+        <div><svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="40" fill="none" stroke-width="10"/><circle class="val" data-v="100" cx="50" cy="50" r="40" fill="none" stroke="var(--amber)" stroke-width="10" stroke-linecap="round" transform="rotate(-90 50 50)"/><text x="50" y="56" text-anchor="middle" font-size="20" font-weight="700" fill="var(--ink)">100</text></svg><div class="gl">aspirants recruited</div></div>
+      </div>
+      <p class="note">These are the targets from the file, not results. Nothing has been measured yet.</p>
+    </div>
+
+    <div class="card s6">
+      <h2>Emotion → mechanic</h2>
+      <div class="emo">
+        <div><span>Fear</span><span>cheap, safe practice</span></div>
+        <div><span>Anxiety</span><span>fixed rhythm, close the day</span></div>
+        <div><span>Greed</span><span>5-source map, Resource Court</span></div>
+        <div><span>Desperation</span><span>cost of a year, Plan B Lab</span></div>
+        <div><span>Depression</span><span>human replies, helplines</span></div>
+        <div><span>Loneliness</span><span>pods, co-study rooms</span></div>
+        <div><span>Shame</span><span>attempt-tagged dignity</span></div>
+        <div><span>Family</span><span>parent page, role-play</span></div>
+        <div><span>Fun</span><span>quiz nights, memes, chai</span></div>
+        <div><span>Hope</span><span>wins of the week, ladder</span></div>
+      </div>
+    </div>
+
+    <div class="card s6" id="risks">
+      <h2>Risks from the devil's advocate</h2>
+      <div class="risk hi"><span class="rl">Price anchored low by competitors</span><span class="rb"><i data-w="92"></i></span><span class="sv">HIGH</span></div>
+      <div class="risk hi"><span class="rl">AI feedback is easy to copy</span><span class="rb"><i data-w="88"></i></span><span class="sv">HIGH</span></div>
+      <div class="risk hi"><span class="rl">Honest mission works against retention</span><span class="rb"><i data-w="85"></i></span><span class="sv">HIGH</span></div>
+      <div class="risk hi"><span class="rl">Capacity to respond to crises</span><span class="rb"><i data-w="90"></i></span><span class="sv">HIGH</span></div>
+      <div class="risk md"><span class="rl">Pod density, volunteer burnout</span><span class="rb"><i data-w="60"></i></span><span class="sv">MEDIUM</span></div>
+      <div class="risk md"><span class="rl">Founder credibility in hubs</span><span class="rb"><i data-w="55"></i></span><span class="sv">MEDIUM</span></div>
+      <div class="risk md"><span class="rl">DPDP compliance by May 2027</span><span class="rb"><i data-w="55"></i></span><span class="sv">MEDIUM</span></div>
+      <div class="risk uk"><span class="rl">Demand trend</span><span class="rb"><i data-w="35"></i></span><span class="sv">UNKNOWN</span></div>
+    </div>
+
+    <div class="card s6">
+      <h2>Free forever</h2>
+      <ul class="chk free">
+        <li>Pods and the daily rhythm</li>
+        <li>Distress support and helpline visibility</li>
+        <li>Honest Guide and calculators</li>
+        <li>Basic Plan B resources</li>
+      </ul>
+    </div>
+    <div class="card s6">
+      <h2>Deliberately left out</h2>
+      <ul class="chk">
+        <li>Public leaderboards and rank numbers</li>
+        <li>Red countdowns and fake scarcity</li>
+        <li>Upsells in distress threads or on failed-result days</li>
+        <li>Result claims that can't be proven</li>
+      </ul>
+    </div>
+
+    <div class="card s12 first">
+      <h2>Proposed first build: Honest Tools page</h2>
+      <p style="margin:0">A single web page that runs from this folder with nothing to install. It has three tools: the <b>Attempt Compass</b> (attempts and age window as a calm timeline), the <b>Cost of a Year</b> calculator (rent, library, coaching, food and opportunity cost), and the <b>Parent Page</b> (a one-page plan with a dated Plan B to send home). Each one ends in a share card, and the page works in English and Hindi. No login, and nothing sensitive is stored.</p>
+    </div>
+
+  </div>
+</div>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var t = document.getElementById('theme');
+  t.onclick = function(){
+    var r = document.documentElement, cur = r.getAttribute('data-theme');
+    var dark = cur ? cur === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.setAttribute('data-theme', dark ? 'light' : 'dark');
+  };
+
+  function fmt(n){ return n >= 100000 ? (n/100000).toFixed(n>=1000000?0:2).replace(/\.00$/,'') + ' lakh' : n.toLocaleString('en-IN'); }
+  function count(el){
+    var to = +el.dataset.n, start = performance.now(), d = reduce ? 0 : 1400;
+    (function f(now){
+      var p = d ? Math.min(1,(now-start)/d) : 1, e = 1-Math.pow(1-p,3);
+      el.textContent = (to>=100000?'~':'') + fmt(Math.round(to*e));
+      if(p<1) requestAnimationFrame(f);
+    })(start);
+  }
+  function onIn(card){
+    card.querySelectorAll('.bar').forEach(function(b){ b.style.width = b.dataset.w + '%'; });
+    card.querySelectorAll('.num').forEach(count);
+    card.querySelectorAll('.rb i').forEach(function(b){ b.style.width = b.dataset.w + '%'; });
+    card.querySelectorAll('circle.val').forEach(function(c){
+      var C = 2*Math.PI*40; c.style.strokeDasharray = C; c.style.strokeDashoffset = C;
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ c.style.strokeDashoffset = C*(1-c.dataset.v/100); }); });
+    });
+    var road = card.querySelector('.road'); if(road) road.style.setProperty('--p','30%');
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); onIn(e.target); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.card').forEach(function(c,i){ c.style.transitionDelay = (i%3)*80+'ms'; io.observe(c); });
+
+  // phone demo
+  var pod = document.getElementById('pod');
+  for(var i=0;i<8;i++){ var d=document.createElement('i'); d.className='dot'+(i<5?' on':''); pod.appendChild(d); }
+  var tasks = document.querySelectorAll('.task'), pbar = document.getElementById('pbar'), feed = document.getElementById('feed'), streak = document.getElementById('streak');
+  var msgs = ['Aman posted his answer','Priya closed the day 👏 5','Rohit (lead): try the 3-line intro','6 of 8 studying now','You showed up today. That counts.'];
+  var step = 0;
+  function tick(){
+    var k = step % 5;
+    if(k===0){ tasks.forEach(function(t){t.classList.remove('done')}); pbar.style.width='0'; }
+    if(k>=1 && k<=3){ tasks[k-1].classList.add('done'); pbar.style.width = (k/3*100)+'%'; }
+    if(k===4){ streak.textContent = 13; } else if(k===0){ streak.textContent = 12; }
+    var dots = pod.children; dots[(step+5)%8].classList.toggle('on');
+    feed.style.opacity = 0;
+    setTimeout(function(){ feed.textContent = msgs[k]; feed.style.opacity = 1; }, 250);
+    step++;
+  }
+  // loop highlight
+  var steps = document.querySelectorAll('#loop .step'), li = 0;
+  function loopTick(){ steps.forEach(function(s){s.classList.remove('lit')}); steps[li%steps.length].classList.add('lit'); li++; }
+  if(!reduce){ setInterval(tick, 1800); setInterval(loopTick, 1500); }
+  loopTick();
+})();
+</script>
+</body>
+</html>

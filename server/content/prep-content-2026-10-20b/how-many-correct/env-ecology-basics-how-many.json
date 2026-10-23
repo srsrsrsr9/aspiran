@@ -1,0 +1,169 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "env-ecology-basics-how-many",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Ecology basics: how many are correct?",
+    "hi": "पारिस्थितिकी की बुनियाद: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about energy flow in an ecosystem:",
+        "statements": [
+          "Roughly 10 per cent of energy passes from one trophic level to the next.",
+          "The pyramid of biomass is upright in every ecosystem, including the open ocean.",
+          "The pyramid of energy is always upright.",
+          "Decomposers such as fungi sit at the top of a food chain as top consumers."
+        ],
+        "why": "Statement 2 is wrong: in the open sea the biomass pyramid is often inverted, as small phytoplankton support larger consumers. Statement 4 is wrong: decomposers break down dead matter from every level."
+      },
+      "hi": {
+        "stem": "किसी पारितंत्र में ऊर्जा प्रवाह के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "एक पोषी स्तर से अगले स्तर तक लगभग 10 प्रतिशत ऊर्जा पहुँचती है।",
+          "जैवभार का पिरामिड हर पारितंत्र में सीधा होता है, खुले महासागर में भी।",
+          "ऊर्जा का पिरामिड हमेशा सीधा होता है।",
+          "कवक जैसे अपघटक खाद्य श्रृंखला के शीर्ष पर सर्वोच्च उपभोक्ता के रूप में होते हैं।"
+        ],
+        "why": "कथन 2 ग़लत है: खुले समुद्र में जैवभार पिरामिड अक्सर उल्टा होता है, क्योंकि छोटे पादप प्लवक बड़े उपभोक्ताओं को पालते हैं। कथन 4 ग़लत है: अपघटक हर स्तर के मृत पदार्थ को तोड़ते हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about ecological succession:",
+        "statements": [
+          "Lichens are often the pioneer species on bare rock.",
+          "The final, relatively stable community in succession is called the climax community.",
+          "Primary succession is faster than secondary succession because soil is already present."
+        ],
+        "why": "Statement 3 is wrong on both counts: secondary succession is faster, because soil already exists there; primary succession starts on bare rock or new land with no soil."
+      },
+      "hi": {
+        "stem": "पारिस्थितिक अनुक्रमण के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नंगी चट्टान पर अक्सर लाइकेन अग्रणी (पायनियर) प्रजाति होते हैं।",
+          "अनुक्रमण का अंतिम, अपेक्षाकृत स्थिर समुदाय चरम (क्लाइमैक्स) समुदाय कहलाता है।",
+          "प्राथमिक अनुक्रमण द्वितीयक अनुक्रमण से तेज़ होता है, क्योंकि वहाँ मिट्टी पहले से होती है।"
+        ],
+        "why": "कथन 3 दोनों तरह से ग़लत है: द्वितीयक अनुक्रमण तेज़ होता है, क्योंकि वहाँ मिट्टी पहले से होती है; प्राथमिक अनुक्रमण बिना मिट्टी वाली नंगी चट्टान या नई ज़मीन पर शुरू होता है।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about ecosystems:",
+        "statements": [
+          "In biomagnification, a toxin's concentration falls at each higher trophic level.",
+          "DDT build-up thinned the eggshells of fish-eating birds and hurt their breeding.",
+          "Eutrophication raises the dissolved oxygen in a lake.",
+          "Net primary productivity is gross primary productivity minus losses to respiration."
+        ],
+        "why": "Statement 1 is wrong: in biomagnification the concentration rises up the food chain. Statement 3 is wrong: excess nutrients cause algal blooms whose decay uses up dissolved oxygen."
+      },
+      "hi": {
+        "stem": "पारितंत्रों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "जैव आवर्धन में किसी विष की सांद्रता हर ऊँचे पोषी स्तर पर घटती है।",
+          "DDT जमा होने से मछली खाने वाले पक्षियों के अंडों के खोल पतले हुए और उनका प्रजनन घटा।",
+          "सुपोषण (यूट्रोफ़िकेशन) झील में घुली ऑक्सीजन बढ़ाता है।",
+          "शुद्ध प्राथमिक उत्पादकता, सकल प्राथमिक उत्पादकता में से श्वसन में ख़र्च घटाने पर मिलती है।"
+        ],
+        "why": "कथन 1 ग़लत है: जैव आवर्धन में सांद्रता खाद्य श्रृंखला में ऊपर जाते हुए बढ़ती है। कथन 3 ग़लत है: ज़्यादा पोषक तत्वों से शैवाल पनपते हैं, जिनके सड़ने से घुली ऑक्सीजन ख़त्म होती है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "An ecotone is a transition zone between two ecosystems, such as a mangrove between land and sea.",
+          "Ecotones often hold more species than either neighbouring community, called the edge effect.",
+          "A keystone species has an effect on its ecosystem far larger than its numbers suggest."
+        ],
+        "why": "All three are correct. The edge effect explains why ecotones are rich in species, and removing a keystone species can change a whole ecosystem."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इकोटोन दो पारितंत्रों के बीच का संक्रमण क्षेत्र है, जैसे ज़मीन और समुद्र के बीच मैंग्रोव।",
+          "इकोटोन में अक्सर दोनों पड़ोसी समुदायों से ज़्यादा प्रजातियाँ होती हैं, इसे कोर प्रभाव (edge effect) कहते हैं।",
+          "कीस्टोन प्रजाति का अपने पारितंत्र पर असर उसकी संख्या की तुलना में कहीं ज़्यादा होता है।"
+        ],
+        "why": "तीनों कथन सही हैं। कोर प्रभाव बताता है कि इकोटोन में प्रजातियाँ ज़्यादा क्यों होती हैं, और कीस्टोन प्रजाति हटने से पूरा पारितंत्र बदल सकता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Biology, Ecosystem, Organisms and Populations, Environmental Issues",
+    "hi": "NCERT कक्षा XII जीव विज्ञान, पारितंत्र, जीव और समष्टियाँ, पर्यावरण के मुद्दे"
+  },
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

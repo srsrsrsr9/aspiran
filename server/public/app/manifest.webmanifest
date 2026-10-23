@@ -1,0 +1,22 @@
+{
+  "name": "UPSC Pods",
+  "short_name": "UPSC Pods",
+  "description": "Today's Chai, practice, mock papers, long reads, focus sessions and your pod.",
+  "id": "/app/",
+  "start_url": "/app/#today",
+  "scope": "/app/",
+  "display": "standalone",
+  "background_color": "#FFF8F3",
+  "theme_color": "#8D4F01",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Focus", "url": "/app/#focus" },
+    { "name": "Mock papers", "url": "/app/#mock" },
+    { "name": "Today's Chai", "url": "/app/#chai" }
+  ]
+}

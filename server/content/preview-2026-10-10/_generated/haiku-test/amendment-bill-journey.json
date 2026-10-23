@@ -1,0 +1,104 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "move": "sfx/whoosh",
+    "stamp": "sfx/stamp",
+    "end": "motif"
+  },
+  "id": "amendment-bill-journey",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How a constitutional amendment passes",
+    "hi": "संविधान संशोधन कैसे पारित होता है"
+  },
+  "item": {
+    "en": "Amendment bill",
+    "hi": "संशोधन विधेयक"
+  },
+  "stations": [
+    {
+      "en": {
+        "name": "Parliament introduction",
+        "stamp": "Introduced",
+        "rule": "Article 368: the bill can be introduced in either House, by a minister or a private member, but not in a state legislature."
+      },
+      "hi": {
+        "name": "संसद में प्रस्तुति",
+        "stamp": "प्रस्तुत",
+        "rule": "अनुच्छेद 368: विधेयक किसी भी सदन में, मंत्री या निजी सदस्य द्वारा पेश हो सकता है, पर राज्य विधानमंडल में नहीं।"
+      }
+    },
+    {
+      "en": {
+        "name": "Each House votes",
+        "stamp": "Special majority",
+        "rule": "Under Article 368, each House passes it separately by a special majority: a majority of total membership, and two-thirds of members present and voting."
+      },
+      "hi": {
+        "name": "प्रत्येक सदन में मतदान",
+        "stamp": "विशेष बहुमत",
+        "rule": "अनुच्छेद 368 के अंतर्गत, प्रत्येक सदन इसे अलग-अलग विशेष बहुमत से पारित करता है: सदन की कुल सदस्य संख्या का बहुमत, और उपस्थित व मतदान करने वाले सदस्यों का दो-तिहाई।"
+      }
+    },
+    {
+      "en": {
+        "name": "Houses disagree",
+        "stamp": "Bill fails",
+        "rule": "There is no joint sitting for an amendment bill. If the two Houses disagree, the bill fails."
+      },
+      "hi": {
+        "name": "सदनों में असहमति",
+        "stamp": "विधेयक विफल",
+        "rule": "संशोधन विधेयक के लिए संयुक्त बैठक नहीं होती। यदि दोनों सदनों में असहमति हो, तो विधेयक विफल हो जाता है।"
+      }
+    },
+    {
+      "en": {
+        "name": "State legislatures",
+        "stamp": "Ratified",
+        "rule": "If federal provisions change, half of the states' legislatures must ratify it by simple majority."
+      },
+      "hi": {
+        "name": "राज्य विधानमंडल",
+        "stamp": "अनुसमर्थित",
+        "rule": "यदि संघीय प्रावधान बदले जाएँ, तो आधे राज्यों के विधानमंडलों को साधारण बहुमत से इसकी पुष्टि करनी होगी।"
+      }
+    },
+    {
+      "en": {
+        "name": "President's desk",
+        "stamp": "Assent",
+        "rule": "The bill then goes to the President, who must give assent. The 24th Amendment of 1971 made this assent compulsory."
+      },
+      "hi": {
+        "name": "राष्ट्रपति के पास",
+        "stamp": "सहमति",
+        "rule": "विधेयक राष्ट्रपति के पास जाता है, जिन्हें सहमति देनी होती है। 24वें संशोधन, 1971 ने इस सहमति को अनिवार्य बनाया।"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "An amendment bill has no joint sitting, so if the two Houses disagree, the bill simply fails.",
+    "hi": "संशोधन विधेयक की संयुक्त बैठक नहीं होती, इसलिए यदि दोनों सदन असहमत हों, तो विधेयक विफल हो जाता है।"
+  },
+  "sources": {
+    "en": "Constitution of India: Article 368 and the 24th Amendment (1971)",
+    "hi": "भारत का संविधान: अनुच्छेद 368 और 24वाँ संशोधन (1971)"
+  },
+  "schema": "upsc-pods/stamp-trail@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/stamp-trail/",
+    "createdOn": "2026-10-10"
+  }
+}

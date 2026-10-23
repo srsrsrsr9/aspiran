@@ -1,0 +1,102 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "id": "assertion-reason-rain-shadows",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Assertion and reason: rain and rain shadows",
+    "hi": "कथन और कारण: वर्षा और वृष्टि-छाया"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The western slopes of the Western Ghats get heavy rain from the southwest monsoon.",
+        "reason": "Moist air rising over the windward slopes cools and drops its moisture as orographic rainfall.",
+        "why": "A is true and R is true. R explains A: moist air cools as it rises over the windward slopes, so rain falls there."
+      },
+      "hi": {
+        "assertion": "दक्षिण-पश्चिम मानसून से पश्चिमी घाट की पवनमुखी ढलानों पर भारी वर्षा होती है।",
+        "reason": "नम हवा पवनमुखी ढलानों पर ऊपर उठकर ठंडी होती है और पर्वतीय वर्षा (orographic rainfall) के रूप में अपनी नमी छोड़ती है।",
+        "why": "A और R दोनों सही हैं, और R A को समझाता है: ऊपर उठती नम हवा ठंडी होकर पवनमुखी ढलानों पर वर्षा करती है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "Parts of Marathwada lie in the rain shadow of the Western Ghats.",
+        "reason": "The descending air on the eastern side is moist, so these areas get heavy rain.",
+        "why": "A is true: parts of Marathwada lie in a rain shadow. R is false: the descending air on the leeward side is drier, so these areas get much less rain."
+      },
+      "hi": {
+        "assertion": "मराठवाड़ा के कुछ हिस्से पश्चिमी घाट की वृष्टि-छाया में पड़ते हैं।",
+        "reason": "पूर्वी ओर उतरती हवा नम होती है, इसलिए इन इलाकों में भारी वर्षा होती है।",
+        "why": "A सही है: मराठवाड़ा के कुछ हिस्से वृष्टि-छाया में हैं। R गलत है: पूर्वी ओर उतरती हवा सूखी होती है, इसलिए वहाँ वर्षा बहुत कम होती है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Mangroves grow in the intertidal zones of tropical coasts and deltas.",
+        "reason": "Many mangroves have breathing roots called pneumatophores.",
+        "why": "A and R are both true, but R does not explain A. R describes a root feature, not why mangroves grow in those zones."
+      },
+      "hi": {
+        "assertion": "मैंग्रोव उष्णकटिबंधीय तटों और डेल्टा के अंतर-ज्वारीय क्षेत्रों में उगते हैं।",
+        "reason": "कई मैंग्रोव में साँस लेने वाली जड़ें (pneumatophores) होती हैं।",
+        "why": "A और R दोनों सही हैं, पर R A को नहीं समझाता। R केवल एक जड़-संरचना बताता है, यह नहीं कि मैंग्रोव किस क्षेत्र में उगते हैं।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "The Coromandel coast gets much of its annual rain from the southwest monsoon.",
+        "reason": "During the southwest monsoon, the Coromandel coast lies in the rain shadow of the Western Ghats.",
+        "why": "A is false: the Coromandel coast gets much of its annual rain from the northeast monsoon. R is true: during the southwest monsoon it lies in a rain shadow."
+      },
+      "hi": {
+        "assertion": "कोरोमंडल तट को अपनी वार्षिक वर्षा का अधिकांश भाग दक्षिण-पश्चिम मानसून से मिलता है।",
+        "reason": "दक्षिण-पश्चिम मानसून के दौरान कोरोमंडल तट पश्चिमी घाट की वृष्टि-छाया में होता है।",
+        "why": "A गलत है: कोरोमंडल तट को अधिकांश वर्षा उत्तर-पूर्वी मानसून (अक्टूबर से दिसंबर) से मिलती है। R सही है: दक्षिण-पश्चिम मानसून में यह वृष्टि-छाया में होता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/assertion-reason/",
+    "createdOn": "2026-10-10"
+  }
+}

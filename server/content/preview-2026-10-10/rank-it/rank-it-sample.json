@@ -1,0 +1,94 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "id": "five-largest-indian-states-by-area",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five largest Indian states by area",
+    "hi": "भारत के पाँच सबसे बड़े राज्य (क्षेत्रफल)"
+  },
+  "prompt": {
+    "en": "Put these states in order, largest area first.",
+    "hi": "इन राज्यों को उनके क्षेत्रफल के क्रम में लगाएँ, सबसे बड़ा पहले।"
+  },
+  "unit": {
+    "en": "square kilometres",
+    "hi": "वर्ग किलोमीटर"
+  },
+  "items": [
+    {
+      "value": 342239,
+      "en": {
+        "label": "Rajasthan"
+      },
+      "hi": {
+        "label": "राजस्थान"
+      }
+    },
+    {
+      "value": 308252,
+      "en": {
+        "label": "Madhya Pradesh"
+      },
+      "hi": {
+        "label": "मध्य प्रदेश"
+      }
+    },
+    {
+      "value": 307713,
+      "en": {
+        "label": "Maharashtra"
+      },
+      "hi": {
+        "label": "महाराष्ट्र"
+      }
+    },
+    {
+      "value": 240928,
+      "en": {
+        "label": "Uttar Pradesh"
+      },
+      "hi": {
+        "label": "उत्तर प्रदेश"
+      }
+    },
+    {
+      "value": 196024,
+      "en": {
+        "label": "Gujarat"
+      },
+      "hi": {
+        "label": "गुजरात"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Madhya Pradesh and Maharashtra are close in area, about 4,500 square kilometres apart. Rajasthan has led since Madhya Pradesh was divided in 2000.",
+    "hi": "मध्य प्रदेश और महाराष्ट्र क्षेत्रफल में लगभग 4,500 वर्ग किलोमीटर के अंतर से करीब हैं। राजस्थान 2000 में मध्य प्रदेश के विभाजन के बाद से सबसे बड़ा राज्य है।"
+  },
+  "sources": {
+    "en": "Census of India 2011",
+    "hi": "भारत की जनगणना 2011"
+  },
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/rank-it/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "upsc-pods-server",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "db:init": "wrangler d1 execute upsc-pods --local --file=schema.sql",
+    "dev": "wrangler dev --ip 0.0.0.0 --port 8787 --test-scheduled",
+    "dev:ai": "wrangler dev --env production --ip 0.0.0.0 --port 8787 --test-scheduled",
+    "deploy": "wrangler deploy --env production",
+    "check": "tsc --noEmit",
+    "test": "node --import ./test/dev-auth.mjs test/smoke.mjs",
+    "test:community": "node --import ./test/dev-auth.mjs test/community.mjs",
+    "test:chotu": "node --import ./test/dev-auth.mjs test/chotu.mjs",
+    "test:languages": "node --import ./test/dev-auth.mjs test/languages.mjs",
+    "test:models": "node test/models-hf.mjs",
+    "test:mocks": "node --import ./test/dev-auth.mjs test/mocks.mjs",
+    "test:auth": "node test/auth.mjs",
+    "test:metrics": "node test/metrics.mjs",
+    "test:friends": "node --import ./test/dev-auth.mjs test/friends.mjs",
+    "models": "node scripts/serve-models.mjs",
+    "import": "node scripts/import-pack.mjs",
+    "test:roadmap": "node test/roadmap.mjs",
+    "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
+    "test:password": "node test/password.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260901.0",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.140.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "workerd@1.20261006.1": true
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0"
+  }
+}

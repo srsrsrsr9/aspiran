@@ -1,0 +1,980 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "ir-sectional-world-and-india-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "India and the world mock 1",
+    "hi": "भारत और विश्व मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS2 International Relations and Bodies",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "ir-united-nations",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the United Nations:",
+        "statements": [
+          "The UN Charter set up six principal organs, including the Trusteeship Council.",
+          "The International Court of Justice sits in Geneva.",
+          "The Security Council has 15 members, five of whom are permanent."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: the International Court of Justice sits at The Hague in the Netherlands; Geneva hosts many other UN offices. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "संयुक्त राष्ट्र के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "UN चार्टर ने छह प्रमुख अंग बनाए, जिनमें न्यासिता परिषद (Trusteeship Council) भी है।",
+          "अंतरराष्ट्रीय न्यायालय (ICJ) जिनेवा में स्थित है।",
+          "सुरक्षा परिषद में 15 सदस्य हैं, जिनमें से पाँच स्थायी हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: अंतरराष्ट्रीय न्यायालय नीदरलैंड्स के हेग (The Hague) में है; जिनेवा में UN के कई दूसरे दफ़्तर हैं। '1, 2 और 3' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "ir-united-nations",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "For how long is a non-permanent member of the UN Security Council elected?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Two years",
+          "Three years",
+          "One year",
+          "Five years"
+        ],
+        "why": "The General Assembly elects non-permanent members for two-year terms, and five of the ten seats change every year. The trap is 'One year': seats change every year, but each member serves two."
+      },
+      "hi": {
+        "stem": "UN सुरक्षा परिषद का अस्थायी सदस्य कितने समय के लिए चुना जाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "दो वर्ष",
+          "तीन वर्ष",
+          "एक वर्ष",
+          "पाँच वर्ष"
+        ],
+        "why": "महासभा अस्थायी सदस्यों को दो वर्ष के लिए चुनती है, और दस में से पाँच सीटें हर साल बदलती हैं। जाल 'एक वर्ष' का है: सीटें हर साल बदलती हैं, पर हर सदस्य दो साल रहता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "ir-un-agencies",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I (UN body) with List II (headquarters) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Food and Agriculture Organization (FAO)",
+          "B. UNESCO",
+          "C. International Atomic Energy Agency (IAEA)",
+          "D. International Labour Organization (ILO)",
+          "1. Vienna",
+          "2. Geneva",
+          "3. Rome",
+          "4. Paris"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "The FAO is in Rome (3), UNESCO in Paris (4), the IAEA in Vienna (1) and the ILO in Geneva (2). The trap is (c), which swaps Vienna and Geneva, two cities that both host many UN offices."
+      },
+      "hi": {
+        "stem": "सूची I (UN निकाय) को सूची II (मुख्यालय) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. खाद्य और कृषि संगठन (FAO)",
+          "B. संयुक्त राष्ट्र शैक्षिक, वैज्ञानिक और सांस्कृतिक संगठन (UNESCO)",
+          "C. अंतरराष्ट्रीय परमाणु ऊर्जा एजेंसी (IAEA)",
+          "D. अंतरराष्ट्रीय श्रम संगठन (ILO)",
+          "1. वियना",
+          "2. जिनेवा",
+          "3. रोम",
+          "4. पेरिस"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "FAO रोम (3) में है, UNESCO पेरिस (4) में, IAEA वियना (1) में और ILO जिनेवा (2) में। जाल तीसरा विकल्प है, जो वियना और जिनेवा को बदल देता है, क्योंकि दोनों शहरों में UN के कई दफ़्तर हैं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "ir-un-agencies",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following is NOT a specialised agency of the United Nations?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "International Labour Organization",
+          "International Monetary Fund",
+          "World Health Organization",
+          "UNICEF"
+        ],
+        "why": "UNICEF is a UN fund and programme, created by the General Assembly, not a specialised agency. The tempting trap is the International Monetary Fund: it is a Bretton Woods institution, but it is also a UN specialised agency."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा संयुक्त राष्ट्र की विशेषीकृत एजेंसी नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अंतरराष्ट्रीय श्रम संगठन",
+          "अंतरराष्ट्रीय मुद्रा कोष",
+          "विश्व स्वास्थ्य संगठन",
+          "संयुक्त राष्ट्र बाल कोष (UNICEF)"
+        ],
+        "why": "UNICEF महासभा द्वारा बनाया गया UN का एक कोष और कार्यक्रम है, विशेषीकृत एजेंसी नहीं। जाल अंतरराष्ट्रीय मुद्रा कोष (IMF) का है: यह ब्रेटन वुड्स संस्था है, पर साथ ही UN की विशेषीकृत एजेंसी भी है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "ir-united-nations",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the United Nations:",
+        "statements": [
+          "The UN Charter was signed at San Francisco in 1945.",
+          "India was among the founding members of the UN, though it was not yet independent.",
+          "General Assembly decisions on important questions need a two-thirds majority of members present and voting.",
+          "Each permanent member of the Security Council can veto decisions on procedural matters."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only three",
+          "Only one",
+          "Only two",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: the veto applies only to substantive matters; procedural decisions need nine affirmative votes of any members. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "संयुक्त राष्ट्र के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "UN चार्टर पर 1945 में सैन फ़्रांसिस्को में हस्ताक्षर हुए।",
+          "भारत UN के संस्थापक सदस्यों में था, भले ही तब तक वह स्वतंत्र नहीं हुआ था।",
+          "महत्वपूर्ण प्रश्नों पर महासभा के निर्णयों के लिए उपस्थित और मतदान करने वाले सदस्यों का दो-तिहाई बहुमत चाहिए।",
+          "सुरक्षा परिषद का हर स्थायी सदस्य प्रक्रियात्मक मामलों पर भी वीटो कर सकता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल तीन",
+          "केवल एक",
+          "केवल दो",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: वीटो केवल सारभूत (substantive) मामलों पर लागू होता है; प्रक्रियात्मक फ़ैसलों के लिए किन्हीं भी नौ सदस्यों के पक्ष में वोट काफ़ी हैं। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "ir-global-groupings",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about BRICS:",
+        "statements": [
+          "South Africa joined the group in 2011, turning BRIC into BRICS.",
+          "The New Development Bank, set up by the BRICS countries, is headquartered in Shanghai.",
+          "BRICS has a permanent secretariat in New Delhi."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: BRICS has no permanent secretariat; the chair rotates among members each year. The trap is '1, 2 and 3', since India is a founding member."
+      },
+      "hi": {
+        "stem": "BRICS के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "दक्षिण अफ़्रीका 2011 में इस समूह में शामिल हुआ, जिससे BRIC, BRICS बन गया।",
+          "BRICS देशों द्वारा बनाए गए न्यू डेवलपमेंट बैंक का मुख्यालय शंघाई में है।",
+          "BRICS का स्थायी सचिवालय नई दिल्ली में है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: BRICS का कोई स्थायी सचिवालय नहीं है; अध्यक्षता हर साल सदस्यों के बीच बदलती है। '1, 2 और 3' जाल है, क्योंकि भारत संस्थापक सदस्य है तो यह सही लग सकता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "ir-regional-groupings",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of groupings and the city that hosts their secretariat:",
+        "statements": [
+          "SAARC – Kathmandu",
+          "ASEAN – Jakarta",
+          "BIMSTEC – Dhaka",
+          "Shanghai Cooperation Organisation – Tashkent"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only two",
+          "Only three",
+          "Only one",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Pair 4 is wrong: the SCO secretariat is in Beijing; Tashkent hosts the SCO's Regional Anti-Terrorist Structure. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "समूहों और उनके सचिवालय वाले शहर के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "SAARC – काठमांडू",
+          "ASEAN – जकार्ता",
+          "BIMSTEC – ढाका",
+          "शंघाई सहयोग संगठन (SCO) – ताशकंद"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल दो",
+          "केवल तीन",
+          "केवल एक",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1, 2 और 3 सही हैं। जोड़ा 4 गलत है: SCO का सचिवालय बीजिंग में है; ताशकंद में SCO का क्षेत्रीय आतंकवाद-रोधी ढाँचा (RATS) है। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "ir-regional-groupings",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Afghanistan became the eighth member of SAARC in 2007.",
+          "Statement II: SAARC was founded at Dhaka in 1985 with seven members."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both statements are correct, but II does not explain I: the founding in 1985 with seven members does not give the reason Afghanistan joined later. The trap is (a), since II looks like background to I."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: अफ़ग़ानिस्तान 2007 में SAARC का आठवाँ सदस्य बना।",
+          "कथन II: SAARC की स्थापना 1985 में ढाका में सात सदस्यों के साथ हुई थी।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, पर II, I की व्याख्या नहीं करता: 1985 में सात सदस्यों से स्थापना यह नहीं बताती कि अफ़ग़ानिस्तान बाद में क्यों जुड़ा। जाल पहला विकल्प है, क्योंकि II, I की पृष्ठभूमि जैसा लगता है।"
+      }
+    },
+    {
+      "format": "select-items",
+      "node": "ir-regional-groupings",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following countries are members of BIMSTEC?",
+        "statements": [
+          "Nepal",
+          "Bhutan",
+          "Maldives",
+          "Thailand"
+        ],
+        "ask": "Select the correct answer using the code given below.",
+        "options": [
+          "1 and 2 only",
+          "2, 3 and 4 only",
+          "1, 2 and 4 only",
+          "1, 2, 3 and 4"
+        ],
+        "why": "BIMSTEC has seven members: Bangladesh, Bhutan, India, Myanmar, Nepal, Sri Lanka and Thailand. The Maldives is not a member. The trap is '1, 2, 3 and 4', because the Maldives is a SAARC member."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-से देश BIMSTEC के सदस्य हैं?",
+        "statements": [
+          "नेपाल",
+          "भूटान",
+          "मालदीव",
+          "थाईलैंड"
+        ],
+        "ask": "नीचे दिए गए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2, 3 और 4",
+          "केवल 1, 2 और 4",
+          "1, 2, 3 और 4"
+        ],
+        "why": "BIMSTEC के सात सदस्य हैं: बांग्लादेश, भूटान, भारत, म्यांमार, नेपाल, श्रीलंका और थाईलैंड। मालदीव इसका सदस्य नहीं है। जाल '1, 2, 3 और 4' का है, क्योंकि मालदीव SAARC का सदस्य है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "ir-global-groupings",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which of the following countries is NOT a member of the Quadrilateral Security Dialogue (Quad)?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Japan",
+          "Australia",
+          "United States",
+          "South Korea"
+        ],
+        "why": "The Quad has four members: India, Japan, Australia and the United States. South Korea is not a member. The trap is Australia, which some remember as having stepped back in the early years, but it is a member."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा देश क्वाड्रिलेटरल सिक्योरिटी डायलॉग (Quad) का सदस्य नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "जापान",
+          "ऑस्ट्रेलिया",
+          "संयुक्त राज्य अमेरिका",
+          "दक्षिण कोरिया"
+        ],
+        "why": "Quad के चार सदस्य हैं: भारत, जापान, ऑस्ट्रेलिया और अमेरिका। दक्षिण कोरिया इसका सदस्य नहीं है। जाल ऑस्ट्रेलिया का है: कुछ लोगों को याद है कि वह शुरुआती सालों में पीछे हटा था, पर वह सदस्य है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "ir-global-groupings",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which regional body became a permanent member of the G20 at the New Delhi summit in September 2023?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "African Union",
+          "European Union",
+          "ASEAN",
+          "Arab League"
+        ],
+        "why": "The African Union was admitted as a permanent member of the G20 at the New Delhi summit in September 2023. The trap is the European Union, which was already a G20 member long before."
+      },
+      "hi": {
+        "stem": "सितंबर 2023 के नई दिल्ली शिखर सम्मेलन में कौन-सा क्षेत्रीय निकाय G20 का स्थायी सदस्य बना?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अफ़्रीकी संघ",
+          "यूरोपीय संघ",
+          "दक्षिण-पूर्व एशियाई राष्ट्र संघ (ASEAN)",
+          "अरब लीग"
+        ],
+        "why": "सितंबर 2023 के नई दिल्ली शिखर सम्मेलन में अफ़्रीकी संघ को G20 का स्थायी सदस्य बनाया गया। जाल यूरोपीय संघ का है, जो उससे बहुत पहले से G20 का सदस्य है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "ir-regional-groupings",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about ASEAN and India:",
+        "statements": [
+          "ASEAN was founded in 1967 through the Bangkok Declaration.",
+          "India is a full member of ASEAN.",
+          "India takes part in the East Asia Summit, which is led by ASEAN."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: India is an ASEAN dialogue partner, not a member; ASEAN's members are all Southeast Asian states. The trap is '1, 2 and 3', as India works closely with ASEAN."
+      },
+      "hi": {
+        "stem": "ASEAN और भारत के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "ASEAN की स्थापना 1967 में बैंकॉक घोषणा के ज़रिए हुई थी।",
+          "भारत ASEAN का पूर्ण सदस्य है।",
+          "भारत ASEAN के नेतृत्व वाले पूर्वी एशिया शिखर सम्मेलन (East Asia Summit) में भाग लेता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: भारत ASEAN का संवाद साझेदार (dialogue partner) है, सदस्य नहीं; ASEAN के सभी सदस्य दक्षिण-पूर्व एशियाई देश हैं। '1, 2 और 3' जाल है, क्योंकि भारत ASEAN के साथ करीब से काम करता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "ir-regional-groupings",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Indian Ocean Rim Association (IORA):",
+        "statements": [
+          "Its secretariat is in Mauritius.",
+          "India is one of its founding members.",
+          "Pakistan is a member of IORA."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "All three",
+          "None",
+          "Only two"
+        ],
+        "why": "Statements 1 and 2 are correct: IORA was launched in Mauritius in 1997, with India among its founders. Statement 3 is wrong: Pakistan is not a member. The trap is 'All three', since Pakistan has an Indian Ocean coastline."
+      },
+      "hi": {
+        "stem": "इंडियन ओशन रिम एसोसिएशन (IORA) के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसका सचिवालय मॉरीशस में है।",
+          "भारत इसके संस्थापक सदस्यों में से एक है।",
+          "पाकिस्तान IORA का सदस्य है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "तीनों",
+          "कोई नहीं",
+          "केवल दो"
+        ],
+        "why": "कथन 1 और 2 सही हैं: IORA की शुरुआत 1997 में मॉरीशस में हुई थी, और भारत संस्थापकों में था। कथन 3 गलत है: पाकिस्तान इसका सदस्य नहीं है। जाल 'तीनों' का है, क्योंकि पाकिस्तान का तट भी हिंद महासागर पर है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "ir-boundary-lines",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (boundary line) with List II (countries it separates) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. McMahon Line",
+          "B. Durand Line",
+          "C. Radcliffe Line",
+          "D. 38th parallel",
+          "1. Afghanistan and Pakistan",
+          "2. North Korea and South Korea",
+          "3. India and China",
+          "4. India and Pakistan"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-3, B-1, C-4, D-2",
+          "A-1, B-3, C-4, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-1, C-3, D-2"
+        ],
+        "why": "The McMahon Line is the India-China line in the east (3), the Durand Line separates Afghanistan and Pakistan (1), the Radcliffe Line divided India and Pakistan in 1947 (4), and the 38th parallel divides the two Koreas (2). The trap is (b)."
+      },
+      "hi": {
+        "stem": "सूची I (सीमा रेखा) को सूची II (वे देश जिन्हें वह अलग करती है) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. मैकमोहन रेखा",
+          "B. डूरंड रेखा",
+          "C. रैडक्लिफ़ रेखा",
+          "D. 38वाँ समानांतर (38th parallel)",
+          "1. अफ़ग़ानिस्तान और पाकिस्तान",
+          "2. उत्तर कोरिया और दक्षिण कोरिया",
+          "3. भारत और चीन",
+          "4. भारत और पाकिस्तान"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-3, B-1, C-4, D-2",
+          "A-1, B-3, C-4, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-1, C-3, D-2"
+        ],
+        "why": "मैकमोहन रेखा पूर्व में भारत-चीन रेखा है (3), डूरंड रेखा अफ़ग़ानिस्तान और पाकिस्तान को अलग करती है (1), रैडक्लिफ़ रेखा ने 1947 में भारत और पाकिस्तान को बाँटा (4), और 38वाँ समानांतर दोनों कोरिया को बाँटता है (2)। जाल दूसरा विकल्प है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "ir-neighbourhood",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about India's land borders:",
+        "statements": [
+          "Bangladesh shares the longest land border with India.",
+          "Mizoram shares international borders with both Myanmar and Bangladesh.",
+          "Sikkim shares international borders with Nepal, Bhutan and China."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. India's border with Bangladesh is its longest land border, Mizoram lies between Myanmar and Bangladesh, and Sikkim touches Nepal, Bhutan and China. The trap is '1 and 2 only', from missing Sikkim's border with Bhutan."
+      },
+      "hi": {
+        "stem": "भारत की स्थलीय सीमाओं के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत के साथ सबसे लंबी स्थलीय सीमा बांग्लादेश की है।",
+          "मिज़ोरम की अंतरराष्ट्रीय सीमा म्यांमार और बांग्लादेश दोनों से लगती है।",
+          "सिक्किम की अंतरराष्ट्रीय सीमा नेपाल, भूटान और चीन से लगती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। बांग्लादेश से लगी सीमा भारत की सबसे लंबी स्थलीय सीमा है, मिज़ोरम म्यांमार और बांग्लादेश के बीच है, और सिक्किम नेपाल, भूटान और चीन से लगता है। जाल 'केवल 1 और 2' का है, अगर सिक्किम-भूटान सीमा याद न रहे।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "ir-neighbourhood",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about Indian states and neighbouring countries:",
+        "statements": [
+          "Arunachal Pradesh shares borders with Bhutan, China and Myanmar.",
+          "Uttarakhand shares borders with Nepal and China.",
+          "West Bengal shares borders with Nepal, Bhutan and Bangladesh.",
+          "Manipur shares a border with Bangladesh."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only two",
+          "Only three",
+          "Only one",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: Manipur borders Myanmar only; among the northeastern states, Tripura, Meghalaya, Assam and Mizoram border Bangladesh. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "भारतीय राज्यों और पड़ोसी देशों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अरुणाचल प्रदेश की सीमा भूटान, चीन और म्यांमार से लगती है।",
+          "उत्तराखंड की सीमा नेपाल और चीन से लगती है।",
+          "पश्चिम बंगाल की सीमा नेपाल, भूटान और बांग्लादेश से लगती है।",
+          "मणिपुर की सीमा बांग्लादेश से लगती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल दो",
+          "केवल तीन",
+          "केवल एक",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: मणिपुर की सीमा केवल म्यांमार से लगती है; पूर्वोत्तर में त्रिपुरा, मेघालय, असम और मिज़ोरम की सीमा बांग्लादेश से लगती है। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "ir-neighbourhood",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which of the following Indian states does NOT share a border with Nepal?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Uttar Pradesh",
+          "Bihar",
+          "Sikkim",
+          "Himachal Pradesh"
+        ],
+        "why": "Five states border Nepal: Uttarakhand, Uttar Pradesh, Bihar, West Bengal and Sikkim. Himachal Pradesh does not. The trap is Sikkim, which many place only next to Bhutan and China, but its western border is with Nepal."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से किस भारतीय राज्य की सीमा नेपाल से नहीं लगती?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "उत्तर प्रदेश",
+          "बिहार",
+          "सिक्किम",
+          "हिमाचल प्रदेश"
+        ],
+        "why": "पाँच राज्यों की सीमा नेपाल से लगती है: उत्तराखंड, उत्तर प्रदेश, बिहार, पश्चिम बंगाल और सिक्किम। हिमाचल प्रदेश की नहीं। जाल सिक्किम का है: कई लोग उसे केवल भूटान और चीन से जोड़ते हैं, पर उसकी पश्चिमी सीमा नेपाल से लगती है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "ir-straits-chokepoints",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which strait separates the Malay Peninsula from the Indonesian island of Sumatra?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Sunda Strait",
+          "Lombok Strait",
+          "Strait of Malacca",
+          "Strait of Hormuz"
+        ],
+        "why": "The Strait of Malacca runs between the Malay Peninsula and Sumatra, linking the Andaman Sea with the South China Sea. The trap is the Sunda Strait, which separates Sumatra from Java, not from the Malay Peninsula."
+      },
+      "hi": {
+        "stem": "कौन-सा जलडमरूमध्य मलय प्रायद्वीप को इंडोनेशिया के सुमात्रा द्वीप से अलग करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सुंडा जलडमरूमध्य",
+          "लोम्बोक जलडमरूमध्य",
+          "मलक्का जलडमरूमध्य",
+          "होर्मुज़ जलडमरूमध्य"
+        ],
+        "why": "मलक्का जलडमरूमध्य मलय प्रायद्वीप और सुमात्रा के बीच है, और अंडमान सागर को दक्षिण चीन सागर से जोड़ता है। जाल सुंडा जलडमरूमध्य का है, जो सुमात्रा को जावा से अलग करता है, मलय प्रायद्वीप से नहीं।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "ir-straits-chokepoints",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of straits and the waters or lands they connect or separate:",
+        "statements": [
+          "Strait of Hormuz – Persian Gulf and Gulf of Oman",
+          "Bab-el-Mandeb – Red Sea and Gulf of Aden",
+          "Palk Strait – India and Sri Lanka",
+          "Strait of Gibraltar – Black Sea and Sea of Marmara"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All four",
+          "Only three"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Pair 4 is wrong: Gibraltar links the Atlantic Ocean with the Mediterranean Sea; the Bosphorus links the Black Sea with the Sea of Marmara. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "जलडमरूमध्यों और उनके द्वारा जोड़े या अलग किए गए जल क्षेत्रों या भू-भागों के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "होर्मुज़ जलडमरूमध्य – फ़ारस की खाड़ी और ओमान की खाड़ी",
+          "बाब-अल-मंदेब – लाल सागर और अदन की खाड़ी",
+          "पाक जलडमरूमध्य – भारत और श्रीलंका",
+          "जिब्राल्टर जलडमरूमध्य – काला सागर और मरमरा सागर"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी चार",
+          "केवल तीन"
+        ],
+        "why": "जोड़े 1, 2 और 3 सही हैं। जोड़ा 4 गलत है: जिब्राल्टर अटलांटिक महासागर को भूमध्य सागर से जोड़ता है; काला सागर को मरमरा सागर से बोस्पोरस जोड़ता है। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "ir-straits-chokepoints",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Strait of Hormuz is one of the world's most important choke points for oil trade.",
+          "Statement II: Tankers leaving ports inside the Persian Gulf can reach the open ocean only through the Strait of Hormuz."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: the Persian Gulf's only sea outlet is the Strait of Hormuz, so oil shipped from ports inside the Gulf must pass through it. The trap is (b), which misses this cause."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: होर्मुज़ जलडमरूमध्य तेल व्यापार के लिए दुनिया के सबसे महत्वपूर्ण चोक पॉइंट्स में से एक है।",
+          "कथन II: फ़ारस की खाड़ी के भीतर के बंदरगाहों से निकलने वाले टैंकर केवल होर्मुज़ जलडमरूमध्य से होकर ही खुले समुद्र तक पहुँच सकते हैं।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, और II, I की व्याख्या करता है: फ़ारस की खाड़ी से समुद्र का एकमात्र रास्ता होर्मुज़ है, इसलिए खाड़ी के बंदरगाहों से जाने वाला तेल यहीं से गुज़रता है। जाल दूसरा विकल्प है, जो यह कारण छोड़ देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "ir-arms-control-treaties",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Treaty on the Non-Proliferation of Nuclear Weapons (NPT):",
+        "statements": [
+          "It recognises as nuclear-weapon states only those that exploded a nuclear device before 1 January 1967.",
+          "India has signed the NPT but not ratified it.",
+          "The NPT was extended indefinitely in 1995."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: India has never signed the NPT, which it sees as discriminatory. The trap is '1, 2 and 3', which mixes up the NPT with treaties some countries sign but do not ratify."
+      },
+      "hi": {
+        "stem": "परमाणु अप्रसार संधि (NPT) के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "यह केवल उन्हीं देशों को परमाणु-हथियार संपन्न देश मानती है जिन्होंने 1 जनवरी 1967 से पहले परमाणु विस्फोट किया था।",
+          "भारत ने NPT पर हस्ताक्षर किए हैं, पर उसका अनुसमर्थन नहीं किया है।",
+          "1995 में NPT को अनिश्चित काल के लिए बढ़ा दिया गया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: भारत ने NPT पर कभी हस्ताक्षर ही नहीं किए, क्योंकि वह इसे भेदभावपूर्ण मानता है। '1, 2 और 3' जाल है, जो NPT को उन संधियों से मिला देता है जिन पर कुछ देश हस्ताक्षर तो करते हैं, पर अनुसमर्थन नहीं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "ir-arms-control-treaties",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Comprehensive Nuclear-Test-Ban Treaty (CTBT) has not yet entered into force.",
+          "Statement II: The CTBT can enter into force only after all 44 states listed in its Annex 2 have ratified it.",
+          "Statement III: The CTBT bans nuclear test explosions only in the atmosphere, under water and in outer space."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Only II is correct, and it explains I: not all 44 Annex 2 states have ratified the CTBT. III is wrong: that limited ban is the Partial Test Ban Treaty of 1963; the CTBT bans all nuclear explosions. The trap is (b)."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: व्यापक परमाणु परीक्षण प्रतिबंध संधि (CTBT) अभी तक लागू नहीं हुई है।",
+          "कथन II: CTBT तभी लागू हो सकती है जब उसके अनुलग्नक 2 (Annex 2) में सूचीबद्ध सभी 44 देश उसका अनुसमर्थन कर दें।",
+          "कथन III: CTBT केवल वायुमंडल, पानी के भीतर और बाहरी अंतरिक्ष में परमाणु परीक्षण विस्फोटों पर रोक लगाती है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "केवल II सही है, और वही I की व्याख्या करता है: अनुलग्नक 2 के सभी 44 देशों ने CTBT का अनुसमर्थन नहीं किया है। III गलत है: ऐसी सीमित रोक 1963 की आंशिक परीक्षण प्रतिबंध संधि (PTBT) में है; CTBT सभी परमाणु विस्फोटों पर रोक लगाती है। जाल दूसरा विकल्प है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "ir-foreign-policy-doctrines",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Panchsheel, the five principles of peaceful coexistence, was first set out in a 1954 agreement between India and which country?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Nepal",
+          "Indonesia",
+          "Myanmar",
+          "China"
+        ],
+        "why": "The five principles were first set out in the 1954 agreement between India and China on trade with the Tibet region. The trap is Indonesia: the 1955 Bandung Conference there adopted ten principles that built on Panchsheel."
+      },
+      "hi": {
+        "stem": "पंचशील, यानी शांतिपूर्ण सह-अस्तित्व के पाँच सिद्धांत, पहली बार 1954 में भारत और किस देश के बीच हुए समझौते में रखे गए?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "नेपाल",
+          "इंडोनेशिया",
+          "म्यांमार",
+          "चीन"
+        ],
+        "why": "पाँच सिद्धांत पहली बार 1954 में तिब्बत क्षेत्र के साथ व्यापार पर भारत और चीन के समझौते में रखे गए। जाल इंडोनेशिया का है: वहाँ 1955 के बांडुंग सम्मेलन में दस सिद्धांत अपनाए गए, जो पंचशील पर आधारित थे।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "ir-foreign-policy-doctrines",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about India's foreign policy:",
+        "statements": [
+          "The first summit of the Non-Aligned Movement was held in Belgrade in 1961.",
+          "Jawaharlal Nehru, Gamal Abdel Nasser and Josip Broz Tito were among the founding leaders of the Non-Aligned Movement.",
+          "India's Look East Policy began in the early 1990s and was upgraded to the Act East Policy in 2014."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "All three are correct. Belgrade hosted the first NAM summit in 1961, Nehru, Nasser and Tito were among its founders, and Look East became Act East in 2014. The trap is 'Only two', from placing the first summit at Bandung."
+      },
+      "hi": {
+        "stem": "भारत की विदेश नीति के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "गुटनिरपेक्ष आंदोलन (NAM) का पहला शिखर सम्मेलन 1961 में बेलग्रेड में हुआ था।",
+          "जवाहरलाल नेहरू, गमाल अब्दुल नासिर और जोसिप ब्रोज़ टीटो गुटनिरपेक्ष आंदोलन के संस्थापक नेताओं में थे।",
+          "भारत की 'लुक ईस्ट' नीति 1990 के दशक की शुरुआत में शुरू हुई और 2014 में 'एक्ट ईस्ट' नीति में बदली गई।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "तीनों कथन सही हैं। NAM का पहला शिखर सम्मेलन 1961 में बेलग्रेड में हुआ, नेहरू, नासिर और टीटो इसके संस्थापकों में थे, और 2014 में 'लुक ईस्ट' 'एक्ट ईस्ट' बनी। जाल 'केवल दो' का है, अगर पहला सम्मेलन बांडुंग में मान लिया जाए।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "ir-foreign-policy-doctrines",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following is NOT one of the five principles of Panchsheel?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Mutual non-aggression",
+          "Equality and mutual benefit",
+          "Collective defence through military alliances",
+          "Mutual non-interference in each other's internal affairs"
+        ],
+        "why": "Panchsheel's five principles are mutual respect for territorial integrity and sovereignty, mutual non-aggression, non-interference, equality and mutual benefit, and peaceful coexistence. Military alliances run against its spirit. The trap is (b), which sounds economic but is one of the five."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा पंचशील के पाँच सिद्धांतों में से एक नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "परस्पर अनाक्रमण",
+          "समानता और परस्पर लाभ",
+          "सैन्य गठबंधनों के ज़रिए सामूहिक रक्षा",
+          "एक-दूसरे के आंतरिक मामलों में परस्पर अहस्तक्षेप"
+        ],
+        "why": "पंचशील के पाँच सिद्धांत हैं: क्षेत्रीय अखंडता और संप्रभुता का परस्पर सम्मान, परस्पर अनाक्रमण, अहस्तक्षेप, समानता और परस्पर लाभ, और शांतिपूर्ण सह-अस्तित्व। सैन्य गठबंधन इसकी भावना के उलट हैं। जाल दूसरा विकल्प है, जो आर्थिक लगता है पर पाँच में शामिल है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Charter of the United Nations; NCERT Class XII Contemporary World Politics; NCERT geography",
+    "hi": "संयुक्त राष्ट्र चार्टर; NCERT कक्षा XII समकालीन विश्व राजनीति; NCERT भूगोल"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

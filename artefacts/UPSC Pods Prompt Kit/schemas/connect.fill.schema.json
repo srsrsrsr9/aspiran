@@ -1,0 +1,216 @@
+{
+  "title": "Pods Connect (16 tiles, 4 hidden groups)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "groups",
+    "redHerrings",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "difficulty",
+          "label",
+          "tiles",
+          "why"
+        ],
+        "properties": {
+          "difficulty": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "description": "1 easiest (shown first on the end screen) to 4 trickiest. Use each value once."
+          },
+          "label": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 7
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 10
+              }
+            },
+            "description": "What the four tiles share, revealed when the group is found"
+          },
+          "tiles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 4
+                }
+              }
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "Exactly four tiles, 3 words or fewer each"
+          },
+          "why": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 34
+              }
+            },
+            "description": "One line that teaches the rule, with the article, year or fact from the source"
+          }
+        }
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "redHerrings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tile",
+          "looksLike",
+          "note"
+        ],
+        "properties": {
+          "tile": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 3,
+            "description": "An English tile text, copied exactly"
+          },
+          "looksLike": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4,
+            "description": "difficulty of the group it seems to fit"
+          },
+          "note": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 18
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 4,
+      "description": "Tiles that plausibly fit a second group. At least two."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "verify"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 45
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "true until a person has checked it"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 6,
+      "description": "Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/connect@1"
+}

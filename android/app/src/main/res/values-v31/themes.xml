@@ -1,0 +1,13 @@
+<resources>
+    <!--
+      Android 12+ system splash (SplashScreen API limits: an icon, a background colour, at most ~1 s of animation,
+      no text). The kulhad settles and its steam rises; ui/Welcome.kt's LaunchWelcome then lets today's greeting
+      rise out of the same kulhad in the app.
+    -->
+    <style name="Theme.UpscPods" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/adda_bg</item>
+        <item name="android:windowSplashScreenBackground">@color/adda_bg</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_kulhad</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+    </style>
+</resources>

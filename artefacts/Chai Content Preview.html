@@ -1,0 +1,1300 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Chai Content Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Mukta:wght@400;500;600&display=swap">
+<style>
+/* Layout: a calm studio sheet; each sample sits in a phone-sized frame with a short note on what it proves. */
+:root {
+  --paper: #FFF8F3;
+  --surface: #FFFDFB;
+  --ink: #201B17;
+  --muted: #6B5E54;
+  --line: #EADDD2;
+  --chai: #8D4F01;
+  --chai-soft: #FFDCC0;
+  --teal: #14696B;
+  --teal-soft: #D5ECEB;
+  --marigold: #C98A0B;
+  --grey: #8A8079;
+  --read: "Martel", "Noto Serif Devanagari", Georgia, serif;
+  --ui: "Mukta", "Noto Sans Devanagari", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18120D; --surface: #211912; --ink: #E9E1DB; --muted: #A99B90; --line: #3A2E24;
+    --chai: #FFB876; --chai-soft: #3E2B1A; --teal: #7FD0CF; --teal-soft: #173634; --marigold: #F2C14E; --grey: #9A8F87;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #18120D; --surface: #211912; --ink: #E9E1DB; --muted: #A99B90; --line: #3A2E24;
+  --chai: #FFB876; --chai-soft: #3E2B1A; --teal: #7FD0CF; --teal-soft: #173634; --marigold: #F2C14E; --grey: #9A8F87;
+  color-scheme: dark;
+}
+/* After 20:00: warmer, dimmer, slower */
+.night {
+  --paper: #140F0B; --surface: #1B140F; --ink: #DCD2C9; --muted: #9A8D82; --line: #30261E;
+  --chai: #E8A066; --chai-soft: #33241A; --teal: #6FB9B8; --teal-soft: #142C2B; --marigold: #D9AE52; --grey: #8A8079;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--paper); color: var(--ink); font-family: var(--ui); font-size: 16px; line-height: 1.5; padding: 0 16px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 28px 64px; }
+header.top { display: grid; gap: 6px; margin-bottom: 18px; }
+.eyebrow { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--chai); font-weight: 600; }
+h1 { font-family: var(--read); font-weight: 800; font-size: clamp(28px, 4.4vw, 40px); line-height: 1.15; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 64ch; margin: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); margin: 18px 0 14px; }
+.controls .group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.controls .label { font-size: 13px; color: var(--muted); margin-right: 2px; }
+.seg button, .toggle { font: inherit; font-size: 14px; border: 1px solid var(--line); background: transparent; color: var(--ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; min-height: 36px; }
+.seg button[aria-pressed="true"], .toggle[aria-pressed="true"] { background: var(--chai); border-color: var(--chai); color: var(--paper); }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+nav.tabs { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+nav.tabs button { font: inherit; font-weight: 500; background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 10px 12px; cursor: pointer; white-space: nowrap; }
+nav.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--chai); }
+.panel { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 32px; align-items: start; }
+@media (max-width: 760px) { .panel { grid-template-columns: minmax(0, 1fr); } }
+.phone { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 18px 16px 16px; width: 100%; max-width: 380px; min-height: 620px; display: flex; flex-direction: column; gap: 12px; color: var(--ink); transition: background .3s, color .3s; }
+.phone .bar { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+.notes { display: grid; gap: 14px; max-width: 60ch; }
+.notes h2 { font-family: var(--read); font-size: 22px; margin: 0; line-height: 1.3; text-wrap: balance; }
+.notes p { margin: 0; color: var(--ink); }
+.notes ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.notes .meta { font-size: 14px; color: var(--muted); }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 14px; border-top: 1px solid var(--line); padding-top: 12px; }
+.spec dt { color: var(--muted); }
+.spec dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+/* Chai card */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 12.5px; padding: 2px 9px; border-radius: 999px; background: var(--chai-soft); color: var(--chai); font-weight: 500; }
+.tone-NEUTRAL .chip, .tone-SERIOUS .chip { background: var(--teal-soft); color: var(--teal); }
+.tone-SERIOUS .chip { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.card { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.illus { width: 100%; max-width: 100%; aspect-ratio: 16 / 10; border-radius: 14px; background: var(--paper); display: block; }
+.textonly .illus, .textonly .reel-illus { display: none; }
+.card h3 { font-family: var(--read); font-weight: 700; font-size: 20px; line-height: 1.4; margin: 0; text-wrap: balance; }
+.card .sum { font-family: var(--read); font-size: 15.5px; line-height: 1.75; margin: 0; }
+[lang="hi"] .card .sum, .card .sum:lang(hi) { line-height: 1.9; }
+.why { background: var(--paper); border-radius: 12px; padding: 10px 12px; }
+.why b { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.why ul { margin: 4px 0 0; padding-left: 18px; font-size: 14.5px; }
+details.exam { border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+details.exam summary { cursor: pointer; font-weight: 600; font-size: 14.5px; }
+.mcq { display: grid; gap: 6px; margin-top: 8px; }
+.mcq button { font: inherit; font-size: 14.5px; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px 10px; border-radius: 10px; cursor: pointer; min-height: 44px; }
+.mcq button.right { border-color: var(--teal); background: var(--teal-soft); }
+.mcq button.wrong { border-color: var(--grey); color: var(--muted); }
+.mcq .fb { font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.joke { font-size: 14px; color: var(--muted); border-left: 2px solid var(--marigold); padding-left: 10px; }
+.joke b { color: var(--ink); font-weight: 600; }
+.trust { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+.nav-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dots { display: flex; gap: 6px; }
+.dots button { width: 12px; height: 12px; border-radius: 50%; border: 1px solid var(--chai); background: transparent; padding: 0; cursor: pointer; }
+.dots button[aria-current="true"] { background: var(--chai); }
+.primary { font: inherit; font-weight: 600; background: var(--chai); color: var(--paper); border: 0; border-radius: 12px; padding: 10px 16px; min-height: 48px; cursor: pointer; }
+.ghost { font: inherit; background: transparent; color: var(--chai); border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; min-height: 44px; cursor: pointer; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.done { flex: 1; display: grid; place-items: center; text-align: center; gap: 8px; }
+.done p { font-family: var(--read); font-size: 20px; margin: 0; }
+
+/* Entry motion: 300 ms fade and rise, from a visible resting state */
+.enter { animation: rise .3s cubic-bezier(.2,0,0,1); }
+.tone-SERIOUS.enter { animation-duration: .15s; }
+@keyframes rise { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.steam path { stroke-dasharray: 60; stroke-dashoffset: 0; animation: steam .3s ease-out; }
+@keyframes steam { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
+.nomotion *, .nomotion *::before { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* Explainer */
+.stage { width: 100%; max-width: 100%; aspect-ratio: 9 / 10; border-radius: 16px; background: var(--paper); display: block; }
+.stage .sc { transition: opacity .3s cubic-bezier(.2,0,0,1), transform .3s cubic-bezier(.2,0,0,1); }
+.stage .off { opacity: 0; }
+.stage .dim { opacity: .28; }
+.caption { font-family: var(--read); font-size: 16px; line-height: 1.7; min-height: 5.2em; margin: 0; }
+.prog { height: 4px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.prog i { display: block; height: 100%; width: 0; background: var(--chai); }
+.hint { font-size: 13px; color: var(--muted); }
+
+/* Reel */
+.reel { position: relative; width: 100%; max-width: 100%; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--paper); border: 1px solid var(--line); display: flex; flex-direction: column; padding: 18px 16px; gap: 12px; }
+.reel .brand { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--chai); font-weight: 600; display: flex; justify-content: space-between; }
+.reel .body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.reel h4 { font-family: var(--read); font-size: 22px; line-height: 1.4; margin: 0; text-wrap: balance; }
+.reel .take { font-family: var(--read); font-size: 16px; line-height: 1.7; margin: 0; color: var(--ink); }
+.reel .take.hide { opacity: 0; }
+.reel .take { transition: opacity .3s; }
+.reel .cap { font-size: 13px; color: var(--muted); }
+.reel .big { font-family: var(--read); font-weight: 800; font-size: 30px; line-height: 1.2; margin: 0; text-wrap: balance; }
+.reel-illus { width: 100%; aspect-ratio: 16/10; border-radius: 12px; }
+
+/* Soundscapes */
+.scapes { display: grid; gap: 12px; }
+.scape { border: 1px solid var(--line); border-radius: 16px; padding: 12px; display: grid; gap: 8px; }
+.scape h4 { margin: 0; font-family: var(--read); font-size: 17px; }
+.scape p { margin: 0; font-size: 14px; color: var(--muted); }
+input[type="range"] { width: 100%; accent-color: var(--chai); }
+
+/* Share */
+.shareimg { width: 100%; max-width: 100%; aspect-ratio: 9/16; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); object-fit: contain; }
+.small { font-size: 13px; color: var(--muted); }
+
+/* Timeline story */
+.tl { position: relative; height: 92px; margin: 4px 16px 0; }
+.tl .axis { position: absolute; left: 0; right: 0; top: 40px; height: 2px; background: var(--line); }
+.tl .yr { position: absolute; top: 58px; font-size: 11.5px; white-space: nowrap; color: var(--muted); transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+.tl button.ev { position: absolute; top: 31px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; border: 2px solid var(--chai); background: var(--surface); padding: 0; cursor: pointer; transition: transform .2s, background .2s; }
+.tl button.ev[aria-current="true"] { background: var(--chai); transform: scale(1.2); }
+.tl button.ev.key { border-color: var(--teal); }
+.evcard { border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: grid; gap: 6px; }
+.evcard .date { font-size: 13px; color: var(--chai); font-weight: 600; font-variant-numeric: tabular-nums; }
+.evcard h4 { margin: 0; font-family: var(--read); font-size: 18px; line-height: 1.45; text-wrap: balance; }
+.evcard p { margin: 0; font-family: var(--read); font-size: 15px; line-height: 1.75; }
+.gap { font-size: 13px; color: var(--muted); }
+/* Match game */
+.match { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 8px; }
+.match .col { display: grid; gap: 8px; align-content: start; }
+.match button { font: inherit; font-size: 14.5px; text-align: left; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 8px 10px; border-radius: 10px; cursor: pointer; min-height: 48px; line-height: 1.35; transition: background .2s, border-color .2s, opacity .2s; }
+.match button.art { font-family: var(--read); font-weight: 700; }
+.match button.sel { border-color: var(--chai); background: var(--chai-soft); }
+.match button.ok { border-color: var(--teal); background: var(--teal-soft); opacity: .75; cursor: default; }
+.match button.no { border-color: var(--grey); animation: nudge .2s; }
+@keyframes nudge { 0%,100% { transform: none; } 50% { transform: translateX(3px); } }
+/* Quiz night */
+.qn { display: grid; gap: 10px; }
+.qn .qtext { font-family: var(--read); font-size: 18px; line-height: 1.5; margin: 0; }
+.qn .opts { display: grid; gap: 8px; }
+.qn .opts div { border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; font-size: 15px; transition: background .3s, border-color .3s, opacity .3s; }
+.qn.revealed .opts div { opacity: .5; }
+.qn.revealed .opts div.ans { opacity: 1; border-color: var(--teal); background: var(--teal-soft); }
+.qn .expl { font-size: 14.5px; color: var(--ink); background: var(--paper); border-radius: 10px; padding: 10px 12px; }
+.qn .count { font-size: 13px; color: var(--muted); }
+
+/* Map Chai */
+.mapsvg { width: 100%; max-width: 100%; aspect-ratio: 32 / 22; border-radius: 14px; display: block; background: var(--paper); }
+.mapsvg .pin { cursor: pointer; }
+.mapsvg .layer { transition: opacity .3s; }
+.mapsvg .hot { cursor: pointer; }
+.fact { font-family: var(--read); font-size: 15px; line-height: 1.75; margin: 0; min-height: 3.5em; }
+/* Number Sense */
+.num { font-family: var(--read); font-weight: 800; font-size: 56px; line-height: 1; color: var(--chai); font-variant-numeric: tabular-nums; margin: 0; }
+.bars { display: grid; gap: 8px; }
+.bars .b { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) 3em; gap: 8px; align-items: center; font-size: 13.5px; }
+.bars .track { height: 14px; background: var(--line); border-radius: 7px; overflow: hidden; position: relative; }
+.bars .fill { height: 100%; background: var(--teal); border-radius: 7px; width: 0; transition: width .4s cubic-bezier(.2,0,0,1); }
+.bars .b.hero .fill { background: var(--chai); }
+.bars .tick { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); opacity: .5; }
+.bars .v { font-variant-numeric: tabular-nums; text-align: right; }
+/* Myth vs Fact */
+.fwd { border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; padding: 12px; background: var(--paper); display: grid; gap: 4px; position: relative; overflow: hidden; }
+.fwd .tag { font-size: 12px; color: var(--muted); font-style: italic; }
+.fwd p { margin: 0; font-family: var(--read); font-size: 16.5px; line-height: 1.6; padding-right: 84px; }
+.stamp { position: absolute; right: 10px; top: 10px; border: 3px solid currentColor; border-radius: 8px; padding: 2px 10px; font-weight: 600; letter-spacing: .08em; font-size: 15px; transform: rotate(-8deg); transition: opacity .25s, transform .25s; background: var(--surface); }
+.stamp.off { opacity: 0; transform: rotate(-8deg) scale(1.3); }
+.stamp.MYTH { color: var(--chai); } .stamp.FACT { color: var(--teal); } .stamp.HALF { color: var(--marigold); }
+.verdict { display: grid; gap: 6px; font-size: 15px; }
+.verdict p { margin: 0; font-family: var(--read); line-height: 1.75; }
+.guess { display: flex; gap: 8px; flex-wrap: wrap; }
+.guess button { flex: 1 1 auto; }
+/* Two Sides */
+.sides { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.sides .col { display: grid; gap: 8px; align-content: start; }
+.sides h5 { margin: 0; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+.sides .for h5 { color: var(--chai); } .sides .against h5 { color: var(--teal); }
+.sides button { font: inherit; font-size: 14px; line-height: 1.45; text-align: left; border-radius: 10px; padding: 9px 10px; cursor: pointer; min-height: 56px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); transition: background .2s; }
+.sides .for button[aria-expanded="true"] { background: var(--chai-soft); border-color: var(--chai); }
+.sides .against button[aria-expanded="true"] { background: var(--teal-soft); border-color: var(--teal); }
+.sides button .hid { color: var(--muted); }
+.outline { border: 1px dashed var(--line); border-radius: 12px; padding: 10px 12px; font-size: 14.5px; display: grid; gap: 4px; }
+.outline b { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.outline ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+/* Lamp Off */
+.lamp { flex: 1; display: grid; place-items: center; gap: 14px; text-align: center; background: #120D09; color: #E6DACF; border-radius: 20px; padding: 24px 16px; }
+.lamp svg { width: 160px; height: 160px; }
+.lamp .flame { transition: opacity 120s linear; }
+.lamp.dim .flame { opacity: .08; }
+.lamp .glow { transition: opacity 120s linear; }
+.lamp.dim .glow { opacity: 0; }
+.lamp p { margin: 0; font-family: var(--read); font-size: 17px; line-height: 1.7; max-width: 26ch; }
+.lamp .q { font-size: 13px; color: #A99B90; }
+.lamp button { font: inherit; background: transparent; color: #E6DACF; border: 1px solid #4A3B2F; border-radius: 12px; padding: 10px 16px; min-height: 48px; cursor: pointer; }
+.nomotion .lamp .flame, .nomotion .lamp .glow { transition: none; }
+</style>
+
+<div class="wrap" id="app">
+  <header class="top">
+    <span class="eyebrow">UPSC Pods · content preview · 10 Oct 2026</span>
+    <h1>Chai, with motion and mood</h1>
+    <p class="lede">Thirteen working samples from the content plan and the UI/UX research. Every piece still teaches with sound, motion and pictures switched off, so try the switches below.</p>
+  </header>
+
+  <div class="controls" role="group" aria-label="Preview settings">
+    <div class="group seg" id="langSeg"><span class="label">Reading language</span>
+      <button type="button" id="lang-en" aria-pressed="true" data-lang="en">English</button>
+      <button type="button" id="lang-hi" aria-pressed="false" data-lang="hi">हिंदी</button>
+    </div>
+    <div class="group"><span class="label">Show</span>
+      <button type="button" class="toggle" id="t-sound" aria-pressed="false">Sound</button>
+      <button type="button" class="toggle" id="t-motion" aria-pressed="true">Motion</button>
+      <button type="button" class="toggle" id="t-pics" aria-pressed="true">Pictures</button>
+      <button type="button" class="toggle" id="t-night" aria-pressed="false">After 20:00</button>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Samples">
+    <button role="tab" id="tab-cards" aria-selected="true" data-panel="cards">Chai cards</button>
+    <button role="tab" id="tab-explain" aria-selected="false" data-panel="explain">Ek Minute explainer</button>
+    <button role="tab" id="tab-reel" aria-selected="false" data-panel="reel">Chai in 60 seconds</button>
+    <button role="tab" id="tab-sound" aria-selected="false" data-panel="sound">Soundscapes</button>
+    <button role="tab" id="tab-share" aria-selected="false" data-panel="share">Share card</button>
+    <button role="tab" id="tab-timeline" aria-selected="false" data-panel="timeline">Timeline story</button>
+    <button role="tab" id="tab-match" aria-selected="false" data-panel="match">Match the Article</button>
+    <button role="tab" id="tab-quiz" aria-selected="false" data-panel="quiz">Quiz night</button>
+    <button role="tab" id="tab-map" aria-selected="false" data-panel="map">Map Chai</button>
+    <button role="tab" id="tab-number" aria-selected="false" data-panel="number">Number Sense</button>
+    <button role="tab" id="tab-myth" aria-selected="false" data-panel="myth">Myth vs Fact</button>
+    <button role="tab" id="tab-sides" aria-selected="false" data-panel="sides">Two Sides</button>
+    <button role="tab" id="tab-lamp" aria-selected="false" data-panel="lamp">Lamp Off</button>
+  </nav>
+
+  <!-- Chai cards -->
+  <section class="panel" id="p-cards" role="tabpanel" aria-labelledby="tab-cards">
+    <div class="phone" id="cardPhone"></div>
+    <div class="notes">
+      <h2>Three illustrated Chai cards, one per tone</h2>
+      <p>The same six zones the app already uses, with one small drawing and a 300 ms entry. Each card's tone tag sets its look: the light card gets marigold and one Chotu joke, the neutral card gets teal, and the serious card drops colour and moves in half the time.</p>
+      <ul>
+        <li>Tap "Next card" or the dots. There is no auto-advance and no "load more".</li>
+        <li>Open Exam Corner and answer the question. Feedback is calm and private.</li>
+        <li>Turn Pictures off to see the data-saver version, which loses nothing you need.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Drawing size</dt><dd>About 2-3 KB each as vector (budget 8 KB)</dd>
+        <dt>Plugs into</dt><dd>Today → Today's Chai, above the headline zone</dd>
+        <dt>Facts</dt><dd>Standard static facts, written for this preview. Not yet checked by an editor.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Explainer -->
+  <section class="panel" id="p-explain" role="tabpanel" aria-labelledby="tab-explain" hidden>
+    <div class="phone">
+      <div class="bar"><span id="exTitle">Ek Minute · Article 200</span><span id="exTime">0:00 / 0:48</span></div>
+      <svg class="stage" id="stage" viewBox="0 0 360 400" role="img" aria-label="Article 200 explainer scene"></svg>
+      <div class="prog" aria-hidden="true"><i id="exProg"></i></div>
+      <p class="caption" id="exCap" aria-live="polite"></p>
+      <div class="row">
+        <button type="button" class="primary" id="exPlay">Play</button>
+        <button type="button" class="ghost" id="exReplay">Replay</button>
+      </div>
+      <span class="hint" id="exHint">Sound is off. Turn on Sound above to hear the music bed and the chai motif.</span>
+    </div>
+    <div class="notes">
+      <h2>Article 200 in 48 seconds</h2>
+      <p>A tap-to-play motion explainer of one static concept: the Governor's four options for a state bill. It starts only when you press Play, can be paused at any point, and every line is on screen as a caption, so it works on mute.</p>
+      <ul>
+        <li>The scene is drawn by the browser from a small script, the same way the app would draw it from a Lottie file. There is no video file.</li>
+        <li>The music bed is a soft tanpura drone. The real version adds a Hindi or English narrator.</li>
+        <li>It ends on the three-note chai motif, which also closes every reel.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Real size</dt><dd>About 60 KB scene + 120 KB voice per language</dd>
+        <dt>Plugs into</dt><dd>Practice → Chai archive, and "Watch 1 min" after "Explain simpler"</dd>
+        <dt>Marketing cut</dt><dd>Captioned 9:16 MP4 for Reels and Shorts</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Reel -->
+  <section class="panel" id="p-reel" role="tabpanel" aria-labelledby="tab-reel" hidden>
+    <div class="phone" style="min-height:auto">
+      <div class="reel" id="reel"></div>
+      <div class="prog" aria-hidden="true"><i id="reelProg"></i></div>
+      <div class="row">
+        <button type="button" class="primary" id="reelPlay">Play</button>
+        <button type="button" class="ghost" id="reelReplay">Replay</button>
+        <span class="small" id="reelTime">0:00 / 0:58</span>
+      </div>
+    </div>
+    <div class="notes">
+      <h2>Chai in 60 seconds</h2>
+      <p>The daily vertical video the marketing plan relies on, cut automatically from the same three cards. Each card gets about 16 seconds: the drawing, the headline, then one line worth remembering.</p>
+      <ul>
+        <li>Built from a fixed template every morning, so it needs no editing time.</li>
+        <li>Tragic cards are left out of the cut automatically.</li>
+        <li>The real version is exported as a captioned MP4 with a narrator, in Hindi and English.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Where it goes</dt><dd>YouTube Shorts, Instagram Reels, Moj</dd>
+        <dt>Ends on</dt><dd>The chai motif and the UPSC Pods mark, with no download pressure</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Soundscapes -->
+  <section class="panel" id="p-sound" role="tabpanel" aria-labelledby="tab-sound" hidden>
+    <div class="phone">
+      <div class="bar"><span>Rooms · Study soundscapes</span><span>Plays only on this phone</span></div>
+      <div class="scapes">
+        <div class="scape" id="sc-monsoon">
+          <svg class="illus" viewBox="0 0 320 140" aria-hidden="true" id="ill-monsoon"></svg>
+          <h4 id="sc-monsoon-name">Monsoon desk</h4>
+          <p id="sc-monsoon-desc">Rain on a tin roof with a slow tanpura underneath.</p>
+          <div class="row"><button type="button" class="primary" id="play-monsoon" data-scape="monsoon">Play</button></div>
+        </div>
+        <div class="scape" id="sc-library">
+          <svg class="illus" viewBox="0 0 320 140" aria-hidden="true" id="ill-library"></svg>
+          <h4 id="sc-library-name">Night library</h4>
+          <p id="sc-library-desc">A ceiling fan, a quiet room, and a low drone.</p>
+          <div class="row"><button type="button" class="primary" id="play-library" data-scape="library">Play</button></div>
+        </div>
+        <label class="small" for="vol">Volume</label>
+        <input type="range" id="vol" min="0" max="100" value="55">
+        <div class="row"><button type="button" class="ghost" id="motif">Hear the chai motif</button></div>
+        <span class="hint" id="sndHint">Pressing Play turns Sound on. Nothing here plays on its own.</span>
+      </div>
+    </div>
+    <div class="notes">
+      <h2>Two soundscapes and the sonic logo</h2>
+      <p>Study sound for Rooms and focus sessions, built from Indian acoustic textures. This preview synthesizes them live in the browser; the real ones are recorded and composed.</p>
+      <ul>
+        <li>Off by default, never autoplays, mixed quietly so nothing jumps out at night.</li>
+        <li>The chai motif is a soft pour followed by three santoor-like notes. It closes reels and explainers but is never used as a notification.</li>
+        <li>The same loops become 1-3 hour "study with me" videos on YouTube.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Real size</dt><dd>About 720 KB per 3-minute loop, downloaded only when picked</dd>
+        <dt>Plugs into</dt><dd>Rooms, chosen by the host; Close the Day wind-down if you approve it</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Timeline story -->
+  <section class="panel" id="p-timeline" role="tabpanel" aria-labelledby="tab-timeline" hidden>
+    <div class="phone">
+      <div class="bar"><span id="tlTitle">Practice · Timeline story</span><span id="tlCount">1 / 7</span></div>
+      <svg class="illus" viewBox="0 0 320 200" aria-hidden="true" id="tlIllus"></svg>
+      <div class="tl" id="tl"></div>
+      <label class="small" for="tlRange" id="tlRangeLabel">Drag along the timeline</label>
+      <input type="range" id="tlRange" min="0" max="6" step="1" value="0">
+      <div class="evcard enter" id="tlCard" aria-live="polite"></div>
+      <div class="row"><button type="button" class="ghost" id="tlPrev">←</button><button type="button" class="primary" id="tlNext">Next →</button></div>
+    </div>
+    <div class="notes">
+      <h2>Making the Constitution, 1946 to 1950</h2>
+      <p>An interactive timeline: drag the slider or tap a dot, and each step shows what happened and how long after the last step it came. The gap between dates is the thing aspirants mix up, so it is printed on every step.</p>
+      <ul>
+        <li>Dots are evenly spaced so each is easy to tap; the line under each step says how long it took, which shows the long wait from 1947 to 1949.</li>
+        <li>The two dates that recur in exams, 26 November 1949 and 26 January 1950, are marked in teal.</li>
+        <li>The same format suits rivers by state, schemes by year, or Modern History.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Real size</dt><dd>About 4 KB of data plus one drawing</dd>
+        <dt>Plugs into</dt><dd>Practice → Chai archive, weekly map and timeline slot</dd>
+        <dt>Marketing cut</dt><dd>A 5-slide carousel, one date per slide</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Match the Article -->
+  <section class="panel" id="p-match" role="tabpanel" aria-labelledby="tab-match" hidden>
+    <div class="phone">
+      <div class="bar"><span id="mtTitle">Practice · Match the Article</span><span id="mtCount">0 / 6</span></div>
+      <p class="small" id="mtHow">Tap an Article, then what it is about.</p>
+      <div class="match"><div class="col" id="mtLeft"></div><div class="col" id="mtRight"></div></div>
+      <p class="caption" id="mtMsg" aria-live="polite" style="min-height:2em"></p>
+      <div class="row"><button type="button" class="ghost" id="mtNew">New round</button></div>
+    </div>
+    <div class="notes">
+      <h2>Match the Article, a low-stakes game</h2>
+      <p>Six Articles, six meanings, and no timer. A wrong pair gives a small nudge and a "try again"; a right pair locks in with a soft note. No score is ever shown to anyone else.</p>
+      <ul>
+        <li>Each round draws 6 pairs from a pool of 14, so it can be played again.</li>
+        <li>Pairs you get wrong would come back in Today's revision at day 3, 10 and 30.</li>
+        <li>Sound is the same santoor note as the Chai cards, and only plays with Sound on.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Real size</dt><dd>About 3 KB per pool</dd>
+        <dt>Plugs into</dt><dd>Practice → games, and Friday quiz nights in Rooms</dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Quiz night -->
+  <section class="panel" id="p-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+    <div class="phone">
+      <div class="bar"><span id="qnTitle">Rooms · Friday quiz night</span><span id="qnCount">1 / 5</span></div>
+      <div class="qn enter" id="qn"></div>
+      <div class="row"><button type="button" class="primary" id="qnReveal">Reveal answer</button><button type="button" class="ghost" id="qnNext">Next question</button></div>
+      <span class="hint" id="qnHint">The pod lead taps Reveal for the whole room.</span>
+    </div>
+    <div class="notes">
+      <h2>A five-question pack for pod leads</h2>
+      <p>A pack a pod lead runs in a Friday room. Everyone answers in their head or in chat, then the lead reveals. Every answer links back to the card or explainer it came from, so the quiz doubles as revision of the week.</p>
+      <ul>
+        <li>This pack revises this week's samples: Article 200, GI tags, Sendai and the Constitution timeline.</li>
+        <li>The reveal is one 300 ms change with a soft note, and nothing is scored publicly.</li>
+        <li>For marketing, the same pack becomes a 5-slide Instagram carousel or a Telegram poll with the answer next day.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Real size</dt><dd>About 2 KB per pack</dd>
+        <dt>Plugs into</dt><dd>Rooms (quiz night) and Pod (pack for pod leads)</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="panel" id="p-map" role="tabpanel" aria-labelledby="tab-map" hidden>
+    <div class="phone">
+      <div class="bar"><span id="mpTitle">Map Chai · Strait of Hormuz</span><span id="mpStep">Explore</span></div>
+      <svg class="mapsvg" id="mapSvg" viewBox="0 0 320 220" role="img" aria-label="Schematic map of the Strait of Hormuz"></svg>
+      <p class="fact" id="mpFact" aria-live="polite"></p>
+      <div class="row"><button type="button" class="primary" id="mpFind">Find it</button><button type="button" class="ghost" id="mpReset">Explore again</button></div>
+      <span class="small" id="mpNote">Schematic, not to scale. Tap the pins.</span></div>
+    <div class="notes"><h2>Map Chai: tap the pins, then find it</h2><p>A vector map card for a story with a place in it. Tapping a pin reveals a layer, then "Find it" asks you to tap the right spot, with no timer. This sample is a schematic of the Strait of Hormuz, drawn without any national boundaries.</p><ul><li>Recognition, not recall: Prelims map questions reward knowing where things sit.</li><li>Wrong taps get a hint, never a cross or a score.</li><li>Share version: the silhouette alone, "Where is this?", with the answer in the app.</li></ul><dl class="spec"><dt>Real size</dt><dd>About 6 KB of vector data</dd><dt>Plugs into</dt><dd>Today → Chai card zone 3, for any story with a location</dd><dt>Idea from</dt><dd>UI/UX research thread, idea 1</dd></dl></div>
+  </section>
+  <section class="panel" id="p-number" role="tabpanel" aria-labelledby="tab-number" hidden>
+    <div class="phone">
+      <div class="bar"><span id="nsTitle">Number Sense · Census 2011</span><span>One number</span></div>
+      <p class="num" id="nsNum">943</p>
+      <p class="fact" id="nsLead"></p>
+      <div class="bars" id="nsBars"></div>
+      <div class="why" id="nsWhy"></div>
+      <p class="trust" id="nsSrc"></p>
+      <div class="row"><button type="button" class="ghost" id="nsReplay">Draw again</button></div></div>
+    <div class="notes"><h2>Number Sense: one number, what it means</h2><p>One figure a Mains answer can use, drawn once in 400 ms, then explained in plain words with a comparison and its source. This sample is India's sex ratio in Census 2011.</p><ul><li>Bars start at 800 and the tick marks 1,000 (parity), so small gaps are visible; the axis start is stated under the bars.</li><li>One comparison from a different source (NFHS-5) teaches why surveys and censuses differ.</li><li>Share version: the number and its one-line meaning, with no app chrome.</li></ul><dl class="spec"><dt>Real size</dt><dd>About 1 KB of data</dd><dt>Plugs into</dt><dd>Today → Chai card zone 5, and Practice → Mains data bank</dd><dt>Idea from</dt><dd>UI/UX research thread, idea 4</dd></dl></div>
+  </section>
+  <section class="panel" id="p-myth" role="tabpanel" aria-labelledby="tab-myth" hidden>
+    <div class="phone">
+      <div class="bar"><span id="myTitle">Forward Buster</span><span id="myCount">1 / 3</span></div>
+      <div class="fwd" id="myFwd"></div>
+      <div class="guess" id="myGuess"></div>
+      <div class="verdict" id="myVerdict" aria-live="polite"></div>
+      <div class="row"><button type="button" class="primary" id="myNext">Next forward</button></div></div>
+    <div class="notes"><h2>Myth vs Fact: the Forward Buster</h2><p>A forwarded claim, the kind that circulates in aspirant WhatsApp groups. You guess first, then the stamp lands with the correct version and its source. The claims here are about the Constitution, so each can be checked against its text.</p><ul><li>Three verdicts: Fact, Myth, Half-true. Half-true teaches the most.</li><li>The tone never mocks the person who forwarded it.</li><li>Built to be forwarded back into the same groups, as a correction card.</li></ul><dl class="spec"><dt>Real size</dt><dd>About 1 KB per claim</dd><dt>Plugs into</dt><dd>Today, one a week in place of a Chai card; Honest Guide</dd><dt>Idea from</dt><dd>UI/UX research thread, idea 5</dd></dl></div>
+  </section>
+  <section class="panel" id="p-sides" role="tabpanel" aria-labelledby="tab-sides" hidden>
+    <div class="phone">
+      <div class="bar"><span id="sdTitle">Two Sides · Mains GS2</span><span id="sdCount">0 / 6 opened</span></div>
+      <h3 style="font-family:var(--read);font-size:19px;line-height:1.4;margin:0" id="sdQ"></h3>
+      <div class="sides"><div class="col for" id="sdFor"></div><div class="col against" id="sdAgainst"></div></div>
+      <div class="outline" id="sdOutline"></div>
+      <p class="trust" id="sdSrc"></p></div>
+    <div class="notes"><h2>Two Sides: a Mains debate in six taps</h2><p>Three points for and three against, each hidden until you tap it, so you try to recall before you read. It ends with a three-part outline you could write in Practice. The sample is simultaneous elections, a recurring GS2 theme.</p><ul><li>Amber for one side and teal for the other keeps the split calm, with no red or green.</li><li>The outline feeds the Mains answer task in Today's 3.</li><li>Balanced on purpose: examiners reward both sides and a way forward.</li></ul><dl class="spec"><dt>Real size</dt><dd>About 2 KB</dd><dt>Plugs into</dt><dd>Practice → Mains, and the Mains task on Today</dd><dt>Idea from</dt><dd>UI/UX research thread, idea 3</dd></dl></div>
+  </section>
+  <section class="panel" id="p-lamp" role="tabpanel" aria-labelledby="tab-lamp" hidden>
+    <div class="phone">
+      <div class="bar"><span id="lpTitle">After Close the Day · optional</span><span>2 min</span></div>
+      <div class="lamp" id="lamp">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <circle class="glow" cx="80" cy="70" r="46" fill="#E8A066" opacity=".16"/>
+          <path class="flame" d="M80 30 C 92 48 96 62 80 82 C 64 62 68 48 80 30 Z" fill="#F2C14E"/>
+          <path class="flame" d="M80 50 C 86 60 86 70 80 80 C 74 70 74 60 80 50 Z" fill="#FFF1C9"/>
+          <path d="M40 92 Q 80 124 120 92 Z" fill="#8D4F01"/><path d="M40 92 H120" stroke="#B8732A" stroke-width="3" stroke-linecap="round"/><path d="M78 82 v10" stroke="#3A2E24" stroke-width="2"/>
+        </svg>
+        <p id="lpText">Let the lamp go out on its own. You don't need to do anything.</p>
+        <span class="q" id="lpCue">Breathe in for four, out for six. Once is enough.</span>
+        <button type="button" id="lpStart">Dim the lamp</button>
+      </div></div>
+    <div class="notes"><h2>Lamp Off: a two-minute wind-down</h2><p>An optional screen after Close the Day. A diya dims slowly over two minutes, with one breath cue and, if Sound is on, a low tanpura. There is no content, no feed and nothing below the last line.</p><ul><li>It is always dark, whatever the theme, because it is meant for 23:30.</li><li>One slow change, not a loop, so it stays within the motion rules.</li><li>Private. It never has a share button and is never used in marketing.</li></ul><dl class="spec"><dt>Real size</dt><dd>Under 2 KB, reuses the bed audio</dd><dt>Plugs into</dt><dd>Close the Day, after "Day closed. You showed up. That counts."</dd><dt>Idea from</dt><dd>UI/UX research thread, idea 9; also the open wind-down decision in the plan</dd></dl></div>
+  </section>
+  <!-- Share -->
+  <section class="panel" id="p-share" role="tabpanel" aria-labelledby="tab-share" hidden>
+    <div class="phone">
+      <div class="bar"><span>Share · Chai of the Day</span><span>1080 × 1920</span></div>
+      <div class="seg row" id="shareSeg">
+        <button type="button" id="sh-0" aria-pressed="true" data-i="0">GI tag</button>
+        <button type="button" id="sh-1" aria-pressed="false" data-i="1">El Niño</button>
+        <button type="button" id="sh-2" aria-pressed="false" data-i="2">Sendai</button>
+      </div>
+      <img class="shareimg" id="shareImg" alt="Chai of the Day share card">
+      <span class="small">Right-click or long-press the image to save it. In the app this is one tap from the card.</span>
+    </div>
+    <div class="notes">
+      <h2>The WhatsApp status card</h2>
+      <p>Rendered from the card itself in the reader's language, at full status size. It carries the drawing, the headline, one line worth knowing and a small UPSC Pods mark. It shows no ranks, no countdowns and no discount.</p>
+      <ul>
+        <li>Switch the reading language above and the card re-renders in Hindi.</li>
+        <li>Tragic cards never get a share button.</li>
+        <li>The real link would open this exact card in the app.</li>
+      </ul>
+      <dl class="spec">
+        <dt>Where it goes</dt><dd>WhatsApp status, Telegram channels</dd>
+        <dt>Same template for</dt><dd>Wins of the week, weekly rhythm dots, calculator results</dd>
+      </dl>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var S = { lang: "en", sound: false, motion: true, pics: true, night: false, card: 0, answered: {} };
+  try { var saved = JSON.parse(localStorage.getItem("chaiPreview") || "{}"); if (saved.lang) S.lang = saved.lang; } catch (e) {}
+  function save() { try { localStorage.setItem("chaiPreview", JSON.stringify({ lang: S.lang })); } catch (e) {} }
+
+  // ---------- Content ----------
+  var CARDS = [
+    { tone: "LIGHT", draw: "gi",
+      en: { chips: ["GS3", "IPR", "Prelims", "GI Act, 1999"],
+        head: "Learn why a GI tag protects a name, not a recipe",
+        sum: "A Geographical Indication (GI) tells buyers that a product comes from a particular place and owes its qualities to it. In India, GIs are registered under the Geographical Indications of Goods (Registration and Protection) Act, 1999, which came into force in 2003. Darjeeling Tea was the first Indian product to get a GI tag. Registration lasts 10 years and can be renewed. Anyone can still cook rasgulla at home. Only producers from the registered area can sell it under the protected name.",
+        why: ["Prelims: IPR basics and the WTO's TRIPS Agreement", "Links to rural livelihoods and exports", "Static link: GI Act, 1999"],
+        q: "A GI registration in India is valid for:", opts: ["5 years", "10 years, and can be renewed", "20 years", "For ever"], ans: 1,
+        right: "Right. 10 years, renewable.", wrong: "Not this one. It is 10 years, and it can be renewed.",
+        joke: "Geography you can eat. The tag guards the name, not your mother's recipe.",
+        take: "A GI tag lasts 10 years and can be renewed. Darjeeling Tea was first." },
+      hi: { chips: ["GS3", "बौद्धिक संपदा", "प्रारंभिक", "GI अधिनियम, 1999"],
+        head: "जानिए, GI टैग नाम की रक्षा करता है, नुस्खे की नहीं",
+        sum: "भौगोलिक संकेत (GI) बताता है कि कोई उत्पाद किसी ख़ास जगह से आता है और उसकी ख़ूबियाँ उसी जगह की देन हैं। भारत में GI का पंजीकरण भौगोलिक संकेत (पंजीकरण और संरक्षण) अधिनियम, 1999 के तहत होता है, जो 2003 में लागू हुआ। दार्जिलिंग चाय GI टैग पाने वाला पहला भारतीय उत्पाद था। पंजीकरण 10 साल के लिए होता है और इसे आगे बढ़ाया जा सकता है। रसगुल्ला घर पर कोई भी बना सकता है, पर संरक्षित नाम से बेचने का हक़ सिर्फ़ उसी इलाक़े के उत्पादकों को है।",
+        why: ["प्रारंभिक: बौद्धिक संपदा और WTO का ट्रिप्स समझौता", "ग्रामीण रोज़गार और निर्यात से जुड़ाव", "स्थायी संदर्भ: GI अधिनियम, 1999"],
+        q: "भारत में GI पंजीकरण कितने समय के लिए मान्य होता है?", opts: ["5 साल", "10 साल, और आगे बढ़ाया जा सकता है", "20 साल", "हमेशा के लिए"], ans: 1,
+        right: "सही। 10 साल, और आगे बढ़ाया जा सकता है।", wrong: "यह नहीं। सही जवाब है 10 साल, जिसे आगे बढ़ाया जा सकता है।",
+        joke: "ऐसा भूगोल जो खाया जा सके। टैग नाम बचाता है, माँ का नुस्खा नहीं।",
+        take: "GI टैग 10 साल चलता है और आगे बढ़ाया जा सकता है। पहला था दार्जिलिंग चाय।" } },
+    { tone: "NEUTRAL", draw: "nino",
+      en: { chips: ["GS1", "Climatology", "Both", "Walker circulation"],
+        head: "Track how El Niño can weaken India's monsoon",
+        sum: "El Niño is an unusual warming of the sea surface in the central and eastern equatorial Pacific Ocean. It weakens the Walker circulation, the loop of winds over the Pacific, and often brings drier conditions to India during the southwest monsoon. It does not decide the monsoon on its own. A positive Indian Ocean Dipole (IOD) can offset it, as in 1997, when a strong El Niño came with a near-normal Indian monsoon.",
+        why: ["GS1 Geography: climatology and the Indian monsoon", "GS3 link: agriculture and food prices", "Static link: Walker circulation, IOD"],
+        q: "Which of these can reduce El Niño's effect on the Indian monsoon?", opts: ["A negative IOD", "A positive IOD", "Western disturbances", "A weak jet stream"], ans: 1,
+        right: "Right. A positive IOD can offset El Niño, as in 1997.", wrong: "Not this one. A positive IOD is the usual offset, as in 1997.",
+        take: "A positive IOD can offset El Niño, as it did in 1997." },
+      hi: { chips: ["GS1", "जलवायु विज्ञान", "दोनों", "वॉकर परिसंचरण"],
+        head: "समझिए, एल नीनो भारत के मानसून को कैसे कमज़ोर कर सकता है",
+        sum: "एल नीनो प्रशांत महासागर के मध्य और पूर्वी भूमध्यरेखीय हिस्से में समुद्र की सतह का असामान्य रूप से गर्म होना है। इससे वॉकर परिसंचरण, यानी प्रशांत के ऊपर हवाओं का चक्र, कमज़ोर पड़ता है और दक्षिण-पश्चिम मानसून में भारत में अक्सर बारिश कम होती है। पर मानसून अकेले एल नीनो से तय नहीं होता। सकारात्मक हिंद महासागर द्विध्रुव (IOD) इसका असर कम कर सकता है, जैसे 1997 में, जब तेज़ एल नीनो के बावजूद मानसून लगभग सामान्य रहा।",
+        why: ["GS1 भूगोल: जलवायु और भारतीय मानसून", "GS3 से जुड़ाव: खेती और खाद्य क़ीमतें", "स्थायी संदर्भ: वॉकर परिसंचरण, IOD"],
+        q: "इनमें से कौन भारतीय मानसून पर एल नीनो का असर कम कर सकता है?", opts: ["नकारात्मक IOD", "सकारात्मक IOD", "पश्चिमी विक्षोभ", "कमज़ोर जेट स्ट्रीम"], ans: 1,
+        right: "सही। सकारात्मक IOD एल नीनो का असर कम कर सकता है, जैसे 1997 में।", wrong: "यह नहीं। आम तौर पर सकारात्मक IOD यह असर कम करता है, जैसे 1997 में।",
+        take: "सकारात्मक IOD एल नीनो का असर कम कर सकता है, जैसे 1997 में।" } },
+    { tone: "SERIOUS", draw: "sendai",
+      en: { chips: ["GS3", "Disaster management", "Mains", "DM Act, 2005"],
+        head: "Revise the Sendai Framework's targets for disaster risk",
+        sum: "The Sendai Framework for Disaster Risk Reduction runs from 2015 to 2030. It was adopted at a UN conference in Sendai, Japan, and India is a signatory. It sets seven global targets, such as reducing disaster deaths and economic losses, and four priorities for action, starting with understanding disaster risk. In India, the Disaster Management Act, 2005 created the National Disaster Management Authority (NDMA), which the Prime Minister chairs.",
+        why: ["GS3: disaster management", "Mains: link global frameworks to state preparedness", "Static link: DM Act, 2005"],
+        q: "Who chairs the National Disaster Management Authority?", opts: ["The Union Home Minister", "The Prime Minister", "The Cabinet Secretary", "The President"], ans: 1,
+        right: "Right. The Prime Minister chairs the NDMA.", wrong: "Not this one. The Prime Minister chairs the NDMA.",
+        take: "Sendai runs 2015 to 2030, with seven targets and four priorities." },
+      hi: { chips: ["GS3", "आपदा प्रबंधन", "मुख्य", "आपदा प्रबंधन अधिनियम, 2005"],
+        head: "दोहराइए, आपदा जोखिम पर सेंडाई फ्रेमवर्क के लक्ष्य",
+        sum: "आपदा जोखिम न्यूनीकरण के लिए सेंडाई फ्रेमवर्क 2015 से 2030 तक के लिए है। इसे जापान के सेंडाई शहर में संयुक्त राष्ट्र के सम्मेलन में अपनाया गया, और भारत ने इस पर हस्ताक्षर किए हैं। इसमें सात वैश्विक लक्ष्य हैं, जैसे आपदा से होने वाली मौतें और आर्थिक नुक़सान घटाना, और कार्रवाई की चार प्राथमिकताएँ, जिनमें पहली है आपदा जोखिम को समझना। भारत में आपदा प्रबंधन अधिनियम, 2005 से राष्ट्रीय आपदा प्रबंधन प्राधिकरण (NDMA) बना, जिसके अध्यक्ष प्रधानमंत्री होते हैं।",
+        why: ["GS3: आपदा प्रबंधन", "मुख्य परीक्षा: वैश्विक ढाँचे को राज्यों की तैयारी से जोड़ें", "स्थायी संदर्भ: आपदा प्रबंधन अधिनियम, 2005"],
+        q: "राष्ट्रीय आपदा प्रबंधन प्राधिकरण के अध्यक्ष कौन होते हैं?", opts: ["केंद्रीय गृह मंत्री", "प्रधानमंत्री", "कैबिनेट सचिव", "राष्ट्रपति"], ans: 1,
+        right: "सही। NDMA के अध्यक्ष प्रधानमंत्री होते हैं।", wrong: "यह नहीं। NDMA के अध्यक्ष प्रधानमंत्री होते हैं।",
+        take: "सेंडाई: 2015 से 2030, सात लक्ष्य, चार प्राथमिकताएँ।" } }
+  ];
+  var UI = {
+    en: { why: "Why this matters for UPSC", exam: "Exam Corner", next: "Next card →", seeEnd: "Finish", keyfacts: "No direct PYQ",
+      trust: "Sample written for this preview from standard reference facts · Not yet checked by an editor · Spot a mistake? Tell us",
+      done: "That's today's Chai ☕", doneSub: "Three cards in this preview. The app has five.", again: "Read again", chotu: "Chotu · AI", save: "Save for revision", saved: "Saved ✓",
+      of: "of", today: "Today's Chai" },
+    hi: { why: "UPSC के लिए यह क्यों ज़रूरी है", exam: "परीक्षा कोना", next: "अगला कार्ड →", seeEnd: "पूरा हुआ", keyfacts: "कोई सीधा PYQ नहीं",
+      trust: "इस झलक के लिए मानक तथ्यों से लिखा गया नमूना · अभी संपादक ने नहीं जाँचा · कोई ग़लती दिखी? हमें बताइए",
+      done: "आज की चाय पूरी ☕", doneSub: "इस झलक में तीन कार्ड हैं। ऐप में पाँच होते हैं।", again: "फिर से पढ़ें", chotu: "छोटू · AI", save: "दोहराने के लिए सहेजें", saved: "सहेजा ✓",
+      of: "में से", today: "आज की चाय" }
+  };
+
+  // ---------- Illustrations (one function, used in-app with tokens and on canvas with literal colours) ----------
+  function pal(lit) {
+    if (lit) return { ink: "#201B17", chai: "#8D4F01", soft: "#FFDCC0", teal: "#14696B", tsoft: "#D5ECEB", mari: "#C98A0B", paper: "#FFF8F3", grey: "#8A8079" };
+    return { ink: "var(--ink)", chai: "var(--chai)", soft: "var(--chai-soft)", teal: "var(--teal)", tsoft: "var(--teal-soft)", mari: "var(--marigold)", paper: "var(--paper)", grey: "var(--grey)" };
+  }
+  function drawGI(c) {
+    return '<rect x="0" y="0" width="320" height="200" fill="' + c.paper + '"/>' +
+      '<path d="M20 168 H300" stroke="' + c.grey + '" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>' +
+      '<g class="steam" fill="none" stroke="' + c.chai + '" stroke-width="2" stroke-linecap="round" opacity=".7"><path d="M118 70 c-8 -10 8 -16 0 -28"/><path d="M138 66 c-8 -10 8 -16 0 -28"/><path d="M158 70 c-8 -10 8 -16 0 -28"/></g>' +
+      '<path d="M92 84 H184 L172 166 H104 Z" fill="' + c.soft + '" stroke="' + c.chai + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+      '<path d="M92 84 H184" stroke="' + c.chai + '" stroke-width="5" stroke-linecap="round"/>' +
+      '<path d="M100 104 H176" stroke="' + c.chai + '" stroke-width="1.4" opacity=".45"/>' +
+      '<circle cx="222" cy="108" r="34" fill="' + c.paper + '" stroke="' + c.mari + '" stroke-width="2.4" stroke-dasharray="4 3"/>' +
+      '<circle cx="222" cy="108" r="25" fill="none" stroke="' + c.mari + '" stroke-width="1.4"/>' +
+      '<text x="222" y="115" text-anchor="middle" font-family="Martel, Georgia, serif" font-weight="800" font-size="21" fill="' + c.mari + '">GI</text>' +
+      '<path d="M262 48 c0 -10 16 -10 16 0 c0 8 -8 16 -8 16 c0 0 -8 -8 -8 -16 Z" fill="' + c.teal + '"/><circle cx="270" cy="48" r="3" fill="' + c.paper + '"/>' +
+      '<path d="M206 150 h40 M214 158 h24" stroke="' + c.grey + '" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>';
+  }
+  function drawNino(c) {
+    var waves = "";
+    for (var i = 0; i < 4; i++) { var y = 120 + i * 14; waves += '<path d="M14 ' + y + ' q 18 -8 36 0 t 36 0 t 36 0 t 36 0 t 36 0 t 36 0 t 36 0 t 36 0" fill="none" stroke="' + c.teal + '" stroke-width="1.6" opacity="' + (0.85 - i * 0.15) + '"/>'; }
+    return '<rect x="0" y="0" width="320" height="200" fill="' + c.paper + '"/>' +
+      '<ellipse cx="208" cy="132" rx="70" ry="24" fill="' + c.mari + '" opacity=".22"/>' + waves +
+      '<circle cx="250" cy="52" r="18" fill="none" stroke="' + c.mari + '" stroke-width="2.2"/>' +
+      '<g stroke="' + c.mari + '" stroke-width="2" stroke-linecap="round"><path d="M250 22 v-8"/><path d="M276 30 l6 -6"/><path d="M284 52 h8"/><path d="M224 30 l-6 -6"/></g>' +
+      '<path d="M64 72 C 100 44 170 44 206 72" fill="none" stroke="' + c.ink + '" stroke-width="1.6" stroke-dasharray="5 4"/>' +
+      '<path d="M200 66 l8 7 l-10 3" fill="none" stroke="' + c.ink + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+      '<text x="22" y="190" font-family="Mukta, system-ui, sans-serif" font-size="12" fill="' + c.grey + '">INDIA</text>' +
+      '<text x="250" y="190" font-family="Mukta, system-ui, sans-serif" font-size="12" fill="' + c.grey + '">PACIFIC</text>' +
+      '<path d="M20 96 l14 -22 l10 12 l8 -8 l6 18 Z" fill="' + c.soft + '" stroke="' + c.chai + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  }
+  function drawSendai(c) {
+    var rain = "";
+    for (var i = 0; i < 9; i++) { var x = 40 + i * 30; rain += '<path d="M' + x + ' ' + (22 + (i % 3) * 8) + ' l-6 14" stroke="' + c.grey + '" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>'; }
+    return '<rect x="0" y="0" width="320" height="200" fill="' + c.paper + '"/>' + rain +
+      '<path d="M160 52 L222 72 V112 C222 146 194 164 160 176 C126 164 98 146 98 112 V72 Z" fill="' + c.tsoft + '" stroke="' + c.teal + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+      '<path d="M132 120 L160 98 L188 120 V146 H132 Z" fill="' + c.paper + '" stroke="' + c.ink + '" stroke-width="1.8" stroke-linejoin="round"/>' +
+      '<rect x="153" y="126" width="14" height="20" fill="none" stroke="' + c.ink + '" stroke-width="1.6"/>' +
+      '<path d="M30 180 H290" stroke="' + c.grey + '" stroke-width="1.5" opacity=".5"/>';
+  }
+  var DRAW = { gi: drawGI, nino: drawNino, sendai: drawSendai };
+  function svgFor(kind, lit, cls) {
+    return '<svg class="' + (cls || "illus") + '" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' + DRAW[kind](pal(lit)) + '</svg>';
+  }
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+
+  // ---------- Chai cards ----------
+  var savedCards = {};
+  function renderCard() {
+    var phone = $("cardPhone"), u = UI[S.lang];
+    if (S.card >= CARDS.length) {
+      phone.innerHTML = '<div class="bar"><span>' + u.today + '</span><span>' + CARDS.length + ' ' + u.of + ' ' + CARDS.length + '</span></div>' +
+        '<div class="done enter" lang="' + S.lang + '">' + svgFor("gi", false, "illus") + '<p>' + u.done + '</p><span class="small">' + u.doneSub + '</span>' +
+        '<button type="button" class="ghost" id="againBtn">' + u.again + '</button></div>';
+      $("againBtn").onclick = function () { S.card = 0; renderCard(); };
+      return;
+    }
+    var card = CARDS[S.card], t = card[S.lang], i = S.card;
+    var chips = t.chips.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join("");
+    var why = t.why.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
+    var opts = t.opts.map(function (x, k) { return '<button type="button" data-k="' + k + '" id="opt-' + i + '-' + k + '">' + String.fromCharCode(97 + k) + ') ' + esc(x) + '</button>'; }).join("");
+    var joke = (card.tone === "LIGHT" && t.joke) ? '<p class="joke"><b>' + u.chotu + '</b> · ' + esc(t.joke) + '</p>' : "";
+    var dots = CARDS.map(function (_, k) { return '<button type="button" aria-label="Card ' + (k + 1) + '" ' + (k === i ? 'aria-current="true"' : "") + ' data-k="' + k + '"></button>'; }).join("");
+    phone.innerHTML =
+      '<div class="bar"><span>' + u.today + ' · ' + card.tone + '</span><span>' + (i + 1) + ' ' + u.of + ' ' + CARDS.length + '</span></div>' +
+      '<article class="card tone-' + card.tone + ' enter" lang="' + S.lang + '">' +
+        svgFor(card.draw, false) +
+        '<div class="chips">' + chips + '</div>' +
+        '<h3>' + esc(t.head) + '</h3>' +
+        '<p class="sum">' + esc(t.sum) + '</p>' +
+        '<div class="why"><b>' + u.why + '</b><ul>' + why + '</ul></div>' +
+        '<details class="exam"><summary>' + u.exam + '</summary><div class="mcq"><span>' + esc(t.q) + '</span>' + opts + '<span class="fb" id="fb-' + i + '" aria-live="polite"></span><span class="small">' + u.keyfacts + '</span></div></details>' +
+        joke +
+        '<p class="trust">' + u.trust + '</p>' +
+      '</article>' +
+      '<div class="nav-row"><div class="dots">' + dots + '</div><div class="row"><button type="button" class="ghost" id="saveBtn">' + (savedCards[i] ? u.saved : u.save) + '</button><button type="button" class="primary" id="nextBtn">' + (i === CARDS.length - 1 ? u.seeEnd : u.next) + '</button></div></div>';
+    phone.querySelectorAll(".mcq button").forEach(function (b) {
+      b.onclick = function () {
+        var k = +b.dataset.k, ok = k === t.ans;
+        phone.querySelectorAll(".mcq button").forEach(function (x) { x.classList.remove("right", "wrong"); });
+        b.classList.add(ok ? "right" : "wrong");
+        if (!ok) phone.querySelector('.mcq button[data-k="' + t.ans + '"]').classList.add("right");
+        $("fb-" + i).textContent = ok ? t.right : t.wrong;
+        if (ok) tick();
+      };
+    });
+    phone.querySelectorAll(".dots button").forEach(function (b) { b.onclick = function () { S.card = +b.dataset.k; renderCard(); }; });
+    $("nextBtn").onclick = function () { S.card++; renderCard(); };
+    $("saveBtn").onclick = function () { savedCards[i] = !savedCards[i]; this.textContent = savedCards[i] ? u.saved : u.save; };
+  }
+
+  // ---------- Audio (synthesized stand-ins for recorded sound) ----------
+  var A = { ctx: null, out: null, vol: 0.55, beds: {} };
+  function ac() {
+    if (!A.ctx) {
+      var C = window.AudioContext || window.webkitAudioContext; if (!C) return null;
+      A.ctx = new C();
+      var comp = A.ctx.createDynamicsCompressor(); comp.threshold.value = -20; comp.ratio.value = 4;
+      A.out = A.ctx.createGain(); A.out.gain.value = A.vol;
+      A.out.connect(comp); comp.connect(A.ctx.destination);
+    }
+    if (A.ctx.state === "suspended") A.ctx.resume();
+    return A.ctx;
+  }
+  function noise(ctx, brown) {
+    var len = ctx.sampleRate * 3, b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0), last = 0;
+    for (var i = 0; i < len; i++) { var w = Math.random() * 2 - 1; if (brown) { last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w; }
+    var s = ctx.createBufferSource(); s.buffer = b; s.loop = true; return s;
+  }
+  function pluck(ctx, dest, f, t, g, dur) {
+    var o1 = ctx.createOscillator(), o2 = ctx.createOscillator(), lp = ctx.createBiquadFilter(), v = ctx.createGain();
+    o1.type = "sawtooth"; o2.type = "sawtooth"; o1.frequency.value = f; o2.frequency.value = f * 1.003;
+    lp.type = "lowpass"; lp.frequency.setValueAtTime(f * 6, t); lp.frequency.exponentialRampToValueAtTime(f * 1.6, t + dur);
+    v.gain.setValueAtTime(0.0001, t); v.gain.exponentialRampToValueAtTime(g, t + 0.02); v.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o1.connect(lp); o2.connect(lp); lp.connect(v); v.connect(dest);
+    o1.start(t); o2.start(t); o1.stop(t + dur + 0.05); o2.stop(t + dur + 0.05);
+  }
+  function santoor(ctx, dest, f, t, g) {
+    [0, 0.085].forEach(function (off, j) {
+      var o = ctx.createOscillator(), h = ctx.createOscillator(), v = ctx.createGain(), hv = ctx.createGain();
+      o.type = "triangle"; h.type = "sine"; o.frequency.value = f; h.frequency.value = f * 2.01; hv.gain.value = 0.35;
+      var tt = t + off, gg = g * (j ? 0.45 : 1);
+      v.gain.setValueAtTime(0.0001, tt); v.gain.exponentialRampToValueAtTime(gg, tt + 0.006); v.gain.exponentialRampToValueAtTime(0.0001, tt + 1.4);
+      o.connect(v); h.connect(hv); hv.connect(v); v.connect(dest);
+      o.start(tt); h.start(tt); o.stop(tt + 1.5); h.stop(tt + 1.5);
+    });
+  }
+  function pour(ctx, dest, t) {
+    var n = noise(ctx, false), bp = ctx.createBiquadFilter(), v = ctx.createGain();
+    bp.type = "bandpass"; bp.Q.value = 3; bp.frequency.setValueAtTime(2200, t); bp.frequency.exponentialRampToValueAtTime(700, t + 0.7);
+    v.gain.setValueAtTime(0.0001, t); v.gain.exponentialRampToValueAtTime(0.18, t + 0.08); v.gain.exponentialRampToValueAtTime(0.0001, t + 0.75);
+    n.connect(bp); bp.connect(v); v.connect(dest); n.start(t); n.stop(t + 0.8);
+  }
+  function motif() {
+    if (!S.sound) return; var ctx = ac(); if (!ctx) return;
+    var t = ctx.currentTime + 0.05;
+    pour(ctx, A.out, t);
+    santoor(ctx, A.out, 554.37, t + 0.8, 0.22);   // Sa
+    santoor(ctx, A.out, 622.25, t + 1.0, 0.2);    // Re
+    santoor(ctx, A.out, 830.61, t + 1.28, 0.24);  // Pa
+  }
+  function tick() {
+    if (!S.sound) return; var ctx = ac(); if (!ctx) return;
+    santoor(ctx, A.out, 830.61, ctx.currentTime + 0.01, 0.08);
+  }
+  // A bed = drone plus optional texture. Returns a stop() function.
+  function bed(kind, level) {
+    var ctx = ac(); if (!ctx) return function () {};
+    var g = ctx.createGain(); g.gain.setValueAtTime(0.0001, ctx.currentTime); g.gain.exponentialRampToValueAtTime(level || 1, ctx.currentTime + 1.5); g.connect(A.out);
+    var nodes = [], timer;
+    // tanpura cycle: Pa, Sa', Sa', Sa
+    var notes = [207.65, 277.18, 277.18, 138.59], k = 0, next = ctx.currentTime + 0.1;
+    function sched() { while (next < ctx.currentTime + 0.4) { pluck(ctx, g, notes[k % 4], next, k % 4 === 3 ? 0.07 : 0.045, 3.2); k++; next += 0.9; } }
+    sched(); timer = setInterval(sched, 120);
+    var pad = ctx.createOscillator(), pv = ctx.createGain(); pad.type = "sine"; pad.frequency.value = 138.59; pv.gain.value = 0.03; pad.connect(pv); pv.connect(g); pad.start(); nodes.push(pad);
+    if (kind === "monsoon") {
+      var n = noise(ctx, false), hp = ctx.createBiquadFilter(), lp = ctx.createBiquadFilter(), nv = ctx.createGain();
+      hp.type = "highpass"; hp.frequency.value = 500; lp.type = "lowpass"; lp.frequency.value = 4800; nv.gain.value = 0.09;
+      n.connect(hp); hp.connect(lp); lp.connect(nv); nv.connect(g); n.start(); nodes.push(n);
+    }
+    if (kind === "library") {
+      var b = noise(ctx, true), flp = ctx.createBiquadFilter(), fv = ctx.createGain(), lfo = ctx.createOscillator(), lg = ctx.createGain();
+      flp.type = "lowpass"; flp.frequency.value = 320; fv.gain.value = 0.22; lfo.frequency.value = 0.9; lg.gain.value = 0.05;
+      lfo.connect(lg); lg.connect(fv.gain); b.connect(flp); flp.connect(fv); fv.connect(g); b.start(); lfo.start(); nodes.push(b, lfo);
+    }
+    return function stop() {
+      clearInterval(timer);
+      var t = ctx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+      setTimeout(function () { nodes.forEach(function (x) { try { x.stop(); } catch (e) {} }); g.disconnect(); }, 700);
+    };
+  }
+
+  // ---------- Ek Minute explainer: Article 200 ----------
+  var EX = {
+    dur: [6, 6, 6, 5, 10, 10, 5],
+    en: ["A bill passed by the state legislature reaches the Governor.",
+         "Under Article 200, the Governor has four options.",
+         "One: give assent. The bill becomes law.",
+         "Two: withhold assent.",
+         "Three: return it for reconsideration, unless it is a Money Bill. If the House passes it again, the Governor cannot withhold assent.",
+         "Four: reserve it for the President. This is required if the bill would reduce the powers of the High Court.",
+         "Article 200, in one minute. UPSC Pods."],
+    hi: ["राज्य विधानमंडल से पारित विधेयक राज्यपाल के पास पहुँचता है।",
+         "अनुच्छेद 200 के तहत राज्यपाल के पास चार विकल्प हैं।",
+         "पहला: सहमति देना। विधेयक क़ानून बन जाता है।",
+         "दूसरा: सहमति रोक लेना।",
+         "तीसरा: पुनर्विचार के लिए लौटाना, अगर वह धन विधेयक न हो। सदन दोबारा पारित कर दे, तो राज्यपाल सहमति नहीं रोक सकते।",
+         "चौथा: राष्ट्रपति के विचार के लिए सुरक्षित रखना। अगर विधेयक हाई कोर्ट की शक्तियाँ घटाता हो, तो ऐसा करना ज़रूरी है।",
+         "एक मिनट में अनुच्छेद 200। UPSC Pods"],
+    labels: { en: ["State legislature", "Governor", "Assent", "Withhold", "Return", "Reserve", "Becomes law", "Not a Money Bill", "For the President", "Bill"],
+              hi: ["विधानमंडल", "राज्यपाल", "सहमति", "रोकना", "लौटाना", "सुरक्षित", "क़ानून बनता है", "धन विधेयक नहीं", "राष्ट्रपति के लिए", "विधेयक"] }
+  };
+  var ex = { t: 0, playing: false, last: 0, stop: null, motifDone: false, raf: 0 };
+  var EX_TOTAL = EX.dur.reduce(function (a, b) { return a + b; }, 0);
+  function building(x, y, w, label, id, dome) {
+    return '<g class="sc" id="' + id + '">' +
+      (dome ? '<path d="M' + (x + w / 2 - 22) + ' ' + (y + 6) + ' a22 20 0 0 1 44 0 Z" fill="var(--chai-soft)" stroke="var(--chai)" stroke-width="1.8"/>' : '<path d="M' + x + ' ' + (y + 8) + ' L' + (x + w / 2) + ' ' + (y - 14) + ' L' + (x + w) + ' ' + (y + 8) + ' Z" fill="var(--chai-soft)" stroke="var(--chai)" stroke-width="1.8" stroke-linejoin="round"/>') +
+      '<rect x="' + x + '" y="' + (y + 8) + '" width="' + w + '" height="56" fill="var(--surface)" stroke="var(--chai)" stroke-width="1.8"/>' +
+      '<path d="M' + (x + 14) + ' ' + (y + 20) + ' v34 M' + (x + w / 2) + ' ' + (y + 20) + ' v34 M' + (x + w - 14) + ' ' + (y + 20) + ' v34" stroke="var(--chai)" stroke-width="1.6"/>' +
+      '<text x="' + (x + w / 2) + '" y="' + (y + 84) + '" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="var(--ui)">' + label + '</text></g>';
+  }
+  function tile(i, x, y, label, icon, sub) {
+    return '<g class="sc" id="tile' + i + '"><rect x="' + x + '" y="' + y + '" width="150" height="96" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="1.5" id="tileBox' + i + '"/>' +
+      icon + '<text x="' + (x + 75) + '" y="' + (y + 70) + '" text-anchor="middle" font-size="14" font-weight="600" fill="var(--ink)" font-family="var(--ui)">' + label + '</text>' +
+      '<text class="sc off" id="tileSub' + i + '" x="' + (x + 75) + '" y="' + (y + 88) + '" text-anchor="middle" font-size="11.5" fill="var(--muted)" font-family="var(--ui)">' + sub + '</text></g>';
+  }
+  function buildStage() {
+    var L = EX.labels[S.lang];
+    var ic0 = '<path d="M83 152 l10 10 l20 -22" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    var ic1 = '<g stroke="var(--grey)" stroke-width="4" stroke-linecap="round"><path d="M248 136 v24"/><path d="M262 136 v24"/></g>';
+    var ic2 = '<path d="M112 258 a18 18 0 1 1 -6 -14" fill="none" stroke="var(--chai)" stroke-width="2.5" stroke-linecap="round"/><path d="M104 238 l4 8 l-9 1" fill="none" stroke="var(--chai)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    var ic3 = '<path d="M236 250 h30 m-8 -8 l8 8 l-8 8" fill="none" stroke="var(--chai)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    $("stage").innerHTML =
+      '<rect width="360" height="400" fill="var(--paper)"/>' +
+      building(22, 34, 100, L[0], "bLeg", false) + building(238, 34, 100, L[1], "bGov", true) +
+      '<g class="sc" id="bill"><rect x="134" y="54" width="30" height="38" rx="3" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/><path d="M140 66 h18 M140 74 h18 M140 82 h12" stroke="var(--muted)" stroke-width="1.4"/><text x="149" y="108" text-anchor="middle" font-size="11.5" fill="var(--muted)" font-family="var(--ui)">' + L[9] + '</text></g>' +
+      tile(0, 22, 124, L[2], ic0, L[6]) + tile(1, 188, 124, L[3], ic1, "") +
+      tile(2, 22, 234, L[4], ic2, L[7]) + tile(3, 188, 234, L[5], ic3, L[8]) +
+      '<g class="sc off" id="endCard"><rect x="22" y="124" width="316" height="206" rx="14" fill="var(--chai-soft)"/>' +
+      '<text x="180" y="214" text-anchor="middle" font-size="30" font-weight="800" fill="var(--chai)" font-family="var(--read)">' + (S.lang === "hi" ? "अनुच्छेद 200" : "Article 200") + '</text>' +
+      '<text x="180" y="248" text-anchor="middle" font-size="14" fill="var(--ink)" font-family="var(--ui)">' + (S.lang === "hi" ? "एक मिनट · UPSC Pods" : "Ek Minute · UPSC Pods") + '</text></g>' +
+      '<text x="180" y="372" text-anchor="middle" font-size="11.5" fill="var(--muted)" font-family="var(--ui)">' + (S.lang === "hi" ? "नमूना · संपादक की जाँच बाक़ी" : "Sample · awaiting editor check") + '</text>';
+    paintScene(sceneAt(ex.t), true);
+  }
+  function sceneAt(t) { var acc = 0; for (var i = 0; i < EX.dur.length; i++) { acc += EX.dur[i]; if (t < acc) return i; } return EX.dur.length - 1; }
+  function setCls(id, cls) { var el = $(id); if (!el) return; el.classList.remove("off", "dim"); if (cls) el.classList.add(cls); }
+  function paintScene(s) {
+    var billX = s === 0 ? (ex.t / EX.dur[0]) : 1;
+    var bill = $("bill"); if (bill) bill.setAttribute("transform", "translate(" + Math.round(Math.min(1, billX) * 62) + " 0)");
+    for (var i = 0; i < 4; i++) {
+      var cls = s < 1 ? "off" : (s === 1 || s === 6) ? (s === 6 ? "off" : null) : (s - 2 === i ? null : "dim");
+      setCls("tile" + i, cls);
+      var box = $("tileBox" + i); if (box) { box.setAttribute("stroke", s - 2 === i ? "var(--chai)" : "var(--line)"); box.setAttribute("stroke-width", s - 2 === i ? "2.5" : "1.5"); }
+      setCls("tileSub" + i, s - 2 === i ? null : "off");
+    }
+    setCls("bill", s === 6 ? "off" : null);
+    setCls("bLeg", s === 6 ? "off" : (s >= 2 ? "dim" : null));
+    setCls("bGov", s === 6 ? "off" : null);
+    setCls("endCard", s === 6 ? null : "off");
+    $("exCap").textContent = EX[S.lang][s];
+    $("exCap").lang = S.lang;
+    $("exProg").style.width = (ex.t / EX_TOTAL * 100) + "%";
+    $("exTime").textContent = fmt(ex.t) + " / " + fmt(EX_TOTAL);
+  }
+  function fmt(t) { t = Math.floor(t); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); }
+  function exFrame(now) {
+    if (!ex.playing) return;
+    ex.t += (now - ex.last) / 1000; ex.last = now;
+    if (ex.t >= EX_TOTAL - 4.6 && !ex.motifDone) { ex.motifDone = true; if (ex.stop) { ex.stop(); ex.stop = null; } motif(); }
+    if (ex.t >= EX_TOTAL) { ex.t = EX_TOTAL; paintScene(6); exPause(); $("exPlay").textContent = S.lang === "hi" ? "चलाएँ" : "Play"; return; }
+    paintScene(sceneAt(ex.t));
+    ex.raf = requestAnimationFrame(exFrame);
+  }
+  function exPlay() {
+    if (ex.t >= EX_TOTAL) { ex.t = 0; ex.motifDone = false; }
+    ex.playing = true; ex.last = performance.now();
+    if (S.sound && !ex.motifDone) ex.stop = bed("explainer", 0.7);
+    $("exPlay").textContent = S.lang === "hi" ? "रोकें" : "Pause";
+    ex.raf = requestAnimationFrame(exFrame);
+  }
+  function exPause() { ex.playing = false; cancelAnimationFrame(ex.raf); if (ex.stop) { ex.stop(); ex.stop = null; } $("exPlay").textContent = S.lang === "hi" ? "चलाएँ" : "Play"; }
+  $("exPlay").onclick = function () { ex.playing ? exPause() : exPlay(); };
+  $("exReplay").onclick = function () { exPause(); ex.t = 0; ex.motifDone = false; paintScene(0); exPlay(); };
+
+  // ---------- Chai in 60 seconds ----------
+  var RL = { segs: [4, 16, 16, 16, 6] };
+  var RL_TOTAL = RL.segs.reduce(function (a, b) { return a + b; }, 0);
+  var rl = { t: 0, playing: false, last: 0, seg: -1, half: null, stop: null, motifDone: false, raf: 0 };
+  function rlSegAt(t) { var acc = 0; for (var i = 0; i < RL.segs.length; i++) { acc += RL.segs[i]; if (t < acc) return [i, t - (acc - RL.segs[i])]; } return [RL.segs.length - 1, RL.segs[RL.segs.length - 1]]; }
+  function renderReel(seg, local) {
+    var hi = S.lang === "hi", box = $("reel"), half = seg >= 1 && seg <= 3 ? local > 6 : null;
+    if (seg === rl.seg && half === rl.half) return;
+    var firstPaint = seg !== rl.seg; rl.seg = seg; rl.half = half;
+    var brand = '<div class="brand"><span>UPSC Pods</span><span>' + (hi ? "60 सेकंड में चाय" : "Chai in 60 seconds") + '</span></div>';
+    if (seg === 0) {
+      box.innerHTML = brand + '<div class="body enter"><p class="cap">' + (hi ? "10 अक्टूबर 2026" : "10 October 2026") + '</p><p class="big">' + (hi ? "आज की चाय, एक मिनट में" : "Today's Chai, in one minute") + '</p><p class="cap">' + (hi ? "तीन कार्ड · कोई शोर नहीं" : "Three cards · no noise") + '</p></div>';
+    } else if (seg === 4) {
+      box.innerHTML = brand + '<div class="body enter" style="text-align:center;align-items:center">' + '<svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true"><path d="M30 44 H90 L82 100 H38 Z" fill="var(--chai-soft)" stroke="var(--chai)" stroke-width="2.4" stroke-linejoin="round"/><path d="M30 44 H90" stroke="var(--chai)" stroke-width="5" stroke-linecap="round"/><g fill="none" stroke="var(--chai)" stroke-width="2" stroke-linecap="round" opacity=".7"><path d="M52 34 c-6 -8 6 -12 0 -22"/><path d="M68 34 c-6 -8 6 -12 0 -22"/></g></svg>' +
+        '<p class="big">' + (hi ? "पूरी चाय पढ़ें, UPSC Pods में" : "Read the full Chai in UPSC Pods") + '</p><p class="cap">' + (hi ? "हर सुबह पाँच कार्ड। मुफ़्त।" : "Five cards every morning. Free.") + '</p></div>';
+    } else {
+      var c = CARDS[seg - 1], t = c[S.lang];
+      if (firstPaint) {
+        box.innerHTML = brand + '<div class="body enter tone-' + c.tone + '" lang="' + S.lang + '">' + svgFor(c.draw, false, "reel-illus") +
+          '<div class="chips">' + t.chips.slice(0, 2).map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join("") + '</div>' +
+          '<h4>' + esc(t.head) + '</h4><p class="take hide" id="rlTake">' + esc(t.take) + '</p></div>' +
+          '<p class="cap">' + seg + ' / 3</p>';
+      }
+      var tk = $("rlTake"); if (tk) tk.classList.toggle("hide", !half);
+    }
+  }
+  function rlFrame(now) {
+    if (!rl.playing) return;
+    rl.t += (now - rl.last) / 1000; rl.last = now;
+    if (rl.t >= RL_TOTAL - 5.6 && !rl.motifDone) { rl.motifDone = true; if (rl.stop) { rl.stop(); rl.stop = null; } motif(); }
+    if (rl.t >= RL_TOTAL) { rl.t = RL_TOTAL; rlPause(); paintReel(); return; }
+    paintReel();
+    rl.raf = requestAnimationFrame(rlFrame);
+  }
+  function paintReel() { var sa = rlSegAt(rl.t); renderReel(sa[0], sa[1]); $("reelProg").style.width = (rl.t / RL_TOTAL * 100) + "%"; $("reelTime").textContent = fmt(rl.t) + " / " + fmt(RL_TOTAL); }
+  function rlPlay() { if (rl.t >= RL_TOTAL) { rl.t = 0; rl.motifDone = false; } rl.playing = true; rl.last = performance.now(); if (S.sound && !rl.motifDone) rl.stop = bed("reel", 0.55); $("reelPlay").textContent = S.lang === "hi" ? "रोकें" : "Pause"; rl.raf = requestAnimationFrame(rlFrame); }
+  function rlPause() { rl.playing = false; cancelAnimationFrame(rl.raf); if (rl.stop) { rl.stop(); rl.stop = null; } $("reelPlay").textContent = S.lang === "hi" ? "चलाएँ" : "Play"; }
+  $("reelPlay").onclick = function () { rl.playing ? rlPause() : rlPlay(); };
+  $("reelReplay").onclick = function () { rlPause(); rl.t = 0; rl.motifDone = false; rl.seg = -1; paintReel(); rlPlay(); };
+
+  // ---------- Soundscapes ----------
+  var scapeStop = {}, scapeOn = null;
+  function drawScapes() {
+    var c = pal(false);
+    $("ill-monsoon").innerHTML = '<rect width="320" height="140" fill="' + c.paper + '"/>' +
+      '<path d="M40 40 L160 18 L280 40" fill="none" stroke="' + c.grey + '" stroke-width="2" stroke-linejoin="round"/>' +
+      [60, 92, 124, 156, 188, 220, 252].map(function (x, i) { return '<path d="M' + x + ' ' + (50 + (i % 2) * 6) + ' l-5 14" stroke="' + c.teal + '" stroke-width="1.6" stroke-linecap="round"/>'; }).join("") +
+      '<rect x="70" y="92" width="180" height="10" rx="3" fill="' + c.soft + '" stroke="' + c.chai + '" stroke-width="1.6"/>' +
+      '<path d="M86 102 v28 M234 102 v28" stroke="' + c.chai + '" stroke-width="1.6"/>' +
+      '<path d="M120 92 v-14 h40 v14" fill="none" stroke="' + c.ink + '" stroke-width="1.4"/><path d="M196 92 h-8 v-12 h14 v12" fill="none" stroke="' + c.chai + '" stroke-width="1.6"/>';
+    $("ill-library").innerHTML = '<rect width="320" height="140" fill="' + c.paper + '"/>' +
+      '<path d="M160 10 v16" stroke="' + c.grey + '" stroke-width="1.6"/><ellipse cx="160" cy="30" rx="60" ry="5" fill="none" stroke="' + c.grey + '" stroke-width="1.6"/><circle cx="160" cy="30" r="5" fill="' + c.grey + '"/>' +
+      '<path d="M60 70 h200 v50 h-200 Z" fill="none" stroke="' + c.chai + '" stroke-width="1.6"/>' +
+      [76, 92, 108, 124, 140].map(function (x, i) { return '<rect x="' + x + '" y="' + (78 + (i % 2) * 4) + '" width="12" height="' + (34 - (i % 2) * 4) + '" fill="' + (i === 2 ? c.soft : "none") + '" stroke="' + c.chai + '" stroke-width="1.4"/>'; }).join("") +
+      '<path d="M190 112 h50 M200 112 v-18 h10" fill="none" stroke="' + c.teal + '" stroke-width="1.6"/><circle cx="214" cy="92" r="10" fill="' + c.mari + '" opacity=".25"/>';
+  }
+  function setScapeLabels() {
+    var hi = S.lang === "hi";
+    $("sc-monsoon-name").textContent = hi ? "मानसून की मेज़" : "Monsoon desk";
+    $("sc-monsoon-desc").textContent = hi ? "टीन की छत पर बारिश, नीचे धीमा तानपुरा।" : "Rain on a tin roof with a slow tanpura underneath.";
+    $("sc-library-name").textContent = hi ? "रात की लाइब्रेरी" : "Night library";
+    $("sc-library-desc").textContent = hi ? "छत का पंखा, शांत कमरा और धीमा स्वर।" : "A ceiling fan, a quiet room, and a low drone.";
+    ["monsoon", "library"].forEach(function (k) { $("play-" + k).textContent = scapeOn === k ? (hi ? "रोकें" : "Stop") : (hi ? "चलाएँ" : "Play"); });
+    $("motif").textContent = hi ? "चाय की धुन सुनें" : "Hear the chai motif";
+  }
+  ["monsoon", "library"].forEach(function (k) {
+    $("play-" + k).onclick = function () {
+      if (!S.sound) setSound(true);
+      if (scapeOn) { scapeStop[scapeOn](); var was = scapeOn; scapeOn = null; if (was === k) { setScapeLabels(); return; } }
+      scapeStop[k] = bed(k, 1); scapeOn = k; setScapeLabels();
+    };
+  });
+  $("motif").onclick = function () { if (!S.sound) setSound(true); motif(); };
+  $("vol").oninput = function () { A.vol = this.value / 100; if (A.out) A.out.gain.setTargetAtTime(A.vol, A.ctx.currentTime, 0.05); };
+
+  // ---------- Share card (canvas) ----------
+  var shareI = 0;
+  function wrap(ctx, text, maxW) {
+    var words = text.split(" "), lines = [], line = "";
+    words.forEach(function (w) { var test = line ? line + " " + w : w; if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; } else line = test; });
+    if (line) lines.push(line); return lines;
+  }
+  function renderShare() {
+    var c = CARDS[shareI], t = c[S.lang], hi = S.lang === "hi", W = 1080, H = 1920;
+    var cv = document.createElement("canvas"); cv.width = W; cv.height = H; var x = cv.getContext("2d");
+    var P = pal(true);
+    var fontsReady = (document.fonts && document.fonts.load) ? Promise.all([document.fonts.load('800 64px Martel', 'अ'), document.fonts.load('400 40px Martel', 'अ'), document.fonts.load('600 32px Mukta', 'अ')]) : Promise.resolve();
+    var img = new Image();
+    img.onload = function () {
+      fontsReady.catch(function () {}).then(function () {
+        x.fillStyle = P.paper; x.fillRect(0, 0, W, H);
+        x.fillStyle = P.chai; x.font = '600 34px Mukta, sans-serif'; x.fillText("UPSC PODS", 90, 150);
+        x.fillStyle = P.grey; x.font = '400 34px Mukta, sans-serif'; x.textAlign = "right"; x.fillText(hi ? "आज की चाय · 10 अक्टूबर" : "Chai of the Day · 10 Oct", W - 90, 150); x.textAlign = "left";
+        x.save(); x.beginPath(); if (x.roundRect) x.roundRect(90, 210, 900, 562, 36); else x.rect(90, 210, 900, 562); x.clip(); x.drawImage(img, 90, 210, 900, 562); x.restore();
+        var cx = 90, cy = 850; x.font = '600 30px Mukta, sans-serif';
+        t.chips.slice(0, 3).forEach(function (ch) { var w = x.measureText(ch).width + 44; x.fillStyle = c.tone === "LIGHT" ? P.soft : P.tsoft; x.beginPath(); if (x.roundRect) x.roundRect(cx, cy - 38, w, 54, 27); else x.rect(cx, cy - 38, w, 54); x.fill(); x.fillStyle = c.tone === "LIGHT" ? P.chai : P.teal; x.fillText(ch, cx + 22, cy); cx += w + 14; });
+        x.fillStyle = P.ink; x.font = '800 66px Martel, Georgia, serif';
+        var y = 990; wrap(x, t.head, 900).forEach(function (l) { x.fillText(l, 90, y); y += hi ? 104 : 96; });
+        y += 30; x.fillStyle = P.chai; x.fillRect(90, y, 80, 6); y += 80;
+        x.fillStyle = P.ink; x.font = '400 42px Martel, Georgia, serif';
+        wrap(x, t.take, 900).forEach(function (l) { x.fillText(l, 90, y); y += hi ? 78 : 70; });
+        x.fillStyle = P.grey; x.font = '400 32px Mukta, sans-serif';
+        x.fillText(hi ? "आज के पाँच कार्ड पढ़ें · UPSC Pods" : "Read today's five cards · UPSC Pods", 90, H - 150);
+        x.fillText(hi ? "नमूना · संपादक की जाँच बाक़ी" : "Sample · awaiting editor check", 90, H - 100);
+        $("shareImg").src = cv.toDataURL("image/png");
+        $("shareImg").alt = (hi ? "शेयर कार्ड: " : "Share card: ") + t.head;
+      });
+    };
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="900" height="562">' + DRAW[c.draw](P) + '</svg>');
+  }
+  $("shareSeg").querySelectorAll("button").forEach(function (b) {
+    b.onclick = function () { shareI = +b.dataset.i; $("shareSeg").querySelectorAll("button").forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); }); renderShare(); };
+  });
+
+  // ---------- Controls ----------
+  function setSound(on) {
+    S.sound = on; $("t-sound").setAttribute("aria-pressed", on ? "true" : "false");
+    $("exHint").hidden = on;
+    if (on) ac();
+    if (!on) { if (scapeOn) { scapeStop[scapeOn](); scapeOn = null; setScapeLabels(); } if (ex.stop) { ex.stop(); ex.stop = null; } if (rl.stop) { rl.stop(); rl.stop = null; } }
+    else { if (ex.playing && !ex.stop && !ex.motifDone) ex.stop = bed("explainer", 0.7); if (rl.playing && !rl.stop && !rl.motifDone) rl.stop = bed("reel", 0.55); }
+  }
+  $("t-sound").onclick = function () { setSound(!S.sound); };
+  $("t-motion").onclick = function () { S.motion = !S.motion; this.setAttribute("aria-pressed", S.motion); document.getElementById("app").classList.toggle("nomotion", !S.motion); };
+  $("t-pics").onclick = function () { S.pics = !S.pics; this.setAttribute("aria-pressed", S.pics); document.getElementById("app").classList.toggle("textonly", !S.pics); };
+  $("t-night").onclick = function () { S.night = !S.night; this.setAttribute("aria-pressed", S.night); document.querySelectorAll(".phone").forEach(function (p) { p.classList.toggle("night", S.night); }); };
+  $("langSeg").querySelectorAll("button").forEach(function (b) {
+    b.onclick = function () { S.lang = b.dataset.lang; save(); applyLang(); };
+  });
+  function applyLang() {
+    $("langSeg").querySelectorAll("button").forEach(function (o) { o.setAttribute("aria-pressed", o.dataset.lang === S.lang ? "true" : "false"); });
+    var hi = S.lang === "hi";
+    $("exTitle").textContent = hi ? "एक मिनट · अनुच्छेद 200" : "Ek Minute · Article 200";
+    $("exPlay").textContent = ex.playing ? (hi ? "रोकें" : "Pause") : (hi ? "चलाएँ" : "Play");
+    $("exReplay").textContent = hi ? "फिर से" : "Replay";
+    $("reelPlay").textContent = rl.playing ? (hi ? "रोकें" : "Pause") : (hi ? "चलाएँ" : "Play");
+    $("reelReplay").textContent = hi ? "फिर से" : "Replay";
+    renderCard(); buildStage(); rl.seg = -1; paintReel(); setScapeLabels(); renderShare(); renderTimeline(); renderMatch(); renderQuiz(); renderMap(); renderNumber(false); renderMyth(); renderSides(); renderLamp();
+  }
+
+  // Tabs
+  var tabs = document.querySelectorAll('nav.tabs [role="tab"]');
+  function showTab(name) {
+    tabs.forEach(function (tb) { var on = tb.dataset.panel === name; tb.setAttribute("aria-selected", on ? "true" : "false"); $("p-" + tb.dataset.panel).hidden = !on; });
+    if (name !== "explain" && ex.playing) exPause();
+    if (name !== "reel" && rl.playing) rlPause();
+    if (name === "number") renderNumber(true);
+  }
+  tabs.forEach(function (tb) { tb.onclick = function () { showTab(tb.dataset.panel); }; });
+  var h = (location.hash || "").replace("#", ""); if (["cards", "explain", "reel", "sound", "share", "timeline", "match", "quiz", "map", "number", "myth", "sides", "lamp"].indexOf(h) >= 0) showTab(h);
+
+
+  // ---------- Timeline story ----------
+  var TL = [
+    { d: "1946-05-16", key: false, en: ["The Cabinet Mission Plan proposes a Constituent Assembly", "The British Cabinet Mission set out a plan for Indians to frame their own constitution through an elected assembly."], hi: ["कैबिनेट मिशन योजना ने संविधान सभा का प्रस्ताव रखा", "ब्रिटिश कैबिनेट मिशन ने योजना दी कि भारतीय एक चुनी हुई सभा के ज़रिए अपना संविधान ख़ुद बनाएँ।"] },
+    { d: "1946-12-09", key: false, en: ["The Constituent Assembly meets for the first time", "Sachchidananda Sinha chaired the first sitting as the temporary President."], hi: ["संविधान सभा की पहली बैठक", "पहली बैठक की अध्यक्षता अस्थायी अध्यक्ष सच्चिदानंद सिन्हा ने की।"] },
+    { d: "1946-12-11", key: false, en: ["Rajendra Prasad is elected President of the Assembly", "He stayed its permanent President until the Constitution was adopted."], hi: ["राजेंद्र प्रसाद सभा के अध्यक्ष चुने गए", "संविधान अंगीकृत होने तक वे सभा के स्थायी अध्यक्ष रहे।"] },
+    { d: "1946-12-13", key: false, en: ["Nehru moves the Objectives Resolution", "It set out the ideals the Constitution would follow. The Assembly adopted it on 22 January 1947, and it later shaped the Preamble."], hi: ["नेहरू ने उद्देश्य प्रस्ताव रखा", "इसमें वे आदर्श थे जिन पर संविधान बनना था। सभा ने इसे 22 जनवरी 1947 को स्वीकार किया, और आगे चलकर इसी से प्रस्तावना बनी।"] },
+    { d: "1947-08-29", key: false, en: ["The Drafting Committee is set up, chaired by B. R. Ambedkar", "Its seven members prepared the draft that the Assembly debated clause by clause."], hi: ["प्रारूप समिति बनी, अध्यक्ष डॉ. बी. आर. आंबेडकर", "इसके सात सदस्यों ने वह मसौदा तैयार किया जिस पर सभा ने एक-एक धारा पर बहस की।"] },
+    { d: "1949-11-26", key: true, en: ["The Constitution is adopted", "Now marked as Constitution Day. Some provisions, such as citizenship and elections, took effect on this date."], hi: ["संविधान अंगीकृत हुआ", "यह दिन अब संविधान दिवस है। नागरिकता और चुनाव जैसे कुछ प्रावधान इसी दिन से लागू हुए।"] },
+    { d: "1950-01-26", key: true, en: ["The Constitution comes into force", "The date was chosen because the Indian National Congress had declared Purna Swaraj on 26 January 1930."], hi: ["संविधान लागू हुआ", "यह तारीख़ इसलिए चुनी गई क्योंकि कांग्रेस ने 26 जनवरी 1930 को पूर्ण स्वराज की घोषणा की थी।"] }
+  ];
+  var tlI = 0;
+  var MON = { en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], hi: ["जनवरी","फ़रवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"] };
+  function dLabel(d) { var m = +d.slice(5, 7), day = +d.slice(8); return day + " " + MON[S.lang].at(m - 1) + " " + d.slice(0, 4); }
+  function gapLabel(a, b) {
+    var days = Math.round((Date.parse(b) - Date.parse(a)) / 864e5), hi = S.lang === "hi";
+    if (days < 60) return hi ? days + " दिन बाद" : days + " days later";
+    var mo = Math.round(days / 30.44);
+    if (mo < 24) return hi ? "लगभग " + mo + " महीने बाद" : "about " + mo + " months later";
+    return hi ? "लगभग " + (mo / 12).toFixed(1) + " साल बाद" : "about " + (mo / 12).toFixed(1) + " years later";
+  }
+  function drawTlIllus() {
+    var c = pal(false);
+    $("tlIllus").innerHTML = '<rect width="320" height="200" fill="' + c.paper + '"/>' +
+      '<path d="M96 40 h112 a8 8 0 0 1 8 8 v118 h-128 v-118 a8 8 0 0 1 8 -8 Z" fill="' + c.soft + '" stroke="' + c.chai + '" stroke-width="2"/>' +
+      '<path d="M88 166 h136" stroke="' + c.chai + '" stroke-width="4" stroke-linecap="round"/>' +
+      '<path d="M112 70 h80 M112 86 h80 M112 102 h62 M112 118 h80 M112 134 h48" stroke="' + c.chai + '" stroke-width="1.6" opacity=".55" stroke-linecap="round"/>' +
+      '<path d="M226 70 l26 -26 l10 10 l-26 26 l-14 4 Z" fill="' + c.paper + '" stroke="' + c.ink + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+      '<circle cx="244" cy="140" r="18" fill="none" stroke="' + c.teal + '" stroke-width="2"/><path d="M236 140 l6 6 l10 -12" fill="none" stroke="' + c.teal + '" stroke-width="2.2" stroke-linecap="round"/>';
+  }
+  function renderTimeline() {
+    var hi = S.lang === "hi", t0 = Date.parse(TL[0].d), t1 = Date.parse(TL[TL.length - 1].d), box = $("tl");
+    var pos = function (d, k) { return (k / (TL.length - 1) * 100).toFixed(2) + "%"; };
+    var html = '<div class="axis"></div>';
+    TL.forEach(function (e, k) { html += '<span class="yr" style="left:' + pos(e.d, k) + '">' + MON[S.lang].at(+e.d.slice(5, 7) - 1).slice(0, 3) + " ’" + e.d.slice(2, 4) + '</span>'; });
+    TL.forEach(function (e, k) { html += '<button type="button" class="ev' + (e.key ? " key" : "") + '" style="left:' + pos(e.d, k) + '" data-k="' + k + '" aria-label="' + esc(dLabel(e.d) + ": " + e[S.lang][0]) + '"' + (k === tlI ? ' aria-current="true"' : "") + '></button>'; });
+    box.innerHTML = html;
+    box.querySelectorAll("button.ev").forEach(function (b) { b.onclick = function () { tlI = +b.dataset.k; renderTimeline(); }; });
+    var e = TL[tlI], card = $("tlCard");
+    card.lang = S.lang;
+    card.innerHTML = '<span class="date">' + dLabel(e.d) + '</span><h4>' + esc(e[S.lang][0]) + '</h4><p>' + esc(e[S.lang][1]) + '</p>' +
+      (tlI > 0 ? '<span class="gap">' + gapLabel(TL[tlI - 1].d, e.d) + (hi ? ", पिछले क़दम के" : " than the step before") + '</span>' : '<span class="gap">' + (hi ? "शुरुआत" : "Where it starts") + '</span>');
+    card.classList.remove("enter"); void card.offsetWidth; card.classList.add("enter");
+    $("tlRange").value = tlI; $("tlCount").textContent = (tlI + 1) + " / " + TL.length;
+    $("tlTitle").textContent = hi ? "अभ्यास · समयरेखा" : "Practice · Timeline story";
+    $("tlRangeLabel").textContent = hi ? "समयरेखा पर आगे-पीछे खिसकाएँ" : "Drag along the timeline";
+    $("tlNext").textContent = tlI === TL.length - 1 ? (hi ? "शुरू से" : "Start again") : (hi ? "आगे →" : "Next →");
+    $("tlPrev").disabled = tlI === 0;
+  }
+  $("tlRange").oninput = function () { tlI = +this.value; renderTimeline(); };
+  $("tlNext").onclick = function () { tlI = tlI === TL.length - 1 ? 0 : tlI + 1; renderTimeline(); };
+  $("tlPrev").onclick = function () { if (tlI > 0) { tlI--; renderTimeline(); } };
+
+  // ---------- Match the Article ----------
+  var ARTS = [
+    { a: "14", en: "Equality before law", hi: "क़ानून के समक्ष समानता" },
+    { a: "19", en: "Six freedoms, including speech", hi: "अभिव्यक्ति समेत छह स्वतंत्रताएँ" },
+    { a: "21", en: "Protection of life and personal liberty", hi: "जीवन और निजी स्वतंत्रता का संरक्षण" },
+    { a: "32", en: "Right to move the Supreme Court for rights", hi: "अधिकारों के लिए सुप्रीम कोर्ट जाने का अधिकार" },
+    { a: "44", en: "Uniform civil code (a Directive Principle)", hi: "समान नागरिक संहिता (नीति निदेशक तत्व)" },
+    { a: "51A", en: "Fundamental Duties", hi: "मौलिक कर्तव्य" },
+    { a: "72", en: "President's power to pardon", hi: "राष्ट्रपति की क्षमादान शक्ति" },
+    { a: "112", en: "Annual financial statement (the Budget)", hi: "वार्षिक वित्तीय विवरण (बजट)" },
+    { a: "200", en: "Governor's assent to state bills", hi: "राज्य विधेयकों पर राज्यपाल की सहमति" },
+    { a: "280", en: "Finance Commission", hi: "वित्त आयोग" },
+    { a: "324", en: "Election Commission", hi: "चुनाव आयोग" },
+    { a: "352", en: "National Emergency", hi: "राष्ट्रीय आपातकाल" },
+    { a: "356", en: "President's Rule in a state", hi: "राज्य में राष्ट्रपति शासन" },
+    { a: "368", en: "Power to amend the Constitution", hi: "संविधान संशोधन की शक्ति" }
+  ];
+  var mt = { round: [], right: [], sel: null, done: {} };
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function newRound() { mt.round = shuffle(ARTS).slice(0, 6); mt.right = shuffle(mt.round); mt.sel = null; mt.done = {}; renderMatch(); $("mtMsg").textContent = ""; }
+  function renderMatch() {
+    var hi = S.lang === "hi", n = Object.keys(mt.done).length;
+    $("mtLeft").innerHTML = mt.round.map(function (r) { return '<button type="button" class="art' + (mt.done[r.a] ? " ok" : mt.sel === r.a ? " sel" : "") + '" data-a="' + r.a + '"' + (mt.done[r.a] ? " disabled" : "") + '>' + (hi ? "अनु. " : "Art. ") + r.a + '</button>'; }).join("");
+    $("mtRight").innerHTML = mt.right.map(function (r) { return '<button type="button" lang="' + S.lang + '" class="' + (mt.done[r.a] ? "ok" : "") + '" data-a="' + r.a + '"' + (mt.done[r.a] ? " disabled" : "") + '>' + esc(r[S.lang]) + '</button>'; }).join("");
+    $("mtCount").textContent = n + " / 6";
+    $("mtTitle").textContent = hi ? "अभ्यास · अनुच्छेद मिलाएँ" : "Practice · Match the Article";
+    $("mtHow").textContent = hi ? "पहले अनुच्छेद चुनें, फिर उसका विषय।" : "Tap an Article, then what it is about.";
+    $("mtNew").textContent = hi ? "नया राउंड" : "New round";
+    $("mtLeft").querySelectorAll("button").forEach(function (b) { b.onclick = function () { mt.sel = b.dataset.a; renderMatch(); }; });
+    $("mtRight").querySelectorAll("button").forEach(function (b) {
+      b.onclick = function () {
+        if (!mt.sel) { $("mtMsg").textContent = hi ? "पहले बाईं ओर से एक अनुच्छेद चुनें।" : "Pick an Article on the left first."; return; }
+        if (b.dataset.a === mt.sel) {
+          mt.done[mt.sel] = true; mt.sel = null; tick(); renderMatch();
+          $("mtMsg").textContent = Object.keys(mt.done).length === 6 ? (hi ? "सभी छह मिल गए। आज के लिए इतना काफ़ी है।" : "All six matched. That's enough for today.") : "";
+        } else {
+          b.classList.add("no"); setTimeout(function () { b.classList.remove("no"); }, 400);
+          $("mtMsg").textContent = hi ? "यह जोड़ी नहीं बनी। फिर कोशिश करें।" : "Not that one. Try again.";
+        }
+      };
+    });
+  }
+  $("mtNew").onclick = newRound;
+
+  // ---------- Quiz night ----------
+  var QN = [
+    { en: ["Under Article 200, which bill can the Governor not return for reconsideration?", ["An Ordinary Bill", "A Money Bill", "A Constitution Amendment Bill", "A Private Member's Bill"], 1, "A Money Bill cannot be returned. From this week's Ek Minute explainer."],
+      hi: ["अनुच्छेद 200 के तहत राज्यपाल कौन-सा विधेयक पुनर्विचार के लिए नहीं लौटा सकते?", ["साधारण विधेयक", "धन विधेयक", "संविधान संशोधन विधेयक", "निजी सदस्य विधेयक"], 1, "धन विधेयक लौटाया नहीं जा सकता। इस हफ़्ते के एक मिनट वीडियो से।"] },
+    { en: ["Which was the first Indian product to get a GI tag?", ["Basmati rice", "Darjeeling Tea", "Mysore silk", "Alphonso mango"], 1, "Darjeeling Tea, in 2004-05. From this week's Chai cards."],
+      hi: ["GI टैग पाने वाला पहला भारतीय उत्पाद कौन-सा था?", ["बासमती चावल", "दार्जिलिंग चाय", "मैसूर सिल्क", "अल्फांसो आम"], 1, "दार्जिलिंग चाय, 2004-05 में। इस हफ़्ते के चाय कार्ड से।"] },
+    { en: ["The Sendai Framework for Disaster Risk Reduction runs until which year?", ["2025", "2030", "2035", "2040"], 1, "2015 to 2030, with seven global targets. From this week's Chai cards."],
+      hi: ["आपदा जोखिम न्यूनीकरण का सेंडाई फ्रेमवर्क किस साल तक है?", ["2025", "2030", "2035", "2040"], 1, "2015 से 2030 तक, सात वैश्विक लक्ष्यों के साथ। इस हफ़्ते के चाय कार्ड से।"] },
+    { en: ["Who chaired the Drafting Committee of the Constituent Assembly?", ["Rajendra Prasad", "B. R. Ambedkar", "Jawaharlal Nehru", "Sachchidananda Sinha"], 1, "B. R. Ambedkar. Rajendra Prasad was President of the Assembly. From the timeline story."],
+      hi: ["संविधान सभा की प्रारूप समिति के अध्यक्ष कौन थे?", ["राजेंद्र प्रसाद", "डॉ. बी. आर. आंबेडकर", "जवाहरलाल नेहरू", "सच्चिदानंद सिन्हा"], 1, "डॉ. बी. आर. आंबेडकर। राजेंद्र प्रसाद सभा के अध्यक्ष थे। समयरेखा से।"] },
+    { en: ["Why was 26 January chosen for the Constitution to come into force?", ["It was Nehru's birthday", "Purna Swaraj was declared on 26 January 1930", "The Assembly first met that day", "It ended the Cabinet Mission"], 1, "To honour the Purna Swaraj declaration of 26 January 1930. From the timeline story."],
+      hi: ["संविधान लागू करने के लिए 26 जनवरी ही क्यों चुनी गई?", ["नेहरू का जन्मदिन था", "26 जनवरी 1930 को पूर्ण स्वराज की घोषणा हुई थी", "उस दिन सभा पहली बार बैठी थी", "उस दिन कैबिनेट मिशन ख़त्म हुआ"], 1, "26 जनवरी 1930 की पूर्ण स्वराज घोषणा के सम्मान में। समयरेखा से।"] }
+  ];
+  var qnI = 0, qnShown = false;
+  function renderQuiz() {
+    var hi = S.lang === "hi", q = QN[qnI][S.lang], box = $("qn");
+    box.lang = S.lang; box.classList.toggle("revealed", qnShown);
+    box.innerHTML = '<p class="qtext">' + esc(q[0]) + '</p><div class="opts">' + q[1].map(function (o, k) { return '<div class="' + (k === q[2] ? "ans" : "") + '">' + String.fromCharCode(97 + k) + ') ' + esc(o) + '</div>'; }).join("") + '</div>' +
+      (qnShown ? '<div class="expl">' + esc(q[3]) + '</div>' : "");
+    $("qnCount").textContent = (qnI + 1) + " / " + QN.length;
+    $("qnTitle").textContent = hi ? "रूम · शुक्रवार क्विज़" : "Rooms · Friday quiz night";
+    $("qnReveal").textContent = hi ? "जवाब दिखाएँ" : "Reveal answer"; $("qnReveal").disabled = qnShown;
+    $("qnNext").textContent = qnI === QN.length - 1 ? (hi ? "शुरू से" : "Start again") : (hi ? "अगला सवाल" : "Next question");
+    $("qnHint").textContent = hi ? "पॉड लीड पूरे रूम के लिए जवाब दिखाते हैं।" : "The pod lead taps Reveal for the whole room.";
+  }
+  $("qnReveal").onclick = function () { qnShown = true; tick(); renderQuiz(); };
+  $("qnNext").onclick = function () { qnI = qnI === QN.length - 1 ? 0 : qnI + 1; qnShown = false; var b = $("qn"); b.classList.remove("enter"); void b.offsetWidth; b.classList.add("enter"); renderQuiz(); };
+
+  // ---------- Map Chai: Strait of Hormuz (schematic) ----------
+  var MAP = {
+    pins: [
+      { id: "iran", x: 196, y: 52, en: ["Iran", "Iran lies along the strait's northern side."], hi: ["ईरान", "जलडमरूमध्य के उत्तरी किनारे पर ईरान है।"] },
+      { id: "musandam", x: 186, y: 120, en: ["Musandam, Oman", "The southern side is Musandam, a part of Oman separated from the rest of the country by UAE territory."], hi: ["मुसंदम, ओमान", "दक्षिणी किनारे पर मुसंदम है, ओमान का वह हिस्सा जो बाक़ी देश से UAE के इलाक़े के कारण अलग है।"] },
+      { id: "gulf", x: 92, y: 120, en: ["Persian Gulf", "Water from the Persian Gulf leaves only through this strait."], hi: ["फ़ारस की खाड़ी", "फ़ारस की खाड़ी का पानी सिर्फ़ इसी जलडमरूमध्य से बाहर निकलता है।"] },
+      { id: "oman", x: 262, y: 150, en: ["Gulf of Oman", "On the other side lies the Gulf of Oman, which opens into the Arabian Sea."], hi: ["ओमान की खाड़ी", "दूसरी ओर ओमान की खाड़ी है, जो आगे अरब सागर में खुलती है।"] }
+    ],
+    lead: { en: "The Strait of Hormuz links the Persian Gulf to the Gulf of Oman. It is a chokepoint for oil shipped from the Gulf, including much of India's crude imports.", hi: "होर्मुज़ जलडमरूमध्य फ़ारस की खाड़ी को ओमान की खाड़ी से जोड़ता है। खाड़ी से जाने वाले तेल के लिए यह एक अहम रास्ता है, जिसमें भारत के कच्चे तेल के आयात का बड़ा हिस्सा भी शामिल है।" },
+    find: { en: "Find it: tap the strait itself.", hi: "ढूँढिए: ठीक जलडमरूमध्य पर टैप करें।" },
+    hint: { en: "Close. Look for the narrowest gap between the two coasts.", hi: "क़रीब हैं। दोनों तटों के बीच सबसे पतली जगह देखिए।" },
+    right: { en: "Found it. That narrow gap is the Strait of Hormuz.", hi: "मिल गया। यही पतली जगह होर्मुज़ जलडमरूमध्य है।" }
+  };
+  var mp = { mode: "explore", seen: {} };
+  function renderMap() {
+    var hi = S.lang === "hi", c = pal(false), L = S.lang;
+    var land = c.soft, sea = c.paper, edge = c.chai;
+    var svg = '<rect width="320" height="220" fill="' + sea + '"/>' +
+      '<g stroke="' + c.teal + '" stroke-width="1" opacity=".35" fill="none"><path d="M20 150 q 20 -6 40 0 t 40 0"/><path d="M220 186 q 20 -6 40 0 t 40 0"/><path d="M40 176 q 20 -6 40 0 t 40 0"/></g>' +
+      '<path d="M0 0 H320 V96 C 290 92 262 88 236 86 C 214 84 202 82 190 78 C 176 74 160 70 140 72 C 110 76 80 84 50 82 C 30 80 12 74 0 70 Z" fill="' + land + '" stroke="' + edge + '" stroke-width="1.6"/>' +
+      '<path d="M0 220 V176 C 30 168 70 160 110 154 C 140 150 160 140 170 124 C 176 114 178 104 186 98 C 192 96 196 104 194 116 C 192 130 200 142 214 152 C 230 164 244 180 250 220 Z" fill="' + land + '" stroke="' + edge + '" stroke-width="1.6"/>' +
+      '<g class="hot" id="mpHot"><ellipse cx="196" cy="90" rx="16" ry="10" fill="' + c.teal + '" opacity="' + (mp.mode === "found" ? .35 : 0) + '"/></g>' +
+      '';
+    var pins = "";
+    if (mp.mode === "explore") MAP.pins.forEach(function (p) {
+      var on = mp.seen[p.id];
+      pins += '<g class="pin" data-id="' + p.id + '" tabindex="0" role="button" aria-label="' + esc(p[L][0]) + '"><circle cx="' + p.x + '" cy="' + p.y + '" r="12" fill="transparent"/><circle cx="' + p.x + '" cy="' + p.y + '" r="6" fill="' + (on ? c.teal : c.surface || c.paper) + '" stroke="' + c.teal + '" stroke-width="2"/>' +
+        (on ? '<text x="' + p.x + '" y="' + (p.y - 12) + '" text-anchor="middle" font-size="11.5" font-weight="600" fill="' + c.ink + '" font-family="Mukta, sans-serif">' + esc(p[L][0]) + '</text>' : "") + '</g>';
+    });
+    $("mapSvg").innerHTML = svg + pins;
+    $("mapSvg").querySelectorAll(".pin").forEach(function (g) {
+      var go = function () { var p = MAP.pins.filter(function (x) { return x.id === g.dataset.id; })[0]; mp.seen[p.id] = true; tick(); renderMap(); $("mpFact").textContent = p[L][1]; };
+      g.onclick = go; g.onkeydown = function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+    });
+    $("mpHot").onclick = function (e) { if (mp.mode !== "find") return; e.stopPropagation(); mp.mode = "found"; tick(); renderMap(); $("mpFact").textContent = MAP.right[L]; };
+    $("mpTitle").textContent = hi ? "नक्शे वाली चाय · होर्मुज़ जलडमरूमध्य" : "Map Chai · Strait of Hormuz";
+    $("mpStep").textContent = mp.mode === "explore" ? (hi ? "देखिए" : "Explore") : mp.mode === "find" ? (hi ? "ढूँढिए" : "Find it") : (hi ? "पूरा" : "Done");
+    $("mpFind").textContent = hi ? "ढूँढिए" : "Find it"; $("mpFind").disabled = mp.mode !== "explore";
+    $("mpReset").textContent = hi ? "फिर से देखें" : "Explore again";
+    $("mpNote").textContent = hi ? "सांकेतिक नक्शा, पैमाने पर नहीं। पिन पर टैप करें।" : "Schematic, not to scale. Tap the pins.";
+    $("mpFact").lang = L;
+    if (mp.mode === "explore" && !Object.keys(mp.seen).length) $("mpFact").textContent = MAP.lead[L];
+  }
+  $("mapSvg").addEventListener("click", function () { if (mp.mode === "find") $("mpFact").textContent = MAP.hint[S.lang]; });
+  $("mpFind").onclick = function () { mp.mode = "find"; renderMap(); $("mpFact").textContent = MAP.find[S.lang]; };
+  $("mpReset").onclick = function () { mp.mode = "explore"; mp.seen = {}; renderMap(); };
+
+  // ---------- Number Sense: sex ratio ----------
+  var NS = {
+    value: 943,
+    lead: { en: "women for every 1,000 men in India, Census 2011.", hi: "महिलाएँ हर 1,000 पुरुषों पर, भारत, जनगणना 2011।" },
+    bars: [
+      { en: "India 2001", hi: "भारत 2001", v: 933 },
+      { en: "India 2011", hi: "भारत 2011", v: 943, hero: true },
+      { en: "Kerala 2011", hi: "केरल 2011", v: 1084 },
+      { en: "Haryana 2011", hi: "हरियाणा 2011", v: 879 }
+    ],
+    why: { en: ["For Mains: the ratio rose by 10 points in a decade, but Haryana stayed far below 1,000.", "NFHS-5 (2019-21) found 1,020. It is a household survey, not a census, so the two are not directly comparable."],
+           hi: ["मुख्य परीक्षा के लिए: दस साल में अनुपात 10 अंक बढ़ा, पर हरियाणा 1,000 से काफ़ी नीचे रहा।", "NFHS-5 (2019-21) में यह 1,020 मिला। यह घरेलू सर्वे है, जनगणना नहीं, इसलिए दोनों की सीधी तुलना नहीं होती।"] },
+    src: { en: "Sources: Census of India 2001 and 2011; NFHS-5 (2019-21) · Sample, awaiting editor check", hi: "स्रोत: भारत की जनगणना 2001 और 2011; NFHS-5 (2019-21) · नमूना, संपादक की जाँच बाक़ी" }
+  };
+  function renderNumber(animate) {
+    var L = S.lang, hi = L === "hi", lo = 800, max = 1100, W = function (v) { return ((v - lo) / (max - lo) * 100) + "%"; };
+    $("nsTitle").textContent = hi ? "एक आंकड़ा · जनगणना 2011" : "Number Sense · Census 2011";
+    $("nsLead").textContent = NS.lead[L]; $("nsLead").lang = L;
+    $("nsBars").innerHTML = NS.bars.map(function (b, k) {
+      return '<div class="b' + (b.hero ? " hero" : "") + '"><span>' + esc(b[L]) + '</span><div class="track"><div class="fill" id="nsF' + k + '"></div><span class="tick" style="left:' + W(1000) + '"></span></div><span class="v">' + b.v.toLocaleString("en-IN") + '</span></div>';
+    }).join("");
+    $("nsBars").insertAdjacentHTML("beforeend", '<span class="small">' + (hi ? "पट्टियाँ 800 से शुरू · निशान = 1,000" : "Bars start at 800 · tick = 1,000") + '</span>');
+    $("nsWhy").innerHTML = '<b>' + (hi ? "इसका मतलब" : "What it means") + '</b><ul>' + NS.why[L].map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul>';
+    $("nsWhy").lang = L;
+    $("nsSrc").textContent = NS.src[L];
+    $("nsReplay").textContent = hi ? "फिर से बनाएँ" : "Draw again";
+    var set = function () { NS.bars.forEach(function (b, k) { $("nsF" + k).style.width = W(b.v); }); };
+    if (animate && S.motion) requestAnimationFrame(function () { requestAnimationFrame(set); }); else { NS.bars.forEach(function (b, k) { var f = $("nsF" + k); f.style.transition = "none"; f.style.width = W(b.v); }); }
+  }
+  $("nsReplay").onclick = function () { renderNumber(true); };
+
+  // ---------- Myth vs Fact ----------
+  var MY = [
+    { v: "MYTH",
+      en: ["Fundamental Duties have been in the Constitution since 1950.", "They were added in 1976 by the 42nd Amendment, on the Swaran Singh Committee's advice, as Part IVA (Article 51A). There were 10 at first; the 86th Amendment (2002) added an 11th, on education for children aged 6 to 14."],
+      hi: ["मौलिक कर्तव्य 1950 से ही संविधान में हैं।", "इन्हें 1976 में 42वें संशोधन से, स्वर्ण सिंह समिति की सलाह पर, भाग 4A (अनुच्छेद 51A) में जोड़ा गया। पहले 10 कर्तव्य थे; 86वें संशोधन (2002) ने 6 से 14 साल के बच्चों की शिक्षा से जुड़ा 11वाँ कर्तव्य जोड़ा।"] },
+    { v: "HALF",
+      en: ["The Constitution was adopted on 26 January 1950.", "Half right. It was adopted on 26 November 1949 and came into force on 26 January 1950. Some provisions, such as citizenship, applied from November 1949."],
+      hi: ["संविधान 26 जनवरी 1950 को अंगीकृत हुआ।", "आधा सही। संविधान 26 नवंबर 1949 को अंगीकृत हुआ और 26 जनवरी 1950 को लागू हुआ। नागरिकता जैसे कुछ प्रावधान नवंबर 1949 से ही लागू हो गए थे।"] },
+    { v: "FACT",
+      en: ["Article 21 protects every person in India, not only citizens.", "Right. Article 21 says no person shall be deprived of life or personal liberty except according to procedure established by law. It covers foreigners too, unlike Article 19, which is for citizens."],
+      hi: ["अनुच्छेद 21 भारत में हर व्यक्ति की रक्षा करता है, सिर्फ़ नागरिकों की नहीं।", "सही। अनुच्छेद 21 कहता है कि किसी भी व्यक्ति को क़ानून द्वारा स्थापित प्रक्रिया के बिना जीवन या निजी स्वतंत्रता से वंचित नहीं किया जाएगा। यह विदेशियों पर भी लागू है, जबकि अनुच्छेद 19 सिर्फ़ नागरिकों के लिए है।"] }
+  ];
+  var VLAB = { en: { MYTH: "MYTH", FACT: "FACT", HALF: "HALF-TRUE" }, hi: { MYTH: "झूठ", FACT: "सच", HALF: "आधा सच" } };
+  var my = { i: 0, guess: null };
+  function renderMyth() {
+    var L = S.lang, hi = L === "hi", m = MY[my.i], t = m[L], shown = my.guess !== null;
+    $("myTitle").textContent = hi ? "वायरल सच या झूठ" : "Forward Buster";
+    $("myCount").textContent = (my.i + 1) + " / " + MY.length;
+    $("myFwd").lang = L;
+    $("myFwd").innerHTML = '<span class="tag">' + (hi ? "↪ फ़ॉरवर्ड किया गया" : "↪ Forwarded") + '</span><p>' + esc(t[0]) + '</p><span class="stamp ' + m.v + (shown ? "" : " off") + '">' + VLAB[L][m.v] + '</span>';
+    $("myGuess").innerHTML = ["FACT", "MYTH", "HALF"].map(function (v) { return '<button type="button" class="ghost" data-v="' + v + '"' + (shown ? " disabled" : "") + '>' + VLAB[L][v] + '</button>'; }).join("");
+    $("myGuess").querySelectorAll("button").forEach(function (b) { b.onclick = function () { my.guess = b.dataset.v; tick(); renderMyth(); }; });
+    $("myVerdict").lang = L;
+    $("myVerdict").innerHTML = shown ? '<span class="small">' + (my.guess === m.v ? (hi ? "आपका अंदाज़ा सही था।" : "Your guess was right.") : (hi ? "अच्छा अंदाज़ा था। सही बात यह है:" : "Good guess. Here is the correct version:")) + '</span><p>' + esc(t[1]) + '</p><span class="trust">' + (hi ? "स्रोत: भारत का संविधान · नमूना, संपादक की जाँच बाक़ी" : "Source: the Constitution of India · Sample, awaiting editor check") + '</span>' : '<span class="small">' + (hi ? "पहले अंदाज़ा लगाइए: सच, झूठ या आधा सच?" : "Guess first: fact, myth or half-true?") + '</span>';
+    $("myNext").textContent = my.i === MY.length - 1 ? (hi ? "शुरू से" : "Start again") : (hi ? "अगला फ़ॉरवर्ड" : "Next forward");
+  }
+  $("myNext").onclick = function () { my.i = (my.i + 1) % MY.length; my.guess = null; renderMyth(); };
+
+  // ---------- Two Sides ----------
+  var SD = {
+    q: { en: "Should India hold Lok Sabha and state assembly elections together?", hi: "क्या भारत में लोकसभा और विधानसभा चुनाव एक साथ होने चाहिए?" },
+    forH: { en: "For", hi: "पक्ष में" }, agH: { en: "Against", hi: "विपक्ष में" },
+    for: { en: ["Saves the cost of running separate elections every year or two", "The Model Code of Conduct would apply less often, so fewer pauses on new schemes", "Security forces and staff are pulled off regular duty less often"],
+           hi: ["हर साल-दो साल अलग-अलग चुनाव कराने का ख़र्च बचता है", "आदर्श आचार संहिता कम बार लागू होगी, तो नई योजनाओं पर कम रोक लगेगी", "सुरक्षा बलों और कर्मचारियों को बार-बार नियमित काम से नहीं हटाना पड़ेगा"] },
+    against: { en: ["Needs amendments to the terms and dissolution of the Lok Sabha and assemblies (Articles 83, 85, 172 and 174)", "National issues may drown out state issues, which raises federalism concerns", "If a government falls mid-term, it is unclear how the cycles stay in sync"],
+               hi: ["लोकसभा और विधानसभाओं के कार्यकाल और विघटन से जुड़े अनुच्छेदों (83, 85, 172 और 174) में संशोधन चाहिए", "राष्ट्रीय मुद्दे राज्यों के मुद्दों को दबा सकते हैं, जिससे संघवाद पर सवाल उठते हैं", "बीच में सरकार गिर जाए, तो चुनाव चक्र एक साथ कैसे रहेंगे, यह साफ़ नहीं"] },
+    outline: { en: ["Introduction: define simultaneous elections; mention the High-Level Committee chaired by Ram Nath Kovind (report, 2024)", "Body: two points for, two against, from the cards above", "Way forward: consensus with states, and a plan for mid-term dissolution"],
+               hi: ["भूमिका: एक साथ चुनाव का अर्थ बताएँ; रामनाथ कोविंद की अध्यक्षता वाली उच्च स्तरीय समिति (रिपोर्ट, 2024) का ज़िक्र करें", "मुख्य भाग: ऊपर के कार्डों से दो पक्ष में, दो विपक्ष में", "आगे का रास्ता: राज्यों के साथ सहमति, और बीच में विघटन की स्थिति के लिए योजना"] }
+  };
+  var sd = {};
+  function renderSides() {
+    var L = S.lang, hi = L === "hi", n = Object.keys(sd).length;
+    $("sdTitle").textContent = hi ? "दो पहलू · मुख्य परीक्षा GS2" : "Two Sides · Mains GS2";
+    $("sdCount").textContent = n + " / 6 " + (hi ? "खुले" : "opened");
+    $("sdQ").textContent = SD.q[L]; $("sdQ").lang = L;
+    var col = function (key, head) { return '<h5>' + head[L] + '</h5>' + SD[key][L].map(function (x, k) { var id = key + k, open = !!sd[id]; return '<button type="button" lang="' + L + '" data-id="' + id + '" aria-expanded="' + open + '">' + (open ? esc(x) : '<span class="hid">' + (hi ? "टैप करें · बिंदु " : "Tap · point ") + (k + 1) + '</span>') + '</button>'; }).join(""); };
+    $("sdFor").innerHTML = col("for", SD.forH); $("sdAgainst").innerHTML = col("against", SD.agH);
+    document.querySelectorAll("#sdFor button, #sdAgainst button").forEach(function (b) { b.onclick = function () { sd[b.dataset.id] = !sd[b.dataset.id]; if (!sd[b.dataset.id]) delete sd[b.dataset.id]; renderSides(); }; });
+    $("sdOutline").lang = L;
+    $("sdOutline").innerHTML = n === 6 ? '<b>' + (hi ? "3 बिंदुओं में ढाँचा" : "Outline in 3 points") + '</b><ol>' + SD.outline[L].map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ol><button type="button" class="primary" style="justify-self:start;margin-top:6px">' + (hi ? "अभ्यास में लिखें" : "Write it in Practice") + '</button>' : '<span class="small">' + (hi ? "सभी छह बिंदु खोलें, फिर उत्तर का ढाँचा दिखेगा।" : "Open all six points to see an answer outline.") + '</span>';
+    $("sdSrc").textContent = hi ? "स्रोत: भारत का संविधान; उच्च स्तरीय समिति रिपोर्ट (2024) · नमूना, संपादक की जाँच बाक़ी" : "Sources: the Constitution of India; High-Level Committee report (2024) · Sample, awaiting editor check";
+  }
+
+  // ---------- Lamp Off ----------
+  var lp = { on: false, stop: null, timer: 0 };
+  function renderLamp() {
+    var hi = S.lang === "hi";
+    $("lpTitle").textContent = hi ? "दिन बंद करने के बाद · वैकल्पिक" : "After Close the Day · optional";
+    if (!lp.on) {
+      $("lpText").textContent = hi ? "दीया अपने आप बुझने दीजिए। आपको कुछ नहीं करना है।" : "Let the lamp go out on its own. You don't need to do anything.";
+      $("lpCue").textContent = hi ? "चार तक साँस लें, छह तक छोड़ें। एक बार काफ़ी है।" : "Breathe in for four, out for six. Once is enough.";
+      $("lpStart").textContent = hi ? "दीया धीमा करें" : "Dim the lamp";
+    }
+  }
+  $("lpStart").onclick = function () {
+    var hi = S.lang === "hi", lamp = $("lamp");
+    if (lp.on) { lp.on = false; clearTimeout(lp.timer); if (lp.stop) { lp.stop(); lp.stop = null; } lamp.classList.remove("dim"); renderLamp(); return; }
+    lp.on = true; lamp.classList.add("dim");
+    if (S.sound) lp.stop = bed("lamp", 0.45);
+    $("lpStart").textContent = hi ? "रोकें" : "Stop";
+    lp.timer = setTimeout(function () {
+      if (lp.stop) { lp.stop(); lp.stop = null; }
+      $("lpText").textContent = hi ? "नींद भी दोहराई का हिस्सा है।" : "Sleep is revision too.";
+      $("lpCue").textContent = ""; $("lpStart").hidden = true; lp.on = false;
+    }, 120000);
+  };
+  drawTlIllus(); newRound();
+  drawScapes(); applyLang();
+})();
+</script>
+
+</body></html>

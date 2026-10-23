@@ -1,0 +1,99 @@
+{
+  "schema": "upsc-pods/stamp-trail@1",
+  "id": "bill-to-act",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Stamp a bill into an Act",
+    "hi": "विधेयक पर मुहर लगाकर क़ानून बनाइए"
+  },
+  "item": {
+    "en": "Bill",
+    "hi": "विधेयक"
+  },
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "move": "sfx/whoosh",
+    "stamp": "sfx/stamp",
+    "end": "motif"
+  },
+  "stations": [
+    {
+      "en": {
+        "name": "Either House",
+        "stamp": "Introduced",
+        "rule": "An ordinary bill can start in the Lok Sabha or the Rajya Sabha, moved by a minister or a private member."
+      },
+      "hi": {
+        "name": "कोई भी सदन",
+        "stamp": "पेश",
+        "rule": "साधारण विधेयक लोकसभा या राज्यसभा, किसी में भी पेश हो सकता है, मंत्री या निजी सदस्य द्वारा।"
+      }
+    },
+    {
+      "en": {
+        "name": "First House",
+        "stamp": "Passed",
+        "rule": "Three readings: introduction, debate on its principles and clauses, often via a committee, then a final vote."
+      },
+      "hi": {
+        "name": "पहला सदन",
+        "stamp": "पारित",
+        "rule": "तीन वाचन: पेश होना, सिद्धांतों और खंडों पर बहस, अक्सर समिति के ज़रिए, फिर अंतिम मतदान।"
+      }
+    },
+    {
+      "en": {
+        "name": "Second House",
+        "stamp": "Passed",
+        "rule": "The other House can pass, amend or reject it. Amendments go back to the first House."
+      },
+      "hi": {
+        "name": "दूसरा सदन",
+        "stamp": "पारित",
+        "rule": "दूसरा सदन इसे पारित, संशोधित या अस्वीकार कर सकता है। संशोधन पहले सदन को लौटते हैं।"
+      }
+    },
+    {
+      "en": {
+        "name": "If deadlocked",
+        "stamp": "Joint sitting",
+        "rule": "If one House rejects it, they disagree on amendments, or six months pass, the President may call a joint sitting under Article 108."
+      },
+      "hi": {
+        "name": "गतिरोध हो तो",
+        "stamp": "संयुक्त बैठक",
+        "rule": "अगर एक सदन अस्वीकार करे, संशोधनों पर असहमति हो, या छह महीने बीत जाएँ, तो राष्ट्रपति अनुच्छेद 108 के तहत संयुक्त बैठक बुला सकते हैं।"
+      }
+    },
+    {
+      "en": {
+        "name": "President",
+        "stamp": "Assent",
+        "rule": "Under Article 111, the President can assent, withhold assent, or return it once for reconsideration."
+      },
+      "hi": {
+        "name": "राष्ट्रपति",
+        "stamp": "अनुमति",
+        "rule": "अनुच्छेद 111 के तहत राष्ट्रपति अनुमति दे सकते हैं, रोक सकते हैं, या एक बार पुनर्विचार के लिए लौटा सकते हैं।"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "A Money Bill is different: it starts only in the Lok Sabha, and the Rajya Sabha has 14 days to make recommendations.",
+    "hi": "धन विधेयक अलग है: यह सिर्फ़ लोकसभा में पेश होता है, और राज्यसभा के पास सिफ़ारिश के लिए 14 दिन होते हैं।"
+  },
+  "sources": {
+    "en": "Constitution of India, Articles 107 to 111",
+    "hi": "भारत का संविधान, अनुच्छेद 107 से 111"
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Sample for the template preview. Standard reference facts, not yet checked by an editor."
+  }
+}

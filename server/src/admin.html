@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>UPSC Pods Admin</title>
+<style>
+  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --bar:#B5651D; --amber:#FCE8C3; --ok:#E3F1E1; --okInk:#2E7D32; --bad:#F8E1DE; --badInk:#B3261E; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --bar:#E8A060; --amber:#4A3712; --ok:#22361F; --okInk:#8BD18F; --bad:#43201B; --badInk:#F2A49B; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
+  header { position:sticky; top:0; z-index:3; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0; color:var(--brand); }
+  #who { margin-left:auto; font-size:13px; color:var(--muted); }
+  .layout { display:grid; grid-template-columns:200px 1fr; max-width:1280px; margin:0 auto; }
+  nav { padding:12px 8px; position:sticky; top:52px; align-self:start; }
+  nav button { display:block; width:100%; text-align:left; border:0; background:none; padding:7px 10px; border-radius:8px; color:var(--ink); }
+  nav button.on { background:var(--amber); font-weight:600; }
+  nav .count { float:right; background:var(--badInk); color:#fff; border-radius:999px; font-size:11px; padding:0 7px; }
+  @media (max-width:800px) { .layout { grid-template-columns:1fr; } nav { position:static; display:flex; flex-wrap:wrap; gap:4px; } nav button { width:auto; } }
+  main { padding:16px; min-width:0; }
+  h2 { margin:0 0 4px; font-size:20px; } h3 { margin:16px 0 6px; font-size:16px; }
+  p.lead { margin:0 0 16px; color:var(--muted); }
+  input, textarea, select, button { font:inherit; color:inherit; }
+  input, textarea, select { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; max-width:100%; }
+  textarea { width:100%; }
+  button { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:5px 12px; cursor:pointer; }
+  button.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
+  @media (prefers-color-scheme: dark) { button.primary { color:#1A1410; } }
+  button.danger { border-color:var(--badInk); color:var(--badInk); }
+  button:disabled { opacity:.5; cursor:default; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:10px; margin-bottom:16px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .tile .n { font-size:26px; font-weight:600; }
+  .tile .l { font-size:13px; color:var(--muted); }
+  .tile.warn { border-color:var(--badInk); }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:6px 8px; border-top:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:500; font-size:12px; border-top:0; }
+  .scroll { overflow-x:auto; }
+  .chip { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:0 8px; font-size:12px; color:var(--muted); margin-right:4px; }
+  .chip.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
+  .chip.bad { background:var(--bad); color:var(--badInk); border-color:transparent; }
+  .chip.warn { background:var(--amber); color:var(--ink); border-color:transparent; }
+  .muted { color:var(--muted); font-size:13px; }
+  .mono { font-family:ui-monospace, Consolas, monospace; font-size:12px; word-break:break-all; }
+  .keybox { background:var(--amber); border-radius:8px; padding:12px; margin:8px 0; }
+  .notes { border-left:3px solid var(--line); padding-left:10px; margin:8px 0; font-size:13px; }
+  .quote { background:var(--bg); border-radius:8px; padding:8px 10px; margin:6px 0; white-space:pre-wrap; }
+  .helplines { background:var(--ok); border-radius:8px; padding:8px 12px; margin-bottom:12px; }
+  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:8px 16px; border-radius:8px; font-size:14px; display:none; z-index:9; max-width:90vw; }
+  .chart { width:100%; height:120px; display:block; }
+  .chart .b { fill:var(--bar); }
+  .chart .b:hover { opacity:.75; }
+  .chart line { stroke:var(--line); }
+  .chart text { fill:var(--muted); font-size:11px; }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:12px; }
+  label.flag { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line); }
+  label.flag:first-child { border-top:0; }
+  pre { white-space:pre-wrap; word-break:break-word; font-size:12px; max-height:420px; overflow:auto; background:var(--bg); padding:10px; border-radius:8px; }
+  dialog { border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--ink); max-width:760px; width:calc(100vw - 32px); padding:16px; }
+  dialog::backdrop { background:rgba(0,0,0,.4); }
+  #signin { max-width:440px; margin:12vh auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>UPSC Pods Admin</h1>
+  <a href="/desk" class="muted">News desk</a>
+  <a href="/status" class="muted">Status page</a>
+  <span id="who"></span>
+</header>
+<div id="app"></div>
+<div id="toast" role="status"></div>
+<dialog id="dlg"></dialog>
+<script>
+"use strict";
+// --- Helpers: everything from the server goes in as text, never as HTML ---------------------
+const $ = (s) => document.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const [base, id] = tag.split("#");
+  const [name, ...cls] = base.split(".");
+  const el = document.createElement(name);
+  if (id) el.id = id;
+  if (cls.length) el.className = cls.join(" ");
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (k === "value") el.value = v;
+    else if (k === "checked") el.checked = !!v;
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  put(el, ...kids, true);
+  return el;
+}
+function put(el, ...kids) {
+  const append = kids[kids.length - 1] === true;
+  if (append) kids.pop(); else el.replaceChildren();
+  for (const k of kids.flat(9)) if (k != null && k !== false) el.append(k instanceof Node ? k : String(k));
+  return el;
+}
+const toast = (t) => { const e = $("#toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => (e.style.display = "none"), 3500); };
+const when = (iso) => (iso ? new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "");
+const ago = (iso) => { if (!iso) return ""; const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} days ago`; };
+const num = (n) => Number(n || 0).toLocaleString("en-IN");
+
+let key = "";
+try { key = sessionStorage.getItem("adminKey") || ""; } catch {}
+let me = null;
+
+async function api(path, opts = {}) {
+  const res = await fetch("/admin/api/" + path, {
+    method: opts.method || (opts.body ? "POST" : "GET"),
+    headers: { "content-type": "application/json", authorization: "Bearer " + key },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (opts.raw) { if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText); return res; }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) { if (res.status === 401) signOut(); throw new Error(data.error || res.statusText); }
+  return data;
+}
+/** Runs an action, shows what happened, then redraws the section. */
+async function act(fn, done) {
+  try { const r = await fn(); if (done) toast(typeof done === "function" ? done(r) : done); await show(current); return r; }
+  catch (e) { toast(e.message); }
+}
+function download(name, text) {
+  const a = h("a", { href: URL.createObjectURL(new Blob([text], { type: "application/json" })), download: name });
+  document.body.append(a); a.click(); a.remove();
+}
+function dialog(...kids) { const d = $("#dlg"); put(d, ...kids, h("div.row", { style: "margin-top:12px;justify-content:flex-end" }, h("button", { onclick: () => d.close() }, "Close"))); d.showModal(); return d; }
+const can = (p) => me && me.perms.includes(p);
+
+/** Single-series bar chart with a hover label per bar and a table view underneath. */
+function bars(title, points, fmt = num) {
+  const W = 600, H = 120, pad = 18, max = Math.max(1, ...points.map((p) => p.v));
+  const bw = (W - 30) / Math.max(points.length, 1);
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("class", "chart"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", title);
+  const ns = (t, a) => { const e = document.createElementNS("http://www.w3.org/2000/svg", t); for (const [k, v] of Object.entries(a)) e.setAttribute(k, v); return e; };
+  svg.append(ns("line", { x1: 30, x2: W, y1: H - pad, y2: H - pad }));
+  const top = ns("text", { x: 0, y: 10 }); top.textContent = fmt(max); svg.append(top);
+  points.forEach((p, i) => {
+    const bh = Math.max(p.v ? 2 : 0, ((H - pad - 14) * p.v) / max);
+    const x = 30 + i * bw + 1, w = Math.max(bw - 2, 1), y = H - pad - bh;
+    // Rounded top, square base on the axis.
+    const r = Math.min(4, w / 2, bh);
+    const path = ns("path", { d: `M${x},${H - pad} V${y + r} Q${x},${y} ${x + r},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${H - pad} Z`, class: "b", fill: "var(--bar)" });
+    const t = ns("title", {}); t.textContent = `${p.label}: ${fmt(p.v)}`; path.append(t);
+    svg.append(path);
+    // A bigger invisible hit target than the bar itself.
+    const hit = ns("rect", { x: 30 + i * bw, y: 0, width: bw, height: H - pad, fill: "transparent" });
+    const t2 = ns("title", {}); t2.textContent = `${p.label}: ${fmt(p.v)}`; hit.append(t2); svg.append(hit);
+  });
+  if (points.length) {
+    const a = ns("text", { x: 30, y: H - 3 }); a.textContent = points[0].label; svg.append(a);
+    const b = ns("text", { x: W, y: H - 3, "text-anchor": "end" }); b.textContent = points[points.length - 1].label; svg.append(b);
+  }
+  return h("div.card", {}, h("div", { style: "font-weight:600" }, title), svg,
+    h("details", {}, h("summary.muted", {}, "Table"), h("table", {}, h("tr", {}, h("th", {}, "Day"), h("th", {}, "Value")), points.map((p) => h("tr", {}, h("td", {}, p.label), h("td", {}, fmt(p.v)))))));
+}
+function lastDays(n) { const out = []; for (let i = n - 1; i >= 0; i--) out.push(new Date(Date.now() + 5.5 * 3600e3 - i * 864e5).toISOString().slice(0, 10)); return out; }
+
+// --- Sign in --------------------------------------------------------------------------------
+function signOut() { key = ""; try { sessionStorage.removeItem("adminKey"); } catch {} me = null; render(); }
+function signInView(msg) {
+  const input = h("input", { type: "password", autocomplete: "off", placeholder: "Your personal key (upk_…) or the owner key", style: "width:100%" });
+  const go = async () => {
+    key = input.value.trim();
+    try { me = await api("me"); try { sessionStorage.setItem("adminKey", key); } catch {} render(); }
+    catch (e) { key = ""; put(err, e.message); }
+  };
+  input.addEventListener("keydown", (e) => e.key === "Enter" && go());
+  const err = h("p.muted", {}, msg || "");
+  return h("div.card#signin", {}, h("h2", {}, "Sign in"),
+    h("p.muted", {}, "Use the personal key an admin gave you. The first time, use the owner key you set with wrangler (ADMIN_TOKEN, or EDITOR_TOKEN if there's no ADMIN_TOKEN), then make personal keys under Staff."),
+    input, h("div.row", { style: "margin-top:10px" }, h("button.primary", { onclick: go }, "Sign in")), err,
+    h("p.muted", {}, "The key stays in this tab only and is forgotten when you close it."));
+}
+
+// --- Sections -------------------------------------------------------------------------------
+const SECTIONS = [
+  ["overview", "Overview", "analytics"], ["content", "Content", "content"], ["moderation", "Moderation", "moderate"],
+  ["safety", "Safety queue", "safety"], ["members", "Members", "members"], ["privacy", "Data requests", "privacy"],
+  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
+  ["announcements", "Announcements", "announce"], ["incidents", "Status and incidents", "incidents"],
+  ["staff", "Staff and roles", "staff"], ["languages", "Languages", "staff"], ["backups", "Backups", "backups"], ["audit", "Audit log", "audit"],
+];
+let current = location.hash.slice(1) || "overview";
+const views = {};
+
+async function render() {
+  const app = $("#app");
+  if (!key) { put($("#who")); put(app, signInView()); return; }
+  if (!me) { try { me = await api("me"); } catch (e) { put(app, signInView(e.message)); return; } }
+  put($("#who"), `${me.name} · ${me.roles.join(", ").replace("_", " ")} `, h("button", { onclick: signOut }, "Sign out"));
+  const allowed = SECTIONS.filter(([, , p]) => can(p));
+  if (!allowed.find(([id]) => id === current)) current = allowed[0]?.[0] || "overview";
+  const nav = h("nav", {}, allowed.map(([id, name]) => h("button", { class: id === current ? "on" : "", "data-id": id, onclick: () => { location.hash = id; } }, name)));
+  put(app, h("div.layout", {}, nav, h("main#main", {})));
+  await show(current);
+}
+async function show(id) {
+  current = id;
+  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.id === id));
+  const main = $("#main");
+  if (!main) return;
+  try { put(main, await views[id]()); } catch (e) { put(main, h("div.card", {}, e.message)); }
+}
+window.addEventListener("hashchange", () => show(location.hash.slice(1) || "overview"));
+
+views.overview = async () => {
+  const o = await api("overview");
+  const tile = (n, l, warn, go) => h("div.tile" + (warn ? ".warn" : ""), { style: go ? "cursor:pointer" : "", onclick: go ? () => (location.hash = go) : null }, h("div.n", {}, n), h("div.l", {}, l));
+  return [h("h2", {}, "Overview"), h("p.lead", {}, `Today (${o.today}).`),
+    h("div.tiles", {},
+      tile(num(o.openSafety), o.oldestSafety ? `safety alerts open, oldest ${ago(o.oldestSafety)}` : "safety alerts open", o.openSafety > 0, can("safety") && "safety"),
+      tile(num(o.openReports), "reports to review", o.openReports > 0, can("moderate") && "moderation"),
+      tile(o.briefOut ? "Out" : "Not yet", `today's brief · ${o.cardsApproved} approved, ${o.cardsWaiting} waiting`, false),
+      tile(num(o.libraryLive), `library items live · ${o.libraryDrafts} drafts`, false, "content"),
+      tile(num(o.members), `members in ${o.pods} pods`, false, can("members") && "members"),
+      tile(num(o.aiCallsToday), "AI calls today", false, can("llm:view") && "llm"),
+      tile(num(o.activeIncidents), "open incidents", o.activeIncidents > 0, can("incidents") && "incidents"),
+      tile(o.lastBackup ? ago(o.lastBackup) : "None", "last backup", !o.lastBackup, can("backups") && "backups")),
+    h("div.card", {}, h("b", {}, "Writing and approving content"), h("p.muted", {}, "Cards, the library, mock papers and long reads are written and approved on the "), h("a", { href: "/desk" }, "News desk"), h("span.muted", {}, ". Your key works there too, and approvals carry your name.")),
+  ];
+};
+
+// Content: one list with history and restore. Writing happens on the desk.
+views.content = async () => {
+  const q = views.content.q || "";
+  const d = await api("content?q=" + encodeURIComponent(q));
+  const search = h("input", { placeholder: "Search titles", value: q, onchange: (e) => { views.content.q = e.target.value; show("content"); } });
+  const status = (r) => [r.en_editor ? h("span.chip.ok", {}, "EN ✓ " + r.en_editor) : h("span.chip", {}, r.status), r.hi_editor ? h("span.chip.ok", {}, "HI ✓ " + r.hi_editor) : null];
+  const histBtn = (type, id, n) => h("button", { onclick: () => history(type, id) }, `History (${n})`);
+  return [h("h2", {}, "Content"), h("p.lead", {}, "Every card and library item, with its full history. Restoring an old version brings it back as a draft that needs approving again. To write or approve, use the News desk."),
+    h("div.row", { style: "margin-bottom:12px" }, search, h("a", { href: "/desk" }, h("button.primary", {}, "Open the News desk"))),
+    h("h3", {}, "Chai cards"),
+    h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Day"), h("th", {}, "Headline"), h("th", {}, "Status"), h("th", {}, "")),
+      d.cards.map((r) => h("tr", {}, h("td", {}, r.day), h("td", {}, r.headline || r.title), h("td", {}, status(r)), h("td", {}, histBtn("card", r.id, r.versions)))))),
+    h("h3", {}, "Library"),
+    h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Kind"), h("th", {}, "Title"), h("th", {}, "Status"), h("th", {}, "Updated"), h("th", {}, "")),
+      d.library.map((r) => h("tr", {}, h("td", {}, r.kind), h("td", {}, r.title), h("td", {}, status(r)), h("td.muted", {}, when(r.updated_at)), h("td", {}, histBtn("library", r.id, r.versions)))))),
+    d.deleted.length ? [h("h3", {}, "Deleted (can be restored)"), h("div.card", {}, d.deleted.map((r) => h("div.row", {}, h("span.mono", {}, r.id), h("span.muted", {}, `deleted ${when(r.at)} by ${r.actor}`), histBtn("library", r.id, "…"))))] : null,
+  ];
+};
+async function history(type, id) {
+  const list = await api(`versions/${type}/${encodeURIComponent(id)}`);
+  const view = h("div", {});
+  const d = dialog(h("h3", {}, "History"), h("p.mono", {}, id),
+    list.length ? h("table", {}, list.map((v) => h("tr", {}, h("td.muted", {}, when(v.at)), h("td", {}, v.action), h("td", {}, v.actor),
+      h("td", {}, h("button", { onclick: async () => { const x = await api("version/" + v.id); put(view, h("pre", {}, JSON.stringify(x.data, null, 2))); } }, "View"),
+        " ", h("button", { onclick: () => { if (confirm("Restore this version as a draft? It will need approving again.")) { d.close(); act(() => api(`version/${v.id}/restore`, { body: {} }), "Restored as a draft"); } } }, "Restore"))))) : h("p.muted", {}, "No history yet. Changes are recorded from now on."),
+    view);
+}
+
+views.moderation = async () => {
+  const all = views.moderation.all;
+  const d = await api("reports?kind=report" + (all ? "&status=all" : ""));
+  return [h("h2", {}, "Moderation"), h("p.lead", {}, "Messages members reported. Hide takes a message out of the pod for everyone."),
+    h("label.row", {}, h("input", { type: "checkbox", checked: all, onchange: (e) => { views.moderation.all = e.target.checked; show("moderation"); } }), "Show handled reports too"),
+    d.reports.length ? d.reports.map((r) => h("div.card", {},
+      h("div.row", {}, h("b", {}, r.author || "Member"), h("span.muted", {}, `in ${r.pod_id} · ${ago(r.created_at)}`), h("span.chip" + (r.status === "open" ? ".warn" : ""), {}, r.status)),
+      h("div.quote", {}, r.text || "(deleted)"), r.reason ? h("p.muted", {}, "Reason given: " + r.reason) : null,
+      notesOf(r),
+      h("div.row", {},
+        r.status === "open" ? [h("button.danger", { onclick: () => act(() => api("reports/" + r.id, { body: { action: "hide" } }), "Message hidden") }, "Hide message"),
+          h("button", { onclick: () => act(() => api("reports/" + r.id, { body: { action: "close" } }), "Closed, no action") }, "No action needed")]
+          : h("button", { onclick: () => act(() => api("reports/" + r.id, { body: { action: "reopen" } }), "Reopened") }, "Reopen"),
+        r.member_id && can("members") ? h("button", { onclick: () => suspendDialog(r.member_id) }, "Pause their chat…") : null))) : h("div.card.muted", {}, "Nothing to review."),
+  ];
+};
+function notesOf(r) { return r.notes && r.notes.length ? h("div.notes", {}, r.notes.map((n) => h("div", {}, h("span.muted", {}, `${when(n.at)} · ${n.by}: `), `${n.action}${n.note ? " — " + n.note : ""}`))) : null; }
+function suspendDialog(id) {
+  const days = h("input", { type: "number", value: 7, min: 1, max: 365, style: "width:80px" });
+  const reason = h("input", { placeholder: "Reason (only staff see this)", style: "width:100%" });
+  const d = dialog(h("h3", {}, "Pause this member's pod chat"), h("p.muted", {}, "They stay in their pod and keep everything on their phone; they just can't chat until it ends."),
+    h("div.row", {}, days, "days"), reason,
+    h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: () => { d.close(); act(() => api(`members/${id}/suspend`, { body: { days: days.value, reason: reason.value } }), "Chat paused"); } }, "Pause chat")));
+}
+
+views.safety = async () => {
+  const all = views.safety.all;
+  const d = await api("reports?kind=distress" + (all ? "&status=all" : ""));
+  const step = (r, action, label, needNote) => h("button", { onclick: () => {
+    const note = needNote ? prompt(needNote) : "";
+    if (needNote && !note) return;
+    act(() => api("reports/" + r.id, { body: { action, note } }), "Updated");
+  } }, label);
+  return [h("h2", {}, "Safety queue"),
+    h("p.lead", {}, "Messages the Guardian flagged as possible distress, oldest first. The member already saw the helplines privately. Nothing was said in the pod. Reach out, escalate if there's risk, and write down what you did."),
+    h("div.helplines", {}, h("b", {}, "Helplines: "), d.helplines.map((x) => `${x.name} ${x.number}`).join(" · "), h("div.muted", {}, "If someone is in immediate danger, call 112.")),
+    h("label.row", {}, h("input", { type: "checkbox", checked: all, onchange: (e) => { views.safety.all = e.target.checked; show("safety"); } }), "Show resolved alerts too"),
+    d.reports.length ? d.reports.map((r) => {
+      const care = h("textarea", { rows: 3, placeholder: "Leave empty to send the standard care note with the helplines" });
+      return h("div.card", { style: r.status === "open" ? "border-color:var(--badInk)" : "" },
+        h("div.row", {}, h("b", {}, r.author || "Member"), h("span.muted", {}, `in ${r.pod_id} · ${ago(r.created_at)}`), h("span.chip" + (r.status === "open" ? ".bad" : r.status === "resolved" ? ".ok" : ".warn"), {}, r.status.replace("_", " "))),
+        h("div.quote", {}, r.text || "(deleted)"), notesOf(r),
+        r.status !== "resolved" ? [
+          r.member_id ? h("details", {}, h("summary", {}, "Send a private care note"), care,
+            h("button.primary", { onclick: () => act(() => api(`reports/${r.id}/care`, { body: { text: care.value } }), (x) => (x.delivered ? "Sent; they're online now" : "Sent; they'll see it when they next open their pod")) }, "Send privately")) : null,
+          h("div.row", { style: "margin-top:8px" },
+            step(r, "reached_out", "Mark reached out"),
+            step(r, "escalated", "Escalate…", "Who did you escalate to, and how? (for example: called Tele-MANAS 14416 with the member's consent)"),
+            step(r, "note", "Add a note…", "Note"),
+            step(r, "resolved", "Resolve…", "What was the outcome?"))] : null);
+    }) : h("div.card.muted", {}, "No open alerts."),
+  ];
+};
+
+views.members = async () => {
+  const q = views.members.q || "";
+  const aq = views.members.aq || "";
+  const [list, accounts] = await Promise.all([api("members?q=" + encodeURIComponent(q)), api("accounts?q=" + encodeURIComponent(aq))]);
+  const statusChip = (a) => a.status === "active" ? h("span.chip.ok", {}, "active") : h("span.chip.bad", { title: a.status_reason || "" }, "suspended");
+  return [h("h2", {}, "Members"),
+    h("h3", {}, "Sign-in accounts"),
+    h("p.lead", {}, "Who may use the app. Suspending switches access off on every device at its next check (the app checks on open and every few hours, and any server call refuses at once) and closes their live pod and Commons connections. Phone numbers and emails are only for finding someone here: members never see them and they are never sent to Chotu or any AI."),
+    h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Phone, email, username, account id or member id", value: aq, style: "min-width:300px", onchange: (e) => { views.members.aq = e.target.value; show("members"); } })),
+    h("div.card.scroll", {}, accounts.length ? h("table", {}, h("tr", {}, h("th", {}, "Account"), h("th", {}, "Signed in with"), h("th", {}, "Member"), h("th", {}, "Last seen"), h("th", {}, "Access"), h("th", {}, "")),
+      accounts.map((a) => h("tr", {},
+        h("td", {}, h("div", {}, a.phone || a.email || (a.username ? "@" + a.username : "(no phone or email)")), h("div.mono.muted", {}, a.uid)),
+        h("td.muted", {}, a.provider === "google.com" ? "Google" : a.provider === "password" ? "Username and password" : a.provider, a.app_version ? h("div", {}, "app " + a.app_version) : null),
+        h("td", {}, a.member_id ? h("span.mono", {}, a.member_id) : h("span.muted", {}, "—"), a.pod_id ? h("div.muted", {}, "pod " + a.pod_id) : null),
+        h("td.muted", {}, a.last_seen_at ? ago(a.last_seen_at) : "never", h("div", {}, "since " + when(a.created_at))),
+        h("td", {}, statusChip(a), a.status_reason ? h("div.muted", {}, a.status_reason) : null),
+        h("td", {}, a.status === "active"
+          ? h("button.danger", { onclick: () => accountDialog(a, "suspend") }, "Suspend…")
+          : h("button", { onclick: () => accountDialog(a, "restore") }, "Restore…"),
+          " ", h("button", { onclick: () => accountHistoryDialog(a) }, "History"),
+          a.provider === "password" ? [" ", h("button", { onclick: () => resetPasswordDialog(a) }, "Reset password…")] : null)))) : h("p.muted", {}, aq ? "No account matches." : "No one has signed in yet.")),
+    h("h3", {}, "Pod members"),
+    h("p.lead", {}, "Pod membership by member id, their pod, and when they joined. Their journal, mood and progress never leave their phone."),
+    h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Member id or pod id", value: q, onchange: (e) => { views.members.q = e.target.value; show("members"); } })),
+    h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Member"), h("th", {}, "Pod"), h("th", {}, "Joined"), h("th", {}, "Consent"), h("th", {}, "State"), h("th", {}, "")),
+      list.map((m) => h("tr", {},
+        h("td.mono", {}, m.member_id),
+        h("td", {}, h("span.mono", {}, m.pod_id), m.is_lead ? h("span.chip.ok", {}, "pod lead") : null, h("div.muted", {}, m.bucket)),
+        h("td.muted", {}, when(m.joined_at)),
+        h("td", {}, m.consent_at ? h("span.chip.ok", {}, when(m.consent_at)) : h("span.chip", {}, "none recorded")),
+        h("td", {}, m.suspended_until && m.suspended_until > new Date().toISOString() ? h("span.chip.bad", { title: m.suspend_reason || "" }, "chat paused until " + when(m.suspended_until)) : h("span.chip", {}, "active"), m.reports ? h("span.chip.warn", {}, `${m.reports} reports`) : null),
+        h("td", {}, h("select", { onchange: (e) => { memberAction(m, e.target.value); e.target.value = ""; } },
+          h("option", { value: "" }, "Actions…"), h("option", { value: "suspend" }, "Pause chat"), h("option", { value: "unsuspend" }, "Unpause chat"),
+          h("option", { value: "lead" }, "Make pod lead"), h("option", { value: "move" }, "Move to another pod"), h("option", { value: "remove" }, "Remove from pod"),
+          can("privacy") ? [h("option", { value: "export" }, "Export their data"), h("option", { value: "erase" }, "Erase their data")] : null))))))];
+};
+function accountDialog(a, action) {
+  const reason = h("input", { placeholder: action === "suspend" ? "Reason (staff only; the member never sees it)" : "Why access is coming back", style: "width:100%" });
+  const who = a.phone || a.email || a.uid;
+  const d = dialog(h("h3", {}, action === "suspend" ? `Switch off access for ${who}` : `Restore access for ${who}`),
+    h("p.muted", {}, action === "suspend"
+      ? "They are signed out and see a calm \"Your access has been switched off\" screen with the support contact. Their on-phone notes stay on their phone until they choose to delete them. Live pod and Commons connections close now."
+      : "They can use the app again the next time it checks (on open, or straight away if they tap Try again)."),
+    reason,
+    h("div.row", { style: "margin-top:8px" }, h(action === "suspend" ? "button.danger" : "button.primary", { onclick: () => {
+      if (!reason.value.trim()) { toast("A reason is required"); return; }
+      d.close();
+      act(() => api(`accounts/${encodeURIComponent(a.uid)}/${action}`, { body: { reason: reason.value.trim() } }), (r) => action === "suspend" ? `Suspended${r.socketsClosed ? `; ${r.socketsClosed} live connection(s) closed` : ""}` : "Access restored");
+    } }, action === "suspend" ? "Suspend" : "Restore")));
+}
+// Username accounts have no email, so a forgotten password is reset here: a one-time temporary password, shown once.
+function resetPasswordDialog(a) {
+  const d = dialog(h("h3", {}, `Reset the password for @${a.username}`),
+    h("p.muted", {}, "Only do this after checking it's really them (for example from their support message). They are signed out on every device, sign in with the temporary password, and the app asks them to choose a new one. It is shown once; send it to them privately."),
+    h("div.row", { style: "margin-top:8px" }, h("button.danger", { onclick: async () => {
+      d.close();
+      try {
+        const r = await api(`accounts/${encodeURIComponent(a.uid)}/reset-password`, { body: {} });
+        dialog(h("h3", {}, `Temporary password for @${r.username}`), h("p.mono", { style: "font-size:20px;user-select:all" }, r.tempPassword),
+          h("p.muted", {}, "Copy it now; it won't be shown again."));
+      } catch (e) { toast(e.message || "Couldn't reset"); }
+    } }, "Set a temporary password")));
+}
+async function accountHistoryDialog(a) {
+  const list = await api(`accounts/${encodeURIComponent(a.uid)}/history`);
+  dialog(h("h3", {}, "Access history"), h("p.mono", {}, a.uid),
+    list.length ? h("table", {}, list.map((x) => h("tr", {}, h("td.muted", {}, when(x.at)), h("td", {}, x.action), h("td", {}, x.reason || ""), h("td.muted", {}, x.actor)))) : h("p.muted", {}, "No changes yet."));
+}
+async function memberAction(m, a) {
+  if (!a) return;
+  if (a === "suspend") return suspendDialog(m.member_id);
+  if (a === "unsuspend") return act(() => api(`members/${m.member_id}/unsuspend`, { body: {} }), "Chat unpaused");
+  if (a === "lead") { const name = prompt("Name to show for the lead", "Pod lead"); if (name) act(() => api(`members/${m.member_id}/lead`, { body: { name } }), "Pod lead changed"); return; }
+  if (a === "move") { const podId = prompt("Pod id to move them to"); if (podId) act(() => api(`members/${m.member_id}/move`, { body: { podId } }), "Moved"); return; }
+  if (a === "remove") { if (confirm("Remove this member from their pod? They can join again from the app.")) act(() => api(`members/${m.member_id}/remove`, { body: {} }), "Removed"); return; }
+  if (a === "export") return exportMember(m.member_id);
+  if (a === "erase") return eraseMember(m.member_id);
+}
+async function exportMember(id) { try { const x = await api("privacy/export", { body: { memberId: id } }); download(`upsc-pods-member-${id.slice(0, 8)}.json`, JSON.stringify(x, null, 2)); toast("Export downloaded"); } catch (e) { toast(e.message); } }
+function eraseMember(id) {
+  const c = prompt("This erases everything the server holds about this member: pod membership, consent records, messages and private notes. Reports stay without their words. It can't be undone.\n\nType DELETE to confirm.");
+  if (c) act(() => api("privacy/delete", { body: { memberId: id, confirm: c } }), "Erased");
+}
+
+views.privacy = async () => {
+  const d = await api("privacy");
+  const id = h("input", { placeholder: "Member id from their app", style: "min-width:320px" });
+  return [h("h2", {}, "Data requests"), h("p.lead", {}, "Under the DPDP Act, members can get a copy of their data or have it erased. They can do both themselves in the app (My Path → Your data). Use this when someone writes in instead."),
+    h("div.card", {}, h("div.row", {}, id, h("button", { onclick: () => exportMember(id.value.trim()) }, "Export"), h("button.danger", { onclick: () => eraseMember(id.value.trim()) }, "Erase…")),
+      h("p.muted", {}, "Ask them for the member id shown in their app. Never ask for their journal or anything else on their phone.")),
+    h("h3", {}, "Consent records"),
+    h("div.card", {}, d.consents.length ? h("table", {}, h("tr", {}, h("th", {}, "Version"), h("th", {}, "Members"), h("th", {}, "Withdrawn")), d.consents.map((c) => h("tr", {}, h("td", {}, c.version), h("td", {}, num(c.n)), h("td", {}, num(c.withdrawn))))) : h("p.muted", {}, "None yet. The apps record consent when someone finishes onboarding.")),
+    h("h3", {}, "Requests"),
+    h("div.card.scroll", {}, d.requests.length ? h("table", {}, h("tr", {}, h("th", {}, "When"), h("th", {}, "Kind"), h("th", {}, "Member (hash)"), h("th", {}, "How"), h("th", {}, "By")),
+      d.requests.map((r) => h("tr", {}, h("td.muted", {}, when(r.at)), h("td", {}, r.kind), h("td.mono", {}, r.member), h("td", {}, r.via), h("td", {}, r.done_by || "the member")))) : h("p.muted", {}, "No requests yet.")),
+    h("p.muted", {}, "After an erasure only a hash of the member id is kept, so restoring an older backup erases them again.")];
+};
+
+views.llm = async () => {
+  const d = await api("llm");
+  const c = d.controls;
+  const byDay = Object.fromEntries(d.daily.map((r) => [r.day, r]));
+  const days = lastDays(d.days);
+  const out = [h("h2", {}, "AI usage"), h("p.lead", {}, "Workers AI drafts news cards, checks them for safety and indexes the notes library. Only call counts, timings and token counts are logged, never prompts or outputs. Members' data is never sent to a model."),
+    !d.connected ? h("div.card", {}, h("span.chip.warn", {}, "Not connected"), " Workers AI isn't bound here (plain local dev). Calls are logged as unavailable and editors write cards by hand. Run ", h("span.mono", {}, "npm run dev:ai"), " after ", h("span.mono", {}, "wrangler login"), " to use it.") : null,
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, `${num(d.today?.calls)} / ${num(c.dailyCallCap)}`), h("div.l", {}, "calls today / daily limit")),
+      h("div.tile", {}, h("div.n", {}, `${num(d.today?.tokens)}`), h("div.l", {}, `tokens today / ${num(c.dailyTokenCap)} limit`)),
+      h("div.tile" + (c.enabled ? "" : ".warn"), {}, h("div.n", {}, c.enabled ? "On" : "Off"), h("div.l", {}, "master switch"))),
+    h("div.grid2", {},
+      bars("Successful calls per day", days.map((x) => ({ label: x, v: byDay[x]?.ok || 0 }))),
+      bars("Tokens per day (in + out)", days.map((x) => ({ label: x, v: (byDay[x]?.tokens_in || 0) + (byDay[x]?.tokens_out || 0) }))),
+      bars("Failed or blocked calls per day", days.map((x) => ({ label: x, v: (byDay[x]?.errors || 0) + (byDay[x]?.blocked || 0) })))),
+    h("h3", {}, "By purpose and model"),
+    h("div.card.scroll", {}, d.byPurpose.length ? h("table", {}, h("tr", {}, ["Purpose", "Model", "Calls", "OK", "Errors", "Blocked", "Tokens in", "Tokens out", "Avg time"].map((x) => h("th", {}, x))),
+      d.byPurpose.map((r) => h("tr", {}, h("td", {}, r.purpose), h("td.mono", {}, r.model), h("td", {}, num(r.calls)), h("td", {}, num(r.ok)), h("td", {}, num(r.errors)), h("td", {}, num(r.blocked)), h("td", {}, num(r.tokens_in)), h("td", {}, num(r.tokens_out)), h("td", {}, r.avg_ms ? r.avg_ms + " ms" : "")))) : h("p.muted", {}, "No calls yet.")),
+    d.recent.length ? [h("h3", {}, "Recent failures and blocks"), h("div.card.scroll", {}, h("table", {}, d.recent.map((r) => h("tr", {}, h("td.muted", {}, when(r.at)), h("td", {}, r.purpose), h("td", {}, h("span.chip" + (r.status === "error" ? ".bad" : ".warn"), {}, r.status)), h("td", {}, r.error)))))] : null];
+  if (can("llm:control")) {
+    const f = {
+      enabled: h("input", { type: "checkbox", checked: c.enabled }), draft: h("input", { type: "checkbox", checked: c.purposes.draft }),
+      guard: h("input", { type: "checkbox", checked: c.purposes.guard }), embed: h("input", { type: "checkbox", checked: c.purposes.embed }),
+      author: h("input", { type: "checkbox", checked: c.purposes.author }), chotu: h("input", { type: "checkbox", checked: c.purposes.chotu }),
+      authorModel: h("select", {}, (d.authorModels || []).map((m) => h("option", { value: m, selected: m === c.authorModel ? true : null }, m))),
+      model: h("select", {}, d.models.map((m) => h("option", { value: m, selected: m === c.draftModel ? true : null }, m))),
+      calls: h("input", { type: "number", value: c.dailyCallCap, min: 0, style: "width:110px" }), tokens: h("input", { type: "number", value: c.dailyTokenCap, min: 0, style: "width:130px" }),
+      maxTokens: h("input", { type: "number", value: c.maxTokens, min: 200, max: 8000, style: "width:100px" }), temp: h("input", { type: "number", value: c.temperature, min: 0, max: 1, step: 0.1, style: "width:80px" }),
+    };
+    out.push(h("h3", {}, "Controls"), h("div.card", {},
+      h("label.flag", {}, f.enabled, h("div", {}, h("b", {}, "AI on"), h("div.muted", {}, "The kill switch. Off means no model is called at all; news arrives as headline and link and editors write the card."))),
+      h("label.flag", {}, f.draft, h("div", {}, h("b", {}, "Draft news cards"))),
+      h("label.flag", {}, f.guard, h("div", {}, h("b", {}, "Safety check on drafts"), h("div.muted", {}, "Editors still read every card before it ships."))),
+      h("label.flag", {}, f.embed, h("div", {}, h("b", {}, "Index the notes library"))),
+      h("label.flag", {}, f.author, h("div", {}, h("b", {}, "Write library drafts (desk Author tab)"),
+        h("div.muted", {}, d.claudeKey ? "Uses Claude with the content team's templates. Drafts still need an editor per language."
+          : "No Claude key on this server yet, so the Author tab works by copy and paste. To turn it on, put ANTHROPIC_API_KEY in server/.dev.vars (local) or run `npx wrangler secret put ANTHROPIC_API_KEY`."))),
+      h("label.flag", {}, f.chotu, h("div", {}, h("b", {}, "Chotu (cloud)"),
+        h("div.muted", {}, d.groqKey ? "Answers Chotu chats on Groq when a phone has no on-device model. Off means those phones see \"Chotu is offline\". Distress, mood and journal text never reach it."
+          : "No Groq key on this server yet, so cloud Chotu is off. To turn it on, put GROQ_API_KEY in server/.dev.vars (local) or run `npx wrangler secret put GROQ_API_KEY`."))),
+      h("div.row", { style: "margin-top:8px" }, "Drafting model", f.model),
+      h("div.row", { style: "margin-top:8px" }, "Authoring model", f.authorModel, h("span.muted", {}, "Haiku is cheaper; Sonnet for harder sources.")),
+      h("div.row", { style: "margin-top:8px" }, "Daily limits:", f.calls, "calls,", f.tokens, "tokens"),
+      h("div.row", { style: "margin-top:8px" }, "Longest draft", f.maxTokens, "tokens · temperature", f.temp),
+      h("div.row", { style: "margin-top:12px" }, h("button.primary", { onclick: () => act(() => api("llm/controls", { body: {
+        enabled: f.enabled.checked, purposes: { draft: f.draft.checked, guard: f.guard.checked, embed: f.embed.checked, author: f.author.checked, chotu: f.chotu.checked }, draftModel: f.model.value, authorModel: f.authorModel.value,
+        dailyCallCap: f.calls.value, dailyTokenCap: f.tokens.value, maxTokens: f.maxTokens.value, temperature: f.temp.value } }), "AI controls saved") }, "Save controls"))));
+  }
+  return out;
+};
+
+const METRICS = { app_opens: "Web app opens", brief_views: "Brief downloads", library_views: "Library downloads", practice_views: "Practice sessions (web)",
+  pod_joins: "New pod members", messages: "Pod messages", reports: "Reports", distress: "Safety alerts", consents: "Consents recorded", data_exports: "Data exports", data_deletions: "Data erasures" };
+views.analytics = async () => {
+  const days = views.analytics.days || 30;
+  const d = await api("analytics?days=" + days);
+  const series = {};
+  for (const r of d.counts) (series[r.metric] ??= {})[r.day] = r.n;
+  const range = lastDays(days);
+  const pub = Object.fromEntries(d.published.map((r) => [r.day, r.cards]));
+  return [h("h2", {}, "Analytics"),
+    h("p.lead", {}, "Daily totals only. Nobody is tracked: the server counts how many, never who, and nothing on members' phones is counted."),
+    h("div.row", { style: "margin-bottom:12px" }, [7, 30, 90].map((n) => h("button", { class: n === days ? "primary" : "", onclick: () => { views.analytics.days = n; show("analytics"); } }, `${n} days`))),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, num(d.pods?.members)), h("div.l", {}, `members in ${num(d.pods?.pods)} pods`)),
+      h("div.tile", {}, h("div.n", {}, Number(d.pods?.avg_size || 0).toFixed(1)), h("div.l", {}, "average pod size (aim: 8 to 10)")),
+      h("div.tile", {}, h("div.n", {}, num(d.safety?.alerts)), h("div.l", {}, d.safety?.avg_minutes_to_first_action != null ? `safety alerts · first action after ${d.safety.avg_minutes_to_first_action} min on average` : "safety alerts"))),
+    h("div.grid2", {},
+      bars("Cards published per day", range.map((x) => ({ label: x, v: pub[x] || 0 }))),
+      Object.entries(METRICS).map(([k, name]) => bars(name, range.map((x) => ({ label: x, v: series[k]?.[x] || 0 }))))),
+    h("h3", {}, "Editorial work"),
+    h("div.card.scroll", {}, d.approvals.length ? h("table", {}, h("tr", {}, h("th", {}, "Who"), h("th", {}, "English approvals"), h("th", {}, "Hindi approvals"), h("th", {}, "All changes")),
+      d.approvals.map((r) => h("tr", {}, h("td", {}, r.actor), h("td", {}, num(r.english)), h("td", {}, num(r.hindi)), h("td", {}, num(r.changes))))) : h("p.muted", {}, "No content changes in this period."))];
+};
+
+// Growth (metrics.ts): our own events only. No third-party trackers; no mood, journal or chat text is ever logged.
+views.growth = async () => {
+  const d = await api("growth");
+  const p = (v) => (v == null ? "–" : v + "%");
+  const table = (head, rows) => h("div.card.scroll", {}, rows.length ? h("table", {}, h("tr", {}, head.map((x) => h("th", {}, x))), rows.map((r) => h("tr", {}, r.map((x) => h("td", {}, x))))) : h("p.muted", {}, "Nothing yet."));
+  const t = d.podTest;
+  const verdict = { stop: ["bad", "Stop: below 30% still active in week 4"], strong: ["ok", "Strong: above 50% still active in week 4"], keep_testing: ["warn", "Keep testing: between 30% and 50%"], too_few: ["", `Too few people yet (need ${t.thresholds.minSample})`] }[t.verdict];
+  const STEP = { onboarding_done: "Finished onboarding", pod_joined: "Joined a pod", first_chotu_chat: "First Chotu chat", ritual: "Did a ritual" };
+  const MOMENT = { pod_joined: "After joining a pod", close_day: "After closing the day", chotu_chat: "After a Chotu chat", quiz: "After a quiz", roadmap: "After building a roadmap", chai: "After reading the Chai" };
+  const f = d.paidFunnel;
+  return [h("h2", {}, "Growth"), h("p.lead", {}, d.note),
+    h("h3", {}, "The pod test"),
+    h("div.tiles", {},
+      h("div.tile" + (t.verdict === "stop" ? ".warn" : ""), {}, h("div.n", {}, p(t.pct)), h("div.l", {}, `of ${num(t.joined)} pod members were active in their 4th week`)),
+      h("div.tile", {}, h("div.n", {}, h("span.chip" + (verdict[0] ? "." + verdict[0] : ""), {}, t.verdict.replace("_", " "))), h("div.l", {}, verdict[1]))),
+    h("p.muted", {}, "Members who joined a pod 4 to 13 weeks ago, counted as active if they opened the app or did anything in days 21 to 27 after joining. AI pod friends are never counted."),
+    h("h3", {}, "Installs by source (90 days)"),
+    table(["Source", "Platform", "Installs", "Signed up", "Sign-up rate"], d.installsBySource.map((r) => [r.source, r.platform, num(r.installs), num(r.signups), p(r.installs ? Math.round((r.signups / r.installs) * 100) : null)])),
+    d.invites.length ? [h("h3", {}, "Invite codes"), table(["Code", "Installs"], d.invites.map((r) => [h("span.mono", {}, r.invite), num(r.installs)]))] : null,
+    h("h3", {}, `Activation: within 7 days of signing up (${num(d.activation.started)} people, 30 days)`),
+    table(["Step", "People", "Share"], d.activation.steps.map((s) => [STEP[s.step] || s.step, num(s.n), p(s.pct)])),
+    h("h3", {}, "Return by signup week"),
+    h("p.muted", {}, "D1: came back the next day. D7: any day 7 to 13. D30: any day 30 to 36. Blank until the whole week has had the full window."),
+    table(["Week of", "People", "D1", "D7", "D30"], d.retention.map((r) => [r.week, num(r.people), p(r.d1), p(r.d7), p(r.d30)])),
+    h("h3", {}, "One-tap feedback (90 days)"),
+    table(["Moment", "Taps", "Helpful", "Okay", "Not really", "Average (1 to 3)"], d.feedback.ratings.map((r) => [MOMENT[r.moment] || r.moment, num(r.n), num(r.r3), num(r.r2), num(r.r1), r.avg])),
+    d.feedback.checkin.map((q) => [h("h3", {}, "Day-7 check-in: " + q.question), table(["Answer", "People"], q.answers.map((a) => [a.choice, num(a.n)]))]),
+    h("h3", {}, `Paid funnel (${f.window})`),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, num(f.offerShown)), h("div.l", {}, "offers shown (Prep only)")),
+      h("div.tile", {}, h("div.n", {}, num(f.checkoutStarted)), h("div.l", {}, `checkouts started · ${p(f.checkoutPerOfferPct)} of offers`)),
+      h("div.tile", {}, h("div.n", {}, num(f.paid)), h("div.l", {}, `paid · ${p(f.paidPerCheckoutPct)} of checkouts`)),
+      h("div.tile", {}, h("div.n", {}, num(f.refunded)), h("div.l", {}, "refunded"))),
+  ];
+};
+
+// Payments (payments.ts): Cashfree orders, refunds, the yearly price and the founding seats, and receipt details.
+views.payments = async () => {
+  const d = await api("payments");
+  const pr = d.price, P = d.pricing, B = d.business;
+  const f = {
+    yearlyInr: h("input", { type: "number", min: 1, value: P.yearlyInr, style: "width:110px" }),
+    foundingInr: h("input", { type: "number", min: 1, value: P.foundingInr, style: "width:110px" }),
+    foundingSeats: h("input", { type: "number", min: 0, value: P.foundingSeats, style: "width:110px" }),
+    foundingOn: h("input", { type: "checkbox", checked: P.foundingOn }),
+    entityName: h("input", { value: B.entityName, maxlength: 120, style: "width:100%" }),
+    address: h("input", { value: B.address, maxlength: 300, style: "width:100%" }),
+    email: h("input", { value: B.email, maxlength: 120, style: "width:100%" }),
+    gstin: h("input", { value: B.gstin, maxlength: 20, style: "width:200px" }),
+  };
+  const save = () => act(() => api("pricing", { body: {
+    pricing: { yearlyInr: +f.yearlyInr.value, foundingInr: +f.foundingInr.value, foundingSeats: +f.foundingSeats.value, foundingOn: f.foundingOn.checked },
+    business: { entityName: f.entityName.value, address: f.address.value, email: f.email.value, gstin: f.gstin.value } } }), "Saved");
+  const refund = (r) => {
+    const amount = h("input", { type: "number", min: 1, max: r.amount_inr, placeholder: `Full: ₹${r.amount_inr}`, style: "width:140px" });
+    const note = h("input", { maxlength: 100, placeholder: "Reason (goes to Cashfree)", style: "width:100%" });
+    const confirmId = h("input", { placeholder: "Type the order id to confirm", style: "width:100%" });
+    const dlg = dialog(h("h3", {}, "Refund " + r.order_id), h("p.muted", {}, "The money goes back through Cashfree and this member's Plus ends now."),
+      h("label", {}, "Amount (₹) ", amount), h("div", { style: "margin:8px 0" }, note), confirmId,
+      h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: () => { dlg.close(); act(() => api(`payments/${r.order_id}/refund`, { body: { amountInr: amount.value || null, note: note.value, confirm: confirmId.value.trim() } }), "Refund sent"); } }, "Refund")));
+  };
+  const statusChip = (st) => h("span.chip" + (st === "paid" ? ".ok" : st === "refunded" ? ".warn" : st === "failed" ? ".bad" : ""), {}, st);
+  return [h("h2", {}, "Payments"),
+    h("p.lead", {}, d.configured ? `Cashfree is set up, in ${d.mode.toUpperCase()} mode.` : "Cashfree isn't set up: add CASHFREE_APP_ID and CASHFREE_SECRET_KEY with `wrangler secret put`. Until then Plus stays in test mode."),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, "₹" + num(pr.amountInr)), h("div.l", {}, pr.founding ? `founding price now · ${num(pr.foundingLeft)} of ${num(pr.foundingSeats)} seats left` : "a year of Plus now")),
+      h("div.tile", {}, h("div.n", {}, num(d.totals?.paid)), h("div.l", {}, "paid")),
+      h("div.tile", {}, h("div.n", {}, "₹" + num(d.totals?.revenue)), h("div.l", {}, "kept (paid, not refunded)")),
+      h("div.tile", {}, h("div.n", {}, num(d.totals?.refunded)), h("div.l", {}, "refunded"))),
+    h("h3", {}, "Price"),
+    h("div.card", {},
+      h("div.row", {}, h("label", {}, "Yearly ₹ ", f.yearlyInr), h("label", {}, "Founding ₹ ", f.foundingInr), h("label", {}, "Founding seats ", f.foundingSeats), h("label", {}, f.foundingOn, " Founding price on")),
+      h("p.muted", {}, "Founding seats count paid, unrefunded orders. A new price applies to new orders only."),
+      h("h3", {}, "On receipts and the legal pages"),
+      h("div", {}, "Legal entity name", f.entityName), h("div", {}, "Registered address", f.address), h("div", {}, "Support email", f.email), h("div", {}, "GSTIN (if registered) ", f.gstin),
+      h("div.row", { style: "margin-top:12px" }, h("button.primary", { onclick: save }, "Save"))),
+    h("h3", {}, "Orders"),
+    h("div.card.scroll", {}, d.rows.length ? h("table", {}, h("tr", {}, ["Order", "Member", "₹", "Status", "Mode", "Created", "Paid", ""].map((x) => h("th", {}, x))),
+      d.rows.map((r) => h("tr", {}, h("td.mono", {}, r.order_id), h("td.mono", {}, r.member_id.slice(0, 10) + "…"), h("td", {}, num(r.amount_inr) + (r.founding ? " (founding)" : "")),
+        h("td", {}, statusChip(r.status), r.refund_inr ? ` ₹${num(r.refund_inr)}` : ""), h("td", {}, r.mode), h("td", {}, when(r.created_at)), h("td", {}, when(r.paid_at)),
+        h("td", {}, r.status === "paid" ? h("button", { onclick: () => refund(r) }, "Refund") : "")))) : h("p.muted", {}, "No orders yet.")),
+  ];
+};
+
+views.flags = async () => {
+  const d = await api("flags");
+  const boxes = Object.fromEntries(Object.keys(d.info).map((k) => [k, h("input", { type: "checkbox", checked: d.flags[k] })]));
+  return [h("h2", {}, "Feature flags"),
+    h("p.lead", {}, "Switch a feature off for everyone, at once. The server enforces these, so they work on every app version, Android and web. Turning pod chat off disconnects everyone straight away and shows on the status page."),
+    h("div.card", {}, Object.entries(d.info).map(([k, name]) => h("label.flag", {}, boxes[k], h("div", {}, h("b", {}, name), h("div.muted.mono", {}, k)))),
+      h("div.row", { style: "margin-top:12px" }, h("button.primary", { onclick: () => {
+        const flags = Object.fromEntries(Object.entries(boxes).map(([k, b]) => [k, b.checked]));
+        const off = Object.entries(flags).filter(([k, v]) => !v && d.flags[k]).map(([k]) => d.info[k]);
+        if (off.length && !confirm("Switch off for everyone now?\n\n" + off.join("\n"))) return;
+        act(() => api("flags", { body: { flags } }), "Flags saved");
+      } }, "Save"))), await resultDaysCard()];
+};
+
+// Result days: 72 hours of result-day mode in every app from the start of each day (IST).
+async function resultDaysCard() {
+  const d = await api("results");
+  const rows = h("div", {});
+  const addRow = (r = { day: "", label: "UPSC result" }) => {
+    const row = h("div.row", { style: "margin:6px 0" },
+      h("input", { type: "date", value: r.day }), h("input", { maxlength: 60, value: r.label, placeholder: "e.g. Prelims 2027 result", style: "flex:1" }),
+      h("button", { onclick: () => row.remove() }, "Remove"));
+    rows.append(row);
+  };
+  d.results.forEach(addRow);
+  if (!d.results.length) addRow();
+  return [h("h2", {}, "Result days"),
+    h("p.lead", {}, "On each day listed, for 72 hours from midnight IST, every app goes quiet: Adda shrinks to one card, Chotu stays quiet, no wins posts and no Plus offers. Add the day UPSC publishes a result, as soon as it's announced."),
+    h("div.card", {}, d.now ? h("p", {}, h("b", {}, "On now: "), d.now.label + " (" + d.now.day + ")") : h("p.muted", {}, "Not on right now."), rows,
+      h("div.row", { style: "margin-top:12px" }, h("button", { onclick: () => addRow() }, "Add a day"),
+        h("button.primary", { onclick: () => {
+          const results = [...rows.children].map((r) => { const [day, label] = r.querySelectorAll("input"); return { day: day.value, label: label.value }; }).filter((r) => r.day);
+          act(() => api("results", { body: { results } }), "Result days saved");
+        } }, "Save result days")))];
+}
+
+views.announcements = async () => {
+  const list = await api("announcements");
+  const f = { title: h("input", { placeholder: "Title", maxlength: 80, style: "width:100%" }), body: h("textarea", { rows: 3, maxlength: 500, placeholder: "Message (plain words, under 500 characters)" }),
+    link: h("input", { placeholder: "Optional link: https://… or #mocks", style: "width:100%" }), level: h("select", {}, h("option", { value: "info" }, "Normal"), h("option", { value: "important" }, "Important")),
+    starts: h("input", { type: "datetime-local" }), ends: h("input", { type: "datetime-local" }), pods: h("input", { type: "checkbox" }) };
+  const now = new Date().toISOString();
+  return [h("h2", {}, "Announcements"),
+    h("p.lead", {}, "A banner at the top of the web app while it's live. Tick \"Post in every pod\" to also send it as a message in every pod, which reaches Android members too."),
+    h("div.card", {}, f.title, h("div", { style: "height:8px" }), f.body, h("div", { style: "height:8px" }), f.link,
+      h("div.row", { style: "margin-top:8px" }, f.level, "Starts", f.starts, "Ends", f.ends),
+      h("label.row", { style: "margin-top:8px" }, f.pods, "Post in every pod now"),
+      h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: () => {
+        if (f.pods.checked && !confirm("Post this in every pod? Members will see it straight away, and it can't be unsent.")) return;
+        act(() => api("announcements", { body: { title: f.title.value, body: f.body.value, link: f.link.value, level: f.level.value, startsAt: f.starts.value || null, endsAt: f.ends.value || null, sendToPods: f.pods.checked } }), (r) => (r.pods ? `Published and posted in ${r.pods} pods` : "Published"));
+      } }, "Publish"))),
+    list.map((a) => {
+      const live = !a.withdrawn_at && a.starts_at <= now && (!a.ends_at || a.ends_at > now);
+      return h("div.card", {}, h("div.row", {}, h("b", {}, a.title), h("span.chip" + (live ? ".ok" : ""), {}, a.withdrawn_at ? "withdrawn" : live ? "live" : a.starts_at > now ? "scheduled" : "ended"), a.level === "important" ? h("span.chip.warn", {}, "important") : null, a.sent_to_pods_at ? h("span.chip", {}, "posted in pods") : null),
+        h("p", {}, a.body), h("p.muted", {}, `${a.created_by} · ${when(a.created_at)}${a.ends_at ? " · ends " + when(a.ends_at) : ""}`),
+        live || a.starts_at > now ? h("button", { onclick: () => act(() => api(`announcements/${a.id}/withdraw`, { body: {} }), "Withdrawn") }, "Withdraw") : null);
+    })];
+};
+
+views.incidents = async () => {
+  const d = await api("incidents");
+  const f = { title: h("input", { placeholder: "What's wrong, in plain words", style: "width:100%" }), comp: h("select", {}, Object.entries(d.components).map(([k, v]) => h("option", { value: k }, v))),
+    impact: h("select", {}, h("option", { value: "minor" }, "Some trouble"), h("option", { value: "major" }, "Down"), h("option", { value: "maintenance" }, "Planned maintenance")),
+    msg: h("textarea", { rows: 2, placeholder: "First update. This is public." }) };
+  return [h("h2", {}, "Status and incidents"),
+    h("p.lead", {}, ["The public ", h("a", { href: "/status", target: "_blank" }, "/status"), " page checks the service live. Post an incident here when something's wrong or planned; it shows there straight away."]),
+    h("div.card", {}, f.title, h("div.row", { style: "margin:8px 0" }, f.comp, f.impact), f.msg,
+      h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: () => act(() => api("incidents", { body: { title: f.title.value, component: f.comp.value, impact: f.impact.value, message: f.msg.value } }), "Posted on the status page") }, "Post incident"))),
+    d.incidents.map((i) => {
+      const st = h("select", {}, d.statuses.map((s) => h("option", { value: s, selected: s === i.status ? true : null }, s)));
+      const m = h("input", { placeholder: "Update (public)", style: "flex:1;min-width:200px" });
+      return h("div.card", {}, h("div.row", {}, h("b", {}, i.title), h("span.chip" + (i.resolved_at ? ".ok" : i.impact === "major" ? ".bad" : ".warn"), {}, i.resolved_at ? "resolved" : i.status), h("span.muted", {}, d.components[i.component])),
+        h("div.notes", {}, [...i.updates].reverse().map((u) => h("div", {}, h("span.muted", {}, `${when(u.at)} · ${u.status}: `), u.message))),
+        !i.resolved_at ? h("div.row", {}, st, m, h("button", { onclick: () => act(() => api("incidents/" + i.id, { body: { status: st.value, message: m.value } }), "Updated") }, "Post update")) : null);
+    })];
+};
+
+views.staff = async () => {
+  const d = await api("staff");
+  const roleBoxes = (have = []) => Object.fromEntries(Object.keys(d.roles).map((r) => [r, h("input", { type: "checkbox", checked: have.includes(r) })]));
+  const nb = roleBoxes(["editor"]);
+  const langBoxes = (have = []) => Object.fromEntries(d.languages.map((l) => [l.code, h("input", { type: "checkbox", checked: have.includes(l.code) })]));
+  const picked = (boxes) => Object.keys(boxes).filter((k) => boxes[k].checked);
+  const langRow = (boxes) => h("div.row.muted", {}, "Languages they approve (for language editors):", d.languages.map((l) => h("label.row", {}, boxes[l.code], l.name)));
+  const nl = langBoxes();
+  const name = h("input", { placeholder: "Full name (shows on approvals)" }), email = h("input", { placeholder: "Email (optional, for your records)" });
+  const showKey = (who, k) => dialog(h("h3", {}, `Personal key for ${who}`),
+    h("div.keybox", {}, h("div.mono", {}, k), h("button", { style: "margin-top:8px", onclick: () => navigator.clipboard.writeText(k).then(() => toast("Copied")) }, "Copy")),
+    h("p", {}, "This is the only time it's shown. Give it to them in person or through a password manager, not in chat or email."),
+    h("p.muted", {}, "They sign in here and on the News desk with it. Lost keys can't be recovered; make a new one."));
+  return [h("h2", {}, "Staff and roles"),
+    h("p.lead", {}, "Everyone gets their own key, so approvals carry their real name and every change is in the audit log."),
+    h("div.card", {}, Object.entries(d.roles).map(([r, desc]) => h("div.muted", {}, desc))),
+    h("h3", {}, "Add a person"),
+    h("div.card", {}, h("div.row", {}, name, email), h("div.row", { style: "margin-top:8px" }, Object.entries(nb).map(([r, b]) => h("label.row", {}, b, r.replace("_", " ")))), langRow(nl),
+      h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: async () => {
+        try { const r = await api("staff", { body: { name: name.value, email: email.value, roles: picked(nb), langs: picked(nl) } }); showKey(name.value, r.key); show("staff"); } catch (e) { toast(e.message); }
+      } }, "Create and show their key"))),
+    h("h3", {}, "People"),
+    h("div.card.scroll", {}, d.staff.length ? h("table", {}, h("tr", {}, h("th", {}, "Name"), h("th", {}, "Roles"), h("th", {}, "Last active"), h("th", {}, "")),
+      d.staff.map((p) => {
+        const boxes = roleBoxes(p.roles), lb = langBoxes(p.langs);
+        return h("tr", { style: p.disabled_at ? "opacity:.5" : "" },
+          h("td", {}, p.name, h("div.muted", {}, p.email || ""), h("div.muted", {}, `added by ${p.created_by} · ${when(p.created_at)}`)),
+          h("td", {}, Object.entries(boxes).map(([r, b]) => h("label.row", {}, b, r.replace("_", " "))), langRow(lb),
+            h("button", { onclick: () => act(() => api(`staff/${p.id}/roles`, { body: { roles: picked(boxes), langs: picked(lb) } }), "Roles saved") }, "Save roles")),
+          h("td.muted", {}, p.last_seen_at ? ago(p.last_seen_at) : "never"),
+          h("td", {}, p.disabled_at ? h("button", { onclick: () => act(() => api(`staff/${p.id}/enable`, { body: {} }), "Re-enabled") }, "Re-enable")
+            : [h("button", { onclick: async () => { if (!confirm("Make a new key? Their old key stops working now.")) return; try { const r = await api(`staff/${p.id}/rotate`, { body: {} }); showKey(p.name, r.key); } catch (e) { toast(e.message); } } }, "New key"), " ",
+              h("button.danger", { onclick: () => { if (confirm(`Disable ${p.name}? Their key stops working now. Their approvals and history stay.`)) act(() => api(`staff/${p.id}/disable`, { body: {} }), "Disabled"); } }, "Disable")]));
+      })) : h("p.muted", {}, "Nobody yet. Until you add people, everyone is using shared keys."))];
+};
+
+views.languages = async () => {
+  const [d, rq] = await Promise.all([api("languages"), api("language-requests")]);
+  const STATUS = { off: "Off", pilot: "Pilot (desk only)", live: "Live (members see it)" };
+  const top = Math.max(1, ...rq.languages.map((l) => l.requests));
+  return [h("h2", {}, "Languages"),
+    h("div.card", {},
+      h("h3", { style: "margin-top:0" }, "Requested by members"),
+      h("p.muted", {}, `What people tapped under "Request your language" in the apps, one count per device per language (${num(rq.devices)} ${rq.devices === 1 ? "device" : "devices"} so far). No names or member ids are kept. "Would help" means they ticked "I'd help translate".`),
+      h("table", {}, h("tr", {}, h("th", {}, "Language"), h("th", {}, "Requests"), h("th", {}, ""), h("th", {}, "Last 7 days"), h("th", {}, "Would help")),
+        rq.languages.map((l) => h("tr", {},
+          h("td", {}, l.name, l.native !== l.name ? [" · ", h("span", { lang: l.code }, l.native)] : null),
+          h("td", {}, num(l.requests)),
+          h("td", { style: "width:40%" }, h("div", { style: `height:8px;border-radius:4px;background:var(--bar);width:${Math.round((l.requests / top) * 100)}%;min-width:${l.requests ? 4 : 0}px` })),
+          h("td", {}, num(l.lastWeek)),
+          h("td", {}, num(l.helpers)))))),
+    h("p.lead", {}, "English and Hindi are written inside every item. Other languages are translated per item on the desk and approved by a language editor. A language goes live for members only when it has an approving editor and a reviewed list of distress phrases."),
+    d.languages.map((l) => {
+      const chip = h("span.chip" + (l.status === "live" ? ".ok" : l.status === "pilot" ? ".warn" : ""), {}, STATUS[l.status]);
+      if (l.inPack) return h("div.card", {}, h("div.row", {}, h("b", {}, `${l.name} · ${l.native}`), chip, h("span.muted", {}, "Built in, always on.")));
+      const sel = h("select", {}, Object.entries(STATUS).map(([k, v]) => h("option", { value: k, selected: k === l.status ? true : null }, v)));
+      const list = h("textarea", { rows: 6, style: "width:100%", lang: l.code }, l.distress.phrases.join("\n"));
+      const reviewer = h("input", { placeholder: "Reviewer's name", value: l.distress.reviewedBy || "" });
+      const saveList = (reviewed) => act(() => api(`languages/${l.code}/distress`, { body: { phrases: list.value, reviewed, reviewedBy: reviewer.value } }), reviewed ? "Marked reviewed" : "List saved");
+      return h("div.card", {},
+        h("div.row", {}, h("b", {}, `${l.name} · ${l.native}`), chip, h("span.muted", {}, l.script + " script"),
+          h("span", { style: "margin-left:auto" }), sel, h("button", { onclick: () => act(() => api(`languages/${l.code}`, { body: { status: sel.value } }), `${l.name}: ${STATUS[sel.value]}`) }, "Set")),
+        l.gaps.length ? h("div", {}, h("div.muted", {}, "Before it can go live:"), h("ul", {}, l.gaps.map((g) => h("li", {}, g)))) : h("p.muted", {}, "Ready to go live."),
+        h("details", { open: l.status !== "off" ? true : null }, h("summary", {}, `Distress phrases (${l.distress.phrases.length})`),
+          h("p.muted", {}, "One per line, in the script and in Roman letters as people type them. Messages containing any of these get the helpline card and alert the safety queue. These count for safety even before review."),
+          list,
+          h("div.muted", {}, l.distress.reviewedBy ? `Reviewed by ${l.distress.reviewedBy} on ${l.distress.reviewedOn}. Changing the list clears this.` : (l.distress.note || "Not reviewed yet.")),
+          h("div.row", { style: "margin-top:8px" }, h("button", { onclick: () => saveList(false) }, "Save list"), reviewer, h("button.primary", { onclick: () => saveList(true) }, "Save and mark reviewed"))),
+        h("div.muted", { style: "font-family:" + l.fonts.replace(/"/g, "'") }, "Fonts: " + l.fonts));
+    })];
+};
+
+views.backups = async () => {
+  const d = await api("backups");
+  return [h("h2", {}, "Backups"),
+    h("p.lead", {}, "A backup is taken every day at 05:30 IST and the last 30 are kept. Restoring replaces content and community data, never staff, the audit log, privacy requests or settings, and a fresh backup is taken first. Pod chat history isn't included."),
+    !d.bound ? h("div.card", {}, "No backup bucket is bound. Check r2_buckets in wrangler.jsonc.") : null,
+    h("div.row", { style: "margin-bottom:12px" }, h("button.primary", { onclick: () => act(() => api("backups", { body: {} }), (r) => `Backed up ${num(r.rows)} rows`) }, "Back up now")),
+    h("div.card.scroll", {}, d.backups.length ? h("table", {}, h("tr", {}, h("th", {}, "When"), h("th", {}, "Why"), h("th", {}, "Rows"), h("th", {}, "Size"), h("th", {}, "")),
+      d.backups.map((b) => h("tr", {}, h("td", {}, when(b.uploaded)), h("td", {}, b.reason), h("td", {}, num(b.rows)), h("td", {}, `${Math.ceil(b.size / 1024)} KB`),
+        h("td", {}, h("button", { onclick: async () => { try { const r = await api("backups/file?key=" + encodeURIComponent(b.key), { raw: true }); download(b.key.split("/").pop(), await r.text()); } catch (e) { toast(e.message); } } }, "Download"), " ",
+          h("button.danger", { onclick: () => { const c = prompt(`Restore the backup from ${when(b.uploaded)}?\n\nContent and community data will be replaced. A backup of the current state is taken first.\n\nType RESTORE to confirm.`); if (c) act(() => api("backups/restore", { body: { key: b.key, confirm: c } }), (r) => `Restored. Taken first: ${r.takenFirst.split("/").pop()}`); } }, "Restore…"))))) : h("p.muted", {}, "No backups yet.")),
+    h("p.muted", {}, "Deployed: Cloudflare D1 also keeps 30 days of point-in-time history. `npx wrangler d1 time-travel restore upsc-pods --timestamp=…` rolls the whole database back.")];
+};
+
+views.audit = async () => {
+  const q = views.audit.q || "";
+  const rows = await api("audit?q=" + encodeURIComponent(q));
+  return [h("h2", {}, "Audit log"), h("p.lead", {}, "Every change made on the desk, in moderation and here, with who made it. It can't be edited or restored over."),
+    h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Search person or action", value: q, onchange: (e) => { views.audit.q = e.target.value; show("audit"); } })),
+    h("div.card.scroll", {}, rows.length ? h("table", {}, h("tr", {}, h("th", {}, "When"), h("th", {}, "Who"), h("th", {}, "What"), h("th", {}, "Details")),
+      rows.map((r) => h("tr", {}, h("td.muted", {}, when(r.at)), h("td", {}, r.actor), h("td", {}, r.action), h("td.mono", {}, r.detail || "")))) : h("p.muted", {}, "Nothing yet."))];
+};
+
+render();
+</script>
+</body>
+</html>

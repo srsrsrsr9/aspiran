@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Stack v2</title>
+<style>
+:root{
+  --bg:#f6f2ec; --panel:#fffdf9; --ink:#2a2622; --muted:#7a7066; --line:#e6ddd1;
+  --amber:#c9822b; --amber-soft:#f3e1c8; --indigo:#5560a8; --indigo-soft:#e2e4f4;
+  --green:#3f8a5c; --green-soft:#dcefe2; --red:#b5533c; --red-soft:#f4dcd5; --gray-soft:#ece7e0;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17161a; --panel:#211f25; --ink:#ece6dc; --muted:#a39a8f; --line:#34313a;
+  --amber:#e0a050; --amber-soft:#3a2d1c; --indigo:#8f98e0; --indigo-soft:#262a45;
+  --green:#6cc08b; --green-soft:#1e3326; --red:#e08a73; --red-soft:#3d2520; --gray-soft:#2a282e;
+}}
+:root[data-theme="dark"]{
+  --bg:#17161a; --panel:#211f25; --ink:#ece6dc; --muted:#a39a8f; --line:#34313a;
+  --amber:#e0a050; --amber-soft:#3a2d1c; --indigo:#8f98e0; --indigo-soft:#262a45;
+  --green:#6cc08b; --green-soft:#1e3326; --red:#e08a73; --red-soft:#3d2520; --gray-soft:#2a282e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 16px 60px}
+h1{font:600 30px/1.2 Georgia,serif;margin:0 0 6px}
+h2{font:600 13px/1 system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.sub{color:var(--muted);max-width:760px;margin:0 0 24px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
+.card.in{opacity:1;transform:none}
+.s12{grid-column:span 12}.s8{grid-column:span 8}.s7{grid-column:span 7}.s6{grid-column:span 6}.s5{grid-column:span 5}.s4{grid-column:span 4}
+@media (max-width:860px){.s8,.s7,.s6,.s5,.s4{grid-column:span 12}}
+.pill{display:inline-block;font-size:12px;padding:3px 10px;border-radius:99px;background:var(--amber-soft);color:var(--amber);font-weight:600}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+.toggle{float:right;font-size:12px;background:none;border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:4px 10px;cursor:pointer}
+.chip{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.c-pick{background:var(--green-soft);color:var(--green)}
+.c-bake{background:var(--amber-soft);color:var(--amber)}
+.c-drop{background:var(--red-soft);color:var(--red)}
+.c-later{background:var(--indigo-soft);color:var(--indigo)}
+/* architecture */
+.arch{display:grid;grid-template-columns:1fr 70px 1.15fr 70px 1fr;align-items:stretch;gap:0}
+@media (max-width:900px){.arch{grid-template-columns:1fr}.link{height:50px;transform:rotate(90deg)}}
+.zone{border:2px solid var(--line);border-radius:14px;padding:14px;position:relative}
+.zone h3{margin:0 0 2px;font:600 16px Georgia,serif}
+.zone .zs{font-size:12px;color:var(--muted);margin-bottom:10px}
+.zone.phone{border-color:var(--green)} .zone.host{border-color:var(--amber)} .zone.cloud{border-color:var(--indigo);border-style:dashed}
+.m{display:flex;justify-content:space-between;gap:6px;align-items:center;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:6px 8px;margin:5px 0;font-size:12.5px}
+.m b{font-weight:600}
+.m small{color:var(--muted);display:block;font-size:11px}
+.link{position:relative;display:flex;align-items:center;justify-content:center}
+.link svg{width:100%;height:60px;overflow:visible}
+.link .lbl{position:absolute;bottom:calc(50% + 18px);font-size:10px;color:var(--muted);text-align:center;width:100%}
+.wall{position:absolute;left:50%;top:8%;bottom:8%;width:4px;margin-left:-2px;background:repeating-linear-gradient(var(--red) 0 8px,transparent 8px 14px);border-radius:2px}
+.wall-tag{position:absolute;top:0;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:var(--red);white-space:nowrap;background:var(--panel);padding:0 4px}
+.dotflow{fill:var(--amber)}
+/* fit bars */
+.fit .row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:13px}
+.fit .nm{width:150px;flex-shrink:0}
+.fit .track{flex:1;height:18px;background:var(--gray-soft);border-radius:5px;position:relative;overflow:visible}
+.fit .fill{height:100%;width:0;border-radius:5px;transition:width 1.3s cubic-bezier(.2,.8,.2,1)}
+.fit .cap{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--red)}
+.fit .cap span{position:absolute;top:-16px;left:-30px;width:60px;text-align:center;font-size:10px;color:var(--red);font-weight:700}
+.fit .gb{width:60px;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.ok{background:var(--green)}.tight{background:var(--amber)}.no{background:var(--red)}
+/* spec */
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.spec div{border:1px solid var(--line);border-radius:10px;padding:10px}
+.spec small{color:var(--muted);font-size:11px;display:block}
+.spec b{font-size:15px}
+/* pipeline */
+.pipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.st{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;min-width:120px;transition:all .35s;background:var(--bg)}
+.st small{display:block;color:var(--muted);font-size:11px}
+.st.lit{border-color:var(--amber);background:var(--amber-soft);transform:translateY(-3px)}
+.st.alert.lit{border-color:var(--red);background:var(--red-soft)}
+.ar{color:var(--muted)}
+.branch{display:flex;flex-direction:column;gap:6px}
+/* tiers */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:700px){.tiers{grid-template-columns:1fr}}
+.tier{border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.tier .ph{width:44px;height:76px;border:3px solid var(--ink);border-radius:9px;margin:0 auto 8px;position:relative;overflow:hidden}
+.tier .ph i{position:absolute;left:0;right:0;bottom:0;background:var(--green);height:0;transition:height 1.4s ease}
+.tier b{display:block}.tier small{color:var(--muted);font-size:12px}
+/* download flow */
+.dl{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.dl span.b{border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--bg)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+td small{color:var(--muted)}
+/* privacy */
+.priv{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.priv{grid-template-columns:1fr}}
+.priv ul{margin:0;padding:0;list-style:none;font-size:13px}
+.priv li{padding:6px 0;border-bottom:1px solid var(--line)}
+.priv .stay li:before{content:"🔒 "}.priv .go li:before{content:"☁️ "}
+.next{border:2px solid var(--amber)}
+.bake{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+@media (max-width:700px){.bake{grid-template-columns:1fr 1fr}}
+.bake div{border:1px dashed var(--amber);border-radius:10px;padding:8px;font-size:12px;text-align:center}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <button class="toggle" id="theme">Toggle theme</button>
+  <span class="pill">AI stack v2 · sized to your laptop</span>
+  <h1>Local AI for the pods, at a glance</h1>
+  <p class="sub">Android phones do the personal work, your laptop hosts the pod mascot, and an optional online layer comes later for paid tiers behind a privacy wall. Every model is open weight and free to use.</p>
+
+  <div class="grid">
+
+    <!-- ARCHITECTURE -->
+    <div class="card s12">
+      <h2>How the pieces connect</h2>
+      <div class="arch">
+        <div class="zone phone">
+          <h3>📱 Each Android phone</h3>
+          <div class="zs">Personal, private, offline</div>
+          <div class="m"><span><b>Chai Buddy</b><small>Qwen3.5-4B/2B or Gemma 4 E4B/E2B</small></span><span class="chip c-bake">bake-off</span></div>
+          <div class="m"><span><b>Memory & search</b><small>EmbeddingGemma 2 · 191 MB</small></span><span class="chip c-pick">pick</span></div>
+          <div class="m"><span><b>Quick decisions</b><small>tiny heads on embeddings</small></span><span class="chip c-later">after labels</span></div>
+          <div class="m"><span><b>Safety screen</b><small>Llama Guard 3 1B · 440 MB</small></span><span class="chip c-pick">pick</span></div>
+        </div>
+        <div class="link">
+          <span class="lbl">pod posts,<br>no mood data</span>
+          <svg viewBox="0 0 70 60"><line x1="0" y1="30" x2="70" y2="30" stroke="var(--line)" stroke-width="3"/><circle class="dotflow" r="5" cy="30"><animate attributeName="cx" from="0" to="70" dur="2s" repeatCount="indefinite"/></circle><circle class="dotflow" r="5" cy="30" style="fill:var(--green)"><animate attributeName="cx" from="70" to="0" dur="2.6s" repeatCount="indefinite"/></circle></svg>
+        </div>
+        <div class="zone host">
+          <h3>💻 Your laptop (pod host)</h3>
+          <div class="zs">Shared brain for every pod · on when you're on</div>
+          <div class="m"><span><b>Mascot "Chotu" + News Desk</b><small>Qwen3.5-9B or Gemma 4 12B, CPU</small></span><span class="chip c-bake">bake-off</span></div>
+          <div class="m"><span><b>Guardian & router decisions</b><small>Laya-multilingual · 322M · Hindi</small></span><span class="chip c-pick">pick</span></div>
+          <div class="m"><span><b>Matchmaker</b><small>EmbeddingGemma 2</small></span><span class="chip c-pick">pick</span></div>
+          <div class="m"><span><b>Handwritten answers</b><small>MiniCPM-V 4.6 · 1.3B</small></span><span class="chip c-later">phase 2</span></div>
+          <div class="m"><span><b>Model manager</b><small>LiteLLM proxy</small></span><span class="chip c-later">paid tiers</span></div>
+        </div>
+        <div class="link">
+          <div class="wall"></div><span class="wall-tag">PRIVACY WALL</span>
+          <svg viewBox="0 0 70 60"><line x1="0" y1="30" x2="70" y2="30" stroke="var(--line)" stroke-width="3" stroke-dasharray="5 5"/><circle class="dotflow" r="4" cy="30" style="fill:var(--indigo)"><animate attributeName="cx" from="0" to="70" dur="3.2s" repeatCount="indefinite"/></circle></svg>
+        </div>
+        <div class="zone cloud">
+          <h3>☁️ Online (later)</h3>
+          <div class="zs">Paid tiers · public content only</div>
+          <div class="m"><span><b>OpenRouter</b><small>main gateway</small></span><span class="chip c-later">later</span></div>
+          <div class="m"><span><b>Sail Research</b><small>zero data retention</small></span><span class="chip c-later">later</span></div>
+          <div class="m"><span><b>Hugging Face</b><small>model downloads</small></span><span class="chip c-pick">day 1</span></div>
+          <div class="m"><span><b>OpenCode free</b><small>rotates, may train on data</small></span><span class="chip c-drop">avoid</span></div>
+          <div class="m"><span><b>Jev</b><small>hosted; Laya covers it locally</small></span><span class="chip c-drop">skip</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAPTOP -->
+    <div class="card s5">
+      <h2>Your laptop</h2>
+      <div class="spec">
+        <div><small>Processor</small><b>Core i5-13420H</b></div>
+        <div><small>RAM</small><b>16 GB</b></div>
+        <div><small>Graphics</small><b>Intel UHD (integrated)</b></div>
+        <div><small>Free disk</small><b>~315 GB</b></div>
+      </div>
+      <p class="note">There's no usable graphics card, so every model runs on the CPU. That's fine for the pilot: smaller models answer quickly, and a 9B model gives a short mascot reply in seconds rather than instantly <i>(my estimate, measured in the bake-off)</i>.</p>
+    </div>
+
+    <div class="card s7 fit" id="fit">
+      <h2>What fits in 16 GB (4-bit, approx.)</h2>
+      <div class="row"><span class="nm">Laya-multilingual</span><div class="track"><div class="fill ok" data-w="5"></div><div class="cap" style="left:75%"><span>~12 GB usable</span></div></div><span class="gb">&lt;1 GB</span></div>
+      <div class="row"><span class="nm">EmbeddingGemma 2</span><div class="track"><div class="fill ok" data-w="3"></div><div class="cap" style="left:75%"></div></div><span class="gb">0.2 GB</span></div>
+      <div class="row"><span class="nm">MiniCPM-V 4.6</span><div class="track"><div class="fill ok" data-w="12"></div><div class="cap" style="left:75%"></div></div><span class="gb">~2 GB</span></div>
+      <div class="row"><span class="nm">Qwen3.5-4B / E4B</span><div class="track"><div class="fill ok" data-w="20"></div><div class="cap" style="left:75%"></div></div><span class="gb">~3 GB</span></div>
+      <div class="row"><span class="nm">Qwen3.5-9B</span><div class="track"><div class="fill ok" data-w="37"></div><div class="cap" style="left:75%"></div></div><span class="gb">~6 GB</span></div>
+      <div class="row"><span class="nm">Gemma 4 12B</span><div class="track"><div class="fill tight" data-w="47"></div><div class="cap" style="left:75%"></div></div><span class="gb">~7.5 GB</span></div>
+      <div class="row"><span class="nm">Sarvam-30B</span><div class="track"><div class="fill no" data-w="100"></div><div class="cap" style="left:75%"></div></div><span class="gb">~18 GB</span></div>
+      <p class="note">Sizes are my estimates for 4-bit files. Windows and your apps need about 4 GB. <b>Sarvam-30B doesn't fit</b> on this laptop. It would need 32 GB+ of RAM, so it's parked until there's a bigger machine.</p>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="card s12">
+      <h2>What happens when someone posts in a pod</h2>
+      <div class="pipe" id="pipe">
+        <div class="st"><b>Message</b><small>"Failed prelims again, kya fayda"</small></div><span class="ar">→</span>
+        <div class="st"><b>Llama Guard</b><small>scam? harassment?</small></div><span class="ar">→</span>
+        <div class="st"><b>Laya decides</b><small>distress 0.71 · speak now? yes</small></div><span class="ar">→</span>
+        <div class="branch">
+          <div class="st alert"><b>⚠ Human + helpline</b><small>pod lead pinged, Tele-MANAS shown</small></div>
+          <div class="st"><b>Chotu replies</b><small>short, warm, labelled AI</small></div>
+        </div>
+      </div>
+      <p class="note">Laya answers typed questions (yes/no, pick one, score) without writing text. It works from day one with no training data. Above a cautious distress threshold, a human is always alerted, and the mascot never handles it alone.</p>
+    </div>
+
+    <!-- PHONE TIERS -->
+    <div class="card s6" id="tiers">
+      <h2>Phone tiers (decided at install)</h2>
+      <div class="tiers">
+        <div class="tier"><div class="ph"><i data-h="90"></i></div><b>8 GB+</b><small>Qwen3.5-4B or Gemma 4 E4B</small></div>
+        <div class="tier"><div class="ph"><i data-h="60"></i></div><b>6 GB</b><small>Qwen3.5-2B or Gemma 4 E2B</small></div>
+        <div class="tier"><div class="ph"><i data-h="25"></i></div><b>4 GB</b><small>No chat model: rituals, packs, search</small></div>
+      </div>
+    </div>
+
+    <div class="card s6">
+      <h2>Install small, download smart</h2>
+      <div class="dl">
+        <span class="b">App ~20 MB</span><span>→</span>
+        <span class="b">Probe RAM, space, Wi-Fi</span><span>→</span>
+        <span class="b">Day 1: embeddings + guard</span><span>→</span>
+        <span class="b">Night: chat model on Wi-Fi</span>
+      </div>
+      <p class="note">Play caps the base app at 200 MB, so the models download from Hugging Face after install. A remote config file picks the model for each tier, so you can swap models without releasing a new app version.</p>
+    </div>
+
+    <!-- MODEL SCORECARD -->
+    <div class="card s7">
+      <h2>Model scorecard</h2>
+      <table>
+        <tr><th>Model</th><th>Role</th><th>Status</th></tr>
+        <tr><td>Qwen3.5 (0.8–9B)<br><small>Apache · 201 languages listed</small></td><td>Mascot voice</td><td><span class="chip c-bake">bake-off</span></td></tr>
+        <tr><td>Gemma 4 E2B / E4B / 12B<br><small>Apache · 140+ languages</small></td><td>Mascot voice</td><td><span class="chip c-bake">bake-off</span></td></tr>
+        <tr><td>EmbeddingGemma 2<br><small>Apache · 6 Oct 2026</small></td><td>Memory, matching</td><td><span class="chip c-pick">pick</span></td></tr>
+        <tr><td>Laya-multilingual<br><small>Apache · includes Hindi</small></td><td>Decisions, routing</td><td><span class="chip c-pick">pick</span></td></tr>
+        <tr><td>Llama Guard 3 1B<br><small>on-device guard</small></td><td>Safety</td><td><span class="chip c-pick">pick</span></td></tr>
+        <tr><td>MiniCPM-V 4.6<br><small>Apache · 1.3B</small></td><td>Handwriting</td><td><span class="chip c-later">phase 2</span></td></tr>
+        <tr><td>MiniCPM5-2B / 1B<br><small>English + Chinese only</small></td><td>—</td><td><span class="chip c-drop">dropped</span></td></tr>
+        <tr><td>Sarvam-30B<br><small>best Hindi, needs 32 GB+</small></td><td>Host upgrade</td><td><span class="chip c-later">bigger PC</span></td></tr>
+        <tr><td>Sarvam Vision<br><small>API only</small></td><td>—</td><td><span class="chip c-drop">not local</span></td></tr>
+      </table>
+    </div>
+
+    <div class="card s5">
+      <h2>The privacy wall</h2>
+      <div class="priv">
+        <ul class="stay"><li>Mood check-ins</li><li>Close-the-day entries</li><li>Distress messages</li><li>Pod chat</li><li>Plan B, attempt and age</li></ul>
+        <ul class="go"><li>News summaries (public)</li><li>Question generation</li><li>Paid answer feedback</li><li>Paid handwriting reading</li></ul>
+      </div>
+      <p class="note">🔒 never leaves the device. ☁️ may go online, with consent, to zero-data-retention providers only. When a free model disappears, the router falls back to the local model.</p>
+    </div>
+
+    <div class="card s12 next">
+      <h2>Next: the bake-off on this laptop</h2>
+      <p style="margin:0">Run 50–100 prompts in Hindi, Hinglish and English through each candidate and score tone, accuracy and safety. The winner becomes the mascot voice.</p>
+      <div class="bake">
+        <div><b>Qwen3.5-9B</b><br>host mascot</div>
+        <div><b>Gemma 4 12B</b><br>host mascot</div>
+        <div><b>Qwen3.5-4B / 2B</b><br>phone stand-ins</div>
+        <div><b>Gemma 4 E4B / E2B</b><br>phone stand-ins</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('theme').onclick = function(){
+    var r = document.documentElement, cur = r.getAttribute('data-theme');
+    var dark = cur ? cur === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    r.setAttribute('data-theme', dark ? 'light' : 'dark');
+  };
+  function onIn(c){
+    c.querySelectorAll('.fill').forEach(function(f){ f.style.width = f.dataset.w + '%'; });
+    c.querySelectorAll('.ph i').forEach(function(f){ f.style.height = f.dataset.h + '%'; });
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); onIn(e.target); io.unobserve(e.target); } });
+  }, {threshold:.1});
+  document.querySelectorAll('.card').forEach(function(c,i){ c.style.transitionDelay = (i%3)*80 + 'ms'; io.observe(c); });
+
+  // pipeline walk-through: message -> guard -> laya -> (alert, reply)
+  var st = document.querySelectorAll('#pipe .st'), seq = [[0],[1],[2],[3,4],[]], k = 0;
+  function tick(){
+    st.forEach(function(s){ s.classList.remove('lit'); });
+    seq[k % seq.length].forEach(function(i){ st[i].classList.add('lit'); });
+    k++;
+  }
+  tick();
+  if(!reduce) setInterval(tick, 1300);
+})();
+</script>
+</body>
+</html>

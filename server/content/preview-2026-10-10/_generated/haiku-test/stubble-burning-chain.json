@@ -1,0 +1,73 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fall": "sfx/domino",
+    "end": "sfx/chime"
+  },
+  "id": "stubble-burning-chain",
+  "tone": "SERIOUS",
+  "title": {
+    "en": "Stubble, smoke and health",
+    "hi": "पराली, धुआँ और सेहत"
+  },
+  "links": [
+    {
+      "en": "Paddy is harvested in October, and wheat must be sown by November.",
+      "hi": "धान की कटाई अक्टूबर में होती है, और गेहूँ नवंबर तक बोना होता है।"
+    },
+    {
+      "en": "This leaves a short window to clear the fields.",
+      "hi": "इससे खेत साफ़ करने का समय कम रह जाता है।"
+    },
+    {
+      "en": "Many farmers burn the leftover stubble because it is the fastest and cheapest option.",
+      "hi": "कई किसान बचा हुआ पराली जलाते हैं, क्योंकि यह सबसे तेज़ और सस्ता तरीका है।"
+    },
+    {
+      "en": "The smoke adds to pollution across north India.",
+      "hi": "इससे उत्तर भारत में प्रदूषण और बढ़ता है।"
+    },
+    {
+      "en": "In early winter, calm winds and cooler air near the ground often trap pollutants.",
+      "hi": "सर्दी की शुरुआत में, शांत हवाएँ और ठंडी हवा अक्सर ज़मीन के पास प्रदूषक फँसा देती हैं।"
+    },
+    {
+      "en": "So Delhi's air quality can fall to 'severe'.",
+      "hi": "इसलिए दिल्ली की हवा की गुणवत्ता 'गंभीर' स्तर तक गिर सकती है।"
+    },
+    {
+      "en": "Poor air raises the risk of respiratory illness.",
+      "hi": "खराब हवा से साँस संबंधी बीमारी का जोखिम बढ़ता है।"
+    }
+  ],
+  "breakIt": {
+    "en": {
+      "question": "Where could this chain be broken, using options named in the source?",
+      "answer": "Options that avoid burning could weaken link 3. The Happy Seeder sows wheat without removing stubble. The Pusa bio-decomposer breaks stubble down in the field."
+    },
+    "hi": {
+      "question": "इस चेन को कहाँ तोड़ा जा सकता है, स्रोत में बताए विकल्पों से?",
+      "answer": "बिना जलाए पराली के विकल्प लिंक 3 को कमज़ोर कर सकते हैं। हैप्पी सीडर पराली हटाए बिना गेहूँ बोता है। पूसा बायो-डीकंपोज़र खेत में ही पराली को तोड़ता है।"
+    }
+  },
+  "sources": {
+    "en": "No source document named; facts from the supplied text.",
+    "hi": "कोई स्रोत दस्तावेज़ नहीं बताया गया; तथ्य दिए गए पाठ से।"
+  },
+  "schema": "upsc-pods/chain@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/chain/",
+    "createdOn": "2026-10-10"
+  }
+}

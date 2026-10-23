@@ -1,0 +1,237 @@
+{
+  "schema": "upsc-pods/explainer@1",
+  "id": "article-200",
+  "title": {
+    "en": "Ek Minute · Article 200",
+    "hi": "एक मिनट · अनुच्छेद 200"
+  },
+  "staticLink": "Article 200",
+  "linkedFromChips": [
+    "Article 200",
+    "Art. 200"
+  ],
+  "tone": "NEUTRAL",
+  "totalSeconds": 48,
+  "canvas": {
+    "width": 360,
+    "height": 400,
+    "units": "dp-like, scale to width"
+  },
+  "elements": {
+    "legislature": {
+      "kind": "building",
+      "roof": "triangle",
+      "x": 22,
+      "y": 34,
+      "w": 100,
+      "label": {
+        "en": "State legislature",
+        "hi": "विधानमंडल"
+      }
+    },
+    "governor": {
+      "kind": "building",
+      "roof": "dome",
+      "x": 238,
+      "y": 34,
+      "w": 100,
+      "label": {
+        "en": "Governor",
+        "hi": "राज्यपाल"
+      }
+    },
+    "bill": {
+      "kind": "paper",
+      "x": 134,
+      "y": 54,
+      "w": 30,
+      "h": 38,
+      "label": {
+        "en": "Bill",
+        "hi": "विधेयक"
+      }
+    },
+    "tiles": [
+      {
+        "x": 22,
+        "y": 124,
+        "w": 150,
+        "h": 96,
+        "icon": "check",
+        "label": {
+          "en": "Assent",
+          "hi": "सहमति"
+        },
+        "sub": {
+          "en": "Becomes law",
+          "hi": "क़ानून बनता है"
+        }
+      },
+      {
+        "x": 188,
+        "y": 124,
+        "w": 150,
+        "h": 96,
+        "icon": "pause",
+        "label": {
+          "en": "Withhold",
+          "hi": "रोकना"
+        },
+        "sub": null
+      },
+      {
+        "x": 22,
+        "y": 234,
+        "w": 150,
+        "h": 96,
+        "icon": "loop-back",
+        "label": {
+          "en": "Return",
+          "hi": "लौटाना"
+        },
+        "sub": {
+          "en": "Not a Money Bill",
+          "hi": "धन विधेयक नहीं"
+        }
+      },
+      {
+        "x": 188,
+        "y": 234,
+        "w": 150,
+        "h": 96,
+        "icon": "arrow-right",
+        "label": {
+          "en": "Reserve",
+          "hi": "सुरक्षित"
+        },
+        "sub": {
+          "en": "For the President",
+          "hi": "राष्ट्रपति के लिए"
+        }
+      }
+    ],
+    "endCard": {
+      "x": 22,
+      "y": 124,
+      "w": 316,
+      "h": 206,
+      "title": {
+        "en": "Article 200",
+        "hi": "अनुच्छेद 200"
+      },
+      "subtitle": {
+        "en": "Ek Minute · UPSC Pods",
+        "hi": "एक मिनट · UPSC Pods"
+      }
+    }
+  },
+  "motion": {
+    "transition": "opacity and position, 300 ms, standard easing",
+    "dimmedOpacity": 0.28,
+    "reducedMotion": "show each scene as a still, captions unchanged"
+  },
+  "audio": {
+    "bed": "audio/bed.ogg",
+    "bedGain": 0.7,
+    "motif": "audio/motif.ogg",
+    "motifAtSeconds": 43.4,
+    "narration": null
+  },
+  "scenes": [
+    {
+      "index": 0,
+      "seconds": 6,
+      "caption": {
+        "en": "A bill passed by the state legislature reaches the Governor.",
+        "hi": "राज्य विधानमंडल से पारित विधेयक राज्यपाल के पास पहुँचता है।"
+      },
+      "state": {
+        "bill": {
+          "x": "0->62 over the scene"
+        },
+        "tiles": "hidden",
+        "end": "hidden"
+      }
+    },
+    {
+      "index": 1,
+      "seconds": 6,
+      "caption": {
+        "en": "Under Article 200, the Governor has four options.",
+        "hi": "अनुच्छेद 200 के तहत राज्यपाल के पास चार विकल्प हैं।"
+      },
+      "state": {
+        "tiles": "all shown",
+        "end": "hidden"
+      }
+    },
+    {
+      "index": 2,
+      "seconds": 6,
+      "caption": {
+        "en": "One: give assent. The bill becomes law.",
+        "hi": "पहला: सहमति देना। विधेयक क़ानून बन जाता है।"
+      },
+      "state": {
+        "tiles": "0 highlighted, others dimmed",
+        "tileSub": 0,
+        "legislature": "dimmed"
+      }
+    },
+    {
+      "index": 3,
+      "seconds": 5,
+      "caption": {
+        "en": "Two: withhold assent.",
+        "hi": "दूसरा: सहमति रोक लेना।"
+      },
+      "state": {
+        "tiles": "1 highlighted, others dimmed",
+        "legislature": "dimmed"
+      }
+    },
+    {
+      "index": 4,
+      "seconds": 10,
+      "caption": {
+        "en": "Three: return it for reconsideration, unless it is a Money Bill. If the House passes it again, the Governor cannot withhold assent.",
+        "hi": "तीसरा: पुनर्विचार के लिए लौटाना, अगर वह धन विधेयक न हो। सदन दोबारा पारित कर दे, तो राज्यपाल सहमति नहीं रोक सकते।"
+      },
+      "state": {
+        "tiles": "2 highlighted, others dimmed",
+        "tileSub": 2,
+        "legislature": "dimmed"
+      }
+    },
+    {
+      "index": 5,
+      "seconds": 10,
+      "caption": {
+        "en": "Four: reserve it for the President. This is required if the bill would reduce the powers of the High Court.",
+        "hi": "चौथा: राष्ट्रपति के विचार के लिए सुरक्षित रखना। अगर विधेयक हाई कोर्ट की शक्तियाँ घटाता हो, तो ऐसा करना ज़रूरी है।"
+      },
+      "state": {
+        "tiles": "3 highlighted, others dimmed",
+        "tileSub": 3,
+        "legislature": "dimmed"
+      }
+    },
+    {
+      "index": 6,
+      "seconds": 5,
+      "caption": {
+        "en": "Article 200, in one minute. UPSC Pods.",
+        "hi": "एक मिनट में अनुच्छेद 200। UPSC Pods"
+      },
+      "state": {
+        "everything else": "hidden",
+        "end": "shown",
+        "sound": "bed fades out at 43.4 s, chai motif plays"
+      }
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "note": "Needs editor approval in EN and HI."
+  }
+}

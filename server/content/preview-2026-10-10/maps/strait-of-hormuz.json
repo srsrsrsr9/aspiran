@@ -1,0 +1,95 @@
+{
+  "schema": "upsc-pods/map-card@1",
+  "id": "strait-of-hormuz",
+  "base": "illustrations/hormuz-schematic.svg",
+  "canvas": {
+    "width": 320,
+    "height": 220
+  },
+  "note": "Schematic, not to scale, no national boundaries drawn",
+  "lead": {
+    "en": "The Strait of Hormuz links the Persian Gulf to the Gulf of Oman. It is a chokepoint for oil shipped from the Gulf, including much of India's crude imports.",
+    "hi": "होर्मुज़ जलडमरूमध्य फ़ारस की खाड़ी को ओमान की खाड़ी से जोड़ता है। खाड़ी से जाने वाले तेल के लिए यह एक अहम रास्ता है, जिसमें भारत के कच्चे तेल के आयात का बड़ा हिस्सा भी शामिल है।"
+  },
+  "pins": [
+    {
+      "id": "iran",
+      "x": 196,
+      "y": 52,
+      "en": {
+        "label": "Iran",
+        "fact": "Iran lies along the strait's northern side."
+      },
+      "hi": {
+        "label": "ईरान",
+        "fact": "जलडमरूमध्य के उत्तरी किनारे पर ईरान है।"
+      }
+    },
+    {
+      "id": "musandam",
+      "x": 186,
+      "y": 120,
+      "en": {
+        "label": "Musandam, Oman",
+        "fact": "The southern side is Musandam, a part of Oman separated from the rest of the country by UAE territory."
+      },
+      "hi": {
+        "label": "मुसंदम, ओमान",
+        "fact": "दक्षिणी किनारे पर मुसंदम है, ओमान का वह हिस्सा जो बाक़ी देश से UAE के इलाक़े के कारण अलग है।"
+      }
+    },
+    {
+      "id": "gulf",
+      "x": 92,
+      "y": 120,
+      "en": {
+        "label": "Persian Gulf",
+        "fact": "Water from the Persian Gulf leaves only through this strait."
+      },
+      "hi": {
+        "label": "फ़ारस की खाड़ी",
+        "fact": "फ़ारस की खाड़ी का पानी सिर्फ़ इसी जलडमरूमध्य से बाहर निकलता है।"
+      }
+    },
+    {
+      "id": "oman",
+      "x": 262,
+      "y": 150,
+      "en": {
+        "label": "Gulf of Oman",
+        "fact": "On the other side lies the Gulf of Oman, which opens into the Arabian Sea."
+      },
+      "hi": {
+        "label": "ओमान की खाड़ी",
+        "fact": "दूसरी ओर ओमान की खाड़ी है, जो आगे अरब सागर में खुलती है।"
+      }
+    }
+  ],
+  "find": {
+    "prompt": {
+      "en": "Find it: tap the strait itself.",
+      "hi": "ढूँढिए: ठीक जलडमरूमध्य पर टैप करें।"
+    },
+    "target": {
+      "shape": "ellipse",
+      "cx": 196,
+      "cy": 90,
+      "rx": 16,
+      "ry": 10
+    },
+    "hint": {
+      "en": "Close. Look for the narrowest gap between the two coasts.",
+      "hi": "क़रीब हैं। दोनों तटों के बीच सबसे पतली जगह देखिए।"
+    },
+    "right": {
+      "en": "Found it. That narrow gap is the Strait of Hormuz.",
+      "hi": "मिल गया। यही पतली जगह होर्मुज़ जलडमरूमध्य है।"
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Written for the preview from standard reference facts. Needs editor approval in EN and HI."
+  }
+}

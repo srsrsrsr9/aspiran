@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-illegal-factory-jobs",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "An unlicensed factory that employs a town",
+    "hi": "एक बिना लाइसेंस कारख़ाना, जिस पर क़स्बा निर्भर"
+  },
+  "en": {
+    "scenario": "You are the sub-divisional magistrate of a small town. An inspection shows that the town's largest garment unit has no fire safety clearance and discharges untreated water into a stream. It employs about four hundred workers, most of them women from nearby villages. The owner asks for six months to comply. Workers' representatives meet you and say closure would push families into debt. Local farmers complain that the stream water is harming their crops.",
+    "question": "What would you do, and what values does each choice serve?",
+    "options": [
+      {
+        "label": "Order immediate closure until the unit complies.",
+        "outcome": "Safety and environmental law are upheld at once. Hundreds of workers lose wages, and the owner may challenge the order in court.",
+        "values": "Rule of law over livelihoods"
+      },
+      {
+        "label": "Allow six months, with monthly inspections and strict milestones.",
+        "outcome": "Jobs continue while compliance is monitored. Risk to workers and the stream continues meanwhile, and others may expect similar relaxation.",
+        "values": "Compassion and pragmatism; accepts some interim risk"
+      },
+      {
+        "label": "Partially close unsafe sections; stop discharge immediately, allow phased compliance.",
+        "outcome": "Most jobs continue and the worst harms stop. It needs close supervision, and the owner may find the conditions costly.",
+        "values": "Balance between safety, environment and livelihoods"
+      }
+    ],
+    "reflect": "When the law protects one group of vulnerable people and harms another, how do you decide whose need comes first?"
+  },
+  "hi": {
+    "scenario": "आप एक छोटे क़स्बे के उप-मंडल मजिस्ट्रेट हैं। निरीक्षण में पता चलता है कि क़स्बे की सबसे बड़ी गारमेंट इकाई के पास अग्नि सुरक्षा मंज़ूरी नहीं है और वह बिना उपचारित पानी एक नाले में छोड़ती है। इसमें लगभग चार सौ कामगार हैं, जिनमें अधिकतर पास के गाँवों की महिलाएँ हैं। मालिक नियमों के पालन के लिए छह महीने माँगता है। कामगारों के प्रतिनिधि आपसे मिलकर कहते हैं कि बंद होने से परिवार कर्ज़ में डूब जाएँगे। स्थानीय किसान शिकायत करते हैं कि नाले का पानी उनकी फ़सलों को नुकसान पहुँचा रहा है।",
+    "question": "आप क्या करेंगे, और हर विकल्प किन मूल्यों की सेवा करता है?",
+    "options": [
+      {
+        "label": "नियमों का पालन होने तक तुरंत बंदी का आदेश दें।",
+        "outcome": "सुरक्षा और पर्यावरण क़ानून का तुरंत पालन होता है। सैकड़ों कामगारों की मज़दूरी छिन जाती है, और मालिक अदालत में आदेश को चुनौती दे सकता है।",
+        "values": "आजीविका से ऊपर विधि का शासन"
+      },
+      {
+        "label": "मासिक निरीक्षण और सख़्त समय-सीमाओं के साथ छह महीने दें।",
+        "outcome": "निगरानी के साथ रोज़गार चलता रहता है। इस बीच कामगारों और नाले पर जोखिम बना रहता है, और दूसरे भी ऐसी छूट की उम्मीद कर सकते हैं।",
+        "values": "करुणा और व्यावहारिकता; कुछ अंतरिम जोखिम स्वीकार"
+      },
+      {
+        "label": "असुरक्षित हिस्से बंद करें; निकासी तुरंत रोकें, चरणबद्ध पालन की अनुमति दें।",
+        "outcome": "अधिकतर रोज़गार बचा रहता है और सबसे बड़े नुकसान रुकते हैं। इसके लिए कड़ी निगरानी चाहिए, और मालिक को शर्तें महँगी लग सकती हैं।",
+        "values": "सुरक्षा, पर्यावरण और आजीविका के बीच संतुलन"
+      }
+    ],
+    "reflect": "जब क़ानून एक कमज़ोर वर्ग को बचाए और दूसरे को नुकसान पहुँचाए, तो आप कैसे तय करेंगे कि किसकी ज़रूरत पहले आती है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

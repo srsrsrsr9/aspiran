@@ -1,0 +1,25 @@
+package com.upscpods.app
+
+import java.time.LocalDate
+
+/** Names and numbers that must be easy to change in one place. */
+object Brand {
+    /** Mascot name, pending the ~10-user name test (ux-guide.md, change 4). Always shown with "· AI". */
+    const val MASCOT_SHORT = "Chotu"
+    const val MASCOT = "$MASCOT_SHORT · AI"
+
+    /** Opt-in in My Path only, shown as a date and never red. Placeholder until UPSC's 2027 calendar. */
+    val PRELIMS_DATE: LocalDate = LocalDate.of(2027, 5, 23)
+}
+
+data class Helpline(val label: String, val dial: String)
+
+/** Test-dial every number before shipping (ux-guide.md, "Before shipping"). */
+object Helplines {
+    val teleManas = Helpline("Tele-MANAS 14416", "14416")
+    val all = listOf(
+        teleManas,
+        Helpline("Tele-MANAS 1-800-891-4416", "18008914416"),
+        Helpline("Emergency 112", "112"),
+    )
+}

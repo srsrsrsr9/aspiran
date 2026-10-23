@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A chai cup with steam, inside the 66dp adaptive-icon safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- cup -->
+    <path android:fillColor="#FFF8F3"
+        android:pathData="M34,48 h34 v14 a17,17 0 0 1 -34,0 z" />
+    <!-- handle -->
+    <path android:strokeColor="#FFF8F3" android:strokeWidth="4" android:fillColor="#00000000"
+        android:pathData="M68,52 a7,7 0 0 1 0,14" />
+    <!-- saucer -->
+    <path android:fillColor="#FFDCC0" android:pathData="M28,80 h46 v4 h-46 z" />
+    <!-- steam -->
+    <path android:strokeColor="#FFDCC0" android:strokeWidth="3" android:strokeLineCap="round" android:fillColor="#00000000"
+        android:pathData="M44,42 c-4,-5 4,-8 0,-14 M52,42 c-4,-5 4,-8 0,-14 M60,42 c-4,-5 4,-8 0,-14" />
+</vector>

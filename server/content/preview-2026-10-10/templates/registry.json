@@ -1,0 +1,581 @@
+{
+  "schema": "upsc-pods/template-registry@1",
+  "note": "One entry per content type. Each folder holds schema.json (the full pack), fill.schema.json (what a writer or model fills), config.json (knobs and defaults), brief.md (instructions) and example.json (a valid pack).",
+  "types": [
+    {
+      "key": "chai-pack",
+      "schema": "upsc-pods/chai-pack@1",
+      "title": "Chai cards (daily pack)",
+      "family": "Read",
+      "folder": "content/cards/",
+      "template": "templates/chai-pack/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "explainer",
+      "schema": "upsc-pods/explainer@1",
+      "title": "Ek Minute explainer",
+      "family": "Watch",
+      "folder": "content/explainers/",
+      "template": "templates/explainer/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "reel",
+      "schema": "upsc-pods/reel@1",
+      "title": "Chai in 60 reel",
+      "family": "Watch",
+      "folder": "content/reels/",
+      "template": "templates/reel/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "timeline",
+      "schema": "upsc-pods/timeline@1",
+      "title": "Timeline",
+      "family": "Explore",
+      "folder": "content/timelines/",
+      "template": "templates/timeline/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "match-game",
+      "schema": "upsc-pods/match-game@1",
+      "title": "Match the pairs",
+      "family": "Play",
+      "folder": "content/games/",
+      "template": "templates/match-game/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "quiz-pack",
+      "schema": "upsc-pods/quiz-pack@1",
+      "title": "Quiz night",
+      "family": "Play",
+      "folder": "content/quizzes/",
+      "template": "templates/quiz-pack/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "map-card",
+      "schema": "upsc-pods/map-card@1",
+      "title": "Map card",
+      "family": "Explore",
+      "folder": "content/maps/",
+      "template": "templates/map-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "number-card",
+      "schema": "upsc-pods/number-card@1",
+      "title": "Number sense",
+      "family": "Explore",
+      "folder": "content/numbers/",
+      "template": "templates/number-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "myth-card",
+      "schema": "upsc-pods/myth-card@1",
+      "title": "Forward buster (myth or fact)",
+      "family": "Play",
+      "folder": "content/myths/",
+      "template": "templates/myth-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "two-sides",
+      "schema": "upsc-pods/two-sides@1",
+      "title": "Two sides (debate)",
+      "family": "Think",
+      "folder": "content/debates/",
+      "template": "templates/two-sides/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "winddown",
+      "schema": "upsc-pods/winddown@1",
+      "title": "Close the day (wind-down)",
+      "family": "Rest",
+      "folder": "content/winddown/",
+      "template": "templates/winddown/",
+      "new": false,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "scratch-card",
+      "schema": "upsc-pods/scratch-card@1",
+      "title": "Scratch and reveal",
+      "family": "Play",
+      "folder": "content/scratch/",
+      "template": "templates/scratch-card/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "stamp-trail",
+      "schema": "upsc-pods/stamp-trail@1",
+      "title": "Stamp trail (process journey)",
+      "family": "Play",
+      "folder": "content/journeys/",
+      "template": "templates/stamp-trail/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "radio",
+      "schema": "upsc-pods/radio@1",
+      "title": "Chai stall radio",
+      "family": "Listen",
+      "folder": "content/radio/",
+      "template": "templates/radio/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "assemble",
+      "schema": "upsc-pods/assemble@1",
+      "title": "Snap together (put in order)",
+      "family": "Play",
+      "folder": "content/assemble/",
+      "template": "templates/assemble/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "chain",
+      "schema": "upsc-pods/chain@1",
+      "title": "Domino effect (cause and effect)",
+      "family": "Think",
+      "folder": "content/chains/",
+      "template": "templates/chain/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "then-now",
+      "schema": "upsc-pods/then-now@1",
+      "title": "Then and now slider",
+      "family": "Explore",
+      "folder": "content/thennow/",
+      "template": "templates/then-now/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "postcard",
+      "schema": "upsc-pods/postcard@1",
+      "title": "Postcard from a place",
+      "family": "Listen",
+      "folder": "content/postcards/",
+      "template": "templates/postcard/",
+      "new": true,
+      "engine": null,
+      "wave": 1
+    },
+    {
+      "key": "trap-spotter",
+      "schema": "upsc-pods/trap-spotter@1",
+      "title": "Trap spotter (MCQ with named traps)",
+      "family": "Play",
+      "folder": "content/trap-spotter/",
+      "template": "templates/trap-spotter/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "better-answer",
+      "schema": "upsc-pods/better-answer@1",
+      "title": "Spot the better answer",
+      "family": "Learn",
+      "folder": "content/better-answer/",
+      "template": "templates/better-answer/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "odd-one-out",
+      "schema": "upsc-pods/odd-one-out@1",
+      "title": "Odd one out",
+      "family": "Play",
+      "folder": "content/odd-one-out/",
+      "template": "templates/odd-one-out/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "two-truths",
+      "schema": "upsc-pods/two-truths@1",
+      "title": "Two truths and a lie",
+      "family": "Play",
+      "folder": "content/two-truths/",
+      "template": "templates/two-truths/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "who-am-i",
+      "schema": "upsc-pods/who-am-i@1",
+      "title": "Who am I? (clue by clue)",
+      "family": "Play",
+      "folder": "content/who-am-i/",
+      "template": "templates/who-am-i/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "assertion-reason",
+      "schema": "upsc-pods/assertion-reason@1",
+      "title": "Assertion and reason",
+      "family": "Play",
+      "folder": "content/assertion-reason/",
+      "template": "templates/assertion-reason/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "how-many-correct",
+      "schema": "upsc-pods/how-many-correct@1",
+      "title": "How many of the above?",
+      "family": "Play",
+      "folder": "content/how-many-correct/",
+      "template": "templates/how-many-correct/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2
+    },
+    {
+      "key": "bucket-sort",
+      "schema": "upsc-pods/bucket-sort@1",
+      "title": "Sort into buckets",
+      "family": "Play",
+      "folder": "content/bucket-sort/",
+      "template": "templates/bucket-sort/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2
+    },
+    {
+      "key": "union-state-list",
+      "schema": "upsc-pods/union-state-list@1",
+      "title": "Union, State or Concurrent?",
+      "family": "Play",
+      "folder": "content/union-state-list/",
+      "template": "templates/union-state-list/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2
+    },
+    {
+      "key": "fact-or-opinion",
+      "schema": "upsc-pods/fact-or-opinion@1",
+      "title": "Fact or opinion?",
+      "family": "Think",
+      "folder": "content/fact-or-opinion/",
+      "template": "templates/fact-or-opinion/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2
+    },
+    {
+      "key": "rank-it",
+      "schema": "upsc-pods/rank-it@1",
+      "title": "Rank it",
+      "family": "Play",
+      "folder": "content/rank-it/",
+      "template": "templates/rank-it/",
+      "new": true,
+      "engine": "order",
+      "wave": 2
+    },
+    {
+      "key": "timeline-shuffle",
+      "schema": "upsc-pods/timeline-shuffle@1",
+      "title": "Timeline shuffle",
+      "family": "Play",
+      "folder": "content/timeline-shuffle/",
+      "template": "templates/timeline-shuffle/",
+      "new": true,
+      "engine": "order",
+      "wave": 2
+    },
+    {
+      "key": "pair-up",
+      "schema": "upsc-pods/pair-up@1",
+      "title": "Pair up",
+      "family": "Play",
+      "folder": "content/pair-up/",
+      "template": "templates/pair-up/",
+      "new": true,
+      "engine": "match",
+      "wave": 2
+    },
+    {
+      "key": "committee-match",
+      "schema": "upsc-pods/committee-match@1",
+      "title": "Committee match",
+      "family": "Play",
+      "folder": "content/committee-match/",
+      "template": "templates/committee-match/",
+      "new": true,
+      "engine": "match",
+      "wave": 2
+    },
+    {
+      "key": "flashcards",
+      "schema": "upsc-pods/flashcards@1",
+      "title": "Flashcards",
+      "family": "Revise",
+      "folder": "content/flashcards/",
+      "template": "templates/flashcards/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "mnemonic",
+      "schema": "upsc-pods/mnemonic@1",
+      "title": "Mnemonic card",
+      "family": "Revise",
+      "folder": "content/mnemonic/",
+      "template": "templates/mnemonic/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "acronym-unpack",
+      "schema": "upsc-pods/acronym-unpack@1",
+      "title": "Acronym unpacker",
+      "family": "Revise",
+      "folder": "content/acronym-unpack/",
+      "template": "templates/acronym-unpack/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "landmark-case",
+      "schema": "upsc-pods/landmark-case@1",
+      "title": "Landmark case in 60 seconds",
+      "family": "Learn",
+      "folder": "content/landmark-case/",
+      "template": "templates/landmark-case/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "scheme-snapshot",
+      "schema": "upsc-pods/scheme-snapshot@1",
+      "title": "Scheme snapshot",
+      "family": "Learn",
+      "folder": "content/scheme-snapshot/",
+      "template": "templates/scheme-snapshot/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "index-card",
+      "schema": "upsc-pods/index-card@1",
+      "title": "Index decoder",
+      "family": "Learn",
+      "folder": "content/index-card/",
+      "template": "templates/index-card/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "word-bank",
+      "schema": "upsc-pods/word-bank@1",
+      "title": "Shabd: bilingual terms",
+      "family": "Revise",
+      "folder": "content/word-bank/",
+      "template": "templates/word-bank/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "directive-word",
+      "schema": "upsc-pods/directive-word@1",
+      "title": "Directive words decoded",
+      "family": "Learn",
+      "folder": "content/directive-word/",
+      "template": "templates/directive-word/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "two-levels",
+      "schema": "upsc-pods/two-levels@1",
+      "title": "Explain it twice",
+      "family": "Learn",
+      "folder": "content/two-levels/",
+      "template": "templates/two-levels/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2
+    },
+    {
+      "key": "story-beats",
+      "schema": "upsc-pods/story-beats@1",
+      "title": "Story in four beats",
+      "family": "Listen",
+      "folder": "content/story-beats/",
+      "template": "templates/story-beats/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2
+    },
+    {
+      "key": "ethics-dilemma",
+      "schema": "upsc-pods/ethics-dilemma@1",
+      "title": "Ethics dilemma (GS4)",
+      "family": "Think",
+      "folder": "content/ethics-dilemma/",
+      "template": "templates/ethics-dilemma/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2
+    },
+    {
+      "key": "answer-skeleton",
+      "schema": "upsc-pods/answer-skeleton@1",
+      "title": "Answer skeleton",
+      "family": "Practise",
+      "folder": "content/answer-skeleton/",
+      "template": "templates/answer-skeleton/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2
+    },
+    {
+      "key": "versus",
+      "schema": "upsc-pods/versus@1",
+      "title": "Versus (X vs Y)",
+      "family": "Learn",
+      "folder": "content/versus/",
+      "template": "templates/versus/",
+      "new": true,
+      "engine": "compare",
+      "wave": 2
+    },
+    {
+      "key": "before-after",
+      "schema": "upsc-pods/before-after@1",
+      "title": "Before and after",
+      "family": "Learn",
+      "folder": "content/before-after/",
+      "template": "templates/before-after/",
+      "new": true,
+      "engine": "compare",
+      "wave": 2
+    },
+    {
+      "key": "link-web",
+      "schema": "upsc-pods/link-web@1",
+      "title": "Link web",
+      "family": "Think",
+      "folder": "content/link-web/",
+      "template": "templates/link-web/",
+      "new": true,
+      "engine": "hub",
+      "wave": 2
+    },
+    {
+      "key": "fill-the-gap",
+      "schema": "upsc-pods/fill-the-gap@1",
+      "title": "Fill the gap",
+      "family": "Revise",
+      "folder": "content/fill-the-gap/",
+      "template": "templates/fill-the-gap/",
+      "new": true,
+      "engine": "cloze",
+      "wave": 2
+    }
+  ],
+  "engines": {
+    "choose": {
+      "title": "Choose",
+      "sfx": "Tick on a pick, a santoor chime when right, a soft nudge (never a buzzer) when wrong.",
+      "motion": "The picked option settles in 150 ms; the explanation rises in 200 ms."
+    },
+    "sort": {
+      "title": "Sort into buckets",
+      "sfx": "A whoosh as a card flies to its bucket, a snap when it lands, a nudge if it bounces back.",
+      "motion": "Cards fly to the bucket in 300 ms; a wrong one bounces back with a 400 ms wobble."
+    },
+    "order": {
+      "title": "Put in order",
+      "sfx": "Tap to pick, a wooden snap as each tile locks, a chime when the line is complete.",
+      "motion": "Tiles spring into slots (300 ms, slight overshoot); values count up as each locks."
+    },
+    "match": {
+      "title": "Match pairs",
+      "sfx": "Tick on a match, a nudge on a miss.",
+      "motion": "Matched pairs slide together and fade to the done colour in 250 ms."
+    },
+    "reveal": {
+      "title": "Flip and reveal",
+      "sfx": "A page turn on each flip; a chime on the last card.",
+      "motion": "Cards flip in 400 ms (a swap with reduced motion); lines on the back appear one by one."
+    },
+    "steps": {
+      "title": "Step through",
+      "sfx": "A page turn per beat; an optional soundscape under stories; a chime at the end.",
+      "motion": "Each beat slides in from the right in 300 ms; choices fold open in 200 ms."
+    },
+    "compare": {
+      "title": "Side by side",
+      "sfx": "A tick as each row opens.",
+      "motion": "Rows slide in from both sides and meet in the middle in 250 ms."
+    },
+    "hub": {
+      "title": "Link web",
+      "sfx": "A tick per spoke; a chime when all are open.",
+      "motion": "Spokes draw out from the centre in 300 ms when tapped."
+    },
+    "cloze": {
+      "title": "Fill the gap",
+      "sfx": "A snap when a word drops into a gap, a nudge if it doesn't fit.",
+      "motion": "Words fly into gaps in 250 ms; a wrong one shakes and returns."
+    }
+  }
+}

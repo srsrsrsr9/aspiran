@@ -1,0 +1,958 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "eco-sectional-economy-2",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Economy sectional mock 2",
+    "hi": "अर्थव्यवस्था सेक्शनल मॉक 2"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS3 Indian Economy (Prelims)",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "eco-agriculture-and-land-reforms",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "In the first phase of the Green Revolution in India, from the mid-1960s, the largest gains in output came in:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "wheat",
+          "pulses",
+          "cotton",
+          "jute"
+        ],
+        "why": "High-yielding varieties first transformed wheat, mainly in Punjab, Haryana and western Uttar Pradesh; rice gained more in a later phase. The trap is (b): pulses lagged behind and did not see similar gains."
+      },
+      "hi": {
+        "stem": "1960 के दशक के मध्य से भारत में हरित क्रांति के पहले चरण में उत्पादन में सबसे बड़ी बढ़त किसमें हुई?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "गेहूँ",
+          "दालें",
+          "कपास",
+          "जूट"
+        ],
+        "why": "अधिक उपज वाली किस्मों ने पहले गेहूँ को बदला, मुख्यतः पंजाब, हरियाणा और पश्चिमी उत्तर प्रदेश में; चावल को बड़ा फ़ायदा बाद के चरण में मिला। (b) का जाल है: दालें पीछे रह गईं और उनमें ऐसी बढ़त नहीं हुई।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-agriculture-and-land-reforms",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about land reforms in India after independence:",
+        "statements": [
+          "The abolition of intermediaries such as zamindars was a major land reform measure.",
+          "A land ceiling fixes the maximum amount of land that an individual or family can own.",
+          "Land ceiling laws were enacted by Parliament as one central law applying uniformly to all states."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: land is a State subject, so each state passed its own ceiling laws, with different limits and exemptions. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "स्वतंत्रता के बाद भारत में भूमि सुधारों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "ज़मींदारों जैसे बिचौलियों का उन्मूलन एक प्रमुख भूमि सुधार उपाय था।",
+          "भूमि की अधिकतम सीमा (ceiling) तय करती है कि कोई व्यक्ति या परिवार अधिक से अधिक कितनी भूमि रख सकता है।",
+          "भूमि सीमा क़ानून संसद ने एक केंद्रीय क़ानून के रूप में बनाए, जो सभी राज्यों पर एक जैसा लागू होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: भूमि राज्य का विषय है, इसलिए हर राज्य ने अपने सीमा क़ानून बनाए, अलग-अलग सीमाओं और छूटों के साथ। जाल '1, 2 और 3' है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-agricultural-pricing-and-food-security",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Government of India announces minimum support prices (MSP) for certain crops before the sowing season.",
+          "Statement II: MSPs are recommended by the Commission for Agricultural Costs and Prices (CACP)."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but II does not explain I. Announcing MSP before sowing is meant to assure farmers of a price floor when they choose crops; who recommends the price is a separate fact. The trap is (a)."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: भारत सरकार कुछ फ़सलों के लिए न्यूनतम समर्थन मूल्य (MSP) बुआई के मौसम से पहले घोषित करती है।",
+          "कथन II: MSP की सिफ़ारिश कृषि लागत और मूल्य आयोग (CACP) करता है।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, पर II, I की व्याख्या नहीं करता। बुआई से पहले MSP घोषित करने का मक़सद है कि किसान फ़सल चुनते समय न्यूनतम दाम को लेकर आश्वस्त रहें; सिफ़ारिश कौन करता है, यह अलग तथ्य है। जाल (a) है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-agricultural-pricing-and-food-security",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Buffer stocks of food grains are procured and stored mainly by the Food Corporation of India.",
+          "Ration shops under the Public Distribution System are also called fair price shops.",
+          "The issue price is the price at which the government buys food grains from farmers.",
+          "The Kisan Credit Card scheme provides farmers with short-term credit for their crop needs."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: the issue price is the price at which grains are released from the central pool for distribution; grain is bought from farmers at the procurement price. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "खाद्यान्न के बफ़र स्टॉक की ख़रीद और भंडारण मुख्यतः भारतीय खाद्य निगम करता है।",
+          "सार्वजनिक वितरण प्रणाली की राशन दुकानों को उचित मूल्य की दुकानें भी कहते हैं।",
+          "निर्गम मूल्य (issue price) वह मूल्य है जिस पर सरकार किसानों से खाद्यान्न ख़रीदती है।",
+          "किसान क्रेडिट कार्ड योजना किसानों को फ़सल की ज़रूरतों के लिए अल्पकालिक ऋण देती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है: निर्गम मूल्य वह दाम है जिस पर केंद्रीय पूल से अनाज वितरण के लिए दिया जाता है; किसानों से अनाज ख़रीद मूल्य पर लिया जाता है। जाल 'सभी चार' है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-agricultural-pricing-and-food-security",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Under the National Food Security Act, 2013, up to what share of the rural population is covered for subsidised food grains?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "50 per cent",
+          "60 per cent",
+          "67 per cent",
+          "75 per cent"
+        ],
+        "why": "The Act covers up to 75 per cent of the rural and up to 50 per cent of the urban population. The trap is 67 per cent, which is roughly the overall share of the whole population covered."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय खाद्य सुरक्षा अधिनियम, 2013 के तहत सब्सिडी वाले अनाज के लिए ग्रामीण जनसंख्या का अधिकतम कितना हिस्सा शामिल है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "50 प्रतिशत",
+          "60 प्रतिशत",
+          "67 प्रतिशत",
+          "75 प्रतिशत"
+        ],
+        "why": "अधिनियम ग्रामीण जनसंख्या के 75 प्रतिशत तक और शहरी जनसंख्या के 50 प्रतिशत तक को शामिल करता है। 67 प्रतिशत का जाल है: यह मोटे तौर पर पूरी जनसंख्या में शामिल लोगों का हिस्सा है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "eco-allied-sectors",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Operation Flood was launched by NABARD in 1970.",
+          "The Yellow Revolution refers to the drive to raise oilseed production.",
+          "The Blue Revolution refers to the growth of fisheries.",
+          "Operation Flood aimed to link rural milk producers with urban consumers through cooperatives."
+        ],
+        "why": "Option (a) is the answer: Operation Flood was launched by the National Dairy Development Board (NDDB) in 1970; NABARD was set up only in 1982. The tempting trap is (b), which is true."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "ऑपरेशन फ़्लड 1970 में NABARD ने शुरू किया।",
+          "पीली क्रांति तिलहन उत्पादन बढ़ाने के अभियान को कहते हैं।",
+          "नीली क्रांति मत्स्य पालन के विकास को कहते हैं।",
+          "ऑपरेशन फ़्लड का लक्ष्य सहकारी संस्थाओं के ज़रिए ग्रामीण दूध उत्पादकों को शहरी उपभोक्ताओं से जोड़ना था।"
+        ],
+        "why": "उत्तर (a) है: ऑपरेशन फ़्लड 1970 में राष्ट्रीय डेयरी विकास बोर्ड (NDDB) ने शुरू किया; NABARD तो 1982 में बना। (b) का जाल लुभाता है, पर वह सही है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-industrial-policy",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about industrial policy in India:",
+        "statements": [
+          "The Industrial Policy Resolution of 1956 classified industries into three categories.",
+          "The New Industrial Policy of 1991 increased the number of industries reserved for the public sector.",
+          "The Competition Act, 2002 replaced the Monopolies and Restrictive Trade Practices (MRTP) Act."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 3 only"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: the 1991 policy sharply cut the list of industries reserved for the public sector and ended licensing for most industries. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "भारत की औद्योगिक नीति के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "1956 के औद्योगिक नीति प्रस्ताव ने उद्योगों को तीन श्रेणियों में बाँटा।",
+          "1991 की नई औद्योगिक नीति ने सार्वजनिक क्षेत्र के लिए आरक्षित उद्योगों की संख्या बढ़ाई।",
+          "प्रतिस्पर्धा अधिनियम, 2002 ने एकाधिकार और प्रतिबंधात्मक व्यापार व्यवहार (MRTP) अधिनियम की जगह ली।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: 1991 की नीति ने सार्वजनिक क्षेत्र के लिए आरक्षित उद्योगों की सूची बहुत घटाई और ज़्यादातर उद्योगों के लिए लाइसेंस ख़त्म किया। जाल '1, 2 और 3' है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-industrial-policy",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The Index of Industrial Production (IIP) for India is compiled and released by:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "the Reserve Bank of India",
+          "the National Statistics Office (NSO), Ministry of Statistics and Programme Implementation",
+          "the Office of the Economic Adviser, Department for Promotion of Industry and Internal Trade",
+          "NITI Aayog"
+        ],
+        "why": "The NSO under MoSPI releases the IIP. The trap is (c): the Office of the Economic Adviser in DPIIT releases the Index of Eight Core Industries, which is often reported alongside the IIP."
+      },
+      "hi": {
+        "stem": "भारत का औद्योगिक उत्पादन सूचकांक (IIP) कौन संकलित और जारी करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भारतीय रिज़र्व बैंक",
+          "राष्ट्रीय सांख्यिकी कार्यालय (NSO), सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय",
+          "आर्थिक सलाहकार का कार्यालय, उद्योग संवर्धन और आंतरिक व्यापार विभाग",
+          "नीति आयोग"
+        ],
+        "why": "IIP, MoSPI के अधीन NSO जारी करता है। (c) का जाल है: DPIIT में आर्थिक सलाहकार का कार्यालय आठ प्रमुख उद्योगों का सूचकांक जारी करता है, जिसकी ख़बर अक्सर IIP के साथ आती है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-msme-and-public-sector",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Small-scale industries generally create more employment per unit of capital invested than large industries.",
+          "Statement II: Small-scale industries generally use more labour-intensive methods of production."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: labour-intensive methods mean more workers for the same capital, which is why small industries were promoted for jobs. The trap is (b), treating the two as unrelated facts."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: लघु उद्योग आम तौर पर बड़े उद्योगों की तुलना में लगाई गई पूँजी की प्रति इकाई अधिक रोज़गार देते हैं।",
+          "कथन II: लघु उद्योग आम तौर पर उत्पादन के अधिक श्रम-प्रधान तरीक़े अपनाते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: श्रम-प्रधान तरीक़ों का मतलब है उतनी ही पूँजी में ज़्यादा कामगार, इसीलिए रोज़गार के लिए लघु उद्योगों को बढ़ावा दिया गया। (b) का जाल दोनों को असंबंधित तथ्य मान लेता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "eco-msme-and-public-sector",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of terms and their meanings:",
+        "statements": [
+          "Disinvestment – sale of part of the government's equity in public sector enterprises",
+          "Strategic sale – transfer of management control along with a block of government shares",
+          "Navratna status – given to loss-making public sector enterprises to help them recover",
+          "Greenfield investment – acquiring an existing company or plant"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. Navratna status gives more financial autonomy to well-performing public sector enterprises, not loss-making ones. Greenfield investment builds new facilities from scratch; buying existing ones is brownfield investment. The trap is 'Only three'."
+      },
+      "hi": {
+        "stem": "शब्दों और उनके अर्थों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "विनिवेश – सार्वजनिक उपक्रमों में सरकार की इक्विटी के एक हिस्से की बिक्री",
+          "रणनीतिक बिक्री – सरकारी शेयरों के एक बड़े हिस्से के साथ प्रबंधन नियंत्रण का हस्तांतरण",
+          "नवरत्न दर्जा – घाटे वाले सार्वजनिक उपक्रमों को उबरने में मदद के लिए दिया जाता है",
+          "ग्रीनफ़ील्ड निवेश – किसी मौजूदा कंपनी या संयंत्र का अधिग्रहण"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। नवरत्न दर्जा अच्छा प्रदर्शन करने वाले सार्वजनिक उपक्रमों को ज़्यादा वित्तीय स्वायत्तता देता है, घाटे वालों को नहीं। ग्रीनफ़ील्ड निवेश नई सुविधाएँ शुरू से बनाता है; मौजूदा को ख़रीदना ब्राउनफ़ील्ड निवेश है। जाल 'केवल तीन' है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-msme-and-public-sector",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Micro, Small and Medium Enterprises Development Act, which first gave a legal framework for the 'medium' category, was enacted in:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1991",
+          "2002",
+          "2006",
+          "2016"
+        ],
+        "why": "The MSMED Act was passed in 2006. The trap is 1991, the year of the New Industrial Policy, which brought changes for small-scale industry but no MSME law."
+      },
+      "hi": {
+        "stem": "सूक्ष्म, लघु और मध्यम उद्यम विकास अधिनियम, जिसने पहली बार 'मध्यम' श्रेणी को क़ानूनी ढाँचा दिया, किस वर्ष बना?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1991",
+          "2002",
+          "2006",
+          "2016"
+        ],
+        "why": "MSMED अधिनियम 2006 में पारित हुआ। 1991 का जाल है: उस साल की नई औद्योगिक नीति ने लघु उद्योगों के लिए बदलाव किए, पर MSME क़ानून नहीं बना।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-exchange-rate-and-convertibility",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the exchange rate of the rupee:",
+        "statements": [
+          "When the rupee depreciates against the dollar, one dollar buys more rupees than before.",
+          "Depreciation of the rupee tends to make Indian exports cheaper for foreign buyers.",
+          "Devaluation means a fall in a currency's value caused by market forces under a floating exchange rate."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: devaluation is a deliberate official cut in value under a fixed or pegged system; a market-driven fall is depreciation. The trap is '1, 2 and 3', using the two words as synonyms."
+      },
+      "hi": {
+        "stem": "रुपये की विनिमय दर के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "डॉलर के मुक़ाबले रुपये का मूल्यह्रास (depreciation) होने पर एक डॉलर में पहले से ज़्यादा रुपये मिलते हैं।",
+          "रुपये का मूल्यह्रास भारतीय निर्यात को विदेशी ख़रीदारों के लिए सस्ता बनाता है।",
+          "अवमूल्यन (devaluation) का अर्थ है लचीली विनिमय दर में बाज़ार की ताक़तों से मुद्रा के मूल्य में गिरावट।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: अवमूल्यन स्थिर या बँधी दर वाली व्यवस्था में सरकार की ओर से जान-बूझकर की गई कटौती है; बाज़ार से आई गिरावट मूल्यह्रास है। '1, 2 और 3' का जाल दोनों शब्दों को एक मान लेने से लगता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-exchange-rate-and-convertibility",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The rupee was devalued in 1991 as part of India's response to an economic crisis.",
+          "Statement II: In 1991, India faced a balance of payments crisis, with foreign exchange reserves barely enough to pay for about two weeks of imports."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: the balance of payments crisis led to devaluation, along with wider reforms and IMF support. The trap is (b), which misses that the reserve crisis was the trigger."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: 1991 में आर्थिक संकट से निपटने के उपायों के तहत रुपये का अवमूल्यन किया गया।",
+          "कथन II: 1991 में भारत भुगतान संतुलन संकट में था, और विदेशी मुद्रा भंडार मुश्किल से लगभग दो हफ़्ते के आयात के लिए काफ़ी था।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: भुगतान संतुलन संकट के कारण ही अवमूल्यन हुआ, साथ में बड़े सुधार और IMF की मदद आई। (b) का जाल यह भूल जाता है कि भंडार का संकट ही इसकी वजह था।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-exchange-rate-and-convertibility",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements about the convertibility of the Indian rupee is correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The rupee has been fully convertible on the capital account since 1991.",
+          "The rupee is convertible on the current account.",
+          "The rupee is not convertible even for payments for imports of goods.",
+          "The rupee has been fully convertible on both current and capital accounts since 2000."
+        ],
+        "why": "India made the rupee convertible on the current account in 1994; capital account convertibility is still partial. The trap is (a), since 1991 began the reforms but did not bring capital account convertibility."
+      },
+      "hi": {
+        "stem": "भारतीय रुपये की परिवर्तनीयता के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "रुपया 1991 से पूँजी खाते पर पूरी तरह परिवर्तनीय है।",
+          "रुपया चालू खाते पर परिवर्तनीय है।",
+          "रुपया वस्तुओं के आयात के भुगतान के लिए भी परिवर्तनीय नहीं है।",
+          "रुपया 2000 से चालू और पूँजी, दोनों खातों पर पूरी तरह परिवर्तनीय है।"
+        ],
+        "why": "भारत ने 1994 में रुपये को चालू खाते पर परिवर्तनीय बनाया; पूँजी खाते पर परिवर्तनीयता अब भी आंशिक है। (a) का जाल है: 1991 से सुधार शुरू हुए, पर पूँजी खाते की परिवर्तनीयता नहीं आई।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "eco-external-sector-and-trade",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (term) with List II (meaning) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Special Economic Zone",
+          "B. External Commercial Borrowing",
+          "C. American Depository Receipt",
+          "D. Hot money",
+          "1. Short-term capital that moves quickly between countries for gains",
+          "2. Instrument issued in the US against shares of a non-US company",
+          "3. Enclave treated as foreign territory for trade and customs",
+          "4. Loans raised by Indian entities from non-resident lenders"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-2, C-4, D-1",
+          "A-3, B-4, C-2, D-1"
+        ],
+        "why": "An SEZ is treated as foreign territory for trade, ECBs are loans from non-resident lenders, an ADR is issued in the US against foreign shares, and hot money is short-term capital. The trap is (a), which swaps SEZ and ECB."
+      },
+      "hi": {
+        "stem": "सूची I (शब्द) को सूची II (अर्थ) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. विशेष आर्थिक क्षेत्र (SEZ)",
+          "B. बाह्य वाणिज्यिक उधार (ECB)",
+          "C. अमेरिकन डिपॉज़िटरी रिसीट (ADR)",
+          "D. हॉट मनी",
+          "1. मुनाफ़े के लिए देशों के बीच तेज़ी से आने-जाने वाली अल्पकालिक पूँजी",
+          "2. किसी गैर-अमेरिकी कंपनी के शेयरों के बदले अमेरिका में जारी साधन",
+          "3. व्यापार और सीमा शुल्क के लिए विदेशी क्षेत्र माना जाने वाला इलाक़ा",
+          "4. भारतीय संस्थाओं द्वारा अनिवासी ऋणदाताओं से लिए गए ऋण"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-2, C-4, D-1",
+          "A-3, B-4, C-2, D-1"
+        ],
+        "why": "SEZ को व्यापार के लिए विदेशी क्षेत्र माना जाता है, ECB अनिवासी ऋणदाताओं से लिए ऋण हैं, ADR विदेशी शेयरों के बदले अमेरिका में जारी होती है, और हॉट मनी अल्पकालिक पूँजी है। (a) का जाल SEZ और ECB को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-external-sector-and-trade",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "India's foreign exchange reserves are held and managed by the Reserve Bank of India.",
+          "They include foreign currency assets, gold, Special Drawing Rights and the reserve tranche position in the IMF.",
+          "Other things being equal, a rise in imports adds to foreign exchange reserves.",
+          "An anti-dumping duty can be imposed on imports sold below their normal value in the exporting country."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: paying for imports uses up foreign exchange, so a rise in imports, other things equal, reduces reserves. The trap is 'All four', from reading quickly."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत का विदेशी मुद्रा भंडार भारतीय रिज़र्व बैंक रखता और प्रबंधित करता है।",
+          "इसमें विदेशी मुद्रा परिसंपत्तियाँ, सोना, विशेष आहरण अधिकार (SDR) और IMF में रिज़र्व ट्रांश स्थिति शामिल हैं।",
+          "अन्य बातें समान रहें तो आयात बढ़ने से विदेशी मुद्रा भंडार बढ़ता है।",
+          "निर्यातक देश में अपने सामान्य मूल्य से कम पर बेचे गए आयात पर एंटी-डंपिंग शुल्क लगाया जा सकता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है: आयात का भुगतान विदेशी मुद्रा से होता है, इसलिए अन्य बातें समान रहें तो आयात बढ़ने से भंडार घटता है। 'सभी चार' का जाल जल्दी में पढ़ने से लगता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-inflation-concepts",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about inflation:",
+        "statements": [
+          "Demand-pull inflation arises when aggregate demand runs ahead of the supply of goods and services.",
+          "Cost-push inflation arises from a rise in input costs, such as wages or fuel prices.",
+          "Inflation reduces the purchasing power of money."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The trap is '1 and 2 only', from treating statement 3 as a separate idea; a fall in the purchasing power of money is simply what a rising price level means."
+      },
+      "hi": {
+        "stem": "मुद्रास्फीति के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "माँग-जनित (demand-pull) मुद्रास्फीति तब होती है जब कुल माँग वस्तुओं और सेवाओं की आपूर्ति से आगे निकल जाती है।",
+          "लागत-जनित (cost-push) मुद्रास्फीति मज़दूरी या ईंधन जैसी लागतें बढ़ने से होती है।",
+          "मुद्रास्फीति पैसे की क्रय शक्ति घटाती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। 'केवल 1 और 2' का जाल कथन 3 को अलग विचार मान लेने से लगता है; पैसे की क्रय शक्ति घटना ही तो बढ़ते मूल्य स्तर का मतलब है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "eco-inflation-concepts",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Unanticipated inflation tends to hurt people who live on fixed money incomes, such as pensioners.",
+          "Statement II: The money incomes of such people do not rise with prices, so their real incomes fall.",
+          "Statement III: Inflation raises the real value of the debts owed by borrowers."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Only II is correct, and it explains I. III is wrong: inflation lowers the real value of debts, which helps borrowers and hurts lenders. The trap is (a), from assuming inflation makes everything costlier, including debts."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: अप्रत्याशित मुद्रास्फीति आम तौर पर स्थिर मौद्रिक आय पर जीने वालों, जैसे पेंशनभोगियों, को नुक़सान पहुँचाती है।",
+          "कथन II: ऐसे लोगों की मौद्रिक आय क़ीमतों के साथ नहीं बढ़ती, इसलिए उनकी वास्तविक आय घट जाती है।",
+          "कथन III: मुद्रास्फीति उधार लेने वालों के कर्ज़ का वास्तविक मूल्य बढ़ा देती है।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "केवल II सही है, और वही I की व्याख्या करता है। III गलत है: मुद्रास्फीति कर्ज़ का वास्तविक मूल्य घटाती है, जिससे उधार लेने वालों को फ़ायदा और देने वालों को नुक़सान होता है। (a) का जाल यह मान लेना है कि महँगाई में कर्ज़ भी महँगा हो जाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-inflation-concepts",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Phillips curve shows the relationship between:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "inflation and unemployment",
+          "tax rates and tax revenue",
+          "income levels and income inequality",
+          "interest rates and investment"
+        ],
+        "why": "The Phillips curve shows an inverse relationship between inflation and unemployment in the short run. The trap is (b), which describes the Laffer curve, another curve named after an economist."
+      },
+      "hi": {
+        "stem": "फ़िलिप्स वक्र किनके बीच संबंध दिखाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मुद्रास्फीति और बेरोज़गारी",
+          "कर दरें और कर राजस्व",
+          "आय स्तर और आय असमानता",
+          "ब्याज दरें और निवेश"
+        ],
+        "why": "फ़िलिप्स वक्र अल्पकाल में मुद्रास्फीति और बेरोज़गारी के बीच उलटा संबंध दिखाता है। (b) का जाल है: वह लैफ़र वक्र है, जो एक और अर्थशास्त्री के नाम पर है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-government-budget-concepts",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the government budget:",
+        "statements": [
+          "Revenue receipts neither create a liability nor reduce the assets of the government.",
+          "Proceeds from disinvestment are capital receipts.",
+          "Interest payments on government debt are capital expenditure."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: interest payments are revenue expenditure, as they create no asset; repayment of the loan principal is capital expenditure. The trap is '1, 2 and 3', mixing up interest and principal."
+      },
+      "hi": {
+        "stem": "सरकारी बजट के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राजस्व प्राप्तियाँ न तो सरकार की कोई देनदारी बनाती हैं और न उसकी परिसंपत्तियाँ घटाती हैं।",
+          "विनिवेश से मिली राशि पूँजीगत प्राप्ति है।",
+          "सरकारी कर्ज़ पर ब्याज भुगतान पूँजीगत व्यय है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: ब्याज भुगतान राजस्व व्यय है, क्योंकि इससे कोई परिसंपत्ति नहीं बनती; कर्ज़ के मूलधन की अदायगी पूँजीगत व्यय है। '1, 2 और 3' का जाल ब्याज और मूलधन को मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "eco-taxation-concepts",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of tax terms and their meanings:",
+        "statements": [
+          "Progressive tax – the tax rate rises as income rises",
+          "Regressive tax – the burden falls relatively more on those with lower incomes",
+          "Proportional tax – the same rate applies at all levels of income",
+          "Ad valorem duty – a fixed amount of tax per unit of the good"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. An ad valorem duty is a percentage of the value of the good; a fixed amount per unit is a specific duty. The trap is 'All four', as both are types of duty."
+      },
+      "hi": {
+        "stem": "कर से जुड़े शब्दों और उनके अर्थों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "प्रगतिशील कर – आय बढ़ने के साथ कर की दर बढ़ती है",
+          "प्रतिगामी कर – बोझ कम आय वालों पर अपेक्षाकृत अधिक पड़ता है",
+          "आनुपातिक कर – आय के हर स्तर पर एक ही दर लागू होती है",
+          "यथामूल्य (ad valorem) शुल्क – वस्तु की प्रति इकाई एक तय राशि का कर"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 3 सही हैं। यथामूल्य शुल्क वस्तु के मूल्य का एक प्रतिशत होता है; प्रति इकाई तय राशि विशिष्ट (specific) शुल्क है। 'सभी चार' का जाल इसलिए लगता है क्योंकि दोनों शुल्क के ही प्रकार हैं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-government-budget-concepts",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is a non-tax revenue receipt of the Union government?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Corporation tax",
+          "Customs duty",
+          "Goods and Services Tax",
+          "Dividends and profits from public sector enterprises"
+        ],
+        "why": "Dividends and profits from public sector enterprises are non-tax revenue, along with interest receipts and fees. The trap is (b): customs duty is collected at the border, but it is still a tax."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सी केंद्र सरकार की गैर-कर राजस्व प्राप्ति है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "निगम कर",
+          "सीमा शुल्क",
+          "वस्तु एवं सेवा कर",
+          "सार्वजनिक उपक्रमों से लाभांश और मुनाफ़ा"
+        ],
+        "why": "सार्वजनिक उपक्रमों से मिला लाभांश और मुनाफ़ा गैर-कर राजस्व है, साथ ही ब्याज प्राप्तियाँ और फ़ीस भी। (b) का जाल है: सीमा शुल्क सीमा पर वसूला जाता है, पर फिर भी वह कर ही है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "eco-government-budget-concepts",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following statements about government borrowing and debt is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Treasury bills and dated securities form part of the government's internal debt.",
+          "Repayment of loans by the government is revenue expenditure.",
+          "External debt includes loans from foreign governments and international institutions.",
+          "Heavy government borrowing can push up interest rates and crowd out private investment."
+        ],
+        "why": "Option (b) is the answer: repaying a loan reduces a liability, so it is capital expenditure. The tempting trap is (d), which sounds like an opinion but describes the standard idea of crowding out."
+      },
+      "hi": {
+        "stem": "सरकारी उधार और कर्ज़ के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "ट्रेज़री बिल और दिनांकित प्रतिभूतियाँ सरकार के आंतरिक ऋण का हिस्सा हैं।",
+          "सरकार द्वारा ऋणों की अदायगी राजस्व व्यय है।",
+          "बाहरी ऋण में विदेशी सरकारों और अंतरराष्ट्रीय संस्थाओं से लिए गए ऋण शामिल हैं।",
+          "सरकार का भारी उधार ब्याज दरें बढ़ा सकता है और निजी निवेश को बाहर धकेल (crowd out) सकता है।"
+        ],
+        "why": "उत्तर (b) है: ऋण चुकाने से देनदारी घटती है, इसलिए यह पूँजीगत व्यय है। (d) का जाल लुभाता है, क्योंकि यह राय जैसा लगता है, पर यह 'क्राउडिंग आउट' का मानक विचार है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-government-budget-concepts",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Subsidies paid by the government are treated as revenue expenditure.",
+          "Statement II: Subsidies neither create assets for the government nor reduce its liabilities."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: expenditure that creates no asset and reduces no liability is classed as revenue expenditure. The trap is (b), missing that this test is exactly how the two kinds of spending are told apart."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: सरकार द्वारा दी गई सब्सिडी राजस्व व्यय मानी जाती है।",
+          "कथन II: सब्सिडी से न तो सरकार की कोई परिसंपत्ति बनती है और न उसकी देनदारी घटती है।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: जो ख़र्च न परिसंपत्ति बनाए, न देनदारी घटाए, वह राजस्व व्यय गिना जाता है। (b) का जाल यह भूल जाता है कि दोनों तरह के ख़र्च में फ़र्क़ इसी कसौटी से होता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-agricultural-pricing-and-food-security",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the National Food Security Act, 2013:",
+        "statements": [
+          "Households under the Antyodaya Anna Yojana are entitled to 35 kg of food grains per household per month.",
+          "Priority households are entitled to 5 kg of food grains per person per month.",
+          "The eldest woman of a household, aged 18 or above, is to be treated as its head for issuing ration cards.",
+          "Pregnant women and lactating mothers are entitled to maternity benefit of not less than Rs 6,000."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. The trap is 'Only three', from doubting the women-centred provisions; the Act makes the eldest adult woman the head of household and provides maternity benefit of at least Rs 6,000."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय खाद्य सुरक्षा अधिनियम, 2013 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "अंत्योदय अन्न योजना के परिवार प्रति परिवार प्रति माह 35 किलो अनाज के हक़दार हैं।",
+          "प्राथमिकता वाले परिवार प्रति व्यक्ति प्रति माह 5 किलो अनाज के हक़दार हैं।",
+          "राशन कार्ड जारी करने के लिए परिवार की 18 वर्ष या उससे अधिक आयु की सबसे बड़ी महिला को परिवार का मुखिया माना जाना है।",
+          "गर्भवती महिलाएँ और स्तनपान कराने वाली माताएँ कम से कम 6,000 रुपये के मातृत्व लाभ की हक़दार हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। 'केवल तीन' का जाल महिलाओं से जुड़े प्रावधानों पर शक करने से लगता है; अधिनियम सबसे बड़ी वयस्क महिला को परिवार का मुखिया बनाता है और कम से कम 6,000 रुपये का मातृत्व लाभ देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Indian Economic Development; NCERT Class XII Introductory Macroeconomics; National Food Security Act, 2013",
+    "hi": "NCERT कक्षा XII भारतीय अर्थव्यवस्था का विकास; NCERT कक्षा XII समष्टि अर्थशास्त्र: एक परिचय; राष्ट्रीय खाद्य सुरक्षा अधिनियम, 2013"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

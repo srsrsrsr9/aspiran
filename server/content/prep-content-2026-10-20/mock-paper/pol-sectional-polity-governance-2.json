@@ -1,0 +1,982 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "pol-sectional-polity-governance-2",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Polity and governance mock 2",
+    "hi": "राजव्यवस्था और शासन मॉक 2"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS2 Polity and Governance",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "pol-parliament",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about a no-confidence motion in Parliament:",
+        "statements": [
+          "It can be moved only in the Lok Sabha.",
+          "It must state the reasons for which it is moved.",
+          "It needs the support of at least 50 members to be admitted."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct: the motion is moved only in the Lok Sabha and needs 50 members to back it. Statement 2 is wrong: a no-confidence motion need not give reasons; a censure motion must. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "संसद में अविश्वास प्रस्ताव के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसे केवल लोकसभा में पेश किया जा सकता है।",
+          "इसमें उन कारणों का उल्लेख करना ज़रूरी है जिनके लिए इसे पेश किया गया है।",
+          "इसे स्वीकार किए जाने के लिए कम से कम 50 सदस्यों का समर्थन चाहिए।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं: यह प्रस्ताव केवल लोकसभा में आता है और इसके लिए 50 सदस्यों का समर्थन चाहिए। कथन 2 गलत है: अविश्वास प्रस्ताव में कारण बताना ज़रूरी नहीं, निंदा प्रस्ताव (censure motion) में ज़रूरी है। '1, 2 और 3' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-parliament",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following parliamentary committees has all its members from the Lok Sabha only?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Public Accounts Committee",
+          "Committee on Public Undertakings",
+          "Estimates Committee",
+          "Joint Committee on Offices of Profit"
+        ],
+        "why": "The Estimates Committee has 30 members, all from the Lok Sabha. The trap is the Public Accounts Committee: most of its 22 members are from the Lok Sabha, but 7 come from the Rajya Sabha."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से किस संसदीय समिति के सभी सदस्य केवल लोकसभा से होते हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "लोक लेखा समिति",
+          "सार्वजनिक उपक्रम समिति",
+          "प्राक्कलन समिति",
+          "लाभ के पदों पर संयुक्त समिति"
+        ],
+        "why": "प्राक्कलन समिति (Estimates Committee) में 30 सदस्य होते हैं, और सभी लोकसभा से आते हैं। जाल लोक लेखा समिति का है: उसके 22 में से ज़्यादातर सदस्य लोकसभा से हैं, पर 7 सदस्य राज्यसभा से भी आते हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-parliament",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Union Budget:",
+        "statements": [
+          "Article 112 calls it the 'annual financial statement'; the word 'budget' is not used there.",
+          "The Lok Sabha can reduce a demand for grant, but cannot increase it.",
+          "Expenditure charged on the Consolidated Fund of India, such as the President's emoluments, is put to vote in the Lok Sabha.",
+          "No money can be withdrawn from the Consolidated Fund of India except under an appropriation made by law."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only three",
+          "Only one",
+          "Only two",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: charged expenditure, such as the President's emoluments, can be discussed in Parliament but is not put to vote in the Lok Sabha. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "केंद्रीय बजट के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 112 इसे 'वार्षिक वित्तीय विवरण' कहता है; वहाँ 'बजट' शब्द का प्रयोग नहीं हुआ है।",
+          "लोकसभा किसी अनुदान माँग को घटा सकती है, पर बढ़ा नहीं सकती।",
+          "भारत की संचित निधि पर भारित व्यय, जैसे राष्ट्रपति की उपलब्धियाँ, लोकसभा में मतदान के लिए रखा जाता है।",
+          "विधि द्वारा किए गए विनियोग के बिना भारत की संचित निधि से कोई धन नहीं निकाला जा सकता।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल तीन",
+          "केवल एक",
+          "केवल दो",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है: भारित व्यय, जैसे राष्ट्रपति की उपलब्धियाँ, पर संसद में चर्चा तो हो सकती है, पर लोकसभा में उस पर मतदान नहीं होता। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-parliament",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (parliamentary device) with List II (what it does) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Policy cut motion",
+          "B. Economy cut motion",
+          "C. Token cut motion",
+          "D. Calling attention motion",
+          "1. Reduces the demand by Rs 100",
+          "2. Draws a minister's attention to a matter of urgent public importance",
+          "3. Reduces the demand to Re 1",
+          "4. Reduces the demand by a specified amount"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "Policy cut: demand reduced to Re 1 (3). Economy cut: by a specified amount (4). Token cut: by Rs 100 (1). Calling attention: an urgent matter raised with a minister (2). The trap is (a), which swaps policy and economy cuts."
+      },
+      "hi": {
+        "stem": "सूची I (संसदीय प्रस्ताव) को सूची II (उसका काम) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. नीति कटौती प्रस्ताव",
+          "B. मितव्ययिता कटौती प्रस्ताव",
+          "C. सांकेतिक कटौती प्रस्ताव",
+          "D. ध्यानाकर्षण प्रस्ताव",
+          "1. माँग को 100 रुपये घटाता है",
+          "2. अविलंबनीय लोक महत्व के विषय की ओर किसी मंत्री का ध्यान खींचता है",
+          "3. माँग को घटाकर 1 रुपया कर देता है",
+          "4. माँग को एक निश्चित राशि से घटाता है"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "नीति कटौती माँग को 1 रुपया कर देती है (3), मितव्ययिता कटौती एक निश्चित राशि घटाती है (4), सांकेतिक कटौती 100 रुपये घटाती है (1), और ध्यानाकर्षण प्रस्ताव किसी ज़रूरी मुद्दे पर मंत्री का ध्यान खींचता है (2)। जाल पहला विकल्प है, जो नीति और मितव्ययिता कटौती को उलट देता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-parliament",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Constitution makes no provision for a joint sitting of the two Houses on a Money Bill.",
+          "Statement II: The Rajya Sabha cannot reject or amend a Money Bill, so no deadlock between the Houses can arise on it."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: the Rajya Sabha can only recommend changes within 14 days, which the Lok Sabha may accept or reject, so no deadlock arises and no joint sitting is needed. The trap is (b), which misses this link."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: संविधान में धन विधेयक पर दोनों सदनों की संयुक्त बैठक का कोई प्रावधान नहीं है।",
+          "कथन II: राज्यसभा धन विधेयक को न अस्वीकार कर सकती है, न उसमें संशोधन कर सकती है, इसलिए उस पर सदनों में गतिरोध पैदा नहीं हो सकता।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, और II, I की व्याख्या करता है: राज्यसभा 14 दिन के भीतर केवल सिफ़ारिशें कर सकती है, जिन्हें लोकसभा माने या न माने, इसलिए गतिरोध नहीं बनता और संयुक्त बैठक की ज़रूरत नहीं पड़ती। जाल दूसरा विकल्प है, जो यह कड़ी छोड़ देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-state-exec",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Legislative Council of a state:",
+        "statements": [
+          "Parliament can create or abolish it by law if the Legislative Assembly passes a resolution to that effect by a special majority.",
+          "Its members are elected for six years, and one-third of them retire every second year.",
+          "A Money Bill can be introduced in it."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct: Article 169 needs an Assembly resolution by special majority, then a law of Parliament, and members serve six years. Statement 3 is wrong: a Money Bill starts only in the Assembly. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "किसी राज्य की विधान परिषद के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "यदि विधानसभा विशेष बहुमत से इस आशय का संकल्प पारित करे, तो संसद विधि द्वारा इसे बना या समाप्त कर सकती है।",
+          "इसके सदस्य छह वर्ष के लिए चुने जाते हैं, और हर दूसरे वर्ष एक-तिहाई सदस्य सेवानिवृत्त होते हैं।",
+          "इसमें धन विधेयक पेश किया जा सकता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: अनुच्छेद 169 के तहत पहले विधानसभा का विशेष बहुमत से संकल्प, फिर संसद का कानून चाहिए, और सदस्यों का कार्यकाल छह वर्ष है। कथन 3 गलत है: धन विधेयक केवल विधानसभा में पेश होता है। '1, 2 और 3' के जाल से बचिए।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-state-exec",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which of the following is NOT correct about a state legislature that has two Houses?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Legislative Council cannot have more than one-third of the Assembly's strength.",
+          "About one-third of the Council's members are elected by members of the Assembly.",
+          "The Council can hold up an ordinary bill for at most four months in all.",
+          "A deadlock between the two Houses is resolved by a joint sitting."
+        ],
+        "why": "Option (d) is the answer: a state legislature has no joint sitting, and the Assembly's will prevails. The tempting trap is (c), which sounds too short but is true: the Council can hold a bill for three months, and then one more month."
+      },
+      "hi": {
+        "stem": "दो सदनों वाले राज्य विधानमंडल के बारे में निम्नलिखित में से कौन-सा सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "विधान परिषद की सदस्य संख्या विधानसभा की एक-तिहाई से अधिक नहीं हो सकती।",
+          "परिषद के लगभग एक-तिहाई सदस्य विधानसभा के सदस्यों द्वारा चुने जाते हैं।",
+          "परिषद किसी साधारण विधेयक को कुल मिलाकर अधिकतम चार महीने रोक सकती है।",
+          "दोनों सदनों के बीच गतिरोध संयुक्त बैठक से सुलझाया जाता है।"
+        ],
+        "why": "चौथा विकल्प ही उत्तर है: राज्य विधानमंडल में संयुक्त बैठक होती ही नहीं, वहाँ विधानसभा की बात चलती है। तीसरा विकल्प लुभाता है क्योंकि अवधि कम लगती है, पर वह सही है: परिषद पहली बार तीन महीने और दूसरी बार एक महीना विधेयक रोक सकती है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-judiciary",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which writ asks a person holding a public office to show by what authority they hold it?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Mandamus",
+          "Prohibition",
+          "Quo warranto",
+          "Habeas corpus"
+        ],
+        "why": "Quo warranto means 'by what authority', and it stops a person from wrongly holding a public office. The trap is Mandamus, which orders an official to perform a public duty, not to justify holding the office."
+      },
+      "hi": {
+        "stem": "कौन-सी रिट किसी सार्वजनिक पद पर बैठे व्यक्ति से यह बताने को कहती है कि वह किस अधिकार से उस पद पर है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "परमादेश (Mandamus)",
+          "प्रतिषेध (Prohibition)",
+          "अधिकार-पृच्छा (Quo warranto)",
+          "बंदी प्रत्यक्षीकरण (Habeas corpus)"
+        ],
+        "why": "Quo warranto का मतलब है 'किस अधिकार से', और यह किसी व्यक्ति को सार्वजनिक पद पर गलत तरीके से बने रहने से रोकती है। जाल Mandamus का है: वह अधिकारी को सार्वजनिक कर्तव्य निभाने का आदेश देती है, पद का अधिकार साबित करने को नहीं कहती।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-judiciary",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about writ jurisdiction in India:",
+        "statements": [
+          "A High Court can issue writs to enforce Fundamental Rights and also for any other purpose.",
+          "The Supreme Court can issue writs under Article 32 only to enforce Fundamental Rights.",
+          "The right to move the Supreme Court under Article 32 is itself a Fundamental Right.",
+          "Habeas corpus can be issued against private individuals as well as public authorities."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. Article 226 lets a High Court issue writs 'for any other purpose', while Article 32 covers Fundamental Rights only and is itself a Fundamental Right. The trap is assuming the Supreme Court's writ power is wider than a High Court's."
+      },
+      "hi": {
+        "stem": "भारत में रिट अधिकारिता के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "उच्च न्यायालय मौलिक अधिकारों को लागू कराने के लिए और किसी अन्य प्रयोजन के लिए भी रिट जारी कर सकता है।",
+          "सर्वोच्च न्यायालय अनुच्छेद 32 के तहत केवल मौलिक अधिकारों को लागू कराने के लिए रिट जारी कर सकता है।",
+          "अनुच्छेद 32 के तहत सर्वोच्च न्यायालय जाने का अधिकार स्वयं एक मौलिक अधिकार है।",
+          "बंदी प्रत्यक्षीकरण की रिट सार्वजनिक प्राधिकारियों के साथ-साथ निजी व्यक्तियों के विरुद्ध भी जारी हो सकती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। अनुच्छेद 226 उच्च न्यायालय को 'किसी अन्य प्रयोजन' के लिए भी रिट जारी करने देता है, जबकि अनुच्छेद 32 केवल मौलिक अधिकारों तक है और स्वयं एक मौलिक अधिकार है। जाल यह मान लेना है कि सर्वोच्च न्यायालय की रिट शक्ति ज़्यादा व्यापक है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-judiciary",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the High Courts:",
+        "statements": [
+          "Parliament can by law establish a common High Court for two or more states.",
+          "A judge of a High Court holds office until the age of 65 years.",
+          "A High Court judge is appointed by the President after consultation with the Chief Justice of India and the Governor of the state."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct: Article 231 allows a common High Court, and Article 217 requires consulting the Chief Justice of India and the Governor. Statement 2 is wrong: High Court judges retire at 62, not 65. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "उच्च न्यायालयों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "संसद विधि द्वारा दो या अधिक राज्यों के लिए एक साझा उच्च न्यायालय स्थापित कर सकती है।",
+          "उच्च न्यायालय का न्यायाधीश 65 वर्ष की आयु तक पद पर रहता है।",
+          "उच्च न्यायालय के न्यायाधीश की नियुक्ति राष्ट्रपति भारत के मुख्य न्यायाधीश और राज्य के राज्यपाल से परामर्श के बाद करता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं: अनुच्छेद 231 साझा उच्च न्यायालय की अनुमति देता है, और अनुच्छेद 217 में मुख्य न्यायाधीश और राज्यपाल से परामर्श ज़रूरी है। कथन 2 गलत है: उच्च न्यायालय के न्यायाधीश 62 पर रिटायर होते हैं; 65 सर्वोच्च न्यायालय के लिए है। '1, 2 और 3' जाल है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-judiciary",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Public Interest Litigation is expressly provided for in the text of the Constitution of India.",
+          "Statement II: Public Interest Litigation relaxed the traditional rule that only an aggrieved person can approach a court (locus standi)."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is wrong: Public Interest Litigation was developed by the Supreme Court through its judgments; the term is not in the Constitution's text. Statement II is correct. The trap is (a), which assumes something so common must be written in the Constitution."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: जनहित याचिका (PIL) का स्पष्ट प्रावधान भारत के संविधान के पाठ में किया गया है।",
+          "कथन II: जनहित याचिका ने उस पारंपरिक नियम (locus standi) को ढीला किया कि केवल पीड़ित व्यक्ति ही अदालत जा सकता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I गलत है: जनहित याचिका सर्वोच्च न्यायालय ने अपने फ़ैसलों के ज़रिए विकसित की है; यह शब्द संविधान के पाठ में नहीं है। कथन II सही है। जाल पहला विकल्प है, जो मान लेता है कि इतनी आम चीज़ संविधान में लिखी ही होगी।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-judiciary",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Articles 323A and 323B, which provide for administrative and other tribunals, were added to the Constitution by which amendment?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24th Amendment Act, 1971",
+          "42nd Amendment Act, 1976",
+          "44th Amendment Act, 1978",
+          "73rd Amendment Act, 1992"
+        ],
+        "why": "The 42nd Amendment Act, 1976 added Part XIVA, with Article 323A on administrative tribunals and Article 323B on tribunals for other matters. The trap is the 44th Amendment, which undid many 42nd Amendment changes but did not add tribunals."
+      },
+      "hi": {
+        "stem": "प्रशासनिक और अन्य अधिकरणों का प्रावधान करने वाले अनुच्छेद 323A और 323B किस संशोधन द्वारा संविधान में जोड़े गए?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24वाँ संशोधन अधिनियम, 1971",
+          "42वाँ संशोधन अधिनियम, 1976",
+          "44वाँ संशोधन अधिनियम, 1978",
+          "73वाँ संशोधन अधिनियम, 1992"
+        ],
+        "why": "42वें संशोधन अधिनियम, 1976 ने भाग XIVA जोड़ा, जिसमें प्रशासनिक अधिकरणों पर अनुच्छेद 323A और अन्य विषयों के अधिकरणों पर अनुच्छेद 323B है। जाल 44वाँ संशोधन है: उसने 42वें संशोधन के कई बदलाव पलटे, पर अधिकरण नहीं जोड़े।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "pol-local",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following pairs about local government in the Constitution:",
+        "statements": [
+          "Part IX – Panchayats",
+          "Part IXA – Municipalities",
+          "Eleventh Schedule – 18 functional items for municipalities",
+          "Article 243K – State Election Commission for panchayat elections"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All four",
+          "Only three"
+        ],
+        "why": "Pairs 1, 2 and 4 are correct. Pair 3 is wrong: the Eleventh Schedule lists 29 subjects for panchayats, while the Twelfth Schedule lists 18 for municipalities. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "संविधान में स्थानीय शासन से जुड़े नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "भाग IX – पंचायतें",
+          "भाग IXA – नगरपालिकाएँ",
+          "ग्यारहवीं अनुसूची – नगरपालिकाओं के 18 कार्यात्मक विषय",
+          "अनुच्छेद 243K – पंचायत चुनावों के लिए राज्य निर्वाचन आयोग"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी चार",
+          "केवल तीन"
+        ],
+        "why": "जोड़े 1, 2 और 4 सही हैं। जोड़ा 3 गलत है: ग्यारहवीं अनुसूची में पंचायतों के 29 विषय हैं, जबकि बारहवीं अनुसूची में नगरपालिकाओं के 18 विषय हैं। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-local",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the 73rd Constitutional Amendment Act, 1992:",
+        "statements": [
+          "Not less than one-third of the seats in panchayats are reserved for women.",
+          "Panchayats have a five-year term, and a dissolved panchayat must be re-elected within six months.",
+          "Every state must have panchayats at all three levels, whatever its population."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: a state with a population not exceeding 20 lakh need not set up panchayats at the intermediate level. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "73वें संविधान संशोधन अधिनियम, 1992 के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "पंचायतों में कम से कम एक-तिहाई सीटें महिलाओं के लिए आरक्षित हैं।",
+          "पंचायतों का कार्यकाल पाँच वर्ष है, और भंग पंचायत का चुनाव छह महीने के भीतर कराना ज़रूरी है।",
+          "हर राज्य में, जनसंख्या चाहे जितनी हो, तीनों स्तरों पर पंचायतें होना ज़रूरी है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: जिस राज्य की जनसंख्या 20 लाख से अधिक नहीं है, उसे मध्यवर्ती स्तर की पंचायत बनाना ज़रूरी नहीं। '1, 2 और 3' जाल है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-local",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which of the following was NOT introduced by the 74th Constitutional Amendment Act, 1992?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "A Gram Sabha consisting of all voters in a village",
+          "A Nagar Panchayat for an area in transition from rural to urban",
+          "Ward Committees in municipalities with a population of three lakh or more",
+          "A District Planning Committee in every district"
+        ],
+        "why": "The Gram Sabha (Article 243A) comes from the 73rd Amendment on panchayats. The tempting trap is the District Planning Committee: it sounds rural, but Article 243ZD was added by the 74th Amendment."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा प्रावधान 74वें संविधान संशोधन अधिनियम, 1992 द्वारा नहीं लाया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "गाँव के सभी मतदाताओं से बनी ग्राम सभा",
+          "ग्रामीण से शहरी में बदल रहे क्षेत्र के लिए नगर पंचायत",
+          "तीन लाख या अधिक जनसंख्या वाली नगरपालिकाओं में वार्ड समितियाँ",
+          "हर ज़िले में ज़िला योजना समिति"
+        ],
+        "why": "ग्राम सभा (अनुच्छेद 243A) पंचायतों वाले 73वें संशोधन से आई है। जाल ज़िला योजना समिति है: नाम से ग्रामीण लगती है, पर अनुच्छेद 243ZD 74वें संशोधन ने जोड़ा था।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-const-bodies",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I (constitutional body) with List II (Article) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Finance Commission",
+          "B. Comptroller and Auditor General of India",
+          "C. Union Public Service Commission",
+          "D. Election Commission of India",
+          "1. Article 324",
+          "2. Article 280",
+          "3. Article 315",
+          "4. Article 148"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-2, D-1",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "The Finance Commission is under Article 280 (2), the CAG Article 148 (4), the UPSC Article 315 (3) and the Election Commission Article 324 (1). The trap is (a), which swaps the Finance Commission and the CAG."
+      },
+      "hi": {
+        "stem": "सूची I (संवैधानिक निकाय) को सूची II (अनुच्छेद) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. वित्त आयोग",
+          "B. भारत के नियंत्रक-महालेखापरीक्षक (CAG)",
+          "C. संघ लोक सेवा आयोग (UPSC)",
+          "D. भारत निर्वाचन आयोग",
+          "1. अनुच्छेद 324",
+          "2. अनुच्छेद 280",
+          "3. अनुच्छेद 315",
+          "4. अनुच्छेद 148"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-2, D-1",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "वित्त आयोग अनुच्छेद 280 (2) में है, CAG अनुच्छेद 148 (4) में, UPSC अनुच्छेद 315 (3) में और निर्वाचन आयोग अनुच्छेद 324 (1) में। जाल पहला विकल्प है, जो वित्त आयोग और CAG को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-statutory",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following bodies:",
+        "statements": [
+          "National Human Rights Commission",
+          "Central Information Commission",
+          "Lokpal",
+          "National Commission for Scheduled Castes"
+        ],
+        "ask": "How many of the above are statutory, not constitutional, bodies?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "The NHRC (Protection of Human Rights Act, 1993), the CIC (Right to Information Act, 2005) and the Lokpal (Lokpal and Lokayuktas Act, 2013) are statutory. The National Commission for Scheduled Castes is constitutional, under Article 338. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "निम्नलिखित निकायों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रीय मानवाधिकार आयोग",
+          "केंद्रीय सूचना आयोग",
+          "लोकपाल",
+          "राष्ट्रीय अनुसूचित जाति आयोग"
+        ],
+        "ask": "उपर्युक्त में से कितने निकाय सांविधिक हैं, संवैधानिक नहीं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "NHRC (मानवाधिकार संरक्षण अधिनियम, 1993), CIC (सूचना का अधिकार अधिनियम, 2005) और लोकपाल (लोकपाल और लोकायुक्त अधिनियम, 2013) सांविधिक निकाय हैं। राष्ट्रीय अनुसूचित जाति आयोग अनुच्छेद 338 के तहत संवैधानिक है। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-statutory",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about some statutory bodies:",
+        "statements": [
+          "The Chairperson of the National Human Rights Commission must have been a Chief Justice of India or a judge of the Supreme Court.",
+          "The Lokpal has a Chairperson and up to eight members, half of whom are judicial members.",
+          "The Chief Information Commissioner is appointed by the President on the recommendation of a committee headed by the Prime Minister."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The tempting trap is to drop statement 1: earlier only a former Chief Justice of India could chair the NHRC, but a 2019 amendment also made former Supreme Court judges eligible."
+      },
+      "hi": {
+        "stem": "कुछ सांविधिक निकायों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रीय मानवाधिकार आयोग का अध्यक्ष वही हो सकता है जो भारत का मुख्य न्यायाधीश या सर्वोच्च न्यायालय का न्यायाधीश रहा हो।",
+          "लोकपाल में एक अध्यक्ष और अधिकतम आठ सदस्य होते हैं, जिनमें से आधे न्यायिक सदस्य होते हैं।",
+          "मुख्य सूचना आयुक्त की नियुक्ति राष्ट्रपति, प्रधानमंत्री की अध्यक्षता वाली समिति की सिफ़ारिश पर करता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। जाल कथन 1 को गलत मान लेना है: पहले केवल पूर्व मुख्य न्यायाधीश ही NHRC के अध्यक्ष बन सकते थे, पर 2019 के संशोधन ने सर्वोच्च न्यायालय के पूर्व न्यायाधीशों को भी पात्र बना दिया।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-const-bodies",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "To whom does the Comptroller and Auditor General of India submit audit reports on the accounts of the Union?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Speaker of the Lok Sabha",
+          "The President",
+          "The Prime Minister",
+          "The Union Finance Minister"
+        ],
+        "why": "Under Article 151, the CAG submits Union audit reports to the President, who has them laid before each House of Parliament. The trap is the Speaker: Parliament's Public Accounts Committee examines the reports, but they go to the President first."
+      },
+      "hi": {
+        "stem": "भारत के नियंत्रक-महालेखापरीक्षक संघ के लेखों से जुड़ी लेखापरीक्षा रिपोर्टें किसे सौंपते हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "लोकसभा अध्यक्ष",
+          "राष्ट्रपति",
+          "प्रधानमंत्री",
+          "केंद्रीय वित्त मंत्री"
+        ],
+        "why": "अनुच्छेद 151 के तहत CAG संघ की लेखापरीक्षा रिपोर्टें राष्ट्रपति को सौंपते हैं, जो उन्हें संसद के हर सदन के सामने रखवाते हैं। जाल लोकसभा अध्यक्ष का है: रिपोर्टों की जाँच संसद की लोक लेखा समिति करती है, पर वे पहले राष्ट्रपति के पास जाती हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "pol-emergency",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: During a National Emergency, the right to life and personal liberty under Article 21 cannot be suspended.",
+          "Statement II: The 44th Amendment Act, 1978 provided that the rights under Articles 20 and 21 cannot be suspended during an emergency.",
+          "Statement III: A proclamation of National Emergency must be approved by both Houses of Parliament within one month."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Statements II and III are both correct. II explains I, as the 44th Amendment shielded Articles 20 and 21 from suspension. III is true but is about parliamentary approval, so it does not explain I. The trap is (a)."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: राष्ट्रीय आपातकाल के दौरान अनुच्छेद 21 के तहत प्राण और दैहिक स्वतंत्रता के अधिकार को निलंबित नहीं किया जा सकता।",
+          "कथन II: 44वें संशोधन अधिनियम, 1978 ने प्रावधान किया कि आपातकाल में अनुच्छेद 20 और 21 के अधिकार निलंबित नहीं किए जा सकते।",
+          "कथन III: राष्ट्रीय आपातकाल की उद्घोषणा को संसद के दोनों सदनों से एक महीने के भीतर अनुमोदन मिलना ज़रूरी है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "कथन II और III दोनों सही हैं। II, I की व्याख्या करता है, क्योंकि 44वें संशोधन ने अनुच्छेद 20 और 21 को निलंबन से बचाया। III भी सही है, पर वह संसद के अनुमोदन की बात करता है, इसलिए I की व्याख्या नहीं करता। जाल पहला विकल्प है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-emergency",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about emergency provisions:",
+        "statements": [
+          "A proclamation of President's Rule under Article 356 must be approved by both Houses of Parliament within two months.",
+          "With Parliament's approval every six months, President's Rule can continue for at most three years.",
+          "In S.R. Bommai v. Union of India (1994), the Supreme Court held that a proclamation under Article 356 is open to judicial review.",
+          "A Financial Emergency under Article 360 was proclaimed once, in 1991."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only three",
+          "Only one",
+          "Only two",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: a Financial Emergency under Article 360 has never been proclaimed, even during the 1991 economic crisis. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "आपातकालीन प्रावधानों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 356 के तहत राष्ट्रपति शासन की उद्घोषणा को संसद के दोनों सदनों से दो महीने के भीतर अनुमोदन मिलना ज़रूरी है।",
+          "हर छह महीने पर संसद के अनुमोदन से राष्ट्रपति शासन अधिकतम तीन वर्ष तक चल सकता है।",
+          "एस.आर. बोम्मई बनाम भारत संघ (1994) में सर्वोच्च न्यायालय ने कहा कि अनुच्छेद 356 की उद्घोषणा न्यायिक समीक्षा के अधीन है।",
+          "अनुच्छेद 360 के तहत वित्तीय आपातकाल एक बार, 1991 में, घोषित किया गया था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल तीन",
+          "केवल एक",
+          "केवल दो",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: अनुच्छेद 360 के तहत वित्तीय आपातकाल कभी घोषित नहीं हुआ, 1991 के आर्थिक संकट में भी नहीं। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "pol-amendment",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of Constitution Amendment Acts and what they did:",
+        "statements": [
+          "52nd Amendment, 1985 – Added the Tenth Schedule on anti-defection",
+          "61st Amendment, 1989 – Lowered the voting age from 21 to 18 years",
+          "91st Amendment, 2003 – Introduced the Goods and Services Tax",
+          "44th Amendment, 1978 – Removed the right to property from the Fundamental Rights"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 4 are correct. Pair 3 is wrong: GST came with the 101st Amendment, 2016; the 91st Amendment capped the size of the Council of Ministers at 15 percent of the Lok Sabha. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "संविधान संशोधन अधिनियमों और उनके कार्यों के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "52वाँ संशोधन, 1985 – दल-बदल विरोधी दसवीं अनुसूची जोड़ी",
+          "61वाँ संशोधन, 1989 – मतदान की आयु 21 से घटाकर 18 वर्ष की",
+          "91वाँ संशोधन, 2003 – वस्तु एवं सेवा कर (GST) लागू किया",
+          "44वाँ संशोधन, 1978 – संपत्ति के अधिकार को मौलिक अधिकारों से हटाया"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1, 2 और 4 सही हैं। जोड़ा 3 गलत है: GST 101वें संशोधन, 2016 से आया; 91वें संशोधन ने मंत्रिपरिषद का आकार लोकसभा की सदस्य संख्या के 15 प्रतिशत तक सीमित किया। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-federal",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the distribution of legislative powers:",
+        "statements": [
+          "Under Article 249, Parliament can make laws on a State List subject if the Rajya Sabha passes a resolution supported by two-thirds of members present and voting.",
+          "Such a resolution remains in force for up to one year and can be renewed.",
+          "Residuary powers of legislation rest with the states."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct: an Article 249 resolution lasts up to one year and can be renewed. Statement 3 is wrong: under Article 248, residuary powers rest with Parliament, unlike in the USA. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "विधायी शक्तियों के बँटवारे के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 249 के तहत, यदि राज्यसभा उपस्थित और मतदान करने वाले सदस्यों के दो-तिहाई समर्थन से संकल्प पारित करे, तो संसद राज्य सूची के विषय पर कानून बना सकती है।",
+          "ऐसा संकल्प अधिकतम एक वर्ष तक लागू रहता है और उसे फिर से बढ़ाया जा सकता है।",
+          "विधि निर्माण की अवशिष्ट शक्तियाँ राज्यों के पास हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: अनुच्छेद 249 का संकल्प एक वर्ष तक चलता है और फिर बढ़ाया जा सकता है। कथन 3 गलत है: अनुच्छेद 248 के तहत अवशिष्ट शक्तियाँ संसद के पास हैं, अमेरिका से उलट। '1, 2 और 3' जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-official-language",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which Schedule of the Constitution of India lists the languages recognised in it, now 22 in number?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Seventh Schedule",
+          "Eighth Schedule",
+          "Ninth Schedule",
+          "Tenth Schedule"
+        ],
+        "why": "The Eighth Schedule lists 22 languages. The trap is the Seventh Schedule, which holds the Union, State and Concurrent Lists, not languages."
+      },
+      "hi": {
+        "stem": "भारत के संविधान की कौन-सी अनुसूची उसमें मान्य भाषाओं की सूची देती है, जिनकी संख्या अब 22 है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सातवीं अनुसूची",
+          "आठवीं अनुसूची",
+          "नौवीं अनुसूची",
+          "दसवीं अनुसूची"
+        ],
+        "why": "आठवीं अनुसूची में 22 भाषाएँ हैं। जाल सातवीं अनुसूची का है, जिसमें संघ, राज्य और समवर्ती सूचियाँ हैं, भाषाएँ नहीं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-federal",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following is NOT correct about bodies and provisions for centre-state cooperation?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Zonal Councils are constitutional bodies set up under Part XI of the Constitution.",
+          "The President can establish an Inter-State Council under Article 263.",
+          "Zonal Councils were set up under the States Reorganisation Act, 1956.",
+          "Article 262 lets Parliament provide for adjudicating inter-state river water disputes."
+        ],
+        "why": "Option (a) is the answer: Zonal Councils are statutory bodies, created by the States Reorganisation Act, 1956, not by the Constitution. The tempting trap is (b), which is true: Article 263 lets the President set up an Inter-State Council."
+      },
+      "hi": {
+        "stem": "केंद्र-राज्य सहयोग से जुड़े निकायों और प्रावधानों के बारे में निम्नलिखित में से कौन-सा सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "क्षेत्रीय परिषदें संविधान के भाग XI के तहत बनी संवैधानिक संस्थाएँ हैं।",
+          "राष्ट्रपति अनुच्छेद 263 के तहत अंतर-राज्य परिषद स्थापित कर सकता है।",
+          "क्षेत्रीय परिषदें राज्य पुनर्गठन अधिनियम, 1956 के तहत बनाई गईं।",
+          "अनुच्छेद 262 संसद को अंतर-राज्यीय नदी जल विवादों के न्यायनिर्णयन का प्रावधान करने देता है।"
+        ],
+        "why": "पहला विकल्प ही उत्तर है: क्षेत्रीय परिषदें (Zonal Councils) राज्य पुनर्गठन अधिनियम, 1956 से बनी सांविधिक संस्थाएँ हैं, संविधान से नहीं। दूसरा विकल्प लुभाता है, पर वह सही है: अनुच्छेद 263 राष्ट्रपति को अंतर-राज्य परिषद बनाने देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India; NCERT Class XI Indian Constitution at Work",
+    "hi": "भारत का संविधान; NCERT कक्षा XI भारत का संविधान: सिद्धांत और व्यवहार"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

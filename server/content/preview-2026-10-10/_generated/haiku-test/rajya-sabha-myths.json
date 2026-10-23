@@ -1,0 +1,81 @@
+{
+  "verdictLabels": {
+    "en": {
+      "MYTH": "MYTH",
+      "FACT": "FACT",
+      "HALF": "HALF-TRUE"
+    },
+    "hi": {
+      "MYTH": "झूठ",
+      "FACT": "सच",
+      "HALF": "आधा सच"
+    }
+  },
+  "rules": [
+    "User guesses before the stamp shows",
+    "Never mock the person who forwarded the claim"
+  ],
+  "id": "rajya-sabha-myths",
+  "claims": [
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "The Rajya Sabha is dissolved every five years, just like the Lok Sabha.",
+        "correction": "The Rajya Sabha is a permanent body and is never dissolved. One-third of its members retire every second year."
+      },
+      "hi": {
+        "claim": "राज्यसभा हर पाँच साल में लोकसभा की तरह भंग हो जाती है।",
+        "correction": "राज्यसभा एक स्थायी सदन है और कभी भंग नहीं होती। इसके एक-तिहाई सदस्य हर दूसरे साल सेवानिवृत्त होते हैं।"
+      }
+    },
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "Chairing the Rajya Sabha makes the Vice-President one of its members.",
+        "correction": "The Vice-President is the ex-officio Chairman of the Rajya Sabha, but is not a member of it."
+      },
+      "hi": {
+        "claim": "राज्यसभा की सभापति होने के कारण उपराष्ट्रपति उसके सदस्य भी बन जाते हैं।",
+        "correction": "भारत के उपराष्ट्रपति राज्यसभा के पदेन सभापति हैं, पर वे उसके सदस्य नहीं होते।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "Money Bills can only be introduced in the Lok Sabha.",
+        "correction": "Right. A Money Bill can be introduced only in the Lok Sabha. The Rajya Sabha can only make recommendations, within 14 days, which the Lok Sabha may accept or reject."
+      },
+      "hi": {
+        "claim": "मनी बिल केवल लोकसभा में पेश किया जा सकता है।",
+        "correction": "सही है। मनी बिल केवल लोकसभा में पेश हो सकता है। राज्यसभा केवल 14 दिनों के भीतर सिफ़ारिशें दे सकती है, जिन्हें लोकसभा स्वीकार या अस्वीकार कर सकती है।"
+      }
+    },
+    {
+      "verdict": "HALF",
+      "en": {
+        "claim": "The Lok Sabha's term is always five years and cannot be changed.",
+        "correction": "Half right. The normal term is five years, but the Lok Sabha can be dissolved earlier. During a national emergency, Parliament can extend its term by one year at a time."
+      },
+      "hi": {
+        "claim": "लोकसभा का कार्यकाल हमेशा पाँच साल होता है और उसे बदला नहीं जा सकता।",
+        "correction": "आधा सही है। लोकसभा का सामान्य कार्यकाल पाँच साल है, पर उसे समय से पहले भंग किया जा सकता है। राष्ट्रीय आपातकाल में संसद इसका कार्यकाल एक-एक साल करके बढ़ा सकती है।"
+      }
+    }
+  ],
+  "source": {
+    "en": "No source document named; facts from supplied text.",
+    "hi": "कोई स्रोत दस्तावेज़ नहीं बताया गया; तथ्य दिए गए पाठ से।"
+  },
+  "schema": "upsc-pods/myth-card@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/myth-card/",
+    "createdOn": "2026-10-10"
+  }
+}

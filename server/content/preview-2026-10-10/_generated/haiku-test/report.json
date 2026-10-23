@@ -1,0 +1,79 @@
+{
+  "note": "Eight fresh source texts (tools/../jobs/sources) filled by Claude Haiku from the template prompts, then assembled and validated with tools/. Run through a Claude agent with the same prompts, not through the API script, because this environment has no API key.",
+  "results": [
+    {
+      "job": 1,
+      "type": "stamp-trail",
+      "id": "amendment-bill-journey",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 2,
+      "type": "scratch-card",
+      "id": "national-parks-scratch",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 3,
+      "type": "then-now",
+      "id": "india-population-then-now",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 4,
+      "type": "radio",
+      "id": "cyclone-names-radio",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 5,
+      "type": "postcard",
+      "id": "chilika-lake",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 6,
+      "type": "assemble",
+      "id": "mughal-emperors-order",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 7,
+      "type": "chain",
+      "id": "stubble-burning-chain",
+      "status": "ok",
+      "firstPassFillErrors": [],
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 8,
+      "type": "myth-card",
+      "id": "rajya-sabha-myths",
+      "status": "ok",
+      "firstPassFillErrors": [
+        "$.source.en: 9 words, limit 8 (fixed by one repair turn)"
+      ],
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

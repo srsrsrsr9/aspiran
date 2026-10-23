@@ -1,0 +1,77 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "id": "flood-relief-collector",
+  "tone": "SERIOUS",
+  "title": {
+    "en": "Flood relief: one area today",
+    "hi": "बाढ़ राहत: आज एक ही क्षेत्र"
+  },
+  "en": {
+    "scenario": "You are the district collector of a flood-hit district. Relief material, such as food, tarpaulins and medicines, can reach only one area today. Village A has been cut off for three days, and the latest report says it is the worst hit. Village B is less affected. A local MLA calls and insists that relief go to Village B first, because it is in his constituency, and hints that he will complain about you to the state government.",
+    "question": "What would you do, and what values does each choice serve?",
+    "options": [
+      {
+        "label": "Send relief to Village A; record the MLA's request.",
+        "outcome": "The worst-hit village is helped first. The MLA may complain to the state government, but the request is on record.",
+        "values": "Impartiality, courage and accountability"
+      },
+      {
+        "label": "Split the relief between both villages.",
+        "outcome": "Both villages get some help, but Village A, the worst hit, may get less than it needs.",
+        "values": "Compassion and fairness, but weaker on urgent need"
+      },
+      {
+        "label": "Send it to Village B first to avoid conflict.",
+        "outcome": "Village B gets help first, and the conflict with the MLA is avoided for now. Village A, the worst hit, waits longer.",
+        "values": "Avoiding conflict; sacrifices impartiality and compassion"
+      }
+    ],
+    "reflect": "When pressure comes from a powerful person, which value should guide your first decision, and why?"
+  },
+  "hi": {
+    "scenario": "आप एक बाढ़-प्रभावित ज़िले के ज़िलाधिकारी हैं। आज राहत सामग्री (भोजन, तिरपाल, दवाइयाँ) केवल एक क्षेत्र तक पहुँच सकती है। गाँव A तीन दिनों से कटा हुआ है, और ताज़ा रिपोर्ट के अनुसार वह सबसे ज़्यादा प्रभावित है। गाँव B पर कम असर पड़ा है। एक स्थानीय विधायक फ़ोन करके ज़ोर देते हैं कि राहत पहले गाँव B में जाए, क्योंकि वह उनके निर्वाचन क्षेत्र में है, और संकेत देते हैं कि वे राज्य सरकार से आपकी शिकायत करेंगे।",
+    "question": "आप क्या करेंगे, और हर विकल्प किन मूल्यों की सेवा करता है?",
+    "options": [
+      {
+        "label": "गाँव A को राहत भेजें; विधायक का अनुरोध दर्ज करें।",
+        "outcome": "सबसे अधिक प्रभावित गाँव को पहले मदद मिलती है। विधायक राज्य सरकार से शिकायत कर सकते हैं, पर उनका अनुरोध रिकॉर्ड में है।",
+        "values": "निष्पक्षता, साहस और जवाबदेही"
+      },
+      {
+        "label": "राहत दोनों गाँवों में बाँटें।",
+        "outcome": "दोनों गाँवों को कुछ मदद मिलती है, पर सबसे अधिक प्रभावित गाँव A को ज़रूरत से कम मिल सकती है।",
+        "values": "करुणा और निष्पक्षता, पर तत्काल ज़रूरत पर कम ध्यान"
+      },
+      {
+        "label": "पहले गाँव B भेजें, ताकि टकराव से बचा जा सके।",
+        "outcome": "गाँव B को पहले मदद मिलती है और विधायक के साथ टकराव फ़िलहाल टल जाता है। सबसे अधिक प्रभावित गाँव A को ज़्यादा इंतज़ार करना पड़ता है।",
+        "values": "टकराव से बचाव; निष्पक्षता और करुणा की कीमत पर"
+      }
+    ],
+    "reflect": "जब किसी शक्तिशाली व्यक्ति का दबाव हो, तब किस मूल्य को आपका पहला फ़ैसला तय करना चाहिए, और क्यों?"
+  },
+  "sources": {
+    "en": "Editor's scenario (fictional, for GS4 practice)",
+    "hi": "संपादक का परिदृश्य (काल्पनिक, GS4 अभ्यास के लिए)"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/ethics-dilemma/",
+    "createdOn": "2026-10-10"
+  }
+}

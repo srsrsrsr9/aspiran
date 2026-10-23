@@ -1,0 +1,126 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "eco-money-fiscal-and-prices-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Money, deficits and prices: assertion and reason",
+    "hi": "मुद्रा, घाटा और कीमतें: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "When the RBI raises the repo rate, bank loans tend to become costlier for borrowers.",
+        "reason": "The repo rate is the rate at which the RBI lends short-term funds to commercial banks.",
+        "why": "Both are true. Banks borrow from the RBI at the repo rate, so a higher repo rate raises their cost of funds, which they pass on. R explains A."
+      },
+      "hi": {
+        "assertion": "जब RBI रेपो दर बढ़ाता है, तो उधार लेने वालों के लिए बैंक ऋण आम तौर पर महँगे हो जाते हैं।",
+        "reason": "रेपो दर वह दर है जिस पर RBI वाणिज्यिक बैंकों को अल्पकालिक धन उधार देता है।",
+        "why": "दोनों सही हैं। बैंक RBI से रेपो दर पर उधार लेते हैं, तो रेपो बढ़ने से उनकी funds की लागत बढ़ती है, जो वे आगे ग्राहकों पर डालते हैं। R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Fiscal deficit is total expenditure minus total receipts excluding borrowings.",
+        "reason": "Primary deficit is fiscal deficit minus interest payments.",
+        "why": "Both definitions are true, but R defines a different measure derived from the fiscal deficit; it does not explain what the fiscal deficit is."
+      },
+      "hi": {
+        "assertion": "राजकोषीय घाटा कुल व्यय में से उधार को छोड़कर कुल प्राप्तियाँ घटाने पर मिलता है।",
+        "reason": "प्राथमिक घाटा राजकोषीय घाटे में से ब्याज भुगतान घटाने पर मिलता है।",
+        "why": "दोनों परिभाषाएँ सही हैं, पर R राजकोषीय घाटे से निकला एक अलग माप बताता है; यह नहीं समझाता कि राजकोषीय घाटा क्या है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "GST is a destination-based tax on consumption.",
+        "reason": "Under GST, the tax revenue goes to the state where the goods are produced.",
+        "why": "A is true. R is false: being destination-based means the revenue goes to the state where the goods or services are consumed, not where they are made."
+      },
+      "hi": {
+        "assertion": "GST उपभोग पर लगने वाला गंतव्य-आधारित कर है।",
+        "reason": "GST में कर राजस्व उस राज्य को जाता है जहाँ वस्तुओं का उत्पादन होता है।",
+        "why": "A सही है। R गलत है: गंतव्य-आधारित का मतलब है कि revenue उस राज्य को जाता है जहाँ वस्तु या सेवा की खपत होती है, जहाँ बनी वहाँ नहीं।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "Deflation always benefits borrowers.",
+        "reason": "Inflation reduces the purchasing power of money.",
+        "why": "A is false: when prices fall, the real burden of a fixed debt rises, which hurts borrowers. R is true."
+      },
+      "hi": {
+        "assertion": "अपस्फीति से उधार लेने वालों को हमेशा लाभ होता है।",
+        "reason": "मुद्रास्फीति मुद्रा की क्रय शक्ति को घटाती है।",
+        "why": "A गलत है: जब कीमतें गिरती हैं, तो तय कर्ज़ का वास्तविक बोझ बढ़ जाता है, जिससे उधार लेने वालों को नुकसान होता है। R सही है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Demand-pull inflation arises when aggregate demand runs ahead of the available supply of goods and services.",
+        "reason": "Cost-push inflation arises from rising input costs such as wages or fuel.",
+        "why": "Both are true, but R describes a different type of inflation with a different cause, so it does not explain A."
+      },
+      "hi": {
+        "assertion": "माँग-जनित मुद्रास्फीति तब होती है जब कुल माँग वस्तुओं और सेवाओं की उपलब्ध आपूर्ति से आगे निकल जाती है।",
+        "reason": "लागत-जनित मुद्रास्फीति मज़दूरी या ईंधन जैसी इनपुट लागतों के बढ़ने से होती है।",
+        "why": "दोनों सही हैं, पर R एक अलग कारण वाली अलग तरह की मुद्रास्फीति बताता है, इसलिए यह A को नहीं समझाता।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Introductory Macroeconomics; Reserve Bank of India publications",
+    "hi": "NCERT कक्षा XII समष्टि अर्थशास्त्र एक परिचय; भारतीय रिज़र्व बैंक के प्रकाशन"
+  },
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

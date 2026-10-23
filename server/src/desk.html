@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>News Desk</title>
+<style>
+  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --amber:#FCE8C3; --ok:#E3F1E1; --bad:#F8E1DE; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --amber:#4A3712; --ok:#22361F; --bad:#43201B; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
+  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:12px 16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; z-index:2; }
+  header h1 { font-size:18px; margin:0 12px 0 0; color:var(--brand); }
+  input, textarea, select, button { font:inherit; color:inherit; }
+  input, textarea, select { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; }
+  button { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 12px; cursor:pointer; }
+  button.primary { background:var(--brand); color:#fff; border-color:var(--brand); }
+  button:disabled { opacity:.5; cursor:default; }
+  nav button.on { border-color:var(--brand); color:var(--brand); font-weight:600; }
+  main { max-width:1200px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:16px; }
+  .card.rejected { opacity:.5; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px; }
+  @media (max-width:800px) { .cols { grid-template-columns:1fr; } }
+  .chip { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:0 8px; font-size:12px; color:var(--muted); }
+  .tone-light { background:var(--ok); } .tone-serious, .tone-tragic { background:var(--bad); }
+  .flag { background:var(--amber); border-radius:6px; padding:2px 8px; margin:2px 0; font-size:13px; }
+  .muted { color:var(--muted); font-size:13px; }
+  .hi { font-size:17px; line-height:1.7; }
+  h3 { margin:4px 0; font-size:17px; } h4 { margin:10px 0 2px; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+  textarea { width:100%; }
+  .approved { color:#2E7D32; font-weight:600; }
+  details summary { cursor:pointer; color:var(--muted); font-size:13px; }
+  #msg { margin-left:auto; font-size:13px; color:var(--muted); }
+  .art { max-width:320px; width:100%; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .takeaway { border-left:3px solid var(--brand); padding-left:8px; margin:8px 0; }
+  table.bi { width:100%; border-collapse:collapse; margin-top:8px; }
+  table.bi td { border-top:1px solid var(--line); padding:6px 8px; vertical-align:top; }
+  table.bi td.k { color:var(--muted); font-size:12px; width:18%; word-break:break-word; }
+  table.bi td.h { font-size:16px; line-height:1.7; }
+  .kind-tabs button { font-size:13px; padding:4px 10px; }
+  .kind-tabs button.on { border-color:var(--brand); color:var(--brand); font-weight:600; }
+  .pick { display:flex; flex-wrap:wrap; gap:6px; max-height:220px; overflow:auto; padding:2px; }
+  .pick button { font-size:13px; padding:4px 10px; border-radius:999px; }
+  .pick button.on { background:var(--brand); color:#fff; border-color:var(--brand); }
+  .step { font-size:12px; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:.05em; margin:12px 0 4px; }
+  .fr { display:grid; grid-template-columns:150px repeat(var(--n), minmax(0, 1fr)); gap:8px; border-top:1px solid var(--line); padding:8px 0; }
+  .fr.bad { background:linear-gradient(90deg, var(--amber), transparent 60%); }
+  .fr .k { color:var(--muted); font-size:12px; word-break:break-word; }
+  .fr textarea { min-height:44px; resize:vertical; }
+  .fr textarea.stale, .fr textarea.empty { border-color:#C77700; }
+  .fr textarea.dirty { border-color:var(--brand); border-width:2px; }
+  .fr .lh { display:none; font-size:11px; color:var(--muted); }
+  .fr.head { border-top:0; font-size:12px; font-weight:600; color:var(--muted); }
+  .fr .why { grid-column:1 / -1; }
+  @media (max-width:800px) { .fr { grid-template-columns:1fr; } .fr .lh { display:block; } .fr.head { display:none; } }
+  .sticky-save { position:sticky; bottom:0; background:var(--card); padding:8px 0; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <h1>News Desk</h1>
+  <input id="token" type="password" placeholder="Editor token" autocomplete="off" size="14">
+  <input id="editor" placeholder="Your name (shows on cards)" size="18">
+  <nav class="row">
+    <button data-tab="queue" class="on">Queue</button>
+    <button data-tab="add">Add a story</button>
+    <button data-tab="author">Author</button>
+    <button data-tab="library">Library</button>
+    <button data-tab="notes">Notes library</button>
+    <button data-tab="reports">Reports</button>
+  </nav>
+  <span id="msg"></span>
+</header>
+<main>
+  <section id="tab-queue">
+    <div class="row" style="margin-bottom:12px">
+      <input id="day" type="date">
+      <button id="reload">Load</button>
+      <button id="run">Fetch and draft now</button>
+      <button id="write">Write a card</button>
+      <button id="publish" class="primary">Publish today's brief</button>
+      <span id="published" class="muted"></span>
+    </div>
+    <p class="muted">Approve 5 to 7 cards. English and Hindi are approved separately. Any edit clears approvals. Hindi only ships if a Hindi editor approved it. Jokes are allowed on light cards only.</p>
+    <div id="queue"></div>
+  </section>
+
+  <section id="tab-add" hidden>
+    <div class="card">
+      <h3>Add a story by hand</h3>
+      <p class="muted">For newspapers: their headline and link, our own words. Paste the facts you checked as source text; the AI drafts from that only.</p>
+      <p><input id="a-title" placeholder="Headline" style="width:100%"></p>
+      <div class="row"><input id="a-source" placeholder="Source name, e.g. The Hindu"><input id="a-url" placeholder="https://link" style="flex:1"></div>
+      <p><textarea id="a-text" rows="8" placeholder="Source text: the facts, in your words or from an official release"></textarea></p>
+      <button id="a-go" class="primary">Draft into the queue</button>
+    </div>
+    <div class="card">
+      <h3>Rituals</h3>
+      <p class="muted">Post a ritual to every pod now (they also run on schedule: 07:00 Chai, 13:00 quiz, 18:00 Mains, 21:30 Close the Day).</p>
+      <div class="row">
+        <button data-ritual="chai">Chai</button><button data-ritual="quiz">Quiz</button><button data-ritual="mains">Mains</button><button data-ritual="close">Close the Day</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-author" hidden>
+    <div class="card">
+      <h3>Write from a source</h3>
+      <p class="muted">Paste text or a link, or pick a PDF. Choose up to three kinds of content (or let it suggest), then Generate. Every draft waits for an editor per language, as usual.</p>
+      <div class="step">1 · Source</div>
+      <textarea id="au-src" rows="6" placeholder="Paste the source text, or a link to an article or PIB release"></textarea>
+      <div class="row"><label class="muted">or a PDF <input id="au-pdf" type="file" accept="application/pdf"></label><button id="au-pdf-clear" hidden>Remove PDF</button></div>
+      <div class="step">2 · What to make</div>
+      <div class="row"><input id="au-find" placeholder="Find a type" style="flex:1;min-width:140px"><button id="au-suggest">Suggest for me</button><span id="au-picked" class="muted"></span></div>
+      <div id="au-types" class="pick" style="margin-top:6px"></div>
+      <div class="step">3 · Languages</div>
+      <div id="au-langs" class="row"></div>
+      <p><input id="au-notes" placeholder="Notes for the writer (optional), e.g. focus on Article 352" style="width:100%"></p>
+      <div class="row"><button id="au-go" class="primary">Generate</button><span id="au-mode" class="muted"></span></div>
+      <div id="au-manual"></div>
+    </div>
+    <div id="au-drafts"></div>
+  </section>
+
+  <section id="tab-library" hidden>
+    <div class="card">
+      <h3>Import a content pack</h3>
+      <p class="muted">Pick the pack's folder (the one with manifest.json). Every file is checked against the manifest. Chai cards land in that day's queue; everything else lands below as drafts. Nothing reaches the app until an editor approves it.</p>
+      <div class="row"><input id="pack-dir" type="file" webkitdirectory multiple><button id="pack-go" class="primary">Upload and import</button></div>
+      <pre id="pack-log" class="muted" style="white-space:pre-wrap"></pre>
+      <div class="row"><span class="muted">Or one translation file (like <code>five-writs-mnemonic.te.json</code>):</span><input id="tr-file" type="file" accept=".json" multiple><button id="tr-go">Add translation</button></div>
+    </div>
+    <div class="card">
+      <h3>Write something new</h3>
+      <p class="muted">Starts a draft from a template. Fill in both languages in the editor, then approve. For pictures or sounds, upload the file first and paste the link it gives you.</p>
+      <div class="row">
+        <select id="new-kind"></select><button id="new-go">Start a draft</button>
+        <span style="margin-left:auto"></span>
+        <input id="up-file" type="file" accept=".svg,.png,.webp,.ogg,.m4a"><button id="up-go">Upload file</button>
+        <input id="up-path" readonly placeholder="link appears here" size="30">
+      </div>
+    </div>
+    <p class="muted">An item is in the app as soon as its English is approved. Hindi text ships only after a Hindi editor approves it. Any edit clears both approvals. Hide takes an item out of the app without deleting it.</p>
+    <div class="row kind-tabs" id="kind-tabs" style="margin-bottom:12px"></div>
+    <div class="row" id="pack-approve" style="margin-bottom:12px"></div>
+    <div id="library"></div>
+  </section>
+
+  <section id="tab-notes" hidden>
+    <div class="card">
+      <h3>Add a note</h3>
+      <p class="muted">Our own words. Bare Acts and the Constitution may be quoted; NCERT and coaching notes may not.</p>
+      <div class="row">
+        <select id="n-kind"><option>article</option><option>act</option><option>case</option><option>committee</option><option>event</option><option>concept</option></select>
+        <input id="n-title" placeholder="Title, e.g. Article 280: Finance Commission" style="flex:1">
+      </div>
+      <p><textarea id="n-body" rows="4" placeholder="4 to 6 plain sentences"></textarea></p>
+      <div class="row"><input id="n-source" placeholder="Source" style="flex:1"><button id="n-go" class="primary">Save note</button><button id="n-seed">Load starter notes</button></div>
+    </div>
+    <div id="notes"></div>
+  </section>
+
+  <section id="tab-reports" hidden>
+    <p class="muted">Distress alerts come first. Reach out privately and kindly; never discuss them in the pod. Helplines: Tele-MANAS 14416 or 1-800-891-4416, emergency 112.</p>
+    <div id="reports"></div>
+  </section>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const todayIst = () => new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
+
+try { $("#token").value = sessionStorage.getItem("token") || ""; $("#editor").value = localStorage.getItem("editor") || ""; } catch {}
+$("#token").onchange = () => { try { sessionStorage.setItem("token", $("#token").value); } catch {} };
+$("#editor").onchange = () => { try { localStorage.setItem("editor", $("#editor").value); } catch {} };
+$("#day").value = todayIst();
+
+function say(text) { $("#msg").textContent = text; }
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, {
+    ...opts,
+    headers: { "content-type": "application/json", authorization: "Bearer " + $("#token").value },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) { say(data.error || res.statusText); throw new Error(data.error); }
+  return data;
+}
+
+document.querySelectorAll("nav button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach((x) => x.classList.toggle("on", x === b));
+  document.querySelectorAll("main section").forEach((s) => s.hidden = s.id !== "tab-" + b.dataset.tab);
+  ({ queue: loadQueue, notes: loadNotes, reports: loadReports, library: loadLibrary, author: loadAuthor })[b.dataset.tab]?.();
+});
+
+function side(t, lang) {
+  if (!t) return '<div class="muted">No ' + (lang === "hi" ? "Hindi" : "English") + ' version yet.</div>';
+  const mcq = t.mcq;
+  return `<div class="${lang === "hi" ? "hi" : ""}">
+    ${t.illustration ? `<img class="art" src="${esc(t.illustration)}" alt="">` : ""}
+    ${t.chips?.length ? `<div>${t.chips.map((c) => `<span class="chip">${esc(c)}</span>`).join(" ")}</div>` : ""}
+    <h3>${esc(t.headline)}</h3>
+    <p>${esc(t.summary) || '<span class="flag">No summary</span>'}</p>
+    <h4>Why it matters</h4><ul>${(t.whyForUpsc || []).map((x) => "<li>" + esc(x) + "</li>").join("")}</ul>
+    ${mcq ? `<h4>MCQ</h4><div>${esc(mcq.question)}</div><ol type="a">${mcq.options.map((o, i) => `<li${i === mcq.answerIndex ? ' class="approved"' : ""}>${esc(o)}</li>`).join("")}</ol><div class="muted">${esc(mcq.explanation)}</div>` : ""}
+    ${t.mainsPrompt ? `<h4>Mains</h4><div>${esc(t.mainsPrompt)}</div>` : ""}
+    <h4>Key facts</h4><ul>${(t.keyFacts || []).map((x) => "<li>" + esc(x) + "</li>").join("")}</ul>
+    ${t.chotu ? `<h4>Chotu</h4><div>“${esc(t.chotu)}”</div>` : ""}
+    ${t.takeaway ? `<h4>Takeaway (share card)</h4><div class="takeaway">${esc(t.takeaway)}</div>` : ""}
+  </div>`;
+}
+
+function enView(c) {
+  return { illustration: c.illustration, chips: c.chips, takeaway: c.takeaway, headline: c.headline, summary: c.summary, whyForUpsc: c.whyForUpsc, mcq: c.examCorner?.mcq, mainsPrompt: c.examCorner?.mainsPrompt, keyFacts: c.examCorner?.keyFacts, chotu: c.chotu };
+}
+
+async function loadQueue() {
+  const data = await api("/desk/api/queue?day=" + $("#day").value);
+  $("#published").textContent = data.publishedAt ? "Published " + new Date(data.publishedAt).toLocaleTimeString() : "Not published yet";
+  const approved = data.candidates.filter((c) => c.en_editor).length;
+  say(data.candidates.length + " candidates · " + approved + " approved");
+  $("#queue").innerHTML = data.candidates.map((r) => {
+    const c = r.card;
+    return `<div class="card ${r.status}" data-id="${r.id}">
+      <div class="row">
+        <span class="chip tone-${c.tone}">${esc(c.tone)}</span>
+        <span class="chip">${esc(c.gsPaper)} · ${esc(c.topic)}</span>
+        <span class="chip">${esc(c.examType)}</span>
+        <span class="chip">score ${Math.round(r.score)}</span>
+        ${r.source_url ? `<a class="muted" href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_name)}</a>` : `<span class="muted">${esc(r.source_name)}</span>`}
+        ${c.shareable === false ? '<span class="chip">not shareable</span>' : ""}
+        <span style="margin-left:auto" class="muted">#<input type="number" min="1" max="12" value="${r.position ?? ""}" data-act="position" style="width:56px"></span>
+      </div>
+      ${r.flags.map((f) => `<div class="flag">⚑ ${esc(f)}</div>`).join("")}
+      <div class="cols"><div>${side(enView(c), "en")}</div><div>${side(c.hi, "hi")}</div></div>
+      <div class="row" style="margin-top:8px">
+        ${r.en_editor ? `<span class="approved">✓ English: ${esc(r.en_editor)}</span>` : `<button class="primary" data-act="approve" data-lang="en">Approve English</button>`}
+        ${r.hi_editor ? `<span class="approved">✓ हिंदी: ${esc(r.hi_editor)}</span>` : (c.hi ? `<button data-act="approve" data-lang="hi">Approve Hindi</button>` : "")}
+        ${c.chotu || c.hi?.chotu ? `<button data-act="strip-joke">Strip joke</button>` : ""}
+        <button data-act="edit">Edit</button>
+        ${r.en_editor || r.hi_editor ? `<button data-act="unapprove">Unapprove</button>` : ""}
+        ${r.status !== "rejected" ? `<button data-act="reject">Reject</button>` : ""}
+      </div>
+      <details><summary>Source text</summary><p class="muted">${esc(r.source_text)}</p></details>
+      <div class="editor" hidden><textarea rows="18">${esc(JSON.stringify(c, null, 2))}</textarea><button class="primary" data-act="save">Save edit</button></div>
+    </div>`;
+  }).join("") || '<p class="muted">Nothing queued for this day. Fetch now, or add a story by hand.</p>';
+}
+
+$("#queue").addEventListener("click", async (e) => {
+  const b = e.target.closest("button[data-act]");
+  if (!b) return;
+  const box = b.closest("[data-id]");
+  const id = box.dataset.id;
+  const act = b.dataset.act;
+  if (act === "edit") { box.querySelector(".editor").hidden = false; return; }
+  if (act === "author") {
+    document.querySelector('nav [data-tab="author"]').click();
+    await loadAuthor();
+    auShow(await api("/desk/api/author/draft/" + id));
+    document.querySelector(`#au-drafts [data-id="${CSS.escape(box.dataset.lib)}"]`)?.scrollIntoView();
+    return;
+  }
+  if (act === "save") {
+    let card;
+    try { card = JSON.parse(box.querySelector("textarea").value); } catch { say("That JSON doesn't parse"); return; }
+    await api("/desk/api/cards/" + id, { method: "POST", body: { card } });
+  } else if (act === "reject" && !confirm("Reject this card?")) {
+    return;
+  } else {
+    await api("/desk/api/cards/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: $("#editor").value } });
+  }
+  loadQueue();
+});
+$("#queue").addEventListener("change", async (e) => {
+  if (e.target.dataset.act !== "position") return;
+  await api("/desk/api/cards/" + e.target.closest("[data-id]").dataset.id + "/position", { method: "POST", body: { position: e.target.value } });
+});
+
+$("#reload").onclick = loadQueue;
+$("#write").onclick = async () => {
+  const r = await api("/desk/api/cards/new", { method: "POST", body: { day: $("#day").value } });
+  await loadQueue();
+  const box = document.querySelector(`[data-id="${r.id}"]`);
+  box.querySelector(".editor").hidden = false;
+  box.scrollIntoView();
+  say("New card: fill in the JSON, save, then approve");
+};
+$("#day").onchange = loadQueue;
+$("#run").onclick = async () => { say("Fetching and drafting, this takes a minute…"); const r = await api("/desk/api/pipeline", { method: "POST" }); say(r.log.join(" · ")); loadQueue(); };
+$("#publish").onclick = async () => {
+  if (!confirm("Publish the approved cards to every pod?")) return;
+  const r = await api("/desk/api/publish", { method: "POST", body: { day: $("#day").value } });
+  say(r.published ? "Published " + r.cards + " cards" : r.reason);
+  loadQueue();
+};
+$("#a-go").onclick = async () => {
+  await api("/desk/api/stories", { method: "POST", body: { title: $("#a-title").value, sourceName: $("#a-source").value, sourceUrl: $("#a-url").value, text: $("#a-text").value } });
+  say("Drafted into today's queue");
+  ["#a-title", "#a-source", "#a-url", "#a-text"].forEach((s) => $(s).value = "");
+};
+document.querySelectorAll("[data-ritual]").forEach((b) => b.onclick = async () => {
+  const r = await api("/desk/api/ritual", { method: "POST", body: { kind: b.dataset.ritual } });
+  say("Posted to " + r.pods + " pods");
+});
+
+// --- Library: content packs, explainers, games, sounds -------------------------------------------
+const KIND_NAMES = { explainer: "Explainers", timeline: "Timelines", match: "Match games", quiz: "Quiz nights", map: "Map Chai", number: "Number Sense", myth: "Myth vs Fact", debate: "Two Sides", scratch: "Scratch and reveal", trail: "Stamp trail", radio: "Chai stall radio", assemble: "Snap together", chain: "Domino effect", thennow: "Then and now", postcard: "Postcards", quote: "Quotes", mock: "Mock papers", read: "Long reads", "trap-spotter": "Trap spotter", "better-answer": "Better answer", "odd-one-out": "Odd one out", "two-truths": "Two truths and a lie", "who-am-i": "Who am I?", "assertion-reason": "Assertion and reason", "how-many-correct": "How many are correct?", "bucket-sort": "Sort into buckets", "union-state-list": "Union, State or Concurrent", "fact-or-opinion": "Fact or opinion", "rank-it": "Rank it", "timeline-shuffle": "Timeline shuffle", "pair-up": "Pair up", "committee-match": "Committee match", "flashcards": "Flashcards", "mnemonic": "Mnemonic", "acronym-unpack": "Acronym unpacked", "landmark-case": "Landmark case", "scheme-snapshot": "Scheme snapshot", "index-card": "Index card", "word-bank": "Word bank", "directive-word": "Directive words", "two-levels": "Two levels", "story-beats": "Story beats", "ethics-dilemma": "Ethics dilemma", "answer-skeleton": "Answer skeleton", "versus": "Versus", "before-after": "Before and after", "link-web": "Link web", "fill-the-gap": "Fill the gap", "hidden-why": "The Hidden Why", winddown: "Lamp Off", sound: "Sounds" };
+$("#new-kind").innerHTML = Object.entries(KIND_NAMES).map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+let libKind = "";
+let libRows = [];
+
+async function loadLibrary() {
+  libRows = await api("/desk/api/library");
+  const counts = {};
+  libRows.forEach((r) => counts[r.kind] = (counts[r.kind] || 0) + 1);
+  $("#kind-tabs").innerHTML = [["", "All", libRows.length], ...Object.entries(KIND_NAMES).filter(([k]) => counts[k]).map(([k, v]) => [k, v, counts[k]])]
+    .map(([k, v, n]) => `<button data-kind="${k}" class="${k === libKind ? "on" : ""}">${v} (${n})</button>`).join("");
+  const rows = libRows.filter((r) => !libKind || r.kind === libKind);
+  const live = libRows.filter((r) => r.status === "approved").length;
+  say(libRows.length + " library items · " + live + " in the app");
+  $("#library").innerHTML = rows.map(libCard).join("") || '<p class="muted">Nothing here yet. Import a pack or start a draft.</p>';
+  // Packs with drafts still waiting: one button approves every waiting English (or Hindi) in that pack, in your name.
+  const waiting = {};
+  libRows.filter((r) => r.pack && r.status !== "hidden").forEach((r) => {
+    const w = waiting[r.pack] ??= { en: 0, hi: 0 };
+    if (!r.en_editor) w.en++; else if (!r.hi_editor && JSON.stringify(r.data).includes('"hi"')) w.hi++;
+  });
+  $("#pack-approve").innerHTML = Object.entries(waiting).filter(([, w]) => w.en || w.hi).map(([p, w]) =>
+    `<span class="muted">pack ${esc(p)}:</span>` +
+    (w.en ? `<button data-pack="${esc(p)}" data-lang="en">Approve English on all ${w.en}</button>` : "") +
+    (w.hi ? `<button data-pack="${esc(p)}" data-lang="hi">Approve Hindi on all ${w.hi}</button>` : "")).join(" ");
+}
+$("#pack-approve").addEventListener("click", async (e) => {
+  const b = e.target.closest("button[data-pack]");
+  if (!b) return;
+  const { pack, lang } = b.dataset;
+  const editor = $("#editor").value.trim();
+  if (!editor) return say("Add your name at the top first; it shows in the app");
+  const todo = libRows.filter((r) => r.pack === pack && r.status !== "hidden" && (lang === "en" ? !r.en_editor : r.en_editor && !r.hi_editor));
+  if (!confirm(`Approve the ${lang === "en" ? "English" : "Hindi"} of ${todo.length} items from ${pack} in your name (${editor})?\n\nOnly do this if you have checked every one of them. Each stays undoable with Unapprove.`)) return;
+  let ok = 0; const failed = [];
+  for (const r of todo) {
+    say(`Approving ${ok + failed.length + 1} of ${todo.length}…`);
+    try { await api("/desk/api/library/" + encodeURIComponent(r.id) + "/approve", { method: "POST", body: { lang, editor } }); ok++; }
+    catch (err) { failed.push(r.title + ": " + err.message); }
+  }
+  await loadLibrary();
+  say(`Approved ${ok} of ${todo.length}.` + (failed.length ? " Not approved: " + failed.slice(0, 3).join("; ") : ""));
+});
+
+/** Every piece of text that has an English and a Hindi side, as a two-column table. */
+function bilingual(data) {
+  const rows = [];
+  const flat = (v) => Array.isArray(v) ? v.map((x) => typeof x === "object" ? JSON.stringify(x) : "• " + x).join("\n")
+    : typeof v === "object" && v ? Object.entries(v).map(([k, x]) => k + ": " + (typeof x === "object" ? JSON.stringify(x) : x)).join("\n") : String(v ?? "");
+  const walk = (n, path) => {
+    if (Array.isArray(n)) return n.forEach((x, i) => walk(x, path + "[" + (i + 1) + "]"));
+    if (!n || typeof n !== "object") return;
+    if ("en" in n) rows.push([path + (n.article ? " · Art. " + n.article : n.verdict ? " · " + n.verdict : n.date ? " · " + n.date : ""), flat(n.en), "hi" in n ? flat(n.hi) : null]);
+    for (const [k, v] of Object.entries(n)) if (k !== "en" && k !== "hi" && k !== "review" && k !== "frame") walk(v, path ? path + "." + k : k);
+  };
+  walk(data, "");
+  return `<table class="bi">${rows.map(([k, en, hi]) => `<tr><td class="k">${esc(k)}</td><td style="white-space:pre-wrap">${esc(en)}</td><td class="h" style="white-space:pre-wrap">${hi === null ? '<span class="flag">No Hindi</span>' : esc(hi)}</td></tr>`).join("")}</table>`;
+}
+
+function mediaOf(data) {
+  const out = new Set();
+  JSON.stringify(data, (k, v) => { if (typeof v === "string" && v.startsWith("/media/")) out.add(v); return v; });
+  return [...out].map((p) => /\.(svg|png|webp)$/.test(p) ? `<img class="art" src="${esc(p)}" alt="">`
+    : /\.(ogg|m4a)$/.test(p) ? `<div class="row"><audio controls preload="none" src="${esc(p)}"></audio><span class="muted">${esc(p.split("/").pop())}</span></div>` : "").join("");
+}
+
+function libCard(r) {
+  const d = r.data;
+  const scenes = r.kind === "explainer" ? `<h4>Scenes</h4><ol>${(d.scenes || []).map((s) => `<li>${s.seconds}s · ${esc(s.caption?.en)}<div class="muted">${esc(JSON.stringify(s.state))}</div></li>`).join("")}</ol>` : "";
+  return `<div class="card ${r.status === "hidden" ? "rejected" : ""}" data-lib="${esc(r.id)}">
+    <div class="row">
+      <span class="chip">${esc(KIND_NAMES[r.kind] || r.kind)}</span>
+      <strong>${esc(r.title)}</strong>
+      <span class="chip">${esc(r.status === "approved" ? "in the app" : r.status)}</span>
+      ${r.pack ? `<span class="muted">pack ${esc(r.pack)}</span>` : ""}
+    </div>
+    ${r.flags.map((f) => `<div class="flag">⚑ ${esc(f)}</div>`).join("")}
+    ${mediaOf(d)}
+    ${bilingual(d)}
+    ${scenes}
+    <div class="row" style="margin-top:8px">
+      ${r.en_editor ? `<span class="approved">✓ English: ${esc(r.en_editor)}</span>` : `<button class="primary" data-l="approve" data-lang="en">Approve English</button>`}
+      ${r.hi_editor ? `<span class="approved">✓ हिंदी: ${esc(r.hi_editor)}</span>` : (r.en_editor ? `<button data-l="approve" data-lang="hi">Approve Hindi</button>` : "")}
+      <button data-l="edit">Edit</button>
+      ${r.en_editor || r.hi_editor ? `<button data-l="unapprove">Unapprove</button>` : ""}
+      ${r.status === "hidden" ? `<button data-l="show">Show</button>` : `<button data-l="hide">Hide</button>`}
+      ${!r.en_editor ? `<button data-l="delete">Delete</button>` : ""}
+      <button data-l="author" title="Side by side, with every language">Open in Author</button>
+    </div>
+    ${otherLangs(r)}
+    <div class="editor" hidden><textarea rows="22">${esc(JSON.stringify(d, (k, v) => k === "frame" ? undefined : v, 2))}</textarea><button class="primary" data-l="save">Save edit</button></div>
+  </div>`;
+}
+
+const LANG_NAMES = { te: "Telugu", mr: "Marathi", ta: "Tamil", bn: "Bengali", kn: "Kannada" };
+/** Languages beyond English and Hindi: approved, or waiting for their editor. */
+function otherLangs(r) {
+  const trs = JSON.parse(r.translations || "{}"), ap = JSON.parse(r.approvals || "{}");
+  const codes = Object.keys(trs);
+  if (!codes.length) return "";
+  return `<div class="row" style="margin-top:6px">${codes.map((l) => ap[l]
+    ? `<span class="approved">✓ ${esc(LANG_NAMES[l] || l)}: ${esc(ap[l].by)}</span>`
+    : `<span class="chip">${esc(LANG_NAMES[l] || l)}: waiting for its editor</span>`).join(" ")}<span class="muted">Check and approve these in Author.</span></div>`;
+}
+$("#tr-go").onclick = async () => {
+  const files = [...$("#tr-file").files];
+  if (!files.length) return say("Pick a .te.json file first");
+  const out = [];
+  for (const f of files) {
+    try { const r = await api("/desk/api/library/translation", { method: "POST", body: JSON.parse(await f.text()) }); out.push("✓ " + r.message); }
+    catch (err) { out.push("✗ " + f.name + ": " + err.message); }
+  }
+  $("#pack-log").textContent = out.join("\n");
+  loadLibrary();
+};
+
+$("#kind-tabs").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-kind]");
+  if (!b) return;
+  libKind = b.dataset.kind;
+  loadLibrary();
+});
+$("#library").addEventListener("click", async (e) => {
+  const b = e.target.closest("button[data-l]");
+  if (!b) return;
+  const box = b.closest("[data-lib]");
+  const id = encodeURIComponent(box.dataset.lib);
+  const act = b.dataset.l;
+  if (act === "edit") { box.querySelector(".editor").hidden = false; return; }
+  if (act === "save") {
+    let data;
+    try { data = JSON.parse(box.querySelector("textarea").value); } catch { say("That JSON doesn't parse"); return; }
+    await api("/desk/api/library/" + id, { method: "POST", body: { data } });
+  } else {
+    if (act === "delete" && !confirm("Delete this draft?")) return;
+    await api("/desk/api/library/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: $("#editor").value } });
+  }
+  loadLibrary();
+});
+$("#new-go").onclick = async () => {
+  const r = await api("/desk/api/library/new", { method: "POST", body: { kind: $("#new-kind").value } });
+  libKind = $("#new-kind").value;
+  await loadLibrary();
+  const box = document.querySelector(`[data-lib="${CSS.escape(r.id)}"]`);
+  box.querySelector(".editor").hidden = false;
+  box.scrollIntoView();
+};
+
+async function putFile(url, file) {
+  const res = await fetch(url, { method: "PUT", headers: { authorization: "Bearer " + $("#token").value }, body: file });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+$("#up-go").onclick = async () => {
+  const f = $("#up-file").files[0];
+  if (!f) return say("Pick a file first");
+  try {
+    $("#up-path").value = (await putFile("/desk/api/uploads/" + encodeURIComponent(f.name.replace(/[^\w.-]/g, "_")), f)).path;
+    $("#up-path").select();
+    say("Uploaded. Paste the link into the item.");
+  } catch (err) { say(err.message); }
+};
+
+$("#pack-go").onclick = async () => {
+  const files = [...$("#pack-dir").files];
+  const root = (f) => f.webkitRelativePath.split("/").slice(1).join("/");
+  const mf = files.find((f) => root(f) === "manifest.json");
+  if (!mf) return say("That folder has no manifest.json");
+  const manifest = JSON.parse(await mf.text());
+  const pack = encodeURIComponent(manifest.packId);
+  const log = $("#pack-log");
+  log.textContent = "Uploading pack " + manifest.packId + "…\n";
+  try {
+    await putFile(`/desk/api/packs/${pack}/files/manifest.json`, mf);
+    for (const entry of manifest.files) {
+      const f = files.find((x) => root(x) === entry.path);
+      if (!f) { log.textContent += "skip " + entry.path + " (not in the folder)\n"; continue; }
+      await putFile(`/desk/api/packs/${pack}/files/${entry.path}`, f);
+      log.textContent += "✓ " + entry.path + "\n";
+    }
+    const out = await api(`/desk/api/packs/${pack}/import`, { method: "POST" });
+    log.textContent += "\n" + [...out.log, ...(out.warnings || []).map((w) => "note: " + w)].join("\n");
+    say("Imported. Cards are in the queue; the rest is below.");
+    loadLibrary();
+  } catch (err) { log.textContent += "\n✗ " + err.message; say(err.message); }
+};
+
+async function loadNotes() {
+  const notes = await api("/desk/api/notes");
+  $("#notes").innerHTML = notes.map((n) => `<div class="card" data-id="${esc(n.id)}">
+    <div class="row"><span class="chip">${esc(n.kind)}</span><strong>${esc(n.title)}</strong><span class="muted">${n.embedded ? "indexed" : "not indexed yet"}</span>
+    <button style="margin-left:auto" data-del>Delete</button></div>
+    <p>${esc(n.body)}</p><div class="muted">${esc(n.source)}</div></div>`).join("") || '<p class="muted">No notes yet. Load the starter notes.</p>';
+}
+$("#notes").addEventListener("click", async (e) => {
+  if (!e.target.matches("[data-del]") || !confirm("Delete this note?")) return;
+  await api("/desk/api/notes/" + e.target.closest("[data-id]").dataset.id, { method: "DELETE" });
+  loadNotes();
+});
+$("#n-go").onclick = async () => {
+  await api("/desk/api/notes", { method: "POST", body: { kind: $("#n-kind").value, title: $("#n-title").value, body: $("#n-body").value, source: $("#n-source").value } });
+  ["#n-title", "#n-body", "#n-source"].forEach((s) => $(s).value = "");
+  loadNotes();
+};
+$("#n-seed").onclick = async () => { const r = await api("/desk/api/notes/seed", { method: "POST" }); say("Loaded " + r.added + " notes"); loadNotes(); };
+
+async function loadReports() {
+  const rows = await api("/mod/api/reports");
+  $("#reports").innerHTML = rows.map((r) => `<div class="card" data-id="${r.id}">
+    <div class="row"><span class="chip ${r.kind === "distress" ? "tone-serious" : ""}">${r.kind === "distress" ? "Distress alert" : "Report"}</span>
+    <strong>${esc(r.author)}</strong><span class="muted">${esc(r.pod_id)} · ${new Date(r.created_at).toLocaleString()}</span></div>
+    <p>${esc(r.text)}</p>${r.reason ? `<div class="muted">Reason: ${esc(r.reason)}</div>` : ""}
+    <div class="row">${r.kind === "report" ? '<button data-a="hide">Hide message</button>' : ""}<button data-a="dismiss">${r.kind === "distress" ? "Followed up" : "Dismiss"}</button></div></div>`).join("") || '<p class="muted">Nothing open.</p>';
+}
+$("#reports").addEventListener("click", async (e) => {
+  const a = e.target.dataset.a;
+  if (!a) return;
+  await api("/mod/api/reports/" + e.target.closest("[data-id]").dataset.id, { method: "POST", body: { action: a } });
+  loadReports();
+});
+
+// --- Author: paste, pick, Generate; then edit and approve each language side by side ---------------
+const AU = { types: [], langs: [], max: 3, claude: null, picked: [], pdf: null, drafts: [] };
+try { AU.drafts = JSON.parse(sessionStorage.getItem("au-drafts") || "[]"); } catch {}
+const auKeep = () => { try { sessionStorage.setItem("au-drafts", JSON.stringify(AU.drafts.slice(0, 12))); } catch {} };
+const auLive = () => !!(AU.claude && AU.claude.key && AU.claude.on);
+
+async function loadAuthor() {
+  const t = await api("/desk/api/author/types");
+  Object.assign(AU, { types: t.types, langs: t.langs, max: t.maxTypes, claude: t.claude });
+  $("#au-mode").textContent = auLive() ? `Writes with ${t.claude.model}. Templates from ${t.templatesFrom}.`
+    : (t.claude.key ? "Claude is switched off for authoring in Admin, so this works by hand: " : "No Claude key on this server, so this works by hand: ")
+      + "copy each prompt into Claude, then paste the answer back.";
+  $("#au-go").textContent = auLive() ? "Generate" : "Get the prompts";
+  $("#au-langs").innerHTML = t.langs.map((l) => l.inPack
+    ? `<span class="chip">✓ ${esc(l.name)}</span>`
+    : `<label><input type="checkbox" value="${l.code}" checked> ${esc(l.name)} (${esc(l.native)})</label>`).join(" ")
+    + ' <span class="muted">English and Hindi are written together. Others are translated from the English.</span>';
+  auTypes();
+  if (!$("#au-drafts").children.length) for (const id of AU.drafts) api("/desk/api/author/draft/" + id).then(auShow).catch(() => {});
+}
+
+function auTypes() {
+  const q = $("#au-find").value.trim().toLowerCase();
+  $("#au-types").innerHTML = AU.types.filter((t) => !q || AU.picked.includes(t.key) || (t.title + " " + t.key + " " + t.family).toLowerCase().includes(q))
+    .map((t) => `<button data-k="${t.key}" class="${AU.picked.includes(t.key) ? "on" : ""}" title="${esc(t.family)}">${esc(t.title)}</button>`).join("");
+  $("#au-picked").textContent = AU.picked.length ? AU.picked.length + " of " + AU.max + " picked" : "None picked yet: Generate will suggest";
+}
+$("#au-find").oninput = auTypes;
+$("#au-types").onclick = (e) => {
+  const k = e.target.dataset.k;
+  if (!k) return;
+  if (AU.picked.includes(k)) AU.picked = AU.picked.filter((x) => x !== k);
+  else if (AU.picked.length < AU.max) AU.picked.push(k);
+  else return say("Up to " + AU.max + " at a time");
+  auTypes();
+};
+$("#au-pdf").onchange = () => {
+  const f = $("#au-pdf").files[0];
+  if (!f) return;
+  if (f.size > 10e6) { say("Keep PDFs under 10 MB"); $("#au-pdf").value = ""; return; }
+  const r = new FileReader();
+  r.onload = () => { AU.pdf = r.result; $("#au-pdf-clear").hidden = false; say("PDF ready: " + f.name); };
+  r.readAsDataURL(f);
+};
+$("#au-pdf-clear").onclick = () => { AU.pdf = null; $("#au-pdf").value = ""; $("#au-pdf-clear").hidden = true; };
+const auSource = () => ({ source: $("#au-src").value, pdf: AU.pdf || undefined, notes: $("#au-notes").value });
+const auLangs = () => [...document.querySelectorAll("#au-langs input:checked")].map((i) => i.value);
+
+async function auSuggest() {
+  say("Reading the source…");
+  const r = await api("/desk/api/author/suggest", { method: "POST", body: auSource() });
+  AU.picked = r.types.slice(0, AU.max);
+  auTypes();
+  say("Suggested (" + r.how + "). Change them if you like.");
+}
+$("#au-suggest").onclick = auSuggest;
+
+async function copy(text, btn) {
+  try {
+    await navigator.clipboard.writeText(text);
+    if (btn) { const t = btn.textContent; btn.textContent = "Copied ✓"; setTimeout(() => btn.textContent = t, 1500); }
+  } catch { prompt("Copy this:", text); }
+}
+
+$("#au-go").onclick = async () => {
+  const src = auSource();
+  if (!src.source.trim() && !src.pdf) return say("Paste a source first");
+  const btn = $("#au-go");
+  if (auLive()) {
+    btn.disabled = true;
+    say("Writing " + (AU.picked.length || "the suggested") + " draft(s)… this can take a minute");
+    try {
+      const r = await api("/desk/api/author/generate", { method: "POST", body: { ...src, types: AU.picked.length ? AU.picked : "suggest", langs: auLangs() } });
+      r.drafts.forEach(auShow);
+      say(r.drafts.length + " draft(s) ready below" + (r.failed.length ? ". Failed: " + r.failed.map((f) => f.title + " (" + f.error + ")").join(", ") : ""));
+    } finally { btn.disabled = false; }
+    return;
+  }
+  // By hand: one prompt per type.
+  if (src.pdf) return say("By hand needs text: paste the PDF's text into the box.");
+  if (!AU.picked.length) await auSuggest();
+  $("#au-manual").innerHTML = AU.picked.map((k) => {
+    const t = AU.types.find((x) => x.key === k);
+    return `<div class="card" data-k="${k}" style="margin-top:12px"><strong>${esc(t.title)}</strong>
+      <div class="row" style="margin:6px 0"><button data-m="copy" class="primary">Copy prompt</button><span class="muted">Paste it into Claude, then paste Claude's whole answer here:</span></div>
+      <textarea rows="4" placeholder="Claude's answer"></textarea><div class="row"><button data-m="save">Make the draft</button></div></div>`;
+  }).join("");
+  say("Copy each prompt into Claude, then paste the answers back");
+};
+$("#au-manual").onclick = async (e) => {
+  const m = e.target.dataset.m, box = e.target.closest("[data-k]");
+  if (!m) return;
+  const body = { ...auSource(), type: box.dataset.k };
+  if (m === "copy") return copy((await api("/desk/api/author/prompt", { method: "POST", body })).paste, e.target);
+  const reply = box.querySelector("textarea").value;
+  if (!reply.trim()) return say("Paste Claude's answer first");
+  const r = await api("/desk/api/author/fill", { method: "POST", body: { ...body, reply } });
+  r.drafts.forEach(auShow);
+  box.remove();
+  say("Draft ready below. Translate it, check it, then approve.");
+};
+
+const auLang = (code) => AU.langs.find((l) => l.code === code) || { code, name: code, native: code };
+const AU_NAMES = { en: "English", hi: "हिंदी" };
+const auName = (l) => AU_NAMES[l] || auLang(l).native;
+
+function auCell(r, l) {
+  let text, cls = "";
+  if (l === "en") text = r.en;
+  else if (l === "hi") text = r.hi ?? "";
+  else { const x = r.extra[l]; text = x ? x.text : ""; cls = !x ? "empty" : x.stale ? "stale" : ""; }
+  if (l !== "en" && r.keep) return `<div><span class="lh">${esc(auName(l))}</span><span class="muted">${esc(text || r.en)} (kept as is)</span></div>`;
+  const note = cls === "stale" ? " · English changed, redo this" : cls === "empty" ? " · missing" : "";
+  const rows = Math.min(6, Math.ceil(String(text).length / 60) + 1);
+  return `<div><span class="lh">${esc(auName(l))}${note}</span><textarea data-p="${esc(r.path)}" data-l="${l}" class="${cls}" rows="${rows}" lang="${l}" title="${esc(note.slice(3))}">${esc(text)}</textarea></div>`;
+}
+
+function auApprove(d, l) {
+  if (d.approvals[l]) return `<span class="approved">✓ ${esc(auName(l))}: ${esc(d.approvals[l])}</span><button data-a="unapprove" data-l="${l}">Take back</button>`;
+  if (l !== "en" && !d.approvals.en) return "";
+  if (l !== "en" && l !== "hi" && !auLang(l).canApprove) return `<span class="muted">${esc(auName(l))} needs a ${esc(auLang(l).name)} editor</span>`;
+  return `<button data-a="approve" data-l="${l}" class="${l === "en" ? "primary" : ""}">Approve ${esc(auName(l))}</button>`;
+}
+
+function auShow(d) {
+  if (!AU.drafts.includes(d.id)) { AU.drafts.unshift(d.id); auKeep(); }
+  const extra = AU.langs.filter((l) => !l.inPack);
+  const cols = ["en", "hi", ...d.langs.filter((l) => l !== "en" && l !== "hi")];
+  const missing = extra.filter((l) => !d.langs.includes(l.code));
+  const html = `<div class="card" data-id="${esc(d.id)}" style="--n:${cols.length}">
+    <div class="row"><span class="chip">${esc(d.typeTitle)}</span><strong>${esc(d.title)}</strong><span class="muted">${esc(d.status)}${d.from ? " · from " + esc(d.from) : ""}</span>
+      <button data-a="close" style="margin-left:auto" title="Remove from this list (the draft stays in Library)">✕</button></div>
+    ${d.general.map((f) => `<div class="flag">${esc(f)}</div>`).join("")}
+    <div class="fr head"><div>Field</div>${cols.map((l) => `<div>${esc(auName(l))}</div>`).join("")}</div>
+    ${d.rows.map((r) => `<div class="fr ${r.issues.length ? "bad" : ""}"><div class="k">${esc(r.label)}${r.register === "chat" ? `<div class="muted" title="Talks to the reader: everyday tone in every language">chatty tone</div>` : ""}</div>${cols.map((l) => auCell(r, l)).join("")}
+      ${r.issues.length ? `<div class="why">${r.issues.map((f) => `<div class="flag">${esc(f)}</div>`).join("")}</div>` : ""}</div>`).join("")}
+    <div class="sticky-save row"><button data-a="save" class="primary" disabled>Save changes</button>
+      ${cols.map((l) => auApprove(d, l)).join(" ")}
+      ${missing.length ? `<span class="muted">Not yet in ${missing.map((l) => esc(l.name)).join(", ")}.</span>` : ""}
+      ${extra.length ? `<details style="flex-basis:100%"><summary>Translate</summary>
+        <div class="row" style="margin-top:6px">
+        ${extra.map((l) => `<span>${esc(l.name)}:</span>
+          ${auLive() ? `<button data-a="translate" data-l="${l.code}">${d.langs.includes(l.code) ? "Translate again" : "Translate"}</button>` : ""}
+          <button data-a="tprompt" data-l="${l.code}">Copy translate prompt</button>`).join("")}
+        </div>
+        <textarea data-tr rows="3" placeholder="Paste Claude's translation (or a whole .${extra[0].code}.json file) here" style="margin-top:6px"></textarea>
+        <div class="row"><select data-trl>${extra.map((l) => `<option value="${l.code}">${esc(l.name)}</option>`).join("")}</select><button data-a="tsave">Save translation</button></div>
+      </details>` : ""}
+    </div></div>`;
+  const old = document.querySelector(`#au-drafts [data-id="${CSS.escape(d.id)}"]`);
+  if (old) old.outerHTML = html; else $("#au-drafts").insertAdjacentHTML("afterbegin", html);
+}
+
+$("#au-drafts").addEventListener("input", (e) => {
+  if (!e.target.dataset.p) return;
+  e.target.classList.add("dirty");
+  e.target.closest("[data-id]").querySelector('[data-a="save"]').disabled = false;
+});
+$("#au-drafts").addEventListener("click", async (e) => {
+  const a = e.target.dataset.a;
+  if (!a) return;
+  const card = e.target.closest("[data-id]"), id = card.dataset.id, l = e.target.dataset.l;
+  const base = "/desk/api/author/draft/" + id;
+  if (a === "close") { AU.drafts = AU.drafts.filter((x) => x !== id); auKeep(); return card.remove(); }
+  if (a === "save") {
+    const edits = [...card.querySelectorAll("textarea.dirty")].map((t) => ({ path: t.dataset.p, lang: t.dataset.l, text: t.value }));
+    if (edits.some((x) => x.lang === "en" || x.lang === "hi") && card.querySelector(".approved") && !confirm("Changing English or Hindi takes back every approval. Save?")) return;
+    auShow(await api(base, { method: "POST", body: { edits } }));
+    return say("Saved and checked again");
+  }
+  if (a === "approve" || a === "unapprove") {
+    if (card.querySelector("textarea.dirty")) return say("Save your changes first");
+    if (a === "approve" && !$("#editor").value.trim()) return say("Add your name at the top first; it shows in the app");
+    await api("/desk/api/library/" + id + "/" + a, { method: "POST", body: { lang: l, editor: $("#editor").value } });
+    auShow(await api(base));
+    return say(a === "approve" ? "Approved" : "Approval taken back");
+  }
+  if (a === "translate") {
+    e.target.disabled = true; say("Translating…");
+    try { auShow(await api(base + "/translate", { method: "POST", body: { lang: l } })); say("Translated. Check it, then approve."); }
+    finally { e.target.disabled = false; }
+    return;
+  }
+  if (a === "tprompt") return copy((await api(base + "/translate-prompt", { method: "POST", body: { lang: l } })).paste, e.target);
+  if (a === "tsave") {
+    const reply = card.querySelector("[data-tr]").value;
+    if (!reply.trim()) return say("Paste the translation first");
+    auShow(await api(base + "/translation", { method: "POST", body: { lang: card.querySelector("[data-trl]").value, reply } }));
+    say("Translation saved. Check it, then approve.");
+  }
+});
+
+if ($("#token").value) loadQueue().catch(() => {});
+</script>
+</body>
+</html>

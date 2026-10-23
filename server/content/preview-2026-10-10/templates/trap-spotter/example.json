@@ -1,0 +1,65 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "id": "trap-spotter-article-32-writs",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Trap spotter: writs and their reach",
+    "hi": "जाल पहचानें: रिट और उनकी पहुँच"
+  },
+  "questions": [
+    {
+      "answerIndex": 1,
+      "traps": [
+        "extreme-word",
+        "none",
+        "right-fact-wrong-reason",
+        "sounds-familiar"
+      ],
+      "en": {
+        "question": "Which writ can be issued against both public authorities and private persons?",
+        "options": [
+          "Only mandamus can free a detained person",
+          "Habeas corpus, which tests whether a detention is lawful",
+          "Mandamus, which orders a public body to perform its duty",
+          "Quo warranto, which asks a judge to explain a verdict"
+        ],
+        "why": "Trap: right-fact-wrong-reason. The mandamus line is true, but it does not answer who a writ can reach. Habeas corpus can be issued against public authorities and private persons."
+      },
+      "hi": {
+        "question": "कौन-सा रिट सरकारी प्राधिकारियों और निजी व्यक्तियों, दोनों के विरुद्ध जारी हो सकता है?",
+        "options": [
+          "केवल परमादेश ही किसी बंदी को छुड़ा सकता है",
+          "बंदी प्रत्यक्षीकरण, जो हिरासत की वैधता की जाँच करता है",
+          "परमादेश, जो किसी सार्वजनिक निकाय को सार्वजनिक कर्तव्य निभाने का आदेश देता है",
+          "अधिकार पृच्छा, जो किसी न्यायाधीश से फैसले की व्याख्या माँगता है"
+        ],
+        "why": "जाल: सही तथ्य, गलत कारण। परमादेश वाली बात सही है, पर वह यह नहीं बताती कि रिट किस तक पहुँच सकती है। बंदी प्रत्यक्षीकरण सरकारी प्राधिकारियों और निजी व्यक्तियों, दोनों के विरुद्ध जारी हो सकता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/trap-spotter/",
+    "createdOn": "2026-10-10"
+  }
+}

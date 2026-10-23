@@ -1,0 +1,30 @@
+{
+  "schema": "upsc-pods/winddown@1",
+  "id": "lamp-off",
+  "seconds": 120,
+  "theme": "always dark",
+  "audio": {
+    "file": "audio/bed.ogg",
+    "gain": 0.45,
+    "onlyIfSoundOn": true
+  },
+  "text": {
+    "en": {
+      "start": "Let the lamp go out on its own. You don't need to do anything.",
+      "cue": "Breathe in for four, out for six. Once is enough.",
+      "button": "Dim the lamp",
+      "end": "Sleep is revision too."
+    },
+    "hi": {
+      "start": "दीया अपने आप बुझने दीजिए। आपको कुछ नहीं करना है।",
+      "cue": "चार तक साँस लें, छह तक छोड़ें। एक बार काफ़ी है।",
+      "button": "दीया धीमा करें",
+      "end": "नींद भी दोहराई का हिस्सा है।"
+    }
+  },
+  "motion": "flame and glow fade to 8% and 0% over 120 s in one linear change; with animations off, show the dim state at once",
+  "rules": [
+    "Never shareable",
+    "Nothing below the end line"
+  ]
+}

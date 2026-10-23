@@ -1,0 +1,890 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "csat-sectional-reasoning-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "CSAT logical reasoning sectional mock 1",
+    "hi": "CSAT तार्किक विवेचन सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "CSAT Paper II Logical Reasoning and Analytical Ability",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "csat-syllogisms",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the statements and conclusions given below. Treat the statements as true, even if they seem to differ from commonly known facts.",
+        "statements": [
+          "Statement: All pens are books.",
+          "Statement: All books are tables.",
+          "Conclusion I: All pens are tables.",
+          "Conclusion II: Some tables are pens."
+        ],
+        "ask": "Which of the conclusions logically follow(s) from the statements?",
+        "options": [
+          "Neither I nor II",
+          "I only",
+          "II only",
+          "Both I and II"
+        ],
+        "why": "Pens sit inside books and books inside tables, so every pen is a table (I). Those pens are then tables that are pens (II). The trap is 'I only': II is simply I read from the other side."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों और निष्कर्षों पर विचार कीजिए। कथनों को सत्य मानिए, भले ही वे सामान्य रूप से ज्ञात तथ्यों से भिन्न लगें।",
+        "statements": [
+          "कथन: सभी पेन किताबें हैं।",
+          "कथन: सभी किताबें मेज़ें हैं।",
+          "निष्कर्ष I: सभी पेन मेज़ें हैं।",
+          "निष्कर्ष II: कुछ मेज़ें पेन हैं।"
+        ],
+        "ask": "कौन-सा/से निष्कर्ष कथनों से तार्किक रूप से निकलता है/निकलते हैं?",
+        "options": [
+          "न तो I और न ही II",
+          "केवल I",
+          "केवल II",
+          "I और II दोनों"
+        ],
+        "why": "पेन किताबों के अंदर हैं और किताबें मेज़ों के अंदर, तो हर पेन एक मेज़ है (I)। यही पेन ऐसी मेज़ें हैं जो पेन हैं (II)। 'केवल I' जाल है: II बस I को उलटी तरफ़ से पढ़ना है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-seating-and-ordering",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "In a class, Ravi is 12th from the top and 18th from the bottom in rank. How many students are there in the class?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "29",
+          "30",
+          "28",
+          "31"
+        ],
+        "why": "Total = 12 + 18 − 1 = 29, because Ravi is counted in both positions. The trap is 30, which counts him twice."
+      },
+      "hi": {
+        "stem": "एक कक्षा में रैंक के अनुसार रवि ऊपर से 12वाँ और नीचे से 18वाँ है। कक्षा में कितने छात्र हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "29",
+          "30",
+          "28",
+          "31"
+        ],
+        "why": "कुल = 12 + 18 − 1 = 29, क्योंकि रवि दोनों गिनती में शामिल है। 30 जाल है, उसमें रवि दो बार गिन लिया जाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-coding-decoding",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "In a certain code, MANGO is written as NBOHP. How is APPLE written in that code?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "BQQMF",
+          "BQPMF",
+          "ZOOKD",
+          "BRRNG"
+        ],
+        "why": "Each letter moves one place forward: M→N, A→B, N→O, G→H, O→P. So APPLE becomes BQQMF. ZOOKD moves letters backward, the reverse of the rule."
+      },
+      "hi": {
+        "stem": "एक कूट भाषा में MANGO को NBOHP लिखा जाता है। उसी कूट में APPLE को कैसे लिखा जाएगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कूट: BQQMF",
+          "कूट: BQPMF",
+          "कूट: ZOOKD",
+          "कूट: BRRNG"
+        ],
+        "why": "हर अक्षर एक स्थान आगे जाता है: M→N, A→B, N→O, G→H, O→P। तो APPLE बनेगा BQQMF। ZOOKD में अक्षर पीछे खिसकाए गए हैं, यानी नियम का उलटा।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-blood-relations",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Pointing to a young man, Meena says, \"He is the son of my mother's only brother.\" How is the young man related to Meena?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Uncle",
+          "Brother",
+          "Nephew",
+          "Cousin"
+        ],
+        "why": "Her mother's only brother is Meena's maternal uncle, and his son is her cousin. 'Brother' is the trap: he would be her brother only if he were her mother's son."
+      },
+      "hi": {
+        "stem": "एक युवक की ओर इशारा करते हुए मीना कहती है, \"यह मेरी माँ के इकलौते भाई का बेटा है।\" युवक का मीना से क्या संबंध है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मामा",
+          "सगा भाई",
+          "भतीजा/भांजा",
+          "चचेरा/ममेरा भाई (कज़िन)"
+        ],
+        "why": "माँ का इकलौता भाई मीना का मामा है, और उसका बेटा मीना का ममेरा भाई (कज़िन) है। 'सगा भाई' जाल है: वह तब होता जब वह मीना की माँ का बेटा होता।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-syllogisms",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the statements and conclusions given below. Treat the statements as true, even if they seem to differ from commonly known facts.",
+        "statements": [
+          "Statement: Some doctors are singers.",
+          "Statement: No singer is a dancer.",
+          "Conclusion I: Some doctors are not dancers.",
+          "Conclusion II: Some dancers are doctors."
+        ],
+        "ask": "Which of the conclusions logically follow(s) from the statements?",
+        "options": [
+          "Both I and II",
+          "II only",
+          "I only",
+          "Neither I nor II"
+        ],
+        "why": "The doctors who are singers cannot be dancers, so I follows. Nothing links dancers to the other doctors, so II is only a possibility. 'Both I and II' is the trap: possible is not the same as certain."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों और निष्कर्षों पर विचार कीजिए। कथनों को सत्य मानिए, भले ही वे सामान्य रूप से ज्ञात तथ्यों से भिन्न लगें।",
+        "statements": [
+          "कथन: कुछ डॉक्टर गायक हैं।",
+          "कथन: कोई भी गायक नर्तक नहीं है।",
+          "निष्कर्ष I: कुछ डॉक्टर नर्तक नहीं हैं।",
+          "निष्कर्ष II: कुछ नर्तक डॉक्टर हैं।"
+        ],
+        "ask": "कौन-सा/से निष्कर्ष कथनों से तार्किक रूप से निकलता है/निकलते हैं?",
+        "options": [
+          "I और II दोनों",
+          "केवल II",
+          "केवल I",
+          "न तो I और न ही II"
+        ],
+        "why": "जो डॉक्टर गायक हैं, वे नर्तक नहीं हो सकते, इसलिए I निकलता है। बाकी डॉक्टरों का नर्तकों से कोई संबंध नहीं दिया गया, तो II सिर्फ़ एक संभावना है। 'I और II दोनों' जाल है: संभव और निश्चित एक बात नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-seating-and-ordering",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Six friends, P to U, sit in a row facing north. Q is at the left end, and R is second to Q's right. U is just right of R. P sits between U and S. Who is second from the right end?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "T",
+          "S",
+          "U",
+          "P"
+        ],
+        "why": "Seats from left: Q, T, R, U, P, S. R is third and U fourth; P must sit between U and S, so P is fifth and S sixth. The trap is S, which sits at the right end itself."
+      },
+      "hi": {
+        "stem": "P से U तक छह मित्र उत्तर की ओर मुँह करके एक पंक्ति में बैठे हैं। Q बाएँ सिरे पर है। R, Q के दाएँ से दूसरे स्थान पर है। U, R के ठीक दाएँ है। P, U और S के बीच बैठा है। दाएँ सिरे से दूसरे स्थान पर कौन है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "T",
+          "S",
+          "U",
+          "P"
+        ],
+        "why": "बाएँ से क्रम: Q, T, R, U, P, S। R तीसरे, U चौथे, और P को U और S के बीच होना है, तो P पाँचवें और S छठे स्थान पर। दाएँ से दूसरा P है। S जाल है, वह तो खुद दाएँ सिरे पर है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-direction-sense",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Ramesh walks 4 km towards north, turns right and walks 3 km. How far is he now from his starting point?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6 km",
+          "7 km",
+          "1 km",
+          "5 km"
+        ],
+        "why": "North 4 km and east 3 km form a right angle, so the distance is √(4² + 3²) = √25 = 5 km. The trap is 7 km, which adds the path instead of measuring the straight line."
+      },
+      "hi": {
+        "stem": "रमेश 4 km उत्तर की ओर चलता है, फिर दाएँ मुड़कर 3 km चलता है। अब वह अपने आरंभ बिंदु से कितनी दूर है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6 km",
+          "7 km",
+          "1 km",
+          "5 km"
+        ],
+        "why": "उत्तर में 4 km और पूर्व में 3 km एक समकोण बनाते हैं, तो दूरी = √(4² + 3²) = √25 = 5 km। 7 km जाल है, उसमें रास्ता जोड़ दिया गया, सीधी दूरी नहीं नापी गई।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-data-sufficiency",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Question: What is Rahul's present age? Consider the two statements given below.",
+        "statements": [
+          "Five years ago, Rahul was 20 years old.",
+          "Rahul is 5 years older than Sunil."
+        ],
+        "ask": "Which of the following is correct about the two statements?",
+        "options": [
+          "Statement 1 alone is sufficient, but Statement 2 alone is not",
+          "Statement 2 alone is sufficient, but Statement 1 alone is not",
+          "Both together are sufficient, but neither alone is",
+          "Both statements together are not sufficient"
+        ],
+        "why": "Statement 1 gives 20 + 5 = 25 years. Statement 2 only compares Rahul with Sunil, whose age is unknown. The trap is 'both together': Statement 1 already settles it."
+      },
+      "hi": {
+        "stem": "प्रश्न: राहुल की वर्तमान आयु क्या है? नीचे दिए दो कथनों पर विचार कीजिए।",
+        "statements": [
+          "पाँच वर्ष पहले राहुल 20 वर्ष का था।",
+          "राहुल, सुनील से 5 वर्ष बड़ा है।"
+        ],
+        "ask": "दोनों कथनों के बारे में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "केवल कथन 1 पर्याप्त है, किंतु अकेला कथन 2 नहीं",
+          "केवल कथन 2 पर्याप्त है, किंतु अकेला कथन 1 नहीं",
+          "दोनों मिलकर पर्याप्त हैं, किंतु कोई भी अकेला नहीं",
+          "दोनों कथन मिलकर भी पर्याप्त नहीं हैं"
+        ],
+        "why": "कथन 1 से आयु 20 + 5 = 25 वर्ष आती है। कथन 2 बस राहुल की तुलना सुनील से करता है, जिसकी आयु पता नहीं। 'दोनों मिलकर' जाल है: कथन 1 अकेले ही काफ़ी है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "csat-seating-and-ordering",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Among five friends, A is taller than B but shorter than C. D is taller than C. E is shorter than B. Consider the following statements:",
+        "statements": [
+          "D is the tallest.",
+          "B is the second shortest.",
+          "C is taller than A.",
+          "E is taller than A."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "The order is D > C > A > B > E. Statements 1, 2 and 3 are correct; E is the shortest, so 4 is wrong. 'All four' is the trap if E is placed without checking it against B."
+      },
+      "hi": {
+        "stem": "पाँच मित्रों में A, B से लंबा है लेकिन C से छोटा। D, C से लंबा है। E, B से छोटा है। नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "D सबसे लंबा है।",
+          "B नीचे से दूसरा (दूसरा सबसे छोटा) है।",
+          "C, A से लंबा है।",
+          "E, A से लंबा है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "क्रम है D > C > A > B > E। कथन 1, 2 और 3 सही हैं; E सबसे छोटा है, तो 4 गलत है। अगर E को B से मिलाए बिना रख दें, तो 'सभी चार' का जाल लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-coding-decoding",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In a certain code, COLD is written as DQOH. Following the same rule, how will WARM be written?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "XBSN",
+          "XCUQ",
+          "XCTQ",
+          "YCUQ"
+        ],
+        "why": "The letters move forward by 1, 2, 3 and 4 places: C→D, O→Q, L→O, D→H. So W→X, A→C, R→U, M→Q gives XCUQ. XBSN wrongly moves every letter by one place only."
+      },
+      "hi": {
+        "stem": "एक कूट भाषा में COLD को DQOH लिखा जाता है। इसी नियम से WARM को कैसे लिखा जाएगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कूट: XBSN",
+          "कूट: XCUQ",
+          "कूट: XCTQ",
+          "कूट: YCUQ"
+        ],
+        "why": "अक्षर क्रम से 1, 2, 3 और 4 स्थान आगे जाते हैं: C→D, O→Q, L→O, D→H। तो W→X, A→C, R→U, M→Q से XCUQ बनता है। XBSN में हर अक्षर बस एक स्थान आगे किया गया, जो गलत है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-blood-relations",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A is the brother of B. B is the sister of C. C is the father of D. How is A related to D?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Brother",
+          "Father",
+          "Grandfather",
+          "Uncle"
+        ],
+        "why": "A, B and C are siblings, and C is D's father. So A is the brother of D's father, that is, D's uncle. 'Father' is the trap if A and C are mixed up."
+      },
+      "hi": {
+        "stem": "A, B का भाई है। B, C की बहन है। C, D का पिता है। A का D से क्या संबंध है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भाई",
+          "पिता",
+          "दादा",
+          "चाचा/ताऊ"
+        ],
+        "why": "A, B और C भाई-बहन हैं, और C, D का पिता है। तो A, D के पिता का भाई यानी D का चाचा/ताऊ है। अगर A और C को एक मान लें, तो 'पिता' का जाल लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-direction-sense",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Sita is facing east. She turns 90 degrees clockwise, then 180 degrees anticlockwise, and then 45 degrees clockwise. Which direction is she facing now?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "North-east",
+          "North-west",
+          "South-east",
+          "South-west"
+        ],
+        "why": "East turned 90° clockwise is south; south turned 180° is north; north turned 45° clockwise is north-east. The trap is north-west, from turning the last 45° the wrong way."
+      },
+      "hi": {
+        "stem": "सीता पूर्व की ओर मुँह करके खड़ी है। वह 90 डिग्री दक्षिणावर्त, फिर 180 डिग्री वामावर्त, और फिर 45 डिग्री दक्षिणावर्त घूमती है। अब उसका मुँह किस दिशा में है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "उत्तर-पूर्व",
+          "उत्तर-पश्चिम",
+          "दक्षिण-पूर्व",
+          "दक्षिण-पश्चिम"
+        ],
+        "why": "पूर्व से 90° दक्षिणावर्त = दक्षिण; दक्षिण से 180° = उत्तर; उत्तर से 45° दक्षिणावर्त = उत्तर-पूर्व। आख़िरी 45° उलटी दिशा में घुमा दें तो उत्तर-पश्चिम का जाल लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-blood-relations",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Introducing a girl, Arun says, \"Her father is the only son of my father.\" How is the girl related to Arun?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Niece",
+          "Sister",
+          "Daughter",
+          "Cousin"
+        ],
+        "why": "Arun is a son of his father, so 'the only son of my father' is Arun himself. The girl is therefore his daughter. 'Niece' is the trap, which assumes the only son is someone else."
+      },
+      "hi": {
+        "stem": "एक लड़की का परिचय कराते हुए अरुण कहता है, \"इसके पिता मेरे पिता के इकलौते बेटे हैं।\" लड़की का अरुण से क्या संबंध है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भतीजी",
+          "बहन",
+          "बेटी",
+          "चचेरी बहन"
+        ],
+        "why": "अरुण खुद अपने पिता का बेटा है, तो 'मेरे पिता का इकलौता बेटा' अरुण ही है। इसलिए लड़की उसकी बेटी है। 'भतीजी' जाल है, जो मान लेता है कि इकलौता बेटा कोई और है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-direction-sense",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "One morning after sunrise, Anil stands so that his shadow falls exactly to his right. Which direction is Anil facing?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "North",
+          "South",
+          "East",
+          "West"
+        ],
+        "why": "In the morning the Sun is in the east, so shadows fall to the west. If west is on his right, he is facing south. 'North' is the trap: facing north puts west on the left."
+      },
+      "hi": {
+        "stem": "एक सुबह सूर्योदय के बाद अनिल इस तरह खड़ा है कि उसकी परछाई ठीक उसके दाईं ओर पड़ती है। अनिल का मुँह किस दिशा में है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "उत्तर",
+          "दक्षिण",
+          "पूर्व",
+          "पश्चिम"
+        ],
+        "why": "सुबह सूर्य पूर्व में होता है, तो परछाई पश्चिम में पड़ती है। अगर पश्चिम उसके दाईं ओर है, तो उसका मुँह दक्षिण की ओर है। 'उत्तर' जाल है: उत्तर की ओर मुँह हो तो पश्चिम बाईं ओर होता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-data-sufficiency",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Question: In which direction is village X from village Y? Consider the two statements given below.",
+        "statements": [
+          "Village Z is 5 km east of village Y.",
+          "Village X is 3 km north of village Y."
+        ],
+        "ask": "Which of the following is correct about the two statements?",
+        "options": [
+          "Statement 1 alone is sufficient, but Statement 2 alone is not",
+          "Statement 2 alone is sufficient, but Statement 1 alone is not",
+          "Both together are sufficient, but neither alone is",
+          "Both statements together are not sufficient"
+        ],
+        "why": "Statement 2 directly places X north of Y. Statement 1 is about Z and says nothing about X. The trap is reaching for both statements when one of them is irrelevant."
+      },
+      "hi": {
+        "stem": "प्रश्न: गाँव X, गाँव Y से किस दिशा में है? नीचे दिए दो कथनों पर विचार कीजिए।",
+        "statements": [
+          "गाँव Z, गाँव Y से 5 km पूर्व में है।",
+          "गाँव X, गाँव Y से 3 km उत्तर में है।"
+        ],
+        "ask": "दोनों कथनों के बारे में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "केवल कथन 1 पर्याप्त है, किंतु अकेला कथन 2 नहीं",
+          "केवल कथन 2 पर्याप्त है, किंतु अकेला कथन 1 नहीं",
+          "दोनों मिलकर पर्याप्त हैं, किंतु कोई भी अकेला नहीं",
+          "दोनों कथन मिलकर भी पर्याप्त नहीं हैं"
+        ],
+        "why": "कथन 2 सीधे बताता है कि X, Y के उत्तर में है। कथन 1 सिर्फ़ Z के बारे में है, X के बारे में कुछ नहीं कहता। जाल यह है कि बेकार कथन होने पर भी दोनों को जोड़ लिया जाए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-seating-and-ordering",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A, B, C, D and E live on floors 1 (lowest) to 5, one per floor. C is on floor 5, E on floor 1. D is just above B. A is on an even floor, not just below C. Who is on floor 3?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "D",
+          "A",
+          "B",
+          "E"
+        ],
+        "why": "A, B and D fill floors 2 to 4. A is on an even floor other than 4, so floor 2. D is just above B, so B is on 3 and D on 4. Putting A on 4 leads to the trap, D."
+      },
+      "hi": {
+        "stem": "A, B, C, D और E मंज़िल 1 (सबसे नीचे) से 5 तक रहते हैं, हर मंज़िल पर एक। C मंज़िल 5 पर और E मंज़िल 1 पर है। D, B के ठीक ऊपर रहता है। A सम मंज़िल पर है, पर C के ठीक नीचे नहीं। मंज़िल 3 पर कौन रहता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "D",
+          "A",
+          "B",
+          "E"
+        ],
+        "why": "मंज़िल 2 से 4 पर A, B और D हैं। A सम मंज़िल पर है पर 4 पर नहीं, तो A मंज़िल 2 पर है। D, B के ठीक ऊपर है, तो B मंज़िल 3 और D मंज़िल 4 पर। A को 4 पर रख दें तो D का जाल लगता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "csat-syllogisms",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: No apple is a mango. All mangoes are fruits. Treating these as true, which one of the following conclusions does NOT follow?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Some fruits are mangoes.",
+          "No fruit is an apple.",
+          "No mango is an apple.",
+          "Some fruits are not apples."
+        ],
+        "why": "Mangoes are fruits that are not apples, so 'some fruits are not apples' follows, and the rest follow too. But other fruits may still be apples, so 'No fruit is an apple' does not follow. 'Some fruits are not apples' is the tempting pick."
+      },
+      "hi": {
+        "stem": "कथन: कोई भी सेब आम नहीं है। सभी आम फल हैं। इन्हें सत्य मानते हुए, निम्नलिखित में से कौन-सा निष्कर्ष नहीं निकलता?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कुछ फल आम हैं।",
+          "कोई भी फल सेब नहीं है।",
+          "कोई भी आम सेब नहीं है।",
+          "कुछ फल सेब नहीं हैं।"
+        ],
+        "why": "आम ऐसे फल हैं जो सेब नहीं हैं, तो 'कुछ फल सेब नहीं हैं' निकलता है, बाकी भी निकलते हैं। पर दूसरे फल सेब हो सकते हैं, इसलिए 'कोई भी फल सेब नहीं है' नहीं निकलता। 'कुछ फल सेब नहीं हैं' चुनने का मन करता है, पर वह सही निष्कर्ष है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-syllogisms",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the statements and conclusions given below. Treat the statements as true, even if they seem to differ from commonly known facts.",
+        "statements": [
+          "Statements: All cups are plates. Some plates are spoons. No spoon is a knife.",
+          "Conclusion I: Some cups are spoons.",
+          "Conclusion II: Some plates are not knives.",
+          "Conclusion III: No cup is a knife."
+        ],
+        "ask": "Which of the conclusions logically follow(s) from the statements?",
+        "options": [
+          "II and III only",
+          "I only",
+          "I and III only",
+          "II only"
+        ],
+        "why": "The plates that are spoons cannot be knives, so II follows. Cups need not overlap spoons (I fails), and plates outside spoons may be knives, so a cup can be a knife (III fails). The trap is 'II and III only'."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों और निष्कर्षों पर विचार कीजिए। कथनों को सत्य मानिए, भले ही वे सामान्य रूप से ज्ञात तथ्यों से भिन्न लगें।",
+        "statements": [
+          "कथन: सभी कप प्लेटें हैं। कुछ प्लेटें चम्मच हैं। कोई भी चम्मच चाकू नहीं है।",
+          "निष्कर्ष I: कुछ कप चम्मच हैं।",
+          "निष्कर्ष II: कुछ प्लेटें चाकू नहीं हैं।",
+          "निष्कर्ष III: कोई भी कप चाकू नहीं है।"
+        ],
+        "ask": "कौन-सा/से निष्कर्ष कथनों से तार्किक रूप से निकलता है/निकलते हैं?",
+        "options": [
+          "केवल II और III",
+          "केवल I",
+          "केवल I और III",
+          "केवल II"
+        ],
+        "why": "जो प्लेटें चम्मच हैं, वे चाकू नहीं हो सकतीं, तो II निकलता है। कपों का चम्मचों से मेल ज़रूरी नहीं (I नहीं), और चम्मच से बाहर की प्लेटें चाकू हो सकती हैं, तो कोई कप चाकू हो सकता है (III नहीं)। 'केवल II और III' जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-seating-and-ordering",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Six persons A to F sit around a circular table facing the centre. B is immediately right of A. D is opposite A. E is not next to D. C is immediately left of D. Who sits opposite B?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "C",
+          "F",
+          "E",
+          "D"
+        ],
+        "why": "Facing the centre, right means anticlockwise. Anticlockwise from A: A, B, C, D, F, E. E cannot be next to D, so it takes the seat beside A. Opposite B is F. Reading 'right' as clockwise gives the trap, C."
+      },
+      "hi": {
+        "stem": "A से F तक छह व्यक्ति एक गोल मेज़ के चारों ओर केंद्र की ओर मुँह करके बैठे हैं। B, A के ठीक दाएँ बैठा है। D, A के ठीक सामने है। E, D का पड़ोसी नहीं है। C, D के ठीक बाएँ बैठा है। B के ठीक सामने कौन है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "C",
+          "F",
+          "E",
+          "D"
+        ],
+        "why": "केंद्र की ओर मुँह हो तो दायाँ यानी वामावर्त। A से वामावर्त क्रम: A, B, C, D, F, E। E, D के पास नहीं हो सकता, तो E, A के बगल में है और F, D के बगल में। B के सामने F है। 'दाएँ' को दक्षिणावर्त पढ़ें तो C का जाल लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-coding-decoding",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "In a certain code, CAT is written as 72 and FISH as 168. Using the same rule, how is BIRD written? (Take A = 1, B = 2, ..., Z = 26.)",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "128",
+          "99",
+          "132",
+          "165"
+        ],
+        "why": "Rule: sum of letter values × number of letters. CAT: 24 × 3 = 72. FISH: 42 × 4 = 168. BIRD: (2+9+18+4) = 33, and 33 × 4 = 132. The trap is 99, from multiplying by 3 every time."
+      },
+      "hi": {
+        "stem": "एक कूट भाषा में CAT को 72 और FISH को 168 लिखा जाता है। इसी नियम से BIRD को कैसे लिखा जाएगा? (A = 1, B = 2, ..., Z = 26 मानिए।)",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "128",
+          "99",
+          "132",
+          "165"
+        ],
+        "why": "नियम: अक्षरों के मान का योग × अक्षरों की संख्या। CAT: 24 × 3 = 72। FISH: 42 × 4 = 168। BIRD: (2+9+18+4) = 33, और 33 × 4 = 132। 99 जाल है, जो हर बार 3 से गुणा करने पर आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-blood-relations",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "In a code, 'P + Q' means P is Q's mother; 'P − Q' means P is Q's brother; 'P × Q' means P is Q's wife. If L + M − N × O, how is L related to O?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Mother-in-law",
+          "Mother",
+          "Sister-in-law",
+          "Grandmother"
+        ],
+        "why": "L is M's mother, and M is N's brother, so N is also L's daughter. N is O's wife, so L is the mother of O's wife: O's mother-in-law. 'Mother' is the trap: L is N's mother, not O's."
+      },
+      "hi": {
+        "stem": "एक कूट में 'P + Q' का अर्थ है P, Q की माँ है; 'P − Q' का अर्थ है P, Q का भाई है; 'P × Q' का अर्थ है P, Q की पत्नी है। यदि L + M − N × O हो, तो L का O से क्या संबंध है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सास",
+          "माँ",
+          "भाभी/साली",
+          "दादी/नानी"
+        ],
+        "why": "L, M की माँ है, और M, N का भाई है, तो N भी L की बेटी है। N, O की पत्नी है, तो L, O की पत्नी की माँ यानी O की सास है। 'माँ' जाल है: L, N की माँ है, O की नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-direction-sense",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "A man starts from point P and walks 5 km south. He turns left and walks 3 km, turns left again and walks 9 km, and then turns left and walks 3 km. Where is he now with respect to P?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "4 km north",
+          "4 km south",
+          "14 km north",
+          "3 km west"
+        ],
+        "why": "South 5, then left is east 3, left again is north 9, left again is west 3. East and west cancel; 9 north minus 5 south leaves 4 km north of P. '4 km south' comes from subtracting the wrong way."
+      },
+      "hi": {
+        "stem": "एक व्यक्ति बिंदु P से 5 km दक्षिण चलता है। वह बाएँ मुड़कर 3 km, फिर बाएँ मुड़कर 9 km, और फिर बाएँ मुड़कर 3 km चलता है। अब वह P के संबंध में कहाँ है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "4 km उत्तर",
+          "4 km दक्षिण",
+          "14 km उत्तर",
+          "3 km पश्चिम"
+        ],
+        "why": "5 km दक्षिण, फिर बाएँ यानी 3 km पूर्व, फिर बाएँ यानी 9 km उत्तर, फिर बाएँ यानी 3 km पश्चिम। पूर्व-पश्चिम कट जाते हैं; 9 उत्तर में से 5 दक्षिण घटाकर P से 4 km उत्तर। उलटा घटाने पर '4 km दक्षिण' का जाल लगता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-data-sufficiency",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Question: On which day of the week did 10 March fall in a certain year? Consider the two statements given below.",
+        "statements": [
+          "In that year, 1 March was a Sunday.",
+          "In that year, 31 March was a Tuesday."
+        ],
+        "ask": "Which of the following is correct about the two statements?",
+        "options": [
+          "Statement 1 alone is sufficient, but Statement 2 alone is not",
+          "Statement 2 alone is sufficient, but Statement 1 alone is not",
+          "Each statement alone is sufficient",
+          "Both statements together are needed"
+        ],
+        "why": "From 1: 8 March is a Sunday, so 10 March is a Tuesday. From 2: 10 March is 21 days (exactly 3 weeks) before 31 March, so also a Tuesday. Each works alone. The trap is stopping after Statement 1."
+      },
+      "hi": {
+        "stem": "प्रश्न: किसी वर्ष 10 मार्च को सप्ताह का कौन-सा दिन था? नीचे दिए दो कथनों पर विचार कीजिए।",
+        "statements": [
+          "उस वर्ष 1 मार्च को रविवार था।",
+          "उस वर्ष 31 मार्च को मंगलवार था।"
+        ],
+        "ask": "दोनों कथनों के बारे में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "केवल कथन 1 पर्याप्त है, किंतु अकेला कथन 2 नहीं",
+          "केवल कथन 2 पर्याप्त है, किंतु अकेला कथन 1 नहीं",
+          "दोनों में से हर कथन अकेले पर्याप्त है",
+          "दोनों कथन मिलकर ज़रूरी हैं"
+        ],
+        "why": "कथन 1 से: 8 मार्च रविवार, तो 10 मार्च मंगलवार। कथन 2 से: 10 मार्च, 31 मार्च से 21 दिन यानी ठीक 3 सप्ताह पहले है, तो वह भी मंगलवार। दोनों अकेले काफ़ी हैं। कथन 1 पर ही रुक जाना जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "csat-data-sufficiency",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Question: Is the positive integer n divisible by 6? Consider the two statements given below.",
+        "statements": [
+          "n is divisible by 3.",
+          "n is divisible by 4."
+        ],
+        "ask": "Which of the following is correct about the two statements?",
+        "options": [
+          "Statement 1 alone is sufficient, but Statement 2 alone is not",
+          "Statement 2 alone is sufficient, but Statement 1 alone is not",
+          "Both together are sufficient, but neither alone is",
+          "Both statements together are not sufficient"
+        ],
+        "why": "Alone, neither settles it: 3 and 9 fail while 6 passes; 4 fails while 12 passes. Together, n is divisible by 12, and so by 6. The trap is 'Statement 1 alone', forgetting that n must also be even."
+      },
+      "hi": {
+        "stem": "प्रश्न: क्या धनात्मक पूर्णांक n, 6 से विभाज्य है? नीचे दिए दो कथनों पर विचार कीजिए।",
+        "statements": [
+          "n, 3 से विभाज्य है।",
+          "n, 4 से विभाज्य है।"
+        ],
+        "ask": "दोनों कथनों के बारे में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "केवल कथन 1 पर्याप्त है, किंतु अकेला कथन 2 नहीं",
+          "केवल कथन 2 पर्याप्त है, किंतु अकेला कथन 1 नहीं",
+          "दोनों मिलकर पर्याप्त हैं, किंतु कोई भी अकेला नहीं",
+          "दोनों कथन मिलकर भी पर्याप्त नहीं हैं"
+        ],
+        "why": "अकेले कोई भी कथन तय नहीं करता: 3 और 9 नहीं चलते, 6 चलता है; 4 नहीं चलता, 12 चलता है। दोनों मिलें तो n, 12 से विभाज्य है, इसलिए 6 से भी। 'केवल कथन 1' जाल है, जिसमें n का सम होना भूल जाते हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "csat-seating-and-ordering",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Five persons J, K, L, M and N stand in a queue facing the counter. K is third. J is ahead of K but is not first. N is last. L is not first. Consider the following statements:",
+        "statements": [
+          "M is first in the queue.",
+          "L stands immediately behind K.",
+          "J and N stand next to each other."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "J must be second, so M and L share first and fourth; L is not first, so the order is M, J, K, L, N. Statements 1 and 2 are correct; J (second) and N (fifth) are not neighbours. 'All three' is the trap."
+      },
+      "hi": {
+        "stem": "पाँच व्यक्ति J, K, L, M और N काउंटर की ओर मुँह करके एक कतार में खड़े हैं। K तीसरे स्थान पर है। J, K से आगे है पर पहले स्थान पर नहीं। N सबसे आख़िर में है। L पहले स्थान पर नहीं है। नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "M कतार में पहले स्थान पर है।",
+          "L, K के ठीक पीछे खड़ा है।",
+          "J और N एक-दूसरे के बगल में खड़े हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई भी नहीं"
+        ],
+        "why": "J दूसरे स्थान पर ही हो सकता है, तो M और L पहले और चौथे पर हैं; L पहले नहीं, तो क्रम है M, J, K, L, N। कथन 1 और 2 सही हैं; J (दूसरा) और N (पाँचवाँ) पड़ोसी नहीं। 'सभी तीन' जाल है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Original practice questions; standard CSAT reasoning methods",
+    "hi": "मौलिक अभ्यास प्रश्न; CSAT तर्कशक्ति की मानक विधियाँ"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

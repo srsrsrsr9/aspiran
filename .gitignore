@@ -1,0 +1,33 @@
+# Secrets and signing: never commit these.
+*.jks
+*.keystore
+keystore.properties
+local.properties
+.dev.vars
+.dev.vars.*
+
+# On-device model files are large; fetch them, don't commit them.
+server/models/*.litertlm
+
+# Build and tool output
+node_modules/
+.wrangler/
+.wrangler-test/
+.wrangler-auth/
+android/.gradle/
+android/.gsock/
+android/build/
+android/app/build/
+.idea/
+*.iml
+
+# Keys and OAuth client files: never commit.
+keys/
+**/client_secret*.json
+android/.kotlin/
+android/app/release/
+*.apk
+*.aab
+android/app/google-services.json
+.wrangler*/
+server/.wrangler-*/

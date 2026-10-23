@@ -1,0 +1,193 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative"
+    ]
+  },
+  "id": "sci-health-and-disease-traps",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Health and disease: spot the trap",
+    "hi": "स्वास्थ्य और रोग: जाल पहचानें"
+  },
+  "questions": [
+    {
+      "answerIndex": 2,
+      "traps": [
+        "sounds-familiar",
+        "extreme-word",
+        "none",
+        "right-fact-wrong-reason"
+      ],
+      "en": {
+        "question": "Antibiotics are effective against which of the following?",
+        "options": [
+          "Viral infections such as the common cold",
+          "All infections, viral and bacterial alike",
+          "Bacterial infections such as typhoid",
+          "Bacterial infections, since they kill all microbes"
+        ],
+        "why": "The cold-and-antibiotic habit makes option 1 sound familiar, but antibiotics act on bacteria, not viruses. Option 4 has the right target with a wrong reason."
+      },
+      "hi": {
+        "question": "एंटीबायोटिक इनमें से किसके ख़िलाफ़ असरदार हैं?",
+        "options": [
+          "सामान्य सर्दी-ज़ुकाम जैसे वायरल संक्रमण",
+          "सभी संक्रमण, वायरल हों या बैक्टीरियल",
+          "टाइफ़ाइड जैसे बैक्टीरियल संक्रमण",
+          "बैक्टीरियल संक्रमण, क्योंकि ये सारे सूक्ष्मजीव मार देते हैं"
+        ],
+        "why": "सर्दी में एंटीबायोटिक लेने की आदत से विकल्प 1 जाना-पहचाना लगता है, पर एंटीबायोटिक बैक्टीरिया पर काम करते हैं, वायरस पर नहीं। विकल्प 4 में लक्ष्य सही है, कारण ग़लत।"
+      }
+    },
+    {
+      "answerIndex": 0,
+      "traps": [
+        "none",
+        "sounds-familiar",
+        "extreme-word",
+        "half-true"
+      ],
+      "en": {
+        "question": "Which cells does HIV mainly attack, weakening the immune system?",
+        "options": [
+          "Helper T lymphocytes",
+          "Red blood cells, causing anaemia",
+          "All white blood cells equally",
+          "B lymphocytes, the antibody makers"
+        ],
+        "why": "Option 4 is half-true: B cells do make antibodies, but HIV mainly destroys helper T cells, which is why the whole immune response weakens."
+      },
+      "hi": {
+        "question": "HIV मुख्य रूप से किन कोशिकाओं पर हमला करके प्रतिरक्षा तंत्र को कमज़ोर करता है?",
+        "options": [
+          "सहायक T लिम्फ़ोसाइट",
+          "लाल रक्त कोशिकाएँ, जिससे एनीमिया होता है",
+          "सभी श्वेत रक्त कोशिकाएँ बराबर",
+          "B लिम्फ़ोसाइट, जो एंटीबॉडी बनाती हैं"
+        ],
+        "why": "विकल्प 4 आधा सच है: B कोशिकाएँ एंटीबॉडी बनाती तो हैं, पर HIV मुख्यतः सहायक T कोशिकाएँ नष्ट करता है, इसीलिए पूरी प्रतिरक्षा कमज़ोर पड़ती है।"
+      }
+    },
+    {
+      "answerIndex": 3,
+      "traps": [
+        "sounds-familiar",
+        "extreme-word",
+        "half-true",
+        "none"
+      ],
+      "en": {
+        "question": "How does a vaccine protect the body against a disease?",
+        "options": [
+          "It kills germs already present in the blood",
+          "One dose always gives lifelong protection",
+          "It supplies ready-made antibodies to the body",
+          "It primes the body to make antibodies and memory cells"
+        ],
+        "why": "Option 3 describes passive immunity, as with antitoxins. A vaccine gives active immunity: the body makes its own antibodies and memory cells for a later attack."
+      },
+      "hi": {
+        "question": "टीका शरीर को किसी बीमारी से कैसे बचाता है?",
+        "options": [
+          "यह ख़ून में पहले से मौजूद कीटाणुओं को मार देता है",
+          "एक ख़ुराक हमेशा जीवन भर सुरक्षा देती है",
+          "यह शरीर को बनी-बनाई एंटीबॉडी देता है",
+          "यह शरीर को एंटीबॉडी और स्मृति कोशिकाएँ बनाने के लिए तैयार करता है"
+        ],
+        "why": "विकल्प 3 निष्क्रिय प्रतिरक्षा है, जैसे एंटीटॉक्सिन में। टीका सक्रिय प्रतिरक्षा देता है: शरीर ख़ुद एंटीबॉडी और स्मृति कोशिकाएँ बनाता है, जो अगले हमले में काम आती हैं।"
+      }
+    },
+    {
+      "answerIndex": 1,
+      "traps": [
+        "sounds-familiar",
+        "none",
+        "extreme-word",
+        "right-fact-wrong-reason"
+      ],
+      "en": {
+        "question": "Why is Vitamin D often called the 'sunshine vitamin'?",
+        "options": [
+          "Sunlight contains Vitamin D, which skin absorbs",
+          "Skin makes it when exposed to ultraviolet-B light",
+          "It comes only from sunlight, never from food",
+          "It helps absorb calcium, which sunlight provides"
+        ],
+        "why": "Option 1 sounds right but sunlight carries no vitamin; skin makes Vitamin D under UV-B. Option 4 is a real fact, calcium absorption, with a wrong reason."
+      },
+      "hi": {
+        "question": "विटामिन D को अक्सर 'धूप वाला विटामिन' क्यों कहते हैं?",
+        "options": [
+          "धूप में विटामिन D होता है, जिसे त्वचा सोख लेती है",
+          "अल्ट्रावायलेट-B प्रकाश पड़ने पर त्वचा इसे बनाती है",
+          "यह केवल धूप से मिलता है, भोजन से कभी नहीं",
+          "यह कैल्शियम सोखने में मदद करता है, जो धूप से मिलता है"
+        ],
+        "why": "विकल्प 1 सही लगता है, पर धूप में कोई विटामिन नहीं होता; UV-B पड़ने पर त्वचा विटामिन D बनाती है। विकल्प 4 में तथ्य, कैल्शियम सोखना, सही है पर कारण ग़लत।"
+      }
+    },
+    {
+      "answerIndex": 2,
+      "traps": [
+        "sounds-familiar",
+        "extreme-word",
+        "none",
+        "right-fact-wrong-reason"
+      ],
+      "en": {
+        "question": "Type 1 diabetes is mainly caused by which of the following?",
+        "options": [
+          "Eating too much sugar in childhood",
+          "Insulin resistance, as in every kind of diabetes",
+          "Loss of insulin-making beta cells in the pancreas",
+          "Pancreas failure, caused by eating too many sweets"
+        ],
+        "why": "The sugar myth makes option 1 tempting. In Type 1, the body's immune system destroys the pancreas's beta cells, so little or no insulin is made."
+      },
+      "hi": {
+        "question": "टाइप 1 डायबिटीज़ मुख्य रूप से इनमें से किस कारण होती है?",
+        "options": [
+          "बचपन में बहुत ज़्यादा चीनी खाना",
+          "इंसुलिन प्रतिरोध, जैसा हर तरह की डायबिटीज़ में होता है",
+          "अग्न्याशय की इंसुलिन बनाने वाली बीटा कोशिकाओं का नष्ट होना",
+          "अग्न्याशय की ख़राबी, जो ज़्यादा मिठाई खाने से होती है"
+        ],
+        "why": "चीनी वाला मिथक विकल्प 1 को लुभावना बनाता है। टाइप 1 में शरीर की अपनी प्रतिरक्षा अग्न्याशय की बीटा कोशिकाएँ नष्ट कर देती है, तो इंसुलिन बहुत कम या बिल्कुल नहीं बनता।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Biology, Human Health and Disease; NCERT Class XI Biology",
+    "hi": "NCERT कक्षा XII जीव विज्ञान, मानव स्वास्थ्य तथा रोग; NCERT कक्षा XI जीव विज्ञान"
+  },
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

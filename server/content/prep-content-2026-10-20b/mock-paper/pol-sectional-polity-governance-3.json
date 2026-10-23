@@ -1,0 +1,952 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "pol-sectional-polity-governance-3",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Polity and governance mock 3",
+    "hi": "राजव्यवस्था और शासन मॉक 3"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS2 Polity and Governance",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "pol-election-commission",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Under the Constitution of India, the Chief Election Commissioner can be removed from office:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "by the President on the advice of the Union Council of Ministers",
+          "in the same manner and on the same grounds as a judge of the Supreme Court",
+          "by the President on the recommendation of the Chief Justice of India",
+          "by a resolution of the Lok Sabha alone"
+        ],
+        "why": "Article 324(5) protects the Chief Election Commissioner: removal is like that of a Supreme Court judge. The trap is (a): the President appoints the CEC, but cannot remove the CEC on the government's advice."
+      },
+      "hi": {
+        "stem": "भारत के संविधान के अनुसार मुख्य चुनाव आयुक्त को पद से हटाया जा सकता है:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "केंद्रीय मंत्रिपरिषद की सलाह पर राष्ट्रपति द्वारा",
+          "उसी रीति से और उन्हीं आधारों पर, जैसे सर्वोच्च न्यायालय के न्यायाधीश को",
+          "भारत के मुख्य न्यायाधीश की सिफ़ारिश पर राष्ट्रपति द्वारा",
+          "केवल लोकसभा के संकल्प द्वारा"
+        ],
+        "why": "अनुच्छेद 324(5) मुख्य चुनाव आयुक्त को सुरक्षा देता है: उन्हें सर्वोच्च न्यायालय के जज की तरह ही हटाया जा सकता है। (a) का जाल है: नियुक्ति राष्ट्रपति करते हैं, पर सरकार की सलाह भर से हटा नहीं सकते।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-election-commission",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Election Commission of India:",
+        "statements": [
+          "The Constitution fixes the number of Election Commissioners at three.",
+          "An Election Commissioner other than the Chief Election Commissioner can be removed only on the recommendation of the Chief Election Commissioner.",
+          "The Commission superintends elections to Parliament, state legislatures and the offices of President and Vice-President."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "2 and 3 only"
+        ],
+        "why": "Statements 2 and 3 are correct (Article 324). Statement 1 is wrong: the Constitution leaves the number of Election Commissioners to the President. The trap is '1 and 3 only', because the Commission has had three members for years."
+      },
+      "hi": {
+        "stem": "भारत निर्वाचन आयोग के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संविधान चुनाव आयुक्तों की संख्या तीन तय करता है।",
+          "मुख्य चुनाव आयुक्त के अलावा किसी अन्य चुनाव आयुक्त को केवल मुख्य चुनाव आयुक्त की सिफ़ारिश पर ही हटाया जा सकता है।",
+          "आयोग संसद, राज्य विधानमंडलों तथा राष्ट्रपति और उपराष्ट्रपति के पदों के चुनावों का अधीक्षण करता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "केवल 2 और 3"
+        ],
+        "why": "कथन 2 और 3 सही हैं (अनुच्छेद 324)। कथन 1 गलत है: चुनाव आयुक्तों की संख्या संविधान ने राष्ट्रपति पर छोड़ी है। 'केवल 1 और 3' का जाल इसलिए लगता है क्योंकि आयोग में कई साल से तीन सदस्य हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-finance-commission",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Finance Commission:",
+        "statements": [
+          "The President constitutes it every fifth year or earlier, as the President considers necessary.",
+          "Parliament may by law lay down the qualifications for its members.",
+          "Its recommendations are binding on the Union government."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct: Article 280 lets Parliament set the qualifications, which it did in a 1951 law. Statement 3 is wrong: the recommendations are advisory. The trap is '1, 2 and 3', since the government usually accepts them."
+      },
+      "hi": {
+        "stem": "वित्त आयोग के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति इसका गठन हर पाँचवें वर्ष या आवश्यक समझें तो उससे पहले करते हैं।",
+          "संसद कानून बनाकर इसके सदस्यों की योग्यताएँ तय कर सकती है।",
+          "इसकी सिफ़ारिशें केंद्र सरकार पर बाध्यकारी हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: अनुच्छेद 280 संसद को योग्यताएँ तय करने देता है, जो उसने 1951 के कानून से कीं। कथन 3 गलत है: सिफ़ारिशें सलाहकारी हैं। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि सरकार आम तौर पर इन्हें मान लेती है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-public-service-commissions",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about public service commissions:",
+        "statements": [
+          "A member of the UPSC holds office for six years or until the age of 65, whichever is earlier.",
+          "Members of a State Public Service Commission are appointed by the Governor but can be removed only by the President.",
+          "On ceasing to hold office, the Chairman of the UPSC can be appointed to any other post under the Government of India.",
+          "The expenses of the UPSC are charged on the Consolidated Fund of India."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: Article 319 bars the UPSC Chairman from any further employment under the Union or a state. The trap is 'All four', because many retired officials do take new posts."
+      },
+      "hi": {
+        "stem": "लोक सेवा आयोगों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "UPSC का सदस्य छह वर्ष तक या 65 वर्ष की आयु तक, जो भी पहले हो, पद पर रहता है।",
+          "राज्य लोक सेवा आयोग के सदस्यों की नियुक्ति राज्यपाल करते हैं, पर उन्हें केवल राष्ट्रपति हटा सकते हैं।",
+          "पद छोड़ने के बाद UPSC के अध्यक्ष को भारत सरकार के किसी भी अन्य पद पर नियुक्त किया जा सकता है।",
+          "UPSC के खर्च भारत की संचित निधि पर भारित हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है: अनुच्छेद 319 के तहत UPSC अध्यक्ष केंद्र या राज्य में आगे कोई नौकरी नहीं ले सकते। 'सभी चार' का जाल इसलिए लगता है क्योंकि कई रिटायर्ड अफ़सर नए पद लेते हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-cag-and-attorney-general",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Attorney General of India:",
+        "statements": [
+          "The person appointed must be qualified to be appointed a judge of the Supreme Court.",
+          "The Attorney General has the right to speak in either House of Parliament but cannot vote there.",
+          "The Attorney General holds office during the pleasure of the President."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct, under Articles 76 and 88. The trap is '1 only': many assume a non-member cannot speak in Parliament, but Article 88 gives the Attorney General that right, without a vote."
+      },
+      "hi": {
+        "stem": "भारत के महान्यायवादी (Attorney General) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नियुक्त व्यक्ति में सर्वोच्च न्यायालय का न्यायाधीश बनने की योग्यता होनी चाहिए।",
+          "महान्यायवादी को संसद के किसी भी सदन में बोलने का अधिकार है, पर वे वहाँ मतदान नहीं कर सकते।",
+          "महान्यायवादी राष्ट्रपति के प्रसादपर्यंत पद पर रहते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं, अनुच्छेद 76 और 88 के तहत। 'केवल 1' का जाल है: बहुत लोग मानते हैं कि जो सदस्य नहीं, वह संसद में बोल नहीं सकता, पर अनुच्छेद 88 महान्यायवादी को बोलने का हक़ देता है, वोट का नहीं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-cag-and-attorney-general",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following statements about the Comptroller and Auditor General of India (CAG) is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "After leaving office, the CAG can be appointed to another post under the Government of India.",
+          "The CAG can be removed only in the manner of a Supreme Court judge.",
+          "The CAG's salary and rights cannot be varied to the CAG's disadvantage after appointment.",
+          "The CAG's term is six years or until the age of 65, whichever is earlier."
+        ],
+        "why": "Option (a) is the answer: Article 148 bars the CAG from any further office under the Union or a state. The tempting trap is (d), which is true but comes from a 1971 Act of Parliament, not the Constitution."
+      },
+      "hi": {
+        "stem": "भारत के नियंत्रक-महालेखापरीक्षक (CAG) के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "पद छोड़ने के बाद CAG को भारत सरकार के अधीन किसी अन्य पद पर नियुक्त किया जा सकता है।",
+          "CAG को केवल सर्वोच्च न्यायालय के न्यायाधीश की रीति से हटाया जा सकता है।",
+          "नियुक्ति के बाद CAG के वेतन और अधिकारों में उनके अहित में बदलाव नहीं हो सकता।",
+          "CAG का कार्यकाल छह वर्ष या 65 वर्ष की आयु तक, जो भी पहले हो, होता है।"
+        ],
+        "why": "उत्तर (a) है: अनुच्छेद 148 CAG को केंद्र या राज्य के अधीन आगे कोई पद लेने से रोकता है। (d) का जाल लुभाता है, पर वह सही है; बस यह नियम संविधान से नहीं, संसद के 1971 के एक कानून से आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-supreme-court",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Under which Article can the President refer a question of law or fact of public importance to the Supreme Court for its opinion?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Article 32",
+          "Article 131",
+          "Article 143",
+          "Article 136"
+        ],
+        "why": "Article 143 gives the Supreme Court its advisory jurisdiction. The trap is Article 131, which is the Court's original jurisdiction over disputes between the Union and the states."
+      },
+      "hi": {
+        "stem": "किस अनुच्छेद के तहत राष्ट्रपति सार्वजनिक महत्व के किसी विधि या तथ्य के प्रश्न को सर्वोच्च न्यायालय की राय के लिए भेज सकते हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अनुच्छेद 32",
+          "अनुच्छेद 131",
+          "अनुच्छेद 143",
+          "अनुच्छेद 136"
+        ],
+        "why": "अनुच्छेद 143 सर्वोच्च न्यायालय को सलाहकारी क्षेत्राधिकार देता है। अनुच्छेद 131 का जाल है: वह केंद्र और राज्यों के बीच विवादों पर कोर्ट का मूल क्षेत्राधिकार है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-supreme-court",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (power of the Supreme Court) with List II (Article) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Original jurisdiction in disputes between the Union and states",
+          "B. Special leave to appeal",
+          "C. Advisory jurisdiction",
+          "D. Review of its own judgments",
+          "1. Article 137",
+          "2. Article 131",
+          "3. Article 143",
+          "4. Article 136"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-1, C-3, D-4",
+          "A-2, B-4, C-3, D-1",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-2, C-1, D-3"
+        ],
+        "why": "Article 131 is original jurisdiction, 136 special leave, 143 advisory and 137 review. The trap is (a), which swaps 136 and 137 because the numbers sit side by side."
+      },
+      "hi": {
+        "stem": "सूची I (सर्वोच्च न्यायालय की शक्ति) को सूची II (अनुच्छेद) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. केंद्र और राज्यों के बीच विवादों में मूल क्षेत्राधिकार",
+          "B. अपील के लिए विशेष अनुमति",
+          "C. सलाहकारी क्षेत्राधिकार",
+          "D. अपने निर्णयों का पुनर्विलोकन",
+          "1. अनुच्छेद 137",
+          "2. अनुच्छेद 131",
+          "3. अनुच्छेद 143",
+          "4. अनुच्छेद 136"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-1, C-3, D-4",
+          "A-2, B-4, C-3, D-1",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-2, C-1, D-3"
+        ],
+        "why": "अनुच्छेद 131 मूल क्षेत्राधिकार है, 136 विशेष अनुमति, 143 सलाहकारी और 137 पुनर्विलोकन। (a) का जाल 136 और 137 को आपस में बदल देता है, क्योंकि दोनों नंबर पास-पास हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-supreme-court",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The salaries of Supreme Court judges cannot be reduced during their term, except during a Financial Emergency.",
+          "Statement II: The salaries of Supreme Court judges are charged on the Consolidated Fund of India and are not put to the vote of Parliament."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but II does not explain I. The bar on cutting salaries comes from Article 125, with the Financial Emergency exception in Article 360. II only concerns voting on expenditure. The trap is (a), linking two separate safeguards."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: सर्वोच्च न्यायालय के न्यायाधीशों के वेतन उनके कार्यकाल में घटाए नहीं जा सकते, सिवाय वित्तीय आपातकाल के।",
+          "कथन II: सर्वोच्च न्यायालय के न्यायाधीशों के वेतन भारत की संचित निधि पर भारित हैं और उन पर संसद में मतदान नहीं होता।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, पर II, I की व्याख्या नहीं करता। वेतन न घटाने की रोक अनुच्छेद 125 से आती है, और वित्तीय आपातकाल वाली छूट अनुच्छेद 360 से। II सिर्फ़ खर्च पर वोटिंग की बात है। (a) का जाल दो अलग सुरक्षाओं को जोड़ देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-high-courts-and-subordinate-courts",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Under Article 233, district judges in a state are appointed by:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "the Governor, in consultation with the High Court",
+          "the Chief Justice of the High Court alone",
+          "the State Public Service Commission",
+          "the President, in consultation with the Chief Justice of India"
+        ],
+        "why": "Article 233 gives the appointment of district judges to the Governor, in consultation with the High Court. The trap is (b): the High Court is consulted and controls subordinate courts, but the appointing authority is the Governor."
+      },
+      "hi": {
+        "stem": "अनुच्छेद 233 के तहत किसी राज्य में ज़िला न्यायाधीशों की नियुक्ति कौन करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राज्यपाल, उच्च न्यायालय के परामर्श से",
+          "केवल उच्च न्यायालय के मुख्य न्यायाधीश",
+          "राज्य लोक सेवा आयोग",
+          "राष्ट्रपति, भारत के मुख्य न्यायाधीश के परामर्श से"
+        ],
+        "why": "अनुच्छेद 233 ज़िला जजों की नियुक्ति राज्यपाल को देता है, उच्च न्यायालय के परामर्श से। (b) का जाल है: हाई कोर्ट से सलाह ली जाती है और अधीनस्थ अदालतों पर उसका नियंत्रण है, पर नियुक्ति राज्यपाल करते हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-high-courts-and-subordinate-courts",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the High Courts:",
+        "statements": [
+          "The President can transfer a High Court judge to another High Court after consulting the Chief Justice of India.",
+          "A retired permanent judge of a High Court cannot plead in that same High Court.",
+          "Parliament can by law extend the jurisdiction of a High Court to a Union Territory.",
+          "A High Court's power of superintendence extends to courts and tribunals constituted under laws relating to the armed forces."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct (Articles 222, 220 and 230). Statement 4 is wrong: Article 227 excludes armed forces tribunals from High Court superintendence. The trap is 'All four', since superintendence otherwise covers all courts and tribunals in the territory."
+      },
+      "hi": {
+        "stem": "उच्च न्यायालयों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति, भारत के मुख्य न्यायाधीश से परामर्श के बाद, उच्च न्यायालय के किसी न्यायाधीश का दूसरे उच्च न्यायालय में तबादला कर सकते हैं।",
+          "उच्च न्यायालय का सेवानिवृत्त स्थायी न्यायाधीश उसी उच्च न्यायालय में वकालत नहीं कर सकता।",
+          "संसद कानून बनाकर किसी उच्च न्यायालय का क्षेत्राधिकार किसी केंद्रशासित प्रदेश तक बढ़ा सकती है।",
+          "उच्च न्यायालय की अधीक्षण शक्ति सशस्त्र बलों से जुड़े कानूनों के तहत बनी अदालतों और अधिकरणों पर भी लागू होती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं (अनुच्छेद 222, 220 और 230)। कथन 4 गलत है: अनुच्छेद 227 सशस्त्र बलों के अधिकरणों को हाई कोर्ट के अधीक्षण से बाहर रखता है। 'सभी चार' का जाल इसलिए लगता है क्योंकि बाकी सभी अदालतें और अधिकरण इसके दायरे में हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-centre-state-legislative-relations",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about Article 252 of the Constitution of India:",
+        "statements": [
+          "Parliament can make a law on a State List subject if the legislatures of two or more states pass resolutions asking it to do so.",
+          "A law passed in this way can be amended or repealed only by Parliament.",
+          "Such a law applies automatically to every state in India."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the law applies only to the states that passed resolutions and to states that later adopt it. The trap is '1, 2 and 3', mistaking a law made by consent for a national law."
+      },
+      "hi": {
+        "stem": "भारत के संविधान के अनुच्छेद 252 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "यदि दो या अधिक राज्यों के विधानमंडल संकल्प पारित कर अनुरोध करें, तो संसद राज्य सूची के किसी विषय पर कानून बना सकती है।",
+          "इस प्रकार पारित कानून में संशोधन या उसे निरस्त केवल संसद कर सकती है।",
+          "ऐसा कानून भारत के हर राज्य पर अपने आप लागू हो जाता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: कानून सिर्फ़ उन राज्यों पर लागू होता है जिन्होंने संकल्प पारित किया, और उन पर जो बाद में संकल्प से इसे अपनाएँ। '1, 2 और 3' का जाल सहमति से बने कानून को राष्ट्रीय कानून समझ लेने से लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-centre-state-legislative-relations",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Article 253 empowers Parliament to make laws for the whole or any part of India, even on State List subjects, in order to:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "implement international treaties, agreements or conventions",
+          "deal with a breakdown of constitutional machinery in a state",
+          "respond to a resolution of the Rajya Sabha in the national interest",
+          "settle disputes over inter-state river waters"
+        ],
+        "why": "Article 253 lets Parliament legislate to give effect to international treaties and agreements. The trap is (c), which describes Article 249, the Rajya Sabha resolution route."
+      },
+      "hi": {
+        "stem": "अनुच्छेद 253 संसद को पूरे भारत या उसके किसी भाग के लिए, राज्य सूची के विषयों पर भी, कानून बनाने की शक्ति किसलिए देता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अंतरराष्ट्रीय संधियों, समझौतों या अभिसमयों को लागू करने के लिए",
+          "किसी राज्य में संवैधानिक तंत्र विफल होने से निपटने के लिए",
+          "राष्ट्रीय हित में राज्यसभा के संकल्प के जवाब में",
+          "अंतर-राज्यीय नदी जल विवाद सुलझाने के लिए"
+        ],
+        "why": "अनुच्छेद 253 संसद को अंतरराष्ट्रीय संधियाँ और समझौते लागू करने के लिए कानून बनाने देता है। (c) का जाल है: वह अनुच्छेद 249 है, यानी राज्यसभा के संकल्प वाला रास्ता।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-centre-state-legislative-relations",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: A Governor can reserve a bill passed by the state legislature for the consideration of the President.",
+          "Statement II: If a reserved bill is returned and the state legislature passes it again, the President must give assent to it."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct (Article 200). Statement II is wrong: under Article 201 the President is not bound to assent even after the state passes the bill again. The trap is (b), borrowing the rule for the President's own suspensive veto on Union bills."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: राज्यपाल राज्य विधानमंडल द्वारा पारित किसी विधेयक को राष्ट्रपति के विचार के लिए आरक्षित कर सकते हैं।",
+          "कथन II: यदि आरक्षित विधेयक लौटाया जाए और राज्य विधानमंडल उसे फिर से पारित कर दे, तो राष्ट्रपति को उस पर अनुमति देनी ही होगी।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है (अनुच्छेद 200)। कथन II गलत है: अनुच्छेद 201 के तहत राज्य के दोबारा पारित करने पर भी राष्ट्रपति अनुमति देने के लिए बाध्य नहीं हैं। (b) का जाल केंद्रीय विधेयकों पर राष्ट्रपति के निलंबनकारी वीटो वाला नियम यहाँ लगा देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "pol-centre-state-administrative-and-financial",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of Articles and their subject matter:",
+        "statements": [
+          "Article 256 – Obligation of states to ensure compliance with laws made by Parliament",
+          "Article 258 – President may entrust Union functions to a state with its consent",
+          "Article 280 – Statutory grants-in-aid to states in need of assistance",
+          "Article 293 – Borrowing by the Government of India"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. Grants-in-aid to states in need are in Article 275; Article 280 sets up the Finance Commission. Article 293 is borrowing by states; Union borrowing is Article 292. The trap is 'Only three', as Article 280 sounds financial."
+      },
+      "hi": {
+        "stem": "अनुच्छेदों और उनके विषयों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 256 – संसद के बनाए कानूनों का पालन सुनिश्चित करने का राज्यों का दायित्व",
+          "अनुच्छेद 258 – राष्ट्रपति राज्य की सहमति से केंद्र के कार्य उसे सौंप सकते हैं",
+          "अनुच्छेद 280 – सहायता की ज़रूरत वाले राज्यों को वैधानिक सहायता अनुदान",
+          "अनुच्छेद 293 – भारत सरकार द्वारा उधार"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। ज़रूरतमंद राज्यों को सहायता अनुदान अनुच्छेद 275 में है; अनुच्छेद 280 वित्त आयोग बनाता है। अनुच्छेद 293 राज्यों के उधार का है; केंद्र का उधार अनुच्छेद 292 में है। 'केवल तीन' का जाल लगता है क्योंकि 280 वित्तीय लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-centre-state-administrative-and-financial",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which Article provides that if a state fails to comply with directions given by the Union, the President may hold that the government of the state cannot be carried on in accordance with the Constitution?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Article 356",
+          "Article 365",
+          "Article 355",
+          "Article 257"
+        ],
+        "why": "Article 365 gives this power, which can then lead to President's Rule. The trap is Article 356, the President's Rule provision itself, which Article 365 feeds into."
+      },
+      "hi": {
+        "stem": "कौन-सा अनुच्छेद कहता है कि यदि कोई राज्य केंद्र के दिए निर्देशों का पालन न करे, तो राष्ट्रपति यह मान सकते हैं कि उस राज्य का शासन संविधान के अनुसार नहीं चल सकता?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अनुच्छेद 356",
+          "अनुच्छेद 365",
+          "अनुच्छेद 355",
+          "अनुच्छेद 257"
+        ],
+        "why": "यह शक्ति अनुच्छेद 365 देता है, जिससे आगे राष्ट्रपति शासन लग सकता है। अनुच्छेद 356 का जाल है: वह खुद राष्ट्रपति शासन का प्रावधान है, जिस तक अनुच्छेद 365 ले जाता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-inter-state-relations",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about inter-state relations under the Constitution of India:",
+        "statements": [
+          "Under Article 261, full faith and credit is given throughout India to public acts, records and judicial proceedings of the Union and of every state.",
+          "Parliament may appoint an authority to carry out the purposes of the Articles on freedom of trade, commerce and intercourse.",
+          "The freedom of trade under Article 301 is absolute, and Parliament cannot restrict it."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct (Articles 261 and 307). Statement 3 is wrong: Article 302 lets Parliament impose restrictions in the public interest. The trap is '1, 2 and 3', because Article 301 opens with a broad guarantee."
+      },
+      "hi": {
+        "stem": "भारत के संविधान के तहत अंतर-राज्यीय संबंधों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 261 के तहत केंद्र और हर राज्य के सार्वजनिक कार्यों, अभिलेखों और न्यायिक कार्यवाहियों को पूरे भारत में पूर्ण विश्वास और मान्यता दी जाती है।",
+          "व्यापार, वाणिज्य और समागम की स्वतंत्रता वाले अनुच्छेदों के उद्देश्य पूरे करने के लिए संसद एक प्राधिकरण नियुक्त कर सकती है।",
+          "अनुच्छेद 301 के तहत व्यापार की स्वतंत्रता निरपेक्ष है, और संसद उस पर रोक नहीं लगा सकती।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं (अनुच्छेद 261 और 307)। कथन 3 गलत है: अनुच्छेद 302 संसद को सार्वजनिक हित में प्रतिबंध लगाने देता है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि अनुच्छेद 301 एक व्यापक गारंटी से शुरू होता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-rural-local-government",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements about panchayats under Part IX of the Constitution is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Gram Sabha consists of persons on the electoral rolls of a village in a panchayat.",
+          "A State Finance Commission reviews the financial position of panchayats every five years.",
+          "A person must be at least 21 years old to be elected to a panchayat.",
+          "The Governor can remove the State Election Commissioner at pleasure."
+        ],
+        "why": "Option (d) is the answer: under Article 243K, the State Election Commissioner can be removed only like a High Court judge. The tempting trap is (c), which is true: Article 243F sets the minimum age at 21, not 18 or 25."
+      },
+      "hi": {
+        "stem": "संविधान के भाग IX के तहत पंचायतों के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "ग्राम सभा में पंचायत क्षेत्र के किसी गाँव की मतदाता सूची में दर्ज व्यक्ति होते हैं।",
+          "राज्य वित्त आयोग हर पाँच वर्ष में पंचायतों की वित्तीय स्थिति की समीक्षा करता है।",
+          "पंचायत में चुने जाने के लिए व्यक्ति की आयु कम से कम 21 वर्ष होनी चाहिए।",
+          "राज्यपाल राज्य निर्वाचन आयुक्त को अपनी इच्छा से हटा सकते हैं।"
+        ],
+        "why": "उत्तर (d) है: अनुच्छेद 243K के तहत राज्य निर्वाचन आयुक्त को सिर्फ़ हाई कोर्ट जज की तरह हटाया जा सकता है। (c) का जाल लुभाता है, पर वह सही है: अनुच्छेद 243F न्यूनतम आयु 21 रखता है, 18 या 25 नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-rural-local-government",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Panchayats (Extension to the Scheduled Areas) Act, which extends Part IX to Fifth Schedule areas with modifications, was enacted in:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1992",
+          "1993",
+          "1996",
+          "2006"
+        ],
+        "why": "PESA was enacted in 1996. The trap is 1992, the year the 73rd Amendment Act was passed; Part IX itself left Scheduled Areas to a separate law by Parliament."
+      },
+      "hi": {
+        "stem": "पंचायत (अनुसूचित क्षेत्रों पर विस्तार) अधिनियम, जो भाग IX को संशोधनों के साथ पाँचवीं अनुसूची के क्षेत्रों तक बढ़ाता है, किस वर्ष बना?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1992",
+          "1993",
+          "1996",
+          "2006"
+        ],
+        "why": "PESA 1996 में बना। 1992 का जाल है: उसी साल 73वाँ संशोधन अधिनियम पारित हुआ था; भाग IX ने अनुसूचित क्षेत्रों को संसद के एक अलग कानून पर छोड़ा था।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-urban-local-government",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about urban local government under Part IXA of the Constitution:",
+        "statements": [
+          "A Nagar Panchayat is constituted for an area in transition from a rural area to an urban area.",
+          "Wards Committees must be constituted in municipalities with a population of three lakh or more.",
+          "A Metropolitan Planning Committee must be set up for every municipal area with a population above one lakh."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct (Articles 243Q and 243S). Statement 3 is wrong: a metropolitan area means a population of ten lakh or more. The trap is '1, 2 and 3', as the one-lakh figure sounds plausible."
+      },
+      "hi": {
+        "stem": "संविधान के भाग IXA के तहत नगरीय स्थानीय शासन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नगर पंचायत उस क्षेत्र के लिए गठित होती है जो ग्रामीण से नगरीय क्षेत्र में बदल रहा हो।",
+          "तीन लाख या अधिक जनसंख्या वाली नगरपालिकाओं में वार्ड समितियाँ बनाना ज़रूरी है।",
+          "एक लाख से अधिक जनसंख्या वाले हर नगरपालिका क्षेत्र के लिए महानगर योजना समिति बनाना ज़रूरी है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं (अनुच्छेद 243Q और 243S)। कथन 3 गलत है: महानगर क्षेत्र का मतलब दस लाख या अधिक जनसंख्या है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि एक लाख का आँकड़ा ठीक-ठाक लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-emergency-provisions",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The 44th Amendment Act, 1978 replaced the words 'internal disturbance' in Article 352 as a ground for National Emergency with:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "internal emergency",
+          "threat to public order",
+          "failure of constitutional machinery",
+          "armed rebellion"
+        ],
+        "why": "Since the 44th Amendment, the grounds are war, external aggression or armed rebellion. The trap is (c), which describes the ground for President's Rule under Article 356, not National Emergency."
+      },
+      "hi": {
+        "stem": "44वें संशोधन अधिनियम, 1978 ने अनुच्छेद 352 में राष्ट्रीय आपातकाल के आधार के रूप में 'आंतरिक अशांति' शब्दों की जगह क्या रखा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "आंतरिक आपातकाल",
+          "लोक व्यवस्था को ख़तरा",
+          "संवैधानिक तंत्र की विफलता",
+          "सशस्त्र विद्रोह"
+        ],
+        "why": "44वें संशोधन के बाद आधार हैं: युद्ध, बाहरी आक्रमण या सशस्त्र विद्रोह। (c) का जाल है: वह अनुच्छेद 356 के तहत राष्ट्रपति शासन का आधार है, राष्ट्रीय आपातकाल का नहीं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-emergency-provisions",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the effects of a National Emergency:",
+        "statements": [
+          "Article 358 suspends the rights under Article 19 automatically only when the emergency is declared on the ground of war or external aggression.",
+          "Under Article 359, the President can by order suspend the right to move courts for enforcing the Fundamental Rights named in the order.",
+          "During the emergency, Parliament can by law extend the term of the Lok Sabha by one year at a time.",
+          "Any such extension cannot continue beyond six months after the emergency has ceased to operate."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. Article 19 is not suspended automatically for an emergency based on armed rebellion, after the 44th Amendment. The trap is 'Only three', from doubting statement 4, but Article 83 sets that six-month limit."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय आपातकाल के प्रभावों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "अनुच्छेद 358 अनुच्छेद 19 के अधिकारों को अपने आप तभी निलंबित करता है जब आपातकाल युद्ध या बाहरी आक्रमण के आधार पर घोषित हो।",
+          "अनुच्छेद 359 के तहत राष्ट्रपति आदेश देकर उसमें नामित मौलिक अधिकारों को लागू कराने के लिए अदालत जाने का अधिकार निलंबित कर सकते हैं।",
+          "आपातकाल के दौरान संसद कानून बनाकर लोकसभा का कार्यकाल एक बार में एक वर्ष के लिए बढ़ा सकती है।",
+          "ऐसा विस्तार आपातकाल खत्म होने के छह महीने बाद तक से अधिक नहीं चल सकता।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। 44वें संशोधन के बाद, सशस्त्र विद्रोह वाले आपातकाल में अनुच्छेद 19 अपने आप निलंबित नहीं होता। 'केवल तीन' का जाल कथन 4 पर शक करने से लगता है, पर छह महीने की सीमा अनुच्छेद 83 में है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-emergency-provisions",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about President's Rule under Article 356:",
+        "statements": [
+          "The President can declare that the powers of the state legislature shall be exercised by or under the authority of Parliament.",
+          "A proclamation of President's Rule automatically dissolves the state Legislative Assembly.",
+          "Parliament can confer on the President the power to make laws for the state."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 3 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct (Articles 356 and 357). Statement 2 is wrong: the Assembly may be dissolved or only kept in suspended animation; dissolution is not automatic. The trap is '1, 2 and 3', since dissolution often follows."
+      },
+      "hi": {
+        "stem": "अनुच्छेद 356 के तहत राष्ट्रपति शासन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति घोषित कर सकते हैं कि राज्य विधानमंडल की शक्तियाँ संसद द्वारा या उसके प्राधिकार के अधीन प्रयोग की जाएँगी।",
+          "राष्ट्रपति शासन की उद्घोषणा से राज्य विधानसभा अपने आप भंग हो जाती है।",
+          "संसद राष्ट्रपति को उस राज्य के लिए कानून बनाने की शक्ति दे सकती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 3",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं (अनुच्छेद 356 और 357)। कथन 2 गलत है: विधानसभा भंग भी हो सकती है या सिर्फ़ निलंबित रखी जा सकती है; भंग होना अपने आप नहीं होता। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि अक्सर विधानसभा भंग हो जाती है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "pol-emergency-provisions",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: A National Emergency on the ground of external aggression can be proclaimed before any actual aggression takes place.",
+          "Statement II: Article 352 lets the President proclaim an emergency if satisfied that there is imminent danger of war or external aggression.",
+          "Statement III: Since the 44th Amendment, the President can proclaim a National Emergency only on the written decision of the Union Cabinet."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "II and III are both correct, but only II explains I: the 'imminent danger' clause allows a proclamation before aggression occurs. III is a procedural safeguard and says nothing about timing. The trap is (a), which treats both true statements as explanations."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: बाहरी आक्रमण के आधार पर राष्ट्रीय आपातकाल वास्तविक आक्रमण होने से पहले भी घोषित किया जा सकता है।",
+          "कथन II: अनुच्छेद 352 राष्ट्रपति को आपातकाल घोषित करने देता है, यदि वे संतुष्ट हों कि युद्ध या बाहरी आक्रमण का आसन्न ख़तरा है।",
+          "कथन III: 44वें संशोधन के बाद राष्ट्रपति राष्ट्रीय आपातकाल केवल केंद्रीय मंत्रिमंडल के लिखित निर्णय पर ही घोषित कर सकते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "II और III दोनों सही हैं, पर सिर्फ़ II ही I की व्याख्या करता है: 'आसन्न ख़तरा' वाला प्रावधान आक्रमण से पहले घोषणा की इजाज़त देता है। III एक प्रक्रियागत सुरक्षा है, समय के बारे में कुछ नहीं कहता। (a) का जाल दोनों सही कथनों को व्याख्या मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-linguistic-minorities",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Special Officer for Linguistic Minorities, provided for in Article 350B, is appointed by and reports to:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "the President",
+          "the Governor of each state",
+          "the Union Minister of Home Affairs",
+          "the Speaker of the Lok Sabha"
+        ],
+        "why": "Under Article 350B, the President appoints the Special Officer, who reports to the President; the reports are laid before Parliament and sent to the states concerned. The trap is (b), because the safeguards mostly operate in states."
+      },
+      "hi": {
+        "stem": "अनुच्छेद 350B में प्रावधानित भाषाई अल्पसंख्यकों के लिए विशेष अधिकारी की नियुक्ति कौन करता है और वह किसे रिपोर्ट देता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राष्ट्रपति",
+          "हर राज्य के राज्यपाल",
+          "केंद्रीय गृह मंत्री",
+          "लोकसभा अध्यक्ष"
+        ],
+        "why": "अनुच्छेद 350B के तहत राष्ट्रपति विशेष अधिकारी नियुक्त करते हैं, और वह राष्ट्रपति को ही रिपोर्ट देता है; रिपोर्ट संसद में रखी जाती है और संबंधित राज्यों को भेजी जाती है। (b) का जाल इसलिए लगता है क्योंकि ये सुरक्षा उपाय ज़्यादातर राज्यों में लागू होते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India; NCERT Class XI Indian Constitution at Work",
+    "hi": "भारत का संविधान; NCERT कक्षा XI भारत का संविधान: सिद्धांत और व्यवहार"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}
