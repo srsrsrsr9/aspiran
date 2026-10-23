@@ -2010,7 +2010,6 @@ function viewPlus() {
         !plan && h("div",
           !st.trial.used && (st.trial.unlocked ? h("button", { onclick: () => post("/plus/trial", { memberId: me }).then((r) => { toast(r.ok ? "7-day trial started." : r.error); load(); }) }, `Start the ${st.trial.days}-day trial`) : h("p.small.muted", st.trial.why)),
           real ? payCard(pay) : h("div.row", { style: { marginTop: "8px" } },
-            h("button", { onclick: () => buy("monthly") }, `TEST: monthly, ₹${st.prices.monthly.inr}`),
             h("button", { onclick: () => buy("yearly") }, `TEST: yearly, ₹${st.prices.yearly.inr}`)),
           h("p.small.muted", real ? `One payment for a year. It doesn't renew by itself. Refunds within ${st.refundWindowDays} days: see the refund policy.` : `Refunds within ${st.refundWindowDays} days. ${st.cancel}`)),
         h("p.small", h("a", { href: "#receipts" }, "My receipts"), " · ", h("a", { href: "/legal/refunds.html", target: "_blank" }, "Refund policy"), " · ", h("a", { href: "/legal/terms.html", target: "_blank" }, "Terms"))),

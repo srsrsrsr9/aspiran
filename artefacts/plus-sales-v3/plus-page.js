@@ -5,6 +5,15 @@
 // device allows it; the offer goes quiet in result mode, pause, after care and late at night.
 
 const WA = "919876656573";
+// The special offer next to the one price: some aspirants can try Plus free. The number is selectable text and a link.
+const offerText = (C) => C.lang() === "hi"
+  ? ["विशेष ऑफ़र: योग्य उम्मीदवार Plus मुफ़्त आज़मा सकते हैं। ज़्यादा जानने के लिए हमें WhatsApp करें: ", "98766 56573"]
+  : ["Special offer: eligible candidates can try Plus free. WhatsApp us to know more: ", "98766 56573"];
+function offerLine(C, h) {
+  const [lead, num] = offerText(C);
+  const msg = C.lang() === "hi" ? "नमस्ते, मुझे Plus के मुफ़्त ऑफ़र के बारे में जानना है।" : "Hi, I'd like to know about the free Plus offer.";
+  return h("p.pp-offer", lead, h("a", { href: `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, target: "_blank", rel: "noopener" }, num));
+}
 
 export function plusSalesPage(C, d) {
   // d: { h, T, plusStatus, offerQuiet, mcqRun, insightsBody, SAMPLE_HIST, SAMPLE_MISSES, weekQs, playable }
@@ -22,7 +31,7 @@ export function plusSalesPage(C, d) {
   const priceEls = [];   // filled once /plus/status answers
   const ctaEls = [];
   const priceText = (p) => `₹${Number(p).toLocaleString("en-IN")}`;
-  const price = h("span", "₹2,499");
+  const price = h("span", "₹9,999");
   priceEls.push(price);
 
   const buy = (label, cls = "") => {
@@ -37,7 +46,7 @@ export function plusSalesPage(C, d) {
   d.plusStatus().then((st) => {
     const pay = st?.payments ?? {};
     const live = pay.provider === "cashfree" && C.plusOn();
-    const p = live ? pay.amountInr : st?.prices?.yearly?.inr ?? 2499;
+    const p = live ? pay.amountInr : st?.prices?.yearly?.inr ?? 9999;
     priceEls.forEach((el) => (el.textContent = priceText(p)));
     for (const a of ctaEls) {
       if (live) a.href = "#plus";
@@ -56,7 +65,8 @@ export function plusSalesPage(C, d) {
         h("h1.pp-h1.rv", "You've done the reading. ", h("span.pp-grad", "Now see what you actually know.")),
         h("p.pp-lead.rv", "Plus turns every mock you take into a map of where your marks are slipping away, and gives you the tools to win them back, week after week, until the day of the exam."),
         quiet ? quietLine : h("div.pp-ctas.rv", buy("Get Plus for the year"), h("a.pp-btn.ghost", { href: "#pp-try" }, "Try a question first")),
-        !quiet && h("p.pp-fine.rv", price, " once, for twelve months. Doesn't renew by itself.")),
+        !quiet && h("p.pp-fine.rv", price, " a year. One payment, doesn't renew by itself."),
+        !quiet && offerLine(C, h)),
       h("div.pp-stage.rv", mockCard(h))),
     h("div.pp-scrollhint", h("span")));
 
@@ -162,20 +172,21 @@ export function plusSalesPage(C, d) {
     rows.map(([a, f, p]) => h("div.pp-trow", h("div", a), h("div.f", f), h("div.plus", p))));
 
   // ---- 8. Price ------------------------------------------------------------------------------------
-  const priceBig = h("span", "₹2,499"); priceEls.push(priceBig);
-  const perDay = h("span", "under ₹7");
+  const priceBig = h("span", "₹9,999"); priceEls.push(priceBig);
+  const perDay = h("span", "about ₹28");
   const priceCard = h("section.pp-price",
     h("div.pp-pricecard.rv",
       h("p.pp-kicker", "One year of Plus"),
       h("div.pp-bigprice", priceBig),
-      h("p.pp-perday", "That's ", perDay, " a day. Less than the cup of chai next to your books."),
+      h("p.pp-perday", "That's ", perDay, " a day, for a whole year of Plus."),
+      !quiet && offerLine(C, h),
       h("ul.pp-terms", ["One payment for twelve months", "It doesn't renew by itself, ever", "Changed your mind? Refund within 7 days", "For every 10 paid seats, one aspirant who can't pay gets Plus free, chosen by pod leads"].map((t) => h("li", tick(), t))),
       quiet ? quietLine : buy("Get Plus for the year", ".wide"),
       !quiet && h("p.pp-wa", "Prefer UPI or another way? ", h("a", { href: `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to pay for UPSC Pods Plus another way.")}`, target: "_blank", rel: "noopener" }, "WhatsApp us on 98766 56573"), " and we'll upgrade your account as soon as payment arrives.")));
   d.plusStatus().then((st) => {
     const pay = st?.payments ?? {};
-    const p = pay.provider === "cashfree" && C.plusOn() ? pay.amountInr : st?.prices?.yearly?.inr ?? 2499;
-    perDay.textContent = `under ₹${Math.ceil(p / 365)}`;
+    const p = pay.provider === "cashfree" && C.plusOn() ? pay.amountInr : st?.prices?.yearly?.inr ?? 9999;
+    perDay.textContent = `about ₹${Math.round(p / 365)}`;
   });
 
   // ---- 9. Questions --------------------------------------------------------------------------------
@@ -562,6 +573,8 @@ main:has(.pp){min-width:0}.pp *{min-width:0}.pp-panel{overflow-x:auto}
 .pp-perday{font-size:17px!important;color:#E4D4C3!important}.pp-perday span{color:var(--sun);font-weight:700}
 .pp-terms{list-style:none;padding:0;margin:22px 0}.pp-terms li{display:flex;gap:10px;align-items:flex-start;margin:12px 0;color:var(--cream);font-size:15px}
 .pp-wa{font-size:14px!important;margin:18px 0 0!important;text-align:center}
+.pp-offer{font-size:15px;font-weight:600;color:#FFD08A;margin:12px 0 0;user-select:text}
+.pp-offer a{color:#FFB547;font-weight:800;white-space:nowrap}
 /* faq */
 .pp-q{border-bottom:1px solid var(--line2);padding:6px 0}
 .pp-q summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-size:19px;font-weight:700;color:var(--cream)}

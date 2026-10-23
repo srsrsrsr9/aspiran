@@ -89,15 +89,8 @@ data class AnswerFeedback(
 
 @Serializable
 data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap()) {
-    /** "₹299 a month, or ₹2,499 a year", from the server's prices; null when it sent none. */
-    fun priceLine(): String? {
-        val m = prices["monthly"]?.inr; val y = prices["yearly"]?.inr
-        return when {
-            m != null && y != null -> "${Honest.inr(m)} a month, or ${Honest.inr(y)} a year"
-            m != null -> "${Honest.inr(m)} a month"
-            else -> null
-        }
-    }
+    /** The one price on show, a year of Plus, from the server; null when it sent none. */
+    fun yearlyInr(): Int? = prices["yearly"]?.inr?.takeIf { it > 0 }
 }
 
 @Serializable

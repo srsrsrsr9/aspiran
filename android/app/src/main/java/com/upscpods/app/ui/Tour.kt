@@ -104,10 +104,10 @@ val TOUR = listOf(
 /**
  * Chotu's tour after onboarding. It sits over the bottom of the screen so the tab it describes shows behind it.
  * [onStop] moves the app to that stop's tab; Skip or the last button ends it for good. Chotu's eyes follow your taps.
- * The last stop pitches Plus with the real prices ([price], from the server) and [onSeePlus] opens the Plus page.
+ * The last stop pitches Plus at the one yearly price ([price], from the server) with the free-trial offer; [onSeePlus] opens the Plus page.
  */
 @Composable
-fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit, price: String? = null, onSeePlus: (() -> Unit)? = null) {
+fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit, price: Int? = null, hindi: Boolean = false, onSeePlus: (() -> Unit)? = null) {
     var i by rememberSaveable { mutableIntStateOf(0) }
     val stop = TOUR[i]
     var origin by remember { mutableStateOf(Offset.Zero) }
@@ -134,7 +134,7 @@ fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit, price: String? =
                             .background(if (k <= i) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant))
                     }
                 }
-                if (stop.pitch) PlusPitch(price, tap, puffKey = i)
+                if (stop.pitch) PlusPitch(price, hindi, tap, puffKey = i)
                 else ChotuSays(stop.line, stop.mood, look = tap, wave = i == 0, puffKey = i)
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = onFinish) { Text(if (stop.pitch) "Start free" else "Skip") }
@@ -150,9 +150,9 @@ fun ChotuTour(onStop: (TourStop) -> Unit, onFinish: () -> Unit, price: String? =
     }
 }
 
-/** The tour's last stop: Chotu sells Plus with confidence. Only what Plus does today, at the server's prices. */
+/** The tour's last stop: Chotu sells Plus with confidence. Only what Plus does today, at the one yearly price. */
 @Composable
-private fun PlusPitch(price: String?, look: Offset?, puffKey: Any) {
+private fun PlusPitch(price: Int?, hindi: Boolean, look: Offset?, puffKey: Any) {
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         ChotuSays("One more thing. Free gets you started. Plus shows you exactly where your marks leak, and wins them back.", ChotuMood.PROUD, look = look, puffKey = puffKey)
         Column(
@@ -168,7 +168,7 @@ private fun PlusPitch(price: String?, look: Offset?, puffKey: Any) {
                 "Unlimited answer reviews",
                 "The weekly Chai test and the monthly compilation",
             ).forEach { Text("✦  $it", color = Color.White, fontSize = 15.sp, fontWeight = FontWeight.SemiBold) }
-            price?.let { Text(it, color = Color(0xFFFFD08A), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, modifier = Modifier.padding(top = 4.dp)) }
+            PlusOffer(hindi, price ?: PLUS_YEARLY_INR, Modifier.padding(top = 4.dp))
         }
     }
 }

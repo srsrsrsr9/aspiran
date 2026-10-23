@@ -430,10 +430,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
     var syllabusPaper by rememberSaveable { mutableStateOf<String?>(null) }
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
-    var plusPrice by remember { mutableStateOf<String?>(null) }
+    var plusPrice by remember { mutableStateOf<Int?>(null) }
     LaunchedEffect(overlay, tab, touring) {
         if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT))
-            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.priceLine() } ?: run { if (plusMember == null) plusMember = false }
+            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.yearlyInr() } ?: run { if (plusMember == null) plusMember = false }
     }
     var tool by rememberSaveable { mutableStateOf(ShelfTool.COMPASS) }
     LaunchedEffect(day.dayClosed) { if (loaded) { closedDays = repo.closedDays(); staged.checkStamps(closedDays, pod.joinedOn) } }
@@ -870,6 +870,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, onDial: (String) -> Unit
         onStop = { stop -> tab = Tab.valueOf(stop.tab); if (tab == Tab.PREP) prepSub = stop.sub?.let { PrepSub.valueOf(it) } ?: PrepSub.TODAY },
         onFinish = { staged.toured = true; touring = false; tab = Tab.ADDA },
         price = plusPrice,
+        hindi = hindi,
         onSeePlus = openPlusInfo,
     )
     }

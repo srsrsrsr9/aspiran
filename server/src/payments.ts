@@ -22,7 +22,8 @@ import { grant } from "./plus";
  */
 
 export interface Pricing { yearlyInr: number; foundingInr: number; foundingSeats: number; foundingOn: boolean }
-export const DEFAULT_PRICING: Pricing = { yearlyInr: 2499, foundingInr: 999, foundingSeats: 300, foundingOn: true };
+// One price: ₹9,999 a year. Founding seats are off; an admin can still switch them on, but nothing shows them by default.
+export const DEFAULT_PRICING: Pricing = { yearlyInr: 9999, foundingInr: 999, foundingSeats: 300, foundingOn: false };
 /** Shown on receipts and the legal pages. Placeholders until the founder fills them in admin. */
 export interface Business { entityName: string; address: string; email: string; gstin: string }
 export const DEFAULT_BUSINESS: Business = { entityName: "[Legal entity name]", address: "[Registered address]", email: "[Support email]", gstin: "" };

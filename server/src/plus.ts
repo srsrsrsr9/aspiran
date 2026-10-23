@@ -15,7 +15,8 @@ import { cashfreeConfigured, paymentsStatus } from "./payments";
  */
 
 export const LIMITS = { free: { feedbackPerWeek: 3, mocksPerMonth: 1, cloudChotuPerDay: 15 }, plus: { feedbackPerWeek: Infinity, mocksPerMonth: Infinity, cloudChotuPerDay: 100 } };
-export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 2499, days: 365 } } as const;
+// One price on show: a year of Plus at ₹9,999 (owner, 23 Oct). Monthly stays only for test-mode purchases and gifts; it is never shown.
+export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 9999, days: 365 } } as const;
 const TRIAL_DAYS = 7;
 const DAY = 86400_000;
 
@@ -140,7 +141,7 @@ export async function plusRoute(req: Request, env: Env, path: string, url: URL):
     const member = validId(memberId) ? await env.DB.prepare("SELECT joined_at FROM members WHERE member_id = ?").bind(memberId).first<{ joined_at: string }>() : null;
     const trialUnlocked = !!member && Date.now() - Date.parse(member.joined_at) >= 7 * DAY;
     return json({
-      enabled, testMode: !cashfreeConfigured(env), payments: await paymentsStatus(env), prices: PRICES, limits: LIMITS.free, plusLimits: { cloudChotuPerDay: LIMITS.plus.cloudChotuPerDay },
+      enabled, testMode: !cashfreeConfigured(env), payments: await paymentsStatus(env), prices: { yearly: PRICES.yearly }, limits: LIMITS.free, plusLimits: { cloudChotuPerDay: LIMITS.plus.cloudChotuPerDay },
       plan: ent, used: validId(memberId) && enabled ? await used(env, memberId) : null,
       trial: { days: TRIAL_DAYS, used: !!row?.trial_used, unlocked: trialUnlocked, why: trialUnlocked ? null : "The 7-day trial unlocks after your first full week in a pod." },
       refundWindowDays: 7, cancel: "Me → Plus → Cancel. Two taps, no questions.",

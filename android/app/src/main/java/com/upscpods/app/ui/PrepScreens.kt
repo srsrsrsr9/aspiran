@@ -81,12 +81,20 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.withStyle
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.upscpods.app.data.Honest
 import com.upscpods.app.data.ContentLibrary
 import com.upscpods.app.data.FAMILIES
 import com.upscpods.app.data.LibraryItem
@@ -532,10 +540,35 @@ private val PLAN_ROWS = listOf(
     Triple("Cloud Chotu turns", "15 a day", "100 a day"),
 )
 
-/** Opens WhatsApp with a prefilled note. The only Plus action in the app: Google Play's payments policy. */
-private fun openPilot(context: Context) {
-    val text = android.net.Uri.encode("I'd like to apply for the Plus pilot")
-    runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://wa.me/919876656573?text=$text"))) }
+/** The one price on show (owner, 23 Oct): a year of Plus. The server's figure wins when it has one. */
+const val PLUS_YEARLY_INR = 9999
+private const val WA_NUMBER = "919876656573"
+private const val WA_SHOWN = "98766 56573"
+private fun waLink(hindi: Boolean) = "https://wa.me/$WA_NUMBER?text=" +
+    android.net.Uri.encode(if (hindi) "नमस्ते, मुझे Plus के मुफ़्त ऑफ़र के बारे में जानना है।" else "Hi, I'd like to know about the free Plus offer.")
+
+/** Opens WhatsApp with a prefilled note about the free offer. The only Plus action in the app: Google Play's payments policy. */
+private fun openPilot(context: Context, hindi: Boolean) {
+    runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(waLink(hindi)))) }
+}
+
+/**
+ * The price and the special offer, together wherever a price shows: "₹9,999 a year", then the free trial for
+ * eligible candidates with the WhatsApp number as selectable text that also opens the chat. For dark stages.
+ */
+@Composable
+fun PlusOffer(hindi: Boolean, inr: Int = PLUS_YEARLY_INR, modifier: Modifier = Modifier) {
+    val price = Honest.inr(inr)
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text(if (hindi) "$price सालाना" else "$price a year", color = Color(0xFFFFD08A), fontWeight = FontWeight.ExtraBold, fontSize = 22.sp)
+        SelectionContainer {
+            Text(buildAnnotatedString {
+                withStyle(SpanStyle(fontWeight = FontWeight.Bold, color = Color(0xFFFFB547))) { append(if (hindi) "विशेष ऑफ़र: " else "Special offer: ") }
+                append(if (hindi) "योग्य उम्मीदवार Plus मुफ़्त आज़मा सकते हैं। ज़्यादा जानने के लिए हमें WhatsApp करें: " else "eligible candidates can try Plus free. WhatsApp us to know more: ")
+                withLink(LinkAnnotation.Url(waLink(hindi), TextLinkStyles(SpanStyle(color = Color(0xFFFFB547), fontWeight = FontWeight.ExtraBold, textDecoration = TextDecoration.Underline)))) { append(WA_SHOWN) }
+            }, color = Color.White.copy(alpha = .9f), fontSize = 14.sp, lineHeight = 20.sp)
+        }
+    }
 }
 
 // Warm night palette for Plus: near-black, cream type, amber to orange. The stages stay dark in both themes, like the website's.
@@ -615,9 +648,9 @@ private fun PilotButton(hindi: Boolean, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Box(
         modifier.fillMaxWidth().heightIn(min = 56.dp).clip(RoundedCornerShape(999.dp)).background(Brush.linearGradient(GRAD))
-            .clickable { openPilot(context) }.padding(horizontal = 24.dp, vertical = 14.dp),
+            .clickable { openPilot(context, hindi) }.padding(horizontal = 24.dp, vertical = 14.dp),
         contentAlignment = Alignment.Center,
-    ) { Text(if (hindi) "मुफ़्त पायलट के लिए आवेदन करें" else "Apply for the free pilot", color = Color(0xFF2A1300), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) }
+    ) { Text(if (hindi) "ज़्यादा जानने के लिए WhatsApp करें" else "WhatsApp us to know more", color = Color(0xFF2A1300), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) }
 }
 
 /** A slim card at the top of Today's 3 and Practice for members without Plus. The caller hides it in quiet times. */
@@ -838,8 +871,8 @@ private fun ChotuTurns(hindi: Boolean) {
 /**
  * Plus as a story, the same one the website tells: a dark warm hero, the score-only habit, real counts from the library,
  * what's inside UPSC Pods for everyone, what the Plus pilot adds, live tastes, what stays free and the pilot card.
- * Every number is real (counted from the library or this phone) or marked as a sample. Google Play's payments policy:
- * no price, no buy button, no payment wording and no link to the website. The one action is the free pilot on WhatsApp,
+ * Every number is real (counted from the library or this phone) or marked as a sample. One price shows, a year of
+ * Plus, with the free-trial offer; still no buy button and no link to the website. The one action is a WhatsApp chat,
  * and in quiet times (pause, result days, after a hard moment, 22:30 to 06:00) it goes quiet; the gate doesn't.
  * Blocks fade and rise in as they scroll into view; motion stops with the phone's "remove animations".
  */
@@ -860,8 +893,8 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
         Text("Plus turns every mock you take into a map of where your marks are slipping away, and gives you the tools to win them back, week after week, until the day of the exam.",
             color = TX2, fontSize = 17.sp, lineHeight = 25.sp)
         if (quiet) Text(quietLine, color = TX) else {
-            PilotButton(hindi, Modifier.padding(top = 4.dp))
-            Text("The Plus pilot is free for a small group of aspirants. We'll look at your profile first.", color = TX2, fontSize = 13.sp)
+            PlusOffer(hindi, modifier = Modifier.padding(top = 4.dp))
+            PilotButton(hindi)
         }
         HeroShot()
     }
@@ -923,8 +956,8 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
         }
     }
 
-    // 5. What the Plus pilot adds, one block per value.
-    Text("What the Plus pilot adds", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold, lineHeight = 36.sp, modifier = Modifier.padding(bottom = 4.dp))
+    // 5. What Plus adds, one block per value.
+    Text("What Plus adds", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold, lineHeight = 36.sp, modifier = Modifier.padding(bottom = 4.dp))
     Feature(GOLD, "01 · Every mock paper", "Every mock paper. Not one a month.",
         "Free members get one full paper a month. Plus opens all ${if (mocks.isNotEmpty()) "${mocks.size}" else "of them"}, ${if (mockQs > 0) "$mockQs" else "hundreds of"} questions across polity, history, geography, economy, environment, science, IR, art and culture, society and CSAT. Real Prelims formats and negative marking, so your guessing habits show up too.",
         if (mocks.isNotEmpty()) "${plural(mocks.size, "paper")} ready now · $mockQs questions" else null) { PaperStack() }
@@ -993,7 +1026,7 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
         }
     }
 
-    // 8. The close: the free pilot card, the only action.
+    // 8. The close: the price and the free offer, the only action.
     Reveal {
         Stage(SAF, Modifier.padding(top = 10.dp), pad = 26) {
             Text("The exam doesn't grade effort.", color = TX, fontSize = 30.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 34.sp, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
@@ -1001,9 +1034,8 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
             if (quiet) Text(quietLine, color = TX2, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth()) else {
                 Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(20.dp)).background(Color.White.copy(alpha = .05f)).border(1.dp, GOLD.copy(alpha = .3f), RoundedCornerShape(20.dp)).padding(18.dp),
                     verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Text("PLUS PILOT", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
-                    Text("Free for a small group of aspirants. Message us on WhatsApp (9876656573) to apply. We'll look at your profile first and reply there.",
-                        color = TX, fontSize = 15.sp, lineHeight = 22.sp)
+                    Text(if (hindi) "एक साल का PLUS" else "ONE YEAR OF PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
+                    PlusOffer(hindi)
                     PilotButton(hindi)
                 }
             }
@@ -1012,7 +1044,7 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
 
     Text("Questions", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold, modifier = Modifier.padding(top = 10.dp))
     Faq("What stays free?", "Everything you use today: the Adda, your pod, Chotu's Talk, Calm, Chai, Today's 3, daily Prelims practice, Learn and play, long reads and one full mock paper a month. Plus never locks any of it.")
-    Faq("How does the pilot work?", "Message us on WhatsApp. We'll look at your profile and reply there. If you're in the group, Plus opens on this account.")
+    Faq("What does Plus cost?", "${Honest.inr(PLUS_YEARLY_INR)} for a year. Eligible candidates can try it free: WhatsApp us on $WA_SHOWN to know more, and if you're eligible, Plus opens on this account.")
     Faq("Does Plus guarantee a better score?", "No one honest can promise that. What Plus does is show you exactly where your marks are going and give you the tools to work on it. The work is still yours.")
     Faq("Is my data private?", "Your mock scores, insights and error log stay on this phone, never on our server.")
     Faq("Already have Plus?", "Sign in with that account and every tool here opens.")
