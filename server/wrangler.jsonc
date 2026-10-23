@@ -19,7 +19,7 @@
   "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "upsc-pods-media" }, { "binding": "BACKUPS", "bucket_name": "upsc-pods-backups" }],
   "triggers": {
     // One half-hourly cron; index.ts runs what's due in IST: 05:30 fetch, merge and pod states; Mon 06:00 batch match;
-    // 07:00 publish and the Chai post; Chotu's host schedule (Mon 08:00, Tue/Thu 19:00, Fri 20:00, Sun 18:00).
+    // 07:00 publish and the Chai post; Chotu's host schedule (Mon 08:00, Wed/Sat 19:00, Fri 20:00, Sun 18:00).
     "crons": ["0,30 * * * *"]
   },
   "env": {

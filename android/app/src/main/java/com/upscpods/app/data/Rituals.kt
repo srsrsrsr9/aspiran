@@ -34,14 +34,14 @@ enum class Ritual(val key: String, val title: String, val titleHi: String, val s
     MONDAY_GOAL("goal", "Monday goal", "सोमवार का लक्ष्य", "Mondays, 8 am", "सोमवार, सुबह 8 बजे", "goal_ritual"),
     ANSWER_HOUR("answer_hour", "Answer hour", "आंसर आवर", "Wed and Sat, 7 pm", "बुध और शनि, शाम 7 बजे", "answer_hour"),
     QUIZ_NIGHT("quiz", "Quiz night", "क्विज़ नाइट", "Fridays, 8 pm, in your pod", "शुक्रवार, रात 8 बजे, आपके पॉड में", "quiz_night"),
-    SUNDAY_CA("ca", "Week in 7 scenes", "7 दृश्यों में हफ़्ता", "Sundays, 10 am", "रविवार, सुबह 10 बजे", "ca_ritual"),
+    SUNDAY_CA("ca", "The week in scenes", "दृश्यों में हफ़्ता", "Sundays, 10 am", "रविवार, सुबह 10 बजे", "ca_ritual"),
     COMEBACK("comeback", "Comeback", "वापसी", "After 3 quiet days", "3 शांत दिनों के बाद", "came_back");
 
     fun title(hindi: Boolean) = if (hindi) titleHi else title
     fun slot(hindi: Boolean) = if (hindi) slotHi else slot
 
-    /** The Sunday CA episode waits for W7 (cinematic current affairs): hidden until the episodes exist. */
-    val available: Boolean get() = this != SUNDAY_CA
+    /** Every ritual can be picked (the Sunday one since W7's cinematic current affairs). */
+    val available: Boolean get() = true
 
     companion object {
         fun of(key: String?): Ritual? = entries.firstOrNull { it.key == key }
@@ -222,7 +222,18 @@ object Rituals {
                 (if (hindi) "रात 8 बजे क्विज़ नाइट" else "Quiz night at 8") to
                     (if (hindi) "पाँच प्रश्न, पूरे पॉड का एक स्कोर, पिछले हफ़्ते के अपने पॉड से मुकाबला।" else "Five questions, one pod score, up against your pod's own last week.")
             }
-            Ritual.SUNDAY_CA -> null
+            Ritual.SUNDAY_CA -> {
+                // The latest week (as last fetched), unless it's all watched already. Counts are the real ones.
+                val w = CurrentAffairs.cachedWeeks(context).firstOrNull() ?: return null
+                val ca = context.getSharedPreferences("ca", Context.MODE_PRIVATE)
+                val seen = ca.all.keys.count { it.startsWith("w:${w.week}/") }
+                if (seen >= w.scenes) return null
+                val mins = Math.round(w.seconds / 60).coerceAtLeast(1)
+                (if (hindi) "${w.scenes} दृश्यों में यह हफ़्ता" else "This week in ${w.scenes} scenes") to buildString {
+                    append(if (hindi) "लगभग $mins मिनट।" else "About $mins min.")
+                    if (w.free > 0) append(if (hindi) " पहला दृश्य सबके लिए खुला है।" else " The first one's open to everyone.")
+                }
+            }
             Ritual.COMEBACK -> {
                 val last = p.getString("lastOpen", null)?.let(LocalDate::parse) ?: return null
                 if (last.isAfter(LocalDate.now().minusDays(3)) || p.getString("comebackFor", null) == last.toString()) return null
@@ -294,7 +305,7 @@ object Rituals {
         Ritual.MONDAY_GOAL -> if (hindi) "लक्ष्य तय। सोमवार वाले आप ने शुक्रवार वाले आप का काम आसान कर दिया।" else "Goal set. Monday-you just did Friday-you a favour."
         Ritual.ANSWER_HOUR -> if (hindi) "एक उत्तर लिख लिया। मेन्स ऐसे ही आसान होता है: एक-एक करके।" else "One answer written. That's how Mains gets easier: one at a time."
         Ritual.QUIZ_NIGHT -> if (hindi) "क्विज़ खेल लिया। पॉड के स्कोर में आपका हिस्सा जुड़ गया।" else "Quiz played. Your share is in the pod's score."
-        Ritual.SUNDAY_CA -> if (hindi) "हफ़्ता पूरा देख लिया।" else "Week watched."
+        Ritual.SUNDAY_CA -> if (hindi) "हफ़्ता देख लिया, सवाल भी हो गए। करंट अफ़ेयर्स ऐसे ही याद रहते हैं।" else "Week watched, questions done. That's how current affairs stick."
         Ritual.COMEBACK -> if (hindi) "आप वापस आ गए। सबसे मुश्किल हिस्सा यही था।" else "You're back. That was the hard part, done."
     }
 

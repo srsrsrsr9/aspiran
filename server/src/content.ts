@@ -111,6 +111,10 @@ const TYPES: Record<string, string> = {
   png: "image/png",
   webp: "image/webp",
   md: "text/markdown; charset=utf-8",
+  mp4: "video/mp4",
+  vtt: "text/vtt; charset=utf-8",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
 };
 const typeOf = (path: string) => TYPES[path.split(".").pop()!.toLowerCase()] ?? "application/octet-stream";
 
@@ -223,13 +227,29 @@ export function keepLangs(node: any, keep: string[]) {
   Object.values(node).forEach((x) => keepLangs(x, keep));
 }
 
-export async function serveMedia(env: Env, key: string): Promise<Response> {
+export async function serveMedia(env: Env, key: string, req?: Request): Promise<Response> {
   if (!env.MEDIA) return bad("No MEDIA bucket bound", 503);
   if (!SAFE_PATH.test(key)) return bad("Bad path");
-  const obj = await env.MEDIA.get(key);
+  // Videos (current-affairs scenes) are read in ranges: the player seeks, and resumes a half-cached file.
+  const want = req?.headers.get("range")?.match(/^bytes=(\d*)-(\d*)$/);
+  const range: R2Range | undefined = want && (want[1] || want[2])
+    ? (want[1] ? { offset: Number(want[1]), ...(want[2] ? { length: Number(want[2]) - Number(want[1]) + 1 } : {}) } : { suffix: Number(want[2]) })
+    : undefined;
+  const obj = await env.MEDIA.get(key, range ? { range } : undefined);
   if (!obj) return bad("Not found", 404);
+  let part: Record<string, string> | undefined;
+  if (range && obj.size > 0) {
+    const r = range as { offset?: number; length?: number; suffix?: number };
+    const start = r.suffix != null ? Math.max(0, obj.size - r.suffix) : Math.min(r.offset ?? 0, obj.size);
+    const len = r.suffix != null ? obj.size - start : Math.min(r.length ?? obj.size - start, obj.size - start);
+    if (len <= 0) return new Response(null, { status: 416, headers: { "content-range": `bytes */${obj.size}` } });
+    part = { "content-range": `bytes ${start}-${start + len - 1}/${obj.size}`, "content-length": String(len) };
+  }
   return new Response(obj.body, {
+    status: part ? 206 : 200,
     headers: {
+      ...(part ?? {}),
+      "accept-ranges": "bytes",
       "content-type": obj.httpMetadata?.contentType ?? typeOf(key),
       "cache-control": "public, max-age=86400",
       "access-control-allow-origin": "*",

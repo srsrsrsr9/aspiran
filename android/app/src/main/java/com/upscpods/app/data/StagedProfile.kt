@@ -231,6 +231,7 @@ class StagedProfile(context: Context) {
             "quiz_night" to StampInfo("pod", "Quiz Night", "You played a Pod Quiz Night."),
             "lead" to StampInfo("roles", "Pod lead", "You lead a pod."),
             // Ritual nudges (data/Rituals.kt): the first time each one is done. Comeback earns "came_back", quiz night "quiz_night".
+            "ca_ritual" to StampInfo("showing", "Week in scenes", "You watched the week's current affairs and took its questions."),
             "chai_ritual" to StampInfo("showing", "Morning Chai", "You had Morning Chai at your chai time."),
             "goal_ritual" to StampInfo("showing", "Fresh-week goal", "You set a goal for the week on a Monday."),
             "answer_hour" to StampInfo("showing", "Answer hour", "You wrote an answer on an answer-hour day."),

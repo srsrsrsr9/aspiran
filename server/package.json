@@ -20,10 +20,12 @@
     "test:friends": "node --import ./test/dev-auth.mjs test/friends.mjs",
     "models": "node scripts/serve-models.mjs",
     "import": "node scripts/import-pack.mjs",
+    "import:ca": "node scripts/import-ca.mjs",
     "test:roadmap": "node test/roadmap.mjs",
     "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
     "test:password": "node test/password.mjs",
-    "test:rooms": "node --import ./test/dev-auth.mjs test/rooms.mjs"
+    "test:rooms": "node --import ./test/dev-auth.mjs test/rooms.mjs",
+    "test:ca": "node test/ca.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260901.0",

@@ -15,6 +15,9 @@ import com.upscpods.app.ui.LongReadsScreen
 import com.upscpods.app.ui.PlusInfoScreen
 import com.upscpods.app.ui.PlusBanner
 import com.upscpods.app.ui.SevenWays
+import com.upscpods.app.ui.CaPlayerScreen
+import com.upscpods.app.ui.CaWeekCard
+import com.upscpods.app.data.CurrentAffairs
 import com.upscpods.app.ui.SyllabusStrip
 import com.upscpods.app.ui.SyllabusTab
 import com.upscpods.app.ui.plusWays
@@ -170,6 +173,16 @@ import java.time.LocalDate
 
 // AppCompatActivity so app language and reading language can use per-app locales.
 class MainActivity : AppCompatActivity() {
+    // A nudge tapped while the app is already open (singleTask): onNewIntent hands its ritual to the screen.
+    private val nudged = mutableStateOf<Ritual?>(null)
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val r = Ritual.of(intent.getStringExtra(Rituals.EXTRA))
+        nudged.value = r ?: Ritual.CHAI.takeIf { intent.getBooleanExtra(Nudge.EXTRA_FROM_NUDGE, false) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Auth.init(this)
@@ -185,7 +198,7 @@ class MainActivity : AppCompatActivity() {
             PodsTheme {
                 var welcome by rememberSaveable { mutableStateOf(greet) }
                 Box(Modifier.fillMaxSize()) {
-                    AppRoot(brief, fromNudge, ritual.takeIf { savedInstanceState == null }, onDial = { number ->
+                    AppRoot(brief, fromNudge, ritual.takeIf { savedInstanceState == null }, nudged.value, onNudged = { nudged.value = null }, onDial = { number ->
                         // ACTION_DIAL opens the dialer pre-filled; no call permission needed.
                         startActivity(Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number")))
                     })
@@ -208,11 +221,11 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial: (String) -> Unit) {
+private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged: Ritual?, onNudged: () -> Unit, onDial: (String) -> Unit) {
     val context = LocalContext.current
     var profile by remember { mutableStateOf(ProfileStore.load(context)) }
     val staged = remember { StagedProfile(context) }
@@ -290,6 +303,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
     val week = remember { Week(context) }
     // Editor-approved explainers, games, sounds and Lamp Off from the pod server, cached for offline.
     val library = remember { ContentLibrary(context) { pod.serverUrl } }
+    // Cinematic current affairs (W7): the week's scenes from the server's /ca, kept for offline.
+    val ca = remember { CurrentAffairs(context) { pod.serverUrl } }
     remember(pod, staged) {
         pod.matchFields = { staged.synced() }
         pod.onStamp = { staged.award(it) }
@@ -337,6 +352,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
         closedDays = repo.closedDays()
         staged.checkStamps(closedDays, pod.joinedOn)
         library.refresh()
+        ca.refresh()
     }
     val hindi = persona?.language == ReadingLanguage.HINDI
     val bank = remember { Practice.loadBank(context) }
@@ -349,6 +365,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
         mutableStateOf(when {
             fromNudge -> Overlay.CHAI
             ritual == Ritual.ANSWER_HOUR || ritual == Ritual.COMEBACK -> Overlay.ANSWER_STUDIO
+            ritual == Ritual.SUNDAY_CA -> Overlay.CA
             else -> Overlay.NONE
         })
     }
@@ -413,6 +430,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
     val openItem = { id: String -> libraryBack = if (overlay == Overlay.LEARN) Overlay.LEARN else Overlay.NONE; libraryItem = id; overlay = Overlay.LIBRARY }
     // Learn and play, long reads and the Plus tools (data/Prep.kt, ui/PrepScreens.kt).
     var readId by rememberSaveable { mutableStateOf<String?>(null) }
+    // The current-affairs week and scene to open; no week means the latest (the Sunday nudge opens that one).
+    var caWeek by rememberSaveable { mutableStateOf<String?>(null) }
+    var caScene by rememberSaveable { mutableStateOf(0) }
     var prepTool by rememberSaveable { mutableStateOf(PrepTool.WEEKLY) }
     var prepBack by rememberSaveable { mutableStateOf(Overlay.NONE) }
     val openTool = { t: PrepTool -> if (overlay != Overlay.PREP_TOOL) prepBack = overlay; prepTool = t; overlay = Overlay.PREP_TOOL }
@@ -458,7 +478,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
     LaunchedEffect(overlay, tab, touring) {
-        if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT))
+        if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT, Overlay.CA))
             community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.yearlyInr() } ?: run { if (plusMember == null) plusMember = false }
     }
     var tool by rememberSaveable { mutableStateOf(ShelfTool.COMPASS) }
@@ -642,6 +662,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
             plusGate, plusQuiet, hindi, prepAnswer, onTool = openTool,
             onMocks = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS }, onClose = { overlay = prepBack },
         )
+        Overlay.CA -> CaPlayerScreen(
+            ca, caWeek, caScene, plusGate, plusQuiet, hindi,
+            onNode = { p, t -> syllabusPaper = p; syllabusFocus = t; overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.SYLLABUS },
+            onSeePlus = openPlusInfo,
+            onWeekDone = { ritualDone(Ritual.SUNDAY_CA) },
+            onClose = { if (arrived == Ritual.SUNDAY_CA) { tab = Tab.PREP; prepSub = PrepSub.TODAY }; overlay = Overlay.NONE; arrived = null },
+        )
         Overlay.LAMP -> library.lampOff()?.let { w ->
             LampOff(w, library, hindi && library.items.any { it.kind == "winddown" && it.hindi }, onClose = { overlay = Overlay.NONE })
         } ?: run { overlay = Overlay.NONE }
@@ -759,6 +786,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
                                 onFiveMinutes = { fiveAt = System.currentTimeMillis() },
                                 onWhy = { openWhy(Guide.WHY_TODAY) },
                                 weekly = {
+                                    // The week in scenes (W7), then the earlier weeks on its shelf.
+                                    CaWeekCard(ca, plusGate, plusQuiet, hindi) { w, n -> caWeek = w; caScene = n; overlay = Overlay.CA }
                                     // The variety, shown off: today's topic in every format we have for it.
                                     SevenWays(library, prep, hindi, onOpen = openItem, onSeeAll = { overlay = Overlay.LEARN })
                                     // Week one: target year, Mains medium, working, one a day.
@@ -877,7 +906,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
                         },
                         onDeleteJournal = { scope.launch { repo.deleteJournal() } },
                         serverUrl = pod.serverUrl,
-                        onServerUrl = { url -> pod.stop(); pod.serverUrl = url; pod.start(persona); scope.launch { config.refresh(); library.refresh() } },
+                        onServerUrl = { url -> pod.stop(); pod.serverUrl = url; pod.start(persona); scope.launch { config.refresh(); library.refresh(); ca.refresh() } },
                         onOpenFocus = { overlay = Overlay.FOCUS },
                         modifier = inner,
                     )
@@ -898,6 +927,20 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, onDial:
         )
     }
     StampToast(staged, Modifier.align(Alignment.TopCenter).statusBarsPadding().padding(top = 72.dp))
+    // A nudge tapped with the app already open: the same screen a cold open from it gets.
+    LaunchedEffect(nudged) {
+        val r = nudged ?: return@LaunchedEffect
+        arrived = r
+        if (r == Ritual.SUNDAY_CA) { caWeek = null; caScene = 0 }
+        overlay = when (r) {
+            Ritual.CHAI -> Overlay.CHAI
+            Ritual.ANSWER_HOUR, Ritual.COMEBACK -> Overlay.ANSWER_STUDIO
+            Ritual.SUNDAY_CA -> Overlay.CA
+            else -> Overlay.NONE
+        }
+        tab = when (r) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; else -> Tab.ADDA }
+        onNudged()
+    }
     // The ritual's actions: Today's Chai read, every quiz question answered (the others are hooked where they happen).
     LaunchedEffect(TaskId.CHAI in day.done) { if (TaskId.CHAI in day.done) ritualDone(Ritual.CHAI) }
     LaunchedEffect(pod.quiz?.id, pod.quizMine.size) {

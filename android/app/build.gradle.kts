@@ -145,5 +145,9 @@ dependencies {
     implementation(libs.androidx.credentials.play.services)
     implementation(libs.googleid)
     implementation(libs.installreferrer)
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.datasource)
+    implementation(libs.androidx.media3.database)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
