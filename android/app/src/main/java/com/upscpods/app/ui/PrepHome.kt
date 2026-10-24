@@ -149,6 +149,8 @@ fun SyllabusTab(
     modifier: Modifier, library: ContentLibrary, prep: Prep, hindi: Boolean, gate: PlusGate, paper: String?,
     onPaper: (String) -> Unit, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit, onSeePlus: () -> Unit,
     focus: String? = null,
+    /** Past UPSC questions per (paper, topic name), and opening them (Practice → PYQ). */
+    pyqs: Map<Pair<String, String>, Int> = emptyMap(), onPyq: (paper: String, topic: String) -> Unit = { _, _ -> },
 ) {
     val pieces = remember(library.items) { prep.pieces(library) }
     val reads = remember(library.items) { prep.reads(library).map { it.first to "read" } }
@@ -165,7 +167,8 @@ fun SyllabusTab(
         PaperHeader(current, pieces + reads, subjectOf, learnt, gate, onSeePlus)
         // A topic opened from the revision list (Mock Intelligence) comes first, already open.
         current.topics.sortedBy { it.name != focus }.forEach { topic ->
-            TopicCard(topic, topicPieces(topic, pieces, subjectOf), topicPieces(topic, reads, subjectOf), learnt, gate.member, hindi, onOpenItem, onOpenRead, startOpen = topic.name == focus)
+            TopicCard(topic, topicPieces(topic, pieces, subjectOf), topicPieces(topic, reads, subjectOf), learnt, gate.member, hindi, onOpenItem, onOpenRead,
+                startOpen = topic.name == focus, pyqs = pyqs[current.id to topic.name] ?: 0, onPyq = { onPyq(current.id, topic.name) })
         }
     }
 }
@@ -213,6 +216,7 @@ private fun Meter(value: Float) {
 private fun TopicCard(
     topic: SyllabusTopic, pieces: List<Pair<LibraryItem, String>>, reads: List<Pair<LibraryItem, String>>, learnt: Map<String, String>,
     member: Boolean, hindi: Boolean, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit, startOpen: Boolean = false,
+    pyqs: Int = 0, onPyq: () -> Unit = {},
 ) {
     var open by rememberSaveable(topic.name, startOpen) { mutableStateOf(startOpen) }
     val n = pieces.size + reads.size
@@ -224,14 +228,16 @@ private fun TopicCard(
             }
             Text(
                 when {
+                    n == 0 && pyqs > 0 -> "$pyqs past UPSC question${if (pyqs == 1) "" else "s"} · fresh pieces land here soon"
                     n == 0 -> "Fresh pieces land here soon. Ask Chotu about it meanwhile."
                     member -> "${pieces.size} to play · ${reads.size} to read · ${(pieces + reads).count { it.first.id in learnt }} done"
                     else -> "${pieces.size} to play · ${reads.size} to read"
-                },
+                } + if (n > 0 && pyqs > 0) " · $pyqs past UPSC" else "",
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (open) {
                 Spacer(Modifier.size(2.dp))
+                if (pyqs > 0) TopicRow("Past UPSC questions", "$pyqs from the official papers. See how UPSC asks it.", Color(0xFFB45309), done = false, onClick = onPyq)
                 pieces.forEach { (item, engine) ->
                     TopicRow(WAY_VERB[engine] ?: kindName(item.kind, hindi), itemTitle(item, hindi && item.hindi), WAY_COLORS[engine]?.first(),
                         done = member && item.id in learnt) { onOpenItem(item.id) }

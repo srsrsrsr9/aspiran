@@ -76,7 +76,9 @@ import com.upscpods.app.data.DayState
 import com.upscpods.app.data.PodClient
 import com.upscpods.app.data.Chotu
 import com.upscpods.app.data.NewsItem
+import com.upscpods.app.data.MainsTask
 import com.upscpods.app.data.Practice
+import com.upscpods.app.data.Pyqs
 import com.upscpods.app.data.PracticeQuestion
 import com.upscpods.app.data.TaskId
 import com.upscpods.app.ui.ChotuMood
@@ -100,6 +102,8 @@ import com.upscpods.app.ui.NeedToTalkSheet
 import com.upscpods.app.ui.PodTab
 import com.upscpods.app.ui.RoomsScreen
 import com.upscpods.app.ui.AnswerStudioScreen
+import com.upscpods.app.ui.PyqFocus
+import com.upscpods.app.ui.PyqScreen
 import com.upscpods.app.data.Rooms
 import com.upscpods.app.data.AnswerLog
 import androidx.compose.material3.Badge
@@ -221,7 +225,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -304,7 +308,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Editor-approved explainers, games, sounds and Lamp Off from the pod server, cached for offline.
     val library = remember { ContentLibrary(context) { pod.serverUrl } }
     // Cinematic current affairs (W7): the week's scenes from the server's /ca, kept for offline.
-    val ca = remember { CurrentAffairs(context) { pod.serverUrl } }
+    val ca = remember { CurrentAffairs(context, { pod.memberId }) { pod.serverUrl } }
     remember(pod, staged) {
         pod.matchFields = { staged.synced() }
         pod.onStamp = { staged.award(it) }
@@ -474,6 +478,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     var prepSub by rememberSaveable { mutableStateOf(PrepSub.TODAY) }
     var syllabusPaper by rememberSaveable { mutableStateOf<String?>(null) }
     var syllabusFocus by rememberSaveable { mutableStateOf<String?>(null) }
+    // Practice → PYQ: past UPSC papers from the library, opened on a paper or one syllabus topic. A Mains one goes to
+    // Answer Studio as the picked question, and Studio's back returns to the list.
+    val pyqPapers = remember(library.items) { Pyqs.papers(library) }
+    val pyqCounts = remember(pyqPapers) { Pyqs.counts(Pyqs.all(pyqPapers)) }
+    var pyqPaper by rememberSaveable { mutableStateOf<String?>(null) }
+    var pyqTopic by rememberSaveable { mutableStateOf<String?>(null) }
+    var studioPyq by remember { mutableStateOf<MainsTask?>(null) }
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
@@ -504,6 +515,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             Overlay.LIBRARY -> libraryBack
             Overlay.READER -> Overlay.READS
             Overlay.PREP_TOOL, Overlay.PLUS_INFO -> prepBack
+            Overlay.ANSWER_STUDIO -> if (studioPyq != null) Overlay.PYQ else Overlay.NONE
             else -> Overlay.NONE
         }
     }
@@ -590,15 +602,16 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             onClose = { overlay = Overlay.NONE },
         )
         Overlay.ANSWER_STUDIO -> AnswerStudioScreen(
-            Practice.studioQuestions(brief, hindi), community, answerLog, rooms, pod, persona, hindi,
+            listOfNotNull(studioPyq) + Practice.studioQuestions(brief, hindi), community, answerLog, rooms, pod, persona, hindi,
             onOpenNeedToTalk = openNeedToTalk,
-            onClose = { overlay = Overlay.NONE; arrived = null },
+            onClose = { overlay = if (studioPyq != null) Overlay.PYQ else Overlay.NONE; arrived = null },
             banner = when (arrived) {
                 Ritual.ANSWER_HOUR -> if (hindi) "आंसर आवर: रूम का आज का प्रश्न चुना हुआ है। तैयार हों तो टाइमर शुरू करें।" else "Answer hour: the room's question for today is picked. Start the timer when you're ready."
                 Ritual.COMEBACK -> if (hindi) "वापसी मुबारक। बस एक 7 मिनट का उत्तर।" else "Welcome back. Just one 7-minute answer."
                 else -> null
             },
             onAnswered = { if (arrived == Ritual.COMEBACK) ritualDone(Ritual.COMEBACK); ritualDone(Ritual.ANSWER_HOUR) },
+            focusArea = staged.value("rubric_weak"),
         )
         Overlay.CLOSE_DAY -> CloseTheDayScreen(
             day, onDial, openNeedToTalk,
@@ -662,6 +675,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             plusGate, plusQuiet, hindi, prepAnswer, onTool = openTool,
             onMocks = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS }, onClose = { overlay = prepBack },
         )
+        Overlay.PYQ -> PyqScreen(pyqPapers, pyqPaper?.let { PyqFocus(it, pyqTopic) },
+            onWrite = { studioPyq = it; overlay = Overlay.ANSWER_STUDIO },
+            onClose = { studioPyq = null; overlay = Overlay.NONE })
         Overlay.CA -> CaPlayerScreen(
             ca, caWeek, caScene, plusGate, plusQuiet, hindi,
             onNode = { p, t -> syllabusPaper = p; syllabusFocus = t; overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.SYLLABUS },
@@ -773,6 +789,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 inner, library, prep, hindi, plusGate, syllabusPaper,
                                 onPaper = { syllabusPaper = it; syllabusFocus = null }, onOpenItem = openItem,
                                 onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo, focus = syllabusFocus,
+                                pyqs = pyqCounts, onPyq = { p, t -> pyqPaper = p; pyqTopic = t; studioPyq = null; overlay = Overlay.PYQ },
                             )
                             PrepSub.TODAY -> TodayScreen(
                                 brief, day, persona,
@@ -821,7 +838,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 day, persona, mains, saved, archive,
                                 onOpenPrelims = { overlay = Overlay.PRELIMS },
                                 onOpenMains = { overlay = Overlay.MAINS },
-                                onOpenStudio = { overlay = Overlay.ANSWER_STUDIO },
+                                onOpenStudio = { studioPyq = null; overlay = Overlay.ANSWER_STUDIO },
+                                pyqCount = pyqPapers.sumOf { it.questions.size },
+                                onOpenPyq = { pyqPaper = null; pyqTopic = null; studioPyq = null; overlay = Overlay.PYQ },
                                 onOpenCards = { cardsToRead = it; overlay = Overlay.CARDS },
                                 modifier = inner,
                                 library = library,
@@ -932,6 +951,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         val r = nudged ?: return@LaunchedEffect
         arrived = r
         if (r == Ritual.SUNDAY_CA) { caWeek = null; caScene = 0 }
+        studioPyq = null
         overlay = when (r) {
             Ritual.CHAI -> Overlay.CHAI
             Ritual.ANSWER_HOUR, Ritual.COMEBACK -> Overlay.ANSWER_STUDIO

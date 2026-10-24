@@ -25,7 +25,8 @@
     "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
     "test:password": "node test/password.mjs",
     "test:rooms": "node --import ./test/dev-auth.mjs test/rooms.mjs",
-    "test:ca": "node test/ca.mjs"
+    "test:ca": "node test/ca.mjs",
+    "test:pyq": "node --import ./test/dev-auth.mjs test/pyq.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260901.0",

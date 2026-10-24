@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -36,6 +37,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.ContentLibrary
 import com.upscpods.app.data.Persona
+import com.upscpods.app.data.PodClient
+import com.upscpods.app.data.RoomBoard
 import com.upscpods.app.data.RoomInfo
 import com.upscpods.app.data.Rooms
 import kotlinx.coroutines.delay
@@ -88,6 +91,7 @@ fun RoomsScreen(
                     }
                     TextButton(onClick = { leaving = true }) { Text("Leave") }
                 }
+                PinnedCard(client)
             },
             resultDay = resultDay,
         )
@@ -105,6 +109,8 @@ fun RoomsScreen(
     LaunchedEffect(Unit) { while (true) { rooms.refresh(); delay(30_000) } }
     val list = rooms.list
     var joining by remember { mutableStateOf<String?>(null) }
+    var board by remember { mutableStateOf<RoomBoard?>(null) }
+    LaunchedEffect(Unit) { while (true) { rooms.board()?.let { board = it }; delay(5 * 60_000) } }
     LazyColumn(modifier.fillMaxSize().padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         item {
             Column(Modifier.padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -113,7 +119,7 @@ fun RoomsScreen(
                 Text("Join as many as help: your language, where you are, your goal, your optional, your region. " +
                     "Chotu and the study friends here are AI and always labelled AI.", style = MaterialTheme.typography.bodyMedium)
                 if (list?.mode == "open") Text(
-                    "Matched pods of 8 start once ${list.threshold} aspirants have joined. ${list.signups} so far.",
+                    "Matched pods of 6 to 8 start once ${list.threshold} aspirants have joined. ${list.signups} so far.",
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -128,6 +134,7 @@ fun RoomsScreen(
         }
         val all = list?.rooms ?: emptyList()
         val mine = all.filter { it.joined }
+        board?.let { b -> item { BoardCard(b, mine.map { it.id }.toSet()) } }
         if (mine.isNotEmpty()) {
             item { Text("Your rooms", style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp)) }
             items(mine, key = { "mine-" + it.id }) { r -> RoomRow(r, busy = false, onOpen = { open = r.id }, onJoin = {}) }
@@ -144,6 +151,55 @@ fun RoomsScreen(
             }
         }
         item { Text(" ", modifier = Modifier.padding(bottom = 16.dp)) }
+    }
+}
+
+/** Room Quiz Night's board: the top rooms by their one shared score this week. No person is on it. */
+@Composable
+private fun BoardCard(b: RoomBoard, mine: Set<String>) {
+    FlatCard(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text("Room board 🎯", style = MaterialTheme.typography.titleSmall)
+            Text("Friday's Room Quiz Night: the same 5 questions in every room, one shared score per room. People are never ranked.",
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (b.rooms.isEmpty()) Text("No room has ${b.minAnswers} answers yet this week. Friday, 20:00.", style = MaterialTheme.typography.bodyMedium)
+            b.rooms.take(5).forEach { r ->
+                Text("${r.rank}. ${r.name} · ${r.pct}% · ${r.answered} answers", style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = if (r.id in mine) FontWeight.Bold else FontWeight.Normal)
+            }
+            b.rooms.firstOrNull { it.id in mine && it.rank > 5 }?.let { r ->
+                Text("${r.rank}. ${r.name} · ${r.pct}%", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            }
+        }
+    }
+}
+
+/** The room's pinned question of the day: answer once, see the room's tally. Mains prompts go to Answer Studio. */
+@Composable
+private fun PinnedCard(client: PodClient) {
+    val p = client.pinned ?: return
+    var shown by rememberSaveable(p.day) { mutableStateOf(true) }
+    FlatCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("📌 Today's question" + (p.topic.takeIf { it.isNotBlank() }?.let { " · $it" } ?: ""), style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
+                TextButton(onClick = { shown = !shown }) { Text(if (shown) "Hide" else "Show") }
+            }
+            if (!shown) return@Column
+            Text(p.question, style = MaterialTheme.typography.bodyMedium)
+            if (p.kind == "mcq") {
+                p.options.forEachIndexed { k, opt ->
+                    FilterChip(selected = p.mine == k, onClick = { client.answerPinned(k) }, enabled = p.mine == null || p.mine == k,
+                        label = { Text("(${'a' + k}) $opt", modifier = Modifier.padding(vertical = 6.dp)) }, modifier = Modifier.fillMaxWidth())
+                }
+                val a = p.answerIndex
+                if (p.mine != null && a != null) Text(
+                    (if (p.mine == a) "✓ Right." else "○ The answer is (${'a' + a}).") + (p.explanation.takeIf { it.isNotBlank() }?.let { " $it" } ?: ""),
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                if (p.tally.answered > 0) Text("${p.tally.answered} answered in this room · ${p.tally.right} right", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            } else Text("Write it in Prep → Answer Studio, then share your intro here.", style = MaterialTheme.typography.bodySmall)
+        }
     }
 }
 

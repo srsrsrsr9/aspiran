@@ -51,6 +51,9 @@ class Rooms(private val context: Context, private val community: Community, priv
         loading = false
     }
 
+    /** The room board: rooms ranked by their shared Quiz Night score this week. Never people. */
+    suspend fun board(): RoomBoard? = if (pod.serverUrl.isBlank() || !pod.mayConnect()) null else community.roomBoard()
+
     suspend fun join(id: String): Boolean = community.joinRoom(id).also { if (it) { markSeen(id); refresh() } }
     suspend fun leave(id: String): Boolean = community.leaveRoom(id).also { if (it) { client(id).forget(); refresh() } }
 

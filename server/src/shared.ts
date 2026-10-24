@@ -60,6 +60,13 @@ export function istDay(d = new Date()): string {
   return istNow(d).toISOString().slice(0, 10);
 }
 
+/** Monday of the IST week, as a day. */
+export function istWeek(at = new Date()): string {
+  const d = new Date(istDay(at) + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+  return d.toISOString().slice(0, 10);
+}
+
 export function newId(prefix = ""): string {
   return prefix + crypto.randomUUID().replace(/-/g, "").slice(0, 16);
 }

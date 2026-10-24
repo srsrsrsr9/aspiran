@@ -7,6 +7,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonArray
 import kotlinx.serialization.json.add
@@ -64,6 +66,13 @@ data class RoomInfo(
 
 @Serializable
 data class RoomsList(val mode: String = "open", val signups: Int = 0, val threshold: Int = 500, val rooms: List<RoomInfo> = emptyList())
+
+/** One room on the room board: the room's shared Quiz Night score. Rooms are ranked, people never. */
+@Serializable
+data class BoardRoom(val rank: Int = 0, val id: String, val name: String = "", val pct: Int = 0, val answered: Int = 0, val players: Int = 0)
+
+@Serializable
+data class RoomBoard(val week: String = "", val minAnswers: Int = 10, val rooms: List<BoardRoom> = emptyList())
 
 @Serializable
 data class RubricArea(val band: String = "at", val note: String = "", val fix: String = "")
@@ -157,6 +166,34 @@ class Community(private val server: () -> String, private val memberId: () -> St
             ?.let { json.decodeFromJsonElement(RoomsList.serializer(), it) }
     suspend fun joinRoom(id: String): Boolean = post("/rooms/join", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null
     suspend fun leaveRoom(id: String): Boolean = post("/rooms/leave", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null
+    /** This week's room board (Room Quiz Night). */
+    suspend fun roomBoard(): RoomBoard? = get("/rooms/leaderboard")?.let { runCatching { json.decodeFromJsonElement(RoomBoard.serializer(), it) }.getOrNull() }
+
+    /**
+     * "Send to pod" with the photo: one JPEG to that room or pod, kept 7 days and seen only by its members. The
+     * reference to post with the message ("photo:<id>"), or null. Answer Studio's own review never keeps the photo.
+     */
+    suspend fun sendPhoto(roomId: String, jpeg: ByteArray): String? = withContext(Dispatchers.IO) {
+        val body = buildJsonObject {
+            put("memberId", memberId()); put("roomId", roomId)
+            put("image", buildJsonObject { put("mime", "image/jpeg"); put("data", android.util.Base64.encodeToString(jpeg, android.util.Base64.NO_WRAP)) })
+        }
+        val base = server()
+        if (base.isBlank()) return@withContext null
+        runCatching {
+            val req = Request.Builder().url("$base/rooms/photo").post(body.toString().toRequestBody("application/json".toMediaType())).build()
+            slowHttp.newCall(req).execute().use { r -> if (r.isSuccessful) json.parseToJsonElement(r.body.string()).jsonObject["ref"]?.jsonPrimitive?.contentOrNull else null }
+        }.getOrNull()
+    }
+
+    /** A photo someone sent to a room you're in. Null once it has gone (after 7 days) or if you're not a member. */
+    suspend fun photo(id: String): ByteArray? = withContext(Dispatchers.IO) {
+        val base = server()
+        if (base.isBlank() || !Regex("[0-9a-f]{32}").matches(id)) return@withContext null
+        runCatching {
+            http.newCall(Request.Builder().url("$base/rooms/photo/$id?member=${memberId()}").build()).execute().use { r -> if (r.isSuccessful) r.body.bytes() else null }
+        }.getOrNull()
+    }
 
     /**
      * Answer Studio: rubric feedback on one answer, typed or as a JPEG of the handwritten sheet. The server reads

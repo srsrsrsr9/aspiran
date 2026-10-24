@@ -2,6 +2,7 @@ import { type Env, json, bad } from "./shared";
 import { bump, ensureSchema, sha256Hex } from "./staff";
 import { forgetAccount } from "./auth";
 import { anonymiseStatements } from "./metrics";
+import { sweepPhotos } from "./rooms";
 
 /**
  * DPDP: consent records, and a member's right to get or erase what the server holds about them.
@@ -68,6 +69,13 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
     // Usage counts stay; the link to the person goes.
     ...anonymiseStatements(env, memberId),
   ]);
+  // Open rooms: their messages, quiz and pinned answers, memberships and any photo they sent.
+  const { results: rooms } = await env.DB.prepare("SELECT room_id FROM room_members WHERE member_id = ?").bind(memberId).all<{ room_id: string }>().catch(() => ({ results: [] as { room_id: string }[] }));
+  for (const { room_id } of rooms) {
+    await env.POD.get(env.POD.idFromName(room_id)).fetch(`https://pod/forget?pod=${encodeURIComponent(room_id)}&member=${encodeURIComponent(memberId)}`, { method: "POST" }).catch(() => null);
+  }
+  await env.DB.prepare("DELETE FROM room_members WHERE member_id = ?").bind(memberId).run().catch(() => {});
+  await sweepPhotos(env, { member: memberId }).catch(() => null);
   await forgetAccount(env, memberId);
   await logRequest(env, "delete", memberId, via, by);
   await bump(env, "data_deletions");

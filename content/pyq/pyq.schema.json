@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/pyq@1",
+  "title": "UPSC previous-year questions",
+  "description": "Official UPSC Civil Services papers, question text only. Prelims answers come from UPSC's own answer key and nowhere else; Mains questions never carry a model answer. Every paper waits for an editor (review.status) before the app shows it. Built into a library pack by server/scripts/pyq.mjs.",
+  "type": "object",
+  "required": ["schema", "papers"],
+  "properties": {
+    "schema": { "const": "upsc-pods/pyq@1" },
+    "note": { "type": "string" },
+    "papers": { "type": "array", "items": { "$ref": "#/$defs/paper" } }
+  },
+  "$defs": {
+    "paper": {
+      "type": "object",
+      "required": ["id", "exam", "year", "paper", "title", "source", "answerKey", "questions", "review"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^(csp|csm|sample)-[0-9]{4}-(gs1|csat|gs2|gs3|gs4|essay)$", "description": "csp = Prelims, csm = Mains, sample = made-up entries for testing the format (never packed)." },
+        "exam": { "enum": ["prelims", "mains"] },
+        "year": { "type": "integer", "minimum": 1979 },
+        "paper": { "enum": ["prelims", "csat", "gs1", "gs2", "gs3", "gs4", "essay"], "description": "The Syllabus.kt paper id." },
+        "title": { "type": "object", "required": ["en"], "properties": { "en": { "type": "string" }, "hi": { "type": "string" } } },
+        "source": {
+          "type": "object",
+          "required": ["publisher", "url"],
+          "properties": {
+            "publisher": { "const": "UPSC" },
+            "url": { "type": "string", "pattern": "^https://(www\\.)?upsc\\.gov\\.in/" },
+            "fetchedOn": { "type": "string", "format": "date" },
+            "how": { "type": "string" }
+          }
+        },
+        "answerKey": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": { "enum": ["official", "awaiting", "none"], "description": "official: answers from UPSC's key at url. awaiting: Prelims paper whose official key we don't have yet, so no answers. none: Mains." },
+            "url": { "type": "string", "pattern": "^https://(www\\.)?upsc\\.gov\\.in/" },
+            "dropped": { "type": "array", "items": { "type": "string" }, "description": "Question numbers UPSC dropped in its key." }
+          }
+        },
+        "sample": { "type": "boolean", "description": "True for SAMPLE entries: never packed, never shown." },
+        "questions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/question" } },
+        "review": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": { "enum": ["draft", "approved"] },
+            "checkedBy": { "type": "string" },
+            "checkedOn": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "required": ["n", "nodes", "en"],
+      "properties": {
+        "n": { "type": "string", "description": "The number printed on the paper: \"7\", or \"3b\" for a part." },
+        "marks": { "type": "number" },
+        "words": { "type": "integer", "description": "Mains word limit." },
+        "nodes": { "type": "array", "items": { "type": "string", "pattern": "^(pre|csat|gs1|gs2|gs3|gs4|essay)-([0-9]+|[a-z]+)$" }, "description": "Syllabus node ids: gs2-1 is GS2's first topic, pre-pol the Prelims topic that draws on polity." },
+        "cards": { "type": "array", "items": { "type": "string" }, "description": "Chai card ids this question links to." },
+        "en": {
+          "type": "object",
+          "required": ["q"],
+          "properties": {
+            "q": { "type": "string", "description": "The question as printed. Case studies keep their parts on new lines." },
+            "options": { "type": "array", "items": { "type": "string" }, "minItems": 4, "maxItems": 4 }
+          }
+        },
+        "hi": { "$ref": "#/$defs/question/properties/en" },
+        "answer": { "type": ["integer", "null"], "minimum": 0, "maximum": 3, "description": "Prelims only, 0 = (a), and only from the official key." }
+      }
+    }
+  }
+}

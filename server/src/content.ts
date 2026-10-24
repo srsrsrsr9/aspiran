@@ -42,12 +42,13 @@ const SCHEMA_KIND: Record<string, string> = {
   "upsc-pods/long-read@1": "read",
   "upsc-pods/calm-script@1": "calm",
   "upsc-pods/routine-card@1": "routine",
+  "upsc-pods/pyq-paper@1": "pyq",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
 /** Manifest entry lists that hold library items. */
 const ITEM_LISTS = ["explainers", "timelines", "games", "quizzes", "maps", "numbers", "myths", "debates", "winddown",
-  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines"];
+  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs"];
 /** Files the desk never needs: share PNGs are drawn on the phone, the rest are tools for writers. */
 const OPTIONAL = /^(share|templates|tools|jobs|_generated)\/|^README\.md$/;
 export const KINDS = [...Object.values(SCHEMA_KIND), ...Object.keys(ENGINE_KINDS)];
@@ -227,7 +228,8 @@ export function keepLangs(node: any, keep: string[]) {
   Object.values(node).forEach((x) => keepLangs(x, keep));
 }
 
-export async function serveMedia(env: Env, key: string, req?: Request): Promise<Response> {
+/** [signed]: a Plus file opened with a signed query (ca.ts), which no shared cache should keep. */
+export async function serveMedia(env: Env, key: string, req?: Request, signed = false): Promise<Response> {
   if (!env.MEDIA) return bad("No MEDIA bucket bound", 503);
   if (!SAFE_PATH.test(key)) return bad("Bad path");
   // Videos (current-affairs scenes) are read in ranges: the player seeks, and resumes a half-cached file.
@@ -251,7 +253,7 @@ export async function serveMedia(env: Env, key: string, req?: Request): Promise<
       ...(part ?? {}),
       "accept-ranges": "bytes",
       "content-type": obj.httpMetadata?.contentType ?? typeOf(key),
-      "cache-control": "public, max-age=86400",
+      "cache-control": signed ? "private, max-age=3600" : "public, max-age=86400",
       "access-control-allow-origin": "*",
       // Opened directly, a file can't run scripts on the desk's origin.
       "content-security-policy": "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self'; sandbox",
@@ -823,9 +825,30 @@ export function normalizeRead(d: any): any {
   return d;
 }
 
+/**
+ * A UPSC previous-year paper (scripts/pyq.mjs). Approving it means the text was checked against the PDF on upsc.gov.in
+ * and, for Prelims, every answer against UPSC's official key. Mains questions never carry a model answer.
+ */
+function checkPyq(d: any): string[] {
+  const flags = ["Check each question against the paper: " + (d.source?.url ?? "no source")];
+  const qs: any[] = Array.isArray(d.questions) ? d.questions : [];
+  if (!/^https:\/\/(www\.)?upsc\.gov\.in\//.test(d.source?.url ?? "")) flags.push("The source must be the paper on upsc.gov.in");
+  if (d.sample) flags.push("SAMPLE paper: never approve this");
+  if (d.exam === "prelims") {
+    if (d.answerKey?.status !== "official") flags.push("No official UPSC answer key yet: members see the questions without answers");
+    else flags.push("Check the answers against the official key: " + (d.answerKey.url ?? ""));
+    qs.forEach((q) => { if (q.answer != null && d.answerKey?.status !== "official") flags.push(`Q${q.n}: an answer without an official key`); });
+  }
+  if (d.exam === "mains" && qs.some((q) => q.answer != null || q.en?.options || q.en?.model)) flags.push("Mains questions carry no options or model answers");
+  qs.forEach((q) => { if (!q.nodes?.length) flags.push(`Q${q.n}: no syllabus node`); });
+  d.shareable = false;
+  return flags;
+}
+
 /** Cheap checks shown to the editor as flags. They never block approval. */
 export function checkItem(kind: string, d: any): string[] {
   if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d)];
+  if (kind === "pyq") return checkPyq(d);
   const flags: string[] = [];
   const missingHi: string[] = [];
   const walk = (n: any, path: string) => {

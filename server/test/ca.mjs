@@ -1,5 +1,5 @@
 // Cinematic current affairs (ca.ts): week upload from the desk, approved-only for phones, drafts for local debug
-// builds, and range reads of the scene videos. Against a running local server with AUTH_MODE=dev:
+// builds, range reads of the scene videos, and the Plus lock on scenes that aren't free. Against a running local server with AUTH_MODE=dev:
 //   EDITOR_TOKEN=... node test/ca.mjs
 import assert from "node:assert/strict";
 
@@ -84,5 +84,34 @@ assert.equal(tail.headers.get("content-range"), "bytes 3990-3999/4000");
 assert.equal((await tail.arrayBuffer()).byteLength, 10);
 assert.equal((await fetch(`${BASE}${week.base}1-gi-tag.vtt`)).headers.get("content-type"), "text/vtt; charset=utf-8");
 step("videos are served in ranges; captions as text/vtt");
+
+// Plus lock: a scene that isn't free plays only with a signed query, which only a Plus member gets.
+const json = { "content-type": "application/json" };
+const editor = { ...json, authorization: "Bearer " + TOKEN };
+const locked = `${BASE}${week.base}3-sendai.mp4`;
+assert.equal((await fetch(locked)).status, 403, "no key, no Plus scene");
+assert.equal((await fetch(`${BASE}${week.base}3-sendai.vtt`)).status, 403, "captions are locked too");
+assert.equal((await fetch(`${BASE}${week.base}3-sendai.jpg`)).status, 200, "posters stay open (shown blurred)");
+const me = crypto.randomUUID().replace(/-/g, "");
+assert.equal((await fetch(`${BASE}/plus/ca-key?member=${me}&week=${WEEK}`)).status, 403, "no plan, no key");
+const flagsBefore = (await (await fetch(BASE + "/admin/api/flags", { headers: editor })).json()).flags;
+await fetch(BASE + "/admin/api/flags", { method: "POST", headers: editor, body: JSON.stringify({ flags: { plus: true } }) });
+try {
+  const bought = await fetch(BASE + "/plus/purchase", { method: "POST", headers: json, body: JSON.stringify({ memberId: me, plan: "monthly", testMode: true }) });
+  assert.equal(bought.status, 200, await bought.clone().text());
+} finally {
+  await fetch(BASE + "/admin/api/flags", { method: "POST", headers: editor, body: JSON.stringify({ flags: { plus: flagsBefore.plus } }) });
+}
+const key = (await get(`/plus/ca-key?member=${me}&week=${WEEK}`)).data;
+assert.match(key.query, /^exp=\d+&sig=[0-9a-f]{64}$/);
+assert.ok(Date.parse(key.expiresAt) > Date.now() + 5 * 3600_000, "the key lasts hours, not days");
+const open = await fetch(`${locked}?${key.query}`, { headers: { range: "bytes=0-9" } });
+assert.equal(open.status, 206);
+assert.equal(open.headers.get("cache-control"), "private, max-age=3600");
+assert.equal((await fetch(`${BASE}${week.base}3-sendai.vtt?${key.query}`)).status, 200);
+assert.equal((await fetch(`${locked}?${key.query.slice(0, -1)}${key.query.endsWith("0") ? "1" : "0"}`)).status, 403, "a changed signature fails");
+assert.equal((await fetch(`${locked}?exp=${Math.floor(Date.now() / 1000) - 10}&sig=${key.query.split("sig=")[1]}`)).status, 403, "an expired key fails");
+assert.equal((await fetch(`${BASE}/media/ca/1999-08/3-sendai.mp4?${key.query}`)).status !== 206, true, "a key is for one week");
+step("Plus scenes: 403 without a key; a Plus member's 6-hour signed key opens them; posters stay open");
 
 console.log("\nca: all passed");

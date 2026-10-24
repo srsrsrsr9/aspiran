@@ -3,6 +3,7 @@ import { activeResult, resultDays } from "./results";
 import { bump, ensureSchema, flags } from "./staff";
 import { logEvent } from "./metrics";
 import { cashfreeConfigured, paymentsStatus } from "./payments";
+import { caKeyFor } from "./ca";
 
 /**
  * Plus (spec §7), behind the "plus" flag, which is off by default. Real payments are one-time yearly Plus on the
@@ -146,6 +147,13 @@ export async function plusRoute(req: Request, env: Env, path: string, url: URL):
       trial: { days: TRIAL_DAYS, used: !!row?.trial_used, unlocked: trialUnlocked, why: trialUnlocked ? null : "The 7-day trial unlocks after your first full week in a pod." },
       refundWindowDays: 7, cancel: "Me → Plus → Cancel. Two taps, no questions.",
     });
+  }
+  // The signed query that plays a week's Plus scenes (ca.ts). Any plan counts, flag or not, as for /plus/status.
+  if (path === "/plus/ca-key") {
+    const week = String(url.searchParams.get("week") ?? body.week ?? "");
+    if (!validId(memberId) || !/^\d{4}-\d{2}$/.test(week)) return bad("member and week are required");
+    if (!(await entitlement(env, memberId))) return bad("This scene is in Plus", 403);
+    return json(await caKeyFor(env, week));
   }
   if (!enabled) return bad("Plus isn't switched on yet.", 404);
 

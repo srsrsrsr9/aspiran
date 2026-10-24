@@ -86,12 +86,24 @@ class StagedProfile(context: Context) {
     val firstDay: Boolean get() = !startedOn().isBefore(LocalDate.now())
 
     /**
-     * Chotu's day-2 chat on the Adda, never in onboarding: true from day 2 until it's been had. It starts with the
-     * ritual picker (W4, ui/NudgeUi.kt). TODO(rework): the rubric and persona questions (how answers are judged,
-     * attempt, medium, weakest paper) join the same chat.
+     * Chotu's day-2 chat on the Adda, never in onboarding: true from day 2 until it's been had. Three steps, one at a
+     * time, each skippable: the ritual picker (W4, ui/NudgeUi.kt), the answer-rubric self-check (how Answer Studio
+     * judges an answer, and which part you trust least), then [DAY_TWO] persona questions not already known.
      */
     var dayTwoAskDue by mutableStateOf(startedOn().isBefore(LocalDate.now()) && !prefs.getBoolean("dayTwoAsked", false)); private set
+    /** 0 rituals, 1 rubric self-check, 2 persona questions. */
+    var dayTwoStep by mutableStateOf(prefs.getInt("dayTwoStep", 0)); private set
     fun markDayTwoAsked() { prefs.edit().putBoolean("dayTwoAsked", true).apply(); dayTwoAskDue = false }
+    /** The next step of the chat; past the last one (or with nothing left to ask), the chat is done. */
+    fun nextDayTwoStep() {
+        var next = dayTwoStep + 1
+        if (next == 1 && !askable("rubric_weak")) next++
+        if (next == 2 && dayTwoQuestions().isEmpty()) next++
+        dayTwoStep = next
+        prefs.edit().putInt("dayTwoStep", next).apply()
+        if (next > 2) markDayTwoAsked()
+    }
+    fun dayTwoQuestions(): List<Question> = DAY_TWO.filter { askable(it) }.mapNotNull { QUESTIONS[it] }
 
     private fun startedOn(): LocalDate = prefs.getString("startedOn", null)?.let { LocalDate.parse(it) }
         ?: LocalDate.now().also { prefs.edit().putString("startedOn", it.toString()).apply() }
@@ -203,6 +215,8 @@ class StagedProfile(context: Context) {
             "compass" to listOf("stop_attempt"),
             "plan" to listOf("main_goal", "hardest_part"),
         )
+        /** Day-2 persona questions: attempt (synced, for pod matching), medium, optional, working or full-time. */
+        val DAY_TWO = listOf("attempt_band", "medium", "optional_subject", "working")
         private val year = LocalDate.now().year
         val QUESTIONS: Map<String, Question> = listOf(
             Question("stage", "Where are you in the journey?", listOf("starting" to "Just starting", "prelims" to "Preparing for Prelims", "mains" to "Cleared Prelims, on Mains", "interview" to "Interview stage", "repeat" to "Taking another attempt")),
@@ -211,6 +225,8 @@ class StagedProfile(context: Context) {
             Question("target_year", "Which year's exam are you aiming for?", listOf("${year + 1}" to "${year + 1}", "${year + 2}" to "${year + 2}", "${year + 3}" to "${year + 3}", "unsure" to "Not sure yet")),
             Question("medium", "Which medium will you write Mains in?", listOf("english" to "English", "hindi" to "Hindi", "other" to "Another language")),
             Question("working", "Are you working while you prepare?", listOf("no" to "Full-time on prep", "yes" to "Working too", "student" to "Still in college")),
+            Question("optional_subject", "Your Mains optional, if you've picked one?", text = "For example: Sociology, or not yet"),
+            Question("rubric_weak", "Which part of your answers do you trust least?", listOf("directive" to "Reading the directive word", "structure" to "Structure", "content" to "Covering the content", "examples" to "Examples and data", "conclusion" to "The conclusion"), note = "Only on this phone. Answer Studio's review shows this part first."),
             Question("stop_attempt", "When would you like to look at this again?", listOf("year" to "In a year", "after_next" to "After the next attempt", "undecided" to "Haven't decided"), note = "Only you see this. Nothing here tells you to stop or continue."),
             Question("main_goal", "What do you most want from this year, apart from the result?", text = "For example: finish the GS syllabus once"),
             Question("hardest_part", "What's the hardest part right now?", listOf("consistency" to "Staying consistent", "syllabus" to "Too much syllabus", "money" to "Money", "alone" to "Feeling alone", "family" to "Family pressure", "focus" to "Focus")),
@@ -219,7 +235,7 @@ class StagedProfile(context: Context) {
             "lang" to "Pod language", "stage" to "Stage", "attempt_band" to "Attempts", "time_band" to "Study time",
             "target_year" to "Target year", "medium" to "Mains medium", "working" to "Working", "optional_subject" to "Optional subject",
             "stop_attempt" to "When to look again", "main_goal" to "This year's goal", "hardest_part" to "Hardest part",
-            "weak_subject" to "Subject to work on", "strong_subject" to "Strongest subject",
+            "weak_subject" to "Subject to work on", "strong_subject" to "Strongest subject", "rubric_weak" to "Answer part to work on",
         )
         val STAMPS = mapOf(
             "first_close" to StampInfo("showing", "First day closed", "You closed a day for the first time."),

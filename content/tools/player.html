@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion story player</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+  html,body{margin:0;background:#18120D;color:#E9E1DB;font-family:Mukta,system-ui,sans-serif}
+  body.render{background:#FFF8F3}
+  #wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:16px}
+  #frame{position:relative;overflow:hidden;border-radius:18px}
+  body.render #wrap{padding:0} body.render #bar{display:none} body.render #frame{border-radius:0}
+  #bar{display:flex;gap:12px;align-items:center;width:100%;max-width:520px}
+  #bar button{font:600 16px Mukta,sans-serif;padding:8px 18px;border-radius:999px;border:0;background:#FFB876;color:#18120D;cursor:pointer}
+  #bar input{flex:1}
+</style></head>
+<body>
+<div id="wrap"><div id="frame"><div id="stage"></div></div>
+  <div id="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" max="1000" value="0"><span id="clock">0.0s</span></div></div>
+<script src="vendor/d3-array.min.js"></script>
+<script src="vendor/d3-geo.min.js"></script>
+<script src="vendor/topojson-client.min.js"></script>
+<script src="motion.js"></script>
+<script src="shots-ca.js"></script>
+<script>
+// player.html?story=../cobra-effect/story.json&root=../../  (root: the content folder, for audio)
+// &render=1 hides the controls and leaves seeking to the renderer; &captions=0 leaves captions out (app cut).
+(async () => {
+  const q = new URLSearchParams(location.search), story = q.get("story") || "../cobra-effect/story.json", root = q.get("root") || "../../";
+  const render = q.has("render"); if (render) document.body.classList.add("render");
+  await document.fonts.load("800 100px Martel"); await document.fonts.load("600 60px Mukta"); await document.fonts.ready;
+  MotionEngine.kit.land = topojson.feature(await fetch("data/land-50m.json").then(r => r.json()), "land");
+  const M = await MotionEngine.load(story, story.replace(/[^/]+$/, "timing.json"), { root, captions: q.get("captions") !== "0" });
+  await Promise.all([...document.images].map(i => i.decode().catch(() => console.warn("image failed", i.src))));
+  window.MOTION = M; M.ready = true;
+  if (render) return;
+  const frame = document.getElementById("frame"), stage = document.getElementById("stage");
+  const fit = () => { const s = Math.min((innerHeight - 90) / M.H, (innerWidth - 32) / M.W); stage.style.transform = `scale(${s})`;
+    frame.style.width = M.W * s + "px"; frame.style.height = M.H * s + "px"; };
+  fit(); addEventListener("resize", fit);
+  const base = story.replace(/[^/]+$/, ""), sfxUrl = id => `${root}audio/sfx/${id}.m4a`;
+  let ctx, bufs = {}, playing = false, t0 = 0, from = 0, nodes = [];
+  const get = async u => bufs[u] || (bufs[u] = await fetch(u).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)));
+  const play = async () => {
+    ctx = ctx || new AudioContext();
+    const A = M.audio, now = ctx.currentTime + 0.1;
+    const sched = async (url, at, gain, loop) => { const b = await get(url); const s = ctx.createBufferSource(), g = ctx.createGain();
+      s.buffer = b; s.loop = !!loop; g.gain.value = gain; s.connect(g).connect(ctx.destination);
+      const off = Math.max(0, from - at); if (!loop && off >= b.duration) return; s.start(now + Math.max(0, at - from), loop ? off % b.duration : off); nodes.push(s); };
+    await Promise.all([...A.vo.map(v => sched(base + v.file, v.at, 1)), ...A.sfx.map(s => sched(sfxUrl(s.id), s.at, s.gain * 0.8)),
+      sched(root + A.music.bed, 0, A.music.gain * 0.6, true), sched(root + A.music.end, A.total - 3.2, 0.6)]);
+    t0 = now; playing = true; tick();
+  };
+  const stop = () => { nodes.forEach(n => { try { n.stop(); } catch (e) {} }); nodes = []; playing = false; };
+  const clock = document.getElementById("clock"), scrub = document.getElementById("scrub"), btn = document.getElementById("play");
+  const show = t => { M.seek(t); clock.textContent = t.toFixed(1) + "s"; scrub.value = (t / M.total) * 1000; };
+  const tick = () => { if (!playing) return; const t = from + ctx.currentTime - t0; if (t >= M.total) { stop(); from = 0; btn.textContent = "Play"; return; }
+    show(t); requestAnimationFrame(tick); };
+  btn.onclick = async () => { if (playing) { from += ctx.currentTime - t0; stop(); btn.textContent = "Play"; } else { btn.textContent = "Pause"; await play(); } };
+  scrub.oninput = () => { if (playing) { stop(); btn.textContent = "Play"; } from = (scrub.value / 1000) * M.total; show(from); };
+})();
+</script>
+</body></html>

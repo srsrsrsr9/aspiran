@@ -68,6 +68,9 @@ fun PracticeTab(
     prepEntries: (@Composable () -> Unit)? = null,
     /** Answer Studio: a timed answer with rubric feedback. */
     onOpenStudio: (() -> Unit)? = null,
+    /** Past UPSC questions (PYQ mode): how many are approved, and opening them. */
+    pyqCount: Int = 0,
+    onOpenPyq: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -98,6 +101,16 @@ fun PracticeTab(
                 done = false,
                 filled = false,
                 onStart = it,
+            )
+        }
+
+        if (pyqCount > 0) {
+            PracticeCard(
+                title = "PYQ: past UPSC questions",
+                detail = "$pyqCount questions from UPSC's own papers, by paper and by syllabus topic. Write a Mains one in Answer Studio.",
+                done = false,
+                filled = false,
+                onStart = onOpenPyq,
             )
         }
 
@@ -385,7 +398,7 @@ private fun SelfCheck(outline: Boolean) {
 @Composable
 private fun LearnAndPlay(library: ContentLibrary, hindi: Boolean, onOpen: (String) -> Unit) {
     // Mock papers have their own place in Prep → Mocks.
-    val items = library.items.filter { it.kind !in setOf("sound", "winddown", "mock", "read", "quote") && it.data["play"] == null }
+    val items = library.items.filter { it.kind !in setOf("sound", "winddown", "mock", "read", "quote", "pyq") && it.data["play"] == null }
     if (items.isEmpty()) return
     Text(if (hindi) "संपादकों की ओर से और" else "More from the editors", style = MaterialTheme.typography.titleLarge)
     items.forEach { item ->

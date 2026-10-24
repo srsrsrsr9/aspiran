@@ -135,8 +135,12 @@ fun AddaTab(
         // Day 7: two quick questions (ui/Feedback.kt).
         CheckinCard()
         ChotuCheckIn(pod.podId != null, staged, onOpenChotu, onOpenPod, onOpenNeedToTalk)
-        // Day 2: Chotu's chat about rituals (W4). Never in onboarding.
-        if (staged.dayTwoAskDue) DayTwoRituals(staged, pod.podId != null, persona?.language == ReadingLanguage.HINDI)
+        // Day 2: Chotu's chat, one step at a time: rituals (W4), the answer rubric, then a few questions. Never in onboarding.
+        if (staged.dayTwoAskDue) when (staged.dayTwoStep) {
+            0 -> DayTwoRituals(staged, pod.podId != null, persona?.language == ReadingLanguage.HINDI)
+            1 -> DayTwoRubric(staged, persona?.language == ReadingLanguage.HINDI)
+            else -> DayTwoPersona(staged, persona?.language == ReadingLanguage.HINDI, onPodAnswers)
+        }
         TodayCard(brief, day, onOpenChai, onOpenTask, onOpenPrep)
         PodCard(pod, onOpenPod)
         // The three matching questions are why pods exist, so they sit right here until answered.
@@ -203,10 +207,64 @@ private fun DayTwoRituals(staged: StagedProfile, inPod: Boolean, hindi: Boolean)
     ) {
         RitualPicker(picks, chai, hindi, inPod) { p, t -> picks = p; chai = t }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = { Rituals.set(context, picks, chai); staged.markDayTwoAsked() }) {
+            Button(onClick = { Rituals.set(context, picks, chai); staged.nextDayTwoStep() }) {
                 Text(if (hindi) "मेरी रस्में सेव करें" else "Save my rituals")
             }
-            TextButton(onClick = { staged.markDayTwoAsked() }) { Text(if (hindi) "अभी नहीं" else "Not now") }
+            TextButton(onClick = { staged.nextDayTwoStep() }) { Text(if (hindi) "अभी नहीं" else "Not now") }
+        }
+    }
+}
+
+/** Day-2 chat, step 2: how Answer Studio judges an answer, and which part you trust least (kept on this phone). */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun DayTwoRubric(staged: StagedProfile, hindi: Boolean) {
+    val q = StagedProfile.QUESTIONS.getValue("rubric_weak")
+    var pick by remember { mutableStateOf<String?>(null) }
+    ChotuSays(
+        if (hindi) "एक बात और: आंसर स्टूडियो हर उत्तर को पाँच चीज़ों पर देखता है: निर्देश शब्द, ढाँचा, विषय-वस्तु, उदाहरण और आँकड़े, और निष्कर्ष। आपको किस पर सबसे कम भरोसा है?"
+        else "One more thing: Answer Studio reads every answer for five things: the directive word, structure, content, examples and data, and the conclusion. Which do you trust least in yours?",
+        ChotuMood.CALM,
+    ) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            q.opts.forEach { (v, label) -> FilterChip(selected = pick == v, onClick = { pick = v }, label = { Text(label) }) }
+        }
+        q.note?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = { pick?.let { staged.set(q.key, it, "asked") }; staged.nextDayTwoStep() }, enabled = pick != null) {
+                Text(if (hindi) "सेव करें" else "Save")
+            }
+            TextButton(onClick = { staged.skip(q.key); staged.nextDayTwoStep() }) { Text(if (hindi) "अभी नहीं" else "Not now") }
+        }
+    }
+}
+
+/** Day-2 chat, last step: attempt, medium, optional and working or full-time, the ones not already known. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun DayTwoPersona(staged: StagedProfile, hindi: Boolean, onSynced: () -> Unit) {
+    val questions = remember { staged.dayTwoQuestions() }
+    var answers by remember { mutableStateOf(mapOf<String, String>()) }
+    ChotuSays(
+        if (hindi) "आख़िरी, वादा। ये बताएँ तो मैं सवाल और योजना आपके हिसाब से रखूँगा। जो न बताना चाहें, छोड़ दें।"
+        else "Last one, promise. Tell me these and I'll fit questions and plans to you. Skip any you'd rather not say.",
+        ChotuMood.HAPPY,
+    ) {
+        questions.forEach { q ->
+            Text(q.q, style = MaterialTheme.typography.titleSmall)
+            if (q.opts.isNotEmpty()) FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                q.opts.forEach { (v, label) -> FilterChip(selected = answers[q.key] == v, onClick = { answers = answers + (q.key to v) }, label = { Text(label) }) }
+            } else OutlinedTextField(value = answers[q.key] ?: "", onValueChange = { answers = answers + (q.key to it.take(80)) }, placeholder = { Text(q.text ?: "") }, singleLine = true)
+        }
+        Text(if (hindi) "मैचिंग के लिए सिर्फ़ प्रयासों की संख्या पॉड सर्वर पर जाती है; बाक़ी इसी फ़ोन पर रहता है।" else "Only your attempts go to the pod server, for matching. The rest stays on this phone.",
+            style = MaterialTheme.typography.labelSmall)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = {
+                questions.forEach { q -> answers[q.key]?.takeIf { it.isNotBlank() }?.let { staged.set(q.key, it.trim(), "asked") } ?: staged.skip(q.key) }
+                if (questions.any { it.key in StagedProfile.SYNCED && answers[it.key] != null }) onSynced()
+                staged.nextDayTwoStep()
+            }, enabled = answers.isNotEmpty()) { Text(if (hindi) "सेव करें" else "Save") }
+            TextButton(onClick = { questions.forEach { staged.skip(it.key) }; staged.nextDayTwoStep() }) { Text(if (hindi) "अभी नहीं" else "Not now") }
         }
     }
 }

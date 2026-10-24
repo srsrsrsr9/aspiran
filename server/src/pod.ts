@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 import { anonymise } from "./anonymise";
-import { type Env, HELPLINES, distress, istDay, istNow, newId } from "./shared";
+import { type Env, HELPLINES, distress, istDay, istNow, istWeek, newId } from "./shared";
 import { extraDistress } from "./langs";
 import { bump, flags } from "./staff";
 import { AiBlocked, callGroq } from "./ai";
@@ -9,7 +9,7 @@ import { HOST_SCHEDULE } from "./community";
 import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reaction } from "./friends";
 
 /**
- * One pod of up to 8 members: chat, chai pings, ritual posts and a shared study room.
+ * One pod of up to 8 members (matched starts are 6 to 8): chat, chai pings, ritual posts and a shared study room.
  * Uses hibernatable WebSockets, so an idle pod costs nothing.
  *
  * Client → server: hello is implicit (member and name come from the URL), then
@@ -19,7 +19,7 @@ import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reactio
  *   {type:"ask_lead", text} · {type:"lead_reply", to, text}: private notes between a member and the pod lead
  *   {type:"goal_set", text, target} (lead, or anyone while there's no lead) · {type:"goal_add", n}: one shared bar
  *   {type:"claim", ritual}: a person runs this week's ritual, so Chotu stays out of it
- *   {type:"quiz_answer", q, choice} · {type:"thanks", id}
+ *   {type:"quiz_answer", q, choice} · {type:"thanks", id} · {type:"pinned_answer", choice} (open rooms' daily question)
  *   A "say" that mentions @Chotu also goes to Chotu: only that message, names swapped for Member A/B,
  *   after the distress check. Chotu's reply is posted to the pod, labelled AI.
  * Server → client:
@@ -28,6 +28,7 @@ import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reactio
  *   {type:"room", room} · {type:"hidden", id} · {type:"care", helplines} · {type:"error", message}
  *   {type:"goal", goal} · {type:"quiz", quiz} · {type:"quiz_result", q, right, answerIndex, explanation}
  *   {type:"thanked", id} · {type:"thanks_received"} · {type:"moved", to}
+ *   {type:"pinned", pinned} · {type:"pinned_result", choice, right, answerIndex, explanation}
  *
  * Chotu hosts (POST /host from the half-hourly cron): at most 2 posts a day, none from 23:30 to 07:00 IST,
  * never about any one member. Chotu is never a member and never counted.
@@ -46,7 +47,12 @@ const CHOTU_REPLIES_PER_DAY = 20;
 interface Goal { text: string; target: number; unit: string; done: number; week: string; setBy: "lead" | "chotu" | "member" }
 interface Quiz { id: string; week: string; questions: { topic: string; question: string; options: string[]; answerIndex: number; explanation?: string }[]; answers: Record<string, Record<number, number>>; lastWeekPct: number | null }
 /** Monday of the IST week, as a day. */
-const weekOf = (at = new Date()) => { const d = new Date(istDay(at) + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7)); return d.toISOString().slice(0, 10); };
+const weekOf = istWeek;
+/**
+ * An open room's pinned question for the day (rooms.ts, POST /pin from the 07:00 job): a Prelims MCQ, or a Mains
+ * prompt in the answer-writing room. One answer each; the room sees one shared tally, never who answered what.
+ */
+interface Pinned { day: string; kind: "mcq" | "mains"; topic: string; question: string; options: string[]; answerIndex: number | null; explanation: string; answers: Record<string, number> }
 
 interface Message {
   id: string;
@@ -167,6 +173,29 @@ export class PodRoom extends DurableObject<Env> {
       const last = this.sql.exec<{ ts: number; name: string; text: string }>(`SELECT ts, name, text FROM messages WHERE hidden = 0 AND kind != 'system' ORDER BY ts DESC LIMIT 1`).toArray()[0];
       return Response.json({ unread, lastTs: last?.ts ?? null, lastName: last?.name ?? null, lastText: last ? last.text.slice(0, 120) : null, online: this.online().length });
     }
+    if (url.pathname.endsWith("/pin") && req.method === "POST") {
+      const p = await req.json<any>();
+      const day = /^\d{4}-\d{2}-\d{2}$/.test(String(p.day)) ? String(p.day) : istDay();
+      const cur = this.getJson<Pinned | null>("pinned", null);
+      const mcq = p.kind !== "mains";
+      const options = mcq && Array.isArray(p.options) ? p.options.slice(0, 4).map((o: unknown) => String(o).slice(0, 300)) : [];
+      if (cur?.day === day || !String(p.question ?? "").trim() || (mcq && (options.length < 2 || !Number.isInteger(p.answerIndex) || p.answerIndex < 0 || p.answerIndex >= options.length))) {
+        return Response.json({ pinned: false });
+      }
+      const pinned: Pinned = {
+        day, kind: mcq ? "mcq" : "mains", topic: String(p.topic ?? "").slice(0, 60), question: String(p.question).slice(0, 1200),
+        options, answerIndex: mcq ? p.answerIndex : null, explanation: String(p.explanation ?? "").slice(0, 800), answers: {},
+      };
+      this.setJson("pinned", pinned);
+      this.broadcast({ type: "pinned", pinned: this.publicPinned(pinned) });
+      return Response.json({ pinned: true });
+    }
+    if (url.pathname.endsWith("/quiz-score")) {
+      // The room board (rooms.ts): this room's one shared quiz score. Never a person's.
+      const quiz = this.getJson<Quiz | null>("quiz", null);
+      if (!quiz) return Response.json({ week: null, right: 0, answered: 0, pct: null, players: 0 });
+      return Response.json({ week: quiz.week, ...this.publicQuiz(quiz).score, players: Object.keys(quiz.answers).length });
+    }
     if (url.pathname.endsWith("/stats")) {
       // For the admin's lurker-to-poster metric: how many different people posted in 14 days. Never who.
       const row = this.sql.exec<{ n: number }>(`SELECT COUNT(DISTINCT member_id) AS n FROM messages WHERE ts > ? AND kind IN ('chat', 'favour', 'offer')`, Date.now() - 14 * 86400_000).toArray()[0];
@@ -224,6 +253,8 @@ export class PodRoom extends DurableObject<Env> {
       this.sql.exec("DELETE FROM thanks WHERE from_id = ? OR to_id = ?", member, member);
       const quiz = this.getJson<Quiz | null>("quiz", null);
       if (quiz?.answers[member]) { delete quiz.answers[member]; this.setJson("quiz", quiz); }
+      const pinned = this.getJson<Pinned | null>("pinned", null);
+      if (pinned?.answers[member] !== undefined) { delete pinned.answers[member]; this.setJson("pinned", pinned); }
       if (this.getMeta("lead") === member) { this.setMeta("lead", null); this.setMeta("leadName", null); }
       this.kick(member, "Your data was deleted.");
       return Response.json({ messages: n, privateNotes: p });
@@ -355,6 +386,16 @@ export class PodRoom extends DurableObject<Env> {
         this.broadcast({ type: "quiz", quiz: this.publicQuiz(quiz) });
         return;
       }
+      case "pinned_answer": {
+        const p = this.getJson<Pinned | null>("pinned", null);
+        const choice = Number(msg.choice);
+        if (!p || p.kind !== "mcq" || p.day !== istDay() || !Number.isInteger(choice) || choice < 0 || choice >= p.options.length) return;
+        if (p.answers[me.memberId] === undefined) { p.answers[me.memberId] = choice; this.setJson("pinned", p); }
+        const mine = p.answers[me.memberId];
+        ws.send(JSON.stringify({ type: "pinned_result", choice: mine, right: mine === p.answerIndex, answerIndex: p.answerIndex, explanation: p.explanation }));
+        this.broadcast({ type: "pinned", pinned: this.publicPinned(p) });
+        return;
+      }
       case "thanks": {
         const row = this.sql.exec<{ member_id: string; kind: string }>("SELECT member_id, kind FROM messages WHERE id = ?", String(msg.id)).toArray()[0];
         if (!row || row.member_id === me.memberId || !HUMAN_KINDS.includes(row.kind)) return;
@@ -437,6 +478,7 @@ export class PodRoom extends DurableObject<Env> {
       type: "history", messages: this.history(), online: this.online(), room: this.room(),
       lead: this.getMeta("leadName"), youAreLead: memberId === this.getMeta("lead"), private: this.privateFor(memberId),
       goal: this.goal(), quiz: quiz ? { ...this.publicQuiz(quiz), mine: quiz.answers[memberId] ?? {} } : null,
+      pinned: this.publicPinned(this.getJson<Pinned | null>("pinned", null), memberId),
       thanked, thankedYou, movedTo: this.getMeta("movedTo"), claims: this.claims().slots,
     };
   }
@@ -456,6 +498,18 @@ export class PodRoom extends DurableObject<Env> {
     let right = 0, answered = 0;
     for (const a of Object.values(q.answers)) for (const [i, c] of Object.entries(a)) { answered++; if (q.questions[Number(i)]?.answerIndex === c) right++; }
     return { id: q.id, week: q.week, questions: q.questions.map(({ topic, question, options }) => ({ topic, question, options })), score: { right, answered, pct: answered ? Math.round((right / answered) * 100) : null }, lastWeekPct: q.lastWeekPct };
+  }
+
+  /** Today's pinned question as the room sees it: the shared tally, and the answer only to someone who answered. */
+  private publicPinned(p: Pinned | null, memberId = "") {
+    if (!p || p.day !== istDay()) return null;
+    const given = Object.values(p.answers);
+    const mine = memberId ? p.answers[memberId] : undefined;
+    return {
+      day: p.day, kind: p.kind, topic: p.topic, question: p.question, options: p.options,
+      tally: { right: given.filter((c) => c === p.answerIndex).length, answered: given.length },
+      mine: mine ?? null, ...(mine !== undefined ? { answerIndex: p.answerIndex, explanation: p.explanation } : {}),
+    };
   }
 
   /** A person posted: the pod isn't quiet, and if it was the lead, newcomers have been greeted. */

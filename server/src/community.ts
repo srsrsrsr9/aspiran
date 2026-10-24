@@ -5,7 +5,7 @@ import { type Env, bad, istDay, istNow, json, newId } from "./shared";
 import { activeResult, resultDays } from "./results";
 import { bump, ensureSchema, flags, getSetting } from "./staff";
 import { logEvent } from "./metrics";
-import { OPEN_ROOMS, podMode, roomCounts, roomPost } from "./rooms";
+import { OPEN_ROOMS, podMode, roomCounts, roomPost, sweepPhotos } from "./rooms";
 import { ANSWER_DAYS } from "./friends";
 
 /**
@@ -273,7 +273,7 @@ export async function hostTick(env: Env, at = new Date()) {
     const jobs: any[] = [{ slot: "check" }];
     for (const s of due) {
       if (s.slot === "goal") continue;
-      const job: any = { slot: s.slot, text: await slotText(env, s.slot, humans) };
+      const job: any = { slot: s.slot, text: s.slot === "quiz" ? ROOM_QUIZ_TEXT : await slotText(env, s.slot, humans) };
       if (s.slot === "quiz") job.quiz = await quizQuestions(env, at.getTime());
       jobs.unshift(job);
     }
@@ -287,6 +287,40 @@ export async function hostTick(env: Env, at = new Date()) {
   if (posted) await bump(env, "host_posts", posted);
   if (friendPosts) await bump(env, "friend_posts", friendPosts);
   return { pods: results.length, rooms: OPEN_ROOMS.length, posted, friendPosts };
+}
+
+const ROOM_QUIZ_TEXT = "Room Quiz Night 🎯 5 questions from this week's Chai, the same in every room. This room's one shared score goes on the room board against the other rooms. People are never ranked.";
+
+/**
+ * Each open room's pinned question for the day (07:00, the "pins" job): the answer-writing room gets today's Mains
+ * prompt, every other room a Prelims MCQ from this week's Chai or the starter bank, a different one per room where
+ * there are enough. The Hindi-medium room gets the Hindi text where an editor checked it.
+ */
+export async function pinRooms(env: Env, at = new Date()) {
+  const day = istDay(at);
+  const { results } = await env.DB.prepare("SELECT day, json FROM briefs WHERE day >= ? ORDER BY day DESC").bind(istDay(new Date(at.getTime() - 7 * DAY))).all<{ day: string; json: string }>();
+  const pool: { topic: string; en: any; hi: any }[] = [];
+  let mains: string | null = null;
+  for (const r of results) for (const it of JSON.parse(r.json).items ?? []) {
+    if (it.tone === "tragic") continue;
+    if (it.examCorner?.mcq) pool.push({ topic: it.topic ?? "Chai", en: it.examCorner.mcq, hi: it.hi?.mcq ?? null });
+    if (!mains && r.day === day && it.examCorner?.mainsPrompt) mains = it.examCorner.mainsPrompt;
+  }
+  for (const q of ((BANK as any).questions ?? []) as any[]) if (q?.en && !pool.some((p) => p.en.question === q.en.question)) pool.push({ topic: q.topic ?? "Prelims", en: q.en, hi: q.hi ?? null });
+  let pinned = 0;
+  for (const [i, r] of OPEN_ROOMS.entries()) {
+    let pin: any;
+    if (r.id === "room-mains-writing" && mains) pin = { day, kind: "mains", topic: "Mains", question: mains };
+    else if (pool.length) {
+      const seed = Number(day.replace(/-/g, ""));
+      const p = pool[(seed + i) % pool.length];
+      const q = r.id === "room-hindi-medium" && p.hi ? p.hi : p.en;
+      pin = { day, kind: "mcq", topic: p.topic, question: q.question, options: q.options, answerIndex: q.answerIndex, explanation: q.explanation ?? "" };
+    } else continue;
+    const res = await roomPost(env, r.id, "pin", pin).catch(() => null);
+    if (res?.ok && (await res.json<{ pinned: boolean }>()).pinned) pinned++;
+  }
+  return { rooms: OPEN_ROOMS.length, pinned };
 }
 
 /** The 07:00 Chai post goes through the same host gate as everything else Chotu says in a pod. */
@@ -444,6 +478,8 @@ export async function runJob(env: Env, job: string, at = new Date()) {
     case "states": return refreshStates(env, at.getTime());
     case "host": return hostTick(env, at);
     case "chai": return { pods: await postChai(env, at) };
+    case "pins": return pinRooms(env, at);
+    case "photos": return sweepPhotos(env, { now: at.getTime() });
     default: throw new Error("Unknown job");
   }
 }

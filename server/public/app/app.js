@@ -287,7 +287,7 @@ const PREP_TABS = [
 ];
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
-  pod: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
+  pod: "pod", rooms: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
   prep: "prep", today: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
@@ -1045,6 +1045,166 @@ function viewFocus() {
     h("div.card", h("p", "The Android app has Focus too: pick the apps to close during a focus block, and daily limits for the rest. My Path → Focus.")));
 }
 
+/// --- Open rooms (server rooms.ts) ----------------------------------------------------------------
+// Joined like channels: language, where you are, goal, optional, region. Real member counts, Chotu and the study
+// friends always labelled AI. The room board ranks rooms by their shared Quiz Night score, never people.
+
+const ROOM_GROUPS = [["language", "Language"], ["attempt", "Where you are"], ["goal", "Goal"], ["optional", "Optionals"], ["region", "Region"]];
+const rooms = { list: null, board: null, error: null, busy: null, id: null, ws: null, status: "off", messages: [], pinned: null, photos: {} };
+let roomsRedraw = () => {};
+const roomSeen = () => store.get("roomSeen", {});
+
+function roomsLoad() {
+  const p = profile();
+  fetch("/rooms/list", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: p.memberId, seen: roomSeen() }) })
+    .then((r) => (r.ok ? r.json() : Promise.reject())).then((l) => { rooms.list = l; rooms.error = null; roomsRedraw(); })
+    .catch(() => { rooms.error = "Couldn't reach the rooms. Check your connection."; roomsRedraw(); });
+  fetch("/rooms/leaderboard").then((r) => (r.ok ? r.json() : null)).then((b) => { if (b) { rooms.board = b; roomsRedraw(); } }).catch(() => {});
+}
+
+function roomJoin(id, join = true) {
+  rooms.busy = id; roomsRedraw();
+  fetch(join ? "/rooms/join" : "/rooms/leave", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: profile().memberId, roomId: id }) })
+    .then((r) => r.json()).then((d) => {
+      rooms.busy = null;
+      if (d.error) { rooms.error = d.error; roomsRedraw(); return; }
+      if (join) { roomsLoad(); location.hash = "#rooms/" + id; } else { roomClose(); location.hash = "#rooms"; roomsLoad(); }
+    }).catch(() => { rooms.busy = null; rooms.error = "Couldn't reach the rooms. Check your connection."; roomsRedraw(); });
+}
+
+function roomOpen(id) {
+  if (rooms.id === id && rooms.ws && rooms.ws.readyState <= 1) return;
+  roomClose();
+  const p = profile();
+  Object.assign(rooms, { id, messages: [], pinned: null, status: "connecting" });
+  const url = new URL(`/rooms/${id}/ws`, location.href);
+  url.protocol = location.protocol === "https:" ? "wss:" : "ws:";
+  url.searchParams.set("member", p.memberId); url.searchParams.set("name", p.name);
+  const ws = new WebSocket(url);
+  rooms.ws = ws;
+  ws.onopen = () => { rooms.status = "online"; roomsRedraw(); };
+  ws.onclose = () => { if (rooms.ws === ws) { rooms.status = "off"; rooms.ws = null; roomsRedraw(); } };
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.type === "history") { rooms.messages = m.messages ?? []; rooms.pinned = m.pinned ?? null; }
+    if (m.type === "msg") rooms.messages = [...rooms.messages, m.message].slice(-200);
+    if (m.type === "hidden") rooms.messages = rooms.messages.filter((x) => x.id !== m.id);
+    // The room's tally changed: keep your own pick and the answer, which the broadcast doesn't carry.
+    if (m.type === "pinned") rooms.pinned = m.pinned && rooms.pinned?.day === m.pinned.day ? { ...m.pinned, mine: rooms.pinned.mine, answerIndex: rooms.pinned.answerIndex, explanation: rooms.pinned.explanation } : m.pinned;
+    if (m.type === "pinned_result" && rooms.pinned) rooms.pinned = { ...rooms.pinned, mine: m.choice, answerIndex: m.answerIndex, explanation: m.explanation };
+    if (m.type === "care") pod.care = true;
+    if (m.type === "error") rooms.error = m.message;
+    roomsRedraw();
+  };
+}
+function roomClose() {
+  if (rooms.id) store.set("roomSeen", { ...roomSeen(), [rooms.id]: Date.now() });
+  const ws = rooms.ws; rooms.ws = null; rooms.id = null; ws?.close();
+}
+
+/** A photo sent with "Send to pod" (Android): members of the room only, gone after 7 days. */
+function roomPhoto(id) {
+  const box = h("div.small.muted", "Loading the photo…");
+  const done = (url) => put(box, url ? h("img", { src: url, alt: "Photo of a handwritten answer", style: { maxWidth: "100%", maxHeight: "360px", display: "block", marginTop: "4px" } }) : "📷 Photo no longer here (photos are kept 7 days)");
+  if (rooms.photos[id] !== undefined) { done(rooms.photos[id]); return box; }
+  fetch(`/rooms/photo/${id}?member=${encodeURIComponent(profile().memberId)}`).then((r) => (r.ok ? r.blob() : null))
+    .then((b) => { rooms.photos[id] = b ? URL.createObjectURL(b) : null; done(rooms.photos[id]); }).catch(() => done(null));
+  return box;
+}
+const PHOTO_REF = /\bphoto:([0-9a-f]{32})\b/g;
+
+function roomBoardCard(mine) {
+  const b = rooms.board;
+  if (!b) return null;
+  return h("div.card",
+    h("strong", "Room board 🎯"),
+    h("p.small.muted", "Friday's Room Quiz Night: the same 5 questions in every room, one shared score per room. People are never ranked."),
+    b.rooms.length === 0 ? h("p", `No room has ${b.minAnswers} answers yet this week. Friday, 20:00.`)
+      : h("ol", { style: { margin: "4px 0", paddingLeft: "20px" } }, b.rooms.slice(0, 5).map((r) => h("li", { style: { fontWeight: mine.has(r.id) ? "700" : "400" } }, `${r.name} · ${r.pct}% · ${r.answered} answers`))));
+}
+
+function roomPinnedCard() {
+  const p = rooms.pinned;
+  if (!p) return null;
+  const answered = p.mine !== null && p.mine !== undefined;
+  return h("div.card.soft",
+    h("strong", "📌 Today's question" + (p.topic ? " · " + p.topic : "")),
+    h("p", p.question),
+    p.kind === "mcq"
+      ? [h("div.col", { style: { gap: "6px" } }, p.options.map((o, k) => h("button" + (p.mine === k ? ".primary" : ""), {
+          disabled: answered, style: { textAlign: "left" },
+          onclick: () => { rooms.pinned = { ...p, mine: k }; rooms.ws?.send(JSON.stringify({ type: "pinned_answer", choice: k })); roomsRedraw(); },
+        }, `(${"abcd"[k]}) ${o}`))),
+        answered && Number.isInteger(p.answerIndex) && h("p", (p.mine === p.answerIndex ? "✓ Right." : `○ The answer is (${"abcd"[p.answerIndex]}).`) + (p.explanation ? " " + p.explanation : "")),
+        p.tally?.answered > 0 && h("p.small.muted", `${p.tally.answered} answered in this room · ${p.tally.right} right`)]
+      : h("p.small.muted", "Write it in Prep → Mains, then share your intro here."));
+}
+
+function viewRooms(arg) {
+  const box = h("div");
+  if (arg) {
+    roomOpen(arg);
+    const input = h("input", { type: "text", maxLength: 1000, placeholder: "Write to the room · type @Chotu to ask Chotu" });
+    const send = () => {
+      const t = input.value.trim(); if (!t || !rooms.ws) return;
+      if (distress(t)) pod.care = true;
+      rooms.ws.send(JSON.stringify({ type: "say", text: t, kind: "chat", clientId: randomId() })); input.value = "";
+    };
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(); });
+    cleanup.push(() => { roomClose(); roomsRedraw = () => {}; });
+    roomsRedraw = () => {
+      const info = rooms.list?.rooms.find((r) => r.id === arg);
+      put(box,
+        h("div.row.between", h("a", { href: "#rooms" }, "← Rooms"), h("button.ghost.small", { disabled: rooms.busy === arg, onclick: () => { if (confirm(`Leave ${info?.name ?? "this room"}? You can join again any time.`)) roomJoin(arg, false); } }, "Leave")),
+        h("h1", info?.name ?? "Room"),
+        info && h("p.small.muted", `${info.members === 1 ? "1 member" : info.members + " members"}${info.online ? ` · ${info.online} here now` : ""}`),
+        h("p.small.muted", rooms.status === "online" ? "" : rooms.status === "connecting" ? "Connecting…" : rooms.error ?? "Offline"),
+        pod.care && careBox(),
+        roomPinnedCard(),
+        h("div.card.chat", { style: { maxHeight: "55vh", overflowY: "auto" } },
+          rooms.messages.length === 0 && h("p.muted", "No messages yet. Say hello."),
+          rooms.messages.map((m) => {
+            const photos = [...String(m.text).matchAll(PHOTO_REF)].map((x) => x[1]);
+            return h("div.msg" + (m.memberId === "chotu" || isFriend(m) ? ".chotu" : ""),
+              h("div.row.small", m.memberId === "chotu" ? chotuLabel(null, 20) : isFriend(m) ? friendLabel(m) : h("span.who", m.name),
+                h("span.muted", new Date(m.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })),
+                isPerson(m) && m.memberId !== profile().memberId && h("button.ghost.small", { onclick: () => { rooms.ws?.send(JSON.stringify({ type: "report", id: m.id, reason: "Reported from the web" })); alert("Thanks. A moderator will look at it."); } }, "Report")),
+              h("div", photos.length ? String(m.text).replace(PHOTO_REF, "").trim() : m.text),
+              photos.map(roomPhoto));
+          })),
+        h("div.row", h("div.grow", input), h("button.primary", { onclick: send }, "Send")));
+    };
+    if (!rooms.list) roomsLoad();
+    roomsRedraw();
+    return h("div.col", box);
+  }
+  cleanup.push(() => { roomsRedraw = () => {}; });
+  roomsRedraw = () => {
+    const l = rooms.list;
+    const all = l?.rooms ?? [];
+    const mine = all.filter((r) => r.joined);
+    const row = (r) => h("div.card", h("div.row.between",
+      h("div", h("strong", r.name), h("p.small", { style: { margin: "2px 0" } }, `${r.members === 1 ? "1 member" : r.members + " members"}${r.online ? ` · ${r.online} here now` : ""}`),
+        h("p.small.muted", { style: { margin: 0 } }, r.lastText ? `${r.lastName ?? "Someone"}: ${r.lastText.replace(PHOTO_REF, "📷")}` : r.note)),
+      r.joined ? h("div.row", r.unread > 0 && h("span.tag", String(r.unread)), h("a.btn", { href: "#rooms/" + r.id }, "Open"))
+        : h("button.primary", { disabled: rooms.busy === r.id, onclick: () => roomJoin(r.id) }, rooms.busy === r.id ? "Joining…" : "Join")));
+    put(box,
+      h("p", "Join as many as help: your language, where you are, your goal, your optional, your region. Chotu and the study friends here are AI and always labelled AI."),
+      l?.mode === "open" && h("p.small.muted", `Matched pods of 6 to 8 start once ${l.threshold} aspirants have joined. ${l.signups} so far.`),
+      rooms.error && h("p.small", rooms.error),
+      !l && !rooms.error && h("p.muted", "Loading rooms…"),
+      roomBoardCard(new Set(mine.map((r) => r.id))),
+      mine.length > 0 && [h("h2", "Your rooms"), mine.map(row)],
+      ROOM_GROUPS.map(([g, title]) => {
+        const rs = all.filter((r) => r.group === g && !r.joined);
+        return rs.length > 0 && [h("h2", title), rs.map(row)];
+      }));
+  };
+  roomsLoad();
+  roomsRedraw();
+  return h("div.col", h("div.row.between", h("h1", "Open rooms"), h("a", { href: "#pod" }, "My pod →")), box);
+}
+
 /// --- Pod ---------------------------------------------------------------------------------------
 // States are honest ("Forming · 2 of 8") and Chotu is never counted. One shared goal bar, never
 // per-person progress. 🙏 thanks are never shown as counts on people.
@@ -1064,7 +1224,7 @@ function podConnect() {
   fetch("/pods/join", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: p.memberId, ...matchBody() }) })
     .then((r) => r.json()).then((summary) => {
       // Open mode (server rooms.ts): below the sign-up threshold pods are open rooms, in the Android app for now.
-      if (!summary.podId && summary.mode === "open") throw new Error("open: Pods are open rooms in the app for now. Matched pods start once more people have joined.");
+      if (!summary.podId && summary.mode === "open") throw new Error("open: Pods are open rooms for now. Matched pods start once more people have joined.");
       if (!summary.podId) throw new Error(summary.error ?? "no pod");
       pod.podId = summary.podId; pod.summary = summary; store.set("podSummary", summary);
       if (!store.get("podJoinedOn")) { store.set("podJoinedOn", today()); rateAfter("pod_joined", 90_000); }
@@ -1252,7 +1412,7 @@ function viewPod() {
     );
   };
   podRedraw();
-  return h("div.col", h("h1", "Your pod"), box);
+  return h("div.col", h("div.row.between", h("h1", "Your pod"), h("a.btn", { href: "#rooms" }, "Open rooms →")), box);
 }
 function leadAsk() {
   const t = h("input", { type: "text", maxLength: 1000, placeholder: "Only the pod lead sees this" });
@@ -1541,7 +1701,7 @@ function viewAdda() {
     h("div.card.host", h("div.row", chotuLabel(null, 36), h("p.grow", { style: { margin: 0 } }, hostLine()))),
     M.checkinCard(h, profile()?.createdOn),
     rapCard(),
-    h("a.card.link", { href: "#pod" }, h("div.row.between", h("strong", "Your pod"), h("span", "→")), h("p.small", { style: { margin: "4px 0" } }, pod.summary ? podLine().replace(" →", "") : "Not in a pod yet. Open it to join up to 8 people at your stage, in your language."), goalBar(true)),
+    h("a.card.link", { href: "#pod" }, h("div.row.between", h("strong", "Your pod"), h("span", "→")), h("p.small", { style: { margin: "4px 0" } }, pod.summary ? podLine().replace(" →", "") : "Not in a pod yet. Open it to join 6 to 8 people at your stage, in your language."), goalBar(true)),
     h("a.card.link", { href: "#commons" }, h("div.row.between", h("strong", "The Commons"), h("span", "→")), commons),
     h("div.card", season),
     h("a.card.link", { href: "#today" }, h("div.row.between", h("div", h("strong", "Today's 3"), h("div.small.muted", "Prep: Chai, practice and an answer. Small is fine.")), h("span", "→"))),
@@ -2671,7 +2831,7 @@ function viewRoutine() {
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, shuffle, today, addDays, render: () => render() });
 
 const VIEWS = {
-  adda: viewAdda, commons: viewCommons, pod: viewPod, chotu: viewChotu,
+  adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,

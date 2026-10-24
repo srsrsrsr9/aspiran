@@ -18,7 +18,7 @@ import { communityRoute, runJob } from "./community";
 import { podMode, roomsRoute } from "./rooms";
 import { answersRoute } from "./answers";
 import { plusRoute, useAllowance } from "./plus";
-import { publicCa } from "./ca";
+import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
 import { activeResult, resultDays } from "./results";
 import { authRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
@@ -150,7 +150,11 @@ export default {
       data.items = data.items.filter((i) => (f.mocks || i.kind !== "mock") && (f.long_reads || i.kind !== "read"));
       return json(data);
     }
-    if (path.startsWith("/media/")) return serveMedia(env, decodeURIComponent(path.slice("/media/".length)), req);
+    if (path.startsWith("/media/")) {
+      const key = decodeURIComponent(path.slice("/media/".length));
+      const locked = await caMediaGate(env, key, url);
+      return locked ?? serveMedia(env, key, req, url.searchParams.has("sig"));
+    }
     // --- Cinematic current affairs: the week's scenes (ca.ts), approved only
     { const r = await publicCa(req, env, path); if (r) return r; }
 
@@ -234,12 +238,16 @@ export default {
       ctx.waitUntil(runPipeline(env).then((l) => console.log(l.join("\n"))));
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
+      // Photos sent to rooms and pods go after 7 days.
+      ctx.waitUntil(runJob(env, "photos", at).then(log("photos"), fail("photos")));
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));
     if (hm === "07:00") {
       // Publish what the editor approved, then tell the pods (through the host gate).
-      ctx.waitUntil(publish(env).then(async (r) => { console.log(JSON.stringify(r)); if (r.published) await postRitual(env, "chai"); }));
+      ctx.waitUntil(publish(env).then(async (r) => { console.log(JSON.stringify(r)); if (r.published) await postRitual(env, "chai"); })
+        // Then each open room's pinned question, from what was just published.
+        .then(() => runJob(env, "pins", at)).then(log("pins"), fail("pins")));
     }
     // Chotu's host schedule (Mon goal, Wed/Sat answer hour, Fri quiz, Sun wins) and the welcome/quiet checks.
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));

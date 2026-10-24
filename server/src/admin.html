@@ -474,7 +474,7 @@ views.analytics = async () => {
     h("div.row", { style: "margin-bottom:12px" }, [7, 30, 90].map((n) => h("button", { class: n === days ? "primary" : "", onclick: () => { views.analytics.days = n; show("analytics"); } }, `${n} days`))),
     h("div.tiles", {},
       h("div.tile", {}, h("div.n", {}, num(d.pods?.members)), h("div.l", {}, `members in ${num(d.pods?.pods)} pods`)),
-      h("div.tile", {}, h("div.n", {}, Number(d.pods?.avg_size || 0).toFixed(1)), h("div.l", {}, "average pod size (aim: 8 to 10)")),
+      h("div.tile", {}, h("div.n", {}, Number(d.pods?.avg_size || 0).toFixed(1)), h("div.l", {}, "average pod size (aim: 6 to 8)")),
       h("div.tile", {}, h("div.n", {}, num(d.safety?.alerts)), h("div.l", {}, d.safety?.avg_minutes_to_first_action != null ? `safety alerts · first action after ${d.safety.avg_minutes_to_first_action} min on average` : "safety alerts"))),
     h("div.grid2", {},
       bars("Cards published per day", range.map((x) => ({ label: x, v: pub[x] || 0 }))),

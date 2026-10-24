@@ -440,7 +440,7 @@ route("POST", /^pricing$/, "flags", async ({ env, s, body }) => {
 route("POST", /^jobs\/run$/, "flags", async ({ env, body }) => {
   const at = body.at ? new Date(body.at) : new Date();
   if (Number.isNaN(at.getTime())) return bad("at must be a date");
-  if (!["match", "merge", "states", "host", "chai"].includes(body.job)) return bad("job must be match, merge, states, host or chai");
+  if (!["match", "merge", "states", "host", "chai", "pins", "photos"].includes(body.job)) return bad("job must be match, merge, states, host, chai, pins or photos");
   return json(await runJob(env, body.job, at));
 });
 

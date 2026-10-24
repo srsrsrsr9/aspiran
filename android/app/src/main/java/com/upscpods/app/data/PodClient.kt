@@ -67,6 +67,13 @@ data class PodQuiz(val id: String, val questions: List<QuizQuestion>, val score:
 
 data class QuizResult(val right: Boolean, val answerIndex: Int, val explanation: String)
 
+/** An open room's question of the day: one shared tally; the answer comes back only once you've answered. */
+@Serializable
+data class PinnedQuestion(
+    val day: String, val kind: String = "mcq", val topic: String = "", val question: String, val options: List<String> = emptyList(),
+    val tally: QuizScore = QuizScore(), val mine: Int? = null, val answerIndex: Int? = null, val explanation: String = "",
+)
+
 /** PAUSED: the admin console switched pod chat (or joining a first pod) off; see [PodClient.pausedNote]. */
 enum class PodStatus { NO_SERVER, CONNECTING, ONLINE, OFFLINE, PAUSED }
 
@@ -115,6 +122,8 @@ class PodClient(context: Context, val roomId: String? = null) {
     /** This member's own quiz picks (question index to option), and what each turned out to be. */
     var quizMine by mutableStateOf(mapOf<Int, Int>()); private set
     var quizResults by mutableStateOf(mapOf<Int, QuizResult>()); private set
+    /** Open rooms only: today's pinned question, with this member's pick and the answer once picked. */
+    var pinned by mutableStateOf<PinnedQuestion?>(null); private set
     /** Messages someone has thanked (ids only; who thanked whom isn't shown). */
     var thanked by mutableStateOf(setOf<String>()); private set
     /** Rituals a member has claimed this week; Chotu stays out of those. */
@@ -248,6 +257,12 @@ class PodClient(context: Context, val roomId: String? = null) {
         quizMine = quizMine + (q to choice)
         return send(buildJsonObject { put("type", "quiz_answer"); put("q", q); put("choice", choice) })
     }
+    fun answerPinned(choice: Int): Boolean {
+        val p = pinned ?: return false
+        if (p.mine != null || p.kind != "mcq") return false
+        pinned = p.copy(mine = choice)
+        return send(buildJsonObject { put("type", "pinned_answer"); put("choice", choice) })
+    }
     fun thank(id: String) = send(buildJsonObject { put("type", "thanks"); put("id", id) })
     /** Running this week's ritual yourself: Chotu stays out of a claimed one. */
     fun claim(ritual: String) = send(buildJsonObject { put("type", "claim"); put("ritual", ritual) }).also { Metrics.ritualOnce(ritual) }
@@ -363,6 +378,7 @@ class PodClient(context: Context, val roomId: String? = null) {
                 quizMine = (ev["quiz"] as? JsonObject)?.get("mine")?.let { m ->
                     runCatching { m.jsonObject.entries.associate { (k, v) -> k.toInt() to v.jsonPrimitive.content.toInt() } }.getOrNull()
                 } ?: emptyMap()
+                pinned = pinnedOf(ev["pinned"])
                 thanked = ev["thanked"]?.let { a -> runCatching { a.jsonArray.map { it.jsonPrimitive.content }.toSet() }.getOrNull() } ?: emptySet()
                 claims = ev["claims"]?.let { a -> runCatching { a.jsonArray.map { it.jsonPrimitive.content } }.getOrNull() } ?: emptyList()
                 if (ev["thankedYou"]?.jsonPrimitive?.booleanOrNull == true) onStamp("first_thanks")
@@ -392,6 +408,16 @@ class PodClient(context: Context, val roomId: String? = null) {
             "care" -> careRequested = true
             "goal" -> goal = goalOf(ev["goal"])
             "quiz" -> quiz = quizOf(ev["quiz"])
+            // The room's tally changed: keep this member's own pick and answer, which the broadcast doesn't carry.
+            "pinned" -> pinned = pinnedOf(ev["pinned"])?.let { p ->
+                val old = pinned
+                if (old != null && old.day == p.day && old.question == p.question) p.copy(mine = old.mine, answerIndex = old.answerIndex ?: p.answerIndex, explanation = old.explanation.ifBlank { p.explanation }) else p
+            }
+            "pinned_result" -> pinned = pinned?.copy(
+                mine = ev["choice"]?.jsonPrimitive?.content?.toIntOrNull(),
+                answerIndex = ev["answerIndex"]?.jsonPrimitive?.content?.toIntOrNull(),
+                explanation = ev["explanation"]?.jsonPrimitive?.contentOrNull ?: "",
+            )
             "quiz_result" -> {
                 val q = ev["q"]?.jsonPrimitive?.content?.toIntOrNull() ?: return
                 quizResults = quizResults + (q to QuizResult(
@@ -418,6 +444,8 @@ class PodClient(context: Context, val roomId: String? = null) {
         (e as? JsonObject)?.let { runCatching { json.decodeFromJsonElement<PodGoal>(it) }.getOrNull() }
     private fun quizOf(e: kotlinx.serialization.json.JsonElement?): PodQuiz? =
         (e as? JsonObject)?.let { runCatching { json.decodeFromJsonElement<PodQuiz>(it) }.getOrNull() }
+    private fun pinnedOf(e: kotlinx.serialization.json.JsonElement?): PinnedQuestion? =
+        (e as? JsonObject)?.let { runCatching { json.decodeFromJsonElement<PinnedQuestion>(it) }.getOrNull() }
 
     private fun moved(to: String) {
         if (to == podId) return
