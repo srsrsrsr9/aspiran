@@ -1,0 +1,262 @@
+{
+  "schema": "upsc-pods/syllabus-notes@1",
+  "subject": "env",
+  "topic": "Environment",
+  "note": "One note per major Environment topic of the syllabus. English only. Drafts: an editor checks every figure and date before approving. Pack with server/scripts/syllabus.mjs.",
+  "notes": [
+    {
+      "id": "env-syl-ecology",
+      "title": "Ecology basics: ecosystems, food chains and nutrient cycles",
+      "nodes": ["pre-6", "gs3-6"],
+      "gsPaper": "GS3",
+      "minutes": 8,
+      "dek": "By the end, you will know how energy and nutrients move through an ecosystem, how pyramids are drawn and how communities change over time.",
+      "sections": [
+        {
+          "head": "The parts of an ecosystem",
+          "body": "An ecosystem is a community of living things together with its physical surroundings, working as one unit. A pond, a forest and a field are all ecosystems.\n\nProducers, mostly green plants and algae, make food by photosynthesis. Consumers eat them: herbivores are primary consumers, the animals that eat herbivores are secondary consumers, and so on. Decomposers, mainly bacteria and fungi, break down dead matter and return nutrients to the soil and water.\n\nA species' niche is its role in the ecosystem: what it eats, where it lives, when it is active. An ecotone is a zone where two ecosystems meet, such as a mangrove between land and sea. Ecotones often hold more species than either side, which is called the edge effect. A keystone species, such as a top predator, has an effect on its ecosystem far larger than its numbers suggest."
+        },
+        {
+          "head": "Energy flows one way",
+          "body": "Energy enters an ecosystem as sunlight and leaves as heat. It flows one way, not in a cycle.\n\nAt each step up the food chain, only about 10 per cent of the energy passes on; the rest is used for living or lost as heat. This is the ten per cent law, linked with Raymond Lindeman's work in 1942. That is why food chains rarely have more than four or five links.\n\nA food chain is one path: grass, grasshopper, frog, snake, eagle. A food web is the network of many chains linked together, which is closer to how nature works. The grazing food chain starts with living plants; the detritus food chain starts with dead matter.\n\nGross primary productivity is the total rate of photosynthesis. Net primary productivity is what is left after the plants' own respiration, and it is what is available to consumers. Tropical rainforests, estuaries and coral reefs are among the most productive ecosystems; deserts and the open ocean are among the least, per unit area."
+        },
+        {
+          "head": "Ecological pyramids",
+          "body": "Pyramids show the numbers, biomass or energy at each trophic level.\n\nThe pyramid of energy is always upright, because energy is lost at every step.\n\nThe pyramid of numbers can be inverted. One large tree can support thousands of insects, so the base is narrower than the level above it.\n\nThe pyramid of biomass is usually upright on land but can be inverted in water. In the sea, the standing biomass of phytoplankton at any moment can be less than that of the zooplankton and fish that eat it, because phytoplankton reproduce very fast."
+        },
+        {
+          "head": "Nutrients cycle; communities change",
+          "body": "Unlike energy, nutrients cycle. In the carbon cycle, plants take in carbon dioxide; respiration, decay and burning return it. The oceans and fossil fuels are large stores.\n\nIn the nitrogen cycle, nitrogen gas is fixed into usable forms by bacteria such as Rhizobium (in the root nodules of legumes) and Azotobacter, by cyanobacteria and by lightning. Nitrifying bacteria turn ammonia into nitrites and nitrates. Denitrifying bacteria return nitrogen to the air. The phosphorus cycle is sedimentary: it has no significant gaseous phase, and rocks are the main store.\n\nEcological succession is the gradual change in the species of a community. Primary succession begins on bare ground where no soil exists, such as fresh lava or bare rock; lichens are typical pioneer species. Secondary succession begins where a community was removed but soil remains, such as an abandoned field or a burnt forest, so it is faster. Succession tends toward a relatively stable climax community."
+        }
+      ],
+      "keyFacts": [
+        "Energy flows one way; nutrients cycle.",
+        "About 10% of energy passes to the next trophic level.",
+        "The pyramid of energy is always upright; numbers can be inverted (a tree); biomass can be inverted in the sea.",
+        "Rhizobium (legume root nodules) and Azotobacter fix nitrogen.",
+        "The phosphorus cycle has no significant gaseous phase.",
+        "Lichens are pioneer species on bare rock; secondary succession is faster because soil remains."
+      ],
+      "examAngle": "Prelims asks which pyramid is always upright, which organisms fix nitrogen, and the difference between primary and secondary succession. These basics also help in Mains answers on conservation.",
+      "selfCheck": [
+        "Why can a pyramid of numbers be inverted but not a pyramid of energy?",
+        "Which nutrient cycle has no gaseous phase?",
+        "Why is secondary succession faster than primary succession?"
+      ],
+      "sources": ["NCERT Class XII Biology, chapters on Ecosystem and Organisms and Populations", "NCERT Class XI Biology, chapter on mineral nutrition (nitrogen cycle)"],
+      "verify": "Check that the chapter names match the current rationalised NCERT editions. The science here is textbook material; no dates beyond Lindeman (1942)."
+    },
+    {
+      "id": "env-syl-biodiversity",
+      "title": "Biodiversity and protected areas: hotspots, reserves and conventions",
+      "nodes": ["pre-6", "gs3-6"],
+      "gsPaper": "GS3",
+      "minutes": 10,
+      "dek": "By the end, you will know India's biodiversity, the kinds of protected area under Indian law, the IUCN categories and the conventions that protect species.",
+      "sections": [
+        {
+          "head": "India's biodiversity",
+          "body": "Biodiversity exists at three levels: genetic diversity within a species, species diversity, and ecosystem diversity.\n\nIndia has about 2.4 per cent of the world's land but roughly 7 to 8 per cent of its recorded species. It is one of 17 megadiverse countries. Four of the world's 36 biodiversity hotspots lie wholly or partly in India: the Himalaya, Indo-Burma, the Western Ghats and Sri Lanka, and Sundaland (which includes the Nicobar Islands).\n\nA hotspot, as defined by Norman Myers and Conservation International, must have at least 1,500 endemic vascular plant species and must have lost at least 70 per cent of its original habitat."
+        },
+        {
+          "head": "Protected areas under Indian law",
+          "body": "The Wildlife (Protection) Act, 1972 provides for four kinds of protected area. National parks have the strictest protection; no rights of people are allowed inside. Wildlife sanctuaries allow some activities, such as grazing, where the authorities permit. Conservation reserves and community reserves were added by the 2002 amendment; they protect land owned by the Government or by communities, often next to existing parks.\n\nTiger reserves are notified under the same Act on the advice of the National Tiger Conservation Authority (NTCA), set up by a 2006 amendment. Project Tiger began in 1973. Project Elephant began in 1992; elephant reserves are administrative, not statutory.\n\nBiosphere reserves follow UNESCO's Man and the Biosphere (MAB) programme of 1971. They have a core, a buffer and a transition zone. India has 18 biosphere reserves, and several of them are in UNESCO's world network; check the current count. Ramsar sites are wetlands of international importance; India's list has grown fast and changes often."
+        },
+        {
+          "head": "The IUCN Red List",
+          "body": "The International Union for Conservation of Nature (IUCN) publishes the Red List of Threatened Species. Its categories, from worst to best, are: Extinct; Extinct in the Wild; Critically Endangered; Endangered; Vulnerable; Near Threatened; Least Concern. Data Deficient and Not Evaluated cover species without enough information.\n\nCritically Endangered, Endangered and Vulnerable are together the 'threatened' categories. Indian examples often asked include the Great Indian Bustard (Critically Endangered) and the Gharial (Critically Endangered). The Red List is updated often, so always check a species' current status.\n\nThe Red List has no legal force. Protection in India comes from the schedules of the Wildlife (Protection) Act, which were reduced to four in the 2022 amendment."
+        },
+        {
+          "head": "The conventions",
+          "body": "The Convention on Biological Diversity (CBD) was opened for signature at the Rio Earth Summit in 1992. It has three goals: conservation, sustainable use, and fair sharing of benefits from genetic resources. Under it, the Cartagena Protocol (2000) deals with living modified organisms, and the Nagoya Protocol (2010) with access and benefit sharing. The Kunming-Montreal Global Biodiversity Framework (2022) set targets for 2030, including '30 by 30', protecting 30 per cent of land and sea.\n\nIndia's Biological Diversity Act, 2002 implements the CBD. It has three tiers: the National Biodiversity Authority (in Chennai), State Biodiversity Boards, and Biodiversity Management Committees at the local level, which keep People's Biodiversity Registers.\n\nOther conventions: Ramsar (1971, signed at Ramsar in Iran) for wetlands; CITES (1973, Washington) for trade in endangered species; and the Convention on Migratory Species (1979, Bonn). The 2022 amendment to the Wildlife (Protection) Act added provisions to implement CITES."
+        }
+      ],
+      "keyFacts": [
+        "India: about 2.4% of land, 7-8% of recorded species; one of 17 megadiverse countries.",
+        "Four of 36 hotspots: Himalaya, Indo-Burma, Western Ghats and Sri Lanka, Sundaland.",
+        "Wildlife (Protection) Act 1972: national parks, sanctuaries; conservation and community reserves added in 2002.",
+        "NTCA by the 2006 amendment; Project Tiger 1973; Project Elephant 1992.",
+        "IUCN threatened = Critically Endangered, Endangered, Vulnerable.",
+        "CBD 1992; Cartagena 2000; Nagoya 2010; Kunming-Montreal GBF 2022.",
+        "Biological Diversity Act 2002: NBA (Chennai), SBBs, BMCs."
+      ],
+      "examAngle": "Prelims asks the difference between a national park and a sanctuary, which protocol covers what, which bodies the Biological Diversity Act creates, and where a protected area lies. Mains asks about conflict between conservation and the rights of forest communities.",
+      "selfCheck": [
+        "What can be allowed in a sanctuary but not in a national park?",
+        "Which protocol deals with access and benefit sharing?",
+        "What are the three tiers under the Biological Diversity Act?"
+      ],
+      "sources": ["Wildlife (Protection) Act, 1972, as amended in 2022 (indiacode.nic.in)", "Ministry of Environment, Forest and Climate Change (moef.gov.in); NTCA (ntca.gov.in)", "IUCN Red List (iucnredlist.org)", "Convention on Biological Diversity (cbd.int)"],
+      "verify": "Check the number of Ramsar sites and of Indian biosphere reserves in UNESCO's network (both change often), the IUCN status of each species named, and the number of schedules after the 2022 amendment."
+    },
+    {
+      "id": "env-syl-laws",
+      "title": "Environmental laws and institutions in India",
+      "nodes": ["gs3-6", "pre-6"],
+      "gsPaper": "GS3",
+      "minutes": 9,
+      "dek": "By the end, you will know the constitutional basis, the main laws in order, the principles courts apply and who enforces what.",
+      "sections": [
+        {
+          "head": "The Constitution",
+          "body": "The original Constitution said little about the environment. The 42nd Amendment, 1976 added Article 48A, a Directive Principle that the State shall protect and improve the environment and safeguard forests and wildlife. It added Article 51A(g), a Fundamental Duty of every citizen to protect the natural environment and to have compassion for living creatures. It also moved forests and the protection of wild animals and birds from the State List to the Concurrent List.\n\nThe Supreme Court has read the right to a clean environment into the right to life under Article 21, for example in Subhash Kumar v State of Bihar (1991). Public interest cases brought by M.C. Mehta shaped much of Indian environmental law."
+        },
+        {
+          "head": "The main laws, in order",
+          "body": "The Wildlife (Protection) Act, 1972 protects species and creates protected areas.\n\nThe Water (Prevention and Control of Pollution) Act, 1974 set up the Central Pollution Control Board and the State boards. The Air (Prevention and Control of Pollution) Act, 1981 gave these boards powers over air pollution too.\n\nThe Forest (Conservation) Act, 1980 requires the Centre's approval before forest land is used for other purposes. A 2023 amendment renamed it the Van (Sanrakshan Evam Samvardhan) Adhiniyam.\n\nThe Environment (Protection) Act, 1986, passed after the Bhopal gas disaster of December 1984, is the umbrella law. It lets the Centre set standards and issue notifications, such as the Environment Impact Assessment notification of 2006 and the Coastal Regulation Zone notifications.\n\nLater laws include the Public Liability Insurance Act, 1991, the Biological Diversity Act, 2002, the Forest Rights Act, 2006, the National Green Tribunal Act, 2010 and the Compensatory Afforestation Fund Act, 2016."
+        },
+        {
+          "head": "Principles the courts apply",
+          "body": "The polluter pays principle: whoever causes pollution pays to repair the damage. The precautionary principle: where there is a threat of serious harm, lack of full scientific certainty is no reason to delay action. The Supreme Court accepted both as part of Indian law in Vellore Citizens' Welfare Forum v Union of India (1996).\n\nThe public trust doctrine: the State holds natural resources such as rivers, forests and the seashore in trust for the public and cannot hand them over for private use. The Court applied it in M.C. Mehta v Kamal Nath (1997).\n\nAbsolute liability: an enterprise engaged in a hazardous activity is absolutely liable for harm caused, with no exceptions. The Court laid this down in M.C. Mehta v Union of India (1987), the oleum gas leak case.\n\nIn T.N. Godavarman Thirumulpad v Union of India (from 1995), the Court held that 'forest' should be read in its dictionary sense, whatever the ownership."
+        },
+        {
+          "head": "Who enforces what",
+          "body": "The Ministry of Environment, Forest and Climate Change (MoEFCC) is the nodal ministry. The Central Pollution Control Board sets standards and advises; the State boards issue consents and enforce.\n\nThe National Green Tribunal (NGT) was set up in October 2010 under the NGT Act. Its principal bench is in New Delhi. It hears civil cases on substantial questions of the environment under seven listed laws, and must try to decide appeals within six months. Appeals from it lie to the Supreme Court.\n\nOther bodies: the National Tiger Conservation Authority, the Wildlife Crime Control Bureau, the National Biodiversity Authority, and the Commission for Air Quality Management in the National Capital Region and adjoining areas (set up under a 2021 Act).\n\nRecent amendments decriminalised some minor offences under the environment laws and replaced jail terms with penalties. Check which changes are in force before writing about them."
+        }
+      ],
+      "keyFacts": [
+        "42nd Amendment 1976: Article 48A, Article 51A(g); forests and wildlife to the Concurrent List.",
+        "Water Act 1974 created the CPCB; Air Act 1981; Forest (Conservation) Act 1980; EPA 1986 after Bhopal (1984).",
+        "EIA notification 2006 under the EPA.",
+        "Polluter pays and precautionary principles: Vellore Citizens' Welfare Forum (1996).",
+        "Public trust doctrine: M.C. Mehta v Kamal Nath (1997); absolute liability: oleum gas case (1987).",
+        "NGT: set up October 2010; principal bench New Delhi; appeals to the Supreme Court."
+      ],
+      "examAngle": "Prelims asks which Act set up the CPCB, which Amendment added Article 48A, and which case laid down which principle. Mains asks about EIA dilution, the NGT's role, and balancing development with protection.",
+      "selfCheck": [
+        "Which Act created the Central Pollution Control Board?",
+        "In which case did the Supreme Court adopt the polluter pays principle?",
+        "Where do appeals from the NGT go?"
+      ],
+      "sources": ["India Code (indiacode.nic.in) for the text of each Act", "Ministry of Environment, Forest and Climate Change (moef.gov.in)", "National Green Tribunal (greentribunal.gov.in)", "Central Pollution Control Board (cpcb.nic.in)"],
+      "verify": "Check case names and years, the NGT's seven scheduled laws, and which decriminalisation amendments (Jan Vishwas Act 2023, Water Amendment 2024) are in force."
+    },
+    {
+      "id": "env-syl-climate",
+      "title": "Climate change: the science, the UN regime and India's commitments",
+      "nodes": ["pre-6", "gs3-6"],
+      "gsPaper": "GS3",
+      "minutes": 10,
+      "dek": "By the end, you will know how the greenhouse effect works, how the climate treaties evolved, and what India has pledged.",
+      "sections": [
+        {
+          "head": "The science in brief",
+          "body": "The greenhouse effect is natural: gases in the atmosphere trap some of the heat the Earth radiates, keeping it warm enough for life. Burning fossil fuels and clearing forests have added greenhouse gases and strengthened the effect.\n\nThe main greenhouse gases are carbon dioxide, methane, nitrous oxide and fluorinated gases (HFCs, PFCs, SF6 and NF3). Global warming potential (GWP) compares how much heat a gas traps relative to carbon dioxide over a period, usually 100 years. Methane traps far more heat than carbon dioxide per tonne but stays in the air for a shorter time.\n\nThe Intergovernmental Panel on Climate Change (IPCC) was set up in 1988 by the World Meteorological Organization and the UN Environment Programme. Its Sixth Assessment Report (2021-2023) found that human activity has warmed the planet by about 1.1°C above 1850-1900 levels."
+        },
+        {
+          "head": "From Rio to Kyoto",
+          "body": "The UN Framework Convention on Climate Change (UNFCCC) was adopted in 1992 and opened for signature at the Rio Earth Summit. It came into force in 1994. Its key principle is 'common but differentiated responsibilities and respective capabilities' (CBDR-RC): all countries must act, but those that polluted most and can afford most must do more.\n\nThe Kyoto Protocol (1997, in force 2005) set binding emission targets only for developed countries listed in Annex I. It created market mechanisms, including the Clean Development Mechanism, which let developed countries earn credits from projects in developing countries. The United States never ratified it."
+        },
+        {
+          "head": "The Paris Agreement",
+          "body": "The Paris Agreement was adopted at COP21 in December 2015 and came into force on 4 November 2016. Its goal is to hold warming well below 2°C above pre-industrial levels, and to pursue efforts to limit it to 1.5°C.\n\nUnlike Kyoto, every country sets its own targets, called Nationally Determined Contributions (NDCs), and updates them every five years, each one more ambitious than the last. A global stocktake every five years checks collective progress; the first was completed at COP28 in Dubai in 2023. Article 6 sets rules for international carbon markets.\n\nMoney is the hardest issue. Developed countries had promised $100 billion a year by 2020. At COP29 in Baku (2024), a new goal was set of at least $300 billion a year by 2035. Check the outcomes of the latest COP before writing them in an answer."
+        },
+        {
+          "head": "India's commitments",
+          "body": "At COP26 in Glasgow (2021), India announced a net-zero target for 2070, as part of the 'Panchamrit' pledges.\n\nIndia's updated NDC of August 2022 commits it to reduce the emissions intensity of its GDP by 45 per cent from 2005 levels by 2030; to reach about 50 per cent of installed electric power capacity from non-fossil sources by 2030; and to create an additional carbon sink of 2.5 to 3 billion tonnes of CO2 equivalent through forest and tree cover by 2030. Reports in 2025 said India had already reached the 50 per cent non-fossil capacity mark; check this, and whether a new NDC for 2035 has been submitted.\n\nAt home, the National Action Plan on Climate Change (2008) set up national missions, including those on solar energy and enhanced energy efficiency. The Energy Conservation Act was amended in 2022 to allow a domestic carbon market. Mission LiFE (Lifestyle for Environment) promotes individual action.\n\nThe Kigali Amendment (2016) to the Montreal Protocol phases down HFCs, which do not harm the ozone layer but are strong greenhouse gases. India's phase-down starts later than that of developed countries."
+        }
+      ],
+      "keyFacts": [
+        "IPCC: 1988, by the WMO and UNEP; AR6 found about 1.1°C of warming.",
+        "UNFCCC: adopted 1992, in force 1994; principle CBDR-RC.",
+        "Kyoto: 1997, in force 2005; binding targets for Annex I only.",
+        "Paris: COP21 2015, in force 4 November 2016; NDCs every five years; first global stocktake 2023.",
+        "India: net zero by 2070; NDC 2022: 45% intensity cut from 2005, ~50% non-fossil capacity, 2.5-3 GtCO2e sink by 2030.",
+        "Kigali Amendment 2016 phases down HFCs."
+      ],
+      "examAngle": "Prelims asks which treaty set binding targets, what CBDR means, which gases a protocol covers, and India's NDC numbers. Mains asks about climate justice, finance and India's energy transition.",
+      "selfCheck": [
+        "How is the Paris Agreement different from the Kyoto Protocol?",
+        "What are India's three NDC targets for 2030?",
+        "Why do HFCs fall under an ozone treaty if they do not harm the ozone layer?"
+      ],
+      "sources": ["UNFCCC (unfccc.int), including India's updated NDC (2022)", "IPCC Sixth Assessment Report, Summary for Policymakers (ipcc.ch)", "Ministry of Environment, Forest and Climate Change (moef.gov.in); PIB releases on COP outcomes"],
+      "verify": "Date-sensitive: check whether India submitted a 2035 NDC, the date India reached 50% non-fossil capacity, and the outcomes of the latest COP (COP30, Belem, 2025)."
+    },
+    {
+      "id": "env-syl-pollution",
+      "title": "Pollution and waste: air, water, plastic and the rules",
+      "nodes": ["gs3-6", "pre-6"],
+      "gsPaper": "GS3",
+      "minutes": 9,
+      "dek": "By the end, you will know the main pollutants, how air quality is measured, what water pollution terms mean, and which rules govern waste.",
+      "sections": [
+        {
+          "head": "Air pollution",
+          "body": "The main air pollutants are particulate matter (PM10 and the finer PM2.5), nitrogen dioxide, sulphur dioxide, carbon monoxide, ozone, ammonia and lead. Ground-level ozone is a secondary pollutant: it is not emitted directly but forms when nitrogen oxides and volatile organic compounds react in sunlight.\n\nIndia's National Air Quality Index, launched in 2014, uses eight pollutants and six categories, from 'good' to 'severe'.\n\nThe National Clean Air Programme (NCAP), launched in January 2019, set cities a target to cut particulate pollution; the target was later raised and extended. In Delhi and the NCR, the Graded Response Action Plan (GRAP) tightens curbs in stages as air quality worsens. Vehicles moved from Bharat Stage IV to Bharat Stage VI emission norms in April 2020, skipping stage V.\n\nThe WHO's 2021 air quality guidelines set the annual guideline for PM2.5 at 5 micrograms per cubic metre, far stricter than India's national standard."
+        },
+        {
+          "head": "Water pollution",
+          "body": "Biochemical oxygen demand (BOD) is the oxygen micro-organisms need to break down the organic matter in water. High BOD means heavy organic pollution, such as sewage. Chemical oxygen demand (COD) measures all oxidisable matter, so COD is usually higher than BOD. Dissolved oxygen (DO) is what fish and other life breathe; it falls as pollution rises.\n\nEutrophication is the over-enrichment of a water body with nutrients, often nitrates and phosphates from fertilisers and sewage. It causes algal blooms, which use up oxygen when they die and decay, killing fish.\n\nBiomagnification is the rise in concentration of a persistent toxin, such as DDT or mercury, at each step up the food chain. Minamata disease, caused by mercury in fish in Japan, is the classic case; the Minamata Convention (2013) controls mercury."
+        },
+        {
+          "head": "The waste rules",
+          "body": "Most waste rules are made under the Environment (Protection) Act, 1986.\n\nThe Solid Waste Management Rules, 2016 require segregation at source into wet, dry and hazardous waste. The Plastic Waste Management Rules, 2016 introduced extended producer responsibility (EPR) for plastic packaging; an amendment banned identified single-use plastic items from 1 July 2022. The E-Waste (Management) Rules, 2022 made producers responsible for collecting and recycling e-waste. There are separate rules for bio-medical waste, construction and demolition waste, and hazardous waste.\n\nThe Swachh Bharat Mission (2014) focused first on toilets and open-defecation-free status, and then on solid and liquid waste management. Waste rules are revised often; check that each set is still the one in force."
+        },
+        {
+          "head": "Chemicals and the conventions",
+          "body": "Three global conventions deal with hazardous chemicals and waste. The Basel Convention (1989) controls the movement of hazardous waste across borders. The Rotterdam Convention (1998) requires prior informed consent before certain hazardous chemicals and pesticides are exported. The Stockholm Convention (2001) aims to eliminate or restrict persistent organic pollutants (POPs), such as DDT and PCBs.\n\nThe Vienna Convention (1985) and the Montreal Protocol (1987) protect the ozone layer by phasing out ozone-depleting substances such as CFCs. The Montreal Protocol is often called the most successful environmental treaty, because every UN member has ratified it and the ozone layer is recovering."
+        }
+      ],
+      "keyFacts": [
+        "National AQI (2014): eight pollutants, six categories.",
+        "Ground-level ozone is a secondary pollutant.",
+        "NCAP launched January 2019; GRAP for Delhi-NCR; BS-VI from April 2020.",
+        "WHO 2021 guideline for annual PM2.5: 5 µg/m³.",
+        "High BOD = heavy organic pollution; COD is usually higher than BOD.",
+        "Single-use plastic items banned from 1 July 2022.",
+        "Basel 1989 (waste trade), Rotterdam 1998 (prior informed consent), Stockholm 2001 (POPs), Montreal 1987 (ozone)."
+      ],
+      "examAngle": "Prelims asks which pollutants are in the AQI, what BOD shows, and which convention covers what. Mains asks why Indian cities stay polluted despite plans, and how to make EPR work.",
+      "selfCheck": [
+        "Why is ground-level ozone called a secondary pollutant?",
+        "What does a high BOD tell you?",
+        "Which convention deals with persistent organic pollutants?"
+      ],
+      "sources": ["Central Pollution Control Board, National AQI and NCAP (cpcb.nic.in)", "Ministry of Environment, Forest and Climate Change, waste management rules (moef.gov.in)", "WHO Global Air Quality Guidelines, 2021 (who.int)", "NCERT Class XII Biology (rationalised), environmental issues material"],
+      "verify": "Check the current NCAP target and year, whether the 2016 solid waste rules have been replaced by newer rules, and the plastic carry-bag thickness rules."
+    },
+    {
+      "id": "env-syl-disaster",
+      "title": "Disaster management in India: the law, the institutions and the Sendai Framework",
+      "nodes": ["gs3-7", "gs1-9"],
+      "gsPaper": "GS3",
+      "minutes": 8,
+      "dek": "By the end, you will know India's hazard profile, who does what under the 2005 Act, how disasters are funded and what the Sendai Framework asks.",
+      "sections": [
+        {
+          "head": "India's hazard profile",
+          "body": "India is exposed to almost every kind of natural hazard. According to the National Disaster Management Authority, a large part of the landmass is prone to earthquakes of moderate to very high intensity; about 12 per cent of the land is prone to floods and river erosion; most of the long coastline is exposed to cyclones and tsunamis; and a large share of the cultivable area is vulnerable to drought. The Himalaya add landslides and avalanches.\n\nA hazard becomes a disaster when it meets vulnerable people. Poor housing, crowded cities, and settlements on floodplains and slopes turn an event into a disaster. That is why the modern approach stresses reducing risk before an event, not only relief afterwards."
+        },
+        {
+          "head": "The Disaster Management Act, 2005",
+          "body": "The Act, passed after the 2004 Indian Ocean tsunami, set up a three-tier structure.\n\nThe National Disaster Management Authority (NDMA) is chaired by the Prime Minister and lays down policies, plans and guidelines. A State Disaster Management Authority (SDMA) is chaired by the Chief Minister. A District Disaster Management Authority (DDMA) is chaired by the District Collector or District Magistrate, with the elected head of the local body as co-chairperson.\n\nThe National Executive Committee, chaired by the Union Home Secretary, helps the NDMA. The National Institute of Disaster Management handles training and research. The National Disaster Response Force (NDRF), a specialised force, was raised in 2006 under the Act. The Ministry of Home Affairs is the nodal ministry for most disasters, while drought falls under the Ministry of Agriculture.\n\nThe Act was amended in 2025; check what the amendment changed before writing about it."
+        },
+        {
+          "head": "Money for disasters",
+          "body": "The Act provides for a National Disaster Response Fund and a State Disaster Response Fund in each state, for relief. The Fifteenth Finance Commission also recommended mitigation funds at national and state level, so that money goes to reducing risk, not only to relief.\n\nThe size of these funds and the share between the Centre and states follow the Finance Commission's recommendations. Relief norms are set by the Centre."
+        },
+        {
+          "head": "The global frameworks",
+          "body": "The Hyogo Framework for Action ran from 2005 to 2015. The Sendai Framework for Disaster Risk Reduction, adopted in 2015, runs from 2015 to 2030. It has seven global targets, such as reducing disaster deaths and economic losses and increasing early warning coverage, and four priorities: understanding disaster risk; strengthening disaster risk governance; investing in risk reduction for resilience; and enhancing preparedness for effective response, and to 'build back better' in recovery.\n\nIndia's first National Disaster Management Plan (2016) was aligned with Sendai. India launched the Coalition for Disaster Resilient Infrastructure (CDRI) in 2019, at the UN Climate Action Summit.\n\nEarly warning has saved many lives. The India Meteorological Department warns of cyclones; the Indian National Centre for Ocean Information Services (INCOIS) in Hyderabad runs the Indian Tsunami Early Warning Centre, set up in 2007. Better warnings and evacuation are why deaths from cyclones in Odisha fell sharply after the 1999 super cyclone."
+        }
+      ],
+      "keyFacts": [
+        "DM Act 2005: NDMA (PM), SDMA (CM), DDMA (Collector, with local body head as co-chair).",
+        "National Executive Committee chaired by the Union Home Secretary.",
+        "NDRF (the force) raised in 2006; MHA is the nodal ministry, drought is with Agriculture.",
+        "Sendai Framework 2015-2030: seven targets, four priorities.",
+        "First National Disaster Management Plan: 2016; CDRI launched by India in 2019.",
+        "INCOIS (Hyderabad) runs the tsunami early warning centre, set up in 2007."
+      ],
+      "examAngle": "Prelims asks who chairs which authority, what the Sendai priorities are, and what CDRI is. Mains asks how to move from relief to risk reduction, with examples like Odisha's cyclone record and urban floods.",
+      "selfCheck": [
+        "Who chairs the DDMA, and who is its co-chair?",
+        "Name two of the Sendai Framework's four priorities.",
+        "Why did cyclone deaths in Odisha fall after 1999?"
+      ],
+      "sources": ["Disaster Management Act, 2005 (indiacode.nic.in)", "National Disaster Management Authority and National Disaster Management Plan (ndma.gov.in)", "UNDRR, Sendai Framework for Disaster Risk Reduction 2015-2030 (undrr.org)", "INCOIS (incois.gov.in)"],
+      "verify": "Check the NDMA's hazard percentages before adding numbers (only the 12% flood figure is quoted), and what the Disaster Management (Amendment) Act, 2025 changed."
+    }
+  ]
+}

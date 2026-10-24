@@ -1,0 +1,355 @@
+{
+  "schema": "upsc-pods/syllabus-notes@1",
+  "subject": "geo",
+  "topic": "Geography",
+  "note": "One note per major Geography topic of the syllabus. English only. Drafts: an editor checks every figure before approving. Pack with server/scripts/syllabus.mjs.",
+  "notes": [
+    {
+      "id": "geo-syl-earth-interior",
+      "title": "The Earth's interior and plate tectonics",
+      "nodes": ["gs1-7", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 8,
+      "dek": "By the end, you will know the layers of the Earth, how seismic waves reveal them, and how continental drift became plate tectonics.",
+      "sections": [
+        {
+          "head": "Layers of the Earth",
+          "body": "No one can drill to the Earth's centre, so most of what we know comes from indirect evidence, chiefly seismic waves.\n\nThe crust is the thin outer shell. Oceanic crust is thinner (about 5 km) and denser; continental crust is thicker (about 30 km on average, and much more under big mountain ranges). The mantle extends to a depth of about 2,900 km. Its upper part includes the asthenosphere, a weak, partly molten zone on which the plates move. The crust and the uppermost mantle together form the rigid lithosphere.\n\nThe core extends from about 2,900 km to the centre, at about 6,371 km. The outer core is liquid; the inner core is solid. The core is made mostly of nickel and iron.\n\nBoundaries between layers are called discontinuities: the Mohorovičić (Moho) between crust and mantle, the Gutenberg between mantle and core, and the Lehmann between outer and inner core."
+        },
+        {
+          "head": "What seismic waves show",
+          "body": "Earthquakes send out body waves, P and S, and surface waves.\n\nP waves (primary) are the fastest and arrive first. They are compressional and travel through solids, liquids and gases. S waves (secondary) are slower and shake the ground at right angles to their direction. They cannot travel through liquids.\n\nThis is how we know the outer core is liquid. S waves do not reach the far side of the Earth: beyond about 105° from the epicentre, no S waves are recorded. P waves bend as they pass through the core, leaving a shadow zone between about 105° and 145° from the epicentre. Surface waves arrive last and do the most damage."
+        },
+        {
+          "head": "From drift to plate tectonics",
+          "body": "Alfred Wegener proposed continental drift in 1912. He argued that all continents once formed one supercontinent, Pangaea, surrounded by one ocean, Panthalassa. His evidence: the jigsaw fit of South America and Africa; rocks of the same age on both sides of the Atlantic; tillite (glacial deposits) in India, Africa, South America and Australia; and fossils such as Mesosaurus and the plant Glossopteris on continents now far apart. He could not explain what force moved the continents, so the idea was not widely accepted.\n\nAfter the Second World War, mapping of the ocean floor changed the picture. Harry Hess proposed sea-floor spreading in the early 1960s: new crust forms at mid-ocean ridges and spreads outward. Rocks are youngest at the ridges and older away from them; bands of magnetic reversals are symmetric on either side. The ocean floor is nowhere older than about 200 million years, much younger than the continents.\n\nThe theory of plate tectonics, set out in the late 1960s, joined these ideas: the lithosphere is broken into large and small plates that move over the asthenosphere."
+        },
+        {
+          "head": "Plate boundaries and India",
+          "body": "Plates meet at three kinds of boundary. At divergent boundaries, they move apart and new crust forms, as at the Mid-Atlantic Ridge. At convergent boundaries, they move together: one plate may sink under another (subduction), making deep trenches, volcanoes and earthquakes, as around the Pacific; or two continents may collide and build mountains. At transform boundaries, plates slide past each other, as at the San Andreas Fault.\n\nThe Indian plate broke away from Gondwana and moved north. It began to collide with the Eurasian plate roughly 40 to 50 million years ago, raising the Himalaya, which are still rising. The Indian plate is still moving north by a few centimetres a year, which is why the Himalayan region has frequent earthquakes."
+        }
+      ],
+      "keyFacts": [
+        "Crust: oceanic ~5 km, continental ~30 km average; mantle to ~2,900 km; centre at ~6,371 km.",
+        "Outer core liquid, inner core solid; mostly nickel and iron.",
+        "Moho (crust-mantle), Gutenberg (mantle-core), Lehmann (outer-inner core).",
+        "S waves cannot pass through liquids; no S waves beyond ~105°; P-wave shadow zone ~105°-145°.",
+        "Wegener 1912: Pangaea; evidence from fit, rocks, tillite, Mesosaurus and Glossopteris fossils.",
+        "Sea-floor spreading: Harry Hess, early 1960s; ocean floor no older than ~200 million years.",
+        "India-Eurasia collision began roughly 40-50 million years ago."
+      ],
+      "examAngle": "Prelims asks which waves pass through liquids, which discontinuity lies where, and what evidence Wegener used. Mains asks how plate tectonics explains earthquakes and volcanoes, often with India's Himalaya as the example.",
+      "selfCheck": [
+        "How do S waves prove that the outer core is liquid?",
+        "What could Wegener not explain?",
+        "Give an example of each of the three types of plate boundary."
+      ],
+      "sources": ["NCERT Class XI Fundamentals of Physical Geography, chapters on the interior of the Earth and the distribution of oceans and continents"],
+      "verify": "Check the shadow-zone angles and the crust thickness figures against the current NCERT edition."
+    },
+    {
+      "id": "geo-syl-atmosphere",
+      "title": "The atmosphere: layers, pressure belts and planetary winds",
+      "nodes": ["gs1-7", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 9,
+      "dek": "By the end, you will know what the air is made of, its layers, how pressure belts form and why winds blow the way they do.",
+      "sections": [
+        {
+          "head": "Composition and layers",
+          "body": "Dry air is about 78 per cent nitrogen, 21 per cent oxygen and just under 1 per cent argon. Carbon dioxide is only about 0.04 per cent but matters greatly for climate. Water vapour varies from almost nothing in deserts to a few per cent in the humid tropics. Dust particles act as nuclei on which water vapour condenses into clouds.\n\nThe troposphere is the lowest layer, where weather happens. It is about 8 km thick at the poles and about 18 km at the equator, because strong convection carries heat higher there. Temperature falls with height by about 6.5°C per km, the normal lapse rate. The tropopause marks its top.\n\nThe stratosphere above holds the ozone layer, which absorbs ultraviolet radiation; temperature rises with height here. The mesosphere is the coldest layer. The thermosphere includes the ionosphere, which reflects radio waves back to Earth. The exosphere is the outermost layer."
+        },
+        {
+          "head": "Heating the Earth",
+          "body": "The Earth receives energy from the Sun as short-wave radiation (insolation). It is not heated evenly: the tropics receive more because the Sun's rays strike them more directly. Albedo is the share of radiation reflected; snow and ice have high albedo, forests and oceans low.\n\nThe Earth radiates heat back as long-wave radiation, which greenhouse gases absorb. Over a year, the Earth's heat budget balances: what comes in goes out.\n\nNormally air cools with height. A temperature inversion is when it warms with height instead, usually on long, clear, calm winter nights when the ground loses heat fast. Inversions trap smoke and dust near the ground, one reason winter smog is worse in north Indian cities."
+        },
+        {
+          "head": "Pressure belts and the forces on winds",
+          "body": "Wind blows from high to low pressure. Around the globe there are bands of pressure: the equatorial low (the doldrums, where hot air rises); the subtropical highs near 30° N and S (the horse latitudes, where air sinks); the subpolar lows near 60°; and the polar highs.\n\nThe pressure gradient force starts the wind. The Coriolis force, caused by the Earth's rotation, deflects winds to the right in the Northern Hemisphere and to the left in the Southern Hemisphere. It is zero at the equator and greatest at the poles, which is why cyclones do not form right on the equator. Friction slows winds near the surface.\n\nThe band where the trade winds of both hemispheres meet is the Inter-Tropical Convergence Zone (ITCZ). It moves north and south with the Sun, and its shift north over India in summer is part of the monsoon."
+        },
+        {
+          "head": "Planetary and local winds",
+          "body": "The trade winds blow from the subtropical highs toward the equator, from the north-east in the Northern Hemisphere and the south-east in the Southern. The westerlies blow from the subtropical highs toward the subpolar lows; in the Southern Hemisphere, with little land to slow them, they are strong (the 'Roaring Forties'). The polar easterlies blow from the polar highs.\n\nThe three-cell model explains this pattern: the Hadley cell in the tropics, the Ferrel cell in the middle latitudes, and the polar cell. Jet streams are fast, narrow bands of wind high in the troposphere; the subtropical westerly jet and the tropical easterly jet both affect India's monsoon.\n\nLocal winds are often asked: the Loo, a hot dry wind of north India in May and June; the Chinook in the Rockies and the Foehn in the Alps, warm dry winds on the leeward side of mountains; the Mistral, a cold wind down the Rhône valley; the Sirocco, a hot wind from the Sahara toward southern Europe; and the Harmattan, a dry dusty wind of West Africa."
+        }
+      ],
+      "keyFacts": [
+        "Air: ~78% nitrogen, ~21% oxygen, ~0.93% argon, ~0.04% CO2.",
+        "Troposphere: ~8 km at the poles, ~18 km at the equator; lapse rate ~6.5°C per km.",
+        "Ozone layer in the stratosphere; the mesosphere is the coldest layer; the ionosphere reflects radio waves.",
+        "Coriolis: right in the NH, left in the SH; zero at the equator.",
+        "Pressure belts: equatorial low, subtropical high (~30°), subpolar low (~60°), polar high.",
+        "Trade winds, westerlies (Roaring Forties), polar easterlies; Hadley, Ferrel and polar cells.",
+        "Loo (north India), Chinook (Rockies), Foehn (Alps), Mistral (Rhône), Sirocco (Sahara), Harmattan (West Africa)."
+      ],
+      "examAngle": "Prelims asks which layer has which feature, why the troposphere is thicker at the equator, what the Coriolis force does, and where local winds blow. Mains links these to the monsoon and to winter smog.",
+      "selfCheck": [
+        "Why is the troposphere thicker at the equator than at the poles?",
+        "Why don't cyclones form right on the equator?",
+        "What is a temperature inversion, and why does it worsen smog?"
+      ],
+      "sources": ["NCERT Class XI Fundamentals of Physical Geography, chapters on the atmosphere, solar radiation and atmospheric circulation", "India Meteorological Department (mausam.imd.gov.in)"],
+      "verify": "Check composition percentages and troposphere heights against the current NCERT edition."
+    },
+    {
+      "id": "geo-syl-monsoon",
+      "title": "Climate of India: the monsoon, its seasons, El Nino and the IOD",
+      "nodes": ["gs1-7", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 9,
+      "dek": "By the end, you will know what controls India's climate, its four seasons, how the monsoon advances, and how El Nino and the IOD affect it.",
+      "sections": [
+        {
+          "head": "What controls India's climate",
+          "body": "India has a tropical monsoon climate. Its main controls are latitude (the Tropic of Cancer runs through the middle of the country), the Himalaya, which block cold winds from Central Asia and trap the monsoon, the distribution of land and sea, and the winds high above.\n\nIn summer the land heats faster than the sea. A low-pressure area forms over north-west India, and the ITCZ shifts north over the Ganga plain. The south-east trade winds of the Southern Hemisphere cross the equator, turn right under the Coriolis force, and arrive as the south-west monsoon. Heating of the Tibetan Plateau and the tropical easterly jet stream high above help strengthen the monsoon; the subtropical westerly jet must shift north of the Himalaya before it sets in."
+        },
+        {
+          "head": "Four seasons",
+          "body": "The India Meteorological Department (IMD) recognises four seasons. Winter (December to February in common usage; IMD's winter season is January-February) is cold and dry in the north. Western disturbances, storms from the Mediterranean region, bring winter rain and snow to the north-west, which helps the rabi crop.\n\nThe hot season, March to May, brings the Loo in the north. Pre-monsoon showers have local names: 'mango showers' in Kerala and coastal Karnataka, 'cherry blossom' showers for coffee in Karnataka, and 'Kalbaisakhi', violent evening thunderstorms in Bengal and Assam.\n\nThe south-west monsoon, June to September, brings most of India's rain. The post-monsoon or retreating monsoon season, October to December, brings rain to the Coromandel coast of Tamil Nadu, which gets much of its rain from the north-east monsoon."
+        },
+        {
+          "head": "How the monsoon advances",
+          "body": "The monsoon's normal onset over Kerala is around 1 June. It arrives in two branches. The Arabian Sea branch hits the Western Ghats and gives heavy rain to the windward western slopes; the leeward side, such as interior Karnataka and Maharashtra, lies in a rain shadow. The Bay of Bengal branch moves into the north-east and then turns west along the Himalaya, up the Ganga plain. Mawsynram and Cherrapunji in Meghalaya, on the windward slopes of the Khasi Hills, are among the wettest places on Earth.\n\nThe monsoon normally covers the whole country by early July and begins to withdraw from north-west India in September. Rain falls in spells, with 'breaks' when the monsoon trough shifts toward the Himalaya.\n\nThe IMD measures the season's rain against the long period average (LPA). Rainfall of 96 to 104 per cent of the LPA is 'normal'."
+        },
+        {
+          "head": "El Nino, La Nina and the IOD",
+          "body": "El Nino is the unusual warming of the central and eastern tropical Pacific. It tends to weaken the Indian monsoon, and many of India's droughts have come in El Nino years. But not every El Nino year is a drought year; in 1997, a strong El Nino year, India's rainfall was normal. La Nina, the cooling phase, often goes with good monsoons. The whole cycle is called ENSO (El Nino-Southern Oscillation).\n\nThe Indian Ocean Dipole (IOD) compares sea temperatures in the western and eastern Indian Ocean. A positive IOD (a warmer west) tends to help the Indian monsoon and can offset an El Nino. The Madden-Julian Oscillation, an eastward-moving band of clouds and rain, affects the monsoon over weeks.\n\nForecasters therefore watch both oceans, not only the Pacific."
+        }
+      ],
+      "keyFacts": [
+        "Tropic of Cancer crosses India; the Himalaya block cold Central Asian winds.",
+        "Western disturbances bring winter rain to the north-west (good for rabi crops).",
+        "Mango showers (Kerala, coastal Karnataka), cherry blossom (Karnataka coffee), Kalbaisakhi (Bengal, Assam).",
+        "Normal onset over Kerala ~1 June; Arabian Sea and Bay of Bengal branches.",
+        "Tamil Nadu's Coromandel coast gets much of its rain from the north-east monsoon (October-December).",
+        "Normal season = 96-104% of the LPA.",
+        "El Nino tends to weaken the monsoon; a positive IOD tends to help it."
+      ],
+      "examAngle": "Prelims asks why Tamil Nadu gets winter rain, what local showers are called, and how El Nino and the IOD affect rain. Mains asks how the monsoon shapes agriculture and how climate change is altering it.",
+      "selfCheck": [
+        "Why does Tamil Nadu get much of its rain in October-December?",
+        "What are western disturbances, and which crop do they help?",
+        "Can a positive IOD offset an El Nino? Explain."
+      ],
+      "sources": ["NCERT Class XI India: Physical Environment, chapter on climate", "NCERT Class IX Contemporary India I, chapter on climate", "India Meteorological Department monsoon reports (mausam.imd.gov.in)"],
+      "verify": "Overlaps the existing long read geo-indian-monsoon-mechanism: the editor may approve only one. Check IMD's normal onset and coverage dates and the LPA 'normal' band (96-104%) against IMD's current definitions."
+    },
+    {
+      "id": "geo-syl-oceans",
+      "title": "Oceans: relief, temperature, salinity, currents and tides",
+      "nodes": ["gs1-7", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 8,
+      "dek": "By the end, you will know the shape of the ocean floor, how temperature and salinity vary, which currents are warm or cold, and why tides happen.",
+      "sections": [
+        {
+          "head": "The ocean floor",
+          "body": "From the coast outward, the ocean floor has four main zones. The continental shelf is the shallow, gently sloping edge of the continent; it holds most fishing grounds and offshore oil and gas, such as Mumbai High. The continental slope drops steeply to the deep ocean. The continental rise is a gentler slope at its foot. The deep sea plain, or abyssal plain, is the flattest part of the Earth's surface.\n\nOcean deeps, or trenches, are the deepest parts, found mostly in the Pacific where plates subduct. The Mariana Trench's Challenger Deep is about 11 km deep. Mid-ocean ridges are underwater mountain chains where new crust forms; Iceland is part of the Mid-Atlantic Ridge above the sea."
+        },
+        {
+          "head": "Temperature and salinity",
+          "body": "Ocean temperature is highest at the surface in the tropics and falls toward the poles. It also falls with depth. The thermocline is the layer where temperature drops sharply; below it the water is cold and stable.\n\nSalinity is the amount of dissolved salt, measured in parts per thousand (‰). The average is about 35 ‰. Salinity is high where evaporation is high and freshwater inflow is low, as in the Red Sea and the Persian Gulf. It is low where rivers pour in or ice melts, as in the Baltic Sea. Inland water bodies can be far saltier: the Dead Sea and Lake Van in Turkey are examples."
+        },
+        {
+          "head": "Ocean currents",
+          "body": "Ocean currents are driven by the planetary winds, by differences in temperature and salinity (and so density), and by the Coriolis force. Warm currents flow from the tropics toward the poles; cold currents flow from the poles toward the equator.\n\nWarm currents include the Gulf Stream and the North Atlantic Drift, the Kuroshio, the Brazil current, the East Australian current and the Agulhas current. Cold currents include the Labrador, the Oyashio, the Canary, the Benguela, the Peru (Humboldt), the California and the West Australian currents.\n\nTwo patterns are often asked. Where warm and cold currents meet, plankton thrive and there are rich fishing grounds, such as the Grand Banks off Newfoundland (Gulf Stream and Labrador current) and the waters off Japan (Kuroshio and Oyashio). Cold currents along the west coasts of continents in the tropics cool and dry the air, helping form deserts such as the Atacama (Peru current) and the Namib (Benguela current).\n\nIn the north Indian Ocean, currents reverse direction with the monsoon winds."
+        },
+        {
+          "head": "Tides and coral reefs",
+          "body": "Tides are the regular rise and fall of the sea, caused mainly by the Moon's gravity and partly by the Sun's. Spring tides, the highest, come at new moon and full moon, when the Sun, Moon and Earth are in line. Neap tides, the lowest range, come when the Sun and Moon are at right angles, at the first and last quarter. The Bay of Fundy in Canada has the world's highest tidal range. In India, the Gulfs of Khambhat and Kutch have high tidal ranges and potential for tidal energy.\n\nCoral reefs grow in warm (about 20°C or more), shallow, clear, salty water. Corals live with algae that give them food and colour. When water gets too warm, corals expel the algae and turn white, which is called bleaching. India's reefs include those of the Gulf of Mannar, the Gulf of Kutch, Lakshadweep and the Andaman and Nicobar Islands."
+        }
+      ],
+      "keyFacts": [
+        "Ocean floor: continental shelf, slope, rise, abyssal plain; plus trenches and ridges.",
+        "Challenger Deep (Mariana Trench): about 11 km deep.",
+        "Average salinity ~35 ‰; high in the Red Sea, low in the Baltic.",
+        "Warm: Gulf Stream, Kuroshio, Brazil, East Australian, Agulhas. Cold: Labrador, Oyashio, Canary, Benguela, Peru, California, West Australian.",
+        "Warm and cold currents meet at rich fishing grounds (Grand Banks; off Japan).",
+        "Cold currents help form west coast deserts: Atacama (Peru), Namib (Benguela).",
+        "Spring tides at new and full moon; neap tides at the quarters; Bay of Fundy has the highest range."
+      ],
+      "examAngle": "Prelims asks which currents are warm or cold, which seas are saltiest, and when spring tides occur. Mains asks how currents affect climate, fishing and coastal deserts.",
+      "selfCheck": [
+        "Why are the Grand Banks such rich fishing grounds?",
+        "Which current helps form the Namib desert?",
+        "Why do spring tides occur at new moon and full moon?"
+      ],
+      "sources": ["NCERT Class XI Fundamentals of Physical Geography, chapters on water (oceans) and movements of ocean water"],
+      "verify": "Check the coral temperature threshold and salinity examples against the current NCERT edition."
+    },
+    {
+      "id": "geo-syl-hazards",
+      "title": "Earthquakes, tsunamis, volcanoes and cyclones",
+      "nodes": ["gs1-9", "gs3-7", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 9,
+      "dek": "By the end, you will know how each hazard forms, how it is measured, and where India is most at risk.",
+      "sections": [
+        {
+          "head": "Earthquakes",
+          "body": "An earthquake is a sudden release of energy along a fault, usually as plates move. The point inside the Earth where it starts is the focus, or hypocentre; the point on the surface directly above it is the epicentre.\n\nMagnitude measures the energy released. The Richter scale is logarithmic: each whole number is about ten times greater in amplitude and about 32 times more in energy. Scientists now usually use the moment magnitude scale. Intensity measures the damage and shaking felt at a place, on the Modified Mercalli scale.\n\nThe Bureau of Indian Standards maps India into seismic zones, with the highest zone covering the north-east, the Himalayan states, the Rann of Kutch and the Andaman and Nicobar Islands. Check the current version of the zonation map, which has been revised."
+        },
+        {
+          "head": "Tsunamis",
+          "body": "A tsunami is a series of long waves caused by a sudden displacement of a large volume of water, usually by an undersea earthquake that lifts or drops the sea floor. Landslides and volcanic eruptions can also cause them.\n\nIn the deep ocean, tsunami waves are low but very fast, moving at hundreds of kilometres an hour. As they reach shallow water near the coast, they slow down and grow tall. The sea often draws back first, exposing the shore, a warning sign.\n\nThe Indian Ocean tsunami of 26 December 2004, set off by a very large earthquake off Sumatra, killed people in many countries, including India. India then set up the Indian Tsunami Early Warning Centre at INCOIS, Hyderabad, in 2007."
+        },
+        {
+          "head": "Volcanoes",
+          "body": "A volcano is an opening through which magma, gases and ash reach the surface. Shield volcanoes, such as those of Hawaii, are broad and gently sloping, built by runny basalt lava. Composite volcanoes (stratovolcanoes), such as Mount Fuji and Vesuvius, are steep, built of layers of lava and ash, and erupt explosively. A caldera is a large crater formed when a volcano collapses after an eruption. Flood basalts are vast sheets of lava from fissures; the Deccan Traps are an example.\n\nMost volcanoes lie along plate boundaries, especially the Pacific 'Ring of Fire'. India's only active volcano is Barren Island in the Andaman Sea; Narcondam nearby is considered dormant."
+        },
+        {
+          "head": "Tropical cyclones",
+          "body": "Tropical cyclones are intense low-pressure systems with strong winds spiralling inward. They need: a large warm sea surface, usually above about 27°C; enough Coriolis force, so they do not form within about 5° of the equator; low vertical wind shear; a pre-existing weak low; and upper-level divergence to carry the rising air away.\n\nThe eye at the centre is calm and clear, surrounded by the eyewall, where winds and rain are strongest. Cyclones weaken over land because they lose their supply of warm, moist air.\n\nThey are called hurricanes in the Atlantic and north-east Pacific, typhoons in the north-west Pacific, and cyclones in the Indian Ocean. The Bay of Bengal gets more cyclones than the Arabian Sea, partly because its water is warmer. Cyclones in the north Indian Ocean are named from a list prepared by a panel of countries, coordinated by the IMD's Regional Specialised Meteorological Centre in New Delhi. Storm surge, the rise of the sea pushed by the wind, causes most cyclone deaths."
+        }
+      ],
+      "keyFacts": [
+        "Focus (hypocentre) is underground; the epicentre is on the surface above it.",
+        "Magnitude (energy; Richter, moment magnitude) vs intensity (damage; Modified Mercalli).",
+        "Each whole step on the Richter scale: ~10× amplitude, ~32× energy.",
+        "Tsunami: fast and low in the deep sea, slow and tall near the coast; 2004 Indian Ocean tsunami; ITEWC at INCOIS (2007).",
+        "Shield (Hawaii) vs composite (Fuji, Vesuvius); Deccan Traps are flood basalts; Barren Island is India's only active volcano.",
+        "Cyclone conditions: SST above ~27°C, Coriolis (not within ~5° of the equator), low wind shear.",
+        "Storm surge causes most cyclone deaths; the Bay of Bengal gets more cyclones than the Arabian Sea."
+      ],
+      "examAngle": "Prelims asks what magnitude and intensity measure, why cyclones need Coriolis force, and where India's active volcano is. Mains asks why the Himalaya and the east coast are so exposed, and how warnings save lives.",
+      "selfCheck": [
+        "What is the difference between magnitude and intensity?",
+        "Why do cyclones weaken after landfall?",
+        "Why are tsunamis hard to notice in the deep ocean?"
+      ],
+      "sources": ["NCERT Class XI Fundamentals of Physical Geography, chapters on the interior of the Earth, landforms and atmospheric circulation", "NCERT Class XI India: Physical Environment, chapter on natural hazards and disasters", "India Meteorological Department (mausam.imd.gov.in); INCOIS (incois.gov.in); Bureau of Indian Standards"],
+      "verify": "Check whether the BIS seismic zonation map has been revised (and whether the highest zone is still Zone V), the cyclone SST threshold, and the Richter energy multiple."
+    },
+    {
+      "id": "geo-syl-physiography",
+      "title": "Physiography and drainage of India: mountains, plains, plateau and rivers",
+      "nodes": ["pre-3", "gs1-7"],
+      "gsPaper": "GS1",
+      "minutes": 10,
+      "dek": "By the end, you will know India's location, its six physiographic divisions, and how Himalayan and peninsular rivers differ.",
+      "sections": [
+        {
+          "head": "Location and size",
+          "body": "India lies wholly in the Northern Hemisphere, between about 8°4' N and 37°6' N, and 68°7' E and 97°25' E. The Tropic of Cancer (23°30' N) divides it roughly in half. Its area is about 3.28 million square km, about 2.4 per cent of the world's land, making it the seventh-largest country.\n\nThe Standard Meridian of India is 82°30' E, which passes near Mirzapur in Uttar Pradesh. Indian Standard Time is five and a half hours ahead of Greenwich Mean Time. The east-west extent of about 30° of longitude means the sun rises about two hours earlier in Arunachal Pradesh than in Gujarat.\n\nThe southernmost point of the mainland is Kanyakumari; the southernmost point of the country is Indira Point in the Nicobar Islands."
+        },
+        {
+          "head": "Six physiographic divisions",
+          "body": "NCERT divides India into six: the Himalayan mountains, the Northern Plains, the Peninsular Plateau, the Indian Desert, the coastal plains and the islands.\n\nThe Himalaya run in three parallel ranges: the Greater Himalaya or Himadri, the highest, with peaks such as Kanchenjunga; the Lesser Himalaya or Himachal, with hill stations; and the Shiwaliks, the outermost foothills. Longitudinal valleys between the Lesser Himalaya and the Shiwaliks are called duns, such as Dehra Dun. The Purvanchal, the eastern hills, include the Patkai, Naga and Mizo hills.\n\nThe Northern Plains are built of alluvium. The bhabar is a narrow belt of pebbles at the foot of the Shiwaliks where streams disappear underground; the terai, south of it, is wet and marshy where they re-emerge. Bhangar is older alluvium on higher ground; khadar is newer alluvium on the floodplains, renewed each year.\n\nThe Peninsular Plateau, made of old crystalline rocks, includes the Central Highlands and the Deccan Plateau. The Western Ghats are continuous and higher; Anamudi (about 2,695 m) is the highest peak in peninsular India. The Eastern Ghats are broken by the rivers flowing to the Bay of Bengal.\n\nThe western coastal plain is narrow (Konkan, Kannad and Malabar coasts). The eastern coastal plain is wider, with deltas (Northern Circars and the Coromandel coast). Lakshadweep is made of coral; the Andaman and Nicobar Islands are the peaks of submerged mountains."
+        },
+        {
+          "head": "Himalayan and peninsular rivers",
+          "body": "Himalayan rivers, the Indus, the Ganga and the Brahmaputra systems, are perennial: they are fed by both rain and melting snow. Many are older than the Himalaya themselves and cut deep gorges as the mountains rose; these are called antecedent rivers. In the plains they meander and shift course, and carry large loads of silt.\n\nPeninsular rivers are older, mostly rain-fed and seasonal, and flow in shallower, more fixed valleys. Most flow east to the Bay of Bengal and form deltas: the Mahanadi, the Godavari (the largest peninsular river, sometimes called the Dakshin Ganga), the Krishna and the Kaveri. The Narmada and the Tapi flow west through rift valleys and form estuaries, not deltas."
+        },
+        {
+          "head": "The big river systems",
+          "body": "The Ganga forms at Devprayag, where the Bhagirathi and the Alaknanda meet. The Yamuna joins it at Prayagraj from the right bank, as does the Son, which comes from the peninsula. The Ghaghara, the Gandak and the Kosi join from the left bank, from the Himalaya; the Kosi is called the 'sorrow of Bihar' for its floods and shifting course.\n\nThe Brahmaputra rises in Tibet, where it is called the Tsangpo, enters India in Arunachal Pradesh as the Siang or Dihang, and flows through Assam before entering Bangladesh, where it is called the Jamuna.\n\nThe Indus rises in Tibet and flows through Ladakh into Pakistan. Its tributaries in India include the Jhelum, Chenab, Ravi, Beas and Sutlej. Under the Indus Waters Treaty of 1960, India got the waters of the eastern rivers (Ravi, Beas and Sutlej) and Pakistan those of the western rivers (Indus, Jhelum and Chenab). In April 2025 India said it would hold the treaty in abeyance; check the treaty's current status."
+        }
+      ],
+      "keyFacts": [
+        "India: 8°4'N-37°6'N, 68°7'E-97°25'E; ~3.28 million sq km; ~2.4% of world land; seventh largest.",
+        "Standard Meridian 82°30'E (near Mirzapur); IST = GMT + 5:30.",
+        "Himalaya: Himadri, Himachal, Shiwaliks; duns between the Lesser Himalaya and the Shiwaliks.",
+        "Bhabar (pebbles, streams vanish), terai (marshy), bhangar (old alluvium), khadar (new alluvium).",
+        "Anamudi (~2,695 m) is the highest peak in peninsular India.",
+        "Narmada and Tapi flow west through rift valleys and form estuaries.",
+        "Ganga forms at Devprayag (Bhagirathi + Alaknanda); Kosi is the 'sorrow of Bihar'.",
+        "Indus Waters Treaty 1960: eastern rivers to India, western rivers to Pakistan."
+      ],
+      "examAngle": "Prelims asks which rivers flow west, which tributaries join from which bank, which hills belong to which range, and the meaning of bhabar and khadar. Mains asks how relief shapes settlement and agriculture, and about river water disputes.",
+      "selfCheck": [
+        "Why do the Narmada and the Tapi form estuaries rather than deltas?",
+        "What is the difference between bhangar and khadar?",
+        "Which rivers did the Indus Waters Treaty give to India?"
+      ],
+      "sources": ["NCERT Class IX Contemporary India I, chapters on India's size and location, physical features and drainage", "NCERT Class XI India: Physical Environment, chapters on structure and physiography, and drainage", "Survey of India (surveyofindia.gov.in)"],
+      "verify": "Check the coastline length if added (it was remeasured and the figure changed), Anamudi's height, and the current status of the Indus Waters Treaty."
+    },
+    {
+      "id": "geo-syl-resources",
+      "title": "Mineral and energy resources, and where industries locate",
+      "nodes": ["gs1-8", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 9,
+      "dek": "By the end, you will know where India's main minerals and fuels are found, and the factors that decide where industries set up.",
+      "sections": [
+        {
+          "head": "Metallic minerals",
+          "body": "The Chota Nagpur plateau in Jharkhand, Odisha and Chhattisgarh is India's mineral heartland.\n\nIron ore: India has both haematite and magnetite, the best ores. Major belts are in Odisha and Jharkhand, in Chhattisgarh (Bailadila, known for high-grade haematite) and in Karnataka. Manganese, used in making steel, comes mainly from Odisha, Madhya Pradesh and Maharashtra.\n\nBauxite, the ore of aluminium, is found mainly in Odisha (the Panchpatmali deposits in Koraput), and in Gujarat, Jharkhand and Maharashtra. Copper comes from Khetri in Rajasthan, Malanjkhand in Madhya Pradesh and Singhbhum in Jharkhand. Mica, used in electrical industries, is found in Jharkhand, Andhra Pradesh (Nellore) and Rajasthan."
+        },
+        {
+          "head": "Energy resources",
+          "body": "Coal is India's main source of commercial energy. Most of it is Gondwana coal, formed over 200 million years ago, found in the river valleys of the Damodar (Jharia, Raniganj, Bokaro), the Mahanadi, the Godavari and the Son. Tertiary coal, much younger, is found in the north-east. Lignite, a low-grade brown coal, is mined at Neyveli in Tamil Nadu.\n\nPetroleum is found in sedimentary rocks. Mumbai High, offshore, is a major field; Gujarat (Ankleshwar) and Assam are others. Digboi in Assam is one of the oldest oil fields and has one of the oldest refineries in the world.\n\nAtomic minerals: uranium is mined at Jaduguda in Jharkhand, and deposits exist in Andhra Pradesh. Thorium comes from monazite sands on the coast of Kerala, which is why India's long-term nuclear plan rests on thorium.\n\nNon-conventional sources, solar, wind, small hydro and biomass, are growing fast. Rajasthan and Gujarat lead in solar potential; Tamil Nadu and Gujarat in wind. Check the latest capacity figures before quoting them."
+        },
+        {
+          "head": "Why industries locate where they do",
+          "body": "Alfred Weber's least-cost theory (1909) says a firm locates where its total cost of transport is lowest. If raw materials lose weight in processing, such as iron ore, sugarcane or limestone, factories go near the raw material. If the product gains weight or spoils easily, as with bottled drinks or bread, factories go near the market.\n\nOther factors are power, water, labour, transport, capital, markets and government policy. Some industries, such as software, are 'footloose': they depend little on raw materials and can locate almost anywhere with skilled people and good connections.\n\nIron and steel plants are near coal and iron ore: Jamshedpur (TISCO, 1907), and the public sector plants at Bhilai and Bokaro (built with Soviet help), Rourkela (German help) and Durgapur (British help)."
+        },
+        {
+          "head": "Industries that moved",
+          "body": "Cotton textiles: India's first successful cotton mill opened in Bombay in 1854. Mumbai and Ahmedabad grew as centres because of cotton from the black soil areas, a humid climate that helped spinning, a port, capital and markets. Later the industry spread to Coimbatore and many other towns, as electricity freed it from coal and ports.\n\nJute: mills cluster along the Hooghly near Kolkata, close to the jute fields of the Ganga-Brahmaputra delta, with water for processing, cheap labour and the port.\n\nSugar: the industry has shifted from Uttar Pradesh and Bihar toward Maharashtra, Karnataka and Tamil Nadu. Cane in the south has higher sucrose content, the crushing season is longer, and cooperatives are strong.\n\nInformation technology clusters in Bengaluru, Hyderabad, Pune, Chennai and the NCR, where there are skilled workers, institutions and connectivity."
+        }
+      ],
+      "keyFacts": [
+        "Chota Nagpur plateau: mineral heartland.",
+        "Iron ore: Odisha, Jharkhand, Chhattisgarh (Bailadila), Karnataka; bauxite: Odisha (Panchpatmali, Koraput).",
+        "Copper: Khetri (Rajasthan), Malanjkhand (MP), Singhbhum (Jharkhand); mica: Jharkhand, Nellore, Rajasthan.",
+        "Gondwana coal (>200 million years) in the Damodar valley; Tertiary coal in the north-east; lignite at Neyveli.",
+        "Digboi: one of the oldest oil fields; Mumbai High: offshore.",
+        "Uranium: Jaduguda; thorium: monazite sands of Kerala.",
+        "Weber (1909): weight-losing raw materials pull industry to the source.",
+        "Steel plants: Bhilai and Bokaro (Soviet help), Rourkela (German), Durgapur (British)."
+      ],
+      "examAngle": "Prelims asks which mineral is found where, which steel plant had which foreign partner, and where lignite is mined. Mains asks why industries cluster and why some (sugar, cotton) moved.",
+      "selfCheck": [
+        "Why are sugar mills built near cane fields?",
+        "Why is thorium important for India's nuclear plan?",
+        "Why did the sugar industry shift south?"
+      ],
+      "sources": ["NCERT Class X Contemporary India II, chapters on minerals and energy resources and on manufacturing industries", "NCERT Class XII India: People and Economy, chapters on mineral and energy resources and on manufacturing industries", "Indian Bureau of Mines, Indian Minerals Yearbook (ibm.gov.in)"],
+      "verify": "Check the leading state for each mineral against the latest Indian Minerals Yearbook (rankings change), and the Bombay mill year (1854)."
+    },
+    {
+      "id": "geo-syl-agriculture",
+      "title": "Soils, crops and agricultural geography of India",
+      "nodes": ["gs1-8", "gs3-3", "pre-3"],
+      "gsPaper": "GS1",
+      "minutes": 9,
+      "dek": "By the end, you will know India's main soil types, its cropping seasons, the conditions each major crop needs, and the Green Revolution's legacy.",
+      "sections": [
+        {
+          "head": "Soils",
+          "body": "Alluvial soils, laid down by rivers, cover the largest area, across the Northern Plains and the deltas of the east coast. They are fertile and rich in potash but often poor in phosphorus.\n\nBlack soils, or regur, formed from the lava rocks of the Deccan, are found in Maharashtra, Gujarat, Madhya Pradesh and nearby. They are clayey, hold moisture well, swell when wet and crack when dry ('self-ploughing'), and suit cotton. They are rich in lime, iron, magnesia and potash but poor in nitrogen, phosphorus and organic matter.\n\nRed and yellow soils, coloured by iron oxide, are found on the crystalline rocks of the eastern and southern Deccan. Laterite soils form under high heat and heavy rain, which leach away nutrients; they are found in Kerala, Karnataka, Tamil Nadu and the hills of Odisha and the north-east, and suit cashew, tea and coffee with manure. Arid soils of Rajasthan are sandy and saline, with a kankar layer below. Saline soils occur in the Rann of Kutch and in over-irrigated areas. Peaty soils occur in Kerala and the Sundarbans."
+        },
+        {
+          "head": "Cropping seasons",
+          "body": "Kharif crops are sown with the onset of the monsoon (June-July) and harvested in September-October: rice, maize, jowar, bajra, cotton, groundnut, soybean, jute and arhar (tur).\n\nRabi crops are sown in October-December and harvested in March-May: wheat, barley, gram, peas and mustard. Rain from western disturbances helps them in the north-west.\n\nZaid crops grow in the short summer season between rabi and kharif: watermelon, muskmelon, cucumber, vegetables and fodder crops."
+        },
+        {
+          "head": "What each crop needs",
+          "body": "Rice needs high temperatures (above 25°C), high humidity and heavy rain (above 100 cm), or irrigation. It grows in the eastern and coastal plains and, with canals and tube wells, in Punjab and Haryana. Wheat needs a cool growing season and bright sunshine at ripening, with 50-75 cm of rain spread through the season; it is the main rabi crop of the north and north-west.\n\nCotton grows best on black soil, with high temperatures, light rain and about 210 frost-free days. Jute needs warm, humid weather and the fertile soils of the flood plains of the Ganga-Brahmaputra delta. Sugarcane needs a hot, humid climate and much water.\n\nTea grows on well-drained slopes with warm, moist, frost-free weather and acidic soils; Assam is the leading state. Coffee in India is mostly grown in Karnataka; the Arabica variety was first grown in the Baba Budan hills. Millets, such as jowar, bajra and ragi, grow in dry areas with poor soils and need little water; 2023 was the International Year of Millets, declared by the UN on India's proposal."
+        },
+        {
+          "head": "The Green Revolution and after",
+          "body": "The Green Revolution of the late 1960s brought high-yielding varieties of wheat (developed by Norman Borlaug's programme in Mexico), and later rice, together with irrigation, fertilisers and assured prices. M.S. Swaminathan led its adoption in India. Food output rose and India stopped depending on food imports.\n\nThe gains were uneven. They were concentrated in Punjab, Haryana and western Uttar Pradesh, and in wheat and rice. Over time, heavy use of tube wells has lowered groundwater tables, and heavy fertiliser use has hurt soils.\n\nIrrigation sources include canals, tanks and wells. Wells and tube wells now irrigate the largest share of land. The Planning Commission divided India into 15 agro-climatic regions in 1988-89 to plan agriculture by local conditions."
+        }
+      ],
+      "keyFacts": [
+        "Alluvial soils cover the largest area; rich in potash, poor in phosphorus.",
+        "Black soil (regur): Deccan lava; self-ploughing; suits cotton; poor in N, P and organic matter.",
+        "Laterite: leaching under heavy rain; suits cashew, tea, coffee with manure.",
+        "Kharif: rice, maize, cotton, jute, groundnut, soybean; Rabi: wheat, barley, gram, mustard; Zaid: melons, cucumber, fodder.",
+        "Rice: >25°C, >100 cm rain; wheat: 50-75 cm, cool growing season, bright ripening sun.",
+        "Cotton: black soil, ~210 frost-free days; tea: acidic soil, well-drained slopes.",
+        "2023: International Year of Millets (UN, on India's proposal).",
+        "15 agro-climatic regions (Planning Commission, 1988-89)."
+      ],
+      "examAngle": "Prelims asks which soil suits which crop, which crops are kharif or rabi, and the climatic needs of each crop. Mains asks about the Green Revolution's regional and environmental costs and about crop diversification.",
+      "selfCheck": [
+        "Why is black soil called self-ploughing?",
+        "Name three kharif and three rabi crops.",
+        "Why did the Green Revolution deepen regional inequality?"
+      ],
+      "sources": ["NCERT Class X Contemporary India II, chapters on resources and development (soils) and agriculture", "NCERT Class XI India: Physical Environment, chapter on soils", "NCERT Class XII India: People and Economy, chapter on land resources and agriculture", "Ministry of Agriculture and Farmers Welfare (agriwelfare.gov.in)"],
+      "verify": "Check the leading producer states if added (none are ranked on purpose), and the year of the agro-climatic regions."
+    }
+  ]
+}
