@@ -65,6 +65,8 @@ class AppConfig(context: Context, private val server: () -> String) {
     val podsOpen get() = config.pods?.mode == "open"
     /** Plus is the one flag that counts as off until the server says otherwise. */
     val plus get() = config.flags["plus"] == true
+    /** Google Play Billing for Plus (data/PlayBilling.kt): off until the server says otherwise, like Plus. */
+    val playBilling get() = config.flags["play_billing"] == true
 
     /**
      * Result-day mode: the result the admin set, while its 72 hours run (worked out on the phone from the

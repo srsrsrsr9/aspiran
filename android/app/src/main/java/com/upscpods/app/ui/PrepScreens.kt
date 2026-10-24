@@ -655,6 +655,28 @@ private fun PilotButton(hindi: Boolean, modifier: Modifier = Modifier) {
     ) { Text(if (hindi) "ज़्यादा जानने के लिए WhatsApp करें" else "WhatsApp us to know more", color = Color(0xFF2A1300), fontWeight = FontWeight.ExtraBold, fontSize = 18.sp) }
 }
 
+/**
+ * A year of Plus through Google Play (data/PlayBilling.kt). Null, and so not shown, unless this build, the server's
+ * play_billing flag and its Play check all say so; with it null the page is exactly as before.
+ */
+class PlayBuy(val busy: Boolean, val note: String?, val onBuy: () -> Unit)
+
+/** Under the WhatsApp chat, only when [PlayBuy] is given. Play's own sheet takes the payment. */
+@Composable
+private fun PlayButton(play: PlayBuy, hindi: Boolean) {
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Box(
+            Modifier.fillMaxWidth().heightIn(min = 52.dp).clip(RoundedCornerShape(999.dp)).border(1.dp, GOLD, RoundedCornerShape(999.dp))
+                .clickable(enabled = !play.busy, onClick = play.onBuy).padding(horizontal = 24.dp, vertical = 12.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(if (play.busy) (if (hindi) "Google Play खुल रहा है…" else "Opening Google Play…") else (if (hindi) "Google Play पर एक साल लें" else "Get a year on Google Play"),
+                color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
+        }
+        play.note?.let { Text(it, color = TX2, fontSize = 13.sp) }
+    }
+}
+
 /** A slim card at the top of Today's 3 and Practice for members without Plus. The caller hides it in quiet times. */
 @Composable
 fun PlusBanner(hindi: Boolean, onOpen: () -> Unit) {
@@ -877,10 +899,11 @@ private fun ChotuTurns(hindi: Boolean) {
  * Plus, with the free-trial offer; still no buy button and no link to the website. The one action is a WhatsApp chat,
  * and in quiet times (pause, result days, after a hard moment, 22:30 to 06:00) it goes quiet; the gate doesn't.
  * Blocks fade and rise in as they scroll into view; motion stops with the phone's "remove animations".
+ * [play] adds a Google Play purchase under the chat; it's null (no buy button) unless Play Billing is switched on.
  */
 @Composable
 private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, bank: List<PrepQ>, misses: List<PrepQ>, hist: List<MockRecord>, pieces: Int, reads: Int,
-                                     ways: List<String>, quiet: Boolean, hindi: Boolean, onAnswer: (PrepQ, Boolean) -> Unit) {
+                                     ways: List<String>, quiet: Boolean, hindi: Boolean, onAnswer: (PrepQ, Boolean) -> Unit, play: PlayBuy? = null) {
     val mockQs = mocks.sumOf { it.questions.size }
     val csat = mocks.count { it.id.contains("csat") || it.paper.equals("CSAT", ignoreCase = true) }
     val quietLine = "Not today. Plus will be here whenever you want it."
@@ -897,6 +920,7 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
         if (quiet) Text(quietLine, color = TX) else {
             PlusOffer(hindi, modifier = Modifier.padding(top = 4.dp))
             PilotButton(hindi)
+            play?.let { PlayButton(it, hindi) }
         }
         HeroShot()
     }
@@ -1039,6 +1063,7 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
                     Text(if (hindi) "एक साल का PLUS" else "ONE YEAR OF PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
                     PlusOffer(hindi)
                     PilotButton(hindi)
+                    play?.let { PlayButton(it, hindi) }
                 }
             }
         }
@@ -1217,12 +1242,13 @@ private fun Faq(q: String, a: String) {
 /** Reached from a preview's "See what Plus adds": the same showcase, as a page. */
 @Composable
 fun PlusInfoScreen(mocks: List<MockPaper>, week: List<PrepQ>, bank: List<PrepQ>, misses: List<PrepQ>, hist: List<MockRecord>, pieces: Int, reads: Int, ways: List<String>,
-                   gate: PlusGate, quiet: Boolean, hindi: Boolean, onAnswer: (PrepQ, Boolean) -> Unit, onTool: (PrepTool) -> Unit, onMocks: () -> Unit, onClose: () -> Unit) =
+                   gate: PlusGate, quiet: Boolean, hindi: Boolean, onAnswer: (PrepQ, Boolean) -> Unit, onTool: (PrepTool) -> Unit, onMocks: () -> Unit, onClose: () -> Unit,
+                   play: PlayBuy? = null) =
     PrepPage("Plus", onClose) {
         when {
             gate.loading -> Muted("Loading…")
             gate.member -> PlusHub(hindi, onTool, onMocks)
-            else -> PlusShowcase(mocks, week, bank, misses, hist, pieces, reads, ways, quiet, hindi, onAnswer)
+            else -> PlusShowcase(mocks, week, bank, misses, hist, pieces, reads, ways, quiet, hindi, onAnswer, play)
         }
     }
 

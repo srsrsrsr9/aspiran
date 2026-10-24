@@ -45,6 +45,10 @@ export interface Env {
   CASHFREE_API_BASE?: string;
   /** Where Cashfree sends people back after paying, e.g. https://upsc-pods.example.workers.dev */
   PUBLIC_BASE_URL?: string;
+  /** Google Play Billing (play.ts): the Play service account's JSON key, a secret (`wrangler secret put`), never in files or chat. */
+  PLAY_SERVICE_ACCOUNT_JSON?: string;
+  /** The app's package name on Play. Unset = com.upscpods.app. */
+  PLAY_PACKAGE_NAME?: string;
 }
 
 export const json = (data: unknown, status = 200) =>

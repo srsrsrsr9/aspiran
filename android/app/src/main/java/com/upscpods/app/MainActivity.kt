@@ -13,6 +13,8 @@ import com.upscpods.app.ui.InsightsScreen
 import com.upscpods.app.ui.LearnHubScreen
 import com.upscpods.app.ui.LongReadsScreen
 import com.upscpods.app.ui.PlusInfoScreen
+import com.upscpods.app.ui.PlayBuy
+import com.upscpods.app.data.PlayBilling
 import com.upscpods.app.ui.PlusBanner
 import com.upscpods.app.ui.SevenWays
 import com.upscpods.app.ui.CaPlayerScreen
@@ -29,6 +31,7 @@ import com.upscpods.app.ui.WeeklyTestScreen
 import com.upscpods.app.data.AppConfig
 import com.upscpods.app.ui.AnnouncementBanner
 import androidx.compose.foundation.layout.Column
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -86,6 +89,7 @@ import com.upscpods.app.ui.ChotuMood
 import com.upscpods.app.ui.ChotuSays
 import com.upscpods.app.data.ReadingLanguage
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.drop
@@ -493,10 +497,18 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
+    var playReady by remember { mutableStateOf(false) }
     LaunchedEffect(overlay, tab, touring) {
         if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT, Overlay.CA))
-            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.yearlyInr() } ?: run { if (plusMember == null) plusMember = false }
+            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.yearlyInr(); playReady = it.playReady } ?: run { if (plusMember == null) plusMember = false }
     }
+    // Google Play Billing for Plus (data/PlayBilling.kt, server play.ts): only in a build made with PLAY_BILLING, and only while
+    // the server's plus and play_billing flags are on and its Play check is set up. Otherwise nothing here runs.
+    val playBilling = remember { if (PlayBilling.built) PlayBilling(context, community) { Auth.session?.memberId ?: pod.memberId } else null }
+    playBilling?.onGranted = { plusMember = true }
+    val playOn = playBilling != null && config.plus && config.playBilling && playReady && plusMember == false
+    LaunchedEffect(playOn) { if (playOn) playBilling?.resume() }
+    DisposableEffect(playBilling) { onDispose { playBilling?.close() } }
     var tool by rememberSaveable { mutableStateOf(ShelfTool.COMPASS) }
     LaunchedEffect(day.dayClosed) { if (loaded) { closedDays = repo.closedDays(); staged.checkStamps(closedDays, pod.joinedOn) } }
     // One practice set's topic scores, for the season counter, mastery stamps and the app's guesses.
@@ -679,6 +691,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             mocks.papers(library), weekQs, bankQs, misses, mockHistory, prep.pieces(library).size, prep.reads(library).size, plusWays(prep.pieces(library)),
             plusGate, plusQuiet, hindi, prepAnswer, onTool = openTool,
             onMocks = { overlay = Overlay.NONE; tab = Tab.PREP; prepSub = PrepSub.MOCKS }, onClose = { overlay = prepBack },
+            play = if (playOn && playBilling != null) PlayBuy(playBilling.busy, playBilling.note) { (context as? Activity)?.let(playBilling::buy) } else null,
         )
         Overlay.PYQ -> PyqScreen(pyqPapers, pyqPaper?.let { PyqFocus(it, pyqTopic) },
             onWrite = { studioPyq = it; overlay = Overlay.ANSWER_STUDIO },

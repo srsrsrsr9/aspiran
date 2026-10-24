@@ -133,12 +133,13 @@ export const FLAG_INFO = {
   announcements: "Announcement banners in the apps",
   pod_friends: "Pod friends: four AI study friends of Chotu (labelled · AI) who post in small pods. Never counted as members, never private, quiet 23:30-07:00, fewer posts as real people join",
   plus: "Plus: free limits, value-moment offers in Prep, trial, and yearly Plus on the web (Cashfree once its keys are set, test mode until then). Off until launch",
+  play_billing: "Google Play Billing for Plus in the Android app (plus_yearly, a year at ₹9,999). Needs the plus flag, PLAY_SERVICE_ACCOUNT_JSON and an app built with PLAY_BILLING on. Off until Play Console is set up",
   password_login: "Username and password sign-in, next to Continue with Google (staff can reset forgotten passwords from Accounts; members with a recovery email can reset their own). Off stops new sign-ups and sign-ins; people already signed in stay signed in",
   sign_in_required: "Member features need a signed-in, active account. Switch off only while older app versions (without sign-in) are being replaced: then calls without a sign-in work as before, and suspended accounts are still refused",
 } as const;
 export type Flag = keyof typeof FLAG_INFO;
-/** Everything starts on, except Plus, which stays off until the founder switches it on. */
-export const DEFAULT_FLAGS: Record<Flag, boolean> = { ...Object.fromEntries(Object.keys(FLAG_INFO).map((k) => [k, true])), plus: false } as any;
+/** Everything starts on, except Plus and Play Billing, which stay off until the founder switches them on. */
+export const DEFAULT_FLAGS: Record<Flag, boolean> = { ...Object.fromEntries(Object.keys(FLAG_INFO).map((k) => [k, true])), plus: false, play_billing: false } as any;
 
 export const DRAFT_MODELS = ["@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/meta/llama-3.1-8b-instruct-fast", "@cf/mistralai/mistral-small-3.1-24b-instruct"];
 export const AUTHOR_MODELS = ["claude-haiku-5-5", "claude-sonnet-5-5"];
@@ -276,6 +277,10 @@ export const ADMIN_SCHEMA = [
   `CREATE TABLE IF NOT EXISTS payments (order_id TEXT PRIMARY KEY, member_id TEXT NOT NULL, amount_inr REAL NOT NULL, founding INTEGER NOT NULL DEFAULT 0,
     status TEXT NOT NULL, mode TEXT NOT NULL, cf_payment_id TEXT, created_at TEXT NOT NULL, paid_at TEXT, refunded_at TEXT, refund_inr REAL, refund_note TEXT)`,
   `CREATE INDEX IF NOT EXISTS payments_member ON payments(member_id, created_at)`,
+  // Google Play purchases (play.ts): one row per purchase token, kept as its SHA-256 only, so a token grants once, to one member.
+  `CREATE TABLE IF NOT EXISTS play_purchases (token_hash TEXT PRIMARY KEY, member_id TEXT NOT NULL, product_id TEXT NOT NULL, order_id TEXT,
+    status TEXT NOT NULL, test INTEGER NOT NULL DEFAULT 0, purchased_at TEXT, created_at TEXT NOT NULL, granted_at TEXT, refunded_at TEXT)`,
+  `CREATE INDEX IF NOT EXISTS play_purchases_member ON play_purchases(member_id, created_at)`,
   // Open pods (rooms.ts): which pre-set rooms a member joined. A member can be in several.
   `CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id))`,
   `CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id)`,

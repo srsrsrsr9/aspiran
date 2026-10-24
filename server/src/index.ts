@@ -20,6 +20,7 @@ import { answersRoute } from "./answers";
 import { plusRoute, useAllowance } from "./plus";
 import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
+import { playRoute } from "./play";
 import { activeResult, resultDays } from "./results";
 import { authRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
 import { passwordRoute } from "./password";
@@ -194,6 +195,9 @@ export default {
     // Cashfree: orders, the return check, receipts and the signed webhook (payments.ts)
     const pay = await paymentsRoute(req, env, path, url);
     if (pay) return pay;
+    // Google Play purchases from the Android app, behind the "play_billing" flag (play.ts)
+    const play = await playRoute(req, env, path);
+    if (play) return play;
     const plus = await plusRoute(req, env, path, url);
     if (plus) return plus;
     const ws = path.match(/^\/pods\/([\w-]+)\/ws$/);
