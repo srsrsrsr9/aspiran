@@ -290,6 +290,7 @@ fun CaPlayerScreen(
             firstFrame = false
             val e = scenes[current]
             if (!caOpen(e, gate)) { player.stop(); player.clearMediaItems(); return@LaunchedEffect }
+            if (!e.free) ca.unlock(w.week)
             val item = MediaItem.Builder().setUri(ca.url(w, e.mp4)).setMediaId(e.id).apply {
                 e.vtt?.let { vtt ->
                     setSubtitleConfigurations(listOf(

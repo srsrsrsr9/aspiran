@@ -308,7 +308,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Editor-approved explainers, games, sounds and Lamp Off from the pod server, cached for offline.
     val library = remember { ContentLibrary(context) { pod.serverUrl } }
     // Cinematic current affairs (W7): the week's scenes from the server's /ca, kept for offline.
-    val ca = remember { CurrentAffairs(context) { pod.serverUrl } }
+    val ca = remember { CurrentAffairs(context, { pod.memberId }) { pod.serverUrl } }
     remember(pod, staged) {
         pod.matchFields = { staged.synced() }
         pod.onStamp = { staged.award(it) }

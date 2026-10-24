@@ -1,5 +1,6 @@
 import { devTokenAllowed } from "./auth-dev";
 import { type Env, bad, json } from "./shared";
+import { ensureSchema } from "./staff";
 
 /**
  * Cinematic current affairs (W7): a week in seven short vertical scenes (upsc-pods/ca-week@1), rendered by the motion
@@ -8,12 +9,75 @@ import { type Env, bad, json } from "./shared";
  *
  * Phones read GET /ca (the weeks) and GET /ca/<week> (one week). Only scenes an editor marked approved go out; a local
  * dev server also hands drafts to debug builds that ask (?drafts=1), which show them with a DRAFT tag.
+ *
+ * Plus lock: the video and captions of a scene that isn't free (and the whole-week cut, unless every scene is free) are
+ * served only with a signed query, ?exp=<unix s>&sig=<hex>, that a Plus member gets from GET /plus/ca-key (plus.ts)
+ * and that lasts [KEY_HOURS] hours. Posters stay open: the shelf shows locked scenes blurred. The phone caches by the
+ * path without the query, so a scene watched once still plays offline after the key runs out.
  */
 
 export const CA_SCHEMA = "upsc-pods/ca-week@1";
 const WEEK = /^\d{4}-\d{2}$/;
 const SAFE_ID = /^[\w.-]{1,80}$/;
 const SAFE_REL = /^(?!.*\.\.)[\w.-]+(\/[\w.-]+)*$/;
+
+const KEY_HOURS = 6;
+const enc = new TextEncoder();
+let mediaKey: Promise<CryptoKey> | null = null;
+/** A random 32-byte key made on first use and kept in D1 (never sent anywhere), like the session key (password.ts). */
+function caKey(env: Env): Promise<CryptoKey> {
+  mediaKey ??= (async () => {
+    await ensureSchema(env);
+    const fresh = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) => b.toString(16).padStart(2, "0")).join("");
+    await env.DB.prepare("INSERT INTO server_keys (name, value, created_at) VALUES ('ca_media', ?, ?) ON CONFLICT(name) DO NOTHING")
+      .bind(fresh, new Date().toISOString()).run();
+    const row = await env.DB.prepare("SELECT value FROM server_keys WHERE name = 'ca_media'").first<{ value: string }>();
+    return crypto.subtle.importKey("raw", enc.encode(row!.value), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  })().catch((e) => { mediaKey = null; throw e; });
+  return mediaKey;
+}
+const hex = (b: ArrayBuffer) => Array.from(new Uint8Array(b), (x) => x.toString(16).padStart(2, "0")).join("");
+const signFor = async (env: Env, week: string, exp: number) => hex(await crypto.subtle.sign("HMAC", await caKey(env), enc.encode(`ca/${week}|${exp}`)));
+
+/** The query that opens a week's locked files for [KEY_HOURS] hours. Only for a member with Plus (plus.ts checks). */
+export async function caKeyFor(env: Env, week: string, now = Date.now()): Promise<{ week: string; query: string; expiresAt: string }> {
+  const exp = Math.floor(now / 1000) + KEY_HOURS * 3600;
+  return { week, query: `exp=${exp}&sig=${await signFor(env, week, exp)}`, expiresAt: new Date(exp * 1000).toISOString() };
+}
+
+// Which files of a week are locked, read from its manifest and kept a minute per isolate (a video is many range reads).
+const lockedCache = new Map<string, { at: number; files: Set<string> }>();
+export function lockedFiles(m: any): Set<string> {
+  const out = new Set<string>();
+  const eps = m?.episodes ?? [];
+  for (const e of eps) if (!e.free) for (const k of ["mp4", "vtt"]) if (e[k]) out.add(e[k]);
+  if (m?.weekMp4 && eps.some((e: any) => !e.free)) out.add(m.weekMp4);
+  return out;
+}
+
+/**
+ * For /media/ca/<week>/<file>: null when the file is open (or not a CA file), else a 403 unless the query carries a
+ * valid, unexpired signature for that week. Called before serveMedia (index.ts).
+ */
+export async function caMediaGate(env: Env, key: string, url: URL): Promise<Response | null> {
+  const at = key.match(/^ca\/(\d{4}-\d{2})\/(.+)$/);
+  if (!at || !env.MEDIA) return null;
+  const [, week, file] = at;
+  let hit = lockedCache.get(week);
+  if (!hit || Date.now() - hit.at > 60_000) {
+    const m = await readManifest(env, week).catch(() => null);
+    hit = { at: Date.now(), files: lockedFiles(m) };
+    lockedCache.set(week, hit);
+  }
+  if (!hit.files.has(file)) return null;
+  const exp = Number(url.searchParams.get("exp")), sig = url.searchParams.get("sig") ?? "";
+  if (!Number.isInteger(exp) || exp * 1000 <= Date.now() || exp * 1000 > Date.now() + (KEY_HOURS + 1) * 3600_000) return bad("This scene is in Plus", 403);
+  // Constant-time compare of two hex strings of the same length.
+  const want = await signFor(env, week, exp);
+  let diff = want.length ^ sig.length;
+  for (let i = 0; i < want.length; i++) diff |= want.charCodeAt(i) ^ (sig.charCodeAt(i) || 0);
+  return diff === 0 ? null : bad("This scene is in Plus", 403);
+}
 
 /** What's wrong with a week's manifest, in words for the desk. Empty when it's fine. */
 export function checkWeek(m: any, week?: string): string[] {

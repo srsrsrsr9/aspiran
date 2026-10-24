@@ -228,7 +228,8 @@ export function keepLangs(node: any, keep: string[]) {
   Object.values(node).forEach((x) => keepLangs(x, keep));
 }
 
-export async function serveMedia(env: Env, key: string, req?: Request): Promise<Response> {
+/** [signed]: a Plus file opened with a signed query (ca.ts), which no shared cache should keep. */
+export async function serveMedia(env: Env, key: string, req?: Request, signed = false): Promise<Response> {
   if (!env.MEDIA) return bad("No MEDIA bucket bound", 503);
   if (!SAFE_PATH.test(key)) return bad("Bad path");
   // Videos (current-affairs scenes) are read in ranges: the player seeks, and resumes a half-cached file.
@@ -252,7 +253,7 @@ export async function serveMedia(env: Env, key: string, req?: Request): Promise<
       ...(part ?? {}),
       "accept-ranges": "bytes",
       "content-type": obj.httpMetadata?.contentType ?? typeOf(key),
-      "cache-control": "public, max-age=86400",
+      "cache-control": signed ? "private, max-age=3600" : "public, max-age=86400",
       "access-control-allow-origin": "*",
       // Opened directly, a file can't run scripts on the desk's origin.
       "content-security-policy": "default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self'; sandbox",

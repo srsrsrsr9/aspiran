@@ -18,7 +18,7 @@ import { communityRoute, runJob } from "./community";
 import { podMode, roomsRoute } from "./rooms";
 import { answersRoute } from "./answers";
 import { plusRoute, useAllowance } from "./plus";
-import { publicCa } from "./ca";
+import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
 import { activeResult, resultDays } from "./results";
 import { authRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
@@ -150,7 +150,11 @@ export default {
       data.items = data.items.filter((i) => (f.mocks || i.kind !== "mock") && (f.long_reads || i.kind !== "read"));
       return json(data);
     }
-    if (path.startsWith("/media/")) return serveMedia(env, decodeURIComponent(path.slice("/media/".length)), req);
+    if (path.startsWith("/media/")) {
+      const key = decodeURIComponent(path.slice("/media/".length));
+      const locked = await caMediaGate(env, key, url);
+      return locked ?? serveMedia(env, key, req, url.searchParams.has("sig"));
+    }
     // --- Cinematic current affairs: the week's scenes (ca.ts), approved only
     { const r = await publicCa(req, env, path); if (r) return r; }
 

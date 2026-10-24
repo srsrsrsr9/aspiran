@@ -29,6 +29,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
+import java.time.Instant
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.IsoFields
@@ -42,12 +43,19 @@ import java.time.DayOfWeek
  *
  * Weeks and their manifests are kept on the phone so the shelf opens offline. Scene videos and captions go through one
  * media cache ([CaCache]): what was watched plays again offline, and "Save for offline" fills it ahead of time.
+ *
+ * Plus scenes are locked on the server too: their files open only with a signed query from /plus/ca-key, which lasts
+ * 6 hours and is fetched ([unlock]) before one plays. The cache keys on the path without that query, so a scene kept
+ * once still plays after its key runs out, offline included.
  */
-class CurrentAffairs(private val context: Context, private val server: () -> String) {
+class CurrentAffairs(private val context: Context, private val member: () -> String = { "" }, private val server: () -> String) {
     var weeks by mutableStateOf<List<CaWeekSummary>>(emptyList())
         private set
 
     private val http = OkHttpClient()
+    private val authed = OkHttpClient.Builder().addInterceptor(AuthInterceptor).build()
+    /** week -> (signed query, when it stops working in ms). In memory only. */
+    private val keys = mutableMapOf<String, Pair<String, Long>>()
     private val dir = File(context.filesDir, "ca").apply { mkdirs() }
     private val posters = File(dir, "posters").apply { mkdirs() }
     private val prefs = context.getSharedPreferences("ca", Context.MODE_PRIVATE)
@@ -93,8 +101,26 @@ class CurrentAffairs(private val context: Context, private val server: () -> Str
     private fun parseWeeks(text: String) =
         ContentLibrary.JSON.decodeFromString(CaWeekList.serializer(), text).weeks.sortedByDescending { it.week }
 
-    /** A file of the week (video, captions, poster), as a full URL on the server. */
-    fun url(w: CaWeek, path: String): String = server().trimEnd('/') + w.base + path
+    /** A file of the week (video, captions, poster), as a full URL on the server, signed when a Plus key is held. */
+    fun url(w: CaWeek, path: String): String =
+        server().trimEnd('/') + w.base + path + (keys[w.week]?.takeIf { it.second > System.currentTimeMillis() }?.let { "?" + it.first } ?: "")
+
+    /** Gets (or keeps) the signed key for a week's Plus scenes. False without Plus or offline; cached scenes still play. */
+    suspend fun unlock(week: String): Boolean = withContext(Dispatchers.IO) {
+        keys[week]?.let { if (it.second > System.currentTimeMillis() + 10 * 60_000) return@withContext true }
+        val base = server()
+        if (base.isBlank()) return@withContext false
+        runCatching {
+            authed.newCall(Request.Builder().url("$base/plus/ca-key?member=${Uri.encode(member())}&week=$week").build()).execute().use { r ->
+                if (!r.isSuccessful) return@use false
+                val o = ContentLibrary.JSON.parseToJsonElement(r.body.string()) as JsonObject
+                val query = o["query"]?.jsonPrimitive?.contentOrNull ?: return@use false
+                val until = o["expiresAt"]?.jsonPrimitive?.contentOrNull?.let { Instant.parse(it).toEpochMilli() } ?: return@use false
+                keys[week] = query to until
+                true
+            }
+        }.getOrDefault(false)
+    }
 
     /** A poster, downloaded once and kept. */
     suspend fun poster(w: CaWeek, path: String?): File? = path?.let { poster(w.base + it) }
@@ -133,6 +159,7 @@ class CurrentAffairs(private val context: Context, private val server: () -> Str
     @OptIn(UnstableApi::class)
     suspend fun saveOffline(w: CaWeek, open: (CaEpisode) -> Boolean, onProgress: (Float) -> Unit): Boolean = withContext(Dispatchers.IO) {
         val scenes = w.episodes.filter(open)
+        if (scenes.any { !it.free }) unlock(w.week)
         val files = scenes.flatMap { listOfNotNull(it.mp4, it.vtt) }
         var ok = true
         files.forEachIndexed { i, path ->
@@ -183,6 +210,8 @@ object CaCache {
         .setCache(get(context))
         .setUpstreamDataSourceFactory(DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(false))
         .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
+        // A Plus file's signed query changes every few hours; the file doesn't.
+        .setCacheKeyFactory { spec -> spec.uri.buildUpon().clearQuery().build().toString() }
 }
 
 @Serializable
