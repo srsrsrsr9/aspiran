@@ -48,7 +48,10 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-/** Where the access check stands. OFFLINE_OK is inside the 72-hour grace; OFFLINE_EXPIRED shows "Connect to the internet". */
+/**
+ * Where the access check stands. OFFLINE_OK is inside the 72-hour grace; OFFLINE_EXPIRED is past it: the app still
+ * reads what the phone has (with a banner), but pod chat stays off until the account is checked again.
+ */
 enum class Access { OK, SIGN_IN, SUSPENDED, OFFLINE_OK, OFFLINE_EXPIRED }
 
 /** A sign-in the server knows about. [label] and [email] are for this person only ("Signed in as a@b.com"). */
@@ -63,7 +66,8 @@ data class RecoveryEmail(val email: String?, val pending: String?, val mail: Boo
  *
  * - Every member call carries the Firebase ID token ([AuthInterceptor] on each OkHttp client).
  * - /me/status is checked on open and on resume, at most every 6 hours; a 403 account_suspended from any call counts too.
- * - Offline, the app keeps working for 72 hours from the last successful check, then asks to connect.
+ * - Offline, the app keeps working from the phone. Past 72 hours from the last successful check, pod chat waits for a
+ *   connection; Chai, the library, saved current affairs, PYQs and Calm still open.
  * - Debug builds without Firebase settings use the server's local dev sign-in (AUTH_MODE=dev, local addresses only).
  * - Username and password (server password.ts, when /config says auth.password) is the other way in: the server
  *   issues its own session token ("upw."), kept in these prefs and sent exactly like the Firebase ID token.

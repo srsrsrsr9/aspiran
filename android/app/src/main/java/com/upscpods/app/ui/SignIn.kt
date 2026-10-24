@@ -49,7 +49,10 @@ import androidx.compose.ui.unit.dp
 import com.upscpods.app.Brand
 import com.upscpods.app.data.Auth
 import com.upscpods.app.data.AuthConfig
+import com.upscpods.app.data.AppRepository
 import com.upscpods.app.data.AuthSession
+import com.upscpods.app.data.Brief
+import com.upscpods.app.data.DayState
 import com.upscpods.app.data.RecoveryEmail
 import kotlinx.coroutines.launch
 
@@ -66,7 +69,7 @@ private tailrec fun Context.activity(): Activity? = when (this) {
  * keeps its pod. [onRetryConfig] reloads /config when it hasn't loaded yet.
  */
 @Composable
-fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetryConfig: suspend () -> Unit, onDone: (AuthSession) -> Unit) {
+fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetryConfig: suspend () -> Unit, onReadOffline: (() -> Unit)? = null, onDone: (AuthSession) -> Unit) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var msg by remember { mutableStateOf<String?>(null) }
@@ -103,6 +106,7 @@ fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetr
                 mode == null -> {
                     Text("Connect to the internet to sign in. It only takes a minute.")
                     OutlinedButton(enabled = !busy, onClick = { busy = true; scope.launch { onRetryConfig(); busy = false } }) { Text("Try again") }
+                    onReadOffline?.let { TextButton(onClick = it) { Text("Read today's Chai while you're offline") } }
                 }
                 mode == "dev" && Auth.devAllowed -> {
                     var who by rememberSaveable { mutableStateOf("") }
@@ -332,13 +336,15 @@ fun ChangePasswordForm(server: String, forced: Boolean, onDone: () -> Unit) {
 
 /** An install from before sign-in: one screen, and everything on the phone stays as it is. */
 @Composable
-fun SignInScreen(name: String?, server: String, auth: AuthConfig?, memberIdHint: String, onRetryConfig: suspend () -> Unit, onNeedToTalk: () -> Unit, onDone: (AuthSession) -> Unit) {
+fun SignInScreen(name: String?, server: String, auth: AuthConfig?, memberIdHint: String, onRetryConfig: suspend () -> Unit, onNeedToTalk: () -> Unit,
+    onReadOffline: (() -> Unit)? = null, onDone: (AuthSession) -> Unit) {
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) { TextButton(onClick = onNeedToTalk) { Text("Need to talk?") } }
             ChotuSays((if (!name.isNullOrBlank()) "Welcome back, ${name.trim()}! " else "Welcome back! ") +
                 "The app now asks everyone to sign in once, to keep the Adda safe. Your journal, stamps, profile and saved work stay on this phone as they are, and your pod stays yours.")
-            SignInPanel(server, auth, memberIdHint, onRetryConfig, onDone)
+            SignInPanel(server, auth, memberIdHint, onRetryConfig, onReadOffline, onDone)
+            onReadOffline?.let { TextButton(onClick = it) { Text("Offline? Read today's Chai without signing in") } }
             Text("Your Google email or username is only for signing in. Your pod never sees it, and it never goes to ${Brand.MASCOT_SHORT}.", style = MaterialTheme.typography.bodySmall)
         }
     }
@@ -381,21 +387,35 @@ fun SuspendedScreen(support: String?, onSignInAgain: () -> Unit, onDeleteLocal: 
     )
 }
 
-/** Offline for more than 72 hours since the last successful check. */
+/**
+ * Offline (or offline past the 72-hour check): the app stays open on what this phone already has. Today's Chai, the
+ * library, saved current affairs, PYQs and Calm work; pod chat, Chotu online and sign-in wait for a connection.
+ */
 @Composable
-fun OfflineGate(onTryAgain: suspend () -> Unit, onNeedToTalk: () -> Unit) {
+fun OfflineBanner(expired: Boolean, onTryAgain: suspend () -> Unit) {
     val scope = rememberCoroutineScope()
     var busy by remember { mutableStateOf(false) }
-    Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
-        Column(Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Kulhad(ChotuMood.CALM, 72.dp)
-            Text("Connect to the internet to keep using UPSC Pods", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-            Text("It's been more than three days since the app could check your account. Connect once and everything opens again; nothing is lost.", style = ReadingText, textAlign = TextAlign.Center)
-            Button(enabled = !busy, modifier = Modifier.fillMaxWidth().height(MainActionHeight), onClick = { busy = true; scope.launch { onTryAgain(); busy = false } }) {
-                Text(if (busy) "Checking…" else "Try again")
+    Surface(color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }) {
+        Row(Modifier.padding(start = 16.dp, end = 4.dp, top = 8.dp, bottom = 8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("You're offline", style = MaterialTheme.typography.titleSmall)
+                Text("Today's Chai, your library, saved current affairs, PYQs and Calm still work. Pod chat, ${Brand.MASCOT_SHORT} online and sign-in need a connection." +
+                    if (expired) " Connect once to check your account; nothing is lost." else "", style = MaterialTheme.typography.bodySmall)
             }
-            TextButton(onClick = onNeedToTalk) { Text("Need to talk? · किसी से बात करनी है?") }
+            TextButton(enabled = !busy, onClick = { busy = true; scope.launch { onTryAgain(); busy = false } }) { Text(if (busy) "Checking…" else "Try again") }
         }
     }
+}
+
+/**
+ * Signed out and offline: today's Chai from this phone (the last brief it downloaded, or the one in the app).
+ * Public content only; nothing from any account is shown.
+ */
+@Composable
+fun OfflineReader(bundled: Brief, onClose: () -> Unit) {
+    val context = LocalContext.current
+    var brief by remember { mutableStateOf(bundled) }
+    LaunchedEffect(Unit) { brief = AppRepository(context).latestBrief { bundled } }
+    val day = remember { DayState() }
+    ChaiScreen(brief, day, preferHindi = false, onClose = onClose)
 }

@@ -365,10 +365,10 @@ function render() {
   document.documentElement.dataset.space = space;
   // A link from a "Reset your password" email: #reset=<code>.
   if (r.name.startsWith("reset=")) { put(root, resetScreen(r.name.slice(6))); return; }
-  // Sign-in (auth.js): a switched-off account, an install that hasn't signed in yet, or offline past the grace period.
+  // Sign-in (auth.js): a switched-off account, or an install that hasn't signed in yet. Offline (even past the 72-hour
+  // check) the app reads what this browser has, under a calm banner (offlineBanner).
   if (Auth.suspended() && !PUBLIC.has(r.name)) { put(root, suspendedView()); return; }
   const needsSignIn = profile() && !Auth.optional() && !Auth.signedIn();
-  if (profile() && !needsSignIn && access.state === "offline-expired" && !PUBLIC.has(r.name)) { put(root, offlineGate()); return; }
   if (!profile() || needsSignIn) {
     // The shelf's honest tools work before (and without) signing up or signing in.
     if (PUBLIC.has(r.name)) {
@@ -396,7 +396,7 @@ function render() {
     h("nav.side", { "aria-label": "Main" }, h("div.brand", "UPSC Pods"), navLinks(), h("div.spacer"),
       h("a.tab", { href: "#calm", "aria-current": r.name === "calm" ? "page" : null }, h("span", { "aria-hidden": "true" }, "◌"), tr("nav.calm")),
       h("a.tab", { href: "#talk", "aria-current": r.name === "talk" ? "page" : null }, h("span", { "aria-hidden": "true" }, "♡"), tr("nav.talk"))),
-    h("main", { id: "main" }, h("div.mobilebar", h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, on("announcements") && space === "adda" ? banner() : null, view),
+    h("main", { id: "main" }, h("div.mobilebar", h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, offlineBanner(), on("announcements") && space === "adda" ? banner() : null, view),
     h("nav.bottom", { "aria-label": "Main" }, navLinks()),
   ));
   tick();
@@ -2218,14 +2218,21 @@ function suspendedView() {
     h("p.small.muted.center", { style: { marginTop: "16px" } }, h("a", { href: "#calm" }, "Calm"), " and ", h("a", { href: "#talk" }, "Need to talk?"), " still work.")));
 }
 
-/** Offline for more than 72 hours since the last successful check. */
-function offlineGate() {
-  const btn = h("button.primary", { onclick: async () => { btn.disabled = true; btn.textContent = "Checking…"; await runAccessCheck(true); btn.disabled = false; btn.textContent = "Try again"; } }, "Try again");
-  return h("main", h("div.col", { style: { maxWidth: "560px", margin: "8vh auto" } },
-    h("div.center", kulhad("calm", 72)),
-    h("h1.center", "Connect to the internet to keep using UPSC Pods"),
-    h("div.card", h("p", "It's been more than three days since the app could check your account. Connect once and everything opens again; nothing is lost."), h("div.row", btn)),
-    h("p.small.muted.center", h("a", { href: "#calm" }, "Calm"), " and ", h("a", { href: "#talk" }, "Need to talk?"), " still work offline.")));
+/**
+ * Offline, or past the 72-hour check: a calm note above the page, kept in one slot so going on or offline updates it
+ * without redrawing what the member is doing. Today's Chai, the library, saved current affairs, PYQs and Calm read
+ * from this browser; pod chat, Chotu online and sign-in need a connection.
+ */
+const offlineSlot = h("div");
+function offlineBanner() { drawOffline(); return offlineSlot; }
+function drawOffline() {
+  const off = !navigator.onLine || access.state === "offline-ok" || access.state === "offline-expired";
+  if (!off || Auth.optional()) { put(offlineSlot); return; }
+  const btn = h("button.ghost.small", { onclick: async () => { btn.disabled = true; btn.textContent = "Checking…"; await runAccessCheck(true); drawOffline(); } }, "Try again");
+  put(offlineSlot, h("div.card", { role: "status", style: { marginBottom: "16px" } },
+    h("div.row.between", h("strong", "You're offline"), btn),
+    h("p", { style: { margin: "6px 0 0" } }, "Today's Chai, your library, saved current affairs, PYQs and Calm still work. Pod chat, Chotu online and sign-in need a connection.",
+      access.state === "offline-expired" ? " Connect once to check your account; nothing is lost." : "")));
 }
 
 // --- Me → Plus (test mode only) ----------------------------------------------------------------------
@@ -2946,7 +2953,8 @@ await Promise.all([loadAll(), P.loadProfile(), Auth.init(config.auth, { onSuspen
 // The access check: on open (waiting at most a few seconds) and when the tab comes back, at most every 6 hours.
 await Promise.race([runAccessCheck(false), new Promise((r) => setTimeout(r, 4000))]);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && profile()) runAccessCheck(false); });
-window.addEventListener("online", () => profile() && runAccessCheck(access.state.startsWith("offline")));
+window.addEventListener("online", () => { drawOffline(); if (profile()) runAccessCheck(access.state.startsWith("offline")).then(drawOffline); });
+window.addEventListener("offline", drawOffline);
 if (profile()) checkStamps();
 M.setMember(() => profile()?.memberId ?? Auth.session()?.memberId ?? null, () => (Auth.signedIn() ? Auth.getToken() : Promise.resolve(null)));
 render();

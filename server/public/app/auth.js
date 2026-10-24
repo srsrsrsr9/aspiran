@@ -235,7 +235,7 @@ export async function check({ force = false } = {}) {
     return Date.now() - last < GRACE_MS ? "offline-ok" : "offline-expired";
   }
 }
-/** Offline and past the grace period: the app shows "Connect to the internet". */
+/** Offline and past the grace period: the app still reads what this browser has, with an offline banner. */
 export const graceOver = () => !optional() && signedIn() && Date.now() - lastOk() >= GRACE_MS;
 /** After a suspension is lifted, the person signs in again from the notice. */
 export const clearSuspended = () => ls.del("suspended");
