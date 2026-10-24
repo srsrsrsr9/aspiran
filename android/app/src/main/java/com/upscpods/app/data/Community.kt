@@ -97,13 +97,18 @@ data class AnswerFeedback(
 )
 
 @Serializable
-data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap()) {
+data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap(), val play: PlayInfo? = null) {
     /** The one price on show, a year of Plus, from the server; null when it sent none. */
     fun yearlyInr(): Int? = prices["yearly"]?.inr?.takeIf { it > 0 }
+    /** The server's play_billing flag is on and its Play check is set up (server play.ts). An older server says nothing: off. */
+    val playReady get() = play?.let { it.on && it.ready } == true
 }
 
 @Serializable
 data class PlusPrice(val inr: Int = 0, val days: Int = 0)
+
+@Serializable
+data class PlayInfo(val on: Boolean = false, val ready: Boolean = false, val productId: String = "")
 
 /**
  * The community parts of the server: pods summary, the Commons, the season, the four matching fields,
@@ -141,6 +146,11 @@ class Community(private val server: () -> String, private val memberId: () -> St
         }) != null
 
     suspend fun plusStatus(): PlusStatus? = get("/plus/status?member=${memberId()}")?.let { json.decodeFromJsonElement(PlusStatus.serializer(), it) }
+
+    /** A Google Play purchase (data/PlayBilling.kt): the server checks it with Google and grants the year. "granted", "pending", or null. */
+    suspend fun playVerify(purchaseToken: String, productId: String): String? =
+        post("/plus/play/verify", buildJsonObject { put("memberId", memberId()); put("purchaseToken", purchaseToken); put("productId", productId) })
+            ?.get("status")?.jsonPrimitive?.contentOrNull
 
     /** Report one Chotu reply: its id, a reason and that reply's text. Never the chat. */
     suspend fun reportChotu(messageId: String, reason: String, text: String): Boolean =

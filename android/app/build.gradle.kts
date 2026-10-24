@@ -35,6 +35,9 @@ android {
         // Sign-in (auth-build.md). No google-services.json: the four Firebase values come from local.properties
         // (firebase.apiKey, firebase.appId, firebase.projectId, firebase.webClientId), -Pupsc.firebase.<key>=..., or env.
         firebaseConfig.forEach { (field, value) -> buildConfigField("String", field, "\"$value\"") }
+        // Google Play Billing for Plus (data/PlayBilling.kt). Off unless the build asks for it with -Pupsc.playBilling=true:
+        // a build without it never starts a purchase, whatever the server's play_billing flag says.
+        buildConfigField("boolean", "PLAY_BILLING", (project.findProperty("upsc.playBilling") == "true").toString())
     }
 
     // Release signing. The keystore and its passwords never live in this repo: they come from
@@ -149,5 +152,6 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.datasource)
     implementation(libs.androidx.media3.database)
+    implementation(libs.play.billing)
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
