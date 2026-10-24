@@ -1541,7 +1541,7 @@ function viewAdda() {
     h("div.card.host", h("div.row", chotuLabel(null, 36), h("p.grow", { style: { margin: 0 } }, hostLine()))),
     M.checkinCard(h, profile()?.createdOn),
     rapCard(),
-    h("a.card.link", { href: "#pod" }, h("div.row.between", h("strong", "Your pod"), h("span", "→")), h("p.small", { style: { margin: "4px 0" } }, pod.summary ? podLine().replace(" →", "") : "Not in a pod yet. Open it to join up to 8 people at your stage, in your language."), goalBar(true)),
+    h("a.card.link", { href: "#pod" }, h("div.row.between", h("strong", "Your pod"), h("span", "→")), h("p.small", { style: { margin: "4px 0" } }, pod.summary ? podLine().replace(" →", "") : "Not in a pod yet. Open it to join 6 to 8 people at your stage, in your language."), goalBar(true)),
     h("a.card.link", { href: "#commons" }, h("div.row.between", h("strong", "The Commons"), h("span", "→")), commons),
     h("div.card", season),
     h("a.card.link", { href: "#today" }, h("div.row.between", h("div", h("strong", "Today's 3"), h("div.small.muted", "Prep: Chai, practice and an answer. Small is fine.")), h("span", "→"))),

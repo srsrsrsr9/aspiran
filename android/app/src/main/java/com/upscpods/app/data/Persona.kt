@@ -34,7 +34,7 @@ data class Persona(
             Attempt.SECOND, Attempt.THIRD -> "2nd–3rd attempt"
             Attempt.FOURTH_PLUS -> "4th attempt and beyond"
         }
-        return "8–10 people · $band · ${stage.short} · ${language.label}"
+        return "6–8 people · $band · ${stage.short} · ${language.label}"
     }
 }
 

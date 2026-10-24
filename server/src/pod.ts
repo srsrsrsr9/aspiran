@@ -9,7 +9,7 @@ import { HOST_SCHEDULE } from "./community";
 import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reaction } from "./friends";
 
 /**
- * One pod of up to 8 members: chat, chai pings, ritual posts and a shared study room.
+ * One pod of up to 8 members (matched starts are 6 to 8): chat, chai pings, ritual posts and a shared study room.
  * Uses hibernatable WebSockets, so an idle pod costs nothing.
  *
  * Client → server: hello is implicit (member and name come from the URL), then

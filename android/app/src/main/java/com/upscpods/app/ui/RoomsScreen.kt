@@ -113,7 +113,7 @@ fun RoomsScreen(
                 Text("Join as many as help: your language, where you are, your goal, your optional, your region. " +
                     "Chotu and the study friends here are AI and always labelled AI.", style = MaterialTheme.typography.bodyMedium)
                 if (list?.mode == "open") Text(
-                    "Matched pods of 8 start once ${list.threshold} aspirants have joined. ${list.signups} so far.",
+                    "Matched pods of 6 to 8 start once ${list.threshold} aspirants have joined. ${list.signups} so far.",
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
