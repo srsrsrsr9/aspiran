@@ -776,7 +776,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 FilterChip(selected = prepSub == sub || (sub == PrepSub.PRACTICE && prepSub == PrepSub.MOCKS), onClick = { prepSub = sub }, label = { Text(sub.label) })
                             }
                         }
-                        if (prepSub == PrepSub.TODAY) SyllabusStrip { syllabusPaper = it; prepSub = PrepSub.SYLLABUS }
+                        if (prepSub == PrepSub.TODAY) SyllabusStrip(staged.value("optional_subject")) { syllabusPaper = it; prepSub = PrepSub.SYLLABUS }
                         if (prepSub in setOf(PrepSub.PRACTICE, PrepSub.MOCKS)) Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             FilterChip(selected = prepSub == PrepSub.PRACTICE, onClick = { prepSub = PrepSub.PRACTICE }, label = { Text("Practice") })
                             FilterChip(selected = prepSub == PrepSub.MOCKS, onClick = { prepSub = PrepSub.MOCKS }, label = { Text("Mocks") })
@@ -790,6 +790,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 onPaper = { syllabusPaper = it; syllabusFocus = null }, onOpenItem = openItem,
                                 onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo, focus = syllabusFocus,
                                 pyqs = pyqCounts, onPyq = { p, t -> pyqPaper = p; pyqTopic = t; studioPyq = null; overlay = Overlay.PYQ },
+                                optional = staged.value("optional_subject"),
                             )
                             PrepSub.TODAY -> TodayScreen(
                                 brief, day, persona,

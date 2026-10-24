@@ -51,6 +51,7 @@ import com.upscpods.app.data.SYLLABUS
 import com.upscpods.app.data.SyllabusPaper
 import com.upscpods.app.data.SyllabusTopic
 import com.upscpods.app.data.subjectName
+import com.upscpods.app.data.syllabusFor
 import java.time.LocalDate
 
 // Prep's front door (sell-first plan W2): the syllabus in view from the first screen, the variety shown off rather
@@ -82,12 +83,12 @@ fun topicPieces(topic: SyllabusTopic, pieces: List<Pair<LibraryItem, String>>, s
 
 /** The full syllabus, one tap from Today: every paper as a chip. */
 @Composable
-fun SyllabusStrip(onPaper: (String) -> Unit) {
+fun SyllabusStrip(optional: String? = null, onPaper: (String) -> Unit) {
     Column(Modifier.fillMaxWidth().padding(top = 4.dp)) {
         Text("THE FULL UPSC SYLLABUS", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.6.sp,
             modifier = Modifier.padding(horizontal = 16.dp))
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 6.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SYLLABUS.forEachIndexed { i, p ->
+            syllabusFor(optional).forEachIndexed { i, p ->
                 val c = WAY_COLORS.values.elementAt(i % WAY_COLORS.size)
                 Box(Modifier.clip(RoundedCornerShape(999.dp)).background(Brush.horizontalGradient(c)).clickable { onPaper(p.id) }.padding(horizontal = 16.dp, vertical = 9.dp)) {
                     Text(p.short, color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
@@ -151,18 +152,22 @@ fun SyllabusTab(
     focus: String? = null,
     /** Past UPSC questions per (paper, topic name), and opening them (Practice → PYQ). */
     pyqs: Map<Pair<String, String>, Int> = emptyMap(), onPyq: (paper: String, topic: String) -> Unit = { _, _ -> },
+    /** The member's answer about their Mains optional: its papers join the chips. */
+    optional: String? = null,
 ) {
     val pieces = remember(library.items) { prep.pieces(library) }
     val reads = remember(library.items) { prep.reads(library).map { it.first to "read" } }
     val subjectOf = remember(pieces, reads) { (pieces + reads).associate { (it, _) -> it.id to prep.subjectOf(it) } }
     val learnt = remember(library.items) { prep.learnt() + prep.readDone() }
     val current = SYLLABUS.firstOrNull { it.id == paper } ?: SYLLABUS.first()
+    // A paper opened from a link (a node in a mock or PYQ) keeps its chip even when it isn't the member's optional.
+    val shown = syllabusFor(optional).let { if (current in it) it else it + current }
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("The UPSC syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
         Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            SYLLABUS.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
+            shown.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
         }
         PaperHeader(current, pieces + reads, subjectOf, learnt, gate, onSeePlus)
         // A topic opened from the revision list (Mock Intelligence) comes first, already open.
