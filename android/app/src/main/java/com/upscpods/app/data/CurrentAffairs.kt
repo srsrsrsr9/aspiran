@@ -262,28 +262,11 @@ data class CaNode(val label: String, val paper: String, val topic: String?)
  * its papers ("prelims-gs", "mains-gs3"). Each opens that place in Prep → Syllabus; ids we can't place are left out.
  */
 fun caNodes(e: CaEpisode): List<CaNode> {
-    fun paperOf(key: String): String? = when (key.lowercase()) {
-        "pre", "prelims", "prelims-gs", "gs", "pre-gs" -> "prelims"
-        "csat", "prelims-csat", "pre-csat" -> "csat"
-        "gs1", "mains-gs1" -> "gs1"
-        "gs2", "mains-gs2" -> "gs2"
-        "gs3", "mains-gs3" -> "gs3"
-        "gs4", "mains-gs4", "ethics" -> "gs4"
-        "essay", "mains-essay" -> "essay"
-        else -> null
-    }
     val nodes = e.syllabusNodes.mapNotNull { id ->
-        val head = id.substringBefore('-')
-        val rest = id.substringAfter('-', "")
-        val paper = SYLLABUS.firstOrNull { it.id == paperOf(head) } ?: return@mapNotNull null
-        val topic = rest.toIntOrNull()?.let { paper.topics.getOrNull(it - 1) }
-            ?: rest.takeIf { it.isNotBlank() }?.let { word ->
-                val w = word.replace('-', ' ').lowercase()
-                paper.topics.firstOrNull { it.name.lowercase().contains(w) } ?: paper.topics.firstOrNull { t -> t.subjects.any { w.startsWith(it) } }
-            }
+        val (paper, topic) = syllabusNode(id) ?: return@mapNotNull null
         topic?.let { CaNode(it.name.substringBefore(':').substringBefore(',').trim(), paper.id, it.name) } ?: CaNode(paper.short, paper.id, null)
     }
-    val papers = e.papers().mapNotNull { id -> SYLLABUS.firstOrNull { it.id == paperOf(id) }?.let { p ->
+    val papers = e.papers().mapNotNull { id -> syllabusPaperOf(id)?.let { p ->
         CaNode(if (id.startsWith("prelims") && p.id == "prelims") "Prelims GS" else if (id.startsWith("mains")) "Mains ${p.short}" else p.short, p.id, null)
     } }
     return (nodes + papers).distinctBy { it.paper to it.topic }

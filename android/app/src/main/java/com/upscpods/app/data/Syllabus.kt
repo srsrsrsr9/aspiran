@@ -79,3 +79,36 @@ val SYLLABUS: List<SyllabusPaper> = listOf(
         t("Answer structure and writing practice", "mains"),
     )),
 )
+
+/** The id a node map uses for a paper: Syllabus ids, except Prelims GS Paper I is "pre". */
+fun SyllabusPaper.nodePrefix() = if (id == "prelims") "pre" else id
+
+/** A topic's node id: "gs2-1" is GS2's first topic, "pre-3" the third Prelims one. */
+fun SyllabusPaper.nodeId(topic: SyllabusTopic) = "${nodePrefix()}-${topics.indexOf(topic) + 1}"
+
+/** The paper a node id's first part names ("pre", "prelims-gs", "mains-gs3", "ethics" …), or null. */
+fun syllabusPaperOf(key: String): SyllabusPaper? = when (key.lowercase()) {
+    "pre", "prelims", "prelims-gs", "gs", "pre-gs" -> "prelims"
+    "csat", "prelims-csat", "pre-csat" -> "csat"
+    "gs1", "mains-gs1" -> "gs1"
+    "gs2", "mains-gs2" -> "gs2"
+    "gs3", "mains-gs3" -> "gs3"
+    "gs4", "mains-gs4", "ethics" -> "gs4"
+    "essay", "mains-essay" -> "essay"
+    else -> null
+}?.let { p -> SYLLABUS.firstOrNull { it.id == p } }
+
+/**
+ * Where a node id sits: "gs2-1" is GS2's first topic; "pre-pol" is the Prelims topic that draws on the polity subject
+ * (or whose name has the word); "gs3" alone is the paper with no topic. Null for ids we can't place.
+ */
+fun syllabusNode(id: String): Pair<SyllabusPaper, SyllabusTopic?>? {
+    val paper = syllabusPaperOf(id.substringBefore('-')) ?: return null
+    val rest = id.substringAfter('-', "")
+    val topic = rest.toIntOrNull()?.let { paper.topics.getOrNull(it - 1) }
+        ?: rest.takeIf { it.isNotBlank() }?.let { word ->
+            val w = word.replace('-', ' ').lowercase()
+            paper.topics.firstOrNull { it.name.lowercase().contains(w) } ?: paper.topics.firstOrNull { t -> t.subjects.any { w.startsWith(it) } }
+        }
+    return paper to topic
+}
