@@ -611,6 +611,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                 else -> null
             },
             onAnswered = { if (arrived == Ritual.COMEBACK) ritualDone(Ritual.COMEBACK); ritualDone(Ritual.ANSWER_HOUR) },
+            focusArea = staged.value("rubric_weak"),
         )
         Overlay.CLOSE_DAY -> CloseTheDayScreen(
             day, onDial, openNeedToTalk,

@@ -96,6 +96,8 @@ fun AnswerStudioScreen(
     banner: String? = null,
     /** An answer was finished (the ritual's action). */
     onAnswered: () -> Unit = {},
+    /** The rubric area you said you trust least (Chotu's day-2 chat): the review shows it first. */
+    focusArea: String? = null,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -265,7 +267,7 @@ fun AnswerStudioScreen(
                 }
 
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
-                    FeedbackView(fb, words)
+                    FeedbackView(fb, words, focusArea)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(onClick = { sending = true }) { Text("Send to pod") }
                         OutlinedButton(onClick = { text = ""; typing = false; feedback = null; step = StudioStep.PICK }) { Text("Another question") }
@@ -310,7 +312,7 @@ private fun WeekLine(log: AnswerLog) {
 }
 
 @Composable
-private fun FeedbackView(fb: AnswerFeedback, words: Int) {
+private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = null) {
     Text("Your review", style = MaterialTheme.typography.titleLarge)
     if (fb.summary.isNotBlank()) Text(fb.summary, style = MaterialTheme.typography.bodyLarge)
     Text(
@@ -322,7 +324,7 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int) {
         style = MaterialTheme.typography.labelMedium,
     )
     if (!fb.readable) Text("Parts of the handwriting were hard to read, so some notes may be off. A brighter, flatter photo helps.", style = MaterialTheme.typography.bodySmall)
-    AREA_NAMES.forEach { (key, name) ->
+    AREA_NAMES.sortedBy { it.first != focusArea }.forEach { (key, name) ->
         val a = fb.areas[key] ?: return@forEach
         FlatCard(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -334,6 +336,7 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int) {
                         color = when (a.band) { "above" -> MaterialTheme.colorScheme.primary; "below" -> MaterialTheme.colorScheme.error; else -> MaterialTheme.colorScheme.onSurfaceVariant },
                     )
                 }
+                if (key == focusArea) Text("The part you said you'd watch", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                 if (a.note.isNotBlank()) Text(a.note, style = MaterialTheme.typography.bodyMedium)
                 if (a.fix.isNotBlank()) Text("One fix: ${a.fix}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
             }
