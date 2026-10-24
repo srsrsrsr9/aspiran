@@ -1,4 +1,4 @@
-import { type Env, bad, json } from "./shared";
+import { type Env, bad, istWeek, json } from "./shared";
 import { bump, ensureSchema, flags, getSetting } from "./staff";
 import { logEvent } from "./metrics";
 
@@ -10,6 +10,14 @@ import { logEvent } from "./metrics";
  * Until the community reaches `signupThreshold` sign-ups (500 by default, setting "growth"), rooms are the only pods:
  * /pods/join refuses new matched members and the apps show the room list. At or above it the matched 8-person pods
  * switch on, and the rooms stay as the public layer.
+ *
+ * Rooms against rooms: Friday's Quiz Night has the same five questions in every room, and /rooms/leaderboard ranks
+ * the rooms by their one shared score. People are never ranked, named or counted on it. Each room also has a pinned
+ * question for the day (POST /pin on the room, from the 07:00 "pins" job in community.ts).
+ *
+ * Photos in "Send to pod": POST /rooms/photo puts one JPEG in R2 (MEDIA, pod-photos/) for [PHOTO_DAYS] days, seen only
+ * by members of that room or pod (GET /rooms/photo/<id>), then swept. Answer Studio's evaluation still keeps nothing:
+ * this is a separate upload the member chooses, after the review.
  */
 
 export interface OpenRoom { id: string; name: string; group: "language" | "attempt" | "goal" | "optional" | "region"; note: string }
@@ -50,6 +58,12 @@ export async function podMode(env: Env): Promise<{ mode: "open" | "matched"; sig
   return { mode: n >= g.signupThreshold ? "matched" : "open", signups: n, threshold: g.signupThreshold };
 }
 
+/** A room needs this many answers in the week before it goes on the board, so two lucky taps don't top it. */
+export const BOARD_MIN_ANSWERS = 10;
+export const PHOTO_DAYS = 7;
+const PHOTO_MAX_BYTES = 1_500_000;
+const PHOTO_PREFIX = "pod-photos/";
+
 const validId = (v: unknown) => /^[\w-]{16,64}$/.test(String(v ?? ""));
 const roomStub = (env: Env, id: string) => env.POD.get(env.POD.idFromName(id));
 export const roomPost = (env: Env, id: string, what: string, body?: unknown) =>
@@ -60,6 +74,45 @@ export async function roomCounts(env: Env): Promise<Map<string, number>> {
   await ensureSchema(env);
   const { results } = await env.DB.prepare("SELECT room_id, COUNT(*) AS n FROM room_members GROUP BY room_id").all<{ room_id: string; n: number }>();
   return new Map(results.map((r) => [r.room_id, r.n]));
+}
+
+/** In this open room, or in this matched pod. */
+async function inRoom(env: Env, memberId: string, roomId: string): Promise<boolean> {
+  const q = isOpenRoom(roomId)
+    ? env.DB.prepare("SELECT 1 FROM room_members WHERE member_id = ? AND room_id = ?")
+    : env.DB.prepare("SELECT 1 FROM members WHERE member_id = ? AND pod_id = ?");
+  return !!(await q.bind(memberId, roomId).first());
+}
+
+/** This week's room board: rooms with enough answers, by their shared score. */
+export async function roomBoard(env: Env) {
+  const week = istWeek();
+  const scores = await Promise.all(OPEN_ROOMS.map(async (r) => {
+    const res = await roomStub(env, r.id).fetch(`https://pod/quiz-score?pod=${r.id}`).catch(() => null);
+    const s = res?.ok ? await res.json<{ week: string | null; right: number; answered: number; pct: number | null; players: number }>() : null;
+    return { id: r.id, name: r.name, group: r.group, ...(s?.week === week ? s : { right: 0, answered: 0, pct: null, players: 0 }) };
+  }));
+  const ranked = scores.filter((s) => s.answered >= BOARD_MIN_ANSWERS && s.pct !== null)
+    .sort((a, b) => (b.pct! - a.pct!) || (b.answered - a.answered) || a.name.localeCompare(b.name));
+  return {
+    week, minAnswers: BOARD_MIN_ANSWERS,
+    rooms: ranked.map(({ id, name, group, pct, answered, players }, i) => ({ rank: i + 1, id, name, group, pct, answered, players })),
+    waiting: scores.filter((s) => !ranked.includes(s)).map(({ id, name, answered }) => ({ id, name, answered })),
+  };
+}
+
+/** Deletes photos past their time (the daily 05:30 job), or every photo one member sent (erasure). */
+export async function sweepPhotos(env: Env, opts: { member?: string; now?: number } = {}) {
+  if (!env.MEDIA) return { deleted: 0 };
+  const now = opts.now ?? Date.now();
+  let cursor: string | undefined, deleted = 0;
+  do {
+    const page = await env.MEDIA.list({ prefix: PHOTO_PREFIX, cursor, include: ["customMetadata"] });
+    const gone = page.objects.filter((o) => opts.member ? o.customMetadata?.member === opts.member : Number(o.customMetadata?.expires ?? 0) <= now).map((o) => o.key);
+    if (gone.length) { await env.MEDIA.delete(gone); deleted += gone.length; }
+    cursor = page.truncated ? page.cursor : undefined;
+  } while (cursor);
+  return { deleted };
 }
 
 interface Activity { unread: number; lastTs: number | null; lastName: string | null; lastText: string | null; online: number }
@@ -102,6 +155,38 @@ export async function roomsRoute(req: Request, env: Env, path: string, url: URL)
       .bind(body.memberId, roomId, new Date().toISOString()).run();
     if (r.meta.changes) { await bump(env, "room_joins"); await logEvent(env, "room_joined", { memberId: body.memberId }, { room: roomId }); }
     return json({ ok: true, roomId, joined: true, members: (await roomCounts(env)).get(roomId) ?? 1 });
+  }
+  if (path === "/rooms/leaderboard" && req.method === "GET") return json(await roomBoard(env));
+  if (path === "/rooms/photo" && req.method === "POST") {
+    const body = await req.json<any>().catch(() => ({}));
+    const roomId = String(body.roomId ?? "");
+    const data = typeof body.image?.data === "string" ? body.image.data : "";
+    if (!validId(body.memberId) || !/^[\w-]{4,64}$/.test(roomId) || body.image?.mime !== "image/jpeg" || !data) return bad("memberId, roomId and image {mime: image/jpeg, data} are required");
+    if (!env.MEDIA) return bad("Photos aren't set up on this server", 503);
+    if (!(await flags(env)).pod_chat) return bad("Pod chat is paused for now.", 503);
+    await ensureSchema(env);
+    if (!(await inRoom(env, body.memberId, roomId))) return bad("Join this room first", 403);
+    const m = await env.DB.prepare("SELECT suspended_until FROM members WHERE member_id = ?").bind(body.memberId).first<{ suspended_until: string | null }>();
+    if (m?.suspended_until && m.suspended_until > new Date().toISOString()) return bad("Your chat is paused by a moderator for now.", 403);
+    let bytes: Uint8Array;
+    try { bytes = Uint8Array.from(atob(data), (c) => c.charCodeAt(0)); } catch { return bad("image data must be base64"); }
+    if (bytes.length > PHOTO_MAX_BYTES) return bad("That photo is too big. Under 1.5 MB, please.", 413);
+    if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return bad("Only JPEG photos");
+    const id = crypto.randomUUID().replace(/-/g, "");
+    const expires = Date.now() + PHOTO_DAYS * 86400_000;
+    await env.MEDIA.put(PHOTO_PREFIX + id + ".jpg", bytes, { httpMetadata: { contentType: "image/jpeg" }, customMetadata: { room: roomId, member: body.memberId, expires: String(expires) } });
+    await bump(env, "pod_photos");
+    return json({ ok: true, id, ref: "photo:" + id, expiresAt: new Date(expires).toISOString() });
+  }
+  const photo = path.match(/^\/rooms\/photo\/([0-9a-f]{32})$/);
+  if (photo && req.method === "GET") {
+    if (!env.MEDIA) return bad("Not found", 404);
+    const obj = await env.MEDIA.get(PHOTO_PREFIX + photo[1] + ".jpg");
+    if (!obj) return bad("This photo has gone. Photos are kept for 7 days.", 404);
+    if (Number(obj.customMetadata?.expires ?? 0) <= Date.now()) return bad("This photo has gone. Photos are kept for 7 days.", 410);
+    await ensureSchema(env);
+    if (!(await inRoom(env, url.searchParams.get("member") ?? "", obj.customMetadata?.room ?? ""))) return bad("Only members of that room can see this photo", 403);
+    return new Response(obj.body, { headers: { "content-type": "image/jpeg", "cache-control": "private, max-age=3600", "access-control-allow-origin": "*" } });
   }
   const ws = path.match(/^\/rooms\/([\w-]+)\/ws$/);
   if (ws) {

@@ -40,6 +40,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.material3.Checkbox
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -115,6 +116,8 @@ fun AnswerStudioScreen(
     var busy by remember { mutableStateOf(false) }
     var error by remember { mutableStateOf<String?>(null) }
     var sending by remember { mutableStateOf(false) }
+    // The reviewed sheet, in memory only (the file is deleted after the review), so "Send to pod" can attach it.
+    var reviewedJpeg by remember { mutableStateOf<ByteArray?>(null) }
     var leaving by remember { mutableStateOf(false) }
     val question = questions.getOrNull(qIndex) ?: questions.first()
     val prompt = question.prompt.replace(Regex("\\s*\\((150|250) (words|शब्द)\\)\\s*$"), "")
@@ -252,7 +255,7 @@ fun AnswerStudioScreen(
                                 when {
                                     fb.care -> onOpenNeedToTalk()
                                     fb.error != null -> error = fb.error
-                                    else -> { feedback = fb; attemptId?.let { log.reviewed(it) }; deletePhoto(); step = StudioStep.FEEDBACK }
+                                    else -> { feedback = fb; reviewedJpeg = jpeg; attemptId?.let { log.reviewed(it) }; deletePhoto(); step = StudioStep.FEEDBACK }
                                 }
                             }
                         },
@@ -270,7 +273,7 @@ fun AnswerStudioScreen(
                     FeedbackView(fb, words, focusArea)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(onClick = { sending = true }) { Text("Send to pod") }
-                        OutlinedButton(onClick = { text = ""; typing = false; feedback = null; step = StudioStep.PICK }) { Text("Another question") }
+                        OutlinedButton(onClick = { text = ""; typing = false; feedback = null; reviewedJpeg = null; step = StudioStep.PICK }) { Text("Another question") }
                     }
                 } ?: run { step = StudioStep.PICK }
             }
@@ -285,18 +288,27 @@ fun AnswerStudioScreen(
         dismissButton = { TextButton(onClick = { leaving = false }) { Text("Keep writing") } },
     )
 
-    if (sending) SendToPodDialog(rooms, pod, onDismiss = { sending = false }) { target ->
-        val body = buildString {
-            append("📝 Answer Studio · $words words\nQ: $prompt\n\n")
-            if (text.isNotBlank() && photoPath == null) append(text.trim().take(1800)).append("\n\n")
-            else append("(Written by hand, ${feedback?.wordCount?.takeIf { it > 0 }?.let { "about $it words" } ?: "on paper"}. I can share the photo.)\n\n")
-            val weakest = feedback?.areas?.entries?.firstOrNull { it.value.band == "below" }
-            append(if (weakest != null) "Chotu's review said my ${AREA_NAMES.firstOrNull { it.first == weakest.key }?.second?.lowercase() ?: weakest.key} needs work. " else "")
-            append("Could someone review it? I'll review one back.")
-        }
-        if (target == null) pod.say(body) else rooms.post(target, body, persona)
+    if (sending) SendToPodDialog(rooms, pod, hasPhoto = reviewedJpeg != null || photoPath != null, onDismiss = { sending = false }) { target, withPhoto ->
         sending = false
         error = null
+        scope.launch {
+            // The photo goes only if the member ticked it: kept 7 days, seen only by that room or pod.
+            val ref = if (!withPhoto) null else {
+                val bytes = reviewedJpeg ?: photoPath?.let { p -> withContext(Dispatchers.IO) { shrink(p) } }
+                bytes?.let { community.sendPhoto(target ?: pod.podId.orEmpty(), it) }.also { if (it == null) error = "Couldn't send the photo just now, so only the text went." }
+            }
+            val body = buildString {
+                append("📝 Answer Studio · $words words\nQ: $prompt\n\n")
+                if (text.isNotBlank() && photoPath == null) append(text.trim().take(1800)).append("\n\n")
+                else if (ref != null) append("(Written by hand. The photo is below, kept for 7 days.)\n\n")
+                else append("(Written by hand, ${feedback?.wordCount?.takeIf { it > 0 }?.let { "about $it words" } ?: "on paper"}. I can share the photo.)\n\n")
+                val weakest = feedback?.areas?.entries?.firstOrNull { it.value.band == "below" }
+                append(if (weakest != null) "Chotu's review said my ${AREA_NAMES.firstOrNull { it.first == weakest.key }?.second?.lowercase() ?: weakest.key} needs work. " else "")
+                append("Could someone review it? I'll review one back.")
+                ref?.let { append("\n").append(it) }
+            }
+            if (target == null) pod.say(body) else rooms.post(target, body, persona)
+        }
     }
 }
 
@@ -354,16 +366,21 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = nu
 
 /** Where "Send to pod" posts: one of your open rooms (Mains answer writing first), or your matched pod. */
 @Composable
-private fun SendToPodDialog(rooms: Rooms, pod: PodClient, onDismiss: () -> Unit, onSend: (String?) -> Unit) {
+private fun SendToPodDialog(rooms: Rooms, pod: PodClient, hasPhoto: Boolean, onDismiss: () -> Unit, onSend: (String?, Boolean) -> Unit) {
     val joined = rooms.joined.sortedBy { if (it.id == "room-mains-writing") 0 else 1 }
+    var withPhoto by remember { mutableStateOf(false) }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Ask for a review") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 if (joined.isEmpty() && pod.podId == null) Text("Join a room first, like Mains answer writing, in the Pod tab.")
-                if (pod.podId != null) TextButton(onClick = { onSend(null) }) { Text("My pod") }
-                joined.forEach { r -> TextButton(onClick = { onSend(r.id) }) { Text(r.name) } }
+                if (hasPhoto) Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(checked = withPhoto, onCheckedChange = { withPhoto = it })
+                    Text("Include the photo. Kept 7 days, seen only by that room.", style = MaterialTheme.typography.bodySmall)
+                }
+                if (pod.podId != null) TextButton(onClick = { onSend(null, withPhoto) }) { Text("My pod") }
+                joined.forEach { r -> TextButton(onClick = { onSend(r.id, withPhoto) }) { Text(r.name) } }
             }
         },
         confirmButton = {},

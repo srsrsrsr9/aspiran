@@ -4,7 +4,7 @@
 // Every call to a member route gets a dev token for the member id it already carries (body memberId or ?member=),
 // so each test member is its own signed-in account and the server links that id on first use. Calls with no member
 // id share one dev account. Sockets get the token as ?auth=. test/auth.mjs tests sign-in itself and doesn't use this.
-const MEMBER_ROUTE = /^\/(pods\/(join|leave|me|choose)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete)|rooms\/(list|join|leave)|rooms\/[\w-]+\/ws|answers\/evaluate)$/;
+const MEMBER_ROUTE = /^\/(pods\/(join|leave|me|choose)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete)|rooms\/(list|join|leave|photo)|rooms\/photo\/\w+|rooms\/[\w-]+\/ws|answers\/evaluate)$/;
 
 const tokenFor = (member) => "dev:" + (member ? "m-" + member : "suite-tester");
 

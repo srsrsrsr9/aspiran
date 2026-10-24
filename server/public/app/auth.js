@@ -14,7 +14,7 @@
 const FIREBASE_SDK = "https://www.gstatic.com/firebasejs/10.14.1";
 export const CHECK_EVERY_MS = 6 * 3600_000;
 export const GRACE_MS = 72 * 3600_000;
-const MEMBER_ROUTE = /^\/(pods\/(join|leave|me|choose)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete))$/;
+const MEMBER_ROUTE = /^\/(pods\/(join|leave|me|choose)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete)|rooms\/(list|join|leave|photo)|rooms\/photo\/\w+|rooms\/[\w-]+\/ws)$/;
 
 const K = "upsc:auth:";
 const ls = {

@@ -10,6 +10,13 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.heightIn
+import android.graphics.BitmapFactory
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.produceState
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import com.upscpods.app.data.Community
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.LinearProgressIndicator
@@ -93,6 +100,7 @@ fun PodTab(
     }
     var reporting by remember { mutableStateOf<PodMessage?>(null) }
     var favour by remember { mutableStateOf<String?>(null) }
+    val community = remember(pod) { Community({ pod.serverUrl }, { pod.memberId }) }
     var askLead by rememberSaveable { mutableStateOf(false) }
 
     Column(modifier.fillMaxSize().imePadding()) {
@@ -132,7 +140,7 @@ fun PodTab(
             }
             items(shown, key = { it.id }) { m ->
                 Bubble(m, mine = m.memberId == pod.memberId, sending = m in pod.outbox, onLongPress = { if (m.kind in setOf("chat", "favour", "offer") && m.memberId != pod.memberId) reporting = m },
-                    thanked = m.id in pod.thanked,
+                    thanked = m.id in pod.thanked, loadPhoto = community::photo,
                     onThank = if (m.kind in setOf("chat", "favour", "offer") && m.memberId != pod.memberId && pod.status == PodStatus.ONLINE) ({ pod.thank(m.id) }) else null)
             }
         }
@@ -447,7 +455,10 @@ private fun LeadNotesDialog(pod: PodClient, onOpenNeedToTalk: () -> Unit, onDism
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun Bubble(m: PodMessage, mine: Boolean, sending: Boolean, onLongPress: () -> Unit, thanked: Boolean = false, onThank: (() -> Unit)? = null) {
+private fun Bubble(
+    m: PodMessage, mine: Boolean, sending: Boolean, onLongPress: () -> Unit, thanked: Boolean = false, onThank: (() -> Unit)? = null,
+    loadPhoto: (suspend (String) -> ByteArray?)? = null,
+) {
     val time = timeFmt.format(Instant.ofEpochMilli(m.ts))
     when (m.kind) {
         "ritual", "chotu", "quiz" -> Column(Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
@@ -473,7 +484,9 @@ private fun Bubble(m: PodMessage, mine: Boolean, sending: Boolean, onLongPress: 
             ) {
                 val tag = when (m.kind) { "favour" -> " · asks a favour"; "offer" -> " · offers help"; else -> "" }
                 if (!mine || tag.isNotEmpty()) Text((if (mine) "You" else m.name) + tag, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
-                Text(m.text, style = MaterialTheme.typography.bodyLarge)
+                val photos = PHOTO_REF.findAll(m.text).map { it.groupValues[1] }.toList()
+                Text(if (photos.isEmpty()) m.text else m.text.replace(PHOTO_REF, "").trim(), style = MaterialTheme.typography.bodyLarge)
+                if (loadPhoto != null) photos.forEach { PhotoInBubble(it, loadPhoto) }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(if (sending) "sending…" else time, style = MaterialTheme.typography.labelSmall)
                     // 🙏 says thanks. Nobody sees a count or who thanked whom.
@@ -483,6 +496,21 @@ private fun Bubble(m: PodMessage, mine: Boolean, sending: Boolean, onLongPress: 
                 }
             }
         }
+    }
+}
+
+/** "Send to pod" with a photo (server rooms.ts): the message carries "photo:<id>"; the photo is kept 7 days, members only. */
+private val PHOTO_REF = Regex("""\bphoto:([0-9a-f]{32})\b""")
+
+@Composable
+private fun PhotoInBubble(id: String, load: suspend (String) -> ByteArray?) {
+    val state by produceState<Any?>(initialValue = null, id) {
+        value = load(id)?.let { b -> runCatching { BitmapFactory.decodeByteArray(b, 0, b.size)?.asImageBitmap() }.getOrNull() } ?: false
+    }
+    when (val s = state) {
+        null -> Text("Loading the photo…", style = MaterialTheme.typography.labelSmall)
+        is ImageBitmap -> Image(s, "Photo of a handwritten answer", Modifier.fillMaxWidth().heightIn(max = 360.dp).padding(vertical = 4.dp), contentScale = ContentScale.Fit)
+        else -> Text("📷 Photo no longer here (photos are kept 7 days)", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

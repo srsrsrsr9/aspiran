@@ -109,6 +109,69 @@ try {
   assert.ok(host.data.rooms >= 17, "the host tick covers the rooms");
   step("the host schedule and AI friends cover the rooms");
 
+  // --- Room Quiz Night: every room plays the same questions, and the board ranks rooms, never people --------
+  const ist = new Date(Date.now() + 5.5 * 3600_000);
+  const friday = new Date(Date.UTC(ist.getUTCFullYear(), ist.getUTCMonth(), ist.getUTCDate() - ((ist.getUTCDay() + 6) % 7) + 4, 14, 30));
+  await admin("jobs/run", { job: "host", at: friday.toISOString() });
+  await post("/rooms/join", { memberId: m1, roomId: "room-repeaters" });
+  await post("/rooms/join", { memberId: m2, roomId: "room-repeaters" });
+  const q1 = await connect("room-repeaters", m1, "Asha");
+  const h1 = await q1.next((e) => e.type === "history");
+  assert.ok(h1.quiz?.questions.length === 5, "the room has this week's quiz");
+  assert.ok(h1.quiz.questions.every((q) => q.answerIndex === undefined), "answers aren't sent before you answer");
+  const q2 = await connect("room-repeaters", m2, "Bilal");
+  await q2.next((e) => e.type === "history");
+  for (const [c, choice] of [[q1, 0], [q2, 1]]) for (let q = 0; q < 5; q++) { c.send({ type: "quiz_answer", q, choice }); await c.next((e) => e.type === "quiz_result" && e.q === q); }
+  const board = await call("/rooms/leaderboard");
+  assert.equal(board.status, 200);
+  const mine = board.data.rooms.find((r) => r.id === "room-repeaters");
+  assert.ok(mine, "a room with 10 answers this week is on the board");
+  assert.ok(mine.answered >= 10 && mine.players >= 2 && mine.pct >= 0 && mine.pct <= 100);
+  assert.deepEqual(board.data.rooms.map((r) => r.rank), board.data.rooms.map((_, i) => i + 1));
+  assert.ok(board.data.rooms.every((r, i, a) => i === 0 || a[i - 1].pct >= r.pct), "ranked by the room's shared score");
+  assert.ok(!JSON.stringify(board.data).includes(m1) && !/memberId|"name":"Asha"/.test(JSON.stringify(board.data)), "no person on the board");
+  assert.ok(board.data.waiting.every((r) => r.answered < board.data.minAnswers), "rooms under the minimum wait");
+  step("Room Quiz Night: one shared score per room, ranked on the room board, people never");
+
+  // --- The pinned question of the day ------------------------------------------------------------------------
+  const pins = await admin("jobs/run", { job: "pins" });
+  assert.equal(pins.data.rooms, 17);
+  q1.ws.close(); q2.ws.close();
+  const p1 = await connect("room-repeaters", m1, "Asha");
+  const ph = (await p1.next((e) => e.type === "history")).pinned;
+  assert.ok(ph && ph.question && ph.kind === "mcq" && ph.options.length >= 2, "the room has a pinned MCQ today");
+  if (ph.mine === null) assert.equal(ph.answerIndex, undefined, "no answer before you answer");
+  p1.send({ type: "pinned_answer", choice: 0 });
+  const pr = await p1.next((e) => e.type === "pinned_result");
+  assert.ok(Number.isInteger(pr.answerIndex) && typeof pr.right === "boolean");
+  const first = pr.choice;
+  p1.send({ type: "pinned_answer", choice: 1 });
+  assert.equal((await p1.next((e) => e.type === "pinned_result")).choice, first, "one answer each");
+  const tally = await p1.next((e) => e.type === "pinned" && e.pinned);
+  assert.ok(tally.pinned.tally.answered >= 1 && tally.pinned.mine === null && tally.pinned.answerIndex === undefined, "the room sees a tally, not who answered");
+  assert.equal((await admin("jobs/run", { job: "pins" })).data.pinned, 0, "one pin a day");
+  p1.ws.close();
+  step("each room pins a question a day, one answer each, a shared tally");
+
+  // --- Photos in "Send to pod": members of that room only, gone after 7 days ---------------------------------
+  const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, ...Array(64).fill(7), 0xff, 0xd9]).toString("base64");
+  assert.equal((await post("/rooms/photo", { memberId: outsider, roomId: "room-repeaters", image: { mime: "image/jpeg", data: jpeg } })).status, 403, "join first");
+  assert.equal((await post("/rooms/photo", { memberId: m1, roomId: "room-repeaters", image: { mime: "image/png", data: jpeg } })).status, 400, "JPEG only");
+  assert.equal((await post("/rooms/photo", { memberId: m1, roomId: "room-repeaters", image: { mime: "image/jpeg", data: Buffer.from("GIF89a").toString("base64") } })).status, 400, "really a JPEG");
+  const up = await post("/rooms/photo", { memberId: m1, roomId: "room-repeaters", image: { mime: "image/jpeg", data: jpeg } });
+  assert.equal(up.status, 200, JSON.stringify(up.data));
+  assert.match(up.data.ref, /^photo:[0-9a-f]{32}$/);
+  assert.ok(Math.abs(new Date(up.data.expiresAt) - Date.now() - 7 * 86400_000) < 60_000, "kept 7 days");
+  const got = await fetch(`${BASE}/rooms/photo/${up.data.id}?member=${m2}`);
+  assert.equal(got.status, 200);
+  assert.equal(got.headers.get("content-type"), "image/jpeg");
+  assert.equal((await got.arrayBuffer()).byteLength, Buffer.from(jpeg, "base64").length);
+  assert.equal((await fetch(`${BASE}/rooms/photo/${up.data.id}?member=${outsider}`)).status, 403, "only that room's members");
+  const swept = await admin("jobs/run", { job: "photos", at: new Date(Date.now() + 8 * 86400_000).toISOString() });
+  assert.ok(swept.data.deleted >= 1);
+  assert.equal((await fetch(`${BASE}/rooms/photo/${up.data.id}?member=${m2}`)).status, 404, "swept after 7 days");
+  step("a photo sent to a room: JPEG only, members only, swept after 7 days");
+
   // --- At the threshold matched pods switch on, rooms stay ---------------------------------------------------
   assert.equal((await admin("growth/threshold", { signupThreshold: 0 })).data.mode, "matched");
   const joined = await post("/pods/join", { memberId: m1, stage: "rooms" + rid().slice(0, 6) });
