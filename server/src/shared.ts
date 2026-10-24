@@ -12,6 +12,10 @@ export interface Env {
   MOD_TOKEN?: string;
   /** Optional: signs username/password session tokens (password.ts). Unset = a random key the Worker keeps in D1. */
   SESSION_SECRET?: string;
+  /** Resend key for password recovery email (mail.ts). A secret (`wrangler secret put`), never in files or chat. */
+  RESEND_API_KEY?: string;
+  /** The sender for recovery email, e.g. "UPSC Pods <no-reply@example.com>", on a domain verified with Resend. */
+  MAIL_FROM?: string;
   /** Optional owner key. Without it, EDITOR_TOKEN is the owner key. */
   ADMIN_TOKEN?: string;
   /** Claude key for the desk's Author tab. Typed by the owner into .dev.vars or `wrangler secret put`. Never in files or chat. */

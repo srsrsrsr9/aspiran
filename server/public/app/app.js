@@ -363,6 +363,8 @@ function render() {
   const r = route();
   const space = spaceOf(r.name);
   document.documentElement.dataset.space = space;
+  // A link from a "Reset your password" email: #reset=<code>.
+  if (r.name.startsWith("reset=")) { put(root, resetScreen(r.name.slice(6))); return; }
   // Sign-in (auth.js): a switched-off account, an install that hasn't signed in yet, or offline past the grace period.
   if (Auth.suspended() && !PUBLIC.has(r.name)) { put(root, suspendedView()); return; }
   const needsSignIn = profile() && !Auth.optional() && !Auth.signedIn();
@@ -1876,6 +1878,7 @@ function viewMe() {
       h("p", Auth.session()?.email ? ["Signed in as ", h("strong", Auth.session().email)] : (Auth.session()?.label ?? "Signed in")),
       h("p.small.muted", Auth.session()?.provider === "password" ? "Only you see this. Your pod sees your nickname, never your username." : "Only you see this. Your pod sees your nickname, never your email."),
       Auth.session()?.provider === "password" ? h("details", h("summary", "Change password"), newPasswordForm(false)) : null,
+      Auth.session()?.provider === "password" && Auth.recoveryOn() ? h("details", h("summary", "Recovery email"), recoveryEmailForm()) : null,
       h("div.row", h("button", { onclick: async () => { if (!confirm("Sign out? Everything saved in this browser stays here; sign in again to use your pod and Chotu.")) return; pod.ws?.close(); commonsLeave(); await Auth.signOut(); location.hash = "#adda"; render(); } }, "Sign out"),
         h("button", { onclick: deleteData }, "Delete my account"))),
     h("div.card", h("h3", { style: { marginTop: 0 } }, tr("path.name")), name,
@@ -2060,9 +2063,14 @@ function passwordForm(hint, done, open) {
     put(flip, up ? "I already have an account" : "New here? Create an account");
     pass.autocomplete = up ? "new-password" : "current-password";
     pass2.hidden = !up;
-    put(note, up ? "Usernames are 3 to 30 small letters, numbers, _ or . Use at least 8 characters for the password. There's no email, so keep your password safe: if you forget it, write to support and we'll set a temporary one." : "");
+    put(note, up ? "Usernames are 3 to 30 small letters, numbers, _ or . Use at least 8 characters for the password. " +
+      (Auth.recoveryOn() ? "After signing in you can add a recovery email in Me → Account, in case you forget it." : "Keep your password safe: if you forget it, write to support and we'll set a temporary one.") : "");
+    forgot.hidden = up;
     put(msg, "");
   };
+  const forgot = h("button.ghost.small", { onclick: () => { forgotBox.hidden = !forgotBox.hidden; } }, "Forgot password?");
+  const forgotBox = forgotForm(done);
+  forgotBox.hidden = true;
   flip.onclick = () => { kind = kind === "signin" ? "signup" : "signin"; draw(); };
   const submit = async () => {
     const u = user.value.trim().toLowerCase();
@@ -2078,8 +2086,86 @@ function passwordForm(hint, done, open) {
   go.onclick = submit;
   [user, pass, pass2].forEach((i) => i.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); }));
   draw();
-  const form = h("div.col", { style: { gap: "8px", marginTop: open ? "0" : "12px" } }, open ? null : h("h3", { style: { margin: 0 } }, "Username and password"), user, pass, pass2, note, h("div.row", go, flip), msg);
+  const form = h("div.col", { style: { gap: "8px", marginTop: open ? "0" : "12px" } }, open ? null : h("h3", { style: { margin: 0 } }, "Username and password"), user, pass, pass2, note, h("div.row", go, flip), msg, forgot, forgotBox);
   return form;
+}
+
+/** Forgot password: ask for a code by username or recovery email, then set a new password with it. */
+function forgotForm(done, code = "") {
+  if (!Auth.recoveryOn()) return h("p.small.muted", "Write to support and we'll set a temporary password for you. You choose a new one when you sign in.");
+  const who = h("input", { type: "text", placeholder: "Username or recovery email", autocomplete: "username", autocapitalize: "none", spellcheck: "false", maxlength: 200 });
+  const msg = h("p.small", { role: "status", "aria-live": "polite" });
+  const send = h("button", { onclick: async () => {
+    if (!who.value.trim()) { put(msg, "Type your username or your recovery email."); return; }
+    send.disabled = true; put(msg, "Sending…");
+    try { const d = await Auth.forgotPassword(who.value); put(msg, d.message); resetBox.hidden = false; }
+    catch (e) { put(msg, e.message); }
+    send.disabled = false;
+  } }, "Email me a reset code");
+  const resetBox = resetForm(code, done);
+  resetBox.hidden = !code;
+  const have = h("button.ghost.small", { onclick: () => { resetBox.hidden = false; } }, "I have a code");
+  return h("div.col", { style: { gap: "8px" } }, h("p.small.muted", "If you added a recovery email, we'll send a code to it. It works once, for 30 minutes."),
+    who, h("div.row", send, have), msg, resetBox);
+}
+
+/** The code from the email and a new password. Signs this browser in; other devices are signed out. */
+function resetForm(code, done) {
+  const box = h("input", { type: "text", placeholder: "Code from the email", autocomplete: "one-time-code", autocapitalize: "none", spellcheck: "false", value: code });
+  const next = h("input", { type: "password", placeholder: "New password (at least 8 characters)", autocomplete: "new-password" });
+  const again = h("input", { type: "password", placeholder: "New password again", autocomplete: "new-password" });
+  const msg = h("p.small", { role: "status", "aria-live": "polite" });
+  const go = h("button.primary", { onclick: async () => {
+    if (!box.value.trim()) { put(msg, "Paste the code from the email."); return; }
+    if (next.value.length < 8) { put(msg, "Use at least 8 characters."); return; }
+    if (next.value !== again.value) { put(msg, "The two new passwords don't match."); return; }
+    go.disabled = true; put(msg, "Saving…");
+    try { const d = await Auth.resetPassword(box.value, next.value); next.value = again.value = ""; put(msg, "Password changed. Other devices are signed out."); done(d); }
+    catch (e) { put(msg, e.message); go.disabled = false; }
+  } }, "Set my new password");
+  return h("div.col", { style: { gap: "8px" } }, box, next, again, h("div.row", go), msg);
+}
+
+/** Opened from the link in a reset email. */
+function resetScreen(code) {
+  const finish = (d) => {
+    // The code is used: replace() takes it out of the address and the history.
+    if (d.status === "suspended") { location.replace("#adda"); return; }
+    access.state = "ok";
+    // Like signing in: an account used on another device brings its pod here.
+    const p = profile();
+    if (p && d.memberId && d.memberId !== p.memberId) { store.set("profile", { ...p, memberId: d.memberId }); store.del("podSummary"); pod.summary = null; }
+    setTimeout(() => location.replace("#adda"), 1200);
+  };
+  return h("main", h("div.col", { style: { maxWidth: "560px", margin: "8vh auto" } },
+    h("div.center", kulhad("calm", 72)),
+    h("h1.center", "Choose a new password"),
+    h("div.card", Auth.recoveryOn() ? resetForm(code, finish) : h("p", "Password reset isn't available right now. Please try again later.")),
+    h("p.small.center", h("a", { href: "#" }, "Back to UPSC Pods"))));
+}
+
+/** Me → Account: an email for "Forgot password?". Checked with a 6-digit code before it's used. */
+function recoveryEmailForm() {
+  const box = h("div.col", { style: { gap: "8px" } }, h("p.small.muted", "Loading…"));
+  const draw = (st) => {
+    const msg = h("p.small", { role: "status", "aria-live": "polite" });
+    const email = h("input", { type: "email", placeholder: "Email address", autocomplete: "email", maxlength: 200 });
+    const code = h("input", { type: "text", placeholder: "6-digit code", inputmode: "numeric", autocomplete: "one-time-code", maxlength: 6 });
+    const act = (fn, busyText) => async (e) => {
+      e.target.disabled = true; put(msg, busyText);
+      try { draw(await fn()); } catch (err) { put(msg, err.message); e.target.disabled = false; }
+    };
+    const add = h("button", { onclick: act(() => Auth.recoveryAdd(email.value), "Sending a code…") }, st.email ? "Change email" : "Send a code");
+    const verify = h("button.primary", { onclick: act(() => Auth.recoveryVerify(code.value), "Checking…") }, "Confirm");
+    const remove = h("button.ghost", { onclick: act(() => Auth.recoveryRemove(), "Removing…") }, "Remove");
+    put(box,
+      h("p.small.muted", "Only for resetting your password if you forget it. We don't send anything else, and nobody else sees it."),
+      st.email ? h("p", "Recovery email: ", h("strong", st.email)) : h("p", "No recovery email yet."),
+      st.pending ? [h("p.small", `We sent a code to ${st.pending}. Type it here. It works for 30 minutes.`), code, h("div.row", verify)] : null,
+      email, h("div.row", add, st.email ? remove : null), msg);
+  };
+  Auth.recoveryStatus().then(draw).catch((e) => put(box, h("p.small", e.message)));
+  return box;
 }
 
 /** After a temporary password (forced), or from Me → Account. */

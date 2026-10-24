@@ -25,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,6 +50,7 @@ import com.upscpods.app.Brand
 import com.upscpods.app.data.Auth
 import com.upscpods.app.data.AuthConfig
 import com.upscpods.app.data.AuthSession
+import com.upscpods.app.data.RecoveryEmail
 import kotlinx.coroutines.launch
 
 private tailrec fun Context.activity(): Activity? = when (this) {
@@ -82,6 +84,7 @@ fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetr
         if (msg != null && msg == Auth.lastGoogleError) TextButton(onClick = { clip.setText(AnnotatedString(msg ?: "")) }) { Text("Copy error details") }
     }
     val pwOn = auth?.password == true && server.isNotBlank()
+    val recoveryOn = pwOn && auth?.recovery == true
     var pwOpen by rememberSaveable { mutableStateOf(false) }
     var mustChange by remember { mutableStateOf<AuthSession?>(null) }
 
@@ -95,7 +98,7 @@ fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetr
                 return@Column
             }
             when {
-                pwOn && !googleReady && !devReady -> PasswordForm(server, memberIdHint, open = true) { s, change -> if (change) mustChange = s else onDone(s) }
+                pwOn && !googleReady && !devReady -> PasswordForm(server, memberIdHint, open = true, recoveryOn) { s, change -> if (change) mustChange = s else onDone(s) }
                 server.isBlank() -> Text("Set the pod server first, in Me → My Path. Then come back here to sign in.")
                 mode == null -> {
                     Text("Connect to the internet to sign in. It only takes a minute.")
@@ -125,17 +128,21 @@ fun SignInPanel(server: String, auth: AuthConfig?, memberIdHint: String?, onRetr
             }
             if (pwOn && (googleReady || devReady)) {
                 if (!pwOpen) TextButton(onClick = { pwOpen = true }) { Text("Use username and password") }
-                else PasswordForm(server, memberIdHint, open = false) { s, change -> if (change) mustChange = s else onDone(s) }
+                else PasswordForm(server, memberIdHint, open = false, recoveryOn) { s, change -> if (change) mustChange = s else onDone(s) }
             }
         }
     }
 }
 
-/** Username and password: sign in, or create an account. No email, so staff reset a forgotten password. */
+/**
+ * Username and password: sign in, or create an account. A forgotten password is reset by email when the account has
+ * a recovery email and the server can send mail ([recovery]); otherwise staff set a temporary one.
+ */
 @Composable
-private fun PasswordForm(server: String, memberIdHint: String?, open: Boolean, onDone: (AuthSession, Boolean) -> Unit) {
+private fun PasswordForm(server: String, memberIdHint: String?, open: Boolean, recovery: Boolean, onDone: (AuthSession, Boolean) -> Unit) {
     val scope = rememberCoroutineScope()
     var signUp by rememberSaveable { mutableStateOf(false) }
+    var forgot by rememberSaveable { mutableStateOf(false) }
     var user by rememberSaveable { mutableStateOf("") }
     var pass by remember { mutableStateOf("") }
     var pass2 by remember { mutableStateOf("") }
@@ -165,12 +172,119 @@ private fun PasswordForm(server: String, memberIdHint: String?, open: Boolean, o
         if (signUp) {
             OutlinedTextField(pass2, { pass2 = it.take(200) }, singleLine = true, label = { Text("Password again") }, modifier = Modifier.fillMaxWidth(),
                 visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password))
-            Text("Usernames are 3 to 30 small letters, numbers, _ or . Use at least 8 characters for the password. There's no email, so keep your password safe: if you forget it, write to support and we'll set a temporary one.",
+            Text("Usernames are 3 to 30 small letters, numbers, _ or . Use at least 8 characters for the password. " +
+                if (recovery) "After signing in you can add a recovery email in Me, in case you forget it." else "Keep your password safe: if you forget it, write to support and we'll set a temporary one.",
                 style = MaterialTheme.typography.bodySmall)
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Button(enabled = !busy, onClick = { submit() }) { Text(if (signUp) "Create account" else "Sign in") }
             TextButton(enabled = !busy, onClick = { signUp = !signUp; msg = null }) { Text(if (signUp) "I have an account" else "New here? Create an account") }
+        }
+        msg?.let { Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
+        if (!signUp) {
+            if (!forgot) TextButton(onClick = { forgot = true }) { Text("Forgot password?") }
+            else if (recovery) ForgotPasswordForm(server) { s -> onDone(s, false) }
+            else Text("Write to support and we'll set a temporary password for you. You choose a new one when you sign in.", style = MaterialTheme.typography.bodySmall)
+        }
+    }
+}
+
+/** Forgot password: a code by email (username or recovery email), then a new password with it. Signs this phone in. */
+@Composable
+private fun ForgotPasswordForm(server: String, onDone: (AuthSession) -> Unit) {
+    val scope = rememberCoroutineScope()
+    var who by rememberSaveable { mutableStateOf("") }
+    var code by rememberSaveable { mutableStateOf("") }
+    var next by remember { mutableStateOf("") }
+    var again by remember { mutableStateOf("") }
+    var haveCode by rememberSaveable { mutableStateOf(false) }
+    var msg by remember { mutableStateOf<String?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Forgot password?", style = MaterialTheme.typography.titleSmall)
+        Text("If you added a recovery email, we'll send a code to it. It works once, for 30 minutes.", style = MaterialTheme.typography.bodySmall)
+        OutlinedTextField(who, { who = it.take(200) }, singleLine = true, label = { Text("Username or recovery email") }, modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            OutlinedButton(enabled = !busy, onClick = {
+                if (who.isBlank()) { msg = "Type your username or your recovery email."; return@OutlinedButton }
+                busy = true; msg = "Sending…"
+                scope.launch {
+                    try { msg = Auth.forgotPassword(server, who); haveCode = true } catch (e: Exception) { msg = e.message }
+                    busy = false
+                }
+            }) { Text("Email me a code") }
+            if (!haveCode) TextButton(onClick = { haveCode = true }) { Text("I have a code") }
+        }
+        if (haveCode) {
+            OutlinedTextField(code, { code = it.trim().take(60) }, singleLine = true, label = { Text("Code from the email") }, modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii, autoCorrectEnabled = false))
+            listOf(
+                Triple("New password (at least 8 characters)", next) { v: String -> next = v },
+                Triple("New password again", again) { v: String -> again = v },
+            ).forEach { (label, value, set) ->
+                OutlinedTextField(value, { set(it.take(200)) }, singleLine = true, label = { Text(label) }, modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password))
+            }
+            Button(enabled = !busy, onClick = {
+                when {
+                    code.isBlank() -> msg = "Paste the code from the email."
+                    next.length < 8 -> msg = "Use at least 8 characters."
+                    next != again -> msg = "The two new passwords don't match."
+                    else -> {
+                        busy = true; msg = "Saving…"
+                        scope.launch {
+                            try { val s = Auth.resetPassword(server, code, next); next = ""; again = ""; code = ""; msg = null; onDone(s) }
+                            catch (e: Exception) { msg = e.message; busy = false }
+                        }
+                    }
+                }
+            }) { Text("Set my new password") }
+        }
+        msg?.let { Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
+    }
+}
+
+/** Me → Account: an email for "Forgot password?", used only after its 6-digit code is typed in. */
+@Composable
+fun RecoveryEmailForm(server: String, onDone: () -> Unit) {
+    val scope = rememberCoroutineScope()
+    var st by remember { mutableStateOf<RecoveryEmail?>(null) }
+    var email by rememberSaveable { mutableStateOf("") }
+    var code by rememberSaveable { mutableStateOf("") }
+    var msg by remember { mutableStateOf<String?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    LaunchedEffect(server) { try { st = Auth.recoveryStatus(server) } catch (e: Exception) { msg = e.message } }
+    fun act(busyText: String, call: suspend () -> RecoveryEmail) {
+        busy = true; msg = busyText
+        scope.launch {
+            try { st = call(); msg = null; code = "" } catch (e: Exception) { msg = e.message }
+            busy = false
+        }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("Recovery email", style = MaterialTheme.typography.titleSmall)
+        Text("Only for resetting your password if you forget it. We don't send anything else, and nobody else sees it.", style = MaterialTheme.typography.bodySmall)
+        val s = st
+        when {
+            s == null -> if (msg == null) Text("Loading…", style = MaterialTheme.typography.bodySmall)
+            !s.mail -> Text("Email isn't set up on this server yet.", style = MaterialTheme.typography.bodyMedium)
+            else -> {
+                Text(s.email?.let { "Recovery email: $it" } ?: "No recovery email yet.", style = MaterialTheme.typography.bodyMedium)
+                s.pending?.let { p ->
+                    Text("We sent a code to $p. Type it here. It works for 30 minutes.", style = MaterialTheme.typography.bodySmall)
+                    OutlinedTextField(code, { v -> code = v.filter { it.isDigit() }.take(6) }, singleLine = true, label = { Text("6-digit code") }, modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+                    Button(enabled = !busy, onClick = { act("Checking…") { Auth.recoveryVerify(server, code) } }) { Text("Confirm") }
+                }
+                OutlinedTextField(email, { email = it.trim().take(200) }, singleLine = true, label = { Text("Email address") }, modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false))
+            }
+        }
+        Row {
+            if (st?.mail == true) OutlinedButton(enabled = !busy, onClick = { act("Sending a code…") { Auth.recoveryAdd(server, email) } }) { Text(if (st?.email != null) "Change email" else "Send a code") }
+            if (st?.email != null) TextButton(enabled = !busy, onClick = { act("Removing…") { Auth.recoveryRemove(server) } }) { Text("Remove") }
+            TextButton(enabled = !busy, onClick = onDone) { Text("Close") }
         }
         msg?.let { Text(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite }) }
     }

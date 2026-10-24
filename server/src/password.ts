@@ -1,4 +1,6 @@
 import { type Account, upsertAccount } from "./auth";
+import { devTokenAllowed } from "./auth-dev";
+import { lastMail, mailOn, sendMail } from "./mail";
 import { b64u, checkPassword, cleanUsername, hashPassword, passwordProblem, unb64u } from "./password-hash";
 import { type Env, bad, json } from "./shared";
 import { type Staff, ensureSchema, flags, label, sha256Hex } from "./staff";
@@ -6,8 +8,11 @@ import { type Staff, ensureSchema, flags, label, sha256Hex } from "./staff";
 /**
  * Username and password sign-in: an alternative to Google, kept on our own server (no Firebase needed).
  *
- * - Usernames are 3-30 characters of a-z, 0-9, _ and . (stored lower-case). No email, so there is no self-service
- *   reset: staff set a one-time temporary password from the admin console, and the app asks for a new one.
+ * - Usernames are 3-30 characters of a-z, 0-9, _ and . (stored lower-case). Staff can set a one-time temporary
+ *   password from the admin console, and the app asks for a new one.
+ * - A member can add a recovery email (optional, checked with a 6-digit code). Then "Forgot password?" mails a
+ *   single-use reset link that works for 30 minutes (mail.ts). The code and the link are kept only as hashes. Asking
+ *   for a reset always gets the same answer, so it can't be used to find out who has an account or an email.
  * - Passwords are hashed with PBKDF2-SHA256 (WebCrypto), 100,000 iterations (the most Workers allows) and a
  *   per-user salt, and compared in constant time.
  * - Sign-in attempts are limited per username and per IP (the IP is kept only as a hash, for 15 minutes' counting).
@@ -76,7 +81,7 @@ export async function verifyPasswordToken(env: Env, token: string): Promise<{ ok
 
 const WINDOW = 15 * 60_000;
 /** [failures allowed in the window, then locked for the rest of it] */
-const LIMITS = { user: 5, ip: 30, signup: 10 } as const;
+const LIMITS = { user: 5, ip: 30, signup: 10, forgot: 10, forgotUser: 3, mailUser: 5, mailIp: 20, code: 5 } as const;
 
 async function clientIp(req: Request) {
   return sha256Hex("ip:" + (req.headers.get("cf-connecting-ip") ?? req.headers.get("x-real-ip") ?? "local"));
@@ -111,7 +116,21 @@ async function session(env: Env, login: PasswordLogin, a: Account) {
 
 const identity = (login: Pick<PasswordLogin, "uid" | "username">) => ({ uid: login.uid, provider: "password", phone: null, email: null, username: login.username });
 
-export async function passwordRoute(req: Request, env: Env, path: string): Promise<Response | null> {
+/** The signed-in password account, from the session token in the Authorization header. */
+async function signedInLogin(req: Request, env: Env): Promise<PasswordLogin | null> {
+  const t = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "").trim();
+  const v = isPasswordToken(t) ? await verifyPasswordToken(env, t) : null;
+  return v?.ok ? v.login : null;
+}
+const signInAgain = () => json({ error: "Please sign in again.", code: "auth_required" }, 401);
+
+export async function passwordRoute(req: Request, env: Env, path: string, ctx?: ExecutionContext): Promise<Response | null> {
+  // Local dev only: the last message the "log" mail provider kept, for test/password.mjs.
+  if (path === "/auth/password/dev/outbox" && req.method === "GET") {
+    const url = new URL(req.url);
+    if (!devTokenAllowed(env.AUTH_MODE, url)) return null;
+    return json(lastMail(url.searchParams.get("to")));
+  }
   if (!path.startsWith("/auth/password/") || req.method !== "POST") return null;
   await ensureSchema(env);
   const body = await req.json<any>().catch(() => ({}));
@@ -158,25 +177,142 @@ export async function passwordRoute(req: Request, env: Env, path: string): Promi
   }
 
   if (op === "change") {
-    const t = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "").trim();
-    const v = isPasswordToken(t) ? await verifyPasswordToken(env, t) : null;
-    if (!v?.ok) return json({ error: "Please sign in again.", code: "auth_required" }, 401);
-    if (await throttled(env, "u:" + v.login.username, LIMITS.user)) return tooMany();
-    if (!(await checkPassword(String(body.current ?? ""), v.login.pw_hash))) {
-      await addFail(env, "u:" + v.login.username);
+    const me = await signedInLogin(req, env);
+    if (!me) return signInAgain();
+    if (await throttled(env, "u:" + me.username, LIMITS.user)) return tooMany();
+    if (!(await checkPassword(String(body.current ?? ""), me.pw_hash))) {
+      await addFail(env, "u:" + me.username);
       return json({ error: "Your current password isn't right.", code: "auth_wrong" }, 401);
     }
     const p = passwordProblem(body.next);
     if (p) return bad(p);
     await env.DB.prepare("UPDATE password_logins SET pw_hash = ?, epoch = epoch + 1, must_change = 0, updated_at = ? WHERE uid = ?")
-      .bind(await hashPassword(body.next), new Date().toISOString(), v.login.uid).run();
-    await clearFails(env, "u:" + v.login.username);
-    const login = (await env.DB.prepare("SELECT * FROM password_logins WHERE uid = ?").bind(v.login.uid).first<PasswordLogin>())!;
+      .bind(await hashPassword(body.next), new Date().toISOString(), me.uid).run();
+    await clearFails(env, "u:" + me.username);
+    await dropResets(env, me.uid);
+    const login = (await env.DB.prepare("SELECT * FROM password_logins WHERE uid = ?").bind(me.uid).first<PasswordLogin>())!;
     const a = await upsertAccount(env, identity(login));
+    return json(await session(env, login, a));
+  }
+
+  // The recovery email, for the signed-in account only.
+  if (op === "recovery" || op.startsWith("recovery/")) {
+    const me = await signedInLogin(req, env);
+    if (!me) return signInAgain();
+    if (op === "recovery") return json({ ...recoveryView(await recoveryOf(env, me.uid)), mail: mailOn(env) });
+    if (op === "recovery/remove") {
+      await env.DB.prepare("DELETE FROM recovery_emails WHERE uid = ?").bind(me.uid).run();
+      await dropResets(env, me.uid);
+      return json({ ...recoveryView(null), mail: mailOn(env) });
+    }
+    if (op === "recovery/add") {
+      if (!mailOn(env)) return json({ error: "Email isn't set up on this server yet.", code: "mail_off" }, 503);
+      const email = cleanEmail(body.email);
+      if (!EMAIL.test(email) || email.length > 200) return bad("That doesn't look like an email address.");
+      const ip = await clientIp(req);
+      if (await throttled(env, "ev:" + me.uid, LIMITS.mailUser) || await throttled(env, "ev:" + ip, LIMITS.mailIp)) return tooMany();
+      await addFail(env, "ev:" + me.uid); // counts codes sent, not failures
+      await addFail(env, "ev:" + ip);
+      const code = String(crypto.getRandomValues(new Uint32Array(1))[0] % 1_000_000).padStart(6, "0");
+      const now = new Date().toISOString();
+      await env.DB.prepare(`INSERT INTO recovery_emails (uid, pending_email, code_hash, code_expires, code_tries, updated_at) VALUES (?, ?, ?, ?, 0, ?)
+        ON CONFLICT(uid) DO UPDATE SET pending_email = excluded.pending_email, code_hash = excluded.code_hash, code_expires = excluded.code_expires,
+        code_tries = 0, updated_at = excluded.updated_at`).bind(me.uid, email, await codeHash(me.uid, code), Date.now() + CODE_MIN * 60_000, now).run();
+      const ok = await sendMail(env, { to: email, subject: "Your UPSC Pods code", text:
+        `Hello @${me.username},\n\nYour code to add this email to your UPSC Pods account is: ${code}\n\nIt works for ${CODE_MIN} minutes. ` +
+        `If you didn't ask for it, you can ignore this email.\n` });
+      if (!ok) return json({ error: "Couldn't send the email. Please try again later.", code: "mail_failed" }, 503);
+      return json({ ...recoveryView(await recoveryOf(env, me.uid)), mail: true });
+    }
+    if (op === "recovery/verify") {
+      const r = await recoveryOf(env, me.uid);
+      if (!r?.code_hash || !r.code_expires || r.code_expires < Date.now()) return json({ error: "That code has expired. Please ask for a new one.", code: "code_expired" }, 400);
+      if (r.code_tries >= LIMITS.code) return tooMany();
+      if (await codeHash(me.uid, String(body.code ?? "").trim()) !== r.code_hash) {
+        await env.DB.prepare("UPDATE recovery_emails SET code_tries = code_tries + 1 WHERE uid = ?").bind(me.uid).run();
+        return json({ error: "That code isn't right.", code: "code_wrong" }, 400);
+      }
+      const now = new Date().toISOString();
+      await env.DB.prepare(`UPDATE recovery_emails SET email = pending_email, pending_email = NULL, code_hash = NULL, code_expires = NULL, code_tries = 0,
+        verified_at = ?, updated_at = ? WHERE uid = ?`).bind(now, now, me.uid).run();
+      return json({ ...recoveryView(await recoveryOf(env, me.uid)), mail: mailOn(env) });
+    }
+    return null;
+  }
+
+  // Forgot password: by username or recovery email. Always the same answer.
+  if (op === "forgot") {
+    if (!(await flags(env)).password_login) return json({ error: "Username sign-in is switched off right now. Please continue with Google.", code: "password_login_off" }, 403);
+    const ip = await clientIp(req);
+    if (await throttled(env, "rr:" + ip, LIMITS.forgot)) return tooMany();
+    await addFail(env, "rr:" + ip); // counts requests per IP
+    await env.DB.prepare("DELETE FROM password_resets WHERE expires_at < ?").bind(Date.now()).run();
+    const who = typeof body.who === "string" ? body.who.trim().toLowerCase().slice(0, 200) : "";
+    const sql = "SELECT p.uid, p.username, r.email FROM recovery_emails r JOIN password_logins p ON p.uid = r.uid WHERE r.email IS NOT NULL AND ";
+    const { results } = who.includes("@")
+      ? await env.DB.prepare(sql + "r.email = ? LIMIT 5").bind(who).all<{ uid: string; username: string; email: string }>()
+      : USERNAME.test(who) ? await env.DB.prepare(sql + "p.username = ?").bind(who).all<{ uid: string; username: string; email: string }>() : { results: [] };
+    const base = (env.PUBLIC_BASE_URL || new URL(req.url).origin).replace(/\/+$/, "");
+    for (const l of results) {
+      if (await throttled(env, "rr:u:" + l.uid, LIMITS.forgotUser)) continue;
+      await addFail(env, "rr:u:" + l.uid);
+      const token = b64u(crypto.getRandomValues(new Uint8Array(32)));
+      await env.DB.prepare("INSERT INTO password_resets (token_hash, uid, expires_at, created_at) VALUES (?, ?, ?, ?)")
+        .bind(await sha256Hex("reset:" + token), l.uid, Date.now() + RESET_MIN * 60_000, new Date().toISOString()).run();
+      // Sent after the answer, so a known address doesn't take longer to answer than an unknown one.
+      const mail = sendMail(env, { to: l.email, subject: "Reset your UPSC Pods password", text:
+        `Hello @${l.username},\n\nSomeone asked to reset the password for @${l.username} on UPSC Pods. If it was you, open this link within ` +
+        `${RESET_MIN} minutes to choose a new one:\n${base}/app/#reset=${token}\n\nOr in the app, tap "Forgot password?", then "I have a code", ` +
+        `and paste this code:\n${token}\n\nThe link works once. If it wasn't you, you can ignore this email: your password stays the same.\n` });
+      if (ctx) ctx.waitUntil(mail); else await mail;
+    }
+    return json({ ok: true, message: `If that account has a recovery email, we've sent a reset link to it. It works for ${RESET_MIN} minutes.` });
+  }
+
+  // Set a new password with the code from the email. Signs every other device out, and signs this one in.
+  if (op === "reset") {
+    if (!(await flags(env)).password_login) return json({ error: "Username sign-in is switched off right now. Please continue with Google.", code: "password_login_off" }, 403);
+    const ip = await clientIp(req);
+    if (await throttled(env, "rp:" + ip, LIMITS.ip)) return tooMany();
+    const token = typeof body.token === "string" ? body.token.trim() : "";
+    const row = /^[\w-]{40,50}$/.test(token)
+      ? await env.DB.prepare("SELECT uid, expires_at FROM password_resets WHERE token_hash = ?").bind(await sha256Hex("reset:" + token)).first<{ uid: string; expires_at: number }>()
+      : null;
+    if (!row || row.expires_at < Date.now()) {
+      await addFail(env, "rp:" + ip);
+      return json({ error: "That reset code has expired or was already used. Please ask for a new one.", code: "reset_invalid" }, 400);
+    }
+    const p = passwordProblem(body.next);
+    if (p) return bad(p);
+    await dropResets(env, row.uid); // single use: this one and any others
+    const upd = await env.DB.prepare("UPDATE password_logins SET pw_hash = ?, epoch = epoch + 1, must_change = 0, updated_at = ? WHERE uid = ?")
+      .bind(await hashPassword(body.next), new Date().toISOString(), row.uid).run();
+    const login = upd.meta.changes ? await env.DB.prepare("SELECT * FROM password_logins WHERE uid = ?").bind(row.uid).first<PasswordLogin>() : null;
+    if (!login) return json({ error: "That reset code has expired or was already used. Please ask for a new one.", code: "reset_invalid" }, 400);
+    await clearFails(env, "u:" + login.username);
+    await env.DB.prepare("INSERT INTO account_audit (at, uid, action, reason, actor_id, actor) VALUES (?, ?, 'reset_password', ?, 'member', 'Member')")
+      .bind(new Date().toISOString(), login.uid, "Reset by recovery email").run();
+    const a = await upsertAccount(env, identity(login), { appVersion: body.appVersion });
     return json(await session(env, login, a));
   }
   return null;
 }
+
+// --- Recovery email -------------------------------------------------------------------------------------------
+
+const CODE_MIN = 30;
+const RESET_MIN = 30;
+const EMAIL = /^[^@\s]{1,64}@[^@\s]+\.[^@\s]{2,}$/;
+const cleanEmail = (v: unknown) => (typeof v === "string" ? v.trim().toLowerCase() : "");
+const codeHash = (uid: string, code: string) => sha256Hex(`code:${uid}:${code}`);
+
+type Recovery = { uid: string; email: string | null; pending_email: string | null; code_hash: string | null; code_expires: number | null; code_tries: number };
+const recoveryOf = (env: Env, uid: string) => env.DB.prepare("SELECT * FROM recovery_emails WHERE uid = ?").bind(uid).first<Recovery>();
+/** What the account screen shows. Only ever the signed-in person's own address. */
+const recoveryView = (r: Recovery | null) => ({
+  email: r?.email ?? null, pending: r?.pending_email && r.code_expires && r.code_expires > Date.now() ? r.pending_email : null,
+});
+const dropResets = (env: Env, uid: string) => env.DB.prepare("DELETE FROM password_resets WHERE uid = ?").bind(uid).run();
 
 // --- Admin and erasure ----------------------------------------------------------------------------------------
 
@@ -190,6 +326,7 @@ export async function resetPassword(env: Env, uid: string, s: Staff) {
   await env.DB.prepare("UPDATE password_logins SET pw_hash = ?, epoch = epoch + 1, must_change = 1, updated_at = ? WHERE uid = ?")
     .bind(await hashPassword(temp), new Date().toISOString(), uid).run();
   await clearFails(env, "u:" + login.username);
+  await dropResets(env, uid);
   await env.DB.prepare("INSERT INTO account_audit (at, uid, action, reason, actor_id, actor) VALUES (?, ?, 'reset_password', ?, ?, ?)")
     .bind(new Date().toISOString(), uid, "Temporary password set", s.id, label(s)).run();
   return json({ ok: true, username: login.username, tempPassword: temp });
@@ -198,4 +335,6 @@ export async function resetPassword(env: Env, uid: string, s: Staff) {
 export const usernameOf = async (env: Env, uid: string) =>
   (await env.DB.prepare("SELECT username FROM password_logins WHERE uid = ?").bind(uid).first<{ username: string }>())?.username ?? null;
 
-export const forgetLogin = (env: Env, uid: string) => env.DB.prepare("DELETE FROM password_logins WHERE uid = ?").bind(uid).run();
+/** Erasure: the login, the recovery email and any reset links. */
+export const forgetLogin = (env: Env, uid: string) => env.DB.batch(["password_logins", "recovery_emails", "password_resets"]
+  .map((t) => env.DB.prepare(`DELETE FROM ${t} WHERE uid = ?`).bind(uid)));

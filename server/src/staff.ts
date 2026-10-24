@@ -133,7 +133,7 @@ export const FLAG_INFO = {
   announcements: "Announcement banners in the apps",
   pod_friends: "Pod friends: four AI study friends of Chotu (labelled · AI) who post in small pods. Never counted as members, never private, quiet 23:30-07:00, fewer posts as real people join",
   plus: "Plus: free limits, value-moment offers in Prep, trial, and yearly Plus on the web (Cashfree once its keys are set, test mode until then). Off until launch",
-  password_login: "Username and password sign-in, next to Continue with Google (no email, so staff reset forgotten passwords from Accounts). Off stops new sign-ups and sign-ins; people already signed in stay signed in",
+  password_login: "Username and password sign-in, next to Continue with Google (staff can reset forgotten passwords from Accounts; members with a recovery email can reset their own). Off stops new sign-ups and sign-ins; people already signed in stay signed in",
   sign_in_required: "Member features need a signed-in, active account. Switch off only while older app versions (without sign-in) are being replaced: then calls without a sign-in work as before, and suspended accounts are still refused",
 } as const;
 export type Flag = keyof typeof FLAG_INFO;
@@ -256,6 +256,12 @@ export const ADMIN_SCHEMA = [
     epoch INTEGER NOT NULL DEFAULT 1, must_change INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL, updated_at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS login_throttle (k TEXT PRIMARY KEY, fails INTEGER NOT NULL, window_start INTEGER NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS server_keys (name TEXT PRIMARY KEY, value TEXT NOT NULL, created_at TEXT NOT NULL)`,
+  // Password recovery by email (password.ts, migrations/0006_password_recovery.sql). Codes and reset tokens are hashed.
+  `CREATE TABLE IF NOT EXISTS recovery_emails (uid TEXT PRIMARY KEY, email TEXT, pending_email TEXT, code_hash TEXT, code_expires INTEGER,
+    code_tries INTEGER NOT NULL DEFAULT 0, verified_at TEXT, updated_at TEXT NOT NULL)`,
+  `CREATE INDEX IF NOT EXISTS recovery_emails_email ON recovery_emails(email)`,
+  `CREATE TABLE IF NOT EXISTS password_resets (token_hash TEXT PRIMARY KEY, uid TEXT NOT NULL, expires_at INTEGER NOT NULL, created_at TEXT NOT NULL)`,
+  `CREATE INDEX IF NOT EXISTS password_resets_uid ON password_resets(uid)`,
   // Growth metrics (metrics.ts): our own events, no third-party trackers. Never free text (no mood, journal or chat).
   `CREATE TABLE IF NOT EXISTS installs (install_id TEXT PRIMARY KEY, platform TEXT, source TEXT, invite_code TEXT, referrer TEXT,
     first_open_at TEXT NOT NULL, member_id TEXT)`,

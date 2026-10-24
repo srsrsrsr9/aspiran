@@ -34,7 +34,7 @@ export async function exportMember(env: Env, memberId: string, via: string, by: 
   const member = await env.DB.prepare("SELECT member_id, pod_id, joined_at, suspended_until, suspend_reason FROM members WHERE member_id = ?").bind(memberId).first<any>();
   const consents = (await env.DB.prepare("SELECT version, purposes, at, withdrawn_at FROM consents WHERE member_id = ?").bind(memberId).all()).results;
   const reports = (await env.DB.prepare("SELECT kind, pod_id, text, reason, status, created_at FROM reports WHERE member_id = ?").bind(memberId).all()).results;
-  const account = await env.DB.prepare("SELECT a.uid, a.provider, a.phone, a.email, p.username, a.status, a.created_at, a.last_seen_at, a.app_version FROM accounts a LEFT JOIN password_logins p ON p.uid = a.uid WHERE a.member_id = ?").bind(memberId).first();
+  const account = await env.DB.prepare("SELECT a.uid, a.provider, a.phone, a.email, p.username, r.email AS recovery_email, a.status, a.created_at, a.last_seen_at, a.app_version FROM accounts a LEFT JOIN password_logins p ON p.uid = a.uid LEFT JOIN recovery_emails r ON r.uid = a.uid WHERE a.member_id = ?").bind(memberId).first();
   // Usage events and one-tap feedback (metrics.ts): names, days and codes only, never text.
   const events = (await env.DB.prepare("SELECT name, props, day FROM events WHERE member_id = ? ORDER BY id").bind(memberId).all()).results;
   const feedback = (await env.DB.prepare("SELECT moment, rating, day FROM feedback WHERE member_id = ? ORDER BY id").bind(memberId).all()).results;
