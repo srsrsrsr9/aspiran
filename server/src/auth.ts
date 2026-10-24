@@ -1,6 +1,7 @@
 import { COMMONS_ROOMS } from "./commons";
 import { devTokenAllowed } from "./auth-dev";
 import { type FirebaseClaims, verifyFirebaseToken } from "./firebase-token";
+import { mailOn } from "./mail";
 import { logEvent } from "./metrics";
 import { forgetLogin, isPasswordToken, usernameOf, verifyPasswordToken } from "./password";
 import { type Env, bad, json } from "./shared";
@@ -158,7 +159,8 @@ export function publicAuthConfig(env: Env, url: URL, required: boolean, password
   return {
     mode: devTokenAllowed(env.AUTH_MODE, url) ? "dev" : firebase ? "firebase" : "unconfigured",
     // password: username and password sign-in is on (password.ts), shown next to "Continue with Google".
-    required, firebase, password, support: env.SUPPORT_CONTACT || null, checkHours: 6, graceHours: 72,
+    // recovery: "Forgot password?" by email works here (mail.ts is set up).
+    required, firebase, password, recovery: password && mailOn(env), support: env.SUPPORT_CONTACT || null, checkHours: 6, graceHours: 72,
   };
 }
 

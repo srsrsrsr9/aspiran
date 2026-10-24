@@ -8,7 +8,8 @@
 //     account_suspended from any call the same way,
 //   - keeps a 72-hour offline grace from the last successful check.
 // Username and password (config.auth.password, server password.ts) is the other way in: the server issues its own
-// session token, kept here in localStorage and sent exactly like the Firebase ID token.
+// session token, kept here in localStorage and sent exactly like the Firebase ID token. With a recovery email
+// (config.auth.recovery), "Forgot password?" mails a single-use reset code.
 // The Google email stays with Firebase and the server's accounts table; nothing here shows it to anyone else.
 
 const FIREBASE_SDK = "https://www.gstatic.com/firebasejs/10.14.1";
@@ -41,6 +42,8 @@ export const mode = () => cfg.mode;
 export const optional = () => !cfg.required && cfg.mode === "unconfigured" && !cfg.password;
 /** Username and password sign-in is offered (the password_login flag). */
 export const passwordOn = () => !!cfg.password;
+/** "Forgot password?" by email works on this server (mail is set up). */
+export const recoveryOn = () => !!cfg.password && !!cfg.recovery;
 
 export async function init(authConfig, { onSuspend } = {}) {
   if (authConfig) { cfg = authConfig; ls.set("config", authConfig); } else cfg = ls.get("config") ?? cfg;
@@ -127,6 +130,32 @@ export async function changePassword(current, next) {
   return d;
 }
 
+/** POST to /auth/password/<op>, with this device's session token when signed in. Throws with the server's message. */
+async function pwPost(op, body = {}, fallback = "Something went wrong. Please try again.") {
+  const headers = { "content-type": "application/json", ...(pwToken ? { authorization: "Bearer " + pwToken } : {}) };
+  const r = await rawFetch("/auth/password/" + op, { method: "POST", headers, body: JSON.stringify(body) }).catch(() => null);
+  if (!r) throw new Error("You seem to be offline. Connect and try again.");
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.error ?? fallback);
+  return d;
+}
+/** The recovery email on this account: { email, pending, mail }. */
+export const recoveryStatus = () => pwPost("recovery");
+/** Sends a 6-digit code to the address; it's used only after recoveryVerify. */
+export const recoveryAdd = (email) => pwPost("recovery/add", { email: String(email ?? "").trim() }, "Couldn't send the code. Please try again.");
+export const recoveryVerify = (code) => pwPost("recovery/verify", { code: String(code ?? "").trim() });
+export const recoveryRemove = () => pwPost("recovery/remove");
+/** By username or recovery email. The answer is the same whether or not the account exists. */
+export const forgotPassword = (who) => pwPost("forgot", { who: String(who ?? "").trim() });
+/** Sets a new password with the code from the email, and signs this browser in. Other devices are signed out. */
+export async function resetPassword(code, next) {
+  const d = await pwPost("reset", { token: String(code ?? "").trim(), next, appVersion: "web" }, "Couldn't reset your password. Please try again.");
+  savePasswordSession(d);
+  if (d.status === "suspended") { markSuspended(d.support); return d; }
+  ls.del("suspended"); ls.set("lastOk", Date.now());
+  return d;
+}
+
 function friendly(e) {
   const code = e?.code ?? "";
   const msg = {
@@ -206,7 +235,7 @@ export async function check({ force = false } = {}) {
     return Date.now() - last < GRACE_MS ? "offline-ok" : "offline-expired";
   }
 }
-/** Offline and past the grace period: the app shows "Connect to the internet". */
+/** Offline and past the grace period: the app still reads what this browser has, with an offline banner. */
 export const graceOver = () => !optional() && signedIn() && Date.now() - lastOk() >= GRACE_MS;
 /** After a suspension is lifted, the person signs in again from the notice. */
 export const clearSuspended = () => ls.del("suspended");

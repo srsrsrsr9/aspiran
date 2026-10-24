@@ -62,7 +62,8 @@ import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.RoadmapStore
 import com.upscpods.app.ui.RoadmapSection
 import com.upscpods.app.data.AuthSession
-import com.upscpods.app.ui.OfflineGate
+import com.upscpods.app.ui.OfflineBanner
+import com.upscpods.app.ui.OfflineReader
 import com.upscpods.app.ui.SignInPanel
 import com.upscpods.app.ui.SignInScreen
 import com.upscpods.app.ui.SuspendedScreen
@@ -265,6 +266,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     var gateTalk by rememberSaveable { mutableStateOf(false) }
     // A sign-in whose account already had a member id (from another phone) brings that pod here.
     val signedIn = { s: AuthSession -> if (s.memberId.isNotBlank()) pod.adoptMemberId(s.memberId) }
+    // Not signed in and offline (a first run, or after Sign out): today's Chai from the phone, public content only.
+    var offlineRead by rememberSaveable { mutableStateOf(false) }
+    if (offlineRead && Auth.suspended == null && !Auth.signedIn) {
+        OfflineReader(bundled) { offlineRead = false }
+        return
+    }
     if (!profile.onboarded) {
         // Switched off at sign-in during first run: the notice; there's nothing saved on the phone yet but the language vote.
         Auth.suspended?.let { support ->
@@ -275,7 +282,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         }
         OnboardingScreen(langRequests, community,
             signIn = if (authOptional) null else ({ done ->
-                SignInPanel(pod.serverUrl, config.auth, pod.memberId, onRetryConfig = { config.refresh() }) { s -> signedIn(s); done() }
+                SignInPanel(pod.serverUrl, config.auth, pod.memberId, onRetryConfig = { config.refresh() }, onReadOffline = { offlineRead = true }) { s -> signedIn(s); done() }
             }),
             onFinish = { consented, persona ->
             ProfileStore.save(context, consented, persona)
@@ -289,17 +296,15 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val persona = profile.persona
     if (!authOptional && Auth.suspended == null && !Auth.signedIn) {
         // An install from before sign-in (or after Sign out): one screen; everything on the phone stays.
-        SignInScreen(persona?.name, pod.serverUrl, config.auth, pod.memberId, onRetryConfig = { config.refresh() }, onNeedToTalk = { gateTalk = true }) { s ->
+        SignInScreen(persona?.name, pod.serverUrl, config.auth, pod.memberId, onRetryConfig = { config.refresh() }, onNeedToTalk = { gateTalk = true },
+            onReadOffline = { offlineRead = true }) { s ->
             signedIn(s); pod.start(persona)
         }
         if (gateTalk) NeedToTalkSheet(onDial, onDismiss = { gateTalk = false })
         return
     }
-    if (!authOptional && Auth.suspended == null && Auth.access == Access.OFFLINE_EXPIRED) {
-        OfflineGate(onTryAgain = { if (Auth.check(pod.serverUrl, force = true) == Access.OK) pod.start(persona) }, onNeedToTalk = { gateTalk = true })
-        if (gateTalk) NeedToTalkSheet(onDial, onDismiss = { gateTalk = false })
-        return
-    }
+    // Offline past the 72-hour check no longer closes the app: it reads from the phone, with a banner (OfflineBanner),
+    // and pod chat stays off (pod.mayConnect) until the account is checked again.
     val day = remember { DayState() }
     val repo = remember { AppRepository(context) }
     val chotu = remember { Chotu.get(context) }
@@ -704,6 +709,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     AnnouncementBanner(a,
                         onOpenLink = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(it))) },
                         onDismiss = { config.dismiss(a.id) })
+                }
+                if (!authOptional && (Auth.access == Access.OFFLINE_OK || Auth.access == Access.OFFLINE_EXPIRED)) {
+                    OfflineBanner(expired = Auth.access == Access.OFFLINE_EXPIRED) { if (Auth.check(pod.serverUrl, force = true) == Access.OK) pod.start(persona) }
                 }
                 }
             },

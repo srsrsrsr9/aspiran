@@ -1,8 +1,10 @@
-// Offline for the desktop app: the shell is cached; cards, library and questions are network-first
-// with the last copy as a fallback. Pod sockets and media pass straight through.
-const SHELL = "upsc-shell-v14";
-const FILES = ["./", "index.html", "app.js", "strings.js", "profile-db.js", "kulhad.js", "honest.js", "welcome.js", "auth.js", "metrics.js", "videos.js", "calm-audio.js", "calm-scripts.js", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
-const DATA = /^\/(brief\/latest|library|practice\/questions)$/;
+// Offline for the desktop app: the whole shell is precached on install, so a second visit opens with no connection.
+// The day-1 reads (today's brief, the library with PYQs, practice questions, /config) are network-first with the last
+// copy as a fallback, so what the first online visit loaded stays readable offline. Only public reads are cached here:
+// member routes (pods, Chotu, Plus, privacy), sockets and media pass straight through.
+const SHELL = "upsc-shell-v15";
+const FILES = ["./", "index.html", "app.js", "strings.js", "profile-db.js", "kulhad.js", "honest.js", "welcome.js", "auth.js", "metrics.js", "videos.js", "calm-audio.js", "calm-scripts.js", "explore.js", "plus-page.js", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
+const DATA = /^\/(brief\/latest|library|practice\/questions|config)$/;
 
 self.addEventListener("install", (e) => e.waitUntil(caches.open(SHELL).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())));
 self.addEventListener("activate", (e) => e.waitUntil(

@@ -45,7 +45,7 @@ export default {
 
     // --- Sign-in (auth.ts): the session call, the access check, and the gate in front of every member route.
     // Past the gate, memberId (body) and member (query) are the signed-in account's own.
-    const auth = await authRoute(req, env, path, url) ?? await passwordRoute(req, env, path);
+    const auth = await authRoute(req, env, path, url) ?? await passwordRoute(req, env, path, ctx);
     if (auth) return auth;
     if (isMemberRoute(path)) {
       const gated = await memberGate(req, env, path, url);

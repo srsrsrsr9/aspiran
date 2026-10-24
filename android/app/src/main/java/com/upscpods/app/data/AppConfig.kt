@@ -28,8 +28,8 @@ data class ResultDay(val day: String, val label: String = "")
 
 /** /config's sign-in block: "dev" (local test server), "firebase", or "unconfigured"; and whether sign-in is required yet. */
 @Serializable
-/** [password]: the server offers username and password sign-in (the password_login flag), next to Google. */
-data class AuthConfig(val mode: String = "unconfigured", val required: Boolean = true, val support: String? = null, val password: Boolean = false)
+/** [password]: the server offers username and password sign-in (the password_login flag), next to Google. [recovery]: "Forgot password?" by email works. */
+data class AuthConfig(val mode: String = "unconfigured", val required: Boolean = true, val support: String? = null, val password: Boolean = false, val recovery: Boolean = false)
 
 /** Open rooms until the sign-up threshold, then matched pods too (server rooms.ts). */
 @Serializable

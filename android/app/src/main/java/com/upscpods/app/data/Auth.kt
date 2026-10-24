@@ -48,11 +48,17 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-/** Where the access check stands. OFFLINE_OK is inside the 72-hour grace; OFFLINE_EXPIRED shows "Connect to the internet". */
+/**
+ * Where the access check stands. OFFLINE_OK is inside the 72-hour grace; OFFLINE_EXPIRED is past it: the app still
+ * reads what the phone has (with a banner), but pod chat stays off until the account is checked again.
+ */
 enum class Access { OK, SIGN_IN, SUSPENDED, OFFLINE_OK, OFFLINE_EXPIRED }
 
 /** A sign-in the server knows about. [label] and [email] are for this person only ("Signed in as a@b.com"). */
 data class AuthSession(val uid: String, val memberId: String, val provider: String, val label: String, val email: String? = null)
+
+/** The recovery email on a username account: [email] once checked, [pending] while its code is out. [mail] is false when the server can't send email. */
+data class RecoveryEmail(val email: String?, val pending: String?, val mail: Boolean)
 
 /**
  * Sign-in and the access switch (auth-build.md). Firebase Authentication proves who someone is (Google only,
@@ -60,10 +66,12 @@ data class AuthSession(val uid: String, val memberId: String, val provider: Stri
  *
  * - Every member call carries the Firebase ID token ([AuthInterceptor] on each OkHttp client).
  * - /me/status is checked on open and on resume, at most every 6 hours; a 403 account_suspended from any call counts too.
- * - Offline, the app keeps working for 72 hours from the last successful check, then asks to connect.
+ * - Offline, the app keeps working from the phone. Past 72 hours from the last successful check, pod chat waits for a
+ *   connection; Chai, the library, saved current affairs, PYQs and Calm still open.
  * - Debug builds without Firebase settings use the server's local dev sign-in (AUTH_MODE=dev, local addresses only).
  * - Username and password (server password.ts, when /config says auth.password) is the other way in: the server
  *   issues its own session token ("upw."), kept in these prefs and sent exactly like the Firebase ID token.
+ *   With a recovery email (checked with a code), "Forgot password?" mails a single-use reset code.
  *
  * The Google email is kept by Firebase and the server's accounts table only; it is never shown to other
  * members and never sent to Chotu.
@@ -221,6 +229,43 @@ object Auth {
             .post(body.toString().toRequestBody("application/json".toMediaType())).build()
         val s = savePasswordSession(postForSession(req))
         withContext(Dispatchers.Main) { session = s }
+    }
+
+    // --- Recovery email and "Forgot password?" ---------------------------------------------------------------
+
+    /** POST /auth/password/<op>. [signedIn] sends this phone's session token (for the account's own recovery email). */
+    private fun pwCall(server: String, op: String, body: JsonObject = JsonObject(emptyMap()), signedIn: Boolean = false): JsonObject {
+        if (server.isBlank()) throw AuthError("Set the pod server first (Me → My Path).")
+        val b = Request.Builder().url("$server/auth/password/$op").post(body.toString().toRequestBody("application/json".toMediaType()))
+        if (signedIn) b.header("Authorization", "Bearer ${pwToken ?: throw AuthError("Please sign in again.")}")
+        return postForSession(b.build())
+    }
+    private fun JsonObject.recovery() = RecoveryEmail(str("email"), str("pending"), str("mail") == "true")
+
+    suspend fun recoveryStatus(server: String) = withContext(Dispatchers.IO) { pwCall(server, "recovery", signedIn = true).recovery() }
+    /** Sends a 6-digit code to [email]. The address is used only after [recoveryVerify]. */
+    suspend fun recoveryAdd(server: String, email: String) = withContext(Dispatchers.IO) {
+        pwCall(server, "recovery/add", buildJsonObject { put("email", email.trim()) }, signedIn = true).recovery()
+    }
+    suspend fun recoveryVerify(server: String, code: String) = withContext(Dispatchers.IO) {
+        pwCall(server, "recovery/verify", buildJsonObject { put("code", code.trim()) }, signedIn = true).recovery()
+    }
+    suspend fun recoveryRemove(server: String) = withContext(Dispatchers.IO) { pwCall(server, "recovery/remove", signedIn = true).recovery() }
+
+    /** By username or recovery email. The server's answer is the same whether or not the account exists. */
+    suspend fun forgotPassword(server: String, who: String): String = withContext(Dispatchers.IO) {
+        pwCall(server, "forgot", buildJsonObject { put("who", who.trim()) }).str("message") ?: "If that account has a recovery email, we've sent a code to it."
+    }
+
+    /** Sets a new password with the code from the email and signs this phone in. Other devices are signed out. */
+    suspend fun resetPassword(server: String, code: String, next: String): AuthSession = withContext(Dispatchers.IO) {
+        val d = pwCall(server, "reset", buildJsonObject { put("token", code.trim()); put("next", next); put("appVersion", "android-" + BuildConfig.VERSION_NAME) })
+        val s = savePasswordSession(d)
+        withContext(Dispatchers.Main) {
+            session = s
+            if (d.str("status") == "suspended") markSuspended(d.str("support")) else { clearSuspended(); markOk(); access = Access.OK }
+        }
+        s
     }
 
     private fun postForSession(req: Request): JsonObject {

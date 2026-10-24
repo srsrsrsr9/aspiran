@@ -105,6 +105,7 @@ fun MeTab(
 private fun AccountCard(onSignOut: () -> Unit, onDeleteAccount: () -> Unit, server: String) {
     var confirm by remember { mutableStateOf(false) }
     var changing by remember { mutableStateOf(false) }
+    var recovering by remember { mutableStateOf(false) }
     val isPassword = Auth.session?.provider == "password"
     FlatCard {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -112,6 +113,8 @@ private fun AccountCard(onSignOut: () -> Unit, onDeleteAccount: () -> Unit, serv
             Text(Auth.session?.email?.let { "Signed in as $it" } ?: Auth.session?.label ?: "Signed in", style = MaterialTheme.typography.bodyMedium)
             Text(if (isPassword) "Only you see this. Your pod sees your nickname, never your username." else "Only you see this. Your pod sees your nickname, never your email.", style = MaterialTheme.typography.bodySmall)
             if (isPassword && changing) ChangePasswordForm(server, forced = false) { changing = false }
+            if (isPassword && recovering) RecoveryEmailForm(server) { recovering = false }
+            if (isPassword && !changing && !recovering) TextButton(onClick = { recovering = true }) { Text("Add a recovery email") }
             Row {
                 if (isPassword && !changing) TextButton(onClick = { changing = true }) { Text("Change password") }
                 TextButton(onClick = { confirm = true }) { Text("Sign out") }

@@ -44,6 +44,9 @@
       // Add app → Web (public values that identify the project; the web app needs them to show "Continue with Google").
       // Payments (Cashfree): CASHFREE_ENV is "sandbox" or "production"; the keys are secrets (wrangler secret put CASHFREE_APP_ID /
       // CASHFREE_SECRET_KEY --env production), never here. PUBLIC_BASE_URL is where Cashfree sends people back after paying.
+      // Password recovery email (src/mail.ts, Resend): `wrangler secret put RESEND_API_KEY --env production`, and MAIL_FROM
+      // (e.g. "UPSC Pods <no-reply@your-domain>", a domain verified in Resend) as a var here or a secret. Without both,
+      // "Forgot password?" isn't offered and staff reset passwords from Accounts as before. Reset links use PUBLIC_BASE_URL.
       "vars": { "FIREBASE_PROJECT_ID": "upsc-pods", "FIREBASE_WEB_API_KEY": "AIzaSyCmNFDhIdcTHUGsWbnChe2sQVdloVJaNgM", "FIREBASE_WEB_APP_ID": "1:751265224545:web:424c58c484db24a5f69720", "SUPPORT_CONTACT": "", "CASHFREE_ENV": "sandbox", "PUBLIC_BASE_URL": "https://upsc-pods-production.chotu-aec.workers.dev" }
     }
   }

@@ -3,7 +3,8 @@
 //   EDITOR_TOKEN=<same> BASE=http://127.0.0.1:8790 node test/password.mjs
 // Part 1 checks the hashing and constant-time compare in plain Node. Part 2 checks sign-up, sign-in, generic errors,
 // the per-username rate limit, the session token on member routes and sockets, change password, staff reset with a
-// temporary password, suspension, erasure (a suspended username stays suspended) and the password_login flag.
+// temporary password, the recovery email and "Forgot password?" (read from the dev "log" mail provider, mail.ts),
+// suspension, erasure (a suspended username stays suspended, the recovery email goes) and the password_login flag.
 // It flips flags (and puts them back), so use a local database.
 import assert from "node:assert/strict";
 
@@ -47,6 +48,7 @@ const flagsBefore = (await admin("flags")).data.flags;
 assert.equal(flagsBefore.password_login, true, "on by default");
 const cfg = (await call("/config")).data.auth;
 assert.equal(cfg.password, true, "/config tells the apps");
+assert.equal(cfg.recovery, true, "recovery by email is on in dev (the log mail provider)");
 step("password_login is on by default and /config says so");
 
 const name = "t_" + rid().slice(0, 10);
@@ -124,14 +126,57 @@ const googleish = (await admin("accounts?q=")).data.find((a) => a.provider !== "
 if (googleish) assert.equal((await admin(`accounts/${googleish.uid}/reset-password`, {})).status, 404, "only for username accounts");
 step("staff find by username and set a one-time temporary password");
 
+// Recovery email: added with a 6-digit code. In dev the mail is kept, not sent, and read back here (local only).
+const mailbox = async (to) => (await call("/auth/password/dev/outbox?to=" + encodeURIComponent(to))).data;
+const email = `${name}@example.test`;
+assert.equal((await post("/auth/password/recovery", {})).status, 401, "needs the session token");
+assert.deepEqual((await post("/auth/password/recovery", {}, { token: tok })).data, { email: null, pending: null, mail: true });
+assert.equal((await post("/auth/password/recovery/add", { email: "not an email" }, { token: tok, headers: ip })).status, 400);
+const add = await post("/auth/password/recovery/add", { email: email.toUpperCase() }, { token: tok, headers: ip });
+assert.equal(add.status, 200, JSON.stringify(add.data));
+assert.equal(add.data.pending, email, "stored lower-case"); assert.equal(add.data.email, null, "not used until checked");
+const code = (await mailbox(email)).text.match(/\b(\d{6})\b/)[1];
+const wrongCode = String((Number(code) + 1) % 1_000_000).padStart(6, "0");
+assert.equal((await post("/auth/password/recovery/verify", { code: wrongCode }, { token: tok })).data.code, "code_wrong");
+const ver = await post("/auth/password/recovery/verify", { code }, { token: tok });
+assert.equal(ver.data.email, email); assert.equal(ver.data.pending, null);
+step("a recovery email is added only after its code is typed in");
+
+// Forgot password: the same answer for a real account, an unknown one and an unknown email.
+const f1 = await post("/auth/password/forgot", { who: name.toUpperCase() }, { headers: ip });
+const f2 = await post("/auth/password/forgot", { who: "nobody_" + rid().slice(0, 8) }, { headers: ip });
+const f3 = await post("/auth/password/forgot", { who: "nobody." + rid().slice(0, 8) + "@example.test" }, { headers: ip });
+assert.equal(f1.status, 200); assert.deepEqual(f2, f1); assert.deepEqual(f3, f1);
+const resetMail = await mailbox(email);
+assert.ok(resetMail.text.includes("@" + name));
+const rtok = resetMail.text.match(/#reset=([\w-]+)/)[1];
+assert.ok(resetMail.text.includes("\n" + rtok + "\n"), "the same code to paste in the app");
+assert.equal((await post("/auth/password/reset", { token: rtok.slice(0, -2) + "xx", next: "fifth password" }, { headers: ip })).data.code, "reset_invalid");
+assert.equal((await post("/auth/password/reset", { token: rtok, next: "short" }, { headers: ip })).status, 400);
+const rs = await post("/auth/password/reset", { token: rtok, next: "fifth password" }, { headers: ip });
+assert.equal(rs.status, 200, JSON.stringify(rs.data)); assert.equal(rs.data.username, name); assert.equal(rs.data.mustChange, false);
+assert.equal((await call("/me/status", { token: tok })).status, 401, "a reset signs other devices out");
+assert.equal((await post("/auth/password/reset", { token: rtok, next: "sixth password" }, { headers: ip })).data.code, "reset_invalid", "single use");
+assert.equal((await post("/auth/password/signin", { username: name, password: "third password" }, { headers: ip })).status, 401);
+assert.equal((await post("/auth/password/signin", { username: name, password: "fifth password" }, { headers: ip })).status, 200);
+tok = rs.data.token;
+await post("/auth/password/forgot", { who: email }, { headers: ip });
+const byEmail = await mailbox(email);
+assert.notEqual(byEmail.text, resetMail.text, "a new link when asked by email");
+assert.ok((await admin(`accounts/${uid}/history`)).data.some((x) => x.action === "reset_password" && x.reason === "Reset by recovery email"));
+step("forgot password: one answer for everyone, a single-use link, other devices signed out");
+
 // Suspend: refused everywhere; erasure keeps a suspended username suspended.
 await admin(`accounts/${uid}/suspend`, { reason: "test" });
 assert.equal((await post("/pods/me", { memberId: hint }, { token: tok })).status, 403);
-const sIn = await post("/auth/password/signin", { username: name, password: "third password" }, { headers: ip });
+const sIn = await post("/auth/password/signin", { username: name, password: "fifth password" }, { headers: ip });
 assert.equal(sIn.data.status, "suspended");
 assert.equal((await post("/privacy/delete", { memberId: hint }, { token: tok })).status, 200, "a suspended person can still erase");
 assert.equal((await admin("accounts?q=" + name)).data.length, 0, "account gone");
-assert.equal((await post("/auth/password/signin", { username: name, password: "third password" }, { headers: ip })).status, 401, "login gone");
+const lastAt = (await mailbox(email)).at;
+assert.equal((await post("/auth/password/forgot", { who: email }, { headers: ip })).status, 200);
+assert.equal((await mailbox(email)).at, lastAt, "the recovery email went with the erasure");
+assert.equal((await post("/auth/password/signin", { username: name, password: "fifth password" }, { headers: ip })).status, 401, "login gone");
 const again = await post("/auth/password/signup", { username: name, password: "fourth password" }, { headers: ip });
 assert.equal(again.status, 200); assert.equal(again.data.status, "suspended", "same username after erasure stays suspended");
 step("suspension and erasure work as for Google accounts");
