@@ -783,7 +783,7 @@ export function normalizeMock(d: any): any {
   d.questions = d.questions.map((q: any) => {
     if (q.en && "question" in q.en) return q;
     const topic = q.topic ?? NODE_NAMES[q.node] ?? (q.node ? String(q.node).replace(/^[a-z]+-/, "").replace(/-/g, " ").replace(/^./, (c: string) => c.toUpperCase()) : "");
-    const out: any = { topic, format: q.format, difficulty: q.difficulty };
+    const out: any = { topic, format: q.format, difficulty: q.difficulty, ...(q.nodes ? { nodes: q.nodes } : {}) };
     for (const l of Object.keys(q)) {
       if (q[l] && typeof q[l] === "object" && !Array.isArray(q[l]) && ("stem" in q[l] || "options" in q[l])) out[l] = { ...lang(q[l], l, q.format ?? ""), answerIndex: q.answer };
     }
