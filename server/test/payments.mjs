@@ -5,6 +5,8 @@
 //   EDITOR_TOKEN=pay-test-token CF_SECRET=local-test-secret BASE=http://127.0.0.1:8792 node --import ./test/dev-auth.mjs test/payments.mjs
 // Checks: the price and founding seats, creating an order, a bad webhook signature refused, a signed webhook granting
 // a year exactly once, the return check, receipts, a wrong amount refused, and a refund from admin ending Plus.
+// Google Play (src/play.ts): the play_billing flag is off by default, verify needs it, a bad body is refused, and
+// without PLAY_SERVICE_ACCOUNT_JSON (never set for this test) verify answers 503 and grants nothing.
 import assert from "node:assert/strict";
 import { createHmac } from "node:crypto";
 import { createServer } from "node:http";
@@ -50,6 +52,7 @@ const success = (orderId, amount) => ({ type: "PAYMENT_SUCCESS_WEBHOOK", data: {
 
 try {
   const flagsBefore = (await admin("flags")).data.flags;
+  assert.equal((await call("/config")).data.flags.play_billing, false, "play_billing is off by default");
   await admin("flags", { flags: { ...flagsBefore, plus: true } });
   await admin("pricing", { pricing: { yearlyInr: 2499, foundingInr: 999, foundingSeats: 300, foundingOn: true } });
   try {
@@ -116,6 +119,22 @@ try {
     const list = (await admin("payments")).data;
     assert.ok(list.rows.some((r) => r.order_id === o.orderId && r.status === "refunded"));
     step("a refund from admin goes to Cashfree and ends Plus");
+
+    // Google Play Billing: built, and off.
+    const pm = rid(), token = "test-token." + rid() + rid();
+    assert.equal((await post("/plus/status", { memberId: pm })).data.play.on, false, "no Play purchase while play_billing is off");
+    assert.equal((await post("/plus/play/verify", { memberId: pm, purchaseToken: token, productId: "plus_yearly" })).status, 404, "flag off: refused");
+    await admin("flags", { flags: { ...flagsBefore, plus: true, play_billing: true } });
+    assert.equal((await post("/plus/status", { memberId: pm })).data.play.on, true);
+    assert.equal((await post("/plus/status", { memberId: pm })).data.play.ready, false, "no service account here");
+    assert.equal((await post("/plus/play/verify", { memberId: pm, productId: "plus_yearly" })).status, 400, "no token");
+    assert.equal((await post("/plus/play/verify", { memberId: pm, purchaseToken: "short", productId: "plus_yearly" })).status, 400, "bad token");
+    assert.equal((await post("/plus/play/verify", { memberId: pm, purchaseToken: token, productId: "plus_monthly" })).status, 400, "wrong product");
+    const pv = await post("/plus/play/verify", { memberId: pm, purchaseToken: token, productId: "plus_yearly" });
+    assert.equal(pv.status, 503); assert.equal(pv.data.error, "Play verification isn't set up");
+    assert.equal((await post("/plus/status", { memberId: pm })).data.plan, null, "an unverified token grants nothing");
+    await admin("flags", { flags: { ...flagsBefore, plus: true } });
+    step("Play: off by default, a bad body refused, 503 without the service account, nothing granted");
 
     const g = (await admin("growth")).data.paidFunnel;
     assert.ok(g.checkoutStarted >= 3 && g.paid >= 2 && g.refunded >= 1);

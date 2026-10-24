@@ -4,11 +4,12 @@ import { bump, ensureSchema, flags } from "./staff";
 import { logEvent } from "./metrics";
 import { cashfreeConfigured, paymentsStatus } from "./payments";
 import { caKeyFor } from "./ca";
+import { PLAY_PRODUCT, playConfigured } from "./play";
 
 /**
  * Plus (spec §7), behind the "plus" flag, which is off by default. Real payments are one-time yearly Plus on the
- * web through Cashfree (payments.ts), once its keys are set; no Play Billing. Until then, and only then, a
- * "purchase" is a labelled test entitlement.
+ * web through Cashfree (payments.ts), once its keys are set. Until then, and only then, a "purchase" is a labelled
+ * test entitlement. Google Play Billing in the Android app (play.ts) is built but off, behind its own "play_billing" flag.
  *
  * The never-list is enforced here as well as in the apps: an offer is only ever returned for the Prep surface,
  * at a listed value moment, and never within 72 hours of a result, during distress, in pause mode, or after
@@ -119,7 +120,8 @@ export async function grant(env: Env, memberId: string, plan: string, source: st
 export async function plusRoute(req: Request, env: Env, path: string, url: URL): Promise<Response | null> {
   if (!path.startsWith("/plus")) return null;
   await ensureSchema(env);
-  const enabled = (await flags(env)).plus;
+  const f = await flags(env);
+  const enabled = f.plus;
   const body = req.method === "POST" ? await req.json<any>().catch(() => ({})) : {};
   const memberId = String(body.memberId ?? url.searchParams.get("member") ?? "");
 
@@ -146,6 +148,8 @@ export async function plusRoute(req: Request, env: Env, path: string, url: URL):
       plan: ent, used: validId(memberId) && enabled ? await used(env, memberId) : null,
       trial: { days: TRIAL_DAYS, used: !!row?.trial_used, unlocked: trialUnlocked, why: trialUnlocked ? null : "The 7-day trial unlocks after your first full week in a pod." },
       refundWindowDays: 7, cancel: "Me → Plus → Cancel. Two taps, no questions.",
+      // The Android app shows the Play purchase only when on and ready (and only in a build made with PLAY_BILLING).
+      play: { on: enabled && f.play_billing, ready: playConfigured(env), productId: PLAY_PRODUCT },
     });
   }
   // The signed query that plays a week's Plus scenes (ca.ts). Any plan counts, flag or not, as for /plus/status.
@@ -218,7 +222,7 @@ export async function plusRoute(req: Request, env: Env, path: string, url: URL):
   }
   // One free Plus seat per 10 paid, chosen by pod leads. The count is public.
   if (path === "/plus/scholarships") {
-    const paid = (await env.DB.prepare("SELECT COUNT(*) AS n FROM entitlements WHERE source IN ('test-purchase', 'gift', 'cashfree') AND ends_at > ?").bind(new Date().toISOString()).first<{ n: number }>())?.n ?? 0;
+    const paid = (await env.DB.prepare("SELECT COUNT(*) AS n FROM entitlements WHERE source IN ('test-purchase', 'gift', 'cashfree', 'play') AND ends_at > ?").bind(new Date().toISOString()).first<{ n: number }>())?.n ?? 0;
     const awarded = (await env.DB.prepare("SELECT COUNT(*) AS n FROM scholarships").first<{ n: number }>())?.n ?? 0;
     const seats = Math.floor(paid / 10);
     if (req.method === "POST") {

@@ -150,6 +150,11 @@ CREATE TABLE IF NOT EXISTS payments (order_id TEXT PRIMARY KEY, member_id TEXT N
   status TEXT NOT NULL, mode TEXT NOT NULL, cf_payment_id TEXT, created_at TEXT NOT NULL, paid_at TEXT, refunded_at TEXT, refund_inr REAL, refund_note TEXT);
 CREATE INDEX IF NOT EXISTS payments_member ON payments(member_id, created_at);
 
+-- Google Play purchases (src/play.ts): one row per purchase token, kept as its SHA-256 only, so a token grants once, to one member.
+CREATE TABLE IF NOT EXISTS play_purchases (token_hash TEXT PRIMARY KEY, member_id TEXT NOT NULL, product_id TEXT NOT NULL, order_id TEXT,
+  status TEXT NOT NULL, test INTEGER NOT NULL DEFAULT 0, purchased_at TEXT, created_at TEXT NOT NULL, granted_at TEXT, refunded_at TEXT);
+CREATE INDEX IF NOT EXISTS play_purchases_member ON play_purchases(member_id, created_at);
+
 CREATE TABLE IF NOT EXISTS password_logins (
   username TEXT PRIMARY KEY,           -- 3-30 of a-z 0-9 _ . (lower-case)
   uid TEXT NOT NULL UNIQUE,            -- accounts.uid ("pw-" + random)
