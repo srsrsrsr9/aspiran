@@ -1,0 +1,398 @@
+{
+  "title": "Answer Mirror (feedback on the member's own answer)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "demand",
+    "keepThis",
+    "rubric",
+    "fixes",
+    "missing",
+    "betterIntro",
+    "betterConclusion",
+    "diagramIdea",
+    "practiceBand"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "demand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "directive",
+        "parts"
+      ],
+      "properties": {
+        "directive": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 4
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 6
+            }
+          }
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "part",
+              "covered"
+            ],
+            "properties": {
+              "part": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "en",
+                  "hi"
+                ],
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 12
+                  },
+                  "hi": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 16
+                  }
+                }
+              },
+              "covered": {
+                "type": "string",
+                "enum": [
+                  "yes",
+                  "partly",
+                  "no"
+                ]
+              }
+            }
+          },
+          "minItems": 1,
+          "maxItems": 5
+        }
+      }
+    },
+    "keepThis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41
+        }
+      },
+      "description": "What already works. Always first, always specific."
+    },
+    "rubric": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "area",
+          "band",
+          "note"
+        ],
+        "properties": {
+          "area": {
+            "type": "string",
+            "enum": [
+              "demand",
+              "structure",
+              "content",
+              "evidence",
+              "balance",
+              "presentation"
+            ]
+          },
+          "band": {
+            "type": "string",
+            "enum": [
+              "strong",
+              "fine",
+              "needs-work"
+            ]
+          },
+          "note": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              }
+            }
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "fixes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "what",
+          "before",
+          "after"
+        ],
+        "properties": {
+          "what": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 14
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 19
+              }
+            }
+          },
+          "before": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 40,
+            "description": "Quote the member's words exactly"
+          },
+          "after": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 62
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 10
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 14
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 5,
+      "description": "Dimensions or examples a strong answer would add"
+    },
+    "betterIntro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 45
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 62
+        }
+      }
+    },
+    "betterConclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 45
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 62
+        }
+      }
+    },
+    "diagramIdea": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 25
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 34
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "practiceBand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "range",
+        "caveat"
+      ],
+      "properties": {
+        "range": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 6,
+          "description": "e.g. '4 to 5 of 10'"
+        },
+        "caveat": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 20
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 28
+            }
+          },
+          "description": "Always say this is a practice estimate, not a UPSC prediction"
+        }
+      }
+    }
+  },
+  "x-type": "upsc-pods/answer-mirror@1"
+}

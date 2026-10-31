@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "geo-islands-of-india",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "India's islands: spot the false one",
+    "hi": "भारत के द्वीप: ग़लत कथन पहचानें"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Barren Island in the Andaman Sea is India's only active volcano.",
+          "The Lakshadweep islands are of coral origin.",
+          "The Ten Degree Channel separates Lakshadweep from the Maldives."
+        ],
+        "fix": "The Ten Degree Channel separates the Andaman Islands from the Nicobar Islands; the Eight Degree Channel separates Minicoy from the Maldives."
+      },
+      "hi": {
+        "statements": [
+          "अंडमान सागर में स्थित बैरन द्वीप भारत का एकमात्र सक्रिय ज्वालामुखी है।",
+          "लक्षद्वीप के द्वीप प्रवाल (कोरल) से बने हैं।",
+          "दस डिग्री चैनल लक्षद्वीप को मालदीव से अलग करता है।"
+        ],
+        "fix": "दस डिग्री चैनल अंडमान द्वीपों को निकोबार द्वीपों से अलग करता है; आठ डिग्री चैनल मिनिकॉय को मालदीव से अलग करता है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Sriharikota, home of ISRO's launch centre, is an island off the Tamil Nadu coast.",
+          "Indira Point, India's southernmost tip, lies on Great Nicobar Island.",
+          "Duncan Passage lies between South Andaman and Little Andaman."
+        ],
+        "fix": "Sriharikota is a barrier island off the coast of Andhra Pradesh, separating Pulicat Lake from the Bay of Bengal."
+      },
+      "hi": {
+        "statements": [
+          "ISRO के प्रक्षेपण केंद्र वाला श्रीहरिकोटा तमिलनाडु तट के पास एक द्वीप है।",
+          "भारत का सबसे दक्षिणी छोर इंदिरा पॉइंट ग्रेट निकोबार द्वीप पर है।",
+          "डंकन पैसेज दक्षिण अंडमान और लिटिल अंडमान के बीच है।"
+        ],
+        "fix": "श्रीहरिकोटा आंध्र प्रदेश के तट के पास एक रोधिका द्वीप है, जो पुलिकट झील को बंगाल की खाड़ी से अलग करता है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Kavaratti is the administrative capital of Lakshadweep.",
+          "The Andaman and Nicobar Islands, like Lakshadweep, are mainly of coral origin.",
+          "Lakshadweep is India's smallest Union Territory by area."
+        ],
+        "fix": "The Andaman and Nicobar Islands are mainly the raised tops of a submerged mountain range, an extension of the Arakan Yoma; coral only fringes them."
+      },
+      "hi": {
+        "statements": [
+          "कवरत्ती लक्षद्वीप की प्रशासनिक राजधानी है।",
+          "अंडमान और निकोबार द्वीप भी लक्षद्वीप की तरह मुख्यतः प्रवाल से बने हैं।",
+          "क्षेत्रफल में लक्षद्वीप भारत का सबसे छोटा केंद्रशासित प्रदेश है।"
+        ],
+        "fix": "अंडमान और निकोबार द्वीप मुख्यतः डूबी हुई पर्वत श्रृंखला (अराकान योमा का विस्तार) की उभरी चोटियाँ हैं; प्रवाल केवल इनके किनारों पर हैं।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Saddle Peak in North Andaman is the highest point of the Andaman and Nicobar Islands.",
+          "Narcondam Island in the Andaman Sea is a dormant volcano.",
+          "Minicoy is the northernmost island of Lakshadweep."
+        ],
+        "fix": "Minicoy is the southernmost island of Lakshadweep, separated from the rest by the Nine Degree Channel."
+      },
+      "hi": {
+        "statements": [
+          "उत्तरी अंडमान का सैडल पीक अंडमान और निकोबार द्वीप समूह का सबसे ऊँचा स्थान है।",
+          "अंडमान सागर का नारकोंडम द्वीप एक सुप्त ज्वालामुखी है।",
+          "मिनिकॉय लक्षद्वीप का सबसे उत्तरी द्वीप है।"
+        ],
+        "fix": "मिनिकॉय लक्षद्वीप का सबसे दक्षिणी द्वीप है, जो बाक़ी द्वीपों से नौ डिग्री चैनल द्वारा अलग है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Diu is an island off the coast of Kerala.",
+          "Pamban (Rameswaram) Island lies between mainland Tamil Nadu and Sri Lanka.",
+          "Elephanta Island, with its rock-cut caves, lies in Mumbai Harbour."
+        ],
+        "fix": "Diu is an island off the southern coast of the Saurashtra peninsula in Gujarat."
+      },
+      "hi": {
+        "statements": [
+          "दीव केरल के तट के पास एक द्वीप है।",
+          "पंबन (रामेश्वरम) द्वीप तमिलनाडु की मुख्य भूमि और श्रीलंका के बीच स्थित है।",
+          "शैलकृत गुफाओं वाला एलिफ़ेंटा द्वीप मुंबई बंदरगाह में है।"
+        ],
+        "fix": "दीव गुजरात के सौराष्ट्र प्रायद्वीप के दक्षिणी तट के पास एक द्वीप है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI India: Physical Environment; NCERT Class IX Contemporary India I",
+    "hi": "NCERT कक्षा XI भारत: भौतिक पर्यावरण; NCERT कक्षा IX समकालीन भारत I"
+  },
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

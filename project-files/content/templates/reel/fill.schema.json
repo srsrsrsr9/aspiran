@@ -1,0 +1,88 @@
+{
+  "title": "Chai in 60 reel",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "intro",
+    "outro"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "intro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 5,
+            "description": "Three short lines: the date, what this is, how many cards"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 7
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "description": "Removed by assemble(); becomes the intro segment."
+    },
+    "outro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 8,
+            "description": "Two or three short lines that close the reel"
+          },
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 11
+          },
+          "minItems": 2,
+          "maxItems": 3
+        }
+      },
+      "description": "Removed by assemble(); becomes the outro segment."
+    }
+  },
+  "x-fillRequired": [
+    "id",
+    "intro",
+    "outro"
+  ],
+  "x-type": "upsc-pods/reel@1"
+}

@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-senior-tender-favour",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A senior's request on a tender",
+    "hi": "टेंडर पर वरिष्ठ का अनुरोध"
+  },
+  "en": {
+    "scenario": "You head the procurement cell of a state department. A tender for hospital equipment is being evaluated. Your immediate senior, who writes your annual appraisal and has always supported you, asks you informally to 'look kindly' at one bidder, whose bid is slightly costlier but technically sound. Nothing is in writing. The lowest bidder meets all conditions but has a mixed record of delays in other states.",
+    "question": "What would you do, and what values does each choice serve?",
+    "options": [
+      {
+        "label": "Evaluate strictly by tender criteria; ignore the informal request.",
+        "outcome": "The process stays clean and defensible. Your relationship with your senior may suffer, with possible effects on your appraisal.",
+        "values": "Integrity and objectivity over personal loyalty"
+      },
+      {
+        "label": "Ask your senior to put any concerns in writing.",
+        "outcome": "Concerns about delays, if genuine, enter the official record. The senior may withdraw the request or feel challenged.",
+        "values": "Transparency and accountability; tests the request's legitimacy"
+      },
+      {
+        "label": "Record the request and refer the evaluation to a committee.",
+        "outcome": "Your own discretion is removed and the decision is shared. It may delay procurement, and the senior may see it as distrust.",
+        "values": "Impartiality and self-protection; costs time"
+      }
+    ],
+    "reflect": "Is loyalty to a senior ever compatible with duty to the public, and where exactly does it end?"
+  },
+  "hi": {
+    "scenario": "आप एक राज्य विभाग के क्रय प्रकोष्ठ के प्रमुख हैं। अस्पताल उपकरणों के एक टेंडर का मूल्यांकन चल रहा है। आपके तत्काल वरिष्ठ, जो आपकी वार्षिक मूल्यांकन रिपोर्ट लिखते हैं और हमेशा आपका साथ देते आए हैं, अनौपचारिक रूप से एक बोलीदाता पर 'नरमी से विचार' करने को कहते हैं, जिसकी बोली थोड़ी महँगी है पर तकनीकी रूप से ठीक है। कुछ भी लिखित में नहीं है। सबसे कम बोली वाला सभी शर्तें पूरी करता है, पर दूसरे राज्यों में उसका देरी का रिकॉर्ड मिला-जुला है।",
+    "question": "आप क्या करेंगे, और हर विकल्प किन मूल्यों की सेवा करता है?",
+    "options": [
+      {
+        "label": "सख़्ती से टेंडर मानदंडों पर मूल्यांकन करें; अनौपचारिक अनुरोध को अनदेखा करें।",
+        "outcome": "प्रक्रिया साफ़ और बचाव योग्य रहती है। वरिष्ठ से संबंध बिगड़ सकते हैं, जिसका असर आपकी मूल्यांकन रिपोर्ट पर पड़ सकता है।",
+        "values": "व्यक्तिगत वफ़ादारी से ऊपर सत्यनिष्ठा और वस्तुनिष्ठता"
+      },
+      {
+        "label": "वरिष्ठ से कहें कि अपनी चिंताएँ लिखित में दें।",
+        "outcome": "देरी की चिंता अगर वास्तविक है, तो आधिकारिक रिकॉर्ड में आ जाती है। वरिष्ठ अनुरोध वापस ले सकते हैं या इसे चुनौती की तरह ले सकते हैं।",
+        "values": "पारदर्शिता और जवाबदेही; अनुरोध की वैधता की परख"
+      },
+      {
+        "label": "अनुरोध दर्ज करें और मूल्यांकन एक समिति को सौंपें।",
+        "outcome": "आपका निजी विवेक हट जाता है और फ़ैसला साझा हो जाता है। ख़रीद में देरी हो सकती है, और वरिष्ठ इसे अविश्वास मान सकते हैं।",
+        "values": "निष्पक्षता और आत्म-सुरक्षा; समय की कीमत पर"
+      }
+    ],
+    "reflect": "क्या किसी वरिष्ठ के प्रति वफ़ादारी कभी जनता के प्रति कर्तव्य से मेल खा सकती है, और उसकी सीमा ठीक कहाँ है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "title": "Mock paper (sectional, Prelims)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "paper",
+    "section",
+    "questions",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "paper": {
+      "type": "string",
+      "enum": [
+        "prelims-gs1"
+      ],
+      "description": "The paper this mock imitates"
+    },
+    "section": {
+      "type": "string",
+      "description": "The syllabus area, for example \"GS2 Polity\""
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "format",
+          "node",
+          "answer",
+          "difficulty",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "negative",
+              "statement-code",
+              "select-items",
+              "how-many-statements",
+              "how-many-pairs",
+              "statement-i-ii",
+              "statement-i-ii-iii",
+              "list-match"
+            ],
+            "description": "The Prelims format this question uses (see templates/exam-formats.json)"
+          },
+          "node": {
+            "type": "string",
+            "x-enumFromConfig": "nodes",
+            "description": "Id of the syllabus-map node this question tests (from the config's node list)",
+            "enum": [
+              "pol-history",
+              "pol-features",
+              "pol-union-territory",
+              "pol-citizenship",
+              "pol-fr",
+              "pol-dpsp",
+              "pol-fd",
+              "pol-amendment",
+              "pol-president",
+              "pol-pm-com",
+              "pol-parliament",
+              "pol-privileges",
+              "pol-state-exec",
+              "pol-judiciary",
+              "pol-federal",
+              "pol-fiscal",
+              "pol-emergency",
+              "pol-local",
+              "pol-scheduled-areas",
+              "pol-uts-special",
+              "pol-const-bodies",
+              "pol-statutory",
+              "pol-elections",
+              "pol-separation",
+              "pol-comparison",
+              "pol-pressure-groups",
+              "pol-official-language"
+            ]
+          },
+          "answer": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3,
+            "description": "Index of the right option, 0 for (a) to 3 for (d), the same in both languages"
+          },
+          "difficulty": {
+            "type": "string",
+            "enum": [
+              "easy",
+              "medium",
+              "hard"
+            ]
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stem",
+              "statements",
+              "ask",
+              "options",
+              "why"
+            ],
+            "properties": {
+              "stem": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45,
+                "description": "The question as it appears, before any statements or lists"
+              },
+              "statements": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 30,
+                  "description": "One numbered statement, pair or list item, without its number"
+                },
+                "minItems": 0,
+                "maxItems": 8
+              },
+              "ask": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "x-maxWords": 22,
+                "description": "The closing line, for example \"Which of the statements given above is/are correct?\". null for a direct or negative question"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 16,
+                  "description": "One option, without its letter"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45,
+                "description": "Why the right option is right and the most tempting wrong one is wrong, from the source"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stem",
+              "statements",
+              "ask",
+              "options",
+              "why"
+            ],
+            "properties": {
+              "stem": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 61,
+                "description": "The question as it appears, before any statements or lists"
+              },
+              "statements": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 41,
+                  "description": "One numbered statement, pair or list item, without its number"
+                },
+                "minItems": 0,
+                "maxItems": 8
+              },
+              "ask": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "minLength": 1,
+                "x-maxWords": 30,
+                "description": "The closing line, for example \"Which of the statements given above is/are correct?\". null for a direct or negative question"
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 22,
+                  "description": "One option, without its letter"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 61,
+                "description": "Why the right option is right and the most tempting wrong one is wrong, from the source"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 10,
+      "maxItems": 100
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/mock-paper@1"
+}

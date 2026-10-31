@@ -1,0 +1,38 @@
+{
+  "schemaId": "upsc-pods/stamp-trail@1",
+  "knobs": {
+    "stations": "3 to 6, in order"
+  },
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "move": "sfx/whoosh",
+      "stamp": "sfx/stamp",
+      "end": "motif"
+    },
+    "tags": {
+      "stage": [
+        "prelims",
+        "mains"
+      ],
+      "papers": [
+        "prelims-gs1",
+        "mains-gs2"
+      ],
+      "formats": [
+        "pre-order",
+        "mains-diagram"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

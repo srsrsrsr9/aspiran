@@ -1,0 +1,116 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "id": "how-many-finance-commission",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How many of the above? Finance Commission",
+    "hi": "ऊपर के कितने सही हैं? वित्त आयोग"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "How many of these three statements are correct?",
+        "statements": [
+          "The Finance Commission is a constitutional body set up under Article 280.",
+          "Its recommendations are binding on the government.",
+          "It recommends how the net proceeds of taxes are divided between the Union and the states."
+        ],
+        "why": "Statement 2 is wrong: its recommendations are advisory, not binding on the government. Statements 1 and 3 are correct: Article 280, and the vertical devolution of tax proceeds."
+      },
+      "hi": {
+        "stem": "इन तीन कथनों में से कितने सही हैं?",
+        "statements": [
+          "वित्त आयोग अनुच्छेद 280 के तहत स्थापित एक संवैधानिक निकाय है।",
+          "इसकी सिफारिशें सरकार पर बाध्यकारी होती हैं।",
+          "यह संघ और राज्यों के बीच कर की शुद्ध आय के बँटवारे की सिफारिश करता है।"
+        ],
+        "why": "कथन 2 गलत है: इसकी सिफारिशें सलाहकारी होती हैं, सरकार पर बाध्यकारी नहीं। कथन 1 और 3 सही हैं: यह अनुच्छेद 280 के तहत बना संवैधानिक निकाय है, और यह संघ और राज्यों के बीच कर का ऊर्ध्वाधर हस्तांतरण (vertical devolution) तय करता है।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "How many of these four statements are correct?",
+        "statements": [
+          "The President constitutes the Finance Commission every three years.",
+          "The Finance Commission has a chairman and four other members.",
+          "The Finance Commission and NITI Aayog are the same constitutional body.",
+          "The Fifteenth Finance Commission, chaired by N.K. Singh, recommended a 41 percent states' share."
+        ],
+        "why": "Statements 1 and 3 are wrong. The President constitutes it every five years, or earlier if needed, and NITI Aayog is not a constitutional body and does not recommend tax devolution. Statements 2 and 4 are correct."
+      },
+      "hi": {
+        "stem": "इन चार कथनों में से कितने सही हैं?",
+        "statements": [
+          "राष्ट्रपति वित्त आयोग का गठन हर तीन वर्ष में करते हैं।",
+          "वित्त आयोग में एक अध्यक्ष और चार अन्य सदस्य होते हैं।",
+          "वित्त आयोग और नीति आयोग एक ही संवैधानिक निकाय हैं।",
+          "पंद्रहवें वित्त आयोग, जिसकी अध्यक्षता एन.के. सिंह ने की, ने राज्यों का हिस्सा 41 प्रतिशत रखने की सिफारिश की।"
+        ],
+        "why": "कथन 1 और 3 गलत हैं। राष्ट्रपति इसे हर पाँच वर्ष में, या ज़रूरत पड़ने पर पहले, गठित करते हैं। नीति आयोग संवैधानिक निकाय नहीं है और कर हस्तांतरण की सिफारिश नहीं करता। कथन 2 और 4 सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/how-many-correct/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  }
+}

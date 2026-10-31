@@ -1,0 +1,38 @@
+{
+  "schemaId": "upsc-pods/reel@1",
+  "knobs": {
+    "cardIds": "ids of the day's Chai cards, in order",
+    "introSeconds": 4,
+    "cardSeconds": 16,
+    "outroSeconds": 6
+  },
+  "cardIds": [
+    "gi-tag",
+    "el-nino",
+    "sendai"
+  ],
+  "introSeconds": 4,
+  "cardSeconds": 16,
+  "outroSeconds": 6,
+  "defaults": {
+    "format": {
+      "aspect": "9:16",
+      "export": "1080x1920 MP4, burned-in captions"
+    },
+    "rules": [
+      "No countdown or urgency on screen",
+      "Captions stay on for the whole reel"
+    ],
+    "tags": {
+      "stage": [
+        "revision"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-current-static"
+      ]
+    }
+  }
+}

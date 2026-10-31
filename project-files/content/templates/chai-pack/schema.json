@@ -1,0 +1,408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/chai-pack@1",
+  "title": "Chai cards (daily pack)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "date",
+    "languages",
+    "cards",
+    "ui"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/chai-pack@1",
+      "x-from": "config"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "x-from": "config"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "en",
+          "hi"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2,
+      "x-from": "config"
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tone",
+          "illustration",
+          "shareCard",
+          "pyq",
+          "pyqLabel",
+          "review",
+          "shareable",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "maxLength": 60,
+            "description": "lowercase-with-hyphens slug, e.g. article-200"
+          },
+          "tone": {
+            "type": "string",
+            "enum": [
+              "LIGHT",
+              "NEUTRAL",
+              "SERIOUS",
+              "TRAGIC"
+            ],
+            "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+          },
+          "illustration": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "x-from": "config"
+          },
+          "shareCard": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string"
+              },
+              "hi": {
+                "type": "string"
+              }
+            },
+            "x-from": "config"
+          },
+          "pyq": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "x-from": "config"
+          },
+          "pyqLabel": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 9
+              }
+            },
+            "x-from": "config"
+          },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "approved-en",
+                  "approved-hi",
+                  "approved"
+                ]
+              },
+              "checkedBy": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "checkedOn": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "x-from": "config"
+          },
+          "shareable": {
+            "type": "boolean",
+            "x-from": "config"
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lensChips",
+              "headline",
+              "summary",
+              "whyItMatters",
+              "examCorner",
+              "chotuJoke",
+              "takeaway"
+            ],
+            "properties": {
+              "lensChips": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                },
+                "minItems": 2,
+                "maxItems": 4
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 12,
+                "description": "Starts with a verb. One idea.",
+                "maxLength": 90
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 95,
+                "description": "Plain explainer: what happened, the static concept behind it, and why. 60 to 95 words.",
+                "x-minWords": 50
+              },
+              "whyItMatters": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 12
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "examCorner": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "question",
+                  "options",
+                  "answerIndex",
+                  "feedbackRight",
+                  "feedbackWrong"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mcq"
+                    ]
+                  },
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 30
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 8
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "answerIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "feedbackRight": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 14
+                  },
+                  "feedbackWrong": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 22
+                  }
+                }
+              },
+              "chotuJoke": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-maxWords": 18,
+                "description": "One gentle joke from Chotu, only on LIGHT cards. null otherwise."
+              },
+              "takeaway": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16,
+                "description": "The one line to remember."
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lensChips",
+              "headline",
+              "summary",
+              "whyItMatters",
+              "examCorner",
+              "chotuJoke",
+              "takeaway"
+            ],
+            "properties": {
+              "lensChips": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                },
+                "minItems": 2,
+                "maxItems": 4
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 17,
+                "description": "Starts with a verb. One idea.",
+                "maxLength": 90
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 129,
+                "description": "Plain explainer: what happened, the static concept behind it, and why. 60 to 95 words.",
+                "x-minWords": 50
+              },
+              "whyItMatters": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 17
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "examCorner": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "question",
+                  "options",
+                  "answerIndex",
+                  "feedbackRight",
+                  "feedbackWrong"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mcq"
+                    ]
+                  },
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 30
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 8
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "answerIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "feedbackRight": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 14
+                  },
+                  "feedbackWrong": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 22
+                  }
+                }
+              },
+              "chotuJoke": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-maxWords": 25,
+                "description": "One gentle joke from Chotu, only on LIGHT cards. null otherwise."
+              },
+              "takeaway": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22,
+                "description": "The one line to remember."
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "ui": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

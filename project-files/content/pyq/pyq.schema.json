@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/pyq@1",
+  "title": "Previous-year question (PYQ) database",
+  "description": "Only questions copied from an official UPSC question paper go in here, with the file they came from. Nothing is written by a model. Answer keys come only from UPSC's own published keys.",
+  "type": "object",
+  "required": ["schema", "sources", "questions"],
+  "properties": {
+    "schema": { "const": "upsc-pods/pyq@1" },
+    "sources": { "type": "array", "items": { "type": "object", "required": ["id", "year", "paper", "kind", "file", "sha256", "origin"],
+      "properties": {
+        "id": { "type": "string", "description": "e.g. cse-pre-2025-gs1-qp" },
+        "year": { "type": "integer" },
+        "paper": { "enum": ["prelims-gs1", "prelims-csat", "mains-essay", "mains-gs1", "mains-gs2", "mains-gs3", "mains-gs4"] },
+        "kind": { "enum": ["question-paper", "answer-key"] },
+        "series": { "type": ["string", "null"], "description": "Test booklet series (A, B, C, D) for Prelims; question numbers differ between series" },
+        "file": { "type": "string", "description": "Path of the PDF under content/pyq/papers/" },
+        "sha256": { "type": "string" },
+        "origin": { "type": "string", "description": "Where the PDF was downloaded from: the upsc.gov.in page, and the date" }
+      } } },
+    "questions": { "type": "array", "items": { "type": "object", "required": ["id", "source", "qno", "en", "nodes", "import", "review"],
+      "properties": {
+        "id": { "type": "string", "description": "pyq-<year>-<paper>-<series>-<qno>, e.g. pyq-2025-gs1-a-017" },
+        "source": { "type": "string", "description": "id of the question-paper source" },
+        "qno": { "type": "integer" },
+        "page": { "type": ["integer", "null"] },
+        "en": { "$ref": "#/$defs/side" },
+        "hi": { "anyOf": [{ "$ref": "#/$defs/side" }, { "type": "null" }] },
+        "answer": { "type": ["integer", "null"], "minimum": 0, "maximum": 3, "description": "From the official answer key only. null until the key is imported" },
+        "answerSource": { "type": ["string", "null"], "description": "id of the answer-key source" },
+        "dropped": { "type": "boolean", "description": "true if UPSC's final key dropped the question" },
+        "format": { "type": ["string", "null"], "description": "One of the exam-formats.json ids, set by an editor" },
+        "nodes": { "type": "array", "items": { "type": "string" }, "description": "Syllabus-map node ids, set by an editor (a classifier may suggest)" },
+        "import": { "type": "object", "properties": { "status": { "enum": ["parsed", "needs-check", "checked"] }, "warnings": { "type": "array", "items": { "type": "string" } } } },
+        "review": { "type": "object", "properties": { "status": { "enum": ["draft", "approved"] }, "checkedBy": { "type": ["string", "null"] }, "checkedOn": { "type": ["string", "null"] } } }
+      } } }
+  },
+  "$defs": { "side": { "type": "object", "required": ["stem", "options"], "properties": {
+    "stem": { "type": "string" }, "statements": { "type": "array", "items": { "type": "string" } }, "ask": { "type": ["string", "null"] },
+    "options": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "string" } } } } }
+}

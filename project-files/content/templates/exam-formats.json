@@ -1,0 +1,375 @@
+{
+  "schema": "upsc-pods/exam-formats@1",
+  "note": "Every UPSC CSE Prelims and Mains question format, and the templates that practise it. Format descriptions follow the public exam pattern; they are not previous-year questions. Optional-subject papers are out of scope. The interview (personality test) has one format so far, covered by hidden-why.",
+  "papers": {
+    "prelims-gs1": "Prelims GS Paper I (100 MCQs, 2 marks each, one-third negative marking)",
+    "prelims-csat": "Prelims CSAT, GS Paper II (qualifying, 33%; 80 MCQs)",
+    "mains-essay": "Mains Essay paper",
+    "mains-gs1": "Mains GS1: Indian heritage and culture, history, geography of the world and society",
+    "mains-gs2": "Mains GS2: governance, Constitution, polity, social justice, international relations",
+    "mains-gs3": "Mains GS3: technology, economy, environment, biodiversity, security, disaster management",
+    "mains-gs4": "Mains GS4: ethics, integrity and aptitude",
+    "mains-qualifying": "Mains qualifying papers: Paper A (an Indian language) and Paper B (English)",
+    "interview": "Interview (personality test), 275 marks"
+  },
+  "formats": [
+    {
+      "id": "pre-direct",
+      "paper": "prelims-gs1",
+      "name": "Direct MCQ",
+      "desc": "One question, four options, one right answer: a fact, a concept or an application.",
+      "coveredBy": [
+        "chai-pack",
+        "quiz-pack",
+        "scratch-card",
+        "trap-spotter",
+        "who-am-i",
+        "acronym-unpack",
+        "landmark-case",
+        "before-after",
+        "fill-the-gap",
+        "should-i-guess",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-negative",
+      "paper": "prelims-gs1",
+      "name": "Negative stem",
+      "desc": "\"Which one of the following is NOT ...\" or \"is incorrect\". The trap is reading it as a positive question.",
+      "coveredBy": [
+        "quiz-pack",
+        "trap-spotter",
+        "odd-one-out",
+        "two-truths",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-statement-code",
+      "paper": "prelims-gs1",
+      "name": "Statements with codes",
+      "desc": "Two to four numbered statements, then \"Which of the statements given above is/are correct?\" with codes such as 1 only, 2 only, both, neither.",
+      "coveredBy": [
+        "myth-card",
+        "two-truths",
+        "versus",
+        "statement-code",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-select-items",
+      "paper": "prelims-gs1",
+      "name": "Select the items (codes)",
+      "desc": "A numbered list of items, then \"Select the correct answer using the code given below\" (1 and 2 only, 1, 2 and 3 ...).",
+      "coveredBy": [
+        "bucket-sort",
+        "union-state-list",
+        "statement-code",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-how-many-statements",
+      "paper": "prelims-gs1",
+      "name": "How many statements are correct",
+      "desc": "Only one, only two, all three or none. Codes no longer help elimination, so every statement must be judged.",
+      "since": "about 2023",
+      "coveredBy": [
+        "how-many-correct",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-how-many-pairs",
+      "paper": "prelims-gs1",
+      "name": "How many pairs are correctly matched",
+      "desc": "Three or four pairs (place and state, term and meaning), and the member counts the correct ones.",
+      "since": "about 2023",
+      "coveredBy": [
+        "pairs-count",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-statement-i-ii",
+      "paper": "prelims-gs1",
+      "name": "Statement I and Statement II",
+      "desc": "Two statements; decide whether each is true and whether II explains I. The older assertion-and-reason format.",
+      "since": "about 2023 in this wording",
+      "coveredBy": [
+        "assertion-reason",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-statement-i-ii-iii",
+      "paper": "prelims-gs1",
+      "name": "Statement I, II and III",
+      "desc": "Do Statements II and III both hold, and does each explain Statement I?",
+      "since": "about 2024",
+      "coveredBy": [
+        "three-statements",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-list-match",
+      "paper": "prelims-gs1",
+      "name": "Match List I with List II",
+      "desc": "Two lists matched with codes, or pairs matched directly.",
+      "coveredBy": [
+        "match-game",
+        "pair-up",
+        "committee-match",
+        "list-match",
+        "mock-paper"
+      ]
+    },
+    {
+      "id": "pre-order",
+      "paper": "prelims-gs1",
+      "name": "Arrange in order",
+      "desc": "Chronological order, north to south, largest to smallest, upstream to downstream.",
+      "coveredBy": [
+        "timeline",
+        "stamp-trail",
+        "assemble",
+        "rank-it",
+        "timeline-shuffle"
+      ]
+    },
+    {
+      "id": "pre-map",
+      "paper": "prelims-gs1",
+      "name": "Location and map",
+      "desc": "Where a place, river, park or strait is, what it borders, which lies furthest east, and so on.",
+      "coveredBy": [
+        "map-card",
+        "postcard"
+      ]
+    },
+    {
+      "id": "pre-current-static",
+      "paper": "prelims-gs1",
+      "name": "Current affairs on a static base",
+      "desc": "A recent event used to test the concept behind it.",
+      "coveredBy": [
+        "chai-pack",
+        "reel",
+        "scratch-card",
+        "radio",
+        "scheme-snapshot",
+        "long-read"
+      ]
+    },
+    {
+      "id": "pre-data",
+      "paper": "prelims-gs1",
+      "name": "Numbers, reports and indices",
+      "desc": "Who publishes which index, what it measures, and order-of-magnitude facts.",
+      "coveredBy": [
+        "number-card",
+        "then-now",
+        "rank-it",
+        "index-card",
+        "data-interpretation"
+      ]
+    },
+    {
+      "id": "csat-rc",
+      "paper": "prelims-csat",
+      "name": "Reading comprehension",
+      "desc": "A passage, then the main idea, an inference, the assumption behind it, or the most logical corollary.",
+      "coveredBy": [
+        "fact-or-opinion",
+        "csat-passage"
+      ]
+    },
+    {
+      "id": "csat-quant",
+      "paper": "prelims-csat",
+      "name": "Basic numeracy",
+      "desc": "Percentages, ratios, averages, time and work, speed and distance, number properties.",
+      "coveredBy": [
+        "csat-quant"
+      ]
+    },
+    {
+      "id": "csat-reasoning",
+      "paper": "prelims-csat",
+      "name": "Logical and analytical reasoning",
+      "desc": "Syllogisms, direction sense, blood relations, arrangements, coding and series.",
+      "coveredBy": [
+        "csat-reasoning"
+      ]
+    },
+    {
+      "id": "csat-data",
+      "paper": "prelims-csat",
+      "name": "Data interpretation",
+      "desc": "A table or chart, then questions that need a calculation from it.",
+      "coveredBy": [
+        "data-interpretation"
+      ]
+    },
+    {
+      "id": "mains-answer",
+      "paper": "mains-gs1,mains-gs2,mains-gs3",
+      "name": "Directive-word answer (10 and 15 marks)",
+      "desc": "150 or 250 words to discuss, critically examine, analyse, elucidate, comment and so on, with an introduction, a body and a conclusion.",
+      "coveredBy": [
+        "explainer",
+        "two-sides",
+        "chain",
+        "better-answer",
+        "fact-or-opinion",
+        "landmark-case",
+        "two-levels",
+        "answer-skeleton",
+        "versus",
+        "before-after",
+        "link-web",
+        "answer-diagram",
+        "long-read",
+        "hidden-why"
+      ]
+    },
+    {
+      "id": "mains-directive",
+      "paper": "mains-gs1,mains-gs2,mains-gs3,mains-gs4",
+      "name": "Reading the directive word",
+      "desc": "What \"discuss\", \"critically examine\" or \"to what extent\" asks for, and the mistake each invites.",
+      "coveredBy": [
+        "directive-word",
+        "answer-skeleton"
+      ]
+    },
+    {
+      "id": "mains-diagram",
+      "paper": "mains-gs1,mains-gs3",
+      "name": "Diagram, flowchart or map in an answer",
+      "desc": "A quick sketch that carries the answer: a process flow, a cycle, a labelled map.",
+      "coveredBy": [
+        "map-card",
+        "stamp-trail",
+        "chain",
+        "answer-diagram"
+      ]
+    },
+    {
+      "id": "mains-both-sides",
+      "paper": "mains-gs2,mains-gs3",
+      "name": "Both sides and way forward",
+      "desc": "Arguments for and against, then a balanced conclusion and a way forward.",
+      "coveredBy": [
+        "two-sides",
+        "long-read"
+      ]
+    },
+    {
+      "id": "mains-gs4-concepts",
+      "paper": "mains-gs4",
+      "name": "Ethics concepts and thinkers",
+      "desc": "Define and distinguish terms (integrity, probity, empathy), and the contributions of thinkers.",
+      "coveredBy": [
+        "word-bank",
+        "kautilya-lens",
+        "narrated-classic",
+        "thinker-lens"
+      ]
+    },
+    {
+      "id": "mains-gs4-quote",
+      "paper": "mains-gs4",
+      "name": "What does this quote mean to you?",
+      "desc": "A quotation by a thinker, to be explained in the present context with an example.",
+      "coveredBy": [
+        "kautilya-lens",
+        "quote-meaning",
+        "thinker-lens"
+      ]
+    },
+    {
+      "id": "mains-gs4-case",
+      "paper": "mains-gs4",
+      "name": "Case study",
+      "desc": "A scenario with stakeholders, ethical issues, options with merits and demerits, and a course of action.",
+      "coveredBy": [
+        "ethics-dilemma",
+        "case-study"
+      ]
+    },
+    {
+      "id": "mains-essay",
+      "paper": "mains-essay",
+      "name": "Essay (philosophical or issue-based)",
+      "desc": "1,000 to 1,200 words on a quote-like or issue theme, read across many dimensions, with a strong opening and close.",
+      "coveredBy": [
+        "story-beats",
+        "link-web",
+        "story-spine",
+        "essay-planner",
+        "thinker-lens"
+      ]
+    },
+    {
+      "id": "qual-essay",
+      "paper": "mains-qualifying",
+      "name": "Qualifying essay",
+      "desc": "A shorter essay in the chosen Indian language (Paper A) or English (Paper B).",
+      "coveredBy": [
+        "story-spine",
+        "essay-planner"
+      ]
+    },
+    {
+      "id": "qual-precis",
+      "paper": "mains-qualifying",
+      "name": "Précis",
+      "desc": "Reduce a passage to about one-third of its length, with a title, in your own words.",
+      "coveredBy": [
+        "precis"
+      ]
+    },
+    {
+      "id": "qual-comprehension",
+      "paper": "mains-qualifying",
+      "name": "Comprehension",
+      "desc": "A passage with questions answered in your own words.",
+      "coveredBy": [
+        "csat-passage"
+      ]
+    },
+    {
+      "id": "qual-translation",
+      "paper": "mains-qualifying",
+      "name": "Translation",
+      "desc": "English to the Indian language and back, in Paper A.",
+      "coveredBy": [
+        "word-bank",
+        "translate-it"
+      ]
+    },
+    {
+      "id": "qual-usage",
+      "paper": "mains-qualifying",
+      "name": "Grammar and usage",
+      "desc": "Correct the sentence, use a word or idiom, give a synonym or antonym.",
+      "coveredBy": [
+        "word-bank",
+        "usage-fix"
+      ]
+    },
+    {
+      "id": "interview-talk",
+      "paper": "interview",
+      "name": "Talking about ideas in the interview",
+      "desc": "Explaining a concept or a piece of evidence clearly and honestly when the board asks for your view, including what the evidence does not show.",
+      "coveredBy": [
+        "hidden-why"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,496 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/explainer@1",
+  "title": "Ek Minute explainer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "staticLink",
+    "linkedFromChips",
+    "tone",
+    "totalSeconds",
+    "canvas",
+    "elements",
+    "motion",
+    "audio",
+    "scenes",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/explainer@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "staticLink": {
+      "type": "string",
+      "minLength": 1,
+      "x-maxWords": 4,
+      "description": "The static anchor, e.g. 'Article 200'"
+    },
+    "linkedFromChips": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 3
+      },
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "totalSeconds": {
+      "type": "number",
+      "x-from": "config"
+    },
+    "canvas": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "elements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legislature",
+        "governor",
+        "bill",
+        "tiles",
+        "endCard"
+      ],
+      "properties": {
+        "legislature": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "roof",
+            "x",
+            "y",
+            "w",
+            "label"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "x-from": "config"
+            },
+            "roof": {
+              "type": "string",
+              "x-from": "config"
+            },
+            "x": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "y": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "w": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3,
+                  "description": "Who acts first, e.g. 'State legislature'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            }
+          }
+        },
+        "governor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "roof",
+            "x",
+            "y",
+            "w",
+            "label"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "x-from": "config"
+            },
+            "roof": {
+              "type": "string",
+              "x-from": "config"
+            },
+            "x": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "y": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "w": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3,
+                  "description": "Who decides, e.g. 'Governor'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            }
+          }
+        },
+        "bill": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "x",
+            "y",
+            "w",
+            "h",
+            "label"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "x-from": "config"
+            },
+            "x": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "y": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "w": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "h": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 2,
+                  "description": "The thing that moves, e.g. 'Bill'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                }
+              }
+            }
+          }
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "x",
+              "y",
+              "w",
+              "h",
+              "icon",
+              "label",
+              "sub"
+            ],
+            "properties": {
+              "x": {
+                "type": "number",
+                "x-from": "config"
+              },
+              "y": {
+                "type": "number",
+                "x-from": "config"
+              },
+              "w": {
+                "type": "number",
+                "x-from": "config"
+              },
+              "h": {
+                "type": "number",
+                "x-from": "config"
+              },
+              "icon": {
+                "type": "string",
+                "x-from": "config"
+              },
+              "label": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "en",
+                  "hi"
+                ],
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 2
+                  },
+                  "hi": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 3
+                  }
+                }
+              },
+              "sub": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "en",
+                      "hi"
+                    ],
+                    "properties": {
+                      "en": {
+                        "type": "string",
+                        "minLength": 1,
+                        "x-maxWords": 4
+                      },
+                      "hi": {
+                        "type": "string",
+                        "minLength": 1,
+                        "x-maxWords": 6
+                      }
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "endCard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "x",
+            "y",
+            "w",
+            "h",
+            "title",
+            "subtitle"
+          ],
+          "properties": {
+            "x": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "y": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "w": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "h": {
+              "type": "number",
+              "x-from": "config"
+            },
+            "title": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            },
+            "subtitle": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 7
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "audio": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "index",
+          "seconds",
+          "caption",
+          "state"
+        ],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "x-from": "config"
+          },
+          "seconds": {
+            "type": "number",
+            "x-from": "config"
+          },
+          "caption": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30,
+                "description": "What the narrator says in this scene"
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              }
+            }
+          },
+          "state": {
+            "type": "object",
+            "x-from": "config"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 9
+    },
+    "review": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "title": "Ek Minute explainer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "staticLink",
+    "linkedFromChips",
+    "tone",
+    "elements",
+    "scenes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "staticLink": {
+      "type": "string",
+      "minLength": 1,
+      "x-maxWords": 4,
+      "description": "The static anchor, e.g. 'Article 200'"
+    },
+    "linkedFromChips": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "x-maxWords": 3
+      },
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "elements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "legislature",
+        "governor",
+        "bill",
+        "tiles",
+        "endCard"
+      ],
+      "properties": {
+        "legislature": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3,
+                  "description": "Who acts first, e.g. 'State legislature'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            }
+          }
+        },
+        "governor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3,
+                  "description": "Who decides, e.g. 'Governor'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            }
+          }
+        },
+        "bill": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label"
+          ],
+          "properties": {
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 2,
+                  "description": "The thing that moves, e.g. 'Bill'"
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                }
+              }
+            }
+          }
+        },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "sub"
+            ],
+            "properties": {
+              "label": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "en",
+                  "hi"
+                ],
+                "properties": {
+                  "en": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 2
+                  },
+                  "hi": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 3
+                  }
+                }
+              },
+              "sub": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "en",
+                      "hi"
+                    ],
+                    "properties": {
+                      "en": {
+                        "type": "string",
+                        "minLength": 1,
+                        "x-maxWords": 4
+                      },
+                      "hi": {
+                        "type": "string",
+                        "minLength": 1,
+                        "x-maxWords": 6
+                      }
+                    }
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "endCard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle"
+          ],
+          "properties": {
+            "title": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                }
+              }
+            },
+            "subtitle": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 7
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caption"
+        ],
+        "properties": {
+          "caption": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30,
+                "description": "What the narrator says in this scene"
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              }
+            }
+          }
+        }
+      },
+      "minItems": 7,
+      "maxItems": 7
+    }
+  },
+  "x-type": "upsc-pods/explainer@1"
+}

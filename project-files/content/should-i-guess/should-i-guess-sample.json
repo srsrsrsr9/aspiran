@@ -1,0 +1,105 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "marking": {
+    "paper": "GS Paper I",
+    "right": 2,
+    "wrong": 0.66,
+    "blank": 0,
+    "verify": "Check against the 2027 CSE notice before publishing."
+  },
+  "id": "should-i-guess-negative-marking",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Should I guess? Negative marking in Prelims",
+    "hi": "अनुमान लगाऊँ या नहीं? प्रीलिम्स में ऋणात्मक अंकन"
+  },
+  "rounds": [
+    {
+      "optionsLeft": 4,
+      "en": {
+        "situation": "You have no idea about this question, and all four options look equally possible to you."
+      },
+      "hi": {
+        "situation": "आपको इस प्रश्न के बारे में कोई जानकारी नहीं है। चारों विकल्प आपको बराबर संभव लगते हैं।"
+      },
+      "ev": 0.01,
+      "verdict": "even",
+      "computed": {
+        "en": "With 4 options left, a guess is worth about zero on average (2 × 1/4 − 0.66 × 3/4 = +0.01). Rule out one more before you decide.",
+        "hi": "4 विकल्प बचे हों तो अंदाज़े का औसत मूल्य लगभग शून्य है (2 × 1/4 − 0.66 × 3/4 = +0.01)। तय करने से पहले एक और विकल्प हटाइए।"
+      }
+    },
+    {
+      "optionsLeft": 3,
+      "en": {
+        "situation": "You are confident one option is wrong. Three options remain, and you are unsure which is right."
+      },
+      "hi": {
+        "situation": "आप पक्के तौर पर एक विकल्प को गलत मानते हैं, इसलिए तीन विकल्प बचे हैं, और आप नहीं जानते कि कौन-सा सही है।"
+      },
+      "ev": 0.23,
+      "verdict": "guess",
+      "computed": {
+        "en": "With 3 options left, a guess is worth about +0.23 marks on average (2 × 1/3 − 0.66 × 2/3 = +0.23), so it pays over many questions.",
+        "hi": "3 विकल्प बचे हों तो अंदाज़े का औसत मूल्य लगभग +0.23 अंक है (2 × 1/3 − 0.66 × 2/3 = +0.23), इसलिए कई प्रश्नों में यह फ़ायदा देता है।"
+      }
+    },
+    {
+      "optionsLeft": 2,
+      "en": {
+        "situation": "You are confident that two options are wrong. Two options remain, and you are torn between them."
+      },
+      "hi": {
+        "situation": "आप पक्के तौर पर दो विकल्पों को गलत मानते हैं। अब आप बचे दो विकल्पों के बीच उलझे हैं।"
+      },
+      "ev": 0.67,
+      "verdict": "guess",
+      "computed": {
+        "en": "With 2 options left, a guess is worth about +0.67 marks on average (2 × 1/2 − 0.66 × 1/2 = +0.67), so it pays over many questions.",
+        "hi": "2 विकल्प बचे हों तो अंदाज़े का औसत मूल्य लगभग +0.67 अंक है (2 × 1/2 − 0.66 × 1/2 = +0.67), इसलिए कई प्रश्नों में यह फ़ायदा देता है।"
+      }
+    }
+  ],
+  "en": {
+    "rule": "Rule out options honestly first, then decide: ruling out one option makes guessing worth about +0.22."
+  },
+  "hi": {
+    "rule": "पहले विकल्पों को ईमानदारी से हटाएँ, फिर तय करें: एक विकल्प हटाने पर अनुमान लगाना लगभग +0.22 अंक का होता है।"
+  },
+  "sources": {
+    "en": "Recent CSE notices on Prelims GS Paper I marking; check 2027 notice",
+    "hi": "हाल की CSE सूचनाएँ, प्रीलिम्स सामान्य अध्ययन पेपर I का अंकन; 2027 की सूचना से मिलान करें"
+  },
+  "schema": "upsc-pods/should-i-guess@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/should-i-guess/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct"
+    ]
+  }
+}

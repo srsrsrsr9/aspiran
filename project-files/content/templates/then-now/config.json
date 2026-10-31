@@ -1,0 +1,36 @@
+{
+  "schemaId": "upsc-pods/then-now@1",
+  "knobs": {
+    "metrics": "1 to 3, all from the same two sources"
+  },
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "gentle"
+    },
+    "sfx": {
+      "tick": "sfx/tick",
+      "end": "sfx/chime"
+    },
+    "tags": {
+      "stage": [
+        "prelims",
+        "mains"
+      ],
+      "papers": [
+        "prelims-gs1",
+        "mains-gs3"
+      ],
+      "formats": [
+        "pre-data"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

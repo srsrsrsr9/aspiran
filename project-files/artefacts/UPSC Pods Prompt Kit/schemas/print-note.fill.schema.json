@@ -1,0 +1,455 @@
+{
+  "title": "Printable one-page note",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "syllabus",
+    "thirtySeconds",
+    "core",
+    "traps",
+    "memoryHook",
+    "overlooked",
+    "mainsAngles",
+    "selfTest",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "syllabus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paper",
+        "line"
+      ],
+      "properties": {
+        "paper": {
+          "type": "string",
+          "enum": [
+            "prelims-gs1",
+            "prelims-csat",
+            "mains-gs1",
+            "mains-gs2",
+            "mains-gs3",
+            "mains-gs4",
+            "mains-essay",
+            "interview"
+          ]
+        },
+        "line": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 16
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 22
+            }
+          },
+          "description": "The syllabus line this note covers"
+        }
+      }
+    },
+    "thirtySeconds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 45
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 62
+        }
+      },
+      "description": "The whole topic in one paragraph"
+    },
+    "core": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layout",
+        "heading",
+        "columns",
+        "rows"
+      ],
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": [
+            "table",
+            "compare",
+            "timeline",
+            "flow",
+            "grid"
+          ]
+        },
+        "heading": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 6
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            }
+          }
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 3
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 4
+              }
+            }
+          },
+          "minItems": 2,
+          "maxItems": 4,
+          "description": "Column headings. timeline: [Year, Event]; flow: [Step, What happens]; grid: [Term, Meaning]"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "en",
+                "hi"
+              ],
+              "properties": {
+                "en": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 14
+                },
+                "hi": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 19
+                }
+              }
+            },
+            "minItems": 2,
+            "maxItems": 4
+          },
+          "minItems": 4,
+          "maxItems": 10,
+          "description": "Each row has one cell per column"
+        }
+      }
+    },
+    "traps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "trap",
+          "truth"
+        ],
+        "properties": {
+          "trap": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22
+              }
+            },
+            "description": "What the examiner says"
+          },
+          "truth": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 18
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              }
+            },
+            "description": "What is actually true"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "memoryHook": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 20
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 28
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Only if honest and genuinely memorable; null otherwise"
+    },
+    "overlooked": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 35
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 48
+        }
+      },
+      "description": "The one point most notes miss and good answers use"
+    },
+    "mainsAngles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paper",
+          "line"
+        ],
+        "properties": {
+          "paper": {
+            "type": "string",
+            "enum": [
+              "prelims-gs1",
+              "prelims-csat",
+              "mains-gs1",
+              "mains-gs2",
+              "mains-gs3",
+              "mains-gs4",
+              "mains-essay",
+              "interview"
+            ]
+          },
+          "line": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 18
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "selfTest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "q",
+          "a"
+        ],
+        "properties": {
+          "q": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22
+              }
+            }
+          },
+          "a": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 10
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 14
+              }
+            }
+          }
+        }
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "verify"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 45
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "true until a person has checked it"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 6,
+      "description": "Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/print-note@1"
+}

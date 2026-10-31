@@ -1,0 +1,138 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "id": "fact-or-opinion-constitution",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Fact or opinion? The Constitution",
+    "hi": "तथ्य या मत? संविधान"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Constitution was adopted on 26 November 1949 and came into force on 26 January 1950.",
+        "why": "Check it against the adoption and commencement dates in any standard text."
+      },
+      "hi": {
+        "text": "संविधान 26 नवंबर 1949 को अपनाया गया और 26 जनवरी 1950 को लागू हुआ।",
+        "why": "जाँच: अपनाने और लागू होने की तारीखें किसी मानक पुस्तक में मिलाएँ।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Constitution is the best in the world.",
+        "why": "Opinion: 'best' is a value judgment that depends on criteria, so it can be debated."
+      },
+      "hi": {
+        "text": "संविधान दुनिया का सबसे अच्छा संविधान है।",
+        "why": "मत: 'सबसे अच्छा' एक मूल्य-निर्णय है, जिस पर लोग अलग-अलग राय रखते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Constituent Assembly took almost three years to draft the Constitution.",
+        "why": "Checkable: compare the drafting period with the adoption date."
+      },
+      "hi": {
+        "text": "संविधान का मसौदा तैयार करने में संविधान सभा को लगभग तीन वर्ष लगे।",
+        "why": "जाँच: मसौदा-काल की अवधि और अपनाने की तारीख मिलाकर देखें।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The frequent amendments show that the Constitution was poorly drafted.",
+        "why": "Opinion: 'poorly drafted' is a judgment; the number of amendments alone does not prove it."
+      },
+      "hi": {
+        "text": "बार-बार हुए संशोधन बताते हैं कि संविधान खराब तरीके से बनाया गया था।",
+        "why": "मत: 'खराब तरीके से बनाया' एक निर्णय है; केवल संशोधनों की संख्या इसे साबित नहीं करती।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Constitution has been amended more than 100 times.",
+        "why": "Checkable: count the amendments in the official list of amendments."
+      },
+      "hi": {
+        "text": "संविधान में 100 से अधिक बार संशोधन हुए हैं।",
+        "why": "जाँच: संशोधनों की आधिकारिक सूची में गिनती करें।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The basic structure doctrine gives judges too much power.",
+        "why": "Opinion: 'too much' is a judgment; many readers weigh judicial power differently."
+      },
+      "hi": {
+        "text": "मूल ढाँचा सिद्धांत न्यायाधीशों को बहुत अधिक शक्ति देता है।",
+        "why": "मत: 'बहुत अधिक' एक आकलन है; न्यायपालिका की शक्ति पर लोगों की राय अलग है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "In the Kesavananda Bharati case (1973), the Supreme Court held that Parliament cannot alter the basic structure.",
+        "why": "Checkable: look up the case name, year and the Court's holding."
+      },
+      "hi": {
+        "text": "केशवानंद भारती मामले (1973) में सर्वोच्च न्यायालय ने कहा कि संसद संविधान के मूल ढाँचे को बदल नहीं सकती।",
+        "why": "जाँच: मामले का नाम, वर्ष और अदालत का निर्णय देखें।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "India would be better governed with a presidential system.",
+        "why": "Opinion: 'better' is a judgment that supporters and critics of both systems weigh differently."
+      },
+      "hi": {
+        "text": "भारत का शासन राष्ट्रपति प्रणाली से बेहतर होता।",
+        "why": "मत: 'बेहतर' एक आकलन है; दोनों प्रणालियों के समर्थक और आलोचक इसे अलग तरह से तौलते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/fact-or-opinion/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs2"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  }
+}

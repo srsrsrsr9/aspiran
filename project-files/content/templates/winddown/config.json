@@ -1,0 +1,27 @@
+{
+  "schemaId": "upsc-pods/winddown@1",
+  "knobs": {
+    "seconds": 60
+  },
+  "defaults": {
+    "seconds": 60,
+    "theme": "night-chai",
+    "audio": {
+      "file": "audio/bed.ogg",
+      "gain": 0.35,
+      "onlyIfSoundOn": true
+    },
+    "motion": "The lamp's glow fades from 100% to 15% over the full duration. No flashing. Respects reduced motion by showing the end state.",
+    "rules": [
+      "No study content",
+      "No numbers"
+    ],
+    "tags": {
+      "stage": [
+        "revision"
+      ],
+      "papers": [],
+      "formats": []
+    }
+  }
+}

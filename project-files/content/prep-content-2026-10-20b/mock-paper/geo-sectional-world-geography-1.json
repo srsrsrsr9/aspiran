@@ -1,0 +1,978 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "geo-sectional-world-geography-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "World geography sectional mock 1",
+    "hi": "विश्व भूगोल सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 World Physical Geography",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "geo-weathering-and-landforms",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A mushroom rock, with a narrow base and a wider top, is formed mainly by:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "abrasion by wind carrying sand in deserts",
+          "the action of sea waves on a coast",
+          "glaciers plucking rock from valley sides",
+          "rainwater dissolving limestone underground"
+        ],
+        "why": "Wind-blown sand wears away the lower part of a rock faster than the top, leaving a mushroom shape. The trap is (b): sea waves form stacks and arches, which can look similar."
+      },
+      "hi": {
+        "stem": "संकरे आधार और चौड़े ऊपरी हिस्से वाली छत्रक शिला (mushroom rock) मुख्यतः किससे बनती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मरुस्थलों में रेत ढोती हवा के अपघर्षण से",
+          "तट पर समुद्री लहरों की क्रिया से",
+          "घाटी की दीवारों से चट्टान उखाड़ते हिमनदों से",
+          "भूमिगत चूना-पत्थर को घोलते वर्षा जल से"
+        ],
+        "why": "हवा के साथ उड़ती रेत चट्टान के निचले हिस्से को ऊपर की तुलना में तेज़ी से घिसती है, जिससे छत्रक जैसा आकार बनता है। (b) का जाल है: लहरें स्टैक और मेहराब बनाती हैं, जो मिलते-जुलते दिख सकते हैं।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-weathering-and-landforms",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of landforms and the agent that mainly forms them:",
+        "statements": [
+          "Esker – glacial meltwater",
+          "Lapies – groundwater acting on limestone",
+          "Yardang – wind",
+          "Fjord – deposition by rivers"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. A fjord is a deep glacial valley drowned by the sea, so it is formed by glacial erosion, not river deposition. The trap is 'All four', since fjords are long water-filled inlets."
+      },
+      "hi": {
+        "stem": "स्थलरूपों और उन्हें मुख्यतः बनाने वाले कारकों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "एस्कर – हिमनद का पिघला जल",
+          "लैपीज़ – चूना-पत्थर पर भूमिगत जल की क्रिया",
+          "यारडांग – पवन",
+          "फ़ियोर्ड – नदियों द्वारा निक्षेपण"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 3 सही हैं। फ़ियोर्ड समुद्र में डूबी गहरी हिमनदी घाटी है, यानी यह हिमनद के अपरदन से बनता है, नदी के निक्षेपण से नहीं। 'सभी चार' का जाल इसलिए लगता है क्योंकि फ़ियोर्ड लंबी पानी भरी खाड़ियाँ होते हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-weathering-and-landforms",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about weathering:",
+        "statements": [
+          "Exfoliation is common in hot deserts, where the daily range of temperature is large.",
+          "Chemical weathering is generally most active in hot and humid climates.",
+          "Frost wedging is most effective in hot and humid tropical lowlands."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: frost wedging needs repeated freezing and thawing of water in cracks, so it works in cold regions and high mountains. The trap is '1, 2 and 3', as all three sound like weathering facts."
+      },
+      "hi": {
+        "stem": "अपक्षय (weathering) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "अपशल्कन (exfoliation) गर्म मरुस्थलों में आम है, जहाँ दैनिक तापांतर अधिक होता है।",
+          "रासायनिक अपक्षय आम तौर पर गर्म और आर्द्र जलवायु में सबसे सक्रिय होता है।",
+          "तुषार अपक्षय (frost wedging) गर्म और आर्द्र उष्णकटिबंधीय निचले इलाकों में सबसे प्रभावी होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: तुषार अपक्षय के लिए दरारों में पानी का बार-बार जमना और पिघलना ज़रूरी है, इसलिए यह ठंडे इलाकों और ऊँचे पहाड़ों में होता है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि तीनों अपक्षय के तथ्य जैसे लगते हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-volcanoes-and-earthquakes",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Shield volcanoes have gentle slopes and are built mainly of fluid basalt lava, as in Hawaii.",
+          "The point inside the earth where an earthquake originates is called the epicentre.",
+          "Composite volcanoes are built of alternate layers of lava and ash, as in Mount Fuji."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 3 only",
+          "2 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: the point of origin is the focus or hypocentre; the epicentre is the point on the surface directly above it. The trap is '1, 2 and 3', a common mix-up of the two terms."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "शील्ड ज्वालामुखियों की ढलानें हल्की होती हैं और वे मुख्यतः तरल बेसाल्ट लावा से बनते हैं, जैसे हवाई में।",
+          "पृथ्वी के भीतर वह बिंदु जहाँ भूकंप शुरू होता है, अधिकेंद्र (epicentre) कहलाता है।",
+          "मिश्रित ज्वालामुखी लावा और राख की बारी-बारी परतों से बनते हैं, जैसे माउंट फ़ूजी।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 3",
+          "केवल 2",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: भूकंप जहाँ शुरू होता है वह उद्गम केंद्र (focus या hypocentre) है; अधिकेंद्र उसके ठीक ऊपर सतह का बिंदु है। '1, 2 और 3' का जाल इन दोनों शब्दों की आम उलझन से लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-volcanoes-and-earthquakes",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which scale measures the intensity of an earthquake on the basis of its observed effects and damage?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Richter scale",
+          "Mercalli scale",
+          "Beaufort scale",
+          "Mohs scale"
+        ],
+        "why": "The Mercalli scale grades intensity by what people feel and the damage done. The trap is the Richter scale, which measures magnitude, the energy released at the source."
+      },
+      "hi": {
+        "stem": "कौन-सा पैमाना भूकंप की तीव्रता को उसके दिखे प्रभावों और नुक़सान के आधार पर मापता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "रिक्टर पैमाना",
+          "मरकैली पैमाना",
+          "ब्यूफ़ोर्ट पैमाना",
+          "मोह्स पैमाना"
+        ],
+        "why": "मरकैली पैमाना तीव्रता को लोगों के महसूस करने और हुए नुक़सान से आँकता है। रिक्टर का जाल है: वह परिमाण (magnitude) मापता है, यानी स्रोत पर निकली ऊर्जा।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "geo-insolation-and-atmosphere",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The maximum insolation at the earth's surface is received over the subtropical deserts rather than at the equator.",
+          "Statement II: The subtropical deserts have the least cloudiness, while the equatorial belt has much cloud cover."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: clouds reflect and absorb incoming sunlight, so the clear skies over subtropical deserts let more of it reach the ground. The trap is (d), assuming the equator must receive the most."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: पृथ्वी की सतह पर अधिकतम सूर्यातप (insolation) भूमध्य रेखा पर नहीं, बल्कि उपोष्ण मरुस्थलों पर मिलता है।",
+          "कथन II: उपोष्ण मरुस्थलों पर बादल सबसे कम होते हैं, जबकि भूमध्यरेखीय पट्टी पर बादल काफ़ी रहते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: बादल आती धूप को परावर्तित और अवशोषित करते हैं, इसलिए उपोष्ण मरुस्थलों का साफ़ आसमान ज़्यादा धूप ज़मीन तक पहुँचने देता है। (d) का जाल यह मान लेना है कि सबसे ज़्यादा धूप भूमध्य रेखा पर ही मिलेगी।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-insolation-and-atmosphere",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which layer of the atmosphere reflects radio waves transmitted from the earth back to the earth?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Troposphere",
+          "Stratosphere",
+          "Mesosphere",
+          "Ionosphere"
+        ],
+        "why": "The ionosphere, with its electrically charged particles, reflects radio waves back to the earth. The trap is the stratosphere, which is known for the ozone layer, not for radio waves."
+      },
+      "hi": {
+        "stem": "वायुमंडल की कौन-सी परत पृथ्वी से भेजी गई रेडियो तरंगों को वापस पृथ्वी की ओर परावर्तित करती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "क्षोभमंडल",
+          "समतापमंडल",
+          "मध्यमंडल",
+          "आयनमंडल"
+        ],
+        "why": "आयनमंडल में आवेशित कण होते हैं, जो रेडियो तरंगों को वापस पृथ्वी पर लौटा देते हैं। समतापमंडल का जाल है: वह ओज़ोन परत के लिए जाना जाता है, रेडियो तरंगों के लिए नहीं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "geo-insolation-and-atmosphere",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the heating of the earth and the atmosphere:",
+        "statements": [
+          "Albedo is the share of incoming solar radiation that is reflected back to space.",
+          "Fresh snow has a higher albedo than a dark forest.",
+          "The atmosphere is heated mainly by long-wave radiation from the earth, not directly by incoming short-wave solar radiation.",
+          "Temperature inversion is most common on cloudy, windy nights."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: inversion is common on long, clear and calm winter nights, when the ground loses heat fast. The trap is 'All four', as inversion is linked with nights."
+      },
+      "hi": {
+        "stem": "पृथ्वी और वायुमंडल के गर्म होने के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "एल्बीडो आने वाले सौर विकिरण का वह हिस्सा है जो वापस अंतरिक्ष में परावर्तित हो जाता है।",
+          "ताज़ी बर्फ़ का एल्बीडो घने गहरे जंगल से अधिक होता है।",
+          "वायुमंडल मुख्यतः पृथ्वी से निकलने वाले दीर्घ तरंग विकिरण से गर्म होता है, सीधे आने वाले लघु तरंग सौर विकिरण से नहीं।",
+          "तापमान व्युत्क्रमण बादलों और तेज़ हवा वाली रातों में सबसे आम होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: व्युत्क्रमण सर्दियों की लंबी, साफ़ और शांत रातों में आम है, जब ज़मीन तेज़ी से गर्मी खोती है। 'सभी चार' का जाल इसलिए लगता है क्योंकि व्युत्क्रमण रात से जुड़ा है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-cyclones",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about tropical cyclones:",
+        "statements": [
+          "They form over large sea surfaces with temperatures above about 27°C.",
+          "They weaken after landfall, as they lose their supply of moisture.",
+          "In the Northern Hemisphere, the winds around a tropical cyclone blow clockwise."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: in the Northern Hemisphere, cyclonic winds blow anticlockwise; they are clockwise in the Southern Hemisphere. The trap is '1, 2 and 3', mixing up the two hemispheres."
+      },
+      "hi": {
+        "stem": "उष्णकटिबंधीय चक्रवातों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "ये लगभग 27°C से अधिक तापमान वाली बड़ी समुद्री सतहों पर बनते हैं।",
+          "तट से टकराने के बाद ये कमज़ोर पड़ जाते हैं, क्योंकि इनकी नमी की आपूर्ति बंद हो जाती है।",
+          "उत्तरी गोलार्ध में उष्णकटिबंधीय चक्रवात के चारों ओर हवाएँ घड़ी की सुई की दिशा में चलती हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: उत्तरी गोलार्ध में चक्रवाती हवाएँ घड़ी की उलटी दिशा में चलती हैं; दक्षिणी गोलार्ध में घड़ी की दिशा में। '1, 2 और 3' का जाल दोनों गोलार्धों को मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "geo-cyclones",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I (local name of tropical cyclones) with List II (region) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Hurricanes",
+          "B. Typhoons",
+          "C. Willy-willies",
+          "D. Cyclones",
+          "1. Indian Ocean",
+          "2. Western Pacific and the China Sea",
+          "3. Atlantic and the Caribbean",
+          "4. Western Australia"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-3, C-4, D-1",
+          "A-3, B-2, C-1, D-4",
+          "A-4, B-2, C-3, D-1",
+          "A-3, B-2, C-4, D-1"
+        ],
+        "why": "Hurricanes are Atlantic and Caribbean storms, typhoons belong to the western Pacific, willy-willies to Western Australia and cyclones to the Indian Ocean. The trap is (a), which swaps hurricanes and typhoons."
+      },
+      "hi": {
+        "stem": "सूची I (उष्णकटिबंधीय चक्रवातों का स्थानीय नाम) को सूची II (क्षेत्र) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. हरिकेन",
+          "B. टाइफ़ून",
+          "C. विली-विली",
+          "D. साइक्लोन",
+          "1. हिंद महासागर",
+          "2. पश्चिमी प्रशांत और चीन सागर",
+          "3. अटलांटिक और कैरिबियन",
+          "4. पश्चिमी ऑस्ट्रेलिया"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-3, C-4, D-1",
+          "A-3, B-2, C-1, D-4",
+          "A-4, B-2, C-3, D-1",
+          "A-3, B-2, C-4, D-1"
+        ],
+        "why": "हरिकेन अटलांटिक और कैरिबियन के तूफ़ान हैं, टाइफ़ून पश्चिमी प्रशांत के, विली-विली पश्चिमी ऑस्ट्रेलिया के और साइक्लोन हिंद महासागर के। (a) का जाल हरिकेन और टाइफ़ून को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "geo-cyclones",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Temperate (extra-tropical) cyclones form along the polar front in the middle latitudes.",
+          "Statement II: Temperate cyclones get their energy mainly from the latent heat released over warm tropical seas."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct. Statement II is wrong: latent heat over warm seas drives tropical cyclones; temperate cyclones draw energy from the contrast between warm and cold air masses along fronts. The trap is (b), applying the tropical mechanism to both."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: शीतोष्ण (बाह्य-उष्णकटिबंधीय) चक्रवात मध्य अक्षांशों में ध्रुवीय वाताग्र के साथ बनते हैं।",
+          "कथन II: शीतोष्ण चक्रवात अपनी ऊर्जा मुख्यतः गर्म उष्णकटिबंधीय समुद्रों पर निकलने वाली गुप्त ऊष्मा से पाते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है। कथन II गलत है: गर्म समुद्रों पर गुप्त ऊष्मा से उष्णकटिबंधीय चक्रवात चलते हैं; शीतोष्ण चक्रवात वाताग्रों पर गर्म और ठंडी वायुराशियों के अंतर से ऊर्जा लेते हैं। (b) का जाल उष्णकटिबंधीय तंत्र को दोनों पर लगा देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-humidity-and-precipitation",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Convectional rainfall, with heavy afternoon showers and thunderstorms on most days, is most typical of:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "the equatorial region",
+          "the Mediterranean region",
+          "the cool temperate west coasts",
+          "the polar regions"
+        ],
+        "why": "Strong daily heating in the equatorial belt makes moist air rise, cool and condense, giving afternoon downpours. The trap is (c): temperate west coasts are wet too, but their rain comes mainly from fronts and depressions."
+      },
+      "hi": {
+        "stem": "ज़्यादातर दिनों में दोपहर बाद तेज़ बौछारों और गरज-चमक वाली संवहनीय वर्षा सबसे अधिक कहाँ की विशेषता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भूमध्यरेखीय क्षेत्र",
+          "भूमध्यसागरीय क्षेत्र",
+          "ठंडे शीतोष्ण पश्चिमी तट",
+          "ध्रुवीय क्षेत्र"
+        ],
+        "why": "भूमध्यरेखीय पट्टी में रोज़ की तेज़ गर्मी से नम हवा ऊपर उठती है, ठंडी होकर संघनित होती है और दोपहर बाद बारिश होती है। (c) का जाल है: शीतोष्ण पश्चिमी तट भी गीले हैं, पर वहाँ बारिश मुख्यतः वाताग्रों और अवदाबों से होती है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-humidity-and-precipitation",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about humidity:",
+        "statements": [
+          "Relative humidity is the actual moisture in the air as a percentage of what it could hold at that temperature.",
+          "The dew point is the temperature at which air becomes saturated.",
+          "Warm air can hold less water vapour than cold air."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: warm air can hold more water vapour, which is why cooling air leads to condensation. The trap is '1, 2 and 3', if the direction of the relationship is reversed."
+      },
+      "hi": {
+        "stem": "आर्द्रता के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "सापेक्ष आर्द्रता हवा में मौजूद वास्तविक नमी है, उस तापमान पर उसकी अधिकतम क्षमता के प्रतिशत के रूप में।",
+          "ओसांक वह तापमान है जिस पर हवा संतृप्त हो जाती है।",
+          "गर्म हवा ठंडी हवा की तुलना में कम जलवाष्प रख सकती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: गर्म हवा ज़्यादा जलवाष्प रख सकती है, इसीलिए हवा ठंडी होने पर संघनन होता है। यह संबंध उलटा याद हो तो '1, 2 और 3' लुभाता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-world-climate-and-biomes",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of temperate grasslands and the regions where they are found:",
+        "statements": [
+          "Pampas – Argentina",
+          "Veld – South Africa",
+          "Llanos – Brazil",
+          "Steppes – North America"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. The Llanos are in Venezuela and Colombia (Brazil has the Campos), and the North American grasslands are the Prairies; the Steppes are in Eurasia. The trap is 'Only three', since the Llanos are in South America."
+      },
+      "hi": {
+        "stem": "शीतोष्ण घास के मैदानों और उनके क्षेत्रों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "पम्पास – अर्जेंटीना",
+          "वेल्ड – दक्षिण अफ़्रीका",
+          "लानोस – ब्राज़ील",
+          "स्टेपीज़ – उत्तरी अमेरिका"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। लानोस वेनेज़ुएला और कोलंबिया में हैं (ब्राज़ील में कैम्पोस हैं), और उत्तरी अमेरिका के घास के मैदान प्रेयरी हैं; स्टेपीज़ यूरेशिया में हैं। 'केवल तीन' का जाल इसलिए लगता है क्योंकि लानोस भी दक्षिण अमेरिका में हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-world-climate-and-biomes",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about climate regions and natural vegetation:",
+        "statements": [
+          "The hot, wet equatorial climate has a small annual range of temperature.",
+          "The taiga forests of the northern hemisphere are mainly coniferous.",
+          "Tundra vegetation consists mainly of mosses, lichens and small shrubs."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The trap is '1 and 2 only', from assuming the tundra is bare: it has no trees, but mosses, lichens and dwarf shrubs grow in the short summer."
+      },
+      "hi": {
+        "stem": "जलवायु प्रदेशों और प्राकृतिक वनस्पति के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "गर्म और आर्द्र भूमध्यरेखीय जलवायु में तापमान का वार्षिक अंतर कम होता है।",
+          "उत्तरी गोलार्ध के टैगा वन मुख्यतः शंकुधारी होते हैं।",
+          "टुंड्रा वनस्पति में मुख्यतः मॉस, लाइकेन और छोटी झाड़ियाँ होती हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। 'केवल 1 और 2' का जाल टुंड्रा को बंजर मान लेने से लगता है: वहाँ पेड़ नहीं होते, पर छोटी गर्मी में मॉस, लाइकेन और बौनी झाड़ियाँ उगती हैं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "geo-world-climate-and-biomes",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is NOT a hot tropical desert?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Kalahari",
+          "Gobi",
+          "Sahara",
+          "Thar"
+        ],
+        "why": "The Gobi is a mid-latitude desert of Mongolia and China with very cold winters. The trap is the Kalahari, which some take for a semi-desert outside the tropics, but it is a hot desert of southern Africa."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा गर्म उष्णकटिबंधीय मरुस्थल नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कालाहारी",
+          "गोबी",
+          "सहारा",
+          "थार"
+        ],
+        "why": "गोबी मंगोलिया और चीन का मध्य-अक्षांशीय मरुस्थल है, जहाँ सर्दियाँ बहुत ठंडी होती हैं। कालाहारी का जाल है: कुछ लोग इसे उष्णकटिबंध से बाहर का अर्ध-मरुस्थल मानते हैं, पर यह दक्षिणी अफ़्रीका का गर्म मरुस्थल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-ocean-floor-and-salinity",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the relief of the ocean floor:",
+        "statements": [
+          "The continental shelf is the gently sloping, shallow extension of a continent under the sea.",
+          "The continental slope is gentler than the continental shelf.",
+          "The Mariana Trench in the Pacific Ocean is the deepest known part of the oceans."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 3 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: the continental slope is much steeper than the shelf, dropping to the deep ocean floor. The trap is '1, 2 and 3', since both are parts of the continental margin."
+      },
+      "hi": {
+        "stem": "समुद्र तल की उच्चावच (relief) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "महाद्वीपीय मग्नतट (shelf) समुद्र के नीचे महाद्वीप का हल्की ढलान वाला, उथला विस्तार है।",
+          "महाद्वीपीय ढाल (slope) महाद्वीपीय मग्नतट से कम ढलवाँ होता है।",
+          "प्रशांत महासागर की मारियाना खाई महासागरों का सबसे गहरा ज्ञात भाग है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 3",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: महाद्वीपीय ढाल मग्नतट से कहीं ज़्यादा खड़ा होता है और गहरे समुद्र तल तक उतरता है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि दोनों महाद्वीपीय किनारे के हिस्से हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "geo-ocean-floor-and-salinity",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The salinity of the Baltic Sea is low.",
+          "Statement II: The Baltic Sea receives a large inflow of fresh water from rivers.",
+          "Statement III: The Baltic Sea lies in the tropics, where evaporation is high."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Only II is correct, and it explains I: heavy river inflow dilutes the Baltic's water. III is wrong: the Baltic lies in the cool high latitudes of northern Europe, and high evaporation would raise salinity anyway. The trap is (b)."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: बाल्टिक सागर की लवणता कम है।",
+          "कथन II: बाल्टिक सागर में नदियों से बड़ी मात्रा में मीठा पानी आता है।",
+          "कथन III: बाल्टिक सागर उष्णकटिबंध में है, जहाँ वाष्पीकरण अधिक होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "केवल II सही है, और वही I की व्याख्या करता है: नदियों का भारी जल-प्रवाह बाल्टिक के पानी को पतला कर देता है। III गलत है: बाल्टिक उत्तरी यूरोप के ठंडे ऊँचे अक्षांशों में है, और ज़्यादा वाष्पीकरण तो लवणता बढ़ाता। जाल (b) है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-ocean-floor-and-salinity",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The average salinity of the world's oceans is about:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "25 parts per thousand",
+          "30 parts per thousand",
+          "35 parts per thousand",
+          "45 parts per thousand"
+        ],
+        "why": "Average ocean salinity is about 35 parts per thousand, that is, 35 grams of salt in a kilogram of sea water. The trap is (b), close to the figure but too low."
+      },
+      "hi": {
+        "stem": "विश्व के महासागरों की औसत लवणता लगभग कितनी है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "25 भाग प्रति हज़ार",
+          "30 भाग प्रति हज़ार",
+          "35 भाग प्रति हज़ार",
+          "45 भाग प्रति हज़ार"
+        ],
+        "why": "महासागरों की औसत लवणता लगभग 35 भाग प्रति हज़ार है, यानी एक किलोग्राम समुद्री पानी में 35 ग्राम नमक। (b) का जाल है: आँकड़े के क़रीब है, पर कम है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-tides-and-currents",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about tides:",
+        "statements": [
+          "Spring tides occur when the sun, the moon and the earth are in a straight line, at new moon and full moon.",
+          "Neap tides occur when the sun and the moon are at right angles to each other with respect to the earth.",
+          "The Bay of Fundy in Canada has some of the highest tides in the world."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The trap is '1 and 2 only': the Bay of Fundy, in Nova Scotia, is the standard example of a very high tidal range, because of the funnel shape of the bay."
+      },
+      "hi": {
+        "stem": "ज्वार-भाटे के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "दीर्घ ज्वार (spring tide) तब आता है जब सूर्य, चंद्रमा और पृथ्वी एक सीधी रेखा में हों, यानी अमावस्या और पूर्णिमा पर।",
+          "लघु ज्वार (neap tide) तब आता है जब पृथ्वी के सापेक्ष सूर्य और चंद्रमा समकोण पर हों।",
+          "कनाडा की फ़ंडी की खाड़ी में विश्व के सबसे ऊँचे ज्वारों में से कुछ आते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। 'केवल 1 और 2' का जाल है: नोवा स्कोशिया की फ़ंडी की खाड़ी बहुत ऊँचे ज्वार का मानक उदाहरण है, खाड़ी के कीप जैसे आकार की वजह से।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-tides-and-currents",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of ocean currents and their nature:",
+        "statements": [
+          "Labrador Current – cold",
+          "Canary Current – cold",
+          "North Atlantic Drift – cold",
+          "Oyashio Current – warm"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. The North Atlantic Drift is warm and keeps north-west European ports ice-free; the Oyashio is a cold current off north-east Asia. The trap is 'Only three', since the North Atlantic Drift reaches cold latitudes."
+      },
+      "hi": {
+        "stem": "महासागरीय धाराओं और उनकी प्रकृति के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "लैब्राडोर धारा – ठंडी",
+          "कैनरी धारा – ठंडी",
+          "उत्तरी अटलांटिक ड्रिफ़्ट – ठंडी",
+          "ओयाशियो धारा – गर्म"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। उत्तरी अटलांटिक ड्रिफ़्ट गर्म है और उत्तर-पश्चिमी यूरोप के बंदरगाहों को बर्फ़ से मुक्त रखती है; ओयाशियो उत्तर-पूर्वी एशिया के पास की ठंडी धारा है। 'केवल तीन' का जाल इसलिए लगता है क्योंकि ड्रिफ़्ट ठंडे अक्षांशों तक पहुँचती है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "geo-world-rivers-and-lakes",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (river) with List II (water body into which it drains) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Danube",
+          "B. Volga",
+          "C. Mackenzie",
+          "D. Zambezi",
+          "1. Caspian Sea",
+          "2. Indian Ocean",
+          "3. Black Sea",
+          "4. Arctic Ocean"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-3, B-1, C-4, D-2",
+          "A-1, B-3, C-4, D-2",
+          "A-3, B-1, C-2, D-4",
+          "A-4, B-1, C-3, D-2"
+        ],
+        "why": "The Danube enters the Black Sea, the Volga the Caspian Sea, the Mackenzie the Arctic Ocean and the Zambezi the Indian Ocean. The trap is (b), which swaps the Danube and the Volga, both major European rivers."
+      },
+      "hi": {
+        "stem": "सूची I (नदी) को सूची II (जिस जल निकाय में वह गिरती है) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. डेन्यूब",
+          "B. वोल्गा",
+          "C. मैकेंज़ी",
+          "D. ज़ाम्बेज़ी",
+          "1. कैस्पियन सागर",
+          "2. हिंद महासागर",
+          "3. काला सागर",
+          "4. आर्कटिक महासागर"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-3, B-1, C-4, D-2",
+          "A-1, B-3, C-4, D-2",
+          "A-3, B-1, C-2, D-4",
+          "A-4, B-1, C-3, D-2"
+        ],
+        "why": "डेन्यूब काला सागर में, वोल्गा कैस्पियन सागर में, मैकेंज़ी आर्कटिक महासागर में और ज़ाम्बेज़ी हिंद महासागर में गिरती है। (b) का जाल डेन्यूब और वोल्गा को आपस में बदल देता है, क्योंकि दोनों यूरोप की बड़ी नदियाँ हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-world-rivers-and-lakes",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Great Lakes of North America:",
+        "statements": [
+          "Lake Superior is the largest of the Great Lakes.",
+          "Lake Michigan lies entirely within the United States.",
+          "The Great Lakes drain into the Atlantic Ocean through the Mississippi river."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the Great Lakes drain to the Atlantic through the St. Lawrence river. The trap is '1, 2 and 3', since the Mississippi is the best-known river of the region."
+      },
+      "hi": {
+        "stem": "उत्तरी अमेरिका की महान झीलों (Great Lakes) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "सुपीरियर झील महान झीलों में सबसे बड़ी है।",
+          "मिशिगन झील पूरी तरह संयुक्त राज्य अमेरिका में है।",
+          "महान झीलें मिसिसिपी नदी के रास्ते अटलांटिक महासागर में जल छोड़ती हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: महान झीलों का पानी सेंट लॉरेंस नदी के रास्ते अटलांटिक में जाता है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि उस क्षेत्र की सबसे मशहूर नदी मिसिसिपी है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "geo-world-mountains-and-rift-valleys",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following is NOT a young fold mountain range?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Andes",
+          "Alps",
+          "Atlas",
+          "Appalachians"
+        ],
+        "why": "The Appalachians of eastern North America are old fold mountains, worn down over a very long time. The trap is the Atlas of north-west Africa, which is less familiar but was folded in the same mountain-building phase as the Alps."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सी नवीन वलित पर्वत श्रेणी नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "एंडीज़",
+          "आल्प्स",
+          "एटलस",
+          "अप्लेशियन"
+        ],
+        "why": "पूर्वी उत्तरी अमेरिका के अप्लेशियन पुराने वलित पर्वत हैं, जो बहुत लंबे समय में घिस चुके हैं। एटलस का जाल है: उत्तर-पश्चिमी अफ़्रीका की यह श्रेणी कम जानी-पहचानी है, पर इसका वलन आल्प्स वाले ही पर्वत-निर्माण दौर में हुआ।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-world-mountains-and-rift-valleys",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which African lake lies in the Great Rift Valley and is among the deepest lakes in the world?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Lake Victoria",
+          "Lake Tanganyika",
+          "Lake Chad",
+          "Lake Volta"
+        ],
+        "why": "Lake Tanganyika fills part of the western branch of the Rift Valley and is among the world's deepest lakes. The trap is Lake Victoria, Africa's largest lake, which lies on a plateau between the two branches of the rift and is shallow."
+      },
+      "hi": {
+        "stem": "अफ़्रीका की कौन-सी झील ग्रेट रिफ़्ट घाटी में है और विश्व की सबसे गहरी झीलों में गिनी जाती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "विक्टोरिया झील",
+          "टांगानिका झील",
+          "चाड झील",
+          "वोल्टा झील"
+        ],
+        "why": "टांगानिका झील रिफ़्ट घाटी की पश्चिमी शाखा के एक हिस्से में भरी है और विश्व की सबसे गहरी झीलों में है। विक्टोरिया का जाल है: अफ़्रीका की सबसे बड़ी झील है, पर रिफ़्ट की दोनों शाखाओं के बीच एक पठार पर है और उथली है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography; NCERT Class VII Our Environment",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत; NCERT कक्षा VII हमारा पर्यावरण"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

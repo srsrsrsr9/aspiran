@@ -1,0 +1,92 @@
+{
+  "title": "Close the day (wind-down)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "cue",
+            "button",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 14
+            },
+            "cue": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "button": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 3
+            },
+            "end": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 6
+            }
+          }
+        },
+        "hi": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "cue",
+            "button",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 19
+            },
+            "cue": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            },
+            "button": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "end": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 9
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-type": "upsc-pods/winddown@1"
+}

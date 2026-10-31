@@ -1,0 +1,166 @@
+{
+  "schemaId": "upsc-pods/explainer@1",
+  "knobs": {
+    "recipe": "four-options: one actor sends an item to a second actor, who has four possible actions. Scene 1 sets up, scene 2 introduces the four options, scenes 3 to 6 show one option each, scene 7 is the end card."
+  },
+  "recipe": "four-options",
+  "review": {
+    "status": "draft",
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "defaults": {
+    "tags": {
+      "stage": [
+        "revision"
+      ],
+      "papers": [
+        "prelims-gs1",
+        "mains-gs2"
+      ],
+      "formats": [
+        "mains-answer"
+      ]
+    },
+    "canvas": {
+      "width": 360,
+      "height": 400,
+      "units": "dp-like, scale to width"
+    },
+    "elements": {
+      "legislature": {
+        "kind": "building",
+        "roof": "triangle",
+        "x": 22,
+        "y": 34,
+        "w": 100
+      },
+      "governor": {
+        "kind": "building",
+        "roof": "dome",
+        "x": 238,
+        "y": 34,
+        "w": 100
+      },
+      "bill": {
+        "kind": "paper",
+        "x": 134,
+        "y": 54,
+        "w": 30,
+        "h": 38
+      },
+      "tiles": [
+        {
+          "x": 22,
+          "y": 124,
+          "w": 150,
+          "h": 96,
+          "icon": "check"
+        },
+        {
+          "x": 188,
+          "y": 124,
+          "w": 150,
+          "h": 96,
+          "icon": "pause"
+        },
+        {
+          "x": 22,
+          "y": 234,
+          "w": 150,
+          "h": 96,
+          "icon": "loop-back"
+        },
+        {
+          "x": 188,
+          "y": 234,
+          "w": 150,
+          "h": 96,
+          "icon": "arrow-right"
+        }
+      ],
+      "endCard": {
+        "x": 22,
+        "y": 124,
+        "w": 316,
+        "h": 206
+      }
+    },
+    "motion": {
+      "transition": "opacity and position, 300 ms, standard easing",
+      "dimmedOpacity": 0.28,
+      "reducedMotion": "show each scene as a still, captions unchanged"
+    },
+    "audio": {
+      "bed": "audio/bed.ogg",
+      "bedGain": 0.7,
+      "motif": "audio/motif.ogg",
+      "motifAtSeconds": 43.4,
+      "narration": null
+    },
+    "scenes": [
+      {
+        "index": 0,
+        "seconds": 6,
+        "state": {
+          "bill": {
+            "x": "0->62 over the scene"
+          },
+          "tiles": "hidden",
+          "end": "hidden"
+        }
+      },
+      {
+        "index": 1,
+        "seconds": 6,
+        "state": {
+          "tiles": "all shown",
+          "end": "hidden"
+        }
+      },
+      {
+        "index": 2,
+        "seconds": 6,
+        "state": {
+          "tiles": "0 highlighted, others dimmed",
+          "tileSub": 0,
+          "legislature": "dimmed"
+        }
+      },
+      {
+        "index": 3,
+        "seconds": 5,
+        "state": {
+          "tiles": "1 highlighted, others dimmed",
+          "legislature": "dimmed"
+        }
+      },
+      {
+        "index": 4,
+        "seconds": 10,
+        "state": {
+          "tiles": "2 highlighted, others dimmed",
+          "tileSub": 2,
+          "legislature": "dimmed"
+        }
+      },
+      {
+        "index": 5,
+        "seconds": 10,
+        "state": {
+          "tiles": "3 highlighted, others dimmed",
+          "tileSub": 3,
+          "legislature": "dimmed"
+        }
+      },
+      {
+        "index": 6,
+        "seconds": 5,
+        "state": {
+          "everything else": "hidden",
+          "end": "shown",
+          "sound": "bed fades out at 43.4 s, chai motif plays"
+        }
+      }
+    ]
+  }
+}

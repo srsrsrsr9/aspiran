@@ -1,0 +1,189 @@
+{
+  "title": "How many pairs are correctly matched?",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "heads",
+    "pairs",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "heads": {
+      "en": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left",
+          "right"
+        ],
+        "properties": {
+          "left": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 3
+          },
+          "right": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 3
+          }
+        }
+      },
+      "hi": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left",
+          "right"
+        ],
+        "properties": {
+          "left": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 5
+          },
+          "right": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 5
+          }
+        }
+      }
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "correct",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "correct": {
+            "type": "boolean"
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "left",
+              "right",
+              "fix"
+            ],
+            "properties": {
+              "left": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6
+              },
+              "right": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6
+              },
+              "fix": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16,
+                "description": "If wrong, the right match; if right, one line of why"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "left",
+              "right",
+              "fix"
+            ],
+            "properties": {
+              "left": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 9
+              },
+              "right": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 9
+              },
+              "fix": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22,
+                "description": "If wrong, the right match; if right, one line of why"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 4
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/pairs-count@1"
+}

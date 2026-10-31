@@ -1,0 +1,195 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "id": "sendai",
+ "card": "cards/chai-2026-10-10.json#sendai",
+ "lang": "en",
+ "tone": "SERIOUS",
+ "title": "The Sendai Framework for disaster risk",
+ "gsPaper": [
+  "mains-gs3"
+ ],
+ "syllabusNodes": [],
+ "sources": [
+  "UNDRR, Sendai Framework for Disaster Risk Reduction 2015–2030",
+  "Disaster Management Act, 2005",
+  "Chai card, 10 Oct 2026 (draft)"
+ ],
+ "free": false,
+ "quiz": [
+  {
+   "id": "sendai-q1",
+   "q": "Who chairs the National Disaster Management Authority?",
+   "options": [
+    "The Union Home Minister",
+    "The Prime Minister",
+    "The Cabinet Secretary",
+    "The President"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The Prime Minister chairs the NDMA."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Facts are from the 10 Oct Chai card, itself still a draft. Needs subject and Hindi editor approval."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "elevenlabs",
+  "voiceId": "X4kfNEZPfKkHBnN2KBJR",
+  "model": "eleven_multilingual_v2",
+  "settings": {
+   "stability": 0.5,
+   "similarity_boost": 0.8,
+   "style": 0.2,
+   "speed": 0.95
+  }
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.3,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one,": "GS1,",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-one": "GS1",
+  "G-S-three": "GS3"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "say": "One framework sets the world's targets for cutting disaster risk, and India has signed it.",
+   "data": {
+    "kicker": "Week 41 · 3 of 3 · GS3",
+    "headline": "The Sendai Framework for disaster risk",
+    "illustration": "illustrations/sendai.svg"
+   }
+  },
+  {
+   "shot": "map",
+   "say": "It was adopted at a UN conference in Sendai, Japan.",
+   "data": {
+    "lon0": 100,
+    "start": {
+     "center": [
+      110,
+      25
+     ],
+     "zoom": 0.9
+    },
+    "moves": [
+     {
+      "cue": "conference",
+      "center": [
+       140.87,
+       36.5
+      ],
+      "zoom": 4.5,
+      "d": 1.8
+     }
+    ],
+    "pins": [
+     {
+      "at": [
+       140.87,
+       38.27
+      ],
+      "label": "Sendai, Japan",
+      "cue": "Sendai,"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "timeline",
+   "say": "It runs from 2015 to 2030.",
+   "data": {
+    "kicker": "Its window",
+    "points": [
+     {
+      "year": 2015,
+      "label": "Adopted",
+      "cue": "2015"
+     },
+     {
+      "year": 2030,
+      "label": "Target year",
+      "cue": "2030"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "stat",
+   "say": "It sets seven global targets, such as fewer disaster deaths and lower economic losses, and four priorities for action, starting with understanding disaster risk.",
+   "data": {
+    "kicker": "What it asks",
+    "items": [
+     {
+      "value": 7,
+      "label": "global targets",
+      "cue": "seven"
+     },
+     {
+      "value": 4,
+      "label": "priorities for action",
+      "cue": "four"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "quote",
+   "say": "In India, the Disaster Management Act of 2005 created the National Disaster Management Authority.",
+   "data": {
+    "kicker": "The India link",
+    "text": "DM Act, 2005 created the NDMA",
+    "by": "National Disaster Management Authority"
+   }
+  },
+  {
+   "shot": "chips",
+   "say": "For mains, link global frameworks to how prepared our states are. That's G-S-three, disaster management.",
+   "data": {
+    "kicker": "Why it matters",
+    "title": "For your exam",
+    "items": [
+     {
+      "text": "GS3 · disaster management",
+      "sub": "Sendai targets and priorities",
+      "cue": "G-S-three"
+     },
+     {
+      "text": "Mains answers",
+      "sub": "Global framework to state preparedness",
+      "cue": "global"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "quiz",
+   "say": "Your turn. Who chairs the National Disaster Management Authority?",
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who chairs the National Disaster Management Authority?",
+    "options": [
+     "The Union Home Minister",
+     "The Prime Minister",
+     "The Cabinet Secretary",
+     "The President"
+    ]
+   }
+  }
+ ]
+}

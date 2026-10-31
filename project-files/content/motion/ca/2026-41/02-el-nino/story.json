@@ -1,0 +1,202 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "id": "el-nino",
+ "card": "cards/chai-2026-10-10.json#el-nino",
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "How El Niño can weaken India's monsoon",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [],
+ "sources": [
+  "NOAA Climate Prediction Center, ENSO basics",
+  "IMD monsoon reports",
+  "Chai card, 10 Oct 2026 (draft)"
+ ],
+ "free": false,
+ "quiz": [
+  {
+   "id": "el-nino-q1",
+   "q": "Which of these can reduce El Niño's effect on the Indian monsoon?",
+   "options": [
+    "A negative IOD",
+    "A positive IOD",
+    "Western disturbances",
+    "A weak jet stream"
+   ],
+   "answerIndex": 1,
+   "why": "Right. A positive IOD can offset El Niño, as in 1997."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Facts are from the 10 Oct Chai card, itself still a draft. Needs subject and Hindi editor approval."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "elevenlabs",
+  "voiceId": "X4kfNEZPfKkHBnN2KBJR",
+  "model": "eleven_multilingual_v2",
+  "settings": {
+   "stability": 0.5,
+   "similarity_boost": 0.8,
+   "style": 0.2,
+   "speed": 0.95
+  }
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.3,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one,": "GS1,",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-one": "GS1",
+  "G-S-three": "GS3"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "say": "Why does a warm patch of the Pacific Ocean worry farmers in India?",
+   "data": {
+    "kicker": "Week 41 · 2 of 3 · GS1",
+    "headline": "How El Niño can weaken India's monsoon",
+    "illustration": "illustrations/nino.svg"
+   }
+  },
+  {
+   "shot": "map",
+   "say": "El Niño is an unusual warming of the sea surface in the central and eastern equatorial Pacific. It weakens the Walker circulation, the loop of winds over the Pacific, and often brings drier conditions to India during the southwest monsoon.",
+   "data": {
+    "lon0": 170,
+    "start": {
+     "center": [
+      170,
+      5
+     ],
+     "zoom": 0.6
+    },
+    "moves": [
+     {
+      "cue": "warming",
+      "center": [
+       -140,
+       0
+      ],
+      "zoom": 1.5,
+      "d": 1.8
+     },
+     {
+      "cue": "Walker",
+      "center": [
+       175,
+       2
+      ],
+      "zoom": 0.85,
+      "d": 1.6
+     },
+     {
+      "cue": "drier",
+      "center": [
+       120,
+       12
+      ],
+      "zoom": 1.0,
+      "d": 1.6
+     }
+    ],
+    "areas": [
+     {
+      "at": [
+       -130,
+       0
+      ],
+      "r": 22,
+      "label": "Warmer sea",
+      "cue": "warming",
+      "warm": true
+     }
+    ],
+    "arcs": [
+     {
+      "from": [
+       -130,
+       0
+      ],
+      "to": [
+       80,
+       21
+      ],
+      "cue": "often"
+     }
+    ],
+    "pins": [
+     {
+      "at": [
+       78,
+       21
+      ],
+      "label": "Drier monsoon",
+      "cue": "drier"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "quote",
+   "say": "But it doesn't decide the monsoon on its own. In 1997, a strong El Niño came with a near-normal Indian monsoon, because a positive Indian Ocean Dipole offset it.",
+   "data": {
+    "kicker": "The 1997 lesson",
+    "text": "Strong El Niño + positive IOD = a near-normal monsoon",
+    "by": "IOD: Indian Ocean Dipole"
+   }
+  },
+  {
+   "shot": "chips",
+   "say": "This is G-S-one climatology, with a G-S-three link to farm output and food prices.",
+   "data": {
+    "kicker": "Why it matters",
+    "title": "For your exam",
+    "items": [
+     {
+      "text": "GS1 · climatology",
+      "sub": "Indian monsoon, Walker circulation",
+      "cue": "climatology"
+     },
+     {
+      "text": "GS3 · agriculture",
+      "sub": "Farm output and food prices",
+      "cue": "G-S-three"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "quiz",
+   "say": "Your turn. What can reduce El Niño's effect on the Indian monsoon?",
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which of these can reduce El Niño's effect on the Indian monsoon?",
+    "options": [
+     "A negative IOD",
+     "A positive IOD",
+     "Western disturbances",
+     "A weak jet stream"
+    ]
+   }
+  }
+ ]
+}

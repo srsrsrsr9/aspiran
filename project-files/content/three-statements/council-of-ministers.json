@@ -1,0 +1,72 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both Statement II and Statement III are correct and both of them explain Statement I",
+      "Both Statement II and Statement III are correct but only one of them explains Statement I",
+      "Only one of the Statements II and III is correct and that explains Statement I",
+      "Neither Statement II nor Statement III is correct"
+    ],
+    "hi": [
+      "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+      "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+      "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+      "न तो कथन II सही है, न ही कथन III"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii-iii"
+    ]
+  },
+  "id": "council-of-ministers-lok-sabha",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Council of Ministers and the Lok Sabha",
+    "hi": "मंत्रिपरिषद और लोकसभा की सामूहिक जिम्मेदारी"
+  },
+  "key": "d",
+  "en": {
+    "s1": "The Council of Ministers is collectively responsible to the Lok Sabha.",
+    "s2": "The Council of Ministers is collectively responsible to the Rajya Sabha.",
+    "s3": "The President appoints the Prime Minister on the advice of the Lok Sabha Speaker.",
+    "why": "Statement II is false: Article 75(3) says the Council is not responsible to the Rajya Sabha. Statement III is false: Article 75(1) says the President appoints the Prime Minister, not the Speaker. Neither explains Statement I, so the key is d."
+  },
+  "hi": {
+    "s1": "मंत्रिपरिषद सामूहिक रूप से लोकसभा के प्रति उत्तरदायी है।",
+    "s2": "मंत्रिपरिषद सामूहिक रूप से राज्यसभा के प्रति उत्तरदायी है।",
+    "s3": "राष्ट्रपति प्रधानमंत्री की नियुक्ति लोकसभा अध्यक्ष की सलाह पर करते हैं।",
+    "why": "देखो, कथन II गलत है। अनुच्छेद 75(3) साफ़ कहता है कि मंत्रिपरिषद राज्यसभा के प्रति सामूहिक रूप से उत्तरदायी नहीं है। कथन III भी गलत है, क्योंकि अनुच्छेद 75(1) में प्रधानमंत्री की नियुक्ति राष्ट्रपति करते हैं, अध्यक्ष नहीं। तो दोनों कथन I को समझा नहीं रहे, और सही उत्तर d है। exam में यह बात याद रखना।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/three-statements@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/three-statements/",
+    "createdOn": "2026-10-11"
+  }
+}

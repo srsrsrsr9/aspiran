@@ -1,0 +1,198 @@
+{
+  "title": "Map card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "lead",
+    "pins",
+    "find"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "lead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41
+        }
+      }
+    },
+    "pins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-enumFromConfig": "anchors",
+            "description": "Pick from the anchors in the settings",
+            "enum": [
+              "iran",
+              "musandam",
+              "gulf",
+              "oman",
+              "strait"
+            ]
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "fact"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 3
+              },
+              "fact": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "fact"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 5
+              },
+              "fact": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 27
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 6
+    },
+    "find": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt",
+        "targetAnchor",
+        "hint",
+        "right"
+      ],
+      "properties": {
+        "prompt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 11
+            }
+          }
+        },
+        "targetAnchor": {
+          "type": "string",
+          "x-enumFromConfig": "anchors",
+          "description": "Which anchor the member must find",
+          "enum": [
+            "iran",
+            "musandam",
+            "gulf",
+            "oman",
+            "strait"
+          ]
+        },
+        "hint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            }
+          }
+        },
+        "right": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            }
+          }
+        }
+      },
+      "x-fillRequired": [
+        "prompt",
+        "targetAnchor",
+        "hint",
+        "right"
+      ]
+    }
+  },
+  "x-type": "upsc-pods/map-card@1"
+}

@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "sci-everyday-biology-and-physics",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Everyday science: find the false statement",
+    "hi": "रोज़मर्रा का विज्ञान: गलत कथन पहचानें"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Lack of vitamin C causes scurvy.",
+          "Skin can make vitamin D when exposed to sunlight.",
+          "Lack of vitamin K causes night blindness."
+        ],
+        "fix": "Lack of vitamin A causes night blindness. Vitamin K is needed for blood clotting."
+      },
+      "hi": {
+        "statements": [
+          "विटामिन C की कमी से स्कर्वी होता है।",
+          "धूप में त्वचा विटामिन D बना सकती है।",
+          "विटामिन K की कमी से रतौंधी होती है।"
+        ],
+        "fix": "रतौंधी विटामिन A की कमी से होती है। विटामिन K खून के थक्के जमने के लिए ज़रूरी है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Louis Pasteur discovered the ABO blood groups.",
+          "People with blood group O negative can donate red cells to any group.",
+          "People with blood group AB positive can receive red cells from any group."
+        ],
+        "fix": "Karl Landsteiner discovered the ABO blood groups in 1901. Pasteur is known for vaccines and pasteurisation."
+      },
+      "hi": {
+        "statements": [
+          "लुई पाश्चर ने ABO रक्त समूहों की खोज की।",
+          "O नेगेटिव रक्त समूह वाले किसी भी समूह को लाल रक्त कोशिकाएँ दे सकते हैं।",
+          "AB पॉज़िटिव रक्त समूह वाले किसी भी समूह से लाल रक्त कोशिकाएँ ले सकते हैं।"
+        ],
+        "fix": "ABO रक्त समूहों की खोज कार्ल लैंडस्टीनर ने 1901 में की थी। पाश्चर टीकों और पाश्चरीकरण के लिए जाने जाते हैं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Sound travels faster in water than in air.",
+          "Sound can travel through a vacuum.",
+          "Light travels faster in a vacuum than in glass."
+        ],
+        "fix": "Sound needs a medium such as air, water or solids, so it cannot travel through a vacuum."
+      },
+      "hi": {
+        "statements": [
+          "ध्वनि हवा की तुलना में पानी में तेज़ चलती है।",
+          "ध्वनि निर्वात में चल सकती है।",
+          "प्रकाश काँच की तुलना में निर्वात में तेज़ चलता है।"
+        ],
+        "fix": "ध्वनि को हवा, पानी या ठोस जैसे माध्यम की ज़रूरत होती है, इसलिए वह निर्वात में नहीं चल सकती।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Diamond and graphite are both forms of carbon.",
+          "Diamond is a good conductor of electricity.",
+          "Graphite conducts electricity and is used in electrodes."
+        ],
+        "fix": "Diamond is a poor conductor of electricity, because all its outer electrons are locked in bonds. Graphite conducts."
+      },
+      "hi": {
+        "statements": [
+          "हीरा और ग्रेफ़ाइट दोनों कार्बन के रूप हैं।",
+          "हीरा विद्युत का अच्छा चालक है।",
+          "ग्रेफ़ाइट विद्युत का चालन करता है और इलेक्ट्रोड में प्रयोग होता है।"
+        ],
+        "fix": "हीरा विद्युत का कुचालक है, क्योंकि इसके सभी बाहरी इलेक्ट्रॉन बंधों में बँधे होते हैं। ग्रेफ़ाइट चालन करता है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Insulin is made by the liver.",
+          "The thyroid gland needs iodine to make thyroxine.",
+          "Adrenaline, the 'fight or flight' hormone, comes from the adrenal glands."
+        ],
+        "fix": "Insulin is made by the beta cells of the islets of Langerhans in the pancreas."
+      },
+      "hi": {
+        "statements": [
+          "इंसुलिन यकृत (लिवर) में बनता है।",
+          "थायरॉइड ग्रंथि को थायरॉक्सिन बनाने के लिए आयोडीन चाहिए।",
+          "'लड़ो या भागो' हॉर्मोन एड्रिनलिन अधिवृक्क ग्रंथियों से आता है।"
+        ],
+        "fix": "इंसुलिन अग्न्याशय (पैंक्रियास) के लैंगरहैंस द्वीपों की बीटा कोशिकाओं में बनता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class X Science; NCERT Class XI and XII Biology",
+    "hi": "NCERT कक्षा X विज्ञान; NCERT कक्षा XI और XII जीव विज्ञान"
+  },
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

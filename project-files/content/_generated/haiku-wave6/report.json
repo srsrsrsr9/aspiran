@@ -1,0 +1,184 @@
+{
+  "createdOn": "2026-10-12",
+  "generator": "Claude Haiku via the template prompt, one agent per job",
+  "jobs": "jobs/jobs.wave6.jsonl",
+  "note": "GS2 Polity lane. 22 jobs: 14 packs, 5 long reads, and a mock paper written as three parts of 10 questions merged into one paper. First-round errors were over-long lists and word limits; one repair round fixed them, and long-read lists were trimmed to their limits by script. Two schema changes came from the run: a mock question with no closing line now uses null, and a list-match question may have 8 lines. One mock question labelled Statement I, II and III was really a statements-with-codes question, so its format and options were corrected by hand. All 30 mock answer keys were re-checked by hand against the source.",
+  "results": [
+    {
+      "job": 1,
+      "type": "how-many-correct",
+      "out": "how-many-correct/preamble-statements.json",
+      "title": "The Preamble, statement by statement",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 2,
+      "type": "flashcards",
+      "out": "flashcards/citizenship-articles.json",
+      "title": "Citizenship: Articles 5 to 11",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "job": 3,
+      "type": "versus",
+      "out": "versus/president-vs-governor.json",
+      "title": "President vs Governor: key differences",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 4,
+      "type": "statement-code",
+      "out": "statement-code/election-commission.json",
+      "title": "Election Commission of India: who does what",
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "job": 5,
+      "type": "who-am-i",
+      "out": "who-am-i/constitutional-posts.json",
+      "title": "Four constitutional posts that are often confused",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 6,
+      "type": "assertion-reason",
+      "out": "assertion-reason/anti-defection.json",
+      "title": "Anti-defection law: the Tenth Schedule",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 7,
+      "type": "list-match",
+      "out": "list-match/supreme-court-jurisdiction.json",
+      "title": "Supreme Court jurisdiction: match the Article",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 8,
+      "type": "bucket-sort",
+      "out": "bucket-sort/fifth-or-sixth-schedule.json",
+      "title": "Fifth and Sixth Schedules: tribal area protection",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 9,
+      "type": "trap-spotter",
+      "out": "trap-spotter/joint-sitting.json",
+      "title": "Joint sitting: spot the traps",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 10,
+      "type": "bucket-sort",
+      "out": "bucket-sort/constitutional-statutory-executive.json",
+      "title": "Constitutional, statutory or executive bodies?",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 11,
+      "type": "timeline-shuffle",
+      "out": "timeline-shuffle/acts-before-1947.json",
+      "title": "Six Acts that shaped the Constitution",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 12,
+      "type": "pairs-count",
+      "out": "pairs-count/borrowed-features.json",
+      "title": "How many pairs are correctly matched?",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 13,
+      "type": "three-statements",
+      "out": "three-statements/council-of-ministers.json",
+      "title": "Council of Ministers and the Lok Sabha",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 14,
+      "type": "landmark-case",
+      "out": "landmark-case/sr-bommai.json",
+      "title": "S.R. Bommai case: Article 356 and federalism",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 15,
+      "type": "long-read",
+      "out": "long-read/long-read-sample.json",
+      "title": "The basic structure doctrine: limits on amending power",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 16,
+      "type": "long-read",
+      "out": "long-read/making-the-constitution.json",
+      "title": "How India's Constitution Was Made, 1946-1950",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 17,
+      "type": "long-read",
+      "out": "long-read/the-governor.json",
+      "title": "The Governor: office, powers and debates",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 18,
+      "type": "long-read",
+      "out": "long-read/anti-defection-law.json",
+      "title": "The anti-defection law and the Tenth Schedule",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 19,
+      "type": "long-read",
+      "out": "long-read/fiscal-federalism.json",
+      "title": "Fiscal Federalism: How Money Is Shared",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 20,
+      "type": "mock-paper",
+      "out": "mock-paper/mock-paper-sample.json (merged)",
+      "title": "Polity Sectional Mock, Part A",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 21,
+      "type": "mock-paper",
+      "out": "mock-paper/mock-paper-sample.json (merged)",
+      "title": "Polity Mock: Part B, Ten Questions",
+      "errors": 0,
+      "warnings": 1
+    },
+    {
+      "job": 22,
+      "type": "mock-paper",
+      "out": "mock-paper/mock-paper-sample.json (merged)",
+      "title": "GS2 Polity Mock: Part C",
+      "errors": 0,
+      "warnings": 1
+    }
+  ]
+}

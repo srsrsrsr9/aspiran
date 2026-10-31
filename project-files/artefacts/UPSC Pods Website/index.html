@@ -1,0 +1,344 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>UPSC Pods Website</title>
+<!-- Copy follows /mnt/project-files/strategy/positioning.md. "Adda" and "Chotu" are working names. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&family=Martel:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: community-first marketing page. Hero with the 45s video, then two clearly separate spaces: Adda (saffron: pod, Commons, Chotu, plus the free-shelf calculators and routine) and Prep (cardamom), then Free vs Plus, FAQ, footer. Same chai palette as the launch kit. */
+:root {
+  --bg: #F7F2EA; --surface: #FFFDF9; --ink: #2A1B12; --muted: #6E5A4C; --line: #E4D8C8;
+  --chai: #6B3A1F; --saffron: #D9822B; --cardamom: #4F6B3E; --saffron-soft: #F6E2C9; --cardamom-soft: #E3EAD9;
+  --display: "Yatra One", "Mukta", system-ui, sans-serif;
+  --body: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --read: "Martel", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+  --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #17100B; --surface: #22180F; --ink: #F3E8DA; --muted: #BFA996; --line: #3A2B1F;
+  --chai: #E0A879; --saffron: #F0A04B; --cardamom: #9DBB83; --saffron-soft: #3B2716; --cardamom-soft: #26301C; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; }
+.page { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 0 48px; display: grid; gap: 72px; }
+.preview { background: var(--saffron-soft); color: var(--chai); font-size: 14px; text-align: center; padding: 8px 16px; }
+nav.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 20px; flex-wrap: wrap; }
+.logo { font-family: var(--display); font-size: 24px; color: var(--chai); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--muted); padding: 3px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--chai); color: var(--bg); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--saffron); outline-offset: 2px; }
+.hero { display: grid; gap: 18px; padding-top: 24px; }
+.hero .nots { font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--saffron); }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 7vw, 76px); line-height: 1.02; margin: 0; color: var(--chai); text-wrap: balance; max-width: 14ch; }
+.hero p { font-family: var(--read); font-size: 18px; line-height: 1.7; max-width: 56ch; margin: 0; }
+.ctas { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn { font: inherit; font-weight: 500; border-radius: 10px; padding: 10px 18px; border: 1px solid var(--chai); cursor: pointer; text-decoration: none; display: inline-block; }
+.btn.primary { background: var(--chai); color: var(--bg); }
+.btn.ghost { background: transparent; color: var(--chai); }
+.small { font-size: 13px; color: var(--muted); }
+h2 { font-family: var(--display); font-weight: 400; font-size: clamp(28px, 4vw, 38px); color: var(--chai); margin: 0; line-height: 1.15; text-wrap: balance; }
+.sec-lede { color: var(--muted); max-width: 60ch; margin: 8px 0 24px; }
+.promises { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.promise { display: grid; gap: 6px; align-content: start; border-top: 2px solid var(--saffron); padding-top: 14px; }
+.promise b { font-size: 19px; }
+.promise span { color: var(--muted); }
+.tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; align-items: start; }
+.tool { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: grid; gap: 14px; min-width: 0; }
+.tool h3 { margin: 0; font-size: 21px; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+input, select { font: inherit; font-size: 16px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; width: 100%; font-variant-numeric: tabular-nums; }
+.result { background: #2A1B12; color: #FFF6EA; border-radius: 14px; padding: 18px; display: grid; gap: 10px; }
+.result.green { background: #4F6B3E; }
+.result .big { font-family: var(--display); font-size: 26px; line-height: 1.15; }
+.result .rows { display: grid; gap: 4px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.result .rows div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed rgba(255,246,234,.25); padding-bottom: 3px; }
+.result .foot { display: flex; justify-content: space-between; font-size: 12px; opacity: .85; gap: 8px; flex-wrap: wrap; }
+.result .foot b { font-family: var(--display); font-weight: 400; font-size: 15px; }
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.routine { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: center; background: var(--saffron-soft); border-radius: 18px; padding: 28px; }
+@media (max-width: 720px) { .routine { grid-template-columns: minmax(0, 1fr); } }
+.day { display: grid; gap: 4px; font-size: 14px; }
+.day div { display: grid; grid-template-columns: 54px 1fr; gap: 10px; align-items: center; }
+.day i { display: block; height: 22px; border-radius: 6px; font-style: normal; font-size: 12px; padding: 2px 8px; color: #FFF6EA; }
+.day time { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+summary { cursor: pointer; font-weight: 500; font-size: 18px; }
+details p { color: var(--muted); max-width: 64ch; margin: 8px 0 0; }
+footer { border-top: 1px solid var(--line); padding-top: 24px; display: grid; gap: 8px; font-size: 14px; color: var(--muted); }
+footer .help { color: var(--ink); font-size: 15px; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 14px; max-width: calc(100% - 32px); }
+
+.hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; gap: 32px; }
+@media (max-width: 760px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+.hero-copy { display: grid; gap: 18px; }
+.vid { justify-self: center; width: min(100%, 320px); display: grid; gap: 8px; }
+.vid video { width: 100%; aspect-ratio: 9 / 16; border-radius: 22px; background: #1a120d; display: block; box-shadow: 0 14px 40px rgba(42,27,18,.22); }
+.vid .small { text-align: center; }
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.split a { text-decoration: none; color: inherit; border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; }
+.split a b { font-family: var(--display); font-weight: 400; font-size: 22px; }
+.split a span { font-size: 14px; color: var(--muted); }
+.split .c1 { background: var(--saffron-soft); } .split .c2 { background: var(--cardamom-soft); }
+.part { border-radius: 22px; padding: 30px 26px; display: grid; gap: 22px; }
+.part.community { background: var(--saffron-soft); }
+.part.prep { background: var(--cardamom-soft); }
+.part-head { display: grid; gap: 6px; }
+.kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.part.prep h2 { color: var(--cardamom); }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: grid; gap: 6px; align-content: start; }
+.card b { font-size: 19px; }
+.card span { color: var(--muted); font-size: 15.5px; }
+.card .tagline { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--saffron); }
+.chotu-row { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 18px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+.chotu-face { width: 84px; height: 78px; background: linear-gradient(#C8693A, #9A4A26); border-top: 7px solid #E08A55; clip-path: polygon(0 0, 100% 0, 84% 100%, 16% 100%); position: relative; }
+.chotu-face::before, .chotu-face::after { content: ""; position: absolute; top: 20px; width: 12px; height: 16px; border-radius: 6px; background: #2A1B12; }
+.chotu-face::before { left: 22px; } .chotu-face::after { right: 22px; }
+.chotu-row p { margin: 0; } .chotu-row p + p { margin-top: 6px; color: var(--muted); font-size: 15px; }
+.plan { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.plan > div { border: 1px solid var(--line); border-radius: 16px; padding: 22px; background: var(--surface); display: grid; gap: 10px; align-content: start; }
+.plan h3 { margin: 0; font-size: 21px; }
+.plan ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.plan .plus { border-color: var(--chai); }
+.promises-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.promises-row span { font-size: 13px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
+</style>
+
+<div class="preview" data-en="Preview only. This page is not live, and the sign-up and Play links don't work yet." data-hi="केवल प्रीव्यू। यह पेज अभी लाइव नहीं है, साइन-अप और Play लिंक अभी काम नहीं करते।"></div>
+<div class="page">
+  <nav class="top" aria-label="Site">
+    <span class="logo">UPSC Pods</span>
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" id="l-en" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" id="l-hi" data-lang="hi" aria-pressed="false">हिंदी</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <span class="nots" data-en="The free adda for UPSC aspirants" data-hi="UPSC अभ्यर्थियों का मुफ़्त अड्डा"></span>
+      <h1 data-en="Never prep alone." data-hi="अकेले तैयारी मत करो।"></h1>
+      <p data-en="Your people, your pod, and everything you need to prep, without paying a rupee. A small pod of 6 to 8 aspirants at your stage checks on you and sits with you on the heavy days. When they're asleep, Chotu, your AI chai cup, keeps you company. Go Plus when you're ready to go all in." data-hi="आपके लोग, आपका पॉड, और तैयारी का सब कुछ, एक रुपया दिए बिना। आपके चरण के 6 से 8 अभ्यर्थियों का छोटा पॉड आपका हाल पूछता है और भारी दिनों में साथ बैठता है। जब वे सो रहे हों, तब आपका AI कुल्हड़ छोटू साथ रहता है। पूरी ताक़त लगाने को तैयार हों, तब Plus लें।"></p>
+      <div class="ctas">
+        <button class="btn primary" type="button" id="cta-play" data-en="Join free on Google Play" data-hi="Google Play पर मुफ़्त जुड़ें"></button>
+        <a class="btn ghost" href="#community" data-en="How pods work" data-hi="पॉड कैसे चलते हैं"></a>
+      </div>
+      <span class="small" data-en="Free, no card needed. Android first, in Hindi and English, from December 2026." data-hi="मुफ़्त, कोई कार्ड नहीं चाहिए। पहले Android पर, हिंदी और अंग्रेज़ी में, दिसंबर 2026 से।"></span>
+    </div>
+    <figure class="vid" style="margin:0">
+      <video src="akela-nahi.mp4" poster="akela-nahi-poster.jpg" controls playsinline preload="metadata" aria-label="Akela Nahi, a 45 second lyric video"></video>
+      <figcaption class="small" data-en="“Akela Nahi”, 45 s. Original beat; vocals still to be recorded." data-hi="“अकेले नहीं”, 45 सेकंड। मूल बीट; आवाज़ अभी रिकॉर्ड होनी है।"></figcaption>
+    </figure>
+  </header>
+
+  <nav class="split" aria-label="Two parts of the app">
+    <a class="c1" href="#community"><span data-en="Space 1" data-hi="जगह 1"></span><b data-en="Adda" data-hi="अड्डा"></b><span data-en="Your people: pod, Commons, Chotu, calm, free tools" data-hi="आपके लोग: पॉड, कॉमन्स, छोटू, सुकून, मुफ़्त टूल"></span></a>
+    <a class="c2" href="#prep"><span data-en="Space 2" data-hi="जगह 2"></span><b data-en="Prep" data-hi="तैयारी"></b><span data-en="Your study engine: Today's 3, Chai, practice, mocks" data-hi="आपका पढ़ाई इंजन: आज के 3, चाय, अभ्यास, मॉक"></span></a>
+  </nav>
+
+  <section class="part community" id="community" aria-labelledby="h-comm">
+    <div class="part-head">
+      <span class="kicker" data-en="Adda · free, no card needed" data-hi="अड्डा · मुफ़्त, कोई कार्ड नहीं"></span>
+      <h2 id="h-comm" data-en="Adda: your people" data-hi="अड्डा: आपके लोग"></h2>
+      <p class="sec-lede" style="margin:0" data-en="You land here, among people, not on a task list. No ads and no offers inside the Adda." data-hi="ऐप खोलते ही आप यहाँ आते हैं, लोगों के बीच, किसी टास्क लिस्ट पर नहीं। अड्डे में कोई विज्ञापन या ऑफ़र नहीं।"></p>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="tagline" data-en="Your pod" data-hi="आपका पॉड"></span><b data-en="6 to 8 people who get it" data-hi="6 से 8 लोग जो समझते हैं"></b><span data-en="Matched by attempt, medium and stage. Pods open on Mondays in batches, so you start together. A Monday check-in, pod chat, and a volunteer pod lead where one is available." data-hi="प्रयास, माध्यम और चरण से मिलान। पॉड हर सोमवार बैच में खुलते हैं, ताकि सब साथ शुरू करें। सोमवार की बातचीत, पॉड चैट, और जहाँ हो सके एक स्वयंसेवक पॉड लीड।"></span></div>
+      <div class="card"><span class="tagline" data-en="The Commons" data-hi="कॉमन्स"></span><b data-en="Study together, live" data-hi="साथ पढ़ें, लाइव"></b><span data-en="Rooms where aspirants study right now, mic off. Real counts only. Close the Day and Calm now are here too, with “Need to talk?” and Tele-MANAS 14416 two taps away." data-hi="ऐसे कमरे जहाँ अभ्यर्थी अभी पढ़ रहे हैं, माइक बंद। सिर्फ़ असली गिनती। दिन बंद करें और अभी सुकून भी यहीं, और “किसी से बात करनी है?” व Tele-MANAS 14416 दो टैप दूर।"></span></div>
+      <div class="card"><span class="tagline" data-en="Wins" data-hi="जीत"></span><b data-en="You showed up. That counts." data-hi="आप आए। यही मायने रखता है।"></b><span data-en="Stamps for the days you turn up, the answer you finally wrote, the mock you didn't skip, and your pod cheers. No leaderboards, no streaks to lose." data-hi="जिस दिन आप आएँ, जो उत्तर आख़िर लिखा, जो मॉक नहीं छोड़ा, उसका स्टैम्प, और पॉड का जश्न। कोई लीडरबोर्ड नहीं, टूटने वाली स्ट्रीक नहीं।"></span></div>
+    </div>
+    <div class="chotu-row">
+      <div class="chotu-face" role="img" aria-label="Chotu, a clay chai cup"></div>
+      <div>
+        <p><b data-en="Pod asleep? Chotu, your AI chai cup, isn't." data-hi="पॉड सो गया? आपका AI कुल्हड़ छोटू जाग रहा है।"></b></p>
+        <p data-en="Chotu hosts your pod's rituals when people are thin, answers everyday doubts, and nudges your pod that you're there. It is always labelled AI: not a person, not a counsellor. When it matters, it hands you to a human and a helpline." data-hi="जब लोग कम हों, छोटू पॉड की रस्में चलाता है, रोज़ के डाउट सुलझाता है, और पॉड को याद दिलाता है कि आप वहाँ हैं। उस पर हमेशा AI लिखा रहता है: इंसान नहीं, काउंसलर नहीं। ज़रूरत हो तो वह आपको इंसान और हेल्पलाइन तक पहुँचाता है।"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" aria-labelledby="h-tools">
+    <span class="kicker" data-en="Adda · the free shelf" data-hi="अड्डा · मुफ़्त अलमारी"></span>
+    <h2 id="h-tools" data-en="Two honest calculators" data-hi="दो सच्चे कैलकुलेटर"></h2>
+    <p class="sec-lede" data-en="Free, no sign-up, and nothing you type leaves this page. Share the result card if it helps someone." data-hi="मुफ़्त, बिना साइन-अप, और जो आप लिखते हैं वह इस पेज से बाहर नहीं जाता। मदद लगे तो रिज़ल्ट कार्ड साझा करें।"></p>
+    <div class="tools">
+      <div class="tool">
+        <h3 data-en="Attempts and age" data-hi="प्रयास और आयु"></h3>
+        <div class="fields">
+          <label for="dob"><span data-en="Year of birth" data-hi="जन्म वर्ष"></span><input id="dob" type="number" min="1985" max="2008" value="1998" inputmode="numeric"></label>
+          <label for="cat"><span data-en="Category" data-hi="श्रेणी"></span><select id="cat"><option value="gen">General / EWS</option><option value="obc">OBC</option><option value="scst">SC / ST</option></select></label>
+          <label for="used"><span data-en="Attempts used" data-hi="उपयोग किए प्रयास"></span><input id="used" type="number" min="0" max="9" value="2" inputmode="numeric"></label>
+        </div>
+        <div class="result" aria-live="polite">
+          <div class="big" id="a-big"></div>
+          <div class="rows" id="a-rows"></div>
+          <div class="foot"><b>UPSC Pods</b><span data-en="Not affiliated with UPSC" data-hi="UPSC से संबद्ध नहीं"></span></div>
+        </div>
+        <div class="ctas"><button class="btn ghost" type="button" data-share="a" data-en="Copy result to share" data-hi="साझा करने के लिए कॉपी करें"></button></div>
+        <p class="note" data-en="Rules used: General 6 attempts to age 32, OBC 9 to 35, SC/ST unlimited to 37, age on 1 August of the exam year, taking the cautious case without a birth month. Check the official CSE notice; disability and other relaxations are not included." data-hi="इस्तेमाल नियम: सामान्य 6 प्रयास, आयु 32 तक; OBC 9, 35 तक; SC/ST असीमित, 37 तक; परीक्षा वर्ष की 1 अगस्त को आयु, जन्म माह के बिना सावधानी वाला अनुमान। आधिकारिक CSE अधिसूचना देखें; दिव्यांग और अन्य छूट शामिल नहीं।"></p>
+      </div>
+
+      <div class="tool">
+        <h3 data-en="Cost of a year" data-hi="एक साल का ख़र्च"></h3>
+        <div class="fields">
+          <label for="c-room"><span data-en="Room or PG, ₹/month" data-hi="कमरा या PG, ₹/माह"></span><input id="c-room" type="number" min="0" step="500" value="15000" inputmode="numeric"></label>
+          <label for="c-food"><span data-en="Food, ₹/month" data-hi="खाना, ₹/माह"></span><input id="c-food" type="number" min="0" step="500" value="6000" inputmode="numeric"></label>
+          <label for="c-lib"><span data-en="Library seat, ₹/month" data-hi="लाइब्रेरी सीट, ₹/माह"></span><input id="c-lib" type="number" min="0" step="100" value="2000" inputmode="numeric"></label>
+          <label for="c-misc"><span data-en="Travel, printouts, other, ₹/month" data-hi="यात्रा, प्रिंटआउट, अन्य, ₹/माह"></span><input id="c-misc" type="number" min="0" step="500" value="4000" inputmode="numeric"></label>
+          <label for="c-coach"><span data-en="Coaching and test series, ₹/year" data-hi="कोचिंग और टेस्ट सीरीज़, ₹/साल"></span><input id="c-coach" type="number" min="0" step="1000" value="60000" inputmode="numeric"></label>
+          <label for="c-books"><span data-en="Books, ₹/year" data-hi="किताबें, ₹/साल"></span><input id="c-books" type="number" min="0" step="500" value="8000" inputmode="numeric"></label>
+        </div>
+        <div class="result green" aria-live="polite">
+          <div class="big" id="c-big"></div>
+          <div class="rows" id="c-rows"></div>
+          <div class="foot"><b>UPSC Pods</b><span data-en="Your numbers, nobody else's" data-hi="आपके आँकड़े, किसी और के नहीं"></span></div>
+        </div>
+        <div class="ctas"><button class="btn ghost" type="button" data-share="c" data-en="Copy result to share" data-hi="साझा करने के लिए कॉपी करें"></button></div>
+        <p class="note" data-en="Starting values are a Delhi-hub example from aspirant blogs, not an average. Change them to your own." data-hi="शुरुआती आँकड़े दिल्ली के एक उदाहरण से हैं, औसत नहीं। अपने आँकड़े डालें।"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="routine" aria-labelledby="h-routine">
+    <div style="display:grid;gap:12px">
+      <h2 id="h-routine" data-en="Build a routine that fits your life" data-hi="अपनी ज़िंदगी के हिसाब से दिनचर्या बनाएँ"></h2>
+      <p style="margin:0;max-width:52ch" data-en="Like a custom workout plan, but for prep. Pick a template for full-time, working or caring-at-home aspirants, move the blocks around, and save it as a phone wallpaper. Rest is built in. No login." data-hi="कस्टम वर्कआउट प्लान जैसा, बस तैयारी के लिए। फ़ुल-टाइम, नौकरी वाले या घर सँभालने वाले अभ्यर्थियों का टेम्पलेट चुनें, ब्लॉक बदलें, और फ़ोन वॉलपेपर बनाएँ। आराम शामिल है। लॉगिन नहीं।"></p>
+      <div class="ctas"><a class="btn primary" id="routine-link" href="https://claude.ai/artifact/3cw7CrG5UXKXBTfoftrcSu" data-en="Open the routine builder" data-hi="रूटीन बिल्डर खोलें"></a></div>
+    </div>
+    <div class="day" aria-label="Example routine">
+      <div><time>06:30</time><i style="background:#A85A1F" data-en="Chai + today's 5 cards" data-hi="चाय + आज के 5 कार्ड"></i></div>
+      <div><time>08:00</time><i style="background:#6B3A1F;height:44px" data-en="Study block · 90 min" data-hi="पढ़ाई · 90 मिनट"></i></div>
+      <div><time>10:00</time><i style="background:#4F6B3E" data-en="Walk" data-hi="टहलना"></i></div>
+      <div><time>10:30</time><i style="background:#6B3A1F" data-en="Study block · 50 min" data-hi="पढ़ाई · 50 मिनट"></i></div>
+      <div><time>18:00</time><i style="background:#3D2A4A" data-en="Mains answer · 20 min" data-hi="मेन्स उत्तर · 20 मिनट"></i></div>
+      <div><time>21:30</time><i style="background:#8A7666" data-en="Close the day, then sleep" data-hi="दिन बंद करें, फिर नींद"></i></div>
+    </div>
+  </section>
+
+  <section class="part prep" id="prep" aria-labelledby="h-prep">
+    <div class="part-head">
+      <span class="kicker" data-en="Prep · free to start" data-hi="तैयारी · मुफ़्त शुरुआत"></span>
+      <h2 id="h-prep" data-en="Prep: your study engine" data-hi="तैयारी: आपका पढ़ाई इंजन"></h2>
+      <p class="sec-lede" style="margin:0" data-en="A separate space, so studying never crowds out the people. Prep is the only place an offer for Plus ever appears." data-hi="एक अलग जगह, ताकि पढ़ाई लोगों को पीछे न धकेले। Plus का ऑफ़र सिर्फ़ यहीं दिखता है, और कहीं नहीं।"></p>
+    </div>
+    <div class="cards">
+      <div class="card"><b data-en="Chai news cards" data-hi="चाय ख़बर कार्ड"></b><span data-en="Daily news with a UPSC lens and sources, checked by a human editor in Hindi and English." data-hi="UPSC नज़रिए से रोज़ की ख़बरें, स्रोत के साथ, हिंदी और अंग्रेज़ी में इंसानी संपादक की जाँच।"></span></div>
+      <div class="card"><b data-en="Today's 3, then stop" data-hi="आज के 3, फिर बस"></b><span data-en="5 Prelims questions, 1 Mains answer, 5 cards. The app tells you when you're done." data-hi="प्रीलिम्स के 5 प्रश्न, मेन्स का 1 उत्तर, 5 कार्ड। पूरा होने पर ऐप ख़ुद बताता है।"></span></div>
+      <div class="card"><b data-en="Practice, mocks, Focus" data-hi="अभ्यास, मॉक, फ़ोकस"></b><span data-en="70 practice formats, PYQs by topic, mocks, long reads and a Focus mode for deep sessions." data-hi="70 अभ्यास फ़ॉर्मेट, विषयवार PYQ, मॉक, लंबे लेख और गहरी पढ़ाई के लिए फ़ोकस मोड।"></span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-plan">
+    <h2 id="h-plan" data-en="What's free, and what Plus adds" data-hi="क्या मुफ़्त है, और Plus में क्या जुड़ता है"></h2>
+    <p class="sec-lede" data-en="The Adda is free so nobody preps alone. Plus pays the bills, so the Adda can stay open to everyone." data-hi="अड्डा मुफ़्त है ताकि कोई अकेले तैयारी न करे। Plus से ख़र्च चलता है, ताकि अड्डा सबके लिए खुला रहे।"></p>
+    <div class="plan">
+      <div>
+        <h3 data-en="Adda: free, no card needed" data-hi="अड्डा: मुफ़्त, कोई कार्ड नहीं"></h3>
+        <ul>
+          <li data-en="Your pod, the Commons, stamps" data-hi="आपका पॉड, कॉमन्स, स्टैम्प"></li>
+          <li data-en="Chotu for everyday doubts and company" data-hi="रोज़ के डाउट और साथ के लिए छोटू"></li>
+          <li data-en="Close the Day, Calm now, distress support" data-hi="दिन बंद करें, अभी सुकून, मुश्किल में मदद"></li>
+          <li data-en="The honest tools: Attempt Compass, Cost of a Year, routine builder" data-hi="सच्चे टूल: प्रयास कम्पास, एक साल का ख़र्च, रूटीन बिल्डर"></li>
+          <li data-en="Prep, free to start: Today's 3, Chai cards, practice" data-hi="तैयारी, मुफ़्त शुरुआत: आज के 3, चाय कार्ड, अभ्यास"></li>
+        </ul>
+      </div>
+      <div class="plus">
+        <h3 data-en="Plus (price not set yet)" data-hi="Plus (क़ीमत अभी तय नहीं)"></h3>
+        <ul>
+          <li data-en="Unlimited answer feedback" data-hi="असीमित उत्तर फ़ीडबैक"></li>
+          <li data-en="All mocks, with breakdowns" data-hi="सभी मॉक, विश्लेषण के साथ"></li>
+          <li data-en="A personal plan, and more of Chotu" data-hi="निजी योजना, और छोटू का ज़्यादा साथ"></li>
+        </ul>
+        <div class="promises-row">
+          <span data-en="No upsell in your first 72 hours" data-hi="पहले 72 घंटे कोई ऑफ़र नहीं"></span>
+          <span data-en="Never on result days" data-hi="रिज़ल्ट के दिन कभी नहीं"></span>
+          <span data-en="Cancel in two taps" data-hi="दो टैप में रद्द"></span>
+          <span data-en="Prices include everything" data-hi="क़ीमत में सब शामिल"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-faq">
+    <h2 id="h-faq" data-en="Questions people ask" data-hi="लोग जो पूछते हैं"></h2>
+    <div style="margin-top:12px">
+      <details><summary data-en="Is it free?" data-hi="क्या यह मुफ़्त है?"></summary><p data-en="The Adda is free, no card needed: your pod, the Commons, Chotu, Calm and the honest tools. Prep is free to start, and Plus adds unlimited feedback, all mocks and a personal plan. You'll never see an offer inside the Adda, on result days or in your first 72 hours." data-hi="अड्डा मुफ़्त है, कोई कार्ड नहीं: पॉड, कॉमन्स, छोटू, सुकून और सच्चे टूल। तैयारी की शुरुआत मुफ़्त है, और Plus में असीमित फ़ीडबैक, सभी मॉक और निजी योजना जुड़ती है। अड्डे में, रिज़ल्ट के दिन या पहले 72 घंटों में आपको कोई ऑफ़र नहीं दिखेगा।"></p></details>
+      <details><summary data-en="What if my pod is quiet?" data-hi="अगर मेरा पॉड शांत हो तो?"></summary><p data-en="Pods open on Mondays in batches, so you start with people at your stage. Until then you're in the Commons with Chotu. A pod that stays small merges with another after a week, so you're never left in an empty room." data-hi="पॉड हर सोमवार बैच में खुलते हैं, ताकि आप अपने चरण के लोगों के साथ शुरू करें। तब तक आप कॉमन्स में छोटू के साथ हैं। जो पॉड छोटा रह जाए, वह एक हफ़्ते बाद दूसरे से मिल जाता है, ताकि आप कभी ख़ाली कमरे में न रहें।"></p></details>
+      <details><summary data-en="Is Chotu a real person?" data-hi="क्या छोटू असली इंसान है?"></summary><p data-en="No. Chotu is an AI chai cup and is always labelled AI. It can make mistakes, so check facts that matter. It is not a counsellor; when you need a person, it connects you to one. We never use fake members." data-hi="नहीं। छोटू एक AI कुल्हड़ है और उस पर हमेशा AI लिखा रहता है। उससे ग़लती हो सकती है, इसलिए ज़रूरी तथ्य जाँचें। वह काउंसलर नहीं है; इंसान की ज़रूरत हो तो जोड़ देता है। हम कभी नक़ली सदस्य नहीं दिखाते।"></p></details>
+      <details><summary data-en="Are you connected to UPSC or a coaching institute?" data-hi="क्या आप UPSC या किसी कोचिंग से जुड़े हैं?"></summary><p data-en="No. UPSC Pods is independent. It is not affiliated with the Union Public Service Commission, and no coaching institute owns or pays us." data-hi="नहीं। UPSC Pods स्वतंत्र है। यह संघ लोक सेवा आयोग से संबद्ध नहीं है, और कोई कोचिंग संस्थान हमारा मालिक नहीं है या हमें भुगतान नहीं करता।"></p></details>
+      <details><summary data-en="Do you promise selection or a rank?" data-hi="क्या आप चयन या रैंक का वादा करते हैं?"></summary><p data-en="No, and nobody honestly can. About 1 in 540 people who sat Prelims in 2026 will be selected. We help you prepare steadily and not alone." data-hi="नहीं, और कोई भी ईमानदारी से नहीं कर सकता। 2026 में प्रीलिम्स देने वाले लगभग 540 में से 1 का चयन होगा। हम आपको लगातार और अकेले नहीं, तैयारी करने में मदद करते हैं।"></p></details>
+      <details><summary data-en="Who sees my data?" data-hi="मेरा डेटा कौन देखता है?"></summary><p data-en="Your Close the Day notes and mood stay encrypted on your phone. Your pod sees only what you choose to share. We don't sell data. You must be 18 or older." data-hi="आपके दिन बंद करने के नोट्स और मूड आपके फ़ोन पर एन्क्रिप्टेड रहते हैं। पॉड सिर्फ़ वही देखता है जो आप साझा करें। हम डेटा नहीं बेचते। आयु 18 या अधिक होनी चाहिए।"></p></details>
+    </div>
+  </section>
+
+  <footer>
+    <span class="help" data-en="If a day feels too heavy: Tele-MANAS, free and confidential, 14416 or 1-800-891-4416." data-hi="अगर दिन बहुत भारी लगे: Tele-MANAS, मुफ़्त और गोपनीय, 14416 या 1-800-891-4416।"></span>
+    <span data-en="UPSC Pods is an independent app and is not affiliated with the Union Public Service Commission. Exam figures from UPSC's 2026 Prelims result; verify on upsc.gov.in." data-hi="UPSC Pods एक स्वतंत्र ऐप है और संघ लोक सेवा आयोग से संबद्ध नहीं है। परीक्षा आँकड़े UPSC के 2026 प्रीलिम्स रिज़ल्ट से; upsc.gov.in पर जाँचें।"></span>
+  </footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+let lang = "en";
+try { lang = localStorage.getItem("site-lang") || "en"; } catch (e) {}
+const $ = id => document.getElementById(id);
+const S = {
+  en: { a_big: (n, last) => n === "∞" ? `No attempt limit. Age window open through CSE ${last}.` : `${n} attempt${n === "1" ? "" : "s"} left, through CSE ${last}.`, a_none: "The age window has closed. A Plan B is a real plan, and we can help you date it.",
+    a_rows: ["Next exam", "Attempts left", "Last eligible exam"], nolimit: "No limit",
+    c_big: v => `About ${v} a year.`, c_rows: ["Living (12 months)", "Coaching, tests, books", "Per month, all in"], toast_copy: "Copied. Paste it anywhere.", toast_sel: "Text selected. Press Ctrl+C to copy.", play: "Preview only: the Play link goes live at launch." },
+  hi: { a_big: (n, last) => n === "∞" ? `प्रयासों की कोई सीमा नहीं। CSE ${last} तक आयु सीमा खुली।` : `${n} प्रयास बाकी, CSE ${last} तक।`, a_none: "आयु सीमा पूरी हो चुकी है। Plan B भी एक असली योजना है, और हम उसकी तारीख़ तय करने में मदद कर सकते हैं।",
+    a_rows: ["अगली परीक्षा", "बाकी प्रयास", "आख़िरी योग्य परीक्षा"], nolimit: "कोई सीमा नहीं",
+    c_big: v => `साल का लगभग ${v}।`, c_rows: ["रहना-खाना (12 माह)", "कोचिंग, टेस्ट, किताबें", "हर महीने, कुल"], toast_copy: "कॉपी हो गया।", toast_sel: "टेक्स्ट चुना गया। कॉपी के लिए Ctrl+C दबाएँ।", play: "केवल प्रीव्यू: Play लिंक लॉन्च पर शुरू होगा।" }
+};
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const rowsHtml = rows => rows.map(([a, b]) => `<div><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join("");
+
+function attempts() {
+  const t = S[lang];
+  const dob = Math.max(1980, Math.min(2010, parseInt($("dob").value, 10) || 1998));
+  const used = Math.max(0, parseInt($("used").value, 10) || 0);
+  const rule = { gen: [6, 32], obc: [9, 35], scst: [Infinity, 37] }[$("cat").value];
+  const lastByAge = dob + rule[1] - 1, first = 2027, left = Math.max(0, rule[0] - used);
+  if (lastByAge < first || left === 0) { $("a-big").textContent = t.a_none; $("a-rows").innerHTML = ""; return; }
+  const last = left === Infinity ? lastByAge : Math.min(lastByAge, first + left - 1);
+  const n = left === Infinity ? "∞" : String(Math.min(left, last - first + 1));
+  $("a-big").textContent = t.a_big(n, last);
+  $("a-rows").innerHTML = rowsHtml([[t.a_rows[0], "CSE 2027 · 23 May"], [t.a_rows[1], n === "∞" ? t.nolimit : n], [t.a_rows[2], "CSE " + last]]);
+}
+function cost() {
+  const t = S[lang], v = id => Math.max(0, parseFloat($(id).value) || 0);
+  const living = 12 * (v("c-room") + v("c-food") + v("c-lib") + v("c-misc"));
+  const study = v("c-coach") + v("c-books");
+  const total = living + study;
+  $("c-big").textContent = t.c_big(inr(total));
+  $("c-rows").innerHTML = rowsHtml([[t.c_rows[0], inr(living)], [t.c_rows[1], inr(study)], [t.c_rows[2], inr(total / 12)]]);
+}
+function toast(msg) { const el = $("toast"); el.textContent = msg; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => el.hidden = true, 2200); }
+function render() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-en]").forEach(el => { el.textContent = el.dataset[lang]; });
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+  attempts(); cost();
+}
+document.addEventListener("click", e => {
+  const l = e.target.closest("[data-lang]");
+  if (l) { lang = l.dataset.lang; try { localStorage.setItem("site-lang", lang); } catch (err) {} render(); return; }
+  if (e.target.closest("#cta-play")) { toast(S[lang].play); return; }
+  const sh = e.target.closest("[data-share]");
+  if (sh) {
+    const box = sh.dataset.share === "a" ? $("a-big").closest(".result") : $("c-big").closest(".result");
+    const text = box.innerText.replace(/\n+/g, "\n") + "\nupscpods.app";
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(box); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast(S[lang].toast_sel); };
+    try { navigator.clipboard.writeText(text).then(() => toast(S[lang].toast_copy), fallback); } catch (err) { fallback(); }
+  }
+});
+document.querySelectorAll(".tool input, .tool select").forEach(el => el.addEventListener("input", () => { attempts(); cost(); }));
+render();
+</script>
+
+</body></html>

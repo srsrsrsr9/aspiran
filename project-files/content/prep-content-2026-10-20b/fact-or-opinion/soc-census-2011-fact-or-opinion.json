@@ -1,0 +1,138 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs2"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "soc-census-2011-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Census 2011: fact or opinion?",
+    "hi": "जनगणना 2011: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Census 2011 recorded a sex ratio of 943 females per 1,000 males for India.",
+        "why": "A number published in Census 2011 tables; you can look it up."
+      },
+      "hi": {
+        "text": "जनगणना 2011 में भारत का लिंगानुपात प्रति 1,000 पुरुषों पर 943 महिलाएँ दर्ज हुआ।",
+        "why": "यह जनगणना 2011 की तालिकाओं में छपा आँकड़ा है, आप इसे देखकर check कर सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Improving the sex ratio depends more on changing attitudes than on stricter laws.",
+        "why": "Weighs one remedy against another; reasonable people rank them differently."
+      },
+      "hi": {
+        "text": "लिंगानुपात सुधारना सख़्त क़ानूनों से ज़्यादा सोच बदलने पर निर्भर है।",
+        "why": "यहाँ एक उपाय को दूसरे से ऊपर रखा गया है, और लोग इसे अलग-अलग तरह से तौलते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "India's literacy rate in Census 2011 was 74.04 per cent.",
+        "why": "An official Census figure, checkable in the published literacy data."
+      },
+      "hi": {
+        "text": "जनगणना 2011 में भारत की साक्षरता दर 74.04 प्रतिशत थी।",
+        "why": "यह जनगणना का आधिकारिक आँकड़ा है, साक्षरता के छपे data में मिल जाएगा।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Literacy figures overstate progress, because being able to sign a name is not real education.",
+        "why": "Judges what counts as 'real' education; that is a view, not a measurement."
+      },
+      "hi": {
+        "text": "साक्षरता के आँकड़े प्रगति को बढ़ा-चढ़ाकर दिखाते हैं, क्योंकि नाम लिख लेना असली शिक्षा नहीं है।",
+        "why": "'असली' शिक्षा क्या है, यह एक नज़रिया है, कोई माप नहीं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Kerala had the highest literacy rate among states in Census 2011.",
+        "why": "State-wise literacy is ranked in Census tables; checkable."
+      },
+      "hi": {
+        "text": "जनगणना 2011 में राज्यों में केरल की साक्षरता दर सबसे ऊँची थी।",
+        "why": "राज्यवार साक्षरता जनगणना की तालिकाओं में दी गई है, आप check कर सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Other states should copy Kerala's model, since it is clearly the best path to development.",
+        "why": "'Should' and 'clearly the best' are judgments; other models have their supporters."
+      },
+      "hi": {
+        "text": "दूसरे राज्यों को केरल मॉडल अपनाना चाहिए, क्योंकि यह साफ़ तौर पर विकास का सबसे अच्छा रास्ता है।",
+        "why": "'चाहिए' और 'सबसे अच्छा' राय वाले शब्द हैं, दूसरे मॉडलों के भी समर्थक हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "About 31 per cent of India's population lived in urban areas in Census 2011.",
+        "why": "The urban share is a Census figure; the exact value is 31.16 per cent."
+      },
+      "hi": {
+        "text": "जनगणना 2011 में भारत की लगभग 31 प्रतिशत आबादी शहरी क्षेत्रों में रहती थी।",
+        "why": "शहरी हिस्सा जनगणना का आँकड़ा है, सटीक मान 31.16 प्रतिशत है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Faster urbanisation is the surest way to reduce rural poverty.",
+        "why": "'Surest way' ranks policy choices; many argue for rural jobs and farm reform instead."
+      },
+      "hi": {
+        "text": "तेज़ शहरीकरण ग्रामीण ग़रीबी घटाने का सबसे पक्का तरीका है।",
+        "why": "'सबसे पक्का तरीका' नीतियों की तुलना करता है, कई लोग ग्रामीण रोज़गार और खेती सुधार को बेहतर मानते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Census of India 2011, Primary Census Abstract",
+    "hi": "भारत की जनगणना 2011, प्राथमिक जनगणना सार"
+  },
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

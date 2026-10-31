@@ -1,0 +1,970 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "env-sectional-environment-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Environment sectional mock 1",
+    "hi": "पर्यावरण सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Environment and Ecology",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "env-ecosystems",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about an ecosystem:",
+        "statements": [
+          "Producers are mostly green plants that make their own food by photosynthesis.",
+          "Decomposers such as bacteria and fungi return nutrients to the soil.",
+          "The flow of energy in an ecosystem is cyclic."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: energy flows in one direction, from the sun through the trophic levels, and is lost as heat; it is nutrients that cycle. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "पारितंत्र के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "उत्पादक मुख्य रूप से हरे पौधे होते हैं, जो प्रकाश-संश्लेषण से अपना भोजन स्वयं बनाते हैं।",
+          "बैक्टीरिया और कवक जैसे अपघटक पोषक तत्वों को मिट्टी में लौटाते हैं।",
+          "पारितंत्र में ऊर्जा का प्रवाह चक्रीय होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है, क्योंकि ऊर्जा एक ही दिशा में बहती है, सूर्य से पोषी स्तरों से होकर, और ऊष्मा के रूप में खो जाती है; चक्र तो पोषक तत्वों का होता है। '1, 2 और 3' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-food-chains",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In a food chain, producers fix 10,000 joules of energy. Following the ten per cent law, about how much energy reaches the secondary consumers?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1,000 J",
+          "100 J",
+          "10 J",
+          "1 J"
+        ],
+        "why": "About 10 per cent passes on at each step: 10,000 J to 1,000 J for primary consumers, then 100 J for secondary consumers. The trap is 1,000 J, which stops one level too early."
+      },
+      "hi": {
+        "stem": "किसी आहार शृंखला में उत्पादक 10,000 जूल ऊर्जा स्थिर करते हैं। दस प्रतिशत नियम के अनुसार द्वितीयक उपभोक्ताओं तक लगभग कितनी ऊर्जा पहुँचेगी?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1,000 J",
+          "100 J",
+          "10 J",
+          "1 J"
+        ],
+        "why": "हर कदम पर लगभग 10 प्रतिशत ऊर्जा आगे जाती है: 10,000 J से प्राथमिक उपभोक्ताओं तक 1,000 J, फिर द्वितीयक उपभोक्ताओं तक 100 J। 1,000 J वाला जाल एक स्तर पहले ही रुक जाता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "env-food-chains",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The pyramid of energy in an ecosystem is always upright.",
+          "Statement II: Some energy is lost as heat at every trophic level."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: since energy is lost at each level, every higher level has less energy than the one below, so the pyramid can never be inverted. The trap is (b), which misses this link."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: किसी पारितंत्र में ऊर्जा का पिरामिड हमेशा सीधा होता है।",
+          "कथन II: हर पोषी स्तर पर कुछ ऊर्जा ऊष्मा के रूप में खो जाती है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, और II, I की व्याख्या करता है। हर स्तर पर ऊर्जा खोती है, इसलिए ऊपर वाले स्तर में हमेशा नीचे वाले से कम ऊर्जा होती है, और पिरामिड कभी उल्टा नहीं होता। (b) का जाल यह रिश्ता छोड़ देता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "env-ecosystems",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is NOT an abiotic component of an ecosystem?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Sunlight",
+          "Temperature",
+          "Soil minerals",
+          "Fungi"
+        ],
+        "why": "Fungi are living organisms, so they are a biotic component; they act as decomposers. Sunlight, temperature and soil minerals are non-living, or abiotic. The trap is soil minerals, which some count as biotic because soil supports life."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा पारितंत्र का अजैविक घटक नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सूर्य का प्रकाश",
+          "तापमान",
+          "मिट्टी के खनिज",
+          "कवक"
+        ],
+        "why": "कवक जीवित जीव हैं, इसलिए जैविक घटक हैं; ये अपघटक का काम करते हैं। सूर्य का प्रकाश, तापमान और मिट्टी के खनिज निर्जीव, यानी अजैविक हैं। मिट्टी के खनिज वाला option लुभाता है, क्योंकि मिट्टी जीवन को सहारा देती है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "env-ecosystems",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Mangroves grow mainly in freshwater lakes at high altitudes.",
+          "Statement II: Many mangroves have breathing roots (pneumatophores) that help them survive in waterlogged soil poor in oxygen."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is wrong: mangroves grow in salty, tidal coastal areas such as the Sundarbans, not in mountain lakes. Statement II is correct. The trap is (b), which accepts I because II is clearly true."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: मैंग्रोव मुख्य रूप से ऊँचाई पर स्थित मीठे पानी की झीलों में उगते हैं।",
+          "कथन II: कई मैंग्रोव में श्वसन मूल (न्यूमेटोफोर) होती हैं, जो उन्हें ऑक्सीजन की कमी वाली जलभरी मिट्टी में जीवित रहने में मदद करती हैं।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I गलत है, क्योंकि मैंग्रोव सुंदरबन जैसे खारे, ज्वारीय तटीय क्षेत्रों में उगते हैं, पहाड़ी झीलों में नहीं। कथन II सही है। (b) का जाल II के साफ़ सही होने की वजह से I को भी मान लेता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "env-biodiversity",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about biodiversity hotspots:",
+        "statements": [
+          "The Western Ghats form part of a hotspot shared with Sri Lanka.",
+          "The Nicobar Islands fall within the Sundaland hotspot.",
+          "The Thar desert is recognised as one of India's biodiversity hotspots.",
+          "The hotspot concept was developed by Norman Myers."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: India's parts of hotspots are the Himalaya, Indo-Burma, Western Ghats and Sri Lanka, and Sundaland; the Thar is not among them. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "जैव विविधता हॉटस्पॉट के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "पश्चिमी घाट उस हॉटस्पॉट का हिस्सा हैं जो श्रीलंका के साथ साझा है।",
+          "निकोबार द्वीप सुंडालैंड हॉटस्पॉट में आते हैं।",
+          "थार मरुस्थल को भारत के जैव विविधता हॉटस्पॉट में से एक माना गया है।",
+          "हॉटस्पॉट की अवधारणा नॉर्मन मायर्स ने विकसित की थी।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है, क्योंकि भारत में हॉटस्पॉट के हिस्से हिमालय, इंडो-बर्मा, पश्चिमी घाट और श्रीलंका, और सुंडालैंड हैं; थार इनमें नहीं है। 'सभी चार' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-biodiversity",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Species that occur naturally only in one particular geographical region and nowhere else are called:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Exotic species",
+          "Endemic species",
+          "Keystone species",
+          "Flagship species"
+        ],
+        "why": "Endemic species are found naturally only in one region. The tempting trap is exotic species, which is the opposite idea: species brought into a region from outside."
+      },
+      "hi": {
+        "stem": "वे प्रजातियाँ जो प्राकृतिक रूप से केवल किसी एक भौगोलिक क्षेत्र में पाई जाती हैं और कहीं नहीं, कहलाती हैं:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "विदेशी प्रजातियाँ",
+          "स्थानिक प्रजातियाँ",
+          "कीस्टोन प्रजातियाँ",
+          "फ़्लैगशिप प्रजातियाँ"
+        ],
+        "why": "स्थानिक (endemic) प्रजातियाँ प्राकृतिक रूप से केवल एक क्षेत्र में मिलती हैं। विदेशी (exotic) प्रजातियाँ लुभाती हैं, पर उनका मतलब उल्टा है: बाहर से किसी क्षेत्र में लाई गई प्रजातियाँ।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "env-biodiversity",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Keystone species",
+          "B. Flagship species",
+          "C. Invasive species",
+          "D. Endemic species",
+          "1. A non-native species that spreads and harms native species",
+          "2. A species whose effect on its ecosystem is far larger than its numbers suggest",
+          "3. A species found naturally only in a particular region",
+          "4. A popular species chosen to draw public support for conservation"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-4, B-2, C-1, D-3",
+          "A-2, B-4, C-3, D-1",
+          "A-1, B-3, C-2, D-4"
+        ],
+        "why": "Keystone species have an outsized effect on their ecosystem (2), flagship species draw public support (4), invasive species are harmful non-natives (1), and endemic species are found only in one region (3). The trap is (b), which swaps keystone and flagship."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. कीस्टोन प्रजाति",
+          "B. फ़्लैगशिप प्रजाति",
+          "C. आक्रामक प्रजाति",
+          "D. स्थानिक प्रजाति",
+          "1. बाहरी प्रजाति जो फैलकर देशी प्रजातियों को नुकसान पहुँचाती है",
+          "2. वह प्रजाति जिसका अपने पारितंत्र पर असर उसकी संख्या की तुलना में कहीं अधिक होता है",
+          "3. वह प्रजाति जो प्राकृतिक रूप से केवल किसी विशेष क्षेत्र में पाई जाती है",
+          "4. संरक्षण के लिए जन-समर्थन जुटाने हेतु चुनी गई लोकप्रिय प्रजाति"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-4, B-2, C-1, D-3",
+          "A-2, B-4, C-3, D-1",
+          "A-1, B-3, C-2, D-4"
+        ],
+        "why": "कीस्टोन प्रजाति का पारितंत्र पर असर बहुत बड़ा होता है (2), फ़्लैगशिप प्रजाति जन-समर्थन जुटाती है (4), आक्रामक प्रजाति नुकसानदेह बाहरी प्रजाति है (1), और स्थानिक प्रजाति केवल एक क्षेत्र में मिलती है (3)। (b) का जाल कीस्टोन और फ़्लैगशिप को बदल देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-iucn",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following IUCN Red List categories indicates the highest risk of extinction in the wild?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Vulnerable",
+          "Near Threatened",
+          "Endangered",
+          "Critically Endangered"
+        ],
+        "why": "Among these, Critically Endangered signals the highest risk, followed by Endangered and then Vulnerable. The tempting trap is Endangered, which is serious but one step below Critically Endangered."
+      },
+      "hi": {
+        "stem": "IUCN रेड लिस्ट की निम्नलिखित श्रेणियों में से कौन-सी जंगल में विलुप्ति के सबसे अधिक खतरे को दर्शाती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सुभेद्य (Vulnerable)",
+          "संकट के निकट (Near Threatened)",
+          "संकटग्रस्त (Endangered)",
+          "गंभीर रूप से संकटग्रस्त (Critically Endangered)"
+        ],
+        "why": "इनमें गंभीर रूप से संकटग्रस्त सबसे ज़्यादा खतरा दिखाता है, उसके बाद संकटग्रस्त और फिर सुभेद्य। संकटग्रस्त वाला option लुभाता है, वह गंभीर है, पर गंभीर रूप से संकटग्रस्त से एक कदम नीचे है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "env-iucn",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the IUCN Red List:",
+        "statements": [
+          "Critically Endangered, Endangered and Vulnerable species are together described as 'threatened'.",
+          "A species classed 'Extinct in the Wild' survives only in captivity or cultivation, or as a population well outside its past range.",
+          "The IUCN is a specialised agency of the United Nations."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the IUCN is a membership union of governments and civil society organisations, not a UN specialised agency. The trap is '1, 2 and 3', because the IUCN works closely with UN bodies."
+      },
+      "hi": {
+        "stem": "IUCN रेड लिस्ट के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "गंभीर रूप से संकटग्रस्त, संकटग्रस्त और सुभेद्य प्रजातियों को मिलाकर 'संकटापन्न' (threatened) कहा जाता है।",
+          "'वन्य रूप से विलुप्त' श्रेणी की प्रजाति केवल बंदी अवस्था या खेती में, या अपने पुराने क्षेत्र से बहुत दूर किसी आबादी के रूप में बची होती है।",
+          "IUCN संयुक्त राष्ट्र की एक विशेष एजेंसी है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है, क्योंकि IUCN सरकारों और नागरिक समाज संगठनों का एक सदस्यता-आधारित संघ है, UN की विशेष एजेंसी नहीं। IUCN UN संस्थाओं के साथ मिलकर काम करता है, इसलिए '1, 2 और 3' लुभाता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "env-protected-areas",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about protected areas in India:",
+        "statements": [
+          "Grazing of livestock is not permitted inside a national park.",
+          "A biosphere reserve is divided into a core zone, a buffer zone and a transition zone.",
+          "Biosphere reserves are notified under the Wildlife (Protection) Act, 1972.",
+          "A state government can declare both wildlife sanctuaries and national parks under the Wildlife (Protection) Act, 1972."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: biosphere reserves are not created under the Wildlife (Protection) Act; they follow UNESCO's Man and the Biosphere framework. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "भारत में संरक्षित क्षेत्रों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रीय उद्यान के अंदर पशुओं की चराई की अनुमति नहीं है।",
+          "जैवमंडल आरक्षित क्षेत्र को कोर क्षेत्र, बफ़र क्षेत्र और संक्रमण क्षेत्र में बाँटा जाता है।",
+          "जैवमंडल आरक्षित क्षेत्र वन्यजीव (संरक्षण) अधिनियम, 1972 के तहत अधिसूचित किए जाते हैं।",
+          "राज्य सरकार वन्यजीव (संरक्षण) अधिनियम, 1972 के तहत वन्यजीव अभयारण्य और राष्ट्रीय उद्यान, दोनों घोषित कर सकती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है, क्योंकि जैवमंडल आरक्षित क्षेत्र वन्यजीव (संरक्षण) अधिनियम के तहत नहीं बनते; ये UNESCO के मानव और जैवमंडल (MAB) ढांचे पर चलते हैं। 'सभी चार' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "env-protected-areas",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of national parks and the states they are in:",
+        "statements": [
+          "Kaziranga – Assam",
+          "Periyar – Kerala",
+          "Bandipur – Tamil Nadu",
+          "Ranthambore – Madhya Pradesh"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only two",
+          "Only one",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. Bandipur is in Karnataka, though it adjoins Tamil Nadu's Mudumalai, and Ranthambore is in Rajasthan. The trap is 'Only three', from placing Bandipur by its neighbour."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय उद्यानों और उनके राज्यों के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "काज़ीरंगा – असम",
+          "पेरियार – केरल",
+          "बांदीपुर – तमिलनाडु",
+          "रणथंभौर – मध्य प्रदेश"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल दो",
+          "केवल एक",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं। बांदीपुर कर्नाटक में है, हालाँकि वह तमिलनाडु के मुदुमलाई से लगा हुआ है, और रणथंभौर राजस्थान में है। बांदीपुर को उसके पड़ोसी के हिसाब से रखने पर 'केवल तीन' लुभाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-protected-areas",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which were the first two sites in India to be designated as wetlands of international importance under the Ramsar Convention, in 1981?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Wular Lake and Loktak Lake",
+          "Sambhar Lake and Harike Wetland",
+          "Loktak Lake and Chilika Lake",
+          "Chilika Lake and Keoladeo National Park"
+        ],
+        "why": "Chilika Lake and Keoladeo National Park were India's first Ramsar sites, designated in 1981. The tempting trap is Loktak and Chilika: Loktak is a well-known Ramsar site, but it was added later."
+      },
+      "hi": {
+        "stem": "रामसर अभिसमय के तहत 1981 में अंतरराष्ट्रीय महत्व की आर्द्रभूमि घोषित होने वाले भारत के पहले दो स्थल कौन-से थे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "वुलर झील और लोकटक झील",
+          "सांभर झील और हरिके आर्द्रभूमि",
+          "लोकटक झील और चिल्का झील",
+          "चिल्का झील और केवलादेव राष्ट्रीय उद्यान"
+        ],
+        "why": "चिल्का झील और केवलादेव राष्ट्रीय उद्यान भारत के पहले रामसर स्थल थे, जिन्हें 1981 में घोषित किया गया। लोकटक और चिल्का वाला option लुभाता है; लोकटक जाना-माना रामसर स्थल है, पर वह बाद में जुड़ा।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "env-conventions",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. CITES",
+          "B. Ramsar Convention",
+          "C. Montreal Protocol",
+          "D. Basel Convention",
+          "1. Conservation and wise use of wetlands",
+          "2. Substances that deplete the ozone layer",
+          "3. International trade in endangered wild animals and plants",
+          "4. Transboundary movement of hazardous wastes"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-1, B-3, C-2, D-4",
+          "A-3, B-1, C-4, D-2",
+          "A-3, B-1, C-2, D-4",
+          "A-2, B-1, C-3, D-4"
+        ],
+        "why": "CITES regulates trade in endangered wild species (3), Ramsar covers wetlands (1), the Montreal Protocol deals with ozone-depleting substances (2), and the Basel Convention covers hazardous wastes crossing borders (4). The trap is (b), which swaps Montreal and Basel."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. साइटिस (CITES)",
+          "B. रामसर अभिसमय",
+          "C. मॉन्ट्रियल प्रोटोकॉल",
+          "D. बेसल अभिसमय",
+          "1. आर्द्रभूमियों का संरक्षण और विवेकपूर्ण उपयोग",
+          "2. ओज़ोन परत को क्षीण करने वाले पदार्थ",
+          "3. संकटग्रस्त वन्य जीवों और पौधों का अंतरराष्ट्रीय व्यापार",
+          "4. खतरनाक अपशिष्टों का सीमा-पार आवागमन"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-1, B-3, C-2, D-4",
+          "A-3, B-1, C-4, D-2",
+          "A-3, B-1, C-2, D-4",
+          "A-2, B-1, C-3, D-4"
+        ],
+        "why": "CITES संकटग्रस्त वन्य प्रजातियों के व्यापार को नियंत्रित करता है (3), रामसर आर्द्रभूमियों से जुड़ा है (1), मॉन्ट्रियल प्रोटोकॉल ओज़ोन-क्षयकारी पदार्थों से (2), और बेसल अभिसमय सीमा-पार खतरनाक अपशिष्टों से (4)। (b) का जाल मॉन्ट्रियल और बेसल को बदल देता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "env-conventions",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Montreal Protocol aims to phase out the production and use of substances that deplete the ozone layer.",
+          "Statement II: The Kigali Amendment to the Montreal Protocol targets the phase-down of hydrofluorocarbons (HFCs)."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but II does not explain I. HFCs do not deplete ozone; they are strong greenhouse gases, added to the Protocol later through the Kigali Amendment. The trap is (a), which assumes HFCs are ozone-depleting."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: मॉन्ट्रियल प्रोटोकॉल का लक्ष्य ओज़ोन परत को क्षीण करने वाले पदार्थों के उत्पादन और उपयोग को चरणबद्ध रूप से समाप्त करना है।",
+          "कथन II: मॉन्ट्रियल प्रोटोकॉल का किगाली संशोधन हाइड्रोफ्लोरोकार्बन (HFCs) में चरणबद्ध कमी को लक्षित करता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, पर II, I की व्याख्या नहीं करता। HFCs ओज़ोन को नुकसान नहीं पहुँचाते; ये ताकतवर ग्रीनहाउस गैसें हैं, जिन्हें बाद में किगाली संशोधन से प्रोटोकॉल में जोड़ा गया। (a) का जाल HFCs को ओज़ोन-क्षयकारी मान लेता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "env-conventions",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about international climate agreements:",
+        "statements": [
+          "The Kyoto Protocol set binding emission reduction targets for developed (Annex I) countries.",
+          "Under the Paris Agreement, each country sets its own targets through Nationally Determined Contributions.",
+          "The Paris Agreement aims to hold the rise in global average temperature to well below 2°C above pre-industrial levels."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. Kyoto bound developed countries to targets, while Paris lets each country set its own NDC within a shared temperature goal. The trap is '2 and 3 only', from wrongly thinking Kyoto's targets were voluntary."
+      },
+      "hi": {
+        "stem": "अंतरराष्ट्रीय जलवायु समझौतों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "क्योटो प्रोटोकॉल ने विकसित (Annex I) देशों के लिए उत्सर्जन घटाने के बाध्यकारी लक्ष्य तय किए।",
+          "पेरिस समझौते के तहत हर देश राष्ट्रीय स्तर पर निर्धारित योगदान (NDC) के ज़रिए अपने लक्ष्य स्वयं तय करता है।",
+          "पेरिस समझौते का लक्ष्य वैश्विक औसत तापमान वृद्धि को पूर्व-औद्योगिक स्तर से 2°C से काफ़ी नीचे रखना है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। क्योटो ने विकसित देशों को लक्ष्यों से बाँधा, जबकि पेरिस में हर देश एक साझा तापमान लक्ष्य के भीतर अपना NDC खुद तय करता है। क्योटो के लक्ष्यों को स्वैच्छिक समझने पर 'केवल 2 और 3' लुभाता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "env-conventions",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of international agreements and their subject:",
+        "statements": [
+          "Cartagena Protocol – biosafety of living modified organisms",
+          "Nagoya Protocol – access to genetic resources and sharing of benefits",
+          "Kyoto Protocol – phase-out of ozone-depleting substances",
+          "Montreal Protocol – greenhouse gas emission targets for developed countries"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only two",
+          "Only one",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct; both are protocols under the Convention on Biological Diversity. Pairs 3 and 4 swap the subjects: Kyoto set greenhouse gas targets, and Montreal deals with ozone-depleting substances. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "अंतरराष्ट्रीय समझौतों और उनके विषय के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "कार्टाजेना प्रोटोकॉल – जीवित संशोधित जीवों की जैव-सुरक्षा",
+          "नागोया प्रोटोकॉल – आनुवंशिक संसाधनों तक पहुँच और लाभों का बँटवारा",
+          "क्योटो प्रोटोकॉल – ओज़ोन-क्षयकारी पदार्थों को चरणबद्ध रूप से समाप्त करना",
+          "मॉन्ट्रियल प्रोटोकॉल – विकसित देशों के लिए ग्रीनहाउस गैस उत्सर्जन लक्ष्य"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल दो",
+          "केवल एक",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं; दोनों जैव विविधता अभिसमय (CBD) के तहत प्रोटोकॉल हैं। जोड़े 3 और 4 में विषय उलट गए हैं: क्योटो ने ग्रीनहाउस गैस लक्ष्य तय किए, और मॉन्ट्रियल ओज़ोन-क्षयकारी पदार्थों से जुड़ा है। 'सभी चार' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-wildlife-laws",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following bodies was given statutory status through the 2006 amendment of the Wildlife (Protection) Act, 1972?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Central Zoo Authority",
+          "Animal Welfare Board of India",
+          "National Tiger Conservation Authority",
+          "National Biodiversity Authority"
+        ],
+        "why": "The 2006 amendment set up the National Tiger Conservation Authority. The tempting trap is the Central Zoo Authority: it also comes under the Wildlife (Protection) Act, but through the 1991 amendment, not 2006."
+      },
+      "hi": {
+        "stem": "वन्यजीव (संरक्षण) अधिनियम, 1972 के 2006 के संशोधन द्वारा निम्नलिखित में से किस निकाय को वैधानिक दर्जा दिया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "केंद्रीय चिड़ियाघर प्राधिकरण",
+          "भारतीय जीव-जंतु कल्याण बोर्ड",
+          "राष्ट्रीय बाघ संरक्षण प्राधिकरण",
+          "राष्ट्रीय जैव विविधता प्राधिकरण"
+        ],
+        "why": "2006 के संशोधन से राष्ट्रीय बाघ संरक्षण प्राधिकरण (NTCA) बना। केंद्रीय चिड़ियाघर प्राधिकरण लुभाता है, वह भी इसी अधिनियम के तहत है, पर 1991 के संशोधन से आया, 2006 से नहीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "env-wildlife-laws",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about wildlife protection in India:",
+        "statements": [
+          "The Wildlife (Protection) Act was passed after the 42nd Amendment had moved wildlife protection to the Concurrent List.",
+          "The 42nd Amendment Act, 1976 moved 'protection of wild animals and birds' from the State List to the Concurrent List.",
+          "The Wildlife (Protection) Act, 1972 provides for the declaration of wildlife sanctuaries and national parks."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 2 and 3 are correct. Statement 1 is wrong on dates: the Act came in 1972, four years before the 42nd Amendment of 1976. The trap is '1, 2 and 3', because the two facts are often learnt together."
+      },
+      "hi": {
+        "stem": "भारत में वन्यजीव संरक्षण के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "वन्यजीव (संरक्षण) अधिनियम तब पारित हुआ जब 42वें संशोधन ने वन्यजीव संरक्षण को समवर्ती सूची में डाल दिया था।",
+          "42वें संविधान संशोधन अधिनियम, 1976 ने 'वन्य जीवों और पक्षियों का संरक्षण' को राज्य सूची से समवर्ती सूची में डाला।",
+          "वन्यजीव (संरक्षण) अधिनियम, 1972 वन्यजीव अभयारण्य और राष्ट्रीय उद्यान घोषित करने का प्रावधान करता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 2 और 3 सही हैं। कथन 1 तारीखों में गलत है, क्योंकि अधिनियम 1972 में आया, 1976 के 42वें संशोधन से चार साल पहले। ये दोनों तथ्य अक्सर साथ पढ़े जाते हैं, इसलिए '1, 2 और 3' लुभाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-pollution",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Ground-level ozone, a major part of photochemical smog, forms when sunlight acts on which of the following?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Nitrogen oxides and volatile organic compounds",
+          "Sulphur dioxide and soot",
+          "Carbon dioxide and water vapour",
+          "Methane and ammonia"
+        ],
+        "why": "Photochemical smog forms when sunlight drives reactions between nitrogen oxides and volatile organic compounds, mainly from vehicles and industry. The tempting trap is sulphur dioxide and soot, which belong to the older, coal-smoke type of smog."
+      },
+      "hi": {
+        "stem": "भू-स्तरीय ओज़ोन, जो प्रकाश-रासायनिक धूम-कोहरे का प्रमुख भाग है, तब बनती है जब सूर्य का प्रकाश निम्नलिखित में से किन पर क्रिया करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "नाइट्रोजन ऑक्साइड और वाष्पशील कार्बनिक यौगिक",
+          "सल्फ़र डाइऑक्साइड और कालिख",
+          "कार्बन डाइऑक्साइड और जलवाष्प",
+          "मीथेन और अमोनिया"
+        ],
+        "why": "प्रकाश-रासायनिक धूम-कोहरा तब बनता है जब धूप नाइट्रोजन ऑक्साइड और वाष्पशील कार्बनिक यौगिकों के बीच क्रिया कराती है, जो मुख्य रूप से वाहनों और उद्योगों से आते हैं। सल्फ़र डाइऑक्साइड और कालिख लुभाते हैं, पर वे कोयले के धुएँ वाले पुराने धूम-कोहरे के हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "env-pollution",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Fish-eating birds can carry DDT at concentrations many times higher than in the water near them.",
+          "Statement II: DDT is not easily broken down and persists in the environment for a long time.",
+          "Statement III: DDT builds up in the fatty tissues of animals and is not readily excreted."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Both II and III are correct, and both explain I: because DDT persists and builds up in fat, it becomes more concentrated at each trophic level, which is biomagnification. The trap is (b), which counts only one of the two causes."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: मछली खाने वाले पक्षियों में DDT की सांद्रता उनके आस-पास के पानी की तुलना में कई गुना अधिक हो सकती है।",
+          "कथन II: DDT आसानी से अपघटित नहीं होता और पर्यावरण में लंबे समय तक बना रहता है।",
+          "कथन III: DDT जीवों के वसा ऊतकों में जमा होता है और आसानी से शरीर से बाहर नहीं निकलता।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "कथन II और III दोनों सही हैं, और दोनों I की व्याख्या करते हैं। DDT टिकाऊ है और वसा में जमा होता है, इसलिए हर पोषी स्तर पर इसकी सांद्रता बढ़ती है; इसे जैव-आवर्धन कहते हैं। (b) का जाल दो में से एक ही कारण गिनता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "env-climate-change",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is NOT a greenhouse gas?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Methane",
+          "Nitrous oxide",
+          "Water vapour",
+          "Nitrogen"
+        ],
+        "why": "Nitrogen, the main gas of the atmosphere, does not absorb heat radiated by the earth, so it is not a greenhouse gas. The tempting trap is water vapour, which is natural and often forgotten, but is in fact a major greenhouse gas."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सी ग्रीनहाउस गैस नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मीथेन",
+          "नाइट्रस ऑक्साइड",
+          "जलवाष्प",
+          "नाइट्रोजन"
+        ],
+        "why": "नाइट्रोजन, जो वायुमंडल की मुख्य गैस है, पृथ्वी से निकलने वाली ऊष्मा नहीं सोखती, इसलिए ग्रीनहाउस गैस नहीं है। जलवाष्प लुभाती है, क्योंकि वह प्राकृतिक है और अक्सर भूल जाते हैं, पर असल में वह एक प्रमुख ग्रीनहाउस गैस है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "env-climate-change",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about climate change:",
+        "statements": [
+          "Methane traps much more heat than the same mass of carbon dioxide.",
+          "The ozone hole is the main cause of global warming.",
+          "The greenhouse effect is caused entirely by human activity."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 only",
+          "1, 2 and 3"
+        ],
+        "why": "Only statement 1 is correct. The ozone hole lets in more ultraviolet rays but is not the main driver of warming, and the greenhouse effect is natural; human emissions only strengthen it. The trap is '1 and 2 only', which mixes up two different problems."
+      },
+      "hi": {
+        "stem": "जलवायु परिवर्तन के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "मीथेन उतने ही द्रव्यमान की कार्बन डाइऑक्साइड की तुलना में कहीं अधिक ऊष्मा रोकती है।",
+          "ओज़ोन छिद्र वैश्विक तापन का मुख्य कारण है।",
+          "ग्रीनहाउस प्रभाव पूरी तरह मानवीय गतिविधियों के कारण होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1",
+          "1, 2 और 3"
+        ],
+        "why": "केवल कथन 1 सही है। ओज़ोन छिद्र से पराबैंगनी किरणें ज़्यादा आती हैं, पर यह तापन का मुख्य कारण नहीं है, और ग्रीनहाउस प्रभाव प्राकृतिक है; मानवीय उत्सर्जन बस उसे बढ़ाते हैं। 'केवल 1 और 2' वाला जाल दो अलग समस्याओं को मिला देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "env-environmental-bodies",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The National Green Tribunal was set up under an Act passed in which year?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1986",
+          "2010",
+          "2002",
+          "2016"
+        ],
+        "why": "The National Green Tribunal was set up under the National Green Tribunal Act, 2010. The tempting trap is 1986, the year of the Environment (Protection) Act, which is one of the laws the Tribunal applies."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय हरित अधिकरण किस वर्ष पारित अधिनियम के तहत स्थापित किया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1986",
+          "2010",
+          "2002",
+          "2016"
+        ],
+        "why": "राष्ट्रीय हरित अधिकरण (NGT) राष्ट्रीय हरित अधिकरण अधिनियम, 2010 के तहत बना। 1986 लुभाता है, क्योंकि उस साल पर्यावरण (संरक्षण) अधिनियम आया, जो उन कानूनों में से एक है जिन्हें अधिकरण लागू करता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "env-environmental-bodies",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about environmental bodies in India:",
+        "statements": [
+          "The Central Pollution Control Board was first constituted under the Water (Prevention and Control of Pollution) Act, 1974.",
+          "The Central Pollution Control Board also has functions under the Air (Prevention and Control of Pollution) Act, 1981.",
+          "The principal bench of the National Green Tribunal is at Bhopal.",
+          "The National Green Tribunal is bound by the procedure laid down in the Code of Civil Procedure, 1908."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only three",
+          "All four",
+          "Only two"
+        ],
+        "why": "Statements 1 and 2 are correct. The NGT's principal bench is in New Delhi, and the NGT is not bound by the Code of Civil Procedure; it follows natural justice. The trap is 'Only three', from assuming a tribunal follows court procedure."
+      },
+      "hi": {
+        "stem": "भारत के पर्यावरण निकायों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "केंद्रीय प्रदूषण नियंत्रण बोर्ड का गठन पहली बार जल (प्रदूषण निवारण और नियंत्रण) अधिनियम, 1974 के तहत हुआ।",
+          "केंद्रीय प्रदूषण नियंत्रण बोर्ड के वायु (प्रदूषण निवारण और नियंत्रण) अधिनियम, 1981 के तहत भी कार्य हैं।",
+          "राष्ट्रीय हरित अधिकरण की प्रधान पीठ भोपाल में है।",
+          "राष्ट्रीय हरित अधिकरण सिविल प्रक्रिया संहिता, 1908 में दी गई प्रक्रिया से बँधा है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल तीन",
+          "सभी चार",
+          "केवल दो"
+        ],
+        "why": "कथन 1 और 2 सही हैं। NGT की प्रधान पीठ नई दिल्ली में है, और NGT सिविल प्रक्रिया संहिता से बँधा नहीं है; वह प्राकृतिक न्याय के सिद्धांतों से चलता है। अधिकरण को अदालत जैसी प्रक्रिया वाला मानने पर 'केवल तीन' लुभाता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Biology; Wildlife (Protection) Act, 1972; National Green Tribunal Act, 2010; Constitution of India",
+    "hi": "NCERT कक्षा XII जीव विज्ञान; वन्यजीव (संरक्षण) अधिनियम, 1972; राष्ट्रीय हरित अधिकरण अधिनियम, 2010; भारत का संविधान"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

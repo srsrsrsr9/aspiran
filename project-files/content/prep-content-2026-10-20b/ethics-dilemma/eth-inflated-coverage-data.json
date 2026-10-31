@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-inflated-coverage-data",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The figures your predecessor left behind",
+    "hi": "पूर्ववर्ती के छोड़े हुए आँकड़े"
+  },
+  "en": {
+    "scenario": "You are a newly posted block development officer. Before a state-level review, you find that your predecessor reported a sanitation scheme's coverage as almost complete, but field checks suggest only about two-thirds of households are covered. Your district head, whose own assessment depends on these numbers, advises you to let the old figures stand and close the gap quietly over the year. Correcting the report now will show the block, and the district, in poor light.",
+    "question": "What do you do about the inflated figures?",
+    "options": [
+      {
+        "label": "Report the true figures at the review",
+        "outcome": "The record becomes honest and the gap may get resources, but your relationship with your superior may sour and the district's standing may drop.",
+        "values": "Honesty and accountability over loyalty"
+      },
+      {
+        "label": "Keep the old figures and fix gaps quietly",
+        "outcome": "There is no immediate conflict and coverage may improve, but false data stays in the system, and you share responsibility if it surfaces.",
+        "values": "Harmony and pragmatism over truthfulness"
+      },
+      {
+        "label": "Put the discrepancy in writing to your superior first",
+        "outcome": "Your superior gets a chance to correct it through proper channels and you have a record, but the correction may be delayed and friction may follow.",
+        "values": "Due process and hierarchy, with a paper trail"
+      }
+    ],
+    "reflect": "If official data is wrong, who is harmed by the error, and does staying silent make you part of it?"
+  },
+  "hi": {
+    "scenario": "आप नए नियुक्त खंड विकास अधिकारी हैं। राज्य-स्तरीय समीक्षा से पहले आपको पता चलता है कि आपके पूर्ववर्ती ने एक स्वच्छता योजना की कवरेज लगभग पूरी बताई थी, पर फ़ील्ड जाँच बताती है कि केवल करीब दो-तिहाई घर ही कवर हैं। आपके ज़िला प्रमुख, जिनका अपना मूल्यांकन इन्हीं आँकड़ों पर टिका है, सलाह देते हैं कि पुराने आँकड़े रहने दें और साल भर में चुपचाप कमी पूरी कर दें। अभी रिपोर्ट सुधारने से ब्लॉक और ज़िले की छवि खराब दिखेगी।",
+    "question": "बढ़ा-चढ़ाकर दिखाए गए आँकड़ों का आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "समीक्षा में सही आँकड़े रिपोर्ट करना",
+        "outcome": "रिकॉर्ड ईमानदार बनता है और कमी के लिए संसाधन मिल सकते हैं, पर वरिष्ठ से आपके संबंध बिगड़ सकते हैं और ज़िले की साख गिर सकती है।",
+        "values": "निष्ठा से ऊपर ईमानदारी और जवाबदेही"
+      },
+      {
+        "label": "पुराने आँकड़े रखना और चुपचाप कमी दूर करना",
+        "outcome": "तुरंत कोई टकराव नहीं होता और कवरेज सुधर सकती है, पर गलत डेटा सिस्टम में बना रहता है, और सामने आने पर ज़िम्मेदारी आपकी भी होगी।",
+        "values": "सत्यनिष्ठा से ऊपर सामंजस्य और व्यावहारिकता"
+      },
+      {
+        "label": "पहले वरिष्ठ को लिखित में विसंगति बताना",
+        "outcome": "वरिष्ठ को उचित माध्यम से सुधार का मौका मिलता है और आपके पास रिकॉर्ड रहता है, पर सुधार में देर हो सकती है और तनाव आ सकता है।",
+        "values": "उचित प्रक्रिया और पदानुक्रम, लिखित रिकॉर्ड के साथ"
+      }
+    ],
+    "reflect": "अगर सरकारी डेटा गलत है, तो उस गलती से किसका नुकसान होता है, और क्या चुप रहना आपको भी उसमें भागीदार बनाता है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

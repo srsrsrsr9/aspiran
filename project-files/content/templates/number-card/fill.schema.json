@@ -1,0 +1,168 @@
+{
+  "title": "Number sense",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "value",
+    "unit",
+    "lead",
+    "chart",
+    "whatItMeans",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "value": {
+      "type": "number",
+      "description": "The hero number, exactly as in the source"
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 5
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 7
+        }
+      }
+    },
+    "lead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 14
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 19
+        }
+      }
+    },
+    "chart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference",
+        "bars"
+      ],
+      "properties": {
+        "reference": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "A meaningful line such as 1000 for parity, or null"
+        },
+        "bars": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi",
+              "v"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 3
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 5
+              },
+              "v": {
+                "type": "number"
+              },
+              "hero": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 2,
+          "maxItems": 5
+        }
+      }
+    },
+    "whatItMeans": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 25
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 34
+          },
+          "minItems": 1,
+          "maxItems": 3
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/number-card@1"
+}

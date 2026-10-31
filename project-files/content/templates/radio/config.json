@@ -1,0 +1,47 @@
+{
+  "schemaId": "upsc-pods/radio@1",
+  "knobs": {
+    "stations": "2 to 4 segments"
+  },
+  "defaults": {
+    "mood": {
+      "bed": "static",
+      "sfx": true,
+      "motion": "gentle"
+    },
+    "sfx": {
+      "tune": "sfx/tune",
+      "static": "sfx/static",
+      "end": "motif"
+    },
+    "stations": [
+      {
+        "freq": 92.7
+      },
+      {
+        "freq": 98.3
+      },
+      {
+        "freq": 101.1
+      }
+    ],
+    "tags": {
+      "stage": [
+        "revision"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-current-static"
+      ]
+    }
+  },
+  "fixedLengths": false,
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

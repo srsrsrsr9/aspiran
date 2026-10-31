@@ -1,0 +1,828 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "csat-sectional-quant-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "CSAT basic numeracy sectional mock 1",
+    "hi": "CSAT आधारभूत संख्यात्मकता सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "CSAT Paper II Basic Numeracy",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-percentages",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A number is first increased by 20% and then the result is decreased by 20%. What is the net change in the number?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "An increase of 4%",
+          "No change",
+          "A decrease of 4%",
+          "A decrease of 2%"
+        ],
+        "why": "Take 100: 100 → 120 → 120 × 0.8 = 96, a 4% decrease. 'No change' is the trap: the 20% cut is taken on a bigger base (120), so it removes more than was added."
+      },
+      "hi": {
+        "stem": "किसी संख्या को पहले 20% बढ़ाया जाता है और फिर परिणाम को 20% घटाया जाता है। संख्या में कुल परिवर्तन क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "4% की वृद्धि",
+          "कोई परिवर्तन नहीं",
+          "4% की कमी",
+          "2% की कमी"
+        ],
+        "why": "100 मानिए: 100 → 120 → 120 × 0.8 = 96, यानी 4% की कमी। 'कोई परिवर्तन नहीं' जाल है: 20% की कटौती बड़े आधार (120) पर लगती है, तो जितना जुड़ा उससे ज़्यादा घट जाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-ratio-and-proportion",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A sum of ₹1,800 is divided between A and B in the ratio 4 : 5. What is B's share?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "₹800",
+          "₹1,000",
+          "₹900",
+          "₹1,200"
+        ],
+        "why": "Total parts = 4 + 5 = 9, so one part = 1,800 ÷ 9 = ₹200. B gets 5 × 200 = ₹1,000. ₹800 is the trap: that is A's share."
+      },
+      "hi": {
+        "stem": "₹1,800 की राशि A और B में 4 : 5 के अनुपात में बाँटी जाती है। B का हिस्सा कितना है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "₹800",
+          "₹1,000",
+          "₹900",
+          "₹1,200"
+        ],
+        "why": "कुल भाग = 4 + 5 = 9, तो एक भाग = 1,800 ÷ 9 = ₹200। B को 5 × 200 = ₹1,000 मिलते हैं। ₹800 जाल है, वह A का हिस्सा है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-percentages",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The price of sugar rises by 25%. By what percentage must a family reduce its sugar consumption so that its spending on sugar stays the same?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "22.5%",
+          "25%",
+          "15%",
+          "20%"
+        ],
+        "why": "Cut needed = 25 ÷ (100 + 25) × 100 = 20%. Check: price 1.25 × quantity 0.8 = 1. The trap is 25%, which takes the rise on the old price instead of the new one."
+      },
+      "hi": {
+        "stem": "चीनी का दाम 25% बढ़ जाता है। एक परिवार को चीनी की खपत कितने प्रतिशत घटानी चाहिए ताकि चीनी पर उसका खर्च उतना ही रहे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "22.5%",
+          "25%",
+          "15%",
+          "20%"
+        ],
+        "why": "ज़रूरी कटौती = 25 ÷ (100 + 25) × 100 = 20%। जाँच: दाम 1.25 × मात्रा 0.8 = 1। 25% जाल है, उसमें बढ़ोतरी को नए दाम की जगह पुराने दाम पर गिन लिया जाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-averages",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The average of five numbers is 20. If one of the numbers, 30, is removed, what is the average of the remaining four numbers?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "18",
+          "14",
+          "17.5",
+          "22.5"
+        ],
+        "why": "Sum of five = 5 × 20 = 100. Remove 30: 70 left, and 70 ÷ 4 = 17.5. The trap is 14, which divides 70 by 5 though only four numbers remain."
+      },
+      "hi": {
+        "stem": "पाँच संख्याओं का औसत 20 है। यदि उनमें से एक संख्या 30 हटा दी जाए, तो बची चार संख्याओं का औसत क्या होगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "18",
+          "14",
+          "17.5",
+          "22.5"
+        ],
+        "why": "पाँचों का योग = 5 × 20 = 100। 30 हटाने पर 70 बचे, और 70 ÷ 4 = 17.5। 14 जाल है, जिसमें 70 को 5 से भाग दिया गया, जबकि बची सिर्फ़ चार संख्याएँ हैं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-speed-distance",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A train running at 72 km/h crosses a pole in 10 seconds. What is the length of the train?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "720 m",
+          "200 m",
+          "180 m",
+          "250 m"
+        ],
+        "why": "72 km/h = 72 × 5/18 = 20 m/s. To cross a pole the train covers its own length: 20 × 10 = 200 m. The trap is 720 m, from multiplying 72 by 10 without converting units."
+      },
+      "hi": {
+        "stem": "72 km/h की गति से चल रही एक ट्रेन एक खंभे को 10 सेकंड में पार करती है। ट्रेन की लंबाई कितनी है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "720 m",
+          "200 m",
+          "180 m",
+          "250 m"
+        ],
+        "why": "72 km/h = 72 × 5/18 = 20 m/s। खंभा पार करने में ट्रेन अपनी लंबाई जितनी दूरी तय करती है: 20 × 10 = 200 m। 720 m जाल है, जो इकाई बदले बिना 72 को 10 से गुणा करने पर आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-and-work",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A can finish a piece of work in 10 days and B can finish it in 15 days. Working together, in how many days will they finish it?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6 days",
+          "12.5 days",
+          "5 days",
+          "8 days"
+        ],
+        "why": "One day's work together = 1/10 + 1/15 = 3/30 + 2/30 = 1/6, so 6 days. The trap is 12.5 days, the average of 10 and 15: working together must be faster than either alone."
+      },
+      "hi": {
+        "stem": "A एक काम 10 दिन में और B वही काम 15 दिन में पूरा कर सकता है। दोनों साथ काम करें तो कितने दिन में पूरा करेंगे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6 दिन",
+          "12.5 दिन",
+          "5 दिन",
+          "8 दिन"
+        ],
+        "why": "दोनों का एक दिन का काम = 1/10 + 1/15 = 3/30 + 2/30 = 1/6, यानी 6 दिन। 12.5 दिन जाल है, जो 10 और 15 का औसत है: साथ काम करने पर समय दोनों के अकेले समय से कम ही होगा।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "csat-number-properties",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about integers:",
+        "statements": [
+          "The sum of two odd numbers is always even.",
+          "The product of two consecutive integers is always even.",
+          "Every prime number is odd.",
+          "The square of an odd number is always odd."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong because 2 is a prime and is even. 'All four' is the trap for anyone who forgets 2."
+      },
+      "hi": {
+        "stem": "पूर्णांकों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "दो विषम संख्याओं का योग हमेशा सम होता है।",
+          "दो क्रमागत पूर्णांकों का गुणनफल हमेशा सम होता है।",
+          "हर अभाज्य संख्या विषम होती है।",
+          "किसी विषम संख्या का वर्ग हमेशा विषम होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है, क्योंकि 2 अभाज्य है और सम भी। जो 2 को भूल जाए, उसके लिए 'सभी चार' जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-probability",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Two fair coins are tossed together. What is the probability of getting at least one head?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "3/4",
+          "1/2",
+          "1/4",
+          "2/3"
+        ],
+        "why": "The outcomes are HH, HT, TH and TT. Only TT has no head, so P = 1 − 1/4 = 3/4. The trap is 1/2, which counts only 'exactly one head'."
+      },
+      "hi": {
+        "stem": "दो निष्पक्ष सिक्के एक साथ उछाले जाते हैं। कम से कम एक चित (head) आने की प्रायिकता क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "3/4",
+          "1/2",
+          "1/4",
+          "2/3"
+        ],
+        "why": "परिणाम हैं HH, HT, TH और TT। सिर्फ़ TT में कोई चित नहीं, तो P = 1 − 1/4 = 3/4। 1/2 जाल है, वह केवल 'ठीक एक चित' को गिनता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-percentages",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In an examination, 60% of the candidates passed in Mathematics, 70% passed in English and 20% failed in both subjects. What percentage passed in both?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "40%",
+          "30%",
+          "50%",
+          "60%"
+        ],
+        "why": "Failed Maths = 40%, failed English = 30%. Failed at least one = 40 + 30 − 20 = 50%, so 50% passed both. The trap is 30%, from 60 + 70 − 100, which ignores the 20% who failed both."
+      },
+      "hi": {
+        "stem": "एक परीक्षा में 60% उम्मीदवार गणित में और 70% अंग्रेज़ी में उत्तीर्ण हुए, जबकि 20% दोनों विषयों में अनुत्तीर्ण रहे। कितने प्रतिशत दोनों में उत्तीर्ण हुए?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "40%",
+          "30%",
+          "50%",
+          "60%"
+        ],
+        "why": "गणित में अनुत्तीर्ण = 40%, अंग्रेज़ी में = 30%। कम से कम एक में अनुत्तीर्ण = 40 + 30 − 20 = 50%, तो दोनों में उत्तीर्ण 50%। 30% जाल है, जो 60 + 70 − 100 से आता है और दोनों में फ़ेल 20% को भूल जाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-ratio-and-proportion",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "If A : B = 2 : 3 and B : C = 4 : 5, what is A : B : C?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "8 : 12 : 10",
+          "2 : 3 : 5",
+          "4 : 6 : 5",
+          "8 : 12 : 15"
+        ],
+        "why": "Make B equal: A : B = 8 : 12 and B : C = 12 : 15, giving 8 : 12 : 15. The trap, 2 : 3 : 5, joins the ratios without matching B."
+      },
+      "hi": {
+        "stem": "यदि A : B = 2 : 3 और B : C = 4 : 5 हो, तो A : B : C क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "8 : 12 : 10",
+          "2 : 3 : 5",
+          "4 : 6 : 5",
+          "8 : 12 : 15"
+        ],
+        "why": "दोनों में B को बराबर कीजिए: A : B = 8 : 12 और B : C = 12 : 15। तो A : B : C = 8 : 12 : 15। 2 : 3 : 5 जाल है, जिसमें B को मिलाए बिना अनुपात जोड़ दिए गए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-ratio-and-proportion",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A 40-litre mixture contains milk and water in the ratio 3 : 1. How many litres of water must be added to make the ratio 3 : 2?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "15 litres",
+          "5 litres",
+          "10 litres",
+          "20 litres"
+        ],
+        "why": "Milk = 30 L and water = 10 L. For 3 : 2, water must be 20 L, so add 10 L. The trap is 20 litres, which is the final water, not the amount to add."
+      },
+      "hi": {
+        "stem": "40 लीटर के एक मिश्रण में दूध और पानी 3 : 1 के अनुपात में हैं। अनुपात 3 : 2 करने के लिए कितने लीटर पानी मिलाना होगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "15 लीटर",
+          "5 लीटर",
+          "10 लीटर",
+          "20 लीटर"
+        ],
+        "why": "दूध = 30 L और पानी = 10 L। 3 : 2 के लिए पानी 20 L होना चाहिए, तो 10 L मिलाना है। 20 लीटर जाल है, वह कुल पानी है, मिलाई जाने वाली मात्रा नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-averages",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The average age of 30 students in a class is 14 years. When the teacher's age is included, the average rises to 15 years. What is the teacher's age?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "29 years",
+          "44 years",
+          "45 years",
+          "46 years"
+        ],
+        "why": "Total with teacher = 31 × 15 = 465. Students' total = 30 × 14 = 420. Teacher = 465 − 420 = 45 years. The trap is 44: the shortcut adds 30 × 1 to the new average 15, not the old 14."
+      },
+      "hi": {
+        "stem": "एक कक्षा के 30 छात्रों की औसत आयु 14 वर्ष है। शिक्षक की आयु जोड़ने पर औसत 15 वर्ष हो जाता है। शिक्षक की आयु क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "29 वर्ष",
+          "44 वर्ष",
+          "45 वर्ष",
+          "46 वर्ष"
+        ],
+        "why": "शिक्षक सहित कुल = 31 × 15 = 465। छात्रों का कुल = 30 × 14 = 420। शिक्षक = 465 − 420 = 45 वर्ष। 44 जाल है: शॉर्टकट में 30 × 1 को नए औसत 15 में जोड़ते हैं, पुराने 14 में नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-speed-distance",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A man travels from town X to town Y at 40 km/h and returns along the same road at 60 km/h. What is his average speed for the whole journey?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "50 km/h",
+          "48 km/h",
+          "45 km/h",
+          "52 km/h"
+        ],
+        "why": "For equal distances, average speed = 2 × 40 × 60 ÷ (40 + 60) = 4,800 ÷ 100 = 48 km/h. The trap is 50 km/h: he spends more time at the slower speed, so the simple average overstates it."
+      },
+      "hi": {
+        "stem": "एक व्यक्ति कस्बे X से Y तक 40 km/h से जाता है और उसी रास्ते से 60 km/h से लौटता है। पूरी यात्रा में उसकी औसत गति क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "50 km/h",
+          "48 km/h",
+          "45 km/h",
+          "52 km/h"
+        ],
+        "why": "बराबर दूरी के लिए औसत गति = 2 × 40 × 60 ÷ (40 + 60) = 4,800 ÷ 100 = 48 km/h। 50 km/h जाल है: धीमी गति पर ज़्यादा समय लगता है, तो सीधा औसत ज़्यादा बताता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-and-work",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A and B together can finish a work in 12 days. A alone can finish it in 20 days. In how many days can B alone finish it?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24 days",
+          "8 days",
+          "32 days",
+          "30 days"
+        ],
+        "why": "B's one day's work = 1/12 − 1/20 = 5/60 − 3/60 = 2/60 = 1/30, so 30 days. The trap is 8 days, from subtracting the days (20 − 12) instead of the rates."
+      },
+      "hi": {
+        "stem": "A और B मिलकर एक काम 12 दिन में पूरा कर सकते हैं। A अकेला उसे 20 दिन में पूरा कर सकता है। B अकेला उसे कितने दिन में पूरा करेगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24 दिन",
+          "8 दिन",
+          "32 दिन",
+          "30 दिन"
+        ],
+        "why": "B का एक दिन का काम = 1/12 − 1/20 = 5/60 − 3/60 = 2/60 = 1/30, यानी 30 दिन। 8 दिन जाल है, जो दरों की जगह दिनों को घटाने (20 − 12) से आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-and-work",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Pipe A can fill a tank in 6 hours and pipe B can empty the full tank in 9 hours. If both are opened together on an empty tank, how long will it take to fill?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "3.6 hours",
+          "18 hours",
+          "15 hours",
+          "12 hours"
+        ],
+        "why": "Net filling per hour = 1/6 − 1/9 = 3/18 − 2/18 = 1/18, so 18 hours. The trap is 3.6 hours, which adds the two rates as if both pipes were filling."
+      },
+      "hi": {
+        "stem": "पाइप A एक टंकी को 6 घंटे में भर सकता है और पाइप B भरी टंकी को 9 घंटे में खाली कर सकता है। खाली टंकी पर दोनों एक साथ खोले जाएँ तो टंकी कितने समय में भरेगी?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "3.6 घंटे",
+          "18 घंटे",
+          "15 घंटे",
+          "12 घंटे"
+        ],
+        "why": "हर घंटे कुल भराई = 1/6 − 1/9 = 3/18 − 2/18 = 1/18, यानी 18 घंटे। 3.6 घंटे जाल है, जो दोनों दरों को ऐसे जोड़ देता है मानो दोनों पाइप भर रहे हों।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-number-properties",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the smallest two-digit number that leaves a remainder of 2 when divided by 6, by 8 and by 12?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24",
+          "26",
+          "50",
+          "22"
+        ],
+        "why": "The LCM of 6, 8 and 12 is 24, so such numbers are 24k + 2: 2, 26, 50 and so on. The smallest two-digit one is 26. The trap is 24, which leaves remainder 0, not 2."
+      },
+      "hi": {
+        "stem": "वह सबसे छोटी दो अंकों की संख्या कौन-सी है जिसे 6, 8 और 12 से भाग देने पर हर बार शेषफल 2 बचता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "24",
+          "26",
+          "50",
+          "22"
+        ],
+        "why": "6, 8 और 12 का LCM 24 है, तो ऐसी संख्याएँ 24k + 2 हैं: 2, 26, 50 आदि। सबसे छोटी दो अंकों वाली 26 है। 24 जाल है, उससे शेषफल 0 बचता है, 2 नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-probability",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Two fair dice are thrown together. What is the probability that the sum of the numbers shown is 7?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1/6",
+          "7/36",
+          "5/36",
+          "1/12"
+        ],
+        "why": "There are 36 outcomes. Sum 7 comes from (1,6), (2,5), (3,4), (4,3), (5,2), (6,1): 6 ways, so 6/36 = 1/6. The trap is 7/36, which treats the sum itself as the count."
+      },
+      "hi": {
+        "stem": "दो निष्पक्ष पासे एक साथ फेंके जाते हैं। दोनों पर आई संख्याओं का योग 7 होने की प्रायिकता क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1/6",
+          "7/36",
+          "5/36",
+          "1/12"
+        ],
+        "why": "कुल 36 परिणाम हैं। योग 7 के लिए (1,6), (2,5), (3,4), (4,3), (5,2), (6,1): 6 तरीके, तो 6/36 = 1/6। 7/36 जाल है, जो योग को ही गिनती मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-percentages",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "In an election between two candidates, 20% of the votes cast were invalid. The winner got 60% of the valid votes and won by 3,200 votes. How many votes were cast in all?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "18,000",
+          "16,000",
+          "25,000",
+          "20,000"
+        ],
+        "why": "Let total = T. Valid = 0.8T. The margin is 60% − 40% = 20% of valid votes = 0.16T = 3,200, so T = 20,000. The trap is 16,000: that is the number of valid votes, not all votes."
+      },
+      "hi": {
+        "stem": "दो उम्मीदवारों के बीच एक चुनाव में डाले गए मतों में से 20% अमान्य थे। विजेता को मान्य मतों का 60% मिला और वह 3,200 मतों से जीता। कुल कितने मत डाले गए?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "18,000",
+          "16,000",
+          "25,000",
+          "20,000"
+        ],
+        "why": "कुल = T मानिए। मान्य = 0.8T। जीत का अंतर = मान्य मतों का 60% − 40% = 20% = 0.16T = 3,200, तो T = 20,000। 16,000 जाल है, वह मान्य मतों की संख्या है, कुल मतों की नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-ratio-and-proportion",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "The present ages of a father and his son are in the ratio 7 : 2. After 10 years, the ratio will be 9 : 4. What is the father's present age?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "28 years",
+          "45 years",
+          "35 years",
+          "42 years"
+        ],
+        "why": "Let ages be 7x and 2x. (7x + 10) ÷ (2x + 10) = 9/4 gives 28x + 40 = 18x + 90, so x = 5 and the father is 35 (check: 45/20 = 9/4). The trap is 45, his age after 10 years."
+      },
+      "hi": {
+        "stem": "एक पिता और उसके बेटे की वर्तमान आयु का अनुपात 7 : 2 है। 10 वर्ष बाद यह अनुपात 9 : 4 होगा। पिता की वर्तमान आयु क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "28 वर्ष",
+          "45 वर्ष",
+          "35 वर्ष",
+          "42 वर्ष"
+        ],
+        "why": "आयु 7x और 2x मानिए। (7x + 10) ÷ (2x + 10) = 9/4 से 28x + 40 = 18x + 90, तो x = 5। पिता = 35। जाँच: 45 : 20 = 9 : 4। 45 जाल है, वह 10 वर्ष बाद की आयु है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-averages",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "After 16 innings, a batsman has a certain batting average. In the 17th innings he scores 87 runs, which raises his average by 3. What is his average after the 17th innings?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "39",
+          "36",
+          "42",
+          "38"
+        ],
+        "why": "Let the old average be x. 16x + 87 = 17(x + 3) = 17x + 51, so x = 36. New average = 39. The trap is 36, the average before the 17th innings."
+      },
+      "hi": {
+        "stem": "16 पारियों के बाद एक बल्लेबाज़ का कुछ औसत है। 17वीं पारी में वह 87 रन बनाता है, जिससे उसका औसत 3 बढ़ जाता है। 17वीं पारी के बाद उसका औसत क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "39",
+          "36",
+          "42",
+          "38"
+        ],
+        "why": "पुराना औसत x मानिए। 16x + 87 = 17(x + 3) = 17x + 51, तो x = 36। नया औसत = 36 + 3 = 39। 36 जाल है, वह 17वीं पारी से पहले का औसत है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-speed-distance",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Two trains, 150 m and 100 m long, run on parallel tracks in opposite directions at 54 km/h and 36 km/h. How long do they take to cross each other completely?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "10 seconds",
+          "50 seconds",
+          "25 seconds",
+          "12.5 seconds"
+        ],
+        "why": "Opposite directions: relative speed = 90 km/h = 25 m/s. Distance = 150 + 100 = 250 m, so time = 250 ÷ 25 = 10 s. The trap is 50 s, which uses the same-direction speed of 18 km/h (5 m/s)."
+      },
+      "hi": {
+        "stem": "150 m और 100 m लंबी दो ट्रेनें समानांतर पटरियों पर विपरीत दिशाओं में 54 km/h और 36 km/h से चल रही हैं। एक-दूसरे को पूरी तरह पार करने में उन्हें कितना समय लगेगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "10 सेकंड",
+          "50 सेकंड",
+          "25 सेकंड",
+          "12.5 सेकंड"
+        ],
+        "why": "विपरीत दिशा में सापेक्ष गति = 54 + 36 = 90 km/h = 25 m/s। दूरी = 150 + 100 = 250 m, तो समय = 250 ÷ 25 = 10 s। 50 s जाल है, जो एक ही दिशा वाली गति 18 km/h (5 m/s) लेने पर आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-time-and-work",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Twelve men can finish a work in 18 days. After they have worked for 6 days, 4 men leave. In how many more days will the remaining men finish the work?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "12 days",
+          "18 days",
+          "24 days",
+          "16 days"
+        ],
+        "why": "Total work = 12 × 18 = 216 man-days; 6 days use 72. The remaining 144 ÷ 8 men = 18 days. The trap is 12 days, which assumes all 12 men stay on."
+      },
+      "hi": {
+        "stem": "12 व्यक्ति एक काम 18 दिन में पूरा कर सकते हैं। 6 दिन काम करने के बाद 4 व्यक्ति चले जाते हैं। बचे हुए व्यक्ति शेष काम कितने और दिनों में पूरा करेंगे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "12 दिन",
+          "18 दिन",
+          "24 दिन",
+          "16 दिन"
+        ],
+        "why": "कुल काम = 12 × 18 = 216 मानव-दिवस। 6 दिन में हुआ = 72। बचा = 144, और 144 ÷ 8 व्यक्ति = 18 दिन। 12 दिन जाल है, जो मान लेता है कि सभी 12 व्यक्ति टिके रहे।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-number-properties",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "What is the unit digit of 7 raised to the power 95?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1",
+          "7",
+          "9",
+          "3"
+        ],
+        "why": "Unit digits of powers of 7 repeat every four: 7, 9, 3, 1. 95 ÷ 4 leaves remainder 3, so the unit digit is the third in the cycle, 3. The trap is 7, from assuming an odd power keeps the digit 7."
+      },
+      "hi": {
+        "stem": "7 की घात 95 (7^95) का इकाई अंक क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1",
+          "7",
+          "9",
+          "3"
+        ],
+        "why": "7 की घातों के इकाई अंक हर चार पर दोहराते हैं: 7, 9, 3, 1। 95 ÷ 4 पर शेषफल 3 है, तो इकाई अंक चक्र का तीसरा यानी 3 है। 7 जाल है, जो मान लेता है कि विषम घात पर अंक 7 ही रहेगा।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-number-properties",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "How many whole numbers from 1 to 100 (both included) are divisible by neither 2 nor 5?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "45",
+          "30",
+          "50",
+          "40"
+        ],
+        "why": "Divisible by 2: 50. By 5: 20. By both (by 10): 10. Divisible by 2 or 5 = 50 + 20 − 10 = 60, so 100 − 60 = 40. The trap is 30, which forgets to add back the 10 counted twice."
+      },
+      "hi": {
+        "stem": "1 से 100 तक (दोनों सहित) कितनी पूर्ण संख्याएँ न तो 2 से और न ही 5 से विभाज्य हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "45",
+          "30",
+          "50",
+          "40"
+        ],
+        "why": "2 से विभाज्य: 50। 5 से: 20। दोनों से (10 से): 10। 2 या 5 से विभाज्य = 50 + 20 − 10 = 60, तो 100 − 60 = 40। 30 जाल है, जिसमें दो बार गिने गए 10 को वापस नहीं जोड़ा गया।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-probability",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "A bag has 4 red and 6 blue balls. Two balls are drawn one after the other without replacement. What is the probability that both are red?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2/15",
+          "4/25",
+          "1/5",
+          "6/25"
+        ],
+        "why": "First red: 4/10. Second red, with 3 red left among 9: 3/9. Product = 12/90 = 2/15. The trap is 4/25 (that is, 4/10 × 4/10), which wrongly puts the first ball back."
+      },
+      "hi": {
+        "stem": "एक थैले में 4 लाल और 6 नीली गेंदें हैं। बिना वापस रखे एक के बाद एक दो गेंदें निकाली जाती हैं। दोनों के लाल होने की प्रायिकता क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2/15",
+          "4/25",
+          "1/5",
+          "6/25"
+        ],
+        "why": "पहली लाल: 4/10। दूसरी लाल, जब 9 में 3 लाल बचीं: 3/9। गुणनफल = 12/90 = 2/15। 4/25 (यानी 4/10 × 4/10) जाल है, जो पहली गेंद को गलती से वापस रख देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Original practice questions; standard arithmetic methods (NCERT Mathematics)",
+    "hi": "मौलिक अभ्यास प्रश्न; अंकगणित की मानक विधियाँ (NCERT गणित)"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "title": "Snap together (put in order)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "prompt",
+    "pieces",
+    "explain",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 14,
+          "description": "The instruction, e.g. 'Put the Preamble's description of India in order'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 19
+        }
+      }
+    },
+    "pieces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "note"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 4,
+                "description": "One tile"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16,
+                "description": "Shown when this tile locks in"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "note"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6,
+                "description": "One tile"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22,
+                "description": "Shown when this tile locks in"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 8,
+      "description": "In the CORRECT order. The app shuffles them."
+    },
+    "explain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 40,
+          "description": "Shown when the whole line is built"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 54
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/assemble@1"
+}

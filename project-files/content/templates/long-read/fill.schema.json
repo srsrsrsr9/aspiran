@@ -1,0 +1,278 @@
+{
+  "title": "Long read (one topic in depth)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "node",
+    "minutes",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "node": {
+      "type": "string",
+      "x-enumFromConfig": "nodes",
+      "description": "Id of the syllabus-map node this long read covers (from the config's node list)",
+      "enum": [
+        "pol-history",
+        "pol-features",
+        "pol-union-territory",
+        "pol-citizenship",
+        "pol-fr",
+        "pol-dpsp",
+        "pol-fd",
+        "pol-amendment",
+        "pol-president",
+        "pol-pm-com",
+        "pol-parliament",
+        "pol-privileges",
+        "pol-state-exec",
+        "pol-judiciary",
+        "pol-federal",
+        "pol-fiscal",
+        "pol-emergency",
+        "pol-local",
+        "pol-scheduled-areas",
+        "pol-uts-special",
+        "pol-const-bodies",
+        "pol-statutory",
+        "pol-elections",
+        "pol-separation",
+        "pol-comparison",
+        "pol-pressure-groups",
+        "pol-official-language"
+      ]
+    },
+    "minutes": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 15,
+      "description": "Reading time at about 150 words a minute, rounded"
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dek",
+        "sections",
+        "keyFacts",
+        "examAngle",
+        "debate",
+        "selfCheck"
+      ],
+      "properties": {
+        "dek": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30,
+          "description": "One or two sentences under the title: what the reader will understand by the end"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "head",
+              "body"
+            ],
+            "properties": {
+              "head": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 8,
+                "description": "A plain section heading"
+              },
+              "body": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 200,
+                "description": "The section, in short paragraphs separated by a blank line"
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 7
+        },
+        "keyFacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 16,
+            "description": "One exam-ready fact from the source: an article, a year, a number or a name"
+          },
+          "minItems": 4,
+          "maxItems": 8
+        },
+        "examAngle": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 45,
+          "description": "How Prelims and Mains ask about this topic, in general terms. Never a real or invented past question"
+        },
+        "debate": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 60,
+          "description": "Where informed people disagree, with both sides fairly put. null if the topic has no live debate"
+        },
+        "selfCheck": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 24,
+            "description": "A question the reader can answer from the long read, to check understanding"
+          },
+          "minItems": 3,
+          "maxItems": 5
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dek",
+        "sections",
+        "keyFacts",
+        "examAngle",
+        "debate",
+        "selfCheck"
+      ],
+      "properties": {
+        "dek": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41,
+          "description": "One or two sentences under the title: what the reader will understand by the end"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "head",
+              "body"
+            ],
+            "properties": {
+              "head": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 11,
+                "description": "A plain section heading"
+              },
+              "body": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 270,
+                "description": "The section, in short paragraphs separated by a blank line"
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 7
+        },
+        "keyFacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22,
+            "description": "One exam-ready fact from the source: an article, a year, a number or a name"
+          },
+          "minItems": 4,
+          "maxItems": 8
+        },
+        "examAngle": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 61,
+          "description": "How Prelims and Mains ask about this topic, in general terms. Never a real or invented past question"
+        },
+        "debate": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 81,
+          "description": "Where informed people disagree, with both sides fairly put. null if the topic has no live debate"
+        },
+        "selfCheck": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 33,
+            "description": "A question the reader can answer from the long read, to check understanding"
+          },
+          "minItems": 3,
+          "maxItems": 5
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/long-read@1"
+}

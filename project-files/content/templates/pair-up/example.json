@@ -1,0 +1,116 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "match": "sfx/tick",
+    "miss": "sfx/nudge"
+  },
+  "id": "classical-dance-forms-and-states",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Match classical dance forms to states",
+    "hi": "शास्त्रीय नृत्य शैलियों को राज्यों से मिलाएँ"
+  },
+  "heads": {
+    "en": {
+      "left": "Dance form",
+      "right": "State"
+    },
+    "hi": {
+      "left": "नृत्य शैली",
+      "right": "राज्य"
+    }
+  },
+  "pairs": [
+    {
+      "en": {
+        "left": "Kathakali",
+        "right": "Kerala"
+      },
+      "hi": {
+        "left": "कथकली",
+        "right": "केरल"
+      }
+    },
+    {
+      "en": {
+        "left": "Kuchipudi",
+        "right": "Andhra Pradesh"
+      },
+      "hi": {
+        "left": "कुचिपुड़ी",
+        "right": "आंध्र प्रदेश"
+      }
+    },
+    {
+      "en": {
+        "left": "Odissi",
+        "right": "Odisha"
+      },
+      "hi": {
+        "left": "ओडिसी",
+        "right": "ओडिशा"
+      }
+    },
+    {
+      "en": {
+        "left": "Sattriya",
+        "right": "Assam"
+      },
+      "hi": {
+        "left": "सत्रिया",
+        "right": "असम"
+      }
+    },
+    {
+      "en": {
+        "left": "Manipuri",
+        "right": "Manipur"
+      },
+      "hi": {
+        "left": "मणिपुरी",
+        "right": "मणिपुर"
+      }
+    },
+    {
+      "en": {
+        "left": "Bharatanatyam",
+        "right": "Tamil Nadu"
+      },
+      "hi": {
+        "left": "भरतनाट्यम",
+        "right": "तमिलनाडु"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Sangeet Natak Akademi",
+    "hi": "संगीत नाटक अकादमी"
+  },
+  "schema": "upsc-pods/pair-up@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/pair-up/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-list-match"
+    ]
+  }
+}

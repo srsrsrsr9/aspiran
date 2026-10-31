@@ -1,0 +1,698 @@
+{
+  "schema": "upsc-pods/syllabus-map@1",
+  "id": "gs2-polity",
+  "subject": {
+    "en": "Indian Polity and Governance (GS2)",
+    "hi": "भारतीय राजव्यवस्था और शासन (GS2)"
+  },
+  "syllabus": {
+    "prelims": {
+      "id": "pre-polity",
+      "en": "Indian Polity and Governance: Constitution, Political System, Panchayati Raj, Public Policy, Rights Issues, etc.",
+      "hi": "भारतीय राज्यतंत्र और शासन: संविधान, राजनीतिक प्रणाली, पंचायती राज, लोक नीति, अधिकार संबंधी मुद्दे आदि।"
+    },
+    "mains": [
+      {
+        "id": "gs2-1",
+        "en": "Indian Constitution: historical underpinnings, evolution, features, amendments, significant provisions and basic structure."
+      },
+      {
+        "id": "gs2-2",
+        "en": "Functions and responsibilities of the Union and the States, issues and challenges pertaining to the federal structure, devolution of powers and finances up to local levels and challenges therein."
+      },
+      {
+        "id": "gs2-3",
+        "en": "Separation of powers between various organs, dispute redressal mechanisms and institutions."
+      },
+      {
+        "id": "gs2-4",
+        "en": "Comparison of the Indian constitutional scheme with that of other countries."
+      },
+      {
+        "id": "gs2-5",
+        "en": "Parliament and State legislatures: structure, functioning, conduct of business, powers and privileges and issues arising out of these."
+      },
+      {
+        "id": "gs2-6",
+        "en": "Structure, organization and functioning of the Executive and the Judiciary; Ministries and Departments of the Government; pressure groups and formal/informal associations and their role in the Polity."
+      },
+      {
+        "id": "gs2-7",
+        "en": "Salient features of the Representation of People's Act."
+      },
+      {
+        "id": "gs2-8",
+        "en": "Appointment to various Constitutional posts, powers, functions and responsibilities of various Constitutional Bodies."
+      },
+      {
+        "id": "gs2-9",
+        "en": "Statutory, regulatory and various quasi-judicial bodies."
+      }
+    ],
+    "verify": "Check every line against the syllabus in the latest CSE notification on upsc.gov.in before showing it as official wording."
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null
+  },
+  "pyqNote": "pyq lists stay empty until official papers are imported with content/tools/pyq-import.mjs and an editor tags each question with node ids. Nothing is filled in by a model.",
+  "nodes": [
+    {
+      "id": "pol-history",
+      "line": "gs2-1",
+      "title": {
+        "en": "Historical underpinnings: Company rule to the Constituent Assembly",
+        "hi": "ऐतिहासिक पृष्ठभूमि: कंपनी शासन से संविधान सभा तक"
+      },
+      "part": null,
+      "articles": null,
+      "packs": [
+        "timeline-shuffle/acts-before-1947.json",
+        "timelines/making-the-constitution.json"
+      ],
+      "longRead": "long-read/making-the-constitution.json",
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            7
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-features",
+      "line": "gs2-1",
+      "title": {
+        "en": "Salient features and the Preamble",
+        "hi": "प्रमुख विशेषताएँ और उद्देशिका"
+      },
+      "part": null,
+      "articles": "Preamble",
+      "packs": [
+        "how-many-correct/preamble-statements.json",
+        "assemble/preamble-snap.json",
+        "fact-or-opinion/fact-or-opinion-sample.json",
+        "myths/forward-buster-constitution.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            1
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-union-territory",
+      "line": "gs2-2",
+      "title": {
+        "en": "The Union and its territory",
+        "hi": "संघ और उसका राज्यक्षेत्र"
+      },
+      "part": "I",
+      "articles": "1-4",
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    },
+    {
+      "id": "pol-citizenship",
+      "line": "gs2-1",
+      "title": {
+        "en": "Citizenship",
+        "hi": "नागरिकता"
+      },
+      "part": "II",
+      "articles": "5-11",
+      "packs": [
+        "flashcards/citizenship-articles.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            2
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-fr",
+      "line": "gs2-1",
+      "title": {
+        "en": "Fundamental Rights",
+        "hi": "मूल अधिकार"
+      },
+      "part": "III",
+      "articles": "12-35",
+      "packs": [
+        "trap-spotter/trap-spotter-sample.json",
+        "mnemonic/mnemonic-sample.json",
+        "before-after/before-after-sample.json",
+        "bucket-sort/bucket-sort-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            3
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-dpsp",
+      "line": "gs2-1",
+      "title": {
+        "en": "Directive Principles of State Policy",
+        "hi": "राज्य के नीति निदेशक तत्व"
+      },
+      "part": "IV",
+      "articles": "36-51",
+      "packs": [
+        "bucket-sort/bucket-sort-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            4
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-fd",
+      "line": "gs2-1",
+      "title": {
+        "en": "Fundamental Duties",
+        "hi": "मूल कर्तव्य"
+      },
+      "part": "IVA",
+      "articles": "51A",
+      "packs": [
+        "statement-code/statement-code-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            5,
+            10
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-amendment",
+      "line": "gs2-1",
+      "title": {
+        "en": "Amendment and the basic structure",
+        "hi": "संशोधन और मूल ढाँचा"
+      },
+      "part": "XX",
+      "articles": "368",
+      "packs": [
+        "landmark-case/landmark-case-sample.json"
+      ],
+      "longRead": "long-read/long-read-sample.json",
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            6,
+            9
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-president",
+      "line": "gs2-6",
+      "title": {
+        "en": "President and Vice-President",
+        "hi": "राष्ट्रपति और उपराष्ट्रपति"
+      },
+      "part": "V",
+      "articles": "52-73",
+      "packs": [
+        "two-truths/two-truths-sample.json",
+        "versus/president-vs-governor.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            11,
+            17
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-pm-com",
+      "line": "gs2-6",
+      "title": {
+        "en": "Prime Minister and the Council of Ministers",
+        "hi": "प्रधानमंत्री और मंत्रिपरिषद"
+      },
+      "part": "V",
+      "articles": "74-78",
+      "packs": [
+        "three-statements/council-of-ministers.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            14
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-parliament",
+      "line": "gs2-5",
+      "title": {
+        "en": "Parliament: structure, sessions and law-making",
+        "hi": "संसद: संरचना, सत्र और विधि-निर्माण"
+      },
+      "part": "V",
+      "articles": "79-122",
+      "packs": [
+        "versus/versus-sample.json",
+        "answer-diagram/answer-diagram-sample.json",
+        "trap-spotter/joint-sitting.json",
+        "journeys/bill-to-act.json",
+        "word-bank/word-bank-sample.json",
+        "debates/simultaneous-elections.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            16
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-privileges",
+      "line": "gs2-5",
+      "title": {
+        "en": "Parliamentary privileges and committees",
+        "hi": "संसदीय विशेषाधिकार और समितियाँ"
+      },
+      "part": "V",
+      "articles": "105, 194",
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    },
+    {
+      "id": "pol-state-exec",
+      "line": "gs2-6",
+      "title": {
+        "en": "Governor, Chief Minister and the state legislature",
+        "hi": "राज्यपाल, मुख्यमंत्री और राज्य विधानमंडल"
+      },
+      "part": "VI",
+      "articles": "152-213",
+      "packs": [
+        "versus/president-vs-governor.json",
+        "explainers/article-200.json"
+      ],
+      "longRead": "long-read/the-governor.json",
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            12,
+            18
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-judiciary",
+      "line": "gs2-6",
+      "title": {
+        "en": "Supreme Court, High Courts and judicial review",
+        "hi": "सर्वोच्च न्यायालय, उच्च न्यायालय और न्यायिक पुनर्विलोकन"
+      },
+      "part": "V, VI",
+      "articles": "124-147, 214-231",
+      "packs": [
+        "list-match/supreme-court-jurisdiction.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            13,
+            19
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-federal",
+      "line": "gs2-2",
+      "title": {
+        "en": "Centre-state relations and the Seventh Schedule",
+        "hi": "केंद्र-राज्य संबंध और सातवीं अनुसूची"
+      },
+      "part": "XI",
+      "articles": "245-263",
+      "packs": [
+        "union-state-list/union-state-list-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            21,
+            30
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-fiscal",
+      "line": "gs2-2",
+      "title": {
+        "en": "Fiscal federalism: Finance Commission and GST Council",
+        "hi": "राजकोषीय संघवाद: वित्त आयोग और GST परिषद"
+      },
+      "part": "XII",
+      "articles": "264-293, 279A",
+      "packs": [
+        "how-many-correct/how-many-correct-sample.json",
+        "answer-skeleton/answer-skeleton-sample.json"
+      ],
+      "longRead": "long-read/fiscal-federalism.json",
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            22,
+            29
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-emergency",
+      "line": "gs2-2",
+      "title": {
+        "en": "Emergency provisions",
+        "hi": "आपात उपबंध"
+      },
+      "part": "XVIII",
+      "articles": "352-360",
+      "packs": [
+        "flashcards/flashcards-sample.json",
+        "timeline-shuffle/national-emergencies-with-hook.json",
+        "landmark-case/sr-bommai.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            24
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-local",
+      "line": "gs2-2",
+      "title": {
+        "en": "Panchayats and municipalities",
+        "hi": "पंचायतें और नगरपालिकाएँ"
+      },
+      "part": "IX, IXA",
+      "articles": "243-243ZG",
+      "packs": [
+        "fill-the-gap/fill-the-gap-sample.json",
+        "better-answer/better-answer-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            25
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-scheduled-areas",
+      "line": "gs2-2",
+      "title": {
+        "en": "Scheduled and tribal areas (Fifth and Sixth Schedules)",
+        "hi": "अनुसूचित और जनजातीय क्षेत्र (पाँचवीं और छठी अनुसूची)"
+      },
+      "part": "X",
+      "articles": "244, 244A",
+      "packs": [
+        "bucket-sort/fifth-or-sixth-schedule.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            26
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-uts-special",
+      "line": "gs2-2",
+      "title": {
+        "en": "Union Territories and special provisions for some states",
+        "hi": "केंद्रशासित प्रदेश और कुछ राज्यों के लिए विशेष उपबंध"
+      },
+      "part": "VIII, XXI",
+      "articles": "239-241, 371-371J",
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    },
+    {
+      "id": "pol-const-bodies",
+      "line": "gs2-8",
+      "title": {
+        "en": "Constitutional bodies: ECI, UPSC, CAG, Attorney General, commissions",
+        "hi": "संवैधानिक निकाय: निर्वाचन आयोग, UPSC, CAG, महान्यायवादी, आयोग"
+      },
+      "part": "XIV, XV, V",
+      "articles": "76, 148-151, 315-323, 324, 338-338B",
+      "packs": [
+        "statement-code/election-commission.json",
+        "who-am-i/constitutional-posts.json",
+        "two-truths/two-truths-sample.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            15,
+            20
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-statutory",
+      "line": "gs2-9",
+      "title": {
+        "en": "Statutory, regulatory and quasi-judicial bodies",
+        "hi": "सांविधिक, नियामक और अर्ध-न्यायिक निकाय"
+      },
+      "part": null,
+      "articles": null,
+      "packs": [
+        "bucket-sort/constitutional-statutory-executive.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            27
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-elections",
+      "line": "gs2-7",
+      "title": {
+        "en": "Elections, the Representation of the People Acts and anti-defection",
+        "hi": "चुनाव, लोक प्रतिनिधित्व अधिनियम और दल-बदल विरोधी कानून"
+      },
+      "part": "XV, Tenth Schedule",
+      "articles": "324-329",
+      "packs": [
+        "assertion-reason/anti-defection.json"
+      ],
+      "longRead": "long-read/anti-defection-law.json",
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            23,
+            28
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "started"
+    },
+    {
+      "id": "pol-separation",
+      "line": "gs2-3",
+      "title": {
+        "en": "Separation of powers and dispute redressal",
+        "hi": "शक्तियों का पृथक्करण और विवाद निवारण"
+      },
+      "part": "XIVA",
+      "articles": "50, 262, 263, 323A, 323B",
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    },
+    {
+      "id": "pol-comparison",
+      "line": "gs2-4",
+      "title": {
+        "en": "Comparing constitutions: what India borrowed and adapted",
+        "hi": "संविधानों की तुलना: भारत ने क्या लिया और कैसे ढाला"
+      },
+      "part": null,
+      "articles": null,
+      "packs": [
+        "pairs-count/borrowed-features.json"
+      ],
+      "longRead": null,
+      "mockQuestions": [
+        {
+          "paper": "mock-paper/mock-paper-sample.json",
+          "numbers": [
+            8
+          ]
+        }
+      ],
+      "pyq": [],
+      "status": "thin"
+    },
+    {
+      "id": "pol-pressure-groups",
+      "line": "gs2-6",
+      "title": {
+        "en": "Pressure groups and associations",
+        "hi": "दबाव समूह और संघ"
+      },
+      "part": null,
+      "articles": null,
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    },
+    {
+      "id": "pol-official-language",
+      "line": "gs2-1",
+      "title": {
+        "en": "Official language and the Schedules",
+        "hi": "राजभाषा और अनुसूचियाँ"
+      },
+      "part": "XVII",
+      "articles": "343-351",
+      "packs": [],
+      "longRead": null,
+      "mockQuestions": [],
+      "pyq": [],
+      "status": "empty"
+    }
+  ],
+  "summary": {
+    "nodes": 27,
+    "started": 15,
+    "thin": 6,
+    "empty": [
+      "pol-union-territory",
+      "pol-privileges",
+      "pol-uts-special",
+      "pol-separation",
+      "pol-pressure-groups",
+      "pol-official-language"
+    ]
+  }
+}

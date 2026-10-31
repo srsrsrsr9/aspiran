@@ -1,0 +1,72 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both Statement II and Statement III are correct and both of them explain Statement I",
+      "Both Statement II and Statement III are correct but only one of them explains Statement I",
+      "Only one of the Statements II and III is correct and that explains Statement I",
+      "Neither Statement II nor Statement III is correct"
+    ],
+    "hi": [
+      "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+      "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+      "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+      "न तो कथन II सही है, न ही कथन III"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii-iii"
+    ]
+  },
+  "id": "coromandel-rain-statements-i-ii-iii",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Rain on the Coromandel coast: which reason fits?",
+    "hi": "कोरोमंडल तट पर वर्षा: कौन सा कारण सही बैठता है?"
+  },
+  "key": "b",
+  "en": {
+    "s1": "The Coromandel coast of Tamil Nadu receives a large share of its annual rainfall between October and December.",
+    "s2": "The northeast monsoon winds pick up moisture over the Bay of Bengal before reaching the Tamil Nadu coast, and so bring rain there.",
+    "s3": "The Western Ghats force the moist southwest monsoon winds to rise, giving heavy orographic rain on the western slopes.",
+    "why": "Statement II is true and explains I: northeast monsoon winds pick up moisture over the Bay of Bengal before reaching Tamil Nadu. Statement III is true but about the western slopes, so it does not explain I."
+  },
+  "hi": {
+    "s1": "तमिलनाडु का कोरोमंडल तट अपनी वार्षिक वर्षा का बड़ा हिस्सा अक्टूबर से दिसंबर के बीच पाता है।",
+    "s2": "उत्तर-पूर्वी मानसून की हवाएँ तमिलनाडु तट तक पहुँचने से पहले बंगाल की खाड़ी के ऊपर नमी उठा लेती हैं, और इसलिए वहाँ वर्षा लाती हैं।",
+    "s3": "पश्चिमी घाट नम दक्षिण-पश्चिमी मानसून की हवाओं को ऊपर उठने पर मजबूर करते हैं, जिससे पश्चिमी ढलानों पर भारी पर्वतीय वर्षा होती है।",
+    "why": "कथन II सही है और कथन I की व्याख्या करता है: उत्तर-पूर्वी मानसून की हवाएँ बंगाल की खाड़ी के ऊपर नमी उठाती हैं और तमिलनाडु तट तक पहुँचकर वर्षा लाती हैं। कथन III भी सही है, पर वह पश्चिमी ढलानों के बारे में है, इसलिए वह कथन I की व्याख्या नहीं करता।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/three-statements@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/three-statements/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/hidden-why@1",
+  "title": "The Hidden Why",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "tone",
+    "title",
+    "mood",
+    "sfx",
+    "scene",
+    "frames",
+    "named",
+    "sayItSmart",
+    "careful",
+    "followUp",
+    "useItIn",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/hidden-why@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "mood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bed",
+        "sfx",
+        "motion"
+      ],
+      "properties": {
+        "bed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sfx": {
+          "type": "boolean"
+        },
+        "motion": {
+          "type": "string",
+          "enum": [
+            "gentle",
+            "crisp",
+            "none"
+          ]
+        }
+      },
+      "x-from": "config"
+    },
+    "sfx": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-from": "config"
+    },
+    "scene": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 40,
+      "description": "Illustration key: content/illustrations/hidden-why/<scene>.svg, drawn 360x640"
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 8,
+      "description": "Caption frames over one illustration. The first is the hook (a claim that sounds wrong); the last names the idea.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi",
+          "focus"
+        ],
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 16
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22
+          },
+          "focus": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "description": "[x, y, zoom] on the 360x640 illustration: where the camera pans for this frame. x 0-360, y 0-640, zoom 1-2.5"
+          }
+        }
+      }
+    },
+    "named": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 14
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 20
+        }
+      },
+      "description": "The idea the story names, e.g. 'Cobra Effect (a perverse incentive)'"
+    },
+    "sayItSmart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 55
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 75
+        }
+      },
+      "description": "A line the aspirant can say in the interview or open an answer with, first person, with the evidence in it"
+    },
+    "careful": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 45
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 62
+        }
+      },
+      "description": "The nuance a board member would raise: what is contested, what the evidence does not show"
+    },
+    "followUp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "q",
+        "hint"
+      ],
+      "properties": {
+        "q": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 16
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 22
+            }
+          },
+          "description": "The likely next question"
+        },
+        "hint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 35
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 48
+            }
+          },
+          "description": "How to handle it"
+        }
+      }
+    },
+    "useItIn": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "paper",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "paper": {
+            "type": "string",
+            "enum": [
+              "prelims-gs1",
+              "prelims-csat",
+              "mains-gs1",
+              "mains-gs2",
+              "mains-gs3",
+              "mains-gs4",
+              "mains-essay",
+              "interview"
+            ]
+          },
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 20
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 28
+          }
+        }
+      }
+    },
+    "linkedPacks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Paths of related packs, or empty"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "description": "The study, record or law each story stands on. Never invent a source.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "verify"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 45
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "true until someone has checked this source"
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

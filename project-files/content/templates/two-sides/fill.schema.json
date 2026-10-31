@@ -1,0 +1,165 @@
+{
+  "title": "Two sides (debate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "paper",
+    "question",
+    "for",
+    "against",
+    "outline",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "paper": {
+      "type": "string",
+      "enum": [
+        "GS1",
+        "GS2",
+        "GS3",
+        "GS4",
+        "Essay"
+      ]
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      }
+    },
+    "for": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 30
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "against": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 30
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "outline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 24
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 33
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/two-sides@1"
+}

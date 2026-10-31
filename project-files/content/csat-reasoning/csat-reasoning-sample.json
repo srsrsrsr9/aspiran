@@ -1,0 +1,144 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "selfContained": true,
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ],
+    "formats": [
+      "csat-reasoning"
+    ]
+  },
+  "id": "direction-relations-syllogisms-reasoning",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Direction, relations and syllogisms",
+    "hi": "दिशा, रिश्ते और तार्किक निष्कर्ष"
+  },
+  "problems": [
+    {
+      "topic": "direction-sense",
+      "answer": 2,
+      "en": {
+        "question": "Ravi starts facing north from his house. He walks 5 km north, turns right and walks 3 km, turns right and walks 5 km, then turns left and walks 3 km. In which direction, and how far, is he from his starting point?",
+        "options": [
+          "6 km west",
+          "3 km north",
+          "6 km east",
+          "5 km south"
+        ],
+        "steps": "Facing north: 5 km north. Right turn, facing east: 3 km east. Right turn, facing south: 5 km south. Left turn, facing east: 3 km east. North-south net 0; east-west net 6 km. Answer: 6 km east."
+      },
+      "hi": {
+        "question": "रवि अपने घर से उत्तर की ओर मुँह करके चलना शुरू करता है। वह 5 किमी उत्तर चलता है, दाएँ मुड़ता है और 3 किमी चलता है, फिर दाएँ मुड़कर 5 किमी चलता है, और फिर बाएँ मुड़कर 3 किमी चलता है। वह अपने शुरुआती बिंदु से किस दिशा में और कितनी दूरी पर है?",
+        "options": [
+          "6 किमी पश्चिम",
+          "3 किमी उत्तर",
+          "6 किमी पूर्व",
+          "5 किमी दक्षिण"
+        ],
+        "steps": "उत्तर की ओर मुँह: 5 किमी उत्तर। दाएँ मुड़कर पूर्व की ओर मुँह: 3 किमी पूर्व। दाएँ मुड़कर दक्षिण की ओर मुँह: 5 किमी दक्षिण। बाएँ मुड़कर फिर पूर्व की ओर मुँह: 3 किमी पूर्व। उत्तर-दक्षिण का शुद्ध योग 0 है और पूर्व-पश्चिम का 6 किमी। उत्तर: 6 किमी पूर्व।"
+      }
+    },
+    {
+      "topic": "blood-relation",
+      "answer": 0,
+      "en": {
+        "question": "Meera is the daughter of Anil. Anil's brother is Suresh. Suresh's son is Kiran. How is Kiran related to Meera?",
+        "options": [
+          "Cousin",
+          "Nephew",
+          "Uncle",
+          "Brother"
+        ],
+        "steps": "Anil is Meera's father. Suresh is Anil's brother, so Suresh is Meera's uncle. Kiran is Suresh's son, so Kiran is the son of Meera's uncle, which makes him her cousin. He is not her nephew, since a nephew is a sibling's son."
+      },
+      "hi": {
+        "question": "मीरा अनिल की बेटी है। अनिल के भाई सुरेश हैं। सुरेश के बेटे किरण हैं। किरण का मीरा से क्या संबंध है?",
+        "options": [
+          "चचेरा भाई",
+          "भतीजा",
+          "चाचा",
+          "भाई"
+        ],
+        "steps": "अनिल मीरा के पिता हैं। सुरेश अनिल के भाई हैं, इसलिए सुरेश मीरा के चाचा हैं। किरण सुरेश के बेटे हैं, यानी मीरा के चाचा के बेटे, इसलिए वे उसके चचेरे भाई हैं। वे भतीजा नहीं हैं, क्योंकि भतीजा भाई-बहन का बेटा होता है।"
+      }
+    },
+    {
+      "topic": "syllogism",
+      "answer": 0,
+      "en": {
+        "question": "Statements: All doctors are professionals. All professionals are educated people. Conclusions: I. All doctors are educated people. II. All professionals are doctors. Which conclusion(s) follow?",
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Both conclusions follow",
+          "Neither conclusion follows"
+        ],
+        "steps": "Doctors sit inside professionals, and professionals sit inside educated people. So all doctors are educated: I follows. II reverses the first premise; the premise does not say every professional is a doctor, so II does not follow."
+      },
+      "hi": {
+        "question": "कथन: सभी डॉक्टर पेशेवर हैं। सभी पेशेवर शिक्षित लोग हैं। निष्कर्ष: I. सभी डॉक्टर शिक्षित लोग हैं। II. सभी पेशेवर डॉक्टर हैं। कौन-सा/कौन-से निष्कर्ष अनुसरण करते हैं?",
+        "options": [
+          "केवल निष्कर्ष I अनुसरण करता है",
+          "केवल निष्कर्ष II अनुसरण करता है",
+          "दोनों निष्कर्ष अनुसरण करते हैं",
+          "कोई निष्कर्ष अनुसरण नहीं करता"
+        ],
+        "steps": "डॉक्टर पेशेवरों के समूह में हैं, और पेशेवर शिक्षित लोगों के समूह में। इसलिए सभी डॉक्टर शिक्षित हैं: निष्कर्ष I अनुसरण करता है। निष्कर्ष II पहले कथन को उलट देता है; कथन यह नहीं कहता कि हर पेशेवर डॉक्टर है, इसलिए II अनुसरण नहीं करता।"
+      }
+    },
+    {
+      "topic": "syllogism",
+      "answer": 2,
+      "en": {
+        "question": "Statements: Some pens are pencils. Some pencils are rulers. Conclusions: I. Some pens are rulers. II. Some rulers are pens. Which conclusion(s) follow?",
+        "options": [
+          "Both conclusions follow",
+          "Only conclusion I follows",
+          "Neither conclusion follows",
+          "Only conclusion II follows"
+        ],
+        "steps": "The pencils that are pens may be different from the pencils that are rulers, so nothing links pens and rulers. I does not follow. II does not follow either. Neither conclusion follows."
+      },
+      "hi": {
+        "question": "कथन: कुछ पेन पेंसिल हैं। कुछ पेंसिल रूलर हैं। निष्कर्ष: I. कुछ पेन रूलर हैं। II. कुछ रूलर पेन हैं। कौन-सा/कौन-से निष्कर्ष अनुसरण करते हैं?",
+        "options": [
+          "दोनों निष्कर्ष अनुसरण करते हैं",
+          "केवल निष्कर्ष I अनुसरण करता है",
+          "कोई निष्कर्ष अनुसरण नहीं करता",
+          "केवल निष्कर्ष II अनुसरण करता है"
+        ],
+        "steps": "जो पेंसिलें पेन हैं, हो सकता है वे वे पेंसिलें न हों जो रूलर हैं। इसलिए पेन और रूलर के बीच कोई सीधा संबंध तय नहीं होता। न I अनुसरण करता है, न II। कोई निष्कर्ष अनुसरण नहीं करता।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/csat-reasoning@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/csat-reasoning/",
+    "createdOn": "2026-10-10"
+  }
+}

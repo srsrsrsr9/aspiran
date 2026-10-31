@@ -1,0 +1,50 @@
+{
+  "title": "Match the pairs",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "pairs"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "article",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "article": {
+            "type": "string",
+            "maxLength": 6,
+            "description": "The left item, e.g. an article number like 21 or 51A"
+          },
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 8,
+            "description": "What it is, 8 words or fewer"
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 11
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 20
+    }
+  },
+  "x-type": "upsc-pods/match-game@1"
+}

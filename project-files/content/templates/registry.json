@@ -1,0 +1,1810 @@
+{
+  "schema": "upsc-pods/template-registry@1",
+  "note": "One entry per content type. Each folder holds schema.json (the full pack), fill.schema.json (what a writer or model fills), config.json (knobs and defaults), brief.md (instructions) and example.json (a valid pack).",
+  "types": [
+    {
+      "key": "chai-pack",
+      "schema": "upsc-pods/chai-pack@1",
+      "title": "Chai cards (daily pack)",
+      "family": "Read",
+      "folder": "content/cards/",
+      "template": "templates/chai-pack/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs1",
+          "mains-gs2",
+          "mains-gs3"
+        ],
+        "formats": [
+          "pre-current-static",
+          "pre-direct"
+        ]
+      }
+    },
+    {
+      "key": "explainer",
+      "schema": "upsc-pods/explainer@1",
+      "title": "Ek Minute explainer",
+      "family": "Watch",
+      "folder": "content/explainers/",
+      "template": "templates/explainer/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "reel",
+      "schema": "upsc-pods/reel@1",
+      "title": "Chai in 60 reel",
+      "family": "Watch",
+      "folder": "content/reels/",
+      "template": "templates/reel/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-current-static"
+        ]
+      }
+    },
+    {
+      "key": "timeline",
+      "schema": "upsc-pods/timeline@1",
+      "title": "Timeline",
+      "family": "Explore",
+      "folder": "content/timelines/",
+      "template": "templates/timeline/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs1"
+        ],
+        "formats": [
+          "pre-order"
+        ]
+      }
+    },
+    {
+      "key": "match-game",
+      "schema": "upsc-pods/match-game@1",
+      "title": "Match the pairs",
+      "family": "Play",
+      "folder": "content/games/",
+      "template": "templates/match-game/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-list-match"
+        ]
+      }
+    },
+    {
+      "key": "quiz-pack",
+      "schema": "upsc-pods/quiz-pack@1",
+      "title": "Quiz night",
+      "family": "Play",
+      "folder": "content/quizzes/",
+      "template": "templates/quiz-pack/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct",
+          "pre-negative"
+        ]
+      }
+    },
+    {
+      "key": "map-card",
+      "schema": "upsc-pods/map-card@1",
+      "title": "Map card",
+      "family": "Explore",
+      "folder": "content/maps/",
+      "template": "templates/map-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs1"
+        ],
+        "formats": [
+          "pre-map",
+          "mains-diagram"
+        ]
+      }
+    },
+    {
+      "key": "number-card",
+      "schema": "upsc-pods/number-card@1",
+      "title": "Number sense",
+      "family": "Explore",
+      "folder": "content/numbers/",
+      "template": "templates/number-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-data"
+        ]
+      }
+    },
+    {
+      "key": "myth-card",
+      "schema": "upsc-pods/myth-card@1",
+      "title": "Forward buster (myth or fact)",
+      "family": "Play",
+      "folder": "content/myths/",
+      "template": "templates/myth-card/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-statement-code"
+        ]
+      }
+    },
+    {
+      "key": "two-sides",
+      "schema": "upsc-pods/two-sides@1",
+      "title": "Two sides (debate)",
+      "family": "Think",
+      "folder": "content/debates/",
+      "template": "templates/two-sides/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs2",
+          "mains-gs3",
+          "mains-essay"
+        ],
+        "formats": [
+          "mains-both-sides",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "winddown",
+      "schema": "upsc-pods/winddown@1",
+      "title": "Close the day (wind-down)",
+      "family": "Rest",
+      "folder": "content/winddown/",
+      "template": "templates/winddown/",
+      "new": false,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "scratch-card",
+      "schema": "upsc-pods/scratch-card@1",
+      "title": "Scratch and reveal",
+      "family": "Play",
+      "folder": "content/scratch/",
+      "template": "templates/scratch-card/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct",
+          "pre-current-static"
+        ]
+      }
+    },
+    {
+      "key": "stamp-trail",
+      "schema": "upsc-pods/stamp-trail@1",
+      "title": "Stamp trail (process journey)",
+      "family": "Play",
+      "folder": "content/journeys/",
+      "template": "templates/stamp-trail/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "pre-order",
+          "mains-diagram"
+        ]
+      }
+    },
+    {
+      "key": "radio",
+      "schema": "upsc-pods/radio@1",
+      "title": "Chai stall radio",
+      "family": "Listen",
+      "folder": "content/radio/",
+      "template": "templates/radio/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-current-static"
+        ]
+      }
+    },
+    {
+      "key": "assemble",
+      "schema": "upsc-pods/assemble@1",
+      "title": "Snap together (put in order)",
+      "family": "Play",
+      "folder": "content/assemble/",
+      "template": "templates/assemble/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-order"
+        ]
+      }
+    },
+    {
+      "key": "chain",
+      "schema": "upsc-pods/chain@1",
+      "title": "Domino effect (cause and effect)",
+      "family": "Think",
+      "folder": "content/chains/",
+      "template": "templates/chain/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs2",
+          "mains-gs3"
+        ],
+        "formats": [
+          "mains-answer",
+          "mains-diagram"
+        ]
+      }
+    },
+    {
+      "key": "then-now",
+      "schema": "upsc-pods/then-now@1",
+      "title": "Then and now slider",
+      "family": "Explore",
+      "folder": "content/thennow/",
+      "template": "templates/then-now/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs3"
+        ],
+        "formats": [
+          "pre-data"
+        ]
+      }
+    },
+    {
+      "key": "postcard",
+      "schema": "upsc-pods/postcard@1",
+      "title": "Postcard from a place",
+      "family": "Listen",
+      "folder": "content/postcards/",
+      "template": "templates/postcard/",
+      "new": true,
+      "engine": null,
+      "wave": 1,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs1"
+        ],
+        "formats": [
+          "pre-map"
+        ]
+      }
+    },
+    {
+      "key": "trap-spotter",
+      "schema": "upsc-pods/trap-spotter@1",
+      "title": "Trap spotter (MCQ with named traps)",
+      "family": "Play",
+      "folder": "content/trap-spotter/",
+      "template": "templates/trap-spotter/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct",
+          "pre-negative"
+        ]
+      }
+    },
+    {
+      "key": "better-answer",
+      "schema": "upsc-pods/better-answer@1",
+      "title": "Spot the better answer",
+      "family": "Learn",
+      "folder": "content/better-answer/",
+      "template": "templates/better-answer/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-gs2",
+          "mains-gs3",
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "odd-one-out",
+      "schema": "upsc-pods/odd-one-out@1",
+      "title": "Odd one out",
+      "family": "Play",
+      "folder": "content/odd-one-out/",
+      "template": "templates/odd-one-out/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-negative"
+        ]
+      }
+    },
+    {
+      "key": "two-truths",
+      "schema": "upsc-pods/two-truths@1",
+      "title": "Two truths and a lie",
+      "family": "Play",
+      "folder": "content/two-truths/",
+      "template": "templates/two-truths/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-negative",
+          "pre-statement-code"
+        ]
+      }
+    },
+    {
+      "key": "who-am-i",
+      "schema": "upsc-pods/who-am-i@1",
+      "title": "Who am I? (clue by clue)",
+      "family": "Play",
+      "folder": "content/who-am-i/",
+      "template": "templates/who-am-i/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct"
+        ]
+      }
+    },
+    {
+      "key": "assertion-reason",
+      "schema": "upsc-pods/assertion-reason@1",
+      "title": "Assertion and reason",
+      "family": "Play",
+      "folder": "content/assertion-reason/",
+      "template": "templates/assertion-reason/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-statement-i-ii"
+        ]
+      }
+    },
+    {
+      "key": "how-many-correct",
+      "schema": "upsc-pods/how-many-correct@1",
+      "title": "How many of the above?",
+      "family": "Play",
+      "folder": "content/how-many-correct/",
+      "template": "templates/how-many-correct/",
+      "new": true,
+      "engine": "choose",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-how-many-statements"
+        ]
+      }
+    },
+    {
+      "key": "bucket-sort",
+      "schema": "upsc-pods/bucket-sort@1",
+      "title": "Sort into buckets",
+      "family": "Play",
+      "folder": "content/bucket-sort/",
+      "template": "templates/bucket-sort/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-select-items"
+        ]
+      }
+    },
+    {
+      "key": "union-state-list",
+      "schema": "upsc-pods/union-state-list@1",
+      "title": "Union, State or Concurrent?",
+      "family": "Play",
+      "folder": "content/union-state-list/",
+      "template": "templates/union-state-list/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "pre-select-items"
+        ]
+      }
+    },
+    {
+      "key": "fact-or-opinion",
+      "schema": "upsc-pods/fact-or-opinion@1",
+      "title": "Fact or opinion?",
+      "family": "Think",
+      "folder": "content/fact-or-opinion/",
+      "template": "templates/fact-or-opinion/",
+      "new": true,
+      "engine": "sort",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-csat",
+          "mains-gs2"
+        ],
+        "formats": [
+          "csat-rc",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "rank-it",
+      "schema": "upsc-pods/rank-it@1",
+      "title": "Rank it",
+      "family": "Play",
+      "folder": "content/rank-it/",
+      "template": "templates/rank-it/",
+      "new": true,
+      "engine": "order",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-order",
+          "pre-data"
+        ]
+      }
+    },
+    {
+      "key": "timeline-shuffle",
+      "schema": "upsc-pods/timeline-shuffle@1",
+      "title": "Timeline shuffle",
+      "family": "Play",
+      "folder": "content/timeline-shuffle/",
+      "template": "templates/timeline-shuffle/",
+      "new": true,
+      "engine": "order",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-order"
+        ]
+      }
+    },
+    {
+      "key": "pair-up",
+      "schema": "upsc-pods/pair-up@1",
+      "title": "Pair up",
+      "family": "Play",
+      "folder": "content/pair-up/",
+      "template": "templates/pair-up/",
+      "new": true,
+      "engine": "match",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-list-match"
+        ]
+      }
+    },
+    {
+      "key": "committee-match",
+      "schema": "upsc-pods/committee-match@1",
+      "title": "Committee match",
+      "family": "Play",
+      "folder": "content/committee-match/",
+      "template": "templates/committee-match/",
+      "new": true,
+      "engine": "match",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-list-match"
+        ]
+      }
+    },
+    {
+      "key": "flashcards",
+      "schema": "upsc-pods/flashcards@1",
+      "title": "Flashcards",
+      "family": "Revise",
+      "folder": "content/flashcards/",
+      "template": "templates/flashcards/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": []
+      }
+    },
+    {
+      "key": "mnemonic",
+      "schema": "upsc-pods/mnemonic@1",
+      "title": "Mnemonic card",
+      "family": "Revise",
+      "folder": "content/mnemonic/",
+      "template": "templates/mnemonic/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": []
+      }
+    },
+    {
+      "key": "acronym-unpack",
+      "schema": "upsc-pods/acronym-unpack@1",
+      "title": "Acronym unpacker",
+      "family": "Revise",
+      "folder": "content/acronym-unpack/",
+      "template": "templates/acronym-unpack/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct"
+        ]
+      }
+    },
+    {
+      "key": "landmark-case",
+      "schema": "upsc-pods/landmark-case@1",
+      "title": "Landmark case in 60 seconds",
+      "family": "Learn",
+      "folder": "content/landmark-case/",
+      "template": "templates/landmark-case/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "pre-direct",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "scheme-snapshot",
+      "schema": "upsc-pods/scheme-snapshot@1",
+      "title": "Scheme snapshot",
+      "family": "Learn",
+      "folder": "content/scheme-snapshot/",
+      "template": "templates/scheme-snapshot/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2",
+          "mains-gs3"
+        ],
+        "formats": [
+          "pre-current-static"
+        ]
+      }
+    },
+    {
+      "key": "index-card",
+      "schema": "upsc-pods/index-card@1",
+      "title": "Index decoder",
+      "family": "Learn",
+      "folder": "content/index-card/",
+      "template": "templates/index-card/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-data"
+        ]
+      }
+    },
+    {
+      "key": "word-bank",
+      "schema": "upsc-pods/word-bank@1",
+      "title": "Shabd: bilingual terms",
+      "family": "Revise",
+      "folder": "content/word-bank/",
+      "template": "templates/word-bank/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-qualifying",
+          "mains-gs4"
+        ],
+        "formats": [
+          "qual-usage",
+          "qual-translation",
+          "mains-gs4-concepts"
+        ]
+      }
+    },
+    {
+      "key": "directive-word",
+      "schema": "upsc-pods/directive-word@1",
+      "title": "Directive words decoded",
+      "family": "Learn",
+      "folder": "content/directive-word/",
+      "template": "templates/directive-word/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-gs2",
+          "mains-gs3",
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-directive"
+        ]
+      }
+    },
+    {
+      "key": "two-levels",
+      "schema": "upsc-pods/two-levels@1",
+      "title": "Explain it twice",
+      "family": "Learn",
+      "folder": "content/two-levels/",
+      "template": "templates/two-levels/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs3"
+        ],
+        "formats": [
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "story-beats",
+      "schema": "upsc-pods/story-beats@1",
+      "title": "Story in four beats",
+      "family": "Listen",
+      "folder": "content/story-beats/",
+      "template": "templates/story-beats/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-essay"
+        ],
+        "formats": [
+          "mains-essay"
+        ]
+      }
+    },
+    {
+      "key": "ethics-dilemma",
+      "schema": "upsc-pods/ethics-dilemma@1",
+      "title": "Ethics dilemma (GS4)",
+      "family": "Think",
+      "folder": "content/ethics-dilemma/",
+      "template": "templates/ethics-dilemma/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-gs4-case"
+        ]
+      }
+    },
+    {
+      "key": "answer-skeleton",
+      "schema": "upsc-pods/answer-skeleton@1",
+      "title": "Answer skeleton",
+      "family": "Practise",
+      "folder": "content/answer-skeleton/",
+      "template": "templates/answer-skeleton/",
+      "new": true,
+      "engine": "steps",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-gs2",
+          "mains-gs3"
+        ],
+        "formats": [
+          "mains-answer",
+          "mains-directive"
+        ]
+      }
+    },
+    {
+      "key": "versus",
+      "schema": "upsc-pods/versus@1",
+      "title": "Versus (X vs Y)",
+      "family": "Learn",
+      "folder": "content/versus/",
+      "template": "templates/versus/",
+      "new": true,
+      "engine": "compare",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "pre-statement-code",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "before-after",
+      "schema": "upsc-pods/before-after@1",
+      "title": "Before and after",
+      "family": "Learn",
+      "folder": "content/before-after/",
+      "template": "templates/before-after/",
+      "new": true,
+      "engine": "compare",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "pre-direct",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "link-web",
+      "schema": "upsc-pods/link-web@1",
+      "title": "Link web",
+      "family": "Think",
+      "folder": "content/link-web/",
+      "template": "templates/link-web/",
+      "new": true,
+      "engine": "hub",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-gs3",
+          "mains-essay"
+        ],
+        "formats": [
+          "mains-answer",
+          "mains-essay"
+        ]
+      }
+    },
+    {
+      "key": "fill-the-gap",
+      "schema": "upsc-pods/fill-the-gap@1",
+      "title": "Fill the gap",
+      "family": "Revise",
+      "folder": "content/fill-the-gap/",
+      "template": "templates/fill-the-gap/",
+      "new": true,
+      "engine": "cloze",
+      "wave": 2,
+      "tags": {
+        "stage": [
+          "prelims",
+          "revision"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct"
+        ]
+      }
+    },
+    {
+      "key": "story-spine",
+      "schema": "upsc-pods/story-spine@1",
+      "title": "Story spine (Essay and GS4)",
+      "family": "Practise",
+      "folder": "content/story-spine/",
+      "template": "templates/story-spine/",
+      "new": true,
+      "engine": "steps",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-essay",
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-essay",
+          "qual-essay"
+        ]
+      }
+    },
+    {
+      "key": "kautilya-lens",
+      "schema": "upsc-pods/kautilya-lens@1",
+      "title": "Kautilya lens",
+      "family": "Learn",
+      "folder": "content/kautilya-lens/",
+      "template": "templates/kautilya-lens/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs4",
+          "mains-gs2",
+          "mains-essay"
+        ],
+        "formats": [
+          "mains-gs4-concepts",
+          "mains-gs4-quote"
+        ]
+      }
+    },
+    {
+      "key": "should-i-guess",
+      "schema": "upsc-pods/should-i-guess@1",
+      "title": "Should I guess? (negative marking)",
+      "family": "Practise",
+      "folder": "content/should-i-guess/",
+      "template": "templates/should-i-guess/",
+      "new": true,
+      "engine": "choose",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct"
+        ]
+      }
+    },
+    {
+      "key": "repeater-journey",
+      "schema": "upsc-pods/repeater-journey@1",
+      "title": "Repeater story (decisions, not outcomes)",
+      "family": "Listen",
+      "folder": "content/repeater-journey/",
+      "template": "templates/repeater-journey/",
+      "new": true,
+      "engine": "steps",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "strategy-corner",
+      "schema": "upsc-pods/strategy-corner@1",
+      "title": "Strategy corner (monthly)",
+      "family": "Think",
+      "folder": "content/strategy-corner/",
+      "template": "templates/strategy-corner/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "book-chai",
+      "schema": "upsc-pods/book-chai@1",
+      "title": "Book Chai (weekly)",
+      "family": "Read",
+      "folder": "content/book-chai/",
+      "template": "templates/book-chai/",
+      "new": true,
+      "engine": "choose",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "narrated-classic",
+      "schema": "upsc-pods/narrated-classic@1",
+      "title": "Narrated classic (two minutes)",
+      "family": "Listen",
+      "folder": "content/narrated-classic/",
+      "template": "templates/narrated-classic/",
+      "new": true,
+      "engine": "steps",
+      "wave": 3,
+      "tags": {
+        "stage": [
+          "revision"
+        ],
+        "papers": [
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-gs4-concepts"
+        ]
+      }
+    },
+    {
+      "key": "statement-code",
+      "schema": "upsc-pods/statement-code@1",
+      "title": "Statements with codes",
+      "family": "Play",
+      "folder": "content/statement-code/",
+      "template": "templates/statement-code/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-statement-code",
+          "pre-select-items"
+        ]
+      }
+    },
+    {
+      "key": "pairs-count",
+      "schema": "upsc-pods/pairs-count@1",
+      "title": "How many pairs are correctly matched?",
+      "family": "Play",
+      "folder": "content/pairs-count/",
+      "template": "templates/pairs-count/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-how-many-pairs"
+        ]
+      }
+    },
+    {
+      "key": "three-statements",
+      "schema": "upsc-pods/three-statements@1",
+      "title": "Statement I, II and III",
+      "family": "Play",
+      "folder": "content/three-statements/",
+      "template": "templates/three-statements/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-statement-i-ii-iii"
+        ]
+      }
+    },
+    {
+      "key": "list-match",
+      "schema": "upsc-pods/list-match@1",
+      "title": "Match List I with List II",
+      "family": "Play",
+      "folder": "content/list-match/",
+      "template": "templates/list-match/",
+      "new": true,
+      "engine": "match",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-list-match"
+        ]
+      }
+    },
+    {
+      "key": "csat-passage",
+      "schema": "upsc-pods/csat-passage@1",
+      "title": "Reading comprehension (CSAT)",
+      "family": "Practise",
+      "folder": "content/csat-passage/",
+      "template": "templates/csat-passage/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims",
+          "mains"
+        ],
+        "papers": [
+          "prelims-csat",
+          "mains-qualifying"
+        ],
+        "formats": [
+          "csat-rc",
+          "qual-comprehension"
+        ]
+      }
+    },
+    {
+      "key": "csat-quant",
+      "schema": "upsc-pods/csat-quant@1",
+      "title": "Basic numeracy (CSAT)",
+      "family": "Practise",
+      "folder": "content/csat-quant/",
+      "template": "templates/csat-quant/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-csat"
+        ],
+        "formats": [
+          "csat-quant"
+        ]
+      }
+    },
+    {
+      "key": "csat-reasoning",
+      "schema": "upsc-pods/csat-reasoning@1",
+      "title": "Logical reasoning (CSAT)",
+      "family": "Practise",
+      "folder": "content/csat-reasoning/",
+      "template": "templates/csat-reasoning/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-csat"
+        ],
+        "formats": [
+          "csat-reasoning"
+        ]
+      }
+    },
+    {
+      "key": "data-interpretation",
+      "schema": "upsc-pods/data-interpretation@1",
+      "title": "Data interpretation",
+      "family": "Practise",
+      "folder": "content/data-interpretation/",
+      "template": "templates/data-interpretation/",
+      "new": true,
+      "engine": "choose",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-csat",
+          "prelims-gs1"
+        ],
+        "formats": [
+          "csat-data",
+          "pre-data"
+        ]
+      }
+    },
+    {
+      "key": "answer-diagram",
+      "schema": "upsc-pods/answer-diagram@1",
+      "title": "Draw it in the answer",
+      "family": "Practise",
+      "folder": "content/answer-diagram/",
+      "template": "templates/answer-diagram/",
+      "new": true,
+      "engine": "steps",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs1",
+          "mains-gs2",
+          "mains-gs3"
+        ],
+        "formats": [
+          "mains-diagram",
+          "mains-answer"
+        ]
+      }
+    },
+    {
+      "key": "quote-meaning",
+      "schema": "upsc-pods/quote-meaning@1",
+      "title": "What does this quote mean to you? (GS4)",
+      "family": "Practise",
+      "folder": "content/quote-meaning/",
+      "template": "templates/quote-meaning/",
+      "new": true,
+      "engine": "steps",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-gs4-quote"
+        ]
+      }
+    },
+    {
+      "key": "case-study",
+      "schema": "upsc-pods/case-study@1",
+      "title": "GS4 case study",
+      "family": "Practise",
+      "folder": "content/case-study/",
+      "template": "templates/case-study/",
+      "new": true,
+      "engine": "steps",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs4"
+        ],
+        "formats": [
+          "mains-gs4-case"
+        ]
+      }
+    },
+    {
+      "key": "essay-planner",
+      "schema": "upsc-pods/essay-planner@1",
+      "title": "Essay planner",
+      "family": "Practise",
+      "folder": "content/essay-planner/",
+      "template": "templates/essay-planner/",
+      "new": true,
+      "engine": "steps",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-essay",
+          "mains-qualifying"
+        ],
+        "formats": [
+          "mains-essay",
+          "qual-essay"
+        ]
+      }
+    },
+    {
+      "key": "precis",
+      "schema": "upsc-pods/precis@1",
+      "title": "Précis (qualifying paper)",
+      "family": "Practise",
+      "folder": "content/precis/",
+      "template": "templates/precis/",
+      "new": true,
+      "engine": "steps",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-qualifying"
+        ],
+        "formats": [
+          "qual-precis"
+        ]
+      }
+    },
+    {
+      "key": "translate-it",
+      "schema": "upsc-pods/translate-it@1",
+      "title": "Translate it (Paper A)",
+      "family": "Practise",
+      "folder": "content/translate-it/",
+      "template": "templates/translate-it/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-qualifying"
+        ],
+        "formats": [
+          "qual-translation"
+        ]
+      }
+    },
+    {
+      "key": "usage-fix",
+      "schema": "upsc-pods/usage-fix@1",
+      "title": "Fix the sentence (Paper B)",
+      "family": "Practise",
+      "folder": "content/usage-fix/",
+      "template": "templates/usage-fix/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 4,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-qualifying"
+        ],
+        "formats": [
+          "qual-usage"
+        ]
+      }
+    },
+    {
+      "key": "thinker-lens",
+      "schema": "upsc-pods/thinker-lens@1",
+      "title": "Thinker lens (GS4 and Essay)",
+      "family": "Learn",
+      "folder": "content/thinker-lens/",
+      "template": "templates/thinker-lens/",
+      "new": true,
+      "engine": "reveal",
+      "wave": 5,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "mains-gs4",
+          "mains-essay",
+          "mains-gs2"
+        ],
+        "formats": [
+          "mains-gs4-quote",
+          "mains-gs4-concepts",
+          "mains-essay"
+        ]
+      }
+    },
+    {
+      "key": "routine-card",
+      "schema": "upsc-pods/routine-card@1",
+      "title": "How they worked (routine library)",
+      "family": "Think",
+      "folder": "content/routine-card/",
+      "template": "templates/routine-card/",
+      "new": true,
+      "engine": "steps",
+      "wave": 5,
+      "tags": {
+        "stage": [
+          "wellbeing"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "calm-script",
+      "schema": "upsc-pods/calm-script@1",
+      "title": "Calm now (breathing and grounding)",
+      "family": "Calm",
+      "folder": "content/calm-script/",
+      "template": "templates/calm-script/",
+      "new": true,
+      "engine": "steps",
+      "wave": 5,
+      "tags": {
+        "stage": [
+          "wellbeing"
+        ],
+        "papers": [],
+        "formats": []
+      }
+    },
+    {
+      "key": "long-read",
+      "schema": "upsc-pods/long-read@1",
+      "title": "Long read (one topic in depth)",
+      "family": "Learn",
+      "folder": "content/long-read/",
+      "template": "templates/long-read/",
+      "new": true,
+      "engine": "steps",
+      "wave": 6,
+      "tags": {
+        "stage": [
+          "revision",
+          "mains"
+        ],
+        "papers": [
+          "prelims-gs1",
+          "mains-gs2"
+        ],
+        "formats": [
+          "mains-answer",
+          "mains-both-sides",
+          "pre-current-static"
+        ]
+      }
+    },
+    {
+      "key": "mock-paper",
+      "schema": "upsc-pods/mock-paper@1",
+      "title": "Mock paper (sectional, Prelims)",
+      "family": "Practice",
+      "folder": "content/mock-paper/",
+      "template": "templates/mock-paper/",
+      "new": true,
+      "engine": "choose",
+      "wave": 6,
+      "tags": {
+        "stage": [
+          "prelims"
+        ],
+        "papers": [
+          "prelims-gs1"
+        ],
+        "formats": [
+          "pre-direct",
+          "pre-negative",
+          "pre-statement-code",
+          "pre-select-items",
+          "pre-how-many-statements",
+          "pre-how-many-pairs",
+          "pre-statement-i-ii",
+          "pre-statement-i-ii-iii",
+          "pre-list-match"
+        ]
+      }
+    },
+    {
+      "key": "hidden-why",
+      "schema": "upsc-pods/hidden-why@1",
+      "title": "The Hidden Why",
+      "family": "Watch",
+      "folder": "content/hidden-why/",
+      "template": "templates/hidden-why/",
+      "new": true,
+      "engine": "picture",
+      "wave": 7,
+      "tags": {
+        "stage": [
+          "mains"
+        ],
+        "papers": [
+          "interview",
+          "mains-gs2",
+          "mains-gs4",
+          "mains-essay"
+        ],
+        "formats": [
+          "interview-talk",
+          "mains-answer"
+        ]
+      }
+    }
+  ],
+  "engines": {
+    "choose": {
+      "title": "Choose",
+      "sfx": "Tick on a pick, a santoor chime when right, a soft nudge (never a buzzer) when wrong.",
+      "motion": "The picked option settles in 150 ms; the explanation rises in 200 ms."
+    },
+    "sort": {
+      "title": "Sort into buckets",
+      "sfx": "A whoosh as a card flies to its bucket, a snap when it lands, a nudge if it bounces back.",
+      "motion": "Cards fly to the bucket in 300 ms; a wrong one bounces back with a 400 ms wobble."
+    },
+    "order": {
+      "title": "Put in order",
+      "sfx": "Tap to pick, a wooden snap as each tile locks, a chime when the line is complete.",
+      "motion": "Tiles spring into slots (300 ms, slight overshoot); values count up as each locks."
+    },
+    "match": {
+      "title": "Match pairs",
+      "sfx": "Tick on a match, a nudge on a miss.",
+      "motion": "Matched pairs slide together and fade to the done colour in 250 ms."
+    },
+    "reveal": {
+      "title": "Flip and reveal",
+      "sfx": "A page turn on each flip; a chime on the last card.",
+      "motion": "Cards flip in 400 ms (a swap with reduced motion); lines on the back appear one by one."
+    },
+    "steps": {
+      "title": "Step through",
+      "sfx": "A page turn per beat; an optional soundscape under stories; a chime at the end.",
+      "motion": "Each beat slides in from the right in 300 ms; choices fold open in 200 ms."
+    },
+    "compare": {
+      "title": "Side by side",
+      "sfx": "A tick as each row opens.",
+      "motion": "Rows slide in from both sides and meet in the middle in 250 ms."
+    },
+    "hub": {
+      "title": "Link web",
+      "sfx": "A tick per spoke; a chime when all are open.",
+      "motion": "Spokes draw out from the centre in 300 ms when tapped."
+    },
+    "cloze": {
+      "title": "Fill the gap",
+      "sfx": "A snap when a word drops into a gap, a nudge if it doesn't fit.",
+      "motion": "Words fly into gaps in 250 ms; a wrong one shakes and returns."
+    },
+    "picture": {
+      "title": "Picture story",
+      "sfx": "A page turn per frame, a santoor chime on the frame that names the idea.",
+      "motion": "The camera pans across one illustration to each frame's focus point in 1.3 s; with motion off, each frame is a still crop."
+    }
+  },
+  "references": [
+    {
+      "key": "quote-bank",
+      "schema": "upsc-pods/quote-bank@1",
+      "file": "content/quotes/quotes.json",
+      "template": "templates/quote-bank/",
+      "note": "Edited by people only"
+    }
+  ]
+}

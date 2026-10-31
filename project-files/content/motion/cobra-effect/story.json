@@ -1,0 +1,26 @@
+{
+  "schema": "upsc-pods/motion@1",
+  "id": "cobra-effect",
+  "from": "hidden-why/cobra-effect-hanoi-rats.json",
+  "lang": "en",
+  "format": { "w": 1080, "h": 1920, "fps": 30 },
+  "voice": { "provider": "elevenlabs", "voiceId": "X4kfNEZPfKkHBnN2KBJR", "model": "eleven_multilingual_v2", "settings": { "stability": 0.5, "similarity_boost": 0.8, "style": 0.25, "speed": 0.95 } },
+  "music": { "bed": "audio/bed.m4a", "gain": 0.32, "duck": true, "end": "audio/motif.m4a" },
+  "display": { "nineteen-oh-two.": "1902.", "G-S-two,": "GS2,", "G-S-four,": "GS4,", "pods.": "Pods." },
+  "beats": [
+    { "shot": "hook", "say": "Pay people to kill rats... and you can end up with more rats.",
+      "data": { "lines": ["Pay for dead rats.", "Get more rats."], "accent": "more" } },
+    { "shot": "pin", "say": "Hanoi, nineteen-oh-two. Fearing plague, the French rulers paid a bounty for every rat killed.",
+      "data": { "place": "Hanoi", "year": "1902", "chips": [{ "at": "plague", "text": "Plague scare" }, { "at": "bounty", "text": "1 rat = 1 cent" }] } },
+    { "shot": "exchange", "say": "The proof they asked for? Just bring in the tail.",
+      "data": { "give": "tail", "office": "Bounty office", "at": "tail." } },
+    { "shot": "run", "say": "Soon, rats without tails were running all over the city.",
+      "data": { "label": "No tails", "at": "without" } },
+    { "shot": "multiply", "say": "People cut off the tails, let the rats go... and some even started farming them.",
+      "data": { "counterLabel": "rats", "fenceAt": "farming" } },
+    { "shot": "named", "say": "Economists call this the Cobra Effect. A scheme gets what it pays for, not what it hopes for.",
+      "data": { "name": "Cobra Effect", "kicker": "The idea", "line": ["A scheme gets", "what it pays for,", "not what it hopes for."], "at": "Cobra" } },
+    { "shot": "outro", "say": "Use it in G-S-two, G-S-four, and your essay. More hidden whys, on UPSC pods.",
+      "data": { "chips": ["GS2 · scheme design", "GS4 · incentives", "Essay · unintended effects"], "brand": "UPSC Pods", "series": "The Hidden Why" } }
+  ]
+}

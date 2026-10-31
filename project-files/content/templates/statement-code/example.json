@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-code",
+      "pre-select-items"
+    ]
+  },
+  "id": "fundamental-duties-statements",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Fundamental Duties: judge the statements",
+    "hi": "मौलिक कर्तव्य: कथनों को परखें"
+  },
+  "kind": "statements",
+  "truth": [
+    true,
+    false,
+    true,
+    false
+  ],
+  "en": {
+    "stem": "With reference to the Fundamental Duties, consider the following statements:",
+    "statements": [
+      "Fundamental Duties are in Article 51A, in Part IVA of the Constitution.",
+      "The original Constitution had Fundamental Duties from the start.",
+      "The 86th Amendment Act, 2002 added an eleventh duty about the education of children aged six to fourteen.",
+      "Fundamental Duties can be directly enforced in a court of law."
+    ],
+    "why": "Statements 1 and 3 are right. Statement 2 is wrong: the 42nd Amendment Act, 1976 added Fundamental Duties; the original Constitution had none. Statement 4 is wrong: courts cannot enforce them directly, though Parliament can make laws to enforce them."
+  },
+  "hi": {
+    "stem": "मौलिक कर्तव्यों के संदर्भ में निम्नलिखित कथनों पर विचार कीजिए:",
+    "statements": [
+      "मौलिक कर्तव्य संविधान के भाग IVA में, अनुच्छेद 51A में हैं।",
+      "मूल संविधान में मौलिक कर्तव्य शुरू से ही थे।",
+      "86वें संशोधन अधिनियम, 2002 ने 6 से 14 वर्ष की आयु के बच्चों की शिक्षा के बारे में एक ग्यारहवाँ कर्तव्य जोड़ा।",
+      "मौलिक कर्तव्यों को किसी न्यायालय में सीधे लागू किया जा सकता है।"
+    ],
+    "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: मौलिक कर्तव्य 42वें संशोधन अधिनियम, 1976 ने जोड़े; मूल संविधान में कोई नहीं था। कथन 4 गलत है: न्यायालय इन्हें सीधे लागू नहीं कर सकता, पर संसद इन्हें लागू करने के लिए कानून बना सकती है।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/statement-code@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "options": {
+    "en": [
+      "1 only",
+      "3 only",
+      "1 and 3 only",
+      "1, 2 and 3 only"
+    ],
+    "hi": [
+      "केवल 1",
+      "केवल 3",
+      "केवल 1 और 3",
+      "केवल 1, 2 और 3"
+    ]
+  },
+  "answer": 2,
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/statement-code/",
+    "createdOn": "2026-10-10"
+  }
+}

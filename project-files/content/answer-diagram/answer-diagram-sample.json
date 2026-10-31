@@ -1,0 +1,79 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/tick",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs1",
+      "mains-gs2",
+      "mains-gs3"
+    ],
+    "formats": [
+      "mains-diagram",
+      "mains-answer"
+    ]
+  },
+  "id": "money-bill-passage",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How a Money Bill passes Parliament",
+    "hi": "धन विधेयक संसद से कैसे पारित होता है"
+  },
+  "paper": "GS2",
+  "diagram": "flowchart",
+  "en": {
+    "question": "How does a Money Bill pass Parliament, and how does the role of each House differ?",
+    "nodes": [
+      "Introduced in Lok Sabha only (President's recommendation)",
+      "Speaker certifies Money Bill; decision is final",
+      "Lok Sabha passes; sent to Rajya Sabha",
+      "Rajya Sabha cannot reject or amend",
+      "Recommendations only; return within 14 days",
+      "Lok Sabha accepts or rejects recommendations",
+      "Not returned in 14 days: deemed passed",
+      "President gives or withholds assent; no reconsideration"
+    ],
+    "caption": "How a Money Bill moves from introduction to President's assent.",
+    "why": "A flowchart fits this process-based answer. Place it in the body, after the introduction; it saves a long paragraph on each step."
+  },
+  "hi": {
+    "question": "किसी धन विधेयक के संसद से पारित होने की प्रक्रिया को चरणबद्ध रूप से कैसे समझा जाए, और लोकसभा तथा राज्यसभा की भूमिका कैसी है?",
+    "nodes": [
+      "केवल लोकसभा में पेश (राष्ट्रपति की सिफारिश पर)",
+      "अध्यक्ष प्रमाणित करते हैं: धन विधेयक; निर्णय अंतिम",
+      "लोकसभा पारित; राज्यसभा को भेजा जाता है",
+      "राज्यसभा इसे अस्वीकार या संशोधित नहीं कर सकती",
+      "केवल सिफारिशें; 14 दिनों के भीतर लौटाना अनिवार्य",
+      "लोकसभा सिफारिशें स्वीकार या अस्वीकार कर सकती है",
+      "14 दिनों में न लौटे तो विधेयक पारित माना",
+      "राष्ट्रपति की अनुमति दें या रोकें; पुनर्विचार नहीं"
+    ],
+    "caption": "धन विधेयक के पारित होने का क्रम: पेश होने से राष्ट्रपति की अनुमति तक",
+    "why": "यह प्रक्रिया चरणों में चलती है, इसलिए फ्लोचार्ट उपयुक्त है। इसे उत्तर के मुख्य भाग में, भूमिका के बाद रखें; इससे हर चरण पर लंबा अनुच्छेद लिखने की ज़रूरत नहीं पड़ती।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/answer-diagram@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/answer-diagram/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "letter": "sfx/tick",
+    "done": "sfx/chime"
+  },
+  "id": "five-writs-mnemonic",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five writs: He Must Pay Customs Quickly",
+    "hi": "पाँच रिट याद रखने का सूत्र"
+  },
+  "mnemonic": {
+    "en": "He Must Pay Customs Quickly",
+    "hi": "He Must Pay Customs Quickly"
+  },
+  "for": {
+    "en": "The five writs, in order",
+    "hi": "पाँच रिट, इसी क्रम में"
+  },
+  "letters": [
+    {
+      "en": {
+        "key": "H",
+        "stands": "Habeas corpus: produce detainee before court"
+      },
+      "hi": {
+        "key": "H",
+        "stands": "बंदी प्रत्यक्षीकरण: बंदी को अदालत में पेश करवाना"
+      }
+    },
+    {
+      "en": {
+        "key": "M",
+        "stands": "Mandamus: command official to do duty"
+      },
+      "hi": {
+        "key": "M",
+        "stands": "परमादेश: लोक अधिकारी को कर्तव्य निभाने का आदेश"
+      }
+    },
+    {
+      "en": {
+        "key": "P",
+        "stands": "Prohibition: stop lower court exceeding powers"
+      },
+      "hi": {
+        "key": "P",
+        "stands": "प्रतिषेध: निचली अदालत को अधिकार-सीमा से रोकना"
+      }
+    },
+    {
+      "en": {
+        "key": "C",
+        "stands": "Certiorari: quash an order already passed"
+      },
+      "hi": {
+        "key": "C",
+        "stands": "उत्प्रेषण: निचली अदालत का पारित आदेश रद्द करना"
+      }
+    },
+    {
+      "en": {
+        "key": "Q",
+        "stands": "Quo warranto: ask by what authority"
+      },
+      "hi": {
+        "key": "Q",
+        "stands": "अधिकार-पृच्छा: कोई सार्वजनिक पद किस अधिकार से"
+      }
+    }
+  ],
+  "note": {
+    "en": "The Supreme Court issues writs under Article 32 and High Courts under Article 226.",
+    "hi": "सर्वोच्च न्यायालय अनुच्छेद 32 के तहत और उच्च न्यायालय अनुच्छेद 226 के तहत रिट जारी करते हैं।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/mnemonic@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/mnemonic/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": []
+  }
+}

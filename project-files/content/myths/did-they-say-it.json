@@ -1,0 +1,104 @@
+{
+  "verdictLabels": {
+    "en": {
+      "MYTH": "MYTH",
+      "FACT": "FACT",
+      "HALF": "HALF-TRUE"
+    },
+    "hi": {
+      "MYTH": "झूठ",
+      "FACT": "सच",
+      "HALF": "आधा सच"
+    }
+  },
+  "rules": [
+    "User guesses before the stamp shows",
+    "Never mock the person who forwarded the claim"
+  ],
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-code"
+    ]
+  },
+  "id": "buddha-vivekananda-kalam-myths",
+  "claims": [
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "Holding on to anger is like grasping a hot coal to throw at someone, said the Buddha.",
+        "correction": "This is not in the Pali Canon, the early record of the Buddha's teaching. It is a modern rewording, loosely based on an image in a later commentary. The Dhammapada does open with the idea that the mind comes first and shapes experience."
+      },
+      "hi": {
+        "claim": "बुद्ध ने कहा, 'गुस्से को पकड़े रहना जलता कोयला किसी और पर फेंकने के लिए उठाने जैसा है।'",
+        "correction": "यह पाली कैनन में नहीं है, जो बुद्ध की शिक्षाओं का प्राचीनतम रिकॉर्ड है। यह आधुनिक रूपांतरण है, जो एक बाद की टीका के एक चित्र पर आधारित है। धम्मपद यह विचार देता है कि मन पहले आता है और अनुभव को आकार देता है।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "Vivekananda said, 'Arise, awake, and stop not till the goal is reached.'",
+        "correction": "Right. It is his adaptation of a verse of the Katha Upanishad (1.3.14). It appears in his lectures, collected in The Complete Works of Swami Vivekananda, published by Advaita Ashrama."
+      },
+      "hi": {
+        "claim": "स्वामी विवेकानंद ने कहा, 'उठो, जागो, और तब तक मत रुको जब तक लक्ष्य प्राप्त न हो।'",
+        "correction": "सही है। यह कथन कठ उपनिषद (1.3.14) के एक श्लोक का उनका रूपांतरण है। यह उनके व्याख्यानों में मिलता है, जो Advaita Ashrama द्वारा प्रकाशित The Complete Works of Swami Vivekananda में संकलित हैं।"
+      }
+    },
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "Kalam's 1999 book Wings of Fire was written by him alone.",
+        "correction": "Wings of Fire (1999) was written with Arun Tiwari. Kalam's books include Ignited Minds (2002) too. Many lines on posters credited to him cannot be traced to his books or speeches."
+      },
+      "hi": {
+        "claim": "कलाम की 1999 की किताब 'Wings of Fire' उन्होंने अकेले लिखी थी।",
+        "correction": "नहीं। Wings of Fire (1999) अरुण तिवारी के साथ लिखी गई थी। कलाम की एक और पुस्तक Ignited Minds (2002) है। पोस्टरों पर लिखे कई कथन उनकी पुस्तकों या भाषणों में नहीं मिलते।"
+      }
+    },
+    {
+      "verdict": "HALF",
+      "en": {
+        "claim": "Kalam led the SLV-3 project, and its first launch in 1979 succeeded.",
+        "correction": "Half right. Kalam did lead the SLV-3 project. But the first launch, in 1979, failed. A successful launch followed in 1980."
+      },
+      "hi": {
+        "claim": "कलाम ने SLV-3 परियोजना का नेतृत्व किया, और इसका पहला प्रक्षेपण 1979 में सफल रहा।",
+        "correction": "आधा सही है। कलाम ने SLV-3 परियोजना का नेतृत्व किया था। लेकिन 1979 में पहला प्रक्षेपण विफल रहा। इसके बाद 1980 में सफल प्रक्षेपण हुआ।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "After the failed 1979 SLV-3 launch, Satish Dhawan faced the press and took responsibility.",
+        "correction": "Right. Kalam often told this story. Satish Dhawan, then ISRO chairman, faced the press himself after the failed 1979 launch. After the successful launch in 1980, he asked Kalam to speak to the press."
+      },
+      "hi": {
+        "claim": "1979 के असफल SLV-3 प्रक्षेपण के बाद सतीश धवन ने खुद प्रेस का सामना किया और ज़िम्मेदारी ली।",
+        "correction": "सही है। कलाम अक्सर यह किस्सा सुनाते थे। तत्कालीन ISRO अध्यक्ष सतीश धवन ने असफल प्रक्षेपण के बाद खुद प्रेस का सामना किया। 1980 की सफलता के बाद उन्होंने कलाम से प्रेस से बात करने को कहा।"
+      }
+    }
+  ],
+  "source": {
+    "en": "Pali Canon; Vivekananda's Complete Works; Kalam's books",
+    "hi": "पाली कैनन; विवेकानंद के Complete Works; कलाम की पुस्तकें"
+  },
+  "schema": "upsc-pods/myth-card@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/myth-card/",
+    "createdOn": "2026-10-11"
+  }
+}

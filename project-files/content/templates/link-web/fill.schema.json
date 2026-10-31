@@ -1,0 +1,168 @@
+{
+  "title": "Link web",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "center",
+        "spokes",
+        "question"
+      ],
+      "properties": {
+        "center": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 4
+        },
+        "spokes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "link"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 4
+              },
+              "link": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 6
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 18,
+          "description": "A Mains-style question the web prepares you for"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "center",
+        "spokes",
+        "question"
+      ],
+      "properties": {
+        "center": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 6
+        },
+        "spokes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "link"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6
+              },
+              "link": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 27
+              }
+            }
+          },
+          "minItems": 4,
+          "maxItems": 6
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 25,
+          "description": "A Mains-style question the web prepares you for"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/link-web@1"
+}

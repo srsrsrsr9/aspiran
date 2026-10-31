@@ -1,0 +1,116 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "preamble-statement-by-statement",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Preamble, statement by statement",
+    "hi": "प्रस्तावना, कथन दर कथन"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "How many of these statements about the Preamble are correct?",
+        "statements": [
+          "The Preamble opens with \"We, the people of India\".",
+          "The Preamble has been amended only once, by the 42nd Amendment Act, 1976.",
+          "The Preamble is enforceable in a court of law.",
+          "The Constituent Assembly adopted the Objectives Resolution on 26 November 1949."
+        ],
+        "why": "Statement 3 is wrong: the Preamble is not enforceable in court, though courts use it to interpret unclear text. Statement 4 is wrong: the Objectives Resolution was adopted on 22 January 1947."
+      },
+      "hi": {
+        "stem": "प्रस्तावना के बारे में इनमें से कितने कथन सही हैं?",
+        "statements": [
+          "प्रस्तावना की शुरुआत \"हम, भारत के लोग\" से होती है।",
+          "प्रस्तावना में केवल एक बार संशोधन हुआ है, 42वें संशोधन अधिनियम, 1976 द्वारा।",
+          "प्रस्तावना न्यायालय में लागू कराई जा सकती है।",
+          "संविधान सभा ने उद्देश्य संकल्प 26 नवंबर 1949 को अपनाया।"
+        ],
+        "why": "देखिए, तीसरा कथन गलत है। प्रस्तावना अदालत में लागू नहीं कराई जा सकती, पर अदालतें अस्पष्ट शब्दों का अर्थ समझने के लिए इसका इस्तेमाल करती हैं। चौथा कथन गलत है। उद्देश्य संकल्प 22 जनवरी 1947 को अपनाया गया था।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "How many of these statements about the Preamble's history and status are correct?",
+        "statements": [
+          "In the Berubari Union case (1960), the Supreme Court said the Preamble is not a part of the Constitution.",
+          "In the Kesavananda Bharati case (1973), the Supreme Court held that the Preamble is not a part of the Constitution.",
+          "The 42nd Amendment Act, 1976 added the words \"Socialist\", \"Secular\" and \"Integrity\" to the Preamble."
+        ],
+        "why": "Statement 2 is wrong: in the Kesavananda Bharati case (1973), the Supreme Court held that the Preamble is a part of the Constitution."
+      },
+      "hi": {
+        "stem": "प्रस्तावना के इतिहास और दर्जे के बारे में इनमें से कितने कथन सही हैं?",
+        "statements": [
+          "बेरुबाड़ी संघ मामले (1960) में सर्वोच्च न्यायालय ने कहा कि प्रस्तावना संविधान का हिस्सा नहीं है।",
+          "केशवानंद भारती मामले (1973) में सर्वोच्च न्यायालय ने माना कि प्रस्तावना संविधान का हिस्सा नहीं है।",
+          "42वें संशोधन अधिनियम, 1976 ने प्रस्तावना में \"Socialist\" (समाजवादी), \"Secular\" (पंथनिरपेक्ष) और \"Integrity\" (अखंडता) शब्द जोड़े।"
+        ],
+        "why": "देखिए, दूसरा कथन गलत है। केशवानंद भारती मामले (1973) में सर्वोच्च न्यायालय ने कहा कि प्रस्तावना संविधान का हिस्सा है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/how-many-correct/",
+    "createdOn": "2026-10-11"
+  }
+}

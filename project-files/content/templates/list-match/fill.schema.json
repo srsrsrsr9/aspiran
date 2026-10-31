@@ -1,0 +1,178 @@
+{
+  "title": "Match List I with List II",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "pairs",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "a",
+              "b"
+            ],
+            "properties": {
+              "a": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6,
+                "description": "List I item"
+              },
+              "b": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 8,
+                "description": "Its match in List II"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "a",
+              "b"
+            ],
+            "properties": {
+              "a": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 9,
+                "description": "List I item"
+              },
+              "b": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 11,
+                "description": "Its match in List II"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "listI",
+        "listII"
+      ],
+      "properties": {
+        "listI": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 4,
+          "description": "What List I holds, e.g. River"
+        },
+        "listII": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 4,
+          "description": "What List II holds, e.g. Origin"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "listI",
+        "listII"
+      ],
+      "properties": {
+        "listI": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 6,
+          "description": "What List I holds, e.g. River"
+        },
+        "listII": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 6,
+          "description": "What List II holds, e.g. Origin"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/list-match@1"
+}

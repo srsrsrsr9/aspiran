@@ -1,0 +1,139 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "done": null
+  },
+  "support": {
+    "en": "These exercises are not a substitute for help. If you feel unsafe or overwhelmed, call Tele-MANAS on 14416, free, at any hour.",
+    "hi": "ये अभ्यास मदद की जगह नहीं लेते। अगर आप असुरक्षित या बहुत परेशान महसूस करें, तो Tele-MANAS को 14416 पर कॉल करें, मुफ़्त, किसी भी समय।",
+    "verify": "Check the helpline number and wording with the safety lead before launch."
+  },
+  "bed": {
+    "default": "none",
+    "options": [
+      "none",
+      "calm-tones-6hz",
+      "calm-tones-4hz",
+      "pink-noise",
+      "rain"
+    ],
+    "note": "Calm tones need headphones; the app says so and keeps the volume low. Never claim they change brainwaves."
+  },
+  "narrator": {
+    "en": null,
+    "hi": null
+  },
+  "audio": {
+    "en": null,
+    "hi": null
+  },
+  "tags": {
+    "stage": [
+      "wellbeing"
+    ],
+    "papers": [],
+    "formats": []
+  },
+  "id": "calm-grounding-5-4-3-2-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five, four, three, two, one",
+    "hi": "पाँच, चार, तीन, दो, एक"
+  },
+  "kind": "grounding",
+  "minutes": 3,
+  "pace": null,
+  "beats": [
+    {
+      "seconds": 15,
+      "en": {
+        "say": "Sit comfortably. Let your eyes rest on the room around you."
+      },
+      "hi": {
+        "say": "आराम से बैठिए। अगर अच्छा लगे, तो अपनी नज़र आसपास के कमरे पर टिका दीजिए।"
+      }
+    },
+    {
+      "seconds": 30,
+      "en": {
+        "say": "Notice five things you can see."
+      },
+      "hi": {
+        "say": "अब पाँच चीज़ें देखिए जो आपको दिख रही हैं। उन्हें धीरे-धीरे मन में गिनिए।"
+      }
+    },
+    {
+      "seconds": 30,
+      "en": {
+        "say": "Notice four things you can feel or touch, like your chair or the floor."
+      },
+      "hi": {
+        "say": "अब चार चीज़ें महसूस कीजिए या छुइए, जैसे कुर्सी या फर्श जो आपको छू रहा है।"
+      }
+    },
+    {
+      "seconds": 30,
+      "en": {
+        "say": "Notice three things you can hear, near and far."
+      },
+      "hi": {
+        "say": "अब तीन आवाज़ें सुनिए, पास की भी और दूर की भी।"
+      }
+    },
+    {
+      "seconds": 25,
+      "en": {
+        "say": "Notice two things you can smell. If little comes through, that is fine."
+      },
+      "hi": {
+        "say": "अब दो गंध महसूस कीजिए। अगर ज़्यादा गंध न आए, तो यह भी ठीक है।"
+      }
+    },
+    {
+      "seconds": 20,
+      "en": {
+        "say": "Notice one thing you can taste, or the taste already in your mouth."
+      },
+      "hi": {
+        "say": "अब एक स्वाद पर ध्यान दीजिए, या मुँह में जो स्वाद पहले से है।"
+      }
+    },
+    {
+      "seconds": 30,
+      "en": {
+        "say": "Come back to the room slowly. There are no wrong answers."
+      },
+      "hi": {
+        "say": "अब धीरे-धीरे अपना ध्यान कमरे में वापस लाइए। कोई गलत जवाब नहीं होता।"
+      }
+    }
+  ],
+  "en": {
+    "intro": "A grounding exercise of about three minutes. Notice five things you see, four you can feel, three you hear, two you smell and one you taste.",
+    "close": "That is the end. You can stay here a little longer, if you wish."
+  },
+  "hi": {
+    "intro": "यह लगभग तीन मिनट का ग्राउंडिंग अभ्यास है। पाँच चीज़ें देखिए, चार छू या महसूस कीजिए, तीन सुनिए, दो की गंध लीजिए और एक का स्वाद लीजिए।",
+    "close": "यह अभ्यास यहाँ समाप्त होता है। आप चाहें तो थोड़ी देर और यहीं बैठे रह सकते हैं।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/calm-script@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/calm-script/",
+    "createdOn": "2026-10-11"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "texture": "chalk",
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "gentle"
+  },
+  "sfx": {
+    "scrape": "sfx/scrape",
+    "reveal": "sfx/chime"
+  },
+  "id": "national-parks-scratch",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Three national parks, one card each",
+    "hi": "तीन राष्ट्रीय उद्यान, हर एक का कार्ड"
+  },
+  "cards": [
+    {
+      "en": {
+        "tease": "Which Assam park holds about two-thirds of the world's great one-horned rhinoceroses?",
+        "answer": "Kaziranga National Park",
+        "detail": "UNESCO listed it as a World Heritage Site in 1985."
+      },
+      "hi": {
+        "tease": "असम का कौन सा पार्क दुनिया के लगभग दो-तिहाई महान एक-सींग वाले गैंडों का घर है?",
+        "answer": "काजीरंगा राष्ट्रीय उद्यान",
+        "detail": "UNESCO ने इसे 1985 में विश्व धरोहर स्थल के रूप में सूचीबद्ध किया।"
+      }
+    },
+    {
+      "en": {
+        "tease": "Which wetland in Bharatpur, Rajasthan, is famous for winter migratory birds?",
+        "answer": "Keoladeo National Park",
+        "detail": "It became a World Heritage Site in 1985. Past winter visitors included the Siberian crane."
+      },
+      "hi": {
+        "tease": "राजस्थान के भरतपुर में कौन सी आर्द्रभूमि सर्दियों के प्रवासी पक्षियों के लिए प्रसिद्ध है?",
+        "answer": "केवलादेव राष्ट्रीय उद्यान",
+        "detail": "यह 1985 में विश्व धरोहर स्थल बना। अतीत में सर्दियों के आगंतुकों में साइबेरियाई सारस भी शामिल था।"
+      }
+    },
+    {
+      "en": {
+        "tease": "Which Kerala park was protected from a hydroelectric project by a people's movement?",
+        "answer": "Silent Valley National Park",
+        "detail": "A people's movement in the 1970s and 1980s stopped a hydroelectric project here."
+      },
+      "hi": {
+        "tease": "केरल का कौन सा पार्क एक जन-आंदोलन के कारण एक पनबिजली परियोजना से सुरक्षित रहा?",
+        "answer": "साइलेंट वैली राष्ट्रीय उद्यान",
+        "detail": "1970 और 1980 के दशक में एक जन-आंदोलन ने यहाँ की एक पनबिजली परियोजना को रोक दिया।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Park facts given in the supplied source text",
+    "hi": "दिए गए स्रोत पाठ में दिए पार्कों के तथ्य"
+  },
+  "schema": "upsc-pods/scratch-card@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/scratch-card/",
+    "createdOn": "2026-10-10"
+  }
+}

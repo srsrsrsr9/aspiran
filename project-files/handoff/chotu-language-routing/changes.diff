@@ -1,0 +1,209 @@
+diff --git a/.dev.vars.example b/.dev.vars.example
+index 2c4562c..85fcd90 100644
+--- a/.dev.vars.example
++++ b/.dev.vars.example
+@@ -2,7 +2,13 @@
+ # Long random strings work best, for example from: node -e "console.log(crypto.randomUUID())"
+ EDITOR_TOKEN=
+ MOD_TOKEN=
+-# Cloud Chotu (Groq) until launch. Your own key from console.groq.com; leave empty to keep cloud Chotu off.
++# Cloud Chotu until launch, routed by language (src/ai.ts CHAT_ROUTES). Leave all three empty to keep it off;
++# a missing key just skips that provider.
++# English: NVIDIA, then Groq. Hindi and Telugu: Google first.
+ GROQ_API_KEY=
++# From aistudio.google.com (API keys).
++GOOGLE_AI_API_KEY=
++# From build.nvidia.com (Get API key).
++NVIDIA_API_KEY=
+ # Dev only: where `npm run models` serves Chotu's model files. Leave empty to use R2.
+ MODEL_FILES_URL=http://127.0.0.1:8788
+diff --git a/src/ai.ts b/src/ai.ts
+index b1fc2c2..6de9831 100644
+--- a/src/ai.ts
++++ b/src/ai.ts
+@@ -107,55 +107,109 @@ export async function callClaude(env: Env, purpose: Purpose, job: ClaudeJob): Pr
+   }
+ }
+ 
+-// --- Groq, for cloud Chotu until launch ---------------------------------------------------------
++// --- Cloud Chotu: Groq, Google and NVIDIA, routed by language ------------------------------------
+ 
+ export interface ChatTurn { role: "system" | "user" | "assistant"; content: string }
+ 
+-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+-export const GROQ_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b"];
++/** The keys are typed by the owner into .dev.vars (local) or `wrangler secret put` (deployed); never logged. */
++type ChatEnv = Env & { GOOGLE_AI_API_KEY?: string; NVIDIA_API_KEY?: string };
++type Provider = "groq" | "google" | "nvidia";
++
++const PROVIDERS: Record<Provider, { name: string; url: string; key: (env: ChatEnv) => string | undefined; keyName: string }> = {
++  groq: { name: "Groq", url: "https://api.groq.com/openai/v1/chat/completions", key: (e) => e.GROQ_API_KEY, keyName: "GROQ_API_KEY" },
++  google: { name: "Google", url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", key: (e) => e.GOOGLE_AI_API_KEY, keyName: "GOOGLE_AI_API_KEY" },
++  nvidia: { name: "NVIDIA", url: "https://integrate.api.nvidia.com/v1/chat/completions", key: (e) => e.NVIDIA_API_KEY, keyName: "NVIDIA_API_KEY" },
++};
++
++/** One model to try: where it runs, its id there, extra request fields, and how long to wait for it. */
++export interface Hop { provider: Provider; model: string; extra?: Record<string, unknown>; timeoutMs?: number }
++
++const GROQ_EXTRA = { reasoning_effort: "low", include_reasoning: false, max_completion_tokens: 400 };
++const GEMINI_EXTRA = { reasoning_effort: "low", max_tokens: 1200 };
+ 
+ /**
+- * One chat reply from Groq (OpenAI-compatible), with the same switches, caps and logging as the others.
+- * Tries the big model, and on an error or rate limit tries the small one once. The key is GROQ_API_KEY,
+- * typed by the owner into .dev.vars (local) or `wrangler secret put` (deployed); it is never logged.
++ * Which models answer in each language Chotu speaks, best first. On an error, rate limit or timeout the next
++ * one is tried, and a provider with no key is skipped. Picks from the model watch (research/model-watch.md):
++ * Nemotron 3 Ultra is the strongest free model in English but mangles Telugu, so Telugu stays on Google.
+  */
+-export async function callGroq(env: Env, purpose: Purpose, messages: ChatTurn[]): Promise<{ text: string; model: string }> {
+-  let last = "Groq didn't answer";
+-  for (const model of GROQ_MODELS) {
+-    const log = logger(env, purpose, model);
++export const CHAT_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
++  en: [
++    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
++    { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
++    { provider: "groq", model: "openai/gpt-oss-20b", extra: GROQ_EXTRA },
++  ],
++  hi: [
++    { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },
++    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
++    { provider: "google", model: "gemma-4-31b-it", extra: { max_tokens: 1200 } },
++    { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
++  ],
++  te: [
++    { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },
++    { provider: "google", model: "gemini-3.5-flash-lite", extra: GEMINI_EXTRA },
++    { provider: "google", model: "gemma-4-31b-it", extra: { max_tokens: 1200 } },
++    // Slow on NVIDIA's free tier (about 50 s) but its Telugu is right, so it's the last resort.
++    { provider: "nvidia", model: "moonshotai/kimi-k3", extra: { max_tokens: 1200 }, timeoutMs: 60_000 },
++  ],
++};
++
++/** "te", "Telugu" or "తెలుగు" → "te"; the same for Hindi; anything else is English. */
++export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
++  const s = String(x ?? "").trim().toLowerCase();
++  if (/^(te\b|telugu|తెలుగు)/.test(s)) return "te";
++  if (/^(hi\b|hindi|हिन्दी|हिंदी)/.test(s)) return "hi";
++  return "en";
++}
++
++/**
++ * One chat reply, trying each hop in turn with the same switches, caps and logging as the others.
++ * Error bodies can echo the request, so only the status is kept.
++ */
++export async function callChat(env: ChatEnv, purpose: Purpose, messages: ChatTurn[], hops: Hop[]): Promise<{ text: string; model: string }> {
++  let last = "No AI provider answered";
++  let keyed = 0;
++  for (const hop of hops) {
++    const p = PROVIDERS[hop.provider];
++    const key = p.key(env);
++    const log = logger(env, purpose, hop.model);
+     await gate(env, purpose, log);
+-    if (!env.GROQ_API_KEY) {
+-      await log("unavailable", null, null, null, "GROQ_API_KEY not set");
+-      throw new AiBlocked("No Groq key on this server. Add GROQ_API_KEY to .dev.vars and restart.");
++    if (!key) {
++      await log("unavailable", null, null, null, `${p.keyName} not set`);
++      continue;
+     }
++    keyed++;
+     const t0 = Date.now();
+     try {
+-      const res = await fetch(GROQ_URL, {
++      const res = await fetch(p.url, {
+         method: "POST",
+-        headers: { authorization: `Bearer ${env.GROQ_API_KEY}`, "content-type": "application/json" },
+-        body: JSON.stringify({ model, messages, reasoning_effort: "low", include_reasoning: false, max_completion_tokens: 400, temperature: 0.6 }),
++        headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
++        body: JSON.stringify({ model: hop.model, messages, temperature: 0.6, ...hop.extra }),
++        signal: AbortSignal.timeout(hop.timeoutMs ?? 20_000),
+       });
+       if (!res.ok) {
+-        // Groq's error bodies can echo the request, so only the status is kept.
+-        last = res.status === 401 ? "Groq rejected the key (check GROQ_API_KEY)" : res.status === 429 ? "Groq is rate-limiting this key" : `Groq error ${res.status}`;
++        last = res.status === 401 || res.status === 403 ? `${p.name} rejected the key (check ${p.keyName})`
++          : res.status === 429 ? `${p.name} is rate-limiting this key` : `${p.name} error ${res.status}`;
+         await log("error", Date.now() - t0, null, null, last);
+-        if (res.status === 401 || res.status === 403) break;
+         continue;
+       }
+       const out = (await res.json()) as any;
+       const text = String(out?.choices?.[0]?.message?.content ?? "").trim();
+       const u = out?.usage ?? {};
+       if (!text) {
+-        last = "Groq sent an empty reply";
++        last = `${p.name} sent an empty reply`;
+         await log("error", Date.now() - t0, u.prompt_tokens ?? null, u.completion_tokens ?? null, last);
+         continue;
+       }
+       await log("ok", Date.now() - t0, u.prompt_tokens ?? null, u.completion_tokens ?? null, null);
+-      return { text, model };
++      return { text, model: hop.model };
+     } catch (e) {
+-      last = `Groq unreachable: ${e instanceof Error ? e.name : "error"}`;
++      last = e instanceof Error && e.name === "TimeoutError" ? `${p.name} took too long` : `${p.name} unreachable: ${e instanceof Error ? e.name : "error"}`;
+       await log("error", Date.now() - t0, null, null, last);
+     }
+   }
++  if (!keyed) throw new AiBlocked("No AI keys on this server. Add GROQ_API_KEY, GOOGLE_AI_API_KEY or NVIDIA_API_KEY to .dev.vars and restart.");
+   throw new Error(last);
+ }
++
++/** The English route, kept for any caller that still asks for Groq by name. */
++export const callGroq = (env: Env, purpose: Purpose, messages: ChatTurn[]) => callChat(env, purpose, messages, CHAT_ROUTES.en);
+diff --git a/src/chotu.ts b/src/chotu.ts
+index b90d5aa..5da5fc4 100644
+--- a/src/chotu.ts
++++ b/src/chotu.ts
+@@ -1,4 +1,4 @@
+-import { AiBlocked, type ChatTurn, callGroq } from "./ai";
++import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
+ import PROMPT from "./chotu-prompt.txt";
+ import { extraDistress } from "./langs";
+ import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
+@@ -8,7 +8,8 @@ import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
+  * 1. Hand phones the on-device model files (`/models`, `/models/files/<name>`). Phones only ever talk to this
+  *    server and no Hugging Face account or token is involved. The bytes come from the first place that has them:
+  *    the dev folder (`npm run models`), then R2, then the pinned Hugging Face commit, passed straight through.
+- * 2. Cloud Chotu (`POST /chotu`) on Groq, for phones without the on-device model, until launch.
++ * 2. Cloud Chotu (`POST /chotu`), for phones without the on-device model, until launch. Each language the aspirant
++ *    can pick for Chotu has its own models (CHAT_ROUTES in ai.ts), so no one provider carries everything.
+  *    Logs metadata only (ai.ts); the chat itself is never stored or logged.
+  */
+ 
+@@ -143,7 +144,8 @@ export function fillPrompt(slots: Record<string, string>): string {
+ 
+ /**
+  * POST /chotu {mode: "talk" | "prep" | "plan" ("chat"/"explain" also accepted), messages: [{role, content}],
+- * context: {language?, notes?}}.
++ * context: {language?, chotu_language?, notes?}}. chotu_language ("en", "hi" or "te") picks the models; without it
++ * the app language does.
+  * The phone checks for distress before sending; this checks again and never calls the model on a match.
+  */
+ export async function chotuChat(req: Request, env: Env): Promise<Response> {
+@@ -163,9 +165,11 @@ export async function chotuChat(req: Request, env: Env): Promise<Response> {
+   const ctx = body.context ?? {};
+   const str = (v: unknown, n: number) => String(v ?? "").replace(/[{}]/g, "").slice(0, n);
+   const now = istNow();
++  const lang = chatLang(ctx.chotu_language ?? ctx.language);
+   const prompt = fillPrompt({
+     mode: ["talk", "prep", "plan"].includes(body.mode) ? body.mode : body.mode === "explain" ? "prep" : "talk",
+-    app_language: str(ctx.language, 40),
++    // Chotu answers in the language picked for it, if one was picked; otherwise in the app's.
++    app_language: ctx.chotu_language ? { en: "English", hi: "Hindi", te: "Telugu" }[lang] : str(ctx.language, 40),
+     // nickname and stage are never filled: they stay on the phone, even if a client sends them.
+     local_time_ist: now.toISOString().slice(11, 16) + " IST",
+     day_of_week: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getUTCDay()],
+@@ -173,8 +177,8 @@ export async function chotuChat(req: Request, env: Env): Promise<Response> {
+     retrieved_notes: str(ctx.notes, 4000),
+   });
+   try {
+-    const { text, model } = await callGroq(env, "chotu", [{ role: "system", content: prompt }, ...turns]);
+-    return json({ reply: text, model, ai: true });
++    const { text, model } = await callChat(env, "chotu", [{ role: "system", content: prompt }, ...turns], CHAT_ROUTES[lang]);
++    return json({ reply: text, model, lang, ai: true });
+   } catch (e) {
+     if (e instanceof AiBlocked) return json({ error: "Chotu is offline right now.", offline: true }, 503);
+     return json({ error: "Chotu couldn't answer just now. Try again in a minute.", offline: false }, 502);

@@ -1,0 +1,110 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "pol-minimum-age-for-offices",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Minimum ages in the Constitution",
+    "hi": "संविधान में न्यूनतम आयु"
+  },
+  "prompt": {
+    "en": "Rank by the minimum age the Constitution sets, highest first.",
+    "hi": "संविधान द्वारा तय न्यूनतम आयु के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "years",
+    "hi": "वर्ष"
+  },
+  "items": [
+    {
+      "value": 35,
+      "en": {
+        "label": "President"
+      },
+      "hi": {
+        "label": "राष्ट्रपति"
+      }
+    },
+    {
+      "value": 30,
+      "en": {
+        "label": "Rajya Sabha member"
+      },
+      "hi": {
+        "label": "राज्यसभा सदस्य"
+      }
+    },
+    {
+      "value": 25,
+      "en": {
+        "label": "Lok Sabha member"
+      },
+      "hi": {
+        "label": "लोकसभा सदस्य"
+      }
+    },
+    {
+      "value": 21,
+      "en": {
+        "label": "Panchayat member"
+      },
+      "hi": {
+        "label": "पंचायत सदस्य"
+      }
+    },
+    {
+      "value": 18,
+      "en": {
+        "label": "Voter"
+      },
+      "hi": {
+        "label": "मतदाता"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The upper House asks for more years: Rajya Sabha 30, Lok Sabha 25. The 61st Amendment cut the voting age from 21 to 18.",
+    "hi": "उच्च सदन ज़्यादा उम्र माँगता है: राज्यसभा 30, लोकसभा 25। 61वें संशोधन ने मतदान की आयु 21 से घटाकर 18 की।"
+  },
+  "memoryHook": {
+    "en": "Step down by fives from 35 to 25, then to 21 and 18.",
+    "hi": "35 से 25 तक पाँच-पाँच घटाइए, फिर 21 और 18 पर उतरिए।"
+  },
+  "sources": {
+    "en": "Constitution of India, Articles 58, 84, 243F and 326; 61st Amendment Act",
+    "hi": "भारत का संविधान, अनुच्छेद 58, 84, 243F और 326; 61वाँ संशोधन अधिनियम"
+  },
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

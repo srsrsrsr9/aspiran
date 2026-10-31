@@ -1,0 +1,1017 @@
+{
+  "schema": "upsc-pods/fact-check@1",
+  "checkedOn": "2026-10-11",
+  "checker": "Claude (first pass, needs editor sign-off)",
+  "files": [
+    {
+      "path": "content/narrated-classic/narrated-classic-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "passage.en",
+          "claim": "Giles 1910, Chapter 3, verses 17-18",
+          "problem": "Wording matches the Giles text on Project Gutenberg. No error.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "https://www.gutenberg.org/ebooks/132"
+        },
+        {
+          "field": "hi.intro",
+          "claim": "...खुद और काम को जानने की बात करता है",
+          "problem": "Hindi adds 'and work'; English says only 'knowing yourself'.",
+          "fix": {
+            "hi": "दो मिनट सुनने लायक हैं, क्योंकि यह स्वयं को जानने की बात करता है।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        },
+        {
+          "field": "sources.hi",
+          "claim": "श्लोक 17 और 18",
+          "problem": "'श्लोक' implies Sanskrit verse; Giles numbers are paragraphs/verses.",
+          "fix": {
+            "hi": "अध्याय 3, खंड 17 और 18"
+          },
+          "severity": "style",
+          "evidence": "Usage"
+        },
+        {
+          "field": "passage (verse 17)",
+          "claim": "Verse 17 text",
+          "problem": "Verse 18's first sentence is in the quote bank (suntzu-art-of-war-3-18), but verse 17 and the rest of verse 18 are not. That's fine for a narrated passage, but the editor should check this against the bank rule.",
+          "fix": "Editor decision: treat the passage as narrated source text, not a quote card.",
+          "severity": "risk",
+          "evidence": "quotes.json has only 3-18 first sentence"
+        }
+      ]
+    },
+    {
+      "path": "content/numbers/sex-ratio-census-2011.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "chart",
+          "claim": "2001: 933, 2011: 943, Kerala 1084, Haryana 879, NFHS-5 1,020",
+          "problem": "All match Census 2011 final figures and NFHS-5. No error.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Census 2011 PCA; NFHS-5 national factsheet"
+        }
+      ]
+    },
+    {
+      "path": "content/odd-one-out/odd-one-out-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "rounds[1].why",
+          "claim": "Rice, maize, cotton are kharif",
+          "problem": "Correct as the generic rule. Maize is also sown as a rabi crop in Bihar and the peninsula, and a sharp student may object.",
+          "fix": {
+            "en": "Rule: the others are mainly kharif crops...",
+            "hi": "नियम: चावल, मक्का और कपास मुख्यतः खरीफ फसलें हैं..."
+          },
+          "severity": "style",
+          "evidence": "NCERT Class 10 Geography ch.4"
+        }
+      ]
+    },
+    {
+      "path": "content/pair-up/pair-up-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/pairs-count/pairs-count-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "answer",
+          "claim": "answer 1 = Only two pairs",
+          "problem": "Recounted: Kaziranga-Assam is true, Periyar-Kerala is true, Bandipur-TN is false, Kanha-Maharashtra is false. That makes 2 correct, so the key is correct.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Recount"
+        },
+        {
+          "field": "pairs[*].hi",
+          "claim": "बाघ अभयारण्य for 'Tiger Reserve'",
+          "problem": "अभयारण्य means sanctuary, a different legal category under WPA 1972. The standard Hindi is 'टाइगर रिज़र्व' or 'बाघ आरक्षित क्षेत्र'.",
+          "fix": {
+            "hi": "पेरियार टाइगर रिज़र्व"
+          },
+          "severity": "style",
+          "evidence": "NTCA Hindi usage"
+        },
+        {
+          "field": "pairs[3].en.fix",
+          "claim": "Tadoba ... is the one often confused with it",
+          "problem": "There is no evidence for the 'often confused' claim.",
+          "fix": {
+            "en": "Kanha is in Madhya Pradesh. Tadoba-Andhari is Maharashtra's best-known tiger reserve.",
+            "hi": "कान्हा मध्य प्रदेश में है। ताडोबा-अंधारी महाराष्ट्र का प्रसिद्ध टाइगर रिज़र्व है।"
+          },
+          "severity": "style",
+          "evidence": "Reasoning"
+        }
+      ]
+    },
+    {
+      "path": "content/postcards/sundarbans.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/precis/precis-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "precis",
+          "claim": "93-word précis of a 227-word passage",
+          "problem": "That is about 41%. Paper A/B convention is about one-third, roughly 75 words. Also, 'steps' says the investment details were cut, yet the précis keeps 'modest investment fills reading rooms quickly'.",
+          "fix": "Trim to about 75 words, or change steps.en to 'Cut the list of extra services and repeated phrasing; kept the investment point in one clause.'",
+          "severity": "style",
+          "evidence": "Word count by script"
+        }
+      ]
+    },
+    {
+      "path": "content/quizzes/quiz-night-week-41.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "questions[4]",
+          "claim": "Purna Swaraj was declared on 26 January 1930",
+          "problem": "Acceptable textbook phrasing. Strictly, the resolution passed at the Lahore session (Dec 1929), and 26 Jan 1930 was observed as Purna Swaraj (Independence) Day.",
+          "fix": {
+            "en": "Purna Swaraj Day was observed on 26 January 1930",
+            "hi": "26 जनवरी 1930 को पूर्ण स्वराज दिवस मनाया गया था"
+          },
+          "severity": "style",
+          "evidence": "Spectrum/Bipan Chandra, India's Struggle for Independence"
+        },
+        {
+          "field": "questions[0]",
+          "claim": "Governor cannot return a Money Bill (Art 200)",
+          "problem": "Correct (first proviso to Art 200).",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Constitution Art 200"
+        }
+      ]
+    },
+    {
+      "path": "content/quote-meaning/quote-meaning-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "quote.text",
+          "claim": "Shamasastry, Book 1 Ch 19",
+          "problem": "The wording matches Shamasastry Book I ch. XIX 'The Duties of a King' (seen in a 1923 2nd-ed. excerpt). The line is the first half of a longer sentence.",
+          "fix": "Check against the 1915 first edition; consider adding '...' at the end.",
+          "severity": "style",
+          "evidence": "https://history.hanover.edu/courses/excerpts/261kaut.html"
+        }
+      ]
+    },
+    {
+      "path": "content/radio/monsoon-desk.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "stations[0]",
+          "claim": "Covers whole country by about 8 July",
+          "problem": "Correct under IMD's revised normal dates (2020). Older textbooks say 15 July, so students may see a conflict.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "IMD revised onset/withdrawal normals, 2020"
+        }
+      ]
+    },
+    {
+      "path": "content/rank-it/rank-it-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "takeaway",
+          "claim": "Madhya Pradesh and Maharashtra ... about 4,500 square kilometres apart",
+          "problem": "Wrong arithmetic. 308,252 - 307,713 = 539 sq km, not 4,500.",
+          "fix": {
+            "en": "Madhya Pradesh and Maharashtra are close in area, only about 540 square kilometres apart. Rajasthan has led since Madhya Pradesh was divided in 2000.",
+            "hi": "मध्य प्रदेश और महाराष्ट्र क्षेत्रफल में बहुत करीब हैं, केवल लगभग 540 वर्ग किलोमीटर का अंतर है। राजस्थान 2000 में मध्य प्रदेश के विभाजन के बाद से सबसे बड़ा राज्य है।"
+          },
+          "severity": "error",
+          "evidence": "Arithmetic on the file's own values"
+        },
+        {
+          "field": "items[4].value",
+          "claim": "Gujarat 196,024",
+          "problem": "Some Census 2011 tables give 196,244 for Gujarat. The ranking is unaffected.",
+          "fix": "Editor: confirm against the Census 2011 'Area and population' table and use one figure.",
+          "severity": "style",
+          "evidence": "Census 2011 state tables vary"
+        }
+      ]
+    },
+    {
+      "path": "content/reels/chai-in-60-2026-10-10.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/repeater-journey/repeater-journey-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "consent",
+          "claim": "composite, consent false",
+          "problem": "Correctly flagged as an illustrative composite. Keep the composite label visible in the UI. No facts to check.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "n/a"
+        }
+      ]
+    },
+    {
+      "path": "content/routine-card/darwin-down-house.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "en.blocks[2].what",
+          "claim": "Went to the drawing-room, read letters, and had a family book read aloud.",
+          "problem": "Misstates the source. Francis Darwin says he came to the drawing-room for his letters and lay on the sofa while family letters were read aloud, and the reading then included part of a novel. There was no 'family book'.",
+          "fix": {
+            "en": "Went to the drawing-room for his letters; lay on the sofa while family letters, then part of a novel, were read aloud.",
+            "hi": "ड्रॉइंग-रूम में आकर अपनी चिट्ठियाँ लीं; सोफ़े पर लेटकर घर की चिट्ठियाँ और फिर किसी उपन्यास का कुछ हिस्सा पढ़कर सुनवाया।"
+          },
+          "severity": "error",
+          "evidence": "Francis Darwin, Life and Letters (1887) vol. I ch. 'Reminiscences of my father's everyday life'; text reproduced at https://hackernoon.com/reminiscences-of-my-fathers-everyday-life"
+        },
+        {
+          "field": "en.blocks[1]",
+          "claim": "Worked from about eight",
+          "problem": "Source: breakfast alone about 7.45, then work until 9.30. 'About eight' is acceptable.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "same"
+        },
+        {
+          "field": "en.blocks[6]",
+          "claim": "In the afternoon: rested, novel read aloud",
+          "problem": "Correct (about 3 pm, resting in his bedroom on the sofa). Could add 'about three'.",
+          "fix": {
+            "en": "About three",
+            "hi": "लगभग तीन बजे"
+          },
+          "severity": "style",
+          "evidence": "same"
+        },
+        {
+          "field": "hi.dontCopy / hi.borrow[0]",
+          "claim": "Extra Hindi sentence 'आपका जीवन और स्वास्थ्य उनसे अलग हो सकता है'; borrow[0] says 'नाश्ते से पहले'",
+          "problem": "The Hindi adds text the English lacks, and borrow[0] differs ('before your first task' vs 'before breakfast').",
+          "fix": "Make EN and HI say the same thing: either add the sentence to the EN or drop it from the HI; for borrow[0] use 'पहले काम से पहले'.",
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/routine-card/routine-card-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "en.blocks",
+          "claim": "Franklin's scheme 5-7, 8-11, 12-1, 2-5, 6-9, 10-4",
+          "problem": "Matches the Autobiography's 'scheme of employment' table, including 'address Powerful Goodness' and 'examination of the day'.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Franklin, Autobiography, Part Two"
+        },
+        {
+          "field": "hi.dontCopy",
+          "claim": "Extra opening sentence 'उनका जीवन आपका जीवन नहीं था'",
+          "problem": "Not in the EN.",
+          "fix": "Make EN and HI match.",
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/scheme-snapshot/scheme-snapshot-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "en.who",
+          "claim": "Eligible landholding farmer families",
+          "problem": "Correct since the June 2019 extension; it was initially for small and marginal farmers. Rs 6,000 is paid in three instalments of Rs 2,000.",
+          "fix": {
+            "en": "keyNumber: Rs 6,000 a year, in three instalments of Rs 2,000",
+            "hi": "Rs 6,000 प्रति वर्ष, Rs 2,000 की तीन किस्तों में"
+          },
+          "severity": "style",
+          "evidence": "pmkisan.gov.in operational guidelines"
+        }
+      ]
+    },
+    {
+      "path": "content/scratch/three-quick-facts.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/should-i-guess/should-i-guess-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "en.rule / hi.rule",
+          "claim": "ruling out one option makes guessing worth about +0.22",
+          "problem": "Contradicts round 2 on the same screen (+0.23). With wrong = 0.66, EV = 0.6667 - 0.44 = 0.227, so +0.23. With the exact penalty of 2/3, it is +0.22 and round 1 becomes 0.00.",
+          "fix": {
+            "en": "...ruling out one option makes guessing worth about +0.23.",
+            "hi": "...एक विकल्प हटाने पर अनुमान लगाना लगभग +0.23 अंक का होता है।"
+          },
+          "severity": "style",
+          "evidence": "Recomputed"
+        }
+      ]
+    },
+    {
+      "path": "content/statement-code/statement-code-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "answer",
+          "claim": "answer 2 = 1 and 3 only",
+          "problem": "Recounted truth [T,F,T,F], so the key is correct. All facts are correct (Part IVA, 42nd 1976, 86th 2002, non-justiciable).",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Constitution Art 51A"
+        }
+      ]
+    },
+    {
+      "path": "content/story-beats/basavanna-anubhava-mantapa.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "takeaway",
+          "claim": "questions often ask about the vachanas and the Anubhava Mantapa",
+          "problem": "An unverified claim about past-question frequency. I could not confirm that UPSC has asked about the Anubhava Mantapa.",
+          "fix": {
+            "en": "GS Paper I covers the Bhakti movement and regional saints; the vachanas and the Anubhava Mantapa are worth knowing.",
+            "hi": "GS पेपर I में भक्ति आंदोलन और क्षेत्रीय संत आते हैं; वचन और अनुभव मंटप जानने योग्य हैं।"
+          },
+          "severity": "risk",
+          "evidence": "No PYQ source given"
+        },
+        {
+          "field": "hi.takeaway",
+          "claim": "...तो इन्हें revision में पक्का कर लीजिए",
+          "problem": "Hindi adds an instruction (and an English word) not in the EN.",
+          "fix": "Drop the clause or add it to EN.",
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/story-beats/narayana-guru-aruvippuram.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "beats[2]",
+          "claim": "one caste, one religion, one God for humankind",
+          "problem": "An inline quote that is not in the quote bank, as is the reported 'Ezhava Shiva' remark. The facts (1856, 1888, 1903 SNDP with the Guru as president, Sivagiri, Vaikom 1924, d. 1928) check out.",
+          "fix": "Add both lines to quotes.json as 'attributed' entries, or keep them as reported paraphrase without quote marks.",
+          "severity": "risk",
+          "evidence": "Quote-bank rule"
+        },
+        {
+          "field": "takeaway",
+          "claim": "Narayana Guru is a frequent name in questions",
+          "problem": "An unverified frequency claim.",
+          "fix": {
+            "en": "GS Paper I covers social reform in the south, where Narayana Guru is a key name.",
+            "hi": "GS पेपर I में दक्षिण भारत के सामाजिक सुधार आते हैं, जिनमें श्री नारायण गुरु एक प्रमुख नाम हैं।"
+          },
+          "severity": "risk",
+          "evidence": "No PYQ source given"
+        }
+      ]
+    },
+    {
+      "path": "content/story-beats/savitribai-phule-school.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "beats[3]",
+          "claim": "Fatima Sheikh taught alongside her.",
+          "problem": "Widely repeated, but the primary documentary evidence is thin and the claim was publicly disputed in 2025. It is safer to attribute it.",
+          "fix": {
+            "en": "Fatima Sheikh is widely credited with teaching alongside her.",
+            "hi": "फ़ातिमा शेख़ को व्यापक रूप से उनके साथ पढ़ाने का श्रेय दिया जाता है।"
+          },
+          "severity": "risk",
+          "evidence": "Reasoning; dispute reported in Indian media, Jan 2025"
+        },
+        {
+          "field": "beats[1]",
+          "claim": "1848, Bhide Wada, Pune",
+          "problem": "Correct. Death in 1897 of plague caught while nursing patients is correct.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Standard biographies"
+        }
+      ]
+    },
+    {
+      "path": "content/story-beats/story-beats-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "beats",
+          "claim": "12 Mar 1930, 78 followers, about 385 km, 24 days, Dandi 5 Apr, salt 6 Apr",
+          "problem": "All standard figures. Some sources give 79 marchers including Gandhi, and 240 miles (about 386-390 km).",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "NCERT Themes in Indian History III"
+        }
+      ]
+    },
+    {
+      "path": "content/story-spine/story-spine-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "hi.news",
+          "claim": "...और नरम लैंडिंग करने वाला चौथा देश",
+          "problem": "True (after USSR, USA, China), but the EN lacks it.",
+          "fix": {
+            "en": "India became the first country to land a spacecraft near the lunar south pole, and the fourth to make a soft landing on the Moon."
+          },
+          "severity": "style",
+          "evidence": "ISRO; EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/strategy-corner/strategy-corner-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "hi.idea",
+          "claim": "पिछले प्रश्नों का पैटर्न, बार-बार आने वाले विषय और अंक देने का तरीका जानें",
+          "problem": "The Hindi adds 'marking scheme' and 'recurring topics', which the EN does not have.",
+          "fix": {
+            "hi": "पेपर को जानें और खुद को भी। पिछले प्रश्नों का पैटर्न देखें, और अपनी कमज़ोरियों को ईमानदारी से पहचानें, जैसे वे विषय जिन्हें आप टालते रहते हैं।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/thennow/literacy-1951-2011.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "metrics[*].to",
+          "claim": "2011: 74.04 / 82.14 / 65.46",
+          "problem": "These are the provisional Census 2011 figures. The final (PCA) figures are 72.98 total, 80.88 men and 64.63 women. The takeaway still holds (×3.98; gap about 16 points).",
+          "fix": {
+            "en": "Use final figures 72.98 / 80.88 / 64.63 and gap 'about 16 in 2011', or label as 'Census 2011, provisional'.",
+            "hi": "अंतिम आँकड़े 72.98 / 80.88 / 64.63 लें और '2011 में लगभग 16', या 'जनगणना 2011, अनंतिम' लिखें।"
+          },
+          "severity": "risk",
+          "evidence": "Census 2011 Primary Census Abstract (final) vs Provisional Population Totals"
+        },
+        {
+          "field": "takeaway",
+          "claim": "Literacy quadrupled; gap 18 to 17",
+          "problem": "Recomputed: 74.04/18.33 = 4.04 and 82.14-65.46 = 16.68. Both are correct on the provisional data.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Arithmetic"
+        }
+      ]
+    },
+    {
+      "path": "content/thinker-lens/basavanna-kayaka.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "hi.useIt",
+          "claim": "GS4 के जवाब में...",
+          "problem": "The EN says 'answers' generally; the HI narrows it to GS4.",
+          "fix": "Make EN and HI match.",
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/thinker-lens/dhammapada-1.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "en.meaning",
+          "claim": "impure mind",
+          "problem": "Müller's 1881 wording is 'evil thought'. This is acceptable as a meaning gloss, not a quote.",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "SBE vol. X"
+        }
+      ]
+    },
+    {
+      "path": "content/thinker-lens/patanjali-practice.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "en.useIt / hi.useIt",
+          "claim": "pairing steady practice with letting go of results",
+          "problem": "Vairagya in YS 1.12-1.15 is non-attachment or dispassion toward objects of craving. 'Letting go of results' is the Gita 2.47 idea, so this mixes up the two texts.",
+          "fix": {
+            "en": "...pairing steady practice with non-attachment, not being pulled by cravings.",
+            "hi": "...लगातार अभ्यास के साथ वैराग्य, यानी इच्छाओं के पीछे न खिंचना, जोड़ दीजिए।"
+          },
+          "severity": "risk",
+          "evidence": "Yoga Sutra 1.15 definition of vairagya"
+        }
+      ]
+    },
+    {
+      "path": "content/thinker-lens/thinker-lens-sample.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "id",
+          "claim": "tirukkural-391-lens",
+          "problem": "Byte-identical to thinker-lens/tirukkural-391.json, with the same id. Duplicate ids may collide in the manifest.",
+          "fix": "Delete one file or give the sample a distinct id.",
+          "severity": "risk",
+          "evidence": "diff of the two files"
+        }
+      ]
+    },
+    {
+      "path": "content/thinker-lens/tirukkural-391.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "quote.original",
+          "claim": "கற்க கசடறக் கற்பவை கற்றபின் நிற்க அதற்குத் தக",
+          "problem": "The Tamil is correct; it is kural 391 in chapter 40 (Kalvi).",
+          "fix": "none",
+          "severity": "style",
+          "evidence": "Standard Tirukkural text"
+        }
+      ]
+    },
+    {
+      "path": "content/three-statements/three-statements-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/timeline-shuffle/national-emergencies-with-hook.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/timeline-shuffle/social-reform-movements.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "items[5].hi",
+          "claim": "...चवदार तालाब से...",
+          "problem": "The HI names the Chavdar tank; the EN does not.",
+          "fix": {
+            "en": "Ambedkar leads the Mahad Satyagraha for Dalits' right to draw water from the Chavdar tank."
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/timeline-shuffle/timeline-shuffle-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/timelines/making-the-constitution.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "events[6].body",
+          "claim": "Congress had declared Purna Swaraj on 26 January 1930",
+          "problem": "Same note as the quiz: 26 Jan 1930 was observed as Purna Swaraj Day after the Lahore resolution of Dec 1929.",
+          "fix": "Optional: 'had observed 26 January 1930 as Purna Swaraj Day'.",
+          "severity": "style",
+          "evidence": "Bipan Chandra"
+        }
+      ]
+    },
+    {
+      "path": "content/translate-it/translate-it-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/trap-spotter/trap-spotter-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "questions[0].options[0]",
+          "claim": "Only mandamus can free a detained person",
+          "problem": "The option is a statement, not a writ name, so it reads oddly against the question 'Which writ...'.",
+          "fix": "Optional: 'Mandamus, the only writ that can free a detained person'.",
+          "severity": "style",
+          "evidence": "Reasoning"
+        }
+      ]
+    },
+    {
+      "path": "content/two-levels/two-levels-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/two-truths/two-truths-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "rounds[2].hi.statements[1]",
+          "claim": "Hindi adds 'and of Delhi and Puducherry'",
+          "problem": "The HI is more precise (Art 54 Explanation, 70th Amendment), but EN and HI differ.",
+          "fix": {
+            "en": "Elected members of the state assemblies, including Delhi and Puducherry, vote in the presidential election."
+          },
+          "severity": "style",
+          "evidence": "Constitution Art 54"
+        }
+      ]
+    },
+    {
+      "path": "content/union-state-list/union-state-list-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "items[5].note",
+          "claim": "a Union law prevails in conflict",
+          "problem": "There is an exception under Art 254(2): a state law reserved for and given the President's assent prevails in that state.",
+          "fix": {
+            "en": "Concurrent List: both can legislate; a Union law usually prevails in conflict (Art 254).",
+            "hi": "समवर्ती सूची: दोनों कानून बना सकते हैं; टकराव में सामान्यतः संघ का कानून मान्य होता है (अनुच्छेद 254)।"
+          },
+          "severity": "style",
+          "evidence": "Constitution Art 254"
+        }
+      ]
+    },
+    {
+      "path": "content/usage-fix/usage-fix-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/versus/versus-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "en.rows[0].b",
+          "claim": "Elected by state assemblies' members",
+          "problem": "Only the elected MLAs vote (HI says निर्वाचित). The UT assemblies of Delhi, Puducherry and J&K also vote.",
+          "fix": {
+            "en": "Elected by the elected members of state and UT assemblies, by proportional representation (single transferable vote); 12 are nominated by the President."
+          },
+          "severity": "style",
+          "evidence": "Constitution Art 80(4)"
+        }
+      ]
+    },
+    {
+      "path": "content/who-am-i/who-am-i-sample.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "rounds[0].clues[1]",
+          "claim": "Article 32 'the heart and soul of the Constitution'",
+          "problem": "A genuine Ambedkar line (CAD, 9 Dec 1948), but it is an inline quote that is not in the quote bank.",
+          "fix": "Add to quotes.json (source: Constituent Assembly Debates, vol. VII, 9 December 1948), or keep it as reported speech.",
+          "severity": "risk",
+          "evidence": "Quote-bank rule; CAD vol VII"
+        }
+      ]
+    },
+    {
+      "path": "content/winddown/lamp-off.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "text.cue",
+          "claim": "Breathe in for four, out for six.",
+          "problem": "A breathing pace in calm content, which the brief says to flag. It implies a physiological effect.",
+          "fix": {
+            "en": "Let your breath slow down on its own.",
+            "hi": "साँस को अपने आप धीमा होने दीजिए।"
+          },
+          "severity": "risk",
+          "evidence": "Editorial policy: no breathing paces in calm content without sign-off"
+        },
+        {
+          "field": "text.end",
+          "claim": "Sleep is revision too.",
+          "problem": "An implicit health and memory claim (sleep consolidates memory), drawn from the playbook's Oakley note.",
+          "fix": {
+            "en": "Enough for today.",
+            "hi": "आज के लिए इतना काफ़ी है।"
+          },
+          "severity": "risk",
+          "evidence": "research/great-minds-playbook.md A9 note; effect claim"
+        }
+      ]
+    },
+    {
+      "path": "content/word-bank/word-bank-sample.json",
+      "status": "ok",
+      "findings": []
+    }
+  ],
+  "quotes": [
+    {
+      "id": "kahneman-tfs-38",
+      "status": "unconfirmed",
+      "findings": [
+        "Two wordings circulate. 'while you are thinking about it' is the title of Kahneman's Edge 2011 essay and is widely quoted with the book. Many quotations of the book (ch. 38 'Thinking About Life', focusing illusion) read 'when you are thinking about it'. The words are not confirmed for the book itself.",
+        "The attribution is genuine (focusing illusion). publicDomain:false is correct.",
+        "Evidence: https://fee.org/articles/if-you-re-sweating-the-small-stuff-read-nobel-laureate-daniel-kahneman/"
+      ],
+      "suggestEdition": "Farrar, Straus and Giroux hardcover, 2011, ch. 38 'Thinking About Life' (about p. 402); check 'when' vs 'while'."
+    },
+    {
+      "id": "kahneman-tfs-intro",
+      "status": "fix",
+      "findings": [
+        "The words are right, but the citation is wrong. The line is in Part I, Chapter 1 'The Characters of the Story' (gorilla study), pp. 23-24, not the Introduction. In the book it follows a colon: '...two important facts about our minds: we can be blind to the obvious, and we are also blind to our blindness.'",
+        "Fix: chapter 'Chapter 1, The Characters of the Story'.",
+        "Evidence: https://stafforini.com/quotes/kahneman-daniel-kahneman/ (cites FSG 2011, pp. 23-24)"
+      ],
+      "suggestEdition": "Farrar, Straus and Giroux, 2011, pp. 23-24."
+    },
+    {
+      "id": "sugarman-first-sentence",
+      "status": "fix",
+      "findings": [
+        "Words are altered. Sugarman's Axiom 3 reads: 'The sole purpose of the first sentence in an advertisement is to get you to read the second sentence of the copy.'",
+        "The bank drops 'sole' and 'of the copy'. Fix the text to the exact axiom.",
+        "The axioms first appeared in Advertising Secrets of the Written Word (1998); the Adweek Copywriting Handbook (Wiley, 2006) repeats them. Find the page.",
+        "Evidence: https://larslofgren.com/joseph-sugarman/"
+      ],
+      "suggestEdition": "The Adweek Copywriting Handbook, John Wiley & Sons, 2006 hardcover (2007 paperback), chapter listing the axioms."
+    },
+    {
+      "id": "suntzu-art-of-war-3-18",
+      "status": "looks-right",
+      "findings": [
+        "The text matches the Giles 1910 translation, ch. III para. 18 (first sentence). The public-domain claim is sound.",
+        "Evidence: https://www.gutenberg.org/ebooks/132"
+      ],
+      "suggestEdition": "Lionel Giles, Sun Tzu on the Art of War (Luzac, London, 1910); Project Gutenberg #132."
+    },
+    {
+      "id": "suntzu-art-of-war-4-15",
+      "status": "fix",
+      "findings": [
+        "Words match Giles ch. IV para. 15, but the sentence is cut. It begins 'Thus it is that in war the victorious strategist only seeks battle after the victory has been won, whereas he who is destined to defeat first fights and afterwards looks for victory.'",
+        "Fix: chapter 'Chapter 4, verse 15', and either add the lead-in words or start with '...the victorious strategist'.",
+        "Evidence: https://suntzusaid.com/book/4"
+      ],
+      "suggestEdition": "Giles 1910 (Luzac); Project Gutenberg #132."
+    },
+    {
+      "id": "kautilya-arthashastra-1-19",
+      "status": "looks-right",
+      "findings": [
+        "Matches Shamasastry, Book I ch. XIX 'The Duties of a King': 'In the happiness of his subjects lies his happiness; in their welfare his welfare; whatever pleases himself he shall not consider as good...' The bank stops mid-sentence, so end with '...'.",
+        "The verified excerpt is from the 2nd ed. (Mysore, 1923); confirm the 1915 1st-ed. wording. Public domain is plausible (translator d. 1944).",
+        "Evidence: https://history.hanover.edu/courses/excerpts/261kaut.html"
+      ],
+      "suggestEdition": "R. Shamasastry, Kautilya's Arthasastra, Government Oriental Library Series, Bangalore, 1915 (archive.org scan); cross-check 2nd ed. 1923."
+    },
+    {
+      "id": "khera-you-can-win-different",
+      "status": "looks-right",
+      "findings": [
+        "The line is the book's own tagline/subtitle ('Winners don't do different things, they do things differently'), so the attribution is genuine. It is a common saying and not original to Khera, so cite it as the book's tagline. Copyrighted, so a short quote only.",
+        "Evidence: https://resourcecentre.tourism.gov.my/webopac/Record/0000009168"
+      ],
+      "suggestEdition": "Shiv Khera, You Can Win, Macmillan India, 1998 (cover/subtitle)."
+    },
+    {
+      "id": "fogg-tiny-habits-want",
+      "status": "unconfirmed",
+      "findings": [
+        "Very likely an exact line: 'Fogg Maxim #1: Help people do what they already want to do.' If confirmed, it can become kind 'quote'. I could not see the book page.",
+        "Evidence: book summaries quote 'Will it help you do what you already want to do?' (https://bookfreak.substack.com/p/book-freak-61-achieve-goals-through-tiny-habits-267226)"
+      ],
+      "suggestEdition": "BJ Fogg, Tiny Habits, Houghton Mifflin Harcourt, 2019 (US 1st ed.); search for 'Fogg Maxim'."
+    },
+    {
+      "id": "tirukkural-391",
+      "status": "looks-right",
+      "findings": [
+        "The Tamil original is correct, and the citation (kural 391, ch. 40 'Kalvi') is correct. The English is our own rendering, so label it as such.",
+        "Pope 1886 differs: 'So learn that you may full and faultless learning gain, Then in obedience meet to lessons learnt remain.' Public domain is fine."
+      ],
+      "suggestEdition": "G. U. Pope, The Sacred Kurral of Tiruvalluva-Nayanar, W. H. Allen, London, 1886 (archive.org)."
+    },
+    {
+      "id": "gita-2-47",
+      "status": "fix",
+      "findings": [
+        "The edition is wrong as suggested. Edwin Arnold (1885) renders the verse 'Let right deeds be / Thy motive, not the fruit which comes from them', not the bank text. The bank text is a modern rendering.",
+        "The Sanskrit first half 'कर्मण्येवाधिकारस्ते मा फलेषु कदाचन' is correct for 2.47.",
+        "Fix: either label it 'our rendering', or use K. T. Telang (SBE vol. 8, 1882): 'Your business is with action alone; not by any means with fruit.'",
+        "Author: list as 'Bhagavad Gita (Krishna to Arjuna)'.",
+        "Evidence: https://sacred-texts.com/hin/gita/bg02.htm ; https://sacred-texts.com/hin/sbe08/sbe0804.htm"
+      ],
+      "suggestEdition": "K. T. Telang, The Bhagavadgita, Sacred Books of the East vol. 8, Oxford, 1882; Sanskrit against gitasupersite.iitk.ac.in 2.47."
+    },
+    {
+      "id": "tagore-gitanjali-35",
+      "status": "fix",
+      "findings": [
+        "The words and poem number (35) are right.",
+        "The edition is off. The first English Gitanjali was the India Society, London, Nov 1912; Macmillan published it in 1913.",
+        "The Bengali original 'চিত্ত যেথা ভয়শূন্য, উচ্চ যেথা শির' is from Naivedya (1901), not the Bengali Gitanjali. Label it 'original: Naivedya'. Public domain is fine (Tagore d. 1941).",
+        "Evidence: https://en.wikipedia.org/wiki/Chitto_Jetha_Bhayshunyo"
+      ],
+      "suggestEdition": "Gitanjali (Song Offerings), India Society, London, 1912, or Macmillan, London, 1913; Bengali: Naivedya (1901), Visva-Bharati Rabindra Rachanavali."
+    },
+    {
+      "id": "vivekananda-arise-awake",
+      "status": "fix",
+      "findings": [
+        "The wording is right and the attribution is genuine. The citation needs filling in: Complete Works vol. 3, Lectures from Colombo to Almora, 'The Vedanta' (Lahore, 12 Nov 1897); also used in a letter of 24 Apr 1897 (vol. 4).",
+        "The Sanskrit is only the first half of Katha Upanishad 1.3.14 and means 'arise, awake, approach the great ones and learn'. 'Stop not till the goal is reached' is Vivekananda's gloss, so label it as his adaptation (the caution already says so).",
+        "Evidence: https://en.wikipedia.org/wiki/Arise,_awake,_and_stop_not_till_the_goal_is_reached"
+      ],
+      "suggestEdition": "Complete Works of Swami Vivekananda, Mayavati Memorial Edition, Advaita Ashrama, vol. 3. Lecture text is public domain; the compilation may carry Advaita Ashrama copyright."
+    },
+    {
+      "id": "kabir-kaal-kare",
+      "status": "unconfirmed",
+      "findings": [
+        "A popular doha. The full couplet is 'काल करे सो आज कर, आज करे सो अब। पल में परलय होएगी, बहुरि करेगा कब॥'. I could not confirm it in a critical edition. Keep 'attributed to Kabir'.",
+        "Public domain is fine."
+      ],
+      "suggestEdition": "Shyamsundar Das (ed.), Kabir Granthavali, Nagari Pracharini Sabha, 1928; or Parasnath Tiwari critical edition (1961)."
+    },
+    {
+      "id": "dhammapada-1",
+      "status": "looks-right",
+      "findings": [
+        "The text matches Max Müller, SBE vol. X (1881), verse 1, Yamakavagga. The Pali opening 'Manopubbaṅgamā dhammā, manoseṭṭhā manomayā' is correct. Public domain is fine."
+      ],
+      "suggestEdition": "F. Max Müller, The Dhammapada, Sacred Books of the East vol. X part I, Oxford, 1881 (sacred-texts.com/bud/sbe10)."
+    },
+    {
+      "id": "basavanna-kayaka",
+      "status": "unconfirmed",
+      "findings": [
+        "The Kannada ಕಾಯಕವೇ ಕೈಲಾಸ is correct as a phrase. It is a Sharana-movement maxim, and its exact location in Basavanna's own vachanas is not established (it is often traced to other Sharanas). 'Attributed' is right.",
+        "The literal gloss is 'work itself is Kailasa (Shiva's abode)'; 'work is worship' is the conventional gloss."
+      ],
+      "suggestEdition": "Samagra Vachana Samputa (Kannada Pustaka Pradhikara / Govt of Karnataka, 2001, ed. M. M. Kalburgi et al.)."
+    },
+    {
+      "id": "patanjali-yoga-sutra-1-12",
+      "status": "looks-right",
+      "findings": [
+        "The Sanskrit अभ्यासवैराग्याभ्यां तन्निरोधः is correct for YS 1.12. The English matches Swami Vivekananda's Raja Yoga rendering ('Their control is by practice and non-attachment'); I matched it by search and did not open the page.",
+        "So the edition can be named instead of 'one common rendering'. Public domain is fine."
+      ],
+      "suggestEdition": "Swami Vivekananda, Raja Yoga, Longmans Green, 1896 (Complete Works vol. 1)."
+    }
+  ],
+  "myPath": [
+    {
+      "claim": "~10 lakh apply each year (1.1)",
+      "status": "conflict",
+      "correct": "CSE 2026: 'over 8 lakh' applied (about 8.19 lakh per coaching data). 2025: about 9.38 lakh. Say 'about 8-10 lakh apply'.",
+      "evidence": "https://newsonair.gov.in/nearly-5-49-lakh-candidates-appear-for-csp-ifos-exam-conducted-by-upsc/ ; https://vajiramandravi.com/upsc-exam/how-many-students-appeared-for-upsc/"
+    },
+    {
+      "claim": "~5.49 lakh actually sat Prelims 2026",
+      "status": "confirmed",
+      "correct": "Nearly 5.49 lakh (provisional, UPSC via All India Radio, 24 May 2026); attendance about 67%.",
+      "evidence": "https://newsonair.gov.in/nearly-5-49-lakh-candidates-appear-for-csp-ifos-exam-conducted-by-upsc/"
+    },
+    {
+      "claim": "Prelims held 24 May 2026; result 15 June 2026; 13,343 qualify for Mains",
+      "status": "confirmed",
+      "correct": "As stated.",
+      "evidence": "https://www.etvbharat.com/amp/en/bharat/upsc-declares-civil-services-prelims-result-over-13300-candidates-qualify-enn26061507573"
+    },
+    {
+      "claim": "14,161 qualified in 2025",
+      "status": "confirmed",
+      "correct": "14,161.",
+      "evidence": "ETV Bharat (above); https://www.pw.live/upsc/exams/how-many-candidates-qualify-for-upsc-mains-2025"
+    },
+    {
+      "claim": "1,016 vacancies notified for CSE 2026",
+      "status": "conflict",
+      "correct": "The 4 Feb 2026 notification was reported as about 933 vacancies (33 PwBD). 1,016 is the figure in the 15 June Prelims-result coverage, probably a revised count. Say '933 notified, later revised to about 1,016', after checking UPSC's result press note. The doc's 'one site shows 933' is wrong: 933 is the notified figure.",
+      "evidence": "https://competition.careers360.com/articles/upsc-vacancies ; https://www.pw.live/news/upsc-cse-2026-notification-eligibility-rules-attempt-limits ; https://www.clearias.com/upsc-prelims-result-2026/"
+    },
+    {
+      "claim": "Vacancies fell from 1,087 (2025) to 1,016",
+      "status": "conflict",
+      "correct": "CSE 2025 notified 979. 1,087 is the vacancy count the government reported at the 2025 final result (6 Mar 2026, 958 recommended). Notified to notified is 979 to 933. Compare like with like.",
+      "evidence": "https://www.businesstoday.in/amp/education/exams/story/upsc-cse-2025-results-declared-over-900-candidates-recommended-for-various-services-heres-how-to-check-result-519466-2026-03-06 ; Careers360 table"
+    },
+    {
+      "claim": "UPSC shortlists roughly 12-14 times vacancies; both years about 13 per vacancy",
+      "status": "conflict",
+      "correct": "The notification wording is 'about twelve to thirteen times' (from memory of earlier notices; check against the 2026 notice). On the doc's figures: 13,343/1,016 = 13.1 and 14,161/1,087 = 13.0. On notified figures: 13,343/933 = 14.3 and 14,161/979 = 14.5.",
+      "evidence": "Arithmetic; CSE notification rules (verify)"
+    },
+    {
+      "claim": "Prelims marks do not count toward final merit",
+      "status": "confirmed",
+      "correct": "Correct: Prelims is qualifying; merit is Mains plus Personality Test (2,025 marks).",
+      "evidence": "CSE notification scheme of examination"
+    },
+    {
+      "claim": "Marks, cut-offs and answer keys released only after the entire cycle",
+      "status": "confirmed",
+      "correct": "Correct for CSE 2026.",
+      "evidence": "ETV Bharat, 15 June 2026"
+    },
+    {
+      "claim": "Derived: about 5.3 lakh sat but did not qualify",
+      "status": "conflict",
+      "correct": "5,49,000 - 13,343 = 5,35,657, about 5.36 lakh. Round to 'about 5.4 lakh' (or '5.35 lakh').",
+      "evidence": "Arithmetic"
+    },
+    {
+      "claim": "Derived: about 1 in 540 finally selected",
+      "status": "conflict",
+      "correct": "5,49,000/1,016 = 540 (or 588 with 933). But vacancies are not selections: in 2025, 958 were recommended against 1,087. Say 'about 1 vacancy per 540 candidates who sat'.",
+      "evidence": "Arithmetic; Business Today 6 Mar 2026"
+    },
+    {
+      "claim": "Regulator commentary: roughly 900 clear annually from more than 10 lakh applicants",
+      "status": "unconfirmed",
+      "correct": "Unsourced. The 2025 final figure was 958 recommended from about 9.4 lakh applicants. Cite the regulator or drop it.",
+      "evidence": "No source found"
+    },
+    {
+      "claim": "A10: of every 1,000 who sat Prelims 2026, about 24 reached Mains and about 2 were finally selected",
+      "status": "conflict",
+      "correct": "24.3 per 1,000 reached Mains (confirmed). 1,016/549 = 1.85 (1.70 with 933), so 'about 2' is fine, but the CSE 2026 final result is not out yet (Mains and interviews are pending as of Oct 2026). Reword: '...about 24 reached Mains, and there are about 2 posts for every 1,000 (final result due 2027)'.",
+      "evidence": "Arithmetic; result not yet declared"
+    },
+    {
+      "claim": "General: 6 attempts, upper age 32",
+      "status": "confirmed",
+      "correct": "6 attempts; age 21-32 as on 1 August 2026.",
+      "evidence": "https://www.pw.live/news/upsc-cse-2026-notification-eligibility-rules-attempt-limits ; https://vajiramandravi.com/upsc-ias-exam/upsc-age-limit"
+    },
+    {
+      "claim": "EWS (missing from the table)",
+      "status": "confirmed",
+      "correct": "Add a row: EWS, 6 attempts, upper age 32 (no relaxation).",
+      "evidence": "https://www.clearias.com/upsc-cse-2026-notification/ ; Vajiram"
+    },
+    {
+      "claim": "OBC: 9 attempts, 35",
+      "status": "confirmed",
+      "correct": "OBC (non-creamy layer) 9 attempts, 35.",
+      "evidence": "ClearIAS notification summary; Vajiram"
+    },
+    {
+      "claim": "SC/ST: unlimited, 37",
+      "status": "confirmed",
+      "correct": "Unlimited within the age limit; 37.",
+      "evidence": "same"
+    },
+    {
+      "claim": "Benchmark disability: 'Extended as notified', age '-'",
+      "status": "unconfirmed",
+      "correct": "Attempts: 9 for General/EWS/OBC PwBD, unlimited for SC/ST PwBD. Age: 10-year relaxation, so 42 for General/EWS PwBD. Secondary sources disagree on OBC-PwBD (45 vs 42) and SC/ST-PwBD (47 vs 42). Confirm cumulative relaxation in the notification's age-limit clause.",
+      "evidence": "https://vajiramandravi.com/upsc-ias-exam/upsc-age-limit (gives 42 for all PwBD); commonly reported 42/45/47"
+    },
+    {
+      "claim": "(missing) CSE 2026 eligibility changes",
+      "status": "confirmed",
+      "correct": "Consider adding: serving IAS/IFS from earlier CSEs cannot apply. Candidates already in service get one chance in CSE 2026 or 2027, then must resign (per notification summaries).",
+      "evidence": "https://www.clearias.com/upsc-cse-2026-notification/"
+    }
+  ]
+}

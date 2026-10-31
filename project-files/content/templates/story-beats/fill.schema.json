@@ -1,0 +1,162 @@
+{
+  "title": "Story in four beats",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "scape",
+    "beats",
+    "takeaway",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "scape": {
+      "type": "string",
+      "enum": [
+        "none",
+        "waves",
+        "rain",
+        "wind",
+        "market",
+        "forest"
+      ],
+      "description": "Soundscape under the story, or none"
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "head",
+              "text"
+            ],
+            "properties": {
+              "head": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 6
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "head",
+              "text"
+            ],
+            "properties": {
+              "head": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 9
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 61
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 5
+    },
+    "takeaway": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/story-beats@1"
+}

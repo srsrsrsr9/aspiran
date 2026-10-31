@@ -1,0 +1,176 @@
+{
+  "run": "2026-10-11",
+  "generator": "Claude Haiku via the template prompts (agent test run, same prompts as tools/generate.mjs)",
+  "jobs": "jobs/jobs.wave5.jsonl",
+  "firstTryValid": 13,
+  "repaired": {
+    "count": 5,
+    "note": "One Haiku repair turn fixed five packs: a routine card with four 'borrow' items (limit 3) and a long Hindi line; a 3-minute slow-breath script written as 35 beats (limit 14), now 7, because the app animates each breath; a sigh script with 2-second beats (minimum 3); a Hindi intro 4 words over; two Hindi source lines left in Latin script."
+  },
+  "checkedByHand": "Claude checked the dates in both reform timelines, the myth verdicts, the Franklin and Darwin routines against the source texts, and the calm-script timings. Every source text was written by Claude from general knowledge and must be checked by a subject editor; the quote-bank lines are all unverified.",
+  "telugu": {
+    "files": 7,
+    "note": "Seven packs translated into Telugu by Claude Haiku with templates/languages/TRANSLATE_PROMPT.md and te.md; 6 passed first time, the mnemonic needed two lines shortened by hand. Terms to confirm against the Telugu Akademi glossary: internal disturbance (అంతర్గత కల్లోలం), writ (రిట్), external aggression (బాహ్య దురాక్రమణ), soft landing (మృదువైన ల్యాండింగ్), and the new Telugu mnemonic."
+  },
+  "results": [
+    {
+      "job": 3,
+      "type": "thinker-lens",
+      "title": "Tirukkural 391: learning shows in conduct",
+      "file": "thinker-lens/tirukkural-391.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 6,
+      "type": "myth-card",
+      "title": "buddha-vivekananda-kalam-myths",
+      "file": "myths/did-they-say-it.json",
+      "errors": [],
+      "warnings": [
+        "$.claims[1].en.correction: the number 14 is not in the source text. Check it"
+      ]
+    },
+    {
+      "job": 7,
+      "type": "timeline-shuffle",
+      "title": "Social reform: which came first?",
+      "file": "timeline-shuffle/social-reform-movements.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 9,
+      "type": "story-beats",
+      "title": "Savitribai and the girls' school in Pune",
+      "file": "story-beats/savitribai-phule-school.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 10,
+      "type": "story-beats",
+      "title": "Sree Narayana Guru: one idol, one idea",
+      "file": "story-beats/narayana-guru-aruvippuram.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 11,
+      "type": "routine-card",
+      "title": "Franklin's day, in a table of hours",
+      "file": "routine-card/routine-card-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 12,
+      "type": "routine-card",
+      "title": "Darwin's day at Down House",
+      "file": "routine-card/darwin-down-house.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 13,
+      "type": "calm-script",
+      "title": "Three minutes of slow breath",
+      "file": "calm-script/calm-script-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 14,
+      "type": "calm-script",
+      "title": "One-minute sigh breath",
+      "file": "calm-script/double-sigh-1-minute.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 15,
+      "type": "calm-script",
+      "title": "Five, four, three, two, one",
+      "file": "calm-script/grounding-5-4-3-2-1.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 16,
+      "type": "book-chai",
+      "title": "Habit stacking, one page at a time",
+      "file": "book-chai/atomic-habits.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 17,
+      "type": "book-chai",
+      "title": "The habit loop, and one swap",
+      "file": "book-chai/power-of-habit.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 18,
+      "type": "book-chai",
+      "title": "No one right timetable",
+      "file": "book-chai/daily-rituals.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": "5b-1",
+      "type": "thinker-lens",
+      "title": "Thoughts Come Before Action",
+      "file": "thinker-lens/dhammapada-1.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": "5b-2",
+      "type": "thinker-lens",
+      "title": "Work Is Worship: Basavanna's Idea",
+      "file": "thinker-lens/basavanna-kayaka.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": "5b-3",
+      "type": "thinker-lens",
+      "title": "Practice and Letting Go",
+      "file": "thinker-lens/patanjali-practice.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": "5b-4",
+      "type": "story-beats",
+      "title": "Basavanna and the Anubhava Mantapa",
+      "file": "story-beats/basavanna-anubhava-mantapa.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": "copy",
+      "type": "thinker-lens",
+      "title": "Tirukkural 391 (also the template's sample)",
+      "file": "thinker-lens/thinker-lens-sample.json",
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "revision": "11 Oct: at the user's request, the Gandhi, Ambedkar and Sen thinker cards, the Gandhi myth pack and the Ambedkar timeline were removed, along with their quote-bank entries. They were replaced with older voices: the Dhammapada, Basavanna and Patanjali thinker cards, and a Basavanna story. All 4 passed first time. The Telugu files were redone in two registers (standard for content, colloquial for explanations and instructions), and all 7 passed first time."
+}

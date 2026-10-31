@@ -1,0 +1,180 @@
+{
+  "title": "Basic numeracy (CSAT)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "problems",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "problems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "topic",
+          "answer",
+          "answerExpr",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "topic": {
+            "type": "string",
+            "enum": [
+              "percentage",
+              "ratio",
+              "average",
+              "time-and-work",
+              "speed-distance",
+              "profit-loss",
+              "number-system",
+              "simple-interest"
+            ]
+          },
+          "answer": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "answerExpr": {
+            "type": "string",
+            "pattern": "^[0-9+\\-*/(). ]+$",
+            "description": "The arithmetic that gives the right option's value, using only digits and + - * / ( ). The validator works it out and checks it against the option."
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "steps"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 50
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 4,
+                  "description": "A number with its unit"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "steps": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 40,
+                "description": "The working, in short steps"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "steps"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 68
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 6,
+                  "description": "A number with its unit"
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "steps": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 54,
+                "description": "The working, in short steps"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 5
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/csat-quant@1"
+}

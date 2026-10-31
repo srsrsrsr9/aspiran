@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/two-sides@1",
+  "title": "Two sides (debate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "paper",
+    "question",
+    "for",
+    "against",
+    "outline",
+    "unlock",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/two-sides@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "paper": {
+      "type": "string",
+      "enum": [
+        "GS1",
+        "GS2",
+        "GS3",
+        "GS4",
+        "Essay"
+      ]
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      }
+    },
+    "for": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 30
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "against": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 22
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 30
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "outline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 24
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 33
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "unlock": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

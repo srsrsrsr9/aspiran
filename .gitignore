@@ -31,3 +31,14 @@ android/app/release/
 android/app/google-services.json
 .wrangler*/
 server/.wrangler-*/
+_incoming/
+project-files/**/*.mp4
+server/models/*.xnnpack_cache
+.DS_Store
+# project-files is reference only: keep its text in git, its bulky media out
+project-files/**/*.wav
+project-files/**/*.mp3
+project-files/**/*.m4a
+project-files/**/*.ogg
+project-files/**/*.zip
+project-files/**/*.png

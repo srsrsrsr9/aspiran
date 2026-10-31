@@ -1,0 +1,42 @@
+{
+  "schemaId": "upsc-pods/scratch-card@1",
+  "knobs": {
+    "cards": "1 to 3",
+    "texture": [
+      "chai-stain",
+      "chalk",
+      "ink"
+    ]
+  },
+  "defaults": {
+    "texture": "chai-stain",
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "gentle"
+    },
+    "sfx": {
+      "scrape": "sfx/scrape",
+      "reveal": "sfx/chime"
+    },
+    "tags": {
+      "stage": [
+        "prelims",
+        "revision"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-direct",
+        "pre-current-static"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

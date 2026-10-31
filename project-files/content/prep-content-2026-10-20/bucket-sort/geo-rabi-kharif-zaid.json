@@ -1,0 +1,174 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "geo-rabi-kharif-zaid",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Sort the crops by season",
+    "hi": "फ़सलों को उनके मौसम के अनुसार छाँटें"
+  },
+  "buckets": {
+    "en": [
+      "Kharif",
+      "Rabi",
+      "Zaid"
+    ],
+    "hi": [
+      "खरीफ़",
+      "रबी",
+      "ज़ायद"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Rice (paddy)",
+        "why": "Sown with the monsoon in June-July and harvested in September-October."
+      },
+      "hi": {
+        "text": "धान (चावल)",
+        "why": "मानसून के साथ जून-जुलाई में बोया जाता है और सितंबर-अक्टूबर में काटा जाता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Wheat",
+        "why": "Sown in winter, October-December, and harvested in April-June."
+      },
+      "hi": {
+        "text": "गेहूँ",
+        "why": "सर्दियों में अक्टूबर-दिसंबर में बोया जाता है और अप्रैल-जून में काटा जाता है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Watermelon",
+        "why": "A short summer crop grown between the rabi and kharif seasons."
+      },
+      "hi": {
+        "text": "तरबूज़",
+        "why": "रबी और खरीफ़ के बीच गर्मियों में उगाई जाने वाली छोटी अवधि की फ़सल।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Cotton",
+        "why": "A monsoon-sown kharif crop that does well on black soil."
+      },
+      "hi": {
+        "text": "कपास",
+        "why": "मानसून में बोई जाने वाली खरीफ़ फ़सल, जो काली मृदा में अच्छी होती है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Mustard",
+        "why": "A winter oilseed sown after the monsoon and harvested in spring."
+      },
+      "hi": {
+        "text": "सरसों",
+        "why": "सर्दियों की तिलहन फ़सल, जो मानसून के बाद बोई जाती है और वसंत में कटती है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Muskmelon",
+        "why": "Grown in the short summer gap, usually with irrigation."
+      },
+      "hi": {
+        "text": "खरबूज़ा",
+        "why": "गर्मियों के छोटे अंतराल में, आमतौर पर सिंचाई के सहारे उगाया जाता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Soybean",
+        "why": "A kharif oilseed sown at the start of the monsoon, big in Madhya Pradesh."
+      },
+      "hi": {
+        "text": "सोयाबीन",
+        "why": "मानसून की शुरुआत में बोई जाने वाली खरीफ़ तिलहन फ़सल, मध्य प्रदेश में प्रमुख।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Gram (chickpea)",
+        "why": "A winter pulse that grows on stored soil moisture after the rains."
+      },
+      "hi": {
+        "text": "चना",
+        "why": "सर्दियों की दलहन फ़सल, जो बारिश के बाद मृदा में बची नमी पर उगती है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Cucumber",
+        "why": "A summer vegetable grown in the zaid season between rabi and kharif."
+      },
+      "hi": {
+        "text": "खीरा",
+        "why": "रबी और खरीफ़ के बीच ज़ायद मौसम में उगाई जाने वाली गर्मियों की सब्ज़ी।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Barley",
+        "why": "A winter cereal sown with wheat in October-December."
+      },
+      "hi": {
+        "text": "जौ",
+        "why": "सर्दियों का अनाज, जो गेहूँ के साथ अक्टूबर-दिसंबर में बोया जाता है।"
+      }
+    }
+  ],
+  "memoryHook": {
+    "en": "Kharif comes with the rain, rabi with the cold, zaid with the summer fruit.",
+    "hi": "खरीफ़ बारिश के साथ, रबी ठंड के साथ, और ज़ायद गर्मी के फलों के साथ।"
+  },
+  "sources": {
+    "en": "NCERT Class X Contemporary India II, chapter on agriculture",
+    "hi": "NCERT कक्षा X समकालीन भारत II, कृषि अध्याय"
+  },
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

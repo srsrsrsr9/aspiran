@@ -1,0 +1,193 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative"
+    ]
+  },
+  "id": "pol-parliament-and-offices-traps",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Spot the trap: Parliament and key offices",
+    "hi": "जाल पहचानिए: संसद और प्रमुख पद"
+  },
+  "questions": [
+    {
+      "answerIndex": 0,
+      "traps": [
+        "none",
+        "sounds-familiar",
+        "extreme-word",
+        "half-true"
+      ],
+      "en": {
+        "question": "Under Article 61, on what ground can the President of India be impeached?",
+        "options": [
+          "Violation of the Constitution",
+          "Proved misbehaviour or incapacity",
+          "Any act done in official capacity",
+          "Violating the Constitution, as the Supreme Court decides"
+        ],
+        "why": "'Proved misbehaviour or incapacity' sounds familiar because it is the ground for removing judges. The President's only ground is violation of the Constitution, decided by Parliament."
+      },
+      "hi": {
+        "question": "अनुच्छेद 61 के तहत भारत के राष्ट्रपति पर किस आधार पर महाभियोग चलाया जा सकता है?",
+        "options": [
+          "संविधान का उल्लंघन",
+          "सिद्ध कदाचार या असमर्थता",
+          "पद पर रहते हुए किया गया कोई भी कार्य",
+          "संविधान का उल्लंघन, जैसा सर्वोच्च न्यायालय तय करे"
+        ],
+        "why": "'सिद्ध कदाचार या असमर्थता' जाना-पहचाना लगता है, क्योंकि यह judges को हटाने का आधार है। राष्ट्रपति के लिए एकमात्र आधार संविधान का उल्लंघन है, और फ़ैसला संसद करती है।"
+      }
+    },
+    {
+      "answerIndex": 2,
+      "traps": [
+        "extreme-word",
+        "half-true",
+        "none",
+        "sounds-familiar"
+      ],
+      "en": {
+        "question": "Which of the following statements about the Speaker of the Lok Sabha is correct?",
+        "options": [
+          "The Speaker never votes in the House",
+          "The Speaker leaves office the moment the House dissolves",
+          "The Speaker presides over a joint sitting of Parliament",
+          "The Speaker resigns by writing to the President"
+        ],
+        "why": "'Never votes' is the extreme-word trap: the Speaker has a casting vote in a tie. The Speaker does preside over joint sittings of the two Houses."
+      },
+      "hi": {
+        "question": "लोकसभा अध्यक्ष के बारे में निम्नलिखित में से कौन-सा कथन सही है?",
+        "options": [
+          "अध्यक्ष सदन में कभी मतदान नहीं करते",
+          "सदन भंग होते ही अध्यक्ष पद छोड़ देते हैं",
+          "अध्यक्ष संसद की संयुक्त बैठक की अध्यक्षता करते हैं",
+          "अध्यक्ष राष्ट्रपति को लिखकर इस्तीफ़ा देते हैं"
+        ],
+        "why": "'कभी नहीं' वाला extreme-word जाल है: बराबरी होने पर अध्यक्ष निर्णायक मत देते हैं। दोनों सदनों की संयुक्त बैठक की अध्यक्षता अध्यक्ष ही करते हैं।"
+      }
+    },
+    {
+      "answerIndex": 1,
+      "traps": [
+        "half-true",
+        "none",
+        "extreme-word",
+        "right-fact-wrong-reason"
+      ],
+      "en": {
+        "question": "How can the Chief Election Commissioner of India be removed from office?",
+        "options": [
+          "By the President, like other Election Commissioners",
+          "Like a Supreme Court judge, on the same grounds",
+          "Only by the Supreme Court after an inquiry",
+          "By Parliament, because Parliament elects the CEC"
+        ],
+        "why": "Option 4 mixes a right fact (Parliament has a role) with a wrong reason: the President appoints the CEC. Removal follows the procedure for a Supreme Court judge."
+      },
+      "hi": {
+        "question": "भारत के मुख्य निर्वाचन आयुक्त को पद से कैसे हटाया जा सकता है?",
+        "options": [
+          "राष्ट्रपति द्वारा, अन्य निर्वाचन आयुक्तों की तरह",
+          "सर्वोच्च न्यायालय के न्यायाधीश की तरह, उन्हीं आधारों पर",
+          "केवल सर्वोच्च न्यायालय द्वारा, जाँच के बाद",
+          "संसद द्वारा, क्योंकि संसद CEC को चुनती है"
+        ],
+        "why": "विकल्प 4 सही तथ्य (संसद की भूमिका है) को गलत कारण से जोड़ता है: CEC की नियुक्ति राष्ट्रपति करते हैं। हटाने की प्रक्रिया सर्वोच्च न्यायालय के judge जैसी है।"
+      }
+    },
+    {
+      "answerIndex": 0,
+      "traps": [
+        "none",
+        "sounds-familiar",
+        "extreme-word",
+        "half-true"
+      ],
+      "en": {
+        "question": "What can the Rajya Sabha do with a Money Bill passed by the Lok Sabha?",
+        "options": [
+          "Make recommendations within 14 days",
+          "Reject it outright",
+          "Nothing, as it cannot even discuss it",
+          "Hold it until a joint sitting is called"
+        ],
+        "why": "Option 4 is half-true: joint sittings exist, but never for Money Bills. The Rajya Sabha can only recommend changes within 14 days, which the Lok Sabha may reject."
+      },
+      "hi": {
+        "question": "लोकसभा द्वारा पारित धन विधेयक के साथ राज्यसभा क्या कर सकती है?",
+        "options": [
+          "14 दिनों के भीतर सिफ़ारिशें कर सकती है",
+          "उसे सीधे अस्वीकार कर सकती है",
+          "कुछ नहीं, वह उस पर चर्चा भी नहीं कर सकती",
+          "संयुक्त बैठक बुलाए जाने तक उसे रोक सकती है"
+        ],
+        "why": "विकल्प 4 आधा सच है: संयुक्त बैठक होती है, पर धन विधेयक के लिए कभी नहीं। राज्यसभा केवल 14 दिनों में बदलाव की सिफ़ारिश कर सकती है, जिसे लोकसभा ठुकरा सकती है।"
+      }
+    },
+    {
+      "answerIndex": 3,
+      "traps": [
+        "sounds-familiar",
+        "half-true",
+        "extreme-word",
+        "none"
+      ],
+      "en": {
+        "question": "Who decides questions of disqualification on grounds of defection under the Tenth Schedule?",
+        "options": [
+          "The Election Commission of India",
+          "The President, on the Election Commission's opinion",
+          "Only the Supreme Court",
+          "The Speaker or Chairman of the House"
+        ],
+        "why": "Option 2 is the procedure for other disqualifications under Article 103, not defection. Under the Tenth Schedule, the presiding officer decides, subject to judicial review."
+      },
+      "hi": {
+        "question": "दसवीं अनुसूची के तहत दल-बदल के आधार पर अयोग्यता के प्रश्न कौन तय करता है?",
+        "options": [
+          "भारत निर्वाचन आयोग",
+          "राष्ट्रपति, निर्वाचन आयोग की राय पर",
+          "केवल सर्वोच्च न्यायालय",
+          "सदन के अध्यक्ष या सभापति"
+        ],
+        "why": "विकल्प 2 अनुच्छेद 103 वाली दूसरी अयोग्यताओं की प्रक्रिया है, दल-बदल की नहीं। दसवीं अनुसूची में फ़ैसला पीठासीन अधिकारी करते हैं, जिसकी judicial review हो सकती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India; NCERT Class XI Indian Constitution at Work",
+    "hi": "भारत का संविधान; NCERT कक्षा XI भारतीय संविधान: सिद्धांत और व्यवहार"
+  },
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

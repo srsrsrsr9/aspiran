@@ -1,0 +1,978 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "anc-sectional-ancient-medieval-culture-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Ancient, medieval and culture mock 1",
+    "hi": "प्राचीन, मध्यकालीन और संस्कृति मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Ancient, Medieval History and Art and Culture",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "anc-harappan-civilisation",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which Harappan site has yielded a large brick structure widely identified as a dockyard?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Kalibangan",
+          "Banawali",
+          "Lothal",
+          "Rakhigarhi"
+        ],
+        "why": "Lothal in Gujarat has the dockyard. The trap is Kalibangan in Rajasthan, which is known for evidence of a ploughed field, not a dockyard."
+      },
+      "hi": {
+        "stem": "किस हड़प्पाई स्थल से ईंटों का एक बड़ा ढाँचा मिला है, जिसे आमतौर पर गोदीवाड़ा (dockyard) माना जाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कालीबंगा",
+          "बनावली",
+          "लोथल",
+          "राखीगढ़ी"
+        ],
+        "why": "गोदीवाड़ा गुजरात के लोथल में मिला है। जाल कालीबंगा (राजस्थान) है, जो जुते हुए खेत के साक्ष्य के लिए जाना जाता है, गोदीवाड़े के लिए नहीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-harappan-civilisation",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Harappan Civilisation:",
+        "statements": [
+          "The Great Bath was found at Mohenjo-daro.",
+          "The Harappan script has been fully deciphered.",
+          "Evidence of a ploughed field has been found at Kalibangan."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: the Harappan script has not yet been deciphered. The trap is '1, 2 and 3', since many seals with writing have been found."
+      },
+      "hi": {
+        "stem": "हड़प्पा सभ्यता के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विशाल स्नानागार (Great Bath) मोहनजोदड़ो में मिला था।",
+          "हड़प्पाई लिपि को पूरी तरह पढ़ लिया गया है।",
+          "कालीबंगा में जुते हुए खेत के साक्ष्य मिले हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: हड़प्पाई लिपि अब तक पढ़ी नहीं जा सकी है। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि लिखावट वाली बहुत-सी मुहरें मिली हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "anc-vedic-age",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Vedic period:",
+        "statements": [
+          "The Rigveda is divided into ten books called mandalas.",
+          "The Gayatri Mantra is found in the Rigveda.",
+          "The sabha and the samiti were assemblies mentioned in the Rigveda.",
+          "The Samaveda is mainly a collection of prose formulas for performing sacrifices."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 describes the Yajurveda; the Samaveda is a collection of chants set to melody. The trap is 'All four', mixing up the two Vedas."
+      },
+      "hi": {
+        "stem": "वैदिक काल के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "ऋग्वेद दस भागों में बँटा है, जिन्हें मंडल कहते हैं।",
+          "गायत्री मंत्र ऋग्वेद में मिलता है।",
+          "सभा और समिति ऋग्वेद में बताई गई सभाएँ थीं।",
+          "सामवेद मुख्य रूप से यज्ञ करने के गद्य सूत्रों का संग्रह है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 यजुर्वेद का वर्णन है; सामवेद धुन में गाए जाने वाले मंत्रों का संग्रह है। 'सभी चार' का जाल दोनों वेदों को मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "anc-vedic-age",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which Veda is a collection of hymns arranged for singing, most of them drawn from the Rigveda?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Rigveda",
+          "Yajurveda",
+          "Atharvaveda",
+          "Samaveda"
+        ],
+        "why": "The Samaveda sets Rigvedic hymns to melody. The trap is the Yajurveda, which is also a ritual text, but it gives the formulas for sacrifices, not songs."
+      },
+      "hi": {
+        "stem": "कौन-सा वेद गाने के लिए व्यवस्थित ऋचाओं का संग्रह है, जिनमें से अधिकांश ऋग्वेद से ली गई हैं?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "ऋग्वेद",
+          "यजुर्वेद",
+          "अथर्ववेद",
+          "सामवेद"
+        ],
+        "why": "सामवेद ऋग्वेद की ऋचाओं को धुन में पिरोता है। जाल यजुर्वेद है, जो भी कर्मकांड का ग्रंथ है, पर उसमें यज्ञ के सूत्र हैं, गीत नहीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-buddhism-and-jainism",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about Buddhism and Jainism:",
+        "statements": [
+          "The Buddha gave his first sermon at Sarnath.",
+          "Vardhamana Mahavira was the twenty-fourth tirthankara of the Jains.",
+          "The First Buddhist Council was held at Pataliputra."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the First Council met at Rajagriha; Pataliputra hosted the Third, under Ashoka. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "बौद्ध धर्म और जैन धर्म के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "बुद्ध ने अपना पहला उपदेश सारनाथ में दिया।",
+          "वर्धमान महावीर जैनों के चौबीसवें तीर्थंकर थे।",
+          "पहली बौद्ध संगीति पाटलिपुत्र में हुई थी।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: पहली संगीति राजगृह में हुई थी; पाटलिपुत्र में तीसरी संगीति अशोक के समय हुई। '1, 2 और 3' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "anc-buddhism-and-jainism",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. First Buddhist Council",
+          "B. Second Buddhist Council",
+          "C. Third Buddhist Council",
+          "D. Fourth Buddhist Council",
+          "1. Pataliputra",
+          "2. Kashmir",
+          "3. Rajagriha",
+          "4. Vaishali"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-3, B-4, C-1, D-2"
+        ],
+        "why": "The councils met at Rajagriha, Vaishali, Pataliputra (under Ashoka) and Kashmir (under Kanishka). The trap is (a), which swaps Rajagriha and Vaishali, both early Magadha-region centres."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. पहली बौद्ध संगीति",
+          "B. दूसरी बौद्ध संगीति",
+          "C. तीसरी बौद्ध संगीति",
+          "D. चौथी बौद्ध संगीति",
+          "1. पाटलिपुत्र",
+          "2. कश्मीर",
+          "3. राजगृह",
+          "4. वैशाली"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-3, B-4, C-1, D-2"
+        ],
+        "why": "संगीतियाँ क्रम से राजगृह, वैशाली, पाटलिपुत्र (अशोक के समय) और कश्मीर (कनिष्क के समय) में हुईं। जाल पहला विकल्प है, जो राजगृह और वैशाली को बदल देता है, क्योंकि दोनों शुरुआती केंद्र एक ही इलाके के हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "anc-mauryan-empire",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Mauryan period:",
+        "statements": [
+          "Megasthenes, an envoy of Seleucus Nicator at Chandragupta Maurya's court, wrote the Indica.",
+          "Ashoka's Major Rock Edict XIII describes the Kalinga war.",
+          "James Prinsep deciphered the Brahmi script of Ashoka's inscriptions in 1837.",
+          "Chandragupta Maurya was directly succeeded by Ashoka."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: Bindusara ruled between Chandragupta and Ashoka. The trap is 'All four', because Bindusara is the least remembered of the three."
+      },
+      "hi": {
+        "stem": "मौर्य काल के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "चंद्रगुप्त मौर्य के दरबार में सेल्यूकस निकेटर के राजदूत मेगस्थनीज़ ने इंडिका लिखी।",
+          "अशोक का बृहद शिलालेख XIII कलिंग युद्ध का वर्णन करता है।",
+          "जेम्स प्रिंसेप ने 1837 में अशोक के अभिलेखों की ब्राह्मी लिपि पढ़ी।",
+          "चंद्रगुप्त मौर्य के ठीक बाद अशोक गद्दी पर बैठे।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: चंद्रगुप्त और अशोक के बीच बिंदुसार ने शासन किया। 'सभी चार' का जाल इसलिए लगता है क्योंकि तीनों में बिंदुसार सबसे कम याद रहते हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "anc-mauryan-empire",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "The Great Stupa at Sanchi was first built in the time of Ashoka.",
+          "Its four carved stone gateways (toranas) were also added during Ashoka's reign."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct. Statement II is wrong: the gateways were added much later, around the first century BCE. The trap is (a), which credits the whole monument to Ashoka."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "साँची का महान स्तूप पहली बार अशोक के समय बना।",
+          "इसके चार नक्काशीदार पत्थर के तोरण भी अशोक के शासनकाल में जोड़े गए।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है। कथन II गलत है: तोरण बहुत बाद में, लगभग पहली शताब्दी ईसा पूर्व में जोड़े गए। पहले विकल्प का जाल पूरा स्मारक अशोक के नाम कर देने से लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "anc-gupta-age",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Who composed the Prayaga Prashasti, the praise of Samudragupta inscribed on the Allahabad Pillar?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Harishena",
+          "Kalidasa",
+          "Banabhatta",
+          "Ravikirti"
+        ],
+        "why": "Harishena, Samudragupta's court poet, composed it. The trap is Ravikirti, who wrote another famous prashasti, the Aihole inscription of the Chalukya king Pulakeshin II."
+      },
+      "hi": {
+        "stem": "इलाहाबाद स्तंभ पर उकेरी गई समुद्रगुप्त की प्रशंसा, प्रयाग प्रशस्ति, की रचना किसने की?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "हरिषेण",
+          "कालिदास",
+          "बाणभट्ट",
+          "रविकीर्ति"
+        ],
+        "why": "इसे समुद्रगुप्त के दरबारी कवि हरिषेण ने रचा था। जाल रविकीर्ति हैं, जिन्होंने एक और मशहूर प्रशस्ति लिखी: चालुक्य राजा पुलकेशिन II का ऐहोल अभिलेख।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-gupta-age",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Gupta period:",
+        "statements": [
+          "The Chinese pilgrim Fa-Hien visited India during the reign of Chandragupta II.",
+          "The Chinese pilgrim Hiuen Tsang visited India during the reign of Chandragupta II.",
+          "Aryabhata wrote the Aryabhatiya in the Gupta period."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: Hiuen Tsang came in the seventh century, in Harsha's reign. The trap is '1, 2 and 3', mixing up the two Chinese pilgrims."
+      },
+      "hi": {
+        "stem": "गुप्त काल के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "चीनी यात्री फ़ाह्यान चंद्रगुप्त II के शासनकाल में भारत आए।",
+          "चीनी यात्री ह्वेनसांग चंद्रगुप्त II के शासनकाल में भारत आए।",
+          "आर्यभट ने आर्यभटीय की रचना गुप्त काल में की।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: ह्वेनसांग सातवीं शताब्दी में हर्ष के शासनकाल में आए थे। '1, 2 और 3' का जाल दोनों चीनी यात्रियों को मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "select-items",
+      "node": "anc-sangam-age",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which of the following works were written in Tamil?",
+        "statements": [
+          "Tolkappiyam",
+          "Silappadikaram",
+          "Manimekalai",
+          "Mricchakatika"
+        ],
+        "ask": "Select the correct answer using the code given below.",
+        "options": [
+          "1 and 2 only",
+          "1, 2 and 3 only",
+          "3 and 4 only",
+          "1, 2, 3 and 4"
+        ],
+        "why": "Tolkappiyam, a work on Tamil grammar, and the epics Silappadikaram and Manimekalai are Tamil. Mricchakatika is a Sanskrit play by Shudraka. The trap is '1 and 2 only', leaving out Manimekalai."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सी रचनाएँ तमिल में लिखी गईं?",
+        "statements": [
+          "तोलकाप्पियम",
+          "शिलप्पादिकारम",
+          "मणिमेकलै",
+          "मृच्छकटिकम"
+        ],
+        "ask": "नीचे दिए गए कूट का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1, 2 और 3",
+          "केवल 3 और 4",
+          "1, 2, 3 और 4"
+        ],
+        "why": "तोलकाप्पियम (तमिल व्याकरण का ग्रंथ) और महाकाव्य शिलप्पादिकारम व मणिमेकलै तमिल में हैं। मृच्छकटिकम शूद्रक का संस्कृत नाटक है। 'केवल 1 और 2' का जाल मणिमेकलै को छोड़ देने से लगता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "anc-south-indian-kingdoms",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Pallavas",
+          "B. Chalukyas of Badami",
+          "C. Rashtrakutas",
+          "D. Cholas under Rajaraja I",
+          "1. Manyakheta",
+          "2. Kanchipuram",
+          "3. Thanjavur",
+          "4. Vatapi"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-4, B-2, C-1, D-3",
+          "A-2, B-4, C-3, D-1",
+          "A-1, B-3, C-2, D-4"
+        ],
+        "why": "The Pallava capital was Kanchipuram, the Chalukyas ruled from Vatapi (Badami), the Rashtrakutas from Manyakheta and Rajaraja I from Thanjavur. The trap is (b), which swaps the Pallava and Chalukya rivals."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. पल्लव",
+          "B. बादामी के चालुक्य",
+          "C. राष्ट्रकूट",
+          "D. राजराज I के समय के चोल",
+          "1. मान्यखेट",
+          "2. कांचीपुरम",
+          "3. तंजावुर",
+          "4. वातापी"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-4, B-2, C-1, D-3",
+          "A-2, B-4, C-3, D-1",
+          "A-1, B-3, C-2, D-4"
+        ],
+        "why": "पल्लवों की राजधानी कांचीपुरम थी, चालुक्य वातापी (बादामी) से, राष्ट्रकूट मान्यखेट से और राजराज I तंजावुर से शासन करते थे। जाल दूसरा विकल्प है, जो प्रतिद्वंद्वी पल्लवों और चालुक्यों को बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "art-temple-architecture",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of temples and the dynasties under which they were built:",
+        "statements": [
+          "Kailasa temple, Ellora – Rashtrakutas",
+          "Brihadeeswara temple, Thanjavur – Cholas",
+          "Virupaksha temple, Pattadakal – Cholas"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Pairs 1 and 2 are correct. The Virupaksha temple at Pattadakal was built under the Chalukyas of Badami. The trap is 'All three', because the name Virupaksha also brings Hampi to mind."
+      },
+      "hi": {
+        "stem": "मंदिरों और उन्हें बनवाने वाले राजवंशों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "कैलास मंदिर, एलोरा – राष्ट्रकूट",
+          "बृहदीश्वर मंदिर, तंजावुर – चोल",
+          "विरुपाक्ष मंदिर, पट्टदकल – चोल"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई नहीं"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। पट्टदकल का विरुपाक्ष मंदिर बादामी के चालुक्यों के समय बना। 'सभी तीन' का जाल इसलिए लगता है क्योंकि विरुपाक्ष नाम सुनकर हम्पी भी याद आता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "anc-delhi-sultanate",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following pairs of a Delhi Sultan and a measure is NOT correctly matched?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Alauddin Khalji – Market control measures",
+          "Muhammad bin Tughlaq – Token currency",
+          "Iltutmish – Silver tanka and copper jital",
+          "Balban – Shifting the capital to Daulatabad"
+        ],
+        "why": "Muhammad bin Tughlaq, not Balban, shifted the capital to Daulatabad. The trap is Iltutmish, whose coinage is less often remembered but is correctly matched."
+      },
+      "hi": {
+        "stem": "दिल्ली के सुल्तान और उनके कदम का निम्नलिखित में से कौन-सा युग्म सही सुमेलित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अलाउद्दीन ख़िलजी – बाज़ार नियंत्रण के उपाय",
+          "मुहम्मद बिन तुग़लक़ – सांकेतिक मुद्रा (token currency)",
+          "इल्तुतमिश – चाँदी का टंका और ताँबे का जीतल",
+          "बलबन – राजधानी दौलताबाद ले जाना"
+        ],
+        "why": "राजधानी को दौलताबाद बलबन नहीं, मुहम्मद बिन तुग़लक़ ले गए थे। जाल इल्तुतमिश वाला विकल्प है, जिनके सिक्के कम याद रहते हैं, पर यह युग्म सही है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-delhi-sultanate",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Delhi Sultanate:",
+        "statements": [
+          "Qutb-ud-din Aibak began the Qutb Minar, and Iltutmish added further storeys.",
+          "Razia Sultan was a daughter of Iltutmish.",
+          "Babur defeated Sikandar Lodi in the First Battle of Panipat in 1526."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Babur defeated Ibrahim Lodi, the last Lodi Sultan; Sikandar Lodi was his father. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "दिल्ली सल्तनत के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "क़ुतुबुद्दीन ऐबक ने क़ुतुब मीनार बनवाना शुरू किया, और इल्तुतमिश ने इसमें और मंज़िलें जोड़ीं।",
+          "रज़िया सुल्तान इल्तुतमिश की बेटी थीं।",
+          "बाबर ने 1526 में पानीपत की पहली लड़ाई में सिकंदर लोदी को हराया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: बाबर ने अंतिम लोदी सुल्तान इब्राहिम लोदी को हराया था; सिकंदर लोदी उनके पिता थे। '1, 2 और 3' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "anc-vijayanagara-empire",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which battle of 1565 led to the sack of the city of Vijayanagara?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Battle of Khanwa",
+          "Battle of Talikota",
+          "Battle of Raichur",
+          "Second Battle of Panipat"
+        ],
+        "why": "At Talikota (also called Rakshasi-Tangadi) in 1565, an alliance of Deccan Sultanates defeated Vijayanagara. The trap is Raichur, a Vijayanagara victory under Krishnadeva Raya in 1520."
+      },
+      "hi": {
+        "stem": "1565 के किस युद्ध के बाद विजयनगर शहर को लूटा और नष्ट किया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "खानवा का युद्ध",
+          "तालीकोटा का युद्ध",
+          "रायचूर का युद्ध",
+          "पानीपत का दूसरा युद्ध"
+        ],
+        "why": "1565 में तालीकोटा (जिसे राक्षसी-तंगडी भी कहते हैं) में दक्कन सल्तनतों के गठबंधन ने विजयनगर को हराया। जाल रायचूर है, जहाँ 1520 में कृष्णदेव राय के समय विजयनगर जीता था।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "anc-vijayanagara-empire",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Krishnadeva Raya wrote the Amuktamalyada in Telugu.",
+          "Krishnadeva Raya belonged to the Tuluva dynasty of Vijayanagara."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but his dynasty does not explain why he wrote a Telugu work. The trap is (a): two true facts about the same king are not cause and effect."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कृष्णदेव राय ने तेलुगु में आमुक्तमाल्यद की रचना की।",
+          "कृष्णदेव राय विजयनगर के तुलुव वंश से थे।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, पर उनका वंश यह नहीं बताता कि उन्होंने तेलुगु में रचना क्यों की। पहले विकल्प का जाल यह है: एक ही राजा के बारे में दो सही बातें, कारण और परिणाम नहीं होतीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-mughal-empire",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Mughals:",
+        "statements": [
+          "Babur defeated Rana Sanga in the First Battle of Panipat.",
+          "Raja Todar Mal is associated with Akbar's land revenue system.",
+          "The Ain-i-Akbari was written by Abul Fazl."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "2 and 3 only",
+          "1 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 2 and 3 are correct. Statement 1 is wrong: Babur defeated Ibrahim Lodi at Panipat in 1526 and Rana Sanga at Khanwa in 1527. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "मुगलों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "बाबर ने पानीपत की पहली लड़ाई में राणा सांगा को हराया।",
+          "राजा टोडरमल अकबर की भू-राजस्व व्यवस्था से जुड़े हैं।",
+          "आईन-ए-अकबरी अबुल फ़ज़ल ने लिखी।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 2 और 3",
+          "केवल 1",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 2 और 3 सही हैं। कथन 1 गलत है: बाबर ने 1526 में पानीपत में इब्राहिम लोदी को और 1527 में खानवा में राणा सांगा को हराया। '1, 2 और 3' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "anc-mughal-empire",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of monuments and the Mughal rulers under whom they were built:",
+        "statements": [
+          "Buland Darwaza – Akbar",
+          "Red Fort, Delhi – Shah Jahan",
+          "Tomb of Itimad-ud-Daula, Agra – Akbar"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Pairs 1 and 2 are correct. Nur Jahan built Itimad-ud-Daula's tomb for her father in Jahangir's reign. The trap is 'All three', because many Agra monuments are linked with Akbar."
+      },
+      "hi": {
+        "stem": "स्मारकों और उन्हें बनवाने वाले मुगल शासकों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "बुलंद दरवाज़ा – अकबर",
+          "लाल क़िला, दिल्ली – शाहजहाँ",
+          "एतमादुद्दौला का मक़बरा, आगरा – अकबर"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी तीन",
+          "कोई नहीं"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। एतमादुद्दौला का मक़बरा जहाँगीर के समय नूरजहाँ ने अपने पिता के लिए बनवाया था। 'सभी तीन' का जाल इसलिए लगता है क्योंकि आगरा के कई स्मारक अकबर से जुड़े हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "anc-bhakti-and-sufi",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Bhakti and Sufi traditions:",
+        "statements": [
+          "The Alvars were devotees of Vishnu, and the Nayanars were devotees of Shiva.",
+          "Verses of Kabir are included in the Guru Granth Sahib.",
+          "Nizamuddin Auliya belonged to the Suhrawardi order."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Nizamuddin Auliya was a saint of the Chishti order in Delhi. The trap is '1, 2 and 3', since the Suhrawardi order was also active then."
+      },
+      "hi": {
+        "stem": "भक्ति और सूफ़ी परंपराओं के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "आलवार विष्णु के भक्त थे, और नयनार शिव के भक्त थे।",
+          "कबीर के पद गुरु ग्रंथ साहिब में शामिल हैं।",
+          "निज़ामुद्दीन औलिया सुहरावर्दी सिलसिले से थे।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: निज़ामुद्दीन औलिया दिल्ली में चिश्ती सिलसिले के संत थे। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि सुहरावर्दी सिलसिला भी उस समय सक्रिय था।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "art-classical-dances",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The classical dance Sattriya grew out of the monasteries (sattras) founded in Assam by whom?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Chaitanya Mahaprabhu",
+          "Jayadeva",
+          "Vallabhacharya",
+          "Srimanta Sankardeva"
+        ],
+        "why": "Srimanta Sankardeva, the Vaishnava saint of Assam, founded the sattras. The trap is Chaitanya Mahaprabhu, a Vaishnava saint of neighbouring Bengal."
+      },
+      "hi": {
+        "stem": "शास्त्रीय नृत्य सत्रिया असम में किसके द्वारा स्थापित मठों (सत्रों) से विकसित हुआ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "चैतन्य महाप्रभु",
+          "जयदेव",
+          "वल्लभाचार्य",
+          "श्रीमंत शंकरदेव"
+        ],
+        "why": "सत्रों की स्थापना असम के वैष्णव संत श्रीमंत शंकरदेव ने की थी। जाल चैतन्य महाप्रभु हैं, जो पड़ोसी बंगाल के वैष्णव संत थे।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "art-classical-dances",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following pairs of classical dances and the states they are associated with:",
+        "statements": [
+          "Kuchipudi – Andhra Pradesh",
+          "Mohiniyattam – Kerala",
+          "Manipuri – Manipur",
+          "Odissi – Odisha"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four pairs are correct. Kuchipudi takes its name from a village in Andhra Pradesh. The trap is 'Only three', from expecting one pair to be wrong."
+      },
+      "hi": {
+        "stem": "शास्त्रीय नृत्यों और उनसे जुड़े राज्यों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "कुचिपुड़ी – आंध्र प्रदेश",
+          "मोहिनीअट्टम – केरल",
+          "मणिपुरी – मणिपुर",
+          "ओडिसी – ओडिशा"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों युग्म सही हैं। कुचिपुड़ी का नाम आंध्र प्रदेश के एक गाँव से पड़ा है। 'केवल तीन' का जाल यह मान लेने से लगता है कि कोई एक युग्म तो गलत होगा ही।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "art-paintings",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following pairs of a painting tradition and its region is NOT correctly matched?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Ajanta murals – Maharashtra",
+          "Madhubani – Bihar",
+          "Warli – Maharashtra",
+          "Pattachitra – Rajasthan"
+        ],
+        "why": "Pattachitra is a cloth-painting tradition of Odisha and West Bengal. The trap is Warli, since Ajanta is also in Maharashtra and two pairs naming one state look suspicious, but both are correct."
+      },
+      "hi": {
+        "stem": "चित्रकला परंपरा और उसके क्षेत्र का निम्नलिखित में से कौन-सा युग्म सही सुमेलित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अजंता के भित्तिचित्र – महाराष्ट्र",
+          "मधुबनी – बिहार",
+          "वारली – महाराष्ट्र",
+          "पट्टचित्र – राजस्थान"
+        ],
+        "why": "पट्टचित्र कपड़े पर बनने वाली चित्रकला है, जो ओडिशा और पश्चिम बंगाल की परंपरा है। जाल वारली है: अजंता भी महाराष्ट्र में है और एक ही राज्य दो बार देखकर शक होता है, पर दोनों युग्म सही हैं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "art-unesco-world-heritage-sites",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following is NOT a UNESCO World Heritage Site?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Meenakshi Amman Temple, Madurai",
+          "Rani-ki-Vav, Patan",
+          "Khajuraho Group of Monuments",
+          "Group of Monuments at Hampi"
+        ],
+        "why": "The Meenakshi temple is famous but is not on the World Heritage list. The trap is Rani-ki-Vav, a stepwell in Gujarat that is less famous but was inscribed in 2014."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा UNESCO विश्व धरोहर स्थल नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मीनाक्षी अम्मन मंदिर, मदुरै",
+          "रानी की वाव, पाटन",
+          "खजुराहो स्मारक समूह",
+          "हम्पी का स्मारक समूह"
+        ],
+        "why": "मीनाक्षी मंदिर मशहूर है, पर विश्व धरोहर सूची में नहीं है। जाल रानी की वाव है: गुजरात की यह बावड़ी कम मशहूर है, पर 2014 में सूची में शामिल हुई थी।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "art-temple-architecture",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "The Sun Temple at Konark is conceived as a giant chariot of the Sun god.",
+          "Large carved stone wheels and horses line the base of the temple.",
+          "The temple is built in the Dravida style of temple architecture."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Statement II is correct and explains the chariot design. Statement III is wrong: Konark follows the Kalinga style, a form of the northern Nagara style. The trap is (a), because the temple is on the eastern coast."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कोणार्क का सूर्य मंदिर सूर्य देव के विशाल रथ के रूप में परिकल्पित है।",
+          "मंदिर के आधार पर पत्थर के बड़े नक्काशीदार पहिए और घोड़े बने हैं।",
+          "यह मंदिर मंदिर स्थापत्य की द्रविड़ शैली में बना है।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और कथन III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "कथन II सही है और रथ वाली बनावट समझाता है। कथन III गलत है: कोणार्क कलिंग शैली में है, जो उत्तर भारतीय नागर शैली का एक रूप है। पहले विकल्प का जाल इसलिए है क्योंकि मंदिर पूर्वी तट पर है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Themes in Indian History Parts I and II; NCERT An Introduction to Indian Art",
+    "hi": "NCERT भारतीय इतिहास के कुछ विषय भाग I और II; NCERT भारतीय कला का परिचय"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

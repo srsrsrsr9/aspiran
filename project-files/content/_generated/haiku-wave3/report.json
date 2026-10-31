@@ -1,0 +1,84 @@
+{
+  "run": "2026-10-11",
+  "generator": "Claude Haiku via the template prompts (agent test run, same prompts as tools/generate.mjs)",
+  "jobs": "jobs/jobs.wave3.jsonl",
+  "firstTryValid": 7,
+  "repaired": {
+    "count": 1,
+    "note": "Job 7 (narrated-classic): one line was 19 words against a limit of 18; fixed in one repair turn. Job 6 (book-chai) was flagged for an English book title in the Hindi field; the rule now allows titles there, so it was not a writer error."
+  },
+  "results": [
+    {
+      "job": 1,
+      "type": "story-spine",
+      "sample": "story-spine/story-spine-sample.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 2,
+      "type": "kautilya-lens",
+      "sample": "kautilya-lens/kautilya-lens-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 3,
+      "type": "should-i-guess",
+      "sample": "should-i-guess/should-i-guess-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 4,
+      "type": "repeater-journey",
+      "sample": "repeater-journey/repeater-journey-sample.json",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ]
+    },
+    {
+      "job": 5,
+      "type": "strategy-corner",
+      "sample": "strategy-corner/strategy-corner-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 6,
+      "type": "book-chai",
+      "sample": "book-chai/book-chai-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 7,
+      "type": "narrated-classic",
+      "sample": "narrated-classic/narrated-classic-sample.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 8,
+      "type": "myth-card",
+      "sample": "myths/chanakya-myth-or-fact.json",
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "job": 9,
+      "type": "timeline-shuffle",
+      "sample": "timeline-shuffle/national-emergencies-with-hook.json",
+      "errors": [],
+      "warnings": [
+        "$.memoryHook.en: the number 62 is not in the source text. Check it",
+        "$.memoryHook.en: the number 71 is not in the source text. Check it",
+        "$.memoryHook.en: the number 75 is not in the source text. Check it",
+        "$.sources: the editor needs to name the source"
+      ]
+    }
+  ]
+}

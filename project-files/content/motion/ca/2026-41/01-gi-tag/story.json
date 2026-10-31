@@ -1,0 +1,191 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "id": "gi-tag",
+ "card": "cards/chai-2026-10-10.json#gi-tag",
+ "lang": "en",
+ "tone": "LIGHT",
+ "title": "A GI tag protects a name, not a recipe",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [],
+ "sources": [
+  "Geographical Indications of Goods (Registration and Protection) Act, 1999",
+  "Chai card, 10 Oct 2026 (draft)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "gi-tag-q1",
+   "q": "A GI registration in India is valid for:",
+   "options": [
+    "5 years",
+    "10 years, and can be renewed",
+    "20 years",
+    "For ever"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 10 years, renewable."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Facts are from the 10 Oct Chai card, itself still a draft. Needs subject and Hindi editor approval."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "elevenlabs",
+  "voiceId": "X4kfNEZPfKkHBnN2KBJR",
+  "model": "eleven_multilingual_v2",
+  "settings": {
+   "stability": 0.5,
+   "similarity_boost": 0.8,
+   "style": 0.2,
+   "speed": 0.95
+  }
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.3,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one,": "GS1,",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-one": "GS1",
+  "G-S-three": "GS3"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "say": "Anyone can cook rasgulla at home. So what does a GI tag actually protect?",
+   "data": {
+    "kicker": "Week 41 · 1 of 3 · GS3",
+    "headline": "A GI tag protects a name, not a recipe",
+    "illustration": "illustrations/gi.svg"
+   }
+  },
+  {
+   "shot": "map",
+   "say": "A Geographical Indication says a product comes from a particular place, and owes its qualities to it. Darjeeling Tea was the first Indian product to get one.",
+   "data": {
+    "lon0": 0,
+    "start": {
+     "center": [
+      60,
+      20
+     ],
+     "zoom": 0.55
+    },
+    "moves": [
+     {
+      "cue": "particular",
+      "center": [
+       80,
+       22
+      ],
+      "zoom": 2.6,
+      "d": 1.8
+     },
+     {
+      "cue": "Darjeeling",
+      "center": [
+       88.26,
+       24.5
+      ],
+      "zoom": 4.2,
+      "d": 1.6
+     }
+    ],
+    "pins": [
+     {
+      "at": [
+       88.26,
+       27.04
+      ],
+      "label": "Darjeeling Tea · first Indian GI",
+      "cue": "first"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "timeline",
+   "say": "India's GI law was passed in 1999, and came into force in 2003.",
+   "data": {
+    "kicker": "The law",
+    "points": [
+     {
+      "year": 1999,
+      "label": "GI Act passed",
+      "cue": "passed"
+     },
+     {
+      "year": 2003,
+      "label": "Comes into force",
+      "cue": "force"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "stat",
+   "say": "A registration lasts ten years, and it can be renewed.",
+   "data": {
+    "kicker": "How long it lasts",
+    "items": [
+     {
+      "value": 10,
+      "suffix": " years",
+      "label": "then it can be renewed",
+      "cue": "ten"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "chips",
+   "say": "For prelims, link it to intellectual property and the WTO's TRIPS Agreement. It also ties in to rural livelihoods and exports.",
+   "data": {
+    "kicker": "Why it matters",
+    "title": "For your exam",
+    "items": [
+     {
+      "text": "Prelims · IPR basics",
+      "sub": "The WTO's TRIPS Agreement",
+      "cue": "intellectual"
+     },
+     {
+      "text": "GS3 · rural economy",
+      "sub": "Livelihoods and exports",
+      "cue": "rural"
+     }
+    ]
+   }
+  },
+  {
+   "shot": "quiz",
+   "say": "Your turn. How long is a GI registration valid?",
+   "data": {
+    "kicker": "Your turn",
+    "q": "A GI registration in India is valid for:",
+    "options": [
+     "5 years",
+     "10 years, and can be renewed",
+     "20 years",
+     "For ever"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,488 @@
+<title>Buyer Review, Annotated</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column. The review is set in a book serif on paper; my notes sit under each point in a sans, on an indigo-tinted panel with a stance chip. */
+:root {
+  --bg: #f6f7f9;
+  --paper: #ffffff;
+  --ink: #23262d;
+  --muted: #646a76;
+  --rule: #dfe2e8;
+  --note: #3236b8;
+  --note-ink: #262a8f;
+  --note-bg: #eef0ff;
+  --note-rule: #c9cdf7;
+  --agree: #1d7a4d;
+  --partly: #9a6200;
+  --push: #b3361f;
+  --add: #3236b8;
+  --chip-bg: #ffffff;
+  --serif: "Literata", Georgia, "Times New Roman", serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161b; --paper: #1b1e24; --ink: #e4e6ea; --muted: #9aa1ad; --rule: #2d313a;
+    --note: #a9adff; --note-ink: #c6c9ff; --note-bg: #20234a; --note-rule: #363b78;
+    --agree: #5cc995; --partly: #e3ad4f; --push: #f08a74; --add: #a9adff; --chip-bg: #14161b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14161b; --paper: #1b1e24; --ink: #e4e6ea; --muted: #9aa1ad; --rule: #2d313a;
+  --note: #a9adff; --note-ink: #c6c9ff; --note-bg: #20234a; --note-rule: #363b78;
+  --agree: #5cc995; --partly: #e3ad4f; --push: #f08a74; --add: #a9adff; --chip-bg: #14161b;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 16.5px; line-height: 1.6; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 40px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { text-wrap: balance; line-height: 1.25; }
+h1 { font-size: 2rem; margin: 0 0 .4rem; font-weight: 700; }
+h2 { font-size: 1.4rem; margin: 3rem 0 1rem; padding-top: 1.2rem; border-top: 2px solid var(--ink); }
+h3 { font-size: 1.12rem; margin: 2rem 0 .6rem; }
+h4 { font-family: var(--sans); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 2rem 0 .5rem; font-weight: 600; }
+p { margin: 0 0 .8rem; }
+ul { margin: 0 0 .8rem; padding-left: 1.2rem; }
+li { margin-bottom: .35rem; }
+code { font-family: var(--mono); font-size: .85em; background: var(--bg); border: 1px solid var(--rule); border-radius: 3px; padding: 0 .25em; overflow-wrap: anywhere; }
+.sub { font-family: var(--sans); color: var(--muted); font-size: .92rem; margin-bottom: 1.6rem; }
+.key { font-family: var(--sans); font-size: .9rem; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 14px; border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; margin-bottom: 1.2rem; }
+.key .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; background: var(--note); vertical-align: -1px; margin-right: 6px; }
+.point { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 16px 18px; margin: 0 0 14px; }
+.point > :last-child { margin-bottom: 0; }
+.num { font-family: var(--mono); color: var(--muted); font-size: .85rem; margin-right: .3rem; }
+.note { font-family: var(--sans); font-size: .95rem; line-height: 1.55; color: var(--note-ink); background: var(--note-bg); border-left: 3px solid var(--note); border-radius: 0 4px 4px 0; padding: 10px 14px; margin: 12px 0 0; }
+.note p:last-child, .note ul:last-child { margin-bottom: 0; }
+.note b, .note strong { color: var(--note-ink); }
+.note .lbl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--note); margin-bottom: 4px; }
+.chip { font-size: .7rem; letter-spacing: .06em; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; background: var(--chip-bg); }
+.chip.agree { color: var(--agree); }
+.chip.partly { color: var(--partly); }
+.chip.push { color: var(--push); }
+.chip.add { color: var(--add); }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; }
+.row .eff { font-family: var(--mono); font-size: .8rem; color: var(--muted); white-space: nowrap; }
+.row .why { grid-column: 1 / -1; color: var(--muted); font-size: .95rem; }
+.row b { min-width: 0; }
+.summary { font-family: var(--sans); background: var(--note-bg); color: var(--note-ink); border: 1px solid var(--note-rule); border-radius: 6px; padding: 16px 18px; margin-bottom: 1.2rem; }
+.summary h3 { margin-top: 0; font-family: var(--sans); color: var(--note); font-size: 1rem; }
+.summary ol { margin: 0; padding-left: 1.2rem; }
+.summary li { margin-bottom: .45rem; }
+</style>
+
+<div class="wrap">
+  <h1>UPSC Pods buyer review, annotated</h1>
+  <div class="sub">The independent reviewer's report from 22 Oct 2026, kept as written, with my take under every point.</div>
+
+  <div class="key"><span><span class="sw"></span>Indigo panels are my notes.</span>
+    <span class="chip agree">Agree</span><span class="chip partly">Partly</span><span class="chip push">Push back</span><span class="chip add">Adding</span></div>
+
+  <div class="summary">
+    <h3>My take in five lines</h3>
+    <ol>
+      <li>The review is right on the big three, and I checked the sharpest claims myself. The website does sell "Unlimited answer feedback", "PYQs by topic" and "checked by a human editor". Yet <code>content/pyq/pyq.json</code> is 233 bytes, and the "no fake members" promise is in <code>strategy/positioning.md</code>.</li>
+      <li>The first fix costs almost nothing: take the untrue claims off the website and the Plus page today. Everything else is a build.</li>
+      <li>I'd change the order of P0s. Sign off the crisis protocol before pods open to strangers, and split the syllabus work in two. The skeleton is a one-day job; the content behind it is the long one.</li>
+      <li>Build answer evaluation, but start narrow: English, photo plus typed, rubric feedback with a band rather than a mark out of 10. Then add Hindi.</li>
+      <li>The reviewer judged a pre-launch build as if it were on sale. That's the right lens for "what blocks paying", but it doesn't mean the foundations are wrong. The parts it praises are the hard parts to copy.</li>
+    </ol>
+  </div>
+
+  <p style="font-family:var(--sans);font-size:.92rem;color:var(--muted)"><b>How the reviewer worked:</b> it couldn't stage the Kotlin source, because the files sit 8–9 folders deep and the staging tool stops at 7. So it pulled the UI strings and Compose screen names from the release APK built about 21 Oct. It also read <code>android\README.md</code>, the bundled assets, the server source (<code>plus.ts</code>, <code>payments.ts</code>, <code>chotu.ts</code>, <code>pod.ts</code>, <code>friends.ts</code>, <code>community.ts</code>, <code>roadmap.ts</code>, <code>ai.ts</code>, <code>index.ts</code> and others) and the shared strategy, status and content notes. It rendered the website in headless Chromium and looked at the Plus sales-page screenshots.</p>
+  <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>For copy and positioning, the evidence is solid: strings in the shipped APK are what a member reads. It's weaker on flow, meaning what opens first, what's gated, and what's behind a flag. Read anything about order or gating as a lead to check, not a finding.</p></div>
+
+  <!-- ============ 1 ============ -->
+  <h2>1. Verdict</h2>
+
+  <div class="point">
+    <p><b>I would not pay today, at ₹2,499 or at the ₹999 founding price.</b> The app is unusually honest and kind. Close the Day, result-day mode, on-phone privacy, and mocks that teach negative-marking strategy are things no coaching app does as well.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>I agree, as of today's build. Nobody should be asked to pay for it in this state. The praise is also earned: those features come from product beliefs, and competitors can't copy beliefs in a sprint.</p></div>
+  </div>
+
+  <div class="point">
+    <p><b>Missing: syllabus-deep material.</b> There is no syllabus map outside Polity, no PYQs, and every content item is an unapproved draft.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed in project files: only <code>content/polity/syllabus-map.json</code> exists, and <code>pyq.json</code> is essentially empty. These are three separate problems with different fixes. The syllabus map is a data job, PYQs are an import job, and approval is a people job. Don't let them blur into one "content" problem.</p></div>
+  </div>
+
+  <div class="point">
+    <p><b>Missing: Mains answer evaluation.</b> There is no evaluator at all, typed or handwritten, yet the Plus page and the website both sell "unlimited answer feedback".</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed. The website lists "Unlimited answer feedback" under Plus, and its FAQ says "Plus adds unlimited feedback". This is the most urgent line in the whole review, because it's a promise rather than a gap.</p></div>
+  </div>
+
+  <div class="point">
+    <p>Of what Plus contains today, the weekly current-affairs test and the monthly compilation are given away free by Drishti, Insights and Vision as PDFs and quizzes. Mock insights are good, but there are only about 16 sectional drafts and a single sample full-length paper to analyse.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Aspirants are trained to expect current-affairs PDFs for free, so a weekly CA test can't carry a paid tier. Plus should be anchored on things that cost real money to deliver: answer evaluation, full-length mocks with analysis, and a personal plan tied to the syllabus.</p></div>
+  </div>
+
+  <div class="point">
+    <p>So I'd stay for the free community and the calm rituals, and spend my money on SuperKalam (about ₹2,999 a year, with handwritten answer evaluation; from memory) or a Vision/Forum test series. Two things would make me pay: real answer feedback, ideally from a photo of my handwritten sheet, and a syllabus spine I can see myself moving through.</p>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>The competitor price is unverified, so check it before it shapes our pricing. "I'd stay for the free community" is good news though: the free layer retains, which is the hard part. The two pay triggers it names match the user's criticisms 1 and 3 exactly, so we now have the same answer from two directions.</p></div>
+  </div>
+
+  <!-- ============ 2 ============ -->
+  <h2>2. The three criticisms</h2>
+
+  <h3>Criticism 1: "Prep doesn't show the UPSC syllabus upfront." Reviewer: agree.</h3>
+
+  <div class="point">
+    <p><span class="num">E1</span>Prep's sub-tabs are Today's 3 · Chai · Practice · Mocks · Read · Learn · Focus · My Plan (web screenshot <code>desktop-first-screen.png</code>; Android screens <code>PrepPage</code>, <code>PrepEntries</code>, <code>LearnHubScreen</code>). None of them is a syllabus.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Eight sub-tabs is also too many on a phone. When we add Syllabus, fold some together: Read and Learn could be one tab, and Focus could live outside Prep. Don't just make it nine.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E2</span>Learn and play is grouped "by format and subject", which means flashcards, pair-up, trap spotter and so on.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Format is how we build content, not how an aspirant thinks. The 70 formats should be invisible plumbing: an aspirant opens "Federalism" and gets whatever formats exist for it.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E3</span>The only syllabus structure is <code>content/polity/syllabus-map.json</code>: 27 Polity nodes, of which 6 are empty and 6 are thin. <code>server/src/roadmap.ts</code> says it outright: "GS2 Polity is mapped unit by unit first; the other subjects are whole-subject estimates".</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed that the file exists and is Polity only. The Polity map already has a node shape, so the other papers can reuse it rather than needing a new design.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E4</span>The roadmap sits behind a 6-question form and is reached from the Chotu tab.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>The plan is a Prep object, so it should live in Prep. Chotu can still offer to build it, but it shouldn't be the only door.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E5</span><code>status/next-steps.md</code> already says: "the app has practice formats but no syllabus-deep material, which is the gap an aspirant would notice first."</p>
+    <div class="note"><div class="lbl">My take <span class="chip add">Adding</span></div><p>We wrote that on 11 Oct and still haven't acted on it. Content work since then went into new formats rather than coverage. That's the process lesson here.</p></div>
+  </div>
+  <div class="point">
+    <p><b>How it feels to an aspirant:</b> UPSC prep is organised around the official syllabus and PYQs. Every competitor (Drishti, Vision, Testbook, SuperKalam) leads with GS1–4, Prelims, CSAT and Essay trees. Without that, the app reads as a games-and-news app.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>"Games-and-news app" is the phrase to fear. It's how a parent or a senior aspirant will dismiss the app in one sentence.</p></div>
+  </div>
+  <div class="point">
+    <p><b>What to do:</b></p>
+    <ul>
+      <li>Make a "Syllabus" view the first thing in Prep: the official syllabus text for Prelims GS, CSAT, GS1–4, Essay and Ethics, broken into nodes.</li>
+      <li>Each node shows its material (cards, long reads, mock questions, PYQs) and an honest "thin / not yet" label.</li>
+      <li>Add a private "read once / revised" tick per node, and feed it to the roadmap instead of whole-subject hour estimates.</li>
+      <li>Without streaks, this is the only progress signal a serious aspirant will trust.</li>
+    </ul>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div>
+      <ul>
+        <li>The official syllabus is public text, so the tree with honest "not yet" labels is a day of work. Ship that first, then fill nodes.</li>
+        <li>I'd keep Today's 3 as a card at the top of the Syllabus view rather than demoting it. The daily "do three, then stop" ritual is what keeps people calm.</li>
+        <li>Watch the tone. A 300-node tree with ticks can turn into an anxiety checklist. Keep progress private, never compare it with others, and lead with "what's next" rather than "% done".</li>
+        <li>A "thin" label is honest, but a tree that's 80% thin also says "not ready". So fill the high-PYQ-weight nodes first (Polity, Economy, Environment, Modern History) before showing other papers in full.</li>
+      </ul></div>
+  </div>
+
+  <h3>Criticism 2: "Pod doesn't show a pod or trigger participation." Reviewer: agree, and it's partly structural.</h3>
+
+  <div class="point">
+    <p><span class="num">E1</span>A new member sees "Not in a pod yet: 8 people at your stage, matched every Monday. Answer the three questions below to be matched." On day 1 there is no pod, just a form and a wait of up to 6 days.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This is the single biggest day-1 problem for a "never prep alone" product. The headline promise fails in the first minute.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E2</span>By design there is no unread badge: "One main button per screen. No unread counts on the Pod." There is one nudge a day, at chai time, for Chai only, and it stops after 2 ignored days.</p>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>No unread counts was a deliberate anti-anxiety choice, and I'd keep it. A soft signal like "Ravi asked something" is fine. A numeric red badge isn't. The real gap is that nothing points to the pod at all.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E3</span>The README lists "push notifications for rituals" as not built. Answer hour, quiz night and Monday goals therefore can't pull anyone back.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>A ritual nobody is reminded of is just a calendar entry. This one is cheap to fix and has a high payoff.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E4</span>Empty pods are filled by four scripted "AI study friends" (<code>server/src/friends.ts</code>). Meera · AI is "On her third attempt"; Arjun · AI "Works in a bank", and so on. They post template messages, and post the most when 0–2 humans are present. They are labelled AI, but they have human backstories. The website and positioning promise "We never use fake members". When an aspirant realises "Meera" is a template, the pod will feel hollow and the trust will go.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed that the promise is in <code>positioning.md</code>, in <code>community-first-spec.md</code> ("no fake members, ever") and in the website FAQ. An AI label next to a human life story is the uncanny version. My preference is to retire the friends and let Chotu host with clearly AI prompts like "Today's question for the pod". Real people will then feel real.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E5</span>Pod rituals assume an activity the app doesn't support. "Answer hour… Bring one answer" and "Your pod can review it in answer hour" have no answer-sharing or review flow behind them.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This is where criticisms 2 and 3 meet. Answer writing is the activity that gives a pod a reason to exist, so build the answer flow once and serve both.</p></div>
+  </div>
+  <div class="point">
+    <p><b>What to do:</b></p>
+    <ul>
+      <li>Put people in a pod on day 1: a provisional pod the moment they sign up, merged at the Monday batch.</li>
+      <li>Make the pod part of Today's 3: "post today's Mains answer to your pod" and "review one podmate's answer" with a simple 4-point rubric.</li>
+      <li>Ship push for rituals, opt-in and capped.</li>
+      <li>Remove the persona backstories, or retire the friends entirely. Chotu as a single, clearly-AI host is enough.</li>
+    </ul>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div>
+      <ul>
+        <li>Provisional pods risk being pods of one or two at launch volumes, which is worse than none. An alternative is a day-1 "waiting room" table per stage and language: everyone joining this week sits there until Monday's match. It's busier and needs no merge logic.</li>
+        <li>Making the pod part of Today's 3 is the best idea in this section. It turns the pod from a place you visit into a step in your day.</li>
+        <li>Push: agree, with a hard cap of one pod push a day and none after 22:30, which matches our existing night rule.</li>
+      </ul></div>
+  </div>
+
+  <h3>Criticism 3: "No handwritten answer-scan evaluation; allow 5 free." Reviewer: agree, and it's worse than stated.</h3>
+
+  <div class="point">
+    <p><span class="num">E1</span>There is no answer evaluation of any kind in the server. <code>index.ts</code> has no evaluation route. <code>plus.ts</code> only counts a <code>feedback</code> allowance (3 a week free, unlimited on Plus) for a feature that doesn't exist.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>The allowance plumbing already existing is useful. When evaluation ships, the quota and the paywall hook are already in place.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E2</span>Android's Mains screen offers a static self-check list and 3 sample questions.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Keep the self-check list. It becomes the rubric the AI and the pod both grade against, so self, peer and AI feedback use the same language.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E3</span>Yet the in-app Plus page says "Free members get three answer reviews a week. Plus removes the limit…" and "Feedback on every answer you write". It even shows a mock exchange: "Is this answer on track?" / "Good structure. Now a conclusion".</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>The sample exchange makes it worse, because it reads like a screenshot of a working feature.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E4</span>The website lists "Unlimited answer feedback" under Plus.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed at line 252 of the website, and again in the FAQ at line 269, in both English and Hindi.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">E5</span>Selling an unbuilt feature is a trust problem and a consumer-protection risk, not just a gap.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree on both counts. It also hurts the Play listing if the store copy repeats it.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Why handwriting matters:</b> Mains is handwritten. Typing 250 words on a phone is not practice for the exam. SuperKalam, PW OnlyIAS and several Telegram bots already evaluate photographed sheets, and Insights, Forum and Vision do it by hand in their test series.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Handwriting is also speed practice: 7–8 minutes per answer is a skill in itself. Show the time taken next to the score.</p></div>
+  </div>
+  <div class="point">
+    <p><b>What to do:</b></p>
+    <ul>
+      <li>Build photo-of-sheet evaluation: a vision model reads the handwriting, then grades against a rubric (directive word, structure, content coverage, examples and data, conclusion), with a word count and a model-answer skeleton.</li>
+      <li>Give 5 free evaluations at signup plus the planned 3 a week. Five lets a buyer judge quality before paying.</li>
+      <li>Differentiate where others can't: (a) "send to pod" peer review using the same rubric; (b) a monthly human-calibrated sample, so the AI grades are checked against real evaluators and the result is published.</li>
+      <li>Cost is low. <i>Guess:</i> a few rupees per page with a mid-tier vision model; confirm in <code>ai-economics.xlsx</code>.</li>
+      <li>Until it ships, remove every feedback claim from the Plus page and the website.</li>
+    </ul>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div>
+      <ul>
+        <li><b>Scope the first version tightly.</b> English first, with GS2 and GS3 questions from our own bank, so the model has a skeleton to grade against. Hindi handwriting recognition is noticeably harder, so make it phase 2 and test it with real sheets.</li>
+        <li><b>Score as a band, not a number.</b> AI marks swing by ±2 on re-runs, and aspirants compare screenshots. Use "Below / At / Above a typical scoring answer" plus three specific fixes. That's more useful and harder to embarrass.</li>
+        <li><b>Five free is right,</b> but count them per account and check the photo is actually an answer sheet, or they'll be farmed.</li>
+        <li><b>Human calibration</b> is the real moat and fits our trust story. Even 50 sheets a month marked by one ex-evaluator and published as "AI vs human" would set us apart.</li>
+        <li><b>Cost:</b> agree it's small, but treat the "few rupees" figure as unverified until it's in <code>ai-economics.xlsx</code>.</li>
+        <li><b>Privacy:</b> answer photos often show names and roll numbers. Crop or blur before sending, and say so on the screen.</li>
+      </ul></div>
+  </div>
+
+  <!-- ============ 3 ============ -->
+  <h2>3. Walking it as a buyer: other observations</h2>
+
+  <h4>Discovery</h4>
+  <div class="point">
+    <p><span class="num">1</span><b>Website.</b> The story is warm and clear ("Never prep alone"). The two calculators are genuinely useful hooks, and the attempt and age rules are correct. But it claims "PYQs by topic" while <code>content/pyq/pyq.json</code> is empty, and "checked by a human editor" while no editor is hired and nothing is approved. It says pods are "6 to 8"; the app says "8 people". <i>Guess:</i> at 390px the hero text and the Adda/Prep cards appeared clipped in a headless render; check on a real phone.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Confirmed: "PYQs by topic" at line 231 and "checked by a human editor" at line 229. The fix is about 20 minutes of copy edits; I can do it in a follow-up if you want. The calculators could also be shared on their own in Telegram groups, which is cheap acquisition.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">2</span><b>Two personalities in one product.</b> The Plus page (<code>plus-sales-v3</code>) is a dark, orange-glow SaaS page ("You've done the reading. Now see what you actually know."). The Adda is cream and calm. On desktop, the Plus hero takes over the Prep/Practice area. That contradicts the spec's "quiet card at value moments only" and makes Prep feel like a storefront.</p>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>A sales page can look a bit different from the app; that's normal. The real problem is the second half: a Plus hero taking over Prep breaks our own rule. Keep v3 as the standalone web page, and inside the app show only the quiet card.</p></div>
+  </div>
+
+  <h4>Install and onboarding</h4>
+  <div class="point">
+    <p><span class="num">3</span>The first run is: tour → consent and 18+ → language → persona questions → mandatory sign-in. Sign-in is username and password with no email recovery ("write to support and we'll set a temporary one"), plus Google. "Connect to the internet to keep using UPSC Pods" suggests the app is gated online (<i>guess</i> from the strings). For library-Wi-Fi aspirants this is friction before any value.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Five steps before any value is a lot. I'd let people do one Chai card and one quick quiz before asking them to sign in, so they get value in the first 60 seconds. Recovery through support doesn't scale past a few hundred users. Phone OTP is the norm in India, but it costs money per SMS, so email recovery is the cheaper first step.</p></div>
+  </div>
+
+  <h4>Day 1 and the daily loop</h4>
+  <div class="point">
+    <p><span class="num">4</span><b>Content is a sample on day 1.</b> The bundled offline set is 3 sample Chai cards with <code>checkedBy: null</code> and 8 bank questions. The 149 drafted Prep items from the 20 Oct packs are unapproved, and the app labels them "Sample content: facts not yet checked". Editor capacity, not code, is the launch blocker.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This is the most important sentence in the review. One option is two tiers of approval: "Sources checked" (AI-assisted, with links to primary sources) and "Editor-approved". Then content can ship sooner while staying honest about what's been checked. The label must never claim more than was done.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">5</span><b>Gaps in the drafted content.</b> The CSAT mocks have no comprehension passages, and comprehension is the largest part of CSAT. There is just one full-length GS paper (the sample Polity one); the rest are 25-question sectionals. The Indus Waters long read needs a current-status line.</p>
+    <div class="note"><div class="lbl">My take <span class="chip add">Adding</span></div><p>We already have a <code>content/csat-passage/</code> format with a sample. The work is writing passages and wiring them into mocks; no new format design is needed. The Indus Waters line is a 5-minute fix.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">6</span><b>Chotu, offline.</b> It needs 5 GB of RAM and 3.6 GB free. <i>Guess:</i> most aspirants' ₹10–15k phones won't qualify, so they get cloud Chotu at 15 turns a day.</p>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>The reviewer may be reading the old model's requirements. We have a plan to move offline Chotu Lite to Gemma 3 1B (<code>artefacts/Switching offline Chotu Lite to Gemma 3 1B.md</code>), which needs much less memory. If that has shipped, this point mostly goes away; if not, it's a reason to finish it.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">7</span><b>Chotu, online.</b> The prompt requires Prep facts to come only from "retrieved notes". With zero approved content the notes will be empty, so Chotu will either keep saying "not sure" or drift. Test this.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This is a good catch and quick to test with ten real aspirant questions. If it keeps saying "not sure", allow retrieval from draft content clearly marked "unchecked" rather than nothing.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">8</span><b>Already good:</b> Today's 3 "then stop", Close the Day, the if-then step, WOOP, recall on day 3/10/30, and Focus app-blocking. This beats every competitor on wellbeing and habit.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Make these visible in the store listing; right now they're the best-kept secret in the app.</p></div>
+  </div>
+
+  <h4>Paywall and what Plus gets me</h4>
+  <div class="point">
+    <p><span class="num">9</span><b>The Android paywall is a WhatsApp application.</b> The app asks people to message a WhatsApp number to pay, and the web FAQ adds "we'll upgrade your account as soon as payment arrives". Steering people to pay off-Play for digital features inside a Play app is a policy risk, and messaging a personal-looking number to pay doesn't feel trustworthy. The web uses Cashfree: ₹2,499 a year, or ₹999 for the first 300 founding seats. Business details on receipts are still placeholders ("[Legal entity name]").</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Strongly agree. This can get the app pulled from Play, which is worse than losing a sale. Choose one: Play Billing in the app, or no purchase path in the app at all with Plus sold only on the web. The legal entity placeholder blocks any real receipt, so that's a paperwork task for you rather than code.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">10</span><b>The Plus feature list is thin.</b> Weekly Chai test, monthly compilation, revise all misses, mock insights, all mocks, 100 Chotu turns, and the unbuilt feedback. Compare Testbook (about ₹500–1,000 a year for thousands of tests and PYQs; from memory) or Drishti's free monthly magazine.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Rebuild Plus around three things: answer evaluation, a full-length mock series with analysis, and a syllabus plan that adapts. Move the weekly CA test and the monthly compilation to free, which also feeds top-of-funnel. The Testbook price is unverified.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">11</span><b>Good paywall ethics:</b> no auto-renew, a 7-day refund, a 7-day trial "earned" after a pod week, offers only in Prep with a "forbidden impression" metric, and Plus free for pod leads. Keep all of it.</p>
+    <div class="note"><div class="lbl">My take <span class="chip add">Adding</span></div><p>Agree, with one catch. If pods are empty in week 1, the trial "earned after a pod week" never unlocks. Tie it to any week of real activity instead, until pods fill reliably.</p></div>
+  </div>
+
+  <h4>Weeks 2–4</h4>
+  <div class="point">
+    <p><span class="num">12</span><b>No sense of progress.</b> There are no streaks (rightly), but also no coverage measure. Rhythm dots and stamps reward showing up, not moving through the syllabus. In week 3 a serious aspirant asks "how much have I covered, and am I on track for May?". Only Polity units can answer that.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This falls out of the syllabus spine for free. Build criticism 1 well and this gets solved too.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">13</span><b>A quiet pod plus no ritual push means drift.</b> The 14-day "stay or move" prompt is humane, but by then most people have already gone.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Bring the first check-in forward to day 4–5, framed as "How's your pod feeling?" rather than "move?".</p></div>
+  </div>
+
+  <h4>Trust</h4>
+  <div class="point">
+    <p><span class="num">14</span><b>The good:</b> the journal is encrypted on the phone; distress is checked on the phone and again on the server, and never sent to the model; helplines are correct (Tele-MANAS 14416 and 1-800-891-4416); result-day mode and the night rules exist.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. This is the moat.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">15</span><b>The gaps:</b> the crisis protocol, community rules and moderator roster are unsigned drafts, yet pod copy promises "a quiet alert for a trained human moderator". Cloud Chotu goes to free tiers at NVIDIA, Groq and Google; "not saved" is true for your server, but third-party retention needs disclosure (<i>guess:</i> some free tiers may use prompts for training; check). Positioning promises "No fake members" while scripted persona friends post in pods.</p>
+    <div class="note"><div class="lbl">My take <span class="chip push">Push back on priority</span></div><p>The review puts the crisis protocol in P1. I'd make it P0. If the copy promises a trained human and nobody is on the roster when a distressed aspirant posts, that's the one failure that can't be undone. On AI providers: free API tiers often allow the provider to use prompts to improve their models. Disclose it in the privacy notice or move to paid tiers; check each provider's current terms.</p></div>
+  </div>
+
+  <!-- ============ 4 ============ -->
+  <h2>4. Prioritised changes</h2>
+
+  <h3>P0: blocks paying</h3>
+  <div class="point">
+    <div class="row"><b>Remove every claim of answer feedback, PYQs and "editor-checked" until each is true (Plus page, website, in-app Plus table)</b><span class="eff">S</span><span class="why">Buyers who find one false claim distrust everything.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Do this first, this week. It's the only item that removes risk at almost no cost.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Build handwritten answer evaluation from a photo: rubric score, comments, model skeleton; 5 free at signup plus 3 a week; typed fallback</b><span class="eff">L</span><span class="why">The #1 reason UPSC aspirants pay for apps.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>Agree it's P0, but it's not L if scoped as above. An English, rubric-band version over our own question bank is M, roughly 2–3 weeks. Hindi and human calibration come after.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Hire or recruit EN/HI editors and approve a launch set (≥30 days of Chai, the 16 sectionals, the 16 long reads)</b><span class="eff">M (people)</span><span class="why">Today the whole app is "sample, not checked".</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>This is the critical path, and only you can start it. Two part-time editors, such as recent Mains-qualified aspirants, is a realistic first step.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Replace the WhatsApp payment with real checkout (Play Billing or user-choice billing on Android, Cashfree on web) and fill in the legal entity</b><span class="eff">M</span><span class="why">You can't ask for money through a phone number.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Fastest safe path: take the payment path out of the Android app now, sell on web via Cashfree, then add Play Billing.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Build a syllabus spine in Prep for all papers, with material and "thin" markers per node</b><span class="eff">M (L for content)</span><span class="why">Makes Prep feel like UPSC prep.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>Split it in two. The tree and the UI are S–M and should ship in the next build. Filling the nodes is the L, ordered by PYQ weight.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>(My addition) Sign off the crisis protocol and staff the moderator roster before pods open to strangers</b><span class="eff">M (people)</span><span class="why">Moved up from P1.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip push">Moved to P0</span></div><p>See point 15. It doesn't block paying, but it blocks opening pods safely, and that matters more.</p></div>
+  </div>
+
+  <h3>P1: hurts retention</h3>
+  <div class="point">
+    <div class="row"><b>Provisional pod on day 1, merged on Monday</b><span class="eff">M</span><span class="why">No empty first week.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>I prefer a weekly waiting-room table per stage and language over tiny provisional pods (see criticism 2).</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Opt-in, capped push for pod rituals (answer hour, quiz night)</b><span class="eff">M</span><span class="why">Without it, nothing brings people back to the pod.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. It's closer to S if the nudge infrastructure from Chai is reused.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>"Post answer to pod" plus a peer-review rubric, wired into Today's 3</b><span class="eff">M</span><span class="why">Gives the pod a job tied to marks.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Build it together with answer evaluation, using the same capture screen and the same rubric. I'd ship them as one feature.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Retire the AI friend personas, or strip their human backstories</b><span class="eff">S</span><span class="why">Keeps the "no fake members" promise.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip push">Move to P0</span></div><p>It's S and it's a broken public promise, so I'd do it alongside the copy fixes.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>PYQ import (10 years of Prelims and Mains), linked to syllabus nodes and Chai cards</b><span class="eff">M</span><span class="why">Table stakes; free elsewhere.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. UPSC papers are public, but answer keys and explanations aren't official for Mains, so start with Prelims, where official keys exist. The schema is already in <code>content/pyq/pyq.schema.json</code>.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Coverage and readiness view (nodes read, revised, mock band by subject)</b><span class="eff">M</span><span class="why">Honest progress without streaks.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Comes almost free with the syllabus spine.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>CSAT comprehension passages; 4–6 full-length GS1 mocks</b><span class="eff">M</span><span class="why">Real exam simulation.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. These are the backbone of a paid mock series, so they belong with the Plus rework.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Sign off the crisis protocol and staff the moderator roster before pods open</b><span class="eff">M (people)</span><span class="why">Promised in the copy; real risk.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip push">Moved to P0</span></div><p>Moved to P0 above.</p></div>
+  </div>
+
+  <h3>P2: polish</h3>
+  <div class="point">
+    <div class="row"><b>Restyle the Plus page in the Prep palette, as a calm card</b><span class="eff">S</span><span class="why">One brand, less "sales funnel".</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>Do it inside the app. The standalone web sales page can keep its own look.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Email or phone recovery for username accounts</b><span class="eff">S</span><span class="why">Lost-password support load.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. It becomes P1 once you have a few hundred users.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Soften the online-only gate; cache day-1 content</b><span class="eff">S</span><span class="why">Library-Wi-Fi reality.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree, after checking in the source what the gate actually blocks.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Disclose third-party AI processing in Privacy</b><span class="eff">S</span><span class="why">DPDP-grade honesty.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip push">Move up</span></div><p>It's S and it's a legal exposure, so do it with the P0 copy fixes.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Align pod size copy (6–8 vs 8); fix possible mobile overflow on the website</b><span class="eff">S</span><span class="why">Consistency.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Bundle it with the copy fixes.</p></div>
+  </div>
+  <div class="point">
+    <div class="row"><b>Native-speaker check of the Hindi and Telugu strings</b><span class="eff">S–M</span><span class="why">Hindi medium is a moat only if it's natural.</span></div>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. The Hindi editor you hire for content can do this in their first week.</p></div>
+  </div>
+
+  <!-- ============ 5 ============ -->
+  <h2>5. What's genuinely good and should be protected</h2>
+  <div class="point">
+    <p><b>Honesty guardrails:</b> no streaks, countdowns or rank promises ("That's about the exam, not about your worth"); result-day mode; offers blocked after 22:30, in distress and within 72 hours of a result, enforced and measured in <code>plus.ts</code>; no auto-renew, a 7-day refund, cancel in two taps.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. When the syllabus spine and evaluation arrive, check them against these rules. Neither should bring back a streak or a rank by the back door.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Privacy:</b> journal and mood stay on the phone and are encrypted; mock scores and the error log stay on the phone; distress is checked on the phone first, then on the server; Chotu is always labelled AI.</p>
+    <div class="note"><div class="lbl">My take <span class="chip partly">Partly</span></div><p>Agree, but answer photos change this. They have to leave the phone to be graded. Say so plainly, and delete them after grading by default.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Mock pedagogy:</b> UPSC negative marking, a "Not sure" tick, guess break-even feedback, score shown as a range, and an error log with "revise my misses". Better than most test series.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. This should headline the Plus mock series.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Chai cards:</b> Exam Corner, the static link (Art. 200), a trust footer, sources, separate EN and HI approval, and 3/10/30-day recall.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. Chai cards are the best daily object we have, and they belong on syllabus nodes too.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Wellbeing and habit tools:</b> Close the Day, the if-then first step, WOOP, Calm, Focus app-blocking, and the Attempt Compass and Cost-of-a-Year calculators. A real differentiator.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree.</p></div>
+  </div>
+  <div class="point">
+    <p><b>Hindi from day one, and the editor-approval workflow.</b> Keep both; just staff them.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Agree. "Just staff them" is the whole job.</p></div>
+  </div>
+
+  <!-- ============ 6 ============ -->
+  <h2>6. Gaps in this review</h2>
+  <div class="point">
+    <p><span class="num">a</span>The app, APK and server were not run; screen flow and layout are inferred from strings and Compose screen names.</p>
+    <div class="note"><div class="lbl">My take <span class="chip add">Adding</span></div><p>Fixable. A session on your PC could build and run the app in an emulator and record the first-run flow. That would turn the flow guesses into facts.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">b</span>The Kotlin source couldn't be read (folder nesting limit), so logic such as the online gate, Android Prep tab order and the Mains self-check is inferred.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Same fix as above.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">c</span>Not read: <code>server/public/app/*.js</code> (web app), <code>content.ts</code>, <code>auth.ts</code>, the founding brief, the full crisis protocol.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>None of these is likely to change the P0 list.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">d</span>Not checked: whether production is live, or whether the <code>plus</code> and <code>pod_friends</code> flags are on.</p>
+    <div class="note"><div class="lbl">My take <span class="chip add">Adding</span></div><p>Worth knowing. If <code>pod_friends</code> is already off in production, the persona issue is a code clean-up rather than a live problem.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">e</span>Competitor prices and features are from general knowledge, not checked live.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Do a quick live price check before repricing Plus.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">f</span>The 390px website clipping is from a headless render, not a real phone.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>Check it on your phone; it takes two minutes.</p></div>
+  </div>
+  <div class="point">
+    <p><span class="num">g</span>Effort sizes and AI-cost remarks are estimates.</p>
+    <div class="note"><div class="lbl">My take <span class="chip agree">Agree</span></div><p>So are mine.</p></div>
+  </div>
+
+  <h2>What the review didn't cover</h2>
+  <div class="point">
+    <div class="note" style="margin-top:0"><div class="lbl">My additions <span class="chip add">Adding</span></div>
+      <ul>
+        <li><b>Who the buyer is.</b> The review reads as a serious second-attempt aspirant. A first-year student and a working professional would weigh things differently. The first cares more about the syllabus map, the second more about the pod and Focus. Pick the launch buyer before repricing Plus.</li>
+        <li><b>Telugu.</b> The app has Telugu content and distress phrases, but the review only mentions Hindi. If Telugu is a launch language, it needs the same editor coverage.</li>
+        <li><b>A sequence that uses the overlap.</b> Three of the biggest items share one build: answer capture → AI rubric feedback → share to pod → peer review in answer hour. Building that loop once covers criticism 3, gives the pod a job (criticism 2) and creates the main Plus feature.</li>
+        <li><b>Suggested order:</b> this week, the copy fixes, persona removal and the privacy disclosure. Next 2–3 weeks, the syllabus tree and the answer loop. In parallel, you hire editors and sign the crisis protocol. Then PYQs, mocks and the Plus repricing.</li>
+      </ul></div>
+  </div>
+</div>

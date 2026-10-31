@@ -1,0 +1,51 @@
+{
+  "schemaId": "upsc-pods/calm-script@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "done": null
+    },
+    "support": {
+      "en": "These exercises are not a substitute for help. If you feel unsafe or overwhelmed, call Tele-MANAS on 14416, free, at any hour.",
+      "hi": "ये अभ्यास मदद की जगह नहीं लेते। अगर आप असुरक्षित या बहुत परेशान महसूस करें, तो Tele-MANAS को 14416 पर कॉल करें, मुफ़्त, किसी भी समय।",
+      "verify": "Check the helpline number and wording with the safety lead before launch."
+    },
+    "bed": {
+      "default": "none",
+      "options": [
+        "none",
+        "calm-tones-6hz",
+        "calm-tones-4hz",
+        "pink-noise",
+        "rain"
+      ],
+      "note": "Calm tones need headphones; the app says so and keeps the volume low. Never claim they change brainwaves."
+    },
+    "narrator": {
+      "en": null,
+      "hi": null
+    },
+    "audio": {
+      "en": null,
+      "hi": null
+    },
+    "tags": {
+      "stage": [
+        "wellbeing"
+      ],
+      "papers": [],
+      "formats": []
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

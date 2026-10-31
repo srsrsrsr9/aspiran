@@ -1,0 +1,81 @@
+{
+  "schemaId": "upsc-pods/mock-paper@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "pick": "sfx/tick",
+      "right": null,
+      "wrong": null,
+      "done": "sfx/chime"
+    },
+    "marking": {
+      "right": 2,
+      "wrong": -0.66,
+      "blank": 0
+    },
+    "timer": {
+      "default": "off",
+      "counts": "up",
+      "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+    },
+    "tags": {
+      "stage": [
+        "prelims"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-direct",
+        "pre-negative",
+        "pre-statement-code",
+        "pre-select-items",
+        "pre-how-many-statements",
+        "pre-how-many-pairs",
+        "pre-statement-i-ii",
+        "pre-statement-i-ii-iii",
+        "pre-list-match"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "nodes": [
+    "pol-history",
+    "pol-features",
+    "pol-union-territory",
+    "pol-citizenship",
+    "pol-fr",
+    "pol-dpsp",
+    "pol-fd",
+    "pol-amendment",
+    "pol-president",
+    "pol-pm-com",
+    "pol-parliament",
+    "pol-privileges",
+    "pol-state-exec",
+    "pol-judiciary",
+    "pol-federal",
+    "pol-fiscal",
+    "pol-emergency",
+    "pol-local",
+    "pol-scheduled-areas",
+    "pol-uts-special",
+    "pol-const-bodies",
+    "pol-statutory",
+    "pol-elections",
+    "pol-separation",
+    "pol-comparison",
+    "pol-pressure-groups",
+    "pol-official-language"
+  ]
+}

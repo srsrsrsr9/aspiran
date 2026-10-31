@@ -1,0 +1,972 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "geo-sectional-geography-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Geography sectional mock 1",
+    "hi": "भूगोल सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Indian and World Geography",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "geo-interior-earth",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the interior of the earth:",
+        "statements": [
+          "The boundary between the crust and the mantle is called the Mohorovicic (Moho) discontinuity.",
+          "S-waves can travel through liquid materials.",
+          "The outer core is believed to be in a liquid state."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: S-waves cannot pass through liquids, which is how scientists infer a liquid outer core. The trap is '1, 2 and 3', which treats S-waves like P-waves."
+      },
+      "hi": {
+        "stem": "पृथ्वी के आंतरिक भाग के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भूपर्पटी और मेंटल के बीच की सीमा को मोहोरोविसिक (मोहो) असांतत्य कहते हैं।",
+          "S-तरंगें तरल पदार्थों से होकर गुजर सकती हैं।",
+          "माना जाता है कि बाह्य क्रोड तरल अवस्था में है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है, क्योंकि S-तरंगें तरल से नहीं गुजरतीं, और इसी से वैज्ञानिक मानते हैं कि बाह्य क्रोड तरल है। '1, 2 और 3' वाला जाल S-तरंगों को P-तरंगों जैसा मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-interior-earth",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The asthenosphere, the weak zone regarded as the main source of magma for volcanic eruptions, is a part of the:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Crust",
+          "Upper mantle",
+          "Outer core",
+          "Inner core"
+        ],
+        "why": "The asthenosphere is the upper portion of the mantle and is the main source of magma. The tempting trap is the crust: magma reaches the surface through the crust, but it does not originate there."
+      },
+      "hi": {
+        "stem": "एस्थेनोस्फीयर, जिसे ज्वालामुखी विस्फोटों में निकलने वाले मैग्मा का मुख्य स्रोत माना जाता है, किसका भाग है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भूपर्पटी",
+          "ऊपरी मेंटल",
+          "बाह्य क्रोड",
+          "आंतरिक क्रोड"
+        ],
+        "why": "एस्थेनोस्फीयर मेंटल का ऊपरी हिस्सा है और मैग्मा का मुख्य स्रोत यही है। भूपर्पटी वाला option लुभाता है, क्योंकि मैग्मा भूपर्पटी से होकर सतह तक आता है, पर बनता वहाँ नहीं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "geo-plate-tectonics",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about plate tectonics:",
+        "statements": [
+          "The Himalayas were formed by the collision of the Indian plate with the Eurasian plate.",
+          "The Mid-Atlantic Ridge is an example of a convergent plate boundary.",
+          "At a transform boundary, plates slide past each other and crust is neither created nor destroyed.",
+          "The theory of continental drift was put forward by Alfred Wegener."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All four",
+          "Only three"
+        ],
+        "why": "Statements 1, 3 and 4 are correct. Statement 2 is wrong: the Mid-Atlantic Ridge is a divergent boundary, where plates move apart and new crust forms. The trap is 'All four', for anyone who links ridges with plates pushing together."
+      },
+      "hi": {
+        "stem": "प्लेट विवर्तनिकी के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "हिमालय का निर्माण भारतीय प्लेट और यूरेशियाई प्लेट के टकराव से हुआ।",
+          "मध्य-अटलांटिक कटक अभिसारी प्लेट सीमा का एक उदाहरण है।",
+          "रूपांतर सीमा पर प्लेटें एक-दूसरे के साथ खिसकती हैं और भूपर्पटी न बनती है, न नष्ट होती है।",
+          "महाद्वीपीय विस्थापन का सिद्धांत अल्फ्रेड वेगनर ने दिया था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी चार",
+          "केवल तीन"
+        ],
+        "why": "कथन 1, 3 और 4 सही हैं। कथन 2 गलत है, क्योंकि मध्य-अटलांटिक कटक अपसारी सीमा है, जहाँ प्लेटें दूर जाती हैं और नई भूपर्पटी बनती है। जो कटक को प्लेटों के टकराव से जोड़ते हैं, वे 'सभी चार' के जाल में फँसते हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "geo-plate-tectonics",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The rim of the Pacific Ocean has a large number of active volcanoes and frequent earthquakes.",
+          "Statement II: Much of the Pacific rim lies along subduction zones, where one plate sinks beneath another.",
+          "Statement III: The Pacific is the largest ocean on the earth."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "Statements II and III are both correct, but only II explains I: subduction along the Pacific rim causes its volcanoes and earthquakes. III is true but has nothing to do with them. The trap is (a), which treats every true statement as an explanation."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: प्रशांत महासागर के किनारों पर बड़ी संख्या में सक्रिय ज्वालामुखी हैं और भूकंप अक्सर आते हैं।",
+          "कथन II: प्रशांत के किनारों का बड़ा भाग क्षेपण (subduction) क्षेत्रों के साथ है, जहाँ एक प्लेट दूसरी के नीचे धँसती है।",
+          "कथन III: प्रशांत पृथ्वी का सबसे बड़ा महासागर है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "कथन II और III दोनों सही हैं, पर केवल II ही I की व्याख्या करता है। प्रशांत के किनारों पर क्षेपण से ही ज्वालामुखी और भूकंप होते हैं। III सही है, पर उसका इनसे कोई लेना-देना नहीं। (a) का जाल हर सही कथन को व्याख्या मान लेता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-landforms",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following pairs of landforms and the agent that mainly forms them:",
+        "statements": [
+          "Barchan – wind",
+          "Cirque – glacier",
+          "Stalactite – groundwater",
+          "Ox-bow lake – sea waves"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only three",
+          "Only one",
+          "Only two",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Pair 4 is wrong: an ox-bow lake forms when a river meander is cut off, so the agent is running water, not sea waves. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "स्थलरूपों और उन्हें मुख्य रूप से बनाने वाले कारक के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "बरखान – पवन",
+          "सर्क – हिमनद",
+          "स्टैलेक्टाइट – भूमिगत जल",
+          "गोखुर झील – समुद्री लहरें"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल तीन",
+          "केवल एक",
+          "केवल दो",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1, 2 और 3 सही हैं। जोड़ा 4 गलत है, क्योंकि गोखुर झील तब बनती है जब नदी का कोई विसर्प कट जाता है, यानी कारक बहता जल है, समुद्री लहरें नहीं। 'सभी चार' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "geo-atmosphere",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements about the troposphere is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Temperature generally decreases with increasing height in it.",
+          "Its height is greater at the equator than at the poles.",
+          "Nearly all weather phenomena, such as clouds and rain, occur in it.",
+          "Temperature rises with height in it because ozone absorbs ultraviolet radiation."
+        ],
+        "why": "Option (d) is the answer: temperature rising with height due to ozone describes the stratosphere, not the troposphere. The tempting trap is (b), which sounds odd but is true, because the troposphere is thickest over the equator."
+      },
+      "hi": {
+        "stem": "क्षोभमंडल के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "इसमें ऊँचाई बढ़ने के साथ तापमान सामान्यतः घटता है।",
+          "इसकी ऊँचाई ध्रुवों की तुलना में भूमध्य रेखा पर अधिक है।",
+          "बादल और वर्षा जैसी लगभग सभी मौसमी घटनाएँ इसी में होती हैं।",
+          "ओज़ोन द्वारा पराबैंगनी विकिरण सोखने के कारण इसमें ऊँचाई के साथ तापमान बढ़ता है।"
+        ],
+        "why": "उत्तर (d) है। ओज़ोन की वजह से ऊँचाई के साथ तापमान बढ़ना समतापमंडल की बात है, क्षोभमंडल की नहीं। (b) अजीब लगता है पर सही है, क्योंकि क्षोभमंडल भूमध्य रेखा पर सबसे मोटा होता है, इसलिए वहाँ मत अटकिए।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-winds",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about winds:",
+        "statements": [
+          "The Coriolis force is zero at the equator.",
+          "In the Northern Hemisphere, the Coriolis force deflects winds to their left.",
+          "Trade winds blow from the subtropical high-pressure belts towards the equatorial low-pressure belt."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: in the Northern Hemisphere winds are deflected to the right, and in the Southern Hemisphere to the left. The trap is '1, 2 and 3', which mixes up the two hemispheres."
+      },
+      "hi": {
+        "stem": "पवनों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भूमध्य रेखा पर कोरिऑलिस बल शून्य होता है।",
+          "उत्तरी गोलार्ध में कोरिऑलिस बल पवनों को उनकी बाईं ओर मोड़ देता है।",
+          "व्यापारिक पवनें उपोष्ण उच्च वायुदाब पेटियों से भूमध्यरेखीय निम्न वायुदाब पेटी की ओर चलती हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है, क्योंकि उत्तरी गोलार्ध में पवनें दाईं ओर मुड़ती हैं और दक्षिणी गोलार्ध में बाईं ओर। '1, 2 और 3' वाला जाल दोनों गोलार्धों को उलट देता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "geo-winds",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Chinook",
+          "B. Foehn",
+          "C. Loo",
+          "D. Harmattan",
+          "1. Northern plains of India",
+          "2. Eastern slopes of the Rocky Mountains",
+          "3. West Africa",
+          "4. Valleys of the Alps"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-1, D-2",
+          "A-2, B-1, C-4, D-3",
+          "A-4, B-2, C-3, D-1"
+        ],
+        "why": "Chinook blows down the eastern slopes of the Rockies (2), Foehn in the Alpine valleys (4), Loo over the northern plains of India (1), and Harmattan over West Africa (3). The trap is (b), which swaps Chinook and Harmattan."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. चिनूक",
+          "B. फ़ॉन (Foehn)",
+          "C. लू",
+          "D. हरमट्टन",
+          "1. भारत के उत्तरी मैदान",
+          "2. रॉकी पर्वत के पूर्वी ढाल",
+          "3. पश्चिम अफ्रीका",
+          "4. आल्प्स की घाटियाँ"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-2, B-4, C-1, D-3",
+          "A-3, B-4, C-1, D-2",
+          "A-2, B-1, C-4, D-3",
+          "A-4, B-2, C-3, D-1"
+        ],
+        "why": "चिनूक रॉकी के पूर्वी ढालों पर उतरती है (2), फ़ॉन आल्प्स की घाटियों में (4), लू भारत के उत्तरी मैदानों में (1), और हरमट्टन पश्चिम अफ्रीका में चलती है (3)। (b) का जाल चिनूक और हरमट्टन को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-ocean-currents",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of ocean currents and their nature:",
+        "statements": [
+          "Gulf Stream – warm",
+          "Humboldt (Peru) Current – cold",
+          "Kuroshio Current – cold",
+          "Benguela Current – warm"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only three",
+          "All four",
+          "Only two"
+        ],
+        "why": "Pairs 1 and 2 are correct. The Kuroshio is a warm current off Japan, and the Benguela is a cold current off south-west Africa, so pairs 3 and 4 are wrong. The trap is 'Only three', for those who know only one of these."
+      },
+      "hi": {
+        "stem": "महासागरीय धाराओं और उनकी प्रकृति के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "गल्फ स्ट्रीम – गर्म",
+          "हम्बोल्ट (पेरू) धारा – ठंडी",
+          "क्यूरोशियो धारा – ठंडी",
+          "बेंगुएला धारा – गर्म"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल तीन",
+          "सभी चार",
+          "केवल दो"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं। क्यूरोशियो जापान के पास की गर्म धारा है और बेंगुएला दक्षिण-पश्चिम अफ्रीका के पास की ठंडी धारा, इसलिए जोड़े 3 और 4 गलत हैं। जिन्हें इनमें से एक ही याद है, वे 'केवल तीन' में फँसते हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "geo-climate-types",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Many hot deserts lie on the western margins of continents in tropical latitudes.",
+          "Statement II: Warm ocean currents flow along the western coasts of continents in tropical latitudes."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct. Statement II is wrong: it is cold currents, such as the Benguela and the Peru Current, that flow along these western coasts, cooling the air and reducing rain. The trap is (a), which accepts the wrong kind of current."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: कई उष्ण मरुस्थल उष्णकटिबंधीय अक्षांशों में महाद्वीपों के पश्चिमी किनारों पर स्थित हैं।",
+          "कथन II: उष्णकटिबंधीय अक्षांशों में महाद्वीपों के पश्चिमी तटों के साथ गर्म महासागरीय धाराएँ बहती हैं।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है। कथन II गलत है, क्योंकि इन पश्चिमी तटों के साथ बेंगुएला और पेरू धारा जैसी ठंडी धाराएँ बहती हैं, जो हवा को ठंडा करके वर्षा घटाती हैं। (a) का जाल गलत धारा को भी सही मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-climate-types",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which climate type has hot, dry summers and mild, rainy winters, and is found on the western margins of continents roughly between 30° and 40° latitude?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "China type",
+          "Mediterranean",
+          "Steppe",
+          "Tropical monsoon"
+        ],
+        "why": "This is the Mediterranean climate, with rain mainly in winter. The tempting trap is the China type: it is also a warm temperate climate, but it lies on eastern margins and gets most of its rain in summer."
+      },
+      "hi": {
+        "stem": "किस जलवायु प्रकार में गर्मियाँ गर्म और शुष्क तथा सर्दियाँ हल्की और वर्षायुक्त होती हैं, और यह लगभग 30° से 40° अक्षांशों के बीच महाद्वीपों के पश्चिमी किनारों पर मिलती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "चीन तुल्य",
+          "भूमध्यसागरीय",
+          "स्टेपी",
+          "उष्णकटिबंधीय मानसूनी"
+        ],
+        "why": "यह भूमध्यसागरीय जलवायु है, जिसमें बारिश मुख्य रूप से सर्दियों में होती है। चीन तुल्य जलवायु लुभाती है, क्योंकि वह भी गर्म शीतोष्ण है, पर वह पूर्वी किनारों पर मिलती है और वहाँ ज़्यादातर बारिश गर्मियों में होती है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "geo-indian-physiography",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the relief of India:",
+        "statements": [
+          "The Shiwaliks form the outermost range of the Himalayas.",
+          "The Western Ghats are fairly continuous, while the Eastern Ghats are broken by rivers.",
+          "Anamudi, the highest peak of peninsular India, lies in the Nilgiri hills.",
+          "The Aravalli range is regarded as one of the oldest fold mountain systems of India."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only three",
+          "Only one",
+          "Only two",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 4 are correct. Statement 3 is wrong: Anamudi lies in the Anaimalai hills, not the Nilgiris, whose highest peak is Doddabetta. The trap is 'All four', because the Nilgiris are the better-known hills."
+      },
+      "hi": {
+        "stem": "भारत के उच्चावच के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "शिवालिक हिमालय की सबसे बाहरी श्रेणी है।",
+          "पश्चिमी घाट लगभग सतत हैं, जबकि पूर्वी घाट नदियों द्वारा कटे हुए हैं।",
+          "प्रायद्वीपीय भारत की सबसे ऊँची चोटी अनाइमुडी नीलगिरि पहाड़ियों में स्थित है।",
+          "अरावली श्रेणी को भारत की सबसे पुरानी वलित पर्वत श्रेणियों में गिना जाता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल तीन",
+          "केवल एक",
+          "केवल दो",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 4 सही हैं। कथन 3 गलत है, क्योंकि अनाइमुडी अन्नामलाई पहाड़ियों में है, नीलगिरि में नहीं, जिनकी सबसे ऊँची चोटी डोडाबेटा है। नीलगिरि ज़्यादा जानी-पहचानी हैं, इसलिए 'सभी चार' लुभाता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-indian-physiography",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Standard Meridian of India, 82°30' E, passes close to which of the following towns?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Nagpur",
+          "Bhopal",
+          "Mirzapur",
+          "Jabalpur"
+        ],
+        "why": "The Standard Meridian of India passes through Mirzapur in Uttar Pradesh. The tempting trap is Nagpur, which lies near the centre of India but well to the west of 82°30' E."
+      },
+      "hi": {
+        "stem": "भारत की मानक याम्योत्तर, 82°30' पूर्व, निम्नलिखित में से किस नगर के पास से गुजरती है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "नागपुर",
+          "भोपाल",
+          "मिर्ज़ापुर",
+          "जबलपुर"
+        ],
+        "why": "भारत की मानक याम्योत्तर उत्तर प्रदेश के मिर्ज़ापुर से होकर गुजरती है। नागपुर लुभाता है, क्योंकि वह भारत के बीच में है, पर वह 82°30' पूर्व से काफ़ी पश्चिम में है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-indian-rivers",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the rivers of peninsular India:",
+        "statements": [
+          "The Narmada and the Tapi flow westwards into the Arabian Sea.",
+          "The Narmada flows through a rift valley.",
+          "The Krishna rises near Trimbakeshwar in Nashik district of Maharashtra."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: it is the Godavari that rises near Trimbakeshwar in Nashik; the Krishna rises near Mahabaleshwar. The trap is any option with 3, which confuses the two east-flowing rivers."
+      },
+      "hi": {
+        "stem": "प्रायद्वीपीय भारत की नदियों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "नर्मदा और तापी पश्चिम की ओर बहकर अरब सागर में गिरती हैं।",
+          "नर्मदा एक भ्रंश घाटी से होकर बहती है।",
+          "कृष्णा महाराष्ट्र के नासिक ज़िले में त्र्यंबकेश्वर के पास से निकलती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है, क्योंकि नासिक में त्र्यंबकेश्वर के पास से गोदावरी निकलती है, जबकि कृष्णा महाबलेश्वर के पास से। जिस option में 3 है, वह इन दोनों पूर्ववाहिनी नदियों को आपस में उलझा देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-indian-rivers",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of rivers and the river they are tributaries of:",
+        "statements": [
+          "Bhavani – Kaveri",
+          "Manjira – Krishna",
+          "Indravati – Godavari",
+          "Chambal – Narmada"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 3 are correct. The Manjira is a tributary of the Godavari, and the Chambal joins the Yamuna, so pairs 2 and 4 are wrong. The trap is 'Only three', since the Chambal flows near the Narmada basin in Madhya Pradesh."
+      },
+      "hi": {
+        "stem": "नदियों और जिस नदी की वे सहायक हैं, उनके नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "भवानी – कावेरी",
+          "मंजीरा – कृष्णा",
+          "इंद्रावती – गोदावरी",
+          "चंबल – नर्मदा"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1 और 3 सही हैं। मंजीरा गोदावरी की सहायक है और चंबल यमुना में मिलती है, इसलिए जोड़े 2 और 4 गलत हैं। चंबल मध्य प्रदेश में नर्मदा बेसिन के पास से बहती है, इसलिए 'केवल तीन' लुभाता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "geo-monsoon",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Western Rajasthan gets very little rain from the Arabian Sea branch of the south-west monsoon.",
+          "Statement II: The Aravalli range lies roughly parallel to the direction of the Arabian Sea branch of the monsoon winds."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: because the Aravallis run parallel to the winds, they do not block them and force them to rise, so little rain falls. The trap is (b), which misses this cause and effect."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: पश्चिमी राजस्थान को दक्षिण-पश्चिम मानसून की अरब सागर शाखा से बहुत कम वर्षा मिलती है।",
+          "कथन II: अरावली श्रेणी मानसून पवनों की अरब सागर शाखा की दिशा के लगभग समानांतर स्थित है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, और II, I की व्याख्या करता है। अरावली पवनों के समानांतर है, इसलिए वह उन्हें रोककर ऊपर उठने पर मजबूर नहीं करती, और बारिश कम होती है। (b) का जाल यह कारण-प्रभाव का रिश्ता छोड़ देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-monsoon",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "During October to December, which coast of India receives a large part of its annual rainfall from the north-east monsoon?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Konkan coast",
+          "Malabar coast",
+          "Coromandel coast",
+          "Kathiawar coast"
+        ],
+        "why": "The north-east monsoon winds pick up moisture over the Bay of Bengal and bring winter rain to the Coromandel (Tamil Nadu) coast. The tempting trap is the Malabar coast, which gets its heavy rain from the south-west monsoon."
+      },
+      "hi": {
+        "stem": "अक्टूबर से दिसंबर के दौरान भारत का कौन-सा तट अपनी वार्षिक वर्षा का बड़ा भाग उत्तर-पूर्वी मानसून से पाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कोंकण तट",
+          "मालाबार तट",
+          "कोरोमंडल तट",
+          "काठियावाड़ तट"
+        ],
+        "why": "उत्तर-पूर्वी मानसून पवनें बंगाल की खाड़ी से नमी लेकर कोरोमंडल (तमिलनाडु) तट पर सर्दियों में बारिश लाती हैं। मालाबार तट लुभाता है, पर वहाँ की भारी बारिश दक्षिण-पश्चिम मानसून से आती है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-soils",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the soils of India:",
+        "statements": [
+          "Alluvial soil is the most widespread soil in India.",
+          "Black soil is also known as regur soil.",
+          "Red soil gets its colour mainly from a high humus content."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: red soil gets its colour from iron oxides spread through crystalline rocks, and it is generally poor in humus. The trap is any option with 3."
+      },
+      "hi": {
+        "stem": "भारत की मृदाओं के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "जलोढ़ मृदा भारत में सबसे अधिक क्षेत्र में फैली मृदा है।",
+          "काली मृदा को रेगुर मृदा भी कहा जाता है।",
+          "लाल मृदा का रंग मुख्य रूप से अधिक ह्यूमस के कारण होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है, क्योंकि लाल मृदा का रंग क्रिस्टलीय चट्टानों में फैले लौह ऑक्साइड से आता है, और इसमें ह्यूमस आम तौर पर कम होता है। जिस option में 3 है, उससे बचिए।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "geo-soils",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Laterite soils develop in areas of high temperature and heavy rainfall.",
+          "Statement II: With proper manuring, laterite soils are useful for growing crops such as cashew."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but II does not explain I. Laterite forms because heavy rain leaches away nutrients under high heat; its use for cashew is a separate fact. The trap is (a), which reads any two linked facts as cause and effect."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: लैटेराइट मृदाएँ उच्च तापमान और भारी वर्षा वाले क्षेत्रों में विकसित होती हैं।",
+          "कथन II: उचित खाद देने पर लैटेराइट मृदाएँ काजू जैसी फ़सलें उगाने के लिए उपयोगी होती हैं।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं, पर II, I की व्याख्या नहीं करता। लैटेराइट इसलिए बनती है क्योंकि तेज़ गर्मी में भारी बारिश पोषक तत्वों को बहा ले जाती है; काजू में इसका उपयोग एक अलग तथ्य है। (a) का जाल हर जुड़े तथ्य को कारण-प्रभाव मान लेता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "geo-natural-vegetation",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following trees is NOT typical of the tropical deciduous (monsoon) forests of India?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Mahogany",
+          "Teak",
+          "Sal",
+          "Shisham"
+        ],
+        "why": "Mahogany is a tree of the tropical evergreen forests, along with ebony and rosewood. Teak, sal and shisham are typical deciduous trees. The tempting trap is sal, which some link with evergreen forests because it stays green much of the year."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा वृक्ष भारत के उष्णकटिबंधीय पर्णपाती (मानसूनी) वनों का विशिष्ट वृक्ष नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "महोगनी",
+          "सागौन",
+          "साल",
+          "शीशम"
+        ],
+        "why": "महोगनी, आबनूस और रोज़वुड के साथ, उष्णकटिबंधीय सदाबहार वनों का वृक्ष है। सागौन, साल और शीशम पर्णपाती वनों के विशिष्ट वृक्ष हैं। साल वाला option लुभाता है, क्योंकि कुछ लोग इसे सदाबहार वनों से जोड़ देते हैं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "geo-minerals",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about minerals and fuels:",
+        "statements": [
+          "Bauxite is the ore from which aluminium is obtained.",
+          "Mica is valued in the electrical industry for its insulating properties.",
+          "Anthracite is the lowest grade of coal, with the least carbon content."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: anthracite is the highest grade of coal, with the most carbon; peat and lignite are lower grades. The trap is '1, 2 and 3', which reverses the coal ranking."
+      },
+      "hi": {
+        "stem": "खनिजों और ईंधनों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "बॉक्साइट वह अयस्क है जिससे एल्युमिनियम प्राप्त होता है।",
+          "अभ्रक को विद्युत उद्योग में उसके कुचालक (insulating) गुणों के लिए महत्व दिया जाता है।",
+          "एन्थ्रेसाइट सबसे निम्न श्रेणी का कोयला है, जिसमें कार्बन सबसे कम होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है, क्योंकि एन्थ्रेसाइट सबसे उच्च श्रेणी का कोयला है, जिसमें कार्बन सबसे ज़्यादा होता है; पीट और लिग्नाइट निचली श्रेणियाँ हैं। '1, 2 और 3' वाला जाल कोयले का क्रम उलट देता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "geo-agriculture",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about cropping seasons and crops in India:",
+        "statements": [
+          "Rabi crops are sown in winter and harvested in summer.",
+          "Wheat is the main kharif crop of north India.",
+          "Watermelon and cucumber are typical zaid crops.",
+          "Tea grows best on flat land where water stands for long periods."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only three",
+          "All four",
+          "Only two"
+        ],
+        "why": "Statements 1 and 3 are correct. Wheat is a rabi crop, and tea needs well-drained land, usually on slopes, because waterlogging harms its roots. The trap is 'Only three', from forgetting that wheat is sown in winter."
+      },
+      "hi": {
+        "stem": "भारत में फ़सल ऋतुओं और फ़सलों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "रबी फ़सलें सर्दियों में बोई जाती हैं और गर्मियों में काटी जाती हैं।",
+          "गेहूँ उत्तर भारत की मुख्य खरीफ़ फ़सल है।",
+          "तरबूज़ और खीरा विशिष्ट ज़ायद फ़सलें हैं।",
+          "चाय उस समतल भूमि पर सबसे अच्छी उगती है जहाँ लंबे समय तक पानी भरा रहता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल तीन",
+          "सभी चार",
+          "केवल दो"
+        ],
+        "why": "कथन 1 और 3 सही हैं। गेहूँ रबी फ़सल है, और चाय को अच्छे जल-निकास वाली ज़मीन चाहिए, आम तौर पर ढलानों पर, क्योंकि जलभराव से उसकी जड़ें खराब होती हैं। गेहूँ सर्दियों में बोया जाता है, यह भूलने पर 'केवल तीन' लुभाता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "geo-straits-lakes-passes",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of straits and what they separate or link:",
+        "statements": [
+          "Strait of Gibraltar – separates Europe and Africa",
+          "Palk Strait – separates India and Sri Lanka",
+          "Strait of Hormuz – links the Red Sea and the Gulf of Aden",
+          "Bering Strait – separates Asia and North America"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only two",
+          "Only three",
+          "All four",
+          "Only one"
+        ],
+        "why": "Pairs 1, 2 and 4 are correct. Pair 3 is wrong: the Bab-el-Mandeb links the Red Sea and the Gulf of Aden, while the Strait of Hormuz links the Persian Gulf and the Gulf of Oman. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "जलडमरूमध्यों और वे जिन्हें अलग करते या जोड़ते हैं, उनके नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "जिब्राल्टर जलडमरूमध्य – यूरोप और अफ्रीका को अलग करता है",
+          "पाक जलडमरूमध्य – भारत और श्रीलंका को अलग करता है",
+          "होर्मुज़ जलडमरूमध्य – लाल सागर और अदन की खाड़ी को जोड़ता है",
+          "बेरिंग जलडमरूमध्य – एशिया और उत्तरी अमेरिका को अलग करता है"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार",
+          "केवल एक"
+        ],
+        "why": "जोड़े 1, 2 और 4 सही हैं। जोड़ा 3 गलत है, क्योंकि लाल सागर और अदन की खाड़ी को बाब-अल-मंदेब जोड़ता है, जबकि होर्मुज़ फ़ारस की खाड़ी और ओमान की खाड़ी को जोड़ता है। 'सभी चार' वाले जाल से बचिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "geo-straits-lakes-passes",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "The Shipki La pass, through which the Sutlej enters India from Tibet, lies in which state?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Himachal Pradesh",
+          "Uttarakhand",
+          "Sikkim",
+          "Arunachal Pradesh"
+        ],
+        "why": "Shipki La is in Kinnaur district of Himachal Pradesh, where the Sutlej enters India. The tempting trap is Uttarakhand, which also has passes into Tibet, such as Lipulekh and Mana."
+      },
+      "hi": {
+        "stem": "शिपकी ला दर्रा, जहाँ से सतलुज तिब्बत से भारत में प्रवेश करती है, किस राज्य में स्थित है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "हिमाचल प्रदेश",
+          "उत्तराखंड",
+          "सिक्किम",
+          "अरुणाचल प्रदेश"
+        ],
+        "why": "शिपकी ला हिमाचल प्रदेश के किन्नौर ज़िले में है, जहाँ से सतलुज भारत में आती है। उत्तराखंड लुभाता है, क्योंकि वहाँ भी लिपुलेख और माणा जैसे तिब्बत जाने वाले दर्रे हैं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "geo-world-locations",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following countries does NOT have a coastline on the Caspian Sea?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Kazakhstan",
+          "Iran",
+          "Azerbaijan",
+          "Uzbekistan"
+        ],
+        "why": "Uzbekistan is landlocked and does not touch the Caspian Sea; the Caspian is bordered by Russia, Kazakhstan, Turkmenistan, Iran and Azerbaijan. The tempting trap is Azerbaijan, a small country that many place only in the Caucasus."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से किस देश की तटरेखा कैस्पियन सागर पर नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "कज़ाख़स्तान",
+          "ईरान",
+          "अज़रबैजान",
+          "उज़्बेकिस्तान"
+        ],
+        "why": "उज़्बेकिस्तान स्थलरुद्ध है और कैस्पियन सागर को नहीं छूता; कैस्पियन की सीमा रूस, कज़ाख़स्तान, तुर्कमेनिस्तान, ईरान और अज़रबैजान से लगती है। अज़रबैजान लुभाता है, क्योंकि कई लोग उसे सिर्फ़ कॉकेशस में रखते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography; NCERT Class XI India: Physical Environment",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत; NCERT कक्षा XI भारत: भौतिक पर्यावरण"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

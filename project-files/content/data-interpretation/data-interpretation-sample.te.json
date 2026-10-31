@@ -1,0 +1,132 @@
+{
+  "schema": "upsc-pods/translation@1",
+  "lang": "te",
+  "pack": {
+    "id": "five-states-area-population-data",
+    "schema": "upsc-pods/data-interpretation@1"
+  },
+  "strings": {
+    "$.title.en": {
+      "en": "Five states: area and population",
+      "text": "ఐదు రాష్ట్రాలు: విస్తీర్ణం, జనాభా"
+    },
+    "$.table.unit.en": {
+      "en": "Area: sq km. Population: lakh",
+      "text": "విస్తీర్ణం: చ.కి.మీ. జనాభా: లక్షలు"
+    },
+    "$.table.columns.en[0]": {
+      "en": "Area (sq km)",
+      "text": "విస్తీర్ణం (చ.కి.మీ.)"
+    },
+    "$.table.columns.en[1]": {
+      "en": "Population (lakh)",
+      "text": "జనాభా (లక్షలు)"
+    },
+    "$.table.rows[0].en.label": {
+      "en": "Rajasthan",
+      "text": "రాజస్థాన్"
+    },
+    "$.table.rows[1].en.label": {
+      "en": "Madhya Pradesh",
+      "text": "మధ్యప్రదేశ్"
+    },
+    "$.table.rows[2].en.label": {
+      "en": "Maharashtra",
+      "text": "మహారాష్ట్ర"
+    },
+    "$.table.rows[3].en.label": {
+      "en": "Uttar Pradesh",
+      "text": "ఉత్తరప్రదేశ్"
+    },
+    "$.table.rows[4].en.label": {
+      "en": "Gujarat",
+      "text": "గుజరాత్"
+    },
+    "$.questions[0].en.question": {
+      "en": "Roughly how many people live per square kilometre in Uttar Pradesh? Use the population in lakh and the area from the table.",
+      "text": "ఉత్తరప్రదేశ్‌లో ఒక చదరపు కిలోమీటరుకు సుమారుగా ఎంతమంది నివసిస్తున్నారు? జనాభాను లక్షలలో, విస్తీర్ణాన్ని పట్టిక నుంచి ఉపయోగించండి."
+    },
+    "$.questions[0].en.options[0]": {
+      "en": "about 200 persons",
+      "text": "సుమారు 200 మంది"
+    },
+    "$.questions[0].en.options[1]": {
+      "en": "about 365 persons",
+      "text": "సుమారు 365 మంది"
+    },
+    "$.questions[0].en.options[2]": {
+      "en": "about 830 persons",
+      "text": "సుమారు 830 మంది"
+    },
+    "$.questions[0].en.options[3]": {
+      "en": "about 2000 persons",
+      "text": "సుమారు 2000 మంది"
+    },
+    "$.questions[0].en.steps": {
+      "en": "Population = 1998 lakh = 199,800,000 people. Density = 199,800,000 / 240,928 = about 829.4 persons per sq km, which rounds to about 830.",
+      "text": "ముందుగా జనాభా లెక్కించండి: 1998 లక్షలు అంటే 199,800,000 మంది. తర్వాత భాగించండి: 199,800,000 / 240,928 = సుమారు 829.4 మంది చ.కి.మీ.కి; రౌండ్ చేస్తే సుమారు 830."
+    },
+    "$.questions[1].en.question": {
+      "en": "Using the table, how many lakh more people live in Uttar Pradesh than in Madhya Pradesh?",
+      "text": "పట్టిక ఆధారంగా, మధ్యప్రదేశ్ కంటే ఉత్తరప్రదేశ్‌లో ఎన్ని లక్షల మంది ఎక్కువగా నివసిస్తున్నారు?"
+    },
+    "$.questions[1].en.options[0]": {
+      "en": "1172 lakh",
+      "text": "1172 లక్షలు"
+    },
+    "$.questions[1].en.options[1]": {
+      "en": "1272 lakh",
+      "text": "1272 లక్షలు"
+    },
+    "$.questions[1].en.options[2]": {
+      "en": "1372 lakh",
+      "text": "1372 లక్షలు"
+    },
+    "$.questions[1].en.options[3]": {
+      "en": "2724 lakh",
+      "text": "2724 లక్షలు"
+    },
+    "$.questions[1].en.steps": {
+      "en": "Uttar Pradesh 1998 lakh minus Madhya Pradesh 726 lakh = 1272 lakh. Adding the two would give 2724 lakh, which is the wrong operation.",
+      "text": "ఉత్తరప్రదేశ్ 1998 లక్షలు నుంచి మధ్యప్రదేశ్ 726 లక్షలు తీసేస్తే = 1272 లక్షలు. ఇద్దరినీ కూడితే 2724 లక్షలు వస్తుంది, కానీ అది తప్పు ఆపరేషన్."
+    },
+    "$.questions[2].en.question": {
+      "en": "What percentage of the total area of these five states is Gujarat's area? Give the answer to one decimal place.",
+      "text": "ఈ ఐదు రాష్ట్రాల మొత్తం విస్తీర్ణంలో గుజరాత్ విస్తీర్ణం ఎంత శాతం? సమాధానాన్ని ఒక దశాంశ స్థానం వరకు ఇవ్వండి."
+    },
+    "$.questions[2].en.options[0]": {
+      "en": "about 12.5%",
+      "text": "సుమారు 12.5%"
+    },
+    "$.questions[2].en.options[1]": {
+      "en": "about 14.1%",
+      "text": "సుమారు 14.1%"
+    },
+    "$.questions[2].en.options[2]": {
+      "en": "about 16.3%",
+      "text": "సుమారు 16.3%"
+    },
+    "$.questions[2].en.options[3]": {
+      "en": "about 20.1%",
+      "text": "సుమారు 20.1%"
+    },
+    "$.questions[2].en.steps": {
+      "en": "Total area = 342239 + 308252 + 307713 + 240928 + 196024 = 1395156 sq km. Gujarat's share = 196024 / 1395156 x 100 = about 14.1%.",
+      "text": "అన్నీ కూడండి: 342239 + 308252 + 307713 + 240928 + 196024 = 1395156 చ.కి.మీ. ఇప్పుడు గుజరాత్ వాటా: 196024 / 1395156 x 100 = సుమారు 14.1%."
+    },
+    "$.sources.en": {
+      "en": "Census of India 2011",
+      "text": "భారత జనాభా గణన 2011"
+    }
+  },
+  "provenance": {
+    "generator": "Claude Haiku via templates/languages/TRANSLATE_PROMPT.md (agent test run)",
+    "createdOn": "2026-10-11"
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Needs a Telugu editor before it is shown."
+  }
+}

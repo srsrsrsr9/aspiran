@@ -1,0 +1,270 @@
+{
+  "title": "Chai cards (daily pack)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cards"
+  ],
+  "properties": {
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "tone",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "maxLength": 60,
+            "description": "lowercase-with-hyphens slug, e.g. article-200"
+          },
+          "tone": {
+            "type": "string",
+            "enum": [
+              "LIGHT",
+              "NEUTRAL",
+              "SERIOUS",
+              "TRAGIC"
+            ],
+            "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lensChips",
+              "headline",
+              "summary",
+              "whyItMatters",
+              "examCorner",
+              "chotuJoke",
+              "takeaway"
+            ],
+            "properties": {
+              "lensChips": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 3
+                },
+                "minItems": 2,
+                "maxItems": 4
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 12,
+                "description": "Starts with a verb. One idea.",
+                "maxLength": 90
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 95,
+                "description": "Plain explainer: what happened, the static concept behind it, and why. 60 to 95 words.",
+                "x-minWords": 50
+              },
+              "whyItMatters": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 12
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "examCorner": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "question",
+                  "options",
+                  "answerIndex",
+                  "feedbackRight",
+                  "feedbackWrong"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mcq"
+                    ]
+                  },
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 30
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 8
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "answerIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "feedbackRight": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 14
+                  },
+                  "feedbackWrong": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 22
+                  }
+                }
+              },
+              "chotuJoke": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-maxWords": 18,
+                "description": "One gentle joke from Chotu, only on LIGHT cards. null otherwise."
+              },
+              "takeaway": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16,
+                "description": "The one line to remember."
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "lensChips",
+              "headline",
+              "summary",
+              "whyItMatters",
+              "examCorner",
+              "chotuJoke",
+              "takeaway"
+            ],
+            "properties": {
+              "lensChips": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 5
+                },
+                "minItems": 2,
+                "maxItems": 4
+              },
+              "headline": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 17,
+                "description": "Starts with a verb. One idea.",
+                "maxLength": 90
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 129,
+                "description": "Plain explainer: what happened, the static concept behind it, and why. 60 to 95 words.",
+                "x-minWords": 50
+              },
+              "whyItMatters": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 17
+                },
+                "minItems": 2,
+                "maxItems": 3
+              },
+              "examCorner": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "type",
+                  "question",
+                  "options",
+                  "answerIndex",
+                  "feedbackRight",
+                  "feedbackWrong"
+                ],
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "mcq"
+                    ]
+                  },
+                  "question": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 30
+                  },
+                  "options": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 8
+                    },
+                    "minItems": 4,
+                    "maxItems": 4
+                  },
+                  "answerIndex": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "feedbackRight": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 14
+                  },
+                  "feedbackWrong": {
+                    "type": "string",
+                    "minLength": 1,
+                    "x-maxWords": 22
+                  }
+                }
+              },
+              "chotuJoke": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "x-maxWords": 25,
+                "description": "One gentle joke from Chotu, only on LIGHT cards. null otherwise."
+              },
+              "takeaway": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22,
+                "description": "The one line to remember."
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    }
+  },
+  "x-type": "upsc-pods/chai-pack@1"
+}

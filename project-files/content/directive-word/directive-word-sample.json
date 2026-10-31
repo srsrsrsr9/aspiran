@@ -1,0 +1,119 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "id": "directive-words-decoded",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Directive words in Mains questions",
+    "hi": "मुख्य परीक्षा के निर्देश शब्द"
+  },
+  "words": [
+    {
+      "en": {
+        "word": "Discuss",
+        "means": "Examine the issue from different sides, bring out main points and arguments, and give a balanced view.",
+        "do": "Present different sides, the main points and arguments, and a balanced view.",
+        "avoid": "One-sided listing of points."
+      },
+      "hi": {
+        "word": "चर्चा कीजिए",
+        "means": "विषय को विभिन्न पक्षों से परखें, मुख्य बिंदु और तर्क सामने लाएँ, और संतुलित दृष्टिकोण दें।",
+        "do": "विभिन्न पक्ष, मुख्य बिंदु और तर्क लिखें, और एक संतुलित दृष्टिकोण दें।",
+        "avoid": "केवल एक पक्ष की सूची बनाना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Critically examine",
+        "means": "Look closely at the issue, judge its merits and demerits with evidence, and reach a reasoned judgment.",
+        "do": "Weigh merits and demerits using evidence, and end with a reasoned judgment.",
+        "avoid": "Only praising or only criticising."
+      },
+      "hi": {
+        "word": "समालोचनात्मक परीक्षण कीजिए",
+        "means": "विषय को गहराई से देखें, उसके गुण-दोष प्रमाण के साथ आंकें, और तर्कसंगत निर्णय तक पहुँचें।",
+        "do": "प्रमाण के साथ गुण और दोष तौलें, और अंत में तर्कसंगत निर्णय लिखें।",
+        "avoid": "केवल प्रशंसा या केवल आलोचना करना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Analyse",
+        "means": "Break the issue into its parts and show how they relate and what causes what.",
+        "do": "Name each part, link the parts, and explain the cause and effect between them.",
+        "avoid": "Describing without explaining the links."
+      },
+      "hi": {
+        "word": "विश्लेषण कीजिए",
+        "means": "विषय के भागों को अलग करें, दिखाएँ कि वे आपस में कैसे जुड़े हैं और कारण-परिणाम क्या है।",
+        "do": "हर भाग समझाएँ, भागों के बीच संबंध जोड़ें, और कारण व प्रभाव स्पष्ट करें।",
+        "avoid": "कड़ियों की व्याख्या किए बिना केवल वर्णन करना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Elucidate",
+        "means": "Explain clearly, with examples, so the concept becomes clear.",
+        "do": "Explain the concept clearly, using examples the reader can follow.",
+        "avoid": "Giving opinions instead of explanation."
+      },
+      "hi": {
+        "word": "स्पष्ट कीजिए",
+        "means": "उदाहरणों के साथ साफ़ समझाएँ, ताकि अवधारणा स्पष्ट हो जाए।",
+        "do": "अवधारणा को उदाहरणों के साथ इस तरह समझाएँ कि पाठक उसे आसानी से समझ सके।",
+        "avoid": "व्याख्या के बजाय अपनी राय देना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Comment",
+        "means": "Give your opinion on the issue, backed by facts and reasoning.",
+        "do": "State a clear opinion, and back it with facts and reasoning.",
+        "avoid": "An opinion without evidence."
+      },
+      "hi": {
+        "word": "टिप्पणी कीजिए",
+        "means": "विषय पर अपनी राय दें, जो तथ्यों और तर्क पर आधारित हो।",
+        "do": "स्पष्ट राय रखें, और उसे तथ्यों व तर्क से पुष्ट करें।",
+        "avoid": "प्रमाण के बिना राय देना।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Coaching guides and toppers' explanations; Hindi question paper forms",
+    "hi": "कोचिंग गाइड और टॉपर्स के स्पष्टीकरण; हिंदी प्रश्नपत्र के रूप"
+  },
+  "schema": "upsc-pods/directive-word@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/directive-word/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs1",
+      "mains-gs2",
+      "mains-gs3",
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-directive"
+    ]
+  }
+}

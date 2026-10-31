@@ -1,0 +1,262 @@
+{
+  "title": "Repeater story (decisions, not outcomes)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "who",
+        "ordinary",
+        "call",
+        "ordeal",
+        "decision",
+        "returned",
+        "question"
+      ],
+      "properties": {
+        "who": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Who this is, without a full name"
+        },
+        "ordinary": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36,
+          "description": "The ordinary world: life and prep before the turning point"
+        },
+        "call": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30,
+          "description": "The call: what made them start, or start again"
+        },
+        "ordeal": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 40,
+          "description": "The ordeal: the hard stretch, plainly told"
+        },
+        "decision": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "made",
+            "knewThen",
+            "happened",
+            "keep",
+            "change"
+          ],
+          "properties": {
+            "made": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 24,
+              "description": "The decision I made"
+            },
+            "knewThen": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 24,
+              "description": "What I knew then"
+            },
+            "happened": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 24,
+              "description": "What happened"
+            },
+            "keep": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 22,
+              "description": "What I'd keep"
+            },
+            "change": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 22,
+              "description": "What I'd change"
+            }
+          }
+        },
+        "returned": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36,
+          "description": "What they brought back. A new path counts as much as a selection"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 18,
+          "description": "A question for the reader about their own next decision"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "who",
+        "ordinary",
+        "call",
+        "ordeal",
+        "decision",
+        "returned",
+        "question"
+      ],
+      "properties": {
+        "who": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22,
+          "description": "Who this is, without a full name"
+        },
+        "ordinary": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 49,
+          "description": "The ordinary world: life and prep before the turning point"
+        },
+        "call": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41,
+          "description": "The call: what made them start, or start again"
+        },
+        "ordeal": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 54,
+          "description": "The ordeal: the hard stretch, plainly told"
+        },
+        "decision": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "made",
+            "knewThen",
+            "happened",
+            "keep",
+            "change"
+          ],
+          "properties": {
+            "made": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 33,
+              "description": "The decision I made"
+            },
+            "knewThen": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 33,
+              "description": "What I knew then"
+            },
+            "happened": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 33,
+              "description": "What happened"
+            },
+            "keep": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 30,
+              "description": "What I'd keep"
+            },
+            "change": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 30,
+              "description": "What I'd change"
+            }
+          }
+        },
+        "returned": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 49,
+          "description": "What they brought back. A new path counts as much as a selection"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 25,
+          "description": "A question for the reader about their own next decision"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/repeater-journey@1"
+}

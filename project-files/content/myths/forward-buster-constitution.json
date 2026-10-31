@@ -1,0 +1,77 @@
+{
+  "schema": "upsc-pods/myth-card@1",
+  "id": "forward-buster-constitution",
+  "verdictLabels": {
+    "en": {
+      "MYTH": "MYTH",
+      "FACT": "FACT",
+      "HALF": "HALF-TRUE"
+    },
+    "hi": {
+      "MYTH": "झूठ",
+      "FACT": "सच",
+      "HALF": "आधा सच"
+    }
+  },
+  "rules": [
+    "User guesses before the stamp shows",
+    "Never mock the person who forwarded the claim"
+  ],
+  "claims": [
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "Fundamental Duties have been in the Constitution since 1950.",
+        "correction": "They were added in 1976 by the 42nd Amendment, on the Swaran Singh Committee's advice, as Part IVA (Article 51A). There were 10 at first; the 86th Amendment (2002) added an 11th, on education for children aged 6 to 14."
+      },
+      "hi": {
+        "claim": "मौलिक कर्तव्य 1950 से ही संविधान में हैं।",
+        "correction": "इन्हें 1976 में 42वें संशोधन से, स्वर्ण सिंह समिति की सलाह पर, भाग 4A (अनुच्छेद 51A) में जोड़ा गया। पहले 10 कर्तव्य थे; 86वें संशोधन (2002) ने 6 से 14 साल के बच्चों की शिक्षा से जुड़ा 11वाँ कर्तव्य जोड़ा।"
+      }
+    },
+    {
+      "verdict": "HALF",
+      "en": {
+        "claim": "The Constitution was adopted on 26 January 1950.",
+        "correction": "Half right. It was adopted on 26 November 1949 and came into force on 26 January 1950. Some provisions, such as citizenship, applied from November 1949."
+      },
+      "hi": {
+        "claim": "संविधान 26 जनवरी 1950 को अंगीकृत हुआ।",
+        "correction": "आधा सही। संविधान 26 नवंबर 1949 को अंगीकृत हुआ और 26 जनवरी 1950 को लागू हुआ। नागरिकता जैसे कुछ प्रावधान नवंबर 1949 से ही लागू हो गए थे।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "Article 21 protects every person in India, not only citizens.",
+        "correction": "Right. Article 21 says no person shall be deprived of life or personal liberty except according to procedure established by law. It covers foreigners too, unlike Article 19, which is for citizens."
+      },
+      "hi": {
+        "claim": "अनुच्छेद 21 भारत में हर व्यक्ति की रक्षा करता है, सिर्फ़ नागरिकों की नहीं।",
+        "correction": "सही। अनुच्छेद 21 कहता है कि किसी भी व्यक्ति को क़ानून द्वारा स्थापित प्रक्रिया के बिना जीवन या निजी स्वतंत्रता से वंचित नहीं किया जाएगा। यह विदेशियों पर भी लागू है, जबकि अनुच्छेद 19 सिर्फ़ नागरिकों के लिए है।"
+      }
+    }
+  ],
+  "source": {
+    "en": "The Constitution of India",
+    "hi": "भारत का संविधान"
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Written for the preview from standard reference facts. Needs editor approval in EN and HI."
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-code"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaId": "upsc-pods/three-statements@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "pick": "sfx/tick",
+      "right": "sfx/chime",
+      "wrong": "sfx/nudge"
+    },
+    "optionText": {
+      "en": [
+        "Both Statement II and Statement III are correct and both of them explain Statement I",
+        "Both Statement II and Statement III are correct but only one of them explains Statement I",
+        "Only one of the Statements II and III is correct and that explains Statement I",
+        "Neither Statement II nor Statement III is correct"
+      ],
+      "hi": [
+        "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+        "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+        "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+        "न तो कथन II सही है, न ही कथन III"
+      ]
+    },
+    "tags": {
+      "stage": [
+        "prelims"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-statement-i-ii-iii"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

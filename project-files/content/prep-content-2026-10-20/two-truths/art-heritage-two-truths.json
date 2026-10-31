@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "art-heritage-two-truths",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Art and heritage: two truths and a lie",
+    "hi": "कला और विरासत: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Ajanta caves are mainly Jain caves.",
+          "The Ellora caves include Buddhist, Hindu and Jain caves.",
+          "The Kailasa temple at Ellora was carved out of a single rock."
+        ],
+        "fix": "The Ajanta caves are Buddhist caves, famous for their paintings of Jataka stories."
+      },
+      "hi": {
+        "statements": [
+          "अजंता की गुफाएँ मुख्य रूप से जैन गुफाएँ हैं।",
+          "एलोरा की गुफाओं में बौद्ध, हिंदू और जैन गुफाएँ हैं।",
+          "एलोरा का कैलाश मंदिर एक ही चट्टान को काटकर बनाया गया।"
+        ],
+        "fix": "अजंता की गुफाएँ बौद्ध गुफाएँ हैं, जो जातक कथाओं के चित्रों के लिए प्रसिद्ध हैं।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Sanchi Stupa was first commissioned by Ashoka.",
+          "The Amaravati school of sculpture flourished in the Andhra region.",
+          "Gandhara sculptures were mostly carved in red sandstone."
+        ],
+        "fix": "Mathura sculptures used red sandstone; Gandhara sculptures were mostly in grey-blue schist and stucco."
+      },
+      "hi": {
+        "statements": [
+          "सांची स्तूप का निर्माण पहले अशोक ने करवाया।",
+          "मूर्तिकला की अमरावती शैली आंध्र क्षेत्र में फली-फूली।",
+          "गांधार की मूर्तियाँ प्रायः लाल बलुआ पत्थर में बनीं।"
+        ],
+        "fix": "मथुरा की मूर्तियों में लाल बलुआ पत्थर लगा; गांधार की मूर्तियाँ प्रायः धूसर-नीले शिस्ट और प्लास्टर (स्टुको) में बनीं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Tyagaraja, Muthuswami Dikshitar and Syama Sastri form the Trinity of Carnatic music.",
+          "The Natya Shastra was written by Kalidasa.",
+          "Jayadeva composed the Gita Govinda."
+        ],
+        "fix": "The Natya Shastra is attributed to Bharata Muni. Kalidasa wrote plays such as Abhijnanashakuntalam."
+      },
+      "hi": {
+        "statements": [
+          "त्यागराज, मुत्तुस्वामी दीक्षितर और श्यामा शास्त्री कर्नाटक संगीत की त्रिमूर्ति हैं।",
+          "नाट्यशास्त्र कालिदास ने लिखा।",
+          "जयदेव ने गीत गोविंद की रचना की।"
+        ],
+        "fix": "नाट्यशास्त्र का श्रेय भरत मुनि को दिया जाता है। कालिदास ने अभिज्ञानशाकुंतलम् जैसे नाटक लिखे।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Pattachitra painting comes mainly from Rajasthan.",
+          "Madhubani painting comes from the Mithila region of Bihar.",
+          "Warli painting is a tribal art from Maharashtra."
+        ],
+        "fix": "Pattachitra is a scroll painting tradition of Odisha and West Bengal."
+      },
+      "hi": {
+        "statements": [
+          "पट्टचित्र चित्रकला मुख्य रूप से राजस्थान की है।",
+          "मधुबनी चित्रकला बिहार के मिथिला क्षेत्र की है।",
+          "वारली चित्रकला महाराष्ट्र की एक जनजातीय कला है।"
+        ],
+        "fix": "पट्टचित्र ओडिशा और पश्चिम बंगाल की कपड़े पर बनने वाली चित्र परंपरा है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Qutub Minar was begun by Qutbuddin Aibak.",
+          "The Buland Darwaza at Fatehpur Sikri was built by Akbar.",
+          "The Taj Mahal was built by Akbar."
+        ],
+        "fix": "The Taj Mahal was built by Shah Jahan in memory of Mumtaz Mahal."
+      },
+      "hi": {
+        "statements": [
+          "कुतुब मीनार का निर्माण कुतुबुद्दीन ऐबक ने शुरू करवाया।",
+          "फ़तेहपुर सीकरी का बुलंद दरवाज़ा अकबर ने बनवाया।",
+          "ताजमहल अकबर ने बनवाया।"
+        ],
+        "fix": "ताजमहल शाहजहाँ ने मुमताज़ महल की याद में बनवाया।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI An Introduction to Indian Art; Sangeet Natak Akademi",
+    "hi": "NCERT कक्षा XI भारतीय कला का परिचय; संगीत नाटक अकादमी"
+  },
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "constitutional-statutory-executive-bodies",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Constitutional, statutory or executive bodies?",
+    "hi": "संवैधानिक, वैधानिक या कार्यकारी निकाय कौन-से हैं?"
+  },
+  "buckets": {
+    "en": [
+      "Constitutional body",
+      "Statutory body",
+      "Executive body"
+    ],
+    "hi": [
+      "संवैधानिक निकाय",
+      "वैधानिक निकाय",
+      "कार्यकारी निकाय"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Election Commission of India",
+        "why": "Created by the Constitution, under Article 324."
+      },
+      "hi": {
+        "text": "भारत निर्वाचन आयोग",
+        "why": "संविधान ने खुद इसे बनाया है, अनुच्छेद 324 के तहत। मतलब इसके पीछे कोई अलग कानून नहीं है, इसलिए यह संवैधानिक है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Union Public Service Commission",
+        "why": "Created by the Constitution, under Article 315."
+      },
+      "hi": {
+        "text": "संघ लोक सेवा आयोग",
+        "why": "संविधान ने इसे बनाया है, अनुच्छेद 315 के तहत। यह किसी संसद के कानून से नहीं बना, इसलिए इसे संवैधानिक गिनिए।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "National Commission for Backward Classes",
+        "why": "Article 338B, added by the 102nd Amendment Act, 2018. Earlier, a statutory body under a 1993 Act."
+      },
+      "hi": {
+        "text": "राष्ट्रीय पिछड़ा वर्ग आयोग",
+        "why": "अनुच्छेद 338B, जो 102वें संशोधन अधिनियम, 2018 से जोड़ा गया। पहले यह 1993 के अधिनियम के तहत वैधानिक निकाय था, अब संवैधानिक है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "National Human Rights Commission",
+        "why": "Created by the Protection of Human Rights Act, 1993."
+      },
+      "hi": {
+        "text": "राष्ट्रीय मानवाधिकार आयोग",
+        "why": "यह मानवाधिकार संरक्षण अधिनियम, 1993 से बना है। इसलिए यह वैधानिक निकाय है, संविधान से सीधे नहीं।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Central Information Commission",
+        "why": "Created by the Right to Information Act, 2005."
+      },
+      "hi": {
+        "text": "केंद्रीय सूचना आयोग",
+        "why": "यह सूचना का अधिकार अधिनियम, 2005 से बना है। कानून से बना, इसलिए इसे वैधानिक निकाय गिना जाता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Central Vigilance Commission",
+        "why": "Created by the Central Vigilance Commission Act, 2003; first set up in 1964 by a government resolution."
+      },
+      "hi": {
+        "text": "केंद्रीय सतर्कता आयोग",
+        "why": "केंद्रीय सतर्कता आयोग अधिनियम, 2003 से बना है। पर 1964 में यह पहले सरकारी संकल्प से बना था, तो इसका इतिहास भी याद रखिए।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "NITI Aayog",
+        "why": "Set up by a Union Cabinet resolution on 1 January 2015, with no Act behind it."
+      },
+      "hi": {
+        "text": "नीति आयोग",
+        "why": "1 जनवरी 2015 को केंद्रीय मंत्रिमंडल के संकल्प से बना। इसके पीछे कोई अधिनियम नहीं है, इसलिए यह कार्यकारी निकाय है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Planning Commission",
+        "why": "Set up by a resolution in 1950; replaced by NITI Aayog."
+      },
+      "hi": {
+        "text": "योजना आयोग",
+        "why": "1950 में संकल्प से बना था, बाद में नीति आयोग ने इसकी जगह ली। यह भी कार्यकारी निकाय था, कानून के बिना।"
+      }
+    }
+  ],
+  "memoryHook": {
+    "en": "C, S, E: created by the Constitution, an Act, or a resolution.",
+    "hi": "C, S, E याद रखिए: संविधान ने बनाया, संसद के कानून से बना, या सरकारी संकल्प से।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/bucket-sort/",
+    "createdOn": "2026-10-11"
+  }
+}

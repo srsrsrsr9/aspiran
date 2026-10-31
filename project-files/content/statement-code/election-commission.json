@@ -1,0 +1,85 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-code",
+      "pre-select-items"
+    ]
+  },
+  "id": "election-commission-powers",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Election Commission of India: who does what",
+    "hi": "भारत निर्वाचन आयोग: किसका काम क्या"
+  },
+  "kind": "statements",
+  "truth": [
+    true,
+    false,
+    false
+  ],
+  "en": {
+    "stem": "With reference to the Election Commission of India, consider the following statements:",
+    "statements": [
+      "Article 324 vests the superintendence, direction and control of elections to Parliament, the state legislatures, and the offices of President and Vice-President in the Election Commission.",
+      "Elections to panchayats and municipalities are conducted by the Election Commission of India.",
+      "Under the 2023 Act, the Chief Justice of India is a member of the selection committee for Election Commissioners."
+    ],
+    "why": "Statement 1 is right: Article 324 gives the Commission superintendence of these elections. Statement 2 is wrong: State Election Commissions conduct panchayat and municipal polls (Articles 243K, 243ZA). Statement 3 is wrong: the Chief Justice is not on the 2023 Act's selection committee."
+  },
+  "hi": {
+    "stem": "भारत निर्वाचन आयोग के संदर्भ में निम्नलिखित कथनों पर विचार कीजिए:",
+    "statements": [
+      "अनुच्छेद 324 संसद, राज्य विधानमंडलों, तथा राष्ट्रपति और उपराष्ट्रपति के पदों के चुनावों का अधीक्षण, निर्देशन और नियंत्रण निर्वाचन आयोग में निहित करता है।",
+      "पंचायतों और नगरपालिकाओं के चुनाव भारत निर्वाचन आयोग द्वारा कराए जाते हैं।",
+      "2023 के अधिनियम के तहत मुख्य न्यायाधीश, चुनाव आयुक्तों की चयन समिति के सदस्य होते हैं।"
+    ],
+    "why": "कथन 1 सही है: अनुच्छेद 324 के तहत आयोग इन चुनावों का अधीक्षण, निर्देशन और नियंत्रण करता है। कथन 2 गलत है, पंचायत और नगरपालिका चुनाव राज्य निर्वाचन आयोग कराते हैं, अनुच्छेद 243K और 243ZA के तहत। कथन 3 गलत है, 2023 के कानून की चयन समिति में मुख्य न्यायाधीश नहीं होते। यही फर्क exam में पूछा जाता है।"
+  },
+  "sources": {
+    "en": "Chief Election Commissioner and Other Election Commissioners Act, 2023; Anoop Baranwal v Union of India (2023)",
+    "hi": "मुख्य चुनाव आयुक्त और अन्य चुनाव आयुक्त (नियुक्ति, सेवा शर्तें और पदावधि) अधिनियम, 2023; अनूप बरनवाल बनाम भारत संघ (2023)"
+  },
+  "schema": "upsc-pods/statement-code@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "options": {
+    "en": [
+      "1 and 3 only",
+      "1 only",
+      "2 only",
+      "1 and 2 only"
+    ],
+    "hi": [
+      "केवल 1 और 3",
+      "केवल 1",
+      "केवल 2",
+      "केवल 1 और 2"
+    ]
+  },
+  "answer": 1,
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/statement-code/",
+    "createdOn": "2026-10-11"
+  }
+}

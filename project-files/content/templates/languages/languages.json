@@ -1,0 +1,108 @@
+{
+  "schema": "upsc-pods/languages@1",
+  "note": "Launch is English and Hindi, written inside each pack. Every other language is a translation file (upsc-pods/translation@1) next to the pack, made with tools/translate.mjs from the checked English and approved by an editor for that language. Order after launch: Telugu (pilot), then Marathi, Tamil, Bengali and Kannada as editors are found.",
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "native": "English",
+      "script": "Latin",
+      "scriptRange": null,
+      "wordFactor": 1,
+      "status": "launch",
+      "writtenIn": "the pack",
+      "fixed": null,
+      "styleNote": "templates/languages/en.md"
+    },
+    {
+      "code": "hi",
+      "name": "Hindi",
+      "native": "हिन्दी",
+      "script": "Devanagari",
+      "scriptRange": "[\\u0900-\\u097F]",
+      "wordFactor": 1.35,
+      "status": "launch",
+      "writtenIn": "the pack",
+      "fixed": {
+        "sources": "संपादक के स्रोत नोट्स",
+        "spineOpeners": [
+          "हर दिन",
+          "एक दिन",
+          "इसी वजह से",
+          "आख़िरकार",
+          "और तब से"
+        ]
+      },
+      "styleNote": "templates/languages/hi.md"
+    },
+    {
+      "code": "te",
+      "name": "Telugu",
+      "native": "తెలుగు",
+      "script": "Telugu",
+      "scriptRange": "[\\u0C00-\\u0C7F]",
+      "wordFactor": 1.1,
+      "status": "pilot",
+      "writtenIn": "a translation file",
+      "fixed": {
+        "sources": "ఎడిటర్ సోర్స్ నోట్స్",
+        "spineOpeners": [
+          "ప్రతిరోజూ",
+          "ఒకరోజు",
+          "దాని వల్ల",
+          "చివరికి",
+          "అప్పటి నుంచి"
+        ]
+      },
+      "styleNote": "templates/languages/te.md"
+    },
+    {
+      "code": "mr",
+      "name": "Marathi",
+      "native": "मराठी",
+      "script": "Devanagari",
+      "scriptRange": "[\\u0900-\\u097F]",
+      "wordFactor": 1.25,
+      "status": "planned",
+      "writtenIn": "a translation file",
+      "fixed": null,
+      "styleNote": "templates/languages/mr.md"
+    },
+    {
+      "code": "ta",
+      "name": "Tamil",
+      "native": "தமிழ்",
+      "script": "Tamil",
+      "scriptRange": "[\\u0B80-\\u0BFF]",
+      "wordFactor": 1.1,
+      "status": "planned",
+      "writtenIn": "a translation file",
+      "fixed": null,
+      "styleNote": "templates/languages/ta.md"
+    },
+    {
+      "code": "bn",
+      "name": "Bengali",
+      "native": "বাংলা",
+      "script": "Bengali",
+      "scriptRange": "[\\u0980-\\u09FF]",
+      "wordFactor": 1.2,
+      "status": "planned",
+      "writtenIn": "a translation file",
+      "fixed": null,
+      "styleNote": "templates/languages/bn.md"
+    },
+    {
+      "code": "kn",
+      "name": "Kannada",
+      "native": "ಕನ್ನಡ",
+      "script": "Kannada",
+      "scriptRange": "[\\u0C80-\\u0CFF]",
+      "wordFactor": 1.1,
+      "status": "planned",
+      "writtenIn": "a translation file",
+      "fixed": null,
+      "styleNote": "templates/languages/kn.md"
+    }
+  ]
+}

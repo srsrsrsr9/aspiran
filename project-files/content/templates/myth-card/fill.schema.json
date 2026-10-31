@@ -1,0 +1,103 @@
+{
+  "title": "Forward buster (myth or fact)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "claims",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "verdict",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "MYTH",
+              "FACT",
+              "HALF"
+            ]
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim",
+              "correction"
+            ],
+            "properties": {
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              },
+              "correction": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim",
+              "correction"
+            ],
+            "properties": {
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 27
+              },
+              "correction": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 61
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    }
+  },
+  "x-type": "upsc-pods/myth-card@1"
+}

@@ -1,0 +1,253 @@
+{
+  "title": "DAF interview drill",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "sections",
+    "situational",
+    "closingTip"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dafField",
+          "questions"
+        ],
+        "properties": {
+          "dafField": {
+            "type": "string",
+            "enum": [
+              "name",
+              "home-state",
+              "home-district",
+              "education",
+              "work",
+              "hobbies",
+              "achievements",
+              "optional",
+              "service-preference",
+              "gap-years"
+            ]
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "q",
+                "whyAsked",
+                "approach",
+                "avoid"
+              ],
+              "properties": {
+                "q": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "en",
+                    "hi"
+                  ],
+                  "properties": {
+                    "en": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 25
+                    },
+                    "hi": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 34
+                    }
+                  }
+                },
+                "whyAsked": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "en",
+                    "hi"
+                  ],
+                  "properties": {
+                    "en": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 18
+                    },
+                    "hi": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 25
+                    }
+                  }
+                },
+                "approach": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "en",
+                    "hi"
+                  ],
+                  "properties": {
+                    "en": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 30
+                    },
+                    "hi": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 41
+                    }
+                  }
+                },
+                "avoid": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "en",
+                    "hi"
+                  ],
+                  "properties": {
+                    "en": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 16
+                    },
+                    "hi": {
+                      "type": "string",
+                      "minLength": 1,
+                      "x-maxWords": 22
+                    }
+                  }
+                }
+              }
+            },
+            "minItems": 2,
+            "maxItems": 4
+          }
+        }
+      },
+      "minItems": 4,
+      "maxItems": 8
+    },
+    "situational": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "q",
+          "approach"
+        ],
+        "properties": {
+          "q": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 35
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 48
+              }
+            }
+          },
+          "approach": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 35
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 48
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "closingTip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41
+        }
+      }
+    }
+  },
+  "x-type": "upsc-pods/daf-drill@1"
+}

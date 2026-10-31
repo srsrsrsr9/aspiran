@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-flood-relief-paperwork",
+  "tone": "SERIOUS",
+  "title": {
+    "en": "Relief kits and the missing list",
+    "hi": "राहत किट और अधूरी सूची"
+  },
+  "en": {
+    "scenario": "You are the sub-divisional magistrate running relief after a flood. The rules say ration kits go only to families listed in the damage survey. Many families who lost their documents are not on the list, and the survey will take ten more days. A local leader insists kits be given to everyone who comes, while your accounts officer warns that unlisted distribution will be flagged as irregular in audit.",
+    "question": "How do you distribute the relief kits?",
+    "options": [
+      {
+        "label": "Follow the survey list strictly until it is complete",
+        "outcome": "Records stay clean and audit-proof, but unlisted families may go without food for days, and anger at the camps may grow.",
+        "values": "Rule compliance over immediate need"
+      },
+      {
+        "label": "Give kits to everyone who comes",
+        "outcome": "Hunger is met quickly, but duplicate claims and leakage are likely, and you may face audit objections for spending outside the rules.",
+        "values": "Compassion over procedural accountability"
+      },
+      {
+        "label": "Verify unlisted families on the spot through the panchayat",
+        "outcome": "Many needy families get kits within a day or two with a paper trail, but it needs extra staff and some genuine cases may still be missed.",
+        "values": "Balancing compassion with accountability, at a cost"
+      }
+    ],
+    "reflect": "When rules written for normal times meet an emergency, how much discretion should an officer use, and how should that discretion be recorded?"
+  },
+  "hi": {
+    "scenario": "आप बाढ़ के बाद राहत कार्य चला रहे उपखंड मजिस्ट्रेट हैं। नियम कहते हैं कि राशन किट केवल उन परिवारों को मिलें जो नुकसान सर्वेक्षण की सूची में हैं। कई परिवार जिनके दस्तावेज़ बह गए, सूची में नहीं हैं, और सर्वेक्षण में दस दिन और लगेंगे। एक स्थानीय नेता ज़ोर देते हैं कि जो भी आए उसे किट दी जाए, जबकि आपके लेखा अधिकारी चेतावनी देते हैं कि सूची से बाहर वितरण को ऑडिट में अनियमित माना जाएगा।",
+    "question": "आप राहत किट कैसे बाँटेंगे?",
+    "options": [
+      {
+        "label": "सर्वेक्षण पूरा होने तक सूची का सख़्ती से पालन",
+        "outcome": "रिकॉर्ड साफ़ और ऑडिट के लायक रहते हैं, पर सूची से बाहर के परिवार कई दिन भूखे रह सकते हैं, और शिविरों में नाराज़गी बढ़ सकती है।",
+        "values": "तात्कालिक ज़रूरत से ऊपर नियम पालन"
+      },
+      {
+        "label": "जो भी आए, सबको किट देना",
+        "outcome": "भूख की समस्या जल्दी हल होती है, पर दोहरे दावे और रिसाव की संभावना है, और नियमों से बाहर खर्च पर ऑडिट आपत्ति आ सकती है।",
+        "values": "प्रक्रियागत जवाबदेही से ऊपर करुणा"
+      },
+      {
+        "label": "पंचायत के ज़रिए सूची से बाहर के परिवारों का मौके पर सत्यापन",
+        "outcome": "कई ज़रूरतमंद परिवारों को एक-दो दिन में रिकॉर्ड के साथ किट मिलती है, पर इसके लिए अतिरिक्त कर्मचारी चाहिए और कुछ वास्तविक मामले फिर भी छूट सकते हैं।",
+        "values": "करुणा और जवाबदेही में संतुलन, एक कीमत पर"
+      }
+    ],
+    "reflect": "जब सामान्य समय के लिए बने नियम आपदा से टकराएँ, तो एक अफ़सर को कितना विवेक इस्तेमाल करना चाहिए, और उसे रिकॉर्ड कैसे करना चाहिए?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

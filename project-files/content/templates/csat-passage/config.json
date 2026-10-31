@@ -1,0 +1,36 @@
+{
+  "schemaId": "upsc-pods/csat-passage@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "pick": "sfx/tick",
+      "right": "sfx/chime",
+      "wrong": "sfx/nudge"
+    },
+    "tags": {
+      "stage": [
+        "prelims",
+        "mains"
+      ],
+      "papers": [
+        "prelims-csat",
+        "mains-qualifying"
+      ],
+      "formats": [
+        "csat-rc",
+        "qual-comprehension"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

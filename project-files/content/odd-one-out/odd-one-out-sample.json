@@ -1,0 +1,131 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "id": "odd-one-out-rivers-crops-bodies-writs",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Odd one out: rivers, crops, bodies, writs",
+    "hi": "अलग कौन है? नदियाँ, फसलें, संस्थाएँ, रिट"
+  },
+  "rounds": [
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Narmada",
+          "Tapi",
+          "Mahi",
+          "Godavari"
+        ],
+        "why": "Rule: the others flow west into the Arabian Sea. The Godavari flows east into the Bay of Bengal."
+      },
+      "hi": {
+        "items": [
+          "नर्मदा",
+          "ताप्ती",
+          "माही",
+          "गोदावरी"
+        ],
+        "why": "नियम: बाकी तीन नदियाँ पश्चिम की ओर अरब सागर में बहती हैं। गोदावरी पूर्व की ओर बंगाल की खाड़ी में बहती है, इसलिए वह नियम तोड़ती है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Wheat",
+          "Rice",
+          "Maize",
+          "Cotton"
+        ],
+        "why": "Rule: the others are kharif crops, sown with the onset of the southwest monsoon. Wheat is a rabi crop, sown in winter."
+      },
+      "hi": {
+        "items": [
+          "गेहूँ",
+          "चावल",
+          "मक्का",
+          "कपास"
+        ],
+        "why": "नियम: चावल, मक्का और कपास खरीफ फसलें हैं, जो दक्षिण-पश्चिम मानसून की शुरुआत के साथ बोई जाती हैं। गेहूँ रबी फसल है, जो सर्दियों में बोई जाती है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Election Commission",
+          "NITI Aayog",
+          "Union Public Service Commission",
+          "Finance Commission"
+        ],
+        "why": "Rule: constitutional bodies (Articles 324, 315, 280). NITI Aayog was set up in 2015 by a Union Cabinet resolution, so it is not one."
+      },
+      "hi": {
+        "items": [
+          "निर्वाचन आयोग",
+          "नीति आयोग",
+          "संघ लोक सेवा आयोग",
+          "वित्त आयोग"
+        ],
+        "why": "नियम: ये संवैधानिक निकाय हैं (अनुच्छेद 324, 315, 280)। नीति आयोग को 2015 में केंद्रीय मंत्रिमंडल के संकल्प से बनाया गया था, इसलिए वह संवैधानिक निकाय नहीं है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Habeas corpus",
+          "Mandamus",
+          "Stay order",
+          "Certiorari"
+        ],
+        "why": "Rule: writs the Supreme Court can issue under Article 32. A stay order is an interim order, not one of the five writs."
+      },
+      "hi": {
+        "items": [
+          "बंदी प्रत्यक्षीकरण",
+          "परमादेश",
+          "स्थगन आदेश",
+          "उत्प्रेषण"
+        ],
+        "why": "नियम: ये अनुच्छेद 32 के तहत सुप्रीम कोर्ट द्वारा जारी किए जा सकने वाले रिट हैं। स्थगन आदेश एक अंतरिम आदेश है, पाँच रिटों में से कोई नहीं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/odd-one-out/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  }
+}

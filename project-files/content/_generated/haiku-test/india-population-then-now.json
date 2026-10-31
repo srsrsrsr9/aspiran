@@ -1,0 +1,75 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "gentle"
+  },
+  "sfx": {
+    "tick": "sfx/tick",
+    "end": "sfx/chime"
+  },
+  "id": "india-population-then-now",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Then and now: India's census",
+    "hi": "तब और अब: भारत की जनगणना"
+  },
+  "from": {
+    "year": 1951
+  },
+  "to": {
+    "year": 2011
+  },
+  "metrics": [
+    {
+      "en": {
+        "label": "Total population",
+        "unit": "crore"
+      },
+      "hi": {
+        "label": "कुल जनसंख्या",
+        "unit": "करोड़"
+      },
+      "from": 36.1,
+      "to": 121.1,
+      "max": 130
+    },
+    {
+      "en": {
+        "label": "Living in urban areas",
+        "unit": "percent"
+      },
+      "hi": {
+        "label": "जनसंख्या में शहरी हिस्सा",
+        "unit": "प्रतिशत"
+      },
+      "from": 17.3,
+      "to": 31.1,
+      "max": 35
+    }
+  ],
+  "takeaway": {
+    "en": "Population rose from 36.1 to 121.1 crore and the urban share from 17.3 to 31.1 percent, so in 2011 most Indians still lived outside urban areas.",
+    "hi": "जनसंख्या 36.1 करोड़ से बढ़कर 121.1 करोड़ और शहरी हिस्सा 17.3 से 31.1 प्रतिशत हुआ, इसलिए 2011 में अधिकांश भारतीय शहरी क्षेत्रों के बाहर रहते थे।"
+  },
+  "note": {
+    "en": "Method changed: the census definition of a town changed slightly between censuses.",
+    "hi": "पद्धति में बदलाव: जनगणना में 'शहर' की परिभाषा जनगणनाओं के बीच थोड़ी बदली।"
+  },
+  "sources": {
+    "en": "Census of India figures (1951 and 2011)",
+    "hi": "भारत की जनगणना के आंकड़े (1951 और 2011)"
+  },
+  "schema": "upsc-pods/then-now@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/then-now/",
+    "createdOn": "2026-10-10"
+  }
+}

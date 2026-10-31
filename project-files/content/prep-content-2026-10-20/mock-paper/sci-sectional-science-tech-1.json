@@ -1,0 +1,970 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "sci-sectional-science-tech-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Science and tech sectional mock 1",
+    "hi": "विज्ञान और प्रौद्योगिकी सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS3 Science and Technology",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "sci-space-technology",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about Indian space missions:",
+        "statements": [
+          "The Polar Satellite Launch Vehicle (PSLV) has four stages, which use solid and liquid propellants alternately.",
+          "The Vikram lander of Chandrayaan-3 soft-landed in the Moon's south polar region in August 2023.",
+          "The Mars Orbiter Mission (Mangalyaan) was launched on a GSLV rocket."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the Mars Orbiter Mission was launched in 2013 on a PSLV, not a GSLV. The trap is '1, 2 and 3', because an interplanetary mission sounds like a job for the heavier rocket."
+      },
+      "hi": {
+        "stem": "भारतीय अंतरिक्ष अभियानों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "ध्रुवीय उपग्रह प्रक्षेपण यान (PSLV) में चार चरण होते हैं, जिनमें बारी-बारी से ठोस और तरल प्रणोदक इस्तेमाल होते हैं।",
+          "चंद्रयान-3 के विक्रम लैंडर ने अगस्त 2023 में चंद्रमा के दक्षिणी ध्रुवीय क्षेत्र में सॉफ्ट लैंडिंग की।",
+          "मंगल ऑर्बिटर मिशन (मंगलयान) को GSLV रॉकेट से प्रक्षेपित किया गया था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: मंगल ऑर्बिटर मिशन 2013 में PSLV से प्रक्षेपित हुआ था, GSLV से नहीं। '1, 2 और 3' वाला विकल्प जाल है, क्योंकि दूसरे ग्रह का मिशन सुनने में भारी रॉकेट का काम लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-space-technology",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following best describes a satellite in geostationary orbit?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It circles over the poles, passing each place at the same local time daily.",
+          "It orbits only a few hundred kilometres above the Earth.",
+          "It orbits above the equator once per Earth rotation, so it seems fixed.",
+          "It completes one orbit around the Earth roughly every 90 minutes."
+        ],
+        "why": "A geostationary satellite sits above the equator and moves with the Earth's rotation, so from the ground it seems to stay in one spot. The trap is the first option: that describes a sun-synchronous polar orbit, used for Earth observation."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा कथन भूस्थिर कक्षा (geostationary orbit) के उपग्रह का सबसे सही वर्णन करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "यह ध्रुवों के ऊपर से घूमता है और हर दिन हर स्थान के ऊपर एक ही स्थानीय समय पर गुज़रता है।",
+          "यह पृथ्वी से केवल कुछ सौ किलोमीटर ऊपर परिक्रमा करता है।",
+          "यह भूमध्य रेखा के ऊपर पृथ्वी के एक घूर्णन में एक चक्कर लगाता है, इसलिए स्थिर लगता है।",
+          "यह लगभग हर 90 मिनट में पृथ्वी का एक चक्कर पूरा करता है।"
+        ],
+        "why": "भूस्थिर उपग्रह भूमध्य रेखा के ऊपर पृथ्वी के घूर्णन के साथ-साथ चलता है, इसलिए ज़मीन से एक ही जगह टिका दिखता है। जाल पहला विकल्प है: वह सूर्य-तुल्यकालिक ध्रुवीय कक्षा का वर्णन है, जो पृथ्वी अवलोकन के काम आती है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "sci-space-technology",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of Indian space missions and their purpose:",
+        "statements": [
+          "Aditya-L1 – studying the Sun from around the Lagrange point L1",
+          "AstroSat – India's first dedicated multi-wavelength space observatory",
+          "Chandrayaan-1 – helped detect water molecules on the Moon's surface",
+          "Gaganyaan – robotic mission to land a rover on Mars"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Pair 4 is wrong: Gaganyaan is India's human spaceflight programme, aimed at sending astronauts to low Earth orbit. The trap is 'All four', for anyone who links every big new mission with Mars."
+      },
+      "hi": {
+        "stem": "भारतीय अंतरिक्ष अभियानों और उनके उद्देश्य के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "आदित्य-L1 – लैग्रेंज बिंदु L1 के आसपास से सूर्य का अध्ययन",
+          "एस्ट्रोसैट (AstroSat) – भारत की पहली समर्पित बहु-तरंगदैर्ध्य अंतरिक्ष वेधशाला",
+          "चंद्रयान-1 – चंद्रमा की सतह पर जल अणुओं का पता लगाने में मदद की",
+          "गगनयान – मंगल पर रोवर उतारने का रोबोटिक मिशन"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1, 2 और 3 सही हैं। जोड़ा 4 गलत है: गगनयान भारत का मानव अंतरिक्ष उड़ान कार्यक्रम है, जिसका लक्ष्य अंतरिक्ष यात्रियों को निचली पृथ्वी कक्षा में भेजना है। 'सभी चार' वाला विकल्प जाल है, अगर आप हर बड़े नए मिशन को मंगल से जोड़ देते हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "sci-space-technology",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Many Earth observation satellites are placed in sun-synchronous polar orbits.",
+          "A satellite in a sun-synchronous orbit passes over a given place at about the same local solar time, so lighting conditions stay consistent between images."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: similar lighting on every pass makes images easy to compare over time, which Earth observation needs. The trap is (b), which misses that consistent lighting is exactly why this orbit is chosen."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "पृथ्वी अवलोकन के कई उपग्रह सूर्य-तुल्यकालिक ध्रुवीय कक्षाओं में रखे जाते हैं।",
+          "सूर्य-तुल्यकालिक कक्षा का उपग्रह किसी स्थान के ऊपर से लगभग एक ही स्थानीय सौर समय पर गुज़रता है, इसलिए चित्रों के बीच प्रकाश की स्थिति एक जैसी रहती है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं और II, I की व्याख्या करता है: हर बार एक जैसी रोशनी होने से समय के साथ चित्रों की तुलना आसान होती है, और पृथ्वी अवलोकन को यही चाहिए। जाल दूसरा विकल्प है, जो चूक जाता है कि यह कक्षा इसी वजह से चुनी जाती है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "sci-space-technology",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following statements about cryogenic rocket engines is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "They use liquid hydrogen as fuel and liquid oxygen as oxidiser.",
+          "Their propellants must be stored at very low temperatures.",
+          "The GSLV uses a cryogenic upper stage.",
+          "They power the first stage of the PSLV."
+        ],
+        "why": "The PSLV has no cryogenic stage: its first stage uses solid propellant. The trap is the GSLV option, which is true: ISRO's GSLV carries a cryogenic upper stage."
+      },
+      "hi": {
+        "stem": "क्रायोजेनिक रॉकेट इंजनों के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "इनमें ईंधन के रूप में द्रव हाइड्रोजन और ऑक्सीकारक के रूप में द्रव ऑक्सीजन इस्तेमाल होती है।",
+          "इनके प्रणोदकों को बहुत कम तापमान पर रखना पड़ता है।",
+          "GSLV में क्रायोजेनिक ऊपरी चरण होता है।",
+          "ये PSLV के पहले चरण को शक्ति देते हैं।"
+        ],
+        "why": "PSLV में कोई क्रायोजेनिक चरण नहीं होता: उसका पहला चरण ठोस प्रणोदक से चलता है। जाल GSLV वाला विकल्प है, जो सही है: ISRO के GSLV में क्रायोजेनिक ऊपरी चरण होता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-biotechnology",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In CRISPR-Cas9 gene editing, what is the main role of the Cas9 protein?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It reads the whole genome and makes a copy of it.",
+          "It cuts DNA at a specific site chosen by a guide RNA.",
+          "It joins amino acids together to build proteins.",
+          "It supplies ready-made antibodies against viruses."
+        ],
+        "why": "Cas9 is an enzyme that cuts DNA; a guide RNA leads it to the exact spot to cut. The trap is the first option: Cas9 does not read or copy the genome, and finding the target is the guide RNA's job."
+      },
+      "hi": {
+        "stem": "CRISPR-Cas9 जीन संपादन में Cas9 प्रोटीन की मुख्य भूमिका क्या है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "यह पूरा जीनोम पढ़कर उसकी प्रतिलिपि बनाता है।",
+          "यह गाइड RNA द्वारा चुने गए एक खास स्थान पर DNA को काटता है।",
+          "यह अमीनो अम्लों को जोड़कर प्रोटीन बनाता है।",
+          "यह वायरसों के विरुद्ध तैयार एंटीबॉडी देता है।"
+        ],
+        "why": "Cas9 एक एंज़ाइम है जो DNA काटता है; गाइड RNA उसे काटने की सही जगह तक ले जाता है। जाल पहला विकल्प है: Cas9 जीनोम न पढ़ता है, न उसकी कॉपी बनाता है, और लक्ष्य ढूँढना गाइड RNA का काम है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "sci-biotechnology",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about genetically modified (GM) crops in India:",
+        "statements": [
+          "Bt cotton carries a gene from the bacterium Bacillus thuringiensis that makes a protein toxic to certain insect pests such as bollworms.",
+          "Bt brinjal was approved for commercial cultivation across India in 2010.",
+          "The Genetic Engineering Appraisal Committee (GEAC) functions under the Ministry of Environment, Forest and Climate Change."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 3 only"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: in 2010 the government put a moratorium on Bt brinjal instead of approving it. The trap is '1, 2 and 3', since 2010 is when Bt brinjal was in the news."
+      },
+      "hi": {
+        "stem": "भारत में आनुवंशिक रूप से संशोधित (GM) फसलों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "Bt कपास में Bacillus thuringiensis जीवाणु का एक जीन होता है, जो बॉलवर्म जैसे कुछ कीटों के लिए विषैला प्रोटीन बनाता है।",
+          "2010 में पूरे भारत में Bt बैंगन की व्यावसायिक खेती को मंज़ूरी दी गई।",
+          "आनुवंशिक अभियांत्रिकी मूल्यांकन समिति (GEAC) पर्यावरण, वन और जलवायु परिवर्तन मंत्रालय के तहत काम करती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: 2010 में सरकार ने Bt बैंगन को मंज़ूरी देने के बजाय उस पर रोक (moratorium) लगाई थी। '1, 2 और 3' वाला विकल्प जाल है, क्योंकि 2010 में ही Bt बैंगन खबरों में था।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "sci-biotechnology",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about DNA and RNA:",
+        "statements": [
+          "DNA is made of two strands wound into a double helix.",
+          "In DNA, adenine pairs with thymine and guanine pairs with cytosine.",
+          "RNA contains uracil in place of thymine.",
+          "Mature human red blood cells carry their DNA in a nucleus."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: mature human red blood cells lose their nucleus, which leaves more room for haemoglobin. The trap is 'All four', from assuming every human cell has a nucleus."
+      },
+      "hi": {
+        "stem": "DNA और RNA के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "DNA दो रज्जुकों (strands) से बना होता है, जो द्विकुंडली (double helix) के रूप में लिपटे रहते हैं।",
+          "DNA में एडेनिन, थाइमिन के साथ और ग्वानिन, साइटोसिन के साथ जोड़ी बनाता है।",
+          "RNA में थाइमिन की जगह यूरेसिल होता है।",
+          "परिपक्व मानव लाल रक्त कोशिकाएँ अपना DNA केंद्रक (nucleus) में रखती हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: परिपक्व मानव लाल रक्त कोशिकाओं में केंद्रक नहीं रहता, जिससे हीमोग्लोबिन के लिए ज़्यादा जगह बचती है। 'सभी चार' वाला विकल्प जाल है, जो मान लेता है कि हर मानव कोशिका में केंद्रक होता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "sci-health-and-disease",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about microbes and disease:",
+        "statements": [
+          "Antibiotics are effective against viral infections such as the common cold.",
+          "Viruses can multiply only inside the living cells of a host.",
+          "Bacteria are prokaryotes, without a membrane-bound nucleus."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 2 and 3 are correct. Statement 1 is wrong: antibiotics act on bacteria, not viruses, so they do not cure a cold. The trap is '1, 2 and 3', a common belief that also feeds antibiotic misuse."
+      },
+      "hi": {
+        "stem": "सूक्ष्मजीवों और रोगों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "एंटीबायोटिक सामान्य ज़ुकाम जैसे वायरल संक्रमणों पर असरदार होते हैं।",
+          "वायरस केवल किसी पोषी (host) की जीवित कोशिकाओं के अंदर ही गुणन कर सकते हैं।",
+          "जीवाणु प्रोकैरियोट होते हैं, जिनमें झिल्ली से घिरा केंद्रक नहीं होता।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 2 और 3 सही हैं। कथन 1 गलत है: एंटीबायोटिक जीवाणुओं पर काम करते हैं, वायरस पर नहीं, इसलिए ज़ुकाम ठीक नहीं करते। '1, 2 और 3' वाला विकल्प जाल है; यही आम धारणा एंटीबायोटिक के गलत इस्तेमाल को भी बढ़ाती है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "sci-health-and-disease",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Overuse and misuse of antibiotics speed up the spread of antimicrobial resistance.",
+          "Antimicrobial resistance happens because the human body becomes immune to antibiotics."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct. Statement II is wrong: the microbes, not the human body, become resistant, as drugs kill susceptible ones and resistant ones survive and multiply. The trap is (a), which accepts the popular idea of the body 'getting used to' medicines."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "एंटीबायोटिक के अधिक और गलत इस्तेमाल से रोगाणुरोधी प्रतिरोध (antimicrobial resistance) तेज़ी से फैलता है।",
+          "रोगाणुरोधी प्रतिरोध इसलिए होता है क्योंकि मानव शरीर एंटीबायोटिक के प्रति प्रतिरक्षित हो जाता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है। कथन II गलत है: प्रतिरोधी शरीर नहीं, सूक्ष्मजीव बनते हैं, क्योंकि दवा संवेदनशील सूक्ष्मजीवों को मारती है और प्रतिरोधी बचकर बढ़ते हैं। जाल पहला विकल्प है, जो 'शरीर को दवा की आदत पड़ जाना' वाली आम सोच मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-health-and-disease",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "How does an mRNA vaccine work?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It gives cells instructions to make a harmless viral protein, which trains the immune system.",
+          "It injects a weakened but live form of the virus.",
+          "It permanently changes the DNA of the person who receives it.",
+          "It supplies ready-made antibodies that give instant protection."
+        ],
+        "why": "An mRNA vaccine carries instructions that cells use to make a viral protein, and the immune system learns to recognise it. The trap is the DNA option: the mRNA does not enter the nucleus and does not change a person's DNA."
+      },
+      "hi": {
+        "stem": "mRNA टीका कैसे काम करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "यह कोशिकाओं को एक हानिरहित वायरल प्रोटीन बनाने का निर्देश देता है, जिससे प्रतिरक्षा तंत्र प्रशिक्षित होता है।",
+          "यह वायरस का कमज़ोर पर जीवित रूप शरीर में डालता है।",
+          "यह टीका लेने वाले व्यक्ति का DNA स्थायी रूप से बदल देता है।",
+          "यह तैयार एंटीबॉडी देता है, जिनसे तुरंत सुरक्षा मिलती है।"
+        ],
+        "why": "mRNA टीका ऐसे निर्देश लेकर आता है जिनसे कोशिकाएँ एक वायरल प्रोटीन बनाती हैं, और प्रतिरक्षा तंत्र उसे पहचानना सीख जाता है। जाल DNA वाला विकल्प है: mRNA केंद्रक में नहीं जाता और व्यक्ति का DNA नहीं बदलता।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "sci-health-and-disease",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following diseases is NOT caused by a virus?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Measles",
+          "Tuberculosis",
+          "Polio",
+          "Dengue"
+        ],
+        "why": "Tuberculosis is caused by a bacterium, Mycobacterium tuberculosis. The trap is dengue: because mosquitoes spread it, some think of it like malaria, but dengue is caused by a virus."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा रोग वायरस से नहीं होता?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "खसरा",
+          "क्षय रोग (टीबी)",
+          "पोलियो",
+          "डेंगू"
+        ],
+        "why": "क्षय रोग एक जीवाणु, Mycobacterium tuberculosis, से होता है। जाल डेंगू का है: मच्छर से फैलने के कारण कुछ लोग इसे मलेरिया जैसा मान लेते हैं, पर डेंगू वायरस से होता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "sci-computing-and-ai",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about blockchain technology:",
+        "statements": [
+          "Each block holds a cryptographic hash of the previous block, linking the blocks into a chain.",
+          "Copies of the ledger are kept by many participants in the network.",
+          "A central bank must approve every transaction recorded on a blockchain."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: a blockchain is a distributed ledger, and records are validated through the network's consensus rules, not by a central authority. The trap is 'All three', as blockchain is often linked with money."
+      },
+      "hi": {
+        "stem": "ब्लॉकचेन प्रौद्योगिकी के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "हर ब्लॉक में पिछले ब्लॉक का क्रिप्टोग्राफ़िक हैश होता है, जो ब्लॉकों को एक श्रृंखला में जोड़ता है।",
+          "नेटवर्क के कई प्रतिभागी खाता-बही (ledger) की प्रतियाँ रखते हैं।",
+          "ब्लॉकचेन पर दर्ज हर लेन-देन को किसी केंद्रीय बैंक की मंज़ूरी चाहिए।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: ब्लॉकचेन एक वितरित खाता-बही है, और रिकॉर्ड नेटवर्क के सहमति (consensus) नियमों से सत्यापित होते हैं, किसी केंद्रीय संस्था से नहीं। 'तीनों' वाला विकल्प जाल है, क्योंकि ब्लॉकचेन को अक्सर पैसे से जोड़ा जाता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "sci-computing-and-ai",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about computing technologies:",
+        "statements": [
+          "A qubit can exist in a superposition of the states 0 and 1.",
+          "Quantum computers are expected to be faster than classical computers for every kind of task.",
+          "Machine learning lets systems learn patterns from data instead of being given every rule explicitly.",
+          "Large language models are trained on large amounts of text to predict the next word or token."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 3 and 4 are correct. Statement 2 is wrong: quantum computers promise big gains only for certain problems, such as some kinds of simulation and factoring, not for every task. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "कंप्यूटिंग प्रौद्योगिकियों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "एक क्यूबिट 0 और 1 अवस्थाओं के अध्यारोपण (superposition) में रह सकता है।",
+          "क्वांटम कंप्यूटर हर तरह के काम में क्लासिकल कंप्यूटरों से तेज़ होंगे, ऐसी अपेक्षा है।",
+          "मशीन लर्निंग से सिस्टम हर नियम स्पष्ट रूप से दिए बिना डेटा से पैटर्न सीखते हैं।",
+          "बड़े भाषा मॉडल (LLM) को बहुत सारे पाठ पर अगला शब्द या टोकन अनुमान लगाने के लिए प्रशिक्षित किया जाता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 3 और 4 सही हैं। कथन 2 गलत है: क्वांटम कंप्यूटर से बड़ा फ़ायदा सिर्फ कुछ समस्याओं में अपेक्षित है, जैसे कुछ तरह के सिमुलेशन और गुणनखंडन, हर काम में नहीं। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "sci-computing-and-ai",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I (term) with List II (description) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Phishing",
+          "B. Ransomware",
+          "C. Blockchain",
+          "D. Internet of Things",
+          "1. Network of everyday devices that connect and exchange data",
+          "2. Malicious software that locks or encrypts data and demands payment",
+          "3. Fake messages that trick people into revealing passwords or bank details",
+          "4. Shared digital ledger whose records are very hard to alter"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-1, B-2, C-4, D-3",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-1, C-3, D-2",
+          "A-3, B-2, C-4, D-1"
+        ],
+        "why": "Phishing tricks people with fake messages (3), ransomware locks data for payment (2), blockchain is a hard-to-alter shared ledger (4), and the Internet of Things links everyday devices (1). The trap is (b), which swaps ransomware and blockchain."
+      },
+      "hi": {
+        "stem": "सूची I (शब्द) को सूची II (विवरण) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. फ़िशिंग",
+          "B. रैनसमवेयर",
+          "C. ब्लॉकचेन",
+          "D. इंटरनेट ऑफ़ थिंग्स",
+          "1. रोज़मर्रा के उपकरणों का नेटवर्क, जो आपस में जुड़कर डेटा का आदान-प्रदान करते हैं",
+          "2. हानिकारक सॉफ़्टवेयर, जो डेटा को लॉक या एन्क्रिप्ट करके भुगतान माँगता है",
+          "3. नकली संदेश, जो लोगों को पासवर्ड या बैंक विवरण बताने के लिए फँसाते हैं",
+          "4. साझा डिजिटल खाता-बही, जिसके रिकॉर्ड बदलना बहुत कठिन है"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-1, B-2, C-4, D-3",
+          "A-3, B-4, C-2, D-1",
+          "A-4, B-1, C-3, D-2",
+          "A-3, B-2, C-4, D-1"
+        ],
+        "why": "फ़िशिंग नकली संदेशों से फँसाती है (3), रैनसमवेयर डेटा लॉक करके पैसे माँगता है (2), ब्लॉकचेन कठिनाई से बदलने वाली साझा खाता-बही है (4), और इंटरनेट ऑफ़ थिंग्स रोज़मर्रा के उपकरणों को जोड़ता है (1)। जाल दूसरा विकल्प है, जो रैनसमवेयर और ब्लॉकचेन को बदल देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "sci-nuclear-energy",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about nuclear energy:",
+        "statements": [
+          "Nuclear power plants operating today produce electricity through nuclear fission.",
+          "Nuclear fusion releases energy when light nuclei, such as isotopes of hydrogen, combine.",
+          "Heavy water is water in which ordinary hydrogen is replaced by tritium."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: heavy water (D2O) contains deuterium, the hydrogen isotope with one neutron; tritium has two neutrons. The trap is '1, 2 and 3', since both are heavier forms of hydrogen."
+      },
+      "hi": {
+        "stem": "परमाणु ऊर्जा के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "आज चल रहे परमाणु बिजलीघर नाभिकीय विखंडन (fission) से बिजली बनाते हैं।",
+          "नाभिकीय संलयन (fusion) में ऊर्जा तब निकलती है जब हाइड्रोजन के समस्थानिकों जैसे हल्के नाभिक आपस में जुड़ते हैं।",
+          "भारी जल वह जल है जिसमें सामान्य हाइड्रोजन की जगह ट्रिटियम होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: भारी जल (D2O) में ड्यूटेरियम होता है, यानी एक न्यूट्रॉन वाला हाइड्रोजन समस्थानिक; ट्रिटियम में दो न्यूट्रॉन होते हैं। '1, 2 और 3' वाला विकल्प जाल है, क्योंकि दोनों हाइड्रोजन के भारी रूप हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "sci-nuclear-energy",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Pressurised Heavy Water Reactors (PHWRs) can run on natural uranium as fuel.",
+          "Heavy water used as a moderator absorbs very few neutrons, so a chain reaction can be sustained without enriched uranium.",
+          "India's three-stage nuclear power programme aims to use thorium in its third stage."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Both II and III are correct, but only II explains I: heavy water wastes few neutrons, so natural uranium is enough. III is true but is about thorium in a later stage. The trap is (a), as both statements sound like Indian nuclear facts."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "दाबित भारी जल रिएक्टर (PHWR) प्राकृतिक यूरेनियम को ईंधन के रूप में इस्तेमाल करके चल सकते हैं।",
+          "मंदक (moderator) के रूप में इस्तेमाल होने वाला भारी जल बहुत कम न्यूट्रॉन सोखता है, इसलिए संवर्धित यूरेनियम के बिना भी शृंखला अभिक्रिया चल सकती है।",
+          "भारत के तीन-चरणीय परमाणु ऊर्जा कार्यक्रम का लक्ष्य तीसरे चरण में थोरियम का उपयोग करना है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "कथन II और III दोनों सही हैं, पर I की व्याख्या केवल II करता है: भारी जल कम न्यूट्रॉन बर्बाद करता है, इसलिए प्राकृतिक यूरेनियम काफ़ी है। III सही है, पर वह आगे के चरण में थोरियम की बात है। जाल पहला विकल्प है, क्योंकि दोनों ही भारतीय परमाणु तथ्य लगते हैं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-defence-technology",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "BrahMos, often in the news, is best described as:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "an indigenous ballistic missile of the Agni family",
+          "a subsonic cruise missile developed with France",
+          "an anti-tank guided missile",
+          "a supersonic cruise missile developed jointly by India and Russia"
+        ],
+        "why": "BrahMos is a supersonic cruise missile from an India-Russia joint venture; its name comes from the Brahmaputra and Moskva rivers. The trap is the Agni option: Agni missiles are ballistic, while BrahMos is a cruise missile."
+      },
+      "hi": {
+        "stem": "अक्सर खबरों में रहने वाली ब्रह्मोस (BrahMos) का सबसे सही वर्णन है:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "अग्नि श्रृंखला की एक स्वदेशी बैलिस्टिक मिसाइल",
+          "फ़्रांस के साथ विकसित एक सबसोनिक क्रूज़ मिसाइल",
+          "एक टैंक-रोधी निर्देशित मिसाइल",
+          "भारत और रूस द्वारा संयुक्त रूप से विकसित एक सुपरसोनिक क्रूज़ मिसाइल"
+        ],
+        "why": "ब्रह्मोस भारत-रूस संयुक्त उद्यम की सुपरसोनिक क्रूज़ मिसाइल है; इसका नाम ब्रह्मपुत्र और मोस्कवा नदियों से आया है। जाल अग्नि वाला विकल्प है: अग्नि मिसाइलें बैलिस्टिक हैं, जबकि ब्रह्मोस क्रूज़ मिसाइल है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "sci-defence-technology",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of Indian missiles and their type:",
+        "statements": [
+          "Agni – surface-to-surface ballistic missile",
+          "Akash – surface-to-air missile",
+          "Nag – anti-tank guided missile",
+          "Prithvi – air-to-air missile"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. Pair 4 is wrong: Prithvi is a surface-to-surface ballistic missile; India's air-to-air missile is Astra. The trap is 'All four', for anyone who remembers the names but not the roles."
+      },
+      "hi": {
+        "stem": "भारतीय मिसाइलों और उनके प्रकार के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "अग्नि – सतह से सतह पर मार करने वाली बैलिस्टिक मिसाइल",
+          "आकाश – सतह से हवा में मार करने वाली मिसाइल",
+          "नाग – टैंक-रोधी निर्देशित मिसाइल",
+          "पृथ्वी – हवा से हवा में मार करने वाली मिसाइल"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1, 2 और 3 सही हैं। जोड़ा 4 गलत है: पृथ्वी सतह से सतह पर मार करने वाली बैलिस्टिक मिसाइल है; भारत की हवा से हवा में मार करने वाली मिसाइल अस्त्र है। 'सभी चार' वाला विकल्प जाल है, अगर आपको नाम याद हैं पर काम नहीं।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-everyday-physics",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The sky looks blue on a clear day mainly because:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "air molecules scatter shorter (blue) wavelengths of sunlight more than longer ones",
+          "the sky reflects the colour of the oceans",
+          "the atmosphere refracts all sunlight into blue",
+          "the ozone layer gives off blue light of its own"
+        ],
+        "why": "Air molecules scatter short wavelengths far more than long ones (Rayleigh scattering), so scattered blue light reaches us from every direction. The trap is the ocean option: the sky is blue even over deserts, far from any sea."
+      },
+      "hi": {
+        "stem": "साफ़ दिन में आकाश मुख्य रूप से नीला इसलिए दिखता है क्योंकि:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "वायु के अणु सूर्य के प्रकाश की छोटी (नीली) तरंगदैर्ध्य को लंबी तरंगदैर्ध्य से अधिक प्रकीर्णित करते हैं",
+          "आकाश महासागरों का रंग परावर्तित करता है",
+          "वायुमंडल सारे सूर्य-प्रकाश को अपवर्तित करके नीला कर देता है",
+          "ओज़ोन परत खुद नीला प्रकाश छोड़ती है"
+        ],
+        "why": "वायु के अणु छोटी तरंगदैर्ध्य को लंबी तरंगदैर्ध्य से कहीं ज़्यादा बिखेरते हैं (रेले प्रकीर्णन), इसलिए बिखरा नीला प्रकाश हर दिशा से हम तक आता है। जाल महासागर वाला विकल्प है: रेगिस्तान में, समुद्र से बहुत दूर भी, आकाश नीला ही दिखता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "sci-everyday-physics",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Ice floats on liquid water.",
+          "Ice is less dense than liquid water because hydrogen bonds hold its molecules in an open, cage-like structure.",
+          "Water is densest at 0 degrees Celsius."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Statement II is correct and explains I. Statement III is wrong: liquid water is densest at about 4 degrees Celsius, not at 0. The trap is (b), from linking maximum density with the freezing point."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "बर्फ़ तरल जल पर तैरती है।",
+          "बर्फ़ तरल जल से कम घनी होती है, क्योंकि हाइड्रोजन बंध उसके अणुओं को एक खुली, पिंजरे जैसी संरचना में रखते हैं।",
+          "जल का घनत्व 0 डिग्री सेल्सियस पर सबसे अधिक होता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "कथन II सही है और I की व्याख्या करता है। कथन III गलत है: तरल जल का घनत्व लगभग 4 डिग्री सेल्सियस पर सबसे ज़्यादा होता है, 0 पर नहीं। जाल दूसरा विकल्प है, जो अधिकतम घनत्व को हिमांक से जोड़ देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "sci-everyday-chemistry",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following common substances and their chemical names:",
+        "statements": [
+          "Baking soda – sodium hydrogen carbonate",
+          "Washing soda – sodium carbonate decahydrate",
+          "Bleaching powder – sodium hypochlorite"
+        ],
+        "ask": "Which of the pairs given above is/are correctly matched?",
+        "options": [
+          "2 only",
+          "1 and 3 only",
+          "2 and 3 only",
+          "1 and 2 only"
+        ],
+        "why": "Pairs 1 and 2 are correct. Pair 3 is wrong: bleaching powder is a calcium compound, calcium oxychloride (CaOCl2); sodium hypochlorite is liquid household bleach. The trap is '1 and 3 only', since 'bleach' suggests hypochlorite."
+      },
+      "hi": {
+        "stem": "नीचे दिए आम पदार्थों और उनके रासायनिक नामों पर विचार कीजिए:",
+        "statements": [
+          "खाने का सोडा (baking soda) – सोडियम हाइड्रोजन कार्बोनेट",
+          "धोने का सोडा (washing soda) – सोडियम कार्बोनेट डेकाहाइड्रेट",
+          "विरंजक चूर्ण (bleaching powder) – सोडियम हाइपोक्लोराइट"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कौन-सा/से सही सुमेलित है/हैं?",
+        "options": [
+          "केवल 2",
+          "केवल 1 और 3",
+          "केवल 2 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "युग्म 1 और 2 सही हैं। युग्म 3 गलत है: विरंजक चूर्ण कैल्शियम का यौगिक, कैल्शियम ऑक्सीक्लोराइड (CaOCl2), है; सोडियम हाइपोक्लोराइट घरेलू तरल ब्लीच है। जाल 'केवल 1 और 3' है, क्योंकि 'ब्लीच' सुनकर हाइपोक्लोराइट याद आता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "sci-human-biology",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which blood group is known as the universal donor for red blood cells?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "AB positive",
+          "O negative",
+          "A positive",
+          "B negative"
+        ],
+        "why": "O negative red cells carry no A, B or Rh antigens, so they can be given to people of any blood group. The trap is AB positive: that group is the universal recipient, not the universal donor."
+      },
+      "hi": {
+        "stem": "लाल रक्त कोशिकाओं के लिए किस रक्त समूह को सर्वदाता (universal donor) कहा जाता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "AB पॉज़िटिव",
+          "O नेगेटिव",
+          "A पॉज़िटिव",
+          "B नेगेटिव"
+        ],
+        "why": "O नेगेटिव लाल कोशिकाओं पर A, B या Rh एंटीजन नहीं होते, इसलिए इन्हें किसी भी रक्त समूह वाले को दिया जा सकता है। जाल AB पॉज़िटिव का है: वह सर्वग्राही (universal recipient) है, सर्वदाता नहीं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "sci-human-biology",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which one of the following pairs of vitamin and deficiency disease is NOT correctly matched?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Vitamin C – Scurvy",
+          "Vitamin D – Rickets",
+          "Vitamin A – Night blindness",
+          "Vitamin K – Beriberi"
+        ],
+        "why": "Beriberi is caused by a lack of vitamin B1 (thiamine); vitamin K is needed for blood clotting. The trap is Vitamin D – Rickets, which can look wrong to those who link vitamin D only with sunlight, but it is correctly matched."
+      },
+      "hi": {
+        "stem": "विटामिन और उसकी कमी से होने वाले रोग का निम्नलिखित में से कौन-सा युग्म सही सुमेलित नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "विटामिन C – स्कर्वी",
+          "विटामिन D – रिकेट्स",
+          "विटामिन A – रतौंधी",
+          "विटामिन K – बेरीबेरी"
+        ],
+        "why": "बेरीबेरी विटामिन B1 (थायमिन) की कमी से होता है; विटामिन K खून के थक्के बनने के लिए ज़रूरी है। जाल विटामिन D – रिकेट्स का है: जो विटामिन D को सिर्फ धूप से जोड़ते हैं, उन्हें यह गलत लग सकता है, पर यह युग्म सही है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "sci-everyday-chemistry",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (natural source) with List II (acid it contains) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Vinegar",
+          "B. Lemon",
+          "C. Curd",
+          "D. Ant sting",
+          "1. Lactic acid",
+          "2. Formic (methanoic) acid",
+          "3. Acetic (ethanoic) acid",
+          "4. Citric acid"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "Vinegar has acetic acid (3), lemon has citric acid (4), curd has lactic acid (1), and an ant sting injects formic acid (2). The trap is (c), which swaps lactic and formic acid."
+      },
+      "hi": {
+        "stem": "सूची I (प्राकृतिक स्रोत) को सूची II (उसमें मौजूद अम्ल) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. सिरका",
+          "B. नींबू",
+          "C. दही",
+          "D. चींटी का डंक",
+          "1. लैक्टिक अम्ल",
+          "2. फ़ॉर्मिक (मेथेनॉइक) अम्ल",
+          "3. एसिटिक (एथेनॉइक) अम्ल",
+          "4. सिट्रिक अम्ल"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "सिरके में एसिटिक अम्ल (3), नींबू में सिट्रिक अम्ल (4), दही में लैक्टिक अम्ल (1) होता है, और चींटी का डंक फ़ॉर्मिक अम्ल (2) छोड़ता है। जाल तीसरा विकल्प है, जो लैक्टिक और फ़ॉर्मिक अम्ल को बदल देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Science Class X; NCERT Biology Class XII; ISRO and DRDO public mission information",
+    "hi": "NCERT विज्ञान कक्षा X; NCERT जीव विज्ञान कक्षा XII; ISRO और DRDO की सार्वजनिक मिशन जानकारी"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

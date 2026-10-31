@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/scratch-card@1",
+  "title": "Scratch and reveal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "tone",
+    "title",
+    "texture",
+    "mood",
+    "sfx",
+    "cards",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/scratch-card@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 6
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 9
+        }
+      }
+    },
+    "texture": {
+      "type": "string",
+      "enum": [
+        "chai-stain",
+        "chalk",
+        "ink"
+      ],
+      "x-from": "config"
+    },
+    "mood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bed",
+        "sfx",
+        "motion"
+      ],
+      "properties": {
+        "bed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sfx": {
+          "type": "boolean"
+        },
+        "motion": {
+          "type": "string",
+          "enum": [
+            "gentle",
+            "crisp",
+            "none"
+          ]
+        }
+      },
+      "x-from": "config"
+    },
+    "sfx": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-from": "config"
+    },
+    "cards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tease",
+              "answer",
+              "detail"
+            ],
+            "properties": {
+              "tease": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 14,
+                "description": "A question the member answers in their head before scratching"
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 8,
+                "description": "The answer, short enough to read at a glance"
+              },
+              "detail": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30,
+                "description": "Why, with one fact from the source"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tease",
+              "answer",
+              "detail"
+            ],
+            "properties": {
+              "tease": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 19,
+                "description": "A question the member answers in their head before scratching"
+              },
+              "answer": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 11,
+                "description": "The answer, short enough to read at a glance"
+              },
+              "detail": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41,
+                "description": "Why, with one fact from the source"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

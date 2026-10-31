@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Understand the UPSC Civil Services Examination pattern, Prelims, Mains and Interview. Explore the subjects, papers, syllabus and preparation approach for every stage.">
+  <title>UPSC Civil Services Examination | Complete Course Guide</title>
+
+  <style>
+    :root {
+      --primary: #172b4d;
+      --secondary: #284d78;
+      --accent: #d69e36;
+      --light: #f4f6f9;
+      --text: #263447;
+      --muted: #64748b;
+      --border: #e1e7ef;
+      --white: #ffffff;
+      --green: #18794e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.7;
+      background: var(--white);
+    }
+
+    a {
+      color: var(--secondary);
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #142541, #294c75);
+      color: white;
+      padding: 85px 0 75px;
+    }
+
+    .eyebrow {
+      color: #f1c36e;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.15;
+      max-width: 780px;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      color: #dce5f0;
+      font-size: 18px;
+      max-width: 750px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-meta span {
+      border: 1px solid #60738c;
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 13px;
+    }
+
+    section {
+      padding: 65px 0;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--light);
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: clamp(27px, 3vw, 36px);
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      color: var(--primary);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    h4 {
+      color: var(--secondary);
+      font-size: 16px;
+      margin: 18px 0 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 32px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 35px;
+    }
+
+    .overview-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 18px rgba(20, 40, 70, 0.04);
+    }
+
+    .overview-card .number {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .overview-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .overview-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--primary);
+      font-size: 28px;
+    }
+
+    .stat span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .paper-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin: 22px 0;
+    }
+
+    .paper-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+
+    .paper-top h3 {
+      margin: 0;
+    }
+
+    .tag {
+      background: #edf3fa;
+      color: var(--secondary);
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag.qualifying {
+      background: #e9f5ee;
+      color: var(--green);
+    }
+
+    .paper-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 15px 0;
+    }
+
+    ul {
+      padding-left: 21px;
+      margin: 10px 0 15px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .learning-box {
+      background: #f3f6fa;
+      border-left: 4px solid var(--accent);
+      padding: 15px 18px;
+      margin-top: 20px;
+      border-radius: 0 7px 7px 0;
+      font-size: 14px;
+    }
+
+    .learning-box strong {
+      color: var(--primary);
+    }
+
+    .exam-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      background: white;
+      font-size: 14px;
+    }
+
+    .exam-table th,
+    .exam-table td {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .exam-table th {
+      background: var(--primary);
+      color: white;
+    }
+
+    .exam-table tr:last-child {
+      font-weight: 700;
+      background: #edf2f8;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .preparation-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .prep-card {
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .prep-card h3 {
+      font-size: 18px;
+    }
+
+    .optional-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .optional-list span {
+      background: white;
+      padding: 11px 13px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .interview-banner {
+      background: var(--primary);
+      color: white;
+      padding: 35px;
+      border-radius: 12px;
+      margin-top: 25px;
+    }
+
+    .interview-banner h3 {
+      color: white;
+      font-size: 24px;
+    }
+
+    .interview-banner p {
+      color: #dce5f0;
+    }
+
+    .interview-banner ul {
+      color: #dce5f0;
+    }
+
+    .cta {
+      text-align: center;
+      background: #f4f6f9;
+      padding: 65px 25px;
+    }
+
+    .cta h2 {
+      max-width: 700px;
+      margin: 0 auto 15px;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 25px;
+      color: var(--muted);
+    }
+
+    .cta a {
+      display: inline-block;
+      background: var(--accent);
+      color: #172b4d;
+      text-decoration: none;
+      padding: 13px 26px;
+      font-weight: 700;
+      border-radius: 6px;
+    }
+
+    .footer {
+      padding: 25px;
+      text-align: center;
+      background: #142541;
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    @media(max-width: 760px) {
+      .overview-grid,
+      .stats,
+      .preparation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .optional-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: 60px 0;
+      }
+
+      section {
+        padding: 45px 0;
+      }
+
+      .paper-card {
+        padding: 20px;
+      }
+
+      .exam-table {
+        font-size: 12px;
+      }
+
+      .exam-table th,
+      .exam-table td {
+        padding: 10px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">UPSC Civil Services Examination</div>
+    <h1>Your Complete Guide to the UPSC Examination</h1>
+    <p>
+      Understand the examination, master every paper and build the knowledge,
+      analytical ability and confidence required to pursue a career in India's
+      Civil Services.
+    </p>
+    <div class="hero-meta">
+      <span>Preliminary Examination</span>
+      <span>Main Examination</span>
+      <span>Personality Test</span>
+      <span>Comprehensive Preparation</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- INTRODUCTION -->
+
+<section>
+  <div class="container">
+    <h2>Understanding the UPSC Civil Services Examination</h2>
+    <p class="section-intro">
+      The Union Public Service Commission (UPSC) conducts the Civil Services
+      Examination (CSE) to recruit candidates for prestigious services such
+      as the Indian Administrative Service (IAS), Indian Police Service (IPS),
+      Indian Foreign Service (IFS) and Indian Revenue Service (IRS), among others.
+    </p>
+
+    <p>
+      The examination evaluates much more than textbook knowledge. It tests
+      a candidate's understanding of society, governance, economics, history,
+      current affairs, analytical thinking, ethical judgement and ability to
+      communicate effectively.
+    </p>
+
+    <p>
+      The selection process has three stages. Each stage serves a different
+      purpose and requires a distinct preparation strategy.
+    </p>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="number">STAGE 01</div>
+        <h3>Preliminary Examination</h3>
+        <p>
+          An objective screening examination that tests conceptual clarity,
+          awareness of current affairs, reasoning and aptitude.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">STAGE 02</div>
+        <h3>Main Examination</h3>
+        <p>
+          A descriptive examination that evaluates in-depth knowledge,
+          structured writing, critical analysis and subject expertise.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">STAGE 03</div>
+        <h3>Personality Test</h3>
+        <p>
+          An interview designed to assess personality, judgement,
+          communication, awareness and suitability for public service.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRELIMS -->
+
+<section>
+  <div class="container">
+    <h2>Stage 1: Preliminary Examination (Prelims)</h2>
+
+    <p class="section-intro">
+      Prelims is the first stage of the UPSC selection process. It consists
+      of two objective-type papers conducted on the same day. Candidates
+      must qualify in both papers to be considered for the Main Examination.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>2</strong>
+        <span>Objective Papers</span>
+      </div>
+      <div class="stat">
+        <strong>400</strong>
+        <span>Total Marks</span>
+      </div>
+      <div class="stat">
+        <strong>2 hrs</strong>
+        <span>Per Paper</span>
+      </div>
+      <div class="stat">
+        <strong>33%</strong>
+        <span>Minimum CSAT Score</span>
+      </div>
+    </div>
+
+    <h3>Paper I: General Studies (GS)</h3>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>General Studies Paper I</h3>
+        <span class="tag">Merit-based screening</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Maximum Marks: 200</span>
+        <span>Duration: 2 Hours</span>
+        <span>Questions: 100</span>
+        <span>Format: MCQ</span>
+      </div>
+
+      <p>
+        General Studies Paper I assesses a candidate's understanding of
+        India's history, geography, political system, economy, environment,
+        science and technology, along with important current affairs.
+      </p>
+
+      <h4>Key Subjects and Topics</h4>
+
+      <ul>
+        <li>
+          <strong>History:</strong> Ancient and Medieval Indian History,
+          Modern Indian History, Indian National Movement and Freedom Struggle.
+        </li>
+        <li>
+          <strong>Geography:</strong> Physical Geography, Indian Geography,
+          World Geography, climate, natural resources and economic geography.
+        </li>
+        <li>
+          <strong>Indian Polity and Governance:</strong> Constitution,
+          Parliament, Judiciary, Fundamental Rights, Directive Principles,
+          constitutional bodies and public institutions.
+        </li>
+        <li>
+          <strong>Indian Economy:</strong> Economic development, banking,
+          inflation, taxation, government budgeting, employment and
+          economic reforms.
+        </li>
+        <li>
+          <strong>Environment and Ecology:</strong> Biodiversity, ecosystems,
+          conservation, climate change, environmental conventions and
+          sustainable development.
+        </li>
+        <li>
+          <strong>Science and Technology:</strong> Recent developments in
+          science, space technology, biotechnology, IT and emerging technologies.
+        </li>
+        <li>
+          <strong>Current Affairs:</strong> Important national and
+          international events, government initiatives and developments
+          relevant to the above subjects.
+        </li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Build strong conceptual foundations, connect static subjects with
+        current affairs, practise topic-wise MCQs and develop effective
+        revision techniques. Regular mock tests help students improve
+        accuracy, speed and examination temperament.
+      </div>
+    </div>
+
+    <h3>Paper II: Civil Services Aptitude Test (CSAT)</h3>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>CSAT Paper II</h3>
+        <span class="tag qualifying">Qualifying Paper</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Maximum Marks: 200</span>
+        <span>Duration: 2 Hours</span>
+        <span>Questions: 80</span>
+        <span>Minimum Qualifying Marks: 66</span>
+      </div>
+
+      <p>
+        CSAT evaluates a candidate's aptitude, reasoning, comprehension
+        and problem-solving abilities. It is designed to test how effectively
+        candidates interpret information and arrive at logical conclusions.
+      </p>
+
+      <h4>Key Subjects and Topics</h4>
+
+      <ul>
+        <li><strong>Reading Comprehension:</strong> Understanding passages,
+          identifying central ideas, interpreting arguments and drawing conclusions.</li>
+        <li><strong>Logical Reasoning:</strong> Statements, assumptions,
+          conclusions, syllogisms and logical relationships.</li>
+        <li><strong>Analytical Ability:</strong> Puzzles, patterns,
+          arrangements and analytical problem-solving.</li>
+        <li><strong>Basic Numeracy:</strong> Number systems, percentages,
+          ratios, averages, profit and loss, time and work, and other
+          Class 10-level mathematics.</li>
+        <li><strong>Data Interpretation:</strong> Tables, graphs, charts
+          and numerical information.</li>
+        <li><strong>Decision-Making:</strong> Problem-solving and
+          decision-making scenarios.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Strengthen mathematical fundamentals, practise comprehension
+        passages, develop logical reasoning skills and take timed CSAT
+        practice tests. Students should aim comfortably above the qualifying
+        threshold rather than treating CSAT as an afterthought.
+      </div>
+    </div>
+
+    <div class="learning-box">
+      <strong>Important examination rule:</strong>
+      Both Prelims papers carry 200 marks each. CSAT is qualifying in nature.
+      Candidates must secure at least 33% in CSAT, while the General Studies
+      Paper I score determines the Prelims merit cutoff. One-third of the
+      marks assigned to a question is deducted for an incorrect answer.
+    </div>
+  </div>
+</section>
+
+<!-- MAINS -->
+
+<section>
+  <div class="container">
+    <h2>Stage 2: Main Examination (Mains)</h2>
+
+    <p class="section-intro">
+      Mains is the most extensive and academically demanding stage of the
+      Civil Services Examination. Unlike Prelims, it requires candidates
+      to write detailed, structured answers that demonstrate conceptual
+      understanding, critical thinking and the ability to present balanced
+      arguments.
+    </p>
+
+    <p>
+      The written examination consists of nine papers. Two are qualifying
+      language papers, while the remaining seven contribute to the Mains
+      merit score.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>9</strong>
+        <span>Written Papers</span>
+      </div>
+      <div class="stat">
+        <strong>7</strong>
+        <span>Merit Papers</span>
+      </div>
+      <div class="stat">
+        <strong>1750</strong>
+        <span>Merit Marks</span>
+      </div>
+      <div class="stat">
+        <strong>3 hrs</strong>
+        <span>Per Paper</span>
+      </div>
+    </div>
+
+    <h3>Part A: Qualifying Language Papers</h3>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper A: Indian Language</h3>
+        <span class="tag qualifying">Qualifying</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Maximum Marks: 300</span>
+        <span>Duration: 3 Hours</span>
+      </div>
+
+      <p>
+        Candidates must select one language from the languages included
+        in the Eighth Schedule of the Constitution of India, subject to
+        the exemptions specified in the UPSC notification.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li>Reading comprehension.</li>
+        <li>Precis writing.</li>
+        <li>Grammar and vocabulary.</li>
+        <li>Short essay writing.</li>
+        <li>Translation between English and the selected Indian language.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Improve reading comprehension, written expression, grammar and
+        translation skills through regular language exercises and practice.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper B: English</h3>
+        <span class="tag qualifying">Qualifying</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Maximum Marks: 300</span>
+        <span>Duration: 3 Hours</span>
+      </div>
+
+      <p>
+        This paper evaluates a candidate's ability to understand and
+        communicate effectively in English. It focuses on comprehension,
+        vocabulary, grammar and written expression.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li>Comprehension of passages.</li>
+        <li>Precis writing.</li>
+        <li>Grammar and vocabulary.</li>
+        <li>Short essay writing.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Develop clarity and accuracy in written communication through
+        comprehension exercises, grammar practice and structured writing.
+      </div>
+    </div>
+
+    <div class="learning-box">
+      <strong>Note:</strong>
+      The two language papers are qualifying in nature. Their marks are
+      not included in the final ranking. Candidates must satisfy the
+      prescribed qualifying standards in both papers.
+    </div>
+
+    <h3 style="margin-top:45px;">Part B: Papers Counted for Merit</h3>
+    <p>
+      These seven papers carry a combined total of 1,750 marks and play
+      a decisive role in determining a candidate's Mains performance.
+    </p>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper I: Essay</h3>
+        <span class="tag">250 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Duration: 3 Hours</span>
+        <span>Descriptive Paper</span>
+      </div>
+
+      <p>
+        The Essay paper assesses a candidate's ability to develop ideas,
+        construct logical arguments and communicate complex thoughts
+        in a clear, coherent and persuasive manner.
+      </p>
+
+      <h4>Common Areas of Essay Preparation</h4>
+      <ul>
+        <li>Society, education and social justice.</li>
+        <li>Politics, democracy and governance.</li>
+        <li>Economy, development and inclusive growth.</li>
+        <li>Science, technology and innovation.</li>
+        <li>Environment and sustainable development.</li>
+        <li>Philosophy, ethics and contemporary issues.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Develop a structured approach to brainstorming, outlining,
+        argument building, use of examples and effective conclusions.
+        Regular timed essay practice helps improve clarity and coherence.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper II: General Studies I</h3>
+        <span class="tag">250 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Duration: 3 Hours</span>
+        <span>History, Culture, Geography and Society</span>
+      </div>
+
+      <p>
+        GS I focuses on India's heritage and culture, historical
+        developments, world geography and the structure and evolution
+        of Indian society.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li><strong>Indian Heritage and Culture:</strong> Art forms,
+          architecture, literature and cultural traditions.</li>
+        <li><strong>Modern Indian History:</strong> Important events,
+          personalities and developments from the mid-18th century onwards.</li>
+        <li><strong>Freedom Struggle:</strong> Different phases of the
+          national movement and contributions from across India.</li>
+        <li><strong>Post-Independence India:</strong> Consolidation,
+          reorganisation and important developments.</li>
+        <li><strong>World History:</strong> Industrial Revolution,
+          world wars, colonisation, decolonisation and political ideologies.</li>
+        <li><strong>Indian Society:</strong> Diversity, women, population,
+          urbanisation, poverty and social empowerment.</li>
+        <li><strong>Geography:</strong> Physical geography, natural resources,
+          geographical phenomena and their impact on human activity.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Use timelines, maps, case studies, thematic notes and analytical
+        answer-writing exercises to develop a connected understanding
+        of historical and contemporary developments.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper III: General Studies II</h3>
+        <span class="tag">250 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Duration: 3 Hours</span>
+        <span>Polity, Governance, Social Justice and International Relations</span>
+      </div>
+
+      <p>
+        GS II evaluates a candidate's understanding of India's constitutional
+        framework, political institutions, public administration,
+        governance mechanisms and international relations.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li><strong>Indian Constitution:</strong> Constitutional framework,
+          amendments, important provisions and basic structure.</li>
+        <li><strong>Political System:</strong> Parliament, state legislatures,
+          executive, judiciary and federal structure.</li>
+        <li><strong>Governance:</strong> Transparency, accountability,
+          e-governance, citizen charters and public service delivery.</li>
+        <li><strong>Social Justice:</strong> Welfare schemes, health,
+          education, poverty, vulnerable sections and social development.</li>
+        <li><strong>Constitutional and Statutory Bodies:</strong>
+          Election Commission, CAG, commissions and regulatory institutions.</li>
+        <li><strong>International Relations:</strong> India's foreign policy,
+          bilateral relations, regional groupings and international organisations.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Connect constitutional concepts with current government policies,
+        landmark judgements and contemporary governance challenges.
+        Practise balanced answers supported by constitutional provisions
+        and relevant examples.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper IV: General Studies III</h3>
+        <span class="tag">250 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Duration: 3 Hours</span>
+        <span>Economy, Science, Environment, Security and Disaster Management</span>
+      </div>
+
+      <p>
+        GS III examines the candidate's understanding of India's economic
+        development, technological progress, environmental challenges,
+        internal security and disaster management.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li><strong>Indian Economy:</strong> Growth, development, employment,
+          inclusive growth, budgeting, infrastructure and investment.</li>
+        <li><strong>Agriculture:</strong> Cropping patterns, irrigation,
+          agricultural marketing, food security and farm subsidies.</li>
+        <li><strong>Science and Technology:</strong> Developments in
+          biotechnology, space, IT, robotics, artificial intelligence
+          and other emerging technologies.</li>
+        <li><strong>Environment:</strong> Conservation, pollution,
+          environmental impact assessment, climate change and biodiversity.</li>
+        <li><strong>Internal Security:</strong> Cybersecurity, terrorism,
+          border management, organised crime and security challenges.</li>
+        <li><strong>Disaster Management:</strong> Disaster preparedness,
+          mitigation, response and recovery mechanisms.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Combine conceptual learning with economic data, government reports,
+        current affairs and real-world case studies. Practise using diagrams,
+        flowcharts and structured analytical answers.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper V: General Studies IV</h3>
+        <span class="tag">250 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Duration: 3 Hours</span>
+        <span>Ethics, Integrity and Aptitude</span>
+      </div>
+
+      <p>
+        GS IV focuses on ethical and moral reasoning, integrity,
+        accountability and the values expected of individuals working
+        in public administration.
+      </p>
+
+      <h4>Key Topics</h4>
+      <ul>
+        <li><strong>Ethics and Human Values:</strong> Ethical principles,
+          human values, attitude and moral reasoning.</li>
+        <li><strong>Emotional Intelligence:</strong> Understanding emotions,
+          empathy, self-awareness and decision-making.</li>
+        <li><strong>Integrity and Impartiality:</strong> Public service values,
+          objectivity, dedication and accountability.</li>
+        <li><strong>Ethics in Public Administration:</strong> Transparency,
+          probity, citizen-centric governance and ethical leadership.</li>
+        <li><strong>Case Studies:</strong> Practical ethical dilemmas
+          involving administrative decisions and competing interests.</li>
+      </ul>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Build a strong understanding of ethical concepts and practise
+        case studies involving real-world administrative dilemmas.
+        Focus on balanced, practical and ethically defensible solutions.
+      </div>
+    </div>
+
+    <div class="paper-card">
+      <div class="paper-top">
+        <h3>Paper VI and VII: Optional Subject</h3>
+        <span class="tag">500 Marks</span>
+      </div>
+
+      <div class="paper-meta">
+        <span>Paper VI: 250 Marks</span>
+        <span>Paper VII: 250 Marks</span>
+        <span>3 Hours Each</span>
+      </div>
+
+      <p>
+        Candidates select one optional subject from the list prescribed
+        by UPSC. The chosen subject has two descriptive papers, each
+        carrying 250 marks.
+      </p>
+
+      <p>
+        The optional subject provides an opportunity to demonstrate
+        specialised academic knowledge and can make a significant
+        contribution to the final Mains score.
+      </p>
+
+      <h4>Popular Optional Subjects</h4>
+
+      <div class="optional-list">
+        <span>Anthropology</span>
+        <span>Geography</span>
+        <span>History</span>
+        <span>Political Science & IR</span>
+        <span>Sociology</span>
+        <span>Public Administration</span>
+        <span>Psychology</span>
+        <span>Philosophy</span>
+        <span>Economics</span>
+        <span>Mathematics</span>
+        <span>Law</span>
+        <span>Literature Subjects</span>
+      </div>
+
+      <p class="note">
+        Other optional subjects include Agriculture, Animal Husbandry
+        and Veterinary Science, Botany, Chemistry, Civil Engineering,
+        Commerce and Accountancy, Electrical Engineering, Geology,
+        Management, Mechanical Engineering, Medical Science, Physics,
+        Statistics and Zoology.
+      </p>
+
+      <div class="learning-box">
+        <strong>Our preparation approach:</strong>
+        Help students understand the syllabus, evaluate their academic
+        interests and strengths, analyse previous years' questions and
+        develop a subject-specific preparation strategy. Optional subject
+        selection should be based on informed evaluation, not popularity alone.
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px;">Mains Examination: Marks Distribution</h3>
+
+    <table class="exam-table">
+      <thead>
+        <tr>
+          <th>Paper</th>
+          <th>Subject</th>
+          <th>Marks</th>
+          <th>Nature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Paper A</td>
+          <td>Indian Language</td>
+          <td>300</td>
+          <td>Qualifying</td>
+        </tr>
+        <tr>
+          <td>Paper B</td>
+          <td>English</td>
+          <td>300</td>
+          <td>Qualifying</td>
+        </tr>
+        <tr>
+          <td>Paper I</td>
+          <td>Essay</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper II</td>
+          <td>General Studies I</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper III</td>
+          <td>General Studies II</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper IV</td>
+          <td>General Studies III</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper V</td>
+          <td>General Studies IV</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper VI</td>
+          <td>Optional Subject I</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td>Paper VII</td>
+          <td>Optional Subject II</td>
+          <td>250</td>
+          <td>Merit</td>
+        </tr>
+        <tr>
+          <td colspan="2">Total Mains Merit Marks</td>
+          <td>1,750</td>
+          <td>Final Ranking</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<!-- INTERVIEW -->
+
+<section>
+  <div class="container">
+    <h2>Stage 3: Personality Test (UPSC Interview)</h2>
+
+    <p class="section-intro">
+      The final stage of the Civil Services Examination is the Personality
+      Test. Candidates who qualify in Mains are invited for an interview
+      conducted by a UPSC board.
+    </p>
+
+    <div class="interview-banner">
+      <h3>Beyond Knowledge: Assessing the Individual</h3>
+      <p>
+        The Personality Test carries 275 marks. It is not simply another
+        academic examination. The objective is to assess a candidate's
+        suitability for a career in public service.
+      </p>
+      <ul>
+        <li>Clarity of thought and expression.</li>
+        <li>Critical thinking and analytical ability.</li>
+        <li>Awareness of national and international developments.</li>
+        <li>Leadership, initiative and decision-making.</li>
+        <li>Integrity, honesty and balanced judgement.</li>
+        <li>Interest in public affairs and understanding of society.</li>
+        <li>Ability to respond calmly to challenging questions.</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:35px;">How We Prepare Students for the Interview</h3>
+
+    <div class="preparation-grid">
+      <div class="prep-card">
+        <h3>Detailed Application Form (DAF) Analysis</h3>
+        <p>
+          Prepare students to discuss their educational background,
+          hometown, work experience, hobbies and other details
+          mentioned in their application.
+        </p>
+      </div>
+
+      <div class="prep-card">
+        <h3>Current Affairs and General Awareness</h3>
+        <p>
+          Develop the ability to discuss important national and
+          international developments with clarity, perspective
+          and balanced judgement.
+        </p>
+      </div>
+
+      <div class="prep-card">
+        <h3>Mock Interview Sessions</h3>
+        <p>
+          Simulate the interview environment and provide structured
+          feedback on communication, confidence, body language
+          and response quality.
+        </p>
+      </div>
+
+      <div class="prep-card">
+        <h3>Personality Development</h3>
+        <p>
+          Strengthen communication, self-awareness, decision-making
+          and the ability to articulate informed opinions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL MARKS -->
+
+<section>
+  <div class="container">
+    <h2>How Is the Final UPSC Rank Determined?</h2>
+
+    <p class="section-intro">
+      The final merit list is prepared using the marks obtained in the
+      Main Examination (seven merit papers) and the Personality Test.
+      Prelims marks are not included in the final ranking.
+    </p>
+
+    <table class="exam-table">
+      <thead>
+        <tr>
+          <th>Examination Stage</th>
+          <th>Marks Counted for Final Merit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Preliminary Examination</td>
+          <td>Not counted</td>
+        </tr>
+        <tr>
+          <td>Main Examination</td>
+          <td>1,750</td>
+        </tr>
+        <tr>
+          <td>Personality Test</td>
+          <td>275</td>
+        </tr>
+        <tr>
+          <td>Total Final Merit</td>
+          <td>2,025</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Candidates are ranked based on their combined Mains and Interview
+      scores. Service allocation depends on final rank, service preferences,
+      vacancies and applicable eligibility requirements.
+    </p>
+  </div>
+</section>
+
+<!-- INSTITUTE PREPARATION APPROACH -->
+
+<section>
+  <div class="container">
+    <h2>Our Approach to Comprehensive UPSC Preparation</h2>
+
+    <p class="section-intro">
+      Clearing UPSC requires more than completing a syllabus. It requires
+      a systematic preparation strategy, consistent practice, timely
+      feedback and the ability to improve with every assessment.
+    </p>
+
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="number">01 · FOUNDATION</div>
+        <h3>Conceptual Clarity</h3>
+        <p>
+          Build a strong foundation across History, Geography, Polity,
+          Economy, Environment and other core subjects.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">02 · APPLICATION</div>
+        <h3>Current Affairs Integration</h3>
+        <p>
+          Connect static syllabus topics with contemporary developments,
+          government policies, reports and important events.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">03 · PRACTICE</div>
+        <h3>Regular Assessments</h3>
+        <p>
+          Strengthen examination readiness through MCQs, sectional tests,
+          full-length mock examinations and performance reviews.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">04 · WRITING</div>
+        <h3>Mains Answer Writing</h3>
+        <p>
+          Develop structured writing, analytical thinking, effective
+          introductions, relevant examples and concise conclusions.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">05 · GUIDANCE</div>
+        <h3>Mentorship and Feedback</h3>
+        <p>
+          Identify strengths and improvement areas through regular
+          evaluations, individual feedback and guided revision.
+        </p>
+      </div>
+
+      <div class="overview-card">
+        <div class="number">06 · FINAL PREPARATION</div>
+        <h3>Interview Readiness</h3>
+        <p>
+          Develop confidence, communication skills, awareness and
+          balanced judgement through mock interviews and mentoring.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+
+<section class="cta" id="admissions">
+  <div class="container">
+    <h2>Start Your UPSC Preparation with a Clear Roadmap</h2>
+    <p>
+      Understand the examination, choose the right preparation strategy
+      and build the knowledge and skills required at every stage of the
+      Civil Services Examination.
+    </p>
+    <a href="#admissions">Explore Our UPSC Preparation Programmes</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>
+    Examination structure and marks are based on the UPSC Civil Services
+    Examination scheme. Candidates should refer to the latest official
+    UPSC notification for applicable rules, syllabus, exemptions and
+    examination updates.
+  </p>
+  <p>
+    Official website:
+    <a href="https://upsc.gov.in/" target="_blank" rel="noopener noreferrer"
+       style="color:#f1c36e;">upsc.gov.in</a>
+  </p>
+</footer>
+
+</body>
+</html>

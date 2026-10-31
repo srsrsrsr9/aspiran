@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/quote-bank@1",
+  "title": "Quote bank",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "note",
+    "quotes"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/quote-bank@1"
+    },
+    "note": {
+      "type": "string"
+    },
+    "quotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "text",
+          "author",
+          "source",
+          "chapter",
+          "edition",
+          "publicDomain",
+          "hi",
+          "original",
+          "verifiedBy",
+          "verifiedOn",
+          "useFor",
+          "neverOn",
+          "caution",
+          "portrait",
+          "review"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "quote",
+              "paraphrase"
+            ],
+            "description": "A paraphrase is never shown in quote marks"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 40
+          },
+          "author": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "chapter": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "edition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "publicDomain": {
+            "type": "boolean"
+          },
+          "hi": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Translation by the Hindi editor, labelled as a translation. null until done."
+          },
+          "original": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "lang",
+              "text"
+            ],
+            "properties": {
+              "lang": {
+                "type": "string",
+                "description": "ISO 639-1 code: ta, sa, bn, hi and so on"
+              },
+              "text": {
+                "type": "string"
+              }
+            },
+            "description": "The line in its own language and script, when the English is a translation"
+          },
+          "verifiedBy": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Editor who checked the exact words against the named edition. null means unverified: do not show in the app."
+          },
+          "verifiedOn": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "useFor": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 6
+          },
+          "neverOn": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 0,
+            "maxItems": 6
+          },
+          "caution": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "portrait": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "file",
+              "label"
+            ],
+            "properties": {
+              "file": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "approved-en",
+                  "approved-hi",
+                  "approved"
+                ]
+              },
+              "checkedBy": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "checkedOn": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 500
+    }
+  }
+}

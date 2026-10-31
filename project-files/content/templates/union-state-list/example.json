@@ -1,0 +1,137 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "id": "union-state-concurrent-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Which list does it belong to?",
+    "hi": "कौन-सी सूची? संघ, राज्य या समवर्ती"
+  },
+  "items": [
+    {
+      "list": "union",
+      "en": {
+        "text": "Defence",
+        "note": "Union List: Parliament makes laws on defence."
+      },
+      "hi": {
+        "text": "रक्षा",
+        "note": "संघ सूची: रक्षा पर कानून संसद बनाती है।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Police",
+        "note": "State List: state legislatures make laws on police."
+      },
+      "hi": {
+        "text": "पुलिस",
+        "note": "राज्य सूची: पुलिस पर कानून राज्य विधानमंडल बनाते हैं।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Education",
+        "note": "Concurrent List: moved from State List by the 42nd Amendment, 1976."
+      },
+      "hi": {
+        "text": "शिक्षा",
+        "note": "समवर्ती सूची: 1976 में 42वें संशोधन द्वारा राज्य सूची से यहाँ लाई गई।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Railways",
+        "note": "Union List: Parliament makes laws on railways."
+      },
+      "hi": {
+        "text": "रेलवे",
+        "note": "संघ सूची: रेलवे पर कानून संसद बनाती है।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Agriculture",
+        "note": "State List: state legislatures make laws on agriculture."
+      },
+      "hi": {
+        "text": "कृषि",
+        "note": "राज्य सूची: कृषि पर कानून राज्य विधानमंडल बनाते हैं।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Criminal law",
+        "note": "Concurrent List: both can legislate; a Union law prevails in conflict."
+      },
+      "hi": {
+        "text": "आपराधिक कानून",
+        "note": "समवर्ती सूची: दोनों कानून बना सकते हैं; टकराव में संघ का कानून मान्य होता है।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Forests",
+        "note": "Concurrent List: also moved from State List by the 42nd Amendment, 1976."
+      },
+      "hi": {
+        "text": "वन",
+        "note": "समवर्ती सूची: 42वें संशोधन (1976) द्वारा राज्य सूची से यहाँ लाए गए।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/union-state-list/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  }
+}

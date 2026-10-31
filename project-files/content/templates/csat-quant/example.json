@@ -1,0 +1,148 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "selfContained": true,
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ],
+    "formats": [
+      "csat-quant"
+    ]
+  },
+  "id": "percentages-averages-speed-numeracy",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Percentages and averages, step by step",
+    "hi": "प्रतिशत और औसत, कदम दर कदम"
+  },
+  "problems": [
+    {
+      "topic": "percentage",
+      "answer": 1,
+      "answerExpr": "(250-200)/200*100",
+      "en": {
+        "question": "The price of a book rises from 200 rupees to 250 rupees. By what percentage has the price gone up?",
+        "options": [
+          "20%",
+          "25%",
+          "30%",
+          "50%"
+        ],
+        "steps": "Change = 250 - 200 = 50 rupees. Percentage change = change / original price x 100 = 50 / 200 x 100 = 25%. Dividing by the new price (250) gives 20%, which is the wrong base."
+      },
+      "hi": {
+        "question": "एक किताब की कीमत 200 रुपये से बढ़कर 250 रुपये हो जाती है। कीमत में कितने प्रतिशत की वृद्धि हुई है?",
+        "options": [
+          "20%",
+          "25%",
+          "30%",
+          "50%"
+        ],
+        "steps": "परिवर्तन = 250 - 200 = 50 रुपये। प्रतिशत परिवर्तन = परिवर्तन / मूल कीमत × 100 = 50 / 200 × 100 = 25%। नई कीमत (250) से भाग देने पर 20% आता है, जो गलत आधार है।"
+      }
+    },
+    {
+      "topic": "average",
+      "answer": 2,
+      "answerExpr": "(30*60+20*80)/50",
+      "en": {
+        "question": "Class A has 30 students with an average score of 60 marks. Class B has 20 students with an average score of 80 marks. What is the average score of all 50 students together?",
+        "options": [
+          "70 marks",
+          "72 marks",
+          "68 marks",
+          "3400 marks"
+        ],
+        "steps": "Total marks: 30 x 60 = 1800 and 20 x 80 = 1600, so 3400 in all. Average = 3400 / 50 = 68 marks. Taking a simple average of 60 and 80 gives 70, which forgets the weights."
+      },
+      "hi": {
+        "question": "कक्षा A में 30 छात्र हैं, जिनका औसत अंक 60 है। कक्षा B में 20 छात्र हैं, जिनका औसत अंक 80 है। सभी 50 छात्रों का मिलाकर औसत अंक क्या है?",
+        "options": [
+          "70 अंक",
+          "72 अंक",
+          "68 अंक",
+          "3400 अंक"
+        ],
+        "steps": "कुल अंक: 30 × 60 = 1800 और 20 × 80 = 1600, यानी कुल 3400। औसत = 3400 / 50 = 68 अंक। 60 और 80 का सादा औसत 70 निकलता है, पर इसमें भार (छात्रों की संख्या) छूट जाता है।"
+      }
+    },
+    {
+      "topic": "speed-distance",
+      "answer": 3,
+      "answerExpr": "120/(60/30+60/60)",
+      "en": {
+        "question": "A car goes 60 km from town A to town B at 30 km/h, and returns the same 60 km at 60 km/h. What is its average speed for the whole round trip?",
+        "options": [
+          "45 km/h",
+          "60 km/h",
+          "90 km/h",
+          "40 km/h"
+        ],
+        "steps": "Distance: 120 km. Time: 2 hours going, 1 hour returning. Average speed = 120 / 3 = 40 km/h. Averaging 30 and 60 directly gives 45, which is wrong."
+      },
+      "hi": {
+        "question": "एक कार A शहर से B शहर तक 60 किमी 30 किमी/घंटा की गति से जाती है, और उतनी ही 60 किमी दूरी 60 किमी/घंटा की गति से लौटती है। पूरी यात्रा की औसत गति क्या है?",
+        "options": [
+          "45 किमी/घंटा",
+          "60 किमी/घंटा",
+          "90 किमी/घंटा",
+          "40 किमी/घंटा"
+        ],
+        "steps": "दूरी: 120 किमी। समय: जाने में 2 घंटे, लौटने में 1 घंटा। औसत गति = 120 / 3 = 40 किमी/घंटा। 30 और 60 का सीधा औसत 45 निकलता है, जो गलत है।"
+      }
+    },
+    {
+      "topic": "percentage",
+      "answer": 2,
+      "answerExpr": "(1200*5/4)*20/100",
+      "en": {
+        "question": "A jacket is sold for 1200 rupees after a discount of 20% on its marked price. What is the discount amount in rupees?",
+        "options": [
+          "240 rupees",
+          "150 rupees",
+          "300 rupees",
+          "1200 rupees"
+        ],
+        "steps": "Marked price x 0.8 = 1200, so marked price = 1200 / 0.8 = 1500 rupees. Discount = 20% of 1500 = 300 rupees. Taking 20% of 1200 gives 240, which uses the wrong base."
+      },
+      "hi": {
+        "question": "एक जैकेट का चिह्नित मूल्य पर 20% की छूट के बाद दाम 1200 रुपये है। छूट की रकम रुपयों में कितनी है?",
+        "options": [
+          "240 रुपये",
+          "150 रुपये",
+          "300 रुपये",
+          "1200 रुपये"
+        ],
+        "steps": "चिह्नित मूल्य × 0.8 = 1200, इसलिए चिह्नित मूल्य = 1200 / 0.8 = 1500 रुपये। छूट = 1500 का 20% = 300 रुपये। 1200 का 20% लेने पर 240 आता है, जो गलत आधार है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/csat-quant@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/csat-quant/",
+    "createdOn": "2026-10-10"
+  }
+}

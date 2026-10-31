@@ -1,0 +1,152 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "done": null
+  },
+  "support": {
+    "en": "These exercises are not a substitute for help. If you feel unsafe or overwhelmed, call Tele-MANAS on 14416, free, at any hour.",
+    "hi": "ये अभ्यास मदद की जगह नहीं लेते। अगर आप असुरक्षित या बहुत परेशान महसूस करें, तो Tele-MANAS को 14416 पर कॉल करें, मुफ़्त, किसी भी समय।",
+    "verify": "Check the helpline number and wording with the safety lead before launch."
+  },
+  "bed": {
+    "default": "none",
+    "options": [
+      "none",
+      "calm-tones-6hz",
+      "calm-tones-4hz",
+      "pink-noise",
+      "rain"
+    ],
+    "note": "Calm tones need headphones; the app says so and keeps the volume low. Never claim they change brainwaves."
+  },
+  "narrator": {
+    "en": null,
+    "hi": null
+  },
+  "audio": {
+    "en": null,
+    "hi": null
+  },
+  "tags": {
+    "stage": [
+      "wellbeing"
+    ],
+    "papers": [],
+    "formats": []
+  },
+  "id": "calm-sigh-1-min",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "One-minute sigh breath",
+    "hi": "एक मिनट का साँस का अभ्यास"
+  },
+  "kind": "sigh",
+  "minutes": 1,
+  "pace": {
+    "inhale": 4,
+    "hold": 2,
+    "exhale": 6
+  },
+  "beats": [
+    {
+      "seconds": 8,
+      "en": {
+        "say": "Sit comfortably. If it feels right, close your eyes."
+      },
+      "hi": {
+        "say": "आराम से बैठिए। अगर अच्छा लगे, तो आँखें बंद कर लीजिए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe in slowly through your nose, then take one shorter breath in on top."
+      },
+      "hi": {
+        "say": "नाक से धीरे से साँस लीजिए, फिर पहली साँस के ऊपर एक और छोटी साँस लीजिए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe out slowly and fully through your mouth."
+      },
+      "hi": {
+        "say": "मुँह से धीरे-धीरे और पूरी तरह साँस बाहर छोड़िए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe in slowly through your nose, then take one shorter breath in on top."
+      },
+      "hi": {
+        "say": "नाक से धीरे से साँस लीजिए, फिर पहली साँस के ऊपर एक और छोटी साँस लीजिए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe out slowly and fully through your mouth."
+      },
+      "hi": {
+        "say": "मुँह से धीरे-धीरे और पूरी तरह साँस बाहर छोड़िए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe in slowly through your nose, then take one shorter breath in on top."
+      },
+      "hi": {
+        "say": "नाक से धीरे से साँस लीजिए, फिर पहली साँस के ऊपर एक और छोटी साँस लीजिए।"
+      }
+    },
+    {
+      "seconds": 6,
+      "en": {
+        "say": "Breathe out slowly and fully through your mouth."
+      },
+      "hi": {
+        "say": "मुँह से धीरे-धीरे और पूरी तरह साँस बाहर छोड़िए।"
+      }
+    },
+    {
+      "seconds": 16,
+      "en": {
+        "say": "Now breathe normally. Let your breath find its own rhythm."
+      },
+      "hi": {
+        "say": "अब सामान्य रूप से साँस लीजिए। साँस को अपनी लय खुद मिलने दीजिए।"
+      }
+    }
+  ],
+  "en": {
+    "intro": "A short sigh exercise, about one minute: two or three long sighs, then normal breathing.",
+    "close": "That is the end. Breathe as you like, and notice how you feel, if you wish."
+  },
+  "hi": {
+    "intro": "यह एक छोटा साँस का अभ्यास है, लगभग एक मिनट का। इसमें दो या तीन बार लंबी साँस छोड़ी जाती है, फिर सामान्य साँस।",
+    "close": "यह अभ्यास यहीं समाप्त होता है। अब जैसे आपको ठीक लगे, साँस लीजिए, और चाहें तो देखिए कि कैसा लग रहा है।"
+  },
+  "sources": {
+    "en": "Balban and colleagues, Stanford study (2023)",
+    "hi": "बालबान और सहयोगी, स्टैनफ़ोर्ड अध्ययन (2023)"
+  },
+  "schema": "upsc-pods/calm-script@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/calm-script/",
+    "createdOn": "2026-10-11"
+  }
+}

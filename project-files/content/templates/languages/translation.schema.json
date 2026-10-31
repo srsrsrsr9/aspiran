@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/translation@1",
+  "title": "Translation file",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "lang",
+    "pack",
+    "strings",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "const": "upsc-pods/translation@1"
+    },
+    "lang": {
+      "enum": [
+        "hi",
+        "te",
+        "mr",
+        "ta",
+        "bn",
+        "kn"
+      ]
+    },
+    "pack": {
+      "type": "object",
+      "required": [
+        "id",
+        "schema"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "strings": {
+      "type": "object",
+      "description": "Key: the path of an English string in the pack. en: the English it was made from (if the pack's English changes, the string is stale). text: the translation.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "en",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "en": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "draft",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

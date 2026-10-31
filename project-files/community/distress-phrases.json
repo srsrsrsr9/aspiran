@@ -1,0 +1,186 @@
+{
+  "schema": "upsc-pods/distress-phrases@1",
+  "status": "draft",
+  "banner": "DRAFT for human review. Not approved. Do not use with members until the safety lead and a qualified mental-health professional have signed off.",
+  "review": {
+    "status": "draft",
+    "requiredReviewers": [
+      "safety lead",
+      "qualified mental-health professional",
+      "native Hindi speaker (every hi line)",
+      "native Telugu speaker (every te line)",
+      "lawyer (record-keeping and data use)"
+    ],
+    "signedOff": [],
+    "notes": "Written as a starting seed list. Not tested on real member posts. Telugu stays blocked from going live until a Telugu reviewer has checked every line."
+  },
+  "usage": "Matches only route a post to a human moderator and show helplines. Never auto-reply as a person, never block or delete the post.",
+  "matching": {
+    "normalise": [
+      "lowercase the roman text",
+      "collapse repeated letters (khatammm -> khatam)",
+      "strip punctuation and emoji before matching, but keep emoji for the moderator view",
+      "treat zero-width characters and extra spaces as absent",
+      "match both native script and roman forms, plus every entry in variants"
+    ],
+    "tierRules": [
+      "danger: route to the on-call wellbeing moderator at once and show the helpline sheet first.",
+      "high: route to the wellbeing moderator queue and show the helpline sheet.",
+      "low: suggest a private check-in from the pod lead. Show the helpline sheet as a quiet link, not a pop-up.",
+      "A low or high match together with a farewell, a method, a time ('tonight', 'aaj raat') or giving things away counts as danger.",
+      "A falsePositives match lowers the priority of a low or high match only. It never hides a danger match. A human still sees the post."
+    ],
+    "never": [
+      "auto-reply as if a human wrote it",
+      "block, hide, delete or shadow-ban the post",
+      "tell the pod that a post was flagged",
+      "show an upsell, a quote card or a celebration to the member while a flag is open",
+      "send the private Chotu chat text anywhere without the member tapping 'Talk to a person'"
+    ]
+  },
+  "behaviouralSignals": [
+    {"signal": "sudden silence after result day from someone who posted most days", "tier": "low", "note": "Pod lead check-in within 48 hours. Upgrade to high if the last post was a farewell or hopeless."},
+    {"signal": "leaving the pod or deleting posts soon after a result", "tier": "low", "note": "Gentle private message. Do not ask them to justify leaving."},
+    {"signal": "giving away books, notes, test-series logins or belongings with phrases like 'ab zaroorat nahi'", "tier": "high", "note": "Giving things away is a classic warning sign. Combined with a farewell it is danger."},
+    {"signal": "thank-you-for-everything or farewell posts that do not fit the conversation", "tier": "high", "note": "Treat as danger if it is late at night, after a result, or with any hopeless phrase."},
+    {"signal": "a run of low moods on Close the Day", "tier": "low", "note": "Private by default. Only the person the member chose hears about it."},
+    {"signal": "posting at 2 to 5 a.m. several nights running with hopeless language", "tier": "high", "note": "Sleep loss plus hopelessness. Check the night roster."}
+  ],
+  "languages": {
+    "hi": {
+      "name": "Hindi and Hinglish",
+      "reviewNote": "A native Hindi speaker must check every line, including the romanised forms and variants.",
+      "tiers": {
+        "danger": [
+          {"text": "मैं खुद को खत्म कर लूँगा", "roman": "main khud ko khatam kar lunga", "variants": ["khud ko khatm kar lunga", "khud ko khatam kar lungi", "khudko khatam kr lunga", "khud ko khtm kar dunga"], "note": "Direct statement of intent. Feminine form 'kar lungi' is equally common."},
+          {"text": "मैं मरना चाहता हूँ", "roman": "main marna chahta hoon", "variants": ["mai marna chahta hu", "marna chahti hoon", "mrna chahta hu", "bas marna hai"], "note": "Direct. Check it is not a quote or a GS discussion."},
+          {"text": "आत्महत्या कर लूँगा", "roman": "aatmahatya kar lunga", "variants": ["atmhatya kar lunga", "aatmhatya", "atmahatya", "suicide kar lunga", "sucide kar lunga"], "note": "Also appears in GS topics (farmer suicides). See falsePositives. Intent wording ('kar lunga', 'karne wala hoon') is the signal."},
+          {"text": "अब जीना नहीं है", "roman": "ab jeena nahi hai", "variants": ["ab jina nahi hai", "ab nahi jeena", "jeene ka mann nahi", "jina nhi h"], "note": "Direct wish not to live."},
+          {"text": "ये मेरा आखिरी मैसेज है", "roman": "ye mera aakhri message hai", "variants": ["mera akhri msg hai", "last message hai mera", "aakhiri message"], "note": "Farewell. Treat as danger unless clearly about leaving the app or a group."},
+          {"text": "सबको अलविदा, मुझे माफ़ करना", "roman": "sabko alvida, mujhe maaf karna", "variants": ["sabko alwida", "alvida doston", "maaf karna mummy papa", "mujhe maaf kar dena"], "note": "Farewell plus apology to family is a strong sign."},
+          {"text": "आज रात सब खत्म कर दूँगा", "roman": "aaj raat sab khatam kar dunga", "variants": ["aaj raat sab khatm", "aaj sab khatam kar dungi", "aaj hi sab khatam"], "note": "Time plus intent."},
+          {"text": "नींद की गोलियाँ जमा कर ली हैं", "roman": "neend ki goliyan jama kar li hain", "variants": ["goliyan jama kar li", "pills rakh li hain", "dawai ikatthi kar li"], "note": "Mentions a method or means. Moderators should not ask for details beyond what safety needs."},
+          {"text": "फाँसी लगा लूँगा", "roman": "phansi laga lunga", "variants": ["fansi laga lunga", "phaansi", "latak jaunga"], "note": "Method mention. 'Phansi' also appears in GS discussions of capital punishment. See falsePositives."},
+          {"text": "मेरे जाने के बाद मेरी किताबें ले लेना", "roman": "mere jaane ke baad meri kitaben le lena", "variants": ["mere baad notes le lena", "mere jane ke baad"], "note": "Farewell plus giving things away."}
+        ],
+        "high": [
+          {"text": "सब खत्म हो गया", "roman": "sab khatam ho gaya", "variants": ["sab khatm", "sab khtm ho gaya", "sab khatam", "ktm sab", "sab khatam hai"], "note": "Very common after results. Often means 'this attempt is over', sometimes means much more. Always gets a human read. 'Syllabus khatam' is a false positive."},
+          {"text": "अब और नहीं होगा मुझसे", "roman": "ab aur nahi hoga mujhse", "variants": ["ab nahi hoga", "mujhse nahi hoga ab", "ab bas", "ab aur nahi"], "note": "Exhaustion or giving up. Read the thread around it."},
+          {"text": "जीने का कोई मतलब नहीं", "roman": "jeene ka koi matlab nahi", "variants": ["jine ka koi matlab nahi", "zindagi ka koi matlab nahi", "jindagi bekaar hai"], "note": "Passive wish not to live. Upgrade to danger with any time, method or farewell."},
+          {"text": "मेरे बिना सब बेहतर रहेंगे", "roman": "mere bina sab behtar rahenge", "variants": ["mere bina sab khush rahenge", "main na rahun to accha", "main nahi rahunga to"], "note": "Feeling like a burden. Strong warning sign."},
+          {"text": "मैं घरवालों पर बोझ हूँ", "roman": "main gharwalon par bojh hoon", "variants": ["bojh hoon", "main bojh hu", "sab par bojh"], "note": "Burden. Common for older repeaters supported by family."},
+          {"text": "घरवालों को मुँह नहीं दिखा सकता", "roman": "gharwalon ko munh nahi dikha sakta", "variants": ["muh nahi dikha sakta", "mooh kaise dikhaunga", "ghar kaise jaunga"], "note": "Shame after a result. Check in quickly."},
+          {"text": "अब कुछ नहीं बचा", "roman": "ab kuch nahi bacha", "variants": ["kuch nahi bacha", "kuchh nahi bacha ab"], "note": "Hopelessness. Can also mean 'no attempts left'. A human decides."},
+          {"text": "ज़िंदगी से थक गया हूँ", "roman": "zindagi se thak gaya hoon", "variants": ["jindagi se thak gaya", "zindgi se thak gayi hoon", "life se thak gaya"], "note": "Tired of life, not just tired of study."},
+          {"text": "मुझे मर जाना चाहिए", "roman": "mujhe mar jana chahiye", "variants": ["mar jana chahiye mujhe", "mar jaun to accha"], "note": "Can be said in frustration. Still a human read every time."},
+          {"text": "अपनी सारी किताबें दे रहा हूँ, अब ज़रूरत नहीं", "roman": "apni saari kitaben de raha hoon, ab zaroorat nahi", "variants": ["notes free mein de raha hu ab zarurat nahi", "sab saman de raha hu"], "note": "Giving things away. Many people sell books after quitting. The 'ab zaroorat nahi' part with hopeless words is the signal."}
+        ],
+        "low": [
+          {"text": "मन नहीं लग रहा", "roman": "mann nahi lag raha", "variants": ["man nhi lag raha", "padhai mein mann nahi", "mann nahi lagta"], "note": "Low mood or low focus. A kind check-in from the pod lead."},
+          {"text": "बहुत डिप्रेस्ड हूँ", "roman": "bahut depressed hoon", "variants": ["bohot depressed hu", "depress ho gaya", "dipression"], "note": "Often casual. Still worth a private check-in."},
+          {"text": "नींद नहीं आती", "roman": "neend nahi aati", "variants": ["neend nhi aa rahi", "so nahi pa raha", "raat bhar jagta hu"], "note": "Sleep trouble. Pair with Lamp Off and a check-in."},
+          {"text": "बहुत अकेला लग रहा है", "roman": "bahut akela lag raha hai", "variants": ["akela feel hota hai", "akeli hoon", "koi baat karne wala nahi"], "note": "Loneliness. Offer a buddy or a chai-break room."},
+          {"text": "सब बेकार लग रहा है", "roman": "sab bekaar lag raha hai", "variants": ["sab bekar", "kuch accha nahi lagta"], "note": "Low mood. Ask gently how long it has felt this way."},
+          {"text": "रोना आ रहा है", "roman": "rona aa raha hai", "variants": ["bahut rona aa raha", "ro raha hu"], "note": "Distress in the moment. A human reply soon."},
+          {"text": "क्या फ़ायदा", "roman": "kya fayda", "variants": ["kya faayda", "kya fayda padhne ka", "koi fayda nahi"], "note": "'What's the point'. Usually about study, sometimes about life. Read the context."}
+        ]
+      },
+      "falsePositives": [
+        {"text": "मर गया, पेपर बहुत टफ था", "roman": "mar gaya, paper bahut tough tha", "note": "Exam slang for 'that paper destroyed me'. Lower priority only if nothing else in the post is hopeless."},
+        {"text": "CSAT ने मार डाला", "roman": "CSAT ne maar dala", "note": "Slang. Same as 'this paper killed me'."},
+        {"text": "सिलेबस खत्म कर दिया", "roman": "syllabus khatam kar diya", "note": "Good news: finished the syllabus. 'Khatam' here is positive."},
+        {"text": "प्रीलिम्स खत्म", "roman": "prelims khatam", "note": "Literal: the exam is over. Read the next line before deciding."},
+        {"text": "जान निकल गई", "roman": "jaan nikal gayi", "note": "Slang for 'I was terrified' or 'I'm exhausted'."},
+        {"text": "किसान आत्महत्या, कोटा की ख़बरें", "roman": "kisan aatmahatya, Kota ki khabrein", "note": "GS topics and news. A study discussion is not a disclosure. But a member can move from the topic to themselves, so a human still glances."},
+        {"text": "फाँसी की सज़ा पर निबंध", "roman": "phansi ki saza par nibandh", "note": "Essay or GS4 topic on capital punishment."},
+        {"text": "देश के लिए जान दे दूँगा", "roman": "desh ke liye jaan de dunga", "note": "Patriotic phrase common in interview prep. Not a disclosure."}
+      ]
+    },
+    "te": {
+      "name": "Telugu and Tenglish",
+      "reviewNote": "A native Telugu speaker must check every line, including the romanised forms and variants. Telugu is blocked from going live until this is done.",
+      "tiers": {
+        "danger": [
+          {"text": "చనిపోవాలని ఉంది", "roman": "chanipovaalani undi", "variants": ["chanipovalani undi", "chanipovalanipistondi", "chachipovalani undi", "chanipotha"], "note": "Direct wish to die."},
+          {"text": "నేను ఆత్మహత్య చేసుకుంటాను", "roman": "nenu aatmahatya chesukuntaanu", "variants": ["atmahatya chesukunta", "aathmahathya", "suicide chesukunta", "sucide chesukunta"], "note": "Direct intent. Also a GS topic (farmer suicides). See falsePositives."},
+          {"text": "ఇక బతకాలని లేదు", "roman": "ika bathakaalani ledu", "variants": ["ika batakalani ledu", "bathakalani ledu", "bratakalani ledu", "brathakalani ledu"], "note": "Direct wish not to live. 'Brathakalani' is a common spoken form."},
+          {"text": "ఇదే నా చివరి మెసేజ్", "roman": "ide naa chivari message", "variants": ["ide na chivari msg", "idhe naa last message", "chivari message"], "note": "Farewell. Danger unless clearly about leaving the app."},
+          {"text": "అందరికీ బై, ఇక నేను కనిపించను", "roman": "andariki bye, ika nenu kanipinchanu", "variants": ["andariki bye ika kanipinchanu", "ika kanipinchanu", "inka kanipinchanu"], "note": "Farewell: 'you won't see me again'."},
+          {"text": "అమ్మా నాన్నా, నన్ను క్షమించండి", "roman": "amma naanna, nannu kshaminchandi", "variants": ["nannu kshaminchandi", "nannu kshaminchu amma", "sorry amma nanna"], "note": "Apology to parents in a farewell tone is a strong sign."},
+          {"text": "ఈ రోజు రాత్రే అంతా ముగిస్తా", "roman": "ee roju raathre antha mugistha", "variants": ["ee rathri antha mugistha", "eeroju antha aipothundi", "ivale antha mugistha"], "note": "Time plus intent."},
+          {"text": "మాత్రలు దాచి పెట్టుకున్నా", "roman": "maatralu daachi pettukunna", "variants": ["tablets daachi pettukunna", "pills unchukunna", "matralu mingesta"], "note": "Mentions means. Do not ask for details beyond what safety needs."},
+          {"text": "నా జీవితం ముగించేస్తా", "roman": "naa jeevitham muginchestha", "variants": ["na jeevitham muginchesta", "life end chestha", "life ki end"], "note": "Direct intent."}
+        ],
+        "high": [
+          {"text": "ఇక నా వల్ల కాదు", "roman": "ika naa valla kaadu", "variants": ["ika na valla kadu", "naa valla kaadu inka", "inka naa valla kaadu"], "note": "'I can't any more'. Read the thread for what 'it' is."},
+          {"text": "బతికి ఏం లాభం", "roman": "bathiki em laabham", "variants": ["brathiki em labham", "bathiki emi labham", "batiki em use"], "note": "'What's the use of living'. Upgrade to danger with any time, method or farewell."},
+          {"text": "అంతా అయిపోయింది", "roman": "antha aipoyindi", "variants": ["antha ayipoyindi", "anta aipoyindi", "antha aipoyindhi", "antha over"], "note": "Telugu equivalent of 'sab khatam'. Often means the attempt is over. Always a human read."},
+          {"text": "నేను లేకపోతే అందరికీ మంచిది", "roman": "nenu lekapothe andariki manchidi", "variants": ["nenu lekapote andariki better", "nenu lekunte manchidi"], "note": "Feeling like a burden. Strong warning sign."},
+          {"text": "నేను అందరికీ భారం", "roman": "nenu andariki bhaaram", "variants": ["nenu bharam", "intlo vallaki bharam ayyanu", "burden ayyanu"], "note": "Burden on family. Common for long-haul repeaters."},
+          {"text": "ఇంట్లో వాళ్ళకి మొహం చూపించలేను", "roman": "intlo vaallaki moham choopinchalenu", "variants": ["moham chupinchalenu", "intiki ela vellali", "intlo ela cheppali"], "note": "Shame after a result."},
+          {"text": "ఇక ఏ ఆశ లేదు", "roman": "ika e aasha ledu", "variants": ["inka aasha ledu", "hope ledu", "e hope ledu"], "note": "Hopelessness."},
+          {"text": "నా పుస్తకాలు, నోట్స్ అన్నీ ఇచ్చేస్తా, ఇక అవసరం లేదు", "roman": "naa pusthakaalu, notes anni ichestha, ika avasaram ledu", "variants": ["notes anni ichestha", "books anni free ga istha ika avasaram ledu"], "note": "Giving things away. Selling books after quitting is common. The 'ika avasaram ledu' part with hopeless words is the signal."},
+          {"text": "ఎక్కడికైనా దూరంగా వెళ్ళిపోవాలని ఉంది", "roman": "ekkadikaina dooranga vellipovaalani undi", "variants": ["dooranga vellipotha", "evariki kanipinchakunda vellipotha"], "note": "Ambiguous: can mean a trip or running away, or something more. A human decides."}
+        ],
+        "low": [
+          {"text": "మనసు బాలేదు", "roman": "manasu baaledu", "variants": ["manasu baledu", "mood baaledu", "manasu bagaledu"], "note": "Low mood. A kind check-in."},
+          {"text": "నిద్ర పట్టట్లేదు", "roman": "nidra pattatledu", "variants": ["nidra raavatledu", "nidra pattadam ledu", "raatri antha melukuva"], "note": "Sleep trouble."},
+          {"text": "ఒంటరిగా అనిపిస్తోంది", "roman": "ontariga anipistondi", "variants": ["ontariga unna", "onteriga anipistundi", "lonely ga undi"], "note": "Loneliness. Offer a buddy or a chai-break room."},
+          {"text": "ఏమీ చదవాలనిపించట్లేదు", "roman": "emi chadavaalanipinchatledu", "variants": ["emi chadavalanipinchatledu", "chadavalani ledu"], "note": "Low motivation."},
+          {"text": "చాలా డిప్రెస్డ్ గా ఉంది", "roman": "chaala depressed ga undi", "variants": ["chala depressed ga undi", "depression lo unna"], "note": "Often casual. Still worth a private check-in."},
+          {"text": "ఏడుపొస్తోంది", "roman": "edupostondi", "variants": ["edupu vastundi", "edustunna"], "note": "Crying. A human reply soon."},
+          {"text": "ఎవరితోనూ మాట్లాడాలనిపించట్లేదు", "roman": "evarithonu maatlaadaalanipinchatledu", "variants": ["evaritho matladalani ledu"], "note": "Withdrawal. Gentle, no pressure."}
+        ]
+      },
+      "falsePositives": [
+        {"text": "చచ్చిపోయా, పేపర్ చాలా టఫ్", "roman": "chachipoyaa, paper chaala tough", "note": "Exam slang for 'that paper destroyed me'. Lower priority only if nothing else is hopeless."},
+        {"text": "సిలబస్ ని చంపేద్దాం", "roman": "syllabus ni champeddam", "note": "'Let's kill the syllabus'. Motivation slang."},
+        {"text": "CSAT చంపేసింది", "roman": "CSAT champesindi", "note": "'CSAT killed me'. Slang."},
+        {"text": "ప్రిలిమ్స్ అయిపోయింది", "roman": "prelims aipoyindi", "note": "Literal: the exam is over. Read the next line."},
+        {"text": "మైండ్ పోయింది", "roman": "mind poyindi", "note": "Slang for 'I was stunned' or 'I'm fried'."},
+        {"text": "రైతుల ఆత్మహత్యలు", "roman": "raithula aatmahatyalu", "note": "GS3 topic on farmer suicides. A study discussion is not a disclosure, but a human still glances."}
+      ]
+    },
+    "en": {
+      "name": "English, including Indian English",
+      "reviewNote": "Check with a mental-health professional. Add euphemisms members actually use once the pilot shows them.",
+      "tiers": {
+        "danger": [
+          {"text": "I want to kill myself", "roman": "", "variants": ["wanna kill myself", "i want to die", "want to end my life", "i will kill myself"], "note": "Direct."},
+          {"text": "I'm going to end it tonight", "roman": "", "variants": ["ending it tonight", "end it all tonight", "tonight is the night"], "note": "Time plus intent."},
+          {"text": "This is my last message", "roman": "", "variants": ["last msg", "final message", "my last post here"], "note": "Farewell. Danger unless clearly about leaving the app."},
+          {"text": "Goodbye everyone, thank you for everything", "roman": "", "variants": ["bye everyone thanks for everything", "goodbye forever", "sorry for everything goodbye"], "note": "Farewell tone. Strong sign after a result or late at night."},
+          {"text": "I have the pills ready", "roman": "", "variants": ["got the pills", "i've saved up tablets", "i have a rope"], "note": "Means mentioned. Do not ask for details beyond what safety needs."},
+          {"text": "I'm going to unalive myself", "roman": "", "variants": ["unalive", "sewer slide", "kms"], "note": "Internet euphemisms. 'kms' is often a joke ('kms this paper'), so a human reads it."},
+          {"text": "I've written letters to my family", "roman": "", "variants": ["wrote a note for my parents", "left a letter"], "note": "Farewell planning."}
+        ],
+        "high": [
+          {"text": "I can't do this anymore", "roman": "", "variants": ["cant do this anymore", "i cant anymore", "i'm done with everything"], "note": "Read the thread for what 'this' is."},
+          {"text": "Everyone would be better off without me", "roman": "", "variants": ["better off without me", "no one would miss me", "nobody will notice if i'm gone"], "note": "Burden. Strong warning sign."},
+          {"text": "What's the point of living", "roman": "", "variants": ["whats the point of life", "no reason to live", "why am i even alive"], "note": "Passive wish not to live."},
+          {"text": "I'm a burden on my parents", "roman": "", "variants": ["i'm a burden", "burden on my family"], "note": "Common for repeaters supported by family."},
+          {"text": "I want to disappear", "roman": "", "variants": ["want to vanish", "wish i could disappear"], "note": "Ambiguous. A human decides."},
+          {"text": "Giving away my notes, won't need them", "roman": "", "variants": ["giving away all my books", "take my notes i won't need them"], "note": "Giving things away."},
+          {"text": "There's no hope left", "roman": "", "variants": ["no hope", "hopeless", "nothing left for me"], "note": "Hopelessness."}
+        ],
+        "low": [
+          {"text": "I'm so tired of everything", "roman": "", "variants": ["tired of everything", "exhausted of life"], "note": "Check the thread. Can be study fatigue."},
+          {"text": "I can't sleep", "roman": "", "variants": ["cant sleep", "haven't slept in days", "up all night again"], "note": "Sleep trouble."},
+          {"text": "I feel numb", "roman": "", "variants": ["feel empty", "feel nothing"], "note": "Low mood."},
+          {"text": "Nobody understands", "roman": "", "variants": ["no one gets it", "no one to talk to"], "note": "Loneliness."},
+          {"text": "I'm done", "roman": "", "variants": ["im done", "done with upsc", "so done"], "note": "Very often about the exam or one paper. A light check-in."},
+          {"text": "Feeling really low", "roman": "", "variants": ["feeling low", "really depressed today"], "note": "Low mood."}
+        ]
+      },
+      "falsePositives": [
+        {"text": "Let's kill the syllabus", "roman": "", "note": "Motivation slang."},
+        {"text": "This paper killed me", "roman": "", "note": "Exam slang."},
+        {"text": "I'm dead after that mock", "roman": "", "note": "Slang for exhausted."},
+        {"text": "Dying of boredom", "roman": "", "note": "Slang."},
+        {"text": "Kota student suicides, farmer suicides, GS4 case study", "roman": "", "note": "Study and news discussion. Not a disclosure, but a human still glances."},
+        {"text": "Capital punishment debate, 'death' of a ruler in History", "roman": "", "note": "Syllabus content."},
+        {"text": "Deadline, dead tired, dead easy", "roman": "", "note": "Ordinary words. Do not match 'dead' alone."}
+      ]
+    }
+  }
+}

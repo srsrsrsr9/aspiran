@@ -1,0 +1,172 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "eco-direct-vs-indirect-taxes",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Direct tax or indirect tax?",
+    "hi": "प्रत्यक्ष कर या अप्रत्यक्ष कर?"
+  },
+  "buckets": {
+    "en": [
+      "Direct tax",
+      "Indirect tax"
+    ],
+    "hi": [
+      "प्रत्यक्ष कर",
+      "अप्रत्यक्ष कर"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Personal income tax",
+        "why": "Paid by the person who earns the income; the burden cannot be passed on."
+      },
+      "hi": {
+        "text": "व्यक्तिगत आयकर",
+        "why": "आय कमाने वाला खुद चुकाता है; इसका बोझ किसी और पर नहीं डाला जा सकता।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Goods and Services Tax (GST)",
+        "why": "Collected by sellers but borne by the final consumer in the price."
+      },
+      "hi": {
+        "text": "वस्तु एवं सेवा कर (GST)",
+        "why": "विक्रेता वसूलता है, पर बोझ कीमत के ज़रिए अंतिम उपभोक्ता उठाता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Corporation tax",
+        "why": "Levied on company profits and paid by the company itself."
+      },
+      "hi": {
+        "text": "निगम कर",
+        "why": "कंपनी के मुनाफ़े पर लगता है और कंपनी खुद चुकाती है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Customs duty on imports",
+        "why": "Paid by the importer at the border, then passed on to buyers."
+      },
+      "hi": {
+        "text": "आयात पर सीमा शुल्क",
+        "why": "सीमा पर आयातक चुकाता है, फिर इसका बोझ खरीदारों पर डाल दिया जाता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Capital gains tax",
+        "why": "A tax on the gain from selling an asset, paid by the seller who gains."
+      },
+      "hi": {
+        "text": "पूँजीगत लाभ कर",
+        "why": "किसी परिसंपत्ति को बेचने पर हुए लाभ पर कर, जिसे लाभ पाने वाला विक्रेता चुकाता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Central excise duty on petrol",
+        "why": "Petrol is outside GST; excise is charged on production and recovered from buyers."
+      },
+      "hi": {
+        "text": "पेट्रोल पर केंद्रीय उत्पाद शुल्क",
+        "why": "पेट्रोल GST से बाहर है; उत्पाद शुल्क उत्पादन पर लगता है और खरीदारों से वसूला जाता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Professional tax",
+        "why": "States levy it on people's professions and jobs under Article 276; the earner pays it."
+      },
+      "hi": {
+        "text": "व्यवसाय कर",
+        "why": "अनुच्छेद 276 के तहत राज्य इसे पेशों और नौकरियों पर लगाते हैं; कमाने वाला खुद चुकाता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "State VAT on diesel",
+        "why": "Diesel is outside GST, so states charge VAT, which is built into the pump price."
+      },
+      "hi": {
+        "text": "डीज़ल पर राज्य VAT",
+        "why": "डीज़ल GST से बाहर है, इसलिए राज्य VAT लगाते हैं, जो पंप की कीमत में शामिल रहता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Wealth tax (abolished from 2015-16)",
+        "why": "It was charged on a person's net wealth, paid directly by the owner."
+      },
+      "hi": {
+        "text": "संपत्ति कर (2015-16 से समाप्त)",
+        "why": "यह व्यक्ति की शुद्ध संपत्ति पर लगता था और मालिक सीधे चुकाता था।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "State excise on liquor",
+        "why": "Alcohol for drinking is outside GST; states tax it and the drinker bears it."
+      },
+      "hi": {
+        "text": "शराब पर राज्य उत्पाद शुल्क",
+        "why": "पीने वाली शराब GST से बाहर है; राज्य इस पर कर लगाते हैं और बोझ उपभोक्ता उठाता है।"
+      }
+    }
+  ],
+  "memoryHook": {
+    "en": "Ask: can the payer pass it on? No means direct. Yes means indirect.",
+    "hi": "खुद से पूछिए: क्या चुकाने वाला बोझ आगे खिसका सकता है? नहीं तो प्रत्यक्ष, हाँ तो अप्रत्यक्ष।"
+  },
+  "sources": {
+    "en": "Constitution of India; NCERT Class XII Macroeconomics; Union Budget documents",
+    "hi": "भारत का संविधान; NCERT कक्षा XII समष्टि अर्थशास्त्र; केंद्रीय बजट दस्तावेज़"
+  },
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

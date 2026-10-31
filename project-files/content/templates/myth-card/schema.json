@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/myth-card@1",
+  "title": "Forward buster (myth or fact)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "verdictLabels",
+    "rules",
+    "claims",
+    "source",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/myth-card@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "verdictLabels": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "rules": {
+      "type": "array",
+      "x-from": "config"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "verdict",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "MYTH",
+              "FACT",
+              "HALF"
+            ]
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim",
+              "correction"
+            ],
+            "properties": {
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              },
+              "correction": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 45
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim",
+              "correction"
+            ],
+            "properties": {
+              "claim": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 27
+              },
+              "correction": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 61
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

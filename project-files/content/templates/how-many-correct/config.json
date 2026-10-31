@@ -1,0 +1,49 @@
+{
+  "schemaId": "upsc-pods/how-many-correct@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "pick": "sfx/tick",
+      "right": "sfx/chime",
+      "wrong": "sfx/nudge"
+    },
+    "optionText": {
+      "en": [
+        "Only one",
+        "Only two",
+        "Only three",
+        "All four",
+        "None"
+      ],
+      "hi": [
+        "केवल एक",
+        "केवल दो",
+        "केवल तीन",
+        "सभी चार",
+        "कोई नहीं"
+      ]
+    },
+    "tags": {
+      "stage": [
+        "prelims"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-how-many-statements"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

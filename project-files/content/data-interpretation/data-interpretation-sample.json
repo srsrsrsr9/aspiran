@@ -1,0 +1,199 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat",
+      "prelims-gs1"
+    ],
+    "formats": [
+      "csat-data",
+      "pre-data"
+    ]
+  },
+  "id": "five-states-area-population-data",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five states: area and population",
+    "hi": "पाँच राज्य: क्षेत्रफल और जनसंख्या"
+  },
+  "table": {
+    "unit": {
+      "en": "Area: sq km. Population: lakh",
+      "hi": "क्षेत्रफल: वर्ग किमी, जनसंख्या: लाख"
+    },
+    "columns": {
+      "en": [
+        "Area (sq km)",
+        "Population (lakh)"
+      ],
+      "hi": [
+        "क्षेत्रफल (वर्ग किमी)",
+        "जनसंख्या (लाख)"
+      ]
+    },
+    "rows": [
+      {
+        "values": [
+          342239,
+          685
+        ],
+        "en": {
+          "label": "Rajasthan"
+        },
+        "hi": {
+          "label": "राजस्थान"
+        }
+      },
+      {
+        "values": [
+          308252,
+          726
+        ],
+        "en": {
+          "label": "Madhya Pradesh"
+        },
+        "hi": {
+          "label": "मध्य प्रदेश"
+        }
+      },
+      {
+        "values": [
+          307713,
+          1124
+        ],
+        "en": {
+          "label": "Maharashtra"
+        },
+        "hi": {
+          "label": "महाराष्ट्र"
+        }
+      },
+      {
+        "values": [
+          240928,
+          1998
+        ],
+        "en": {
+          "label": "Uttar Pradesh"
+        },
+        "hi": {
+          "label": "उत्तर प्रदेश"
+        }
+      },
+      {
+        "values": [
+          196024,
+          604
+        ],
+        "en": {
+          "label": "Gujarat"
+        },
+        "hi": {
+          "label": "गुजरात"
+        }
+      }
+    ]
+  },
+  "questions": [
+    {
+      "answer": 2,
+      "answerExpr": "1998*100000/240928",
+      "en": {
+        "question": "Roughly how many people live per square kilometre in Uttar Pradesh? Use the population in lakh and the area from the table.",
+        "options": [
+          "about 200 persons",
+          "about 365 persons",
+          "about 830 persons",
+          "about 2000 persons"
+        ],
+        "steps": "Population = 1998 lakh = 199,800,000 people. Density = 199,800,000 / 240,928 = about 829.4 persons per sq km, which rounds to about 830."
+      },
+      "hi": {
+        "question": "उत्तर प्रदेश में प्रति वर्ग किलोमीटर लगभग कितने लोग रहते हैं? तालिका की लाख वाली जनसंख्या और क्षेत्रफल का उपयोग कीजिए।",
+        "options": [
+          "लगभग 200 लोग",
+          "लगभग 365 लोग",
+          "लगभग 830 लोग",
+          "लगभग 2000 लोग"
+        ],
+        "steps": "जनसंख्या = 1998 लाख = 199,800,000 लोग। घनत्व = 199,800,000 / 240,928 = लगभग 829.4 लोग प्रति वर्ग किमी, जो लगभग 830 के बराबर है।"
+      }
+    },
+    {
+      "answer": 1,
+      "answerExpr": "1998-726",
+      "en": {
+        "question": "Using the table, how many lakh more people live in Uttar Pradesh than in Madhya Pradesh?",
+        "options": [
+          "1172 lakh",
+          "1272 lakh",
+          "1372 lakh",
+          "2724 lakh"
+        ],
+        "steps": "Uttar Pradesh 1998 lakh minus Madhya Pradesh 726 lakh = 1272 lakh. Adding the two would give 2724 lakh, which is the wrong operation."
+      },
+      "hi": {
+        "question": "तालिका का उपयोग करके उत्तर प्रदेश की जनसंख्या मध्य प्रदेश से कितने लाख अधिक है?",
+        "options": [
+          "1172 लाख",
+          "1272 लाख",
+          "1372 लाख",
+          "2724 लाख"
+        ],
+        "steps": "उत्तर प्रदेश 1998 लाख में से मध्य प्रदेश 726 लाख घटाने पर 1272 लाख आता है। दोनों को जोड़ने पर 2724 लाख आएगा, जो गलत संक्रिया है।"
+      }
+    },
+    {
+      "answer": 1,
+      "answerExpr": "196024/1395156*100",
+      "en": {
+        "question": "What percentage of the total area of these five states is Gujarat's area? Give the answer to one decimal place.",
+        "options": [
+          "about 12.5%",
+          "about 14.1%",
+          "about 16.3%",
+          "about 20.1%"
+        ],
+        "steps": "Total area = 342239 + 308252 + 307713 + 240928 + 196024 = 1395156 sq km. Gujarat's share = 196024 / 1395156 x 100 = about 14.1%."
+      },
+      "hi": {
+        "question": "इन पाँच राज्यों के कुल क्षेत्रफल में से गुजरात का क्षेत्रफल कितने प्रतिशत है? उत्तर एक दशमलव तक दीजिए।",
+        "options": [
+          "लगभग 12.5%",
+          "लगभग 14.1%",
+          "लगभग 16.3%",
+          "लगभग 20.1%"
+        ],
+        "steps": "कुल क्षेत्रफल = 342239 + 308252 + 307713 + 240928 + 196024 = 1395156 वर्ग किमी। गुजरात का हिस्सा = 196024 / 1395156 × 100 = लगभग 14.1%।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Census of India 2011",
+    "hi": "भारत की जनगणना 2011"
+  },
+  "schema": "upsc-pods/data-interpretation@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/data-interpretation/",
+    "createdOn": "2026-10-10"
+  }
+}

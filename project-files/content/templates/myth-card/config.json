@@ -1,0 +1,42 @@
+{
+  "schemaId": "upsc-pods/myth-card@1",
+  "knobs": {
+    "claims": "1 to 5"
+  },
+  "defaults": {
+    "verdictLabels": {
+      "en": {
+        "MYTH": "MYTH",
+        "FACT": "FACT",
+        "HALF": "HALF-TRUE"
+      },
+      "hi": {
+        "MYTH": "झूठ",
+        "FACT": "सच",
+        "HALF": "आधा सच"
+      }
+    },
+    "rules": [
+      "User guesses before the stamp shows",
+      "Never mock the person who forwarded the claim"
+    ],
+    "tags": {
+      "stage": [
+        "prelims",
+        "revision"
+      ],
+      "papers": [
+        "prelims-gs1"
+      ],
+      "formats": [
+        "pre-statement-code"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

@@ -1,0 +1,1165 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "polity-sectional-mock-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "GS2 Polity sectional mock 1",
+    "hi": "GS2 राजव्यवस्था सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS2 Polity",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "pol-features",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Preamble of the Constitution of India:",
+        "statements": [
+          "The Constitution, with its Preamble, was adopted on 26 November 1949.",
+          "The Preamble is enforceable in a court of law, like a Fundamental Right.",
+          "The Preamble is based on the Objectives Resolution, which Jawaharlal Nehru moved on 13 December 1946."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct: the Constitution was adopted on 26 November 1949, and the Preamble rests on Nehru's Objectives Resolution. Statement 2 is wrong: the Preamble is not enforceable in court. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "भारत के संविधान की प्रस्तावना के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "संविधान, अपनी प्रस्तावना सहित, 26 नवंबर 1949 को अपनाया गया था।",
+          "प्रस्तावना मौलिक अधिकार की तरह किसी न्यायालय में लागू कराई जा सकती है।",
+          "प्रस्तावना उद्देश्य संकल्प (Objectives Resolution) पर आधारित है, जिसे जवाहरलाल नेहरू ने 13 दिसंबर 1946 को पेश किया था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। संविधान 26 नवंबर 1949 को अपनाया गया था, और प्रस्तावना नेहरू के उद्देश्य संकल्प पर आधारित है। कथन 2 गलत है, क्योंकि प्रस्तावना अदालत में लागू नहीं कराई जा सकती। '1, 2 और 3' के जाल में न फँसिए।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-citizenship",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about citizenship in India:",
+        "statements": [
+          "The Constitution deals only with who were citizens when it came into force on 26 January 1950.",
+          "The Citizenship Act, 1955 provides for three ways of losing citizenship.",
+          "Overseas Citizenship of India is dual citizenship, so OCI cardholders can vote."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only two",
+          "Only one",
+          "All three",
+          "None"
+        ],
+        "why": "Statements 1 and 2 are correct: the Constitution covers citizens on 26 January 1950, and the 1955 Act gives three ways to lose citizenship. Statement 3 is wrong: OCI is not dual citizenship, and OCI cardholders cannot vote. The tempting option is 'All three'."
+      },
+      "hi": {
+        "stem": "भारत में नागरिकता के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "संविधान केवल यह बताता है कि 26 जनवरी 1950 को लागू होने के समय कौन नागरिक थे।",
+          "नागरिकता अधिनियम, 1955 नागरिकता खोने के तीन तरीके बताता है।",
+          "Overseas Citizenship of India (OCI) दोहरी नागरिकता है, इसलिए OCI कार्डधारक मतदान कर सकते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल दो",
+          "केवल एक",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "कथन 1 और 2 सही हैं। संविधान 26 जनवरी 1950 के समय के नागरिकों की ही बात करता है, और 1955 के अधिनियम में नागरिकता खोने के तीन तरीके हैं। कथन 3 गलत है, क्योंकि OCI दोहरी नागरिकता नहीं है और OCI कार्डधारक मतदान नहीं कर सकते। 'तीनों' का विकल्प लुभाता है, इसलिए ध्यान से पढ़िए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-fr",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which writ is issued by a higher court to quash an order that a lower court or tribunal has already passed without jurisdiction?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Habeas corpus",
+          "Mandamus",
+          "Prohibition",
+          "Certiorari"
+        ],
+        "why": "Certiorari is issued by a higher court to quash an order a lower court or tribunal has already passed without jurisdiction. The tempting trap is Prohibition: it also comes from a higher court, but it stops a lower court while the case is going on."
+      },
+      "hi": {
+        "stem": "कौन-सी रिट उच्च न्यायालय द्वारा उस आदेश को रद्द करने के लिए जारी की जाती है, जिसे कोई निचली अदालत या अधिकरण अधिकार-क्षेत्र के बिना पहले ही पारित कर चुका हो?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "बंदी प्रत्यक्षीकरण (Habeas corpus)",
+          "परमादेश (Mandamus)",
+          "प्रतिषेध (Prohibition)",
+          "उत्प्रेषण (Certiorari)"
+        ],
+        "why": "Certiorari वह रिट है, जिससे उच्च न्यायालय निचली अदालत या अधिकरण का वह आदेश रद्द करता है जो उसने अधिकार-क्षेत्र के बिना दिया हो। इसमें जाल Prohibition का है। वह भी उच्च अदालत से आती है, लेकिन चलते मामले में निचली अदालत को रोकती है, पहले से दिए आदेश को रद्द नहीं करती।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-dpsp",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about Fundamental Rights and Directive Principles of State Policy:",
+        "statements": [
+          "Fundamental Rights in Part III are justiciable, so a person can go to court to enforce them.",
+          "Directive Principles of State Policy in Part IV can be enforced by courts.",
+          "Equal pay for equal work for men and women is a Directive Principle under Article 39(d)."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "2 only",
+          "1 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 3 are correct: Fundamental Rights can be enforced in court, and equal pay is Article 39(d), a Directive Principle. Statement 2 is wrong: Directive Principles are not justiciable. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "मौलिक अधिकारों और राज्य नीति के निदेशक तत्वों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भाग III में दिए मौलिक अधिकार न्यायोचित (justiciable) हैं, यानी व्यक्ति उन्हें लागू कराने के लिए अदालत जा सकता है।",
+          "भाग IV में दिए राज्य नीति के निदेशक तत्वों को अदालतें लागू करा सकती हैं।",
+          "पुरुषों और महिलाओं के लिए समान कार्य हेतु समान वेतन अनुच्छेद 39(d) के अंतर्गत एक निदेशक तत्व है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 2",
+          "केवल 1 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं: मौलिक अधिकार अदालत में लागू कराए जा सकते हैं, और समान वेतन अनुच्छेद 39(d) का निदेशक तत्व है। कथन 2 गलत है, क्योंकि निदेशक तत्व न्यायोचित नहीं हैं। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि ये देश के शासन में मूलभूत हैं, पर अदालत इन्हें लागू नहीं करवा सकती।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-fd",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following is NOT true of the Fundamental Duties in the Constitution of India?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "They are directly enforceable in a court of law.",
+          "They apply to citizens only, not to foreigners.",
+          "They were added by the 42nd Amendment Act, 1976.",
+          "The 86th Amendment Act, 2002 added an eleventh duty on education."
+        ],
+        "why": "Option (a) is the answer: Fundamental Duties are not directly enforceable, as the Constitution gives no direct legal sanction for their violation. The tempting trap is (c), which is true: the 42nd Amendment added them on the Swaran Singh Committee's recommendation."
+      },
+      "hi": {
+        "stem": "भारत के संविधान में मौलिक कर्तव्यों के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "इन्हें अदालत में सीधे लागू कराया जा सकता है।",
+          "ये केवल नागरिकों पर लागू होते हैं, विदेशियों पर नहीं।",
+          "इन्हें 42वें संविधान संशोधन अधिनियम, 1976 द्वारा जोड़ा गया।",
+          "86वें संविधान संशोधन अधिनियम, 2002 ने शिक्षा से जुड़ा ग्यारहवाँ कर्तव्य जोड़ा।"
+        ],
+        "why": "पहला विकल्प ही उत्तर है: मौलिक कर्तव्य सीधे लागू नहीं होते, क्योंकि उनके उल्लंघन पर संविधान कोई सीधी कानूनी सज़ा नहीं देता। जो विकल्प लुभाता है, वह तीसरा है, और वह सही है: इन्हें 42वें संशोधन ने स्वर्ण सिंह समिति की सिफारिश पर जोड़ा था।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-amendment",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following two statements about amending the Constitution:",
+        "statements": [
+          "Parliament can amend any part of the Constitution, including Fundamental Rights, but cannot alter or destroy its basic structure.",
+          "Under Article 368, a Constitution Amendment Bill can be passed in a joint sitting of both Houses by a simple majority."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct: Kesavananda Bharati held that Parliament can amend Fundamental Rights but not the basic structure. Statement II is wrong: an amendment bill needs a separate special majority in each House, with no joint sitting. The trap is (a), which misses this."
+      },
+      "hi": {
+        "stem": "संविधान में संशोधन के बारे में नीचे दिए दो कथनों पर विचार कीजिए:",
+        "statements": [
+          "संसद संविधान के किसी भी भाग में संशोधन कर सकती है, मौलिक अधिकारों में भी, पर उसके मूल ढांचे (basic structure) को बदल या नष्ट नहीं कर सकती।",
+          "अनुच्छेद 368 के तहत संविधान संशोधन विधेयक दोनों सदनों की संयुक्त बैठक में साधारण बहुमत से पारित हो सकता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I सही है: केशवानंद भारती मामले में कहा गया कि संसद मौलिक अधिकारों सहित संशोधन कर सकती है, पर मूल ढांचा नहीं बदल सकती। कथन II गलत है: संशोधन विधेयक को हर सदन अलग-अलग विशेष बहुमत से पास करता है, और इसके लिए संयुक्त बैठक नहीं होती। जाल पहला विकल्प है, जो यह दूसरी गलती छोड़ देता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "pol-history",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of Acts and what they did:",
+        "statements": [
+          "Regulating Act, 1773 – first step by the British Parliament to control the East India Company",
+          "Government of India Act, 1858 – created the post of Secretary of State for India",
+          "Indian Councils Act, 1909 – introduced dyarchy in the provinces"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "All three",
+          "None",
+          "Only two"
+        ],
+        "why": "Pairs 1 and 2 are correct. Pair 3 is wrong: dyarchy in the provinces came with the Government of India Act, 1919; the 1909 Act brought separate electorates for Muslims. The trap is 'All three'."
+      },
+      "hi": {
+        "stem": "अधिनियमों और उनके कार्यों के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "विनियमन अधिनियम, 1773 – ब्रिटिश संसद द्वारा ईस्ट इंडिया कंपनी पर नियंत्रण की ओर पहला कदम",
+          "भारत शासन अधिनियम, 1858 – भारत के राज्य सचिव (Secretary of State for India) का पद बनाया",
+          "भारतीय परिषद अधिनियम, 1909 – प्रांतों में द्वैध शासन (dyarchy) लागू किया"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "तीनों",
+          "कोई नहीं",
+          "केवल दो"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं। पहला अधिनियम कंपनी पर ब्रिटिश संसद के नियंत्रण का पहला कदम था, और 1858 के अधिनियम ने राज्य सचिव का पद बनाया। जोड़ा 3 गलत है: प्रांतों में द्वैध शासन 1919 के अधिनियम से आया, जबकि 1909 के अधिनियम ने मुसलमानों के लिए पृथक निर्वाचन लाया। जाल 'तीनों' का है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-comparison",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Ireland",
+          "B. Canada",
+          "C. Australia",
+          "D. Weimar Constitution of Germany",
+          "1. Suspension of Fundamental Rights during an Emergency",
+          "2. Concurrent List",
+          "3. Residuary powers with the Centre",
+          "4. Directive Principles of State Policy"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-1, B-2, C-3, D-4",
+          "A-2, B-1, C-4, D-3"
+        ],
+        "why": "Ireland gave the Directive Principles (4), Canada gave residuary powers to the Centre (3), Australia gave the Concurrent List (2), and the Weimar Constitution gave suspension of Fundamental Rights (1). The trap is (b), which swaps Ireland and Canada."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. आयरलैंड",
+          "B. कनाडा",
+          "C. ऑस्ट्रेलिया",
+          "D. जर्मनी का वाइमर संविधान",
+          "1. आपातकाल में मौलिक अधिकारों का निलंबन",
+          "2. समवर्ती सूची",
+          "3. केंद्र के पास अवशिष्ट शक्तियाँ",
+          "4. राज्य नीति के निदेशक तत्व"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-2, D-1",
+          "A-3, B-4, C-1, D-2",
+          "A-1, B-2, C-3, D-4",
+          "A-2, B-1, C-4, D-3"
+        ],
+        "why": "आयरलैंड ने राज्य नीति के निदेशक तत्व (4) दिए, कनाडा ने केंद्र को अवशिष्ट शक्तियाँ (3), ऑस्ट्रेलिया ने समवर्ती सूची (2), और वाइमर संविधान ने आपातकाल में मौलिक अधिकारों का निलंबन (1) दिया। जाल दूसरे विकल्प का है, जो आयरलैंड और कनाडा की जोड़ी उलट देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-amendment",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "In Kesavananda Bharati v. State of Kerala (1973), a bench of 13 judges decided the case by what majority?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "9 to 4",
+          "8 to 5",
+          "7 to 6",
+          "12 to 1"
+        ],
+        "why": "Note the narrow margin: the court split 7 to 6, so a wide margin like 12 to 1 is the trap."
+      },
+      "hi": {
+        "stem": "केशवानंद भारती बनाम केरल राज्य (1973) में 13 न्यायाधीशों की पीठ ने मामला किस बहुमत से तय किया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "9 बनाम 4",
+          "8 बनाम 5",
+          "7 बनाम 6",
+          "12 बनाम 1"
+        ],
+        "why": "13 न्यायाधीशों की पीठ ने यह मामला 7 बनाम 6 के बहुमत से तय किया, यानी बहुत कम अंतर से। 12 बनाम 1 जैसा बड़ा अंतर जाल है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-fd",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Fundamental Duties:",
+        "statements": [
+          "They are in Article 51A, in Part IVA of the Constitution.",
+          "The original Constitution of 1950 contained a list of Fundamental Duties.",
+          "The idea of Fundamental Duties was inspired by the Constitution of the former USSR."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "All three",
+          "Only two",
+          "Only one",
+          "None"
+        ],
+        "why": "Statements 1 and 3 are correct: the duties sit in Article 51A, and the USSR Constitution inspired them. Statement 2 is wrong: the original Constitution had none; the 42nd Amendment added them in 1976. The trap is 'All three'."
+      },
+      "hi": {
+        "stem": "मौलिक कर्तव्यों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "ये संविधान के भाग IVA में अनुच्छेद 51A के अंतर्गत हैं।",
+          "मूल संविधान, 1950 में मौलिक कर्तव्यों की सूची थी।",
+          "मौलिक कर्तव्यों का विचार पूर्व USSR के संविधान से प्रेरित था।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "तीनों",
+          "केवल दो",
+          "केवल एक",
+          "कोई नहीं"
+        ],
+        "why": "कथन 1 और 3 सही हैं: कर्तव्य अनुच्छेद 51A में हैं, और इनका विचार पूर्व USSR के संविधान से लिया गया। कथन 2 गलत है: मूल संविधान में कोई कर्तव्य नहीं था, इन्हें 1976 में 42वें संशोधन ने जोड़ा। 'तीनों' का विकल्प लुभा सकता है, पर इसमें न फँसिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-president",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Who takes part in electing the President of India?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Nominated members of both Houses and of state assemblies",
+          "Only the elected members of the Rajya Sabha",
+          "Elected members of both Houses, and of state assemblies, Delhi and Puducherry",
+          "Members of state legislative councils"
+        ],
+        "why": "Nominated members do not vote. The electoral college has the elected members of both Houses and of state assemblies, plus Delhi and Puducherry. The trap is option (b), which leaves out the state assemblies."
+      },
+      "hi": {
+        "stem": "भारत के राष्ट्रपति के चुनाव में कौन भाग लेता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "दोनों सदनों और राज्य विधानसभाओं के मनोनीत सदस्य",
+          "केवल राज्यसभा के निर्वाचित सदस्य",
+          "दोनों सदनों और राज्य विधानसभाओं के निर्वाचित सदस्य, दिल्ली और पुडुचेरी सहित",
+          "राज्य विधान परिषदों के सदस्य"
+        ],
+        "why": "मनोनीत सदस्य वोट नहीं डालते। निर्वाचक मंडल में दोनों सदनों के निर्वाचित सदस्य और राज्य विधानसभाओं के निर्वाचित सदस्य होते हैं, साथ में दिल्ली और पुडुचेरी भी। जाल विकल्प (b) है, जो राज्य विधानसभाओं को छोड़ देता है। इसे आप ध्यान से याद रख लीजिए।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-state-exec",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which statement about the Governor of a state is correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Governor is elected by the state legislature",
+          "The Governor holds office during the pleasure of the President",
+          "The Governor can be removed only by impeachment",
+          "The Governor can pardon a death sentence"
+        ],
+        "why": "The Governor holds office during the President's pleasure (Article 156), so can be removed earlier. The Governor is not elected; the President appoints. Impeachment is only for the President. A Governor cannot pardon a death sentence. The trap is (c), which describes the President."
+      },
+      "hi": {
+        "stem": "राज्यपाल के बारे में कौन-सा कथन सही है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राज्यपाल राज्य विधानमंडल द्वारा निर्वाचित होता है",
+          "राज्यपाल राष्ट्रपति के प्रसादपर्यंत पद धारण करता है",
+          "राज्यपाल को केवल महाभियोग द्वारा हटाया जा सकता है",
+          "राज्यपाल मृत्युदंड की क्षमादान कर सकता है"
+        ],
+        "why": "राज्यपाल राष्ट्रपति के प्रसादपर्यंत पद पर रहता है (अनुच्छेद 156), इसलिए उसे समय से पहले हटाया जा सकता है। राज्यपाल चुना नहीं जाता, राष्ट्रपति उसे नियुक्त करते हैं। महाभियोग सिर्फ़ राष्ट्रपति के लिए है। राज्यपाल मृत्युदंड की माफ़ी नहीं दे सकता, वह उसे रोक, घटा या बदल सकता है। जाल विकल्प (c) है, जो राष्ट्रपति पर लागू होता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-judiciary",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Which of the following is NOT correct about the Supreme Court's advisory jurisdiction under Article 143?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The President may refer a question of law or fact of public importance",
+          "Its opinion is binding on the President",
+          "It gives its opinion to the President",
+          "The question referred must be of public importance"
+        ],
+        "why": "The opinion is not binding on the President, so (b) is the one NOT correct. (a), (c) and (d) match Article 143 as the source gives it. Do not confuse an advisory opinion with a binding judgment."
+      },
+      "hi": {
+        "stem": "उच्चतम न्यायालय की सलाहकार अधिकारिता (अनुच्छेद 143) के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राष्ट्रपति विधि या तथ्य का सार्वजनिक महत्व का प्रश्न भेज सकते हैं",
+          "इसकी राय राष्ट्रपति पर बाध्यकारी होती है",
+          "यह अपनी राय राष्ट्रपति को देता है",
+          "भेजे गए प्रश्न का सार्वजनिक महत्व होना चाहिए"
+        ],
+        "why": "राय राष्ट्रपति पर बाध्यकारी नहीं होती, इसलिए (b) वह कथन है जो सही नहीं है। (a), (c) और (d) अनुच्छेद 143 को वैसे ही बताते हैं जैसे स्रोत में लिखा है। सलाहकार राय और बाध्यकारी फ़ैसले को आप अलग-अलग रखिए।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-pm-com",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Council of Ministers and the Prime Minister.",
+        "statements": [
+          "The Council of Ministers is collectively responsible to the Lok Sabha, not to the Rajya Sabha.",
+          "The 44th Amendment Act, 1978 stopped the President from sending the Council's advice back for reconsideration.",
+          "Under Article 75(1A), the total number of ministers, including the Prime Minister, cannot exceed 15 percent of Lok Sabha members."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1 only"
+        ],
+        "why": "Statement 2 is wrong: the 44th Amendment let the President send advice back once for reconsideration. Statements 1 and 3 are correct (Articles 75(3) and 75(1A)). The trap is (a), which keeps statement 2."
+      },
+      "hi": {
+        "stem": "मंत्रिपरिषद और प्रधानमंत्री के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "मंत्रिपरिषद सामूहिक रूप से लोकसभा के प्रति उत्तरदायी है, राज्यसभा के प्रति नहीं।",
+          "44वें संशोधन अधिनियम, 1978 ने राष्ट्रपति को मंत्रिपरिषद की सलाह पुनर्विचार के लिए लौटाने से रोक दिया।",
+          "अनुच्छेद 75(1A) के अंतर्गत प्रधानमंत्री सहित मंत्रियों की कुल संख्या लोकसभा सदस्यों की कुल संख्या के 15 प्रतिशत से अधिक नहीं हो सकती।"
+        ],
+        "ask": "उपरोक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "1 और 2 केवल",
+          "2 और 3 केवल",
+          "1 और 3 केवल",
+          "केवल 1"
+        ],
+        "why": "कथन 2 गलत है: 44वें संशोधन ने राष्ट्रपति को सलाह एक बार पुनर्विचार के लिए लौटाने दी थी। कथन 1 और 3 सही हैं (अनुच्छेद 75(3) और 75(1A))। जाल विकल्प (a) है, जो कथन 2 को सही मानता है। इसे ध्यान से देखिए।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-const-bodies",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about constitutional offices.",
+        "statements": [
+          "The Attorney General for India has the right to vote in both Houses of Parliament.",
+          "The Chief Election Commissioner can be removed in the same manner as a judge of the Supreme Court.",
+          "The CAG holds office for six years or until the age of 65, whichever is earlier."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "1 and 3 only",
+          "1 only",
+          "2 and 3 only"
+        ],
+        "why": "The Attorney General can speak in both Houses under Article 88 but has no right to vote. Statements 2 and 3 are correct, as the source gives them. The trap is (a), which keeps statement 1."
+      },
+      "hi": {
+        "stem": "संवैधानिक पदों के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "भारत के महान्यायवादी को दोनों सदनों में मत देने का अधिकार है।",
+          "मुख्य निर्वाचन आयुक्त को उच्चतम न्यायालय के न्यायाधीश की तरह ही हटाया जा सकता है।",
+          "नियंत्रक-महालेखापरीक्षक (CAG) छह वर्ष या 65 वर्ष की आयु तक, जो भी पहले हो, पद पर रहता है।"
+        ],
+        "ask": "उपरोक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "1 और 2 केवल",
+          "1 और 3 केवल",
+          "केवल 1",
+          "2 और 3 केवल"
+        ],
+        "why": "महान्यायवादी अनुच्छेद 88 के तहत दोनों सदनों में बोल सकते हैं, पर उन्हें मत देने का अधिकार नहीं है। कथन 2 और 3 सही हैं: मुख्य निर्वाचन आयुक्त उच्चतम न्यायालय के न्यायाधीश की तरह हटाए जाते हैं, और CAG का कार्यकाल छह वर्ष या 65 वर्ष है। जाल विकल्प (a) है, जो कथन 1 को सही मानता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-parliament",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the passage of bills by Parliament.",
+        "statements": [
+          "A Money Bill can be introduced in the Rajya Sabha with the President's recommendation.",
+          "On a Money Bill, the Rajya Sabha can only make recommendations, and must return the bill within 14 days.",
+          "A joint sitting of both Houses is available for a Constitution Amendment Bill.",
+          "The Speaker of the Lok Sabha presides over a joint sitting of the two Houses."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Only statements 2 and 4 are correct. A Money Bill starts only in the Lok Sabha, and a Constitution Amendment Bill has no joint sitting; each House passes it separately. The trap is 'Only three', which counts statement 1 as correct."
+      },
+      "hi": {
+        "stem": "संसद में विधेयक पारित होने के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "धन विधेयक राष्ट्रपति की सिफ़ारिश से राज्यसभा में पेश किया जा सकता है।",
+          "धन विधेयक पर राज्यसभा केवल सिफ़ारिशें कर सकती है और उसे 14 दिनों के भीतर लौटाना होता है।",
+          "संविधान संशोधन विधेयक के लिए दोनों सदनों की संयुक्त बैठक उपलब्ध है।",
+          "लोकसभा अध्यक्ष दोनों सदनों की संयुक्त बैठक की अध्यक्षता करते हैं।"
+        ],
+        "ask": "उपरोक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "सही कथन 2 और 4 हैं। धन विधेयक केवल लोकसभा में पेश होता है, और संविधान संशोधन विधेयक पर संयुक्त बैठक नहीं होती; हर सदन उसे अलग से पारित करता है। जाल विकल्प 'केवल तीन' है, जो कथन 1 को सही मान लेता है। इसे याद रखिए।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-president",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the President of India and the Vice-President.",
+        "statements": [
+          "The President is elected by an electoral college that includes nominated members of both Houses.",
+          "The President holds office for five years and is eligible for re-election.",
+          "The Vice-President is elected by all members of both Houses; state legislators do not take part.",
+          "Presidential and Vice-Presidential elections use proportional representation by single transferable vote, by secret ballot."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only two",
+          "Only one",
+          "All four",
+          "Only three"
+        ],
+        "why": "Statement 1 is wrong: nominated members do not vote in the presidential election. Statements 2, 3 and 4 are correct. The trap is 'All four', which treats the nominated members as voters."
+      },
+      "hi": {
+        "stem": "भारत के राष्ट्रपति और उपराष्ट्रपति के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "राष्ट्रपति ऐसे निर्वाचक मंडल द्वारा चुने जाते हैं जिसमें दोनों सदनों के मनोनीत सदस्य शामिल होते हैं।",
+          "राष्ट्रपति पाँच वर्ष के लिए पद पर रहते हैं और पुनः निर्वाचन के लिए पात्र हैं।",
+          "उपराष्ट्रपति दोनों सदनों के सभी सदस्यों द्वारा चुने जाते हैं; राज्य विधानमंडल के सदस्य भाग नहीं लेते।",
+          "राष्ट्रपति और उपराष्ट्रपति, दोनों के चुनाव में एकल संक्रमणीय मत द्वारा आनुपातिक प्रतिनिधित्व और गुप्त मतदान का प्रयोग होता है।"
+        ],
+        "ask": "उपरोक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल दो",
+          "केवल एक",
+          "सभी चार",
+          "केवल तीन"
+        ],
+        "why": "कथन 1 गलत है: राष्ट्रपति चुनाव में मनोनीत सदस्य वोट नहीं डालते। कथन 2, 3 और 4 सही हैं। जाल विकल्प 'सभी चार' है, जो मनोनीत सदस्यों को मतदाता मान लेता है। इसलिए निर्वाचक मंडल में कौन होता है, यह ध्यान रखिए।"
+      }
+    },
+    {
+      "format": "select-items",
+      "node": "pol-state-exec",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following powers of a Governor of a state.",
+        "statements": [
+          "Reserve a bill for the consideration of the President.",
+          "Issue an ordinance when the state legislature is not in session.",
+          "Pardon a death sentence."
+        ],
+        "ask": "Select the correct answer using the code given below.",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Items 1 and 2 are correct: Article 200 lets the Governor reserve a bill for the President, and Article 213 allows an ordinance when the legislature is not in session. Item 3 is wrong, as a Governor cannot pardon a death sentence."
+      },
+      "hi": {
+        "stem": "राज्यपाल की निम्नलिखित शक्तियों पर विचार कीजिए।",
+        "statements": [
+          "विधेयक को राष्ट्रपति के विचार के लिए सुरक्षित रखना।",
+          "विधानमंडल सत्र में न हो, तब अध्यादेश जारी करना।",
+          "मृत्युदंड की क्षमादान करना।"
+        ],
+        "ask": "नीचे दिए गए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "1 और 2 केवल",
+          "2 और 3 केवल",
+          "1 और 3 केवल",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: अनुच्छेद 200 के तहत राज्यपाल विधेयक को राष्ट्रपति के विचार के लिए सुरक्षित रख सकता है, और अनुच्छेद 213 के तहत विधानमंडल सत्र में न हो तो अध्यादेश जारी कर सकता है। कथन 3 गलत है, क्योंकि राज्यपाल मृत्युदंड की माफ़ी नहीं दे सकता। इसे आप याद रख लीजिए।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-judiciary",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Supreme Court of India.",
+        "statements": [
+          "It has original jurisdiction in disputes between the Government of India and one or more states.",
+          "The law it declares is binding on all courts in India.",
+          "It can grant special leave to appeal from a tribunal of the armed forces."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct: Article 131 gives original jurisdiction in Centre-state disputes, and Article 141 makes the law it declares binding on all courts. Statement 3 is wrong, since special leave excludes tribunals of the armed forces. (d) keeps 3."
+      },
+      "hi": {
+        "stem": "उच्चतम न्यायालय के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "भारत सरकार और एक या अधिक राज्यों के बीच विवादों में इसकी मूल अधिकारिता है।",
+          "यह जो विधि घोषित करता है, वह भारत के सभी न्यायालयों पर बाध्यकारी है।",
+          "यह सशस्त्र बलों के किसी अधिकरण से अपील की विशेष अनुमति दे सकता है।"
+        ],
+        "ask": "उपरोक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं: अनुच्छेद 131 भारत सरकार और राज्यों के बीच विवादों पर मूल अधिकारिता देता है, और अनुच्छेद 141 के अनुसार उसकी घोषित विधि सभी न्यायालयों पर बाध्यकारी है। कथन 3 गलत है, क्योंकि विशेष अनुमति सशस्त्र बलों के अधिकरण पर लागू नहीं होती। जाल विकल्प (d) है, जो 3 को सही मानता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-const-bodies",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I with List II, and select the correct answer.",
+        "statements": [
+          "A. Attorney General for India",
+          "B. Comptroller and Auditor General",
+          "C. Chief Election Commissioner",
+          "D. Speaker of the Lok Sabha",
+          "1. Holds office during the pleasure of the President",
+          "2. Presides over a joint sitting of both Houses",
+          "3. Union accounts reports laid before Parliament by the President",
+          "4. Heads the Election Commission of India"
+        ],
+        "ask": "Select the correct answer using the code given below.",
+        "options": [
+          "A-2, B-3, C-4, D-1",
+          "A-4, B-2, C-1, D-3",
+          "A-3, B-1, C-2, D-4",
+          "A-1, B-3, C-4, D-2"
+        ],
+        "why": "The Attorney General holds office at the President's pleasure (A-1). CAG's reports go to the President, who lays them before Parliament (B-3). Speaker presides over joint sittings (D-2). CEC heads the Commission (C-4). The trap is (a), which pairs A with 2."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से मिलाइए और सही उत्तर चुनिए।",
+        "statements": [
+          "A. महान्यायवादी (भारत के)",
+          "B. नियंत्रक-महालेखापरीक्षक (CAG)",
+          "C. मुख्य निर्वाचन आयुक्त",
+          "D. लोकसभा अध्यक्ष",
+          "1. राष्ट्रपति के प्रसादपर्यंत पद पर रहते हैं",
+          "2. दोनों सदनों की संयुक्त बैठक की अध्यक्षता करते हैं",
+          "3. संघ के लेखों से जुड़ी रिपोर्ट राष्ट्रपति द्वारा संसद में रखवाई जाती है",
+          "4. भारत के निर्वाचन आयोग के प्रमुख होते हैं"
+        ],
+        "ask": "नीचे दिए गए कूट का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "A-2, B-3, C-4, D-1",
+          "A-4, B-2, C-1, D-3",
+          "A-3, B-1, C-2, D-4",
+          "A-1, B-3, C-4, D-2"
+        ],
+        "why": "महान्यायवादी राष्ट्रपति के प्रसादपर्यंत पद पर रहते हैं (A-1)। CAG की रिपोर्ट राष्ट्रपति संसद में रखवाते हैं (B-3)। लोकसभा अध्यक्ष संयुक्त बैठक की अध्यक्षता करते हैं (D-2), और मुख्य निर्वाचन आयुक्त निर्वाचन आयोग के प्रमुख होते हैं (C-4)। जाल विकल्प (a) है, जो A को 2 से जोड़ता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-federal",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Education was moved from the State List to the Concurrent List by which amendment?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "42nd Amendment, 1976",
+          "44th Amendment, 1978",
+          "73rd Amendment, 1992",
+          "101st Amendment, 2016"
+        ],
+        "why": "The 42nd Amendment of 1976 moved education and forests from the State List to the Concurrent List. The tempting wrong pick is the 44th Amendment of 1978, which changed the ground for a National Emergency, not the lists."
+      },
+      "hi": {
+        "stem": "शिक्षा को राज्य सूची से समवर्ती सूची में किस संशोधन से ले जाया गया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "42वाँ संशोधन, 1976",
+          "44वाँ संशोधन, 1978",
+          "73वाँ संशोधन, 1992",
+          "101वाँ संशोधन, 2016"
+        ],
+        "why": "42वें संशोधन, 1976 ने शिक्षा और वन को राज्य सूची से समवर्ती सूची में डाला था। जो 44वाँ संशोधन, 1978 चुन लेते हैं, वे उलझ जाते हैं। उसने आपातकाल का आधार 'आंतरिक अशांति' की जगह 'सशस्त्र विद्रोह' कर दिया, सूचियाँ नहीं बदलीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-fiscal",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Finance Commission and the GST Council.",
+        "statements": [
+          "The President constitutes a Finance Commission every five years, or earlier.",
+          "The recommendations of the GST Council are binding on Parliament and the state legislatures.",
+          "The recommendations of the Finance Commission are advisory; the Union government lays them before Parliament."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1 and 3 only"
+        ],
+        "why": "Statements 1 and 3 are correct: the Finance Commission is constituted every five years and its recommendations are advisory. The tempting pick, 1 and 2 only, fails on Statement 2: GST Council recommendations are not binding (Mohit Minerals, 2022)."
+      },
+      "hi": {
+        "stem": "वित्त आयोग और GST परिषद के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "राष्ट्रपति हर पाँच वर्ष में, या उससे पहले, वित्त आयोग का गठन करते हैं।",
+          "GST परिषद की सिफ़ारिशें संसद और राज्य विधानमंडलों पर बाध्यकारी होती हैं।",
+          "वित्त आयोग की सिफ़ारिशें सलाहकारी होती हैं; केंद्र सरकार उन्हें व्याख्यात्मक ज्ञापन के साथ संसद के समक्ष रखती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "केवल 1 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। वित्त आयोग हर पाँच साल में, या उससे पहले, बनता है, और उसकी सिफ़ारिशें सलाहकारी होती हैं। जो '1 और 2' चुनते हैं, वे कथन 2 पर फिसल जाते हैं। Mohit Minerals (2022) में सुप्रीम कोर्ट ने कहा कि GST परिषद की सिफ़ारिशें बाध्यकारी नहीं हैं, उनका केवल प्रेरक मूल्य है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-elections",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the anti-defection law, the Tenth Schedule.",
+        "statements": [
+          "A nominated member is disqualified if the member joins a political party after six months from taking the seat.",
+          "Disqualification does not apply if the original party merges with another party and at least two-thirds of the members of the legislature party agree to the merger.",
+          "The 91st Amendment Act, 2003 restored the protection for a split by one-third of a legislature party."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Statements 1 and 2 are correct, so the answer is 'Only two'. Statement 3 is false: the 91st Amendment, 2003 removed the one-third split exception. The tempting pick, 'All three', misses this change."
+      },
+      "hi": {
+        "stem": "दल-बदल विरोधी कानून, यानी दसवीं अनुसूची, के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "मनोनीत सदस्य यदि सदन में स्थान ग्रहण करने के छह महीने बाद किसी राजनीतिक दल में शामिल होता है, तो अयोग्य हो जाता है।",
+          "मूल दल का किसी अन्य दल में विलय हो और विधायी दल के कम से कम दो-तिहाई सदस्य विलय पर सहमत हों, तो अयोग्यता लागू नहीं होती।",
+          "91वें संशोधन अधिनियम, 2003 ने विधायी दल के एक-तिहाई सदस्यों द्वारा 'विभाजन' की छूट को फिर से लागू कर दिया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "कथन 1 और 2 सही हैं, इसलिए उत्तर 'केवल दो' है। कथन 3 गलत है: 91वें संशोधन, 2003 ने एक-तिहाई 'विभाजन' की छूट हटाई थी, लौटाई नहीं। जो 'तीनों' चुनता है, वह इसी बदलाव को भूल जाता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "pol-emergency",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The National Emergency under Article 352 has been proclaimed three times.",
+        "statements": [],
+        "ask": "Which one of the following is NOT correct?",
+        "options": [
+          "The 1962 proclamation was on the ground of internal disturbance.",
+          "The 1971 proclamation was on the ground of external aggression, during the war with Pakistan.",
+          "The 1978 amendment replaced 'internal disturbance' with 'armed rebellion' as a ground for a National Emergency.",
+          "The 1975 proclamation was declared in June 1975 while the 1971 proclamation was still in force."
+        ],
+        "why": "The 1962 proclamation was on the ground of external aggression, during the war with China, not internal disturbance. The 1975 proclamation was the one on internal grounds, so the trap is mixing the two. The other three are correct."
+      },
+      "hi": {
+        "stem": "अनुच्छेद 352 के तहत राष्ट्रीय आपातकाल अब तक तीन बार घोषित हुआ है।",
+        "statements": [],
+        "ask": "निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "options": [
+          "1962 की घोषणा 'आंतरिक अशांति' के आधार पर हुई थी।",
+          "1971 की घोषणा पाकिस्तान के साथ युद्ध के दौरान बाहरी आक्रमण के आधार पर हुई थी।",
+          "1978 के 44वें संशोधन ने राष्ट्रीय आपातकाल के आधार के रूप में 'आंतरिक अशांति' की जगह 'सशस्त्र विद्रोह' रखा।",
+          "1975 की घोषणा जून 1975 में हुई, जब 1971 की घोषणा अब भी लागू थी।"
+        ],
+        "why": "1962 की घोषणा चीन के साथ युद्ध के दौरान बाहरी आक्रमण के आधार पर हुई थी, आंतरिक अशांति पर नहीं। आंतरिक आधार वाली घोषणा 1975 की थी, इसलिए लोग दोनों को मिला देते हैं। बाकी तीनों विकल्प सही हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "pol-local",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about Panchayati Raj institutions.",
+        "statements": [
+          "Statement I: The 73rd Amendment Act, 1992 gave constitutional status to Panchayati Raj institutions.",
+          "Statement II: Panchayat elections are conducted by the Election Commission of India, not by State Election Commissions."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both are correct, and Statement II is the correct explanation for Statement I",
+          "Both are correct, but Statement II is not the correct explanation for Statement I",
+          "Statement I is correct but Statement II is incorrect",
+          "Statement I is incorrect but Statement II is correct"
+        ],
+        "why": "Statement I is true: the 73rd Amendment gave Panchayati Raj constitutional status. Statement II is false: State Election Commissions, under Articles 243K and 243ZA, conduct panchayat elections, not the Election Commission of India. Option (b) is the trap."
+      },
+      "hi": {
+        "stem": "पंचायती राज संस्थाओं के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "कथन I: 73वें संशोधन अधिनियम, 1992 ने पंचायती राज संस्थाओं को संवैधानिक दर्जा दिया।",
+          "कथन II: पंचायत चुनाव भारत निर्वाचन आयोग द्वारा कराए जाते हैं, न कि राज्य निर्वाचन आयोगों द्वारा।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "दोनों कथन सही हैं, और कथन II, कथन I का सही स्पष्टीकरण है",
+          "दोनों कथन सही हैं, पर कथन II, कथन I का सही स्पष्टीकरण नहीं है",
+          "कथन I सही है, पर कथन II गलत है",
+          "कथन I गलत है, पर कथन II सही है"
+        ],
+        "why": "कथन I सही है: 73वें संशोधन ने पंचायती राज को संवैधानिक दर्जा दिया। कथन II गलत है: पंचायत चुनाव राज्य निर्वाचन आयोग कराते हैं (अनुच्छेद 243K और 243ZA के तहत), भारत निर्वाचन आयोग नहीं। विकल्प (b) वाला जाल है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "pol-scheduled-areas",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I (provision) with List II (feature) about tribal areas.",
+        "statements": [
+          "A. Fifth Schedule (Article 244(1))",
+          "B. Sixth Schedule (Article 244(2))",
+          "C. Panchayats (Extension to the Scheduled Areas) Act, 1996",
+          "1. Autonomous District Councils",
+          "2. Gram sabha powers",
+          "3. Tribes Advisory Council"
+        ],
+        "ask": "Select the correct answer using the codes given below.",
+        "options": [
+          "A-1, B-2, C-3",
+          "A-2, B-1, C-3",
+          "A-1, B-3, C-2",
+          "A-3, B-1, C-2"
+        ],
+        "why": "Fifth Schedule (A) uses a Tribes Advisory Council (3). Sixth Schedule (B) areas are run by Autonomous District Councils (1). PESA (C) gives the gram sabha its powers (2). The trap is (b), which puts the gram sabha with the Fifth Schedule."
+      },
+      "hi": {
+        "stem": "जनजातीय क्षेत्रों से जुड़े सूची I (प्रावधान) को सूची II (विशेषता) से सुमेलित कीजिए।",
+        "statements": [
+          "A. पाँचवीं अनुसूची (अनुच्छेद 244(1))",
+          "B. छठी अनुसूची (अनुच्छेद 244(2))",
+          "C. पंचायत (अनुसूचित क्षेत्रों तक विस्तार) अधिनियम, 1996 (PESA)",
+          "1. स्वायत्त ज़िला परिषदें",
+          "2. ग्राम सभा को शक्तियाँ",
+          "3. जनजातीय सलाहकार परिषद"
+        ],
+        "ask": "नीचे दिए गए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "options": [
+          "A-1, B-2, C-3",
+          "A-2, B-1, C-3",
+          "A-1, B-3, C-2",
+          "A-3, B-1, C-2"
+        ],
+        "why": "A का मेल 3 से है: पाँचवीं अनुसूची में जनजातीय सलाहकार परिषद होती है। B का मेल 1 से है: छठी अनुसूची वाले इलाके स्वायत्त ज़िला परिषदें चलाती हैं। C का मेल 2 से है: PESA ग्राम सभा को शक्तियाँ देता है। जाल विकल्प (b) है, जो पाँचवीं अनुसूची को ग्राम सभा से जोड़ देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "pol-statutory",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "A statutory body is one created by an Act of Parliament. Which of the following is a statutory body?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Central Information Commission (Right to Information Act, 2005)",
+          "GST Council (Article 279A)",
+          "NITI Aayog (Union Cabinet resolution)",
+          "Finance Commission (Article 280)"
+        ],
+        "why": "The Central Information Commission exists under the Right to Information Act, 2005, so it is statutory. The tempting wrong pick is the GST Council: it was added by the 101st Amendment under Article 279A, which makes it constitutional."
+      },
+      "hi": {
+        "stem": "सांविधिक निकाय वह है जिसे संसद के किसी अधिनियम से बनाया गया हो। निम्नलिखित में से कौन-सा सांविधिक निकाय है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "केंद्रीय सूचना आयोग (सूचना का अधिकार अधिनियम, 2005)",
+          "GST परिषद (अनुच्छेद 279A)",
+          "नीति आयोग (केंद्रीय मंत्रिमंडल का संकल्प)",
+          "वित्त आयोग (अनुच्छेद 280)"
+        ],
+        "why": "केंद्रीय सूचना आयोग सूचना का अधिकार अधिनियम, 2005 से बना है, इसलिए यह सांविधिक है। यहीं सबसे ज़्यादा भ्रम होता है: GST परिषद को 101वें संशोधन, 2016 ने अनुच्छेद 279A के तहत जोड़ा, इसलिए वह संवैधानिक है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "pol-elections",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Tenth Schedule.",
+        "statements": [
+          "An independent member is disqualified if the member joins a political party after the election.",
+          "Questions of disqualification are decided by the President of India.",
+          "In Kihoto Hollohan v Zachillhu (1992), the Supreme Court held that the Speaker's or Chairman's decision is subject to judicial review."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "2 only",
+          "1 and 2 only",
+          "1 and 3 only",
+          "2 and 3 only"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is false: the Speaker or the Chairman decides disqualification questions, not the President. The tempting pick, 1 and 2 only, fails on Statement 2."
+      },
+      "hi": {
+        "stem": "दसवीं अनुसूची (दल-बदल विरोधी कानून) के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "स्वतंत्र सदस्य यदि चुनाव के बाद किसी राजनीतिक दल में शामिल हो जाता है, तो वह अयोग्य हो जाता है।",
+          "अयोग्यता से जुड़े प्रश्नों का निर्णय राष्ट्रपति करते हैं।",
+          "किहोतो होलोहन बनाम ज़ाचिल्हू (1992) में सुप्रीम कोर्ट ने कहा कि अध्यक्ष या सभापति के निर्णय की न्यायिक समीक्षा हो सकती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 2",
+          "केवल 1 और 2",
+          "केवल 1 और 3",
+          "केवल 2 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: अयोग्यता के सवाल पर फ़ैसला सदन के अध्यक्ष या सभापति करते हैं, राष्ट्रपति नहीं। जो '1 और 2' चुनते हैं, वे इसी गलती में फँसते हैं।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "pol-fiscal",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs about fiscal federalism.",
+        "statements": [
+          "15th Finance Commission: recommended that states get 41 percent of the divisible pool for 2021-22 to 2025-26",
+          "16th Finance Commission: chaired by N.K. Singh",
+          "GST Council: decisions need a majority of at least three-fourths of the weighted votes of members present and voting"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "None",
+          "Only two",
+          "Only one",
+          "All three"
+        ],
+        "why": "Pairs 1 and 3 are correct, so the answer is 'Only two'. Pair 2 is wrong: N.K. Singh chaired the 15th Finance Commission, and Arvind Panagariya chairs the 16th. The tempting pick, 'All three', misses the change of chair."
+      },
+      "hi": {
+        "stem": "राजकोषीय संघवाद के संदर्भ में निम्नलिखित युग्मों पर विचार कीजिए।",
+        "statements": [
+          "15वाँ वित्त आयोग: 2021-22 से 2025-26 के लिए राज्यों को विभाज्य पूल का 41 प्रतिशत देने की सिफ़ारिश की",
+          "16वाँ वित्त आयोग: इसके अध्यक्ष N.K. सिंह थे",
+          "GST परिषद: निर्णय के लिए उपस्थित और मतदान करने वाले सदस्यों के भारित मतों के कम से कम तीन-चौथाई बहुमत की ज़रूरत होती है"
+        ],
+        "ask": "उपर्युक्त कितने युग्म सही सुमेलित हैं?",
+        "options": [
+          "कोई नहीं",
+          "केवल दो",
+          "केवल एक",
+          "तीनों"
+        ],
+        "why": "युग्म 1 और 3 सही हैं, इसलिए उत्तर 'केवल दो' है। युग्म 2 गलत है: N.K. सिंह 15वें वित्त आयोग के अध्यक्ष थे, और 16वें वित्त आयोग के अध्यक्ष अरविंद पनगढ़िया हैं। जो 'तीनों' चुनते हैं, वे अध्यक्ष बदलने वाली बात चूक जाते हैं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "pol-federal",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Seventh Schedule of the Constitution.",
+        "statements": [
+          "Defence and foreign affairs are in the Union List, where Parliament makes the laws.",
+          "Police and public order are in the State List, where state legislatures make the laws.",
+          "Education and forests were moved to the Concurrent List by the 42nd Amendment, 1976.",
+          "On a Concurrent List subject, a state law prevails over a Union law in case of conflict."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All four",
+          "Only three"
+        ],
+        "why": "Statements 1, 2 and 3 are correct, so the answer is 'Only three'. Statement 4 is false: in a conflict on a Concurrent List subject, a Union law prevails. The tempting pick, 'All four', assumes the state law wins."
+      },
+      "hi": {
+        "stem": "भारतीय संविधान की सातवीं अनुसूची के बारे में निम्नलिखित कथनों पर विचार कीजिए।",
+        "statements": [
+          "रक्षा और विदेश मामले संघ सूची में हैं, जिस पर संसद कानून बनाती है।",
+          "पुलिस और लोक व्यवस्था राज्य सूची में हैं, जिस पर राज्य विधानमंडल कानून बनाते हैं।",
+          "शिक्षा और वन 42वें संशोधन, 1976 द्वारा राज्य सूची से समवर्ती सूची में ले जाए गए।",
+          "समवर्ती सूची के विषय पर टकराव होने पर राज्य का कानून संघ के कानून पर प्रभावी होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "सभी चार",
+          "केवल तीन"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं, इसलिए उत्तर 'केवल तीन' है। कथन 4 गलत है: समवर्ती सूची पर टकराव में संघ का कानून प्रभावी होता है। जो 'सभी चार' चुनते हैं, वे मान लेते हैं कि राज्य का कानून जीतेगा।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/mock-paper/",
+    "createdOn": "2026-10-11",
+    "note": "Three generation runs of ten questions each (parts A to C), merged into one paper. Every answer key was re-checked by hand against the source on 2026-10-11; an editor still signs off."
+  }
+}

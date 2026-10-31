@@ -1,0 +1,968 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "his-sectional-modern-history-2",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Modern India sectional mock 2",
+    "hi": "आधुनिक भारत सेक्शनल मॉक 2"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS1 Modern Indian History",
+  "questions": [
+    {
+      "format": "direct",
+      "node": "his-company-expansion",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "In the Battle of Plassey (1757), the forces of the East India Company led by Robert Clive defeated:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Mir Qasim",
+          "Siraj-ud-Daulah",
+          "Shuja-ud-Daulah",
+          "Mir Jafar"
+        ],
+        "why": "Clive defeated Siraj-ud-Daulah, the Nawab of Bengal, at Plassey. The trap is Mir Jafar: he was Siraj's commander who stayed out of the fight and was then made Nawab by the Company."
+      },
+      "hi": {
+        "stem": "प्लासी के युद्ध (1757) में रॉबर्ट क्लाइव के नेतृत्व वाली ईस्ट इंडिया कंपनी की सेना ने किसे हराया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मीर क़ासिम",
+          "सिराजुद्दौला",
+          "शुजाउद्दौला",
+          "मीर जाफ़र"
+        ],
+        "why": "प्लासी में क्लाइव ने बंगाल के नवाब सिराजुद्दौला को हराया। मीर जाफ़र का जाल है: वह सिराज का सेनापति था जो लड़ाई से अलग रहा, और फिर कंपनी ने उसे नवाब बना दिया।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "his-company-expansion",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. First Anglo-Mysore War",
+          "B. Third Anglo-Mysore War",
+          "C. First Anglo-Maratha War",
+          "D. First Anglo-Sikh War",
+          "1. Treaty of Salbai",
+          "2. Treaty of Lahore",
+          "3. Treaty of Madras",
+          "4. Treaty of Seringapatam"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-3, B-4, C-1, D-2"
+        ],
+        "why": "The Treaty of Madras (1769) ended the first Mysore war, Seringapatam (1792) the third, Salbai (1782) the first Maratha war and Lahore (1846) the first Sikh war. The trap is (a), which swaps the two Mysore treaties."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. प्रथम आंग्ल-मैसूर युद्ध",
+          "B. तृतीय आंग्ल-मैसूर युद्ध",
+          "C. प्रथम आंग्ल-मराठा युद्ध",
+          "D. प्रथम आंग्ल-सिख युद्ध",
+          "1. सालबाई की संधि",
+          "2. लाहौर की संधि",
+          "3. मद्रास की संधि",
+          "4. श्रीरंगपट्टनम की संधि"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2",
+          "A-3, B-4, C-1, D-2"
+        ],
+        "why": "मद्रास की संधि (1769) से पहला मैसूर युद्ध खत्म हुआ, श्रीरंगपट्टनम (1792) से तीसरा, सालबाई (1782) से पहला मराठा युद्ध और लाहौर (1846) से पहला सिख युद्ध। (a) का जाल दोनों मैसूर संधियों को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-company-expansion",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the expansion of Company rule:",
+        "statements": [
+          "Tipu Sultan was killed defending Seringapatam in the Fourth Anglo-Mysore War in 1799.",
+          "By the Treaty of Bassein (1802), Peshwa Baji Rao II accepted the Subsidiary Alliance.",
+          "Punjab was annexed by the Company in 1849, when Lord Hastings was Governor-General."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Punjab was annexed in 1849 under Lord Dalhousie, after the Second Anglo-Sikh War. The trap is '1, 2 and 3', because the year 1849 is right."
+      },
+      "hi": {
+        "stem": "कंपनी शासन के विस्तार के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "चौथे आंग्ल-मैसूर युद्ध में 1799 में श्रीरंगपट्टनम की रक्षा करते हुए टीपू सुल्तान मारे गए।",
+          "बसीन की संधि (1802) से पेशवा बाजीराव द्वितीय ने सहायक संधि स्वीकार की।",
+          "पंजाब को कंपनी ने 1849 में मिलाया, जब लॉर्ड हेस्टिंग्स गवर्नर-जनरल थे।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "केवल 1",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: पंजाब 1849 में दूसरे आंग्ल-सिख युद्ध के बाद लॉर्ड डलहौज़ी के समय मिलाया गया। '1, 2 और 3' का जाल इसलिए लगता है क्योंकि साल 1849 सही है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "his-company-administration",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of land revenue systems and the persons associated with them:",
+        "statements": [
+          "Permanent Settlement – Lord Cornwallis",
+          "Ryotwari system – Thomas Munro",
+          "Mahalwari system – Holt Mackenzie",
+          "Permanent Settlement – first introduced in the Madras Presidency"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1, 2 and 3 are correct. The Permanent Settlement of 1793 began in Bengal and Bihar; Madras is linked with the ryotwari system. The trap is 'All four', because Munro and Madras come to mind with land revenue."
+      },
+      "hi": {
+        "stem": "भू-राजस्व व्यवस्थाओं और उनसे जुड़े व्यक्तियों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "स्थायी बंदोबस्त – लॉर्ड कॉर्नवालिस",
+          "रैयतवाड़ी व्यवस्था – थॉमस मुनरो",
+          "महालवाड़ी व्यवस्था – होल्ट मैकेंज़ी",
+          "स्थायी बंदोबस्त – सबसे पहले मद्रास प्रेसीडेंसी में लागू"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "युग्म 1, 2 और 3 सही हैं। 1793 का स्थायी बंदोबस्त बंगाल और बिहार में शुरू हुआ; मद्रास रैयतवाड़ी से जुड़ा है। 'सभी चार' का जाल इसलिए लगता है क्योंकि भू-राजस्व के साथ मुनरो और मद्रास याद आ जाते हैं।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "his-company-administration",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Under the Permanent Settlement, the Company could not raise its land revenue when cultivation expanded and incomes from land rose.",
+          "Statement II: The revenue demand on the zamindars was fixed permanently and was not to be increased in future."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: once the demand was fixed for ever, the Company could not claim a share of later growth in land income. The trap is (b), treating the fixed demand as a separate fact."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: स्थायी बंदोबस्त में खेती बढ़ने और ज़मीन से आमदनी बढ़ने पर भी कंपनी अपना भू-राजस्व नहीं बढ़ा सकती थी।",
+          "कथन II: ज़मींदारों पर राजस्व की माँग स्थायी रूप से तय कर दी गई थी और भविष्य में उसे बढ़ाया नहीं जाना था।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: माँग हमेशा के लिए तय होने के बाद कंपनी ज़मीन की बढ़ी आमदनी में हिस्सा नहीं माँग सकती थी। (b) का जाल तय माँग को एक अलग तथ्य मान लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-company-administration",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The College of Fort William at Calcutta was set up in 1800 to train the Company's civil servants by:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Lord Cornwallis",
+          "Warren Hastings",
+          "Lord William Bentinck",
+          "Lord Wellesley"
+        ],
+        "why": "Lord Wellesley founded the College of Fort William in 1800. The trap is Cornwallis, who is linked with reorganising the Company's civil service, but he left India in 1793."
+      },
+      "hi": {
+        "stem": "कंपनी के सिविल सेवकों को प्रशिक्षण देने के लिए 1800 में कलकत्ता में फ़ोर्ट विलियम कॉलेज किसने स्थापित किया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "लॉर्ड कॉर्नवालिस",
+          "वॉरेन हेस्टिंग्स",
+          "लॉर्ड विलियम बेंटिंक",
+          "लॉर्ड वेलेज़ली"
+        ],
+        "why": "फ़ोर्ट विलियम कॉलेज 1800 में लॉर्ड वेलेज़ली ने बनाया। कॉर्नवालिस का जाल है: उनका नाम कंपनी की सिविल सेवा सुधारने से जुड़ा है, पर वे 1793 में भारत छोड़ चुके थे।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "his-company-administration",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements about the Charter Acts is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Charter Act of 1833 ended the Company's commercial activities.",
+          "The Charter Act of 1813 ended the Company's monopoly of trade with China.",
+          "The Charter Act of 1813 set aside one lakh rupees a year for education in India.",
+          "The Charter Act of 1833 made the Governor-General of Bengal the Governor-General of India."
+        ],
+        "why": "Option (b) is the answer: the 1813 Act ended the Company's monopoly of trade with India but kept its monopoly of the tea trade and trade with China. The tempting trap is (c), which is true."
+      },
+      "hi": {
+        "stem": "चार्टर अधिनियमों के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1833 के चार्टर अधिनियम ने कंपनी की व्यापारिक गतिविधियाँ समाप्त कीं।",
+          "1813 के चार्टर अधिनियम ने चीन के साथ व्यापार पर कंपनी का एकाधिकार समाप्त किया।",
+          "1813 के चार्टर अधिनियम ने भारत में शिक्षा के लिए हर वर्ष एक लाख रुपये अलग रखे।",
+          "1833 के चार्टर अधिनियम ने बंगाल के गवर्नर-जनरल को भारत का गवर्नर-जनरल बनाया।"
+        ],
+        "why": "उत्तर (b) है: 1813 के अधिनियम ने भारत के साथ व्यापार पर कंपनी का एकाधिकार खत्म किया, पर चाय के व्यापार और चीन के साथ व्यापार का एकाधिकार बना रहा। (c) का जाल लुभाता है, पर वह सही है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-early-resistance-to-company",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about early resistance to Company rule:",
+        "statements": [
+          "The Paika Rebellion of 1817 in Odisha was led by Bakshi Jagabandhu.",
+          "The Faraizi movement in Bengal was founded by Haji Shariatullah.",
+          "The Kol uprising of 1831–32 took place in the Malabar region."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the Kol uprising took place in Chotanagpur, in present-day Jharkhand. The trap is '1, 2 and 3', mixing up the Kols with the Moplah risings in Malabar."
+      },
+      "hi": {
+        "stem": "कंपनी शासन के ख़िलाफ़ शुरुआती प्रतिरोध के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "ओडिशा में 1817 के पाइका विद्रोह का नेतृत्व बख़्शी जगबंधु ने किया।",
+          "बंगाल में फ़राज़ी आंदोलन की स्थापना हाजी शरीयतुल्लाह ने की।",
+          "1831–32 का कोल विद्रोह मालाबार क्षेत्र में हुआ।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: कोल विद्रोह छोटानागपुर में हुआ, जो आज के झारखंड में है। '1, 2 और 3' का जाल कोलों को मालाबार के मोपला विद्रोहों से मिला देने से लगता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-early-resistance-to-company",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Velu Thampi, who rose against the East India Company in 1808–09, was the Dewan (Dalawa) of:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Travancore",
+          "Mysore",
+          "Hyderabad",
+          "Arcot"
+        ],
+        "why": "Velu Thampi was the Dalawa of Travancore and resisted the Company's growing control there. The trap is Mysore, the best-known southern state that fought the Company."
+      },
+      "hi": {
+        "stem": "1808–09 में ईस्ट इंडिया कंपनी के ख़िलाफ़ उठ खड़े हुए वेलु थम्पी किस राज्य के दीवान (दलवा) थे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "त्रावणकोर",
+          "मैसूर",
+          "हैदराबाद",
+          "अर्काट"
+        ],
+        "why": "वेलु थम्पी त्रावणकोर के दलवा थे और उन्होंने वहाँ कंपनी के बढ़ते नियंत्रण का विरोध किया। मैसूर का जाल है, क्योंकि कंपनी से लड़ने वाला दक्षिण का सबसे जाना-माना राज्य वही है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "his-early-resistance-to-company",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about resistance to Company rule before 1857:",
+        "statements": [
+          "The Sanyasi–Fakir rebellion in Bengal forms the backdrop of Bankim Chandra Chattopadhyay's novel Anandamath.",
+          "The Wahabi movement in India was led by Syed Ahmad of Rae Bareli.",
+          "Veerapandya Kattabomman was a poligar of Panchalankurichi in present-day Tamil Nadu.",
+          "The Ramosis who rose against the Company were a community of Assam."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: the Ramosis rose in the Western Ghats region of Maharashtra. The trap is 'All four', since several risings did take place in the north-east."
+      },
+      "hi": {
+        "stem": "1857 से पहले कंपनी शासन के प्रतिरोध के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "बंगाल का संन्यासी–फ़कीर विद्रोह बंकिम चंद्र चट्टोपाध्याय के उपन्यास आनंदमठ की पृष्ठभूमि है।",
+          "भारत में वहाबी आंदोलन का नेतृत्व रायबरेली के सैयद अहमद ने किया।",
+          "वीरपांड्य कट्टबोम्मन आज के तमिलनाडु में पांचालंकुरिचि के पोलिगार थे।",
+          "कंपनी के विरुद्ध उठने वाले रामोसी असम का एक समुदाय थे।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: रामोसी महाराष्ट्र के पश्चिमी घाट क्षेत्र में उठे थे। 'सभी चार' का जाल इसलिए लगता है क्योंकि कई विद्रोह सचमुच उत्तर-पूर्व में हुए थे।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-socio-religious-reform",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about reform movements in the nineteenth century:",
+        "statements": [
+          "The Prarthana Samaj was founded in Bombay in 1867.",
+          "Henry Vivian Derozio, who inspired the Young Bengal movement, taught at the Hindu College, Calcutta.",
+          "The Theosophical Society was founded in India by Annie Besant."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: Madame Blavatsky and Colonel Olcott founded the Theosophical Society in New York in 1875; it later moved its headquarters to Adyar. Annie Besant joined later and led it. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "उन्नीसवीं सदी के सुधार आंदोलनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "प्रार्थना समाज की स्थापना 1867 में बंबई में हुई।",
+          "यंग बंगाल आंदोलन के प्रेरक हेनरी विवियन डेरोज़ियो कलकत्ता के हिंदू कॉलेज में पढ़ाते थे।",
+          "थियोसोफ़िकल सोसाइटी की स्थापना भारत में एनी बेसेंट ने की।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: थियोसोफ़िकल सोसाइटी 1875 में न्यूयॉर्क में मैडम ब्लावात्स्की और कर्नल ऑलकॉट ने बनाई; बाद में इसका मुख्यालय अड्यार आया। एनी बेसेंट बाद में जुड़ीं और नेतृत्व किया। जाल '1, 2 और 3' है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "his-socio-religious-reform",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Match List I with List II and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Atmiya Sabha",
+          "B. Tattvabodhini Sabha",
+          "C. Servants of India Society",
+          "D. Sri Narayana Dharma Paripalana Yogam",
+          "1. Gopal Krishna Gokhale",
+          "2. Sri Narayana Guru",
+          "3. Raja Rammohan Roy",
+          "4. Debendranath Tagore"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-3, C-4, D-2"
+        ],
+        "why": "Rammohan Roy started the Atmiya Sabha, Debendranath Tagore the Tattvabodhini Sabha, Gokhale the Servants of India Society and Sri Narayana Guru inspired the SNDP Yogam. The trap is (b), which swaps the two Bengal sabhas."
+      },
+      "hi": {
+        "stem": "सूची I को सूची II से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. आत्मीय सभा",
+          "B. तत्त्वबोधिनी सभा",
+          "C. सर्वेंट्स ऑफ़ इंडिया सोसाइटी",
+          "D. श्री नारायण धर्म परिपालन योगम",
+          "1. गोपाल कृष्ण गोखले",
+          "2. श्री नारायण गुरु",
+          "3. राजा राममोहन राय",
+          "4. देवेंद्रनाथ टैगोर"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-3, B-4, C-1, D-2",
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-3, C-4, D-2"
+        ],
+        "why": "आत्मीय सभा राममोहन राय ने, तत्त्वबोधिनी सभा देवेंद्रनाथ टैगोर ने और सर्वेंट्स ऑफ़ इंडिया सोसाइटी गोखले ने शुरू की; SNDP योगम श्री नारायण गुरु की प्रेरणा से बना। (b) का जाल बंगाल की दोनों सभाओं को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "his-education-and-press",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Wood's Despatch of 1854 is often called the 'Magna Carta of English Education in India'.",
+          "Statement II: It laid out a comprehensive plan, from vernacular schools at village level up to universities in Calcutta, Bombay and Madras."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II explains I: the Despatch earned that name because it set out a full plan for education at every level. The trap is (b), reading II as a mere list of its contents."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: 1854 के वुड डिस्पैच को अक्सर 'भारत में अंग्रेज़ी शिक्षा का मैग्ना कार्टा' कहा जाता है।",
+          "कथन II: इसने गाँव स्तर के देशी भाषा स्कूलों से लेकर कलकत्ता, बंबई और मद्रास के विश्वविद्यालयों तक एक व्यापक योजना रखी।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, और II, I की व्याख्या करता है: डिस्पैच को यह नाम इसीलिए मिला क्योंकि उसने हर स्तर की शिक्षा की पूरी योजना रखी। (b) का जाल II को बस उसकी सामग्री की सूची समझ लेता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-education-and-press",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Bengal Gazette, started in 1780 and regarded as the first newspaper in India, was founded by:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Raja Rammohan Roy",
+          "Ishwar Chandra Vidyasagar",
+          "James Augustus Hicky",
+          "Henry Louis Vivian Derozio"
+        ],
+        "why": "James Augustus Hicky started the Bengal Gazette, also called Hicky's Gazette, in 1780. The trap is Rammohan Roy, a pioneer of Indian-language journalism, but his papers came decades later."
+      },
+      "hi": {
+        "stem": "1780 में शुरू हुआ और भारत का पहला समाचार-पत्र माना जाने वाला 'बंगाल गज़ट' किसने शुरू किया?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "राजा राममोहन राय",
+          "ईश्वर चंद्र विद्यासागर",
+          "जेम्स ऑगस्टस हिक्की",
+          "हेनरी लुई विवियन डेरोज़ियो"
+        ],
+        "why": "बंगाल गज़ट, जिसे हिक्की गज़ट भी कहते हैं, 1780 में जेम्स ऑगस्टस हिक्की ने शुरू किया। राममोहन राय का जाल है: वे भारतीय भाषा पत्रकारिता के अग्रणी थे, पर उनके अख़बार कई दशक बाद आए।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-peasant-movements",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about peasant movements:",
+        "statements": [
+          "The Deccan riots of 1875 were directed mainly against moneylenders.",
+          "The agrarian league formed in Pabna in 1873 resisted rent increases by zamindars.",
+          "The Eka movement in Awadh in the early 1920s was led by Madari Pasi."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "All three are correct. The trap is '1 and 2 only', from doubting the Eka movement, a lesser-known rising of the early 1920s against high rents and forced labour, led by Madari Pasi."
+      },
+      "hi": {
+        "stem": "किसान आंदोलनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "1875 के दक्कन दंगे मुख्यतः साहूकारों के ख़िलाफ़ थे।",
+          "1873 में पबना में बनी कृषक लीग ने ज़मींदारों द्वारा लगान बढ़ाने का विरोध किया।",
+          "1920 के दशक की शुरुआत में अवध के एका आंदोलन का नेतृत्व मदारी पासी ने किया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। 'केवल 1 और 2' का जाल एका आंदोलन पर शक करने से लगता है; यह 1920 के दशक की शुरुआत का कम चर्चित आंदोलन था, ऊँचे लगान और बेगार के ख़िलाफ़, जिसके नेता मदारी पासी थे।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "his-peasant-movements",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: The Bardoli Satyagraha of 1928 was a campaign of refusing to pay land revenue.",
+          "Statement II: The Bombay government had sharply raised the land revenue demand in Bardoli taluka.",
+          "Statement III: During the campaign, Vallabhbhai Patel came to be called 'Sardar'."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct, and both of them explain Statement I.",
+          "Both Statement II and Statement III are correct, but only one of them explains Statement I.",
+          "Only one of Statements II and III is correct, and that one explains Statement I.",
+          "Neither Statement II nor Statement III is correct."
+        ],
+        "why": "II and III are both correct, but only II explains I: the revenue hike is why the peasants refused to pay. III is a famous outcome of the campaign, not its cause. The trap is (a)."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: 1928 का बारडोली सत्याग्रह भू-राजस्व न चुकाने का अभियान था।",
+          "कथन II: बंबई सरकार ने बारडोली तालुका में भू-राजस्व की माँग काफ़ी बढ़ा दी थी।",
+          "कथन III: इस अभियान के दौरान वल्लभभाई पटेल को 'सरदार' कहा जाने लगा।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं, और दोनों कथन I की व्याख्या करते हैं।",
+          "कथन II और कथन III दोनों सही हैं, पर उनमें से केवल एक कथन I की व्याख्या करता है।",
+          "कथन II और III में से केवल एक सही है, और वही कथन I की व्याख्या करता है।",
+          "न तो कथन II सही है, न ही कथन III।"
+        ],
+        "why": "II और III दोनों सही हैं, पर सिर्फ़ II ही I की व्याख्या करता है: राजस्व बढ़ने की वजह से ही किसानों ने भुगतान से इनकार किया। III इस अभियान का मशहूर नतीजा है, उसकी वजह नहीं। जाल (a) है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-peasant-movements",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The Tebhaga movement of 1946–47 in Bengal demanded that sharecroppers (bargadars) keep what share of the crop?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "One-half",
+          "Two-thirds",
+          "Three-fourths",
+          "The whole crop, with ownership of the land"
+        ],
+        "why": "Tebhaga means 'three shares': sharecroppers demanded two-thirds of the crop instead of one-half. The trap is one-half, which was the share they usually received before the movement."
+      },
+      "hi": {
+        "stem": "1946–47 में बंगाल के तेभागा आंदोलन ने माँग की कि बटाईदार (बरगादार) फ़सल का कितना हिस्सा रखें?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "आधा",
+          "दो-तिहाई",
+          "तीन-चौथाई",
+          "पूरी फ़सल, ज़मीन के मालिकाना हक़ के साथ"
+        ],
+        "why": "तेभागा का अर्थ है 'तीन भाग': बटाईदारों ने आधे की जगह फ़सल का दो-तिहाई हिस्सा माँगा। 'आधा' का जाल है, क्योंकि आंदोलन से पहले उन्हें आम तौर पर इतना ही मिलता था।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-peasant-movements",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Who was the president of the All India Kisan Sabha when it was founded at Lucknow in 1936?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Swami Sahajanand Saraswati",
+          "N.G. Ranga",
+          "Baba Ramchandra",
+          "Indulal Yagnik"
+        ],
+        "why": "Swami Sahajanand Saraswati was its first president. The trap is N.G. Ranga, who was also a founder of the Sabha and served as its general secretary."
+      },
+      "hi": {
+        "stem": "1936 में लखनऊ में अखिल भारतीय किसान सभा की स्थापना के समय उसके अध्यक्ष कौन थे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "स्वामी सहजानंद सरस्वती",
+          "एन.जी. रंगा",
+          "बाबा रामचंद्र",
+          "इंदुलाल याज्ञिक"
+        ],
+        "why": "स्वामी सहजानंद सरस्वती इसके पहले अध्यक्ष थे। एन.जी. रंगा का जाल है: वे भी सभा के संस्थापकों में थे और इसके महासचिव रहे।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "his-tribal-movements",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of tribal or regional uprisings and the leaders or people associated with them:",
+        "statements": [
+          "Khasi uprising – U Tirot Singh",
+          "Ahom revolt of 1828 – Gomdhar Konwar",
+          "Rampa rebellion of 1922–24 – Alluri Sitarama Raju",
+          "Tana Bhagat movement – Oraons of Chotanagpur"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four pairs are correct. The trap is 'Only three', from doubting the Tana Bhagat movement, which grew among the Oraons of Chotanagpur from about 1914 and later joined the Gandhian movement."
+      },
+      "hi": {
+        "stem": "जनजातीय या क्षेत्रीय विद्रोहों और उनसे जुड़े नेताओं या लोगों के निम्नलिखित युग्मों पर विचार कीजिए:",
+        "statements": [
+          "खासी विद्रोह – यू तिरोत सिंह",
+          "1828 का अहोम विद्रोह – गोमधर कोंवर",
+          "1922–24 का रंपा विद्रोह – अल्लूरी सीताराम राजू",
+          "ताना भगत आंदोलन – छोटानागपुर के उराँव"
+        ],
+        "ask": "उपर्युक्त युग्मों में से कितने सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों युग्म सही हैं। 'केवल तीन' का जाल ताना भगत आंदोलन पर शक करने से लगता है; यह लगभग 1914 से छोटानागपुर के उराँवों में फैला और बाद में गांधीवादी आंदोलन से जुड़ गया।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "his-tribal-movements",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Statement I: Gaidinliu was a Naga spiritual and political leader who led resistance to British rule in the Naga hills.",
+          "Statement II: Jawaharlal Nehru gave her the title 'Rani'."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, but II does not explain I: the title was an honour from Nehru, not the reason for her resistance, which grew from the Heraka movement. The trap is (a), linking a famous title to the cause."
+      },
+      "hi": {
+        "stem": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथन I: गाइदिन्ल्यू एक नागा आध्यात्मिक और राजनीतिक नेता थीं, जिन्होंने नागा पहाड़ियों में ब्रिटिश शासन का विरोध किया।",
+          "कथन II: जवाहरलाल नेहरू ने उन्हें 'रानी' की उपाधि दी।"
+        ],
+        "ask": "उपर्युक्त कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों सही हैं, पर II, I की व्याख्या नहीं करता: उपाधि नेहरू का दिया सम्मान थी, उनके विरोध की वजह नहीं, जो हेराका आंदोलन से निकला था। (a) का जाल एक मशहूर उपाधि को वजह से जोड़ देता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-congress-ministries-and-world-war-two",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the period 1937–39:",
+        "statements": [
+          "After the 1937 provincial elections, the Congress formed ministries in a majority of the provinces.",
+          "The Congress ministries resigned in 1939 in protest against India being made a party to the Second World War without consultation.",
+          "The Muslim League won a majority of the Muslim seats in the 1937 elections."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the League fared poorly in 1937, even in Muslim seats; its strength grew later. The trap is '1, 2 and 3', reading the League's position of the 1940s back into 1937."
+      },
+      "hi": {
+        "stem": "1937–39 के दौर के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "1937 के प्रांतीय चुनावों के बाद कांग्रेस ने अधिकांश प्रांतों में मंत्रिमंडल बनाए।",
+          "भारत को बिना पूछे दूसरे विश्व युद्ध में शामिल करने के विरोध में कांग्रेस मंत्रिमंडलों ने 1939 में इस्तीफ़ा दिया।",
+          "1937 के चुनावों में मुस्लिम लीग ने अधिकांश मुस्लिम सीटें जीतीं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: 1937 में लीग का प्रदर्शन कमज़ोर रहा, मुस्लिम सीटों पर भी; उसकी ताक़त बाद में बढ़ी। '1, 2 और 3' का जाल 1940 के दशक वाली लीग की स्थिति को 1937 पर लागू कर देता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "his-congress-ministries-and-world-war-two",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Whom did Gandhi choose as the first satyagrahi of the Individual Satyagraha launched in 1940?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Vinoba Bhave",
+          "Jawaharlal Nehru",
+          "Vallabhbhai Patel",
+          "C. Rajagopalachari"
+        ],
+        "why": "Vinoba Bhave was the first individual satyagrahi in October 1940. The trap is Nehru, who was chosen as the second satyagrahi."
+      },
+      "hi": {
+        "stem": "1940 में शुरू हुए व्यक्तिगत सत्याग्रह के पहले सत्याग्रही के रूप में गांधी ने किसे चुना?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "विनोबा भावे",
+          "जवाहरलाल नेहरू",
+          "वल्लभभाई पटेल",
+          "सी. राजगोपालाचारी"
+        ],
+        "why": "अक्टूबर 1940 में विनोबा भावे पहले व्यक्तिगत सत्याग्रही बने। नेहरू का जाल है: उन्हें दूसरे सत्याग्रही के रूप में चुना गया था।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "his-quit-india-and-ina",
+      "answer": 3,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Quit India Movement:",
+        "statements": [
+          "The Quit India resolution was passed at Bombay on 8 August 1942.",
+          "Gandhi gave the call 'Do or Die' while launching the movement.",
+          "Parallel governments were set up in places such as Ballia, Tamluk and Satara.",
+          "Aruna Asaf Ali hoisted the national flag at the Gowalia Tank maidan after the leaders' arrest."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. The trap is 'Only three', from doubting the parallel governments, which ran for some time in Ballia, Tamluk (Midnapore) and Satara."
+      },
+      "hi": {
+        "stem": "भारत छोड़ो आंदोलन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत छोड़ो प्रस्ताव 8 अगस्त 1942 को बंबई में पारित हुआ।",
+          "आंदोलन शुरू करते हुए गांधी ने 'करो या मरो' का नारा दिया।",
+          "बलिया, तामलुक और सतारा जैसी जगहों पर समानांतर सरकारें बनीं।",
+          "नेताओं की गिरफ़्तारी के बाद अरुणा आसफ़ अली ने गोवालिया टैंक मैदान पर राष्ट्रीय ध्वज फहराया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। 'केवल तीन' का जाल समानांतर सरकारों पर शक करने से लगता है, जो कुछ समय तक बलिया, तामलुक (मिदनापुर) और सतारा में चलीं।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "his-quit-india-and-ina",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about Subhas Chandra Bose and the Indian National Army (INA):",
+        "statements": [
+          "Bose proclaimed the Provisional Government of Free India at Singapore in October 1943.",
+          "The trials of INA officers were held at the Red Fort in Delhi.",
+          "The Rani of Jhansi Regiment of the INA was led by Lakshmi Swaminathan."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 3 only"
+        ],
+        "why": "All three are correct. The trap is '1 and 2 only', from doubting statement 3; Captain Lakshmi Swaminathan, later Lakshmi Sahgal, commanded the women's regiment."
+      },
+      "hi": {
+        "stem": "सुभाष चंद्र बोस और आज़ाद हिंद फ़ौज (INA) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "बोस ने अक्टूबर 1943 में सिंगापुर में आज़ाद भारत की अस्थायी सरकार की घोषणा की।",
+          "INA अधिकारियों के मुक़दमे दिल्ली के लाल क़िले में चले।",
+          "INA की रानी झाँसी रेजिमेंट का नेतृत्व लक्ष्मी स्वामीनाथन ने किया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 3"
+        ],
+        "why": "तीनों कथन सही हैं। 'केवल 1 और 2' का जाल कथन 3 पर शक करने से लगता है; कैप्टन लक्ष्मी स्वामीनाथन, जो बाद में लक्ष्मी सहगल कहलाईं, महिला रेजिमेंट की कमान सँभालती थीं।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "his-road-to-partition",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following statements about the years 1946–47 is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The Muslim League observed 16 August 1946 as Direct Action Day.",
+          "Lord Mountbatten announced the plan for partition on 3 June 1947.",
+          "Cyril Radcliffe chaired the boundary commissions for both Punjab and Bengal.",
+          "The Interim Government formed in September 1946 was headed by Muhammad Ali Jinnah."
+        ],
+        "why": "Option (d) is the answer: Jawaharlal Nehru led the Interim Government; the League joined it later. The tempting trap is (c), which is true: Radcliffe chaired both commissions."
+      },
+      "hi": {
+        "stem": "1946–47 के वर्षों के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "मुस्लिम लीग ने 16 अगस्त 1946 को प्रत्यक्ष कार्रवाई दिवस के रूप में मनाया।",
+          "लॉर्ड माउंटबेटन ने 3 जून 1947 को विभाजन की योजना घोषित की।",
+          "सिरिल रैडक्लिफ़ ने पंजाब और बंगाल, दोनों के सीमा आयोगों की अध्यक्षता की।",
+          "सितंबर 1946 में बनी अंतरिम सरकार के प्रमुख मुहम्मद अली जिन्ना थे।"
+        ],
+        "why": "उत्तर (d) है: अंतरिम सरकार का नेतृत्व जवाहरलाल नेहरू ने किया; लीग बाद में उसमें शामिल हुई। (c) का जाल लुभाता है, पर वह सही है: रैडक्लिफ़ ने दोनों आयोगों की अध्यक्षता की।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VIII Our Pasts III; NCERT Class XII Themes in Indian History Part III",
+    "hi": "NCERT कक्षा VIII हमारे अतीत III; NCERT कक्षा XII भारतीय इतिहास के कुछ विषय भाग III"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

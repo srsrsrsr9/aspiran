@@ -1,0 +1,191 @@
+{
+  "title": "Book Chai (weekly)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "answer",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "answer": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Which situation fits the idea"
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "book",
+        "idea",
+        "situations",
+        "why",
+        "howToUse",
+        "readIt"
+      ],
+      "properties": {
+        "book": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 12,
+          "description": "Title and author, as the source gives them"
+        },
+        "idea": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36,
+          "description": "One idea from the book, in plain words"
+        },
+        "situations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 20,
+            "description": "A situation an aspirant might be in"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30,
+          "description": "Why that situation fits and the others don't"
+        },
+        "howToUse": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 24,
+          "description": "How to use the idea this week"
+        },
+        "readIt": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 24,
+          "description": "The free or low-cost way to read it, from the source"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "book",
+        "idea",
+        "situations",
+        "why",
+        "howToUse",
+        "readIt"
+      ],
+      "properties": {
+        "book": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 17,
+          "description": "Title and author, as the source gives them"
+        },
+        "idea": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 49,
+          "description": "One idea from the book, in plain words"
+        },
+        "situations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 27,
+            "description": "A situation an aspirant might be in"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41,
+          "description": "Why that situation fits and the others don't"
+        },
+        "howToUse": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 33,
+          "description": "How to use the idea this week"
+        },
+        "readIt": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 33,
+          "description": "The free or low-cost way to read it, from the source"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/book-chai@1"
+}

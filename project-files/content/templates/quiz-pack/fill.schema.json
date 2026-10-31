@@ -1,0 +1,107 @@
+{
+  "title": "Quiz night",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "questions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "answerIndex",
+              "explanation"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 8
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "answerIndex": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "answerIndex",
+              "explanation"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 11
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "answerIndex": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 34
+              }
+            }
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 10
+    }
+  },
+  "x-type": "upsc-pods/quiz-pack@1"
+}

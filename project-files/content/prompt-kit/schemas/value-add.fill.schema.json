@@ -1,0 +1,444 @@
+{
+  "title": "Mains value-add sheet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "syllabus",
+    "data",
+    "cases",
+    "committees",
+    "examples",
+    "keywords",
+    "wayForward",
+    "quoteIds",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "syllabus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paper",
+        "line"
+      ],
+      "properties": {
+        "paper": {
+          "type": "string",
+          "enum": [
+            "prelims-gs1",
+            "prelims-csat",
+            "mains-gs1",
+            "mains-gs2",
+            "mains-gs3",
+            "mains-gs4",
+            "mains-essay",
+            "interview"
+          ]
+        },
+        "line": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 16
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 22
+            }
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "figure",
+          "useFor",
+          "source",
+          "verify"
+        ],
+        "properties": {
+          "figure": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22
+              }
+            }
+          },
+          "useFor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 12
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16
+              }
+            }
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 20
+          },
+          "verify": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 6
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "year",
+          "point",
+          "verify"
+        ],
+        "properties": {
+          "name": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 8
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 11
+              }
+            }
+          },
+          "year": {
+            "type": "integer"
+          },
+          "point": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 28
+              }
+            }
+          },
+          "verify": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 4
+    },
+    "committees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "year",
+          "point",
+          "verify"
+        ],
+        "properties": {
+          "name": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 10
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 14
+              }
+            }
+          },
+          "year": {
+            "type": "integer"
+          },
+          "point": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 28
+              }
+            }
+          },
+          "verify": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 0,
+      "maxItems": 4
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "where",
+          "what",
+          "useFor",
+          "verify"
+        ],
+        "properties": {
+          "where": {
+            "type": "string",
+            "enum": [
+              "india-state",
+              "india-district",
+              "global"
+            ]
+          },
+          "what": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 22
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              }
+            }
+          },
+          "useFor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 12
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 16
+              }
+            }
+          },
+          "verify": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 5
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 6
+          }
+        }
+      },
+      "minItems": 5,
+      "maxItems": 10,
+      "description": "Terms an examiner looks for"
+    },
+    "wayForward": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "en": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 18
+          },
+          "hi": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 25
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 5
+    },
+    "quoteIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "maxItems": 2,
+      "description": "Ids from quotes/quotes.json only. Never write a quote's words."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "verify"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 45
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "true until a person has checked it"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 6,
+      "description": "Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/value-add@1"
+}

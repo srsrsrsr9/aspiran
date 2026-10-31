@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/before-after@1",
+  "title": "Before and after",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "tone",
+    "title",
+    "mood",
+    "sfx",
+    "year",
+    "en",
+    "hi",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/before-after@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "mood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bed",
+        "sfx",
+        "motion"
+      ],
+      "properties": {
+        "bed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sfx": {
+          "type": "boolean"
+        },
+        "motion": {
+          "type": "string",
+          "enum": [
+            "gentle",
+            "crisp",
+            "none"
+          ]
+        }
+      },
+      "x-from": "config"
+    },
+    "sfx": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-from": "config"
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 1950,
+      "maximum": 2100
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "law",
+        "amendment",
+        "before",
+        "after",
+        "why"
+      ],
+      "properties": {
+        "law": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8,
+          "description": "The law or article that changed"
+        },
+        "amendment": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8,
+          "description": "What changed it"
+        },
+        "before": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36
+        },
+        "after": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "law",
+        "amendment",
+        "before",
+        "after",
+        "why"
+      ],
+      "properties": {
+        "law": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11,
+          "description": "The law or article that changed"
+        },
+        "amendment": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11,
+          "description": "What changed it"
+        },
+        "before": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 49
+        },
+        "after": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 49
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

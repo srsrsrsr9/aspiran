@@ -1,0 +1,171 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "sci-diseases-by-pathogen",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Sort the disease by what causes it",
+    "hi": "बीमारी को उसके कारक के हिसाब से छाँटें"
+  },
+  "buckets": {
+    "en": [
+      "Bacteria",
+      "Virus",
+      "Protozoa"
+    ],
+    "hi": [
+      "जीवाणु (बैक्टीरिया)",
+      "विषाणु (वायरस)",
+      "प्रोटोज़ोआ"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Tuberculosis",
+        "why": "Caused by the bacterium Mycobacterium tuberculosis; treated with a long course of antibiotics."
+      },
+      "hi": {
+        "text": "क्षय रोग (टीबी)",
+        "why": "माइकोबैक्टीरियम ट्यूबरकुलोसिस नाम के जीवाणु से होता है; इलाज एंटीबायोटिक का लंबा कोर्स है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Cholera",
+        "why": "Caused by the bacterium Vibrio cholerae, spread through contaminated water and food."
+      },
+      "hi": {
+        "text": "हैज़ा",
+        "why": "विब्रियो कॉलेरी जीवाणु से होता है, जो दूषित पानी और भोजन से फैलता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Typhoid",
+        "why": "Caused by the bacterium Salmonella typhi; the Widal test is a common check."
+      },
+      "hi": {
+        "text": "टाइफ़ाइड",
+        "why": "साल्मोनेला टाइफ़ी जीवाणु से होता है; विडाल टेस्ट इसकी आम जाँच है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Tetanus",
+        "why": "Caused by the bacterium Clostridium tetani, which enters through wounds; prevented by vaccine."
+      },
+      "hi": {
+        "text": "टिटनेस",
+        "why": "क्लॉस्ट्रिडियम टेटानी जीवाणु से होता है, जो घाव से शरीर में जाता है; टीके से बचाव होता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Polio",
+        "why": "Caused by the poliovirus; India was certified polio-free by WHO in 2014."
+      },
+      "hi": {
+        "text": "पोलियो",
+        "why": "पोलियो वायरस से होता है; WHO ने 2014 में भारत को पोलियो-मुक्त प्रमाणित किया।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Measles",
+        "why": "Caused by the measles virus, spread through the air; prevented by vaccine."
+      },
+      "hi": {
+        "text": "खसरा",
+        "why": "खसरा वायरस से होता है, जो हवा से फैलता है; टीके से बचाव होता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Dengue",
+        "why": "Caused by the dengue virus, carried by the Aedes mosquito."
+      },
+      "hi": {
+        "text": "डेंगू",
+        "why": "डेंगू वायरस से होता है, जिसे एडीज़ मच्छर फैलाता है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Malaria",
+        "why": "Caused by the protozoan Plasmodium, carried by the female Anopheles mosquito."
+      },
+      "hi": {
+        "text": "मलेरिया",
+        "why": "प्लाज़्मोडियम नाम के प्रोटोज़ोआ से होता है, जिसे मादा एनोफ़िलीज़ मच्छर फैलाती है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Kala-azar",
+        "why": "Caused by the protozoan Leishmania donovani, spread by the sandfly."
+      },
+      "hi": {
+        "text": "काला-अज़ार",
+        "why": "लीशमैनिया डोनोवानी प्रोटोज़ोआ से होता है, जिसे बालू मक्खी (sandfly) फैलाती है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Amoebic dysentery",
+        "why": "Caused by the protozoan Entamoeba histolytica, spread through contaminated water."
+      },
+      "hi": {
+        "text": "अमीबी पेचिश",
+        "why": "एंटअमीबा हिस्टोलिटिका प्रोटोज़ोआ से होती है, जो दूषित पानी से फैलता है।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "NCERT Class XII Biology, Human Health and Disease; NCERT Class VIII Science",
+    "hi": "NCERT कक्षा XII जीव विज्ञान, मानव स्वास्थ्य तथा रोग; NCERT कक्षा VIII विज्ञान"
+  },
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

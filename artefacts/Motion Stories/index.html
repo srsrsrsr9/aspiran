@@ -1,0 +1,163 @@
+<title>Motion Stories</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: video on the left like a phone on a desk, the reasoning beside it; stacks to one column on phones. */
+:root{
+  --paper:#FFF8F3; --surface:#FFFDFB; --ink:#201B17; --muted:#6B5E54; --line:#EADDD2;
+  --chai:#8D4F01; --chai-soft:#FFDCC0; --teal:#14696B; --teal-soft:#D5ECEB;
+  --display:Martel,Georgia,serif; --body:Mukta,"Segoe UI",system-ui,sans-serif; --mono:ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#18120D; --surface:#211912; --ink:#E9E1DB; --muted:#A99B90; --line:#3A2E24;
+  --chai:#FFB876; --chai-soft:#3E2B1A; --teal:#7FD0CF; --teal-soft:#173634; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#18120D; --surface:#211912; --ink:#E9E1DB; --muted:#A99B90; --line:#3A2E24;
+  --chai:#FFB876; --chai-soft:#3E2B1A; --teal:#7FD0CF; --teal-soft:#173634; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:48px}
+header{display:flex;flex-direction:column;gap:8px;max-width:64ch}
+.eyebrow{font:600 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--chai)}
+h1{font:800 clamp(34px,5vw,52px)/1.1 var(--display);margin:0;text-wrap:balance}
+h2{font:800 26px/1.2 var(--display);margin:0;text-wrap:balance}
+h3{font:700 18px/1.3 var(--body);margin:0}
+p{margin:0}
+.lede{font-size:19px;color:var(--muted)}
+.hero{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:40px;align-items:start}
+.phone{width:100%;max-width:340px;aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(32,27,23,.22);border:6px solid var(--ink)}
+.phone video{width:100%;height:100%;display:block;object-fit:cover}
+.note{font-size:14px;color:var(--muted);margin-top:10px;max-width:340px}
+.col{display:flex;flex-direction:column;gap:22px;min-width:0}
+.traits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;padding:0;margin:0;list-style:none}
+.traits li{border-top:2px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.traits b{font-weight:700}
+.traits span{color:var(--muted);font-size:15.5px}
+section{display:flex;flex-direction:column;gap:18px}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.step .n{font:700 13px var(--mono);color:var(--teal)}
+.step p{font-size:15.5px;color:var(--muted)}
+code{font:500 14px var(--mono);background:var(--teal-soft);color:var(--teal);padding:1px 6px;border-radius:6px;overflow-wrap:anywhere}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15.5px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 13px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr.pick td:first-child{font-weight:700;color:var(--chai)}
+.pill{display:inline-block;font:600 12px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px;background:var(--chai-soft);color:var(--chai);margin-left:6px}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.shot{border-left:3px solid var(--chai);padding:4px 0 4px 14px;display:flex;flex-direction:column;gap:2px}
+.shot b{font:700 15px var(--mono);color:var(--ink)}
+.shot span{font-size:15px;color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.why div{display:flex;flex-direction:column;gap:6px}
+.why p{color:var(--muted);font-size:15.5px}
+ol.next{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;max-width:72ch}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.phone{margin:0 auto}.note{margin-inline:auto}.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}.why{grid-template-columns:1fr}}
+@media (max-width:460px){.traits{grid-template-columns:1fr}.pipe{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">The Hidden Why · motion version · sample 1</div>
+    <h1>Motion Stories</h1>
+    <p class="lede">Our picture stories, turned into 40-second vertical videos with camera moves, a voice, music and sound. Made from a story file by code, so the next hundred cost the same effort as the first.</p>
+  </header>
+
+  <div class="hero">
+    <div>
+      <div class="phone"><video src="cobra-effect.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video></div>
+      <p class="note">Cobra Effect, 41.8 s, 1080×1920. Voice: your ElevenLabs "Rao garu" voice. Music: our tanpura bed, ducked under the voice. Tap play for sound.</p>
+    </div>
+    <div class="col">
+      <h2>What your seven samples share</h2>
+      <p>I could see the thumbnails and three frames from each video; YouTube blocks full playback from where I work, so the NDTV moment at 6:50 I could not watch. The motion-design six have the same grammar:</p>
+      <ul class="traits">
+        <li><b>One idea per beat</b><span>Each shot says one thing, then moves on in 3 to 6 seconds.</span></li>
+        <li><b>Flat, minimal shapes</b><span>Few colours, lots of empty space, simple icons (Asana, Francis J, SOGA).</span></li>
+        <li><b>The camera moves</b><span>Push-ins, pans and pull-backs over a still world, so nothing feels static.</span></li>
+        <li><b>Match cuts</b><span>A shape from one shot becomes the next shot (the Vox short is about exactly this).</span></li>
+        <li><b>Eased motion</b><span>Things overshoot and settle; nothing moves at constant speed.</span></li>
+        <li><b>Sound on every hit</b><span>Whoosh on cuts, tick on counts, stamp on reveals, over a quiet bed.</span></li>
+      </ul>
+      <p>The Claude motion-graphics short is the most relevant one: it was made from prompts and code alone. That is the approach below.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>Current affairs: Week in scenes (sample, week 41)</h2>
+    <div class="hero">
+      <div>
+        <div class="phone"><video src="el-nino.mp4" poster="el-nino.jpg" controls playsinline preload="metadata"></video></div>
+        <p class="note">Scene 2 of 3, El Niño, 46.7 s. Social cut with captions; the app gets a lighter cut and draws captions itself.</p>
+      </div>
+      <div class="col">
+        <p>The weekly current-affairs test becomes a short episode of scenes, one per Chai card, each ending in a quiz the app shows straight after. This sample week uses the 10 Oct cards: GI tag, El Niño and the Sendai Framework.</p>
+        <ul class="traits">
+          <li><b>Scene shape</b><span>Hook, what happened on a map or timeline, the key number, the exam link, then “Your turn”.</span></li>
+          <li><b>Maps without borders</b><span>Land only, no country lines, so we never show a boundary that differs from India's official map.</span></li>
+          <li><b>Tone rules</b><span>Serious topics play without music; tragic ones get no effects either.</span></li>
+          <li><b>Free and Plus</b><span>Scene 1 each week is free; the rest sit behind Plus in the app.</span></li>
+        </ul>
+        <p style="color:var(--muted)">The app side (player, gating, offline, Sunday reminder) is being built against these files now.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recommendation: a pipeline with a shot library, not hand-made templates</h2>
+    <p style="max-width:72ch">Writers fill a short story file. Code turns it into video. Motion quality lives in a library of reusable shots, so it improves for every story at once.</p>
+    <div class="pipe">
+      <div class="step"><span class="n">1 · Story file</span><h3>Beats and lines</h3><p>Each beat names a shot, the voice line and its data. Our Hidden Why packs convert almost one to one.</p></div>
+      <div class="step"><span class="n">2 · Voice</span><h3>Audio plus word times</h3><p>Each line is voiced and every word gets a timestamp. Motion and captions are cued to spoken words.</p></div>
+      <div class="step"><span class="n">3 · Motion engine</span><h3>HTML that can seek</h3><p>Every frame is a pure function of time, so the same code previews live in a browser and renders exactly.</p></div>
+      <div class="step"><span class="n">4 · Render</span><h3>MP4 with sound mix</h3><p>Headless Chrome captures 30 fps; ffmpeg adds voice, ducked music, effects and loudness to −16 LUFS.</p></div>
+    </div>
+    <p style="max-width:72ch;color:var(--muted)">Rendering takes about 90 seconds per video on this machine, with no paid tools. The same files work as YouTube Shorts, Reels and in-app video.</p>
+  </section>
+
+  <section>
+    <h2>Why not the other routes</h2>
+    <div class="why">
+      <div><h3>After Effects templates</h3><p>The best look, but every video needs an editor's hours. That doesn't scale to a story a day in two languages.</p></div>
+      <div><h3>Remotion (React to video)</h3><p>Same idea as ours and a good upgrade path, but it needs a paid company licence for teams above three people.</p></div>
+      <div><h3>Lottie in the app</h3><p>Good for small looping icons inside screens. It can't carry voice, captions and a 40-second edit on its own.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Voice options</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Voice</th><th>Strength</th><th>Catch</th><th>Use for</th></tr></thead>
+      <tbody>
+        <tr class="pick"><td>Sarvam Bulbul<span class="pill">default</span></td><td>Natural Indian English, Hindi, Telugu and other Indian languages; low cost per character</td><td>Needs a Sarvam API key; word timings come from an alignment step</td><td>All EN and HI production</td></tr>
+        <tr><td>Maya1 (open source)</td><td>Expressive, with emotion tags; free to run</td><td>English-focused; needs a GPU server to host</td><td>High volume later, if per-minute cost matters</td></tr>
+        <tr><td>ElevenLabs</td><td>Already connected; word timings built in</td><td>Free plan here: stock and your own voices only, no music API</td><td>This sample and quick drafts</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Shots in the library so far</h2>
+    <div class="shots">
+      <div class="shot"><b>hook</b><span>Kinetic headline, strike-through, a crowd that bursts out on a cue word.</span></div>
+      <div class="shot"><b>pin</b><span>Dot-map globe, camera zooms to a place, pin drops, fact chips slide in.</span></div>
+      <div class="shot"><b>exchange</b><span>An object draws on and travels across a camera pan to a counter; a coin flips out.</span></div>
+      <div class="shot"><b>run</b><span>Three-layer parallax city with characters running and a label that tracks them.</span></div>
+      <div class="shot"><b>multiply</b><span>A count that doubles while the camera pulls back to reveal the whole grid.</span></div>
+      <div class="shot"><b>named</b><span>Circle match-cut into colour, the idea's name stamps in, the takeaway builds line by line.</span></div>
+      <div class="shot"><b>outro</b><span>Where to use it in the exam, then the brand card.</span></div>
+    </div>
+    <p style="max-width:72ch;color:var(--muted)">Every shot also gets a whip-pan entry with motion blur, story-style progress bars and word-by-word captions for sound-off viewing.</p>
+  </section>
+
+  <section>
+    <h2>Next steps</h2>
+    <ol class="next">
+      <li>Add a Sarvam API key and an alignment step, then re-voice this sample in Indian English and Hindi.</li>
+      <li>Grow the library to about 15 shots (timeline, versus split, map route, chart build, quote card) so all six Hidden Why stories render without new code.</li>
+      <li>Commission the illustration house style and a licensed music bed; the drawings and bed here are stand-ins.</li>
+      <li>Add an editor check before publishing: facts, Hindi and a watch-through, same as the picture stories.</li>
+    </ol>
+  </section>
+</div>

@@ -1,0 +1,176 @@
+{
+  "title": "Trap spotter (MCQ with named traps)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "questions",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "answerIndex",
+          "traps",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "answerIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "traps": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "none",
+                "extreme-word",
+                "half-true",
+                "right-fact-wrong-reason",
+                "recent-news-bias",
+                "sounds-familiar"
+              ]
+            },
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "One per option. 'none' for the right answer; the trap each wrong option sets otherwise."
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "why"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 10
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 32,
+                "description": "Names the trap in plain words and says why the right answer is right"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "options",
+              "why"
+            ],
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              },
+              "options": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "x-maxWords": 14
+                },
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 44,
+                "description": "Names the trap in plain words and says why the right answer is right"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 5
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/trap-spotter@1"
+}

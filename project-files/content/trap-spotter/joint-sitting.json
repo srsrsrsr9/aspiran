@@ -1,0 +1,77 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative"
+    ]
+  },
+  "id": "article-108-joint-sitting",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Joint sitting: spot the traps",
+    "hi": "संयुक्त बैठक: कौन-से जाल पहचानें"
+  },
+  "questions": [
+    {
+      "answerIndex": 2,
+      "traps": [
+        "extreme-word",
+        "sounds-familiar",
+        "none",
+        "half-true"
+      ],
+      "en": {
+        "question": "Which statement about a joint sitting of Parliament is correct?",
+        "options": [
+          "A joint sitting follows every bill the Rajya Sabha rejects.",
+          "A rejected Money Bill goes to a joint sitting.",
+          "The Lok Sabha Speaker presides over a joint sitting.",
+          "The Deputy Chairman of Rajya Sabha always presides over it."
+        ],
+        "why": "The trap is sounds-familiar: a rejected Money Bill feels like a joint-sitting case, but the Lok Sabha prevails on it. The Speaker presides over a joint sitting (Article 118(4))."
+      },
+      "hi": {
+        "question": "संसद की संयुक्त बैठक के बारे में कौन-सा कथन सही है?",
+        "options": [
+          "राज्यसभा जो भी विधेयक रद्द करे, उस पर संयुक्त बैठक होती है",
+          "रद्द हुए धन विधेयक पर संयुक्त बैठक बुलाई जाती है",
+          "लोकसभा के अध्यक्ष संयुक्त बैठक की अध्यक्षता करते हैं",
+          "राज्यसभा के उपसभापति हमेशा संयुक्त बैठक की अध्यक्षता करते हैं"
+        ],
+        "why": "यहाँ जाल है जाना-पहचाना लगना (sounds-familiar)। आप सोचेंगे कि रद्द हुए धन विधेयक पर भी संयुक्त बैठक होगी, पर ऐसा नहीं है, वहाँ लोकसभा की बात ही मानी जाती है। संयुक्त बैठक की अध्यक्षता लोकसभा के अध्यक्ष करते हैं (अनुच्छेद 118(4))।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/trap-spotter/",
+    "createdOn": "2026-10-11"
+  }
+}

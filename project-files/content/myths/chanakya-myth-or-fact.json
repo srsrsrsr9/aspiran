@@ -1,0 +1,104 @@
+{
+  "verdictLabels": {
+    "en": {
+      "MYTH": "MYTH",
+      "FACT": "FACT",
+      "HALF": "HALF-TRUE"
+    },
+    "hi": {
+      "MYTH": "झूठ",
+      "FACT": "सच",
+      "HALF": "आधा सच"
+    }
+  },
+  "rules": [
+    "User guesses before the stamp shows",
+    "Never mock the person who forwarded the claim"
+  ],
+  "id": "forward-buster-chanakya-myths",
+  "claims": [
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "Every 'Chanakya quote' going around online is from his Arthashastra.",
+        "correction": "No. Many lines circulated as 'Chanakya quotes' do not appear in the Arthashastra, and many cannot be traced to either text. The Chanakya Niti is a different collection of moral sayings."
+      },
+      "hi": {
+        "claim": "इंटरनेट पर घूमने वाला हर 'चाणक्य कथन' उनके अर्थशास्त्र से है।",
+        "correction": "नहीं। इंटरनेट पर 'चाणक्य के कथन' के रूप में घूमने वाली कई पंक्तियाँ अर्थशास्त्र में नहीं मिलतीं, और कई किसी भी ग्रंथ में नहीं खोजी जा सकतीं। चाणक्य नीति नैतिक सूक्तियों का एक अलग संग्रह है।"
+      }
+    },
+    {
+      "verdict": "HALF",
+      "en": {
+        "claim": "Kautilya wrote the whole Arthashastra in one go, as a single book.",
+        "correction": "Half right. The Arthashastra is traditionally attributed to Kautilya. But scholars debate whether one person wrote it at one time; many think it was compiled and revised over a period."
+      },
+      "hi": {
+        "claim": "कौटिल्य ने पूरा अर्थशास्त्र एक ही समय में, एक ही पुस्तक के रूप में लिखा।",
+        "correction": "आधा सही है। अर्थशास्त्र परंपरा से कौटिल्य का माना जाता है। पर विद्वान बहस करते हैं कि क्या एक ही व्यक्ति ने इसे एक ही समय में लिखा। कई मानते हैं कि इसे समय के साथ संकलित और संशोधित किया गया।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "R. Shamasastry published an English translation of the Arthashastra in 1915.",
+        "correction": "Right. A manuscript was found in 1905, and R. Shamasastry published the English translation in 1915. Before that, the text was known mainly through references in other works."
+      },
+      "hi": {
+        "claim": "आर. शमशास्त्री ने 1915 में अर्थशास्त्र का अंग्रेज़ी अनुवाद प्रकाशित किया।",
+        "correction": "सही है। एक पांडुलिपि 1905 में मिली, और आर. शमशास्त्री ने 1915 में अंग्रेज़ी अनुवाद प्रकाशित किया। उससे पहले यह पाठ मुख्यतः दूसरी रचनाओं के संदर्भों से जाना जाता था।"
+      }
+    },
+    {
+      "verdict": "MYTH",
+      "en": {
+        "claim": "The Arthashastra is the same book as the Chanakya Niti.",
+        "correction": "No. The Chanakya Niti is a collection of moral sayings. The Arthashastra is a treatise on statecraft, economics and administration. They are different works."
+      },
+      "hi": {
+        "claim": "अर्थशास्त्र और चाणक्य नीति एक ही पुस्तक हैं।",
+        "correction": "नहीं। चाणक्य नीति नैतिक सूक्तियों का संग्रह है। अर्थशास्त्र राज्यकला, अर्थशास्त्र और प्रशासन पर एक ग्रंथ है। ये दो अलग रचनाएँ हैं।"
+      }
+    },
+    {
+      "verdict": "FACT",
+      "en": {
+        "claim": "The Arthashastra says a king's welfare lies in the welfare of his subjects.",
+        "correction": "Right. The Arthashastra describes the king's welfare as lying in the welfare of his subjects (Book 1, Chapter 19)."
+      },
+      "hi": {
+        "claim": "अर्थशास्त्र कहता है कि राजा का कल्याण उसकी प्रजा के कल्याण में है।",
+        "correction": "सही है। अर्थशास्त्र में पुस्तक 1, अध्याय 19 में वर्णन है कि राजा का कल्याण उसकी प्रजा के कल्याण में है।"
+      }
+    }
+  ],
+  "source": {
+    "en": "Arthashastra, R.P. Kangle's edition (editor to check)",
+    "hi": "अर्थशास्त्र, आर.पी. कांगले का संस्करण (संपादक जाँचें)"
+  },
+  "schema": "upsc-pods/myth-card@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/myth-card/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-code"
+    ]
+  }
+}

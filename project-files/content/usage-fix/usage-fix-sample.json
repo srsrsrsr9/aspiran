@@ -1,0 +1,95 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "language": "en",
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-qualifying"
+    ],
+    "formats": [
+      "qual-usage"
+    ]
+  },
+  "id": "english-usage-fix-paper-b",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Common English usage errors to fix",
+    "hi": "अंग्रेज़ी के आम व्याकरण-दोष सुधारें"
+  },
+  "items": [
+    {
+      "wrong": "One of my friends are preparing for the examination.",
+      "right": "One of my friends is preparing for the examination.",
+      "rule": {
+        "en": "The subject \"one\" is singular, so the verb is \"is\".",
+        "hi": "विषय 'one' एकवचन है, इसलिए क्रिया 'is' होगी।"
+      }
+    },
+    {
+      "wrong": "He is senior than me in service.",
+      "right": "He is senior to me in service.",
+      "rule": {
+        "en": "'Senior', 'junior', 'superior' and 'inferior' take 'to', not 'than'.",
+        "hi": "Senior, junior, superior, inferior के साथ 'to' आता है, 'than' नहीं।"
+      }
+    },
+    {
+      "wrong": "Each of the students have submitted the form.",
+      "right": "Each of the students has submitted the form.",
+      "rule": {
+        "en": "'Each' takes a singular verb.",
+        "hi": "'Each' के साथ एकवचन क्रिया आती है, जैसे 'has'।"
+      }
+    },
+    {
+      "wrong": "I am knowing the answer.",
+      "right": "I know the answer.",
+      "rule": {
+        "en": "Verbs of knowing and believing are not usually used in the continuous form.",
+        "hi": "जानने और मानने वाली क्रियाएँ सामान्यतः continuous रूप में नहीं आतीं।"
+      }
+    },
+    {
+      "wrong": "Despite of the rain, the meeting was held.",
+      "right": "Despite the rain, the meeting was held.",
+      "rule": {
+        "en": "'Despite' is not followed by 'of'; 'in spite of' is.",
+        "hi": "'Despite' के बाद 'of' नहीं आता; 'in spite of' आता है।"
+      }
+    },
+    {
+      "wrong": "We discussed about the new policy.",
+      "right": "We discussed the new policy.",
+      "rule": {
+        "en": "'Discuss' takes a direct object without 'about'.",
+        "hi": "'Discuss' के बाद सीधे कर्म आता है, 'about' नहीं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/usage-fix@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/usage-fix/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,14 @@
+# Copy to .dev.vars and type your own values. Never commit .dev.vars or paste it in chat.
+# Long random strings work best, for example from: node -e "console.log(crypto.randomUUID())"
+EDITOR_TOKEN=
+MOD_TOKEN=
+# Cloud Chotu until launch, routed by language (src/ai.ts CHAT_ROUTES). Leave all three empty to keep it off;
+# a missing key just skips that provider.
+# English: NVIDIA, then Groq. Hindi and Telugu: Google first.
+GROQ_API_KEY=
+# From aistudio.google.com (API keys).
+GOOGLE_AI_API_KEY=
+# From build.nvidia.com (Get API key).
+NVIDIA_API_KEY=
+# Dev only: where `npm run models` serves Chotu's model files. Leave empty to use R2.
+MODEL_FILES_URL=http://127.0.0.1:8788

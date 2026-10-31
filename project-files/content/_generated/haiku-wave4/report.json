@@ -1,0 +1,159 @@
+{
+  "run": "2026-10-11",
+  "generator": "Claude Haiku via the template prompts (agent test run, same prompts as tools/generate.mjs)",
+  "jobs": "jobs/jobs.wave4.jsonl",
+  "firstTryValid": 13,
+  "repaired": {
+    "count": 1,
+    "note": "Job 8 (data-interpretation): the table's unit line was 7 words against a limit of 6; shortened by hand. Job 14 (translate-it) was flagged for Hindi words inside the English usage notes; the rule now allows that in translate-it notes, so it was not a writer error. Worked numbers in questions that carry an answerExpr are no longer grounding-checked against the source, because the validator works the arithmetic out itself."
+  },
+  "checkedByHand": "CSAT numeracy answers (25%, 68, 40 km/h, 300 rupees), the four reasoning puzzles, the census figures in the data table, the coded options for Fundamental Duties, the précis length (93 words for a 227-word passage, about 41%; the paper asks for about a third) and the six translations were read by Claude. A native Hindi editor still needs to check every Hindi string.",
+  "results": [
+    {
+      "job": 1,
+      "type": "statement-code",
+      "title": "Fundamental Duties: judge the statements",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "statement-code/statement-code-sample.json"
+    },
+    {
+      "job": 2,
+      "type": "pairs-count",
+      "title": "Parks and tiger reserves: which pairs match?",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "pairs-count/pairs-count-sample.json"
+    },
+    {
+      "job": 3,
+      "type": "three-statements",
+      "title": "Rain on the Coromandel coast: which reason fits?",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "three-statements/three-statements-sample.json"
+    },
+    {
+      "job": 4,
+      "type": "list-match",
+      "title": "Peninsular rivers: where each one rises",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "list-match/list-match-sample.json"
+    },
+    {
+      "job": 5,
+      "type": "csat-passage",
+      "title": "Groundwater: one resource, a common decision",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "csat-passage/csat-passage-sample.json"
+    },
+    {
+      "job": 6,
+      "type": "csat-quant",
+      "title": "Percentages and averages, step by step",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "csat-quant/csat-quant-sample.json"
+    },
+    {
+      "job": 7,
+      "type": "csat-reasoning",
+      "title": "Direction, relations and syllogisms",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "csat-reasoning/csat-reasoning-sample.json"
+    },
+    {
+      "job": 8,
+      "type": "data-interpretation",
+      "title": "Five states: area and population",
+      "errors": [],
+      "warnings": [],
+      "sample": "data-interpretation/data-interpretation-sample.json"
+    },
+    {
+      "job": 9,
+      "type": "answer-diagram",
+      "title": "How a Money Bill passes Parliament",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "answer-diagram/answer-diagram-sample.json"
+    },
+    {
+      "job": 10,
+      "type": "quote-meaning",
+      "title": "What Kautilya's quote means today",
+      "errors": [],
+      "warnings": [],
+      "sample": "quote-meaning/quote-meaning-sample.json"
+    },
+    {
+      "job": 11,
+      "type": "case-study",
+      "title": "Substandard school building: an ethical choice",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "case-study/case-study-sample.json"
+    },
+    {
+      "job": 12,
+      "type": "essay-planner",
+      "title": "Failure is the best teacher: an essay plan",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "essay-planner/essay-planner-sample.json"
+    },
+    {
+      "job": 13,
+      "type": "precis",
+      "title": "Libraries as shared workplaces for aspirants",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "precis/precis-sample.json"
+    },
+    {
+      "job": 14,
+      "type": "translate-it",
+      "title": "Translate these six sentences into Hindi",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "translate-it/translate-it-sample.json"
+    },
+    {
+      "job": 15,
+      "type": "usage-fix",
+      "title": "Common English usage errors to fix",
+      "errors": [],
+      "warnings": [
+        "$.sources: the editor needs to name the source"
+      ],
+      "sample": "usage-fix/usage-fix-sample.json"
+    }
+  ]
+}

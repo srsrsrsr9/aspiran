@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/assertion-reason@1",
+  "title": "Assertion and reason",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "tone",
+    "title",
+    "mood",
+    "sfx",
+    "items",
+    "optionText",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/assertion-reason@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "mood": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bed",
+        "sfx",
+        "motion"
+      ],
+      "properties": {
+        "bed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sfx": {
+          "type": "boolean"
+        },
+        "motion": {
+          "type": "string",
+          "enum": [
+            "gentle",
+            "crisp",
+            "none"
+          ]
+        }
+      },
+      "x-from": "config"
+    },
+    "sfx": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-from": "config"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "description": "a: both true, R explains A. b: both true, R does not explain A. c: A true, R false. d: A false, R true."
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assertion",
+              "reason",
+              "why"
+            ],
+            "properties": {
+              "assertion": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 30
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 36,
+                "description": "Why the key is right"
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assertion",
+              "reason",
+              "why"
+            ],
+            "properties": {
+              "assertion": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 41
+              },
+              "why": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 49,
+                "description": "Why the key is right"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 5
+    },
+    "optionText": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

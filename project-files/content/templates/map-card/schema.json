@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/map-card@1",
+  "title": "Map card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "base",
+    "canvas",
+    "note",
+    "lead",
+    "pins",
+    "find",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/map-card@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "base": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "canvas": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "note": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "lead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41
+        }
+      }
+    },
+    "pins": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "x",
+          "y",
+          "en",
+          "hi"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "x-enumFromConfig": "anchors",
+            "description": "Pick from the anchors in the settings"
+          },
+          "x": {
+            "type": "number",
+            "x-from": "config"
+          },
+          "y": {
+            "type": "number",
+            "x-from": "config"
+          },
+          "en": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "fact"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 3
+              },
+              "fact": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 20
+              }
+            }
+          },
+          "hi": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "fact"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 5
+              },
+              "fact": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 27
+              }
+            }
+          }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 6
+    },
+    "find": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompt",
+        "hint",
+        "right"
+      ],
+      "properties": {
+        "prompt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 8
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 11
+            }
+          }
+        },
+        "targetAnchor": {
+          "type": "string",
+          "x-enumFromConfig": "anchors",
+          "description": "Which anchor the member must find"
+        },
+        "target": {
+          "type": "object",
+          "x-from": "config"
+        },
+        "hint": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            }
+          }
+        },
+        "right": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "en",
+            "hi"
+          ],
+          "properties": {
+            "en": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "hi": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            }
+          }
+        }
+      },
+      "x-fillRequired": [
+        "prompt",
+        "targetAnchor",
+        "hint",
+        "right"
+      ]
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

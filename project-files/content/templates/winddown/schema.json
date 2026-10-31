@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/winddown@1",
+  "title": "Close the day (wind-down)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "seconds",
+    "theme",
+    "audio",
+    "text",
+    "motion",
+    "rules"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/winddown@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "seconds": {
+      "type": "integer",
+      "x-from": "config"
+    },
+    "theme": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "audio": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "cue",
+            "button",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 14
+            },
+            "cue": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 12
+            },
+            "button": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 3
+            },
+            "end": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 6
+            }
+          }
+        },
+        "hi": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "cue",
+            "button",
+            "end"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 19
+            },
+            "cue": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 17
+            },
+            "button": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 5
+            },
+            "end": {
+              "type": "string",
+              "minLength": 1,
+              "x-maxWords": 9
+            }
+          }
+        }
+      }
+    },
+    "motion": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "rules": {
+      "type": "array",
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

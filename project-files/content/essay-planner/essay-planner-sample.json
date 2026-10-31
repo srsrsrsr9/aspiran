@@ -1,0 +1,105 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-essay",
+      "mains-qualifying"
+    ],
+    "formats": [
+      "mains-essay",
+      "qual-essay"
+    ]
+  },
+  "id": "failure-is-the-best-teacher",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Failure is the best teacher: an essay plan",
+    "hi": "असफलता सर्वश्रेष्ठ शिक्षक है: निबंध की योजना"
+  },
+  "kind": "philosophical",
+  "en": {
+    "theme": "Failure is the best teacher.",
+    "reading": "What the topic really asks: when and how failure teaches. The trap: reading failure only as exam failure.",
+    "dimensions": [
+      {
+        "lens": "Personal",
+        "point": "People often learn more from a mistake they reflect on than from an easy success."
+      },
+      {
+        "lens": "Science and technology",
+        "point": "ISRO's Chandrayaan-2 lander crash-landed in September 2019; its lessons shaped Chandrayaan-3, which landed near the Moon's south pole on 23 August 2023."
+      },
+      {
+        "lens": "Economic",
+        "point": "Many start-ups fail; founders and investors use those failures to build better ones."
+      },
+      {
+        "lens": "Policy and governance",
+        "point": "Evaluating schemes that did not work helps design better ones."
+      },
+      {
+        "lens": "Ethical",
+        "point": "Owning a failure honestly builds trust; hiding it repeats it."
+      }
+    ],
+    "opening": "In September 2019, ISRO's Chandrayaan-2 lander crash-landed. The lessons from that failure shaped Chandrayaan-3, which landed near the Moon's south pole on 23 August 2023.",
+    "counter": "Failure teaches only if it is examined; repeated failure without reflection can crush confidence. Some failures, like a collapsed bridge, are too costly to learn from and must be prevented.",
+    "close": "Failure teaches when we examine it honestly. Owning a mistake builds trust; hiding it repeats it."
+  },
+  "hi": {
+    "theme": "असफलता सबसे अच्छी शिक्षक है।",
+    "reading": "असल में यह विषय पूछता है कि असफलता कब और कैसे सिखाती है। जाल यह है कि असफलता को केवल परीक्षा में असफल होने तक सीमित कर दिया जाए।",
+    "dimensions": [
+      {
+        "lens": "व्यक्तिगत",
+        "point": "लोग अक्सर आसान सफलता से नहीं, बल्कि उस गलती से ज़्यादा सीखते हैं जिस पर वे सोच-विचार करते हैं।"
+      },
+      {
+        "lens": "विज्ञान और प्रौद्योगिकी",
+        "point": "ISRO के चंद्रयान-2 लैंडर की सितंबर 2019 में क्रैश-लैंडिंग हुई; उससे मिले सबक ने चंद्रयान-3 को आकार दिया, जो 23 अगस्त 2023 को चंद्रमा के दक्षिणी ध्रुव के पास उतरा।"
+      },
+      {
+        "lens": "आर्थिक",
+        "point": "कई स्टार्टअप असफल होते हैं; संस्थापक और निवेशक इन असफलताओं से बेहतर कंपनियाँ बनाते हैं।"
+      },
+      {
+        "lens": "नीति और शासन",
+        "point": "जो योजनाएँ काम नहीं कर पाईं, उनका मूल्यांकन बेहतर योजनाएँ बनाने में मदद करता है।"
+      },
+      {
+        "lens": "नैतिक",
+        "point": "असफलता को ईमानदारी से स्वीकार करना भरोसा बनाता है; उसे छिपाना उसे दोहराता है।"
+      }
+    ],
+    "opening": "सितंबर 2019 में ISRO के चंद्रयान-2 लैंडर की क्रैश-लैंडिंग हुई। उस असफलता से मिले सबक ने चंद्रयान-3 को आकार दिया, जो 23 अगस्त 2023 को चंद्रमा के दक्षिणी ध्रुव के पास उतरा।",
+    "counter": "असफलता तभी सिखाती है जब उसकी जाँच हो; बिना सोच-विचार के बार-बार असफल होना आत्मविश्वास तोड़ सकता है। कुछ असफलताएँ, जैसे ढहा हुआ पुल, इतनी महँगी होती हैं कि उनसे 'सीखने' के बजाय उन्हें रोका जाना ज़रूरी है।",
+    "close": "असफलता तभी सिखाती है जब हम उसकी ईमानदारी से जाँच करें। गलती स्वीकार करना भरोसा बनाता है, और उसे छिपाना उसे दोहराता है।"
+  },
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/essay-planner@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/essay-planner/",
+    "createdOn": "2026-10-10"
+  }
+}

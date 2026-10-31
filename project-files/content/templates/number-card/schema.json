@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/number-card@1",
+  "title": "Number sense",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "value",
+    "unit",
+    "lead",
+    "chart",
+    "whatItMeans",
+    "sources",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/number-card@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "value": {
+      "type": "number",
+      "description": "The hero number, exactly as in the source"
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 5
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 7
+        }
+      }
+    },
+    "lead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 14
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 19
+        }
+      }
+    },
+    "chart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "axisStart",
+        "axisEnd",
+        "reference",
+        "animateMs",
+        "bars"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "bars"
+          ],
+          "x-from": "config"
+        },
+        "axisStart": {
+          "type": "number",
+          "x-from": "config"
+        },
+        "axisEnd": {
+          "type": "number",
+          "x-from": "config"
+        },
+        "reference": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "A meaningful line such as 1000 for parity, or null"
+        },
+        "animateMs": {
+          "type": "integer",
+          "x-from": "config"
+        },
+        "bars": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi",
+              "v"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 3
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 5
+              },
+              "v": {
+                "type": "number"
+              },
+              "hero": {
+                "type": "boolean"
+              }
+            }
+          },
+          "minItems": 2,
+          "maxItems": 5
+        }
+      }
+    },
+    "whatItMeans": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 25
+          },
+          "minItems": 1,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 34
+          },
+          "minItems": 1,
+          "maxItems": 3
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "approved-en",
+            "approved-hi",
+            "approved"
+          ]
+        },
+        "checkedBy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checkedOn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "x-from": "config"
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  }
+}

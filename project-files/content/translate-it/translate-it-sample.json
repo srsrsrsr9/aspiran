@@ -1,0 +1,95 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "direction": "en-to-hi",
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-qualifying"
+    ],
+    "formats": [
+      "qual-translation"
+    ]
+  },
+  "id": "paper-a-translation-practice-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Translate these six sentences into Hindi",
+    "hi": "छह वाक्य: अंग्रेज़ी से हिंदी अनुवाद"
+  },
+  "items": [
+    {
+      "en": "The Constitution of India came into force on 26 January 1950.",
+      "hi": "भारत का संविधान 26 जनवरी 1950 को लागू हुआ।",
+      "note": {
+        "en": "'Came into force' means took effect; use लागू हुआ, the usual form.",
+        "hi": "'लागू होना' का अर्थ है प्रभावी होना; यही सामान्य प्रयोग है।"
+      }
+    },
+    {
+      "en": "Every citizen has a duty to protect the natural environment, including forests, lakes, rivers and wildlife.",
+      "hi": "हर नागरिक का कर्तव्य है कि वह वनों, झीलों, नदियों और वन्यजीवों सहित प्राकृतिक पर्यावरण की रक्षा करे।",
+      "note": {
+        "en": "'Including' is a list of examples, not the whole; 'सहित' keeps that sense.",
+        "hi": "'सहित' का प्रयोग बताता है कि सूची उदाहरण है, पूरी सूची नहीं।"
+      }
+    },
+    {
+      "en": "The Election Commission conducts elections to Parliament and to the state legislatures.",
+      "hi": "निर्वाचन आयोग संसद और राज्य विधानमंडलों के चुनाव कराता है।",
+      "note": {
+        "en": "'Conducts' means organises the polls; use कराता है for it.",
+        "hi": "'कराता है' आयोजन और संचालन दोनों का भाव देता है।"
+      }
+    },
+    {
+      "en": "A Money Bill can be introduced only in the Lok Sabha.",
+      "hi": "धन विधेयक केवल लोकसभा में पेश किया जा सकता है।",
+      "note": {
+        "en": "'Only' limits where it starts; place केवल before लोकसभा में.",
+        "hi": "केवल को 'लोकसभा में' से पहले रखें, ताकि सीमा साफ़ रहे।"
+      }
+    },
+    {
+      "en": "Clean drinking water is still a challenge in many villages, especially in summer.",
+      "hi": "कई गाँवों में, खासकर गर्मियों में, स्वच्छ पेयजल आज भी एक चुनौती है।",
+      "note": {
+        "en": "'Still' and 'especially' carry the sense; आज भी and खासकर keep them.",
+        "hi": "'आज भी' और 'खासकर' दोनों भाव बनाए रखते हैं।"
+      }
+    },
+    {
+      "en": "Panchayats help people take part in decisions about their own village.",
+      "hi": "पंचायतें लोगों को अपने गाँव से जुड़े निर्णयों में भागीदारी करने में मदद करती हैं।",
+      "note": {
+        "en": "'Take part in' becomes भागीदारी करना; 'their own village' stays as अपने गाँव.",
+        "hi": "'भागीदारी करना' take part का सही अनुवाद है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/translate-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/translate-it/",
+    "createdOn": "2026-10-10"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "id": "bucket-sort-rights-or-principles",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Sort into buckets: rights or principles?",
+    "hi": "किस खाने में जाएगा? अधिकार या सिद्धांत"
+  },
+  "buckets": {
+    "en": [
+      "Fundamental Rights",
+      "Directive Principles"
+    ],
+    "hi": [
+      "मौलिक अधिकार",
+      "राज्य के नीति निदेशक तत्व"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Equality before the law (Article 14)",
+        "why": "Part III Fundamental Right. A person can go to court to enforce it."
+      },
+      "hi": {
+        "text": "कानून के समक्ष समानता (अनुच्छेद 14)",
+        "why": "भाग III का मौलिक अधिकार। व्यक्ति इसे लागू कराने के लिए अदालत जा सकता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Uniform civil code for citizens (Article 44)",
+        "why": "Part IV Directive Principle. Courts cannot enforce it, though it is fundamental in governance."
+      },
+      "hi": {
+        "text": "नागरिकों के लिए समान नागरिक संहिता (अनुच्छेद 44)",
+        "why": "भाग IV का नीति निदेशक तत्व। अदालतें इसे लागू नहीं करा सकतीं, फिर भी यह शासन में मूलभूत है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Protection of six freedoms, including speech (Article 19)",
+        "why": "Part III Fundamental Right, protecting six freedoms including speech and expression."
+      },
+      "hi": {
+        "text": "अभिव्यक्ति सहित छह स्वतंत्रताओं की रक्षा (अनुच्छेद 19)",
+        "why": "भाग III का मौलिक अधिकार, जो अभिव्यक्ति सहित छह स्वतंत्रताओं की रक्षा करता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Organising village panchayats (Article 40)",
+        "why": "Part IV Directive Principle. Courts cannot enforce it."
+      },
+      "hi": {
+        "text": "ग्राम पंचायतों का संगठन (अनुच्छेद 40)",
+        "why": "भाग IV का नीति निदेशक तत्व। अदालतें इसे लागू नहीं करा सकतीं।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Right to constitutional remedies (Article 32)",
+        "why": "Part III Fundamental Right. It lets a person move the Supreme Court directly."
+      },
+      "hi": {
+        "text": "संवैधानिक उपचारों का अधिकार (अनुच्छेद 32)",
+        "why": "भाग III का मौलिक अधिकार। इससे व्यक्ति सीधे सर्वोच्च न्यायालय जा सकता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Equal pay for equal work (Article 39(d))",
+        "why": "Part IV Directive Principle. Not justiciable, so courts cannot enforce equal pay."
+      },
+      "hi": {
+        "text": "समान कार्य के लिए समान वेतन (अनुच्छेद 39(d))",
+        "why": "भाग IV का नीति निदेशक तत्व। यह गैर-न्यायोचित है, इसलिए अदालतें समान वेतन लागू नहीं करा सकतीं।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Abolition of untouchability (Article 17)",
+        "why": "Part III Fundamental Right, enforceable in court."
+      },
+      "hi": {
+        "text": "अस्पृश्यता का उन्मूलन (अनुच्छेद 17)",
+        "why": "भाग III का मौलिक अधिकार, जो अदालत में लागू कराया जा सकता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Separating judiciary from executive (Article 50)",
+        "why": "Part IV Directive Principle. Not justiciable; courts cannot enforce it."
+      },
+      "hi": {
+        "text": "न्यायपालिका को कार्यपालिका से अलग करना (अनुच्छेद 50)",
+        "why": "भाग IV का नीति निदेशक तत्व। यह गैर-न्यायोचित है, अदालतें इसे लागू नहीं करा सकतीं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/bucket-sort/",
+    "createdOn": "2026-10-10"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  }
+}

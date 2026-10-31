@@ -1,0 +1,36 @@
+{
+  "schemaId": "upsc-pods/fact-or-opinion@1",
+  "knobs": {},
+  "defaults": {
+    "mood": {
+      "bed": null,
+      "sfx": true,
+      "motion": "crisp"
+    },
+    "sfx": {
+      "fly": "sfx/whoosh",
+      "land": "sfx/snap",
+      "wrong": "sfx/nudge"
+    },
+    "tags": {
+      "stage": [
+        "prelims",
+        "mains"
+      ],
+      "papers": [
+        "prelims-csat",
+        "mains-gs2"
+      ],
+      "formats": [
+        "csat-rc",
+        "mains-answer"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  }
+}

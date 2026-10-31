@@ -1,0 +1,124 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-pairs"
+    ]
+  },
+  "id": "national-parks-tiger-reserves-pairs",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Parks and tiger reserves: which pairs match?",
+    "hi": "राष्ट्रीय उद्यान और बाघ अभयारण्य: कौन से जोड़े सही हैं?"
+  },
+  "heads": {
+    "en": {
+      "left": "Park or reserve",
+      "right": "State"
+    },
+    "hi": {
+      "left": "राष्ट्रीय उद्यान / अभयारण्य",
+      "right": "राज्य"
+    }
+  },
+  "pairs": [
+    {
+      "correct": true,
+      "en": {
+        "left": "Kaziranga National Park",
+        "right": "Assam",
+        "fix": "Kaziranga National Park is in Assam, as the source states."
+      },
+      "hi": {
+        "left": "काजीरंगा राष्ट्रीय उद्यान",
+        "right": "असम",
+        "fix": "काजीरंगा राष्ट्रीय उद्यान असम में है, जैसा स्रोत बताता है।"
+      }
+    },
+    {
+      "correct": true,
+      "en": {
+        "left": "Periyar Tiger Reserve",
+        "right": "Kerala",
+        "fix": "Periyar Tiger Reserve is in Kerala, as the source states."
+      },
+      "hi": {
+        "left": "पेरियार बाघ अभयारण्य",
+        "right": "केरल",
+        "fix": "पेरियार बाघ अभयारण्य केरल में है, जैसा स्रोत बताता है।"
+      }
+    },
+    {
+      "correct": false,
+      "en": {
+        "left": "Bandipur National Park",
+        "right": "Tamil Nadu",
+        "fix": "Bandipur is in Karnataka. Mudumalai, which adjoins it, is in Tamil Nadu."
+      },
+      "hi": {
+        "left": "बांदीपुर राष्ट्रीय उद्यान",
+        "right": "तमिलनाडु",
+        "fix": "बांदीपुर कर्नाटक में है। तमिलनाडु में मुदुमलाई है, जो उससे सटा है।"
+      }
+    },
+    {
+      "correct": false,
+      "en": {
+        "left": "Kanha National Park",
+        "right": "Maharashtra",
+        "fix": "Kanha is in Madhya Pradesh. Tadoba, in Maharashtra, is the one often confused with it."
+      },
+      "hi": {
+        "left": "कान्हा राष्ट्रीय उद्यान",
+        "right": "महाराष्ट्र",
+        "fix": "कान्हा मध्य प्रदेश में है। महाराष्ट्र का ताडोबा अक्सर उसके साथ भ्रमित होता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/pairs-count@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "options": {
+    "en": [
+      "Only one pair",
+      "Only two pairs",
+      "Only three pairs",
+      "All four pairs"
+    ],
+    "hi": [
+      "केवल एक युग्म",
+      "केवल दो युग्म",
+      "केवल तीन युग्म",
+      "सभी चार युग्म"
+    ]
+  },
+  "answer": 1,
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/pairs-count/",
+    "createdOn": "2026-10-10"
+  }
+}

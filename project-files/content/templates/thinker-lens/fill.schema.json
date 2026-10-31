@@ -1,0 +1,190 @@
+{
+  "title": "Thinker lens (GS4 and Essay)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "quoteId",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "quoteId": {
+      "type": "string",
+      "x-enumFromConfig": "quoteIds",
+      "description": "Id of the thinker's line in the quote bank. The app inserts the exact words, the citation and the original script; never write the quote yourself.",
+      "enum": [
+        "kautilya-arthashastra-1-19",
+        "tirukkural-391",
+        "dhammapada-1",
+        "basavanna-kayaka",
+        "patanjali-yoga-sutra-1-12",
+        "gita-2-47",
+        "tagore-gitanjali-35",
+        "vivekananda-arise-awake"
+      ]
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "thinker",
+        "topic",
+        "meaning",
+        "useIt",
+        "introLine",
+        "syllabus"
+      ],
+      "properties": {
+        "thinker": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8,
+          "description": "Who: name and one identifying phrase, from the source"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8,
+          "description": "The GS4 or Essay theme this line serves"
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30,
+          "description": "What the line means, in plain words"
+        },
+        "useIt": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 32,
+          "description": "How to use it in an answer, with the kind of question it fits"
+        },
+        "introLine": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 28,
+          "description": "A sample opening or closing sentence for an answer that uses the idea. Credit the thinker; do not repeat the quote"
+        },
+        "syllabus": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 20,
+          "description": "Where it sits in the syllabus"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "thinker",
+        "topic",
+        "meaning",
+        "useIt",
+        "introLine",
+        "syllabus"
+      ],
+      "properties": {
+        "thinker": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11,
+          "description": "Who: name and one identifying phrase, from the source"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11,
+          "description": "The GS4 or Essay theme this line serves"
+        },
+        "meaning": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41,
+          "description": "What the line means, in plain words"
+        },
+        "useIt": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 44,
+          "description": "How to use it in an answer, with the kind of question it fits"
+        },
+        "introLine": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 38,
+          "description": "A sample opening or closing sentence for an answer that uses the idea. Credit the thinker; do not repeat the quote"
+        },
+        "syllabus": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 27,
+          "description": "Where it sits in the syllabus"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/thinker-lens@1"
+}

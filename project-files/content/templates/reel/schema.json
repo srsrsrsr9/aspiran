@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "upsc-pods/reel@1",
+  "title": "Chai in 60 reel",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "upsc-pods/reel@1",
+      "x-from": "config"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "format": {
+      "type": "object",
+      "x-from": "config"
+    },
+    "rules": {
+      "type": "array",
+      "x-from": "config"
+    },
+    "cards": {
+      "type": "string",
+      "x-from": "config"
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "seconds"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "intro",
+              "card",
+              "outro"
+            ]
+          },
+          "seconds": {
+            "type": "number"
+          },
+          "text": {
+            "type": "object"
+          },
+          "cardId": {
+            "type": "string"
+          },
+          "sound": {
+            "type": "string"
+          },
+          "showTakeawayAtSeconds": {
+            "type": "number"
+          },
+          "uses": {
+            "type": "array"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 7,
+      "x-from": "config",
+      "description": "Built by assemble() from intro, the day's card ids and outro."
+    },
+    "intro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 5,
+            "description": "Three short lines: the date, what this is, how many cards"
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 7
+          },
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "description": "Removed by assemble(); becomes the intro segment."
+    },
+    "outro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 8,
+            "description": "Two or three short lines that close the reel"
+          },
+          "minItems": 2,
+          "maxItems": 3
+        },
+        "hi": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 11
+          },
+          "minItems": 2,
+          "maxItems": 3
+        }
+      },
+      "description": "Removed by assemble(); becomes the outro segment."
+    },
+    "tags": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Exam tags from the template: stage, papers and question formats (see templates/exam-formats.json)"
+    },
+    "provenance": {
+      "type": "object",
+      "x-from": "config",
+      "description": "Added by the generator: model, template, date. Absent on hand-written packs."
+    }
+  },
+  "x-fillRequired": [
+    "id",
+    "intro",
+    "outro"
+  ]
+}

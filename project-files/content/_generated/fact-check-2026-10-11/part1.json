@@ -1,0 +1,635 @@
+{
+  "schema": "upsc-pods/fact-check@1",
+  "checkedOn": "2026-10-11",
+  "checker": "Claude (first pass, needs editor sign-off)",
+  "files": [
+    {
+      "path": "content/acronym-unpack/acronym-unpack-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "en.what / hi.what",
+          "claim": "A 2005 law guaranteeing at least 100 days of wage employment in a financial year to rural households...",
+          "problem": "Out of date. MGNREGA was replaced by the Viksit Bharat - Guarantee for Rozgar and Ajeevika Mission (Gramin) Act, 2025 (VB-G RAM G). The President gave assent on 21 Dec 2025, and MGNREGA ceased to apply from 1 July 2026. The new Act guarantees 125 days. On 11 Oct 2026 the present tense ('guaranteeing', 'is entitled') is wrong.",
+          "fix": {
+            "en": "A 2005 law that guaranteed at least 100 days of wage employment in a financial year to rural households whose adults volunteered for unskilled manual work. From 1 July 2026 it was replaced by the VB-G RAM G Act, 2025, which guarantees 125 days.",
+            "hi": "यह 2005 का कानून था, जो अकुशल शारीरिक श्रम के इच्छुक ग्रामीण परिवारों को वित्तीय वर्ष में कम से कम 100 दिन मजदूरी वाले रोजगार की गारंटी देता था। 1 जुलाई 2026 से इसकी जगह VB-G RAM G अधिनियम, 2025 ने ली, जो 125 दिन की गारंटी देता है।"
+          },
+          "severity": "error",
+          "evidence": "https://www.outlookmoney.com/news/vb-g-ram-g-act-replaces-mgnrega-implementation-to-take-effect-from-july-1 ; https://www.onmanorama.com/news/india/2025/12/21/viksit-bharat-guarantee-rural-employment-president-assent.amp.html (the editor should confirm against the gazette on egazette.gov.in / pib.gov.in)"
+        },
+        {
+          "field": "en.fact / hi.fact",
+          "claim": "If work is not given within 15 days of applying, the applicant is entitled to an unemployment allowance.",
+          "problem": "This was true under MGNREGA (Section 7). It should be in the past tense, or the pack should be reframed around the new Act. Check the new Act's timeframe before stating a number for it.",
+          "fix": {
+            "en": "Under MGNREGA, if work was not given within 15 days of applying, the applicant was entitled to an unemployment allowance.",
+            "hi": "MGNREGA के तहत, यदि आवेदन के 15 दिन के भीतर काम न मिलता, तो आवेदक को बेरोजगारी भत्ता पाने का अधिकार था।"
+          },
+          "severity": "error",
+          "evidence": "MGNREGA 2005, Section 7; see the replacement evidence above"
+        },
+        {
+          "field": "title / tags",
+          "claim": "Revision card on MGNREGA",
+          "problem": "An exam-relevant twist is now missing: aspirants should learn both the old Act and its replacement. Consider a companion card on VB-G RAM G.",
+          "fix": "(editorial decision)",
+          "severity": "style",
+          "evidence": "Reasoning"
+        }
+      ]
+    },
+    {
+      "path": "content/answer-diagram/answer-diagram-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "hi.question",
+          "claim": "किसी धन विधेयक के संसद से पारित होने की प्रक्रिया को चरणबद्ध रूप से कैसे समझा जाए...",
+          "problem": "The Hindi question is worded differently from the English ('how should the process be understood step by step'). The meaning drifts slightly.",
+          "fix": {
+            "hi": "धन विधेयक संसद से कैसे पारित होता है, और प्रत्येक सदन की भूमिका कैसे भिन्न है?"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/answer-skeleton/answer-skeleton-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "en.body[1] / hi.body[1]",
+          "claim": "The Fifteenth Finance Commission, chaired by N.K. Singh, recommended states a 41 percent share of the divisible pool.",
+          "problem": "The fact is correct, but it is out of date for 2026-27 answers. The Sixteenth Finance Commission, chaired by Arvind Panagariya, covers 2026-31; its report was tabled in Feb 2026 and keeps the states' share at 41 percent. A Mains answer written in 2026 should cite the current Commission.",
+          "fix": {
+            "en": "The Sixteenth Finance Commission, chaired by Arvind Panagariya, kept the states' share of the divisible pool at 41 percent for 2026-31, the same as the Fifteenth (N.K. Singh).",
+            "hi": "सोलहवें वित्त आयोग ने, अरविंद पनगढ़िया की अध्यक्षता में, 2026-31 के लिए राज्यों का विभाज्य कोष में हिस्सा 41 प्रतिशत ही रखा, जितना पंद्रहवें (एन.के. सिंह) ने रखा था।"
+          },
+          "severity": "risk",
+          "evidence": "https://superkalam.com/current-affairs/12-02-2026/have-states-gained-from-the-16th-fc-pg10-7fcbd66a-8110-4abf-be4d-4316a94ae214 (the editor should confirm on fincomindia.nic.in / the Budget 2026-27 papers)"
+        },
+        {
+          "field": "hi.body[1]",
+          "claim": "N.K. Singh (Latin script in the Hindi text)",
+          "problem": "The name is left in Latin script; how-many-correct uses एन.के. सिंह.",
+          "fix": {
+            "hi": "एन.के. सिंह"
+          },
+          "severity": "style",
+          "evidence": "Consistency"
+        }
+      ]
+    },
+    {
+      "path": "content/assemble/preamble-snap.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/assertion-reason/assertion-reason-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "items[3].hi.why",
+          "claim": "(अक्टूबर से दिसंबर)",
+          "problem": "The Hindi adds the months, which the English does not have. They are correct, but EN and HI should match.",
+          "fix": {
+            "en": "A is false: the Coromandel coast gets much of its annual rain from the northeast monsoon (October to December). R is true: during the southwest monsoon it lies in a rain shadow."
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/before-after/before-after-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/better-answer/better-answer-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "pairs[1].hi.a",
+          "claim": "यह उत्तर इन प्रावधानों और स्थानीय स्वशासन पर उनके असर की पड़ताल करेगा।",
+          "problem": "The Hindi adds 'and their effect on local self-government'; the English says only 'This answer examines these provisions.'",
+          "fix": {
+            "hi": "यह उत्तर इन प्रावधानों की पड़ताल करेगा।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        },
+        {
+          "field": "pairs[0].hi.why",
+          "claim": "A सामान्य है और स्रोत से कोई तथ्य नहीं देता।",
+          "problem": "The Hindi adds 'from the source'; the English says 'gives no fact'.",
+          "fix": {
+            "hi": "A सामान्य है और कोई तथ्य नहीं देता।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/book-chai/atomic-habits.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/book-chai/book-chai-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/book-chai/daily-rituals.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "hi.situations[0]",
+          "claim": "...उसे घंटे-दर-घंटे हूबहू अपनाने का मन करता है।",
+          "problem": "The Hindi says the aspirant 'feels like copying' the timetable; the English says the aspirant 'copies it'.",
+          "fix": {
+            "hi": "...और उसे घंटे-दर-घंटे हूबहू अपना लेता है।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        },
+        {
+          "field": "en.readIt",
+          "claim": "Short accounts in the same style are easy to find in library magazines and newspapers.",
+          "problem": "This is a vague claim and cannot be checked.",
+          "fix": {
+            "en": "Many public libraries stock it."
+          },
+          "severity": "style",
+          "evidence": "Reasoning"
+        }
+      ]
+    },
+    {
+      "path": "content/book-chai/power-of-habit.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/bucket-sort/bucket-sort-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "items[5].en.why / hi.why",
+          "claim": "Not justiciable, so courts cannot enforce equal pay.",
+          "problem": "Misleading. Article 39(d) is not enforceable on its own. But since Randhir Singh v. Union of India (1982), the Supreme Court has enforced 'equal pay for equal work' by reading Article 39(d) with Articles 14 and 16 (also State of Punjab v. Jagjit Singh, 2016). 'Courts cannot enforce equal pay' would mislead in a Prelims statement question.",
+          "fix": {
+            "en": "Part IV Directive Principle, not enforceable by itself. The Supreme Court has, however, enforced equal pay by reading it with Articles 14 and 16 (Randhir Singh, 1982).",
+            "hi": "भाग IV का नीति निदेशक तत्व, जो अपने आप में न्यायालय में लागू नहीं कराया जा सकता। फिर भी सर्वोच्च न्यायालय ने इसे अनुच्छेद 14 और 16 के साथ पढ़कर समान वेतन लागू कराया है (रणधीर सिंह, 1982)।"
+          },
+          "severity": "risk",
+          "evidence": "Randhir Singh v. Union of India, (1982) 1 SCC 618; State of Punjab v. Jagjit Singh, (2017) 1 SCC 148"
+        }
+      ]
+    },
+    {
+      "path": "content/calm-script/calm-script-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "sources",
+          "claim": "Balban and colleagues, Stanford study (2023)",
+          "problem": "Source mismatch. Balban et al. (Cell Reports Medicine, 2023) compared cyclic sighing, box breathing, cyclic hyperventilation and mindfulness. It did not test 4-in/6-out slow breathing at about six breaths a minute. Citing it here implies evidence the study does not give, which also brushes against the no-health-claims rule.",
+          "fix": {
+            "en": "Slow-breathing practice; no specific study cited",
+            "hi": "धीमी साँस का अभ्यास; किसी विशेष अध्ययन का हवाला नहीं"
+          },
+          "severity": "risk",
+          "evidence": "Balban MY et al., 'Brief structured respiration practices enhance mood and reduce physiological arousal', Cell Rep Med 2023;4(1):100895"
+        },
+        {
+          "field": "hi.intro",
+          "claim": "नाक से लगभग 4 सेकंड साँस लीजिए",
+          "problem": "The Hindi adds 'through the nose', which the English does not have. The Hindi beats also add 'लगभग' ('about').",
+          "fix": {
+            "en": "Breathe in through your nose for about 4 seconds and out for about 6."
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/calm-script/double-sigh-1-minute.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "pace",
+          "claim": "{inhale:4, hold:2, exhale:6}",
+          "problem": "The data contradicts the script. The beats describe a double inhale (a long breath in, then a short top-up) followed by a long exhale, with no hold. If the app renders 'hold 2 s' from this field, the screen will contradict the narration.",
+          "fix": {
+            "en": "Model the pace as inhale 4, top-up inhale 2 (no hold), exhale 6; or set pace to null as in the grounding script."
+          },
+          "severity": "risk",
+          "evidence": "Script beats[1..6]; Balban et al. 2023 describe cyclic sighing without a breath hold"
+        },
+        {
+          "field": "hi.title",
+          "claim": "एक मिनट का साँस का अभ्यास",
+          "problem": "The Hindi title drops 'sigh' ('One-minute breathing exercise').",
+          "fix": {
+            "hi": "एक मिनट की 'आह' वाली साँस (डबल साँस)"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/calm-script/grounding-5-4-3-2-1.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "beats[0].hi.say",
+          "claim": "अगर अच्छा लगे...",
+          "problem": "The Hindi adds 'if it feels right', which is not in the English. This is harmless.",
+          "fix": {
+            "hi": "आराम से बैठिए। अपनी नज़र आसपास के कमरे पर टिका दीजिए।"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/cards/chai-2026-10-10.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "cards[0].en.summary / hi.summary",
+          "claim": "Anyone can still cook rasgulla at home. Only producers from the registered area can sell it under the protected name.",
+          "problem": "Misleading. 'Rasgulla' itself is not a protected name. Two GIs exist: 'Banglar Rasogolla' (West Bengal, 2017) and 'Odisha Rasagola' (2019). Anyone may sell plain 'rasgulla'. Also, only registered authorised users, not every producer in the area, may use a GI.",
+          "fix": {
+            "en": "Anyone can still cook rasgulla at home, or sell it as rasgulla. But only authorised producers from Odisha can sell it as 'Odisha Rasagola', a registered GI.",
+            "hi": "रसगुल्ला घर पर कोई भी बना सकता है, और रसगुल्ला नाम से बेच भी सकता है। पर 'ओडिशा रसगोला' नाम से, जो एक पंजीकृत GI है, सिर्फ़ ओडिशा के अधिकृत उत्पादक ही बेच सकते हैं।"
+          },
+          "severity": "risk",
+          "evidence": "GI Registry journal entries: Banglar Rasogolla (2017), Odisha Rasagola (2019); GI Act 1999, Sections 17 and 21 (authorised users)"
+        },
+        {
+          "field": "cards[2].en.summary / hi.summary",
+          "claim": "...and India is a signatory.",
+          "problem": "Imprecise. The Sendai Framework is a non-binding agreement that UN member states adopted at the Third UN World Conference (March 2015), and the UN General Assembly endorsed it (A/RES/69/283). It is not a treaty that countries sign.",
+          "fix": {
+            "en": "...adopted by UN member states, including India, at a UN conference in Sendai, Japan, in 2015.",
+            "hi": "...इसे 2015 में जापान के सेंडाई में संयुक्त राष्ट्र सम्मेलन में भारत समेत संयुक्त राष्ट्र के सदस्य देशों ने अपनाया।"
+          },
+          "severity": "risk",
+          "evidence": "https://www.undrr.org/publication/sendai-framework-disaster-risk-reduction-2015-2030 ; UNGA A/RES/69/283"
+        }
+      ]
+    },
+    {
+      "path": "content/case-study/case-study-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "title.hi",
+          "claim": "सार्वजनिक निर्माण में ईमानदारी का कठिन निर्णय",
+          "problem": "The Hindi title ('A hard decision of integrity in public construction') does not match the English title.",
+          "fix": {
+            "hi": "घटिया स्कूल भवन: एक नैतिक निर्णय"
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/chains/el-nino-to-your-plate.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "links[0].hi",
+          "claim": "अल नीनो",
+          "problem": "The spelling differs from the cards pack, which uses 'एल नीनो'. Pick one.",
+          "fix": {
+            "hi": "एल नीनो"
+          },
+          "severity": "style",
+          "evidence": "Consistency with cards/chai-2026-10-10.json"
+        }
+      ]
+    },
+    {
+      "path": "content/committee-match/committee-match-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/csat-passage/csat-passage-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "questions[0].hi.options[0]",
+          "claim": "किसान लापरवाह हैं और उन्हें जरूरत से ज़्यादा पानी पंप करते हैं।",
+          "problem": "Hindi grammar error: 'उन्हें ... करते हैं' should be 'वे ... करते हैं'.",
+          "fix": {
+            "hi": "किसान लापरवाह हैं और वे ज़रूरत से ज़्यादा पानी पंप करते हैं।"
+          },
+          "severity": "style",
+          "evidence": "Hindi grammar"
+        }
+      ]
+    },
+    {
+      "path": "content/csat-quant/csat-quant-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/csat-reasoning/csat-reasoning-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/data-interpretation/data-interpretation-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/debates/simultaneous-elections.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "against.en[0] / against.hi[0]",
+          "claim": "Needs amendments to ... (Articles 83, 85, 172 and 174)",
+          "problem": "Check the article list. The Kovind High-Level Committee and the Constitution (One Hundred and Twenty-Ninth Amendment) Bill, 2024 propose inserting a new Article 82A and amending Articles 83, 172 and 327. Articles 85 and 174 (summoning, prorogation and dissolution) were in the 2018 Law Commission draft, but the Bill does not touch them. The bill is now with a Joint Parliamentary Committee, a current hook that the card does not mention.",
+          "fix": {
+            "en": "Needs constitutional amendments: the 2024 Bill would insert Article 82A and amend Articles 83, 172 and 327",
+            "hi": "संविधान संशोधन ज़रूरी: 2024 का विधेयक अनुच्छेद 82A जोड़ेगा और अनुच्छेद 83, 172 और 327 में संशोधन करेगा"
+          },
+          "severity": "risk",
+          "evidence": "https://prsindia.org/billtrack/the-constitution-one-hundred-and-twenty-ninth-amendment-bill-2024 (editor to confirm); Kovind HLC report, March 2024"
+        }
+      ]
+    },
+    {
+      "path": "content/directive-word/directive-word-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "sources",
+          "claim": "Coaching guides and toppers' explanations",
+          "problem": "This is a weak source for an official-sounding definition. UPSC does not publish definitions of directive words.",
+          "fix": {
+            "en": "Common usage in Mains question papers; UPSC publishes no official definitions",
+            "hi": "मुख्य परीक्षा प्रश्नपत्रों में सामान्य प्रयोग; UPSC इनकी आधिकारिक परिभाषा नहीं देता"
+          },
+          "severity": "style",
+          "evidence": "Reasoning"
+        }
+      ]
+    },
+    {
+      "path": "content/essay-planner/essay-planner-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/ethics-dilemma/ethics-dilemma-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/explainers/article-200.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "scenes[1].caption / elements.tiles[1]",
+          "claim": "Under Article 200, the Governor has four options. ... Two: withhold assent.",
+          "problem": "The bare text of Article 200 lists four courses. But the Supreme Court holds that withholding must be followed by returning the bill to the House: see State of Punjab v. Principal Secretary to the Governor (2023), and the Constitution Bench opinion in the Presidential Reference of 20 Nov 2025, para 99: 'the first proviso conditions the verb withhold, to mean withhold and return to the Legislature'. Presenting 'withhold' as a standalone pocket veto would mislead Mains aspirants. Keep the four options from the text, but add the Court's reading.",
+          "fix": {
+            "en": "Two: withhold assent. The Supreme Court has held that a Governor who withholds assent must return the bill to the House (2023; Presidential Reference, 2025).",
+            "hi": "दूसरा: सहमति रोक लेना। सर्वोच्च न्यायालय के अनुसार सहमति रोकने पर राज्यपाल को विधेयक सदन को लौटाना होगा (2023; राष्ट्रपति संदर्भ, 2025)।"
+          },
+          "severity": "risk",
+          "evidence": "https://cjp.org.in/a-constitutional-reset-on-governor-assent-the-supreme-courts-opinion-in-the-presidential-reference-on-articles-200-201/ ; https://www.scobserver.in/cases/presidential-reference-on-powers-of-the-governor-and-president/ ; State of Punjab v. Principal Secretary to the Governor of Punjab, 2023 INSC 1009"
+        },
+        {
+          "field": "(root)",
+          "claim": "No sources block",
+          "problem": "Unlike the other packs, the explainer has no 'sources' field.",
+          "fix": {
+            "en": "Constitution of India, Article 200; Supreme Court, Presidential Reference opinion (2025)",
+            "hi": "भारत का संविधान, अनुच्छेद 200; सर्वोच्च न्यायालय, राष्ट्रपति संदर्भ पर राय (2025)"
+          },
+          "severity": "style",
+          "evidence": "Schema consistency"
+        }
+      ]
+    },
+    {
+      "path": "content/fact-or-opinion/fact-or-opinion-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/fill-the-gap/fill-the-gap-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/flashcards/flashcards-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "cards[0].en.back / hi.back",
+          "claim": "Part XVIII of the Constitution. It covers Articles 352, 356 and 360.",
+          "problem": "Misleading. Part XVIII covers Articles 352 to 360 (nine Articles, including 353-355, 357-359). The three Articles listed are the three types of emergency, not the whole Part.",
+          "fix": {
+            "en": "Part XVIII (Articles 352 to 360). The three types are in Articles 352, 356 and 360.",
+            "hi": "भाग XVIII (अनुच्छेद 352 से 360)। तीनों प्रकार अनुच्छेद 352, 356 और 360 में हैं।"
+          },
+          "severity": "risk",
+          "evidence": "Constitution of India, Part XVIII (legislative.gov.in)"
+        }
+      ]
+    },
+    {
+      "path": "content/games/match-the-article.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "pairs[10].hi",
+          "claim": "चुनाव आयोग",
+          "problem": "The Constitution's Hindi text uses 'निर्वाचन आयोग' (fill-the-gap uses 'राज्य निर्वाचन आयोग').",
+          "fix": {
+            "hi": "निर्वाचन आयोग"
+          },
+          "severity": "style",
+          "evidence": "Hindi text of the Constitution, Article 324"
+        }
+      ]
+    },
+    {
+      "path": "content/how-many-correct/how-many-correct-sample.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "optionText",
+          "claim": "[Only one, Only two, Only three, All four, None] used for a 3-statement item",
+          "problem": "Item 1 has three statements, but the shared option set offers 'All four' and lacks 'All three'. The answer key itself is right: item 1 has 2 correct (statements 1 and 3), and item 2 has 2 correct (statements 2 and 4). UPSC's format is four options that match the statement count.",
+          "fix": {
+            "en": "Per item: 3 statements -> [Only one, Only two, All three, None]; 4 statements -> [Only one, Only two, Only three, All four]",
+            "hi": "प्रति प्रश्न: 3 कथन -> [केवल एक, केवल दो, सभी तीन, कोई नहीं]; 4 कथन -> [केवल एक, केवल दो, केवल तीन, सभी चार]"
+          },
+          "severity": "risk",
+          "evidence": "Recount of items[0].truth and items[1].truth"
+        },
+        {
+          "field": "items[1].en.statements[3]",
+          "claim": "The Fifteenth Finance Commission... 41 percent",
+          "problem": "This is true, but the Sixteenth FC (Panagariya, 2026-31) is now the current one and also kept 41 percent. Consider updating it for 2026-27 aspirants.",
+          "fix": {
+            "en": "The Sixteenth Finance Commission, chaired by Arvind Panagariya, recommended a 41 percent states' share.",
+            "hi": "अरविंद पनगढ़िया की अध्यक्षता वाले सोलहवें वित्त आयोग ने राज्यों का हिस्सा 41 प्रतिशत रखने की सिफारिश की।"
+          },
+          "severity": "style",
+          "evidence": "See answer-skeleton evidence"
+        }
+      ]
+    },
+    {
+      "path": "content/index-card/index-card-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/journeys/bill-to-act.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/kautilya-lens/kautilya-lens-sample.json",
+      "status": "check",
+      "findings": [
+        {
+          "field": "quote.verified / quote.text",
+          "claim": "In the happiness of his subjects lies his happiness; in their welfare his welfare.",
+          "problem": "The wording matches the Shamasastry translation (Book 1, Chapter 19) and the quote-bank entry, and the card correctly references quoteId. But the bank entry and the embedded copy are both unverified (verified:false, verifiedBy:null), and the Hindi is null. The card must not go live until the bank entry is verified and a Hindi rendering is added to the bank.",
+          "fix": "(no text change; verify bank entry kautilya-arthashastra-1-19 and add hi)",
+          "severity": "risk",
+          "evidence": "Shamasastry, Arthashastra (1915), Book I, Ch. XIX 'The Duties of a King'; quotes/quotes.json"
+        }
+      ]
+    },
+    {
+      "path": "content/landmark-case/landmark-case-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/link-web/link-web-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/list-match/list-match-sample.json",
+      "status": "ok",
+      "findings": []
+    },
+    {
+      "path": "content/maps/strait-of-hormuz.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "(root)",
+          "claim": "No tone field",
+          "problem": "The other packs carry 'tone'.",
+          "fix": {
+            "en": "\"tone\": \"NEUTRAL\""
+          },
+          "severity": "style",
+          "evidence": "Schema consistency"
+        }
+      ]
+    },
+    {
+      "path": "content/mnemonic/mnemonic-sample.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "for.en / for.hi",
+          "claim": "The five writs, in order",
+          "problem": "The writs have no official order, so 'in order' implies a canonical sequence that does not exist. The Hindi mnemonic is also left in English.",
+          "fix": {
+            "en": "The five writs",
+            "hi": "पाँच रिट"
+          },
+          "severity": "style",
+          "evidence": "Article 32(2) lists them without ranking"
+        }
+      ]
+    },
+    {
+      "path": "content/myths/chanakya-myth-or-fact.json",
+      "status": "ok",
+      "findings": [
+        {
+          "field": "source",
+          "claim": "Arthashastra, R.P. Kangle's edition (editor to check)",
+          "problem": "The Kautilya-lens card and the quote bank cite the Shamasastry 1915 translation for the same Book 1, Chapter 19 line. The two should use one edition.",
+          "fix": {
+            "en": "Arthashastra, R. Shamasastry translation (1915); R.P. Kangle edition for cross-check",
+            "hi": "अर्थशास्त्र, आर. शमशास्त्री अनुवाद (1915); मिलान के लिए आर.पी. कांगले संस्करण"
+          },
+          "severity": "style",
+          "evidence": "Consistency with quotes/quotes.json"
+        }
+      ]
+    },
+    {
+      "path": "content/myths/did-they-say-it.json",
+      "status": "fix",
+      "findings": [
+        {
+          "field": "claims[1].en.claim / hi.claim",
+          "claim": "Vivekananda said, 'Arise, awake, and stop not till the goal is reached.'",
+          "problem": "The quote is written inline with no quoteId, which breaks the rule that quotes come from the quote bank. The bank already has 'vivekananda-arise-awake', unverified, with the chapter still 'Check the volume and lecture'. The attribution is correct (Katha Upanishad 1.3.14, adapted in his lectures).",
+          "fix": {
+            "en": "Add \"quoteId\": \"vivekananda-arise-awake\" to the claim and render the text from the bank; verify the volume and lecture first."
+          },
+          "severity": "risk",
+          "evidence": "quotes/quotes.json; Complete Works of Swami Vivekananda (Advaita Ashrama)"
+        },
+        {
+          "field": "claims[0].hi.correction",
+          "claim": "पाली कैनन ... जो बुद्ध की शिक्षाओं का प्राचीनतम रिकॉर्ड है ... एक बाद की टीका के एक चित्र पर आधारित",
+          "problem": "The Hindi says 'the oldest record'; the English says 'the early record'. The Hindi also drops 'loosely'. The source of the image is Buddhaghosa's Visuddhimagga (IX.23), a 5th-century treatise; naming it would help.",
+          "fix": {
+            "en": "...It is a modern rewording, loosely based on an image in Buddhaghosa's Visuddhimagga, a 5th-century work...",
+            "hi": "...यह आधुनिक रूपांतरण है, जो 5वीं सदी के ग्रंथ, बुद्धघोष के विसुद्धिमग्ग, के एक चित्र पर ढीले रूप से आधारित है..."
+          },
+          "severity": "style",
+          "evidence": "Visuddhimagga IX.23"
+        },
+        {
+          "field": "claims[2].en.correction",
+          "claim": "Wings of Fire (1999) was written with Arun Tiwari.",
+          "problem": "The English lacks the opening 'No.' that the Hindi has ('नहीं।').",
+          "fix": {
+            "en": "No. Wings of Fire (1999) was written with Arun Tiwari. ..."
+          },
+          "severity": "style",
+          "evidence": "EN/HI comparison"
+        }
+      ]
+    },
+    {
+      "path": "content/myths/forward-buster-constitution.json",
+      "status": "ok",
+      "findings": []
+    }
+  ]
+}

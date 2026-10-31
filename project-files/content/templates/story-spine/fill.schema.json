@@ -1,0 +1,178 @@
+{
+  "title": "Story spine (Essay and GS4)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "paper",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "paper": {
+      "type": "string",
+      "enum": [
+        "Essay",
+        "GS4"
+      ]
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "news",
+        "spine",
+        "why",
+        "topic",
+        "starter"
+      ],
+      "properties": {
+        "news": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 34,
+          "description": "The news item in one or two plain sentences, from the source"
+        },
+        "spine": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 26,
+            "description": "One line of the spine, starting with its opener"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 30,
+          "description": "Why a story opening works for this kind of essay"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "An essay topic for the member to try the spine on"
+        },
+        "starter": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 14,
+          "description": "A nudge for the member's first line, not an answer"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "news",
+        "spine",
+        "why",
+        "topic",
+        "starter"
+      ],
+      "properties": {
+        "news": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 46,
+          "description": "The news item in one or two plain sentences, from the source"
+        },
+        "spine": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 36,
+            "description": "One line of the spine, starting with its opener"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "why": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 41,
+          "description": "Why a story opening works for this kind of essay"
+        },
+        "topic": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22,
+          "description": "An essay topic for the member to try the spine on"
+        },
+        "starter": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 19,
+          "description": "A nudge for the member's first line, not an answer"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/story-spine@1"
+}

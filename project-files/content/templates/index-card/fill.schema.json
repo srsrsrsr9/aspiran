@@ -1,0 +1,162 @@
+{
+  "title": "Index decoder",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "edition",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "edition": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Which edition the facts are from, if the source says"
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "publisher",
+        "measures",
+        "indiaPoint",
+        "caution"
+      ],
+      "properties": {
+        "index": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "measures": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 26
+        },
+        "indiaPoint": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 26,
+          "description": "What the source says about India"
+        },
+        "caution": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 20,
+          "description": "How not to misread it"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "publisher",
+        "measures",
+        "indiaPoint",
+        "caution"
+      ],
+      "properties": {
+        "index": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        },
+        "measures": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36
+        },
+        "indiaPoint": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 36,
+          "description": "What the source says about India"
+        },
+        "caution": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 27,
+          "description": "How not to misread it"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/index-card@1"
+}

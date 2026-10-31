@@ -1,0 +1,217 @@
+{
+  "title": "Higher or Lower (number chain)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "metric",
+    "unit",
+    "direction",
+    "items",
+    "takeaway",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ]
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      },
+      "description": "What is compared, e.g. 'Area of the state'"
+    },
+    "unit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 3
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 4
+        }
+      }
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "higher-wins",
+        "earlier-wins"
+      ],
+      "description": "earlier-wins for years"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "value",
+          "valueLabel",
+          "nugget"
+        ],
+        "properties": {
+          "name": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 5
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 7
+              }
+            }
+          },
+          "value": {
+            "type": "number"
+          },
+          "valueLabel": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 4,
+            "description": "The value as printed, e.g. '3,42,239'. Copied from the source."
+          },
+          "nugget": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "en",
+              "hi"
+            ],
+            "properties": {
+              "en": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 18
+              },
+              "hi": {
+                "type": "string",
+                "minLength": 1,
+                "x-maxWords": 25
+              }
+            },
+            "description": "One fact shown after the reveal"
+          }
+        }
+      },
+      "minItems": 8,
+      "maxItems": 12,
+      "description": "No two values within 3% of each other, so every pair has a fair answer"
+    },
+    "takeaway": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 24
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 33
+        }
+      },
+      "description": "A pattern worth remembering, not just the top item"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "verify"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "x-maxWords": 45
+          },
+          "verify": {
+            "type": "boolean",
+            "description": "true until a person has checked it"
+          }
+        }
+      },
+      "minItems": 1,
+      "maxItems": 6,
+      "description": "Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/higher-lower@1"
+}

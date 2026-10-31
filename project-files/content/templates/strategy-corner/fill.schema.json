@@ -1,0 +1,143 @@
+{
+  "title": "Strategy corner (monthly)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "tone",
+    "title",
+    "quoteId",
+    "en",
+    "hi",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 60,
+      "description": "lowercase-with-hyphens slug, e.g. article-200"
+    },
+    "tone": {
+      "type": "string",
+      "enum": [
+        "LIGHT",
+        "NEUTRAL",
+        "SERIOUS",
+        "TRAGIC"
+      ],
+      "description": "LIGHT: everyday or quirky. NEUTRAL: most policy and static topics. SERIOUS: security, disasters, health crises. TRAGIC: loss of life."
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 8
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 11
+        }
+      }
+    },
+    "quoteId": {
+      "type": "string",
+      "x-enumFromConfig": "quoteIds",
+      "description": "Id of the strategy quote from the quote bank. The app inserts the exact text; never write the quote yourself.",
+      "enum": [
+        "suntzu-art-of-war-3-18",
+        "suntzu-art-of-war-4-15",
+        "kautilya-arthashastra-1-19"
+      ]
+    },
+    "en": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "idea",
+        "question",
+        "tryThis"
+      ],
+      "properties": {
+        "idea": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 28,
+          "description": "What the line means for preparation, in plain words"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 18,
+          "description": "One question about the member's own preparation this month"
+        },
+        "tryThis": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 20,
+          "description": "One small action for this week"
+        }
+      }
+    },
+    "hi": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "idea",
+        "question",
+        "tryThis"
+      ],
+      "properties": {
+        "idea": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 38,
+          "description": "What the line means for preparation, in plain words"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 25,
+          "description": "One question about the member's own preparation this month"
+        },
+        "tryThis": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 27,
+          "description": "One small action for this week"
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "en",
+        "hi"
+      ],
+      "properties": {
+        "en": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 16,
+          "description": "Where the facts come from, e.g. 'Census of India 2011'"
+        },
+        "hi": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxWords": 22
+        }
+      },
+      "description": "Name the source documents. Never invent a source."
+    }
+  },
+  "x-type": "upsc-pods/strategy-corner@1"
+}

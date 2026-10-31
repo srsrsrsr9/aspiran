@@ -1,0 +1,124 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-pairs"
+    ]
+  },
+  "id": "pairs-count-constitution-borrowings",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How many pairs are correctly matched?",
+    "hi": "कितने जोड़े सही तरह मिलाए गए हैं?"
+  },
+  "heads": {
+    "en": {
+      "left": "Feature",
+      "right": "Country"
+    },
+    "hi": {
+      "left": "विशेषता",
+      "right": "देश"
+    }
+  },
+  "pairs": [
+    {
+      "correct": true,
+      "en": {
+        "left": "Fundamental Rights",
+        "right": "United States",
+        "fix": "The framers adapted features from the US, including Fundamental Rights."
+      },
+      "hi": {
+        "left": "मौलिक अधिकार",
+        "right": "संयुक्त राज्य अमेरिका",
+        "fix": "सही जोड़ा है। बनाने वालों ने अमेरिका से मौलिक अधिकार लिए, पर अपने हिसाब से ढालकर।"
+      }
+    },
+    {
+      "correct": true,
+      "en": {
+        "left": "Directive Principles of State Policy",
+        "right": "Ireland",
+        "fix": "The source ties these Directive Principles to Ireland, a model the framers adapted."
+      },
+      "hi": {
+        "left": "राज्य नीति के निदेशक तत्व",
+        "right": "आयरलैंड",
+        "fix": "सही जोड़ा है। राज्य नीति के ये निदेशक तत्व आयरलैंड से लिए गए, जिन्हें बनाने वालों ने अपने हिसाब से ढाला।"
+      }
+    },
+    {
+      "correct": false,
+      "en": {
+        "left": "Concurrent List",
+        "right": "Canada",
+        "fix": "Correct match is Australia. The source ties the Concurrent List to Australia."
+      },
+      "hi": {
+        "left": "समवर्ती सूची",
+        "right": "कनाडा",
+        "fix": "सही मिलान ऑस्ट्रेलिया है। समवर्ती सूची वहीं से ली गई थी, कनाडा से नहीं।"
+      }
+    },
+    {
+      "correct": false,
+      "en": {
+        "left": "Fundamental Duties",
+        "right": "France",
+        "fix": "Correct match is the Soviet Union (USSR). France is linked to liberty, equality and fraternity."
+      },
+      "hi": {
+        "left": "मौलिक कर्तव्य",
+        "right": "फ्रांस",
+        "fix": "सही मिलान सोवियत संघ (USSR) है। फ्रांस से जुड़ी बात स्वतंत्रता, समानता और बंधुत्व है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Editor's source notes",
+    "hi": "संपादक के स्रोत नोट्स"
+  },
+  "schema": "upsc-pods/pairs-count@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "options": {
+    "en": [
+      "Only one pair",
+      "Only two pairs",
+      "Only three pairs",
+      "All four pairs"
+    ],
+    "hi": [
+      "केवल एक युग्म",
+      "केवल दो युग्म",
+      "केवल तीन युग्म",
+      "सभी चार युग्म"
+    ]
+  },
+  "answer": 1,
+  "provenance": {
+    "generator": "Claude Haiku via the template prompt (agent test run)",
+    "template": "templates/pairs-count/",
+    "createdOn": "2026-10-11"
+  }
+}

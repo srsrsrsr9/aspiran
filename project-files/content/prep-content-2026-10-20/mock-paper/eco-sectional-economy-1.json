@@ -1,0 +1,978 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "marking": {
+    "right": 2,
+    "wrong": -0.66,
+    "blank": 0
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative",
+      "pre-statement-code",
+      "pre-select-items",
+      "pre-how-many-statements",
+      "pre-how-many-pairs",
+      "pre-statement-i-ii",
+      "pre-statement-i-ii-iii",
+      "pre-list-match"
+    ]
+  },
+  "id": "eco-sectional-economy-1",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Economy sectional mock 1",
+    "hi": "अर्थव्यवस्था सेक्शनल मॉक 1"
+  },
+  "paper": "prelims-gs1",
+  "section": "GS3 Indian Economy (Prelims)",
+  "questions": [
+    {
+      "format": "statement-code",
+      "node": "eco-national-income",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about national income:",
+        "statements": [
+          "Gross Domestic Product (GDP) measures the value of final goods and services produced within a country's domestic territory in a year.",
+          "Gross National Product (GNP) is GDP plus net factor income from abroad.",
+          "Intermediate goods are counted in GDP so that all production is captured."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "1 and 2 only",
+          "2 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: GDP counts only final goods and services, because adding intermediate goods would count the same value twice. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय आय के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "सकल घरेलू उत्पाद (GDP) एक वर्ष में किसी देश के घरेलू क्षेत्र में उत्पादित अंतिम वस्तुओं और सेवाओं का मूल्य मापता है।",
+          "सकल राष्ट्रीय उत्पाद (GNP), GDP और विदेश से प्राप्त शुद्ध साधन आय का योग है।",
+          "सारा उत्पादन शामिल करने के लिए मध्यवर्ती वस्तुओं को भी GDP में गिना जाता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 1 और 2",
+          "केवल 2 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: GDP में सिर्फ अंतिम वस्तुएँ और सेवाएँ गिनी जाती हैं, क्योंकि मध्यवर्ती वस्तुएँ जोड़ने से एक ही मूल्य दो बार गिना जाएगा। '1, 2 और 3' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-inflation",
+      "answer": 2,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following compiles and releases the all-India Consumer Price Index (Rural, Urban and Combined)?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Reserve Bank of India",
+          "Office of the Economic Adviser, DPIIT",
+          "National Statistics Office, Ministry of Statistics and Programme Implementation",
+          "Labour Bureau"
+        ],
+        "why": "The National Statistics Office (NSO) under MoSPI releases the all-India CPI (Rural, Urban, Combined). The trap is the Office of the Economic Adviser, DPIIT: it releases the Wholesale Price Index, not the CPI."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन अखिल भारतीय उपभोक्ता मूल्य सूचकांक (ग्रामीण, शहरी और संयुक्त) तैयार और जारी करता है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "भारतीय रिज़र्व बैंक",
+          "आर्थिक सलाहकार का कार्यालय, DPIIT",
+          "राष्ट्रीय सांख्यिकी कार्यालय, सांख्यिकी और कार्यक्रम कार्यान्वयन मंत्रालय",
+          "श्रम ब्यूरो"
+        ],
+        "why": "अखिल भारतीय CPI (ग्रामीण, शहरी, संयुक्त) MoSPI के तहत राष्ट्रीय सांख्यिकी कार्यालय (NSO) जारी करता है। जाल है आर्थिक सलाहकार का कार्यालय, DPIIT: वह थोक मूल्य सूचकांक (WPI) जारी करता है, CPI नहीं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-monetary-policy",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about the Monetary Policy Committee (MPC) of the Reserve Bank of India:",
+        "statements": [
+          "It has six members, three of whom are from the RBI, including the Governor.",
+          "In case of a tie, the Governor has a casting vote.",
+          "It was given a statutory basis through an amendment to the RBI Act, 1934.",
+          "It decides the Cash Reserve Ratio that banks must maintain."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct. Statement 4 is wrong: the MPC's statutory job is to fix the policy repo rate; the CRR is set by the RBI itself. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "भारतीय रिज़र्व बैंक की मौद्रिक नीति समिति (MPC) के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसमें छह सदस्य होते हैं, जिनमें से तीन, गवर्नर सहित, RBI से होते हैं।",
+          "मत बराबर होने पर गवर्नर के पास निर्णायक मत होता है।",
+          "इसे RBI अधिनियम, 1934 में संशोधन द्वारा वैधानिक आधार दिया गया।",
+          "यह तय करती है कि बैंकों को कितना नकद आरक्षित अनुपात (CRR) रखना है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं। कथन 4 गलत है: कानून के तहत MPC का काम पॉलिसी रेपो रेट तय करना है, CRR तो RBI खुद तय करता है। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "eco-monetary-policy",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is NOT a quantitative instrument of monetary policy?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Cash Reserve Ratio",
+          "Open market operations",
+          "Bank rate",
+          "Moral suasion"
+        ],
+        "why": "Moral suasion, where the RBI persuades banks through advice and appeals, is a qualitative tool. The trap is open market operations: they sound like a market activity, but buying and selling securities changes the overall quantity of money."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा मौद्रिक नीति का मात्रात्मक उपकरण नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "नकद आरक्षित अनुपात",
+          "खुले बाज़ार की क्रियाएँ",
+          "बैंक दर",
+          "नैतिक प्रेरणा (Moral suasion)"
+        ],
+        "why": "नैतिक प्रेरणा में RBI सलाह और अपील से बैंकों को समझाता है, इसलिए यह गुणात्मक उपकरण है। जाल है खुले बाज़ार की क्रियाएँ: नाम बाज़ार जैसा लगता है, पर प्रतिभूतियाँ खरीदने-बेचने से मुद्रा की कुल मात्रा बदलती है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-banking",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about reserve requirements for banks in India:",
+        "statements": [
+          "Under the Cash Reserve Ratio, banks keep a share of their deposits as cash balances with the RBI.",
+          "The Statutory Liquidity Ratio can be maintained in cash, gold or approved securities.",
+          "The RBI pays banks interest on the balances they keep under the Cash Reserve Ratio."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 and 2 only",
+          "2 only",
+          "1 and 3 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the RBI pays no interest on CRR balances, which is why banks see the CRR as a cost. The trap is '1, 2 and 3'."
+      },
+      "hi": {
+        "stem": "भारत में बैंकों की आरक्षित निधि की अनिवार्यताओं के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "नकद आरक्षित अनुपात के तहत बैंक अपनी जमा राशि का एक हिस्सा RBI के पास नकद शेष के रूप में रखते हैं।",
+          "सांविधिक तरलता अनुपात (SLR) नकद, सोने या अनुमोदित प्रतिभूतियों के रूप में रखा जा सकता है।",
+          "नकद आरक्षित अनुपात के तहत रखी राशि पर RBI बैंकों को ब्याज देता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1 और 2",
+          "केवल 2",
+          "केवल 1 और 3",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: CRR की राशि पर RBI कोई ब्याज नहीं देता, इसीलिए बैंक CRR को एक लागत मानते हैं। '1, 2 और 3' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-monetary-policy",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "The repo rate is the rate at which:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "the RBI lends short-term funds to banks against government securities",
+          "commercial banks lend to their most creditworthy customers",
+          "banks park their surplus funds with the RBI",
+          "the government borrows from the public through long-term bonds"
+        ],
+        "why": "Repo is a repurchase agreement: the RBI lends to banks for a short period, taking government securities as collateral. The tempting trap is the third option: parking surplus funds with the RBI is the opposite direction of a repo."
+      },
+      "hi": {
+        "stem": "रेपो रेट वह दर है जिस पर:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "RBI सरकारी प्रतिभूतियों के बदले बैंकों को अल्पकालिक ऋण देता है",
+          "वाणिज्यिक बैंक अपने सबसे भरोसेमंद ग्राहकों को ऋण देते हैं",
+          "बैंक अपनी अतिरिक्त राशि RBI के पास रखते हैं",
+          "सरकार दीर्घकालिक बॉन्ड के ज़रिए जनता से उधार लेती है"
+        ],
+        "why": "रेपो एक पुनर्खरीद समझौता है: RBI सरकारी प्रतिभूतियाँ गिरवी लेकर बैंकों को थोड़े समय के लिए उधार देता है। तीसरा विकल्प लुभाता है, पर बैंकों का अतिरिक्त पैसा RBI के पास रखना तो रेपो की उल्टी दिशा है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-monetary-policy",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "When the RBI buys government securities in the open market, liquidity in the banking system rises.",
+          "The RBI pays for the securities it buys by crediting banks' accounts, which adds to their reserves."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Both are correct, and II is the reason for I: the RBI's payment adds to banks' reserves, so liquidity rises. The trap is (b): II is not a separate fact but the very mechanism behind I."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "जब RBI खुले बाज़ार में सरकारी प्रतिभूतियाँ खरीदता है, तो बैंकिंग प्रणाली में तरलता बढ़ती है।",
+          "RBI खरीदी गई प्रतिभूतियों का भुगतान बैंकों के खातों में राशि जमा करके करता है, जिससे उनका आरक्षित धन बढ़ता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "दोनों कथन सही हैं और II ही I का कारण है: RBI का भुगतान बैंकों का आरक्षित धन बढ़ाता है, इसलिए तरलता बढ़ती है। जाल दूसरा विकल्प है: कथन II कोई अलग तथ्य नहीं, बल्कि I के पीछे की प्रक्रिया ही है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "eco-money-market",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following pairs of money market instruments and their features:",
+        "statements": [
+          "Treasury bill – short-term security of the Government of India, with a maturity of less than one year",
+          "Commercial paper – unsecured promissory note issued by companies",
+          "Certificate of deposit – instrument issued by the RBI to absorb liquidity"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Pairs 1 and 2 are correct. Pair 3 is wrong: certificates of deposit are issued by banks and some financial institutions to raise funds, not by the RBI. The trap is 'All three'."
+      },
+      "hi": {
+        "stem": "मुद्रा बाज़ार के उपकरणों और उनकी विशेषताओं के नीचे दिए जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "ट्रेज़री बिल – भारत सरकार की अल्पकालिक प्रतिभूति, जिसकी परिपक्वता अवधि एक वर्ष से कम होती है",
+          "वाणिज्यिक पत्र (Commercial paper) – कंपनियों द्वारा जारी असुरक्षित वचन पत्र",
+          "जमा प्रमाणपत्र (Certificate of deposit) – तरलता सोखने के लिए RBI द्वारा जारी उपकरण"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं। जोड़ा 3 गलत है: जमा प्रमाणपत्र बैंक और कुछ वित्तीय संस्थाएँ पैसा जुटाने के लिए जारी करते हैं, RBI नहीं। 'तीनों' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-banking",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about payments banks in India:",
+        "statements": [
+          "They can accept demand deposits such as savings and current account deposits.",
+          "They can issue ATM or debit cards to their customers.",
+          "They can issue credit cards and give loans."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 3 only",
+          "1 and 2 only"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: payments banks cannot lend or issue credit cards. The trap is '1 and 3 only', which assumes that any bank taking deposits can also lend."
+      },
+      "hi": {
+        "stem": "भारत में पेमेंट्स बैंकों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "ये बचत और चालू खाते जैसी माँग जमाएँ स्वीकार कर सकते हैं।",
+          "ये अपने ग्राहकों को ATM या डेबिट कार्ड जारी कर सकते हैं।",
+          "ये क्रेडिट कार्ड जारी कर सकते हैं और ऋण दे सकते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 3",
+          "केवल 1 और 2"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: पेमेंट्स बैंक न ऋण दे सकते हैं, न क्रेडिट कार्ड जारी कर सकते हैं। 'केवल 1 और 3' जाल है, जो मान लेता है कि जमा लेने वाला हर बैंक ऋण भी दे सकता है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-banking",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Under RBI norms, a term loan becomes a non-performing asset (NPA) when interest or principal instalment remains overdue for more than:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "60 days",
+          "90 days",
+          "120 days",
+          "180 days"
+        ],
+        "why": "A term loan turns into an NPA when interest or an instalment of principal stays overdue for more than 90 days. The trap is 180 days, the older norm that India replaced with the 90-day rule."
+      },
+      "hi": {
+        "stem": "RBI के मानदंडों के अनुसार, कोई सावधि ऋण गैर-निष्पादित परिसंपत्ति (NPA) तब बनता है जब ब्याज या मूलधन की किस्त कितने समय से अधिक बकाया रहे?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "60 दिन",
+          "90 दिन",
+          "120 दिन",
+          "180 दिन"
+        ],
+        "why": "जब ब्याज या मूलधन की किस्त 90 दिन से ज़्यादा बकाया रहे, तब सावधि ऋण NPA बन जाता है। जाल 180 दिन का है, जो पुराना मानदंड था और जिसकी जगह 90 दिन का नियम आया।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-banking",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "A 'scheduled bank' in India is a bank that is included in the:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "First Schedule to the Banking Regulation Act, 1949",
+          "Second Schedule to the Reserve Bank of India Act, 1934",
+          "Seventh Schedule to the Constitution of India",
+          "list of banks notified by the Ministry of Corporate Affairs"
+        ],
+        "why": "Scheduled banks are those listed in the Second Schedule to the RBI Act, 1934. The trap is the Banking Regulation Act, 1949: it is the main law regulating banks, but the 'schedule' in the term comes from the RBI Act."
+      },
+      "hi": {
+        "stem": "भारत में 'अनुसूचित बैंक' वह बैंक है जो इसमें शामिल हो:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "बैंककारी विनियमन अधिनियम, 1949 की पहली अनुसूची",
+          "भारतीय रिज़र्व बैंक अधिनियम, 1934 की दूसरी अनुसूची",
+          "भारत के संविधान की सातवीं अनुसूची",
+          "कॉर्पोरेट कार्य मंत्रालय द्वारा अधिसूचित बैंकों की सूची"
+        ],
+        "why": "अनुसूचित बैंक वे हैं जो RBI अधिनियम, 1934 की दूसरी अनुसूची में शामिल हैं। जाल बैंककारी विनियमन अधिनियम, 1949 का है: बैंकों को नियंत्रित करने वाला मुख्य कानून वही है, पर 'अनुसूचित' शब्द RBI अधिनियम से आता है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-budget",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the funds of the Government of India:",
+        "statements": [
+          "The Contingency Fund of India is placed at the disposal of the President, who can make advances from it for unforeseen expenditure.",
+          "Money in the Public Account of India can be paid out without an appropriation by Parliament.",
+          "All revenues received by the Union government are credited to the Contingency Fund of India."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1 and 2 only",
+          "1, 2 and 3"
+        ],
+        "why": "Statements 1 and 2 are correct (Articles 267 and 266). Statement 3 is wrong: Union revenues go into the Consolidated Fund of India. The trap is '1 only', from assuming every payment needs Parliament's appropriation; Public Account money does not."
+      },
+      "hi": {
+        "stem": "भारत सरकार की निधियों के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत की आकस्मिकता निधि राष्ट्रपति के अधिकार में रखी जाती है, जो अप्रत्याशित व्यय के लिए इससे अग्रिम दे सकते हैं।",
+          "भारत के लोक लेखा (Public Account) की राशि संसद के विनियोग के बिना खर्च की जा सकती है।",
+          "केंद्र सरकार को मिलने वाले सभी राजस्व भारत की आकस्मिकता निधि में जमा होते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "केवल 1 और 2",
+          "1, 2 और 3"
+        ],
+        "why": "कथन 1 और 2 सही हैं (अनुच्छेद 267 और 266)। कथन 3 गलत है: केंद्र का राजस्व भारत की संचित निधि में जाता है। जाल 'केवल 1' है, जो मान लेता है कि हर भुगतान के लिए संसद का विनियोग चाहिए; लोक लेखा की राशि के लिए ऐसा नहीं है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-fiscal-policy",
+      "answer": 1,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements about the Fiscal Responsibility and Budget Management (FRBM) Act:",
+        "statements": [
+          "It was enacted by Parliament in 2003.",
+          "It aims to bring discipline to government finances, including reducing the fiscal deficit.",
+          "It was brought in through an amendment to the Constitution."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "All three",
+          "None"
+        ],
+        "why": "Statements 1 and 2 are correct. Statement 3 is wrong: the FRBM Act is an ordinary Act of Parliament, not a constitutional amendment. The trap is 'All three', because the Act sounds as binding as a constitutional rule."
+      },
+      "hi": {
+        "stem": "राजकोषीय उत्तरदायित्व और बजट प्रबंधन (FRBM) अधिनियम के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसे संसद ने 2003 में पारित किया।",
+          "इसका उद्देश्य राजकोषीय घाटा कम करने सहित सरकारी वित्त में अनुशासन लाना है।",
+          "इसे संविधान में संशोधन के ज़रिए लाया गया।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "तीनों",
+          "कोई नहीं"
+        ],
+        "why": "कथन 1 और 2 सही हैं। कथन 3 गलत है: FRBM अधिनियम संसद का एक सामान्य कानून है, संविधान संशोधन नहीं। 'तीनों' वाला विकल्प जाल है, क्योंकि यह कानून सुनने में संवैधानिक नियम जितना बाध्यकारी लगता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii",
+      "node": "eco-budget",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "No money can be withdrawn from the Consolidated Fund of India except under an appropriation made by law.",
+          "Expenditure charged on the Consolidated Fund of India is put to the vote of the Lok Sabha every year."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement I and Statement II are correct, and Statement II explains Statement I.",
+          "Both Statement I and Statement II are correct, but Statement II does not explain Statement I.",
+          "Statement I is correct, but Statement II is incorrect.",
+          "Statement I is incorrect, but Statement II is correct."
+        ],
+        "why": "Statement I is correct under Article 266(3). Statement II is wrong: charged expenditure, such as the President's emoluments, may be discussed but is not put to vote. The trap is (b), which treats charged expenditure like the demands for grants."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "कानून द्वारा किए गए विनियोग के बिना भारत की संचित निधि से कोई धन नहीं निकाला जा सकता।",
+          "भारत की संचित निधि पर भारित व्यय पर हर वर्ष लोकसभा में मतदान होता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन I और कथन II दोनों सही हैं, और कथन II, कथन I की सही व्याख्या करता है।",
+          "कथन I और कथन II दोनों सही हैं, पर कथन II, कथन I की व्याख्या नहीं करता।",
+          "कथन I सही है, पर कथन II गलत है।",
+          "कथन I गलत है, पर कथन II सही है।"
+        ],
+        "why": "कथन I अनुच्छेद 266(3) के तहत सही है। कथन II गलत है: भारित व्यय, जैसे राष्ट्रपति की परिलब्धियाँ, पर चर्चा हो सकती है, पर मतदान नहीं होता। जाल दूसरा विकल्प है, जो भारित व्यय को अनुदान की माँगों जैसा मान लेता है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "eco-international-bodies",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Match List I (institution) with List II (associated feature) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. International Monetary Fund",
+          "B. International Bank for Reconstruction and Development",
+          "C. World Trade Organization",
+          "D. Bank for International Settlements",
+          "1. Hosts the Basel Committee on Banking Supervision",
+          "2. Special Drawing Rights",
+          "3. Dispute Settlement Body",
+          "4. Long-term loans for development projects"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-4, C-1, D-3",
+          "A-1, B-3, C-4, D-2",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "The IMF created SDRs (2), the IBRD of the World Bank gives long-term development loans (4), the WTO has the Dispute Settlement Body (3), and the BIS hosts the Basel Committee (1). The trap is (a), which swaps the IMF and the World Bank."
+      },
+      "hi": {
+        "stem": "सूची I (संस्था) को सूची II (संबंधित विशेषता) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. अंतरराष्ट्रीय मुद्रा कोष",
+          "B. अंतरराष्ट्रीय पुनर्निर्माण और विकास बैंक",
+          "C. विश्व व्यापार संगठन",
+          "D. बैंक फॉर इंटरनेशनल सेटलमेंट्स",
+          "1. बैंकिंग पर्यवेक्षण पर बेसल समिति की मेज़बानी",
+          "2. विशेष आहरण अधिकार (SDR)",
+          "3. विवाद निपटान निकाय",
+          "4. विकास परियोजनाओं के लिए दीर्घकालिक ऋण"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-2, C-3, D-1",
+          "A-2, B-4, C-1, D-3",
+          "A-1, B-3, C-4, D-2",
+          "A-2, B-4, C-3, D-1"
+        ],
+        "why": "IMF ने SDR बनाए (2), विश्व बैंक का IBRD विकास के लिए दीर्घकालिक ऋण देता है (4), WTO में विवाद निपटान निकाय है (3), और BIS बेसल समिति की मेज़बानी करता है (1)। जाल पहला विकल्प है, जो IMF और विश्व बैंक को आपस में बदल देता है।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-taxation",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements about the Goods and Services Tax (GST) in India:",
+        "statements": [
+          "It was introduced through the Constitution (One Hundred and First Amendment) Act, 2016.",
+          "The GST Council is a constitutional body chaired by the Union Finance Minister.",
+          "GST is a destination-based tax on consumption.",
+          "Alcoholic liquor for human consumption is taxed under GST."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Statements 1, 2 and 3 are correct; the GST Council comes from Article 279A. Statement 4 is wrong: the Constitution keeps alcoholic liquor for human consumption outside GST, so states still tax it. The trap is 'All four'."
+      },
+      "hi": {
+        "stem": "भारत में वस्तु एवं सेवा कर (GST) के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसे संविधान (एक सौ एकवाँ संशोधन) अधिनियम, 2016 के ज़रिए लागू किया गया।",
+          "GST परिषद एक संवैधानिक निकाय है, जिसकी अध्यक्षता केंद्रीय वित्त मंत्री करते हैं।",
+          "GST उपभोग पर लगने वाला गंतव्य-आधारित कर है।",
+          "मानव उपभोग के लिए मादक शराब पर GST लगता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "कथन 1, 2 और 3 सही हैं; GST परिषद अनुच्छेद 279A से बनी है। कथन 4 गलत है: संविधान ने मानव उपभोग की मादक शराब को GST से बाहर रखा है, इसलिए उस पर राज्य ही कर लगाते हैं। 'सभी चार' वाला विकल्प जाल है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "eco-taxation",
+      "answer": 0,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Which one of the following is NOT a direct tax?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Customs duty",
+          "Corporation tax",
+          "Personal income tax",
+          "Capital gains tax"
+        ],
+        "why": "Customs duty is an indirect tax: it is levied on imported or exported goods and its burden passes on to buyers. The trap is corporation tax: businesses pay it, but it falls on company profits and cannot be shifted, so it is direct."
+      },
+      "hi": {
+        "stem": "निम्नलिखित में से कौन-सा प्रत्यक्ष कर नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "सीमा शुल्क",
+          "निगम कर",
+          "व्यक्तिगत आयकर",
+          "पूँजीगत लाभ कर"
+        ],
+        "why": "सीमा शुल्क अप्रत्यक्ष कर है: यह आयात या निर्यात होने वाली वस्तुओं पर लगता है और इसका बोझ खरीदारों पर चला जाता है। जाल निगम कर का है: इसे कंपनियाँ भरती हैं, पर यह उनके मुनाफ़े पर लगता है और आगे नहीं खिसकता, इसलिए प्रत्यक्ष है।"
+      }
+    },
+    {
+      "format": "statement-code",
+      "node": "eco-external-sector",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements about India's balance of payments:",
+        "statements": [
+          "The current account records trade in goods and services.",
+          "Remittances sent home by Indians working abroad are recorded in the capital account.",
+          "Foreign direct investment and foreign portfolio investment are recorded in the capital account."
+        ],
+        "ask": "Which of the statements given above is/are correct?",
+        "options": [
+          "1 only",
+          "2 and 3 only",
+          "1, 2 and 3",
+          "1 and 3 only"
+        ],
+        "why": "Statements 1 and 3 are correct. Statement 2 is wrong: remittances are transfers, recorded in the current account, not the capital account. The trap is '1, 2 and 3', since remittances feel like a capital inflow."
+      },
+      "hi": {
+        "stem": "भारत के भुगतान संतुलन के बारे में नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "चालू खाते में वस्तुओं और सेवाओं का व्यापार दर्ज होता है।",
+          "विदेश में काम करने वाले भारतीयों द्वारा घर भेजा गया पैसा (प्रेषण) पूँजी खाते में दर्ज होता है।",
+          "प्रत्यक्ष विदेशी निवेश और विदेशी पोर्टफोलियो निवेश पूँजी खाते में दर्ज होते हैं।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2 और 3",
+          "1, 2 और 3",
+          "केवल 1 और 3"
+        ],
+        "why": "कथन 1 और 3 सही हैं। कथन 2 गलत है: प्रेषण अंतरण (transfers) हैं, जो चालू खाते में दर्ज होते हैं, पूँजी खाते में नहीं। '1, 2 और 3' वाला विकल्प जाल है, क्योंकि प्रेषण पूँजी के आने जैसा लगता है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "eco-external-sector",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Foreign direct investment (FDI) is generally seen as a more stable source of foreign capital than foreign portfolio investment (FPI).",
+          "FDI reflects a lasting interest and some say in the management of the enterprise.",
+          "FPI investors can sell listed shares and bonds quickly and take their money out."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Both II and III are correct, and each explains I: FDI's lasting stake keeps it in place, while FPI can leave quickly. The trap is (b): III explains I too, by showing why FPI is the less stable one."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "प्रत्यक्ष विदेशी निवेश (FDI) को आम तौर पर विदेशी पोर्टफोलियो निवेश (FPI) से अधिक स्थिर विदेशी पूँजी माना जाता है।",
+          "FDI में उद्यम में दीर्घकालिक हित और प्रबंधन में कुछ भागीदारी होती है।",
+          "FPI निवेशक सूचीबद्ध शेयर और बॉन्ड जल्दी बेचकर अपना पैसा निकाल सकते हैं।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "कथन II और III दोनों सही हैं और दोनों I की व्याख्या करते हैं: FDI की दीर्घकालिक हिस्सेदारी उसे टिकाए रखती है, जबकि FPI जल्दी निकल सकता है। जाल दूसरा विकल्प है: III भी I को समझाता है, क्योंकि वह बताता है कि FPI कम स्थिर क्यों है।"
+      }
+    },
+    {
+      "format": "statement-i-ii-iii",
+      "node": "eco-inflation",
+      "answer": 2,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "Inflation measured by the Consumer Price Index can differ from inflation measured by the Wholesale Price Index in the same month.",
+          "The Wholesale Price Index covers goods only, while the Consumer Price Index also includes services such as housing, health and education.",
+          "The Wholesale Price Index is compiled and released by the Reserve Bank of India."
+        ],
+        "ask": "Which one of the following is correct in respect of the above statements?",
+        "options": [
+          "Both Statement II and Statement III are correct and both of them explain Statement I",
+          "Both Statement II and Statement III are correct but only one of them explains Statement I",
+          "Only one of the Statements II and III is correct and that explains Statement I",
+          "Neither Statement II nor Statement III is correct"
+        ],
+        "why": "Statement II is correct and explains I: the two indices cover different baskets. Statement III is wrong: the WPI comes from the Office of the Economic Adviser, DPIIT, not the RBI. The trap is (b), which assumes the RBI compiles price indices."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "एक ही महीने में उपभोक्ता मूल्य सूचकांक से मापी गई मुद्रास्फीति, थोक मूल्य सूचकांक से मापी गई मुद्रास्फीति से अलग हो सकती है।",
+          "थोक मूल्य सूचकांक में केवल वस्तुएँ होती हैं, जबकि उपभोक्ता मूल्य सूचकांक में आवास, स्वास्थ्य और शिक्षा जैसी सेवाएँ भी शामिल हैं।",
+          "थोक मूल्य सूचकांक भारतीय रिज़र्व बैंक तैयार और जारी करता है।"
+        ],
+        "ask": "इन कथनों के संदर्भ में निम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "कथन II और कथन III दोनों सही हैं और दोनों कथन I की व्याख्या करते हैं",
+          "कथन II और कथन III दोनों सही हैं, पर केवल एक ही कथन I की व्याख्या करता है",
+          "कथन II और III में से केवल एक सही है और वही कथन I की व्याख्या करता है",
+          "न तो कथन II सही है, न ही कथन III"
+        ],
+        "why": "कथन II सही है और I की व्याख्या करता है: दोनों सूचकांकों की टोकरी अलग है। कथन III गलत है: WPI आर्थिक सलाहकार का कार्यालय, DPIIT जारी करता है, RBI नहीं। जाल दूसरा विकल्प है, जो मान लेता है कि मूल्य सूचकांक RBI बनाता है।"
+      }
+    },
+    {
+      "format": "how-many-pairs",
+      "node": "eco-inflation",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Consider the following pairs of terms and their meanings:",
+        "statements": [
+          "Stagflation – high inflation together with stagnant growth and high unemployment",
+          "Deflation – a fall in the general price level",
+          "Disinflation – the general price level falls below zero",
+          "Core inflation – measures only food and fuel prices"
+        ],
+        "ask": "How many of the pairs given above are correctly matched?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "Pairs 1 and 2 are correct. Disinflation means prices still rise, but more slowly; core inflation leaves out food and fuel rather than measuring only them. The trap is 'Only three', from accepting the disinflation pair."
+      },
+      "hi": {
+        "stem": "नीचे दिए शब्दों और उनके अर्थों के जोड़ों पर विचार कीजिए:",
+        "statements": [
+          "मुद्रास्फीतिजनित मंदी (Stagflation) – ऊँची मुद्रास्फीति के साथ ठहरी हुई वृद्धि और ऊँची बेरोज़गारी",
+          "अपस्फीति (Deflation) – सामान्य मूल्य स्तर में गिरावट",
+          "अवस्फीति (Disinflation) – सामान्य मूल्य स्तर शून्य से नीचे चला जाना",
+          "कोर मुद्रास्फीति – केवल खाद्य और ईंधन की कीमतें मापती है"
+        ],
+        "ask": "इनमें से कितने जोड़े सही सुमेलित हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "जोड़े 1 और 2 सही हैं। अवस्फीति में कीमतें बढ़ती तो हैं, पर धीमी रफ़्तार से; और कोर मुद्रास्फीति खाद्य और ईंधन को बाहर रखती है, सिर्फ उन्हें नहीं मापती। जाल 'केवल तीन' है, जो अवस्फीति वाले जोड़े को सही मान लेता है।"
+      }
+    },
+    {
+      "format": "negative",
+      "node": "eco-international-bodies",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which one of the following statements about the World Trade Organization (WTO) is NOT correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It came into being on 1 January 1995.",
+          "It succeeded the GATT system as the forum for multilateral trade rules.",
+          "Its headquarters is in Geneva.",
+          "India joined it only after 2000."
+        ],
+        "why": "India is a founding member of the WTO, which began on 1 January 1995, so (d) is not correct. The trap is (a): some confuse the WTO's start with GATT, which dates from 1947."
+      },
+      "hi": {
+        "stem": "विश्व व्यापार संगठन (WTO) के बारे में निम्नलिखित में से कौन-सा कथन सही नहीं है?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "यह 1 जनवरी 1995 को अस्तित्व में आया।",
+          "बहुपक्षीय व्यापार नियमों के मंच के रूप में इसने GATT व्यवस्था की जगह ली।",
+          "इसका मुख्यालय जिनेवा में है।",
+          "भारत इसमें 2000 के बाद ही शामिल हुआ।"
+        ],
+        "why": "भारत WTO का संस्थापक सदस्य है, और WTO 1 जनवरी 1995 को शुरू हुआ था, इसलिए चौथा विकल्प गलत है। जाल पहला विकल्प है: कुछ लोग WTO की शुरुआत को GATT से मिला देते हैं, जो 1947 का है।"
+      }
+    },
+    {
+      "format": "direct",
+      "node": "eco-national-income",
+      "answer": 0,
+      "difficulty": "hard",
+      "en": {
+        "stem": "If a country's net factor income from abroad is negative in a year, which one of the following must be true for that year?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Its GNP is less than its GDP.",
+          "Its GNP is greater than its GDP.",
+          "Its NDP is greater than its GDP.",
+          "Its trade balance is in deficit."
+        ],
+        "why": "GNP equals GDP plus net factor income from abroad, so a negative figure makes GNP smaller than GDP. The trap is a trade deficit: factor income covers earnings like wages, interest and profits, not exports and imports of goods."
+      },
+      "hi": {
+        "stem": "यदि किसी वर्ष किसी देश की विदेश से शुद्ध साधन आय ऋणात्मक हो, तो उस वर्ष के लिए निम्नलिखित में से क्या अवश्य सही होगा?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "उसका GNP उसके GDP से कम है।",
+          "उसका GNP उसके GDP से अधिक है।",
+          "उसका NDP उसके GDP से अधिक है।",
+          "उसका व्यापार संतुलन घाटे में है।"
+        ],
+        "why": "GNP बराबर है GDP और विदेश से शुद्ध साधन आय के योग के, इसलिए यह आय ऋणात्मक हो तो GNP, GDP से कम होगा। जाल व्यापार घाटे का है: साधन आय में मज़दूरी, ब्याज और मुनाफ़े जैसी कमाई आती है, वस्तुओं का आयात-निर्यात नहीं।"
+      }
+    },
+    {
+      "format": "how-many-statements",
+      "node": "eco-international-bodies",
+      "answer": 3,
+      "difficulty": "easy",
+      "en": {
+        "stem": "Consider the following statements:",
+        "statements": [
+          "The IMF and the World Bank both emerged from the Bretton Woods Conference of 1944.",
+          "The Special Drawing Right is an international reserve asset created by the IMF.",
+          "The International Development Association, part of the World Bank Group, lends on concessional terms to the poorest countries.",
+          "A member's voting power in the IMF is largely linked to its quota."
+        ],
+        "ask": "How many of the statements given above are correct?",
+        "options": [
+          "Only one",
+          "Only two",
+          "Only three",
+          "All four"
+        ],
+        "why": "All four are correct. The trap is 'Only three', from thinking the IMF works on one country, one vote; in fact votes are largely linked to each member's quota."
+      },
+      "hi": {
+        "stem": "नीचे दिए कथनों पर विचार कीजिए:",
+        "statements": [
+          "IMF और विश्व बैंक दोनों 1944 के ब्रेटन वुड्स सम्मेलन से बने।",
+          "विशेष आहरण अधिकार (SDR) IMF द्वारा बनाई गई एक अंतरराष्ट्रीय आरक्षित परिसंपत्ति है।",
+          "विश्व बैंक समूह का अंग, अंतरराष्ट्रीय विकास संघ (IDA), सबसे गरीब देशों को रियायती शर्तों पर ऋण देता है।",
+          "IMF में किसी सदस्य की मतदान शक्ति मुख्य रूप से उसके कोटे से जुड़ी होती है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कितने सही हैं?",
+        "options": [
+          "केवल एक",
+          "केवल दो",
+          "केवल तीन",
+          "सभी चार"
+        ],
+        "why": "चारों कथन सही हैं। जाल 'केवल तीन' का है, जो यह सोचकर चुना जाता है कि IMF में हर देश का एक वोट होता है; असल में मतदान शक्ति मुख्य रूप से हर सदस्य के कोटे से जुड़ी है।"
+      }
+    },
+    {
+      "format": "list-match",
+      "node": "eco-fiscal-policy",
+      "answer": 1,
+      "difficulty": "hard",
+      "en": {
+        "stem": "Match List I (deficit) with List II (how it is worked out) and select the correct answer using the codes given below.",
+        "statements": [
+          "A. Fiscal deficit",
+          "B. Revenue deficit",
+          "C. Primary deficit",
+          "D. Effective revenue deficit",
+          "1. Fiscal deficit minus interest payments",
+          "2. Revenue deficit minus grants for creation of capital assets",
+          "3. Total expenditure minus total receipts other than borrowings",
+          "4. Revenue expenditure minus revenue receipts"
+        ],
+        "ask": "Which one of the following is the correct match?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "Fiscal deficit is total expenditure minus non-borrowed receipts (3), revenue deficit is revenue expenditure minus revenue receipts (4), primary deficit removes interest payments (1), and effective revenue deficit removes grants for capital assets (2). The trap is (c), which swaps C and D."
+      },
+      "hi": {
+        "stem": "सूची I (घाटा) को सूची II (उसकी गणना) से सुमेलित कीजिए और नीचे दिए कूटों का प्रयोग करके सही उत्तर चुनिए।",
+        "statements": [
+          "A. राजकोषीय घाटा",
+          "B. राजस्व घाटा",
+          "C. प्राथमिक घाटा",
+          "D. प्रभावी राजस्व घाटा",
+          "1. राजकोषीय घाटा घटा ब्याज भुगतान",
+          "2. राजस्व घाटा घटा पूँजीगत परिसंपत्तियों के निर्माण के लिए अनुदान",
+          "3. कुल व्यय घटा उधारी को छोड़कर कुल प्राप्तियाँ",
+          "4. राजस्व व्यय घटा राजस्व प्राप्तियाँ"
+        ],
+        "ask": "निम्नलिखित में से कौन-सा सही सुमेलन है?",
+        "options": [
+          "A-4, B-3, C-1, D-2",
+          "A-3, B-4, C-1, D-2",
+          "A-3, B-4, C-2, D-1",
+          "A-1, B-4, C-3, D-2"
+        ],
+        "why": "राजकोषीय घाटा कुल व्यय में से उधारी छोड़कर बाकी प्राप्तियाँ घटाने पर आता है (3), राजस्व घाटा राजस्व व्यय घटा राजस्व प्राप्तियाँ है (4), प्राथमिक घाटे में ब्याज भुगतान घटाते हैं (1), और प्रभावी राजस्व घाटे में पूँजीगत परिसंपत्तियों के अनुदान (2)। जाल तीसरा विकल्प है, जो C और D को बदल देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Introductory Macroeconomics; RBI Act, 1934; Constitution of India",
+    "hi": "NCERT कक्षा XII समष्टि अर्थशास्त्र: एक परिचय; RBI अधिनियम, 1934; भारत का संविधान"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Prep content build)",
+    "createdOn": "2026-10-20",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schemaId": "upsc-pods/map-card@1",
+  "knobs": {
+    "base": "a schematic base map with named anchors. No borders are drawn."
+  },
+  "defaults": {
+    "base": "illustrations/hormuz-schematic.svg",
+    "canvas": {
+      "width": 480,
+      "height": 360
+    },
+    "note": "Schematic. Not to scale. No boundaries shown.",
+    "tags": {
+      "stage": [
+        "prelims",
+        "mains"
+      ],
+      "papers": [
+        "prelims-gs1",
+        "mains-gs1"
+      ],
+      "formats": [
+        "pre-map",
+        "mains-diagram"
+      ]
+    }
+  },
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "anchors": {
+    "iran": {
+      "name": "Iran",
+      "x": 196,
+      "y": 52
+    },
+    "musandam": {
+      "name": "Musandam, Oman",
+      "x": 186,
+      "y": 120
+    },
+    "gulf": {
+      "name": "Persian Gulf",
+      "x": 92,
+      "y": 120
+    },
+    "oman": {
+      "name": "Gulf of Oman",
+      "x": 262,
+      "y": 150
+    },
+    "strait": {
+      "name": "The strait itself",
+      "x": 196,
+      "y": 90,
+      "rx": 16,
+      "ry": 10
+    }
+  }
+}
