@@ -1,6 +1,8 @@
-# UPSC Pods (Chotu): instructions for Claude
+# Aspiran (formerly UPSC Pods; Chotu): instructions for Claude
 
-Full context is in `artefacts/handover/HANDOVER.md`; read it only when you need history.
+Start with `artefacts/handover/SESSION-2026-10-31.md` (latest decisions and the pending list). Older context is in
+`artefacts/handover/HANDOVER.md`; read it only when you need history. The brand is now **Aspiran** (https://aspiran.in);
+code and older docs still say "UPSC Pods" until the rename lands. The project lives on the owner's Mac.
 
 ## What this is
 UPSC Pods: a community-first study app for UPSC aspirants in India. Small "pods" of aspirants, daily
@@ -28,8 +30,9 @@ English and Hindi first; Telugu is the pilot language.
 - `npm run import -- <pack folder>` imports a content pack. Everything lands as drafts.
 
 ## Standing rules
-- Never deploy, push, change a live flag, type a password or approve content. Write a PowerShell 5.1
-  runbook (one line at a time, `curl.exe`, success and failure notes per step) in `artefacts/` for the owner.
+- Never deploy, change a live flag, type a password or approve content. Write a macOS Terminal (zsh) runbook
+  (one command at a time, success and failure notes per step) in `artefacts/` for the owner.
+- Commit locally and push to GitHub (`origin` = github.com/srsrsrsr9/aspiran) at sensible checkpoints. Never commit secrets.
 - Secrets go in with `npx wrangler secret put NAME --env production`, typed by the owner. Never in files or chat.
 - Content is always a draft until an English and a Hindi editor approve it. Don't claim content is
   "checked by a human editor" anywhere until that's true.
@@ -38,7 +41,7 @@ English and Hindi first; Telugu is the pilot language.
   maps are schematic with no national borders.
 - Chotu and AI pod friends are always labelled AI, quiet from 23:30 to 07:00 IST, never respond to
   feelings, ranks or results. Distress handling follows `community/crisis-protocol.md`.
-- The Android app never sells Plus or links to where it's sold (Play Billing is built but off, pending the
-  owner's decision). Web payments are Cashfree, still in sandbox.
+- Plus is sold both in the Android app via Google Play Billing (owner decided 31 Oct; built, still off until the Play
+  account and product are ready) and on the web via Cashfree (still sandbox). ₹9,999/yr; ₹999 for the first 300.
 - Keep a local copy of every artefact you publish or revise in `artefacts/`.
 - Write for a non-developer owner: plain words, short replies, decisions up front.
