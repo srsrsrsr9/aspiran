@@ -72,7 +72,7 @@ Groq is still the fastest per token, but its production list is stuck on Llama 3
 
 ## 2026-10-15 (update): free stack, training on our data allowed
 
-Edureka decided that letting providers train on our prompts is fine for now. That lifts the "no free tiers for student chats" rule until further notice.
+The owner decided that letting providers train on our prompts is fine for now. That lifts the "no free tiers for student chats" rule until further notice.
 
 ### Free options worth using
 
@@ -116,7 +116,7 @@ Caveat: a Google forum reply says running a public production app on the free ti
 
 ## 2026-10-15 (update 2): route by the aspirant's chosen language
 
-Edureka wants the newest, best model as the default (not Gemma for its own sake), and wants Chotu to route by the language each aspirant picks, so no single provider carries everything.
+The owner wants the newest, best model as the default (not Gemma for its own sake), and wants Chotu to route by the language each aspirant picks, so no single provider carries everything.
 
 ### What's newest right now
 - **Gemini 4 Argon** (Google flagship, public 13 Oct 2026): **no free tier**. $2 / $10 until 30 Nov, then $4 / $20 from 1 Dec. It's the only Gemini 4 model so far. Source: ai.google.dev/gemini-api/docs/pricing

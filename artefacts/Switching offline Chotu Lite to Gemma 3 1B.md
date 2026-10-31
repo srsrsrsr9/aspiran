@@ -1,6 +1,6 @@
 # Switching offline Chotu Lite to Gemma 3 1B
 
-Oct 13, 2026 · @Edureka
+Oct 13, 2026 · @Aspiran
 
 ## Why
 
