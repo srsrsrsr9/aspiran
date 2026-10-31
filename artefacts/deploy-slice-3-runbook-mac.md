@@ -8,6 +8,11 @@ What this adds:
 - **Play Billing for Plus:** built, but the `play_billing` flag stays off.
 - **The content drafts:** 30 syllabus notes, 3 CSAT passages, 3 full Prelims GS1 mocks, and the syllabus map for the
   optionals and language papers. They arrive as drafts; nothing is public until an editor approves it.
+- **Legal pages** now name SnapSkill LLP and list Resend and Google Play. Address, support email, Grievance Officer
+  and city are still placeholders until you send them.
+- **Web app: "Read aloud · device voice"** on Chai cards (not tragic ones) and long reads.
+
+Checked on the Mac before this runbook: type check passes and all 14 server test suites pass (31 Oct).
 
 How to run it:
 - Open **Terminal** (Applications > Utilities). Paste one line at a time and wait for it to finish.
