@@ -26,7 +26,7 @@ export interface Pricing { yearlyInr: number; foundingInr: number; foundingSeats
 export const DEFAULT_PRICING: Pricing = { yearlyInr: 9999, foundingInr: 999, foundingSeats: 300, foundingOn: false };
 /** Shown on receipts and the legal pages. Placeholders until the founder fills them in admin. */
 export interface Business { entityName: string; address: string; email: string; gstin: string }
-export const DEFAULT_BUSINESS: Business = { entityName: "[Legal entity name]", address: "[Registered address]", email: "[Support email]", gstin: "" };
+export const DEFAULT_BUSINESS: Business = { entityName: "SnapSkill LLP", address: "[Registered address]", email: "[Support email]", gstin: "" };
 
 const API_VERSION = "2023-08-01";
 const YEAR_DAYS = 365;
