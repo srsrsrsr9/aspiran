@@ -233,6 +233,8 @@ private fun ChaiCardPage(item: NewsItem, preferHindi: Boolean, showJoke: Boolean
             if (item.hi != null) {
                 AssistChip(onClick = { hindi = !hindi }, label = { Text(l.switchTo) })
             }
+            // The phone's own voice, on a tap. Tragic cards get no sound.
+            if (!tragic) ReadAloudButton(listOf(v.headline, v.summary, l.why, v.whyForUpsc.joinToString("\n")).joinToString("\n"))
             // On-device only, and only when the model is downloaded. Tragic cards keep the editor's words.
             if (!tragic) ExplainSimpler(chotu, "${v.headline}. ${v.summary}", hindi = l.hindi)
 

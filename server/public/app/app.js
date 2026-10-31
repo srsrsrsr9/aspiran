@@ -627,6 +627,7 @@ function viewChai(arg) {
       it.illustration && !store.get("dataSaver") && h("img", { src: it.illustration, alt: "", style: { width: "100%", borderRadius: "12px", marginTop: "12px" } }),
       h("h1", { style: { marginTop: "12px" } }, t.headline),
       h("div.reader", { style: { fontSize: "18px", margin: 0 } }, h("p", t.summary)),
+      it.tone !== "tragic" && readAloud([t.headline, t.summary, ...(t.why?.length ? ["Why this matters for UPSC", ...t.why] : [])].join("\n"), t.lang),
       t.why?.length > 0 && h("div", h("h3", "Why this matters for UPSC"), h("ul", t.why.map((w) => h("li", w)))),
       examOpen,
       h("hr", { style: { border: 0, borderTop: "1px solid var(--line)", margin: "16px 0" } }),
@@ -946,6 +947,32 @@ function viewRead(arg) {
     h("div.card", h("div.row.between", h("div", h("strong", "Saved Chai cards"), h("div.small.muted", `${store.get("saved", []).length} saved`)), h("a.btn", { href: "#read/saved" }, "Read"))));
 }
 
+// "Read aloud · device voice": the browser's own speech, on a tap only. Nothing is sent anywhere; no AI voice.
+// Stops when the page changes. Hidden where the browser has no speech.
+function readAloud(text, lang) {
+  if (!("speechSynthesis" in window)) return null;
+  const hi = lang === "hi";
+  const label = () => (speechSynthesis.speaking ? (hi ? "■ रोकें" : "■ Stop") : hi ? "🔈 सुनें · डिवाइस की आवाज़" : "🔈 Read aloud · device voice");
+  const note = h("span.small.muted");
+  const btn = h("button.ghost", { onclick: () => {
+    if (speechSynthesis.speaking) { speechSynthesis.cancel(); btn.textContent = label(); return; }
+    const want = hi ? "hi" : "en";
+    const voices = speechSynthesis.getVoices();
+    const voice = voices.find((v) => v.lang.toLowerCase().startsWith(want + "-in")) ?? voices.find((v) => v.lang.toLowerCase().startsWith(want));
+    if (hi && voices.length && !voice) { note.textContent = " इस डिवाइस में हिंदी आवाज़ नहीं है।"; return; }
+    note.textContent = "";
+    String(text).split(/\n+/).map((x) => x.trim()).filter(Boolean).forEach((part, k, all) => {
+      const u = new SpeechSynthesisUtterance(part);
+      u.lang = hi ? "hi-IN" : "en-IN"; if (voice) u.voice = voice;
+      if (k === all.length - 1) u.onend = u.onerror = () => { btn.textContent = label(); };
+      speechSynthesis.speak(u);
+    });
+    btn.textContent = hi ? "■ रोकें" : "■ Stop";
+  } }, label());
+  cleanup.push(() => speechSynthesis.cancel());
+  return h("span", btn, note);
+}
+
 function readerTools() {
   const size = store.get("readSize", 20);
   document.documentElement.style.setProperty("--read-size", size + "px");
@@ -975,6 +1002,7 @@ function reader(id) {
       h("div.bar", progress)),
     h("article.reader", { lang },
       h("h1", { style: { fontFamily: "var(--ui-font)" } }, bi(d.title)),
+      h("div", { style: { fontFamily: "var(--ui-font)" } }, readAloud([bi(d.title), ...sections.flatMap((s) => [s.heading, s.body])].filter(Boolean).join("\n"), lang)),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, `${d.minutes} min · ${checked?.checkedBy ? `Checked by ${checked.checkedBy}, ${checked.checkedOn} ✓` : "Not yet checked by an editor"}`),
       sections.map((s) => [s.heading && h("h2", s.heading), String(s.body ?? "").split(/\n{2,}/).map((para) => h("p", para))]),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, "Sources: " + bi(d.sources))),

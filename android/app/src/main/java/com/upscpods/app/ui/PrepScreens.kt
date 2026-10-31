@@ -280,6 +280,10 @@ fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: 
         }
         Text(read.title.pick(hindi), style = MaterialTheme.typography.headlineSmall)
         Muted("${read.minutes} min · ${read.review.line(hindi)}")
+        ReadAloudButton(remember(read, hindi) {
+            (listOf(read.title.pick(hindi), read.dekFor(hindi)) + read.sectionsFor(hindi).flatMap { listOf(it.heading, it.body) })
+                .filter { it.isNotBlank() }.joinToString("\n")
+        })
         read.dekFor(hindi).takeIf { it.isNotBlank() }?.let { Text(it, style = body, fontWeight = FontWeight.Medium) }
         read.sectionsFor(hindi).forEach { s ->
             if (s.heading.isNotBlank()) Text(s.heading, style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 8.dp))
