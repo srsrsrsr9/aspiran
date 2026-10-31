@@ -32,9 +32,14 @@ mv ~/Documents/app/android/.idea ~/Documents/app/android/.idea-windows-old
 - Failure: copy the first red error line from the **Build** window and send it to Claude.
 
 ## Build result (Claude, 31 Oct)
-Not finished from Claude's side. Claude's sandbox blocks Java from reaching the internet, so Gradle 9.8.1 and the
-libraries couldn't download. That's a limit of Claude's sandbox, not of the project. Android Studio on your Mac has
-no such block, so Step 1 does the first real download and build. The `app-debug.apk` in `app/build` is the old one
+The first sync failed: "Could not install Gradle distribution ... Connect timed out". On this Mac's network, Java
+(which Gradle and Android Studio use) can't connect to GitHub's download server (release-assets.githubusercontent.com),
+where Gradle's zip is hosted. curl can, and Java reaches Google's and Maven's library servers fine. Claude downloaded
+the zip with curl, checked it against Gradle's published SHA-256, and put it in
+`~/.gradle/wrapper/dists/gradle-9.8.1-bin/a2l6ltp3k1vth6lwipzm5p2jp/`, so Studio no longer needs to download it.
+After that, the Studio sync succeeded (it installed Android SDK Platform 37) and Claude's `./gradlew assembleDebug`
+gave **BUILD SUCCESSFUL** (31 Oct, 22:59): `android/app/build/outputs/apk/debug/app-debug.apk`, about 73 MB.
+If a future Gradle version hits the same timeout, the same trick works (or try another network, such as a phone hotspot). The `app-debug.apk` in `app/build` is the old one
 from the Windows PC (24 Oct).
 
 ## Step 3. Find `upload.jks` (needed only for Play uploads)
