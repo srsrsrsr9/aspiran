@@ -4,7 +4,7 @@
 1. **Optionals, and in what order.** The other chat suggested starting with the first 5 nodes of each optional
    (Sociology, Geography, PSIR, Anthropology, History, Public Administration) so every one has a working start.
    I recommend that. Say yes, or give your own order.
-2. **Video topics.** Approve the 18 topics in Part 4 (or strike any). I build the videos here on the Mac; you do the voice.
+2. **Video topics.** Approve or change the 18 topics in Part 4. You build the videos too (owner, 2 Nov).
 
 ---
 
@@ -67,17 +67,14 @@ Modern history: 30 notes). Polity, governance, IR, culture, world history, socie
 all of Ethics have none. These nine batches add about 70 notes, in English and Hindi. They are now in the brief:
 upload the new version, `artefacts/Aspiran content brief for Claude.md`, to the Project and replace the old file.
 
-## Part 4. Videos
-Your earlier work (`docs/content/`) covers episodes 4–9, plus 1–3 from your own pack. They are good drafts: claims
-were checked, and the review notes are honest. They are not in the app yet, they're English only, and they use a
-placeholder voice. Making videos needs code, so the claude.ai chat can't do it. **I'll build them here on the Mac with
-your kit.**
+## Part 4. Videos (yours)
+Episodes 4–9 (`docs/content/`) plus 1–3 from your pack are good drafts: claims checked, honest review notes. They're
+English only, use a placeholder voice and aren't in the app yet.
 
-**You do:**
-1. Approve the topics below.
-2. **Voice:** each episode comes with an `.elevenlabs.txt` script. Record it in ElevenLabs with the voice you used for
-   the "Akela nahi" videos, and put the files in `~/Downloads/aspiran-voice/`. I swap them in and re-time the captions.
-3. Later: choose the Hindi voice, so every episode also gets a Hindi version.
+**How to build the next ones:** videos need code, so use a chat with **code execution and web search turned on** (Claude
+Sonnet), upload `upsc-pods-kit.zip`, and paste **Prompt A** from the kit's README with a batch of rows from below. Ask
+for one episode at a time if it runs out of room. Record the narration in ElevenLabs from each `.elevenlabs.txt`.
+Put the finished episode folders in `~/Downloads/aspiran-videos/`. I check the files and add them to the app as drafts.
 
 **V1 (8 episodes, mostly Polity, the biggest gap):** 10 India's carbon market · 11 Seats frozen until a census ·
 12 GDP base year · 14 Money Bill vs Financial Bill · 15 Ordinances and re-promulgation · 16 Why a bill lapses ·
@@ -88,9 +85,9 @@ your kit.**
 25 DPDP Act 2023 · 26 Project Cheetah · 27 Governor's assent timelines · 13 Indus Waters Treaty (SERIOUS and contested;
 last, strictly neutral, and only if you're comfortable).
 
-Each is 40–56 seconds and ends on a question, with no answer on screen. Every fact goes in a claims table for the editor,
-and every video arrives as a draft.
+**Later:** choose a Hindi voice so every episode also gets a Hindi version.
 
 ## What happens to everything
-Every file comes to me. I check it with code, fix the format, and import it as **drafts**. Nothing shows as checked
+Every file comes to me. I check it with code, fix the format, and import it as **drafts**. Making content is your
+work; mine is the app, the website, pedagogy, marketing and the quality of the whole journey. Nothing shows as checked
 until an English and a Hindi editor approve it.

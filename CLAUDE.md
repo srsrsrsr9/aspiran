@@ -45,4 +45,7 @@ English and Hindi first; Telugu is the pilot language.
 - Plus is sold both in the Android app via Google Play Billing (owner decided 31 Oct; built, still off until the Play
   account and product are ready) and on the web via Cashfree (still sandbox). ₹9,999/yr; ₹999 for the first 300.
 - Keep a local copy of every artefact you publish or revise in `artefacts/`.
+- The owner makes all content, videos included (2 Nov 2026). Claude checks, formats and imports it as drafts, and puts
+  new content needs in the owner's assignment (`artefacts/content-assignment-*.md`). Claude's own focus: pedagogy, app builds,
+  website, marketing and the quality of the whole user journey.
 - Write for a non-developer owner: plain words, short replies, decisions up front.
