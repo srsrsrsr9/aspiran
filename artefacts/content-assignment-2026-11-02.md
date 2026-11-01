@@ -43,12 +43,16 @@ Answers to your open questions:
 ```
 
 ## Part 3. The rest of the brief (one chat per batch)
-**Better this time:**
-- Turn on **code execution / file creation** in the chat's settings. The last chat had it off, so it couldn't zip files or
-  count words.
-- If it still can't make files, that's fine: copy the whole reply into a text file named after the batch (e.g.
-  `B02.txt`) in `~/Downloads/aspiran-batches/`. I pull the files out and check them with code, as I did with B01.
-- One batch per chat keeps the quality up. Type `Make batch B02`, and so on.
+**How to run it in incognito chats (better results, fewer limit hits):**
+1. **One new incognito chat per batch.** A single long chat gets slower and sloppier, and uses your limit faster,
+   because every reply re-reads everything above it.
+2. **Paste only that batch's prompt**, from `artefacts/content-prompts/` (e.g. `B05.md`), not the whole brief. Each one
+   holds the rules plus that one batch, at about a third of the length. Then type `Make batch B05`.
+3. **Save the reply before you close the tab.** Incognito chats vanish. Paste the whole reply into a text file named
+   after the batch (`B05.txt`) in `~/Downloads/aspiran-batches/`. If it says `CONTINUES`, type `next` and paste that
+   reply into the same file.
+4. Use Opus with extended thinking on, if your plan has it. It does the careful self-check better.
+5. Tell me when files land. I pull them out and check them with code, as I did with B01.
 
 | Order | Batch | What | Chats |
 |---|---|---|---|
