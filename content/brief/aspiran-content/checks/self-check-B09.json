@@ -1,0 +1,29 @@
+{
+  "batch": "B09",
+  "checksRun": [
+    "Each file has exactly 80 terms (counted by hand)",
+    "Every meaning ≤ 20 English words (counted by hand; longest about 19)",
+    "Every term has hi in Devanagari; hiAlt either a string or null",
+    "Political neutrality: no party names; contested ideas (e.g. Indian feudalism, communalism) defined descriptively",
+    "No national borders described (rule C1)",
+    "Strict re-read of polity (writs, Article numbers), economy (deficit definitions), history (land revenue systems), environment (treaty years), IR (NPT/CTBT status)"
+  ],
+  "issuesFound": [
+    "Polity: an early draft used 'सर्वोच्च न्यायालय' as primary; the Constitution's Hindi text uses 'उच्चतम न्यायालय'",
+    "History: 'Dual Government' and 'Dyarchy' both mapped to द्वैध शासन, causing confusion",
+    "Science: 'Epidemic' and 'Pandemic' both mapped to महामारी",
+    "IR: an early list included the Line of Actual Control, against rule C1",
+    "Economy: reverse repo described as the main absorption tool; the Standing Deposit Facility now plays that role"
+  ],
+  "fixed": [
+    "Polity: उच्चतम न्यायालय primary, सर्वोच्च in hiAlt",
+    "History: Dual Government → दोहरा शासन; Dyarchy → द्वैध शासन, each with a qualifying hiAlt",
+    "Science: Pandemic → वैश्विक महामारी",
+    "IR: replaced with Confidence-Building Measures",
+    "Economy: meaning notes the Standing Deposit Facility"
+  ],
+  "stillOpen": [
+    "Machine count of terms and words",
+    "Hindi editor check of all 640 Hindi terms against UPSC Hindi papers"
+  ]
+}

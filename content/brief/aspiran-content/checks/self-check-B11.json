@@ -1,0 +1,28 @@
+{
+  "batch": "B11",
+  "checksRun": [
+    "300 questions, ids b11-q001 to b11-q300, no gaps or duplicates (checked by hand)",
+    "Every question has persona from the five keys, depth from opener/follow-up/deep, idkOk boolean, and en/hi text",
+    "Forbidden topics scan: religion, caste, marriage, family income — none asked",
+    "Slots appear identically in en and hi",
+    "Current-issue questions avoid stating any recent fact as given, so they don't date",
+    "Political neutrality: questions on welfare spending, lateral entry and Centre-state relations ask for both sides or the candidate's reasoning",
+    "Strict re-read of q097, q101, q115, q244, q286"
+  ],
+  "issuesFound": [
+    "q097: an early wording ('Gaps in a CV make people wonder') could read as judgemental",
+    "q244: an early draft used the loaded phrase 'freebie politics'",
+    "q280: an early draft asked about the number of attempts, which can be stressful",
+    "q287: an early draft asked how 'family' supported preparation, close to family-circumstance territory"
+  ],
+  "fixed": [
+    "q097: reworded neutrally ('There's a gap of some years in your form. How did you spend that time?')",
+    "q244: reframed as 'state welfare spending … investment or burden'",
+    "q280: changed to 'What has the preparation journey taught you about yourself?'",
+    "q287: changed to 'Who has been your biggest support'"
+  ],
+  "stillOpen": [
+    "Machine count of groups and depths",
+    "Hindi editor review of formal Hindi register for board questions"
+  ]
+}

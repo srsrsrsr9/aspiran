@@ -1,0 +1,55 @@
+{
+  "batch": "B11",
+  "made": "2026-11-01",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "interview/personas.json",
+      "id": "b11-personas",
+      "items": 5
+    },
+    {
+      "path": "interview/bank-01.json",
+      "id": "b11-bank-01",
+      "items": 100
+    },
+    {
+      "path": "interview/bank-02.json",
+      "id": "b11-bank-02",
+      "items": 100
+    },
+    {
+      "path": "interview/bank-03.json",
+      "id": "b11-bank-03",
+      "items": 100
+    }
+  ],
+  "counts": {
+    "personas": 5,
+    "questions": 300,
+    "byGroup": {
+      "hometown-state": 40,
+      "education": 35,
+      "work": 30,
+      "hobbies": 35,
+      "optional": 30,
+      "service-choice": 30,
+      "ethics-situations": 35,
+      "current-issues-daf": 35,
+      "why-civil-services": 30
+    },
+    "byDepth": {
+      "opener": 17,
+      "follow-up": 175,
+      "deep": 108
+    },
+    "idkOkTrue": 34
+  },
+  "openQuestions": [
+    "The brief specifies a single interview/bank.json. Because of reply size it arrives as bank-01, bank-02 and bank-03 (each valid JSON). The Merge step, or Claude Code, should concatenate the three `questions` arrays into interview/bank.json. Question ids b11-q001 to b11-q300 are unique across all three.",
+    "Each question has `group` and `id` in addition to persona, depth, idkOk and q. The brief asks for questions to be grouped, but shows no schema. Please confirm.",
+    "Slots used: {state}, {district}, {graduation_subject}, {hobby}, {optional}, {previous_job}, {service_preference}. No new slot types were introduced.",
+    "Excluded by rule: religion, caste, marriage plans, family income. q287 asks 'who has been your biggest support' rather than about family specifically.",
+    "Depth counts were tallied by hand and should be machine-checked."
+  ]
+}

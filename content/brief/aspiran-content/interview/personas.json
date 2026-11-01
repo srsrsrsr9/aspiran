@@ -1,0 +1,229 @@
+{
+  "id": "b11-personas",
+  "version": 1,
+  "tone": "NEUTRAL",
+  "personas": [
+    {
+      "key": "chair",
+      "name": {
+        "en": "The Chair",
+        "hi": "अध्यक्ष"
+      },
+      "style": {
+        "en": "Warm and unhurried. Opens from your DAF, puts you at ease, and keeps the conversation broad.",
+        "hi": "आत्मीय और धैर्यवान। आपके डीएएफ़ से शुरुआत करते हैं, आपको सहज करते हैं, और बातचीत को व्यापक रखते हैं।"
+      },
+      "moves": [
+        {
+          "en": "Starts with your name, hometown or education to settle you in.",
+          "hi": "आपको सहज करने के लिए आपके नाम, गृहनगर या पढ़ाई से शुरुआत।"
+        },
+        {
+          "en": "Links one DAF detail to a wider national issue.",
+          "hi": "डीएएफ़ की एक बात को किसी व्यापक राष्ट्रीय मुद्दे से जोड़ना।"
+        },
+        {
+          "en": "Summarises your answer and hands over to another member.",
+          "hi": "आपके जवाब का सार बताकर किसी दूसरे सदस्य को बात सौंपना।"
+        }
+      ],
+      "sampleQuestions": [
+        {
+          "en": "You're from {district}. Tell us something about it that most outsiders wouldn't know.",
+          "hi": "आप {district} से हैं। उसके बारे में कोई ऐसी बात बताइए जो ज़्यादातर बाहरी लोग नहीं जानते।"
+        },
+        {
+          "en": "You studied {graduation_subject}. What made you choose it?",
+          "hi": "आपने {graduation_subject} पढ़ा है। इसे चुनने की वजह क्या थी?"
+        },
+        {
+          "en": "How would you describe {state} to someone visiting for the first time?",
+          "hi": "पहली बार आने वाले किसी व्यक्ति को आप {state} के बारे में कैसे बताएँगे?"
+        }
+      ],
+      "onIDontKnow": {
+        "en": "Nods kindly and moves on: 'That's all right. Let's talk about something else.'",
+        "hi": "सहजता से सिर हिलाकर आगे बढ़ते हैं: 'कोई बात नहीं। चलिए, किसी और विषय पर बात करते हैं।'"
+      }
+    },
+    {
+      "key": "sceptic",
+      "name": {
+        "en": "The Sceptic",
+        "hi": "संशयवादी सदस्य"
+      },
+      "style": {
+        "en": "Polite but persistent. Probes weak points, asks for evidence, and tests whether your views hold under pressure.",
+        "hi": "विनम्र पर लगातार। कमज़ोर बिंदुओं पर टटोलते हैं, सबूत माँगते हैं, और देखते हैं कि दबाव में आपकी राय टिकती है या नहीं।"
+      },
+      "moves": [
+        {
+          "en": "Asks 'How do you know?' or 'What's the evidence?'",
+          "hi": "पूछते हैं 'आप कैसे जानते हैं?' या 'सबूत क्या है?'"
+        },
+        {
+          "en": "Offers the opposite view and asks you to respond.",
+          "hi": "विरोधी नज़रिया रखकर आपसे जवाब माँगते हैं।"
+        },
+        {
+          "en": "Points out a tension between two things you said.",
+          "hi": "आपकी कही दो बातों के बीच के विरोधाभास की ओर इशारा करते हैं।"
+        }
+      ],
+      "sampleQuestions": [
+        {
+          "en": "Why leave a stable job as {previous_job} for an uncertain exam?",
+          "hi": "{previous_job} जैसी स्थिर नौकरी छोड़कर एक अनिश्चित परीक्षा क्यों?"
+        },
+        {
+          "en": "People say {state} has good schemes but poor implementation. Do you agree?",
+          "hi": "लोग कहते हैं कि {state} में योजनाएँ अच्छी हैं पर अमल कमज़ोर है। क्या आप सहमत हैं?"
+        },
+        {
+          "en": "If the private sector delivers better services, why should government do it at all?",
+          "hi": "अगर निजी क्षेत्र बेहतर सेवाएँ देता है, तो सरकार ये काम करे ही क्यों?"
+        }
+      ],
+      "onIDontKnow": {
+        "en": "Accepts it, then tests reasoning: 'Fair enough. How would you go about finding out?'",
+        "hi": "मान लेते हैं, फिर सोच परखते हैं: 'ठीक है। आप ये पता कैसे लगाएँगे?'"
+      }
+    },
+    {
+      "key": "hobby-prober",
+      "name": {
+        "en": "The Hobby-Prober",
+        "hi": "रुचि-जिज्ञासु सदस्य"
+      },
+      "style": {
+        "en": "Curious and specific. Takes the hobbies in your DAF seriously and goes several layers deep.",
+        "hi": "जिज्ञासु और बारीक। आपके डीएएफ़ की रुचियों को गंभीरता से लेते हैं और कई परतों तक जाते हैं।"
+      },
+      "moves": [
+        {
+          "en": "Asks technical details only a genuine practitioner would know.",
+          "hi": "ऐसी तकनीकी बातें पूछते हैं जो सिर्फ़ सच में करने वाला जानता हो।"
+        },
+        {
+          "en": "Explores the history, people or institutions behind the hobby.",
+          "hi": "रुचि के पीछे के इतिहास, लोगों या संस्थाओं को टटोलते हैं।"
+        },
+        {
+          "en": "Asks how the hobby has shaped you or could help in service.",
+          "hi": "पूछते हैं कि रुचि ने आपको कैसे गढ़ा या सेवा में कैसे काम आएगी।"
+        }
+      ],
+      "sampleQuestions": [
+        {
+          "en": "You've listed {hobby}. When did you last do it, and what exactly did you do?",
+          "hi": "आपने {hobby} लिखा है। आख़िरी बार कब किया, और ठीक-ठीक क्या किया?"
+        },
+        {
+          "en": "What's something about {hobby} that beginners usually get wrong?",
+          "hi": "{hobby} में शुरुआत करने वाले आमतौर पर कौन-सी ग़लती करते हैं?"
+        },
+        {
+          "en": "How has {hobby} changed the way you deal with people or pressure?",
+          "hi": "{hobby} ने लोगों या दबाव से निपटने के आपके तरीक़े को कैसे बदला?"
+        }
+      ],
+      "onIDontKnow": {
+        "en": "Stays friendly: 'No problem. Which part of {hobby} do you know best? Tell me about that.'",
+        "hi": "दोस्ताना रहते हैं: 'कोई बात नहीं। {hobby} का कौन-सा हिस्सा आप सबसे अच्छी तरह जानते हैं? उसके बारे में बताइए।'"
+      }
+    },
+    {
+      "key": "ca-hawk",
+      "name": {
+        "en": "The Current-Affairs Hawk",
+        "hi": "समसामयिकी पर पैनी नज़र वाले सदस्य"
+      },
+      "style": {
+        "en": "Brisk and quick-fire. Links your DAF to the news and asks for India's position on live issues.",
+        "hi": "तेज़ और फटाफट। आपके डीएएफ़ को ख़बरों से जोड़ते हैं और ताज़ा मुद्दों पर भारत का रुख़ पूछते हैं।"
+      },
+      "moves": [
+        {
+          "en": "Connects your hometown, job or subject to a recent development.",
+          "hi": "आपके गृहनगर, नौकरी या विषय को किसी हालिया घटनाक्रम से जोड़ते हैं।"
+        },
+        {
+          "en": "Asks two or three short factual questions in a row.",
+          "hi": "लगातार दो-तीन छोटे तथ्यात्मक सवाल पूछते हैं।"
+        },
+        {
+          "en": "Asks what India should do, and why.",
+          "hi": "पूछते हैं कि भारत को क्या करना चाहिए, और क्यों।"
+        }
+      ],
+      "sampleQuestions": [
+        {
+          "en": "Has {district} been affected by floods, drought or heat recently? How was it handled?",
+          "hi": "क्या हाल में {district} बाढ़, सूखे या गर्मी से प्रभावित हुआ है? इससे कैसे निपटा गया?"
+        },
+        {
+          "en": "How is AI likely to change jobs like {previous_job}?",
+          "hi": "एआई {previous_job} जैसी नौकरियों को कैसे बदल सकता है?"
+        },
+        {
+          "en": "Which central scheme has made the most visible difference in your district?",
+          "hi": "किस केंद्रीय योजना ने आपके ज़िले में सबसे ज़्यादा दिखने वाला बदलाव किया है?"
+        }
+      ],
+      "onIDontKnow": {
+        "en": "Moves fast but keeps it fair: 'Okay. If you had to decide on it, how would you approach it?'",
+        "hi": "तेज़ी से आगे बढ़ते हैं पर निष्पक्ष रहते हैं: 'ठीक है। अगर आपको इस पर फ़ैसला करना हो, तो आप कैसे सोचेंगे?'"
+      }
+    },
+    {
+      "key": "quiet-one",
+      "name": {
+        "en": "The Quiet One",
+        "hi": "मौन सदस्य"
+      },
+      "style": {
+        "en": "Listens silently for most of the interview, then asks one hard, reflective follow-up.",
+        "hi": "ज़्यादातर इंटरव्यू में चुपचाप सुनते हैं, फिर एक कठिन, सोचने वाला सवाल पूछते हैं।"
+      },
+      "moves": [
+        {
+          "en": "Picks up a phrase you used earlier and asks what you meant.",
+          "hi": "आपके पहले कहे किसी शब्द को पकड़कर पूछते हैं कि आपका मतलब क्या था।"
+        },
+        {
+          "en": "Asks a values or judgement question with no clean answer.",
+          "hi": "मूल्य या विवेक का ऐसा सवाल पूछते हैं जिसका कोई साफ़ जवाब न हो।"
+        },
+        {
+          "en": "Asks what you would do, not what you know.",
+          "hi": "पूछते हैं आप क्या करेंगे, ये नहीं कि आप क्या जानते हैं।"
+        }
+      ],
+      "sampleQuestions": [
+        {
+          "en": "If you were posted as Collector of {district} tomorrow, what would you do in your first hundred days?",
+          "hi": "अगर कल आपको {district} का कलेक्टर बना दिया जाए, तो पहले सौ दिनों में आप क्या करेंगे?"
+        },
+        {
+          "en": "Describe a mistake you made at work and what you did about it.",
+          "hi": "काम के दौरान की गई किसी ग़लती के बारे में बताइए, और आपने उसके बारे में क्या किया।"
+        },
+        {
+          "en": "What did growing up in {district} teach you that a book couldn't?",
+          "hi": "{district} में बड़े होने ने आपको ऐसा क्या सिखाया जो कोई किताब नहीं सिखा सकती?"
+        }
+      ],
+      "onIDontKnow": {
+        "en": "Says little: a short 'Thank you,' and the Chair moves on. Silence is not a judgement.",
+        "hi": "बहुत कम कहते हैं: एक छोटा 'धन्यवाद', और अध्यक्ष आगे बढ़ जाते हैं। चुप्पी कोई फ़ैसला नहीं है।"
+      }
+    }
+  ],
+  "notes": "Personas are composites for practice, not descriptions of any real board member. 'onIDontKnow' describes a fair, typical reaction; it is not a promise of how a real board behaves.",
+  "factsToCheck": [
+    "DAF = Detailed Application Form (UPSC Mains/Personality Test form)"
+  ],
+  "review": {
+    "status": "draft"
+  }
+}

@@ -1,0 +1,1114 @@
+{
+  "id": "b11-bank-02",
+  "version": 1,
+  "tone": "NEUTRAL",
+  "questions": [
+    {
+      "id": "b11-q101",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's your plan if you aren't selected this time?",
+        "hi": "अगर इस बार आपका चयन नहीं होता, तो आपकी योजना क्या है?"
+      }
+    },
+    {
+      "id": "b11-q102",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's one achievement from {previous_job} that you're proud of?",
+        "hi": "{previous_job} के दौरान की एक उपलब्धि बताइए जिस पर आपको गर्व है।"
+      }
+    },
+    {
+      "id": "b11-q103",
+      "group": "work",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What policy change would help your previous sector the most?",
+        "hi": "कौन-सा नीतिगत बदलाव आपके पिछले क्षेत्र की सबसे ज़्यादा मदद करेगा?"
+      }
+    },
+    {
+      "id": "b11-q104",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Did your work ever affect someone's life in a way you hadn't expected?",
+        "hi": "क्या आपके काम ने कभी किसी के जीवन पर ऐसा असर डाला जिसकी आपने उम्मीद नहीं की थी?"
+      }
+    },
+    {
+      "id": "b11-q105",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did work teach you about handling pressure and deadlines?",
+        "hi": "काम ने आपको दबाव और समय-सीमा सँभालने के बारे में क्या सिखाया?"
+      }
+    },
+    {
+      "id": "b11-q106",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "You've listed {hobby}. When did you last do it, and what exactly did you do?",
+        "hi": "आपने {hobby} लिखा है। आख़िरी बार कब किया, और ठीक-ठीक क्या किया?"
+      }
+    },
+    {
+      "id": "b11-q107",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How did you get into {hobby}?",
+        "hi": "{hobby} की शुरुआत आपने कैसे की?"
+      }
+    },
+    {
+      "id": "b11-q108",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's something about {hobby} that beginners usually get wrong?",
+        "hi": "{hobby} में शुरुआत करने वाले आमतौर पर कौन-सी ग़लती करते हैं?"
+      }
+    },
+    {
+      "id": "b11-q109",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Explain one technical aspect of {hobby} in detail.",
+        "hi": "{hobby} के किसी एक तकनीकी पहलू को विस्तार से समझाइए।"
+      }
+    },
+    {
+      "id": "b11-q110",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Who are some well-known figures in {hobby}, in India or abroad?",
+        "hi": "{hobby} की दुनिया में, भारत या विदेश के, कुछ जाने-माने नाम बताइए।"
+      }
+    },
+    {
+      "id": "b11-q111",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What's the history of {hobby} in India?",
+        "hi": "भारत में {hobby} का इतिहास क्या है?"
+      }
+    },
+    {
+      "id": "b11-q112",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How has {hobby} changed the way you deal with people or pressure?",
+        "hi": "{hobby} ने लोगों या दबाव से निपटने के आपके तरीक़े को कैसे बदला?"
+      }
+    },
+    {
+      "id": "b11-q113",
+      "group": "hobbies",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Do you pursue {hobby} alone or with others?",
+        "hi": "आप {hobby} अकेले करते हैं या दूसरों के साथ?"
+      }
+    },
+    {
+      "id": "b11-q114",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What equipment, skills or practice does {hobby} need?",
+        "hi": "{hobby} के लिए किन उपकरणों, कौशल या अभ्यास की ज़रूरत होती है?"
+      }
+    },
+    {
+      "id": "b11-q115",
+      "group": "hobbies",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Many people list hobbies they barely pursue. How would you show us that {hobby} is genuine for you?",
+        "hi": "बहुत लोग ऐसी रुचियाँ लिखते हैं जिन्हें वे शायद ही करते हैं। आप हमें कैसे दिखाएँगे कि {hobby} सच में आपकी रुचि है?"
+      }
+    },
+    {
+      "id": "b11-q116",
+      "group": "hobbies",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Is there a government scheme or body that promotes {hobby}?",
+        "hi": "क्या कोई सरकारी योजना या संस्था {hobby} को बढ़ावा देती है?"
+      }
+    },
+    {
+      "id": "b11-q117",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's the most difficult thing you've attempted in {hobby}?",
+        "hi": "{hobby} में आपने सबसे कठिन क्या करने की कोशिश की है?"
+      }
+    },
+    {
+      "id": "b11-q118",
+      "group": "hobbies",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What has {hobby} taught you about failure?",
+        "hi": "{hobby} ने आपको असफलता के बारे में क्या सिखाया है?"
+      }
+    },
+    {
+      "id": "b11-q119",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How much time do you give to {hobby} in a typical week?",
+        "hi": "एक आम हफ़्ते में आप {hobby} को कितना समय देते हैं?"
+      }
+    },
+    {
+      "id": "b11-q120",
+      "group": "hobbies",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Will you keep up {hobby} once you're in service? How?",
+        "hi": "सेवा में आने के बाद क्या आप {hobby} जारी रखेंगे? कैसे?"
+      }
+    },
+    {
+      "id": "b11-q121",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "As an officer, how could {hobby} help you connect with communities?",
+        "hi": "एक अधिकारी के रूप में {hobby} समुदायों से जुड़ने में आपकी कैसे मदद कर सकता है?"
+      }
+    },
+    {
+      "id": "b11-q122",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's a common misconception about {hobby}?",
+        "hi": "{hobby} के बारे में एक आम ग़लतफ़हमी क्या है?"
+      }
+    },
+    {
+      "id": "b11-q123",
+      "group": "hobbies",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Have there been any recent events or achievements in {hobby} in India?",
+        "hi": "क्या हाल में भारत में {hobby} से जुड़ी कोई घटना या उपलब्धि हुई है?"
+      }
+    },
+    {
+      "id": "b11-q124",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Recommend one book, film or resource about {hobby}.",
+        "hi": "{hobby} पर कोई एक किताब, फ़िल्म या स्रोत सुझाइए।"
+      }
+    },
+    {
+      "id": "b11-q125",
+      "group": "hobbies",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Isn't {hobby} a luxury many Indians can't afford? How could it be made more accessible?",
+        "hi": "क्या {hobby} ऐसी विलासिता नहीं जो बहुत से भारतीय वहन नहीं कर सकते? इसे सुलभ कैसे बनाया जा सकता है?"
+      }
+    },
+    {
+      "id": "b11-q126",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What would you teach a child about {hobby} first?",
+        "hi": "किसी बच्चे को {hobby} के बारे में आप सबसे पहले क्या सिखाएँगे?"
+      }
+    },
+    {
+      "id": "b11-q127",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Is there an Indian or regional tradition connected to {hobby}?",
+        "hi": "क्या {hobby} से जुड़ी कोई भारतीय या क्षेत्रीय परंपरा है?"
+      }
+    },
+    {
+      "id": "b11-q128",
+      "group": "hobbies",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Why do you think people need hobbies at all?",
+        "hi": "आपको क्यों लगता है कि लोगों को रुचियों की ज़रूरत होती है?"
+      }
+    },
+    {
+      "id": "b11-q129",
+      "group": "hobbies",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did {hobby} help you during your preparation?",
+        "hi": "क्या तैयारी के दौरान {hobby} ने आपकी मदद की?"
+      }
+    },
+    {
+      "id": "b11-q130",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What separates an amateur from a professional in {hobby}?",
+        "hi": "{hobby} में एक शौक़िया और एक पेशेवर के बीच क्या अंतर है?"
+      }
+    },
+    {
+      "id": "b11-q131",
+      "group": "hobbies",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Does {hobby} have any environmental or social impact?",
+        "hi": "क्या {hobby} का कोई पर्यावरणीय या सामाजिक प्रभाव है?"
+      }
+    },
+    {
+      "id": "b11-q132",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you had to organise a district-level event around {hobby}, how would you go about it?",
+        "hi": "अगर आपको {hobby} पर ज़िला-स्तरीय आयोजन करना हो, तो आप उसे कैसे करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q133",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What skill in {hobby} are you still working on?",
+        "hi": "{hobby} का कौन-सा कौशल आप अब भी सुधार रहे हैं?"
+      }
+    },
+    {
+      "id": "b11-q134",
+      "group": "hobbies",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "You've listed several hobbies. Which would you give up first, and why?",
+        "hi": "आपने कई रुचियाँ लिखी हैं। आप सबसे पहले कौन-सी छोड़ेंगे, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q135",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How has technology changed {hobby}?",
+        "hi": "तकनीक ने {hobby} को कैसे बदला है?"
+      }
+    },
+    {
+      "id": "b11-q136",
+      "group": "hobbies",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What does {hobby} give you that work or study doesn't?",
+        "hi": "{hobby} आपको ऐसा क्या देता है जो काम या पढ़ाई नहीं देती?"
+      }
+    },
+    {
+      "id": "b11-q137",
+      "group": "hobbies",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Have you ever shared {hobby} with others, by teaching or performing?",
+        "hi": "क्या आपने कभी {hobby} दूसरों के साथ साझा किया, सिखाकर या प्रस्तुति देकर?"
+      }
+    },
+    {
+      "id": "b11-q138",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us about a memorable experience you've had through {hobby}.",
+        "hi": "{hobby} से जुड़ा कोई यादगार अनुभव बताइए।"
+      }
+    },
+    {
+      "id": "b11-q139",
+      "group": "hobbies",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Should sports and the arts get more public funding compared with other priorities? Why or why not?",
+        "hi": "क्या दूसरी प्राथमिकताओं की तुलना में खेल और कलाओं को ज़्यादा सार्वजनिक धन मिलना चाहिए? क्यों या क्यों नहीं?"
+      }
+    },
+    {
+      "id": "b11-q140",
+      "group": "hobbies",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What rules or etiquette does {hobby} have?",
+        "hi": "{hobby} के क्या नियम या शिष्टाचार हैं?"
+      }
+    },
+    {
+      "id": "b11-q141",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "Why did you choose {optional} as your optional subject?",
+        "hi": "आपने {optional} को वैकल्पिक विषय क्यों चुना?"
+      }
+    },
+    {
+      "id": "b11-q142",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did you choose {optional} for marks or for interest? Be honest.",
+        "hi": "आपने {optional} अंकों के लिए चुना या रुचि के लिए? ईमानदारी से बताइए।"
+      }
+    },
+    {
+      "id": "b11-q143",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which part of {optional} did you enjoy most?",
+        "hi": "{optional} का कौन-सा हिस्सा आपको सबसे ज़्यादा अच्छा लगा?"
+      }
+    },
+    {
+      "id": "b11-q144",
+      "group": "optional",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How has studying {optional} changed the way you think?",
+        "hi": "{optional} पढ़ने से आपके सोचने का तरीक़ा कैसे बदला?"
+      }
+    },
+    {
+      "id": "b11-q145",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Name a key thinker or text in {optional} and explain one of its ideas.",
+        "hi": "{optional} के किसी प्रमुख चिंतक या ग्रंथ का नाम लीजिए और उसका एक विचार समझाइए।"
+      }
+    },
+    {
+      "id": "b11-q146",
+      "group": "optional",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How does {optional} help you understand a current issue in India?",
+        "hi": "{optional} भारत के किसी मौजूदा मुद्दे को समझने में आपकी कैसे मदद करता है?"
+      }
+    },
+    {
+      "id": "b11-q147",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What is a major criticism of one theory you studied in {optional}?",
+        "hi": "{optional} में पढ़े किसी सिद्धांत की एक बड़ी आलोचना क्या है?"
+      }
+    },
+    {
+      "id": "b11-q148",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How would {optional} help you as a district officer?",
+        "hi": "ज़िला अधिकारी के रूप में {optional} आपकी कैसे मदद करेगा?"
+      }
+    },
+    {
+      "id": "b11-q149",
+      "group": "optional",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Which idea in {optional} do you disagree with, and why?",
+        "hi": "{optional} के किस विचार से आप असहमत हैं, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q150",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Explain a concept from {optional} in simple words.",
+        "hi": "{optional} की किसी अवधारणा को सरल शब्दों में समझाइए।"
+      }
+    },
+    {
+      "id": "b11-q151",
+      "group": "optional",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Is there a recent debate in {optional} that you've followed?",
+        "hi": "क्या {optional} में कोई हालिया बहस है जिसे आपने देखा-समझा है?"
+      }
+    },
+    {
+      "id": "b11-q152",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How does {optional} connect with {graduation_subject}?",
+        "hi": "{optional} का {graduation_subject} से क्या संबंध है?"
+      }
+    },
+    {
+      "id": "b11-q153",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Some say the optional has little to do with administration. Do you agree?",
+        "hi": "कुछ लोग कहते हैं कि वैकल्पिक विषय का प्रशासन से कम लेना-देना है। क्या आप सहमत हैं?"
+      }
+    },
+    {
+      "id": "b11-q154",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which question in your {optional} Mains papers did you find hardest?",
+        "hi": "{optional} के मुख्य परीक्षा प्रश्नपत्रों में आपको कौन-सा सवाल सबसे कठिन लगा?"
+      }
+    },
+    {
+      "id": "b11-q155",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Apply a theory from {optional} to a real problem in {state}.",
+        "hi": "{optional} के किसी सिद्धांत को {state} की किसी असली समस्या पर लागू कीजिए।"
+      }
+    },
+    {
+      "id": "b11-q156",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which sources did you find most useful for {optional}?",
+        "hi": "{optional} के लिए आपको कौन-से स्रोत सबसे उपयोगी लगे?"
+      }
+    },
+    {
+      "id": "b11-q157",
+      "group": "optional",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you taught {optional} to school students, where would you begin?",
+        "hi": "अगर आप स्कूली छात्रों को {optional} पढ़ाते, तो कहाँ से शुरू करते?"
+      }
+    },
+    {
+      "id": "b11-q158",
+      "group": "optional",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "How has {optional} as a field changed over the last few decades?",
+        "hi": "पिछले कुछ दशकों में {optional} का क्षेत्र कैसे बदला है?"
+      }
+    },
+    {
+      "id": "b11-q159",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Is {optional} more about memorising or about thinking?",
+        "hi": "{optional} ज़्यादा याद करने के बारे में है या सोचने के बारे में?"
+      }
+    },
+    {
+      "id": "b11-q160",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What would a policymaker gain from studying {optional}?",
+        "hi": "{optional} पढ़कर किसी नीति-निर्माता को क्या मिलेगा?"
+      }
+    },
+    {
+      "id": "b11-q161",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Name an Indian scholar in {optional} and their contribution.",
+        "hi": "{optional} के किसी भारतीय विद्वान का नाम और उनका योगदान बताइए।"
+      }
+    },
+    {
+      "id": "b11-q162",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Does {optional} give answers, or only better questions?",
+        "hi": "{optional} जवाब देता है, या सिर्फ़ बेहतर सवाल?"
+      }
+    },
+    {
+      "id": "b11-q163",
+      "group": "optional",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What limitation of {optional} did you discover while preparing?",
+        "hi": "तैयारी के दौरान आपको {optional} की कौन-सी सीमा समझ आई?"
+      }
+    },
+    {
+      "id": "b11-q164",
+      "group": "optional",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Give an example from this year's news that {optional} helps explain.",
+        "hi": "इस साल की ख़बरों से एक उदाहरण दीजिए जिसे {optional} समझाने में मदद करता है।"
+      }
+    },
+    {
+      "id": "b11-q165",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How would you use {optional} to design a better public programme?",
+        "hi": "किसी बेहतर सार्वजनिक कार्यक्रम को बनाने में आप {optional} का उपयोग कैसे करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q166",
+      "group": "optional",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Does {hobby} connect with {optional} in any way?",
+        "hi": "क्या {hobby} का {optional} से कोई संबंध है?"
+      }
+    },
+    {
+      "id": "b11-q167",
+      "group": "optional",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "If you could choose a different optional now, which would it be, and why?",
+        "hi": "अगर आप अब कोई और वैकल्पिक विषय चुन सकते, तो कौन-सा, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q168",
+      "group": "optional",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What has {optional} taught you about people or society?",
+        "hi": "{optional} ने आपको लोगों या समाज के बारे में क्या सिखाया है?"
+      }
+    },
+    {
+      "id": "b11-q169",
+      "group": "optional",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did you prepare {optional} alone or with others? What worked best?",
+        "hi": "आपने {optional} की तैयारी अकेले की या दूसरों के साथ? सबसे अच्छा क्या रहा?"
+      }
+    },
+    {
+      "id": "b11-q170",
+      "group": "optional",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": true,
+      "q": {
+        "en": "Where does India stand globally in research related to {optional}?",
+        "hi": "{optional} से जुड़े अनुसंधान में भारत विश्व स्तर पर कहाँ है?"
+      }
+    },
+    {
+      "id": "b11-q171",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "Your first preference is {service_preference}. Why?",
+        "hi": "आपकी पहली प्राथमिकता {service_preference} है। क्यों?"
+      }
+    },
+    {
+      "id": "b11-q172",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What if you're allotted a different service? How will you feel about it?",
+        "hi": "अगर आपको कोई दूसरी सेवा मिले तो? आप उसके बारे में कैसा महसूस करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q173",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What do you know about the actual work of {service_preference}?",
+        "hi": "{service_preference} के वास्तविक काम के बारे में आप क्या जानते हैं?"
+      }
+    },
+    {
+      "id": "b11-q174",
+      "group": "service-choice",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What do you expect to find hardest about {service_preference}?",
+        "hi": "{service_preference} में आपको सबसे कठिन क्या लगने की उम्मीद है?"
+      }
+    },
+    {
+      "id": "b11-q175",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What reforms have been suggested for {service_preference}?",
+        "hi": "{service_preference} के लिए कौन-से सुधार सुझाए गए हैं?"
+      }
+    },
+    {
+      "id": "b11-q176",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Is it power, prestige or service that draws you to {service_preference}? Be honest.",
+        "hi": "आपको {service_preference} की ओर शक्ति, प्रतिष्ठा या सेवा में से क्या खींचता है? ईमानदारी से बताइए।"
+      }
+    },
+    {
+      "id": "b11-q177",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What might a typical working day look like for you in {service_preference}, ten years from now?",
+        "hi": "दस साल बाद {service_preference} में आपका एक आम कामकाजी दिन कैसा हो सकता है?"
+      }
+    },
+    {
+      "id": "b11-q178",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Is there an officer of {service_preference}, past or present, whose work you admire? Why?",
+        "hi": "क्या {service_preference} का कोई अधिकारी, पूर्व या वर्तमान, है जिसके काम का आप सम्मान करते हैं? क्यों?"
+      }
+    },
+    {
+      "id": "b11-q179",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Civil servants are often called resistant to change. Is that fair?",
+        "hi": "सिविल सेवकों को अक्सर बदलाव का विरोधी कहा जाता है। क्या ये उचित है?"
+      }
+    },
+    {
+      "id": "b11-q180",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What is lateral entry into government, and what are the arguments for and against it?",
+        "hi": "सरकार में लेटरल एंट्री क्या है, और इसके पक्ष और विपक्ष में तर्क क्या हैं?"
+      }
+    },
+    {
+      "id": "b11-q181",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How is {service_preference} different from the other services you listed?",
+        "hi": "{service_preference} आपकी सूची की दूसरी सेवाओं से कैसे अलग है?"
+      }
+    },
+    {
+      "id": "b11-q182",
+      "group": "service-choice",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How will you stay politically neutral while serving elected governments of any party?",
+        "hi": "किसी भी दल की निर्वाचित सरकार की सेवा करते हुए आप राजनीतिक रूप से तटस्थ कैसे रहेंगे?"
+      }
+    },
+    {
+      "id": "b11-q183",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What if you're posted far from home, to a difficult area?",
+        "hi": "अगर आपको घर से दूर, किसी कठिन इलाक़े में तैनात किया जाए तो?"
+      }
+    },
+    {
+      "id": "b11-q184",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What role do the All India Services play in Indian federalism?",
+        "hi": "भारतीय संघवाद में अखिल भारतीय सेवाओं की क्या भूमिका है?"
+      }
+    },
+    {
+      "id": "b11-q185",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How should civil servants use technology without losing the human touch?",
+        "hi": "सिविल सेवक मानवीय स्पर्श खोए बिना तकनीक का उपयोग कैसे करें?"
+      }
+    },
+    {
+      "id": "b11-q186",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What does training for {service_preference} involve?",
+        "hi": "{service_preference} के प्रशिक्षण में क्या-क्या शामिल होता है?"
+      }
+    },
+    {
+      "id": "b11-q187",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Is the generalist civil servant outdated in a world that needs specialists?",
+        "hi": "विशेषज्ञों की ज़रूरत वाली दुनिया में क्या सामान्यज्ञ सिविल सेवक पुराने पड़ गए हैं?"
+      }
+    },
+    {
+      "id": "b11-q188",
+      "group": "service-choice",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How will you keep learning after you join?",
+        "hi": "सेवा में आने के बाद आप सीखते कैसे रहेंगे?"
+      }
+    },
+    {
+      "id": "b11-q189",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What are the aims of Mission Karmayogi?",
+        "hi": "मिशन कर्मयोगी के उद्देश्य क्या हैं?"
+      }
+    },
+    {
+      "id": "b11-q190",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What would you like people to say about you after your first posting?",
+        "hi": "पहली तैनाती के बाद आप चाहेंगे कि लोग आपके बारे में क्या कहें?"
+      }
+    },
+    {
+      "id": "b11-q191",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Some officers grow cynical over the years. What will stop that happening to you?",
+        "hi": "कुछ अधिकारी बरसों में निराशावादी हो जाते हैं। आपके साथ ऐसा होने से क्या रोकेगा?"
+      }
+    },
+    {
+      "id": "b11-q192",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which cadre would you prefer, and why?",
+        "hi": "आप कौन-सा कैडर पसंद करेंगे, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q193",
+      "group": "service-choice",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What does the word 'service' in civil service mean to you?",
+        "hi": "सिविल सेवा में 'सेवा' शब्द का आपके लिए क्या मतलब है?"
+      }
+    },
+    {
+      "id": "b11-q194",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How do you see the relationship between civil servants and elected representatives?",
+        "hi": "आप सिविल सेवकों और निर्वाचित प्रतिनिधियों के संबंध को कैसे देखते हैं?"
+      }
+    },
+    {
+      "id": "b11-q195",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Frequent transfers are common. How would you handle them?",
+        "hi": "बार-बार तबादले आम हैं। आप इन्हें कैसे सँभालेंगे?"
+      }
+    },
+    {
+      "id": "b11-q196",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "During a crisis in your district, how would you handle media pressure?",
+        "hi": "ज़िले में किसी संकट के दौरान आप मीडिया के दबाव को कैसे सँभालेंगे?"
+      }
+    },
+    {
+      "id": "b11-q197",
+      "group": "service-choice",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How well does performance appraisal work in the civil services? What would improve it?",
+        "hi": "सिविल सेवाओं में कार्य-निष्पादन मूल्यांकन कितना कारगर है? इसे क्या बेहतर बनाएगा?"
+      }
+    },
+    {
+      "id": "b11-q198",
+      "group": "service-choice",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you could change one rule about the civil services, what would it be?",
+        "hi": "अगर आप सिविल सेवाओं का एक नियम बदल सकते, तो वो कौन-सा होता?"
+      }
+    },
+    {
+      "id": "b11-q199",
+      "group": "service-choice",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What would you do with your free time as an officer?",
+        "hi": "एक अधिकारी के रूप में अपने ख़ाली समय में आप क्या करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q200",
+      "group": "service-choice",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Where do you see yourself after thirty years in service?",
+        "hi": "सेवा के तीस साल बाद आप ख़ुद को कहाँ देखते हैं?"
+      }
+    }
+  ],
+  "factsToCheck": [
+    "Mission Karmayogi (2020) aims (q189)",
+    "Lateral entry into government (q180) — present arguments neutrally"
+  ],
+  "review": {
+    "status": "draft"
+  }
+}

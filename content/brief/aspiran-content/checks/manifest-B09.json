@@ -1,0 +1,58 @@
+{
+  "batch": "B09",
+  "made": "2026-11-01",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "terms/polity.json",
+      "id": "terms-polity",
+      "items": 80
+    },
+    {
+      "path": "terms/economy.json",
+      "id": "terms-economy",
+      "items": 80
+    },
+    {
+      "path": "terms/geography.json",
+      "id": "terms-geography",
+      "items": 80
+    },
+    {
+      "path": "terms/environment.json",
+      "id": "terms-environment",
+      "items": 80
+    },
+    {
+      "path": "terms/history.json",
+      "id": "terms-history",
+      "items": 80
+    },
+    {
+      "path": "terms/science-technology.json",
+      "id": "terms-science-technology",
+      "items": 80
+    },
+    {
+      "path": "terms/society.json",
+      "id": "terms-society",
+      "items": 80
+    },
+    {
+      "path": "terms/international-relations.json",
+      "id": "terms-international-relations",
+      "items": 80
+    }
+  ],
+  "counts": {
+    "subjects": 8,
+    "terms": 640
+  },
+  "openQuestions": [
+    "Hindi choices follow the Constitution's Hindi text (polity) and NCERT/CSTT usage elsewhere as I know it; `hiAlt` carries common alternatives. The Hindi editor should confirm against UPSC's Hindi question papers.",
+    "Some terms appear in two subjects with different angles (e.g. Urbanisation in Geography and Society; Mangrove in Geography). Claude Code may want to deduplicate or cross-link them.",
+    "The subject slug for Science & Technology is 'science-technology'; the brief's example used single words. Please confirm the slug.",
+    "Border-related IR terms (e.g. Line of Actual Control) are deliberately left out under rule C1.",
+    "A few meanings include dates or years that can change status (e.g. BRICS membership, reverse repo's role); these are in factsToCheck."
+  ]
+}

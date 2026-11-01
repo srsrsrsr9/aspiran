@@ -1,0 +1,1113 @@
+{
+  "id": "b11-bank-01",
+  "version": 1,
+  "tone": "NEUTRAL",
+  "questions": [
+    {
+      "id": "b11-q001",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "You're from {district}. Tell us something about it that most outsiders wouldn't know.",
+        "hi": "आप {district} से हैं। उसके बारे में कोई ऐसी बात बताइए जो ज़्यादातर बाहरी लोग नहीं जानते।"
+      }
+    },
+    {
+      "id": "b11-q002",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "What is {district} best known for?",
+        "hi": "{district} किस बात के लिए सबसे ज़्यादा जाना जाता है?"
+      }
+    },
+    {
+      "id": "b11-q003",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's the biggest development challenge in {district} today?",
+        "hi": "आज {district} की सबसे बड़ी विकास संबंधी चुनौती क्या है?"
+      }
+    },
+    {
+      "id": "b11-q004",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "If {district} has so many resources, why does it still lag on some indicators?",
+        "hi": "अगर {district} में इतने संसाधन हैं, तो वो कुछ सूचकांकों पर अब भी पीछे क्यों है?"
+      }
+    },
+    {
+      "id": "b11-q005",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you were posted as Collector of {district} tomorrow, what would you do in your first hundred days?",
+        "hi": "अगर कल आपको {district} का कलेक्टर बना दिया जाए, तो पहले सौ दिनों में आप क्या करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q006",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which river or water source matters most to {district}, and what condition is it in?",
+        "hi": "{district} के लिए कौन-सी नदी या जल स्रोत सबसे अहम है, और उसकी हालत कैसी है?"
+      }
+    },
+    {
+      "id": "b11-q007",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How has migration, in or out, affected {district}?",
+        "hi": "आने या जाने वाले प्रवास ने {district} को कैसे प्रभावित किया है?"
+      }
+    },
+    {
+      "id": "b11-q008",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": true,
+      "q": {
+        "en": "Is the best-known local industry or craft of {district} growing or declining? Why?",
+        "hi": "{district} का सबसे जाना-माना स्थानीय उद्योग या शिल्प बढ़ रहा है या घट रहा है? क्यों?"
+      }
+    },
+    {
+      "id": "b11-q009",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "What languages are spoken in {district}?",
+        "hi": "{district} में कौन-कौन सी भाषाएँ बोली जाती हैं?"
+      }
+    },
+    {
+      "id": "b11-q010",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Name a historical figure from {state} and tell us why they matter to you.",
+        "hi": "{state} के किसी ऐतिहासिक व्यक्तित्व का नाम लीजिए और बताइए वे आपके लिए क्यों मायने रखते हैं।"
+      }
+    },
+    {
+      "id": "b11-q011",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What did the latest {state} budget prioritise?",
+        "hi": "{state} के पिछले बजट में किन चीज़ों को प्राथमिकता दी गई?"
+      }
+    },
+    {
+      "id": "b11-q012",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Name one policy of {state} that other states should copy, and one they should avoid.",
+        "hi": "{state} की एक ऐसी नीति बताइए जिसे दूसरे राज्यों को अपनाना चाहिए, और एक जिससे बचना चाहिए।"
+      }
+    },
+    {
+      "id": "b11-q013",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "People say {state} has good schemes but weak implementation. Do you agree?",
+        "hi": "लोग कहते हैं कि {state} में योजनाएँ अच्छी हैं पर अमल कमज़ोर है। क्या आप सहमत हैं?"
+      }
+    },
+    {
+      "id": "b11-q014",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us about a festival or tradition from {state} that you enjoy.",
+        "hi": "{state} के किसी त्योहार या परंपरा के बारे में बताइए जो आपको अच्छी लगती है।"
+      }
+    },
+    {
+      "id": "b11-q015",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What is the main crop of {district}, and what problems do its farmers face?",
+        "hi": "{district} की मुख्य फ़सल क्या है, और वहाँ के किसानों को किन समस्याओं का सामना करना पड़ता है?"
+      }
+    },
+    {
+      "id": "b11-q016",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How is climate change showing up in {state}?",
+        "hi": "{state} में जलवायु परिवर्तन किस रूप में दिख रहा है?"
+      }
+    },
+    {
+      "id": "b11-q017",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's the weakest part of local governance in your district?",
+        "hi": "आपके ज़िले में स्थानीय शासन की सबसे कमज़ोर कड़ी क्या है?"
+      }
+    },
+    {
+      "id": "b11-q018",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Before taking a big decision in {district}, whose voice would you most want to hear?",
+        "hi": "{district} में कोई बड़ा फ़ैसला लेने से पहले आप सबसे ज़्यादा किसकी बात सुनना चाहेंगे?"
+      }
+    },
+    {
+      "id": "b11-q019",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "Is there a place in {district} you'd recommend to a visitor? What would you improve there?",
+        "hi": "{district} में कोई ऐसी जगह है जो आप किसी आगंतुक को सुझाएँगे? वहाँ आप क्या सुधारेंगे?"
+      }
+    },
+    {
+      "id": "b11-q020",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Has {district} faced floods, drought or extreme heat recently? How was it handled?",
+        "hi": "क्या हाल में {district} में बाढ़, सूखा या भीषण गर्मी पड़ी है? उससे कैसे निपटा गया?"
+      }
+    },
+    {
+      "id": "b11-q021",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Some say growth in {state} has been uneven across regions. Which regions lag, and why?",
+        "hi": "कुछ लोग कहते हैं कि {state} में विकास क्षेत्रों के बीच असमान रहा है। कौन-से क्षेत्र पीछे हैं, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q022",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What are public health facilities like in your area?",
+        "hi": "आपके इलाक़े में सरकारी स्वास्थ्य सुविधाएँ कैसी हैं?"
+      }
+    },
+    {
+      "id": "b11-q023",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What kind of jobs do young people in {district} look for?",
+        "hi": "{district} के युवा किस तरह की नौकरियाँ ढूँढते हैं?"
+      }
+    },
+    {
+      "id": "b11-q024",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What would make a young person choose to stay in {district} rather than leave?",
+        "hi": "किसी युवा को {district} छोड़ने के बजाय वहीं रहने के लिए क्या प्रेरित करेगा?"
+      }
+    },
+    {
+      "id": "b11-q025",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which central scheme has made the most visible difference in your district?",
+        "hi": "किस केंद्रीय योजना ने आपके ज़िले में सबसे ज़्यादा दिखने वाला बदलाव किया है?"
+      }
+    },
+    {
+      "id": "b11-q026",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "And which scheme has not worked well there? Why not?",
+        "hi": "और कौन-सी योजना वहाँ ठीक से नहीं चली? क्यों नहीं?"
+      }
+    },
+    {
+      "id": "b11-q027",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What forests, wildlife or natural features is {state} known for?",
+        "hi": "{state} किन वनों, वन्यजीवों या प्राकृतिक विशेषताओं के लिए जाना जाता है?"
+      }
+    },
+    {
+      "id": "b11-q028",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": true,
+      "q": {
+        "en": "Is {state} involved in any inter-state issue, such as water sharing? How should such issues be resolved?",
+        "hi": "क्या {state} किसी अंतर-राज्यीय मुद्दे, जैसे पानी के बँटवारे, से जुड़ा है? ऐसे मुद्दे कैसे सुलझने चाहिए?"
+      }
+    },
+    {
+      "id": "b11-q029",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What is one thing your district administration does well?",
+        "hi": "आपका ज़िला प्रशासन कौन-सा एक काम अच्छी तरह करता है?"
+      }
+    },
+    {
+      "id": "b11-q030",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "How would you describe {state} to someone visiting for the first time?",
+        "hi": "पहली बार आने वाले किसी व्यक्ति को आप {state} के बारे में कैसे बताएँगे?"
+      }
+    },
+    {
+      "id": "b11-q031",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Isn't regional pride sometimes a barrier to national integration?",
+        "hi": "क्या क्षेत्रीय गौरव कभी-कभी राष्ट्रीय एकता में बाधा नहीं बनता?"
+      }
+    },
+    {
+      "id": "b11-q032",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "As an officer, how would you balance respect for local identity with national unity?",
+        "hi": "एक अधिकारी के रूप में आप स्थानीय पहचान के सम्मान और राष्ट्रीय एकता के बीच संतुलन कैसे रखेंगे?"
+      }
+    },
+    {
+      "id": "b11-q033",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "How fast is {state} urbanising, and what problems is that creating?",
+        "hi": "{state} में नगरीकरण कितनी तेज़ी से हो रहा है, और इससे कौन-सी समस्याएँ पैदा हो रही हैं?"
+      }
+    },
+    {
+      "id": "b11-q034",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Name a well-known institution in {state}, like a university or research centre.",
+        "hi": "{state} की किसी प्रसिद्ध संस्था, जैसे विश्वविद्यालय या अनुसंधान केंद्र, का नाम बताइए।"
+      }
+    },
+    {
+      "id": "b11-q035",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How does education in {district} compare with the rest of {state}, and why?",
+        "hi": "{district} में शिक्षा की स्थिति बाक़ी {state} की तुलना में कैसी है, और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q036",
+      "group": "hometown-state",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How has digital connectivity changed life in the villages of your district?",
+        "hi": "डिजिटल कनेक्टिविटी ने आपके ज़िले के गाँवों के जीवन को कैसे बदला है?"
+      }
+    },
+    {
+      "id": "b11-q037",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What traditional craft or art form comes from {state}?",
+        "hi": "{state} का कौन-सा पारंपरिक शिल्प या कला रूप है?"
+      }
+    },
+    {
+      "id": "b11-q038",
+      "group": "hometown-state",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did growing up in {district} teach you that a book couldn't?",
+        "hi": "{district} में बड़े होने ने आपको ऐसा क्या सिखाया जो कोई किताब नहीं सिखा सकती?"
+      }
+    },
+    {
+      "id": "b11-q039",
+      "group": "hometown-state",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If {district} had to choose between a large industrial project and protecting farmland, what should guide the decision?",
+        "hi": "अगर {district} को एक बड़ी औद्योगिक परियोजना और खेती की ज़मीन बचाने के बीच चुनना हो, तो फ़ैसला किस आधार पर होना चाहिए?"
+      }
+    },
+    {
+      "id": "b11-q040",
+      "group": "hometown-state",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us about someone in your district, not famous, whom you admire. Why?",
+        "hi": "अपने ज़िले के किसी ऐसे व्यक्ति के बारे में बताइए जो प्रसिद्ध नहीं, पर जिनका आप सम्मान करते हैं। क्यों?"
+      }
+    },
+    {
+      "id": "b11-q041",
+      "group": "education",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "You studied {graduation_subject}. Why did you choose it?",
+        "hi": "आपने {graduation_subject} पढ़ा है। आपने इसे क्यों चुना?"
+      }
+    },
+    {
+      "id": "b11-q042",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's one idea from {graduation_subject} that changed how you see the world?",
+        "hi": "{graduation_subject} का कौन-सा एक विचार है जिसने दुनिया को देखने का आपका नज़रिया बदला?"
+      }
+    },
+    {
+      "id": "b11-q043",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How exactly will {graduation_subject} help you as an administrator? Give a specific example.",
+        "hi": "{graduation_subject} एक प्रशासक के रूप में आपकी ठीक-ठीक कैसे मदद करेगा? एक ठोस उदाहरण दीजिए।"
+      }
+    },
+    {
+      "id": "b11-q044",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": true,
+      "q": {
+        "en": "Is there a problem in {graduation_subject} you still find hard? Tell us about it.",
+        "hi": "क्या {graduation_subject} की कोई समस्या है जो आपको अब भी कठिन लगती है? उसके बारे में बताइए।"
+      }
+    },
+    {
+      "id": "b11-q045",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What's a recent development in the field of {graduation_subject}?",
+        "hi": "{graduation_subject} के क्षेत्र में कोई हालिया घटनाक्रम बताइए।"
+      }
+    },
+    {
+      "id": "b11-q046",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "You studied {graduation_subject} but chose {optional} as your optional. Why the switch?",
+        "hi": "आपने {graduation_subject} पढ़ा, पर वैकल्पिक विषय {optional} चुना। ये बदलाव क्यों?"
+      }
+    },
+    {
+      "id": "b11-q047",
+      "group": "education",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us about your college. What did you enjoy most there?",
+        "hi": "अपने कॉलेज के बारे में बताइए। वहाँ आपको सबसे अच्छा क्या लगा?"
+      }
+    },
+    {
+      "id": "b11-q048",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Who was a teacher who influenced you, and how?",
+        "hi": "किस शिक्षक ने आपको प्रभावित किया, और कैसे?"
+      }
+    },
+    {
+      "id": "b11-q049",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What would you change in the way {graduation_subject} is taught in India?",
+        "hi": "भारत में {graduation_subject} पढ़ाने के तरीक़े में आप क्या बदलेंगे?"
+      }
+    },
+    {
+      "id": "b11-q050",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What do you see as the most important changes proposed by the National Education Policy 2020?",
+        "hi": "राष्ट्रीय शिक्षा नीति 2020 में प्रस्तावित सबसे अहम बदलाव आप किन्हें मानते हैं?"
+      }
+    },
+    {
+      "id": "b11-q051",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Many say Indian graduates aren't job-ready. What's going wrong?",
+        "hi": "बहुत लोग कहते हैं कि भारतीय स्नातक नौकरी के लिए तैयार नहीं होते। ग़लती कहाँ हो रही है?"
+      }
+    },
+    {
+      "id": "b11-q052",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Is a degree still the best signal of someone's ability? Defend your answer.",
+        "hi": "क्या डिग्री अब भी किसी की क्षमता का सबसे अच्छा संकेत है? अपने जवाब का बचाव कीजिए।"
+      }
+    },
+    {
+      "id": "b11-q053",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did you take part in any college activities, societies or projects?",
+        "hi": "क्या आपने कॉलेज की किसी गतिविधि, संस्था या परियोजना में हिस्सा लिया?"
+      }
+    },
+    {
+      "id": "b11-q054",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Explain a basic concept from {graduation_subject} to us as if we were school students.",
+        "hi": "{graduation_subject} की कोई बुनियादी अवधारणा हमें ऐसे समझाइए जैसे हम स्कूली छात्र हों।"
+      }
+    },
+    {
+      "id": "b11-q055",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did you get wrong in college that you'd do differently now?",
+        "hi": "कॉलेज में आपसे क्या ग़लती हुई जो आप अब अलग तरीक़े से करते?"
+      }
+    },
+    {
+      "id": "b11-q056",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How can technology improve learning in government schools without widening gaps?",
+        "hi": "तकनीक सरकारी स्कूलों में असमानता बढ़ाए बिना पढ़ाई कैसे बेहतर कर सकती है?"
+      }
+    },
+    {
+      "id": "b11-q057",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Coaching centres are everywhere. Are they good or bad for education?",
+        "hi": "कोचिंग केंद्र हर जगह हैं। ये शिक्षा के लिए अच्छे हैं या बुरे?"
+      }
+    },
+    {
+      "id": "b11-q058",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How could {graduation_subject} help solve a problem in {state}?",
+        "hi": "{graduation_subject} {state} की किसी समस्या को हल करने में कैसे मदद कर सकता है?"
+      }
+    },
+    {
+      "id": "b11-q059",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you could add one subject to every school's curriculum, what would it be and why?",
+        "hi": "अगर आप हर स्कूल के पाठ्यक्रम में एक विषय जोड़ सकें, तो वो क्या होगा और क्यों?"
+      }
+    },
+    {
+      "id": "b11-q060",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Why do learning outcomes stay low even when school enrolment is high?",
+        "hi": "स्कूलों में नामांकन ऊँचा होने पर भी सीखने के परिणाम कम क्यों रहते हैं?"
+      }
+    },
+    {
+      "id": "b11-q061",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did you read outside your syllabus during college?",
+        "hi": "कॉलेज के दौरान आपने पाठ्यक्रम से बाहर क्या पढ़ा?"
+      }
+    },
+    {
+      "id": "b11-q062",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What's a limitation of {graduation_subject} as a discipline?",
+        "hi": "एक विषय के रूप में {graduation_subject} की एक सीमा क्या है?"
+      }
+    },
+    {
+      "id": "b11-q063",
+      "group": "education",
+      "persona": "chair",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How should India balance wider access to higher education with its quality?",
+        "hi": "भारत को उच्च शिक्षा तक व्यापक पहुँच और उसकी गुणवत्ता के बीच संतुलन कैसे बनाना चाहिए?"
+      }
+    },
+    {
+      "id": "b11-q064",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "What's one question in {graduation_subject} you wish someone would answer?",
+        "hi": "{graduation_subject} का एक ऐसा सवाल बताइए जिसका जवाब आप चाहते हैं कोई दे।"
+      }
+    },
+    {
+      "id": "b11-q065",
+      "group": "education",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did you pursue {hobby} in college too? How did you balance it with studies?",
+        "hi": "क्या कॉलेज में भी आप {hobby} करते थे? पढ़ाई के साथ उसका संतुलन कैसे बनाया?"
+      }
+    },
+    {
+      "id": "b11-q066",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you're so interested in {graduation_subject}, why not make a career in it?",
+        "hi": "अगर आपकी {graduation_subject} में इतनी रुचि है, तो उसी में करियर क्यों नहीं बनाया?"
+      }
+    },
+    {
+      "id": "b11-q067",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "How well does India fund research, and what would you change?",
+        "hi": "भारत अनुसंधान पर कितना ख़र्च करता है, और आप क्या बदलेंगे?"
+      }
+    },
+    {
+      "id": "b11-q068",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": true,
+      "q": {
+        "en": "Are there Indian scientists or scholars in {graduation_subject} whom you admire?",
+        "hi": "क्या {graduation_subject} के क्षेत्र में ऐसे भारतीय वैज्ञानिक या विद्वान हैं जिनका आप सम्मान करते हैं?"
+      }
+    },
+    {
+      "id": "b11-q069",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What does a good teacher do that a good textbook can't?",
+        "hi": "एक अच्छा शिक्षक ऐसा क्या करता है जो एक अच्छी पाठ्यपुस्तक नहीं कर सकती?"
+      }
+    },
+    {
+      "id": "b11-q070",
+      "group": "education",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Should India welcome foreign university campuses? What are the pros and cons?",
+        "hi": "क्या भारत को विदेशी विश्वविद्यालयों के परिसरों का स्वागत करना चाहिए? फ़ायदे और नुक़सान क्या हैं?"
+      }
+    },
+    {
+      "id": "b11-q071",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Is teaching in the mother tongue practical at the higher education level?",
+        "hi": "क्या उच्च शिक्षा के स्तर पर मातृभाषा में पढ़ाना व्यावहारिक है?"
+      }
+    },
+    {
+      "id": "b11-q072",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How did your schooling shape the person you are today?",
+        "hi": "आपकी स्कूली पढ़ाई ने आपको आज जैसा इंसान बनाने में कैसी भूमिका निभाई?"
+      }
+    },
+    {
+      "id": "b11-q073",
+      "group": "education",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Rote learning gets marks. Why should anyone want to change it?",
+        "hi": "रटकर पढ़ने से अंक मिलते हैं। फिर कोई इसे बदलना क्यों चाहे?"
+      }
+    },
+    {
+      "id": "b11-q074",
+      "group": "education",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What would you tell a first-year student of {graduation_subject}?",
+        "hi": "{graduation_subject} के पहले साल के छात्र से आप क्या कहेंगे?"
+      }
+    },
+    {
+      "id": "b11-q075",
+      "group": "education",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How did you plan your preparation for this exam alongside or after your studies?",
+        "hi": "पढ़ाई के साथ या उसके बाद आपने इस परीक्षा की तैयारी की योजना कैसे बनाई?"
+      }
+    },
+    {
+      "id": "b11-q076",
+      "group": "work",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "You worked as {previous_job}. What did your work involve day to day?",
+        "hi": "आपने {previous_job} के रूप में काम किया है। रोज़ के काम में क्या-क्या शामिल था?"
+      }
+    },
+    {
+      "id": "b11-q077",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What was the most satisfying moment in that job?",
+        "hi": "उस नौकरी में सबसे संतोषजनक पल कौन-सा था?"
+      }
+    },
+    {
+      "id": "b11-q078",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Why leave a stable job as {previous_job} for an uncertain exam?",
+        "hi": "{previous_job} जैसी स्थिर नौकरी छोड़कर एक अनिश्चित परीक्षा क्यों?"
+      }
+    },
+    {
+      "id": "b11-q079",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Describe a mistake you made at work and what you did about it.",
+        "hi": "काम के दौरान की गई किसी ग़लती के बारे में बताइए, और आपने उसके बारे में क्या किया।"
+      }
+    },
+    {
+      "id": "b11-q080",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What will you miss about your previous work, and what won't you?",
+        "hi": "पिछले काम की कौन-सी बात आपको याद आएगी, और कौन-सी नहीं?"
+      }
+    },
+    {
+      "id": "b11-q081",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us how you handled a difficult colleague or client.",
+        "hi": "बताइए आपने किसी मुश्किल सहकर्मी या ग्राहक को कैसे सँभाला।"
+      }
+    },
+    {
+      "id": "b11-q082",
+      "group": "work",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How is your previous sector changing because of technology or policy?",
+        "hi": "तकनीक या नीति के कारण आपका पिछला क्षेत्र कैसे बदल रहा है?"
+      }
+    },
+    {
+      "id": "b11-q083",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Which skills from {previous_job} will help you in the civil services?",
+        "hi": "{previous_job} के कौन-से कौशल सिविल सेवा में आपकी मदद करेंगे?"
+      }
+    },
+    {
+      "id": "b11-q084",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Won't government feel slow to someone used to {previous_job}? How will you cope?",
+        "hi": "{previous_job} के आदी व्यक्ति को सरकार धीमी नहीं लगेगी? आप कैसे तालमेल बिठाएँगे?"
+      }
+    },
+    {
+      "id": "b11-q085",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Tell us about a time you disagreed with your manager. What did you do?",
+        "hi": "किसी ऐसे मौक़े के बारे में बताइए जब आप अपने प्रबंधक से असहमत थे। आपने क्या किया?"
+      }
+    },
+    {
+      "id": "b11-q086",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did your job teach you about working in a team?",
+        "hi": "आपकी नौकरी ने आपको टीम में काम करने के बारे में क्या सिखाया?"
+      }
+    },
+    {
+      "id": "b11-q087",
+      "group": "work",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": true,
+      "q": {
+        "en": "Which regulation affects your previous industry the most, and is it working?",
+        "hi": "कौन-सा नियमन आपके पिछले उद्योग को सबसे ज़्यादा प्रभावित करता है, और क्या वो कारगर है?"
+      }
+    },
+    {
+      "id": "b11-q088",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did you ever face an ethical dilemma at work? How did you resolve it?",
+        "hi": "क्या काम पर आपको कभी कोई नैतिक दुविधा झेलनी पड़ी? आपने उसे कैसे सुलझाया?"
+      }
+    },
+    {
+      "id": "b11-q089",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How did you manage your time between work and preparation?",
+        "hi": "आपने काम और तैयारी के बीच समय का प्रबंधन कैसे किया?"
+      }
+    },
+    {
+      "id": "b11-q090",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "What did your job teach you about people that books couldn't?",
+        "hi": "आपकी नौकरी ने आपको लोगों के बारे में ऐसा क्या सिखाया जो किताबें नहीं सिखा सकीं?"
+      }
+    },
+    {
+      "id": "b11-q091",
+      "group": "work",
+      "persona": "hobby-prober",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "Did your work leave you time for {hobby}?",
+        "hi": "क्या आपके काम के बाद {hobby} के लिए समय बचता था?"
+      }
+    },
+    {
+      "id": "b11-q092",
+      "group": "work",
+      "persona": "ca-hawk",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What are working conditions like for people at lower levels in your previous sector?",
+        "hi": "आपके पिछले क्षेत्र में निचले स्तर पर काम करने वालों की कामकाजी स्थितियाँ कैसी हैं?"
+      }
+    },
+    {
+      "id": "b11-q093",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If the private sector delivers better services, why should government do it at all?",
+        "hi": "अगर निजी क्षेत्र बेहतर सेवाएँ देता है, तो सरकार ये काम करे ही क्यों?"
+      }
+    },
+    {
+      "id": "b11-q094",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "How did the people you served see your organisation?",
+        "hi": "जिन लोगों की आप सेवा करते थे, वे आपके संगठन को कैसे देखते थे?"
+      }
+    },
+    {
+      "id": "b11-q095",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "If you could change one thing in your previous organisation, what would it be?",
+        "hi": "अगर आप अपने पिछले संगठन में एक चीज़ बदल सकते, तो वो क्या होती?"
+      }
+    },
+    {
+      "id": "b11-q096",
+      "group": "work",
+      "persona": "chair",
+      "depth": "opener",
+      "idkOk": false,
+      "q": {
+        "en": "If you haven't worked yet, tell us what you've been doing since graduating.",
+        "hi": "अगर आपने अभी तक नौकरी नहीं की, तो बताइए स्नातक होने के बाद से आप क्या कर रहे हैं।"
+      }
+    },
+    {
+      "id": "b11-q097",
+      "group": "work",
+      "persona": "sceptic",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "There's a gap of some years in your form. How did you spend that time?",
+        "hi": "आपके फ़ॉर्म में कुछ वर्षों का अंतराल है। वो समय आपने कैसे बिताया?"
+      }
+    },
+    {
+      "id": "b11-q098",
+      "group": "work",
+      "persona": "ca-hawk",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "How is artificial intelligence likely to change jobs like {previous_job}?",
+        "hi": "कृत्रिम बुद्धिमत्ता {previous_job} जैसी नौकरियों को कैसे बदल सकती है?"
+      }
+    },
+    {
+      "id": "b11-q099",
+      "group": "work",
+      "persona": "chair",
+      "depth": "follow-up",
+      "idkOk": false,
+      "q": {
+        "en": "What did you enjoy least about your work?",
+        "hi": "आपको अपने काम में सबसे कम क्या पसंद था?"
+      }
+    },
+    {
+      "id": "b11-q100",
+      "group": "work",
+      "persona": "quiet-one",
+      "depth": "deep",
+      "idkOk": false,
+      "q": {
+        "en": "Based on your work experience, what does professionalism mean to you?",
+        "hi": "अपने कामकाजी अनुभव के आधार पर, आपके लिए व्यावसायिकता का क्या मतलब है?"
+      }
+    }
+  ],
+  "factsToCheck": [
+    "National Education Policy 2020 (q050)"
+  ],
+  "review": {
+    "status": "draft"
+  }
+}

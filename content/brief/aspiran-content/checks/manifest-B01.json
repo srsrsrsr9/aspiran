@@ -1,0 +1,34 @@
+{
+  "batch": "B01",
+  "made": "2026-11-01",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "pause-lines/pause-lines.json",
+      "id": "b01-pause-lines",
+      "items": 50
+    },
+    {
+      "path": "chotu/voice.json",
+      "id": "b01-chotu-voice",
+      "items": 30
+    }
+  ],
+  "counts": {
+    "pauseLines": 50,
+    "pauseLinesPolished": 40,
+    "pauseLinesNew": 10,
+    "pauseLineAlts": 3,
+    "chotuDo": 8,
+    "chotuDont": 8,
+    "chotuExamples": 30
+  },
+  "openQuestions": [
+    "journal-first-open says 'We don't read it.' This is only true if no person or AI (including Chotu) ever reads journal text. Please confirm, or change the line.",
+    "export says everything is 'yours to take'. Please confirm export covers every item type.",
+    "Several drafts were softened to stay within the learning-science evidence: try-before-show, item-returns, mixed-csat, late-night, interview-opens, walk-mode. The original 'six minutes' in skeleton-drill became 'many minutes'.",
+    "first-mains: the original line 'Everybody who clears wrote a bad one first' is unverifiable, so it was changed.",
+    "chotu/voice.json has no schema in Part D. Please confirm the structure, including the per-example tone field.",
+    "who is 56 words; the brief says 60. Is 60 a target or a cap?"
+  ]
+}

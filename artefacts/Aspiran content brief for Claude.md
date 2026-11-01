@@ -7,7 +7,7 @@ stays for the card types it already covers.*
 
 ## Part A. For you (the owner): how to run this
 
-**Goal:** produce 13 batches of content with Claude in your other account, then send Claude Code one zip file.
+**Goal:** produce 22 batches of content with Claude in your other account, then send Claude Code one zip file.
 
 ### Set-up (once)
 1. In claude.ai, create a **Project** called "Aspiran content".
@@ -57,6 +57,7 @@ arrives in the app as **drafts**. Nothing is shown as checked until an English a
 | B11 | Interview question bank + board personas | 300 questions, 5 personas | medium |
 | B12 | Essay practice set | 24 essay topics with three-snap guides | medium |
 | B13 | Restart and welcome-back day scripts | 12 scripts | small |
+| B14 to B22 | Syllabus notes for the topics the app has none of yet (added 2 Nov) | 6 to 8 notes per batch | large |
 
 **Which optional first?** Your call. Each optional needs about 3 to 6 batches to cover its 15 to 30 highest-value
 nodes. B10 is the first of them; continue as B10a, B10b and so on.
@@ -544,6 +545,51 @@ Rules:
 - **Never mention how many days were missed.**
 - No guilt and no cheerleading.
 - Calm, practical, warm.
+
+---
+
+### B14 to B22. Syllabus notes for the gaps (added 2 November 2026)
+
+The app has notes only for Economy, Environment, Geography and Modern history. These batches fill the rest. One
+batch per chat:
+
+| Batch | Subject | Notes | Syllabus nodes (the app's own topic ids) |
+|---|---|---|---|
+| B14 | Polity I: Constitution, federalism, Parliament | 8 | `gs2-1` Constitution, `gs2-2` federalism, `gs2-3` Parliament, `pre-4` |
+| B15 | Polity II: executive, judiciary, elections, bodies | 8 | `gs2-4` executive and judiciary, `gs2-5` elections, `gs2-6` bodies, `pre-4` |
+| B16 | Governance and social justice | 8 | `gs2-7` governance, `gs2-8` welfare, health, education |
+| B17 | International relations | 6 | `gs2-9` neighbourhood, `gs2-10` groupings, `gs2-11` diaspora |
+| B18 | Ancient and medieval India, and Indian culture | 8 | `gs1-1` culture, `pre-2` |
+| B19 | World history and Indian society | 8 | `gs1-5` world history, `gs1-6` society |
+| B20 | Science and technology, and general science | 8 | `gs3-5` S&T, `pre-7` general science |
+| B21 | Internal security | 6 | `gs3-8` internal security |
+| B22 | Ethics (GS4) foundations | 8 | `gs4-1` to `gs4-5` |
+
+One file per subject, `syllabus/<subject>.json`, in exactly the shape the app already imports:
+```json
+{"schema": "upsc-pods/syllabus-notes@1", "subject": "pol", "topic": "Polity",
+ "note": "One line on what this file covers.",
+ "notes": [{"id": "pol-syl-basic-structure", "title": "≤ 70 characters", "nodes": ["gs2-1", "pre-4"],
+   "gsPaper": "GS2", "minutes": 8, "dek": "By the end, you will know … (one sentence)",
+   "sections": [{"head": "", "body": "≤ 180 words; plain paragraphs separated by a blank line"}],
+   "keyFacts": ["5 to 8 one-line facts a person should be able to recall"],
+   "examAngle": "≤ 60 words: how Prelims and Mains ask about this",
+   "selfCheck": ["3 to 5 questions the person answers from memory"],
+   "sources": ["NCERT, Bare Act or Constitution article, standard text: as exact as you can"],
+   "verify": "What the editor must check: every number, date, case and anything that changes",
+   "hi": {"title": "", "dek": "", "sections": [{"head": "", "body": ""}], "keyFacts": [], "examAngle": "", "selfCheck": []},
+   "tone": "NEUTRAL", "factsToCheck": [], "review": {"status": "draft"}}]}
+```
+- `subject` is one of `pol`, `his`, `anc`, `art`, `sci`, `ir`, `soc`, `eth` (B19 uses two files: `his` for world history,
+  `soc` for society).
+- 3 to 5 sections per note, about 600 to 900 words of English in all. Each note ends with `selfCheck`: material that only
+  informs is not enough.
+- `hi` mirrors the English: same number of sections, facts and questions, in the same order.
+- Every article, case, amendment, committee, date and figure goes in `factsToCheck` and in `verify`.
+- Polity: quote the Constitution only in short exact phrases, with the article number. Courts: name, year and holding,
+  nothing you're unsure of. Politics: describe, never judge.
+- IR and internal security: describe places in words only; no borders, no claims about disputed territory; state each
+  side's formal position, with dates, and nothing more.
 
 ---
 

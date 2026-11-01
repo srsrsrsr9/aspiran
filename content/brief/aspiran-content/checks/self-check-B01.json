@@ -1,0 +1,29 @@
+{
+  "batch": "B01",
+  "checksRun": [
+    "JSON structure and required fields: checked by eye; no code execution in this session",
+    "Every en has a hi partner containing Devanagari: checked by eye",
+    "Pause lines ≤ 15 English words: counted by hand; the longest are first-mains and sure-but-wrong at 15",
+    "Banned words (hurry, last chance, guaranteed, topper's secret, 'you should have', countdowns): none found. 'Should have' appears only inside Chotu's dont rule, which names it as banned.",
+    "TRAGIC examples: no emoji, no jokes",
+    "Emoji: at most one per reply, LIGHT only (3 examples)",
+    "Hindi gender: Chotu's replies and the pause lines avoid gendered verb forms for the reader",
+    "Strict re-read of 5 random items: item-returns, sure-but-wrong, wrong-answer, result-not-cleared, chai-tragic"
+  ],
+  "issuesFound": [
+    "sure-but-wrong: the draft's 'costs marks twice' was imprecise about negative marking",
+    "wrong-answer: the 'close neighbour' joke risked reading as playful on a wrong answer",
+    "result-not-cleared: an early draft added 'rest first, no decision tonight', which goes beyond the one-kind-line feelings rule",
+    "Feelings replies: an early draft used 'बात कर सकते हैं', a masculine verb form"
+  ],
+  "fixed": [
+    "sure-but-wrong reworded to 'no mark, plus a penalty'; negative marking added to factsToCheck",
+    "wrong-answer kept as a gentle line on a NEUTRAL fact item; the explanation follows immediately",
+    "result-not-cleared trimmed to the feelings script",
+    "Changed to the gender-free passive 'बात की जा सकती है'"
+  ],
+  "stillOpen": [
+    "Word counts and JSON validity were not machine-checked. Claude Code should re-run C6.",
+    "The Hindi needs the Hindi editor's ear for naturalness, especially the softened pause lines."
+  ]
+}

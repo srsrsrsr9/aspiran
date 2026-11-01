@@ -1,0 +1,35 @@
+{
+  "batch": "B10a",
+  "made": "2026-11-01",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/sociology/nodes/soc-p1-03.json",
+      "id": "soc-p1-03",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-04.json",
+      "id": "soc-p1-04",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-05.json",
+      "id": "soc-p1-05",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "nodes": 3,
+    "practiceQuestions": 9,
+    "recallCards": 36,
+    "skeletons": 9,
+    "examples": 9
+  },
+  "openQuestions": [
+    "With nodes 1–2 in B10, Sociology's first five nodes are complete.",
+    "Next order: the first five nodes of each other optional (PSIR, Geography, Anthropology, History, Public Administration), or keep going in Sociology? Default is the first five of each optional, so every optional has a working start.",
+    "The 'links' field uses invented slugs (e.g. sociology/soc-p1-09-durkheim). Claude Code should map these to real node ids.",
+    "Two examples have empty 'source' fields and are general claims; editors may want a citation or removal."
+  ]
+}
