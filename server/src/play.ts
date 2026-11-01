@@ -25,7 +25,7 @@ import { PRICES, grant } from "./plus";
  */
 
 export const PLAY_PRODUCT = "plus_yearly";
-const PACKAGE = "com.upscpods.app";
+const PACKAGE = "in.aspiran.app";
 const SCOPE = "https://www.googleapis.com/auth/androidpublisher";
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 const API = "https://androidpublisher.googleapis.com/androidpublisher/v3";

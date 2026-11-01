@@ -47,7 +47,7 @@ export interface Env {
   PUBLIC_BASE_URL?: string;
   /** Google Play Billing (play.ts): the Play service account's JSON key, a secret (`wrangler secret put`), never in files or chat. */
   PLAY_SERVICE_ACCOUNT_JSON?: string;
-  /** The app's package name on Play. Unset = com.upscpods.app. */
+  /** The app's package name on Play. Unset = in.aspiran.app. */
   PLAY_PACKAGE_NAME?: string;
 }
 

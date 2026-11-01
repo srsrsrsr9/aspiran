@@ -46,7 +46,7 @@
             android:exported="false"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:taskAffinity="com.upscpods.app.focus" />
+            android:taskAffinity="${applicationId}.focus" />
         <service
             android:name=".data.FocusGuard"
             android:exported="true"

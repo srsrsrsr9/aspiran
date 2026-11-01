@@ -14,7 +14,7 @@ English and Hindi first; Telugu is the pilot language.
   `upsc-pods-backups`, Durable Objects `PodRoom` and `CommonsRoom`, one half-hourly cron. Also serves the
   web app (`server/public/app/`, no build step), the editor desk (`/desk`) and admin (`/admin`).
   `server/README.md` is the reference for everything server-side.
-- `android/`: Kotlin and Compose app, package `com.upscpods.app`. Built by the owner in Android Studio.
+- `android/`: Kotlin and Compose app. Play id `in.aspiran.app` (code package stays `com.upscpods.app`). Built by the owner in Android Studio.
 - `content/`: content packs (JSON per item, `en` and `hi` side by side) and the tools that make them.
   `content/README.md` explains the formats; the prompt kit is in `artefacts/UPSC Pods Prompt Kit/`.
 - `focus-extension/`: the browser site-blocker used by Focus blocks.

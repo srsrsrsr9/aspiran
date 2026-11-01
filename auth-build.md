@@ -72,7 +72,7 @@ mistake. Checked on a production-like local server: `401 auth_invalid`.
 3. **Turn on the providers.** In Authentication → Sign-in method:
    - Enable **Phone**.
    - Enable **Google** and pick the support email. Open "Web SDK configuration" and copy the **Web client ID**: that's `firebase.webClientId`.
-4. **Add the Android app.** In Project settings → Your apps, choose Add app → Android, with package `com.upscpods.app`.
+4. **Add the Android app.** In Project settings → Your apps, choose Add app → Android, with package `in.aspiran.app`.
    - Add all four fingerprints: SHA-1 and SHA-256 for both the upload key and the debug key.
    - Phone sign-in (Play Integrity / SafetyNet) and Google sign-in both check them.
    - Run these yourself. keytool asks for the store password; type it there, never into chat or a file:

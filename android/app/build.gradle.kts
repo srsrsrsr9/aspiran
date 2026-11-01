@@ -23,11 +23,12 @@ val firebaseConfig = linkedMapOf(
 )
 
 android {
+    // Code package (namespace) stays com.upscpods.app: only the store id below is public, and `in` is a Kotlin keyword.
     namespace = "com.upscpods.app"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.upscpods.app"
+        applicationId = "in.aspiran.app" // owner, 31 Oct 2026: set before the first Play upload; never change it after
         minSdk = 26
         targetSdk = 36
         versionCode = 1
