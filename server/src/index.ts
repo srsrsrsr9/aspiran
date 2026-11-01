@@ -27,6 +27,7 @@ import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
 
+import { webRoute } from "./web";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -171,6 +172,8 @@ export default {
         .bind(id, String(b.text ?? "").slice(0, 2000), String(b.reason ?? "Reported").slice(0, 300), new Date().toISOString()).run();
       return json({ ok: true });
     }
+    // --- The website (aspiran.in): Chotu as the guide, and what visitors tell it (web.ts)
+    if (path.startsWith("/web/")) { const r = await webRoute(req, env, path); if (r) return r; }
     if (path === "/chotu" && req.method === "POST") {
       // Free cloud turns are counted only when Plus is switched on and the app says who's asking.
       const peek = await req.clone().json<any>().catch(() => ({}));

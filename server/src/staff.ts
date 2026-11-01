@@ -284,6 +284,11 @@ export const ADMIN_SCHEMA = [
   // Open pods (rooms.ts): which pre-set rooms a member joined. A member can be in several.
   `CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id))`,
   `CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id)`,
+  // The website (web.ts): what a visitor tells Chotu as they scroll, and the daily cap on Chotu's website replies.
+  `CREATE TABLE IF NOT EXISTS web_leads (visitor_id TEXT PRIMARY KEY, name TEXT, details TEXT NOT NULL, contact TEXT, contact_kind TEXT,
+    lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,
+  `CREATE INDEX IF NOT EXISTS web_leads_seen ON web_leads(last_seen)`,
+  `CREATE TABLE IF NOT EXISTS web_rate (k TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, day))`,
 ];
 
 const ALTERS = [

@@ -14,6 +14,7 @@ import { activeResult, cleanResults, resultDays } from "./results";
 import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
+import { listLeads } from "./web";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
@@ -423,6 +424,16 @@ route("GET", /^analytics$/, "analytics", async ({ env, url }) => {
 route("GET", /^community$/, "analytics", async ({ env }) => json(await communityMetrics(env)));
 // Growth: installs by source, activation, return by signup week, feedback, the paid funnel and the pod test (metrics.ts).
 route("GET", /^growth$/, "analytics", async ({ env }) => json(await growthReport(env)));
+// Website visitors who talked to Chotu (web.ts). ?contact=1 for only those who left a number or email; ?format=csv to download.
+route("GET", /^web\/leads$/, "analytics", async ({ env, url }) => {
+  const rows = await listLeads(env, page(url, 5000), url.searchParams.get("contact") === "1");
+  if (url.searchParams.get("format") !== "csv") return json({ leads: rows });
+  const keys = ["name", "attempt", "medium", "stage", "optional", "city", "year", "hours", "worry", "sleep", "recall", "calibration", "pluck", "chai", "path"];
+  const cell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [["first_seen", "last_seen", "contact", "contact_kind", "lang", "consent_at", "source", ...keys].join(",")]
+    .concat(rows.map((r) => [r.first_seen, r.last_seen, r.contact, r.contact_kind, r.lang, r.consent_at, r.source, ...keys.map((k) => r.details[k])].map(cell).join(",")));
+  return new Response(lines.join("\n"), { headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="aspiran-web-leads-${istDay()}.csv"` } });
+});
 // Payments (payments.ts): the list, refunds, the price and the founding seats, and the business details on receipts.
 route("GET", /^payments$/, "flags", async ({ env, url }) => json({ ...(await listPayments(env, (url.searchParams.get("q") ?? "").slice(0, 60), page(url))), pricing: await pricing(env), business: await business(env), defaults: { pricing: DEFAULT_PRICING, business: DEFAULT_BUSINESS } }));
 route("POST", /^payments\/(upsc_[0-9a-f]{24})\/refund$/, "flags", async ({ env, s, body, m }) => {
