@@ -174,7 +174,12 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 const todayIst = () => new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
 
 try { $("#token").value = sessionStorage.getItem("token") || ""; $("#editor").value = localStorage.getItem("editor") || ""; } catch {}
-$("#token").onchange = () => { try { sessionStorage.setItem("token", $("#token").value); } catch {} };
+// A new token reloads the tab that's open, so it doesn't sit empty under an old "Wrong or missing key.".
+$("#token").onchange = () => {
+  try { sessionStorage.setItem("token", $("#token").value); } catch {}
+  say("");
+  document.querySelector("nav button.on")?.click();
+};
 $("#editor").onchange = () => { try { localStorage.setItem("editor", $("#editor").value); } catch {} };
 $("#day").value = todayIst();
 
