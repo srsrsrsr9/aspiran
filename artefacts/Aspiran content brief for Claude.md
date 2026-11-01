@@ -582,7 +582,7 @@ One file per subject, `syllabus/<subject>.json`, in exactly the shape the app al
 ```
 - `subject` is one of `pol`, `his`, `anc`, `art`, `sci`, `ir`, `soc`, `eth` (B19 uses two files: `his` for world history,
   `soc` for society).
-- 3 to 5 sections per note, about 600 to 900 words of English in all. Each note ends with `selfCheck`: material that only
+- 3 to 5 sections per note, about 500 to 900 words of English in all. Each note ends with `selfCheck`: material that only
   informs is not enough.
 - `hi` mirrors the English: same number of sections, facts and questions, in the same order.
 - Every article, case, amendment, committee, date and figure goes in `factsToCheck` and in `verify`.
