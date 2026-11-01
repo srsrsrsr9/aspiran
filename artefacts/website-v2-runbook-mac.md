@@ -12,8 +12,7 @@ Before you start:
 - The new homepage is **English only** for now. A Hindi version follows.
 - At night (23:30 to 07:00 IST) the scripted Chotu still guides visitors and saves their answers, but **AI replies
   are off** and he says it's late.
-- The privacy page doesn't yet mention website chat and visitor details. Step 6 says what to add before you share
-  the site widely.
+- The privacy page on the same branch now covers website chat and visitor details. Read it in the preview.
 
 Checked on the Mac before this runbook:
 - type check passes;
@@ -124,9 +123,9 @@ git checkout main && git pull
 
 ## Step 6. Before sharing the site widely
 
-- **Privacy page:** it should say the website saves what visitors tell Chotu (name, attempt, medium and similar),
-  keeps a phone or email only after the tick, sends chat to an AI provider, and how to ask for deletion. Ask Claude to
-  draft that paragraph; you approve it.
+- **Privacy page:** updated on the same branch (website chat, visitor answers, contact only with the tick, AI
+  providers). Read it at `/privacy` in the preview (step 5a) before merging. Retention period, legal name, address and
+  grievance contact are still placeholders.
 - **Hindi homepage:** to follow.
 - **The ₹999 offer** on the site says "first 300 on the website". The web checkout (Cashfree) is still in sandbox, so
   the site's "Save my seat" only collects contacts for now. That's what it says, so nothing is promised that can't
