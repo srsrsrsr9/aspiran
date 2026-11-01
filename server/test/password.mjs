@@ -45,11 +45,13 @@ const admin = (path, body) => call("/admin/api/" + path, { method: body ? "POST"
 const ip = { "cf-connecting-ip": `10.9.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}` };
 
 const flagsBefore = (await admin("flags")).data.flags;
-assert.equal(flagsBefore.password_login, true, "on by default");
+// Off by default (Google only for now); this run switches it on in Admin, and puts it back at the end.
+assert.equal(flagsBefore.password_login, false, "off by default (use a fresh test database)");
+assert.equal((await admin("flags", { flags: { ...flagsBefore, password_login: true } })).status, 200);
 const cfg = (await call("/config")).data.auth;
 assert.equal(cfg.password, true, "/config tells the apps");
 assert.equal(cfg.recovery, true, "recovery by email is on in dev (the log mail provider)");
-step("password_login is on by default and /config says so");
+step("password_login switched on in Admin and /config says so");
 
 const name = "t_" + rid().slice(0, 10);
 const hint = rid();

@@ -26,12 +26,13 @@ English and Hindi first; Telugu is the pilot language.
 
 ## Commands (in `server/`)
 - `npm run dev` (local), `npm run check` (tsc), `npm test` plus the `test:*` suites (13 in all).
-- `npm run deploy` deploys production. Only the owner runs it, from a runbook.
+- `npm run deploy` deploys production. Claude runs it (owner decided 1 Nov 2026) after `npm run check` and the tests pass,
+  applies any new migrations first, then checks the live pages. The owner still publishes Android releases.
 - `npm run import -- <pack folder>` imports a content pack. Everything lands as drafts.
 
 ## Standing rules
-- Never deploy, change a live flag, type a password or approve content. Write a macOS Terminal (zsh) runbook
-  (one command at a time, success and failure notes per step) in `artefacts/` for the owner.
+- Never change a live flag, type a password or approve content. For anything the owner must run (secrets, Play Console,
+  Android releases), write a macOS Terminal (zsh) runbook (one command at a time, success and failure notes per step) in `artefacts/`.
 - Commit locally and push to GitHub (`origin` = github.com/srsrsrsr9/aspiran) at sensible checkpoints. Never commit secrets.
 - Secrets go in with `npx wrangler secret put NAME --env production`, typed by the owner. Never in files or chat.
 - Content is always a draft until an English and a Hindi editor approve it. Don't claim content is

@@ -139,7 +139,9 @@ export const FLAG_INFO = {
 } as const;
 export type Flag = keyof typeof FLAG_INFO;
 /** Everything starts on, except Plus and Play Billing, which stay off until the founder switches them on. */
-export const DEFAULT_FLAGS: Record<Flag, boolean> = { ...Object.fromEntries(Object.keys(FLAG_INFO).map((k) => [k, true])), plus: false, play_billing: false } as any;
+export const DEFAULT_FLAGS: Record<Flag, boolean> = { ...Object.fromEntries(Object.keys(FLAG_INFO).map((k) => [k, true])), plus: false, play_billing: false,
+  // Google only for now (owner, 1 Nov 2026): username sign-in stays built but hidden until switched on in Admin → Flags.
+  password_login: false } as any;
 
 export const DRAFT_MODELS = ["@cf/meta/llama-3.3-70b-instruct-fp8-fast", "@cf/meta/llama-3.1-8b-instruct-fast", "@cf/mistralai/mistral-small-3.1-24b-instruct"];
 export const AUTHOR_MODELS = ["claude-haiku-5-5", "claude-sonnet-5-5"];
