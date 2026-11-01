@@ -1,5 +1,6 @@
 import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backups";
 import { checkItem, prepareEdit, titleOf } from "./content";
+import { coverage } from "./coverage";
 import { autoChecks } from "./pipeline";
 import { exportMember, forgetMember } from "./privacy";
 import { type Env, HELPLINES, bad, istDay, json, newId } from "./shared";
@@ -278,6 +279,7 @@ route("GET", /^content$/, "content", async ({ env, url }) => {
   ).all()).results;
   return json({ cards, library, deleted });
 });
+route("GET", /^coverage$/, "content", async ({ env }) => json(await coverage(env)));
 route("GET", /^versions\/(card|library)\/(.+)$/, "content", async ({ env, m }) => {
   const { results } = await env.DB.prepare("SELECT id, action, actor, at, length(json) AS size FROM content_versions WHERE item_type = ? AND item_id = ? ORDER BY id DESC")
     .bind(m[1], decodeURIComponent(m[2])).all();

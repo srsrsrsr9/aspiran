@@ -32,7 +32,7 @@
   button:disabled { opacity:.5; cursor:default; }
   .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
   .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(170px, 1fr)); gap:10px; margin-bottom:16px; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-bottom:16px; }
   .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
   .tile .n { font-size:26px; font-weight:600; }
   .tile .l { font-size:13px; color:var(--muted); }
@@ -51,7 +51,23 @@
   .notes { border-left:3px solid var(--line); padding-left:10px; margin:8px 0; font-size:13px; }
   .quote { background:var(--bg); border-radius:8px; padding:8px 10px; margin:6px 0; white-space:pre-wrap; }
   .helplines { background:var(--ok); border-radius:8px; padding:8px 12px; margin-bottom:12px; }
-  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--bg); padding:8px 16px; border-radius:8px; font-size:14px; display:none; z-index:9; max-width:90vw; }
+  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); display:none; gap:10px; align-items:flex-start; z-index:9; width:min(560px, calc(100vw - 32px));
+    background:var(--card); color:var(--ink); border:1px solid var(--line); padding:10px 12px 10px 14px; border-radius:10px; font-size:14px; box-shadow:0 4px 18px rgba(0,0,0,.18); }
+  #toast.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
+  #toast.err { background:var(--bad); color:var(--badInk); border-color:var(--badInk); }
+  #toast .t { flex:1; color:var(--ink); white-space:pre-wrap; word-break:break-word; }
+  #toast .ic { font-weight:700; }
+  #toast button { border:0; background:none; padding:0 4px; color:inherit; font-size:16px; line-height:1; }
+  .banner { border-radius:8px; padding:8px 12px; margin:10px 0; font-size:14px; }
+  .banner:empty { display:none; }
+  .banner.err { background:var(--bad); color:var(--badInk); }
+  .banner.ok { background:var(--ok); color:var(--okInk); }
+  .pill { display:inline-block; border-radius:999px; padding:1px 10px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .pill.gap { background:var(--bad); color:var(--badInk); }
+  .pill.drafts, .pill.hindi { background:var(--amber); color:var(--ink); }
+  .pill.ok { background:var(--ok); color:var(--okInk); }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  tr.gap td:first-child { border-left:3px solid var(--badInk); }
   .chart { width:100%; height:120px; display:block; }
   .chart .b { fill:var(--bar); }
   .chart .b:hover { opacity:.75; }
@@ -63,7 +79,10 @@
   pre { white-space:pre-wrap; word-break:break-word; font-size:12px; max-height:420px; overflow:auto; background:var(--bg); padding:10px; border-radius:8px; }
   dialog { border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--ink); max-width:760px; width:calc(100vw - 32px); padding:16px; }
   dialog::backdrop { background:rgba(0,0,0,.4); }
-  #signin { max-width:440px; margin:12vh auto; }
+  #signin { max-width:460px; margin:10vh auto; }
+  #signin label { display:block; font-weight:600; margin:14px 0 4px; }
+  #signin .row input { flex:1; min-width:0; }
+  @media (max-width:640px) { .layout nav { flex-wrap:nowrap; overflow-x:auto; } .layout nav button { flex:none; } }
 </style>
 </head>
 <body>
@@ -74,7 +93,7 @@
   <span id="who"></span>
 </header>
 <div id="app"></div>
-<div id="toast" role="status"></div>
+<div id="toast" role="status" aria-live="polite"><span class="ic" aria-hidden="true"></span><span class="t"></span><button type="button" aria-label="Close">×</button></div>
 <dialog id="dlg"></dialog>
 <script>
 "use strict";
@@ -102,7 +121,26 @@ function put(el, ...kids) {
   for (const k of kids.flat(9)) if (k != null && k !== false) el.append(k instanceof Node ? k : String(k));
   return el;
 }
-const toast = (t) => { const e = $("#toast"); e.textContent = t; e.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => (e.style.display = "none"), 3500); };
+/** kind: "ok" (green, goes after 4 s), "err" (red, stays until closed) or "info". */
+const toast = (t, kind = "info") => {
+  const e = $("#toast");
+  e.className = kind;
+  e.setAttribute("role", kind === "err" ? "alert" : "status");
+  e.querySelector(".ic").textContent = kind === "ok" ? "✓" : kind === "err" ? "!" : "i";
+  e.querySelector(".t").textContent = t;
+  e.style.display = "flex";
+  clearTimeout(toast.t);
+  if (kind !== "err") toast.t = setTimeout(() => (e.style.display = "none"), kind === "ok" ? 4000 : 7000);
+};
+document.querySelector("#toast button").onclick = () => ($("#toast").style.display = "none");
+/** Server messages are mostly plain already; these are the ones that aren't, plus anything that looks like code. */
+function friendly(msg, status) {
+  const m = String(msg || "").trim();
+  if (m === "Not found") return "That isn't there any more. Reload the page and try again.";
+  if (status === 403) return (m && !/^forbidden$/i.test(m) ? m : "Your role can't do that.") + " Ask an admin if you need this.";
+  if (status >= 500 || /^[{[<]/.test(m) || !m) return `The server had a problem${status ? " (error " + status + ")" : ""}. Nothing was changed. Try again in a minute; if it keeps happening, tell the owner.`;
+  return m;
+}
 const when = (iso) => (iso ? new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "");
 const ago = (iso) => { if (!iso) return ""; const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} days ago`; };
 const num = (n) => Number(n || 0).toLocaleString("en-IN");
@@ -112,20 +150,26 @@ try { key = sessionStorage.getItem("adminKey") || ""; } catch {}
 let me = null;
 
 async function api(path, opts = {}) {
-  const res = await fetch("/admin/api/" + path, {
-    method: opts.method || (opts.body ? "POST" : "GET"),
-    headers: { "content-type": "application/json", authorization: "Bearer " + key },
-    body: opts.body ? JSON.stringify(opts.body) : undefined,
-  });
-  if (opts.raw) { if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText); return res; }
+  let res;
+  try {
+    res = await fetch("/admin/api/" + path, {
+      method: opts.method || (opts.body ? "POST" : "GET"),
+      headers: { "content-type": "application/json", authorization: "Bearer " + key },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+  } catch { throw new Error("Can't reach the server. Check your internet connection and try again. Nothing was changed."); }
+  if (opts.raw && res.ok) return res;
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) { if (res.status === 401) signOut(); throw new Error(data.error || res.statusText); }
+  if (!res.ok) {
+    if (res.status === 401 && path !== "me") signOut("Your key stopped working (it may have been replaced or switched off). Sign in again.");
+    throw Object.assign(new Error(friendly(data.error || res.statusText, res.status)), { status: res.status });
+  }
   return data;
 }
 /** Runs an action, shows what happened, then redraws the section. */
 async function act(fn, done) {
-  try { const r = await fn(); if (done) toast(typeof done === "function" ? done(r) : done); await show(current); return r; }
-  catch (e) { toast(e.message); }
+  try { const r = await fn(); if (done) toast(typeof done === "function" ? done(r) : done, "ok"); await show(current); return r; }
+  catch (e) { toast(e.message, "err"); }
 }
 function download(name, text) {
   const a = h("a", { href: URL.createObjectURL(new Blob([text], { type: "application/json" })), download: name });
@@ -165,20 +209,36 @@ function bars(title, points, fmt = num) {
 function lastDays(n) { const out = []; for (let i = n - 1; i >= 0; i--) out.push(new Date(Date.now() + 5.5 * 3600e3 - i * 864e5).toISOString().slice(0, 10)); return out; }
 
 // --- Sign in --------------------------------------------------------------------------------
-function signOut() { key = ""; try { sessionStorage.removeItem("adminKey"); } catch {} me = null; render(); }
-function signInView(msg) {
-  const input = h("input", { type: "password", autocomplete: "off", placeholder: "Your personal key (upk_…) or the owner key", style: "width:100%" });
+let signInNote = null;
+function signOut(msg, kind = "err") { key = ""; try { sessionStorage.removeItem("adminKey"); } catch {} me = null; signInNote = msg ? [msg, kind] : null; render(); }
+function signInView(msg, kind = "err") {
+  const input = h("input", { id: "key", type: "password", autocomplete: "off", spellcheck: "false", placeholder: "Paste your key here" });
+  const banner = h("div.banner." + kind, { role: "alert" }, msg || "");
+  const btn = h("button.primary", { onclick: () => go() }, "Sign in");
+  const say = (t, k = "err") => { banner.className = "banner " + k; put(banner, t); };
   const go = async () => {
-    key = input.value.trim();
+    const typed = input.value.trim();
+    if (!typed) { say("Type or paste your key first."); input.focus(); return; }
+    btn.disabled = true; put(btn, "Checking…");
+    key = typed;
     try { me = await api("me"); try { sessionStorage.setItem("adminKey", key); } catch {} render(); }
-    catch (e) { key = ""; put(err, e.message); }
+    catch (e) {
+      key = "";
+      btn.disabled = false; put(btn, "Sign in");
+      say(e.status === 401 ? "That key didn't work. Check that you pasted all of it (a personal key starts with upk_). If it still fails, ask an admin for a new key." : e.message);
+    }
   };
   input.addEventListener("keydown", (e) => e.key === "Enter" && go());
-  const err = h("p.muted", {}, msg || "");
-  return h("div.card#signin", {}, h("h2", {}, "Sign in"),
-    h("p.muted", {}, "Use the personal key an admin gave you. The first time, use the owner key you set with wrangler (ADMIN_TOKEN, or EDITOR_TOKEN if there's no ADMIN_TOKEN), then make personal keys under Staff."),
-    input, h("div.row", { style: "margin-top:10px" }, h("button.primary", { onclick: go }, "Sign in")), err,
-    h("p.muted", {}, "The key stays in this tab only and is forgotten when you close it."));
+  const eye = h("button", { type: "button", "aria-pressed": "false", onclick: () => {
+    const show = input.type === "password";
+    input.type = show ? "text" : "password"; put(eye, show ? "Hide" : "Show"); eye.setAttribute("aria-pressed", String(show));
+  } }, "Show");
+  setTimeout(() => input.focus(), 0);
+  return h("div.card#signin", {}, h("h2", {}, "Sign in to Admin"),
+    h("p.muted", {}, "Use the personal key an admin made for you under Staff. It starts with upk_. The first time, use the owner key set with wrangler (ADMIN_TOKEN, or EDITOR_TOKEN if there's no ADMIN_TOKEN), then make personal keys under Staff."),
+    h("label", { for: "key" }, "Your key"), h("div.row", {}, input, eye), banner,
+    h("div.row", { style: "margin-top:12px" }, btn),
+    h("p.muted", {}, "The key stays in this browser tab and is forgotten when you close it. Editors can go straight to the ", h("a", { href: "/desk" }, "News desk"), "."));
 }
 
 // --- Sections -------------------------------------------------------------------------------
@@ -194,9 +254,10 @@ const views = {};
 
 async function render() {
   const app = $("#app");
-  if (!key) { put($("#who")); put(app, signInView()); return; }
-  if (!me) { try { me = await api("me"); } catch (e) { put(app, signInView(e.message)); return; } }
-  put($("#who"), `${me.name} · ${me.roles.join(", ").replace("_", " ")} `, h("button", { onclick: signOut }, "Sign out"));
+  if (!key) { put($("#who")); put(app, signInView(...(signInNote || []))); signInNote = null; return; }
+  if (!me) { try { me = await api("me"); } catch (e) { key = ""; try { sessionStorage.removeItem("adminKey"); } catch {} put(app, signInView(e.status === 401 ? "" : e.message)); return; } }
+  const ROLE = { admin: "Admin", editor: "Editor", hindi_editor: "Hindi editor", language_editor: "Language editor", moderator: "Moderator" };
+  put($("#who"), "Signed in as ", h("b", {}, me.name), ` · ${me.roles.map((r) => ROLE[r] || r).join(", ")} `, h("button", { onclick: () => signOut("You're signed out.", "ok") }, "Sign out"));
   const allowed = SECTIONS.filter(([, , p]) => can(p));
   if (!allowed.find(([id]) => id === current)) current = allowed[0]?.[0] || "overview";
   const nav = h("nav", {}, allowed.map(([id, name]) => h("button", { class: id === current ? "on" : "", "data-id": id, onclick: () => { location.hash = id; } }, name)));
@@ -208,7 +269,9 @@ async function show(id) {
   document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.id === id));
   const main = $("#main");
   if (!main) return;
-  try { put(main, await views[id]()); } catch (e) { put(main, h("div.card", {}, e.message)); }
+  if (!views[id]) { put(main, h("div.card", {}, "There's no section called \"" + id + "\". Pick one from the list.")); return; }
+  try { put(main, await views[id]()); }
+  catch (e) { put(main, h("div.card", {}, h("div.banner.err", {}, "This section didn't load. " + e.message), h("button", { onclick: () => show(id) }, "Try again"))); }
 }
 window.addEventListener("hashchange", () => show(location.hash.slice(1) || "overview"));
 
@@ -232,12 +295,13 @@ views.overview = async () => {
 // Content: one list with history and restore. Writing happens on the desk.
 views.content = async () => {
   const q = views.content.q || "";
-  const d = await api("content?q=" + encodeURIComponent(q));
+  const [d, cov] = await Promise.all([api("content?q=" + encodeURIComponent(q)), api("coverage")]);
   const search = h("input", { placeholder: "Search titles", value: q, onchange: (e) => { views.content.q = e.target.value; show("content"); } });
   const status = (r) => [r.en_editor ? h("span.chip.ok", {}, "EN ✓ " + r.en_editor) : h("span.chip", {}, r.status), r.hi_editor ? h("span.chip.ok", {}, "HI ✓ " + r.hi_editor) : null];
   const histBtn = (type, id, n) => h("button", { onclick: () => history(type, id) }, `History (${n})`);
   return [h("h2", {}, "Content"), h("p.lead", {}, "Every card and library item, with its full history. Restoring an old version brings it back as a draft that needs approving again. To write or approve, use the News desk."),
     h("div.row", { style: "margin-bottom:12px" }, search, h("a", { href: "/desk" }, h("button.primary", {}, "Open the News desk"))),
+    coverageCard(cov),
     h("h3", {}, "Chai cards"),
     h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Day"), h("th", {}, "Headline"), h("th", {}, "Status"), h("th", {}, "")),
       d.cards.map((r) => h("tr", {}, h("td", {}, r.day), h("td", {}, r.headline || r.title), h("td", {}, status(r)), h("td", {}, histBtn("card", r.id, r.versions)))))),
@@ -247,6 +311,27 @@ views.content = async () => {
     d.deleted.length ? [h("h3", {}, "Deleted (can be restored)"), h("div.card", {}, d.deleted.map((r) => h("div.row", {}, h("span.mono", {}, r.id), h("span.muted", {}, `deleted ${when(r.at)} by ${r.actor}`), histBtn("library", r.id, "…"))))] : null,
   ];
 };
+/** Per paper and subject: what exists, and how far English and Hindi have got. The desk's Coverage tab has the same numbers. */
+function coverageCard(cov) {
+  const t = cov.totals;
+  const STATUS = { gap: ["gap", "Nothing yet"], drafts: ["drafts", "Drafts only"], hindi: ["hindi", "Hindi behind"], ok: ["ok", "In the app"] };
+  const only = !!views.content.gapsOnly;
+  return [h("h3", {}, "Coverage by paper and syllabus topic"),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, num(t.items)), h("div.l", {}, "items in all")),
+      h("div.tile", {}, h("div.n", {}, num(t.live)), h("div.l", {}, "in the app (English approved)")),
+      h("div.tile", {}, h("div.n", {}, num(t.hindiLive)), h("div.l", {}, "with Hindi approved")),
+      h("div.tile" + (t.gaps ? ".warn" : ""), {}, h("div.n", {}, `${num(t.gaps)} of ${num(t.topics)}`), h("div.l", {}, "syllabus topics with nothing yet")),
+      h("div.tile" + (t.draftsOnly ? ".warn" : ""), {}, h("div.n", {}, num(t.draftsOnly)), h("div.l", {}, "topics with drafts only"))),
+    h("label.row", { style: "margin-bottom:8px" }, h("input", { type: "checkbox", checked: only, onchange: (e) => { views.content.gapsOnly = e.target.checked; show("content"); } }), "Only rows that need work"),
+    h("div.card.scroll", {}, h("table", {},
+      h("tr", {}, h("th", {}, "Paper"), h("th", {}, "Topic"), h("th.n", {}, "Items"), h("th.n", {}, "English in the app"), h("th.n", {}, "English waiting"), h("th.n", {}, "Hindi approved"), h("th.n", {}, "Hindi waiting"), h("th", {}, "Status")),
+      cov.papers.map((p) => p.rows.filter((r) => !only || r.status !== "ok").map((r, i) => h("tr" + (r.status === "gap" ? ".gap" : ""), {},
+        h("td", {}, i === 0 ? h("b", {}, p.name) : ""), h("td", {}, r.topic), h("td.n", {}, num(r.total)), h("td.n", {}, num(r.en.approved)), h("td.n", {}, num(r.en.waiting)),
+        h("td.n", {}, num(r.hi.approved)), h("td.n", {}, num(r.hi.waiting)), h("td", {}, h("span.pill." + STATUS[r.status][0], {}, STATUS[r.status][1]))))))),
+    cov.nowhere ? h("p.muted", {}, `${num(cov.nowhere.total)} more items aren't under any syllabus topic (wind-downs, sounds, or titles that don't name a subject).`) : null,
+    h("p.muted", {}, "Topics are the ones the app's Syllabus tab shows. Mocks and past papers count under the topics their questions are tagged with; everything else counts where the app shows it, from its subject and title. One item can count under several topics. Chai cards are included; rejected ones are not. The News desk's Coverage tab has the same numbers with more detail.")];
+}
 async function history(type, id) {
   const list = await api(`versions/${type}/${encodeURIComponent(id)}`);
   const view = h("div", {});
@@ -356,7 +441,7 @@ function accountDialog(a, action) {
       : "They can use the app again the next time it checks (on open, or straight away if they tap Try again)."),
     reason,
     h("div.row", { style: "margin-top:8px" }, h(action === "suspend" ? "button.danger" : "button.primary", { onclick: () => {
-      if (!reason.value.trim()) { toast("A reason is required"); return; }
+      if (!reason.value.trim()) { toast("Write a reason first. Only staff see it.", "err"); return; }
       d.close();
       act(() => api(`accounts/${encodeURIComponent(a.uid)}/${action}`, { body: { reason: reason.value.trim() } }), (r) => action === "suspend" ? `Suspended${r.socketsClosed ? `; ${r.socketsClosed} live connection(s) closed` : ""}` : "Access restored");
     } }, action === "suspend" ? "Suspend" : "Restore")));
@@ -371,7 +456,7 @@ function resetPasswordDialog(a) {
         const r = await api(`accounts/${encodeURIComponent(a.uid)}/reset-password`, { body: {} });
         dialog(h("h3", {}, `Temporary password for @${r.username}`), h("p.mono", { style: "font-size:20px;user-select:all" }, r.tempPassword),
           h("p.muted", {}, "Copy it now; it won't be shown again."));
-      } catch (e) { toast(e.message || "Couldn't reset"); }
+      } catch (e) { toast(e.message || "Couldn't reset the password.", "err"); }
     } }, "Set a temporary password")));
 }
 async function accountHistoryDialog(a) {
@@ -389,7 +474,7 @@ async function memberAction(m, a) {
   if (a === "export") return exportMember(m.member_id);
   if (a === "erase") return eraseMember(m.member_id);
 }
-async function exportMember(id) { try { const x = await api("privacy/export", { body: { memberId: id } }); download(`upsc-pods-member-${id.slice(0, 8)}.json`, JSON.stringify(x, null, 2)); toast("Export downloaded"); } catch (e) { toast(e.message); } }
+async function exportMember(id) { try { const x = await api("privacy/export", { body: { memberId: id } }); download(`upsc-pods-member-${id.slice(0, 8)}.json`, JSON.stringify(x, null, 2)); toast("Export downloaded", "ok"); } catch (e) { toast(e.message, "err"); } }
 function eraseMember(id) {
   const c = prompt("This erases everything the server holds about this member: pod membership, consent records, messages and private notes. Reports stay without their words. It can't be undone.\n\nType DELETE to confirm.");
   if (c) act(() => api("privacy/delete", { body: { memberId: id, confirm: c } }), "Erased");
@@ -655,7 +740,7 @@ views.staff = async () => {
   const nl = langBoxes();
   const name = h("input", { placeholder: "Full name (shows on approvals)" }), email = h("input", { placeholder: "Email (optional, for your records)" });
   const showKey = (who, k) => dialog(h("h3", {}, `Personal key for ${who}`),
-    h("div.keybox", {}, h("div.mono", {}, k), h("button", { style: "margin-top:8px", onclick: () => navigator.clipboard.writeText(k).then(() => toast("Copied")) }, "Copy")),
+    h("div.keybox", {}, h("div.mono", {}, k), h("button", { style: "margin-top:8px", onclick: () => navigator.clipboard.writeText(k).then(() => toast("Copied", "ok"), () => toast("Couldn't copy. Select the key and copy it by hand.", "err")) }, "Copy")),
     h("p", {}, "This is the only time it's shown. Give it to them in person or through a password manager, not in chat or email."),
     h("p.muted", {}, "They sign in here and on the News desk with it. Lost keys can't be recovered; make a new one."));
   return [h("h2", {}, "Staff and roles"),
@@ -664,7 +749,7 @@ views.staff = async () => {
     h("h3", {}, "Add a person"),
     h("div.card", {}, h("div.row", {}, name, email), h("div.row", { style: "margin-top:8px" }, Object.entries(nb).map(([r, b]) => h("label.row", {}, b, r.replace("_", " ")))), langRow(nl),
       h("div.row", { style: "margin-top:8px" }, h("button.primary", { onclick: async () => {
-        try { const r = await api("staff", { body: { name: name.value, email: email.value, roles: picked(nb), langs: picked(nl) } }); showKey(name.value, r.key); show("staff"); } catch (e) { toast(e.message); }
+        try { const r = await api("staff", { body: { name: name.value, email: email.value, roles: picked(nb), langs: picked(nl) } }); showKey(name.value, r.key); show("staff"); } catch (e) { toast(e.message, "err"); }
       } }, "Create and show their key"))),
     h("h3", {}, "People"),
     h("div.card.scroll", {}, d.staff.length ? h("table", {}, h("tr", {}, h("th", {}, "Name"), h("th", {}, "Roles"), h("th", {}, "Last active"), h("th", {}, "")),
@@ -676,7 +761,7 @@ views.staff = async () => {
             h("button", { onclick: () => act(() => api(`staff/${p.id}/roles`, { body: { roles: picked(boxes), langs: picked(lb) } }), "Roles saved") }, "Save roles")),
           h("td.muted", {}, p.last_seen_at ? ago(p.last_seen_at) : "never"),
           h("td", {}, p.disabled_at ? h("button", { onclick: () => act(() => api(`staff/${p.id}/enable`, { body: {} }), "Re-enabled") }, "Re-enable")
-            : [h("button", { onclick: async () => { if (!confirm("Make a new key? Their old key stops working now.")) return; try { const r = await api(`staff/${p.id}/rotate`, { body: {} }); showKey(p.name, r.key); } catch (e) { toast(e.message); } } }, "New key"), " ",
+            : [h("button", { onclick: async () => { if (!confirm("Make a new key? Their old key stops working now.")) return; try { const r = await api(`staff/${p.id}/rotate`, { body: {} }); showKey(p.name, r.key); } catch (e) { toast(e.message, "err"); } } }, "New key"), " ",
               h("button.danger", { onclick: () => { if (confirm(`Disable ${p.name}? Their key stops working now. Their approvals and history stay.`)) act(() => api(`staff/${p.id}/disable`, { body: {} }), "Disabled"); } }, "Disable")]));
       })) : h("p.muted", {}, "Nobody yet. Until you add people, everyone is using shared keys."))];
 };
@@ -725,7 +810,7 @@ views.backups = async () => {
     h("div.row", { style: "margin-bottom:12px" }, h("button.primary", { onclick: () => act(() => api("backups", { body: {} }), (r) => `Backed up ${num(r.rows)} rows`) }, "Back up now")),
     h("div.card.scroll", {}, d.backups.length ? h("table", {}, h("tr", {}, h("th", {}, "When"), h("th", {}, "Why"), h("th", {}, "Rows"), h("th", {}, "Size"), h("th", {}, "")),
       d.backups.map((b) => h("tr", {}, h("td", {}, when(b.uploaded)), h("td", {}, b.reason), h("td", {}, num(b.rows)), h("td", {}, `${Math.ceil(b.size / 1024)} KB`),
-        h("td", {}, h("button", { onclick: async () => { try { const r = await api("backups/file?key=" + encodeURIComponent(b.key), { raw: true }); download(b.key.split("/").pop(), await r.text()); } catch (e) { toast(e.message); } } }, "Download"), " ",
+        h("td", {}, h("button", { onclick: async () => { try { const r = await api("backups/file?key=" + encodeURIComponent(b.key), { raw: true }); download(b.key.split("/").pop(), await r.text()); toast("Backup downloaded", "ok"); } catch (e) { toast(e.message, "err"); } } }, "Download"), " ",
           h("button.danger", { onclick: () => { const c = prompt(`Restore the backup from ${when(b.uploaded)}?\n\nContent and community data will be replaced. A backup of the current state is taken first.\n\nType RESTORE to confirm.`); if (c) act(() => api("backups/restore", { body: { key: b.key, confirm: c } }), (r) => `Restored. Taken first: ${r.takenFirst.split("/").pop()}`); } }, "Restore…"))))) : h("p.muted", {}, "No backups yet.")),
     h("p.muted", {}, "Deployed: Cloudflare D1 also keeps 30 days of point-in-time history. `npx wrangler d1 time-travel restore upsc-pods --timestamp=…` rolls the whole database back.")];
 };

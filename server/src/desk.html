@@ -5,16 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>News Desk</title>
 <style>
-  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --amber:#FCE8C3; --ok:#E3F1E1; --bad:#F8E1DE; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --amber:#4A3712; --ok:#22361F; --bad:#43201B; } }
+  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --onBrand:#fff; --amber:#FCE8C3; --ok:#E3F1E1; --okInk:#2E7D32; --bad:#F8E1DE; --badInk:#B3261E; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --onBrand:#1A1410; --amber:#4A3712; --ok:#22361F; --okInk:#8BD18F; --bad:#43201B; --badInk:#F2A49B; } }
   * { box-sizing: border-box; }
+  [hidden] { display:none !important; }
   body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
-  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:12px 16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; z-index:2; }
+  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 16px; z-index:2; }
+  header .bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
   header h1 { font-size:18px; margin:0 12px 0 0; color:var(--brand); }
+  #who { margin-left:auto; display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:13px; color:var(--muted); }
+  #who b { color:var(--ink); }
+  header nav { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  @media (max-width:640px) { header { position:static; } header nav { flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px; } header nav button { flex:none; } }
   input, textarea, select, button { font:inherit; color:inherit; }
   input, textarea, select { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; }
   button { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 12px; cursor:pointer; }
-  button.primary { background:var(--brand); color:#fff; border-color:var(--brand); }
+  button.primary { background:var(--brand); color:var(--onBrand); border-color:var(--brand); }
   button:disabled { opacity:.5; cursor:default; }
   nav button.on { border-color:var(--brand); color:var(--brand); font-weight:600; }
   main { max-width:1200px; margin:0 auto; padding:16px; }
@@ -30,9 +36,52 @@
   .hi { font-size:17px; line-height:1.7; }
   h3 { margin:4px 0; font-size:17px; } h4 { margin:10px 0 2px; font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
   textarea { width:100%; }
-  .approved { color:#2E7D32; font-weight:600; }
+  .approved:not(.card) { color:var(--okInk); font-weight:600; }
   details summary { cursor:pointer; color:var(--muted); font-size:13px; }
-  #msg { margin-left:auto; font-size:13px; color:var(--muted); }
+  .signin { max-width:460px; margin:10vh auto 0; }
+  .signin h2 { margin:0 0 6px; font-size:22px; }
+  .signin label { display:block; font-weight:600; margin:14px 0 4px; }
+  .signin .row input { flex:1; min-width:0; }
+  .banner { border-radius:8px; padding:8px 12px; margin:10px 0; font-size:14px; }
+  .banner:empty { display:none; }
+  .banner.err { background:var(--bad); color:var(--badInk); }
+  .banner.ok { background:var(--ok); color:var(--okInk); }
+  .banner.info { background:var(--amber); }
+  .sum { font-size:14px; margin:0 0 12px; }
+  #toasts { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; gap:8px; z-index:9; width:min(560px, calc(100vw - 32px)); }
+  .toast { display:flex; gap:10px; align-items:flex-start; padding:10px 12px 10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--card); box-shadow:0 4px 18px rgba(0,0,0,.18); font-size:14px; }
+  .toast.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
+  .toast.err { background:var(--bad); color:var(--badInk); border-color:var(--badInk); }
+  .toast .t { flex:1; white-space:pre-wrap; word-break:break-word; color:var(--ink); }
+  .toast .ic { font-weight:700; }
+  .toast button { border:0; background:none; padding:0 4px; color:inherit; font-size:16px; line-height:1; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-bottom:16px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .tile .n { font-size:24px; font-weight:600; }
+  .tile .l { font-size:13px; color:var(--muted); }
+  .tile.warn { border-color:var(--badInk); }
+  .pill { display:inline-block; border-radius:999px; padding:1px 10px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .pill.gap { background:var(--bad); color:var(--badInk); }
+  .pill.drafts, .pill.hindi { background:var(--amber); color:var(--ink); }
+  .pill.ok { background:var(--ok); color:var(--okInk); }
+  table.cov { width:100%; border-collapse:collapse; font-size:14px; }
+  table.cov th { text-align:left; color:var(--muted); font-weight:500; font-size:12px; padding:4px 8px; }
+  table.cov td { border-top:1px solid var(--line); padding:8px; vertical-align:top; }
+  table.cov td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  table.cov th.n { text-align:right; }
+  table.cov tr.gap td:first-child { border-left:3px solid var(--badInk); }
+  .meter { display:flex; height:6px; border-radius:3px; overflow:hidden; background:var(--line); margin-top:6px; max-width:220px; }
+  .meter i { display:block; height:100%; }
+  .meter .a { background:var(--okInk); } .meter .w { background:#C77700; }
+  @media (max-width:640px) {
+    table.cov thead { display:none; }
+    table.cov tr { display:grid; grid-template-columns:1fr 1fr; gap:2px 12px; border-top:1px solid var(--line); padding:8px 0; }
+    table.cov td { border:0; padding:2px 0; }
+    table.cov td.subj { grid-column:1 / -1; }
+    table.cov td.n { text-align:left; }
+    table.cov td.n::before { content:attr(data-l) ": "; color:var(--muted); font-size:12px; }
+    table.cov tr.gap td:first-child { border-left:0; }
+  }
   .art { max-width:320px; width:100%; border:1px solid var(--line); border-radius:8px; background:#fff; }
   .takeaway { border-left:3px solid var(--brand); padding-left:8px; margin:8px 0; }
   table.bi { width:100%; border-collapse:collapse; margin-top:8px; }
@@ -43,7 +92,7 @@
   .kind-tabs button.on { border-color:var(--brand); color:var(--brand); font-weight:600; }
   .pick { display:flex; flex-wrap:wrap; gap:6px; max-height:220px; overflow:auto; padding:2px; }
   .pick button { font-size:13px; padding:4px 10px; border-radius:999px; }
-  .pick button.on { background:var(--brand); color:#fff; border-color:var(--brand); }
+  .pick button.on { background:var(--brand); color:var(--onBrand); border-color:var(--brand); }
   .step { font-size:12px; font-weight:700; color:var(--brand); text-transform:uppercase; letter-spacing:.05em; margin:12px 0 4px; }
   .fr { display:grid; grid-template-columns:150px repeat(var(--n), minmax(0, 1fr)); gap:8px; border-top:1px solid var(--line); padding:8px 0; }
   .fr.bad { background:linear-gradient(90deg, var(--amber), transparent 60%); }
@@ -60,20 +109,35 @@
 </head>
 <body>
 <header>
-  <h1>News Desk</h1>
-  <input id="token" type="password" placeholder="Editor token" autocomplete="off" size="14">
-  <input id="editor" placeholder="Your name (shows on cards)" size="18">
-  <nav class="row">
-    <button data-tab="queue" class="on">Queue</button>
-    <button data-tab="add">Add a story</button>
-    <button data-tab="author">Author</button>
-    <button data-tab="library">Library</button>
-    <button data-tab="notes">Notes library</button>
-    <button data-tab="reports">Reports</button>
+  <div class="bar">
+    <h1>News desk</h1>
+    <div id="who"></div>
+  </div>
+  <nav id="tabs" hidden>
+    <button data-tab="queue" data-perm="content">Today's queue</button>
+    <button data-tab="coverage" data-perm="content">Coverage</button>
+    <button data-tab="library" data-perm="content">Library</button>
+    <button data-tab="author" data-perm="content">Author</button>
+    <button data-tab="add" data-perm="content">Add a story</button>
+    <button data-tab="notes" data-perm="content">Notes library</button>
+    <button data-tab="reports" data-perm="moderate">Reports</button>
   </nav>
-  <span id="msg"></span>
 </header>
-<main>
+
+<div id="signin" class="card signin" hidden>
+  <h2>Sign in to the News desk</h2>
+  <p class="muted">Use the personal key an admin made for you under Admin → Staff. It starts with <code>upk_</code>. The owner can also use the owner key.</p>
+  <label for="token">Your key</label>
+  <div class="row">
+    <input id="token" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key here">
+    <button id="token-show" type="button" aria-pressed="false">Show</button>
+  </div>
+  <div id="signin-msg" class="banner" role="alert"></div>
+  <div class="row" style="margin-top:12px"><button id="signin-go" class="primary">Sign in</button></div>
+  <p class="muted">The key stays in this browser tab and is forgotten when you close it. Lost it? An admin can make you a new one. Admins can also open the <a href="/admin">admin console</a>.</p>
+</div>
+
+<main hidden>
   <section id="tab-queue">
     <div class="row" style="margin-bottom:12px">
       <input id="day" type="date">
@@ -81,8 +145,8 @@
       <button id="run">Fetch and draft now</button>
       <button id="write">Write a card</button>
       <button id="publish" class="primary">Publish today's brief</button>
-      <span id="published" class="muted"></span>
     </div>
+    <p id="q-sum" class="sum"></p>
     <p class="muted">Approve 5 to 7 cards. English and Hindi are approved separately. Any edit clears approvals. Hindi only ships if a Hindi editor approved it. Jokes are allowed on light cards only.</p>
     <div id="queue"></div>
   </section>
@@ -124,6 +188,14 @@
     <div id="au-drafts"></div>
   </section>
 
+  <section id="tab-coverage" hidden>
+    <div class="row" style="margin-bottom:4px"><h2 style="margin:0;font-size:20px">Coverage</h2><span style="margin-left:auto"></span>
+      <label class="row muted"><input id="cov-gaps" type="checkbox"> Only rows that need work</label><button id="cov-reload">Refresh</button></div>
+    <p class="muted">Every paper and syllabus topic, as aspirants see them in the app's Syllabus tab, with what we have under each and how far English and Hindi have got. "In the app" means English is approved. Mocks and past papers count under the topics their questions are tagged with; everything else counts where the app shows it, from its subject and title. One item can count under several topics. Chai cards are included; rejected ones are not.</p>
+    <div id="cov-tiles" class="tiles"></div>
+    <div id="cov"></div>
+  </section>
+
   <section id="tab-library" hidden>
     <div class="card">
       <h3>Import a content pack</h3>
@@ -143,6 +215,7 @@
       </div>
     </div>
     <p class="muted">An item is in the app as soon as its English is approved. Hindi text ships only after a Hindi editor approves it. Any edit clears both approvals. Hide takes an item out of the app without deleting it.</p>
+    <p id="lib-sum" class="sum"></p>
     <div class="row kind-tabs" id="kind-tabs" style="margin-bottom:12px"></div>
     <div class="row" id="pack-approve" style="margin-bottom:12px"></div>
     <div id="library"></div>
@@ -167,39 +240,164 @@
     <div id="reports"></div>
   </section>
 </main>
+<div id="toasts" aria-live="polite"></div>
 
 <script>
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const todayIst = () => new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
 
-try { $("#token").value = sessionStorage.getItem("token") || ""; $("#editor").value = localStorage.getItem("editor") || ""; } catch {}
-// A new token reloads the tab that's open, so it doesn't sit empty under an old "Wrong or missing key.".
-$("#token").onchange = () => {
-  try { sessionStorage.setItem("token", $("#token").value); } catch {}
-  say("");
-  document.querySelector("nav button.on")?.click();
+// --- Messages: a toast for what just happened, in plain words. Errors stay until closed. --------------
+/** kind: "ok", "err", "info", or "busy" (stays until the next message). Returns the toast so it can be replaced. */
+function toast(text, kind = "info") {
+  if (!text) return;
+  document.querySelectorAll("#toasts .toast.busy, #toasts .toast.err").forEach((t) => t.remove());
+  const t = document.createElement("div");
+  t.className = "toast " + kind;
+  t.setAttribute("role", kind === "err" ? "alert" : "status");
+  t.innerHTML = `<span class="ic" aria-hidden="true">${kind === "ok" ? "✓" : kind === "err" ? "!" : kind === "busy" ? "…" : "i"}</span><span class="t"></span><button type="button" aria-label="Close">×</button>`;
+  t.querySelector(".t").textContent = text;
+  t.querySelector("button").onclick = () => t.remove();
+  $("#toasts").append(t);
+  while ($("#toasts").children.length > 4) $("#toasts").firstElementChild.remove();
+  if (kind !== "busy") setTimeout(() => t.remove(), kind === "ok" ? 4000 : kind === "info" ? 7000 : 20000);
+  return t;
+}
+const say = (text) => toast(text, "info");
+const ok = (text) => toast(text, "ok");
+const oops = (text) => toast(text, "err");
+const busy = (text) => toast(text, "busy");
+const unbusy = () => document.querySelectorAll("#toasts .toast.busy").forEach((t) => t.remove());
+
+/** Server messages are mostly plain already; these are the ones that aren't, plus anything that looks like code. */
+function friendly(msg, status) {
+  const m = String(msg || "").trim();
+  const MAP = {
+    "title and sourceUrl are required": "Add a headline and a link first.",
+    "title and body are required": "Add a title and the note text first.",
+    "Not found": "That isn't there any more. Reload the page and try again.",
+    "No such card": "That card isn't there any more. Reload the queue.",
+    "Unknown action": "The desk didn't recognise that button. Reload the page and try again.",
+  };
+  if (MAP[m]) return MAP[m];
+  if (status === 403) return m && !/^forbidden$/i.test(m) ? m + " Ask an admin if you need this." : "Your role can't do that. Ask an admin if you need this.";
+  if (status >= 500 || /^[{[<]/.test(m) || !m) return `The server had a problem${status ? " (error " + status + ")" : ""}. Nothing was changed. Try again in a minute; if it keeps happening, tell the owner.`;
+  return m;
+}
+/** An error already shown to the person, so nothing else needs to show it. */
+const shown = (text) => Object.assign(new Error(text), { shown: true });
+window.addEventListener("unhandledrejection", (e) => {
+  e.preventDefault();
+  unbusy();
+  if (!e.reason?.shown) oops("Something went wrong: " + friendly(e.reason?.message) + " Reload the page if it keeps happening.");
+});
+
+// --- Sign in -----------------------------------------------------------------------------------
+let token = "";
+let me = null;
+try { token = sessionStorage.getItem("token") || ""; } catch {}
+
+const signedName = () => (me?.personal ? me.name : (document.querySelector("#editor")?.value || "").trim());
+/** Shared keys have no name, so approvals need one typed at the top. Personal keys approve in their own name. */
+function needName() {
+  if (signedName()) return false;
+  oops("Type your name in the box at the top first. It shows in the app next to what you approve.");
+  document.querySelector("#editor")?.focus();
+  return true;
+}
+
+function showSignIn(msg, kind = "err") {
+  me = null;
+  $("#signin").hidden = false;
+  document.querySelector("main").hidden = true;
+  $("#tabs").hidden = true;
+  $("#who").replaceChildren();
+  const b = $("#signin-msg");
+  b.className = "banner " + kind;
+  b.textContent = msg || "";
+  $("#token").focus();
+  $("#token").select();
+}
+
+async function signIn(key, quiet) {
+  key = key.trim();
+  if (!key) return showSignIn("Type or paste your key first.");
+  const btn = $("#signin-go");
+  btn.disabled = true; btn.textContent = "Checking…";
+  let res;
+  try { res = await fetch("/admin/api/me", { headers: { authorization: "Bearer " + key } }); }
+  catch { btn.disabled = false; btn.textContent = "Sign in"; return showSignIn("Can't reach the server. Check your internet connection and try again."); }
+  btn.disabled = false; btn.textContent = "Sign in";
+  if (!res.ok) {
+    try { sessionStorage.removeItem("token"); } catch {}
+    if (quiet) return showSignIn("");
+    return showSignIn(res.status === 401 ? "That key didn't work. Check that you pasted all of it (it starts with upk_). If it still fails, ask an admin for a new key."
+      : friendly((await res.json().catch(() => ({}))).error, res.status));
+  }
+  me = await res.json();
+  token = key;
+  try { sessionStorage.setItem("token", key); } catch {}
+  enterDesk();
+}
+
+function enterDesk() {
+  $("#signin").hidden = true;
+  document.querySelector("main").hidden = false;
+  $("#tabs").hidden = false;
+  const roles = me.roles.map((r) => ({ admin: "Admin", editor: "Editor", hindi_editor: "Hindi editor", language_editor: "Language editor", moderator: "Moderator" })[r] || r).join(", ");
+  $("#who").innerHTML = me.personal
+    ? `<span>Signed in as <b>${esc(me.name)}</b> · ${esc(roles)}</span>`
+    : `<span>Signed in with the <b>${esc(me.name.toLowerCase())}</b></span><input id="editor" placeholder="Your name, for approvals" size="20" aria-label="Your name, shown on what you approve">`;
+  $("#who").insertAdjacentHTML("beforeend", (me.perms.includes("staff") || me.perms.includes("analytics") ? `<a href="/admin">Admin</a>` : "") + `<button id="signout">Sign out</button>`);
+  const ed = $("#editor");
+  if (ed) {
+    try { ed.value = localStorage.getItem("editor") || ""; } catch {}
+    ed.onchange = () => { try { localStorage.setItem("editor", ed.value); } catch {} };
+  }
+  $("#signout").onclick = () => { try { sessionStorage.removeItem("token"); } catch {} token = ""; $("#token").value = ""; showSignIn("You're signed out.", "ok"); };
+  const tabs = [...document.querySelectorAll("#tabs button")];
+  tabs.forEach((b) => b.hidden = !me.perms.includes(b.dataset.perm));
+  (tabs.find((b) => b.classList.contains("on") && !b.hidden) || tabs.find((b) => !b.hidden))?.click();
+}
+
+$("#signin-go").onclick = () => signIn($("#token").value);
+$("#token").addEventListener("keydown", (e) => { if (e.key === "Enter") signIn($("#token").value); });
+$("#token-show").onclick = () => {
+  const show = $("#token").type === "password";
+  $("#token").type = show ? "text" : "password";
+  $("#token-show").textContent = show ? "Hide" : "Show";
+  $("#token-show").setAttribute("aria-pressed", String(show));
 };
-$("#editor").onchange = () => { try { localStorage.setItem("editor", $("#editor").value); } catch {} };
 $("#day").value = todayIst();
 
-function say(text) { $("#msg").textContent = text; }
-
 async function api(path, opts = {}) {
-  const res = await fetch(path, {
-    ...opts,
-    headers: { "content-type": "application/json", authorization: "Bearer " + $("#token").value },
-    body: opts.body ? JSON.stringify(opts.body) : undefined,
-  });
+  let res;
+  try {
+    res = await fetch(path, {
+      ...opts,
+      headers: { "content-type": "application/json", authorization: "Bearer " + token },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+  } catch {
+    unbusy();
+    oops("Can't reach the server. Check your internet connection and try again. Nothing was changed.");
+    throw shown("offline");
+  }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) { say(data.error || res.statusText); throw new Error(data.error); }
+  if (!res.ok) {
+    unbusy();
+    if (res.status === 401) { showSignIn("Your key stopped working (it may have been replaced or switched off). Sign in again."); throw shown("signed out"); }
+    const text = friendly(data.error || res.statusText, res.status);
+    oops(text);
+    throw shown(text);
+  }
   return data;
 }
 
-document.querySelectorAll("nav button").forEach((b) => b.onclick = () => {
-  document.querySelectorAll("nav button").forEach((x) => x.classList.toggle("on", x === b));
+document.querySelectorAll("#tabs button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("on", x === b));
   document.querySelectorAll("main section").forEach((s) => s.hidden = s.id !== "tab-" + b.dataset.tab);
-  ({ queue: loadQueue, notes: loadNotes, reports: loadReports, library: loadLibrary, author: loadAuthor })[b.dataset.tab]?.();
+  ({ queue: loadQueue, notes: loadNotes, reports: loadReports, library: loadLibrary, author: loadAuthor, coverage: loadCoverage })[b.dataset.tab]?.();
 });
 
 function side(t, lang) {
@@ -225,9 +423,12 @@ function enView(c) {
 
 async function loadQueue() {
   const data = await api("/desk/api/queue?day=" + $("#day").value);
-  $("#published").textContent = data.publishedAt ? "Published " + new Date(data.publishedAt).toLocaleTimeString() : "Not published yet";
-  const approved = data.candidates.filter((c) => c.en_editor).length;
-  say(data.candidates.length + " candidates · " + approved + " approved");
+  const live = data.candidates.filter((c) => c.status !== "rejected");
+  const approved = live.filter((c) => c.en_editor).length;
+  const hindi = live.filter((c) => c.hi_editor).length;
+  const when = data.publishedAt ? `<span class="pill ok">Published at ${esc(new Date(data.publishedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }))}</span>` : `<span class="pill drafts">Not published yet</span>`;
+  $("#q-sum").innerHTML = `${when} <b>${live.length}</b> card${live.length === 1 ? "" : "s"} for ${esc(data.day)} · <b>${approved}</b> English approved · <b>${hindi}</b> Hindi approved`
+    + (approved < 5 && live.length ? ` · <span class="muted">approve ${5 - approved} more to reach 5</span>` : "");
   $("#queue").innerHTML = data.candidates.map((r) => {
     const c = r.card;
     return `<div class="card ${r.status}" data-id="${r.id}">
@@ -272,18 +473,23 @@ $("#queue").addEventListener("click", async (e) => {
   }
   if (act === "save") {
     let card;
-    try { card = JSON.parse(box.querySelector("textarea").value); } catch { say("That JSON doesn't parse"); return; }
+    try { card = JSON.parse(box.querySelector("textarea").value); } catch (err) { return oops(badJson(err)); }
     await api("/desk/api/cards/" + id, { method: "POST", body: { card } });
+    ok("Saved. Any approvals were cleared, so approve it again.");
   } else if (act === "reject" && !confirm("Reject this card?")) {
     return;
   } else {
-    await api("/desk/api/cards/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: $("#editor").value } });
+    if (act === "approve" && needName()) return;
+    await api("/desk/api/cards/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: signedName() } });
+    ok({ approve: (b.dataset.lang === "hi" ? "Hindi" : "English") + " approved. It goes out when you publish today's brief.", unapprove: "Approvals taken back. The card is a draft again.",
+      reject: "Card rejected. It won't be published.", "strip-joke": "Joke removed." }[act] || "Done.");
   }
   loadQueue();
 });
 $("#queue").addEventListener("change", async (e) => {
   if (e.target.dataset.act !== "position") return;
   await api("/desk/api/cards/" + e.target.closest("[data-id]").dataset.id + "/position", { method: "POST", body: { position: e.target.value } });
+  ok(e.target.value ? "Order saved: this card is #" + e.target.value + "." : "Order cleared.");
 });
 
 $("#reload").onclick = loadQueue;
@@ -293,24 +499,88 @@ $("#write").onclick = async () => {
   const box = document.querySelector(`[data-id="${r.id}"]`);
   box.querySelector(".editor").hidden = false;
   box.scrollIntoView();
-  say("New card: fill in the JSON, save, then approve");
+  say("New card added. Fill in the edit box, save, then approve.");
 };
 $("#day").onchange = loadQueue;
-$("#run").onclick = async () => { say("Fetching and drafting, this takes a minute…"); const r = await api("/desk/api/pipeline", { method: "POST" }); say(r.log.join(" · ")); loadQueue(); };
+$("#run").onclick = async () => {
+  busy("Fetching today's news and drafting cards. This takes about a minute…");
+  const r = await api("/desk/api/pipeline", { method: "POST" });
+  ok("Done. " + (r.log.length ? r.log.join("\n") : "Nothing new to draft."));
+  loadQueue();
+};
 $("#publish").onclick = async () => {
   if (!confirm("Publish the approved cards to every pod?")) return;
   const r = await api("/desk/api/publish", { method: "POST", body: { day: $("#day").value } });
-  say(r.published ? "Published " + r.cards + " cards" : r.reason);
+  if (r.published) ok("Published " + r.cards + " cards to every pod."); else oops(r.reason + ". Approve at least one card's English first.");
   loadQueue();
 };
 $("#a-go").onclick = async () => {
+  if (!$("#a-title").value.trim() || !$("#a-url").value.trim()) return oops("Add a headline and a link first.");
   await api("/desk/api/stories", { method: "POST", body: { title: $("#a-title").value, sourceName: $("#a-source").value, sourceUrl: $("#a-url").value, text: $("#a-text").value } });
-  say("Drafted into today's queue");
+  ok("Drafted into today's queue. Check it under Today's queue.");
   ["#a-title", "#a-source", "#a-url", "#a-text"].forEach((s) => $(s).value = "");
 };
 document.querySelectorAll("[data-ritual]").forEach((b) => b.onclick = async () => {
   const r = await api("/desk/api/ritual", { method: "POST", body: { kind: b.dataset.ritual } });
-  say("Posted to " + r.pods + " pods");
+  if (r.pods) ok("Posted to " + r.pods + " pods."); else say("No pod got it. Either there are no pods yet, Chotu has already posted twice today, or it's quiet hours (23:30 to 07:00).");
+});
+
+/** The edit boxes hold the item as JSON; a typo there gets a plain explanation, not the parser's. */
+function badJson(err) {
+  const at = String(err.message).match(/position (\d+)/)?.[1];
+  return "Not saved: the edit box has a typing mistake (often a missing comma, quote mark or bracket)" + (at ? `, around character ${at}` : "") + ". Nothing was changed.";
+}
+
+// --- Coverage: per paper and subject, what exists and how far English and Hindi have got ------------
+const COV_STATUS = { gap: ["gap", "Nothing yet"], drafts: ["drafts", "Drafts only"], hindi: ["hindi", "Hindi behind"], ok: ["ok", "In the app"] };
+let covData = null;
+async function loadCoverage() {
+  covData = await api("/desk/api/coverage");
+  drawCoverage();
+}
+function drawCoverage() {
+  const d = covData;
+  if (!d) return;
+  const t = d.totals;
+  const tile = (n, l, warn) => `<div class="tile${warn ? " warn" : ""}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  $("#cov-tiles").innerHTML = tile(t.items, "items in all") + tile(t.live, "in the app (English approved)") + tile(t.hindiLive, "with Hindi approved")
+    + tile(t.waiting, "waiting for an English editor") + tile(`${t.gaps} <span class="muted" style="font-size:14px">of ${t.topics}</span>`, "syllabus topics with nothing yet", t.gaps > 0) + tile(t.draftsOnly, "topics with drafts only", t.draftsOnly > 0);
+  const onlyWork = $("#cov-gaps").checked;
+  const kindsOf = (k) => Object.entries(k).sort((a, b) => b[1] - a[1]).map(([kind, n]) => `${esc({ chai: "Chai cards", pyq: "Past UPSC papers" }[kind] || KIND_NAMES[kind] || kind)}: ${n}`).join(" · ");
+  const html = d.papers.map((p) => {
+    const rows = p.rows.filter((r) => !onlyWork || r.status !== "ok");
+    if (!rows.length) return "";
+    const need = p.rows.filter((r) => r.status === "gap").length;
+    return `<div class="card"><div class="row"><h3 style="margin:0">${esc(p.name)}</h3>
+      ${need ? `<span class="pill gap">${need} of ${p.rows.length} topics with nothing yet</span>` : `<span class="pill ok">Every topic has something</span>`}</div>
+      <table class="cov"><thead><tr><th>Topic</th><th class="n">Items</th><th class="n">English in the app</th><th class="n">English waiting</th><th class="n">Hindi approved</th><th class="n">Hindi waiting</th><th class="n">No Hindi yet</th><th>Status</th></tr></thead><tbody>
+      ${rows.map((r) => {
+        const live = r.total - r.hidden;
+        const [cls, label] = COV_STATUS[r.status];
+        const pct = (n) => live ? Math.round((n / live) * 100) : 0;
+        return `<tr class="${r.status === "gap" ? "gap" : ""}">
+          <td class="subj"><b>${esc(r.topic)}</b>${r.total ? `<div class="muted">${kindsOf(r.kinds)}${r.hidden ? ` · ${r.hidden} hidden` : ""}</div>
+            <div class="meter" title="${r.en.approved} in the app, ${r.en.waiting} waiting"><i class="a" style="width:${pct(r.en.approved)}%"></i><i class="w" style="width:${pct(r.en.waiting)}%"></i></div>` : ""}</td>
+          <td class="n" data-l="Items">${r.total}</td>
+          <td class="n" data-l="English in the app">${r.en.approved}</td>
+          <td class="n" data-l="English waiting">${r.en.waiting}</td>
+          <td class="n" data-l="Hindi approved">${r.hi.approved}</td>
+          <td class="n" data-l="Hindi waiting">${r.hi.waiting}</td>
+          <td class="n" data-l="No Hindi yet">${r.hi.missing}</td>
+          <td><span class="pill ${cls}">${label}</span></td></tr>`;
+      }).join("")}</tbody></table></div>`;
+  }).join("");
+  const nw = d.nowhere;
+  $("#cov").innerHTML = (html || '<div class="card"><span class="pill ok">Nothing needs work</span> Every syllabus topic has approved English and Hindi.</div>')
+    + (nw ? `<div class="card"><h3 style="margin:0 0 4px">Not under any syllabus topic: ${nw.total}</h3><p class="muted" style="margin:0">${kindsOf(nw.kinds)}. These are in the library but the app's Syllabus tab doesn't list them under a topic (wind-downs, sounds, or items whose title doesn't name a subject). Fine for some kinds; for study items, add the subject to the title or id.</p></div>` : "");
+}
+$("#cov-gaps").onchange = drawCoverage;
+$("#cov-reload").onclick = () => loadCoverage().then(() => ok("Coverage refreshed."));
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("[data-goto]");
+  if (!a) return;
+  e.preventDefault();
+  document.querySelector(`#tabs [data-tab="${a.dataset.goto}"]`)?.click();
 });
 
 // --- Library: content packs, explainers, games, sounds -------------------------------------------
@@ -327,7 +597,8 @@ async function loadLibrary() {
     .map(([k, v, n]) => `<button data-kind="${k}" class="${k === libKind ? "on" : ""}">${v} (${n})</button>`).join("");
   const rows = libRows.filter((r) => !libKind || r.kind === libKind);
   const live = libRows.filter((r) => r.status === "approved").length;
-  say(libRows.length + " library items · " + live + " in the app");
+  const waitingN = libRows.filter((r) => r.status !== "hidden" && !r.en_editor).length;
+  $("#lib-sum").innerHTML = `<b>${libRows.length}</b> items · <b>${live}</b> in the app · <b>${waitingN}</b> waiting for an English editor · <a href="#" data-goto="coverage">see coverage by subject</a>`;
   $("#library").innerHTML = rows.map(libCard).join("") || '<p class="muted">Nothing here yet. Import a pack or start a draft.</p>';
   // Packs with drafts still waiting: one button approves every waiting English (or Hindi) in that pack, in your name.
   const waiting = {};
@@ -344,18 +615,20 @@ $("#pack-approve").addEventListener("click", async (e) => {
   const b = e.target.closest("button[data-pack]");
   if (!b) return;
   const { pack, lang } = b.dataset;
-  const editor = $("#editor").value.trim();
-  if (!editor) return say("Add your name at the top first; it shows in the app");
+  if (needName()) return;
+  const editor = signedName();
   const todo = libRows.filter((r) => r.pack === pack && r.status !== "hidden" && (lang === "en" ? !r.en_editor : r.en_editor && !r.hi_editor));
   if (!confirm(`Approve the ${lang === "en" ? "English" : "Hindi"} of ${todo.length} items from ${pack} in your name (${editor})?\n\nOnly do this if you have checked every one of them. Each stays undoable with Unapprove.`)) return;
-  let ok = 0; const failed = [];
+  let done = 0; const failed = [];
   for (const r of todo) {
-    say(`Approving ${ok + failed.length + 1} of ${todo.length}…`);
-    try { await api("/desk/api/library/" + encodeURIComponent(r.id) + "/approve", { method: "POST", body: { lang, editor } }); ok++; }
+    busy(`Approving ${done + failed.length + 1} of ${todo.length}…`);
+    try { await api("/desk/api/library/" + encodeURIComponent(r.id) + "/approve", { method: "POST", body: { lang, editor } }); done++; }
     catch (err) { failed.push(r.title + ": " + err.message); }
   }
+  unbusy();
   await loadLibrary();
-  say(`Approved ${ok} of ${todo.length}.` + (failed.length ? " Not approved: " + failed.slice(0, 3).join("; ") : ""));
+  if (failed.length) oops(`Approved ${done} of ${todo.length}. Not approved:\n` + failed.slice(0, 5).join("\n"));
+  else ok(`Approved all ${done}.`);
 });
 
 /** Every piece of text that has an English and a Hindi side, as a two-column table. */
@@ -420,13 +693,15 @@ function otherLangs(r) {
 }
 $("#tr-go").onclick = async () => {
   const files = [...$("#tr-file").files];
-  if (!files.length) return say("Pick a .te.json file first");
+  if (!files.length) return oops("Pick a translation file first (like five-writs-mnemonic.te.json).");
   const out = [];
   for (const f of files) {
     try { const r = await api("/desk/api/library/translation", { method: "POST", body: JSON.parse(await f.text()) }); out.push("✓ " + r.message); }
     catch (err) { out.push("✗ " + f.name + ": " + err.message); }
   }
   $("#pack-log").textContent = out.join("\n");
+  const bad = out.filter((x) => x.startsWith("✗")).length;
+  if (bad) oops(`${bad} of ${out.length} translation files weren't added. The list under the button says why.`); else ok(`Added ${out.length} translation file${out.length === 1 ? "" : "s"}.`);
   loadLibrary();
 };
 
@@ -445,11 +720,16 @@ $("#library").addEventListener("click", async (e) => {
   if (act === "edit") { box.querySelector(".editor").hidden = false; return; }
   if (act === "save") {
     let data;
-    try { data = JSON.parse(box.querySelector("textarea").value); } catch { say("That JSON doesn't parse"); return; }
+    try { data = JSON.parse(box.querySelector("textarea").value); } catch (err) { return oops(badJson(err)); }
     await api("/desk/api/library/" + id, { method: "POST", body: { data } });
+    ok("Saved. Any approvals were cleared, so approve it again.");
   } else {
-    if (act === "delete" && !confirm("Delete this draft?")) return;
-    await api("/desk/api/library/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: $("#editor").value } });
+    if (act === "delete" && !confirm("Delete this draft? An admin can restore it from Admin → Content.")) return;
+    if (act === "approve" && needName()) return;
+    await api("/desk/api/library/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: signedName() } });
+    ok({ approve: b.dataset.lang === "hi" ? "Hindi approved. Members reading in Hindi now see it." : "English approved. It's in the app now.",
+      unapprove: "Approvals taken back. It's out of the app until approved again.", hide: "Hidden. It's out of the app but not deleted.",
+      show: "Shown again.", delete: "Draft deleted." }[act] || "Done.");
   }
   loadLibrary();
 });
@@ -463,27 +743,32 @@ $("#new-go").onclick = async () => {
 };
 
 async function putFile(url, file) {
-  const res = await fetch(url, { method: "PUT", headers: { authorization: "Bearer " + $("#token").value }, body: file });
+  let res;
+  try { res = await fetch(url, { method: "PUT", headers: { authorization: "Bearer " + token }, body: file }); }
+  catch { throw new Error("Can't reach the server. Check your internet connection and try again."); }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || res.statusText);
+  if (res.status === 401) { showSignIn("Your key stopped working. Sign in again."); throw shown("signed out"); }
+  if (!res.ok) throw new Error(friendly(data.error || res.statusText, res.status));
   return data;
 }
 $("#up-go").onclick = async () => {
   const f = $("#up-file").files[0];
-  if (!f) return say("Pick a file first");
+  if (!f) return oops("Pick a file first.");
   try {
     $("#up-path").value = (await putFile("/desk/api/uploads/" + encodeURIComponent(f.name.replace(/[^\w.-]/g, "_")), f)).path;
     $("#up-path").select();
-    say("Uploaded. Paste the link into the item.");
-  } catch (err) { say(err.message); }
+    ok("Uploaded. The link is selected in the box: paste it into the item.");
+  } catch (err) { if (!err.shown) oops("Upload failed: " + err.message); }
 };
 
 $("#pack-go").onclick = async () => {
   const files = [...$("#pack-dir").files];
+  if (!files.length) return oops("Pick the pack's folder first (the one with manifest.json in it).");
   const root = (f) => f.webkitRelativePath.split("/").slice(1).join("/");
   const mf = files.find((f) => root(f) === "manifest.json");
-  if (!mf) return say("That folder has no manifest.json");
-  const manifest = JSON.parse(await mf.text());
+  if (!mf) return oops("That folder has no manifest.json. Pick the pack's own folder, not the one above it.");
+  let manifest;
+  try { manifest = JSON.parse(await mf.text()); } catch { return oops("The manifest.json in that folder has a typing mistake, so it can't be read. Ask whoever made the pack to fix it."); }
   const pack = encodeURIComponent(manifest.packId);
   const log = $("#pack-log");
   log.textContent = "Uploading pack " + manifest.packId + "…\n";
@@ -497,9 +782,9 @@ $("#pack-go").onclick = async () => {
     }
     const out = await api(`/desk/api/packs/${pack}/import`, { method: "POST" });
     log.textContent += "\n" + [...out.log, ...(out.warnings || []).map((w) => "note: " + w)].join("\n");
-    say("Imported. Cards are in the queue; the rest is below.");
+    ok("Pack imported. Chai cards are in that day's queue; everything else is below as drafts.");
     loadLibrary();
-  } catch (err) { log.textContent += "\n✗ " + err.message; say(err.message); }
+  } catch (err) { log.textContent += "\n✗ " + err.message; if (!err.shown) oops("The import stopped: " + err.message); }
 };
 
 async function loadNotes() {
@@ -512,14 +797,17 @@ async function loadNotes() {
 $("#notes").addEventListener("click", async (e) => {
   if (!e.target.matches("[data-del]") || !confirm("Delete this note?")) return;
   await api("/desk/api/notes/" + e.target.closest("[data-id]").dataset.id, { method: "DELETE" });
+  ok("Note deleted.");
   loadNotes();
 });
 $("#n-go").onclick = async () => {
+  if (!$("#n-title").value.trim() || !$("#n-body").value.trim()) return oops("Add a title and the note text first.");
   await api("/desk/api/notes", { method: "POST", body: { kind: $("#n-kind").value, title: $("#n-title").value, body: $("#n-body").value, source: $("#n-source").value } });
   ["#n-title", "#n-body", "#n-source"].forEach((s) => $(s).value = "");
+  ok("Note saved.");
   loadNotes();
 };
-$("#n-seed").onclick = async () => { const r = await api("/desk/api/notes/seed", { method: "POST" }); say("Loaded " + r.added + " notes"); loadNotes(); };
+$("#n-seed").onclick = async () => { const r = await api("/desk/api/notes/seed", { method: "POST" }); ok("Loaded " + r.added + " starter notes."); loadNotes(); };
 
 async function loadReports() {
   const rows = await api("/mod/api/reports");
@@ -533,6 +821,7 @@ $("#reports").addEventListener("click", async (e) => {
   const a = e.target.dataset.a;
   if (!a) return;
   await api("/mod/api/reports/" + e.target.closest("[data-id]").dataset.id, { method: "POST", body: { action: a } });
+  ok(a === "hide" ? "Message hidden from the pod." : "Marked as handled.");
   loadReports();
 });
 
@@ -569,15 +858,15 @@ $("#au-types").onclick = (e) => {
   if (!k) return;
   if (AU.picked.includes(k)) AU.picked = AU.picked.filter((x) => x !== k);
   else if (AU.picked.length < AU.max) AU.picked.push(k);
-  else return say("Up to " + AU.max + " at a time");
+  else return oops("You can pick up to " + AU.max + " at a time. Untick one first.");
   auTypes();
 };
 $("#au-pdf").onchange = () => {
   const f = $("#au-pdf").files[0];
   if (!f) return;
-  if (f.size > 10e6) { say("Keep PDFs under 10 MB"); $("#au-pdf").value = ""; return; }
+  if (f.size > 10e6) { oops("That PDF is over 10 MB. Pick a smaller one, or paste the text instead."); $("#au-pdf").value = ""; return; }
   const r = new FileReader();
-  r.onload = () => { AU.pdf = r.result; $("#au-pdf-clear").hidden = false; say("PDF ready: " + f.name); };
+  r.onload = () => { AU.pdf = r.result; $("#au-pdf-clear").hidden = false; ok("PDF ready: " + f.name); };
   r.readAsDataURL(f);
 };
 $("#au-pdf-clear").onclick = () => { AU.pdf = null; $("#au-pdf").value = ""; $("#au-pdf-clear").hidden = true; };
@@ -585,11 +874,11 @@ const auSource = () => ({ source: $("#au-src").value, pdf: AU.pdf || undefined, 
 const auLangs = () => [...document.querySelectorAll("#au-langs input:checked")].map((i) => i.value);
 
 async function auSuggest() {
-  say("Reading the source…");
+  busy("Reading the source…");
   const r = await api("/desk/api/author/suggest", { method: "POST", body: auSource() });
   AU.picked = r.types.slice(0, AU.max);
   auTypes();
-  say("Suggested (" + r.how + "). Change them if you like.");
+  ok("Suggested (" + r.how + "). Change them if you like.");
 }
 $("#au-suggest").onclick = auSuggest;
 
@@ -602,20 +891,21 @@ async function copy(text, btn) {
 
 $("#au-go").onclick = async () => {
   const src = auSource();
-  if (!src.source.trim() && !src.pdf) return say("Paste a source first");
+  if (!src.source.trim() && !src.pdf) return oops("Paste a source or a link first, or pick a PDF.");
   const btn = $("#au-go");
   if (auLive()) {
     btn.disabled = true;
-    say("Writing " + (AU.picked.length || "the suggested") + " draft(s)… this can take a minute");
+    busy("Writing " + (AU.picked.length || "the suggested") + " draft(s). This can take a minute…");
     try {
       const r = await api("/desk/api/author/generate", { method: "POST", body: { ...src, types: AU.picked.length ? AU.picked : "suggest", langs: auLangs() } });
       r.drafts.forEach(auShow);
-      say(r.drafts.length + " draft(s) ready below" + (r.failed.length ? ". Failed: " + r.failed.map((f) => f.title + " (" + f.error + ")").join(", ") : ""));
+      if (r.failed.length) oops(r.drafts.length + " draft(s) ready below. These didn't work:\n" + r.failed.map((f) => f.title + ": " + friendly(f.error)).join("\n"));
+      else ok(r.drafts.length + " draft(s) ready below. Check each language, then approve.");
     } finally { btn.disabled = false; }
     return;
   }
   // By hand: one prompt per type.
-  if (src.pdf) return say("By hand needs text: paste the PDF's text into the box.");
+  if (src.pdf) return oops("Working by hand needs text: copy the PDF's text into the box instead.");
   if (!AU.picked.length) await auSuggest();
   $("#au-manual").innerHTML = AU.picked.map((k) => {
     const t = AU.types.find((x) => x.key === k);
@@ -623,7 +913,7 @@ $("#au-go").onclick = async () => {
       <div class="row" style="margin:6px 0"><button data-m="copy" class="primary">Copy prompt</button><span class="muted">Paste it into Claude, then paste Claude's whole answer here:</span></div>
       <textarea rows="4" placeholder="Claude's answer"></textarea><div class="row"><button data-m="save">Make the draft</button></div></div>`;
   }).join("");
-  say("Copy each prompt into Claude, then paste the answers back");
+  say("Copy each prompt into Claude, then paste the answers back here.");
 };
 $("#au-manual").onclick = async (e) => {
   const m = e.target.dataset.m, box = e.target.closest("[data-k]");
@@ -631,11 +921,11 @@ $("#au-manual").onclick = async (e) => {
   const body = { ...auSource(), type: box.dataset.k };
   if (m === "copy") return copy((await api("/desk/api/author/prompt", { method: "POST", body })).paste, e.target);
   const reply = box.querySelector("textarea").value;
-  if (!reply.trim()) return say("Paste Claude's answer first");
+  if (!reply.trim()) return oops("Paste Claude's answer into the box first.");
   const r = await api("/desk/api/author/fill", { method: "POST", body: { ...body, reply } });
   r.drafts.forEach(auShow);
   box.remove();
-  say("Draft ready below. Translate it, check it, then approve.");
+  ok("Draft ready below. Translate it, check it, then approve.");
 };
 
 const auLang = (code) => AU.langs.find((l) => l.code === code) || { code, name: code, native: code };
@@ -704,31 +994,31 @@ $("#au-drafts").addEventListener("click", async (e) => {
     const edits = [...card.querySelectorAll("textarea.dirty")].map((t) => ({ path: t.dataset.p, lang: t.dataset.l, text: t.value }));
     if (edits.some((x) => x.lang === "en" || x.lang === "hi") && card.querySelector(".approved") && !confirm("Changing English or Hindi takes back every approval. Save?")) return;
     auShow(await api(base, { method: "POST", body: { edits } }));
-    return say("Saved and checked again");
+    return ok("Saved and checked again.");
   }
   if (a === "approve" || a === "unapprove") {
-    if (card.querySelector("textarea.dirty")) return say("Save your changes first");
-    if (a === "approve" && !$("#editor").value.trim()) return say("Add your name at the top first; it shows in the app");
-    await api("/desk/api/library/" + id + "/" + a, { method: "POST", body: { lang: l, editor: $("#editor").value } });
+    if (card.querySelector("textarea.dirty")) return oops("Save your changes first, then approve.");
+    if (a === "approve" && needName()) return;
+    await api("/desk/api/library/" + id + "/" + a, { method: "POST", body: { lang: l, editor: signedName() } });
     auShow(await api(base));
-    return say(a === "approve" ? "Approved" : "Approval taken back");
+    return ok(a === "approve" ? auName(l) + " approved." : "Approval taken back.");
   }
   if (a === "translate") {
-    e.target.disabled = true; say("Translating…");
-    try { auShow(await api(base + "/translate", { method: "POST", body: { lang: l } })); say("Translated. Check it, then approve."); }
+    e.target.disabled = true; busy("Translating…");
+    try { auShow(await api(base + "/translate", { method: "POST", body: { lang: l } })); ok("Translated. Check it, then approve."); }
     finally { e.target.disabled = false; }
     return;
   }
   if (a === "tprompt") return copy((await api(base + "/translate-prompt", { method: "POST", body: { lang: l } })).paste, e.target);
   if (a === "tsave") {
     const reply = card.querySelector("[data-tr]").value;
-    if (!reply.trim()) return say("Paste the translation first");
+    if (!reply.trim()) return oops("Paste the translation into the box first.");
     auShow(await api(base + "/translation", { method: "POST", body: { lang: card.querySelector("[data-trl]").value, reply } }));
-    say("Translation saved. Check it, then approve.");
+    ok("Translation saved. Check it, then approve.");
   }
 });
 
-if ($("#token").value) loadQueue().catch(() => {});
+if (token) signIn(token, true); else showSignIn("");
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 import { authorApi } from "./author";
 import { contentApi } from "./content";
+import { coverage } from "./coverage";
 import { caDeskApi } from "./ca";
 import { addNote, listNotes } from "./library";
 import { addCandidate, autoChecks } from "./pipeline";
@@ -110,6 +111,7 @@ export async function deskApi(req: Request, env: Env, path: string): Promise<Res
 }
 
 async function deskInner(req: Request, env: Env, path: string, s: Staff): Promise<Response> {
+  if (path === "coverage" && req.method === "GET") return json(await coverage(env));
   // Content packs, the library and hand-written cards read their own bodies (some are file uploads).
   const content = (await authorApi(req, env, path, s)) ?? (await caDeskApi(req, env, path)) ?? (await contentApi(req, env, path, s));
   if (content) return content;
