@@ -97,9 +97,10 @@ on. Present as a table. Mark anything that has shut down or been restricted by r
 
 ## Prompt E: ChatGPT, find the gaps (run last)
 
-Paste this, then paste the "Master list of entries" (the last section of
-`reports/Exam success tools and methods.md`, 390 names) underneath it. If the tool says the
-message is too long, paste the list in two halves and say "part 2 of the list follows".
+Paste this, then paste the whole of `artefacts/Exam catalogue master list.txt` (487 names,
+one per line) where it says [paste list here]. If ChatGPT says the message is too long, send
+lines 1–250 first with "part 1 of 2, don't answer yet", then lines 251–487 with "part 2 of 2,
+now answer".
 
 ```
 Below is a list of apps, books, courses and study methods that help people do well in
