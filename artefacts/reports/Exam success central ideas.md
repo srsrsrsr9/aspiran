@@ -1,18 +1,18 @@
-# Twenty-six ideas sit under 527 exam tools
+# Twenty-six ideas sit under 543 exam tools
 
 *Part 2 of 4 in a research project on what helps people do well in exams. Neutral test-prep view: school, university entrance, standardised tests, professional and civil-service exams and language tests, in every country. Written 1 November 2026.*
 
-Part 1 catalogued 527 apps, websites, books, courses, creators, places, public programmes and named methods. This part pulls out the central ideas behind them and sorts every entry under those ideas. Part 3 will describe how each idea is put into practice in detail. Part 4 will weigh the research evidence for each one. **Nothing here says whether an idea works**; where that matters, evidence is assessed in Part 4.
+Part 1 catalogued 543 apps, websites, books, courses, creators, places, public programmes and named methods. This part pulls out the central ideas behind them and sorts every entry under those ideas. Part 3 will describe how each idea is put into practice in detail. Part 4 will weigh the research evidence for each one. **Nothing here says whether an idea works**; where that matters, evidence is assessed in Part 4.
 
 ## Headline
 
-**527 entries come down to 26 central ideas in 7 families.** The market is lopsided. Three things carry most of it: expert teaching and curated content (TCH, 68 entries built mainly around it), testing yourself (RET, present in 176 entries, a third of the catalogue) and spaced review (SPA, 43 primary, 91 in all). Retrieval and spacing travel together more than any other pair (68 entries): most flashcard apps, revision rules and study books are some mix of "test yourself, then come back later".
+**543 entries come down to 26 central ideas in 7 families.** The market is lopsided. Three things carry most of it: expert teaching and curated content (TCH, 69 entries built mainly around it), testing yourself (RET, present in 181 entries, a third of the catalogue) and spaced review (SPA, 43 primary, 91 in all). Retrieval and spacing travel together more than any other pair (68 entries): most flashcard apps, revision rules and study books are some mix of "test yourself, then come back later".
 
 **The same idea travels under many names.** A mistake notebook is a 错题本 in China, an 오답노트 in Korea and an "error log" in English, and one Chinese company sells a printer for it. Blank-page recall is 백지복습, "blurting" or a "brain dump". Paying for a silent desk is a 付费自习室 in China, a 독서실 or study café in Korea, a Benkyo Café in Japan and a "library" in Indian exam towns, and online versions copy the name (Bilibili 自习室, "study with me"). Star-teacher video lectures are the same product in Korea, Japan, China and India.
 
 **Apps and books emphasise different ideas.** Apps cluster on spacing, retrieval, notes, focus timers, planners and, most recently, AI that makes your study material for you (23 entries, all apps or websites). Books and named methods carry the ideas that apps rarely build: learning from worked examples and model answers, interleaving, memory techniques, exam targeting and learning how to learn. No app in the catalogue is built mainly around interleaving or worked examples.
 
-**Several ideas are small in the catalogue but cross every border.** Exam targeting (deciding what to study from past papers and the setters' sources) has only 3 primary entries but appears in 19, from Japan's Akahon past-paper books to Korea's EBS workbooks and India's previous-year-question method. Public comparison and rankings (11 entries) runs from Duolingo leagues to all-India test-series ranks and Korea's study-hour league tables.
+**Several ideas are small in the catalogue but cross every border.** Exam targeting (deciding what to study from past papers and the setters' sources) has only 4 primary entries but appears in 21, from Japan's Akahon past-paper books to Korea's EBS workbooks, Cambridge's examiner reports and India's previous-year-question method. Public comparison and rankings (12 entries) runs from Duolingo leagues to all-India test-series ranks, Nigeria's national CBT mock and Korea's study-hour league tables.
 
 **Two concerns run across all ideas rather than being ideas themselves:** whether claims can be trusted (regulators have acted on brain-training games, supplements and coaching adverts), and who can get access (price, language, disability). They are treated as lenses at the end.
 
@@ -33,12 +33,12 @@ A compact list to paste into another AI tool, for example with the question "Wha
 | MIX | Interleaving and varied practice | Mix different topics or problem types in one session so you must choose the method each time. |
 | ADP | Working on weak spots | Find what you cannot do yet and practise exactly that until it is mastered, by machine or by design. |
 | FBK | Feedback and error correction | Find out what was wrong and why, then fix it, including keeping a record of mistakes. |
-| TST | Exam rehearsal and technique | Practise under real exam conditions and learn how to handle the paper itself. |
-| TGT | Exam targeting | Decide what to study from the syllabus, past-paper patterns and what the setters use. |
-| PLN | Planning and self-monitoring | Plan when to study, track what you actually did and adjust. |
-| LHL | Learning how to learn | Learn which study methods exist and how memory and thinking work, then apply that to yourself. |
+| TST | Exam rehearsal and technique | Practise under real exam conditions (written, practical or oral) and learn test-taking strategy for the paper itself. |
+| TGT | Exam targeting | Decide what to study from the syllabus, past-paper patterns, examiner reports and what the setters use. |
+| PLN | Planning and self-monitoring | Plan when to study, track what you actually did and how well you know it, and adjust. |
+| LHL | Learning how to learn | Learn which study strategies exist and when to use them (metacognitive knowledge), and how memory and thinking work. |
 | FOC | Attention and distraction control | Protect stretches of focused time from phones, sites and noise. |
-| HAB | Motivation, habits and mindset | Keep going through rewards, routines and beliefs about effort and ability. |
+| HAB | Motivation, habits and mindset | Keep going through rewards, routines, commitments with something at stake, and beliefs about effort and ability. |
 | SPC | Study spaces and co-presence | Study in a place set aside for it, or alongside other people who are also studying. |
 | GRP | Study groups and teaching others | Learn by discussing with peers, teaching them, or sharing material in a community. |
 | CMP | Public comparison and rankings | See how your effort or scores stack up against others. |
@@ -51,7 +51,7 @@ A compact list to paste into another AI tool, for example with the question "Wha
 
 ## How to read this report
 
-Each of the 527 entries has one **primary** idea (the one it is mainly built around) and up to three **secondary** ideas. "Primary" counts tell you what the market builds things around; "any" counts (primary or secondary) tell you how often an idea turns up at all. Codes are three letters and are stable: Parts 3 and 4 will use them. "#" numbers refer to the master list at the end of the Part 1 catalogue (`artefacts/reports/Exam success tools and methods.md`); the full mapping is in the appendix.
+Each of the 543 entries has one **primary** idea (the one it is mainly built around) and up to three **secondary** ideas. "Primary" counts tell you what the market builds things around; "any" counts (primary or secondary) tell you how often an idea turns up at all. Codes are three letters and are stable: Parts 3 and 4 will use them. "#" numbers refer to the master list at the end of the Part 1 catalogue (`artefacts/reports/Exam success tools and methods.md`); the full mapping is in the appendix.
 
 **Rule used for the primary.** The primary is what a user mainly does or gets when using the entry, judged from its Part 1 description. Three tie-breaks: (1) a book, course or creator that teaches several study strategies is coded "learning how to learn" (LHL), with the strategies it pushes as secondaries; one that centres on a single strategy (a memory-sport book, *Retrieval Practice* by Kate Jones) takes that strategy. (2) A product that bundles features takes the feature its description leads with. (3) A flashcard tool is spacing (SPA) if the scheduler is the point, AI-made material (GEN) if the AI making the cards is the point, and notes (NOT) if it is a notes app first.
 
@@ -61,34 +61,34 @@ The three first-pass mappers used different rules (one took the first idea named
 
 | Family | Code | Idea | Plain definition | Other names it goes by | Primary | Any |
 |---|---|---|---|---|---|---|
-| **Remembering** (102 primary) | RET | Retrieval practice | Pull the answer out of your own memory (quiz, flashcard, blank page) instead of looking at it. | active recall, testing effect, practice testing, blurting, brain dump, 백지복습, red sheet 赤シート, question bank, 刷题, pretesting, generation effect | 40 | 176 |
+| **Remembering** (105 primary) | RET | Retrieval practice | Pull the answer out of your own memory (quiz, flashcard, blank page) instead of looking at it. | active recall, testing effect, practice testing, blurting, brain dump, 백지복습, red sheet 赤シート, question bank, 刷题, pretesting, generation effect; noted variants: rehearsal aloud (早读), overlearning | 43 | 181 |
 |  | SPA | Spacing and scheduled review | Come back to the same material several times, with gaps that grow, instead of all at once. | spaced repetition (SRS), Leitner box, SM-2, FSRS, revision cycles, 2-3-5-7, 1-3-7-21, successive relearning | 43 | 91 |
 |  | MNE | Memory techniques | Turn hard-to-hold facts into vivid images, places, stories or codes that are easier to recall. | mnemonics, memory palace, method of loci, journey method, major, peg, PAO and Dominic systems, acronyms, keyword method, chunking | 19 | 25 |
-| **Understanding: being taught and making sense** (137 primary) | TCH | Expert teaching and curated content | Learn from a skilled teacher or a trusted, well-chosen source. | lectures, coaching, cram school, juku and yobikō, star teachers, standard books, NCERT, digests, current-affairs compilations | 68 | 114 |
-|  | TUT | Tutoring and mentoring | One-to-one guidance that asks questions and adjusts to you, from a person or an AI. | Socratic tutor, study mode, guided learning, mentorship, one-to-one tuition, apprenticeship | 13 | 27 |
+| **Understanding: being taught and making sense** (138 primary) | TCH | Expert teaching and curated content | Learn from a skilled teacher or a trusted, well-chosen source. | lectures, coaching, cram school, juku and yobikō, star teachers, standard books, NCERT, digests, current-affairs compilations | 69 | 115 |
+|  | TUT | Tutoring and mentoring | One-to-one guidance that asks questions and adjusts to you, from a person or an AI. | Socratic tutor, study mode, guided learning, mentorship, one-to-one tuition, apprenticeship | 13 | 28 |
 |  | ELA | Understanding and elaboration | Make sense of material by explaining, asking why, linking to what you know and picturing it. | self-explanation, elaborative interrogation, Feynman technique, dual coding, concept maps, SQ3R, PQ4R, THIEVES, KWL, explorables | 19 | 75 |
-|  | EXM | Worked examples and model answers | Study a finished solution or a top performer's answer, then imitate it. | worked examples, solved examples, problem-type books (수학의 정석, チャート式), topper copies, topper strategy books | 8 | 22 |
+|  | EXM | Worked examples and model answers | Study a finished solution or a top performer's answer, then imitate it. | worked examples, solved examples, problem-type books (수학의 정석, チャート式), topper copies, topper strategy books | 8 | 23 |
 |  | NOT | Note-making and organising knowledge | Put what you learn into your own structured notes, maps or linked files. | Cornell notes, outlines, mind maps, Zettelkasten, second brain, PARA, note compression, summarising | 29 | 51 |
-| **Practising and feedback** (54 primary) | MIX | Interleaving and varied practice | Mix different topics or problem types in one session so you must choose the method each time. | interleaving, mixed practice, varied practice | 2 | 13 |
-|  | ADP | Working on weak spots | Find what you cannot do yet and practise exactly that until it is mastered, by machine or by design. | adaptive learning, mastery learning, diagnostics, knowledge maps, deliberate practice | 14 | 34 |
-|  | FBK | Feedback and error correction | Find out what was wrong and why, then fix it, including keeping a record of mistakes. | error log, mistake notebook, 错题本, 오답노트, answer evaluation, AI answer graders, mark schemes, exam wrappers | 16 | 68 |
-|  | TST | Exam rehearsal and technique | Practise under real exam conditions and learn how to handle the paper itself. | mock tests, timed past papers, test series, national mocks, CBT simulators, Akahon 赤本, in-exam strategy, PEEL, answer structure | 22 | 54 |
-| **Steering your own study** (113 primary) | TGT | Exam targeting | Decide what to study from the syllabus, past-paper patterns and what the setters use. | PYQ analysis, syllabus mapping, 80/20 rule, 'few sources', setter-linked books (EBS 수능특강), trend analysis | 3 | 19 |
-|  | PLN | Planning and self-monitoring | Plan when to study, track what you actually did and adjust. | timetable, backward planning, time blocking, GTD, WOOP, study cycle, metacognition, self-regulation, study logs | 24 | 74 |
-|  | LHL | Learning how to learn | Learn which study methods exist and how memory and thinking work, then apply that to yourself. | study skills, science of learning, 'six strategies', Learning How to Learn, studytube, critical thinking, Pólya's steps | 54 | 56 |
+| **Practising and feedback** (62 primary) | MIX | Interleaving and varied practice | Mix different topics or problem types in one session so you must choose the method each time. | interleaving, mixed practice, varied practice | 2 | 13 |
+|  | ADP | Working on weak spots | Find what you cannot do yet and practise exactly that until it is mastered, by machine or by design. | adaptive learning, mastery learning, diagnostics, knowledge maps, deliberate practice | 14 | 36 |
+|  | FBK | Feedback and error correction | Find out what was wrong and why, then fix it, including keeping a record of mistakes. | error log, mistake notebook, 错题本, 오답노트, answer evaluation, AI answer graders, mark schemes, exam wrappers | 16 | 74 |
+|  | TST | Exam rehearsal and technique | Practise under real exam conditions (written, practical or oral) and learn test-taking strategy for the paper itself. | mock tests, timed past papers, test series, national mocks, CBT simulators, Akahon 赤本, OSCE practice, matching study conditions to the exam, in-exam strategy, test-wiseness, answer elimination, three-pass, PEEL, answer structure | 30 | 65 |
+| **Steering your own study** (117 primary) | TGT | Exam targeting | Decide what to study from the syllabus, past-paper patterns, examiner reports and what the setters use. | PYQ analysis, syllabus mapping, 80/20 rule, 'few sources', setter-linked books (EBS 수능특강), trend analysis, examiner reports | 4 | 21 |
+|  | PLN | Planning and self-monitoring | Plan when to study, track what you actually did and how well you know it, and adjust. | timetable, backward planning, time blocking, GTD, WOOP, study cycle, metacognition, self-regulation, study logs, confidence calibration, certainty-based marking | 25 | 78 |
+|  | LHL | Learning how to learn | Learn which study strategies exist and when to use them (metacognitive knowledge), and how memory and thinking work. | study skills, science of learning, 'six strategies', Learning How to Learn, studytube, critical thinking, Pólya's steps | 54 | 56 |
 |  | FOC | Attention and distraction control | Protect stretches of focused time from phones, sites and noise. | Pomodoro (番茄), deep work, site and app blockers, friction apps, focus timers, focus trees, noise masking | 21 | 57 |
-|  | HAB | Motivation, habits and mindset | Keep going through rewards, routines and beliefs about effort and ability. | streaks, gamification, leagues, habit stacking, two-minute rule, growth mindset, grit, 'not yet' | 11 | 49 |
+|  | HAB | Motivation, habits and mindset | Keep going through rewards, routines, commitments with something at stake, and beliefs about effort and ability. | streaks, gamification, leagues, habit stacking, two-minute rule, growth mindset, grit, 'not yet', effort regulation, self-efficacy, commitment devices (Beeminder, stickK) | 13 | 51 |
 | **Other people and places** (25 primary) | SPC | Study spaces and co-presence | Study in a place set aside for it, or alongside other people who are also studying. | paid study rooms (付费自习室, 독서실, study café, Benkyo Café, Indian reading rooms), exam towns, body doubling, study with me, 공방, B站自习室 | 16 | 30 |
-|  | GRP | Study groups and teaching others | Learn by discussing with peers, teaching them, or sharing material in a community. | peer instruction, protégé effect, teach-back, reciprocal teaching, jigsaw, shared decks, Telegram and Reddit study communities | 7 | 26 |
-|  | CMP | Public comparison and rankings | See how your effort or scores stack up against others. | leaderboards, leagues, all-India rank, percentiles, national mocks, pass-likelihood grades, study-hour rankings | 2 | 11 |
+|  | GRP | Study groups and teaching others | Learn by discussing with peers, teaching them, or sharing material in a community. | peer instruction, protégé effect, teach-back, reciprocal teaching, jigsaw, shared decks, Telegram and Reddit study communities | 7 | 27 |
+|  | CMP | Public comparison and rankings | See how your effort or scores stack up against others. | leaderboards, leagues, all-India rank, percentiles, national mocks, pass-likelihood grades, study-hour rankings | 2 | 12 |
 | **Body and mind** (39 primary) | LIF | Body basics | Sleep, exercise, food, water and caffeine set the physical conditions for study and exams. | sleep and naps, all-nighter avoidance, exercise, breakfast, hydration, caffeine timing | 9 | 20 |
 |  | ANX | Exam nerves and mental wellbeing | Manage stress and anxiety, and get help when it becomes too much. | test anxiety tools, expressive writing, reappraisal, self-affirmation, CBT apps, mindfulness, breathing, helplines, counselling | 30 | 38 |
 | **Shortcuts, handovers and defaults** (57 primary) | GEN | AI-made study material | An AI turns your files or a topic into cards, quizzes, notes or summaries for you. | AI flashcard maker, notes-to-quiz, lecture-to-notes, source-grounded assistant, audio overview | 17 | 23 |
 |  | OFF | Answer lookup and offloading | A tool or person supplies the answer or does the work, plus the guardrails built against that. | photo solver, homework help, answer service, 作业帮, 콴다; guardrails: authorship logs, bookwork checks | 12 | 16 |
 |  | QFX | Quick fixes and popular beliefs | Products or beliefs that promise an easy boost or a fixed 'type' of learner. | brain training, smart drugs, nootropics, speed reading, learning styles, left/right brain, Mozart effect, sleep learning | 22 | 26 |
-|  | BAS | Default habits | What many students do without being taught: reread, highlight, cram, multitask. | rereading, highlighting, underlining, cramming, all-nighters, massed practice, multitasking, listening again (text-to-speech) | 6 | 7 |
+|  | BAS | Default habits | What many students do without being taught: reread, highlight, cram, multitask. | rereading, highlighting, underlining, cramming, all-nighters, massed practice, multitasking, listening again (text-to-speech), reading aloud | 6 | 8 |
 
-Family totals: Remembering 102 primary (220 any); Understanding 137 (243); Practising and feedback 54 (142); Steering your own study 113 (193); Other people and places 25 (63); Body and mind 39 (54); Shortcuts, handovers and defaults 57 (72).
+Family totals: Remembering 105 primary (225 any); Understanding 138 (246); Practising and feedback 62 (155); Steering your own study 117 (199); Other people and places 25 (65); Body and mind 39 (54); Shortcuts, handovers and defaults 57 (73). The primaries add up to 543.
 
 ## How the list was settled
 
@@ -117,15 +117,17 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 - **Attention (T): not split**; blocking, friction and timers are forms of one idea, described in its section.
 - **Small proposals left as notes:** comprehensible input for language learning (LingQ, filed under TCH); drill by sheer volume (题海战术, filed under RET); outcome guarantees ("refund if you fail", a selling device, noted under the trust lens); reference management (Zotero, filed under NOT).
 
-## Family 1: Remembering (102 primary)
+## Family 1: Remembering (105 primary)
 
-### RET Retrieval practice (40 primary, 176 any)
+### RET Retrieval practice (43 primary, 181 any)
 
 **What it is.** Getting information out of your head instead of putting it in again: closing the book and writing what you remember, answering a flashcard, doing practice questions. Attempting questions before you have been taught (pretesting) counts here too.
 
 **Names and brands.** Active recall, the testing effect, practice testing, self-quizzing. Writing everything you recall on blank paper is *blurting* or a *brain dump* in UK study culture and 백지복습 ("blank-paper review") in Korea. Japan's 暗記ペン and 赤シート (an orange pen whose ink vanishes under a red sheet) turn any textbook into a self-test; the Cornell cue column and the Leitner box do the same on paper. In China, 刷题 ("brushing questions") and the 题海战术 ("question-sea tactic") mean drilling huge volumes of questions. In classrooms it becomes a game: Kahoot!, Blooket, Gimkit, Wayground (formerly Quizizz).
 
 **What carries it.** Every type. Question banks (UWorld, AMBOSS, Marrow), topic-sorted question books (China's 5·3, India's Oswaal and MTG), flashcard apps (as a secondary to spacing), classroom quiz tools, and named methods. It is the single most common idea in the catalogue.
+
+**Noted variants (not separate ideas).** *Rehearsal aloud*: China's 早读 morning reading (#543), a daily school period of reading texts aloud, is plain rehearsal rather than retrieval, so it sits between RET and BAS. *Overlearning*: carrying on drilling after you first get it right; it is a dose of practice, not a separate idea, and overlaps with the question-sea tactic and with mastery practice (ADP).
 
 **Representative entries.** Retrieval practice (#298, method); Blurting (#327, UK method); Memorisation pen and red sheet (#426, Japan, stationery); Question-sea tactic (#400, China, method); 5 Years Gaokao, 3 Years Mocks (#401, China, book); UWorld (#74, US medical exams, website); Marrow (#172, India, app); Kahoot! (#438, classroom app); *Retrieval Practice*, Kate Jones (#269, UK book); Pretesting (#308, method).
 
@@ -149,25 +151,25 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Method of loci (#344); Major system (#345); PAO system (#347); Keyword mnemonic (#312); Baicizhan (#398, China, app); *Moonwalking with Einstein* (#272, US book); *How to Develop a Brilliant Memory*, O'Brien (#470, UK book); *Word Power Made Easy* (#229, India-popular book); *The Art of Memory*, Yates (#474, history); Memrise (#24, app, as a secondary).
 
-## Family 2: Understanding, being taught and making sense (137 primary)
+## Family 2: Understanding, being taught and making sense (138 primary)
 
-### TCH Expert teaching and curated content (68 primary, 114 any)
+### TCH Expert teaching and curated content (69 primary, 115 any)
 
 **What it is.** Learning from a skilled teacher or a trusted, well-chosen source. It has two forms. **Live or video teaching**: classes, lecture series, coaching. **Curated content**: standard textbooks, reference books, digests and current-affairs compilations.
 
 **Names and brands.** Coaching (India), cram schools, juku and yobikō (Japan), exam academies. The **star-teacher lecture** is one product across Asia: Megastudy, Etoos and Gongdangi's unlimited lecture passes (Korea), Toshin and Study Sapuri (Japan), New Oriental and Gaotu (China), Unacademy and PhysicsWallah (India), Outlier (US). States run free versions: EBSi (Korea), DIKSHA, SATHEE in 12 languages, SWAYAM, NPTEL and IIT-PAL (India). On the content side: the "standard book" canon (NCERT, Laxmikanth), monthly current-affairs compilations, GKToday, Pratiyogita Darpan, and *Bharat* yearbook.
 
-**What carries it.** Courses, websites and books in about equal measure, plus places (Aakash, Allen, Kawaijuku). Of the 68 primary entries, about 46 are live or video teaching, about 20 are curated content and two are sets of teaching principles. It is the largest primary idea, and India and East Asia supply most of it.
+**What carries it.** Courses, websites and books in about equal measure, plus places (Aakash, Allen, Kawaijuku). Of the 69 primary entries, about 47 are live or video teaching, about 20 are curated content and two are sets of teaching principles. It is the largest primary idea, and India and East Asia supply most of it.
 
 **Representative entries.** Megastudy (#408, Korea); Toshin High School (#421, Japan); New Oriental (#397, China); PhysicsWallah (#173, India); EBSi (#410, Korea, free state lectures); SATHEE (#460, India, free, 12 languages); NCERT textbooks (#216, India, books); Monthly current-affairs compilations (#215, India); Rosenshine's *Principles of Instruction* (#242, research paper); LingQ (#434, language input, app).
 
-### TUT Tutoring and mentoring (13 primary, 27 any)
+### TUT Tutoring and mentoring (13 primary, 28 any)
 
 **What it is.** One-to-one guidance that asks you questions, checks your thinking and adjusts to you, from a person or an AI.
 
 **Names and brands.** Socratic tutoring (guiding by questions rather than giving answers); "study mode" (ChatGPT), "guided learning" (Gemini), "learning mode" (Claude); one-to-one tuition; mentorship programmes; apprenticeship. Since mid-2025 the AI version is free in general chatbots, which Part 1 called a commodity shift.
 
-**What carries it.** Mostly apps, plus mentoring programmes and premium tutoring firms.
+**What carries it.** Mostly apps, plus mentoring programmes and premium tutoring firms. Research classifications also list *help seeking* (knowing when and whom to ask) as a learner skill. In this catalogue it appears only as a service you can buy (TUT) or a group you can join (GRP); no product is built around teaching it.
 
 **Representative entries.** ChatGPT Study Mode (#49); Gemini Guided Learning (#50); Khanmigo (#53, US, refuses to hand over answers); OneSmart (#406, China, human tutors); NDLI-FERMI AI Tutor (#463, India); JEET AI (#464, India); Edukemy mentorship (#192, India); Gongsin (#432, Korea, top-university students mentoring); *Mastery*, Greene (#284, apprenticeship book); Yuanfudao (#88, China).
 
@@ -181,7 +183,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Elaborative interrogation (#303); Self-explanation (#304); Feynman technique (#326); Dual coding (#306); Concept mapping (#336); SQ3R (#330); THIEVES (#507); GeoGebra (#443, website); Brilliant (#69, website); *Concepts of Physics*, H C Verma (#523, India book).
 
-### EXM Worked examples and model answers (8 primary, 22 any)
+### EXM Worked examples and model answers (8 primary, 23 any)
 
 **What it is.** Studying a finished solution or a top performer's answer, then producing your own in the same way.
 
@@ -201,7 +203,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Cornell notes (#333); Zettelkasten (#337); Mind mapping (#335); Note compression (#342, India); *Building a Second Brain* (#283, book); Obsidian (#121, app); Logseq (#9, app); XMind (#127, app); Clearnote (#433, Japan, shared handwritten notes); *The Organized Mind* (#499, book).
 
-## Family 3: Practising and feedback (54 primary)
+## Family 3: Practising and feedback (62 primary)
 
 ### MIX Interleaving and varied practice (2 primary, 13 any)
 
@@ -213,7 +215,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Interleaving (#302, method); *Range* (#263, book); *Make It Stick* (#247, book, secondary); Seneca Learning (#66, UK website, secondary); Concrete examples (#305, varied examples, secondary); RetrievalPractice.org (#238, secondary).
 
-### ADP Working on weak spots (14 primary, 34 any)
+### ADP Working on weak spots (14 primary, 36 any)
 
 **What it is.** Finding what you cannot yet do and practising exactly that until you can, whether software does the finding or you and a coach do.
 
@@ -223,51 +225,53 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Squirrel AI (#59, China); ALEKS (#64, US); Khan Academy (#65); IXL (#72); Sparx Maths (#67, UK); Embibe (#182, India); Xueersi (#396, China, learning tablets); Mastery learning (#363); Deliberate practice (#364); *Peak*, Ericsson (#262, book).
 
-### FBK Feedback and error correction (16 primary, 68 any)
+### FBK Feedback and error correction (16 primary, 74 any)
 
 **What it is.** Finding out what was wrong and why, then fixing it, including keeping a record of mistakes to revisit.
 
 **Names and brands.** The **mistake notebook** is the clearest cross-country cluster: 错题本 (China), 오답노트 (Korea), "error log" (English), "PYQ error analysis" (India). Exam wrappers are the same loop at the level of a whole test. Written work gets marked: correspondence marking (Z-kai, Japan), expert draft feedback (Studiosity), and in India a crowded market of **AI answer graders** for written civil-service answers (SuperKalam, CollectorBabu, PrepAiro, UPSC AI) and daily answer-writing programmes (Insights, IASbaba, ForumIAS).
 
-**What carries it.** Websites mostly (AI graders, answer-writing programmes), plus methods for the error log. It is also the most common partner of question practice (28 entries).
+**What carries it.** Websites mostly (AI graders, answer-writing programmes), plus methods for the error log. It is also the most common partner of question practice (30 entries).
 
 **Representative entries.** Error log / mistake notebook (#141, method); Zuoyebang Miaomiaoji (#391, China, mistake-notebook printer); Z-kai (#420, Japan); SuperKalam (#187, India, AI grader); CollectorBabu (#189, India, AI plus human); Insights IAS (#198, India, daily answer writing); Daily answer writing with feedback (#341, method); Studiosity (#92, expert feedback on drafts); Grammarly for Students (#90, writing feedback).
 
-### TST Exam rehearsal and technique (22 primary, 54 any)
+### TST Exam rehearsal and technique (30 primary, 65 any)
 
 **What it is.** Practising under real exam conditions (full length, timed, on the real interface) and learning how to handle the paper itself: pacing, order, eliminating options, structuring a written answer.
 
 **Names and brands.** Mock tests, full-length simulations, timed past papers, the "PYQ method", test series. **National ranked mocks** are one product across countries: Fenbi's online mocks (China), Kawaijuku and Sundai's pass-likelihood grades (Japan), all-India test series (Vision IAS, SimCAT/AIMCAT). Official simulators: College Board's Bluebook, GMAT Official Practice, India's NTA Abhyas and NTA mock portal. Past-paper books: Akahon 赤本 (one red book per Japanese university), Tianli 38 Sets (China). Technique: in-exam strategy guides, PEEL paragraphs (Point, Evidence, Explanation, Link), answer-writing books.
 
-**What carries it.** Apps, websites, courses, books and methods roughly equally; it often comes bundled with teaching (22 entries) and with question practice (23).
+**Two sub-strands.** TST holds two research literatures, so Parts 3 and 4 report and grade them separately. (a) **Rehearsal under exam conditions**: mocks and simulators, including practical and oral exams (OSCE stations: Geeky Medics, #537) and *matching study conditions to the exam* (studying in conditions like the test's). (b) **Test-taking strategy**: answer elimination (the Princeton Review's "process of elimination"), test-wiseness (*Test-Taking Strategies*, #540; *Ace the GMAT*, #541), guessing under negative marking and time triage (the three-pass method, #542).
 
-**Representative entries.** Mock tests and full-length simulations (#339); Past-paper / PYQ method (#338); Official practice tests (#86, US); National Test Abhyas (#517, India); Akahon (#425, Japan); Tianli 38 Sets (#402, China); Fenbi (#392, China); Vision IAS test series (#196, India); In-exam strategy guides (#142); PEEL paragraphs (#510, UK method).
+**What carries it.** Apps, websites, courses, books and methods roughly equally; it often comes bundled with teaching (23 entries) and with question practice (26). The second cross-check added national CBT simulators and mocks from Nigeria (Skolra, #530; Prep50, #529), Brazil's free government app MEC Enem (#532) and Germany's STARK Abitur past-paper books (#534).
 
-## Family 4: Steering your own study (113 primary)
+**Representative entries.** Mock tests and full-length simulations (#339); Past-paper / PYQ method (#338); Official practice tests (#86, US); National Test Abhyas (#517, India); Akahon (#425, Japan); Tianli 38 Sets (#402, China); Fenbi (#392, China); Vision IAS test series (#196, India); In-exam strategy guides (#142); PEEL paragraphs (#510, UK method); MEC Enem (#532, Brazil, government app); Geeky Medics (#537, UK, practical exams); Three-pass exam method (#542).
 
-### TGT Exam targeting (3 primary, 19 any)
+## Family 4: Steering your own study (117 primary)
+
+### TGT Exam targeting (4 primary, 21 any)
 
 **What it is.** Deciding what to study, and how much, from the syllabus, past-paper patterns and the sources the setters use.
 
-**Names and brands.** Previous-year-question (PYQ) topic-frequency analysis; syllabus mapping; the 80/20 (Pareto) rule applied to topics; "few sources, many revisions"; "foundation first" (NCERT before anything else). **Setter-linked books** are the strongest form: Korea's EBS 수능특강 workbooks, whose passages feed the national exam; Japan's Akahon past papers per university; India's board sample papers and marking schemes.
+**Names and brands.** Previous-year-question (PYQ) topic-frequency analysis; syllabus mapping; the 80/20 (Pareto) rule applied to topics; "few sources, many revisions"; "foundation first" (NCERT before anything else). **Setter-linked books** are the strongest form: Korea's EBS 수능특강 workbooks, whose passages feed the national exam; Japan's Akahon past papers per university; India's board sample papers and marking schemes. **Examiner reports** are a named variant: reading what examiners say candidates got wrong, question by question (Cambridge principal examiner reports, #539).
 
 **What carries it.** Rarely the whole product; usually a feature of past-paper books, question banks, strategy books and revision plans. That is why it has few primaries but recurs across countries.
 
-**Representative entries.** 80/20 rule (#356); EBS Suneung Special Lectures (#411, Korea); *Mission IAS* (#228, India, exam-trend analysis); Past-paper / PYQ method (#338, secondary); Akahon (#425, Japan, secondary); Multiple revision cycles from limited sources (#340, secondary); CBSE sample papers and marking schemes (#519, secondary); AnKing deck (#2, mapped to the US medical syllabus, secondary).
+**Representative entries.** 80/20 rule (#356); EBS Suneung Special Lectures (#411, Korea); *Mission IAS* (#228, India, exam-trend analysis); Past-paper / PYQ method (#338, secondary); Akahon (#425, Japan, secondary); Multiple revision cycles from limited sources (#340, secondary); CBSE sample papers and marking schemes (#519, secondary); AnKing deck (#2, mapped to the US medical syllabus, secondary); Cambridge principal examiner reports (#539, UK).
 
-### PLN Planning and self-monitoring (24 primary, 74 any)
+### PLN Planning and self-monitoring (25 primary, 78 any)
 
 **What it is.** Planning when to study, tracking what you actually did, and adjusting. Researchers call the whole cycle "metacognition" or "self-regulation" (thinking about and steering your own learning).
 
-**Names and brands.** Study timetable and backward planning from the exam date; timeboxing; the Eisenhower matrix; the Ivy Lee method; Getting Things Done; eat the frog; WOOP (wish, outcome, obstacle, plan) and "if-then" plans; exam wrappers; the study cycle; CREAM. Bar-exam courses (Barbri, Themis) sell a day-by-day plan. China's Hengshui model is planning taken to a minute-by-minute boarding regime.
+**Names and brands.** Study timetable and backward planning from the exam date; timeboxing; the Eisenhower matrix; the Ivy Lee method; Getting Things Done; eat the frog; WOOP (wish, outcome, obstacle, plan) and "if-then" plans; exam wrappers; the study cycle; CREAM. Bar-exam courses (Barbri, Themis) sell a day-by-day plan. China's Hengshui model is planning taken to a minute-by-minute boarding regime. **Confidence calibration** is a named variant: judging how well you know each item, not just how much time you spent. Certainty-based marking (#538), built into Moodle quizzes, makes you rate your certainty and costs you more for confident wrong answers. It fills the "monitoring" or "self-judgment" category that every research classification has and this list was weak on; it also overlaps with FBK.
 
 **What carries it.** Planner and task apps, calendars and named methods.
 
-**Representative entries.** Study timetable / backward planning (#343); Timeboxing (#352); Getting Things Done (#355); WOOP (#139); Exam wrappers (#140); Metacognition and self-regulation (#311); Study Cycle (#512, US); Barbri (#83, US bar exam); Hengshui model (#404, China); Shovel (#112, app comparing hours needed with hours available).
+**Representative entries.** Study timetable / backward planning (#343); Timeboxing (#352); Getting Things Done (#355); WOOP (#139); Exam wrappers (#140); Metacognition and self-regulation (#311); Study Cycle (#512, US); Barbri (#83, US bar exam); Hengshui model (#404, China); Shovel (#112, app comparing hours needed with hours available); Certainty-based marking (#538, method).
 
 ### LHL Learning how to learn (54 primary, 56 any)
 
-**What it is.** Learning which study methods exist and how memory, attention and thinking work, so you can choose and use methods yourself. It also covers general thinking skills, such as Pólya's four problem-solving steps and courses in reasoning.
+**What it is.** Knowing which study strategies exist and when to use them, and how memory, attention and thinking work, so you can choose and use methods yourself. Researchers call this *metacognitive knowledge*. Donker et al. (2014) and the Education Endowment Foundation treat it as a category of its own, which answers the objection that LHL is "circular" because it only teaches the other ideas. It also covers general thinking skills, such as Pólya's four problem-solving steps and courses in reasoning.
 
 **Names and brands.** Study skills; "the science of learning"; "the six strategies" (retrieval, spacing, interleaving, elaboration, concrete examples, dual coding); Learning How to Learn (Barbara Oakley's online course); studytube and productivity creators; study-skills handbooks; critical-thinking courses.
 
@@ -285,15 +289,15 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Pomodoro technique (#351); Tomato ToDo (#429, China); Forest (#93, app); Cold Turkey Blocker (#96); one sec (#97); LeechBlock NG (#450, browser extension); Deep work (#358); Brain.fm, Endel, Noisli (#104); Background noise (#375); *Stolen Focus* (#285, book).
 
-### HAB Motivation, habits and mindset (11 primary, 49 any)
+### HAB Motivation, habits and mindset (13 primary, 51 any)
 
 **What it is.** Keeping going: rewards and game elements, routines that make study automatic, and beliefs about effort and ability.
 
-**Names and brands.** Streaks, points, badges and leagues (gamification); habit stacking and the two-minute rule (*Atomic Habits*); role-playing habit games (Habitica); growth mindset ("not yet"); grit.
+**Names and brands.** Streaks, points, badges and leagues (gamification); habit stacking and the two-minute rule (*Atomic Habits*); role-playing habit games (Habitica); growth mindset ("not yet"); grit. HAB also covers what research classifications call effort regulation, self-efficacy and task value. **Commitment devices** are a named variant: putting money or reputation at stake on a study goal. Beeminder (#535) charges you when you fall below your graphed goal; stickK (#536) lets you sign a voluntary commitment contract with a referee and an optional "anti-charity". The research behind them is behavioural economics, not habit formation, so Part 4 grades them separately.
 
 **What carries it.** Mostly a secondary feature added to apps (Duolingo, Kahoot!, Forest, IXL), plus books on habits and mindset.
 
-**Representative entries.** Duolingo (#25, app); Streaks (#120); Habitica (#119); *Atomic Habits* (#278); Growth mindset (#373); *Grit* (#270); "Science of Success" and grit MOOCs (#294); Matt D'Avella (#296, creator); Kahoot! (#438, secondary).
+**Representative entries.** Duolingo (#25, app); Streaks (#120); Habitica (#119); *Atomic Habits* (#278); Growth mindset (#373); *Grit* (#270); "Science of Success" and grit MOOCs (#294); Matt D'Avella (#296, creator); Kahoot! (#438, secondary); Beeminder (#535); stickK (#536).
 
 ## Family 5: Other people and places (25 primary)
 
@@ -307,7 +311,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Paid self-study rooms (#403, China); Dokseosil and study cafés (#416, Korea); Benkyo Café (#427, Japan); Paid study libraries and reading rooms (#234, India); Noryangjin and Sillim gosichon (#415, Korea); Coaching hubs (#235, India); Bilibili study rooms (#428, China); Study with me / gongbang videos (#108); Focusmate (#105, website); Context-dependent memory (#378, method).
 
-### GRP Study groups and teaching others (7 primary, 26 any)
+### GRP Study groups and teaching others (7 primary, 27 any)
 
 **What it is.** Learning with and through peers: discussing questions, teaching each other, sharing decks, notes and answers in a community.
 
@@ -317,7 +321,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Study groups and peer instruction (#360); Teach-back (#359); Reciprocal teaching (#361); Jigsaw classroom (#511); Telegram study channels (#231, India); r/UPSC and r/GetStudying (#233); CivilsDaily mentor groups (#194, India); Anki shared decks (#1, secondary); IndiaBIX discussion threads (#447, secondary).
 
-### CMP Public comparison and rankings (2 primary, 11 any)
+### CMP Public comparison and rankings (2 primary, 12 any)
 
 **What it is.** Seeing how your effort or scores compare with other people's, often in public.
 
@@ -381,7 +385,7 @@ The starting list (v0) had 19 ideas. The three mappers proposed about twenty cha
 
 **Representative entries.** Lumosity (#162, app); HAPPYneuron (#165); "Smart Kids Brain Boost" (#166, South Africa); Modafinil (#167); Learning styles (#380); Speed reading (#386); Mozart effect (#389); Kwik Learning (#293, course); *Urban Myths about Learning* (#268, the debunking side).
 
-### BAS Default habits (6 primary, 7 any)
+### BAS Default habits (6 primary, 8 any)
 
 **What it is.** What many students do without being taught a method: reread, highlight, cram the night before, study with messages running. Listening to notes again through text-to-speech is rereading by ear.
 
@@ -400,9 +404,9 @@ Most entries combine ideas: 68 entries contain both retrieval and spacing, and o
 | Retrieval + spacing (RET + SPA) | 68 | A flashcard is a retrieval prompt; the scheduler decides when it returns | Anki and every FSRS app, revision rules, study books |
 | Notes + spacing + retrieval | 11 | Notes apps that turn marked lines into scheduled cards | RemNote, Logseq, Obsidian plugins, SuperMemo |
 | AI material + retrieval + spacing | 11 | The AI writes the cards; the app quizzes and schedules them | Vaia, Retain, StudyCards AI, Rember |
-| Retrieval + feedback | 28 | Answering a question is only half; the explanation of the wrong answer is the other | UWorld, AMBOSS, Magoosh, past papers with mark schemes |
-| Teaching + exam rehearsal | 22 | The coaching model: classes plus a ranked test series | Unacademy, Aakash, Allen, New Oriental, Vision IAS, NPTEL |
-| Exam rehearsal + retrieval + feedback | 8 | Timed practice, then analysing errors | PYQ method, Fenbi, UWorld, Physics & Maths Tutor |
+| Retrieval + feedback | 30 | Answering a question is only half; the explanation of the wrong answer is the other | UWorld, AMBOSS, Magoosh, past papers with mark schemes |
+| Teaching + exam rehearsal | 23 | The coaching model: classes plus a ranked test series | Unacademy, Aakash, Allen, New Oriental, Vision IAS, NPTEL |
+| Exam rehearsal + retrieval + feedback | 9 | Timed practice, then analysing errors | PYQ method, Fenbi, UWorld, Physics & Maths Tutor |
 | Learning how to learn + retrieval + spacing | 14 | The "six strategies" package that study books and creators repeat | *Make It Stick*, *Learn Like a Pro*, Ali Abdaal, Thomas Frank |
 | Focus + planning | 19 | A timer or blocker with tasks, schedules or reports | Focus To-Do, Freedom, Opal, TickTick, Pomodoro |
 | Study spaces + focus | 17 | Company or a quiet room as a way to stay on task | Study rooms in four countries, Focusmate, Bilibili rooms |
@@ -417,40 +421,40 @@ Two patterns stand out. First, **bundles follow the exam culture**: the Indian a
 
 The table below counts, for each idea, how many entries of each type carry it at all (primary or secondary). Part 1 typed research papers as books, and algorithms are counted with methods.
 
-| Code | Idea | app (131) | website (98) | book (91) | course (51) | creator (15) | programme (14) | place (11) | method (112) | product (4) |
+| Code | Idea | app (136) | website (101) | book (95) | course (52) | creator (15) | programme (14) | place (11) | method (115) | product (4) |
 |---|---|---|---|---|---|---|---|---|---|---|
-| RET | Retrieval practice | 51 | 47 | 35 | 9 | 5 | 2 | · | 27 | · |
+| RET | Retrieval practice | 53 | 48 | 35 | 9 | 5 | 2 | · | 29 | · |
 | SPA | Spacing and scheduled review | 36 | 12 | 16 | 3 | 5 | · | · | 19 | · |
 | MNE | Memory techniques | 2 | · | 11 | 1 | · | · | · | 11 | · |
-| TCH | Expert teaching and curated content | 22 | 28 | 18 | 33 | 4 | · | 7 | 2 | · |
-| TUT | Tutoring and mentoring | 12 | 7 | 1 | 4 | · | 3 | · | · | · |
+| TCH | Expert teaching and curated content | 22 | 28 | 18 | 34 | 4 | · | 7 | 2 | · |
+| TUT | Tutoring and mentoring | 13 | 7 | 1 | 4 | · | 3 | · | · | · |
 | ELA | Understanding and elaboration | 17 | 7 | 17 | 7 | 2 | · | · | 25 | · |
-| EXM | Worked examples and model answers | · | 3 | 13 | 2 | 2 | · | · | 2 | · |
+| EXM | Worked examples and model answers | · | 3 | 14 | 2 | 2 | · | · | 2 | · |
 | NOT | Note-making and organising knowledge | 29 | 1 | 5 | 2 | 1 | 1 | · | 12 | · |
 | MIX | Interleaving and varied practice | · | 2 | 8 | · | · | · | · | 3 | · |
-| ADP | Working on weak spots | 5 | 6 | 6 | 3 | · | 2 | 1 | 11 | · |
-| FBK | Feedback and error correction | 12 | 19 | 10 | 12 | · | 2 | · | 13 | · |
-| TST | Exam rehearsal and technique | 11 | 13 | 7 | 10 | 1 | · | 3 | 9 | · |
-| TGT | Exam targeting | 2 | 4 | 8 | 1 | 1 | · | · | 3 | · |
-| PLN | Planning and self-monitoring | 20 | 11 | 15 | 7 | · | 2 | · | 19 | · |
+| ADP | Working on weak spots | 7 | 6 | 6 | 3 | · | 2 | 1 | 11 | · |
+| FBK | Feedback and error correction | 13 | 21 | 11 | 13 | · | 2 | · | 14 | · |
+| TST | Exam rehearsal and technique | 15 | 15 | 10 | 11 | 1 | · | 3 | 10 | · |
+| TGT | Exam targeting | 2 | 4 | 10 | 1 | 1 | · | · | 3 | · |
+| PLN | Planning and self-monitoring | 22 | 12 | 15 | 7 | · | 2 | · | 20 | · |
 | LHL | Learning how to learn | · | 4 | 32 | 13 | 6 | · | · | 1 | · |
 | FOC | Attention and distraction control | 18 | 7 | 8 | 2 | 4 | 2 | 3 | 12 | 1 |
-| HAB | Motivation, habits and mindset | 17 | 10 | 11 | 2 | 3 | 1 | · | 5 | · |
+| HAB | Motivation, habits and mindset | 18 | 11 | 11 | 2 | 3 | 1 | · | 5 | · |
 | SPC | Study spaces and co-presence | 2 | 6 | 1 | 2 | 3 | 2 | 9 | 5 | · |
-| GRP | Study groups and teaching others | 6 | 8 | · | 2 | 1 | 2 | 1 | 6 | · |
-| CMP | Public comparison and rankings | 6 | 2 | · | 1 | · | 1 | 1 | · | · |
+| GRP | Study groups and teaching others | 6 | 9 | · | 2 | 1 | 2 | 1 | 6 | · |
+| CMP | Public comparison and rankings | 7 | 2 | · | 1 | · | 1 | 1 | · | · |
 | LIF | Body basics | 4 | 1 | 4 | · | 1 | · | · | 10 | · |
 | ANX | Exam nerves and mental wellbeing | 8 | 8 | 4 | 2 | 1 | 6 | · | 9 | · |
 | GEN | AI-made study material | 12 | 11 | · | · | · | · | · | · | · |
 | OFF | Answer lookup and offloading | 9 | 7 | · | · | · | · | · | · | · |
 | QFX | Quick fixes and popular beliefs | 5 | · | 2 | 1 | 1 | 2 | · | 11 | 4 |
-| BAS | Default habits | 3 | · | · | · | · | · | · | 4 | · |
+| BAS | Default habits | 3 | · | · | · | · | · | · | 5 | · |
 
-**What the market builds most.** By primary, expert teaching and content leads (68), then learning how to learn (54, almost all books and courses), spacing (43) and retrieval (40). By any mention, retrieval leads by far (176), then teaching (114), spacing (91), understanding (75) and planning (74). Retrieval is the idea most entries add, even when they are built around something else.
+**What the market builds most.** By primary, expert teaching and content leads (69), then learning how to learn (54, almost all books and courses), spacing (43), retrieval (43) and exam rehearsal (30). By any mention, retrieval leads by far (181), then teaching (115), spacing (91), planning (78), understanding (75) and feedback (74). Retrieval is the idea most entries add, even when they are built around something else.
 
-**What is rare.** Interleaving (2 primary), public comparison (2), exam targeting (3), default habits (6), study groups (7) and worked examples and model answers (8) are seldom the main point of anything. Interleaving, rankings and targeting nonetheless recur as features, which suggests they are add-ons rather than products. Study groups are rare as products because they are mostly free and informal.
+**What is rare.** Interleaving (2 primary), public comparison (2), exam targeting (4), default habits (6), study groups (7) and worked examples and model answers (8) are seldom the main point of anything. Interleaving, rankings and targeting nonetheless recur as features, which suggests they are add-ons rather than products. Study groups are rare as products because they are mostly free and informal.
 
-**Ideas books and methods emphasise but apps neglect.** Worked examples and model answers (no apps; 13 books), interleaving (no apps; 8 books), learning how to learn (no apps; 32 books, 13 courses), memory techniques (2 apps; 11 books and 11 methods), body basics (4 apps; 10 methods) and exam targeting (2 apps). These are ideas that are easy to write down but harder to turn into software, or that people do not pay for separately.
+**Ideas books and methods emphasise but apps neglect.** Worked examples and model answers (no apps; 14 books), interleaving (no apps; 8 books), learning how to learn (no apps; 32 books, 13 courses), memory techniques (2 apps; 11 books and 11 methods), body basics (4 apps; 10 methods) and exam targeting (2 apps). These are ideas that are easy to write down but harder to turn into software, or that people do not pay for separately.
 
 **Ideas apps emphasise but books neglect.** AI-made study material and answer lookup appear only in apps and websites. Note-making (29 primary, 20 of them apps), focus control (13 primary apps), spacing (23 primary apps) and planners are app-heavy; books mention them but rarely centre on them. Tutoring is now mostly an app idea because AI made it cheap.
 
@@ -464,15 +468,105 @@ These are not ways of learning, so they are not codes. Parts 3 and 4 should note
 
 **Access, price and language.** Who can actually use it? Free state platforms (DIKSHA, SATHEE in 12 languages, SWAYAM, NPTEL, EBSi, Khan Academy), cheap mass lectures used as a funnel to paid courses (PhysicsWallah, StudyIQ, YouTube channels), Hindi-medium and vernacular providers (Drishti IAS, Adda247), bilingual quizzes (QuizCherry), multilingual helplines (Tele-MANAS), and disability access (text-to-speech readers; the CAST Universal Design for Learning guidelines). Most global tools are English-first. Access shapes which ideas reach which students more than the ideas themselves do.
 
+## Checked against research classifications and other AI tools
+
+After the list was settled, it was checked three ways on 1 November 2026: Perplexity was asked how published research classifies study strategies, Gemini was asked what ideas the list misses, and ChatGPT and Kimi were asked for examples from other countries. Every claim was checked against the web. The raw answers and the checks are in `research_notes/Exam success central ideas/crosscheck/` (`verified_FGH.md`). **Result: the 26 codes stay.** The checks support adding named variants and sharpening two definitions, not adding or merging codes. They also added 16 entries to the Part 1 catalogue (#528 to #543), which are coded in the appendix.
+
+### The seven research frameworks
+
+| Framework | Citation | Link | Its categories |
+|---|---|---|---|
+| Weinstein & Mayer | Weinstein, C. E. & Mayer, R. E. (1986). The teaching of learning strategies. In M. C. Wittrock (Ed.), *Handbook of Research on Teaching* (3rd ed.). Macmillan. | No open copy found; categories confirmed through a [summary by Weinstein](https://www.nisod.org/archive_files/abstracts/pdf/XXXI_19.pdf) and a [2021 review](https://frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.635289/full) | Rehearsal, elaboration and organisation (each for basic and complex tasks); comprehension monitoring; affective and motivational strategies |
+| MSLQ | Pintrich, Smith, Garcia & McKeachie (1991). *A Manual for the Use of the Motivated Strategies for Learning Questionnaire*. University of Michigan. | [ERIC ED338122](https://files.eric.ed.gov/fulltext/ED338122.pdf) | Motivation (goal orientations, task value, control beliefs, self-efficacy, test anxiety); learning strategies (rehearsal, elaboration, organisation, critical thinking, metacognitive self-regulation); resource management (time and study environment, effort regulation, peer learning, help seeking) |
+| Zimmerman | Zimmerman, B. J. (2002). Becoming a self-regulated learner: An overview. *Theory Into Practice*, 41(2), 64–70. | [PDF (author-hosted copy)](http://www.johnnietfeld.com/uploads/2/2/6/0/22606800/zimmerman_2002.pdf) | Forethought (goal setting, strategic planning, self-motivation beliefs); performance (self-control, self-observation); self-reflection (self-judgment, self-reaction) |
+| Dunlosky et al. | Dunlosky, Rawson, Marsh, Nathan & Willingham (2013). *Psychological Science in the Public Interest*, 14(1), 4–58. | [PubMed 26173288](https://pubmed.ncbi.nlm.nih.gov/26173288/) | Ten techniques: elaborative interrogation, self-explanation, summarisation, highlighting, keyword mnemonic, imagery for text, rereading, practice testing, distributed practice, interleaved practice |
+| Donker et al. | Donker, de Boer, Kostons, Dignath van Ewijk & van der Werf (2014). *Educational Research Review*, 11, 1–26. | [PDF](https://www.neurodyspaca.org/IMG/pdf/donker_et_al._-_2014_-_effectiveness_of_learning_strategy_instruction_on_.pdf) | Cognitive (rehearsal, elaboration, organisation); metacognitive (planning, monitoring, evaluation); management (effort, peers and others, environment); plus motivational aspects and metacognitive knowledge as separate groups |
+| Hattie & Donoghue | Hattie & Donoghue (2016). Learning strategies: A synthesis and conceptual model. *npj Science of Learning*, 1, 16013. | [PMC6380372](https://pmc.ncbi.nlm.nih.gov/articles/PMC6380372/) | Skill, will and thrill; success criteria; surface, deep and transfer phases (acquiring and consolidating within surface and deep); the environment |
+| EEF | Education Endowment Foundation, *Metacognition and self-regulation* (Toolkit strand) and guidance report *Metacognition and Self-Regulated Learning* (2nd ed.). | [Toolkit strand](https://educationendowmentfoundation.org.uk/education-evidence/teaching-learning-toolkit/metacognition-and-self-regulation); [guidance report](https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition) | Plan, monitor, evaluate; metacognition (thinking about learning) and self-regulation (managing motivation and behaviour) |
+
+**Three corrections to Perplexity's answer.** (1) Its Weinstein link points to a different paper: Weinstein, C. E. & **Meyer, D. K.** (1991), "Cognitive learning strategies and college teaching", *New Directions for Teaching and Learning*, no. 45 ([Crossref record](https://api.crossref.org/works/10.1002/tl.37219914505)). (2) Its EEF links were on eef.dev, which looks like a development copy of the EEF site; the official domain is educationendowmentfoundation.org.uk. (3) It put "metacognitive knowledge" inside Donker's management group and called the peers group "peer tutoring". In Donker, metacognitive knowledge is a separate group and the category is "peers and others".
+
+### How the 26 codes map to the frameworks
+
+"—" means the framework has no matching category. W&M = Weinstein & Mayer; H&D = Hattie & Donoghue.
+
+| Code | W&M 1986 | MSLQ 1991 | Zimmerman 2002 | Dunlosky 2013 | Donker 2014 | H&D 2016 | EEF |
+|---|---|---|---|---|---|---|---|
+| RET | (rehearsal, loosely) | Rehearsal (loosely) | — | Practice testing | Rehearsal (loosely) | Consolidating surface | — |
+| SPA | — | — | — | Distributed practice | — | Consolidating surface | — |
+| MNE | Elaboration (basic) | Elaboration | — | Keyword mnemonic; imagery | Elaboration | Acquiring surface | — |
+| TCH | — | — | — | — | — | — (teacher input, not a learner strategy) | — |
+| TUT | — | Help seeking (partly) | Self-control: help seeking (partly) | — | Peers and others | — | — |
+| ELA | Elaboration (complex) | Elaboration | — | Elaborative interrogation; self-explanation; imagery | Elaboration | Acquiring deep | — |
+| EXM | — | — | (modelling, outside the three phases) | — | — | Success criteria (partly) | — |
+| NOT | Organisational | Organisation | — | Summarisation | Organisation | Acquiring surface | — |
+| MIX | — | — | — | Interleaved practice | — | Consolidating surface | — |
+| ADP | — | — | — | — | — | Consolidating (deliberate practice) | — |
+| FBK | Comprehension monitoring (partly) | Metacognitive self-regulation (partly) | Self-judgment | — | Evaluation | Consolidating deep (feedback) | Evaluate |
+| TST | Affective (test anxiety, partly) | — | — | Practice testing (partly) | — | — | — |
+| TGT | — | — | Task analysis | — | Planning (partly) | Success criteria (partly) | Plan (partly) |
+| PLN | — | Metacognitive self-regulation; time and study environment | Goal setting, strategic planning; self-observation | — | Planning; monitoring | — | Plan; monitor |
+| LHL | — | — | — | (the review itself is LHL material) | Metacognitive knowledge | Skill (partly) | Metacognitive knowledge |
+| FOC | Affective (staying alert, partly) | Time and study environment | Self-control | — | Environment | Environment | — |
+| HAB | Affective and motivational | Goal orientations; task value; control beliefs; self-efficacy; effort regulation | Self-motivation beliefs; self-reaction | — | Effort; motivational aspects | Will; thrill | Self-regulation (motivation) |
+| SPC | — | Time and study environment | Self-control (environment structuring) | — | Environment | Environment | — |
+| GRP | — | Peer learning | — | — | Peers and others | — | — |
+| CMP | — | (extrinsic goal orientation, loosely) | — | — | — | — | — |
+| LIF | — | — | — | — | — | Environment (sleep, exercise mentioned) | — |
+| ANX | Affective and motivational | Test anxiety | — | — | Motivational aspects (partly) | Thrill/will (partly) | — |
+| GEN | — | — | — | — | — | — | — |
+| OFF | — | — | — | — | — | — | — |
+| QFX | — | — | — | — | — | — | — |
+| BAS | Rehearsal (basic) | Rehearsal | — | Rereading; highlighting | Rehearsal | Acquiring surface | — |
+
+**The research uses a three-way split.** MSLQ and Donker sort strategies into *cognitive* (rehearse, elaborate, organise), *metacognitive* (plan, monitor, evaluate) and *resource management* (time, environment, effort, other people). Our families line up with it: Remembering, Understanding (ELA, NOT, MNE) and Practising (MIX, RET) are cognitive; Steering your own study (PLN, TGT, LHL) and FBK are metacognitive; Other people and places, FOC, HAB and Body and mind are resource management and motivation.
+
+**Some codes fit no framework, and that is expected.** TCH, TUT, EXM (as a product), GEN, OFF, QFX, CMP and TST are *sources* of help or *conditions*, not learner strategies. The frameworks classify what a learner does. This list classifies what products are built around, so it includes sources of help that learner-strategy classifications leave out.
+
+### What the list lacks
+
+- **Monitoring what you know is weak.** Every framework has a "comprehension monitoring" or "self-judgment" category. PLN covered tracking *time*, not judging *how well you know something*. Confidence calibration is now a named PLN variant (below), but the catalogue has only one entry built on it (#538).
+- **No product is built around help seeking or transfer.** Help seeking (MSLQ, Donker, Zimmerman) appears only as a service to buy (TUT) or a group to join (GRP), not as a skill anyone teaches. Transfer (using what you learned in a new situation; Hattie & Donoghue's third phase) is partly inside ELA and MIX but has no product of its own. This is a finding about the market, not a reason for new codes.
+- **Plain repetition has no neutral home.** Rereading sits in BAS, rote drill (题海战术) in RET, and recitation was nowhere. Rehearsal aloud is now noted under RET and BAS.
+- **Covered already:** critical thinking (inside LHL), effort regulation and motivational beliefs (inside HAB), success criteria (spread across EXM, TGT and FBK's mark schemes).
+
+### Named variants added (no new codes)
+
+| Code | Variant | What it is | Catalogue entries |
+|---|---|---|---|
+| HAB | Commitment devices | Putting money or reputation at stake on a study goal | Beeminder (#535), stickK (#536) |
+| TST | (a) Rehearsal under exam conditions, including practical and oral exams and matching study conditions to the exam | Mocks and simulators; OSCE practice; studying in conditions like the test's | Geeky Medics (#537), Skolra (#530), Prep50 (#529), MEC Enem (#532), STARK (#534); context-dependent memory (#378, coded SPC) |
+| TST | (b) Test-taking strategy | Answer elimination, test-wiseness, guessing under negative marking, time triage | *Test-Taking Strategies* (#540), *Ace the GMAT* (#541), three-pass method (#542), in-exam strategy guides (#142), The Princeton Review (#82) |
+| PLN | Confidence calibration | Judging how well you know each item; cross-reference FBK | Certainty-based marking (#538); Brainscape's confidence ratings (#19, coded elsewhere) |
+| TGT | Examiner reports | Reading what examiners say candidates got wrong | Cambridge principal examiner reports (#539) |
+| RET / BAS | Rehearsal aloud; overlearning | Reading aloud (早读); drilling past first mastery | Morning reading 早读 (#543); question-sea tactic (#400) |
+
+TST now holds two research literatures, so Parts 3 and 4 report and grade its two sub-strands separately. **Promotion rule for later:** if a variant reaches five or more primary entries in a future catalogue round, it becomes its own code. Test-taking strategy and commitment devices are the likeliest.
+
+**LHL is sharpened, not dropped.** Gemini argued LHL is "circular" because it only teaches the other 25 ideas. The research disagrees: Donker et al. and the EEF treat *metacognitive knowledge* (knowing which strategies exist and when to use them) as its own category with its own effects. The LHL definition now says this.
+
+### Proposals not adopted
+
+| Proposal (source) | Decision | Reason |
+|---|---|---|
+| Split ELA into verbal and visual (Gemini) | Rejected | "Separate brain pathways" overstates the case; dual coding is a cognitive theory, not a brain finding. Part 4 can name the variants (Dunlosky rates imagery separately) under one code. |
+| Merge BAS and QFX into an "anti-patterns" group (Gemini) | Rejected | Calling them anti-patterns prejudges Part 4, which this part avoids (QFX was renamed for that reason). BAS is the baseline Part 4 compares against. They already share a family. |
+| Treat LHL as a meta-category, not an idea (Gemini) | Rejected | See above: the research treats metacognitive knowledge as its own category. LHL has 54 primary entries, all books, courses, creators and websites. |
+| Merge CMP into HAB (Gemini) | Kept separate for now | CMP has only 2 primaries (#103, #418), so either choice is defensible. Comparison works through pressure and can harm, which matters for Part 4. Revisit if Part 4 finds no separate evidence. |
+| Split TCH into live teaching and curated texts (Gemini) | Kept as is | No framework treats teacher input as a learner strategy, so the split adds little; the TCH section already reports the two forms. |
+| Split TST into full mocks and answering technique (Gemini) | One code, two sub-strands | Partly supported (see above). |
+
+Gemini's "same mechanism" claims were mostly groupings this list already makes (retrieval with blurting and pretesting; adaptive learning with deliberate practice; body doubling with study rooms). Its explanations used invented or misapplied terms ("strengthen synaptic pathways", "Parkinsonian scarcity", the Hawthorne effect) and are not used here. Kimi's country examples were all already in the catalogue.
+
 ## Known limitations
 
 - **Single-coder judgement.** Each range of entries was coded once by one AI mapper and then reconciled by one reviewer applying the rule above; there was no second independent coder and no agreement check. Changing the primary rule would move many entries (93 primaries changed during reconciliation alone, mostly books moving to LHL). Treat counts within about ±5 as similar.
 - **Coded from descriptions, not use.** Entries were coded from their one-line Part 1 descriptions, not by using the products. Some Part 1 rows rest on the researchers' background knowledge (tagged BK there), including about 15 of the East Asian rows and most book details; their codes inherit that uncertainty.
-- **Counts reflect the catalogue, not the market.** Part 1 over-represents India (especially civil-service preparation) and English-language sources, and the cross-check additions reflect what four AI tools suggested. One entry can stand for many products (#44 is about 30 apps; #215 is five compilations). Counts show how often an idea appears in this catalogue, not market share, users or revenue.
+- **Counts reflect the catalogue, not the market.** Part 1 over-represents India (especially civil-service preparation) and English-language sources, and the cross-check additions reflect what AI tools suggested (137 entries from four tools in the first round, 16 from the second). Africa, Latin America and continental Europe have one country each. One entry can stand for many products (#44 is about 30 apps; #215 is five compilations). Counts show how often an idea appears in this catalogue, not market share, users or revenue.
 - **Caps and borders.** A three-secondary cap undercounts heavily bundled products. Several boundaries are judgement calls: rankings (CMP) versus mocks (TST), mentors (TUT) versus groups (GRP), music for focus (FOC) versus study places (SPC), and the split of wellbeing between LIF and ANX.
 - **Not settled here.** Comprehensible input for language exams (LingQ) and drill by sheer volume (题海战术) were kept inside other ideas but may deserve their own codes if Part 3 finds many more examples. Evidence for every idea is left to Part 4.
 
-## Appendix: full mapping of the 527 entries
+## Appendix: full mapping of the 543 entries
 
 Ordered by the Part 1 master list number. Types follow the Part 1 mappers (research papers count as books; "product" is a drug or supplement). Mechanisms are the mapper's short description, at most 15 words.
 
@@ -1005,3 +1099,19 @@ Ordered by the Part 1 master list number. Types follow the Part 1 mappers (resea
 | 525 | SWAYAM | course | TCH | TST | Free university courses with proctored certificate exams |
 | 526 | e-PG Pathshala | website | TCH | — | Free syllabus-based postgraduate e-content modules |
 | 527 | Bharat 2026: A Reference Annual (Publications Division) | book | TCH | — | Official yearly reference on schemes, ministries and data |
+| 528 | Varsity CBT (Nigeria) | website | RET | TST, FBK | Free JAMB, WAEC and NECO past questions with instant scoring and a timed CBT mode |
+| 529 | Prep50 (Nigeria) | app | TST | ADP, CMP | JAMB and WAEC prep with weak-area analytics and a national ranked CBT mock |
+| 530 | Skolra (Nigeria) | app | TST | RET | JAMB CBT simulator: 180 questions in 2 hours with real-exam navigation keys |
+| 531 | CatchUp Edu (Nigeria) | app | RET | TUT, TST | Exam practice questions with AI explanations, offline study and bookable live classes |
+| 532 | MEC Enem (Brazil) | app | TST | FBK, ADP, PLN | Free government Enem mocks, AI essay feedback, paths by difficulty and AI study plans |
+| 533 | Descomplica (Brazil) | course | TCH | FBK, TST | Online Enem video lessons with mock exams and a monthly quota of essay corrections |
+| 534 | STARK Abitur books (Germany) | book | TST | EXM, TGT | State-specific Abitur books with original past exam tasks and solutions |
+| 535 | Beeminder | app | HAB | PLN | Graphed study goal; going off track charges a pledge that usually rises after each failure |
+| 536 | stickK | website | HAB | PLN | Voluntary commitment contract: money at stake, a referee, an optional "anti-charity" |
+| 537 | Geeky Medics | website | TST | FBK, GRP | OSCE station practice with examiner checklists, virtual patients and group practice |
+| 538 | Certainty-based marking (Moodle quizzes; UCL LAPT) | method | PLN | FBK, RET | Rate certainty for each answer; confident wrong answers lose more marks |
+| 539 | Cambridge principal examiner reports | book | TGT | FBK | Examiners describe, question by question, how candidates did and common mistakes |
+| 540 | Test-Taking Strategies (Kesselman-Turkel and Peterson) | book | TST | — | Study-skills book on handling exams and question types (test-wiseness) |
+| 541 | Ace the GMAT (Brandon Royal) | book | TST | — | GMAT strategy guide to the test and its question types |
+| 542 | Three-pass exam method | method | TST | — | Answer easy questions first, then medium ones, then hard ones |
+| 543 | Morning reading 早读 (China) | method | RET | BAS | Daily school routine of reading texts aloud before lessons start |
