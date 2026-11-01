@@ -416,3 +416,22 @@ Unchanged from section 11 of the proposal, plus:
 - **Sleep:** does accuracy after short-sleep nights differ, per person? If it does, that's both a feature and a story.
 - **Inconsistency:** how many people return after a 2-week gap, and how many finish their restart day?
 - **Pods:** share of pods still active at 8 weeks, before and after merges.
+
+---
+
+## 21. After the final research report (added the evening of 1 Nov)
+
+The research session finished its four parts (`artefacts/reports/`, plus `Exam research - notes for Aspiran.md`).
+Nothing above changes direction. Four things sharpen:
+
+1. **AI-made study material is graded D.** There are no trials, and the "make it yourself" effect points the wrong
+   way. Our content kit uses AI to make content, so the rule is: AI-made content is the **source** (like a textbook),
+   never the last step. Every piece must make the person produce something: answer from memory, write the one-pager,
+   make their own card, pick the example for their case file. Offer "make your own card from this" on every note.
+2. **The review queue should use FSRS** (an open, well-tested scheduler with a TypeScript version, `ts-fsrs`). It
+   replaces the fixed 3-day and 25-to-40-day rules. Build step 1 uses it; we don't invent our own.
+3. **No AI answer-grader has been checked against real UPSC examiners.** The 50-answer test (section 5) applies to
+   English too: two experienced evaluators mark 50 answers, and we compare. Until then, never market the AI
+   marking as "accurate", only as "a second opinion next to your own marks".
+4. **Mistake notebooks alone are C.** That fits the plan: the Sunday Fix turns each logged mistake into one change.
+   A log without the fix is not worth building.
