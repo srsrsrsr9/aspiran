@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Chotu from '../components/Chotu.astro';
+import { waUrl, WA_MSG_EN } from '../i18n';
+import '@fontsource/martel/latin-800.css';
+import '@fontsource/martel/devanagari-700.css';
+import '@fontsource/mukta/devanagari-400.css';
+import '../styles/chotu.css';
+import '../styles/home.css';
+
+// The long home page. Copy is in this file, room by room; Chotu's lines and questions are in
+// src/scripts/home.ts. Everything works without the server; Chotu's free-text replies and saving a visitor's
+// details need the Worker's /web/chotu and /web/lead routes (server/src/web.ts in the app repo).
+
+const title = 'Aspiran: light up the UPSC syllabus';
+const description =
+  'A UPSC study space where what you read in October is still there in March. Small pods, a daily review that ends, Mains answers you rewrite, and Chotu, an AI chai cup that walks with you. No streaks, no leaderboards, no rank predictions.';
+
+// The syllabus sky: [paper, topic]. Positions are generated in the script, clustered by paper.
+const sky: [string, string][] = [
+  ['GS1', 'Ancient India'], ['GS1', 'Medieval India'], ['GS1', 'Modern India'], ['GS1', 'Freedom struggle'], ['GS1', 'Art and culture'],
+  ['GS1', 'World history'], ['GS1', 'Society'], ['GS1', 'Urbanisation'], ['GS1', 'Physical geography'], ['GS1', 'Indian geography'],
+  ['GS1', 'Monsoon'], ['GS1', 'Resources'], ['GS2', 'Constitution'], ['GS2', 'Preamble'], ['GS2', 'Fundamental rights'],
+  ['GS2', 'Parliament'], ['GS2', 'Judiciary'], ['GS2', 'Federalism'], ['GS2', 'Finance Commission'], ['GS2', 'Local bodies'],
+  ['GS2', 'Governance'], ['GS2', 'Welfare schemes'], ['GS2', 'India and neighbours'], ['GS2', 'Global groupings'],
+  ['GS3', 'Growth and inflation'], ['GS3', 'Budget'], ['GS3', 'Banking'], ['GS3', 'Agriculture'], ['GS3', 'Infrastructure'],
+  ['GS3', 'Science and tech'], ['GS3', 'Space'], ['GS3', 'Environment'], ['GS3', 'Climate change'], ['GS3', 'Disasters'],
+  ['GS3', 'Internal security'], ['GS3', 'Cyber security'], ['GS4', 'Ethics basics'], ['GS4', 'Attitude'], ['GS4', 'Emotional intelligence'],
+  ['GS4', 'Integrity'], ['GS4', 'Case studies'], ['GS4', 'Probity'], ['Essay', 'Thesis'], ['Essay', 'Structure'],
+  ['Essay', 'Openings'], ['Essay', 'Examples'], ['CSAT', 'Comprehension'], ['CSAT', 'Reasoning'], ['CSAT', 'Numeracy'],
+  ['CSAT', 'Data'], ['Optional', 'Paper 1'], ['Optional', 'Paper 2'], ['Optional', 'PYQ themes'], ['Optional', 'Answers'],
+];
+
+const passage = [
+  'Every summer, the hottest streets in a city are rarely the richest ones.',
+  'Trees, shade and cool roofs follow money, because they follow land prices.',
+  'Planners often treat heat as weather, something that simply happens to everyone.',
+  'Yet who gets shade is decided in budget meetings, years before any heatwave.',
+  'A heat plan that ignores this will keep protecting the already protected.',
+  'Cities do not fail the poor by accident; they are drawn that way.',
+];
+
+const never = [
+  'Streaks you are scared to break',
+  'Leaderboards and public ranks',
+  '"Your selection chance: 73%"',
+  '"Only 4 seats left" countdowns',
+  '14-hour topper routine reels',
+  'Notifications that chase you',
+  'Your number sold to a call centre',
+  'A 300-page monthly magazine',
+];
+
+const WA = waUrl(WA_MSG_EN);
+---
+
+<BaseLayout title={title} description={description} themeColor="#06070F">
+  <div class="night" id="top">
+    <a class="skip" href="#main">Skip to the page</a>
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <nav class="hud-nav" aria-label="Site">
+      <a class="brand" href="#top">
+        <svg aria-hidden="true" width="30" height="30" viewBox="0 0 40 40">
+          <path d="M14 3c-2 3 2 4 0 7M20 2c-2 3 2 4 0 8M26 3c-2 3 2 4 0 7" fill="none" stroke="#F0A04B" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M5 15h30l-4.5 20.5a3 3 0 0 1-3 2.5H12.5a3 3 0 0 1-3-2.5z" fill="#C8693A"></path>
+          <rect x="4" y="13" width="32" height="4.5" rx="2.2" fill="#E08A55"></rect>
+        </svg>
+        <b>Aspiran</b>
+      </a>
+      <div class="hud-r">
+        <span class="hud-tag" aria-hidden="true">● ONLINE</span>
+        <a class="btn ghost sm" href="#seat" data-umami-event="cta-seat" data-umami-event-where="nav">Save my seat</a>
+      </div>
+    </nav>
+
+    <!-- 1. Hero -->
+    <header class="hero" data-scene="hero">
+      <p class="hud">ASPIRAN · A STUDY SPACE FOR UPSC</p>
+      <h1>Light up<br /><span class="glow-text">the syllabus.</span></h1>
+      <p class="lede">
+        A study space where what you read in October is still there in March. Where your answers get better because you
+        rewrote them, not because you read a topper's copy. Where nobody counts your hours, and nobody ranks you.
+      </p>
+      <div class="ctas">
+        <button class="btn primary" type="button" data-open-chotu data-umami-event="cta-chotu" data-umami-event-where="hero">Say hi to Chotu</button>
+        <a class="btn ghost" href="#plant">Scroll. Things happen.</a>
+      </div>
+      <p class="hud dim scroll-cue" aria-hidden="true">↓ 17 rooms below. Each one is short.</p>
+    </header>
+
+    <main id="main">
+      <!-- 2. The planted fact -->
+      <section class="scene plant" id="plant" data-scene="plant">
+        <p class="hud">ROOM 01 · A SMALL EXPERIMENT</p>
+        <h2>Remember this.<br />I'll ask you later.</h2>
+        <div class="fact-card" data-reveal>
+          <span class="hud">FACT · GS2 · PREAMBLE</span>
+          <p>The Preamble has been amended <b>exactly once</b>: in 1976, by the 42nd Amendment, which added
+            <b>socialist</b>, <b>secular</b> and <b>integrity</b>.</p>
+        </div>
+        <p class="note">No pressure. Don't scroll back for it. You'll see why.</p>
+      </section>
+
+      <!-- 3. The leak -->
+      <section class="scene leak" id="leak" data-scene="leak">
+        <p class="hud">ROOM 02 · THE LEAK</p>
+        <h2>Most prep leaks.</h2>
+        <p class="lede">You read a chapter. It feels solid. By the time Diwali's over, most of it has quietly drained away,
+          and you only find out in the exam hall.</p>
+        <div class="leak-box" data-reveal>
+          <div class="seg" role="group" aria-label="Choose a way to study">
+            <button type="button" data-leak="read" aria-pressed="true">Read and move on</button>
+            <button type="button" data-leak="aspiran" aria-pressed="false">Aspiran's daily review</button>
+          </div>
+          <svg class="leak-chart" viewBox="0 0 600 240" role="img" aria-labelledby="leak-cap">
+            <line x1="40" y1="200" x2="580" y2="200" class="axis"></line>
+            <text x="40" y="226" class="tick">Oct</text><text x="170" y="226" class="tick">Dec</text>
+            <text x="300" y="226" class="tick">Jan</text><text x="430" y="226" class="tick">Feb</text><text x="545" y="226" class="tick">Mar</text>
+            <text x="40" y="24" class="tick">What you can still recall</text>
+            <path id="leak-path" class="curve" d=""></path>
+            <g id="leak-dots"></g>
+          </svg>
+          <p class="cap" id="leak-cap">Without review, it drains. With a short review just before you'd forget, each dip is smaller,
+            and the gaps between reviews grow from a day to a week to months. <span class="dim">A sketch of the shape, not your data.</span></p>
+        </div>
+        <p class="effect">Ten to twenty minutes a day. It ends every day. Nothing piles up into guilt.</p>
+      </section>
+
+      <aside class="pause" data-scene="q1" aria-label="A pause">
+        <blockquote>"Re-reading feels like learning.<br />Recalling <em>is</em> learning."</blockquote>
+        <cite>— on the wall of every Aspiran pod</cite>
+      </aside>
+
+      <!-- 4. The sky -->
+      <section class="scene sky" id="sky-room" data-scene="sky">
+        <p class="hud">ROOM 03 · YOUR SYLLABUS, AS A SKY</p>
+        <h2>Fog, then stars.</h2>
+        <p class="lede">Every line of the UPSC syllabus is a star. It starts dark. It lights up only when you've earned it.
+          Scroll and watch a year go by.</p>
+        <div class="sky-wrap" id="sky-wrap">
+          <div class="sky-stick">
+            <svg id="sky" class="sky-map" viewBox="0 0 1000 560" role="img" aria-label="The syllabus as a star map, lighting up over a year">
+              <g id="sky-lines"></g>
+              {sky.map(([paper, topic], i) => (
+                <g class="star" data-i={i} data-paper={paper} data-topic={topic} tabindex="0">
+                  <circle class="halo" r="14"></circle>
+                  <circle class="dot" r="4.5"></circle>
+                  <title>{paper} · {topic}</title>
+                </g>
+              ))}
+              <g id="sky-labels"></g>
+            </svg>
+            <div class="sky-hud">
+              <span class="hud" id="sky-month">MONTH 0 · FOG</span>
+              <span class="sky-tip" id="sky-tip" aria-live="polite">Tap a star</span>
+            </div>
+            <ul class="legend">
+              <li><i class="s met"></i><b>Met</b> You've read it once.</li>
+              <li><i class="s recall"></i><b>Can recall</b> Pulled from memory a week or more later.</li>
+              <li><i class="s use"></i><b>Can use</b> You wrote an answer with it.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="effect">No "63% complete". Re-reading can fake confidence. Time can't, which is why "Can recall" only lights up after a week.</p>
+      </section>
+
+      <!-- 5. The recall -->
+      <section class="scene recall" id="recall" data-scene="recall">
+        <p class="hud">ROOM 04 · REMEMBER ROOM 01?</p>
+        <h2>Quick. Don't scroll up.</h2>
+        <div class="quiz" data-reveal>
+          <p class="q">How many times has the Preamble been amended?</p>
+          <div class="opts" id="recall-opts">
+            <button type="button" data-a="0">Never</button>
+            <button type="button" data-a="1">Once</button>
+            <button type="button" data-a="2">Twice</button>
+            <button type="button" data-a="x">No idea</button>
+          </div>
+          <p class="reveal-line" id="recall-out" aria-live="polite" hidden></p>
+        </div>
+        <p class="effect">That small effort of pulling it out is the whole trick. Aspiran is built around it: you answer first, then you look.</p>
+      </section>
+
+      <!-- 6. Writing -->
+      <section class="scene write" id="write" data-scene="write">
+        <p class="hud">ROOM 05 · MAINS</p>
+        <h2>Structured argument<br />under a word limit.</h2>
+        <p class="lede">That's what Mains marks, and it's a skill, not a talent. You build it like a muscle: decode, write by hand,
+          judge your own answer, rewrite the weak part. Again. Again.</p>
+
+        <div class="snaps" data-reveal aria-label="An essay built in three snaps">
+          <figure class="snap s1"><span class="hud">SNAP 1 · SKELETON</span>
+            <p>Thesis: cities are drawn, not grown.<br />→ who gets shade<br />→ who decides<br />→ what a fair plan does</p></figure>
+          <figure class="snap s2"><span class="hud">SNAP 2 · OUTLINE</span>
+            <p>Open: a street at 46°C.<br />1. Heat follows land prices<br />2. Budgets decide shade<br />3. Counter-view: weather is weather<br />4. Ward-level heat plans<br />Close: back to the street</p></figure>
+          <figure class="snap s3"><span class="hud">SNAP 3 · THE ESSAY</span>
+            <p class="scribble">On the hottest afternoon of May, the street outside the bus depot reads 46°C. Two kilometres
+              away, under a canopy of old neem trees, it reads 39. Nobody planned that difference, or so we tell ourselves...</p></figure>
+        </div>
+        <p class="effect">For essays you send three photos: skeleton, outline, essay. We see how your thinking was built, not just how it ended.</p>
+
+        <div class="mark" id="mark" data-reveal>
+          <div class="mark-q">
+            <span class="hud">TRY IT · MARK FIRST, THEN COMPARE</span>
+            <p class="q">"Explain the role of the Finance Commission in India's fiscal federalism." (150 words)</p>
+            <p class="ans">The Finance Commission is set up every five years under Article 280. It recommends how taxes are shared between
+              the Centre and the states and among the states. It uses criteria like population, area and income distance. The
+              15th Finance Commission gave 41% to states. It also recommends grants. So it is very important for federalism.</p>
+            <p class="dim small">Rate this answer yourself first, 1 to 5 on each line. Then see the AI's marks next to yours.</p>
+          </div>
+          <div class="rubric" id="rubric"></div>
+          <button type="button" class="btn primary" id="mark-reveal" disabled>Show the AI's marks</button>
+          <p class="reveal-line" id="mark-out" aria-live="polite" hidden></p>
+        </div>
+        <p class="effect">The gap between your marks and ours is the real skill. Over months, you'll watch it shrink.
+          Then you rewrite only the weakest part, in five minutes. Feedback you don't act on is just reading.</p>
+      </section>
+
+      <aside class="pause" data-scene="q2" aria-label="A pause">
+        <blockquote>"The exam doesn't ask what you read.<br />It asks what you can still find."</blockquote>
+        <cite>— Chotu · AI, at 2 a.m., probably</cite>
+      </aside>
+
+      <!-- 7. Pluck the line -->
+      <section class="scene pluck" id="pluck" data-scene="pluck">
+        <p class="hud">ROOM 06 · CSAT</p>
+        <h2>Pluck the line.</h2>
+        <p class="lede">CSAT is only qualifying, but failing it ends the year. Comprehension is a hunt for the one sentence that
+          carries the answer. So we made it a hunt.</p>
+        <div class="pluck-box" data-reveal>
+          <p class="q"><span class="hud">TAP THE LINE THAT PROVES IT</span><br />"Who suffers in a heatwave is decided by people, not by the weather."</p>
+          <div class="petals" id="petals">
+            {passage.map((s, i) => <button type="button" class="petal" data-i={i} style={`--i:${i}`}>{s}</button>)}
+          </div>
+          <p class="reveal-line" id="pluck-out" aria-live="polite" hidden></p>
+        </div>
+        <p class="effect">If your first CSAT check says you're safe, you'll barely see CSAT again. If not, a short daily set, and a
+          printable sheet to carry on the metro.</p>
+      </section>
+
+      <!-- 8. Chai -->
+      <section class="scene chai" id="chai" data-scene="chai">
+        <p class="hud">ROOM 07 · CURRENT AFFAIRS</p>
+        <h2>News that sticks to the syllabus.</h2>
+        <p class="lede">A few chai cards a day, and then it ends. Each one is pinned to a star in your sky, and asks about the idea
+          underneath the headline, because that's what UPSC asks about.</p>
+        <div class="chai-row" data-reveal>
+          <article class="chai-card" id="chai-card">
+            <div class="tags"><span>GS3 · Disasters</span><span>GS1 · Urbanisation</span></div>
+            <h3>Cities draw up ward-level heat plans</h3>
+            <p>Some cities now map heat street by street, and plan shade, water points and work hours ward by ward.</p>
+            <p class="concept"><b>The idea underneath:</b> adaptation works best at the smallest level that can act.</p>
+            <button type="button" class="btn primary sm" id="keep">Keep for Mains</button>
+          </article>
+          <div class="casefile" id="casefile">
+            <span class="hud">YOUR CASE FILE · GS3 · DISASTERS</span>
+            <ul id="case-list" aria-live="polite"><li class="dim">Empty. Keep up to four examples per topic.</li></ul>
+          </div>
+        </div>
+        <p class="effect">A year of news becomes about three hundred examples you can actually use in an answer. Not a pile of monthly
+          magazines. Skip one that really matters, and Chotu nudges you. Once.</p>
+      </section>
+
+      <!-- 9. Calibration -->
+      <section class="scene sure" id="sure" data-scene="sure">
+        <p class="hud">ROOM 08 · NEGATIVE MARKING</p>
+        <h2>Are you as sure as you feel?</h2>
+        <p class="lede">In Prelims, a wrong answer costs a third of the question's marks. Knowing when to trust yourself is worth
+          real marks. Three statements: true or false, and how sure are you?</p>
+        <div class="cal" id="cal" data-reveal></div>
+        <p class="reveal-line big" id="cal-out" aria-live="polite" hidden></p>
+        <p class="effect">Aspiran keeps this number for you, privately, every month: "When you were sure, you were right 87 times in 100."
+          And it shows your confident mistakes first, because those are the ones you'll fix for good.</p>
+      </section>
+
+      <aside class="pause" data-scene="q3" aria-label="A pause">
+        <blockquote>"Nobody clears this alone.<br />Nobody can write your answer for you either."</blockquote>
+        <cite>— the pod rule</cite>
+      </aside>
+
+      <!-- 10. Pods -->
+      <section class="scene pod" id="pod" data-scene="pod">
+        <p class="hud">ROOM 09 · YOUR POD</p>
+        <h2>Alone first.<br />Then together.</h2>
+        <p class="lede">Six to eight aspirants at your stage. Everyone writes the same question alone. Then the pod sees two answers
+          side by side and says which is stronger, and why. No marks. Just "this one, because".</p>
+        <div class="podviz" data-reveal aria-hidden="true">
+          <div class="orbit">
+            <span class="p" style="--a:0">R</span><span class="p" style="--a:1">M</span><span class="p" style="--a:2">S</span>
+            <span class="p" style="--a:3">A</span><span class="p" style="--a:4">K</span><span class="p" style="--a:5">T</span>
+            <span class="core">same<br />question</span>
+          </div>
+          <div class="pair">
+            <div class="ans-mini">Answer A<br /><i>opens with a statistic</i></div>
+            <div class="vs">which is stronger?</div>
+            <div class="ans-mini win">Answer B<br /><i>answers "explain" in line one</i></div>
+          </div>
+        </div>
+        <ul class="facts">
+          <li><b>You</b> read, write and rest. You decide your week.</li>
+          <li><b>Your pod</b> explains to each other, compares answers, notices when someone goes quiet.</li>
+          <li><b>Aspiran</b> keeps the map, brings things back on time, and marks answers (AI, always labelled).</li>
+        </ul>
+        <p class="effect">Pods go quiet sometimes: jobs, exams, life. When yours does, we merge it with another, quietly. Nobody is
+          left in an empty room.</p>
+      </section>
+
+      <!-- 11. Your room -->
+      <section class="scene yours" id="yours" data-scene="yours">
+        <p class="hud">ROOM 10 · A ROOM OF YOUR OWN</p>
+        <h2>Your notes. Your journal.<br />Your to-dos. Your sleep.</h2>
+        <p class="lede">Type it or say it. Plan your day, write the 2 a.m. thought down, tick things off. It's your space. Chotu only
+          uses it to help you, and only when you ask.</p>
+        <div class="sleep" data-reveal>
+          <label for="sleep-range"><span class="hud">SLEEP · LAST WEEK, ON AVERAGE</span>
+            <output id="sleep-out" for="sleep-range">7 h</output></label>
+          <input id="sleep-range" type="range" min="4" max="9" step="0.5" value="7" />
+          <svg id="sleep-sky" class="sleep-sky" viewBox="0 0 600 140" aria-hidden="true"></svg>
+          <p class="cap" id="sleep-cap" aria-live="polite">Sleep is part of the syllabus.</p>
+        </div>
+        <p class="effect">A week of short sleep quietly erases what you read. Aspiran shows you your own sleep next to your own
+          recall, so you can see it, not just be told.</p>
+      </section>
+
+      <!-- 12. Off the screen -->
+      <section class="scene walk" id="walk" data-scene="walk">
+        <p class="hud">ROOM 11 · OFF THE SCREEN</p>
+        <h2>Study that doesn't glue you to a phone.</h2>
+        <div class="tiles" data-reveal>
+          <div class="tile"><b>Listen and walk</b><p>Notes and chai cards read aloud. Long days need moving bodies.</p></div>
+          <div class="tile"><b>Print and carry</b><p>One-page sheets for the metro, the queue, the tea stall.</p></div>
+          <div class="tile"><b>Write on paper</b><p>Mains is handwritten. So are your answers. Snap and upload. A stylus works too.</p></div>
+          <div class="tile"><b>Say it from memory</b><p>Close the book, say it out loud, then check.</p></div>
+        </div>
+      </section>
+
+      <!-- 13. Never -->
+      <section class="scene never" id="never" data-scene="never">
+        <p class="hud">ROOM 12 · THE ANTI-ED-TECH</p>
+        <h2>Things you will never see here.</h2>
+        <ul class="strike" id="strike">
+          {never.map((n) => <li><span>{n}</span></li>)}
+        </ul>
+        <p class="lede">These tricks keep you on an app. They don't get you through an exam. Some of them make you feel worse, so
+          you'll pay for the cure. We'd rather you needed us less each month.</p>
+      </section>
+
+      <!-- 14. You vs you -->
+      <section class="scene ipsative" id="ipsative" data-scene="ipsative">
+        <p class="hud">ROOM 13 · YOU VS. YOU</p>
+        <h2>The only comparison<br />that's fair.</h2>
+        <p class="lede">There's a name for it: <b>ipsative assessment</b>. You're measured against your own past, never against a
+          stranger's highlight reel.</p>
+        <div class="then-now" data-reveal>
+          <div class="tn then"><span class="hud">OCTOBER YOU</span>
+            <ul><li>Self-marks 4 points off the AI's</li><li>Misread the statement: 9 times</li><li>14 stars met, 2 can recall</li></ul></div>
+          <div class="tn arrow" aria-hidden="true">→</div>
+          <div class="tn now"><span class="hud">FEBRUARY YOU</span>
+            <ul><li>Self-marks 1 point off</li><li>Misread the statement: 3 times</li><li>61 stars met, 38 can recall, 12 can use</li></ul></div>
+        </div>
+        <p class="dim small center">An example of what you'd see. Your own numbers, nobody else's.</p>
+      </section>
+
+      <aside class="pause" data-scene="q4" aria-label="A pause">
+        <blockquote>"You're not behind.<br />You're only ever measured against yesterday."</blockquote>
+        <cite>— Aspiran</cite>
+      </aside>
+
+      <!-- 15. Interview -->
+      <section class="scene interview" id="interview" data-scene="interview">
+        <p class="hud">ROOM 14 · IF YOU CLEAR MAINS</p>
+        <h2>We go all in.</h2>
+        <p class="lede">The interview board is five strangers with five kinds of questions. So you practise with variety: mock boards
+          with your pod, questions built from your own form (your town, your degree, your hobbies), and Chotu playing the board
+          member who asks the one you didn't expect.</p>
+      </section>
+
+      <!-- 16. Languages -->
+      <section class="scene langs" id="langs" data-scene="langs">
+        <p class="hud">ROOM 15 · YOUR LANGUAGE</p>
+        <h2 lang="hi">हिंदी में भी। पूरा।</h2>
+        <p class="lede">Hindi and English from day one: notes, practice and answer feedback. Every topic carries its terms in both,
+          like <span lang="hi">राजकोषीय घाटा</span> / fiscal deficit, because the books are in one and the exam may be in the other.</p>
+      </section>
+
+      <!-- 17. Price -->
+      <section class="scene price" id="price" data-scene="price">
+        <p class="hud">ROOM 16 · WHAT IT COSTS</p>
+        <h2>Free to join. Plus if you want more.</h2>
+        <div class="plans" data-reveal>
+          <div class="plan"><b>Free</b><p class="amt">₹0</p>
+            <ul><li>Your pod and the Commons</li><li>The daily review and Chai</li><li>Chotu for everyday doubts</li><li>Your notes, journal, to-dos and sleep</li></ul></div>
+          <div class="plan plus"><b>Plus</b><p class="amt">₹9,999<span>/year</span></p>
+            <p class="offer">First 300 on the website: <b>₹999</b> for the first year.</p>
+            <ul><li>Unlimited answer marking and rewrites</li><li>All mocks, with your mistake types</li><li>Essays in three snaps</li><li>More of Chotu</li></ul></div>
+        </div>
+      </section>
+
+      <!-- 18. Seat -->
+      <section class="scene seat" id="seat" data-scene="seat">
+        <p class="hud">ROOM 17 · YOUR SEAT</p>
+        <h2 id="seat-h">Here's what Chotu knows about you.</h2>
+        <div class="seat-card" data-reveal>
+          <dl id="seat-summary"><dt class="dim">Nothing yet.</dt><dd class="dim">Talk to Chotu as you scroll, or just leave a number.</dd></dl>
+          <form id="seat-form" novalidate>
+            <label for="seat-contact">WhatsApp number or email</label>
+            <input id="seat-contact" name="contact" type="text" autocomplete="tel" placeholder="98765 43210" />
+            <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <label class="tick"><input type="checkbox" id="seat-ok" /> Aspiran can message me about my seat and the app.</label>
+            <button class="btn primary" type="submit" data-umami-event="seat-submit">Save my seat</button>
+            <p class="form-out" id="seat-out" aria-live="polite"></p>
+            <p class="small dim">We keep what you told Chotu on this page to set up your pod and to make Aspiran better.
+              <a href="/privacy">Privacy</a>. Rather talk? <a href={WA} target="_blank" rel="noopener" id="seat-wa">WhatsApp us</a>.</p>
+          </form>
+        </div>
+      </section>
+
+      <section class="scene end" data-scene="end">
+        <Chotu group="final" size={130} />
+        <h2>Prep anywhere else<br />and you'll miss the stars.</h2>
+        <p class="hud dim">END OF THE PAGE. LIKE EVERYTHING HERE, IT ENDS.</p>
+      </section>
+
+      <footer class="foot">
+        <b>Aspiran</b>
+        <nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href={WA} target="_blank" rel="noopener">WhatsApp</a></nav>
+        <p class="small dim">Not affiliated with UPSC. Chotu is an AI and can be wrong. Study content is a draft until our editors check it.</p>
+      </footer>
+    </main>
+
+    <!-- Chotu's dock: walks down the page with the visitor -->
+    <aside class="dock" id="dock" aria-label="Chat with Chotu, an AI" data-open="false">
+      <div class="dock-bubble" id="dock-bubble" hidden></div>
+      <button type="button" class="dock-cup" id="dock-cup" aria-label="Open the chat with Chotu" aria-expanded="false" aria-controls="dock-panel">
+        <Chotu group="dock" size={66} />
+      </button>
+      <div class="dock-panel" id="dock-panel">
+        <div class="dock-head"><b>Chotu</b><span class="ai">AI</span><span class="dim small" id="dock-status">walking with you</span>
+          <button type="button" class="dock-x" id="dock-x" aria-label="Minimise the chat">–</button></div>
+        <div class="dock-log" id="dock-log" aria-live="polite"></div>
+        <div class="dock-chips" id="dock-chips"></div>
+        <form class="dock-form" id="dock-form">
+          <input id="dock-in" type="text" maxlength="500" autocomplete="off" placeholder="Ask Chotu anything" aria-label="Message Chotu" />
+          <button type="submit" class="btn primary sm">Send</button>
+        </form>
+        <p class="dock-note">Chotu is AI and can be wrong. What you tell it here is saved to set up your pod. <a href="/privacy">Privacy</a></p>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    import '../scripts/home.ts';
+  </script>
+</BaseLayout>

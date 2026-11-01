@@ -1,0 +1,35 @@
+/* Chotu animation, shared by the old and new pages. */
+/* Chotu animation */
+.chotu { overflow: visible; display: block; }
+.ch-idle, .ch-gest { transform-box: fill-box; transform-origin: 50% 100%; }
+.ch-idle { animation: breathe 2.6s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.03,.96); } }
+.gst0 { animation: gHop 1.4s ease-in-out; }
+@keyframes gHop { 0% { transform: translateY(0) scale(1.15,.8); } 25% { transform: translateY(-46px) scale(.88,1.18); } 50% { transform: translateY(0) scale(1.18,.78); } 70% { transform: translateY(-18px) scale(.96,1.06); } 100% { transform: translateY(0) scale(1); } }
+.gst1 { animation: gSip 1.8s ease-in-out; }
+@keyframes gSip { 0%,100% { transform: rotate(0); } 30%,70% { transform: rotate(-28deg) translateY(-6px); } }
+.gst2 { animation: gTiny 2s ease-in-out; }
+@keyframes gTiny { 0% { transform: scale(1); } 20%,70% { transform: scale(.4); } 85% { transform: scale(1.2,.85); } 100% { transform: scale(1); } }
+.gst3 { animation: gTall 1.6s ease-in-out; }
+@keyframes gTall { 0% { transform: scale(1); } 30% { transform: scale(.7,1.4); } 50% { transform: scale(1.25,.8); } 70% { transform: scale(.92,1.1); } 100% { transform: scale(1); } }
+.gst4 { animation: gSpin 1.6s ease-in-out; }
+@keyframes gSpin { 0% { transform: rotate(0) translateY(0); } 40% { transform: rotate(360deg) translateY(-30px); } 100% { transform: rotate(720deg) translateY(0); } }
+.gst5 { animation: gJelly 1.4s ease-in-out; }
+@keyframes gJelly { 0%,100% { transform: scale(1); } 15% { transform: scale(1.2,.8); } 30% { transform: scale(.85,1.15); } 45% { transform: scale(1.1,.92); } 60% { transform: scale(.95,1.05); } 80% { transform: scale(1.03,.98); } }
+.gst6 { animation: gBig 2s ease-in-out; }
+@keyframes gBig { 0%,100% { transform: scale(1); } 30%,65% { transform: scale(1.45); } }
+.ch-eye { transform-box: fill-box; transform-origin: 50% 50%; animation: blink 4s infinite; }
+@keyframes blink { 0%,92%,100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+.ch-armL { transform-box: fill-box; transform-origin: 100% 50%; animation: waveL 1.8s ease-in-out infinite; }
+.ch-armR { transform-box: fill-box; transform-origin: 0% 50%; animation: waveR 1.8s ease-in-out .9s infinite; }
+@keyframes waveL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-26deg); } }
+@keyframes waveR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(26deg); } }
+.ch-steam path { transform-box: fill-box; animation: steam 2.4s ease-in-out infinite; opacity: 0; }
+.ch-steam path:nth-child(2) { animation-delay: .6s; }
+.ch-steam path:nth-child(3) { animation-delay: 1.2s; }
+@keyframes steam { 0% { opacity: 0; transform: translateY(8px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-14px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-idle, .ch-gest, .ch-eye, .ch-armL, .ch-armR, .ch-steam path { animation: none !important; }
+  .ch-steam path { opacity: .6; }
+}
