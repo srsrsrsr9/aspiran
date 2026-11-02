@@ -290,7 +290,7 @@ const PREP_TABS = [
 ];
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
-  pod: "pod", rooms: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
+  pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
   prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
@@ -696,8 +696,11 @@ function reviewGrade(q, grade) {
   if (ids.length > 500) ids.sort((a, b) => all[a].f.last.localeCompare(all[b].f.last)).slice(0, ids.length - 500).forEach((id) => delete all[id]);
   store.set("reviews", all);
 }
-const addMiss = (q) => { if (!q.en) return; const m = store.get("misses", []).filter((x) => x.id !== q.id); m.push({ ...q, missedOn: today() }); store.set("misses", m.slice(-300)); reviewGrade(q, F.AGAIN); };
-const gotRight = (q) => { store.set("misses", store.get("misses", []).filter((m) => m.id !== q.id)); reviewGrade(q, F.GOOD); };
+/** Right and total answers per day, kept 120 days: only for the private sleep view in Your room. */
+const logRight = (ok) => { const d = store.get("rightDays", {}), t = today(), x = d[t] ?? [0, 0]; x[0] += ok ? 1 : 0; x[1]++; d[t] = x;
+  store.set("rightDays", Object.fromEntries(Object.entries(d).sort().slice(-120))); };
+const addMiss = (q) => { logRight(false); if (!q.en) return; const m = store.get("misses", []).filter((x) => x.id !== q.id); m.push({ ...q, missedOn: today() }); store.set("misses", m.slice(-300)); reviewGrade(q, F.AGAIN); };
+const gotRight = (q) => { logRight(true); store.set("misses", store.get("misses", []).filter((m) => m.id !== q.id)); reviewGrade(q, F.GOOD); };
 /** Questions due today, the most overdue first. */
 const dueReviews = (day = today()) => Object.values(reviewQueue()).filter((r) => r.f.due <= day).sort((a, b) => a.f.due.localeCompare(b.f.due)).map((r) => r.q);
 const mcqOf = (q) => (hindi() && q.hi ? q.hi : q.en);
@@ -804,11 +807,12 @@ function viewReview() {
     const it = set[i];
     if (it.node) {
       const nd = SY.nodeById(it.node), n = nodes()[it.node];
-      const grade = (g) => { putNode(it.node, MP.check(n, g, day)); i++; draw(); };
+      const grade = (g) => { logRight(g >= F.GOOD); putNode(it.node, MP.check(n, g, day)); i++; draw(); };
       put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${nd.paper.short} · Topic check`),
         h("div.card", h("h2", { style: { marginTop: 0 } }, nd.name),
           h("p", "Close your notes. Say or write the main points from memory, then check them."),
           n.note && h("details", h("summary", "Check against what you wrote when you met it"), h("p", { style: { whiteSpace: "pre-wrap" } }, n.note)),
+          roomNotesFor(it.node),
           h("p.small.muted", "How much came back?"),
           h("div.row", { style: { flexWrap: "wrap" } }, [[F.AGAIN, "Little"], [F.HARD, "Some, with effort"], [F.GOOD, "Most of it"], [F.EASY, "All of it, easily"]]
             .map(([g, l]) => h(g === F.GOOD ? "button.primary" : "button", { onclick: () => grade(g) }, l)))));
@@ -870,7 +874,7 @@ function viewNode(id) {
       h("div.card", h("h3", { style: { marginTop: 0 } }, "2. Close the book and write what you remember"),
         h("p.small.muted", "Then open the book, check, and fix it. This note stays in this browser."), memory,
         h("div", { style: { marginTop: "12px" } }, h("button.primary", { onclick: () => { putNode(id, MP.meet(null, day, memory.value.trim())); render(); } }, "Mark as met"))),
-      back);
+      roomNotesFor(id), back);
   }
   const due = n.f.due <= day;
   const parts = {
@@ -887,6 +891,7 @@ function viewNode(id) {
   return h("div.col", ...head,
     h("div.card", ...parts, due && h("a.btn.primary", { href: "#review" }, "Open the review")),
     n.note && h("details.card", h("summary", "What you wrote when you met it"), h("p", { style: { whiteSpace: "pre-wrap" } }, n.note)),
+    roomNotesFor(id),
     h("div.row.between", back, h("button.ghost", { onclick: () => { if (confirm("Set this topic back to Not started? Its checks start again.")) { putNode(id, null); render(); } } }, "Start this topic again")));
 }
 
@@ -2343,6 +2348,7 @@ function viewMe() {
   const link = (href, title, sub) => h("a.card.link", { href }, h("div.row.between", h("div", h("strong", title), sub && h("div.small.muted", sub)), h("span", "→")));
   return h("div.col", h("h1", p.name),
     link("#profile", "Profile", "What the app knows about you, where it's kept, and how to delete it"),
+    link("#room", "Your room", "Sleep, notes, to-dos and your journal. Private, never scored, yours to download"),
     link("#rhythm", "Rhythm", "The days you closed. No streaks."),
     link("#stamps", "Stamp book", `${Object.keys(s).length ? Object.keys(s).length + (Object.keys(s).length === 1 ? " stamp" : " stamps") + " so far" : "Stamps for showing up, helping and more"}. None can be lost.`),
     link("#privacy", "Privacy", "Pause, Smarter Chotu, result-day mode, download or delete"),
@@ -2389,6 +2395,99 @@ function viewProfile() {
       notes.length === 0 && h("p.muted", "No notes. In Chotu, tap “Let Chotu remember this” under something you said."),
       notes.map((n) => h("div.task", h("div.grow", n.text), h("button.ghost.small", { onclick: () => { P.deleteMemory(n.id); render(); } }, "Delete")))),
     h("p.small.muted", "Deleting something here means the app forgets it, including that it ever asked."));
+}
+
+// --- Your room (teaching plan, step 4) ---------------------------------------------------------------
+// Sleep, notes, to-dos and the journal. Private: nothing here goes to the pod, to marketing or to an AI, and nothing
+// is scored. Sleep never gets a streak or a comparison; after three weeks it shows your own review accuracy by sleep.
+
+const SLEEP_H = [[5, "5 or less"], [6, "About 6"], [7, "About 7"], [8, "8 or more"]];
+const SLEEP_FELT = [["rested", "Rested"], ["okay", "Okay"], ["tired", "Tired"]];
+const roomNotes = () => store.get("roomNotes", []);
+const roomTodos = () => store.get("todos", []);
+const nodeMatch = (text) => {
+  const words = text.toLowerCase().match(/[a-z]{5,}/g)?.filter((w) => !["revise", "revision", "chapter", "notes", "today", "finish", "write", "about", "practice"].includes(w)) ?? [];
+  return words.length ? SY.NODES.find((nd) => words.some((w) => nd.name.toLowerCase().includes(w))) ?? null : null;
+};
+function roomNotesFor(nodeId) {
+  const mine = roomNotes().filter((n) => n.node === nodeId);
+  return mine.length > 0 && h("details.card", { open: true }, h("summary", `Your notes on this (${mine.length})`),
+    mine.slice(-5).map((n) => h("p", { style: { whiteSpace: "pre-wrap" } }, n.text)));
+}
+function sleepInsight() {
+  const sl = store.get("sleep", {}), rd = store.get("rightDays", {});
+  if (Object.keys(sl).length < 21) return h("p.small.muted", `After three weeks of mornings (${Object.keys(sl).length} so far), this shows your own review accuracy after short and long nights. Only you see it.`);
+  const sum = (test) => Object.entries(sl).filter(([d, x]) => test(x.h) && rd[d]?.[1] >= 3).reduce((a, [d]) => [a[0] + rd[d][0], a[1] + rd[d][1], a[2] + 1], [0, 0, 0]);
+  const short = sum((v) => v <= 5), long = sum((v) => v >= 7);
+  if (short[2] < 5 || long[2] < 5) return h("p.small.muted", "Not enough days yet on both sides (5 or more after short nights and after long ones, with some review done) to compare.");
+  return h("p", `Your answers on days after under 6 hours: ${Math.round(100 * short[0] / short[1])}% right. After 7 or more: ${Math.round(100 * long[0] / long[1])}%. Your own data, over ${short[2] + long[2]} days.`);
+}
+function viewRoom() {
+  const day = today(), sleep = store.get("sleep", {}), last = sleep[day] ?? {};
+  const setSleep = (k, v) => { const all = store.get("sleep", {}); all[day] = { ...(all[day] ?? {}), [k]: v }; store.set("sleep", Object.fromEntries(Object.entries(all).sort().slice(-400))); render(); };
+  // Notes: typed or dictated, optionally pinned to a syllabus topic; a pinned note comes back with that topic.
+  const noteText = h("textarea", { rows: 4, placeholder: "A note in your own words", style: { fontFamily: "var(--read-font)", fontSize: "17px" } });
+  const pin = h("input", { list: "room-nodes", style: { width: "100%" }, placeholder: "Pin to a syllabus topic (optional)" });
+  const nodeList = h("datalist", { id: "room-nodes" }, SY.NODES.map((nd) => h("option", { value: nd.name })));
+  const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const dictate = Speech && h("button", { onclick: () => {
+    const r = new Speech(); r.lang = lang() === "hi" ? "hi-IN" : "en-IN"; r.interimResults = false;
+    r.onresult = (e) => { noteText.value = (noteText.value + " " + [...e.results].map((x) => x[0].transcript).join(" ")).trim(); };
+    r.onend = () => { dictate.textContent = "Speak a note"; };
+    dictate.textContent = "Listening… (tap Stop when done)"; r.start();
+    dictate.onclick = () => r.stop();
+  } }, "Speak a note");
+  const care = h("div");
+  noteText.addEventListener("input", () => put(care, distress(noteText.value) ? careBox() : null));
+  const addNote = () => {
+    const text = noteText.value.trim(); if (!text) return;
+    const node = SY.NODES.find((nd) => nd.name === pin.value.trim())?.id ?? null;
+    store.set("roomNotes", [...roomNotes(), { id: Date.now().toString(36), at: day, text: text.slice(0, 4000), node }].slice(-1000)); render();
+  };
+  // To-dos: your list, separate from the plan. No due dates, so nothing is ever overdue.
+  const todoIn = h("input", { placeholder: "Something for you to do", maxLength: 160, style: { flex: "1" }, onkeydown: (e) => { if (e.key === "Enter") addTodo(); } });
+  const addTodo = () => { const t = todoIn.value.trim(); if (!t) return; store.set("todos", [...roomTodos(), { id: Date.now().toString(36), text: t, done: false }].slice(-300)); render(); };
+  const setTodo = (id, patch) => { store.set("todos", roomTodos().map((x) => (x.id === id ? { ...x, ...patch } : x))); render(); };
+  const todos = roomTodos(), open = todos.filter((x) => !x.done), done = todos.filter((x) => x.done);
+  const todoRow = (x) => {
+    const match = !x.node && !x.offered && nodeMatch(x.text);
+    return h("div.task", h("label.grow", h("input", { type: "checkbox", checked: x.done, onchange: (e) => setTodo(x.id, { done: e.target.checked }) }), " ", x.text,
+        x.node && h("a.small", { href: "#map/" + x.node, style: { marginLeft: "8px" } }, "· " + (SY.nodeById(x.node)?.name ?? "topic"))),
+      match && h("span.small", "Link to “", match.name, "”? ", h("button.ghost.small", { onclick: () => setTodo(x.id, { node: match.id, offered: true }) }, "Yes"), h("button.ghost.small", { onclick: () => setTodo(x.id, { offered: true }) }, "No")),
+      h("button.ghost.small", { onclick: () => { store.set("todos", roomTodos().filter((y) => y.id !== x.id)); render(); }, "aria-label": "Delete" }, "×"));
+  };
+  const journalN = Object.keys(store.get("journal", {})).length;
+  const journalBox = h("div");
+  const notes = roomNotes();
+  return h("div.col", h("h1", "Your room"),
+    h("p.muted", "Only you see this. Nothing here goes to your pod, to marketing or to any AI, and nothing is scored."),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Last night's sleep"),
+      h("div.chips", SLEEP_H.map(([v, l]) => h("button.chip", { "aria-pressed": String(last.h === v), onclick: () => setSleep("h", v) }, l))),
+      h("div.chips", SLEEP_FELT.map(([v, l]) => h("button.chip", { "aria-pressed": String(last.felt === v), onclick: () => setSleep("felt", v) }, l))),
+      h("p.small.muted", "Sleep over weeks matters more for exams than the night before. One tap in the morning is enough."),
+      sleepInsight()),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Notes"),
+      h("p.small.muted", "Pin a note to a syllabus topic and it comes back with that topic in your review."),
+      noteText, care, pin, nodeList, h("div.row", h("button.primary", { onclick: addNote }, "Save the note"), dictate),
+      notes.length > 0 && h("div", notes.slice().reverse().slice(0, 30).map((n) => h("div.task",
+        h("div.grow", h("div", { style: { whiteSpace: "pre-wrap" } }, n.text), h("div.small.muted", n.at, n.node ? h("span", " · ", h("a", { href: "#map/" + n.node }, SY.nodeById(n.node)?.name ?? "topic")) : null)),
+        h("button.ghost.small", { onclick: () => { if (confirm("Delete this note?")) { store.set("roomNotes", roomNotes().filter((x) => x.id !== n.id)); render(); } } }, "Delete"))))),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "To-dos"),
+      h("p.small.muted", "Your own list, apart from the plan. No dates, so nothing is ever overdue."),
+      h("div.row", todoIn, h("button", { onclick: addTodo }, "Add")),
+      open.map(todoRow),
+      done.length > 0 && h("details", h("summary.small", `Done (${done.length})`), done.slice(-30).map(todoRow))),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Journal"),
+      h("p.small", journalN ? `${journalN} entr${journalN === 1 ? "y" : "ies"}, encrypted on this device. You write them when you close the day.` : "You can write a few lines when you close the day. It's encrypted on this device."),
+      h("p.small.muted", "Nobody reads it, and no AI. If you write something that sounds like you're in danger, the app shows you people who can help; that's all it does."),
+      h("div.row", h("a.btn", { href: "#close" }, "Close the day"), journalN > 0 && h("button", { onclick: async () => {
+        const all = store.get("journal", {}), rows = [];
+        for (const [d, sealed] of Object.entries(all).sort().reverse().slice(0, 30)) { const e = await vault.open(sealed).catch(() => null); if (e) rows.push([d, e]); }
+        put(journalBox, rows.map(([d, e]) => h("div.task", h("div.grow", h("div.small.muted", d), [e.memory, e.after && "After: " + e.after, e.step && "Next: " + e.step, e.block && "In the way: " + e.block].filter(Boolean).map((t) => h("div", t))))));
+      } }, "Read my journal")), journalBox),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Take it with you"),
+      h("p.small", "Download everything in your room and the rest of the app as one file, any time. Your work is yours."),
+      h("button", { onclick: exportData }, "Download my data")));
 }
 
 function viewRhythm() {
@@ -2450,7 +2549,7 @@ async function exportData() {
   out.profileFields = P.fields(); out.chotuNotes = P.memory();
   const memberId = profile()?.memberId;
   if (memberId) out.server = await fetch("/privacy/export", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId }) }).then((r) => r.json()).catch(() => "Couldn't reach the server; try again when online.");
-  const a = h("a", { href: URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: "application/json" })), download: `upsc-pods-${today()}.json` });
+  const a = h("a", { href: URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: "application/json" })), download: `aspiran-${today()}.json` });
   document.body.append(a); a.click(); a.remove();
 }
 async function deleteData() {
@@ -3400,7 +3499,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, room: viewRoom,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
