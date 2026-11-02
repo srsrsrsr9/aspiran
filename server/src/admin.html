@@ -399,7 +399,7 @@ views.safety = async () => {
 views.members = async () => {
   const q = views.members.q || "";
   const aq = views.members.aq || "";
-  const [list, accounts] = await Promise.all([api("members?q=" + encodeURIComponent(q)), api("accounts?q=" + encodeURIComponent(aq))]);
+  const [list, accounts, merges] = await Promise.all([api("members?q=" + encodeURIComponent(q)), api("accounts?q=" + encodeURIComponent(aq)), api("pod-merges").catch(() => [])]);
   const statusChip = (a) => a.status === "active" ? h("span.chip.ok", {}, "active") : h("span.chip.bad", { title: a.status_reason || "" }, "suspended");
   return [h("h2", {}, "Members"),
     h("h3", {}, "Sign-in accounts"),
@@ -417,6 +417,17 @@ views.members = async () => {
           : h("button", { onclick: () => accountDialog(a, "restore") }, "Restore…"),
           " ", h("button", { onclick: () => accountHistoryDialog(a) }, "History"),
           a.provider === "password" ? [" ", h("button", { onclick: () => resetPasswordDialog(a) }, "Reset password…")] : null)))) : h("p.muted", {}, aq ? "No account matches." : "No one has signed in yet.")),
+    h("h3", {}, "Pods to join up"),
+    h("p.lead", {}, "Every Monday the app pairs pods where fewer than 3 people posted that week with another thin pod of the same stage and language. Nothing moves until you approve. Approving tells both pods; the move happens 3 days later, and anyone who taps \"Keep me here\" stays."),
+    h("div.card.scroll", {}, merges.length ? h("table", {}, h("tr", {}, h("th", {}, "Move"), h("th", {}, "Into"), h("th", {}, "Why"), h("th", {}, "State"), h("th", {}, "")),
+      merges.map((g) => h("tr", {},
+        h("td", {}, h("span.mono", {}, g.from_pod), h("div.muted", {}, `${g.from_size ?? 0} members · ${g.from_bucket ?? ""}`)),
+        h("td", {}, h("span.mono", {}, g.to_pod), h("div.muted", {}, `${g.to_size ?? 0} members · ${g.to_bucket ?? ""}`)),
+        h("td.muted", {}, g.reason || ""),
+        h("td", {}, h("span.chip" + (g.status === "approved" ? ".ok" : ""), {}, g.status === "approved" ? `approved, joins ${g.merge_on}` : g.status), g.staying ? h("div.muted", {}, `${g.staying} staying`) : null, g.decided_by ? h("div.muted", {}, g.decided_by) : null),
+        h("td", {}, g.status === "proposed" ? [
+          h("button.primary", { onclick: () => act(() => api(`pod-merges/${g.id}/approve`, { body: {} }), "Approved. Both pods are told now.") }, "Approve"), " ",
+          h("button", { onclick: () => act(() => api(`pod-merges/${g.id}/drop`, { body: {} }), "Dropped") }, "Drop")] : null)))) : h("p.muted", {}, "No proposals. They appear after Monday's match when two pods are thin.")),
     h("h3", {}, "Pod members"),
     h("p.lead", {}, "Pod membership by member id, their pod, and when they joined. Their journal, mood and progress never leave their phone."),
     h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Member id or pod id", value: q, onchange: (e) => { views.members.q = e.target.value; show("members"); } })),

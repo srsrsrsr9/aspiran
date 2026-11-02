@@ -132,6 +132,18 @@ async function loadAll() {
 }
 const libraryOf = (kind) => (data.library?.items ?? []).filter((i) => i.kind === kind);
 
+/**
+ * Pause lines (content kind "pause-lines"): one short line at a moment that matters, shown the first time only (and
+ * for the rest of that visit, so a redraw doesn't hide it). Quiet when the lines aren't approved yet.
+ */
+const pauseNow = new Set();
+function pauseLine(key) {
+  const line = libraryOf("pause-lines").flatMap((i) => i.data.lines ?? []).find((l) => l.key === key);
+  if (!line || (store.get("pause:" + key) && !pauseNow.has(key))) return null;
+  store.set("pause:" + key, today()); pauseNow.add(key);
+  return h("p.small.pause", bi(line));
+}
+
 // --- Profile and the day -----------------------------------------------------------------------
 
 const profile = () => store.get("profile");
@@ -291,10 +303,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -629,7 +641,7 @@ function viewChai(arg) {
   if (i === items.length) {
     if (!dayState().done.includes("CHAI")) { M.track("chai_read", { cards: items.length }); rateAfter("chai"); }
     markDone("CHAI");
-    return h("div.col.center", h("h1", "That's today's Chai."), h("p.muted", `${items.length} cards. See you tomorrow morning.`),
+    return h("div.col.center", h("h1", "That's today's Chai."), pauseLine("news-enough"), h("p.muted", `${items.length} cards. See you tomorrow morning.`),
       h("div.row", { style: { justifyContent: "center" } }, h("a.btn.primary", { href: "#prelims" }, "Prelims practice"), h("a.btn", { href: "#today" }, "Today")));
   }
   const it = items[i], t = cardText(it);
@@ -735,6 +747,12 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
+    h("h2", "Away from the screen"),
+    h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", "Earphones in: the device voice names a topic or reads a card, you say three points aloud.")), h("span", "→"))),
+    h("a.card.link", { href: "#print" }, h("div.row.between", h("div", h("strong", "Print this week's set"), h("div.small.muted", "A recall card, a mixed CSAT set and your own one-pagers, on paper.")), h("span", "→"))),
+    h("h2", "Optional and terms"),
+    h("a.card.link", { href: "#optional" }, h("div.row.between", h("div", h("strong", "Optional subject"), h("div.small.muted", libraryOf("optional-node").length ? `${[...new Set(libraryOf("optional-node").map((i) => i.data.optional))].map(optName).join(", ")}: topic by topic.` : "Opens once optional topics are approved.")), h("span", "→"))),
+    h("a.card.link", { href: "#terms" }, h("div.row.between", h("div", h("strong", "English–Hindi terms"), h("div.small.muted", libraryOf("terms").length ? `${libraryOf("terms").reduce((n, i) => n + (i.data.terms?.length ?? 0), 0)} terms with meanings.` : "Opens once the term lists are approved.")), h("span", "→"))),
     h("h2", "Go deeper"), X.toolsStrip(),
     h("p.small", h("a", { href: "#upgrade" }, "See everything in Plus →")));
 }
@@ -828,7 +846,7 @@ function viewReview() {
     next.disabled = true;
   };
   draw();
-  return h("div.col", h("h1", "Review"), h("p.small.muted", "Recall first. Nothing here is scored or shared."), box);
+  return h("div.col", h("h1", "Review"), pauseLine("first-review"), h("p.small.muted", "Recall first. Nothing here is scored or shared. It works offline too: everything due is on this device."), box);
 }
 
 // --- Syllabus map (teaching plan, build step 2) ------------------------------------------------------
@@ -853,6 +871,7 @@ function viewMap(arg) {
   const cur = papers.find((p) => p.id === store.get("mapPaper")) ?? papers[0];
   return h("div.col",
     h("h1", "Your syllabus map"),
+    pauseLine("syllabus-first-open"),
     h("p.muted", "Every topic in the official syllabus. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this."),
     h("p.small", mapLine()),
     h("div.chips", papers.map((p) => h("button.chip", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); } }, p.short))),
@@ -1018,7 +1037,7 @@ function viewMains() {
   }
 
   draw();
-  return h("div.col", h("h1", "Mains answer"), h("p.small.muted", topic), profileAsk("mains"),
+  return h("div.col", h("h1", "Mains answer"), pauseLine("first-mains"), h("p.small.muted", topic), profileAsk("mains"),
     h("div.card.soft", h("strong", prompt)),
     box);
 }
@@ -1033,7 +1052,7 @@ const SNAPS = [
 
 function viewEssay(arg) {
   const essays = libraryOf("essay");
-  if (!arg) return h("div.col", h("h1", "Essays in three snaps"),
+  if (!arg) return h("div.col", h("h1", "Essays in three snaps"), pauseLine("essay-first-snap"),
     h("p", "Each essay goes in three sittings: a skeleton, then an outline, then the essay. You write each snap first, then compare it with the guide. Do them on different days if you like."),
     essays.length === 0 && h("p.muted", "Essay topics appear here once an English and a Hindi editor approve them."),
     essays.map((e) => { const st = store.get("essay:" + e.id, {}); const doneN = SNAPS.filter((x) => st["s" + x.n + "done"]).length;
@@ -1097,7 +1116,7 @@ function viewCaseFile(arg) {
   const gaps = nodes.filter((nd) => !mine.some((x) => x.node === nd.id));
   const row = (x) => h("div.task", h("div.grow", h("div", x.example), h("div.small.muted", `${x.day} · from “${x.from}”`)),
     h("button.ghost.small", { onclick: () => { if (confirm("Remove this example?")) { store.set("caseFile", caseFile().filter((y) => y.id !== x.id)); render(); } } }, "Remove"));
-  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Your case file"),
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Your case file"), pauseLine("keep-for-mains"),
     h("p.muted", "Examples you kept from Chai, by paper and topic, for your Mains answers. Only you see this."),
     h("div.chips", CASE_PAPERS.map((p) => h("a.chip", { href: "#casefile/" + p, "aria-pressed": String(p === paper) }, `${p} (${all.filter((x) => x.paper === p).length})`))),
     mine.length === 0 && h("p", "Nothing kept for this paper yet. On a Chai card, tap Keep for Mains."),
@@ -1145,7 +1164,7 @@ function viewProgress() {
     ["Your first mock interview", boards[0]], ["Ten examples in your case file", caseFile().map((x) => x.day).sort()[9]]];
   const ty = P.value("target_year");
   const weeks = /^\d{4}$/.test(ty ?? "") ? Math.round((Date.parse(`${ty}-05-25`) - Date.now()) / (7 * 86400_000)) : null;
-  return h("div.col", h("h1", "You vs. you"),
+  return h("div.col", h("h1", "You vs. you"), pauseLine("you-vs-you"),
     h("p.muted", "Only against your own past. No ranks, no cut-offs, nobody else's numbers."),
     weeks != null && weeks > 0 && h("p", `Prelims ${ty} is about ${weeks} weeks away (UPSC usually holds it in late May; check the official calendar).`),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Your syllabus map"), h("p", `${counts.met} Met · ${counts.recall} Can recall · ${counts.use} Can use, out of ${SY.NODES.length} topics.`)),
@@ -1177,6 +1196,159 @@ function ivPlan(qs, daf, seed) {
     if (q) { out.push(q); seen.add(p + q.group); }
   }
   return out.map((q) => q.id);
+}
+
+// --- Off-screen study (teaching plan §6): walk mode, the weekly print set, and the review that works offline ----
+
+/**
+ * Walk mode: the device voice reads a Chai card or names a due topic, then waits while you say three points aloud.
+ * Starts only on a tap and moves on only on a tap. Nothing is recorded or sent.
+ */
+function walkSteps() {
+  const topics = reviewItems().filter((x) => x.node).slice(0, 5).map(({ node }) => {
+    const nd = SY.nodeById(node);
+    return { title: nd.name, kind: "Topic", say: hindi() ? `विषय: ${nd.name}। इसके बारे में जो तीन बातें याद हैं, बोलकर कहिए।` : `Topic: ${nd.name}. Say three things you remember about it.`, node };
+  });
+  const cards = (data.brief?.items ?? []).filter((it) => it.tone !== "tragic").slice(0, 5).map((it) => {
+    const t = cardText(it);
+    return { title: t.headline, kind: "Chai", say: [t.headline, t.summary].filter(Boolean).join(". "), lang: t.lang };
+  });
+  return [...topics, ...cards].slice(0, 8);
+}
+function viewWalk() {
+  const steps = walkSteps();
+  const can = "speechSynthesis" in window;
+  if (!steps.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Walk mode"), h("p", "Nothing to walk through yet: no topics due and no Chai cards today."));
+  let i = 0, phase = "ready";
+  const box = h("div");
+  const speak = (text, lng) => new Promise((res) => {
+    if (!can) return res();
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = (lng ?? lang()) === "hi" ? "hi-IN" : "en-IN";
+    u.onend = u.onerror = res;
+    speechSynthesis.speak(u);
+    // Some browsers never fire onend (no voice installed): move on after roughly the time it takes to say it.
+    setTimeout(res, 3000 + text.split(/\s+/).length * 450);
+  });
+  cleanup.push(() => can && speechSynthesis.cancel());
+  const play = async () => {
+    const s = steps[i];
+    phase = "speaking"; draw();
+    await speak(s.kind === "Chai" ? `${s.say}. ${hindi() ? "अब इसकी तीन बातें बोलकर कहिए।" : "Now say three points from that, aloud."}` : s.say, s.lang);
+    if (phase === "speaking") { phase = "say"; draw(); }
+  };
+  const draw = () => {
+    if (i >= steps.length) return put(box, h("div.card", h("h2", "That's the walk."), h("p", "Saying it aloud is recall. The topics still come back in your review when they're due."), h("a.btn.primary", { href: "#today" }, "Back to Today")));
+    const s = steps[i];
+    put(box, h("div.small.muted", `${i + 1} of ${steps.length} · ${s.kind}`),
+      h("div.card", h("h2", { style: { marginTop: 0 } }, s.title),
+        phase === "ready" && h("button.primary", { onclick: play }, can ? "▶ Play" : "Show"),
+        phase === "speaking" && h("p.muted", "Reading aloud…"),
+        (phase === "say" || !can && phase !== "ready") && h("p", h("strong", "Your turn. "), "Say three points aloud. No need to be right; it's the trying that helps."),
+        s.kind === "Chai" && !can && h("p", s.say),
+        phase !== "ready" && h("div.row", h("button.ghost", { onclick: play }, "Again"), h("button.primary", { onclick: () => { if (can) speechSynthesis.cancel(); i++; phase = "ready"; draw(); if (i < steps.length) play(); } }, "Next"))));
+  };
+  draw();
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Walk mode"), pauseLine("walk-mode"),
+    h("p.muted", "Put in earphones and walk. The device voice reads a card or names a topic, then waits while you say three points out loud. It starts when you tap Play, and moves on only when you tap Next. Nothing is recorded."),
+    !can && h("p.small", "This browser has no voice, so the text is shown instead."), box);
+}
+
+/** The weekly print set: a recall card, a mixed CSAT set, and your own one-pagers. Opens a print-ready page. */
+const escHtml = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+function printSet(parts) {
+  const week = today();
+  const recall = Object.entries(nodes()).filter(([id, n]) => SY.nodeById(id) && n.f?.due && n.f.due <= addDays(week, 7)).sort((a, b) => a[1].f.due.localeCompare(b[1].f.due)).slice(0, 10).map(([id]) => SY.nodeById(id).name);
+  const misses = dueReviews(addDays(week, 7)).slice(0, 10 - recall.length).map((q) => (q.en ? mcqOf(q) : q)?.question ?? "").filter(Boolean);
+  const csat = libraryOf("mock").map(paperFrom).filter((p) => /csat/i.test(p.paper ?? p.title)).flatMap((p) => p.questions.map(mcqOf)).filter((q) => q?.options?.length);
+  const pickN = (arr, n) => arr.map((x) => [Math.random(), x]).sort((a, b) => a[0] - b[0]).slice(0, n).map((x) => x[1]);
+  const set = pickN(csat, 10);
+  const pagers = Object.entries(nodes()).filter(([id, n]) => SY.nodeById(id) && n.note).map(([id, n]) => ({ name: SY.nodeById(id).name, paper: SY.nodeById(id).paper.short, note: n.note }));
+  const foot = `<footer>Aspiran · aspiran.in · free to print and share · ${escHtml(week)}</footer>`;
+  const pages = [];
+  if (parts.recall) pages.push(`<section><h1>10 things to recall this week</h1><p class="m">Cover the page below each line and say or write what you remember. Then check in your notes.</p><ol>${[...recall, ...misses].map((x) => `<li>${escHtml(x)}<div class="blank"></div></li>`).join("") || "<li>Nothing due yet. Mark topics as met on your syllabus map and they appear here.</li>"}</ol>${foot}</section>`);
+  if (parts.csat && set.length) {
+    pages.push(`<section><h1>CSAT set, mixed</h1><p class="m">Mixed types on purpose: it feels harder, and that's part of why it works. Answers are on the last page.</p><ol>${set.map((q) => `<li><p>${escHtml(q.question)}</p><ol type="a">${q.options.map((o) => `<li>${escHtml(o)}</li>`).join("")}</ol></li>`).join("")}</ol>${foot}</section>`);
+    pages.push(`<section><h1>Answers</h1><ol>${set.map((q) => `<li><b>${"abcd"[q.answerIndex] ?? ""}</b> ${escHtml(q.explanation ?? "")}</li>`).join("")}</ol>${foot}</section>`);
+  }
+  if (parts.pagers) pages.push(...(pagers.length ? pagers : [{ name: "Your one-pagers", paper: "", note: "When you meet a topic on your syllabus map and write your note, it can be printed here as your own booklet." }])
+    .map((p) => `<section><h1>${escHtml(p.name)}</h1><p class="m">${escHtml(p.paper)} · your own words</p><div class="note">${escHtml(p.note)}</div>${foot}</section>`));
+  const w = window.open("", "_blank");
+  if (!w) return alert("Your browser blocked the print page. Allow pop-ups for this site and try again.");
+  w.document.write(`<!doctype html><html lang="${lang()}"><head><meta charset="utf-8"><title>Aspiran print set ${escHtml(week)}</title><style>
+    body{font:12pt/1.5 Georgia,"Noto Serif","Noto Serif Devanagari",serif;color:#000;margin:0 auto;max-width:720px;padding:16px}
+    h1{font-size:18pt;margin:0 0 4px}.m{color:#444;font-style:italic}section{page-break-after:always;position:relative;min-height:90vh}
+    .blank{border-bottom:1px dotted #999;height:28px}.note{white-space:pre-wrap}li{margin:6px 0}
+    footer{position:absolute;bottom:0;font:9pt system-ui,sans-serif;color:#555}@media screen{section{border-bottom:1px solid #ccc;margin-bottom:24px;min-height:0}footer{position:static;margin-top:16px}}
+  </style></head><body>${pages.join("")}<script>setTimeout(()=>print(),300)<\/script></body></html>`);
+  w.document.close();
+}
+function viewPrint() {
+  const csat = libraryOf("mock").some((i) => /csat/i.test(i.data.paper ?? bi(i.data.title)));
+  const parts = { recall: true, csat, pagers: false };
+  const box = (k, label, note, off) => h("label.card.row", { style: { alignItems: "flex-start", gap: "10px" } },
+    h("input", { type: "checkbox", checked: parts[k], disabled: off, onchange: (e) => { parts[k] = e.target.checked; } }), h("div", h("strong", label), h("div.small.muted", note)));
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Print this week's set"), pauseLine("print-set"),
+    h("p.muted", "Some of the best revision happens on paper, on a bus. Pick what goes in, then print or save it as a PDF. A small Aspiran line sits in the footer, so it's fine to share."),
+    box("recall", "10 things to recall", "Topics coming back this week and questions you missed, one line each, with room to write."),
+    box("csat", "CSAT set, mixed", csat ? "Ten questions of mixed types, with the answers on a separate last page." : "Opens once checked CSAT questions are in the library.", !csat),
+    box("pagers", "Your one-pagers", "The notes you wrote when you met each topic, one per page: your own booklet for the last weeks."),
+    h("button.primary", { onclick: () => printSet(parts) }, "Open the print page"));
+}
+
+// --- Optional subjects (content kind "optional-node") and term lists ("terms") -------------------------------
+
+const OPTIONAL_NAMES = { geography: "Geography", sociology: "Sociology", anthropology: "Anthropology", psir: "Political Science and IR", history: "History", "public-administration": "Public Administration" };
+const optName = (k) => OPTIONAL_NAMES[k] ?? k.replace(/-/g, " ").replace(/^./, (c) => c.toUpperCase());
+function viewOptional(arg) {
+  const all = libraryOf("optional-node").map((i) => i.data).filter((d) => d.optional);
+  const [subject, nodeId] = String(arg ?? "").split("/");
+  const subjects = [...new Set(all.map((d) => d.optional))].sort();
+  const back = (href, label) => h("a", { href }, "← " + label);
+  if (!subject) return h("div.col", back("#practice", "Practice"), h("h1", "Optional subject"),
+    h("p.muted", "Topic by topic: why it matters, a note to read, questions to write, and things to recall. The same order as the GS topics."),
+    subjects.length ? subjects.map((k) => h("a.card.link", { href: "#optional/" + k }, h("div.row.between", h("div", h("strong", optName(k)), h("div.small.muted", `${all.filter((d) => d.optional === k).length} topics so far`)), h("span", "→"))))
+      : h("p", "Optional topics appear here once an editor approves them."));
+  const mine = all.filter((d) => d.optional === subject).sort((a, b) => (a.paper - b.paper) || a.id.localeCompare(b.id));
+  const titleOf = (d) => bi(d.title) || bi(d.onePagerPrompts)?.[0]?.replace(/\.$/, "") || d.id;
+  if (!nodeId) return h("div.col", back("#optional", "Optional subject"), h("h1", optName(subject)),
+    [1, 2].map((p) => mine.some((d) => d.paper === p) && h("div", h("h2", `Paper ${p}`),
+      mine.filter((d) => d.paper === p).map((d) => h("a.card.link", { href: `#optional/${subject}/${d.id}` }, h("div.row.between", h("div", h("strong", titleOf(d)), h("div.small.muted", `${d.practiceQuestions?.length ?? 0} questions · ${d.recall?.length ?? 0} to recall`)), h("span", "→")))))));
+  const d = mine.find((x) => x.id === nodeId);
+  if (!d) return h("div.col", back("#optional/" + subject, optName(subject)), h("p", "That topic isn't here."));
+  const note = bi(d.note);
+  return h("div.col", back("#optional/" + subject, optName(subject)), h("h1", titleOf(d)), h("p.small.muted", `${optName(subject)} · Paper ${d.paper}`),
+    pauseLine("pyq-first"),
+    d.practiceQuestions?.length && h("div.card", h("h2", { style: { marginTop: 0 } }, "What they ask"),
+      d.practiceQuestions.map((q) => h("p", bi(q.q), h("span.small.muted", ` · ${q.marks} marks, ${q.words} words${q.isPYQ ? " · past paper" : ""}`))),
+      h("p.small.muted", "Write one on paper, then mark it yourself in Mains answer.")),
+    d.why && h("div.card.soft", h("strong", "Why it matters"), h("p", bi(d.why))),
+    note && h("div.card", h("div.row.between", h("h2", { style: { marginTop: 0 } }, "The note"), readAloud(note, lang())), h("div", { style: { whiteSpace: "pre-wrap", fontFamily: "var(--read-font)" } }, note)),
+    d.diagram && h("div.card.soft", h("strong", "Draw this"), h("p", bi(d.diagram))),
+    d.thinkers?.length && h("div.card", h("strong", "Thinkers"), d.thinkers.map((t) => h("p", h("strong", t.name + ": "), bi(t.idea)))),
+    d.examples?.length && h("div.card", h("strong", "Examples to use"), d.examples.map((x) => h("p", bi(x), x.source && h("span.small.muted", ` (${x.source})`)))),
+    d.recall?.length && h("div.card", h("strong", "Recall: say it, then check"), d.recall.map((r) => h("details", h("summary", bi(r.q)), h("p", bi(r.a))))),
+    bi(d.onePagerPrompts)?.length && h("div.card.soft", pauseLine("one-pager-memory"), h("strong", "Your one-pager, from memory"), h("ol", bi(d.onePagerPrompts).map((x) => h("li", x)))));
+}
+
+function viewTerms(arg) {
+  const lists = libraryOf("terms").map((i) => i.data).filter((d) => d.terms?.length);
+  const subject = arg && lists.some((d) => d.subject === arg) ? arg : "";
+  const q = h("input", { type: "search", placeholder: "Search in English or Hindi", value: viewTerms.q ?? "" });
+  const box = h("div");
+  const draw = () => {
+    const needle = q.value.trim().toLowerCase(); viewTerms.q = q.value;
+    const rows = lists.filter((d) => !subject || d.subject === subject).flatMap((d) => d.terms.map((t) => ({ ...t, subject: d.subject })))
+      .filter((t) => !needle || [t.en, t.hi, t.hiAlt, t.meaning?.en, t.meaning?.hi].some((x) => x && x.toLowerCase().includes(needle)));
+    put(box, rows.length ? rows.slice(0, 300).map((t) => h("div.card", h("div.row.between", h("strong", t.en), h("strong", { lang: "hi" }, t.hi + (t.hiAlt ? ` / ${t.hiAlt}` : ""))), t.meaning && h("p.small", bi(t.meaning))))
+      : h("p.muted", lists.length ? "No term matches." : "Term lists appear here once an editor approves them."));
+  };
+  q.addEventListener("input", draw); draw();
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "English–Hindi terms"), pauseLine("hindi-medium"),
+    h("p.muted", "The words examiners expect, in both languages, with a one-line meaning. Useful whichever medium you write in."),
+    lists.length > 1 && h("div.row", h("a.btn" + (subject ? "" : ".primary"), { href: "#terms" }, "All"), lists.map((d) => h("a.btn" + (subject === d.subject ? ".primary" : ""), { href: "#terms/" + d.subject }, d.subject.replace(/-/g, " ")))),
+    q, box);
 }
 
 function viewInterview(arg) {
@@ -1287,7 +1459,7 @@ function viewMock(arg) {
     h("div.grow", h("strong", p.title), h("div.small.muted", `${p.questions.length} questions · ${p.countUp ? `about ${p.minutes} min suggested, no countdown` : `${p.minutes} min`} · +${p.marking.right} / ${p.marking.wrong} per question`),
       p.checked && h("div.small", `Checked by ${p.checked.checkedBy}, ${p.checked.checkedOn} ✓`), p.note && h("div.small.muted", p.note)),
     h("button.primary", { onclick: () => mockStart(p) }, "Start")));
-  return h("div.col", h("h1", "Mock papers"),
+  return h("div.col", h("h1", "Mock papers"), pauseLine("first-mock-start"),
     h("p.muted", "Timed, with negative marking. Full screen, and your blocklist stays closed until you submit."),
     papers.map(startCard),
     quick ? startCard(quick) : h("p.small.muted", "A quick mock appears once there are 10 or more checked questions."),
@@ -1783,9 +1955,10 @@ function viewRooms(arg) {
 // per-person progress. 🙏 thanks are never shown as counts on people.
 
 const pod = { ws: null, podId: null, summary: store.get("podSummary"), messages: [], online: [], room: null, lead: null, youAreLead: false, priv: [],
-  care: false, status: "off", error: null, goal: null, quiz: null, quizMine: {}, quizResults: {}, thanked: new Set(), claims: [] };
+  care: false, status: "off", error: null, goal: null, quiz: null, quizMine: {}, quizResults: {}, thanked: new Set(), claims: [],
+  helper: null, pair: null, compared: false, missSent: null };
 const RITUALS = "Mon goal · Wed and Sat answer hour · Fri Pod Quiz Night · Sun wins";
-const isPerson = (m) => !["system", "chotu", "moderator", "choice"].includes(m.memberId) && m.kind !== "system" && !isFriend(m);
+const isPerson = (m) => !["system", "chotu", "moderator", "choice", "compare"].includes(m.memberId) && m.kind !== "system" && !isFriend(m);
 
 /** What the server may know for matching: only the four fields, and only the ones you gave. */
 const matchBody = () => ({ ...P.syncedFields(), lang: P.value("lang") ?? POD_LANG[lang()] ?? "english" });
@@ -1816,7 +1989,7 @@ function onPodEvent(m) {
   const me = profile()?.memberId;
   if (m.type === "history") {
     Object.assign(pod, { messages: m.messages ?? [], online: m.online ?? [], room: m.room, lead: m.lead, youAreLead: m.youAreLead, priv: m.private ?? [],
-      goal: m.goal, quiz: m.quiz, quizMine: m.quiz?.mine ?? {}, thanked: new Set(m.thanked ?? []), claims: m.claims ?? [] });
+      goal: m.goal, quiz: m.quiz, quizMine: m.quiz?.mine ?? {}, thanked: new Set(m.thanked ?? []), claims: m.claims ?? [], helper: m.helper ?? null });
     if (m.thankedYou) award("first_thanks");
     if (m.youAreLead) award("lead");
     if (m.movedTo) return podMoved();
@@ -1838,6 +2011,10 @@ function onPodEvent(m) {
   if (m.type === "thanked") pod.thanked.add(m.id);
   if (m.type === "thanks_received") award("first_thanks");
   if (m.type === "moved") return podMoved();
+  if (m.type === "helper") pod.helper = m.helper;
+  if (m.type === "compare_pair") pod.pair = m;
+  if (m.type === "compared") { pod.pair = null; pod.compared = true; }
+  if (m.type === "miss_you_sent") pod.missSent = m.n;
   podRedraw();
 }
 
@@ -1856,6 +2033,9 @@ function podHeader() {
   const opens = s.opensOn ? new Date(s.opensOn + "T12:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : null;
   return h("div.pod-head",
     h("div.row.between", h("strong", `${label} · ${s.humans} of ${s.capacity}`), s.state === "quiet" && h("span.small.muted", "Quiet lately")),
+    s.merge && h("div.card.soft", h("p.small", `Your pod and another pod with the same stage and language have both been quiet, so on ${new Date(s.merge.on + "T12:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" })} they become one pod with more people around. Your old messages stay here.`),
+      s.merge.stay ? h("div.row", h("span.small.grow", "You chose to stay in this pod."), h("button.ghost.small", { onclick: () => mergeStay(false) }, "Join after all"))
+        : h("div.row", h("span.small.muted.grow", "Only you see your choice."), h("button.small", { onclick: () => mergeStay(true) }, "Keep me here"))),
     s.closest && h("p.small", "Nobody shares your exact stage, attempts and study time yet, so you're in the closest pod: same stage and language. If a pod for your exact group forms, you'll be asked privately whether to move. Nobody moves unless they choose to."),
     s.sizeState === "forming" && h("p.small", `Your pod has ${s.humans === 1 ? "1 person" : s.humans + " people"} so far. More join${opens ? " on " + opens : ""}, when this week's new members are matched. Meanwhile, the `, h("a", { href: "#commons" }, "Commons"), " is open."),
     h("p.small.muted", RITUALS));
@@ -1940,7 +2120,7 @@ function viewPod() {
     const inFocus = focus.active && focus.active.kind !== "break";
     const choice = pod.priv.filter((m) => m.memberId === "choice").at(-1);
     const moved = store.get("podMovedNote");
-    const privNotes = pod.priv.filter((m) => m.memberId !== "choice");
+    const privNotes = pod.priv.filter((m) => m.memberId !== "choice" && m.memberId !== "compare" && !/\(pod helper\)$/.test(m.name));
     put(box,
       podHeader(),
       moved && h("div.card.soft", h("div.row.between", h("span", moved), h("button.ghost.small", { onclick: () => { store.del("podMovedNote"); podRedraw(); } }, "OK"))),
@@ -1955,11 +2135,13 @@ function viewPod() {
         goalBar(),
         catchUp(since),
         quizCard(),
+        answerHourCard(),
+        helperNotes(),
         h("div.card.chat", { style: { maxHeight: "55vh", overflowY: "auto" } },
           pod.messages.length === 0 && h("p.muted", "No messages yet. Say hello."),
           pod.messages.map((m) => h("div.msg" + (m.memberId === "chotu" || isFriend(m) ? ".chotu" : ""),
             h("div.row.small", m.memberId === "chotu" ? chotuLabel(null, 20) : isFriend(m) ? friendLabel(m) : h("span.who", m.name),
-              m.kind === "favour" && h("span.tag", "Favour"), m.kind === "offer" && h("span.tag", "Offer"),
+              m.kind === "favour" && h("span.tag", "Favour"), m.kind === "offer" && h("span.tag", "Offer"), m.kind === "answer" && h("span.tag", "Answer"),
               h("span.muted", new Date(m.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })),
               isPerson(m) && m.memberId !== me && h("button.ghost.small", { title: "Say thanks", "aria-label": "Say thanks", onclick: () => pod.ws?.send(JSON.stringify({ type: "thanks", id: m.id })) }, "🙏"),
               isPerson(m) && m.memberId !== me && h("button.ghost.small", { onclick: () => { pod.ws?.send(JSON.stringify({ type: "report", id: m.id, reason: "Reported from the web" })); alert("Thanks. A moderator will look at it."); } }, "Report")),
@@ -1973,6 +2155,7 @@ function viewPod() {
         pod.messages.some(isFriend) && h("details", { style: { marginTop: "12px" } }, h("summary", "Who are Meera, Arjun, Ira and Kabir?"),
           h("p.small", "They're Chotu's AI study friends, there so a new pod never feels empty. Every one of them is marked AI. They aren't members and are never counted, they never message anyone privately, and they go quiet as more people join."),
           Object.entries(FRIENDS).map(([id, f]) => h("div.row.small", friendLabel({ memberId: id, name: id.slice(7)[0].toUpperCase() + id.slice(8) + " · AI" }, 18), h("span.muted", f.bio)))),
+        helperCard(),
         h("details", { style: { marginTop: "12px" } }, h("summary", "Run a ritual this week"),
           h("p.small.muted", "If someone in the pod runs it, Chotu stays out of it."),
           h("div.row", [["answer_hour", "Answer hour"], ["quiz", "Quiz Night"], ["wins", "Sunday wins"]].map(([k, l]) =>
@@ -1991,6 +2174,80 @@ function viewPod() {
 function leadAsk() {
   const t = h("input", { type: "text", maxLength: 1000, placeholder: "Only the pod lead sees this" });
   return h("div.row", h("div.grow", t), h("button", { onclick: () => { if (!t.value.trim()) return; if (distress(t.value)) pod.care = true; pod.ws?.send(JSON.stringify({ type: "ask_lead", text: t.value.trim() })); t.value = ""; } }, "Send"));
+}
+
+// --- Pods v2: Answer hour pair comparison, the monthly helper, and joining a quieter pod (teaching plan §8) ----
+const podSend = (o) => pod.ws?.send(JSON.stringify(o));
+
+/** Answer hour: write alone first, post it, then say which of two answers is stronger and one reason. */
+function answerHourCard() {
+  const me = profile().memberId;
+  const weekAgo = Date.now() - 7 * 86400_000;
+  const answers = pod.messages.filter((m) => m.kind === "answer" && m.ts > weekAgo);
+  const notes = pod.priv.filter((m) => m.memberId === "compare");
+  const ta = h("textarea", { rows: 6, maxLength: 2500, placeholder: "Your answer, about 150 words. Write it alone first." });
+  const p = pod.pair;
+  let pick = null;
+  const reason = h("input", { type: "text", maxLength: 300, placeholder: "One reason (about the answers, not the people)" });
+  return h("details.card", { open: !!p || answers.some((m) => m.memberId !== me) && !pod.compared },
+    h("summary", h("strong", "Answer hour"), h("span.small.muted", ` · ${answers.length} answer${answers.length === 1 ? "" : "s"} this week`)),
+    pauseLine("pod-alone-first"),
+    h("p.small.muted", "Write alone first, then post it. After that, compare two answers from your pod: which is stronger, and one reason. The writers hear your reason privately, never who sent it. Nobody is scored."),
+    ta,
+    h("div.row", { style: { marginTop: "6px" } },
+      h("span.small.muted.grow", "Posted answers are seen by your pod."),
+      h("button", { onclick: () => { const t = ta.value.trim(); if (t.split(/\s+/).length < 20) return alert("Write a little more first (at least a few lines)."); if (distress(t)) pod.care = true; podSend({ type: "say", kind: "answer", text: t, clientId: randomId() }); ta.value = ""; award("explained"); } }, "Post my answer")),
+    h("hr"),
+    !p && h("div.row", h("span.small.grow", pod.compared ? "Thanks. Your reason went to both writers." : "Ready to compare two answers?"),
+      h("button", { onclick: () => { pod.compared = false; podSend({ type: "compare_get" }); } }, "Compare two answers")),
+    p?.none && h("p.small.muted", "No new pair to compare yet. Once two others have posted this week, there will be."),
+    p && !p.none && h("div",
+      pauseLine("pod-compare"),
+      h("div.grid2", ["a", "b"].map((k, i) => h("label.card.soft", { style: { cursor: "pointer" } },
+        h("div.row", h("input", { type: "radio", name: "pick", onchange: () => { pick = k; } }), h("strong", `Answer ${i + 1}`)),
+        h("p.small", { style: { whiteSpace: "pre-wrap" } }, p[k].text)))),
+      reason,
+      h("div.row", { style: { marginTop: "6px" } },
+        h("button.ghost", { onclick: () => { pod.pair = null; podRedraw(); } }, "Not now"),
+        h("button.primary", { onclick: () => { if (!pick) return alert("Pick the stronger one first."); if (reason.value.trim().length < 3) return alert("Give one reason."); if (distress(reason.value)) pod.care = true; podSend({ type: "compare", a: p.a.id, b: p.b.id, pick, reason: reason.value.trim() }); } }, "Send my reason"))),
+    notes.length > 0 && h("div", { style: { marginTop: "10px" } }, h("p.small", h("strong", "What others said about your answers")),
+      notes.slice(-5).map((m) => h("p.small", m.text))));
+}
+
+/** One volunteer a month opens Answer hour and checks on people who've gone quiet. */
+function helperCard() {
+  const me = profile().memberId;
+  const hp = pod.helper;
+  const mine = hp?.memberId === me;
+  const q = h("input", { type: "text", maxLength: 600, placeholder: "Today's question (optional)" });
+  const note = h("textarea", { rows: 2, maxLength: 300 }, "We missed you at the pod this week. No catching up needed; come to Answer hour when you can.");
+  return h("details", { style: { marginTop: "12px" }, open: mine },
+    h("summary", hp ? (mine ? "You're the pod helper this month" : `${hp.name} is the pod helper this month`) : "Pod helper: open this month"),
+    pauseLine("pod-helper"),
+    !hp && [h("p.small.muted", "One member a month opens Answer hour and sends a kind note to anyone who's gone quiet. It's a volunteer role and changes hands each month."),
+      h("button", { onclick: () => podSend({ type: "helper_take" }) }, "I'll be the helper this month")],
+    hp && !mine && h("p.small.muted", "They open Answer hour and check on anyone who's gone quiet. Next month anyone can take it."),
+    mine && [
+      h("p.small", h("strong", "Open Answer hour")), h("div.row", h("div.grow", q), h("button", { onclick: () => { podSend({ type: "answer_hour_start", question: q.value.trim() }); q.value = ""; } }, "Open it")),
+      h("p.small", { style: { marginTop: "10px" } }, h("strong", "Check on quiet members")),
+      h("p.small.muted", "Goes privately to anyone who hasn't posted for a week, once a week at most. The pod doesn't see who."),
+      note, h("div.row", h("span.small.muted.grow", pod.missSent == null ? "" : pod.missSent ? `Sent to ${pod.missSent} ${pod.missSent === 1 ? "person" : "people"}.` : "Everyone has posted this week; nobody to send to."),
+        h("button", { onclick: () => { if (note.value.trim()) podSend({ type: "miss_you", text: note.value.trim() }); } }, "Send")),
+      h("button.ghost.small", { style: { marginTop: "10px" }, onclick: () => { if (confirm("Hand back the helper role for this month?")) podSend({ type: "helper_leave" }); } }, "Hand it back")]);
+}
+
+/** A kind note from this month's helper, if you've been away. */
+function helperNotes() {
+  const notes = pod.priv.filter((m) => /\(pod helper\)$/.test(m.name) && m.memberId !== profile().memberId);
+  const last = notes.at(-1);
+  if (!last || store.get("helperNoteSeen") === last.id) return null;
+  return h("div.card.soft", h("p.small", h("strong", last.name + ": "), last.text), h("div.row", h("span.small.muted.grow", "Only you got this."), h("button.ghost.small", { onclick: () => { store.set("helperNoteSeen", last.id); podRedraw(); } }, "OK")));
+}
+
+async function mergeStay(stay) {
+  const r = await post("/pods/merge-stay", { memberId: profile().memberId, mergeId: pod.summary.merge.id, stay }).catch(() => null);
+  if (r?.ok) { pod.summary = { ...pod.summary, merge: { ...pod.summary.merge, stay } }; store.set("podSummary", pod.summary); }
+  podRedraw();
 }
 
 async function podChoose(choice, noteId) {
@@ -2553,7 +2810,7 @@ function viewRoom() {
   const journalN = Object.keys(store.get("journal", {})).length;
   const journalBox = h("div");
   const notes = roomNotes();
-  return h("div.col", h("h1", "Your room"),
+  return h("div.col", h("h1", "Your room"), pauseLine("journal-first-open"),
     h("p.muted", "Only you see this. Nothing here goes to your pod, to marketing or to any AI, and nothing is scored."),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Last night's sleep"),
       h("div.chips", SLEEP_H.map(([v, l]) => h("button.chip", { "aria-pressed": String(last.h === v), onclick: () => setSleep("h", v) }, l))),
@@ -3593,7 +3850,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

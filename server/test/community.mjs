@@ -326,6 +326,76 @@ try {
   await admin("flags", { flags: { plus: false } });
 }
 
+// --- Pods v2: the helper, pair comparison in Answer hour, and two thin pods joining up --------------------
+const vs = "cv" + rid().slice(0, 8);
+const VA = { stage: vs, language: "english", time_band: "morning" }, VB = { stage: vs, language: "english", time_band: "night" };
+const vb = Array.from({ length: 8 }, rid);
+const vbPod = (await post("/pods/join", { memberId: vb[0], ...VB })).data.podId;
+for (const id of vb.slice(1)) await post("/pods/join", { memberId: id, ...VB });
+const va = Array.from({ length: 3 }, rid);
+const vaPod = (await post("/pods/join", { memberId: va[0], ...VA })).data.podId;
+assert.notEqual(vaPod, vbPod, "the closest pod is full, so the morning group starts its own");
+for (const id of va.slice(1)) assert.equal((await post("/pods/join", { memberId: id, ...VA })).data.podId, vaPod);
+for (const id of vb.slice(3)) await post("/pods/leave", { memberId: id });
+
+const [ra, rb, rc] = await Promise.all([connect(vaPod, va[0], "Ravi"), connect(vaPod, va[1], "Sana"), connect(vaPod, va[2], "Tara")]);
+ra.send({ type: "helper_take" });
+assert.match((await rb.next((e) => e.type === "helper")).helper.name, /Ravi/);
+rb.send({ type: "helper_take" });
+assert.match((await rb.next((e) => e.type === "error")).message, /Ravi is this month's pod helper/);
+rb.send({ type: "answer_hour_start", question: "x" });
+assert.match((await rb.next((e) => e.type === "error")).message, /helper opens/);
+ra.send({ type: "answer_hour_start", question: "Discuss the role of the Finance Commission." });
+assert.match((await rc.next((e) => e.type === "msg" && e.message.kind === "ritual")).message.text, /Answer hour is open/);
+step("one pod helper a month, who alone opens Answer hour");
+
+rb.send({ type: "say", kind: "answer", text: "Sana's answer. ".repeat(80) });
+rc.send({ type: "say", kind: "answer", text: "Tara's answer about the Finance Commission." });
+assert.ok((await ra.next((e) => e.type === "msg" && e.message.kind === "answer" && e.message.name === "Sana")).message.text.length > 1000, "an answer can be longer than a chat line");
+await ra.next((e) => e.type === "msg" && e.message.kind === "answer" && e.message.name === "Tara");
+rb.send({ type: "compare_get" });
+assert.equal((await rb.next((e) => e.type === "compare_pair")).none, true, "your own answer is never in your pair");
+ra.send({ type: "compare_get" });
+const pair = await ra.next((e) => e.type === "compare_pair");
+assert.ok(pair.a?.id && pair.b?.id && pair.a.id !== pair.b.id);
+ra.send({ type: "compare", a: pair.a.id, b: pair.b.id, pick: "a", reason: "" });
+assert.match((await ra.next((e) => e.type === "error")).message, /one reason/);
+ra.send({ type: "compare", a: pair.a.id, b: pair.b.id, pick: "a", reason: "Uses an example from the 15th Finance Commission." });
+await ra.next((e) => e.type === "compared");
+const [nb, nc] = await Promise.all([rb.next((e) => e.type === "private"), rc.next((e) => e.type === "private")]);
+const sanaFirst = pair.a.text.startsWith("Sana");
+assert.match((sanaFirst ? nb : nc).message.text, /found yours the stronger/);
+assert.match((sanaFirst ? nc : nb).message.text, /found the other one stronger/);
+assert.ok([nb, nc].every((n) => n.message.memberId === "compare" && /15th Finance Commission/.test(n.message.text) && !/Ravi/.test(n.message.text)), "private to each writer, without who compared");
+ra.send({ type: "compare_get" });
+assert.equal((await ra.next((e) => e.type === "compare_pair")).none, true, "the same pair never comes back");
+ra.send({ type: "miss_you", text: "We miss you at Answer hour. Come back when you can." });
+assert.equal((await ra.next((e) => e.type === "miss_you_sent")).n, 0, "everyone here posted this week");
+for (const c of [ra, rb, rc]) c.ws.close();
+step("Answer hour: answers posted, two compared with one reason, sent privately to both writers");
+
+const later = (d) => new Date(Date.now() + d * 86400_000).toISOString();
+const thinRun = (await admin("jobs/run", { job: "match", at: later(15) })).data;
+assert.ok(thinRun.thin.proposed >= 1, "Monday proposes thin pods joining");
+const proposal = (await admin("pod-merges")).data.find((g) => [g.from_pod, g.to_pod].sort().join() === [vaPod, vbPod].sort().join());
+assert.ok(proposal && proposal.status === "proposed", "the two thin pods of the same stage and language are paired");
+assert.equal((await post("/pods/me", { memberId: va[0] })).data.merge, null, "nothing is said before Ops approves");
+assert.equal((await post("/pods/merge-stay", { memberId: va[0], mergeId: proposal.id })).status, 404);
+const ok = (await admin(`pod-merges/${proposal.id}/approve`, {})).data;
+assert.equal(ok.status, "approved");
+const fromIds = proposal.from_pod === vaPod ? va : vb.slice(0, 3);
+const mine = (await post("/pods/me", { memberId: fromIds[0] })).data.merge;
+assert.equal(mine.on, ok.mergeOn); assert.equal(mine.stay, false);
+assert.equal((await post("/pods/merge-stay", { memberId: fromIds[0], mergeId: proposal.id })).data.stay, true);
+assert.equal((await post("/pods/me", { memberId: fromIds[0] })).data.merge.stay, true);
+assert.equal((await post("/pods/merge-stay", { memberId: rid(), mergeId: proposal.id })).status, 404, "only members of the two pods");
+const joined = (await admin("jobs/run", { job: "merge", at: later(4) })).data;
+assert.ok(joined.joined >= 1);
+assert.equal((await post("/pods/me", { memberId: fromIds[0] })).data.podId, proposal.from_pod, "who chose to stay, stays");
+for (const id of fromIds.slice(1)) assert.equal((await post("/pods/me", { memberId: id })).data.podId, proposal.to_pod);
+assert.equal((await admin("pod-merges")).data.find((g) => g.id === proposal.id).status, "done");
+step("two thin pods: proposed on Monday, joined only after Ops approves, and anyone can stay");
+
 const metrics = (await admin("community")).data;
 assert.ok(metrics.podStates && typeof metrics.podStates === "object" && Array.isArray(metrics.lurkerToPoster));
 step("admin community metrics");

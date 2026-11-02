@@ -195,7 +195,7 @@ export async function authRoute(req: Request, env: Env, path: string, url: URL):
 
 /** Member routes. Everything else (welcome, Free Shelf content, briefs, library, status, counts) stays open. */
 export function isMemberRoute(path: string): boolean {
-  return /^\/pods\/(join|leave|me|choose)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
+  return /^\/pods\/(join|leave|me|choose|merge-stay)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
     || path === "/members/profile" || /^\/commons\/[\w-]+\/ws$/.test(path) || path === "/season/add" || path === "/mocks/band"
     || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
     || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)

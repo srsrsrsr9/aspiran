@@ -289,6 +289,10 @@ export const ADMIN_SCHEMA = [
   // Day 1: the starter rooms a member was put in, once (rooms.ts startRooms).
   `CREATE TABLE IF NOT EXISTS room_starters (member_id TEXT PRIMARY KEY, rooms TEXT NOT NULL, at TEXT NOT NULL)`,
   `CREATE TABLE IF NOT EXISTS interview_uses (member_id TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (member_id, day))`,
+  // Pods v2 (community.ts): two thin pods join up. The app proposes, Ops approves, any member can stay where they are.
+  `CREATE TABLE IF NOT EXISTS pod_merges (id TEXT PRIMARY KEY, from_pod TEXT NOT NULL, to_pod TEXT NOT NULL, status TEXT NOT NULL,
+    reason TEXT, created_at TEXT NOT NULL, decided_at TEXT, decided_by TEXT, merge_on TEXT, done_at TEXT)`,
+  `CREATE TABLE IF NOT EXISTS pod_merge_optouts (merge_id TEXT NOT NULL, member_id TEXT NOT NULL, PRIMARY KEY (merge_id, member_id))`,
   // The website (web.ts): what a visitor tells Chotu as they scroll, and the daily cap on Chotu's website replies.
   `CREATE TABLE IF NOT EXISTS web_leads (visitor_id TEXT PRIMARY KEY, name TEXT, details TEXT NOT NULL, contact TEXT, contact_kind TEXT,
     lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,

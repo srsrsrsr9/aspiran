@@ -164,15 +164,15 @@ export async function leavePod(env: Env, memberId: string) {
 }
 
 /** Moves members of `from` into `to` (same bucket), and tells both pods. Used by the merge and the Monday match. */
-async function mergeInto(env: Env, from: PodRow, to: PodRow) {
+async function mergeInto(env: Env, from: PodRow, to: PodRow, note = "Your forming pod joined another one with the same stage and language, so you have more company. Open Pod to continue there. Your old messages stay here.") {
   await env.DB.batch([
     env.DB.prepare("UPDATE members SET pod_id = ? WHERE pod_id = ?").bind(to.id, from.id),
     env.DB.prepare("UPDATE pods SET size = size + ? WHERE id = ?").bind(from.size, to.id),
     env.DB.prepare("UPDATE pods SET size = 0, state = 'merged', merged_into = ? WHERE id = ?").bind(to.id, from.id),
   ]);
   await setSizeState(env, to.id);
-  await podPost(env, from.id, "moved", { to: to.id, text: "Your forming pod joined another one with the same stage and language, so you have more company. Open Pod to continue there. Your old messages stay here." }).catch(() => {});
-  await podPost(env, to.id, "system", { text: `${from.size === 1 ? "One person" : `${from.size} people`} from a forming pod in your bucket joined today. A quick hello helps.` }).catch(() => {});
+  await podPost(env, from.id, "moved", { to: to.id, text: note }).catch(() => {});
+  await podPost(env, to.id, "system", { text: `${from.size === 1 ? "One person" : `${from.size} people`} from another pod with the same stage and language joined today. A quick hello helps.` }).catch(() => {});
   await bump(env, "pod_merges");
 }
 
@@ -223,6 +223,97 @@ export async function refreshStates(env: Env, now = Date.now()) {
     }
   }
   return { pods: results.length, asked };
+}
+
+// --- Pods v2: thin pods join up (teaching plan §8) ----------------------------------------------------------
+// Monday: a pod where fewer than 3 people posted in the week is paired with another thin pod of the same stage and
+// language (same bucket first), and the pair is proposed to Ops. Nothing happens until Ops approves. Then both pods are
+// told, the merge waits 3 days, and any member can choose to stay where they are. Daily: approved merges whose day has
+// come move everyone who didn't opt out. Nobody is ever told which pod was "quieter".
+
+interface MergeRow { id: string; from_pod: string; to_pod: string; status: string; reason: string | null; created_at: string; decided_at: string | null; merge_on: string | null }
+const sameStageLang = (a: string, b: string) => { const x = a.split("-"), y = b.split("-"); return x[0] === y[0] && x[2] === y[2]; };
+
+export async function proposeMerges(env: Env, now = Date.now()) {
+  await ensureSchema(env);
+  const { results } = await env.DB.prepare("SELECT * FROM pods WHERE merged_into IS NULL AND size >= 3 AND created_at < ? ORDER BY bucket, size")
+    .bind(new Date(now - 14 * DAY).toISOString()).all<PodRow>();
+  const open = new Set((await env.DB.prepare("SELECT from_pod, to_pod FROM pod_merges WHERE status IN ('proposed', 'approved')").all<{ from_pod: string; to_pod: string }>())
+    .results.flatMap((r) => [r.from_pod, r.to_pod]));
+  const thin: (PodRow & { posters: number })[] = [];
+  for (const p of results) {
+    if (open.has(p.id)) continue;
+    const r = await podPost(env, p.id, "stats", { days: 7 }).then((x) => x.json<{ posters14d: number }>()).catch(() => null);
+    if (r && r.posters14d < 3) thin.push({ ...p, posters: r.posters14d });
+  }
+  let proposed = 0;
+  const used = new Set<string>();
+  for (const from of thin) {
+    if (used.has(from.id)) continue;
+    const fits = (t: PodRow) => t.id !== from.id && !used.has(t.id) && t.size + from.size <= POD_CAPACITY;
+    // The bigger pod is the one people move into, so fewer people move.
+    const to = thin.find((t) => fits(t) && t.bucket === from.bucket) ?? thin.find((t) => fits(t) && sameStageLang(t.bucket, from.bucket));
+    if (!to) continue;
+    const [a, b] = to.size >= from.size ? [from, to] : [to, from];
+    await env.DB.prepare("INSERT INTO pod_merges (id, from_pod, to_pod, status, reason, created_at) VALUES (?, ?, ?, 'proposed', ?, ?)")
+      .bind(newId("mg"), a.id, b.id, `${a.posters} and ${b.posters} people posted last week; ${a.size} + ${b.size} members${a.bucket === b.bucket ? ", same bucket" : ", same stage and language"}`, new Date(now).toISOString()).run();
+    used.add(a.id); used.add(b.id);
+    proposed++;
+  }
+  return { thin: thin.length, proposed };
+}
+
+const MERGE_NOTE = (on: string) => `Your pod and another pod with the same stage and language have both been quiet this week, so on ${on} they'll become one pod with more people around. Your old messages stay where they are. If you'd rather stay as you are, choose "Keep me here" in Pod.`;
+
+/** Ops approves (merge in 3 days, both pods told) or drops a proposal. */
+export async function decideMerge(env: Env, id: string, approve: boolean, by: string, now = Date.now()) {
+  await ensureSchema(env);
+  const m = await env.DB.prepare("SELECT * FROM pod_merges WHERE id = ? AND status = 'proposed'").bind(id).first<MergeRow>();
+  if (!m) return null;
+  const on = istDay(new Date(now + 3 * DAY));
+  await env.DB.prepare("UPDATE pod_merges SET status = ?, decided_at = ?, decided_by = ?, merge_on = ? WHERE id = ?")
+    .bind(approve ? "approved" : "dropped", new Date(now).toISOString(), by, approve ? on : null, id).run();
+  if (approve) for (const pod of [m.from_pod, m.to_pod]) await podPost(env, pod, "system", { text: MERGE_NOTE(on) }).catch(() => {});
+  return { id, status: approve ? "approved" : "dropped", mergeOn: approve ? on : null };
+}
+
+/** A member's open merge, for Pod: the day it happens and whether they chose to stay. */
+export async function mergeFor(env: Env, memberId: string, podId: string) {
+  const m = await env.DB.prepare("SELECT * FROM pod_merges WHERE status = 'approved' AND (from_pod = ? OR to_pod = ?)").bind(podId, podId).first<MergeRow>().catch(() => null);
+  if (!m) return null;
+  const out = await env.DB.prepare("SELECT 1 FROM pod_merge_optouts WHERE merge_id = ? AND member_id = ?").bind(m.id, memberId).first();
+  return { id: m.id, on: m.merge_on, stay: !!out };
+}
+
+/** Daily: merges whose day has come. Members of the smaller pod who chose to stay are left where they are. */
+export async function runMerges(env: Env, now = Date.now()) {
+  await ensureSchema(env);
+  const { results } = await env.DB.prepare("SELECT * FROM pod_merges WHERE status = 'approved' AND merge_on <= ?").bind(istDay(new Date(now))).all<MergeRow>();
+  let done = 0;
+  for (const m of results) {
+    const to = await env.DB.prepare("SELECT * FROM pods WHERE id = ? AND merged_into IS NULL").bind(m.to_pod).first<PodRow>();
+    const from = await env.DB.prepare("SELECT * FROM pods WHERE id = ? AND merged_into IS NULL").bind(m.from_pod).first<PodRow>();
+    const stay = new Set((await env.DB.prepare("SELECT member_id FROM pod_merge_optouts WHERE merge_id = ?").bind(m.id).all<{ member_id: string }>()).results.map((r) => r.member_id));
+    if (to && from) {
+      const movers = (await env.DB.prepare("SELECT member_id FROM members WHERE pod_id = ?").bind(from.id).all<{ member_id: string }>()).results
+        .map((r) => r.member_id).filter((id) => !stay.has(id)).slice(0, Math.max(POD_CAPACITY - to.size, 0));
+      if (movers.length === from.size) await mergeInto(env, from, to, "Your pod joined another one with the same stage and language, so there are more people around. Open Pod to continue there. Your old messages stay here.");
+      else if (movers.length) {
+        for (const id of movers) await env.DB.prepare("UPDATE members SET pod_id = ? WHERE member_id = ?").bind(to.id, id).run();
+        await env.DB.batch([
+          env.DB.prepare("UPDATE pods SET size = MAX(size - ?, 0) WHERE id = ?").bind(movers.length, from.id),
+          env.DB.prepare("UPDATE pods SET size = size + ? WHERE id = ?").bind(movers.length, to.id),
+        ]);
+        await setSizeState(env, from.id); await setSizeState(env, to.id);
+        await podPost(env, from.id, "system", { text: `Some of the pod moved to the joined pod today; the rest of you chose to stay here. Both are fine.` }).catch(() => {});
+        await podPost(env, to.id, "system", { text: `${movers.length === 1 ? "One person" : `${movers.length} people`} joined today from another pod. A quick hello helps.` }).catch(() => {});
+        for (const id of movers) await podPost(env, from.id, "moved-one", { member: id, to: to.id }).catch(() => {});
+      }
+    }
+    await env.DB.prepare("UPDATE pod_merges SET status = 'done', done_at = ? WHERE id = ?").bind(new Date(now).toISOString(), m.id).run();
+    done++;
+  }
+  return done;
 }
 
 // --- Chotu as host (spec §3 and Chotu v2) --------------------------------------------------------------
@@ -431,7 +522,7 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     if (!validId(memberId)) return bad("memberId must be a random id of 16 to 64 characters");
     await ensureSchema(env);
     const existing = await env.DB.prepare("SELECT p.*, m.closest FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(memberId).first<PodRow>();
-    if (existing) return json(podSummary(existing));
+    if (existing) return json({ ...podSummary(existing), merge: await mergeFor(env, body.memberId, existing.id) });
     if (!(await flags(env)).pod_join) return bad("Joining pods is paused for now. Try again later.", 503);
     // Open mode (rooms.ts): below the sign-up threshold nobody new is matched; the apps show the open rooms instead.
     const mode = await podMode(env);
@@ -452,7 +543,18 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     if (!validId(body.memberId)) return bad("memberId is required");
     await ensureSchema(env);
     const p = await env.DB.prepare("SELECT p.*, m.closest FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(body.memberId).first<PodRow>();
-    return p ? json(podSummary(p)) : json({ podId: null });
+    return p ? json({ ...podSummary(p), merge: await mergeFor(env, body.memberId, p.id) }) : json({ podId: null });
+  }
+  // Pods v2: before an approved merge, any member can keep their place ("Keep me here"), or change their mind.
+  if (path === "/pods/merge-stay" && req.method === "POST") {
+    const body = await req.json<any>().catch(() => ({}));
+    if (!validId(body.memberId) || typeof body.mergeId !== "string") return bad("memberId and mergeId are required");
+    await ensureSchema(env);
+    const m = await env.DB.prepare("SELECT 1 FROM pod_merges g JOIN members m ON m.pod_id IN (g.from_pod, g.to_pod) WHERE g.id = ? AND g.status = 'approved' AND m.member_id = ?").bind(body.mergeId, body.memberId).first();
+    if (!m) return bad("No merge for your pod", 404);
+    if (body.stay === false) await env.DB.prepare("DELETE FROM pod_merge_optouts WHERE merge_id = ? AND member_id = ?").bind(body.mergeId, body.memberId).run();
+    else await env.DB.prepare("INSERT OR IGNORE INTO pod_merge_optouts (merge_id, member_id) VALUES (?, ?)").bind(body.mergeId, body.memberId).run();
+    return json({ ok: true, stay: body.stay !== false });
   }
   // The private stay-or-move choice for a quiet pod. Nobody is moved without asking.
   if (path === "/pods/choose" && req.method === "POST") {
@@ -512,8 +614,8 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
 
 export async function runJob(env: Env, job: string, at = new Date()) {
   switch (job) {
-    case "match": return { merged: await mergeForming(env, { minAgeDays: 0, intoSmall: true, now: at.getTime() }), offered: await offerExactPods(env) };
-    case "merge": return { merged: await mergeForming(env, { minAgeDays: 7, intoSmall: false, now: at.getTime() }) };
+    case "match": return { merged: await mergeForming(env, { minAgeDays: 0, intoSmall: true, now: at.getTime() }), offered: await offerExactPods(env), thin: await proposeMerges(env, at.getTime()) };
+    case "merge": return { merged: await mergeForming(env, { minAgeDays: 7, intoSmall: false, now: at.getTime() }), joined: await runMerges(env, at.getTime()) };
     case "states": return refreshStates(env, at.getTime());
     case "host": return hostTick(env, at);
     case "chai": return { pods: await postChai(env, at) };

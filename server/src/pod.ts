@@ -20,6 +20,10 @@ import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reactio
  *   {type:"goal_set", text, target} (lead, or anyone while there's no lead) · {type:"goal_add", n}: one shared bar
  *   {type:"claim", ritual}: a person runs this week's ritual, so Chotu stays out of it
  *   {type:"quiz_answer", q, choice} · {type:"thanks", id} · {type:"pinned_answer", choice} (open rooms' daily question)
+ *   Pods v2 (teaching plan §8): {type:"say", kind:"answer", text}: an Answer hour answer · {type:"compare_get"} ·
+ *   {type:"compare", a, b, pick:"a"|"b", reason}: which of two answers is stronger and one reason, sent privately to
+ *   both writers (never a count or a score) · {type:"helper_take"} · {type:"helper_leave"} (one volunteer a month) ·
+ *   {type:"answer_hour_start", question} and {type:"miss_you", text} (the helper only)
  *   A "say" that mentions @Chotu also goes to Chotu: only that message, names swapped for Member A/B,
  *   after the distress check. Chotu's reply is posted to the pod, labelled AI.
  * Server → client:
@@ -29,6 +33,8 @@ import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reactio
  *   {type:"goal", goal} · {type:"quiz", quiz} · {type:"quiz_result", q, right, answerIndex, explanation}
  *   {type:"thanked", id} · {type:"thanks_received"} · {type:"moved", to}
  *   {type:"pinned", pinned} · {type:"pinned_result", choice, right, answerIndex, explanation}
+ *   {type:"compare_pair", a, b} or {type:"compare_pair", none:true} · {type:"compared"} · {type:"helper", helper}
+ *   {type:"miss_you_sent", n}
  *
  * Chotu hosts (POST /host from the half-hourly cron): at most 2 posts a day, none from 23:30 to 07:00 IST,
  * never about any one member. Chotu is never a member and never counted.
@@ -38,11 +44,16 @@ import { type QuizQ, friendLevel, friendPosts, inQuietHours, isStudyWin, reactio
  * do less as more real people join. They cheer a plain study win in general words, never a message about feelings.
  */
 
-type Kind = "chat" | "ping" | "ritual" | "system" | "favour" | "offer" | "chotu" | "quiz" | "friend" | "friend_quiz";
-const HUMAN_KINDS = ["chat", "favour", "offer"];
+type Kind = "chat" | "ping" | "ritual" | "system" | "favour" | "offer" | "chotu" | "quiz" | "friend" | "friend_quiz" | "answer";
+const HUMAN_KINDS = ["chat", "favour", "offer", "answer"];
+/** An Answer hour answer can be a full 250 words. */
+const ANSWER_LEN = 2500;
 const CHOTU = "Chotu · AI";
 const HOST_SLOTS = ["goal", "answer_hour", "quiz", "wins"];
 const CHOTU_REPLIES_PER_DAY = 20;
+
+/** Pod helper (Pods v2): one volunteer member for the calendar month (IST). Starts Answer hour; checks on quiet people. */
+interface Helper { memberId: string; name: string; month: string }
 
 interface Goal { text: string; target: number; unit: string; done: number; week: string; setBy: "lead" | "chotu" | "member" }
 interface Quiz { id: string; week: string; questions: { topic: string; question: string; options: string[]; answerIndex: number; explanation?: string }[]; answers: Record<string, Record<number, number>>; lastWeekPct: number | null }
@@ -98,6 +109,8 @@ export class PodRoom extends DurableObject<Env> {
       id TEXT PRIMARY KEY, from_id TEXT, from_name TEXT, to_id TEXT, text TEXT, ts INTEGER)`);
     // 🙏 thanks: shown on the message, never as a count on a person. They feed the helper's own stamp.
     this.sql.exec(`CREATE TABLE IF NOT EXISTS thanks (msg_id TEXT, from_id TEXT, to_id TEXT, ts INTEGER, PRIMARY KEY (msg_id, from_id))`);
+    // Pods v2: who compared which two answers (so nobody gets the same pair twice). The pick itself is only sent privately.
+    this.sql.exec(`CREATE TABLE IF NOT EXISTS compares (from_id TEXT, a TEXT, b TEXT, ts INTEGER, PRIMARY KEY (from_id, a, b))`);
   }
 
   async fetch(req: Request): Promise<Response> {
@@ -154,6 +167,12 @@ export class PodRoom extends DurableObject<Env> {
       this.broadcast({ type: "moved", to });
       return new Response("ok");
     }
+    if (url.pathname.endsWith("/moved-one") && req.method === "POST") {
+      // Pods v2: some of this pod joined another one; only those who moved reconnect there.
+      const { member, to } = await req.json<{ member: string; to: string }>();
+      this.sendTo(String(member), { type: "moved", to: String(to) });
+      return new Response("ok");
+    }
     if (url.pathname.endsWith("/stay-or-move") && req.method === "POST") {
       // Quiet for 14 days: each member privately chooses. Nobody is moved without asking. With {member, text}, only
       // that member is asked (Monday's offer to someone in the closest pod once their exact group has one).
@@ -201,7 +220,9 @@ export class PodRoom extends DurableObject<Env> {
     }
     if (url.pathname.endsWith("/stats")) {
       // For the admin's lurker-to-poster metric: how many different people posted in 14 days. Never who.
-      const row = this.sql.exec<{ n: number }>(`SELECT COUNT(DISTINCT member_id) AS n FROM messages WHERE ts > ? AND kind IN ('chat', 'favour', 'offer')`, Date.now() - 14 * 86400_000).toArray()[0];
+      // Pods v2 asks with {days: 7} for the weekly thin-pod check.
+      const days = Math.min(Math.max(Number((await req.json<{ days?: number }>().catch(() => ({} as { days?: number }))).days) || 14, 1), 60);
+      const row = this.sql.exec<{ n: number }>(`SELECT COUNT(DISTINCT member_id) AS n FROM messages WHERE ts > ? AND kind IN ('chat', 'favour', 'offer', 'answer')`, Date.now() - days * 86400_000).toArray()[0];
       return Response.json({ posters14d: row?.n ?? 0 });
     }
     if (url.pathname.endsWith("/lead") && req.method === "POST") {
@@ -254,6 +275,9 @@ export class PodRoom extends DurableObject<Env> {
       const n = this.sql.exec("DELETE FROM messages WHERE member_id = ?", member).rowsWritten;
       const p = this.sql.exec("DELETE FROM private WHERE from_id = ? OR to_id = ?", member, member).rowsWritten;
       this.sql.exec("DELETE FROM thanks WHERE from_id = ? OR to_id = ?", member, member);
+      this.sql.exec("DELETE FROM compares WHERE from_id = ?", member);
+      this.setMeta("missed:" + member, null);
+      if (this.helper()?.memberId === member) this.setJson("helper", null);
       const quiz = this.getJson<Quiz | null>("quiz", null);
       if (quiz?.answers[member]) { delete quiz.answers[member]; this.setJson("quiz", quiz); }
       const pinned = this.getJson<Pinned | null>("pinned", null);
@@ -305,13 +329,13 @@ export class PodRoom extends DurableObject<Env> {
     }
     switch (msg?.type) {
       case "say": {
-        const text = String(msg.text ?? "").replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, MAX_LEN);
+        const kind: Kind = msg.kind === "favour" || msg.kind === "offer" || msg.kind === "answer" ? msg.kind : "chat";
+        const text = String(msg.text ?? "").replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, kind === "answer" ? ANSWER_LEN : MAX_LEN);
         if (!text) return;
         if (!this.allow(me.memberId)) {
           ws.send(JSON.stringify({ type: "error", message: "Slow down a little. Try again in a minute." }));
           return;
         }
-        const kind: Kind = msg.kind === "favour" || msg.kind === "offer" ? msg.kind : "chat";
         const m: Message = { id: newId("m"), memberId: me.memberId, name: me.name, text, ts: Date.now(), kind, clientId: msg.clientId };
         this.post(m);
         await bump(this.env, "messages");
@@ -407,6 +431,92 @@ export class PodRoom extends DurableObject<Env> {
         this.sendTo(row.member_id, { type: "thanks_received" });
         return;
       }
+      case "compare_get": {
+        // Two answers from this week, neither yours, a pair you haven't compared, the least-compared first.
+        const rows = this.sql.exec<{ id: string; member_id: string; text: string }>(
+          `SELECT id, member_id, text FROM messages WHERE kind = 'answer' AND hidden = 0 AND member_id != ? AND ts > ? ORDER BY ts DESC LIMIT 40`,
+          me.memberId, Date.now() - 7 * 86400_000).toArray().filter((r) => !r.member_id.startsWith("friend:"));
+        const done = new Set(this.sql.exec<{ a: string; b: string }>("SELECT a, b FROM compares WHERE from_id = ?", me.memberId).toArray().map((r) => r.a + "|" + r.b));
+        const seen = (id: string) => this.sql.exec<{ n: number }>("SELECT COUNT(*) AS n FROM compares WHERE a = ? OR b = ?", id, id).toArray()[0]?.n ?? 0;
+        const order = rows.map((r) => ({ ...r, n: seen(r.id) })).sort((x, y) => x.n - y.n || Math.random() - 0.5);
+        for (let i = 0; i < order.length; i++) for (let j = i + 1; j < order.length; j++) {
+          const [x, y] = [order[i], order[j]];
+          if (x.member_id === y.member_id || done.has([x.id, y.id].sort().join("|"))) continue;
+          const [a, b] = Math.random() < 0.5 ? [x, y] : [y, x];
+          return ws.send(JSON.stringify({ type: "compare_pair", a: { id: a.id, text: a.text }, b: { id: b.id, text: b.text } }));
+        }
+        return ws.send(JSON.stringify({ type: "compare_pair", none: true }));
+      }
+      case "compare": {
+        const reason = String(msg.reason ?? "").replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, 300);
+        const ids = [String(msg.a ?? ""), String(msg.b ?? "")];
+        if (reason.length < 3 || !["a", "b"].includes(msg.pick) || ids[0] === ids[1]) return ws.send(JSON.stringify({ type: "error", message: "Pick one and give one reason." }));
+        if (!this.allow(me.memberId)) return ws.send(JSON.stringify({ type: "error", message: "Slow down a little. Try again in a minute." }));
+        const rows = ids.map((id) => this.sql.exec<{ id: string; member_id: string }>("SELECT id, member_id FROM messages WHERE id = ? AND kind = 'answer' AND hidden = 0", id).toArray()[0]);
+        if (rows.some((r) => !r || r.member_id === me.memberId)) return;
+        const key = [...ids].sort();
+        if (this.sql.exec("SELECT 1 FROM compares WHERE from_id = ? AND a = ? AND b = ?", me.memberId, key[0], key[1]).toArray().length) return;
+        if (await this.guardian(ws, me, newId("c"), reason)) return;
+        this.sql.exec("INSERT INTO compares (from_id, a, b, ts) VALUES (?, ?, ?, ?)", me.memberId, key[0], key[1], Date.now());
+        const strong = msg.pick === "a" ? rows[0]! : rows[1]!, other = msg.pick === "a" ? rows[1]! : rows[0]!;
+        const note = (to: string, text: string) => {
+          if (to === strong.member_id && to === other.member_id) return;
+          const m: Message = { id: newId("p"), memberId: "compare", name: "Answer hour", text, ts: Date.now(), kind: "system", to };
+          this.sql.exec("INSERT INTO private (id, from_id, from_name, to_id, text, ts) VALUES (?, ?, ?, ?, ?, ?)", m.id, m.memberId, m.name, to, text, m.ts);
+          this.sendTo(to, { type: "private", message: m });
+        };
+        note(strong.member_id, `Someone in your pod compared your answer with another one and found yours the stronger of the two. Their reason: “${reason}”`);
+        note(other.member_id, `Someone in your pod compared your answer with another one and found the other one stronger. Their reason: “${reason}” Both answers are in the pod; reading the other one is the quickest way to see it.`);
+        ws.send(JSON.stringify({ type: "compared" }));
+        return;
+      }
+      case "helper_take": {
+        if (this.podId.startsWith("room-")) return;
+        const cur = this.helper();
+        if (cur && cur.memberId !== me.memberId) return ws.send(JSON.stringify({ type: "error", message: `${cur.name} is this month's pod helper. Next month it's open again.` }));
+        if (cur) return;
+        const helper: Helper = { memberId: me.memberId, name: me.name, month: istDay().slice(0, 7) };
+        this.setJson("helper", helper);
+        this.post({ id: newId("m"), memberId: "system", name: "Pod", text: `${me.name} is the pod helper this month: they open Answer hour and check on anyone who's gone quiet. It's a volunteer role and it changes hands every month.`, ts: Date.now(), kind: "system" });
+        this.broadcast({ type: "helper", helper: { name: helper.name, memberId: helper.memberId } });
+        return;
+      }
+      case "helper_leave": {
+        if (this.helper()?.memberId !== me.memberId) return;
+        this.setJson("helper", null);
+        this.post({ id: newId("m"), memberId: "system", name: "Pod", text: `${me.name} has handed back the pod helper role. Anyone can take it for the rest of the month.`, ts: Date.now(), kind: "system" });
+        this.broadcast({ type: "helper", helper: null });
+        return;
+      }
+      case "answer_hour_start": {
+        if (this.helper()?.memberId !== me.memberId) return ws.send(JSON.stringify({ type: "error", message: "The pod helper opens Answer hour." }));
+        const q = String(msg.question ?? "").replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, 600);
+        const c = this.claims();
+        if (!c.slots.includes("answer_hour")) { c.slots.push("answer_hour"); this.setJson("claims", c); }
+        this.post({ id: newId("m"), memberId: me.memberId, name: me.name, text: `Answer hour is open.${q ? ` Question: ${q}` : ""} Write alone first, about 150 words, then post it here as an answer. After that, compare two answers: which is stronger, and one reason.`, ts: Date.now(), kind: "ritual" });
+        await this.humanPosted(me.memberId);
+        return;
+      }
+      case "miss_you": {
+        if (this.helper()?.memberId !== me.memberId) return;
+        const text = String(msg.text ?? "").replace(/[\u0000-\u0008\u000B-\u001F\u007F]/g, "").trim().slice(0, 300);
+        if (!text || await this.guardian(ws, me, newId("p"), text)) return;
+        // Members who haven't posted in 7 days, at most one note a week each. Who got one is never shown to the pod.
+        const week = Date.now() - 7 * 86400_000;
+        const { results } = await this.env.DB.prepare("SELECT member_id FROM members WHERE pod_id = ?").bind(this.podId).all<{ member_id: string }>();
+        let n = 0;
+        for (const { member_id } of results) {
+          if (member_id === me.memberId || Number(this.getMeta("missed:" + member_id) ?? 0) > week) continue;
+          if (this.sql.exec("SELECT 1 FROM messages WHERE member_id = ? AND ts > ? LIMIT 1", member_id, week).toArray().length) continue;
+          const m: Message = { id: newId("p"), memberId: me.memberId, name: `${me.name} (pod helper)`, text, ts: Date.now(), kind: "chat", to: member_id };
+          this.sql.exec("INSERT INTO private (id, from_id, from_name, to_id, text, ts) VALUES (?, ?, ?, ?, ?, ?)", m.id, m.memberId, m.name, member_id, text, m.ts);
+          this.setMeta("missed:" + member_id, String(Date.now()));
+          this.sendTo(member_id, { type: "private", message: m });
+          n++;
+        }
+        ws.send(JSON.stringify({ type: "miss_you_sent", n }));
+        return;
+      }
       case "chai_ping":
         this.post({ id: newId("m"), memberId: me.memberId, name: me.name, text: `${me.name} sent a chai ping ☕`, ts: Date.now(), kind: "ping" });
         return;
@@ -483,7 +593,14 @@ export class PodRoom extends DurableObject<Env> {
       goal: this.goal(), quiz: quiz ? { ...this.publicQuiz(quiz), mine: quiz.answers[memberId] ?? {} } : null,
       pinned: this.publicPinned(this.getJson<Pinned | null>("pinned", null), memberId),
       thanked, thankedYou, movedTo: this.getMeta("movedTo"), claims: this.claims().slots,
+      helper: ((h) => (h ? { name: h.name, memberId: h.memberId } : null))(this.helper()),
     };
+  }
+
+  /** This month's helper, or null once the month has turned (the role rotates). */
+  private helper(): Helper | null {
+    const h = this.getJson<Helper | null>("helper", null);
+    return h && h.month === istDay().slice(0, 7) ? h : null;
   }
 
   private goal(): Goal | null {

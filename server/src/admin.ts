@@ -10,7 +10,7 @@ import {
 } from "./staff";
 import { COMPONENTS } from "./status";
 import { languageRequests } from "./requests";
-import { communityMetrics, runJob } from "./community";
+import { communityMetrics, decideMerge, runJob } from "./community";
 import { activeResult, cleanResults, resultDays } from "./results";
 import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
@@ -154,6 +154,20 @@ route("GET", /^members$/, "members", async ({ env, url }) => {
 route("GET", /^pods$/, "members", async ({ env }) => {
   const { results } = await env.DB.prepare("SELECT id, bucket, size, created_at, lead_member FROM pods ORDER BY created_at DESC LIMIT 500").all();
   return json(results);
+});
+// Pods v2: thin pods the Monday job proposes to join. Nothing moves until Ops approves; members can still stay.
+route("GET", /^pod-merges$/, "members", async ({ env }) => {
+  const { results } = await env.DB.prepare(
+    `SELECT g.*, a.size AS from_size, a.bucket AS from_bucket, b.size AS to_size, b.bucket AS to_bucket,
+       (SELECT COUNT(*) FROM pod_merge_optouts o WHERE o.merge_id = g.id) AS staying
+     FROM pod_merges g LEFT JOIN pods a ON a.id = g.from_pod LEFT JOIN pods b ON b.id = g.to_pod ORDER BY g.created_at DESC LIMIT 100`).all();
+  return json(results);
+});
+route("POST", /^pod-merges\/([\w-]+)\/(approve|drop)$/, "members", async ({ env, s, m }) => {
+  const r = await decideMerge(env, m[1], m[2] === "approve", label(s));
+  if (!r) return bad("No open proposal with that id", 404);
+  await audit(env, s, `pod merge ${m[2]}`, m[1]);
+  return json(r);
 });
 route("POST", /^members\/([\w-]+)\/(suspend|unsuspend|remove|lead|move)$/, "members", async ({ env, body, m }) => {
   const [, id, action] = m;
