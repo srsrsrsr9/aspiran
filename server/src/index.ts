@@ -17,6 +17,7 @@ import { type Env, bad, istDay, istNow, json } from "./shared";
 import { communityRoute, runJob } from "./community";
 import { podMode, roomsRoute } from "./rooms";
 import { answersRoute } from "./answers";
+import { interviewRoute } from "./interview";
 import { plusRoute, useAllowance } from "./plus";
 import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
@@ -194,6 +195,9 @@ export default {
     // --- Answer Studio: rubric feedback on a Mains answer, photo or typed (answers.ts)
     const answers = await answersRoute(req, env, path);
     if (answers) return answers;
+    // --- Mock interview board: one AI follow-up per answer (interview.ts)
+    const interview = await interviewRoute(req, env, path);
+    if (interview) return interview;
     // --- Plus, test mode only and behind the "plus" flag: plus.ts
     // Cashfree: orders, the return check, receipts and the signed webhook (payments.ts)
     const pay = await paymentsRoute(req, env, path, url);

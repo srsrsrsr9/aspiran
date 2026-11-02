@@ -82,6 +82,9 @@ data class RubricArea(val band: String = "at", val note: String = "", val fix: S
 @Serializable
 data class AnswerSkeleton(val intro: String = "", val body: List<String> = emptyList(), val conclusion: String = "")
 
+/** The mock board's AI member: a follow-up question, or a note on why there isn't one. */
+data class BoardReply(val followUp: String? = null, val note: String? = null, val care: Boolean = false)
+
 /** Answer Studio's feedback (server answers.ts). [error] is set instead when it couldn't be given. */
 @Serializable
 data class AnswerFeedback(
@@ -234,6 +237,34 @@ class Community(private val server: () -> String, private val memberId: () -> St
                 }
             }
         }.getOrElse { AnswerFeedback(error = "No connection. Your answer is saved here; try again when you're online.") }
+    }
+
+    /**
+     * Mock interview: one follow-up from the board member played by AI. [BoardReply.note] says why there's none
+     * (quiet hours, a result week, today's limit, offline); on a distress phrase the server sends care instead.
+     */
+    suspend fun interviewFollow(name: String, style: String, question: String, answer: String, hindi: Boolean): BoardReply = withContext(Dispatchers.IO) {
+        val base = server()
+        if (base.isBlank()) return@withContext BoardReply(note = "Follow-ups need the pod server. Carry on with the next question.")
+        val body = buildJsonObject {
+            put("memberId", memberId()); put("question", question); put("answer", answer); put("hindi", hindi)
+            put("persona", buildJsonObject { put("name", name); put("style", style) })
+        }
+        runCatching {
+            val req = Request.Builder().url("$base/interview/follow").post(body.toString().toRequestBody("application/json".toMediaType())).build()
+            slowHttp.newCall(req).execute().use { r ->
+                val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
+                val str = { k: String -> (o?.get(k) as? kotlinx.serialization.json.JsonPrimitive)?.contentOrNull }
+                when {
+                    o == null -> BoardReply(note = "The board member didn't come through. Carry on with the next question.")
+                    str("care") == "true" -> BoardReply(care = true)
+                    str("quiet") == "true" -> BoardReply(note = "The AI board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.")
+                    str("limit") == "true" -> BoardReply(note = "That's enough follow-ups for today. Carry on with the bank's questions.")
+                    r.isSuccessful && !str("followUp").isNullOrBlank() -> BoardReply(followUp = str("followUp"))
+                    else -> BoardReply(note = str("error") ?: "The board member didn't come through. Carry on with the next question.")
+                }
+            }
+        }.getOrElse { BoardReply(note = "No connection. Carry on with the next question.") }
     }
 
     /** "Delete my data": erases the pod membership, messages, consent record and sign-in account on the server. */

@@ -74,6 +74,9 @@ fun PracticeTab(
     /** Essays in three snaps: how many approved topics, and opening them. */
     essayCount: Int = 0,
     onOpenEssays: () -> Unit = {},
+    /** Mock interview: whether the question bank is approved yet, and opening the board. */
+    interviewReady: Boolean = false,
+    onOpenInterview: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -112,6 +115,14 @@ fun PracticeTab(
             done = false,
             filled = false,
             onStart = onOpenEssays,
+        )
+
+        PracticeCard(
+            title = "Mock interview",
+            detail = if (interviewReady) "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." else "Opens once the interview questions are approved.",
+            done = false,
+            filled = false,
+            onStart = onOpenInterview,
         )
 
         if (pyqCount > 0) {

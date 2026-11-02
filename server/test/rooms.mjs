@@ -204,8 +204,16 @@ try {
   assert.equal(off.status, 503, "with the evaluate switch off no model is called");
   assert.equal(off.data.offline, true);
   step("the evaluate route checks the answer, distress and the AI switch before any model call");
+
+  // --- Mock interview board: one AI follow-up, never on distress, quiet when the AI is off --------------------
+  const iv = (body) => post("/interview/follow", { memberId: m1, persona: { name: "The Sceptic", style: "Polite but persistent." }, question: "Why leave a stable job?", ...body });
+  assert.equal((await iv({})).status, 400, "an answer is required");
+  assert.equal((await iv({ answer: "I feel hopeless, I want to end my life" })).data.care, true, "distress gets helplines, not a question");
+  await admin("llm/controls", { purposes: { chotu: false } });
+  assert.equal((await iv({ answer: "I wanted work with a wider public impact." })).data.quiet, true, "with the AI off the board uses the bank only");
+  step("the interview follow-up checks distress and the AI switch before any model call");
 } finally {
-  await admin("llm/controls", { purposes: { evaluate: true } });
+  await admin("llm/controls", { purposes: { evaluate: true, chotu: true } });
   await admin("growth/threshold", { signupThreshold: before.threshold });
 }
 console.log("\nRooms and Answer Studio checks passed.");

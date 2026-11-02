@@ -288,6 +288,7 @@ export const ADMIN_SCHEMA = [
   `CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id)`,
   // Day 1: the starter rooms a member was put in, once (rooms.ts startRooms).
   `CREATE TABLE IF NOT EXISTS room_starters (member_id TEXT PRIMARY KEY, rooms TEXT NOT NULL, at TEXT NOT NULL)`,
+  `CREATE TABLE IF NOT EXISTS interview_uses (member_id TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (member_id, day))`,
   // The website (web.ts): what a visitor tells Chotu as they scroll, and the daily cap on Chotu's website replies.
   `CREATE TABLE IF NOT EXISTS web_leads (visitor_id TEXT PRIMARY KEY, name TEXT, details TEXT NOT NULL, contact TEXT, contact_kind TEXT,
     lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,

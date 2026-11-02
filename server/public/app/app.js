@@ -291,10 +291,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -724,6 +724,7 @@ function viewPractice() {
     h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Essays in three snaps"), h("div.small.muted", `Skeleton, outline, essay, each compared with a guide. ${libraryOf("essay").length} topic${libraryOf("essay").length === 1 ? "" : "s"}.`)), h("a.btn", { href: "#essay" }, "Open"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Mock interview"), h("div.small.muted", libraryOf("interview-bank").length ? "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." : "Opens once the interview questions are approved.")), h("a.btn", { href: "#interview" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
@@ -1053,6 +1054,109 @@ function viewEssay(arg) {
   }));
   draw();
   return h("div.col", h("a", { href: "#essay" }, "← Essays"), h("h1", bi(d.topic)), box);
+}
+
+// --- Mock interview -------------------------------------------------------------------------------
+// Teaching plan, interview: a board of five personas, questions from the approved bank filled with the member's own
+// DAF details (kept on this device). An AI board member can ask one follow-up per answer (/interview/follow); at
+// night or in a result week the board uses the bank only. No timer, no score: the last step is your own note.
+
+const DAF = [["district", "Home district"], ["state", "Home state"], ["graduation_subject", "Graduation subject"], ["previous_job", "Work before this (leave empty if none)"],
+  ["hobby", "A hobby you listed"], ["optional", "Optional subject"], ["service_preference", "First service preference"]];
+const IV_ORDER = ["sceptic", "hobby-prober", "ca-hawk", "quiet-one", "chair"];
+const ivFill = (t, daf) => t.replace(/\{(\w+)\}/g, (_, k) => daf[k] ?? "");
+const ivUsable = (q, daf) => (q.q?.en ?? "").match(/\{\w+\}/g)?.every((t) => daf[t.slice(1, -1)]?.trim()) ?? true;
+
+function ivPlan(qs, daf, seed) {
+  const sh = shuffle(qs.filter((q) => ivUsable(q, daf)), seed);
+  const out = [], seen = new Set();
+  const opener = sh.find((q) => q.depth === "opener" && q.persona === "chair") ?? sh.find((q) => q.depth === "opener");
+  if (opener) out.push(opener);
+  for (let i = 0; out.length < 10 && i < 50; i++) {
+    const p = IV_ORDER[i % IV_ORDER.length];
+    const q = sh.find((x) => x.persona === p && x.depth !== "opener" && !out.includes(x) && !seen.has(p + x.group));
+    if (q) { out.push(q); seen.add(p + q.group); }
+  }
+  return out.map((q) => q.id);
+}
+
+function viewInterview(arg) {
+  const qs = libraryOf("interview-bank").flatMap((i) => i.data.questions ?? []);
+  const personas = libraryOf("interview-personas")[0]?.data.personas ?? [];
+  const who = (k) => personas.find((p) => p.key === k) ?? { name: { en: "Board member", hi: "बोर्ड सदस्य" }, style: { en: "", hi: "" } };
+  const daf = store.get("interview:daf", {});
+  const log = store.get("interviewLog", []);
+  if (!qs.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Mock interview"), h("p", "The board's questions appear here once an English and a Hindi editor approve them."));
+
+  if (arg === "daf" || !Object.values(daf).some((v) => v?.trim())) {
+    const fields = DAF.map(([k, label]) => h("div.col", { style: { gap: "4px" } }, h("label.small", { for: "daf-" + k }, label), h("input", { id: "daf-" + k, style: { maxWidth: "420px" }, value: daf[k] ?? "", oninput: (e) => { daf[k] = e.target.value; store.set("interview:daf", daf); } })));
+    return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Your DAF, in short"),
+      h("p", "The board asks from your Detailed Application Form. Fill what you can; questions that need an empty field are skipped. This stays on this device."),
+      fields, h("button.primary", { onclick: () => { store.set("interview:daf", daf); location.hash = "#interview/start"; } }, "Save and meet the board"));
+  }
+
+  let st = store.get("interview:now");
+  if (arg === "start" || !st) {
+    if (arg !== "start") return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Mock interview"),
+      h("p", "A board of five. The Chair opens, then each member asks in their own way. Answer aloud as you would in the room, or type. No clock and no score: at the end you write one note to yourself."),
+      personas.length > 0 && h("div.card.soft", personas.map((p) => h("p.small", h("strong", bi(p.name)), " · ", bi(p.style)))),
+      h("div.row", h("a.btn.primary", { href: "#interview/start" }, "Start a board"), h("a.btn", { href: "#interview/daf" }, "Edit your DAF")),
+      log.length > 0 && h("div", h("h2", "Your notes"), log.slice().reverse().slice(0, 8).map((r) => h("div.card", h("div.small.muted", `${r.day} · ${r.asked} questions`), r.note && h("p", r.note)))));
+    st = { ids: ivPlan(qs, daf, Date.now() % 100000), i: 0, answers: {}, day: today() };
+    if (!st.ids.length) return h("div.col", h("p", "Fill a few more DAF details so the board has questions to ask."), h("a", { href: "#interview/daf" }, "Edit your DAF"));
+    store.set("interview:now", st);
+    if (arg === "start") { history.replaceState(null, "", "#interview"); }
+  }
+  const save = () => store.set("interview:now", st);
+  const box = h("div.col");
+  const draw = () => {
+    if (st.i >= st.ids.length) {
+      const note = h("textarea", { rows: 4, placeholder: "Which answer would you give differently, and how?", value: st.note ?? "", oninput: (e) => { st.note = e.target.value; save(); } });
+      return put(box, h("h2", "The board thanks you"),
+        h("p", "One note to yourself before you go. That's the only mark this gets."), note,
+        h("div.row", h("button.primary", { onclick: () => {
+          const a = Object.values(st.answers);
+          log.push({ day: st.day, asked: a.length, aloud: a.filter((x) => x.aloud).length, idk: a.filter((x) => x.idk).length, followUps: a.filter((x) => x.fu).length, note: (st.note ?? "").trim().slice(0, 600) });
+          store.set("interviewLog", log.slice(-50)); store.del("interview:now"); render();
+        } }, "Save the note")));
+    }
+    const q = qs.find((x) => x.id === st.ids[st.i]), p = who(q.persona), a = (st.answers[q.id] ??= {});
+    const text = ivFill(bi(q.q), daf);
+    const ta = h("textarea", { rows: 5, placeholder: "Type your answer, or answer aloud and jot the key points", value: a.text ?? "", style: { fontFamily: "var(--read-font)", fontSize: "17px" }, oninput: (e) => { a.text = e.target.value; save(); next.textContent = nextLabel(); } });
+    const nextLabel = () => (a.text?.trim() || a.idk ? "Next question" : "I answered aloud: next");
+    const next = h("button.primary", { onclick: () => { if (!a.text?.trim() && !a.idk) a.aloud = true; st.i++; save(); draw(); window.scrollTo(0, 0); } }, nextLabel());
+    const fuBox = h("div.col");
+    const drawFu = () => {
+      if (a.idk) return put(fuBox, h("div.card.soft", h("p", bi(p.onIDontKnow)), h("p.small.muted", q.idkOk ? "On a fact you don't know, saying so plainly is the right answer." : "Here the board wanted your view. Next time, try a line or two, even a tentative one.")));
+      if (a.fu) return put(fuBox, h("div.card.soft", h("div.small.muted", bi(p.name) + " · AI"), h("p", a.fu)),
+        h("textarea", { rows: 3, placeholder: "Your answer to the follow-up", value: a.fa ?? "", oninput: (e) => { a.fa = e.target.value; save(); } }));
+      if (a.fuNote) return put(fuBox, h("p.small.muted", a.fuNote));
+      put(fuBox);
+    };
+    const ask = () => {
+      if (words(a.text) < 8) { a.fuNote = "Type at least a sentence or two so the member has something to follow up on."; drawFu(); a.fuNote = null; return; }
+      put(fuBox, h("p.muted", bi(p.name) + " is thinking…"));
+      post("/interview/follow", { memberId: profile().memberId, persona: { name: bi(p.name), style: bi(p.style) }, question: text, answer: a.text, hindi: lang() === "hi" }).then((r) => {
+        if (r?.care) { pod.care = true; put(fuBox, careBox()); return; }
+        if (r?.quiet) a.fuNote = "The AI board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.";
+        else if (r?.limit) a.fuNote = "That's enough follow-ups for today. Carry on with the bank's questions.";
+        else if (!r || r.error) a.fuNote = r?.error ?? "Couldn't reach the board member. Check your connection.";
+        else a.fu = r.followUp;
+        save(); drawFu();
+      });
+    };
+    put(box, h("div.small.muted", `Question ${st.i + 1} of ${st.ids.length}`),
+      h("div.card", h("strong", bi(p.name)), h("div.small.muted", bi(p.style)), h("p", { style: { fontSize: "19px" } }, text)),
+      ta, fuBox,
+      h("div.row.wrap",
+        !a.fu && !a.idk && h("button", { onclick: ask }, "Ask me a follow-up (AI)"),
+        !a.idk && h("button", { onclick: () => { a.idk = true; save(); draw(); } }, "I don't know"),
+        next),
+      h("button.link.small", { onclick: () => { st.i = st.ids.length; save(); draw(); } }, "End the board here"));
+    drawFu();
+  };
+  draw();
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Mock interview"), box);
 }
 
 // --- Mock papers -------------------------------------------------------------------------------
@@ -3296,7 +3400,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
