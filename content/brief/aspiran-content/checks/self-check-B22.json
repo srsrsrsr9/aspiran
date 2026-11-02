@@ -1,0 +1,24 @@
+{
+  "batch": "B22",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content (final run): 2 files: syllabus 1 |  | 0 issues",
+    "Word counts with code: every section body 139 to 177 words (limit 180); section totals per note 619 to 681 (want 500 to 900); every examAngle 37 to 48 words (limit 60); every title 52 to 67 characters (limit 70).",
+    "Strict re-read of 5 random notes (seed 22): eth-syl-ethics-human-interface, eth-syl-private-public-values, eth-syl-attitude-structure-function, eth-syl-attitude-influence-persuasion, eth-syl-aptitude-foundational-values."
+  ],
+  "issuesFound": [
+    "eth-syl-ethics-human-interface hi: the civil servant's self-question used a masculine verb (कर सकता हूँ); the Hindi should stay free of gender.",
+    "eth-syl-emotional-intelligence hi: the self-awareness example used masculine forms (चिड़चिड़ा हो जाता है) where the English uses 'they'.",
+    "eth-syl-indian-moral-thinkers hi: the reader-facing tip used पक्के, a gendered adjective.",
+    "Re-read for facts: all five sampled notes rely on textbook-level material; every model, article, report and year is in factsToCheck and verify. No one-sided politics: the political-attitudes section describes neutrality without judging any party or government. Each note ends with selfCheck and asks questions inside sections, so none only informs."
+  ],
+  "fixed": [
+    "Rephrased to a gender-free passive: क्या सार्वजनिक रूप से इसका बचाव किया जा सकता है?",
+    "Rephrased with honorific plural: थकान में उनका धैर्य जल्दी टूटता है, वे ... टालते हैं।",
+    "Rephrased: जब तक आपको पूरा भरोसा न हो।"
+  ],
+  "stillOpen": [
+    "Node mapping gs4-1 to gs4-5 is assumed from the GS4 syllabus order; needs confirmation against the app.",
+    "Goleman's five-component labels match his workplace model (Working with Emotional Intelligence, 1998); his 1995 book names the domains slightly differently. Editor to confirm wording.",
+    "Hindi for empathy: सहानुभूति chosen, with हमदर्दी for sympathy; some texts use समानुभूति. Hindi editor to decide."
+  ]
+}

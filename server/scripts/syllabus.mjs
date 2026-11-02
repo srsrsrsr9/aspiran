@@ -17,7 +17,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const CONTENT = join(ROOT, "content");
 const KT = join(ROOT, "android", "app", "src", "main", "java", "com", "upscpods", "app", "data", "Syllabus.kt");
 const today = () => new Date().toISOString().slice(0, 10);
-const SUBJECTS = ["pol", "his", "anc", "art", "geo", "env", "eco", "sci", "ir", "soc", "eth", "mains", "ess", "csat"];
+const SUBJECTS = ["pol", "his", "anc", "art", "geo", "env", "eco", "sci", "ir", "sec", "soc", "eth", "mains", "ess", "csat"];
 
 /** Paper id → number of topics, read from Syllabus.kt. Prelims GS Paper I is "pre" in node ids. */
 function papers() {
@@ -125,11 +125,13 @@ const MOCK_LOOK = {
 
 function toRead(d, n) {
   return {
-    schema: "upsc-pods/long-read@1", id: n.id, tone: "NEUTRAL", title: { en: n.title },
+    schema: "upsc-pods/long-read@1", id: n.id, tone: n.tone ?? "NEUTRAL", title: n.hi?.title ? { en: n.title, hi: n.hi.title } : { en: n.title },
     node: n.nodes[0], nodes: n.nodes, topic: d.topic, gsPaper: n.gsPaper, minutes: n.minutes,
     en: { dek: n.dek, sections: n.sections, keyFacts: n.keyFacts, examAngle: n.examAngle, selfCheck: n.selfCheck },
+    ...(n.hi?.sections?.length ? { hi: { dek: n.hi.dek, sections: n.hi.sections, keyFacts: n.hi.keyFacts ?? [], examAngle: n.hi.examAngle ?? "", selfCheck: n.hi.selfCheck ?? [] } } : {}),
     sources: { en: n.sources.join("; ") },
-    review: REVIEW(`Draft, English only. Verify: ${n.verify}`),
+    ...(n.factsToCheck?.length ? { factsToCheck: n.factsToCheck } : {}),
+    review: REVIEW(`Draft, ${n.hi?.sections?.length ? "English and Hindi" : "English only"}. Verify: ${n.verify}`),
     provenance: PROVENANCE,
   };
 }

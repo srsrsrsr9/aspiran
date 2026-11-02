@@ -1,0 +1,24 @@
+{
+  "batch": "B17",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content (run 1): 1 issue (ir-syl-global-groupings: a hi string has no Devanagari: G20)",
+    "python3 check_batch.py aspiran-content (final): '1 files: syllabus 1' ... '0 issues'",
+    "Word counts by code: section bodies 131-165 words (limit 180); notes 576-635 words (want 500-900); examAngle 41-48 words (limit 60); titles 40-68 characters (limit 70)",
+    "Strict re-read of 5 notes picked at random: ir-syl-bilateral-neighbours, ir-syl-global-groupings, ir-syl-diaspora, ir-syl-nonalignment-autonomy, ir-syl-regional-groupings"
+  ],
+  "issuesFound": [
+    "Hindi section head for the G20 section was 'G20' only, with no Devanagari.",
+    "Diaspora note: the Ministry of Overseas Indian Affairs began in 2004 under a different name; the text's '2004' is right but the verify line did not flag the renaming.",
+    "Re-read found no one-sided political lines: the Quad section gives China's criticism and the members' response as formal positions only; Nepal treaty review and Teesta are described without blame.",
+    "Re-read found every note ends with selfCheck and each section ends with a recall prompt or exam instruction, so no note only informs.",
+    "Re-read compared Hindi with English for section, keyFact and selfCheck order and counts: all match; numbers kept as digits."
+  ],
+  "fixed": [
+    "Hindi head changed to 'G20 समूह'.",
+    "Added the 2004 renaming to the diaspora note's verify line."
+  ],
+  "stillOpen": [
+    "All dates, treaty terms and group memberships listed in factsToCheck need the editor's check, especially recent items (2014 onwards) and trade rankings.",
+    "World Bank remittance ranking is stated without a figure; recheck against the latest report."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "batch": "B10-geography",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/geography/nodes/geo-p1-01.json",
+      "id": "geo-p1-01",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-02.json",
+      "id": "geo-p1-02",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-05.json",
+      "id": "geo-p1-05",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/syllabus.json",
+      "id": "opt-geography-syllabus",
+      "items": 75
+    }
+  ],
+  "counts": {
+    "syllabus": 1,
+    "nodes": 3,
+    "syllabusNodes": 75,
+    "practiceQuestions": 10,
+    "recall": 37,
+    "skeletons": 10,
+    "examples": 12,
+    "paper1Nodes": 40,
+    "paper2Nodes": 35
+  },
+  "openQuestions": [
+    "Syllabus titles follow UPSC wording from memory of the notification; please check every title against the current UPSC CSE notification.",
+    "Paper 2 split: settlements and political aspects are 2 nodes each so that hazards land on geo-p2-31 as the done node geo-p1-04 expects; the urban node geo-p2-26 is heavy (about 3 hours) and could be split later, which would shift later numbers.",
+    "No separate node for Paper 2's compulsory map question; decide whether the app wants one.",
+    "geo-p1-03 and geo-p1-04 are not remade; their syllabus titles match their content. geo-p1-03 links to 'geo-p1-02-interior-geosynclines', consistent with this syllabus.",
+    "Two examples cite a standard text (Savindra Singh, Geomorphology) rather than NCERT: Tibet as Kober's median mass, and the Pat lands erosion surface. The editor may prefer to swap them.",
+    "Hindi for Kober's terms (kratogen, Zwischengebirge, gliptogenesis) is transliterated; the Hindi editor may know a preferred UPSC Hindi form."
+  ]
+}

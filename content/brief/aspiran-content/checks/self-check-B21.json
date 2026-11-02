@@ -1,0 +1,22 @@
+{
+  "batch": "B21",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 3 files: syllabus 1 |  | 0 issues"
+  ],
+  "issuesFound": [
+    "First checker run: 0 issues; word counts per section (131-168) and per note (588-662) counted with code.",
+    "Strict re-read of 5 notes (extremism, terrorism law, money laundering, border and coastal, forces and AFSPA): border note named the Line of Control, which touches disputed territory.",
+    "Terrorism note: 'low conviction rates' is a statistical claim not in factsToCheck.",
+    "AFSPA note: 'disturbed areas reduced over time' is a changing fact not in factsToCheck.",
+    "Hindi checked against English for the 5 re-read notes: same section, keyFact and selfCheck counts and order; politics described on both sides (AFSPA, UAPA, PMLA, security vs development)."
+  ],
+  "fixed": [
+    "Removed the Line of Control reference in English and Hindi; now 'where the Army is deployed on the line itself'.",
+    "Added the UAPA criticism (bail, trials, conviction rates) to factsToCheck with a note to check NCRB data.",
+    "Added the reduction of disturbed areas to factsToCheck as a changing fact."
+  ],
+  "stillOpen": [
+    "Editor to confirm all dates, section numbers and the Coast Guard date (Act 1978; interim force 1977).",
+    "Subject key choice (see manifest openQuestions)."
+  ]
+}

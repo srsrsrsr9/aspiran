@@ -1,0 +1,28 @@
+{
+  "batch": "B16",
+  "checksRun": [
+    "python3 -I check_batch.py aspiran-content -> final line: 0 issues",
+    "Code check: all 8 titles <= 70 characters (max 70); only the allowed note fields; hi has exactly title, dek, sections, keyFacts, examAngle, selfCheck",
+    "Code check: hi.sections, hi.keyFacts, hi.selfCheck lengths match English for every note; paragraph counts match per section; every hi string contains Devanagari",
+    "Code check: English section words per note 659 to 700 (all within 500 to 900); every section body <= 180 words (max 180); examAngle <= 60 words",
+    "Code check: banned words and emoji absent",
+    "Strict re-read (C6.4) of 5 random notes (seed 16): pol-gov-health, pol-gov-civil-society, pol-gov-education, pol-gov-civil-services, pol-gov-poverty-hunger"
+  ],
+  "issuesFound": [
+    "pol-gov-civil-society: said NGO trusts register under the Indian Trusts Act, 1882; that Act covers private trusts, while charitable NGOs register under state public trust laws",
+    "pol-gov-education: the qualitative claim that government and independent surveys report learning gaps, and that some states objected to NEP language provisions, were not in factsToCheck",
+    "pol-gov-transparency-accountability (found while writing): Section 8 privacy exemption was described in its pre-2023 form; the DPDP Act 2023 reworded Section 8(1)(j)",
+    "Several section bodies were first drafted at 181 to 191 words, over the 180 limit"
+  ],
+  "fixed": [
+    "pol-gov-civil-society: changed to 'public charitable trust under state trust laws' in English, Hindi and keyFacts; factsToCheck and verify updated",
+    "pol-gov-education: both claims added to factsToCheck and verify",
+    "pol-gov-transparency-accountability: Section 8 now says 'personal information, an exemption reworded by the DPDP Act, 2023'; added to factsToCheck and verify",
+    "Trimmed over-length sections in English and Hindi together; re-ran counts and the checker"
+  ],
+  "stillOpen": [
+    "Editor to confirm the current text and commencement of RTI Section 8(1)(j) after the DPDP Act 2023",
+    "Editor to confirm whether recent items (106th Amendment 2023, free NFSA grains since 2023, Ayushman Arogya Mandir name, Mission Karmayogi) should stay",
+    "Re-read found no one-sided political statements: RTI 2019 amendment, lateral entry, FCRA, PM-JAY, cash vs grain, NEP 2020 and the Global Hunger Index are each given with both views; Hindi matched English in meaning and order in all 5 notes read"
+  ]
+}

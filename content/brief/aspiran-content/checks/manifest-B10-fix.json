@@ -1,0 +1,57 @@
+{
+  "batch": "B10-fix",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/geography/nodes/geo-p1-03.json",
+      "id": "geo-p1-03",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-04.json",
+      "id": "geo-p1-04",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-03.json",
+      "id": "soc-p1-03",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-04.json",
+      "id": "soc-p1-04",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-05.json",
+      "id": "soc-p1-05",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "nodes": 5,
+    "sociology": 3,
+    "geography": 2,
+    "recallCards": 60,
+    "examples": 15
+  },
+  "openQuestions": [
+    "geo-p1-03 example 2 (Gulf of Bothnia uplift): added source Arthur Holmes, Principles of Physical Geology (isostasy chapter); source check listed in factsToCheck.",
+    "geo-p1-03 example 3 (marine fossils high in the Himalaya): no source I was confident of, so replaced with the Indian plate's northward movement closing the Tethys and raising the Himalaya, sourced to NCERT Class 11 Fundamentals of Physical Geography, 'Distribution of Oceans and Continents'; original claim moved to factsToCheck.",
+    "geo-p1-04 example 1 (Deccan Traps / Réunion hotspot): replaced with the Deccan Traps lava outpouring (about 60 million years ago) during the Indian plate's movement, sourced to the same NCERT chapter; Réunion link moved to factsToCheck (it stays in note section 2).",
+    "geo-p1-04: added factsToCheck flag that a revised BIS seismic code (2025) may add Zone VI for the Himalayan arc; text left as zones II–V until confirmed.",
+    "soc-p1-03 example 3 (NSS data): added source National Sample Survey Office, MoSPI, NSS round reports.",
+    "soc-p1-03 recall rebalanced from define 7/compare 1/apply 2/example 2 to 3/3/3/3: card 1 (steps) now an apply case on girls' school attendance; card 5 now an apply case on villagers answering to please surveyors; cards 6 and 7 now real compare cards (positivist vs interpretive on evidence; critical vs positivist on aim); card 8 now an example card (thinker per strand).",
+    "soc-p1-03 recall card 10: no longer calls Srinivas's Rampura fieldwork 'interpretive' outright; notes he is usually classed as a structural-functionalist (added to factsToCheck).",
+    "soc-p1-04 example 3 (crime data): replaced with NCRB Crime in India counting police-registered cases, sourced to National Crime Records Bureau, Crime in India (annual report); under-reporting claim moved to factsToCheck.",
+    "soc-p1-04 example 2 Hindi: added 'coroner' (कोरोनर, मृत्यु-जाँच अधिकारी), which the Hindi had dropped.",
+    "soc-p1-04 recall rebalanced from define 6/example 3/apply 2/compare 1 to 3/3/3/3: card 4 now an apply case (measuring religion as a social fact); card 5 reworded as an example card; card 6 compares positivist and interpretive views; card 7 an apply case on suicide classification; card 8 compares Frankfurt School and Popper critiques.",
+    "soc-p1-05 example 3 (insider/outsider debate): replaced with Béteille and Madan (eds.), Encounter and Experience (1975); original claim moved to factsToCheck.",
+    "soc-p1-05 recall rebalanced from define 7/compare 2/example 2/apply 1 to 3/3/3/3: value relevance and neutrality merged into one compare card; Myrdal vs Gouldner compare card; thinkers-per-approach example card; apply cases on generalising from one Delhi neighbourhood and on a dowry study under Weber's distinction. Dropped the plain define cards on value neutrality, Myrdal and the limits of non-positivist methods, and the interactionism vs ethnomethodology compare (all still covered in the note).",
+    "Sources I added but am not fully certain of the exact location: Holmes, Principles of Physical Geology for the Gulf of Bothnia uplift; the NCERT 'Distribution of Oceans and Continents' chapter for the Tethys/Himalaya and the Deccan Traps lava (about 60 million years ago). Please check edition and page.",
+    "Claims moved to factsToCheck because I had no confident source: marine fossils high in the Himalaya; Deccan Traps–Réunion hotspot link; under-reporting of some crimes in India; Indian sociologists' insider/outsider debate. The Réunion link and the insider/outsider debate still appear in note text and need a source or a softer wording.",
+    "geo-p1-04 seismic zones: a revised BIS code (2025) is reported to add Zone VI for the Himalayan arc. I left zones II–V in the text; the owner should confirm and update the note, card 8, skeleton 1 and one-pager line if so.",
+    "geo recall kinds were not part of the fix list and are unchanged (geo-p1-03: define 4/compare 3/example 3/apply 2; geo-p1-04: define 4/compare 4/example 2/apply 2); both pass the checker."
+  ]
+}

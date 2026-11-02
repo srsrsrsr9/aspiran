@@ -1,0 +1,22 @@
+{
+  "batch": "B13",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 13 files: restart 12  0 issues",
+    "Word limits counted with code: headlines 4-7 words (limit 8), bodies 27-37 words (limit 40).",
+    "Every pauseLineKey checked by code against done-B01-pause-lines.json.",
+    "Strict re-read of 5 random items: b13-02, b13-03, b13-06, b13-10, b13-11 (gap length never stated, no guilt or cheerleading, Hindi meaning and gender-free forms, each ends in a concrete 15-minute action)."
+  ],
+  "issuesFound": [
+    "Checker passed on the first run.",
+    "Strict re-read: b13-02 Hindi said 'easiest way' (सबसे आसान) where the English says 'quickest way'.",
+    "Strict re-read: b13-01 Hindi first draft used a gendered verb (छोड़ गए थे)."
+  ],
+  "fixed": [
+    "b13-02 Hindi changed to सबसे तेज़ तरीका.",
+    "b13-01 Hindi changed to the gender-free जैसे छोड़े थे."
+  ],
+  "stillOpen": [
+    "No facts to check in this batch; factsToCheck is empty on every item.",
+    "Owner to confirm whether a rest step (b13-11) counts as a 'first step'."
+  ]
+}

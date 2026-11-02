@@ -1,0 +1,56 @@
+{
+  "batch": "B10-psir",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/psir/syllabus.json",
+      "id": "opt-psir-syllabus",
+      "items": 110
+    },
+    {
+      "path": "optionals/psir/nodes/psir-p1-01.json",
+      "id": "psir-p1-01",
+      "items": 1
+    },
+    {
+      "path": "optionals/psir/nodes/psir-p1-02.json",
+      "id": "psir-p1-02",
+      "items": 1
+    },
+    {
+      "path": "optionals/psir/nodes/psir-p1-03.json",
+      "id": "psir-p1-03",
+      "items": 1
+    },
+    {
+      "path": "optionals/psir/nodes/psir-p1-04.json",
+      "id": "psir-p1-04",
+      "items": 1
+    },
+    {
+      "path": "optionals/psir/nodes/psir-p1-05.json",
+      "id": "psir-p1-05",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "syllabusNodes": 110,
+    "syllabusNodesPaper1": 67,
+    "syllabusNodesPaper2": 43,
+    "nodeFiles": 5,
+    "practiceQuestions": 15,
+    "recallCards": 60,
+    "skeletons": 15,
+    "examples": 18,
+    "thinkers": 24
+  },
+  "openQuestions": [
+    "Syllabus units follow the UPSC items; Section A/B labels are not separate fields (schema has none). Paper 1 Section B 'Principal Organs' (a) Union and (b) State are merged into one unit. Owner may want sections shown.",
+    "Node splits are our own choice (67 nodes in Paper 1, 43 in Paper 2); some, such as the Western thinkers, could be merged if the owner prefers fewer nodes.",
+    "Political Theory: meaning and approaches is split into two nodes (p1-01 meaning, p1-02 approaches); the six theories of the state are paired into three nodes (p1-03 to p1-05).",
+    "Hindi terms chosen: उपागम (approach), प्राधान्य (hegemony), सकारात्मक कार्रवाई (affirmative action), पश्च-औपनिवेशिक (post-colonial), नया उदारवाद (new liberalism, to keep it apart from नव-उदारवाद, neo-liberalism). Hindi editor to confirm against UPSC's Hindi syllabus.",
+    "No quotations are used; well-known lines (Laslett, Communist Manifesto, Ambedkar 25 November 1949) are paraphrased and listed in factsToCheck.",
+    "Links use made-up slugs (psir/..., gs2/...) for Claude Code to map."
+  ]
+}

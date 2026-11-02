@@ -22,7 +22,7 @@ const L = (v) => (v && typeof v === "object" ? (v[C.lang()] ?? v.en ?? []) : [])
 // --- Subjects and families -----------------------------------------------------------------------
 
 const SUBJECTS = [["pol", "Polity"], ["his", "Modern history"], ["anc", "Ancient and medieval"], ["art", "Art and culture"], ["geo", "Geography"],
-  ["env", "Environment"], ["eco", "Economy"], ["sci", "Science and tech"], ["ir", "World and India"], ["soc", "Society"], ["eth", "Ethics"],
+  ["env", "Environment"], ["eco", "Economy"], ["sci", "Science and tech"], ["ir", "World and India"], ["sec", "Internal security"], ["soc", "Society"], ["eth", "Ethics"],
   ["mains", "Answer writing"], ["ess", "Essay"], ["csat", "CSAT"]];
 const SUBJECT_NAME = Object.fromEntries(SUBJECTS);
 /** Subject from the id's prefix (pol-, geo-, ...). Older items without one go by a few words in the title. */

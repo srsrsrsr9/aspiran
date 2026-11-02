@@ -1,0 +1,24 @@
+{
+  "batch": "B06",
+  "checksRun": [
+    "Word limits counted with code: idea ≤40, useWhen ≤25, misuse ≤20, term meaning ≤30; longest example 20 words; no repeated term.",
+    "Strict re-read of 5 random items: Patel, Buddha, persuasion, rule of law, compassion. Nothing to fix in them.",
+    "Lead reviewer re-checked all 8 quotes for real, correct attribution.",
+    "python3 check_batch.py aspiran-content → 4 files: gs4-terms 2 / 0 issues"
+  ],
+  "issuesFound": [
+    "A factsToCheck entry asserted an unsure date (August 1947) for Gandhi's talisman.",
+    "terms.json had 61 terms."
+  ],
+  "fixed": [
+    "Talisman date removed and flagged for verification.",
+    "Dropped 'public trust' to make exactly 60 terms."
+  ],
+  "stillOpen": [
+    "Hindi editor: confirm GS4 terms against UPSC's Hindi GS4 syllabus: empathy समानुभूति (or सहानुभूति?), compassion करुणा (or संवेदना?), persuasion अनुनय (or धर्मानुनय?), probity ईमानदारी (प्रोबिटी) with honesty as सच्चाई (ऑनेस्टी), emotional intelligence भावनात्मक समझ (or भावनात्मक बुद्धिमत्ता?).",
+    "Editorial choice to confirm: the list includes living scholars Amartya Sen and Daniel Goleman, and Mother Teresa.",
+    "8 thinkers carry a quote (Gandhi's talisman, Ambedkar on constitutional morality, Tagore Gitanjali 35, Kautilya Arthashastra 1.19.34, Kant's universal law, Mill's Socrates line, Socrates via Plato's Apology, King's Letter from Birmingham Jail). Verify each wording against the named source; the Hindi of quotes is a free rendering (भावानुवाद), not an official translation.",
+    "Verify the Patel speech date (10 October 1949) and the date of Gandhi's talisman note (left undated on purpose).",
+    "Each file has a top-level notes string explaining the recall use; drop it if the importer rejects it."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "batch": "B19",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content: 2 files: syllabus 2 | 0 issues",
+    "Word counts by code: every section body 142 to 174 words (limit 180); totals per note 602 to 666 (want 500 to 900); examAngle 41 to 47 words (limit 60); titles 35 to 61 characters (limit 70).",
+    "Strict re-read of 5 notes: his-syl-world-wars-cold-war, his-syl-american-french-revolutions, his-syl-colonialism-decolonisation, soc-syl-women-organisations, soc-syl-communalism-regionalism-secularism."
+  ],
+  "issuesFound": [
+    "his-syl-world-wars-cold-war: draft gave a number for Indian soldiers in the First World War, a statistic not needed and not textbook-exact.",
+    "his-syl-american-french-revolutions: draft quoted a phrase from the Declaration of Independence in quotation marks.",
+    "his-syl-colonialism-decolonisation: draft called Ghana the first sub-Saharan colony to become independent; Sudan (1956) came earlier, so the claim was too strong.",
+    "soc-syl-women-organisations: draft said 'studies point both ways' on proxy representation without citing any study.",
+    "soc-syl-communalism-regionalism-secularism: checked for one-sided politics; no party or community is named as a cause, no violent incident is named, critics from different sides are attributed."
+  ],
+  "fixed": [
+    "Removed the soldier figure; now 'a very large number of soldiers and resources'.",
+    "Paraphrased the consent-of-the-governed idea without quotation marks; listed in factsToCheck.",
+    "Changed to 'among the first colonies in sub-Saharan Africa'.",
+    "Changed to 'Observers report both outcomes' and noted in factsToCheck that no study is cited.",
+    "No change needed; Hindi checked to match English section by section (same order, same lists)."
+  ],
+  "stillOpen": [
+    "Hindi for secularism: the notes use धर्मनिरपेक्षता (NCERT Hindi) in general and पंथनिरपेक्ष when citing the Preamble's word. Hindi editor to confirm.",
+    "No statistics (sex ratio, urban share, casualty totals) are given on purpose; the only figure is the NCERT Class IX Holocaust figure of about six million. Editor may add latest Census figures."
+  ]
+}

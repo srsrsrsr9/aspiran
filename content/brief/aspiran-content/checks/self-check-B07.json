@@ -1,0 +1,27 @@
+{
+  "batch": "B07",
+  "checksRun": [
+    "src/verify.py recomputes all 72 arithmetic, data, series and logic answers (logic puzzles solved by trying every case, proving a unique solution), confirms exactly one option matches and the key points to it: 72/72 pass.",
+    "verify.py also checks Hindi options are in the same order as English, each supportingLine is a whole sentence of the passage, and each 'why' is 40 words or fewer.",
+    "Correct-answer positions across the 8 weeks: index 0 x25, 1 x27, 2 x27, 3 x25; no two weeks share a pattern.",
+    "Strict re-read of 5 random items: W6#3, W7#11, W1#2, W2#6, W1#9.",
+    "python3 check_batch.py aspiran-content → 10 files: csat 8 / 0 issues"
+  ],
+  "issuesFound": [
+    "Ambiguous Hindi in W7#11 option 4 and W7#5 option 4.",
+    "A 'why' in W1#3 used a scolding 'मत कीजिए'.",
+    "Leftover draft phrase in the W6#7 'why'."
+  ],
+  "fixed": [
+    "Rewrote both Hindi options.",
+    "Softened the W1#3 explanation.",
+    "Rewrote the W6#7 'why'."
+  ],
+  "stillOpen": [
+    "The checker needs Devanagari in every Hindi option, so number options carry a Hindi unit ('680 रुपये', '25 प्रतिशत') and series options read '47 और 95' or 'पाँचवाँ पद (46)'. Confirm this style.",
+    "Decision-making items in weeks 2, 4, 6 and 8 involve officials' choices. Editors should confirm each keyed answer is the only defensible one.",
+    "Week 5 passage says eldercare at home is mostly done by women; week 8 passage describes benefits linked to a home address. Both are in factsToCheck; confirm they are fair and current.",
+    "Hindi explanations mix in English words ('trap', 'column') in the spoken register. Hindi editor to confirm the level.",
+    "Tables are rows of strings with bilingual header cells (e.g. 'Rent / किराया')."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "batch": "B10-history",
+  "checksRun": [
+    "python3 -I /home/claude/tools/check_batch.py aspiran-content — final output: 8 files: optionals 6 | 0 issues",
+    "Word counts by script: why <= 60, note <= 600, recall answers <= 40, examples <= 40, thinker ideas <= 30 (all within limits)",
+    "Recall kind balance: 3 define, 3 compare, 3 example, 3 apply in each node",
+    "Strict re-read of all 5 nodes plus the syllabus (fewer than 6 items, so every item was re-read)"
+  ],
+  "issuesFound": [
+    "hist-p1-01 factsToCheck said Cunningham was the ASI's first Director-General in 1861; he was appointed Archaeological Surveyor in 1861 and became Director-General in 1871.",
+    "Dates for Attirampakkam (about 1.5 million years), Mehrgarh (about 7000 BCE), early rice at Koldihwa and domestication at Bagor/Adamgarh are specialist estimates; they needed hedging in the text.",
+    "Syllabus: UPSC's '(1935-1947)' date for linguistic reorganisation looks odd but is how the syllabus prints it.",
+    "Indus-Sarasvati naming is a sensitive debate; checked that both positions are stated without endorsing either."
+  ],
+  "fixed": [
+    "Corrected the Cunningham fact in hist-p1-01 factsToCheck.",
+    "Hedged specialist dates in the notes ('has been dated to about', 'debated') and listed each in factsToCheck.",
+    "Kept the syllabus date as printed and flagged it in syllabus factsToCheck."
+  ],
+  "stillOpen": [
+    "All syllabus titles need checking against the current UPSC notification (wording reproduced from memory).",
+    "Hindi editor to confirm terms such as अभिलेखशास्त्र, पुरालिपिशास्त्र, स्तरविन्यास, सूक्ष्मपाषाण, गर्त-आवास, गोदीबाड़ा against NCERT Hindi usage.",
+    "Specialist dates and site attributions listed in each node's factsToCheck need checking against Upinder Singh (2008) or NCERT."
+  ]
+}

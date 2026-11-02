@@ -1,0 +1,27 @@
+{
+  "batch": "B18",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content (final output): 3 files: syllabus 1  0 issues",
+    "Word counts by code: every section body at most 180 words; notes total 582 to 656 English words; examAngle at most 47 words; titles at most 64 characters.",
+    "Strict re-read (C6.4) of 5 notes chosen at random with seed 18: anc-syl-buddhism-jainism, anc-syl-harappan-civilisation, anc-syl-temple-architecture, anc-syl-mauryas-ashoka-dhamma, anc-syl-bhakti-sufi-movements."
+  ],
+  "issuesFound": [
+    "Mauryas: 'Ashoka fought only one major war' stated more than the sources support.",
+    "Mauryas (hi): the same sentence used 'अपने राज्याभिषेक', which read awkwardly with a non-subject referent.",
+    "Vedic age: one source line merged two different books into one entry.",
+    "Bhakti and Sufi: 'gave bhakti and devotion a deeper base' was redundant (bhakti means devotion).",
+    "Sultanate and Mughals: the Class XII fine-arts book title is not certain.",
+    "Re-read found no one-sided politics, no invented quotes or PYQs, and every note ends with 3 to 5 self-check questions; Hindi sections, key facts and questions match the English in number and order."
+  ],
+  "fixed": [
+    "Changed to 'Ashoka's best-known war was against Kalinga' in English and Hindi.",
+    "Hindi changed to 'उनके राज्याभिषेक'.",
+    "Split into a clean R.S. Sharma (old NCERT) entry.",
+    "Reworded to 'gave bhakti a deeper philosophical base'.",
+    "Added an instruction to confirm the book title to that note's verify field."
+  ],
+  "stillOpen": [
+    "All dates, sites, rulers and texts are listed in factsToCheck for the human editor; none were checked against a pasted source.",
+    "Hindi spellings of some names (फ़ाह्यान, करैक्काल अम्मैयार, नालायिर दिव्य प्रबंधम) should be checked by the Hindi editor against NCERT Hindi editions."
+  ]
+}

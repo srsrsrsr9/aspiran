@@ -51,6 +51,13 @@ const SCHEMA_KIND: Record<string, string> = {
   "aspiran/interview-bank@1": "interview-bank",
   "aspiran/interview-personas@1": "interview-personas",
   "aspiran/optional-node@1": "optional-node",
+  "aspiran/optional-syllabus@1": "optional-syllabus",
+  "aspiran/mains-skeleton@1": "mains-skeleton",
+  "aspiran/gs4-case@1": "gs4-case",
+  "aspiran/gs4-glossary@1": "gs4-glossary",
+  "aspiran/csat-week@1": "csat-week",
+  "aspiran/walk-script@1": "walk-script",
+  "aspiran/restart-day@1": "restart-day",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
@@ -768,6 +775,13 @@ const BRIEF_TITLE: Record<string, (d: any) => string | undefined> = {
   "interview-bank": (d) => `Interview questions ${d.id} (${d.questions?.length ?? 0})`,
   "interview-personas": (d) => `Interview board personas (${d.personas?.length ?? 0})`,
   "optional-node": (d) => `${cap(d.optional ?? "optional")} paper ${d.paper ?? "?"}, ${d.id}: ${d.title?.en ?? d.onePagerPrompts?.en?.[0] ?? ""}`,
+  "optional-syllabus": (d) => `${cap(d.optional ?? "optional")}: syllabus map (${(d.papers ?? []).flatMap((p: any) => p.units ?? []).flatMap((u: any) => u.nodes ?? []).length} topics)`,
+  "mains-skeleton": (d) => `Answer skeleton: ${String(d.pyqId ?? d.id).replace(/^csm-(\d+)-gs(\d)-q0?/, "Mains $1 GS$2 Q")}`,
+  "gs4-case": (d) => `GS4 case ${String(d.id).replace(/^b05-case-0?/, "")}: ${d.tension?.en ?? d.setting ?? ""}`,
+  "gs4-glossary": (d) => d.thinkers ? `GS4 thinkers (${d.thinkers.length})` : `GS4 terms (${d.terms?.length ?? 0})`,
+  "csat-week": (d) => `CSAT week ${String(d.id).replace(/^csat-week-0?/, "")}`,
+  "walk-script": (d) => `Walk: ${d.topic?.en ?? d.id}`,
+  "restart-day": (d) => `Welcome back (${String(d.when ?? "").replace(/-/g, " ")}): ${d.headline?.en ?? ""}`,
 };
 
 export function titleOf(kind: string, d: any): string {

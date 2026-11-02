@@ -1,0 +1,81 @@
+{
+  "batch": "B13",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "restart/b13-01.json",
+      "id": "b13-01",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-02.json",
+      "id": "b13-02",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-03.json",
+      "id": "b13-03",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-04.json",
+      "id": "b13-04",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-05.json",
+      "id": "b13-05",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-06.json",
+      "id": "b13-06",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-07.json",
+      "id": "b13-07",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-08.json",
+      "id": "b13-08",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-09.json",
+      "id": "b13-09",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-10.json",
+      "id": "b13-10",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-11.json",
+      "id": "b13-11",
+      "items": 1
+    },
+    {
+      "path": "restart/b13-12.json",
+      "id": "b13-12",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "restartScripts": 12,
+    "about3Days": 3,
+    "about2Weeks": 3,
+    "about1Month": 3,
+    "badMockOrResult": 3
+  },
+  "openQuestions": [
+    "`when` holds an internal key (about-3-days, about-2-weeks, about-1-month, bad-mock-or-result); no screen text mentions the length of the gap.",
+    "headline, body and firstStep are en/hi pairs, like every other user-facing field.",
+    "b13-11 (after a result) is tone SERIOUS; the rest are NEUTRAL. None uses a joke or emoji.",
+    "pauseLineKey values are all from done-B01-pause-lines.json; some keys repeat across scripts (return-gap x3, one-pager-memory x2, restart-day x2). The owner may prefer one key per script.",
+    "b13-11's first step is rest, not study, by design; the owner may want a study step there instead."
+  ]
+}

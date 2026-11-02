@@ -1,0 +1,21 @@
+{
+  "batch": "B14",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 2 files: syllabus 1 | 0 issues",
+    "Code checks (B14-verify.py): titles <= 70 characters, hi lists match English in length, every section <= 180 words, notes run 696 to 716 words of sections: no problems.",
+    "Strict re-read of 5 random notes: pol-syl-fundamental-rights, pol-syl-federalism-centre-state, pol-syl-local-government, pol-syl-parliament-structure, pol-syl-parliament-lawmaking (facts against standard texts, Hindi key facts against English, each note ends in selfCheck)."
+  ],
+  "issuesFound": [
+    "Earlier drafting runs fixed word-limit and length issues the checker reported (scripts B14-fix1 to B14-fix5).",
+    "Strict re-read found no wrong facts: the 42nd Amendment's five subjects, Money Bill 14-day rule, joint sitting rules, Rajya Sabha strength, 73rd/74th Amendment schedules and dates all match standard texts.",
+    "No one-sided political judgement found; Sarkaria and Punchhi commissions are described, not judged."
+  ],
+  "fixed": [
+    "All checker issues from drafting runs."
+  ],
+  "stillOpen": [
+    "Every Article, amendment, case, date and figure is in factsToCheck and verify for the editor.",
+    "Hindi Article sub-letters (243 series) need the Hindi editor's confirmation.",
+    "Lok Sabha present strength and committee sizes can change; confirm at publication."
+  ]
+}

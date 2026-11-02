@@ -1,0 +1,24 @@
+{
+  "batch": "B10-public-administration",
+  "checksRun": [
+    "python3 -I /home/claude/tools/check_batch.py aspiran-content -> 7 files: optionals 6 |  | 0 issues",
+    "Own script checks: why <=60, note <=600 (pa-p1-01 514, -02 477, -03 490, -04 417, -05 465 words), 4 note sections each ending in a question (en and hi), 5+5 one-pager prompts, recall answers <=40, examples <=40, thinker ideas <=30, 3-5 skeleton headings, recall kinds 3/3/3/3 in every node",
+    "Strict re-read of all 5 nodes plus the syllabus (fewer than 5 random items available beyond these, so every item was re-read)"
+  ],
+  "issuesFound": [
+    "pa-p1-01 and pa-p1-03: one note section each ended with an instruction rather than a question (en and hi)",
+    "pa-p1-02 hi note section 4: awkward phrase 'जैसा आलोचक मानते' did not match the English 'as the critics would expect'",
+    "pa-p1-05: rent-seeking is attributed to Tullock in the note, but the term itself was coined by Krueger (1974); wording kept as 'Tullock described', and both are listed in factsToCheck",
+    "Syllabus: capitalised first letters on split nodes differ from UPSC's lowercase mid-sentence wording"
+  ],
+  "fixed": [
+    "Reworded the two section endings into questions in both languages",
+    "Changed the Hindi phrase to 'जैसी आलोचक अपेक्षा करते'",
+    "Checked political balance: Public Choice (pa-p1-05) and the dichotomy (pa-p1-02) each give supporters' and critics' views; no party or government is judged"
+  ],
+  "stillOpen": [
+    "All factsToCheck entries (book dates, conference years, rule numbers such as AIS Conduct Rules Rule 5, JFM circular date) need an editor's check",
+    "Syllabus wording to be checked against the current UPSC CSE notification",
+    "Capitalisation of split syllabus titles left for the owner to decide (see manifest openQuestions)"
+  ]
+}

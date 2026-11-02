@@ -1,0 +1,18 @@
+{
+  "batch": "B04",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 20 files: skeletons 20 |  | 0 issues",
+    "Word limits counted with code (whitespace words of English text).",
+    "Strict re-read of 5 random items: q05 (India's ITER share ~9%, cryostat), q12 (14 sectors, outlay), q18 (NDC numbers in the right year), q19 (accord dates; Manipur described neutrally), q09 (no communal framing; counter-measures included)"
+  ],
+  "issuesFound": [
+    "Checker passed on the first run.",
+    "Re-read: no factual errors found in the 5 items; q10's 2026 target is now in the past, flagged in openQuestions."
+  ],
+  "fixed": [
+    "No text changes needed after the re-read."
+  ],
+  "stillOpen": [
+    "Every scheme, figure and date is in factsToCheck."
+  ]
+}

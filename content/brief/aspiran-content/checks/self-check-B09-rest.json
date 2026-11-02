@@ -1,0 +1,19 @@
+{
+  "batch": "B09-rest",
+  "checksRun": [
+    "Strict re-read (polity/economy/geography): CAG, Parliamentary System, HDI, Liberalisation, Epicentre, Weathering. Fixed: Weathering meaning was circular; Equality before Law described equal protection of laws instead.",
+    "Strict re-read (environment/history/science-technology/society): Telemedicine, Glocalisation, Black hole, Ryotwari system, Renewable energy. Fixed Hindi wording in Renewable energy; earlier fixed Hindi meanings for BOD and Bhakti movement.",
+    "No meaning contains an article number or figure; all such facts are in factsToCheck. Longest English meaning: 16 words (limit 20).",
+    "python3 check_batch.py aspiran-content → 9 files: terms 7 / 0 issues"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "terms/society.json was rebuilt from scratch (the earlier 79-term list was not in the kit). An editor should compare it with the earlier 79 and decide which terms to keep, add or drop.",
+    "Hindi editor: confirm the main and alternative Hindi term where usage varies: धर्मनिरपेक्षता / पंथनिरपेक्षता (Constitution's Hindi text uses पंथनिरपेक्ष), मौलिक / मूल अधिकार, सर्वोच्च / उच्चतम न्यायालय, शोधन अक्षमता / दिवालियापन, सब्सिडी / सहायिकी, कृष्ण विवर / ब्लैक होल, जेंडर / सामाजिक लिंग, सुपोषण / यूट्रोफिकेशन, व्यपगत का सिद्धांत / हड़प नीति, गरमपंथी / उग्रवादी.",
+    "Reverse Repo Rate is defined the classic textbook way; RBI's corridor floor is now the SDF. Decide whether the term stays.",
+    "Sex ratio uses India's Census definition (females per 1000 males).",
+    "Chauth and Sardeshmukhi fractions are kept out of the meanings and listed in factsToCheck; decide whether to put them in.",
+    "Some terms appear in more than one subject list (e.g. Secularism, Climate change, Liberalisation). Decide whether repeats across lists are fine."
+  ]
+}

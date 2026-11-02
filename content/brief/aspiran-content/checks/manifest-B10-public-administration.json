@@ -1,0 +1,55 @@
+{
+  "batch": "B10-public-administration",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/public-administration/nodes/pa-p1-01.json",
+      "id": "pa-p1-01",
+      "items": 1
+    },
+    {
+      "path": "optionals/public-administration/nodes/pa-p1-02.json",
+      "id": "pa-p1-02",
+      "items": 1
+    },
+    {
+      "path": "optionals/public-administration/nodes/pa-p1-03.json",
+      "id": "pa-p1-03",
+      "items": 1
+    },
+    {
+      "path": "optionals/public-administration/nodes/pa-p1-04.json",
+      "id": "pa-p1-04",
+      "items": 1
+    },
+    {
+      "path": "optionals/public-administration/nodes/pa-p1-05.json",
+      "id": "pa-p1-05",
+      "items": 1
+    },
+    {
+      "path": "optionals/public-administration/syllabus.json",
+      "id": "opt-public-administration-syllabus",
+      "items": 91
+    }
+  ],
+  "counts": {
+    "syllabus": 1,
+    "nodes": 5,
+    "syllabusNodes": 91,
+    "practiceQuestions": 20,
+    "recallCards": 60,
+    "skeletons": 20,
+    "examples": 20,
+    "thinkers": 23
+  },
+  "openQuestions": [
+    "Syllabus node titles follow UPSC wording; long units were split at semicolons into 91 nodes (Paper 1: 52, Paper 2: 39). Check against the current UPSC CSE notification before publishing.",
+    "Where a split started a node mid-sentence (e.g. 'revenue administration', 'career advancement', 'pay and service conditions') the first letter was capitalised; otherwise wording is UPSC's.",
+    "Paper 2 unit 5 still names the Planning Commission and NDC, as UPSC prints it; nodes there will need to cover NITI Aayog as the current body. Owner to confirm.",
+    "Thinkers' ideas are paraphrased, not quoted (e.g. Wilson's knife image, 'politics without romance'); all are listed in factsToCheck for the editor.",
+    "Links use made-up slugs (public-administration/pa-p1-0x-..., gs2/..., gs3/...) for Claude Code to map.",
+    "Indian links to New Public Administration (Article 243D, MGNREGA social audit, RTI) are presented as reflecting its spirit, not as directly caused by it."
+  ]
+}

@@ -1,6 +1,7 @@
 // Imports the owner's content batches (the claude.ai Project's output, saved in content/brief/aspiran-content) into the
 // desk as drafts, through the same pack upload as import-pack.mjs.
 //   npm run import:brief -- ../content/brief/aspiran-content
+// Syllabus notes (B14–B22) are not here: they live in content/syllabus and go in with scripts/syllabus.mjs.
 // Only files a batch's checks/manifest-*.json lists are sent: those are the ones the checker passed. Each file gets its
 // schema from its folder, so the server knows its kind. Re-running is safe: unchanged items stay as they are; a changed
 // one goes back to draft with its approvals cleared. Needs EDITOR_TOKEN (and BASE for production), as import-pack does.
@@ -22,14 +23,24 @@ const SCHEMA_OF = [
   [/^interview\/personas\.json$/, "aspiran/interview-personas@1"],
   [/^interview\//, "aspiran/interview-bank@1"],
   [/^optionals\/[a-z-]+\/nodes\//, "aspiran/optional-node@1"],
+  [/^optionals\/[a-z-]+\/syllabus\.json$/, "aspiran/optional-syllabus@1"],
+  [/^skeletons\//, "aspiran/mains-skeleton@1"],
+  [/^gs4-cases\//, "aspiran/gs4-case@1"],
+  [/^gs4-terms\//, "aspiran/gs4-glossary@1"],
+  [/^csat\//, "aspiran/csat-week@1"],
+  [/^walk\//, "aspiran/walk-script@1"],
+  [/^restart\//, "aspiran/restart-day@1"],
 ];
 
 const checks = join(src, "checks");
-const listed = [];
-for (const f of readdirSync(checks).filter((n) => /^manifest-.+\.json$/.test(n)).sort()) {
+// A file a later batch fixed (B10-fix, B09-rest) is listed twice; the fixing batch wins.
+const byPath = new Map();
+const later = (n) => (/-(fix|rest)\.json$/.test(n) ? 1 : 0);
+for (const f of readdirSync(checks).filter((n) => /^manifest-.+\.json$/.test(n)).sort((a, b) => later(a) - later(b) || a.localeCompare(b))) {
   const m = JSON.parse(readFileSync(join(checks, f), "utf8"));
-  for (const file of m.files ?? []) listed.push({ path: file.path, batch: m.batch });
+  for (const file of m.files ?? []) byPath.set(file.path, { path: file.path, batch: m.batch });
 }
+const listed = [...byPath.values()];
 
 const day = new Date().toISOString().slice(0, 10);
 const packId = `brief-${day}`;

@@ -1,0 +1,95 @@
+{
+  "id": "b05-case-24",
+  "version": 1,
+  "tone": "SERIOUS",
+  "isPYQ": false,
+  "setting": "data-tech",
+  "tension": {
+    "en": "Speed against fairness",
+    "hi": "गति बनाम निष्पक्षता"
+  },
+  "case": {
+    "en": "You are the project director of a state programme to use face recognition to mark attendance and release monthly ration for people in remote areas. The Chief Minister wants it launched statewide on a date already announced, three weeks away. Pilot results show the system works well for most users, but fails much more often for elderly people, manual labourers and people with poor lighting at home. When it fails, the person must travel to the block office to verify. The vendor says the error rate will fall 'with more data' after launch. Field staff warn that some elderly people may stop getting rations. Opposition leaders call it a 'surveillance tool'; supporters say it will end fake beneficiaries.",
+    "hi": "आप एक राज्य कार्यक्रम के परियोजना निदेशक हैं, जो दूरदराज़ इलाक़ों में लोगों की उपस्थिति दर्ज करने और मासिक राशन जारी करने के लिए चेहरा पहचान का उपयोग करेगा। मुख्यमंत्री इसे तीन सप्ताह बाद, पहले से घोषित तारीख़ पर पूरे राज्य में शुरू करना चाहते हैं। पायलट के नतीजे बताते हैं कि प्रणाली ज़्यादातर उपयोगकर्ताओं के लिए अच्छा काम करती है, पर बुज़ुर्गों, हाथ से काम करने वाले मज़दूरों और घर में कम रोशनी वाले लोगों के लिए कहीं अधिक बार विफल होती है। विफल होने पर व्यक्ति को सत्यापन के लिए ब्लॉक कार्यालय जाना पड़ता है। विक्रेता कहता है कि शुरू होने के बाद 'अधिक डेटा के साथ' त्रुटि दर घटेगी। फ़ील्ड कर्मचारी चेतावनी देते हैं कि कुछ बुज़ुर्गों का राशन रुक सकता है। विपक्षी नेता इसे 'निगरानी का साधन' कहते हैं; समर्थक कहते हैं कि इससे फ़र्ज़ी लाभार्थी ख़त्म होंगे।"
+  },
+  "question": {
+    "en": "What are the options available to you? Evaluate each and state what you would do.",
+    "hi": "आपके पास कौन-से विकल्प हैं? हर एक का मूल्यांकन करें और बताएँ कि आप क्या करेंगे।"
+  },
+  "circle": {
+    "stakeholders": [
+      {
+        "who": {
+          "en": "Elderly and labourers",
+          "hi": "बुज़ुर्ग और मज़दूर"
+        },
+        "stake": {
+          "en": "Uninterrupted rations.",
+          "hi": "बिना रुकावट राशन।"
+        }
+      },
+      {
+        "who": {
+          "en": "Government",
+          "hi": "सरकार"
+        },
+        "stake": {
+          "en": "A timely, credible launch.",
+          "hi": "समय पर, विश्वसनीय शुरुआत।"
+        }
+      },
+      {
+        "who": {
+          "en": "Honest beneficiaries",
+          "hi": "ईमानदार लाभार्थी"
+        },
+        "stake": {
+          "en": "No leakage to fakes.",
+          "hi": "फ़र्ज़ी लोगों को रिसाव न हो।"
+        }
+      },
+      {
+        "who": {
+          "en": "Vendor",
+          "hi": "विक्रेता"
+        },
+        "stake": {
+          "en": "Contract and reputation.",
+          "hi": "अनुबंध और प्रतिष्ठा।"
+        }
+      }
+    ],
+    "inTension": {
+      "en": "A fast launch meets a political deadline and cuts leakage, but a known bias would fall on the most vulnerable.",
+      "hi": "तेज़ शुरुआत राजनीतिक समय-सीमा पूरी करती है और रिसाव घटाती है, पर एक ज्ञात पक्षपात सबसे कमज़ोर लोगों पर पड़ेगा।"
+    },
+    "options": [
+      {
+        "en": "Launch statewide on the date: meets the deadline, but excludes vulnerable people.",
+        "hi": "तारीख़ पर पूरे राज्य में शुरू: समय-सीमा पूरी, पर कमज़ोर लोग बाहर।"
+      },
+      {
+        "en": "Cancel the project: avoids harm now, but loses a useful tool and wastes the investment.",
+        "hi": "परियोजना रद्द: अभी नुकसान से बचाव, पर उपयोगी साधन खोता है और निवेश बर्बाद।"
+      },
+      {
+        "en": "Launch on the date in phases, with a mandatory non-biometric fallback (OTP or a local official's verification), no one denied rations for a failed scan, and published error rates: slower full rollout.",
+        "hi": "तारीख़ पर चरणों में शुरू, अनिवार्य ग़ैर-बायोमेट्रिक विकल्प (ओटीपी या स्थानीय अधिकारी का सत्यापन) के साथ, स्कैन विफल होने पर किसी का राशन न रुके, और त्रुटि दर सार्वजनिक: पूरा विस्तार धीमा।"
+      }
+    ],
+    "choice": {
+      "en": "Option 3. Technology should widen access, not narrow it; a fallback keeps the deadline and protects the weakest.",
+      "hi": "विकल्प 3। तकनीक को पहुँच बढ़ानी चाहिए, घटानी नहीं; विकल्प व्यवस्था समय-सीमा भी रखती है और सबसे कमज़ोर की रक्षा भी करती है।"
+    }
+  },
+  "seasoning": [
+    {
+      "en": "Do no harm: a public system must not shift its errors onto those least able to bear them.",
+      "hi": "हानि न करें: सार्वजनिक प्रणाली अपनी त्रुटियाँ उन पर न डाले जो उन्हें सबसे कम झेल सकते हैं।"
+    }
+  ],
+  "factsToCheck": [],
+  "review": {
+    "status": "draft"
+  }
+}

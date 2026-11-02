@@ -84,7 +84,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
     <div class="tile"><b>7</b><span>things waiting on you</span></div>
-    <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
+    <div class="tile"><b>22 of 22</b><span>content batches made (B01–B22); more asked for</span></div>
     <div class="tile"><b>Live</b><span>new homepage on aspiran.in since 2 Nov</span></div>
     <div class="tile"><b>9 of 10</b><span>teaching-plan build steps built (Hindi marking waits on a test)</span></div>
   </div>
@@ -103,8 +103,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Needs you</h2>
   <p class="lede">These can't move until you act. Most urgent first.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Send the made batches to the live Desk (2 minutes)</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code>. It needs your Desk key, which Claude must not see. 35 files land as drafts.</p></div></li>
-    <li><span class="n">1b</span><div><b>Content: running in the claude.ai Project</b><p>You're making the batches on the side. Tell Claude when zips are ready, and Claude checks them and brings them in as drafts. Still to fix: Geography optional notes 3–4, and the B10a links that use made-up topic names.</p></div></li>
+    <li><span class="n">1</span><div><b>Send all the content to the live Desk (5 minutes)</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code>. It needs your Desk key, which Claude must not see. About 300 drafts land: every batch from B01 to B22, plus the syllabus notes.</p></div></li>
+    <li><span class="n">1b</span><div><b>More content in the claude.ai Project</b><p>Paste the two messages in <code>artefacts/content-handoff-2026-11-02.md</code>: CSAT mocks, Hindi for the GS mocks, and the next optional topics go into the Project; videos V1 and V2 go into a new chat with code turned on.</p></div></li>
     <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
     <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
@@ -153,8 +153,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Claude's queue</h2>
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">2</span><div><b>Hook content into the built features as it's approved</b><p>GS4 case circle (needs B05), the CSAT part of the print set (B07), walk scripts (B08), welcome-back days (B13).</p></div></li>
+    <li><span class="n">1</span><div><b>Check each content zip as it arrives</b><p>B01–B22 are checked and ready to import. Next zips: run the code checks, clear facts-to-check, and send you fixes to paste back.</p></div></li>
+    <li><span class="n">2</span><div><b>Wire the new content into the apps</b><p>The content is made: Mains skeletons in Answer Studio, the GS4 case circle (B05), the CSAT part of the print set (B07), walk scripts in walk mode (B08), welcome-back days (B13).</p></div></li>
     <li><span class="n">3</span><div><b>Website follow-ups</b><p>A native Hindi read of the live Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
   </ul>
 </section>
@@ -167,10 +167,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <div class="tbl"><table>
     <thead><tr><th>Area</th><th>What's there</th><th>Gap</th></tr></thead>
     <tbody>
-      <tr><td>Past papers (PYQs)</td><td class="num">79 questions<small>Mains 2025 GS1, GS2, GS3 (20 each), GS4 (19)</small></td><td>No Prelims papers yet; no model skeletons (B02–B04)</td></tr>
-      <tr><td>Prelims mocks</td><td class="num">3 full mocks<small>300 GS Paper I questions</small></td><td>None for CSAT</td></tr>
+      <tr><td>Past papers (PYQs)</td><td class="num">79 questions<small>Mains 2025 GS1, GS2, GS3 (20 each), GS4 (19)</small></td><td>No Prelims papers yet. Skeletons for GS1–GS3 are made (B02–B04)</td></tr>
+      <tr><td>Prelims mocks</td><td class="num">3 full mocks<small>300 GS Paper I questions, English only</small></td><td>No CSAT full mock; Hindi asked for (B23, B24)</td></tr>
       <tr><td>CSAT</td><td class="num">3 comprehension sets</td><td>Reasoning, numeracy, data interpretation (B07)</td></tr>
-      <tr><td>Prep syllabus notes</td><td class="num">30 notes<small>Economy 8 · Environment 6 · Geography 8 · Modern history 8</small></td><td>Polity, governance, IR, culture, world history, society, science, internal security and Ethics have none (B14–B22)</td></tr>
+      <tr><td>Prep syllabus notes</td><td class="num">98 notes once imported<small>All GS subjects, plus a new Internal security subject; the 70 new ones are in English and Hindi</small></td><td>The first 28 are English only</td></tr>
       <tr><td>Chai current-affairs cards</td><td>Live, made daily</td><td>See Desk → Coverage</td></tr>
       <tr><td>Videos</td><td>Episodes 1–9 drafted<small>English, placeholder voice, not yet in the app</small></td><td>18 more topics (V1, V2)</td></tr>
     </tbody>
@@ -181,17 +181,17 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <thead><tr><th>Batch</th><th>What</th><th>Made</th><th>Status</th></tr></thead>
     <tbody>
       <tr><td><code>B01</code></td><td>Pause lines and Chotu's voice sheet</td><td class="num">50 lines, 1 sheet</td><td><span class="chip c-done">Made</span></td></tr>
-      <tr><td><code>B02–B04</code></td><td>Answer skeletons for the 60 Mains 2025 GS1–GS3 questions</td><td class="num">0 of 60</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B05</code></td><td>GS4 ethics cases (our own)</td><td class="num">0 of 24</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B06</code></td><td>GS4 thinkers and terms, in plain words</td><td class="num">0 of 100</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B07</code></td><td>CSAT weekly printable sets</td><td class="num">0 of 8 weeks</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B08</code></td><td>Walk-mode audio scripts</td><td class="num">0 of 20</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B09</code></td><td>English–Hindi term lists</td><td class="num">2 of 8 lists<small>Society (79, needs 1 more), IR (80)</small></td><td><span class="chip c-prog">Part made</span></td></tr>
-      <tr><td><code>B10</code></td><td>Optional subjects, 5 nodes per chat</td><td class="num">5 nodes<small>Sociology 3–5, Geography 3–4 (need small fixes)</small></td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>B02–B04</code></td><td>Answer skeletons for the 60 Mains 2025 GS1–GS3 questions</td><td class="num">60 of 60</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B05</code></td><td>GS4 ethics cases (our own)</td><td class="num">24 of 24</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B06</code></td><td>GS4 thinkers and terms, in plain words</td><td class="num">40 thinkers, 60 terms</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B07</code></td><td>CSAT weekly printable sets</td><td class="num">8 of 8 weeks</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B08</code></td><td>Walk-mode audio scripts</td><td class="num">20 of 20</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B09</code></td><td>English–Hindi term lists</td><td class="num">8 of 8 lists<small>80 terms each</small></td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B10</code></td><td>Optional subjects</td><td class="num">6 maps, 30 topics<small>Topics 1–5 for each of six optionals</small></td><td><span class="chip c-prog">Part made</span></td></tr>
       <tr><td><code>B11</code></td><td>Interview question bank and board personas</td><td class="num">300 questions, 5 personas</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B12</code></td><td>Essay practice topics with three-snap guides</td><td class="num">24 of 24</td><td><span class="chip c-done">Made</span></td></tr>
-      <tr><td><code>B13</code></td><td>Welcome-back day scripts</td><td class="num">0 of 12</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td><code>B14–B22</code></td><td>Syllabus notes for the gaps (polity, governance, IR, culture, world history, society, science, internal security, Ethics)</td><td class="num">0 of about 70</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B13</code></td><td>Welcome-back day scripts</td><td class="num">12 of 12</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B14–B22</code></td><td>Syllabus notes for the gaps (polity, governance, IR, culture, world history, society, science, internal security, Ethics)</td><td class="num">70 notes</td><td><span class="chip c-done">Made</span></td></tr>
     </tbody>
   </table></div>
 
@@ -199,15 +199,15 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <div class="tbl"><table>
     <thead><tr><th>Optional</th><th>Syllabus map</th><th>Nodes made</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>Sociology</td><td>Not yet</td><td class="num">3, 4, 5</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>Geography</td><td>Not yet</td><td class="num">3, 4</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>PSIR</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td>Anthropology</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td>History</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
-      <tr><td>Public Administration</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td>Sociology</td><td>Made (74 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Geography</td><td>Made (75 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>PSIR</td><td>Made (110 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Anthropology</td><td>Made (98 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>History</td><td>Made (166 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Public Administration</td><td>Made (91 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
     </tbody>
   </table></div>
-  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. The importers are built and live; the 35 checked files go to the Desk as drafts when you run the import runbook (Needs you, item 1). Then they wait for editor approval. The apps now have a place for each kind and show it once it's approved.</p>
+  <p class="note">All of B01–B22 is checked by code, saved in <code>content/</code>, and imported cleanly on a test server. The live server knows every kind (version <code>6c4bacb1</code>); the drafts land when you run the import runbook (Needs you, item 1), then wait for editor approval. Essays, terms, interview, optionals, pause lines and the syllabus notes show in the apps once approved. Skeletons, GS4 cases, CSAT weeks, walk scripts and welcome-back days sit on the Desk until Claude wires them into the apps (next in Claude's queue).</p>
 </section>
 
 <section id="website">

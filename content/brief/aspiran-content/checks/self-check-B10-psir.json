@@ -1,0 +1,24 @@
+{
+  "batch": "B10-psir",
+  "checksRun": [
+    "check_batch.py final output: 7 files: optionals 6  0 issues",
+    "Word limits counted with code (lib.save): why <= 60, note <= 600, recall answers <= 40, examples <= 40, thinker ideas <= 30",
+    "Recall kinds counted: 3 define, 3 compare, 3 example, 3 apply in every node",
+    "Strict re-read of all 5 nodes plus the syllabus as a checker who did not write them: facts, political balance, Hindi match, and whether every section asks something of the reader"
+  ],
+  "issuesFound": [
+    "psir-p1-03 Hindi used 'नव उदारवाद' for T.H. Green's new liberalism, too close to 'नव-उदारवाद' (neo-liberalism) and confusing for readers",
+    "First drafts of the theory notes risked one-sided framing of the 1991 reforms and of Marxism; checked that each node gives supporters' and critics' arguments",
+    "Examples in the style models had empty sources; every example here was given a named source and the fact added to factsToCheck"
+  ],
+  "fixed": [
+    "Changed to 'नया उदारवाद (न्यू लिबरलिज़्म)' in the note and skeleton of psir-p1-03",
+    "psir-p1-03 section 4 and psir-p1-04 section 4 state both sides; psir-p1-05 gives the reply to the feminist and post-colonial critiques",
+    "All 18 examples carry a non-empty source"
+  ],
+  "stillOpen": [
+    "Exact UPSC wording of the syllabus (English and Hindi) needs checking against the current notification",
+    "Dates and titles of works listed in each node's factsToCheck need a human check, especially Easton 1962 list of behavioural features, Cobban 1953, and Laslett 1956",
+    "Article 243D: wording on chairperson reservation for women is paraphrased; check the bare text"
+  ]
+}

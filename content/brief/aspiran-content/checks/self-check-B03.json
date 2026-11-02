@@ -1,0 +1,18 @@
+{
+  "batch": "B03",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 20 files: skeletons 20 |  | 0 issues",
+    "Word limits counted with code (whitespace words of English text).",
+    "Strict re-read of 5 random items: q03 (India's pardon is post-conviction; US excludes impeachment), q04 (Section 32 excludes public order and police; no seat numbers in text), q11 (cases and years), q14 (14th FC 42%, 15th FC 41%), q20 (vetoes by both sides named; Article 108)"
+  ],
+  "issuesFound": [
+    "Checker passed on the first run.",
+    "Re-read: q17 Hindi heading ended with a Latin full stop instead of a purna viram."
+  ],
+  "fixed": [
+    "Replaced the full stop with a purna viram in q17."
+  ],
+  "stillOpen": [
+    "Every case, article and date is in factsToCheck for the editor."
+  ]
+}

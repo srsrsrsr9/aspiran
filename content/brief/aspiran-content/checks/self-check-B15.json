@@ -1,0 +1,29 @@
+{
+  "batch": "B15",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content (final output: '2 files: syllabus 1' ... '0 issues')",
+    "Code checks (B15-merge.py, B15-count.py): every title <= 70 chars (max 70); hi sections/keyFacts/selfCheck lengths match English for all 8 notes; every section <= 180 words; section totals 659 to 815 words per note; examAngle <= 60 words; only the Part D fields used",
+    "Strict re-read as a non-author checker of 5 random notes (seed 15): pol-syl-supreme-court, pol-syl-president-vp, pol-syl-high-courts-review, pol-syl-constitutional-bodies, pol-syl-pm-council; also re-read pol-syl-statutory-bodies after the checker flagged it. Looked for wrong facts, one-sided politics, Hindi not matching English, items that only inform"
+  ],
+  "issuesFound": [
+    "Checker: banned word 'guaranteed' in pol-syl-statutory-bodies (NHRC definition of human rights)",
+    "Code count: sections over 180 words in pol-syl-state-executive, pol-syl-supreme-court, pol-syl-elections, pol-syl-high-courts-review and pol-syl-statutory-bodies",
+    "Re-read, pol-syl-high-courts-review: the line saying Indian judicial review is simply narrower than American due process was out of date after Maneka Gandhi (1978)",
+    "Re-read, pol-syl-pm-council: defector bar described as lasting 'until re-elected'; Article 75(1B) says until the term ends or re-election, whichever is earlier",
+    "Re-read, pol-syl-statutory-bodies: 'the idea of a Lokpal goes back to the First ARC' was loose; the ARC recommended it",
+    "Re-read: politics checked for balance; collegium vs NJAC, judicial activism, anti-defection, RTI 2019 amendment and tribunals each give both sides. Hindi matched English in count, order and facts in the sampled notes; every note ends in selfCheck questions"
+  ],
+  "fixed": [
+    "Reworded the NHRC definition without 'guaranteed' (paraphrase, not a quote)",
+    "Trimmed the overlong sections (and the matching Hindi) to <= 180 words",
+    "Rewrote the judicial review line: Article 21 'procedure established by law', and since Maneka Gandhi v Union of India (1978) courts test fair, just and reasonable procedure; added to factsToCheck and verify",
+    "Corrected the Article 75(1B) wording in English and Hindi; added it to factsToCheck and verify",
+    "Changed the Lokpal line to 'The First Administrative Reforms Commission (1966) recommended a Lokpal' in English and Hindi",
+    "Took out the NHRC one-year limit to keep a section within the word limit (and from factsToCheck/verify)"
+  ],
+  "stillOpen": [
+    "Recent changes are left out on purpose: the Election Commissioners' appointment law and the NHRC/CIC tenures; the editor should decide whether to add the current position",
+    "Supreme Court sanctioned strength (34) and case citation years (for example S.P. Gupta, 1981 or 1982) need the editor's check",
+    "File naming for two pol files (pol-polity-1 from B14, pol-polity-2 from B15) is the owner's call"
+  ]
+}

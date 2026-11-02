@@ -1,0 +1,30 @@
+{
+  "batch": "B08",
+  "checksRun": [
+    "Strict re-read (scripts 1-10): federalism, FR/DPSP, Gandhian mass movements, plate tectonics, inflation.",
+    "Strict re-read (scripts 11-20): fiscal deficit, energy flow, vaccines, secularism, attitude and aptitude, plus emotional intelligence.",
+    "Code check: no digits and no brackets other than pause marks in either language; English scripts 615-747 words.",
+    "python3 check_batch.py aspiran-content → 22 files: walk 20 / 0 issues"
+  ],
+  "issuesFound": [
+    "Hindi 'you' forms that were not gender-free, and तुम-form commands in the Gandhi script.",
+    "Two claims missing from factsToCheck: plate speed comparison, and the ~fifty years from drift to plate tectonics.",
+    "Gendered Hindi first-person verbs (रहा हूँ, बचता हूँ) in emotional intelligence and attitude scripts.",
+    "Secularism script grouped the US and France as one Western model."
+  ],
+  "fixed": [
+    "Rewrote those Hindi lines in neutral forms.",
+    "Added both claims to factsToCheck.",
+    "Made those Hindi verbs gender-neutral.",
+    "Removed the US/France line; trimmed secularism English to 747 words."
+  ],
+  "stillOpen": [
+    "Hindi walk scripts write numbers as words (spoken style), while rule C4 says numbers stay digits. Decide which rule wins for audio scripts.",
+    "minutes is estimated (about 140 words a minute plus pauses). Editors should time a real read.",
+    "Verify: RBI external benchmark lending circular (2019), priority sector lending described as a qualitative tool, N K Singh FRBM review committee report (2017), Lindeman's ten percent law (1942), 'principled distance' credited to Rajeev Bhargava.",
+    "The district-officer scene in walk-emotional-intelligence is an invented illustration (flagged in its factsToCheck).",
+    "Inflation script says the target has been four percent with a two-to-six band; it is reviewed every five years, so check the target in force.",
+    "Check hedged/contested points: Lothal as a dockyard, the citadel on the western side of Harappan cities, Mawsynram's rainfall rank.",
+    "Topics chosen (20): Polity 3, History 3, Geography 3, Economy 3, Environment 2, Science 2, Society 2, Ethics 2; none TRAGIC."
+  ]
+}

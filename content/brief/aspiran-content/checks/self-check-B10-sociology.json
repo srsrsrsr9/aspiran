@@ -1,0 +1,24 @@
+{
+  "batch": "B10-sociology",
+  "checksRun": [
+    "python3 -I /home/claude/tools/check_batch.py aspiran-content",
+    "4 files: optionals 3\n\n0 issues",
+    "Word counts by code: why 54/48 (limit 60), note 433/435 (limit 600), recall answers max 26 (limit 40), examples max 23 (limit 40), thinker ideas max 18 (limit 30)",
+    "Code check: each note section ends with a question in en and hi; recall kinds 3 of each in both nodes; one skeleton per practice question with 3-5 headings",
+    "Strict re-read (fewer than 5 nodes, so both nodes plus the syllabus): facts, balance, Hindi match, reader tasks"
+  ],
+  "issuesFound": [
+    "soc-p1-01 recall card on colonial modernity claimed railways brought travel 'across caste lines', an unsourced social claim",
+    "soc-p1-01 'twin revolutions' framing could read as a quotation of Nisbet",
+    "Syllabus ids had to stay consistent with done nodes soc-p1-03..05 and links soc-p1-09 (Durkheim), soc-p1-10 (Weber)"
+  ],
+  "fixed": [
+    "Softened the recall answer to 'new forms of travel and contact' in en and hi",
+    "Practice question paraphrases the idea without quotation marks; the Nisbet attribution is listed in factsToCheck",
+    "Verified by script: soc-p1-03/04/05 titles match the given numbering; soc-p1-08 Marx, -09 Durkheim, -10 Weber"
+  ],
+  "stillOpen": [
+    "Hindi syllabus terms (e.g. उद्देश्यपरकता, विसंबंधन, प्रतिरूप परिवर्त) need the Hindi editor to match UPSC's official Hindi syllabus",
+    "Beteille 1996 EPW essay details and Comte's coinage date (1838-39) are listed for fact-checking"
+  ]
+}

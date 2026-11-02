@@ -67,7 +67,7 @@ val FAMILIES: List<Triple<String, String, String>> = listOf(
 /** Subjects from the id prefix (pol-, geo-, ...), as on the web. */
 val SUBJECTS: List<Pair<String, String>> = listOf(
     "pol" to "Polity", "his" to "Modern history", "anc" to "Ancient and medieval", "art" to "Art and culture", "geo" to "Geography",
-    "env" to "Environment", "eco" to "Economy", "sci" to "Science and tech", "ir" to "World and India", "soc" to "Society", "eth" to "Ethics",
+    "env" to "Environment", "eco" to "Economy", "sci" to "Science and tech", "ir" to "World and India", "sec" to "Internal security", "soc" to "Society", "eth" to "Ethics",
     "mains" to "Answer writing", "ess" to "Essay", "csat" to "CSAT",
 )
 private val SUBJECT_NAME = SUBJECTS.toMap()

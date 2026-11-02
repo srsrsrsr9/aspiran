@@ -1,0 +1,31 @@
+{
+  "batch": "B10-geography",
+  "checksRun": [
+    "python3 -I check_batch.py aspiran-content: 6 files: optionals 4  0 issues",
+    "Word counts by code: notes 519, 488, 510 (limit 600); why 45, 47, 44 (limit 60); all recall answers, examples and thinker ideas within limits (checker)",
+    "Recall kinds counted by code: geo-p1-01 has 4 define, 3 compare, 3 example, 3 apply (13 cards); geo-p1-02 and geo-p1-05 have 3 of each (12 cards)",
+    "Syllabus ids checked by code: geo-p1-01 to geo-p1-40 and geo-p2-01 to geo-p2-35, with geo-p2-01 = structure and relief and geo-p2-31 = environmental hazards",
+    "Strict re-read of all 3 new nodes plus the syllabus (fewer than 5 new nodes), and of geo-p1-03/04 syllabus titles for consistency"
+  ],
+  "issuesFound": [
+    "syllabus: Hindi for 'Space relationship' was rendered as अंतरिक्ष संबंध (outer-space sense)",
+    "syllabus: grammar slip मानव की पारिस्थितिक अनुकूलन",
+    "geo-p1-02: a draft example on the Kola superdeep borehole had no NCERT source",
+    "geo-p1-02: shadow-zone wording needed to say S-waves are absent at all distances beyond 105°, not only 105°–145°",
+    "geo-p1-01: Thornbury's concept risked reading as a quotation",
+    "geo-p1-05: risk of presenting the Davis/Penck/King slope models as settled fact"
+  ],
+  "fixed": [
+    "Changed to स्थानिक संबंध",
+    "Changed to मानव के पारिस्थितिक अनुकूलन",
+    "Replaced with the NCERT example on South African gold mines",
+    "Note states S absent beyond 105° and P absent between about 105° and 145°",
+    "Paraphrased with no quotation marks; marked as paraphrase in factsToCheck",
+    "Note presents them as three differing views ('The theories differ'), each attributed"
+  ],
+  "stillOpen": [
+    "Syllabus wording to be checked against the current UPSC notification",
+    "Two examples sourced to a standard text rather than NCERT (see manifest openQuestions)",
+    "Dates in factsToCheck (Mohorovičić 1909, Lehmann 1936, Penck 1924, Hack 1960, Leopold-Wolman 1957, Wood 1942, Colaba Observatory 1841) need editor confirmation"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "batch": "B10-sociology",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/sociology/syllabus.json",
+      "id": "opt-sociology-syllabus",
+      "items": 74
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-01.json",
+      "id": "soc-p1-01",
+      "items": 1
+    },
+    {
+      "path": "optionals/sociology/nodes/soc-p1-02.json",
+      "id": "soc-p1-02",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "syllabusNodes": 74,
+    "syllabusNodesPaper1": 33,
+    "syllabusNodesPaper2": 41,
+    "nodeFiles": 2,
+    "practiceQuestions": 8,
+    "recallCards": 24,
+    "skeletons": 8,
+    "examples": 8,
+    "thinkers": 8
+  },
+  "openQuestions": [
+    "Syllabus wording was written from the known UPSC Sociology syllabus; it should be checked against the current CSE notification, and the Hindi titles against UPSC's official Hindi syllabus.",
+    "Some UPSC sub-topics are joined into one node (e.g. soc-p1-07, soc-p2-10, soc-p2-35) to keep each at 1-3 study hours; the owner may prefer finer splits.",
+    "Paper 2 has no official unit names beyond its A/B/C sections and numbered sub-headings, so unit names combine the two.",
+    "Link slugs such as soc-p2-05-modernization-indian-tradition and gs1/world-history-industrial-revolution are made-up slugs for Claude Code to map.",
+    "Andre Beteille's essay 'Sociology and Common Sense' (EPW, 1996) is cited from memory; year and argument are in factsToCheck."
+  ]
+}

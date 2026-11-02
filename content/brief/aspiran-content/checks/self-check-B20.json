@@ -1,0 +1,25 @@
+{
+  "batch": "B20",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content: 3 files: syllabus 1 0 issues",
+    "English section word counts per note counted with code: sci-syl-cell-genetics 577, sci-syl-nutrition-human-body 580, sci-syl-microbes-immunity 564, sci-syl-everyday-physics 628, sci-syl-everyday-chemistry 629, sci-syl-space-technology 593, sci-syl-nuclear-energy 610, sci-syl-biotech-emerging-tech 630 (all 500 to 900; every section 180 or fewer)",
+    "Strict re-read of 5 random sections (random.seed(20)): microbes-immunity section 2, everyday-chemistry section 1, nutrition-human-body section 3, space-technology section 1, microbes-immunity section 3, with their Hindi mirrors",
+    "PYQ check: no PYQs are used or named in this batch"
+  ],
+  "issuesFound": [
+    "Re-read: microbes-immunity section 2 listed hepatitis as viral without qualification; some hepatitis has non-viral causes.",
+    "Re-read of nuclear-energy Hindi (side check): the fission sentence repeated a word and read awkwardly.",
+    "Re-read: everyday-chemistry section 1 says metals sit on the left of the periodic table; hydrogen, top left, is a non-metal. Accepted as textbook-level simplification.",
+    "No one-sided politics found; the nuclear and GM crop sections give both sides and no verdict. Every note ends with selfCheck questions, so none only informs."
+  ],
+  "fixed": [
+    "Changed to viral hepatitis in English and Hindi.",
+    "Rewrote the Hindi fission sentence to read naturally.",
+    "Re-ran the checker after each fix: 0 issues."
+  ],
+  "stillOpen": [
+    "Editor to verify every entry in each note's factsToCheck and verify fields, especially the dated milestones (ISRO 1969, Aryabhata 1975, SLV-3 1980, Chandrayaan-1 2008, MOM 2013 and 2014, DAE 1954, CLND Act 2010, CRISPR Nobel 2020).",
+    "Bt cotton as the only commercially approved GM crop is flagged as may change.",
+    "The Hindi editor to confirm the term choices: समसूत्री and अर्धसूत्री विभाजन, केंद्रकाभ, पुनर्योगज DNA, प्रतिबंधन एंज़ाइम, यशदलेपन."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "batch": "B05",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 24 files: gs4-cases 24 |  | 0 issues",
+    "Word limits counted with code (whitespace words of English text).",
+    "Strict re-read of 5 random items: case 03 (D.K. Basu 1997), case 05 (Parmanand Katara 1989), case 09 (no real company named), case 18 (Olga Tellis 1985; humane option is lawful), case 24 (both political sides described, no judgement)"
+  ],
+  "issuesFound": [
+    "Checker passed on the first run.",
+    "Re-read: case 14's Kautilya line is a common attribution I could not confirm; flagged rather than removed."
+  ],
+  "fixed": [
+    "Added a verify note for case 14 in factsToCheck."
+  ],
+  "stillOpen": [
+    "Court cases used as seasoning are in factsToCheck."
+  ]
+}

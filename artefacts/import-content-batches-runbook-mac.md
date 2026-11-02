@@ -1,9 +1,12 @@
 # Bring the made content batches into the live Desk (Mac)
 
-2 Nov 2026. Takes about 2 minutes. You run it because it needs your Desk sign-in key, which Claude must never see.
+2 Nov 2026 (updated in the evening for B01–B22). Takes about 5 minutes. You run it because it needs your Desk sign-in key, which Claude must never see.
 
-What it does: sends every file a batch's `checks/manifest-*.json` lists (35 files: pause lines, Chotu's voice sheet,
-24 essay topics, 2 term lists, 3 interview banks, the board personas, 3 Sociology notes) to the live Desk as **drafts**.
+What it does: sends all of B01–B22 to the live Desk as **drafts**, in two parts:
+- Step 3: 200 files from the batches: pause lines, Chotu's voice, 24 essays, 8 term lists, the interview bank and
+  personas, 60 Mains answer skeletons, 24 GS4 cases, GS4 thinkers and terms, 8 CSAT weeks, 20 walk scripts,
+  12 welcome-back days, and 6 optionals (syllabus map and topics 1–5 each).
+- Step 4: the syllabus notes, 98 in all, including the 70 new ones from B14–B22 (now in English and Hindi), and the mocks.
 Nothing goes to aspirants until an English and a Hindi editor approve it. Running it again is safe: unchanged files stay as they are.
 
 Open Terminal (zsh). Run one command at a time.
@@ -27,20 +30,28 @@ Paste the key you use to sign in to the live Desk (the production one, or your p
 ```bash
 BASE=https://upsc-pods-production.chotu-aec.workers.dev npm run import:brief -- ../content/brief/aspiran-content
 ```
-- Success: a line like `35 files from 5 batches → pack brief-2026-11-02`, then a list ending with the number added
-  (or "unchanged" on a re-run). It also lists six term lists (polity, economy…) as "not made yet": that's expected.
+- Success: a line like `200 files from 20 batches → pack brief-2026-11-02`, then a long list ending with
+  "Imported." Items you already had say "unchanged".
 - Failure "401" or "Sign in": the key was wrong. Run Step 2 again.
 - Failure "fetch failed": check the internet connection and run Step 3 again.
 
-## Step 4. Forget the key
+## Step 4. Send the syllabus notes
+```bash
+node scripts/syllabus.mjs pack /tmp/aspiran-syllabus && BASE=https://upsc-pods-production.chotu-aec.workers.dev npm run import -- /tmp/aspiran-syllabus
+```
+- Success: `Pack syllabus-…: 98 reads, 4 mocks`, then "Imported." Notes about sound effects are fine.
+- Failure: the same fixes as Step 3.
+
+## Step 5. Forget the key
 ```bash
 unset EDITOR_TOKEN
 ```
 
-## Step 5. Look at them
+## Step 6. Look at them
 Open https://upsc-pods-production.chotu-aec.workers.dev/desk → Library. New tabs: Pause lines, Chotu's voice,
-Essay topics, Term lists, Interview questions, Interview personas, Optional subject notes. Each card shows English and
+Essay topics, Term lists, Interview questions, Interview personas, Optional subject notes, Optional syllabus maps,
+Mains answer skeletons, GS4 cases, GS4 thinkers and terms, CSAT weekly sets, Walk scripts, Welcome-back days, and more
+Long reads. Each card shows English and
 Hindi side by side, with a ⚑ flag for any facts to check against a source before approving.
 
-Not sent yet: Geography optional notes 3 and 4 (they need small fixes and aren't in a batch's checks file), and the six
-term lists still to be made.
+Everything made so far is in. Internal security notes sit under a new Prep subject, "Internal security".

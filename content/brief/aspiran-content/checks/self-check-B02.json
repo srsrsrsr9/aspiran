@@ -1,0 +1,18 @@
+{
+  "batch": "B02",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content -> 20 files: skeletons 20 |  | 0 issues",
+    "Word limits counted with code (whitespace words of English text).",
+    "Strict re-read of 5 random items: q03 (Chandella dates and UNESCO year), q07 (tsunami tone set to SERIOUS), q11 (Phule dates and works), q14 (onshore vs offshore contrast is geographic, not just a list), q19 (both sides present; no party named)"
+  ],
+  "issuesFound": [
+    "Checker passed on the first run.",
+    "Strict re-read: q11 dated Shetkaryacha Asud to 1881, but it was written in 1881 and published c. 1883."
+  ],
+  "fixed": [
+    "Added the publication note for Shetkaryacha Asud to q11 factsToCheck."
+  ],
+  "stillOpen": [
+    "Every date and example is in factsToCheck for the editor."
+  ]
+}

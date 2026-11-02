@@ -1,0 +1,98 @@
+{
+  "id": "b05-case-05",
+  "version": 1,
+  "tone": "SERIOUS",
+  "isPYQ": false,
+  "setting": "health",
+  "tension": {
+    "en": "Compassion against rules",
+    "hi": "करुणा बनाम नियम"
+  },
+  "case": {
+    "en": "You are the Medical Superintendent of a district hospital. At midnight, a daily-wage worker arrives with his wife, who is in severe respiratory distress after childbirth at home. She needs intensive care. The hospital's free treatment scheme requires an identity document and an entry in the beneficiary list; the family has neither, as they moved from another state two months ago. The only free ICU bed is reserved under the scheme, and the accounts officer reminds you that last year the hospital was audited for 'irregular admissions' and two staff were penalised. A private hospital nearby would charge more than the family can pay. The duty doctor says the woman may not survive a transfer.",
+    "hi": "आप एक ज़िला अस्पताल के चिकित्सा अधीक्षक हैं। आधी रात को एक दिहाड़ी मज़दूर अपनी पत्नी के साथ आता है, जिसे घर पर प्रसव के बाद साँस की गंभीर तकलीफ़ है। उसे गहन चिकित्सा चाहिए। अस्पताल की मुफ़्त इलाज योजना के लिए पहचान पत्र और लाभार्थी सूची में नाम ज़रूरी है; परिवार के पास दोनों नहीं हैं, क्योंकि वे दो महीने पहले दूसरे राज्य से आए हैं। एकमात्र ख़ाली आईसीयू बिस्तर योजना के तहत आरक्षित है, और लेखा अधिकारी याद दिलाते हैं कि पिछले साल 'अनियमित भर्ती' के लिए अस्पताल का ऑडिट हुआ था और दो कर्मचारियों पर दंड लगा था। पास का निजी अस्पताल परिवार की क्षमता से अधिक शुल्क लेगा। ड्यूटी डॉक्टर कहते हैं कि महिला शायद स्थानांतरण न झेल पाए।"
+  },
+  "question": {
+    "en": "What are the options available to you? Evaluate each and state what you would do.",
+    "hi": "आपके पास कौन-से विकल्प हैं? हर एक का मूल्यांकन करें और बताएँ कि आप क्या करेंगे।"
+  },
+  "circle": {
+    "stakeholders": [
+      {
+        "who": {
+          "en": "Patient and family",
+          "hi": "मरीज़ और परिवार"
+        },
+        "stake": {
+          "en": "Her life.",
+          "hi": "उसका जीवन।"
+        }
+      },
+      {
+        "who": {
+          "en": "Duty doctor and staff",
+          "hi": "ड्यूटी डॉक्टर और कर्मचारी"
+        },
+        "stake": {
+          "en": "Duty of care, fear of audit.",
+          "hi": "देखभाल का कर्तव्य, ऑडिट का डर।"
+        }
+      },
+      {
+        "who": {
+          "en": "Accounts officer",
+          "hi": "लेखा अधिकारी"
+        },
+        "stake": {
+          "en": "Rules and financial propriety.",
+          "hi": "नियम और वित्तीय औचित्य।"
+        }
+      },
+      {
+        "who": {
+          "en": "Scheme beneficiaries",
+          "hi": "योजना के लाभार्थी"
+        },
+        "stake": {
+          "en": "Fair access to reserved beds.",
+          "hi": "आरक्षित बिस्तरों तक उचित पहुँच।"
+        }
+      }
+    ],
+    "inTension": {
+      "en": "A life in immediate danger against documentation rules meant to prevent misuse.",
+      "hi": "तत्काल ख़तरे में एक जीवन, दुरुपयोग रोकने के लिए बने दस्तावेज़ी नियमों के विरुद्ध।"
+    },
+    "options": [
+      {
+        "en": "Refuse admission under the scheme: rule-safe, but may cost a life.",
+        "hi": "योजना के तहत भर्ती से इनकार: नियम के अनुसार सुरक्षित, पर जान जा सकती है।"
+      },
+      {
+        "en": "Refer to the private hospital: shifts responsibility, but risks death in transit and debt.",
+        "hi": "निजी अस्पताल भेजना: ज़िम्मेदारी टलती है, पर रास्ते में मौत और क़र्ज़ का ख़तरा।"
+      },
+      {
+        "en": "Admit now as an emergency, record reasons in writing, and complete papers later with the family's help: audit risk to you.",
+        "hi": "अभी आपात स्थिति में भर्ती करें, कारण लिखित में दर्ज करें, और परिवार की मदद से बाद में काग़ज़ पूरे करें: आप पर ऑडिट का जोखिम।"
+      }
+    ],
+    "choice": {
+      "en": "Option 3. Rules exist to serve patients; in an emergency, the right to life comes first, and written reasons keep it transparent.",
+      "hi": "विकल्प 3। नियम मरीज़ों की सेवा के लिए हैं; आपात स्थिति में जीवन का अधिकार पहले है, और लिखित कारण इसे पारदर्शी रखते हैं।"
+    }
+  },
+  "seasoning": [
+    {
+      "en": "Article 21: courts have read emergency medical care into the right to life.",
+      "hi": "अनुच्छेद 21: अदालतों ने आपात चिकित्सा को जीवन के अधिकार का हिस्सा माना है।"
+    }
+  ],
+  "factsToCheck": [
+    "Parmanand Katara v. Union of India (1989): duty to give emergency medical aid",
+    "Paschim Banga Khet Mazdoor Samity v. State of West Bengal (1996)"
+  ],
+  "review": {
+    "status": "draft"
+  }
+}

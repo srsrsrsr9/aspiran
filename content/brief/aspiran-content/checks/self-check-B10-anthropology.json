@@ -1,0 +1,27 @@
+{
+  "batch": "B10-anthropology",
+  "checksRun": [
+    "Own word-count script (common.py): why <=60, note <=600, recall answers <=40, examples <=40, thinker ideas <=30, every note section ends with a question in en and hi — all pass (notes 462–561 words)",
+    "Recall kinds counted: each node has 3 define, 3 compare, 3 example, 3 apply",
+    "Strict re-read of all 5 nodes (ant-p1-01 to ant-p1-05) and the syllabus as a checker who did not write them",
+    "check_batch.py output: 7 files: optionals 6 |  | 0 issues"
+  ],
+  "issuesFound": [
+    "ant-p1-02 note section 3 ended with an instruction, not a question (en and hi)",
+    "ant-p1-05 Hindi put 'survival of the fittest' in quotation marks while the English did not; inconsistent",
+    "ant-p1-05 recall Hindi grammar: 'पेप्पर्ड मॉथ का औद्योगिक कृष्णता' (wrong gender agreement)",
+    "ant-p1-01 note uses the evolutionists' term 'savagery'; checked that it is framed as their scheme, not the note's own view",
+    "Eric Wolf's bridge-between-sciences-and-humanities line: attribution uncertain, so it is paraphrased and unattributed"
+  ],
+  "fixed": [
+    "ant-p1-02 section 3 rewritten as a question in en and hi",
+    "ant-p1-05 Hindi quotes removed; English term added in brackets",
+    "ant-p1-05 Hindi corrected to 'पेप्पर्ड मॉथ में औद्योगिक कृष्णता'"
+  ],
+  "stillOpen": [
+    "Syllabus wording written from memory of the UPSC syllabus; needs a line-by-line check against the current notification (listed in syllabus factsToCheck)",
+    "All fossil and tool dates are rounded textbook figures and need expert checking (Laetoli, Lucy, Oldowan, Acheulian, Attirampakkam)",
+    "Example sources Sonakia (GSI report) and Pappu et al. (2011) are cited by author and outlet only; editors may want full citations",
+    "Hindi technical terms (उद्विकास, नरवानर, महारंध्र, जननद्रव्य) need the Hindi editor's check against UPSC Hindi papers"
+  ]
+}
