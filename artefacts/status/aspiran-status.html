@@ -1,0 +1,275 @@
+<title>Aspiran Build Status</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a single study register. Sticky section tabs, then one ruled section per question the owner asks. */
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1d2333; --muted:#5d6475; --line:#dcdbd3;
+  --accent:#2f3f78; --accent-soft:#e7eaf5; --marigold:#b9780f;
+  --done:#2c7a4b; --done-bg:#e3f2e8; --prog:#2f5fa8; --prog-bg:#e3ecf8;
+  --you:#9a5b00; --you-bg:#fbefd9; --todo:#626877; --todo-bg:#ecebe6; --part:#6a4fa0; --part-bg:#eee8f7;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Source Sans 3",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151f; --panel:#1a1f2c; --ink:#e7e9f0; --muted:#a2a8b8; --line:#2c3344;
+  --accent:#9fb0f0; --accent-soft:#232b45; --marigold:#e8b04a;
+  --done:#7fd3a0; --done-bg:#183324; --prog:#8db4f0; --prog-bg:#1a2a44;
+  --you:#f0c06a; --you-bg:#3a2c12; --todo:#b3b8c5; --todo-bg:#262b37; --part:#c4b0ef; --part-bg:#2b2440;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12151f; --panel:#1a1f2c; --ink:#e7e9f0; --muted:#a2a8b8; --line:#2c3344;
+  --accent:#9fb0f0; --accent-soft:#232b45; --marigold:#e8b04a;
+  --done:#7fd3a0; --done-bg:#183324; --prog:#8db4f0; --prog-bg:#1a2a44;
+  --you:#f0c06a; --you-bg:#3a2c12; --todo:#b3b8c5; --todo-bg:#262b37; --part:#c4b0ef; --part-bg:#2b2440;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+header h1{font:700 clamp(28px,5vw,40px)/1.1 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+header p{margin:6px 0 0;color:var(--muted);max-width:68ch}
+.asof{font:600 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--marigold)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin:20px 0 8px;overflow-x:auto}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;white-space:nowrap}
+nav a{display:block;padding:6px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+section{padding-top:28px;scroll-margin-top:60px}
+h2{font:700 24px/1.2 var(--display);margin:0 0 4px;text-wrap:balance}
+h3{font:600 17px/1.3 var(--display);margin:20px 0 8px}
+.lede{color:var(--muted);margin:0 0 14px;max-width:70ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.tile b{font:700 26px/1 var(--display);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:14px}
+.chip{display:inline-block;font:600 12px/1 var(--body);padding:5px 9px;border-radius:999px;white-space:nowrap;letter-spacing:.02em}
+.c-done{background:var(--done-bg);color:var(--done)} .c-prog{background:var(--prog-bg);color:var(--prog)}
+.c-you{background:var(--you-bg);color:var(--you)} .c-todo{background:var(--todo-bg);color:var(--todo)}
+.c-part{background:var(--part-bg);color:var(--part)}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.list li .n{font:600 13px var(--mono);color:var(--marigold);padding-top:2px;min-width:2ch}
+.list li div{min-width:0}
+.list li p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--accent-soft)}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+td small{display:block;color:var(--muted)}
+code{font:13px var(--mono);background:var(--accent-soft);padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.cols>div{min-width:0}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:2.2em 1fr auto;gap:4px 10px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);font:700 20px/1 var(--display);color:var(--accent)}
+.steps li div{min-width:0}
+.steps li p{margin:3px 0 0;color:var(--muted);font-size:15px}
+.bar{height:8px;border-radius:999px;background:var(--todo-bg);overflow:hidden;display:flex;margin:10px 0 6px}
+.bar i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.note{border-left:3px solid var(--marigold);padding:8px 14px;background:var(--panel);border-radius:0 8px 8px 0;color:var(--muted);font-size:15px;margin-top:16px}
+footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:14px}
+@media (max-width:520px){.steps li{grid-template-columns:2em 1fr}.steps li .chip{grid-column:2;justify-self:start}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="asof">Updated 2 November 2026</div>
+  <h1>Aspiran: where we are</h1>
+  <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
+  <div class="tiles">
+    <div class="tile"><b>10</b><span>things waiting on you</span></div>
+    <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
+    <div class="tile"><b>Not merged</b><span>new homepage, ready to preview</span></div>
+    <div class="tile"><b>0 of 10</b><span>teaching-plan build steps finished (5 partly there)</span></div>
+  </div>
+</header>
+
+<nav aria-label="Sections"><ul>
+  <li><a href="#you">Needs you</a></li>
+  <li><a href="#done">Done</a></li>
+  <li><a href="#next">Claude's queue</a></li>
+  <li><a href="#content">Content</a></li>
+  <li><a href="#website">Website</a></li>
+  <li><a href="#pedagogy">Teaching plan</a></li>
+</ul></nav>
+
+<section id="you">
+  <h2>Needs you</h2>
+  <p class="lede">These can't move until you act. Most urgent first.</p>
+  <ul class="list">
+    <li><span class="n">1</span><div><b>Switch off username sign-in on the live app</b><p>Admin → Flags → <code>password_login</code> → off. The code default is off now, but the setting saved on 20 Oct overrides it. Claude isn't allowed to change live flags.</p></div></li>
+    <li><span class="n">2</span><div><b>Content: two answers, then start the claude.ai Project</b><p>Pick the order of the optionals (suggested: first 5 nodes of Sociology, Geography, PSIR, Anthropology, History, Public Administration) and approve the 18 video topics. Then set up the Project and run Group 1 (9 chats at once). Steps: <code>artefacts/content-project-how-to.md</code>.</p></div></li>
+    <li><span class="n">3</span><div><b>Preview and merge the new homepage</b><p>Branch <code>homepage-v2</code> merges cleanly. Merging publishes aspiran.in. Steps 5a to 5d of <code>artefacts/website-v2-runbook-mac.md</code>.</p></div></li>
+    <li><span class="n">4</span><div><b>Legal details for the privacy and legal pages</b><p>SnapSkill LLP's registered address, a support email, the Grievance Officer's name, the court city, and how long we keep visitor answers.</p></div></li>
+    <li><span class="n">5</span><div><b>Android signing key</b><p>Copy <code>upsc-pods-keys/</code> (with <code>upload.jks</code>) from the old PC to this Mac. No Play upload is possible without it.</p></div></li>
+    <li><span class="n">6</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Follow <code>artefacts/android-aspiran-id-firebase-mac.md</code>. Google sign-in on Android needs it.</p></div></li>
+    <li><span class="n">7</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product so in-app Plus can be switched on.</p></div></li>
+    <li><span class="n">8</span><div><b>Email sending (Resend)</b><p>Verify aspiran.in in Resend, then type in <code>RESEND_API_KEY</code> and <code>MAIL_FROM</code> with <code>wrangler secret put</code>.</p></div></li>
+    <li><span class="n">9</span><div><b>Cashfree to live mode</b><p>The web checkout for the ₹999 × 300 offer is still sandbox, so the site only collects contacts for now.</p></div></li>
+    <li><span class="n">10</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
+  </ul>
+</section>
+
+<section id="done">
+  <h2>Done</h2>
+  <p class="lede">Since the move to the Mac (31 Oct). Older work is in the handover notes.</p>
+  <div class="cols">
+    <div>
+      <h3>App and server</h3>
+      <ul class="list">
+        <li><span class="chip c-done">Live</span><div><b>Server deploy, 1 Nov</b><p>Version <code>c4639958</code>: new Desk and Admin (clear sign-in, plain messages, Coverage by paper and topic), website Chotu routes, visitor table. Claude runs server deploys from now on.</p></div></li>
+        <li><span class="chip c-done">In code</span><div><b>Google sign-in only</b><p>Username sign-in is off by default. The live flag still needs you (item 1).</p></div></li>
+        <li><span class="chip c-done">Built</span><div><b>Android builds on the Mac</b><p>Play id is now <code>in.aspiran.app</code>; the server's Play check uses it.</p></div></li>
+        <li><span class="chip c-done">Built</span><div><b>Read aloud with the device voice</b><p>Chai cards (not tragic ones) and long reads, Android and web. Not yet heard on a real phone.</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>Code on GitHub</b><p>Private repo <code>srsrsrsr9/aspiran</code>, pushed after each piece of work.</p></div></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Plans, research and content set-up</h3>
+      <ul class="list">
+        <li><span class="chip c-done">Done</span><div><b>Exam-tools research, 4 parts</b><p>543 tools catalogued; ideas graded A to E by evidence. Notes for Aspiran are kept separate.</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>Teaching plan (pedagogy reply)</b><p>Answers to all 21 of your comments, plus a build order. See the Teaching plan tab.</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>AI cost per aspirant</b><p>Text AI ₹200–450 a month for a heavy user; live voice is the price risk; ₹9,999 works with voice capped.</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>Content brief and claude.ai Project</b><p>One brief, 22 batches, a checker script that every chat runs, and a status file. The first paste (47 files) was checked and saved as drafts.</p></div></li>
+        <li><span class="chip c-done">Built</span><div><b>New homepage and privacy page</b><p>On the <code>homepage-v2</code> branch, waiting for you to merge.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <h2>Claude's queue</h2>
+  <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
+  <ul class="list">
+    <li><span class="n">1</span><div><b>Build step 1 of the teaching plan: the spine</b><p>One review queue on FSRS, the syllabus map with Met / Can recall / Can use, and a Today screen that shows one step at a time.</p></div></li>
+    <li><span class="n">2</span><div><b>Bring finished content into the app</b><p>Write importers for the new kinds (pause lines, essays, interview bank, term lists, optional nodes). Then import the checked batches as drafts for the Desk.</p></div></li>
+    <li><span class="n">3</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
+    <li><span class="n">4</span><div><b>Chotu's model order</b><p>English chat still tries NVIDIA first; you said Groq. Align it, and put Gemini first for photographed answers.</p></div></li>
+    <li><span class="n">5</span><div><b>AI pod friends</b><p>Drop the human backstories, rename "Pooja · AI" (it clashes with the real editor), and start a provisional pod on day 1.</p></div></li>
+    <li><span class="n">6</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
+    <li><span class="n">7</span><div><b>Website follow-ups</b><p>Hindi homepage; put SnapSkill LLP into the privacy page; Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
+  </ul>
+</section>
+
+<section id="content">
+  <h2>Content coverage</h2>
+  <p class="lede">What the app has now, and what the claude.ai Project is making. <b>Everything is a draft</b>: no English and Hindi editor has approved any of it yet. Live counts of Chai cards and library items per topic are in Desk → Coverage.</p>
+  <div class="legend"><span class="chip c-done">Made</span><span class="chip c-prog">Part made</span><span class="chip c-todo">Not started</span><span class="chip c-part">In the app</span></div>
+  <h3>In the app now</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Area</th><th>What's there</th><th>Gap</th></tr></thead>
+    <tbody>
+      <tr><td>Past papers (PYQs)</td><td class="num">79 questions<small>Mains 2025 GS1, GS2, GS3 (20 each), GS4 (19)</small></td><td>No Prelims papers yet; no model skeletons (B02–B04)</td></tr>
+      <tr><td>Prelims mocks</td><td class="num">3 full mocks<small>300 GS Paper I questions</small></td><td>None for CSAT</td></tr>
+      <tr><td>CSAT</td><td class="num">3 comprehension sets</td><td>Reasoning, numeracy, data interpretation (B07)</td></tr>
+      <tr><td>Prep syllabus notes</td><td class="num">30 notes<small>Economy 8 · Environment 6 · Geography 8 · Modern history 8</small></td><td>Polity, governance, IR, culture, world history, society, science, internal security and Ethics have none (B14–B22)</td></tr>
+      <tr><td>Chai current-affairs cards</td><td>Live, made daily</td><td>See Desk → Coverage</td></tr>
+      <tr><td>Videos</td><td>Episodes 1–9 drafted<small>English, placeholder voice, not yet in the app</small></td><td>18 more topics (V1, V2)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Being made in the claude.ai Project</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Batch</th><th>What</th><th>Made</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td><code>B01</code></td><td>Pause lines and Chotu's voice sheet</td><td class="num">50 lines, 1 sheet</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B02–B04</code></td><td>Answer skeletons for the 60 Mains 2025 GS1–GS3 questions</td><td class="num">0 of 60</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B05</code></td><td>GS4 ethics cases (our own)</td><td class="num">0 of 24</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B06</code></td><td>GS4 thinkers and terms, in plain words</td><td class="num">0 of 100</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B07</code></td><td>CSAT weekly printable sets</td><td class="num">0 of 8 weeks</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B08</code></td><td>Walk-mode audio scripts</td><td class="num">0 of 20</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B09</code></td><td>English–Hindi term lists</td><td class="num">2 of 8 lists<small>Society (79, needs 1 more), IR (80)</small></td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>B10</code></td><td>Optional subjects, 5 nodes per chat</td><td class="num">5 nodes<small>Sociology 3–5, Geography 3–4 (need small fixes)</small></td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>B11</code></td><td>Interview question bank and board personas</td><td class="num">300 questions, 5 personas</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B12</code></td><td>Essay practice topics with three-snap guides</td><td class="num">24 of 24</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>B13</code></td><td>Welcome-back day scripts</td><td class="num">0 of 12</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>B14–B22</code></td><td>Syllabus notes for the gaps (polity, governance, IR, culture, world history, society, science, internal security, Ethics)</td><td class="num">0 of about 70</td><td><span class="chip c-todo">Not started</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Optional subjects</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Optional</th><th>Syllabus map</th><th>Nodes made</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Sociology</td><td>Not yet</td><td class="num">3, 4, 5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Geography</td><td>Not yet</td><td class="num">3, 4</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>PSIR</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td>Anthropology</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td>History</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td>Public Administration</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. They are not yet in the app: they need the importers (Claude's queue, item 2), then editor approval.</p>
+</section>
+
+<section id="website">
+  <h2>Website (aspiran.in)</h2>
+  <p class="lede">The live site still shows the old homepage, with your latest tagline. The new one is built and waiting.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Piece</th><th>Status</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>New long homepage (17 rooms, Chotu walks along)</td><td><span class="chip c-you">Needs you</span></td><td>Branch <code>homepage-v2</code>, 2 commits ahead of the live site; merges cleanly. Merge to publish.</td></tr>
+      <tr><td>Chotu chat and visitor answers on the site</td><td><span class="chip c-done">Live on server</span></td><td><code>/web/chotu</code> and <code>/web/lead</code> deployed 1 Nov. The live homepage doesn't use them until the merge.</td></tr>
+      <tr><td>Visitor list download</td><td><span class="chip c-done">Live</span></td><td>Admin → web leads, as a spreadsheet (CSV).</td></tr>
+      <tr><td>Privacy page</td><td><span class="chip c-prog">Drafted</span></td><td>Covers website chat, visitor answers, contact only with the tick, AI providers. Placeholders: address, grievance contact, how long we keep data.</td></tr>
+      <tr><td>Hindi homepage</td><td><span class="chip c-todo">Not started</span></td><td>After the English one is live.</td></tr>
+      <tr><td>₹999 × 300 checkout</td><td><span class="chip c-you">Needs you</span></td><td>Cashfree still in sandbox. The site says "save my seat" and only collects contacts.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="pedagogy">
+  <h2>Teaching plan</h2>
+  <p class="lede">The final position after your comments and the research (full text: <code>artefacts/pedagogy-response-2026-11-01.md</code>), then how much of it is built.</p>
+
+  <h3>The plan in short</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Topic</th><th>Decision</th></tr></thead>
+    <tbody>
+      <tr><td>A big plan that feels small</td><td>Today shows one step at a time. The full plan is one tap away, never on the front screen.</td></tr>
+      <tr><td>Pause lines</td><td>Our own lines, placed where the idea is used. No made-up quotes from real people.</td></tr>
+      <tr><td>Which tactic where</td><td>Retrieval and spacing everywhere. Mixing topics only for maths, CSAT, maps and "which of these" Prelims items, never essays.</td></tr>
+      <tr><td>Review schedule</td><td>FSRS, a tested open scheduler, replaces our fixed day rules.</td></tr>
+      <tr><td>AI-made content</td><td>It's the source, like a textbook, never the last step. Every piece makes the aspirant produce something (answer from memory, a one-pager, their own card).</td></tr>
+      <tr><td>Your room</td><td>Private sleep log, notes, journal, to-dos and export. Never scored. Sleep gets the most care.</td></tr>
+      <tr><td>Languages</td><td>Hindi first for practice and evaluation. Telugu waits.</td></tr>
+      <tr><td>Away from the screen</td><td>Audio walks, weekly printables, paper answers. No "wait for Wi-Fi"; a 12 MB day pack is the target.</td></tr>
+      <tr><td>Missed days</td><td>Plans bend: set steps after 1 missed day, 1 week and 1 month. Welcome-back scripts, no guilt.</td></tr>
+      <tr><td>Writing</td><td>Mark yourself, then AI, then rewrite. Paper by default, stylus allowed. Essays in three snaps: skeleton, outline, essay.</td></tr>
+      <tr><td>AI marking</td><td>Called "a second opinion next to your own marks" until 50 answers are compared with two experienced evaluators. Hindi marking waits for the same test.</td></tr>
+      <tr><td>Progress</td><td>Only "you vs. you" and "ready by exam date". No cut-offs, no "toppers had X by now".</td></tr>
+      <tr><td>Mistakes</td><td>The Sunday Fix turns each logged mistake into one change. A log alone isn't built.</td></tr>
+      <tr><td>Keep for Mains</td><td>One quiet nudge, only on cards an editor marked high value.</td></tr>
+      <tr><td>Interview</td><td>Chotu plays the board members; the pod is the human board.</td></tr>
+      <tr><td>Sound and motion</td><td>Relaxed. Tragic-tone rules and Chotu's quiet hours (23:30–07:00) stay.</td></tr>
+      <tr><td>Tracking</td><td>Track what helps learning, with one plain notice and four opt-ins (DPDP Act 2023, Play data safety).</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Build progress</h3>
+  <div class="bar" role="img" aria-label="0 of 10 steps built, 5 partly built, 5 not started"><i style="width:0%;background:var(--done)"></i><i style="width:50%;background:var(--part)"></i></div>
+  <div class="legend"><span class="chip c-done">Built</span><span class="chip c-part">Partly there</span><span class="chip c-todo">Not started</span></div>
+  <ol class="steps" style="margin-top:14px">
+    <li><div><b>Spine</b><p>Review queue on FSRS, the syllabus map (Met / Can recall / Can use), one-step Today. Today's 3 exists; the rest doesn't. Claude's next job.</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Writing</b><p>Answer Studio with skeletons and AI marking exists. Self-mark first, the rewrite loop, three-snap essays and the GS4 case circle are not built.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Your room</b><p>A private journal (stays on the phone) and Close the day exist. Notes, to-dos, the sleep log and export are not built.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Hindi evaluation</b><p>Waits for the 50-answer test with two evaluators.</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Pods v2</b><p>Answer hour exists. Pair comparison, the helper role, merging quiet pods and open pods are not built.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Off-screen</b><p>Read-aloud is built. Walk mode, weekly printables and the offline queue are not. Content: B07, B08.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Chai v2</b><p>Keep for Mains, case files, the high-value nudge.</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Progress views</b><p>You vs. you, readiness by exam date, calibration.</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Interview</b><p>Question bank and personas are made (B11). The app feature isn't built.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Optionals</b><p>Comes in as you make the packs (B10).</p></div><span class="chip c-todo">Not started</span></li>
+  </ol>
+</section>
+
+<footer>
+  Kept by Claude Code. The source is <code>artefacts/status/aspiran-status.html</code> in the app folder; every session that changes the plan, content, website or build updates it and republishes this page.
+</footer>
+</div>
