@@ -83,10 +83,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
-    <div class="tile"><b>7</b><span>things waiting on you</span></div>
+    <div class="tile"><b>8</b><span>things waiting on you</span></div>
     <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
     <div class="tile"><b>Live</b><span>new homepage on aspiran.in since 2 Nov</span></div>
-    <div class="tile"><b>1 of 10</b><span>teaching-plan build steps finished (5 partly there)</span></div>
+    <div class="tile"><b>9 of 10</b><span>teaching-plan build steps built (Hindi marking waits on a test)</span></div>
   </div>
 </header>
 
@@ -109,7 +109,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
     <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
     <li><span class="n">5</span><div><b>Cashfree to live mode</b><p>The web checkout for the ₹999 × 300 offer is still sandbox, so the site only collects contacts for now.</p></div></li>
-    <li><span class="n">6</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
+    <li><span class="n">6</span><div><b>Hindi homepage: a native Hindi read</b><p>Built and checked on phone and desktop, not published. Read it in the website preview (or ask Claude for the text) and say go; Claude then publishes it.</p></div></li>
+    <li><span class="n">7</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
   </ul>
 </section>
 
@@ -120,6 +121,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Live</span><div><b>The rest of the teaching plan, 2 Nov</b><p>Aspiran's name on every screen. Writing: mark yourself first, AI as a second opinion, one rewrite; essays in three snaps. Mock interview with five board personas. Your room: sleep, notes, to-dos, journal, export. Keep for Mains and your case file. You vs. you. Pods v2: Answer hour pair comparison, a monthly pod helper, quiet pods joined only after Ops approves. Walk mode, a weekly print set, optional-subject pages, English–Hindi terms, and pause lines at first moments. Live on the web (version <code>7e1cadfa</code>); Android in the code for the next release. Each piece shows content only once editors approve it.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Nobody starts alone, 2 Nov</b><p>On day one a new person is put in three open rooms to start: their language, their attempt and their goal. They're told which, and can leave any. Once matched pods are on, someone whose exact group has nobody yet joins the closest active pod (same stage and language), never an empty one. On Monday, if a pod for their exact group has formed, they're asked privately whether to move. Live on the web; Android with the next release.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Content importers, 2 Nov</b><p>The Desk now takes pause lines, Chotu's voice sheet, essay topics, term lists, interview questions and personas, and optional-subject notes, English and Hindi side by side, each with a flag for facts to check. One command sends every checked batch in as drafts. Tried locally with all 35 made files.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>The spine, 2 Nov</b><p>One review for everything: every Chai question you answer, every miss and every topic you've met comes back just before you'd forget it (the Friday and monthly sets are gone). A syllabus map of all 228 topics, each Not started, Met, Can recall or Can use, with no percentages. Today now shows one next step, with the full list one tap away. Live on the web; in the Android code for the next release.</p></div></li>
@@ -153,8 +155,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
     <li><span class="n">1</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">2</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
-    <li><span class="n">3</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The Met / Can use map the site talks about is now built.</p></div></li>
+    <li><span class="n">2</span><div><b>Hook content into the built features as it's approved</b><p>GS4 case circle (needs B05), the CSAT part of the print set (B07), walk scripts (B08), welcome-back days (B13).</p></div></li>
+    <li><span class="n">3</span><div><b>Website follow-ups</b><p>Publish the Hindi homepage after your read. Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
   </ul>
 </section>
 
@@ -206,7 +208,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
       <tr><td>Public Administration</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
     </tbody>
   </table></div>
-  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. The importers are built and live; the 35 checked files go to the Desk as drafts when you run the import runbook (Needs you, item 1). Then they wait for editor approval. The apps don't show these new kinds to aspirants yet.</p>
+  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. The importers are built and live; the 35 checked files go to the Desk as drafts when you run the import runbook (Needs you, item 1). Then they wait for editor approval. The apps now have a place for each kind and show it once it's approved.</p>
 </section>
 
 <section id="website">
@@ -219,7 +221,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
       <tr><td>Chotu chat and visitor answers on the site</td><td><span class="chip c-done">Live on server</span></td><td><code>/web/chotu</code> and <code>/web/lead</code>, used by the live homepage.</td></tr>
       <tr><td>Visitor list download</td><td><span class="chip c-done">Live</span></td><td>Admin → web leads, as a spreadsheet (CSV).</td></tr>
       <tr><td>Privacy and terms</td><td><span class="chip c-done">Live</span></td><td>SnapSkill LLP, Mohali, Punjab; hello@aspiran.in; courts at Mohali; answers kept until the person asks us to delete them.</td></tr>
-      <tr><td>Hindi homepage</td><td><span class="chip c-todo">Not started</span></td><td>After the English one is live.</td></tr>
+      <tr><td>Hindi homepage</td><td><span class="chip c-you">Needs you</span></td><td>Built at <code>/hi/</code>, with Chotu speaking Hindi; waits for a native Hindi read before it goes live.</td></tr>
       <tr><td>₹999 × 300 checkout</td><td><span class="chip c-you">Needs you</span></td><td>Cashfree still in sandbox. The site says "save my seat" and only collects contacts.</td></tr>
     </tbody>
   </table></div>
@@ -254,19 +256,19 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   </table></div>
 
   <h3>Build progress</h3>
-  <div class="bar" role="img" aria-label="1 of 10 steps built, 5 partly built, 4 not started"><i style="width:10%;background:var(--done)"></i><i style="width:50%;background:var(--part)"></i></div>
+  <div class="bar" role="img" aria-label="9 of 10 steps built, 1 not started"><i style="width:90%;background:var(--done)"></i></div>
   <div class="legend"><span class="chip c-done">Built</span><span class="chip c-part">Partly there</span><span class="chip c-todo">Not started</span></div>
   <ol class="steps" style="margin-top:14px">
-    <li><div><b>Spine</b><p>Built. One FSRS review queue for questions and topics, the syllabus map (Met / Can recall / Can use, no percentages; "Can recall" needs a check a week or more later; faded topics go back to Met), and the one-step Today. Live on the web; Android with the next release. The Plus coverage meter on Android's Syllabus tab still shows a percentage; it goes when Progress views are built.</p></div><span class="chip c-done">Built</span></li>
-    <li><div><b>Writing</b><p>Answer Studio with skeletons and AI marking exists. Self-mark first, the rewrite loop, three-snap essays and the GS4 case circle are not built.</p></div><span class="chip c-part">Partly there</span></li>
-    <li><div><b>Your room</b><p>A private journal (stays on the phone) and Close the day exist. Notes, to-dos, the sleep log and export are not built.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Spine</b><p>Built. One FSRS review queue for questions and topics, the syllabus map (Met / Can recall / Can use, no percentages; "Can recall" needs a check a week or more later; faded topics go back to Met), and the one-step Today. Live on the web; Android with the next release.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Writing</b><p>Built: self-mark first, AI as a second opinion, one rewrite with one fix, essays in three snaps. The GS4 case circle waits on the B05 cases.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Your room</b><p>Built: sleep in one tap (your own accuracy by sleep after three weeks), notes typed or spoken and pinned to topics, to-dos with no dates, the journal, export.</p></div><span class="chip c-done">Built</span></li>
     <li><div><b>Hindi evaluation</b><p>Waits for the 50-answer test with two evaluators.</p></div><span class="chip c-todo">Not started</span></li>
-    <li><div><b>Pods v2</b><p>Answer hour exists, and nobody starts alone (starter rooms, the closest pod). Pair comparison, the helper role and merging quiet pods are not built.</p></div><span class="chip c-part">Partly there</span></li>
-    <li><div><b>Off-screen</b><p>Read-aloud is built. Walk mode, weekly printables and the offline queue are not. Content: B07, B08.</p></div><span class="chip c-part">Partly there</span></li>
-    <li><div><b>Chai v2</b><p>Keep for Mains, case files, the high-value nudge.</p></div><span class="chip c-todo">Not started</span></li>
-    <li><div><b>Progress views</b><p>You vs. you, readiness by exam date, calibration.</p></div><span class="chip c-todo">Not started</span></li>
-    <li><div><b>Interview</b><p>Question bank and personas are made (B11). The app feature isn't built.</p></div><span class="chip c-part">Partly there</span></li>
-    <li><div><b>Optionals</b><p>Comes in as you make the packs (B10).</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Pods v2</b><p>Built: Answer hour with pair comparison (one private reason), a monthly volunteer pod helper, starter rooms and the closest pod, quiet pods joined only after Ops approves, with a Keep me here choice.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Off-screen</b><p>Built: read-aloud, walk mode with the phone's voice, the weekly print set. The CSAT part of the print set waits on B07; no QR code on the sheet yet.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Chai v2</b><p>Built: editors mark about 1 card in 5 high value; Keep for Mains into your case file, which shows topics with no example yet.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Progress views</b><p>Built: You vs. you (writing then and now, how often your own marks agree, sure vs. guess), weeks to Prelims, markers by date. The Syllabus tab's percentage is gone.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Interview</b><p>Built: five board personas ask from the approved bank with your DAF (kept on the device), one AI follow-up per answer, no clock, no score.</p></div><span class="chip c-done">Built</span></li>
+    <li><div><b>Optionals</b><p>Built: optional-subject topic pages and English–Hindi term search. They fill as you make the packs (B09, B10).</p></div><span class="chip c-done">Built</span></li>
   </ol>
 </section>
 

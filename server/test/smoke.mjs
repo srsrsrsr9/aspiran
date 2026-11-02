@@ -299,7 +299,7 @@ await post(`/admin/api/incidents/${inc}`, { status: "Resolved", message: "Test o
 st = (await call("/status.json", { auth: false })).data;
 assert.notEqual(st.components.pods.state, "degraded");
 const statusPage = await fetch(`${BASE}/status`);
-assert.ok(statusPage.status === 200 && (await statusPage.text()).includes("UPSC Pods status"));
+assert.ok(statusPage.status === 200 && (await statusPage.text()).includes("Aspiran status"));
 step("announcements reach /config, incidents show on the public /status page");
 
 // Members: pause chat, then unpause.
