@@ -36,6 +36,8 @@ def strings(o):
 ids = collections.Counter()
 for f in sorted(glob.glob("**/*.json", recursive=True)):
     d = json.load(open(f, encoding="utf-8"))
+    if f.startswith("syllabus/"):
+        walk(f, d); continue  # the app's own notes format; checked by the importer
     for k in ("id", "version", "tone", "factsToCheck", "review"):
         if k not in d: add(f, f"missing {k}")
     if d.get("version") != 1: add(f, "version not 1")
@@ -84,7 +86,7 @@ for f in sorted(glob.glob("**/*.json", recursive=True)):
         for t in T:
             if wc(t["meaning"]["en"]) > 20: add(f, f"{t['en']}: meaning {wc(t['meaning']['en'])} words > 20")
             if not (t["hiAlt"] is None or isinstance(t["hiAlt"], str)): add(f, f"{t['en']}: hiAlt not string/null")
-    if f.startswith("optionals/"):
+    if f.startswith("optionals/") and "/nodes/" in f:
         pq, rc, sk, ex = d["practiceQuestions"], d["recall"], d["skeletons"], d["examples"]
         print(f, "why", wc(d["why"]["en"]), "note", wc(d["note"]["en"]), "pq", len(pq), "recall", len(rc), "skel", len(sk), "ex", len(ex), "kinds", dict(collections.Counter(r["kind"] for r in rc)))
         if wc(d["why"]["en"]) > 60: add(f, f"why {wc(d['why']['en'])} words > 60")

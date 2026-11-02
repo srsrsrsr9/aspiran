@@ -88,3 +88,8 @@ last, strictly neutral, and only if you're comfortable).
 Every file comes to me. I check it with code, fix the format, and import it as **drafts**. Making content is your
 work; mine is the app, the website, pedagogy, marketing and the quality of the whole journey. Nothing shows as checked
 until an English and a Hindi editor approve it.
+
+---
+
+## Update, 2 Nov (evening)
+B01–B22 all received (`docs/content/aspiran-all-batches.zip`) and checked by code: all pass. What is still to make (CSAT mocks, Hindi for the GS mocks, more optional nodes, videos V1 and V2) is in `artefacts/content-handoff-2026-11-02.md`, ready to paste.
