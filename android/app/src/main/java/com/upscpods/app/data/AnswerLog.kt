@@ -25,6 +25,11 @@ data class AnswerAttempt(
     val outcome: String = "started",
     val over: Boolean = false,
     val reviewed: Boolean = false,
+    /** Your own marks per rubric area ("below", "at", "above"), made before any second opinion. */
+    val self: Map<String, String> = emptyMap(),
+    /** The AI second opinion's bands, when you asked for one. */
+    val ai: Map<String, String> = emptyMap(),
+    val rewritten: Boolean = false,
 )
 
 /** Answer Studio's attempt log (sell-first plan, W5): started, finished, abandoned, over time. Never leaves the phone. */
@@ -49,6 +54,9 @@ class AnswerLog(context: Context) {
     fun finish(id: String, over: Boolean) = update(id) { it.copy(outcome = "finished", endedAt = System.currentTimeMillis(), over = over) }
     fun abandon(id: String) = update(id) { if (it.outcome == "started") it.copy(outcome = "abandoned", endedAt = System.currentTimeMillis()) else it }
     fun reviewed(id: String) = update(id) { it.copy(reviewed = true) }
+    fun marked(id: String, self: Map<String, String>) = update(id) { it.copy(self = self) }
+    fun secondOpinion(id: String, ai: Map<String, String>) = update(id) { it.copy(ai = ai) }
+    fun rewrote(id: String) = update(id) { it.copy(rewritten = true) }
 
     private fun update(id: String, f: (AnswerAttempt) -> AnswerAttempt) = save(all().map { if (it.id == id) f(it) else it })
 

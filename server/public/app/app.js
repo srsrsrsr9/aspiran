@@ -291,10 +291,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -722,7 +722,8 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Today's new questions.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
     h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
-    h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written today." : "One question, 150 words, about 20 minutes. Autosaves.")), h("a.btn", { href: "#mains" }, "Write"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Essays in three snaps"), h("div.small.muted", `Skeleton, outline, essay, each compared with a guide. ${libraryOf("essay").length} topic${libraryOf("essay").length === 1 ? "" : "s"}.`)), h("a.btn", { href: "#essay" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
@@ -893,21 +894,165 @@ const MAINS_FALLBACK = [
   ["Governance", "How has the Right to Information Act improved accountability in public administration? (150 words)"],
   ["Economy", "Examine the significance of financial inclusion for inclusive growth in India. (150 words)"],
 ];
+// --- Writing (teaching plan, build step 2) -----------------------------------------------------------
+// Write, then mark it yourself, then a second opinion from AI next to your marks, then one rewrite with one fix.
+// Your marks and the AI's are kept in this browser (writingLog) so Progress can show how close your own eye is.
+
+const AREAS = [["directive", "Directive word"], ["structure", "Structure"], ["content", "Content coverage"], ["examples", "Examples and data"], ["conclusion", "Conclusion"]];
+const BANDS = [["below", "Below"], ["at", "At"], ["above", "Above"]];
+const BAND_RANK = { below: 0, at: 1, above: 2 };
+const words = (t) => (String(t ?? "").match(/\S+/g) ?? []).length;
+
 function viewMains() {
   const day = today();
   const fromCard = (data.brief?.items ?? []).map(cardText).find((t) => t.mains);
   const [topic, prompt] = fromCard ? ["From today's Chai", fromCard.mains] : MAINS_FALLBACK[Math.floor(Date.now() / 86400000) % MAINS_FALLBACK.length];
+  const question = prompt.replace(/\s*\((150|250) (words|शब्द)\)\s*$/, "");
   const key = "mains:" + day;
-  const ta = h("textarea", { rows: 14, placeholder: "Intro (2 lines) · Body (3 or 4 points) · Way forward (1 or 2 lines)", value: store.get(key, ""), style: { fontFamily: "var(--read-font)", fontSize: "18px" } });
-  const count = h("span.small.muted");
-  const upd = () => { const n = (ta.value.match(/\S+/g) ?? []).length; count.textContent = `${n} words${n > 180 ? " · try to keep near 150" : ""}`; store.set(key, ta.value); };
-  ta.addEventListener("input", upd); upd();
+  const w = store.get("write:" + day, { step: "write", target: /250/.test(prompt) ? 250 : 150, self: {}, fix: "", ai: null, v2: null });
+  const save = () => store.set("write:" + day, w);
+  const go = (step) => { w.step = step; save(); draw(); window.scrollTo(0, 0); };
+  const box = h("div.col");
+  const steps = () => h("p.small.muted", ["Write", "Mark it yourself", "Second opinion", "Rewrite"].map((x, i) => (["write", "self", "ai", "rewrite"].indexOf(w.step) === i ? `[${x}]` : x)).join(" → "));
+  const draw = () => put(box, w.step !== "done" && steps(), ({ write, self, ai: second, rewrite, done }[w.step] ?? write)());
+
+  function write() {
+    const ta = h("textarea", { rows: 14, placeholder: "Intro (2 lines) · Body (3 or 4 points) · Way forward (1 or 2 lines)", value: store.get(key, ""), style: { fontFamily: "var(--read-font)", fontSize: "18px" } });
+    const count = h("span.small.muted");
+    const upd = () => { const n = words(ta.value); count.textContent = `${n} words${n > w.target * 1.2 ? ` · try to keep near ${w.target}` : ""}`; store.set(key, ta.value); };
+    ta.addEventListener("input", upd); upd();
+    return [
+      h("div.row", [150, 250].map((n) => h("button" + (w.target === n ? ".primary" : ".ghost") + ".small", { onclick: () => { w.target = n; save(); draw(); } }, `${n} words`))),
+      h("div.row.between", count, h("button.ghost", { onclick: () => focus.start(w.target === 250 ? 30 : 20, "Mains answer", "focus", "MAINS") }, `Start a ${w.target === 250 ? 30 : 20}-minute focus block`)),
+      ta,
+      h("p.small.muted", "Paper is best: write by hand, then type it here or mark it straight from the sheet. Saved in this browser as you type."),
+      h("div.row", h("button.primary", { onclick: () => go("self") }, "Done writing: mark it yourself →")),
+    ];
+  }
+
+  function self() {
+    const all = AREAS.every(([k]) => w.self[k]);
+    const fix = h("input", { type: "text", maxLength: 200, value: w.fix, placeholder: "The one thing I'd change first", oninput: (e) => { w.fix = e.target.value; save(); } });
+    return [
+      h("p", "Mark it yourself first. For each part: below, at or above a typical scoring answer. Your own eye is the skill that matters on the day."),
+      AREAS.map(([k, name]) => h("div.card", h("div.row.between", h("strong", name),
+        h("div.row", BANDS.map(([b, label]) => h("button.small" + (w.self[k] === b ? ".primary" : ".ghost"), { "aria-pressed": String(w.self[k] === b), onclick: () => { w.self[k] = b; save(); draw(); } }, label)))))),
+      h("label", h("strong", "One fix"), fix),
+      h("div.row",
+        h("button.primary", { disabled: !all, onclick: () => go("ai") }, "Get a second opinion (AI) →"),
+        h("button.ghost", { disabled: !all, onclick: () => go("rewrite") }, "Skip it and rewrite")),
+      !all && h("p.small.muted", "Mark all five parts to go on."),
+    ];
+  }
+
+  function second() {
+    const text = store.get(key, "");
+    if (!w.ai && words(text) < 20) return [
+      h("p", "The second opinion reads a typed answer. Type what you wrote (even roughly), or skip it and go to the rewrite. On the Android app you can send a photo of the sheet."),
+      h("div.row", h("button", { onclick: () => go("write") }, "← Type it"), h("button.primary", { onclick: () => go("rewrite") }, "Rewrite without it")),
+    ];
+    if (!w.ai) {
+      const note = h("p.muted", "Reading your answer…");
+      post("/answers/evaluate", { memberId: profile().memberId, question, words: w.target, text }).then((r) => {
+        if (r?.care) { pod.care = true; put(note, careBox()); return; }
+        if (!r || r.error) { put(note, h("p", r?.error ?? "Couldn't reach the reviewer. Check your connection."), h("button", { onclick: () => go("rewrite") }, "Go to the rewrite")); return; }
+        w.ai = { areas: r.areas ?? {}, summary: r.summary ?? "", wordCount: r.wordCount ?? 0, skeleton: r.skeleton ?? null, left: r.left ?? null };
+        save(); draw();
+      });
+      return [note];
+    }
+    const agree = AREAS.filter(([k]) => w.ai.areas[k]?.band === w.self[k]).length;
+    return [
+      h("p", w.ai.summary),
+      h("p.small.muted", [w.ai.wordCount ? `${w.ai.wordCount} words of ${w.target}` : null, w.ai.left != null ? `${w.ai.left} free review${w.ai.left === 1 ? "" : "s"} left this week` : null].filter(Boolean).join(" · ")),
+      h("div.tbl", h("table", h("thead", h("tr", h("th", "Part"), h("th", "You"), h("th", "Second opinion"))),
+        h("tbody", AREAS.map(([k, name]) => { const a = w.ai.areas[k] ?? {}; return [
+          h("tr", h("td", h("strong", name)), h("td", BANDS.find(([b]) => b === w.self[k])?.[1] ?? "–"), h("td", BANDS.find(([b]) => b === a.band)?.[1] ?? "–")),
+          (a.note || a.fix) && h("tr", h("td", { colSpan: 3 }, h("span.small", a.note ?? ""), a.fix && h("div.small", h("strong", "One fix: "), a.fix))),
+        ]; })))),
+      h("p", agree === 5 ? "You and the second opinion agree on all five parts." : `You and the second opinion agree on ${agree} of 5. Where you differ, look again: neither is always right.`),
+      w.ai.skeleton?.body?.length > 0 && h("details.card", h("summary", "A model answer's skeleton"),
+        w.ai.skeleton.intro && h("p", h("strong", "Intro: "), w.ai.skeleton.intro), h("ul", w.ai.skeleton.body.map((b) => h("li", b))), w.ai.skeleton.conclusion && h("p", h("strong", "Conclusion: "), w.ai.skeleton.conclusion)),
+      h("p.small.muted", "A second opinion by AI, next to your own marks. It can be wrong; your pod and your own judgement come first."),
+      h("div.row", h("button.primary", { onclick: () => go("rewrite") }, "Rewrite it with one fix →")),
+    ];
+  }
+
+  function rewrite() {
+    // Your own fix first; otherwise the AI's fix for the part it rated lowest.
+    const low = w.ai ? AREAS.map(([k]) => [k, w.ai.areas[k]]).filter(([, a]) => a?.fix).sort((a, b) => BAND_RANK[a[1].band] - BAND_RANK[b[1].band])[0] : null;
+    const fix = w.fix || low?.[1].fix || "Make the conclusion answer the question's directive word.";
+    const ta = h("textarea", { rows: 14, value: w.v2 ?? store.get(key, ""), style: { fontFamily: "var(--read-font)", fontSize: "18px" }, oninput: (e) => { w.v2 = e.target.value; save(); } });
+    return [
+      h("div.card.soft", h("strong", "Your one fix: "), fix),
+      h("p", "Rewrite the answer with just that change. One fix, done well, sticks better than five half-done."),
+      ta,
+      h("div.row",
+        h("button.primary", { onclick: () => {
+          if (!w.v2) w.v2 = ta.value;
+          const log = store.get("writingLog", []);
+          log.push({ day, prompt: question, words: w.target, self: w.self, ai: w.ai ? Object.fromEntries(AREAS.map(([k]) => [k, w.ai.areas[k]?.band ?? null])) : null, rewritten: true });
+          store.set("writingLog", log.slice(-200));
+          markDone("MAINS"); go("done");
+        } }, "Save the rewrite"),
+        h("button.ghost", { onclick: () => go(w.ai ? "ai" : "self") }, "← Back")),
+    ];
+  }
+
+  function done() {
+    return [
+      h("div.card.soft", h("strong", "Done for today: written, marked and rewritten."), h("p.small", { style: { margin: "4px 0 0" } }, `First version ${words(store.get(key, ""))} words, rewrite ${words(w.v2)} words. Both stay in this browser.`)),
+      h("div.row", h("a.btn.primary", { href: "#today" }, "Back to Today"), h("a.btn", { href: "#essay" }, "Essays in three snaps"),
+        h("button.ghost", { onclick: () => { if (confirm("Start today's answer again? This clears your marks and the rewrite.")) { store.del("write:" + day); render(); } } }, "Start again")),
+    ];
+  }
+
+  draw();
   return h("div.col", h("h1", "Mains answer"), h("p.small.muted", topic), profileAsk("mains"),
     h("div.card.soft", h("strong", prompt)),
-    h("div.row.between", count, h("button.ghost", { onclick: () => focus.start(20, "Mains answer", "focus", "MAINS") }, "Start a 20-minute focus block")),
-    ta,
-    h("div.row", { style: { marginTop: "12px" } }, h("button.primary", { onclick: () => { markDone("MAINS"); location.hash = "#today"; } }, "Done for today"),
-      h("span.small.muted", "Saved in this browser as you type.")));
+    box);
+}
+
+// --- Essays in three snaps: skeleton, outline, essay. Each snap is yours first, then you compare with the guide.
+
+const SNAPS = [
+  { n: 1, name: "Skeleton", field: "snap1Skeleton", ask: "Your stand in one line, and three or four angles you'd cover. About 10 minutes.", min: 15 },
+  { n: 2, name: "Outline", field: "snap2Outline", ask: "Intro idea, one line per paragraph, and the conclusion. About 25 minutes.", min: 40 },
+  { n: 3, name: "Essay", field: "snap3Watch", ask: "The full essay, 1,000 to 1,200 words. Paper is best; type it here or just tick when the sheet is done.", min: 0 },
+];
+
+function viewEssay(arg) {
+  const essays = libraryOf("essay");
+  if (!arg) return h("div.col", h("h1", "Essays in three snaps"),
+    h("p", "Each essay goes in three sittings: a skeleton, then an outline, then the essay. You write each snap first, then compare it with the guide. Do them on different days if you like."),
+    essays.length === 0 && h("p.muted", "Essay topics appear here once an English and a Hindi editor approve them."),
+    essays.map((e) => { const st = store.get("essay:" + e.id, {}); const doneN = SNAPS.filter((x) => st["s" + x.n + "done"]).length;
+      return h("a.card.link", { href: "#essay/" + e.id }, h("div.row.between", h("div", h("strong", bi(e.data.topic)), h("div.small.muted", doneN ? `${doneN} of 3 snaps done` : e.data.kind === "abstract" ? "Abstract" : "Topical")), h("span", "→"))); }));
+  const e = essays.find((x) => x.id === arg);
+  if (!e) return h("div.col", h("p", "That essay isn't available."), h("a", { href: "#essay" }, "← Essays"));
+  const d = e.data, k = "essay:" + e.id, st = store.get(k, {});
+  const save = () => store.set(k, st);
+  const box = h("div.col");
+  const draw = () => put(box, SNAPS.map((x) => {
+    const open = x.n === 1 || st["s" + (x.n - 1) + "done"];
+    if (!open) return h("div.card", h("strong", `Snap ${x.n}: ${x.name}`), h("p.small.muted", "Opens after the snap before it."));
+    const ta = h("textarea", { rows: x.n === 3 ? 16 : 6, value: st["s" + x.n] ?? "", style: { fontFamily: "var(--read-font)", fontSize: "17px" }, oninput: (ev) => { st["s" + x.n] = ev.target.value; save(); cnt.textContent = words(ev.target.value) + " words"; } });
+    const cnt = h("span.small.muted", words(st["s" + x.n]) + " words");
+    const guide = bi(d[x.field]);
+    return h("div.card", h("div.row.between", h("strong", `Snap ${x.n}: ${x.name}`), st["s" + x.n + "done"] && h("span.small.muted", "Done")),
+      h("p.small", x.ask), ta, cnt,
+      !st["s" + x.n + "done"]
+        ? h("div.row", h("button.primary", { disabled: false, onclick: () => {
+            if (words(st["s" + x.n]) < x.min && !confirm(x.n === 3 ? "Mark the essay as written on paper?" : "That's short. Compare with the guide anyway?")) return;
+            st["s" + x.n + "done"] = today(); save(); draw();
+          } }, x.n === 3 ? "I've written it: show the watch-outs" : "Done: compare with the guide"))
+        : [h("div.card.soft", h("strong", x.n === 3 ? "Watch-outs: check your essay against these" : "The guide's " + x.name.toLowerCase()), h("p", { style: { whiteSpace: "pre-wrap" } }, guide)),
+          x.n === 1 && d.angles?.length > 0 && h("details", h("summary", "More angles"), h("ul", d.angles.map((a) => h("li", bi(a))))),
+          x.n === 2 && d.openers?.length > 0 && h("details", h("summary", "Ways to open"), h("ul", d.openers.map((a) => h("li", bi(a))))),
+          h("p.small.muted", "What did you have that the guide didn't, and what did it have that you missed? The second one is your next fix.")]);
+  }));
+  draw();
+  return h("div.col", h("a", { href: "#essay" }, "← Essays"), h("h1", bi(d.topic)), box);
 }
 
 // --- Mock papers -------------------------------------------------------------------------------
@@ -3151,7 +3296,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

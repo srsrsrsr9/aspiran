@@ -71,6 +71,9 @@ fun PracticeTab(
     /** Past UPSC questions (PYQ mode): how many are approved, and opening them. */
     pyqCount: Int = 0,
     onOpenPyq: () -> Unit = {},
+    /** Essays in three snaps: how many approved topics, and opening them. */
+    essayCount: Int = 0,
+    onOpenEssays: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -96,12 +99,20 @@ fun PracticeTab(
         onOpenStudio?.let {
             PracticeCard(
                 title = "Answer Studio",
-                detail = "A timed answer, 7 or 11 minutes, on paper. Photograph it for feedback on the directive word, structure, content, examples and conclusion.",
+                detail = "A timed answer, 7 or 11 minutes, on paper. Mark it yourself, get a second opinion from AI, then rewrite it with one fix.",
                 done = false,
                 filled = false,
                 onStart = it,
             )
         }
+
+        PracticeCard(
+            title = "Essays in three snaps",
+            detail = "Skeleton, outline, essay, each compared with a guide. $essayCount topic${if (essayCount == 1) "" else "s"}.",
+            done = false,
+            filled = false,
+            onStart = onOpenEssays,
+        )
 
         if (pyqCount > 0) {
             PracticeCard(
@@ -161,7 +172,7 @@ fun PracticeTab(
 }
 
 @Composable
-private fun PracticeCard(title: String, detail: String, done: Boolean, filled: Boolean, onStart: () -> Unit) {
+internal fun PracticeCard(title: String, detail: String, done: Boolean, filled: Boolean, onStart: () -> Unit) {
     FlatCard {
         Column(Modifier.padding(16.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium)

@@ -65,7 +65,10 @@ import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-private enum class StudioStep { PICK, WRITE, SUBMIT, FEEDBACK }
+private enum class StudioStep { PICK, WRITE, SUBMIT, SELF, FEEDBACK, REWRITE }
+
+private val BANDS = listOf("below" to "Below", "at" to "At", "above" to "Above")
+private fun bandName(b: String?) = BANDS.firstOrNull { it.first == b }?.second ?: "–"
 
 /** 7 minutes for a 150-word answer, 11 for 250: the exam's pace. */
 private fun minutesFor(words: Int) = if (words == 250) 11 else 7
@@ -119,6 +122,10 @@ fun AnswerStudioScreen(
     // The reviewed sheet, in memory only (the file is deleted after the review), so "Send to pod" can attach it.
     var reviewedJpeg by remember { mutableStateOf<ByteArray?>(null) }
     var leaving by remember { mutableStateOf(false) }
+    // Teaching plan, writing: mark it yourself first, then the AI's second opinion next to your marks, then one rewrite.
+    val selfMarks = remember { androidx.compose.runtime.mutableStateMapOf<String, String>() }
+    var myFix by rememberSaveable { mutableStateOf("") }
+    var doneNote by remember { mutableStateOf<String?>(null) }
     val question = questions.getOrNull(qIndex) ?: questions.first()
     val prompt = question.prompt.replace(Regex("\\s*\\((150|250) (words|शब्द)\\)\\s*$"), "")
 
@@ -166,6 +173,7 @@ fun AnswerStudioScreen(
         ) {
             when (step) {
                 StudioStep.PICK -> {
+                    doneNote?.let { Text(it, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary) }
                     ChotuSays(banner ?: log.chotuLine(hindi), ChotuMood.CALM)
                     Text("Pick a question", style = MaterialTheme.typography.titleMedium)
                     questions.forEachIndexed { i, q ->
@@ -192,6 +200,7 @@ fun AnswerStudioScreen(
                         onClick = {
                             val a = log.start(prompt, words)
                             attemptId = a.id; startedAt = a.startedAt; over = false; text = ""; feedback = null; error = null
+                            selfMarks.clear(); myFix = ""; doneNote = null
                             deletePhoto()
                             if (focus) Focus.start(context, minutesFor(words), "Answer Studio")
                             step = StudioStep.WRITE
@@ -245,8 +254,28 @@ fun AnswerStudioScreen(
                         } else TextButton(onClick = { typing = true }) { Text("Type it instead") }
                     }
                     error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }
+                    Button(onClick = { step = StudioStep.SELF }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Mark it yourself →") }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        TextButton(onClick = { sending = true }) { Text("Send to pod") }
+                        TextButton(onClick = { deletePhoto(); text = ""; typing = false; step = StudioStep.PICK }) { Text("Another question") }
+                    }
+                }
+
+                StudioStep.SELF -> {
+                    Text("Mark it yourself first", style = MaterialTheme.typography.titleMedium)
+                    Text("For each part: below, at or above a typical scoring answer. Your own eye is the skill that matters on the day.", style = MaterialTheme.typography.bodyMedium)
+                    AREA_NAMES.forEach { (key, name) ->
+                        Text(name, style = MaterialTheme.typography.titleSmall)
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            BANDS.forEach { (b, label) -> FilterChip(selected = selfMarks[key] == b, onClick = { selfMarks[key] = b }, label = { Text(label) }) }
+                        }
+                    }
+                    OutlinedTextField(value = myFix, onValueChange = { myFix = it.take(200) }, label = { Text("The one thing I'd change first") }, modifier = Modifier.fillMaxWidth())
+                    val allMarked = AREA_NAMES.all { selfMarks[it.first] != null }
+                    error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }
                     Button(
                         onClick = {
+                            attemptId?.let { log.marked(it, selfMarks.toMap()) }
                             busy = true; error = null
                             scope.launch {
                                 val jpeg = photoPath?.let { p -> withContext(Dispatchers.IO) { shrink(p) } }
@@ -255,27 +284,51 @@ fun AnswerStudioScreen(
                                 when {
                                     fb.care -> onOpenNeedToTalk()
                                     fb.error != null -> error = fb.error
-                                    else -> { feedback = fb; reviewedJpeg = jpeg; attemptId?.let { log.reviewed(it) }; deletePhoto(); step = StudioStep.FEEDBACK }
+                                    else -> {
+                                        feedback = fb; reviewedJpeg = jpeg
+                                        attemptId?.let { log.reviewed(it); log.secondOpinion(it, fb.areas.mapValues { e -> e.value.band }) }
+                                        deletePhoto(); step = StudioStep.FEEDBACK
+                                    }
                                 }
                             }
                         },
-                        enabled = !busy && (photoPath != null || Practice.wordCount(text) > 0),
+                        enabled = allMarked && !busy && (photoPath != null || Practice.wordCount(text) > 0),
                         modifier = Modifier.fillMaxWidth().height(MainActionHeight),
-                    ) { Text(if (busy) "Reading your answer…" else "Get feedback") }
-                    Text("3 free reviews a week; unlimited with Plus. The photo is read once and not kept.", style = MaterialTheme.typography.bodySmall)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        TextButton(onClick = { sending = true }) { Text("Send to pod") }
-                        TextButton(onClick = { deletePhoto(); text = ""; typing = false; step = StudioStep.PICK }) { Text("Another question") }
-                    }
+                    ) { Text(if (busy) "Reading your answer…" else "Get a second opinion (AI) →") }
+                    OutlinedButton(onClick = { attemptId?.let { log.marked(it, selfMarks.toMap()) }; step = StudioStep.REWRITE }, enabled = allMarked, modifier = Modifier.fillMaxWidth()) { Text("Skip it and rewrite") }
+                    if (!allMarked) Text("Mark all five parts to go on.", style = MaterialTheme.typography.bodySmall)
+                    Text("3 free second opinions a week; unlimited with Plus. The photo is read once and not kept.", style = MaterialTheme.typography.bodySmall)
                 }
 
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
-                    FeedbackView(fb, words, focusArea)
+                    FeedbackView(fb, words, focusArea, selfMarks)
+                    Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite it with one fix →") }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = { sending = true }) { Text("Send to pod") }
-                        OutlinedButton(onClick = { text = ""; typing = false; feedback = null; reviewedJpeg = null; step = StudioStep.PICK }) { Text("Another question") }
+                        TextButton(onClick = { sending = true }) { Text("Send to pod") }
+                        TextButton(onClick = { text = ""; typing = false; feedback = null; reviewedJpeg = null; step = StudioStep.PICK }) { Text("Another question") }
                     }
                 } ?: run { step = StudioStep.PICK }
+
+                StudioStep.REWRITE -> {
+                    // Your own fix first; otherwise the second opinion's fix for the part it rated lowest.
+                    val rank = mapOf("below" to 0, "at" to 1, "above" to 2)
+                    val aiFix = feedback?.areas?.values?.filter { it.fix.isNotBlank() }?.minByOrNull { rank[it.band] ?: 1 }?.fix
+                    val fix = myFix.ifBlank { aiFix ?: "Make the conclusion answer the question's directive word." }
+                    Text("Rewrite with one fix", style = MaterialTheme.typography.titleMedium)
+                    FlatCard(Modifier.fillMaxWidth()) { Text("Your one fix: $fix", Modifier.padding(12.dp), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold) }
+                    Text("Write the answer again with just that change, on paper or here. One fix, done well, sticks better than five half-done.", style = MaterialTheme.typography.bodyMedium)
+                    OutlinedTextField(value = text, onValueChange = { text = it }, modifier = Modifier.fillMaxWidth().heightIn(min = 200.dp),
+                        textStyle = if (hindi) ReadingHindi else ReadingText, placeholder = { Text("Optional: type the rewrite") })
+                    Button(
+                        onClick = {
+                            attemptId?.let { log.rewrote(it) }
+                            text = ""; typing = false; feedback = null; reviewedJpeg = null
+                            doneNote = "Written, marked and rewritten. Well done."
+                            step = StudioStep.PICK
+                        },
+                        modifier = Modifier.fillMaxWidth().height(MainActionHeight),
+                    ) { Text("The rewrite is done") }
+                }
             }
         }
     }
@@ -324,8 +377,13 @@ private fun WeekLine(log: AnswerLog) {
 }
 
 @Composable
-private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = null) {
-    Text("Your review", style = MaterialTheme.typography.titleLarge)
+private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = null, self: Map<String, String> = emptyMap()) {
+    Text("A second opinion (AI)", style = MaterialTheme.typography.titleLarge)
+    if (self.isNotEmpty()) {
+        val agree = AREA_NAMES.count { (k, _) -> fb.areas[k]?.band == self[k] }
+        Text(if (agree == 5) "You and the second opinion agree on all five parts." else "You and the second opinion agree on $agree of 5. Where you differ, look again: neither is always right.",
+            style = MaterialTheme.typography.bodyMedium)
+    }
     if (fb.summary.isNotBlank()) Text(fb.summary, style = MaterialTheme.typography.bodyLarge)
     Text(
         listOfNotNull(
@@ -348,6 +406,7 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = nu
                         color = when (a.band) { "above" -> MaterialTheme.colorScheme.primary; "below" -> MaterialTheme.colorScheme.error; else -> MaterialTheme.colorScheme.onSurfaceVariant },
                     )
                 }
+                if (self.isNotEmpty()) Text("You: ${bandName(self[key])} · Second opinion: ${bandName(a.band)}", style = MaterialTheme.typography.labelMedium)
                 if (key == focusArea) Text("The part you said you'd watch", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                 if (a.note.isNotBlank()) Text(a.note, style = MaterialTheme.typography.bodyMedium)
                 if (a.fix.isNotBlank()) Text("One fix: ${a.fix}", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
@@ -361,7 +420,7 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = nu
         sk.body.forEach { Text("• $it", style = MaterialTheme.typography.bodyMedium) }
         if (sk.conclusion.isNotBlank()) Text("Conclusion: ${sk.conclusion}", style = MaterialTheme.typography.bodyMedium)
     }
-    Text("Feedback by AI. It can be wrong; your pod and your own judgement come first.", style = MaterialTheme.typography.bodySmall)
+    Text("A second opinion by AI, next to your own marks. It can be wrong; your pod and your own judgement come first.", style = MaterialTheme.typography.bodySmall)
 }
 
 /** Where "Send to pod" posts: one of your open rooms (Mains answer writing first), or your matched pod. */
