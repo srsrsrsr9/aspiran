@@ -77,6 +77,10 @@ fun PracticeTab(
     /** Mock interview: whether the question bank is approved yet, and opening the board. */
     interviewReady: Boolean = false,
     onOpenInterview: () -> Unit = {},
+    /** Chai v2 and progress: the case file and You vs. you. */
+    caseCount: Int = 0,
+    onOpenCaseFile: () -> Unit = {},
+    onOpenProgress: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -115,6 +119,22 @@ fun PracticeTab(
             done = false,
             filled = false,
             onStart = onOpenEssays,
+        )
+
+        PracticeCard(
+            title = "Your case file",
+            detail = "$caseCount example${if (caseCount == 1) "" else "s"} kept from Chai for Mains.",
+            done = false,
+            filled = false,
+            onStart = onOpenCaseFile,
+        )
+
+        PracticeCard(
+            title = "You vs. you",
+            detail = "Your writing, your sense of sure, your markers. Only against your own past.",
+            done = false,
+            filled = false,
+            onStart = onOpenProgress,
         )
 
         PracticeCard(

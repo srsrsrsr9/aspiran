@@ -28,6 +28,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SuggestionChip
@@ -78,7 +79,7 @@ import kotlinx.coroutines.launch
 fun ChaiScreen(brief: Brief, day: DayState, preferHindi: Boolean, onClose: () -> Unit, archive: Boolean = false, chotu: Chotu? = null,
     library: ContentLibrary? = null, onOpenItem: ((String) -> Unit)? = null,
     yesterday: PracticeQuestion? = null, onYesterday: ((PracticeQuestion, Boolean) -> Unit)? = null,
-    onExamAnswer: ((String, Boolean) -> Unit)? = null, onWhy: ((String) -> Unit)? = null) {
+    onExamAnswer: ((String, Boolean) -> Unit)? = null, onWhy: ((String) -> Unit)? = null, caseFile: com.upscpods.app.data.CaseFile? = null) {
     val cards = brief.items
     // Day-1 recall: kept for this visit even after it's answered, gone on the next card.
     val recall = remember { yesterday }
@@ -169,6 +170,7 @@ fun ChaiScreen(brief: Brief, day: DayState, preferHindi: Boolean, onClose: () ->
                             onToggleSave = {
                                 day.savedCards = if (item.id in day.savedCards) day.savedCards - item.id else day.savedCards + item.id
                             },
+                            caseFile = caseFile,
                         )
                     } else {
                         EndCard(archive, onClose)
@@ -182,12 +184,14 @@ fun ChaiScreen(brief: Brief, day: DayState, preferHindi: Boolean, onClose: () ->
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ChaiCardPage(item: NewsItem, preferHindi: Boolean, showJoke: Boolean, chotu: Chotu?, saved: Boolean,
-    date: String, library: ContentLibrary?, onOpenItem: ((String) -> Unit)?, onExamAnswer: ((String, Boolean) -> Unit)?, onWhy: (() -> Unit)?, onToggleSave: () -> Unit) {
+    date: String, library: ContentLibrary?, onOpenItem: ((String) -> Unit)?, onExamAnswer: ((String, Boolean) -> Unit)?, onWhy: (() -> Unit)?, onToggleSave: () -> Unit,
+    caseFile: com.upscpods.app.data.CaseFile? = null) {
     var hindi by rememberSaveable(item.id) { mutableStateOf(preferHindi && item.hi != null) }
     val v = item.text(hindi)
     val l = v.labels
     var examOpen by rememberSaveable(item.id) { mutableStateOf(false) }
     var reported by rememberSaveable(item.id) { mutableStateOf(false) }
+    var keeping by rememberSaveable(item.id) { mutableStateOf(false) }
     val uri = LocalUriHandler.current
     val tragic = item.tone == Tone.TRAGIC
     val context = LocalContext.current
@@ -268,6 +272,13 @@ private fun ChaiCardPage(item: NewsItem, preferHindi: Boolean, showJoke: Boolean
                 if (item.shareable && !tragic) {
                     TextButton(onClick = { scope.launch { shareCard(context, library, item, hindi, date) } }) { Text(l.share) }
                 }
+                if (caseFile != null && !tragic) {
+                    TextButton(onClick = { keeping = !keeping }, enabled = !caseFile.has(item.id)) { Text(if (caseFile.has(item.id)) "✓ In your case file" else "Keep for Mains") }
+                }
+            }
+            if (caseFile != null && !tragic && keeping && !caseFile.has(item.id)) KeepForm(item, v.headline, v.keyFacts.firstOrNull(), caseFile) { keeping = false }
+            if (caseFile != null && item.highValue && !tragic && !caseFile.has(item.id)) {
+                Text("This one is worth keeping for ${item.gsPaper.takeIf { Regex("GS[1-4]").matches(it) } ?: "Mains"}.", style = MaterialTheme.typography.bodySmall)
             }
         }
 
@@ -398,6 +409,32 @@ private fun glossaryText(text: String, terms: List<String>): AnnotatedString = b
         while (start >= 0) {
             addStyle(SpanStyle(textDecoration = TextDecoration.Underline), start, start + term.length)
             start = text.indexOf(term, start + term.length, ignoreCase = true)
+        }
+    }
+}
+
+/** Keep for Mains: one example line in your words, under a paper and (if you like) a topic. The app suggests once. */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun KeepForm(item: NewsItem, headline: String, fact: String?, caseFile: com.upscpods.app.data.CaseFile, onDone: () -> Unit) {
+    var paper by rememberSaveable(item.id) { mutableStateOf(item.gsPaper.takeIf { it in com.upscpods.app.data.CASE_PAPERS } ?: "GS2") }
+    var node by rememberSaveable(item.id) { mutableStateOf<String?>(null) }
+    var line by rememberSaveable(item.id) { mutableStateOf(fact?.let { "$headline: $it" } ?: headline) }
+    FlatCard(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("Keep for Mains", style = MaterialTheme.typography.titleSmall)
+            Text("One example line, in your words. You can change what's suggested.", style = MaterialTheme.typography.bodySmall)
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                com.upscpods.app.data.CASE_PAPERS.forEach { p -> FilterChip(selected = p == paper, onClick = { paper = p; node = null }, label = { Text(p) }) }
+            }
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                caseFile.topicsOf(paper).forEach { (id, name) -> FilterChip(selected = node == id, onClick = { node = if (node == id) null else id }, label = { Text(name, maxLines = 1) }) }
+            }
+            OutlinedTextField(value = line, onValueChange = { line = it }, modifier = Modifier.fillMaxWidth())
+            Row {
+                TextButton(onClick = { if (line.isNotBlank()) { caseFile.keep(item.id, paper, node, line.trim(), headline); onDone() } }) { Text("Keep it") }
+                TextButton(onClick = onDone) { Text("Cancel") }
+            }
         }
     }
 }

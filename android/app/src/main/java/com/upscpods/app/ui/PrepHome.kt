@@ -200,25 +200,8 @@ private fun PaperHeader(p: SyllabusPaper, all: List<Pair<LibraryItem, String>>, 
             Text(p.name, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             Text(p.lead, style = MaterialTheme.typography.bodyMedium)
             Text("${p.topics.size} topics · ${inPaper.size} pieces to learn from", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-            if (gate.member) {
-                val done = inPaper.count { it.first.id in learnt }
-                val pct = if (inPaper.isEmpty()) 0f else done.toFloat() / inPaper.size
-                Text("Your coverage: ${(pct * 100).toInt()}% · $done of ${inPaper.size} done", style = MaterialTheme.typography.labelLarge)
-                Meter(pct)
-            } else {
-                // The Plus layer, shown locked: a member's coverage meter, blurred, with the way in.
-                Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).clickable(onClick = onSeePlus)) {
-                    Column(Modifier.fillMaxWidth().blur(5.dp).padding(vertical = 6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        // No made-up numbers: older phones don't blur.
-                        Text("Your coverage ·· readiness ··", style = MaterialTheme.typography.labelLarge)
-                        Meter(.64f)
-                    }
-                    Row(Modifier.align(Alignment.Center).clip(RoundedCornerShape(999.dp)).background(Color(0xE6141C34)).padding(horizontal = 14.dp, vertical = 7.dp),
-                        verticalAlignment = Alignment.CenterVertically) {
-                        Text("🔒 Track your coverage and readiness · Plus", color = Color(0xFFFFB547), fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                    }
-                }
-            }
+            // No coverage percentage (teaching plan): each topic below shows Not started, Met, Can recall or Can use.
+            Text("Each topic below shows where you are with it: Not started, Met, Can recall or Can use.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

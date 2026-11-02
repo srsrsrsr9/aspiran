@@ -54,6 +54,8 @@ data class NewsItem(
     val shareable: Boolean = true,
     /** Set when editors wrote the card themselves rather than editing an AI draft. */
     val writtenBy: String? = null,
+    /** An editor marked it high value for Mains (about 1 in 5): the card adds one quiet line suggesting you keep it. */
+    val highValue: Boolean = false,
     /** Hindi version, written natively (not machine-translated) and checked by a Hindi editor. */
     val hi: CardText? = null,
 ) {
