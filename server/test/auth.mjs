@@ -143,14 +143,31 @@ r = await call("/me/status", { token: "dev:never-signed-in" + rid().slice(0, 6) 
 assert.equal(r.data.status, "none");
 step("/me/status says active, or none before the first session");
 
-// Free Shelf and the public welcome stay open with no account.
-for (const p of ["/config", "/library", "/practice/questions", "/commons", "/season", "/status.json", "/app/", "/app/welcome.js", "/models"]) {
+// The Free Shelf and the public welcome stay open with no account.
+for (const p of ["/config", "/library/shelf", "/commons", "/season", "/status.json", "/app/", "/app/welcome.js", "/models"]) {
   const s = (await call(p)).status;
   assert.ok(![401, 403].includes(s), `${p} answered ${s}`);
 }
-assert.ok(![401, 403].includes((await call("/brief/latest")).status));
 assert.equal((await post("/languages/request", { device: rid(), lang: "te" })).status, 200);
-step("Free Shelf content, the welcome, status and language requests need no account");
+const shelf = (await call("/library/shelf")).data;
+assert.ok((shelf.items ?? []).every((i) => ["calm", "routine", "pause-lines"].includes(i.kind)), "the shelf holds only calm scripts, routines and pause lines");
+step("the Free Shelf, the welcome, status and language requests need no account");
+
+// The content itself (library, briefs, practice) needs an account, so nobody can pull it all anonymously.
+for (const p of ["/library", "/practice/questions?days=90", "/brief/latest", "/brief/2026-10-01"]) {
+  assert.equal((await call(p)).status, 401, `${p} without an account`);
+  assert.ok(![401, 403, 429].includes((await call(p, { token: alice })).status), `${p} with an account`);
+}
+step("library, briefs and practice need an account and work with one");
+
+// A daily limit per account on content loads.
+const heavy = "dev:heavy-" + rid().slice(0, 6);
+let last;
+for (let i = 0; i < 61; i++) last = await call("/library", { token: heavy });
+assert.equal(last.status, 429);
+assert.equal(last.data.code, "content_cap");
+assert.equal((await call("/library", { token: alice })).status, 200, "one account's limit doesn't touch another's");
+step("an account that loads the library more than 60 times in a day is told to come back tomorrow");
 
 // Admin: find by phone, email and uid; suspend.
 assert.equal((await call("/admin/api/accounts")).status, 401);

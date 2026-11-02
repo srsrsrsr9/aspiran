@@ -124,6 +124,8 @@ async function getJson(path, cacheKey) {
 }
 const data = { brief: null, library: null, questions: null };
 async function loadAll() {
+  // Content needs sign-in; a visitor gets only the Free Shelf's calm scripts and routines.
+  if (!Auth.signedIn()) { data.library = (await getJson("/library/shelf")) ?? { items: [] }; data.questions = { fromCards: [], bank: [] }; return; }
   [data.brief, data.library, data.questions] = await Promise.all([
     getJson("/brief/latest", "brief"), getJson("/library", "library"), getJson("/practice/questions?days=90", "questions"),
   ]);
@@ -3875,6 +3877,8 @@ setInterval(() => { const el = $("#focusBig"); const f = focus.active; if (el &&
 const theme = store.get("theme"); if (theme) document.documentElement.dataset.theme = theme;
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 await Promise.all([loadAll(), P.loadProfile(), Auth.init(config.auth, { onSuspend: onAccountSuspended })]);
+// Content needs sign-in: if the first load ran before the token was ready, load again now that it is.
+if (Auth.signedIn() && !(data.library?.items?.length)) await loadAll();
 // The access check: on open (waiting at most a few seconds) and when the tab comes back, at most every 6 hours.
 await Promise.race([runAccessCheck(false), new Promise((r) => setTimeout(r, 4000))]);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && profile()) runAccessCheck(false); });

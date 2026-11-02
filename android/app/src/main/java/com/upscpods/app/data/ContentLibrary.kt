@@ -32,7 +32,7 @@ class ContentLibrary(private val context: Context, private val server: () -> Str
     var items by mutableStateOf<List<LibraryItem>>(emptyList())
         private set
 
-    private val http = OkHttpClient()
+    private val http = OkHttpClient.Builder().addInterceptor(AuthInterceptor).build()
     private val cache = File(context.filesDir, "library.json")
     private val mediaDir = File(context.filesDir, "media").apply { mkdirs() }
     private val lock = Mutex()

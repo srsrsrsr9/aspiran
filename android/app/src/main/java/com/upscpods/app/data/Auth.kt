@@ -79,7 +79,7 @@ data class RecoveryEmail(val email: String?, val pending: String?, val mail: Boo
 object Auth {
     const val CHECK_EVERY_MS = 6 * 3_600_000L
     const val GRACE_MS = 72 * 3_600_000L
-    private val MEMBER_ROUTE = Regex("^/(pods/(join|leave|me|choose|merge-stay)|pods/[\\w-]+/ws|members/profile|commons/[\\w-]+/ws|season/add|mocks/band|plus(/.*)?|chotu|chotu/report|consent|events|feedback|privacy/(export|delete)|rooms/(list|join|leave|photo)|rooms/photo/\\w+|rooms/[\\w-]+/ws|answers/evaluate|interview/follow)$")
+    private val MEMBER_ROUTE = Regex("^/(library|practice/questions|brief/(latest|\\d{4}-\\d{2}-\\d{2})|pods/(join|leave|me|choose|merge-stay)|pods/[\\w-]+/ws|members/profile|commons/[\\w-]+/ws|season/add|mocks/band|plus(/.*)?|chotu|chotu/report|consent|events|feedback|privacy/(export|delete)|rooms/(list|join|leave|photo)|rooms/photo/\\w+|rooms/[\\w-]+/ws|answers/evaluate|interview/follow)$")
     fun isMemberRoute(path: String) = MEMBER_ROUTE.matches(path.trimEnd('/'))
 
     /**

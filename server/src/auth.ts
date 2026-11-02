@@ -200,8 +200,10 @@ export function isMemberRoute(path: string): boolean {
     || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
     || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)
     || /^\/rooms\/(list|join|leave|photo)$/.test(path) || /^\/rooms\/[\w-]+\/ws$/.test(path) || /^\/rooms\/photo\/\w+$/.test(path)
-    || path === "/answers/evaluate" || path === "/interview/follow";
+    || path === "/answers/evaluate" || path === "/interview/follow" || isContentRoute(path);
 }
+/** The approved content (library, briefs, practice): members only, so the whole library can't be pulled anonymously. */
+export const isContentRoute = (path: string): boolean => /^\/(library|practice\/questions|brief\/(latest|\d{4}-\d{2}-\d{2}))$/.test(path);
 /** A suspended person can still get or erase their data (DPDP). */
 const OPEN_WHEN_SUSPENDED = /^\/privacy\/(export|delete)$/;
 /** Bodies that are anonymous by design: no member id is added if the client didn't send one. */
@@ -231,7 +233,7 @@ export async function memberGate(req: Request, env: Env, path: string, url: URL)
 
   const out = new URL(url.toString());
   out.searchParams.delete("auth");
-  if (out.searchParams.has("member") || isWs) out.searchParams.set("member", a.member_id!);
+  if (out.searchParams.has("member") || isWs || isContentRoute(path)) out.searchParams.set("member", a.member_id!);
   const headers = new Headers(req.headers);
   headers.delete("authorization");
   if (body) {

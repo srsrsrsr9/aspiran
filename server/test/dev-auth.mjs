@@ -4,9 +4,11 @@
 // Every call to a member route gets a dev token for the member id it already carries (body memberId or ?member=),
 // so each test member is its own signed-in account and the server links that id on first use. Calls with no member
 // id share one dev account. Sockets get the token as ?auth=. test/auth.mjs tests sign-in itself and doesn't use this.
-const MEMBER_ROUTE = /^\/(pods\/(join|leave|me|choose|merge-stay)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete)|rooms\/(list|join|leave|photo)|rooms\/photo\/\w+|rooms\/[\w-]+\/ws|answers\/evaluate|interview\/follow)$/;
+const MEMBER_ROUTE = /^\/(library|practice\/questions|brief\/(latest|\d{4}-\d{2}-\d{2})|pods\/(join|leave|me|choose|merge-stay)|pods\/[\w-]+\/ws|members\/profile|commons\/[\w-]+\/ws|season\/add|mocks\/band|plus(\/.*)?|chotu|chotu\/report|consent|privacy\/(export|delete)|rooms\/(list|join|leave|photo)|rooms\/photo\/\w+|rooms\/[\w-]+\/ws|answers\/evaluate|interview\/follow)$/;
 
-const tokenFor = (member) => "dev:" + (member ? "m-" + member : "suite-tester");
+// One tester per run, so the daily content limit (60 library loads per account) never carries from suite to suite.
+const TESTER = "suite-tester-" + Math.random().toString(36).slice(2, 8);
+const tokenFor = (member) => "dev:" + (member ? "m-" + member : TESTER);
 
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (input, init = {}) => {

@@ -23,7 +23,7 @@ import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
 import { playRoute } from "./play";
 import { activeResult, resultDays } from "./results";
-import { authRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
+import { authRoute, isContentRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
 import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
@@ -55,6 +55,11 @@ export default {
       if (gated instanceof Response) return gated;
       req = gated;
       url = new URL(req.url);
+    }
+    // Library, briefs and practice: a daily cap per account. Apps fetch these a few times a day and keep a copy.
+    if (isContentRoute(path)) {
+      const capped = await contentCap(env, url.searchParams.get("member"), path);
+      if (capped) return capped;
     }
 
     // --- Public status page
@@ -142,7 +147,14 @@ export default {
       return json({ fromCards, bank });
     }
 
-    // --- Content library (approved items only) and the files it points at
+    // --- Content library (approved items only) and the files it points at. Members only (isContentRoute); the Free
+    // Shelf's calm scripts and routines stay open to visitors at /library/shelf.
+    if (path === "/library/shelf") {
+      if (!(await flags(env)).library) return json({ items: [], paused: true });
+      const data = await (await publicLibrary(env)).json<{ items: { kind: string }[] }>();
+      data.items = data.items.filter((i) => SHELF_KINDS.has(i.kind));
+      return json(data);
+    }
     if (path === "/library") {
       const f = await flags(env);
       if (!f.library) return json({ items: [], paused: true });
@@ -264,3 +276,20 @@ export default {
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },
 } satisfies ExportedHandler<Env>;
+
+/** What the Free Shelf shows visitors with no account. */
+const SHELF_KINDS = new Set(["calm", "routine", "pause-lines"]);
+
+/** Daily pulls a member may make of each content route; far above what the apps need, far below a scrape. */
+const CONTENT_CAP: Record<string, number> = { library: 60, brief: 200, practice: 120 };
+async function contentCap(env: Env, member: string | null, path: string): Promise<Response | null> {
+  if (!member) return null; // sign-in switched off by Ops: nothing to count against
+  const key = path.split("/")[1]; // library, brief or practice
+  await ensureSchema(env);
+  const day = istDay();
+  const row = await env.DB.prepare(
+    "INSERT INTO content_pulls (member_id, day, route, n) VALUES (?, ?, ?, 1) ON CONFLICT (member_id, day, route) DO UPDATE SET n = n + 1 RETURNING n",
+  ).bind(member, day, key).first<{ n: number }>();
+  if ((row?.n ?? 0) <= (CONTENT_CAP[key] ?? 60)) return null;
+  return json({ error: "That's a lot of loading for one day. Your saved copy still works; it refreshes tomorrow.", code: "content_cap" }, 429);
+}
