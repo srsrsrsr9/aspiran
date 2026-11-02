@@ -83,10 +83,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
-    <div class="tile"><b>10</b><span>things waiting on you</span></div>
+    <div class="tile"><b>6</b><span>things waiting on you</span></div>
     <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
-    <div class="tile"><b>Not merged</b><span>new homepage, ready to preview</span></div>
-    <div class="tile"><b>0 of 10</b><span>teaching-plan build steps finished (5 partly there)</span></div>
+    <div class="tile"><b>Live</b><span>new homepage on aspiran.in since 2 Nov</span></div>
+    <div class="tile"><b>0 of 10</b><span>teaching-plan build steps finished (6 partly there)</span></div>
   </div>
 </header>
 
@@ -103,16 +103,12 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Needs you</h2>
   <p class="lede">These can't move until you act. Most urgent first.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Switch off username sign-in on the live app</b><p>Admin → Flags → <code>password_login</code> → off. The code default is off now, but the setting saved on 20 Oct overrides it. Claude isn't allowed to change live flags.</p></div></li>
-    <li><span class="n">2</span><div><b>Content: two answers, then start the claude.ai Project</b><p>Pick the order of the optionals (suggested: first 5 nodes of Sociology, Geography, PSIR, Anthropology, History, Public Administration) and approve the 18 video topics. Then set up the Project and run Group 1 (9 chats at once). Steps: <code>artefacts/content-project-how-to.md</code>.</p></div></li>
-    <li><span class="n">3</span><div><b>Preview and merge the new homepage</b><p>Branch <code>homepage-v2</code> merges cleanly. Merging publishes aspiran.in. Steps 5a to 5d of <code>artefacts/website-v2-runbook-mac.md</code>.</p></div></li>
-    <li><span class="n">4</span><div><b>Legal details for the privacy and legal pages</b><p>SnapSkill LLP's registered address, a support email, the Grievance Officer's name, the court city, and how long we keep visitor answers.</p></div></li>
-    <li><span class="n">5</span><div><b>Android signing key</b><p>Copy <code>upsc-pods-keys/</code> (with <code>upload.jks</code>) from the old PC to this Mac. No Play upload is possible without it.</p></div></li>
-    <li><span class="n">6</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Follow <code>artefacts/android-aspiran-id-firebase-mac.md</code>. Google sign-in on Android needs it.</p></div></li>
-    <li><span class="n">7</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product so in-app Plus can be switched on.</p></div></li>
-    <li><span class="n">8</span><div><b>Email sending (Resend)</b><p>Verify aspiran.in in Resend, then type in <code>RESEND_API_KEY</code> and <code>MAIL_FROM</code> with <code>wrangler secret put</code>.</p></div></li>
-    <li><span class="n">9</span><div><b>Cashfree to live mode</b><p>The web checkout for the ₹999 × 300 offer is still sandbox, so the site only collects contacts for now.</p></div></li>
-    <li><span class="n">10</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
+    <li><span class="n">1</span><div><b>Content: running in the claude.ai Project</b><p>You're making the batches on the side. Tell Claude when zips are ready, and Claude checks them and brings them in as drafts.</p></div></li>
+    <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
+    <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
+    <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
+    <li><span class="n">5</span><div><b>Cashfree to live mode</b><p>The web checkout for the ₹999 × 300 offer is still sandbox, so the site only collects contacts for now.</p></div></li>
+    <li><span class="n">6</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
   </ul>
 </section>
 
@@ -123,8 +119,13 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Live</span><div><b>Review queue on FSRS, 2 Nov</b><p>Missed questions come back just before you'd forget them, and each right answer pushes them further out. Live on the web. In the Android code, out with the next release. Checked against the reference library.</p></div></li>
+        <li><span class="chip c-done">Live</span><div><b>Chotu and answer marking, 2 Nov</b><p>English chat goes to Groq first. Typed answers go to Groq, photos to Gemini.</p></div></li>
+        <li><span class="chip c-done">Live</span><div><b>AI pod friends made honest, 2 Nov</b><p>No invented lives, jobs or wins: they suggest, explain and ask. "Pooja · AI" is now "Ira · AI".</p></div></li>
+        <li><span class="chip c-done">Live</span><div><b>Legal details filled, 2 Nov</b><p>SnapSkill LLP, Mohali, Punjab, hello@aspiran.in, courts at Mohali, in the app and on the website. Website answers are kept until the person asks us to delete them.</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>Email sending set up</b><p>Resend's key and sender address are in place on the server.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Server deploy, 1 Nov</b><p>Version <code>c4639958</code>: new Desk and Admin (clear sign-in, plain messages, Coverage by paper and topic), website Chotu routes, visitor table. Claude runs server deploys from now on.</p></div></li>
-        <li><span class="chip c-done">In code</span><div><b>Google sign-in only</b><p>Username sign-in is off by default. The live flag still needs you (item 1).</p></div></li>
+        <li><span class="chip c-done">Live</span><div><b>Google sign-in only</b><p>Username sign-in is off, in the code and in the live setting.</p></div></li>
         <li><span class="chip c-done">Built</span><div><b>Android builds on the Mac</b><p>Play id is now <code>in.aspiran.app</code>; the server's Play check uses it.</p></div></li>
         <li><span class="chip c-done">Built</span><div><b>Read aloud with the device voice</b><p>Chai cards (not tragic ones) and long reads, Android and web. Not yet heard on a real phone.</p></div></li>
         <li><span class="chip c-done">Done</span><div><b>Code on GitHub</b><p>Private repo <code>srsrsrsr9/aspiran</code>, pushed after each piece of work.</p></div></li>
@@ -137,7 +138,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
         <li><span class="chip c-done">Done</span><div><b>Teaching plan (pedagogy reply)</b><p>Answers to all 21 of your comments, plus a build order. See the Teaching plan tab.</p></div></li>
         <li><span class="chip c-done">Done</span><div><b>AI cost per aspirant</b><p>Text AI ₹200–450 a month for a heavy user; live voice is the price risk; ₹9,999 works with voice capped.</p></div></li>
         <li><span class="chip c-done">Done</span><div><b>Content brief and claude.ai Project</b><p>One brief, 22 batches, a checker script that every chat runs, and a status file. The first paste (47 files) was checked and saved as drafts.</p></div></li>
-        <li><span class="chip c-done">Built</span><div><b>New homepage and privacy page</b><p>On the <code>homepage-v2</code> branch, waiting for you to merge.</p></div></li>
+        <li><span class="chip c-done">Live</span><div><b>New homepage and privacy page</b><p>Published on aspiran.in on 2 Nov, with your tagline "Your UPSC adda. Chai's on us."</p></div></li>
       </ul>
     </div>
   </div>
@@ -147,13 +148,12 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Claude's queue</h2>
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Build step 1 of the teaching plan: the spine</b><p>One review queue on FSRS, the syllabus map with Met / Can recall / Can use, and a Today screen that shows one step at a time.</p></div></li>
+    <li><span class="n">1</span><div><b>Finish the spine (teaching plan, step 1)</b><p>The review queue is on FSRS. Next: fold the Friday and monthly recall sets into that one queue, the syllabus map with Met / Can recall / Can use, and a Today screen that shows one step at a time.</p></div></li>
     <li><span class="n">2</span><div><b>Bring finished content into the app</b><p>Write importers for the new kinds (pause lines, essays, interview bank, term lists, optional nodes). Then import the checked batches as drafts for the Desk.</p></div></li>
     <li><span class="n">3</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">4</span><div><b>Chotu's model order</b><p>English chat still tries NVIDIA first; you said Groq. Align it, and put Gemini first for photographed answers.</p></div></li>
-    <li><span class="n">5</span><div><b>AI pod friends</b><p>Drop the human backstories, rename "Pooja · AI" (it clashes with the real editor), and start a provisional pod on day 1.</p></div></li>
-    <li><span class="n">6</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
-    <li><span class="n">7</span><div><b>Website follow-ups</b><p>Hindi homepage; put SnapSkill LLP into the privacy page; Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
+    <li><span class="n">4</span><div><b>A day-1 pod</b><p>Put each new person in a provisional pod on their first day, so nobody starts alone.</p></div></li>
+    <li><span class="n">5</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
+    <li><span class="n">6</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The site already talks about the Met / Can use map, so the map is the next build.</p></div></li>
   </ul>
 </section>
 
@@ -210,14 +210,14 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 
 <section id="website">
   <h2>Website (aspiran.in)</h2>
-  <p class="lede">The live site still shows the old homepage, with your latest tagline. The new one is built and waiting.</p>
+  <p class="lede">The new homepage is live on aspiran.in (published 2 Nov), with Chotu chatting and saving visitor answers.</p>
   <div class="tbl"><table>
     <thead><tr><th>Piece</th><th>Status</th><th>Detail</th></tr></thead>
     <tbody>
-      <tr><td>New long homepage (17 rooms, Chotu walks along)</td><td><span class="chip c-you">Needs you</span></td><td>Branch <code>homepage-v2</code>, 2 commits ahead of the live site; merges cleanly. Merge to publish.</td></tr>
-      <tr><td>Chotu chat and visitor answers on the site</td><td><span class="chip c-done">Live on server</span></td><td><code>/web/chotu</code> and <code>/web/lead</code> deployed 1 Nov. The live homepage doesn't use them until the merge.</td></tr>
+      <tr><td>New long homepage (17 rooms, Chotu walks along)</td><td><span class="chip c-done">Live</span></td><td>Published 2 Nov with your tagline. English only.</td></tr>
+      <tr><td>Chotu chat and visitor answers on the site</td><td><span class="chip c-done">Live on server</span></td><td><code>/web/chotu</code> and <code>/web/lead</code>, used by the live homepage.</td></tr>
       <tr><td>Visitor list download</td><td><span class="chip c-done">Live</span></td><td>Admin → web leads, as a spreadsheet (CSV).</td></tr>
-      <tr><td>Privacy page</td><td><span class="chip c-prog">Drafted</span></td><td>Covers website chat, visitor answers, contact only with the tick, AI providers. Placeholders: address, grievance contact, how long we keep data.</td></tr>
+      <tr><td>Privacy and terms</td><td><span class="chip c-done">Live</span></td><td>SnapSkill LLP, Mohali, Punjab; hello@aspiran.in; courts at Mohali; answers kept until the person asks us to delete them.</td></tr>
       <tr><td>Hindi homepage</td><td><span class="chip c-todo">Not started</span></td><td>After the English one is live.</td></tr>
       <tr><td>₹999 × 300 checkout</td><td><span class="chip c-you">Needs you</span></td><td>Cashfree still in sandbox. The site says "save my seat" and only collects contacts.</td></tr>
     </tbody>
@@ -253,10 +253,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   </table></div>
 
   <h3>Build progress</h3>
-  <div class="bar" role="img" aria-label="0 of 10 steps built, 5 partly built, 5 not started"><i style="width:0%;background:var(--done)"></i><i style="width:50%;background:var(--part)"></i></div>
+  <div class="bar" role="img" aria-label="0 of 10 steps built, 6 partly built, 4 not started"><i style="width:0%;background:var(--done)"></i><i style="width:60%;background:var(--part)"></i></div>
   <div class="legend"><span class="chip c-done">Built</span><span class="chip c-part">Partly there</span><span class="chip c-todo">Not started</span></div>
   <ol class="steps" style="margin-top:14px">
-    <li><div><b>Spine</b><p>Review queue on FSRS, the syllabus map (Met / Can recall / Can use), one-step Today. Today's 3 exists; the rest doesn't. Claude's next job.</p></div><span class="chip c-todo">Not started</span></li>
+    <li><div><b>Spine</b><p>The review queue runs on FSRS (web live; Android with the next release). Still to build: one queue for every review, the syllabus map (Met / Can recall / Can use), and the one-step Today. Claude's next job.</p></div><span class="chip c-part">Partly there</span></li>
     <li><div><b>Writing</b><p>Answer Studio with skeletons and AI marking exists. Self-mark first, the rewrite loop, three-snap essays and the GS4 case circle are not built.</p></div><span class="chip c-part">Partly there</span></li>
     <li><div><b>Your room</b><p>A private journal (stays on the phone) and Close the day exist. Notes, to-dos, the sleep log and export are not built.</p></div><span class="chip c-part">Partly there</span></li>
     <li><div><b>Hindi evaluation</b><p>Waits for the 50-answer test with two evaluators.</p></div><span class="chip c-todo">Not started</span></li>
