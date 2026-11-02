@@ -18,6 +18,8 @@ import { RAP_VIDEOS, onMeteredData, rapLangFor } from "./videos.js";
 import * as Auth from "./auth.js";
 import * as M from "./metrics.js";
 import * as F from "./fsrs.js";
+import * as SY from "./syllabus.js";
+import * as MP from "./map.js";
 import * as X from "./explore.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
@@ -289,10 +291,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -490,23 +492,42 @@ function viewToday() {
   const s = dayState();
   const plan = store.get("plan");
   const firstStep = plan && plan.madeOn < today() && plan.madeOn >= addDays(today(), -1) ? plan : null;
-  const next = TASKS.find((t) => !s.done.includes(t.id));
   const rm = resultMode();
   // Result-day mode: Prep shrinks too. Nothing to do today unless you want to.
   if (rm) return h("div.col", h("h1", "Today's 3"), h("div.card.soft", h("p", "Whatever happened, you're more than a roll number."), h("p.small.muted", "Nothing here needs doing today. It'll all be here when you want it.")));
+  // One step at a time (teaching plan, build step 3): the next thing to do, big; the full list one tap away.
+  const due = reviewItems().length;
+  const steps = [
+    firstStep && !s.firstStepDone && { title: plan.line, sub: "Your first step, from last night · 5 min",
+      act: [h("button.primary", { onclick: () => focus.start(5, "First step", "five") }, "Just 5 minutes"),
+        h("button.ghost", { onclick: () => { const d = dayState(); d.firstStepDone = true; saveDay(d); render(); } }, "Did it")] },
+    due > 0 && !s.reviewed && { title: `Review: ${due} due`, sub: `Recall first · about ${reviewMinutes(due)} min`,
+      act: [h("a.btn.primary", { href: "#review" }, "Start the review")] },
+    ...TASKS.filter((t) => !s.done.includes(t.id)).map((t) => ({ title: t.title, sub: `${t.minutes} min · ${t.subject}${s.started.includes(t.id) ? " · Started" : ""}`,
+      act: [h("button.primary", { onclick: () => { markStarted(t.id); focus.start(5, t.title, "five", t.id); location.hash = t.go; } }, "Just 5 minutes"),
+        h("a.btn", { href: t.go }, `All ${t.minutes} min`)] })),
+  ].filter(Boolean);
+  const step = steps[0];
+  const nextCard = step
+    ? h("div.card", h("div.small.muted", "Next"), h("h2", { style: { margin: "4px 0" } }, step.title), h("div.small.muted", step.sub),
+      h("div.row", { style: { marginTop: "12px", flexWrap: "wrap" } }, ...step.act),
+      steps.length > 1 && h("p.small.muted", `Then ${steps.length - 1} more.`))
+    : h("div.card", h("h2", { style: { marginTop: 0 } }, "You're done for today. Really."), h("p.muted", "The rest of the day is yours. Close the Day tonight if you like."));
   const tasks = h("div.card",
     h("h2", { style: { marginTop: 0 } }, "Today's 3"),
+    (due > 0 || s.reviewed) && h("div.task",
+      h("div.status", s.reviewed && !due ? "✓" : "○"),
+      h("div.grow", h("a", { href: "#review" }, "Review"), h("div.small.muted", s.reviewed && !due ? "Done" : `${due} due · about ${reviewMinutes(due)} min`))),
     firstStep && h("div.task",
       h("div.status", s.firstStepDone ? "✓" : "→"),
       h("div.grow", h("div", plan.line), h("div.small.muted", "Tomorrow's first step, from last night")),
       !s.firstStepDone && h("button", { onclick: () => { focus.start(5, "First step", "five"); } }, "Just 5 minutes"),
       !s.firstStepDone && h("button.ghost", { onclick: () => { const d = dayState(); d.firstStepDone = true; saveDay(d); render(); } }, "Did it")),
     TASKS.map((t) => {
-      const done = s.done.includes(t.id), started = s.started.includes(t.id), isNext = t === next;
+      const done = s.done.includes(t.id), started = s.started.includes(t.id);
       return h("div.task",
         h("div.status", { "aria-label": done ? "Done" : started ? "Started" : "Not started" }, done ? "✓" : started ? "◐" : "○"),
         h("div.grow", h("a", { href: t.go }, t.title), h("div.small.muted", `${t.minutes} min · ${t.subject}${started && !done ? " · Started" : ""}`)),
-        !done && isNext && h("button.primary", { onclick: () => { markStarted(t.id); focus.start(5, t.title, "five", t.id); location.hash = t.go; } }, "Just 5 minutes"),
         !done && h("a.btn", { href: t.go }, `All ${t.minutes} min`));
     }),
     s.done.length > 0 && h("p.small.muted", `${s.done.length} done. You did that.`),
@@ -519,7 +540,9 @@ function viewToday() {
     h("p.small", h("a", { href: "#pod" }, podLine())),
     profileAsk("today"),
     routineCard(),
-    tasks,
+    nextCard,
+    h("details", h("summary", "Today's full list"), tasks),
+    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between",
       h("div", h("strong", "Long session?"), h("div.small.muted", fm ? `${fm} focused minutes today.` : "Start a focus block. Distracting sites stay closed until it ends.")),
       h("a.btn", { href: "#focus" }, "Focus"))),
@@ -618,7 +641,8 @@ function viewChai(arg) {
   const examOpen = h("details", h("summary", "Open Exam Corner"),
     t.mcq && mcqBlock(t.mcq, (right) => {
       const rec = store.get("recall", {}); rec[it.id] = { day: today(), right, topic: it.topic }; store.set("recall", rec);
-      if (!right) addMiss({ id: "card-" + it.id, cardId: it.id, topic: it.topic, en: it.examCorner?.mcq, hi: it.hi?.mcq ?? null });
+      const q = { id: "card-" + it.id, cardId: it.id, topic: it.topic, en: it.examCorner?.mcq, hi: it.hi?.mcq ?? null };
+      if (right) gotRight(q); else addMiss(q);
     }),
     t.mains && h("p", h("strong", "Mains: "), t.mains),
     t.facts.length > 0 && h("div", h("strong", "Key facts"), h("ul", t.facts.map((f) => h("li", f)))),
@@ -646,8 +670,10 @@ function viewChai(arg) {
 
 // --- Practice: Prelims, Mains, mock papers -----------------------------------------------------
 
-// The review queue (teaching plan, build step 1): every missed question, scheduled by FSRS (fsrs.js). A miss comes
-// back when you're about to forget it; each right answer pushes it further out. Stays in this browser.
+// The review queue (teaching plan, build step 1): every missed question and every Chai question you've answered,
+// scheduled by FSRS (fsrs.js). Each comes back when you're about to forget it; each right answer pushes it further out.
+// It replaces the old Friday-misses and monthly "Remember these?" sets. Topics you've met on the syllabus map join it
+// too (map.js). Stays in this browser.
 function reviewQueue() {
   let all = store.get("reviews", null);
   if (!all) { // first run: bring in misses kept under the old 3-day rule
@@ -657,11 +683,14 @@ function reviewQueue() {
   }
   return all;
 }
-/** Grade a question in the queue. A miss always enters it; a right answer only moves one that's already there. */
+/**
+ * Grade a question in the queue. A miss always enters it, and so does a right answer on a Chai card (it comes back in
+ * a few days, then further out). A right answer on a starter-bank question only moves one that's already there.
+ */
 function reviewGrade(q, grade) {
   if (!q.en) return;
   const all = reviewQueue(), cur = all[q.id];
-  if (!cur && grade !== F.AGAIN) return;
+  if (!cur && grade !== F.AGAIN && !q.cardId) return;
   all[q.id] = { q: { id: q.id, cardId: q.cardId, topic: q.topic, en: q.en, hi: q.hi ?? null }, f: F.review(cur?.f ?? null, grade, today()) };
   const ids = Object.keys(all);
   if (ids.length > 500) ids.sort((a, b) => all[a].f.last.localeCompare(all[b].f.last)).slice(0, ids.length - 500).forEach((id) => delete all[id]);
@@ -677,11 +706,10 @@ function prelimsSet() {
   const day = today();
   const fixed = store.get("prelims:" + day);
   if (fixed) return fixed;
-  const misses = dueReviews(day).slice(0, 3);
+  // New questions only: what's due for revision is in the review (#review), so nothing is asked twice in a day.
   const cards = (data.questions?.fromCards ?? []);
-  const pool = [...misses, ...cards.filter((c) => !misses.some((m) => m.id === c.id))];
   const bank = shuffle(data.questions?.bank ?? [], Number(day.replace(/-/g, "")));
-  const set = [...pool, ...bank].filter((q) => q.en).slice(0, 5).map((q) => ({ ...q, review: misses.some((m) => m.id === q.id) }));
+  const set = [...cards, ...bank].filter((q) => q.en).slice(0, 5);
   store.set("prelims:" + day, set);
   return set;
 }
@@ -691,7 +719,9 @@ function viewPractice() {
   const mocks = libraryOf("mock");
   const hist = store.get("mockHistory", []);
   return h("div.col", X.plusBanner(), h("h1", "Practice"),
-    h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Missed ones come back just before you'd forget them.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Today's new questions.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
+    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written today." : "One question, 150 words, about 20 minutes. Autosaves.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
@@ -713,11 +743,11 @@ function viewPrelims() {
       if (!viewPrelims.counted) { viewPrelims.counted = true; practiceFinished(set, results); }
       put(box, h("h2", `${right} of ${set.length} right.`),
         firstRight && h("p", `You got the ${firstRight} question right. That one's yours now.`),
-        h("p.muted", "Missed ones come back just before you'd forget them."), h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today's 3"));
+        h("p.muted", "These come back in your review just before you'd forget them."), h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today"));
       return;
     }
     const q = set[i];
-    put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${q.topic}${q.review ? " · Back for revision" : ""}`),
+    put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${q.topic}`),
       h("div.card", mcqBlock(mcqOf(q), (ok) => {
         results.push({ topic: q.topic, ok });
         if (ok) { right++; firstRight ??= q.topic; gotRight(q); } else addMiss(q);
@@ -728,6 +758,134 @@ function viewPrelims() {
   const next = h("button.primary", { onclick: () => { i++; draw(); } }, "Next");
   draw();
   return h("div.col", h("h1", "Prelims practice"), box);
+}
+
+// --- Review: the one queue (teaching plan, build step 1) -----------------------------------------------
+// Recall first: topics you've met that are due a check, then questions that are due. At most 20 in one go; the rest
+// wait for tomorrow quietly.
+
+const REVIEW_MAX = 20;
+const nodes = () => store.get("map", {});
+const putNode = (id, n) => { const m = nodes(); if (n) m[id] = n; else delete m[id]; store.set("map", m); };
+function reviewItems(day = today()) {
+  const m = nodes();
+  const topics = Object.entries(m).filter(([id, n]) => MP.isDue(n, day) && SY.nodeById(id))
+    .sort((a, b) => a[1].f.due.localeCompare(b[1].f.due)).map(([id]) => ({ node: id }));
+  return [...topics, ...dueReviews(day).map((q) => ({ q }))].slice(0, REVIEW_MAX);
+}
+const reviewMinutes = (n) => Math.max(2, Math.ceil(n / 2));
+function reviewLine() {
+  const n = reviewItems().length;
+  if (dayState().reviewed && !n) return "Done today.";
+  return n ? `${n} due today · about ${reviewMinutes(n)} min. Each comes back just before you'd forget it.` : "Nothing due today. Missed questions, Chai questions and topics you've met come back here.";
+}
+
+function viewReview() {
+  const day = today();
+  const set = reviewItems(day);
+  if (!set.length) return h("div.col", h("h1", "Review"),
+    h("p", dayState().reviewed ? "That's today's review done." : "Nothing due today."),
+    h("p.muted", "Questions you answer in Chai and Prelims, and topics you mark as met on your syllabus map, come back here just before you'd forget them."),
+    h("div.row", h("a.btn.primary", { href: "#today" }, "Back to Today"), h("a.btn", { href: "#map" }, "Your syllabus map")));
+  let i = 0, right = 0, asked = 0;
+  const box = h("div");
+  const next = h("button.primary", { onclick: () => { i++; draw(); } }, "Next");
+  const draw = () => {
+    if (i >= set.length) {
+      const d = dayState(); d.reviewed = true; saveDay(d);
+      put(box, h("h2", "That's today's review."),
+        asked > 0 && h("p", `${right} of ${asked} question${asked === 1 ? "" : "s"} came back right.`),
+        h("p.muted", "Each one returns just before you'd forget it. The ones you knew well wait longer."),
+        h("a.btn.primary", { href: "#today" }, "Next step"));
+      return;
+    }
+    const it = set[i];
+    if (it.node) {
+      const nd = SY.nodeById(it.node), n = nodes()[it.node];
+      const grade = (g) => { putNode(it.node, MP.check(n, g, day)); i++; draw(); };
+      put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${nd.paper.short} · Topic check`),
+        h("div.card", h("h2", { style: { marginTop: 0 } }, nd.name),
+          h("p", "Close your notes. Say or write the main points from memory, then check them."),
+          n.note && h("details", h("summary", "Check against what you wrote when you met it"), h("p", { style: { whiteSpace: "pre-wrap" } }, n.note)),
+          h("p.small.muted", "How much came back?"),
+          h("div.row", { style: { flexWrap: "wrap" } }, [[F.AGAIN, "Little"], [F.HARD, "Some, with effort"], [F.GOOD, "Most of it"], [F.EASY, "All of it, easily"]]
+            .map(([g, l]) => h(g === F.GOOD ? "button.primary" : "button", { onclick: () => grade(g) }, l)))));
+      return;
+    }
+    const q = it.q;
+    put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${q.topic ?? "Question"}`),
+      h("div.card", mcqBlock(mcqOf(q), (ok) => { asked++; if (ok) { right++; gotRight(q); } else addMiss(q); next.disabled = false; })), next);
+    next.disabled = true;
+  };
+  draw();
+  return h("div.col", h("h1", "Review"), h("p.small.muted", "Recall first. Nothing here is scored or shared."), box);
+}
+
+// --- Syllabus map (teaching plan, build step 2) ------------------------------------------------------
+// Every topic in the official syllabus, each Not started, Met, Can recall or Can use (map.js). No percentages.
+
+const STATE_DOT = { none: "○", met: "◐", recall: "●", use: "★" };
+function mapCounts(day = today()) {
+  const m = nodes(), c = { met: 0, recall: 0, use: 0 };
+  for (const nd of SY.NODES) { const st = MP.stateOf(m[nd.id], day); if (st !== MP.NONE) c[st]++; }
+  return c;
+}
+function mapLine() {
+  const c = mapCounts();
+  if (!c.met && !c.recall && !c.use) return "Every topic in the syllabus. Mark one as met when you've studied it.";
+  return [c.met && `${c.met} met`, c.recall && `${c.recall} can recall`, c.use && `${c.use} can use`].filter(Boolean).join(" · ");
+}
+
+function viewMap(arg) {
+  if (arg && SY.nodeById(arg)) return viewNode(arg);
+  const day = today(), m = nodes();
+  const papers = SY.papersFor(P.value("optional_subject"));
+  const cur = papers.find((p) => p.id === store.get("mapPaper")) ?? papers[0];
+  return h("div.col",
+    h("h1", "Your syllabus map"),
+    h("p.muted", "Every topic in the official syllabus. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this."),
+    h("p.small", mapLine()),
+    h("div.chips", papers.map((p) => h("button.chip", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); } }, p.short))),
+    h("div.card.soft", h("strong", cur.name), h("div.small.muted", cur.lead)),
+    cur.topics.map((name, i) => {
+      const id = SY.nodeId(cur, i), st = MP.stateOf(m[id], day);
+      return h("a.card.link", { href: "#map/" + id }, h("div.row.between",
+        h("span", name), h("span.small", { style: { whiteSpace: "nowrap", color: st === MP.NONE ? "var(--muted)" : "var(--brand)" } }, `${STATE_DOT[st]} ${MP.LABEL[st]}`)));
+    }),
+    !P.value("optional_subject") && h("p.small.muted", "Your optional's papers show here once you tell us your optional (Practice → Mains answer asks)."));
+}
+
+function viewNode(id) {
+  const day = today(), nd = SY.nodeById(id), n = nodes()[id], st = MP.stateOf(n, day);
+  const back = h("a.btn", { href: "#map" }, "← Your syllabus map");
+  const head = [h("div.small.muted", `${nd.paper.name}`), h("h1", nd.name), h("p", h("strong", `${STATE_DOT[st]} ${MP.LABEL[st]}`))];
+  if (st === MP.NONE) {
+    const memory = h("textarea", { rows: 8, placeholder: "Without looking: the main points, in your own words." });
+    return h("div.col", ...head,
+      h("div.card", h("h3", { style: { marginTop: 0 } }, "1. Learn it"),
+        h("p", "See what UPSC has asked on it, then read your source: NCERT, a standard book, or a piece in Learn."),
+        h("div.row", h("a.btn", { href: "#learn" }, "Learn and play"), h("a.btn", { href: "#chotu" }, "Ask Chotu · AI"))),
+      h("div.card", h("h3", { style: { marginTop: 0 } }, "2. Close the book and write what you remember"),
+        h("p.small.muted", "Then open the book, check, and fix it. This note stays in this browser."), memory,
+        h("div", { style: { marginTop: "12px" } }, h("button.primary", { onclick: () => { putNode(id, MP.meet(null, day, memory.value.trim())); render(); } }, "Mark as met"))),
+      back);
+  }
+  const due = n.f.due <= day;
+  const parts = {
+    met: [h("p", n.recalledOn ? "It's been a while since your last check, so it's back to Met. The next check that goes well brings it back."
+        : "You've met it. A recall check after a week or more moves it to Can recall."),
+      h("p", due ? "A check is due today." : `Next check: ${n.f.due}. It comes up in your review.`)],
+    recall: [h("p", "You can recall it. To reach Can use, use it: write an answer on it, or try a set of past questions on it."),
+      h("div.row", { style: { flexWrap: "wrap" } },
+        h("button", { onclick: () => { putNode(id, MP.use(n, day, "answer")); render(); } }, "I wrote an answer on it"),
+        h("button", { onclick: () => { putNode(id, MP.use(n, day, "pyq")); render(); } }, "I did past questions on it"),
+        h("a.btn", { href: "#mains" }, "Write one now"))],
+    use: [h("p", "You can use it. Your review keeps checking it, further apart each time.")],
+  }[st];
+  return h("div.col", ...head,
+    h("div.card", ...parts, due && h("a.btn.primary", { href: "#review" }, "Open the review")),
+    n.note && h("details.card", h("summary", "What you wrote when you met it"), h("p", { style: { whiteSpace: "pre-wrap" } }, n.note)),
+    h("div.row.between", back, h("button.ghost", { onclick: () => { if (confirm("Set this topic back to Not started? Its checks start again.")) { putNode(id, null); render(); } } }, "Start this topic again")));
 }
 
 const MAINS_FALLBACK = [
@@ -2981,7 +3139,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

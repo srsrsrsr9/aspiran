@@ -150,12 +150,13 @@ class AppRepository(context: Context) {
     }
 
     /**
-     * A Prelims answer. Due cards are graded by FSRS; a miss on a fresh card enters the queue.
-     * Static bank questions don't feed revision.
+     * Any answer on a Chai card's question (Chai, yesterday's question, Prelims, the review, a mock): FSRS grades it,
+     * and a card seen for the first time enters the queue, right or wrong. Static bank questions don't feed revision.
+     * This one queue replaces the old Friday and monthly sets.
      */
     suspend fun recordAnswer(q: PracticeQuestion, right: Boolean) {
         val id = q.cardId ?: return
-        if (q.isReview || !right) recordReview(id, right)
+        recordReview(id, right)
     }
 
     /** Cards due for revision today, from saved cards and earlier packs. */

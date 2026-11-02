@@ -25,6 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
@@ -43,8 +45,9 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 /**
- * Today, top to bottom: greeting, Today's 3, pod strip, Close the Day (collapsed).
- * After 20:00 Close the Day moves to the top. One filled button per screen. No countdown, streak or upsell.
+ * Today, top to bottom: greeting, the one next step (teaching plan, build step 3), today's full list one tap away,
+ * the syllabus map, pod strip, Close the Day (collapsed). After 20:00 Close the Day moves to the top.
+ * One filled button per screen. No countdown, streak or upsell.
  */
 @Composable
 fun TodayScreen(
@@ -63,8 +66,16 @@ fun TodayScreen(
     onWhy: (() -> Unit)? = null,
     /** Monday's WOOP or this week's line, and the planning mirror. */
     weekly: @Composable () -> Unit = {},
+    /** The review queue: how many are due, whether today's is done, and opening it. */
+    reviewDue: Int = 0,
+    reviewed: Boolean = false,
+    onOpenReview: () -> Unit = {},
+    /** The syllabus map's counts ("3 met · 1 can recall"), and opening it. */
+    mapLine: String? = null,
+    onOpenMap: () -> Unit = {},
 ) {
     val evening = now.hour >= 20
+    var full by rememberSaveable { mutableStateOf(false) }
     Column(
         modifier = modifier.verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -72,11 +83,82 @@ fun TodayScreen(
         Greeting(now, day, persona)
         weekly()
         if (evening) CloseTheDayBlock(day, primary = true, onOpenCloseDay, now)
-        TodaysThree(brief, day, persona, now, primary = !evening, mainsTopic, onFiveMinutes, onWhy) { if (it == TaskId.CHAI) onOpenChai() else onOpenTask(it) }
+        val open = { t: TaskId -> if (t == TaskId.CHAI) onOpenChai() else onOpenTask(t) }
+        NextStep(day, persona, brief, mainsTopic, reviewDue.takeIf { !reviewed } ?: 0, filled = !evening, onOpenReview,
+            onFive = { t -> day.startFiveMinutes(t); onFiveMinutes(t); open(t) }, onFirstStep = { onFiveMinutes(null) }, onOpen = open)
+        TextButton(onClick = { full = !full }) { Text(if (full) "Hide today's full list" else "Today's full list") }
+        if (full) {
+            if (reviewDue > 0 || reviewed) FlatCard(Modifier.clickable(onClick = onOpenReview)) {
+                Column(Modifier.padding(16.dp)) {
+                    Text("Review", style = MaterialTheme.typography.titleMedium)
+                    Text(if (reviewDue == 0) "✓ Done" else "$reviewDue due · about ${maxOf(2, (reviewDue + 1) / 2)} min", style = MaterialTheme.typography.bodySmall)
+                }
+            }
+            TodaysThree(brief, day, persona, now, primary = false, mainsTopic, onFiveMinutes, onWhy, open)
+        }
+        mapLine?.let { line ->
+            FlatCard(Modifier.clickable(onClick = onOpenMap)) {
+                Column(Modifier.padding(16.dp)) {
+                    Text("Your syllabus map →", style = MaterialTheme.typography.titleMedium)
+                    Text(line, style = MaterialTheme.typography.bodySmall)
+                }
+            }
+        }
         PodStrip(day, pod, onOpenPod)
         if (!evening) CloseTheDayBlock(day, primary = false, onOpenCloseDay, now)
         if (brief.sample) {
             Text("Sample content: facts not yet checked", style = MaterialTheme.typography.labelSmall)
+        }
+    }
+}
+
+/** The one thing to do next: last night's first step, then the review, then the next of today's 3. */
+@Composable
+private fun NextStep(
+    day: DayState, persona: Persona?, brief: Brief, mainsTopic: String, reviewDue: Int, filled: Boolean, onOpenReview: () -> Unit,
+    onFive: (TaskId) -> Unit, onFirstStep: () -> Unit, onOpen: (TaskId) -> Unit,
+) {
+    val firstStep = day.firstStep?.takeIf { !day.firstStepDone }
+    val task = day.remaining.firstOrNull()
+    val left = listOfNotNull(firstStep, reviewDue.takeIf { it > 0 }).size + day.remaining.size
+    FlatCard {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (left == 0) {
+                Text("You're done for today. Really.", style = MaterialTheme.typography.titleLarge)
+                Text("The rest of the day is yours. Close the Day tonight if you like.", style = MaterialTheme.typography.bodyMedium)
+                return@Column
+            }
+            Text("Next", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+            val action: @Composable (String, () -> Unit) -> Unit = { label, go ->
+                if (filled) Button(onClick = go, modifier = Modifier.height(MainActionHeight)) { Text(label) } else OutlinedButton(onClick = go) { Text(label) }
+            }
+            when {
+                firstStep != null -> {
+                    Text(firstStep.line, style = MaterialTheme.typography.titleLarge)
+                    Text("Your first step, from last night · 5 min", style = MaterialTheme.typography.bodySmall)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        action("Just 5 minutes", onFirstStep)
+                        TextButton(onClick = { day.firstStepDone = true; day.showUp() }) { Text("Did it") }
+                    }
+                }
+                reviewDue > 0 -> {
+                    Text("Review: $reviewDue due", style = MaterialTheme.typography.titleLarge)
+                    Text("Recall first · about ${maxOf(2, (reviewDue + 1) / 2)} min", style = MaterialTheme.typography.bodySmall)
+                    action("Start the review", onOpenReview)
+                }
+                task != null -> {
+                    val partTime = task == TaskId.MAINS && persona?.partTime == true
+                    val minutes = if (partTime) 5 else task.minutes
+                    Text(if (task == TaskId.CHAI) "Today's Chai, ${brief.items.size} card${if (brief.items.size == 1) "" else "s"}" else if (partTime) "Mains outline" else task.title,
+                        style = MaterialTheme.typography.titleLarge)
+                    Text("$minutes min · ${if (task == TaskId.MAINS) mainsTopic else task.subject}${if (task in day.started) " · Started" else ""}", style = MaterialTheme.typography.bodySmall)
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        action("Just 5 minutes") { onFive(task) }
+                        if (minutes > 5) TextButton(onClick = { onOpen(task) }) { Text("All $minutes min") }
+                    }
+                }
+            }
+            if (left > 1) Text("Then ${left - 1} more.", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

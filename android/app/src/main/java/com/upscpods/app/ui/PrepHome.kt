@@ -24,6 +24,8 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,6 +52,10 @@ import com.upscpods.app.data.Prep
 import com.upscpods.app.data.SYLLABUS
 import com.upscpods.app.data.SyllabusPaper
 import com.upscpods.app.data.SyllabusTopic
+import com.upscpods.app.data.MapNode
+import com.upscpods.app.data.MapState
+import com.upscpods.app.data.SyllabusMap
+import com.upscpods.app.data.nodeId
 import com.upscpods.app.data.subjectName
 import com.upscpods.app.data.syllabusFor
 import java.time.LocalDate
@@ -154,6 +160,12 @@ fun SyllabusTab(
     pyqs: Map<Pair<String, String>, Int> = emptyMap(), onPyq: (paper: String, topic: String) -> Unit = { _, _ -> },
     /** The member's answer about their Mains optional: its papers join the chips. */
     optional: String? = null,
+    /** The syllabus map on this phone (data/SyllabusMap.kt), by node id, and its actions. */
+    map: Map<String, MapNode> = emptyMap(),
+    onMeet: (id: String, note: String) -> Unit = { _, _ -> },
+    onUse: (id: String, how: String) -> Unit = { _, _ -> },
+    onReset: (id: String) -> Unit = {},
+    onOpenReview: () -> Unit = {},
 ) {
     val pieces = remember(library.items) { prep.pieces(library) }
     val reads = remember(library.items) { prep.reads(library).map { it.first to "read" } }
@@ -164,8 +176,9 @@ fun SyllabusTab(
     val shown = syllabusFor(optional).let { if (current in it) it else it + current }
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("The UPSC syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
-        Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here.",
+        Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(SyllabusMap.line(map.values.groupingBy { it.state() }.eachCount()), style = MaterialTheme.typography.labelLarge)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             shown.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
         }
@@ -173,7 +186,8 @@ fun SyllabusTab(
         // A topic opened from the revision list (Mock Intelligence) comes first, already open.
         current.topics.sortedBy { it.name != focus }.forEach { topic ->
             TopicCard(topic, topicPieces(topic, pieces, subjectOf), topicPieces(topic, reads, subjectOf), learnt, gate.member, hindi, onOpenItem, onOpenRead,
-                startOpen = topic.name == focus, pyqs = pyqs[current.id to topic.name] ?: 0, onPyq = { onPyq(current.id, topic.name) })
+                startOpen = topic.name == focus, pyqs = pyqs[current.id to topic.name] ?: 0, onPyq = { onPyq(current.id, topic.name) },
+                node = map[current.nodeId(topic)], id = current.nodeId(topic), onMeet = onMeet, onUse = onUse, onReset = onReset, onOpenReview = onOpenReview)
         }
     }
 }
@@ -222,13 +236,18 @@ private fun TopicCard(
     topic: SyllabusTopic, pieces: List<Pair<LibraryItem, String>>, reads: List<Pair<LibraryItem, String>>, learnt: Map<String, String>,
     member: Boolean, hindi: Boolean, onOpenItem: (String) -> Unit, onOpenRead: (String) -> Unit, startOpen: Boolean = false,
     pyqs: Int = 0, onPyq: () -> Unit = {},
+    node: MapNode? = null, id: String = "", onMeet: (String, String) -> Unit = { _, _ -> }, onUse: (String, String) -> Unit = { _, _ -> },
+    onReset: (String) -> Unit = {}, onOpenReview: () -> Unit = {},
 ) {
     var open by rememberSaveable(topic.name, startOpen) { mutableStateOf(startOpen) }
     val n = pieces.size + reads.size
+    val state = node?.state() ?: MapState.NONE
     FlatCard(Modifier.clickable { open = !open }) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(topic.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                Text("${state.mark} ${state.label}  ", style = MaterialTheme.typography.labelMedium,
+                    color = if (state == MapState.NONE) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.primary)
                 Text(if (open) "▴" else "▾", style = MaterialTheme.typography.titleMedium)
             }
             Text(
@@ -242,6 +261,7 @@ private fun TopicCard(
             )
             if (open) {
                 Spacer(Modifier.size(2.dp))
+                MapStep(id, node, state, onMeet, onUse, onReset, onOpenReview)
                 if (pyqs > 0) TopicRow("Past UPSC questions", "$pyqs from the official papers. See how UPSC asks it.", Color(0xFFB45309), done = false, onClick = onPyq)
                 pieces.forEach { (item, engine) ->
                     TopicRow(WAY_VERB[engine] ?: kindName(item.kind, hindi), itemTitle(item, hindi && item.hindi), WAY_COLORS[engine]?.first(),
@@ -263,5 +283,39 @@ private fun TopicRow(kind: String, title: String, color: Color?, done: Boolean, 
             Text(title, style = MaterialTheme.typography.bodyMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
         }
         if (done) Text("✓", color = Color(0xFF3DDC97), fontWeight = FontWeight.Bold)
+    }
+}
+
+/** Where this topic is on the map, and the one thing that moves it on. */
+@Composable
+private fun MapStep(
+    id: String, node: MapNode?, state: MapState, onMeet: (String, String) -> Unit, onUse: (String, String) -> Unit,
+    onReset: (String) -> Unit, onOpenReview: () -> Unit,
+) {
+    Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).background(MaterialTheme.colorScheme.surfaceVariant).padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        when (state) {
+            MapState.NONE -> {
+                var note by rememberSaveable(id) { mutableStateOf("") }
+                Text("Learn it below, then close the book and write what you remember. Check it against the book and fix it.", style = MaterialTheme.typography.bodyMedium)
+                OutlinedTextField(note, { note = it }, Modifier.fillMaxWidth(), placeholder = { Text("Without looking: the main points, in your own words.") }, minLines = 3)
+                OutlinedButton(onClick = { onMeet(id, note.trim()) }) { Text("Mark as met") }
+            }
+            MapState.MET -> {
+                Text(if (node?.recalledOn != null) "It's been a while since your last check, so it's back to Met. The next check that goes well brings it back."
+                    else "You've met it. A recall check after a week or more moves it to Can recall.", style = MaterialTheme.typography.bodyMedium)
+                if (node?.isDue() == true) OutlinedButton(onClick = onOpenReview) { Text("A check is due: open the review") }
+                else Text("Next check: ${node?.due}. It comes up in your review.", style = MaterialTheme.typography.bodySmall)
+            }
+            MapState.RECALL -> {
+                Text("You can recall it. To reach Can use, use it: write an answer on it, or try a set of past questions on it.", style = MaterialTheme.typography.bodyMedium)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    OutlinedButton(onClick = { onUse(id, "answer") }) { Text("I wrote an answer") }
+                    OutlinedButton(onClick = { onUse(id, "pyq") }) { Text("I did past questions") }
+                }
+            }
+            MapState.USE -> Text("You can use it. Your review keeps checking it, further apart each time.", style = MaterialTheme.typography.bodyMedium)
+        }
+        if (state != MapState.NONE) TextButton(onClick = { onReset(id) }) { Text("Start this topic again") }
     }
 }

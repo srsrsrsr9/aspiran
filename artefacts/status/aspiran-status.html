@@ -86,7 +86,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div class="tile"><b>6</b><span>things waiting on you</span></div>
     <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
     <div class="tile"><b>Live</b><span>new homepage on aspiran.in since 2 Nov</span></div>
-    <div class="tile"><b>0 of 10</b><span>teaching-plan build steps finished (6 partly there)</span></div>
+    <div class="tile"><b>1 of 10</b><span>teaching-plan build steps finished (5 partly there)</span></div>
   </div>
 </header>
 
@@ -119,6 +119,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Live</span><div><b>The spine, 2 Nov</b><p>One review for everything: every Chai question you answer, every miss and every topic you've met comes back just before you'd forget it (the Friday and monthly sets are gone). A syllabus map of all 228 topics, each Not started, Met, Can recall or Can use, with no percentages. Today now shows one next step, with the full list one tap away. Live on the web; in the Android code for the next release.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Review queue on FSRS, 2 Nov</b><p>Missed questions come back just before you'd forget them, and each right answer pushes them further out. Live on the web. In the Android code, out with the next release. Checked against the reference library.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Chotu and answer marking, 2 Nov</b><p>English chat goes to Groq first. Typed answers go to Groq, photos to Gemini.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>AI pod friends made honest, 2 Nov</b><p>No invented lives, jobs or wins: they suggest, explain and ask. "Pooja · AI" is now "Ira · AI".</p></div></li>
@@ -148,12 +149,11 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Claude's queue</h2>
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Finish the spine (teaching plan, step 1)</b><p>The review queue is on FSRS. Next: fold the Friday and monthly recall sets into that one queue, the syllabus map with Met / Can recall / Can use, and a Today screen that shows one step at a time.</p></div></li>
-    <li><span class="n">2</span><div><b>Bring finished content into the app</b><p>Write importers for the new kinds (pause lines, essays, interview bank, term lists, optional nodes). Then import the checked batches as drafts for the Desk.</p></div></li>
-    <li><span class="n">3</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">4</span><div><b>A day-1 pod</b><p>Put each new person in a provisional pod on their first day, so nobody starts alone.</p></div></li>
-    <li><span class="n">5</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
-    <li><span class="n">6</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The site already talks about the Met / Can use map, so the map is the next build.</p></div></li>
+    <li><span class="n">1</span><div><b>Bring finished content into the app</b><p>Write importers for the new kinds (pause lines, essays, interview bank, term lists, optional nodes). Then import the checked batches as drafts for the Desk.</p></div></li>
+    <li><span class="n">2</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
+    <li><span class="n">3</span><div><b>A day-1 pod</b><p>Put each new person in a provisional pod on their first day, so nobody starts alone.</p></div></li>
+    <li><span class="n">4</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
+    <li><span class="n">5</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The Met / Can use map the site talks about is now built.</p></div></li>
   </ul>
 </section>
 
@@ -253,10 +253,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   </table></div>
 
   <h3>Build progress</h3>
-  <div class="bar" role="img" aria-label="0 of 10 steps built, 6 partly built, 4 not started"><i style="width:0%;background:var(--done)"></i><i style="width:60%;background:var(--part)"></i></div>
+  <div class="bar" role="img" aria-label="1 of 10 steps built, 5 partly built, 4 not started"><i style="width:10%;background:var(--done)"></i><i style="width:50%;background:var(--part)"></i></div>
   <div class="legend"><span class="chip c-done">Built</span><span class="chip c-part">Partly there</span><span class="chip c-todo">Not started</span></div>
   <ol class="steps" style="margin-top:14px">
-    <li><div><b>Spine</b><p>The review queue runs on FSRS (web live; Android with the next release). Still to build: one queue for every review, the syllabus map (Met / Can recall / Can use), and the one-step Today. Claude's next job.</p></div><span class="chip c-part">Partly there</span></li>
+    <li><div><b>Spine</b><p>Built. One FSRS review queue for questions and topics, the syllabus map (Met / Can recall / Can use, no percentages; "Can recall" needs a check a week or more later; faded topics go back to Met), and the one-step Today. Live on the web; Android with the next release. The Plus coverage meter on Android's Syllabus tab still shows a percentage; it goes when Progress views are built.</p></div><span class="chip c-done">Built</span></li>
     <li><div><b>Writing</b><p>Answer Studio with skeletons and AI marking exists. Self-mark first, the rewrite loop, three-snap essays and the GS4 case circle are not built.</p></div><span class="chip c-part">Partly there</span></li>
     <li><div><b>Your room</b><p>A private journal (stays on the phone) and Close the day exist. Notes, to-dos, the sleep log and export are not built.</p></div><span class="chip c-part">Partly there</span></li>
     <li><div><b>Hindi evaluation</b><p>Waits for the 50-answer test with two evaluators.</p></div><span class="chip c-todo">Not started</span></li>

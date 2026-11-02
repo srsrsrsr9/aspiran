@@ -56,6 +56,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.LifecycleResumeEffect
@@ -126,6 +127,10 @@ import com.upscpods.app.data.Nudge
 import com.upscpods.app.data.Ritual
 import com.upscpods.app.data.Rituals
 import com.upscpods.app.data.Recall
+import com.upscpods.app.data.SyllabusMap
+import com.upscpods.app.data.syllabusNode
+import com.upscpods.app.ui.ReviewScreen
+import com.upscpods.app.ui.TopicCheck
 import com.upscpods.app.data.Week
 import com.upscpods.app.data.Focus
 import com.upscpods.app.ui.FocusScreen
@@ -230,7 +235,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REMEMBER, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -313,6 +318,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val repo = remember { AppRepository(context) }
     val chotu = remember { Chotu.get(context) }
     val recall = remember { Recall(context) }
+    // The syllabus map (Met / Can recall / Can use) and its topic checks, on this phone (data/SyllabusMap.kt).
+    val syllabusMap = remember { SyllabusMap(context) }
+    var mapTick by remember { mutableIntStateOf(0) }
     val week = remember { Week(context) }
     // Editor-approved explainers, games, sounds and Lamp Off from the pod server, cached for offline.
     val library = remember { ContentLibrary(context) { pod.serverUrl } }
@@ -388,7 +396,17 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     var arrived by rememberSaveable { mutableStateOf(ritual) }
     val ritualDone = { r: Ritual -> if (Rituals.finished(context, r)) { reward = r; staged.award(r.stamp) } }
     var yesterdayQ by remember { mutableStateOf<PracticeQuestion?>(null) }
-    var monthly by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
+    // The one review queue: questions and syllabus topics due today (FSRS), at most SyllabusMap.REVIEW_MAX at once.
+    var reviewQs by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
+    var reviewTopics by remember { mutableStateOf(emptyList<TopicCheck>()) }
+    val loadReview: suspend () -> Unit = {
+        val nodes = syllabusMap.nodes()
+        reviewTopics = syllabusMap.due().mapNotNull { id ->
+            syllabusNode(id)?.let { (p, t) -> t?.let { TopicCheck(id, p.short, it.name, nodes[id]?.note ?: "") } }
+        }.take(SyllabusMap.REVIEW_MAX)
+        reviewQs = repo.dueCards().mapNotNull { item -> item.text(hindi).mcq?.let { PracticeQuestion("card-${item.id}", item.topic, it, item.id, true) } }
+            .take(SyllabusMap.REVIEW_MAX - reviewTopics.size)
+    }
     // "Just 5 minutes": when it started, while it runs.
     var fiveAt by rememberSaveable { mutableStateOf<Long?>(null) }
     // "Why this works" and the reading shelf open on one entry; Back returns where they came from.
@@ -462,10 +480,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     LaunchedEffect(loaded, brief, day.savedCards) {
         if (!loaded) return@LaunchedEffect
         archive = repo.archive()
-        if (questions.isEmpty()) questions = Practice.prelimsSet(brief, repo.dueCards(), bank, hindi, misses = recall.fridayMisses(archive, hindi))
+        if (questions.isEmpty()) questions = Practice.prelimsSet(brief, bank, hindi)
         saved = repo.savedCards()
         if (yesterdayQ == null) yesterdayQ = recall.yesterdayQuestion(brief, archive, hindi)
-        monthly = recall.monthlySet(archive, hindi)
+        loadReview()
     }
     // Save every change to the day.
     LaunchedEffect(loaded) {
@@ -559,6 +577,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         mocks.forget(); activeMock = null; mockHistory = emptyList()
         prep.forget(); misses = emptyList()
         recall.forget()
+        syllabusMap.forget(); mapTick++
         week.forget()
         staged.forget()
         Focus.forget(context)
@@ -586,11 +605,16 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             yesterday = yesterdayQ,
             onYesterday = { q, right ->
                 q.cardId?.let { recall.answeredYesterday(it, right, q.topic) }
-                // A miss on yesterday's card enters the review queue.
-                if (!right) scope.launch { repo.recordAnswer(q.copy(isReview = false), false) }
+                // Right or wrong, yesterday's card goes into the review queue (FSRS sets when it comes back).
+                scope.launch { repo.recordAnswer(q, right) }
                 yesterdayQ = null
             },
-            onExamAnswer = { id, right -> recall.record(id, right, brief.items.firstOrNull { it.id == id }?.topic ?: "") },
+            onExamAnswer = { id, right ->
+                val item = brief.items.firstOrNull { it.id == id }
+                recall.record(id, right, item?.topic ?: "")
+                // Every Chai question answered joins the review queue: it comes back just before you'd forget it.
+                item?.text(hindi)?.mcq?.let { scope.launch { repo.recordAnswer(PracticeQuestion("card-$id", item.topic, it, id, false), right) } }
+            },
             onWhy = openWhy,
         )
         Overlay.CARDS -> cardsToRead?.let { b ->
@@ -602,12 +626,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             onFinished = { day.markDone(TaskId.PRELIMS); finishPractice() },
             onClose = { overlay = Overlay.NONE; session = emptyMap() },
         )
-        Overlay.REMEMBER -> PrelimsScreen(
-            monthly,
+        Overlay.REVIEW -> ReviewScreen(
+            reviewTopics, reviewQs,
+            onCheck = { t, g -> syllabusMap.check(t.id, g); mapTick++ },
             onAnswer = answer,
-            onFinished = { recall.finishedMonthly(); finishPractice() },
-            onClose = { overlay = Overlay.NONE; if (monthly.isNotEmpty()) monthly = recall.monthlySet(archive, hindi) },
-            title = "Remember these?",
+            onFinished = { syllabusMap.reviewedOn = LocalDate.now().toString(); finishPractice() },
+            onClose = { overlay = Overlay.NONE; scope.launch { loadReview() } },
         )
         Overlay.MAINS -> MainsScreen(
             mains,
@@ -812,6 +836,11 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 onOpenRead = { readId = it; overlay = Overlay.READER }, onSeePlus = openPlusInfo, focus = syllabusFocus,
                                 pyqs = pyqCounts, onPyq = { p, t -> pyqPaper = p; pyqTopic = t; studioPyq = null; overlay = Overlay.PYQ },
                                 optional = staged.value("optional_subject"),
+                                map = remember(mapTick) { syllabusMap.nodes() },
+                                onMeet = { id, note -> syllabusMap.meet(id, note); mapTick++; scope.launch { loadReview() } },
+                                onUse = { id, how -> syllabusMap.use(id, how); mapTick++ },
+                                onReset = { id -> syllabusMap.reset(id); mapTick++; scope.launch { loadReview() } },
+                                onOpenReview = { overlay = Overlay.REVIEW },
                             )
                             PrepSub.TODAY -> TodayScreen(
                                 brief, day, persona,
@@ -819,6 +848,11 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 onOpenCloseDay = { overlay = Overlay.CLOSE_DAY },
                                 onOpenTask = { overlay = if (it == TaskId.PRELIMS) Overlay.PRELIMS else Overlay.MAINS },
                                 onOpenPod = { tab = Tab.POD },
+                                reviewDue = reviewTopics.size + reviewQs.size,
+                                reviewed = syllabusMap.reviewedOn == LocalDate.now().toString(),
+                                onOpenReview = { overlay = Overlay.REVIEW },
+                                mapLine = remember(mapTick) { SyllabusMap.line(syllabusMap.counts()) },
+                                onOpenMap = { prepSub = PrepSub.SYLLABUS },
                                 modifier = inner,
                                 pod = pod,
                                 mainsTopic = mains.topic,
@@ -867,9 +901,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 modifier = inner,
                                 library = library,
                                 onOpenItem = openItem,
-                                friday = LocalDate.now().dayOfWeek == DayOfWeek.FRIDAY,
-                                monthly = monthly.size,
-                                onOpenMonthly = { overlay = Overlay.REMEMBER },
+                                reviewDue = reviewTopics.size + reviewQs.size,
+                                onOpenReview = { overlay = Overlay.REVIEW },
                                 prepEntries = {
                                     val pieces = prep.pieces(library)
                                     PrepEntries(

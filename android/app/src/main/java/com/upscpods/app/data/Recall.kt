@@ -5,15 +5,13 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.time.DayOfWeek
 import java.time.LocalDate
 
 /**
- * The 1/7/30-day recall loop (playbook A5). Every answer stays on this phone.
- *
- * - Day 1: one question from yesterday's pack at the top of today's Chai, gone after one tap.
- * - Day 7: on Fridays the Prelims set pulls first from this week's misses and skips.
- * - Day 30: a monthly "Remember these?" set from packs about a month old.
+ * Day-1 recall (playbook A5): one question from yesterday's pack at the top of today's Chai, gone after one tap, plus
+ * the answer log behind "Know the paper, know yourself". Every answer stays on this phone. The old Friday and monthly
+ * sets are gone: every Chai answer now goes into the one review queue (AppRepository, FSRS), which brings it back
+ * just before you'd forget it.
  */
 class Recall(context: Context) {
     private val prefs = context.getSharedPreferences("recall", Context.MODE_PRIVATE)
@@ -54,42 +52,6 @@ class Recall(context: Context) {
         val from = date.minusDays(30).toString()
         return answers().values.filter { !it.right && it.topic.isNotBlank() && it.date >= from }
             .groupingBy { it.topic }.eachCount().entries.sortedByDescending { it.value }.take(3).map { it.key to it.value }
-    }
-
-    // --- Day 7 ----------------------------------------------------------------
-
-    /** Cards from the last 7 days' packs that were answered wrong or never answered. Empty except on Fridays. */
-    fun fridayMisses(archive: List<Brief>, hindi: Boolean, date: LocalDate = LocalDate.now()): List<NewsItem> {
-        if (date.dayOfWeek != DayOfWeek.FRIDAY) return emptyList()
-        val from = date.minusDays(7).toString()
-        val seen = answers()
-        return archive.filter { it.date >= from && it.date < date.toString() && !it.sample }
-            .flatMap { it.items }
-            .filter { it.text(hindi).mcq != null && seen[it.id]?.right != true }
-            // Wrong answers before skipped ones.
-            .sortedBy { if (seen[it.id]?.right == false) 0 else 1 }
-            .distinctBy { it.id }
-    }
-
-    // --- Day 30 ---------------------------------------------------------------
-
-    /** "Remember these?": up to 5 cards from packs 25 to 40 days old, once a month. */
-    fun monthlySet(archive: List<Brief>, hindi: Boolean, date: LocalDate = LocalDate.now()): List<PracticeQuestion> {
-        if (prefs.getString("monthly", null) == date.toString().take(7)) return emptyList()
-        val from = date.minusDays(40).toString()
-        val to = date.minusDays(25).toString()
-        val seen = answers()
-        return archive.filter { it.date in from..to && !it.sample }
-            .flatMap { it.items }
-            .filter { it.text(hindi).mcq != null }
-            .distinctBy { it.id }
-            .sortedBy { if (seen[it.id]?.right == false) 0 else 1 }
-            .take(Practice.DAILY)
-            .map { PracticeQuestion("month-${it.id}", it.topic, it.text(hindi).mcq!!, it.id, isReview = true) }
-    }
-
-    fun finishedMonthly(date: LocalDate = LocalDate.now()) {
-        prefs.edit().putString("monthly", date.toString().take(7)).apply()
     }
 
     fun forget() = prefs.edit().clear().apply()

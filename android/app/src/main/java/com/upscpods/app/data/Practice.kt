@@ -37,25 +37,20 @@ object Practice {
     }.getOrDefault(emptyList())
 
     /**
-     * Due revisions first (that's the point of spacing), then today's cards, then the static bank,
-     * rotated by date so the filler changes daily. Same input gives the same set all day.
+     * Today's cards, then the static bank, rotated by date so the filler changes daily. Same input gives the same set all day.
      */
     fun prelimsSet(
         today: Brief,
-        due: List<NewsItem>,
         bank: List<BankQuestion>,
         hindi: Boolean,
         date: LocalDate = LocalDate.now(),
-        misses: List<NewsItem> = emptyList(),
     ): List<PracticeQuestion> {
         val out = mutableListOf<PracticeQuestion>()
         fun fromCard(item: NewsItem, review: Boolean) {
             val mcq = item.text(hindi).mcq ?: return
             if (out.none { it.cardId == item.id }) out += PracticeQuestion("card-${item.id}", item.topic, mcq, item.id, review)
         }
-        // Fridays: this week's misses and skips come first (see Recall.fridayMisses).
-        misses.forEach { fromCard(it, review = true) }
-        due.forEach { fromCard(it, review = true) }
+        // New questions only: what's due for revision is in the review (ReviewScreen), so nothing is asked twice a day.
         today.items.forEach { fromCard(it, review = false) }
         if (bank.isNotEmpty()) {
             val start = (date.toEpochDay() % bank.size).toInt()

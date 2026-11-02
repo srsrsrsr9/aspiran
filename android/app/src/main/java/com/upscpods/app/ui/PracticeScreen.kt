@@ -62,9 +62,9 @@ fun PracticeTab(
     modifier: Modifier = Modifier,
     library: ContentLibrary? = null,
     onOpenItem: (String) -> Unit = {},
-    friday: Boolean = false,
-    monthly: Int = 0,
-    onOpenMonthly: () -> Unit = {},
+    /** Questions and topics due in the review today. */
+    reviewDue: Int = 0,
+    onOpenReview: () -> Unit = {},
     prepEntries: (@Composable () -> Unit)? = null,
     /** Answer Studio: a timed answer with rubric feedback. */
     onOpenStudio: (() -> Unit)? = null,
@@ -81,8 +81,7 @@ fun PracticeTab(
     ) {
         PracticeCard(
             title = "${Practice.DAILY} Prelims questions",
-            detail = if (friday) "Friday recall: this week's misses and skips first, then revision that's due · about 5 min"
-                else "Today's cards, revision that's due, and a few static ones · about 5 min",
+            detail = "Today's new questions from the Chai cards, and a few static ones · about 5 min",
             done = TaskId.PRELIMS in day.done,
             filled = next == TaskId.PRELIMS,
             onStart = onOpenPrelims,
@@ -114,14 +113,14 @@ fun PracticeTab(
             )
         }
 
-        // The 30-day loop: once a month, cards from about a month ago.
-        if (monthly > 0) {
+        // The one review queue (FSRS): every Chai question answered and every topic met comes back here.
+        if (reviewDue > 0) {
             PracticeCard(
-                title = "Remember these?",
-                detail = "$monthly questions from about a month ago. Answers stay on this phone.",
+                title = "Review: $reviewDue due",
+                detail = "Questions and topics that are about to slip. Each comes back just before you'd forget it. Stays on this phone.",
                 done = false,
                 filled = false,
-                onStart = onOpenMonthly,
+                onStart = onOpenReview,
             )
         }
 
