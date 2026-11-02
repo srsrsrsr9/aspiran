@@ -384,7 +384,7 @@ function mcqRun(qs, { limit = Infinity, onDone, title } = {}) {
     const q = qs[i];
     const next = h("button.primary", { disabled: true, onclick: () => { i++; draw(); } }, i + 1 < n ? "Next" : "Finish");
     put(box, h("div.small.muted", `${title ? title + " · " : ""}${i + 1} of ${n}${q.topic ? " · " + q.topic : ""}`),
-      h("div.card", C.mcqBlock(C.mcqOf(q), (ok) => { if (ok) { right++; C.store.set("misses", C.store.get("misses", []).filter((m) => m.id !== q.id)); } else C.addMiss(q); next.disabled = false; })), next);
+      h("div.card", C.mcqBlock(C.mcqOf(q), (ok) => { if (ok) { right++; C.gotRight(q); } else C.addMiss(q); next.disabled = false; })), next);
   };
   draw();
   return box;

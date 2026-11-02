@@ -1,6 +1,7 @@
 package com.upscpods.app.data.db
 
 import android.content.Context
+import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Entity
@@ -10,6 +11,8 @@ import androidx.room.PrimaryKey
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 /** One row per calendar day (ISO date). Task sets are stored as comma-separated TaskId names. */
 @Entity
@@ -30,12 +33,18 @@ data class SavedCard(
     val cardJson: String,
 )
 
-/** Spaced revision: saved cards and wrong MCQs come back at about day 3, 10 and 30. */
+/**
+ * Spaced revision: saved cards and wrong MCQs, scheduled by FSRS (data/Fsrs.kt). [stage] counts reviews.
+ * Rows from before FSRS (version 1) have stability 0 and are treated as new on their next review.
+ */
 @Entity
 data class ReviewItem(
     @PrimaryKey val cardId: String,
     val dueOn: String,
     val stage: Int,
+    @ColumnInfo(defaultValue = "0") val stability: Double = 0.0,
+    @ColumnInfo(defaultValue = "0") val difficulty: Double = 0.0,
+    @ColumnInfo(defaultValue = "") val lastOn: String = "",
 )
 
 /** Close the Day entry, AES-GCM encrypted with a key held in the Android Keystore. */
@@ -123,7 +132,7 @@ interface AppDao {
 
 @Database(
     entities = [DayRecord::class, SavedCard::class, ReviewItem::class, JournalEntry::class, CachedBrief::class, Draft::class],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -132,8 +141,18 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         @Volatile private var instance: AppDatabase? = null
 
+        /** FSRS fields on ReviewItem (2 Nov 2026). Existing reviews keep their due dates. */
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE ReviewItem ADD COLUMN stability REAL NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE ReviewItem ADD COLUMN difficulty REAL NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE ReviewItem ADD COLUMN lastOn TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
         fun get(context: Context): AppDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "pods.db")
+                .addMigrations(MIGRATION_1_2)
                 .build()
                 .also { instance = it }
         }

@@ -17,6 +17,7 @@ import { REQUESTABLE, fontFor, greetingOfTheDay, loadNoto, welcomeScene } from "
 import { RAP_VIDEOS, onMeteredData, rapLangFor } from "./videos.js";
 import * as Auth from "./auth.js";
 import * as M from "./metrics.js";
+import * as F from "./fsrs.js";
 import * as X from "./explore.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
@@ -645,14 +646,38 @@ function viewChai(arg) {
 
 // --- Practice: Prelims, Mains, mock papers -----------------------------------------------------
 
-const addMiss = (q) => { if (!q.en) return; const m = store.get("misses", []).filter((x) => x.id !== q.id); m.push({ ...q, missedOn: today() }); store.set("misses", m.slice(-300)); };
+// The review queue (teaching plan, build step 1): every missed question, scheduled by FSRS (fsrs.js). A miss comes
+// back when you're about to forget it; each right answer pushes it further out. Stays in this browser.
+function reviewQueue() {
+  let all = store.get("reviews", null);
+  if (!all) { // first run: bring in misses kept under the old 3-day rule
+    all = {};
+    for (const m of store.get("misses", [])) if (m.en) all[m.id] = { q: { id: m.id, cardId: m.cardId, topic: m.topic, en: m.en, hi: m.hi ?? null }, f: F.review(null, F.AGAIN, m.missedOn ?? today()) };
+    store.set("reviews", all);
+  }
+  return all;
+}
+/** Grade a question in the queue. A miss always enters it; a right answer only moves one that's already there. */
+function reviewGrade(q, grade) {
+  if (!q.en) return;
+  const all = reviewQueue(), cur = all[q.id];
+  if (!cur && grade !== F.AGAIN) return;
+  all[q.id] = { q: { id: q.id, cardId: q.cardId, topic: q.topic, en: q.en, hi: q.hi ?? null }, f: F.review(cur?.f ?? null, grade, today()) };
+  const ids = Object.keys(all);
+  if (ids.length > 500) ids.sort((a, b) => all[a].f.last.localeCompare(all[b].f.last)).slice(0, ids.length - 500).forEach((id) => delete all[id]);
+  store.set("reviews", all);
+}
+const addMiss = (q) => { if (!q.en) return; const m = store.get("misses", []).filter((x) => x.id !== q.id); m.push({ ...q, missedOn: today() }); store.set("misses", m.slice(-300)); reviewGrade(q, F.AGAIN); };
+const gotRight = (q) => { store.set("misses", store.get("misses", []).filter((m) => m.id !== q.id)); reviewGrade(q, F.GOOD); };
+/** Questions due today, the most overdue first. */
+const dueReviews = (day = today()) => Object.values(reviewQueue()).filter((r) => r.f.due <= day).sort((a, b) => a.f.due.localeCompare(b.f.due)).map((r) => r.q);
 const mcqOf = (q) => (hindi() && q.hi ? q.hi : q.en);
 
 function prelimsSet() {
   const day = today();
   const fixed = store.get("prelims:" + day);
   if (fixed) return fixed;
-  const misses = store.get("misses", []).filter((m) => m.missedOn <= addDays(day, -3)).slice(0, 2);
+  const misses = dueReviews(day).slice(0, 3);
   const cards = (data.questions?.fromCards ?? []);
   const pool = [...misses, ...cards.filter((c) => !misses.some((m) => m.id === c.id))];
   const bank = shuffle(data.questions?.bank ?? [], Number(day.replace(/-/g, "")));
@@ -666,7 +691,7 @@ function viewPractice() {
   const mocks = libraryOf("mock");
   const hist = store.get("mockHistory", []);
   return h("div.col", X.plusBanner(), h("h1", "Practice"),
-    h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Missed ones come back in 3 days.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Missed ones come back just before you'd forget them.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written today." : "One question, 150 words, about 20 minutes. Autosaves.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
@@ -688,14 +713,14 @@ function viewPrelims() {
       if (!viewPrelims.counted) { viewPrelims.counted = true; practiceFinished(set, results); }
       put(box, h("h2", `${right} of ${set.length} right.`),
         firstRight && h("p", `You got the ${firstRight} question right. That one's yours now.`),
-        h("p.muted", "Missed ones come back in 3 days."), h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today's 3"));
+        h("p.muted", "Missed ones come back just before you'd forget them."), h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today's 3"));
       return;
     }
     const q = set[i];
     put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${q.topic}${q.review ? " · Back for revision" : ""}`),
       h("div.card", mcqBlock(mcqOf(q), (ok) => {
         results.push({ topic: q.topic, ok });
-        if (ok) { right++; firstRight ??= q.topic; store.set("misses", store.get("misses", []).filter((m) => m.id !== q.id)); } else addMiss(q);
+        if (ok) { right++; firstRight ??= q.topic; gotRight(q); } else addMiss(q);
         next.disabled = false;
       })), next);
     next.disabled = true;
@@ -2952,7 +2977,7 @@ function viewRoutine() {
   );
 }
 
-X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, shuffle, today, addDays, render: () => render() });
+X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,

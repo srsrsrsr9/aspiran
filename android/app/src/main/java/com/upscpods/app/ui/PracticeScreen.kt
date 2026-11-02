@@ -131,7 +131,7 @@ fun PracticeTab(
         Text("Saved for revision", style = MaterialTheme.typography.titleLarge)
         if (saved.isEmpty()) {
             Text(
-                "Cards you save come back here, and in your Prelims questions on day 3, 10 and 30.",
+                "Cards you save come back here, and in your Prelims questions, just before you'd forget them.",
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
@@ -225,7 +225,7 @@ fun PrelimsScreen(
                 Text("$rightCount of ${questions.size} right", style = MaterialTheme.typography.headlineSmall)
                 Text(
                     if (rightCount < questions.size) {
-                        "The ones you missed come back in 3 days. That's how they stick."
+                        "The ones you missed come back just before you'd forget them. That's how they stick."
                     } else {
                         "All of them. Go have your chai."
                     },

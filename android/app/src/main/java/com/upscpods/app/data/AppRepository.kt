@@ -131,28 +131,27 @@ class AppRepository(context: Context) {
 
     // --- Revision ------------------------------------------------------------
 
-    private val reviewGaps = listOf(3L, 10L, 30L)
-
-    suspend fun scheduleReview(cardId: String) = withContext(Dispatchers.IO) {
-        if (dao.review(cardId) == null) {
-            dao.putReview(ReviewItem(cardId, LocalDate.now().plusDays(reviewGaps[0]).toString(), 0))
-        }
+    private suspend fun gradeReview(cardId: String, grade: Int) {
+        val cur = dao.review(cardId)
+        val before = cur?.takeIf { it.stability > 0 && it.lastOn.isNotEmpty() }
+            ?.let { Fsrs.State(it.stability, it.difficulty, LocalDate.parse(it.lastOn), LocalDate.parse(it.dueOn)) }
+        val next = Fsrs.review(before, grade)
+        dao.putReview(ReviewItem(cardId, next.due.toString(), (cur?.stage ?: 0) + 1, next.stability, next.difficulty, next.last.toString()))
     }
 
-    /** Right answers move to the next gap (3 → 10 → 30, then done); wrong ones restart at 3 days. */
+    /** A card saved for revision counts as read once: FSRS brings it back in about 3 days. */
+    suspend fun scheduleReview(cardId: String) = withContext(Dispatchers.IO) {
+        if (dao.review(cardId) == null) gradeReview(cardId, Fsrs.GOOD)
+    }
+
+    /** Right answers push the card further out; wrong ones bring it back soon. FSRS sets both gaps. */
     suspend fun recordReview(cardId: String, right: Boolean) = withContext(Dispatchers.IO) {
-        val current = dao.review(cardId)?.stage ?: -1
-        val next = if (right) current + 1 else 0
-        if (next >= reviewGaps.size) {
-            dao.deleteReview(cardId)
-        } else {
-            dao.putReview(ReviewItem(cardId, LocalDate.now().plusDays(reviewGaps[next]).toString(), next))
-        }
+        gradeReview(cardId, if (right) Fsrs.GOOD else Fsrs.AGAIN)
     }
 
     /**
-     * A Prelims answer. Due cards move along the 3/10/30 ladder; a miss on a fresh card
-     * brings it back in 3 days. Static bank questions don't feed revision.
+     * A Prelims answer. Due cards are graded by FSRS; a miss on a fresh card enters the queue.
+     * Static bank questions don't feed revision.
      */
     suspend fun recordAnswer(q: PracticeQuestion, right: Boolean) {
         val id = q.cardId ?: return

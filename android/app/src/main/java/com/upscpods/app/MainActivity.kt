@@ -422,7 +422,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val submitMock = { m: ActiveMock ->
         mocks.submit(m)
         Focus.stop(context)
-        // A wrong Chai-card question comes back in Prelims practice in 3 days, as in the daily set.
+        // A wrong Chai-card question enters the review queue and comes back in Prelims practice (FSRS sets when).
         m.paper.questions.forEachIndexed { i, q ->
             val a = m.answers[i]
             // Every wrong answer goes to the error log (mock insights, revise my misses).
@@ -586,7 +586,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             yesterday = yesterdayQ,
             onYesterday = { q, right ->
                 q.cardId?.let { recall.answeredYesterday(it, right, q.topic) }
-                // A miss on yesterday's card brings it back in 3 days.
+                // A miss on yesterday's card enters the review queue.
                 if (!right) scope.launch { repo.recordAnswer(q.copy(isReview = false), false) }
                 yesterdayQ = null
             },
