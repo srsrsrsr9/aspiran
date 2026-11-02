@@ -43,12 +43,20 @@ const SCHEMA_KIND: Record<string, string> = {
   "upsc-pods/calm-script@1": "calm",
   "upsc-pods/routine-card@1": "routine",
   "upsc-pods/pyq-paper@1": "pyq",
+  // The owner's content batches (artefacts/Aspiran content brief for Claude.md), wrapped by scripts/import-brief.mjs.
+  "aspiran/pause-lines@1": "pause-lines",
+  "aspiran/chotu-voice@1": "chotu-voice",
+  "aspiran/essay-topic@1": "essay",
+  "aspiran/term-list@1": "terms",
+  "aspiran/interview-bank@1": "interview-bank",
+  "aspiran/interview-personas@1": "interview-personas",
+  "aspiran/optional-node@1": "optional-node",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
 /** Manifest entry lists that hold library items. */
 const ITEM_LISTS = ["explainers", "timelines", "games", "quizzes", "maps", "numbers", "myths", "debates", "winddown",
-  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs"];
+  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs", "brief"];
 /** Files the desk never needs: share PNGs are drawn on the phone, the rest are tools for writers. */
 const OPTIONAL = /^(share|templates|tools|jobs|_generated)\/|^README\.md$/;
 export const KINDS = [...Object.values(SCHEMA_KIND), ...Object.keys(ENGINE_KINDS)];
@@ -750,7 +758,21 @@ async function upsertCard(env: Env, pack: string, day: string, c: any, position:
 
 // --- Library items ----------------------------------------------------------------------------
 
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ");
+/** Titles for the brief's kinds, which have no single title field. */
+const BRIEF_TITLE: Record<string, (d: any) => string | undefined> = {
+  "pause-lines": (d) => `Pause lines (${d.lines?.length ?? 0})`,
+  "chotu-voice": () => "Chotu's voice sheet",
+  essay: (d) => d.topic?.en,
+  terms: (d) => `English–Hindi terms: ${cap(d.subject ?? d.id)} (${d.terms?.length ?? 0})`,
+  "interview-bank": (d) => `Interview questions ${d.id} (${d.questions?.length ?? 0})`,
+  "interview-personas": (d) => `Interview board personas (${d.personas?.length ?? 0})`,
+  "optional-node": (d) => `${cap(d.optional ?? "optional")} paper ${d.paper ?? "?"}, ${d.id}: ${d.title?.en ?? d.onePagerPrompts?.en?.[0] ?? ""}`,
+};
+
 export function titleOf(kind: string, d: any): string {
+  const brief = BRIEF_TITLE[kind]?.(d);
+  if (brief) return String(brief).slice(0, 140);
   const t = d.title?.en ?? d.place?.en ?? d.name?.en ?? d.question?.en ?? d.lead?.en ?? d.claims?.[0]?.en?.claim ?? d.text?.en?.start ?? (d.en?.person ? `${d.en.person}: ${d.en.when ?? "a day"}` : undefined);
   return String(t ?? `${kind} ${d.id}`).slice(0, 140);
 }
@@ -850,6 +872,14 @@ export function checkItem(kind: string, d: any): string[] {
   if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d)];
   if (kind === "pyq") return checkPyq(d);
   const flags: string[] = [];
+  // The brief asks writers to list every fact that needs checking against a source; the editor clears them.
+  const facts: string[] = Array.isArray(d.factsToCheck) ? d.factsToCheck : [];
+  if (facts.length) flags.push(`${facts.length > 1 ? `Check these ${facts.length} facts` : "Check this fact"} against a source before approving: ${facts.join("; ")}`.slice(0, 600));
+  if (kind === "essay" && !(d.snap1Skeleton && d.snap2Outline && d.snap3Watch)) flags.push("Missing one of the three snaps (skeleton, outline, what to watch)");
+  if (kind === "interview-bank") {
+    const lone = (d.questions ?? []).filter((q: any) => !q.q?.hi).length;
+    if (lone) flags.push(`${lone} question${lone > 1 ? "s have" : " has"} no Hindi`);
+  }
   const missingHi: string[] = [];
   const walk = (n: any, path: string) => {
     if (Array.isArray(n)) return n.forEach((x, i) => walk(x, `${path}[${i}]`));

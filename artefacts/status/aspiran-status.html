@@ -83,7 +83,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
-    <div class="tile"><b>6</b><span>things waiting on you</span></div>
+    <div class="tile"><b>7</b><span>things waiting on you</span></div>
     <div class="tile"><b>4 of 13</b><span>content batches done (B01, B11, B12, half of B09)</span></div>
     <div class="tile"><b>Live</b><span>new homepage on aspiran.in since 2 Nov</span></div>
     <div class="tile"><b>1 of 10</b><span>teaching-plan build steps finished (5 partly there)</span></div>
@@ -103,7 +103,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Needs you</h2>
   <p class="lede">These can't move until you act. Most urgent first.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Content: running in the claude.ai Project</b><p>You're making the batches on the side. Tell Claude when zips are ready, and Claude checks them and brings them in as drafts.</p></div></li>
+    <li><span class="n">1</span><div><b>Send the made batches to the live Desk (2 minutes)</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code>. It needs your Desk key, which Claude must not see. 35 files land as drafts.</p></div></li>
+    <li><span class="n">1b</span><div><b>Content: running in the claude.ai Project</b><p>You're making the batches on the side. Tell Claude when zips are ready, and Claude checks them and brings them in as drafts. Still to fix: Geography optional notes 3–4, and the B10a links that use made-up topic names.</p></div></li>
     <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
     <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
@@ -119,6 +120,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Live</span><div><b>Content importers, 2 Nov</b><p>The Desk now takes pause lines, Chotu's voice sheet, essay topics, term lists, interview questions and personas, and optional-subject notes, English and Hindi side by side, each with a flag for facts to check. One command sends every checked batch in as drafts. Tried locally with all 35 made files.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>The spine, 2 Nov</b><p>One review for everything: every Chai question you answer, every miss and every topic you've met comes back just before you'd forget it (the Friday and monthly sets are gone). A syllabus map of all 228 topics, each Not started, Met, Can recall or Can use, with no percentages. Today now shows one next step, with the full list one tap away. Live on the web; in the Android code for the next release.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Review queue on FSRS, 2 Nov</b><p>Missed questions come back just before you'd forget them, and each right answer pushes them further out. Live on the web. In the Android code, out with the next release. Checked against the reference library.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Chotu and answer marking, 2 Nov</b><p>English chat goes to Groq first. Typed answers go to Groq, photos to Gemini.</p></div></li>
@@ -149,11 +151,10 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Claude's queue</h2>
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
-    <li><span class="n">1</span><div><b>Bring finished content into the app</b><p>Write importers for the new kinds (pause lines, essays, interview bank, term lists, optional nodes). Then import the checked batches as drafts for the Desk.</p></div></li>
-    <li><span class="n">2</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">3</span><div><b>A day-1 pod</b><p>Put each new person in a provisional pod on their first day, so nobody starts alone.</p></div></li>
-    <li><span class="n">4</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
-    <li><span class="n">5</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The Met / Can use map the site talks about is now built.</p></div></li>
+    <li><span class="n">1</span><div><b>Check each content zip as it arrives</b><p>Run the code checks and a second AI from another family, match PYQ ids against UPSC's papers, clear facts-to-check, and send you fixes to paste back.</p></div></li>
+    <li><span class="n">2</span><div><b>A day-1 pod</b><p>Put each new person in a provisional pod on their first day, so nobody starts alone.</p></div></li>
+    <li><span class="n">3</span><div><b>Rename UPSC Pods to Aspiran inside the app</b><p>Text and screens only; internal server names stay.</p></div></li>
+    <li><span class="n">4</span><div><b>Website follow-ups</b><p>Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026). The Met / Can use map the site talks about is now built.</p></div></li>
   </ul>
 </section>
 
@@ -205,7 +206,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
       <tr><td>Public Administration</td><td>Not yet</td><td class="num">none</td><td><span class="chip c-todo">Not started</span></td></tr>
     </tbody>
   </table></div>
-  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. They are not yet in the app: they need the importers (Claude's queue, item 2), then editor approval.</p>
+  <p class="note">The made batches are saved in <code>content/brief/</code> and checked by code. The importers are built and live; the 35 checked files go to the Desk as drafts when you run the import runbook (Needs you, item 1). Then they wait for editor approval. The apps don't show these new kinds to aspirants yet.</p>
 </section>
 
 <section id="website">

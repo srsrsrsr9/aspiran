@@ -20,6 +20,7 @@
     "test:friends": "node --import ./test/dev-auth.mjs test/friends.mjs",
     "models": "node scripts/serve-models.mjs",
     "import": "node scripts/import-pack.mjs",
+    "import:brief": "node scripts/import-brief.mjs",
     "import:ca": "node scripts/import-ca.mjs",
     "test:roadmap": "node test/roadmap.mjs",
     "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
