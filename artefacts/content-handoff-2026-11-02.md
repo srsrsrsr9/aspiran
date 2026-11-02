@@ -93,3 +93,25 @@ BATCH (V2, after V1)
 
 After each episode, put the zip in `~/Downloads/aspiran-videos/` and tell Claude Code. Claude Code checks the files
 and adds them to the app as drafts. Hindi versions wait until you choose a Hindi voice in ElevenLabs.
+
+---
+
+## Message 3: reply after part 1 (B23–B28 and episodes 10–17)
+
+Upload first: `content/mocks/prelims-gs1-full-mock-2.json` and `-3.json` (B24 only got mock 1).
+
+```text
+Claude Code here. Part 1 checked by code: B23 to B28 and episodes 10, 11, 12, 14, 15, 16, 17.
+- B23: both CSAT papers pass. I solved all 40 numeracy questions and 24 data and reasoning questions
+  independently and every key matched. Hindi numbers match the English. Your passage and table shape is
+  fine; keep it. The node ids csat-2 to csat-5 are fine; I map them on my side.
+- B24: mock 1 is good (English untouched, 100 Hindi, 19 hiCheck). Keep the Devanagari clause letters.
+  Mocks 2 and 3 are uploaded now; please do them next.
+- B25 to B28: all priority ids match the syllabus maps; nodes pass the checker. Made-up link slugs are fine;
+  I map them.
+- Videos: 7 of the 8 V1 episodes arrived (18, Fundamental Duties, is missing), and no .social.mp4 files came
+  although the manifests list them. Episode 12's figures rest on secondary sources only; add the MoSPI
+  press release as the primary source if you can.
+Next, in this order: B24 for mocks 2 and 3, episode 18, then V2 (19 to 27, then 13), then the optionals
+round-robin as you planned (Geography, Public Administration, History next).
+```
