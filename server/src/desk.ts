@@ -186,6 +186,13 @@ async function deskInner(req: Request, env: Env, path: string, s: Staff): Promis
         await env.DB.prepare("UPDATE candidates SET card_json = ? WHERE id = ?").bind(JSON.stringify(c), id).run();
         await recordVersion(env, "card", id, JSON.stringify(c), "remove joke", who);
         return json({ ok: true });
+      case "mains-value":
+        // About 1 in 5 cards: the apps add one quiet "worth keeping for GS2" line to these only. A mark, not an edit,
+        // so the approvals stay.
+        c.highValue = !c.highValue;
+        await env.DB.prepare("UPDATE candidates SET card_json = ? WHERE id = ?").bind(JSON.stringify(c), id).run();
+        await recordVersion(env, "card", id, JSON.stringify(c), c.highValue ? "high value for Mains" : "not high value", who);
+        return json({ ok: true, highValue: c.highValue });
       case "position":
         await env.DB.prepare("UPDATE candidates SET position = ? WHERE id = ?").bind(Number(body.position) || null, id).run();
         return json({ ok: true });

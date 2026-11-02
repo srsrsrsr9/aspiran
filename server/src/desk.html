@@ -447,6 +447,7 @@ async function loadQueue() {
         ${r.en_editor ? `<span class="approved">✓ English: ${esc(r.en_editor)}</span>` : `<button class="primary" data-act="approve" data-lang="en">Approve English</button>`}
         ${r.hi_editor ? `<span class="approved">✓ हिंदी: ${esc(r.hi_editor)}</span>` : (c.hi ? `<button data-act="approve" data-lang="hi">Approve Hindi</button>` : "")}
         ${c.chotu || c.hi?.chotu ? `<button data-act="strip-joke">Strip joke</button>` : ""}
+        <button data-act="mains-value" title="About 1 card in 5. Readers get one quiet line suggesting they keep it for Mains.">${c.highValue ? "★ High value for Mains (undo)" : "Mark high value for Mains"}</button>
         <button data-act="edit">Edit</button>
         ${r.en_editor || r.hi_editor ? `<button data-act="unapprove">Unapprove</button>` : ""}
         ${r.status !== "rejected" ? `<button data-act="reject">Reject</button>` : ""}
@@ -482,7 +483,7 @@ $("#queue").addEventListener("click", async (e) => {
     if (act === "approve" && needName()) return;
     await api("/desk/api/cards/" + id + "/" + act, { method: "POST", body: { lang: b.dataset.lang, editor: signedName() } });
     ok({ approve: (b.dataset.lang === "hi" ? "Hindi" : "English") + " approved. It goes out when you publish today's brief.", unapprove: "Approvals taken back. The card is a draft again.",
-      reject: "Card rejected. It won't be published.", "strip-joke": "Joke removed." }[act] || "Done.");
+      reject: "Card rejected. It won't be published.", "strip-joke": "Joke removed.", "mains-value": "Mark changed. Approvals stay as they were." }[act] || "Done.");
   }
   loadQueue();
 });

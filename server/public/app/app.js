@@ -291,10 +291,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -664,7 +664,9 @@ function viewChai(arg) {
       h("div.small", t.checkedBy ? `Checked by ${t.checkedBy}, ${t.checkedOn} ✓` : "Not yet checked by an editor"),
       h("div.row", { style: { marginTop: "8px" } },
         h("button.ghost", { onclick: () => { const list = store.get("saved", []).filter((x) => x.id !== it.id); if (!isSaved) list.push({ ...it, savedOn: today() }); store.set("saved", list); render(); } }, isSaved ? "✓ Saved for revision" : "Save for revision"),
-        t.lang !== lang() && h("span.small.muted", tr("lang.cardMissing")))),
+        it.tone !== "tragic" && keepButton(it, t),
+        t.lang !== lang() && h("span.small.muted", tr("lang.cardMissing"))),
+      it.highValue && it.tone !== "tragic" && !caseFile().some((x) => x.cardId === it.id) && h("p.small", `This one is worth keeping for ${/^GS[1-4]$/.test(it.gsPaper) ? it.gsPaper : "Mains"}.`)),
     h("div.row.between", h("button", { disabled: i === 0, onclick: () => nav(i - 1) }, "← Back"), h("span.small.muted", "Arrow keys work too"), h("button.primary", { onclick: () => nav(i + 1) }, "Next →")));
 }
 
@@ -727,6 +729,8 @@ function viewPractice() {
     h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Essays in three snaps"), h("div.small.muted", `Skeleton, outline, essay, each compared with a guide. ${libraryOf("essay").length} topic${libraryOf("essay").length === 1 ? "" : "s"}.`)), h("a.btn", { href: "#essay" }, "Open"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Your case file"), h("div.small.muted", `${caseFile().length} example${caseFile().length === 1 ? "" : "s"} kept from Chai for Mains.`)), h("a.btn", { href: "#casefile" }, "Open"))),
+    h("a.card.link", { href: "#progress" }, h("div.row.between", h("div", h("strong", "You vs. you"), h("div.small.muted", "Your writing, your sense of sure, your markers. Only against your own past.")), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock interview"), h("div.small.muted", libraryOf("interview-bank").length ? "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." : "Opens once the interview questions are approved.")), h("a.btn", { href: "#interview" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
@@ -1059,6 +1063,96 @@ function viewEssay(arg) {
   }));
   draw();
   return h("div.col", h("a", { href: "#essay" }, "← Essays"), h("h1", bi(d.topic)), box);
+}
+
+// --- Case files: Keep for Mains (teaching plan, Chai v2) ------------------------------------------------------
+// You pick what goes in: a Chai card becomes one example line under a paper and, if you like, a syllabus topic. The
+// app suggests the paper and the line once; you change them. The case file shows which topics have no example yet.
+
+const CASE_PAPERS = ["GS1", "GS2", "GS3", "GS4", "Essay"];
+const caseFile = () => store.get("caseFile", []);
+function keepButton(it, t) {
+  const kept = caseFile().find((x) => x.cardId === it.id);
+  if (kept) return h("a.btn.ghost", { href: "#casefile/" + kept.paper }, "✓ In your case file");
+  return h("button.ghost", { onclick: (e) => {
+    const paper = h("select", CASE_PAPERS.map((p) => h("option", { value: p, selected: p === it.gsPaper }, p)));
+    const nodesOf = () => SY.NODES.filter((nd) => nd.paper.short === paper.value || (paper.value === "Essay" && nd.paper.id === "essay"));
+    const topic = h("select");
+    const fillTopics = () => put(topic, h("option", { value: "" }, "Any topic"), nodesOf().map((nd) => h("option", { value: nd.id }, nd.name)));
+    paper.addEventListener("change", fillTopics); fillTopics();
+    const line = h("textarea", { rows: 3, value: t.facts?.[0] ? `${t.headline}: ${t.facts[0]}` : t.headline });
+    const form = h("div.card.soft", h("strong", "Keep for Mains"), h("p.small.muted", "One example line, in your words. You can change what's suggested."),
+      h("label.small", "Paper "), paper, h("label.small", " Topic "), topic, line,
+      h("div.row", h("button.primary", { onclick: () => {
+        store.set("caseFile", [...caseFile(), { id: Date.now().toString(36), cardId: it.id, paper: paper.value, node: topic.value || null, example: line.value.trim().slice(0, 600), from: t.headline, day: today() }].slice(-2000));
+        render();
+      } }, "Keep it"), h("button", { onclick: () => form.remove() }, "Cancel")));
+    e.target.closest("article").append(form);
+  } }, "Keep for Mains");
+}
+function viewCaseFile(arg) {
+  const all = caseFile(), paper = CASE_PAPERS.includes(arg) ? arg : "GS2";
+  const mine = all.filter((x) => x.paper === paper);
+  const nodes = SY.NODES.filter((nd) => nd.paper.short === paper || (paper === "Essay" && nd.paper.id === "essay"));
+  const gaps = nodes.filter((nd) => !mine.some((x) => x.node === nd.id));
+  const row = (x) => h("div.task", h("div.grow", h("div", x.example), h("div.small.muted", `${x.day} · from “${x.from}”`)),
+    h("button.ghost.small", { onclick: () => { if (confirm("Remove this example?")) { store.set("caseFile", caseFile().filter((y) => y.id !== x.id)); render(); } } }, "Remove"));
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Your case file"),
+    h("p.muted", "Examples you kept from Chai, by paper and topic, for your Mains answers. Only you see this."),
+    h("div.chips", CASE_PAPERS.map((p) => h("a.chip", { href: "#casefile/" + p, "aria-pressed": String(p === paper) }, `${p} (${all.filter((x) => x.paper === p).length})`))),
+    mine.length === 0 && h("p", "Nothing kept for this paper yet. On a Chai card, tap Keep for Mains."),
+    nodes.map((nd) => { const ex = mine.filter((x) => x.node === nd.id); return ex.length > 0 && h("div.card", h("strong", nd.name), ex.map(row)); }),
+    mine.some((x) => !x.node) && h("div.card", h("strong", "Not pinned to a topic"), mine.filter((x) => !x.node).map(row)),
+    mine.length > 0 && gaps.length > 0 && h("details.card", h("summary", `Topics with no example yet (${gaps.length})`), h("ul", gaps.map((nd) => h("li", nd.name)))));
+}
+
+// --- Progress: you vs. you (teaching plan, step 8) -------------------------------------------------------------
+// Only against your own past: never a rank, a cut-off or other people. Short labels, then and now.
+
+const BAND_N = { below: 1, at: 2, above: 3 };
+const avg = (xs) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
+const one = (x) => (Math.round(x * 10) / 10).toString();
+function viewProgress() {
+  const wl = store.get("writingLog", []).filter((w) => w.ai && Object.keys(w.ai).length);
+  const day = today(), m = nodes();
+  const counts = mapCounts(day);
+  const hist = store.get("mockHistory", []);
+  // Writing: the AI's band per part, your first five answers against your last five; and how often your own marks agreed.
+  let writing;
+  if (wl.length >= 6) {
+    const first = wl.slice(0, 5), last = wl.slice(-5);
+    const agree = (ws) => avg(ws.map((w) => AREAS.filter(([k]) => w.self?.[k] && w.self[k] === w.ai[k]).length));
+    writing = [h("p", `Your own marks agreed with the second opinion on ${one(agree(first))} of 5 parts in your first five answers, and ${one(agree(last))} in your last five. That gap closing is the real progress.`),
+      h("div.tbl", h("table", h("thead", h("tr", h("th", "Part"), h("th", "First five"), h("th", "Last five"))),
+        h("tbody", AREAS.map(([k, name]) => { const a = avg(first.map((w) => BAND_N[w.ai[k]]).filter(Boolean)), b = avg(last.map((w) => BAND_N[w.ai[k]]).filter(Boolean));
+          return h("tr", h("td", name), h("td", a == null ? "–" : one(a)), h("td", h("strong", b == null ? "–" : one(b)))); })))),
+      h("p.small.muted", "1 is below a typical scoring answer, 2 at it, 3 above it.")];
+  } else writing = [h("p.small.muted", `After six answers with a second opinion (${wl.length} so far), this compares your first five with your last five.`)];
+  // Calibration: how often "sure" answers were right, against the ones you marked as a guess.
+  const sure = hist.reduce((a, r) => [a[0] + (r.right - (r.unsureRight ?? 0)), a[1] + (r.attempted - (r.unsureTotal ?? 0))], [0, 0]);
+  const guess = hist.reduce((a, r) => [a[0] + (r.unsureRight ?? 0), a[1] + (r.unsureTotal ?? 0)], [0, 0]);
+  const calib = sure[1] >= 20 && guess[1] >= 10
+    ? h("p", `When you were sure: ${Math.round(100 * sure[0] / sure[1])}% right. When you marked a guess: ${Math.round(100 * guess[0] / guess[1])}%. ${guess[0] / guess[1] > 0.45 ? "Your guesses do better than you think; trust them a little more." : guess[0] / guess[1] < 0.3 ? "Guesses cost you marks; skip more of them." : "Your sense of what you know is about right."}`)
+    : h("p.small.muted", "Mark answers “Not sure” in mocks. After a few papers this shows how far your sense of sure matches your marks.");
+  // Markers: the date you first reached each one. Not targets, not cut-offs.
+  const vals = Object.values(m), metDays = vals.map((n) => n.met).filter(Boolean).sort();
+  const recallDays = vals.map((n) => n.recalledOn).filter(Boolean).sort(), useDays = vals.map((n) => n.usedOn).filter(Boolean).sort();
+  const rewrites = store.get("writingLog", []).filter((w) => w.rewritten).map((w) => w.day).sort();
+  const essaysDone = Object.keys(localStorage).filter((k) => k.startsWith("upsc:essay:")).map((k) => store.get(k.slice(5), {}).s3done).filter(Boolean).sort();
+  const boards = store.get("interviewLog", []).map((r) => r.day).sort();
+  const markers = [["Your first topic Met", metDays[0]], ["Ten topics Met", metDays[9]], ["Your first topic you Can recall", recallDays[0]], ["Your first topic you Can use", useDays[0]],
+    ["Your first answer rewritten", rewrites[0]], ["Ten answers rewritten", rewrites[9]], ["Your first full mock", hist[0]?.day], ["Your first essay in three snaps", essaysDone[0]],
+    ["Your first mock interview", boards[0]], ["Ten examples in your case file", caseFile().map((x) => x.day).sort()[9]]];
+  const ty = P.value("target_year");
+  const weeks = /^\d{4}$/.test(ty ?? "") ? Math.round((Date.parse(`${ty}-05-25`) - Date.now()) / (7 * 86400_000)) : null;
+  return h("div.col", h("h1", "You vs. you"),
+    h("p.muted", "Only against your own past. No ranks, no cut-offs, nobody else's numbers."),
+    weeks != null && weeks > 0 && h("p", `Prelims ${ty} is about ${weeks} weeks away (UPSC usually holds it in late May; check the official calendar).`),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Your syllabus map"), h("p", `${counts.met} Met · ${counts.recall} Can recall · ${counts.use} Can use, out of ${SY.NODES.length} topics.`)),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Writing"), writing),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Sure and not sure"), calib),
+    h("div.card", h("h2", { style: { marginTop: 0 } }, "Markers"), h("p.small.muted", "The day you first reached each one."),
+      markers.map(([label, d]) => h("div.task", h("span.grow", label), h("span.small", { style: { color: d ? "var(--brand)" : "var(--muted)" } }, d ? "✓ " + d : "Not yet")))));
 }
 
 // --- Mock interview -------------------------------------------------------------------------------
@@ -3499,7 +3593,7 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, room: viewRoom,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
