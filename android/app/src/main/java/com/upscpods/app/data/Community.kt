@@ -18,6 +18,10 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.concurrent.TimeUnit
 
+/** A join-up of two quiet pods that Ops approved. [stay] is this member's private "Keep me here". */
+@Serializable
+data class PodMerge(val id: String, val on: String? = null, val stay: Boolean = false)
+
 /** The pod's honest summary from /pods/join, /pods/me and /pods/choose. */
 @Serializable
 data class PodSummary(
@@ -31,6 +35,8 @@ data class PodSummary(
     val hasLead: Boolean = false,
     /** Day 1: in the closest pod (same stage and language) because nobody shared the exact group yet. */
     val closest: Boolean = false,
+    /** Pods v2: Ops approved joining this quiet pod with another on [PodMerge.on]; the member may keep their pod. */
+    val merge: PodMerge? = null,
 ) {
     /** "Forming · 2 of 8" etc. Real numbers only. */
     val header: String get() = when (sizeState) {
@@ -135,6 +141,10 @@ class Community(private val server: () -> String, private val memberId: () -> St
     suspend fun choose(stay: Boolean): PodSummary? =
         post("/pods/choose", buildJsonObject { put("memberId", memberId()); put("choice", if (stay) "stay" else "move") })
             ?.let { json.decodeFromJsonElement(PodSummary.serializer(), it) }
+
+    /** "Keep me here" (or join after all) for an approved pod join-up. Only the member sees the choice. */
+    suspend fun mergeStay(mergeId: String, stay: Boolean): Boolean =
+        post("/pods/merge-stay", buildJsonObject { put("memberId", memberId()); put("mergeId", mergeId); put("stay", stay) }) != null
 
     suspend fun commons(): CommonsSummary? = get("/commons")?.let { json.decodeFromJsonElement(CommonsSummary.serializer(), it) }
     suspend fun season(): Season? = get("/season")?.let { json.decodeFromJsonElement(Season.serializer(), it) }

@@ -33,6 +33,11 @@ import okhttp3.WebSocketListener
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 
+/** Pods v2: one volunteer a month who opens Answer hour and checks on quiet members. */
+data class PodHelper(val name: String, val memberId: String)
+/** Two Answer hour answers to compare. */
+data class ComparePair(val aId: String, val aText: String, val bId: String, val bText: String)
+
 @Serializable
 data class PodMessage(
     val id: String,
@@ -134,6 +139,12 @@ class PodClient(context: Context, val roomId: String? = null) {
     ); private set
     /** Set when this pod was merged; the app reconnects to the new one. */
     var movedNote by mutableStateOf<String?>(null)
+    /** Pods v2: this month's volunteer helper, the pair of answers to compare, and what the helper's last check-in reached. */
+    var helper by mutableStateOf<PodHelper?>(null); private set
+    var pair by mutableStateOf<ComparePair?>(null)
+    var noPair by mutableStateOf(false); private set
+    var compared by mutableStateOf(false); private set
+    var missSent by mutableStateOf<Int?>(null); private set
     /** Called for things that earn a stamp: "first_thanks", "lead", "quiz_night". */
     var onStamp: (String) -> Unit = {}
     /** The four matching fields from the staged profile (stage, attempt_band, lang, time_band). */
@@ -237,6 +248,15 @@ class PodClient(context: Context, val roomId: String? = null) {
     fun askLead(text: String): Boolean = text.isNotBlank() && send(buildJsonObject { put("type", "ask_lead"); put("text", text.trim()) })
     fun replyPrivately(to: String, text: String): Boolean =
         text.isNotBlank() && send(buildJsonObject { put("type", "lead_reply"); put("to", to); put("text", text.trim()) })
+
+    /** Answer hour: two answers from this week to compare (not yours), then which is stronger and one reason. */
+    fun askPair(): Boolean { compared = false; noPair = false; return send(buildJsonObject { put("type", "compare_get") }) }
+    fun compare(a: String, b: String, pick: String, reason: String): Boolean =
+        send(buildJsonObject { put("type", "compare"); put("a", a); put("b", b); put("pick", pick); put("reason", reason.trim()) })
+    fun takeHelper() = send(buildJsonObject { put("type", "helper_take") })
+    fun leaveHelper() = send(buildJsonObject { put("type", "helper_leave") })
+    fun openAnswerHour(question: String) = send(buildJsonObject { put("type", "answer_hour_start"); put("question", question.trim()) })
+    fun missYou(text: String) = text.isNotBlank() && send(buildJsonObject { put("type", "miss_you"); put("text", text.trim()) })
 
     private fun sayEvent(m: PodMessage) = buildJsonObject {
         put("type", "say"); put("text", m.text); put("clientId", m.clientId)
@@ -380,6 +400,7 @@ class PodClient(context: Context, val roomId: String? = null) {
                 } ?: emptyMap()
                 pinned = pinnedOf(ev["pinned"])
                 thanked = ev["thanked"]?.let { a -> runCatching { a.jsonArray.map { it.jsonPrimitive.content }.toSet() }.getOrNull() } ?: emptySet()
+                helper = helperOf(ev["helper"])
                 claims = ev["claims"]?.let { a -> runCatching { a.jsonArray.map { it.jsonPrimitive.content } }.getOrNull() } ?: emptyList()
                 if (ev["thankedYou"]?.jsonPrimitive?.booleanOrNull == true) onStamp("first_thanks")
                 if (isLead) onStamp("lead")
@@ -432,6 +453,13 @@ class PodClient(context: Context, val roomId: String? = null) {
             "thanked" -> ev["id"]?.jsonPrimitive?.contentOrNull?.let { thanked = thanked + it }
             "thanks_received" -> onStamp("first_thanks")
             "moved" -> ev["to"]?.jsonPrimitive?.contentOrNull?.let { moved(it) }
+            "helper" -> helper = helperOf(ev["helper"])
+            "compare_pair" -> if (ev["none"]?.jsonPrimitive?.booleanOrNull == true) { pair = null; noPair = true } else {
+                val a = ev["a"]?.jsonObject; val b = ev["b"]?.jsonObject
+                if (a != null && b != null) pair = ComparePair(a["id"]!!.jsonPrimitive.content, a["text"]!!.jsonPrimitive.content, b["id"]!!.jsonPrimitive.content, b["text"]!!.jsonPrimitive.content)
+            }
+            "compared" -> { pair = null; compared = true }
+            "miss_you_sent" -> missSent = ev["n"]?.jsonPrimitive?.content?.toIntOrNull()
             "reported" -> notice = "Thanks. A moderator will look at it."
             "error" -> {
                 if (ev["code"]?.jsonPrimitive?.contentOrNull == "account_suspended") { Auth.markSuspended(null); return }
@@ -440,6 +468,10 @@ class PodClient(context: Context, val roomId: String? = null) {
         }
     }
 
+    private fun helperOf(e: kotlinx.serialization.json.JsonElement?): PodHelper? = (e as? JsonObject)?.let { o ->
+        val id = o["memberId"]?.jsonPrimitive?.contentOrNull ?: return@let null
+        PodHelper(o["name"]?.jsonPrimitive?.contentOrNull ?: "A member", id)
+    }
     private fun goalOf(e: kotlinx.serialization.json.JsonElement?): PodGoal? =
         (e as? JsonObject)?.let { runCatching { json.decodeFromJsonElement<PodGoal>(it) }.getOrNull() }
     private fun quizOf(e: kotlinx.serialization.json.JsonElement?): PodQuiz? =

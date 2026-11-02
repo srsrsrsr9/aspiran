@@ -376,6 +376,7 @@ private fun EndCard(archive: Boolean, onClose: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(if (archive) "That's the pack ☕" else "That's today's Chai ☕", style = MaterialTheme.typography.headlineSmall)
+        if (!archive) { Spacer(Modifier.height(8.dp)); PauseLine("news-enough") }
         Spacer(Modifier.height(16.dp))
         OutlinedButton(onClick = onClose) { Text(if (archive) "Back" else "Back to Today") }
     }

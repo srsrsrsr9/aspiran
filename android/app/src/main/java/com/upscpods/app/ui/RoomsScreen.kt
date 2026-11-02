@@ -82,7 +82,7 @@ fun RoomsScreen(
         BackHandler { open = null }
         var leaving by remember { mutableStateOf(false) }
         PodTab(
-            client, onOpenNeedToTalk, onOpenSettings, modifier, library,
+            client, onOpenNeedToTalk, onOpenSettings, modifier, library, v2 = false,
             top = {
                 Row(Modifier.fillMaxWidth().padding(horizontal = 8.dp), verticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = { open = null }) { Text("← Rooms") }

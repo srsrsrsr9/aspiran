@@ -144,6 +144,7 @@ fun MockListTab(
                         else "• The paper submits itself when time runs out. If you close the app, the clock keeps running and the paper waits for you.",
                     )
                     if (p.note.isNotBlank()) Text(p.note, style = MaterialTheme.typography.bodySmall)
+                    PauseLine("first-mock-start")
                 }
             },
             confirmButton = { Button(onClick = { confirm = null; onStart(p) }) { Text("Start the paper") } },

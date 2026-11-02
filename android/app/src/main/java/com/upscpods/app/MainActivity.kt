@@ -239,7 +239,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, WALK, PRINT, OPTIONAL, TERMS }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -382,6 +382,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         ca.refresh()
     }
     val hindi = persona?.language == ReadingLanguage.HINDI
+    com.upscpods.app.ui.PauseSource.library = library; com.upscpods.app.ui.PauseSource.hindi = hindi
     val bank = remember { Practice.loadBank(context) }
     val mains = remember(brief, hindi) { Practice.mainsTask(brief, hindi) }
     var questions by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
@@ -729,6 +730,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         Overlay.ESSAY -> EssayScreen(library, hindi, onClose = { overlay = Overlay.NONE })
         Overlay.CASE_FILE -> com.upscpods.app.ui.CaseFileScreen(caseFile, onClose = { overlay = Overlay.NONE })
         Overlay.PROGRESS -> com.upscpods.app.ui.ProgressScreen(answerLog, mocks, syllabusMap, caseFile, staged.value("target_year"), onClose = { overlay = Overlay.NONE })
+        Overlay.WALK -> com.upscpods.app.ui.WalkScreen(reviewTopics.map { it.id to it.name }, brief.items, hindi, library, onClose = { overlay = Overlay.NONE })
+        Overlay.PRINT -> com.upscpods.app.ui.PrintScreen(syllabusMap, reviewQs.map { it.mcq.question }, mocks.papers(library), hindi, library, onClose = { overlay = Overlay.NONE })
+        Overlay.OPTIONAL -> com.upscpods.app.ui.OptionalScreen(library, hindi, onClose = { overlay = Overlay.NONE })
+        Overlay.TERMS -> com.upscpods.app.ui.TermsScreen(library, hindi, onClose = { overlay = Overlay.NONE })
         Overlay.INTERVIEW -> InterviewScreen(library, community, hindi, onOpenNeedToTalk = openNeedToTalk, onClose = { overlay = Overlay.NONE })
         Overlay.PYQ -> PyqScreen(pyqPapers, pyqPaper?.let { PyqFocus(it, pyqTopic) },
             onWrite = { studioPyq = it; overlay = Overlay.ANSWER_STUDIO },
@@ -805,7 +810,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     onBackToPod = if (pod.podId != null) ({ showRooms = false }) else null,
                     resultDay = result,
                 ) else PodTab(
-                    pod, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library,
+                    pod, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library, hindi = hindi,
                     top = {
                         TextButton(onClick = { showRooms = true }, modifier = Modifier.padding(horizontal = 8.dp)) {
                             Text(if (rooms.unreadTotal > 0) "Open rooms · ${rooms.unreadTotal} new" else "Open rooms")
@@ -917,6 +922,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 caseCount = caseFile.entries.size,
                                 onOpenCaseFile = { overlay = Overlay.CASE_FILE },
                                 onOpenProgress = { overlay = Overlay.PROGRESS },
+                                onOpenWalk = { overlay = Overlay.WALK },
+                                onOpenPrint = { overlay = Overlay.PRINT },
+                                onOpenOptional = { overlay = Overlay.OPTIONAL },
+                                onOpenTerms = { overlay = Overlay.TERMS },
                                 onOpenCards = { cardsToRead = it; overlay = Overlay.CARDS },
                                 modifier = inner,
                                 library = library,

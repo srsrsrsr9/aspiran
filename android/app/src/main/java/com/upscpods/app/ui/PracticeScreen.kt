@@ -81,6 +81,11 @@ fun PracticeTab(
     caseCount: Int = 0,
     onOpenCaseFile: () -> Unit = {},
     onOpenProgress: () -> Unit = {},
+    /** Away from the screen, optional subjects and terms. */
+    onOpenWalk: () -> Unit = {},
+    onOpenPrint: () -> Unit = {},
+    onOpenOptional: () -> Unit = {},
+    onOpenTerms: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -154,6 +159,37 @@ fun PracticeTab(
                 onStart = onOpenPyq,
             )
         }
+
+        Text("Away from the screen", style = MaterialTheme.typography.titleMedium)
+        PracticeCard(
+            title = "Walk mode",
+            detail = "Earphones in: the phone reads a card or names a topic, then you say three points aloud. Nothing is recorded.",
+            done = false,
+            filled = false,
+            onStart = onOpenWalk,
+        )
+        PracticeCard(
+            title = "Print this week's set",
+            detail = "Ten things to recall, a mixed CSAT set and your one-pagers, on paper.",
+            done = false,
+            filled = false,
+            onStart = onOpenPrint,
+        )
+        Text("Optional and terms", style = MaterialTheme.typography.titleMedium)
+        PracticeCard(
+            title = "Optional subject",
+            detail = "Topic by topic: why it matters, the note, questions to write, things to recall.",
+            done = false,
+            filled = false,
+            onStart = onOpenOptional,
+        )
+        PracticeCard(
+            title = "English–Hindi terms",
+            detail = "The words examiners expect, in both languages, with a one-line meaning.",
+            done = false,
+            filled = false,
+            onStart = onOpenTerms,
+        )
 
         // The one review queue (FSRS): every Chai question answered and every topic met comes back here.
         if (reviewDue > 0) {
@@ -367,6 +403,7 @@ fun MainsScreen(
             Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
+            PauseLine("first-mains")
             Text(task.topic, style = MaterialTheme.typography.labelMedium)
             Text(task.prompt, style = MaterialTheme.typography.titleMedium)
             if (outline) {

@@ -176,6 +176,7 @@ fun SyllabusTab(
     val shown = syllabusFor(optional).let { if (current in it) it else it + current }
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("The UPSC syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
+        PauseLine("syllabus-first-open")
         Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(SyllabusMap.line(map.values.groupingBy { it.state() }.eachCount()), style = MaterialTheme.typography.labelLarge)

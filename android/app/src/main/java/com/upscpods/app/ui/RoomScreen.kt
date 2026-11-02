@@ -122,6 +122,7 @@ fun RoomPage(room: RoomStore, hindi: Boolean, onOpenJournal: () -> Unit, onExpor
     FlatCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("Journal", style = MaterialTheme.typography.titleMedium)
+            PauseLine("journal-first-open")
             Text("Your journal lives in My Path, on this phone. Nobody reads it, and no AI. If you write something that sounds like you're in danger, the app shows you people who can help; that's all it does.", style = MaterialTheme.typography.bodySmall)
             OutlinedButton(onClick = onOpenJournal) { Text("Open My Path") }
         }

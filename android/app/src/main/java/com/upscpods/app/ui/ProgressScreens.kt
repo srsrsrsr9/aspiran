@@ -47,6 +47,7 @@ fun CaseFileScreen(caseFile: CaseFile, onClose: () -> Unit) {
     BackHandler(onBack = onClose)
     Scaffold(topBar = { TopAppBar(title = { Text("Your case file") }, navigationIcon = { TextButton(onClick = onClose) { Text("← Back") } }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            PauseLine("keep-for-mains")
             Text("Examples you kept from Chai, by paper and topic, for your Mains answers. Only you see this.")
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 CASE_PAPERS.forEach { p -> FilterChip(selected = p == paper, onClick = { paper = p }, label = { Text("$p (${caseFile.entries.count { it.paper == p }})") }) }
@@ -92,6 +93,7 @@ fun ProgressScreen(answerLog: AnswerLog, mocks: Mocks, syllabusMap: SyllabusMap,
     BackHandler(onBack = onClose)
     Scaffold(topBar = { TopAppBar(title = { Text("You vs. you") }, navigationIcon = { TextButton(onClick = onClose) { Text("← Back") } }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            PauseLine("you-vs-you")
             Text("Only against your own past. No ranks, no cut-offs, nobody else's numbers.")
             targetYear?.toIntOrNull()?.let { y ->
                 val weeks = java.time.temporal.ChronoUnit.WEEKS.between(java.time.LocalDate.now(), java.time.LocalDate.of(y, 5, 25))

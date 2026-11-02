@@ -82,6 +82,9 @@ fun PodTab(
     top: @Composable () -> Unit = {},
     /** Result-day mode: the pod opens only if the member taps in. */
     resultDay: String? = null,
+    /** Pods v2 (Answer hour, the helper, joining up): pods only, not open rooms. */
+    v2: Boolean = true,
+    hindi: Boolean = false,
 ) {
     var enteredOnResultDay by rememberSaveable { mutableStateOf(false) }
     if (resultDay != null && !enteredOnResultDay) {
@@ -117,12 +120,20 @@ fun PodTab(
             return@Column
         }
         PodHeader(pod)
+        if (v2) {
+            MergeCard(pod, community)
+            HelperNote(pod)
+        }
         top()
         var tools by rememberSaveable { mutableStateOf(false) }
         TextButton(onClick = { tools = !tools }, modifier = Modifier.padding(horizontal = 8.dp)) {
-            Text(if (tools) "Hide study room and quiz" else "Study room · Quiz Night · goal")
+            Text(if (tools) "Hide study room and quiz" else if (v2) "Answer hour · study room · Quiz Night · goal" else "Study room · Quiz Night · goal")
         }
-        if (tools) Column(Modifier.heightIn(max = 340.dp).verticalScroll(rememberScrollState())) {
+        if (tools) Column(Modifier.heightIn(max = 420.dp).verticalScroll(rememberScrollState())) {
+            if (v2) {
+                AnswerHourCard(pod, library, hindi, onOpenNeedToTalk)
+                HelperCard(pod, library, hindi)
+            }
             GoalCard(pod)
             QuizCard(pod)
             StudyRoomCard(pod, library)
@@ -139,7 +150,7 @@ fun PodTab(
                 Text("Quiet so far. Say hello, or send a chai ping.", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(vertical = 16.dp))
             }
             items(shown, key = { it.id }) { m ->
-                Bubble(m, mine = m.memberId == pod.memberId, sending = m in pod.outbox, onLongPress = { if (m.kind in setOf("chat", "favour", "offer") && m.memberId != pod.memberId) reporting = m },
+                Bubble(m, mine = m.memberId == pod.memberId, sending = m in pod.outbox, onLongPress = { if (m.kind in setOf("chat", "favour", "offer", "answer") && m.memberId != pod.memberId) reporting = m },
                     thanked = m.id in pod.thanked, loadPhoto = community::photo,
                     onThank = if (m.kind in setOf("chat", "favour", "offer") && m.memberId != pod.memberId && pod.status == PodStatus.ONLINE) ({ pod.thank(m.id) }) else null)
             }
@@ -409,7 +420,7 @@ private fun FavourDialog(kind: String, onDismiss: () -> Unit, onSend: (String) -
 private fun LeadNotesDialog(pod: PodClient, onOpenNeedToTalk: () -> Unit, onDismiss: () -> Unit) {
     var text by rememberSaveable { mutableStateOf("") }
     var replyTo by rememberSaveable { mutableStateOf<String?>(null) }
-    val notes = pod.privateNotes
+    val notes = pod.privateNotes.filterNot { it.memberId == "compare" || (it.name.endsWith("(pod helper)") && it.memberId != pod.memberId) }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(if (pod.isLead) "Private notes from your pod" else "Ask ${pod.lead ?: "your pod lead"} privately") },
@@ -484,7 +495,7 @@ private fun Bubble(
                     .combinedClickable(onClick = {}, onLongClick = onLongPress)
                     .padding(horizontal = 12.dp, vertical = 8.dp),
             ) {
-                val tag = when (m.kind) { "favour" -> " · asks a favour"; "offer" -> " · offers help"; else -> "" }
+                val tag = when (m.kind) { "favour" -> " · asks a favour"; "offer" -> " · offers help"; "answer" -> " · Answer hour"; else -> "" }
                 if (!mine || tag.isNotEmpty()) Text((if (mine) "You" else m.name) + tag, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
                 val photos = PHOTO_REF.findAll(m.text).map { it.groupValues[1] }.toList()
                 Text(if (photos.isEmpty()) m.text else m.text.replace(PHOTO_REF, "").trim(), style = MaterialTheme.typography.bodyLarge)
@@ -590,4 +601,157 @@ private fun Soundscapes(library: ContentLibrary?) {
             )
         }
     }
+}
+
+// --- Pods v2: Answer hour, the monthly helper, joining two quiet pods ------------------------------------------------
+
+/** An approved join-up with another quiet pod, and the private "Keep me here". The web copy is in podHeader in app.js. */
+@Composable
+private fun MergeCard(pod: PodClient, community: Community) {
+    val s = pod.summary ?: return
+    val m = s.merge ?: return
+    val scope = rememberCoroutineScope()
+    val on = m.on?.let { runCatching { java.time.LocalDate.parse(it).format(DateTimeFormatter.ofPattern("EEEE d MMM")) }.getOrNull() } ?: "soon"
+    FlatCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("Your pod and another pod with the same stage and language have both been quiet, so on $on they become one pod with more people around. Your old messages stay here.", style = MaterialTheme.typography.bodyMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(if (m.stay) "You chose to stay in this pod." else "Only you see your choice.", style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                TextButton(onClick = {
+                    scope.launch { if (community.mergeStay(m.id, !m.stay)) pod.updateSummary(s.copy(merge = m.copy(stay = !m.stay))) }
+                }) { Text(if (m.stay) "Join after all" else "Keep me here") }
+            }
+        }
+    }
+}
+
+/** A kind note from this month's helper, if you've been away. Shown until OK. */
+@Composable
+private fun HelperNote(pod: PodClient) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val prefs = remember { context.getSharedPreferences("pod_v2", android.content.Context.MODE_PRIVATE) }
+    val last = pod.privateNotes.lastOrNull { it.name.endsWith("(pod helper)") && it.memberId != pod.memberId } ?: return
+    var seen by remember(last.id) { mutableStateOf(prefs.getString("helperNoteSeen", null) == last.id) }
+    if (seen) return
+    FlatCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.padding(12.dp)) {
+            Text("${last.name}: ${last.text}", style = MaterialTheme.typography.bodyMedium)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Only you got this.", style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                TextButton(onClick = { prefs.edit().putString("helperNoteSeen", last.id).apply(); seen = true }) { Text("OK") }
+            }
+        }
+    }
+}
+
+/**
+ * Answer hour: write alone first, post the answer, then compare two answers from the pod (which is stronger, and one
+ * reason). The writers hear the reason privately, never who sent it. Nobody is scored. The web copy is answerHourCard.
+ */
+@Composable
+private fun AnswerHourCard(pod: PodClient, library: ContentLibrary?, hindi: Boolean, onOpenNeedToTalk: () -> Unit) {
+    val weekAgo = System.currentTimeMillis() - 7 * 86_400_000L
+    val answers = pod.messages.count { it.kind == "answer" && it.ts > weekAgo }
+    var text by rememberSaveable { mutableStateOf("") }
+    var reason by rememberSaveable { mutableStateOf("") }
+    var pick by rememberSaveable { mutableStateOf<String?>(null) }
+    var problem by remember { mutableStateOf<String?>(null) }
+    val online = pod.status == PodStatus.ONLINE
+    FlatCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text("Answer hour · $answers answer${if (answers == 1) "" else "s"} this week", style = MaterialTheme.typography.titleMedium)
+            PauseLine("pod-alone-first", library, hindi)
+            Text("Write alone first, then post it. After that, compare two answers from your pod: which is stronger, and one reason. The writers hear your reason privately, never who sent it. Nobody is scored.", style = MaterialTheme.typography.bodySmall)
+            OutlinedTextField(value = text, onValueChange = { text = it.take(2500) }, placeholder = { Text("Your answer, about 150 words. Write it alone first.") }, modifier = Modifier.fillMaxWidth().heightIn(min = 120.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text("Posted answers are seen by your pod.", style = MaterialTheme.typography.labelSmall, modifier = Modifier.weight(1f))
+                OutlinedButton(enabled = online && text.isNotBlank(), onClick = {
+                    if (text.trim().split(Regex("\\s+")).size < 20) { problem = "Write a little more first (at least a few lines)."; return@OutlinedButton }
+                    if (DistressMatcher.matches(text)) onOpenNeedToTalk()
+                    pod.say(text, "answer"); text = ""; problem = null
+                }) { Text("Post my answer") }
+            }
+            val p = pod.pair
+            if (p == null) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(when { pod.compared -> "Thanks. Your reason went to both writers."; pod.noPair -> "No new pair to compare yet. Once two others have posted this week, there will be."; else -> "Ready to compare two answers?" },
+                        style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                    OutlinedButton(enabled = online, onClick = { pick = null; reason = ""; pod.askPair() }) { Text("Compare two") }
+                }
+            } else {
+                PauseLine("pod-compare", library, hindi)
+                listOf("a" to p.aText, "b" to p.bText).forEachIndexed { i, (k, t) ->
+                    Column(
+                        Modifier.fillMaxWidth().background(
+                            if (pick == k) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainerHigh, RoundedCornerShape(8.dp),
+                        ).clickable { pick = k }.padding(10.dp),
+                    ) {
+                        Text("Answer ${i + 1}${if (pick == k) " · stronger" else ""}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+                        Text(t, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+                OutlinedTextField(value = reason, onValueChange = { reason = it.take(300) }, placeholder = { Text("One reason (about the answers, not the people)") }, modifier = Modifier.fillMaxWidth())
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    TextButton(onClick = { pod.pair = null }) { Text("Not now") }
+                    Button(enabled = online && pick != null && reason.trim().length >= 3, onClick = {
+                        if (DistressMatcher.matches(reason)) onOpenNeedToTalk()
+                        pod.compare(p.aId, p.bId, pick!!, reason)
+                    }) { Text("Send my reason") }
+                }
+            }
+            problem?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
+            val notes = pod.privateNotes.filter { it.memberId == "compare" }
+            if (notes.isNotEmpty()) {
+                Text("What others said about your answers", style = MaterialTheme.typography.titleSmall)
+                notes.takeLast(5).forEach { Text(it.text, style = MaterialTheme.typography.bodySmall) }
+            }
+        }
+    }
+}
+
+/** One volunteer a month opens Answer hour and checks on people who've gone quiet. The web copy is helperCard. */
+@Composable
+private fun HelperCard(pod: PodClient, library: ContentLibrary?, hindi: Boolean) {
+    val h = pod.helper
+    val mine = h?.memberId == pod.memberId
+    var question by rememberSaveable { mutableStateOf("") }
+    var note by rememberSaveable { mutableStateOf("We missed you at the pod this week. No catching up needed; come to Answer hour when you can.") }
+    var leaving by remember { mutableStateOf(false) }
+    val online = pod.status == PodStatus.ONLINE
+    FlatCard(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)) {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Text(when { h == null -> "Pod helper: open this month"; mine -> "You're the pod helper this month"; else -> "${h.name} is the pod helper this month" }, style = MaterialTheme.typography.titleMedium)
+            PauseLine("pod-helper", library, hindi)
+            when {
+                h == null -> {
+                    Text("One member a month opens Answer hour and sends a kind note to anyone who's gone quiet. It's a volunteer role and changes hands each month.", style = MaterialTheme.typography.bodySmall)
+                    OutlinedButton(enabled = online, onClick = { pod.takeHelper() }) { Text("I'll be the helper this month") }
+                }
+                !mine -> Text("They open Answer hour and check on anyone who's gone quiet. Next month anyone can take it.", style = MaterialTheme.typography.bodySmall)
+                else -> {
+                    Text("Open Answer hour", style = MaterialTheme.typography.titleSmall)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        OutlinedTextField(value = question, onValueChange = { question = it.take(600) }, placeholder = { Text("Today's question (optional)") }, singleLine = true, modifier = Modifier.weight(1f))
+                        TextButton(enabled = online, onClick = { pod.openAnswerHour(question); question = "" }) { Text("Open it") }
+                    }
+                    Text("Check on quiet members", style = MaterialTheme.typography.titleSmall)
+                    Text("Goes privately to anyone who hasn't posted for a week, once a week at most. The pod doesn't see who.", style = MaterialTheme.typography.bodySmall)
+                    OutlinedTextField(value = note, onValueChange = { note = it.take(300) }, modifier = Modifier.fillMaxWidth())
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(pod.missSent?.let { n -> if (n == 0) "Everyone has posted this week; nobody to send to." else "Sent to $n ${if (n == 1) "person" else "people"}." } ?: "",
+                            style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                        TextButton(enabled = online && note.isNotBlank(), onClick = { pod.missYou(note) }) { Text("Send") }
+                    }
+                    TextButton(onClick = { leaving = true }) { Text("Hand it back") }
+                }
+            }
+        }
+    }
+    if (leaving) AlertDialog(
+        onDismissRequest = { leaving = false },
+        title = { Text("Hand back the helper role?") },
+        text = { Text("Anyone in the pod can take it for the rest of the month.") },
+        confirmButton = { TextButton(onClick = { pod.leaveHelper(); leaving = false }) { Text("Hand it back") } },
+        dismissButton = { TextButton(onClick = { leaving = false }) { Text("Keep it") } },
+    )
 }

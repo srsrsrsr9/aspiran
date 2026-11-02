@@ -78,6 +78,7 @@ fun EssayScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             val current = list.firstOrNull { it.first == open }
             if (current == null) {
+                PauseLine("essay-first-snap", library, hindi)
                 Text("Each essay goes in three sittings: a skeleton, then an outline, then the essay. You write each snap first, then compare it with the guide.", style = MaterialTheme.typography.bodyLarge)
                 if (list.isEmpty()) Text("Essay topics appear here once an English and a Hindi editor approve them.", style = MaterialTheme.typography.bodyMedium)
                 list.forEach { (id, e) ->

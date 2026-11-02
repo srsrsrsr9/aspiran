@@ -75,6 +75,7 @@ fun ReviewScreen(
                 return@Column
             }
             val t = topics[index]
+            PauseLine("first-review")
             Text("${t.paper} · Topic check", style = MaterialTheme.typography.labelMedium)
             Text(t.name, style = MaterialTheme.typography.headlineSmall)
             Text("Close your notes. Say or write the main points from memory, then check them.", style = MaterialTheme.typography.bodyLarge)
