@@ -249,6 +249,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val staged = remember { StagedProfile(context) }
     val pod = remember { PodClient(context) }
     val community = remember { Community({ pod.serverUrl }, { pod.memberId }) }
+    val room = remember { com.upscpods.app.data.RoomStore(context) }
     // Open rooms (server rooms.ts) and Answer Studio's attempt log.
     val rooms = remember { Rooms(context, community, pod) }
     val answerLog = remember { AnswerLog(context) }
@@ -559,6 +560,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         }
     }
     val answer = { q: PracticeQuestion, right: Boolean ->
+        room.logRight(right)
         val (r, t) = session[q.topic] ?: (0 to 0)
         session = session + (q.topic to ((r + if (right) 1 else 0) to (t + 1)))
         q.cardId?.let { recall.record(it, right, q.topic) }
@@ -632,10 +634,11 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         )
         Overlay.REVIEW -> ReviewScreen(
             reviewTopics, reviewQs,
-            onCheck = { t, g -> syllabusMap.check(t.id, g); mapTick++ },
+            onCheck = { t, g -> room.logRight(g >= com.upscpods.app.data.Fsrs.GOOD); syllabusMap.check(t.id, g); mapTick++ },
             onAnswer = answer,
             onFinished = { syllabusMap.reviewedOn = LocalDate.now().toString(); finishPractice() },
             onClose = { overlay = Overlay.NONE; scope.launch { loadReview() } },
+            notesFor = room::notesFor,
         )
         Overlay.MAINS -> MainsScreen(
             mains,
@@ -967,6 +970,15 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     onSignOut = if (authOptional) null else ({ pod.stop(); scope.launch { Auth.signOut() }; mePage = MePage.HOME }),
                     chotu = chotu,
                     modifier = m,
+                    room = room,
+                    hindi = hindi,
+                    onExportRoom = {
+                        scope.launch {
+                            val text = room.export() + "\n\nJOURNAL\n" + repo.exportJournal().ifBlank { "No entries yet." }
+                            val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, text)
+                            context.startActivity(Intent.createChooser(send, "Export my room"))
+                        }
+                    },
                 ) { inner ->
                     MyPathTab(
                         day, persona, openNeedToTalk,

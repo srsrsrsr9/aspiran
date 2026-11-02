@@ -45,6 +45,8 @@ fun ReviewScreen(
     onAnswer: (PracticeQuestion, Boolean) -> Unit,
     onFinished: () -> Unit,
     onClose: () -> Unit,
+    /** Your own notes pinned to a topic (Your room), shown with its check. */
+    notesFor: (String) -> List<String> = { emptyList() },
 ) {
     var index by rememberSaveable { mutableIntStateOf(0) }
     var showNote by rememberSaveable(index) { mutableStateOf(false) }
@@ -79,6 +81,10 @@ fun ReviewScreen(
             if (t.note.isNotBlank()) {
                 if (showNote) Text(t.note, style = MaterialTheme.typography.bodyMedium)
                 else TextButton(onClick = { showNote = true }) { Text("Check against what you wrote when you met it") }
+            }
+            notesFor(t.id).takeIf { it.isNotEmpty() }?.let { mine ->
+                Text("Your notes on this", style = MaterialTheme.typography.labelLarge)
+                mine.forEach { Text(it, style = MaterialTheme.typography.bodyMedium) }
             }
             Text("How much came back?", style = MaterialTheme.typography.labelLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {

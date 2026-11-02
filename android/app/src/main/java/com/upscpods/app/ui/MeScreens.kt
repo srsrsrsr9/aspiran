@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 /** Me's pages. The top bar shows the open page's title and a back arrow (see MainActivity). */
-enum class MePage(val title: String) { HOME("Me"), PROFILE("Profile"), STAMPS("Stamp book"), RHYTHM("Rhythm"), PRIVACY("Privacy"), PLUS("Plus"), LANGUAGES("Request your language"), SETTINGS("My Path") }
+enum class MePage(val title: String) { HOME("Me"), PROFILE("Profile"), STAMPS("Stamp book"), RHYTHM("Rhythm"), PRIVACY("Privacy"), ROOM("Your room"), PLUS("Plus"), LANGUAGES("Request your language"), SETTINGS("My Path") }
 
 /**
  * Me: Profile (each field with its source, where it's kept, and Delete), Stamp book, Rhythm (dots, no streaks),
@@ -65,6 +65,10 @@ fun MeTab(
     modifier: Modifier = Modifier,
     /** Sign out (null when sign-in isn't in use). Everything on the phone stays. */
     onSignOut: (() -> Unit)? = null,
+    /** Your room: sleep, notes, to-dos and export (null hides it). */
+    room: com.upscpods.app.data.RoomStore? = null,
+    hindi: Boolean = false,
+    onExportRoom: () -> Unit = {},
     settings: @Composable (Modifier) -> Unit,
 ) {
     BackHandler(enabled = page != MePage.HOME) { onPage(MePage.HOME) }
@@ -78,6 +82,7 @@ fun MeTab(
                 persona?.name?.takeIf { it.isNotBlank() }?.let { Text("Hi, $it.", style = MaterialTheme.typography.bodyLarge) }
                 MeRow("Profile", "What the app knows about you, and where it's kept") { onPage(MePage.PROFILE) }
                 MeRow("Stamp book", "${staged.stamps.size} " + (if (staged.stamps.size == 1) "stamp" else "stamps") + ". None are ever lost") { onPage(MePage.STAMPS) }
+                if (room != null) MeRow("Your room", "Sleep, notes, to-dos and your journal. Private, never scored, yours to export") { onPage(MePage.ROOM) }
                 MeRow("Rhythm", "The days you closed, as dots. Not a streak") { onPage(MePage.RHYTHM) }
                 MeRow("Privacy", "Smarter ${Brand.MASCOT_SHORT}, offline ${Brand.MASCOT_SHORT}, result-day mode, what leaves the phone") { onPage(MePage.PRIVACY) }
                 if (plusOn) MeRow("Plus", "Your plan") { onPage(MePage.PLUS) }
@@ -93,6 +98,7 @@ fun MeTab(
                 PrivacyPage(staged, adminResult)
                 OfflineChotuSettings(chotu)
             }
+            MePage.ROOM -> room?.let { RoomPage(it, hindi, onOpenJournal = { onPage(MePage.SETTINGS) }, onExport = onExportRoom, onOpenNeedToTalk = onOpenNeedToTalk) }
             MePage.PLUS -> PlusPage(community)
             MePage.LANGUAGES -> RequestLanguageCard(langRequests, community)
             MePage.SETTINGS -> Unit
