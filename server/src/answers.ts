@@ -28,6 +28,12 @@ export const EVAL_HOPS: Hop[] = [
   { provider: "groq", model: "meta-llama/llama-4-scout-17b-16e-instruct", extra: { temperature: 0.2, max_completion_tokens: 1800 }, timeoutMs: 30_000 },
 ];
 
+/** Typed answers need no vision, so the fast text model goes first; the vision models follow as fallbacks. */
+export const TYPED_EVAL_HOPS: Hop[] = [
+  { provider: "groq", model: "openai/gpt-oss-120b", extra: { temperature: 0.2, reasoning_effort: "medium", include_reasoning: false, max_completion_tokens: 1800 }, timeoutMs: 30_000 },
+  ...EVAL_HOPS,
+];
+
 const PROMPT = (question: string, words: number, source: string) => `You are an experienced UPSC Civil Services Mains evaluator. Grade one answer to this question, written for a ${words}-word limit:
 
 "${question}"
@@ -80,7 +86,9 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
     let fb = null as ReturnType<typeof readFeedback>, model = "";
     // One retry if the reply isn't usable JSON: free models sometimes wander.
     for (let i = 0; i < 2 && !fb; i++) {
-      const out = await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS);
+      const out = img
+        ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS)
+        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], TYPED_EVAL_HOPS);
       fb = readFeedback(out.text, text && !img ? wordsIn(text) : null);
       model = out.model;
     }

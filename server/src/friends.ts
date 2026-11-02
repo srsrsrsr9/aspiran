@@ -12,18 +12,19 @@
  *   feelings in it (low, tired, anxious...) or one that tripped the distress check.
  * - Quiet hours 23:30–07:00 IST, nothing in a result week, and the `pod_friends` flag switches them all off.
  * - Activity follows the number of real people: full with 0–2, light with 3–5, rituals only beyond that.
+ * - No invented lives: no attempts, jobs or wins of their own. They suggest, explain and ask (owner, 2 Nov 2026).
  * Posts are written here from fixed templates (no AI model), so they are cheap, predictable and checkable.
  */
 
 export interface Friend { id: string; name: string; color: string; bio: string }
 
 export const FRIENDS: Friend[] = [
-  { id: "friend:meera", name: "Meera · AI", color: "#b5543c", bio: "On her third attempt. Steady, Mains-minded, starts the answer-writing hours." },
-  { id: "friend:arjun", name: "Arjun · AI", color: "#3f51b5", bio: "Works in a bank. Studies 6 to 8 every morning before the office." },
-  { id: "friend:pooja", name: "Pooja · AI", color: "#2e7d32", bio: "Hindi-medium, deep into GS1: history, art and culture, geography." },
-  { id: "friend:kabir", name: "Kabir · AI", color: "#c98a12", bio: "The quizzer. Drops a quick question most days and the answer later." },
+  { id: "friend:meera", name: "Meera · AI", color: "#b5543c", bio: "AI study friend. Hosts the answer-writing hours and shares Mains writing tips." },
+  { id: "friend:arjun", name: "Arjun · AI", color: "#3f51b5", bio: "AI study friend. Suggests a small morning block and a short close to the day." },
+  { id: "friend:ira", name: "Ira · AI", color: "#2e7d32", bio: "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society." },
+  { id: "friend:kabir", name: "Kabir · AI", color: "#c98a12", bio: "AI study friend. Drops a quick question most days and the answer later." },
 ];
-const F = Object.fromEntries(FRIENDS.map((f) => [f.id.slice(7), f])) as Record<"meera" | "arjun" | "pooja" | "kabir", Friend>;
+const F = Object.fromEntries(FRIENDS.map((f) => [f.id.slice(7), f])) as Record<"meera" | "arjun" | "ira" | "kabir", Friend>;
 
 export type FriendLevel = "full" | "light" | "rituals";
 /** 0–2 real people: full; 3–5: light; more: rituals only. */
@@ -38,56 +39,57 @@ export interface QuizQ { topic: string; question: string; options: string[]; ans
 export interface FriendPost { friend: Friend; text: string; kind: "friend" | "friend_quiz" }
 
 // --- What they say -------------------------------------------------------------------------------------------
+// They are AI and say so: no invented lives, attempts, jobs or wins of their own. They suggest, explain and ask.
 
 const pick = <T>(list: T[], seed: number) => list[Math.abs(seed) % list.length];
 
 const ARJUN_MORNING = [
-  "Morning block done before the office: 45 minutes of Polity, the Parliament chapter. Back tonight for revision.",
-  "6 to 7 today was the editorial and two Chai cards. Short, but it's in the bag.",
-  "Up early, one hour of Economy (inflation basics). Coffee, then the commute.",
-  "Did 20 Prelims questions on the train yesterday and 30 minutes of notes this morning. Small and steady.",
-  "Today's morning slot: Geography maps for 40 minutes. Office now. Someone keep the pod warm for me.",
+  "Morning, pod. A 45-minute block before work or college counts. One idea for today: the Parliament chapter in Polity.",
+  "Short on time today? One editorial and two Chai cards is a real start.",
+  "Morning block idea: one hour of Economy, inflation basics. Small and steady beats long and rare.",
+  "On a commute? 20 Prelims questions on the phone, then 30 minutes of notes later. Both count.",
+  "Morning block idea: 40 minutes of Geography maps. Draw them; don't just look.",
 ];
 const ARJUN_NIGHT = [
-  "Closing my day: read one Chai card, revised my morning notes. Tomorrow's first step is 15 questions on Polity.",
-  "Short evening. 20 minutes of revision and I'm calling it. Tomorrow at 6 again.",
-  "Tired from work, so tonight was only flashcards. Still counts. Tomorrow: Economy, the budget chapter.",
+  "Closing the day: name one thing you revised and one first step for tomorrow. One idea for tomorrow: 15 Polity questions.",
+  "Short evening? 20 minutes of revision is enough to call it a day.",
+  "Tired tonight? Flashcards only still counts. Tomorrow's idea: Economy, the budget chapter.",
 ];
-const POOJA_NOTES = [
-  "GS1 note for today: the Harappan cities had grid streets and covered drains. Lothal had a dockyard. Making a one-page chart of the sites.",
-  "Art and culture today: Nagara temples have curvilinear shikharas, Dravida temples have vimanas and gopurams. Vesara mixes both.",
-  "Geography: the Western Ghats get orographic rain; the rain-shadow side is much drier. Drew the map twice to remember it.",
-  "Modern history: the 1857 revolt, causes in four boxes (political, economic, military, social). Revising it with a timeline.",
-  "Bhakti and Sufi movements today. Kabir, Mirabai, Nizamuddin Auliya on one page. Reading in Hindi first, then English.",
-  "Indian society for GS1: urbanisation and its effects. Writing two examples for each point so Mains answers have something solid.",
+const IRA_NOTES = [
+  "GS1 note for today: the Harappan cities had grid streets and covered drains, and Lothal had a dockyard. Try a one-page chart of the sites.",
+  "Art and culture: Nagara temples have curved shikharas, Dravida temples have vimanas and gopurams, and Vesara mixes both.",
+  "Geography: the Western Ghats get orographic rain, and the rain-shadow side is much drier. Drawing the map twice helps it stick.",
+  "Modern history: the causes of the 1857 revolt fit in four boxes (political, economic, military, social). A timeline helps revision.",
+  "Bhakti and Sufi movements: Kabir, Mirabai and Nizamuddin Auliya fit on one page. Reading it in Hindi first works well for many.",
+  "Indian society for GS1: urbanisation and its effects. Write two examples for each point so a Mains answer has something solid.",
 ];
 const MEERA_ANSWER_HOUR = [
-  "Starting an answer-writing hour now. One question, 150 words, 10 minutes, then I'll reread it once. Anyone joining, share your intro if you like.",
-  "Answer-writing hour from now. Today I'm doing a GS2 question on federalism. Timer is on.",
-  "I'm writing one Mains answer now: intro, three points, a way forward. If you write too, post your first line here.",
+  "Answer-writing hour starts now. One question, 150 words, then reread it once. If you write, share your intro here if you like.",
+  "Answer-writing hour from now. Today's idea: a GS2 question on federalism.",
+  "Writing one Mains answer now? Intro, three points, a way forward. Post your first line here if you like.",
 ];
 const MEERA_TIPS = [
-  "Something that helped me this attempt: I write the conclusion line first, then build the answer back to it.",
-  "Revision tip from my last two attempts: fewer sources, more rounds. I reread my own notes, not new books.",
-  "I keep a one-page error log from mocks. Before every test I read only that page.",
+  "A Mains tip: write the conclusion line first, then build the answer back to it.",
+  "A revision tip: fewer sources, more rounds. Reread your own notes before opening a new book.",
+  "A mock tip: keep a one-page list of your mistakes, and before each test read only that page.",
 ];
 const PAIRS: [keyof typeof F, string, keyof typeof F, string][] = [
-  ["kabir", "Meera, how do you fit Mains writing into a Prelims month?", "meera", "Two answers a week, Wednesday and Saturday. Small, but it keeps the hand moving."],
-  ["arjun", "Pooja, any trick for remembering temple styles?", "pooja", "I draw the shapes, badly. Shikhara curves, vimana steps. The drawing sticks better than the words."],
-  ["pooja", "Kabir, do you revise from your quiz mistakes?", "kabir", "Every Sunday. I keep the wrong ones in a list and redo only those."],
-  ["meera", "Arjun, how do you study on office days?", "arjun", "Mornings only, 6 to 8. Evenings are for light revision if I'm not too tired."],
+  ["kabir", "Meera, how can someone fit Mains writing into a Prelims month?", "meera", "Two answers a week, Wednesday and Saturday. Small, but it keeps the hand moving."],
+  ["arjun", "Ira, any trick for remembering temple styles?", "ira", "Draw the shapes, even badly. Shikhara curves, vimana steps. A drawing sticks better than the words."],
+  ["ira", "Kabir, is it worth revising quiz mistakes?", "kabir", "Yes. Keep the wrong ones in a list and redo only those each Sunday."],
+  ["meera", "Arjun, what works on busy days?", "arjun", "One short block, morning if possible. Evenings for light revision."],
   ["kabir", "Arjun, newspaper or Chai cards first?", "arjun", "Chai first on busy days, it's quicker. The full paper on Sundays."],
 ];
-const WINS = [
-  ["pooja", "My study win this week: finished the whole ancient history unit and made one chart for it."],
-  ["arjun", "Win of the week: five mornings out of six at the desk by 6. Very happy with that."],
-  ["meera", "My win: wrote six Mains answers this week. The last one felt much clearer than the first."],
-  ["kabir", "This week's win: cleared my error list of 30 questions. Only 4 still trick me."],
+const WEEK_ASK = [
+  ["ira", "Sunday check: what was one study win this week? One line is enough."],
+  ["arjun", "End of the week. What's one thing you got done? Small counts."],
+  ["meera", "Sunday: did you write any answers this week? Even one is worth noting."],
+  ["kabir", "Week's end. Which topic finally made sense this week?"],
 ] as const;
 const REACTIONS = [
   ["meera", "Good going 👏 That's real work done."],
   ["arjun", "Nice. That's how the week gets built, one block at a time."],
-  ["pooja", "Well done 👏 Keep that rhythm going."],
+  ["ira", "Well done 👏 Keep that rhythm going."],
   ["kabir", "Solid 👏 That's a question bank's worth of progress."],
 ] as const;
 
@@ -111,8 +113,8 @@ export function friendPosts(hm: string, weekday: number, level: FriendLevel, see
   const answerDay = ANSWER_DAYS.includes(weekday);
   // Rituals: every level.
   if (answerDay && hm === "19:00") say("meera", pick(MEERA_ANSWER_HOUR, seed));
-  if (weekday === 5 && hm === "20:00") say("kabir", "Quiz night! I'm in. Five questions, one pod score. Good luck everyone.");
-  if (weekday === 0 && hm === "18:00") { const [f, t] = pick([...WINS], seed); say(f, t); }
+  if (weekday === 5 && hm === "20:00") say("kabir", "Quiz night! Five questions, one pod score. Good luck, everyone.");
+  if (weekday === 0 && hm === "18:00") { const [f, t] = pick([...WEEK_ASK], seed); say(f, t); }
   if (level === "rituals") return out;
   // Light: a morning line, the daily question and its answer.
   if (hm === "07:00") say("arjun", pick(ARJUN_MORNING, seed));
@@ -120,7 +122,7 @@ export function friendPosts(hm: string, weekday: number, level: FriendLevel, see
   if (quiz && hm === "18:00" && weekday !== 0) say("kabir", answerText(quiz));
   if (level === "light") return out;
   // Full: GS1 notes, a tip, the friends talking to each other, an evening answer hour on other days, a night close.
-  if (hm === "10:30") say("pooja", pick(POOJA_NOTES, seed));
+  if (hm === "10:30") say("ira", pick(IRA_NOTES, seed));
   if (hm === "15:00" && seed % 2 === 0) say("meera", pick(MEERA_TIPS, seed >> 1));
   if (hm === "16:30") { const [a, q, b, r] = pick(PAIRS, seed); say(a, q); say(b, r); }
   if (!answerDay && weekday !== 5 && weekday !== 0 && hm === "19:00") say("meera", pick(MEERA_ANSWER_HOUR, seed + 1));

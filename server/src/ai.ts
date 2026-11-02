@@ -134,14 +134,15 @@ const GEMINI_EXTRA = { reasoning_effort: "low", max_tokens: 1200 };
 /**
  * Which models answer in each language Chotu speaks, best first. On an error, rate limit or timeout the next
  * one is tried, and a provider with no key is skipped. Picks from the model watch (research/model-watch.md):
- * Nemotron 3 Ultra is the strongest free model in English but mangles Telugu, so Telugu stays on Google.
+ * English goes to Groq first (fast; owner's call, 2 Nov 2026), with Nemotron 3 Ultra as the fallback. Nemotron mangles
+ * Telugu, so Telugu stays on Google.
  */
 export const CHAT_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
   en: [
-    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
     { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
     { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
     { provider: "groq", model: "openai/gpt-oss-20b", extra: GROQ_EXTRA },
+    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
   ],
   hi: [
     { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },

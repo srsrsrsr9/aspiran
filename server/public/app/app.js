@@ -347,13 +347,16 @@ function banner() {
 const chotuLabel = (tone, size = 28) => h("span.chotu-label", kulhad(tone ?? toneNow({ result: !!resultMode() }), size), h("span", "Chotu · AI"));
 /** Chotu's AI study friends in pods (server/src/friends.ts): always labelled AI, never members, never counted. */
 const FRIENDS = {
-  "friend:meera": { color: "#b5543c", bio: "On her third attempt. Steady, Mains-minded, starts the answer-writing hours." },
-  "friend:arjun": { color: "#3f51b5", bio: "Works in a bank. Studies 6 to 8 every morning before the office." },
-  "friend:pooja": { color: "#2e7d32", bio: "Hindi-medium, deep into GS1: history, art and culture, geography." },
-  "friend:kabir": { color: "#c98a12", bio: "The quizzer. Drops a quick question most days and the answer later." },
+  "friend:meera": { color: "#b5543c", bio: "AI study friend. Hosts the answer-writing hours and shares Mains writing tips." },
+  "friend:arjun": { color: "#3f51b5", bio: "AI study friend. Suggests a small morning block and a short close to the day." },
+  "friend:ira": { color: "#2e7d32", bio: "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society." },
+  "friend:kabir": { color: "#c98a12", bio: "AI study friend. Drops a quick question most days and the answer later." },
 };
+// Older pod messages from before the rename (2 Nov 2026).
+const OLD_FRIENDS = { "friend:pooja": { color: "#2e7d32", bio: "AI study friend." } };
 const isFriend = (m) => String(m.memberId).startsWith("friend:");
-const friendLabel = (m, size = 20) => h("span.chotu-label", { title: FRIENDS[m.memberId]?.bio ?? "AI study friend" }, kulhad("warm", size, FRIENDS[m.memberId]?.color ?? "#888"), h("span", m.name), h("span.tag", "AI"));
+const friendInfo = (id) => FRIENDS[id] ?? OLD_FRIENDS[id];
+const friendLabel = (m, size = 20) => h("span.chotu-label", { title: friendInfo(m.memberId)?.bio ?? "AI study friend" }, kulhad("warm", size, friendInfo(m.memberId)?.color ?? "#888"), h("span", m.name), h("span.tag", "AI"));
 
 let cleanup = [];
 function render() {
@@ -1426,7 +1429,7 @@ function viewPod() {
           h("button", { onclick: () => send("favour") }, "Ask a favour"), h("button", { onclick: () => send("offer") }, "Offer help"),
           pod.room ? h("button", { onclick: () => pod.ws?.send(JSON.stringify({ type: "room_join" })) }, `Join the ${pod.room.minutes}-min study room`)
             : h("button", { onclick: () => pod.ws?.send(JSON.stringify({ type: "room_start", minutes: 25 })) }, "Start a 25-min study room")),
-        pod.messages.some(isFriend) && h("details", { style: { marginTop: "12px" } }, h("summary", "Who are Meera, Arjun, Pooja and Kabir?"),
+        pod.messages.some(isFriend) && h("details", { style: { marginTop: "12px" } }, h("summary", "Who are Meera, Arjun, Ira and Kabir?"),
           h("p.small", "They're Chotu's AI study friends, there so a new pod never feels empty. Every one of them is marked AI. They aren't members and are never counted, they never message anyone privately, and they go quiet as more people join."),
           Object.entries(FRIENDS).map(([id, f]) => h("div.row.small", friendLabel({ memberId: id, name: id.slice(7)[0].toUpperCase() + id.slice(8) + " · AI" }, 18), h("span.muted", f.bio)))),
         h("details", { style: { marginTop: "12px" } }, h("summary", "Run a ritual this week"),

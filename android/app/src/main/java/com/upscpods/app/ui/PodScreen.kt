@@ -516,10 +516,12 @@ private fun PhotoInBubble(id: String, load: suspend (String) -> ByteArray?) {
 
 /** Chotu's AI study friends (server/src/friends.ts): their own cup colour and an AI tag. Never members, never counted. */
 private val FRIENDS = mapOf(
-    "friend:meera" to (Color(0xFFB5543C) to "On her third attempt. Steady, Mains-minded, starts the answer-writing hours."),
-    "friend:arjun" to (Color(0xFF3F51B5) to "Works in a bank. Studies 6 to 8 every morning before the office."),
-    "friend:pooja" to (Color(0xFF2E7D32) to "Hindi-medium, deep into GS1: history, art and culture, geography."),
-    "friend:kabir" to (Color(0xFFC98A12) to "The quizzer. Drops a quick question most days and the answer later."),
+    "friend:meera" to (Color(0xFFB5543C) to "AI study friend. Hosts the answer-writing hours and shares Mains writing tips."),
+    "friend:arjun" to (Color(0xFF3F51B5) to "AI study friend. Suggests a small morning block and a short close to the day."),
+    "friend:ira" to (Color(0xFF2E7D32) to "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society."),
+    "friend:kabir" to (Color(0xFFC98A12) to "AI study friend. Drops a quick question most days and the answer later."),
+    // Older pod messages from before the rename (2 Nov 2026).
+    "friend:pooja" to (Color(0xFF2E7D32) to "AI study friend."),
 )
 
 @Composable
