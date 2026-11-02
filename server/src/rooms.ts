@@ -1,6 +1,7 @@
 import { type Env, bad, istWeek, json } from "./shared";
 import { bump, ensureSchema, flags, getSetting } from "./staff";
 import { logEvent } from "./metrics";
+import { type MatchFields, matchFields } from "./community";
 
 /**
  * Open pods (sell-first plan, W3): pre-set rooms anyone can join on day 1, like Slack channels. A member can be in
@@ -49,6 +50,32 @@ export const DEFAULT_GROWTH = { signupThreshold: 500 };
 export async function signups(env: Env): Promise<number> {
   await ensureSchema(env);
   return (await env.DB.prepare("SELECT COUNT(*) AS n FROM accounts").first<{ n: number }>())?.n ?? 0;
+}
+
+/**
+ * Day 1 (teaching plan: nobody starts alone): the rooms a new member is put in before they pick any. Their
+ * language, their attempt and their goal, from the four matching fields. They can leave any of them.
+ */
+export function starterRooms(f: MatchFields): string[] {
+  const lang = f.lang === "hindi" ? "room-hindi-medium" : f.lang === "telugu" ? "room-telugu" : "room-english-medium";
+  const attempt = f.stage === "repeat" || f.attempt_band === "2-3" || f.attempt_band === "4+" ? "room-repeaters" : "room-first-attempt";
+  const goal = f.stage === "mains" ? "room-mains-writing" : f.stage === "interview" ? null : "room-prelims-2027";
+  return [lang, attempt, goal].filter((r): r is string => !!r);
+}
+
+/** Puts a member in their starter rooms once, the first time they're in none. Returns the rooms joined. */
+async function startRooms(env: Env, memberId: string, f: MatchFields, mine: Set<string>): Promise<string[]> {
+  if (mine.size || !(await flags(env)).pod_join) return [];
+  const ids = starterRooms(f);
+  const first = await env.DB.prepare("INSERT OR IGNORE INTO room_starters (member_id, rooms, at) VALUES (?, ?, ?)")
+    .bind(memberId, ids.join(","), new Date().toISOString()).run();
+  if (!first.meta.changes) return [];
+  const at = new Date().toISOString();
+  await env.DB.batch(ids.map((id) => env.DB.prepare("INSERT OR IGNORE INTO room_members (member_id, room_id, joined_at) VALUES (?, ?, ?)").bind(memberId, id, at)));
+  await bump(env, "room_starts");
+  await logEvent(env, "rooms_started", { memberId }, { rooms: ids.join(",") });
+  ids.forEach((id) => mine.add(id));
+  return ids;
 }
 
 /** "open" below the threshold (rooms only), "matched" at or above it (matched pods on, rooms stay). */
@@ -131,6 +158,8 @@ export async function roomsRoute(req: Request, env: Env, path: string, url: URL)
     const mine = memberId
       ? new Set((await env.DB.prepare("SELECT room_id FROM room_members WHERE member_id = ?").bind(memberId).all<{ room_id: string }>()).results.map((r) => r.room_id))
       : new Set<string>();
+    // A member's first visit puts them in their starter rooms (the apps send the matching fields with the list).
+    const started = memberId && body.start !== false ? await startRooms(env, memberId, matchFields(body), mine) : [];
     const counts = await roomCounts(env);
     const rooms = await Promise.all(OPEN_ROOMS.map(async (r) => {
       const since = Math.max(0, Number(seen[r.id]) || 0);
@@ -139,7 +168,7 @@ export async function roomsRoute(req: Request, env: Env, path: string, url: URL)
       // Unread only means something in a room you're in, and only once you've opened it.
       return { ...r, members: counts.get(r.id) ?? 0, joined: mine.has(r.id), ...a, unread: mine.has(r.id) ? a.unread : 0 };
     }));
-    return json({ ...(await podMode(env)), rooms });
+    return json({ ...(await podMode(env)), rooms, started });
   }
   if ((path === "/rooms/join" || path === "/rooms/leave") && req.method === "POST") {
     const body = await req.json<any>().catch(() => ({}));

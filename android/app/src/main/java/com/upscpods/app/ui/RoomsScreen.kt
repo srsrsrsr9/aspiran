@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -118,6 +119,13 @@ fun RoomsScreen(
                 Text("Open rooms", style = MaterialTheme.typography.titleLarge)
                 Text("Join as many as help: your language, where you are, your goal, your optional, your region. " +
                     "Chotu and the study friends here are AI and always labelled AI.", style = MaterialTheme.typography.bodyMedium)
+                if (rooms.started.isNotEmpty()) Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(12.dp)) {
+                        val names = rooms.started.let { if (it.size < 2) it.joinToString() else it.dropLast(1).joinToString(", ") + " and " + it.last() }
+                        Text("So you don't start alone, you're in $names. Leave any that don't fit, and join others below.", style = MaterialTheme.typography.bodyMedium)
+                        TextButton(onClick = { rooms.clearStarted() }) { Text("Got it") }
+                    }
+                }
                 if (list?.mode == "open") Text(
                     "Matched pods of 6 to 8 start once ${list.threshold} aspirants have joined. ${list.signups} so far.",
                     style = MaterialTheme.typography.bodySmall,

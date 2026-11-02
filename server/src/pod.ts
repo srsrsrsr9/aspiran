@@ -155,9 +155,12 @@ export class PodRoom extends DurableObject<Env> {
       return new Response("ok");
     }
     if (url.pathname.endsWith("/stay-or-move") && req.method === "POST") {
-      // Quiet for 14 days: each member privately chooses. Nobody is moved without asking.
-      const { results } = await this.env.DB.prepare("SELECT member_id FROM members WHERE pod_id = ?").bind(this.podId).all<{ member_id: string }>();
-      const text = "Your pod has been quiet for two weeks. You can stay, or move to a more active pod with the same stage and language. Nobody moves unless they choose to.";
+      // Quiet for 14 days: each member privately chooses. Nobody is moved without asking. With {member, text}, only
+      // that member is asked (Monday's offer to someone in the closest pod once their exact group has one).
+      const one = await req.json<{ member?: string; text?: string }>().catch(() => ({} as { member?: string; text?: string }));
+      const results = one.member ? [{ member_id: one.member }]
+        : (await this.env.DB.prepare("SELECT member_id FROM members WHERE pod_id = ?").bind(this.podId).all<{ member_id: string }>()).results;
+      const text = one.text ? String(one.text).slice(0, MAX_LEN) : "Your pod has been quiet for two weeks. You can stay, or move to a more active pod with the same stage and language. Nobody moves unless they choose to.";
       for (const { member_id } of results) {
         const m: Message = { id: newId("p"), memberId: "choice", name: "UPSC Pods", text, ts: Date.now(), kind: "system", to: member_id };
         this.sql.exec("INSERT INTO private (id, from_id, from_name, to_id, text, ts) VALUES (?, ?, ?, ?, ?, ?)", m.id, m.memberId, m.name, member_id, m.text, m.ts);

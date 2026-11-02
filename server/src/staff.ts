@@ -286,6 +286,8 @@ export const ADMIN_SCHEMA = [
   // Open pods (rooms.ts): which pre-set rooms a member joined. A member can be in several.
   `CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id))`,
   `CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id)`,
+  // Day 1: the starter rooms a member was put in, once (rooms.ts startRooms).
+  `CREATE TABLE IF NOT EXISTS room_starters (member_id TEXT PRIMARY KEY, rooms TEXT NOT NULL, at TEXT NOT NULL)`,
   // The website (web.ts): what a visitor tells Chotu as they scroll, and the daily cap on Chotu's website replies.
   `CREATE TABLE IF NOT EXISTS web_leads (visitor_id TEXT PRIMARY KEY, name TEXT, details TEXT NOT NULL, contact TEXT, contact_kind TEXT,
     lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,
@@ -315,6 +317,8 @@ const ALTERS = [
   "ALTER TABLE pods ADD COLUMN last_human_at TEXT",
   "ALTER TABLE pods ADD COLUMN quiet_asked_at TEXT",
   "ALTER TABLE pods ADD COLUMN merged_into TEXT",
+  // Day 1: joined the closest pod because their exact group had none yet; offered a move when one forms.
+  "ALTER TABLE members ADD COLUMN closest INTEGER",
 ];
 
 /** Staff check for an API area: 401 with no key, 403 without the permission. */

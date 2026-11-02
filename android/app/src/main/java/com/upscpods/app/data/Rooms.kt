@@ -26,6 +26,10 @@ class Rooms(private val context: Context, private val community: Community, priv
 
     var list by mutableStateOf(runCatching { json.decodeFromString(RoomsList.serializer(), prefs.getString("last", null)!!) }.getOrNull()); private set
     var loading by mutableStateOf(false); private set
+    /** Day 1: the rooms the server put a new member in, by name, until they close the note. */
+    var started by mutableStateOf(prefs.getString("started", null)?.split("\n")?.filter { it.isNotBlank() } ?: emptyList()); private set
+    fun clearStarted() { started = emptyList(); prefs.edit().remove("started").apply() }
+
     /** The room on screen, if any: its messages are read as they come. */
     var viewing by mutableStateOf<String?>(null)
 
@@ -44,7 +48,11 @@ class Rooms(private val context: Context, private val community: Community, priv
     suspend fun refresh() {
         if (pod.serverUrl.isBlank() || !pod.mayConnect()) return
         loading = true
-        community.rooms(seen())?.let { l ->
+        community.rooms(seen(), pod.matchFields())?.let { l ->
+            if (l.started.isNotEmpty()) {
+                started = l.rooms.filter { it.id in l.started }.map { it.name }
+                prefs.edit().putString("started", started.joinToString("\n")).apply()
+            }
             list = l.copy(rooms = l.rooms.map { if (it.id == viewing) it.copy(unread = 0) else it })
             prefs.edit().putString("last", json.encodeToString(RoomsList.serializer(), l)).apply()
         }

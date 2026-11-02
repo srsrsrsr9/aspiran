@@ -181,6 +181,8 @@ private fun PodHeader(pod: PodClient) {
             }
             Text(listOfNotNull(s.header, opens?.let { "opens $it" }, if (s.state == "quiet") "quiet lately" else null).joinToString(" · "),
                 style = MaterialTheme.typography.labelLarge)
+            if (s.closest) Text("Nobody shares your exact stage, attempts and study time yet, so you're in the closest pod: same stage and language. " +
+                "If a pod for your exact group forms, you'll be asked privately whether to move. Nobody moves unless they choose to.", style = MaterialTheme.typography.bodySmall)
             if (s.sizeState == "forming") Text("Chotu keeps the pod company until more people join on Monday. It's labelled AI, always.", style = MaterialTheme.typography.bodySmall)
         }
         pod.goal?.let { g ->

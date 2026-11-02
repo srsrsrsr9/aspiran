@@ -71,7 +71,7 @@ export function nextMonday(fromDay = istDay()): string {
   return d.toISOString().slice(0, 10);
 }
 
-interface PodRow { id: string; bucket: string; size: number; created_at: string; lead_member: string | null; state: string | null; opens_on: string | null; last_human_at: string | null; quiet_asked_at: string | null; merged_into: string | null }
+interface PodRow { id: string; bucket: string; size: number; created_at: string; lead_member: string | null; state: string | null; opens_on: string | null; last_human_at: string | null; quiet_asked_at: string | null; merged_into: string | null; closest?: number | null }
 
 export function podSummary(p: PodRow, now = Date.now()) {
   const state = podState(p, now);
@@ -80,6 +80,8 @@ export function podSummary(p: PodRow, now = Date.now()) {
     // A forming pod shows the Monday its batch match runs; honest copy, never a promise of how many will come.
     opensOn: p.size <= 2 ? (p.opens_on && p.opens_on > istDay(new Date(now)) ? p.opens_on : nextMonday(istDay(new Date(now)))) : null,
     hasLead: !!p.lead_member,
+    // Day 1: in the closest pod (same stage and language) because their exact group had nobody yet.
+    closest: !!p.closest,
   };
 }
 
@@ -89,25 +91,62 @@ export const podPost = (env: Env, id: string, what: string, body?: unknown) =>
 
 // --- Joining, leaving, moving -------------------------------------------------------------------------
 
-/** Puts a member in an open pod of their bucket, or starts a forming one. Returns where they are. */
-export async function joinPod(env: Env, memberId: string, f: MatchFields, avoid?: string): Promise<{ podId: string }> {
+/**
+ * The closest active pod with room for someone whose exact bucket has none: same stage and language (a field nobody
+ * gave matches only others who didn't give it either), then most alike in study time and attempts, then the biggest.
+ * Quiet pods are skipped. Day 1 of the teaching plan: nobody starts alone in an empty pod.
+ */
+async function closestPod(env: Env, f: MatchFields, avoid: string, now = Date.now()): Promise<{ id: string } | null> {
+  const active = new Date(now - 5 * DAY).toISOString();
+  return env.DB.prepare(
+    `SELECT p.id FROM pods p JOIN members m ON m.pod_id = p.id
+     WHERE p.merged_into IS NULL AND p.size < ? AND p.id != ? AND (p.last_human_at > ? OR p.created_at > ?)
+       AND m.stage IS ? AND m.lang IS ?
+     GROUP BY p.id ORDER BY SUM(m.time_band IS ?) DESC, SUM(m.attempt_band IS ?) DESC, p.size DESC, p.created_at LIMIT 1`,
+  ).bind(POD_CAPACITY, avoid, active, active, f.stage, f.lang, f.time_band, f.attempt_band).first<{ id: string }>();
+}
+
+/** Puts a member in an open pod of their bucket, else the closest active pod, else starts a forming one. */
+export async function joinPod(env: Env, memberId: string, f: MatchFields, avoid?: string): Promise<{ podId: string; closest: boolean }> {
   const bucket = bucketOf(f);
   let pod = await env.DB.prepare(
     "SELECT id FROM pods WHERE bucket = ? AND size < ? AND merged_into IS NULL AND id != ? ORDER BY size DESC, created_at LIMIT 1",
   ).bind(bucket, POD_CAPACITY, avoid ?? "").first<{ id: string }>();
   const now = new Date().toISOString();
+  const near = pod ? null : await closestPod(env, f, avoid ?? "");
+  if (near) pod = near;
   if (!pod) {
     pod = { id: newId("pod_") };
     await env.DB.prepare("INSERT INTO pods (id, bucket, size, created_at, state, opens_on) VALUES (?, ?, 0, ?, 'forming', ?)")
       .bind(pod.id, bucket, now, nextMonday()).run();
   }
   await env.DB.batch([
-    env.DB.prepare("INSERT INTO members (member_id, pod_id, joined_at, stage, attempt_band, lang, time_band) VALUES (?, ?, ?, ?, ?, ?, ?)")
-      .bind(memberId, pod.id, now, f.stage, f.attempt_band, f.lang, f.time_band),
+    env.DB.prepare("INSERT INTO members (member_id, pod_id, joined_at, stage, attempt_band, lang, time_band, closest) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+      .bind(memberId, pod.id, now, f.stage, f.attempt_band, f.lang, f.time_band, near ? 1 : null),
     env.DB.prepare("UPDATE pods SET size = size + 1 WHERE id = ?").bind(pod.id),
   ]);
   await setSizeState(env, pod.id);
-  return { podId: pod.id };
+  if (near) await podPost(env, pod.id, "system", { text: "Someone new joined today. A quick hello helps." }).catch(() => {});
+  return { podId: pod.id, closest: !!near };
+}
+
+/**
+ * Monday's batch match, after the merge: anyone who joined the closest pod is asked privately whether to move once
+ * their exact group has a pod of 3 or more with room. Asked once; nobody moves unless they choose to.
+ */
+export async function offerExactPods(env: Env) {
+  await ensureSchema(env);
+  const { results } = await env.DB.prepare("SELECT member_id, pod_id, stage, attempt_band, lang, time_band FROM members WHERE closest = 1").all<any>();
+  let offered = 0;
+  for (const m of results) {
+    const exact = await env.DB.prepare("SELECT id FROM pods WHERE bucket = ? AND size >= 3 AND size < ? AND merged_into IS NULL AND id != ? LIMIT 1")
+      .bind(bucketOf(m), POD_CAPACITY, m.pod_id).first<{ id: string }>();
+    if (!exact) continue;
+    await podPost(env, m.pod_id, "stay-or-move", { member: m.member_id, text: "A pod for your exact stage, attempts and study time has formed. You can move there, or stay here with the people you know now. Nobody moves unless they choose to." }).catch(() => {});
+    await env.DB.prepare("UPDATE members SET closest = 0 WHERE member_id = ?").bind(m.member_id).run();
+    offered++;
+  }
+  return offered;
 }
 
 async function setSizeState(env: Env, podId: string) {
@@ -391,17 +430,17 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     const memberId = String(body.memberId ?? "");
     if (!validId(memberId)) return bad("memberId must be a random id of 16 to 64 characters");
     await ensureSchema(env);
-    const existing = await env.DB.prepare("SELECT p.* FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(memberId).first<PodRow>();
+    const existing = await env.DB.prepare("SELECT p.*, m.closest FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(memberId).first<PodRow>();
     if (existing) return json(podSummary(existing));
     if (!(await flags(env)).pod_join) return bad("Joining pods is paused for now. Try again later.", 503);
     // Open mode (rooms.ts): below the sign-up threshold nobody new is matched; the apps show the open rooms instead.
     const mode = await podMode(env);
     if (mode.mode === "open") return json({ ...mode, podId: null, error: "Pods are open rooms for now. Pick one or more from the room list." }, 409);
-    const { podId } = await joinPod(env, memberId, matchFields(body));
-    await bump(env, "pod_joins");
+    const { podId, closest } = await joinPod(env, memberId, matchFields(body));
+    await bump(env, closest ? "pod_joins_closest" : "pod_joins");
     await logEvent(env, "pod_joined", { memberId });
     const row = await env.DB.prepare("SELECT * FROM pods WHERE id = ?").bind(podId).first<PodRow>();
-    return json(podSummary(row!));
+    return json(podSummary({ ...row!, closest: closest ? 1 : 0 }));
   }
   if (path === "/pods/leave" && req.method === "POST") {
     const body = await req.json<any>().catch(() => ({}));
@@ -412,7 +451,7 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     const body = await req.json<any>().catch(() => ({}));
     if (!validId(body.memberId)) return bad("memberId is required");
     await ensureSchema(env);
-    const p = await env.DB.prepare("SELECT p.* FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(body.memberId).first<PodRow>();
+    const p = await env.DB.prepare("SELECT p.*, m.closest FROM members m JOIN pods p ON p.id = m.pod_id WHERE m.member_id = ?").bind(body.memberId).first<PodRow>();
     return p ? json(podSummary(p)) : json({ podId: null });
   }
   // The private stay-or-move choice for a quiet pod. Nobody is moved without asking.
@@ -423,10 +462,10 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
     if (!m) return bad("Not in a pod", 404);
     if (body.choice === "stay") return json({ podId: m.pod_id, stayed: true });
     await leavePod(env, body.memberId);
-    const { podId } = await joinPod(env, body.memberId, { stage: m.stage, attempt_band: m.attempt_band, lang: m.lang, time_band: m.time_band }, m.pod_id);
+    const { podId, closest } = await joinPod(env, body.memberId, { stage: m.stage, attempt_band: m.attempt_band, lang: m.lang, time_band: m.time_band }, m.pod_id);
     await bump(env, "pod_moves");
     const row = await env.DB.prepare("SELECT * FROM pods WHERE id = ?").bind(podId).first<PodRow>();
-    return json(podSummary(row!));
+    return json(podSummary({ ...row!, closest: closest ? 1 : 0 }));
   }
   // Only the four matching fields are accepted; anything else in the body is ignored and never stored.
   if (path === "/members/profile" && req.method === "POST") {
@@ -473,7 +512,7 @@ export async function communityRoute(req: Request, env: Env, path: string, url: 
 
 export async function runJob(env: Env, job: string, at = new Date()) {
   switch (job) {
-    case "match": return { merged: await mergeForming(env, { minAgeDays: 0, intoSmall: true, now: at.getTime() }) };
+    case "match": return { merged: await mergeForming(env, { minAgeDays: 0, intoSmall: true, now: at.getTime() }), offered: await offerExactPods(env) };
     case "merge": return { merged: await mergeForming(env, { minAgeDays: 7, intoSmall: false, now: at.getTime() }) };
     case "states": return refreshStates(env, at.getTime());
     case "host": return hostTick(env, at);

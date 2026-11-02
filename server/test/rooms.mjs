@@ -59,13 +59,26 @@ try {
   assert.equal(refused.data.mode, "open");
   step("below the sign-up threshold /pods/join points new members to the rooms");
 
-  let list = (await post("/rooms/list", { memberId: m1 })).data;
+  let list = (await post("/rooms/list", { memberId: m1, start: false })).data;
   assert.ok(list.rooms.length >= 17);
   for (const id of ["room-hindi-medium", "room-telugu", "room-repeaters", "room-working", "room-prelims-2027", "room-mains-writing", "room-opt-psir", "room-opt-anthropology", "room-east-ne", "room-west-central"]) {
     assert.ok(list.rooms.some((r) => r.id === id), id);
   }
   assert.ok(list.rooms.every((r) => !r.joined && r.unread === 0));
   step("the room list has language, attempt, goal, optional and region rooms");
+
+  // --- Day 1: starter rooms, once -------------------------------------------------------------------------
+  const n1 = rid();
+  const st = (await post("/rooms/list", { memberId: n1, stage: "mains", attempt_band: "2-3", lang: "hi", nickname: "never stored" })).data;
+  assert.deepEqual([...st.started].sort(), ["room-hindi-medium", "room-mains-writing", "room-repeaters"]);
+  assert.deepEqual(st.rooms.filter((r) => r.joined).map((r) => r.id).sort(), [...st.started].sort());
+  for (const id of st.started) await post("/rooms/leave", { memberId: n1, roomId: id });
+  const again = (await post("/rooms/list", { memberId: n1, stage: "mains", lang: "hi" })).data;
+  assert.deepEqual(again.started, [], "starter rooms happen once; leaving them all is respected");
+  assert.ok(again.rooms.every((r) => !r.joined));
+  const plain = (await post("/rooms/list", { memberId: rid() })).data;
+  assert.deepEqual([...plain.started].sort(), ["room-english-medium", "room-first-attempt", "room-prelims-2027"], "no fields: English, first attempt, Prelims");
+  step("on day 1 a new member is put in their language, attempt and goal rooms, once");
 
   assert.equal((await post("/rooms/join", { memberId: m1, roomId: "room-nope" })).status, 400, "only listed rooms");
   const before1 = list.rooms.find((r) => r.id === "room-mains-writing").members;

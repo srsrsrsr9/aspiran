@@ -29,6 +29,8 @@ data class PodSummary(
     /** A forming pod's batch-match Monday (YYYY-MM-DD). */
     val opensOn: String? = null,
     val hasLead: Boolean = false,
+    /** Day 1: in the closest pod (same stage and language) because nobody shared the exact group yet. */
+    val closest: Boolean = false,
 ) {
     /** "Forming · 2 of 8" etc. Real numbers only. */
     val header: String get() = when (sizeState) {
@@ -65,7 +67,7 @@ data class RoomInfo(
 )
 
 @Serializable
-data class RoomsList(val mode: String = "open", val signups: Int = 0, val threshold: Int = 500, val rooms: List<RoomInfo> = emptyList())
+data class RoomsList(val mode: String = "open", val signups: Int = 0, val threshold: Int = 500, val rooms: List<RoomInfo> = emptyList(), val started: List<String> = emptyList())
 
 /** One room on the room board: the room's shared Quiz Night score. Rooms are ranked, people never. */
 @Serializable
@@ -171,8 +173,12 @@ class Community(private val server: () -> String, private val memberId: () -> St
             ?.get("ok")?.toString() != "false"
 
     /** The open rooms, with unread counted from [seen] (room id to the last time this phone opened it, in ms). */
-    suspend fun rooms(seen: Map<String, Long>): RoomsList? =
-        post("/rooms/list", buildJsonObject { put("memberId", memberId()); put("seen", buildJsonObject { seen.forEach { (k, v) -> put(k, v) } }) })
+    suspend fun rooms(seen: Map<String, Long>, fields: Map<String, String> = emptyMap()): RoomsList? =
+        post("/rooms/list", buildJsonObject {
+            put("memberId", memberId()); put("seen", buildJsonObject { seen.forEach { (k, v) -> put(k, v) } })
+            // The matching fields pick a new member's starter rooms (server rooms.ts), the first time only.
+            fields.forEach { (k, v) -> put(k, v) }
+        })
             ?.let { json.decodeFromJsonElement(RoomsList.serializer(), it) }
     suspend fun joinRoom(id: String): Boolean = post("/rooms/join", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null
     suspend fun leaveRoom(id: String): Boolean = post("/rooms/leave", buildJsonObject { put("memberId", memberId()); put("roomId", id) }) != null

@@ -110,6 +110,31 @@ const mv = (await post("/pods/choose", { memberId: m2, choice: "move" })).data;
 assert.ok(mv.podId && mv.podId !== j1.podId, "move puts the member in another pod");
 step("a member can choose to stay or move");
 
+// --- Day 1: the closest pod, and the Monday offer to move ------------------------------------------------
+const cs = "cc" + rid().slice(0, 8);
+const B = { stage: cs, language: "english", time_band: "night" }, X = { stage: cs, language: "english", time_band: "morning" };
+const bm = Array.from({ length: 3 }, rid);
+const bPod = (await post("/pods/join", { memberId: bm[0], ...B })).data.podId;
+for (const id of bm.slice(1)) assert.equal((await post("/pods/join", { memberId: id, ...B })).data.podId, bPod);
+const x = rid();
+const xj = (await post("/pods/join", { memberId: x, ...X })).data;
+assert.equal(xj.podId, bPod, "nobody in the exact group yet: the closest pod, same stage and language");
+assert.equal(xj.closest, true);
+assert.equal((await post("/pods/me", { memberId: x })).data.closest, true);
+assert.notEqual((await post("/pods/join", { memberId: rid(), stage: cs, language: "hindi" })).data.podId, bPod, "never across languages");
+for (let i = 0; i < 4; i++) await post("/pods/join", { memberId: rid(), ...B });
+const ym = Array.from({ length: 3 }, rid);
+const yPod = (await post("/pods/join", { memberId: ym[0], ...X })).data;
+assert.notEqual(yPod.podId, bPod, "a full closest pod takes nobody: the exact group starts its own");
+assert.equal(yPod.closest, false);
+for (const id of ym.slice(1)) assert.equal((await post("/pods/join", { memberId: id, ...X })).data.podId, yPod.podId);
+const offer = (await admin("jobs/run", { job: "match" })).data;
+assert.ok(offer.offered >= 1, "Monday asks the member in the closest pod privately");
+assert.equal((await post("/pods/me", { memberId: x })).data.closest, false, "asked once");
+assert.equal((await post("/pods/me", { memberId: x })).data.podId, bPod, "nobody moves without choosing");
+assert.equal((await post("/pods/choose", { memberId: x, choice: "move" })).data.podId, yPod.podId, "moving goes to the exact group's pod");
+step("on day 1 a new member joins the closest active pod, and is offered their exact group's pod once it forms");
+
 // --- Chotu's host schedule in a pod --------------------------------------------------------------------
 // Times inside the current IST week, so the goal and quiz count as this week's.
 const istToday = new Date(Date.now() + 5.5 * 3600_000).toISOString().slice(0, 10);

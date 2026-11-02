@@ -1270,10 +1270,17 @@ const rooms = { list: null, board: null, error: null, busy: null, id: null, ws: 
 let roomsRedraw = () => {};
 const roomSeen = () => store.get("roomSeen", {});
 
+/** "A", "A and B", "A, B and C". */
+const listAnd = (xs) => (xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs.at(-1));
+
 function roomsLoad() {
   const p = profile();
-  fetch("/rooms/list", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: p.memberId, seen: roomSeen() }) })
-    .then((r) => (r.ok ? r.json() : Promise.reject())).then((l) => { rooms.list = l; rooms.error = null; roomsRedraw(); })
+  fetch("/rooms/list", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: p.memberId, seen: roomSeen(), ...matchBody() }) })
+    .then((r) => (r.ok ? r.json() : Promise.reject())).then((l) => {
+      // Day 1: the server put a new member in their starter rooms. Say which, until they close the note.
+      if (l.started?.length) store.set("roomsStarted", l.rooms.filter((r) => l.started.includes(r.id)).map((r) => r.name));
+      rooms.list = l; rooms.error = null; roomsRedraw();
+    })
     .catch(() => { rooms.error = "Couldn't reach the rooms. Check your connection."; roomsRedraw(); });
   fetch("/rooms/leaderboard").then((r) => (r.ok ? r.json() : null)).then((b) => { if (b) { rooms.board = b; roomsRedraw(); } }).catch(() => {});
 }
@@ -1406,6 +1413,8 @@ function viewRooms(arg) {
         : h("button.primary", { disabled: rooms.busy === r.id, onclick: () => roomJoin(r.id) }, rooms.busy === r.id ? "Joining…" : "Join")));
     put(box,
       h("p", "Join as many as help: your language, where you are, your goal, your optional, your region. Chotu and the study friends here are AI and always labelled AI."),
+      store.get("roomsStarted") && h("div.card.soft", h("p", { style: { margin: 0 } }, `So you don't start alone, you're in ${listAnd(store.get("roomsStarted"))}. Leave any that don't fit, and join others below.`),
+        h("button.ghost.small", { onclick: () => { store.del("roomsStarted"); roomsRedraw(); } }, "Got it")),
       l?.mode === "open" && h("p.small.muted", `Matched pods of 6 to 8 start once ${l.threshold} aspirants have joined. ${l.signups} so far.`),
       rooms.error && h("p.small", rooms.error),
       !l && !rooms.error && h("p.muted", "Loading rooms…"),
@@ -1499,6 +1508,7 @@ function podHeader() {
   const opens = s.opensOn ? new Date(s.opensOn + "T12:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "short" }) : null;
   return h("div.pod-head",
     h("div.row.between", h("strong", `${label} · ${s.humans} of ${s.capacity}`), s.state === "quiet" && h("span.small.muted", "Quiet lately")),
+    s.closest && h("p.small", "Nobody shares your exact stage, attempts and study time yet, so you're in the closest pod: same stage and language. If a pod for your exact group forms, you'll be asked privately whether to move. Nobody moves unless they choose to."),
     s.sizeState === "forming" && h("p.small", `Your pod has ${s.humans === 1 ? "1 person" : s.humans + " people"} so far. More join${opens ? " on " + opens : ""}, when this week's new members are matched. Meanwhile, the `, h("a", { href: "#commons" }, "Commons"), " is open."),
     h("p.small.muted", RITUALS));
 }
@@ -1638,7 +1648,7 @@ function leadAsk() {
 async function podChoose(choice, noteId) {
   store.set("choiceDone:" + noteId, true);
   const r = await fetch("/pods/choose", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: profile().memberId, choice }) }).then((x) => x.json()).catch(() => null);
-  if (choice === "move" && r?.podId && r.podId !== pod.podId) podMoved("You moved to a more active pod with the same stage and language. Say hi when you like.");
+  if (choice === "move" && r?.podId && r.podId !== pod.podId) podMoved("You moved to a new pod with the same stage and language. Say hi when you like.");
   else podRedraw();
 }
 
@@ -1954,6 +1964,8 @@ function rapCard() {
 
 /** Fetch the pod summary for the Adda without opening the chat. */
 function podPeek() {
+  // Day 1: loading the room list puts a new member in their starter rooms.
+  if (!rooms.list) roomsLoad();
   if (pod.ws) return;
   post("/pods/me", { memberId: profile().memberId }).then((s) => { if (s.podId) { pod.summary = s; store.set("podSummary", s); } });
 }
