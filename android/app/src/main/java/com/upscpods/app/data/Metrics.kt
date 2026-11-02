@@ -147,7 +147,7 @@ object Metrics {
 
     // --- Day-7 check-in ---------------------------------------------------------------------------------------
 
-    val CHECKIN_Q1 = "How useful has UPSC Pods been in your first week?" to listOf("Very useful", "Somewhat", "Not yet")
+    val CHECKIN_Q1 = "How useful has Aspiran been in your first week?" to listOf("Very useful", "Somewhat", "Not yet")
     val CHECKIN_Q2 = "What would help you most next?" to listOf("A livelier pod", "More practice questions", "A study plan", "Better Chotu answers", "Something else")
 
     /** From day 7 after the first open, until answered or put away. */

@@ -218,8 +218,8 @@ export async function passwordRoute(req: Request, env: Env, path: string, ctx?: 
       await env.DB.prepare(`INSERT INTO recovery_emails (uid, pending_email, code_hash, code_expires, code_tries, updated_at) VALUES (?, ?, ?, ?, 0, ?)
         ON CONFLICT(uid) DO UPDATE SET pending_email = excluded.pending_email, code_hash = excluded.code_hash, code_expires = excluded.code_expires,
         code_tries = 0, updated_at = excluded.updated_at`).bind(me.uid, email, await codeHash(me.uid, code), Date.now() + CODE_MIN * 60_000, now).run();
-      const ok = await sendMail(env, { to: email, subject: "Your UPSC Pods code", text:
-        `Hello @${me.username},\n\nYour code to add this email to your UPSC Pods account is: ${code}\n\nIt works for ${CODE_MIN} minutes. ` +
+      const ok = await sendMail(env, { to: email, subject: "Your Aspiran code", text:
+        `Hello @${me.username},\n\nYour code to add this email to your Aspiran account is: ${code}\n\nIt works for ${CODE_MIN} minutes. ` +
         `If you didn't ask for it, you can ignore this email.\n` });
       if (!ok) return json({ error: "Couldn't send the email. Please try again later.", code: "mail_failed" }, 503);
       return json({ ...recoveryView(await recoveryOf(env, me.uid)), mail: true });
@@ -260,8 +260,8 @@ export async function passwordRoute(req: Request, env: Env, path: string, ctx?: 
       await env.DB.prepare("INSERT INTO password_resets (token_hash, uid, expires_at, created_at) VALUES (?, ?, ?, ?)")
         .bind(await sha256Hex("reset:" + token), l.uid, Date.now() + RESET_MIN * 60_000, new Date().toISOString()).run();
       // Sent after the answer, so a known address doesn't take longer to answer than an unknown one.
-      const mail = sendMail(env, { to: l.email, subject: "Reset your UPSC Pods password", text:
-        `Hello @${l.username},\n\nSomeone asked to reset the password for @${l.username} on UPSC Pods. If it was you, open this link within ` +
+      const mail = sendMail(env, { to: l.email, subject: "Reset your Aspiran password", text:
+        `Hello @${l.username},\n\nSomeone asked to reset the password for @${l.username} on Aspiran. If it was you, open this link within ` +
         `${RESET_MIN} minutes to choose a new one:\n${base}/app/#reset=${token}\n\nOr in the app, tap "Forgot password?", then "I have a code", ` +
         `and paste this code:\n${token}\n\nThe link works once. If it wasn't you, you can ignore this email: your password stays the same.\n` });
       if (ctx) ctx.waitUntil(mail); else await mail;

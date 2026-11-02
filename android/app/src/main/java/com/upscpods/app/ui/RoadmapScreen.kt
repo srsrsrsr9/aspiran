@@ -233,7 +233,7 @@ private fun shareRoadmap(context: Context, p: RoadmapPlan) {
         p.order.take(10).forEachIndexed { i, s -> add(Line("${i + 1}. ${s.name} · about ${s.hours} h", 30f, regular, ink, 4f)) }
         add(Line("Three checks", 38f, bold, ink, 8f))
         p.milestones.forEach { add(Line("${it.title} (by ${it.by})", 30f, bold, ink, 2f)); add(Line(it.check, 26f, regular, muted, 14f)) }
-        add(Line("Made free with UPSC Pods ☕ No rank predictions, just a plan.", 28f, regular, brown, 0f))
+        add(Line("Made free with Aspiran ☕ No rank predictions, just a plan.", 28f, regular, brown, 0f))
     }
     val layouts = lines.map { l ->
         val paint = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { textSize = l.size; color = l.color; typeface = l.face }

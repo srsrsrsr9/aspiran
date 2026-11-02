@@ -686,7 +686,7 @@ private fun PlayButton(play: PlayBuy, hindi: Boolean) {
 fun PlusBanner(hindi: Boolean, onOpen: () -> Unit) {
     Box(Modifier.padding(horizontal = 16.dp, vertical = 4.dp).clickable(onClick = onOpen)) {
         Stage(SAF, pad = 18) {
-            Text("UPSC PODS PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
+            Text("ASPIRAN PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
             Text(if (hindi) "आपकी गलतियाँ, सबसे सस्ते अंक जो आप वापस पा सकते हैं।" else "Your mistakes are the cheapest marks you'll ever win back.",
                 color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, lineHeight = 23.sp)
             Text(if (hindi) "हर मॉक का विश्लेषण। हर गलती, याद होने तक वापस।" else "Every mock, analysed. Every miss, back until it sticks.", color = TX2, fontSize = 14.sp)
@@ -717,7 +717,7 @@ fun PlusTab(modifier: Modifier, mocks: List<MockPaper>, week: List<PrepQ>, bank:
 @Composable
 private fun ColumnScope.PlusHub(hindi: Boolean, onTool: (PrepTool) -> Unit, onMocks: () -> Unit) {
     Stage(GOLD) {
-        Text("UPSC PODS PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
+        Text("ASPIRAN PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
         GradText(if (hindi) "आपके Plus टूल" else "Your Plus tools", TextStyle(fontSize = 34.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 38.sp), colors = listOf(Color.White, Color(0xFFFFE2B8)))
         Text(if (hindi) "नीचे सब कुछ आपके लिए खुला है।" else "You have Plus. Everything below is open.", color = TX2, fontSize = 16.sp)
     }
@@ -898,7 +898,7 @@ private fun ChotuTurns(hindi: Boolean) {
 
 /**
  * Plus as a story, the same one the website tells: a dark warm hero, the score-only habit, real counts from the library,
- * what's inside UPSC Pods for everyone, what the Plus pilot adds, live tastes, what stays free and the pilot card.
+ * what's inside Aspiran for everyone, what the Plus pilot adds, live tastes, what stays free and the pilot card.
  * Every number is real (counted from the library or this phone) or marked as a sample. One price shows, a year of
  * Plus, with the free-trial offer; still no buy button and no link to the website. The one action is a WhatsApp chat,
  * and in quiet times (pause, result days, after a hard moment, 22:30 to 06:00) it goes quiet; the gate doesn't.
@@ -915,7 +915,7 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
     // 1. The hero.
     val h = entrance(0, 900)
     Stage(SAF, Modifier.graphicsLayer { alpha = h; translationY = (1 - h) * 40f }) {
-        Text("UPSC PODS PLUS", Modifier.clip(RoundedCornerShape(999.dp)).background(GOLD.copy(alpha = .08f)).border(1.dp, GOLD.copy(alpha = .35f), RoundedCornerShape(999.dp))
+        Text("ASPIRAN PLUS", Modifier.clip(RoundedCornerShape(999.dp)).background(GOLD.copy(alpha = .08f)).border(1.dp, GOLD.copy(alpha = .35f), RoundedCornerShape(999.dp))
             .padding(horizontal = 12.dp, vertical = 5.dp), color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 12.sp, letterSpacing = 2.sp)
         Text("You've done the reading.", color = TX, style = TextStyle(fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 39.sp, letterSpacing = (-1).sp))
         GradText("Now see what you actually know.", TextStyle(fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 39.sp, letterSpacing = (-1).sp))
@@ -961,11 +961,11 @@ private fun ColumnScope.PlusShowcase(mocks: List<MockPaper>, week: List<PrepQ>, 
         }
     }
 
-    // 4. Inside UPSC Pods: what everyone already gets.
+    // 4. Inside Aspiran: what everyone already gets.
     Reveal {
         Rise {
             Column(Modifier.padding(top = 18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Kicker("Inside UPSC Pods")
+                Kicker("Inside Aspiran")
                 Text("Not another PDF dump.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold, lineHeight = 36.sp)
                 GradText("A whole way of preparing.", TextStyle(fontSize = 28.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 34.sp))
                 Muted("Stories you can swipe. Games that teach. News every morning. Mocks that explain themselves. A study buddy who answers back. All in one place, built around how UPSC actually tests you.")
@@ -1103,7 +1103,7 @@ private fun CountStat(n: Int, label: String, sub: String, modifier: Modifier) {
     }
 }
 
-/** One "Inside UPSC Pods" tile: free for everyone, on its own dark card. */
+/** One "Inside Aspiran" tile: free for everyone, on its own dark card. */
 @Composable
 private fun InsideTile(accent: Color, title: String, body: String, visual: @Composable ColumnScope.() -> Unit) = Reveal {
     Rise {

@@ -89,7 +89,7 @@ export function statusHtml(s: Awaited<ReturnType<typeof statusData>>): string {
     <p class="muted">${esc((COMPONENTS as any)[i.component] ?? i.component)} · started ${esc(when(i.startedAt))}${i.resolvedAt ? ` · resolved ${esc(when(i.resolvedAt))}` : ""}</p>
     ${[...i.updates].reverse().map((u: any) => `<p><b>${esc(u.status)}</b> <span class="muted">${esc(when(u.at))}</span><br>${esc(u.message)}</p>`).join("")}</article>`;
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>UPSC Pods status</title><meta http-equiv="refresh" content="60">
+<title>Aspiran status</title><meta http-equiv="refresh" content="60">
 <style>
 :root{--bg:#FFF8F3;--card:#fff;--ink:#221A14;--muted:#6B5D52;--line:#E8DDD3;--ok:#2E7D32;--deg:#B26A00;--out:#C62828;--mnt:#3F6CB3}
 @media (prefers-color-scheme:dark){:root{--bg:#1A1410;--card:#251D17;--ink:#F0E6DD;--muted:#B8A99C;--line:#3A2F27;--ok:#7BC47F;--deg:#F0B35A;--out:#F28B82;--mnt:#8AB4F8}}
@@ -104,7 +104,7 @@ main{max-width:760px;margin:0 auto;padding:24px 16px}h1{font-size:20px;margin:0 
 .inc{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--deg);border-radius:8px;padding:12px 16px;margin-top:8px}.inc.major{border-left-color:var(--out)}.inc.maintenance{border-left-color:var(--mnt)}
 .inc p{margin:6px 0}
 </style></head><body><main>
-<h1>UPSC Pods status</h1>
+<h1>Aspiran status</h1>
 <div class="banner ${s.state}" role="status">${esc(s.overall)}</div>
 ${active.length ? `<h2>Happening now</h2>${active.map(incident).join("")}` : ""}
 <div class="card">${Object.values(s.components).map((c) => `<div class="comp"><div><div>${esc(c.name)}</div>${c.note ? `<p class="muted">${esc(c.note)}</p>` : ""}</div>

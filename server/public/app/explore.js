@@ -513,7 +513,7 @@ function plusHub(st) {
   const ends = st.plan?.endsAt ? new Date(st.plan.endsAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) : null;
   return h("div.col",
     h("section.sales-hero.member",
-      h("div.sales-eyebrow", "UPSC Pods Plus"),
+      h("div.sales-eyebrow", "Aspiran Plus"),
       h("h1", T({ en: "Your Plus tools", hi: "आपके Plus टूल" })),
       h("p.sales-sub", ends ? T({ en: `Plus is yours until ${ends}. Everything below is open.`, hi: `${ends} तक Plus आपका है। नीचे सब कुछ खुला है।` })
         : T({ en: "Everything below is open.", hi: "नीचे सब कुछ खुला है।" }))),
@@ -531,7 +531,7 @@ export function plusBanner() {
     put(box, h("a.plus-banner", { href: "#upgrade" },
       h("span.pb-glow", { "aria-hidden": "true" }),
       h("div.grow",
-        h("span.pb-eyebrow", "UPSC Pods Plus"),
+        h("span.pb-eyebrow", "Aspiran Plus"),
         h("strong", T({ en: "Your mistakes are the cheapest marks you'll ever win back.", hi: "आपकी गलतियाँ, सबसे सस्ते अंक जो आप वापस पा सकते हैं।" })),
         h("div.small", T({ en: "Every mock, analysed. Every miss, back until it sticks.", hi: "हर मॉक का विश्लेषण। हर गलती, याद होने तक वापस।" }))),
       h("span.pb-go", T({ en: "See Plus", hi: "Plus देखें" }), " →")));

@@ -1,4 +1,4 @@
-// UPSC Pods on the web: the same cards, practice, pods and editor checks as the phone, plus long
+// Aspiran on the web: the same cards, practice, pods and editor checks as the phone, plus long
 // reading, timed mock papers and focus sessions for desk and laptop study. Installable as a desktop
 // app (manifest + service worker). Everything personal stays in this browser; the journal is
 // encrypted with a key the browser can't export.
@@ -213,7 +213,7 @@ let lastTickDone = false;
 function tick() {
   const f = store.get("focus");
   let pill = $("#pill");
-  if (!f) { pill?.remove(); document.title = "UPSC Pods"; return; }
+  if (!f) { pill?.remove(); document.title = "Aspiran"; return; }
   const left = f.endsAt - Date.now();
   if (left <= 0) {
     if (!lastTickDone) { lastTickDone = true; finishFocus(f); }
@@ -379,7 +379,7 @@ function render() {
     // The shelf's honest tools work before (and without) signing up or signing in.
     if (PUBLIC.has(r.name)) {
       put(root, h("div.shell.public", h("main", { id: "main" },
-        h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "UPSC Pods · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
+        h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
         VIEWS[r.name](r.arg))));
       return;
     }
@@ -399,7 +399,7 @@ function render() {
   const prepRail = space === "prep" && !immersive && h("nav.subrail", { "aria-label": "Prep" },
     PREP_TABS.map(([id, label]) => h("a.subtab", { href: "#" + id, "aria-current": sub === id ? "page" : null }, tr(label))));
   put(root, h("div.shell",
-    h("nav.side", { "aria-label": "Main" }, h("div.brand", "UPSC Pods"), navLinks(), h("div.spacer"),
+    h("nav.side", { "aria-label": "Main" }, h("div.brand", "Aspiran"), navLinks(), h("div.spacer"),
       h("a.tab", { href: "#calm", "aria-current": r.name === "calm" ? "page" : null }, h("span", { "aria-hidden": "true" }, "◌"), tr("nav.calm")),
       h("a.tab", { href: "#talk", "aria-current": r.name === "talk" ? "page" : null }, h("span", { "aria-hidden": "true" }, "♡"), tr("nav.talk"))),
     h("main", { id: "main" }, h("div.mobilebar", h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, offlineBanner(), on("announcements") && space === "adda" ? banner() : null, view),
@@ -2115,8 +2115,8 @@ function viewMe() {
     h("div", { id: "lang-request" }, requestPanel()),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Desktop app"),
       standalone ? h("p", "✓ You're using the desktop app.")
-        : installPrompt ? h("div", h("p", "Install UPSC Pods as an app on this computer. It opens in its own window and works offline."), h("button.primary", { onclick: async () => { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; render(); } }, "Install the desktop app"))
-          : h("p", "In Chrome or Edge, use the install icon in the address bar (or menu → Apps → Install UPSC Pods). It opens in its own window and works offline.")),
+        : installPrompt ? h("div", h("p", "Install Aspiran as an app on this computer. It opens in its own window and works offline."), h("button.primary", { onclick: async () => { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; render(); } }, "Install the desktop app"))
+          : h("p", "In Chrome or Edge, use the install icon in the address bar (or menu → Apps → Install Aspiran). It opens in its own window and works offline.")),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Data saver"),
       h("label", h("input", { type: "checkbox", checked: !!store.get("dataSaver"), onchange: (e) => store.set("dataSaver", e.target.checked) }), " Skip drawings on cards")));
 }
@@ -2367,7 +2367,7 @@ function resetScreen(code) {
     h("div.center", kulhad("calm", 72)),
     h("h1.center", "Choose a new password"),
     h("div.card", Auth.recoveryOn() ? resetForm(code, finish) : h("p", "Password reset isn't available right now. Please try again later.")),
-    h("p.small.center", h("a", { href: "#" }, "Back to UPSC Pods"))));
+    h("p.small.center", h("a", { href: "#" }, "Back to Aspiran"))));
 }
 
 /** Me → Account: an email for "Forgot password?". Checked with a 6-digit code before it's used. */
@@ -2415,7 +2415,7 @@ function newPasswordForm(forced, done) {
 function signInScreen() {
   const p = profile();
   return h("main", h("div.col", h("div.center", kulhad("warm", 72)), h("h1.center", `Welcome back, ${p.name}`),
-    h("p", "UPSC Pods now asks everyone to sign in once, to keep the Adda safe. Your journal, stamps, profile and saved work stay in this browser as they are, and your pod stays yours."),
+    h("p", "Aspiran now asks everyone to sign in once, to keep the Adda safe. Your journal, stamps, profile and saved work stay in this browser as they are, and your pod stays yours."),
     signInPanel(p.memberId, (memberId) => {
       // Signing in to an account that already has a member id (used on another device) brings that pod here.
       if (memberId && memberId !== p.memberId) { store.set("profile", { ...profile(), memberId }); store.del("podSummary"); pod.summary = null; }
@@ -2432,13 +2432,13 @@ function suspendedView() {
     h("div.center", kulhad("calm", 72)),
     h("h1.center", "Your access has been switched off"),
     h("div.card",
-      h("p", "You can't use UPSC Pods with this account right now, so you've been signed out."),
-      h("p", support ? ["If you think this is a mistake, or want to talk about it, write to ", h("a", { href: /@/.test(support) ? "mailto:" + support : support }, support), "."] : "If you think this is a mistake, write to the UPSC Pods team."),
+      h("p", "You can't use Aspiran with this account right now, so you've been signed out."),
+      h("p", support ? ["If you think this is a mistake, or want to talk about it, write to ", h("a", { href: /@/.test(support) ? "mailto:" + support : support }, support), "."] : "If you think this is a mistake, write to the Aspiran team."),
       h("p.small.muted", "Your journal, notes and saved work are still in this browser. Nothing has been deleted.")),
     h("div.row", { style: { justifyContent: "center" } },
       h("button", { onclick: () => { Auth.clearSuspended(); render(); } }, "Sign in again"),
       h("button.danger", { onclick: () => {
-        if (!confirm("Delete everything UPSC Pods saved in this browser: journal, profile, answers, mock results and focus log? This can't be undone. To erase what the server holds too, write to us (you can't sign in while access is off).")) return;
+        if (!confirm("Delete everything Aspiran saved in this browser: journal, profile, answers, mock results and focus log? This can't be undone. To erase what the server holds too, write to us (you can't sign in while access is off).")) return;
         wipeLocal(); Auth.clearSuspended(); location.hash = ""; render();
       } }, "Delete my data")),
     h("p.small.muted.center", { style: { marginTop: "16px" } }, h("a", { href: "#calm" }, "Calm"), " and ", h("a", { href: "#talk" }, "Need to talk?"), " still work.")));
@@ -2712,7 +2712,7 @@ async function shareRoadmap(rm) {
   lines.at(-1).gap = 28;
   add("Three checks", 36, true, "#3b2a20", 8);
   for (const m of rm.milestones) add(`${m.title} (by ${m.by})`, 28, true, "#3b2a20", 4), add(m.check, 24, false, "#6b5a50", 14);
-  add("Made free with UPSC Pods. No rank predictions, just a plan.", 24, false, "#8a3b22", 0);
+  add("Made free with Aspiran. No rank predictions, just a plan.", 24, false, "#8a3b22", 0);
   // Wrap long lines.
   const rows = [];
   for (const l of lines) {
@@ -3081,7 +3081,7 @@ function shareShape(r) {
   }
   g.setTransform(1, 0, 0, 1, 0, 0);
   g.fillStyle = v("--muted") || "#6B5D52"; g.font = "24px " + (v("--ui-font") || "sans-serif");
-  g.fillText("UPSC Pods", 60, H - 50);
+  g.fillText("Aspiran", 60, H - 50);
   const a = h("a", { href: c.toDataURL("image/png"), download: "my-day-shape.png" });
   document.body.append(a); a.click(); a.remove();
 }

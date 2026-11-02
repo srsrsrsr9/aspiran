@@ -145,7 +145,7 @@ suspend fun shareCard(context: Context, library: ContentLibrary?, item: NewsItem
         y = text(v.headline, 64f, 0xFF201B17.toInt(), reading, y + 24f)
         v.takeaway?.let { y = text(it, 46f, 0xFF201B17.toInt(), readingRegular, y + 40f) }
         val foot = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { textSize = 36f; color = 0xFF8D4F01.toInt(); typeface = reading }
-        c.drawText("UPSC Pods ☕", 80f, h - 120f, foot)
+        c.drawText("Aspiran ☕", 80f, h - 120f, foot)
         val dir = File(context.cacheDir, "share").apply { mkdirs() }
         File(dir, "chai-${item.id}-${if (hindi) "hi" else "en"}.png").also { f -> f.outputStream().use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) } }
     }

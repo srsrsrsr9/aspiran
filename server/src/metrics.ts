@@ -24,7 +24,7 @@ export const RITUALS = ["close_day", "answer_hour", "quiz", "wins", "goal", "com
 /** Moments that get the one-tap rating, and the two day-7 questions with their fixed choices. */
 export const RATING_MOMENTS = ["pod_joined", "close_day", "chotu_chat", "quiz", "roadmap", "chai"] as const;
 export const CHECKIN = {
-  q1: { text: "How useful has UPSC Pods been in your first week?", choices: ["Very useful", "Somewhat", "Not yet"] },
+  q1: { text: "How useful has Aspiran been in your first week?", choices: ["Very useful", "Somewhat", "Not yet"] },
   q2: { text: "What would help you most next?", choices: ["A livelier pod", "More practice questions", "A study plan", "Better Chotu answers", "Something else"] },
 } as const;
 

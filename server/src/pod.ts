@@ -162,7 +162,7 @@ export class PodRoom extends DurableObject<Env> {
         : (await this.env.DB.prepare("SELECT member_id FROM members WHERE pod_id = ?").bind(this.podId).all<{ member_id: string }>()).results;
       const text = one.text ? String(one.text).slice(0, MAX_LEN) : "Your pod has been quiet for two weeks. You can stay, or move to a more active pod with the same stage and language. Nobody moves unless they choose to.";
       for (const { member_id } of results) {
-        const m: Message = { id: newId("p"), memberId: "choice", name: "UPSC Pods", text, ts: Date.now(), kind: "system", to: member_id };
+        const m: Message = { id: newId("p"), memberId: "choice", name: "Aspiran", text, ts: Date.now(), kind: "system", to: member_id };
         this.sql.exec("INSERT INTO private (id, from_id, from_name, to_id, text, ts) VALUES (?, ?, ?, ?, ?, ?)", m.id, m.memberId, m.name, member_id, m.text, m.ts);
         this.sendTo(member_id, { type: "private", message: m });
       }
@@ -265,7 +265,7 @@ export class PodRoom extends DurableObject<Env> {
     if (url.pathname.endsWith("/care") && req.method === "POST" && member) {
       // From a trained moderator, seen only by this member, with the helplines.
       const { text, from } = await req.json<{ text: string; from?: string }>();
-      const m: Message = { id: newId("p"), memberId: "moderator", name: String(from ?? "UPSC Pods care team").slice(0, 40), text: String(text).slice(0, MAX_LEN), ts: Date.now(), kind: "system", to: member };
+      const m: Message = { id: newId("p"), memberId: "moderator", name: String(from ?? "Aspiran care team").slice(0, 40), text: String(text).slice(0, MAX_LEN), ts: Date.now(), kind: "system", to: member };
       this.sql.exec("INSERT INTO private (id, from_id, from_name, to_id, text, ts) VALUES (?, ?, ?, ?, ?, ?)", m.id, m.memberId, m.name, member, m.text, m.ts);
       let delivered = false;
       for (const w of this.ctx.getWebSockets()) {

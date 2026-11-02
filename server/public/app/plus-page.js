@@ -50,7 +50,7 @@ export function plusSalesPage(C, d) {
     priceEls.forEach((el) => (el.textContent = priceText(p)));
     for (const a of ctaEls) {
       if (live) a.href = "#plus";
-      else { a.href = `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to get UPSC Pods Plus.")}`; a.target = "_blank"; a.rel = "noopener"; }
+      else { a.href = `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to get Aspiran Plus.")}`; a.target = "_blank"; a.rel = "noopener"; }
       a.addEventListener("click", () => C.post("/plus/impression", { surface: "prep", moment: "upgrade", action: "accepted", memberId: C.profile()?.memberId }));
     }
     if (!quiet) C.post("/plus/impression", { surface: "prep", moment: "upgrade", memberId: C.profile()?.memberId });
@@ -61,7 +61,7 @@ export function plusSalesPage(C, d) {
     h("div.pp-orb.o1"), h("div.pp-orb.o2"), h("div.pp-orb.o3"), h("div.pp-grain"),
     h("div.pp-hero-in",
       h("div.pp-copy",
-        h("p.pp-eyebrow.rv", h("span.pp-dot"), "UPSC Pods Plus"),
+        h("p.pp-eyebrow.rv", h("span.pp-dot"), "Aspiran Plus"),
         h("h1.pp-h1.rv", "You've done the reading. ", h("span.pp-grad", "Now see what you actually know.")),
         h("p.pp-lead.rv", "Plus turns every mock you take into a map of where your marks are slipping away, and gives you the tools to win them back, week after week, until the day of the exam."),
         quiet ? quietLine : h("div.pp-ctas.rv", buy("Get Plus for the year"), h("a.pp-btn.ghost", { href: "#pp-try" }, "Try a question first")),
@@ -92,7 +92,7 @@ export function plusSalesPage(C, d) {
   const lib = C.data.library?.items ?? [];
   const kinds = new Set(lib.filter((i) => i.data?.play?.engine || !["mock", "read"].includes(i.kind)).map((i) => i.kind));
   const inside = h("section.pp-inside",
-    h("div.pp-narrow", h("p.pp-kicker.rv", "Inside UPSC Pods"),
+    h("div.pp-narrow", h("p.pp-kicker.rv", "Inside Aspiran"),
       h("h2.pp-h2.rv", "Not another PDF dump. ", h("span.pp-grad", "A whole way of preparing.")),
       h("p.pp-sub.rv", "Stories you can swipe. Games that teach. News every morning. Mocks that explain themselves. A study buddy who answers back. All in one place, built around how UPSC actually tests you.")),
     h("div.pp-bento",
@@ -182,7 +182,7 @@ export function plusSalesPage(C, d) {
       !quiet && offerLine(C, h),
       h("ul.pp-terms", ["One payment for twelve months", "It doesn't renew by itself, ever", "Changed your mind? Refund within 7 days", "For every 10 paid seats, one aspirant who can't pay gets Plus free, chosen by pod leads"].map((t) => h("li", tick(), t))),
       quiet ? quietLine : buy("Get Plus for the year", ".wide"),
-      !quiet && h("p.pp-wa", "Prefer UPI or another way? ", h("a", { href: `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to pay for UPSC Pods Plus another way.")}`, target: "_blank", rel: "noopener" }, "WhatsApp us on 98766 56573"), " and we'll upgrade your account as soon as payment arrives.")));
+      !quiet && h("p.pp-wa", "Prefer UPI or another way? ", h("a", { href: `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to pay for Aspiran Plus another way.")}`, target: "_blank", rel: "noopener" }, "WhatsApp us on 98766 56573"), " and we'll upgrade your account as soon as payment arrives.")));
   d.plusStatus().then((st) => {
     const pay = st?.payments ?? {};
     const p = pay.provider === "cashfree" && C.plusOn() ? pay.amountInr : st?.prices?.yearly?.inr ?? 9999;

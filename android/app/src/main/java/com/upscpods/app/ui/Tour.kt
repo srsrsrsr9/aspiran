@@ -161,7 +161,7 @@ private fun PlusPitch(price: Int?, hindi: Boolean, look: Offset?, puffKey: Any) 
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            Text("UPSC PODS PLUS", color = Color(0xFFFFB547), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
+            Text("ASPIRAN PLUS", color = Color(0xFFFFB547), fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
             listOf(
                 "Every mock analysed: where your marks leak",
                 "Every miss comes back until it sticks",

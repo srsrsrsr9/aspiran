@@ -124,7 +124,7 @@ export async function paymentsRoute(req: Request, env: Env, path: string, url: U
       business: biz,
       receipts: rows.map((r) => ({
         receiptNo: "UPR-" + r.order_id.slice(5, 17).toUpperCase(), orderId: r.order_id, paidAt: r.paid_at, amountInr: r.amount_inr,
-        item: "UPSC Pods Plus, one year (one-time payment, no auto-renewal)" + (r.founding ? ", founding price" : ""),
+        item: "Aspiran Plus, one year (one-time payment, no auto-renewal)" + (r.founding ? ", founding price" : ""),
         status: r.status, refundedAt: r.refunded_at, refundInr: r.refund_inr, mode: r.mode, paymentRef: r.cf_payment_id,
       })),
     });
@@ -143,7 +143,7 @@ export async function paymentsRoute(req: Request, env: Env, path: string, url: U
       order_id: orderId, order_amount: price.amountInr, order_currency: "INR",
       customer_details: { customer_id: memberId.slice(0, 50), customer_phone: phone, ...(account?.email ? { customer_email: account.email } : {}) },
       order_meta: { return_url: `${base}/app/#paid/{order_id}`, notify_url: `${base}/payments/cashfree/webhook` },
-      order_note: "UPSC Pods Plus, one year",
+      order_note: "Aspiran Plus, one year",
     });
     if (r.status >= 300 || !r.data?.payment_session_id) { await bump(env, "payment_order_failed"); return bad("Couldn't start the payment just now. Try again in a minute.", 502); }
     await env.DB.prepare("INSERT INTO payments (order_id, member_id, amount_inr, founding, status, mode, created_at) VALUES (?, ?, ?, ?, 'created', ?, ?)")

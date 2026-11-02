@@ -4,7 +4,7 @@ import { type Env } from "./shared";
  * Sending email (password recovery in password.ts). The provider is picked by which setting is there:
  *
  * - RESEND_API_KEY and MAIL_FROM: sent through Resend (resend.com). The key is a secret (`wrangler secret put`),
- *   MAIL_FROM is the sender, e.g. "UPSC Pods <no-reply@example.com>", on a domain verified with Resend.
+ *   MAIL_FROM is the sender, e.g. "Aspiran <no-reply@example.com>", on a domain verified with Resend.
  * - AUTH_MODE=dev (local only): nothing is sent. The message is kept in memory for the tests to read
  *   (GET /auth/password/dev/outbox, local only).
  * - Neither: mail is off, and the apps don't offer recovery by email.

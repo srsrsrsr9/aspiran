@@ -47,7 +47,7 @@ export async function exportMember(env: Env, memberId: string, via: string, by: 
   await bump(env, "data_exports");
   return {
     exportedAt: new Date().toISOString(),
-    note: "Everything the UPSC Pods server holds about this member id. Journal, mood, progress and saved cards live only on the member's own device.",
+    note: "Everything the Aspiran server holds about this member id. Journal, mood, progress and saved cards live only on the member's own device.",
     account, member, consents, reportsAboutTheirMessages: reports, pod, usageEvents: events, feedback,
   };
 }

@@ -1,4 +1,4 @@
-/* UPSC Pods content templates: shared library.
+/* Aspiran content templates: shared library.
  * Plain script with no dependencies. It runs in Node (require) and in the browser (window.PodsTemplates).
  *
  *   fillSchema(schema, config)   the part of a pack schema the writer (a person or a model) fills in

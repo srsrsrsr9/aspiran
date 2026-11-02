@@ -362,14 +362,14 @@ fun SuspendedScreen(support: String?, onSignInAgain: () -> Unit, onDeleteLocal: 
             Text("Your access has been switched off", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
             FlatCard {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("You can't use UPSC Pods with this account right now, so you've been signed out.", style = ReadingText)
+                    Text("You can't use Aspiran with this account right now, so you've been signed out.", style = ReadingText)
                     if (!support.isNullOrBlank()) {
                         Text("If you think this is a mistake, or want to talk about it, write to $support.", style = ReadingText)
                         TextButton(onClick = {
                             val uri = if ('@' in support) Uri.parse("mailto:$support") else Uri.parse(support)
                             runCatching { context.startActivity(Intent(if ('@' in support) Intent.ACTION_SENDTO else Intent.ACTION_VIEW, uri)) }
                         }) { Text("Contact support") }
-                    } else Text("If you think this is a mistake, write to the UPSC Pods team.", style = ReadingText)
+                    } else Text("If you think this is a mistake, write to the Aspiran team.", style = ReadingText)
                     Text("Your journal, notes and saved work are still on this phone. Nothing has been deleted.", style = MaterialTheme.typography.bodySmall)
                 }
             }

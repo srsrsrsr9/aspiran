@@ -66,7 +66,7 @@ export async function restoreBackup(env: Env, key: string) {
   const obj = await env.BACKUPS.get(key);
   if (!obj) throw new Error("No such backup");
   const data = await obj.json<any>();
-  if (data?.schema !== "upsc-pods/backup@1") throw new Error("Not a UPSC Pods backup");
+  if (data?.schema !== "upsc-pods/backup@1") throw new Error("Not a Aspiran backup");
   const safety = await createBackup(env, "before-restore");
   const counts: Record<string, number> = {};
   for (const t of RESTORED) {

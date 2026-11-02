@@ -1108,7 +1108,7 @@ const TEMPLATES: Record<string, any> = {
   explainer: {
     schema: "upsc-pods/explainer@1", id: "", title: en_hi("Ek Minute · ", "एक मिनट · "), staticLink: "", linkedFromChips: [],
     tone: "NEUTRAL", canvas: { width: 360, height: 400 },
-    elements: { tiles: [{ x: 22, y: 124, w: 150, h: 96, icon: "check", label: en_hi(""), sub: null }], endCard: { x: 22, y: 124, w: 316, h: 206, title: en_hi(""), subtitle: en_hi("Ek Minute · UPSC Pods", "एक मिनट · UPSC Pods") } },
+    elements: { tiles: [{ x: 22, y: 124, w: 150, h: 96, icon: "check", label: en_hi(""), sub: null }], endCard: { x: 22, y: 124, w: 316, h: 206, title: en_hi(""), subtitle: en_hi("Ek Minute · Aspiran", "एक मिनट · Aspiran") } },
     motion: { dimmedOpacity: 0.28 },
     audio: { bed: null, motif: null, narration: null },
     scenes: [{ index: 0, seconds: 6, caption: en_hi(""), state: { tiles: "all shown", end: "hidden" } }],

@@ -88,7 +88,7 @@ fun FocusScreen(onClose: () -> Unit) {
                 FlatCard {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Let Focus close apps", style = MaterialTheme.typography.titleMedium)
-                        Text("To close apps during a block, UPSC Pods needs to see which app is open. Turn it on once in Settings.", style = MaterialTheme.typography.bodyMedium)
+                        Text("To close apps during a block, Aspiran needs to see which app is open. Turn it on once in Settings.", style = MaterialTheme.typography.bodyMedium)
                         Button(onClick = { explain = true }) { Text("Turn on") }
                     }
                 }
@@ -119,7 +119,7 @@ fun FocusScreen(onClose: () -> Unit) {
         title = { Text("How Focus uses Accessibility") },
         text = {
             Text(
-                "UPSC Pods uses Android's Accessibility service only to see which app is in front, so it can show the “closed for now” screen over apps you chose. " +
+                "Aspiran uses Android's Accessibility service only to see which app is in front, so it can show the “closed for now” screen over apps you chose. " +
                     "It doesn't read what's on your screen, what you type, or anything inside other apps, and nothing leaves your phone. You can turn it off any time in Settings.",
             )
         },

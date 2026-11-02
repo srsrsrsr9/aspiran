@@ -78,7 +78,7 @@ export function ratingCard(h, moment) {
 
 // --- Day-7 check-in ----------------------------------------------------------------------------
 
-const Q1 = { text: "How useful has UPSC Pods been in your first week?", choices: ["Very useful", "Somewhat", "Not yet"] };
+const Q1 = { text: "How useful has Aspiran been in your first week?", choices: ["Very useful", "Somewhat", "Not yet"] };
 const Q2 = { text: "What would help you most next?", choices: ["A livelier pod", "More practice questions", "A study plan", "Better Chotu answers", "Something else"] };
 
 /** Shown from day 7 after they started (createdOn), until answered or dismissed. */

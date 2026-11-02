@@ -235,8 +235,8 @@ route("POST", /^reports\/(\d+)$/, "moderate", async ({ env, s, body, m }) => {
 route("POST", /^reports\/(\d+)\/care$/, "safety", async ({ env, s, body, m }) => {
   const row = await env.DB.prepare("SELECT * FROM reports WHERE id = ?").bind(Number(m[1])).first<any>();
   if (!row?.member_id) return bad("This alert has no member to write to (older alerts, or the member was erased).", 404);
-  const text = String(body.text ?? "").trim() || `Hi, this is the UPSC Pods care team. We saw your message and we're here. If things feel heavy, Tele-MANAS is free and open all day: call 14416 or 1-800-891-4416. In an emergency, call 112.`;
-  const r = await podCall(env, row.pod_id, "care", row.member_id, { text, from: "UPSC Pods care team" }).then((x) => x.json<{ delivered: boolean }>());
+  const text = String(body.text ?? "").trim() || `Hi, this is the Aspiran care team. We saw your message and we're here. If things feel heavy, Tele-MANAS is free and open all day: call 14416 or 1-800-891-4416. In an emergency, call 112.`;
+  const r = await podCall(env, row.pod_id, "care", row.member_id, { text, from: "Aspiran care team" }).then((x) => x.json<{ delivered: boolean }>());
   const notes = JSON.parse(row.notes ?? "[]");
   notes.push({ at: new Date().toISOString(), by: label(s), action: "care note", note: r.delivered ? "Sent; they're online" : "Sent; they'll see it next time they open their pod" });
   await env.DB.prepare("UPDATE reports SET status = CASE WHEN status = 'open' THEN 'reached_out' ELSE status END, notes = ?, handled_by = ?, updated_at = ? WHERE id = ?")
