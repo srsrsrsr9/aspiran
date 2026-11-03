@@ -1133,10 +1133,10 @@ private fun StoryCards() {
             val y by animateFloatAsState(q * 14f, tween(600, easing = FastOutSlowInEasing), label = "card")
             Column(Modifier.fillMaxWidth().padding(bottom = 30.dp).graphicsLayer { translationY = y.dp.toPx(); scaleX = 1f - q * .05f; scaleY = 1f - q * .05f; alpha = 1f - q * .3f }
                 .clip(RoundedCornerShape(18.dp)).background(Brush.linearGradient(listOf(PAPER, Color(0xFFF5DFC6)))).padding(16.dp), verticalArrangement = Arrangement.spacedBy(7.dp)) {
-                Text("LONG READ · ${i + 1}/${heads.size}", color = Color(0xFF8D4F01), fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                Text("LONG READ · ${i + 1}/${heads.size}", color = Color(0xFF9A4E0E), fontSize = 10.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
                 Text(heads[i], color = Color(0xFF221A14), fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
                 listOf(.94f, .86f, .7f).forEach { w -> Box(Modifier.fillMaxWidth(w).height(6.dp).clip(RoundedCornerShape(3.dp)).background(Color(0x22221A14))) }
-                Text("Swipe →", color = Color(0xFF8D4F01), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                Text("Swipe →", color = Color(0xFF9A4E0E), fontSize = 12.sp, fontWeight = FontWeight.Bold)
             }
         }
     }

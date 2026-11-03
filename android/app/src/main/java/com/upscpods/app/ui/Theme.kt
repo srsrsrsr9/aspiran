@@ -23,41 +23,48 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.upscpods.app.R
 
-// Fixed brand colours, dynamic colour off (ux-guide.md section 5).
-// Never use #B8732A for buttons: it fails contrast with white.
+// Earth and sky (artefacts/design/earth-and-sky.md). The Adda is earth (chai, clay, cardamom); Prep is sky, in Kulhad.kt.
+// Chai is the one accent in both. Same values as the web app and the website. Dynamic colour off (ux-guide.md section 5).
+// Never use #C8693A for buttons: it fails contrast with white.
 private val Light = lightColorScheme(
-    primary = Color(0xFF8D4F01),
+    primary = Color(0xFF9A4E0E),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFFFDCC0),
-    onPrimaryContainer = Color(0xFF2D1600),
-    tertiary = Color(0xFF14696B),
-    surface = Color(0xFFFFF8F3),
-    background = Color(0xFFFFF8F3),
-    onSurface = Color(0xFF201B17),
-    onBackground = Color(0xFF201B17),
+    primaryContainer = Color(0xFFF6E2C9),
+    onPrimaryContainer = Color(0xFF2A1B12),
+    tertiary = Color(0xFF4F6B3E),
+    surface = Color(0xFFF7F2EA),
+    background = Color(0xFFF7F2EA),
+    onSurface = Color(0xFF2A1B12),
+    onBackground = Color(0xFF2A1B12),
+    onSurfaceVariant = Color(0xFF6E5A4C),
+    outline = Color(0xFFB9A693),
+    outlineVariant = Color(0xFFE4D8C8),
     // Warm neutrals so Material's default purples never show through.
-    secondaryContainer = Color(0xFFF5DEC8),
-    onSecondaryContainer = Color(0xFF2B1700),
-    surfaceVariant = Color(0xFFF1E0D0),
-    surfaceContainerLow = Color(0xFFFCEFE3),
-    surfaceContainer = Color(0xFFF8EADC),
+    secondaryContainer = Color(0xFFE3EAD9),
+    onSecondaryContainer = Color(0xFF26301C),
+    surfaceVariant = Color(0xFFEDE3D5),
+    surfaceContainerLow = Color(0xFFFFFDF9),
+    surfaceContainer = Color(0xFFF1E9DD),
 )
 
 private val Dark = darkColorScheme(
-    primary = Color(0xFFFFB876),
-    onPrimary = Color(0xFF4B2800),
-    primaryContainer = Color(0xFF6B3B00),
-    onPrimaryContainer = Color(0xFFFFDCC0),
-    tertiary = Color(0xFF82D3D5),
-    surface = Color(0xFF18120D),
-    background = Color(0xFF18120D),
-    onSurface = Color(0xFFE9E1DB),
-    onBackground = Color(0xFFE9E1DB),
-    secondaryContainer = Color(0xFF5A4331),
-    onSecondaryContainer = Color(0xFFF8DEC8),
-    surfaceVariant = Color(0xFF52443A),
-    surfaceContainerLow = Color(0xFF221A14),
-    surfaceContainer = Color(0xFF261E18),
+    primary = Color(0xFFF0A04B),
+    onPrimary = Color(0xFF1B1205),
+    primaryContainer = Color(0xFF3B2716),
+    onPrimaryContainer = Color(0xFFF6E2C9),
+    tertiary = Color(0xFF9DBB83),
+    surface = Color(0xFF17100B),
+    background = Color(0xFF17100B),
+    onSurface = Color(0xFFF3E8DA),
+    onBackground = Color(0xFFF3E8DA),
+    onSurfaceVariant = Color(0xFFBFA996),
+    outline = Color(0xFF6E5A4C),
+    outlineVariant = Color(0xFF3A2B1F),
+    secondaryContainer = Color(0xFF26301C),
+    onSecondaryContainer = Color(0xFFE3EAD9),
+    surfaceVariant = Color(0xFF3A2B1F),
+    surfaceContainerLow = Color(0xFF22180F),
+    surfaceContainer = Color(0xFF2A1E14),
 )
 
 // Martel 400/700 (SIL OFL, licence in assets/licenses) covers Latin and Devanagari.
@@ -78,7 +85,11 @@ val ReadingHindi = ReadingText.copy(lineHeight = 29.sp)
 
 private val AppTypography = Typography().let { base ->
     base.copy(
-        titleLarge = base.titleLarge.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold),
+        // Headings in Martel, as on the website and the web app.
+        headlineLarge = base.headlineLarge.copy(fontFamily = ReadingFont, fontWeight = FontWeight.Bold),
+        headlineMedium = base.headlineMedium.copy(fontFamily = ReadingFont, fontWeight = FontWeight.Bold),
+        headlineSmall = base.headlineSmall.copy(fontFamily = ReadingFont, fontWeight = FontWeight.Bold),
+        titleLarge = base.titleLarge.copy(fontFamily = ReadingFont, fontSize = 20.sp, fontWeight = FontWeight.Bold),
         labelSmall = base.labelSmall.copy(fontSize = 12.sp), // nothing under 12 sp
     )
 }

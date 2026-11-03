@@ -124,7 +124,7 @@ suspend fun shareCard(context: Context, library: ContentLibrary?, item: NewsItem
         val h = 1920
         val bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
         val c = Canvas(bmp)
-        c.drawColor(0xFFFFF8F3.toInt())
+        c.drawColor(0xFFF7F2EA.toInt())
         val reading = runCatching { ResourcesCompat.getFont(context, R.font.martel_bold) }.getOrNull() ?: Typeface.DEFAULT_BOLD
         val readingRegular = runCatching { ResourcesCompat.getFont(context, R.font.martel_regular) }.getOrNull() ?: Typeface.DEFAULT
         fun text(s: String, size: Float, color: Int, face: Typeface, top: Float, width: Int = w - 160): Float {
@@ -134,7 +134,7 @@ suspend fun shareCard(context: Context, library: ContentLibrary?, item: NewsItem
             return top + layout.height
         }
         var y = 140f
-        y = text(if (hindi) "आज की चाय" else "Chai of the Day", 54f, 0xFF8D4F01.toInt(), reading, y)
+        y = text(if (hindi) "आज की चाय" else "Chai of the Day", 54f, 0xFF9A4E0E.toInt(), reading, y)
         y = text(date, 36f, 0xFF6B5E54.toInt(), readingRegular, y + 8f)
         val art = item.illustration?.takeIf { library != null && !library.dataSaver() }?.let { renderSvg(library!!, it, w - 160) }
         if (art != null) {
@@ -144,7 +144,7 @@ suspend fun shareCard(context: Context, library: ContentLibrary?, item: NewsItem
         y = text(v.chips.joinToString("  ·  "), 34f, 0xFF14696B.toInt(), readingRegular, y + 56f)
         y = text(v.headline, 64f, 0xFF201B17.toInt(), reading, y + 24f)
         v.takeaway?.let { y = text(it, 46f, 0xFF201B17.toInt(), readingRegular, y + 40f) }
-        val foot = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { textSize = 36f; color = 0xFF8D4F01.toInt(); typeface = reading }
+        val foot = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { textSize = 36f; color = 0xFF9A4E0E.toInt(); typeface = reading }
         c.drawText("Aspiran ☕", 80f, h - 120f, foot)
         val dir = File(context.cacheDir, "share").apply { mkdirs() }
         File(dir, "chai-${item.id}-${if (hindi) "hi" else "en"}.png").also { f -> f.outputStream().use { bmp.compress(Bitmap.CompressFormat.PNG, 100, it) } }

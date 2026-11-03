@@ -5,25 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Aspiran</title>
 <meta name="description" content="Today's Chai, practice, mock papers, long reads and your pod, on the web and as a desktop app.">
-<meta name="theme-color" content="#8D4F01">
+<meta name="theme-color" content="#9A4E0E">
 <meta name="upsc-pods-app" content="1">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
+  /* Earth and sky (artefacts/design/earth-and-sky.md). The Adda is earth: chai, clay and cardamom. Prep is sky: dawn by
+     day, the website's night sky after dark. Day or night follows the theme; earth or sky follows the space. Chai is the
+     one accent everywhere, the lamp you study by. The same values are in Android Theme.kt and the website. */
+  @font-face { font-family: "Martel"; font-weight: 800; font-display: swap; src: url(fonts/martel-latin-800-normal.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2212; }
+  @font-face { font-family: "Martel"; font-weight: 800; font-display: swap; src: url(fonts/martel-devanagari-800-normal.woff2) format("woff2");
+    unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF; }
   :root {
-    --bg:#FFF8F3; --card:#FFFFFF; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --brand-ink:#FFFFFF;
-    --soft:#FCE8C3; --ok:#E3F1E1; --okink:#24572A; --bad:#F8E1DE; --badink:#8A2A1E; --focus:#2F5D62;
+    --bg:#F7F2EA; --card:#FFFDF9; --ink:#2A1B12; --muted:#6E5A4C; --line:#E4D8C8; --brand:#9A4E0E; --brand-ink:#FFFFFF;
+    --soft:#F6E2C9; --ok:#E3EAD9; --okink:#3E5631; --bad:#F8E1DE; --badink:#8A2A1E; --focus:#4F6B3E;
     --read-font: Georgia, "Noto Serif", "Martel", serif;
     --ui-font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+    --head-font: "Martel", Georgia, "Noto Serif Devanagari", serif;
   }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --bg:#1A1410; --card:#251D17; --ink:#F3E9E0; --muted:#B9AA9C; --line:#3A2F27; --brand:#F0B46A; --brand-ink:#2A1A08;
-    --soft:#3A2C17; --ok:#1F3321; --okink:#BFE3C1; --bad:#3D211D; --badink:#F2B8AE; --focus:#8CC3C8;
+    --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --brand-ink:#1B1205;
+    --soft:#3B2716; --ok:#26301C; --okink:#C4DCB0; --bad:#3D211D; --badink:#F2B8AE; --focus:#9DBB83;
   } }
   :root[data-theme="dark"] {
-    --bg:#1A1410; --card:#251D17; --ink:#F3E9E0; --muted:#B9AA9C; --line:#3A2F27; --brand:#F0B46A; --brand-ink:#2A1A08;
-    --soft:#3A2C17; --ok:#1F3321; --okink:#BFE3C1; --bad:#3D211D; --badink:#F2B8AE; --focus:#8CC3C8;
+    --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --brand-ink:#1B1205;
+    --soft:#3B2716; --ok:#26301C; --okink:#C4DCB0; --bad:#3D211D; --badink:#F2B8AE; --focus:#9DBB83;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 var(--ui-font); }
@@ -42,7 +50,7 @@
   textarea { min-height: 120px; resize: vertical; }
   .shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
   nav.side { border-right: 1px solid var(--line); padding: 20px 12px; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; gap: 2px; }
-  nav.side .brand { font-weight: 700; font-size: 18px; padding: 4px 12px 16px; }
+  nav.side .brand { font: 800 20px/1.2 var(--head-font); color: var(--brand); padding: 4px 12px 16px; }
   nav a.tab { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; color: var(--ink); text-decoration: none; }
   nav a.tab[aria-current="page"] { background: var(--soft); font-weight: 600; }
   nav .spacer { flex: 1; }
@@ -112,13 +120,24 @@
   .rblock .grip { cursor: grab; color: var(--muted); }
   .rblock input[type="time"] { width: 110px; }
 
-  /* Two spaces: the Adda is warm (chai brown, terracotta, cream, Martel headings); Prep is cool (ink blue, slate, white). */
-  :root[data-space="adda"] h1, :root[data-space="adda"] h2 { font-family: "Martel", Georgia, "Noto Serif Devanagari", serif; }
-  :root[data-space="prep"] { --bg:#F7F9FB; --card:#FFFFFF; --ink:#16202B; --muted:#55626F; --line:#DCE3EA; --brand:#264B73; --brand-ink:#FFFFFF; --soft:#E4ECF5; }
+  /* Prep is the sky: a pale dawn by day, the night sky after dark, with a few still stars. Headings use Martel in both spaces. */
+  h1, h2 { font-family: var(--head-font); font-weight: 800; letter-spacing: -.01em; }
+  :root[data-space="prep"] { --bg:#F3F3F8; --card:#FFFFFF; --ink:#161A2E; --muted:#565C78; --line:#DCDDEA; --soft:#E6E7F3; --ok:#E1EFE4; --okink:#24572A; --focus:#2E3A73; }
   @media (prefers-color-scheme: dark) { :root[data-space="prep"]:not([data-theme="light"]) {
-    --bg:#10161D; --card:#18212B; --ink:#E6EDF4; --muted:#9AA8B6; --line:#2A3542; --brand:#8DB4E2; --brand-ink:#0D1A29; --soft:#1F2C3B;
+    --bg:#0B0E1C; --card:#141932; --ink:#EEEAF6; --muted:#A3A8C6; --line:#262C4A; --brand:#F0A04B; --brand-ink:#1B1205; --soft:#1E2444;
+    --ok:#1C3326; --okink:#9DDB9A; --bad:#3A1E22; --badink:#FF9A8A; --focus:#7FE3F0;
   } }
-  :root[data-theme="dark"][data-space="prep"] { --bg:#10161D; --card:#18212B; --ink:#E6EDF4; --muted:#9AA8B6; --line:#2A3542; --brand:#8DB4E2; --brand-ink:#0D1A29; --soft:#1F2C3B; }
+  :root[data-theme="dark"][data-space="prep"] { --bg:#0B0E1C; --card:#141932; --ink:#EEEAF6; --muted:#A3A8C6; --line:#262C4A; --brand:#F0A04B; --brand-ink:#1B1205; --soft:#1E2444;
+    --ok:#1C3326; --okink:#9DDB9A; --bad:#3A1E22; --badink:#FF9A8A; --focus:#7FE3F0; }
+  :root[data-space="prep"] body { background:
+    radial-gradient(1px 1px at 12% 18%, var(--star, transparent) 99%, transparent), radial-gradient(1px 1px at 78% 9%, var(--star, transparent) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 41% 31%, var(--star, transparent) 99%, transparent), radial-gradient(1px 1px at 88% 44%, var(--star, transparent) 99%, transparent),
+    radial-gradient(1px 1px at 23% 63%, var(--star, transparent) 99%, transparent), radial-gradient(1.5px 1.5px at 64% 72%, var(--star, transparent) 99%, transparent),
+    radial-gradient(1px 1px at 6% 88%, var(--star, transparent) 99%, transparent), radial-gradient(1px 1px at 93% 91%, var(--star, transparent) 99%, transparent),
+    radial-gradient(900px 500px at 75% -10%, var(--glow, transparent), transparent 70%), var(--bg);
+    background-attachment: fixed; }
+  @media (prefers-color-scheme: dark) { :root[data-space="prep"]:not([data-theme="light"]) { --star: rgba(238,234,246,.55); --glow: #1A1840; } }
+  :root[data-theme="dark"][data-space="prep"] { --star: rgba(238,234,246,.55); --glow: #1A1840; }
   nav.subrail { display: flex; gap: 4px; overflow-x: auto; margin: -8px 0 16px; padding-bottom: 4px; border-bottom: 1px solid var(--line); }
   nav.subrail a.subtab { white-space: nowrap; padding: 8px 12px; border-radius: 10px 10px 0 0; color: var(--muted); text-decoration: none; font-size: 15px; }
   nav.subrail a.subtab[aria-current="page"] { color: var(--brand); font-weight: 600; box-shadow: inset 0 -3px 0 var(--brand); }

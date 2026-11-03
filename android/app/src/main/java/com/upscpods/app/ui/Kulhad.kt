@@ -274,41 +274,48 @@ fun ChotuSays(
     }
 }
 
-// Prep is the cool space (study), Adda the warm one (people). Same type and shapes, different palette.
+// Prep is the sky (study, ambition), the Adda the earth (people). Dawn by day, the website's night sky after dark.
+// Chai stays the accent, the lamp you study by. Same type and shapes.
 private val PrepLight = lightColorScheme(
-    primary = Color(0xFF1F5F8B),
+    primary = Color(0xFF9A4E0E),
     onPrimary = Color(0xFFFFFFFF),
-    primaryContainer = Color(0xFFD3E6F5),
-    onPrimaryContainer = Color(0xFF0A2236),
-    tertiary = Color(0xFF14696B),
-    surface = Color(0xFFF6F9FC),
-    background = Color(0xFFF6F9FC),
-    onSurface = Color(0xFF181C20),
-    onBackground = Color(0xFF181C20),
-    secondaryContainer = Color(0xFFDCE6EF),
-    onSecondaryContainer = Color(0xFF111D27),
-    surfaceVariant = Color(0xFFDEE5EC),
-    surfaceContainerLow = Color(0xFFEDF3F8),
-    surfaceContainer = Color(0xFFE6EDF3),
+    primaryContainer = Color(0xFFE6E7F3),
+    onPrimaryContainer = Color(0xFF161A2E),
+    tertiary = Color(0xFF2E3A73),
+    surface = Color(0xFFF3F3F8),
+    background = Color(0xFFF3F3F8),
+    onSurface = Color(0xFF161A2E),
+    onBackground = Color(0xFF161A2E),
+    onSurfaceVariant = Color(0xFF565C78),
+    outline = Color(0xFF9A9EB8),
+    outlineVariant = Color(0xFFDCDDEA),
+    secondaryContainer = Color(0xFFE6E7F3),
+    onSecondaryContainer = Color(0xFF161A2E),
+    surfaceVariant = Color(0xFFE6E7F3),
+    surfaceContainerLow = Color(0xFFFFFFFF),
+    surfaceContainer = Color(0xFFEBEBF4),
 )
 private val PrepDark = darkColorScheme(
-    primary = Color(0xFF9BCBF0),
-    onPrimary = Color(0xFF00324F),
-    primaryContainer = Color(0xFF184A6D),
-    onPrimaryContainer = Color(0xFFD3E6F5),
-    tertiary = Color(0xFF82D3D5),
-    surface = Color(0xFF0F1418),
-    background = Color(0xFF0F1418),
-    onSurface = Color(0xFFDFE3E8),
-    onBackground = Color(0xFFDFE3E8),
-    secondaryContainer = Color(0xFF34424E),
-    onSecondaryContainer = Color(0xFFD7E3EE),
-    surfaceVariant = Color(0xFF3F4850),
-    surfaceContainerLow = Color(0xFF171D22),
-    surfaceContainer = Color(0xFF1B2228),
+    primary = Color(0xFFF0A04B),
+    onPrimary = Color(0xFF1B1205),
+    primaryContainer = Color(0xFF1E2444),
+    onPrimaryContainer = Color(0xFFEEEAF6),
+    tertiary = Color(0xFF7FE3F0),
+    surface = Color(0xFF0B0E1C),
+    background = Color(0xFF0B0E1C),
+    onSurface = Color(0xFFEEEAF6),
+    onBackground = Color(0xFFEEEAF6),
+    onSurfaceVariant = Color(0xFFA3A8C6),
+    outline = Color(0xFF4A5178),
+    outlineVariant = Color(0xFF262C4A),
+    secondaryContainer = Color(0xFF1E2444),
+    onSecondaryContainer = Color(0xFFEEEAF6),
+    surfaceVariant = Color(0xFF1E2444),
+    surfaceContainerLow = Color(0xFF141932),
+    surfaceContainer = Color(0xFF181E3A),
 )
 
-/** Wraps the Prep tab in the cool palette. */
+/** Wraps the Prep tab in the sky palette. */
 @Composable
 fun PrepSpace(content: @Composable () -> Unit) {
     MaterialTheme(

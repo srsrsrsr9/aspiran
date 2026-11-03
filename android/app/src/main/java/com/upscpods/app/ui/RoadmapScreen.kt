@@ -223,7 +223,7 @@ private fun shareRoadmap(context: Context, p: RoadmapPlan) {
     val bold = Typeface.create(Typeface.SERIF, Typeface.BOLD)
     val regular = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL)
     data class Line(val text: String, val size: Float, val face: Typeface, val color: Int, val gap: Float)
-    val brown = 0xFF8D4F01.toInt(); val ink = 0xFF201B17.toInt(); val muted = 0xFF6B5E54.toInt()
+    val brown = 0xFF9A4E0E.toInt(); val ink = 0xFF201B17.toInt(); val muted = 0xFF6B5E54.toInt()
     val lines = buildList {
         add(Line("My UPSC roadmap · Prelims ${p.goal.examYear}", 54f, bold, brown, 12f))
         add(Line("${p.weeksLeft} weeks · about ${p.hoursPerWeek} hours a week · ${if (p.goal.working) "working and studying" else "full-time"}", 32f, regular, muted, 40f))

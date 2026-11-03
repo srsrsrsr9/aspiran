@@ -3767,8 +3767,8 @@ function weeklyReview(r) {
 function shareShape(r) {
   const W = 1200, H = 630, c = h("canvas", { width: W, height: H }), g = c.getContext("2d");
   const css = getComputedStyle(document.documentElement), v = (n) => css.getPropertyValue(n).trim();
-  const COLORS = { focus: "#8D4F01", body: "#2F7D4A", food: "#C99A2E", people: "#A8436A", work: "#6B5D52", rest: "#3E5C76" };
-  g.fillStyle = v("--bg") || "#FFF8F3"; g.fillRect(0, 0, W, H);
+  const COLORS = { focus: "#9A4E0E", body: "#2F7D4A", food: "#C99A2E", people: "#A8436A", work: "#6B5D52", rest: "#3E5C76" };
+  g.fillStyle = v("--bg") || "#F7F2EA"; g.fillRect(0, 0, W, H);
   g.fillStyle = v("--ink") || "#221A14"; g.font = "600 44px " + (v("--ui-font") || "sans-serif");
   g.fillText(tr("routine.title"), 60, 100);
   const blocks = r.blocks.filter((b) => b.type !== "sleep");
