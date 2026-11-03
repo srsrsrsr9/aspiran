@@ -39,9 +39,16 @@ for (const f of manifest.files) {
 }
 console.log(`Uploaded ${sent} files to pack ${pack}${skipped ? `, skipped ${skipped}` : ""}`);
 
-const res = await fetch(`${BASE}/desk/api/packs/${encodeURIComponent(pack)}/import`, { method: "POST", headers: { authorization: "Bearer " + TOKEN } });
-const out = await res.json();
-for (const line of out.log ?? []) console.log("  " + line);
-for (const line of out.warnings ?? []) console.log("  note: " + line);
-if (!res.ok) throw new Error(out.error ?? "Import failed");
+// 40 items at a time: one live request may make only 1,000 calls to the database and storage.
+for (let from = 0; from != null; ) {
+  const res = await fetch(`${BASE}/desk/api/packs/${encodeURIComponent(pack)}/import?from=${from}&count=40`, { method: "POST", headers: { authorization: "Bearer " + TOKEN } });
+  const text = await res.text();
+  let out;
+  try { out = JSON.parse(text); } catch { throw new Error(`The server answered ${res.status} with a page, not data (items ${from} onwards). Run the same command again; finished items say "unchanged".`); }
+  for (const line of out.log ?? []) console.log("  " + line);
+  for (const line of out.warnings ?? []) console.log("  note: " + line);
+  if (!res.ok) throw new Error(out.error ?? "Import failed");
+  from = out.next ?? null;
+  if (from != null) console.log(`  … ${from} of ${out.total} done`);
+}
 console.log(`\nImported. Approve on the desk: ${BASE}/desk`);

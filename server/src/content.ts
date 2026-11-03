@@ -288,7 +288,12 @@ export async function contentApi(req: Request, env: Env, path: string, s: Staff)
   if (put && req.method === "PUT") return uploadPackFile(env, put[1], put[2], await req.arrayBuffer());
 
   const imp = path.match(/^packs\/([^/]+)\/import$/);
-  if (imp && req.method === "POST") return importPack(env, imp[1]);
+  if (imp && req.method === "POST") {
+    // ?from=&count= imports a slice of the pack's items: a Worker request may make only 1,000 calls to D1 and R2,
+    // and each item takes about six. scripts/import-pack.mjs walks the slices.
+    const q = new URL(req.url).searchParams;
+    return importPack(env, imp[1], q.has("from") ? { from: Math.max(0, Number(q.get("from")) || 0), count: Math.min(60, Math.max(1, Number(q.get("count")) || 40)) } : undefined);
+  }
 
   if (path === "packs" && req.method === "GET") {
     const { results } = await env.DB.prepare("SELECT id, imported_at, log FROM packs ORDER BY id DESC").all();
@@ -464,17 +469,23 @@ async function readJson(env: Env, pack: string, path: string) {
   return JSON.parse(await obj.text());
 }
 
-async function importPack(env: Env, pack: string): Promise<Response> {
+async function importPack(env: Env, pack: string, part?: { from: number; count: number }): Promise<Response> {
   if (!env.MEDIA) return bad("No MEDIA bucket bound", 503);
   const row = await env.DB.prepare("SELECT manifest FROM packs WHERE id = ?").bind(pack).first<{ manifest: string }>();
   if (!row) return bad("Upload the pack first", 404);
   const m = JSON.parse(row.manifest);
   const log: string[] = [];
   const warnings: string[] = [];
+  const e = m.entry ?? {};
+  const items = ITEM_LISTS.flatMap((key) => (e[key] ?? []) as string[]);
+  const slice = part ? items.slice(part.from, part.from + part.count) : items;
+  // Chai cards, sounds, translations and the rest come with the last slice.
+  const last = !part || part.from + part.count >= items.length;
 
   // Every content file must be here. Share PNGs, templates and writer tools are optional.
   const skipped: Record<string, number> = {};
   for (const f of m.files as { path: string }[]) {
+    if (part && !slice.includes(f.path) && !(last && !items.includes(f.path))) continue;
     if (await env.MEDIA.head(`${pack}/${f.path}`)) continue;
     if (OPTIONAL.test(f.path)) { const top = f.path.split("/")[0]; skipped[top] = (skipped[top] ?? 0) + 1; }
     else log.push(`Missing ${f.path}`);
@@ -482,10 +493,9 @@ async function importPack(env: Env, pack: string): Promise<Response> {
   if (log.length) return json({ ok: false, log }, 422);
   for (const [top, n] of Object.entries(skipped)) warnings.push(`${top}: ${n} file${n > 1 ? "s" : ""} not uploaded (the app doesn't need them)`);
 
-  const e = m.entry ?? {};
   const sfx = e.sfx ? await loadSfx(env, pack, e.sfx, m.files) : null;
   if (sfx) log.push(`Sound effects: ${Object.keys(sfx.effects).length} available`);
-  if (e.chaiPack) {
+  if (e.chaiPack && last) {
     const chai = await readJson(env, pack, e.chaiPack);
     if (chai.schema !== "upsc-pods/chai-pack@1") throw new Error(`${e.chaiPack}: expected upsc-pods/chai-pack@1`);
     let n = 0;
@@ -509,7 +519,16 @@ async function importPack(env: Env, pack: string): Promise<Response> {
     const r = await upsertItem(env, kind, pack, fixed, [note ?? `From pack ${pack}: ${data.review?.note ?? "draft"}`, ...notes, ...checkItem(kind, fixed)]);
     log.push(`${kind} ${data.id}: ${r}`);
   };
-  for (const key of ITEM_LISTS) for (const p of (e[key] ?? []) as string[]) await importItem(p);
+  for (const p of slice) await importItem(p);
+  const save = async () => {
+    const prev = part && part.from > 0 ? JSON.parse((await env.DB.prepare("SELECT log FROM packs WHERE id = ?").bind(pack).first<{ log: string }>())?.log ?? "[]") : [];
+    await env.DB.prepare("UPDATE packs SET imported_at = ?, log = ? WHERE id = ?")
+      .bind(new Date().toISOString(), JSON.stringify([...prev, ...log, ...warnings]), pack).run();
+  };
+  if (!last) {
+    await save();
+    return json({ ok: true, log, warnings, next: part!.from + part!.count, total: items.length });
+  }
   // Wave 2: thirty types on nine engines, every sample written by a model from a source text.
   for (const p of (e.wave2?.samples ?? []) as string[]) {
     await importItem(p, "Written by a model from a source text: check every fact against the source before approving");
@@ -554,8 +573,7 @@ async function importPack(env: Env, pack: string): Promise<Response> {
   }
   for (const p of (e.reels ?? []) as string[]) warnings.push(`${p}: reels are exported as MP4 for social media, not shown in the app`);
 
-  await env.DB.prepare("UPDATE packs SET imported_at = ?, log = ? WHERE id = ?")
-    .bind(new Date().toISOString(), JSON.stringify([...log, ...warnings]), pack).run();
+  await save();
   return json({ ok: true, log, warnings });
 }
 

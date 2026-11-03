@@ -32,8 +32,10 @@ Paste the key you use to sign in to the live Desk (the production one, or your p
 ```bash
 BASE=https://upsc-pods-production.chotu-aec.workers.dev npm run import:brief -- ../content/brief/aspiran-content
 ```
-- Success: a line like `221 files from 26 batches → pack brief-2026-11-03`, then a long list ending with
-  "Imported." Items you already had say "unchanged".
+- Success: a line like `221 files from 26 batches → pack brief-2026-11-03`, then a long list with
+  "… 40 of 221 done" lines along the way, ending with "Imported." Items you already had say "unchanged".
+- Failure "Unexpected token '<'" or "answered … with a page": fixed on 3 Nov (the import now goes 40 items at a
+  time). Run Step 3 again; it is safe to repeat.
 - Failure "401" or "Sign in": the key was wrong. Run Step 2 again.
 - Failure "fetch failed": check the internet connection and run Step 3 again.
 
