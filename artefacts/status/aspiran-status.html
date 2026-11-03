@@ -79,12 +79,12 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 
 <div class="wrap">
 <header>
-  <div class="asof">Updated 3 November 2026, late night</div>
+  <div class="asof">Updated 3 November 2026, 9:30 pm</div>
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
     <div class="tile"><b>8</b><span>things waiting on you</span></div>
-    <div class="tile"><b>296</b><span>content files checked and filed as drafts (B01–B29, P1–P5, A1–A2); next job written</span></div>
+    <div class="tile"><b>293</b><span>content files checked and filed as drafts (B01–B29, P1–P5, A1–A2); next job written</span></div>
     <div class="tile"><b>478</b><span>library items live and approved; Chai not published yet</span></div>
     <div class="tile"><b>9 of 10</b><span>teaching-plan build steps built (Hindi marking waits on a test)</span></div>
   </div>
@@ -108,7 +108,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <li><span class="n">1c</span><div><b>Approve the videos in the Desk</b><p>Episodes 10–35 are drafts (weeks 2026-45 and 2026-46), still with the placeholder voice. Desk → Videos now plays each one with its captions, sources and quiz, with Approve and Back to draft. Approving needs an editor name.</p></div></li>
     <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
-    <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
+    <li><span class="n">0</span><div><b>First Play Store test release (about an hour)</b><p>Your Play account is approved and the code is ready. Follow <code>artefacts/play-store-first-release-mac.md</code>: build the signed bundle in Android Studio (variant release), create the app, upload to Internal testing, add Play's signing SHA-1 and SHA-256 to Firebase, install from the opt-in link. Everything to paste is in <code>artefacts/play/store-listing.md</code>; the icon and feature graphic are in <code>artefacts/play/</code>. Later: <code>plus_yearly</code> product, and a closed test of 12 testers for 14 days if it's a personal account.</p></div></li>
     <li><span class="n">5</span><div><b>Cashfree to live mode</b><p>The web checkout for the ₹999 × 300 offer is still sandbox, so the site only collects contacts for now.</p></div></li>
     <li><span class="n">6</span><div><b>Editors and moderators</b><p>You and Pooja approve drafts in the Desk (nothing counts as checked until an English and a Hindi editor approve it). The crisis protocol still needs a moderator roster.</p></div></li>
   </ul>
@@ -121,6 +121,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Ready</span><div><b>Play Store build, 3 Nov</b><p>The kulhad from aspiran.in is now the icon everywhere: Android launcher (with a themed version), web app, Play icon and feature graphic (master: <code>artefacts/brand/aspiran-kulhad.svg</code>). The Play build leaves out Focus closing other apps until Google reviews that permission; the Focus screen says so. "Delete my account and data" on Android, and a Delete your account section on the privacy page for Play. Store listing, App content and Data safety answers written. Server live as version <code>66b13a30</code>.</p></div></li>
         <li><span class="chip c-done">Done</span><div><b>Prelims papers, reads by subject, part 2 filed, 3 Nov</b><p>The official Prelims GS Paper I for 2018, 2019, 2021, 2023 and 2025 is loaded with UPSC's own keys (498 questions, drafts). Long reads now sit under their subjects on web and Android. Part 2 from the other account is checked and filed: 40 printables, 12 talk scripts, 20 optional topics, 19 more videos and 40 recorded audio parts. The Desk now takes printables and audio lectures.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>One look: earth and sky, 3 Nov</b><p>The app and the website now share colours and Martel headings. The Adda is earth (chai, clay, cardamom); Prep is sky: a pale dawn by day, the website's night sky with still stars after dark. Buttons are chai everywhere. Rules and colours: <code>artefacts/design/earth-and-sky.md</code>. Live on the web; in the new test APK <code>artefacts/builds/aspiran-review-2026-11-03c.apk</code>.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>All the batches now have screens, 3 Nov</b><p>Practice now has Answer skeletons (60 real Mains 2025 questions: outline first, then compare), Ethics (GS4) with 24 cases, 40 thinkers and 60 terms, and CSAT one set a week (8 weeks, worked answers). Walk mode lists 20 guided walks. Today shows a welcome-back card after 3 days or more away, and a hard mock gets a quiet note. Each optional shows where to start, in order. The Plus banner is now a slim line with × (hidden for a week). Live on the web (version <code>c6d0a8be</code>); in the new test APK <code>artefacts/builds/aspiran-review-2026-11-03b.apk</code>.</p></div></li>
