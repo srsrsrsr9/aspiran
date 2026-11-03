@@ -61,7 +61,7 @@ Open https://upsc-pods-production.chotu-aec.workers.dev/desk → Library. New ta
 Essay topics, Term lists, Interview questions, Interview personas, Optional subject notes, Optional syllabus maps,
 Mains answer skeletons, GS4 cases, GS4 thinkers and terms, CSAT weekly sets, Walk scripts, Welcome-back days, and more
 Long reads, Optional priority lists. Mock papers now include the two CSAT papers. The videos are under
-Current affairs, week 2026-45, all drafts and Plus-only (`free: false`). Each card shows English and
+Current affairs, week 2026-45, all drafts, free for everyone once approved (`free: true`). Each card shows English and
 Hindi side by side, with a ⚑ flag for any facts to check against a source before approving.
 
 Everything made so far is in. Internal security notes sit under a new Prep subject, "Internal security".
