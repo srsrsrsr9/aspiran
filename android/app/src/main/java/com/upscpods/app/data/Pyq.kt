@@ -22,8 +22,9 @@ data class PyqQuestion(
     val answer: Int? = null,
 )
 
+/** provisional: UPSC's key published right after the exam, before its final key. */
 @Serializable
-data class PyqKey(val status: String = "none", val url: String? = null, val dropped: List<String> = emptyList())
+data class PyqKey(val status: String = "none", val url: String? = null, val dropped: List<String> = emptyList(), val provisional: Boolean = false)
 
 @Serializable
 data class PyqSource(val publisher: String = "UPSC", val url: String = "")

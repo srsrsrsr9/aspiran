@@ -1,0 +1,327 @@
+{
+ "n": 23,
+ "id": "peace-clause",
+ "title": "The WTO's peace clause shields India's grain stocks, for now",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "mains-gs3"
+ ],
+ "sources": [
+  "WTO General Council decision on public stockholding for food security purposes, 27 November 2014 (WT/L/939), interpreting the Bali Ministerial Decision WT/MIN(13)/38-WT/L/913 (2013)",
+  "WTO Agreement on Agriculture, Articles 6.3 and 7.2(b)",
+  "India's first invocation for rice, marketing year 2018-19, notified 31 March 2020 (TWN); again in 2024 for 2022-23 (Outlook Business)",
+  "MC14, Yaounde, concluded 30 March 2026 without a permanent solution (NEXT IAS; OWINFS)"
+ ],
+ "quiz": {
+  "q": "What does the peace clause protect?",
+  "options": [
+   "Public food stocks from WTO disputes",
+   "All farm export subsidies",
+   "India's tariffs on farm imports",
+   "Fertiliser subsidies from any limit"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Members agreed not to challenge, in WTO dispute settlement, developing countries' support for staple crops in existing public stockholding programmes, if conditions are met."
+ },
+ "script": [
+  [
+   [
+    "India buys grain at support prices,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and stores it for food security.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Under WTO farm rules, that support has a cap:",
+    "Under W T O farm rules, that support has a cap:",
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "10 percent of the crop's value,",
+    "ten percent of the crop's value,",
+    0.96,
+    0.1,
+    1.0
+   ],
+   [
+    "priced at 1986-88 prices.",
+    "priced at nineteen eighty-six to eighty-eight prices.",
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Cross it, and India could face a WTO dispute.",
+    "Cross it, and India could face a W T O dispute.",
+    1.0,
+    0.3,
+    1.0
+   ],
+   [
+    "Unless the peace clause applies.",
+    null,
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Agreed at Bali in 2013,",
+    "Agreed at Bali in twenty thirteen,",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and extended in 2014 until a permanent solution is found,",
+    "and extended in twenty fourteen until a permanent solution is found,",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "it stops members from challenging staple-crop stockholding in a dispute.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "India first invoked it in 2020, for rice,",
+    "India first invoked it in twenty twenty, for rice,",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and has invoked it again since.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But there is still no permanent solution,",
+    null,
+    0.95,
+    0.12,
+    1.0
+   ],
+   [
+    "not even at the WTO's March 2026 ministerial meeting.",
+    "not even at the W T O's March twenty twenty-six ministerial meeting.",
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A shield,",
+    null,
+    0.9,
+    0.15,
+    1.0
+   ],
+   [
+    "not a settlement.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "What does the peace clause protect?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "A shield for",
+    "India's grain",
+    "stocks"
+   ],
+   "icon": "scale"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "stat",
+   "heading": "The WTO cap on support",
+   "value": "10%",
+   "label": "of the crop's value",
+   "sub": "measured at 1986-88 prices",
+   "at": "10 percent"
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "chain",
+   "heading": "If India crosses the cap",
+   "steps": [
+    {
+     "text": "Support above the cap",
+     "at": "Cross it"
+    },
+    {
+     "text": "A WTO dispute",
+     "at": "WTO dispute"
+    },
+    {
+     "text": "Unless: the peace clause",
+     "at": "peace clause"
+    }
+   ]
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "list",
+   "heading": "The peace clause",
+   "items": [
+    {
+     "text": "Agreed at Bali, 2013",
+     "at": "Bali"
+    },
+    {
+     "text": "2014: until a permanent fix",
+     "at": "extended in 2014"
+    },
+    {
+     "text": "No disputes over staple-crop stocks",
+     "at": "staple-crop"
+    }
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "stat",
+   "heading": "India and the clause",
+   "value": "2020",
+   "label": "first invoked, for rice",
+   "sub": "invoked again since",
+   "at": "first invoked"
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "statement",
+   "lines": [
+    "Still no",
+    "permanent solution"
+   ],
+   "sub": "Not agreed at the WTO ministerial meeting, March 2026",
+   "emph": [
+    "permanent"
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "A shield,",
+    "not a settlement."
+   ],
+   "emph": [
+    "shield"
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Under the 27 Nov 2014 General Council decision, members will not challenge through WTO dispute settlement developing members' compliance with AoA Articles 6.3 and 7.2(b) for support to traditional staple food crops under public stockholding programmes",
+   "url": "https://www.wto.org/english/thewto_e/minist_e/mc9_e/nov14stockholding_e.htm"
+  },
+  {
+   "claim": "The mechanism stems from the Bali Ministerial Decision (2013) and continues until a permanent solution is agreed and adopted (2014 decision)",
+   "url": "https://www.wto.org/english/thewto_e/minist_e/mc9_e/nov14stockholding_e.htm",
+   "quote": "until a permanent solution is agreed and adopted"
+  },
+  {
+   "claim": "Support must stay within 10 percent of the value of production for developing countries, calculated using 1986-88 reference prices",
+   "url": "https://www.outlookbusiness.com/news/used-peace-clause-to-provide-excess-support-to-rice-farmers-india-to-wto",
+   "url2": "https://twn.my/title2/susagri/2020/sa792.htm"
+  },
+  {
+   "claim": "India first invoked the Bali decision for rice in a notification of 31 March 2020 (marketing year 2018-19)",
+   "url": "https://twn.my/title2/susagri/2020/sa792.htm",
+   "url2": "https://www.outlookbusiness.com/news/used-peace-clause-to-provide-excess-support-to-rice-farmers-india-to-wto"
+  },
+  {
+   "claim": "India invoked the peace clause again (reported April 2024, rice, 2022-23)",
+   "url": "https://www.outlookbusiness.com/news/used-peace-clause-to-provide-excess-support-to-rice-farmers-india-to-wto",
+   "url2": "https://twn.my/title2/susagri/2020/sa792.htm"
+  },
+  {
+   "claim": "MC14 (Yaounde) ended on 30 March 2026 without a permanent solution on public stockholding; India had demanded one",
+   "url": "https://owinfs.org/MC14-conclusion",
+   "url2": "https://www.nextias.com/ca/current-affairs/31-03-2026/wto-mc14"
+  },
+  {
+   "claim": "India procures grain at support prices (MSP) for public stocks",
+   "url": "https://www.nextias.com/ca/current-affairs/31-03-2026/wto-mc14",
+   "url2": "https://www.outlookbusiness.com/news/used-peace-clause-to-provide-excess-support-to-rice-farmers-india-to-wto"
+  }
+ ],
+ "review_note": "Peace clause text from the WTO page (2014 decision). The 10 percent de minimis and 1986-88 reference prices are AoA rules but sourced here to secondary reports; check against AoA Article 6.4. India's invocations (2020 first; again since) and the MC14 outcome are secondary-only. Simplified: the clause has conditions (existing programmes, transparency, no trade distortion) which the script compresses into 'stops members from challenging'. Not included: the number of times India has invoked it, rice export figures."
+}

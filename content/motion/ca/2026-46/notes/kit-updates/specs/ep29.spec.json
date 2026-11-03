@@ -1,0 +1,320 @@
+{
+ "n": 29,
+ "id": "joint-sitting",
+ "title": "A bill can become law even if the Rajya Sabha says no",
+ "format": "kinetic",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "sources": [
+  "Constitution of India, Article 108 (joint sitting) and Article 111 (assent to Bills)",
+  "Joint sittings held in 1961 (Dowry Prohibition Bill), 1978 (Banking Service Commission (Repeal) Bill) and 2002 (Prevention of Terrorism Bill)"
+ ],
+ "quiz": {
+  "q": "Which bill can never go to a joint sitting?",
+  "options": [
+   "A Money Bill",
+   "A bill the Rajya Sabha rejected",
+   "A bill stuck for over six months",
+   "A bill with disputed amendments"
+  ],
+  "answerIndex": 0,
+  "why": "Right. The proviso to Article 108(1) says it does not apply to a Money Bill; the other three are its exact triggers."
+ },
+ "script": [
+  [
+   [
+    "Can a bill become law if the Rajya Sabha rejects it?",
+    null,
+    1.0,
+    0.3,
+    1.0
+   ],
+   [
+    "For an ordinary bill, yes.",
+    null,
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A bill must pass both Houses,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "then get the President's assent.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "If one House rejects it,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "if they finally disagree on amendments,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "or if six months pass,",
+    null,
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "the President can call a joint sitting.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "There, a majority of members of both Houses, present and voting, decides.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It never applies to a Money Bill,",
+    null,
+    0.96,
+    0.12,
+    1.0
+   ],
+   [
+    "and constitutional amendments can't go to one.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It has happened only three times:",
+    null,
+    0.98,
+    0.12,
+    1.0
+   ],
+   [
+    "in 1961, 1978 and 2002.",
+    "in nineteen sixty-one, nineteen seventy-eight, and two thousand two.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Two Houses.",
+    null,
+    0.9,
+    0.2,
+    1.0
+   ],
+   [
+    "One way out of a deadlock.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Which bill can never go to a joint sitting?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Rajya Sabha",
+    "says no?"
+   ],
+   "icon": "building",
+   "emph": [
+    "yes."
+   ]
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "chain",
+   "heading": "The normal path",
+   "steps": [
+    {
+     "text": "Both Houses pass it",
+     "at": "both Houses"
+    },
+    {
+     "text": "President's assent",
+     "at": "assent"
+    }
+   ]
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "list",
+   "heading": "Article 108 triggers",
+   "items": [
+    {
+     "text": "Rejected by the other House",
+     "at": "rejects it"
+    },
+    {
+     "text": "Final disagreement on amendments",
+     "at": "disagree"
+    },
+    {
+     "text": "Six months pass",
+     "at": "six months"
+    }
+   ],
+   "emph": [
+    "joint",
+    "sitting."
+   ]
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "statement",
+   "lines": [
+    "Majority of both",
+    "Houses together"
+   ],
+   "emph": [
+    "majority"
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "compare",
+   "heading": "Never at a joint sitting",
+   "left": {
+    "label": "Money Bill",
+    "text": "Excluded by Article 108",
+    "at": "Money Bill"
+   },
+   "right": {
+    "label": "Amendments",
+    "text": "Constitution amendment bills",
+    "at": "constitutional amendments"
+   },
+   "warn": [
+    "never"
+   ]
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "stat",
+   "heading": "Joint sittings so far",
+   "value": "3",
+   "label": "1961, 1978, 2002",
+   "at": "three times"
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Two Houses.",
+    "One way out."
+   ],
+   "emph": [
+    "deadlock."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "A Bill becomes an Act when passed by both Houses and assented to by the President (Article 111)",
+   "url": "https://www.constitutionofindia.net/articles/article-111-assent-to-bills",
+   "url2": "https://vajiramandravi.com/current-affairs/article-111-of-indian-constitution/"
+  },
+  {
+   "claim": "Article 108(1): joint sitting if the Bill is rejected by the other House, the Houses finally disagree on amendments, or more than six months elapse after the other House receives it",
+   "url": "https://www.constitutionofindia.net/articles/article-108-joint-sitting-of-both-houses-in-certain-cases",
+   "url2": "https://vajiramandravi.com/current-affairs/joint-sitting-of-parliament/"
+  },
+  {
+   "claim": "Article 108(4): passed by a majority of the total number of members of both Houses present and voting",
+   "url": "https://www.constitutionofindia.net/articles/article-108-joint-sitting-of-both-houses-in-certain-cases",
+   "url2": "https://vajiramandravi.com/current-affairs/joint-sitting-of-parliament/",
+   "quote": "a majority of the total number of members of both Houses present and voting"
+  },
+  {
+   "claim": "Article 108 does not apply to a Money Bill; Constitution Amendment Bills cannot be referred to a joint sitting (Article 368 requires each House separately)",
+   "url": "https://www.constitutionofindia.net/articles/article-108-joint-sitting-of-both-houses-in-certain-cases",
+   "url2": "https://vajiramandravi.com/current-affairs/joint-sitting-of-parliament/"
+  },
+  {
+   "claim": "Joint sittings have been held three (3) times: 1961, 1978, 2002",
+   "url": "https://vajiramandravi.com/current-affairs/joint-sitting-of-parliament/",
+   "url2": "https://school.careers360.com/how-many-times-have-joint-sitting-of-parliament-held-in-india"
+  }
+ ],
+ "review_note": "Constitution text read via constitutionofindia.net (not the official Gazette copy); check against the Legislative Department text. 'Six months pass' compresses 'more than six months elapse from the date of reception of the Bill by the other House'. The President 'can call' = notifies intention to summon (Art. 108(1)); the bar on summoning after Lok Sabha dissolution (Art. 108(5)) was covered in episode 16 and left out here. Joint sitting count rests on two secondary sources; re-check that no further joint sitting has been held."
+}

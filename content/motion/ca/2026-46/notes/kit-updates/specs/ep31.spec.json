@@ -1,0 +1,274 @@
+{
+ "n": 31,
+ "id": "el-nino-monsoon",
+ "title": "El Niño usually weakens the monsoon, but not always",
+ "format": "whiteboard",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "sources": [
+  "IMD, end-of-season press release, southwest monsoon 2019 (El Nino and positive IOD; June-September season)",
+  "IMD long range forecast, April 2026, as reported by Down To Earth (El Nino expected; positive IOD could offset)",
+  "Down To Earth, 'El Nino may disrupt monsoons' (1997: about 101% of LPA); Anantam IAS explainer on El Nino and La Nina"
+ ],
+ "quiz": {
+  "q": "Which of these usually helps India's monsoon?",
+  "options": [
+   "La Niña",
+   "El Niño",
+   "A negative IOD",
+   "A warmer eastern Pacific"
+  ],
+  "answerIndex": 0,
+  "why": "Right. La Niña, the cooling phase in the central and eastern Pacific, tends to strengthen the Indian monsoon."
+ },
+ "script": [
+  [
+   [
+    "El Niño means a weak monsoon.",
+    "El Nino means a weak monsoon.",
+    1.0,
+    0.25,
+    1.0
+   ],
+   [
+    "Mostly.",
+    null,
+    0.88,
+    0.2,
+    1.0
+   ],
+   [
+    "Not always.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "El Niño is unusual warming of the sea surface in the central and eastern Pacific.",
+    "El Nino is unusual warming of the sea surface in the central and eastern Pacific.",
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "La Niña is unusual cooling.",
+    "La Nina is unusual cooling.",
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "El Niño tends to weaken India's June-to-September monsoon;",
+    "El Nino tends to weaken India's June-to-September monsoon;",
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "La Niña tends to strengthen it.",
+    "La Nina tends to strengthen it.",
+    0.98,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But in 1997, one of the strongest El Niños,",
+    "But in nineteen ninety-seven, one of the strongest El Ninos,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "India's monsoon rain was about normal.",
+    null,
+    0.94,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A positive Indian Ocean Dipole,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "a warmer western Indian Ocean,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "can push back.",
+    null,
+    0.92,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "That's why IMD's forecasts watch both oceans.",
+    "That's why I M D's forecasts watch both oceans.",
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A signal,",
+    null,
+    0.9,
+    0.15,
+    1.0
+   ],
+   [
+    "not a sentence.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Which of these usually helps India's monsoon?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "El Niño =",
+    "weak monsoon?"
+   ],
+   "icon": "drop"
+  },
+  {
+   "sent": [
+    1,
+    2
+   ],
+   "type": "compare",
+   "heading": "Two phases of the Pacific",
+   "left": {
+    "label": "El Niño",
+    "text": "Warming; tends to weaken monsoon",
+    "at": "unusual warming"
+   },
+   "right": {
+    "label": "La Niña",
+    "text": "Cooling; tends to strengthen it",
+    "at": "unusual cooling"
+   }
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "statement",
+   "lines": [
+    "1997: strong El Niño",
+    "Monsoon: about normal"
+   ]
+  },
+  {
+   "sent": [
+    4,
+    5
+   ],
+   "type": "chain",
+   "heading": "The other ocean",
+   "steps": [
+    {
+     "text": "Positive Indian Ocean Dipole",
+     "at": "positive Indian Ocean Dipole"
+    },
+    {
+     "text": "Can push back on El Niño",
+     "at": "can push back"
+    },
+    {
+     "text": "IMD watches both",
+     "at": "both oceans"
+    }
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "A signal,",
+    "not a sentence."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "El Nino is anomalous warming of sea surface temperatures in the central and eastern Pacific; La Nina is anomalous cooling in the same region",
+   "url": "https://anantamias.com/el-nino-la-nina/?pdf=1",
+   "url2": "https://www.downtoearth.org.in/environment/el-nino-may-disrupt-monsoons-38358"
+  },
+  {
+   "claim": "El Nino typically weakens the Indian monsoon; La Nina tends to strengthen it / is favourable",
+   "url": "https://anantamias.com/el-nino-la-nina/?pdf=1",
+   "url2": "https://www.downtoearth.org.in/environment/el-nino-may-disrupt-monsoons-38358"
+  },
+  {
+   "claim": "In 1997, one of the strongest El Ninos, monsoon rainfall was about normal (about 101% of LPA; +2%)",
+   "url": "https://www.downtoearth.org.in/environment/el-nino-may-disrupt-monsoons-38358",
+   "url2": "https://anantamias.com/el-nino-la-nina/?pdf=1"
+  },
+  {
+   "claim": "A positive Indian Ocean Dipole can offset El Nino's effect on the monsoon; IMD forecasts consider both ENSO and IOD",
+   "url": "https://mausam.imd.gov.in/backend/assets/press_release_pdf/IMD_Press_release_2019_monsoon.pdf",
+   "url2": "https://www.downtoearth.org.in/climate-change/south-west-monsoon-rainfall-to-be-below-normal-or-deficient-in-2026"
+  },
+  {
+   "claim": "The southwest monsoon season is June to September",
+   "url": "https://mausam.imd.gov.in/backend/assets/press_release_pdf/IMD_Press_release_2019_monsoon.pdf"
+  }
+ ],
+ "review_note": "Mostly secondary sources; IMD's 2019 end-of-season press release confirms the June-September season and IMD's use of El Nino and IOD. The 1997 figure differs slightly between sources (101% of LPA vs +2%), so the video says 'about normal' and '~100%'. Left out: the 2026 outcome (sources give a 12-13% deficit; still settling), the Walker circulation mechanism, Eurasian snow cover. The 'warmer western Indian Ocean' gloss for positive IOD is from the Anantam explainer."
+}

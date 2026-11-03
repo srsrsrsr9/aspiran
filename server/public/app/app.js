@@ -1649,17 +1649,40 @@ function mockResult(r) {
 
 // --- Long reading ------------------------------------------------------------------------------
 
+// Long reads, grouped by subject in syllabus order. The syllabus packs carry a topic; the first 16 reads (Oct packs) don't,
+// so their subject is listed here by id. The same list is in Android OffScreen.kt (READ_SUBJECTS).
+const READ_SUBJECTS = ["Ancient and medieval India, and culture", "Modern history", "World history", "Indian society", "Geography", "Polity",
+  "Governance and social justice", "International relations", "Economy", "Science and technology", "Environment", "Internal security",
+  "Ethics, integrity and aptitude"];
+const READ_SUBJECT_OF = {
+  "read:anc-mauryan-state-and-ashoka": 0, "read:art-temple-architecture-nagara-dravida": 0, "read:his-gandhian-mass-movements": 1,
+  "read:geo-indian-monsoon-mechanism": 4, "read:pol-election-commission-and-elections": 5, "read:pol-panchayati-raj": 5,
+  "read:soc-cooperative-federalism": 5, "read:soc-constitutional-safeguards-for-weaker-sections": 6, "read:ir-india-and-its-neighbourhood": 7,
+  "read:eco-gst-explained": 8, "read:eco-monetary-policy-explained": 8, "read:sci-biotechnology-basics": 9, "read:sci-indias-space-programme": 9,
+  "read:env-climate-change-agreements": 10, "read:env-protected-areas-network": 10, "read:eth-attitude-and-emotional-intelligence": 12,
+};
+const readSubject = (it) => it.data.topic ?? READ_SUBJECTS[READ_SUBJECT_OF[it.id]] ?? "Other";
+
 function viewRead(arg) {
   if (arg === "saved") return savedCards();
   if (arg) return reader(arg);
   const reads = libraryOf("read");
   const done = store.get("readDone", {});
+  const order = (s) => { const i = READ_SUBJECTS.indexOf(s); return i < 0 ? 99 : i; };
+  const subjects = [...new Set(reads.map(readSubject))].sort((a, b) => order(a) - order(b));
+  const pick = subjects.includes(store.get("readSubject", "")) ? store.get("readSubject", "") : "";
+  const shown = subjects.filter((s) => !pick || s === pick);
+  const row = (it) => h("div.card", h("div.row.between",
+    h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min${done[it.id] ? " · Read" : ""}`)),
+    h("a.btn", { href: "#read/" + encodeURIComponent(it.id) }, "Read")));
+  const choose = (s) => { store.set("readSubject", s); render(); };
   return h("div.col", h("h1", "Long reads"),
-    h("p.muted", "For a proper sit-down session. Text size and theme are in the reader. At the end, write what you remember before you check."),
+    h("p.muted", `${reads.length} reads across ${subjects.length} subjects. Text size and theme are in the reader. At the end, write what you remember before you check.`),
     reads.length === 0 && h("p", "Long reads appear here after an editor writes and approves them on the desk."),
-    reads.map((it) => h("div.card", h("div.row.between",
-      h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min · ${[it.data.gsPaper, it.data.topic].filter(Boolean).join(" · ")}${done[it.id] ? " · Read" : ""}`)),
-      h("a.btn", { href: "#read/" + encodeURIComponent(it.id) }, "Read")))),
+    reads.length > 0 && h("div.chips", { role: "group", "aria-label": "Subject" },
+      h("button.chip", { "aria-pressed": String(!pick), onclick: () => choose("") }, "All"),
+      subjects.map((s) => h("button.chip", { "aria-pressed": String(pick === s), onclick: () => choose(s) }, `${s} · ${reads.filter((it) => readSubject(it) === s).length}`))),
+    shown.map((s) => h("section", h("h2", s), reads.filter((it) => readSubject(it) === s).map(row))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved Chai cards"), h("div.small.muted", `${store.get("saved", []).length} saved`)), h("a.btn", { href: "#read/saved" }, "Read"))));
 }
 

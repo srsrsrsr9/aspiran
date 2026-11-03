@@ -1,0 +1,293 @@
+{
+ "n": 13,
+ "id": "indus-waters-treaty",
+ "title": "The Indus Waters Treaty has no exit clause for one side",
+ "format": "cards",
+ "tone": "SERIOUS",
+ "gsPaper": [
+  "mains-gs2"
+ ],
+ "sources": [
+  "Indus Waters Treaty, Karachi, 19 September 1960 (UN Treaty Series vol. 419, No. 6032): Articles I(5)-(6), II(1), III(1), XII(3)-(4)",
+  "India: MEA special briefing, 23 April 2025; Government of India statement, 31 August 2026 (Tribune; Al Jazeera)",
+  "Pakistan: National Security Committee statement, 24 April 2025 (Radio Pakistan; Dawn)",
+  "Court of Arbitration (Indus Waters Western Rivers Arbitration), award of 31 August 2026 (Tribune; Al Jazeera)"
+ ],
+ "quiz": {
+  "q": "Which rivers go to India under the treaty?",
+  "options": [
+   "Sutlej, Beas and Ravi",
+   "Indus, Jhelum and Chenab",
+   "Jhelum, Chenab and Ravi",
+   "Indus, Sutlej and Beas"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Article II gives India unrestricted use of the Eastern Rivers: the Sutlej, Beas and Ravi."
+ },
+ "script": [
+  [
+   [
+    "Can one country exit the Indus Waters Treaty by itself?",
+    null,
+    0.94,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Signed in 1960, it gives India the eastern rivers:",
+    "Signed in nineteen sixty, it gives India the eastern rivers:",
+    0.95,
+    0.15,
+    1.0
+   ],
+   [
+    "the Sutlej, the Beas and the Ravi.",
+    "the Sutlej, the Bee-aas and the Raa-vi.",
+    0.93,
+    0.3,
+    1.0
+   ],
+   [
+    "Pakistan, the western rivers:",
+    null,
+    0.94,
+    0.15,
+    1.0
+   ],
+   [
+    "the Indus, the Jhelum and the Chenab.",
+    "the Indus, the Jhay-lum and the Chi-naab.",
+    0.93,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Under Article XII, it can be changed or ended",
+    "Under Article twelve, it can be changed or ended",
+    0.95,
+    0.12,
+    1.0
+   ],
+   [
+    "only by a new treaty, ratified for that purpose.",
+    null,
+    0.88,
+    0.55,
+    1.0
+   ]
+  ],
+  [
+   [
+    "On 23 April 2025, India said it would hold the treaty in abeyance,",
+    "On the twenty-third of April, twenty twenty-five, India said it would hold the treaty in abeyance,",
+    0.95,
+    0.12,
+    1.0
+   ],
+   [
+    "until Pakistan abjures support for cross-border terrorism.",
+    null,
+    0.93,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The next day, Pakistan said the treaty has no provision for unilateral suspension.",
+    null,
+    0.95,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "On 31 August 2026, a Court of Arbitration held that the treaty remains in force.",
+    "On the thirty-first of August, twenty twenty-six, a Court of Arbitration held that the treaty remains in force.",
+    0.95,
+    0.25,
+    1.0
+   ],
+   [
+    "India rejected the award.",
+    null,
+    0.93,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "One text.",
+    null,
+    0.86,
+    0.3,
+    1.0
+   ],
+   [
+    "Two positions.",
+    null,
+    0.86,
+    0.6,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.93,
+    0.3,
+    1.0
+   ],
+   [
+    "Which rivers go to India under the treaty?",
+    null,
+    0.94,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "The Indus",
+    "Waters Treaty"
+   ],
+   "icon": "drop"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "compare",
+   "heading": "Who gets which rivers (1960)",
+   "left": {
+    "label": "India: east",
+    "text": "Sutlej, Beas, Ravi",
+    "at": "eastern rivers"
+   },
+   "right": {
+    "label": "Pakistan: west",
+    "text": "Indus, Jhelum, Chenab",
+    "at": "the western rivers"
+   }
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "statement",
+   "lines": [
+    "Article XII"
+   ],
+   "sub": "Modified or ended only by a duly ratified treaty concluded for that purpose",
+   "emph": [
+    "XII"
+   ]
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "compare",
+   "heading": "Formal statements, April 2025",
+   "left": {
+    "label": "India, 23 Apr",
+    "text": "Treaty held in abeyance",
+    "at": "abeyance"
+   },
+   "right": {
+    "label": "Pakistan, 24 Apr",
+    "text": "No provision for unilateral suspension",
+    "at": "no provision"
+   }
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "compare",
+   "heading": "31 August 2026",
+   "left": {
+    "label": "Court award",
+    "text": "Treaty remains in force",
+    "at": "remains in force"
+   },
+   "right": {
+    "label": "India",
+    "text": "Rejects the award",
+    "at": "India rejected"
+   }
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "One text.",
+    "Two positions."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "The treaty was signed at Karachi on 19 September 1960 (1960)",
+   "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20419/volume-419-I-6032-English.pdf"
+  },
+  {
+   "claim": "Eastern Rivers (Sutlej, Beas, Ravi) are available for the unrestricted use of India (Art. I(5), II(1)); Pakistan receives the Western Rivers (Indus, Jhelum, Chenab) (Art. I(6), III(1))",
+   "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20419/volume-419-I-6032-English.pdf"
+  },
+  {
+   "claim": "Article XII (3)-(4): the treaty may be modified, and continues in force until terminated, only by a duly ratified treaty concluded for that purpose between the two Governments",
+   "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20419/volume-419-I-6032-English.pdf",
+   "quote": "shall continue in force until terminated by a duly ratified treaty concluded for that purpose"
+  },
+  {
+   "claim": "On 23 April 2025 India announced the treaty would be held in abeyance with immediate effect until Pakistan credibly and irrevocably abjures its support for cross-border terrorism",
+   "url": "https://www.indembassyhanoi.gov.in/page/transcript-of-special-briefing-by-mea/",
+   "quote": "The Indus Waters Treaty of 1960 will be held in abeyance with immediate effect"
+  },
+  {
+   "claim": "On 24 April 2025 Pakistan's National Security Committee said the treaty contains no provision for unilateral suspension",
+   "url": "https://www.radio.gov.pk/24-04-2025/pakistan-rejects-indian-announcement-to-hold-indus-waters-treaty-in-abeyance",
+   "url2": "https://www.dawn.com/news/1906354/assault-on-rivers-will-be-act-of-war"
+  },
+  {
+   "claim": "On 31 August 2026 the Court of Arbitration unanimously held that India's abeyance decision was impermissible and the treaty remains in force",
+   "url": "https://www.tribuneindia.com/news/india/indus-waters-treaty-will-remain-in-abeyance-says-india-rejects-international-courts-verdict/",
+   "url2": "https://www.aljazeera.com/news/2026/9/1/pakistan-wins-indus-waters-battle-at-the-hague-but-india-threat-remains"
+  },
+  {
+   "claim": "India rejected the 31 August 2026 award, called the court illegally constituted, said it has never recognised it, and said abeyance remains in force",
+   "url": "https://www.tribuneindia.com/news/india/indus-waters-treaty-will-remain-in-abeyance-says-india-rejects-international-courts-verdict/",
+   "url2": "https://www.aljazeera.com/news/2026/9/1/pakistan-wins-indus-waters-battle-at-the-hague-but-india-threat-remains"
+  }
+ ],
+ "review_note": "SERIOUS and strictly neutral: treaty text plus each side's formal statements with dates, no verdict and no characterisation. Treaty text from the UN Treaty Series (primary); India's April 2025 statement from the MEA briefing transcript on an Indian embassy site (primary). Pakistan's statement and the August 2026 award and India's response come from two news sources each; the award text itself was not read. Left out on purpose: Pakistan's 'act of war' wording, the Pahalgam attack details, the Ratle/Kishenganga merits, the Neutral Expert process, the June 2025 supplemental award, any figures on water flows. Exit-clause title is accurate to Article XII(4): no unilateral termination clause. Re-check status immediately before release; this topic moves."
+}

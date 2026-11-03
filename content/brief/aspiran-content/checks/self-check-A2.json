@@ -1,0 +1,32 @@
+{
+  "batch": "A2",
+  "checksRun": [
+    "python3 -I tools/build.py (parse, JSON shape, checks below)",
+    "English words per talk 1,500-2,000, counted by code over chapter scripts",
+    "3-6 chapters, same count in en and hi; exactly 3 check questions with 4 options, answerIndex and why, same answers in en and hi",
+    "No digits (0-9 or Devanagari) in any spoken field; no 'as you can see' or 'you must'",
+    "Voice files: every part at most 1,500 characters, starts with '--- part N ---', ends at a sentence break",
+    "ethics-integrity-probity-accountability: en 1551 words, 5 chapters, ~13 min; hi 1771 words; voice parts en 8 (max 1491 chars), hi 8 (max 1482 chars); chars en 11479, hi 11158",
+    "ethics-emotional-intelligence: en 1543 words, 5 chapters, ~13 min; hi 1830 words; voice parts en 8 (max 1488 chars), hi 8 (max 1499 chars); chars en 11315, hi 11296",
+    "climate-negotiations-rio-to-now: en 1581 words, 5 chapters, ~14 min; hi 1687 words; voice parts en 9 (max 1485 chars), hi 8 (max 1493 chars); chars en 11777, hi 10548",
+    "federalism-centre-state: en 1598 words, 5 chapters, ~14 min; hi 1680 words; voice parts en 9 (max 1488 chars), hi 8 (max 1490 chars); chars en 11783, hi 10243",
+    "internal-security-basics: en 1565 words, 5 chapters, ~14 min; hi 1654 words; voice parts en 9 (max 1495 chars), hi 8 (max 1499 chars); chars en 11869, hi 10747",
+    "csat-reading-a-passage: en 1530 words, 5 chapters, ~13 min; hi 1671 words; voice parts en 8 (max 1498 chars), hi 7 (max 1496 chars); chars en 10535, hi 10064",
+    "Printed the first sentence of every chapter by code: chapter one opens with a welcome and what the talk covers, every later chapter names which part we are in",
+    "Re-read of all 6 talks while writing: Articles, Acts and dates against the Constitution text, MHA, UNFCCC and MoEFCC sources; check answers against the scripts; Hindi paragraphs follow the English paragraphs one to one"
+  ],
+  "issuesFound": [
+    "First drafts of all six talks except federalism were 1,244 to 1,496 English words, under the 1,500 floor",
+    "The Hindi title of the integrity talk said ईमानदारी for probity while the script used शुचिता"
+  ],
+  "fixed": [
+    "Added two to four paragraphs to each short talk, in English and the same in Hindi (Gandhi's talisman, the Arthashastra, whistle-blowers; EI versus IQ, a five-component scene, public criticism, sthitaprajna; the IPCC; border management, intelligence, police reform; a Hindi-English note and an inference question for CSAT). All now 1,530 to 1,598 words",
+    "Hindi title now reads 'सत्यनिष्ठा, शुचिता और जवाबदेही'"
+  ],
+  "stillOpen": [
+    "Hindi terms for the Hindi editor: शुचिता, प्रवर्तनीयता, सामाजिक अंकेक्षण, समानुभूति, आत्म-नियमन, स्थितप्रज्ञ, साझा लेकिन विभेदित ज़िम्मेदारियाँ, वैश्विक जायज़ा (global stocktake), हानि और क्षति, अवशिष्ट शक्तियाँ, प्रसादपर्यंत, विभाज्य पूल, अनुच्छेद दो सौ उनासी क (279A), विधिविरुद्ध क्रियाकलाप निवारण अधिनियम, पूर्वधारणा, निहितार्थ",
+    "Time-sensitive facts to recheck before release: COP30 and later COP outcomes; Sixteenth Finance Commission share; latest Supreme Court position on Governors' timelines; LWE status after the March 2026 target; Whistle Blowers Protection Act commencement",
+    "All dates and numbers are in each file's factsToCheck for a human check against the listed sources"
+  ],
+  "codeIssuesRemaining": []
+}

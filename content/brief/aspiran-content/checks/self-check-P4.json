@@ -1,0 +1,21 @@
+{
+  "batch": "P4",
+  "checksRun": [
+    "python3 -I build.py P4 (lib.check on every sheet: shape, 2-4 blocks, table <= 12 rows, row widths, en/hi same block shapes, Hindi in Devanagari, en <= 360 words, banned phrases, JSON re-read)",
+    "8 sheets / 0 issues",
+    "history-modern-india-timeline: en 155 words / hi 156 words, 2 blocks, ok",
+    "history-governors-general: en 157 words / hi 160 words, 2 blocks, ok",
+    "history-congress-sessions: en 165 words / hi 179 words, 2 blocks, ok",
+    "history-constitutional-acts: en 190 words / hi 197 words, 2 blocks, ok",
+    "culture-bhakti-sufi: en 165 words / hi 162 words, 2 blocks, ok",
+    "culture-temple-architecture: en 148 words / hi 147 words, 3 blocks, ok",
+    "culture-classical-dances: en 159 words / hi 164 words, 3 blocks, ok",
+    "culture-buddhism-jainism: en 161 words / hi 169 words, 2 blocks, ok"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "Hindi transliteration of names for the Hindi editor: विजयराघवाचारियर, अंबिका चरण मजूमदार, शंकरदेव, ऋजुपालिका, मोहिनीअट्टम.",
+    "All dates, tenures and session presidents are in factsToCheck for a human check against NCERT."
+  ]
+}

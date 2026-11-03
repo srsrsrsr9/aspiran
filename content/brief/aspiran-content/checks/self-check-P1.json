@@ -1,0 +1,23 @@
+{
+  "batch": "P1",
+  "checksRun": [
+    "python3 -I build.py P1 (lib.check on every sheet: shape, 2-4 blocks, table <= 12 rows, row widths, en/hi same block shapes, Hindi in Devanagari, en <= 360 words, banned phrases, JSON re-read)",
+    "10 sheets / 0 issues",
+    "polity-articles-to-know: en 216 words / hi 220 words, 3 blocks, ok",
+    "polity-fundamental-rights: en 221 words / hi 240 words, 3 blocks, ok",
+    "polity-dpsp-vs-fr: en 212 words / hi 224 words, 3 blocks, ok",
+    "polity-constitutional-bodies: en 185 words / hi 197 words, 2 blocks, ok",
+    "polity-amendments: en 183 words / hi 197 words, 2 blocks, ok",
+    "polity-emergency-types: en 174 words / hi 185 words, 2 blocks, ok",
+    "polity-money-vs-financial-bill: en 177 words / hi 179 words, 2 blocks, ok",
+    "polity-parliamentary-committees: en 188 words / hi 193 words, 3 blocks, ok",
+    "polity-writs: en 176 words / hi 188 words, 2 blocks, ok",
+    "polity-schedules: en 168 words / hi 173 words, 3 blocks, ok"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "Hindi legal terms follow the official Hindi text of the Constitution where known (परमादेश, उत्प्रेषण, अधिकार पृच्छा, प्रविलंबन, परिहार, लघुकरण); the Hindi editor should confirm.",
+    "Every article number, amendment year and committee size is in factsToCheck for a human check against legislative.gov.in and loksabha.nic.in."
+  ]
+}

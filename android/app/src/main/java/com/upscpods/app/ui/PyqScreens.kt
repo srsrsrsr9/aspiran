@@ -104,18 +104,19 @@ private fun PrelimsPyq(pq: Pyq) = FlatCard {
             FilterChip(selected = picked == k, onClick = { if (picked < 0) picked = k },
                 label = { Text("(${'a' + k}) $opt", modifier = Modifier.padding(vertical = 8.dp)) }, modifier = Modifier.fillMaxWidth())
         }
+        val keyName = if (pq.paper.answerKey.provisional) "provisional key" else "official key"
         if (picked >= 0) Text(
             when {
                 answer == null && pq.q.n in pq.paper.answerKey.dropped -> "UPSC dropped this question in its official key."
                 answer == null -> "UPSC hasn't published the official key for this paper yet, so we don't say which answer is right."
-                picked == answer -> "✓ Right, per UPSC's official key."
-                else -> "○ Not quite. UPSC's official key says (${'a' + answer}) ${pq.q.en.options.getOrElse(answer) { "" }}."
+                picked == answer -> "✓ Right, per UPSC's ${keyName}."
+                else -> "○ Not quite. UPSC's ${keyName} says (${'a' + answer}) ${pq.q.en.options.getOrElse(answer) { "" }}."
             },
             style = MaterialTheme.typography.bodyLarge,
         )
         val key = pq.paper.answerKey.url ?: pq.paper.source.url
         if (picked >= 0 && key.isNotBlank()) TextButton(onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(key))) }) {
-            Text(if (answer != null) "UPSC's answer key ↗" else "The paper on upsc.gov.in ↗")
+            Text(if (answer != null) "UPSC's $keyName ↗" else "The paper on upsc.gov.in ↗")
         }
     }
 }

@@ -1,0 +1,268 @@
+{
+ "n": 34,
+ "id": "balance-of-payments",
+ "title": "India's goods gap is huge. Its current account gap isn't.",
+ "format": "whiteboard",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "RBI, 'Developments in India's Balance of Payments during the First Quarter (April-June) of 2026-27', 1 September 2026"
+ ],
+ "quiz": {
+  "q": "Which account records remittances from abroad?",
+  "options": [
+   "The current account",
+   "The capital account",
+   "The financial account",
+   "The forex reserves"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Remittances are personal transfers, recorded in the current account along with goods, services and income."
+ },
+ "script": [
+  [
+   [
+    "From April to June 2026,",
+    "From April to June twenty twenty-six,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "India imported 86 billion dollars more goods than it exported.",
+    "India imported eighty-six billion dollars more goods than it exported.",
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Yet its current account deficit was just 4.2 billion:",
+    "Yet its current account deficit was just four point two billion:",
+    0.96,
+    0.15,
+    1.0
+   ],
+   [
+    "half a percent of GDP.",
+    "half a percent of G D P.",
+    0.92,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Why? The current account also counts services and transfers.",
+    null,
+    1.0,
+    0.3,
+    1.0
+   ],
+   [
+    "Net services brought in 51.6 billion;",
+    "Net services brought in fifty-one point six billion;",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "remittance receipts, 42.9 billion.",
+    "remittance receipts, forty-two point nine billion.",
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The other side records investment:",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "textbooks call it the capital account;",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "RBI data calls it the financial account.",
+    "R B I data calls it the financial account.",
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "That quarter, direct investment came in,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "while portfolio money flowed out.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Goods tell half the story.",
+    null,
+    0.92,
+    0.2,
+    1.0
+   ],
+   [
+    "Services and remittances tell the rest.",
+    null,
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Which account records remittances from abroad?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "A huge goods gap.",
+    "A small deficit?"
+   ],
+   "icon": "coin"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "stat",
+   "heading": "Current account, Apr-Jun 2026",
+   "value": "0.5%",
+   "label": "of GDP: deficit",
+   "sub": "4.2 billion dollars",
+   "at": "4.2 billion"
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "list",
+   "heading": "Apr-Jun 2026, billion dollars",
+   "items": [
+    {
+     "text": "Goods: -86.1",
+     "at": "services and transfers"
+    },
+    {
+     "text": "Net services: +51.6",
+     "at": "Net services"
+    },
+    {
+     "text": "Remittances: +42.9",
+     "at": "remittance"
+    }
+   ]
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "compare",
+   "heading": "The other side",
+   "left": {
+    "label": "Textbooks",
+    "text": "Capital account",
+    "at": "capital account"
+   },
+   "right": {
+    "label": "RBI data",
+    "text": "Financial account",
+    "at": "financial account"
+   }
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "statement",
+   "lines": [
+    "Goods: half the story"
+   ],
+   "sub": "Services and remittances tell the rest.",
+   "emph": [
+    "half"
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Q1 2026-27 (April-June 2026) merchandise trade deficit US$86.1 billion (86)",
+   "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63493",
+   "url2": "https://www.tribuneindia.com/news/current-account-deficit/indias-current-account-deficit-widens-to-usd-4-2-billion-in-q1-fy27-as-merchandise-trade-gap-rises-rbi"
+  },
+  {
+   "claim": "Current account deficit US$4.2 billion, 0.5% of GDP in Q1 2026-27",
+   "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63493",
+   "url2": "https://www.tribuneindia.com/news/current-account-deficit/indias-current-account-deficit-widens-to-usd-4-2-billion-in-q1-fy27-as-merchandise-trade-gap-rises-rbi"
+  },
+  {
+   "claim": "Net services receipts US$51.6 billion; personal transfer (remittance) receipts US$42.9 billion",
+   "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63493",
+   "url2": "https://www.tribuneindia.com/news/current-account-deficit/indias-current-account-deficit-widens-to-usd-4-2-billion-in-q1-fy27-as-merchandise-trade-gap-rises-rbi"
+  },
+  {
+   "claim": "Investment flows sit in the financial account in RBI's BoP data; the capital account in that format is narrow (capital transfers, non-produced non-financial assets)",
+   "url": "https://anantamias.com/current-affairs/india-balance-payments-q1-2026-27/",
+   "url2": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63493"
+  },
+  {
+   "claim": "Net FDI was an inflow (US$6.1 bn) and net FPI an outflow (US$9.6 bn) in Q1 2026-27",
+   "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63493",
+   "url2": "https://www.tribuneindia.com/news/current-account-deficit/indias-current-account-deficit-widens-to-usd-4-2-billion-in-q1-fy27-as-merchandise-trade-gap-rises-rbi"
+  }
+ ],
+ "review_note": "All figures from RBI's 1 September 2026 press release (primary) and are preliminary; they may be revised. The video shows 'Apr-Jun 2026' on every number. Remittance figure is gross personal transfer receipts as RBI reports it. Simplification: 'textbooks call it the capital account' reflects the older presentation; check the wording with the economy editor. Left out: reserve valuation changes, primary income, the year-ago comparison."
+}

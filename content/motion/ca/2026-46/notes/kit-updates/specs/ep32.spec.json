@@ -1,0 +1,312 @@
+{
+ "n": 32,
+ "id": "biodiversity-hotspots",
+ "title": "A biodiversity hotspot is defined by what it has lost",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "Critical Ecosystem Partnership Fund (CEPF), 'Biodiversity hotspots' (criteria; 36 hotspots)",
+  "India's four hotspots: Himalaya, Indo-Burma, Western Ghats, Sundaland (Nicobar Islands) (Padhai; Maps for UPSC)",
+  "Wild Life (Protection) Act, 1972: protected-area categories (WII ENVIS page); national park and sanctuary rules (GKToday; WildTrails)"
+ ],
+ "quiz": {
+  "q": "Which hotspot covers the Nicobar Islands?",
+  "options": [
+   "Sundaland",
+   "Indo-Burma",
+   "Western Ghats",
+   "Himalaya"
+  ],
+  "answerIndex": 0,
+  "why": "Right. India's part of the Sundaland hotspot is the Nicobar Islands; the Andamans fall in Indo-Burma."
+ },
+ "script": [
+  [
+   [
+    "A biodiversity hotspot isn't just rich in species.",
+    null,
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "It's defined by what it has lost.",
+    null,
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "To qualify, a region needs at least 1,500 plant species found nowhere else,",
+    "To qualify, a region needs at least fifteen hundred plant species found nowhere else,",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and must have lost at least 70 percent of its original vegetation.",
+    "and must have lost at least seventy percent of its original vegetation.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "There are 36 worldwide.",
+    "There are thirty-six worldwide.",
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "Four reach into India:",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "the Himalaya, Indo-Burma, the Western Ghats,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and Sundaland, through the Nicobar Islands.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But a hotspot is a conservation label, not a law.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Legal protection comes from the Wild Life Protection Act:",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "national parks, sanctuaries, conservation reserves and community reserves.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In a national park, grazing is not allowed.",
+    null,
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "In a sanctuary, the Chief Wildlife Warden can permit some rights.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Rich, and threatened,",
+    null,
+    0.92,
+    0.15,
+    1.0
+   ],
+   [
+    "by definition.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Which hotspot covers the Nicobar Islands?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Hotspots:",
+    "rich, and",
+    "already damaged"
+   ],
+   "icon": "pin"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "compare",
+   "heading": "Two tests for a hotspot",
+   "left": {
+    "label": "Endemic plants",
+    "text": "At least 1,500 found nowhere else",
+    "at": "at least 1,500"
+   },
+   "right": {
+    "label": "Habitat lost",
+    "text": "At least 70% of original vegetation",
+    "at": "70 percent"
+   }
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "list",
+   "heading": "36 worldwide; four reach India",
+   "items": [
+    {
+     "text": "Himalaya",
+     "at": "the Himalaya"
+    },
+    {
+     "text": "Indo-Burma",
+     "at": "Indo-Burma"
+    },
+    {
+     "text": "Western Ghats",
+     "at": "Western Ghats"
+    },
+    {
+     "text": "Sundaland (Nicobar Islands)",
+     "at": "Sundaland"
+    }
+   ]
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "list",
+   "heading": "Protection in law: the 1972 Act",
+   "items": [
+    {
+     "text": "National parks",
+     "at": "national parks"
+    },
+    {
+     "text": "Wildlife sanctuaries",
+     "at": "sanctuaries"
+    },
+    {
+     "text": "Conservation, community reserves",
+     "at": "conservation reserves"
+    }
+   ]
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "compare",
+   "heading": "Park or sanctuary?",
+   "left": {
+    "label": "National park",
+    "text": "No grazing",
+    "at": "national park"
+   },
+   "right": {
+    "label": "Sanctuary",
+    "text": "Some rights, if the Warden permits",
+    "at": "In a sanctuary"
+   }
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Rich, and",
+    "threatened"
+   ],
+   "emph": [
+    "threatened"
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "A hotspot must contain at least 1,500 (1500) species of vascular plants found nowhere else and have lost at least 70 percent of its primary native vegetation; there are 36 hotspots",
+   "url": "https://cepf.net/stories/biodiversity-hotspots",
+   "url2": "https://padhai.ai/geography/biodiversity-hotspots-in-india"
+  },
+  {
+   "claim": "Four hotspots include parts of India: Himalaya, Indo-Burma, Western Ghats (and Sri Lanka), and Sundaland (Nicobar Islands)",
+   "url": "https://padhai.ai/geography/biodiversity-hotspots-in-india",
+   "url2": "https://mapsforupsc.com/biodiversity-hotspots-in-india/"
+  },
+  {
+   "claim": "Hotspot criteria were formalised by Conservation International (a conservation framework, not a legal designation in India)",
+   "url": "https://padhai.ai/geography/biodiversity-hotspots-in-india",
+   "url2": "https://cepf.net/stories/biodiversity-hotspots"
+  },
+  {
+   "claim": "Protected areas under the Wild Life (Protection) Act 1972 include national parks, wildlife sanctuaries, conservation reserves and community reserves (1972)",
+   "url": "https://v1.wii.gov.in/node/4081",
+   "url2": "https://www.gktoday.in/types-of-protected-areas-in-india/"
+  },
+  {
+   "claim": "No grazing is allowed in national parks; in sanctuaries, certain rights may be allowed at the discretion of the Chief Wildlife Warden",
+   "url": "https://www.gktoday.in/types-of-protected-areas-in-india/",
+   "url2": "https://wildtrails.in/?p=1305"
+  }
+ ],
+ "review_note": "Hotspot criteria from CEPF (the hotspot programme's funder) plus an explainer; the 1,500 figure refers to endemic vascular plants. India's four hotspots from two explainers. The sanctuary-rights point (Chief Wildlife Warden's discretion) is in one source only (GKToday); check against WLPA sections 33 and 35. Protected-area counts are deliberately left out: the WII page is dated 2021 and its totals don't add up. Andamans are in Indo-Burma per Maps for UPSC; that supports the quiz explanation."
+}

@@ -1,0 +1,286 @@
+{
+ "n": 26,
+ "id": "project-cheetah",
+ "title": "Project Cheetah started with a court's permission",
+ "format": "whiteboard",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "Supreme Court order, Centre for Environment Law, WWF v. Union of India, 28 January 2020 (India Environment Portal; Down To Earth)",
+  "Arrivals: eight from Namibia (released 17 September 2022), twelve from South Africa (February 2023) (The Week; Wikipedia)",
+  "Population 52 as of September 2026, 32 born in India (Insights IAS; Punjab Kesari)"
+ ],
+ "quiz": {
+  "q": "Where did the first cheetahs come from?",
+  "options": [
+   "Namibia",
+   "South Africa",
+   "Botswana",
+   "Kenya"
+  ],
+  "answerIndex": 0,
+  "why": "Right. The first eight came from Namibia and were released at Kuno on 17 September 2022; twelve from South Africa followed in February 2023."
+ },
+ "script": [
+  [
+   [
+    "India's cheetahs didn't just come back.",
+    null,
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "A court had to say yes first.",
+    null,
+    0.94,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The cheetah was declared extinct in India in 1952.",
+    "The cheetah was declared extinct in India in nineteen fifty-two.",
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In January 2020, the Supreme Court allowed African cheetahs",
+    "In January twenty twenty, the Supreme Court allowed African cheetahs",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "to be brought to a suitable habitat.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It called this an introduction, not a re-introduction,",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and set up an expert committee to guide it.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The first eight came from Namibia,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "released at Kuno in September 2022.",
+    "released at Kuno in September twenty twenty-two.",
+    1.0,
+    0.25,
+    1.0
+   ],
+   [
+    "Twelve more came from South Africa in 2023.",
+    "Twelve more came from South Africa in twenty twenty-three.",
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "As of September 2026, India has over fifty cheetahs,",
+    "As of September twenty twenty-six, India has over fifty cheetahs,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "most of them born here.",
+    null,
+    0.95,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Permission came first.",
+    null,
+    0.92,
+    0.2,
+    1.0
+   ],
+   [
+    "The work came after.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Where did the first cheetahs come from?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Cheetahs:",
+    "a court said yes"
+   ],
+   "icon": "scale"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "stat",
+   "heading": "Declared extinct in India",
+   "value": "1952",
+   "label": "the year it was declared",
+   "at": "declared extinct"
+  },
+  {
+   "sent": [
+    2,
+    3
+   ],
+   "type": "chain",
+   "heading": "Supreme Court, Jan 2020",
+   "steps": [
+    {
+     "text": "Allowed: African cheetahs",
+     "at": "allowed African cheetahs"
+    },
+    {
+     "text": "To a suitable habitat",
+     "at": "suitable habitat"
+    },
+    {
+     "text": "An expert committee to guide it",
+     "at": "expert committee"
+    }
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "compare",
+   "heading": "Where they came from",
+   "left": {
+    "label": "Namibia",
+    "text": "First eight, Sept 2022",
+    "at": "from Namibia"
+   },
+   "right": {
+    "label": "South Africa",
+    "text": "Twelve, 2023",
+    "at": "from South Africa"
+   }
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "stat",
+   "heading": "As of September 2026",
+   "value": "50+",
+   "label": "cheetahs in India",
+   "sub": "most born in India",
+   "at": "over fifty"
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Permission first.",
+    "Work after."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "The cheetah was declared extinct in India in 1952",
+   "url": "https://www.theweek.in/news/india/2023/02/18/12-cheetahs-from-south-africa-arrive-in-madhya-pradesh.amp.html",
+   "url2": "https://www.insightsonindia.com/2026/09/17/the-cheetah/"
+  },
+  {
+   "claim": "On 28 January 2020 the Supreme Court allowed the introduction of African cheetahs to a suitable habitat in India (Centre for Environment Law, WWF v. Union of India)",
+   "url": "https://www.indiaenvironmentportal.org.in/in-court/order-of-the-supreme-court-regarding-introduction-of-african-cheetah-into-india-28012020",
+   "url2": "https://www.downtoearth.org.in/wildlife-biodiversity/african-cheetahs-can-be-brought-into-india-rules-supreme-court-69010"
+  },
+  {
+   "claim": "The Court said it would amount to an 'introduction' of the African cheetah, not a re-introduction, and formed a Committee of Experts to guide the process",
+   "url": "https://www.indiaenvironmentportal.org.in/in-court/order-of-the-supreme-court-regarding-introduction-of-african-cheetah-into-india-28012020",
+   "url2": "https://www.downtoearth.org.in/wildlife-biodiversity/african-cheetahs-can-be-brought-into-india-rules-supreme-court-69010",
+   "quote": "an 'introduction' of the African Cheetah and not a re-introduction"
+  },
+  {
+   "claim": "The first eight cheetahs came from Namibia and were released at Kuno on 17 September 2022 (2022)",
+   "url": "https://www.theweek.in/news/india/2023/02/18/12-cheetahs-from-south-africa-arrive-in-madhya-pradesh.amp.html",
+   "url2": "https://en.wikipedia.org/wiki/African_cheetah_translocation_to_India"
+  },
+  {
+   "claim": "Twelve cheetahs arrived from South Africa in February 2023",
+   "url": "https://www.theweek.in/news/india/2023/02/18/12-cheetahs-from-south-africa-arrive-in-madhya-pradesh.amp.html",
+   "url2": "https://en.wikipedia.org/wiki/African_cheetah_translocation_to_India"
+  },
+  {
+   "claim": "As of September 2026 India has 52 cheetahs (over fifty, 50+), 32 of them born in India",
+   "url": "https://www.insightsonindia.com/2026/09/17/the-cheetah/",
+   "url2": "https://english.punjabkesari.com/india/project-cheetah-marks-four-years-indias-population-stands-at-52"
+  }
+ ],
+ "review_note": "All sources are secondary. The SC order text was read through India Environment Portal's summary, not the order PDF. Counts are shown only as 'over fifty, as of September 2026' (sources report 52; others report 57-60 at other dates, so the number moves). 'Most born here' rests on 32 of 52. Left out: cheetah deaths, Gandhi Sagar, Botswana batch (not confirmed), the 2023 SC hearings on deaths."
+}

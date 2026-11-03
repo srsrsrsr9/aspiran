@@ -1,0 +1,21 @@
+{
+  "batch": "P2",
+  "checksRun": [
+    "python3 -I build.py P2 (lib.check on every sheet: shape, 2-4 blocks, table <= 12 rows, row widths, en/hi same block shapes, Hindi in Devanagari, en <= 360 words, banned phrases, JSON re-read)",
+    "8 sheets / 0 issues",
+    "economy-monetary-policy-tools: en 243 words / hi 273 words, 3 blocks, ok",
+    "economy-fiscal-terms: en 168 words / hi 167 words, 3 blocks, ok",
+    "economy-budget-documents: en 230 words / hi 222 words, 3 blocks, ok",
+    "economy-inflation-measures: en 158 words / hi 174 words, 2 blocks, ok",
+    "economy-balance-of-payments: en 152 words / hi 164 words, 3 blocks, ok",
+    "economy-financial-regulators: en 157 words / hi 167 words, 2 blocks, ok",
+    "economy-flagship-schemes: en 210 words / hi 217 words, 2 blocks, ok",
+    "economy-key-indices: en 179 words / hi 174 words, 3 blocks, ok"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "Hindi economic terms for the Hindi editor: स्थायी जमा सुविधा, सीमांत स्थायी सुविधा, अपस्फीतिकारक, अवस्फीति, मुद्रास्फीतिजनित मंदी, प्रभावी राजस्व घाटा.",
+    "Base years for CPI and national accounts changed in 2026; confirm the factsToCheck entries before release."
+  ]
+}

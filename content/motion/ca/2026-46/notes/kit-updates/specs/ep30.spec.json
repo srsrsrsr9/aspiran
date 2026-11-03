@@ -1,0 +1,287 @@
+{
+ "n": 30,
+ "id": "three-lists",
+ "title": "When Union and State laws clash, the Union usually wins. Usually.",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "sources": [
+  "Constitution of India, Articles 246, 248, 254 and 356; Seventh Schedule",
+  "S. R. Bommai v. Union of India, Supreme Court, 1994 (nine-judge bench)"
+ ],
+ "quiz": {
+  "q": "Who holds powers over subjects on no list?",
+  "options": [
+   "Parliament",
+   "State legislatures",
+   "The President",
+   "The Inter-State Council"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Article 248 gives Parliament exclusive power over any matter not in the State or Concurrent List (residuary powers)."
+ },
+ "script": [
+  [
+   [
+    "When a Union law and a State law clash, the Union usually wins.",
+    null,
+    1.0,
+    0.25,
+    1.0
+   ],
+   [
+    "Usually.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Article 246 splits law-making into three lists:",
+    "Article two forty-six splits law-making into three lists:",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "Union, State, and Concurrent.",
+    null,
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A subject on no list belongs to Parliament, under Article 248.",
+    "A subject on no list belongs to Parliament, under Article two forty-eight.",
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "If a State law clashes with Parliament's law on a Concurrent subject,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "the State law is void to that extent.",
+    null,
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Unless the President assents to it.",
+    null,
+    0.92,
+    0.2,
+    1.0
+   ],
+   [
+    "Then it prevails in that State,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "until Parliament legislates again.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "And Article 356, President's Rule?",
+    "And Article three fifty-six, President's Rule?",
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "In Bommai, in 1994, nine judges made it open to judicial review,",
+    "In Bommai, in nineteen ninety-four, nine judges made it open to judicial review,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "with majority tested on the floor.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The lists divide power.",
+    null,
+    0.92,
+    0.2,
+    1.0
+   ],
+   [
+    "The courts guard the balance.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Who holds powers over subjects on no list?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Union vs State:",
+    "who wins?"
+   ],
+   "icon": "scale"
+  },
+  {
+   "sent": [
+    1,
+    2
+   ],
+   "type": "list",
+   "heading": "Seventh Schedule, Article 246",
+   "items": [
+    {
+     "text": "Union List: Parliament",
+     "at": "Union, State"
+    },
+    {
+     "text": "State List: States",
+     "at": "Union, State"
+    },
+    {
+     "text": "Concurrent List: both",
+     "at": "Concurrent"
+    },
+    {
+     "text": "On no list: Parliament (Art. 248)",
+     "at": "on no list"
+    }
+   ]
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "chain",
+   "heading": "Article 254: a clash on a Concurrent subject",
+   "steps": [
+    {
+     "text": "State law void to that extent",
+     "at": "void"
+    },
+    {
+     "text": "Unless the President assents",
+     "at": "Unless the President"
+    },
+    {
+     "text": "Until Parliament legislates again",
+     "at": "until Parliament"
+    }
+   ]
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "statement",
+   "lines": [
+    "Article 356",
+    "is reviewable"
+   ],
+   "sub": "S. R. Bommai, 1994: nine judges; majority tested on the floor",
+   "emph": [
+    "reviewable"
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Lists divide power.",
+    "Courts guard balance."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Article 246 and the Seventh Schedule divide subjects into the Union, State and Concurrent Lists",
+   "url": "https://vajiramandravi.com/current-affairs/7th-schedule-of-indian-constitution/",
+   "url2": "https://anantamias.com/7th-schedule-of-indian-constitution/?pdf=1"
+  },
+  {
+   "claim": "Article 248: Parliament has exclusive power over any matter not enumerated in the State or Concurrent List (residuary powers)",
+   "url": "https://vajiramandravi.com/current-affairs/7th-schedule-of-indian-constitution/",
+   "url2": "https://anantamias.com/7th-schedule-of-indian-constitution/?pdf=1"
+  },
+  {
+   "claim": "Article 254(1): a State law repugnant to a Parliament law on a Concurrent matter is void to the extent of the repugnancy",
+   "url": "https://www.constitutionofindia.net/articles/article-254-inconsistency-between-laws-made-by-parliament-and-laws-made-by-the-legislatures-of-states/",
+   "url2": "https://vajiramandravi.com/current-affairs/7th-schedule-of-indian-constitution/",
+   "quote": "shall, to the extent of the repugnancy, be void"
+  },
+  {
+   "claim": "Article 254(2): a State law reserved for the President and assented prevails in that State; Parliament may later amend or repeal it",
+   "url": "https://www.constitutionofindia.net/articles/article-254-inconsistency-between-laws-made-by-parliament-and-laws-made-by-the-legislatures-of-states/",
+   "url2": "https://vajiramandravi.com/current-affairs/7th-schedule-of-indian-constitution/"
+  },
+  {
+   "claim": "S. R. Bommai (1994), nine-judge bench: Article 356 proclamations are subject to judicial review; majority must be tested on the floor of the House (246, 248, 254, 356)",
+   "url": "https://vajiramandravi.com/current-affairs/sr-bommai-vs-union-of-india/",
+   "url2": "https://www.drishtiias.com/daily-updates/daily-news-analysis/s-r-bommai-v-union-of-india-case-1994/print_manually"
+  }
+ ],
+ "review_note": "Constitution text read via constitutionofindia.net and two explainers, not the official Gazette copy. Simplification: Article 254(1) also covers conflicts with Union List laws; the script frames it for Concurrent subjects, where 254(2) applies. Entry counts of each list are deliberately left out (sources disagree after amendments). Episode 8 already covers Bommai in depth, so it gets one line here. Title is a framing; accurate to Art. 254(2)."
+}

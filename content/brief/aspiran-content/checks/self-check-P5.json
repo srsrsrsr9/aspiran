@@ -1,0 +1,20 @@
+{
+  "batch": "P5",
+  "checksRun": [
+    "python3 -I build.py P5 (lib.check on every sheet: shape, 2-4 blocks, table <= 12 rows, row widths, en/hi same block shapes, Hindi in Devanagari, en <= 360 words, banned phrases, JSON re-read)",
+    "6 sheets / 0 issues",
+    "ethics-thinkers: en 235 words / hi 237 words, 2 blocks, ok",
+    "ethics-terms: en 177 words / hi 204 words, 3 blocks, ok",
+    "ethics-case-study-frame: en 179 words / hi 193 words, 3 blocks, ok",
+    "csat-formulas: en 248 words / hi 260 words, 2 blocks, ok",
+    "csat-reasoning-patterns: en 219 words / hi 227 words, 2 blocks, ok",
+    "csat-exam-day-checklist: en 152 words / hi 168 words, 3 blocks, ok",
+    "csat-formulas: 13 assertions run in p5.py before saving: pct_change(80, 100) = 25.0; successive(20, -10) = 8.0; check 1.2*0.9 = 8.0; profit_pct(400, 500) = 25.0; si(5000, 8, 3) = 1200.0; ci(10000, 10, 2) = 2100.0; avg_speed(40, 60) = 48.0; work(12, 6) = 4.0; share(900, [2,3,4]) = [200.0, 300.0, 400.0]; new_avg(4, 15, 25) = 17.0; handshakes(10) = 45; clock(3, 40) = 130.0; comb(5, 3) = 10"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "Hindi editor: प्रोबिटी kept with ईमानदारी in brackets because Hindi books vary; संचय vs संयोजन for combinations; न्याय-वाक्य for syllogism.",
+    "Exam-day rules (entry time, allowed items, negative marking, CSAT qualifying mark) must be checked against the next UPSC notice before release."
+  ]
+}

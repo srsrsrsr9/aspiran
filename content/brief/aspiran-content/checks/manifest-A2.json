@@ -1,0 +1,73 @@
+{
+  "batch": "A2",
+  "made": "2026-11-03",
+  "model": "Claude Opus 5.5",
+  "kind": "audio-lecture",
+  "files": [
+    {
+      "path": "audio/ethics-integrity-probity-accountability.json",
+      "id": "ethics-integrity-probity-accountability",
+      "items": 1,
+      "voice": [
+        "audio/ethics-integrity-probity-accountability.en.voice.txt",
+        "audio/ethics-integrity-probity-accountability.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/ethics-emotional-intelligence.json",
+      "id": "ethics-emotional-intelligence",
+      "items": 1,
+      "voice": [
+        "audio/ethics-emotional-intelligence.en.voice.txt",
+        "audio/ethics-emotional-intelligence.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/climate-negotiations-rio-to-now.json",
+      "id": "climate-negotiations-rio-to-now",
+      "items": 1,
+      "voice": [
+        "audio/climate-negotiations-rio-to-now.en.voice.txt",
+        "audio/climate-negotiations-rio-to-now.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/federalism-centre-state.json",
+      "id": "federalism-centre-state",
+      "items": 1,
+      "voice": [
+        "audio/federalism-centre-state.en.voice.txt",
+        "audio/federalism-centre-state.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/internal-security-basics.json",
+      "id": "internal-security-basics",
+      "items": 1,
+      "voice": [
+        "audio/internal-security-basics.en.voice.txt",
+        "audio/internal-security-basics.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/csat-reading-a-passage.json",
+      "id": "csat-reading-a-passage",
+      "items": 1,
+      "voice": [
+        "audio/csat-reading-a-passage.en.voice.txt",
+        "audio/csat-reading-a-passage.hi.voice.txt"
+      ]
+    }
+  ],
+  "counts": {
+    "talks": 6,
+    "voiceFiles": 12
+  },
+  "openQuestions": [
+    "Same voice-file layout as A1: title, chapters, the three check questions read with options, then the answers, then a goodbye. Cut at 'Three questions to check yourself' / 'अब खुद को जाँचने के लिए तीन सवाल' if the app wants the quiz separate.",
+    "csat-reading-a-passage reads an original practice passage aloud inside chapter four and works through four questions on it. In the app it may help to show that passage as text under the player.",
+    "internal-security-basics is written in neutral, general terms with no operational detail; it names the border forces and their borders as given in MHA reports, and does not discuss any specific incident beyond the 2008 Mumbai attacks as the reason the NIA was set up.",
+    "climate-negotiations-rio-to-now stops at COP30 (Belém, November 2025) without describing its outcome, and asks listeners to check the latest COP; Claude Code or an editor may want to add one sentence on COP30 and COP31 once checked.",
+    "The two ethics talks pair well (integrity, probity and accountability; emotional intelligence) and could be linked as a GS4 series."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "batch": "B29",
+  "made": "2026-11-02",
+  "model": "Claude Opus 5.5",
+  "files": [
+    {
+      "path": "optionals/geography/nodes/geo-p1-08.json",
+      "id": "geo-p1-08",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-12.json",
+      "id": "geo-p1-12",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-24.json",
+      "id": "geo-p1-24",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p1-38.json",
+      "id": "geo-p1-38",
+      "items": 1
+    },
+    {
+      "path": "optionals/geography/nodes/geo-p2-04.json",
+      "id": "geo-p2-04",
+      "items": 1
+    }
+  ],
+  "counts": {
+    "nodeFiles": 5,
+    "priorityFiles": 0,
+    "practiceQuestions": 15,
+    "recallCards": 60,
+    "skeletons": 15,
+    "examples": 20,
+    "thinkers": 19
+  },
+  "openQuestions": [
+    "Nodes follow the Geography priority list in B25, ranks 1 to 5: geo-p1-08 monsoons and jet streams, geo-p1-24 quantitative revolution and later approaches, geo-p1-38 central place and growth pole theories, geo-p1-12 climate change and urban climate, geo-p2-04 Indian monsoon, cyclones and western disturbances.",
+    "geo-p1-08 and geo-p2-04 overlap on purpose: p1-08 holds the theory, p2-04 the Indian season and rainfall pattern. Claude Code may want to cross-link them.",
+    "Geography nodes carry thinkers (Halley, Flohn, Christaller and others) to keep the node format; Claude Code may prefer to label the field 'key scientists' in the app for this optional.",
+    "Climate figures (CO2 ppm, warming since pre-industrial) change each year and are flagged in factsToCheck for updating before release."
+  ]
+}

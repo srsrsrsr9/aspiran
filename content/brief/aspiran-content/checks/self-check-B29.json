@@ -1,0 +1,20 @@
+{
+  "batch": "B29",
+  "checksRun": [
+    "python3 -I tools/lib.py check B29",
+    "5 files: priority 0, nodes 5 / 0 issues",
+    "Note words en/hi by code: geo-p1-08 476/506, geo-p1-12 427/493, geo-p1-24 392/474, geo-p1-38 443/512, geo-p2-04 490/537 (limit 600)",
+    "Recall kinds counted by code: 3 of each kind in every node",
+    "Strict re-read of all 5 nodes: physical facts and dates, diagrams described match the text, Hindi match, reader questions at the end of every note section"
+  ],
+  "issuesFound": [
+    "geo-p1-08 Hindi treated ऋतु as masculine ('गीला ग्रीष्म ऋतु')"
+  ],
+  "fixed": [
+    "Changed to 'गीली ग्रीष्म ऋतु और सूखी शीत ऋतु होती है' in geo-p1-08"
+  ],
+  "stillOpen": [
+    "Hindi terms need the Hindi editor: पुरवा/पछुआ जेट, मानसून गर्त, देहली (threshold), परास (range), समदैशिक मैदान (isotropic plain), प्रतिक्षेप प्रभाव (backwash), प्रेरक उद्योग (propulsive industry), शमन/अनुकूलन",
+    "IMD normal dates, rainfall averages and cyclone death tolls in factsToCheck need a human check against IMD sources"
+  ]
+}

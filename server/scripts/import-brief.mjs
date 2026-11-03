@@ -32,6 +32,8 @@ const SCHEMA_OF = [
   [/^csat\//, "aspiran/csat-week@1"],
   [/^walk\//, "aspiran/walk-script@1"],
   [/^restart\//, "aspiran/restart-day@1"],
+  [/^printables\//, "aspiran/printable@1"],
+  [/^audio\/[^/]+\.json$/, "aspiran/audio-lecture@1"],
 ];
 
 const checks = join(src, "checks");

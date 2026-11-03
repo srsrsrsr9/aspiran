@@ -245,17 +245,43 @@ private fun PieceTile(item: LibraryItem, engine: String, subject: String, n: Int
 
 // --- Long reads -----------------------------------------------------------------------------------------
 
+// Long reads, grouped by subject in syllabus order. The syllabus packs carry a topic; the first 16 reads (Oct packs) don't,
+// so their subject is listed here by id. The same list is in the web app's app.js (READ_SUBJECTS).
+internal val READ_SUBJECTS = listOf("Ancient and medieval India, and culture", "Modern history", "World history", "Indian society", "Geography", "Polity",
+    "Governance and social justice", "International relations", "Economy", "Science and technology", "Environment", "Internal security",
+    "Ethics, integrity and aptitude")
+private val READ_SUBJECT_OF = mapOf(
+    "read:anc-mauryan-state-and-ashoka" to 0, "read:art-temple-architecture-nagara-dravida" to 0, "read:his-gandhian-mass-movements" to 1,
+    "read:geo-indian-monsoon-mechanism" to 4, "read:pol-election-commission-and-elections" to 5, "read:pol-panchayati-raj" to 5,
+    "read:soc-cooperative-federalism" to 5, "read:soc-constitutional-safeguards-for-weaker-sections" to 6, "read:ir-india-and-its-neighbourhood" to 7,
+    "read:eco-gst-explained" to 8, "read:eco-monetary-policy-explained" to 8, "read:sci-biotechnology-basics" to 9, "read:sci-indias-space-programme" to 9,
+    "read:env-climate-change-agreements" to 10, "read:env-protected-areas-network" to 10, "read:eth-attitude-and-emotional-intelligence" to 12,
+)
+internal fun readSubject(id: String, r: LongRead): String = r.topic.ifBlank { READ_SUBJECT_OF[id]?.let { READ_SUBJECTS[it] } ?: "Other" }
+
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi: Boolean, onOpen: (String) -> Unit, onClose: () -> Unit) {
     val done = remember(reads) { prep.readDone() }
+    val bySubject = remember(reads) {
+        reads.groupBy { (item, r) -> readSubject(item.id, r) }.toSortedMap(compareBy { READ_SUBJECTS.indexOf(it).let { i -> if (i < 0) 99 else i } })
+    }
+    var pick by rememberSaveable { mutableStateOf("") }
     PrepPage("Long reads", onClose) {
-        Text("For a proper sit-down session. Text size is in the reader. At the end, write what you remember before you check.", style = MaterialTheme.typography.bodyMedium)
+        Text("${reads.size} reads across ${bySubject.size} subjects. Text size is in the reader. At the end, write what you remember before you check.", style = MaterialTheme.typography.bodyMedium)
         if (reads.isEmpty()) Text("Long reads appear here after an editor writes and approves them on the desk.")
-        reads.forEach { (item, r) ->
-            FlatCard(Modifier.clickable { onOpen(item.id) }) {
-                Column(Modifier.padding(16.dp)) {
-                    Text(r.title.pick(hindi && item.hindi), style = MaterialTheme.typography.titleMedium)
-                    Muted("${r.minutes} min · " + listOf(r.gsPaper, r.topic).filter { it.isNotBlank() }.joinToString(" · ") + if (done[item.id] != null) " · Read" else "")
+        if (reads.isNotEmpty()) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = pick.isEmpty(), onClick = { pick = "" }, label = { Text("All") })
+            bySubject.forEach { (s, list) -> FilterChip(selected = pick == s, onClick = { pick = s }, label = { Text("$s · ${list.size}") }) }
+        }
+        bySubject.filterKeys { pick.isEmpty() || it == pick }.forEach { (s, list) ->
+            Text(s, style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 8.dp))
+            list.forEach { (item, r) ->
+                FlatCard(Modifier.clickable { onOpen(item.id) }) {
+                    Column(Modifier.padding(16.dp)) {
+                        Text(r.title.pick(hindi && item.hindi), style = MaterialTheme.typography.titleMedium)
+                        Muted("${r.minutes} min" + if (done[item.id] != null) " · Read" else "")
+                    }
                 }
             }
         }

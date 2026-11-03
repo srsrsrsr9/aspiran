@@ -1,0 +1,73 @@
+{
+  "batch": "A1",
+  "made": "2026-11-03",
+  "model": "Claude Opus 5.5",
+  "kind": "audio-lecture",
+  "files": [
+    {
+      "path": "audio/union-budget.json",
+      "id": "union-budget",
+      "items": 1,
+      "voice": [
+        "audio/union-budget.en.voice.txt",
+        "audio/union-budget.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/parliament-year.json",
+      "id": "parliament-year",
+      "items": 1,
+      "voice": [
+        "audio/parliament-year.en.voice.txt",
+        "audio/parliament-year.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/rbi-sets-rates.json",
+      "id": "rbi-sets-rates",
+      "items": 1,
+      "voice": [
+        "audio/rbi-sets-rates.en.voice.txt",
+        "audio/rbi-sets-rates.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/monsoon-start-to-finish.json",
+      "id": "monsoon-start-to-finish",
+      "items": 1,
+      "voice": [
+        "audio/monsoon-start-to-finish.en.voice.txt",
+        "audio/monsoon-start-to-finish.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/freedom-struggle-1857-1919.json",
+      "id": "freedom-struggle-1857-1919",
+      "items": 1,
+      "voice": [
+        "audio/freedom-struggle-1857-1919.en.voice.txt",
+        "audio/freedom-struggle-1857-1919.hi.voice.txt"
+      ]
+    },
+    {
+      "path": "audio/freedom-struggle-1919-1947.json",
+      "id": "freedom-struggle-1919-1947",
+      "items": 1,
+      "voice": [
+        "audio/freedom-struggle-1919-1947.en.voice.txt",
+        "audio/freedom-struggle-1919-1947.hi.voice.txt"
+      ]
+    }
+  ],
+  "counts": {
+    "talks": 6,
+    "voiceFiles": 12
+  },
+  "openQuestions": [
+    "Each voice file reads, in order: the talk title, each chapter title and script, the three check questions with their options, then the answers with the reason, then a one-line goodbye. If the app wants to play the questions as a separate quiz, cut the voice files at the line 'Three questions to check yourself' (Hindi: 'अब खुद को जाँचने के लिए तीन सवाल').",
+    "All spoken text has numbers in words, including titles, so the freedom-struggle titles read 'part one: from eighteen fifty-seven to nineteen nineteen'. Claude Code may want to add a short display title with digits (for example 'Freedom struggle 1: 1857–1919') for the app list.",
+    "minutes is an estimate from the English word count plus the check section, at about 140 words a minute; it can be replaced with the real mp3 length after recording.",
+    "freedom-struggle-1857-1919 and freedom-struggle-1919-1947 are a pair; part two opens by pointing back to part one. They could be linked as a series in the app.",
+    "The Partition passage in freedom-struggle-1919-1947 deliberately gives no casualty or displacement figure, because estimates vary widely; it says 'many millions' displaced and 'large numbers' killed."
+  ]
+}

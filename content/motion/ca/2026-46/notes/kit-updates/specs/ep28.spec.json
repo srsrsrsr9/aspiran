@@ -1,0 +1,292 @@
+{
+ "n": 28,
+ "id": "liquidity-corridor",
+ "title": "The reverse repo stopped being the floor in 2022",
+ "format": "whiteboard",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "RBI, Statement on Developmental and Regulatory Policies, April 2022 (SDF as floor of the LAF corridor; FRRR at 3.35 per cent retained)",
+  "RBI, Governor's Statement, 7 October 2026 (repo 5.50, SDF 5.25, MSF and Bank Rate 5.75 per cent)"
+ ],
+ "quiz": {
+  "q": "Which facility is now the floor of the RBI's corridor?",
+  "options": [
+   "Standing Deposit Facility",
+   "Fixed-rate reverse repo",
+   "Marginal Standing Facility",
+   "The Bank Rate"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Since April 2022 the Standing Deposit Facility, 25 bps below repo, is the floor; the MSF is the ceiling."
+ },
+ "script": [
+  [
+   [
+    "Many notes still call the reverse repo the floor for short-term rates.",
+    null,
+    1.02,
+    0.2,
+    1.0
+   ],
+   [
+    "Since 2022, it isn't.",
+    "Since twenty twenty-two, it isn't.",
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The RBI steers overnight rates with a corridor",
+    "The R B I steers overnight rates with a corridor",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "around its policy repo rate.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The ceiling is the Marginal Standing Facility rate,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "a quarter point above repo.",
+    null,
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In April 2022, a new floor arrived:",
+    "In April twenty twenty-two, a new floor arrived:",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "the Standing Deposit Facility,",
+    null,
+    0.96,
+    0.1,
+    1.0
+   ],
+   [
+    "a quarter point below, with no collateral needed.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The fixed-rate reverse repo stayed in the toolkit,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "but outside the corridor.",
+    null,
+    0.94,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "As of October 2026:",
+    "As of October twenty twenty-six:",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "repo 5.5,",
+    "repo five point five,",
+    0.96,
+    0.1,
+    1.0
+   ],
+   [
+    "deposit facility 5.25,",
+    "deposit facility five point two five,",
+    0.96,
+    0.1,
+    1.0
+   ],
+   [
+    "MSF 5.75 percent.",
+    "M S F five point seven five percent.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Learn the corridor,",
+    null,
+    0.92,
+    0.15,
+    1.0
+   ],
+   [
+    "not just the rate.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Which facility is now the floor of the RBI's corridor?",
+    "Which facility is now the floor of the R B I's corridor?",
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Not the floor",
+    "any more"
+   ],
+   "icon": "coin"
+  },
+  {
+   "sent": [
+    1,
+    2
+   ],
+   "type": "chain",
+   "heading": "The RBI's corridor",
+   "steps": [
+    {
+     "text": "Policy repo rate in the middle",
+     "at": "policy repo rate"
+    },
+    {
+     "text": "Ceiling: MSF, a quarter above",
+     "at": "Marginal Standing"
+    }
+   ]
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "compare",
+   "heading": "The floor since April 2022",
+   "left": {
+    "label": "Floor now",
+    "text": "Standing Deposit Facility",
+    "at": "Standing Deposit"
+   },
+   "right": {
+    "label": "Reverse repo",
+    "text": "Kept, outside the corridor",
+    "at": "fixed-rate reverse repo"
+   }
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "list",
+   "heading": "As of October 2026",
+   "items": [
+    {
+     "text": "MSF: 5.75%",
+     "at": "MSF 5.75"
+    },
+    {
+     "text": "Repo: 5.50%",
+     "at": "repo 5.5"
+    },
+    {
+     "text": "SDF: 5.25%",
+     "at": "deposit facility 5.25"
+    }
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Learn the corridor,",
+    "not just the rate."
+   ],
+   "emph": [
+    "corridor"
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "In April 2022 the SDF replaced the fixed rate reverse repo (FRRR) as the floor of the LAF corridor (2022)",
+   "url": "https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx?Id=20933",
+   "url2": "https://moneylife.in/article/rbi-keeps-repo-rate-unchanged-at-4-percentage-introduces-standing-deposit-facility-at-25bps-below-policy-rate/66847.html",
+   "quote": "the SDF will replace the fixed rate reverse repo (FRRR) as the floor"
+  },
+  {
+   "claim": "The SDF is 25 bps below the repo rate (a quarter point) and absorbs liquidity without collateral; the MSF is 25 bps above repo and is the ceiling",
+   "url": "https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx?Id=20933"
+  },
+  {
+   "claim": "The FRRR (3.35 per cent then) was retained in the toolkit but is no longer the corridor floor",
+   "url": "https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx?Id=20933",
+   "url2": "https://moneylife.in/article/rbi-keeps-repo-rate-unchanged-at-4-percentage-introduces-standing-deposit-facility-at-25bps-below-policy-rate/66847.html"
+  },
+  {
+   "claim": "As of 7 October 2026: policy repo rate 5.50 (5.5) per cent, SDF 5.25 per cent, MSF and Bank Rate 5.75 per cent",
+   "url": "https://rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=63744"
+  }
+ ],
+ "review_note": "Primary: RBI April 2022 statement and RBI 7 October 2026 Governor's statement. Moving numbers carry 'as of October 2026' on screen and in narration; re-check after the next MPC meeting (rates change). The hook 'many notes still call the reverse repo the floor' is an editorial framing, not a sourced fact. Left out: what the MPC is, CRR/SLR, OMOs, variable-rate repo/reverse repo auctions."
+}

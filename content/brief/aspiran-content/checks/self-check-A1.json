@@ -1,0 +1,32 @@
+{
+  "batch": "A1",
+  "checksRun": [
+    "python3 -I tools/build.py (parse, JSON shape, checks below)",
+    "English words per talk 1,500-2,000, counted by code over chapter scripts",
+    "3-6 chapters, same count in en and hi; exactly 3 check questions with 4 options, answerIndex and why, same answers in en and hi",
+    "No digits (0-9 or Devanagari) in any spoken field; no 'as you can see' or 'you must'",
+    "Voice files: every part at most 1,500 characters, starts with '--- part N ---', ends at a sentence break",
+    "union-budget: en 1594 words, 5 chapters, ~12 min; hi 1680 words; voice parts en 8 (max 1498 chars), hi 7 (max 1485 chars); chars en 11031, hi 9938",
+    "parliament-year: en 1546 words, 5 chapters, ~13 min; hi 1646 words; voice parts en 8 (max 1495 chars), hi 7 (max 1497 chars); chars en 10662, hi 9873",
+    "rbi-sets-rates: en 1585 words, 5 chapters, ~13 min; hi 1750 words; voice parts en 8 (max 1496 chars), hi 8 (max 1499 chars); chars en 10934, hi 10266",
+    "monsoon-start-to-finish: en 1594 words, 5 chapters, ~13 min; hi 1748 words; voice parts en 8 (max 1496 chars), hi 7 (max 1499 chars); chars en 10720, hi 10195",
+    "freedom-struggle-1857-1919: en 1627 words, 5 chapters, ~14 min; hi 1783 words; voice parts en 9 (max 1499 chars), hi 8 (max 1500 chars); chars en 12062, hi 10954",
+    "freedom-struggle-1919-1947: en 1609 words, 5 chapters, ~14 min; hi 1766 words; voice parts en 9 (max 1488 chars), hi 8 (max 1486 chars); chars en 12209, hi 11219",
+    "Printed the first sentence of every chapter by code: chapter one opens with a welcome and what the talk covers, every later chapter names which part we are in",
+    "Re-read of all 6 talks while writing: Articles and dates against the Constitution text and NCERT, check answers against the scripts, Hindi paragraphs follow the English paragraphs one to one"
+  ],
+  "issuesFound": [
+    "First drafts of union-budget, parliament-year, rbi-sets-rates and monsoon-start-to-finish were 1,409 to 1,463 English words, under the 1,500 floor",
+    "The banned-phrase check first matched the ordinary Hindi 'देख सकते हैं' ('you can watch', about the House) and flagged parliament-year falsely"
+  ],
+  "fixed": [
+    "Added one or two paragraphs, in English and the same in Hindi, to each short talk: Economic Survey and debt path (Budget), ordinances between sessions and private members' Fridays (Parliament), an imagined MPC vote and limits of transmission (RBI), uneven rainfall and 'no single factor' (monsoon). All now 1,546 to 1,627 words",
+    "Narrowed the Hindi check to 'जैसा कि आप देख' (the real 'as you can see')"
+  ],
+  "stillOpen": [
+    "Hindi terms for the Hindi editor: लेखानुदान, भारित व्यय, गिलोटिन, सत्रावसान, पुरःस्थापन, अपरिवर्तनवादी, स्थायी जमा सुविधा, सीमांत स्थायी सुविधा, चलनिधि समायोजन सुविधा, अंतर-उष्णकटिबंधीय अभिसरण क्षेत्र, हिंद महासागर द्विध्रुव, मैडेन जूलियन दोलन, धन निकासी का सिद्धांत, पृथक निर्वाचन मंडल, द्वैध शासन",
+    "rbi-sets-rates: the inflation target for the five years from April 2026 needs checking against the current Gazette notification before release; the script says 'since the framework began, four per cent with a band of two to six'",
+    "All dates and numbers are in each file's factsToCheck for a human check against the listed sources"
+  ],
+  "codeIssuesRemaining": []
+}

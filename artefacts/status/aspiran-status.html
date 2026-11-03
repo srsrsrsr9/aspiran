@@ -79,12 +79,12 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 
 <div class="wrap">
 <header>
-  <div class="asof">Updated 3 November 2026, night</div>
+  <div class="asof">Updated 3 November 2026, late night</div>
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
     <div class="tile"><b>8</b><span>things waiting on you</span></div>
-    <div class="tile"><b>22 of 22</b><span>content batches made (B01–B22); more asked for</span></div>
+    <div class="tile"><b>296</b><span>content files checked and filed as drafts (B01–B29, P1–P5, A1–A2); next job written</span></div>
     <div class="tile"><b>478</b><span>library items live and approved; Chai not published yet</span></div>
     <div class="tile"><b>9 of 10</b><span>teaching-plan build steps built (Hindi marking waits on a test)</span></div>
   </div>
@@ -104,8 +104,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <p class="lede">These can't move until you act. Most urgent first.</p>
   <ul class="list">
     <li><span class="n">1</span><div><b>Publish the daily Chai (5–10 minutes each morning)</b><p>No Chai issue has been published yet, so Today says "Today's Chai isn't out yet" every day. 94 drafted cards are waiting in the Desk and 3 are approved. This is the biggest reason the app feels thin. The full count is in <code>artefacts/content-audit-2026-11-03.md</code>.</p></div></li>
-    <li><span class="n">1b</span><div><b>Next content, for the other Claude account</b><p>Everything to paste is in <code>artefacts/content-assignment-2026-11-03.md</code>: 19 more videos (episode 18, V2 and 8 evergreen V3 topics) with Hindi scripts, 40 one-page printables (new), 12 audio lectures (new), Hindi for GS mocks 2 and 3, and more optional topics. Voices now come from Sarvam AI (Indian, about ₹500–1,000 for all of it) instead of ElevenLabs: pick one Hindi and one English speaker first.</p></div></li>
-    <li><span class="n">1c</span><div><b>Approve the videos in the Desk</b><p>Episodes 10–12 and 14–17 are drafts. Desk → Videos now plays each one with its captions, sources and quiz, with Approve and Back to draft. Approving needs an editor name.</p></div></li>
+    <li><span class="n">1b</span><div><b>Send part 2 to the Desk, then the next job</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code> (about 15 minutes, needs your Desk key): it sends all batches, both video weeks and the 5 Prelims papers as drafts. Then paste Message 1 of <code>artefacts/content-assignment-2026-11-03b.md</code> into the other account. It covers practice items (20 for each of 10 formats), 24 flashcard decks and more optional topics, with my suggested answers to its questions. Top up Sarvam for the 191 narration parts still waiting.</p></div></li>
+    <li><span class="n">1c</span><div><b>Approve the videos in the Desk</b><p>Episodes 10–35 are drafts (weeks 2026-45 and 2026-46), still with the placeholder voice. Desk → Videos now plays each one with its captions, sources and quiz, with Approve and Back to draft. Approving needs an editor name.</p></div></li>
     <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
     <li><span class="n">4</span><div><b>Google Play account</b><p>Waiting for Google's approval. Then create the <code>plus_yearly</code> product and copy Google's app-signing SHA-1 into Firebase.</p></div></li>
@@ -121,6 +121,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Done</span><div><b>Prelims papers, reads by subject, part 2 filed, 3 Nov</b><p>The official Prelims GS Paper I for 2018, 2019, 2021, 2023 and 2025 is loaded with UPSC's own keys (498 questions, drafts). Long reads now sit under their subjects on web and Android. Part 2 from the other account is checked and filed: 40 printables, 12 talk scripts, 20 optional topics, 19 more videos and 40 recorded audio parts. The Desk now takes printables and audio lectures.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>One look: earth and sky, 3 Nov</b><p>The app and the website now share colours and Martel headings. The Adda is earth (chai, clay, cardamom); Prep is sky: a pale dawn by day, the website's night sky with still stars after dark. Buttons are chai everywhere. Rules and colours: <code>artefacts/design/earth-and-sky.md</code>. Live on the web; in the new test APK <code>artefacts/builds/aspiran-review-2026-11-03c.apk</code>.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>All the batches now have screens, 3 Nov</b><p>Practice now has Answer skeletons (60 real Mains 2025 questions: outline first, then compare), Ethics (GS4) with 24 cases, 40 thinkers and 60 terms, and CSAT one set a week (8 weeks, worked answers). Walk mode lists 20 guided walks. Today shows a welcome-back card after 3 days or more away, and a hard mock gets a quiet note. Each optional shows where to start, in order. The Plus banner is now a slim line with × (hidden for a week). Live on the web (version <code>c6d0a8be</code>); in the new test APK <code>artefacts/builds/aspiran-review-2026-11-03b.apk</code>.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>Website review fixes, 2 Nov</b><p>An independent review found Chotu covering the page. Now his bubbles hide themselves after a few seconds and have a close button, tablets keep a strip free for his cup, phones get a smaller cup, and he steps aside over the price and the seat form. Visitors' answers stay in their browser until they press Save my seat (the privacy page says so). Also fixed: typed chat with Chotu (it had broken), Hindi "Skip" and "Yes", room 5's question on phones, Hindi leftovers, the contact field, faint text. Added a line saying what Aspiran is and a second Save my seat button.</p></div></li>
@@ -158,9 +159,9 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <h2>Claude's queue</h2>
   <p class="lede">What Claude works on next, in order, unless you change it. None of these wait on you.</p>
   <ul class="list">
-    <li><span class="n">0</span><div><b>Prelims past papers and subject tags</b><p>Load the official Prelims GS papers 2013–2025 with UPSC's answer keys as drafts, and tag the 114 long reads by subject, so both look as full as they are. Waiting for your OK.</p></div></li>
-    <li><span class="n">1</span><div><b>Check each content zip as it arrives</b><p>B01–B22 are checked and ready to import. Next zips: run the code checks, clear facts-to-check, and send you fixes to paste back.</p></div></li>
-    <li><span class="n">2</span><div><b>Screens for printables and audio lectures</b><p>Two new kinds in the 3 Nov assignment. The importer and screens get built as the first files arrive.</p></div></li>
+    <li><span class="n">1</span><div><b>Screens for printables and audio lectures</b><p>Both kinds now import into the Desk. Next: a printable page to view and print, and a talk player that joins the recorded Sarvam parts, on web and Android.</p></div></li>
+    <li><span class="n">2</span><div><b>The other Prelims years</b><p>2016, 2020, 2022, 2024 and 2026 were held back because their scans read poorly. They'll be checked line by line before they're loaded.</p></div></li>
+    <li><span class="n">2b</span><div><b>Check each content zip as it arrives</b><p>Practice X1–X5, flashcards F1 and optionals B30 are next. Run the code checks, clear facts-to-check, and send you fixes to paste back.</p></div></li>
     <li><span class="n">3</span><div><b>Website follow-ups</b><p>A native Hindi read of the live Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
   </ul>
 </section>
@@ -173,13 +174,14 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <div class="tbl"><table>
     <thead><tr><th>Area</th><th>What's there</th><th>Gap</th></tr></thead>
     <tbody>
-      <tr><td>Past papers (PYQs)</td><td class="num">79 questions<small>Mains 2025 GS1, GS2, GS3 (20 each), GS4 (19)</small></td><td>No Prelims papers yet. Skeletons for GS1–GS3 are made (B02–B04)</td></tr>
+      <tr><td>Past papers (PYQs)</td><td class="num">79 live<small>Mains 2025 GS1–GS4. Plus 498 Prelims questions ready as drafts: GS Paper I 2018, 2019, 2021, 2023, 2025 with UPSC's keys</small></td><td>An editor checks each Prelims paper against its PDF. 2016, 2020, 2022, 2024, 2026 held back</td></tr>
       <tr><td>Prelims mocks</td><td class="num">5 full mocks<small>3 GS Paper I (mock 1 in Hindi too), 2 CSAT in English and Hindi</small></td><td>Hindi for GS mocks 2 and 3 (B24)</td></tr>
       <tr><td>CSAT</td><td class="num">3 comprehension sets</td><td>Reasoning, numeracy, data interpretation (B07)</td></tr>
       <tr><td>Prep syllabus notes</td><td class="num">98 notes once imported<small>All GS subjects, plus a new Internal security subject; the 70 new ones are in English and Hindi</small></td><td>The first 28 are English only</td></tr>
       <tr><td>Chai current-affairs cards</td><td>0 published<small>94 drafts waiting, 3 approved</small></td><td>Needs a daily publish in the Desk</td></tr>
-      <tr><td>Videos</td><td>Episodes 10–12, 14–17 on the Desk<small>English, free for everyone once approved</small></td><td>Episode 18, V2, V3 and Hindi versions (3 Nov assignment)</td></tr>
-      <tr><td>Printables and audio lectures</td><td>None yet</td><td>40 printables and 12 lectures asked for (3 Nov assignment)</td></tr>
+      <tr><td>Videos</td><td>Episodes 10–35 made (26)<small>English placeholder voice, free for everyone once approved; Hindi scripts written</small></td><td>Sarvam voice and Hindi audio (needs Sarvam credits)</td></tr>
+      <tr><td>Printables and audio lectures</td><td>40 printables, 12 talk scripts (drafts)<small>2 talks partly recorded</small></td><td>App screens (Claude); the rest of the recording (Sarvam credits)</td></tr>
+      <tr><td>Long reads</td><td class="num">114<small>Now grouped by subject on web and Android</small></td><td>Fine</td></tr>
     </tbody>
   </table></div>
 
@@ -201,7 +203,11 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
       <tr><td><code>B23</code></td><td>CSAT full mocks, English and Hindi</td><td class="num">2 papers, 160 questions</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B24</code></td><td>Hindi for the GS mocks</td><td class="num">1 of 3 mocks</td><td><span class="chip c-prog">Part made</span></td></tr>
       <tr><td><code>B25–B28</code></td><td>Optional priority lists, then nodes</td><td class="num">6 lists; Sociology, PSIR, Anthropology +5 each</td><td><span class="chip c-prog">Part made</span></td></tr>
-      <tr><td><code>V1</code></td><td>Videos 10–18</td><td class="num">7 of 8<small>Episode 18 missing</small></td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>V1–V3</code></td><td>Videos 10–35</td><td class="num">26 of 26<small>Voice: placeholder until Sarvam</small></td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>P1–P5</code></td><td>One-page printables (polity, economy, geography, history, ethics and CSAT)</td><td class="num">40 of 40</td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>A1–A2</code></td><td>Audio lectures, 12–14 minutes</td><td class="num">12 scripts<small>Recording part done</small></td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>B29</code></td><td>Optional nodes by priority</td><td class="num">20<small>Geography +5, the other five +3 each</small></td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>X1–X5, F1, B30</code></td><td>Practice items, flashcards, more optional nodes</td><td class="num">0<small>Asked for 3 Nov (assignment 3b)</small></td><td><span class="chip c-todo">Not started</span></td></tr>
       <tr><td><code>B14–B22</code></td><td>Syllabus notes for the gaps (polity, governance, IR, culture, world history, society, science, internal security, Ethics)</td><td class="num">70 notes</td><td><span class="chip c-done">Made</span></td></tr>
     </tbody>
   </table></div>
@@ -210,15 +216,15 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <div class="tbl"><table>
     <thead><tr><th>Optional</th><th>Syllabus map</th><th>Nodes made</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td>Sociology</td><td>Made (74 topics)</td><td class="num">1–5, +5 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>Geography</td><td>Made (75 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>PSIR</td><td>Made (110 topics)</td><td class="num">1–5, +5 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>Anthropology</td><td>Made (98 topics)</td><td class="num">1–5, +5 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>History</td><td>Made (166 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
-      <tr><td>Public Administration</td><td>Made (91 topics)</td><td class="num">1–5</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Sociology</td><td>Made (74 topics)</td><td class="num">1–5, +8 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Geography</td><td>Made (75 topics)</td><td class="num">1–5, +5 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>PSIR</td><td>Made (110 topics)</td><td class="num">1–5, +8 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Anthropology</td><td>Made (98 topics)</td><td class="num">1–5, +8 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>History</td><td>Made (166 topics)</td><td class="num">1–5, +3 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
+      <tr><td>Public Administration</td><td>Made (91 topics)</td><td class="num">1–5, +3 by priority</td><td><span class="chip c-prog">Started</span></td></tr>
     </tbody>
   </table></div>
-  <p class="note">All of B01–B28 and videos 10–17 are checked by code, saved in <code>content/</code>, and imported cleanly on a test server. The live server knows every kind, including the new optional priority lists (version <code>86c8a4a7</code>); the drafts land when you run the import runbook (Needs you, item 1), then wait for editor approval. Essays, terms, interview, optionals, pause lines and the syllabus notes show in the apps once approved. Skeletons, GS4 cases, CSAT weeks, walk scripts, welcome-back days and the optional priority lists now have screens too (3 Nov).</p>
+  <p class="note">All of B01–B29, P1–P5, A1–A2 and videos 10–35 are checked by code, saved in <code>content/</code>, and imported cleanly on a test server. The live server knows every kind, including the new optional priority lists (version <code>86c8a4a7</code>); the drafts land when you run the import runbook (Needs you, item 1), then wait for editor approval. Essays, terms, interview, optionals, pause lines and the syllabus notes show in the apps once approved. Skeletons, GS4 cases, CSAT weeks, walk scripts, welcome-back days and the optional priority lists now have screens too (3 Nov).</p>
 </section>
 
 <section id="website">

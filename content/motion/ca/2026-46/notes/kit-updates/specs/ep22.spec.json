@@ -1,0 +1,353 @@
+{
+ "n": 22,
+ "id": "western-disturbances",
+ "title": "Western disturbances bring winter rain the monsoon doesn't",
+ "format": "whiteboard",
+ "tone": "LIGHT",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "sources": [
+  "IMD Meteorological Centre Srinagar, 'Western Disturbance' explainer (mausam.imd.gov.in/srinagar/img/wd.pdf)",
+  "IMD, Western Disturbance report, 12-13 December 2019"
+ ],
+ "quiz": {
+  "q": "Where do western disturbances come from?",
+  "options": [
+   "The Mediterranean region",
+   "The Bay of Bengal",
+   "The Arabian Sea",
+   "The Tibetan Plateau"
+  ],
+  "answerIndex": 0,
+  "why": "Right. IMD describes them as extratropical storms from the Mediterranean (sometimes the Caspian), carried east by the westerlies."
+ },
+ "script": [
+  [
+   [
+    "India's rain comes with the monsoon.",
+    null,
+    1.04,
+    0.2,
+    1.0
+   ],
+   [
+    "So why does Delhi get rain in winter?",
+    null,
+    1.02,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Blame a storm from the Mediterranean.",
+    null,
+    0.9,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "A western disturbance is an extratropical storm,",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "born over the Mediterranean or Caspian Sea.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The westerlies carry it east,",
+    null,
+    1.02,
+    0.1,
+    1.0
+   ],
+   [
+    "across Iran, Afghanistan and Pakistan,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "into India.",
+    null,
+    0.95,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "When it meets the Himalayas,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "it brings rain to the plains",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and heavy snow to the hills.",
+    null,
+    0.95,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "That winter rain matters for rabi crops.",
+    null,
+    1.0,
+    0.25,
+    1.0
+   ],
+   [
+    "Too much can damage them,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and bring landslides and avalanches.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The monsoon is tropical, and carries its moisture low.",
+    null,
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "A western disturbance carries it higher up.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Different storm.",
+    null,
+    0.88,
+    0.2,
+    1.0
+   ],
+   [
+    "Different season.",
+    null,
+    0.86,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Where do western disturbances come from?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Rain in winter?",
+    "Not the monsoon."
+   ],
+   "icon": "drop"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "statement",
+   "lines": [
+    "A storm from the",
+    "Mediterranean"
+   ],
+   "emph": [
+    "Mediterranean"
+   ]
+  },
+  {
+   "sent": [
+    2,
+    3
+   ],
+   "type": "chain",
+   "heading": "How it reaches India",
+   "steps": [
+    {
+     "text": "Mediterranean or Caspian",
+     "at": "Mediterranean or Caspian"
+    },
+    {
+     "text": "Iran, Afghanistan, Pakistan",
+     "at": "across Iran"
+    },
+    {
+     "text": "Into India",
+     "at": "into India"
+    }
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "compare",
+   "heading": "At the Himalayas",
+   "left": {
+    "label": "Plains",
+    "text": "Rain",
+    "at": "rain to the plains"
+   },
+   "right": {
+    "label": "Hills",
+    "text": "Heavy snow",
+    "at": "heavy snow"
+   }
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "list",
+   "heading": "Rabi crops",
+   "items": [
+    {
+     "text": "Winter rain helps",
+     "at": "rabi crops"
+    },
+    {
+     "text": "Too much damages",
+     "at": "Too much"
+    },
+    {
+     "text": "Landslides, avalanches",
+     "at": "landslides"
+    }
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "compare",
+   "heading": "Where the moisture travels",
+   "left": {
+    "label": "Monsoon",
+    "text": "Tropical, moisture low",
+    "at": "The monsoon"
+   },
+   "right": {
+    "label": "Disturbance",
+    "text": "Moisture higher up",
+    "at": "higher up"
+   }
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "statement",
+   "lines": [
+    "Different storm.",
+    "Different season."
+   ],
+   "emph": [
+    "storm",
+    "season"
+   ]
+  },
+  {
+   "sent": [
+    8,
+    8
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "A western disturbance is an extratropical storm originating in the Mediterranean region that brings winter rain to northwest India",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf",
+   "quote": "The extratropical storm that originates in the Mediterranean region"
+  },
+  {
+   "claim": "WDs originate in the Caspian Sea or the Mediterranean Sea as extra-tropical cyclones, driven by the westerlies",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf",
+   "quote": "WDs originate in the Caspian Sea or the Mediterranean Sea"
+  },
+  {
+   "claim": "They travel across Iran, Afghanistan and Pakistan to enter the Indian subcontinent",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf"
+  },
+  {
+   "claim": "They bring rain to low-lying areas and heavy snow to mountainous areas; moisture is shed when the system meets the Himalayas",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf"
+  },
+  {
+   "claim": "Delhi gets winter rain from WDs: widespread rainfall over Punjab, Haryana, Chandigarh and Delhi on 12-13 Dec 2019",
+   "url": "https://mausam.imd.gov.in/backend/assets/press_release_pdf/WD_Report_12-13_December_2019.pdf"
+  },
+  {
+   "claim": "The precipitation matters for agriculture, particularly rabi crops; excess can cause crop damage, landslides, floods and avalanches",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf"
+  },
+  {
+   "claim": "WDs carry moisture in the upper atmosphere, unlike tropical systems that carry it in the lower layers",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf"
+  },
+  {
+   "claim": "WDs are non-monsoonal precipitation",
+   "url": "https://mausam.imd.gov.in/srinagar/img/wd.pdf"
+  }
+ ],
+ "review_note": "IMD sources only, as asked. The IMD Srinagar explainer says WDs can occur in any season; the script presents them as the source of winter rain (also from that page) and does not claim they occur only in winter. Delhi winter rain is backed by one dated IMD event report (Dec 2019). Not included: WD frequency per month, cold waves and fog (in the IMD page but cut for length), climate-change trends."
+}

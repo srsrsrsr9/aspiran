@@ -1,0 +1,337 @@
+{
+ "n": 27,
+ "id": "governor-assent",
+ "title": "Governors now have a clock on assent, or do they?",
+ "format": "kinetic",
+ "tone": "SERIOUS",
+ "gsPaper": [
+  "mains-gs2"
+ ],
+ "sources": [
+  "Constitution of India, Articles 200, 142, 143",
+  "State of Tamil Nadu v. Governor of Tamil Nadu, Supreme Court, 8 April 2025 (two-judge bench)",
+  "In re: Assent, Withholding or Reservation of Bills by the Governor and the President of India, Special Reference under Article 143, opinion of 20 November 2025 (five-judge bench)"
+ ],
+ "quiz": {
+  "q": "Which Article covers the Governor's assent to bills?",
+  "options": [
+   "Article 200",
+   "Article 201",
+   "Article 143",
+   "Article 356"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Article 200 covers the Governor's assent; Article 201 covers bills reserved for the President."
+ },
+ "script": [
+  [
+   [
+    "Can a court give a Governor a deadline to decide on a bill?",
+    null,
+    0.94,
+    0.55,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Article 200 gives the Governor options:",
+    "Article two hundred gives the Governor options:",
+    0.94,
+    0.15,
+    1.0
+   ],
+   [
+    "assent, withhold assent,",
+    null,
+    0.92,
+    0.1,
+    1.0
+   ],
+   [
+    "or reserve the bill for the President.",
+    null,
+    0.92,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It sets no fixed time limit.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In April 2025, a two-judge bench set timelines,",
+    "In April twenty twenty-five, a two-judge bench set timelines,",
+    0.94,
+    0.12,
+    1.0
+   ],
+   [
+    "and treated ten Tamil Nadu bills as having received assent.",
+    null,
+    0.94,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The President then sought the Court's opinion under Article 143.",
+    "The President then sought the Court's opinion under Article one forty-three.",
+    0.94,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In November 2025, five judges advised:",
+    "In November twenty twenty-five, five judges advised:",
+    0.92,
+    0.15,
+    1.0
+   ],
+   [
+    "courts cannot fix timelines,",
+    null,
+    0.9,
+    0.12,
+    1.0
+   ],
+   [
+    "and there is no deemed assent.",
+    null,
+    0.88,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But a Governor cannot sit on a bill indefinitely.",
+    null,
+    0.9,
+    0.2,
+    1.0
+   ],
+   [
+    "For prolonged inaction, a court may direct a decision.",
+    null,
+    0.92,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "No fixed clock.",
+    null,
+    0.86,
+    0.3,
+    1.0
+   ],
+   [
+    "But no endless wait.",
+    null,
+    0.86,
+    0.55,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.92,
+    0.3,
+    1.0
+   ],
+   [
+    "Which Article covers the Governor's assent to bills?",
+    "Which Article covers the Governor's assent to bills?",
+    0.94,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "A deadline",
+    "for Governors?"
+   ],
+   "icon": "doc",
+   "emph": [
+    "deadline"
+   ]
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "list",
+   "heading": "Article 200",
+   "items": [
+    {
+     "text": "Assent",
+     "at": "assent,"
+    },
+    {
+     "text": "Withhold assent",
+     "at": "withhold"
+    },
+    {
+     "text": "Reserve for the President",
+     "at": "reserve"
+    }
+   ]
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "statement",
+   "lines": [
+    "No fixed",
+    "time limit"
+   ],
+   "emph": [
+    "no",
+    "fixed"
+   ]
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "statement",
+   "lines": [
+    "April 2025"
+   ],
+   "emph": [
+    "timelines,",
+    "assent."
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "statement",
+   "lines": [
+    "Article 143"
+   ],
+   "emph": [
+    "opinion"
+   ]
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "compare",
+   "heading": "Opinion, November 2025",
+   "left": {
+    "label": "Timelines",
+    "text": "Courts cannot fix",
+    "at": "courts cannot fix"
+   },
+   "right": {
+    "label": "Deemed assent",
+    "text": "Not recognised",
+    "at": "no deemed assent"
+   },
+   "warn": [
+    "cannot",
+    "no"
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Limited direction"
+   ],
+   "emph": [
+    "indefinitely.",
+    "direct"
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "statement",
+   "lines": [
+    "No fixed clock.",
+    "No endless wait."
+   ],
+   "emph": [
+    "clock.",
+    "wait."
+   ]
+  },
+  {
+   "sent": [
+    8,
+    8
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Under Article 200 the Governor may assent, withhold assent, or reserve a bill for the President (and may return a non-Money Bill for reconsideration)",
+   "url": "https://www.sanskritiias.com/current-affairs/the-supreme-courts-decision-on-the-presidential-reference",
+   "url2": "https://en.wikipedia.org/wiki/In_re:_Assent,_Withholding_or_Reservation_of_Bills_by_the_Governor_and_the_President_of_India"
+  },
+  {
+   "claim": "The Constitution sets no fixed time limit for the Governor's decision (Article 200: 'as soon as possible' replaced a six-week limit in the Constituent Assembly)",
+   "url": "https://vajiramandravi.com/current-affairs/presidential-reference-on-governors-assent-to-bills/",
+   "url2": "https://www.sanskritiias.com/current-affairs/the-supreme-courts-decision-on-the-presidential-reference"
+  },
+  {
+   "claim": "On 8 April 2025 a two-judge bench in State of Tamil Nadu v. Governor of Tamil Nadu set timelines and, using Article 142, treated 10 pending Tamil Nadu bills as assented (deemed assent)",
+   "url": "https://www.sanskritiias.com/current-affairs/the-supreme-courts-decision-on-the-presidential-reference",
+   "url2": "https://vajiramandravi.com/current-affairs/presidential-reference-on-governors-assent-to-bills/"
+  },
+  {
+   "claim": "The President made a reference under Article 143 on the questions",
+   "url": "https://en.wikipedia.org/wiki/In_re:_Assent,_Withholding_or_Reservation_of_Bills_by_the_Governor_and_the_President_of_India",
+   "url2": "https://vajiramandravi.com/current-affairs/presidential-reference-on-governors-assent-to-bills/"
+  },
+  {
+   "claim": "On 20 November 2025 a five-judge Constitution Bench advised that courts cannot impose timelines for assent and that deemed assent is not recognised",
+   "url": "https://en.wikipedia.org/wiki/In_re:_Assent,_Withholding_or_Reservation_of_Bills_by_the_Governor_and_the_President_of_India",
+   "url2": "https://www.sanskritiias.com/current-affairs/the-supreme-courts-decision-on-the-presidential-reference"
+  },
+  {
+   "claim": "Governors cannot delay indefinitely; in clear cases of prolonged inaction a court may issue a limited mandamus to decide within a reasonable time",
+   "url": "https://www.sanskritiias.com/current-affairs/the-supreme-courts-decision-on-the-presidential-reference",
+   "url2": "https://www.scobserver.in/journal/the-supreme-courts-retreat-from-holding-governors-accountable/"
+  }
+ ],
+ "review_note": "SERIOUS, strictly neutral: the script reports what each ruling held, with no evaluation. All sources secondary; check against the 8 April 2025 judgment and the 20 November 2025 opinion. The opinion is advisory (Article 143); the script says 'advised'. The return-for-reconsideration option (first proviso to Article 200) is omitted from the spoken list for length but noted in claims. Left out: the specific one- and three-month timelines of the April 2025 ruling (not confirmed by two sources), whether the opinion was unanimous, names of the Governor and judges, any later developments after November 2025 (none found)."
+}

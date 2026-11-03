@@ -1,0 +1,9 @@
+# Claims table: After 2023, "forest" means something narrower on paper
+
+| # | Claim (as spoken or shown) | Source | Status |
+|---|---|---|---|
+| 1 | Godavarman (1996): the Forest Conservation Act applies to all forests irrespective of ownership or classification; 'forest' is understood in its dictionary meaning | Supreme Court order of 19 Feb 2024 (recording Godavarman, 12 Dec 1996) https://api.sci.gov.in/supremecourt/2023/40155/40155_2023_1_22_50541_Order_19-Feb-2024.pdf | verified-primary |
+| 2 | Section 1A(1) of the amended Act (2023) covers land declared or notified as forest under the Indian Forest Act, 1927 or other law, and land recorded in Government record as forest on or after 25 October 1980 | Supreme Court order of 19 Feb 2024 (reproducing s.1A); Anantam IAS https://api.sci.gov.in/supremecourt/2023/40155/40155_2023_1_22_50541_Order_19-Feb-2024.pdf | verified-primary |
+| 3 | Unrecorded 'deemed' forest land may fall outside the amended definition (ThePrint estimates about 15% of forest cover) | ThePrint (20 Feb 2024); Drishti IAS https://theprint.in/judiciary/what-interim-sc-order-on-modi-govts-forest-conservation-law-means-for-environmental-protection/1972353/ | verified-secondary |
+| 4 | On 19 February 2024 the Supreme Court directed that the Godavarman principles continue to be observed pending the Rule 16 exercise by States/UTs (record of forest-like areas) | Supreme Court order, 19 Feb 2024; order of 4 Mar 2025 keeps it in force https://api.sci.gov.in/supremecourt/2023/40155/40155_2023_1_22_50541_Order_19-Feb-2024.pdf | verified-primary |
+| 5 | On 16 September 2026 the Supreme Court said it will examine the constitutional validity of the 2023 definition of forest; the challenge is pending | PTI via Nagaland Post (17 Sep 2026); Deccan Herald https://nagalandpost.com/sc-says-it-will-examine-constitutional-validity-of-forest-definition-under-2023-law/ | verified-secondary |

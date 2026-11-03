@@ -36,7 +36,8 @@
           "properties": {
             "status": { "enum": ["official", "awaiting", "none"], "description": "official: answers from UPSC's key at url. awaiting: Prelims paper whose official key we don't have yet, so no answers. none: Mains." },
             "url": { "type": "string", "pattern": "^https://(www\\.)?upsc\\.gov\\.in/" },
-            "dropped": { "type": "array", "items": { "type": "string" }, "description": "Question numbers UPSC dropped in its key." }
+            "dropped": { "type": "array", "items": { "type": "string" }, "description": "Question numbers UPSC dropped in its key." },
+            "provisional": { "type": "boolean", "description": "True while the key is UPSC's provisional one, published days after the exam; UPSC's final key comes after the whole exam ends." }
           }
         },
         "sample": { "type": "boolean", "description": "True for SAMPLE entries: never packed, never shown." },

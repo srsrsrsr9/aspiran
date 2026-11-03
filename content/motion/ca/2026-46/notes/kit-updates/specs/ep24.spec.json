@@ -1,0 +1,297 @@
+{
+ "n": 24,
+ "id": "tribunals",
+ "title": "Tribunals keep losing to the Supreme Court",
+ "format": "kinetic",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "mains-gs2"
+ ],
+ "sources": [
+  "L. Chandra Kumar v. Union of India, Supreme Court, 18 March 1997, seven-judge bench (digiscr.sci.gov.in)",
+  "PRS Legislative Brief, Tribunals Reforms Bill, 2021 (incl. the July 2021 Madras Bar Association ruling on the Ordinance)",
+  "Madras Bar Association (MBA V), Supreme Court, 19 November 2025 (Business Standard; Bar and Bench)"
+ ],
+ "quiz": {
+  "q": "What did the Tribunals Reforms Act do?",
+  "options": [
+   "Abolished several appellate tribunals",
+   "Created the National Green Tribunal",
+   "Ended High Court review of tribunals",
+   "Set a five-year term for members"
+  ],
+  "answerIndex": 0,
+  "why": "Right. It abolished appellate bodies such as the film certification and patents appellate boards and sent their work mainly to High Courts."
+ },
+ "script": [
+  [
+   [
+    "Parliament keeps writing rules for tribunals.",
+    null,
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "The Supreme Court keeps striking them down.",
+    null,
+    0.95,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In 1997, in L. Chandra Kumar,",
+    "In nineteen ninety-seven, in L. Chandra Kumar,",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "seven judges held that High Court review is part of the basic structure.",
+    null,
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "Tribunal rulings stay open to it.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In 2021, an ordinance set a four-year term,",
+    "In twenty twenty-one, an ordinance set a four-year term,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and a minimum age of 50.",
+    "and a minimum age of fifty.",
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "In July, the Court struck both down.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Then the Tribunals Reforms Act brought them back,",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and abolished several appellate tribunals.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In November 2025, the Court struck them down again:",
+    "In November twenty twenty-five, the Court struck them down again:",
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "Parliament had re-enacted what it had already invalidated.",
+    null,
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It ordered a National Tribunals Commission within four months.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The fight is about independence.",
+    null,
+    0.9,
+    0.55,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "What did the Tribunals Reforms Act do?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Tribunals vs",
+    "the Supreme Court"
+   ],
+   "icon": "scale",
+   "emph": [
+    "striking"
+   ]
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "statement",
+   "lines": [
+    "L. Chandra Kumar",
+    "1997"
+   ],
+   "emph": [
+    "basic",
+    "structure"
+   ]
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "compare",
+   "heading": "2021 Ordinance",
+   "left": {
+    "label": "Term",
+    "text": "Four years",
+    "at": "four-year term"
+   },
+   "right": {
+    "label": "Minimum age",
+    "text": "50",
+    "at": "minimum age"
+   },
+   "warn": [
+    "struck"
+   ]
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "statement",
+   "lines": [
+    "Back in the Act"
+   ],
+   "emph": [
+    "brought",
+    "back"
+   ]
+  },
+  {
+   "sent": [
+    4,
+    4
+   ],
+   "type": "statement",
+   "lines": [
+    "Struck down again"
+   ],
+   "warn": [
+    "again"
+   ],
+   "emph": [
+    "re-enacted"
+   ]
+  },
+  {
+   "sent": [
+    5,
+    5
+   ],
+   "type": "stat",
+   "heading": "National Tribunals Commission",
+   "value": "4",
+   "label": "months to set it up",
+   "at": "four months"
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Independence"
+   ],
+   "emph": [
+    "independence."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "L. Chandra Kumar v. Union of India (18 March 1997), seven-judge bench: judicial review under Articles 226 and 32 is part of the basic structure; tribunal decisions are subject to High Court review under Articles 226/227",
+   "url": "https://digiscr.sci.gov.in/admin/judgement_file/judgement_pdf/1997/volume%202/Part%20I/1997_2_1186-1250_1702203566.pdf"
+  },
+  {
+   "claim": "The April 2021 Ordinance set a four-year term and a minimum age of 50; the Supreme Court struck these down in July 2021",
+   "url": "https://prsindia.org/billtrack/prs-products/prs-legislative-brief-3780",
+   "url2": "https://www.business-standard.com/industry/news/sc-minimum-age-tenure-tribunals-commission-judgment-125111901310_1.html"
+  },
+  {
+   "claim": "The Tribunals Reforms Act 2021 retained the four-year term and minimum age of 50, and abolished several appellate bodies (e.g. under the Cinematograph Act and Patents Act), transferring their functions mainly to High Courts",
+   "url": "https://prsindia.org/billtrack/prs-products/prs-legislative-brief-3780",
+   "url2": "https://www.business-standard.com/industry/news/sc-minimum-age-tenure-tribunals-commission-judgment-125111901310_1.html"
+  },
+  {
+   "claim": "On 19 November 2025 the Supreme Court struck down the Act's minimum age of 50 and four-year tenure, saying the Centre had revived provisions earlier declared unconstitutional",
+   "url": "https://www.business-standard.com/industry/news/sc-minimum-age-tenure-tribunals-commission-judgment-125111901310_1.html",
+   "url2": "https://www.barandbench.com/news/litigation/supreme-court-quashes-tribunal-reforms-act-provisions-on-appointment-tenure-censures-government"
+  },
+  {
+   "claim": "The Court directed the Union to set up a National Tribunals Commission within four (4) months",
+   "url": "https://www.business-standard.com/industry/news/sc-minimum-age-tenure-tribunals-commission-judgment-125111901310_1.html",
+   "url2": "https://www.barandbench.com/news/litigation/supreme-court-quashes-tribunal-reforms-act-provisions-on-appointment-tenure-censures-government"
+  }
+ ],
+ "review_note": "L. Chandra Kumar facts from the official judgment PDF (digiscr.sci.gov.in). The 2021 and 2025 rulings are from secondary sources (PRS, Business Standard, Bar and Bench); check against the judgments. The script says 'High Court review' for judicial review under Articles 226/227 (the judgment also covers Article 32). Left out: Rojer Mathew (2019), MBA III/IV details, whether the Commission has been set up as of today, bench composition of the 2025 ruling (reported as CJI Gavai and Justice Vinod Chandran)."
+}

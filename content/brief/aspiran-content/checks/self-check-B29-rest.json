@@ -1,0 +1,27 @@
+{
+  "batch": "B29",
+  "checksRun": [
+    "python3 check_batch.py aspiran-content",
+    "15 files: optionals 15 / 0 issues",
+    "Note words en/hi by code: ant-p1-35 388/451, ant-p2-09 388/419, ant-p2-22 371/426, hist-p1-18 403/411, hist-p1-19 392/419, hist-p1-45 380/422, psir-p1-14 368/417, psir-p1-36 380/464, psir-p1-44 417/466, pa-p1-07 359/397, pa-p1-08 326/407, pa-p1-11 385/422, soc-p1-11 360/404, soc-p1-12 380/431, soc-p2-02 368/423 (limit 600)",
+    "Why words by code: all English under 60; Hindi under 60 after one fix",
+    "Recall kinds counted by code: 3 define, 3 compare, 3 example, 3 apply in every node",
+    "Every note section ends with a question to the reader, in English and Hindi, checked by code",
+    "Strict re-read of 6 nodes as a checker who did not write them (pa-p1-11, hist-p1-18, psir-p1-44, ant-p2-09, ant-p1-35, soc-p2-02): facts and dates, balance on political and caste topics, Hindi match"
+  ],
+  "issuesFound": [
+    "ant-p2-22 Hindi 'why' ran to 62 words (limit 60)",
+    "pa-p1-11 factsToCheck gave Crozier's book date confusingly ('1964 (English 1964)')",
+    "ant-p1-35 one-pager prompt said each of Morgan's seven periods opens with an invention; Lower Savagery has none"
+  ],
+  "fixed": [
+    "Shortened the ant-p2-22 Hindi 'why' to 56 words",
+    "Changed to 'English 1964 (French original 1963)' in pa-p1-11",
+    "Reworded to 'the inventions that mark them' in ant-p1-35"
+  ],
+  "stillOpen": [
+    "Hindi terms need the Hindi editor: लक्ष्य विस्थापन, प्रशिक्षित अक्षमता, एडहॉक्रेसी, नव लोक सेवा, लोक मूल्य, उप-सामंतीकरण, प्रतिरूप परिवर्त, अव्यक्तता (latency), नवजन्मता (natality), प्रति-बहुमतवादी, अनुकरणात्मक/संसर्गात्मक जादू",
+    "Case names and dates in psir-p1-44, census figures in ant-p2-22, and inscription details in hist-p1-18 and hist-p1-19 need a human check against primary sources",
+    "Attribution of the political theory of caste to Abbe Dubois (ant-p2-09) and Arendt's reference to Gandhi (psir-p1-36) are flagged to verify"
+  ]
+}

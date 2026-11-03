@@ -1,0 +1,21 @@
+{
+  "batch": "P3",
+  "checksRun": [
+    "python3 -I build.py P3 (lib.check on every sheet: shape, 2-4 blocks, table <= 12 rows, row widths, en/hi same block shapes, Hindi in Devanagari, en <= 360 words, banned phrases, JSON re-read)",
+    "8 sheets / 0 issues",
+    "geography-rivers-tributaries: en 202 words / hi 233 words, 2 blocks, ok",
+    "geography-soils: en 199 words / hi 210 words, 2 blocks, ok",
+    "geography-monsoon-mechanism: en 184 words / hi 218 words, 3 blocks, ok",
+    "environment-climate-conventions: en 159 words / hi 166 words, 2 blocks, ok",
+    "environment-protected-areas: en 184 words / hi 207 words, 2 blocks, ok",
+    "environment-ramsar-biosphere: en 160 words / hi 174 words, 3 blocks, ok",
+    "geography-minerals: en 178 words / hi 175 words, 2 blocks, ok",
+    "geography-cyclones: en 159 words / hi 160 words, 3 blocks, ok"
+  ],
+  "issuesFound": [],
+  "fixed": [],
+  "stillOpen": [
+    "Hindi terms for the Hindi editor: ज्वारनदमुख (estuary), निक्षालन (leaching), अंतर-उष्णकटिबंधीय अभिसरण क्षेत्र, हिंद महासागर द्विध्रुव, मॉन्ट्रो रिकॉर्ड.",
+    "Mineral-producing States change year to year; confirm against the latest Indian Minerals Yearbook."
+  ]
+}

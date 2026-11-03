@@ -1,6 +1,6 @@
 // Previous-year UPSC questions (content/pyq/pyq.json, schema in content/pyq/pyq.schema.json).
 //   node scripts/pyq.mjs add <paper id> <questions.tsv> <upsc.gov.in url>   add or replace a paper from a transcription
-//   node scripts/pyq.mjs key <paper id> <key.csv> <upsc.gov.in key url>    fill a Prelims paper's answers from UPSC's key
+//   node scripts/pyq.mjs key <paper id> <key.csv> <upsc.gov.in key url> [provisional]   fill a Prelims paper's answers from UPSC's key
 //   node scripts/pyq.mjs check                                             check every paper
 //   node scripts/pyq.mjs pack [out folder]                                 write a library pack, then: npm run import -- <folder>
 // The papers on upsc.gov.in are scans, so questions arrive as a transcription TSV, one per line:
@@ -100,8 +100,8 @@ if (cmd === "add") {
   save(d);
   console.log(`${id}: ${entry.questions.length} questions, draft`);
 } else if (cmd === "key") {
-  const [id, csv, url] = args;
-  if (!id || !csv || !UPSC.test(url ?? "")) throw new Error("Usage: node scripts/pyq.mjs key <paper id> <key.csv> <upsc.gov.in url of the official key>");
+  const [id, csv, url, kind] = args;
+  if (!id || !csv || !UPSC.test(url ?? "") || (kind && kind !== "provisional")) throw new Error("Usage: node scripts/pyq.mjs key <paper id> <key.csv> <upsc.gov.in url of the official key> [provisional]");
   const d = load();
   const p = d.papers.find((x) => x.id === id);
   if (!p || p.exam !== "prelims") throw new Error(`${id}: no Prelims paper with that id`);
@@ -117,10 +117,10 @@ if (cmd === "add") {
     q.answer = i;
     n++;
   }
-  p.answerKey = { status: "official", url, ...(dropped.length ? { dropped } : {}) };
+  p.answerKey = { status: "official", url, ...(dropped.length ? { dropped } : {}), ...(kind ? { provisional: true } : {}) };
   p.review = { status: "draft", note: "Answers filled from the official key: check a few against the PDF before approving." };
   save(d);
-  console.log(`${id}: ${n} answers from the official key${dropped.length ? `, ${dropped.length} dropped` : ""}`);
+  console.log(`${id}: ${n} answers from the ${kind ? "provisional" : "official"} key${dropped.length ? `, ${dropped.length} dropped` : ""}`);
 } else if (cmd === "check" || cmd === "pack") {
   const d = load();
   const { errs, notes } = check(d);

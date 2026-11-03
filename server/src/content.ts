@@ -59,6 +59,8 @@ const SCHEMA_KIND: Record<string, string> = {
   "aspiran/csat-week@1": "csat-week",
   "aspiran/walk-script@1": "walk-script",
   "aspiran/restart-day@1": "restart-day",
+  "aspiran/printable@1": "printable",
+  "aspiran/audio-lecture@1": "audio-lecture",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
@@ -802,6 +804,8 @@ const BRIEF_TITLE: Record<string, (d: any) => string | undefined> = {
   "csat-week": (d) => `CSAT week ${String(d.id).replace(/^csat-week-0?/, "")}`,
   "walk-script": (d) => `Walk: ${d.topic?.en ?? d.id}`,
   "restart-day": (d) => `Welcome back (${String(d.when ?? "").replace(/-/g, " ")}): ${d.headline?.en ?? ""}`,
+  printable: (d) => `Printable sheet: ${d.en?.title ?? d.id}`,
+  "audio-lecture": (d) => `Audio lecture: ${d.en?.title ?? cap(String(d.id))}${d.minutes ? ` (${d.minutes} min)` : ""}`,
 };
 
 export function titleOf(kind: string, d: any): string {
@@ -892,7 +896,7 @@ function checkPyq(d: any): string[] {
   if (d.sample) flags.push("SAMPLE paper: never approve this");
   if (d.exam === "prelims") {
     if (d.answerKey?.status !== "official") flags.push("No official UPSC answer key yet: members see the questions without answers");
-    else flags.push("Check the answers against the official key: " + (d.answerKey.url ?? ""));
+    else flags.push(`Check the answers against the ${d.answerKey.provisional ? "provisional (not final) " : "official "}key: ` + (d.answerKey.url ?? ""));
     qs.forEach((q) => { if (q.answer != null && d.answerKey?.status !== "official") flags.push(`Q${q.n}: an answer without an official key`); });
   }
   if (d.exam === "mains" && qs.some((q) => q.answer != null || q.en?.options || q.en?.model)) flags.push("Mains questions carry no options or model answers");

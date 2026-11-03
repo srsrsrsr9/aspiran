@@ -1,0 +1,311 @@
+{
+ "n": 25,
+ "id": "dpdp-act",
+ "title": "India's data law gives you rights, and the rules decide when",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "mains-gs2",
+  "mains-gs3"
+ ],
+ "sources": [
+  "Digital Personal Data Protection Act, 2023 (Act 22 of 2023, 11 August 2023): sections 1(2), 2(i), 2(j), 11-14 (indiacode.nic.in)",
+  "DPDP Rules, 2025, notified 13-14 November 2025, phased over 12 and 18 months (PTI via The Week; MirvoLegal timeline as at September 2026)"
+ ],
+ "quiz": {
+  "q": "Who is a Data Fiduciary?",
+  "options": [
+   "Whoever decides purpose and means",
+   "The person the data is about",
+   "Only a government department",
+   "The Data Protection Board"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Section 2(i): any person who, alone or with others, determines the purpose and means of processing personal data."
+ },
+ "script": [
+  [
+   [
+    "India passed its data protection law in 2023.",
+    "India passed its data protection law in twenty twenty-three.",
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "Most of it still isn't in force.",
+    null,
+    0.92,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It gives you, the Data Principal, rights:",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "to access your data, correct or erase it,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "seek redress, and nominate someone.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Whoever decides why and how your data is processed",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "is a Data Fiduciary, and owes you those duties.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But the Act lets the government switch on different parts on different dates.",
+    null,
+    1.0,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The rules came in November 2025.",
+    "The rules came in November twenty twenty-five.",
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "The Data Protection Board part started at once.",
+    null,
+    1.0,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Consent managers come a year later.",
+    null,
+    1.0,
+    0.15,
+    1.0
+   ],
+   [
+    "Most duties, after 18 months:",
+    "Most duties, after eighteen months:",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "around May 2027.",
+    "around May twenty twenty-seven.",
+    0.95,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The rights are written.",
+    null,
+    0.92,
+    0.2,
+    1.0
+   ],
+   [
+    "The rules set the clock.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "Who is a Data Fiduciary?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Your data rights",
+    "are written.",
+    "When do they start?"
+   ],
+   "icon": "doc"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "list",
+   "heading": "Your rights as a Data Principal",
+   "items": [
+    {
+     "text": "Access your data",
+     "at": "to access"
+    },
+    {
+     "text": "Correct or erase it",
+     "at": "correct or erase"
+    },
+    {
+     "text": "Seek redress",
+     "at": "seek redress"
+    },
+    {
+     "text": "Nominate someone",
+     "at": "nominate"
+    }
+   ]
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "compare",
+   "heading": "Who is who",
+   "left": {
+    "label": "Data Principal",
+    "text": "The person the data is about",
+    "at": "Whoever decides"
+   },
+   "right": {
+    "label": "Data Fiduciary",
+    "text": "Decides why and how data is processed",
+    "at": "is a Data Fiduciary"
+   }
+  },
+  {
+   "sent": [
+    3,
+    3
+   ],
+   "type": "statement",
+   "lines": [
+    "Different parts,",
+    "different dates"
+   ],
+   "sub": "Section 1(2) of the Act",
+   "emph": [
+    "dates"
+   ]
+  },
+  {
+   "sent": [
+    4,
+    5
+   ],
+   "type": "chain",
+   "heading": "The DPDP Rules, 2025",
+   "steps": [
+    {
+     "text": "Nov 2025: Data Protection Board",
+     "at": "The Data Protection Board"
+    },
+    {
+     "text": "A year on: consent managers",
+     "at": "Consent managers"
+    },
+    {
+     "text": "About May 2027: most duties",
+     "at": "around May 2027"
+    }
+   ]
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Rights: written.",
+    "Rules: the clock."
+   ],
+   "emph": [
+    "clock."
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "The DPDP Act is Act 22 of 2023, dated 11 August 2023",
+   "url": "https://www.indiacode.nic.in/bitstream/123456789/22037/2/a2023-22.pdf"
+  },
+  {
+   "claim": "Data Principal: the individual to whom the personal data relates (s. 2(j)); rights to access information (s. 11), correction and erasure (s. 12), grievance redressal (s. 13), nominate (s. 14)",
+   "url": "https://www.indiacode.nic.in/bitstream/123456789/22037/2/a2023-22.pdf"
+  },
+  {
+   "claim": "Data Fiduciary: any person who alone or with others determines the purpose and means of processing personal data (s. 2(i))",
+   "url": "https://www.indiacode.nic.in/bitstream/123456789/22037/2/a2023-22.pdf",
+   "quote": "determines the purpose and means of processing of personal data"
+  },
+  {
+   "claim": "Different dates may be appointed for different provisions (s. 1(2))",
+   "url": "https://www.indiacode.nic.in/bitstream/123456789/22037/2/a2023-22.pdf",
+   "quote": "different dates may be appointed for different provisions"
+  },
+  {
+   "claim": "The DPDP Rules were notified in November 2025; Data Protection Board provisions took effect at once",
+   "url": "https://www.mirvolegal.com/insights/dpdp-rules-2025-compliance-timeline/",
+   "url2": "https://www.theweek.in/wire-updates/business/2025/11/14/del148-biz-dpdp-rules-ld-govt.html"
+  },
+  {
+   "claim": "Consent manager provisions take effect one year after notification; most obligations after 18 months, around 13 May 2027",
+   "url": "https://www.mirvolegal.com/insights/dpdp-rules-2025-compliance-timeline/",
+   "url2": "https://www.theweek.in/wire-updates/business/2025/11/14/del148-biz-dpdp-rules-ld-govt.html"
+  }
+ ],
+ "review_note": "Act text from indiacode.nic.in. Rules timeline from two secondary sources; the exact commencement dates (13 or 14 Nov 2026 / May 2027) vary by a day across sources, so the script says 'a year later' and 'around May 2027'. Left out: MeitY's January 2026 proposal to compress the 18 months to 12 (a draft, not notified as of the MirvoLegal update in September 2026; re-check before release). 'Most of it still isn't in force' reflects that the rights and fiduciary duties start with the 18-month phase per the timeline sources. Penalties and exemptions not covered."
+}
