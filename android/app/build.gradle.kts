@@ -39,6 +39,8 @@ android {
         // Google Play Billing for Plus (data/PlayBilling.kt). Off unless the build asks for it with -Pupsc.playBilling=true:
         // a build without it never starts a purchase, whatever the server's play_billing flag says.
         buildConfigField("boolean", "PLAY_BILLING", (project.findProperty("upsc.playBilling") == "true").toString())
+        // Focus blocks close apps through an accessibility service (data/FocusGuard). The review build leaves it out.
+        buildConfigField("boolean", "FOCUS_GUARD", "true")
     }
 
     // Release signing. The keystore and its passwords never live in this repo: they come from
@@ -83,6 +85,14 @@ android {
             // Release builds accept https only (see data/ServerPolicy.kt).
             buildConfigField("String", "DEFAULT_SERVER", "\"https://upsc-pods-production.chotu-aec.workers.dev\"")
             signingConfig = signingConfigs.getByName("release")
+        }
+        // A test copy to send to a phone over WhatsApp or Drive: the release app, signed with the debug key and without
+        // the Focus accessibility service (src/review/AndroidManifest.xml), because Play Protect in India blocks
+        // sideloaded apps that have one. ./gradlew assembleReview → app/build/outputs/apk/review/app-review.apk
+        create("review") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+            buildConfigField("boolean", "FOCUS_GUARD", "false")
         }
     }
     compileOptions {

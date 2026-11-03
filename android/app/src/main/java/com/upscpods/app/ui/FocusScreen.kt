@@ -35,6 +35,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
+import com.upscpods.app.BuildConfig
 import com.upscpods.app.data.Focus
 import kotlinx.coroutines.delay
 
@@ -84,7 +85,15 @@ fun FocusScreen(onClose: () -> Unit) {
                     }
                 }
             }
-            if (!serviceOn) item {
+            if (!serviceOn && !BuildConfig.FOCUS_GUARD) item {
+                FlatCard {
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Text("This test copy can't close apps", style = MaterialTheme.typography.titleMedium)
+                        Text("Closing apps needs a permission that Android blocks in copies installed outside Google Play. Focus blocks still work; the apps you pick below stay open. The Play Store version closes them.", style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+            if (!serviceOn && BuildConfig.FOCUS_GUARD) item {
                 FlatCard {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Let Focus close apps", style = MaterialTheme.typography.titleMedium)
