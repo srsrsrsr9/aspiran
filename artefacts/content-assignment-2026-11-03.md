@@ -5,8 +5,16 @@ download and print) and **audio lectures** (10–15 minute talks to listen to on
 everything to paste. I'll build the app screens for both new kinds while you make them.
 
 ## Decide first (2 minutes)
-1. **Hindi voice in ElevenLabs.** Every video and lecture needs one. Pick a calm, clear Hindi voice and use it for
-   everything. Without it, Hindi users get English only.
+1. **Voice: Sarvam AI (Bulbul), not ElevenLabs.** Sarvam is a Bengaluru company built for Indian languages. It
+   reads Hindi, English with an Indian accent, Telugu and 8 more, at about ₹15–30 per 10,000 characters, against
+   roughly ₹100–250 for ElevenLabs. All of this assignment (about 3.5 lakh characters, English and Hindi) comes to
+   roughly ₹500–1,000, and new accounts get free credits to start. Sign up at sarvam.ai, open the dashboard's
+   text-to-speech playground, and pick one calm Hindi speaker and one English speaker. Use the same two for
+   everything. Check the current price on sarvam.ai/api-pricing before you top up.
+   - The playground takes a limited length at a time, so the scripts come split into parts of about 1,500
+     characters. Paste one part, download the mp3, then the next. Name them `-01.mp3`, `-02.mp3` and so on; I join them.
+   - Free fallback if Sarvam doesn't suit: AI4Bharat's Indic Parler-TTS (IIT Madras, open source). It costs nothing,
+     but it needs setting up on a computer, so ask me first.
 2. **Order.** My suggestion: Part 1 (videos V2) and Part 2 (printables) in parallel, then Part 3 (audio), then Part 4.
 
 ## What's in the app now
@@ -23,8 +31,8 @@ everything to paste. I'll build the app screens for both new kinds while you mak
 
 ## Part 1. Videos: 19 more episodes
 Same way as before: a chat with **code execution and web search on** (Claude Sonnet), upload `upsc-pods-kit.zip`,
-paste **Message 2** below with one row of episodes at a time. Record each `.elevenlabs.txt` in ElevenLabs, English
-and Hindi. Put finished folders in `~/Downloads/aspiran-videos/`.
+paste **Message 2** below with one row of episodes at a time. Record each `.voice.txt` (English) and `.hi.voice.txt`
+(Hindi) in Sarvam, part by part. Put finished folders in `~/Downloads/aspiran-videos/`.
 
 **Finish V1:** 18 Fundamental Duties.
 
@@ -52,7 +60,7 @@ A printable is one A4 page: a table, a timeline, a map key or a comparison, in E
 | P5 | Ethics and CSAT (6): GS4 thinkers one-liners, Ethics terms, Case-study answer frame, CSAT formulas, CSAT reasoning patterns, Exam-day checklist |
 
 ## Part 3. Audio lectures: 12 talks (new)
-A talk is a script you record in ElevenLabs, 1,500–2,000 words (10–15 minutes), English and Hindi, with chapters,
+A talk is a script you record in Sarvam, 1,500–2,000 words (10–15 minutes), English and Hindi, with chapters,
 3 check questions at the end, and sources. Paste **Message 3** into the content Project for scripts; record them
 like the videos.
 
@@ -123,8 +131,11 @@ example each, checked by running code); CSAT reasoning patterns; Exam-day checkl
 
 ```text
 Using the kit's Prompt A, make the next episodes, one at a time, in the same format as before (script, captions,
-quiz, sources, .elevenlabs.txt). New this time: also write a Hindi script and Hindi captions (.hi.srt and
-.hi.elevenlabs.txt) for each episode, the same scenes in the same order. Episodes in this batch: <paste one row
+quiz, sources). Changes this time: the narration file is <episode>.voice.txt instead of .elevenlabs.txt (it will be
+read by Sarvam AI's Bulbul voice, not ElevenLabs), split into parts of at most 1,500 characters, each part starting
+with a line "--- part N ---" and ending at a sentence break. No ElevenLabs tags or SSML; plain sentences, numbers
+written as words. Also write a Hindi script and Hindi captions (.hi.srt and .hi.voice.txt, split the same way) for
+each episode, the same scenes in the same order. Episodes in this batch: <paste one row
 from Part 1, e.g. "18 Fundamental Duties · 19 Deficits and the FRBM anchor · 20 Inflation targeting">.
 Rules as before: every claim in sources, sound off by default, no national borders on any map, schematic only,
 neutral tone, and episode 13 (Indus Waters) strictly neutral and marked SERIOUS.
@@ -133,7 +144,7 @@ neutral tone, and episode 13 (Indus Waters) strictly neutral and marked SERIOUS.
 ## Message 3: paste into the content Project (audio lectures)
 
 ```text
-Next new kind: audio lectures. Scripts only; the owner records them in ElevenLabs. Same rules as the brief.
+Next new kind: audio lectures. Scripts only; the owner records them with Sarvam AI (Bulbul voices). Same rules as the brief.
 Batches A1 and A2 below; one zip each.
 
 One file per talk: audio/<slug>.json, shaped like this:
@@ -154,7 +165,9 @@ One file per talk: audio/<slug>.json, shaped like this:
   "sources": ["..."],
   "factsToCheck": ["..."]
 }
-Also put the plain text to record in audio/<slug>.en.elevenlabs.txt and audio/<slug>.hi.elevenlabs.txt.
+Also put the plain text to record in audio/<slug>.en.voice.txt and audio/<slug>.hi.voice.txt, split into parts of at
+most 1,500 characters, each starting with a line "--- part N ---" and ending at a sentence break. Plain sentences
+only: no SSML or voice tags, numbers written as words.
 
 Rules:
 - 1,500–2,000 words in English, 3–6 chapters, written to be heard: short sentences, numbers said in words, each
