@@ -1,7 +1,8 @@
 // Imports the owner's content batches (the claude.ai Project's output, saved in content/brief/aspiran-content) into the
 // desk as drafts, through the same pack upload as import-pack.mjs.
 //   npm run import:brief -- ../content/brief/aspiran-content
-// Syllabus notes (B14–B22) are not here: they live in content/syllabus and go in with scripts/syllabus.mjs.
+// Syllabus notes (B14–B22) and full mocks (B23, B24) are not here: they live in content/syllabus and content/mocks and go
+// in with scripts/syllabus.mjs.
 // Only files a batch's checks/manifest-*.json lists are sent: those are the ones the checker passed. Each file gets its
 // schema from its folder, so the server knows its kind. Re-running is safe: unchanged items stay as they are; a changed
 // one goes back to draft with its approvals cleared. Needs EDITOR_TOKEN (and BASE for production), as import-pack does.
@@ -24,6 +25,7 @@ const SCHEMA_OF = [
   [/^interview\//, "aspiran/interview-bank@1"],
   [/^optionals\/[a-z-]+\/nodes\//, "aspiran/optional-node@1"],
   [/^optionals\/[a-z-]+\/syllabus\.json$/, "aspiran/optional-syllabus@1"],
+  [/^optionals\/[a-z-]+\/priority\.json$/, "aspiran/optional-priority@1"],
   [/^skeletons\//, "aspiran/mains-skeleton@1"],
   [/^gs4-cases\//, "aspiran/gs4-case@1"],
   [/^gs4-terms\//, "aspiran/gs4-glossary@1"],
@@ -48,6 +50,8 @@ const out = mkdtempSync(join(tmpdir(), "aspiran-brief-"));
 const files = [], entry = [];
 const unknown = [], missing = [];
 for (const { path, batch } of listed) {
+  // Full mocks (B23, B24) live in content/mocks and go in with scripts/syllabus.mjs.
+  if (path.startsWith("mocks/")) continue;
   if (!existsSync(join(src, path))) { missing.push(path); continue; }
   const schema = SCHEMA_OF.find(([re]) => re.test(path))?.[1];
   if (!schema) { unknown.push(path); continue; }

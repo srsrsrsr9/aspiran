@@ -1,0 +1,18 @@
+{
+  "batch": "B25",
+  "checksRun": [
+    "python3 -I tools/lib.py check B25",
+    "6 files: priority 6, nodes 0 / 0 issues",
+    "Titles and paper numbers compared by script with each optional's syllabus.json",
+    "Checked by script: 25 unique ids per file, ranks 1-25, none already written, why lines at most 35 words in en and hi"
+  ],
+  "issuesFound": [
+    "The brief's check_batch.py was not in the shared folder, so a new checker (tools/lib.py) was written with the same rules as the B10 self-checks"
+  ],
+  "fixed": [
+    "Checker covers JSON validity, unique ids, en/hi pairs with Devanagari, draft status, isPYQ false, word limits, note sections ending in a question, recall kinds, one skeleton per practice question"
+  ],
+  "stillOpen": [
+    "Order within each list is editorial and the owner may want to move topics up or down"
+  ]
+}

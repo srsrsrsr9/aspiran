@@ -1,0 +1,18 @@
+{
+  "batch": "B24",
+  "checksRun": [
+    "python3 checks/build_b24.py <mock> <hi parts> <B09 terms> <out> -> 100 questions, 100 with hi, 0 issues",
+    "English, answers, option order and every file-level field compared with the uploaded file: unchanged",
+    "hi keys match the English keys per question (q, options, why, plus statements and ask where the English has them); option and statement counts match",
+    "Every number in each option and statement is the same in Hindi as in English; numbers in q, ask and why also match",
+    "Each English option and ask line maps to exactly one Hindi wording across the paper",
+    "B09 term lists: 151 term uses found in the English, all 151 use the B09 Hindi or its alternative"
+  ],
+  "issuesFound": [
+    "Two false alarms in the first run of the check (number order in a G20 statement, oblique case of व्यपगत के सिद्धांत). The check was fixed; the text was right."
+  ],
+  "fixed": [],
+  "stillOpen": [
+    "Mocks 2 and 3 not received."
+  ]
+}

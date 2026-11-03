@@ -1,0 +1,22 @@
+{
+  "batch": "B28",
+  "checksRun": [
+    "python3 -I tools/lib.py check B28",
+    "7 files: priority 0, nodes 5 / 0 issues",
+    "Note words en/hi by code: ant-p1-21 426/497, ant-p1-23 425/498, ant-p1-27 429/471, ant-p1-37 391/455, ant-p1-44 422/439 (limit 600)",
+    "Recall kinds counted by code: 3 of each kind in every node",
+    "Strict re-read of all 5 nodes: ethnographic facts, balance between theory and critique, Hindi match, reader questions at the end of every note section"
+  ],
+  "issuesFound": [
+    "ant-p1-21 used संस्कृतिकरण for enculturation, which a reader could confuse with संस्कृतीकरण (Sanskritisation)",
+    "ant-p1-21 note section 2 ended with an instruction, not a question, in both languages (caught by the checker)"
+  ],
+  "fixed": [
+    "Changed to स्वसंस्कृति-ग्रहण (एनकल्चरेशन) throughout ant-p1-21",
+    "Rewrote the closing line of section 2 as a question in en and hi"
+  ],
+  "stillOpen": [
+    "Hindi terms need the Hindi editor and the B09 anthropology list: स्वसंस्कृति-ग्रहण, परसंस्कृतिग्रहण, अर्धांश (moiety), बंधुसमूह (phratry), मातुलस्थानीय (avunculocal), समाकलनात्मक आवश्यकताएँ, नृजाति-वर्णन (ethnography)",
+    "Ethnographic details in factsToCheck (Khasi ka khadduh, Yako double descent, Torres Strait members) need a human check"
+  ]
+}

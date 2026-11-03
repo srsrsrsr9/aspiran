@@ -1,0 +1,34 @@
+{
+  "batch": "B23",
+  "checksRun": [
+    "checks/b23-src/build.py builds both files from the source modules and recomputes every numeracy, data and reasoning answer by code: 46 of 46 per paper (92 in all) match the key, with exactly one option matching the computed value.",
+    "Logic puzzles (seating, floors/lectures, fruits, ranking, code language) are solved by trying every arrangement and asserting a unique answer; syllogisms are checked against every Venn model of the three terms; data sufficiency against every integer in a range; calendar items with Python's datetime.",
+    "Mutation test: moving each coded item's key to a wrong option is caught 92 of 92 times.",
+    "Format: 80 questions per file; 4 options in en and hi; Hindi options in the same order with the same digits; digits in q and statements match between en and hi; every Hindi q, option and why has Devanagari; statement-code items have statements and ask in both languages; table shapes match.",
+    "Comprehension: each quoted supporting phrase used in a 'why' was checked by code to appear verbatim in its passage. Answers themselves were checked by reading.",
+    "No 'why' refers to an option by position (options were reordered after writing), checked by regex in en and hi.",
+    "Correct-answer positions: 20 at each of 0, 1, 2 and 3 in each paper.",
+    "Overlap with B07 weekly CSAT items checked by word overlap; near-duplicates rewritten (see issuesFound).",
+    "Every file is valid JSON; review.status is 'draft'; nothing is marked approved."
+  ],
+  "issuesFound": [
+    "16 numeracy and reasoning items were too close to B07 weekly practice items (same stems, some with the same numbers: work 12/18 and 12/20 days, boat 15 and 3 km/h over 36 km, trains 150 m and 100 m, a 64-cube, a 3:40 clock, a 40-student row, a dam-burst rumour).",
+    "Comprehension 'why' texts in mock 1 named options by position ('the second option'), which would be wrong after reordering.",
+    "Mock 2 passage 9 said a pot of water 'takes longer to boil' on a mountain, which is wrong (it boils sooner, at a lower temperature).",
+    "The analogy question in mock 2 had no Hindi words in its Hindi q."
+  ],
+  "fixed": [
+    "Rewrote all 16 with new numbers and set-ups, and re-ran the code checks.",
+    "Rewrote those 'why' texts to name options by content, and added a regex check.",
+    "Changed it to rice taking longer to cook in boiling water on a mountain.",
+    "Reworded the question in both languages."
+  ],
+  "stillOpen": [
+    "Passages: the GS mock shape has no place for a passage, so each file has a top-level \"passages\" list ({id, title, text, hi: {title, text}}) and each comprehension question carries \"passage\": \"<id>\". Data questions carry \"table\" (rows of strings, first row the header) and \"hi.table\" with Hindi headers and the same numbers. Please confirm this fits the app, or tell me the shape you want.",
+    "Node ids: only csat-1 (comprehension) was known from the uploaded set. I used csat-2 basic numeracy, csat-3 data interpretation, csat-4 logical and analytical reasoning, csat-5 decision-making. Please confirm against the app's topic list.",
+    "Topic labels are per section (Comprehension, Basic numeracy, Data interpretation, Logical and analytical reasoning, Decision-making) rather than the single 'CSAT' label the comprehension set used.",
+    "Decision-making (6 per paper) is marked like every other question under the given marking. Editors should confirm each keyed answer is the only defensible one.",
+    "Following B07, every Hindi option has Devanagari, so number options carry a Hindi unit ('7.5 दिन', '50 रुपये', 'संख्या 216'); the digits are identical to the English.",
+    "Each paper has one data-sufficiency item and two syllogism items with fixed option sets; their option order is the conventional one and was not shuffled."
+  ]
+}

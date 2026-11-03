@@ -4,7 +4,9 @@
 // Sources (all English, all drafts):
 //   content/syllabus/<subject>.json   upsc-pods/syllabus-notes@1: one long read per syllabus topic
 //   content/csat/<set>.json           upsc-pods/csat-passages@1: passages with their questions
-//   content/mocks/<mock>.json         upsc-pods/mock-source@1: a full paper of questions
+//   content/mocks/<mock>.json         upsc-pods/mock-source@1: a full paper of questions. Optional per question:
+//                                     "hi" (q, statements, ask, options, why), "passage" (an id in the file's
+//                                     "passages" list) and "table" (rows of strings, header first; "hi.table" too).
 // Node ids are checked against the papers and topics in the app's Syllabus.kt ("gs3-2" is GS3's second topic,
 // "pre-4" the fourth Prelims one). Each item carries an editor flag saying what to verify. Nothing here is
 // approved: the pack lands on the desk as drafts.
@@ -97,14 +99,19 @@ function check() {
     if (d.schema !== "upsc-pods/mock-source@1") { errs.push(`${p}: schema should be upsc-pods/mock-source@1`); continue; }
     if (ids.has(d.id)) errs.push(`${p}: id ${d.id} used twice`);
     ids.add(d.id);
-    if (d.questions.length !== 100) errs.push(`${p}: ${d.questions.length} questions; a full GS Paper I has 100`);
+    const full = d.paper === "prelims-csat" ? 80 : 100;
+    if (d.questions.length !== full) errs.push(`${p}: ${d.questions.length} questions; a full ${d.paper === "prelims-csat" ? "CSAT paper" : "GS Paper I"} has ${full}`);
+    const passages = new Set((d.passages ?? []).map((x) => x.id));
     const topics = {};
     d.questions.forEach((q, k) => {
       const at = `${p} Q${k + 1}`;
       checkMcq(q, at, errs);
+      if (q.passage && !passages.has(q.passage)) errs.push(`${at}: passage ${q.passage} isn't in the file's passages`);
+      if (q.hi && (!q.hi.q?.trim() || q.hi.options?.length !== 4 || !q.hi.why?.trim())) errs.push(`${at}: the Hindi needs q, four options and why`);
       topics[q.topic] = (topics[q.topic] ?? 0) + 1;
       // No question twice, in this mock or any other.
-      const key = norm(q.q) + " | " + (q.statements ?? []).map(norm).join(" | ");
+      // Generic stems ("Which assumption is implicit…") repeat across passages, so the passage, table and options count too.
+      const key = [q.q, ...(q.statements ?? []), q.passage ?? "", tableText(q.table ?? []), ...(q.options ?? [])].map(norm).join(" | ");
       if (seenQ.has(key)) errs.push(`${at}: same question as ${seenQ.get(key)}`);
       seenQ.set(key, at);
     });
@@ -136,21 +143,40 @@ function toRead(d, n) {
   };
 }
 
-/** A question in the template shape normalizeMock() in src/content.ts plays. */
-const toMockQ = (q, stem) => ({
-  format: q.format ?? "direct", node: q.nodes[0], nodes: q.nodes, topic: q.topic, answer: q.answerIndex, difficulty: q.difficulty ?? "medium",
-  en: { stem: stem ?? q.q, statements: q.statements ?? [], ask: q.ask ?? null, options: q.options, why: q.why },
-});
+/** A table as plain lines, since the player shows text: "Year | Wheat | Rice". */
+const tableText = (rows) => (rows ?? []).map((r) => r.join(" | ")).join("\n");
+
+/**
+ * A question in the template shape normalizeMock() in src/content.ts plays, in English and (when written) Hindi.
+ * A passage or table goes above the question, because the player shows one question at a time.
+ */
+const toMockQ = (q, stem, passages = {}) => {
+  const lang = (m, l) => {
+    const p = passages[q.passage];
+    const pass = p ? (l === "hi" && p.hi ? `${p.hi.title}\n\n${p.hi.text}` : `${p.title}\n\n${p.text}`) : null;
+    const table = l === "hi" ? (m.table ?? q.table) : q.table;
+    return { stem: [pass, l === "en" && stem ? stem : m.q, table ? tableText(table) : null].filter(Boolean).join("\n\n"),
+      statements: m.statements ?? [], ask: m.ask ?? null, options: m.options, why: m.why };
+  };
+  return {
+    format: q.format ?? "direct", node: q.nodes[0], nodes: q.nodes, topic: q.topic, answer: q.answerIndex, difficulty: q.difficulty ?? "medium",
+    en: lang(q, "en"), ...(q.hi ? { hi: lang(q.hi, "hi") } : {}),
+  };
+};
 
 function toMock(d) {
   const flags = d.questions.map((q, i) => q.verify ? `Q${i + 1}: ${q.verify}` : null).filter(Boolean);
+  const passages = Object.fromEntries((d.passages ?? []).map((p) => [p.id, p]));
+  const hindi = d.questions.every((q) => q.hi);
+  const hiCheck = (d.hiCheck ?? []).map((h) => typeof h === "string" ? h : JSON.stringify(h));
   return {
     ...MOCK_LOOK, marking: d.marking ?? { right: 2, wrong: -0.66, blank: 0 },
     tags: { stage: ["prelims"], papers: [d.paper] },
-    id: d.id, tone: "NEUTRAL", title: { en: d.title }, paper: d.paper, section: d.section, minutes: d.minutes,
-    questions: d.questions.map((q) => toMockQ(q)),
+    id: d.id, tone: "NEUTRAL", title: d.hi?.title ? { en: d.title, hi: d.hi.title } : { en: d.title }, paper: d.paper, section: d.section, minutes: d.minutes,
+    questions: d.questions.map((q) => toMockQ(q, null, passages)),
     sources: { en: d.sources.join("; ") }, schema: "upsc-pods/mock-paper@1",
-    review: REVIEW(`Draft, English only. Check every answer. ${d.verify ?? ""}${flags.length ? " Date-sensitive or worth a second look: " + flags.join("; ") : ""}`.trim()),
+    ...(d.factsToCheck?.length ? { factsToCheck: d.factsToCheck } : {}),
+    review: REVIEW(`Draft, ${hindi ? "English and Hindi" : "English only"}. Check every answer. ${d.verify ?? ""}${flags.length ? " Date-sensitive or worth a second look: " + flags.join("; ") : ""}${hiCheck.length ? ` Hindi editor, check these terms: ${hiCheck.join("; ")}` : ""}`.trim()),
     provenance: PROVENANCE,
   };
 }

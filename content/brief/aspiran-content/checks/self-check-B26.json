@@ -1,0 +1,24 @@
+{
+  "batch": "B26",
+  "checksRun": [
+    "python3 -I tools/lib.py check B26",
+    "5 files: priority 0, nodes 5 / 0 issues",
+    "Note words en/hi by code: soc-p1-08 419/499, soc-p1-09 421/495, soc-p1-10 436/477, soc-p1-15 388/460, soc-p2-09 412/480 (limit 600)",
+    "Recall kinds counted by code: 3 define, 3 compare, 3 example, 3 apply in every node",
+    "Strict re-read of all 5 nodes as a checker who did not write them: facts, balance between theory and critique, Hindi match, and whether every note section ends with a question to the reader"
+  ],
+  "issuesFound": [
+    "soc-p2-09 Hindi 'why' ran to 62 words (limit 60)",
+    "soc-p1-10 called Milton Singer an Indian scholar; he was an American anthropologist",
+    "soc-p1-08 Hindi had a gender slip ('का अधिरचना')"
+  ],
+  "fixed": [
+    "Shortened the soc-p2-09 Hindi 'why' to under 60 words",
+    "Reworded to 'scholars such as Milton Singer' in soc-p1-10",
+    "Changed to 'की अधिरचना' in soc-p1-08"
+  ],
+  "stillOpen": [
+    "Hindi terms (अधिशेष मूल्य, आदर्शशून्यता, फ़र्स्टेहेन, नेमीकरण, समाहन) need the Hindi editor to match UPSC's Hindi papers and the B09 term lists",
+    "Dates and titles in each node's factsToCheck need a human check, especially the Rampura dominant caste and Berreman 1960"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "batch": "B27",
+  "checksRun": [
+    "python3 -I tools/lib.py check B27",
+    "5 files: priority 0, nodes 5 / 0 issues",
+    "Note words en/hi by code: psir-p1-07 408/451, psir-p1-25 400/443, psir-p1-26 410/461, psir-p1-35 406/442, psir-p2-08 400/454 (limit 600)",
+    "Recall kinds counted by code: 3 of each kind in every node",
+    "Strict re-read of all 5 nodes: facts, balance (each thinker has critics stated), Hindi match, reader questions at the end of every note section"
+  ],
+  "issuesFound": [
+    "psir-p1-26 note traced Ambedkar's endogamy argument to Annihilation of Caste, but it was first set out in his 1916 paper Castes in India",
+    "psir-p1-25 and psir-p1-26 risked reading as Gandhi versus Ambedkar with a winner; checked both nodes give each side's reasons"
+  ],
+  "fixed": [
+    "Added Castes in India (1916) to factsToCheck and kept the note wording general ('He traced caste to endogamy')",
+    "Both nodes state the Poona Pact as a meeting point and pose it as an open question to the reader"
+  ],
+  "stillOpen": [
+    "Hindi terms need the Hindi editor: प्राधान्य (hegemony), मोर्चाबंदी का युद्ध / चालबाज़ी का युद्ध (war of position / manoeuvre; चालबाज़ी may read as negative), स्वेच्छातंत्रवादी (libertarian), क्रमिक प्राथमिकता (lexical priority), अतिव्यापी सहमति",
+    "Speech dates and article numbers in factsToCheck need a human check against the Constituent Assembly Debates"
+  ]
+}

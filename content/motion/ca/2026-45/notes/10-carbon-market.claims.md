@@ -1,0 +1,11 @@
+# Claims table: India's carbon market has no cap
+
+| # | Claim (as spoken or shown) | Source | Status |
+|---|---|---|---|
+| 1 | The Carbon Credit Trading Scheme was notified on 28 June 2023 under the Energy Conservation (Amendment) Act, 2022 (amending the 2001 Act) | Lok Sabha USQ 482, 6 Feb 2025; KS&K analysis citing S.O. 2825(E) https://eparlib.sansad.in/bitstream/123456789/2987704/1/AU482_Ezi7PM.pdf | verified-secondary |
+| 2 | Obligated entities must achieve greenhouse gas emission intensity targets notified by the Government (intensity, not an absolute cap) | Lok Sabha USQ 482; PIB 22 Jan 2026; ICAP https://www.pib.gov.in/PressReleasePage.aspx?PRID=2217239&reg=3&lang=1 | verified-primary |
+| 3 | Targets are set per tonne of product (intensity-based baseline-and-credit system, no cap) | ICAP (30 Mar 2026); Down To Earth (14 Jul 2026) https://icapcarbonaction.com/en/news/compliance-obligations-under-indias-carbon-credit-trading-scheme-enter-force-seven-sectors | verified-secondary |
+| 4 | Entities that beat their targets get Carbon Credit Certificates they can trade; entities that fall short must buy and surrender certificates | PIB 22 Jan 2026; ICAP https://www.pib.gov.in/PressReleasePage.aspx?PRID=2217239&reg=3&lang=1 | verified-primary |
+| 5 | GEI targets notified for aluminium, cement, chlor-alkali, pulp and paper (Oct 2025) and petroleum refineries, petrochemicals, textiles, secondary aluminium (13 Jan 2026) | PIB, MoEFCC, 22 Jan 2026 https://www.pib.gov.in/PressReleasePage.aspx?PRID=2217239&reg=3&lang=1 | verified-primary |
+| 6 | Iron and steel targets are a revised draft (issued 26 June 2026, 60-day objection window), not final as of November 2026 | LKS; Down To Earth https://sustainability.lkslaw.com/insights/gei-targets-iron-steel | verified-secondary |
+| 7 | Under an intensity target, a plant's total emissions can rise with output while it still meets its target (follows from the target being per unit of product) | Inference from the intensity design; ICAP describes CCTS as intensity-based, not cap-based https://icapcarbonaction.com/en/news/compliance-obligations-under-indias-carbon-credit-trading-scheme-enter-force-seven-sectors | verified-secondary |

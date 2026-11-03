@@ -1,0 +1,9 @@
+# Claims table: A Money Bill and a Financial Bill are not the same thing
+
+| # | Claim (as spoken or shown) | Source | Status |
+|---|---|---|---|
+| 1 | Article 110(1): a Bill is a Money Bill if it contains only provisions dealing with matters such as taxes, government borrowing, and the custody of / appropriation from the Consolidated Fund | Constitution of India, Art. 110 https://www.constitutionofindia.net/articles/article-110-definition-of-money-bills/ | verified-secondary |
+| 2 | Article 110(3): the Speaker's decision on whether a Bill is a Money Bill is final; 110(4): the Speaker's certificate is endorsed on it | Constitution of India, Art. 110 https://www.constitutionofindia.net/articles/article-110-definition-of-money-bills/ | verified-secondary |
+| 3 | Article 109: a Money Bill is not introduced in the Council of States; the Council returns it within 14 days with recommendations; the Lok Sabha may accept or reject all or any of them | Constitution of India, Art. 109 https://www.constitutionofindia.net/articles/article-109-special-procedure-in-respect-of-money-bills/ | verified-secondary |
+| 4 | Article 117(1): a Bill making provision for any of the matters in Art. 110(1)(a)-(f) needs the President's recommendation and shall not be introduced in the Council of States; a bill that also has other provisions is therefore not a Money Bill (110(1) 'only') | Constitution of India, Art. 117 and 110 https://www.constitutionofindia.net/articles/article-117-special-provisions-as-to-financial-bills/ | verified-secondary |
+| 5 | After introduction, a Financial Bill follows the ordinary procedure: it is passed only when both Houses agree (Art. 107(2)); the Rajya Sabha's 14-day limit does not apply | Art. 107(2); Anantam IAS explainer https://anantamias.com/money-bill-vs-finance-bill/ | verified-secondary |

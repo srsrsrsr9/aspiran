@@ -1,0 +1,36 @@
+{
+  "batch": "B23",
+  "made": "2026-11-02",
+  "model": "Claude",
+  "files": [
+    {
+      "path": "mocks/prelims-csat-full-mock-1.json",
+      "id": "pre-csat-full-mock-1",
+      "items": 80
+    },
+    {
+      "path": "mocks/prelims-csat-full-mock-2.json",
+      "id": "pre-csat-full-mock-2",
+      "items": 80
+    }
+  ],
+  "counts": {
+    "questions": 160,
+    "passages": 18,
+    "byTopic": {
+      "Comprehension": 56,
+      "Basic numeracy": 40,
+      "Data interpretation": 16,
+      "Logical and analytical reasoning": 36,
+      "Decision-making": 12
+    }
+  },
+  "openQuestions": [
+    "Passages: the GS mock shape has no place for a passage, so each file has a top-level \"passages\" list ({id, title, text, hi: {title, text}}) and each comprehension question carries \"passage\": \"<id>\". Data questions carry \"table\" (rows of strings, first row the header) and \"hi.table\" with Hindi headers and the same numbers. Please confirm this fits the app, or tell me the shape you want.",
+    "Node ids: only csat-1 (comprehension) was known from the uploaded set. I used csat-2 basic numeracy, csat-3 data interpretation, csat-4 logical and analytical reasoning, csat-5 decision-making. Please confirm against the app's topic list.",
+    "Topic labels are per section (Comprehension, Basic numeracy, Data interpretation, Logical and analytical reasoning, Decision-making) rather than the single 'CSAT' label the comprehension set used.",
+    "Decision-making (6 per paper) is marked like every other question under the given marking. Editors should confirm each keyed answer is the only defensible one.",
+    "Following B07, every Hindi option has Devanagari, so number options carry a Hindi unit ('7.5 दिन', '50 रुपये', 'संख्या 216'); the digits are identical to the English.",
+    "Each paper has one data-sufficiency item and two syllogism items with fixed option sets; their option order is the conventional one and was not shuffled."
+  ]
+}

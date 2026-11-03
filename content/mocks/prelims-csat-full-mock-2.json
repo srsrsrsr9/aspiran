@@ -1,0 +1,2775 @@
+{
+  "schema": "upsc-pods/mock-source@1",
+  "id": "pre-csat-full-mock-2",
+  "title": "Prelims CSAT Paper II: full mock 2",
+  "paper": "prelims-csat",
+  "section": "Full paper",
+  "minutes": 120,
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "note": "80 original questions balanced roughly like recent UPSC CSAT papers: comprehension 28 (in 9 original passages), basic numeracy 20, data interpretation 8, logical and analytical reasoning 18, decision-making 6. No question is taken from a past paper.",
+  "sources": [
+    "Original passages and questions written for this app",
+    "Question styles follow recent UPSC CSAT papers (upsc.gov.in)"
+  ],
+  "verify": "Numeracy, data and reasoning answers were recomputed by code (see checks/self-check.json). For comprehension, read each passage with its questions and confirm every answer follows from the passage alone and no wrong option is also defensible. For decision-making, confirm the keyed answer is the only defensible one.",
+  "hi": {
+    "title": "प्रारंभिक परीक्षा CSAT प्रश्नपत्र II: पूर्ण मॉक 2"
+  },
+  "review": {
+    "status": "draft"
+  },
+  "factsToCheck": [
+    "m2-p1: solar output falls at sunset while urban electricity demand in India peaks in the evening; batteries and pumped hydro store energy with some losses; agricultural pumping can be shifted to daytime. General, no figures used.",
+    "m2-p2: some towns mark vending zones, issue licences and set hours (in line with the Street Vendors (Protection of Livelihood and Regulation of Street Vending) Act, 2014, which the passage does not name).",
+    "m2-p4: self-help groups save and lend from a common fund and can receive bank loans as a group (the SHG-bank linkage model). No figures used.",
+    "m2-p5: soil organic matter falls with repeated tillage, bare fallows and fertiliser-only management, and rebuilds over years with cover, compost and rotation. General soil science.",
+    "m2-p8: coral bleaching is the expulsion of symbiotic algae (zooxanthellae) under prolonged heat stress; bleached corals can recover if temperatures fall. General science.",
+    "m2-p9: water boils below 100 °C at altitude because air pressure is lower, so it boils sooner but at a lower temperature, and food takes longer to cook. The passage says rice takes longer to cook in boiling water on a mountain, which follows from the lower boiling temperature.",
+    "All names, tables and figures in the numeracy, data and reasoning questions are invented for practice and are not real data.",
+    "Reasoning item: 26 January 1950 was a Thursday (checked with Python's calendar).",
+    "Decision-making item on gifts relies on the general principle in conduct rules that officials should not accept gifts in connection with official work; it does not cite any rule number."
+  ],
+  "passages": [
+    {
+      "id": "m2-p1",
+      "title": "When the sun goes down",
+      "text": "Solar power has become one of the cheapest ways to generate electricity. Panels on rooftops and in large parks now supply a growing share of the power used during the day. Yet the sun sets every evening, and in many Indian cities that is exactly when demand rises: people return home, switch on lights and fans, and cook dinner. A grid that relies heavily on solar power must find another source for these hours.\n\nAt present that gap is filled mostly by power stations that can be turned up and down, many of them burning coal or gas. This creates an odd situation. The more solar capacity a grid adds, the more sharply it must ramp up other plants each evening, and those plants sit partly idle during the sunny hours while still having to be paid for.\n\nStorage offers a way out. Batteries can be charged with cheap midday power and discharged after sunset. Water can be pumped uphill when power is plentiful and released through turbines when it is needed. Both methods lose some energy in the process, and both cost money to build. But as their costs fall, they make it possible to shift sunshine from noon to night.\n\nStorage is not the only answer. Demand itself can be shifted. Water pumps for farms, for example, can be run in the afternoon rather than at night if the supply is reliable at that time. Prices that are lower at midday can encourage factories and households to move some of their use to the sunny hours. A grid that uses both approaches will need less storage, and less backup from fossil fuels, than one that relies on either alone.",
+      "hi": {
+        "title": "जब सूरज ढलता है",
+        "text": "सौर ऊर्जा बिजली बनाने के सबसे सस्ते तरीक़ों में से एक बन गई है। छतों पर और बड़े पार्कों में लगे पैनल अब दिन में उपयोग होने वाली बिजली का बढ़ता हिस्सा देते हैं। फिर भी सूरज हर शाम ढलता है, और कई भारतीय शहरों में ठीक उसी समय माँग बढ़ती है: लोग घर लौटते हैं, बत्तियाँ और पंखे चलाते हैं, और रात का खाना पकाते हैं। जो ग्रिड सौर ऊर्जा पर बहुत निर्भर है, उसे इन घंटों के लिए कोई दूसरा स्रोत ढूँढना होगा।\n\nअभी यह कमी मुख्य रूप से ऐसे बिजलीघरों से पूरी होती है जिनका उत्पादन घटाया-बढ़ाया जा सकता है, और उनमें से कई कोयला या गैस जलाते हैं। इससे एक अजीब स्थिति बनती है। ग्रिड जितनी अधिक सौर क्षमता जोड़ता है, उसे हर शाम दूसरे संयंत्रों का उत्पादन उतनी ही तेज़ी से बढ़ाना पड़ता है, और ये संयंत्र धूप वाले घंटों में आंशिक रूप से ख़ाली बैठे रहते हैं, जबकि उनका भुगतान फिर भी करना पड़ता है।\n\nभंडारण इससे निकलने का एक रास्ता देता है। बैटरियों को दोपहर की सस्ती बिजली से चार्ज करके सूर्यास्त के बाद इस्तेमाल किया जा सकता है। बिजली भरपूर होने पर पानी को ऊपर पंप किया जा सकता है और ज़रूरत पड़ने पर टर्बाइनों से होकर छोड़ा जा सकता है। दोनों तरीक़ों में इस प्रक्रिया में कुछ ऊर्जा नष्ट होती है, और दोनों को बनाने में पैसा लगता है। पर जैसे-जैसे उनकी लागत घटती है, वे धूप को दोपहर से रात तक ले जाना संभव बनाते हैं।\n\nभंडारण ही एकमात्र उत्तर नहीं है। माँग को भी खिसकाया जा सकता है। उदाहरण के लिए, खेतों के पानी के पंप रात की बजाय दोपहर में चलाए जा सकते हैं, यदि उस समय आपूर्ति भरोसेमंद हो। दोपहर में कम क़ीमतें कारख़ानों और घरों को अपने उपयोग का कुछ हिस्सा धूप वाले घंटों में ले जाने के लिए प्रेरित कर सकती हैं। जो ग्रिड दोनों तरीक़े अपनाता है, उसे किसी एक पर निर्भर ग्रिड की तुलना में कम भंडारण और जीवाश्म ईंधनों से कम सहारे की ज़रूरत होगी।"
+      }
+    },
+    {
+      "id": "m2-p2",
+      "title": "The street as a shared room",
+      "text": "In most Indian towns the street is far more than a route for traffic. It is a market, a meeting place, a playground and, for many, a workplace. Vendors selling fruit, tea, flowers and repairs set up on pavements because that is where customers pass. Shoppers benefit from goods brought to their doorstep at low prices. The vendors, for their part, earn a living with very little capital.\n\nCity authorities often see this activity as disorder. Pavements crowded with stalls force pedestrians onto the road; carts block traffic; waste piles up at the end of the day. From time to time, drives are launched to clear the streets. Stalls are removed, goods are seized, and for a few weeks the pavements are empty. Then, slowly, the vendors return, because the reasons that brought them there have not changed.\n\nA more lasting approach begins by accepting that street vending meets a real need, both for those who sell and for those who buy. The question then becomes how to organise it rather than how to remove it. Some towns have marked out vending zones, issued licences, set fixed hours and made vendors responsible for cleaning their spots. Where vendors have a voice in drawing up these rules, they are more likely to follow them.\n\nSuch arrangements do not end every conflict. Shopkeepers may resent competition at their doors, and residents may object to noise. But a rule that people helped to make, and that leaves them a way to earn a living, tends to hold longer than one that simply tells them to go away.",
+      "hi": {
+        "title": "साझा कमरे जैसी सड़क",
+        "text": "ज़्यादातर भारतीय शहरों में सड़क यातायात के रास्ते से कहीं अधिक है। वह बाज़ार है, मिलने की जगह है, खेल का मैदान है और बहुतों के लिए कार्यस्थल भी। फल, चाय, फूल बेचने वाले और मरम्मत करने वाले विक्रेता फ़ुटपाथ पर इसलिए बैठते हैं क्योंकि ग्राहक वहीं से गुज़रते हैं। ख़रीदारों को घर के पास कम दाम पर सामान मिल जाता है। विक्रेता, अपनी ओर से, बहुत कम पूँजी में रोज़ी कमाते हैं।\n\nनगर प्रशासन अक्सर इस गतिविधि को अव्यवस्था मानता है। ठेलों से भरे फ़ुटपाथ पैदल चलने वालों को सड़क पर उतरने को मजबूर करते हैं; गाड़ियाँ यातायात रोकती हैं; दिन के अंत में कचरा जमा हो जाता है। समय-समय पर सड़कें ख़ाली कराने के अभियान चलाए जाते हैं। ठेले हटा दिए जाते हैं, सामान ज़ब्त कर लिया जाता है, और कुछ सप्ताहों तक फ़ुटपाथ ख़ाली रहते हैं। फिर धीरे-धीरे विक्रेता लौट आते हैं, क्योंकि जिन कारणों से वे वहाँ आए थे, वे बदले नहीं हैं।\n\nअधिक टिकाऊ तरीक़ा यह मानने से शुरू होता है कि रेहड़ी-पटरी का व्यापार एक वास्तविक ज़रूरत पूरी करता है, बेचने वालों के लिए भी और ख़रीदने वालों के लिए भी। तब प्रश्न यह बन जाता है कि इसे व्यवस्थित कैसे किया जाए, न कि इसे हटाया कैसे जाए। कुछ शहरों ने विक्रय क्षेत्र चिह्नित किए हैं, लाइसेंस जारी किए हैं, निश्चित समय तय किया है और विक्रेताओं को अपनी जगह साफ़ रखने की ज़िम्मेदारी दी है। जहाँ इन नियमों को बनाने में विक्रेताओं की भी आवाज़ होती है, वहाँ उनके इनका पालन करने की संभावना अधिक होती है।\n\nऐसी व्यवस्थाएँ हर टकराव ख़त्म नहीं करतीं। दुकानदारों को अपने दरवाज़े पर प्रतिस्पर्धा बुरी लग सकती है, और निवासी शोर पर आपत्ति कर सकते हैं। पर जो नियम लोगों ने बनाने में मदद की हो, और जो उनके लिए रोज़ी कमाने का रास्ता छोड़ता हो, वह उस नियम से अधिक समय तक टिकता है जो उन्हें बस चले जाने को कहता है।"
+      }
+    },
+    {
+      "id": "m2-p3",
+      "title": "Being wrong, usefully",
+      "text": "Science is often presented as a collection of facts. Students learn that the earth goes round the sun, that diseases are spread by germs, and that matter is made of atoms. What they learn less often is how these ideas came to be accepted, and how many other ideas were tried and dropped along the way.\n\nThe strength of science lies less in any single answer than in its method of correcting itself. A scientist proposes an explanation and works out what it predicts. Others then test those predictions, often hoping to find a flaw. An idea that survives many such tests is accepted, but only for as long as it keeps surviving. If new evidence goes against it, the idea is revised or replaced, even if it has been taught for generations.\n\nThis makes science different from simple certainty. A scientist who says 'the evidence strongly suggests' is not being vague; she is describing how much the evidence supports a claim. Members of the public sometimes hear this caution as weakness, and prefer a confident voice that never admits doubt. But a claim that can never be shown to be wrong is not stronger for that reason. It simply cannot be tested.\n\nTeaching science as a fixed list of facts hides this process. It may also leave students unprepared when the advice they hear changes, as it sometimes must when better evidence arrives. A student who understands how science corrects itself is more likely to see such a change as a sign that the system is working, not as proof that experts cannot be trusted.",
+      "hi": {
+        "title": "उपयोगी ढंग से ग़लत होना",
+        "text": "विज्ञान को अक्सर तथ्यों के संग्रह के रूप में प्रस्तुत किया जाता है। विद्यार्थी सीखते हैं कि पृथ्वी सूर्य के चारों ओर घूमती है, कि रोग कीटाणुओं से फैलते हैं, और कि पदार्थ परमाणुओं से बना है। वे यह कम सीखते हैं कि ये विचार कैसे स्वीकार किए गए, और रास्ते में कितने दूसरे विचार आज़माए और छोड़ दिए गए।\n\nविज्ञान की शक्ति किसी एक उत्तर में कम और स्वयं को सुधारने की उसकी पद्धति में अधिक है। कोई वैज्ञानिक एक व्याख्या प्रस्तावित करता है और यह निकालता है कि उससे क्या भविष्यवाणी होती है। फिर दूसरे लोग उन भविष्यवाणियों को परखते हैं, अक्सर इस आशा में कि कोई दोष मिल जाए। जो विचार ऐसी अनेक परखों में टिक जाता है, वह स्वीकार कर लिया जाता है, पर केवल तब तक जब तक वह टिका रहता है। यदि नए साक्ष्य उसके विरुद्ध जाते हैं, तो विचार को संशोधित किया जाता है या बदल दिया जाता है, भले ही वह पीढ़ियों से पढ़ाया जा रहा हो।\n\nयह विज्ञान को सीधी-सादी निश्चितता से अलग बनाता है। जो वैज्ञानिक कहती है कि 'साक्ष्य दृढ़ता से संकेत करते हैं', वह गोलमोल बात नहीं कर रही; वह बता रही है कि साक्ष्य किसी दावे का कितना समर्थन करते हैं। आम लोग कभी-कभी इस सावधानी को कमज़ोरी समझते हैं, और ऐसी आत्मविश्वासी आवाज़ पसंद करते हैं जो कभी संदेह स्वीकार नहीं करती। पर जिस दावे को कभी ग़लत सिद्ध नहीं किया जा सकता, वह इस कारण अधिक मज़बूत नहीं हो जाता। उसे बस परखा नहीं जा सकता।\n\nविज्ञान को तथ्यों की एक तय सूची की तरह पढ़ाना इस प्रक्रिया को छिपा देता है। इससे विद्यार्थी तब तैयार नहीं रह पाते जब उन्हें मिलने वाली सलाह बदलती है, जैसा कि बेहतर साक्ष्य आने पर कभी-कभी होना ही चाहिए। जो विद्यार्थी समझता है कि विज्ञान स्वयं को कैसे सुधारता है, वह ऐसे बदलाव को इस बात का संकेत मानने की अधिक संभावना रखता है कि व्यवस्था काम कर रही है, न कि इस बात का प्रमाण कि विशेषज्ञों पर भरोसा नहीं किया जा सकता।"
+      }
+    },
+    {
+      "id": "m2-p4",
+      "title": "Small loans, shared trust",
+      "text": "For people with little property, borrowing from a bank has long been difficult. A bank lending a small sum must still check the borrower, process papers and chase repayment, and without land or a house to offer as security, the poor appear risky. Many have therefore turned to moneylenders, who lend quickly but often at very high rates.\n\nSelf-help groups offered another route. Women in a village form a small group, save a little each month and lend from their common fund to members in need. After some time, a bank may lend to the group as a whole. The group, not the individual, is responsible for repayment, and members know each other well enough to judge who can repay and to press those who fall behind.\n\nThe benefits have gone beyond money. Regular meetings give women a place to discuss problems, keep accounts and deal with officials. Yet the model also has limits. Peer pressure that ensures repayment can turn harsh for a member facing illness or crop failure, and small loans alone rarely lift a family out of poverty if there are no markets for what it produces.",
+      "hi": {
+        "title": "छोटे ऋण, साझा भरोसा",
+        "text": "कम संपत्ति वाले लोगों के लिए बैंक से उधार लेना लंबे समय से कठिन रहा है। छोटी राशि देने वाले बैंक को भी उधार लेने वाले की जाँच करनी पड़ती है, काग़ज़ तैयार करने पड़ते हैं और वसूली के पीछे भागना पड़ता है, और ज़मानत के लिए ज़मीन या घर न होने पर ग़रीब जोखिम भरे लगते हैं। इसलिए बहुत-से लोग साहूकारों के पास गए हैं, जो जल्दी उधार देते हैं पर अक्सर बहुत ऊँची दरों पर।\n\nस्वयं सहायता समूहों ने एक और रास्ता दिया। गाँव की महिलाएँ एक छोटा समूह बनाती हैं, हर महीने थोड़ी बचत करती हैं और अपनी साझा निधि से ज़रूरतमंद सदस्यों को उधार देती हैं। कुछ समय बाद बैंक पूरे समूह को ऋण दे सकता है। वसूली की ज़िम्मेदारी व्यक्ति की नहीं, समूह की होती है, और सदस्य एक-दूसरे को इतनी अच्छी तरह जानती हैं कि आँक सकें कि कौन चुका सकता है और पीछे रहने वालों पर ज़ोर डाल सकें।\n\nलाभ पैसे से आगे गए हैं। नियमित बैठकें महिलाओं को समस्याओं पर चर्चा करने, हिसाब रखने और अधिकारियों से निपटने की जगह देती हैं। फिर भी इस मॉडल की सीमाएँ भी हैं। वसूली सुनिश्चित करने वाला आपसी दबाव बीमारी या फ़सल ख़राब होने से जूझ रही सदस्य के लिए कठोर हो सकता है, और यदि परिवार जो बनाता है उसके लिए बाज़ार ही न हो, तो अकेले छोटे ऋण शायद ही किसी परिवार को ग़रीबी से निकाल पाते हैं।"
+      }
+    },
+    {
+      "id": "m2-p5",
+      "title": "The living skin of the land",
+      "text": "Soil is often treated as mere dirt, a surface to hold up crops. In fact it is a living system. A handful of healthy soil holds countless organisms that break down dead plants, release nutrients and bind particles into crumbs that let air and water in. The dark material they leave behind, organic matter, is what gives fertile soil much of its ability to hold water and feed plants.\n\nWhen land is ploughed again and again, left bare between crops, or fed only with chemical fertilisers, this organic matter slowly declines. The soil may still produce a crop for many years if enough fertiliser is added, so the loss is easy to miss. But it becomes harder and more crusted, absorbs less rain and washes away more easily. In dry regions, this can be the first step towards land that no longer supports farming at all.\n\nRebuilding soil is slow. Keeping the ground covered with crops or crop residue, adding compost or manure and growing a variety of crops in rotation can raise organic matter over years, not seasons. Because the benefits come late and the costs come early, farmers who rent land for a season or two have little reason to invest in it.",
+      "hi": {
+        "title": "धरती की जीवित त्वचा",
+        "text": "मिट्टी को अक्सर केवल धूल माना जाता है, फ़सलों को थामे रखने वाली एक सतह। वास्तव में वह एक जीवित प्रणाली है। स्वस्थ मिट्टी की एक मुट्ठी में अनगिनत जीव होते हैं, जो मृत पौधों को विघटित करते हैं, पोषक तत्व मुक्त करते हैं और कणों को ऐसे भुरभुरे ढेलों में बाँधते हैं जिनसे हवा और पानी भीतर जा सके। वे जो गहरे रंग का पदार्थ पीछे छोड़ते हैं, यानी जैविक पदार्थ, वही उपजाऊ मिट्टी को पानी रोकने और पौधों को पोषण देने की उसकी क्षमता का बड़ा हिस्सा देता है।\n\nजब ज़मीन को बार-बार जोता जाता है, फ़सलों के बीच ख़ाली छोड़ दिया जाता है, या केवल रासायनिक उर्वरक दिए जाते हैं, तो यह जैविक पदार्थ धीरे-धीरे घटता है। पर्याप्त उर्वरक डालने पर मिट्टी कई वर्षों तक फ़सल देती रह सकती है, इसलिए यह क्षति आसानी से नज़र नहीं आती। पर वह कठोर और पपड़ीदार होती जाती है, कम बारिश सोखती है और आसानी से बह जाती है। शुष्क क्षेत्रों में यह ऐसी ज़मीन की ओर पहला क़दम हो सकता है जो खेती लायक रहे ही नहीं।\n\nमिट्टी को फिर से बनाना धीमा काम है। ज़मीन को फ़सलों या फ़सल-अवशेषों से ढका रखना, कम्पोस्ट या गोबर की खाद डालना और फ़सल-चक्र में अलग-अलग फ़सलें उगाना जैविक पदार्थ को मौसमों में नहीं, वर्षों में बढ़ा सकते हैं। चूँकि लाभ देर से आते हैं और लागत पहले लगती है, इसलिए जो किसान एक-दो मौसम के लिए ज़मीन किराये पर लेते हैं, उनके पास उसमें निवेश करने का बहुत कम कारण होता है।"
+      }
+    },
+    {
+      "id": "m2-p6",
+      "title": "Between two languages",
+      "text": "India's literatures are written in many languages, yet most readers can enjoy only those in the one or two languages they know. Translation is the bridge. A novel written in Malayalam can reach readers in Assam; a poem in Marathi can be read in Punjab. Without translators, each literature would remain largely unknown beyond its own region.\n\nGood translation is harder than it looks. Words rarely match one to one, and much of a text's meaning lies in rhythm, idiom and the world it assumes its readers share. A translator must constantly choose: stay close to the original words and risk sounding stiff, or write naturally in the new language and risk losing something of the original's flavour. There is no formula for this; each choice depends on judgement.\n\nDespite this, translators are often poorly paid and their names are printed in small type, if at all. Readers praise the author for a book they could read only because someone else rewrote every sentence of it.",
+      "hi": {
+        "title": "दो भाषाओं के बीच",
+        "text": "भारत का साहित्य अनेक भाषाओं में लिखा जाता है, फिर भी अधिकांश पाठक केवल उन्हीं एक-दो भाषाओं के साहित्य का आनंद ले पाते हैं जिन्हें वे जानते हैं। अनुवाद ही पुल है। मलयालम में लिखा उपन्यास असम के पाठकों तक पहुँच सकता है; मराठी की कविता पंजाब में पढ़ी जा सकती है। अनुवादकों के बिना हर साहित्य अपने क्षेत्र के बाहर काफ़ी हद तक अनजाना ही रह जाता।\n\nअच्छा अनुवाद जितना दिखता है उससे कठिन है। शब्द शायद ही कभी एक-एक करके मेल खाते हैं, और किसी पाठ के अर्थ का बड़ा हिस्सा उसकी लय, मुहावरों और उस संसार में होता है जिसे वह मानकर चलता है कि उसके पाठक जानते हैं। अनुवादक को लगातार चुनना पड़ता है: मूल शब्दों के निकट रहे और भाषा के कठोर लगने का जोखिम उठाए, या नई भाषा में सहज ढंग से लिखे और मूल के स्वाद का कुछ अंश खोने का जोखिम उठाए। इसका कोई सूत्र नहीं है; हर चुनाव विवेक पर निर्भर करता है।\n\nइसके बावजूद, अनुवादकों को अक्सर कम पारिश्रमिक मिलता है और उनके नाम छोटे अक्षरों में छपते हैं, यदि छपते भी हैं। पाठक उस किताब के लिए लेखक की प्रशंसा करते हैं जिसे वे केवल इसलिए पढ़ पाए क्योंकि किसी और ने उसका हर वाक्य फिर से लिखा।"
+      }
+    },
+    {
+      "id": "m2-p7",
+      "title": "Why people pay their taxes",
+      "text": "It is natural to think that people pay taxes only because they fear being caught. Penalties and inspections certainly matter. Yet in most countries the chance of any single person being audited is small, and many still pay what they owe. Something besides fear is at work.\n\nOne part of it is a sense of fairness. People are more willing to pay when they believe others are paying too, and when they see the money returned as roads, schools and clinics that work. If they believe that the rich escape, or that funds are wasted, their own willingness weakens. Another part is convenience: a tax that is simple to understand and easy to file is paid more often than one that demands hours of paperwork and the help of an agent.\n\nThis suggests that collecting more revenue is not only a matter of tougher enforcement. Making the system simpler, showing clearly what taxes pay for and treating honest taxpayers with respect can all raise compliance, sometimes at a lower cost than more inspections.",
+      "hi": {
+        "title": "लोग कर क्यों चुकाते हैं",
+        "text": "यह सोचना स्वाभाविक है कि लोग कर केवल पकड़े जाने के डर से चुकाते हैं। दंड और निरीक्षण निश्चित रूप से मायने रखते हैं। फिर भी अधिकांश देशों में किसी एक व्यक्ति की जाँच होने की संभावना कम होती है, और फिर भी बहुत-से लोग जितना देना है उतना चुकाते हैं। डर के अलावा भी कुछ काम कर रहा है।\n\nइसका एक हिस्सा निष्पक्षता की भावना है। लोग तब कर देने को अधिक तैयार रहते हैं जब उन्हें विश्वास हो कि दूसरे भी चुका रहे हैं, और जब वे देखें कि पैसा ठीक से चलने वाली सड़कों, स्कूलों और क्लिनिकों के रूप में लौट रहा है। यदि उन्हें लगे कि अमीर बच निकलते हैं, या धन बर्बाद होता है, तो उनकी अपनी इच्छा कमज़ोर पड़ जाती है। दूसरा हिस्सा सुविधा है: जो कर समझने में सरल और भरने में आसान हो, वह उस कर से अधिक बार चुकाया जाता है जिसमें घंटों काग़ज़ी काम और किसी एजेंट की मदद लगे।\n\nइससे संकेत मिलता है कि अधिक राजस्व जुटाना केवल सख़्त प्रवर्तन का मामला नहीं है। व्यवस्था को सरल बनाना, स्पष्ट रूप से दिखाना कि कर किन कामों पर ख़र्च होते हैं और ईमानदार करदाताओं के साथ सम्मान से पेश आना, ये सब अनुपालन बढ़ा सकते हैं, कभी-कभी अधिक निरीक्षणों से कम लागत पर।"
+      }
+    },
+    {
+      "id": "m2-p8",
+      "title": "Reefs under heat",
+      "text": "Coral reefs are built by tiny animals that live in partnership with algae inside their tissues. The algae supply food through photosynthesis and give corals much of their colour. When the sea stays unusually warm for weeks, this partnership breaks down: the corals expel the algae and turn white, a process called bleaching. Bleached corals are not dead, and if the water cools soon enough they can recover. But repeated or prolonged heat leaves them starving and weak, and many die. Because reefs shelter a great variety of fish and protect coasts from waves, their loss is felt far beyond the reef itself.",
+      "hi": {
+        "title": "गर्मी की मार झेलती प्रवाल भित्तियाँ",
+        "text": "प्रवाल भित्तियाँ ऐसे सूक्ष्म जीवों से बनती हैं जो अपने ऊतकों के भीतर शैवाल के साथ साझेदारी में रहते हैं। शैवाल प्रकाश-संश्लेषण से भोजन देते हैं और प्रवालों को उनका अधिकांश रंग देते हैं। जब समुद्र सप्ताहों तक असामान्य रूप से गर्म रहता है, तो यह साझेदारी टूट जाती है: प्रवाल शैवाल को बाहर निकाल देते हैं और सफ़ेद पड़ जाते हैं, जिसे विरंजन कहते हैं। विरंजित प्रवाल मरे नहीं होते, और यदि पानी जल्दी ठंडा हो जाए तो वे फिर से ठीक हो सकते हैं। पर बार-बार या लंबे समय तक रहने वाली गर्मी उन्हें भूखा और कमज़ोर छोड़ देती है, और बहुत-से मर जाते हैं। चूँकि भित्तियाँ मछलियों की बड़ी विविधता को आश्रय देती हैं और तटों को लहरों से बचाती हैं, इसलिए उनका नष्ट होना भित्ति से बहुत दूर तक महसूस होता है।"
+      }
+    },
+    {
+      "id": "m2-p9",
+      "title": "The question behind the answer",
+      "text": "A student who has memorised that water boils at 100 degrees Celsius can repeat the fact on demand. A student who has wondered why rice takes longer to cook in boiling water on a mountain has begun to do something different: she is connecting a fact to the world and asking what lies behind it. The second kind of learning is slower and harder to test in an examination, but it lasts longer and carries over to new problems. Classrooms that reward only correct answers, and never good questions, teach students that curiosity is a distraction from learning rather than the heart of it.",
+      "hi": {
+        "title": "उत्तर के पीछे का प्रश्न",
+        "text": "जिस विद्यार्थी ने रट लिया है कि पानी 100 डिग्री सेल्सियस पर उबलता है, वह माँगे जाने पर यह तथ्य दोहरा सकता है। जिस विद्यार्थी ने सोचा है कि पहाड़ पर उबलते पानी में चावल पकने में अधिक समय क्यों लगता है, उसने कुछ अलग करना शुरू कर दिया है: वह एक तथ्य को दुनिया से जोड़ रही है और पूछ रही है कि उसके पीछे क्या है। दूसरी तरह का सीखना धीमा है और परीक्षा में परखना कठिन, पर वह अधिक समय तक टिकता है और नई समस्याओं तक पहुँचता है। जो कक्षाएँ केवल सही उत्तरों को पुरस्कृत करती हैं, और अच्छे प्रश्नों को कभी नहीं, वे विद्यार्थियों को सिखाती हैं कि जिज्ञासा सीखने का केंद्र नहीं, बल्कि उससे भटकाव है।"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A is twice as efficient as B. Working together, they finish a job in 14 days. In how many days can A alone finish it?",
+      "options": [
+        "28 days",
+        "42 days",
+        "21 days",
+        "18 days"
+      ],
+      "answerIndex": 2,
+      "why": "If B does r units of work per day, A does 2r, and together 3r. The job = 3r × 14 = 42r units. A alone takes 42r ÷ 2r = 21 days. (B alone would take 42 days.)",
+      "hi": {
+        "q": "A, B से दोगुना कार्यकुशल है। मिलकर वे कोई काम 14 दिनों में पूरा करते हैं। A अकेला उसे कितने दिनों में पूरा कर सकता है?",
+        "options": [
+          "28 दिन",
+          "42 दिन",
+          "21 दिन",
+          "18 दिन"
+        ],
+        "why": "यदि B प्रतिदिन r इकाई काम करता है, तो A 2r करता है, और दोनों मिलकर 3r। पूरा काम = 3r × 14 = 42r इकाई। A अकेले को 42r ÷ 2r = 21 दिन लगेंगे। (B अकेले को 42 दिन लगेंगे।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p1",
+      "q": "What problem does the passage mainly discuss?",
+      "options": [
+        "Solar panels are too expensive for most households.",
+        "Coal and gas plants cannot be turned up and down.",
+        "Solar power is plentiful at midday but demand peaks after sunset, so the grid must cover the evening gap.",
+        "Cities use less electricity in the evening than during the day."
+      ],
+      "answerIndex": 2,
+      "why": "The first paragraph sets out the mismatch: the sun sets just when demand rises, so a solar-heavy grid needs another source for those hours. The passage calls solar one of the cheapest sources and says evening demand rises, which rules out the claims about cost and lower evening use.",
+      "hi": {
+        "q": "गद्यांश मुख्य रूप से किस समस्या पर चर्चा करता है?",
+        "options": [
+          "सौर पैनल अधिकांश घरों के लिए बहुत महँगे हैं।",
+          "कोयला और गैस संयंत्रों का उत्पादन घटाया-बढ़ाया नहीं जा सकता।",
+          "सौर ऊर्जा दोपहर में भरपूर होती है पर माँग सूर्यास्त के बाद चरम पर होती है, इसलिए ग्रिड को शाम की कमी पूरी करनी पड़ती है।",
+          "शहर दिन की तुलना में शाम को कम बिजली उपयोग करते हैं।"
+        ],
+        "why": "पहला अनुच्छेद यह बेमेल बताता है: सूरज ठीक तब ढलता है जब माँग बढ़ती है, इसलिए सौर पर निर्भर ग्रिड को उन घंटों के लिए दूसरा स्रोत चाहिए। गद्यांश सौर को सबसे सस्ते स्रोतों में गिनता है और कहता है कि शाम को माँग बढ़ती है, इसलिए लागत और शाम को कम उपयोग वाले दावे ग़लत हैं।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p1",
+      "q": "According to the passage, why is it an 'odd situation' that more solar capacity requires more evening ramping?",
+      "options": [
+        "Because the backup plants stay partly idle in sunny hours but must still be paid for.",
+        "Because solar panels produce more power at night as capacity grows.",
+        "Because coal plants become cheaper the less they run.",
+        "Because demand in the evening falls as solar capacity rises."
+      ],
+      "answerIndex": 0,
+      "why": "The second paragraph says the backup plants 'sit partly idle during the sunny hours while still having to be paid for', even as they must ramp up more sharply each evening. Nothing in the passage says solar works at night or that idle plants get cheaper.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, यह 'अजीब स्थिति' क्यों है कि अधिक सौर क्षमता के साथ शाम को उत्पादन तेज़ी से बढ़ाने की ज़रूरत बढ़ती है?",
+        "options": [
+          "क्योंकि सहायक संयंत्र धूप वाले घंटों में आंशिक रूप से ख़ाली रहते हैं पर उनका भुगतान फिर भी करना पड़ता है।",
+          "क्योंकि क्षमता बढ़ने पर सौर पैनल रात में अधिक बिजली बनाते हैं।",
+          "क्योंकि कोयला संयंत्र जितना कम चलें, उतने सस्ते होते जाते हैं।",
+          "क्योंकि सौर क्षमता बढ़ने पर शाम की माँग घटती है।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है कि सहायक संयंत्र 'धूप वाले घंटों में आंशिक रूप से ख़ाली बैठे रहते हैं, जबकि उनका भुगतान फिर भी करना पड़ता है', और साथ ही उन्हें हर शाम और तेज़ी से उत्पादन बढ़ाना पड़ता है। गद्यांश कहीं नहीं कहता कि सौर रात में काम करता है या ख़ाली संयंत्र सस्ते हो जाते हैं।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "statement-code",
+      "difficulty": "medium",
+      "passage": "m2-p1",
+      "q": "Consider the following statements:",
+      "statements": [
+        "According to the passage, pumped water storage, unlike batteries, loses no energy.",
+        "The passage implies that farmers would run pumps in the afternoon only if they could rely on getting power then."
+      ],
+      "ask": "Which of the statements given above is/are correct?",
+      "options": [
+        "1 only",
+        "2 only",
+        "Both 1 and 2",
+        "Neither 1 nor 2"
+      ],
+      "answerIndex": 1,
+      "why": "Statement 1 is wrong: the passage says both batteries and pumped water 'lose some energy in the process'. Statement 2 follows from the example of farm pumps, which can be run in the afternoon 'if the supply is reliable at that time'.",
+      "hi": {
+        "q": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "गद्यांश के अनुसार, बैटरियों के विपरीत, पंप किए गए पानी के भंडारण में कोई ऊर्जा नष्ट नहीं होती।",
+          "गद्यांश का आशय है कि किसान दोपहर में पंप तभी चलाएँगे जब वे उस समय बिजली मिलने पर भरोसा कर सकें।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2",
+          "1 और 2 दोनों",
+          "न तो 1, न ही 2"
+        ],
+        "why": "कथन 1 ग़लत है: गद्यांश कहता है कि बैटरियाँ और पंप किया गया पानी, दोनों 'इस प्रक्रिया में कुछ ऊर्जा' खोते हैं। कथन 2 खेतों के पंपों के उदाहरण से निकलता है, जो दोपहर में चलाए जा सकते हैं 'यदि उस समय आपूर्ति भरोसेमंद हो'।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p1",
+      "q": "Which one of the following best expresses the author's conclusion?",
+      "options": [
+        "Combining storage with shifting demand to sunny hours reduces the need for both storage and fossil-fuel backup.",
+        "Storage alone can solve the evening problem without any change in demand.",
+        "Grids should stop adding solar capacity until storage becomes free.",
+        "Coal and gas plants will always be needed in the same amounts as today."
+      ],
+      "answerIndex": 0,
+      "why": "The last sentence says a grid using both approaches 'will need less storage, and less backup from fossil fuels, than one that relies on either alone'. The fourth paragraph opens by saying storage is 'not the only answer', which rules out the storage-alone option.",
+      "hi": {
+        "q": "निम्नलिखित में से कौन-सा कथन लेखक के निष्कर्ष को सबसे अच्छी तरह व्यक्त करता है?",
+        "options": [
+          "भंडारण को माँग धूप वाले घंटों में खिसकाने के साथ जोड़ने से भंडारण और जीवाश्म-ईंधन सहारे, दोनों की ज़रूरत घटती है।",
+          "माँग में कोई बदलाव किए बिना अकेला भंडारण शाम की समस्या हल कर सकता है।",
+          "जब तक भंडारण मुफ़्त न हो जाए, ग्रिडों को सौर क्षमता जोड़ना बंद कर देना चाहिए।",
+          "कोयला और गैस संयंत्रों की ज़रूरत हमेशा आज जितनी ही रहेगी।"
+        ],
+        "why": "अंतिम वाक्य कहता है कि दोनों तरीक़े अपनाने वाले ग्रिड को 'किसी एक पर निर्भर ग्रिड की तुलना में कम भंडारण और जीवाश्म ईंधनों से कम सहारे की ज़रूरत होगी'। चौथा अनुच्छेद यह कहकर शुरू होता है कि भंडारण 'एकमात्र उत्तर नहीं है', इसलिए अकेले भंडारण वाला विकल्प ग़लत है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "What number comes next in the series: 4, 6, 9, 13.5, ?",
+      "options": [
+        "18",
+        "20.25",
+        "19.5",
+        "22.5"
+      ],
+      "answerIndex": 1,
+      "why": "Each term is 1.5 times the previous one: 4 × 1.5 = 6, 6 × 1.5 = 9, 9 × 1.5 = 13.5, so the next is 13.5 × 1.5 = 20.25.",
+      "hi": {
+        "q": "श्रेणी में अगली संख्या क्या होगी: 4, 6, 9, 13.5, ?",
+        "options": [
+          "संख्या 18",
+          "संख्या 20.25",
+          "संख्या 19.5",
+          "संख्या 22.5"
+        ],
+        "why": "हर पद पिछले पद का 1.5 गुना है: 4 × 1.5 = 6, 6 × 1.5 = 9, 9 × 1.5 = 13.5, अतः अगला 13.5 × 1.5 = 20.25।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A boat goes 30 km downstream in 2 hours and comes back 18 km upstream in 2 hours. What is the speed of the boat in still water?",
+      "options": [
+        "3 km/h",
+        "15 km/h",
+        "10.5 km/h",
+        "12 km/h"
+      ],
+      "answerIndex": 3,
+      "why": "Downstream speed = 30/2 = 15 km/h = boat + stream. Upstream speed = 18/2 = 9 km/h = boat − stream. Adding: 2 × boat = 24, so the boat's speed in still water = 12 km/h (and the stream's is 3 km/h).",
+      "hi": {
+        "q": "एक नाव धारा के साथ 30 किमी 2 घंटे में जाती है और धारा के विरुद्ध 18 किमी 2 घंटे में लौटती है। शांत जल में नाव की चाल क्या है?",
+        "options": [
+          "3 किमी/घंटा",
+          "15 किमी/घंटा",
+          "10.5 किमी/घंटा",
+          "12 किमी/घंटा"
+        ],
+        "why": "धारा के साथ चाल = 30/2 = 15 किमी/घंटा = नाव + धारा। धारा के विरुद्ध चाल = 18/2 = 9 किमी/घंटा = नाव − धारा। जोड़ने पर: 2 × नाव = 24, अतः शांत जल में नाव की चाल = 12 किमी/घंटा (और धारा की 3 किमी/घंटा)।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "What comes next in the series: AZ, BY, CX, DW, ?",
+      "options": [
+        "EU",
+        "FV",
+        "EW",
+        "EV"
+      ],
+      "answerIndex": 3,
+      "why": "The first letters go forward one at a time: A, B, C, D, so next is E. The second letters go backward from the end: Z, Y, X, W, so next is V. The answer is EV.",
+      "hi": {
+        "q": "श्रेणी में आगे क्या आएगा: AZ, BY, CX, DW, ?",
+        "options": [
+          "अक्षर-युग्म EU",
+          "अक्षर-युग्म FV",
+          "अक्षर-युग्म EW",
+          "अक्षर-युग्म EV"
+        ],
+        "why": "पहले अक्षर एक-एक करके आगे बढ़ते हैं: A, B, C, D, अतः अगला E है। दूसरे अक्षर अंत से पीछे की ओर चलते हैं: Z, Y, X, W, अतः अगला V है। उत्तर EV है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A father is now four times as old as his son. After 5 years he will be three times as old as his son. What is the father's present age?",
+      "options": [
+        "36 years",
+        "40 years",
+        "44 years",
+        "30 years"
+      ],
+      "answerIndex": 1,
+      "why": "Let the son's age be s, so the father is 4s. After 5 years: 4s + 5 = 3(s + 5) = 3s + 15, so s = 10. Father = 4 × 10 = 40 years. Check: in 5 years they will be 45 and 15, and 45 = 3 × 15.",
+      "hi": {
+        "q": "एक पिता की वर्तमान आयु अपने पुत्र की आयु की चार गुनी है। 5 वर्ष बाद वह पुत्र की आयु का तीन गुना होगा। पिता की वर्तमान आयु क्या है?",
+        "options": [
+          "36 वर्ष",
+          "40 वर्ष",
+          "44 वर्ष",
+          "30 वर्ष"
+        ],
+        "why": "मान लें पुत्र की आयु s है, तो पिता 4s है। 5 वर्ष बाद: 4s + 5 = 3(s + 5) = 3s + 15, अतः s = 10। पिता = 4 × 10 = 40 वर्ष। जाँच: 5 वर्ष बाद वे 45 और 15 के होंगे, और 45 = 3 × 15।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p2",
+      "q": "According to the passage, why do vendors return to the streets after a clearance drive?",
+      "options": [
+        "The authorities invite them back after a few weeks.",
+        "The fines for vending are too small to matter.",
+        "Shopkeepers ask them to return to attract customers.",
+        "The reasons that brought them there, such as customers and the need to earn, have not changed."
+      ],
+      "answerIndex": 3,
+      "why": "The second paragraph says vendors return 'because the reasons that brought them there have not changed'; the first paragraph gives those reasons: customers pass there and vending needs little capital. Fines, invitations and shopkeepers' requests are not mentioned; the passage says shopkeepers may resent the competition.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, सड़कें ख़ाली कराने के अभियान के बाद विक्रेता फिर क्यों लौट आते हैं?",
+        "options": [
+          "कुछ सप्ताह बाद प्रशासन उन्हें वापस बुला लेता है।",
+          "रेहड़ी लगाने पर जुर्माना इतना कम है कि उसका कोई असर नहीं होता।",
+          "दुकानदार ग्राहकों को आकर्षित करने के लिए उन्हें लौटने को कहते हैं।",
+          "जिन कारणों से वे वहाँ आए थे, जैसे ग्राहक और कमाने की ज़रूरत, वे बदले नहीं हैं।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है कि विक्रेता लौटते हैं 'क्योंकि जिन कारणों से वे वहाँ आए थे, वे बदले नहीं हैं'; पहला अनुच्छेद वे कारण बताता है: ग्राहक वहीं से गुज़रते हैं और इस काम में पूँजी कम लगती है। जुर्माने, बुलावे या दुकानदारों के अनुरोध का ज़िक्र नहीं है; गद्यांश तो कहता है कि दुकानदारों को प्रतिस्पर्धा बुरी लग सकती है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p2",
+      "q": "The author's approach to street vending can best be described as",
+      "options": [
+        "leaving it completely unregulated",
+        "banning it in favour of shops",
+        "organising it through agreed rules rather than trying to remove it",
+        "allowing it only for vendors who own shops"
+      ],
+      "answerIndex": 2,
+      "why": "The third paragraph says the question 'becomes how to organise it rather than how to remove it', and describes zones, licences, fixed hours and cleaning duties. Rules of that kind are regulation, so 'completely unregulated' is also wrong.",
+      "hi": {
+        "q": "रेहड़ी-पटरी व्यापार के प्रति लेखक के दृष्टिकोण का सबसे अच्छा वर्णन क्या है?",
+        "options": [
+          "इसे पूरी तरह बिना नियमन के छोड़ देना",
+          "दुकानों के पक्ष में इस पर रोक लगाना",
+          "इसे हटाने की कोशिश के बजाय सहमति से बने नियमों के ज़रिए व्यवस्थित करना",
+          "केवल उन विक्रेताओं को अनुमति देना जिनकी अपनी दुकानें हैं"
+        ],
+        "why": "तीसरा अनुच्छेद कहता है कि प्रश्न यह बन जाता है कि 'इसे व्यवस्थित कैसे किया जाए, न कि इसे हटाया कैसे जाए', और क्षेत्र, लाइसेंस, निश्चित समय और सफ़ाई की ज़िम्मेदारी का वर्णन करता है। ऐसे नियम नियमन ही हैं, इसलिए 'पूरी तरह बिना नियमन' भी ग़लत है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p2",
+      "q": "Which one of the following assumptions underlies the author's view that vendors should help draw up the rules?",
+      "options": [
+        "Vendors understand traffic engineering better than officials.",
+        "Shopkeepers and residents have no legitimate complaints.",
+        "Every vendor will follow any rule once it is written down.",
+        "People are more willing to obey rules they had a hand in making."
+      ],
+      "answerIndex": 3,
+      "why": "The author says that where vendors have a voice in the rules, 'they are more likely to follow them', and later that a rule people helped to make 'tends to hold longer'. This rests on the idea that taking part in rule-making increases willingness to comply. The passage admits shopkeepers' and residents' concerns, and claims only 'more likely', not that every vendor will comply.",
+      "hi": {
+        "q": "विक्रेताओं को नियम बनाने में शामिल करने के लेखक के विचार के पीछे निम्नलिखित में से कौन-सी पूर्वधारणा है?",
+        "options": [
+          "विक्रेता यातायात अभियांत्रिकी अधिकारियों से बेहतर समझते हैं।",
+          "दुकानदारों और निवासियों की कोई जायज़ शिकायत नहीं है।",
+          "लिखे जाने के बाद हर विक्रेता किसी भी नियम का पालन करेगा।",
+          "लोग उन नियमों का पालन करने को अधिक तैयार रहते हैं जिन्हें बनाने में उनका हाथ रहा हो।"
+        ],
+        "why": "लेखक कहता है कि जहाँ नियमों में विक्रेताओं की आवाज़ होती है, वहाँ 'उनके इनका पालन करने की संभावना अधिक होती है', और बाद में कि जो नियम लोगों ने बनाने में मदद की हो वह 'अधिक समय तक टिकता है'। यह इस विचार पर टिका है कि नियम बनाने में भागीदारी पालन की इच्छा बढ़ाती है। गद्यांश दुकानदारों और निवासियों की चिंताओं को स्वीकार करता है, और केवल 'संभावना अधिक' कहता है, यह नहीं कि हर विक्रेता पालन करेगा।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "statement-code",
+      "difficulty": "medium",
+      "passage": "m2-p2",
+      "q": "Consider the following statements:",
+      "statements": [
+        "The author admits that organised vending will not remove all disputes.",
+        "According to the passage, street vending benefits buyers as well as sellers."
+      ],
+      "ask": "Which of the statements given above is/are correct?",
+      "options": [
+        "1 only",
+        "2 only",
+        "Both 1 and 2",
+        "Neither 1 nor 2"
+      ],
+      "answerIndex": 2,
+      "why": "Statement 1 matches the last paragraph: 'Such arrangements do not end every conflict.' Statement 2 matches the first paragraph, which says shoppers benefit from 'goods brought to their doorstep at low prices'.",
+      "hi": {
+        "q": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "लेखक स्वीकार करता है कि व्यवस्थित विक्रय सभी विवादों को ख़त्म नहीं करेगा।",
+          "गद्यांश के अनुसार, रेहड़ी-पटरी व्यापार से बेचने वालों के साथ ख़रीदारों को भी लाभ होता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2",
+          "1 और 2 दोनों",
+          "न तो 1, न ही 2"
+        ],
+        "why": "कथन 1 अंतिम अनुच्छेद से मेल खाता है: 'ऐसी व्यवस्थाएँ हर टकराव ख़त्म नहीं करतीं।' कथन 2 पहले अनुच्छेद से मेल खाता है, जो कहता है कि ख़रीदारों को 'घर के पास कम दाम पर सामान' मिल जाता है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "In a certain code, MANGO is written as OCPIQ. How will APPLE be written in that code?",
+      "options": [
+        "CQRNG",
+        "CRRNG",
+        "BQQMF",
+        "CRRMG"
+      ],
+      "answerIndex": 1,
+      "why": "Each letter moves two places forward: M → O, A → C, N → P, G → I, O → Q. For APPLE: A → C, P → R, P → R, L → N, E → G. So APPLE is written as CRRNG.",
+      "hi": {
+        "q": "किसी कूट भाषा में MANGO को OCPIQ लिखा जाता है। उसी कूट में APPLE को कैसे लिखा जाएगा?",
+        "options": [
+          "कूट CQRNG",
+          "कूट CRRNG",
+          "कूट BQQMF",
+          "कूट CRRMG"
+        ],
+        "why": "हर अक्षर दो स्थान आगे जाता है: M → O, A → C, N → P, G → I, O → Q। APPLE के लिए: A → C, P → R, P → R, L → N, E → G। अतः APPLE का कूट CRRNG है।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "You are the officer in charge of water supply in a town during a severe summer. Residents of a low-income colony complain that water tankers reach them rarely, while better-off areas get tankers daily. What should you do?",
+      "options": [
+        "Continue the existing pattern, since changing it may annoy influential residents.",
+        "Stop tankers to all areas until the monsoon arrives, so that everyone is treated the same.",
+        "Draw up a tanker schedule based on need and population, publish it, and check that it is followed.",
+        "Ask the colony residents to buy water privately until supply improves."
+      ],
+      "answerIndex": 2,
+      "why": "A published, need-based schedule shares scarce water fairly and makes it easy to see whether it is followed. Keeping the unfair pattern ignores the complaint; stopping all tankers harms everyone; telling poor residents to buy water shifts the burden onto those least able to bear it.",
+      "hi": {
+        "q": "आप भीषण गर्मी में एक शहर की जलापूर्ति के प्रभारी अधिकारी हैं। एक कम आय वाली बस्ती के निवासी शिकायत करते हैं कि पानी के टैंकर उन तक कभी-कभार पहुँचते हैं, जबकि संपन्न इलाक़ों में रोज़ टैंकर जाते हैं। आपको क्या करना चाहिए?",
+        "options": [
+          "मौजूदा ढर्रा जारी रखें, क्योंकि उसे बदलने से प्रभावशाली निवासी नाराज़ हो सकते हैं।",
+          "मानसून आने तक सभी इलाक़ों में टैंकर बंद कर दें, ताकि सबके साथ एक जैसा व्यवहार हो।",
+          "ज़रूरत और आबादी के आधार पर टैंकरों की समय-सारणी बनाएँ, उसे सार्वजनिक करें और जाँचें कि उसका पालन हो।",
+          "बस्ती के निवासियों से कहें कि आपूर्ति सुधरने तक निजी तौर पर पानी ख़रीदें।"
+        ],
+        "why": "सार्वजनिक, ज़रूरत-आधारित समय-सारणी दुर्लभ पानी को निष्पक्ष रूप से बाँटती है और यह देखना आसान बनाती है कि उसका पालन हो रहा है या नहीं। अनुचित ढर्रा जारी रखना शिकायत को अनदेखा करता है; सभी टैंकर बंद करना सबको नुक़सान पहुँचाता है; ग़रीब निवासियों से पानी ख़रीदने को कहना बोझ उन पर डालता है जो उसे उठाने में सबसे कम सक्षम हैं।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "What is the largest number that divides 245 and 1029 leaving a remainder of 5 in each case?",
+      "options": [
+        "16",
+        "8",
+        "32",
+        "12"
+      ],
+      "answerIndex": 0,
+      "why": "If the number leaves remainder 5, it divides 245 − 5 = 240 and 1029 − 5 = 1024 exactly. 240 = 2⁴ × 15 and 1024 = 2¹⁰, so their HCF is 2⁴ = 16. Since 16 > 5, a remainder of 5 is possible. Answer: 16.",
+      "hi": {
+        "q": "वह सबसे बड़ी संख्या कौन-सी है जिससे 245 और 1029 को भाग देने पर हर बार शेषफल 5 बचता है?",
+        "options": [
+          "संख्या 16",
+          "संख्या 8",
+          "संख्या 32",
+          "संख्या 12"
+        ],
+        "why": "यदि संख्या शेषफल 5 छोड़ती है, तो वह 245 − 5 = 240 और 1029 − 5 = 1024 को पूर्णतः विभाजित करती है। 240 = 2⁴ × 15 और 1024 = 2¹⁰, अतः उनका म.स. 2⁴ = 16 है। चूँकि 16 > 5, शेषफल 5 संभव है। उत्तर: 16।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "A is B's brother. C is the mother of A. D is C's father. E is D's son. How is B related to E?",
+      "options": [
+        "Son",
+        "Nephew or niece",
+        "Brother",
+        "Grandson"
+      ],
+      "answerIndex": 1,
+      "why": "A and B are siblings, and C is their mother. D is C's father, and E is D's son, so E is C's brother. B is the child of E's sister, which makes B E's nephew or niece. B's gender is not given, so 'nephew or niece' is the only safe answer.",
+      "hi": {
+        "q": "A, B का भाई है। C, A की माँ है। D, C के पिता हैं। E, D का पुत्र है। B का E से क्या संबंध है?",
+        "options": [
+          "पुत्र",
+          "भांजा या भांजी",
+          "भाई",
+          "नाती"
+        ],
+        "why": "A और B भाई-बहन हैं, और C उनकी माँ है। D, C के पिता हैं, और E, D का पुत्र है, इसलिए E, C का भाई है। B, E की बहन की संतान है, जिससे B, E का भांजा या भांजी है। B का लिंग नहीं बताया गया है, इसलिए 'भांजा या भांजी' ही एकमात्र सुरक्षित उत्तर है।"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "The table shows how many students from four schools, P, Q, R and S, appeared in an examination and how many passed. Which school had the highest pass percentage?",
+      "table": [
+        [
+          "School",
+          "Students appeared",
+          "Students passed"
+        ],
+        [
+          "P",
+          "120",
+          "96"
+        ],
+        [
+          "Q",
+          "150",
+          "105"
+        ],
+        [
+          "R",
+          "90",
+          "81"
+        ],
+        [
+          "S",
+          "140",
+          "98"
+        ]
+      ],
+      "options": [
+        "R",
+        "P",
+        "Q",
+        "S"
+      ],
+      "answerIndex": 0,
+      "why": "Pass percentages: P = 96/120 = 80%, Q = 105/150 = 70%, R = 81/90 = 90%, S = 98/140 = 70%. School R is highest at 90%, even though it passed the fewest students.",
+      "hi": {
+        "q": "तालिका दिखाती है कि चार स्कूलों, P, Q, R और S, के कितने विद्यार्थी एक परीक्षा में बैठे और कितने उत्तीर्ण हुए। किस स्कूल का उत्तीर्ण प्रतिशत सबसे अधिक था?",
+        "table": [
+          [
+            "स्कूल",
+            "परीक्षा में बैठे विद्यार्थी",
+            "उत्तीर्ण विद्यार्थी"
+          ],
+          [
+            "P",
+            "120",
+            "96"
+          ],
+          [
+            "Q",
+            "150",
+            "105"
+          ],
+          [
+            "R",
+            "90",
+            "81"
+          ],
+          [
+            "S",
+            "140",
+            "98"
+          ]
+        ],
+        "options": [
+          "स्कूल R",
+          "स्कूल P",
+          "स्कूल Q",
+          "स्कूल S"
+        ],
+        "why": "उत्तीर्ण प्रतिशत: P = 96/120 = 80%, Q = 105/150 = 70%, R = 81/90 = 90%, S = 98/140 = 70%। स्कूल R 90% के साथ सबसे ऊपर है, भले ही वहाँ सबसे कम विद्यार्थी उत्तीर्ण हुए।"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The table shows how many students from four schools, P, Q, R and S, appeared in an examination and how many passed. What was the overall pass percentage of the four schools taken together?",
+      "table": [
+        [
+          "School",
+          "Students appeared",
+          "Students passed"
+        ],
+        [
+          "P",
+          "120",
+          "96"
+        ],
+        [
+          "Q",
+          "150",
+          "105"
+        ],
+        [
+          "R",
+          "90",
+          "81"
+        ],
+        [
+          "S",
+          "140",
+          "98"
+        ]
+      ],
+      "options": [
+        "78%",
+        "76%",
+        "75%",
+        "80%"
+      ],
+      "answerIndex": 1,
+      "why": "Total appeared = 120 + 150 + 90 + 140 = 500. Total passed = 96 + 105 + 81 + 98 = 380. Overall pass percentage = 380/500 × 100 = 76%. (Averaging the four school percentages, (80 + 70 + 90 + 70)/4 = 77.5%, is wrong because the schools are of different sizes.)",
+      "hi": {
+        "q": "तालिका दिखाती है कि चार स्कूलों, P, Q, R और S, के कितने विद्यार्थी एक परीक्षा में बैठे और कितने उत्तीर्ण हुए। चारों स्कूलों को मिलाकर कुल उत्तीर्ण प्रतिशत क्या था?",
+        "table": [
+          [
+            "स्कूल",
+            "परीक्षा में बैठे विद्यार्थी",
+            "उत्तीर्ण विद्यार्थी"
+          ],
+          [
+            "P",
+            "120",
+            "96"
+          ],
+          [
+            "Q",
+            "150",
+            "105"
+          ],
+          [
+            "R",
+            "90",
+            "81"
+          ],
+          [
+            "S",
+            "140",
+            "98"
+          ]
+        ],
+        "options": [
+          "78 प्रतिशत",
+          "76 प्रतिशत",
+          "75 प्रतिशत",
+          "80 प्रतिशत"
+        ],
+        "why": "कुल परीक्षा में बैठे = 120 + 150 + 90 + 140 = 500। कुल उत्तीर्ण = 96 + 105 + 81 + 98 = 380। कुल उत्तीर्ण प्रतिशत = 380/500 × 100 = 76%। (चारों स्कूलों के प्रतिशत का औसत, (80 + 70 + 90 + 70)/4 = 77.5%, ग़लत है क्योंकि स्कूलों का आकार अलग-अलग है।)"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The table shows how many students from four schools, P, Q, R and S, appeared in an examination and how many passed. How many more students from school Q would have had to pass for Q's pass percentage to equal that of school P?",
+      "table": [
+        [
+          "School",
+          "Students appeared",
+          "Students passed"
+        ],
+        [
+          "P",
+          "120",
+          "96"
+        ],
+        [
+          "Q",
+          "150",
+          "105"
+        ],
+        [
+          "R",
+          "90",
+          "81"
+        ],
+        [
+          "S",
+          "140",
+          "98"
+        ]
+      ],
+      "options": [
+        "9",
+        "12",
+        "15",
+        "20"
+      ],
+      "answerIndex": 2,
+      "why": "P's pass percentage = 96/120 = 80%. For Q to reach 80%, it needs 80% of 150 = 120 passes. Q actually had 105. Extra passes needed = 120 − 105 = 15.",
+      "hi": {
+        "q": "तालिका दिखाती है कि चार स्कूलों, P, Q, R और S, के कितने विद्यार्थी एक परीक्षा में बैठे और कितने उत्तीर्ण हुए। स्कूल Q का उत्तीर्ण प्रतिशत स्कूल P के बराबर होने के लिए Q के कितने और विद्यार्थियों को उत्तीर्ण होना पड़ता?",
+        "table": [
+          [
+            "स्कूल",
+            "परीक्षा में बैठे विद्यार्थी",
+            "उत्तीर्ण विद्यार्थी"
+          ],
+          [
+            "P",
+            "120",
+            "96"
+          ],
+          [
+            "Q",
+            "150",
+            "105"
+          ],
+          [
+            "R",
+            "90",
+            "81"
+          ],
+          [
+            "S",
+            "140",
+            "98"
+          ]
+        ],
+        "options": [
+          "9 विद्यार्थी",
+          "12 विद्यार्थी",
+          "15 विद्यार्थी",
+          "20 विद्यार्थी"
+        ],
+        "why": "P का उत्तीर्ण प्रतिशत = 96/120 = 80%। Q को 80% तक पहुँचने के लिए 150 का 80% = 120 उत्तीर्ण चाहिए। Q के वास्तव में 105 उत्तीर्ण थे। आवश्यक अतिरिक्त = 120 − 105 = 15।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "How many zeros are there at the end of 50! (the product 1 × 2 × 3 × … × 50)?",
+      "options": [
+        "12",
+        "10",
+        "11",
+        "14"
+      ],
+      "answerIndex": 0,
+      "why": "Each trailing zero needs a factor 10 = 2 × 5, and there are far more 2s than 5s, so count the 5s. Multiples of 5 up to 50: 50/5 = 10. Multiples of 25 give one extra 5 each: 50/25 = 2. Total = 10 + 2 = 12 zeros.",
+      "hi": {
+        "q": "50! (गुणनफल 1 × 2 × 3 × … × 50) के अंत में कितने शून्य हैं?",
+        "options": [
+          "12 शून्य",
+          "10 शून्य",
+          "11 शून्य",
+          "14 शून्य"
+        ],
+        "why": "हर अंतिम शून्य के लिए 10 = 2 × 5 का एक गुणनखंड चाहिए, और 2 की संख्या 5 से कहीं अधिक है, इसलिए 5 गिनें। 50 तक 5 के गुणज: 50/5 = 10। 25 के गुणज हर एक अतिरिक्त 5 देते हैं: 50/25 = 2। कुल = 10 + 2 = 12 शून्य।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p3",
+      "q": "According to the passage, where does the real strength of science lie?",
+      "options": [
+        "In the large number of facts it has collected.",
+        "In its method of testing ideas and correcting itself when evidence changes.",
+        "In the confidence with which scientists state their conclusions.",
+        "In ideas that have been taught unchanged for generations."
+      ],
+      "answerIndex": 1,
+      "why": "The second paragraph opens: 'The strength of science lies less in any single answer than in its method of correcting itself.' The passage says ideas are revised 'even if' taught for generations, and it treats caution, not confidence, as honest.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, विज्ञान की असली शक्ति कहाँ है?",
+        "options": [
+          "उसके द्वारा इकट्ठा किए गए तथ्यों की बड़ी संख्या में।",
+          "विचारों को परखने और साक्ष्य बदलने पर स्वयं को सुधारने की उसकी पद्धति में।",
+          "उस आत्मविश्वास में जिसके साथ वैज्ञानिक अपने निष्कर्ष बताते हैं।",
+          "उन विचारों में जो पीढ़ियों से बिना बदले पढ़ाए जा रहे हैं।"
+        ],
+        "why": "दूसरा अनुच्छेद इस वाक्य से शुरू होता है: 'विज्ञान की शक्ति किसी एक उत्तर में कम और स्वयं को सुधारने की उसकी पद्धति में अधिक है।' गद्यांश कहता है कि विचार पीढ़ियों से पढ़ाए जाने के 'बावजूद' बदले जाते हैं, और वह आत्मविश्वास को नहीं, सावधानी को ईमानदारी मानता है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p3",
+      "q": "What does the author mean by saying that a claim that can never be shown to be wrong 'simply cannot be tested'?",
+      "options": [
+        "Such a claim is always true.",
+        "Such a claim is the strongest kind of scientific knowledge.",
+        "Such a claim has already passed every possible test.",
+        "Such a claim gains no strength from being unbeatable, because no evidence could ever count against it."
+      ],
+      "answerIndex": 3,
+      "why": "The author denies that being impossible to disprove makes a claim stronger: 'It simply cannot be tested.' A claim that no evidence could go against has not passed tests; it has avoided them.",
+      "hi": {
+        "q": "जब लेखक कहता है कि जिस दावे को कभी ग़लत सिद्ध नहीं किया जा सकता 'उसे बस परखा नहीं जा सकता', तो उसका आशय क्या है?",
+        "options": [
+          "ऐसा दावा हमेशा सत्य होता है।",
+          "ऐसा दावा वैज्ञानिक ज्ञान का सबसे मज़बूत रूप है।",
+          "ऐसा दावा पहले ही हर संभव परख में खरा उतर चुका है।",
+          "ऐसे दावे को अजेय होने से कोई शक्ति नहीं मिलती, क्योंकि कोई भी साक्ष्य कभी उसके विरुद्ध नहीं जा सकता।"
+        ],
+        "why": "लेखक इस बात को नकारता है कि ग़लत सिद्ध न हो सकना किसी दावे को मज़बूत बनाता है: 'उसे बस परखा नहीं जा सकता।' जिस दावे के विरुद्ध कोई साक्ष्य जा ही न सके, वह परखों में खरा नहीं उतरा; वह उनसे बच निकला है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p3",
+      "q": "Which one of the following can be inferred from the passage?",
+      "options": [
+        "Scientists who change their advice cannot be trusted.",
+        "A change in scientific advice can be a sign that the method is working as it should.",
+        "Ideas that have been taught for a long time are never revised.",
+        "Students should memorise scientific facts without asking how they were found."
+      ],
+      "answerIndex": 1,
+      "why": "The last paragraph says a student who understands self-correction will see changed advice 'as a sign that the system is working'. The passage says long-taught ideas can be replaced, and criticises teaching science as a fixed list of facts.",
+      "hi": {
+        "q": "गद्यांश से निम्नलिखित में से किसका अनुमान लगाया जा सकता है?",
+        "options": [
+          "जो वैज्ञानिक अपनी सलाह बदलते हैं, उन पर भरोसा नहीं किया जा सकता।",
+          "वैज्ञानिक सलाह में बदलाव इस बात का संकेत हो सकता है कि पद्धति ठीक वैसे काम कर रही है जैसे करना चाहिए।",
+          "लंबे समय से पढ़ाए जा रहे विचार कभी संशोधित नहीं होते।",
+          "विद्यार्थियों को वैज्ञानिक तथ्य यह पूछे बिना रट लेने चाहिए कि वे कैसे खोजे गए।"
+        ],
+        "why": "अंतिम अनुच्छेद कहता है कि आत्म-सुधार समझने वाला विद्यार्थी बदली हुई सलाह को 'इस बात का संकेत' मानेगा 'कि व्यवस्था काम कर रही है'। गद्यांश कहता है कि लंबे समय से पढ़ाए गए विचार बदले जा सकते हैं, और विज्ञान को तथ्यों की तय सूची की तरह पढ़ाने की आलोचना करता है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "statement-code",
+      "difficulty": "medium",
+      "passage": "m2-p3",
+      "q": "Consider the following statements:",
+      "statements": [
+        "According to the passage, once an idea has passed many tests it is accepted permanently.",
+        "The author regards the phrase 'the evidence strongly suggests' as a way of avoiding a clear answer."
+      ],
+      "ask": "Which of the statements given above is/are correct?",
+      "options": [
+        "1 only",
+        "2 only",
+        "Both 1 and 2",
+        "Neither 1 nor 2"
+      ],
+      "answerIndex": 3,
+      "why": "Statement 1 goes against the second paragraph: an idea is accepted 'only for as long as it keeps surviving'. Statement 2 goes against the third paragraph, which says the phrase 'the evidence strongly suggests' is 'not being vague' but describes how strongly evidence supports a claim.",
+      "hi": {
+        "q": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "गद्यांश के अनुसार, कोई विचार अनेक परखों में खरा उतरने के बाद स्थायी रूप से स्वीकार कर लिया जाता है।",
+          "लेखक 'साक्ष्य दृढ़ता से संकेत करते हैं' वाक्यांश को स्पष्ट उत्तर से बचने का तरीक़ा मानता है।"
+        ],
+        "ask": "उपर्युक्त कथनों में से कौन-सा/से सही है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2",
+          "1 और 2 दोनों",
+          "न तो 1, न ही 2"
+        ],
+        "why": "कथन 1 दूसरे अनुच्छेद के विरुद्ध है: कोई विचार 'केवल तब तक' स्वीकार किया जाता है 'जब तक वह टिका रहता है'। कथन 2 तीसरे अनुच्छेद के विरुद्ध है, जो कहता है कि 'साक्ष्य दृढ़ता से संकेत करते हैं' कहना 'गोलमोल बात' नहीं है, बल्कि यह बताता है कि साक्ष्य किसी दावे का कितना समर्थन करते हैं।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A man is facing east. He turns 90° clockwise, then 180° clockwise, and then 45° anticlockwise. Which direction is he facing now?",
+      "options": [
+        "North-east",
+        "South-west",
+        "West",
+        "North-west"
+      ],
+      "answerIndex": 3,
+      "why": "Measure directions clockwise from north: east = 90°. Turning 90° clockwise gives 180° (south). Turning 180° clockwise gives 360°, i.e. 0° (north). Turning 45° anticlockwise gives 0° − 45° = 315°, which is north-west.",
+      "hi": {
+        "q": "एक व्यक्ति पूर्व की ओर मुँह करके खड़ा है। वह 90° दक्षिणावर्त मुड़ता है, फिर 180° दक्षिणावर्त, और फिर 45° वामावर्त। अब उसका मुँह किस दिशा में है?",
+        "options": [
+          "उत्तर-पूर्व",
+          "दक्षिण-पश्चिम",
+          "पश्चिम",
+          "उत्तर-पश्चिम"
+        ],
+        "why": "दिशाओं को उत्तर से दक्षिणावर्त मापें: पूर्व = 90°। 90° दक्षिणावर्त मुड़ने पर 180° (दक्षिण)। 180° दक्षिणावर्त मुड़ने पर 360°, यानी 0° (उत्तर)। 45° वामावर्त मुड़ने पर 0° − 45° = 315°, जो उत्तर-पश्चिम है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "What is the sum of the first 20 odd natural numbers (1 + 3 + 5 + … )?",
+      "options": [
+        "400",
+        "420",
+        "380",
+        "441"
+      ],
+      "answerIndex": 0,
+      "why": "The sum of the first n odd numbers is n². For n = 20 the sum is 20² = 400. (Check: the 20th odd number is 39, and the sum = 20 × (1 + 39)/2 = 400.)",
+      "hi": {
+        "q": "पहली 20 विषम प्राकृत संख्याओं (1 + 3 + 5 + … ) का योग क्या है?",
+        "options": [
+          "योग 400",
+          "योग 420",
+          "योग 380",
+          "योग 441"
+        ],
+        "why": "पहली n विषम संख्याओं का योग n² होता है। n = 20 के लिए योग 20² = 400 है। (जाँच: 20वीं विषम संख्या 39 है, और योग = 20 × (1 + 39)/2 = 400।)"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "Statements: Some doctors are singers. No singer is lazy.\nConclusions: I. Some doctors are not lazy. II. All lazy people are doctors.\nWhich of the conclusions definitely follows from the statements?",
+      "options": [
+        "Only conclusion I follows",
+        "Only conclusion II follows",
+        "Both I and II follow",
+        "Neither I nor II follows"
+      ],
+      "answerIndex": 0,
+      "why": "The doctors who are singers cannot be lazy, because no singer is lazy. So at least some doctors are not lazy: conclusion I follows. Nothing links lazy people to doctors; lazy people may or may not be doctors, so II does not follow.",
+      "hi": {
+        "q": "कथन: कुछ डॉक्टर गायक हैं। कोई गायक आलसी नहीं है।\nनिष्कर्ष: I. कुछ डॉक्टर आलसी नहीं हैं। II. सभी आलसी लोग डॉक्टर हैं।\nकथनों से कौन-सा/से निष्कर्ष निश्चित रूप से निकलता/निकलते है/हैं?",
+        "options": [
+          "केवल निष्कर्ष I निकलता है",
+          "केवल निष्कर्ष II निकलता है",
+          "I और II दोनों निकलते हैं",
+          "न तो I, न ही II निकलता है"
+        ],
+        "why": "जो डॉक्टर गायक हैं, वे आलसी नहीं हो सकते, क्योंकि कोई गायक आलसी नहीं है। अतः कम से कम कुछ डॉक्टर आलसी नहीं हैं: निष्कर्ष I निकलता है। आलसी लोगों को डॉक्टरों से कोई बात नहीं जोड़ती; आलसी लोग डॉक्टर हो भी सकते हैं और नहीं भी, इसलिए II नहीं निकलता।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A mistake by a junior member of your team delays an important report. At a meeting, your senior officer criticises your team sharply in front of others. What is the most appropriate response?",
+      "options": [
+        "Tell the meeting that the junior member alone is to blame.",
+        "Argue with the senior officer that the criticism is unfair.",
+        "Stay silent at the meeting and then give the junior member a harsh scolding.",
+        "Accept responsibility as the team leader, explain how the delay will be fixed, and later help the junior learn from the mistake."
+      ],
+      "answerIndex": 3,
+      "why": "As team leader you are answerable for the team's work, so owning the delay and giving a fix is both honest and constructive; helping the junior afterwards prevents a repeat. Blaming the junior publicly undermines trust, arguing in the meeting escalates conflict, and a harsh scolding teaches fear rather than better work.",
+      "hi": {
+        "q": "आपकी टीम के एक कनिष्ठ सदस्य की ग़लती से एक महत्वपूर्ण रिपोर्ट में देरी होती है। एक बैठक में आपके वरिष्ठ अधिकारी दूसरों के सामने आपकी टीम की कड़ी आलोचना करते हैं। सबसे उचित प्रतिक्रिया क्या है?",
+        "options": [
+          "बैठक में कहें कि अकेला कनिष्ठ सदस्य ही दोषी है।",
+          "वरिष्ठ अधिकारी से बहस करें कि आलोचना अनुचित है।",
+          "बैठक में चुप रहें और फिर कनिष्ठ सदस्य को कड़ी फटकार लगाएँ।",
+          "टीम प्रमुख के रूप में ज़िम्मेदारी स्वीकार करें, बताएँ कि देरी कैसे ठीक होगी, और बाद में कनिष्ठ सदस्य को ग़लती से सीखने में मदद करें।"
+        ],
+        "why": "टीम प्रमुख के रूप में आप टीम के काम के लिए उत्तरदायी हैं, इसलिए देरी की ज़िम्मेदारी लेना और समाधान बताना ईमानदार भी है और रचनात्मक भी; बाद में कनिष्ठ की मदद करना इसे दोहराए जाने से रोकता है। कनिष्ठ को सार्वजनिक रूप से दोष देना भरोसा तोड़ता है, बैठक में बहस टकराव बढ़ाती है, और कड़ी फटकार बेहतर काम नहीं, डर सिखाती है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "What is the compound interest on ₹8,000 for 3 years at 5% per annum, compounded annually?",
+      "options": [
+        "₹1,200",
+        "₹1,320",
+        "₹1,261",
+        "₹1,276"
+      ],
+      "answerIndex": 2,
+      "why": "Amount = 8,000 × 1.05³. Year 1: 8,000 × 1.05 = 8,400. Year 2: 8,400 × 1.05 = 8,820. Year 3: 8,820 × 1.05 = 9,261. Compound interest = 9,261 − 8,000 = ₹1,261. (₹1,200 is the simple interest, the trap.)",
+      "hi": {
+        "q": "₹8,000 पर 5% वार्षिक दर से 3 वर्ष का चक्रवृद्धि ब्याज (वार्षिक संयोजित) क्या है?",
+        "options": [
+          "1,200 रुपये",
+          "1,320 रुपये",
+          "1,261 रुपये",
+          "1,276 रुपये"
+        ],
+        "why": "मिश्रधन = 8,000 × 1.05³। वर्ष 1: 8,000 × 1.05 = 8,400। वर्ष 2: 8,400 × 1.05 = 8,820। वर्ष 3: 8,820 × 1.05 = 9,261। चक्रवृद्धि ब्याज = 9,261 − 8,000 = ₹1,261। (₹1,200 साधारण ब्याज है, जो एक जाल है।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p4",
+      "q": "According to the passage, why have banks found it hard to lend to the poor?",
+      "options": [
+        "The poor never repay their loans.",
+        "Small loans still carry checking and collection costs, and the poor often lack property to offer as security.",
+        "Banks are not allowed to lend to women.",
+        "Moneylenders have forced banks out of villages."
+      ],
+      "answerIndex": 1,
+      "why": "The first paragraph says a small loan still needs checks, papers and follow-up, and without land or a house as security the poor 'appear risky'. 'Appear' is not 'never repay'; the passage in fact says banks lend to groups and members repay.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, बैंकों को ग़रीबों को उधार देना कठिन क्यों लगा है?",
+        "options": [
+          "ग़रीब कभी अपने ऋण नहीं चुकाते।",
+          "छोटे ऋणों में भी जाँच और वसूली का ख़र्च आता है, और ग़रीबों के पास अक्सर ज़मानत के लिए संपत्ति नहीं होती।",
+          "बैंकों को महिलाओं को उधार देने की अनुमति नहीं है।",
+          "साहूकारों ने बैंकों को गाँवों से बाहर कर दिया है।"
+        ],
+        "why": "पहला अनुच्छेद कहता है कि छोटे ऋण में भी जाँच, काग़ज़ और वसूली की ज़रूरत होती है, और ज़मीन या घर की ज़मानत न होने पर ग़रीब 'जोखिम भरे लगते हैं'। 'लगना' और 'कभी न चुकाना' एक बात नहीं; गद्यांश तो कहता है कि बैंक समूहों को उधार देते हैं और सदस्य चुकाती हैं।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p4",
+      "q": "What feature of self-help groups, according to the passage, makes lending to them less risky for banks?",
+      "options": [
+        "Members know one another and the group as a whole is responsible for repayment.",
+        "Each member offers land as security.",
+        "The government repays the loans if members cannot.",
+        "Groups charge higher interest than moneylenders."
+      ],
+      "answerIndex": 0,
+      "why": "The second paragraph says the group, not the individual, is responsible for repayment, and members know each other well enough to judge who can repay and to press those who fall behind. Land, government guarantees and interest rates of groups are not mentioned.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, स्वयं सहायता समूहों की कौन-सी विशेषता बैंकों के लिए उन्हें उधार देना कम जोखिम भरा बनाती है?",
+        "options": [
+          "सदस्य एक-दूसरे को जानती हैं और वसूली की ज़िम्मेदारी पूरे समूह की होती है।",
+          "हर सदस्य ज़मानत के रूप में ज़मीन देती है।",
+          "सदस्य न चुका पाएँ तो सरकार ऋण चुकाती है।",
+          "समूह साहूकारों से अधिक ब्याज लेते हैं।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है कि वसूली की ज़िम्मेदारी व्यक्ति की नहीं, समूह की होती है, और सदस्य एक-दूसरे को इतनी अच्छी तरह जानती हैं कि आँक सकें कौन चुका सकता है और पीछे रहने वालों पर ज़ोर डाल सकें। ज़मीन, सरकारी गारंटी या समूहों की ब्याज दर का कोई ज़िक्र नहीं है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p4",
+      "q": "Which one of the following best reflects the author's overall assessment of self-help groups?",
+      "options": [
+        "They have failed and should be replaced by moneylenders.",
+        "They are a complete solution to rural poverty.",
+        "They bring real gains, financial and social, but cannot by themselves end poverty and can be harsh on members in trouble.",
+        "They matter only because they give women a place to meet."
+      ],
+      "answerIndex": 2,
+      "why": "The third paragraph credits benefits 'beyond money', then states limits: peer pressure can turn harsh, and loans alone 'rarely lift a family out of poverty' without markets. That balanced view rules out calling them a failure or a complete solution.",
+      "hi": {
+        "q": "निम्नलिखित में से कौन-सा कथन स्वयं सहायता समूहों के बारे में लेखक के समग्र आकलन को सबसे अच्छी तरह दर्शाता है?",
+        "options": [
+          "वे असफल रहे हैं और उनकी जगह साहूकारों को आना चाहिए।",
+          "वे ग्रामीण ग़रीबी का पूरा समाधान हैं।",
+          "वे वास्तविक आर्थिक और सामाजिक लाभ लाते हैं, पर अकेले ग़रीबी ख़त्म नहीं कर सकते और कठिनाई में फँसी सदस्यों के प्रति कठोर हो सकते हैं।",
+          "वे केवल इसलिए महत्वपूर्ण हैं क्योंकि वे महिलाओं को मिलने की जगह देते हैं।"
+        ],
+        "why": "तीसरा अनुच्छेद 'पैसे से आगे' के लाभों को श्रेय देता है, फिर सीमाएँ बताता है: आपसी दबाव कठोर हो सकता है, और बाज़ार के बिना छोटे ऋण 'शायद ही किसी परिवार को ग़रीबी से निकाल पाते हैं'। यह संतुलित दृष्टि उन्हें असफल या पूरा समाधान कहने वाले विकल्पों को ख़ारिज करती है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The average weight of 30 students is 40 kg. When the teacher's weight is included, the average rises by 0.5 kg. What is the teacher's weight?",
+      "options": [
+        "40.5 kg",
+        "50 kg",
+        "55.5 kg",
+        "56 kg"
+      ],
+      "answerIndex": 2,
+      "why": "Total weight of students = 30 × 40 = 1,200 kg. With the teacher there are 31 people with average 40.5 kg: total = 31 × 40.5 = 1,255.5 kg. Teacher = 1,255.5 − 1,200 = 55.5 kg.",
+      "hi": {
+        "q": "30 विद्यार्थियों का औसत भार 40 किग्रा है। शिक्षक का भार शामिल करने पर औसत 0.5 किग्रा बढ़ जाता है। शिक्षक का भार क्या है?",
+        "options": [
+          "40.5 किग्रा",
+          "50 किग्रा",
+          "55.5 किग्रा",
+          "56 किग्रा"
+        ],
+        "why": "विद्यार्थियों का कुल भार = 30 × 40 = 1,200 किग्रा। शिक्षक सहित 31 लोग हैं जिनका औसत 40.5 किग्रा है: कुल = 31 × 40.5 = 1,255.5 किग्रा। शिक्षक = 1,255.5 − 1,200 = 55.5 किग्रा।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "Six people P, Q, R, S, T and U sit around a circular table facing the centre. P sits opposite S. Q sits second to the right of P. T sits to the immediate right of S. R does not sit next to Q. Who sits to the immediate left of P?",
+      "options": [
+        "U",
+        "T",
+        "Q",
+        "R"
+      ],
+      "answerIndex": 3,
+      "why": "Number the seats 0 to 5 clockwise and put P at 0. When people face the centre, a person's right is the next seat anticlockwise and their left is the next seat clockwise. S is opposite P, so S = 3. Q is second to the right of P: 0 − 2 → seat 4. T is immediately right of S: 3 − 1 → seat 2. Seats 1 and 5 remain for R and U. Seat 5 is next to Q (seat 4), so R = 1 and U = 5. Immediately left of P is seat 1: R.",
+      "hi": {
+        "q": "छह लोग P, Q, R, S, T और U एक गोल मेज़ के चारों ओर केंद्र की ओर मुँह करके बैठे हैं। P, S के सामने बैठा है। Q, P के दाएँ से दूसरे स्थान पर बैठा है। T, S के ठीक दाएँ बैठा है। R, Q के बगल में नहीं बैठा है। P के ठीक बाएँ कौन बैठा है?",
+        "options": [
+          "व्यक्ति U",
+          "व्यक्ति T",
+          "व्यक्ति Q",
+          "व्यक्ति R"
+        ],
+        "why": "सीटों को दक्षिणावर्त 0 से 5 तक गिनें और P को 0 पर रखें। केंद्र की ओर मुँह होने पर व्यक्ति का दायाँ अगली वामावर्त सीट और बायाँ अगली दक्षिणावर्त सीट होती है। S, P के सामने है, अतः S = 3। Q, P के दाएँ से दूसरे स्थान पर है: 0 − 2 → सीट 4। T, S के ठीक दाएँ है: 3 − 1 → सीट 2। R और U के लिए सीट 1 और 5 बचती हैं। सीट 5, Q (सीट 4) के बगल में है, अतः R = 1 और U = 5। P के ठीक बाएँ सीट 1 है: R।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "In what ratio must rice costing ₹30 per kg be mixed with rice costing ₹45 per kg so that the mixture costs ₹40 per kg?",
+      "options": [
+        "1 : 2",
+        "2 : 1",
+        "1 : 3",
+        "3 : 2"
+      ],
+      "answerIndex": 0,
+      "why": "Let x kg of the ₹30 rice be mixed with y kg of the ₹45 rice. Then 30x + 45y = 40(x + y), so 5y = 10x and x : y = 1 : 2. (Rule of alligation: (45 − 40) : (40 − 30) = 5 : 10 = 1 : 2.)",
+      "hi": {
+        "q": "₹30 प्रति किग्रा वाले चावल को ₹45 प्रति किग्रा वाले चावल के साथ किस अनुपात में मिलाया जाए कि मिश्रण का मूल्य ₹40 प्रति किग्रा हो?",
+        "options": [
+          "1 : 2 का अनुपात",
+          "2 : 1 का अनुपात",
+          "1 : 3 का अनुपात",
+          "3 : 2 का अनुपात"
+        ],
+        "why": "मान लें ₹30 वाला x किग्रा और ₹45 वाला y किग्रा चावल मिलाया जाता है। तब 30x + 45y = 40(x + y), अतः 5y = 10x और x : y = 1 : 2। (एलिगेशन नियम: (45 − 40) : (40 − 30) = 5 : 10 = 1 : 2।)"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "Among five students, P scored more than Q but less than R. S scored less than Q. T scored more than R. Who ranks third in the scores?",
+      "options": [
+        "Q",
+        "P",
+        "R",
+        "T"
+      ],
+      "answerIndex": 1,
+      "why": "From the clues: T > R, R > P, P > Q and Q > S. Putting these in one chain from highest to lowest: T, R, P, Q, S. The third is P.",
+      "hi": {
+        "q": "पाँच विद्यार्थियों में P ने Q से अधिक पर R से कम अंक पाए। S ने Q से कम अंक पाए। T ने R से अधिक अंक पाए। अंकों में तीसरे स्थान पर कौन है?",
+        "options": [
+          "विद्यार्थी Q",
+          "विद्यार्थी P",
+          "विद्यार्थी R",
+          "विद्यार्थी T"
+        ],
+        "why": "संकेतों से: T > R, R > P, P > Q और Q > S। इन्हें सबसे अधिक से सबसे कम तक एक क्रम में रखने पर: T, R, P, Q, S। तीसरे स्थान पर P है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "A bag contains 4 red and 6 blue balls. Two balls are drawn at random one after the other without replacement. What is the probability that both are red?",
+      "options": [
+        "2/15",
+        "4/25",
+        "1/5",
+        "1/15"
+      ],
+      "answerIndex": 0,
+      "why": "Probability the first is red = 4/10. With one red gone, 3 red remain out of 9, so the second is red with probability 3/9. Both red = 4/10 × 3/9 = 12/90 = 2/15. (4/25 is the trap: it assumes the first ball is put back.)",
+      "hi": {
+        "q": "एक थैले में 4 लाल और 6 नीली गेंदें हैं। बिना वापस रखे, एक के बाद एक दो गेंदें यादृच्छिक रूप से निकाली जाती हैं। दोनों के लाल होने की प्रायिकता क्या है?",
+        "options": [
+          "प्रायिकता 2/15",
+          "प्रायिकता 4/25",
+          "प्रायिकता 1/5",
+          "प्रायिकता 1/15"
+        ],
+        "why": "पहली गेंद के लाल होने की प्रायिकता = 4/10। एक लाल निकल जाने पर 9 में से 3 लाल बचती हैं, अतः दूसरी के लाल होने की प्रायिकता 3/9 है। दोनों लाल = 4/10 × 3/9 = 12/90 = 2/15। (4/25 एक जाल है: इसमें माना गया है कि पहली गेंद वापस रख दी गई।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p5",
+      "q": "According to the passage, why is the decline of soil organic matter easy to miss?",
+      "options": [
+        "Because with enough fertiliser the soil can keep producing crops for many years.",
+        "Because organic matter has no effect on how soil holds water.",
+        "Because the decline happens only in wet regions.",
+        "Because farmers measure organic matter every season."
+      ],
+      "answerIndex": 0,
+      "why": "The second paragraph says the soil 'may still produce a crop for many years if enough fertiliser is added, so the loss is easy to miss'. The first paragraph says organic matter gives soil much of its water-holding ability, and the passage singles out dry regions, not wet ones.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, मिट्टी के जैविक पदार्थ में कमी आसानी से नज़र क्यों नहीं आती?",
+        "options": [
+          "क्योंकि पर्याप्त उर्वरक डालने पर मिट्टी कई वर्षों तक फ़सल देती रह सकती है।",
+          "क्योंकि जैविक पदार्थ का मिट्टी के पानी रोकने पर कोई असर नहीं होता।",
+          "क्योंकि यह कमी केवल नम क्षेत्रों में होती है।",
+          "क्योंकि किसान हर मौसम में जैविक पदार्थ मापते हैं।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है कि 'पर्याप्त उर्वरक डालने पर मिट्टी कई वर्षों तक फ़सल देती रह सकती है, इसलिए यह क्षति आसानी से नज़र नहीं आती'। पहला अनुच्छेद कहता है कि जैविक पदार्थ ही मिट्टी को पानी रोकने की क्षमता का बड़ा हिस्सा देता है, और गद्यांश शुष्क क्षेत्रों का ज़िक्र करता है, नम क्षेत्रों का नहीं।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "statement-code",
+      "difficulty": "medium",
+      "passage": "m2-p5",
+      "q": "Consider the following statements:",
+      "statements": [
+        "Farmers with secure, long-term use of their land are more likely to invest in rebuilding soil than those who rent for a season.",
+        "According to the passage, any use of chemical fertiliser destroys soil organic matter."
+      ],
+      "ask": "On the basis of the passage, which of the statements given above is/are valid?",
+      "options": [
+        "1 only",
+        "2 only",
+        "Both 1 and 2",
+        "Neither 1 nor 2"
+      ],
+      "answerIndex": 0,
+      "why": "Statement 1 follows: the last sentence says benefits come late and costs early, so short-term tenants have little reason to invest. Statement 2 goes beyond the passage: it says organic matter declines when land is fed 'only' with chemical fertilisers, not that any use of fertiliser destroys it.",
+      "hi": {
+        "q": "निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "जिन किसानों के पास अपनी ज़मीन का सुरक्षित, दीर्घकालिक उपयोग है, वे एक मौसम के लिए किराये पर लेने वालों की तुलना में मिट्टी को फिर से बनाने में निवेश करने की अधिक संभावना रखते हैं।",
+          "गद्यांश के अनुसार, रासायनिक उर्वरक का कोई भी उपयोग मिट्टी के जैविक पदार्थ को नष्ट कर देता है।"
+        ],
+        "ask": "गद्यांश के आधार पर, उपर्युक्त कथनों में से कौन-सा/से मान्य है/हैं?",
+        "options": [
+          "केवल 1",
+          "केवल 2",
+          "1 और 2 दोनों",
+          "न तो 1, न ही 2"
+        ],
+        "why": "कथन 1 निकलता है: अंतिम वाक्य कहता है कि लाभ देर से आते हैं और लागत पहले, इसलिए अल्पकालिक किरायेदारों के पास निवेश का कम कारण होता है। कथन 2 गद्यांश से आगे जाता है: गद्यांश कहता है कि ज़मीन को 'केवल' रासायनिक उर्वरक देने पर जैविक पदार्थ घटता है, यह नहीं कि उर्वरक का कोई भी उपयोग उसे नष्ट कर देता है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p5",
+      "q": "The central message of the passage is that",
+      "options": [
+        "chemical fertilisers should be banned",
+        "soil in dry regions cannot be farmed at all",
+        "compost is cheaper than chemical fertiliser",
+        "soil is a living system whose health declines quietly under poor practice and can be rebuilt only slowly"
+      ],
+      "answerIndex": 3,
+      "why": "The passage moves from soil as a living system, to its quiet decline, to the slow work of rebuilding. It never calls for a ban, never compares prices, and says poor soil 'can be the first step' towards unfarmable land, not that all dry land is unfarmable.",
+      "hi": {
+        "q": "गद्यांश का केंद्रीय संदेश यह है कि",
+        "options": [
+          "रासायनिक उर्वरकों पर रोक लगा देनी चाहिए",
+          "शुष्क क्षेत्रों की मिट्टी में बिल्कुल खेती नहीं हो सकती",
+          "कम्पोस्ट रासायनिक उर्वरक से सस्ता है",
+          "मिट्टी एक जीवित प्रणाली है जिसका स्वास्थ्य ग़लत तरीक़ों से चुपचाप गिरता है और जिसे केवल धीरे-धीरे फिर से बनाया जा सकता है"
+        ],
+        "why": "गद्यांश मिट्टी को जीवित प्रणाली बताने से शुरू होकर उसकी चुपचाप गिरावट और फिर उसे धीरे-धीरे बनाने के काम तक जाता है। वह न रोक की माँग करता है, न क़ीमतों की तुलना, और कहता है कि ख़राब मिट्टी खेती-अयोग्य ज़मीन की ओर 'पहला क़दम हो सकती है', यह नहीं कि सारी शुष्क ज़मीन खेती-अयोग्य है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "What day of the week was 26 January 1950?",
+      "options": [
+        "Thursday",
+        "Wednesday",
+        "Friday",
+        "Sunday"
+      ],
+      "answerIndex": 0,
+      "why": "Count odd days. 1 to 1600 years: 0 odd days. 1601 to 1900 (300 years): 1 odd day. 1901 to 1949 (49 years, 12 of them leap years): 49 + 12 = 61 days → 61 = 7 × 8 + 5, so 5 odd days. 1 to 26 January 1950: 26 days → 5 odd days. Total = 0 + 1 + 5 + 5 = 11 → 11 − 7 = 4. Counting from Sunday as 0, 4 is Thursday.",
+      "hi": {
+        "q": "26 जनवरी 1950 को सप्ताह का कौन-सा दिन था?",
+        "options": [
+          "गुरुवार",
+          "बुधवार",
+          "शुक्रवार",
+          "रविवार"
+        ],
+        "why": "विषम दिन गिनें। 1 से 1600 वर्ष: 0 विषम दिन। 1601 से 1900 (300 वर्ष): 1 विषम दिन। 1901 से 1949 (49 वर्ष, जिनमें 12 लीप वर्ष): 49 + 12 = 61 दिन → 61 = 7 × 8 + 5, अतः 5 विषम दिन। 1 से 26 जनवरी 1950: 26 दिन → 5 विषम दिन। कुल = 0 + 1 + 5 + 5 = 11 → 11 − 7 = 4। रविवार को 0 मानकर गिनें तो 4 गुरुवार है।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "After you approve a citizen's licence application, which met all the rules, he visits your office with an expensive gift to thank you. What should you do?",
+      "options": [
+        "Thank him politely but decline the gift, explaining that you cannot accept gifts for official work.",
+        "Accept the gift, since the work was done fairly and he is only expressing thanks.",
+        "Accept the gift but give it to a colleague.",
+        "Report him to the police for attempting bribery."
+      ],
+      "answerIndex": 0,
+      "why": "Accepting gifts for official work, even after the work is done, creates an expectation of favours and is against conduct rules. A polite refusal with an explanation keeps your integrity without insulting a citizen who may not know the rules. Passing the gift on is still accepting it, and a police report is out of proportion for a thank-you after a lawful decision.",
+      "hi": {
+        "q": "आपके द्वारा एक नागरिक के लाइसेंस आवेदन को, जो सभी नियमों पर खरा था, स्वीकृत करने के बाद वह धन्यवाद देने के लिए एक महँगा उपहार लेकर आपके कार्यालय आता है। आपको क्या करना चाहिए?",
+        "options": [
+          "उसे विनम्रता से धन्यवाद दें पर उपहार अस्वीकार करें, और समझाएँ कि आप सरकारी काम के लिए उपहार स्वीकार नहीं कर सकते।",
+          "उपहार स्वीकार कर लें, क्योंकि काम निष्पक्ष रूप से हुआ था और वह केवल धन्यवाद दे रहा है।",
+          "उपहार स्वीकार करें पर उसे किसी सहकर्मी को दे दें।",
+          "रिश्वत देने के प्रयास के लिए उसकी पुलिस में शिकायत करें।"
+        ],
+        "why": "सरकारी काम के लिए उपहार स्वीकार करना, काम हो जाने के बाद भी, एहसान की अपेक्षा पैदा करता है और आचरण नियमों के विरुद्ध है। समझाकर विनम्र इनकार आपकी सत्यनिष्ठा बनाए रखता है और उस नागरिक का अपमान नहीं करता जो शायद नियम न जानता हो। उपहार आगे दे देना भी उसे स्वीकार करना ही है, और वैध निर्णय के बाद धन्यवाद के लिए पुलिस शिकायत अनुपात से बाहर है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "A committee of 3 is to be chosen from 5 men and 4 women. In how many ways can this be done if the committee must include at least one woman?",
+      "options": [
+        "74",
+        "84",
+        "64",
+        "80"
+      ],
+      "answerIndex": 0,
+      "why": "All committees of 3 from 9 people: C(9,3) = 84. Committees with no woman (all men): C(5,3) = 10. At least one woman = 84 − 10 = 74.",
+      "hi": {
+        "q": "5 पुरुषों और 4 महिलाओं में से 3 सदस्यों की एक समिति चुननी है। यदि समिति में कम से कम एक महिला होनी चाहिए, तो यह कितने तरीक़ों से किया जा सकता है?",
+        "options": [
+          "74 तरीक़े",
+          "84 तरीक़े",
+          "64 तरीक़े",
+          "80 तरीक़े"
+        ],
+        "why": "9 लोगों में से 3 की सभी समितियाँ: C(9,3) = 84। बिना किसी महिला वाली (सभी पुरुष) समितियाँ: C(5,3) = 10। कम से कम एक महिला = 84 − 10 = 74।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A clock gains 5 minutes every hour. It is set to the correct time at 6:00 a.m. What time will it show when the correct time is 6:00 p.m. the same day?",
+      "options": [
+        "6:55 p.m.",
+        "7:00 p.m.",
+        "6:05 p.m.",
+        "7:05 p.m."
+      ],
+      "answerIndex": 1,
+      "why": "From 6:00 a.m. to 6:00 p.m. is 12 hours. The clock gains 5 minutes each hour: 12 × 5 = 60 minutes. So it shows 6:00 p.m. + 60 minutes = 7:00 p.m.",
+      "hi": {
+        "q": "एक घड़ी हर घंटे 5 मिनट आगे हो जाती है। उसे सुबह 6:00 बजे सही समय पर मिलाया जाता है। उसी दिन जब सही समय शाम 6:00 बजे होगा, तब वह क्या समय दिखाएगी?",
+        "options": [
+          "शाम 6:55 बजे",
+          "शाम 7:00 बजे",
+          "शाम 6:05 बजे",
+          "शाम 7:05 बजे"
+        ],
+        "why": "सुबह 6:00 से शाम 6:00 तक 12 घंटे हैं। घड़ी हर घंटे 5 मिनट आगे होती है: 12 × 5 = 60 मिनट। अतः वह शाम 6:00 + 60 मिनट = शाम 7:00 बजे दिखाएगी।"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "The table shows the rainfall recorded at a town from June to October in one year. Approximately what percentage of the total June–October rainfall fell in July and August together (to the nearest whole number)?",
+      "table": [
+        [
+          "Month",
+          "Rainfall (mm)"
+        ],
+        [
+          "June",
+          "120"
+        ],
+        [
+          "July",
+          "300"
+        ],
+        [
+          "August",
+          "280"
+        ],
+        [
+          "September",
+          "160"
+        ],
+        [
+          "October",
+          "40"
+        ]
+      ],
+      "options": [
+        "58%",
+        "62%",
+        "64%",
+        "66%"
+      ],
+      "answerIndex": 2,
+      "why": "Total = 120 + 300 + 280 + 160 + 40 = 900 mm. July + August = 300 + 280 = 580 mm. Share = 580/900 × 100 = 64.4…%, which is 64% to the nearest whole number.",
+      "hi": {
+        "q": "तालिका में एक वर्ष में जून से अक्टूबर तक एक शहर में दर्ज वर्षा दी गई है। जून–अक्टूबर की कुल वर्षा का लगभग कितना प्रतिशत जुलाई और अगस्त में मिलाकर हुआ (निकटतम पूर्ण संख्या तक)?",
+        "table": [
+          [
+            "महीना",
+            "वर्षा (मिमी)"
+          ],
+          [
+            "जून",
+            "120"
+          ],
+          [
+            "जुलाई",
+            "300"
+          ],
+          [
+            "अगस्त",
+            "280"
+          ],
+          [
+            "सितंबर",
+            "160"
+          ],
+          [
+            "अक्टूबर",
+            "40"
+          ]
+        ],
+        "options": [
+          "58 प्रतिशत",
+          "62 प्रतिशत",
+          "64 प्रतिशत",
+          "66 प्रतिशत"
+        ],
+        "why": "कुल = 120 + 300 + 280 + 160 + 40 = 900 मिमी। जुलाई + अगस्त = 300 + 280 = 580 मिमी। हिस्सा = 580/900 × 100 = 64.4…%, यानी निकटतम पूर्ण संख्या तक 64%।"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The table shows the rainfall recorded at a town from June to October in one year. By what percentage did the rainfall fall from August to September (to one decimal place)?",
+      "table": [
+        [
+          "Month",
+          "Rainfall (mm)"
+        ],
+        [
+          "June",
+          "120"
+        ],
+        [
+          "July",
+          "300"
+        ],
+        [
+          "August",
+          "280"
+        ],
+        [
+          "September",
+          "160"
+        ],
+        [
+          "October",
+          "40"
+        ]
+      ],
+      "options": [
+        "42.9%",
+        "75.0%",
+        "120.0%",
+        "57.1%"
+      ],
+      "answerIndex": 0,
+      "why": "Fall = 280 − 160 = 120 mm. Percentage fall = 120/280 × 100 = 42.857…%, i.e. 42.9%. (57.1% is September as a share of August, 160/280; 75.0% wrongly divides by the September figure.)",
+      "hi": {
+        "q": "तालिका में एक वर्ष में जून से अक्टूबर तक एक शहर में दर्ज वर्षा दी गई है। अगस्त से सितंबर तक वर्षा कितने प्रतिशत घटी (एक दशमलव स्थान तक)?",
+        "table": [
+          [
+            "महीना",
+            "वर्षा (मिमी)"
+          ],
+          [
+            "जून",
+            "120"
+          ],
+          [
+            "जुलाई",
+            "300"
+          ],
+          [
+            "अगस्त",
+            "280"
+          ],
+          [
+            "सितंबर",
+            "160"
+          ],
+          [
+            "अक्टूबर",
+            "40"
+          ]
+        ],
+        "options": [
+          "42.9 प्रतिशत",
+          "75.0 प्रतिशत",
+          "120.0 प्रतिशत",
+          "57.1 प्रतिशत"
+        ],
+        "why": "कमी = 280 − 160 = 120 मिमी। प्रतिशत कमी = 120/280 × 100 = 42.857…%, यानी 42.9%। (57.1% अगस्त के अनुपात में सितंबर है, 160/280; 75.0% में ग़लती से सितंबर के आँकड़े से भाग दिया गया है।)"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "The table shows the rainfall recorded at a town from June to October in one year. What was the average monthly rainfall over these five months?",
+      "table": [
+        [
+          "Month",
+          "Rainfall (mm)"
+        ],
+        [
+          "June",
+          "120"
+        ],
+        [
+          "July",
+          "300"
+        ],
+        [
+          "August",
+          "280"
+        ],
+        [
+          "September",
+          "160"
+        ],
+        [
+          "October",
+          "40"
+        ]
+      ],
+      "options": [
+        "180 mm",
+        "175 mm",
+        "200 mm",
+        "225 mm"
+      ],
+      "answerIndex": 0,
+      "why": "Total = 120 + 300 + 280 + 160 + 40 = 900 mm over 5 months. Average = 900/5 = 180 mm.",
+      "hi": {
+        "q": "तालिका में एक वर्ष में जून से अक्टूबर तक एक शहर में दर्ज वर्षा दी गई है। इन पाँच महीनों की औसत मासिक वर्षा कितनी थी?",
+        "table": [
+          [
+            "महीना",
+            "वर्षा (मिमी)"
+          ],
+          [
+            "जून",
+            "120"
+          ],
+          [
+            "जुलाई",
+            "300"
+          ],
+          [
+            "अगस्त",
+            "280"
+          ],
+          [
+            "सितंबर",
+            "160"
+          ],
+          [
+            "अक्टूबर",
+            "40"
+          ]
+        ],
+        "options": [
+          "180 मिमी",
+          "175 मिमी",
+          "200 मिमी",
+          "225 मिमी"
+        ],
+        "why": "5 महीनों में कुल = 120 + 300 + 280 + 160 + 40 = 900 मिमी। औसत = 900/5 = 180 मिमी।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "A train 200 m long passes a man walking at 6 km/h in the same direction as the train in 12 seconds. What is the speed of the train?",
+      "options": [
+        "60 km/h",
+        "66 km/h",
+        "54 km/h",
+        "72 km/h"
+      ],
+      "answerIndex": 1,
+      "why": "To pass the man the train covers its own length, 200 m, in 12 s at the relative speed: 200/12 = 50/3 m/s = 50/3 × 18/5 = 60 km/h. Moving in the same direction, relative speed = train − man, so train = 60 + 6 = 66 km/h. (60 km/h is the trap: it forgets the man is moving.)",
+      "hi": {
+        "q": "200 मीटर लंबी एक रेलगाड़ी अपनी ही दिशा में 6 किमी/घंटा से चल रहे एक व्यक्ति को 12 सेकंड में पार करती है। रेलगाड़ी की चाल क्या है?",
+        "options": [
+          "60 किमी/घंटा",
+          "66 किमी/घंटा",
+          "54 किमी/घंटा",
+          "72 किमी/घंटा"
+        ],
+        "why": "व्यक्ति को पार करने के लिए रेलगाड़ी सापेक्ष चाल से 12 सेकंड में अपनी लंबाई, 200 मीटर, तय करती है: 200/12 = 50/3 मीटर/सेकंड = 50/3 × 18/5 = 60 किमी/घंटा। एक ही दिशा में चलने पर सापेक्ष चाल = रेलगाड़ी − व्यक्ति, अतः रेलगाड़ी = 60 + 6 = 66 किमी/घंटा। (60 किमी/घंटा एक जाल है: इसमें भूल जाते हैं कि व्यक्ति भी चल रहा है।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p6",
+      "q": "According to the passage, what choice does a translator constantly face?",
+      "options": [
+        "Whether to translate poetry or prose.",
+        "Whether to print the author's name or their own.",
+        "Whether to translate into one language or many.",
+        "Whether to stay close to the original words or to write naturally in the new language."
+      ],
+      "answerIndex": 3,
+      "why": "The second paragraph says the translator must choose between staying close to the original words, at the risk of sounding stiff, and writing naturally, at the risk of losing flavour. The other options are not described as choices the translator faces.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, अनुवादक को लगातार कौन-सा चुनाव करना पड़ता है?",
+        "options": [
+          "कविता का अनुवाद करे या गद्य का।",
+          "लेखक का नाम छापे या अपना।",
+          "एक भाषा में अनुवाद करे या कई में।",
+          "मूल शब्दों के निकट रहे या नई भाषा में सहज ढंग से लिखे।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है कि अनुवादक को मूल शब्दों के निकट रहने, जिसमें भाषा कठोर लगने का जोखिम है, और सहज ढंग से लिखने, जिसमें स्वाद खोने का जोखिम है, के बीच चुनना पड़ता है। बाक़ी विकल्पों का वर्णन अनुवादक के चुनाव के रूप में नहीं किया गया है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p6",
+      "q": "The tone of the last paragraph is best described as",
+      "options": [
+        "angry at authors for taking credit",
+        "neutral and purely descriptive",
+        "regretful that translators' contribution goes largely unrecognised",
+        "humorous and light-hearted"
+      ],
+      "answerIndex": 2,
+      "why": "Words such as 'poorly paid', 'small type, if at all' and the closing contrast between praising the author and the translator who 'rewrote every sentence' show regret at the lack of recognition. The paragraph does not blame authors, and it is not neutral in its sympathies.",
+      "hi": {
+        "q": "अंतिम अनुच्छेद के स्वर का सबसे अच्छा वर्णन क्या है?",
+        "options": [
+          "श्रेय लेने के लिए लेखकों पर क्रोध",
+          "तटस्थ और केवल वर्णनात्मक",
+          "इस बात पर खेद कि अनुवादकों के योगदान को काफ़ी हद तक मान्यता नहीं मिलती",
+          "हास्यपूर्ण और हल्का-फुल्का"
+        ],
+        "why": "'कम पारिश्रमिक', 'छोटे अक्षरों में, यदि छपते भी हैं' जैसे शब्द और अंत में लेखक की प्रशंसा तथा 'हर वाक्य फिर से लिखने' वाले अनुवादक के बीच का विरोधाभास मान्यता की कमी पर खेद दिखाते हैं। अनुच्छेद लेखकों को दोष नहीं देता, और उसकी सहानुभूति तटस्थ नहीं है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p6",
+      "q": "Which one of the following statements is best supported by the passage?",
+      "options": [
+        "A translation that stays close to the original words is always better.",
+        "Most Indian readers know several languages well enough to need no translations.",
+        "There is no fixed rule that tells a translator how to balance faithfulness and naturalness.",
+        "Literature can be fully understood without knowing the world it assumes."
+      ],
+      "answerIndex": 2,
+      "why": "The second paragraph says: 'There is no formula for this; each choice depends on judgement.' The passage says most readers know only one or two languages and that meaning lies partly in the world a text assumes.",
+      "hi": {
+        "q": "निम्नलिखित में से किस कथन का गद्यांश सबसे अधिक समर्थन करता है?",
+        "options": [
+          "जो अनुवाद मूल शब्दों के निकट रहता है, वह हमेशा बेहतर होता है।",
+          "अधिकांश भारतीय पाठक इतनी भाषाएँ जानते हैं कि उन्हें अनुवाद की ज़रूरत नहीं।",
+          "कोई तय नियम नहीं है जो अनुवादक को बताए कि मूल के प्रति निष्ठा और सहजता में संतुलन कैसे बनाए।",
+          "साहित्य को उस संसार को जाने बिना पूरी तरह समझा जा सकता है जिसे वह मानकर चलता है।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है: 'इसका कोई सूत्र नहीं है; हर चुनाव विवेक पर निर्भर करता है।' गद्यांश कहता है कि अधिकांश पाठक केवल एक-दो भाषाएँ जानते हैं और अर्थ का एक हिस्सा उस संसार में होता है जिसे पाठ मानकर चलता है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "How many squares of all sizes are there in a 4 × 4 grid of small squares?",
+      "options": [
+        "16",
+        "30",
+        "20",
+        "25"
+      ],
+      "answerIndex": 1,
+      "why": "Count by size. 1 × 1 squares: 4 × 4 = 16. 2 × 2: 3 × 3 = 9. 3 × 3: 2 × 2 = 4. 4 × 4: 1. Total = 16 + 9 + 4 + 1 = 30.",
+      "hi": {
+        "q": "छोटे वर्गों के 4 × 4 जाल में सभी आकारों के कुल कितने वर्ग हैं?",
+        "options": [
+          "16 वर्ग",
+          "30 वर्ग",
+          "20 वर्ग",
+          "25 वर्ग"
+        ],
+        "why": "आकार के अनुसार गिनें। 1 × 1 वर्ग: 4 × 4 = 16। 2 × 2: 3 × 3 = 9। 3 × 3: 2 × 2 = 4। 4 × 4: 1। कुल = 16 + 9 + 4 + 1 = 30।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "Which digit should replace * in the number 5*432 so that the number is divisible by 9?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answerIndex": 1,
+      "why": "A number is divisible by 9 when the sum of its digits is divisible by 9. The known digits add up to 5 + 4 + 3 + 2 = 14. The next multiple of 9 is 18, so * = 18 − 14 = 4 (the one after, 27, would need 13, which is not a digit). Check: 54,432 = 9 × 6,048.",
+      "hi": {
+        "q": "संख्या 5*432 में * के स्थान पर कौन-सा अंक रखा जाए कि संख्या 9 से विभाज्य हो जाए?",
+        "options": [
+          "अंक 3",
+          "अंक 4",
+          "अंक 5",
+          "अंक 6"
+        ],
+        "why": "कोई संख्या 9 से तब विभाज्य होती है जब उसके अंकों का योग 9 से विभाज्य हो। ज्ञात अंकों का योग 5 + 4 + 3 + 2 = 14 है। 9 का अगला गुणज 18 है, अतः * = 18 − 14 = 4 (उसके बाद 27 के लिए 13 चाहिए, जो अंक नहीं है)। जाँच: 54,432 = 9 × 6,048।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "Five lectures, on History, Polity, Economy, Geography and Science, are held from Monday to Friday, one each day. Polity is on Wednesday. Economy is on the day immediately after History. Science is not on Monday or Friday. Geography is held before Polity. Which lecture is on Friday?",
+      "options": [
+        "History",
+        "Science",
+        "Geography",
+        "Economy"
+      ],
+      "answerIndex": 3,
+      "why": "Number the days 1 (Monday) to 5 (Friday). Polity = 3. Science is 2 or 4; Geography is 1 or 2. If Science = 4, the days left for History and Economy (after placing Geography on 1 or 2) are {2, 5} or {1, 5}, never two consecutive days: impossible. So Science = 2, Geography = 1, and History and Economy take 4 and 5 in that order. Friday is Economy.",
+      "hi": {
+        "q": "पाँच व्याख्यान, इतिहास, राजव्यवस्था, अर्थव्यवस्था, भूगोल और विज्ञान पर, सोमवार से शुक्रवार तक, हर दिन एक, होते हैं। राजव्यवस्था बुधवार को है। अर्थव्यवस्था, इतिहास के ठीक अगले दिन है। विज्ञान न सोमवार को है न शुक्रवार को। भूगोल, राजव्यवस्था से पहले होता है। शुक्रवार को कौन-सा व्याख्यान है?",
+        "options": [
+          "इतिहास",
+          "विज्ञान",
+          "भूगोल",
+          "अर्थव्यवस्था"
+        ],
+        "why": "दिनों को 1 (सोमवार) से 5 (शुक्रवार) तक गिनें। राजव्यवस्था = 3। विज्ञान 2 या 4 पर; भूगोल 1 या 2 पर। यदि विज्ञान = 4, तो भूगोल को 1 या 2 पर रखने के बाद इतिहास और अर्थव्यवस्था के लिए {2, 5} या {1, 5} बचते हैं, जो कभी लगातार दिन नहीं: असंभव। अतः विज्ञान = 2, भूगोल = 1, और इतिहास व अर्थव्यवस्था इसी क्रम में 4 और 5 पर। शुक्रवार को अर्थव्यवस्था है।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "During a drought, two neighbouring villages quarrel over water from a shared pond, and tempers are rising. As the local officer, what should you do first?",
+      "options": [
+        "Give the pond to the larger village, since it has more people.",
+        "Call representatives of both villages together, agree on a fair sharing schedule for the pond, and arrange extra supply if possible.",
+        "Close the pond to both villages until the rains come.",
+        "Leave the villages to settle the matter between themselves."
+      ],
+      "answerIndex": 1,
+      "why": "Bringing both sides together lowers tension and gives them a stake in a fair schedule, while extra supply eases the shortage behind the quarrel. Favouring one village breeds resentment, closing the pond deprives everyone in a drought, and staying out risks the quarrel turning violent.",
+      "hi": {
+        "q": "सूखे के दौरान दो पड़ोसी गाँव एक साझा तालाब के पानी को लेकर झगड़ रहे हैं, और तनाव बढ़ रहा है। स्थानीय अधिकारी के रूप में आपको सबसे पहले क्या करना चाहिए?",
+        "options": [
+          "तालाब बड़े गाँव को दे दें, क्योंकि वहाँ अधिक लोग हैं।",
+          "दोनों गाँवों के प्रतिनिधियों को एक साथ बुलाएँ, तालाब के पानी के बँटवारे की निष्पक्ष समय-सारणी पर सहमति बनाएँ, और संभव हो तो अतिरिक्त आपूर्ति की व्यवस्था करें।",
+          "बारिश आने तक तालाब दोनों गाँवों के लिए बंद कर दें।",
+          "गाँवों को आपस में मामला सुलझाने के लिए छोड़ दें।"
+        ],
+        "why": "दोनों पक्षों को साथ लाना तनाव घटाता है और उन्हें निष्पक्ष समय-सारणी में भागीदार बनाता है, जबकि अतिरिक्त आपूर्ति झगड़े के पीछे की कमी को कम करती है। एक गाँव का पक्ष लेना नाराज़गी पैदा करता है, तालाब बंद करना सूखे में सबको वंचित करता है, और दूर रहना झगड़े के हिंसक होने का जोखिम बढ़ाता है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "₹6,500 is divided among A, B and C in the ratio 1/2 : 1/3 : 1/4. What is A's share?",
+      "options": [
+        "₹2,000",
+        "₹1,500",
+        "₹3,000",
+        "₹3,250"
+      ],
+      "answerIndex": 2,
+      "why": "Multiply each part by 12 (the LCM of 2, 3 and 4) to clear the fractions: 1/2 : 1/3 : 1/4 = 6 : 4 : 3. The parts add up to 13. A's share = 6/13 × 6,500 = ₹3,000. (B gets ₹2,000 and C ₹1,500.)",
+      "hi": {
+        "q": "₹6,500 को A, B और C में 1/2 : 1/3 : 1/4 के अनुपात में बाँटा जाता है। A का हिस्सा क्या है?",
+        "options": [
+          "2,000 रुपये",
+          "1,500 रुपये",
+          "3,000 रुपये",
+          "3,250 रुपये"
+        ],
+        "why": "भिन्न हटाने के लिए हर भाग को 12 (2, 3 और 4 का ल.स.) से गुणा करें: 1/2 : 1/3 : 1/4 = 6 : 4 : 3। भागों का योग 13 है। A का हिस्सा = 6/13 × 6,500 = ₹3,000। (B को ₹2,000 और C को ₹1,500 मिलते हैं।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p7",
+      "q": "What observation leads the author to conclude that 'something besides fear is at work'?",
+      "options": [
+        "Penalties for tax evasion have been abolished.",
+        "Most people are audited every year.",
+        "Rich people pay more tax than poor people.",
+        "Many people pay what they owe even though the chance of being audited is small."
+      ],
+      "answerIndex": 3,
+      "why": "The first paragraph notes that the chance of any one person being audited is small, 'and many still pay what they owe'. If fear were the only reason, low audit chances would mean low payment. The passage says penalties 'certainly matter', so they have not been abolished.",
+      "hi": {
+        "q": "कौन-सा अवलोकन लेखक को इस निष्कर्ष तक ले जाता है कि 'डर के अलावा भी कुछ काम कर रहा है'?",
+        "options": [
+          "कर-चोरी के दंड समाप्त कर दिए गए हैं।",
+          "अधिकांश लोगों की हर वर्ष जाँच होती है।",
+          "अमीर लोग ग़रीबों से अधिक कर चुकाते हैं।",
+          "जाँच की संभावना कम होने के बावजूद बहुत-से लोग जितना देना है उतना चुकाते हैं।"
+        ],
+        "why": "पहला अनुच्छेद बताता है कि किसी एक व्यक्ति की जाँच होने की संभावना कम है, 'और फिर भी बहुत-से लोग जितना देना है उतना चुकाते हैं'। यदि डर ही एकमात्र कारण होता, तो जाँच की कम संभावना का अर्थ कम भुगतान होता। गद्यांश कहता है कि दंड 'निश्चित रूप से मायने रखते हैं', इसलिए वे समाप्त नहीं हुए।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p7",
+      "q": "Which one of the following, if true, would most strengthen the author's argument?",
+      "options": [
+        "A country doubled its tax inspectors and collected more revenue.",
+        "Some people still evade taxes even when the system is simple.",
+        "Tax rates differ widely between countries.",
+        "After a tax form was shortened and made available online, the number of people filing on time rose sharply without any increase in inspections."
+      ],
+      "answerIndex": 3,
+      "why": "The author argues that simplicity can raise compliance without tougher enforcement. A rise in on-time filing after simplification, with inspections unchanged, supports this directly. Doubling inspectors supports the enforcement view instead, and the claim that some still evade does not strengthen the argument.",
+      "hi": {
+        "q": "निम्नलिखित में से कौन-सा, यदि सत्य हो, लेखक के तर्क को सबसे अधिक मज़बूत करेगा?",
+        "options": [
+          "एक देश ने अपने कर निरीक्षक दोगुने किए और अधिक राजस्व जुटाया।",
+          "व्यवस्था सरल होने पर भी कुछ लोग कर-चोरी करते हैं।",
+          "विभिन्न देशों में कर की दरें बहुत अलग-अलग हैं।",
+          "कर का फ़ॉर्म छोटा करके ऑनलाइन उपलब्ध कराने के बाद, निरीक्षण बढ़ाए बिना, समय पर कर भरने वालों की संख्या तेज़ी से बढ़ी।"
+        ],
+        "why": "लेखक का तर्क है कि सरलता सख़्त प्रवर्तन के बिना अनुपालन बढ़ा सकती है। निरीक्षण उतने ही रहते हुए सरलीकरण के बाद समय पर कर भरने में वृद्धि इसका सीधा समर्थन करती है। निरीक्षक दोगुने करना उलटे प्रवर्तन वाले दृष्टिकोण का समर्थन करता है, और यह दावा कि कुछ लोग अब भी चोरी करते हैं, तर्क को मज़बूत नहीं करता।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p7",
+      "q": "According to the passage, what is likely to weaken a person's willingness to pay tax?",
+      "options": [
+        "Seeing tax money returned as working roads and schools.",
+        "A belief that the rich escape paying or that public funds are wasted.",
+        "A simple tax form that is easy to file.",
+        "Being treated with respect by tax officials."
+      ],
+      "answerIndex": 1,
+      "why": "The second paragraph says: 'If they believe that the rich escape, or that funds are wasted, their own willingness weakens.' The passage presents working services, simple forms and respectful treatment as things that raise compliance.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, किसी व्यक्ति की कर चुकाने की इच्छा किस कारण कमज़ोर पड़ सकती है?",
+        "options": [
+          "कर के पैसे को ठीक से चलने वाली सड़कों और स्कूलों के रूप में लौटते देखना।",
+          "यह विश्वास कि अमीर कर देने से बच निकलते हैं या सार्वजनिक धन बर्बाद होता है।",
+          "भरने में आसान, सरल कर फ़ॉर्म।",
+          "कर अधिकारियों द्वारा सम्मान से पेश आना।"
+        ],
+        "why": "दूसरा अनुच्छेद कहता है: 'यदि उन्हें लगे कि अमीर बच निकलते हैं, या धन बर्बाद होता है, तो उनकी अपनी इच्छा कमज़ोर पड़ जाती है।' गद्यांश ठीक चलने वाली सेवाओं, सरल फ़ॉर्म और सम्मानजनक व्यवहार को अनुपालन बढ़ाने वाली बातें बताता है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "Which one of the following numbers does not belong with the others: 31, 37, 41, 49, 53?",
+      "options": [
+        "37",
+        "41",
+        "53",
+        "49"
+      ],
+      "answerIndex": 3,
+      "why": "31, 37, 41 and 53 are prime numbers. 49 = 7 × 7 is not prime, so it is the odd one out.",
+      "hi": {
+        "q": "निम्नलिखित संख्याओं में से कौन-सी बाक़ियों से मेल नहीं खाती: 31, 37, 41, 49, 53?",
+        "options": [
+          "संख्या 37",
+          "संख्या 41",
+          "संख्या 53",
+          "संख्या 49"
+        ],
+        "why": "31, 37, 41 और 53 अभाज्य संख्याएँ हैं। 49 = 7 × 7 अभाज्य नहीं है, इसलिए वही बेमेल है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "How many times do the hour hand and the minute hand of a clock point in exactly the same direction in a full day of 24 hours?",
+      "options": [
+        "24",
+        "23",
+        "22",
+        "11"
+      ],
+      "answerIndex": 2,
+      "why": "The minute hand gains 360° on the hour hand every 12/11 hours, i.e. every 65 5/11 minutes. In 12 hours that happens 12 ÷ (12/11) = 11 times, counting 12:00 once. In 24 hours it happens 2 × 11 = 22 times. (24 is the trap: between 11 and 1 o'clock the hands meet only once, at 12.)",
+      "hi": {
+        "q": "24 घंटे के एक पूरे दिन में घड़ी की घंटे और मिनट की सुइयाँ कितनी बार ठीक एक ही दिशा में होती हैं?",
+        "options": [
+          "24 बार",
+          "23 बार",
+          "22 बार",
+          "11 बार"
+        ],
+        "why": "मिनट की सुई हर 12/11 घंटे, यानी हर 65 5/11 मिनट में घंटे की सुई से 360° आगे निकलती है। 12 घंटों में ऐसा 12 ÷ (12/11) = 11 बार होता है, 12:00 को एक बार गिनकर। 24 घंटों में यह 2 × 11 = 22 बार होता है। (24 एक जाल है: 11 और 1 बजे के बीच सुइयाँ केवल एक बार, 12 बजे, मिलती हैं।)"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "Question: Is the positive integer n divisible by 6?\nStatement I: n is divisible by 3.\nStatement II: n is divisible by 4.\nWhich one of the following is correct?",
+      "options": [
+        "Statement I alone is sufficient",
+        "Statement II alone is sufficient",
+        "Both statements together are sufficient, but neither alone is",
+        "Even both statements together are not sufficient"
+      ],
+      "answerIndex": 2,
+      "why": "Statement I alone: 3 is divisible by 3 but not by 6, while 6 is divisible by both, so no definite answer. Statement II alone: 4 is not divisible by 6, while 12 is, so no definite answer. Together: n is divisible by 3 and 4, hence by 12, and every multiple of 12 is divisible by 6. The answer is a definite 'yes', so both together are sufficient, but neither alone is.",
+      "hi": {
+        "q": "प्रश्न: क्या धनात्मक पूर्णांक n, 6 से विभाज्य है?\nकथन I: n, 3 से विभाज्य है।\nकथन II: n, 4 से विभाज्य है।\nनिम्नलिखित में से कौन-सा सही है?",
+        "options": [
+          "केवल कथन I पर्याप्त है",
+          "केवल कथन II पर्याप्त है",
+          "दोनों कथन मिलकर पर्याप्त हैं, पर कोई भी अकेला नहीं",
+          "दोनों कथन मिलकर भी पर्याप्त नहीं हैं"
+        ],
+        "why": "केवल कथन I: 3, 3 से विभाज्य है पर 6 से नहीं, जबकि 6 दोनों से विभाज्य है, इसलिए निश्चित उत्तर नहीं। केवल कथन II: 4, 6 से विभाज्य नहीं, जबकि 12 है, इसलिए निश्चित उत्तर नहीं। दोनों मिलकर: n, 3 और 4 से, अतः 12 से विभाज्य है, और 12 का हर गुणज 6 से विभाज्य है। उत्तर निश्चित रूप से 'हाँ' है, अतः दोनों कथन मिलकर पर्याप्त हैं, पर कोई भी अकेला नहीं।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A sum of money doubles itself in 8 years at simple interest. What is the rate of interest per annum?",
+      "options": [
+        "10%",
+        "12.5%",
+        "8%",
+        "15%"
+      ],
+      "answerIndex": 1,
+      "why": "If the sum doubles, the interest earned equals the principal. Taking the principal as 100, interest = 100 over 8 years. Rate = 100 × 100/(100 × 8) = 12.5% per annum.",
+      "hi": {
+        "q": "कोई धनराशि साधारण ब्याज पर 8 वर्षों में दोगुनी हो जाती है। वार्षिक ब्याज दर क्या है?",
+        "options": [
+          "10 प्रतिशत",
+          "12.5 प्रतिशत",
+          "8 प्रतिशत",
+          "15 प्रतिशत"
+        ],
+        "why": "यदि राशि दोगुनी होती है, तो अर्जित ब्याज मूलधन के बराबर है। मूलधन 100 मानें, तो 8 वर्षों में ब्याज = 100। दर = 100 × 100/(100 × 8) = 12.5% वार्षिक।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p8",
+      "q": "According to the passage, which one of the following is true of bleached corals?",
+      "options": [
+        "They are already dead.",
+        "They have gained extra algae.",
+        "They are unaffected by further heat.",
+        "They are still alive and can recover if the water cools soon enough."
+      ],
+      "answerIndex": 3,
+      "why": "The passage says: 'Bleached corals are not dead, and if the water cools soon enough they can recover.' Bleaching means losing algae, not gaining them, and further heat leaves them weaker.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, विरंजित प्रवालों के बारे में निम्नलिखित में से कौन-सा सत्य है?",
+        "options": [
+          "वे पहले ही मर चुके हैं।",
+          "उन्हें अतिरिक्त शैवाल मिल गए हैं।",
+          "आगे की गर्मी का उन पर कोई असर नहीं होता।",
+          "वे अभी जीवित हैं और पानी जल्दी ठंडा होने पर फिर से ठीक हो सकते हैं।"
+        ],
+        "why": "गद्यांश कहता है: 'विरंजित प्रवाल मरे नहीं होते, और यदि पानी जल्दी ठंडा हो जाए तो वे फिर से ठीक हो सकते हैं।' विरंजन का अर्थ शैवाल खोना है, पाना नहीं, और आगे की गर्मी उन्हें और कमज़ोर करती है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p8",
+      "q": "Why, according to the passage, are bleached corals left 'starving'?",
+      "options": [
+        "Because warm water carries no fish for them to eat.",
+        "Because waves break off their feeding parts.",
+        "Because they turn white and can no longer see their food.",
+        "Because the algae that supplied them with food through photosynthesis have been expelled."
+      ],
+      "answerIndex": 3,
+      "why": "The algae 'supply food through photosynthesis'; bleaching is the corals expelling those algae. Once they are gone, so is that food supply. Nothing is said about fish as food, waves damaging corals, or sight.",
+      "hi": {
+        "q": "गद्यांश के अनुसार, विरंजित प्रवाल 'भूखे' क्यों रह जाते हैं?",
+        "options": [
+          "क्योंकि गर्म पानी में खाने के लिए मछलियाँ नहीं होतीं।",
+          "क्योंकि लहरें उनके भोजन ग्रहण करने वाले अंग तोड़ देती हैं।",
+          "क्योंकि वे सफ़ेद हो जाते हैं और अपना भोजन देख नहीं पाते।",
+          "क्योंकि प्रकाश-संश्लेषण से उन्हें भोजन देने वाले शैवाल बाहर निकाल दिए गए हैं।"
+        ],
+        "why": "शैवाल 'प्रकाश-संश्लेषण से भोजन देते हैं'; विरंजन का अर्थ है प्रवालों का उन शैवालों को बाहर निकाल देना। उनके जाते ही भोजन का वह स्रोत भी चला जाता है। मछलियों को भोजन मानने, लहरों से नुक़सान या देखने के बारे में कुछ नहीं कहा गया है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "In a class of 50 students, 28 study Hindi, 26 study Sanskrit and 8 study both. How many students study neither?",
+      "options": [
+        "12",
+        "8",
+        "0",
+        "4"
+      ],
+      "answerIndex": 3,
+      "why": "Students who study at least one = 28 + 26 − 8 = 46 (the 8 who study both are counted twice in 28 + 26). Students who study neither = 50 − 46 = 4.",
+      "hi": {
+        "q": "50 विद्यार्थियों की एक कक्षा में 28 हिंदी, 26 संस्कृत और 8 दोनों पढ़ते हैं। कितने विद्यार्थी दोनों में से कोई भी नहीं पढ़ते?",
+        "options": [
+          "12 विद्यार्थी",
+          "8 विद्यार्थी",
+          "0 विद्यार्थी",
+          "4 विद्यार्थी"
+        ],
+        "why": "कम से कम एक पढ़ने वाले = 28 + 26 − 8 = 46 (दोनों पढ़ने वाले 8 विद्यार्थी 28 + 26 में दो बार गिने गए हैं)। दोनों में से कोई नहीं पढ़ने वाले = 50 − 46 = 4।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "On taking charge of an office, you find that a large supply contract was given by your predecessor without the required tender process. The supplies are arriving and are of acceptable quality. What should you do?",
+      "options": [
+        "Ignore it, since the supplies are of acceptable quality.",
+        "Cancel the contract at once and stop all supplies.",
+        "Record the facts and report the matter to the competent authority through proper channels, while ensuring supplies needed for public services are not disrupted.",
+        "Contact your predecessor privately and ask him to correct the papers."
+      ],
+      "answerIndex": 2,
+      "why": "A breach of procedure must be reported to those with the authority to examine it, and recording the facts protects the process. Keeping essential supplies flowing avoids harming the public while the matter is reviewed. Ignoring it condones the breach, cancelling at once may disrupt services and is not your decision alone, and asking for papers to be 'corrected' privately risks a cover-up.",
+      "hi": {
+        "q": "किसी कार्यालय का प्रभार सँभालने पर आप पाते हैं कि आपके पूर्ववर्ती ने आवश्यक निविदा प्रक्रिया के बिना आपूर्ति का एक बड़ा अनुबंध दे दिया था। आपूर्ति आ रही है और उसकी गुणवत्ता स्वीकार्य है। आपको क्या करना चाहिए?",
+        "options": [
+          "इसे अनदेखा करें, क्योंकि आपूर्ति की गुणवत्ता स्वीकार्य है।",
+          "अनुबंध तुरंत रद्द करें और सारी आपूर्ति रोक दें।",
+          "तथ्य दर्ज करें और उचित माध्यम से सक्षम प्राधिकारी को मामले की सूचना दें, साथ ही सुनिश्चित करें कि जन-सेवाओं के लिए आवश्यक आपूर्ति बाधित न हो।",
+          "अपने पूर्ववर्ती से निजी तौर पर संपर्क करें और उनसे काग़ज़ात ठीक करने को कहें।"
+        ],
+        "why": "प्रक्रिया के उल्लंघन की सूचना उन्हें दी जानी चाहिए जिनके पास उसकी जाँच का अधिकार है, और तथ्य दर्ज करना प्रक्रिया की रक्षा करता है। आवश्यक आपूर्ति चालू रखना मामले की समीक्षा के दौरान जनता को नुक़सान से बचाता है। अनदेखा करना उल्लंघन को माफ़ करना है, तुरंत रद्द करना सेवाएँ बाधित कर सकता है और यह अकेले आपका निर्णय नहीं, और निजी तौर पर काग़ज़ 'ठीक' कराना मामले को दबाने का जोखिम है।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "A rectangular park measures 60 m by 40 m. A path 2 m wide runs all around it on the inside, along the boundary. What is the area of the path?",
+      "options": [
+        "400 sq m",
+        "416 sq m",
+        "368 sq m",
+        "384 sq m"
+      ],
+      "answerIndex": 3,
+      "why": "The path is inside, so the inner rectangle is 60 − 2 × 2 = 56 m long and 40 − 2 × 2 = 36 m wide. Area of path = whole park − inner part = 60 × 40 − 56 × 36 = 2,400 − 2,016 = 384 sq m.",
+      "hi": {
+        "q": "एक आयताकार पार्क 60 मीटर × 40 मीटर का है। उसके भीतर, सीमा के साथ-साथ चारों ओर 2 मीटर चौड़ा रास्ता है। रास्ते का क्षेत्रफल क्या है?",
+        "options": [
+          "400 वर्ग मीटर",
+          "416 वर्ग मीटर",
+          "368 वर्ग मीटर",
+          "384 वर्ग मीटर"
+        ],
+        "why": "रास्ता भीतर है, इसलिए भीतरी आयत 60 − 2 × 2 = 56 मीटर लंबा और 40 − 2 × 2 = 36 मीटर चौड़ा है। रास्ते का क्षेत्रफल = पूरा पार्क − भीतरी भाग = 60 × 40 − 56 × 36 = 2,400 − 2,016 = 384 वर्ग मीटर।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The length of a rectangle is increased by 20% and its breadth is decreased by 10%. What is the effect on its area?",
+      "options": [
+        "An increase of 10%",
+        "An increase of 8%",
+        "A decrease of 8%",
+        "An increase of 2%"
+      ],
+      "answerIndex": 1,
+      "why": "New area = 1.20 × 0.90 = 1.08 times the old area, i.e. an increase of 8%. Formula for changes a% and b%: a + b + ab/100 = 20 − 10 + (20 × −10)/100 = 10 − 2 = 8%. (10% is the trap: simply adding 20 and −10.)",
+      "hi": {
+        "q": "एक आयत की लंबाई 20% बढ़ाई जाती है और चौड़ाई 10% घटाई जाती है। उसके क्षेत्रफल पर क्या प्रभाव पड़ता है?",
+        "options": [
+          "10% की वृद्धि",
+          "8% की वृद्धि",
+          "8% की कमी",
+          "2% की वृद्धि"
+        ],
+        "why": "नया क्षेत्रफल = 1.20 × 0.90 = पुराने का 1.08 गुना, यानी 8% की वृद्धि। a% और b% परिवर्तन का सूत्र: a + b + ab/100 = 20 − 10 + (20 × −10)/100 = 10 − 2 = 8%। (10% एक जाल है: इसमें 20 और −10 को सीधे जोड़ दिया गया है।)"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "In a code language, '479' means 'tea is hot', '415' means 'tea and milk' and '952' means 'hot milk drink'. Which digit stands for 'drink'?",
+      "options": [
+        "5",
+        "2",
+        "9",
+        "4"
+      ],
+      "answerIndex": 1,
+      "why": "'tea' is in the first two messages; the only digit common to 479 and 415 is 4, so tea = 4. 'hot' is in the first and third; common to 479 and 952 is 9, so hot = 9. 'milk' is in the second and third; common to 415 and 952 is 5, so milk = 5. In 952, 9 = hot and 5 = milk, so drink = 2.",
+      "hi": {
+        "q": "एक कूट भाषा में '479' का अर्थ 'tea is hot', '415' का अर्थ 'tea and milk' और '952' का अर्थ 'hot milk drink' है। 'drink' के लिए कौन-सा अंक है?",
+        "options": [
+          "अंक 5",
+          "अंक 2",
+          "अंक 9",
+          "अंक 4"
+        ],
+        "why": "'tea' पहले दो संदेशों में है; 479 और 415 में एकमात्र साझा अंक 4 है, अतः tea = 4। 'hot' पहले और तीसरे में है; 479 और 952 में साझा 9 है, अतः hot = 9। 'milk' दूसरे और तीसरे में है; 415 और 952 में साझा 5 है, अतः milk = 5। 952 में 9 = hot और 5 = milk, अतः drink = 2।"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "The table shows the sales (in ₹ crore) of a company in four regions in 2023 and 2024. Which region showed the highest percentage growth in sales from 2023 to 2024?",
+      "table": [
+        [
+          "Region",
+          "2023",
+          "2024"
+        ],
+        [
+          "North",
+          "40",
+          "46"
+        ],
+        [
+          "South",
+          "50",
+          "55"
+        ],
+        [
+          "East",
+          "30",
+          "36"
+        ],
+        [
+          "West",
+          "60",
+          "63"
+        ]
+      ],
+      "options": [
+        "North",
+        "South",
+        "West",
+        "East"
+      ],
+      "answerIndex": 3,
+      "why": "Growth: North (46 − 40)/40 = 15%; South (55 − 50)/50 = 10%; East (36 − 30)/30 = 20%; West (63 − 60)/60 = 5%. East is highest. (North and East both grew by ₹6 crore, but East started from a smaller base.)",
+      "hi": {
+        "q": "तालिका में 2023 और 2024 में चार क्षेत्रों में एक कंपनी की बिक्री (₹ करोड़ में) दी गई है। 2023 से 2024 तक किस क्षेत्र की बिक्री में सबसे अधिक प्रतिशत वृद्धि हुई?",
+        "table": [
+          [
+            "क्षेत्र",
+            "2023",
+            "2024"
+          ],
+          [
+            "उत्तर",
+            "40",
+            "46"
+          ],
+          [
+            "दक्षिण",
+            "50",
+            "55"
+          ],
+          [
+            "पूर्व",
+            "30",
+            "36"
+          ],
+          [
+            "पश्चिम",
+            "60",
+            "63"
+          ]
+        ],
+        "options": [
+          "उत्तर क्षेत्र",
+          "दक्षिण क्षेत्र",
+          "पश्चिम क्षेत्र",
+          "पूर्व क्षेत्र"
+        ],
+        "why": "वृद्धि: उत्तर (46 − 40)/40 = 15%; दक्षिण (55 − 50)/50 = 10%; पूर्व (36 − 30)/30 = 20%; पश्चिम (63 − 60)/60 = 5%। पूर्व सबसे ऊपर है। (उत्तर और पूर्व दोनों में ₹6 करोड़ की वृद्धि हुई, पर पूर्व का आधार छोटा था।)"
+      }
+    },
+    {
+      "topic": "Data interpretation",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "The table shows the sales (in ₹ crore) of a company in four regions in 2023 and 2024. By what percentage did the company's total sales grow from 2023 to 2024 (to one decimal place)?",
+      "table": [
+        [
+          "Region",
+          "2023",
+          "2024"
+        ],
+        [
+          "North",
+          "40",
+          "46"
+        ],
+        [
+          "South",
+          "50",
+          "55"
+        ],
+        [
+          "East",
+          "30",
+          "36"
+        ],
+        [
+          "West",
+          "60",
+          "63"
+        ]
+      ],
+      "options": [
+        "10.0%",
+        "12.5%",
+        "11.1%",
+        "20.0%"
+      ],
+      "answerIndex": 2,
+      "why": "Total 2023 = 40 + 50 + 30 + 60 = 180. Total 2024 = 46 + 55 + 36 + 63 = 200. Growth = 20/180 × 100 = 11.11…%, i.e. 11.1%. (10.0% wrongly divides by the 2024 total.)",
+      "hi": {
+        "q": "तालिका में 2023 और 2024 में चार क्षेत्रों में एक कंपनी की बिक्री (₹ करोड़ में) दी गई है। 2023 से 2024 तक कंपनी की कुल बिक्री कितने प्रतिशत बढ़ी (एक दशमलव स्थान तक)?",
+        "table": [
+          [
+            "क्षेत्र",
+            "2023",
+            "2024"
+          ],
+          [
+            "उत्तर",
+            "40",
+            "46"
+          ],
+          [
+            "दक्षिण",
+            "50",
+            "55"
+          ],
+          [
+            "पूर्व",
+            "30",
+            "36"
+          ],
+          [
+            "पश्चिम",
+            "60",
+            "63"
+          ]
+        ],
+        "options": [
+          "10.0 प्रतिशत",
+          "12.5 प्रतिशत",
+          "11.1 प्रतिशत",
+          "20.0 प्रतिशत"
+        ],
+        "why": "कुल 2023 = 40 + 50 + 30 + 60 = 180। कुल 2024 = 46 + 55 + 36 + 63 = 200। वृद्धि = 20/180 × 100 = 11.11…%, यानी 11.1%। (10.0% में ग़लती से 2024 के कुल से भाग दिया गया है।)"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "A shop offers two successive discounts of 20% and 10% on a jacket marked at ₹2,500. What does a customer pay?",
+      "options": [
+        "₹1,750",
+        "₹1,850",
+        "₹1,800",
+        "₹1,700"
+      ],
+      "answerIndex": 2,
+      "why": "After the first discount of 20%: 2,500 × 0.80 = ₹2,000. After the second discount of 10% on ₹2,000: 2,000 × 0.90 = ₹1,800. (Two discounts of 20% and 10% equal a single discount of 28%, not 30%: 2,500 × 0.72 = 1,800.)",
+      "hi": {
+        "q": "एक दुकान ₹2,500 अंकित मूल्य वाली जैकेट पर 20% और 10% की दो क्रमिक छूट देती है। ग्राहक कितना भुगतान करता है?",
+        "options": [
+          "1,750 रुपये",
+          "1,850 रुपये",
+          "1,800 रुपये",
+          "1,700 रुपये"
+        ],
+        "why": "20% की पहली छूट के बाद: 2,500 × 0.80 = ₹2,000। ₹2,000 पर 10% की दूसरी छूट के बाद: 2,000 × 0.90 = ₹1,800। (20% और 10% की दो छूटें 28% की एक छूट के बराबर हैं, 30% के नहीं: 2,500 × 0.72 = 1,800।)"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "passage": "m2-p9",
+      "q": "What does the author suggest about learning driven by curiosity?",
+      "options": [
+        "It is faster than memorising facts.",
+        "It is easy to test in examinations.",
+        "It is slower and harder to examine, but lasts longer and helps with new problems.",
+        "It is a distraction from real learning."
+      ],
+      "answerIndex": 2,
+      "why": "The passage says the second kind of learning 'is slower and harder to test in an examination, but it lasts longer and carries over to new problems'. It calls curiosity 'the heart' of learning, so 'a distraction' is the opposite of the author's view.",
+      "hi": {
+        "q": "जिज्ञासा से प्रेरित सीखने के बारे में लेखक क्या सुझाता है?",
+        "options": [
+          "वह तथ्य रटने से तेज़ है।",
+          "उसे परीक्षाओं में परखना आसान है।",
+          "वह धीमा है और परीक्षा में परखना कठिन है, पर अधिक समय तक टिकता है और नई समस्याओं में मदद करता है।",
+          "वह असली सीखने से भटकाव है।"
+        ],
+        "why": "गद्यांश कहता है कि दूसरी तरह का सीखना 'धीमा है और परीक्षा में परखना कठिन, पर वह अधिक समय तक टिकता है और नई समस्याओं तक पहुँचता है'। वह जिज्ञासा को सीखने का 'केंद्र' कहता है, इसलिए 'भटकाव' लेखक के विचार का उलटा है।"
+      }
+    },
+    {
+      "topic": "Comprehension",
+      "nodes": [
+        "csat-1"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "passage": "m2-p9",
+      "q": "Which one of the following is the most logical corollary of the passage?",
+      "options": [
+        "Teachers who want lasting learning should also value and reward good questions, not only correct answers.",
+        "Examinations should be abolished.",
+        "Students should stop learning facts such as the boiling point of water.",
+        "Curiosity cannot be encouraged in a classroom."
+      ],
+      "answerIndex": 0,
+      "why": "The passage criticises classrooms that 'reward only correct answers, and never good questions'. The natural follow-up is to reward questions too. It does not ask to abolish examinations or stop learning facts; it says such classrooms teach curiosity is a distraction, which implies the reverse can be taught.",
+      "hi": {
+        "q": "निम्नलिखित में से कौन-सा गद्यांश का सबसे तार्किक उपनिगमन है?",
+        "options": [
+          "जो शिक्षक स्थायी सीखना चाहते हैं, उन्हें केवल सही उत्तरों को नहीं, अच्छे प्रश्नों को भी महत्व और पुरस्कार देना चाहिए।",
+          "परीक्षाएँ समाप्त कर देनी चाहिए।",
+          "विद्यार्थियों को पानी के क्वथनांक जैसे तथ्य सीखना बंद कर देना चाहिए।",
+          "कक्षा में जिज्ञासा को प्रोत्साहित नहीं किया जा सकता।"
+        ],
+        "why": "गद्यांश उन कक्षाओं की आलोचना करता है जो 'केवल सही उत्तरों को पुरस्कृत करती हैं, और अच्छे प्रश्नों को कभी नहीं'। स्वाभाविक अगला क़दम प्रश्नों को भी पुरस्कृत करना है। वह परीक्षाएँ समाप्त करने या तथ्य सीखना बंद करने को नहीं कहता; वह कहता है कि ऐसी कक्षाएँ जिज्ञासा को भटकाव सिखाती हैं, जिसका अर्थ है कि इसका उलटा भी सिखाया जा सकता है।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "medium",
+      "q": "Statements: All roses are flowers. Some flowers are red.\nConclusions: I. Some roses are red. II. Some flowers are roses.\nWhich of the conclusions definitely follows from the statements?",
+      "options": [
+        "Only conclusion I follows",
+        "Only conclusion II follows",
+        "Both I and II follow",
+        "Neither I nor II follows"
+      ],
+      "answerIndex": 1,
+      "why": "The red flowers may or may not include any roses, so I does not definitely follow. Since all roses are flowers (and roses exist), the flowers that are roses make II true: some flowers are roses.",
+      "hi": {
+        "q": "कथन: सभी गुलाब फूल हैं। कुछ फूल लाल हैं।\nनिष्कर्ष: I. कुछ गुलाब लाल हैं। II. कुछ फूल गुलाब हैं।\nकथनों से कौन-सा/से निष्कर्ष निश्चित रूप से निकलता/निकलते है/हैं?",
+        "options": [
+          "केवल निष्कर्ष I निकलता है",
+          "केवल निष्कर्ष II निकलता है",
+          "I और II दोनों निकलते हैं",
+          "न तो I, न ही II निकलता है"
+        ],
+        "why": "लाल फूलों में कोई गुलाब हो भी सकता है और नहीं भी, इसलिए I निश्चित रूप से नहीं निकलता। चूँकि सभी गुलाब फूल हैं (और गुलाब मौजूद हैं), जो फूल गुलाब हैं वे II को सत्य बनाते हैं: कुछ फूल गुलाब हैं।"
+      }
+    },
+    {
+      "topic": "Basic numeracy",
+      "nodes": [
+        "csat-5"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "In an election between two candidates, the winner received 58% of the valid votes and won by 4,800 votes. How many valid votes were cast?",
+      "options": [
+        "30,000",
+        "28,000",
+        "32,000",
+        "24,000"
+      ],
+      "answerIndex": 0,
+      "why": "The loser received 100 − 58 = 42% of the valid votes. The winning margin is 58% − 42% = 16% of the valid votes, which equals 4,800. So the valid votes = 4,800 × 100/16 = 30,000.",
+      "hi": {
+        "q": "दो उम्मीदवारों के बीच एक चुनाव में विजेता को 58% वैध मत मिले और वह 4,800 मतों से जीता। कितने वैध मत डाले गए?",
+        "options": [
+          "30,000 मत",
+          "28,000 मत",
+          "32,000 मत",
+          "24,000 मत"
+        ],
+        "why": "हारने वाले को 100 − 58 = 42% वैध मत मिले। जीत का अंतर 58% − 42% = वैध मतों का 16% है, जो 4,800 के बराबर है। अतः वैध मत = 4,800 × 100/16 = 30,000।"
+      }
+    },
+    {
+      "topic": "Logical and analytical reasoning",
+      "nodes": [
+        "csat-2"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "Which number completes the analogy 8 : 512 :: 6 : ?",
+      "options": [
+        "216",
+        "36",
+        "196",
+        "256"
+      ],
+      "answerIndex": 0,
+      "why": "512 = 8³ (8 × 8 × 8). In the same way, 6³ = 6 × 6 × 6 = 216.",
+      "hi": {
+        "q": "कौन-सी संख्या सादृश्य 8 : 512 :: 6 : ? को पूरा करती है?",
+        "options": [
+          "संख्या 216",
+          "संख्या 36",
+          "संख्या 196",
+          "संख्या 256"
+        ],
+        "why": "512 = 8³ (8 × 8 × 8)। इसी तरह 6³ = 6 × 6 × 6 = 216।"
+      }
+    },
+    {
+      "topic": "Decision-making",
+      "nodes": [
+        "csat-3"
+      ],
+      "format": "direct",
+      "difficulty": "easy",
+      "q": "You organise a free health check-up camp in a village, but very few people come because of a rumour that the tests are harmful. What should you do?",
+      "options": [
+        "Close the camp, since people have made their choice.",
+        "Announce that people who do not attend will lose their government benefits.",
+        "Meet respected local people such as the school teacher, health worker and village elders, explain the tests, and ask them to help reassure the community.",
+        "Ignore the rumour and wait for people to come on their own."
+      ],
+      "answerIndex": 2,
+      "why": "Rumours are best answered by people the community already trusts, with clear information. Closing the camp wastes a chance to help, threatening benefits is coercive and unlawful, and waiting lets the rumour stand.",
+      "hi": {
+        "q": "आप एक गाँव में मुफ़्त स्वास्थ्य जाँच शिविर लगाते हैं, पर इस अफ़वाह के कारण बहुत कम लोग आते हैं कि जाँचें हानिकारक हैं। आपको क्या करना चाहिए?",
+        "options": [
+          "शिविर बंद कर दें, क्योंकि लोगों ने अपना फ़ैसला कर लिया है।",
+          "घोषणा करें कि जो लोग नहीं आएँगे, उनके सरकारी लाभ बंद हो जाएँगे।",
+          "स्कूल शिक्षक, स्वास्थ्य कार्यकर्ता और गाँव के बुज़ुर्गों जैसे सम्मानित स्थानीय लोगों से मिलें, उन्हें जाँचों के बारे में समझाएँ, और समुदाय को आश्वस्त करने में उनकी मदद माँगें।",
+          "अफ़वाह को अनदेखा करें और लोगों के अपने-आप आने की प्रतीक्षा करें।"
+        ],
+        "why": "अफ़वाहों का सबसे अच्छा उत्तर वे लोग देते हैं जिन पर समुदाय पहले से भरोसा करता है, स्पष्ट जानकारी के साथ। शिविर बंद करना मदद का अवसर गँवाना है, लाभ बंद करने की धमकी दबावपूर्ण और ग़ैरक़ानूनी है, और प्रतीक्षा करना अफ़वाह को बने रहने देता है।"
+      }
+    }
+  ]
+}
