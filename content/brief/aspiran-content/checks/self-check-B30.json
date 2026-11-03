@@ -1,0 +1,32 @@
+{
+  "batch": "B30",
+  "checksRun": [
+    "python3 check.py aspiran-content (key order, id/filename/optional/paper match, no clash with ids in earlier zips, en/hi present, Devanagari in every hi field, no Devanagari digits, no Latin article letters in Hindi, word limits, counts)",
+    "31 files: optionals 31 / 0 issues on the final run",
+    "Note words en/hi by code: ant-p1-06 407/483, ant-p1-11 427/474, ant-p1-12 434/466, ant-p1-13 437/453, ant-p1-38 431/487, geo-p1-09 425/484, geo-p1-14 453/499, geo-p1-15 447/506, geo-p1-16 450/494, geo-p1-33 433/487, geo-p2-map 425/457, hist-p1-06 442/481, hist-p1-69 418/460, hist-p2-11 432/461, hist-p2-26 456/499, hist-p2-32 420/465, psir-p1-12 437/523, psir-p1-54 434/474, psir-p2-28 401/425, psir-p2-36 410/449, psir-p2-38 429/479, pa-p1-13 393/438, pa-p1-15 358/433, pa-p1-19 385/465, pa-p1-20 388/479, pa-p1-34 435/487, soc-p1-13 422/462, soc-p1-17 420/476, soc-p1-24 400/478, soc-p2-01 404/461, soc-p2-03 402/455 (limit 600)",
+    "Why words by code: every English and Hindi 'why' at 60 or under (highest 59)",
+    "Recall kinds counted by code: 3 define, 3 compare, 3 example, 3 apply in every node",
+    "Every note section ends with a question to the reader, in English and Hindi, checked by code",
+    "Answers block checked by search: lettered articles in Hindi written 279क (279A) and 21क (21A); no PTG/PVTG or seismic-zone content arose in this batch's topics, so those two rules had nothing to apply to; no .voice.txt files in this batch",
+    "Map rule: geo-p2-map and the three anthropology/geography diagrams that show places are schematic sketches with no national borders"
+  ],
+  "issuesFound": [
+    "pa-p1-15 and pa-p1-34: note section 3 ended with an instruction ('Give an example...') instead of a question",
+    "soc-p1-24: third skeleton had only 2 headings (minimum 3)",
+    "psir-p1-12: Hindi diagram text had the article as 21A without the Hindi letter",
+    "hist-p2-11: Hindi used जागीर for Permanent Settlement estates, which mixes up Mughal and British terms"
+  ],
+  "fixed": [
+    "Reworded both section endings as questions in English and Hindi",
+    "Added a third heading ('Middle view: privatisation and new forms of belief') in soc-p1-24",
+    "Changed to 'अनुच्छेद 21क (21A, शिक्षा)' in psir-p1-12",
+    "Changed to संपदा in hist-p2-11"
+  ],
+  "stillOpen": [
+    "Hindi terms need the Hindi editor: 'मैं' (I) / 'मुझे' (Me), सामान्यीकृत अन्य, क्रीड़ा अवस्था, विनिमय गतिशीलता, पूर्वाभासी समाजीकरण, सामूहिक उत्तेजना, सांसारिक तपश्चर्या, मिथिम, सामान्यीकृत विनिमय, शिखर-कटक / शिखर-उभार, महारंध्र, पश्चकपाल गाँठ, पश्च-दाढ़ अंतराल, निकेत, मोज़ेक उद्विकास, अनुकूली विकिरण",
+    "Facts that changed or may have changed in 2025-26 are flagged, not asserted: Sixteenth Finance Commission share and the 2025 rulings on Governors' assent and the Article 143 opinion (psir-p1-54); MAHASAGAR (psir-p2-28); iCET renamed TRUST, 2025 US tariffs, 10-year defence framework (psir-p2-36); 2025 border and Yarlung Tsangpo dam developments (psir-p2-38); Deep Ocean Mission status (geo-p1-14, geo-p1-16)",
+    "Fossil dates, cranial capacities and current classifications in ant-p1-11, ant-p1-12 and ant-p1-13 vary between sources and need a check against a current textbook",
+    "Syllabus spells 'Doll's rule'; ant-p1-06 uses Dollo's rule and says so in factsToCheck",
+    "geo-p2-map: place sets are written for practice and the exact current format of the map question (number of places, 30-word limit, marks) should be checked against the latest paper"
+  ]
+}

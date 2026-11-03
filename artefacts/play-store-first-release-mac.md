@@ -44,7 +44,9 @@ the app id changed, and Play would reject them.
 https://play.google.com/console → **Create app**.
 - App name: `Aspiran: UPSC prep, together`. Default language: English (India) – en-IN. App or game: **App**. Free or
   paid: **Free** (Plus is an in-app purchase, which is allowed in a free app).
-- Tick the two declarations → Create app.
+- Package name: `in.aspiran.app` (it can never be changed after this). Press "Check availability".
+- Leave "automatic protection" on.
+- Tick all three declarations (Developer Program Policies, Play App Signing, US export laws) → Create app.
 
 ## Step 5. Internal testing release
 1. Left menu: Test and release → Testing → **Internal testing** → Testers tab → Create email list. Name it "Aspiran
@@ -60,8 +62,8 @@ https://play.google.com/console → **Create app**.
 
 ## Step 6. Make sign-in work for the Play copy (important)
 Play re-signs the app with Google's own key, so Firebase has to know that key too, or "Continue with Google" fails.
-1. Play Console → Test and release → **App integrity** → App signing. Copy the **SHA-1** and the **SHA-256** under "App
-   signing key certificate".
+1. Play Console → **Protected with Play** (left menu; App integrity moved there in 2026) → App signing. Copy the **SHA-1**
+   and the **SHA-256** under "App signing key certificate". The page appears once the first release is uploaded.
 2. Firebase console → project upsc-pods → Project settings → the Aspiran Android app (`in.aspiran.app`) → **Add
    fingerprint** → paste the SHA-1 → Save. Do the same for the SHA-256.
 3. Wait 10 minutes.
