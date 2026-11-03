@@ -117,6 +117,7 @@
     <button data-tab="queue" data-perm="content">Today's queue</button>
     <button data-tab="coverage" data-perm="content">Coverage</button>
     <button data-tab="library" data-perm="content">Library</button>
+    <button data-tab="videos" data-perm="content">Videos</button>
     <button data-tab="author" data-perm="content">Author</button>
     <button data-tab="add" data-perm="content">Add a story</button>
     <button data-tab="notes" data-perm="content">Notes library</button>
@@ -194,6 +195,12 @@
     <p class="muted">Every paper and syllabus topic, as aspirants see them in the app's Syllabus tab, with what we have under each and how far English and Hindi have got. "In the app" means English is approved. Mocks and past papers count under the topics their questions are tagged with; everything else counts where the app shows it, from its subject and title. One item can count under several topics. Chai cards are included; rejected ones are not.</p>
     <div id="cov-tiles" class="tiles"></div>
     <div id="cov"></div>
+  </section>
+
+  <section id="tab-videos" hidden>
+    <div class="row" style="margin-bottom:4px"><h2 style="margin:0;font-size:20px">Videos</h2><span style="margin-left:auto"></span><button id="ca-reload">Refresh</button></div>
+    <p class="muted">The current-affairs scenes, week by week. Watch each one with its captions, check the facts against the sources listed, then approve it. Only approved scenes reach the apps. Your name (top of the page) goes on the approval. "Free" scenes are open to everyone; the rest are in Plus.</p>
+    <div id="ca"></div>
   </section>
 
   <section id="tab-library" hidden>
@@ -397,7 +404,7 @@ async function api(path, opts = {}) {
 document.querySelectorAll("#tabs button").forEach((b) => b.onclick = () => {
   document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("on", x === b));
   document.querySelectorAll("main section").forEach((s) => s.hidden = s.id !== "tab-" + b.dataset.tab);
-  ({ queue: loadQueue, notes: loadNotes, reports: loadReports, library: loadLibrary, author: loadAuthor, coverage: loadCoverage })[b.dataset.tab]?.();
+  ({ queue: loadQueue, notes: loadNotes, reports: loadReports, library: loadLibrary, author: loadAuthor, coverage: loadCoverage, videos: loadVideos })[b.dataset.tab]?.();
 });
 
 function side(t, lang) {
@@ -535,6 +542,35 @@ function badJson(err) {
 // --- Coverage: per paper and subject, what exists and how far English and Hindi have got ------------
 const COV_STATUS = { gap: ["gap", "Nothing yet"], drafts: ["drafts", "Drafts only"], hindi: ["hindi", "Hindi behind"], ok: ["ok", "In the app"] };
 let covData = null;
+async function loadVideos() {
+  const weeks = await api("/desk/api/ca");
+  if (!weeks.length) { $("#ca").innerHTML = `<p class="muted">No weeks yet. Send one with <code>npm run import:ca</code>.</p>`; return; }
+  const full = await Promise.all(weeks.map((w) => api("/desk/api/ca/" + w.week)));
+  $("#ca").innerHTML = full.map((w, i) => `<div class="card"><div class="row"><h3 style="margin:0">Week ${esc(w.week)}</h3>
+      <span class="pill ${weeks[i].approved === w.episodes.length ? "ok" : "gap"}">${weeks[i].approved} of ${w.episodes.length} approved</span>
+      ${weeks[i].missing.length ? `<span class="pill gap">${weeks[i].missing.length} files missing</span>` : ""}</div>
+    ${w.episodes.map((e) => `<div class="card" style="margin-top:10px"><div class="row"><strong>${e.n}. ${esc(e.title?.en ?? e.title ?? e.id)}</strong>
+        <span class="pill">${e.free ? "Free" : "Plus"}</span><span class="pill">${esc(e.tone ?? "")}</span>
+        <span class="pill ${e.review?.status === "approved" ? "ok" : "gap"}">${e.review?.status === "approved" ? `Approved by ${esc(e.review.checkedBy)} on ${esc(e.review.checkedOn)}` : "Draft"}</span>
+        <span style="margin-left:auto"></span>
+        ${e.review?.status === "approved"
+          ? `<button data-ca="${esc(w.week)}|${esc(e.id)}|draft">Back to draft</button>`
+          : `<button class="primary" data-ca="${esc(w.week)}|${esc(e.id)}|approved">Approve</button>`}</div>
+      <video controls preload="none" playsinline style="width:100%;max-width:360px;margin-top:8px;border-radius:12px" poster="${esc(e.still)}" src="${esc(e.play)}">
+        ${e.vtt ? `<track kind="captions" srclang="${esc(w.lang)}" label="Captions" src="${esc(w.base + e.vtt)}" default>` : ""}</video>
+      ${(e.sources ?? []).length ? `<details><summary>Sources (${e.sources.length})</summary><ul>${e.sources.map((x) => typeof x === "string" ? `<li>${esc(x)}</li>` : `<li>${esc(x.title ?? x.name ?? "")} ${x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.url)}</a>` : ""} ${x.date ? `<span class="muted">${esc(x.date)}</span>` : ""}</li>`).join("")}</ul></details>` : `<p class="muted">No sources listed: check the facts against an official source before approving.</p>`}
+      ${(e.quiz ?? []).length ? `<details><summary>Question after the scene</summary>${e.quiz.map((q) => `<p>${esc(q.q?.en ?? q.q)}<br><span class="muted">${(q.options?.en ?? q.options ?? []).map((o, k) => (k === (q.answerIndex ?? q.answer) ? "✓ " : "") + esc(o)).join(" · ")}</span></p>`).join("")}</details>` : ""}
+    </div>`).join("")}</div>`).join("");
+  $("#ca").querySelectorAll("[data-ca]").forEach((b) => b.onclick = async () => {
+    const [week, id, status] = b.dataset.ca.split("|");
+    if (status === "approved" && !confirm("Approve this scene? You watched it, and its facts match the sources.")) return;
+    await api(`/desk/api/ca/${week}/episodes/${encodeURIComponent(id)}/review`, { method: "POST", body: { status, editor: $("#editor")?.value } });
+    toast(status === "approved" ? "Approved. It reaches the apps within a minute." : "Back to draft.");
+    loadVideos();
+  });
+}
+$("#ca-reload").onclick = loadVideos;
+
 async function loadCoverage() {
   covData = await api("/desk/api/coverage");
   drawCoverage();

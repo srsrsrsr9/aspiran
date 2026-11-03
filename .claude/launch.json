@@ -4,8 +4,36 @@
     {
       "name": "website",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["--prefix", "/Users/srinivasvedantam/Documents/aspiran-web", "astro", "preview", "--root", "/Users/srinivasvedantam/Documents/aspiran-web", "--port", "4329"],
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/srinivasvedantam/Documents/aspiran-web",
+        "astro",
+        "preview",
+        "--root",
+        "/Users/srinivasvedantam/Documents/aspiran-web",
+        "--port",
+        "4329"
+      ],
       "port": 4329
+    },
+    {
+      "name": "app-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/srinivasvedantam/Documents/app/server",
+        "wrangler",
+        "dev",
+        "--config",
+        "/Users/srinivasvedantam/Documents/app/server/wrangler.jsonc",
+        "--port",
+        "8794",
+        "--persist-to",
+        "/private/tmp/claude-501/-Users-srinivasvedantam-Documents-app/952a987c-fbd7-437f-8a45-8f19f2cead03/scratchpad/db-view",
+        "--var",
+        "AUTH_MODE:dev"
+      ],
+      "port": 8794
     }
   ]
 }

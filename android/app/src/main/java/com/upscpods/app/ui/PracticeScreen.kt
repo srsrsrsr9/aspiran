@@ -86,6 +86,13 @@ fun PracticeTab(
     onOpenPrint: () -> Unit = {},
     onOpenOptional: () -> Unit = {},
     onOpenTerms: () -> Unit = {},
+    /** The owner's batches: answer skeletons, GS4 cases and weekly CSAT sets (BriefScreens.kt). */
+    skeletonCount: Int = 0,
+    onOpenSkeletons: () -> Unit = {},
+    caseStudyCount: Int = 0,
+    onOpenEthics: () -> Unit = {},
+    csatWeeks: Int = 0,
+    onOpenCsat: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -117,6 +124,28 @@ fun PracticeTab(
                 onStart = it,
             )
         }
+
+        PracticeCard(
+            title = "Answer skeletons",
+            detail = if (skeletonCount > 0) "$skeletonCount real Mains questions, each with a way in. Outline first, then compare." else "Opens once the skeletons are approved.",
+            done = false,
+            filled = false,
+            onStart = onOpenSkeletons,
+        )
+        PracticeCard(
+            title = "Ethics (GS4)",
+            detail = if (caseStudyCount > 0) "$caseStudyCount case studies, plus thinkers and terms in English and Hindi." else "Opens once the cases are approved.",
+            done = false,
+            filled = false,
+            onStart = onOpenEthics,
+        )
+        PracticeCard(
+            title = "CSAT, one set a week",
+            detail = if (csatWeeks > 0) "$csatWeeks weekly sets: numbers, reasoning, a table and a passage. Worked answers." else "Opens once the CSAT sets are approved.",
+            done = false,
+            filled = false,
+            onStart = onOpenCsat,
+        )
 
         PracticeCard(
             title = "Essays in three snaps",

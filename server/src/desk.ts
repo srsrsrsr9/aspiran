@@ -113,7 +113,7 @@ export async function deskApi(req: Request, env: Env, path: string): Promise<Res
 async function deskInner(req: Request, env: Env, path: string, s: Staff): Promise<Response> {
   if (path === "coverage" && req.method === "GET") return json(await coverage(env));
   // Content packs, the library and hand-written cards read their own bodies (some are file uploads).
-  const content = (await authorApi(req, env, path, s)) ?? (await caDeskApi(req, env, path)) ?? (await contentApi(req, env, path, s));
+  const content = (await authorApi(req, env, path, s)) ?? (await caDeskApi(req, env, path, s)) ?? (await contentApi(req, env, path, s));
   if (content) return content;
   const url = new URL(req.url);
   const body = req.method === "POST" ? await req.json<any>().catch(() => ({})) : {};

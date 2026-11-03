@@ -525,16 +525,17 @@ function plusHub(st) {
 /** A slim card at the top of Today's 3 and Practice for members without Plus. Hidden in quiet times. */
 export function plusBanner() {
   const box = h("div");
-  if (offerQuiet()) return box;
+  // A slim line, not a hero: it sits above the content, never over it, and × puts it away for a week.
+  if (offerQuiet() || (C.store.get("plusBannerHiddenUntil") ?? "") > C.today()) return box;
   plusStatus().then((st) => {
     if (st.open || offerQuiet()) return;
-    put(box, h("a.plus-banner", { href: "#upgrade" },
-      h("span.pb-glow", { "aria-hidden": "true" }),
-      h("div.grow",
-        h("span.pb-eyebrow", "Aspiran Plus"),
-        h("strong", T({ en: "Your mistakes are the cheapest marks you'll ever win back.", hi: "आपकी गलतियाँ, सबसे सस्ते अंक जो आप वापस पा सकते हैं।" })),
-        h("div.small", T({ en: "Every mock, analysed. Every miss, back until it sticks.", hi: "हर मॉक का विश्लेषण। हर गलती, याद होने तक वापस।" }))),
-      h("span.pb-go", T({ en: "See Plus", hi: "Plus देखें" }), " →")));
+    put(box, h("div.plus-banner",
+      h("a.grow", { href: "#upgrade" },
+        h("span.pb-eyebrow", "Plus"), " ",
+        h("span", T({ en: "Every mock analysed, every miss back until it sticks.", hi: "हर मॉक का विश्लेषण, हर गलती याद होने तक वापस।" })), " ",
+        h("span.pb-go", T({ en: "See Plus", hi: "Plus देखें" }), " →")),
+      h("button.pb-x", { "aria-label": T({ en: "Hide for a week", hi: "एक हफ़्ते के लिए छिपाएँ" }), title: T({ en: "Hide for a week", hi: "एक हफ़्ते के लिए छिपाएँ" }),
+        onclick: () => { C.store.set("plusBannerHiddenUntil", C.addDays(C.today(), 7)); box.remove(); } }, "×")));
   });
   return box;
 }
@@ -578,10 +579,6 @@ function injectStyles() {
   .taste { border-color: var(--brand); }
   .upgrade-cta .bignum { font-size: 44px; }
   .compare-plans td, .compare-plans th { font-size: 14px; }
-  .plus-banner { display: flex; gap: 14px; align-items: center; text-decoration: none; color: inherit; border: 1px solid var(--brand); border-radius: 18px; padding: 14px 16px; margin-bottom: 12px;
-    background: linear-gradient(120deg, var(--soft), var(--card)); }
-  .plus-banner strong { display: block; font-size: 17px; margin-bottom: 2px; }
-  .plus-banner .btn { white-space: nowrap; display: inline-block; border-radius: 999px; padding: 8px 18px; background: var(--brand); color: var(--brand-ink); font-weight: 600; }
   .sales-tastes .taste .card { overflow-x: auto; }
   .sales-tastes table.breakdown { min-width: 340px; }
   .sales { max-width: 860px; min-width: 0; }
@@ -623,7 +620,6 @@ function injectStyles() {
     .sales-sub { font-size: 16px; }
     .sales-close { padding: 20px 16px; }
     .sales-tastes { grid-template-columns: 1fr; }
-    .plus-banner { flex-direction: column; align-items: flex-start; }
     .compare-plans th, .compare-plans td { font-size: 13px; padding: 6px 4px; }
   }
 
@@ -794,7 +790,6 @@ function injectStyles() {
     .v-dots i { animation: px-fill 4s ease-in-out infinite; animation-delay: calc(var(--k) * 150ms); }
     .v-seat i { animation: px-glow 4s ease-in-out infinite; }
     .v-note { animation: px-pop .6s cubic-bezier(.2, .8, .2, 1.4) both; } .v-note.n1 { animation-delay: .5s; } .v-note.n2 { animation-delay: .9s; }
-    .plus-banner .pb-glow { animation: px-drift 12s ease-in-out infinite alternate; }
   }
   @keyframes px-drift { from { transform: translate(-4%, -3%) rotate(0deg); } to { transform: translate(4%, 3%) rotate(8deg); } }
   @keyframes px-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -809,14 +804,14 @@ function injectStyles() {
   @keyframes px-fill { 0%, 100% { background: rgba(255, 255, 255, .25); } 50% { background: var(--gold); } }
   @keyframes px-glow { 0%, 100% { box-shadow: 0 0 30px rgba(255, 197, 107, .5); } 50% { box-shadow: 0 0 60px rgba(255, 197, 107, .95); } }
 
-  /* The banner on Today's 3 and Practice. */
-  .plus-banner { position: relative; overflow: hidden; isolation: isolate; display: flex; gap: 16px; align-items: center; text-decoration: none; color: #F6F1E8; border: 0; border-radius: 22px;
-    padding: 18px 20px; margin-bottom: 14px; background: radial-gradient(120% 140% at 90% 0%, #2A3260 0%, #0E1528 55%, #070B16 100%); box-shadow: 0 18px 40px -20px rgba(10, 14, 30, .7); }
-  .plus-banner .pb-glow { position: absolute; inset: -40%; z-index: -1; background: radial-gradient(30% 40% at 15% 60%, rgba(255, 154, 77, .35), transparent 70%), radial-gradient(30% 40% at 85% 30%, rgba(255, 94, 126, .3), transparent 70%); }
-  .plus-banner .pb-eyebrow { display: block; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #FFC56B; margin-bottom: 4px; }
-  .plus-banner strong { display: block; font-size: 18px; line-height: 1.25; letter-spacing: -.01em; margin-bottom: 4px; color: #fff; }
-  .plus-banner .small { color: #AEB6C8; }
-  .plus-banner .pb-go { white-space: nowrap; font-weight: 800; padding: 11px 20px; border-radius: 999px; color: #2A1300; background: linear-gradient(95deg, #FFD58A 0%, #FF9A4D 45%, #FF5E7E 100%); }
+  /* The slim line on Today's 3 and Practice. */
+  .plus-banner { display: flex; gap: 8px; align-items: center; border: 1px solid rgba(255, 154, 77, .45); border-radius: 999px; padding: 6px 6px 6px 14px; margin-bottom: 10px;
+    background: linear-gradient(95deg, rgba(255, 213, 138, .16), rgba(255, 94, 126, .10)); font-size: 14px; }
+  .plus-banner a { color: inherit; text-decoration: none; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .plus-banner .pb-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #C2410C; }
+  .plus-banner .pb-go { font-weight: 700; white-space: nowrap; }
+  .plus-banner .pb-x { border: 0; background: transparent; font-size: 18px; line-height: 1; padding: 4px 10px; color: inherit; opacity: .6; cursor: pointer; }
+  .plus-banner .pb-x:hover { opacity: 1; }
 
   @media (max-width: 760px) {
     .px-hero { grid-template-columns: minmax(0, 1fr); padding: 32px 22px 24px; border-radius: 26px; gap: 8px; }
@@ -835,7 +830,6 @@ function injectStyles() {
     .px-ctas { flex-direction: column; align-items: stretch; } .px-ghost { text-align: center; }
     .px-bar { grid-template-columns: 90px minmax(0, 1fr); }
     .v-note.n1 { right: 4px; } .v-note.n2 { left: 4px; }
-    .plus-banner { flex-direction: column; align-items: flex-start; }
   }
   @media (max-width: 520px) { .match-grid { gap: 6px; } .match-grid .opt { padding: 10px; font-size: 14px; } }
   @media print { nav, .subrail, .mobilebar, .no-print, .plus-note { display: none !important; } .card { break-inside: avoid; } }

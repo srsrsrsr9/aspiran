@@ -1,6 +1,6 @@
 import { devTokenAllowed } from "./auth-dev";
 import { type Env, bad, json } from "./shared";
-import { ensureSchema } from "./staff";
+import { type Staff, approverName, ensureSchema } from "./staff";
 
 /**
  * Cinematic current affairs (W7): a week in seven short vertical scenes (upsc-pods/ca-week@1), rendered by the motion
@@ -177,8 +177,38 @@ export async function publicCa(req: Request, env: Env, path: string): Promise<Re
   return Response.json(p, { headers });
 }
 
-/** Desk: PUT ca/<week>/files/<path> (manifest.json first, then the files it names) and GET ca. */
-export async function caDeskApi(req: Request, env: Env, path: string): Promise<Response | null> {
+/**
+ * Desk: PUT ca/<week>/files/<path> (manifest.json first, then the files it names), GET ca, GET ca/<week> (every
+ * scene, drafts too, with links the desk can play) and POST ca/<week>/episodes/<id>/review {status, editor}.
+ */
+export async function caDeskApi(req: Request, env: Env, path: string, s?: Staff): Promise<Response | null> {
+  const one = path.match(/^ca\/([^/]+)$/);
+  if (one && req.method === "GET") {
+    if (!env.MEDIA || !WEEK.test(one[1])) return bad("No such week", 404);
+    const m = await readManifest(env, one[1]);
+    if (!m) return bad("No such week", 404);
+    const exp = Math.floor(Date.now() / 1000) + KEY_HOURS * 3600, sig = await signFor(env, one[1], exp);
+    const w = publicWeek(m, true);
+    return json({ ...w, episodes: w.episodes.map((e: any) => ({ ...e, play: `${w.base}${e.mp4}?exp=${exp}&sig=${sig}`, still: `${w.base}${e.poster}?exp=${exp}&sig=${sig}` })) });
+  }
+  // An editor watches a scene, checks its sources and approves it (or sends it back to draft). Only approved scenes reach phones.
+  const rev = path.match(/^ca\/([^/]+)\/episodes\/([^/]+)\/review$/);
+  if (rev && req.method === "POST") {
+    if (!env.MEDIA || !WEEK.test(rev[1])) return bad("No such week", 404);
+    const m = await readManifest(env, rev[1]);
+    const e = m?.episodes?.find((x: any) => x.id === rev[2]);
+    if (!e) return bad("No such scene", 404);
+    const body = await req.json<any>().catch(() => ({}));
+    if (body.status === "approved") {
+      const by = s ? approverName(s, body.editor) : "";
+      if (!by) return bad("Type your name at the top first: it goes on the approval");
+      e.review = { ...e.review, status: "approved", checkedBy: by, checkedOn: new Date().toISOString().slice(0, 10) };
+    } else if (body.status === "draft") {
+      e.review = { status: "draft" };
+    } else return bad("status should be approved or draft");
+    await env.MEDIA.put(`ca/${rev[1]}/manifest.json`, JSON.stringify(m, null, 2), { httpMetadata: { contentType: "application/json; charset=utf-8" } });
+    return json({ ok: true, review: e.review });
+  }
   if (path === "ca" && req.method === "GET") {
     if (!env.MEDIA) return json([]);
     const out = [];
@@ -204,7 +234,13 @@ export async function caDeskApi(req: Request, env: Env, path: string): Promise<R
     try { m = JSON.parse(new TextDecoder().decode(buf)); } catch { return bad("manifest.json doesn't parse"); }
     const errs = checkWeek(m, week);
     if (errs.length) return json({ error: errs[0], errors: errs }, 422);
-    await env.MEDIA.put(`ca/${week}/manifest.json`, buf, { httpMetadata: { contentType: "application/json; charset=utf-8" } });
+    // Re-sending a week keeps the desk's approvals for scenes whose video is the same file.
+    const old = await readManifest(env, week).catch(() => null);
+    for (const e of m.episodes) {
+      const was = old?.episodes?.find((x: any) => x.id === e.id && x.mp4 === e.mp4);
+      if (was?.review?.status === "approved" && e.review?.status !== "approved") e.review = was.review;
+    }
+    await env.MEDIA.put(`ca/${week}/manifest.json`, JSON.stringify(m, null, 2), { httpMetadata: { contentType: "application/json; charset=utf-8" } });
     return json({ ok: true, files: weekFiles(m) });
   }
   const m = await readManifest(env, week);

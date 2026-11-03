@@ -21,6 +21,7 @@ import * as F from "./fsrs.js";
 import * as SY from "./syllabus.js";
 import * as MP from "./map.js";
 import * as X from "./explore.js";
+import * as BR from "./brief.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -306,9 +307,9 @@ const PREP_TABS = [
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
   prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
-  learn: "prep", upgrade: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
+  learn: "prep", upgrade: "prep", skeletons: "prep", cases: "prep", csat: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { skeletons: "practice", cases: "practice", csat: "practice", walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -552,6 +553,7 @@ function viewToday() {
     h("h1", greeting()),
     h("p.muted", data.brief?.date ? `Chai for ${data.brief.date}` : "Today's Chai isn't out yet."),
     h("p.small", h("a", { href: "#pod" }, podLine())),
+    BR.welcomeBack(gapAtOpen),
     profileAsk("today"),
     routineCard(),
     nextCard,
@@ -742,6 +744,9 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
     h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
+    h("a.card.link", { href: "#skeletons" }, h("div.row.between", h("div", h("strong", "Answer skeletons"), h("div.small.muted", libraryOf("mains-skeleton").length ? `${libraryOf("mains-skeleton").length} real Mains questions, each with a way in. Outline first, then compare.` : "Opens once the skeletons are approved.")), h("span", "→"))),
+    h("a.card.link", { href: "#cases" }, h("div.row.between", h("div", h("strong", "Ethics (GS4)"), h("div.small.muted", libraryOf("gs4-case").length ? `${libraryOf("gs4-case").length} case studies, plus thinkers and terms in English and Hindi.` : "Opens once the cases are approved.")), h("span", "→"))),
+    h("a.card.link", { href: "#csat" }, h("div.row.between", h("div", h("strong", "CSAT, one set a week"), h("div.small.muted", libraryOf("csat-week").length ? `${libraryOf("csat-week").length} weekly sets: numbers, reasoning, a table and a passage. Worked answers.` : "Opens once the CSAT sets are approved.")), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Essays in three snaps"), h("div.small.muted", `Skeleton, outline, essay, each compared with a guide. ${libraryOf("essay").length} topic${libraryOf("essay").length === 1 ? "" : "s"}.`)), h("a.btn", { href: "#essay" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Your case file"), h("div.small.muted", `${caseFile().length} example${caseFile().length === 1 ? "" : "s"} kept from Chai for Mains.`)), h("a.btn", { href: "#casefile" }, "Open"))),
     h("a.card.link", { href: "#progress" }, h("div.row.between", h("div", h("strong", "You vs. you"), h("div.small.muted", "Your writing, your sense of sure, your markers. Only against your own past.")), h("span", "→"))),
@@ -750,7 +755,7 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
     h("h2", "Away from the screen"),
-    h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", "Earphones in: the device voice names a topic or reads a card, you say three points aloud.")), h("span", "→"))),
+    h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", `Earphones in: the device voice names a topic or reads a card, you say three points aloud.${libraryOf("walk-script").length ? ` Plus ${libraryOf("walk-script").length} guided walks.` : ""}`)), h("span", "→"))),
     h("a.card.link", { href: "#print" }, h("div.row.between", h("div", h("strong", "Print this week's set"), h("div.small.muted", "A recall card, a mixed CSAT set and your own one-pagers, on paper.")), h("span", "→"))),
     h("h2", "Optional and terms"),
     h("a.card.link", { href: "#optional" }, h("div.row.between", h("div", h("strong", "Optional subject"), h("div.small.muted", libraryOf("optional-node").length ? `${[...new Set(libraryOf("optional-node").map((i) => i.data.optional))].map(optName).join(", ")}: topic by topic.` : "Opens once optional topics are approved.")), h("span", "→"))),
@@ -1217,10 +1222,11 @@ function walkSteps() {
   });
   return [...topics, ...cards].slice(0, 8);
 }
-function viewWalk() {
+function viewWalk(arg) {
+  if (arg) return BR.viewWalkScript(arg);
   const steps = walkSteps();
   const can = "speechSynthesis" in window;
-  if (!steps.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Walk mode"), h("p", "Nothing to walk through yet: no topics due and no Chai cards today."));
+  if (!steps.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Walk mode"), h("p", "Nothing of yours to walk through yet: no topics due and no Chai cards today."), BR.walkScripts());
   let i = 0, phase = "ready";
   const box = h("div");
   const speak = (text, lng) => new Promise((res) => {
@@ -1254,7 +1260,7 @@ function viewWalk() {
   draw();
   return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Walk mode"), pauseLine("walk-mode"),
     h("p.muted", "Put in earphones and walk. The device voice reads a card or names a topic, then waits while you say three points out loud. It starts when you tap Play, and moves on only when you tap Next. Nothing is recorded."),
-    !can && h("p.small", "This browser has no voice, so the text is shown instead."), box);
+    !can && h("p.small", "This browser has no voice, so the text is shown instead."), box, BR.walkScripts());
 }
 
 /** The weekly print set: a recall card, a mixed CSAT set, and your own one-pagers. Opens a print-ready page. */
@@ -1315,6 +1321,7 @@ function viewOptional(arg) {
   const mine = all.filter((d) => d.optional === subject).sort((a, b) => (a.paper - b.paper) || a.id.localeCompare(b.id));
   const titleOf = (d) => bi(d.title) || bi(d.onePagerPrompts)?.[0]?.replace(/\.$/, "") || d.id;
   if (!nodeId) return h("div.col", back("#optional", "Optional subject"), h("h1", optName(subject)),
+    BR.optionalOrder(subject, new Set(mine.map((d) => d.id))),
     [1, 2].map((p) => mine.some((d) => d.paper === p) && h("div", h("h2", `Paper ${p}`),
       mine.filter((d) => d.paper === p).map((d) => h("a.card.link", { href: `#optional/${subject}/${d.id}` }, h("div.row.between", h("div", h("strong", titleOf(d)), h("div.small.muted", `${d.practiceQuestions?.length ?? 0} questions · ${d.recall?.length ?? 0} to recall`)), h("span", "→")))))));
   const d = mine.find((x) => x.id === nodeId);
@@ -1634,6 +1641,7 @@ function mockResult(r) {
     r.id !== "quick" && !resultMode() && mockBandCard(r),
     r.id !== "quick" && plusCard("mock_band"),
     guessLine && h("div.card.soft", guessLine),
+    !resultMode() && BR.afterHardMock(r),
     weak.length > 0 && h("p", `Worth a look: ${weak.join(", ")}. Wrong answers come back in Prelims practice.`),
     h("h2", "Go through the answers"), list,
     h("a.btn", { href: "#mock" }, "Back to mock papers"));
@@ -2364,6 +2372,9 @@ function closedDays() {
   return [...out].sort();
 }
 const mondayOf = (day) => { const d = new Date(day + "T12:00"); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return localDay(d); };
+
+/** Days since this device last opened the app, read once at start (before checkStamps moves lastOpen to today). */
+const gapAtOpen = (() => { const last = store.get("lastOpen"); return last ? Math.round((new Date(today() + "T12:00") - new Date(last + "T12:00")) / 864e5) : 0; })();
 
 /** Stamps that come from what's already on this device, checked once per open. */
 function checkStamps() {
@@ -3849,10 +3860,12 @@ function viewRoutine() {
 }
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
+BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud });
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
+  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

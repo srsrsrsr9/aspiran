@@ -81,6 +81,7 @@ fun TodayScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Greeting(now, day, persona)
+        WelcomeBackCard(PauseSource.library, PauseSource.hindi)
         weekly()
         if (evening) CloseTheDayBlock(day, primary = true, onOpenCloseDay, now)
         val open = { t: TaskId -> if (t == TaskId.CHAI) onOpenChai() else onOpenTask(t) }

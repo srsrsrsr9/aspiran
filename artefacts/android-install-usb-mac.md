@@ -1,6 +1,6 @@
 # Put the Aspiran test app on your phone over USB (Mac)
 
-**Easier, since 3 Nov:** send yourself `artefacts/builds/aspiran-review-2026-11-03.apk` on WhatsApp or Drive and
+**Easier, since 3 Nov:** send yourself `artefacts/builds/aspiran-review-2026-11-03b.apk` on WhatsApp or Drive and
 install it like before (uninstall any old Aspiran first). It's the same app without the part that closes other apps
 during Focus blocks, so Play Protect lets it in. Rebuild it with `./gradlew assembleReview` in `android/`. Use the
 steps below only if you need Focus to close apps on your phone.

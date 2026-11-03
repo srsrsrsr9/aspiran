@@ -383,6 +383,7 @@ fun MockResultScreen(
                     RangeBand(history)
                 }
             }
+            if (record.id != QUICK && !resultWeek) AfterHardMock(PauseSource.library, PauseSource.hindi, record.score, record.max)
             // Opt-in band: full papers only, never in result week, and never a rank.
             if (record.id != QUICK && !resultWeek && bandOpen) {
                 FlatCard {

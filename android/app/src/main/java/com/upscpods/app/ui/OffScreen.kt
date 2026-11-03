@@ -74,8 +74,8 @@ internal fun JsonElement?.biList(hindi: Boolean): List<String> = when (this) {
     else -> emptyList()
 }
 
-private fun JsonElement?.arr(): List<JsonObject> = (this as? JsonArray)?.mapNotNull { it as? JsonObject } ?: emptyList()
-private fun JsonObject.str(k: String) = (this[k] as? JsonPrimitive)?.contentOrNull
+internal fun JsonElement?.arr(): List<JsonObject> = (this as? JsonArray)?.mapNotNull { it as? JsonObject } ?: emptyList()
+internal fun JsonObject.str(k: String) = (this[k] as? JsonPrimitive)?.contentOrNull
 
 // --- Pause lines (content kind "pause-lines"): one quiet line at a first moment ----------------------------------
 
@@ -108,7 +108,7 @@ fun PauseLine(key: String, library: ContentLibrary?, hindi: Boolean) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Page(title: String, onClose: () -> Unit, content: @Composable () -> Unit) {
+internal fun Page(title: String, onClose: () -> Unit, content: @Composable () -> Unit) {
     BackHandler(onBack = onClose)
     Scaffold(topBar = { TopAppBar(title = { Text(title) }, navigationIcon = { TextButton(onClick = onClose) { Text("← Back") } }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) { content() }
@@ -137,6 +137,7 @@ fun WalkScreen(topics: List<Pair<String, String>>, cards: List<NewsItem>, hindi:
     }.take(8)
     var i by rememberSaveable { mutableIntStateOf(0) }
     var phase by rememberSaveable { mutableStateOf("ready") }
+    var script by rememberSaveable { mutableStateOf<String?>(null) }
     var tts by remember { mutableStateOf<TextToSpeech?>(null) }
     var noVoice by remember { mutableStateOf(false) }
     DisposableEffect(Unit) { onDispose { tts?.stop(); tts?.shutdown() } }
@@ -161,14 +162,16 @@ fun WalkScreen(topics: List<Pair<String, String>>, cards: List<NewsItem>, hindi:
         tts = made
     }
 
+    script?.let { id -> return Page("Guided walk", { script = null }) { WalkScriptPage(library, hindi, id) } }
     Page("Walk mode", onClose) {
         PauseLine("walk-mode", library, hindi)
         Text("Put in earphones and walk. The phone's voice reads a card or names a topic, then waits while you say three points out loud. It starts when you tap Play, and moves on only when you tap Next. Nothing is recorded.")
-        if (steps.isEmpty()) { Text("Nothing to walk through yet: no topics due and no Chai cards today."); return@Page }
+        if (steps.isEmpty()) { Text("Nothing of yours to walk through yet: no topics due and no Chai cards today."); WalkScripts(library, hindi) { script = it }; return@Page }
         if (i >= steps.size) {
             Text("That's the walk.", style = MaterialTheme.typography.titleLarge)
             Text("Saying it aloud is recall. The topics still come back in your review when they're due.")
             Button(onClick = onClose) { Text("Done") }
+            WalkScripts(library, hindi) { script = it }
             return@Page
         }
         val s = steps[i]
@@ -191,6 +194,7 @@ fun WalkScreen(topics: List<Pair<String, String>>, cards: List<NewsItem>, hindi:
             }
         }
         if (noVoice) Text("This phone has no voice for this language, so the text is shown instead. Add one in Settings → Text-to-speech.", style = MaterialTheme.typography.bodySmall)
+        WalkScripts(library, hindi) { script = it }
     }
 }
 
@@ -302,6 +306,7 @@ fun OptionalScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit)
             }
             d == null -> {
                 val mine = all.filter { it.str("optional") == sub }.sortedWith(compareBy({ (it["paper"] as? JsonPrimitive)?.intOrNull ?: 0 }, { it.str("id") }))
+                OptionalOrder(library, hindi, sub, mine.mapNotNull { it.str("id") }.toSet()) { nodeId = it }
                 listOf(1, 2).forEach { p ->
                     val ofPaper = mine.filter { (it["paper"] as? JsonPrimitive)?.intOrNull == p }
                     if (ofPaper.isNotEmpty()) Text("Paper $p", style = MaterialTheme.typography.titleMedium)

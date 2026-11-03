@@ -681,19 +681,27 @@ private fun PlayButton(play: PlayBuy, hindi: Boolean) {
     }
 }
 
-/** A slim card at the top of Today's 3 and Practice for members without Plus. The caller hides it in quiet times. */
+/**
+ * One slim line at the top of Today's 3 and Practice for members without Plus. The caller hides it in quiet times.
+ * It sits above the scrolling content, so it stays one line, and × hides it for a week.
+ */
 @Composable
 fun PlusBanner(hindi: Boolean, onOpen: () -> Unit) {
-    Box(Modifier.padding(horizontal = 16.dp, vertical = 4.dp).clickable(onClick = onOpen)) {
-        Stage(SAF, pad = 18) {
-            Text("ASPIRAN PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 2.sp)
-            Text(if (hindi) "आपकी गलतियाँ, सबसे सस्ते अंक जो आप वापस पा सकते हैं।" else "Your mistakes are the cheapest marks you'll ever win back.",
-                color = Color.White, fontWeight = FontWeight.ExtraBold, fontSize = 18.sp, lineHeight = 23.sp)
-            Text(if (hindi) "हर मॉक का विश्लेषण। हर गलती, याद होने तक वापस।" else "Every mock, analysed. Every miss, back until it sticks.", color = TX2, fontSize = 14.sp)
-            Box(Modifier.clip(RoundedCornerShape(999.dp)).background(Brush.linearGradient(GRAD)).padding(horizontal = 20.dp, vertical = 10.dp)) {
-                Text(if (hindi) "Plus देखें →" else "See Plus →", color = Color(0xFF2A1300), fontWeight = FontWeight.ExtraBold)
-            }
-        }
+    val prefs = LocalContext.current.getSharedPreferences("plus", android.content.Context.MODE_PRIVATE)
+    var hiddenUntil by remember { mutableStateOf(prefs.getLong("bannerHiddenUntil", 0L)) }
+    if (System.currentTimeMillis() < hiddenUntil) return
+    Row(
+        Modifier.padding(horizontal = 16.dp, vertical = 4.dp).fillMaxWidth().clip(RoundedCornerShape(999.dp)).background(Color(0xFF2A1A10))
+            .clickable(onClick = onOpen).padding(start = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text("PLUS", color = GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.6.sp)
+        Text(if (hindi) "  हर मॉक का विश्लेषण · देखें →" else "  Every mock analysed · See Plus →", color = Color.White, fontSize = 13.sp,
+            maxLines = 1, modifier = Modifier.weight(1f))
+        TextButton(onClick = {
+            hiddenUntil = System.currentTimeMillis() + 7 * 86_400_000L
+            prefs.edit().putLong("bannerHiddenUntil", hiddenUntil).apply()
+        }) { Text("×", color = TX2, fontSize = 18.sp) }
     }
 }
 
