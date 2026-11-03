@@ -47,6 +47,30 @@ for (const f of readdirSync(checks).filter((n) => /^manifest-.+\.json$/.test(n))
 const listed = [...byPath.values()];
 
 const day = new Date().toISOString().slice(0, 10);
+
+// A talk's Sarvam recording sits in content/audio/recordings/<id>/ as <id>.en-01.mp3, <id>.hi-01.mp3 and so on. A
+// language goes in only when every part of its .voice.txt is recorded; until then the app reads the script aloud.
+const RECORDINGS = join(src, "..", "..", "audio", "recordings");
+const recorded = [];
+function withRecording(data, jsonPath) {
+  const dir = join(RECORDINGS, data.id);
+  if (!existsSync(dir)) return data;
+  const recording = {};
+  for (const l of ["en", "hi"]) {
+    const script = jsonPath.replace(/\.json$/, `.${l}.voice.txt`);
+    const want = existsSync(script) ? (readFileSync(script, "utf8").match(/^--- part \d+ ---/gm) ?? []).length : 0;
+    const parts = readdirSync(dir).filter((n) => n.startsWith(`${data.id}.${l}-`) && n.endsWith(".mp3")).sort();
+    if (!parts.length) continue;
+    if (parts.length !== want) { console.log(`  ${data.id} (${l}): ${parts.length} of ${want} parts recorded; the device voice reads it for now`); continue; }
+    recording[l] = parts.map((n) => {
+      const path = `recordings/${data.id}/${n}`;
+      const bytes = readFileSync(join(dir, n));
+      recorded.push({ path, bytes });
+      return path;
+    });
+  }
+  return Object.keys(recording).length ? { ...data, recording } : data;
+}
 const packId = `brief-${day}`;
 const out = mkdtempSync(join(tmpdir(), "aspiran-brief-"));
 const files = [], entry = [];
@@ -57,13 +81,20 @@ for (const { path, batch } of listed) {
   if (!existsSync(join(src, path))) { missing.push(path); continue; }
   const schema = SCHEMA_OF.find(([re]) => re.test(path))?.[1];
   if (!schema) { unknown.push(path); continue; }
-  const data = JSON.parse(readFileSync(join(src, path), "utf8"));
+  let data = JSON.parse(readFileSync(join(src, path), "utf8"));
+  if (schema === "aspiran/audio-lecture@1") data = withRecording(data, join(src, path));
   const bytes = Buffer.from(JSON.stringify({ schema, ...data, review: { ...(data.review ?? {}), note: `Batch ${batch}, made in the claude.ai Project` } }, null, 2));
   mkdirSync(dirname(join(out, path)), { recursive: true });
   writeFileSync(join(out, path), bytes);
   files.push({ path, sha256: createHash("sha256").update(bytes).digest("hex") });
   entry.push(path);
 }
+for (const { path, bytes } of recorded) {
+  mkdirSync(dirname(join(out, path)), { recursive: true });
+  writeFileSync(join(out, path), bytes);
+  files.push({ path, sha256: createHash("sha256").update(bytes).digest("hex") });
+}
+if (recorded.length) console.log(`${recorded.length} recorded parts go with the talks`);
 if (missing.length) console.log(`Listed in a batch but not in the folder (not made yet?): ${missing.join(", ")}`);
 if (unknown.length) console.log(`Not imported (no kind for these yet): ${unknown.join(", ")}`);
 writeFileSync(join(out, "manifest.json"), JSON.stringify({ schema: "upsc-pods/pack-manifest@1", packId, createdOn: day, files, entry: { brief: entry } }, null, 2));

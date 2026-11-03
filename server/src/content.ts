@@ -590,6 +590,8 @@ function withMediaPaths(kind: string, pack: string, d: any, warnings: string[]) 
     out.scenes = compileScenes(out, warnings);
   }
   if (kind === "winddown" && out.audio?.file) out.audio.file = media(pack, out.audio.file);
+  // A talk's recorded parts, in order, per language.
+  if (kind === "audio-lecture" && out.recording) for (const l of Object.keys(out.recording)) out.recording[l] = (out.recording[l] ?? []).map((p: string) => media(pack, p));
   // The Hidden Why names its drawing by scene; a missing file leaves a plain paper background.
   if (kind === "hidden-why" && !out.illustration && /^[a-z0-9-]+$/.test(out.scene ?? "")) out.illustration = media(pack, `illustrations/hidden-why/${out.scene}.svg`);
   return out;

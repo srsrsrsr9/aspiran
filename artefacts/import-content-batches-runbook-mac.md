@@ -7,7 +7,7 @@ What it does: sends everything made so far to the live Desk as **drafts**, in fo
   personas, 60 Mains answer skeletons, 24 GS4 cases, GS4 thinkers and terms, 8 CSAT weeks, 20 walk scripts,
   12 welcome-back days, 6 optionals (syllabus map and topics 1–5 each), the 6 optional priority lists (B25) and
   15 more optional topics (B26–B28: Sociology, PSIR, Anthropology). New in part 2: 40 printable sheets (P1–P5),
-  12 audio-lecture scripts (A1, A2) and 20 more optional topics (B29). 296 files in all.
+  12 audio-lecture scripts (A1, A2) and 20 more optional topics (B29). 293 files in all.
 - Step 4: the syllabus notes (98) and 6 mocks: GS mocks 1–3 (mock 1 now with Hindi, B24) and the two CSAT papers (B23).
 - Step 5: video episodes 10 to 17 as the week "2026-45" (about 22 MB), and episodes 18 to 35 as the week "2026-46"
   (about 39 MB). The voice is still the placeholder; the Sarvam voice replaces it later.
@@ -37,8 +37,8 @@ Paste the key you use to sign in to the live Desk (the production one, or your p
 ```bash
 BASE=https://upsc-pods-production.chotu-aec.workers.dev npm run import:brief -- ../content/brief/aspiran-content
 ```
-- Success: a line like `296 files from 36 batches → pack brief-2026-11-03`, then a long list with
-  "… 40 of 296 done" lines along the way, ending with "Imported." Items you already had say "unchanged".
+- Success: a line like `293 files from 35 batches → pack brief-2026-11-03`, then a long list with
+  "… 40 of 293 done" lines along the way, ending with "Imported." Items you already had say "unchanged".
 - Failure "Unexpected token '<'" or "answered … with a page": fixed on 3 Nov (the import now goes 40 items at a
   time). Run Step 3 again; it is safe to repeat.
 - Failure "401" or "Sign in": the key was wrong. Run Step 2 again.

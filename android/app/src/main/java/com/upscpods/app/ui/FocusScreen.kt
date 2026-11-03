@@ -88,8 +88,8 @@ fun FocusScreen(onClose: () -> Unit) {
             if (!serviceOn && !BuildConfig.FOCUS_GUARD) item {
                 FlatCard {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("This test copy can't close apps", style = MaterialTheme.typography.titleMedium)
-                        Text("Closing apps needs a permission that Android blocks in copies installed outside Google Play. Focus blocks still work; the apps you pick below stay open. The Play Store version closes them.", style = MaterialTheme.typography.bodyMedium)
+                        Text("Focus can't close apps yet", style = MaterialTheme.typography.titleMedium)
+                        Text("Closing apps needs a permission Google reviews separately; it comes in a later version. Focus blocks still work; the apps you pick below stay open.", style = MaterialTheme.typography.bodyMedium)
                     }
                 }
             }

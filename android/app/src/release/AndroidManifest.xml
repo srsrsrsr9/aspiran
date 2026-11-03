@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Play build: no Focus accessibility service until Google Play approves the accessibility declaration
+     (Play Console → App content). Focus blocks still run; they just can't close other apps. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <service android:name=".data.FocusGuard" tools:node="remove" />
+    </application>
+</manifest>

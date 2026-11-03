@@ -177,12 +177,12 @@ fun MyPathTab(
 
         // Delete in two taps: tap, then confirm.
         if (!confirmDelete) {
-            TextButton(onClick = { confirmDelete = true }) { Text("Delete my data") }
+            TextButton(onClick = { confirmDelete = true }) { Text("Delete my account and data") }
         } else {
-            Text("This removes your profile and answers from this phone.", style = MaterialTheme.typography.bodySmall)
+            Text("This deletes your account: your sign-in, pod membership, messages and consent record on our server, and your profile, answers and journal on this phone. It can't be undone.", style = MaterialTheme.typography.bodySmall)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(onClick = { confirmDelete = false }) { Text("Keep it") }
-                OutlinedButton(onClick = onDeleteData) { Text("Delete") }
+                OutlinedButton(onClick = onDeleteData) { Text("Delete my account") }
             }
         }
     }
