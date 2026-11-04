@@ -1,15 +1,25 @@
 # Aspiran: Play Store listing (copy and paste)
 
-3 Nov 2026. Everything Play Console asks for in the store listing and App content pages. The images are in this folder.
+3 Nov 2026, assets and copy updated 5 Nov. Everything Play Console asks for in the store listing and App content pages. The images are in this folder.
 
 ## Main store listing
 **App name** (max 30): `Aspiran: UPSC prep, together`
 
 **Short description** (max 80):
-`UPSC prep in a small pod: daily current affairs, practice, mocks, an AI buddy.`
+`See the whole UPSC syllabus light up as you learn it. Recall, review, together.`
 
 **Full description:**
 ```text
+The whole UPSC syllabus. Every line of it.
+
+Aspiran shows the entire syllabus as a garden: 9 papers, 59 topics, 297 lines. Every leaf is one line. It lights up when you meet it, and deepens as you recall it and use it in an answer. You always know what you know.
+
+How Aspiran teaches
+• Recall, not re-reading: close the book and pull it out of your head. That's what makes it stay.
+• Review just before you'd forget: short reviews, with gaps that grow from a day to a week to months.
+• Write, mark, rewrite: Mains answers marked, then rewritten.
+• News tied to the syllabus: every current-affairs card points back to the line it belongs to.
+
 Never prep alone.
 
 Aspiran is a study app for UPSC Civil Services aspirants. You join a small pod of aspirants at your stage, in your language, and prepare side by side.
@@ -36,11 +46,21 @@ Aspiran is an independent app run by SnapSkill LLP. It is not affiliated with, e
 Privacy policy: https://upsc-pods-production.chotu-aec.workers.dev/legal/privacy
 ```
 
-**Graphics**
+**Graphics** (all in this folder)
 - App icon: `play-icon-512.png` (512 × 512).
 - Feature graphic: `feature-graphic-1024x500.png` (1024 × 500).
-- Phone screenshots: take 4 to 6 on your phone once the Play copy is installed (Today, Chai, a pod, Practice, the syllabus map,
-  Chotu). Hold power and volume-down together. Play needs at least 2.
+- Phone screenshots: the 7 files in `phone/` (1080 × 1920), in this order: 01-garden, 02-teach, 03-recall, 04-vine,
+  05-mains, 06-chotu, 07-you. Drag all 7 into **Phone screenshots** at once, then drag to reorder if needed.
+- Tablet screenshots: optional. Leave empty.
+- Video: `aspiran-promo-1080p.mp4` (29 seconds, silent, 1920 × 1080). Play only takes a YouTube link:
+  1. Open https://studio.youtube.com (signed in as the Aspiran Google account) → **Create** → **Upload videos**.
+  2. Pick `aspiran-promo-1080p.mp4`. Title: `Aspiran: the whole UPSC syllabus, every line of it`.
+  3. Audience: **No, it's not made for kids**. Skip the extras.
+  4. Visibility: **Public** or **Unlisted** (both work for Play). Click **Save**.
+  5. Copy the link (looks like `https://youtu.be/…`), paste it into **Video** on the store listing, and click **Save**.
+  If Play says the link is invalid, use the `https://www.youtube.com/watch?v=…` form instead.
+- Screenshots and video come from the test account "Ananya" on a local copy, with about four months of made-up progress.
+  To rebuild them: `make-store-assets.cjs` and `make-promo-video.sh` (Claude runs these).
 
 **Category:** Education. **Tags:** Education, Exam preparation (pick the closest offered).
 **Contact details:** email hello@aspiran.in; website https://aspiran.in.
