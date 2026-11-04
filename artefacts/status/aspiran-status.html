@@ -79,12 +79,12 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
 
 <div class="wrap">
 <header>
-  <div class="asof">Updated 4 November 2026, 12:30 am</div>
+  <div class="asof">Updated 4 November 2026, 7:30 am</div>
   <h1>Aspiran: where we are</h1>
   <p>One page for the whole build: what's done, what needs you, content, the website, and the teaching plan with how much of it is built. Claude updates this page whenever something moves.</p>
   <div class="tiles">
     <div class="tile"><b>8</b><span>things waiting on you</span></div>
-    <div class="tile"><b>324</b><span>content files checked and filed as drafts (B01–B30, P1–P5, A1–A2), all 12 talks recorded</span></div>
+    <div class="tile"><b>547</b><span>content files checked and filed as drafts (B01–B30, P1–P5, A1–A2, X1–X5, F1), all 12 talks recorded</span></div>
     <div class="tile"><b>478</b><span>library items live and approved; Chai not published yet</span></div>
     <div class="tile"><b>9 of 10</b><span>teaching-plan build steps built (Hindi marking waits on a test)</span></div>
   </div>
@@ -104,8 +104,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <p class="lede">These can't move until you act. Most urgent first.</p>
   <ul class="list">
     <li><span class="n">1</span><div><b>Publish the daily Chai (5–10 minutes each morning)</b><p>No Chai issue has been published yet, so Today says "Today's Chai isn't out yet" every day. 94 drafted cards are waiting in the Desk and 3 are approved. This is the biggest reason the app feels thin. The full count is in <code>artefacts/content-audit-2026-11-03.md</code>.</p></div></li>
-    <li><span class="n">1b</span><div><b>Send part 2 to the Desk, then the next job</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code> (about 15 minutes, needs your Desk key): it sends all batches, both video weeks and the 5 Prelims papers as drafts. Then paste Message 1 of <code>artefacts/content-assignment-2026-11-03b.md</code> into the other account. It covers practice items (20 for each of 10 formats), 24 flashcard decks and more optional topics, with my suggested answers to its questions. Top up Sarvam for the 191 narration parts still waiting.</p></div></li>
-    <li><span class="n">1c</span><div><b>Approve the videos in the Desk</b><p>Episodes 10–35 are drafts (weeks 2026-45 and 2026-46), still with the placeholder voice. Desk → Videos now plays each one with its captions, sources and quiz, with Approve and Back to draft. Approving needs an editor name.</p></div></li>
+    <li><span class="n">1b</span><div><b>Send parts 2–4 to the Desk, then the next job</b><p>Run <code>artefacts/import-content-batches-runbook-mac.md</code> (about 15 minutes, needs your Desk key): it sends all 547 batch files, both video weeks, the mocks and the 5 Prelims papers as drafts. Then paste the message in <code>artefacts/content-assignment-2026-11-04.md</code> into the other account and upload <code>artefacts/content-reference-part5.zip</code> with it. It asks for the 18 thinnest practice formats (X6–X11), a few fixes, Latin brackets in mock 1, 30 more optional topics, specs for videos 18–21 and a facts check. My suggested answers to its questions are at the top; change any you disagree with.</p></div></li>
+    <li><span class="n">1c</span><div><b>Approve the videos in the Desk</b><p>Episodes 10–35 are drafts (weeks 2026-45 and 2026-46). Episodes 13 and 22–35 now have the Sarvam English voice; the rest still have the placeholder voice. Desk → Videos now plays each one with its captions, sources and quiz, with Approve and Back to draft. Approving needs an editor name.</p></div></li>
     <li><span class="n">2</span><div><b>Android signing key</b><p>The key is on the Mac now. Run Step 1 of <code>artefacts/android-aspiran-id-firebase-mac.md</code>: move it out of <code>docs/</code>, get its SHA-1 with <code>keytool</code>, and later add <code>keystore.properties</code> for release builds.</p></div></li>
     <li><span class="n">3</span><div><b>Firebase for the new app id <code>in.aspiran.app</code></b><p>Steps 2 to 4 of the same runbook. Google sign-in on Android needs it.</p></div></li>
     <li><span class="n">0</span><div><b>First Play Store test release (about an hour)</b><p>Your Play account is approved and the code is ready. Follow <code>artefacts/play-store-first-release-mac.md</code>: build the signed bundle in Android Studio (variant release), create the app, upload to Internal testing, add Play's signing SHA-1 and SHA-256 to Firebase, install from the opt-in link. Everything to paste is in <code>artefacts/play/store-listing.md</code>; the icon and feature graphic are in <code>artefacts/play/</code>. Later: <code>plus_yearly</code> product, and a closed test of 12 testers for 14 days if it's a personal account.</p></div></li>
@@ -121,6 +121,8 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <div>
       <h3>App and server</h3>
       <ul class="list">
+        <li><span class="chip c-done">Done</span><div><b>Videos re-voiced, 4 Nov</b><p>Episodes 13 and 22–35 are re-rendered with the Sarvam English recordings. Captions and scene changes follow the real voice, phrase by phrase. Episodes 18–21 wait for their specs (V4), and the Hindi videos come next. They go live when you run the import runbook (Step 5).</p></div></li>
+        <li><span class="chip c-done">Done</span><div><b>Content part 4 filed, 4 Nov</b><p>200 practice items over 10 formats, 24 flashcard decks and the Hindi for GS mocks 2 and 3 are checked by code and filed as drafts. Practice items now go in with the import runbook, and the Desk shows each one's facts to check. Server live as version <code>e6a8f5bc</code>.</p></div></li>
         <li><span class="chip c-done">Ready</span><div><b>Play Store build, 3 Nov</b><p>The kulhad from aspiran.in is now the icon everywhere: Android launcher (with a themed version), web app, Play icon and feature graphic (master: <code>artefacts/brand/aspiran-kulhad.svg</code>). The Play build leaves out Focus closing other apps until Google reviews that permission; the Focus screen says so. "Delete my account and data" on Android, and a Delete your account section on the privacy page for Play. Store listing, App content and Data safety answers written. Server live as version <code>66b13a30</code>.</p></div></li>
         <li><span class="chip c-done">Done</span><div><b>Prelims papers, reads by subject, part 2 filed, 3 Nov</b><p>The official Prelims GS Paper I for 2018, 2019, 2021, 2023 and 2025 is loaded with UPSC's own keys (498 questions, drafts). Long reads now sit under their subjects on web and Android. Part 2 from the other account is checked and filed: 40 printables, 12 talk scripts, 20 optional topics, 19 more videos and 40 recorded audio parts. The Desk now takes printables and audio lectures.</p></div></li>
         <li><span class="chip c-done">Live</span><div><b>One look: earth and sky, 3 Nov</b><p>The app and the website now share colours and Martel headings. The Adda is earth (chai, clay, cardamom); Prep is sky: a pale dawn by day, the website's night sky with still stars after dark. Buttons are chai everywhere. Rules and colours: <code>artefacts/design/earth-and-sky.md</code>. Live on the web; in the new test APK <code>artefacts/builds/aspiran-review-2026-11-03c.apk</code>.</p></div></li>
@@ -162,7 +164,7 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
   <ul class="list">
     <li><span class="n">1</span><div><b>Screens for printables and audio lectures</b><p>Both kinds now import into the Desk. Next: a printable page to view and print, and a talk player that joins the recorded Sarvam parts, on web and Android.</p></div></li>
     <li><span class="n">2</span><div><b>The other Prelims years</b><p>2016, 2020, 2022, 2024 and 2026 were held back because their scans read poorly. They'll be checked line by line before they're loaded.</p></div></li>
-    <li><span class="n">2b</span><div><b>Check each content zip as it arrives</b><p>Practice X1–X5, flashcards F1 and optionals B30 are next. Run the code checks, clear facts-to-check, and send you fixes to paste back.</p></div></li>
+    <li><span class="n">2b</span><div><b>Check each content zip as it arrives</b><p>Assignment 5 is next: X6–X11, X-fix, B24c, B31, V4 and FC1. Run the code checks and send you fixes to paste back.</p></div></li>
     <li><span class="n">3</span><div><b>Website follow-ups</b><p>A native Hindi read of the live Hindi homepage. Prelims provisional answer keys (UPSC publishes them from CSE 2026).</p></div></li>
   </ul>
 </section>
@@ -176,11 +178,11 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
     <thead><tr><th>Area</th><th>What's there</th><th>Gap</th></tr></thead>
     <tbody>
       <tr><td>Past papers (PYQs)</td><td class="num">79 live<small>Mains 2025 GS1–GS4. Plus 498 Prelims questions ready as drafts: GS Paper I 2018, 2019, 2021, 2023, 2025 with UPSC's keys</small></td><td>An editor checks each Prelims paper against its PDF. 2016, 2020, 2022, 2024, 2026 held back</td></tr>
-      <tr><td>Prelims mocks</td><td class="num">5 full mocks<small>3 GS Paper I (mock 1 in Hindi too), 2 CSAT in English and Hindi</small></td><td>Hindi for GS mocks 2 and 3 (B24)</td></tr>
+      <tr><td>Prelims mocks</td><td class="num">5 full mocks<small>3 GS Paper I and 2 CSAT, all in English and Hindi</small></td><td>Latin brackets in mock 1's Hindi (B24c)</td></tr>
       <tr><td>CSAT</td><td class="num">3 comprehension sets</td><td>Reasoning, numeracy, data interpretation (B07)</td></tr>
       <tr><td>Prep syllabus notes</td><td class="num">98 notes once imported<small>All GS subjects, plus a new Internal security subject; the 70 new ones are in English and Hindi</small></td><td>The first 28 are English only</td></tr>
       <tr><td>Chai current-affairs cards</td><td>0 published<small>94 drafts waiting, 3 approved</small></td><td>Needs a daily publish in the Desk</td></tr>
-      <tr><td>Videos</td><td>Episodes 10–35 made (26)<small>English placeholder voice, free for everyone once approved; Hindi scripts written</small></td><td>Sarvam voice and Hindi audio (needs Sarvam credits)</td></tr>
+      <tr><td>Videos</td><td>Episodes 10–35 made (26)<small>15 with the Sarvam English voice (13, 22–35), the rest placeholder; free for everyone once approved; Hindi recorded</small></td><td>Specs for 18–21 (V4); Hindi videos (Claude)</td></tr>
       <tr><td>Printables and audio lectures</td><td>40 printables, 12 talks (drafts)<small>All 12 talks recorded in English and Hindi (Sarvam)</small></td><td>App screens (Claude, in progress); a listen-check of the voices</td></tr>
       <tr><td>Long reads</td><td class="num">114<small>Now grouped by subject on web and Android</small></td><td>Fine</td></tr>
     </tbody>
@@ -202,14 +204,15 @@ footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid va
       <tr><td><code>B12</code></td><td>Essay practice topics with three-snap guides</td><td class="num">24 of 24</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B13</code></td><td>Welcome-back day scripts</td><td class="num">12 of 12</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B23</code></td><td>CSAT full mocks, English and Hindi</td><td class="num">2 papers, 160 questions</td><td><span class="chip c-done">Made</span></td></tr>
-      <tr><td><code>B24</code></td><td>Hindi for the GS mocks</td><td class="num">1 of 3 mocks</td><td><span class="chip c-prog">Part made</span></td></tr>
+      <tr><td><code>B24, B24b</code></td><td>Hindi for the GS mocks</td><td class="num">3 of 3 mocks</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B25–B28</code></td><td>Optional priority lists, then nodes</td><td class="num">6 lists; Sociology, PSIR, Anthropology +5 each</td><td><span class="chip c-prog">Part made</span></td></tr>
-      <tr><td><code>V1–V3</code></td><td>Videos 10–35</td><td class="num">26 of 26<small>Voice: placeholder until Sarvam</small></td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>V1–V3</code></td><td>Videos 10–35</td><td class="num">26 of 26<small>Sarvam English voice on 13 and 22–35</small></td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>P1–P5</code></td><td>One-page printables (polity, economy, geography, history, ethics and CSAT)</td><td class="num">40 of 40</td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>A1–A2</code></td><td>Audio lectures, 12–14 minutes</td><td class="num">12 scripts<small>Recording part done</small></td><td><span class="chip c-prog">Part made</span></td></tr>
       <tr><td><code>B29</code></td><td>Optional nodes by priority</td><td class="num">20<small>Geography +5, the other five +3 each</small></td><td><span class="chip c-done">Made</span></td></tr>
       <tr><td><code>B30</code></td><td>Optional nodes, round 2, plus the Geography map question</td><td class="num">31</td><td><span class="chip c-done">Made</span></td></tr>
-      <tr><td><code>X1–X5, F1</code></td><td>Practice items and flashcards</td><td class="num">0<small>Waiting: practice-format-samples.zip was never uploaded to the other account</small></td><td><span class="chip c-todo">Not started</span></td></tr>
+      <tr><td><code>X1–X5, F1</code></td><td>Practice items and flashcards</td><td class="num">200 items, 24 decks<small>10 formats, 20 each; 1 landmark case held back (id clash)</small></td><td><span class="chip c-done">Made</span></td></tr>
+      <tr><td><code>X6–X11, B31, V4, FC1</code></td><td>The 18 thinnest formats, fixes, mock 1 brackets, optionals, video 18–21 specs, facts check</td><td class="num">0<small>Assignment 5, 4 Nov</small></td><td><span class="chip c-todo">Not started</span></td></tr>
       <tr><td><code>B14–B22</code></td><td>Syllabus notes for the gaps (polity, governance, IR, culture, world history, society, science, internal security, Ethics)</td><td class="num">70 notes</td><td><span class="chip c-done">Made</span></td></tr>
     </tbody>
   </table></div>
