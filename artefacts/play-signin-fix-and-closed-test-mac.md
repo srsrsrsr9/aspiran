@@ -25,6 +25,10 @@ Firebase console → project **upsc-pods** → ⚙ Project settings → Your app
 console.cloud.google.com → choose the **upsc-pods** project → APIs and services → **Credentials** → under "OAuth 2.0
 Client IDs" there should be an **Android** client for `in.aspiran.app` with Play's SHA-1.
 - Failure: there isn't one. Create credentials → OAuth client ID → Android → package `in.aspiran.app` → Play's SHA-1.
+- Failure: "already in use" when creating it. Each package-and-SHA-1 pair can be in only one client anywhere in
+  Google, whichever account you use. Usually Firebase already made it in A2. Look for "Android client for
+  in.aspiran.app (auto created by Google Service)" in upsc-pods' Credentials list. If it's there, this step is done.
+  If not, it's in another project. Use the project picker → **All** to find it, delete it there, and try again later.
 
 ### A4. Check the sign-in screen is open to everyone
 Same place → **OAuth consent screen** (Google Auth Platform → Audience). The publishing status should be
