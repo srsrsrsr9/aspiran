@@ -215,7 +215,11 @@
     .mobilebar a { font-size: 14px; text-decoration: none; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); }
     .grid2 { grid-template-columns: 1fr; }
   }
-@media print { nav, header, .rail, .tabs, button, .ratesheet { display: none !important; } .receipt { break-inside: avoid; box-shadow: none; } }
+  table.sheet { border-collapse: collapse; width: 100%; margin: 6px 0; font-size: 15px; }
+  table.sheet th, table.sheet td { border: 1px solid var(--line); padding: 5px 8px; text-align: left; vertical-align: top; }
+  .sheet-block { margin: 10px 0; }
+  .sheet-note { border-left: 3px solid var(--brand); padding-left: 10px; }
+@media print { nav, header, .rail, .tabs, button, .ratesheet, .no-print, .mobilebar { display: none !important; } .sheet-page { font-size: 12pt; } .sheet-page .card { border: 1px solid #999; } .receipt { break-inside: avoid; box-shadow: none; } }
 </style>
 </head>
 <body>

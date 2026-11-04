@@ -304,7 +304,7 @@ let token = "";
 let me = null;
 try { token = sessionStorage.getItem("token") || ""; } catch {}
 
-const signedName = () => (me?.personal ? me.name : (document.querySelector("#editor")?.value || "").trim());
+const signedName = () => "Editorial team"; // approvals always show this name (owner, 4 Nov 2026)
 /** Shared keys have no name, so approvals need one typed at the top. Personal keys approve in their own name. */
 function needName() {
   if (signedName()) return false;
@@ -354,7 +354,7 @@ function enterDesk() {
   const roles = me.roles.map((r) => ({ admin: "Admin", editor: "Editor", hindi_editor: "Hindi editor", language_editor: "Language editor", moderator: "Moderator" })[r] || r).join(", ");
   $("#who").innerHTML = me.personal
     ? `<span>Signed in as <b>${esc(me.name)}</b> · ${esc(roles)}</span>`
-    : `<span>Signed in with the <b>${esc(me.name.toLowerCase())}</b></span><input id="editor" placeholder="Your name, for approvals" size="20" aria-label="Your name, shown on what you approve">`;
+    : `<span>Signed in with the <b>${esc(me.name.toLowerCase())}</b> · approvals show as Editorial team</span>`;
   $("#who").insertAdjacentHTML("beforeend", (me.perms.includes("staff") || me.perms.includes("analytics") ? `<a href="/admin">Admin</a>` : "") + `<button id="signout">Sign out</button>`);
   const ed = $("#editor");
   if (ed) {
@@ -564,7 +564,7 @@ async function loadVideos() {
   $("#ca").querySelectorAll("[data-ca]").forEach((b) => b.onclick = async () => {
     const [week, id, status] = b.dataset.ca.split("|");
     if (status === "approved" && !confirm("Approve this scene? You watched it, and its facts match the sources.")) return;
-    await api(`/desk/api/ca/${week}/episodes/${encodeURIComponent(id)}/review`, { method: "POST", body: { status, editor: $("#editor")?.value } });
+    await api(`/desk/api/ca/${week}/episodes/${encodeURIComponent(id)}/review`, { method: "POST", body: { status, editor: signedName() } });
     toast(status === "approved" ? "Approved. It reaches the apps within a minute." : "Back to draft.");
     loadVideos();
   });

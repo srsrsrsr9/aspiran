@@ -57,7 +57,8 @@ const shuffle = (a, seed) => { a = a.slice(); let x = seed || 1; for (let i = a.
 const mem = new Map();
 const store = {
   get(k, d = null) { try { const v = localStorage.getItem("upsc:" + k); return v == null ? (mem.has(k) ? mem.get(k) : d) : JSON.parse(v); } catch { return mem.has(k) ? mem.get(k) : d; } },
-  set(k, v) { mem.set(k, v); try { localStorage.setItem("upsc:" + k, JSON.stringify(v)); } catch {} },
+  // A value too big for the browser's storage drops the old copy too, so a stale one is never read back.
+  set(k, v) { mem.set(k, v); try { localStorage.setItem("upsc:" + k, JSON.stringify(v)); } catch { try { localStorage.removeItem("upsc:" + k); } catch {} } },
   del(k) { mem.delete(k); try { localStorage.removeItem("upsc:" + k); } catch {} },
   clear() { mem.clear(); try { Object.keys(localStorage).filter((k) => k.startsWith("upsc:")).forEach((k) => localStorage.removeItem(k)); } catch {} },
 };
@@ -120,11 +121,14 @@ async function getJson(path, cacheKey) {
     if (cacheKey) store.set("cache:" + cacheKey, data);
     return data;
   } catch {
+    if (cacheKey) loadedFromCache = true;
     return cacheKey ? store.get("cache:" + cacheKey) : null;
   }
 }
 const data = { brief: null, library: null, questions: null };
+let loadedFromCache = false;
 async function loadAll() {
+  loadedFromCache = false;
   // Content needs sign-in; a visitor gets only the Free Shelf's calm scripts and routines.
   if (!Auth.signedIn()) { data.library = (await getJson("/library/shelf")) ?? { items: [] }; data.questions = { fromCards: [], bank: [] }; return; }
   [data.brief, data.library, data.questions] = await Promise.all([
@@ -757,6 +761,8 @@ function viewPractice() {
     h("h2", "Away from the screen"),
     h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", `Earphones in: the device voice names a topic or reads a card, you say three points aloud.${libraryOf("walk-script").length ? ` Plus ${libraryOf("walk-script").length} guided walks.` : ""}`)), h("span", "→"))),
     h("a.card.link", { href: "#print" }, h("div.row.between", h("div", h("strong", "Print this week's set"), h("div.small.muted", "A recall card, a mixed CSAT set and your own one-pagers, on paper.")), h("span", "→"))),
+    libraryOf("audio-lecture").length > 0 && h("a.card.link", { href: "#talks" }, h("div.row.between", h("div", h("strong", "Audio lectures"), h("div.small.muted", `${libraryOf("audio-lecture").length} talks of 10 to 15 minutes, each with three quick checks.`)), h("span", "→"))),
+    libraryOf("printable").length > 0 && h("a.card.link", { href: "#sheets" }, h("div.row.between", h("div", h("strong", "Printable sheets"), h("div.small.muted", `${libraryOf("printable").length} one-page tables, timelines and lists to print and pin up.`)), h("span", "→"))),
     h("h2", "Optional and terms"),
     h("a.card.link", { href: "#optional" }, h("div.row.between", h("div", h("strong", "Optional subject"), h("div.small.muted", libraryOf("optional-node").length ? `${[...new Set(libraryOf("optional-node").map((i) => i.data.optional))].map(optName).join(", ")}: topic by topic.` : "Opens once optional topics are approved.")), h("span", "→"))),
     h("a.card.link", { href: "#terms" }, h("div.row.between", h("div", h("strong", "English–Hindi terms"), h("div.small.muted", libraryOf("terms").length ? `${libraryOf("terms").reduce((n, i) => n + (i.data.terms?.length ?? 0), 0)} terms with meanings.` : "Opens once the term lists are approved.")), h("span", "→"))),
@@ -3888,7 +3894,7 @@ BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAl
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
-  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat,
+  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
@@ -3913,8 +3919,9 @@ setInterval(() => { const el = $("#focusBig"); const f = focus.active; if (el &&
 const theme = store.get("theme"); if (theme) document.documentElement.dataset.theme = theme;
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 await Promise.all([loadAll(), P.loadProfile(), Auth.init(config.auth, { onSuspend: onAccountSuspended })]);
-// Content needs sign-in: if the first load ran before the token was ready, load again now that it is.
-if (Auth.signedIn() && !(data.library?.items?.length)) await loadAll();
+// Content needs sign-in: if the first load ran before the token was ready (so it fell back to the copy saved on the
+// device, which can be days old), load again now that it is.
+if (Auth.signedIn() && (loadedFromCache || !(data.library?.items?.length))) await loadAll();
 // The access check: on open (waiting at most a few seconds) and when the tab comes back, at most every 6 hours.
 await Promise.race([runAccessCheck(false), new Promise((r) => setTimeout(r, 4000))]);
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && profile()) runAccessCheck(false); });

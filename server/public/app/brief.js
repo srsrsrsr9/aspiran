@@ -206,3 +206,92 @@ export function optionalOrder(subject, haveIds) {
       haveIds.has(n.id) ? h("a", { href: `#optional/${subject}/${n.id}` }, T(n.title)) : h("span", T(n.title)),
       h("span.small.muted", ` · Paper ${n.paper}`), n.why && h("div.small", T(n.why))))));
 }
+
+// --- Printable sheets ("printable") and audio lectures ("audio-lecture") ------------------------------
+
+const SUBJECT = { polity: "Polity", economy: "Economy", geography: "Geography", environment: "Environment", culture: "Art and culture", history: "History", ethics: "Ethics", csat: "CSAT", security: "Internal security", science: "Science" };
+const subjectName = (s) => SUBJECT[s] ?? String(s ?? "More").replace(/^./, (c) => c.toUpperCase());
+/** Items grouped by subject, subjects in SUBJECT's order. */
+function bySubject(items) {
+  const order = Object.keys(SUBJECT);
+  const subs = [...new Set(items.map((d) => d.subject))].sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99));
+  return subs.map((s) => [s, items.filter((d) => d.subject === s)]);
+}
+
+function sheetBlock(b) {
+  const cap = b.caption && h("strong", b.caption);
+  if (b.type === "table") return h("div.sheet-block", cap, h("table.sheet", b.head?.length && h("tr", b.head.map((c) => h("th", c))), (b.rows ?? []).map((r) => h("tr", r.map((c) => h("td", c))))));
+  if (b.type === "timeline") return h("div.sheet-block", cap, h("table.sheet", (b.items ?? []).map((x) => h("tr", h("th", x.when), h("td", x.what)))));
+  if (b.type === "list") return h("div.sheet-block", cap, h("ul", (b.items ?? []).map((x) => h("li", x))));
+  if (b.type === "compare") return h("div.sheet-block", cap, h("div.grid2", [b.left, b.right].filter(Boolean).map((s) => h("div", h("strong", s.title), h("ul", (s.points ?? []).map((p) => h("li", p)))))));
+  if (b.type === "note") return h("p.sheet-note", b.text);
+  return null;
+}
+
+export function viewSheets(arg) {
+  const all = lib("printable").sort((a, b) => String(T(a)?.title).localeCompare(String(T(b)?.title)));
+  if (!all.length) return empty("Printable sheets", "One-page sheets");
+  const d = arg && all.find((x) => x.id === arg);
+  if (d) {
+    const s = T(d) ?? {};
+    return h("div.col.sheet-page", h("div.row.between.no-print", back("#sheets", "Printable sheets"), h("button.primary", { onclick: () => window.print() }, "Print")),
+      h("div.small.muted", [subjectName(d.subject), d.paper].filter(Boolean).join(" · ")),
+      h("h1", s.title), s.subtitle && h("p.muted", s.subtitle),
+      (s.blocks ?? []).map(sheetBlock),
+      s.remember?.length && h("div.card.soft", h("strong", "Remember"), h("ul", s.remember.map((x) => h("li", x)))),
+      h("p.small.muted.no-print", "One page, made to be printed and pinned up. Cover it, say what you remember, then check."));
+  }
+  return h("div.col", back("#practice", "Practice"), h("h1", "Printable sheets"),
+    h("p.muted", `${all.length} one-page sheets: tables, timelines and lists to print, pin up and test yourself from.`),
+    bySubject(all).map(([sub, items]) => h("div", h("h2", subjectName(sub)),
+      items.map((x) => h("a.card.link", { href: "#sheets/" + x.id }, h("div.row.between",
+        h("div", h("strong", T(x)?.title), T(x)?.subtitle && h("div.small.muted", T(x).subtitle)), h("span", "→")))))));
+}
+
+/** Plays the recorded parts one after another from a single player. Nothing starts until the person presses play. */
+function partsPlayer(urls) {
+  let k = 0;
+  const label = h("span.small.muted");
+  const audio = h("audio", { controls: true, preload: "none", style: { width: "100%" } });
+  const load = (i) => { k = i; audio.src = urls[k]; label.textContent = urls.length > 1 ? `Part ${k + 1} of ${urls.length}` : ""; };
+  audio.addEventListener("ended", () => { if (k + 1 < urls.length) { load(k + 1); audio.play().catch(() => {}); } else label.textContent = "The end."; });
+  addEventListener("hashchange", () => audio.pause(), { once: true });
+  load(0);
+  return h("div", audio, label);
+}
+
+export function viewTalks(arg) {
+  const all = lib("audio-lecture").sort((a, b) => String(T(a)?.title).localeCompare(String(T(b)?.title)));
+  if (!all.length) return empty("Audio lectures", "Audio lectures");
+  const heard = C.store.get("talksHeard", {});
+  const d = arg && all.find((x) => x.id === arg);
+  if (d) {
+    const lang = C.lang() === "hi" && d.hi ? "hi" : "en";
+    const s = d[lang] ?? d.en, chapters = s.chapters ?? [];
+    const rec = d.recording?.[lang];
+    const listen = rec?.length
+      ? h("div.card", h("strong", "Listen"), h("p.small.muted", "Recorded voice. Earphones in, or play it on a walk."), partsPlayer(rec))
+      : h("div.card", h("div.row.between", h("strong", "Listen"), C.readAloud(chapters.map((c) => c.title + ".\n" + c.script).join("\n"), lang)),
+        h("p.small.muted", "Not recorded yet, so the device voice reads it."));
+    const results = [];
+    const done = h("div");
+    const check = (s.check ?? []).map((q, i) => h("div.card", C.mcqBlock({ question: `${i + 1}. ${q.q}`, options: q.options ?? [], answerIndex: Number(q.answerIndex), explanation: q.why }, (ok) => {
+      results[i] = ok;
+      if (results.filter((x) => x !== undefined).length === s.check.length) {
+        const all2 = C.store.get("talksHeard", {}); all2[d.id] = C.today(); C.store.set("talksHeard", all2);
+        put(done, h("div.card", h("strong", "That's the talk."), h("p", "Say the three ideas you'd keep, aloud, once. Then stop here for today or pick another."), h("a.btn", { href: "#talks" }, "All talks")));
+      }
+    })));
+    return h("div.col", back("#talks", "Audio lectures"),
+      h("div.small.muted", [subjectName(d.subject), d.paper, d.minutes && `about ${d.minutes} min`].filter(Boolean).join(" · ")),
+      h("h1", s.title), s.summary && h("p", s.summary), listen,
+      h("details.card", h("summary", h("strong", "Read along"), h("span.small.muted", ` · ${chapters.length} chapter${chapters.length === 1 ? "" : "s"}`)),
+        chapters.map((c) => h("div", h("h3", c.title), h("p", { style: { whiteSpace: "pre-line", fontFamily: "var(--read-font)" } }, c.script)))),
+      check.length && h("h2", "Three quick checks"), check.length && h("p.small.muted", "After you've listened. Nothing is scored."), check, done);
+  }
+  return h("div.col", back("#practice", "Practice"), h("h1", "Audio lectures"),
+    h("p.muted", `${all.length} talks of 10 to 15 minutes, in chapters, each ending with three quick checks. For a walk, the bus or the kitchen.`),
+    bySubject(all).map(([sub, items]) => h("div", h("h2", subjectName(sub)),
+      items.map((x) => h("a.card.link", { href: "#talks/" + x.id }, h("div.row.between",
+        h("div", h("strong", T(x)?.title), h("div.small.muted", [x.minutes && `${x.minutes} min`, x.recording?.[C.lang() === "hi" ? "hi" : "en"]?.length ? "recorded" : "device voice", heard[x.id] && "heard"].filter(Boolean).join(" · "))), h("span", "→")))))));
+}

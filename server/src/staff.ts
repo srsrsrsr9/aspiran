@@ -86,8 +86,11 @@ export async function staffFrom(req: Request, env: Env): Promise<Staff | null> {
 }
 
 /** The name an approval is recorded under: the account's own, or the one typed with a shared key. */
-export function approverName(s: Staff, typed: unknown): string {
-  return s.name ?? String(typed ?? "").trim().slice(0, 60);
+// Every approval shows one name in the app and on the Desk: the owner chose this on 4 Nov 2026 so nobody has to type
+// or update a name. Who actually pressed Approve is still in the audit log (signed-in staff by name, keys by key).
+export const EDITORIAL_NAME = "Editorial team";
+export function approverName(_s: Staff, _typed: unknown): string {
+  return EDITORIAL_NAME;
 }
 
 export const label = (s: Staff) => s.name ?? (s.id === "owner" ? "Owner key" : s.id === "shared-mod" ? "Shared moderator key" : "Shared editor key");

@@ -162,7 +162,7 @@ cand = q.candidates.find((c) => c.id === id);
 assert.equal(cand.card.chotu, null, "jokes are stripped on non-light cards");
 step("edit saves, joke stripped on a neutral card");
 
-assert.equal((await call(`/desk/api/cards/${id}/approve`, { method: "POST", body: { lang: "en" } })).status, 400);
+// Approvals always show "Editorial team" (owner, 4 Nov 2026), so no name is needed.
 await call(`/desk/api/cards/${id}/approve`, { method: "POST", body: { lang: "en", editor: "Test Editor" } });
 const pub = (await call("/desk/api/publish", { method: "POST" })).data;
 assert.equal(pub.published, true);
@@ -170,7 +170,7 @@ step("approved and published");
 
 const brief = (await call("/brief/latest", { auth: false })).data;
 const item = brief.items.find((i) => i.id === id);
-assert.equal(item.checkedBy, "Test Editor");
+assert.equal(item.checkedBy, "Editorial team");
 assert.equal(item.hi, undefined, "unapproved Hindi is not shipped");
 step("public brief carries the editor's check, no unapproved Hindi");
 
@@ -249,7 +249,7 @@ const rd = (await as(ed.key, "/desk/api/library/new", { method: "POST", body: { 
 assert.equal((await as(hi.key, `/desk/api/library/${rd}/approve`, { method: "POST", body: { lang: "en", editor: "Someone Else" } })).status, 403);
 assert.equal((await as(ed.key, `/desk/api/library/${rd}/approve`, { method: "POST", body: { lang: "en", editor: "Typed Name" } })).status, 200);
 let row = (await call("/admin/api/content?q=" + encodeURIComponent(rd.split(":")[1]))).data.library.find((r) => r.id === rd);
-assert.equal(row.en_editor, "Smoke Editor (test)", "a personal key approves under its own name, not a typed one");
+assert.equal(row.en_editor, "Editorial team", "every approval shows as Editorial team, whatever is typed");
 await as(ed.key, `/desk/api/library/${rd}/unapprove`, { method: "POST" });
 await as(ed.key, `/desk/api/library/${rd}/delete`, { method: "POST" });
 let versions = (await call(`/admin/api/versions/library/${encodeURIComponent(rd)}`)).data;
