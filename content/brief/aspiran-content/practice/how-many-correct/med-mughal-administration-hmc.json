@@ -1,0 +1,172 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "med-mughal-administration-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Mughal administration: how many correct?",
+    "hi": "मुगल प्रशासन: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the mansabdari system:",
+        "statements": [
+          "Akbar introduced the mansabdari system.",
+          "A mansabdar's zat rank set his personal rank and salary.",
+          "His sawar rank set the number of horsemen he had to keep.",
+          "Mansabs passed automatically from father to son."
+        ],
+        "why": "Statement 4 is wrong: mansabs were not hereditary; the emperor granted, changed or withdrew them. The other three are correct."
+      },
+      "hi": {
+        "stem": "मनसबदारी व्यवस्था के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "मनसबदारी व्यवस्था अकबर ने शुरू की।",
+          "मनसबदार का ज़ात पद उसका निजी पद और वेतन तय करता था।",
+          "उसका सवार पद तय करता था कि उसे कितने घुड़सवार रखने हैं।",
+          "मनसब अपने आप पिता से पुत्र को मिल जाते थे।"
+        ],
+        "why": "कथन 4 गलत है: मनसब वंशानुगत नहीं थे; बादशाह उन्हें देता, बदलता या वापस लेता था। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about land revenue under Akbar:",
+        "statements": [
+          "Raja Todar Mal is linked with Akbar's revenue system known as zabt.",
+          "Under the dahsala system, revenue was based on average produce and prices over ten years.",
+          "Jagirdars held their land permanently and passed it to their sons."
+        ],
+        "why": "Statement 3 is wrong: jagirs were assignments of revenue, usually transferred every few years, not permanent holdings. So two are correct."
+      },
+      "hi": {
+        "stem": "अकबर के समय के भू-राजस्व के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राजा टोडरमल अकबर की ज़ब्त नामक राजस्व व्यवस्था से जुड़े हैं।",
+          "दहसाला व्यवस्था में राजस्व दस वर्षों की औसत उपज और कीमतों पर आधारित था।",
+          "जागीरदार अपनी ज़मीन स्थायी रूप से रखते थे और बेटों को दे देते थे।"
+        ],
+        "why": "कथन 3 गलत है: जागीर राजस्व का आवंटन थी, जो प्रायः कुछ वर्षों में बदल दी जाती थी, स्थायी अधिकार नहीं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Mughal officials:",
+        "statements": [
+          "The diwan was in charge of revenue and finance.",
+          "The mir bakhshi handled the appointment and pay of mansabdars.",
+          "The kotwal was the head of the judiciary.",
+          "The qazi was the commander of the Mughal army."
+        ],
+        "why": "Statement 3 is wrong: the kotwal kept order in towns. Statement 4 is wrong: the qazi was a judge. So two are correct."
+      },
+      "hi": {
+        "stem": "मुगल अधिकारियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "दीवान राजस्व और वित्त का प्रभारी था।",
+          "मीर बख्शी मनसबदारों की नियुक्ति और वेतन देखता था।",
+          "कोतवाल न्यायपालिका का प्रमुख था।",
+          "काज़ी मुगल सेना का सेनापति था।"
+        ],
+        "why": "कथन 3 गलत है: कोतवाल नगरों में व्यवस्था बनाए रखता था। कथन 4 गलत है: काज़ी न्यायाधीश था। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Mughal policy:",
+        "statements": [
+          "Turki was the language of Mughal administration.",
+          "Akbar abolished the jizya.",
+          "Aurangzeb also abolished the jizya."
+        ],
+        "why": "Statement 1 is wrong: Babur wrote in Turki, but Persian was the language of administration. Statement 3 is wrong: Aurangzeb brought the jizya back in 1679. Only one is correct."
+      },
+      "hi": {
+        "stem": "मुगल नीति के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "तुर्की मुगल प्रशासन की भाषा थी।",
+          "अकबर ने जज़िया समाप्त किया।",
+          "औरंगज़ेब ने भी जज़िया समाप्त किया।"
+        ],
+        "why": "कथन 1 गलत है: बाबर ने तुर्की में लिखा, पर प्रशासन की भाषा फ़ारसी थी। कथन 3 गलत है: औरंगज़ेब ने 1679 में जज़िया फिर से लगाया। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Themes in Indian History II; NCERT Class VII Our Pasts II",
+    "hi": "NCERT कक्षा XII भारतीय इतिहास के कुछ विषय II; NCERT कक्षा VII हमारे अतीत II"
+  },
+  "factsToCheck": [
+    "Akbar abolished the jizya in 1564; Aurangzeb reimposed it in 1679"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

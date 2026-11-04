@@ -1,0 +1,147 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "eco-direct-and-indirect-taxes-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Direct and indirect taxes: two truths and a lie",
+    "hi": "प्रत्यक्ष और अप्रत्यक्ष कर: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Income tax is a direct tax.",
+          "GST is an indirect tax.",
+          "Corporation tax is an indirect tax."
+        ],
+        "fix": "Corporation tax is a direct tax: it falls on the company's own profits."
+      },
+      "hi": {
+        "statements": [
+          "आयकर एक प्रत्यक्ष कर है।",
+          "GST एक अप्रत्यक्ष कर है।",
+          "निगम कर एक अप्रत्यक्ष कर है।"
+        ],
+        "fix": "निगम कर प्रत्यक्ष कर है: यह कंपनी के अपने लाभ पर लगता है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "GST replaced customs duty on imports.",
+          "Petroleum crude is currently outside the GST.",
+          "GST is a destination-based tax."
+        ],
+        "fix": "Basic customs duty still applies on imports; GST replaced many domestic indirect taxes such as excise and VAT."
+      },
+      "hi": {
+        "statements": [
+          "GST ने आयात पर सीमा शुल्क की जगह ले ली।",
+          "कच्चा पेट्रोलियम फ़िलहाल GST से बाहर है।",
+          "GST गंतव्य-आधारित कर है।"
+        ],
+        "fix": "आयात पर मूल सीमा शुल्क अब भी लगता है; GST ने उत्पाद शुल्क और VAT जैसे कई घरेलू अप्रत्यक्ष करों की जगह ली।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "A progressive tax takes a higher share from higher incomes.",
+          "Indirect taxes are usually more progressive than direct taxes.",
+          "Cess proceeds are not shared with states through the divisible pool."
+        ],
+        "fix": "Indirect taxes fall equally on rich and poor buyers, so they tend to be regressive."
+      },
+      "hi": {
+        "statements": [
+          "प्रगतिशील कर ऊँची आय से अधिक हिस्सा लेता है।",
+          "अप्रत्यक्ष कर प्रायः प्रत्यक्ष करों से अधिक प्रगतिशील होते हैं।",
+          "उपकर (सेस) की राशि विभाज्य पूल के ज़रिए राज्यों से नहीं बाँटी जाती।"
+        ],
+        "fix": "अप्रत्यक्ष कर अमीर और गरीब खरीदारों पर बराबर पड़ते हैं, इसलिए ये प्रायः प्रतिगामी होते हैं।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Article 246A gives both Parliament and state legislatures power to make laws on GST.",
+          "The GST Council recommends tax rates.",
+          "States have no vote in the GST Council."
+        ],
+        "fix": "States together hold two-thirds of the weighted vote in the GST Council."
+      },
+      "hi": {
+        "statements": [
+          "अनुच्छेद 246क (246A) संसद और राज्य विधानमंडलों दोनों को GST पर कानून बनाने की शक्ति देता है।",
+          "GST परिषद कर दरों की सिफ़ारिश करती है।",
+          "GST परिषद में राज्यों का कोई मत नहीं होता।"
+        ],
+        "fix": "GST परिषद के भारित मत में राज्यों का मिलाकर दो-तिहाई हिस्सा है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Central Board of Direct Taxes administers GST.",
+          "The CBDT works under the Department of Revenue.",
+          "The Central Board of Indirect Taxes and Customs administers central GST and customs."
+        ],
+        "fix": "The CBDT handles income tax and other direct taxes; GST at the centre is run by the CBIC."
+      },
+      "hi": {
+        "statements": [
+          "केंद्रीय प्रत्यक्ष कर बोर्ड GST का प्रशासन करता है।",
+          "CBDT राजस्व विभाग के अधीन काम करता है।",
+          "केंद्रीय अप्रत्यक्ष कर और सीमा शुल्क बोर्ड केंद्रीय GST और सीमा शुल्क का प्रशासन करता है।"
+        ],
+        "fix": "CBDT आयकर और अन्य प्रत्यक्ष कर देखता है; केंद्र में GST का प्रशासन CBIC करता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 246A, 269A and 270; Union Budget documents; Central Board of Direct Taxes; CBIC",
+    "hi": "भारत का संविधान, अनुच्छेद 246क (246A), 269क (269A) और 270; केंद्रीय बजट दस्तावेज़; केंद्रीय प्रत्यक्ष कर बोर्ड; CBIC"
+  },
+  "factsToCheck": [
+    "Income-tax Act, 2025 replaced the 1961 Act from 1 April 2026: confirm before publishing",
+    "GST rate structure changed in September 2025; no rates are used here"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

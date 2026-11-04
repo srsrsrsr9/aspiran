@@ -1,0 +1,148 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "env-national-parks-and-tiger-reserves-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "National parks and tiger reserves: two truths and a lie",
+    "hi": "राष्ट्रीय उद्यान और बाघ अभयारण्य: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Project Tiger was launched in 1973.",
+          "Jim Corbett National Park was India's first national park.",
+          "Kaziranga is best known for the one-horned rhinoceros and is in Kerala."
+        ],
+        "fix": "Kaziranga is in Assam."
+      },
+      "hi": {
+        "statements": [
+          "प्रोजेक्ट टाइगर 1973 में शुरू हुआ।",
+          "जिम कॉर्बेट राष्ट्रीय उद्यान भारत का पहला राष्ट्रीय उद्यान था।",
+          "काज़ीरंगा एक सींग वाले गैंडे के लिए प्रसिद्ध है और केरल में है।"
+        ],
+        "fix": "काज़ीरंगा असम में है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Gir National Park is the main home of the snow leopard.",
+          "Gir in Gujarat is the only wild home of the Asiatic lion.",
+          "Hemis National Park in Ladakh is known for snow leopards."
+        ],
+        "fix": "Gir is home to the Asiatic lion; snow leopards live in high Himalayan areas like Hemis."
+      },
+      "hi": {
+        "statements": [
+          "गिर राष्ट्रीय उद्यान हिम तेंदुए का मुख्य घर है।",
+          "गुजरात का गिर एशियाई शेर का एकमात्र प्राकृतिक घर है।",
+          "लद्दाख का हेमिस राष्ट्रीय उद्यान हिम तेंदुओं के लिए जाना जाता है।"
+        ],
+        "fix": "गिर एशियाई शेर का घर है; हिम तेंदुए हेमिस जैसे ऊँचे हिमालयी क्षेत्रों में रहते हैं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "A tiger reserve has a core area and a buffer area.",
+          "Tiger reserves are notified by the National Tiger Conservation Authority alone, without the state.",
+          "The NTCA carries out the All India Tiger Estimation with the Wildlife Institute of India."
+        ],
+        "fix": "Tiger reserves are notified by the state government on the advice of the NTCA."
+      },
+      "hi": {
+        "statements": [
+          "बाघ अभयारण्य में एक कोर क्षेत्र और एक बफ़र क्षेत्र होता है।",
+          "बाघ अभयारण्य राज्य के बिना केवल राष्ट्रीय बाघ संरक्षण प्राधिकरण अधिसूचित करता है।",
+          "NTCA भारतीय वन्यजीव संस्थान के साथ अखिल भारतीय बाघ आकलन करता है।"
+        ],
+        "fix": "बाघ अभयारण्य राज्य सरकार NTCA की सलाह पर अधिसूचित करती है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Keoladeo National Park is famous for birds.",
+          "Periyar Tiger Reserve is in Kerala.",
+          "The Sundarbans National Park is in Odisha."
+        ],
+        "fix": "The Sundarbans National Park is in West Bengal; Odisha's Bhitarkanika is another mangrove park."
+      },
+      "hi": {
+        "statements": [
+          "केवलादेव राष्ट्रीय उद्यान पक्षियों के लिए प्रसिद्ध है।",
+          "पेरियार बाघ अभयारण्य केरल में है।",
+          "सुंदरबन राष्ट्रीय उद्यान ओडिशा में है।"
+        ],
+        "fix": "सुंदरबन राष्ट्रीय उद्यान पश्चिम बंगाल में है; ओडिशा का भितरकनिका एक अन्य मैंग्रोव उद्यान है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Silent Valley National Park is in Kerala.",
+          "Dachigam National Park is famous for the one-horned rhinoceros.",
+          "Dachigam is known for the hangul, the Kashmir stag."
+        ],
+        "fix": "Dachigam, in Jammu and Kashmir, protects the hangul; rhinos live in parks like Kaziranga."
+      },
+      "hi": {
+        "statements": [
+          "साइलेंट वैली राष्ट्रीय उद्यान केरल में है।",
+          "दाचीगाम राष्ट्रीय उद्यान एक सींग वाले गैंडे के लिए प्रसिद्ध है।",
+          "दाचीगाम हंगुल, यानी कश्मीरी बारहसिंगा, के लिए जाना जाता है।"
+        ],
+        "fix": "जम्मू और कश्मीर का दाचीगाम हंगुल की रक्षा करता है; गैंडे काज़ीरंगा जैसे उद्यानों में रहते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "National Tiger Conservation Authority; MoEFCC; Wildlife Institute of India",
+    "hi": "राष्ट्रीय बाघ संरक्षण प्राधिकरण; MoEFCC; भारतीय वन्यजीव संस्थान"
+  },
+  "factsToCheck": [
+    "Project Tiger launched 1973",
+    "Jim Corbett set up in 1936 as Hailey National Park",
+    "Number of tiger reserves changes often: not stated here"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

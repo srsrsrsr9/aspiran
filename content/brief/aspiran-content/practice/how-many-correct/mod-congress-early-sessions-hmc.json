@@ -1,0 +1,174 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "mod-congress-early-sessions-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Early sessions of the Indian National Congress: how many correct?",
+    "hi": "भारतीय राष्ट्रीय कांग्रेस के शुरुआती अधिवेशन: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the founding of the Congress:",
+        "statements": [
+          "The first session of the Indian National Congress was held in Bombay in 1885.",
+          "W.C. Bonnerjee presided over the first session.",
+          "A.O. Hume, a retired British civil servant, helped to found the Congress.",
+          "Dadabhai Naoroji presided over the first session."
+        ],
+        "why": "Statement 4 is wrong: Bonnerjee presided in 1885; Naoroji presided the next year, at Calcutta. The other three are correct."
+      },
+      "hi": {
+        "stem": "कांग्रेस की स्थापना के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारतीय राष्ट्रीय कांग्रेस का पहला अधिवेशन 1885 में बंबई में हुआ।",
+          "पहले अधिवेशन की अध्यक्षता W.C. बनर्जी ने की।",
+          "सेवानिवृत्त ब्रिटिश सिविल सेवक A.O. ह्यूम ने कांग्रेस की स्थापना में मदद की।",
+          "पहले अधिवेशन की अध्यक्षता दादाभाई नौरोजी ने की।"
+        ],
+        "why": "कथन 4 गलत है: 1885 में अध्यक्ष बनर्जी थे; नौरोजी अगले वर्ष कलकत्ता में अध्यक्ष बने। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about early Congress presidents:",
+        "statements": [
+          "Badruddin Tyabji was the first Muslim president of the Congress.",
+          "George Yule presided over the first session of the Congress.",
+          "Sarojini Naidu was the first woman president of the Congress."
+        ],
+        "why": "Statement 2 is wrong: George Yule presided in 1888, as the first non-Indian president. Statement 3 is wrong: Annie Besant was the first woman president, in 1917; Sarojini Naidu was the first Indian woman president, in 1925. Only one is correct."
+      },
+      "hi": {
+        "stem": "कांग्रेस के शुरुआती अध्यक्षों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "बदरुद्दीन तैयबजी कांग्रेस के पहले मुस्लिम अध्यक्ष थे।",
+          "जॉर्ज यूल ने कांग्रेस के पहले अधिवेशन की अध्यक्षता की।",
+          "सरोजिनी नायडू कांग्रेस की पहली महिला अध्यक्ष थीं।"
+        ],
+        "why": "कथन 2 गलत है: जॉर्ज यूल 1888 में पहले गैर-भारतीय अध्यक्ष बने। कथन 3 गलत है: पहली महिला अध्यक्ष 1917 में एनी बेसेंट थीं; सरोजिनी नायडू 1925 में पहली भारतीय महिला अध्यक्ष बनीं। सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about Congress sessions from 1906 to 1916:",
+        "statements": [
+          "At the Calcutta session of 1906, the Congress adopted Swaraj as its goal.",
+          "The Surat session of 1907 saw a split between the Moderates and the Extremists.",
+          "The Lucknow session of 1916 brought the two groups together again.",
+          "The Lucknow Pact of 1916 was an agreement between the Congress and the Muslim League."
+        ],
+        "why": "All four are correct. Naoroji announced Swaraj as the goal in 1906, the party split at Surat in 1907, and Lucknow in 1916 saw both reunion and the pact with the League."
+      },
+      "hi": {
+        "stem": "1906 से 1916 तक के कांग्रेस अधिवेशनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "1906 के कलकत्ता अधिवेशन में कांग्रेस ने स्वराज को अपना लक्ष्य बनाया।",
+          "1907 के सूरत अधिवेशन में नरम दल और गरम दल में फूट पड़ी।",
+          "1916 के लखनऊ अधिवेशन में दोनों दल फिर साथ आए।",
+          "1916 का लखनऊ समझौता कांग्रेस और मुस्लिम लीग के बीच हुआ।"
+        ],
+        "why": "चारों कथन सही हैं। 1906 में नौरोजी ने स्वराज को लक्ष्य घोषित किया, 1907 में सूरत में फूट पड़ी, और 1916 में लखनऊ में दोनों दल फिर मिले और लीग से समझौता भी हुआ।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the economic critique of British rule:",
+        "statements": [
+          "Dadabhai Naoroji wrote Poverty and Un-British Rule in India.",
+          "The drain theory argued that British rule carried India's wealth out of the country.",
+          "R.C. Dutt wrote Hind Swaraj."
+        ],
+        "why": "Statement 3 is wrong: Gandhi wrote Hind Swaraj in 1909; R.C. Dutt wrote The Economic History of India. So two are correct."
+      },
+      "hi": {
+        "stem": "ब्रिटिश शासन की आर्थिक आलोचना के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "दादाभाई नौरोजी ने Poverty and Un-British Rule in India लिखी।",
+          "धन निकासी सिद्धांत का तर्क था कि ब्रिटिश शासन भारत का धन देश से बाहर ले जा रहा था।",
+          "R.C. दत्त ने हिंद स्वराज लिखी।"
+        ],
+        "why": "कथन 3 गलत है: हिंद स्वराज गांधी ने 1909 में लिखी; R.C. दत्त ने The Economic History of India लिखी। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VIII Our Pasts III; NCERT Class XII Themes in Indian History III; Bipan Chandra, India's Struggle for Independence",
+    "hi": "NCERT कक्षा VIII हमारे अतीत III; NCERT कक्षा XII भारतीय इतिहास के कुछ विषय III; बिपन चंद्र, भारत का स्वतंत्रता संघर्ष"
+  },
+  "factsToCheck": [
+    "First INC session Bombay 1885, president W.C. Bonnerjee",
+    "Badruddin Tyabji president 1887 (Madras); George Yule 1888 (Allahabad); Annie Besant 1917 (Calcutta)",
+    "Surat split 1907; Lucknow session and pact 1916; Swaraj goal at Calcutta 1906"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

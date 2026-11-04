@@ -1,0 +1,130 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "ir-imf-world-bank-and-wto-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "IMF, World Bank and WTO: assertion and reason",
+    "hi": "IMF, विश्व बैंक और WTO: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The IMF and the World Bank are called the Bretton Woods institutions.",
+        "reason": "Both were planned at the 1944 conference held at Bretton Woods in the United States.",
+        "why": "Both are true, and R is the origin of the name in A."
+      },
+      "hi": {
+        "assertion": "IMF और विश्व बैंक को ब्रेटन वुड्स संस्थाएँ कहा जाता है।",
+        "reason": "दोनों की योजना अमेरिका के ब्रेटन वुड्स में 1944 में हुए सम्मेलन में बनी।",
+        "why": "दोनों सही हैं, और R ही A में बताए नाम का स्रोत है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "The WTO came into being in 1995.",
+        "reason": "The WTO was set up at the same time as the IMF, in 1944.",
+        "why": "A is true: it replaced the GATT framework on 1 January 1995. R is false."
+      },
+      "hi": {
+        "assertion": "WTO 1995 में अस्तित्व में आया।",
+        "reason": "WTO की स्थापना IMF के साथ ही 1944 में हुई।",
+        "why": "A सही है: इसने 1 जनवरी 1995 को GATT ढाँचे की जगह ली। R गलत है।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "Voting power in the IMF is equal for all member countries.",
+        "reason": "Voting power in the IMF is linked mainly to each member's quota.",
+        "why": "A is false. R is true: quotas, based largely on economic size, set voting power."
+      },
+      "hi": {
+        "assertion": "IMF में सभी सदस्य देशों की मतदान शक्ति बराबर है।",
+        "reason": "IMF में मतदान शक्ति मुख्यतः हर सदस्य के कोटे से जुड़ी है।",
+        "why": "A गलत है। R सही है: कोटा, जो मोटे तौर पर अर्थव्यवस्था के आकार पर आधारित है, मतदान शक्ति तय करता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The WTO's dispute settlement system has been weakened in recent years.",
+        "reason": "Its Appellate Body has been unable to hear appeals because new members have not been appointed.",
+        "why": "Both are true. Without a working Appellate Body, appeals stall, so R explains A."
+      },
+      "hi": {
+        "assertion": "हाल के वर्षों में WTO की विवाद निपटान व्यवस्था कमज़ोर हुई है।",
+        "reason": "इसका अपीलीय निकाय नए सदस्यों की नियुक्ति न होने से अपीलें नहीं सुन पा रहा है।",
+        "why": "दोनों सही हैं। कामकाजी अपीलीय निकाय के बिना अपीलें अटक जाती हैं, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "The World Bank group includes the International Development Association.",
+        "reason": "The IMF publishes the World Economic Outlook.",
+        "why": "Both are true, but an IMF report does not explain the World Bank's structure."
+      },
+      "hi": {
+        "assertion": "विश्व बैंक समूह में अंतरराष्ट्रीय विकास संघ शामिल है।",
+        "reason": "IMF वर्ल्ड इकोनॉमिक आउटलुक प्रकाशित करता है।",
+        "why": "दोनों सही हैं, पर IMF की रिपोर्ट विश्व बैंक की संरचना को नहीं समझाती।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "IMF (imf.org); World Bank (worldbank.org); WTO (wto.org); Ministry of Commerce and Industry",
+    "hi": "IMF (imf.org); विश्व बैंक (worldbank.org); WTO (wto.org); वाणिज्य और उद्योग मंत्रालय"
+  },
+  "factsToCheck": [
+    "WTO set up on 1 January 1995",
+    "WTO Appellate Body unable to hear appeals since December 2019"
+  ],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

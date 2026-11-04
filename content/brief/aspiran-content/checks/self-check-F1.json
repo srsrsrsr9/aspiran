@@ -1,0 +1,83 @@
+{
+  "batch": "F1",
+  "madeOn": "2026-11-03",
+  "decks": 24,
+  "cards": 288,
+  "result": "0 issues",
+  "checks": {
+    "valid_json": {
+      "pass": true
+    },
+    "deck_count_24": {
+      "pass": true,
+      "detail": 24
+    },
+    "four_decks_per_subject": {
+      "pass": true,
+      "detail": {
+        "Polity": 4,
+        "Economy": 4,
+        "Geography": 4,
+        "Environment": 4,
+        "History": 4,
+        "Science": 4
+      }
+    },
+    "prefix_allowed": {
+      "pass": true,
+      "detail": {
+        "pol": 4,
+        "eco": 4,
+        "geo": 4,
+        "env": 4,
+        "anc": 1,
+        "med": 1,
+        "mod": 2,
+        "sci": 4
+      }
+    },
+    "same_shape_as_sample": {
+      "pass": true
+    },
+    "cards_12_each_en_hi_parallel": {
+      "pass": true
+    },
+    "no_duplicate_card_fronts": {
+      "pass": true
+    },
+    "numbers_match_en_hi": {
+      "pass": true
+    },
+    "no_predictions_ranks_scores_timers_streaks": {
+      "pass": true
+    },
+    "ids_unique_in_batch": {
+      "pass": true
+    },
+    "ids_unique_across_all_batches": {
+      "pass": true,
+      "detail": "checked against 45 zips in aspiran-batches/"
+    },
+    "ids_avoid_practice_format_suffixes": {
+      "pass": true
+    }
+  },
+  "hindiRules": [
+    "Digits on screen, never number words (rule C4)",
+    "Article letters as in the Hindi Constitution, e.g. 21क, with the Latin form in square brackets on first mention in each deck, e.g. 21क [21A] (square brackets because many mentions already sit inside round brackets)"
+  ],
+  "notes": [
+    "numbers_match_en_hi ignores the Latin article forms added in brackets in Hindi; sci-deck-indian-space-missions card 8 writes 1.5 million km as 15 लाख किमी, which is the same number.",
+    "The ban check skips the phrase \"officer's rank\" (Mughal mansab rank), which is not an exam rank."
+  ],
+  "strictReread": {
+    "decks": [
+      "pol-deck-fundamental-rights",
+      "geo-deck-earth-interior-and-plates",
+      "pol-deck-president-and-governor",
+      "anc-deck-harappan-sites",
+      "sci-deck-biotechnology-basics"
+    ],
+    "result": "All 60 cards re-read against the listed sources. No wrong answers found. Article numbers in the polity decks were checked against the Constitution's text; dated items stay in factsToCheck."
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "anc-post-mauryan-kingdoms-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "After the Mauryas: two truths and a lie",
+    "hi": "मौर्यों के बाद: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Kanishka was a Kushana ruler.",
+          "The Fourth Buddhist Council is linked with Kanishka's reign.",
+          "The Kushanas ruled mainly from Pataliputra."
+        ],
+        "fix": "The Kushana capitals were Purushapura (Peshawar) and Mathura."
+      },
+      "hi": {
+        "statements": [
+          "कनिष्क एक कुषाण शासक था।",
+          "चौथी बौद्ध संगीति कनिष्क के शासनकाल से जुड़ी है।",
+          "कुषाण मुख्यतः पाटलिपुत्र से शासन करते थे।"
+        ],
+        "fix": "कुषाणों की राजधानियाँ पुरुषपुर (पेशावर) और मथुरा थीं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Satavahana kings were known by their fathers' names.",
+          "The Satavahanas ruled in the Deccan.",
+          "The Satavahanas issued coins and land grants."
+        ],
+        "fix": "Satavahana kings were often named after their mothers, as in Gautamiputra Satakarni."
+      },
+      "hi": {
+        "statements": [
+          "सातवाहन राजा अपने पिता के नाम से जाने जाते थे।",
+          "सातवाहनों ने दक्कन में शासन किया।",
+          "सातवाहनों ने सिक्के और भूमि-दान जारी किए।"
+        ],
+        "fix": "सातवाहन राजाओं के नाम प्रायः माताओं पर होते थे, जैसे गौतमीपुत्र सातकर्णी।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Indo-Greeks issued coins with portraits of kings.",
+          "The Shungas came to power after the Kushanas.",
+          "Pushyamitra Shunga founded the Shunga dynasty."
+        ],
+        "fix": "The Shungas came to power around 185 BCE, after the last Mauryan king, long before the Kushanas."
+      },
+      "hi": {
+        "statements": [
+          "हिंद-यवन शासकों ने राजाओं के चित्र वाले सिक्के जारी किए।",
+          "शुंग वंश कुषाणों के बाद सत्ता में आया।",
+          "पुष्यमित्र शुंग ने शुंग वंश की स्थापना की।"
+        ],
+        "fix": "शुंग लगभग 185 ई.पू. में अंतिम मौर्य राजा के बाद सत्ता में आए, कुषाणों से बहुत पहले।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Saka era is used in India's national calendar.",
+          "Rudradaman's Junagadh inscription is in Sanskrit.",
+          "Rudradaman was a Chola king."
+        ],
+        "fix": "Rudradaman was a Shaka ruler, of the Western Kshatrapas."
+      },
+      "hi": {
+        "statements": [
+          "भारत के राष्ट्रीय पंचांग में शक संवत का उपयोग होता है।",
+          "रुद्रदामन का जूनागढ़ अभिलेख संस्कृत में है।",
+          "रुद्रदामन एक चोल राजा था।"
+        ],
+        "fix": "रुद्रदामन पश्चिमी क्षत्रपों में से एक शक शासक था।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Gandhara school of art used only red sandstone.",
+          "The Mathura school produced early images of the Buddha.",
+          "Gandhara art shows Greek and Roman influence."
+        ],
+        "fix": "Gandhara art used grey schist and stucco; red sandstone is typical of Mathura."
+      },
+      "hi": {
+        "statements": [
+          "गांधार कला शैली में केवल लाल बलुआ पत्थर का उपयोग हुआ।",
+          "मथुरा शैली में बुद्ध की आरंभिक प्रतिमाएँ बनीं।",
+          "गांधार कला पर यूनानी और रोमन प्रभाव दिखता है।"
+        ],
+        "fix": "गांधार कला में धूसर शिस्ट और प्लास्टर का उपयोग हुआ; लाल बलुआ पत्थर मथुरा की विशेषता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Themes in Indian History I; NCERT Class VI Our Pasts I",
+    "hi": "NCERT कक्षा XII भारतीय इतिहास के कुछ विषय I; NCERT कक्षा VI हमारे अतीत I"
+  },
+  "factsToCheck": [
+    "Saka era begins in 78 CE"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

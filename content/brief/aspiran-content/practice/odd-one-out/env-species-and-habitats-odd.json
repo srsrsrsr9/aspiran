@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "env-species-and-habitats-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Species and their homes: find the odd one",
+    "hi": "प्रजातियाँ और उनके आवास: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Snow leopard",
+          "Lion-tailed macaque",
+          "Red panda",
+          "Himalayan tahr"
+        ],
+        "why": "The snow leopard, red panda and Himalayan tahr live in the Himalayas. The lion-tailed macaque lives in the Western Ghats."
+      },
+      "hi": {
+        "items": [
+          "हिम तेंदुआ",
+          "शेर-पूँछ मकाक",
+          "लाल पांडा",
+          "हिमालयी तहर"
+        ],
+        "why": "हिम तेंदुआ, लाल पांडा और हिमालयी तहर हिमालय में रहते हैं। शेर-पूँछ मकाक पश्चिमी घाट में रहता है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Olive ridley turtle",
+          "Dugong",
+          "Gangetic dolphin",
+          "Great Indian bustard"
+        ],
+        "why": "The olive ridley, dugong and Gangetic dolphin live in water. The Great Indian bustard is a grassland bird."
+      },
+      "hi": {
+        "items": [
+          "ऑलिव रिडले कछुआ",
+          "डुगोंग",
+          "गंगा डॉल्फ़िन",
+          "ग्रेट इंडियन बस्टर्ड"
+        ],
+        "why": "ऑलिव रिडले, डुगोंग और गंगा डॉल्फ़िन पानी में रहते हैं। ग्रेट इंडियन बस्टर्ड घास के मैदानों का पक्षी है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Kangaroo",
+          "Nilgai",
+          "Blackbuck",
+          "Chinkara"
+        ],
+        "why": "The nilgai, blackbuck and chinkara are wild antelopes of India. The kangaroo is native to Australia."
+      },
+      "hi": {
+        "items": [
+          "कंगारू",
+          "नीलगाय",
+          "काला हिरण",
+          "चिंकारा"
+        ],
+        "why": "नीलगाय, काला हिरण और चिंकारा भारत के जंगली मृग हैं। कंगारू ऑस्ट्रेलिया का मूल निवासी है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Sundari",
+          "Rhizophora",
+          "Teak",
+          "Avicennia"
+        ],
+        "why": "Sundari, Rhizophora and Avicennia are mangrove trees. Teak is a deciduous forest tree."
+      },
+      "hi": {
+        "items": [
+          "सुंदरी",
+          "राइज़ोफ़ोरा",
+          "सागौन",
+          "एविसेनिया"
+        ],
+        "why": "सुंदरी, राइज़ोफ़ोरा और एविसेनिया मैंग्रोव पेड़ हैं। सागौन पर्णपाती वन का पेड़ है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Hangul",
+          "Asiatic lion",
+          "Sangai",
+          "Nilgiri tahr"
+        ],
+        "why": "The hangul, sangai and Nilgiri tahr are hoofed plant-eaters. The Asiatic lion is a meat-eating predator."
+      },
+      "hi": {
+        "items": [
+          "हंगुल",
+          "एशियाई शेर",
+          "संगाई",
+          "नीलगिरि तहर"
+        ],
+        "why": "हंगुल, संगाई और नीलगिरि तहर खुर वाले शाकाहारी जीव हैं। एशियाई शेर मांसाहारी शिकारी है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "MoEFCC; Wildlife Institute of India; IUCN Red List",
+    "hi": "MoEFCC; भारतीय वन्यजीव संस्थान; IUCN रेड लिस्ट"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

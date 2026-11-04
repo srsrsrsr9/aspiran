@@ -1,0 +1,197 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative"
+    ]
+  },
+  "id": "pol-constitutional-bodies-trap",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Constitutional and statutory bodies: spot the trap",
+    "hi": "संवैधानिक और सांविधिक निकाय: जाल पहचानिए"
+  },
+  "questions": [
+    {
+      "answerIndex": 2,
+      "traps": [
+        "sounds-familiar",
+        "sounds-familiar",
+        "none",
+        "extreme-word"
+      ],
+      "en": {
+        "question": "Which of these is a constitutional body?",
+        "options": [
+          "National Human Rights Commission",
+          "Central Vigilance Commission",
+          "National Commission for Scheduled Castes",
+          "Lokpal, which the Constitution names in Part XIV"
+        ],
+        "why": "NHRC and CVC sound as weighty, but both are statutory. The National Commission for Scheduled Castes is set up under Article 338."
+      },
+      "hi": {
+        "question": "इनमें से कौन-सा संवैधानिक निकाय है?",
+        "options": [
+          "राष्ट्रीय मानव अधिकार आयोग",
+          "केंद्रीय सतर्कता आयोग",
+          "राष्ट्रीय अनुसूचित जाति आयोग",
+          "लोकपाल, जिसका नाम संविधान के भाग 14 (XIV) में है"
+        ],
+        "why": "NHRC और CVC उतने ही वज़नदार लगते हैं, पर दोनों सांविधिक हैं। राष्ट्रीय अनुसूचित जाति आयोग अनुच्छेद 338 के तहत बना है।"
+      }
+    },
+    {
+      "answerIndex": 0,
+      "traps": [
+        "none",
+        "half-true",
+        "extreme-word",
+        "sounds-familiar"
+      ],
+      "en": {
+        "question": "Which statement about the Comptroller and Auditor General (CAG) is correct?",
+        "options": [
+          "The CAG holds office for six years or until age 65, whichever is earlier.",
+          "The CAG audits the accounts of the Union but not of the states.",
+          "The CAG can be removed by the President at pleasure.",
+          "The CAG is an officer of the Lok Sabha Secretariat."
+        ],
+        "why": "Option B is half true: the CAG audits both Union and state accounts. Removal is like a Supreme Court judge's, not at pleasure."
+      },
+      "hi": {
+        "question": "नियंत्रक एवं महालेखा परीक्षक (CAG) के बारे में कौन-सा कथन सही है?",
+        "options": [
+          "CAG छह वर्ष या 65 वर्ष की आयु तक, जो पहले हो, पद पर रहते हैं।",
+          "CAG केंद्र के खातों की लेखा-परीक्षा करते हैं, राज्यों की नहीं।",
+          "राष्ट्रपति CAG को अपनी इच्छा से हटा सकते हैं।",
+          "CAG लोकसभा सचिवालय के अधिकारी हैं।"
+        ],
+        "why": "दूसरा विकल्प आधा सच है: CAG केंद्र और राज्य दोनों के खातों की लेखा-परीक्षा करते हैं। उन्हें हटाने की प्रक्रिया सर्वोच्च न्यायालय के न्यायाधीश जैसी है, इच्छा से नहीं।"
+      }
+    },
+    {
+      "answerIndex": 3,
+      "traps": [
+        "extreme-word",
+        "sounds-familiar",
+        "half-true",
+        "none"
+      ],
+      "en": {
+        "question": "Which statement about the Election Commission of India is correct?",
+        "options": [
+          "The Constitution fixes the Commission at exactly three members.",
+          "The Chief Election Commissioner is appointed by the Chief Justice of India.",
+          "Election Commissioners can be removed only by impeachment, like the Chief Election Commissioner.",
+          "The Constitution lets the President fix the number of Election Commissioners."
+        ],
+        "why": "The Commission has had three members since 1993, so \"exactly three\" feels fixed, but Article 324 leaves the number to the President. Only the CEC has judge-like protection from removal."
+      },
+      "hi": {
+        "question": "भारत निर्वाचन आयोग के बारे में कौन-सा कथन सही है?",
+        "options": [
+          "संविधान आयोग के सदस्यों की संख्या ठीक तीन तय करता है।",
+          "मुख्य निर्वाचन आयुक्त की नियुक्ति भारत के मुख्य न्यायाधीश करते हैं।",
+          "निर्वाचन आयुक्तों को भी मुख्य निर्वाचन आयुक्त की तरह केवल महाभियोग जैसी प्रक्रिया से हटाया जा सकता है।",
+          "संविधान राष्ट्रपति को निर्वाचन आयुक्तों की संख्या तय करने देता है।"
+        ],
+        "why": "1993 से आयोग में तीन सदस्य हैं, इसलिए \"ठीक तीन\" तय लगता है, पर अनुच्छेद 324 संख्या राष्ट्रपति पर छोड़ता है। केवल CEC को न्यायाधीश जैसी सुरक्षा है।"
+      }
+    },
+    {
+      "answerIndex": 1,
+      "traps": [
+        "sounds-familiar",
+        "none",
+        "half-true",
+        "extreme-word"
+      ],
+      "en": {
+        "question": "The Finance Commission is constituted under:",
+        "options": [
+          "Article 112, which covers the annual budget",
+          "Article 280",
+          "Article 280, and its advice binds Parliament",
+          "Article 360, with financial emergency"
+        ],
+        "why": "Article 112 is the budget article and sounds related. The Finance Commission comes from Article 280, and its advice is not binding."
+      },
+      "hi": {
+        "question": "वित्त आयोग किस अनुच्छेद के तहत बनता है?",
+        "options": [
+          "अनुच्छेद 112, जो वार्षिक बजट से जुड़ा है",
+          "अनुच्छेद 280",
+          "अनुच्छेद 280, और इसकी सलाह संसद पर बाध्यकारी है",
+          "अनुच्छेद 360, वित्तीय आपातकाल के साथ"
+        ],
+        "why": "अनुच्छेद 112 बजट का अनुच्छेद है और संबंधित लगता है। वित्त आयोग अनुच्छेद 280 से बनता है, और इसकी सलाह बाध्यकारी नहीं है।"
+      }
+    },
+    {
+      "answerIndex": 2,
+      "traps": [
+        "half-true",
+        "extreme-word",
+        "none",
+        "sounds-familiar"
+      ],
+      "en": {
+        "question": "Which statement about the Union Public Service Commission is correct?",
+        "options": [
+          "Its members are appointed by the President and removed by the Prime Minister.",
+          "Its advice binds the government in every case.",
+          "Its members can be removed by the President on grounds set in the Constitution, in some cases after a Supreme Court inquiry.",
+          "It conducts elections to Parliament."
+        ],
+        "why": "Option A is half true: the President appoints, but the Prime Minister has no power to remove. Removal for misbehaviour needs an inquiry by the Supreme Court under Article 317."
+      },
+      "hi": {
+        "question": "संघ लोक सेवा आयोग के बारे में कौन-सा कथन सही है?",
+        "options": [
+          "इसके सदस्यों की नियुक्ति राष्ट्रपति करते हैं और उन्हें प्रधानमंत्री हटाते हैं।",
+          "इसकी सलाह हर मामले में सरकार पर बाध्यकारी है।",
+          "इसके सदस्यों को राष्ट्रपति संविधान में दिए आधारों पर हटा सकते हैं, कुछ मामलों में सर्वोच्च न्यायालय की जाँच के बाद।",
+          "यह संसद के चुनाव कराता है।"
+        ],
+        "why": "पहला विकल्प आधा सच है: नियुक्ति राष्ट्रपति करते हैं, पर प्रधानमंत्री को हटाने की शक्ति नहीं है। कदाचार पर हटाने के लिए अनुच्छेद 317 के तहत सर्वोच्च न्यायालय की जाँच चाहिए।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 148, 280, 315, 324 and 338; Protection of Human Rights Act 1993; Lokpal and Lokayuktas Act 2013",
+    "hi": "भारत का संविधान, अनुच्छेद 148, 280, 315, 324 और 338; मानव अधिकार संरक्षण अधिनियम 1993; लोकपाल और लोकायुक्त अधिनियम 2013"
+  },
+  "factsToCheck": [
+    "CAG term: six years or age 65",
+    "Chief Election Commissioner and Other Election Commissioners (Appointment, Conditions of Service and Term of Office) Act, 2023: selection committee of PM, Leader of Opposition and a Union minister"
+  ],
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "art-temple-architecture-styles-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Temple architecture styles: assertion and reason",
+    "hi": "मंदिर स्थापत्य की शैलियाँ: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Dravida temples often have large gateway towers called gopurams.",
+        "reason": "In south Indian temple complexes, high enclosure walls are entered through towered gateways.",
+        "why": "Both are true. Large enclosures with towered entrances are why gopurams became so prominent, so R explains A."
+      },
+      "hi": {
+        "assertion": "द्रविड़ मंदिरों में प्रायः गोपुरम नामक बड़े प्रवेश द्वार शिखर होते हैं।",
+        "reason": "दक्षिण भारतीय मंदिर परिसरों में ऊँची परिधि दीवारों में शिखर वाले द्वारों से प्रवेश होता है।",
+        "why": "दोनों सही हैं। शिखर वाले प्रवेश द्वारों वाली बड़ी परिधियों के कारण गोपुरम इतने प्रमुख बने, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "Nagara temples have a curving tower called a shikhara.",
+        "reason": "In Nagara temples, the tower over the sanctum is called a vimana.",
+        "why": "A is true. R is false: vimana is the Dravida term; in the Nagara style it is the shikhara."
+      },
+      "hi": {
+        "assertion": "नागर मंदिरों में शिखर नामक घुमावदार मीनार होती है।",
+        "reason": "नागर मंदिरों में गर्भगृह के ऊपर की मीनार को विमान कहते हैं।",
+        "why": "A सही है। R गलत है: विमान द्रविड़ शैली का शब्द है; नागर शैली में इसे शिखर कहते हैं।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The Kailasa temple at Ellora is a rock-cut temple.",
+        "reason": "It was carved downward out of a single mass of rock.",
+        "why": "Both are true, and R is what \"rock-cut\" means here."
+      },
+      "hi": {
+        "assertion": "एलोरा का कैलाश मंदिर शैलकृत मंदिर है।",
+        "reason": "इसे चट्टान के एक ही खंड को ऊपर से नीचे काटकर बनाया गया।",
+        "why": "दोनों सही हैं, और यहाँ \"शैलकृत\" का यही अर्थ है जो R में है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "The Vesara style mixes features of the Nagara and Dravida styles.",
+        "reason": "Hoysala temples are known for their star-shaped plans.",
+        "why": "Both are true, but the star plan of Hoysala temples is an example within the Deccan tradition, not the reason the Vesara style is a mix."
+      },
+      "hi": {
+        "assertion": "वेसर शैली में नागर और द्रविड़ शैलियों की विशेषताएँ मिली हुई हैं।",
+        "reason": "होयसल मंदिर अपनी तारे जैसी योजना के लिए जाने जाते हैं।",
+        "why": "दोनों सही हैं, पर होयसल मंदिरों की तारा योजना दक्कन परंपरा का एक उदाहरण है, वेसर शैली के मिश्रित होने का कारण नहीं।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "The Konark Sun Temple is built in the Dravida style.",
+        "reason": "The Konark Sun Temple is designed as a chariot with carved wheels.",
+        "why": "A is false: Konark is a Kalinga version of the Nagara style. R is true."
+      },
+      "hi": {
+        "assertion": "कोणार्क सूर्य मंदिर द्रविड़ शैली में बना है।",
+        "reason": "कोणार्क सूर्य मंदिर नक्काशीदार पहियों वाले रथ के रूप में बना है।",
+        "why": "A गलत है: कोणार्क नागर शैली का कलिंग रूप है। R सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI An Introduction to Indian Art; Archaeological Survey of India",
+    "hi": "NCERT कक्षा XI भारतीय कला का परिचय; भारतीय पुरातत्व सर्वेक्षण"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "geo-minerals-and-industries-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Minerals and industries of India: two truths and a lie",
+    "hi": "भारत के खनिज और उद्योग: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Jharia is a major coalfield in Jharkhand.",
+          "Kudremukh is a well-known coalfield in Kerala.",
+          "Most of India's coal comes from Gondwana rocks."
+        ],
+        "fix": "Kudremukh, in Karnataka, is known for iron ore, not coal."
+      },
+      "hi": {
+        "statements": [
+          "झरिया झारखंड का एक प्रमुख कोयला क्षेत्र है।",
+          "कुद्रेमुख केरल का एक प्रसिद्ध कोयला क्षेत्र है।",
+          "भारत का अधिकांश कोयला गोंडवाना चट्टानों से मिलता है।"
+        ],
+        "fix": "कर्नाटक का कुद्रेमुख लौह अयस्क के लिए जाना जाता है, कोयले के लिए नहीं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Bauxite is the ore of copper.",
+          "Mica is used in electrical goods because it insulates well.",
+          "Manganese is used in making steel."
+        ],
+        "fix": "Bauxite is the ore of aluminium."
+      },
+      "hi": {
+        "statements": [
+          "बॉक्साइट ताँबे का अयस्क है।",
+          "अभ्रक अच्छा विद्युत रोधी है, इसलिए बिजली के सामान में इस्तेमाल होता है।",
+          "मैंगनीज़ का उपयोग इस्पात बनाने में होता है।"
+        ],
+        "fix": "बॉक्साइट एल्युमिनियम का अयस्क है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Iron and steel plants are often located near sources of iron ore and coal.",
+          "The Bhilai steel plant is in Chhattisgarh.",
+          "The Rourkela steel plant is in Andhra Pradesh."
+        ],
+        "fix": "The Rourkela steel plant is in Odisha."
+      },
+      "hi": {
+        "statements": [
+          "लोहा और इस्पात संयंत्र प्रायः लौह अयस्क और कोयले के स्रोतों के पास होते हैं।",
+          "भिलाई इस्पात संयंत्र छत्तीसगढ़ में है।",
+          "राउरकेला इस्पात संयंत्र आंध्र प्रदेश में है।"
+        ],
+        "fix": "राउरकेला इस्पात संयंत्र ओडिशा में है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Cotton textile mills grew early around Mumbai and Ahmedabad.",
+          "The jute industry is concentrated mainly in Punjab.",
+          "Black soil helped cotton growing in Maharashtra and Gujarat."
+        ],
+        "fix": "Jute mills are concentrated along the Hugli in West Bengal, close to the jute-growing delta."
+      },
+      "hi": {
+        "statements": [
+          "सूती वस्त्र मिलें शुरू में मुंबई और अहमदाबाद के आसपास बढ़ीं।",
+          "जूट उद्योग मुख्यतः पंजाब में केंद्रित है।",
+          "काली मृदा ने महाराष्ट्र और गुजरात में कपास की खेती में मदद की।"
+        ],
+        "fix": "जूट मिलें पश्चिम बंगाल में हुगली के किनारे केंद्रित हैं, जूट उगाने वाले डेल्टा के पास।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Digboi in Assam is India's newest oilfield.",
+          "Mumbai High is an offshore oilfield.",
+          "Natural gas is often found along with petroleum."
+        ],
+        "fix": "Digboi is one of the oldest oilfields in the world, with oil found there in the late nineteenth century."
+      },
+      "hi": {
+        "statements": [
+          "असम का डिगबोई भारत का सबसे नया तेल क्षेत्र है।",
+          "मुंबई हाई एक अपतटीय तेल क्षेत्र है।",
+          "प्राकृतिक गैस प्रायः पेट्रोलियम के साथ मिलती है।"
+        ],
+        "fix": "डिगबोई दुनिया के सबसे पुराने तेल क्षेत्रों में है, जहाँ उन्नीसवीं सदी के अंत में तेल मिला।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class X Contemporary India II; NCERT Class XII India: People and Economy; Ministry of Mines",
+    "hi": "NCERT कक्षा X समकालीन भारत II; NCERT कक्षा XII भारत: लोग और अर्थव्यवस्था; खान मंत्रालय"
+  },
+  "factsToCheck": [
+    "Jharia coalfield in Jharkhand; Kudremukh iron ore in Karnataka"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

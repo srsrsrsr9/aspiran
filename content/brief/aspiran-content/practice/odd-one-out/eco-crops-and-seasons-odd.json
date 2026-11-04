@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "eco-crops-and-seasons-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Crops and seasons: find the odd one",
+    "hi": "फ़सलें और ऋतुएँ: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Rice",
+          "Wheat",
+          "Cotton",
+          "Jowar"
+        ],
+        "why": "Rice, cotton and jowar are mainly kharif crops. Wheat is a rabi crop, sown in winter."
+      },
+      "hi": {
+        "items": [
+          "धान",
+          "गेहूँ",
+          "कपास",
+          "ज्वार"
+        ],
+        "why": "धान, कपास और ज्वार मुख्यतः खरीफ़ फ़सलें हैं। गेहूँ रबी फ़सल है, जो सर्दियों में बोई जाती है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Mustard",
+          "Gram",
+          "Barley",
+          "Groundnut"
+        ],
+        "why": "Mustard, gram and barley are rabi crops. Groundnut is mainly a kharif crop."
+      },
+      "hi": {
+        "items": [
+          "सरसों",
+          "चना",
+          "जौ",
+          "मूँगफली"
+        ],
+        "why": "सरसों, चना और जौ रबी फ़सलें हैं। मूँगफली मुख्यतः खरीफ़ फ़सल है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Sugarcane",
+          "Watermelon",
+          "Cucumber",
+          "Muskmelon"
+        ],
+        "why": "Watermelon, cucumber and muskmelon are typical zaid crops of the short summer season. Sugarcane stays in the field for about a year."
+      },
+      "hi": {
+        "items": [
+          "गन्ना",
+          "तरबूज़",
+          "खीरा",
+          "खरबूज़ा"
+        ],
+        "why": "तरबूज़, खीरा और खरबूज़ा छोटी ग्रीष्म ऋतु की विशिष्ट ज़ायद फ़सलें हैं। गन्ना लगभग एक साल खेत में रहता है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Tea",
+          "Coffee",
+          "Wheat",
+          "Rubber"
+        ],
+        "why": "Tea, coffee and rubber are plantation crops. Wheat is a food grain grown on ordinary farms."
+      },
+      "hi": {
+        "items": [
+          "चाय",
+          "कॉफ़ी",
+          "गेहूँ",
+          "रबड़"
+        ],
+        "why": "चाय, कॉफ़ी और रबड़ बागान फ़सलें हैं। गेहूँ साधारण खेतों में उगने वाला खाद्यान्न है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Ragi",
+          "Soybean",
+          "Bajra",
+          "Jowar"
+        ],
+        "why": "Ragi, bajra and jowar are millets. Soybean is an oilseed and pulse crop."
+      },
+      "hi": {
+        "items": [
+          "रागी",
+          "सोयाबीन",
+          "बाजरा",
+          "ज्वार"
+        ],
+        "why": "रागी, बाजरा और ज्वार मोटे अनाज (मिलेट) हैं। सोयाबीन तिलहन और दलहन फ़सल है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class X Contemporary India II; Ministry of Agriculture and Farmers Welfare",
+    "hi": "NCERT कक्षा X समकालीन भारत II; कृषि और किसान कल्याण मंत्रालय"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

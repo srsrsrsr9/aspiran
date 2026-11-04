@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "env-climate-treaties-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Climate treaties and India's targets: how many correct?",
+    "hi": "जलवायु संधियाँ और भारत के लक्ष्य: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about climate treaties:",
+        "statements": [
+          "The UNFCCC was opened for signature at the Rio Earth Summit in 1992.",
+          "The Kyoto Protocol set binding emission targets only for developed countries.",
+          "The Paris Agreement was adopted at COP21 in 2015.",
+          "The Paris Agreement sets a binding emission cut for each country, decided by the treaty itself."
+        ],
+        "why": "Statement 4 is wrong: under Paris, each country decides its own target, the Nationally Determined Contribution. The other three are correct."
+      },
+      "hi": {
+        "stem": "जलवायु संधियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "UNFCCC 1992 के रियो पृथ्वी सम्मेलन में हस्ताक्षर के लिए खोला गया।",
+          "क्योटो प्रोटोकॉल ने केवल विकसित देशों के लिए बाध्यकारी उत्सर्जन लक्ष्य तय किए।",
+          "पेरिस समझौता 2015 में COP21 में अपनाया गया।",
+          "पेरिस समझौता खुद हर देश के लिए बाध्यकारी उत्सर्जन कटौती तय करता है।"
+        ],
+        "why": "कथन 4 गलत है: पेरिस के तहत हर देश अपना लक्ष्य खुद तय करता है, जिसे राष्ट्रीय स्तर पर निर्धारित योगदान कहते हैं। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Paris Agreement:",
+        "statements": [
+          "It aims to hold warming well below 2 degrees Celsius above pre-industrial levels.",
+          "Countries are to submit new or updated NDCs every five years.",
+          "The Green Climate Fund was created under the Kyoto Protocol."
+        ],
+        "why": "Statement 3 is wrong: the Green Climate Fund was set up under the UNFCCC at Cancun in 2010. So two are correct."
+      },
+      "hi": {
+        "stem": "पेरिस समझौते के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसका लक्ष्य तापवृद्धि को पूर्व-औद्योगिक स्तर से 2 डिग्री सेल्सियस से काफ़ी नीचे रखना है।",
+          "देशों को हर पाँच साल में नया या अद्यतन NDC देना होता है।",
+          "हरित जलवायु कोष क्योटो प्रोटोकॉल के तहत बना।"
+        ],
+        "why": "कथन 3 गलत है: हरित जलवायु कोष 2010 में कानकुन में UNFCCC के तहत बना। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about climate science and recent COPs:",
+        "statements": [
+          "The IPCC was set up by the World Meteorological Organization and UNEP.",
+          "The IPCC runs its own climate experiments and measurements.",
+          "A fund for loss and damage was agreed at COP27 in Sharm el-Sheikh.",
+          "COP28 was held in Baku."
+        ],
+        "why": "Statement 2 is wrong: the IPCC assesses published research; it does not run its own experiments. Statement 4 is wrong: COP28 was in Dubai; COP29 was in Baku. So two are correct."
+      },
+      "hi": {
+        "stem": "जलवायु विज्ञान और हाल के COP सम्मेलनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "IPCC की स्थापना विश्व मौसम विज्ञान संगठन और UNEP ने की।",
+          "IPCC अपने खुद के जलवायु प्रयोग और मापन करता है।",
+          "हानि और क्षति के लिए एक कोष पर COP27 में शर्म अल-शेख में सहमति बनी।",
+          "COP28 बाकू में हुआ।"
+        ],
+        "why": "कथन 2 गलत है: IPCC प्रकाशित शोध का आकलन करता है; वह अपने प्रयोग नहीं करता। कथन 4 गलत है: COP28 दुबई में हुआ; COP29 बाकू में हुआ। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about India's climate targets:",
+        "statements": [
+          "India's 2022 NDC aims to cut the emissions intensity of its GDP by 45 percent from 2005 levels by 2030.",
+          "India aims to reach net zero emissions by 2050.",
+          "The principle of common but differentiated responsibilities first appeared in the Paris Agreement."
+        ],
+        "why": "Statement 2 is wrong: India's net zero target year is 2070. Statement 3 is wrong: the principle is already in the 1992 UNFCCC. Only one is correct."
+      },
+      "hi": {
+        "stem": "भारत के जलवायु लक्ष्यों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत का 2022 का NDC 2030 तक GDP की उत्सर्जन तीव्रता को 2005 के स्तर से 45 प्रतिशत घटाने का लक्ष्य रखता है।",
+          "भारत का लक्ष्य 2050 तक शुद्ध शून्य उत्सर्जन है।",
+          "साझा पर भिन्न उत्तरदायित्व का सिद्धांत पहली बार पेरिस समझौते में आया।"
+        ],
+        "why": "कथन 2 गलत है: भारत का शुद्ध शून्य लक्ष्य वर्ष 2070 है। कथन 3 गलत है: यह सिद्धांत 1992 के UNFCCC में ही है। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "UNFCCC; Kyoto Protocol; Paris Agreement; India's updated NDC 2022 (PIB); IPCC",
+    "hi": "UNFCCC; क्योटो प्रोटोकॉल; पेरिस समझौता; भारत का अद्यतन NDC 2022 (PIB); IPCC"
+  },
+  "factsToCheck": [
+    "Paris Agreement adopted at COP21, 2015",
+    "Loss and damage fund agreed at COP27, 2022; COP28 Dubai 2023; COP29 Baku 2024",
+    "India's 2022 NDC: 45% cut in emissions intensity of GDP from 2005 levels by 2030",
+    "India net zero target 2070",
+    "Check whether India has submitted a newer NDC (2035 targets) before publishing"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

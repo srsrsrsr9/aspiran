@@ -1,0 +1,160 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "match": "sfx/tick",
+    "miss": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-list-match"
+    ]
+  },
+  "id": "eco-reports-and-publishers-pair",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Reports and indices and who publishes them",
+    "hi": "रिपोर्ट और सूचकांक, और उन्हें कौन प्रकाशित करता है"
+  },
+  "heads": {
+    "en": {
+      "left": "Report or index",
+      "right": "Published by"
+    },
+    "hi": {
+      "left": "रिपोर्ट या सूचकांक",
+      "right": "प्रकाशक"
+    }
+  },
+  "pairs": [
+    {
+      "en": {
+        "left": "Consumer Price Index (all-India)",
+        "right": "National Statistics Office, MoSPI"
+      },
+      "hi": {
+        "left": "उपभोक्ता मूल्य सूचकांक (अखिल भारतीय)",
+        "right": "राष्ट्रीय सांख्यिकी कार्यालय, MoSPI"
+      }
+    },
+    {
+      "en": {
+        "left": "Wholesale Price Index",
+        "right": "Office of the Economic Adviser, DPIIT"
+      },
+      "hi": {
+        "left": "थोक मूल्य सूचकांक",
+        "right": "आर्थिक सलाहकार कार्यालय, DPIIT"
+      }
+    },
+    {
+      "en": {
+        "left": "Human Development Report",
+        "right": "UNDP"
+      },
+      "hi": {
+        "left": "मानव विकास रिपोर्ट",
+        "right": "UNDP"
+      }
+    },
+    {
+      "en": {
+        "left": "Global Gender Gap Report",
+        "right": "World Economic Forum"
+      },
+      "hi": {
+        "left": "वैश्विक लैंगिक अंतराल रिपोर्ट",
+        "right": "विश्व आर्थिक मंच"
+      }
+    },
+    {
+      "en": {
+        "left": "World Investment Report",
+        "right": "UNCTAD"
+      },
+      "hi": {
+        "left": "विश्व निवेश रिपोर्ट",
+        "right": "UNCTAD"
+      }
+    },
+    {
+      "en": {
+        "left": "World Economic Outlook",
+        "right": "IMF"
+      },
+      "hi": {
+        "left": "विश्व आर्थिक परिदृश्य",
+        "right": "IMF"
+      }
+    },
+    {
+      "en": {
+        "left": "World Development Report",
+        "right": "World Bank"
+      },
+      "hi": {
+        "left": "विश्व विकास रिपोर्ट",
+        "right": "विश्व बैंक"
+      }
+    },
+    {
+      "en": {
+        "left": "State of World Population",
+        "right": "UNFPA"
+      },
+      "hi": {
+        "left": "विश्व जनसंख्या की स्थिति",
+        "right": "UNFPA"
+      }
+    },
+    {
+      "en": {
+        "left": "Emissions Gap Report",
+        "right": "UNEP"
+      },
+      "hi": {
+        "left": "उत्सर्जन अंतराल रिपोर्ट",
+        "right": "UNEP"
+      }
+    },
+    {
+      "en": {
+        "left": "Global Innovation Index",
+        "right": "WIPO"
+      },
+      "hi": {
+        "left": "वैश्विक नवाचार सूचकांक",
+        "right": "WIPO"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "MoSPI; DPIIT; UNDP; World Economic Forum; UNCTAD; IMF; World Bank; UNFPA; UNEP; WIPO",
+    "hi": "MoSPI; DPIIT; UNDP; विश्व आर्थिक मंच; UNCTAD; IMF; विश्व बैंक; UNFPA; UNEP; WIPO"
+  },
+  "factsToCheck": [
+    "CPI and WPI base-year revisions in 2026: check the current base year before quoting one (none quoted here)"
+  ],
+  "schema": "upsc-pods/pair-up@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

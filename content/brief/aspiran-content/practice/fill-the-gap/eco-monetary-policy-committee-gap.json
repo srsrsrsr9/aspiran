@@ -1,0 +1,82 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {},
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct"
+    ]
+  },
+  "id": "eco-monetary-policy-committee-gap",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Monetary Policy Committee",
+    "hi": "मौद्रिक नीति समिति"
+  },
+  "answers": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "en": {
+    "text": "The Monetary Policy Committee has [[1]] members and is chaired by the [[2]]. It sets the policy [[3]] rate with the aim of keeping CPI inflation at 4 per cent, within a band of [[4]] per cent either side. If votes are tied, the chair has a [[5]] vote.",
+    "bank": [
+      "six",
+      "RBI Governor",
+      "repo",
+      "2",
+      "casting",
+      "five",
+      "Finance Minister",
+      "reverse repo",
+      "3"
+    ],
+    "why": "Three members are from the RBI and three are appointed by the government. The Finance Minister is not a member. The repo rate, not the reverse repo, is the policy rate."
+  },
+  "hi": {
+    "text": "मौद्रिक नीति समिति में [[1]] सदस्य होते हैं और इसकी अध्यक्षता [[2]] करते हैं। यह नीतिगत [[3]] दर तय करती है, ताकि CPI मुद्रास्फीति 4 प्रतिशत पर, दोनों ओर [[4]] प्रतिशत की सीमा में रहे। मत बराबर होने पर अध्यक्ष के पास [[5]] मत होता है।",
+    "bank": [
+      "छह",
+      "RBI गवर्नर",
+      "रेपो",
+      "2",
+      "निर्णायक",
+      "पाँच",
+      "वित्त मंत्री",
+      "रिवर्स रेपो",
+      "3"
+    ],
+    "why": "तीन सदस्य RBI से होते हैं और तीन सरकार नियुक्त करती है। वित्त मंत्री सदस्य नहीं होते। नीतिगत दर रेपो दर है, रिवर्स रेपो नहीं।"
+  },
+  "sources": {
+    "en": "Reserve Bank of India Act 1934, Section 45ZB; RBI (rbi.org.in)",
+    "hi": "भारतीय रिज़र्व बैंक अधिनियम 1934, धारा 45यख (45ZB); RBI (rbi.org.in)"
+  },
+  "factsToCheck": [
+    "Inflation target of 4% with a band of 2% either side was notified for April 2021 to March 2026: check the target notified for the period from April 2026 before publishing"
+  ],
+  "schema": "upsc-pods/fill-the-gap@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

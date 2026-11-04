@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "anc-chola-state-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Chola state: two truths and a lie",
+    "hi": "चोल राज्य: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Uttaramerur inscriptions describe village assemblies.",
+          "The Chola village assembly of Brahmin landholders was called the ur.",
+          "The sabha chose members for its committees partly by lot."
+        ],
+        "fix": "The assembly of Brahmin landholders was the sabha; the ur was the assembly of ordinary villages."
+      },
+      "hi": {
+        "statements": [
+          "उत्तरमेरूर अभिलेखों में ग्राम सभाओं का वर्णन है।",
+          "ब्राह्मण भूस्वामियों की चोल ग्राम सभा को उर कहा जाता था।",
+          "सभा अपनी समितियों के सदस्य कुछ हद तक लॉटरी से चुनती थी।"
+        ],
+        "fix": "ब्राह्मण भूस्वामियों की सभा को सभा कहते थे; उर साधारण गाँवों की सभा थी।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Rajaraja I built the Brihadeeswara temple at Madurai.",
+          "Rajendra I founded Gangaikondacholapuram.",
+          "Chola bronze images were made by the lost-wax method."
+        ],
+        "fix": "The Brihadeeswara temple is at Thanjavur."
+      },
+      "hi": {
+        "statements": [
+          "राजराज प्रथम ने मदुरै में बृहदेश्वर मंदिर बनवाया।",
+          "राजेंद्र प्रथम ने गंगैकोंडचोलपुरम बसाया।",
+          "चोल काँस्य प्रतिमाएँ लुप्त-मोम विधि से बनती थीं।"
+        ],
+        "fix": "बृहदेश्वर मंदिर तंजावुर में है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Cholas had a strong navy.",
+          "Chola influence reached parts of Southeast Asia.",
+          "The Cholas ruled mainly from the Malabar coast."
+        ],
+        "fix": "The Chola heartland was the Kaveri delta on the Coromandel side."
+      },
+      "hi": {
+        "statements": [
+          "चोलों के पास शक्तिशाली नौसेना थी।",
+          "चोलों का प्रभाव दक्षिण-पूर्व एशिया के भागों तक पहुँचा।",
+          "चोल मुख्यतः मालाबार तट से शासन करते थे।"
+        ],
+        "fix": "चोलों का मुख्य क्षेत्र कोरोमंडल की ओर कावेरी डेल्टा था।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Temples were centres of economic and social life in Chola times.",
+          "Land granted to temples was called brahmadeya.",
+          "Land granted to Brahmins was called brahmadeya."
+        ],
+        "fix": "Land granted to temples was devadana; brahmadeya was land granted to Brahmins."
+      },
+      "hi": {
+        "statements": [
+          "चोल काल में मंदिर आर्थिक और सामाजिक जीवन के केंद्र थे।",
+          "मंदिरों को दी गई भूमि को ब्रह्मदेय कहा जाता था।",
+          "ब्राह्मणों को दी गई भूमि को ब्रह्मदेय कहा जाता था।"
+        ],
+        "fix": "मंदिरों को दी गई भूमि देवदान थी; ब्रह्मदेय ब्राह्मणों को दी गई भूमि थी।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Nataraja bronze shows Shiva as the lord of music only.",
+          "The Nataraja image shows Shiva as the lord of dance.",
+          "Chola temples are part of a UNESCO World Heritage Site."
+        ],
+        "fix": "Nataraja shows Shiva as the lord of the cosmic dance."
+      },
+      "hi": {
+        "statements": [
+          "नटराज काँस्य प्रतिमा शिव को केवल संगीत के देवता के रूप में दिखाती है।",
+          "नटराज प्रतिमा शिव को नृत्य के देवता के रूप में दिखाती है।",
+          "चोल मंदिर UNESCO विश्व धरोहर स्थल का हिस्सा हैं।"
+        ],
+        "fix": "नटराज शिव को ब्रह्मांडीय नृत्य के देवता के रूप में दिखाता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VII Our Pasts II; NCERT Class XI An Introduction to Indian Art; UNESCO World Heritage List (Great Living Chola Temples)",
+    "hi": "NCERT कक्षा VII हमारे अतीत II; NCERT कक्षा XI भारतीय कला का परिचय; UNESCO विश्व धरोहर सूची (महान जीवंत चोल मंदिर)"
+  },
+  "factsToCheck": [
+    "Uttaramerur inscriptions of Parantaka I, 10th century"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "sci-physics-in-daily-life-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Physics in daily life: assertion and reason",
+    "hi": "रोज़मर्रा के जीवन में भौतिकी: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The sky looks blue on a clear day.",
+        "reason": "Air molecules scatter shorter blue wavelengths of sunlight much more than longer red ones.",
+        "why": "Both are true. Stronger scattering of blue light explains the blue sky, so R explains A."
+      },
+      "hi": {
+        "assertion": "साफ़ दिन में आकाश नीला दिखता है।",
+        "reason": "वायु के अणु सूर्य के प्रकाश की छोटी नीली तरंगदैर्ध्य को लंबी लाल तरंगदैर्ध्य से कहीं अधिक प्रकीर्णित करते हैं।",
+        "why": "दोनों सही हैं। नीले प्रकाश का अधिक प्रकीर्णन नीले आकाश को समझाता है, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "A steel ship floats although steel is denser than water.",
+        "reason": "The ship's hollow shape pushes aside a weight of water equal to its own weight.",
+        "why": "Both are true. By Archimedes' principle, the displaced water holds the ship up, so R explains A."
+      },
+      "hi": {
+        "assertion": "स्टील पानी से सघन है, फिर भी स्टील का जहाज़ तैरता है।",
+        "reason": "जहाज़ का खोखला आकार अपने भार के बराबर पानी हटा देता है।",
+        "why": "दोनों सही हैं। आर्किमिडीज़ के सिद्धांत के अनुसार हटाया गया पानी जहाज़ को ऊपर थामे रखता है, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "We see lightning before we hear thunder.",
+        "reason": "Sound travels faster than light in air.",
+        "why": "A is true. R is false: light is far faster than sound, which is why the flash comes first."
+      },
+      "hi": {
+        "assertion": "हमें गड़गड़ाहट सुनने से पहले बिजली की चमक दिखती है।",
+        "reason": "वायु में ध्वनि प्रकाश से तेज़ चलती है।",
+        "why": "A सही है। R गलत है: प्रकाश ध्वनि से कहीं तेज़ है, इसीलिए चमक पहले आती है।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "A pencil in a glass of water looks straight.",
+        "reason": "Light bends when it passes from water into air.",
+        "why": "A is false: the pencil looks bent at the surface. R is true, and it is exactly why it looks bent."
+      },
+      "hi": {
+        "assertion": "पानी के गिलास में रखी पेंसिल सीधी दिखती है।",
+        "reason": "प्रकाश पानी से वायु में जाते समय मुड़ जाता है।",
+        "why": "A गलत है: पेंसिल सतह पर मुड़ी दिखती है। R सही है, और इसी कारण वह मुड़ी दिखती है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Pressure cookers cook food faster.",
+        "reason": "Stainless steel is an alloy of iron.",
+        "why": "Both are true, but the metal is not the reason. Cooking is faster because higher pressure raises the boiling point of water."
+      },
+      "hi": {
+        "assertion": "प्रेशर कुकर में खाना जल्दी पकता है।",
+        "reason": "स्टेनलेस स्टील लोहे की एक मिश्रधातु है।",
+        "why": "दोनों सही हैं, पर धातु इसका कारण नहीं। खाना इसलिए जल्दी पकता है क्योंकि ऊँचा दाब पानी का क्वथनांक बढ़ा देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class IX and X Science; NCERT Class XI Physics",
+    "hi": "NCERT कक्षा IX और X विज्ञान; NCERT कक्षा XI भौतिकी"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

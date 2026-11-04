@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "env-wetlands-and-ramsar-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Wetlands and the Ramsar Convention: how many correct?",
+    "hi": "आर्द्रभूमियाँ और रामसर अभिसमय: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Ramsar Convention:",
+        "statements": [
+          "It was signed at Ramsar, Iran, in 1971.",
+          "India joined it in the same year it was signed.",
+          "The Montreux Record lists Ramsar sites where harmful ecological change is happening or likely.",
+          "The convention is run by the United Nations Environment Programme."
+        ],
+        "why": "Statement 2 is wrong: India joined in 1982. Statement 4 is wrong: Ramsar is an independent treaty, not part of UNEP; its secretariat is hosted by IUCN in Switzerland. So two are correct."
+      },
+      "hi": {
+        "stem": "रामसर अभिसमय के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इस पर 1971 में ईरान के रामसर में हस्ताक्षर हुए।",
+          "भारत इसमें उसी वर्ष शामिल हुआ जिस वर्ष इस पर हस्ताक्षर हुए।",
+          "मॉन्ट्रो रिकॉर्ड में वे रामसर स्थल दर्ज होते हैं जहाँ हानिकारक पारिस्थितिक बदलाव हो रहा है या होने की आशंका है।",
+          "यह अभिसमय संयुक्त राष्ट्र पर्यावरण कार्यक्रम चलाता है।"
+        ],
+        "why": "कथन 2 गलत है: भारत 1982 में शामिल हुआ। कथन 4 गलत है: रामसर एक स्वतंत्र संधि है, UNEP का हिस्सा नहीं; इसका सचिवालय स्विट्ज़रलैंड में IUCN के पास है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Indian wetlands on the Montreux Record:",
+        "statements": [
+          "World Wetlands Day is observed on 2 February.",
+          "Keoladeo National Park is on the Montreux Record.",
+          "Chilika Lake is still on the Montreux Record."
+        ],
+        "why": "Statement 3 is wrong: Chilika was taken off the Montreux Record in 2002 after its restoration. So two are correct."
+      },
+      "hi": {
+        "stem": "मॉन्ट्रो रिकॉर्ड पर भारतीय आर्द्रभूमियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विश्व आर्द्रभूमि दिवस 2 फ़रवरी को मनाया जाता है।",
+          "केवलादेव राष्ट्रीय उद्यान मॉन्ट्रो रिकॉर्ड पर है।",
+          "चिल्का झील अब भी मॉन्ट्रो रिकॉर्ड पर है।"
+        ],
+        "why": "कथन 3 गलत है: पुनर्स्थापन के बाद 2002 में चिल्का को मॉन्ट्रो रिकॉर्ड से हटा दिया गया। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about what counts as a wetland:",
+        "statements": [
+          "India's Wetlands (Conservation and Management) Rules were notified in 2017.",
+          "Under these rules, each state and union territory has a wetlands authority.",
+          "Mangroves are left out of the Ramsar definition of wetlands.",
+          "Under Ramsar, marine waters up to six metres deep at low tide count as wetlands."
+        ],
+        "why": "Statement 3 is wrong: the Ramsar definition is broad and includes mangroves, coral reefs and even rice paddies. The other three are correct."
+      },
+      "hi": {
+        "stem": "आर्द्रभूमि किसे माना जाता है, इस के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारत के आर्द्रभूमि (संरक्षण और प्रबंधन) नियम 2017 में अधिसूचित हुए।",
+          "इन नियमों के तहत हर राज्य और केंद्रशासित प्रदेश में एक आर्द्रभूमि प्राधिकरण है।",
+          "रामसर की आर्द्रभूमि की परिभाषा से मैंग्रोव बाहर रखे गए हैं।",
+          "रामसर के तहत भाटे के समय छह मीटर तक गहरे समुद्री जल को आर्द्रभूमि माना जाता है।"
+        ],
+        "why": "कथन 3 गलत है: रामसर की परिभाषा व्यापक है और इसमें मैंग्रोव, प्रवाल भित्तियाँ और धान के खेत तक शामिल हैं। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about some Indian wetlands:",
+        "statements": [
+          "Loktak Lake has floating masses of vegetation called phumdis.",
+          "Keibul Lamjao National Park floats on Loktak Lake.",
+          "Wular Lake is in Ladakh."
+        ],
+        "why": "Statement 3 is wrong: Wular Lake is in Jammu and Kashmir, fed by the Jhelum. So two are correct."
+      },
+      "hi": {
+        "stem": "कुछ भारतीय आर्द्रभूमियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "लोकटक झील में तैरती वनस्पति के ढेर होते हैं जिन्हें फुमदी कहते हैं।",
+          "केइबुल लामजाओ राष्ट्रीय उद्यान लोकटक झील पर तैरता है।",
+          "वुलर झील लद्दाख में है।"
+        ],
+        "why": "कथन 3 गलत है: वुलर झील जम्मू और कश्मीर में है, जिसे झेलम पानी देती है। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Ramsar Convention text and site list; Wetlands (Conservation and Management) Rules 2017, MoEFCC",
+    "hi": "रामसर अभिसमय का पाठ और स्थल सूची; आर्द्रभूमि (संरक्षण और प्रबंधन) नियम 2017, MoEFCC"
+  },
+  "factsToCheck": [
+    "Ramsar Convention signed 1971; India joined in 1982",
+    "Keoladeo and Loktak on the Montreux Record; Chilika removed in 2002",
+    "Keibul Lamjao described as the only floating national park in the world",
+    "Wetlands Rules notified in 2017",
+    "World Wetlands Day on 2 February"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

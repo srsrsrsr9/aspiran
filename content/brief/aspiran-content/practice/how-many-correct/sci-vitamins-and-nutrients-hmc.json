@@ -1,0 +1,170 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "sci-vitamins-and-nutrients-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Vitamins and deficiency diseases: how many correct?",
+    "hi": "विटामिन और कमी से होने वाले रोग: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about vitamins and deficiency diseases:",
+        "statements": [
+          "A lack of vitamin A can cause night blindness.",
+          "A lack of vitamin C causes scurvy.",
+          "A lack of vitamin D causes rickets in children.",
+          "A lack of vitamin K causes beriberi."
+        ],
+        "why": "Statement 4 is wrong: beriberi comes from a lack of vitamin B1 (thiamine); vitamin K is needed for blood clotting. The other three are correct."
+      },
+      "hi": {
+        "stem": "विटामिन और उनकी कमी से होने वाले रोगों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विटामिन A की कमी से रतौंधी हो सकती है।",
+          "विटामिन C की कमी से स्कर्वी होता है।",
+          "विटामिन D की कमी से बच्चों में रिकेट्स होता है।",
+          "विटामिन K की कमी से बेरी-बेरी होता है।"
+        ],
+        "why": "कथन 4 गलत है: बेरी-बेरी विटामिन B1 (थायमिन) की कमी से होता है; विटामिन K रक्त के थक्के बनने के लिए ज़रूरी है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about how vitamins dissolve:",
+        "statements": [
+          "Vitamins A, D, E and K are fat-soluble.",
+          "Vitamin C is fat-soluble.",
+          "Vitamin B12 comes naturally mainly from green leafy vegetables."
+        ],
+        "why": "Statement 2 is wrong: vitamin C dissolves in water. Statement 3 is wrong: vitamin B12 comes naturally mainly from animal foods such as milk, eggs and meat. Only one is correct."
+      },
+      "hi": {
+        "stem": "विटामिनों की घुलनशीलता के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विटामिन A, D, E और K वसा में घुलनशील हैं।",
+          "विटामिन C वसा में घुलनशील है।",
+          "विटामिन B12 प्राकृतिक रूप से मुख्यतः हरी पत्तेदार सब्ज़ियों से मिलता है।"
+        ],
+        "why": "कथन 2 गलत है: विटामिन C पानी में घुलता है। कथन 3 गलत है: विटामिन B12 प्राकृतिक रूप से मुख्यतः दूध, अंडे और मांस जैसे पशु-आधारित भोजन से मिलता है। सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about nutrients and health:",
+        "statements": [
+          "Vitamin K helps blood to clot.",
+          "Pellagra is caused by a lack of niacin.",
+          "Folic acid taken in early pregnancy helps prevent neural tube defects.",
+          "A lack of iodine causes goitre."
+        ],
+        "why": "All four are correct. Iodine is a mineral, not a vitamin, but its lack is the classic cause of goitre."
+      },
+      "hi": {
+        "stem": "पोषक तत्वों और स्वास्थ्य के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विटामिन K रक्त का थक्का बनने में मदद करता है।",
+          "पेलाग्रा नियासिन की कमी से होता है।",
+          "गर्भावस्था की शुरुआत में फ़ोलिक एसिड लेने से न्यूरल ट्यूब दोषों से बचाव होता है।",
+          "आयोडीन की कमी से घेंघा होता है।"
+        ],
+        "why": "चारों कथन सही हैं। आयोडीन विटामिन नहीं, खनिज है, पर इसकी कमी घेंघे का जाना-माना कारण है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about vitamins in daily life:",
+        "statements": [
+          "The skin makes vitamin D when exposed to ultraviolet-B sunlight.",
+          "Long cooking at high heat can destroy vitamin C.",
+          "Anaemia is caused mainly by a lack of vitamin A."
+        ],
+        "why": "Statement 3 is wrong: the most common cause of anaemia is a lack of iron; folate and B12 deficiency can also cause it. So two are correct."
+      },
+      "hi": {
+        "stem": "रोज़मर्रा के जीवन में विटामिनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "धूप की पराबैंगनी-B किरणें पड़ने पर त्वचा विटामिन D बनाती है।",
+          "तेज़ आँच पर देर तक पकाने से विटामिन C नष्ट हो सकता है।",
+          "रक्ताल्पता (एनीमिया) मुख्यतः विटामिन A की कमी से होती है।"
+        ],
+        "why": "कथन 3 गलत है: रक्ताल्पता का सबसे आम कारण आयरन की कमी है; फ़ोलेट और B12 की कमी से भी यह हो सकती है। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VI Science; NCERT Class XI Biology; Ministry of Health and Family Welfare",
+    "hi": "NCERT कक्षा VI विज्ञान; NCERT कक्षा XI जीव विज्ञान; स्वास्थ्य और परिवार कल्याण मंत्रालय"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

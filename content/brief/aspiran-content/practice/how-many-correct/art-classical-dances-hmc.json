@@ -1,0 +1,176 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "art-classical-dances-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Classical dances of India: how many correct?",
+    "hi": "भारत के शास्त्रीय नृत्य: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about where classical dances come from:",
+        "statements": [
+          "Kathakali is from Kerala.",
+          "Kuchipudi is named after a village in Andhra Pradesh.",
+          "Sattriya grew in the Vaishnava monasteries (sattras) of Assam.",
+          "Manipuri comes from Odisha."
+        ],
+        "why": "Statement 4 is wrong: Manipuri comes from Manipur; Odisha's classical dance is Odissi. The other three are correct."
+      },
+      "hi": {
+        "stem": "शास्त्रीय नृत्यों के उद्गम के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कथकली केरल का नृत्य है।",
+          "कुचिपुड़ी का नाम आंध्र प्रदेश के एक गाँव पर है।",
+          "सत्रिया असम के वैष्णव मठों (सत्रों) में विकसित हुआ।",
+          "मणिपुरी ओडिशा का नृत्य है।"
+        ],
+        "why": "कथन 4 गलत है: मणिपुरी मणिपुर का नृत्य है; ओडिशा का शास्त्रीय नृत्य ओडिसी है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about classical dance forms:",
+        "statements": [
+          "The Sangeet Natak Akademi recognises eight classical dance forms.",
+          "Mohiniyattam is a solo dance traditionally performed by women.",
+          "Kathak grew mainly in the temples of Tamil Nadu.",
+          "Kathakali dancers traditionally wear elaborate face make-up and costumes."
+        ],
+        "why": "Statement 3 is wrong: Kathak grew in north India, from storytellers to the Mughal and Rajput courts. The other three are correct."
+      },
+      "hi": {
+        "stem": "शास्त्रीय नृत्य रूपों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संगीत नाटक अकादमी आठ शास्त्रीय नृत्य रूपों को मान्यता देती है।",
+          "मोहिनीअट्टम परंपरागत रूप से महिलाओं का एकल नृत्य है।",
+          "कथक मुख्य रूप से तमिलनाडु के मंदिरों में विकसित हुआ।",
+          "कथकली नर्तक परंपरागत रूप से विस्तृत मुख-सज्जा और वेशभूषा पहनते हैं।"
+        ],
+        "why": "कथन 3 गलत है: कथक उत्तर भारत में कथावाचकों से लेकर मुगल और राजपूत दरबारों तक विकसित हुआ। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about dance theory and technique:",
+        "statements": [
+          "The Natya Shastra is attributed to Bharata Muni.",
+          "Abhinaya means rhythm.",
+          "Odissi uses the tribhanga posture, bending the body in three places.",
+          "Bharatanatyam was earlier known as Sadir."
+        ],
+        "why": "Statement 2 is wrong: abhinaya means expression; rhythm is tala. The other three are correct."
+      },
+      "hi": {
+        "stem": "नृत्य के सिद्धांत और तकनीक के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नाट्यशास्त्र भरत मुनि का माना जाता है।",
+          "अभिनय का अर्थ लय है।",
+          "ओडिसी में त्रिभंग मुद्रा होती है, जिसमें शरीर तीन जगह से मुड़ता है।",
+          "भरतनाट्यम को पहले सदिर कहा जाता था।"
+        ],
+        "why": "कथन 2 गलत है: अभिनय का अर्थ भाव-प्रदर्शन है; लय को ताल कहते हैं। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about Yakshagana and Chhau:",
+        "statements": [
+          "Yakshagana is one of the eight classical dances recognised by the Sangeet Natak Akademi.",
+          "Masks are used in the Purulia and Seraikela styles of Chhau.",
+          "Chhau is on UNESCO's list of the Intangible Cultural Heritage of Humanity."
+        ],
+        "why": "Statement 1 is wrong: Yakshagana is a folk theatre form of coastal Karnataka, not one of the eight. So two are correct."
+      },
+      "hi": {
+        "stem": "यक्षगान और छऊ के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "यक्षगान संगीत नाटक अकादमी के आठ मान्य शास्त्रीय नृत्यों में से एक है।",
+          "छऊ की पुरुलिया और सरायकेला शैलियों में मुखौटे पहने जाते हैं।",
+          "छऊ UNESCO की मानवता की अमूर्त सांस्कृतिक विरासत की सूची में है।"
+        ],
+        "why": "कथन 1 गलत है: यक्षगान तटीय कर्नाटक का लोक नाट्य रूप है, आठ में से एक नहीं। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Sangeet Natak Akademi; Ministry of Culture; UNESCO Intangible Cultural Heritage lists; NCERT Class XI An Introduction to Indian Art",
+    "hi": "संगीत नाटक अकादमी; संस्कृति मंत्रालय; UNESCO अमूर्त सांस्कृतिक विरासत सूचियाँ; NCERT कक्षा XI भारतीय कला का परिचय"
+  },
+  "factsToCheck": [
+    "Sangeet Natak Akademi recognises eight classical dances (Ministry of Culture lists also include Chhau in some places)",
+    "Chhau inscribed by UNESCO in 2010"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

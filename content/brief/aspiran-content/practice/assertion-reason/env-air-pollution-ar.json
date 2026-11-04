@@ -1,0 +1,130 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "env-air-pollution-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Air pollution: assertion and reason",
+    "hi": "वायु प्रदूषण: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "PM2.5 is considered more harmful to health than PM10.",
+        "reason": "PM2.5 particles are small enough to reach deep into the lungs and even the bloodstream.",
+        "why": "Both are true, and R is why PM2.5 is more harmful."
+      },
+      "hi": {
+        "assertion": "स्वास्थ्य के लिए PM2.5 को PM10 से अधिक हानिकारक माना जाता है।",
+        "reason": "PM2.5 कण इतने छोटे होते हैं कि फेफड़ों में गहराई तक और रक्तप्रवाह तक पहुँच सकते हैं।",
+        "why": "दोनों सही हैं, और R ही बताता है कि PM2.5 अधिक हानिकारक क्यों है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Air quality in Delhi often worsens in early winter.",
+        "reason": "Cooler air near the ground and weak winds trap pollutants, a temperature inversion.",
+        "why": "Both are true. Trapped, still air lets pollution build up, so R explains A, along with factors like stubble burning."
+      },
+      "hi": {
+        "assertion": "दिल्ली की वायु गुणवत्ता प्रायः सर्दियों की शुरुआत में बिगड़ जाती है।",
+        "reason": "ज़मीन के पास ठंडी हवा और कमज़ोर पवनें प्रदूषकों को रोक लेती हैं, जिसे तापमान व्युत्क्रमण कहते हैं।",
+        "why": "दोनों सही हैं। रुकी और ठहरी हवा में प्रदूषण जमा होता है, इसलिए R, A को समझाता है, पराली जलाने जैसे कारकों के साथ।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "Ground-level ozone is a harmful pollutant.",
+        "reason": "Ground-level ozone is released directly from car exhausts.",
+        "why": "A is true. R is false: ground-level ozone is a secondary pollutant, formed when nitrogen oxides and volatile organic compounds react in sunlight."
+      },
+      "hi": {
+        "assertion": "ज़मीनी स्तर का ओज़ोन एक हानिकारक प्रदूषक है।",
+        "reason": "ज़मीनी स्तर का ओज़ोन सीधे वाहनों के धुएँ से निकलता है।",
+        "why": "A सही है। R गलत है: ज़मीनी ओज़ोन द्वितीयक प्रदूषक है, जो धूप में नाइट्रोजन ऑक्साइड और वाष्पशील कार्बनिक यौगिकों की अभिक्रिया से बनता है।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "The National Air Quality Index measures only PM2.5.",
+        "reason": "The National Air Quality Index covers several pollutants, including PM10, nitrogen dioxide, sulphur dioxide and ozone.",
+        "why": "A is false. R is true: the index uses up to eight pollutants, and the worst one sets the AQI."
+      },
+      "hi": {
+        "assertion": "राष्ट्रीय वायु गुणवत्ता सूचकांक केवल PM2.5 मापता है।",
+        "reason": "राष्ट्रीय वायु गुणवत्ता सूचकांक में PM10, नाइट्रोजन डाइऑक्साइड, सल्फ़र डाइऑक्साइड और ओज़ोन सहित कई प्रदूषक शामिल हैं।",
+        "why": "A गलत है। R सही है: सूचकांक आठ तक प्रदूषकों का उपयोग करता है, और सबसे खराब प्रदूषक AQI तय करता है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Acid rain can damage marble buildings.",
+        "reason": "Catalytic converters reduce harmful gases from vehicle exhausts.",
+        "why": "Both are true, but R does not explain A. Acid rain damages marble because acids react with calcium carbonate."
+      },
+      "hi": {
+        "assertion": "अम्लीय वर्षा संगमरमर की इमारतों को नुकसान पहुँचा सकती है।",
+        "reason": "उत्प्रेरक परिवर्तक वाहनों के धुएँ से हानिकारक गैसें घटाते हैं।",
+        "why": "दोनों सही हैं, पर R, A को नहीं समझाता। अम्लीय वर्षा संगमरमर को इसलिए नुकसान पहुँचाती है क्योंकि अम्ल कैल्शियम कार्बोनेट से अभिक्रिया करते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Central Pollution Control Board; Air (Prevention and Control of Pollution) Act 1981; NCERT Class XII Biology",
+    "hi": "केंद्रीय प्रदूषण नियंत्रण बोर्ड; वायु (प्रदूषण निवारण और नियंत्रण) अधिनियम 1981; NCERT कक्षा XII जीव विज्ञान"
+  },
+  "factsToCheck": [
+    "National Clean Air Programme launched in 2019",
+    "National AQI launched in 2014 with eight pollutants"
+  ],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "eco-deficits-and-budget-terms-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Deficits and budget terms: how many correct?",
+    "hi": "घाटे और बजट की शब्दावली: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about deficit measures:",
+        "statements": [
+          "Fiscal deficit is total expenditure minus total receipts other than borrowings.",
+          "Primary deficit is fiscal deficit minus interest payments.",
+          "Revenue deficit is revenue expenditure minus revenue receipts.",
+          "Effective revenue deficit is revenue deficit plus grants for creating capital assets."
+        ],
+        "why": "Statement 4 is wrong: effective revenue deficit subtracts those grants from revenue deficit. The other three are correct."
+      },
+      "hi": {
+        "stem": "घाटे के मापों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राजकोषीय घाटा कुल व्यय में से उधार के अलावा कुल प्राप्तियाँ घटाने पर मिलता है।",
+          "प्राथमिक घाटा राजकोषीय घाटे में से ब्याज भुगतान घटाने पर मिलता है।",
+          "राजस्व घाटा राजस्व व्यय में से राजस्व प्राप्तियाँ घटाने पर मिलता है।",
+          "प्रभावी राजस्व घाटा राजस्व घाटे में पूँजीगत परिसंपत्तियाँ बनाने के अनुदान जोड़ने पर मिलता है।"
+        ],
+        "why": "कथन 4 गलत है: प्रभावी राजस्व घाटे में ये अनुदान राजस्व घाटे से घटाए जाते हैं। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the FRBM framework:",
+        "statements": [
+          "The Fiscal Responsibility and Budget Management Act was passed in 2003.",
+          "A committee chaired by N.K. Singh reviewed the FRBM framework.",
+          "A citizen can go to court to enforce the fiscal deficit target in the FRBM Act."
+        ],
+        "why": "Statement 3 is wrong: the FRBM targets bind the government through reporting to Parliament, not through courts. So two are correct."
+      },
+      "hi": {
+        "stem": "FRBM ढाँचे के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राजकोषीय उत्तरदायित्व और बजट प्रबंधन अधिनियम 2003 में पारित हुआ।",
+          "N.K. सिंह की अध्यक्षता वाली समिति ने FRBM ढाँचे की समीक्षा की।",
+          "कोई नागरिक FRBM अधिनियम के राजकोषीय घाटे के लक्ष्य को लागू कराने के लिए अदालत जा सकता है।"
+        ],
+        "why": "कथन 3 गलत है: FRBM के लक्ष्य संसद को रिपोर्टिंग के ज़रिए सरकार पर लागू होते हैं, अदालतों के ज़रिए नहीं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Union Budget:",
+        "statements": [
+          "The Constitution uses the term \"Annual Financial Statement\", not \"Budget\".",
+          "Expenditure charged on the Consolidated Fund of India is not put to the vote of the Lok Sabha.",
+          "The Prime Minister's salary is charged on the Consolidated Fund of India.",
+          "The Contingency Fund of India is placed at the disposal of the Finance Minister."
+        ],
+        "why": "Statement 3 is wrong: the President's salary is charged, but ministers' salaries are voted. Statement 4 is wrong: the Contingency Fund is at the disposal of the President. So two are correct."
+      },
+      "hi": {
+        "stem": "केंद्रीय बजट के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संविधान \"बजट\" नहीं, \"वार्षिक वित्तीय विवरण\" शब्द का प्रयोग करता है।",
+          "भारत की संचित निधि पर भारित व्यय पर लोकसभा में मतदान नहीं होता।",
+          "प्रधानमंत्री का वेतन भारत की संचित निधि पर भारित है।",
+          "भारत की आकस्मिकता निधि वित्त मंत्री के अधिकार में रखी जाती है।"
+        ],
+        "why": "कथन 3 गलत है: राष्ट्रपति का वेतन भारित है, पर मंत्रियों के वेतन पर मतदान होता है। कथन 4 गलत है: आकस्मिकता निधि राष्ट्रपति के अधिकार में होती है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about receipts and expenditure:",
+        "statements": [
+          "Disinvestment receipts are capital receipts.",
+          "Interest payments are capital expenditure.",
+          "Recovery of loans given by the government is a revenue receipt."
+        ],
+        "why": "Interest payments are revenue expenditure, and loan recoveries are capital receipts, because they reduce the government's assets. Only one is correct."
+      },
+      "hi": {
+        "stem": "प्राप्तियों और व्यय के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "विनिवेश से मिली राशि पूँजीगत प्राप्ति है।",
+          "ब्याज भुगतान पूँजीगत व्यय है।",
+          "सरकार द्वारा दिए गए ऋणों की वसूली राजस्व प्राप्ति है।"
+        ],
+        "why": "ब्याज भुगतान राजस्व व्यय है, और ऋण वसूली पूँजीगत प्राप्ति है, क्योंकि इससे सरकार की परिसंपत्तियाँ घटती हैं। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 112, 266 and 267; FRBM Act 2003; Union Budget documents",
+    "hi": "भारत का संविधान, अनुच्छेद 112, 266 और 267; FRBM अधिनियम 2003; केंद्रीय बजट दस्तावेज़"
+  },
+  "factsToCheck": [
+    "FRBM Act passed in 2003",
+    "N.K. Singh committee on FRBM review reported in 2017"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

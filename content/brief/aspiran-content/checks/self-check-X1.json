@@ -1,0 +1,34 @@
+{
+  "batch": "X1",
+  "checksRun": [
+    "python3 check.py X1 (valid JSON; key order, schema value, mood, sfx and optionText identical to practice-format-samples; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; en and hi have the same number of questions, statements, options, items, bank words and gaps; every answer index, lie, odd and better index in range; truth list length equals statement count; trap labels valid and 'none' only on the answer; Devanagari in every Hindi field, no Devanagari digits, no Latin article or Part letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique across X batches checked together and against every id in earlier zips in aspiran-batches and the samples)",
+    "40 files: how-many-correct 20 files / 80 items, trap-spotter 20 files / 100 items",
+    "0 issues on the final run",
+    "Answer spread counted by code: how-many-correct: 0=2, 1=11, 2=35, 3=29, 4=3; trap-spotter: 0=20, 1=30, 2=30, 3=20",
+    "factsToCheck entries: 84 (dates and numbers to confirm; added as a top-level list before 'schema', the same way B29 and B30 nodes carry it)",
+    "Answers block applied by search: PVTGs written with '(PTGs in the UPSC syllabus)' on first mention (soc-tribal-rights-laws-hmc); Hindi lettered articles written 243यघ (243ZD) and 21क (21A); Parts written 9 (IX), 9क (IXA), 14 (XIV) in Hindi; no .voice.txt files in this batch, so digits are used throughout",
+    "TRAGIC rule: no disasters, violence or deaths as topics; Gandhian questions avoid Chauri Chaura and 1942 violence; emergency questions are about constitutional provisions only",
+    "how-many-correct: no 3-statement item has all three true (there is no 'All three' option); 'All four' only on 4-statement items"
+  ],
+  "issuesFound": [
+    "pol-panchayats-and-municipalities-hmc: Hindi explanation had अनुच्छेद 243ZD with Latin letters",
+    "Hindi sources and statements wrote Parts as IX, IXA and XIV",
+    "pol-emergency-provisions-trap (Bommai), eco-balance-of-payments-and-fdi-trap (1991 gold), anc-buddhism-and-jainism-trap, env-iucn-cites-and-species-trap (bustard), eco-inflation-and-price-indices-trap (CPI vs WPI), geo-atmosphere-and-winds-trap (Coriolis), pol-emergency-provisions-trap (Article 19): trap label on a wrong option did not match the kind of error the option makes",
+    "Checker first flagged 'rank' in the Mughal zat and sawar ranks, and Latin-only acronyms (IRDAI, PFRDA, UNEP, WWF, 5+3+3+4) in Hindi options",
+    "how-many-correct answer spread was skewed: 46 of 80 items had exactly two correct statements and none had zero"
+  ],
+  "fixed": [
+    "Changed to अनुच्छेद 243यघ (243ZD)",
+    "Changed to भाग 9 (IX), 9क (IXA), 14 (XIV)",
+    "Rewrote the weak wrong options so each one shows the trap its label names, and updated the en and hi explanations",
+    "Narrowed the banned-word check to aspirant ranks and scores; allowed acronym-only Hindi options, which are also acronyms in Hindi print",
+    "Rewrote or added statements in 12 items (en and hi, with explanations) so the spread is closer to even, including two items where no statement is correct"
+  ],
+  "stillOpen": [
+    "factsToCheck: the samples have no factsToCheck key, but the brief asks for one, so every file carries it as a top-level list just before 'schema'. If the importer rejects unknown keys, drop it or move it into review.note",
+    "Hindi terms for the Hindi editor: गणपूर्ति (quorum), सत्रावसान, भारित व्यय, आकस्मिकता निधि, प्रभावी राजस्व घाटा, विकेंद्रीकृत खरीद, राज्य परामर्शित मूल्य, ज्वारनदमुख, दीर्घ ज्वार / लघु ज्वार, मॉन्ट्रो रिकॉर्ड, फुमदी, आहत सिक्के, मुवेंदर, तिणै, ज़ात / सवार, दहसाला, सूर्य-तुल्यकालिक कक्षा, स्टैगफ़्लेशन, निक्षालन, खादर / बांगर, मूलाधार (कीस्टोन) प्रजाति, जैव आवर्धन, अमर-नायक, पुनर्योगज",
+    "Facts that may have changed in 2025-26 are in factsToCheck, not asserted beyond what is stable: India's NDC (a 2035 NDC may have been filed), CPI base-year revision, number of PVTGs (75), Sangeet Natak Akademi's count of classical dances",
+    "eco-banking-and-reserve-ratios-hmc and eco-capital-markets-trap avoid current rate values on purpose; only definitions are tested"
+  ],
+  "finalRunIssues": []
+}

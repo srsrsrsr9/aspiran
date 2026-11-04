@@ -55,7 +55,7 @@ const lit = (en: string, hi: string): Bi => ({ en: viewLang === "en" ? en : LABE
 export const LABELS: Record<string, Record<string, string>> = {
   te: {
     "Extreme word": "అతి పదం", "Right fact, wrong reason": "సరైన వాస్తవం, తప్పు కారణం", "Scope swap": "పరిధి మార్పు",
-    "Outdated": "పాత సమాచారం", "Half true": "సగం నిజం", "Correct": "సరైనది",
+    "Outdated": "పాత సమాచారం", "Half true": "సగం నిజం", "Sounds familiar": "తెలిసినట్టే ఉంది", "Correct": "సరైనది",
     "Which is the better answer?": "ఏది మెరుగైన సమాధానం?", "Which is the odd one out?": "వీటిలో భిన్నమైనది ఏది?",
     "Two are true. Which is the lie?": "రెండు నిజం. అబద్ధం ఏది?", "Who am I?": "నేను ఎవరు?",
     "Assertion (A)": "ప్రకటన (A)", "Reason (R)": "కారణం (R)", "Fact": "వాస్తవం", "Opinion": "అభిప్రాయం",
@@ -88,6 +88,7 @@ const TRAPS: Record<string, [string, string]> = {
   "scope-swap": ["Scope swap", "दायरे की अदला-बदली"],
   "outdated": ["Outdated", "पुराना तथ्य"],
   "half-true": ["Half true", "आधा सच"],
+  "sounds-familiar": ["Sounds familiar", "जाना-पहचाना लगता है"],
   "none": ["Correct", "सही"],
 };
 /** Paper keys from templates/exam-formats.json, as chips. */

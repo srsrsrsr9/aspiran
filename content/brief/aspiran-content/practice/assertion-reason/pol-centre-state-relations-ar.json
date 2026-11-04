@@ -1,0 +1,129 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "pol-centre-state-relations-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Centre-state relations: assertion and reason",
+    "hi": "केंद्र-राज्य संबंध: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Parliament can make a law on a State List subject if the Rajya Sabha passes a resolution in the national interest.",
+        "reason": "The Rajya Sabha represents the states, so Article 249 gives it the power to allow such a law.",
+        "why": "Both are true. Because the Rajya Sabha speaks for the states, the Constitution lets a two-thirds resolution there open a State List subject to Parliament, so R explains A."
+      },
+      "hi": {
+        "assertion": "राज्यसभा राष्ट्रीय हित में प्रस्ताव पारित करे तो संसद राज्य सूची के किसी विषय पर कानून बना सकती है।",
+        "reason": "राज्यसभा राज्यों का प्रतिनिधित्व करती है, इसलिए अनुच्छेद 249 उसे ऐसा कानून बनाने की अनुमति देने की शक्ति देता है।",
+        "why": "दोनों सही हैं। राज्यसभा राज्यों की आवाज़ है, इसलिए संविधान वहाँ दो-तिहाई प्रस्ताव से राज्य सूची का विषय संसद के लिए खोलने देता है, यानी R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "The Governor is appointed by the President.",
+        "reason": "The Governor is elected by the members of the state legislature.",
+        "why": "A is true: Article 155 says the President appoints the Governor. R is false: the Constituent Assembly rejected an elected Governor."
+      },
+      "hi": {
+        "assertion": "राज्यपाल की नियुक्ति राष्ट्रपति करते हैं।",
+        "reason": "राज्यपाल का चुनाव राज्य विधानमंडल के सदस्य करते हैं।",
+        "why": "A सही है: अनुच्छेद 155 कहता है कि राज्यपाल की नियुक्ति राष्ट्रपति करते हैं। R गलत है: संविधान सभा ने निर्वाचित राज्यपाल का विचार नहीं माना।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Residuary powers of legislation lie with Parliament.",
+        "reason": "The Concurrent List has subjects on which both Parliament and state legislatures can make laws.",
+        "why": "Both are true, but R does not explain A. Residuary powers rest with Parliament under Article 248 and Entry 97 of the Union List, not because a Concurrent List exists."
+      },
+      "hi": {
+        "assertion": "विधि निर्माण की अवशिष्ट शक्तियाँ संसद के पास हैं।",
+        "reason": "समवर्ती सूची में वे विषय हैं जिन पर संसद और राज्य विधानमंडल दोनों कानून बना सकते हैं।",
+        "why": "दोनों सही हैं, पर R, A को नहीं समझाता। अवशिष्ट शक्तियाँ अनुच्छेद 248 और संघ सूची की प्रविष्टि 97 के कारण संसद के पास हैं, समवर्ती सूची के होने से नहीं।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "If a state law on a Concurrent List subject conflicts with a Union law, the state law always prevails.",
+        "reason": "Under Article 254, a state law that has received the President's assent can prevail in that state.",
+        "why": "A is false: normally the Union law prevails. R is true: a state law reserved for and given the President's assent can prevail in that state, which is the exception."
+      },
+      "hi": {
+        "assertion": "समवर्ती सूची के विषय पर राज्य का कानून केंद्र के कानून से टकराए तो राज्य का कानून हमेशा प्रभावी होता है।",
+        "reason": "अनुच्छेद 254 के तहत राष्ट्रपति की अनुमति पाने वाला राज्य कानून उस राज्य में प्रभावी हो सकता है।",
+        "why": "A गलत है: सामान्यतः केंद्र का कानून प्रभावी होता है। R सही है: राष्ट्रपति के विचार के लिए रखा गया और उनकी अनुमति पाया राज्य कानून उस राज्य में प्रभावी हो सकता है, यही अपवाद है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Two or more states can ask Parliament to make a law on a State List subject for them.",
+        "reason": "Under Article 252, Parliament can legislate for states whose legislatures pass resolutions asking it to.",
+        "why": "Both are true, and R is the provision that allows A."
+      },
+      "hi": {
+        "assertion": "दो या अधिक राज्य संसद से राज्य सूची के किसी विषय पर अपने लिए कानून बनाने को कह सकते हैं।",
+        "reason": "अनुच्छेद 252 के तहत संसद उन राज्यों के लिए कानून बना सकती है जिनके विधानमंडल ऐसा प्रस्ताव पारित करें।",
+        "why": "दोनों सही हैं, और R ही वह प्रावधान है जो A को संभव बनाता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 155, 156, 200, 246, 249 and 252, Seventh Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 155, 156, 200, 246, 249 और 252, सातवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "2025 Supreme Court rulings on time limits for Governors' assent and the President's reference under Article 143: check the current position before publishing"
+  ],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

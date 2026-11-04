@@ -1,0 +1,178 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "eco-banking-and-reserve-ratios-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Banks, reserve ratios and policy rates: how many correct?",
+    "hi": "बैंक, आरक्षित अनुपात और नीतिगत दरें: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about reserve ratios:",
+        "statements": [
+          "Cash Reserve Ratio (CRR) is the share of a bank's net demand and time liabilities kept as cash with the RBI.",
+          "Banks earn interest from the RBI on their CRR balances.",
+          "Statutory Liquidity Ratio (SLR) can be held in cash, gold or approved securities.",
+          "SLR assets must be deposited with the RBI."
+        ],
+        "why": "Statement 2 is wrong: the RBI pays no interest on CRR balances. Statement 4 is wrong: banks hold SLR assets themselves. So two are correct."
+      },
+      "hi": {
+        "stem": "आरक्षित अनुपातों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नकद आरक्षित अनुपात (CRR) बैंक की शुद्ध माँग और सावधि देयताओं का वह हिस्सा है जो RBI के पास नकद रखा जाता है।",
+          "बैंकों को RBI से उनकी CRR राशि पर ब्याज मिलता है।",
+          "सांविधिक तरलता अनुपात (SLR) नकद, सोने या अनुमोदित प्रतिभूतियों में रखा जा सकता है।",
+          "SLR की परिसंपत्तियाँ RBI के पास जमा करनी होती हैं।"
+        ],
+        "why": "कथन 2 गलत है: RBI, CRR की राशि पर कोई ब्याज नहीं देता। कथन 4 गलत है: SLR की परिसंपत्तियाँ बैंक खुद रखते हैं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Reserve Bank of India:",
+        "statements": [
+          "The RBI was nationalised in 1949.",
+          "The RBI issues one-rupee notes.",
+          "The RBI mints coins."
+        ],
+        "why": "One-rupee notes and all coins are issued by the Government of India; coins are minted at government mints. The RBI only puts them into circulation. Only one is correct."
+      },
+      "hi": {
+        "stem": "भारतीय रिज़र्व बैंक के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "RBI का राष्ट्रीयकरण 1949 में हुआ।",
+          "RBI एक रुपये के नोट जारी करता है।",
+          "RBI सिक्के ढालता है।"
+        ],
+        "why": "एक रुपये के नोट और सभी सिक्के भारत सरकार जारी करती है; सिक्के सरकारी टकसालों में ढलते हैं। RBI उन्हें केवल चलन में लाता है। सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about specialised banks:",
+        "statements": [
+          "NABARD was set up on the advice of the CRAFICARD committee.",
+          "SIDBI is the principal financial institution for micro, small and medium enterprises.",
+          "Regional Rural Banks are jointly owned by the Union government, a state government and a sponsor bank.",
+          "Payments banks can issue credit cards."
+        ],
+        "why": "Statement 4 is wrong: payments banks can take small deposits and issue debit cards, but cannot lend or issue credit cards. The other three are correct."
+      },
+      "hi": {
+        "stem": "विशिष्ट बैंकों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "NABARD की स्थापना CRAFICARD समिति की सलाह पर हुई।",
+          "SIDBI सूक्ष्म, लघु और मध्यम उद्यमों के लिए प्रमुख वित्तीय संस्था है।",
+          "क्षेत्रीय ग्रामीण बैंकों का स्वामित्व केंद्र सरकार, राज्य सरकार और प्रायोजक बैंक के पास संयुक्त रूप से है।",
+          "भुगतान बैंक क्रेडिट कार्ड जारी कर सकते हैं।"
+        ],
+        "why": "कथन 4 गलत है: भुगतान बैंक छोटी जमा ले सकते हैं और डेबिट कार्ड दे सकते हैं, पर ऋण नहीं दे सकते और क्रेडिट कार्ड जारी नहीं कर सकते। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about policy rates:",
+        "statements": [
+          "Repo rate is the rate at which the RBI lends to banks against government securities.",
+          "Under the Standing Deposit Facility, the RBI absorbs surplus funds from banks without giving securities in return.",
+          "Bank Rate is the rate at which banks lend to their best customers.",
+          "The Marginal Standing Facility rate is set above the repo rate."
+        ],
+        "why": "Statement 3 is wrong: Bank Rate is the rate at which the RBI lends to banks without a repo arrangement; the rate for a bank's best customers is a lending benchmark set by the bank. The other three are correct."
+      },
+      "hi": {
+        "stem": "नीतिगत दरों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "रेपो दर वह दर है जिस पर RBI सरकारी प्रतिभूतियों के बदले बैंकों को ऋण देता है।",
+          "स्थायी जमा सुविधा के तहत RBI बदले में प्रतिभूतियाँ दिए बिना बैंकों से अतिरिक्त धन लेता है।",
+          "बैंक दर वह दर है जिस पर बैंक अपने सबसे अच्छे ग्राहकों को ऋण देते हैं।",
+          "सीमांत स्थायी सुविधा (MSF) दर रेपो दर से ऊपर रखी जाती है।"
+        ],
+        "why": "कथन 3 गलत है: बैंक दर वह दर है जिस पर RBI बिना रेपो व्यवस्था के बैंकों को ऋण देता है; सबसे अच्छे ग्राहकों की दर बैंक खुद तय करते हैं। बाकी तीन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "RBI Act 1934; Banking Regulation Act 1949; NABARD Act 1981; RBI monetary policy statements",
+    "hi": "RBI अधिनियम 1934; बैंकिंग विनियमन अधिनियम 1949; NABARD अधिनियम 1981; RBI मौद्रिक नीति वक्तव्य"
+  },
+  "factsToCheck": [
+    "RBI nationalised on 1 January 1949",
+    "NABARD set up in 1982 on the CRAFICARD (Shivaraman) committee's advice",
+    "Standing Deposit Facility introduced in April 2022",
+    "Payments banks may not issue credit cards (RBI licensing guidelines)"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

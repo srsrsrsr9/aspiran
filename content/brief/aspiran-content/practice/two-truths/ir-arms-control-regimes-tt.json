@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "ir-arms-control-regimes-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Arms control regimes and India: two truths and a lie",
+    "hi": "शस्त्र नियंत्रण व्यवस्थाएँ और भारत: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "India joined the Missile Technology Control Regime in 2016.",
+          "India is a member of the Nuclear Suppliers Group.",
+          "India is a member of the Wassenaar Arrangement."
+        ],
+        "fix": "India is not a member of the Nuclear Suppliers Group; its application is pending."
+      },
+      "hi": {
+        "statements": [
+          "भारत 2016 में मिसाइल प्रौद्योगिकी नियंत्रण व्यवस्था में शामिल हुआ।",
+          "भारत परमाणु आपूर्तिकर्ता समूह का सदस्य है।",
+          "भारत वासेनार व्यवस्था का सदस्य है।"
+        ],
+        "fix": "भारत परमाणु आपूर्तिकर्ता समूह का सदस्य नहीं है; उसका आवेदन लंबित है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "India has signed the Nuclear Non-Proliferation Treaty.",
+          "India has not signed the Comprehensive Nuclear-Test-Ban Treaty.",
+          "India follows a policy of no first use of nuclear weapons."
+        ],
+        "fix": "India has not signed the NPT, which it sees as discriminatory."
+      },
+      "hi": {
+        "statements": [
+          "भारत ने परमाणु अप्रसार संधि पर हस्ताक्षर किए हैं।",
+          "भारत ने व्यापक परमाणु परीक्षण प्रतिबंध संधि पर हस्ताक्षर नहीं किए हैं।",
+          "भारत परमाणु हथियारों के पहले उपयोग न करने की नीति अपनाता है।"
+        ],
+        "fix": "भारत ने NPT पर हस्ताक्षर नहीं किए, जिसे वह भेदभावपूर्ण मानता है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Australia Group deals with chemical and biological weapons.",
+          "India joined the Australia Group in 2018.",
+          "The Australia Group is a treaty body under the United Nations."
+        ],
+        "fix": "The Australia Group is an informal arrangement of countries, not a UN treaty body."
+      },
+      "hi": {
+        "statements": [
+          "ऑस्ट्रेलिया समूह रासायनिक और जैविक हथियारों से जुड़ा है।",
+          "भारत 2018 में ऑस्ट्रेलिया समूह में शामिल हुआ।",
+          "ऑस्ट्रेलिया समूह संयुक्त राष्ट्र के तहत एक संधि निकाय है।"
+        ],
+        "fix": "ऑस्ट्रेलिया समूह देशों की एक अनौपचारिक व्यवस्था है, संयुक्त राष्ट्र का संधि निकाय नहीं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The IAEA promotes peaceful uses of nuclear energy.",
+          "The IAEA has its headquarters in Geneva.",
+          "India is a member of the IAEA."
+        ],
+        "fix": "The IAEA is headquartered in Vienna."
+      },
+      "hi": {
+        "statements": [
+          "IAEA परमाणु ऊर्जा के शांतिपूर्ण उपयोग को बढ़ावा देता है।",
+          "IAEA का मुख्यालय जिनेवा में है।",
+          "भारत IAEA का सदस्य है।"
+        ],
+        "fix": "IAEA का मुख्यालय वियना में है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "India is not a party to the Chemical Weapons Convention.",
+          "India has ratified the Chemical Weapons Convention.",
+          "The Organisation for the Prohibition of Chemical Weapons oversees that convention."
+        ],
+        "fix": "India signed and ratified the Chemical Weapons Convention and is a party to it."
+      },
+      "hi": {
+        "statements": [
+          "भारत रासायनिक हथियार अभिसमय का पक्षकार नहीं है।",
+          "भारत ने रासायनिक हथियार अभिसमय का अनुसमर्थन किया है।",
+          "रासायनिक हथियार निषेध संगठन इस अभिसमय की निगरानी करता है।"
+        ],
+        "fix": "भारत ने रासायनिक हथियार अभिसमय पर हस्ताक्षर और अनुसमर्थन किया है और वह इसका पक्षकार है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Ministry of External Affairs; IAEA; MTCR, Wassenaar Arrangement and Australia Group websites",
+    "hi": "विदेश मंत्रालय; IAEA; MTCR, वासेनार व्यवस्था और ऑस्ट्रेलिया समूह की वेबसाइटें"
+  },
+  "factsToCheck": [
+    "India joined MTCR 2016, Wassenaar 2017, Australia Group 2018"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

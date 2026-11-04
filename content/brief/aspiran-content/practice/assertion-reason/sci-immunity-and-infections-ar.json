@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "sci-immunity-and-infections-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Immunity and infections: assertion and reason",
+    "hi": "प्रतिरक्षा और संक्रमण: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Antibiotics do not cure the common cold.",
+        "reason": "The common cold is caused by viruses, and antibiotics act on bacteria.",
+        "why": "Both are true. Antibiotics target bacteria, so they do not work on viral colds, and R explains A."
+      },
+      "hi": {
+        "assertion": "एंटीबायोटिक साधारण ज़ुकाम ठीक नहीं करते।",
+        "reason": "साधारण ज़ुकाम वायरस से होता है, और एंटीबायोटिक जीवाणुओं पर काम करते हैं।",
+        "why": "दोनों सही हैं। एंटीबायोटिक जीवाणुओं को निशाना बनाते हैं, इसलिए वायरस वाले ज़ुकाम पर काम नहीं करते, यानी R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Vaccination can protect people who have not been vaccinated.",
+        "reason": "When enough people are immune, an infection finds it hard to spread, which is herd immunity.",
+        "why": "Both are true, and R is how A happens."
+      },
+      "hi": {
+        "assertion": "टीकाकरण उन लोगों की भी रक्षा कर सकता है जिन्हें टीका नहीं लगा।",
+        "reason": "जब पर्याप्त लोग प्रतिरक्षित हों, तो संक्रमण के लिए फैलना कठिन हो जाता है, जिसे सामूहिक प्रतिरक्षा कहते हैं।",
+        "why": "दोनों सही हैं, और R ही बताता है कि A कैसे होता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "Malaria is spread by the bite of an infected mosquito.",
+        "reason": "Malaria is caused by a virus.",
+        "why": "A is true: female Anopheles mosquitoes spread it. R is false: malaria is caused by the Plasmodium parasite, a protozoan."
+      },
+      "hi": {
+        "assertion": "मलेरिया संक्रमित मच्छर के काटने से फैलता है।",
+        "reason": "मलेरिया एक वायरस से होता है।",
+        "why": "A सही है: मादा एनोफ़िलीज़ मच्छर इसे फैलाते हैं। R गलत है: मलेरिया प्लाज़्मोडियम परजीवी से होता है, जो एक प्रोटोज़ोआ है।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "Antimicrobial resistance is caused only by overuse of antibiotics in hospitals.",
+        "reason": "Overuse of antibiotics in people and in livestock helps resistant microbes survive and spread.",
+        "why": "A is false: \"only\" is wrong, because farm use and poor sanitation also drive resistance. R is true."
+      },
+      "hi": {
+        "assertion": "रोगाणुरोधी प्रतिरोध केवल अस्पतालों में एंटीबायोटिक के ज़्यादा उपयोग से होता है।",
+        "reason": "लोगों और पशुधन में एंटीबायोटिक का ज़्यादा उपयोग प्रतिरोधी सूक्ष्मजीवों को बचने और फैलने में मदद करता है।",
+        "why": "A गलत है: \"केवल\" गलत है, क्योंकि खेती में उपयोग और खराब स्वच्छता भी प्रतिरोध बढ़ाते हैं। R सही है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "Antibodies are made by B lymphocytes.",
+        "reason": "Tuberculosis is caused by a bacterium.",
+        "why": "Both are true, but the cause of tuberculosis does not explain which cells make antibodies."
+      },
+      "hi": {
+        "assertion": "एंटीबॉडी B लिम्फ़ोसाइट बनाती हैं।",
+        "reason": "क्षयरोग (TB) एक जीवाणु से होता है।",
+        "why": "दोनों सही हैं, पर क्षयरोग का कारण यह नहीं समझाता कि एंटीबॉडी कौन-सी कोशिकाएँ बनाती हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Biology, Human Health and Disease; Ministry of Health and Family Welfare; WHO",
+    "hi": "NCERT कक्षा XII जीव विज्ञान, मानव स्वास्थ्य तथा रोग; स्वास्थ्य और परिवार कल्याण मंत्रालय; WHO"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

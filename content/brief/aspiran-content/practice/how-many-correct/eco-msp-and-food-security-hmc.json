@@ -1,0 +1,175 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "eco-msp-and-food-security-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "MSP, procurement and food security: how many correct?",
+    "hi": "MSP, खरीद और खाद्य सुरक्षा: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Minimum Support Price (MSP):",
+        "statements": [
+          "MSP is recommended by the Commission for Agricultural Costs and Prices (CACP).",
+          "The CACP is a statutory body.",
+          "The Union government announces MSP for both kharif and rabi crops.",
+          "Every private buyer is legally bound to pay at least the MSP."
+        ],
+        "why": "Statement 2 is wrong: the CACP is an attached office of the agriculture ministry, not a statutory body. Statement 4 is wrong: MSP has no legal backing against private buyers. So two are correct."
+      },
+      "hi": {
+        "stem": "न्यूनतम समर्थन मूल्य (MSP) के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "MSP की सिफ़ारिश कृषि लागत और मूल्य आयोग (CACP) करता है।",
+          "CACP एक सांविधिक निकाय है।",
+          "केंद्र सरकार खरीफ़ और रबी दोनों फ़सलों के लिए MSP घोषित करती है।",
+          "हर निजी खरीदार कानूनन कम से कम MSP देने को बाध्य है।"
+        ],
+        "why": "कथन 2 गलत है: CACP कृषि मंत्रालय का संबद्ध कार्यालय है, सांविधिक निकाय नहीं। कथन 4 गलत है: निजी खरीदारों पर MSP का कोई कानूनी आधार नहीं है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the National Food Security Act, 2013:",
+        "statements": [
+          "It covers up to 75 percent of the rural and up to 50 percent of the urban population.",
+          "Antyodaya Anna Yojana households are entitled to 35 kg of grain per household per month.",
+          "Priority households are entitled to 10 kg of grain per person per month."
+        ],
+        "why": "Statement 3 is wrong: priority households get 5 kg per person per month. So two are correct."
+      },
+      "hi": {
+        "stem": "राष्ट्रीय खाद्य सुरक्षा अधिनियम, 2013 के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "यह ग्रामीण जनसंख्या के 75 प्रतिशत तक और शहरी जनसंख्या के 50 प्रतिशत तक को कवर करता है।",
+          "अंत्योदय अन्न योजना के परिवारों को प्रति परिवार प्रति माह 35 किलो अनाज का हक़ है।",
+          "प्राथमिकता वाले परिवारों को प्रति व्यक्ति प्रति माह 10 किलो अनाज का हक़ है।"
+        ],
+        "why": "कथन 3 गलत है: प्राथमिकता वाले परिवारों को प्रति व्यक्ति प्रति माह 5 किलो मिलता है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about procurement and storage:",
+        "statements": [
+          "The Food Corporation of India was set up under the Food Corporations Act, 1964.",
+          "Buffer stock norms for central pool grain are fixed by the Union government.",
+          "Under decentralised procurement, a state buys and distributes grain itself.",
+          "The Food Corporation of India fixes the MSP."
+        ],
+        "why": "Statement 4 is wrong: the Union government fixes MSP on the CACP's advice; FCI only buys and stores grain. The other three are correct."
+      },
+      "hi": {
+        "stem": "खरीद और भंडारण के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भारतीय खाद्य निगम की स्थापना खाद्य निगम अधिनियम, 1964 के तहत हुई।",
+          "केंद्रीय पूल के अनाज के बफ़र स्टॉक मानक केंद्र सरकार तय करती है।",
+          "विकेंद्रीकृत खरीद में राज्य स्वयं अनाज खरीदता और बाँटता है।",
+          "भारतीय खाद्य निगम MSP तय करता है।"
+        ],
+        "why": "कथन 4 गलत है: MSP केंद्र सरकार CACP की सलाह पर तय करती है; FCI केवल अनाज खरीदता और रखता है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about sugarcane pricing:",
+        "statements": [
+          "The Fair and Remunerative Price (FRP) applies to wheat and rice.",
+          "The FRP is fixed by each state government.",
+          "No state may set a cane price above the FRP."
+        ],
+        "why": "All three are wrong: the FRP is for sugarcane, it is fixed by the Union government, and some states add a State Advised Price above it. None is correct."
+      },
+      "hi": {
+        "stem": "गन्ने के मूल्य निर्धारण के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "उचित और लाभकारी मूल्य (FRP) गेहूँ और धान पर लागू होता है।",
+          "FRP हर राज्य सरकार तय करती है।",
+          "कोई राज्य गन्ने का मूल्य FRP से ऊपर तय नहीं कर सकता।"
+        ],
+        "why": "तीनों कथन गलत हैं: FRP गन्ने के लिए है, इसे केंद्र सरकार तय करती है, और कुछ राज्य इसके ऊपर राज्य परामर्शित मूल्य (SAP) जोड़ते हैं। कोई भी कथन सही नहीं है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "National Food Security Act 2013; Food Corporations Act 1964; Department of Food and Public Distribution; CACP",
+    "hi": "राष्ट्रीय खाद्य सुरक्षा अधिनियम 2013; खाद्य निगम अधिनियम 1964; खाद्य और सार्वजनिक वितरण विभाग; CACP"
+  },
+  "factsToCheck": [
+    "NFSA coverage up to 75% rural and 50% urban population",
+    "Antyodaya households 35 kg per month; priority households 5 kg per person per month",
+    "FCI set up under the Food Corporations Act, 1964",
+    "FRP for sugarcane fixed by the Union government"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "env-renewable-energy-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Renewable energy: two truths and a lie",
+    "hi": "नवीकरणीय ऊर्जा: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The International Solar Alliance was launched by India and France.",
+          "The International Solar Alliance has its headquarters in Paris.",
+          "The International Solar Alliance works to spread solar energy use."
+        ],
+        "fix": "The ISA's headquarters is in Gurugram, India."
+      },
+      "hi": {
+        "statements": [
+          "अंतरराष्ट्रीय सौर गठबंधन भारत और फ़्रांस ने शुरू किया।",
+          "अंतरराष्ट्रीय सौर गठबंधन का मुख्यालय पेरिस में है।",
+          "अंतरराष्ट्रीय सौर गठबंधन सौर ऊर्जा का उपयोग फैलाने का काम करता है।"
+        ],
+        "fix": "ISA का मुख्यालय भारत के गुरुग्राम में है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Green hydrogen is made from natural gas without capturing carbon.",
+          "Green hydrogen is made by splitting water using renewable electricity.",
+          "India has a National Green Hydrogen Mission."
+        ],
+        "fix": "Hydrogen made from natural gas without carbon capture is called grey hydrogen."
+      },
+      "hi": {
+        "statements": [
+          "हरित हाइड्रोजन बिना कार्बन पकड़े प्राकृतिक गैस से बनता है।",
+          "हरित हाइड्रोजन नवीकरणीय बिजली से पानी को तोड़कर बनता है।",
+          "भारत में राष्ट्रीय हरित हाइड्रोजन मिशन है।"
+        ],
+        "fix": "बिना कार्बन पकड़े प्राकृतिक गैस से बना हाइड्रोजन धूसर (ग्रे) हाइड्रोजन कहलाता है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Wind speeds are generally higher offshore than on land.",
+          "Tamil Nadu and Gujarat have large wind power capacity.",
+          "Wind power produces large carbon emissions while running."
+        ],
+        "fix": "Wind turbines produce almost no emissions while running; emissions come mainly from making and installing them."
+      },
+      "hi": {
+        "statements": [
+          "समुद्र में पवन की गति प्रायः ज़मीन से अधिक होती है।",
+          "तमिलनाडु और गुजरात में पवन ऊर्जा की बड़ी क्षमता है।",
+          "पवन ऊर्जा चलते समय बहुत अधिक कार्बन उत्सर्जन करती है।"
+        ],
+        "fix": "पवन टरबाइन चलते समय लगभग कोई उत्सर्जन नहीं करते; उत्सर्जन मुख्यतः उन्हें बनाने और लगाने में होता है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Solar photovoltaic cells turn sunlight directly into electricity.",
+          "Solar cells are mostly made from copper.",
+          "Rooftop solar lets homes produce some of their own power."
+        ],
+        "fix": "Most solar cells are made from silicon."
+      },
+      "hi": {
+        "statements": [
+          "सौर फ़ोटोवोल्टिक सेल धूप को सीधे बिजली में बदलते हैं।",
+          "सौर सेल ज़्यादातर ताँबे से बनते हैं।",
+          "छत पर लगा सौर पैनल घरों को अपनी कुछ बिजली खुद बनाने देता है।"
+        ],
+        "fix": "अधिकांश सौर सेल सिलिकॉन से बनते हैं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Geothermal energy comes from the heat of the Sun stored in the air.",
+          "Puga Valley in Ladakh has been studied for geothermal energy.",
+          "Tidal energy uses the rise and fall of the sea."
+        ],
+        "fix": "Geothermal energy comes from heat inside the Earth."
+      },
+      "hi": {
+        "statements": [
+          "भूतापीय ऊर्जा हवा में जमा सूर्य की गर्मी से आती है।",
+          "लद्दाख की पुगा घाटी का भूतापीय ऊर्जा के लिए अध्ययन हुआ है।",
+          "ज्वारीय ऊर्जा समुद्र के चढ़ाव और उतार का उपयोग करती है।"
+        ],
+        "fix": "भूतापीय ऊर्जा पृथ्वी के भीतर की गर्मी से आती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Ministry of New and Renewable Energy; International Solar Alliance; Central Electricity Authority",
+    "hi": "नवीन और नवीकरणीय ऊर्जा मंत्रालय; अंतरराष्ट्रीय सौर गठबंधन; केंद्रीय विद्युत प्राधिकरण"
+  },
+  "factsToCheck": [
+    "International Solar Alliance launched 2015; headquarters Gurugram",
+    "National Green Hydrogen Mission approved January 2023"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

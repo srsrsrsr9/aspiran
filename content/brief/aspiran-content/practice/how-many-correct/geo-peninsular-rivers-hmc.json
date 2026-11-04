@@ -1,0 +1,170 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "geo-peninsular-rivers-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Peninsular rivers of India: how many correct?",
+    "hi": "भारत की प्रायद्वीपीय नदियाँ: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about peninsular rivers:",
+        "statements": [
+          "The Narmada flows west through a rift valley.",
+          "The Tapi flows into the Bay of Bengal.",
+          "The Godavari is the largest peninsular river system.",
+          "The Mahanadi rises in Chhattisgarh."
+        ],
+        "why": "Statement 2 is wrong: the Tapi, like the Narmada, flows west into the Arabian Sea. The other three are correct."
+      },
+      "hi": {
+        "stem": "प्रायद्वीपीय नदियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नर्मदा एक भ्रंश घाटी से होकर पश्चिम की ओर बहती है।",
+          "तापी बंगाल की खाड़ी में गिरती है।",
+          "गोदावरी सबसे बड़ा प्रायद्वीपीय नदी तंत्र है।",
+          "महानदी छत्तीसगढ़ से निकलती है।"
+        ],
+        "why": "कथन 2 गलत है: तापी भी नर्मदा की तरह पश्चिम की ओर बहकर अरब सागर में गिरती है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the sources of rivers:",
+        "statements": [
+          "The Kaveri rises in the Brahmagiri hills of Karnataka.",
+          "The Krishna rises near Mahabaleshwar in Maharashtra.",
+          "The Tungabhadra is a tributary of the Godavari."
+        ],
+        "why": "Statement 3 is wrong: the Tungabhadra joins the Krishna. So two are correct."
+      },
+      "hi": {
+        "stem": "नदियों के उद्गम के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "कावेरी कर्नाटक की ब्रह्मगिरि पहाड़ियों से निकलती है।",
+          "कृष्णा महाराष्ट्र में महाबलेश्वर के पास से निकलती है।",
+          "तुंगभद्रा गोदावरी की सहायक नदी है।"
+        ],
+        "why": "कथन 3 गलत है: तुंगभद्रा कृष्णा में मिलती है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about west-flowing rivers:",
+        "statements": [
+          "The Narmada and the Tapi form estuaries rather than deltas.",
+          "The Sabarmati drains into the Gulf of Khambhat.",
+          "The Luni rises in the Western Ghats.",
+          "The Periyar flows into the Bay of Bengal."
+        ],
+        "why": "Statement 3 is wrong: the Luni rises in the Aravalli range near Ajmer. Statement 4 is wrong: the Periyar flows into the Arabian Sea. So two are correct."
+      },
+      "hi": {
+        "stem": "पश्चिम की ओर बहने वाली नदियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "नर्मदा और तापी डेल्टा के बजाय ज्वारनदमुख (एस्चुअरी) बनाती हैं।",
+          "साबरमती खंभात की खाड़ी में गिरती है।",
+          "लूनी पश्चिमी घाट से निकलती है।",
+          "पेरियार बंगाल की खाड़ी में गिरती है।"
+        ],
+        "why": "कथन 3 गलत है: लूनी अजमेर के पास अरावली से निकलती है। कथन 4 गलत है: पेरियार अरब सागर में गिरती है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about tributaries:",
+        "statements": [
+          "The Chambal is a tributary of the Godavari.",
+          "The Indravati is a tributary of the Mahanadi.",
+          "The Bhima is a tributary of the Kaveri."
+        ],
+        "why": "The Chambal joins the Yamuna, the Indravati joins the Godavari, and the Bhima joins the Krishna. None is correct."
+      },
+      "hi": {
+        "stem": "सहायक नदियों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "चंबल गोदावरी की सहायक नदी है।",
+          "इंद्रावती महानदी की सहायक नदी है।",
+          "भीमा कावेरी की सहायक नदी है।"
+        ],
+        "why": "चंबल यमुना में मिलती है, इंद्रावती गोदावरी में, और भीमा कृष्णा में। कोई भी कथन सही नहीं है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI India: Physical Environment; Central Water Commission",
+    "hi": "NCERT कक्षा XI भारत: भौतिक पर्यावरण; केंद्रीय जल आयोग"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "eco-interest-rates-and-inflation-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Interest rates, money and inflation: assertion and reason",
+    "hi": "ब्याज दरें, मुद्रा और मुद्रास्फीति: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "A rise in the repo rate tends to make bank loans costlier.",
+        "reason": "Banks borrow from the RBI at the repo rate, so their cost of funds goes up.",
+        "why": "Both are true. A higher repo rate raises banks' borrowing costs, which they pass on, so R explains A."
+      },
+      "hi": {
+        "assertion": "रेपो दर बढ़ने से बैंक ऋण प्रायः महँगे हो जाते हैं।",
+        "reason": "बैंक RBI से रेपो दर पर उधार लेते हैं, इसलिए उनकी धन की लागत बढ़ जाती है।",
+        "why": "दोनों सही हैं। ऊँची रेपो दर बैंकों की उधार लागत बढ़ाती है, जिसे वे आगे बढ़ाते हैं, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Open market sales of government securities by the RBI reduce liquidity in the banking system.",
+        "reason": "Banks pay the RBI for the securities they buy, so money moves out of the banking system.",
+        "why": "Both are true, and R is how A happens."
+      },
+      "hi": {
+        "assertion": "RBI द्वारा खुले बाज़ार में सरकारी प्रतिभूतियाँ बेचने से बैंकिंग तंत्र में तरलता घटती है।",
+        "reason": "बैंक खरीदी गई प्रतिभूतियों का भुगतान RBI को करते हैं, इसलिए धन बैंकिंग तंत्र से बाहर चला जाता है।",
+        "why": "दोनों सही हैं, और R ही बताता है कि A कैसे होता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "Inflation reduces the real value of money held as cash.",
+        "reason": "Inflation increases the number of goods a fixed sum of money can buy.",
+        "why": "A is true. R is false: inflation reduces what a fixed sum can buy, which is exactly why cash loses real value."
+      },
+      "hi": {
+        "assertion": "मुद्रास्फीति नकद रखे गए धन का वास्तविक मूल्य घटाती है।",
+        "reason": "मुद्रास्फीति से एक तय राशि में खरीदी जा सकने वाली वस्तुओं की संख्या बढ़ जाती है।",
+        "why": "A सही है। R गलत है: मुद्रास्फीति से तय राशि में कम वस्तुएँ आती हैं, इसी कारण नकद का वास्तविक मूल्य घटता है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "The RBI has a Monetary Policy Committee.",
+        "reason": "The RBI also regulates payment systems in India.",
+        "why": "Both are true, but R has nothing to do with why the MPC exists. The MPC was created by the 2016 amendment to the RBI Act for setting the policy rate."
+      },
+      "hi": {
+        "assertion": "RBI की एक मौद्रिक नीति समिति है।",
+        "reason": "RBI भारत में भुगतान प्रणालियों का भी नियमन करता है।",
+        "why": "दोनों सही हैं, पर MPC के होने से R का कोई संबंध नहीं। नीतिगत दर तय करने के लिए MPC को 2016 में RBI अधिनियम में संशोधन से बनाया गया।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "Deflation is always good for an economy because prices fall.",
+        "reason": "Falling prices can lead people to delay spending, which can slow growth.",
+        "why": "A is false: lasting deflation can hurt output and raise the real burden of debt. R is true and shows one reason why."
+      },
+      "hi": {
+        "assertion": "अपस्फीति अर्थव्यवस्था के लिए हमेशा अच्छी होती है क्योंकि कीमतें गिरती हैं।",
+        "reason": "गिरती कीमतों से लोग खर्च टाल सकते हैं, जिससे वृद्धि धीमी हो सकती है।",
+        "why": "A गलत है: लंबी अपस्फीति उत्पादन को नुकसान पहुँचा सकती है और कर्ज़ का वास्तविक बोझ बढ़ा सकती है। R सही है और इसका एक कारण बताता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "RBI monetary policy reports; NCERT Class XII Introductory Macroeconomics",
+    "hi": "RBI मौद्रिक नीति रिपोर्ट; NCERT कक्षा XII समष्टि अर्थशास्त्र: एक परिचय"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

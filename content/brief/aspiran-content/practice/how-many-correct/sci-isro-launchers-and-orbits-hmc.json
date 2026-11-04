@@ -1,0 +1,175 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "sci-isro-launchers-and-orbits-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "ISRO launchers, missions and orbits: how many correct?",
+    "hi": "ISRO के प्रक्षेपण यान, मिशन और कक्षाएँ: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Indian launch vehicles:",
+        "statements": [
+          "PSLV has four stages that use solid and liquid fuel in turn.",
+          "GSLV Mk II uses an Indian-made cryogenic upper stage.",
+          "LVM3 was earlier called GSLV Mk III.",
+          "SSLV is built to carry satellites of about 10 tonnes."
+        ],
+        "why": "Statement 4 is wrong: the Small Satellite Launch Vehicle carries up to about 500 kg to low Earth orbit. The other three are correct."
+      },
+      "hi": {
+        "stem": "भारतीय प्रक्षेपण यानों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "PSLV के चार चरण बारी-बारी से ठोस और द्रव ईंधन का उपयोग करते हैं।",
+          "GSLV Mk II में भारत में बना क्रायोजेनिक ऊपरी चरण लगता है।",
+          "LVM3 को पहले GSLV Mk III कहा जाता था।",
+          "SSLV लगभग 10 टन के उपग्रह ले जाने के लिए बना है।"
+        ],
+        "why": "कथन 4 गलत है: लघु उपग्रह प्रक्षेपण यान (SSLV) निम्न भू-कक्षा तक लगभग 500 किलो तक ले जाता है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about recent Indian missions:",
+        "statements": [
+          "Chandrayaan-3 landed near the Moon's south pole in August 2023.",
+          "Chandrayaan-3 was launched on a PSLV.",
+          "Aditya-L1 studies the Sun from near the first Lagrange point, L1."
+        ],
+        "why": "Statement 2 is wrong: Chandrayaan-3 went up on an LVM3. So two are correct."
+      },
+      "hi": {
+        "stem": "हाल के भारतीय मिशनों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "चंद्रयान-3 अगस्त 2023 में चंद्रमा के दक्षिणी ध्रुव के पास उतरा।",
+          "चंद्रयान-3 को PSLV से प्रक्षेपित किया गया।",
+          "आदित्य-L1 पहले लैग्रेंज बिंदु, L1, के पास से सूर्य का अध्ययन करता है।"
+        ],
+        "why": "कथन 2 गलत है: चंद्रयान-3 को LVM3 से भेजा गया। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about space facilities and programmes:",
+        "statements": [
+          "The Satish Dhawan Space Centre is at Sriharikota.",
+          "The Thumba launching station is near Thiruvananthapuram.",
+          "NavIC gives navigation coverage over the whole globe.",
+          "Gaganyaan is India's human spaceflight programme."
+        ],
+        "why": "Statement 3 is wrong: NavIC is a regional system covering India and about 1,500 km around it. The other three are correct."
+      },
+      "hi": {
+        "stem": "अंतरिक्ष सुविधाओं और कार्यक्रमों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "सतीश धवन अंतरिक्ष केंद्र श्रीहरिकोटा में है।",
+          "थुंबा प्रक्षेपण केंद्र तिरुवनंतपुरम के पास है।",
+          "NavIC पूरी पृथ्वी पर नेविगेशन सेवा देता है।",
+          "गगनयान भारत का मानव अंतरिक्ष उड़ान कार्यक्रम है।"
+        ],
+        "why": "कथन 3 गलत है: NavIC एक क्षेत्रीय प्रणाली है जो भारत और उसके आसपास लगभग 1,500 किमी तक सेवा देती है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about satellite orbits:",
+        "statements": [
+          "A geostationary orbit is about 36,000 km above the equator.",
+          "A satellite in geostationary orbit goes round the Earth once a day.",
+          "Sun-synchronous orbits are used mainly by communication satellites."
+        ],
+        "why": "Statement 3 is wrong: sun-synchronous orbits suit Earth observation, because they pass over each place at the same local time; communication satellites mostly use geostationary orbit. So two are correct."
+      },
+      "hi": {
+        "stem": "उपग्रह कक्षाओं के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "भूस्थिर कक्षा भूमध्य रेखा से लगभग 36,000 किमी ऊपर है।",
+          "भूस्थिर कक्षा का उपग्रह दिन में एक बार पृथ्वी का चक्कर लगाता है।",
+          "सूर्य-तुल्यकालिक कक्षाएँ मुख्यतः संचार उपग्रहों के लिए होती हैं।"
+        ],
+        "why": "कथन 3 गलत है: सूर्य-तुल्यकालिक कक्षाएँ पृथ्वी अवलोकन के लिए ठीक हैं, क्योंकि ये हर जगह के ऊपर एक ही स्थानीय समय पर गुज़रती हैं; संचार उपग्रह ज़्यादातर भूस्थिर कक्षा में होते हैं। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "ISRO (isro.gov.in); Department of Space annual reports; PIB",
+    "hi": "ISRO (isro.gov.in); अंतरिक्ष विभाग की वार्षिक रिपोर्ट; PIB"
+  },
+  "factsToCheck": [
+    "PSLV stages: solid, liquid, solid, liquid",
+    "SSLV payload about 500 kg to low Earth orbit",
+    "Chandrayaan-3 landed on 23 August 2023, launched on LVM3",
+    "Geostationary altitude about 35,786 km"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

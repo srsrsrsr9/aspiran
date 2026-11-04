@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "pol-writs-and-remedies-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Writs and remedies: find the odd one",
+    "hi": "रिट और उपचार: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Habeas corpus",
+          "Mandamus",
+          "Certiorari",
+          "Ordinance"
+        ],
+        "why": "Habeas corpus, mandamus and certiorari are writs. An ordinance is a law made by the executive."
+      },
+      "hi": {
+        "items": [
+          "बंदी प्रत्यक्षीकरण",
+          "परमादेश",
+          "उत्प्रेषण",
+          "अध्यादेश"
+        ],
+        "why": "बंदी प्रत्यक्षीकरण, परमादेश और उत्प्रेषण रिट हैं। अध्यादेश कार्यपालिका द्वारा बनाया गया कानून है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Certiorari",
+          "Quo warranto",
+          "Prohibition",
+          "Mandamus to a lower court"
+        ],
+        "why": "Certiorari, prohibition and mandamus here are aimed at courts or bodies acting judicially. Quo warranto tests a person's right to hold a public office."
+      },
+      "hi": {
+        "items": [
+          "उत्प्रेषण",
+          "अधिकार पृच्छा",
+          "प्रतिषेध",
+          "निचली अदालत को परमादेश"
+        ],
+        "why": "यहाँ उत्प्रेषण, प्रतिषेध और परमादेश अदालतों या न्यायिक रूप से काम करने वाले निकायों पर लक्षित हैं। अधिकार पृच्छा किसी व्यक्ति के सार्वजनिक पद पर बने रहने के अधिकार को परखती है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Mandamus against the President",
+          "Habeas corpus against a private person",
+          "Quo warranto for a public office",
+          "Certiorari against a tribunal"
+        ],
+        "why": "Three are possible. Mandamus cannot be issued against the President or a Governor."
+      },
+      "hi": {
+        "items": [
+          "राष्ट्रपति के विरुद्ध परमादेश",
+          "किसी निजी व्यक्ति के विरुद्ध बंदी प्रत्यक्षीकरण",
+          "सार्वजनिक पद के लिए अधिकार पृच्छा",
+          "अधिकरण के विरुद्ध उत्प्रेषण"
+        ],
+        "why": "तीन संभव हैं। राष्ट्रपति या राज्यपाल के विरुद्ध परमादेश जारी नहीं हो सकता।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Article 32",
+          "Article 226",
+          "Article 368",
+          "Article 139"
+        ],
+        "why": "Articles 32, 226 and 139 deal with the power to issue writs. Article 368 deals with amending the Constitution."
+      },
+      "hi": {
+        "items": [
+          "अनुच्छेद 32",
+          "अनुच्छेद 226",
+          "अनुच्छेद 368",
+          "अनुच्छेद 139"
+        ],
+        "why": "अनुच्छेद 32, 226 और 139 रिट जारी करने की शक्ति से जुड़े हैं। अनुच्छेद 368 संविधान संशोधन से जुड़ा है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Right to equality",
+          "Right against exploitation",
+          "Right to freedom of religion",
+          "Right to property"
+        ],
+        "why": "Three are Fundamental Rights today. The right to property became a constitutional right under Article 300A in 1978."
+      },
+      "hi": {
+        "items": [
+          "समता का अधिकार",
+          "शोषण के विरुद्ध अधिकार",
+          "धर्म की स्वतंत्रता का अधिकार",
+          "संपत्ति का अधिकार"
+        ],
+        "why": "तीन आज मौलिक अधिकार हैं। संपत्ति का अधिकार 1978 में अनुच्छेद 300क (300A) के तहत संवैधानिक अधिकार बना।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 32 and 226",
+    "hi": "भारत का संविधान, अनुच्छेद 32 और 226"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

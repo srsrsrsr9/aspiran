@@ -1,0 +1,32 @@
+{
+  "batch": "X5",
+  "checksRun": [
+    "python3 check.py X1,X2,X3,X4,X5 (valid JSON; key order, schema value, mood, sfx and optionText identical to practice-format-samples; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; en and hi have the same number of questions, statements, options, items, bank words and gaps; every answer index, lie, odd and better index in range; truth list length equals statement count; trap labels valid and 'none' only on the answer; Devanagari in every Hindi field, no Devanagari digits, no Latin article or Part letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique across X batches checked together and against every id in earlier zips in aspiran-batches and the samples)",
+    "40 files: better-answer 20 files / 80 items, fill-the-gap 20 files / 90 items",
+    "0 issues on the final run",
+    "Answer spread counted by code: better-answer: 0=40, 1=40",
+    "factsToCheck entries: 16 (dates and numbers to confirm; added as a top-level list before 'schema', the same way B29 and B30 nodes carry it)",
+    "fill-the-gap: 4 to 5 gaps per file, bank of at least gaps + 3, answers unique and in range, gaps [[1]]..[[n]] in the same order in en and hi, bank in the same order in both languages",
+    "better-answer: 4 pairs per file, one paper per file across GS1 to GS4, kind set to introduction, body or conclusion; 'better' split 40 to 40",
+    "Each weaker answer has a named fault in 'why' (generic, off-question, overclaims, one-sided, slogan) so there is one defensible better answer",
+    "TRAGIC rule: no disaster, violence or security topics; a women-in-the-movement answer that named the Dharasana raid was changed to avoid a violent event",
+    "Answers block: Hindi article letters 279क (279A), 243घ (243D), 243झ (243I), 243ट (243K), RBI Act धारा 45यख (45ZB); digits on screen"
+  ],
+  "issuesFound": [
+    "Hindi text of eco-monetary-policy-committee-gap had gaps 3 and 4 in the reverse order from English, so the same answer key would have been wrong in Hindi",
+    "First draft of mod-better-conclusions-freedom-struggle named Dharasana, a raid where satyagrahis were beaten",
+    "Hindi sources cited lettered articles and a lettered RBI Act section in Latin form"
+  ],
+  "fixed": [
+    "Rewrote the Hindi sentence so the gaps run in the same order",
+    "Replaced with Sarojini Naidu and Kasturba Gandhi",
+    "Wrote the Hindi letters with the Latin form in brackets on first mention"
+  ],
+  "stillOpen": [
+    "Inflation target (4% plus or minus 2%) was notified to March 2026: confirm the target for the period from April 2026 (eco-monetary-policy-committee-gap)",
+    "Governor's assent: Supreme Court rulings of 2025 not used in pol-office-of-the-governor-gap; add only after checking",
+    "In better-answer the stronger answer is usually the longer one, as in the sample; the editor may want some weak answers made longer so length is not a giveaway",
+    "Hindi terms for the Hindi editor: प्रसादपर्यंत, निर्णायक मत, मंदक, सर्वदाता / सर्वग्राही, अभिवृत्ति / अभिक्षमता, सत्यनिष्ठा"
+  ],
+  "finalRunIssues": []
+}

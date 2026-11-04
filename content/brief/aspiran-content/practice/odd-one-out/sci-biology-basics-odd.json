@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "sci-biology-basics-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Biology basics: find the odd one",
+    "hi": "जीव विज्ञान की बुनियादी बातें: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Mitochondria",
+          "Chloroplast",
+          "Cell wall of bacteria",
+          "Endoplasmic reticulum"
+        ],
+        "why": "Mitochondria, chloroplasts and endoplasmic reticulum are membrane-bound organelles. The bacterial cell wall is an outer layer, not an organelle."
+      },
+      "hi": {
+        "items": [
+          "माइटोकॉन्ड्रिया",
+          "हरितलवक (क्लोरोप्लास्ट)",
+          "जीवाणु की कोशिका भित्ति",
+          "अंतर्द्रव्यी जालिका"
+        ],
+        "why": "माइटोकॉन्ड्रिया, हरितलवक और अंतर्द्रव्यी जालिका झिल्ली से घिरे कोशिकांग हैं। जीवाणु की कोशिका भित्ति बाहरी परत है, कोशिकांग नहीं।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Whale",
+          "Shark",
+          "Tuna",
+          "Rohu"
+        ],
+        "why": "The shark, tuna and rohu are fish. The whale is a mammal."
+      },
+      "hi": {
+        "items": [
+          "व्हेल",
+          "शार्क",
+          "टूना",
+          "रोहू"
+        ],
+        "why": "शार्क, टूना और रोहू मछलियाँ हैं। व्हेल स्तनधारी है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Insulin",
+          "Thyroxine",
+          "Adrenaline",
+          "Pepsin"
+        ],
+        "why": "Insulin, thyroxine and adrenaline are hormones. Pepsin is a digestive enzyme."
+      },
+      "hi": {
+        "items": [
+          "इंसुलिन",
+          "थायरॉक्सिन",
+          "एड्रिनलिन",
+          "पेप्सिन"
+        ],
+        "why": "इंसुलिन, थायरॉक्सिन और एड्रिनलिन हार्मोन हैं। पेप्सिन पाचक एंज़ाइम है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Tuberculosis",
+          "Malaria",
+          "Cholera",
+          "Typhoid"
+        ],
+        "why": "Tuberculosis, cholera and typhoid are caused by bacteria. Malaria is caused by a protozoan parasite."
+      },
+      "hi": {
+        "items": [
+          "क्षयरोग",
+          "मलेरिया",
+          "हैज़ा",
+          "टाइफ़ाइड"
+        ],
+        "why": "क्षयरोग, हैज़ा और टाइफ़ाइड जीवाणुओं से होते हैं। मलेरिया प्रोटोज़ोआ परजीवी से होता है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Pea",
+          "Gram",
+          "Wheat",
+          "Lentil"
+        ],
+        "why": "Pea, gram and lentil are legumes, with nitrogen-fixing root nodules. Wheat is a cereal grass."
+      },
+      "hi": {
+        "items": [
+          "मटर",
+          "चना",
+          "गेहूँ",
+          "मसूर"
+        ],
+        "why": "मटर, चना और मसूर फलीदार पौधे हैं, जिनकी जड़ों में नाइट्रोजन स्थिर करने वाली गाँठें होती हैं। गेहूँ अनाज घास है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class IX and X Science; NCERT Class XI Biology",
+    "hi": "NCERT कक्षा IX और X विज्ञान; NCERT कक्षा XI जीव विज्ञान"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

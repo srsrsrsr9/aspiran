@@ -1,0 +1,147 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "sci-computing-and-ai-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Computing and artificial intelligence: two truths and a lie",
+    "hi": "कंप्यूटिंग और कृत्रिम बुद्धिमत्ता: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Machine learning lets computers improve at a task from data.",
+          "Large language models are trained on large amounts of text.",
+          "Machine learning systems never make mistakes once trained."
+        ],
+        "fix": "Trained models still make errors, and they can carry biases from their training data."
+      },
+      "hi": {
+        "statements": [
+          "मशीन लर्निंग कंप्यूटरों को डेटा से किसी काम में बेहतर होने देती है।",
+          "बड़े भाषा मॉडलों को बहुत सारे पाठ पर प्रशिक्षित किया जाता है।",
+          "मशीन लर्निंग प्रणालियाँ प्रशिक्षण के बाद कभी गलती नहीं करतीं।"
+        ],
+        "fix": "प्रशिक्षित मॉडल भी गलतियाँ करते हैं, और उनमें प्रशिक्षण डेटा के पूर्वाग्रह आ सकते हैं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "A qubit can only be 0 or 1, like a normal bit.",
+          "India has a National Quantum Mission.",
+          "Quantum computers use effects such as superposition."
+        ],
+        "fix": "A qubit can be in a superposition of 0 and 1 until it is measured."
+      },
+      "hi": {
+        "statements": [
+          "क्यूबिट सामान्य बिट की तरह केवल 0 या 1 हो सकता है।",
+          "भारत में राष्ट्रीय क्वांटम मिशन है।",
+          "क्वांटम कंप्यूटर अध्यारोपण जैसे प्रभावों का उपयोग करते हैं।"
+        ],
+        "fix": "मापे जाने तक क्यूबिट 0 और 1 के अध्यारोपण में रह सकता है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "A semiconductor chip contains many transistors.",
+          "Silicon is a poor choice for chips because it is a good insulator.",
+          "India has a mission to build a semiconductor manufacturing ecosystem."
+        ],
+        "fix": "Silicon is a semiconductor, and its conductivity can be controlled by doping, which is why chips use it."
+      },
+      "hi": {
+        "statements": [
+          "एक अर्धचालक चिप में बहुत सारे ट्रांज़िस्टर होते हैं।",
+          "सिलिकॉन चिप के लिए खराब विकल्प है क्योंकि यह अच्छा कुचालक है।",
+          "भारत में अर्धचालक विनिर्माण तंत्र बनाने का एक मिशन है।"
+        ],
+        "fix": "सिलिकॉन अर्धचालक है, और डोपिंग से इसकी चालकता नियंत्रित की जा सकती है, इसीलिए चिप में इसका उपयोग होता है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Blockchain records data in linked blocks that are hard to alter.",
+          "Cryptocurrencies use blockchain technology.",
+          "Blockchain can be used only for cryptocurrencies."
+        ],
+        "fix": "Blockchain is also tried for land records, supply chains and certificates."
+      },
+      "hi": {
+        "statements": [
+          "ब्लॉकचेन डेटा को जुड़े हुए ब्लॉकों में दर्ज करता है जिन्हें बदलना कठिन है।",
+          "क्रिप्टोकरेंसी ब्लॉकचेन तकनीक का उपयोग करती हैं।",
+          "ब्लॉकचेन का उपयोग केवल क्रिप्टोकरेंसी के लिए हो सकता है।"
+        ],
+        "fix": "ब्लॉकचेन को भूमि अभिलेखों, आपूर्ति शृंखलाओं और प्रमाणपत्रों के लिए भी आज़माया जाता है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "A deepfake is a genuine, unedited video.",
+          "Deepfakes use AI to make fake but realistic images, audio or video.",
+          "Deepfakes can be used to spread misinformation."
+        ],
+        "fix": "A deepfake is synthetic or altered media made with AI to look real."
+      },
+      "hi": {
+        "statements": [
+          "डीपफ़ेक एक असली, बिना संपादन का वीडियो होता है।",
+          "डीपफ़ेक AI से नकली पर असली जैसे दिखने वाले चित्र, ऑडियो या वीडियो बनाते हैं।",
+          "डीपफ़ेक का उपयोग गलत सूचना फैलाने में हो सकता है।"
+        ],
+        "fix": "डीपफ़ेक AI से बना कृत्रिम या बदला हुआ मीडिया है जो असली दिखता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Ministry of Electronics and Information Technology; Department of Science and Technology (National Quantum Mission); NCERT",
+    "hi": "इलेक्ट्रॉनिकी और सूचना प्रौद्योगिकी मंत्रालय; विज्ञान और प्रौद्योगिकी विभाग (राष्ट्रीय क्वांटम मिशन); NCERT"
+  },
+  "factsToCheck": [
+    "IndiaAI Mission approved March 2024",
+    "National Quantum Mission approved April 2023"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

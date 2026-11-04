@@ -1,0 +1,31 @@
+{
+  "batch": "X4",
+  "checksRun": [
+    "python3 check.py X1,X2,X3,X4 (valid JSON; key order, schema value, mood, sfx and optionText identical to practice-format-samples; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; en and hi have the same number of questions, statements, options, items, bank words and gaps; every answer index, lie, odd and better index in range; truth list length equals statement count; trap labels valid and 'none' only on the answer; Devanagari in every Hindi field, no Devanagari digits, no Latin article or Part letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique across X batches checked together and against every id in earlier zips in aspiran-batches and the samples)",
+    "40 files: landmark-case 20 files / 20 items, pair-up 20 files / 201 items",
+    "0 issues on the final run",
+    "Answer spread counted by code: ",
+    "factsToCheck entries: 40 (dates and numbers to confirm; added as a top-level list before 'schema', the same way B29 and B30 nodes carry it)",
+    "pair-up: 9 to 12 pairs per file, every left and every right unique within a file, so each item has exactly one match",
+    "landmark-case: only well-established Supreme Court cases with a clear holding; bench size and majority listed in factsToCheck",
+    "TRAGIC rule: cases whose facts centre on a disaster, violence or death (for example the oleum gas leak, Vishaka, Common Cause) were left out",
+    "Answers block: Hindi article and section letters written 21क (21A), 16(4क) [16(4A)], 19(1)(क) [19(1)(a)], धारा 66क (66A)"
+  ],
+  "issuesFound": [
+    "Hindi held 66A (an IT Act section) in Latin letters",
+    "Hindi Golaknath used the English word 'overruling' alone; Kihoto Hollohan's Hindi called paragraph 7 an article",
+    "Two pair-up rights were vague (Eighth Schedule, Fifth Schedule) and Kalbaisakhi left out Assam"
+  ],
+  "fixed": [
+    "Wrote धारा 66क (66A) on first mention",
+    "Gave the Hindi term with the English in brackets; corrected to पैराग्राफ़ 7",
+    "Reworded the three pairs"
+  ],
+  "stillOpen": [
+    "Recent cases to confirm against the judgment text: electoral bonds (15 February 2024), SC sub-classification (1 August 2024), mineral royalty (25 July 2024) and its later order on past dues",
+    "Godavarman: the 2023 amendment to the Forest (Conservation) Act and the 2024 interim orders may have changed the position; the file states only the 1996 holding",
+    "Navtej Johar: Section 377 IPC was replaced by the Bharatiya Nyaya Sanhita from 1 July 2024",
+    "Pair-up committee and newspaper dates are in factsToCheck"
+  ],
+  "finalRunIssues": []
+}

@@ -1,0 +1,21 @@
+{
+  "batch": "B24b",
+  "checksRun": [
+    "python3 checks/build_b24b.py <mock> <hi parts> <B09 terms> <out> <hiCheck>: mock 2 and mock 3 each 100 questions, 100 with hi, 0 issues",
+    "English, answers, option order and every file-level field compared with the uploaded files: unchanged",
+    "hi keys match the English keys per question (q, options, why, plus statements and ask where the English has them); option and statement counts match",
+    "Every number in each option and statement is the same in Hindi as in English (Latin article brackets set aside); digits on screen, no number words",
+    "B09 term lists: mock 2 140 of 143 uses, mock 3 137 of 140 use the B09 Hindi; the 6 misses are false matches (Governor in RBI Governor and colonial Governor, President in Congress president, soil in 'on its soil', status in constitutional status, rotation in 'by rotation')",
+    "Every hiCheck term was found in the Hindi text of the questions it lists"
+  ],
+  "issuesFound": [
+    "Options with ₹ failed the Devanagari check; the check now allows ₹.",
+    "Six B09 term misses in the first run (अंतर्राज्यीय परिषद, नकद आरक्षित अनुपात, ग्रैफीन, देशी रियासतें, मरु राष्ट्रीय उद्यान, जैव सुदृढ़ीकरण)."
+  ],
+  "fixed": [
+    "The six terms were changed to the B09 forms."
+  ],
+  "stillOpen": [
+    "One warning only: mock 3 q11 why has an extra digit 1 from 75(1क); it is the clause number, not an error."
+  ]
+}

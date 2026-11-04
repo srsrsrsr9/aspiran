@@ -1,0 +1,197 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-direct",
+      "pre-negative"
+    ]
+  },
+  "id": "eco-balance-of-payments-and-fdi-trap",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Balance of payments, FDI and FPI: spot the trap",
+    "hi": "भुगतान संतुलन, FDI और FPI: जाल पहचानिए"
+  },
+  "questions": [
+    {
+      "answerIndex": 2,
+      "traps": [
+        "sounds-familiar",
+        "extreme-word",
+        "none",
+        "half-true"
+      ],
+      "en": {
+        "question": "Remittances sent home by Indians working abroad are recorded in the balance of payments under:",
+        "options": [
+          "the capital account, as foreign investment",
+          "foreign exchange reserves directly",
+          "the current account, as private transfers",
+          "the capital account, as external commercial borrowing"
+        ],
+        "why": "Large inflows sound like investment, so the capital account feels right, but remittances are private transfers in the current account."
+      },
+      "hi": {
+        "question": "विदेश में काम करने वाले भारतीयों द्वारा भेजी गई राशि (प्रेषण) भुगतान संतुलन में कहाँ दर्ज होती है?",
+        "options": [
+          "पूँजी खाते में, विदेशी निवेश के रूप में",
+          "सीधे विदेशी मुद्रा भंडार में",
+          "चालू खाते में, निजी अंतरण के रूप में",
+          "पूँजी खाते में, बाह्य वाणिज्यिक उधार के रूप में"
+        ],
+        "why": "बड़ा अंतर्वाह निवेश जैसा लगता है, इसलिए पूँजी खाता सही लगता है, पर प्रेषण चालू खाते के निजी अंतरण हैं।"
+      }
+    },
+    {
+      "answerIndex": 0,
+      "traps": [
+        "none",
+        "half-true",
+        "sounds-familiar",
+        "extreme-word"
+      ],
+      "en": {
+        "question": "In India, a foreign investment is generally treated as FDI rather than FPI when the investor holds:",
+        "options": [
+          "10 percent or more of the company's equity",
+          "more than 50 percent, giving control",
+          "any shares bought through the stock market",
+          "exactly 26 percent"
+        ],
+        "why": "Control at 50 percent is half true for a \"subsidiary\" but not the test for FDI. The line is 10 percent of equity."
+      },
+      "hi": {
+        "question": "भारत में किसी विदेशी निवेश को सामान्यतः FPI के बजाय FDI तब माना जाता है जब निवेशक के पास हो:",
+        "options": [
+          "कंपनी की इक्विटी का 10 प्रतिशत या अधिक",
+          "50 प्रतिशत से अधिक, जिससे नियंत्रण मिले",
+          "शेयर बाज़ार से खरीदे गए कोई भी शेयर",
+          "ठीक 26 प्रतिशत"
+        ],
+        "why": "50 प्रतिशत पर नियंत्रण \"सहायक कंपनी\" के लिए आधा सच है, पर FDI की कसौटी नहीं। सीमा इक्विटी का 10 प्रतिशत है।"
+      }
+    },
+    {
+      "answerIndex": 3,
+      "traps": [
+        "extreme-word",
+        "sounds-familiar",
+        "half-true",
+        "none"
+      ],
+      "en": {
+        "question": "Which statement about rupee convertibility is correct?",
+        "options": [
+          "The rupee is fully convertible on both current and capital account.",
+          "The rupee became fully convertible in 1991.",
+          "The rupee is not convertible for any purpose.",
+          "The rupee is convertible on the current account and partly on the capital account."
+        ],
+        "why": "1991 sounds familiar as the reform year, but current account convertibility came in 1994, and capital account convertibility is still partial."
+      },
+      "hi": {
+        "question": "रुपये की परिवर्तनीयता के बारे में कौन-सा कथन सही है?",
+        "options": [
+          "रुपया चालू और पूँजी दोनों खातों पर पूरी तरह परिवर्तनीय है।",
+          "रुपया 1991 में पूरी तरह परिवर्तनीय हो गया।",
+          "रुपया किसी भी प्रयोजन के लिए परिवर्तनीय नहीं है।",
+          "रुपया चालू खाते पर परिवर्तनीय है और पूँजी खाते पर आंशिक रूप से।"
+        ],
+        "why": "1991 सुधारों का वर्ष होने से जाना-पहचाना लगता है, पर चालू खाते की परिवर्तनीयता 1994 में आई, और पूँजी खाते की परिवर्तनीयता अब भी आंशिक है।"
+      }
+    },
+    {
+      "answerIndex": 1,
+      "traps": [
+        "half-true",
+        "none",
+        "extreme-word",
+        "sounds-familiar"
+      ],
+      "en": {
+        "question": "A current account deficit means that:",
+        "options": [
+          "India imports more goods than it exports, and nothing else counts.",
+          "India's payments for goods, services, income and transfers exceed its receipts on these.",
+          "the government's spending exceeds its revenue.",
+          "the country can never repay its debts."
+        ],
+        "why": "Option A is half true: the trade deficit is part of it, but services, income and transfers count too. Government spending is the fiscal deficit, a different idea."
+      },
+      "hi": {
+        "question": "चालू खाता घाटे का अर्थ है:",
+        "options": [
+          "भारत निर्यात से अधिक वस्तुएँ आयात करता है, और कुछ नहीं गिना जाता।",
+          "वस्तुओं, सेवाओं, आय और अंतरणों पर भारत के भुगतान इनसे मिलने वाली प्राप्तियों से अधिक हैं।",
+          "सरकार का व्यय उसके राजस्व से अधिक है।",
+          "देश अपना कर्ज़ कभी नहीं चुका सकता।"
+        ],
+        "why": "पहला विकल्प आधा सच है: व्यापार घाटा इसका हिस्सा है, पर सेवाएँ, आय और अंतरण भी गिने जाते हैं। सरकारी व्यय राजकोषीय घाटा है, अलग विचार।"
+      }
+    },
+    {
+      "answerIndex": 2,
+      "traps": [
+        "sounds-familiar",
+        "sounds-familiar",
+        "none",
+        "extreme-word"
+      ],
+      "en": {
+        "question": "Why did India's 1991 crisis lead to pledging of gold?",
+        "options": [
+          "Because the RBI wanted to switch the reserves into dollars for profit.",
+          "Because gold prices had fallen and the government wanted to sell before they fell further.",
+          "Because foreign exchange reserves had fallen to about two weeks of imports, and gold was used to raise emergency loans.",
+          "Because the IMF asks every member to pledge gold each year."
+        ],
+        "why": "Option B sounds like market logic, but the gold was pledged as security, not sold to beat a price fall. Reserves had nearly run out, so gold was pledged to borrow abroad."
+      },
+      "hi": {
+        "question": "1991 के संकट में भारत को सोना गिरवी क्यों रखना पड़ा?",
+        "options": [
+          "क्योंकि RBI मुनाफ़े के लिए भंडार को डॉलर में बदलना चाहता था।",
+          "क्योंकि सोने के दाम गिरे थे और सरकार और गिरने से पहले बेचना चाहती थी।",
+          "क्योंकि विदेशी मुद्रा भंडार लगभग दो सप्ताह के आयात जितना रह गया था, और आपात ऋण के लिए सोने का सहारा लिया गया।",
+          "क्योंकि IMF हर सदस्य से हर साल सोना गिरवी रखवाता है।"
+        ],
+        "why": "दूसरा विकल्प बाज़ार का तर्क लगता है, पर सोना दाम गिरने से पहले बेचा नहीं, ज़मानत के रूप में गिरवी रखा गया। भंडार लगभग खत्म हो गया था, इसलिए विदेश से उधार के लिए सोना गिरवी रखा गया।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "RBI balance of payments data; Department of Economic Affairs; FEMA 1999; Economic Survey",
+    "hi": "RBI भुगतान संतुलन आँकड़े; आर्थिक कार्य विभाग; FEMA 1999; आर्थिक सर्वेक्षण"
+  },
+  "factsToCheck": [
+    "FDI/FPI threshold of 10 percent of equity",
+    "Current account convertibility since 1994 (IMF Article VIII)"
+  ],
+  "schema": "upsc-pods/trap-spotter@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

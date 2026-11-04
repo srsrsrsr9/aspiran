@@ -1,0 +1,144 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "geo-world-physical-features-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "World physical features: two truths and a lie",
+    "hi": "विश्व की भौतिक विशेषताएँ: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Sahara is the world's largest desert of any kind.",
+          "The Atacama is one of the driest places on Earth.",
+          "The Gobi is a cold desert."
+        ],
+        "fix": "The Sahara is the largest hot desert; counting cold deserts, Antarctica is the largest."
+      },
+      "hi": {
+        "statements": [
+          "सहारा हर प्रकार के रेगिस्तानों में विश्व का सबसे बड़ा रेगिस्तान है।",
+          "अटाकामा पृथ्वी के सबसे शुष्क स्थानों में है।",
+          "गोबी एक ठंडा रेगिस्तान है।"
+        ],
+        "fix": "सहारा सबसे बड़ा गर्म रेगिस्तान है; ठंडे रेगिस्तानों को गिनें तो अंटार्कटिका सबसे बड़ा है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Strait of Malacca links the Indian Ocean with the South China Sea.",
+          "The Strait of Hormuz links the Persian Gulf with the Gulf of Oman.",
+          "The Strait of Gibraltar links the Red Sea with the Mediterranean."
+        ],
+        "fix": "Gibraltar links the Atlantic Ocean with the Mediterranean; the Suez Canal links the Red Sea with the Mediterranean."
+      },
+      "hi": {
+        "statements": [
+          "मलक्का जलडमरूमध्य हिंद महासागर को दक्षिण चीन सागर से जोड़ता है।",
+          "होर्मुज़ जलडमरूमध्य फ़ारस की खाड़ी को ओमान की खाड़ी से जोड़ता है।",
+          "जिब्राल्टर जलडमरूमध्य लाल सागर को भूमध्य सागर से जोड़ता है।"
+        ],
+        "fix": "जिब्राल्टर अटलांटिक महासागर को भूमध्य सागर से जोड़ता है; स्वेज़ नहर लाल सागर को भूमध्य सागर से जोड़ती है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Andes run along the western side of South America.",
+          "The Alps are old block mountains.",
+          "The Rockies are fold mountains in North America."
+        ],
+        "fix": "The Alps are young fold mountains, formed in the same mountain-building period as the Himalayas."
+      },
+      "hi": {
+        "statements": [
+          "एंडीज़ दक्षिण अमेरिका के पश्चिमी भाग में फैली हैं।",
+          "आल्प्स पुराने ब्लॉक पर्वत हैं।",
+          "रॉकीज़ उत्तर अमेरिका के वलित पर्वत हैं।"
+        ],
+        "fix": "आल्प्स नवीन वलित पर्वत हैं, जो हिमालय वाले पर्वत-निर्माण काल में बने।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Amazon carries less water than any other major river.",
+          "The Nile flows north into the Mediterranean.",
+          "The Congo crosses the equator twice."
+        ],
+        "fix": "The Amazon carries the largest volume of water of any river."
+      },
+      "hi": {
+        "statements": [
+          "अमेज़न किसी भी बड़ी नदी से कम पानी ले जाती है।",
+          "नील उत्तर की ओर बहकर भूमध्य सागर में गिरती है।",
+          "कांगो नदी भूमध्य रेखा को दो बार पार करती है।"
+        ],
+        "fix": "अमेज़न किसी भी नदी से अधिक मात्रा में पानी ले जाती है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Great Barrier Reef lies off the coast of Australia.",
+          "The Mariana Trench is in the Pacific Ocean.",
+          "Lake Baikal is the largest lake in Africa."
+        ],
+        "fix": "Lake Baikal is in Siberia, Russia, and is the deepest lake in the world; Africa's largest lake is Lake Victoria."
+      },
+      "hi": {
+        "statements": [
+          "ग्रेट बैरियर रीफ़ ऑस्ट्रेलिया के तट से दूर है।",
+          "मारियाना गर्त प्रशांत महासागर में है।",
+          "बैकाल झील अफ़्रीका की सबसे बड़ी झील है।"
+        ],
+        "fix": "बैकाल झील रूस के साइबेरिया में है और विश्व की सबसे गहरी झील है; अफ़्रीका की सबसे बड़ी झील विक्टोरिया झील है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography; NCERT Class VII Our Environment",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत; NCERT कक्षा VII हमारा पर्यावरण"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

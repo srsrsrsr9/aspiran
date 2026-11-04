@@ -1,0 +1,30 @@
+{
+  "batch": "X3",
+  "checksRun": [
+    "python3 check.py X1,X2,X3 (valid JSON; key order, schema value, mood, sfx and optionText identical to practice-format-samples; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; en and hi have the same number of questions, statements, options, items, bank words and gaps; every answer index, lie, odd and better index in range; truth list length equals statement count; trap labels valid and 'none' only on the answer; Devanagari in every Hindi field, no Devanagari digits, no Latin article or Part letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique across X batches checked together and against every id in earlier zips in aspiran-batches and the samples)",
+    "40 files: odd-one-out 20 files / 100 items, timeline-shuffle 20 files / 120 items",
+    "0 issues on the final run",
+    "Answer spread counted by code: odd-one-out: 0=21, 1=24, 2=29, 3=26",
+    "factsToCheck entries: 24 (dates and numbers to confirm; added as a top-level list before 'schema', the same way B29 and B30 nodes carry it)",
+    "odd-one-out: four items per round, one odd, and the explanation names the single rule the other three share",
+    "timeline-shuffle: six events per file, years distinct and in order, at least a year apart, so there is only one right order",
+    "Approximate dates (building completions, ancient eras) are listed in factsToCheck",
+    "TRAGIC rule: no wars, famines, massacres or disasters as timeline events"
+  ],
+  "issuesFound": [
+    "Odd-one-out had stray drafting text and some rounds with two defensible odd items (Sambhar lake round, Asiatic lion round, the sociology round, BRICS called 'founding')",
+    "Mughal timeline put Humayun's Tomb (completion given as 1570 to 1572 in sources) one year before Fatehpur Sikri (1571), so the order could be argued",
+    "A draft Delhi Sultanate buildings timeline relied on dates that vary by source"
+  ],
+  "fixed": [
+    "Rewrote the ambiguous odd-one-out rounds and removed the stray text",
+    "Replaced Humayun's Tomb with Akbar's rebuilding of the Agra Fort (begun 1565)",
+    "Dropped the Sultanate buildings file; 20 timeline files remain, one topic each"
+  ],
+  "stillOpen": [
+    "factsToCheck sits as a top-level list before 'schema', as in X1 and X2",
+    "Facts that may have changed in 2025-26: DPDP Rules notified in 2025 (pol-rights-based-laws-tl); Forest (Conservation) Act renamed by the 2023 amendment (env-environment-laws-tl)",
+    "Mughal building dates vary by source by a year or two; the gaps used are wide enough except Taj Mahal complex 1653 vs Jama Masjid 1656, which the editor may want to confirm"
+  ],
+  "finalRunIssues": []
+}

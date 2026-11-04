@@ -1,0 +1,147 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "eco-poverty-and-employment-measures-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Measuring poverty and jobs: two truths and a lie",
+    "hi": "गरीबी और रोज़गार का मापन: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Multidimensional Poverty Index looks at health, education and living standards.",
+          "The Multidimensional Poverty Index measures only income.",
+          "NITI Aayog publishes India's National Multidimensional Poverty Index."
+        ],
+        "fix": "The MPI measures deprivations such as nutrition, schooling, cooking fuel and housing, not income."
+      },
+      "hi": {
+        "statements": [
+          "बहुआयामी गरीबी सूचकांक स्वास्थ्य, शिक्षा और जीवन स्तर को देखता है।",
+          "बहुआयामी गरीबी सूचकांक केवल आय मापता है।",
+          "भारत का राष्ट्रीय बहुआयामी गरीबी सूचकांक नीति आयोग प्रकाशित करता है।"
+        ],
+        "fix": "MPI पोषण, स्कूली शिक्षा, खाना पकाने का ईंधन और आवास जैसी वंचनाएँ मापता है, आय नहीं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Periodic Labour Force Survey is run by the RBI.",
+          "The Periodic Labour Force Survey measures unemployment.",
+          "The labour force includes people who are working and people seeking work."
+        ],
+        "fix": "The PLFS is run by the National Statistics Office under MoSPI."
+      },
+      "hi": {
+        "statements": [
+          "आवधिक श्रम बल सर्वेक्षण RBI चलाता है।",
+          "आवधिक श्रम बल सर्वेक्षण बेरोज़गारी मापता है।",
+          "श्रम बल में काम करने वाले और काम ढूँढने वाले दोनों शामिल हैं।"
+        ],
+        "fix": "PLFS को MoSPI के अधीन राष्ट्रीय सांख्यिकी कार्यालय चलाता है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Disguised unemployment means more people work on a task than it needs.",
+          "Disguised unemployment is common in agriculture.",
+          "Disguised unemployment is easy to see in official job counts."
+        ],
+        "fix": "Disguised unemployment is hidden, because the extra workers look employed."
+      },
+      "hi": {
+        "statements": [
+          "प्रच्छन्न बेरोज़गारी का अर्थ है किसी काम में ज़रूरत से अधिक लोग लगे हों।",
+          "प्रच्छन्न बेरोज़गारी कृषि में आम है।",
+          "प्रच्छन्न बेरोज़गारी सरकारी रोज़गार आँकड़ों में आसानी से दिख जाती है।"
+        ],
+        "fix": "प्रच्छन्न बेरोज़गारी छिपी रहती है, क्योंकि अतिरिक्त कामगार रोज़गार में लगे दिखते हैं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Seasonal unemployment happens when work is available only in some months.",
+          "Frictional unemployment comes from a long-term fall in demand for a whole industry.",
+          "Structural unemployment can arise when workers' skills do not match available jobs."
+        ],
+        "fix": "Frictional unemployment is short-term, while people move between jobs; a long-term fall in an industry causes structural unemployment."
+      },
+      "hi": {
+        "statements": [
+          "मौसमी बेरोज़गारी तब होती है जब काम केवल कुछ महीनों में मिलता है।",
+          "घर्षणात्मक बेरोज़गारी किसी पूरे उद्योग की माँग में लंबी गिरावट से आती है।",
+          "संरचनात्मक बेरोज़गारी तब हो सकती है जब कामगारों के कौशल उपलब्ध नौकरियों से मेल न खाएँ।"
+        ],
+        "fix": "घर्षणात्मक बेरोज़गारी अल्पकालिक होती है, जब लोग नौकरियाँ बदल रहे होते हैं; किसी उद्योग की लंबी गिरावट संरचनात्मक बेरोज़गारी लाती है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Gini coefficient measures the level of prices.",
+          "A Gini coefficient of zero means perfect equality.",
+          "The Lorenz curve is used to show inequality."
+        ],
+        "fix": "The Gini coefficient measures inequality of income or consumption, not prices."
+      },
+      "hi": {
+        "statements": [
+          "गिनी गुणांक कीमतों का स्तर मापता है।",
+          "शून्य गिनी गुणांक का अर्थ पूर्ण समानता है।",
+          "असमानता दिखाने के लिए लॉरेंज़ वक्र का उपयोग होता है।"
+        ],
+        "fix": "गिनी गुणांक आय या उपभोग की असमानता मापता है, कीमतें नहीं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NITI Aayog National Multidimensional Poverty Index; MoSPI Periodic Labour Force Survey; UNDP and OPHI Global MPI",
+    "hi": "नीति आयोग राष्ट्रीय बहुआयामी गरीबी सूचकांक; MoSPI आवधिक श्रम बल सर्वेक्षण; UNDP और OPHI वैश्विक MPI"
+  },
+  "factsToCheck": [
+    "PLFS monthly estimates began in 2025; check current release schedule",
+    "National MPI uses 12 indicators"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "ir-un-principal-organs-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The principal organs of the UN: how many correct?",
+    "hi": "संयुक्त राष्ट्र के प्रमुख अंग: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the UN system:",
+        "statements": [
+          "The UN Charter sets up six principal organs.",
+          "The Trusteeship Council suspended its work in 1994.",
+          "The International Court of Justice sits in The Hague.",
+          "Judges of the International Court of Justice are elected by the Security Council alone."
+        ],
+        "why": "Statement 4 is wrong: ICJ judges need an absolute majority in both the General Assembly and the Security Council. The other three are correct."
+      },
+      "hi": {
+        "stem": "संयुक्त राष्ट्र व्यवस्था के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संयुक्त राष्ट्र चार्टर छह प्रमुख अंग बनाता है।",
+          "न्यास परिषद ने 1994 में अपना काम स्थगित कर दिया।",
+          "अंतरराष्ट्रीय न्यायालय हेग में स्थित है।",
+          "अंतरराष्ट्रीय न्यायालय के न्यायाधीश केवल सुरक्षा परिषद चुनती है।"
+        ],
+        "why": "कथन 4 गलत है: ICJ के न्यायाधीशों को महासभा और सुरक्षा परिषद दोनों में पूर्ण बहुमत चाहिए। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Security Council:",
+        "statements": [
+          "The Security Council has 15 members.",
+          "Its non-permanent members serve three-year terms.",
+          "Each permanent member can veto a substantive resolution.",
+          "India has served several terms as a non-permanent member."
+        ],
+        "why": "Statement 2 is wrong: non-permanent members serve two-year terms. The other three are correct."
+      },
+      "hi": {
+        "stem": "सुरक्षा परिषद के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "सुरक्षा परिषद में 15 सदस्य हैं।",
+          "इसके अस्थायी सदस्यों का कार्यकाल तीन वर्ष होता है।",
+          "हर स्थायी सदस्य किसी सारभूत प्रस्ताव पर वीटो कर सकता है।",
+          "भारत कई बार अस्थायी सदस्य रह चुका है।"
+        ],
+        "why": "कथन 2 गलत है: अस्थायी सदस्यों का कार्यकाल दो वर्ष होता है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about other UN organs:",
+        "statements": [
+          "The Secretary-General is appointed by the General Assembly on the recommendation of the Security Council.",
+          "The Economic and Social Council has 15 members.",
+          "Each member state has one vote in the General Assembly.",
+          "General Assembly resolutions are legally binding on all members."
+        ],
+        "why": "Statement 2 is wrong: ECOSOC has 54 members. Statement 4 is wrong: most General Assembly resolutions are recommendations. So two are correct."
+      },
+      "hi": {
+        "stem": "संयुक्त राष्ट्र के अन्य अंगों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "महासचिव की नियुक्ति सुरक्षा परिषद की सिफ़ारिश पर महासभा करती है।",
+          "आर्थिक और सामाजिक परिषद में 15 सदस्य हैं।",
+          "महासभा में हर सदस्य देश का एक मत होता है।",
+          "महासभा के प्रस्ताव सभी सदस्यों पर कानूनी रूप से बाध्यकारी होते हैं।"
+        ],
+        "why": "कथन 2 गलत है: ECOSOC में 54 सदस्य हैं। कथन 4 गलत है: महासभा के ज़्यादातर प्रस्ताव केवल सिफ़ारिशें होते हैं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about the founding of the UN:",
+        "statements": [
+          "The UN Charter was signed in San Francisco in 1945.",
+          "The UN has its headquarters in Geneva.",
+          "The UN took the place of the League of Nations.",
+          "The Charter came into force on 24 October 1945, now marked as United Nations Day."
+        ],
+        "why": "Statement 2 is wrong: UN headquarters is in New York; Geneva hosts one of its main offices. The other three are correct."
+      },
+      "hi": {
+        "stem": "संयुक्त राष्ट्र की स्थापना के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संयुक्त राष्ट्र चार्टर पर 1945 में सैन फ़्रांसिस्को में हस्ताक्षर हुए।",
+          "संयुक्त राष्ट्र का मुख्यालय जिनेवा में है।",
+          "संयुक्त राष्ट्र ने राष्ट्र संघ (लीग ऑफ़ नेशंस) की जगह ली।",
+          "चार्टर 24 अक्टूबर 1945 को लागू हुआ, जिसे अब संयुक्त राष्ट्र दिवस के रूप में मनाया जाता है।"
+        ],
+        "why": "कथन 2 गलत है: संयुक्त राष्ट्र का मुख्यालय न्यूयॉर्क में है; जिनेवा में उसका एक प्रमुख कार्यालय है। बाकी तीन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Charter of the United Nations; un.org; International Court of Justice (icj-cij.org)",
+    "hi": "संयुक्त राष्ट्र चार्टर; un.org; अंतरराष्ट्रीय न्यायालय (icj-cij.org)"
+  },
+  "factsToCheck": [
+    "Trusteeship Council suspended operations in 1994",
+    "ICJ: 15 judges, nine-year terms",
+    "ECOSOC: 54 members"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

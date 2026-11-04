@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "env-gases-and-pollutants-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Gases and pollutants: find the odd one",
+    "hi": "गैसें और प्रदूषक: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Carbon dioxide",
+          "Methane",
+          "Nitrous oxide",
+          "Nitrogen"
+        ],
+        "why": "Carbon dioxide, methane and nitrous oxide are greenhouse gases. Nitrogen, the main gas in air, does not trap heat."
+      },
+      "hi": {
+        "items": [
+          "कार्बन डाइऑक्साइड",
+          "मीथेन",
+          "नाइट्रस ऑक्साइड",
+          "नाइट्रोजन"
+        ],
+        "why": "कार्बन डाइऑक्साइड, मीथेन और नाइट्रस ऑक्साइड ग्रीनहाउस गैसें हैं। वायु की मुख्य गैस नाइट्रोजन गर्मी नहीं रोकती।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Ground-level ozone",
+          "Sulphur dioxide",
+          "Carbon monoxide",
+          "Nitric oxide"
+        ],
+        "why": "Sulphur dioxide, carbon monoxide and nitric oxide are mostly released directly. Ground-level ozone forms later, in sunlight, so it is a secondary pollutant."
+      },
+      "hi": {
+        "items": [
+          "ज़मीनी ओज़ोन",
+          "सल्फ़र डाइऑक्साइड",
+          "कार्बन मोनोऑक्साइड",
+          "नाइट्रिक ऑक्साइड"
+        ],
+        "why": "सल्फ़र डाइऑक्साइड, कार्बन मोनोऑक्साइड और नाइट्रिक ऑक्साइड प्रायः सीधे निकलते हैं। ज़मीनी ओज़ोन बाद में धूप में बनता है, इसलिए यह द्वितीयक प्रदूषक है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "CFCs",
+          "Halons",
+          "Methane",
+          "Carbon tetrachloride"
+        ],
+        "why": "CFCs, halons and carbon tetrachloride deplete the ozone layer and are controlled by the Montreal Protocol. Methane is covered by climate agreements, not Montreal."
+      },
+      "hi": {
+        "items": [
+          "CFC",
+          "हैलोन",
+          "मीथेन",
+          "कार्बन टेट्राक्लोराइड"
+        ],
+        "why": "CFC, हैलोन और कार्बन टेट्राक्लोराइड ओज़ोन परत घटाते हैं और मॉन्ट्रियल प्रोटोकॉल से नियंत्रित हैं। मीथेन जलवायु समझौतों में आता है, मॉन्ट्रियल में नहीं।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Lead",
+          "Oxygen",
+          "Mercury",
+          "Cadmium"
+        ],
+        "why": "Lead, mercury and cadmium are toxic heavy metals. Oxygen is a gas we need to breathe."
+      },
+      "hi": {
+        "items": [
+          "सीसा",
+          "ऑक्सीजन",
+          "पारा",
+          "कैडमियम"
+        ],
+        "why": "सीसा, पारा और कैडमियम विषैली भारी धातुएँ हैं। ऑक्सीजन वह गैस है जो हमें साँस लेने के लिए चाहिए।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Fly ash",
+          "Smoke",
+          "Dust",
+          "Noise"
+        ],
+        "why": "Fly ash, smoke and dust are particulate air pollutants. Noise is a form of energy, not particles."
+      },
+      "hi": {
+        "items": [
+          "फ़्लाई ऐश",
+          "धुआँ",
+          "धूल",
+          "शोर"
+        ],
+        "why": "फ़्लाई ऐश, धुआँ और धूल कणीय वायु प्रदूषक हैं। शोर ऊर्जा का एक रूप है, कण नहीं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Chemistry, Environmental Chemistry; IPCC; Central Pollution Control Board",
+    "hi": "NCERT कक्षा XI रसायन, पर्यावरणीय रसायन; IPCC; केंद्रीय प्रदूषण नियंत्रण बोर्ड"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

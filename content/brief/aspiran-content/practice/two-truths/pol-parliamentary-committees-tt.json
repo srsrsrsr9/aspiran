@@ -1,0 +1,147 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "pol-parliamentary-committees-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Parliamentary committees: two truths and a lie",
+    "hi": "संसदीय समितियाँ: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Public Accounts Committee examines the CAG's audit reports.",
+          "The Public Accounts Committee is chaired by the Finance Minister.",
+          "By convention, the PAC chair comes from the opposition."
+        ],
+        "fix": "Ministers cannot be members of the Public Accounts Committee; its chair is usually an opposition MP appointed by the Speaker."
+      },
+      "hi": {
+        "statements": [
+          "लोक लेखा समिति CAG की लेखा-परीक्षा रिपोर्टों की जाँच करती है।",
+          "लोक लेखा समिति की अध्यक्षता वित्त मंत्री करते हैं।",
+          "परंपरा के अनुसार PAC का अध्यक्ष विपक्ष से होता है।"
+        ],
+        "fix": "मंत्री लोक लेखा समिति के सदस्य नहीं हो सकते; इसका अध्यक्ष प्रायः विपक्ष का सांसद होता है, जिसे लोकसभा अध्यक्ष नियुक्त करते हैं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Estimates Committee has members from both Houses.",
+          "The Estimates Committee suggests economies in government spending.",
+          "The Committee on Public Undertakings examines the working of public sector enterprises."
+        ],
+        "fix": "All 30 members of the Estimates Committee come from the Lok Sabha."
+      },
+      "hi": {
+        "statements": [
+          "प्राक्कलन समिति में दोनों सदनों के सदस्य होते हैं।",
+          "प्राक्कलन समिति सरकारी व्यय में मितव्ययिता के सुझाव देती है।",
+          "सरकारी उपक्रमों संबंधी समिति सार्वजनिक क्षेत्र के उद्यमों के कामकाज की जाँच करती है।"
+        ],
+        "fix": "प्राक्कलन समिति के सभी 30 सदस्य लोकसभा से होते हैं।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Departmentally related standing committees examine the demands for grants of ministries.",
+          "These committees also examine bills referred to them.",
+          "A bill must be sent to a standing committee before it can be passed."
+        ],
+        "fix": "Sending a bill to a committee is not compulsory; the presiding officer or the House decides whether to refer it."
+      },
+      "hi": {
+        "statements": [
+          "विभाग-संबंधित स्थायी समितियाँ मंत्रालयों की अनुदान माँगों की जाँच करती हैं।",
+          "ये समितियाँ उन्हें भेजे गए विधेयकों की भी जाँच करती हैं।",
+          "कोई भी विधेयक पारित होने से पहले स्थायी समिति को भेजना अनिवार्य है।"
+        ],
+        "fix": "विधेयक को समिति के पास भेजना अनिवार्य नहीं है; पीठासीन अधिकारी या सदन तय करता है कि उसे भेजा जाए या नहीं।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "A Joint Parliamentary Committee is an ad hoc committee.",
+          "Ad hoc committees continue permanently once formed.",
+          "Select committees can be set up to examine a particular bill."
+        ],
+        "fix": "Ad hoc committees end once they finish their task and report; standing committees are the permanent ones."
+      },
+      "hi": {
+        "statements": [
+          "संयुक्त संसदीय समिति एक तदर्थ समिति है।",
+          "तदर्थ समितियाँ एक बार बनने के बाद स्थायी रूप से चलती रहती हैं।",
+          "किसी खास विधेयक की जाँच के लिए प्रवर समितियाँ बनाई जा सकती हैं।"
+        ],
+        "fix": "तदर्थ समितियाँ अपना काम पूरा कर रिपोर्ट देने के बाद समाप्त हो जाती हैं; स्थायी समितियाँ ही स्थायी होती हैं।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Committee meetings are always open to the public and the press.",
+          "Committee reports are presented to the House.",
+          "Committees let members study subjects in more depth than debate on the floor allows."
+        ],
+        "fix": "Committee meetings are held in private, which lets members work across party lines."
+      },
+      "hi": {
+        "statements": [
+          "समिति की बैठकें हमेशा जनता और प्रेस के लिए खुली होती हैं।",
+          "समिति की रिपोर्टें सदन में प्रस्तुत की जाती हैं।",
+          "समितियाँ सदस्यों को सदन की बहस से अधिक गहराई में विषयों का अध्ययन करने देती हैं।"
+        ],
+        "fix": "समिति की बैठकें बंद कमरे में होती हैं, जिससे सदस्य दलगत रेखाओं से ऊपर उठकर काम कर पाते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Rules of Procedure and Conduct of Business in Lok Sabha; Lok Sabha Secretariat",
+    "hi": "लोकसभा के प्रक्रिया तथा कार्य संचालन नियम; लोकसभा सचिवालय"
+  },
+  "factsToCheck": [
+    "PAC: 22 members (15 Lok Sabha, 7 Rajya Sabha); Estimates Committee: 30 members, all Lok Sabha",
+    "Departmentally related standing committees: 24"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

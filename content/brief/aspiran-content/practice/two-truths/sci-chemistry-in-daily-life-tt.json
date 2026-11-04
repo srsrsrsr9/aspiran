@@ -1,0 +1,144 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "sci-chemistry-in-daily-life-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Chemistry in daily life: two truths and a lie",
+    "hi": "रोज़मर्रा के जीवन में रसायन: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "Baking soda is sodium hydrogen carbonate.",
+          "Washing soda is sodium chloride.",
+          "Plaster of Paris is made by heating gypsum."
+        ],
+        "fix": "Washing soda is sodium carbonate; sodium chloride is common salt."
+      },
+      "hi": {
+        "statements": [
+          "खाने का सोडा सोडियम हाइड्रोजन कार्बोनेट है।",
+          "धोने का सोडा सोडियम क्लोराइड है।",
+          "प्लास्टर ऑफ़ पेरिस जिप्सम को गर्म करके बनता है।"
+        ],
+        "fix": "धोने का सोडा सोडियम कार्बोनेट है; सोडियम क्लोराइड साधारण नमक है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Pure water has a pH of 1.",
+          "Antacids neutralise excess stomach acid.",
+          "Lemon juice is acidic."
+        ],
+        "fix": "Pure water is neutral, with a pH of 7."
+      },
+      "hi": {
+        "statements": [
+          "शुद्ध पानी का pH 1 होता है।",
+          "एंटासिड पेट के अतिरिक्त अम्ल को उदासीन करते हैं।",
+          "नींबू का रस अम्लीय होता है।"
+        ],
+        "fix": "शुद्ध पानी उदासीन होता है, जिसका pH 7 है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "Iron rusts when exposed to moisture and oxygen.",
+          "Galvanising coats iron with zinc to stop rust.",
+          "Stainless steel rusts faster than ordinary iron."
+        ],
+        "fix": "Stainless steel resists rust because of the chromium in it."
+      },
+      "hi": {
+        "statements": [
+          "नमी और ऑक्सीजन के संपर्क में लोहे पर जंग लगती है।",
+          "जस्तीकरण में जंग रोकने के लिए लोहे पर जस्ते की परत चढ़ाई जाती है।",
+          "स्टेनलेस स्टील पर साधारण लोहे से जल्दी जंग लगती है।"
+        ],
+        "fix": "स्टेनलेस स्टील में क्रोमियम होने से उस पर जंग नहीं लगती।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "LPG is mainly a mixture of butane and propane.",
+          "LPG has a strong smell of its own.",
+          "CNG is mainly methane."
+        ],
+        "fix": "LPG has no smell; a strong-smelling compound such as ethyl mercaptan is added so that leaks can be noticed."
+      },
+      "hi": {
+        "statements": [
+          "LPG मुख्यतः ब्यूटेन और प्रोपेन का मिश्रण है।",
+          "LPG की अपनी तेज़ गंध होती है।",
+          "CNG मुख्यतः मीथेन है।"
+        ],
+        "fix": "LPG में अपनी गंध नहीं होती; रिसाव का पता चल सके, इसलिए एथिल मरकैप्टन जैसा तेज़ गंध वाला यौगिक मिलाया जाता है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Soap works better in hard water than in soft water.",
+          "Hard water contains salts of calcium and magnesium.",
+          "Detergents can work in hard water."
+        ],
+        "fix": "Soap forms scum with calcium and magnesium in hard water, so it lathers poorly."
+      },
+      "hi": {
+        "statements": [
+          "साबुन मृदु जल की तुलना में कठोर जल में बेहतर काम करता है।",
+          "कठोर जल में कैल्शियम और मैग्नीशियम के लवण होते हैं।",
+          "डिटर्जेंट कठोर जल में भी काम कर सकते हैं।"
+        ],
+        "fix": "कठोर जल में कैल्शियम और मैग्नीशियम के साथ साबुन मैल बनाता है, इसलिए झाग कम बनता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class X Science; NCERT Class XII Chemistry",
+    "hi": "NCERT कक्षा X विज्ञान; NCERT कक्षा XII रसायन"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

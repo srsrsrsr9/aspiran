@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "anc-texts-and-authors-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Ancient texts and authors: find the odd one",
+    "hi": "प्राचीन ग्रंथ और लेखक: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Abhijnanashakuntalam",
+          "Meghaduta",
+          "Mudrarakshasa",
+          "Raghuvamsha"
+        ],
+        "why": "Abhijnanashakuntalam, Meghaduta and Raghuvamsha are by Kalidasa. Mudrarakshasa is by Vishakhadatta."
+      },
+      "hi": {
+        "items": [
+          "अभिज्ञानशाकुंतलम्",
+          "मेघदूत",
+          "मुद्राराक्षस",
+          "रघुवंश"
+        ],
+        "why": "अभिज्ञानशाकुंतलम्, मेघदूत और रघुवंश कालिदास के हैं। मुद्राराक्षस विशाखदत्त का है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Arthashastra",
+          "Rigveda",
+          "Samaveda",
+          "Atharvaveda"
+        ],
+        "why": "The Rigveda, Samaveda and Atharvaveda are Vedas. The Arthashastra is a work on statecraft."
+      },
+      "hi": {
+        "items": [
+          "अर्थशास्त्र",
+          "ऋग्वेद",
+          "सामवेद",
+          "अथर्ववेद"
+        ],
+        "why": "ऋग्वेद, सामवेद और अथर्ववेद वेद हैं। अर्थशास्त्र राज्य-शासन पर ग्रंथ है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Aryabhatiya",
+          "Brihat Samhita",
+          "Panchasiddhantika",
+          "Charaka Samhita"
+        ],
+        "why": "The first three are works on astronomy and mathematics by Aryabhata and Varahamihira. The Charaka Samhita is a work on medicine."
+      },
+      "hi": {
+        "items": [
+          "आर्यभटीय",
+          "बृहत्संहिता",
+          "पंचसिद्धांतिका",
+          "चरक संहिता"
+        ],
+        "why": "पहले तीन आर्यभट और वराहमिहिर के खगोल और गणित के ग्रंथ हैं। चरक संहिता चिकित्सा का ग्रंथ है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Indica",
+          "Harshacharita",
+          "Si-yu-ki",
+          "Account of Fa-Hien"
+        ],
+        "why": "The Indica, Si-yu-ki and Fa-Hien's account were written by foreign visitors. The Harshacharita was written by Banabhatta, Harsha's court poet."
+      },
+      "hi": {
+        "items": [
+          "इंडिका",
+          "हर्षचरित",
+          "सि-यू-की",
+          "फ़ाह्यान का वृत्तांत"
+        ],
+        "why": "इंडिका, सि-यू-की और फ़ाह्यान का वृत्तांत विदेशी यात्रियों ने लिखे। हर्षचरित हर्ष के दरबारी कवि बाणभट्ट ने लिखा।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Jataka tales",
+          "Tripitaka",
+          "Acharanga Sutra",
+          "Milindapanha"
+        ],
+        "why": "The Jatakas, Tripitaka and Milindapanha are Buddhist texts. The Acharanga Sutra is a Jain text."
+      },
+      "hi": {
+        "items": [
+          "जातक कथाएँ",
+          "त्रिपिटक",
+          "आचारांग सूत्र",
+          "मिलिंदपन्ह"
+        ],
+        "why": "जातक, त्रिपिटक और मिलिंदपन्ह बौद्ध ग्रंथ हैं। आचारांग सूत्र जैन ग्रंथ है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Themes in Indian History I; NCERT Class VI Our Pasts I",
+    "hi": "NCERT कक्षा XII भारतीय इतिहास के कुछ विषय I; NCERT कक्षा VI हमारे अतीत I"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

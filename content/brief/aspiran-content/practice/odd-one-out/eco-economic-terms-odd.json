@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "eco-economic-terms-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Economic terms: find the odd one",
+    "hi": "आर्थिक शब्द: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Repo rate",
+          "Cash Reserve Ratio",
+          "Fiscal deficit",
+          "Open market operations"
+        ],
+        "why": "Repo rate, CRR and open market operations are tools of monetary policy. Fiscal deficit is a measure of government finances."
+      },
+      "hi": {
+        "items": [
+          "रेपो दर",
+          "नकद आरक्षित अनुपात",
+          "राजकोषीय घाटा",
+          "खुले बाज़ार की क्रियाएँ"
+        ],
+        "why": "रेपो दर, CRR और खुले बाज़ार की क्रियाएँ मौद्रिक नीति के साधन हैं। राजकोषीय घाटा सरकारी वित्त का माप है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Income tax",
+          "GST",
+          "Customs duty",
+          "Excise duty on petrol"
+        ],
+        "why": "GST, customs and excise are indirect taxes. Income tax is a direct tax."
+      },
+      "hi": {
+        "items": [
+          "आयकर",
+          "GST",
+          "सीमा शुल्क",
+          "पेट्रोल पर उत्पाद शुल्क"
+        ],
+        "why": "GST, सीमा शुल्क और उत्पाद शुल्क अप्रत्यक्ष कर हैं। आयकर प्रत्यक्ष कर है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Disinvestment receipts",
+          "Borrowings",
+          "Recovery of loans",
+          "Interest receipts"
+        ],
+        "why": "Disinvestment, borrowings and loan recoveries are capital receipts. Interest received is a revenue receipt."
+      },
+      "hi": {
+        "items": [
+          "विनिवेश प्राप्तियाँ",
+          "उधार",
+          "ऋणों की वसूली",
+          "ब्याज प्राप्तियाँ"
+        ],
+        "why": "विनिवेश, उधार और ऋण वसूली पूँजीगत प्राप्तियाँ हैं। मिला हुआ ब्याज राजस्व प्राप्ति है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Remittances",
+          "Foreign direct investment",
+          "Software exports",
+          "Tourism earnings"
+        ],
+        "why": "Remittances, software exports and tourism earnings are in the current account. FDI is in the capital account."
+      },
+      "hi": {
+        "items": [
+          "प्रेषण",
+          "प्रत्यक्ष विदेशी निवेश",
+          "सॉफ़्टवेयर निर्यात",
+          "पर्यटन आय"
+        ],
+        "why": "प्रेषण, सॉफ़्टवेयर निर्यात और पर्यटन आय चालू खाते में हैं। FDI पूँजी खाते में है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Agriculture",
+          "Fishing",
+          "Banking",
+          "Mining"
+        ],
+        "why": "Agriculture, fishing and mining are primary sector activities. Banking belongs to the tertiary sector."
+      },
+      "hi": {
+        "items": [
+          "कृषि",
+          "मत्स्य पालन",
+          "बैंकिंग",
+          "खनन"
+        ],
+        "why": "कृषि, मत्स्य पालन और खनन प्राथमिक क्षेत्र की गतिविधियाँ हैं। बैंकिंग तृतीयक क्षेत्र में आती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XII Introductory Macroeconomics; Union Budget documents; RBI",
+    "hi": "NCERT कक्षा XII समष्टि अर्थशास्त्र: एक परिचय; केंद्रीय बजट दस्तावेज़; RBI"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

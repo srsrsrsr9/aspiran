@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "sci-physics-and-chemistry-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Physics and chemistry: find the odd one",
+    "hi": "भौतिकी और रसायन: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Newton",
+          "Joule",
+          "Watt",
+          "Kilogram"
+        ],
+        "why": "The newton, joule and watt are derived SI units. The kilogram is a base unit."
+      },
+      "hi": {
+        "items": [
+          "न्यूटन",
+          "जूल",
+          "वाट",
+          "किलोग्राम"
+        ],
+        "why": "न्यूटन, जूल और वाट व्युत्पन्न SI इकाइयाँ हैं। किलोग्राम मूल इकाई है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Sound waves",
+          "Radio waves",
+          "X-rays",
+          "Visible light"
+        ],
+        "why": "Radio waves, X-rays and visible light are electromagnetic waves. Sound is a mechanical wave and needs a medium."
+      },
+      "hi": {
+        "items": [
+          "ध्वनि तरंगें",
+          "रेडियो तरंगें",
+          "एक्स-किरणें",
+          "दृश्य प्रकाश"
+        ],
+        "why": "रेडियो तरंगें, एक्स-किरणें और दृश्य प्रकाश विद्युतचुंबकीय तरंगें हैं। ध्वनि यांत्रिक तरंग है और उसे माध्यम चाहिए।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Copper",
+          "Silver",
+          "Glass",
+          "Aluminium"
+        ],
+        "why": "Copper, silver and aluminium are good conductors of electricity. Glass is an insulator."
+      },
+      "hi": {
+        "items": [
+          "ताँबा",
+          "चाँदी",
+          "काँच",
+          "एल्युमिनियम"
+        ],
+        "why": "ताँबा, चाँदी और एल्युमिनियम बिजली के अच्छे चालक हैं। काँच कुचालक है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Helium",
+          "Nitrogen",
+          "Neon",
+          "Argon"
+        ],
+        "why": "Helium, neon and argon are noble gases. Nitrogen is not."
+      },
+      "hi": {
+        "items": [
+          "हीलियम",
+          "नाइट्रोजन",
+          "नियॉन",
+          "आर्गन"
+        ],
+        "why": "हीलियम, नियॉन और आर्गन उत्कृष्ट गैसें हैं। नाइट्रोजन नहीं।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Rusting of iron",
+          "Burning of wood",
+          "Cooking an egg",
+          "Melting of ice"
+        ],
+        "why": "Rusting, burning and cooking are chemical changes. Melting of ice is a physical change."
+      },
+      "hi": {
+        "items": [
+          "लोहे पर जंग लगना",
+          "लकड़ी का जलना",
+          "अंडा पकाना",
+          "बर्फ़ का पिघलना"
+        ],
+        "why": "जंग लगना, जलना और पकाना रासायनिक परिवर्तन हैं। बर्फ़ का पिघलना भौतिक परिवर्तन है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class IX and X Science; NCERT Class XI Physics and Chemistry",
+    "hi": "NCERT कक्षा IX और X विज्ञान; NCERT कक्षा XI भौतिकी और रसायन"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

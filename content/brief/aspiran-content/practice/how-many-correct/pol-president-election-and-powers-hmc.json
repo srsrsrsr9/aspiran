@@ -1,0 +1,174 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "pol-president-election-and-powers-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The President: election and powers: how many correct?",
+    "hi": "राष्ट्रपति: निर्वाचन और शक्तियाँ: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the election of the President:",
+        "statements": [
+          "Elected members of both Houses of Parliament vote in the presidential election.",
+          "Nominated members of the Rajya Sabha vote in it.",
+          "Elected members of the Legislative Assemblies of Delhi and Puducherry vote in it.",
+          "Members of State Legislative Councils vote in it."
+        ],
+        "why": "Nominated members and members of Legislative Councils do not vote, so statements 2 and 4 are wrong. Delhi and Puducherry were added by the 70th Amendment. So two are correct."
+      },
+      "hi": {
+        "stem": "राष्ट्रपति के निर्वाचन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "संसद के दोनों सदनों के निर्वाचित सदस्य राष्ट्रपति चुनाव में मत देते हैं।",
+          "राज्यसभा के मनोनीत सदस्य इसमें मत देते हैं।",
+          "दिल्ली और पुदुचेरी की विधानसभाओं के निर्वाचित सदस्य इसमें मत देते हैं।",
+          "राज्य विधान परिषदों के सदस्य इसमें मत देते हैं।"
+        ],
+        "why": "मनोनीत सदस्य और विधान परिषदों के सदस्य मत नहीं देते, इसलिए कथन 2 और 4 गलत हैं। दिल्ली और पुदुचेरी 70वें संशोधन से जोड़े गए। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about removing the President and election disputes:",
+        "statements": [
+          "The President can be impeached for \"violation of the Constitution\".",
+          "An impeachment charge can be started only in the Lok Sabha.",
+          "Disputes about a presidential election are decided by the Election Commission of India."
+        ],
+        "why": "Statement 2 is wrong: either House can start the charge. Statement 3 is wrong: under Article 71 the Supreme Court decides such disputes. Only one is correct."
+      },
+      "hi": {
+        "stem": "राष्ट्रपति को हटाने और चुनाव विवादों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति पर \"संविधान के उल्लंघन\" के लिए महाभियोग चलाया जा सकता है।",
+          "महाभियोग का आरोप केवल लोकसभा में शुरू किया जा सकता है।",
+          "राष्ट्रपति चुनाव से जुड़े विवादों का निर्णय भारत निर्वाचन आयोग करता है।"
+        ],
+        "why": "कथन 2 गलत है: आरोप किसी भी सदन में शुरू हो सकता है। कथन 3 गलत है: अनुच्छेद 71 के तहत ऐसे विवादों का निर्णय सर्वोच्च न्यायालय करता है। सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        false,
+        true,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about ordinances and pardons:",
+        "statements": [
+          "The President can issue an ordinance only when both Houses are not in session.",
+          "An ordinance lapses six weeks after Parliament reassembles unless approved earlier.",
+          "Under Article 72, the President can pardon a sentence of death.",
+          "Under Article 72, the President can pardon a sentence given by a court martial."
+        ],
+        "why": "Statement 1 is wrong: an ordinance can be issued when either House is not in session. The other three are correct."
+      },
+      "hi": {
+        "stem": "अध्यादेशों और क्षमादान के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति अध्यादेश केवल तभी जारी कर सकते हैं जब दोनों सदन सत्र में न हों।",
+          "अध्यादेश संसद के दोबारा समवेत होने के छह सप्ताह बाद समाप्त हो जाता है, यदि पहले स्वीकृत न हो।",
+          "अनुच्छेद 72 के तहत राष्ट्रपति मृत्युदंड को क्षमा कर सकते हैं।",
+          "अनुच्छेद 72 के तहत राष्ट्रपति सेना न्यायालय (कोर्ट मार्शल) की सज़ा को क्षमा कर सकते हैं।"
+        ],
+        "why": "कथन 1 गलत है: कोई एक सदन भी सत्र में न हो तो अध्यादेश जारी हो सकता है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the President's assent to bills:",
+        "statements": [
+          "The President can return a bill, other than a Money Bill, to Parliament for reconsideration.",
+          "If Parliament passes the returned bill again, the President can return it once more.",
+          "The President can return a Constitution Amendment Bill for reconsideration."
+        ],
+        "why": "Statement 2 is wrong: a bill can be returned only once; if passed again, the President must give assent. Statement 3 is wrong: since the 24th Amendment, assent to a Constitution Amendment Bill is compulsory. Only one is correct."
+      },
+      "hi": {
+        "stem": "विधेयकों पर राष्ट्रपति की अनुमति के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति धन विधेयक के अलावा किसी विधेयक को पुनर्विचार के लिए संसद को लौटा सकते हैं।",
+          "संसद लौटाए गए विधेयक को फिर पारित कर दे तो राष्ट्रपति उसे एक बार और लौटा सकते हैं।",
+          "राष्ट्रपति संविधान संशोधन विधेयक को पुनर्विचार के लिए लौटा सकते हैं।"
+        ],
+        "why": "कथन 2 गलत है: विधेयक केवल एक बार लौटाया जा सकता है; फिर पारित होने पर राष्ट्रपति को अनुमति देनी होती है। कथन 3 गलत है: 24वें संशोधन के बाद संविधान संशोधन विधेयक पर अनुमति अनिवार्य है। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 54, 61, 71, 72, 111 and 123",
+    "hi": "भारत का संविधान, अनुच्छेद 54, 61, 71, 72, 111 और 123"
+  },
+  "factsToCheck": [
+    "Delhi and Puducherry assemblies added to the electoral college by the 70th Amendment, 1992",
+    "Ordinance lapses six weeks after Parliament reassembles (Article 123)",
+    "24th Amendment, 1971 made assent to Constitution Amendment Bills compulsory"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

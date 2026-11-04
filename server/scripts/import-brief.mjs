@@ -79,9 +79,10 @@ for (const { path, batch } of listed) {
   // Full mocks (B23, B24) live in content/mocks and go in with scripts/syllabus.mjs.
   if (path.startsWith("mocks/")) continue;
   if (!existsSync(join(src, path))) { missing.push(path); continue; }
-  const schema = SCHEMA_OF.find(([re]) => re.test(path))?.[1];
-  if (!schema) { unknown.push(path); continue; }
   let data = JSON.parse(readFileSync(join(src, path), "utf8"));
+  // Practice formats (X1–X5, F1) carry their own upsc-pods/<format>@1 schema.
+  const schema = path.startsWith("practice/") && /^upsc-pods\/[a-z-]+@1$/.test(data.schema ?? "") ? data.schema : SCHEMA_OF.find(([re]) => re.test(path))?.[1];
+  if (!schema) { unknown.push(path); continue; }
   if (schema === "aspiran/audio-lecture@1") data = withRecording(data, join(src, path));
   const bytes = Buffer.from(JSON.stringify({ schema, ...data, review: { ...(data.review ?? {}), note: `Batch ${batch}, made in the claude.ai Project` } }, null, 2));
   mkdirSync(dirname(join(out, path)), { recursive: true });

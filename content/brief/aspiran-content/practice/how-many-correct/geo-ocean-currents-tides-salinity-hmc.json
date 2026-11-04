@@ -1,0 +1,173 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "geo-ocean-currents-tides-salinity-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Ocean currents, tides and salinity: how many correct?",
+    "hi": "महासागरीय धाराएँ, ज्वार और लवणता: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about ocean currents:",
+        "statements": [
+          "The Gulf Stream is a warm current in the North Atlantic.",
+          "The Labrador Current is a warm current.",
+          "The Humboldt (Peru) Current is a cold current off the west coast of South America.",
+          "The Kuroshio is a warm current off Japan."
+        ],
+        "why": "Statement 2 is wrong: the Labrador Current is a cold current flowing south from the Arctic. The other three are correct."
+      },
+      "hi": {
+        "stem": "महासागरीय धाराओं के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "गल्फ़ स्ट्रीम उत्तरी अटलांटिक की एक गर्म धारा है।",
+          "लैब्राडोर धारा एक गर्म धारा है।",
+          "हम्बोल्ट (पेरू) धारा दक्षिण अमेरिका के पश्चिमी तट से लगी एक ठंडी धारा है।",
+          "क्यूरोशियो जापान के पास की एक गर्म धारा है।"
+        ],
+        "why": "कथन 2 गलत है: लैब्राडोर धारा आर्कटिक से दक्षिण की ओर बहने वाली ठंडी धारा है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about tides:",
+        "statements": [
+          "Spring tides occur when the Sun, the Moon and the Earth are in a line.",
+          "Neap tides occur at full moon and new moon.",
+          "Most coasts get two high tides roughly every day."
+        ],
+        "why": "Statement 2 is wrong: full moon and new moon bring spring tides; neap tides come when the Sun and Moon are at right angles. So two are correct."
+      },
+      "hi": {
+        "stem": "ज्वार-भाटे के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "दीर्घ ज्वार तब आते हैं जब सूर्य, चंद्रमा और पृथ्वी एक सीध में होते हैं।",
+          "लघु ज्वार पूर्णिमा और अमावस्या को आते हैं।",
+          "ज़्यादातर तटों पर लगभग हर दिन दो बार उच्च ज्वार आता है।"
+        ],
+        "why": "कथन 2 गलत है: पूर्णिमा और अमावस्या को दीर्घ ज्वार आते हैं; लघु ज्वार तब आते हैं जब सूर्य और चंद्रमा समकोण पर होते हैं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about currents and coasts:",
+        "statements": [
+          "In tropical and subtropical latitudes, cold currents usually flow along the west coasts of continents.",
+          "Rich fishing grounds often develop where warm and cold currents meet.",
+          "The Benguela Current flows along the east coast of Africa.",
+          "The Agulhas Current is a cold current."
+        ],
+        "why": "Statement 3 is wrong: the Benguela flows along Africa's west coast. Statement 4 is wrong: the Agulhas is a warm current along the east coast. So two are correct."
+      },
+      "hi": {
+        "stem": "धाराओं और तटों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "उष्ण और उपोष्ण अक्षांशों में ठंडी धाराएँ प्रायः महाद्वीपों के पश्चिमी तटों के साथ बहती हैं।",
+          "जहाँ गर्म और ठंडी धाराएँ मिलती हैं, वहाँ अक्सर समृद्ध मत्स्य क्षेत्र बनते हैं।",
+          "बेंगुएला धारा अफ़्रीका के पूर्वी तट के साथ बहती है।",
+          "अगुलहास धारा एक ठंडी धारा है।"
+        ],
+        "why": "कथन 3 गलत है: बेंगुएला अफ़्रीका के पश्चिमी तट के साथ बहती है। कथन 4 गलत है: अगुलहास पूर्वी तट के साथ बहने वाली गर्म धारा है। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "en": {
+        "stem": "Consider the following statements about salinity:",
+        "statements": [
+          "Salinity of seawater is usually expressed in parts per thousand.",
+          "The Dead Sea is less salty than the open ocean.",
+          "High evaporation raises the salinity of surface water.",
+          "The Baltic Sea has low salinity because of large river inflow and little evaporation."
+        ],
+        "why": "Statement 2 is wrong: the Dead Sea is many times saltier than the open ocean. The other three are correct."
+      },
+      "hi": {
+        "stem": "लवणता के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "समुद्री जल की लवणता प्रायः प्रति हज़ार भाग में व्यक्त की जाती है।",
+          "मृत सागर खुले महासागर से कम खारा है।",
+          "अधिक वाष्पीकरण सतही जल की लवणता बढ़ाता है।",
+          "बाल्टिक सागर में नदियों का बहुत पानी आने और कम वाष्पीकरण के कारण लवणता कम है।"
+        ],
+        "why": "कथन 2 गलत है: मृत सागर खुले महासागर से कई गुना अधिक खारा है। बाकी तीन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

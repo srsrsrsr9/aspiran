@@ -1,0 +1,175 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "pol-panchayats-and-municipalities-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Panchayats and municipalities: how many correct?",
+    "hi": "पंचायतें और नगरपालिकाएँ: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the 73rd Amendment:",
+        "statements": [
+          "It added Part IX to the Constitution.",
+          "It added the Eleventh Schedule, which lists 29 subjects.",
+          "It made a three-tier system compulsory in every state, whatever its population.",
+          "It applies on its own to Fifth Schedule areas, without any further law."
+        ],
+        "why": "Statement 3 is wrong: states with a population under 20 lakh need not have the intermediate tier. Statement 4 is wrong: Scheduled Areas needed a separate law, PESA, 1996. So two are correct."
+      },
+      "hi": {
+        "stem": "73वें संशोधन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसने संविधान में भाग 9 (IX) जोड़ा।",
+          "इसने ग्यारहवीं अनुसूची जोड़ी, जिसमें 29 विषय हैं।",
+          "इसने हर राज्य में, जनसंख्या चाहे जो हो, त्रि-स्तरीय व्यवस्था अनिवार्य कर दी।",
+          "यह बिना किसी और कानून के अपने आप पाँचवीं अनुसूची के क्षेत्रों पर लागू होता है।"
+        ],
+        "why": "कथन 3 गलत है: 20 लाख से कम जनसंख्या वाले राज्यों में मध्यवर्ती स्तर ज़रूरी नहीं। कथन 4 गलत है: अनुसूचित क्षेत्रों के लिए अलग कानून, PESA 1996, लाना पड़ा। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Gram Sabhas and panchayat elections:",
+        "statements": [
+          "The Gram Sabha is made up of all persons on the electoral rolls of a village in the panchayat area.",
+          "Panchayat elections are conducted by the Election Commission of India.",
+          "The State Election Commissioner is appointed by the Chief Election Commissioner."
+        ],
+        "why": "Panchayat elections are run by the State Election Commission, and the State Election Commissioner is appointed by the Governor. So statements 2 and 3 are wrong; only one is correct."
+      },
+      "hi": {
+        "stem": "ग्राम सभा और पंचायत चुनावों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "ग्राम सभा में पंचायत क्षेत्र के गाँव की मतदाता सूची में दर्ज सभी व्यक्ति होते हैं।",
+          "पंचायत चुनाव भारत निर्वाचन आयोग कराता है।",
+          "राज्य निर्वाचन आयुक्त की नियुक्ति मुख्य निर्वाचन आयुक्त करते हैं।"
+        ],
+        "why": "पंचायत चुनाव राज्य निर्वाचन आयोग कराता है, और राज्य निर्वाचन आयुक्त की नियुक्ति राज्यपाल करते हैं। इसलिए कथन 2 और 3 गलत हैं; सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about panchayats:",
+        "statements": [
+          "A panchayat's normal term is five years.",
+          "If a panchayat is dissolved early, a fresh election must be held within six months.",
+          "Seats for Scheduled Castes and Scheduled Tribes are reserved in proportion to their population in the area.",
+          "A person must be at least 25 years old to be a panchayat member."
+        ],
+        "why": "Statement 4 is wrong: the minimum age is 21 years. The other three are correct."
+      },
+      "hi": {
+        "stem": "पंचायतों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "पंचायत का सामान्य कार्यकाल पाँच वर्ष है।",
+          "पंचायत समय से पहले भंग हो तो छह महीने के भीतर नया चुनाव कराना होता है।",
+          "अनुसूचित जातियों और अनुसूचित जनजातियों के लिए सीटें क्षेत्र में उनकी जनसंख्या के अनुपात में आरक्षित होती हैं।",
+          "पंचायत सदस्य बनने के लिए कम से कम 25 वर्ष की आयु चाहिए।"
+        ],
+        "why": "कथन 4 गलत है: न्यूनतम आयु 21 वर्ष है। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the 74th Amendment:",
+        "statements": [
+          "It added the Twelfth Schedule, which lists 18 subjects.",
+          "It provides for Ward Committees in municipalities with a population of three lakh or more.",
+          "It provides for a District Planning Committee only in metropolitan areas."
+        ],
+        "why": "Statement 3 is wrong: Article 243ZD provides a District Planning Committee in every district; metropolitan areas get a separate Metropolitan Planning Committee. So two are correct."
+      },
+      "hi": {
+        "stem": "74वें संशोधन के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "इसने बारहवीं अनुसूची जोड़ी, जिसमें 18 विषय हैं।",
+          "इसमें तीन लाख या अधिक जनसंख्या वाली नगरपालिकाओं में वार्ड समितियों का प्रावधान है।",
+          "इसमें ज़िला योजना समिति का प्रावधान केवल महानगरीय क्षेत्रों के लिए है।"
+        ],
+        "why": "कथन 3 गलत है: अनुच्छेद 243यघ (243ZD) हर ज़िले में ज़िला योजना समिति का प्रावधान करता है; महानगरीय क्षेत्रों के लिए अलग महानगर योजना समिति है। यानी दो कथन सही हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Parts IX and IXA, Eleventh and Twelfth Schedules",
+    "hi": "भारत का संविधान, भाग 9 और 9क (IXA), ग्यारहवीं और बारहवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "Eleventh Schedule has 29 subjects; Twelfth Schedule has 18",
+    "Intermediate tier optional for states with population under 20 lakh (Article 243B)",
+    "Minimum age 21 for panchayat membership (Article 243F)",
+    "Ward Committees for municipalities of three lakh or more (Article 243S)"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

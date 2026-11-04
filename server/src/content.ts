@@ -907,14 +907,18 @@ function checkPyq(d: any): string[] {
   return flags;
 }
 
+/** The brief asks writers to list every fact that needs checking against a source; the editor clears them. */
+function factFlags(d: any): string[] {
+  const facts: string[] = Array.isArray(d.factsToCheck) ? d.factsToCheck.map(String) : [];
+  return facts.length ? [`${facts.length > 1 ? `Check these ${facts.length} facts` : "Check this fact"} against a source before approving: ${facts.join("; ")}`.slice(0, 600)] : [];
+}
+
 /** Cheap checks shown to the editor as flags. They never block approval. */
 export function checkItem(kind: string, d: any): string[] {
-  if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d)];
+  if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d), ...factFlags(d)];
   if (kind === "pyq") return checkPyq(d);
   const flags: string[] = [];
-  // The brief asks writers to list every fact that needs checking against a source; the editor clears them.
-  const facts: string[] = Array.isArray(d.factsToCheck) ? d.factsToCheck : [];
-  if (facts.length) flags.push(`${facts.length > 1 ? `Check these ${facts.length} facts` : "Check this fact"} against a source before approving: ${facts.join("; ")}`.slice(0, 600));
+  flags.push(...factFlags(d));
   if (kind === "essay" && !(d.snap1Skeleton && d.snap2Outline && d.snap3Watch)) flags.push("Missing one of the three snaps (skeleton, outline, what to watch)");
   if (kind === "interview-bank") {
     const lone = (d.questions ?? []).filter((q: any) => !q.q?.hi).length;

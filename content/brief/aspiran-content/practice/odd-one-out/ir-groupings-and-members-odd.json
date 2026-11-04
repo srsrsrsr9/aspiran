@@ -1,0 +1,155 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "ir-groupings-and-members-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Groupings and their members: find the odd one",
+    "hi": "समूह और उनके सदस्य: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Bhutan",
+          "Nepal",
+          "Myanmar",
+          "Maldives"
+        ],
+        "why": "Bhutan, Nepal and the Maldives are members of SAARC. Myanmar is not; it is in BIMSTEC and ASEAN."
+      },
+      "hi": {
+        "items": [
+          "भूटान",
+          "नेपाल",
+          "म्यांमार",
+          "मालदीव"
+        ],
+        "why": "भूटान, नेपाल और मालदीव SAARC के सदस्य हैं। म्यांमार नहीं; वह BIMSTEC और ASEAN में है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Pakistan",
+          "Thailand",
+          "Sri Lanka",
+          "Bangladesh"
+        ],
+        "why": "Thailand, Sri Lanka and Bangladesh are members of BIMSTEC. Pakistan is not."
+      },
+      "hi": {
+        "items": [
+          "पाकिस्तान",
+          "थाईलैंड",
+          "श्रीलंका",
+          "बांग्लादेश"
+        ],
+        "why": "थाईलैंड, श्रीलंका और बांग्लादेश BIMSTEC के सदस्य हैं। पाकिस्तान नहीं।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "United States",
+          "Japan",
+          "Australia",
+          "China"
+        ],
+        "why": "The United States, Japan and Australia are India's partners in the Quad. China is not a member."
+      },
+      "hi": {
+        "items": [
+          "अमेरिका",
+          "जापान",
+          "ऑस्ट्रेलिया",
+          "चीन"
+        ],
+        "why": "अमेरिका, जापान और ऑस्ट्रेलिया क्वाड में भारत के साझेदार हैं। चीन सदस्य नहीं है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Brazil",
+          "Japan",
+          "China",
+          "South Africa"
+        ],
+        "why": "Brazil, China and South Africa are long-standing BRICS members along with India and Russia. Japan is not in BRICS."
+      },
+      "hi": {
+        "items": [
+          "ब्राज़ील",
+          "जापान",
+          "चीन",
+          "दक्षिण अफ़्रीका"
+        ],
+        "why": "ब्राज़ील, चीन और दक्षिण अफ़्रीका भारत और रूस के साथ BRICS के पुराने सदस्य हैं। जापान BRICS में नहीं है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Kazakhstan",
+          "Kyrgyzstan",
+          "Afghanistan",
+          "Tajikistan"
+        ],
+        "why": "Kazakhstan, Kyrgyzstan and Tajikistan are founding members of the SCO. Afghanistan is not a member."
+      },
+      "hi": {
+        "items": [
+          "कज़ाख़स्तान",
+          "किर्गिज़स्तान",
+          "अफ़गानिस्तान",
+          "ताजिकिस्तान"
+        ],
+        "why": "कज़ाख़स्तान, किर्गिज़स्तान और ताजिकिस्तान SCO के संस्थापक सदस्य हैं। अफ़गानिस्तान सदस्य नहीं है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Ministry of External Affairs; SAARC, BIMSTEC and SCO secretariats",
+    "hi": "विदेश मंत्रालय; SAARC, BIMSTEC और SCO सचिवालय"
+  },
+  "factsToCheck": [
+    "BRICS and ASEAN membership changed in 2024-25; rounds avoid newly joined members"
+  ],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

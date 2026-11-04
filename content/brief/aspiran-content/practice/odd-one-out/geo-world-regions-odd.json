@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "geo-world-regions-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "World geography: find the odd one",
+    "hi": "विश्व भूगोल: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Sahara",
+          "Kalahari",
+          "Gobi",
+          "Namib"
+        ],
+        "why": "The Sahara, Kalahari and Namib are in Africa. The Gobi is in Asia."
+      },
+      "hi": {
+        "items": [
+          "सहारा",
+          "कालाहारी",
+          "गोबी",
+          "नामीब"
+        ],
+        "why": "सहारा, कालाहारी और नामीब अफ़्रीका में हैं। गोबी एशिया में है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Andes",
+          "Alps",
+          "Himalayas",
+          "Rockies"
+        ],
+        "why": "All four are fold mountains, so look at location. The Alps, Himalayas and Rockies are in the Northern Hemisphere; most of the Andes lie in the Southern Hemisphere."
+      },
+      "hi": {
+        "items": [
+          "एंडीज़",
+          "आल्प्स",
+          "हिमालय",
+          "रॉकीज़"
+        ],
+        "why": "चारों वलित पर्वत हैं, इसलिए स्थिति देखिए। आल्प्स, हिमालय और रॉकीज़ उत्तरी गोलार्ध में हैं; एंडीज़ का अधिकांश भाग दक्षिणी गोलार्ध में है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "Prairies",
+          "Taiga",
+          "Pampas",
+          "Steppes"
+        ],
+        "why": "Prairies, Pampas and Steppes are temperate grasslands. The taiga is a coniferous forest."
+      },
+      "hi": {
+        "items": [
+          "प्रेयरी",
+          "टैगा",
+          "पंपास",
+          "स्टेपी"
+        ],
+        "why": "प्रेयरी, पंपास और स्टेपी शीतोष्ण घास के मैदान हैं। टैगा शंकुधारी वन है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "Nile",
+          "Congo",
+          "Niger",
+          "Volga"
+        ],
+        "why": "The Nile, Congo and Niger are African rivers. The Volga flows in Russia."
+      },
+      "hi": {
+        "items": [
+          "नील",
+          "कांगो",
+          "नाइजर",
+          "वोल्गा"
+        ],
+        "why": "नील, कांगो और नाइजर अफ़्रीकी नदियाँ हैं। वोल्गा रूस में बहती है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Strait of Malacca",
+          "Strait of Hormuz",
+          "Panama Canal",
+          "Bab-el-Mandeb"
+        ],
+        "why": "Malacca, Hormuz and Bab-el-Mandeb are natural straits. The Panama Canal is man-made."
+      },
+      "hi": {
+        "items": [
+          "मलक्का जलडमरूमध्य",
+          "होर्मुज़ जलडमरूमध्य",
+          "पनामा नहर",
+          "बाब-अल-मंदेब"
+        ],
+        "why": "मलक्का, होर्मुज़ और बाब-अल-मंदेब प्राकृतिक जलडमरूमध्य हैं। पनामा नहर मानव-निर्मित है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography; NCERT Class VII Our Environment",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत; NCERT कक्षा VII हमारा पर्यावरण"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

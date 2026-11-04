@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "anc-vedic-period-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Vedic period: assertion and reason",
+    "hi": "वैदिक काल: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The Rigveda was passed down orally for centuries before it was written.",
+        "reason": "Students learnt the hymns by careful recitation from their teachers.",
+        "why": "Both are true. Precise oral learning is how the text survived before writing, so R explains A."
+      },
+      "hi": {
+        "assertion": "ऋग्वेद लिखे जाने से पहले सदियों तक मौखिक रूप से आगे बढ़ाया गया।",
+        "reason": "विद्यार्थी गुरुओं से ध्यानपूर्वक पाठ करके सूक्त सीखते थे।",
+        "why": "दोनों सही हैं। सटीक मौखिक शिक्षा से ही यह ग्रंथ लिखे जाने से पहले बचा रहा, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "The Rigveda is the oldest of the four Vedas.",
+        "reason": "The Rigveda is mainly a collection of prose rules for sacrifices.",
+        "why": "A is true. R is false: the Rigveda is a collection of hymns; ritual prose belongs to texts like the Yajurveda and the Brahmanas."
+      },
+      "hi": {
+        "assertion": "ऋग्वेद चारों वेदों में सबसे पुराना है।",
+        "reason": "ऋग्वेद मुख्यतः यज्ञ के गद्य नियमों का संग्रह है।",
+        "why": "A सही है। R गलत है: ऋग्वेद सूक्तों का संग्रह है; कर्मकांड का गद्य यजुर्वेद और ब्राह्मण ग्रंथों जैसे ग्रंथों में है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "The Sabha and the Samiti were assemblies in the Vedic period.",
+        "reason": "The Upanishads discuss ideas such as atman and brahman.",
+        "why": "Both are true, but R is about later philosophy and does not explain the early assemblies."
+      },
+      "hi": {
+        "assertion": "सभा और समिति वैदिक काल की सभाएँ थीं।",
+        "reason": "उपनिषदों में आत्मन् और ब्रह्म जैसे विचारों की चर्चा है।",
+        "why": "दोनों सही हैं, पर R बाद के दर्शन से जुड़ा है और आरंभिक सभाओं को नहीं समझाता।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "Iron was widely used in the early Rigvedic period.",
+        "reason": "In later Vedic times, iron tools helped clear forests in the Ganga valley.",
+        "why": "A is false: iron use spread later. R is true and is linked with the later Vedic shift east."
+      },
+      "hi": {
+        "assertion": "आरंभिक ऋग्वैदिक काल में लोहे का व्यापक उपयोग होता था।",
+        "reason": "उत्तर वैदिक काल में लोहे के औज़ारों ने गंगा घाटी में जंगल साफ़ करने में मदद की।",
+        "why": "A गलत है: लोहे का उपयोग बाद में फैला। R सही है और उत्तर वैदिक काल में पूर्व की ओर बढ़ाव से जुड़ा है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Cattle were an important form of wealth in the Rigvedic period.",
+        "reason": "The economy then was largely pastoral.",
+        "why": "Both are true. In a herding economy, cattle measured wealth, so R explains A."
+      },
+      "hi": {
+        "assertion": "ऋग्वैदिक काल में मवेशी धन का एक महत्वपूर्ण रूप थे।",
+        "reason": "तब की अर्थव्यवस्था मुख्यतः पशुपालन पर आधारित थी।",
+        "why": "दोनों सही हैं। पशुपालक अर्थव्यवस्था में मवेशी ही धन का माप थे, इसलिए R, A को समझाता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class VI Our Pasts I; NCERT Class XII Themes in Indian History I",
+    "hi": "NCERT कक्षा VI हमारे अतीत I; NCERT कक्षा XII भारतीय इतिहास के कुछ विषय I"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

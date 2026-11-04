@@ -1,0 +1,28 @@
+{
+  "batch": "X2",
+  "checksRun": [
+    "python3 check.py X1,X2 (valid JSON; key order, schema value, mood, sfx and optionText identical to practice-format-samples; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; en and hi have the same number of questions, statements, options, items, bank words and gaps; every answer index, lie, odd and better index in range; truth list length equals statement count; trap labels valid and 'none' only on the answer; Devanagari in every Hindi field, no Devanagari digits, no Latin article or Part letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique across X batches checked together and against every id in earlier zips in aspiran-batches and the samples)",
+    "40 files: assertion-reason 20 files / 100 items, two-truths 20 files / 100 items",
+    "0 issues on the final run",
+    "Answer spread counted by code: assertion-reason: a=40, b=20, c=20, d=20; two-truths: 0=36, 1=32, 2=32",
+    "factsToCheck entries: 37 (dates and numbers to confirm; added as a top-level list before 'schema', the same way B29 and B30 nodes carry it)",
+    "assertion-reason: every item uses one of keys a, b, c, d; there is no 'both false' option, so no item has both A and R false; every 'b' pairs two true statements on clearly separate points",
+    "two-truths: exactly three statements per round, one lie, and the 'fix' states the correct fact",
+    "Answers block applied by search: Hindi lettered articles written 300क (300A), 246क (246A), 269क (269A), 21क (21A); clause letters in Hindi written 39(घ); Parts written 3 (III), 4 (IV), 4क (IVA), 20 (XX)",
+    "TRAGIC rule: no disasters, violence or deaths as topics; laws on women are about rights, not crimes"
+  ],
+  "issuesFound": [
+    "soc-laws-for-women-tt listed the Domestic Violence Act in its sources though no round used it, which brings a violence topic into a game for no reason",
+    "F1.zip appeared in aspiran-batches during this batch; its ids were added to the clash check"
+  ],
+  "fixed": [
+    "Replaced that source with the two Acts the rounds actually use (Sexual Harassment at Workplace Act 2013, Dowry Prohibition Act 1961), in en and hi",
+    "Re-collected ids from every earlier zip including F1; no clash (all practice ids here end in a format suffix such as -ar or -tt)"
+  ],
+  "stillOpen": [
+    "factsToCheck sits as a top-level list before 'schema', as in X1",
+    "Hindi terms for the Hindi editor: अभिकथन, अवशिष्ट शक्तियाँ, सहदायिकी, प्राक्कलन समिति, तदर्थ समिति, द्वैध शासन, हस्तांतरित / आरक्षित विषय, प्रच्छन्न बेरोज़गारी, घर्षणात्मक बेरोज़गारी, अध्यारोपण, क्यूबिट, जस्तीकरण, सधुक्कड़ी, देवदान / ब्रह्मदेय, वृष्टि छाया, मानसून द्रोणी",
+    "Facts that may have changed in 2025-26 are flagged: Income-tax Act 2025 replacing the 1961 Act; GST rate changes of September 2025 (no rates used); MSME thresholds revised in 2025; PLFS monthly releases; Governor's assent rulings of 2025 (pol-centre-state-relations-ar); count of World Heritage Sites (not stated)"
+  ],
+  "finalRunIssues": []
+}

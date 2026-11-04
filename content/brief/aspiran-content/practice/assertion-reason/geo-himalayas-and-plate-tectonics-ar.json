@@ -1,0 +1,127 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "geo-himalayas-and-plate-tectonics-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Himalayas and plate tectonics: assertion and reason",
+    "hi": "हिमालय और प्लेट विवर्तनिकी: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The Himalayas are young fold mountains.",
+        "reason": "They were formed by the collision of the Indian plate with the Eurasian plate.",
+        "why": "Both are true. The collision crumpled sediments into folds, so R explains A."
+      },
+      "hi": {
+        "assertion": "हिमालय नवीन वलित पर्वत हैं।",
+        "reason": "ये भारतीय प्लेट के यूरेशियाई प्लेट से टकराने से बने।",
+        "why": "दोनों सही हैं। टकराव ने अवसादों को मोड़कर वलित किया, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "Marine fossils are found high in the Himalayas.",
+        "reason": "The rocks there formed from sediments laid down in the Tethys Sea before being pushed up.",
+        "why": "Both are true, and R explains how sea fossils got so high."
+      },
+      "hi": {
+        "assertion": "हिमालय की ऊँचाइयों पर समुद्री जीवाश्म मिलते हैं।",
+        "reason": "वहाँ की चट्टानें टेथिस सागर में जमा अवसादों से बनीं, फिर ऊपर धकेली गईं।",
+        "why": "दोनों सही हैं, और R बताता है कि समुद्री जीवाश्म इतनी ऊँचाई पर कैसे पहुँचे।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "The Shiwaliks are the outermost range of the Himalayas.",
+        "reason": "The Shiwaliks are the oldest and highest range of the Himalayas.",
+        "why": "A is true. R is false: the Shiwaliks are the youngest and lowest range; the Greater Himalaya (Himadri) is the highest."
+      },
+      "hi": {
+        "assertion": "शिवालिक हिमालय की सबसे बाहरी श्रेणी है।",
+        "reason": "शिवालिक हिमालय की सबसे पुरानी और सबसे ऊँची श्रेणी है।",
+        "why": "A सही है। R गलत है: शिवालिक सबसे नई और सबसे नीची श्रेणी है; महान हिमालय (हिमाद्रि) सबसे ऊँचा है।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "The Peninsular plateau is younger than the Himalayas.",
+        "reason": "The Peninsular plateau is made largely of ancient crystalline rocks.",
+        "why": "A is false: the plateau is one of the oldest landmasses on Earth. R is true, and it is the reason the plateau is so old."
+      },
+      "hi": {
+        "assertion": "प्रायद्वीपीय पठार हिमालय से नया है।",
+        "reason": "प्रायद्वीपीय पठार मुख्यतः प्राचीन क्रिस्टलीय चट्टानों से बना है।",
+        "why": "A गलत है: यह पठार पृथ्वी के सबसे पुराने भूभागों में है। R सही है, और यही बताता है कि पठार इतना पुराना क्यों है।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "The Himalayas are still rising.",
+        "reason": "The Ganga is formed by the meeting of the Bhagirathi and the Alaknanda at Devprayag.",
+        "why": "Both are true, but the Ganga's source has nothing to do with uplift. The Himalayas rise because the Indian plate keeps pushing north."
+      },
+      "hi": {
+        "assertion": "हिमालय अब भी ऊपर उठ रहा है।",
+        "reason": "गंगा देवप्रयाग में भागीरथी और अलकनंदा के मिलने से बनती है।",
+        "why": "दोनों सही हैं, पर गंगा के उद्गम का उत्थान से कोई संबंध नहीं। हिमालय इसलिए उठ रहा है क्योंकि भारतीय प्लेट उत्तर की ओर धकेलती रहती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class XI Fundamentals of Physical Geography; NCERT Class XI India: Physical Environment",
+    "hi": "NCERT कक्षा XI भौतिक भूगोल के मूल सिद्धांत; NCERT कक्षा XI भारत: भौतिक पर्यावरण"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

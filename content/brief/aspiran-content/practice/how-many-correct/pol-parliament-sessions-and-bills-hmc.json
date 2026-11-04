@@ -1,0 +1,174 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Only one",
+      "Only two",
+      "Only three",
+      "All four",
+      "None"
+    ],
+    "hi": [
+      "केवल एक",
+      "केवल दो",
+      "केवल तीन",
+      "सभी चार",
+      "कोई नहीं"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-how-many-statements"
+    ]
+  },
+  "id": "pol-parliament-sessions-and-bills-hmc",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Parliament: sessions, sittings and bills: how many correct?",
+    "hi": "संसद: सत्र, बैठकें और विधेयक: कितने कथन सही?"
+  },
+  "items": [
+    {
+      "truth": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about sessions of Parliament:",
+        "statements": [
+          "The President summons each House of Parliament from time to time.",
+          "The Constitution fixes three sessions of Parliament every year.",
+          "Not more than six months may pass between the last sitting of one session and the first sitting of the next.",
+          "Prorogation of the Lok Sabha makes all bills pending in it lapse."
+        ],
+        "why": "Statement 2 is wrong: the budget, monsoon and winter sessions are a convention, not a rule in the Constitution. Statement 4 is wrong: prorogation ends a session, but bills lapse only on dissolution. So two are correct."
+      },
+      "hi": {
+        "stem": "संसद के सत्रों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राष्ट्रपति समय-समय पर संसद के प्रत्येक सदन को आहूत करते हैं।",
+          "संविधान हर वर्ष संसद के तीन सत्र तय करता है।",
+          "एक सत्र की अंतिम बैठक और अगले सत्र की पहली बैठक के बीच छह महीने से अधिक का अंतर नहीं हो सकता।",
+          "लोकसभा का सत्रावसान होने पर उसमें लंबित सभी विधेयक समाप्त हो जाते हैं।"
+        ],
+        "why": "कथन 2 गलत है: बजट, मानसून और शीतकालीन सत्र एक परंपरा हैं, संविधान का नियम नहीं। कथन 4 गलत है: सत्रावसान से सत्र खत्म होता है, पर विधेयक केवल विघटन पर समाप्त होते हैं। यानी दो कथन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about quorum and joint sittings:",
+        "statements": [
+          "The quorum of each House is one-tenth of the total number of members of that House.",
+          "The Chairman of the Rajya Sabha presides over a joint sitting of the two Houses.",
+          "A joint sitting can be called to settle a deadlock over a Constitution Amendment Bill."
+        ],
+        "why": "Statement 2 is wrong: the Speaker of the Lok Sabha presides over a joint sitting. Statement 3 is wrong: Article 108 joint sittings do not apply to Constitution Amendment Bills. Only one is correct."
+      },
+      "hi": {
+        "stem": "गणपूर्ति (कोरम) और संयुक्त बैठक के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "प्रत्येक सदन की गणपूर्ति उस सदन के कुल सदस्यों का दसवाँ भाग है।",
+          "दोनों सदनों की संयुक्त बैठक की अध्यक्षता राज्यसभा के सभापति करते हैं।",
+          "संविधान संशोधन विधेयक पर गतिरोध दूर करने के लिए संयुक्त बैठक बुलाई जा सकती है।"
+        ],
+        "why": "कथन 2 गलत है: संयुक्त बैठक की अध्यक्षता लोकसभा अध्यक्ष करते हैं। कथन 3 गलत है: अनुच्छेद 108 की संयुक्त बैठक संविधान संशोधन विधेयकों पर लागू नहीं होती। सिर्फ़ एक कथन सही है।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about Money Bills:",
+        "statements": [
+          "A Money Bill can be introduced only in the Lok Sabha.",
+          "The Rajya Sabha can hold a Money Bill for at most 14 days.",
+          "The Constitution says the Speaker's decision on whether a bill is a Money Bill is final.",
+          "The Rajya Sabha can reject a Money Bill outright."
+        ],
+        "why": "Statement 4 is wrong: the Rajya Sabha can only make recommendations, which the Lok Sabha may accept or reject. The other three are correct."
+      },
+      "hi": {
+        "stem": "धन विधेयकों के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "धन विधेयक केवल लोकसभा में पेश किया जा सकता है।",
+          "राज्यसभा धन विधेयक को अधिकतम 14 दिन तक रोक सकती है।",
+          "संविधान के अनुसार कोई विधेयक धन विधेयक है या नहीं, इस पर लोकसभा अध्यक्ष का निर्णय अंतिम है।",
+          "राज्यसभा धन विधेयक को पूरी तरह अस्वीकार कर सकती है।"
+        ],
+        "why": "कथन 4 गलत है: राज्यसभा केवल सिफ़ारिशें कर सकती है, जिन्हें लोकसभा माने या न माने। बाकी तीन सही हैं।"
+      }
+    },
+    {
+      "truth": [
+        true,
+        false,
+        false
+      ],
+      "en": {
+        "stem": "Consider the following statements about the Rajya Sabha:",
+        "statements": [
+          "The Rajya Sabha is a permanent House and is not dissolved.",
+          "One-half of its members retire every three years.",
+          "The Vice-President is a member of the Rajya Sabha."
+        ],
+        "why": "Statement 2 is wrong: one-third of members retire every second year. Statement 3 is wrong: the Vice-President is the ex officio Chairman, not a member. Only one is correct."
+      },
+      "hi": {
+        "stem": "राज्यसभा के बारे में निम्नलिखित कथनों पर विचार कीजिए:",
+        "statements": [
+          "राज्यसभा एक स्थायी सदन है और इसका विघटन नहीं होता।",
+          "इसके आधे सदस्य हर तीन वर्ष में सेवानिवृत्त होते हैं।",
+          "उपराष्ट्रपति राज्यसभा के सदस्य होते हैं।"
+        ],
+        "why": "कथन 2 गलत है: हर दूसरे वर्ष एक-तिहाई सदस्य सेवानिवृत्त होते हैं। कथन 3 गलत है: उपराष्ट्रपति पदेन सभापति होते हैं, सदस्य नहीं। सिर्फ़ एक कथन सही है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 85, 100, 108, 109, 110 and 118",
+    "hi": "भारत का संविधान, अनुच्छेद 85, 100, 108, 109, 110 और 118"
+  },
+  "factsToCheck": [
+    "Gap between two sessions not more than six months (Article 85)",
+    "Rajya Sabha may hold a Money Bill for 14 days (Article 109)",
+    "One-third of Rajya Sabha members retire every second year (Article 83)"
+  ],
+  "schema": "upsc-pods/how-many-correct@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

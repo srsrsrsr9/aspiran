@@ -1,0 +1,130 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "optionText": {
+    "en": [
+      "Both A and R are true, and R is the correct explanation of A",
+      "Both A and R are true, but R is not the correct explanation of A",
+      "A is true, but R is false",
+      "A is false, but R is true"
+    ],
+    "hi": [
+      "A और R दोनों सही हैं, और R, A की सही व्याख्या है",
+      "A और R दोनों सही हैं, पर R, A की सही व्याख्या नहीं है",
+      "A सही है, पर R ग़लत है",
+      "A ग़लत है, पर R सही है"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-statement-i-ii"
+    ]
+  },
+  "id": "pol-elections-and-anti-defection-ar",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Elections and anti-defection: assertion and reason",
+    "hi": "चुनाव और दल-बदल विरोधी कानून: अभिकथन और कारण"
+  },
+  "items": [
+    {
+      "key": "a",
+      "en": {
+        "assertion": "The voting age in India is 18 years.",
+        "reason": "The 61st Amendment lowered the voting age from 21 to 18.",
+        "why": "Both are true. The 61st Amendment changed Article 326, so R explains A."
+      },
+      "hi": {
+        "assertion": "भारत में मतदान की आयु 18 वर्ष है।",
+        "reason": "61वें संशोधन ने मतदान की आयु 21 से घटाकर 18 कर दी।",
+        "why": "दोनों सही हैं। 61वें संशोधन ने अनुच्छेद 326 बदला, इसलिए R, A को समझाता है।"
+      }
+    },
+    {
+      "key": "c",
+      "en": {
+        "assertion": "A split by one-third of a party's legislators no longer protects them from disqualification.",
+        "reason": "The Tenth Schedule was added by the 91st Amendment.",
+        "why": "A is true: the 91st Amendment of 2003 removed the split exception. R is false: the Tenth Schedule was added by the 52nd Amendment of 1985."
+      },
+      "hi": {
+        "assertion": "किसी दल के एक-तिहाई विधायकों का विभाजन अब उन्हें अयोग्यता से नहीं बचाता।",
+        "reason": "दसवीं अनुसूची 91वें संशोधन से जोड़ी गई।",
+        "why": "A सही है: 2003 के 91वें संशोधन ने विभाजन वाला अपवाद हटा दिया। R गलत है: दसवीं अनुसूची 1985 के 52वें संशोधन से जोड़ी गई।"
+      }
+    },
+    {
+      "key": "b",
+      "en": {
+        "assertion": "A merger of a party with another is allowed under the Tenth Schedule if two-thirds of its legislators agree.",
+        "reason": "The Presiding Officer decides questions of disqualification under the Tenth Schedule.",
+        "why": "Both are true, but R is about who decides, not about why mergers are allowed. So R does not explain A."
+      },
+      "hi": {
+        "assertion": "दसवीं अनुसूची के तहत किसी दल का दूसरे दल में विलय तब मान्य है जब उसके दो-तिहाई विधायक सहमत हों।",
+        "reason": "दसवीं अनुसूची के तहत अयोग्यता के प्रश्नों का निर्णय पीठासीन अधिकारी करते हैं।",
+        "why": "दोनों सही हैं, पर R यह बताता है कि निर्णय कौन करता है, यह नहीं कि विलय क्यों मान्य है। इसलिए R, A को नहीं समझाता।"
+      }
+    },
+    {
+      "key": "d",
+      "en": {
+        "assertion": "The Election Commission conducts elections to panchayats and municipalities.",
+        "reason": "Article 324 vests the superintendence of elections to Parliament, state legislatures and the offices of President and Vice-President in the Election Commission.",
+        "why": "A is false: State Election Commissions run local body elections. R is true and shows why: Article 324 covers only those higher elections."
+      },
+      "hi": {
+        "assertion": "निर्वाचन आयोग पंचायतों और नगरपालिकाओं के चुनाव कराता है।",
+        "reason": "अनुच्छेद 324 संसद, राज्य विधानमंडलों और राष्ट्रपति व उपराष्ट्रपति पदों के चुनावों का अधीक्षण निर्वाचन आयोग को सौंपता है।",
+        "why": "A गलत है: स्थानीय निकायों के चुनाव राज्य निर्वाचन आयोग कराते हैं। R सही है और यही दिखाता है: अनुच्छेद 324 केवल इन ऊँचे चुनावों पर लागू होता है।"
+      }
+    },
+    {
+      "key": "a",
+      "en": {
+        "assertion": "A nominated member of a House is disqualified if they join a political party more than six months after taking their seat.",
+        "reason": "The Tenth Schedule gives a nominated member six months to join a party.",
+        "why": "Both are true, and R is the rule that produces A."
+      },
+      "hi": {
+        "assertion": "सदन का मनोनीत सदस्य सीट ग्रहण करने के छह महीने बाद किसी दल में शामिल हो तो अयोग्य हो जाता है।",
+        "reason": "दसवीं अनुसूची मनोनीत सदस्य को किसी दल में शामिल होने के लिए छह महीने देती है।",
+        "why": "दोनों सही हैं, और R ही वह नियम है जिससे A निकलता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 324, 326 and Tenth Schedule; Representation of the People Act 1951; 61st Amendment Act 1988",
+    "hi": "भारत का संविधान, अनुच्छेद 324, 326 और दसवीं अनुसूची; लोक प्रतिनिधित्व अधिनियम 1951; 61वाँ संशोधन अधिनियम 1988"
+  },
+  "factsToCheck": [
+    "61st Amendment (1988, in force 1989) lowered the voting age to 18",
+    "52nd Amendment 1985 added the Tenth Schedule; 91st Amendment 2003 removed the one-third split exception"
+  ],
+  "schema": "upsc-pods/assertion-reason@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

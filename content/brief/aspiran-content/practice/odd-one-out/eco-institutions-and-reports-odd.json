@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative"
+    ]
+  },
+  "id": "eco-institutions-and-reports-odd",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Institutions and their reports: find the odd one",
+    "hi": "संस्थाएँ और उनकी रिपोर्टें: अलग कौन?"
+  },
+  "rounds": [
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "World Economic Outlook",
+          "Global Financial Stability Report",
+          "Human Development Report",
+          "Fiscal Monitor"
+        ],
+        "why": "The World Economic Outlook, Global Financial Stability Report and Fiscal Monitor are IMF reports. The Human Development Report is UNDP's."
+      },
+      "hi": {
+        "items": [
+          "वर्ल्ड इकोनॉमिक आउटलुक",
+          "ग्लोबल फ़ाइनेंशियल स्टेबिलिटी रिपोर्ट",
+          "मानव विकास रिपोर्ट",
+          "फ़िस्कल मॉनिटर"
+        ],
+        "why": "वर्ल्ड इकोनॉमिक आउटलुक, ग्लोबल फ़ाइनेंशियल स्टेबिलिटी रिपोर्ट और फ़िस्कल मॉनिटर IMF की रिपोर्टें हैं। मानव विकास रिपोर्ट UNDP की है।"
+      }
+    },
+    {
+      "odd": 0,
+      "en": {
+        "items": [
+          "Economic Survey",
+          "Financial Stability Report",
+          "Monetary Policy Report",
+          "Report on Currency and Finance"
+        ],
+        "why": "The last three are RBI publications. The Economic Survey is prepared by the Ministry of Finance."
+      },
+      "hi": {
+        "items": [
+          "आर्थिक सर्वेक्षण",
+          "वित्तीय स्थिरता रिपोर्ट",
+          "मौद्रिक नीति रिपोर्ट",
+          "मुद्रा और वित्त पर रिपोर्ट"
+        ],
+        "why": "अंतिम तीन RBI के प्रकाशन हैं। आर्थिक सर्वेक्षण वित्त मंत्रालय तैयार करता है।"
+      }
+    },
+    {
+      "odd": 3,
+      "en": {
+        "items": [
+          "IBRD",
+          "IDA",
+          "IFC",
+          "BIS"
+        ],
+        "why": "IBRD, IDA and IFC belong to the World Bank Group. The Bank for International Settlements is a separate body of central banks, based in Basel."
+      },
+      "hi": {
+        "items": [
+          "IBRD",
+          "IDA",
+          "IFC",
+          "BIS"
+        ],
+        "why": "IBRD, IDA और IFC विश्व बैंक समूह के हैं। अंतरराष्ट्रीय निपटान बैंक (BIS) केंद्रीय बैंकों की एक अलग संस्था है, जो बासेल में है।"
+      }
+    },
+    {
+      "odd": 1,
+      "en": {
+        "items": [
+          "SEBI",
+          "NITI Aayog",
+          "IRDAI",
+          "PFRDA"
+        ],
+        "why": "SEBI, IRDAI and PFRDA are financial sector regulators. NITI Aayog is a policy think tank."
+      },
+      "hi": {
+        "items": [
+          "SEBI",
+          "नीति आयोग",
+          "IRDAI",
+          "PFRDA"
+        ],
+        "why": "SEBI, IRDAI और PFRDA वित्तीय क्षेत्र के नियामक हैं। नीति आयोग नीति संबंधी विचार संस्था है।"
+      }
+    },
+    {
+      "odd": 2,
+      "en": {
+        "items": [
+          "Global Gender Gap Report",
+          "Global Competitiveness Report",
+          "World Development Report",
+          "Global Risks Report"
+        ],
+        "why": "The Gender Gap, Competitiveness and Global Risks reports come from the World Economic Forum. The World Development Report is the World Bank's."
+      },
+      "hi": {
+        "items": [
+          "ग्लोबल जेंडर गैप रिपोर्ट",
+          "ग्लोबल कॉम्पिटिटिवनेस रिपोर्ट",
+          "वर्ल्ड डेवलपमेंट रिपोर्ट",
+          "ग्लोबल रिस्क्स रिपोर्ट"
+        ],
+        "why": "जेंडर गैप, कॉम्पिटिटिवनेस और ग्लोबल रिस्क्स रिपोर्टें विश्व आर्थिक मंच की हैं। वर्ल्ड डेवलपमेंट रिपोर्ट विश्व बैंक की है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "IMF; World Bank; UNDP; World Economic Forum; RBI",
+    "hi": "IMF; विश्व बैंक; UNDP; विश्व आर्थिक मंच; RBI"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/odd-one-out@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

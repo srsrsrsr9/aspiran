@@ -1,0 +1,146 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": "sfx/chime",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-negative",
+      "pre-statement-code"
+    ]
+  },
+  "id": "art-world-heritage-sites-india-tt",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "World Heritage Sites in India: two truths and a lie",
+    "hi": "भारत के विश्व धरोहर स्थल: दो सच, एक झूठ"
+  },
+  "rounds": [
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Ramappa Temple in Telangana is a World Heritage Site.",
+          "Dholavira is a World Heritage Site.",
+          "The Ramappa Temple is in Tamil Nadu."
+        ],
+        "fix": "The Ramappa (Rudreshwara) Temple is at Palampet in Telangana."
+      },
+      "hi": {
+        "statements": [
+          "तेलंगाना का रामप्पा मंदिर विश्व धरोहर स्थल है।",
+          "धोलावीरा विश्व धरोहर स्थल है।",
+          "रामप्पा मंदिर तमिलनाडु में है।"
+        ],
+        "fix": "रामप्पा (रुद्रेश्वर) मंदिर तेलंगाना के पालमपेट में है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "The Western Ghats is listed as a cultural site.",
+          "Kaziranga National Park is a natural World Heritage Site.",
+          "Khangchendzonga National Park is a mixed site."
+        ],
+        "fix": "The Western Ghats is a natural site, listed for its biodiversity."
+      },
+      "hi": {
+        "statements": [
+          "पश्चिमी घाट को सांस्कृतिक स्थल के रूप में सूचीबद्ध किया गया है।",
+          "काज़ीरंगा राष्ट्रीय उद्यान प्राकृतिक विश्व धरोहर स्थल है।",
+          "खंगचेंदज़ोंगा राष्ट्रीय उद्यान मिश्रित स्थल है।"
+        ],
+        "fix": "पश्चिमी घाट प्राकृतिक स्थल है, जो अपनी जैव विविधता के लिए सूचीबद्ध है।"
+      }
+    },
+    {
+      "lie": 1,
+      "en": {
+        "statements": [
+          "The Moidams of the Ahom dynasty are in Assam.",
+          "Santiniketan is in Odisha.",
+          "The sacred ensembles of the Hoysalas are in Karnataka."
+        ],
+        "fix": "Santiniketan is in West Bengal."
+      },
+      "hi": {
+        "statements": [
+          "अहोम वंश के मोइदाम असम में हैं।",
+          "शांतिनिकेतन ओडिशा में है।",
+          "होयसलों के पवित्र मंदिर समूह कर्नाटक में हैं।"
+        ],
+        "fix": "शांतिनिकेतन पश्चिम बंगाल में है।"
+      }
+    },
+    {
+      "lie": 2,
+      "en": {
+        "statements": [
+          "The Mountain Railways of India include the Darjeeling Himalayan Railway.",
+          "The Nilgiri Mountain Railway is part of the same listing.",
+          "The Konkan Railway is one of the Mountain Railways of India."
+        ],
+        "fix": "The three Mountain Railways are Darjeeling, Nilgiri and Kalka-Shimla; the Konkan Railway is not listed."
+      },
+      "hi": {
+        "statements": [
+          "भारत की पर्वतीय रेलों में दार्जिलिंग हिमालयन रेलवे शामिल है।",
+          "नीलगिरि पर्वतीय रेल भी इसी सूची का हिस्सा है।",
+          "कोंकण रेलवे भारत की पर्वतीय रेलों में से एक है।"
+        ],
+        "fix": "तीन पर्वतीय रेलें दार्जिलिंग, नीलगिरि और कालका-शिमला हैं; कोंकण रेलवे सूची में नहीं है।"
+      }
+    },
+    {
+      "lie": 0,
+      "en": {
+        "statements": [
+          "Jaipur City is listed for its Mughal gardens.",
+          "Ahmedabad was India's first World Heritage City.",
+          "The Rani-ki-Vav stepwell is in Gujarat."
+        ],
+        "fix": "Jaipur is listed as a planned city with a grid layout, laid out in the eighteenth century."
+      },
+      "hi": {
+        "statements": [
+          "जयपुर शहर अपने मुगल बागों के लिए सूचीबद्ध है।",
+          "अहमदाबाद भारत का पहला विश्व धरोहर शहर था।",
+          "रानी की वाव बावड़ी गुजरात में है।"
+        ],
+        "fix": "जयपुर अठारहवीं सदी में ग्रिड योजना पर बसाए गए नियोजित शहर के रूप में सूचीबद्ध है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "UNESCO World Heritage List; Archaeological Survey of India",
+    "hi": "UNESCO विश्व धरोहर सूची; भारतीय पुरातत्व सर्वेक्षण"
+  },
+  "factsToCheck": [
+    "Ramappa Temple 2021; Dholavira 2021; Santiniketan 2023; Hoysala temples 2023; Moidams 2024; Maratha Military Landscapes 2025"
+  ],
+  "schema": "upsc-pods/two-truths@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batches X1–X5)",
+    "createdOn": "2026-11-03",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}
