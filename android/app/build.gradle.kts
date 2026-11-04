@@ -32,7 +32,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 3
-        versionName = "0.1.0"
+        versionName = "0.3.0"
         // Sign-in (auth-build.md). No google-services.json: the four Firebase values come from local.properties
         // (firebase.apiKey, firebase.appId, firebase.projectId, firebase.webClientId), -Pupsc.firebase.<key>=..., or env.
         firebaseConfig.forEach { (field, value) -> buildConfigField("String", field, "\"$value\"") }
