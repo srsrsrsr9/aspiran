@@ -22,7 +22,7 @@ import * as SY from "./syllabus.js";
 import * as MP from "./map.js";
 import * as X from "./explore.js";
 import * as BR from "./brief.js";
-import * as SKY from "./sky.js";
+import * as VINE from "./vine.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -311,10 +311,10 @@ const PREP_TABS = [
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
-  prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
+  prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", vine: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", upgrade: "prep", skeletons: "prep", cases: "prep", csat: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { skeletons: "practice", cases: "practice", csat: "practice", walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { skeletons: "practice", cases: "practice", csat: "practice", walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", vine: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
@@ -440,7 +440,7 @@ function onboarding() {
   const tl = (k) => t(k, o.lang);
   const redraw = () => put($("#root"), onboarding());
   const step = (n) => { o.step = n; redraw(); };
-  const dots = o.step === 0 ? null : h("div.dots", { "aria-label": `Step ${Math.min(o.step + 1, 5)} of 5` }, [0, 1, 2, 3, 4].map((i) => h("i" + (i === o.step ? ".on" : ""))));
+  const dots = o.step === 0 ? null : h("div.dots", { "aria-label": `Step ${Math.min(o.step + 1, 6)} of 6` }, [0, 1, 2, 3, 4, 5].map((i) => h("i" + (i === o.step ? ".on" : ""))));
   let body;
   if (o.step === 0) {
     // The home page for anyone new: a welcome in eleven languages, the app in English (Hindi where it exists),
@@ -477,6 +477,13 @@ function onboarding() {
       h("div.card", name, h("p.small.muted", "Only your pod sees it. It never goes to Chotu."),
         h("div.row", { style: { marginTop: "12px" } }, h("button", { onclick: () => step(2) }, "Back"), h("button.primary", { onclick: () => step(4) }, "Next")))];
     setTimeout(() => name.focus(), 0);
+  } else if (o.step === 4) {
+    // The whole syllabus, before anything else: the breadth is the honest picture, and every leaf starts dark.
+    body = [h("h1", "This is the whole syllabus"),
+      gardenSection({ hero: false, note: false }),
+      h("p", "Every leaf is one line of UPSC's syllabus. It's meant to look like a lot, because it is. Nobody lights it all at once."),
+      h("p.muted", "Each leaf lights up as you meet its topic, and deepens as you recall it and use it. One day at a time, with your pod beside you."),
+      h("div.row", h("button", { onclick: () => step(3) }, "Back"), h("button.primary", { onclick: () => step(5) }, "Next"))];
   } else {
     body = [h("div.center", kulhad("warm", 96)), h("h1.center", "Meet Chotu"), h("p.center", h("span.ai-tag", "Chotu · AI")),
       h("div.card",
@@ -533,6 +540,9 @@ function viewToday() {
       h("div.row", { style: { marginTop: "12px", flexWrap: "wrap" } }, ...step.act),
       steps.length > 1 && h("p.small.muted", `Then ${steps.length - 1} more.`))
     : h("div.card", h("h2", { style: { marginTop: 0 } }, "You're done for today. Really."), h("p.muted", "The rest of the day is yours. Close the Day tonight if you like."));
+  const syllabus = h("div.card", { style: { padding: "14px" } },
+    h("div.row.between", h("strong", { style: { fontFamily: "var(--head-font)", fontSize: "18px" } }, "Your syllabus"), h("a", { href: "#map" }, "All of it →")),
+    gardenSection({ height: 300, hero: false, note: false }));
   const tasks = h("div.card",
     h("h2", { style: { marginTop: 0 } }, "Today's 3"),
     (due > 0 || s.reviewed) && h("div.task",
@@ -563,7 +573,7 @@ function viewToday() {
     routineCard(),
     nextCard,
     h("details", h("summary", "Today's full list"), tasks),
-    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
+    syllabus,
     h("div.card", h("div.row.between",
       h("div", h("strong", "Long session?"), h("div.small.muted", fm ? `${fm} focused minutes today.` : "Start a focus block. Distracting sites stay closed until it ends.")),
       h("a.btn", { href: "#focus" }, "Focus"))),
@@ -747,7 +757,7 @@ function viewPractice() {
   return h("div.col", X.plusBanner(), h("h1", "Practice"),
     h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Today's new questions.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
-    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "Your syllabus map"), h("div.small.muted", mapLine())), h("span", "→"))),
+    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "The whole syllabus"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("a.card.link", { href: "#skeletons" }, h("div.row.between", h("div", h("strong", "Answer skeletons"), h("div.small.muted", libraryOf("mains-skeleton").length ? `${libraryOf("mains-skeleton").length} real Mains questions, each with a way in. Outline first, then compare.` : "Opens once the skeletons are approved.")), h("span", "→"))),
     h("a.card.link", { href: "#cases" }, h("div.row.between", h("div", h("strong", "Ethics (GS4)"), h("div.small.muted", libraryOf("gs4-case").length ? `${libraryOf("gs4-case").length} case studies, plus thinkers and terms in English and Hindi.` : "Opens once the cases are approved.")), h("span", "→"))),
@@ -878,19 +888,55 @@ function mapLine() {
   return [c.met && `${c.met} met`, c.recall && `${c.recall} can recall`, c.use && `${c.use} can use`].filter(Boolean).join(" · ");
 }
 
-/** Your sky: every paper as a constellation, every topic a star (sky.js). A tap opens that paper's topic list. */
-function skyView(papers, m, day, cur) {
-  const stateOf = (id) => MP.stateOf(m[id], day);
-  return h("section.sky", { "aria-label": "Your sky: the syllabus as constellations" },
-    h("h2", { style: { margin: 0 } }, "Your sky"),
-    h("p.small.muted", "One star for each topic in the syllabus. Each one you meet lights up, and grows brighter as you recall it and use it."),
-    SKY.legend(),
-    h("div.sky-grid", papers.map((p) => {
-      const topics = p.topics.map((name, i) => ({ id: SY.nodeId(p, i), name }));
-      return h("button.sky-card", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); document.getElementById("map-papers")?.scrollIntoView({ block: "start" }); } },
-        h("div.row.between", h("strong", p.short), h("span.small.muted", SKY.countLine(topics, stateOf))),
-        SKY.constellation(topics, stateOf, `${p.name}: ${SKY.countLine(topics, stateOf)}`));
-    })));
+/** The whole syllabus as a creeper garden (vine.js): a vine per paper, a branch per topic, a leaf per syllabus line. */
+function syllabusVines(day = today()) {
+  const m = nodes(), optional = P.value("optional_subject");
+  return VINE.vinesOf(SY.papersFor(optional), SY.nodeId, (id) => MP.stateOf(m[id], day), !!optional);
+}
+function gardenSection({ height = 430, hero = true, note = true } = {}) {
+  const vines = syllabusVines(), c = VINE.countsOf(vines);
+  return h("section.garden", { "aria-label": "The whole syllabus, as a creeper garden" },
+    hero && h("p.garden-hero", "The whole syllabus. Every line of it."),
+    h("div.garden-count", [[c.papers, "papers"], [c.topics, "topics"], [c.lines, "lines to learn"], [c.lit, c.lit === 1 ? "leaf lit" : "leaves lit"]]
+      .map(([n, l]) => h("div", h("b", String(n)), h("span", l)))),
+    h("div.garden-frame", VINE.garden(vines, { height, onVine: (id) => { location.hash = "#vine/" + id; } })),
+    note && h("p.small.muted", c.lit
+      ? "Every leaf is a line of UPSC's syllabus. It lights up when you meet its topic, and deepens as you recall it and use it. Tap a vine to open it."
+      : "It looks like a lot because it is. Every leaf is a line of UPSC's syllabus, and each one lights up as you meet its topic. Tap a vine to open it."),
+    note && VINE.legend());
+}
+
+/** One paper's creeper: every topic a branch, every syllabus line a leaf, and the lines written out under each. */
+function viewVine(id) {
+  const day = today(), vines = syllabusVines(day);
+  const k = Math.max(0, vines.findIndex((v) => v.id === id)), v = vines[k];
+  const c = VINE.countsOf([v]);
+  const back = h("div", { style: { marginBottom: "8px" } }, h("a.btn", { href: "#map" }, "← The whole garden"));
+  const nav = h("div.row.between", k > 0 ? h("a.btn", { href: "#vine/" + vines[k - 1].id }, "← " + vines[k - 1].label) : h("span"),
+    k < vines.length - 1 ? h("a.btn", { href: "#vine/" + vines[k + 1].id }, vines[k + 1].label + " →") : h("span"));
+  if (v.seedling) return h("div.col", back, h("h1", v.name), h("p.muted", v.lead),
+    h("div.card", h("p", "Your optional is two papers of its own, with as many lines again as a GS paper."), h("a.btn.primary", { href: "#mains" }, "Tell us your optional")), nav);
+  return h("div.col", back,
+    h("div.small.muted", v.name),
+    h("h1", { style: { margin: "0" } }, v.label === v.name ? v.name : `${v.label}: ${c.lines} lines`),
+    v.lead && h("p.muted", v.lead),
+    h("p.small", `${c.topics} topics · ${c.lines} lines · ${c.lit} lit`),
+    VINE.legend(),
+    h("div.creeper", v.branches.map((b, i) => {
+      const lis = b.leaves.map((l) => h("li", l.node && b.paper ? h("a", { href: "#map/" + l.node }, l.line) : l.line));
+      let svg = null;
+      svg = VINE.topicBranch(b, v.id + i, { onLeaf: (j) => {
+        lis.forEach((li, x) => li.classList.toggle("on", x === j));
+        svg.querySelectorAll(".vine-leaf").forEach((g, x) => g.classList.toggle("on", x === j));
+      } });
+      const st = b.state;
+      return h("div.creeper-topic", svg,
+        h("div.creeper-text",
+          b.node ? h("a.topic", { href: "#map/" + b.node }, b.label) : h("span.topic", { style: { fontFamily: "var(--head-font)", fontWeight: 800, fontSize: "17px" } }, b.label),
+          st && h("span.small", { style: { color: st === MP.NONE ? "var(--muted)" : "var(--brand)" } }, `${STATE_DOT[st]} ${MP.LABEL[st]}`),
+          h("ul.creeper-lines", lis)));
+    })),
+    nav);
 }
 
 function viewMap(arg) {
@@ -899,11 +945,11 @@ function viewMap(arg) {
   const papers = SY.papersFor(P.value("optional_subject"));
   const cur = papers.find((p) => p.id === store.get("mapPaper")) ?? papers[0];
   return h("div.col",
-    h("h1", "Your syllabus map"),
+    h("h1", { style: { marginBottom: 0 } }, "The whole syllabus"),
     pauseLine("syllabus-first-open"),
-    h("p.muted", "Every topic in the official syllabus. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this."),
-    h("p.small", mapLine()),
-    skyView(papers, m, day, cur),
+    gardenSection({ hero: false }),
+    h("h2", "Topic by topic"),
+    h("p.small.muted", "Each topic moves from Not started to Met, then Can recall, then Can use. Only you see this."),
     h("div.chips#map-papers", papers.map((p) => h("button.chip", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); } }, p.short))),
     h("div.card.soft", h("strong", cur.name), h("div.small.muted", cur.lead)),
     cur.topics.map((name, i) => {
@@ -3910,7 +3956,7 @@ BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAl
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
-  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
+  prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks,
   learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
