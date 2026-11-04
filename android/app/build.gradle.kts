@@ -31,8 +31,8 @@ android {
         applicationId = "in.aspiran.app" // owner, 31 Oct 2026: set before the first Play upload; never change it after
         minSdk = 26
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.4.0"
+        versionCode = 6
+        versionName = "0.4.1"
         // Sign-in (auth-build.md). No google-services.json: the four Firebase values come from local.properties
         // (firebase.apiKey, firebase.appId, firebase.projectId, firebase.webClientId), -Pupsc.firebase.<key>=..., or env.
         firebaseConfig.forEach { (field, value) -> buildConfigField("String", field, "\"$value\"") }

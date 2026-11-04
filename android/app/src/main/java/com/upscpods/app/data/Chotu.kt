@@ -5,7 +5,6 @@ import android.util.Log
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.work.Constraints
 import androidx.work.CoroutineWorker
 import androidx.work.ExistingWorkPolicy
-import androidx.work.ForegroundInfo
+import androidx.work.BackoffPolicy
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
@@ -238,6 +237,8 @@ class Chotu private constructor(private val app: Context) {
                     .build(),
             )
             .setInputData(workDataOf("spec" to json.encodeToString(ModelSpec.serializer(), m), "base" to base, "wifiOnly" to wifiOnly))
+            // Android stops background work after about 10 minutes; it comes back quickly and resumes from the .part file.
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 15, TimeUnit.SECONDS)
             .build()
         // REPLACE, so switching Wi-Fi only <-> mobile data takes effect. The .part file stays, so it resumes.
         WorkManager.getInstance(app).enqueueUniqueWork(WORK, ExistingWorkPolicy.REPLACE, req)
@@ -727,8 +728,9 @@ class Chotu private constructor(private val app: Context) {
 
 /**
  * Downloads the model from our pod server, resuming where it stopped (HTTP Range), following redirects
- * (R2 or a CDN later), then checks the size and SHA-256 before keeping it. Runs as a foreground job so a
- * multi-GB download isn't cut off at 10 minutes. Short network blips are retried here; anything that
+ * (R2 or a CDN later), then checks the size and SHA-256 before keeping it. Ordinary background work, not a
+ * foreground service (so no Play declaration): when Android stops it (about 10 minutes at a time), it retries and
+ * picks up from the .part file. A plain progress notification shows when notifications are allowed. Short network blips are retried here; anything that
  * won't fix itself fails with a sentence the person can act on, so the screen never sits on
  * "waiting" forever.
  */
@@ -755,20 +757,21 @@ class ModelDownloadWorker(context: Context, params: WorkerParameters) : Coroutin
         if (dir.usableSpace < m.bytes - part.length() + 200_000_000) {
             return@withContext fail("Not enough free space: ${m.sizeLabel} is needed. Free some space and try again.")
         }
-        runCatching { setForeground(foreground(m, part.length(), wifiOnly)) }
+        note(m, part.length(), wifiOnly)
 
         // A few quick tries for blips, resuming each time; then hand back to WorkManager to wait for a network.
         var lastError = ""
         for (attempt in 0 until 4) {
             try {
                 fetch(m, url, part, wifiOnly)
+                if (isStopped) return@withContext Result.retry() // Android's time limit; resumes from the .part file
                 break
             } catch (e: Fatal) {
                 return@withContext fail(e.why)
             } catch (e: java.io.IOException) {
                 lastError = e.message ?: e.javaClass.simpleName
                 if (attempt == 3) {
-                    return@withContext if (runAttemptCount < 5) Result.retry()
+                    return@withContext if (runAttemptCount < 40) Result.retry()
                     else fail("The download keeps dropping. Check the connection and tap Try again; it picks up where it stopped.")
                 }
                 delay(2000L shl attempt)
@@ -785,6 +788,7 @@ class ModelDownloadWorker(context: Context, params: WorkerParameters) : Coroutin
             return@withContext fail("The file didn't match its checksum, so it was deleted. Tap Try again to download it fresh.")
         }
         if (!part.renameTo(dest)) return@withContext fail("Couldn't save the model. Free some space and try again.")
+        clearNote()
         Result.success()
     }
 
@@ -825,14 +829,14 @@ class ModelDownloadWorker(context: Context, params: WorkerParameters) : Coroutin
                         lastShown = done
                         lastAt = now
                         setProgress(workDataOf("done" to done))
-                        if (done - lastNote > 50_000_000) { lastNote = done; runCatching { setForeground(foreground(m, done, wifiOnly)) } }
+                        if (done - lastNote > 50_000_000) { lastNote = done; note(m, done, wifiOnly) }
                     }
                 }
             }
         }
     }
 
-    private fun fail(why: String) = Result.failure(workDataOf("why" to why))
+    private fun fail(why: String): Result { clearNote(); return Result.failure(workDataOf("why" to why)) }
 
     private fun sha256(f: File): String {
         val md = MessageDigest.getInstance("SHA-256")
@@ -843,7 +847,8 @@ class ModelDownloadWorker(context: Context, params: WorkerParameters) : Coroutin
         return md.digest().joinToString("") { "%02x".format(it) }
     }
 
-    private fun foreground(m: ModelSpec, done: Long, wifiOnly: Boolean): ForegroundInfo {
+    /** A plain, silent progress notification; skipped when notifications aren't allowed. */
+    private fun note(m: ModelSpec, done: Long, wifiOnly: Boolean) {
         val nm = NotificationManagerCompat.from(applicationContext)
         nm.createNotificationChannel(NotificationChannelCompat.Builder(CHANNEL, NotificationManagerCompat.IMPORTANCE_LOW).setName("${Brand.MASCOT_SHORT} download").build())
         val pct = (done * 100 / m.bytes).toInt()
@@ -852,11 +857,13 @@ class ModelDownloadWorker(context: Context, params: WorkerParameters) : Coroutin
             .setContentTitle("Downloading ${Brand.MASCOT_SHORT}")
             .setContentText("${m.sizeLabel} · ${if (wifiOnly) "Wi-Fi only" else "any network"} · $pct%")
             .setProgress(100, pct, false)
-            .setOngoing(true)
+            .setOnlyAlertOnce(true)
             .setSilent(true)
             .build()
-        return if (Build.VERSION.SDK_INT >= 29) ForegroundInfo(NOTE_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC) else ForegroundInfo(NOTE_ID, n)
+        try { nm.notify(NOTE_ID, n) } catch (_: SecurityException) { /* notifications not allowed: the Chotu screen still shows progress */ }
     }
+
+    private fun clearNote() = NotificationManagerCompat.from(applicationContext).cancel(NOTE_ID)
 
     private companion object {
         const val CHANNEL = "chotu-download"

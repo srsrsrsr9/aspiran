@@ -1,5 +1,9 @@
 # Play Console: Foreground service permissions (4 Nov 2026)
 
+**Update, same day: no longer needed.** The app no longer uses a foreground service (versionCode 6, 0.4.1). Upload
+the new bundle; once it's the only one on any track, Play stops asking. If the page still shows, click Discard and
+leave it until version 6 is up. The notes below are kept for the record.
+
 **Why Play is asking:** the app uses `FOREGROUND_SERVICE_DATA_SYNC` for one job: downloading offline Chotu's
 AI model (a Gemma file of a few GB). The person starts the download themselves by tapping Download on the
 consent card in the Chotu tab. While it runs, a silent notification shows "Downloading Chotu · <size> · <n>%",
