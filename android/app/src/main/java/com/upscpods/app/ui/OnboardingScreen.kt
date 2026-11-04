@@ -58,7 +58,7 @@ import com.upscpods.app.data.Stage
 import com.upscpods.app.data.StudyHours
 import com.upscpods.app.data.syllabusFor
 
-private enum class Step { WELCOME, LANGUAGE, SIGN_IN, CONSENT, NAME, SYLLABUS, MEET }
+private enum class Step { WELCOME, LANGUAGE, SIGN_IN, CONSENT, NAME, MEET }
 
 /**
  * First run, community-first: a welcome in eleven languages, then language (with "Request your language"), then sign in
@@ -98,7 +98,7 @@ fun OnboardingScreen(
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                if (step == Step.LANGUAGE || step == Step.SIGN_IN || step == Step.NAME || step == Step.SYLLABUS || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
+                if (step == Step.LANGUAGE || step == Step.SIGN_IN || step == Step.NAME || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
                 Spacer(Modifier.weight(1f))
                 if (step == Step.NAME) TextButton(onClick = { next() }) { Text("Skip") }
             }
@@ -116,7 +116,16 @@ fun OnboardingScreen(
                 ) {
                     when (s) {
                         Step.WELCOME -> {
-                            // The home screen for anyone new: hello in eleven languages, the app itself in English.
+                            // The whole syllabus and the way Aspiran teaches it come first (owner, 4 Nov 2026): the breadth is
+                            // the honest picture, and every leaf starts dark. Then the welcome, hello in eleven languages.
+                            Text("The whole UPSC syllabus. Every line of it.", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold,
+                                modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                            val vines = remember { vinesOf(syllabusFor(null), emptyMap(), hasOptional = false) }
+                            GardenSection(vines, onVine = {}, height = 380f, note = false)
+                            Text("Every leaf is one line of UPSC's syllabus. It looks like a lot because it is, and that's why we take it a leaf at a time. Each one lights up as you meet its topic, and blooms when you can use it in an answer.",
+                                style = ReadingText)
+                            GardenKey()
+                            PedagogyCard()
                             WelcomeScene()
                             Text("Welcome to the Adda", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold,
                                 modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
@@ -155,14 +164,6 @@ fun OnboardingScreen(
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth(),
                             )
-                        }
-                        Step.SYLLABUS -> {
-                            Text("This is the whole syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-                            val vines = remember { vinesOf(syllabusFor(null), emptyMap(), hasOptional = false) }
-                            GardenSection(vines, onVine = {}, height = 380f, note = false)
-                            Text("Every leaf is one line of UPSC's syllabus. It looks like a lot because it is, and that's why we take it a leaf at a time. Each one lights up as you meet its topic, and blooms when you can use it in an answer.",
-                                style = ReadingText)
-                            GardenKey()
                         }
                         Step.MEET -> {
                             ChotuSays(

@@ -82,7 +82,7 @@ Note anything odd in one line each (screen, what you did, what happened) and sen
 
 ## Part 2. Build version 3 and send it out (about 20 minutes, tonight)
 
-Version 3 is ready in the project (`versionCode 6`, version name 0.4.0: raised on 4 Nov evening for the syllabus
+Version 3 is ready in the project (`versionCode 7`, version name 0.4.0: raised on 4 Nov evening for the syllabus
 garden and dark mode, so the number is free even if you had already uploaded a 3). Same steps as your first release
 (`play-store-first-release-mac.md`, steps 1–3):
 1. Android Studio → File → **Sync Project with Gradle Files**.

@@ -440,14 +440,20 @@ function onboarding() {
   const tl = (k) => t(k, o.lang);
   const redraw = () => put($("#root"), onboarding());
   const step = (n) => { o.step = n; redraw(); };
-  const dots = o.step === 0 ? null : h("div.dots", { "aria-label": `Step ${Math.min(o.step + 1, 6)} of 6` }, [0, 1, 2, 3, 4, 5].map((i) => h("i" + (i === o.step ? ".on" : ""))));
+  const dots = o.step === 0 ? null : h("div.dots", { "aria-label": `Step ${Math.min(o.step + 1, 5)} of 5` }, [0, 1, 2, 3, 4].map((i) => h("i" + (i === o.step ? ".on" : ""))));
   let body;
   if (o.step === 0) {
     // The home page for anyone new: a welcome in eleven languages, the app in English (Hindi where it exists),
     // and a prominent way to ask for your own language.
-    body = [welcomeScene(kulhad),
-      h("p.small.muted.center", { style: { margin: 0 } }, tl("onboard.title")),
-      h("h1.center", "Welcome to the Adda"),
+    // The whole syllabus and the way Aspiran teaches it come first (owner, 4 Nov 2026): the breadth is the honest
+    // picture, and every leaf starts dark. Then the welcome.
+    body = [h("p.small.muted.center", { style: { margin: 0 } }, tl("onboard.title")),
+      h("h1.center", "The whole UPSC syllabus. Every line of it."),
+      gardenSection({ hero: false, note: false, height: 360 }),
+      h("p.center", "Every leaf is one line of UPSC's syllabus. It's meant to look like a lot, because it is. Each leaf lights up as you meet its topic, and deepens as you recall it and use it."),
+      pitchCard(),
+      welcomeScene(kulhad),
+      h("h2.center", "Welcome to the Adda"),
       h("p.center", "Pull up a chair. A pod of people at your stage, Chotu, Calm and today's Chai. Free, no card needed."),
       h("div.center", { style: { margin: "12px 0 4px" } }, h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(Auth.optional() || (o.memberId && Auth.signedIn()) ? 2 : 1) }, "Come in")),
       h("div.card", h("h3", { style: { marginTop: 0 } }, tl("lang.label")),
@@ -477,13 +483,6 @@ function onboarding() {
       h("div.card", name, h("p.small.muted", "Only your pod sees it. It never goes to Chotu."),
         h("div.row", { style: { marginTop: "12px" } }, h("button", { onclick: () => step(2) }, "Back"), h("button.primary", { onclick: () => step(4) }, "Next")))];
     setTimeout(() => name.focus(), 0);
-  } else if (o.step === 4) {
-    // The whole syllabus, before anything else: the breadth is the honest picture, and every leaf starts dark.
-    body = [h("h1", "This is the whole syllabus"),
-      gardenSection({ hero: false, note: false }),
-      h("p", "Every leaf is one line of UPSC's syllabus. It's meant to look like a lot, because it is. Nobody lights it all at once."),
-      h("p.muted", "Each leaf lights up as you meet its topic, and deepens as you recall it and use it. One day at a time, with your pod beside you."),
-      h("div.row", h("button", { onclick: () => step(3) }, "Back"), h("button.primary", { onclick: () => step(5) }, "Next"))];
   } else {
     body = [h("div.center", kulhad("warm", 96)), h("h1.center", "Meet Chotu"), h("p.center", h("span.ai-tag", "Chotu · AI")),
       h("div.card",
@@ -540,9 +539,10 @@ function viewToday() {
       h("div.row", { style: { marginTop: "12px", flexWrap: "wrap" } }, ...step.act),
       steps.length > 1 && h("p.small.muted", `Then ${steps.length - 1} more.`))
     : h("div.card", h("h2", { style: { marginTop: 0 } }, "You're done for today. Really."), h("p.muted", "The rest of the day is yours. Close the Day tonight if you like."));
+  // The garden and the method come first (owner, 4 Nov 2026); the day's work follows.
   const syllabus = h("div.card", { style: { padding: "14px" } },
     h("div.row.between", h("strong", { style: { fontFamily: "var(--head-font)", fontSize: "18px" } }, "Your syllabus"), h("a", { href: "#map" }, "All of it →")),
-    gardenSection({ height: 300, hero: false, note: false }));
+    gardenSection({ height: 340, hero: true, note: false }));
   const tasks = h("div.card",
     h("h2", { style: { marginTop: 0 } }, "Today's 3"),
     (due > 0 || s.reviewed) && h("div.task",
@@ -566,6 +566,8 @@ function viewToday() {
   const fm = focus.minutesOn(today());
   return h("div.col", X.plusBanner(),
     h("h1", greeting()),
+    syllabus,
+    pitchCard({ open: (profile().createdOn ?? today()) >= addDays(today(), -6) }),
     h("p.muted", data.brief?.date ? `Chai for ${data.brief.date}` : "Today's Chai isn't out yet."),
     h("p.small", h("a", { href: "#pod" }, podLine())),
     BR.welcomeBack(gapAtOpen),
@@ -573,7 +575,6 @@ function viewToday() {
     routineCard(),
     nextCard,
     h("details", h("summary", "Today's full list"), tasks),
-    syllabus,
     h("div.card", h("div.row.between",
       h("div", h("strong", "Long session?"), h("div.small.muted", fm ? `${fm} focused minutes today.` : "Start a focus block. Distracting sites stay closed until it ends.")),
       h("a.btn", { href: "#focus" }, "Focus"))),
@@ -755,9 +756,10 @@ function viewPractice() {
   const mocks = libraryOf("mock");
   const hist = store.get("mockHistory", []);
   return h("div.col", X.plusBanner(), h("h1", "Practice"),
+    h("div.card", { style: { padding: "14px" } }, gardenSection({ height: 360, hero: true, note: false }), h("a.btn", { href: "#map" }, "Open the whole garden →")),
+    pitchCard(),
     h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Today's new questions.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
-    h("a.card.link", { href: "#map" }, h("div.row.between", h("div", h("strong", "The whole syllabus"), h("div.small.muted", mapLine())), h("span", "→"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
     h("a.card.link", { href: "#skeletons" }, h("div.row.between", h("div", h("strong", "Answer skeletons"), h("div.small.muted", libraryOf("mains-skeleton").length ? `${libraryOf("mains-skeleton").length} real Mains questions, each with a way in. Outline first, then compare.` : "Opens once the skeletons are approved.")), h("span", "→"))),
     h("a.card.link", { href: "#cases" }, h("div.row.between", h("div", h("strong", "Ethics (GS4)"), h("div.small.muted", libraryOf("gs4-case").length ? `${libraryOf("gs4-case").length} case studies, plus thinkers and terms in English and Hindi.` : "Opens once the cases are approved.")), h("span", "→"))),
@@ -893,6 +895,24 @@ function syllabusVines(day = today()) {
   const m = nodes(), optional = P.value("optional_subject");
   return VINE.vinesOf(SY.papersFor(optional), SY.nodeId, (id) => MP.stateOf(m[id], day), !!optional);
 }
+/** How Aspiran teaches: the method in six lines, shown with the garden wherever the garden leads (owner, 4 Nov 2026).
+ * The same lines as the website's rooms and Android's PedagogyCard. */
+const PITCH = [
+  ["Recall, not re-reading", "Close the book and pull it out of your head. That's what makes it stay."],
+  ["Review just before you'd forget", "Short reviews, with gaps that grow from a day to a week to months."],
+  ["Write, mark, rewrite", "Mains answers on paper, marked, then rewritten. Essays in three snaps: skeleton, outline, essay."],
+  ["News tied to the syllabus", "Every Chai card is pinned to the syllabus lines it belongs to."],
+  ["Know how sure you are", "Say how sure you were before you see the answer. Only ever against your own past."],
+  ["One step at a time", "Today shows the next thing to do, never the whole mountain at once."],
+];
+function pitchCard({ open = true } = {}) {
+  const list = h("ol.pitch", PITCH.map(([t, d]) => h("li", h("strong", t), h("span.small.muted", d))));
+  return h("div.card.pitch-card",
+    h("h2", { style: { margin: "0 0 4px" } }, "How Aspiran teaches"),
+    h("p.small.muted", { style: { margin: "0 0 8px" } }, "The way memory actually works, built into every day."),
+    open ? list : h("details", h("summary", "The six ideas"), list));
+}
+
 function gardenSection({ height = 430, hero = true, note = true } = {}) {
   const vines = syllabusVines(), c = VINE.countsOf(vines);
   return h("section.garden", { "aria-label": "The whole syllabus, as a creeper garden" },

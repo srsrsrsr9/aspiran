@@ -189,6 +189,7 @@ fun SyllabusTab(
                 else -> onPaper(id)
             }
         })
+        PedagogyCard()
         Text("Topic by topic", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             shown.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }

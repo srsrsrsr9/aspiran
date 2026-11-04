@@ -83,6 +83,24 @@ fun TodayScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Greeting(now, day, persona)
+        // The garden and the method come first (owner, 4 Nov 2026); the day's work follows.
+        if (vines != null) FlatCard {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Your syllabus", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                    TextButton(onClick = onOpenMap) { Text("All of it →") }
+                }
+                GardenSection(vines, onVine = { onOpenMap() }, height = 340f, note = false, small = true)
+            }
+        } else mapLine?.let { line ->
+            FlatCard(Modifier.clickable(onClick = onOpenMap)) {
+                Column(Modifier.padding(16.dp)) {
+                    Text("Your syllabus map →", style = MaterialTheme.typography.titleMedium)
+                    Text(line, style = MaterialTheme.typography.bodySmall)
+                }
+            }
+        }
+        PedagogyCard()
         WelcomeBackCard(PauseSource.library, PauseSource.hindi)
         weekly()
         if (evening) CloseTheDayBlock(day, primary = true, onOpenCloseDay, now)
@@ -98,22 +116,6 @@ fun TodayScreen(
                 }
             }
             TodaysThree(brief, day, persona, now, primary = false, mainsTopic, onFiveMinutes, onWhy, open)
-        }
-        if (vines != null) FlatCard {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    Text("Your syllabus", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-                    TextButton(onClick = onOpenMap) { Text("All of it →") }
-                }
-                GardenSection(vines, onVine = { onOpenMap() }, height = 300f, note = false, small = true)
-            }
-        } else mapLine?.let { line ->
-            FlatCard(Modifier.clickable(onClick = onOpenMap)) {
-                Column(Modifier.padding(16.dp)) {
-                    Text("Your syllabus map →", style = MaterialTheme.typography.titleMedium)
-                    Text(line, style = MaterialTheme.typography.bodySmall)
-                }
-            }
         }
         PodStrip(day, pod, onOpenPod)
         if (!evening) CloseTheDayBlock(day, primary = false, onOpenCloseDay, now)

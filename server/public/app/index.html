@@ -235,6 +235,12 @@ try { var t = JSON.parse(localStorage.getItem("upsc:theme") || '"dark"'); if (t 
     --g-stem:#4D6E4C; --g-twig:#5A7F57; --leaf-none:#56658A; --leaf-none-fill:rgba(96,112,150,.38); --leaf-met:#6DB36F; --leaf-recall:#9BE38C;
     --leaf-use:#C6FFA6; --leaf-glow:rgba(155,227,140,.75); --bloom:#F0A04B; --bloom-eye:#FFE0A8; --g-star:rgba(238,234,246,.7); --g-label:#E8D8C4; }
   .garden { display: flex; flex-direction: column; gap: 10px; margin: 4px 0 8px; }
+  ol.pitch { list-style: none; counter-reset: p; margin: 0; padding: 0; display: grid; gap: 10px; }
+  ol.pitch li { counter-increment: p; display: grid; grid-template-columns: 28px 1fr; column-gap: 8px; align-items: baseline; }
+  ol.pitch li::before { content: counter(p); grid-row: span 2; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 12px; font-weight: 700; background: color-mix(in srgb, var(--brand) 18%, transparent); color: var(--brand); }
+  ol.pitch li strong { display: block; }
+  @media (min-width: 720px) { ol.pitch { grid-template-columns: 1fr 1fr; column-gap: 20px; } }
   .garden-hero { font-family: var(--head-font, serif); font-weight: 800; font-size: clamp(26px, 7vw, 34px); line-height: 1.12; margin: 0; text-wrap: balance; }
   .garden-count { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; }
   .garden-count b { font-family: var(--head-font, serif); font-size: 26px; line-height: 1; display: block; }
