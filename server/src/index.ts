@@ -28,7 +28,7 @@ import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
 
-import { webRoute } from "./web";
+import { pruneWebChats, webRoute } from "./web";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -263,6 +263,8 @@ export default {
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
       // Photos sent to rooms and pods go after 7 days.
       ctx.waitUntil(runJob(env, "photos", at).then(log("photos"), fail("photos")));
+      // Website Chotu chats go after 180 days.
+      ctx.waitUntil(pruneWebChats(env).then(log("web chats"), fail("web chats")));
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));

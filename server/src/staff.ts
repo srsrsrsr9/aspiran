@@ -303,6 +303,11 @@ export const ADMIN_SCHEMA = [
     lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS web_leads_seen ON web_leads(last_seen)`,
   `CREATE TABLE IF NOT EXISTS web_rate (k TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, day))`,
+  // The website's Chotu chats (owner, 4 Nov 2026), one row per message, kept 180 days. Distress messages are never saved.
+  `CREATE TABLE IF NOT EXISTS web_chats (id INTEGER PRIMARY KEY AUTOINCREMENT, visitor_id TEXT NOT NULL, at TEXT NOT NULL, role TEXT NOT NULL,
+    content TEXT NOT NULL, lang TEXT)`,
+  `CREATE INDEX IF NOT EXISTS web_chats_visitor ON web_chats(visitor_id, at)`,
+  `CREATE INDEX IF NOT EXISTS web_chats_at ON web_chats(at)`,
 ];
 
 const ALTERS = [

@@ -616,11 +616,13 @@ views.growth = async () => {
   ];
 };
 
-// Website leads (web.ts): what visitors told Chotu on aspiran.in as they scrolled. The chat itself is never stored;
-// a phone number or email is here only when the visitor said yes to the notice next to the box.
+// Website leads (web.ts): what visitors told Chotu on aspiran.in as they scrolled, and their chats (kept 180 days).
+// A phone number or email is here only when the visitor said yes to the notice next to the box.
 views.leads = async () => {
   const only = !!views.leads.only;
-  const d = await api("web/leads" + (only ? "?contact=1" : ""));
+  const [d, c] = await Promise.all([api("web/leads" + (only ? "?contact=1" : "")), api("web/chats")]);
+  const chatN = Object.fromEntries(c.chats.map((x) => [x.visitor_id, x.n]));
+  const readBtn = (id) => chatN[id] ? h("button", { onclick: () => openChat(id) }, "Read chat (" + num(chatN[id]) + ")") : "";
   const LABEL = { name: "Name", attempt: "Attempt", medium: "Medium", stage: "Stage", optional: "Optional", city: "City", year: "Exam year", hours: "Hours a day", worry: "Worry", sleep: "Sleep", recall: "Recall", calibration: "Calibration", pluck: "Picked", chai: "Chai", path: "Path" };
   const csv = async () => {
     try {
@@ -631,10 +633,12 @@ views.leads = async () => {
   };
   const withContact = d.leads.filter((r) => r.contact).length;
   return [h("h2", {}, "Website leads"),
-    h("p.lead", {}, "Visitors to aspiran.in who talked to Chotu · AI, newest first. What they shared about themselves is saved as they scroll. Their chat messages are not stored."),
+    h("p.lead", {}, "Visitors to aspiran.in who talked to Chotu · AI, newest first. What they shared is saved as they scroll; their chats are kept for 180 days. Messages that looked like distress are never saved (the visitor was shown helplines instead). Opening a chat is noted in the audit log."),
+    h("div#chatbox"),
     h("div.tiles", {},
       h("div.tile", {}, h("div.n", {}, num(d.leads.length)), h("div.l", {}, only ? "visitors who left a number or email" : "visitors who shared something")),
-      h("div.tile", {}, h("div.n", {}, num(withContact)), h("div.l", {}, "left a number or email (with their yes)"))),
+      h("div.tile", {}, h("div.n", {}, num(withContact)), h("div.l", {}, "left a number or email (with their yes)")),
+      h("div.tile", {}, h("div.n", {}, num(c.chats.length)), h("div.l", {}, "chats in the last 180 days"))),
     h("div.card", {},
       h("label", {}, h("input", { type: "checkbox", checked: only, onchange: (e) => { views.leads.only = e.target.checked; show("leads"); } }), " Only those who left a number or email"), " ",
       h("button", { onclick: csv }, "Download as a spreadsheet (CSV)")),
@@ -646,10 +650,33 @@ views.leads = async () => {
         h("td", {}, r.contact ? [h("span.mono", {}, r.contact), h("div.muted", {}, "yes given " + when(r.consent_at))] : h("span.muted", {}, "–")),
         h("td", {}, Object.entries(r.details).filter(([k]) => k !== "name").map(([k, v]) => h("div", {}, h("b", {}, (LABEL[k] || k) + ": "), String(v)))),
         h("td", {}, r.lang === "hi" ? "Hindi" : "English"),
-        h("td", {}, r.source || h("span.muted", {}, "–")))))
+        h("td", {}, r.source || h("span.muted", {}, "–"), h("div", {}, readBtn(r.visitor_id))))))
       : h("p.muted", {}, "Nobody yet. Leads appear here as visitors talk to Chotu on aspiran.in.")),
+    h("h3", {}, "All chats"),
+    h("div.card.scroll", {}, c.chats.length ? h("table", {},
+      h("tr", {}, ["Last message", "Visitor", "Messages", "Last thing they said", ""].map((x) => h("th", {}, x))),
+      c.chats.map((x) => h("tr", {},
+        h("td", {}, when(x.last_at)),
+        h("td", {}, x.name || h("span.muted", {}, "didn't say"), x.contact ? h("div.mono", {}, x.contact) : ""),
+        h("td", {}, num(x.n)),
+        h("td", {}, (x.last_said || "").slice(0, 140)),
+        h("td", {}, h("button", { onclick: () => openChat(x.visitor_id) }, "Read")))))
+      : h("p.muted", {}, "No chats yet.")),
   ];
 };
+
+async function openChat(id) {
+  const box = $("#chatbox");
+  try {
+    const d = await api("web/chats/" + encodeURIComponent(id));
+    put(box, h("div.card", {},
+      h("div", { style: "display:flex;justify-content:space-between;align-items:center" }, h("b", {}, "Chat with visitor " + id.slice(0, 8)), h("button", { onclick: () => put(box) }, "Close")),
+      d.messages.map((m) => h("div", { style: "margin:8px 0" },
+        h("div.muted", {}, (m.role === "chotu" ? "Chotu · AI" : "Visitor") + " · " + when(m.at)),
+        h("div", { style: m.role === "chotu" ? "padding-left:16px" : "font-weight:600" }, m.content)))));
+    box.scrollIntoView({ behavior: "smooth" });
+  } catch (e) { toast(e.message, "err"); }
+}
 
 // Payments (payments.ts): Cashfree orders, refunds, the yearly price and the founding seats, and receipt details.
 views.payments = async () => {

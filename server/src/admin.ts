@@ -15,7 +15,7 @@ import { activeResult, cleanResults, resultDays } from "./results";
 import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
-import { listLeads } from "./web";
+import { listLeads, listWebChats, webChat } from "./web";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
@@ -449,6 +449,12 @@ route("GET", /^web\/leads$/, "analytics", async ({ env, url }) => {
   const lines = [["first_seen", "last_seen", "contact", "contact_kind", "lang", "consent_at", "source", ...keys].join(",")]
     .concat(rows.map((r) => [r.first_seen, r.last_seen, r.contact, r.contact_kind, r.lang, r.consent_at, r.source, ...keys.map((k) => r.details[k])].map(cell).join(",")));
   return new Response(lines.join("\n"), { headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="aspiran-web-leads-${istDay()}.csv"` } });
+});
+// The website's Chotu chats (web.ts): one row per visitor, then one visitor's whole chat. Opening a chat is logged.
+route("GET", /^web\/chats$/, "analytics", async ({ env, url }) => json({ chats: await listWebChats(env, page(url, 500)) }));
+route("GET", /^web\/chats\/([\w-]{12,64})$/, "analytics", async ({ env, s, m }) => {
+  await audit(env, s, "read website chat", m[1]);
+  return json({ visitor: m[1], messages: await webChat(env, m[1]) });
 });
 // Payments (payments.ts): the list, refunds, the price and the founding seats, and the business details on receipts.
 route("GET", /^payments$/, "flags", async ({ env, url }) => json({ ...(await listPayments(env, (url.searchParams.get("q") ?? "").slice(0, 60), page(url))), pricing: await pricing(env), business: await business(env), defaults: { pricing: DEFAULT_PRICING, business: DEFAULT_BUSINESS } }));

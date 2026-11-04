@@ -9,7 +9,10 @@ import { ensureSchema, sha256Hex } from "./staff";
  *   quiet from 23:30 to 07:00 IST like the app, and the same distress check before any model is called.
  * - POST /web/lead: what a visitor tells Chotu as they scroll (name, attempt, medium...), saved as it comes in.
  *   A phone number or email is kept only with the visitor's yes to the one-line notice next to the box.
- * Staff read the list at GET /admin/api/web/leads (admin.ts).
+ * - The chat itself is saved (owner, 4 Nov 2026) in web_chats: the visitor's message and Chotu's reply, kept 180 days
+ *   (pruneWebChats, run nightly). Messages that look like distress are never saved; the visitor is shown help instead.
+ * Staff read the list at GET /admin/api/web/leads and a chat at GET /admin/api/web/chats/<visitor> (admin.ts).
+ * The privacy policy (public/legal/privacy.html) says so.
  */
 
 const MAX_TURNS = 8;
@@ -134,16 +137,55 @@ async function webChotu(req: Request, env: Env): Promise<Response> {
   const system = PROMPT.replace("{{visitor}}", visitor).replace("{{time}}", now.toISOString().slice(11, 16));
   try {
     const { text } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], WEB_ROUTES[lang]);
+    await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), lang);
     return json({ reply: text.trim(), ai: true });
   } catch (e) {
     if (lang === "hi" && !(e instanceof AiBlocked)) {
       try {
         const { text } = await callChat(env, "chotu", [{ role: "system", content: system + "\nAnswer in simple English." }, ...turns], WEB_ROUTES.en);
+        await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), "en");
         return json({ reply: text.trim(), ai: true, fallback: true });
       } catch { /* fall through */ }
     }
     return json({ error: "Chotu can't talk just now. Try again in a minute.", offline: true }, 503);
   }
+}
+
+/** Saves the visitor's last message and Chotu's reply. A failure here never costs the visitor their reply. */
+async function saveTurn(env: Env, visitorId: unknown, said: string, reply: string, lang: string) {
+  if (!visitorIdOk(visitorId)) return;
+  const at = new Date();
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO web_chats (visitor_id, at, role, content, lang) VALUES (?, ?, 'visitor', ?, ?)").bind(visitorId, at.toISOString(), said, lang),
+    env.DB.prepare("INSERT INTO web_chats (visitor_id, at, role, content, lang) VALUES (?, ?, 'chotu', ?, ?)").bind(visitorId, new Date(at.getTime() + 1).toISOString(), reply, lang),
+  ]).catch((e) => console.log("web chat save failed", String(e)));
+}
+
+/** One visitor's chat, oldest first. */
+export async function webChat(env: Env, visitorId: string) {
+  await ensureSchema(env);
+  const rows = await env.DB.prepare("SELECT at, role, content, lang FROM web_chats WHERE visitor_id = ? ORDER BY at, id LIMIT 500").bind(visitorId).all<any>();
+  return rows.results ?? [];
+}
+
+/** Chats newest first, one row per visitor, with what they shared (if anything) and their last message. */
+export async function listWebChats(env: Env, limit: number) {
+  await ensureSchema(env);
+  const rows = await env.DB.prepare(
+    `SELECT c.visitor_id, COUNT(*) AS n, MIN(c.at) AS first_at, MAX(c.at) AS last_at, l.name, l.contact,
+       (SELECT content FROM web_chats x WHERE x.visitor_id = c.visitor_id AND x.role = 'visitor' ORDER BY x.at DESC LIMIT 1) AS last_said
+     FROM web_chats c LEFT JOIN web_leads l ON l.visitor_id = c.visitor_id
+     GROUP BY c.visitor_id ORDER BY last_at DESC LIMIT ?`,
+  ).bind(limit).all<any>();
+  return rows.results ?? [];
+}
+
+/** Nightly: chats older than 180 days go. */
+export async function pruneWebChats(env: Env) {
+  await ensureSchema(env);
+  const cutoff = new Date(Date.now() - 180 * 86400_000).toISOString();
+  const r = await env.DB.prepare("DELETE FROM web_chats WHERE at < ?").bind(cutoff).run();
+  return { deleted: r.meta?.changes ?? 0 };
 }
 
 async function webLead(req: Request, env: Env): Promise<Response> {
