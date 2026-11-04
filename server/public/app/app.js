@@ -22,6 +22,7 @@ import * as SY from "./syllabus.js";
 import * as MP from "./map.js";
 import * as X from "./explore.js";
 import * as BR from "./brief.js";
+import * as SKY from "./sky.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -877,6 +878,21 @@ function mapLine() {
   return [c.met && `${c.met} met`, c.recall && `${c.recall} can recall`, c.use && `${c.use} can use`].filter(Boolean).join(" · ");
 }
 
+/** Your sky: every paper as a constellation, every topic a star (sky.js). A tap opens that paper's topic list. */
+function skyView(papers, m, day, cur) {
+  const stateOf = (id) => MP.stateOf(m[id], day);
+  return h("section.sky", { "aria-label": "Your sky: the syllabus as constellations" },
+    h("h2", { style: { margin: 0 } }, "Your sky"),
+    h("p.small.muted", "One star for each topic in the syllabus. Each one you meet lights up, and grows brighter as you recall it and use it."),
+    SKY.legend(),
+    h("div.sky-grid", papers.map((p) => {
+      const topics = p.topics.map((name, i) => ({ id: SY.nodeId(p, i), name }));
+      return h("button.sky-card", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); document.getElementById("map-papers")?.scrollIntoView({ block: "start" }); } },
+        h("div.row.between", h("strong", p.short), h("span.small.muted", SKY.countLine(topics, stateOf))),
+        SKY.constellation(topics, stateOf, `${p.name}: ${SKY.countLine(topics, stateOf)}`));
+    })));
+}
+
 function viewMap(arg) {
   if (arg && SY.nodeById(arg)) return viewNode(arg);
   const day = today(), m = nodes();
@@ -887,7 +903,8 @@ function viewMap(arg) {
     pauseLine("syllabus-first-open"),
     h("p.muted", "Every topic in the official syllabus. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this."),
     h("p.small", mapLine()),
-    h("div.chips", papers.map((p) => h("button.chip", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); } }, p.short))),
+    skyView(papers, m, day, cur),
+    h("div.chips#map-papers", papers.map((p) => h("button.chip", { "aria-pressed": String(p === cur), onclick: () => { store.set("mapPaper", p.id); render(); } }, p.short))),
     h("div.card.soft", h("strong", cur.name), h("div.small.muted", cur.lead)),
     cur.topics.map((name, i) => {
       const id = SY.nodeId(cur, i), st = MP.stateOf(m[id], day);

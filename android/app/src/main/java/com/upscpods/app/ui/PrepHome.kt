@@ -180,6 +180,7 @@ fun SyllabusTab(
         Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(SyllabusMap.line(map.values.groupingBy { it.state() }.eachCount()), style = MaterialTheme.typography.labelLarge)
+        SkySection(shown, map, current, onPaper)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             shown.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
         }
