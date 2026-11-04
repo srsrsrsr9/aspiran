@@ -79,7 +79,9 @@ const limitFor = (kind: string, isPlus: boolean) => {
 export async function useAllowance(env: Env, memberId: string, kind: "feedback" | "mock" | "chotu"): Promise<{ ok: boolean; left: number | null; limit: number | null }> {
   if (!(await flags(env)).plus) return { ok: true, left: null, limit: null };
   await ensureSchema(env);
-  const isPlus = !!(await entitlement(env, memberId));
+  const ent = await entitlement(env, memberId);
+  if (ent?.source === "staff") return { ok: true, left: null, limit: null }; // Plus given by the owner: no caps at all
+  const isPlus = !!ent;
   const u = await used(env, memberId);
   const n = kind === "feedback" ? u.feedbackThisWeek : kind === "mock" ? u.mocksThisMonth : u.chotuToday;
   const limit = limitFor(kind, isPlus);
