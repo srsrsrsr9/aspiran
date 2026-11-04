@@ -71,6 +71,9 @@ class ContentLibrary(private val context: Context, private val server: () -> Str
         }
     }
 
+    /** The full address of a server file (path like /media/pack/x.mp3), for streaming. */
+    fun url(path: String): String = server() + path
+
     /** A server file (path like /media/pack/x.svg), downloaded once. Null when offline and not cached. */
     suspend fun file(path: String): File? = withContext(Dispatchers.IO) {
         lock.withLock {

@@ -93,6 +93,11 @@ fun PracticeTab(
     onOpenEthics: () -> Unit = {},
     csatWeeks: Int = 0,
     onOpenCsat: () -> Unit = {},
+    /** Printable sheets and audio lectures (SheetsTalks.kt). */
+    talkCount: Int = 0,
+    onOpenTalks: () -> Unit = {},
+    sheetCount: Int = 0,
+    onOpenSheets: () -> Unit = {},
 ) {
     val partTime = persona?.partTime == true
     // One filled button per screen: the first of today's two practice tasks not yet done.
@@ -203,6 +208,20 @@ fun PracticeTab(
             done = false,
             filled = false,
             onStart = onOpenPrint,
+        )
+        if (talkCount > 0) PracticeCard(
+            title = "Audio lectures",
+            detail = "$talkCount talks of 10 to 15 minutes, each with three quick checks.",
+            done = false,
+            filled = false,
+            onStart = onOpenTalks,
+        )
+        if (sheetCount > 0) PracticeCard(
+            title = "Printable sheets",
+            detail = "$sheetCount one-page tables, timelines and lists to read, print and pin up.",
+            done = false,
+            filled = false,
+            onStart = onOpenSheets,
         )
         Text("Optional and terms", style = MaterialTheme.typography.titleMedium)
         PracticeCard(
