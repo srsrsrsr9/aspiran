@@ -245,7 +245,7 @@ function signInView(msg, kind = "err") {
 const SECTIONS = [
   ["overview", "Overview", "analytics"], ["content", "Content", "content"], ["moderation", "Moderation", "moderate"],
   ["safety", "Safety queue", "safety"], ["members", "Members", "members"], ["privacy", "Data requests", "privacy"],
-  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
+  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["leads", "Website leads", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
   ["announcements", "Announcements", "announce"], ["incidents", "Status and incidents", "incidents"],
   ["staff", "Staff and roles", "staff"], ["languages", "Languages", "staff"], ["backups", "Backups", "backups"], ["audit", "Audit log", "audit"],
 ];
@@ -613,6 +613,41 @@ views.growth = async () => {
       h("div.tile", {}, h("div.n", {}, num(f.checkoutStarted)), h("div.l", {}, `checkouts started · ${p(f.checkoutPerOfferPct)} of offers`)),
       h("div.tile", {}, h("div.n", {}, num(f.paid)), h("div.l", {}, `paid · ${p(f.paidPerCheckoutPct)} of checkouts`)),
       h("div.tile", {}, h("div.n", {}, num(f.refunded)), h("div.l", {}, "refunded"))),
+  ];
+};
+
+// Website leads (web.ts): what visitors told Chotu on aspiran.in as they scrolled. The chat itself is never stored;
+// a phone number or email is here only when the visitor said yes to the notice next to the box.
+views.leads = async () => {
+  const only = !!views.leads.only;
+  const d = await api("web/leads" + (only ? "?contact=1" : ""));
+  const LABEL = { name: "Name", attempt: "Attempt", medium: "Medium", stage: "Stage", optional: "Optional", city: "City", year: "Exam year", hours: "Hours a day", worry: "Worry", sleep: "Sleep", recall: "Recall", calibration: "Calibration", pluck: "Picked", chai: "Chai", path: "Path" };
+  const csv = async () => {
+    try {
+      const res = await api("web/leads?format=csv" + (only ? "&contact=1" : ""), { raw: true });
+      const a = h("a", { href: URL.createObjectURL(await res.blob()), download: "aspiran-web-leads.csv" });
+      document.body.append(a); a.click(); a.remove();
+    } catch (e) { toast(e.message, "err"); }
+  };
+  const withContact = d.leads.filter((r) => r.contact).length;
+  return [h("h2", {}, "Website leads"),
+    h("p.lead", {}, "Visitors to aspiran.in who talked to Chotu · AI, newest first. What they shared about themselves is saved as they scroll. Their chat messages are not stored."),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, num(d.leads.length)), h("div.l", {}, only ? "visitors who left a number or email" : "visitors who shared something")),
+      h("div.tile", {}, h("div.n", {}, num(withContact)), h("div.l", {}, "left a number or email (with their yes)"))),
+    h("div.card", {},
+      h("label", {}, h("input", { type: "checkbox", checked: only, onchange: (e) => { views.leads.only = e.target.checked; show("leads"); } }), " Only those who left a number or email"), " ",
+      h("button", { onclick: csv }, "Download as a spreadsheet (CSV)")),
+    h("div.card.scroll", {}, d.leads.length ? h("table", {},
+      h("tr", {}, ["Last seen", "Name", "Contact", "What they shared", "Language", "Came from"].map((x) => h("th", {}, x))),
+      d.leads.map((r) => h("tr", {},
+        h("td", {}, when(r.last_seen), h("div.muted", {}, "first " + when(r.first_seen))),
+        h("td", {}, r.name || h("span.muted", {}, "–")),
+        h("td", {}, r.contact ? [h("span.mono", {}, r.contact), h("div.muted", {}, "yes given " + when(r.consent_at))] : h("span.muted", {}, "–")),
+        h("td", {}, Object.entries(r.details).filter(([k]) => k !== "name").map(([k, v]) => h("div", {}, h("b", {}, (LABEL[k] || k) + ": "), String(v)))),
+        h("td", {}, r.lang === "hi" ? "Hindi" : "English"),
+        h("td", {}, r.source || h("span.muted", {}, "–")))))
+      : h("p.muted", {}, "Nobody yet. Leads appear here as visitors talk to Chotu on aspiran.in.")),
   ];
 };
 
