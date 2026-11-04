@@ -82,7 +82,7 @@ Note anything odd in one line each (screen, what you did, what happened) and sen
 
 ## Part 2. Build version 3 and send it out (about 20 minutes, tonight)
 
-Version 3 is ready in the project (`versionCode 4`, version name 0.4.0: raised on 4 Nov evening for the syllabus
+Version 3 is ready in the project (`versionCode 5`, version name 0.4.0: raised on 4 Nov evening for the syllabus
 garden and dark mode, so the number is free even if you had already uploaded a 3). Same steps as your first release
 (`play-store-first-release-mac.md`, steps 1–3):
 1. Android Studio → File → **Sync Project with Gradle Files**.
@@ -93,7 +93,7 @@ garden and dark mode, so the number is free even if you had already uploaded a 3
    - Success: "App bundle(s) generated successfully". Failure: send me the message.
 4. Play Console → Test and release → **Internal testing** → Create new release → upload `app-release.aab` →
    release notes: *"The whole syllabus as a creeper garden, dark mode by default, audio lectures and printable sheets."* → Next → Save and publish.
-   - Failure: "Version code 4 has already been used". Tell me and I'll raise it.
+   - Failure: "Version code 5 has already been used". Tell me and I'll raise it.
 5. Install it on your phone from Play (it may take up to an hour to show) and run tests 10–26 in the app.
 6. If it's fine: Closed testing → Create new release → **Add from library** → version 3 → Start rollout.
 
