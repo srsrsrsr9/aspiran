@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-csr-offer-for-clearance",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A hospital wing and a pending clearance",
+    "hi": "एक अस्पताल विंग और लंबित मंज़ूरी"
+  },
+  "en": {
+    "scenario": "You are a member of a state body that reviews environmental clearances. A company whose expansion proposal is before you offers, under its CSR budget, to build a new children's wing at the district hospital. A senior official hints that the hospital wing would be a big public gain and the clearance should be 'handled positively'. The proposal has unresolved questions about groundwater use.",
+    "question": "How do you handle the clearance?",
+    "options": [
+      {
+        "label": "Judge the proposal only on its environmental merits",
+        "outcome": "The process stays independent, but the company may withdraw the CSR offer and the senior may be unhappy.",
+        "values": "Objectivity and independence of regulation"
+      },
+      {
+        "label": "Ask the company to answer the groundwater questions before any decision",
+        "outcome": "Public gain stays possible if the concerns are met, but the link between CSR and clearance remains unspoken and uneasy.",
+        "values": "Due diligence with openness to public benefit"
+      },
+      {
+        "label": "Clear it with conditions so the hospital wing goes ahead",
+        "outcome": "The district gets a hospital wing soon, but a clearance is seen as tied to a gift and the groundwater risk is passed on.",
+        "values": "Immediate public welfare over regulatory integrity"
+      }
+    ],
+    "reflect": "Can a good outcome justify a decision process that others would see as bought?"
+  },
+  "hi": {
+    "scenario": "आप पर्यावरण मंज़ूरी की समीक्षा करने वाले एक राज्य निकाय के सदस्य हैं। एक कंपनी, जिसका विस्तार प्रस्ताव आपके सामने है, अपने CSR बजट से ज़िला अस्पताल में बच्चों का नया विंग बनाने की पेशकश करती है। एक वरिष्ठ अधिकारी संकेत देते हैं कि अस्पताल विंग बड़ा जनहित होगा और मंज़ूरी को 'सकारात्मक रूप से देखा' जाना चाहिए। प्रस्ताव में भूजल उपयोग पर अनसुलझे सवाल हैं।",
+    "question": "आप मंज़ूरी को कैसे संभालेंगे?",
+    "options": [
+      {
+        "label": "प्रस्ताव को केवल पर्यावरणीय गुण-दोष पर परखना",
+        "outcome": "प्रक्रिया स्वतंत्र रहती है, पर कंपनी CSR प्रस्ताव वापस ले सकती है और वरिष्ठ नाखुश हो सकते हैं।",
+        "values": "विनियमन की वस्तुनिष्ठता और स्वतंत्रता"
+      },
+      {
+        "label": "किसी निर्णय से पहले कंपनी से भूजल के सवालों का जवाब माँगना",
+        "outcome": "चिंताएँ दूर हों तो जनहित संभव रहता है, पर CSR और मंज़ूरी का संबंध अनकहा और असहज बना रहता है।",
+        "values": "जनहित के प्रति खुलेपन के साथ उचित परिश्रम"
+      },
+      {
+        "label": "शर्तों के साथ मंज़ूरी देना ताकि अस्पताल विंग बने",
+        "outcome": "ज़िले को जल्दी अस्पताल विंग मिलता है, पर मंज़ूरी को उपहार से जुड़ा माना जाता है और भूजल का जोखिम आगे खिसक जाता है।",
+        "values": "विनियामक सत्यनिष्ठा से ऊपर तात्कालिक जनकल्याण"
+      }
+    ],
+    "reflect": "क्या अच्छा परिणाम ऐसी निर्णय प्रक्रिया को सही ठहरा सकता है जिसे दूसरे खरीदी हुई मानें?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

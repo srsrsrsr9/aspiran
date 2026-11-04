@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-cousin-on-interview-list",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Your cousin is on the interview list",
+    "hi": "साक्षात्कार सूची में आपका चचेरा भाई"
+  },
+  "en": {
+    "scenario": "You chair an interview board for contract posts in a district health society. On the morning of the interviews you see that your cousin is one of the candidates. You have not met in years, and nobody on the board knows you are related. The interviews start in an hour, and finding a replacement chair at short notice would delay the process for weeks.",
+    "question": "What do you do about the interview board?",
+    "options": [
+      {
+        "label": "Declare the relationship and step aside",
+        "outcome": "The process stays clean and you are on record, but the interviews may be postponed and candidates who travelled far may be inconvenienced.",
+        "values": "Impartiality and transparency over convenience"
+      },
+      {
+        "label": "Stay on, but declare it and not mark your cousin",
+        "outcome": "The interviews go ahead and the board knows of the link, but others may still feel your presence affects the outcome.",
+        "values": "Practical fairness with partial disclosure"
+      },
+      {
+        "label": "Say nothing, since you are not close",
+        "outcome": "There is no delay, but if the link comes out later the selection may be challenged and your integrity questioned.",
+        "values": "Efficiency over the appearance of fairness"
+      }
+    ],
+    "reflect": "Is a conflict of interest about what you would actually do, or about what others can reasonably believe?"
+  },
+  "hi": {
+    "scenario": "आप एक ज़िला स्वास्थ्य समिति में संविदा पदों के साक्षात्कार बोर्ड के अध्यक्ष हैं। साक्षात्कार की सुबह आप देखते हैं कि आपका चचेरा भाई भी एक उम्मीदवार है। आप वर्षों से नहीं मिले हैं, और बोर्ड में किसी को नहीं पता कि आप रिश्तेदार हैं। साक्षात्कार एक घंटे में शुरू होंगे, और इतने कम समय में नया अध्यक्ष ढूँढने से प्रक्रिया हफ़्तों टल जाएगी।",
+    "question": "साक्षात्कार बोर्ड के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "रिश्ता बताकर बोर्ड से हट जाना",
+        "outcome": "प्रक्रिया साफ़ रहती है और आपका रुख दर्ज होता है, पर साक्षात्कार टल सकते हैं और दूर से आए उम्मीदवारों को परेशानी हो सकती है।",
+        "values": "सुविधा से ऊपर निष्पक्षता और पारदर्शिता"
+      },
+      {
+        "label": "बोर्ड में रहना, पर रिश्ता बताकर भाई को अंक न देना",
+        "outcome": "साक्षात्कार होते हैं और बोर्ड को रिश्ते की जानकारी रहती है, पर दूसरों को फिर भी लग सकता है कि आपकी मौजूदगी से नतीजा प्रभावित हुआ।",
+        "values": "आंशिक प्रकटीकरण के साथ व्यावहारिक निष्पक्षता"
+      },
+      {
+        "label": "कुछ न कहना, क्योंकि आप करीबी नहीं हैं",
+        "outcome": "कोई देरी नहीं होती, पर बाद में रिश्ता सामने आया तो चयन को चुनौती मिल सकती है और आपकी सत्यनिष्ठा पर सवाल उठ सकते हैं।",
+        "values": "निष्पक्षता के आभास से ऊपर दक्षता"
+      }
+    ],
+    "reflect": "क्या हितों का टकराव इस बारे में है कि आप वास्तव में क्या करेंगे, या इस बारे में कि दूसरे उचित रूप से क्या मान सकते हैं?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

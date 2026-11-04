@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "env-greenhouse-gas-warming-power-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How strongly greenhouse gases warm",
+    "hi": "ग्रीनहाउस गैसें कितनी तेज़ी से गर्म करती हैं"
+  },
+  "prompt": {
+    "en": "Rank by 100-year global warming potential, highest first.",
+    "hi": "100 वर्ष की वैश्विक तापन क्षमता के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "times carbon dioxide (GWP-100)",
+    "hi": "कार्बन डाइऑक्साइड का गुना (जीडब्ल्यूपी-100)"
+  },
+  "items": [
+    {
+      "value": 23500,
+      "en": {
+        "label": "Sulphur hexafluoride (SF6)"
+      },
+      "hi": {
+        "label": "सल्फ़र हेक्साफ़्लोराइड (SF6)"
+      }
+    },
+    {
+      "value": 16100,
+      "en": {
+        "label": "Nitrogen trifluoride (NF3)"
+      },
+      "hi": {
+        "label": "नाइट्रोजन ट्राइफ़्लोराइड (NF3)"
+      }
+    },
+    {
+      "value": 265,
+      "en": {
+        "label": "Nitrous oxide (N2O)"
+      },
+      "hi": {
+        "label": "नाइट्रस ऑक्साइड (N2O)"
+      }
+    },
+    {
+      "value": 28,
+      "en": {
+        "label": "Methane (CH4)"
+      },
+      "hi": {
+        "label": "मीथेन (CH4)"
+      }
+    },
+    {
+      "value": 1,
+      "en": {
+        "label": "Carbon dioxide (CO2)"
+      },
+      "hi": {
+        "label": "कार्बन डाइऑक्साइड (CO2)"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Carbon dioxide is the weakest per tonne but causes the most warming, because far more of it is emitted and it lasts for centuries.",
+    "hi": "प्रति टन कार्बन डाइऑक्साइड सबसे कमज़ोर है, पर सबसे ज़्यादा तापन इसी से होता है, क्योंकि इसका उत्सर्जन कहीं ज़्यादा है और यह सदियों तक रहती है।"
+  },
+  "memoryHook": {
+    "en": "The fluorine gases are in the thousands; N2O in the hundreds; methane in the tens; CO2 is 1.",
+    "hi": "फ़्लोरीन वाली गैसें हज़ारों में; N2O सैकड़ों में; मीथेन दहाई में; CO2 एक।"
+  },
+  "sources": {
+    "en": "IPCC Fifth Assessment Report (2013), Working Group I, Table 8.A.1; UNFCCC decision 18/CMA.1 (Paris Agreement reporting uses these values)",
+    "hi": "आईपीसीसी पाँचवीं आकलन रिपोर्ट (2013), कार्य समूह 1, तालिका 8.A.1; यूएनएफ़सीसीसी निर्णय 18/CMA.1 (पेरिस समझौते की रिपोर्टिंग इन्हीं मानों का उपयोग करती है)"
+  },
+  "factsToCheck": [
+    "IPCC AR5 GWP-100: SF6 23,500, NF3 16,100, N2O 265, CH4 28, CO2 1",
+    "AR6 (2021) gives slightly different values; AR5 values are used because UNFCCC reporting under decision 18/CMA.1 uses them; confirm this is still the reporting basis in 2026"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

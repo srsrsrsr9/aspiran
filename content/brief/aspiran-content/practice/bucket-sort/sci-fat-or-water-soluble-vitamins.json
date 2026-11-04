@@ -1,0 +1,158 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "sci-fat-or-water-soluble-vitamins",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Fat-soluble or water-soluble vitamin?",
+    "hi": "वसा में घुलनशील या पानी में घुलनशील विटामिन?"
+  },
+  "buckets": {
+    "en": [
+      "Fat-soluble",
+      "Water-soluble"
+    ],
+    "hi": [
+      "वसा में घुलनशील",
+      "पानी में घुलनशील"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Vitamin A",
+        "why": "Needed for vision; lack of it causes night blindness. The body can store it in the liver."
+      },
+      "hi": {
+        "text": "विटामिन A",
+        "why": "देखने के लिए ज़रूरी; इसकी कमी से रतौंधी होती है। शरीर इसे यकृत में जमा कर सकता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Vitamin D",
+        "why": "The skin makes it in sunlight; lack of it causes rickets in children."
+      },
+      "hi": {
+        "text": "विटामिन D",
+        "why": "धूप में त्वचा इसे बनाती है; इसकी कमी से बच्चों में रिकेट्स होता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Vitamin E",
+        "why": "An antioxidant that protects cell membranes."
+      },
+      "hi": {
+        "text": "विटामिन E",
+        "why": "एक एंटीऑक्सीडेंट, जो कोशिका झिल्लियों की रक्षा करता है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Vitamin K",
+        "why": "Needed for blood to clot."
+      },
+      "hi": {
+        "text": "विटामिन K",
+        "why": "ख़ून के जमने के लिए ज़रूरी।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Vitamin C",
+        "why": "Lack of it causes scurvy, with bleeding gums. The body does not store much of it."
+      },
+      "hi": {
+        "text": "विटामिन C",
+        "why": "इसकी कमी से स्कर्वी होता है, जिसमें मसूड़ों से ख़ून आता है। शरीर इसे ज़्यादा जमा नहीं करता।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Vitamin B1 (thiamine)",
+        "why": "Lack of it causes beriberi."
+      },
+      "hi": {
+        "text": "विटामिन B1 (थायमिन)",
+        "why": "इसकी कमी से बेरी-बेरी होता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Vitamin B3 (niacin)",
+        "why": "Lack of it causes pellagra."
+      },
+      "hi": {
+        "text": "विटामिन B3 (नियासिन)",
+        "why": "इसकी कमी से पेलाग्रा होता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Vitamin B9 (folic acid)",
+        "why": "Taken in pregnancy to help prevent neural tube defects in the baby."
+      },
+      "hi": {
+        "text": "विटामिन B9 (फ़ोलिक अम्ल)",
+        "why": "गर्भावस्था में शिशु में तंत्रिका नली के दोषों से बचाव के लिए लिया जाता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Vitamin B12",
+        "why": "Found mainly in animal foods; lack of it causes a kind of anaemia."
+      },
+      "hi": {
+        "text": "विटामिन B12",
+        "why": "मुख्य रूप से पशु-आधारित भोजन में मिलता है; इसकी कमी से एक तरह का रक्ताल्पता (एनीमिया) होता है।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "NCERT Class VI Science, Components of Food; NCERT Class XI Biology; Ministry of Health and Family Welfare",
+    "hi": "NCERT कक्षा VI विज्ञान, भोजन के घटक; NCERT कक्षा XI जीव विज्ञान; स्वास्थ्य और परिवार कल्याण मंत्रालय"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X6)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "soc-sex-ratio-by-state-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Sex ratio by state, Census 2011",
+    "hi": "राज्यवार लिंगानुपात, जनगणना 2011"
+  },
+  "prompt": {
+    "en": "Rank by sex ratio in Census 2011, highest first.",
+    "hi": "जनगणना 2011 के लिंगानुपात के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "females per 1,000 males",
+    "hi": "प्रति 1,000 पुरुषों पर महिलाएँ"
+  },
+  "items": [
+    {
+      "value": 1084,
+      "en": {
+        "label": "Kerala"
+      },
+      "hi": {
+        "label": "केरल"
+      }
+    },
+    {
+      "value": 996,
+      "en": {
+        "label": "Tamil Nadu"
+      },
+      "hi": {
+        "label": "तमिलनाडु"
+      }
+    },
+    {
+      "value": 973,
+      "en": {
+        "label": "Karnataka"
+      },
+      "hi": {
+        "label": "कर्नाटक"
+      }
+    },
+    {
+      "value": 895,
+      "en": {
+        "label": "Punjab"
+      },
+      "hi": {
+        "label": "पंजाब"
+      }
+    },
+    {
+      "value": 879,
+      "en": {
+        "label": "Haryana"
+      },
+      "hi": {
+        "label": "हरियाणा"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "India's overall figure was 943. Kerala was the only state above 1,000, and Haryana was the lowest among states.",
+    "hi": "भारत का कुल आँकड़ा 943 था। केरल अकेला राज्य था जो 1,000 से ऊपर था, और राज्यों में हरियाणा सबसे नीचे था।"
+  },
+  "memoryHook": {
+    "en": "South at the top, north-west at the bottom, with India at 943 in between.",
+    "hi": "दक्षिण ऊपर, उत्तर-पश्चिम नीचे, और बीच में भारत 943 पर।"
+  },
+  "sources": {
+    "en": "Census of India 2011, Primary Census Abstract",
+    "hi": "भारत की जनगणना 2011, प्राथमिक जनगणना सार"
+  },
+  "factsToCheck": [
+    "Census 2011 sex ratio: Kerala 1,084, Tamil Nadu 996, Karnataka 973, Punjab 895, Haryana 879, India 943",
+    "Census 2011 is the latest published census; replace when Census 2027 results are released"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

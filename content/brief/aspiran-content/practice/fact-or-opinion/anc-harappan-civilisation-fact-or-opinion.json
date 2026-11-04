@@ -1,0 +1,142 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs1"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "anc-harappan-civilisation-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Harappan civilisation: fact or opinion?",
+    "hi": "हड़प्पा सभ्यता: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Excavation at Harappa began in 1921 under Daya Ram Sahni.",
+        "why": "The date and excavator are in ASI records."
+      },
+      "hi": {
+        "text": "हड़प्पा में खुदाई 1921 में दयाराम साहनी के नेतृत्व में शुरू हुई।",
+        "why": "तारीख और खुदाई करने वाले का नाम भारतीय पुरातत्व सर्वेक्षण के रिकॉर्ड में है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Harappans were the most advanced people of their time.",
+        "why": "'Most advanced' compares whole civilisations; there is no single measure."
+      },
+      "hi": {
+        "text": "हड़प्पा के लोग अपने समय के सबसे उन्नत लोग थे।",
+        "why": "'सबसे उन्नत' पूरी सभ्यताओं की तुलना है; इसका कोई एक माप नहीं है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Harappan script has not been deciphered.",
+        "why": "Scholars agree no reading has been accepted so far."
+      },
+      "hi": {
+        "text": "हड़प्पा लिपि अब तक पढ़ी नहीं जा सकी है।",
+        "why": "विद्वान मानते हैं कि अब तक कोई पाठ स्वीकार नहीं हुआ है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Once the script is read, it will change everything we know about early India.",
+        "why": "A prediction about the future, not something we can check now."
+      },
+      "hi": {
+        "text": "लिपि पढ़ ली गई तो प्राचीन भारत के बारे में हमारी सारी जानकारी बदल जाएगी।",
+        "why": "यह भविष्य के बारे में अनुमान है, जिसे अभी जाँचा नहीं जा सकता।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Dholavira in Gujarat became a UNESCO World Heritage Site in 2021.",
+        "why": "The inscription is on UNESCO's list."
+      },
+      "hi": {
+        "text": "गुजरात का धोलावीरा 2021 में यूनेस्को का विश्व धरोहर स्थल बना।",
+        "why": "यह यूनेस्को की सूची में दर्ज है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Dholavira is more impressive than Mohenjo-daro.",
+        "why": "'More impressive' is a personal judgment."
+      },
+      "hi": {
+        "text": "धोलावीरा मोहनजोदड़ो से ज़्यादा प्रभावशाली है।",
+        "why": "'ज़्यादा प्रभावशाली' एक निजी आकलन है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Great Bath was found at Mohenjo-daro.",
+        "why": "A site record you can check."
+      },
+      "hi": {
+        "text": "विशाल स्नानागार मोहनजोदड़ो में मिला।",
+        "why": "यह स्थल का रिकॉर्ड है जिसे आप जाँच सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Great Bath must have been used for religious rituals.",
+        "why": "An interpretation; the evidence supports it but does not prove it."
+      },
+      "hi": {
+        "text": "विशाल स्नानागार का उपयोग ज़रूर धार्मिक अनुष्ठानों के लिए होता होगा।",
+        "why": "यह एक व्याख्या है; साक्ष्य इसका समर्थन करते हैं, पर इसे साबित नहीं करते।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Archaeological Survey of India; UNESCO World Heritage List (Dholavira, 2021); NCERT Class 12, Themes in Indian History, Part I",
+    "hi": "भारतीय पुरातत्व सर्वेक्षण; यूनेस्को विश्व धरोहर सूची (धोलावीरा, 2021); एनसीईआरटी कक्षा 12, भारतीय इतिहास के कुछ विषय, भाग 1"
+  },
+  "factsToCheck": [
+    "Harappa excavated from 1921 under Daya Ram Sahni",
+    "Dholavira inscribed on the World Heritage List in July 2021"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

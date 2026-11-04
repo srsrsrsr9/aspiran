@@ -1,0 +1,152 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "eco-farms-land-and-livestock-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Farms, land and livestock",
+    "hi": "खेती, भूमि और पशुधन"
+  },
+  "items": [
+    {
+      "list": "state",
+      "en": {
+        "text": "Agriculture, including protection against pests and plant diseases",
+        "note": "State List entry 14."
+      },
+      "hi": {
+        "text": "कृषि, नाशक जीवों और पौधों के रोगों से बचाव सहित",
+        "note": "राज्य सूची की प्रविष्टि 14।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Land, land tenures and transfer of farm land",
+        "note": "State List entry 18; this is why land reform laws are state laws."
+      },
+      "hi": {
+        "text": "भूमि, भू-धृति और कृषि भूमि का अंतरण",
+        "note": "राज्य सूची की प्रविष्टि 18; इसीलिए भूमि सुधार कानून राज्यों के कानून हैं।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Land revenue",
+        "note": "State List entry 45, including land records and survey for revenue."
+      },
+      "hi": {
+        "text": "भू-राजस्व",
+        "note": "राज्य सूची की प्रविष्टि 45, राजस्व के लिए भू-अभिलेख और सर्वेक्षण सहित।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Livestock care and prevention of animal diseases",
+        "note": "State List entry 15, with veterinary training and practice."
+      },
+      "hi": {
+        "text": "पशुधन की देखभाल और पशु रोगों की रोकथाम",
+        "note": "राज्य सूची की प्रविष्टि 15, पशु चिकित्सा प्रशिक्षण और व्यवसाय के साथ।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Pounds and cattle trespass",
+        "note": "State List entry 16."
+      },
+      "hi": {
+        "text": "काँजी हाउस और पशु अतिचार",
+        "note": "राज्य सूची की प्रविष्टि 16।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Growing, making and selling opium for export",
+        "note": "Union List entry 59; opium cultivation is licensed by the Centre."
+      },
+      "hi": {
+        "text": "निर्यात के लिए अफ़ीम की खेती, निर्माण और बिक्री",
+        "note": "संघ सूची की प्रविष्टि 59; अफ़ीम की खेती का लाइसेंस केंद्र देता है।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Salt made and supplied by Union agencies",
+        "note": "Union List entry 58."
+      },
+      "hi": {
+        "text": "संघ अभिकरणों द्वारा नमक का निर्माण और प्रदाय",
+        "note": "संघ सूची की प्रविष्टि 58।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Trade in foodstuffs, cattle fodder, raw cotton and raw jute",
+        "note": "Concurrent List entry 33; the Essential Commodities Act, 1955 uses it."
+      },
+      "hi": {
+        "text": "खाद्य पदार्थ, पशु चारा, कच्ची कपास और कच्चे जूट का व्यापार",
+        "note": "समवर्ती सूची की प्रविष्टि 33; आवश्यक वस्तु अधिनियम, 1955 इसी पर आधारित है।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Constitution of India, Article 246 and Seventh Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 246 और सातवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "Seventh Schedule entry numbers and list placement as in the current official text (Legislative Department, India Code)"
+  ],
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

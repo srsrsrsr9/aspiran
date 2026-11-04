@@ -1,0 +1,120 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs1",
+      "mains-gs2",
+      "mains-gs3",
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-directive"
+    ]
+  },
+  "id": "mains-directive-words-positions",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five words that ask for your stand or a way forward",
+    "hi": "आपका मत या आगे की राह माँगने वाले पाँच शब्द"
+  },
+  "words": [
+    {
+      "en": {
+        "word": "Do you agree?",
+        "means": "Take a position on the statement and defend it.",
+        "do": "Say yes, no or partly in the opening, give reasons, and admit the strongest point on the other side.",
+        "avoid": "Sitting on the fence until the last line, or never answering the question."
+      },
+      "hi": {
+        "word": "क्या आप सहमत हैं?",
+        "means": "कथन पर एक पक्ष लें और उसका बचाव करें।",
+        "do": "शुरुआत में हाँ, ना या आंशिक रूप से कहें, कारण दें, और विरोधी पक्ष का सबसे मज़बूत बिंदु भी स्वीकारें।",
+        "avoid": "आख़िरी पंक्ति तक कोई पक्ष न लेना, या प्रश्न का उत्तर ही न देना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Suggest",
+        "means": "Put forward practical measures or solutions.",
+        "do": "Give specific, workable steps and say who would take each one.",
+        "avoid": "Vague wishes such as 'awareness should be raised' with no detail."
+      },
+      "hi": {
+        "word": "सुझाव दीजिए",
+        "means": "व्यावहारिक उपाय या समाधान प्रस्तुत करें।",
+        "do": "विशिष्ट और व्यावहारिक कदम दें, और बताएँ कि हर कदम कौन उठाएगा।",
+        "avoid": "बिना विवरण के अस्पष्ट इच्छाएँ, जैसे 'जागरूकता बढ़ानी चाहिए'।"
+      }
+    },
+    {
+      "en": {
+        "word": "Outline",
+        "means": "Give the main points or structure briefly, without detail.",
+        "do": "Cover all the main features in short points or a brief framework.",
+        "avoid": "Going deep into one feature and leaving the rest out."
+      },
+      "hi": {
+        "word": "रूपरेखा प्रस्तुत कीजिए",
+        "means": "मुख्य बिंदु या ढाँचा संक्षेप में दें, बिना विस्तार के।",
+        "do": "सभी मुख्य विशेषताएँ छोटे बिंदुओं या संक्षिप्त ढाँचे में कवर करें।",
+        "avoid": "एक विशेषता में गहराई तक जाना और बाकी छोड़ देना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Highlight",
+        "means": "Draw attention to the most important features or points.",
+        "do": "Pick the few points that matter most and say why each one matters.",
+        "avoid": "Listing everything with equal weight, so nothing stands out."
+      },
+      "hi": {
+        "word": "प्रकाश डालिए",
+        "means": "सबसे महत्वपूर्ण विशेषताओं या बिंदुओं की ओर ध्यान खींचें।",
+        "do": "सबसे महत्वपूर्ण कुछ बिंदु चुनें और बताएँ कि हर एक क्यों मायने रखता है।",
+        "avoid": "सब कुछ बराबर महत्व से गिना देना, जिससे कुछ भी अलग न दिखे।"
+      }
+    },
+    {
+      "en": {
+        "word": "Identify",
+        "means": "Name and briefly point out the specific factors, features or issues asked for.",
+        "do": "Name each item clearly, then add a line on why it fits.",
+        "avoid": "Explaining at length without ever naming the items clearly."
+      },
+      "hi": {
+        "word": "पहचान कीजिए",
+        "means": "माँगे गए विशिष्ट कारकों, विशेषताओं या मुद्दों का नाम लें और संक्षेप में इंगित करें।",
+        "do": "हर एक का स्पष्ट नाम लें, फिर एक पंक्ति में बताएँ कि वह क्यों उपयुक्त है।",
+        "avoid": "लंबी व्याख्या करना पर कभी स्पष्ट नाम न लेना।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "General Mains answer-writing practice; editor to confirm Hindi forms against UPSC papers",
+    "hi": "सामान्य मुख्य परीक्षा उत्तर-लेखन अभ्यास; संपादक UPSC प्रश्नपत्रों से हिंदी रूपों की पुष्टि करें"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/directive-word@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X10)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

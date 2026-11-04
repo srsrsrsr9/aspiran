@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-doctor-private-referrals",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Referrals to a private clinic",
+    "hi": "निजी क्लिनिक को रेफ़रल"
+  },
+  "en": {
+    "scenario": "You are the chief medical officer of a district. Patients complain that a senior surgeon at the district hospital often says the hospital's waiting list is long and suggests they see him at a private clinic in the evening, where he charges fees. He is one of only two surgeons, works long hours and is popular with many patients. If you act strictly, he may resign and surgeries at the hospital would fall sharply.",
+    "question": "What do you do about the surgeon?",
+    "options": [
+      {
+        "label": "Start a formal inquiry under the service rules",
+        "outcome": "The rules are upheld and patients are protected from pressure, but the hospital may lose a skilled surgeon.",
+        "values": "Accountability and patients' rights"
+      },
+      {
+        "label": "Warn him privately and fix the waiting-list system",
+        "outcome": "The practice may stop and he stays, but patients already pushed to pay get no remedy.",
+        "values": "Correction and continuity of service"
+      },
+      {
+        "label": "Let it be, as he serves many patients",
+        "outcome": "Surgeries continue at today's level, but poor patients keep being nudged to pay for what should be free.",
+        "values": "Service output over fairness"
+      }
+    ],
+    "reflect": "When a valued professional bends the rules, does their value to the system change what should be done?"
+  },
+  "hi": {
+    "scenario": "आप एक ज़िले के मुख्य चिकित्सा अधिकारी हैं। मरीज़ शिकायत करते हैं कि ज़िला अस्पताल के एक वरिष्ठ सर्जन अक्सर कहते हैं कि अस्पताल की प्रतीक्षा सूची लंबी है और उन्हें शाम को एक निजी क्लिनिक में मिलने का सुझाव देते हैं, जहाँ वे शुल्क लेते हैं। वे केवल दो सर्जनों में से एक हैं, लंबे समय तक काम करते हैं और कई मरीज़ों में लोकप्रिय हैं। सख्ती करने पर वे इस्तीफ़ा दे सकते हैं और अस्पताल में सर्जरी बहुत घट जाएगी।",
+    "question": "आप सर्जन के बारे में क्या करेंगे?",
+    "options": [
+      {
+        "label": "सेवा नियमों के तहत औपचारिक जाँच शुरू करना",
+        "outcome": "नियम बने रहते हैं और मरीज़ दबाव से बचते हैं, पर अस्पताल एक कुशल सर्जन खो सकता है।",
+        "values": "जवाबदेही और मरीज़ों के अधिकार"
+      },
+      {
+        "label": "अकेले में चेतावनी देकर प्रतीक्षा सूची की व्यवस्था सुधारना",
+        "outcome": "यह चलन रुक सकता है और वे बने रहते हैं, पर जिन मरीज़ों को पहले भुगतान के लिए धकेला गया उन्हें कोई राहत नहीं मिलती।",
+        "values": "सुधार और सेवा की निरंतरता"
+      },
+      {
+        "label": "कई मरीज़ों की सेवा करने से जाने देना",
+        "outcome": "सर्जरी आज के स्तर पर चलती रहती है, पर गरीब मरीज़ों को उस चीज़ के लिए भुगतान की ओर धकेला जाता रहता है जो मुफ़्त होनी चाहिए।",
+        "values": "निष्पक्षता से ऊपर सेवा का उत्पादन"
+      }
+    ],
+    "reflect": "जब कोई मूल्यवान पेशेवर नियम मोड़ता है, तो क्या व्यवस्था के लिए उसकी उपयोगिता यह बदलती है कि क्या किया जाना चाहिए?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

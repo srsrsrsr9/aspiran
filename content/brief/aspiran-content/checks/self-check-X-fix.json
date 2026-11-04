@@ -1,0 +1,15 @@
+{
+  "batch": "X-fix",
+  "made": "2026-11-04",
+  "checksRun": [
+    "better-answer: 20 files, 80 pairs; only the weaker answer (en and hi) changed; ids, key order, 'better' index, 'why', strong answers and all other fields byte-identical in content to X5",
+    "Length of weaker answer / stronger answer, by characters, across all 160 en+hi pairs: min 0.85, max 1.09, mean 0.92 (X5 before: min 0.29, max 0.87, mean 0.48)",
+    "landmark-case: pol-nabam-rebia-case replaces pol-sr-bommai-case; same keys and order as the X4 landmark-case files; mood, sfx, tags, tone, schema identical; review.status draft; id and topic not in existing-titles.md and not in any zip in aspiran-batches"
+  ],
+  "issuesFound": [],
+  "finalRunIssues": [],
+  "stillOpen": [
+    "Weaker answers are now 85% to 109% of the stronger answer's length (characters), mean 92%. Word counts can differ more in a few pairs because weak answers use shorter words.",
+    "pol-nabam-rebia-case: confirm the status-quo-ante date (15 December 2015) and the citation (2016) 8 SCC 1 against the judgment; the Speaker point is left out because it was referred to a larger bench in 2023"
+  ]
+}

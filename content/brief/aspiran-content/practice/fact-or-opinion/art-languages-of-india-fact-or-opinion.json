@@ -1,0 +1,144 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs1"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "art-languages-of-india-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Languages of India: fact or opinion?",
+    "hi": "भारत की भाषाएँ: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Eighth Schedule of the Constitution lists 22 languages.",
+        "why": "Count them in the Schedule."
+      },
+      "hi": {
+        "text": "संविधान की आठवीं अनुसूची में 22 भाषाएँ हैं।",
+        "why": "अनुसूची में इन्हें गिनकर देखिए।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Every Eighth Schedule language should be an official language of the Union.",
+        "why": "Says what 'should' be; a policy view."
+      },
+      "hi": {
+        "text": "आठवीं अनुसूची की हर भाषा संघ की राजभाषा होनी चाहिए।",
+        "why": "यह बताता है कि क्या 'होना चाहिए'; यह नीति पर एक राय है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Tamil was the first language declared classical, in 2004.",
+        "why": "A government decision with a date."
+      },
+      "hi": {
+        "text": "तमिल 2004 में शास्त्रीय घोषित होने वाली पहली भाषा थी।",
+        "why": "यह तारीख वाला सरकारी निर्णय है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Older languages deserve more support than newer ones.",
+        "why": "Ranks languages by worth; that is a value choice."
+      },
+      "hi": {
+        "text": "पुरानी भाषाओं को नई भाषाओं से ज़्यादा सहायता मिलनी चाहिए।",
+        "why": "भाषाओं को महत्व के क्रम में रखना मूल्यों का चुनाव है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "In 2024 the government declared five more classical languages, taking the total to 11.",
+        "why": "The decision was announced by the Union Cabinet and is on record."
+      },
+      "hi": {
+        "text": "2024 में सरकार ने पाँच और भाषाओं को शास्त्रीय घोषित किया, जिससे कुल संख्या 11 हो गई।",
+        "why": "यह निर्णय केंद्रीय मंत्रिमंडल ने घोषित किया और रिकॉर्ड में है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Classical status does little to help a language survive.",
+        "why": "A judgment about effect; supporters point to research grants."
+      },
+      "hi": {
+        "text": "शास्त्रीय दर्जा किसी भाषा को बचाने में ज़्यादा मदद नहीं करता।",
+        "why": "यह असर पर एक आकलन है; समर्थक शोध अनुदानों की ओर इशारा करते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The 92nd Amendment, 2003 added Bodo, Dogri, Maithili and Santhali to the Eighth Schedule.",
+        "why": "The Amendment Act names them."
+      },
+      "hi": {
+        "text": "92वें संशोधन, 2003 ने बोडो, डोगरी, मैथिली और संथाली को आठवीं अनुसूची में जोड़ा।",
+        "why": "संशोधन अधिनियम में इनके नाम हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Children always learn best in their mother tongue.",
+        "why": "'Always' turns a research finding into a sweeping claim."
+      },
+      "hi": {
+        "text": "बच्चे हमेशा अपनी मातृभाषा में ही सबसे अच्छा सीखते हैं।",
+        "why": "'हमेशा' एक शोध निष्कर्ष को बड़े दावे में बदल देता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Eighth Schedule; 92nd Amendment Act, 2003; Ministry of Culture and PIB (classical languages, 2004 and 2024)",
+    "hi": "भारत का संविधान, आठवीं अनुसूची; 92वाँ संशोधन अधिनियम, 2003; संस्कृति मंत्रालय और पीआईबी (शास्त्रीय भाषाएँ, 2004 और 2024)"
+  },
+  "factsToCheck": [
+    "22 languages in the Eighth Schedule (as of 2026)",
+    "Tamil declared classical in 2004",
+    "Five languages declared classical on 3 October 2024 (Marathi, Pali, Prakrit, Assamese, Bengali), total 11",
+    "92nd Amendment, 2003 added Bodo, Dogri, Maithili and Santhali"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

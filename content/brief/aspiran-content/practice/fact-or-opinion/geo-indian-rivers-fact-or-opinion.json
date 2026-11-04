@@ -1,0 +1,141 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs1"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "geo-indian-rivers-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Rivers of India: fact or opinion?",
+    "hi": "भारत की नदियाँ: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Godavari is the longest river of peninsular India.",
+        "why": "River lengths are measured and published by the Central Water Commission."
+      },
+      "hi": {
+        "text": "गोदावरी प्रायद्वीपीय भारत की सबसे लंबी नदी है।",
+        "why": "नदियों की लंबाई केंद्रीय जल आयोग मापता और प्रकाशित करता है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Linking rivers is the best answer to India's water shortages.",
+        "why": "'Best answer' ranks one policy above others such as saving water."
+      },
+      "hi": {
+        "text": "नदियों को जोड़ना भारत की पानी की कमी का सबसे अच्छा उपाय है।",
+        "why": "'सबसे अच्छा उपाय' एक नीति को दूसरों, जैसे पानी बचाने, से ऊपर रखता है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Narmada flows west, through a rift valley, into the Arabian Sea.",
+        "why": "Its course is shown in physical maps and textbooks."
+      },
+      "hi": {
+        "text": "नर्मदा एक भ्रंश घाटी से होकर पश्चिम की ओर अरब सागर में बहती है।",
+        "why": "इसका मार्ग भौतिक मानचित्रों और पाठ्यपुस्तकों में दिखाया गया है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Narmada is the most beautiful river in India.",
+        "why": "Beauty is a matter of taste."
+      },
+      "hi": {
+        "text": "नर्मदा भारत की सबसे सुंदर नदी है।",
+        "why": "सुंदरता अपनी-अपनी पसंद की बात है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Bhagirathi and the Alaknanda meet at Devprayag to form the Ganga.",
+        "why": "A point on the map you can check."
+      },
+      "hi": {
+        "text": "भागीरथी और अलकनंदा देवप्रयाग में मिलकर गंगा बनाती हैं।",
+        "why": "यह मानचित्र पर एक जगह है जिसे आप जाँच सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Cleaning the Ganga matters more than any other river project.",
+        "why": "Ranks one project above all others; that is a value choice."
+      },
+      "hi": {
+        "text": "गंगा की सफ़ाई किसी भी दूसरी नदी परियोजना से ज़्यादा ज़रूरी है।",
+        "why": "एक परियोजना को बाकी सबसे ऊपर रखना मूल्यों का चुनाव है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Brahmaputra is called the Siang or Dihang where it enters Arunachal Pradesh.",
+        "why": "Its local names are recorded in official basin reports."
+      },
+      "hi": {
+        "text": "ब्रह्मपुत्र अरुणाचल प्रदेश में प्रवेश करते समय सियांग या दिहांग कहलाती है।",
+        "why": "इसके स्थानीय नाम आधिकारिक बेसिन रिपोर्टों में दर्ज हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Big dams do more good than harm.",
+        "why": "Weighs benefits against costs; people weigh them differently."
+      },
+      "hi": {
+        "text": "बड़े बाँधों से नुकसान से ज़्यादा फ़ायदा होता है।",
+        "why": "यहाँ फ़ायदे और नुकसान को तौला गया है; लोग इन्हें अलग-अलग तौलते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "India-WRIS river basin pages (Central Water Commission); NCERT Class 11, India: Physical Environment",
+    "hi": "इंडिया-डब्ल्यूआरआईएस नदी बेसिन पृष्ठ (केंद्रीय जल आयोग); एनसीईआरटी कक्षा 11, भारत: भौतिक पर्यावरण"
+  },
+  "factsToCheck": [
+    "Godavari as the longest peninsular river (about 1,465 km, India-WRIS)"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

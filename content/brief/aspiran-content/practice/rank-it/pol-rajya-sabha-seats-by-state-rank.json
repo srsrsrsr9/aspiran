@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "pol-rajya-sabha-seats-by-state-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Rajya Sabha seats by state",
+    "hi": "राज्यवार राज्यसभा सीटें"
+  },
+  "prompt": {
+    "en": "Rank by number of Rajya Sabha seats, most first.",
+    "hi": "राज्यसभा सीटों की संख्या के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "seats",
+    "hi": "सीटें"
+  },
+  "items": [
+    {
+      "value": 31,
+      "en": {
+        "label": "Uttar Pradesh"
+      },
+      "hi": {
+        "label": "उत्तर प्रदेश"
+      }
+    },
+    {
+      "value": 19,
+      "en": {
+        "label": "Maharashtra"
+      },
+      "hi": {
+        "label": "महाराष्ट्र"
+      }
+    },
+    {
+      "value": 18,
+      "en": {
+        "label": "Tamil Nadu"
+      },
+      "hi": {
+        "label": "तमिलनाडु"
+      }
+    },
+    {
+      "value": 12,
+      "en": {
+        "label": "Karnataka"
+      },
+      "hi": {
+        "label": "कर्नाटक"
+      }
+    },
+    {
+      "value": 10,
+      "en": {
+        "label": "Rajasthan"
+      },
+      "hi": {
+        "label": "राजस्थान"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The Fourth Schedule shares Rajya Sabha seats roughly by population, so the order is close to the Lok Sabha's. Bihar and West Bengal (16 each) are left out here because they tie.",
+    "hi": "चौथी अनुसूची राज्यसभा सीटें मोटे तौर पर जनसंख्या के आधार पर बाँटती है, इसलिए क्रम लोकसभा जैसा ही है। बिहार और पश्चिम बंगाल (16-16) बराबर हैं, इसलिए यहाँ शामिल नहीं हैं।"
+  },
+  "memoryHook": {
+    "en": "31, then 19 and 18 side by side, then a drop to 12 and 10.",
+    "hi": "31, फिर 19 और 18 साथ-साथ, फिर 12 और 10 तक गिरावट।"
+  },
+  "sources": {
+    "en": "Constitution of India, Article 80 and Fourth Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 80 और चौथी अनुसूची"
+  },
+  "factsToCheck": [
+    "Fourth Schedule seats (current text): UP 31, Maharashtra 19, Tamil Nadu 18, Karnataka 12, Rajasthan 10; Bihar 16, West Bengal 16"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

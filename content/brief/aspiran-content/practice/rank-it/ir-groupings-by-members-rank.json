@@ -1,0 +1,116 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "ir-groupings-by-members-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Groupings India belongs to, by size",
+    "hi": "भारत जिन समूहों में है, आकार के अनुसार"
+  },
+  "prompt": {
+    "en": "Rank these groupings by number of members, most first.",
+    "hi": "इन समूहों को सदस्यों की संख्या के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "members",
+    "hi": "सदस्य"
+  },
+  "items": [
+    {
+      "value": 193,
+      "en": {
+        "label": "United Nations"
+      },
+      "hi": {
+        "label": "संयुक्त राष्ट्र"
+      }
+    },
+    {
+      "value": 21,
+      "en": {
+        "label": "G20"
+      },
+      "hi": {
+        "label": "जी20"
+      }
+    },
+    {
+      "value": 11,
+      "en": {
+        "label": "ASEAN (India is a dialogue partner)"
+      },
+      "hi": {
+        "label": "आसियान (भारत संवाद साझेदार है)"
+      }
+    },
+    {
+      "value": 8,
+      "en": {
+        "label": "SAARC"
+      },
+      "hi": {
+        "label": "सार्क"
+      }
+    },
+    {
+      "value": 4,
+      "en": {
+        "label": "Quad"
+      },
+      "hi": {
+        "label": "क्वाड"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The G20 has 19 countries plus the European Union and the African Union, which joined in 2023. ASEAN grew to 11 when Timor-Leste joined in October 2025. India is a member of all except ASEAN.",
+    "hi": "जी20 में 19 देश, यूरोपीय संघ और 2023 में जुड़ा अफ़्रीकी संघ हैं। अक्टूबर 2025 में तिमोर-लेस्ते के जुड़ने से आसियान 11 का हो गया। भारत आसियान को छोड़कर सभी का सदस्य है।"
+  },
+  "memoryHook": {
+    "en": "UN in the hundreds, G20 in the twenties, then 11, 8 and the Quad's 4.",
+    "hi": "संयुक्त राष्ट्र सैकड़ों में, जी20 बीस के ऊपर, फिर 11, 8 और क्वाड के 4।"
+  },
+  "sources": {
+    "en": "United Nations; Ministry of External Affairs; ASEAN Secretariat; SAARC Secretariat",
+    "hi": "संयुक्त राष्ट्र; विदेश मंत्रालय; आसियान सचिवालय; सार्क सचिवालय"
+  },
+  "factsToCheck": [
+    "UN members: 193",
+    "G20: 19 countries, the EU and the African Union (joined 9 September 2023) = 21",
+    "ASEAN: 11 members after Timor-Leste was admitted on 26 October 2025",
+    "SAARC: 8 members; Quad: 4 (Australia, India, Japan, United States)"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

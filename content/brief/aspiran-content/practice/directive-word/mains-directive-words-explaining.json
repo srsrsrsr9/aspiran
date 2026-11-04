@@ -1,0 +1,120 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs1",
+      "mains-gs2",
+      "mains-gs3",
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-directive"
+    ]
+  },
+  "id": "mains-directive-words-explaining",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five words that ask you to explain",
+    "hi": "समझाने को कहने वाले पाँच शब्द"
+  },
+  "words": [
+    {
+      "en": {
+        "word": "Explain",
+        "means": "Make clear how or why something happens, giving causes and reasons.",
+        "do": "Set out the cause-and-effect chain step by step, with one example.",
+        "avoid": "Describing what something is without saying how or why."
+      },
+      "hi": {
+        "word": "व्याख्या कीजिए",
+        "means": "स्पष्ट करें कि कोई बात कैसे या क्यों होती है, कारण और तर्क देते हुए।",
+        "do": "कारण और प्रभाव की कड़ी क्रम से रखें, एक उदाहरण के साथ।",
+        "avoid": "केवल यह बताना कि कोई चीज़ क्या है, पर यह नहीं कि कैसे या क्यों।"
+      }
+    },
+    {
+      "en": {
+        "word": "Describe",
+        "means": "Give a detailed account of what something is like: its features, parts or stages.",
+        "do": "Cover the main features in a logical order, such as by time, place or component.",
+        "avoid": "Arguing for or against, or judging, when only a description was asked."
+      },
+      "hi": {
+        "word": "वर्णन कीजिए",
+        "means": "किसी चीज़ का विस्तृत विवरण दें: उसकी विशेषताएँ, भाग या चरण।",
+        "do": "मुख्य विशेषताओं को तार्किक क्रम में रखें, जैसे समय, स्थान या घटक के अनुसार।",
+        "avoid": "जब केवल वर्णन माँगा हो, तब पक्ष-विपक्ष में तर्क देना या निर्णय सुनाना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Elaborate",
+        "means": "Take a given idea and develop it in more depth and detail.",
+        "do": "Start from the statement in the question and add dimensions, data and examples to it.",
+        "avoid": "Changing the topic, or repeating the statement in other words."
+      },
+      "hi": {
+        "word": "विस्तार से बताइए",
+        "means": "दिए गए विचार को अधिक गहराई और विस्तार से विकसित करें।",
+        "do": "प्रश्न के कथन से शुरू करें और उसमें आयाम, आँकड़े और उदाहरण जोड़ें।",
+        "avoid": "विषय बदल देना, या कथन को दूसरे शब्दों में दोहराते रहना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Illustrate",
+        "means": "Make a point clear through concrete examples, cases or diagrams.",
+        "do": "State the point briefly, then give two or three specific, relevant examples.",
+        "avoid": "Giving theory with no examples, or examples that do not fit the point."
+      },
+      "hi": {
+        "word": "सोदाहरण स्पष्ट कीजिए",
+        "means": "ठोस उदाहरणों, मामलों या आरेखों से बात स्पष्ट करें।",
+        "do": "बात संक्षेप में रखें, फिर 2-3 विशिष्ट और प्रासंगिक उदाहरण दें।",
+        "avoid": "बिना उदाहरण के केवल सिद्धांत लिखना, या ऐसे उदाहरण देना जो बात से मेल न खाएँ।"
+      }
+    },
+    {
+      "en": {
+        "word": "Enumerate",
+        "means": "List the points one by one, briefly.",
+        "do": "Number each point and keep each to a line or two.",
+        "avoid": "Writing long paragraphs on a few points instead of covering the full list."
+      },
+      "hi": {
+        "word": "गिनाइए",
+        "means": "बिंदुओं को एक-एक करके संक्षेप में सूचीबद्ध करें।",
+        "do": "हर बिंदु को क्रमांक दें और एक-दो पंक्ति में रखें।",
+        "avoid": "पूरी सूची देने के बजाय कुछ बिंदुओं पर लंबे अनुच्छेद लिखना।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "General Mains answer-writing practice; editor to confirm Hindi forms against UPSC papers",
+    "hi": "सामान्य मुख्य परीक्षा उत्तर-लेखन अभ्यास; संपादक UPSC प्रश्नपत्रों से हिंदी रूपों की पुष्टि करें"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/directive-word@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X10)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

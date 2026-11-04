@@ -1,0 +1,153 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "soc-schools-universities-and-research-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Schools, universities and research",
+    "hi": "विद्यालय, विश्वविद्यालय और अनुसंधान"
+  },
+  "items": [
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Education, including technical and medical education and universities",
+        "note": "Concurrent List entry 25, moved from the State List by the 42nd Amendment, 1976."
+      },
+      "hi": {
+        "text": "शिक्षा, तकनीकी और चिकित्सा शिक्षा तथा विश्वविद्यालयों सहित",
+        "note": "समवर्ती सूची की प्रविष्टि 25, जिसे 42वें संशोधन, 1976 ने राज्य सूची से यहाँ रखा।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Setting standards in higher education and research",
+        "note": "Union List entry 66; bodies like the UGC rest on it."
+      },
+      "hi": {
+        "text": "उच्च शिक्षा और अनुसंधान के मानक तय करना",
+        "note": "संघ सूची की प्रविष्टि 66; विश्वविद्यालय अनुदान आयोग जैसी संस्थाएँ इसी पर टिकी हैं।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Banaras Hindu, Aligarh Muslim and Delhi universities",
+        "note": "Union List entry 63 names these three universities."
+      },
+      "hi": {
+        "text": "बनारस हिंदू, अलीगढ़ मुस्लिम और दिल्ली विश्वविद्यालय",
+        "note": "संघ सूची की प्रविष्टि 63 में इन तीनों विश्वविद्यालयों के नाम हैं।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Centrally funded science and technology institutions of national importance",
+        "note": "Union List entry 64."
+      },
+      "hi": {
+        "text": "केंद्र से वित्तपोषित राष्ट्रीय महत्व की वैज्ञानिक और तकनीकी संस्थाएँ",
+        "note": "संघ सूची की प्रविष्टि 64।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Union agencies for professional training, including police training",
+        "note": "Union List entry 65."
+      },
+      "hi": {
+        "text": "व्यावसायिक प्रशिक्षण के संघ अभिकरण, पुलिस प्रशिक्षण सहित",
+        "note": "संघ सूची की प्रविष्टि 65।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Setting up universities by state law",
+        "note": "State List entry 32 lets a state incorporate universities."
+      },
+      "hi": {
+        "text": "राज्य के कानून से विश्वविद्यालय स्थापित करना",
+        "note": "राज्य सूची की प्रविष्टि 32 राज्य को विश्वविद्यालय निगमित करने देती है।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Libraries and museums run or funded by the state",
+        "note": "State List entry 12."
+      },
+      "hi": {
+        "text": "राज्य द्वारा चलाए या वित्तपोषित पुस्तकालय और संग्रहालय",
+        "note": "राज्य सूची की प्रविष्टि 12।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Agricultural education and research",
+        "note": "Part of State List entry 14, on agriculture."
+      },
+      "hi": {
+        "text": "कृषि शिक्षा और अनुसंधान",
+        "note": "राज्य सूची की प्रविष्टि 14 का हिस्सा, जो कृषि की है।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Constitution of India, Article 246 and Seventh Schedule; 42nd Amendment Act, 1976",
+    "hi": "भारत का संविधान, अनुच्छेद 246 और सातवीं अनुसूची; 42वाँ संशोधन अधिनियम, 1976"
+  },
+  "factsToCheck": [
+    "Seventh Schedule entry numbers and list placement as in the current official text (Legislative Department, India Code)",
+    "Education moved from the State List to Concurrent List entry 25 by the 42nd Amendment, 1976"
+  ],
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

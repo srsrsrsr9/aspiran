@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-spouse-ngo-grant",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Your spouse's NGO applies for a grant",
+    "hi": "आपके जीवनसाथी के NGO का अनुदान आवेदन"
+  },
+  "en": {
+    "scenario": "You are a district collector. A state scheme lets your office give grants to NGOs for adult literacy. Your spouse runs a well-regarded NGO that has worked in the district for ten years, and it has applied. Its proposal is one of the strongest on paper. A local newspaper has started asking which NGOs will be chosen.",
+    "question": "How do you handle the grant decision?",
+    "options": [
+      {
+        "label": "Recuse yourself and let a committee decide without you",
+        "outcome": "The decision can be seen as fair and the NGO is judged on merit, but critics may still say the committee felt your influence.",
+        "values": "Impartiality and public trust"
+      },
+      {
+        "label": "Ask your spouse to withdraw the application",
+        "outcome": "There is no question of favour, but a capable NGO and the learners it serves lose out because of your post.",
+        "values": "Avoiding any appearance of bias, at a cost to merit"
+      },
+      {
+        "label": "Decide yourself, since the proposal is strong",
+        "outcome": "A good proposal may be funded quickly, but the decision looks partial and may be challenged.",
+        "values": "Outcome and efficiency over process"
+      }
+    ],
+    "reflect": "Should a public servant's family pay a price for that servant's office, and how much?"
+  },
+  "hi": {
+    "scenario": "आप ज़िला कलेक्टर हैं। एक राज्य योजना के तहत आपका कार्यालय प्रौढ़ साक्षरता के लिए NGO को अनुदान दे सकता है। आपके जीवनसाथी एक प्रतिष्ठित NGO चलाते हैं, जो दस वर्ष से ज़िले में काम कर रहा है, और उसने आवेदन किया है। कागज़ पर उसका प्रस्ताव सबसे मज़बूत में से एक है। एक स्थानीय अख़बार पूछने लगा है कि कौन-से NGO चुने जाएँगे।",
+    "question": "अनुदान के निर्णय को आप कैसे संभालेंगे?",
+    "options": [
+      {
+        "label": "खुद अलग होकर समिति को आपके बिना निर्णय लेने देना",
+        "outcome": "निर्णय निष्पक्ष दिख सकता है और NGO को गुण-दोष पर परखा जाता है, पर आलोचक फिर भी कह सकते हैं कि समिति पर आपका प्रभाव था।",
+        "values": "निष्पक्षता और जनविश्वास"
+      },
+      {
+        "label": "जीवनसाथी से आवेदन वापस लेने को कहना",
+        "outcome": "पक्षपात का कोई सवाल नहीं उठता, पर आपके पद के कारण एक सक्षम NGO और उसके शिक्षार्थी वंचित रह जाते हैं।",
+        "values": "योग्यता की कीमत पर पक्षपात के हर आभास से बचना"
+      },
+      {
+        "label": "मज़बूत प्रस्ताव होने से खुद निर्णय लेना",
+        "outcome": "अच्छे प्रस्ताव को जल्दी धन मिल सकता है, पर निर्णय पक्षपाती दिखता है और उसे चुनौती मिल सकती है।",
+        "values": "प्रक्रिया से ऊपर परिणाम और दक्षता"
+      }
+    ],
+    "reflect": "क्या किसी लोक सेवक के परिवार को उसके पद की कीमत चुकानी चाहिए, और कितनी?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

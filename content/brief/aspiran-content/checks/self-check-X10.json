@@ -1,0 +1,24 @@
+{
+  "batch": "X10",
+  "checksRun": [
+    "python3 check.py (valid JSON; key order identical to the practice-format-samples-2 file of each format with factsToCheck inserted just before 'schema'; schema value, mood, sfx and tone identical to the sample; tags identical to the sample for mnemonic, acronym-unpack and directive-word; tags.stage identical for word-bank; review.status draft; id matches filename and uses an allowed prefix; en and hi have the same number of letters or words and the same fields; mnemonic keys spell the mnemonic and the Hindi initials count matches; acronym letters spell the acronym and each English word starts with its letter; Devanagari in every Hindi field, no Devanagari digits, no Latin article letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique in the batch, not in existing-titles.md and not in any earlier zip in aspiran-batches; directive words not among the six in the sample and not repeated across files; word-bank terms not repeated from eth-gs4-core-terms)",
+    "44 files: mnemonic 15 files / 88 letters, acronym-unpack 15 files / 67 letters, word-bank 10 files / 80 words, directive-word 4 files / 20 words",
+    "Subject spread: pol 8, eco 6, env 5, sci 5, geo 3, ir 4, anc 2, med 1, mod 1, art 2, soc 2, eth 1, mains 4",
+    "factsToCheck entries: 58",
+    "Looked up for this batch: Timor-Leste admitted to ASEAN at the 47th ASEAN Summit, 26 Oct 2025; Sattriya recognised in 2000; MoEFCC exemption of SDN-1 and SDN-2 genome-edited plants, 30 March 2022. Other facts are from NCERT, the Constitution and official bodies, written from general knowledge; every date or number is in factsToCheck.",
+    "Tragic rule: no disaster, violence or deaths. The Delhi Sultanate note says 'Mughal rule under Babur followed in 1526' instead of naming the battle.",
+    "Hindi: digits on screen; article letters as in the Hindi Constitution with Latin in brackets on first mention: 300क (300A), 279क (279A)"
+  ],
+  "issuesFound": [
+    "First run flagged the word 'ranks' in the taxonomy mnemonic (id and title)",
+    "Hindi source for ir-diplomacy-terms cited 'GATT अनुच्छेद I' with a Latin numeral"
+  ],
+  "fixed": [
+    "Renamed to sci-taxonomic-hierarchy-kpcofgs, title 'Levels of classification'",
+    "Written as 'GATT अनुच्छेद 1'"
+  ],
+  "stillOpen": [
+    "See QUESTIONS-FOR-OWNER-part5.md"
+  ],
+  "finalRunIssues": []
+}

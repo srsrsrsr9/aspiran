@@ -1,0 +1,48 @@
+{
+  "batch": "X8",
+  "checksRun": [
+    "python3 check.py (valid JSON; key order identical to practice-format-samples-2 with factsToCheck inserted just before 'schema'; schema, mood, sfx, tags and tone identical to the sample for each format; review.status draft; id matches filename and uses an allowed subject prefix; en and hi have the same keys in the same order; committee-match: 5 to 8 pairs, each with year (whole number or null) and committee/subject in both languages, no committee repeated in a file; scheme-snapshot: launched is a year; numbers in en and hi match field by field and pair by pair; Devanagari in every Hindi field, no Devanagari digits, no Latin article or section letters in Hindi outside brackets; no streak, timer or exam-prediction wording; no tragic wording; no budget outlays; every file has sources and a non-empty factsToCheck)",
+    "Ids checked against 522 ids in existing-titles.md and 326 practice, node, deck and mock ids in the earlier zips in aspiran-batches (X1–X5, X-fix, B and F batches); no clashes; no id repeated in X8",
+    "50 files: committee-match 15 files / 97 pairs, scheme-snapshot 15 files, index-card 20 files",
+    "Committee years: 95 given, 2 left null where the appointment year needs checking (as the sample does for the Hartog Committee)",
+    "factsToCheck entries: 105",
+    "0 issues on the final run"
+  ],
+  "issuesFound": [
+    "First run: eth-probity-and-anti-corruption-bodies wrote '4th report' in English and a word in Hindi, so the number check failed"
+  ],
+  "fixed": [
+    "Wrote 'fourth report' in English"
+  ],
+  "currentFacts2025_2026": [
+    "PM SVANidhi: restructured and extended to 31 March 2030 with tranches of ₹15,000, ₹25,000 and ₹50,000 (Cabinet, 27 August 2025)",
+    "CPI: new series with base 2024=100 from 12 February 2026, replacing base 2012",
+    "PMAY-G: factsToCheck notes that MGNREGA was replaced by the VB-G RAM G Act in December 2025",
+    "DPDP Act, 2023: Rules notified November 2025 (in factsToCheck of sci-data-and-digital-committees)"
+  ],
+  "result": {
+    "files": 50,
+    "byFormat": {
+      "committee-match": [
+        15,
+        97
+      ],
+      "index-card": [
+        20,
+        20
+      ],
+      "scheme-snapshot": [
+        15,
+        15
+      ]
+    },
+    "years": {
+      "int": 95,
+      "null": 2
+    },
+    "factsToCheck": 105,
+    "existingIds": 522,
+    "earlierIds": 326,
+    "issues": []
+  }
+}

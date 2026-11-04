@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-land-plan-insider-tip",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Advance knowledge of a new highway",
+    "hi": "नए राजमार्ग की पहले से जानकारी"
+  },
+  "en": {
+    "scenario": "You work in a state planning department and have seen the draft route of a new highway, not yet public. Land near the planned interchanges will rise sharply in value. Your elder brother, a farmer, mentions that he is thinking of selling his plot in that area to clear a debt. He has not asked you anything about the highway.",
+    "question": "What do you say to your brother?",
+    "options": [
+      {
+        "label": "Say nothing about the highway",
+        "outcome": "Confidential information stays protected and you gain nothing from your post, but your brother may sell cheaply and later feel you let him down.",
+        "values": "Confidentiality and integrity over family interest"
+      },
+      {
+        "label": "Advise him in general to wait and get a fair valuation",
+        "outcome": "You may help him without naming the plan, but you are still using what you know, even if indirectly.",
+        "values": "Family care with a blurred line"
+      },
+      {
+        "label": "Tell him about the route so he can decide",
+        "outcome": "Your brother benefits, but you misuse official information, which may be a breach of rules and of public trust.",
+        "values": "Family loyalty over public duty"
+      }
+    ],
+    "reflect": "Is it misuse of office if you gain nothing yourself but someone close to you does?"
+  },
+  "hi": {
+    "scenario": "आप एक राज्य नियोजन विभाग में काम करते हैं और आपने एक नए राजमार्ग का मसौदा मार्ग देखा है, जो अभी सार्वजनिक नहीं है। प्रस्तावित इंटरचेंज के पास की ज़मीन का मूल्य तेज़ी से बढ़ेगा। आपके बड़े भाई, जो किसान हैं, बताते हैं कि वे कर्ज़ चुकाने के लिए उस इलाके का अपना प्लॉट बेचने की सोच रहे हैं। उन्होंने आपसे राजमार्ग के बारे में कुछ नहीं पूछा है।",
+    "question": "आप अपने भाई से क्या कहेंगे?",
+    "options": [
+      {
+        "label": "राजमार्ग के बारे में कुछ न कहना",
+        "outcome": "गोपनीय जानकारी सुरक्षित रहती है और आप पद से कुछ नहीं पाते, पर भाई सस्ते में बेच सकते हैं और बाद में उन्हें लग सकता है कि आपने साथ नहीं दिया।",
+        "values": "पारिवारिक हित से ऊपर गोपनीयता और सत्यनिष्ठा"
+      },
+      {
+        "label": "सामान्य सलाह देना कि रुकें और उचित मूल्यांकन करवाएँ",
+        "outcome": "योजना का नाम लिए बिना आप उनकी मदद कर सकते हैं, पर आप फिर भी, भले परोक्ष रूप से, अपनी जानकारी का उपयोग कर रहे हैं।",
+        "values": "धुँधली सीमा के साथ परिवार की परवाह"
+      },
+      {
+        "label": "मार्ग के बारे में बताना ताकि वे निर्णय ले सकें",
+        "outcome": "भाई को लाभ होता है, पर आप सरकारी जानकारी का दुरुपयोग करते हैं, जो नियमों और जनविश्वास का उल्लंघन हो सकता है।",
+        "values": "सार्वजनिक कर्तव्य से ऊपर पारिवारिक निष्ठा"
+      }
+    ],
+    "reflect": "अगर आपको खुद कुछ न मिले पर आपके किसी करीबी को लाभ हो, तो क्या यह पद का दुरुपयोग है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

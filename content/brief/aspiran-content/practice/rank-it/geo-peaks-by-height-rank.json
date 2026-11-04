@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "geo-peaks-by-height-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Peaks of India by height",
+    "hi": "ऊँचाई के अनुसार भारत की चोटियाँ"
+  },
+  "prompt": {
+    "en": "Rank these peaks by height, highest first.",
+    "hi": "इन चोटियों को ऊँचाई के अनुसार क्रम दें, सबसे ऊँची पहले।"
+  },
+  "unit": {
+    "en": "metres",
+    "hi": "मीटर"
+  },
+  "items": [
+    {
+      "value": 8586,
+      "en": {
+        "label": "Kangchenjunga (Sikkim)"
+      },
+      "hi": {
+        "label": "कंचनजंगा (सिक्किम)"
+      }
+    },
+    {
+      "value": 7816,
+      "en": {
+        "label": "Nanda Devi (Uttarakhand)"
+      },
+      "hi": {
+        "label": "नंदा देवी (उत्तराखंड)"
+      }
+    },
+    {
+      "value": 2695,
+      "en": {
+        "label": "Anamudi (Kerala)"
+      },
+      "hi": {
+        "label": "अनामुडी (केरल)"
+      }
+    },
+    {
+      "value": 2637,
+      "en": {
+        "label": "Doddabetta (Tamil Nadu)"
+      },
+      "hi": {
+        "label": "दोड्डाबेट्टा (तमिलनाडु)"
+      }
+    },
+    {
+      "value": 1722,
+      "en": {
+        "label": "Guru Shikhar (Rajasthan)"
+      },
+      "hi": {
+        "label": "गुरु शिखर (राजस्थान)"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Anamudi is the highest peak of peninsular India, Doddabetta the highest in the Nilgiris, and Guru Shikhar the highest point of the Aravallis.",
+    "hi": "अनामुडी प्रायद्वीपीय भारत की सबसे ऊँची चोटी है, दोड्डाबेट्टा नीलगिरि की सबसे ऊँची, और गुरु शिखर अरावली का सबसे ऊँचा बिंदु।"
+  },
+  "memoryHook": {
+    "en": "Two Himalayan giants above 7,000 m, then a big drop to the south and west.",
+    "hi": "हिमालय की दो विशाल चोटियाँ 7,000 मीटर से ऊपर, फिर दक्षिण और पश्चिम में बड़ी गिरावट।"
+  },
+  "sources": {
+    "en": "Survey of India; NCERT Class 11, India: Physical Environment",
+    "hi": "भारतीय सर्वेक्षण विभाग; एनसीईआरटी कक्षा 11, भारत: भौतिक पर्यावरण"
+  },
+  "factsToCheck": [
+    "Heights: Kangchenjunga 8,586 m, Nanda Devi 7,816 m, Anamudi 2,695 m, Doddabetta 2,637 m, Guru Shikhar 1,722 m (confirm against Survey of India figures)"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

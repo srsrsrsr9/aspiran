@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-friend-false-overtime",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A friend's overtime claims",
+    "hi": "एक मित्र के ओवरटाइम दावे"
+  },
+  "en": {
+    "scenario": "You are a section officer. While checking records, you notice that a colleague who is also a close friend has claimed overtime for evenings when the office register shows he left early. The amount is small. You know he has heavy loan repayments after his house was damaged by termites and repairs ran over budget. If you report it, a formal inquiry will follow and could affect his promotion.",
+    "question": "What do you do about the claims?",
+    "options": [
+      {
+        "label": "Report the mismatch through the proper channel",
+        "outcome": "The record is corrected and rules are applied evenly, but your friendship may end and he may face a penalty.",
+        "values": "Accountability and fairness to all over personal loyalty"
+      },
+      {
+        "label": "Speak to him privately and ask him to withdraw the claims",
+        "outcome": "He gets a chance to correct it without an inquiry, but the earlier false claims stay hidden from the system.",
+        "values": "Compassion and correction without punishment"
+      },
+      {
+        "label": "Ignore it as too small to matter",
+        "outcome": "There is no conflict now, but you have knowingly let a false claim pass, which may encourage it again.",
+        "values": "Loyalty and peace over duty"
+      }
+    ],
+    "reflect": "Does a person's hardship change what honesty requires of you, or only how you act on it?"
+  },
+  "hi": {
+    "scenario": "आप अनुभाग अधिकारी हैं। रिकॉर्ड जाँचते हुए आप देखते हैं कि एक सहकर्मी, जो आपका करीबी मित्र भी है, ने उन शामों का ओवरटाइम माँगा है जब कार्यालय रजिस्टर के अनुसार वह जल्दी चला गया था। राशि छोटी है। आप जानते हैं कि दीमक से घर खराब होने और मरम्मत का खर्च बजट से अधिक होने के बाद उस पर भारी कर्ज़ है। रिपोर्ट करने पर औपचारिक जाँच होगी, जिससे उसकी पदोन्नति प्रभावित हो सकती है।",
+    "question": "इन दावों के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "उचित माध्यम से विसंगति की रिपोर्ट करना",
+        "outcome": "रिकॉर्ड सुधरता है और नियम सब पर समान रूप से लागू होते हैं, पर आपकी मित्रता टूट सकती है और उसे दंड मिल सकता है।",
+        "values": "निजी निष्ठा से ऊपर जवाबदेही और सबके प्रति निष्पक्षता"
+      },
+      {
+        "label": "उससे अकेले में बात कर दावे वापस लेने को कहना",
+        "outcome": "उसे बिना जाँच के सुधार का मौका मिलता है, पर पहले के गलत दावे व्यवस्था से छिपे रहते हैं।",
+        "values": "दंड के बिना करुणा और सुधार"
+      },
+      {
+        "label": "छोटा मामला मानकर अनदेखा करना",
+        "outcome": "अभी कोई टकराव नहीं होता, पर आपने जानबूझकर गलत दावा जाने दिया, जिससे यह फिर हो सकता है।",
+        "values": "कर्तव्य से ऊपर निष्ठा और शांति"
+      }
+    ],
+    "reflect": "क्या किसी की कठिनाई यह बदलती है कि ईमानदारी आपसे क्या माँगती है, या केवल यह कि आप उस पर कैसे अमल करें?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

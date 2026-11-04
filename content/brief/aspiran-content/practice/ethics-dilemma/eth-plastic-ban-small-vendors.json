@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-plastic-ban-small-vendors",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A plastic ban and small vendors",
+    "hi": "प्लास्टिक प्रतिबंध और छोटे विक्रेता"
+  },
+  "en": {
+    "scenario": "You head the enforcement drive on single-use plastic in a city. Your teams have mostly fined street vendors and small shops, who say they cannot afford alternatives. Large packaged-goods firms, whose wrappers make up much of the waste, are covered by separate producer rules that your teams do not enforce. A vendors' union calls the drive unfair, while residents want cleaner streets.",
+    "question": "How do you take the drive forward?",
+    "options": [
+      {
+        "label": "Continue fining all violators equally",
+        "outcome": "The rule is applied as written and streets may get cleaner, but the burden falls hardest on the poorest sellers.",
+        "values": "Rule of law and environmental protection"
+      },
+      {
+        "label": "Pause fines on small vendors and help them find alternatives",
+        "outcome": "Vendors get time and support, but some plastic use continues and residents may see the drive as weak.",
+        "values": "Equity and a just transition"
+      },
+      {
+        "label": "Push the producer-rule authority to act on large firms first",
+        "outcome": "The main source is targeted and fairness improves, but this is outside your direct power and may take long.",
+        "values": "Fairness through addressing root causes"
+      }
+    ],
+    "reflect": "Is it fair to enforce a good rule mainly where it is easiest to enforce?"
+  },
+  "hi": {
+    "scenario": "आप एक शहर में एकल-उपयोग प्लास्टिक पर प्रवर्तन अभियान के प्रमुख हैं। आपकी टीमों ने ज़्यादातर रेहड़ी वालों और छोटी दुकानों पर जुर्माना लगाया है, जो कहते हैं कि वे विकल्प नहीं खरीद सकते। बड़ी पैकेज्ड सामान कंपनियाँ, जिनके रैपर कचरे का बड़ा हिस्सा हैं, अलग उत्पादक नियमों के दायरे में हैं जिन्हें आपकी टीमें लागू नहीं करतीं। विक्रेता संघ अभियान को अनुचित कहता है, जबकि निवासी साफ़ सड़कें चाहते हैं।",
+    "question": "आप अभियान को आगे कैसे बढ़ाएँगे?",
+    "options": [
+      {
+        "label": "सभी उल्लंघनकर्ताओं पर समान जुर्माना जारी रखना",
+        "outcome": "नियम जैसा लिखा है वैसा लागू होता है और सड़कें साफ़ हो सकती हैं, पर बोझ सबसे गरीब विक्रेताओं पर सबसे भारी पड़ता है।",
+        "values": "विधि का शासन और पर्यावरण संरक्षण"
+      },
+      {
+        "label": "छोटे विक्रेताओं पर जुर्माना रोककर विकल्प खोजने में मदद करना",
+        "outcome": "विक्रेताओं को समय और सहायता मिलती है, पर कुछ प्लास्टिक उपयोग जारी रहता है और निवासियों को अभियान कमज़ोर लग सकता है।",
+        "values": "समानता और न्यायसंगत बदलाव"
+      },
+      {
+        "label": "उत्पादक नियमों वाले प्राधिकरण पर पहले बड़ी कंपनियों पर कार्रवाई का दबाव बनाना",
+        "outcome": "मुख्य स्रोत पर निशाना साधा जाता है और निष्पक्षता बढ़ती है, पर यह आपकी सीधी शक्ति से बाहर है और समय ले सकता है।",
+        "values": "मूल कारणों को संबोधित कर निष्पक्षता"
+      }
+    ],
+    "reflect": "क्या किसी अच्छे नियम को मुख्यतः वहीं लागू करना उचित है जहाँ लागू करना सबसे आसान है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "sci-planets-by-diameter-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Planets by size",
+    "hi": "आकार के अनुसार ग्रह"
+  },
+  "prompt": {
+    "en": "Rank these planets by diameter, largest first.",
+    "hi": "इन ग्रहों को व्यास के अनुसार क्रम दें, सबसे बड़ा पहले।"
+  },
+  "unit": {
+    "en": "km",
+    "hi": "किमी"
+  },
+  "items": [
+    {
+      "value": 142984,
+      "en": {
+        "label": "Jupiter"
+      },
+      "hi": {
+        "label": "बृहस्पति"
+      }
+    },
+    {
+      "value": 120536,
+      "en": {
+        "label": "Saturn"
+      },
+      "hi": {
+        "label": "शनि"
+      }
+    },
+    {
+      "value": 51118,
+      "en": {
+        "label": "Uranus"
+      },
+      "hi": {
+        "label": "अरुण"
+      }
+    },
+    {
+      "value": 49528,
+      "en": {
+        "label": "Neptune"
+      },
+      "hi": {
+        "label": "वरुण"
+      }
+    },
+    {
+      "value": 12756,
+      "en": {
+        "label": "Earth"
+      },
+      "hi": {
+        "label": "पृथ्वी"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The four outer planets are giants; Earth is the largest of the four rocky planets but is about one-eleventh of Jupiter's width.",
+    "hi": "चारों बाहरी ग्रह विशाल हैं; पृथ्वी चार चट्टानी ग्रहों में सबसे बड़ी है, पर बृहस्पति की चौड़ाई का लगभग ग्यारहवाँ हिस्सा है।"
+  },
+  "memoryHook": {
+    "en": "Gas giants first (Jupiter, Saturn), then ice giants (Uranus, Neptune), then Earth.",
+    "hi": "पहले गैस दानव (बृहस्पति, शनि), फिर हिम दानव (अरुण, वरुण), फिर पृथ्वी।"
+  },
+  "sources": {
+    "en": "NASA Planetary Fact Sheet (equatorial diameter)",
+    "hi": "नासा प्लैनेटरी फ़ैक्ट शीट (विषुवतीय व्यास)"
+  },
+  "factsToCheck": [
+    "Equatorial diameters (NASA Planetary Fact Sheet): Jupiter 142,984 km, Saturn 120,536 km, Uranus 51,118 km, Neptune 49,528 km, Earth 12,756 km"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

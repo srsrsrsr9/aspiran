@@ -1,0 +1,185 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs3"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "eco-revenue-or-capital-receipts",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Revenue receipt or capital receipt?",
+    "hi": "राजस्व प्राप्ति या पूंजीगत प्राप्ति?"
+  },
+  "buckets": {
+    "en": [
+      "Revenue receipt",
+      "Capital receipt"
+    ],
+    "hi": [
+      "राजस्व प्राप्ति",
+      "पूंजीगत प्राप्ति"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Corporation tax",
+        "why": "A tax creates no liability and reduces no asset, so it is a revenue receipt."
+      },
+      "hi": {
+        "text": "निगम कर",
+        "why": "कर से न कोई देनदारी बनती है, न कोई परिसंपत्ति घटती है, इसलिए यह राजस्व प्राप्ति है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Central GST collected by the Union",
+        "why": "Like every tax, it is a revenue receipt."
+      },
+      "hi": {
+        "text": "केंद्र द्वारा वसूला गया केंद्रीय GST",
+        "why": "हर कर की तरह, यह राजस्व प्राप्ति है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Dividend paid by the RBI to the government",
+        "why": "Dividends and surplus transfers are non-tax revenue."
+      },
+      "hi": {
+        "text": "RBI द्वारा सरकार को दिया गया लाभांश",
+        "why": "लाभांश और अधिशेष हस्तांतरण गैर-कर राजस्व हैं।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Interest received on loans the Centre gave to states",
+        "why": "Interest is income on a loan, not repayment of it, so it is revenue."
+      },
+      "hi": {
+        "text": "राज्यों को दिए ऋणों पर केंद्र को मिला ब्याज",
+        "why": "ब्याज ऋण की आय है, उसकी वापसी नहीं, इसलिए यह राजस्व है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Money from auctioning telecom spectrum",
+        "why": "The Budget shows it as non-tax revenue under communication services, even though the sums are large and irregular."
+      },
+      "hi": {
+        "text": "दूरसंचार स्पेक्ट्रम की नीलामी से मिली राशि",
+        "why": "बजट इसे संचार सेवाओं के तहत गैर-कर राजस्व दिखाता है, भले ही राशि बड़ी और अनियमित हो।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Fees for issuing passports",
+        "why": "Fees and charges for services are non-tax revenue."
+      },
+      "hi": {
+        "text": "पासपोर्ट जारी करने का शुल्क",
+        "why": "सेवाओं के शुल्क और प्रभार गैर-कर राजस्व हैं।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Selling part of the government's stake in a public sector company",
+        "why": "Disinvestment reduces an asset the government owns, so it is a capital receipt."
+      },
+      "hi": {
+        "text": "किसी सार्वजनिक क्षेत्र की कंपनी में सरकार की हिस्सेदारी का कुछ भाग बेचना",
+        "why": "विनिवेश से सरकार की परिसंपत्ति घटती है, इसलिए यह पूंजीगत प्राप्ति है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Borrowing by selling dated government bonds",
+        "why": "Borrowing creates a liability, so it is a capital receipt."
+      },
+      "hi": {
+        "text": "दिनांकित सरकारी बॉन्ड बेचकर उधार लेना",
+        "why": "उधार से देनदारी बनती है, इसलिए यह पूंजीगत प्राप्ति है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Repayment by a state of a loan the Centre gave it",
+        "why": "The repayment reduces the Centre's financial asset, so it is capital, while the interest on it is revenue."
+      },
+      "hi": {
+        "text": "केंद्र से लिए ऋण का किसी राज्य द्वारा भुगतान",
+        "why": "भुगतान से केंद्र की वित्तीय परिसंपत्ति घटती है, इसलिए यह पूंजीगत है, जबकि उस पर ब्याज राजस्व है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Funds raised through Treasury Bills",
+        "why": "Treasury Bills are short-term borrowing, so they are a capital receipt."
+      },
+      "hi": {
+        "text": "ट्रेज़री बिल से जुटाई गई राशि",
+        "why": "ट्रेज़री बिल अल्पकालिक उधार हैं, इसलिए यह पूंजीगत प्राप्ति है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Borrowing from the National Small Savings Fund",
+        "why": "Small savings money lent to the government is a liability, so it is capital."
+      },
+      "hi": {
+        "text": "राष्ट्रीय लघु बचत कोष से उधार",
+        "why": "सरकार को उधार दिया गया लघु बचत का पैसा देनदारी है, इसलिए यह पूंजीगत है।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Ministry of Finance, Union Budget: Receipt Budget and Budget at a Glance; NCERT Class XII, Introductory Macroeconomics, chapter 5, Government Budget and the Economy",
+    "hi": "वित्त मंत्रालय, केंद्रीय बजट: प्राप्ति बजट और बजट एक नज़र में; NCERT कक्षा XII, समष्टि अर्थशास्त्र एक परिचय, अध्याय 5, सरकारी बजट और अर्थव्यवस्था"
+  },
+  "factsToCheck": [
+    "Spectrum auction proceeds are shown as non-tax revenue (communication services) in the Receipt Budget",
+    "Disinvestment receipts are shown as non-debt capital receipts"
+  ],
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X6)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

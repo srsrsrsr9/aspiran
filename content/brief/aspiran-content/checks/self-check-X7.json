@@ -1,0 +1,29 @@
+{
+  "batch": "X7",
+  "checksRun": [
+    "python3 check.py on all 45 files (valid JSON; key order, schema, mood, sfx, tone, tags.stage/formats and bucketNames identical to practice-format-samples-2; factsToCheck a non-empty top-level list just before 'schema'; review.status draft; id matches filename and uses an allowed prefix; en and hi have the same keys in every item; Devanagari in every Hindi field and none in English items; no Devanagari digits; no Latin article, entry or section letter in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording)",
+    "ids checked against 522 ids in existing-titles.md and 419 practice ids in every earlier zip in aspiran-batches, including X8, X9, X10, X11 and X-fix: no clashes, no duplicates",
+    "union-state-list: 15 files / 143 items (Union 57, State 44, Concurrent 42); every file uses all three lists; no item repeated across files or repeated from the sample",
+    "fact-or-opinion: 15 files / 120 statements, 4 facts and 4 opinions in each, alternating as in the sample",
+    "rank-it: 15 files / 75 items; values numeric, no ties, listed highest first as in the sample; every value appears in the file's factsToCheck with its date or edition",
+    "factsToCheck entries: 94",
+    "Hindi article letters written as in the Hindi Constitution with Latin in brackets on first mention: 243घ (243D), 243ङ (243E), 243ट (243K), 243ण (243O), 246क (246A), 279क (279A), 300क (300A), 330क (330A), 332क (332A), 334क (334A), 366(12क) (366(12A)), 371च (371F); entries 11क (11A), 17क (17A), 17ख (17B), 33क (33A); RBI Act धारा 45यक (45ZA), 45यख (45ZB); Wild Life Act अध्याय 4ख (IVB)",
+    "Tags: union-state-list and rank-it copy the sample stage and papers; fact-or-opinion keeps prelims-csat and sets the mains paper by subject (GS1 to GS4), the way X1 to X5 varied better-answer papers"
+  ],
+  "issuesFound": [
+    "Hindi unit for literacy rank-it was only the % sign, with no Devanagari",
+    "Two Hindi first mentions (279A, 366(12A)) lacked the Latin form in brackets",
+    "A union-state-list item on relief of displaced persons (entry 27) refers to Partition; removed under the tragic-topics rule",
+    "Vocational training of labour (Concurrent 25) was first noted as added in 1976; it was already in entry 25, so the note was corrected"
+  ],
+  "fixed": [
+    "Changed the unit to प्रतिशत",
+    "Added the brackets",
+    "Item removed",
+    "Note corrected"
+  ],
+  "stillOpen": [
+    "See QUESTIONS-FOR-OWNER-part5-X7.md"
+  ],
+  "finalRunIssues": []
+}

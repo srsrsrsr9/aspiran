@@ -1,0 +1,160 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs3"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "env-primary-or-secondary-pollutants",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Primary or secondary air pollutant?",
+    "hi": "प्राथमिक या द्वितीयक वायु प्रदूषक?"
+  },
+  "buckets": {
+    "en": [
+      "Primary pollutant",
+      "Secondary pollutant"
+    ],
+    "hi": [
+      "प्राथमिक प्रदूषक",
+      "द्वितीयक प्रदूषक"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Sulphur dioxide from burning coal",
+        "why": "Released straight from the source into the air."
+      },
+      "hi": {
+        "text": "कोयला जलाने से निकली सल्फ़र डाइऑक्साइड",
+        "why": "स्रोत से सीधे हवा में छोड़ी जाती है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Carbon monoxide from vehicle exhaust",
+        "why": "Comes straight out of the tailpipe when fuel burns incompletely."
+      },
+      "hi": {
+        "text": "वाहनों के धुएँ से निकली कार्बन मोनोऑक्साइड",
+        "why": "ईंधन के अधूरे जलने पर सीधे साइलेंसर से निकलती है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Nitric oxide from engines",
+        "why": "Formed inside hot engines and released directly."
+      },
+      "hi": {
+        "text": "इंजनों से निकली नाइट्रिक ऑक्साइड",
+        "why": "गर्म इंजनों के भीतर बनती है और सीधे छोड़ी जाती है।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Soot from burning crop stubble",
+        "why": "Particles thrown into the air directly by burning."
+      },
+      "hi": {
+        "text": "पराली जलाने से निकली कालिख",
+        "why": "जलने से सीधे हवा में फेंके गए कण।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Dust from construction sites",
+        "why": "Particles stirred up directly from the source."
+      },
+      "hi": {
+        "text": "निर्माण स्थलों की धूल",
+        "why": "स्रोत से सीधे उड़े कण।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Ozone near the ground",
+        "why": "Formed when nitrogen oxides and hydrocarbons react in sunlight; no chimney releases it."
+      },
+      "hi": {
+        "text": "ज़मीन के पास की ओज़ोन",
+        "why": "धूप में नाइट्रोजन ऑक्साइड और हाइड्रोकार्बन की अभिक्रिया से बनती है; कोई चिमनी इसे नहीं छोड़ती।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Peroxyacetyl nitrate (PAN)",
+        "why": "An eye irritant formed in photochemical smog."
+      },
+      "hi": {
+        "text": "पेरॉक्सीएसिटाइल नाइट्रेट (PAN)",
+        "why": "प्रकाश-रासायनिक धुंध में बनने वाला आँखों में जलन पैदा करने वाला पदार्थ।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Sulphuric acid in acid rain",
+        "why": "Forms in the air when sulphur dioxide is oxidised and dissolves in water."
+      },
+      "hi": {
+        "text": "अम्लीय वर्षा में सल्फ़्यूरिक अम्ल",
+        "why": "हवा में सल्फ़र डाइऑक्साइड के ऑक्सीकरण और पानी में घुलने से बनता है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Photochemical smog",
+        "why": "A brown haze produced by sunlight acting on vehicle pollutants."
+      },
+      "hi": {
+        "text": "प्रकाश-रासायनिक धुंध (स्मॉग)",
+        "why": "वाहनों के प्रदूषकों पर धूप की क्रिया से बनी भूरी धुंध।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "NCERT Class XI, Chemistry Part II, Environmental Chemistry; Central Pollution Control Board, National Ambient Air Quality Standards",
+    "hi": "NCERT कक्षा XI, रसायन विज्ञान भाग 2, पर्यावरणीय रसायन; केंद्रीय प्रदूषण नियंत्रण बोर्ड, राष्ट्रीय परिवेशी वायु गुणवत्ता मानक"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X6)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

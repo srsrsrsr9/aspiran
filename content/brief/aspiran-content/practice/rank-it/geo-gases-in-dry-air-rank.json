@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "geo-gases-in-dry-air-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Gases in dry air",
+    "hi": "शुष्क वायु की गैसें"
+  },
+  "prompt": {
+    "en": "Rank these gases by their share of dry air, largest first.",
+    "hi": "इन गैसों को शुष्क वायु में उनके हिस्से के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "% by volume",
+    "hi": "आयतन के अनुसार %"
+  },
+  "items": [
+    {
+      "value": 78.08,
+      "en": {
+        "label": "Nitrogen"
+      },
+      "hi": {
+        "label": "नाइट्रोजन"
+      }
+    },
+    {
+      "value": 20.95,
+      "en": {
+        "label": "Oxygen"
+      },
+      "hi": {
+        "label": "ऑक्सीजन"
+      }
+    },
+    {
+      "value": 0.93,
+      "en": {
+        "label": "Argon"
+      },
+      "hi": {
+        "label": "आर्गन"
+      }
+    },
+    {
+      "value": 0.04,
+      "en": {
+        "label": "Carbon dioxide"
+      },
+      "hi": {
+        "label": "कार्बन डाइऑक्साइड"
+      }
+    },
+    {
+      "value": 0.0018,
+      "en": {
+        "label": "Neon"
+      },
+      "hi": {
+        "label": "नियॉन"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Carbon dioxide is a tiny share of the air but traps heat; its share has risen from about 0.028% before industry to about 0.042% today.",
+    "hi": "कार्बन डाइऑक्साइड वायु का बहुत छोटा हिस्सा है, पर गर्मी रोकती है; इसका हिस्सा उद्योगों से पहले के लगभग 0.028% से बढ़कर आज लगभग 0.042% हो गया है।"
+  },
+  "memoryHook": {
+    "en": "Nitrogen and oxygen make up 99%; argon is a distant third.",
+    "hi": "नाइट्रोजन और ऑक्सीजन मिलकर 99% हैं; आर्गन बहुत पीछे तीसरे स्थान पर।"
+  },
+  "sources": {
+    "en": "NASA Earth Fact Sheet; NOAA Global Monitoring Laboratory; NCERT Class 11, Fundamentals of Physical Geography",
+    "hi": "नासा अर्थ फ़ैक्ट शीट; एनओएए ग्लोबल मॉनिटरिंग लैबोरेटरी; एनसीईआरटी कक्षा 11, भौतिक भूगोल के मूल सिद्धांत"
+  },
+  "factsToCheck": [
+    "Dry air: nitrogen 78.08%, oxygen 20.95%, argon 0.93%, neon 0.0018% (NASA Earth Fact Sheet)",
+    "Carbon dioxide: NOAA global annual mean about 423 ppm (0.042%) for 2024; pre-industrial about 280 ppm; shown rounded as 0.04%"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

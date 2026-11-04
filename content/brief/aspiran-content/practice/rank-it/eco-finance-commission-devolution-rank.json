@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "eco-finance-commission-devolution-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "States' share of central taxes, by Finance Commission",
+    "hi": "केंद्रीय करों में राज्यों का हिस्सा, वित्त आयोग के अनुसार"
+  },
+  "prompt": {
+    "en": "Rank by the share of the divisible pool of central taxes each Commission gave to the states, highest first.",
+    "hi": "हर आयोग ने केंद्रीय करों के विभाज्य पूल का जितना हिस्सा राज्यों को दिया, उसके अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "% of the divisible pool",
+    "hi": "विभाज्य पूल का %"
+  },
+  "items": [
+    {
+      "value": 42,
+      "en": {
+        "label": "14th Finance Commission (2015-20)"
+      },
+      "hi": {
+        "label": "14वाँ वित्त आयोग (2015-20)"
+      }
+    },
+    {
+      "value": 41,
+      "en": {
+        "label": "15th Finance Commission (2021-26)"
+      },
+      "hi": {
+        "label": "15वाँ वित्त आयोग (2021-26)"
+      }
+    },
+    {
+      "value": 32,
+      "en": {
+        "label": "13th Finance Commission (2010-15)"
+      },
+      "hi": {
+        "label": "13वाँ वित्त आयोग (2010-15)"
+      }
+    },
+    {
+      "value": 30.5,
+      "en": {
+        "label": "12th Finance Commission (2005-10)"
+      },
+      "hi": {
+        "label": "12वाँ वित्त आयोग (2005-10)"
+      }
+    },
+    {
+      "value": 29.5,
+      "en": {
+        "label": "11th Finance Commission (2000-05)"
+      },
+      "hi": {
+        "label": "11वाँ वित्त आयोग (2000-05)"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The 14th Commission made the biggest jump, from 32% to 42%. The 15th set 41%, the 1% drop reflecting Jammu and Kashmir becoming a Union territory. The Commissions work under Article 280.",
+    "hi": "14वें आयोग ने सबसे बड़ी छलाँग लगाई, 32% से 42%। 15वें ने 41% तय किया; 1% की कमी जम्मू-कश्मीर के संघ राज्यक्षेत्र बनने के कारण थी। ये आयोग अनुच्छेद 280 के तहत काम करते हैं।"
+  },
+  "memoryHook": {
+    "en": "Slow climb from 29.5 to 32, a leap to 42, then 41.",
+    "hi": "29.5 से 32 तक धीमी चढ़ाई, फिर 42 की छलाँग, फिर 41।"
+  },
+  "sources": {
+    "en": "Reports of the 11th to 15th Finance Commissions; Constitution of India, Article 280",
+    "hi": "11वें से 15वें वित्त आयोगों की रिपोर्टें; भारत का संविधान, अनुच्छेद 280"
+  },
+  "factsToCheck": [
+    "Shares of the divisible pool: 11th FC 29.5%, 12th 30.5%, 13th 32%, 14th 42%, 15th 41% (2021-26)",
+    "The 16th Finance Commission's award covers 2026-31; its share is not used here, so confirm it and consider adding it as a sixth item"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-children-at-public-event",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Schoolchildren for a public event",
+    "hi": "सार्वजनिक कार्यक्रम के लिए स्कूली बच्चे"
+  },
+  "en": {
+    "scenario": "You are a block education officer. A local elected representative is inaugurating a new road and asks that students from nearby government schools line up along the route with flags during school hours. Head teachers have called you, unsure what to do. The representative has helped get funds for school buildings and expects cooperation. Exams are three weeks away.",
+    "question": "What do you tell the head teachers?",
+    "options": [
+      {
+        "label": "Say no: children stay in class during school hours",
+        "outcome": "Teaching time and children's dignity are protected, but the representative may be offended and future support for schools may suffer.",
+        "values": "Children's interest and neutrality of public institutions"
+      },
+      {
+        "label": "Allow a small group for a short time with parents' consent",
+        "outcome": "The request is partly met and disruption is limited, but children are still used for a public show and a precedent is set.",
+        "values": "Compromise and goodwill with limits"
+      },
+      {
+        "label": "Allow it, since the event is official",
+        "outcome": "Relations with the representative stay good, but children lose study time and schools are drawn into publicity.",
+        "values": "Cooperation with authority over children's interest"
+      }
+    ],
+    "reflect": "Is it ever right to use children's presence to lend warmth to a public event? What would make it right?"
+  },
+  "hi": {
+    "scenario": "आप खंड शिक्षा अधिकारी हैं। एक स्थानीय जनप्रतिनिधि एक नई सड़क का उद्घाटन कर रहे हैं और चाहते हैं कि पास के सरकारी स्कूलों के विद्यार्थी स्कूल के समय में झंडे लेकर रास्ते पर कतार में खड़े हों। प्रधानाध्यापकों ने असमंजस में आपको फ़ोन किया है। जनप्रतिनिधि ने स्कूल भवनों के लिए धन दिलाने में मदद की है और सहयोग की उम्मीद रखते हैं। परीक्षाएँ तीन हफ़्ते दूर हैं।",
+    "question": "आप प्रधानाध्यापकों से क्या कहेंगे?",
+    "options": [
+      {
+        "label": "मना करना: स्कूल के समय में बच्चे कक्षा में रहें",
+        "outcome": "पढ़ाई का समय और बच्चों की गरिमा सुरक्षित रहती है, पर जनप्रतिनिधि नाराज़ हो सकते हैं और स्कूलों को आगे मिलने वाला सहयोग घट सकता है।",
+        "values": "बच्चों का हित और सार्वजनिक संस्थाओं की तटस्थता"
+      },
+      {
+        "label": "माता-पिता की सहमति से थोड़े समय के लिए छोटे समूह को अनुमति",
+        "outcome": "अनुरोध आंशिक रूप से पूरा होता है और व्यवधान सीमित रहता है, पर बच्चों का उपयोग फिर भी सार्वजनिक दिखावे में होता है और एक मिसाल बनती है।",
+        "values": "सीमाओं के साथ समझौता और सद्भाव"
+      },
+      {
+        "label": "आधिकारिक कार्यक्रम होने से अनुमति देना",
+        "outcome": "जनप्रतिनिधि से संबंध अच्छे रहते हैं, पर बच्चों की पढ़ाई का समय जाता है और स्कूल प्रचार में खिंच जाते हैं।",
+        "values": "बच्चों के हित से ऊपर सत्ता के साथ सहयोग"
+      }
+    ],
+    "reflect": "क्या किसी सार्वजनिक कार्यक्रम में रौनक के लिए बच्चों की मौजूदगी का उपयोग कभी सही है? उसे सही क्या बनाएगा?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

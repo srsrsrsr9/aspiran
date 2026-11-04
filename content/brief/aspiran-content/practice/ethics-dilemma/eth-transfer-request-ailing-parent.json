@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-transfer-request-ailing-parent",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A transfer request out of turn",
+    "hi": "बारी से पहले तबादले का अनुरोध"
+  },
+  "en": {
+    "scenario": "You manage transfers of teachers in a district. A teacher posted in a remote school asks to move to the district town because her father needs regular treatment there. Under the policy she must serve two more years in the remote post. Three other teachers have waited longer and have their own family reasons. If she moves, the remote school will have only one teacher until a new posting.",
+    "question": "How do you decide on her request?",
+    "options": [
+      {
+        "label": "Follow the policy and keep her in place",
+        "outcome": "The rules stay fair to those who waited, but she struggles to care for her father and may lose motivation.",
+        "values": "Fairness and consistency of rules"
+      },
+      {
+        "label": "Grant a temporary attachment with a timeline",
+        "outcome": "She can care for her father and the policy is not set aside for good, but others may see it as an exception and the remote school is short-staffed.",
+        "values": "Compassion within a structured exception"
+      },
+      {
+        "label": "Transfer her permanently on compassionate grounds",
+        "outcome": "Her need is fully met, but the waiting teachers feel cheated and the remote school's children lose a teacher.",
+        "values": "Compassion over rules and equity"
+      }
+    ],
+    "reflect": "When compassion for one person means unfairness to others, how should a public servant weigh the two?"
+  },
+  "hi": {
+    "scenario": "आप एक ज़िले में शिक्षकों के तबादले देखते हैं। एक दूरस्थ स्कूल में तैनात शिक्षिका ज़िला मुख्यालय आना चाहती है क्योंकि उसके पिता को वहाँ नियमित इलाज चाहिए। नीति के अनुसार उसे दूरस्थ पद पर दो वर्ष और रहना है। तीन अन्य शिक्षक अधिक समय से प्रतीक्षा में हैं और उनके अपने पारिवारिक कारण हैं। वह गई तो नई नियुक्ति तक दूरस्थ स्कूल में केवल एक शिक्षक रहेगा।",
+    "question": "उसके अनुरोध पर आप कैसे निर्णय लेंगे?",
+    "options": [
+      {
+        "label": "नीति मानकर उसे वहीं रखना",
+        "outcome": "प्रतीक्षा करने वालों के लिए नियम निष्पक्ष रहते हैं, पर उसे पिता की देखभाल में कठिनाई होती है और उसकी प्रेरणा घट सकती है।",
+        "values": "नियमों की निष्पक्षता और एकरूपता"
+      },
+      {
+        "label": "समय-सीमा के साथ अस्थायी संबद्धता देना",
+        "outcome": "वह पिता की देखभाल कर सकती है और नीति हमेशा के लिए नहीं टूटती, पर दूसरे इसे अपवाद मान सकते हैं और दूरस्थ स्कूल में स्टाफ़ कम रहता है।",
+        "values": "व्यवस्थित अपवाद के भीतर करुणा"
+      },
+      {
+        "label": "अनुकंपा के आधार पर स्थायी तबादला करना",
+        "outcome": "उसकी ज़रूरत पूरी होती है, पर प्रतीक्षारत शिक्षक ठगा महसूस करते हैं और दूरस्थ स्कूल के बच्चे एक शिक्षक खो देते हैं।",
+        "values": "नियमों और समानता से ऊपर करुणा"
+      }
+    ],
+    "reflect": "जब एक व्यक्ति के प्रति करुणा दूसरों के प्रति अन्याय बने, तो लोक सेवक दोनों को कैसे तौले?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

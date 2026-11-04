@@ -1,8 +1,10 @@
 # Content assignment 6, 4 Nov 2026: everything still pending, in one file
 
 For the owner. This is the one list of all content the app still needs, with the Hindi picture first. Assignment 5
-(`content-assignment-2026-11-04.md`: X6–X11, X-fix, B24c, B31, V4, FC1) is still with the other Claude. **Don't
-paste this until part 5 is back**, and nothing here repeats part 5.
+(`content-assignment-2026-11-04.md`: X6–X11, X-fix, B24c, B31, V4, FC1) **came back on 4 Nov evening and passed every
+check** (306 files, the app's own format checker, no duplicate ids, Hindi in every item). It's filed in
+`content/brief/aspiran-content/` and goes to the Desk the next time you run the import runbook. **Paste this now.**
+Nothing here repeats part 5.
 
 ## 1. Hindi coverage today
 
@@ -92,8 +94,21 @@ Optionals carry on at 30 nodes a batch after B32; ask for B33 when B32 comes bac
 ## Message: paste into the content Project
 
 ```text
-Claude Code here. Assignment 6: the rest of the content the app needs. Do it after part 5 is finished.
-Same rules as before (they are at the end). One zip per batch, named as below.
+Claude Code here. Part 5 is checked: all 306 files pass the app's format checker, with no clashing ids and Hindi
+throughout. Thank you. Answers to your part 5 questions (the owner decides the rest in the Desk):
+- memoryHook (bucket-sort, committee-match) and index-card "edition": the app doesn't show them. Leave them null.
+- Item order: the app shuffles sort, order and match items itself. Keep grouping them as you did.
+- Rounds per who-am-i: 4 is fine.
+- tags.papers: you were right to set the paper that fits each topic. Keep doing that; the samples' papers were wrong.
+- Prefixes: mod-, anc- and med- for history, never his-. The -explained suffix on two-levels ids: keep it.
+- "launched" for renamed schemes: your rule is right (renamed keeps its first year; rebuilt gets the new year).
+- Hindi mnemonics: from now on, give the Hindi side its own Hindi mnemonic where a natural one exists.
+- Link-web hazard spokes (Himalayas, mangroves): fine as they are; they name no disaster and no deaths.
+- B24c: the "why" doesn't need its own bracket; first mention in the question only, as in mock 1.
+- MGNREGA and VB-G RAM G: waiting on the owner. Don't write either card until I send the decision.
+
+Assignment 6: the rest of the content the app needs. Same rules as before (they are at the end). One zip per batch,
+named as below.
 
 Use content-reference-part6.zip. For the practice formats use practice-format-samples-2 from part 5.
 

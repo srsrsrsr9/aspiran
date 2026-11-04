@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-sports-selection-pressure",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A trial for the state team",
+    "hi": "राज्य टीम के लिए चयन ट्रायल"
+  },
+  "en": {
+    "scenario": "You are on the selection panel for a state junior athletics team. A senior official's son finished just outside the selection mark in the trials. The official calls to say the boy was unwell that day and asks for him to be picked or given a re-trial. Another athlete from a poor family, who made the mark, would be dropped if the boy is added. No re-trial was offered to anyone else.",
+    "question": "How do you respond to the request?",
+    "options": [
+      {
+        "label": "Stick to the trial results",
+        "outcome": "Selection stays merit-based and fair to the athlete who qualified, but the official may be displeased and you may face pressure.",
+        "values": "Merit and equal treatment"
+      },
+      {
+        "label": "Offer a re-trial open to all who claim illness, with proof",
+        "outcome": "The boy gets a fair chance under a clear rule, but the process is reopened and others may doubt why.",
+        "values": "Procedural fairness through a general rule"
+      },
+      {
+        "label": "Add the boy to the team",
+        "outcome": "The official is satisfied, but a qualified athlete loses a place and trust in the selection process falls.",
+        "values": "Deference to authority over merit"
+      }
+    ],
+    "reflect": "If a rule is changed for one person, can it still be called a rule?"
+  },
+  "hi": {
+    "scenario": "आप राज्य जूनियर एथलेटिक्स टीम के चयन पैनल में हैं। एक वरिष्ठ अधिकारी का बेटा ट्रायल में चयन सीमा से ठीक पीछे रहा। अधिकारी फ़ोन कर कहते हैं कि लड़का उस दिन अस्वस्थ था और उसे चुनने या दोबारा ट्रायल देने को कहते हैं। सीमा पार करने वाले एक गरीब परिवार के एथलीट को, लड़के को जोड़ने पर, बाहर होना पड़ेगा। किसी और को दोबारा ट्रायल का मौका नहीं दिया गया था।",
+    "question": "आप अनुरोध का जवाब कैसे देंगे?",
+    "options": [
+      {
+        "label": "ट्रायल के परिणामों पर टिके रहना",
+        "outcome": "चयन योग्यता आधारित और योग्य एथलीट के प्रति निष्पक्ष रहता है, पर अधिकारी नाराज़ हो सकते हैं और आप पर दबाव आ सकता है।",
+        "values": "योग्यता और समान व्यवहार"
+      },
+      {
+        "label": "प्रमाण के साथ अस्वस्थता का दावा करने वाले सभी के लिए दोबारा ट्रायल",
+        "outcome": "स्पष्ट नियम के तहत लड़के को निष्पक्ष मौका मिलता है, पर प्रक्रिया फिर खुलती है और दूसरे कारण पर संदेह कर सकते हैं।",
+        "values": "सामान्य नियम के ज़रिए प्रक्रियात्मक निष्पक्षता"
+      },
+      {
+        "label": "लड़के को टीम में जोड़ना",
+        "outcome": "अधिकारी संतुष्ट होते हैं, पर एक योग्य एथलीट जगह खो देता है और चयन प्रक्रिया पर भरोसा घटता है।",
+        "values": "योग्यता से ऊपर सत्ता का सम्मान"
+      }
+    ],
+    "reflect": "अगर किसी एक व्यक्ति के लिए नियम बदला जाए, तो क्या वह फिर भी नियम कहलाएगा?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

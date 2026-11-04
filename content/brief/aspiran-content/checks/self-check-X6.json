@@ -1,0 +1,32 @@
+{
+  "batch": "X6",
+  "checksRun": [
+    "python3 check.py X6 (valid JSON; key order, schema value, mood, sfx and tags.formats identical to practice-format-samples-2, with factsToCheck as a top-level list just before 'schema'; review.status draft; tone NEUTRAL; id matches filename and uses an allowed subject prefix; who-am-i: 4 to 6 rounds, 4 options, en and hi have the same number of clues and options, answer index in range, no duplicate options, reveal names the keyed answer in en and hi; bucket-sort: 9 to 12 items, en and hi bucket lists the same length, every bucket index in range, every bucket has at least 2 items, no duplicate items; Devanagari in every Hindi field, no Devanagari digits, no Latin article letters in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; ids unique within X6 and not in existing-titles.md, any earlier zip in aspiran-batches or the samples; manifest lists exactly the files present)",
+    "40 files: who-am-i 20 files / 81 rounds, bucket-sort 20 files / 214 items",
+    "0 issues on the final run",
+    "Answer spread for who-am-i, placed by code: 0=21, 1=20, 2=20, 3=20",
+    "bucket-sort item counts: 9 items x3 files, 10 x5, 11 x7, 12 x5",
+    "factsToCheck entries: 86",
+    "Topics checked by hand against existing-titles.md: no who-am-i or bucket-sort topic repeats one already in the app",
+    "TRAGIC rule: no disasters, violence or deaths; sati, the Hul and the Chauri Chaura and Dharasana events were left out; the sample's mention of Bhabha's death was not copied into any reveal",
+    "Hindi article letters: 21क (21A), 51क(छ) (51A(g)), 51क(ज) (51A(h)), 51क(ट) (51A(k)), 48क (48A), 39(घ), 67(ख) (67(b)), 279क (279A), RBI Act धारा 45यख (45ZB), भाग 4क (IVA); digits on screen"
+  ],
+  "issuesFound": [
+    "med-sultanate-or-mughal: 'Akbar ranked nobles' tripped the rank/score word check",
+    "Checker flagged nested brackets such as 51क(छ) (51A(g)) as Latin letters outside brackets",
+    "Checker flagged reveals that spell out a name the option gives with initials (P. C. Mahalanobis, C. D. Deshmukh, V. K. R. V. Rao)"
+  ],
+  "fixed": [
+    "Changed to 'Akbar graded nobles'",
+    "Made the bracket check handle nested brackets; the Hindi text was already correct",
+    "Made the reveal check match on surname; the reveals were already correct"
+  ],
+  "stillOpen": [
+    "who-am-i has 4 rounds per file (the brief allows 4 to 6; the sample has 3)",
+    "bucket-sort memoryHook is null in every file, as in the sample, because the sample does not show its non-null shape",
+    "bucket-sort items are grouped by bucket, as in the sample; this assumes the app shuffles them",
+    "Hindi terms for the Hindi editor: प्रसादपर्यंत, बंदी प्रत्यक्षीकरण, परमादेश, प्रतिषेध, उत्प्रेषण, अधिकार-पृच्छा, मंगल कक्षित्र मिशन, भ्रंशोत्थ, प्रतिपवन ढलान, गोदीबाड़ा, सांविधिक, निरपेक्ष आदेश",
+    "Facts that may have changed in 2025-26 are in factsToCheck: Chandrayaan-2 orbiter status, NSG membership, National Development Council's status, IORA chair, Lothal heritage complex status"
+  ],
+  "finalRunIssues": []
+}

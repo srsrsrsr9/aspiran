@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-face-scan-ration-shops",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Face scans at ration shops",
+    "hi": "राशन दुकानों पर चेहरा स्कैन"
+  },
+  "en": {
+    "scenario": "You head the food and civil supplies department in a state. A vendor offers a face-recognition system for ration shops that it says will stop leakage by fake cardholders. A pilot showed less leakage, but also that some elderly and manual workers were wrongly rejected and went home without grain. There is no clear rule yet on how long the face data will be stored or who can access it.",
+    "question": "Do you roll out the system across the state?",
+    "options": [
+      {
+        "label": "Roll it out now to stop leakage",
+        "outcome": "Leakage may fall and savings may be large, but genuine beneficiaries may be denied food and privacy risks remain unsettled.",
+        "values": "Efficiency and preventing misuse of public funds"
+      },
+      {
+        "label": "Roll it out only with a manual fallback and clear data rules",
+        "outcome": "Rejected beneficiaries still get grain and data use is limited, but the rollout is slower and some leakage continues meanwhile.",
+        "values": "Balancing efficiency with rights and safeguards"
+      },
+      {
+        "label": "Hold the rollout until an independent review",
+        "outcome": "No one is wrongly denied by the new system, but leakage continues and the vendor and some officials may push back.",
+        "values": "Caution and the right to food over speed"
+      }
+    ],
+    "reflect": "When technology makes a system more efficient but less forgiving, who should carry the cost of its errors?"
+  },
+  "hi": {
+    "scenario": "आप एक राज्य के खाद्य और नागरिक आपूर्ति विभाग के प्रमुख हैं। एक विक्रेता राशन दुकानों के लिए चेहरा पहचान प्रणाली देता है, जिसके बारे में उसका दावा है कि इससे फ़र्ज़ी कार्डधारकों से होने वाला रिसाव रुकेगा। एक पायलट में रिसाव घटा, पर यह भी दिखा कि कुछ बुज़ुर्ग और मज़दूर गलत तरीके से अस्वीकार हुए और बिना अनाज के लौटे। चेहरे का डेटा कितने समय रखा जाएगा और कौन देख सकेगा, इस पर अभी कोई स्पष्ट नियम नहीं है।",
+    "question": "क्या आप यह प्रणाली पूरे राज्य में लागू करेंगे?",
+    "options": [
+      {
+        "label": "रिसाव रोकने के लिए अभी लागू करना",
+        "outcome": "रिसाव घट सकता है और बड़ी बचत हो सकती है, पर वास्तविक लाभार्थी भोजन से वंचित हो सकते हैं और निजता के जोखिम अनसुलझे रहते हैं।",
+        "values": "दक्षता और सार्वजनिक धन के दुरुपयोग की रोकथाम"
+      },
+      {
+        "label": "मैनुअल विकल्प और स्पष्ट डेटा नियमों के साथ ही लागू करना",
+        "outcome": "अस्वीकार हुए लाभार्थियों को भी अनाज मिलता है और डेटा का उपयोग सीमित रहता है, पर लागू करना धीमा होता है और तब तक कुछ रिसाव जारी रहता है।",
+        "values": "अधिकारों और सुरक्षा उपायों के साथ दक्षता का संतुलन"
+      },
+      {
+        "label": "स्वतंत्र समीक्षा तक रोक देना",
+        "outcome": "नई प्रणाली से कोई गलत तरीके से वंचित नहीं होता, पर रिसाव जारी रहता है और विक्रेता तथा कुछ अधिकारी विरोध कर सकते हैं।",
+        "values": "गति से ऊपर सावधानी और भोजन का अधिकार"
+      }
+    ],
+    "reflect": "जब तकनीक किसी व्यवस्था को अधिक कुशल पर कम क्षमाशील बनाती है, तो उसकी गलतियों की कीमत किसे चुकानी चाहिए?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

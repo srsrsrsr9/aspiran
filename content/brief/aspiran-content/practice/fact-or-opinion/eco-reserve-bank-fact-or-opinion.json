@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs3"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "eco-reserve-bank-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The RBI and inflation: fact or opinion?",
+    "hi": "रिज़र्व बैंक और महँगाई: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Reserve Bank of India began operations in 1935 and was nationalised in 1949.",
+        "why": "Both dates are in the RBI's official history."
+      },
+      "hi": {
+        "text": "भारतीय रिज़र्व बैंक ने 1935 में काम शुरू किया और 1949 में उसका राष्ट्रीयकरण हुआ।",
+        "why": "दोनों तारीखें रिज़र्व बैंक के आधिकारिक इतिहास में हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The RBI should give growth the same weight as inflation when it sets rates.",
+        "why": "Says what the RBI 'should' do; economists disagree on this."
+      },
+      "hi": {
+        "text": "दरें तय करते समय रिज़र्व बैंक को विकास को महँगाई जितना ही महत्व देना चाहिए।",
+        "why": "यह बताता है कि रिज़र्व बैंक को क्या 'करना चाहिए'; अर्थशास्त्री इस पर एकमत नहीं हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Monetary Policy Committee has six members, three of them from the RBI, including the Governor.",
+        "why": "The make-up is set out in the RBI Act."
+      },
+      "hi": {
+        "text": "मौद्रिक नीति समिति में छह सदस्य हैं, जिनमें गवर्नर सहित तीन रिज़र्व बैंक से हैं।",
+        "why": "इसकी बनावट रिज़र्व बैंक अधिनियम में लिखी है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Six members are too few to reflect the range of views in a large economy.",
+        "why": "'Too few' is a judgment about design, not a measurement."
+      },
+      "hi": {
+        "text": "इतनी बड़ी अर्थव्यवस्था के अलग-अलग विचारों के लिए छह सदस्य बहुत कम हैं।",
+        "why": "'बहुत कम' बनावट पर एक आकलन है, कोई माप नहीं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Central Government sets the inflation target, in consultation with the RBI, once every five years.",
+        "why": "Section 45ZA of the RBI Act says so."
+      },
+      "hi": {
+        "text": "केंद्र सरकार रिज़र्व बैंक से परामर्श करके हर पाँच वर्ष में एक बार महँगाई का लक्ष्य तय करती है।",
+        "why": "रिज़र्व बैंक अधिनियम की धारा 45यक (45ZA) यही कहती है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Food prices should be left out of the target because interest rates cannot control them.",
+        "why": "A policy view; others say food is what households feel most."
+      },
+      "hi": {
+        "text": "खाद्य कीमतों को लक्ष्य से बाहर रखना चाहिए, क्योंकि ब्याज दरें उन्हें काबू नहीं कर सकतीं।",
+        "why": "यह नीति पर एक राय है; दूसरे कहते हैं कि परिवार सबसे ज़्यादा खाद्य कीमतें ही महसूस करते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The inflation target is set in terms of the Consumer Price Index.",
+        "why": "The government's notification names the index."
+      },
+      "hi": {
+        "text": "महँगाई का लक्ष्य उपभोक्ता मूल्य सूचकांक के आधार पर तय होता है।",
+        "why": "सरकार की अधिसूचना में इस सूचकांक का नाम है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "A cut in interest rates is always good news for the economy.",
+        "why": "'Always good' is a sweeping judgment; a cut can also push up prices."
+      },
+      "hi": {
+        "text": "ब्याज दरों में कटौती अर्थव्यवस्था के लिए हमेशा अच्छी खबर है।",
+        "why": "'हमेशा अच्छी' एक बड़ा आकलन है; कटौती से कीमतें भी बढ़ सकती हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Reserve Bank of India Act, 1934, sections 45ZA and 45ZB; RBI history pages",
+    "hi": "भारतीय रिज़र्व बैंक अधिनियम, 1934, धारा 45यक (45ZA) और 45यख (45ZB); रिज़र्व बैंक का इतिहास"
+  },
+  "factsToCheck": [
+    "RBI began operations on 1 April 1935; nationalised on 1 January 1949",
+    "Monetary Policy Committee: six members, three from the RBI (section 45ZB)",
+    "Inflation target set once every five years (section 45ZA); confirm the target notified for April 2026 onward before adding any number"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

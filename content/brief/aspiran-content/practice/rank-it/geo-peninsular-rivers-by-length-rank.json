@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "geo-peninsular-rivers-by-length-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Peninsular rivers by length",
+    "hi": "लंबाई के अनुसार प्रायद्वीपीय नदियाँ"
+  },
+  "prompt": {
+    "en": "Rank these peninsular rivers by length, longest first.",
+    "hi": "इन प्रायद्वीपीय नदियों को लंबाई के अनुसार क्रम दें, सबसे लंबी पहले।"
+  },
+  "unit": {
+    "en": "km",
+    "hi": "किमी"
+  },
+  "items": [
+    {
+      "value": 1465,
+      "en": {
+        "label": "Godavari"
+      },
+      "hi": {
+        "label": "गोदावरी"
+      }
+    },
+    {
+      "value": 1400,
+      "en": {
+        "label": "Krishna"
+      },
+      "hi": {
+        "label": "कृष्णा"
+      }
+    },
+    {
+      "value": 1312,
+      "en": {
+        "label": "Narmada"
+      },
+      "hi": {
+        "label": "नर्मदा"
+      }
+    },
+    {
+      "value": 851,
+      "en": {
+        "label": "Mahanadi"
+      },
+      "hi": {
+        "label": "महानदी"
+      }
+    },
+    {
+      "value": 800,
+      "en": {
+        "label": "Kaveri"
+      },
+      "hi": {
+        "label": "कावेरी"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The Godavari, Krishna, Mahanadi and Kaveri flow east into the Bay of Bengal; the Narmada flows west into the Arabian Sea.",
+    "hi": "गोदावरी, कृष्णा, महानदी और कावेरी पूर्व की ओर बंगाल की खाड़ी में जाती हैं; नर्मदा पश्चिम की ओर अरब सागर में जाती है।"
+  },
+  "memoryHook": {
+    "en": "The three big ones are all above 1,300 km; the next two are near 800.",
+    "hi": "तीन बड़ी नदियाँ 1,300 किमी से ऊपर हैं; अगली दो 800 के आसपास।"
+  },
+  "sources": {
+    "en": "India-WRIS basin reports (Central Water Commission and Ministry of Jal Shakti)",
+    "hi": "इंडिया-डब्ल्यूआरआईएस बेसिन रिपोर्टें (केंद्रीय जल आयोग और जल शक्ति मंत्रालय)"
+  },
+  "factsToCheck": [
+    "Lengths from India-WRIS: Godavari 1,465 km, Krishna 1,400 km, Narmada 1,312 km, Mahanadi 851 km, Kaveri 800 km; lengths differ slightly between sources, so the editor should confirm against the current India-WRIS pages"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

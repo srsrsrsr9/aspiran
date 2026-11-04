@@ -1,0 +1,171 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "geo-planetary-and-local-winds",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Planetary wind, warm local wind or cold local wind?",
+    "hi": "ग्रहीय पवन, गर्म स्थानीय पवन या ठंडी स्थानीय पवन?"
+  },
+  "buckets": {
+    "en": [
+      "Planetary wind",
+      "Warm local wind",
+      "Cold local wind"
+    ],
+    "hi": [
+      "ग्रहीय पवन",
+      "गर्म स्थानीय पवन",
+      "ठंडी स्थानीय पवन"
+    ]
+  },
+  "items": [
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Trade winds",
+        "why": "They blow all year from the subtropical highs towards the equator."
+      },
+      "hi": {
+        "text": "व्यापारिक पवनें",
+        "why": "ये पूरे वर्ष उपोष्ण उच्च दाब से भूमध्य रेखा की ओर चलती हैं।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Westerlies",
+        "why": "They blow all year from the subtropical highs towards the subpolar lows."
+      },
+      "hi": {
+        "text": "पछुआ पवनें",
+        "why": "ये पूरे वर्ष उपोष्ण उच्च दाब से उपध्रुवीय निम्न दाब की ओर चलती हैं।"
+      }
+    },
+    {
+      "bucket": 0,
+      "en": {
+        "text": "Polar easterlies",
+        "why": "They blow from the polar highs towards the subpolar lows."
+      },
+      "hi": {
+        "text": "ध्रुवीय पूर्वी पवनें",
+        "why": "ये ध्रुवीय उच्च दाब से उपध्रुवीय निम्न दाब की ओर चलती हैं।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Loo",
+        "why": "A hot, dry wind over the plains of north India in May and June."
+      },
+      "hi": {
+        "text": "लू",
+        "why": "मई और जून में उत्तर भारत के मैदानों पर चलने वाली गर्म, सूखी पवन।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Chinook",
+        "why": "A warm, dry wind down the eastern slopes of the Rockies; it can melt snow fast."
+      },
+      "hi": {
+        "text": "चिनूक",
+        "why": "रॉकी पर्वत की पूर्वी ढलानों से उतरने वाली गर्म, सूखी पवन; यह बर्फ़ को तेज़ी से पिघला सकती है।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Foehn",
+        "why": "A warm, dry wind on the lee side of the Alps."
+      },
+      "hi": {
+        "text": "फ़ॉन",
+        "why": "आल्प्स की प्रतिपवन ढलान पर चलने वाली गर्म, सूखी पवन।"
+      }
+    },
+    {
+      "bucket": 1,
+      "en": {
+        "text": "Sirocco",
+        "why": "A hot wind from the Sahara that blows north across the Mediterranean."
+      },
+      "hi": {
+        "text": "सिरोको",
+        "why": "सहारा से आने वाली गर्म पवन, जो भूमध्य सागर के पार उत्तर की ओर चलती है।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Mistral",
+        "why": "A cold wind that funnels down the Rhone valley in France to the Mediterranean."
+      },
+      "hi": {
+        "text": "मिस्ट्रल",
+        "why": "फ़्रांस की रोन घाटी से भूमध्य सागर की ओर उतरने वाली ठंडी पवन।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Bora",
+        "why": "A cold, gusty wind on the eastern shore of the Adriatic Sea."
+      },
+      "hi": {
+        "text": "बोरा",
+        "why": "एड्रियाटिक सागर के पूर्वी तट पर चलने वाली ठंडी, झोंकेदार पवन।"
+      }
+    },
+    {
+      "bucket": 2,
+      "en": {
+        "text": "Pampero",
+        "why": "A cold wind that sweeps across the pampas of Argentina."
+      },
+      "hi": {
+        "text": "पैम्पेरो",
+        "why": "अर्जेंटीना के पम्पास पर चलने वाली ठंडी पवन।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "NCERT Class XI, Fundamentals of Physical Geography, chapter 10, Atmospheric Circulation and Weather Systems; India Meteorological Department",
+    "hi": "NCERT कक्षा XI, भौतिक भूगोल के मूल सिद्धांत, अध्याय 10, वायुमंडलीय परिसंचरण तथा मौसम प्रणालियाँ; भारत मौसम विज्ञान विभाग"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/bucket-sort@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X6)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

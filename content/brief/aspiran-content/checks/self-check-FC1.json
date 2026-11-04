@@ -1,0 +1,80 @@
+{
+  "job": "FC1",
+  "checks": [
+    "valid JSON",
+    "key order, id, schema, mood, sfx unchanged",
+    "review.status draft",
+    "structure identical to the part 4 file apart from text",
+    "en and hi same shape",
+    "gap counts and answer indexes in range",
+    "no Devanagari digits in Hindi"
+  ],
+  "files": [
+    {
+      "batch": "X1",
+      "path": "practice/how-many-correct/env-climate-treaties-hmc.json",
+      "id": "env-climate-treaties-hmc",
+      "changedKeys": [
+        "items",
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    },
+    {
+      "batch": "X5",
+      "path": "practice/fill-the-gap/pol-office-of-the-governor-gap.json",
+      "id": "pol-office-of-the-governor-gap",
+      "changedKeys": [
+        "en",
+        "hi",
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    },
+    {
+      "batch": "X5",
+      "path": "practice/fill-the-gap/eco-monetary-policy-committee-gap.json",
+      "id": "eco-monetary-policy-committee-gap",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    },
+    {
+      "batch": "X4",
+      "path": "practice/landmark-case/env-godavarman-forest-case.json",
+      "id": "env-godavarman-forest-case",
+      "changedKeys": [
+        "en",
+        "hi",
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    },
+    {
+      "batch": "X4",
+      "path": "practice/landmark-case/eco-mineral-royalty-case.json",
+      "id": "eco-mineral-royalty-case",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    },
+    {
+      "batch": "X2",
+      "path": "practice/assertion-reason/pol-centre-state-relations-ar.json",
+      "id": "pol-centre-state-relations-ar",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "issues": []
+    }
+  ],
+  "issues": 0
+}

@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-exam-leak-rumour",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A rumour of a leaked paper",
+    "hi": "पेपर लीक की अफ़वाह"
+  },
+  "en": {
+    "scenario": "You are the controller of a state recruitment examination to be held in two days for over two lakh candidates. A message on a messaging app claims the paper has leaked and shows a few questions. Your team cannot yet confirm whether they match the real paper. Postponing would cost money and upset candidates who have travelled; going ahead risks an unfair exam if the leak is real.",
+    "question": "What do you do about the exam?",
+    "options": [
+      {
+        "label": "Postpone and set a fresh paper",
+        "outcome": "Fairness is protected whatever the truth, but lakhs of candidates are inconvenienced and the department is criticised for delay.",
+        "values": "Fairness and caution over cost"
+      },
+      {
+        "label": "Go ahead with a reserve paper set already",
+        "outcome": "The date is kept and the leaked set, if any, is useless, but the reserve paper may not have been checked as carefully.",
+        "values": "Continuity with a reasonable safeguard"
+      },
+      {
+        "label": "Go ahead as planned and investigate after",
+        "outcome": "Candidates are spared disruption, but if the leak is real the results may be cancelled later, which harms everyone more.",
+        "values": "Stability now over certainty of fairness"
+      }
+    ],
+    "reflect": "When you cannot know the facts in time, what should guide a decision that affects lakhs of people?"
+  },
+  "hi": {
+    "scenario": "आप एक राज्य भर्ती परीक्षा के नियंत्रक हैं, जो दो दिन बाद दो लाख से अधिक उम्मीदवारों के लिए होनी है। एक मैसेजिंग ऐप पर संदेश दावा करता है कि पेपर लीक हो गया है और कुछ प्रश्न दिखाता है। आपकी टीम अभी पुष्टि नहीं कर सकी कि वे असली पेपर से मेल खाते हैं। स्थगित करने में खर्च होगा और यात्रा कर चुके उम्मीदवार परेशान होंगे; जारी रखने पर, लीक असली हो तो, परीक्षा अनुचित होगी।",
+    "question": "परीक्षा के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "स्थगित कर नया पेपर बनवाना",
+        "outcome": "सच जो भी हो, निष्पक्षता बची रहती है, पर लाखों उम्मीदवार परेशान होते हैं और देरी के लिए विभाग की आलोचना होती है।",
+        "values": "लागत से ऊपर निष्पक्षता और सावधानी"
+      },
+      {
+        "label": "पहले से तैयार आरक्षित पेपर से परीक्षा लेना",
+        "outcome": "तिथि बनी रहती है और लीक हुआ सेट, अगर कोई है, बेकार हो जाता है, पर आरक्षित पेपर की जाँच शायद उतनी सावधानी से न हुई हो।",
+        "values": "उचित सुरक्षा उपाय के साथ निरंतरता"
+      },
+      {
+        "label": "योजना के अनुसार परीक्षा लेकर बाद में जाँच करना",
+        "outcome": "उम्मीदवार परेशानी से बचते हैं, पर लीक असली हुआ तो परिणाम बाद में रद्द हो सकते हैं, जिससे सबका अधिक नुकसान होगा।",
+        "values": "निष्पक्षता की निश्चितता से ऊपर अभी की स्थिरता"
+      }
+    ],
+    "reflect": "जब आप समय पर तथ्य नहीं जान सकते, तो लाखों लोगों को प्रभावित करने वाला निर्णय किस आधार पर होना चाहिए?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

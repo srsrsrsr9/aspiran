@@ -1,0 +1,144 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs3"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "sci-india-in-space-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "India in space: fact or opinion?",
+    "hi": "अंतरिक्ष में भारत: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "ISRO was set up in 1969.",
+        "why": "A date in ISRO's official history."
+      },
+      "hi": {
+        "text": "इसरो की स्थापना 1969 में हुई।",
+        "why": "यह इसरो के आधिकारिक इतिहास की तारीख है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Space spending should wait until poverty has been ended.",
+        "why": "Puts one goal before another; a value judgment."
+      },
+      "hi": {
+        "text": "गरीबी खत्म होने तक अंतरिक्ष पर खर्च रोक देना चाहिए।",
+        "why": "एक लक्ष्य को दूसरे से पहले रखना मूल्यों का आकलन है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Chandrayaan-3's lander touched down near the Moon's south pole on 23 August 2023.",
+        "why": "A dated mission event published by ISRO."
+      },
+      "hi": {
+        "text": "चंद्रयान-3 का लैंडर 23 अगस्त 2023 को चंद्रमा के दक्षिणी ध्रुव के पास उतरा।",
+        "why": "यह इसरो द्वारा प्रकाशित, तारीख वाली मिशन घटना है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Moon landing was India's greatest scientific achievement.",
+        "why": "'Greatest' ranks achievements; others would pick different ones."
+      },
+      "hi": {
+        "text": "चंद्रमा पर उतरना भारत की सबसे बड़ी वैज्ञानिक उपलब्धि थी।",
+        "why": "'सबसे बड़ी' उपलब्धियों को क्रम देता है; दूसरे लोग कुछ और चुनेंगे।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Aditya-L1 studies the Sun from an orbit around Lagrange point L1.",
+        "why": "The mission's orbit is described by ISRO."
+      },
+      "hi": {
+        "text": "आदित्य-एल1 लग्रांज बिंदु एल1 के चारों ओर की कक्षा से सूर्य का अध्ययन करता है।",
+        "why": "इस मिशन की कक्षा का वर्णन इसरो ने किया है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "India should send people to the Moon before sending more robots.",
+        "why": "Says what 'should' come first; a choice of priorities."
+      },
+      "hi": {
+        "text": "भारत को और रोबोट भेजने से पहले इंसानों को चंद्रमा पर भेजना चाहिए।",
+        "why": "यह बताता है कि पहले क्या 'होना चाहिए'; यह प्राथमिकताओं का चुनाव है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Mars Orbiter Mission entered orbit around Mars on its first attempt, in 2014.",
+        "why": "On record in ISRO's mission history."
+      },
+      "hi": {
+        "text": "मंगल कक्षित्र मिशन 2014 में पहले ही प्रयास में मंगल की कक्षा में पहुँचा।",
+        "why": "यह इसरो के मिशन इतिहास में दर्ज है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Private companies will do more for India's space future than ISRO.",
+        "why": "A prediction, and it compares two very different roles."
+      },
+      "hi": {
+        "text": "भारत के अंतरिक्ष भविष्य के लिए निजी कंपनियाँ इसरो से ज़्यादा करेंगी।",
+        "why": "यह एक अनुमान है, और दो बहुत अलग भूमिकाओं की तुलना करता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Indian Space Research Organisation mission pages (Chandrayaan-3, Aditya-L1, Mars Orbiter Mission)",
+    "hi": "भारतीय अंतरिक्ष अनुसंधान संगठन के मिशन पृष्ठ (चंद्रयान-3, आदित्य-एल1, मंगल कक्षित्र मिशन)"
+  },
+  "factsToCheck": [
+    "ISRO formed 15 August 1969",
+    "Chandrayaan-3 landing: 23 August 2023",
+    "Aditya-L1 launched 2 September 2023; halo orbit around L1 from January 2024",
+    "Mars Orbiter Mission entered Mars orbit 24 September 2014"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

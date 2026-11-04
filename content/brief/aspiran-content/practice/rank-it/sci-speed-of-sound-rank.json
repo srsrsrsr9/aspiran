@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "sci-speed-of-sound-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Speed of sound in different media",
+    "hi": "अलग-अलग माध्यमों में ध्वनि की चाल"
+  },
+  "prompt": {
+    "en": "Rank by the speed of sound at 25 °C, fastest first.",
+    "hi": "25 °C पर ध्वनि की चाल के अनुसार क्रम दें, सबसे तेज़ पहले।"
+  },
+  "unit": {
+    "en": "m/s",
+    "hi": "मी/से"
+  },
+  "items": [
+    {
+      "value": 6420,
+      "en": {
+        "label": "Aluminium"
+      },
+      "hi": {
+        "label": "ऐलुमिनियम"
+      }
+    },
+    {
+      "value": 3980,
+      "en": {
+        "label": "Glass (flint)"
+      },
+      "hi": {
+        "label": "काँच (फ़्लिंट)"
+      }
+    },
+    {
+      "value": 1531,
+      "en": {
+        "label": "Sea water"
+      },
+      "hi": {
+        "label": "समुद्री जल"
+      }
+    },
+    {
+      "value": 1284,
+      "en": {
+        "label": "Hydrogen"
+      },
+      "hi": {
+        "label": "हाइड्रोजन"
+      }
+    },
+    {
+      "value": 346,
+      "en": {
+        "label": "Air"
+      },
+      "hi": {
+        "label": "वायु"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Sound is usually fastest in solids and slowest in gases. Hydrogen is an exception among gases: it is so light that sound travels almost four times faster in it than in air.",
+    "hi": "ध्वनि आमतौर पर ठोस में सबसे तेज़ और गैस में सबसे धीमी चलती है। गैसों में हाइड्रोजन अपवाद है: यह इतनी हल्की है कि इसमें ध्वनि वायु से लगभग चार गुना तेज़ चलती है।"
+  },
+  "memoryHook": {
+    "en": "Solid, solid, liquid, then the light gas, and plain air last.",
+    "hi": "ठोस, ठोस, द्रव, फिर हल्की गैस, और सबसे आखिर में साधारण वायु।"
+  },
+  "sources": {
+    "en": "NCERT Class 9 Science, chapter on Sound, table of speed of sound in different media at 25 °C",
+    "hi": "एनसीईआरटी कक्षा 9 विज्ञान, ध्वनि अध्याय, 25 °C पर विभिन्न माध्यमों में ध्वनि की चाल की तालिका"
+  },
+  "factsToCheck": [
+    "NCERT table values at 25 °C: aluminium 6,420 m/s, glass (flint) 3,980 m/s, sea water 1,531 m/s, hydrogen 1,284 m/s, air (dry) 346 m/s; confirm against the current rationalised NCERT edition"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

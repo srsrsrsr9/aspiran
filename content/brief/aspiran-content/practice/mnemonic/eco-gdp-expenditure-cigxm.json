@@ -1,0 +1,110 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "letter": "sfx/tick",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "revision"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": []
+  },
+  "id": "eco-gdp-expenditure-cigxm",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "GDP by the expenditure method",
+    "hi": "व्यय विधि से GDP"
+  },
+  "mnemonic": {
+    "en": "CIGXM",
+    "hi": "CIGXM (उ-नि-स-नि-आ)"
+  },
+  "for": {
+    "en": "The parts added up in GDP = C + I + G + (X − M)",
+    "hi": "GDP = C + I + G + (X − M) में जोड़े जाने वाले भाग"
+  },
+  "letters": [
+    {
+      "en": {
+        "key": "C",
+        "stands": "Consumption: private final consumption spending"
+      },
+      "hi": {
+        "key": "C",
+        "stands": "उपभोग: निजी अंतिम उपभोग व्यय"
+      }
+    },
+    {
+      "en": {
+        "key": "I",
+        "stands": "Investment: gross capital formation"
+      },
+      "hi": {
+        "key": "I",
+        "stands": "निवेश: सकल पूंजी निर्माण"
+      }
+    },
+    {
+      "en": {
+        "key": "G",
+        "stands": "Government final consumption spending"
+      },
+      "hi": {
+        "key": "G",
+        "stands": "सरकारी अंतिम उपभोग व्यय"
+      }
+    },
+    {
+      "en": {
+        "key": "X",
+        "stands": "Exports, added"
+      },
+      "hi": {
+        "key": "X",
+        "stands": "निर्यात, जोड़े जाते हैं"
+      }
+    },
+    {
+      "en": {
+        "key": "M",
+        "stands": "Imports, subtracted"
+      },
+      "hi": {
+        "key": "M",
+        "stands": "आयात, घटाए जाते हैं"
+      }
+    }
+  ],
+  "note": {
+    "en": "X minus M is net exports. Imports are subtracted because that spending goes to output made abroad. In India, private final consumption is the largest of these parts.",
+    "hi": "X घटा M शुद्ध निर्यात है। आयात घटाए जाते हैं क्योंकि वह व्यय विदेश में बने उत्पादन पर होता है। भारत में निजी अंतिम उपभोग व्यय इन भागों में सबसे बड़ा है।"
+  },
+  "sources": {
+    "en": "NCERT Class XII, Introductory Macroeconomics, 'National Income Accounting'; MoSPI National Accounts Statistics",
+    "hi": "NCERT कक्षा XII, समष्टि अर्थशास्त्र एक परिचय, 'राष्ट्रीय आय का लेखांकन'; MoSPI राष्ट्रीय लेखा सांख्यिकी"
+  },
+  "factsToCheck": [
+    "Private final consumption expenditure is the largest expenditure component of India's GDP (MoSPI National Accounts, latest release)"
+  ],
+  "schema": "upsc-pods/mnemonic@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X10)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

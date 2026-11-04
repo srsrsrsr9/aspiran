@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-rti-embarrassing-file",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "An RTI request your senior wants delayed",
+    "hi": "एक RTI आवेदन जिसे वरिष्ठ टालना चाहते हैं"
+  },
+  "en": {
+    "scenario": "You are the public information officer in a state department. An RTI application asks for file notings on why a large purchase was made from a single supplier without tender. The notings show that rules were bent under pressure, though no money seems to have changed hands. Your senior asks you to reply that the file is 'under examination' and let the 30-day limit pass.",
+    "question": "How do you reply to the application?",
+    "options": [
+      {
+        "label": "Give the information within the time limit",
+        "outcome": "The law is followed and the public learns how the decision was made, but your senior may be displeased and the department embarrassed.",
+        "values": "Transparency and the rule of law"
+      },
+      {
+        "label": "Give it, but first tell your senior in writing",
+        "outcome": "You follow the law and keep your senior informed, but you may face pressure in the days before the reply goes out.",
+        "values": "Lawfulness with respect for hierarchy"
+      },
+      {
+        "label": "Follow your senior and delay the reply",
+        "outcome": "You avoid friction at work, but you break the Act, and you may personally face a penalty from the information commission.",
+        "values": "Obedience over legal duty"
+      }
+    ],
+    "reflect": "If a rule-bending decision caused no loss, does the public still have a right to know about it?"
+  },
+  "hi": {
+    "scenario": "आप एक राज्य विभाग में लोक सूचना अधिकारी हैं। एक RTI आवेदन में पूछा गया है कि बिना निविदा एक ही आपूर्तिकर्ता से बड़ी खरीद क्यों हुई, और उसकी फ़ाइल टिप्पणियाँ माँगी गई हैं। टिप्पणियाँ दिखाती हैं कि दबाव में नियम मोड़े गए, हालाँकि पैसों का लेन-देन नहीं दिखता। आपके वरिष्ठ कहते हैं कि जवाब दें कि फ़ाइल 'जाँच में है' और 30 दिन की सीमा बीत जाने दें।",
+    "question": "आप आवेदन का जवाब कैसे देंगे?",
+    "options": [
+      {
+        "label": "समय-सीमा के भीतर सूचना देना",
+        "outcome": "कानून का पालन होता है और जनता जानती है कि निर्णय कैसे हुआ, पर वरिष्ठ नाराज़ हो सकते हैं और विभाग की किरकिरी हो सकती है।",
+        "values": "पारदर्शिता और विधि का शासन"
+      },
+      {
+        "label": "सूचना देना, पर पहले वरिष्ठ को लिखित में बताना",
+        "outcome": "आप कानून मानते हैं और वरिष्ठ को सूचित रखते हैं, पर जवाब भेजने से पहले के दिनों में आप पर दबाव आ सकता है।",
+        "values": "पदानुक्रम के सम्मान के साथ वैधता"
+      },
+      {
+        "label": "वरिष्ठ की बात मानकर जवाब टालना",
+        "outcome": "कार्यस्थल पर टकराव से बचते हैं, पर अधिनियम का उल्लंघन होता है, और सूचना आयोग से आप पर व्यक्तिगत दंड लग सकता है।",
+        "values": "कानूनी कर्तव्य से ऊपर आज्ञापालन"
+      }
+    ],
+    "reflect": "अगर नियम मोड़ने वाले निर्णय से कोई नुकसान नहीं हुआ, तो क्या जनता को उसके बारे में जानने का अधिकार फिर भी है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

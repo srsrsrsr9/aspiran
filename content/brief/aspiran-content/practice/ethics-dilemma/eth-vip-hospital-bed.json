@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-vip-hospital-bed",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A request to jump the bed queue",
+    "hi": "बिस्तर की कतार तोड़ने का अनुरोध"
+  },
+  "en": {
+    "scenario": "You are the medical superintendent of a busy government hospital. All beds in the general medicine ward are full, and five patients are waiting in the emergency area by order of need. An influential local leader calls and asks that his relative, who has a stable but painful condition, be given the next bed and a private room. The leader sits on the hospital's advisory committee.",
+    "question": "How do you handle the call?",
+    "options": [
+      {
+        "label": "Explain that beds go by medical need and add the relative to the queue",
+        "outcome": "Patients are treated fairly, but the leader may be angry and the hospital may face pressure in the committee.",
+        "values": "Equity and medical ethics"
+      },
+      {
+        "label": "Arrange good outpatient care for the relative until a bed is free",
+        "outcome": "The relative gets attention and the queue is respected, but the leader may feel his request was refused.",
+        "values": "Fairness with courtesy and care"
+      },
+      {
+        "label": "Give the relative the next bed",
+        "outcome": "The leader is pleased, but a patient with greater need waits longer and staff see that influence works.",
+        "values": "Deference to power over fairness"
+      }
+    ],
+    "reflect": "In a public hospital, what should decide who gets care first, and what does it cost when something else does?"
+  },
+  "hi": {
+    "scenario": "आप एक व्यस्त सरकारी अस्पताल के चिकित्सा अधीक्षक हैं। सामान्य चिकित्सा वार्ड के सभी बिस्तर भरे हैं, और आपातकालीन क्षेत्र में पाँच मरीज़ ज़रूरत के क्रम में प्रतीक्षा कर रहे हैं। एक प्रभावशाली स्थानीय नेता फ़ोन कर कहते हैं कि उनके रिश्तेदार को, जिनकी स्थिति स्थिर पर दर्दनाक है, अगला बिस्तर और निजी कमरा दिया जाए। नेता अस्पताल की सलाहकार समिति में हैं।",
+    "question": "आप इस फ़ोन को कैसे संभालेंगे?",
+    "options": [
+      {
+        "label": "समझाना कि बिस्तर चिकित्सा ज़रूरत से मिलते हैं और रिश्तेदार को कतार में जोड़ना",
+        "outcome": "मरीज़ों से निष्पक्ष व्यवहार होता है, पर नेता नाराज़ हो सकते हैं और समिति में अस्पताल पर दबाव आ सकता है।",
+        "values": "समानता और चिकित्सा नैतिकता"
+      },
+      {
+        "label": "बिस्तर खाली होने तक रिश्तेदार की अच्छी OPD देखभाल करवाना",
+        "outcome": "रिश्तेदार पर ध्यान दिया जाता है और कतार का सम्मान होता है, पर नेता को लग सकता है कि उनका अनुरोध ठुकराया गया।",
+        "values": "शिष्टता और देखभाल के साथ निष्पक्षता"
+      },
+      {
+        "label": "रिश्तेदार को अगला बिस्तर देना",
+        "outcome": "नेता प्रसन्न होते हैं, पर अधिक ज़रूरत वाला मरीज़ ज़्यादा इंतज़ार करता है और स्टाफ़ देखता है कि प्रभाव काम करता है।",
+        "values": "निष्पक्षता से ऊपर सत्ता का सम्मान"
+      }
+    ],
+    "reflect": "सरकारी अस्पताल में पहले इलाज किसे मिले, यह किस आधार पर तय हो, और कुछ और आधार बनने की कीमत क्या है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

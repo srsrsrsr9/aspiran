@@ -1,0 +1,141 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs1"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "med-bhakti-and-sufi-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Bhakti and Sufi traditions: fact or opinion?",
+    "hi": "भक्ति और सूफ़ी परंपराएँ: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Verses of Kabir are included in the Guru Granth Sahib.",
+        "why": "You can find them in the text itself."
+      },
+      "hi": {
+        "text": "कबीर के पद गुरु ग्रंथ साहिब में शामिल हैं।",
+        "why": "ये पद खुद ग्रंथ में देखे जा सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Kabir's message is more relevant today than ever before.",
+        "why": "'More relevant than ever' is a judgment about our times."
+      },
+      "hi": {
+        "text": "कबीर का संदेश आज पहले से कहीं ज़्यादा प्रासंगिक है।",
+        "why": "'पहले से कहीं ज़्यादा' हमारे समय पर एक आकलन है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Mirabai composed devotional songs addressed to Krishna.",
+        "why": "Her songs survive and are documented."
+      },
+      "hi": {
+        "text": "मीराबाई ने कृष्ण को संबोधित भक्ति गीत रचे।",
+        "why": "उनके गीत आज भी उपलब्ध हैं और दर्ज हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Bhakti saints did more for social equality than any king.",
+        "why": "Compares very different kinds of influence; there is no measure for it."
+      },
+      "hi": {
+        "text": "भक्ति संतों ने सामाजिक बराबरी के लिए किसी भी राजा से ज़्यादा किया।",
+        "why": "यह बहुत अलग तरह के प्रभावों की तुलना है; इसका कोई माप नहीं है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The dargah of Khwaja Muinuddin Chishti is at Ajmer.",
+        "why": "A place you can verify."
+      },
+      "hi": {
+        "text": "ख्वाजा मुईनुद्दीन चिश्ती की दरगाह अजमेर में है।",
+        "why": "यह एक जगह है जिसकी पुष्टि की जा सकती है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Sufi music is the finest part of India's musical heritage.",
+        "why": "'Finest' is a matter of taste."
+      },
+      "hi": {
+        "text": "सूफ़ी संगीत भारत की संगीत विरासत का सबसे उत्तम हिस्सा है।",
+        "why": "'सबसे उत्तम' अपनी-अपनी पसंद की बात है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Basavanna, a 12th-century reformer in Karnataka, expressed his teaching in vachanas.",
+        "why": "The vachanas survive and are dated by historians."
+      },
+      "hi": {
+        "text": "कर्नाटक के 12वीं सदी के सुधारक बसवण्णा ने अपनी शिक्षा वचनों में दी।",
+        "why": "वचन आज उपलब्ध हैं और इतिहासकारों ने उनका काल तय किया है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Vachanas should be taught in every school in India.",
+        "why": "Says what 'should' be done; a curriculum choice."
+      },
+      "hi": {
+        "text": "वचन भारत के हर विद्यालय में पढ़ाए जाने चाहिए।",
+        "why": "यह बताता है कि क्या 'होना चाहिए'; यह पाठ्यक्रम का चुनाव है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class 12, Themes in Indian History, Part II (Bhakti-Sufi Traditions); Ministry of Culture",
+    "hi": "एनसीईआरटी कक्षा 12, भारतीय इतिहास के कुछ विषय, भाग 2 (भक्ति-सूफ़ी परंपराएँ); संस्कृति मंत्रालय"
+  },
+  "factsToCheck": [
+    "Basavanna dated to the 12th century"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

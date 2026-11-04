@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs1"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "mod-salt-march-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "The Salt March, 1930: fact or opinion?",
+    "hi": "नमक यात्रा, 1930: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Gandhi set out from Sabarmati Ashram for Dandi on 12 March 1930.",
+        "why": "A dated event in the historical record."
+      },
+      "hi": {
+        "text": "गांधीजी 12 मार्च 1930 को साबरमती आश्रम से दांडी के लिए निकले।",
+        "why": "यह ऐतिहासिक रिकॉर्ड में दर्ज, तारीख वाली घटना है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Salt March was the most important moment of the freedom struggle.",
+        "why": "'Most important' ranks events; historians pick different ones."
+      },
+      "hi": {
+        "text": "नमक यात्रा स्वतंत्रता संग्राम का सबसे अहम क्षण थी।",
+        "why": "'सबसे अहम' घटनाओं को क्रम देता है; इतिहासकार अलग-अलग घटनाएँ चुनते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Gandhi broke the salt law at Dandi on 6 April 1930.",
+        "why": "Recorded in contemporary reports."
+      },
+      "hi": {
+        "text": "गांधीजी ने 6 अप्रैल 1930 को दांडी में नमक कानून तोड़ा।",
+        "why": "यह उस समय की रिपोर्टों में दर्ज है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Choosing salt as the issue was a stroke of genius.",
+        "why": "Praise is a judgment; some leaders at the time doubted the choice."
+      },
+      "hi": {
+        "text": "नमक को मुद्दा बनाना प्रतिभा का कमाल था।",
+        "why": "प्रशंसा एक आकलन है; उस समय कुछ नेताओं को इस चुनाव पर शक था।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Salt March began the Civil Disobedience Movement.",
+        "why": "Standard historical record."
+      },
+      "hi": {
+        "text": "नमक यात्रा से सविनय अवज्ञा आंदोलन शुरू हुआ।",
+        "why": "यह इतिहास का मानक रिकॉर्ड है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Non-violent protest works in every situation.",
+        "why": "'Every situation' is a sweeping claim, not a checked fact."
+      },
+      "hi": {
+        "text": "अहिंसक विरोध हर स्थिति में कारगर होता है।",
+        "why": "'हर स्थिति' एक बड़ा दावा है, जाँचा हुआ तथ्य नहीं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Gandhi-Irwin Pact was signed in March 1931.",
+        "why": "The date is on record."
+      },
+      "hi": {
+        "text": "गांधी-इरविन समझौते पर मार्च 1931 में हस्ताक्षर हुए।",
+        "why": "यह तारीख रिकॉर्ड में है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The Gandhi-Irwin Pact gave away too much.",
+        "why": "'Too much' is a judgment; others saw it as a gain."
+      },
+      "hi": {
+        "text": "गांधी-इरविन समझौते में बहुत ज़्यादा छोड़ दिया गया।",
+        "why": "'बहुत ज़्यादा' एक आकलन है; दूसरों ने इसे उपलब्धि माना।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "NCERT Class 12, Themes in Indian History, Part III; National Archives of India",
+    "hi": "एनसीईआरटी कक्षा 12, भारतीय इतिहास के कुछ विषय, भाग 3; भारत का राष्ट्रीय अभिलेखागार"
+  },
+  "factsToCheck": [
+    "March began 12 March 1930 from Sabarmati Ashram",
+    "Gandhi broke the salt law at Dandi on 6 April 1930",
+    "Gandhi-Irwin Pact signed 5 March 1931"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

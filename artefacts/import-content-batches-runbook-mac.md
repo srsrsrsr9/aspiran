@@ -9,7 +9,9 @@ What it does: sends everything made so far to the live Desk as **drafts**, in fo
   15 more optional topics (B26–B28: Sociology, PSIR, Anthropology). New in part 2: 40 printable sheets (P1–P5),
   12 audio-lecture scripts (A1, A2) and 20 more optional topics (B29), 31 more optional topics (B30) and the recorded voice for all 12 talks. New in part 4: 200 practice items over 10
   formats (X1–X5) and 24 flashcard decks (F1). 547 files in all.
-- Step 4: the syllabus notes (98) and 6 mocks: GS mocks 1–3, all three now with Hindi (B24, B24b) and the two CSAT papers (B23).
+  New in part 5 (4 Nov evening): 279 more practice items over 18 formats (X6–X11), the X5 better-answer and FC1
+  fact-check fixes (they replace the part 4 drafts of the same name) and 30 more optional topics (B31).
+- Step 4: the syllabus notes (98) and 6 mocks: GS mocks 1–3, all three now with Hindi (B24, B24b; mock 1's brackets tidied in B24c) and the two CSAT papers (B23).
 - Step 5: video episodes 10 to 17 as the week "2026-45" (about 22 MB), and episodes 18 to 35 as the week "2026-46"
   (about 39 MB). Episodes 13 and 22–35 now have the Sarvam English voice; the others still have the placeholder voice.
 - Step 5b: the official Prelims GS Paper I for 2018, 2019, 2021, 2023 and 2025 with UPSC's own answer keys, plus the

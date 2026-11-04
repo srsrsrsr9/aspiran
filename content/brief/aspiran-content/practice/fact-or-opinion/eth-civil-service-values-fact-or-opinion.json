@@ -1,0 +1,142 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs4"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "eth-civil-service-values-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Values in the civil service: fact or opinion?",
+    "hi": "सिविल सेवा के मूल्य: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Under Article 311, a civil servant cannot be dismissed by an authority below the one that appointed them.",
+        "why": "The rule is in Article 311(1)."
+      },
+      "hi": {
+        "text": "अनुच्छेद 311 के तहत किसी सिविल सेवक को उसकी नियुक्ति करने वाले प्राधिकारी से नीचे का प्राधिकारी बर्खास्त नहीं कर सकता।",
+        "why": "यह नियम अनुच्छेद 311(1) में है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Integrity matters more than competence in a civil servant.",
+        "why": "Ranks two values; people weigh them differently."
+      },
+      "hi": {
+        "text": "सिविल सेवक में योग्यता से ज़्यादा सत्यनिष्ठा मायने रखती है।",
+        "why": "यह दो मूल्यों को क्रम देता है; लोग इन्हें अलग-अलग तौलते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The All India Services (Conduct) Rules were framed in 1968.",
+        "why": "The year is in the title of the Rules."
+      },
+      "hi": {
+        "text": "अखिल भारतीय सेवा (आचरण) नियम 1968 में बनाए गए।",
+        "why": "वर्ष नियमों के नाम में ही है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "A written code of ethics changes behaviour less than a good example from seniors does.",
+        "why": "Compares two influences; there is no settled measure."
+      },
+      "hi": {
+        "text": "लिखी हुई आचार संहिता से व्यवहार उतना नहीं बदलता जितना वरिष्ठों के अच्छे उदाहरण से।",
+        "why": "यह दो प्रभावों की तुलना है; इसका कोई तय माप नहीं है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Second Administrative Reforms Commission's fourth report was titled 'Ethics in Governance'.",
+        "why": "The report is published and dated 2007."
+      },
+      "hi": {
+        "text": "द्वितीय प्रशासनिक सुधार आयोग की चौथी रिपोर्ट का नाम 'शासन में नैतिकता' था।",
+        "why": "यह रिपोर्ट प्रकाशित है और 2007 की है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Fear of punishment works better than appeals to conscience.",
+        "why": "A claim about human nature that ethicists argue over."
+      },
+      "hi": {
+        "text": "सज़ा का डर अंतरात्मा की अपील से बेहतर काम करता है।",
+        "why": "यह मानव स्वभाव पर एक दावा है, जिस पर नीतिशास्त्री बहस करते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Lokpal and Lokayuktas Act was passed in 2013.",
+        "why": "An Act of Parliament with a year in its name."
+      },
+      "hi": {
+        "text": "लोकपाल और लोकायुक्त अधिनियम 2013 में पारित हुआ।",
+        "why": "यह संसद का अधिनियम है, जिसके नाम में वर्ष है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "An honest officer should refuse every gift, however small.",
+        "why": "Says what 'should' be done; rules allow some small gifts with limits."
+      },
+      "hi": {
+        "text": "ईमानदार अधिकारी को हर उपहार ठुकरा देना चाहिए, चाहे वह कितना भी छोटा हो।",
+        "why": "यह बताता है कि क्या 'करना चाहिए'; नियम सीमा के साथ कुछ छोटे उपहारों की अनुमति देते हैं।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Article 311; All India Services (Conduct) Rules, 1968; Second ARC, Fourth Report: Ethics in Governance (2007); Lokpal and Lokayuktas Act, 2013",
+    "hi": "भारत का संविधान, अनुच्छेद 311; अखिल भारतीय सेवा (आचरण) नियम, 1968; द्वितीय प्रशासनिक सुधार आयोग, चौथी रिपोर्ट: शासन में नैतिकता (2007); लोकपाल और लोकायुक्त अधिनियम, 2013"
+  },
+  "factsToCheck": [
+    "Second ARC Fourth Report, Ethics in Governance: January 2007",
+    "Lokpal and Lokayuktas Act, 2013 (in force 16 January 2014)"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

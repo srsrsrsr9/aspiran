@@ -1,0 +1,271 @@
+{
+ "n": 19,
+ "id": "primary-deficit",
+ "title": "The deficit that matters most isn't the headline one",
+ "format": "whiteboard",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "Union Budget 2026-27, Budget at a Glance: Budget Estimates 2026-27 fiscal deficit 4.3% of GDP, revenue deficit 1.5%, primary deficit 0.7% (indiabudget.gov.in)",
+  "Budget Speech 2026-27: debt-to-GDP target of 50 +/- 1 percent by 2030-31; 55.6% estimated for 2026-27 (indiabudget.gov.in)",
+  "PRS Legislative Research, Union Budget Analysis 2026-27"
+ ],
+ "quiz": {
+  "q": "What is the primary deficit?",
+  "options": [
+   "Fiscal deficit minus interest payments",
+   "Revenue deficit minus capital grants",
+   "Fiscal deficit plus interest payments",
+   "Total borrowing minus disinvestment"
+  ],
+  "answerIndex": 0,
+  "why": "Right. Primary deficit is the fiscal deficit minus interest payments, so it shows the gap from current spending without the cost of past debt."
+ },
+ "script": [
+  [
+   [
+    "The fiscal deficit gets the headlines:",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "4.3 percent of GDP",
+    "four point three percent of G D P",
+    0.96,
+    0.1,
+    1.0
+   ],
+   [
+    "in the 2026-27 budget.",
+    "in the twenty twenty-six twenty-seven budget.",
+    0.98,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But much of that gap pays for the past.",
+    null,
+    0.95,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The primary deficit is the fiscal deficit minus interest payments.",
+    null,
+    0.98,
+    0.3,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It shows the gap from today's spending alone.",
+    null,
+    0.98,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The same budget puts it at just 0.7 percent of GDP.",
+    "The same budget puts it at just zero point seven percent of G D P.",
+    0.96,
+    0.25,
+    1.0
+   ]
+  ],
+  [
+   [
+    "So about 3.6 points of the deficit is interest.",
+    "So about three point six points of the deficit is interest.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The medium-term anchor is debt:",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "about 50 percent of GDP,",
+    "about fifty percent of G D P,",
+    0.98,
+    0.1,
+    1.0
+   ],
+   [
+    "give or take one point,",
+    null,
+    0.98,
+    0.1,
+    1.0
+   ],
+   [
+    "by March 2031.",
+    "by March twenty thirty-one.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Shrink the primary deficit,",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "and new borrowing mostly services old debt.",
+    null,
+    0.96,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "What is the primary deficit?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "The headline deficit",
+    "4.3% of GDP"
+   ],
+   "icon": "coin"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "statement",
+   "lines": [
+    "Much of it pays",
+    "for the past"
+   ],
+   "emph": [
+    "past"
+   ]
+  },
+  {
+   "sent": [
+    2,
+    3
+   ],
+   "type": "compare",
+   "heading": "Two deficits",
+   "left": {
+    "label": "Fiscal",
+    "text": "All the borrowing, interest included",
+    "at": "the fiscal deficit"
+   },
+   "right": {
+    "label": "Primary",
+    "text": "Fiscal deficit minus interest",
+    "at": "minus interest payments"
+   }
+  },
+  {
+   "sent": [
+    4,
+    5
+   ],
+   "type": "stat",
+   "value": "0.7%",
+   "label": "Primary deficit, of GDP",
+   "sub": "About 3.6 of the 4.3 points is interest",
+   "at": "0.7 percent"
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "stat",
+   "value": "50±1%",
+   "label": "Debt anchor, of GDP",
+   "sub": "By March 2031",
+   "at": "about 50 percent"
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "statement",
+   "lines": [
+    "Shrink the primary gap",
+    "Borrowing pays old debt"
+   ],
+   "emph": [
+    "old debt"
+   ]
+  },
+  {
+   "sent": [
+    8,
+    8
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "Budget Estimates 2026-27: fiscal deficit 4.3% of GDP; primary deficit 0.7% of GDP; revenue deficit 1.5%",
+   "url": "https://www.indiabudget.gov.in/doc/Budget_at_Glance/budget_at_a_glance.pdf",
+   "url2": "https://prsindia.org/files/budget/budget_parliament/2026/Union_Budget_Analysis-2026-27.pdf"
+  },
+  {
+   "claim": "Primary deficit = fiscal deficit minus interest payments; hence about 3.6 percentage points of GDP (4.3 minus 0.7) is interest",
+   "url": "https://www.indiabudget.gov.in/doc/Budget_at_Glance/budget_at_a_glance.pdf",
+   "url2": "https://prsindia.org/files/budget/budget_parliament/2026/Union_Budget_Analysis-2026-27.pdf"
+  },
+  {
+   "claim": "The government aims to bring Central debt to around 50% of GDP (+/- 1) by March 2031 (2030-31)",
+   "url": "https://www.indiabudget.gov.in/doc/budget_speech.pdf",
+   "url2": "https://prsindia.org/files/budget/budget_parliament/2026/Union_Budget_Analysis-2026-27.pdf"
+  },
+  {
+   "claim": "Central debt is estimated at 55.6% of GDP in 2026-27 BE",
+   "url": "https://www.indiabudget.gov.in/doc/budget_speech.pdf",
+   "url2": "https://prsindia.org/files/budget/budget_parliament/2026/Union_Budget_Analysis-2026-27.pdf"
+  }
+ ],
+ "review_note": "Spec written after the fact for the existing video and Sarvam recording; spoken text matches 19-primary-deficit.voice.txt word for word. Claims copied from the claims table. Now checked against primary sources: Budget at a Glance 2026-27 (indiabudget.gov.in) shows BE 2026-27 fiscal deficit 4.3, revenue deficit 1.5 and primary deficit 0.7 percent of GDP, with primary deficit computed as fiscal deficit less interest; the Budget Speech states the 50 +/- 1 percent debt-to-GDP target by 2030-31 and 55.6 percent for 2026-27. 3.6 points is our arithmetic (4.3 - 0.7). Claim 4 (55.6%) is not spoken or shown; kept from the claims table as context. gsPaper adds prelims-gs to the old mains-gs3 tag."
+}

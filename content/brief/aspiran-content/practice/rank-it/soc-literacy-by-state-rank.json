@@ -1,0 +1,113 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "soc-literacy-by-state-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Literacy by state, Census 2011",
+    "hi": "राज्यवार साक्षरता, जनगणना 2011"
+  },
+  "prompt": {
+    "en": "Rank by literacy rate in Census 2011, highest first.",
+    "hi": "जनगणना 2011 की साक्षरता दर के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "%",
+    "hi": "प्रतिशत"
+  },
+  "items": [
+    {
+      "value": 94.0,
+      "en": {
+        "label": "Kerala"
+      },
+      "hi": {
+        "label": "केरल"
+      }
+    },
+    {
+      "value": 91.33,
+      "en": {
+        "label": "Mizoram"
+      },
+      "hi": {
+        "label": "मिज़ोरम"
+      }
+    },
+    {
+      "value": 88.7,
+      "en": {
+        "label": "Goa"
+      },
+      "hi": {
+        "label": "गोवा"
+      }
+    },
+    {
+      "value": 87.22,
+      "en": {
+        "label": "Tripura"
+      },
+      "hi": {
+        "label": "त्रिपुरा"
+      }
+    },
+    {
+      "value": 61.8,
+      "en": {
+        "label": "Bihar"
+      },
+      "hi": {
+        "label": "बिहार"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "India's rate was 74.04%. Bihar had the lowest rate among states; three of the top four are small states.",
+    "hi": "भारत की दर 74.04% थी। राज्यों में बिहार की दर सबसे कम थी; ऊपर के चार में से तीन छोटे राज्य हैं।"
+  },
+  "memoryHook": {
+    "en": "Kerala, Mizoram, Goa, Tripura all above 85%; Bihar just above 60%.",
+    "hi": "केरल, मिज़ोरम, गोवा, त्रिपुरा सभी 85% से ऊपर; बिहार 60% से थोड़ा ऊपर।"
+  },
+  "sources": {
+    "en": "Census of India 2011, Primary Census Abstract",
+    "hi": "भारत की जनगणना 2011, प्राथमिक जनगणना सार"
+  },
+  "factsToCheck": [
+    "Census 2011 literacy (age 7 and above): Kerala 94.00%, Mizoram 91.33%, Goa 88.70%, Tripura 87.22%, Bihar 61.80%, India 74.04%"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

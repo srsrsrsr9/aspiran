@@ -1,0 +1,79 @@
+{
+  "batch": "FC1",
+  "made": "2026-11-04",
+  "kind": "fact-check fixes",
+  "files": [
+    {
+      "path": "practice/how-many-correct/env-climate-treaties-hmc.json",
+      "id": "env-climate-treaties-hmc",
+      "replaces": "X1.zip:practice/how-many-correct/env-climate-treaties-hmc.json",
+      "schema": "upsc-pods/how-many-correct@1",
+      "changedKeys": [
+        "items",
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    },
+    {
+      "path": "practice/fill-the-gap/pol-office-of-the-governor-gap.json",
+      "id": "pol-office-of-the-governor-gap",
+      "replaces": "X5.zip:practice/fill-the-gap/pol-office-of-the-governor-gap.json",
+      "schema": "upsc-pods/fill-the-gap@1",
+      "changedKeys": [
+        "en",
+        "hi",
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    },
+    {
+      "path": "practice/fill-the-gap/eco-monetary-policy-committee-gap.json",
+      "id": "eco-monetary-policy-committee-gap",
+      "replaces": "X5.zip:practice/fill-the-gap/eco-monetary-policy-committee-gap.json",
+      "schema": "upsc-pods/fill-the-gap@1",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    },
+    {
+      "path": "practice/landmark-case/env-godavarman-forest-case.json",
+      "id": "env-godavarman-forest-case",
+      "replaces": "X4.zip:practice/landmark-case/env-godavarman-forest-case.json",
+      "schema": "upsc-pods/landmark-case@1",
+      "changedKeys": [
+        "en",
+        "hi",
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    },
+    {
+      "path": "practice/landmark-case/eco-mineral-royalty-case.json",
+      "id": "eco-mineral-royalty-case",
+      "replaces": "X4.zip:practice/landmark-case/eco-mineral-royalty-case.json",
+      "schema": "upsc-pods/landmark-case@1",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    },
+    {
+      "path": "practice/assertion-reason/pol-centre-state-relations-ar.json",
+      "id": "pol-centre-state-relations-ar",
+      "replaces": "X2.zip:practice/assertion-reason/pol-centre-state-relations-ar.json",
+      "schema": "upsc-pods/assertion-reason@1",
+      "changedKeys": [
+        "sources",
+        "factsToCheck"
+      ],
+      "factsToCheck": "inside the file"
+    }
+  ],
+  "report": "FC1-report.md"
+}

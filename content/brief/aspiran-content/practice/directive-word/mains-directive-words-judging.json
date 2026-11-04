@@ -1,0 +1,120 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "flip": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs1",
+      "mains-gs2",
+      "mains-gs3",
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-directive"
+    ]
+  },
+  "id": "mains-directive-words-judging",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Five words that ask for a judgement",
+    "hi": "निर्णय माँगने वाले पाँच शब्द"
+  },
+  "words": [
+    {
+      "en": {
+        "word": "Examine",
+        "means": "Look into the topic in detail, probing its facts and implications.",
+        "do": "Go beneath the surface: check the claim, its basis and its consequences, then conclude.",
+        "avoid": "A flat description that never tests the claim."
+      },
+      "hi": {
+        "word": "परीक्षण कीजिए",
+        "means": "विषय की विस्तार से जाँच करें, उसके तथ्यों और निहितार्थों को परखते हुए।",
+        "do": "सतह से नीचे जाएँ: दावा, उसका आधार और उसके परिणाम जाँचें, फिर निष्कर्ष दें।",
+        "avoid": "सपाट वर्णन जो दावे को कभी परखता ही नहीं।"
+      }
+    },
+    {
+      "en": {
+        "word": "Assess",
+        "means": "Weigh the importance, extent or value of something and give a measured judgement.",
+        "do": "State what you are measuring against, weigh gains against gaps, then give a clear overall view.",
+        "avoid": "Listing points without saying how much they matter."
+      },
+      "hi": {
+        "word": "आकलन कीजिए",
+        "means": "किसी चीज़ के महत्व, सीमा या मूल्य को तौलें और संतुलित निर्णय दें।",
+        "do": "बताएँ कि किस आधार पर माप रहे हैं, उपलब्धियों और कमियों को तौलें, फिर स्पष्ट समग्र मत दें।",
+        "avoid": "बिंदु गिनाना पर यह न बताना कि वे कितने महत्वपूर्ण हैं।"
+      }
+    },
+    {
+      "en": {
+        "word": "Justify",
+        "means": "Give good reasons to support a stated position or decision.",
+        "do": "Accept the stance in the question and back it with evidence; answer the main objection briefly.",
+        "avoid": "Arguing against the position you were asked to justify."
+      },
+      "hi": {
+        "word": "औचित्य सिद्ध कीजिए",
+        "means": "किसी कथित पक्ष या निर्णय के समर्थन में ठोस कारण दें।",
+        "do": "प्रश्न के पक्ष को स्वीकार कर उसे साक्ष्य से पुष्ट करें; मुख्य आपत्ति का संक्षेप में उत्तर दें।",
+        "avoid": "जिस पक्ष का औचित्य सिद्ध करना था, उसी के विरुद्ध तर्क देना।"
+      }
+    },
+    {
+      "en": {
+        "word": "Substantiate",
+        "means": "Prove a statement true with evidence such as data, reports, laws or cases.",
+        "do": "For each point, attach a specific source: a report, a judgment, a figure or an example.",
+        "avoid": "Repeating the claim with stronger words but no evidence."
+      },
+      "hi": {
+        "word": "पुष्टि कीजिए",
+        "means": "आँकड़ों, रिपोर्टों, कानूनों या मामलों जैसे साक्ष्य से कथन को सत्य सिद्ध करें।",
+        "do": "हर बिंदु के साथ एक विशिष्ट स्रोत जोड़ें: रिपोर्ट, निर्णय, आँकड़ा या उदाहरण।",
+        "avoid": "बिना साक्ष्य के दावे को और ज़ोरदार शब्दों में दोहराना।"
+      }
+    },
+    {
+      "en": {
+        "word": "To what extent",
+        "means": "Judge how far a statement is true, rather than simply yes or no.",
+        "do": "Show where it holds and where it does not, then say how far you agree.",
+        "avoid": "Answering as if the statement were wholly true or wholly false."
+      },
+      "hi": {
+        "word": "किस सीमा तक",
+        "means": "आँकें कि कोई कथन कितना सही है, केवल हाँ या ना में नहीं।",
+        "do": "दिखाएँ कि वह कहाँ लागू होता है और कहाँ नहीं, फिर बताएँ कि आप कितना सहमत हैं।",
+        "avoid": "ऐसे उत्तर देना जैसे कथन पूरी तरह सही या पूरी तरह ग़लत हो।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "General Mains answer-writing practice; editor to confirm Hindi forms against UPSC papers",
+    "hi": "सामान्य मुख्य परीक्षा उत्तर-लेखन अभ्यास; संपादक UPSC प्रश्नपत्रों से हिंदी रूपों की पुष्टि करें"
+  },
+  "factsToCheck": [],
+  "schema": "upsc-pods/directive-word@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X10)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

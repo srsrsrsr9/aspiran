@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-own-error-in-approval",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "An error you made last year",
+    "hi": "पिछले वर्ष की आपकी गलती"
+  },
+  "en": {
+    "scenario": "You are a deputy secretary. While reviewing old files, you find that a year ago you approved a payment to a supplier using an outdated rate, so the government paid more than it should have. No one has noticed, and the audit for that year is over. Reporting it would mean a recovery process and a note in your record, just as you are being considered for promotion.",
+    "question": "What do you do about your own error?",
+    "options": [
+      {
+        "label": "Report it and start recovery of the excess",
+        "outcome": "Public money may be recovered and your honesty is on record, but your promotion may be delayed.",
+        "values": "Integrity and accountability for one's own actions"
+      },
+      {
+        "label": "Fix the rate for future payments without reporting the past one",
+        "outcome": "Further loss is stopped and your record stays clean, but the past excess is never recovered or disclosed.",
+        "values": "Damage control with self-protection"
+      },
+      {
+        "label": "Leave it, since the audit has closed",
+        "outcome": "Nothing changes for you, but you knowingly let a loss to the public stand and the error may repeat.",
+        "values": "Self-interest over duty"
+      }
+    ],
+    "reflect": "Is admitting your own mistake harder than reporting someone else's? Why should it matter more?"
+  },
+  "hi": {
+    "scenario": "आप उप सचिव हैं। पुरानी फ़ाइलें देखते हुए आप पाते हैं कि एक वर्ष पहले आपने पुरानी दर पर एक आपूर्तिकर्ता को भुगतान मंज़ूर किया, जिससे सरकार ने जितना देना था उससे अधिक भुगतान किया। किसी का ध्यान नहीं गया, और उस वर्ष का ऑडिट हो चुका है। रिपोर्ट करने पर वसूली की प्रक्रिया होगी और आपके रिकॉर्ड में टिप्पणी जुड़ेगी, ठीक तब जब आपकी पदोन्नति पर विचार हो रहा है।",
+    "question": "अपनी गलती के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "रिपोर्ट कर अधिक भुगतान की वसूली शुरू करना",
+        "outcome": "सार्वजनिक धन वसूल हो सकता है और आपकी ईमानदारी दर्ज होती है, पर आपकी पदोन्नति टल सकती है।",
+        "values": "अपने कार्यों के लिए सत्यनिष्ठा और जवाबदेही"
+      },
+      {
+        "label": "पिछला मामला बताए बिना आगे के भुगतानों की दर ठीक करना",
+        "outcome": "आगे का नुकसान रुकता है और आपका रिकॉर्ड साफ़ रहता है, पर पिछला अधिक भुगतान न वसूला जाता है न बताया जाता है।",
+        "values": "आत्म-रक्षा के साथ नुकसान नियंत्रण"
+      },
+      {
+        "label": "ऑडिट बंद होने से छोड़ देना",
+        "outcome": "आपके लिए कुछ नहीं बदलता, पर आप जानबूझकर जनता का नुकसान बना रहने देते हैं और गलती दोहराई जा सकती है।",
+        "values": "कर्तव्य से ऊपर स्वार्थ"
+      }
+    ],
+    "reflect": "क्या अपनी गलती मानना किसी और की गलती बताने से कठिन है? यह अधिक महत्त्वपूर्ण क्यों होना चाहिए?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

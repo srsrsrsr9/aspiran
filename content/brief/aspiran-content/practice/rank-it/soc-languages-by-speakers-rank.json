@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "soc-languages-by-speakers-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Languages by number of speakers, Census 2011",
+    "hi": "बोलने वालों की संख्या के अनुसार भाषाएँ, जनगणना 2011"
+  },
+  "prompt": {
+    "en": "Rank by share of the population who speak each as their language, highest first.",
+    "hi": "हर भाषा को अपनी भाषा बताने वाली जनसंख्या के हिस्से के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "% of population",
+    "hi": "जनसंख्या का %"
+  },
+  "items": [
+    {
+      "value": 43.63,
+      "en": {
+        "label": "Hindi"
+      },
+      "hi": {
+        "label": "हिंदी"
+      }
+    },
+    {
+      "value": 8.03,
+      "en": {
+        "label": "Bengali"
+      },
+      "hi": {
+        "label": "बांग्ला"
+      }
+    },
+    {
+      "value": 6.86,
+      "en": {
+        "label": "Marathi"
+      },
+      "hi": {
+        "label": "मराठी"
+      }
+    },
+    {
+      "value": 6.7,
+      "en": {
+        "label": "Telugu"
+      },
+      "hi": {
+        "label": "तेलुगु"
+      }
+    },
+    {
+      "value": 5.7,
+      "en": {
+        "label": "Tamil"
+      },
+      "hi": {
+        "label": "तमिल"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "The Census groups many mother tongues under 'Hindi', which is one reason its share is so large. Marathi moved ahead of Telugu in 2011.",
+    "hi": "जनगणना कई मातृभाषाओं को 'हिंदी' के अंतर्गत गिनती है, इसीलिए इसका हिस्सा इतना बड़ा है। 2011 में मराठी तेलुगु से आगे निकल गई।"
+  },
+  "memoryHook": {
+    "en": "Hindi far ahead; then Bengali, Marathi, Telugu, Tamil, each a little lower.",
+    "hi": "हिंदी बहुत आगे; फिर बांग्ला, मराठी, तेलुगु, तमिल, हर एक थोड़ा कम।"
+  },
+  "sources": {
+    "en": "Census of India 2011, Paper 1 of 2018: Language (Office of the Registrar General)",
+    "hi": "भारत की जनगणना 2011, पेपर 1, 2018: भाषा (महापंजीयक का कार्यालय)"
+  },
+  "factsToCheck": [
+    "Census 2011 language shares: Hindi 43.63%, Bengali 8.03%, Marathi 6.86%, Telugu 6.70%, Tamil 5.70%",
+    "Marathi ahead of Telugu in 2011 (Telugu was third in 2001)"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

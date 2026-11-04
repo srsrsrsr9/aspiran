@@ -1,0 +1,143 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs3"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "env-tiger-conservation-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Saving the tiger: fact or opinion?",
+    "hi": "बाघ संरक्षण: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "Project Tiger was launched in 1973.",
+        "why": "A dated government programme; you can check it."
+      },
+      "hi": {
+        "text": "प्रोजेक्ट टाइगर 1973 में शुरू हुआ।",
+        "why": "यह तारीख वाला सरकारी कार्यक्रम है; आप इसे जाँच सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Tourism inside tiger reserves does more harm than good.",
+        "why": "Weighs costs against benefits; reserves and experts weigh them differently."
+      },
+      "hi": {
+        "text": "बाघ अभयारण्यों के अंदर पर्यटन से फ़ायदे से ज़्यादा नुकसान होता है।",
+        "why": "यहाँ नुकसान और फ़ायदे को तौला गया है; विशेषज्ञ इन्हें अलग-अलग तौलते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The National Tiger Conservation Authority is a statutory body under the Wild Life (Protection) Act.",
+        "why": "It was created by a 2006 amendment to that Act."
+      },
+      "hi": {
+        "text": "राष्ट्रीय बाघ संरक्षण प्राधिकरण वन्यजीव (संरक्षण) अधिनियम के तहत एक सांविधिक निकाय है।",
+        "why": "इसे उस अधिनियम में 2006 के संशोधन से बनाया गया।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Tigers deserve more conservation money than less famous species.",
+        "why": "Ranks species by worth; that is a value choice."
+      },
+      "hi": {
+        "text": "बाघों को कम प्रसिद्ध प्रजातियों से ज़्यादा संरक्षण धन मिलना चाहिए।",
+        "why": "प्रजातियों को महत्व के क्रम में रखना मूल्यों का चुनाव है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "India counts its tigers in a nationwide estimation every four years.",
+        "why": "The cycle is set by NTCA and its reports are published."
+      },
+      "hi": {
+        "text": "भारत हर चार वर्ष में देशभर में बाघों की गणना करता है।",
+        "why": "यह चक्र एनटीसीए तय करता है और इसकी रिपोर्टें प्रकाशित होती हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Moving villages out of core areas is the best way to protect tigers.",
+        "why": "'Best way' ranks one approach; others favour living alongside wildlife."
+      },
+      "hi": {
+        "text": "कोर क्षेत्रों से गाँवों को बाहर बसाना बाघों को बचाने का सबसे अच्छा तरीका है।",
+        "why": "'सबसे अच्छा तरीका' एक उपाय को ऊपर रखता है; दूसरे लोग वन्यजीवों के साथ रहने के पक्ष में हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The tiger is India's national animal.",
+        "why": "An official status you can look up."
+      },
+      "hi": {
+        "text": "बाघ भारत का राष्ट्रीय पशु है।",
+        "why": "यह आधिकारिक दर्जा है जिसे आप देख सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Camera traps give a truer count than any other method.",
+        "why": "'Truer than any other' is a claim experts argue over."
+      },
+      "hi": {
+        "text": "कैमरा ट्रैप किसी भी दूसरे तरीके से ज़्यादा सही गिनती देते हैं।",
+        "why": "'किसी भी दूसरे से ज़्यादा सही' पर विशेषज्ञों में बहस है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "National Tiger Conservation Authority; Wild Life (Protection) Act, 1972, Chapter IVB",
+    "hi": "राष्ट्रीय बाघ संरक्षण प्राधिकरण; वन्यजीव (संरक्षण) अधिनियम, 1972, अध्याय 4ख (IVB)"
+  },
+  "factsToCheck": [
+    "Project Tiger launched in 1973",
+    "NTCA set up under the 2006 amendment to the Wild Life (Protection) Act",
+    "All India Tiger Estimation every four years (2006, 2010, 2014, 2018, 2022); check whether the 2026 round has reported"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

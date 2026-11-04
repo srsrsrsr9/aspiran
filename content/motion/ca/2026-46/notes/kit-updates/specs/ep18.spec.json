@@ -1,0 +1,312 @@
+{
+ "n": 18,
+ "id": "fundamental-duties",
+ "title": "Fundamental Duties can't be enforced by a court, yet courts use them",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "sources": [
+  "Constitution of India, Part IVA, Article 51A (inserted by the Constitution (Forty-second Amendment) Act, 1976; clause (k) added by the Constitution (Eighty-sixth Amendment) Act, 2002)",
+  "AIIMS Students' Union v. AIIMS, Supreme Court: duties equally important as rights; aid to interpretation (as reported by Anantam IAS and Vajiram and Ravi)",
+  "M.C. Mehta v. Union of India (1988) and later environmental cases citing Article 51A(g) (secondary sources)"
+ ],
+ "quiz": {
+  "q": "Which amendment added Article 51A to the Constitution?",
+  "options": [
+   "The 42nd Amendment, 1976",
+   "The 44th Amendment, 1978",
+   "The 73rd Amendment, 1992",
+   "The 86th Amendment, 2002"
+  ],
+  "answerIndex": 0,
+  "why": "Right. The 42nd Amendment (1976) inserted Part IVA and Article 51A with ten duties; the 86th (2002) only added clause (k)."
+ },
+ "script": [
+  [
+   [
+    "No court can force you to perform a Fundamental Duty.",
+    null,
+    1.0,
+    0.2,
+    1.0
+   ],
+   [
+    "So why do judges keep citing them?",
+    null,
+    1.0,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Article 51A lists the duties of every citizen.",
+    "Article fifty-one A lists the duties of every citizen.",
+    1.0,
+    0.12,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The 42nd Amendment added ten of them,",
+    "The forty-second Amendment added ten of them,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "in 1976.",
+    "in nineteen seventy-six.",
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The 86th Amendment, in 2002,",
+    "The eighty-sixth Amendment, in two thousand two,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "added an eleventh:",
+    null,
+    0.98,
+    0.12,
+    1.0
+   ],
+   [
+    "parents and guardians must provide chances for education",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "to children aged six to fourteen.",
+    null,
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The duties can't be enforced directly by a court.",
+    null,
+    0.98,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But in the AIIMS Students' Union case,",
+    "But in the A I I M S Students' Union case,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "the Supreme Court called them as important as rights,",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and a guide to interpreting laws.",
+    null,
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Courts have also read the duty to protect the environment",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "into environmental cases.",
+    null,
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Not a command.",
+    null,
+    0.9,
+    0.2,
+    1.0
+   ],
+   [
+    "A lens.",
+    null,
+    0.88,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.15,
+    1.0
+   ],
+   [
+    "Which amendment added Article 51A to the Constitution?",
+    "Which amendment added Article fifty-one A to the Constitution?",
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    0
+   ],
+   "type": "title",
+   "lines": [
+    "Can't be enforced.",
+    "Still cited."
+   ],
+   "icon": "scale"
+  },
+  {
+   "sent": [
+    1,
+    1
+   ],
+   "type": "statement",
+   "lines": [
+    "Article 51A",
+    "Duties of every citizen"
+   ],
+   "emph": [
+    "51A"
+   ]
+  },
+  {
+   "sent": [
+    2,
+    3
+   ],
+   "type": "chain",
+   "heading": "How the duties were added",
+   "steps": [
+    {
+     "text": "42nd Amendment, 1976: ten duties",
+     "at": "42nd Amendment"
+    },
+    {
+     "text": "86th Amendment, 2002: an eleventh",
+     "at": "86th Amendment"
+    },
+    {
+     "text": "Education, ages six to fourteen",
+     "at": "six to fourteen"
+    }
+   ]
+  },
+  {
+   "sent": [
+    4,
+    5
+   ],
+   "type": "compare",
+   "heading": "What courts can do with them",
+   "left": {
+    "label": "Enforce",
+    "text": "Not directly",
+    "at": "can't be enforced directly"
+   },
+   "right": {
+    "label": "Interpret",
+    "text": "As important as rights; a guide to laws",
+    "at": "a guide to interpreting laws"
+   }
+  },
+  {
+   "sent": [
+    6,
+    6
+   ],
+   "type": "statement",
+   "lines": [
+    "Protect the",
+    "environment"
+   ],
+   "emph": [
+    "environment"
+   ],
+   "icon": "drop"
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "statement",
+   "lines": [
+    "Not a command.",
+    "A lens."
+   ],
+   "emph": [
+    "lens"
+   ]
+  },
+  {
+   "sent": [
+    8,
+    8
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "The 42nd Amendment (1976) inserted Part IVA and Article 51A with ten Fundamental Duties",
+   "url": "https://www.anantamias.com/fundamental-duties/",
+   "url2": "https://vajiramandravi.com/current-affairs/part-4a-of-indian-constitution/"
+  },
+  {
+   "claim": "The 86th Amendment (2002) added Article 51A(k): parents/guardians to provide opportunities for education to children between 6 and 14 years",
+   "url": "https://www.anantamias.com/fundamental-duties/",
+   "url2": "https://vajiramandravi.com/current-affairs/part-4a-of-indian-constitution/"
+  },
+  {
+   "claim": "Fundamental Duties are non-justiciable: courts cannot directly enforce them",
+   "url": "https://www.anantamias.com/fundamental-duties/",
+   "url2": "https://vajiramandravi.com/current-affairs/part-4a-of-indian-constitution/"
+  },
+  {
+   "claim": "In AIIMS Students' Union v. AIIMS the Supreme Court said duties are equally important as rights and relevant to interpreting laws",
+   "url": "https://www.anantamias.com/fundamental-duties/",
+   "url2": "https://vajiramandravi.com/current-affairs/part-4a-of-indian-constitution/"
+  },
+  {
+   "claim": "Courts have relied on Article 51A(g) (duty to protect and improve the natural environment) in environmental cases, e.g. M.C. Mehta (1988), M.K. Ranjitsinh (2024)",
+   "url": "https://vajiramandravi.com/current-affairs/part-4a-of-indian-constitution/",
+   "url2": "https://www.anantamias.com/fundamental-duties/"
+  }
+ ],
+ "review_note": "Spec written after the fact for the existing video and Sarvam recording; spoken text matches 18-fundamental-duties.voice.txt word for word. Claims copied from the claims table; both named secondary sources (Anantam IAS and Vajiram and Ravi) were opened and each supports every claim, so each claim carries both URLs. Still no primary source: the Constitution text of Article 51A and the AIIMS judgment were not fetched. The AIIMS year differs across sources (Vajiram 2001, Anantam 2002), so no year is shown. No environmental case is named on screen. gsPaper adds prelims-gs to the old mains-gs2 tag, as the topic is in the Prelims syllabus."
+}

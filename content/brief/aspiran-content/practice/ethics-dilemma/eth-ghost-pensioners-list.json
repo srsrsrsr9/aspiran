@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-ghost-pensioners-list",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Clearing ghost names from a pension list",
+    "hi": "पेंशन सूची से फ़र्ज़ी नाम हटाना"
+  },
+  "en": {
+    "scenario": "You are a district social welfare officer. A data match suggests that about one in ten names on the old-age pension list may be duplicates or people who have moved away. Your senior wants all flagged names stopped this month to show savings. Your field staff warn that the match is rough, and some genuine pensioners with spelling differences in their records may be cut off.",
+    "question": "What do you do about the flagged names?",
+    "options": [
+      {
+        "label": "Stop all flagged pensions now",
+        "outcome": "Savings are quick and fraud is cut, but some genuine elderly people may lose their only income without warning.",
+        "values": "Efficiency and protection of public money"
+      },
+      {
+        "label": "Verify each flagged name in the field before stopping it",
+        "outcome": "Genuine pensioners are protected, but it takes months and your senior may say you are slow.",
+        "values": "Due process and care for the vulnerable"
+      },
+      {
+        "label": "Send notices and stop payment only if there is no reply in a set time",
+        "outcome": "Most cases are sorted with less effort, but those who cannot read or travel may still miss the notice.",
+        "values": "Balance between speed and fairness"
+      }
+    ],
+    "reflect": "When cleaning up a list, which error is worse: paying someone who should not be paid, or not paying someone who should?"
+  },
+  "hi": {
+    "scenario": "आप ज़िला समाज कल्याण अधिकारी हैं। एक डेटा मिलान बताता है कि वृद्धावस्था पेंशन सूची में करीब हर दस में से एक नाम दोहराव हो सकता है या ऐसे लोगों का जो कहीं और चले गए। आपके वरिष्ठ चाहते हैं कि बचत दिखाने के लिए इसी महीने सभी चिह्नित नाम रोक दिए जाएँ। आपका फ़ील्ड स्टाफ़ चेताता है कि मिलान मोटा-मोटा है, और रिकॉर्ड में वर्तनी के अंतर वाले कुछ वास्तविक पेंशनभोगी भी कट सकते हैं।",
+    "question": "चिह्नित नामों के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "सभी चिह्नित पेंशन अभी रोकना",
+        "outcome": "बचत जल्दी होती है और धोखाधड़ी घटती है, पर कुछ वास्तविक बुज़ुर्ग बिना सूचना के अपनी इकलौती आय खो सकते हैं।",
+        "values": "दक्षता और सार्वजनिक धन की सुरक्षा"
+      },
+      {
+        "label": "रोकने से पहले हर चिह्नित नाम का फ़ील्ड सत्यापन",
+        "outcome": "वास्तविक पेंशनभोगी सुरक्षित रहते हैं, पर महीनों लगते हैं और वरिष्ठ आपको धीमा कह सकते हैं।",
+        "values": "उचित प्रक्रिया और कमज़ोर वर्गों की परवाह"
+      },
+      {
+        "label": "नोटिस भेजकर तय समय में जवाब न आने पर ही भुगतान रोकना",
+        "outcome": "कम मेहनत में अधिकांश मामले सुलझते हैं, पर जो पढ़ या यात्रा नहीं कर सकते, उनसे नोटिस फिर भी छूट सकता है।",
+        "values": "गति और निष्पक्षता के बीच संतुलन"
+      }
+    ],
+    "reflect": "सूची साफ़ करते समय कौन-सी गलती बदतर है: अपात्र को भुगतान करना, या पात्र को भुगतान न करना?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

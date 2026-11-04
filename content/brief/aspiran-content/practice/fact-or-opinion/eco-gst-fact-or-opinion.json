@@ -1,0 +1,142 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "tags": {
+    "stage": [
+      "prelims",
+      "mains"
+    ],
+    "papers": [
+      "prelims-csat",
+      "mains-gs3"
+    ],
+    "formats": [
+      "csat-rc",
+      "mains-answer"
+    ]
+  },
+  "id": "eco-gst-fact-or-opinion",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "GST: fact or opinion?",
+    "hi": "जीएसटी: तथ्य या राय?"
+  },
+  "items": [
+    {
+      "kind": "fact",
+      "en": {
+        "text": "GST came into force across India on 1 July 2017.",
+        "why": "A date on record; you can look it up."
+      },
+      "hi": {
+        "text": "जीएसटी 1 जुलाई 2017 को पूरे भारत में लागू हुआ।",
+        "why": "यह रिकॉर्ड में दर्ज तारीख है; आप इसे देख सकते हैं।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "GST has made India truly one market.",
+        "why": "'Truly one market' is a verdict; some point to the goods still outside GST."
+      },
+      "hi": {
+        "text": "जीएसटी ने भारत को सच में एक बाज़ार बना दिया है।",
+        "why": "'सच में एक बाज़ार' एक निष्कर्ष है; कुछ लोग जीएसटी से बाहर की वस्तुओं की ओर इशारा करते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The 101st Amendment added Article 246A, letting both Parliament and state legislatures make GST laws.",
+        "why": "The Article is in the Constitution text."
+      },
+      "hi": {
+        "text": "101वें संशोधन ने अनुच्छेद 246क (246A) जोड़ा, जिससे संसद और राज्य विधानमंडल दोनों जीएसटी कानून बना सकते हैं।",
+        "why": "यह अनुच्छेद संविधान के पाठ में है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Petrol and diesel should be brought under GST as soon as possible.",
+        "why": "Says what 'should' happen; states worry about losing revenue."
+      },
+      "hi": {
+        "text": "पेट्रोल और डीज़ल को जल्द से जल्द जीएसटी में लाना चाहिए।",
+        "why": "यह बताता है कि क्या 'होना चाहिए'; राज्यों को आय घटने की चिंता है।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The GST Council is chaired by the Union Finance Minister.",
+        "why": "Article 279A sets out who chairs it."
+      },
+      "hi": {
+        "text": "जीएसटी परिषद की अध्यक्षता केंद्रीय वित्त मंत्री करते हैं।",
+        "why": "अनुच्छेद 279क (279A) बताता है कि अध्यक्ष कौन होगा।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "The GST Council's decisions favour the Centre over the states.",
+        "why": "A reading of how decisions turn out; others say most decisions are by consensus."
+      },
+      "hi": {
+        "text": "जीएसटी परिषद के फ़ैसले राज्यों के बजाय केंद्र के पक्ष में जाते हैं।",
+        "why": "यह फ़ैसलों को देखने का एक नज़रिया है; दूसरे कहते हैं कि ज़्यादातर फ़ैसले सहमति से होते हैं।"
+      }
+    },
+    {
+      "kind": "fact",
+      "en": {
+        "text": "The Constitution keeps alcoholic liquor for human consumption outside GST.",
+        "why": "Article 366(12A) defines GST to leave it out."
+      },
+      "hi": {
+        "text": "संविधान मानव उपभोग की मादक शराब को जीएसटी से बाहर रखता है।",
+        "why": "अनुच्छेद 366(12क) (366(12A)) जीएसटी की परिभाषा में इसे बाहर रखता है।"
+      }
+    },
+    {
+      "kind": "opinion",
+      "en": {
+        "text": "Fewer GST rates would make the tax fairer for everyone.",
+        "why": "'Fairer for everyone' is a judgment; a single rate can weigh more on the poor."
+      },
+      "hi": {
+        "text": "जीएसटी की कम दरें इस कर को सबके लिए ज़्यादा न्यायसंगत बना देंगी।",
+        "why": "'सबके लिए न्यायसंगत' एक आकलन है; एक ही दर गरीबों पर ज़्यादा बोझ डाल सकती है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "Constitution of India, Articles 246A, 279A and 366(12A); 101st Amendment Act, 2016",
+    "hi": "भारत का संविधान, अनुच्छेद 246क (246A), 279क (279A) और 366(12क) (366(12A)); 101वाँ संशोधन अधिनियम, 2016"
+  },
+  "factsToCheck": [
+    "GST in force from 1 July 2017",
+    "GST rate changes of September 2025: no rates used here"
+  ],
+  "schema": "upsc-pods/fact-or-opinion@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

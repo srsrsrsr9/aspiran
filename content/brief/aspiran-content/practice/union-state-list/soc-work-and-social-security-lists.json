@@ -1,0 +1,152 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "soc-work-and-social-security-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Work, wages and social security",
+    "hi": "काम, मज़दूरी और सामाजिक सुरक्षा"
+  },
+  "items": [
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Welfare of labour: provident funds, pensions and maternity benefit",
+        "note": "Concurrent List entry 24, with working conditions and workmen's compensation."
+      },
+      "hi": {
+        "text": "श्रमिकों का कल्याण: भविष्य निधि, पेंशन और प्रसूति प्रसुविधा",
+        "note": "समवर्ती सूची की प्रविष्टि 24, काम की शर्तों और कर्मकार प्रतिकर के साथ।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Social security and social insurance; employment and unemployment",
+        "note": "Concurrent List entry 23."
+      },
+      "hi": {
+        "text": "सामाजिक सुरक्षा और सामाजिक बीमा; नियोजन और बेकारी",
+        "note": "समवर्ती सूची की प्रविष्टि 23।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Vocational and technical training of labour",
+        "note": "Part of Concurrent List entry 25, the same entry that covers education."
+      },
+      "hi": {
+        "text": "श्रमिकों का व्यावसायिक और तकनीकी प्रशिक्षण",
+        "note": "समवर्ती सूची की प्रविष्टि 25 का हिस्सा, वही प्रविष्टि जिसमें शिक्षा है।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Labour and safety in mines and oilfields",
+        "note": "Union List entry 55."
+      },
+      "hi": {
+        "text": "खानों और तेल क्षेत्रों में श्रम और सुरक्षा",
+        "note": "संघ सूची की प्रविष्टि 55।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Industrial disputes concerning Union employees",
+        "note": "Union List entry 61; other industrial disputes are Concurrent."
+      },
+      "hi": {
+        "text": "संघ के कर्मचारियों से जुड़े औद्योगिक विवाद",
+        "note": "संघ सूची की प्रविष्टि 61; बाकी औद्योगिक विवाद समवर्ती हैं।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Inter-state migration",
+        "note": "Union List entry 81."
+      },
+      "hi": {
+        "text": "अंतरराज्यिक प्रवास",
+        "note": "संघ सूची की प्रविष्टि 81।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Relief of the disabled and those unable to work",
+        "note": "State List entry 9."
+      },
+      "hi": {
+        "text": "दिव्यांगों और काम करने में असमर्थ लोगों की सहायता",
+        "note": "राज्य सूची की प्रविष्टि 9।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Pensions paid by the state",
+        "note": "State List entry 42."
+      },
+      "hi": {
+        "text": "राज्य द्वारा दी जाने वाली पेंशन",
+        "note": "राज्य सूची की प्रविष्टि 42।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Constitution of India, Article 246 and Seventh Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 246 और सातवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "Seventh Schedule entry numbers and list placement as in the current official text (Legislative Department, India Code)"
+  ],
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

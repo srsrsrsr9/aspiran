@@ -1,0 +1,288 @@
+{
+ "n": 20,
+ "id": "inflation-band",
+ "title": "India's inflation target is a band, not a number",
+ "format": "cards",
+ "tone": "NEUTRAL",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "sources": [
+  "RBI Act, 1934, Section 45ZA (Central Government, in consultation with the RBI, determines the inflation target once every five years)",
+  "Department of Economic Affairs gazette notification, 25 March 2026: CPI inflation target 4% with upper tolerance 6% and lower tolerance 2%, 1 April 2026 to 31 March 2031 (Business Today; Drishti IAS)",
+  "RBI Act, Section 45ZN: failure = inflation outside the band for three consecutive quarters; RBI reports reasons, remedial actions and time to return (Drishti IAS; Tribune)",
+  "First such report finalised by the MPC on 3 November 2022 (Tribune; Business Today)"
+ ],
+ "quiz": {
+  "q": "What is the tolerance band around India's inflation target?",
+  "options": [
+   "Plus or minus 1 point: 3 to 5%",
+   "Plus or minus 2 points: 2 to 6%",
+   "Plus or minus 3 points: 1 to 7%",
+   "No band: exactly 4%"
+  ],
+  "answerIndex": 1,
+  "why": "Right. The target for April 2026 to March 2031 is 4% CPI inflation, with a lower tolerance of 2% and an upper tolerance of 6%."
+ },
+ "script": [
+  [
+   [
+    "India's inflation target is 4 percent.",
+    "India's inflation target is four percent.",
+    1.0,
+    0.25,
+    1.0
+   ]
+  ],
+  [
+   [
+    "But the RBI isn't told to hit exactly 4.",
+    "But the R B I isn't told to hit exactly four.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The target comes with a band:",
+    null,
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "2 to 6 percent, on retail inflation.",
+    "two to six percent, on retail inflation.",
+    0.96,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Under the RBI Act,",
+    "Under the R B I Act,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "the government sets it with the RBI, every five years.",
+    "the government sets it with the R B I, every five years.",
+    0.98,
+    0.4,
+    1.0
+   ]
+  ],
+  [
+   [
+    "In March 2026,",
+    "In March twenty twenty-six,",
+    1.0,
+    0.1,
+    1.0
+   ],
+   [
+    "it kept the target at 4 percent, plus or minus 2,",
+    "it kept the target at four percent, plus or minus two,",
+    0.98,
+    0.1,
+    1.0
+   ],
+   [
+    "until March 2031.",
+    "until March twenty thirty-one.",
+    0.96,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Stay outside the band for three quarters in a row,",
+    null,
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "and the RBI must report to the government:",
+    "and the R B I must report to the government:",
+    1.0,
+    0.12,
+    1.0
+   ],
+   [
+    "why, what it will do, and by when.",
+    null,
+    0.95,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "It sent its first such report in November 2022.",
+    "It sent its first such report in November twenty twenty-two.",
+    0.98,
+    0.45,
+    1.0
+   ]
+  ],
+  [
+   [
+    "The number is the aim.",
+    null,
+    0.92,
+    0.25,
+    1.0
+   ],
+   [
+    "The band is the accountability.",
+    null,
+    0.9,
+    0.5,
+    1.0
+   ]
+  ],
+  [
+   [
+    "Your turn.",
+    null,
+    0.95,
+    0.3,
+    1.0
+   ],
+   [
+    "What is the tolerance band around India's inflation target?",
+    null,
+    0.98,
+    0.8,
+    1.0
+   ]
+  ]
+ ],
+ "scenes": [
+  {
+   "sent": [
+    0,
+    1
+   ],
+   "type": "title",
+   "lines": [
+    "Target: 4%",
+    "Not exactly 4"
+   ],
+   "icon": "coin"
+  },
+  {
+   "sent": [
+    2,
+    2
+   ],
+   "type": "stat",
+   "value": "2-6%",
+   "label": "Tolerance band",
+   "sub": "On retail (CPI) inflation",
+   "at": "2 to 6 percent"
+  },
+  {
+   "sent": [
+    3,
+    4
+   ],
+   "type": "list",
+   "heading": "Who sets it, and for how long",
+   "items": [
+    {
+     "text": "The government, with the RBI",
+     "at": "sets it with the RBI"
+    },
+    {
+     "text": "Every five years",
+     "at": "every five years"
+    },
+    {
+     "text": "Kept at 4% plus or minus 2 until March 2031",
+     "at": "until March 2031"
+    }
+   ]
+  },
+  {
+   "sent": [
+    5,
+    6
+   ],
+   "type": "chain",
+   "heading": "Outside the band",
+   "steps": [
+    {
+     "text": "Three quarters in a row",
+     "at": "three quarters in a row"
+    },
+    {
+     "text": "RBI reports to the government",
+     "at": "must report"
+    },
+    {
+     "text": "Why, what it will do, by when",
+     "at": "what it will do"
+    },
+    {
+     "text": "First report: November 2022",
+     "at": "November 2022"
+    }
+   ]
+  },
+  {
+   "sent": [
+    7,
+    7
+   ],
+   "type": "compare",
+   "heading": "Two parts of the target",
+   "left": {
+    "label": "The number",
+    "text": "The aim",
+    "at": "The number is the aim"
+   },
+   "right": {
+    "label": "The band",
+    "text": "The accountability",
+    "at": "The band is the accountability"
+   }
+  },
+  {
+   "sent": [
+    8,
+    8
+   ],
+   "type": "quiz"
+  }
+ ],
+ "claims": [
+  {
+   "claim": "The inflation target is 4% CPI with lower tolerance 2% and upper tolerance 6%, retained by gazette notification of 25 March 2026 for 1 April 2026 to 31 March 2031",
+   "url": "https://www.businesstoday.in/latest/economy/story/govt-retains-inflation-target-at-4-with-2-6-band-for-next-five-years-522390-2026-03-25",
+   "url2": "https://www.drishtiias.com/daily-updates/daily-news-analysis/india-retains-4-inflation-target-for-rbi"
+  },
+  {
+   "claim": "Under Section 45ZA of the RBI Act, the Central Government, in consultation with the RBI, sets the target once every five years; it is measured on headline CPI (retail) inflation",
+   "url": "https://www.drishtiias.com/daily-updates/daily-news-analysis/india-retains-4-inflation-target-for-rbi",
+   "url2": "https://www.businesstoday.in/latest/economy/story/govt-retains-inflation-target-at-4-with-2-6-band-for-next-five-years-522390-2026-03-25"
+  },
+  {
+   "claim": "If inflation stays outside the band for three consecutive quarters, the RBI must report to the government the reasons, remedial actions and the time to return to target (Section 45ZN)",
+   "url": "https://www.drishtiias.com/daily-updates/daily-news-analysis/india-retains-4-inflation-target-for-rbi",
+   "url2": "https://www.tribuneindia.com/news/business/rbi-panel-meets-to-finalise-inflation-report-for-govt-447512"
+  },
+  {
+   "claim": "The RBI's first report on missing the inflation target was finalised and sent in November 2022",
+   "url": "https://www.tribuneindia.com/news/business/rbi-panel-meets-to-finalise-inflation-report-for-govt-447512",
+   "url2": "https://www.businesstoday.in/latest/economy/story/rbi-meet-concludes-governor-shaktikanta-das-others-finalise-draft-report-on-retail-inflation-for-govt-351761-2022-11-03"
+  }
+ ],
+ "review_note": "Spec written after the fact for the existing video and Sarvam recording; spoken text matches 20-inflation-band.voice.txt word for word. Claims copied from the claims table. Claim 1's original URL (indianbankingnews.com) did not open, so it now cites Business Today (25 Mar 2026, opened: notification under Section 45ZA, 4% with 2-6% band, 1 April 2026 to 31 March 2031) and Drishti IAS. Claim 3 adds the Tribune (reasons, remedial actions, time frame). Claim 4: both sources say the MPC met on 3 November 2022 under Section 45ZN to finalise the report to be sent; neither shows the date the letter reached the government, so 'sent in November 2022' rests on reports. Not fetched: the gazette and the RBI Act text (no primary source yet). gsPaper adds prelims-gs."
+}

@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "eco-msme-size-limits-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "MSME size limits",
+    "hi": "एमएसएमई की आकार सीमाएँ"
+  },
+  "prompt": {
+    "en": "Rank these MSME limits by amount, highest first.",
+    "hi": "एमएसएमई की इन सीमाओं को राशि के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "Rs crore",
+    "hi": "करोड़ रुपये"
+  },
+  "items": [
+    {
+      "value": 500,
+      "en": {
+        "label": "Medium enterprise: turnover limit"
+      },
+      "hi": {
+        "label": "मध्यम उद्यम: टर्नओवर सीमा"
+      }
+    },
+    {
+      "value": 125,
+      "en": {
+        "label": "Medium enterprise: investment limit"
+      },
+      "hi": {
+        "label": "मध्यम उद्यम: निवेश सीमा"
+      }
+    },
+    {
+      "value": 100,
+      "en": {
+        "label": "Small enterprise: turnover limit"
+      },
+      "hi": {
+        "label": "लघु उद्यम: टर्नओवर सीमा"
+      }
+    },
+    {
+      "value": 25,
+      "en": {
+        "label": "Small enterprise: investment limit"
+      },
+      "hi": {
+        "label": "लघु उद्यम: निवेश सीमा"
+      }
+    },
+    {
+      "value": 10,
+      "en": {
+        "label": "Micro enterprise: turnover limit"
+      },
+      "hi": {
+        "label": "सूक्ष्म उद्यम: टर्नओवर सीमा"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "These limits were raised from 1 April 2025. Each turnover limit is four times its investment limit; a micro enterprise may invest up to Rs 2.5 crore.",
+    "hi": "ये सीमाएँ 1 अप्रैल 2025 से बढ़ाई गईं। हर टर्नओवर सीमा उसकी निवेश सीमा की चार गुनी है; सूक्ष्म उद्यम 2.5 करोड़ रुपये तक निवेश कर सकता है।"
+  },
+  "memoryHook": {
+    "en": "Turnover is four times investment at every level: 10 and 2.5, 100 and 25, 500 and 125.",
+    "hi": "हर स्तर पर टर्नओवर निवेश का चार गुना: 10 और 2.5, 100 और 25, 500 और 125।"
+  },
+  "sources": {
+    "en": "Micro, Small and Medium Enterprises Development Act, 2006, section 7; Ministry of MSME notification of March 2025",
+    "hi": "सूक्ष्म, लघु और मध्यम उद्यम विकास अधिनियम, 2006, धारा 7; एमएसएमई मंत्रालय की मार्च 2025 की अधिसूचना"
+  },
+  "factsToCheck": [
+    "Revised limits in force from 1 April 2025: micro investment Rs 2.5 crore / turnover Rs 10 crore; small Rs 25 crore / Rs 100 crore; medium Rs 125 crore / Rs 500 crore",
+    "Confirm the notification number and date (March 2025) on the Ministry of MSME site"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

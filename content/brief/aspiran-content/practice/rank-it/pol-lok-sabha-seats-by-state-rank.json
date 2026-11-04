@@ -1,0 +1,114 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "pol-lok-sabha-seats-by-state-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Lok Sabha seats: the five biggest states",
+    "hi": "लोकसभा सीटें: पाँच सबसे बड़े राज्य"
+  },
+  "prompt": {
+    "en": "Rank by number of Lok Sabha seats, most first.",
+    "hi": "लोकसभा सीटों की संख्या के अनुसार क्रम दें, सबसे अधिक पहले।"
+  },
+  "unit": {
+    "en": "seats",
+    "hi": "सीटें"
+  },
+  "items": [
+    {
+      "value": 80,
+      "en": {
+        "label": "Uttar Pradesh"
+      },
+      "hi": {
+        "label": "उत्तर प्रदेश"
+      }
+    },
+    {
+      "value": 48,
+      "en": {
+        "label": "Maharashtra"
+      },
+      "hi": {
+        "label": "महाराष्ट्र"
+      }
+    },
+    {
+      "value": 42,
+      "en": {
+        "label": "West Bengal"
+      },
+      "hi": {
+        "label": "पश्चिम बंगाल"
+      }
+    },
+    {
+      "value": 40,
+      "en": {
+        "label": "Bihar"
+      },
+      "hi": {
+        "label": "बिहार"
+      }
+    },
+    {
+      "value": 39,
+      "en": {
+        "label": "Tamil Nadu"
+      },
+      "hi": {
+        "label": "तमिलनाडु"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "These five states hold 249 of the 543 elected seats. Seats per state are frozen until a delimitation after the first census taken after 2026 (Article 82).",
+    "hi": "इन पाँच राज्यों के पास 543 निर्वाचित सीटों में से 249 हैं। हर राज्य की सीटें 2026 के बाद की पहली जनगणना पर आधारित परिसीमन तक स्थिर हैं (अनुच्छेद 82)।"
+  },
+  "memoryHook": {
+    "en": "UP stands alone at 80; the next four sit close together, from 48 down to 39.",
+    "hi": "उत्तर प्रदेश 80 पर अकेला है; बाकी चार 48 से 39 के बीच पास-पास हैं।"
+  },
+  "sources": {
+    "en": "Representation of the People Act, 1950, First Schedule; Delimitation of Parliamentary and Assembly Constituencies Order, 2008; Constitution of India, Article 82",
+    "hi": "लोक प्रतिनिधित्व अधिनियम, 1950, पहली अनुसूची; संसदीय और विधानसभा निर्वाचन क्षेत्रों का परिसीमन आदेश, 2008; भारत का संविधान, अनुच्छेद 82"
+  },
+  "factsToCheck": [
+    "Lok Sabha seats as at the 2024 general election: UP 80, Maharashtra 48, West Bengal 42, Bihar 40, Tamil Nadu 39 (total elected seats 543)",
+    "Freeze on seats per state until the first census after 2026 (Article 82, as amended by the 84th Amendment, 2001)"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

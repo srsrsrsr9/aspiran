@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-festival-gift-hamper",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A festival hamper from a contractor",
+    "hi": "ठेकेदार का त्योहारी उपहार"
+  },
+  "en": {
+    "scenario": "You are an executive engineer in a public works division. During a festival, a contractor whose road project you supervise sends a large hamper of sweets, dry fruits and an expensive watch to your home. Your family has already opened it. Colleagues say such gifts are common at festival time and refusing them is seen as rude. The contractor's next bill is due for your approval next week.",
+    "question": "What do you do with the gift?",
+    "options": [
+      {
+        "label": "Return the whole hamper with a polite note",
+        "outcome": "Your position is clear and the bill can be judged on merit, but the contractor and some colleagues may see you as unfriendly.",
+        "values": "Integrity and objectivity over social custom"
+      },
+      {
+        "label": "Keep the sweets, return the watch",
+        "outcome": "You avoid seeming rude while refusing the costly item, but you have still accepted something from a party whose work you judge.",
+        "values": "Courtesy balanced against a partial line"
+      },
+      {
+        "label": "Keep it, but deposit the watch with the office and record it",
+        "outcome": "The gift is on record under the conduct rules, but the contractor may still expect goodwill in return.",
+        "values": "Rule-based compliance and disclosure"
+      }
+    ],
+    "reflect": "Where does a courtesy end and an obligation begin, and who decides that?"
+  },
+  "hi": {
+    "scenario": "आप एक लोक निर्माण खंड में कार्यपालक अभियंता हैं। एक त्योहार पर, जिस ठेकेदार की सड़क परियोजना की आप निगरानी करते हैं, वह आपके घर मिठाई, सूखे मेवे और एक महँगी घड़ी वाला बड़ा उपहार भेजता है। आपका परिवार उसे खोल चुका है। सहकर्मी कहते हैं कि त्योहार पर ऐसे उपहार आम हैं और लौटाना अशिष्टता मानी जाती है। ठेकेदार का अगला बिल अगले हफ़्ते आपकी मंज़ूरी के लिए आना है।",
+    "question": "आप उपहार का क्या करेंगे?",
+    "options": [
+      {
+        "label": "विनम्र पत्र के साथ पूरा उपहार लौटाना",
+        "outcome": "आपका रुख स्पष्ट रहता है और बिल को गुण-दोष पर परखा जा सकता है, पर ठेकेदार और कुछ सहकर्मी आपको रूखा मान सकते हैं।",
+        "values": "सामाजिक रिवाज से ऊपर सत्यनिष्ठा और वस्तुनिष्ठता"
+      },
+      {
+        "label": "मिठाई रखना, घड़ी लौटाना",
+        "outcome": "महँगी चीज़ लौटाते हुए आप अशिष्ट नहीं दिखते, पर आपने फिर भी उस पक्ष से कुछ लिया जिसके काम का आप मूल्यांकन करते हैं।",
+        "values": "शिष्टाचार और एक आंशिक सीमा का संतुलन"
+      },
+      {
+        "label": "रखना, पर घड़ी कार्यालय में जमा कर दर्ज करना",
+        "outcome": "आचरण नियमों के तहत उपहार दर्ज हो जाता है, पर ठेकेदार फिर भी बदले में सद्भाव की उम्मीद कर सकता है।",
+        "values": "नियम आधारित अनुपालन और प्रकटीकरण"
+      }
+    ],
+    "reflect": "शिष्टाचार कहाँ खत्म होता है और दायित्व कहाँ शुरू होता है, और यह कौन तय करता है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

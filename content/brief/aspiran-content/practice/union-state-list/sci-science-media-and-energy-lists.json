@@ -1,0 +1,152 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "sci-science-media-and-energy-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Science, surveys, media and energy",
+    "hi": "विज्ञान, सर्वेक्षण, मीडिया और ऊर्जा"
+  },
+  "items": [
+    {
+      "list": "union",
+      "en": {
+        "text": "Posts, telephones, wireless and broadcasting",
+        "note": "Union List entry 31, which also covers other forms of communication."
+      },
+      "hi": {
+        "text": "डाक, टेलीफ़ोन, बेतार और प्रसारण",
+        "note": "संघ सूची की प्रविष्टि 31, जिसमें संचार के दूसरे रूप भी आते हैं।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Survey of India and the geological, botanical and zoological surveys",
+        "note": "Union List entry 68."
+      },
+      "hi": {
+        "text": "भारतीय सर्वेक्षण तथा भूवैज्ञानिक, वनस्पति और प्राणि सर्वेक्षण",
+        "note": "संघ सूची की प्रविष्टि 68।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Meteorological organisations",
+        "note": "Also Union List entry 68; weather forecasting is central."
+      },
+      "hi": {
+        "text": "मौसम विज्ञान संगठन",
+        "note": "यह भी संघ सूची की प्रविष्टि 68 में है; मौसम का पूर्वानुमान केंद्र का विषय है।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Gas and gas-works",
+        "note": "State List entry 25."
+      },
+      "hi": {
+        "text": "गैस और गैस संकर्म",
+        "note": "राज्य सूची की प्रविष्टि 25।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Taxes on the sale and use of electricity",
+        "note": "State List entry 53, so electricity duty is a state tax."
+      },
+      "hi": {
+        "text": "बिजली की बिक्री और उपभोग पर कर",
+        "note": "राज्य सूची की प्रविष्टि 53, इसलिए बिजली शुल्क राज्य का कर है।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Drugs and poisons",
+        "note": "Concurrent List entry 19; the Drugs and Cosmetics Act, 1940 is central."
+      },
+      "hi": {
+        "text": "औषधि और विष",
+        "note": "समवर्ती सूची की प्रविष्टि 19; औषधि और प्रसाधन सामग्री अधिनियम, 1940 केंद्रीय है।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Newspapers, books and printing presses",
+        "note": "Concurrent List entry 39."
+      },
+      "hi": {
+        "text": "समाचार पत्र, पुस्तकें और मुद्रणालय",
+        "note": "समवर्ती सूची की प्रविष्टि 39।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Boilers",
+        "note": "Concurrent List entry 37; boiler safety law is central, run by states."
+      },
+      "hi": {
+        "text": "बॉयलर",
+        "note": "समवर्ती सूची की प्रविष्टि 37; बॉयलर सुरक्षा कानून केंद्रीय है और राज्य उसे लागू करते हैं।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Constitution of India, Article 246 and Seventh Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 246 और सातवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "Seventh Schedule entry numbers and list placement as in the current official text (Legislative Department, India Code)"
+  ],
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

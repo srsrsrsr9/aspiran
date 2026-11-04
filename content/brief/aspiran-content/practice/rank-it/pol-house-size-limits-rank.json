@@ -1,0 +1,116 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tap",
+    "snap": "sfx/snap",
+    "wrong": "sfx/nudge",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1"
+    ],
+    "formats": [
+      "pre-order",
+      "pre-data"
+    ]
+  },
+  "id": "pol-house-size-limits-rank",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "How big can a House be?",
+    "hi": "सदन कितना बड़ा हो सकता है?"
+  },
+  "prompt": {
+    "en": "Rank these limits on the size of a House, largest first.",
+    "hi": "सदन के आकार की इन सीमाओं को क्रम दें, सबसे बड़ी पहले।"
+  },
+  "unit": {
+    "en": "members",
+    "hi": "सदस्य"
+  },
+  "items": [
+    {
+      "value": 550,
+      "en": {
+        "label": "Lok Sabha: most members allowed"
+      },
+      "hi": {
+        "label": "लोकसभा: अधिकतम सदस्य"
+      }
+    },
+    {
+      "value": 500,
+      "en": {
+        "label": "State Legislative Assembly: most members allowed"
+      },
+      "hi": {
+        "label": "राज्य विधानसभा: अधिकतम सदस्य"
+      }
+    },
+    {
+      "value": 250,
+      "en": {
+        "label": "Rajya Sabha: most members allowed"
+      },
+      "hi": {
+        "label": "राज्यसभा: अधिकतम सदस्य"
+      }
+    },
+    {
+      "value": 60,
+      "en": {
+        "label": "State Legislative Assembly: fewest members allowed"
+      },
+      "hi": {
+        "label": "राज्य विधानसभा: न्यूनतम सदस्य"
+      }
+    },
+    {
+      "value": 40,
+      "en": {
+        "label": "State Legislative Council: fewest members allowed"
+      },
+      "hi": {
+        "label": "राज्य विधान परिषद: न्यूनतम सदस्य"
+      }
+    }
+  ],
+  "takeaway": {
+    "en": "Article 81 allows up to 530 members from states and 20 from Union territories. A few small states have fewer than 60 MLAs under special provisions, such as Article 371F for Sikkim.",
+    "hi": "अनुच्छेद 81 राज्यों से अधिकतम 530 और संघ राज्यक्षेत्रों से 20 सदस्यों की अनुमति देता है। कुछ छोटे राज्यों में विशेष प्रावधानों से 60 से कम विधायक हैं, जैसे सिक्किम के लिए अनुच्छेद 371च (371F)।"
+  },
+  "memoryHook": {
+    "en": "Lok Sabha 550 and Rajya Sabha 250 differ by 300; an assembly runs from 60 to 500.",
+    "hi": "लोकसभा 550 और राज्यसभा 250 में 300 का अंतर है; विधानसभा 60 से 500 तक हो सकती है।"
+  },
+  "sources": {
+    "en": "Constitution of India, Articles 80, 81, 170 and 171",
+    "hi": "भारत का संविधान, अनुच्छेद 80, 81, 170 और 171"
+  },
+  "factsToCheck": [
+    "Article 81: up to 530 from states and 20 from Union territories (550); Anglo-Indian nominations under Article 331 ended in January 2020 (104th Amendment)",
+    "Article 80: Rajya Sabha up to 250 (238 elected plus 12 nominated)",
+    "Article 170: assembly not more than 500 and not less than 60",
+    "Article 171: council not more than one-third of the assembly and not less than 40"
+  ],
+  "schema": "upsc-pods/rank-it@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

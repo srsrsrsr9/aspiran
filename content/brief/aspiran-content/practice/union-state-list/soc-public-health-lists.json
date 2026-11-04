@@ -1,0 +1,175 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "fly": "sfx/whoosh",
+    "land": "sfx/snap",
+    "wrong": "sfx/nudge"
+  },
+  "bucketNames": {
+    "en": [
+      "Union List",
+      "State List",
+      "Concurrent List"
+    ],
+    "hi": [
+      "संघ सूची",
+      "राज्य सूची",
+      "समवर्ती सूची"
+    ]
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-gs1",
+      "mains-gs2"
+    ],
+    "formats": [
+      "pre-select-items"
+    ]
+  },
+  "id": "soc-public-health-lists",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Health, food safety and welfare",
+    "hi": "स्वास्थ्य, खाद्य सुरक्षा और कल्याण"
+  },
+  "items": [
+    {
+      "list": "state",
+      "en": {
+        "text": "Public health and sanitation; hospitals and dispensaries",
+        "note": "State List entry 6, so health services are mainly run by states."
+      },
+      "hi": {
+        "text": "लोक स्वास्थ्य और स्वच्छता; अस्पताल और औषधालय",
+        "note": "राज्य सूची की प्रविष्टि 6, इसलिए स्वास्थ्य सेवाएँ मुख्य रूप से राज्य चलाते हैं।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Intoxicating liquors",
+        "note": "State List entry 8; this is why prohibition differs from state to state."
+      },
+      "hi": {
+        "text": "मादक शराब",
+        "note": "राज्य सूची की प्रविष्टि 8; इसीलिए शराबबंदी हर राज्य में अलग है।"
+      }
+    },
+    {
+      "list": "state",
+      "en": {
+        "text": "Burials, burial grounds and cremation grounds",
+        "note": "State List entry 10."
+      },
+      "hi": {
+        "text": "शव गाड़ना, कब्रिस्तान और श्मशान",
+        "note": "राज्य सूची की प्रविष्टि 10।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Adulteration of foodstuffs",
+        "note": "Concurrent List entry 18; the Food Safety and Standards Act, 2006 is a central law."
+      },
+      "hi": {
+        "text": "खाद्य पदार्थों में मिलावट",
+        "note": "समवर्ती सूची की प्रविष्टि 18; खाद्य सुरक्षा और मानक अधिनियम, 2006 केंद्रीय कानून है।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Stopping infectious diseases spreading from one state to another",
+        "note": "Concurrent List entry 29."
+      },
+      "hi": {
+        "text": "संक्रामक रोगों को एक राज्य से दूसरे राज्य में फैलने से रोकना",
+        "note": "समवर्ती सूची की प्रविष्टि 29।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Mental illness and its care (the entry says 'lunacy and mental deficiency')",
+        "note": "Concurrent List entry 16."
+      },
+      "hi": {
+        "text": "मानसिक रोग और उसकी देखभाल (प्रविष्टि में 'पागलपन और मानसिक दुर्बलता' लिखा है)",
+        "note": "समवर्ती सूची की प्रविष्टि 16।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Medical, legal and other professions",
+        "note": "Concurrent List entry 26."
+      },
+      "hi": {
+        "text": "चिकित्सा, विधि और अन्य वृत्तियाँ",
+        "note": "समवर्ती सूची की प्रविष्टि 26।"
+      }
+    },
+    {
+      "list": "concurrent",
+      "en": {
+        "text": "Registration of births and deaths",
+        "note": "Concurrent List entry 30, under vital statistics."
+      },
+      "hi": {
+        "text": "जन्म और मृत्यु का पंजीकरण",
+        "note": "समवर्ती सूची की प्रविष्टि 30, जन्म-मृत्यु आँकड़ों के अंतर्गत।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Port quarantine and seamen's hospitals",
+        "note": "Union List entry 28."
+      },
+      "hi": {
+        "text": "पत्तन संगरोध और नाविक अस्पताल",
+        "note": "संघ सूची की प्रविष्टि 28।"
+      }
+    },
+    {
+      "list": "union",
+      "en": {
+        "text": "Inter-state quarantine",
+        "note": "Union List entry 81, with inter-state migration."
+      },
+      "hi": {
+        "text": "अंतरराज्यिक संगरोध",
+        "note": "संघ सूची की प्रविष्टि 81, अंतरराज्यिक प्रवास के साथ।"
+      }
+    }
+  ],
+  "memoryHook": null,
+  "sources": {
+    "en": "Constitution of India, Article 246 and Seventh Schedule",
+    "hi": "भारत का संविधान, अनुच्छेद 246 और सातवीं अनुसूची"
+  },
+  "factsToCheck": [
+    "Seventh Schedule entry numbers and list placement as in the current official text (Legislative Department, India Code)",
+    "Food Safety and Standards Act, 2006 (central law under Concurrent List entry 18)"
+  ],
+  "schema": "upsc-pods/union-state-list@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X7)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

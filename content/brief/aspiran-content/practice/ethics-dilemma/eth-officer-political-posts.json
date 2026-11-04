@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-officer-political-posts",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "A junior officer's posts online",
+    "hi": "एक कनिष्ठ अधिकारी की ऑनलाइन पोस्ट"
+  },
+  "en": {
+    "scenario": "You are a district superintendent of a government department. A capable junior officer in your team has been posting sharp comments on social media about a political party's policies, under his own name. The posts are not abusive and many people agree with them. A local party worker has complained to you that the officer is not neutral and asked for action.",
+    "question": "How do you respond to the complaint?",
+    "options": [
+      {
+        "label": "Issue a formal warning under the conduct rules",
+        "outcome": "Neutrality of the service is upheld, but the officer may feel his free speech is curbed and morale in the team may dip.",
+        "values": "Political neutrality and rule of law"
+      },
+      {
+        "label": "Counsel him privately to stop and remove the posts",
+        "outcome": "The issue may end quietly and his career is protected, but the complainant may see no action and the rule is applied informally.",
+        "values": "Guidance and proportion over formal action"
+      },
+      {
+        "label": "Take no action, as the posts are polite",
+        "outcome": "His expression is respected, but the public may doubt that he treats all citizens alike, whatever their politics.",
+        "values": "Freedom of expression over service neutrality"
+      }
+    ],
+    "reflect": "Can a civil servant be neutral in public and still hold strong views in private? Where is the line?"
+  },
+  "hi": {
+    "scenario": "आप एक सरकारी विभाग के ज़िला अधीक्षक हैं। आपकी टीम का एक सक्षम कनिष्ठ अधिकारी अपने नाम से सोशल मीडिया पर एक राजनीतिक दल की नीतियों पर तीखी टिप्पणियाँ करता रहा है। पोस्ट अपमानजनक नहीं हैं और कई लोग उनसे सहमत हैं। एक स्थानीय दल कार्यकर्ता ने आपसे शिकायत की है कि अधिकारी तटस्थ नहीं है और कार्रवाई माँगी है।",
+    "question": "आप शिकायत का जवाब कैसे देंगे?",
+    "options": [
+      {
+        "label": "आचरण नियमों के तहत औपचारिक चेतावनी देना",
+        "outcome": "सेवा की तटस्थता बनी रहती है, पर अधिकारी को लग सकता है कि उसकी अभिव्यक्ति दबाई गई और टीम का मनोबल गिर सकता है।",
+        "values": "राजनीतिक तटस्थता और विधि का शासन"
+      },
+      {
+        "label": "अकेले में समझाकर पोस्ट हटाने को कहना",
+        "outcome": "मामला चुपचाप खत्म हो सकता है और उसका करियर बचता है, पर शिकायतकर्ता को कोई कार्रवाई नहीं दिखती और नियम अनौपचारिक रूप से लागू होता है।",
+        "values": "औपचारिक कार्रवाई से ऊपर मार्गदर्शन और अनुपात"
+      },
+      {
+        "label": "पोस्ट विनम्र होने से कोई कार्रवाई न करना",
+        "outcome": "उसकी अभिव्यक्ति का सम्मान होता है, पर जनता को संदेह हो सकता है कि वह हर राजनीतिक विचार वाले नागरिक से समान व्यवहार करता है।",
+        "values": "सेवा की तटस्थता से ऊपर अभिव्यक्ति की स्वतंत्रता"
+      }
+    ],
+    "reflect": "क्या कोई लोक सेवक सार्वजनिक रूप से तटस्थ रहते हुए निजी तौर पर मज़बूत विचार रख सकता है? सीमा कहाँ है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

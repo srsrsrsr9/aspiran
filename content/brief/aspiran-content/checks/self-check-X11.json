@@ -1,0 +1,22 @@
+{
+  "batch": "X11",
+  "checksRun": [
+    "python3 check.py (valid JSON; top-level key order, schema value, mood, sfx, tone and tags.stage/formats identical to practice-format-samples-2; nested key shape identical to the sample; ethics-dilemma tags identical to the sample (mains-gs4); review.status draft; id matches filename and uses an allowed subject prefix; factsToCheck, where present, is a non-empty list just before 'schema'; en and hi have the same number of beats, options and spokes; the same numbers appear in en and hi of each beat or side, allowing for the Latin form in brackets; Devanagari in every Hindi field, no Devanagari digits, no Latin article letter in Hindi outside brackets; no rank, score, timer, streak or exam-prediction wording; no tragic-event words; no answer key or 'best option' wording in dilemmas; manifest lists exactly the files in the zip)",
+    "ids checked against existing-titles.md, every id in earlier zips in aspiran-batches (A, B, F, P, X1-X5, B30), the samples, and the X8, X10 and X-fix zips already saved by other threads: no clash",
+    "50 files: story-beats 15 files / 60 beats, ethics-dilemma 20 files / 60 options, link-web 15 files / 90 spokes",
+    "factsToCheck entries: 59 across 26 files; the 20 dilemmas and 4 link-webs with no dates or numbers carry none",
+    "0 issues on the final run"
+  ],
+  "issuesFound": [
+    "A dilemma option label used the word 'score' ('not score your cousin'), which the banned-word check flags",
+    "First number check flagged three Hindi beats where the Latin form in brackets (279A, 8(1)(j)) and 'Part IX' / 'भाग 9' repeat or differ in form"
+  ],
+  "fixed": [
+    "Changed to 'not mark your cousin'",
+    "Checked by hand that the numbers match; the check now ignores the bracketed Latin form and reads Part IX as 9"
+  ],
+  "stillOpen": [
+    "See QUESTIONS-FOR-OWNER-part5-X11.md"
+  ],
+  "finalRunIssues": []
+}

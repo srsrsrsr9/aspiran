@@ -1,0 +1,22 @@
+{
+  "batch": "X9",
+  "checksRun": [
+    "python3 check.py on X9 (valid JSON; top-level keys in the same order as practice-format-samples-2 with factsToCheck as a list just before 'schema'; schema, mood, sfx and tone identical to the sample; inner keys of en, hi, title and sources as in the sample; review.status draft; id matches filename and uses an allowed subject prefix; versus rows have label/a/b and the same count in en and hi; two-levels keywords same count in en and hi; before-after year is a number; Devanagari in every Hindi field; no Devanagari digits; no Latin article letters in Hindi outside brackets; first Hindi mention of each lettered article or section followed by the Latin form in brackets; no rank, score, timer, streak or exam-prediction wording; ids unique within X9 and against existing-titles.md and every id in the zips in aspiran-batches, including X8, X10, X11 and X-fix)",
+    "50 files: versus 20 (120 rows), before-after 15, two-levels 15",
+    "factsToCheck entries: 69",
+    "Answer-index checks do not apply: none of the three formats has answer indices",
+    "Tragic-topic word scan on English text: one hit ('deaths' as a demographic term in the sex-ratio file), reviewed and kept"
+  ],
+  "issuesFound": [
+    "Hindi article letters at first mention needed the Latin form in brackets in several files (for example 75(1क) [75(1A)], 243ण [243O])",
+    "Pardoning power of President versus Governor was dropped as a versus topic: the Governor and death sentences point is contested after the 2021 Supreme Court ruling, so it was replaced with ECI versus State Election Commission",
+    "in-situ versus ex-situ conservation would have reused the id of an existing bucket-sort file; replaced with stratospheric versus ground-level ozone"
+  ],
+  "fixed": [
+    "All of the above"
+  ],
+  "stillOpen": [
+    "Editor check of every factsToCheck item"
+  ],
+  "finalRunIssues": []
+}

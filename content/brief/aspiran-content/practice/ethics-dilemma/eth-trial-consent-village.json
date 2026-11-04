@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-trial-consent-village",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Consent forms in a medicine trial",
+    "hi": "दवा परीक्षण में सहमति पत्र"
+  },
+  "en": {
+    "scenario": "You are a district health officer. A private firm, with the required approvals, is running a trial of a new medicine for anaemia in some villages. During a visit you find that many participants signed consent forms in English they could not read, and some believe the medicine is a free government supply. The trial could help many women if it works, and stopping it would delay results by a year.",
+    "question": "What do you do about the trial?",
+    "options": [
+      {
+        "label": "Report to the ethics committee and regulator and ask for a pause",
+        "outcome": "Participants' rights are protected and consent can be taken again properly, but the trial is delayed and the firm may resist.",
+        "values": "Autonomy and informed consent over speed"
+      },
+      {
+        "label": "Let it run while the firm re-explains and re-takes consent",
+        "outcome": "The trial continues and consent improves, but those already enrolled took part without truly understanding it.",
+        "values": "Correction without disruption"
+      },
+      {
+        "label": "Leave it, as the trial has approvals",
+        "outcome": "There is no conflict with the firm and the results come sooner, but people continue in a study they did not knowingly join.",
+        "values": "Formal compliance over substantive ethics"
+      }
+    ],
+    "reflect": "Is a signature the same as consent? What makes consent real?"
+  },
+  "hi": {
+    "scenario": "आप ज़िला स्वास्थ्य अधिकारी हैं। एक निजी कंपनी, आवश्यक मंज़ूरियों के साथ, कुछ गाँवों में एनीमिया की एक नई दवा का परीक्षण कर रही है। एक दौरे में आप पाते हैं कि कई प्रतिभागियों ने अंग्रेज़ी में सहमति पत्र पर दस्तखत किए जिसे वे पढ़ नहीं सकते थे, और कुछ मानते हैं कि दवा सरकार की मुफ़्त आपूर्ति है। दवा कारगर हुई तो कई महिलाओं को मदद मिल सकती है, और परीक्षण रोकने से नतीजे एक साल टल जाएँगे।",
+    "question": "परीक्षण के बारे में आप क्या करेंगे?",
+    "options": [
+      {
+        "label": "आचार समिति और नियामक को बताकर रोक माँगना",
+        "outcome": "प्रतिभागियों के अधिकार सुरक्षित रहते हैं और सहमति फिर से ठीक से ली जा सकती है, पर परीक्षण में देरी होती है और कंपनी विरोध कर सकती है।",
+        "values": "गति से ऊपर स्वायत्तता और सूचित सहमति"
+      },
+      {
+        "label": "परीक्षण चलने देना, जबकि कंपनी फिर से समझाकर सहमति ले",
+        "outcome": "परीक्षण जारी रहता है और सहमति सुधरती है, पर जो पहले जुड़ चुके हैं उन्होंने बिना सच में समझे भाग लिया।",
+        "values": "बिना व्यवधान के सुधार"
+      },
+      {
+        "label": "मंज़ूरी होने से छोड़ देना",
+        "outcome": "कंपनी से कोई टकराव नहीं होता और नतीजे जल्दी आते हैं, पर लोग ऐसे अध्ययन में बने रहते हैं जिसमें वे जानबूझकर नहीं जुड़े।",
+        "values": "वास्तविक नैतिकता से ऊपर औपचारिक अनुपालन"
+      }
+    ],
+    "reflect": "क्या दस्तखत और सहमति एक ही बात है? सहमति को वास्तविक क्या बनाता है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "next": "sfx/page",
+    "done": "sfx/chime"
+  },
+  "tags": {
+    "stage": [
+      "mains"
+    ],
+    "papers": [
+      "mains-gs4"
+    ],
+    "formats": [
+      "mains-gs4-case"
+    ]
+  },
+  "id": "eth-citizen-data-for-startup",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Sharing citizen data with a start-up",
+    "hi": "एक स्टार्ट-अप के साथ नागरिक डेटा साझा करना"
+  },
+  "en": {
+    "scenario": "You are a municipal commissioner. A start-up offers to build a free app that predicts water pipe bursts and plans repairs. To train it, the firm asks for the city's data on water connections, which includes names, addresses and monthly use for every household. The mayor is keen, and the firm says it will keep the data safe. There is no written agreement yet on how the data will be used or deleted.",
+    "question": "Do you share the data?",
+    "options": [
+      {
+        "label": "Share it now so the project can start",
+        "outcome": "The city may get a useful tool quickly, but residents' personal data goes out without clear limits or their knowledge.",
+        "values": "Innovation and public service delivery"
+      },
+      {
+        "label": "Share only anonymised data under a written agreement",
+        "outcome": "Repairs can still be planned and privacy is better protected, but it takes longer and the firm may say the data is less useful.",
+        "values": "Purpose limitation and privacy with innovation"
+      },
+      {
+        "label": "Refuse until the city has a data-sharing policy",
+        "outcome": "No personal data is put at risk, but the city may lose a free tool and the mayor may be unhappy.",
+        "values": "Caution and data protection over speed"
+      }
+    ],
+    "reflect": "Who owns data that citizens give the state to get a service, and who can decide its other uses?"
+  },
+  "hi": {
+    "scenario": "आप नगर आयुक्त हैं। एक स्टार्ट-अप मुफ़्त ऐप बनाने की पेशकश करता है जो पानी की पाइप फटने का अनुमान लगाकर मरम्मत की योजना बनाए। इसे प्रशिक्षित करने के लिए कंपनी शहर के जल कनेक्शन का डेटा माँगती है, जिसमें हर घर का नाम, पता और मासिक उपयोग है। महापौर उत्साहित हैं, और कंपनी कहती है कि डेटा सुरक्षित रहेगा। डेटा के उपयोग या मिटाने पर अभी कोई लिखित समझौता नहीं है।",
+    "question": "क्या आप डेटा साझा करेंगे?",
+    "options": [
+      {
+        "label": "परियोजना शुरू करने के लिए अभी साझा करना",
+        "outcome": "शहर को जल्दी एक उपयोगी उपकरण मिल सकता है, पर निवासियों का व्यक्तिगत डेटा स्पष्ट सीमाओं या उनकी जानकारी के बिना बाहर जाता है।",
+        "values": "नवाचार और सार्वजनिक सेवा प्रदायगी"
+      },
+      {
+        "label": "लिखित समझौते के तहत केवल अनाम डेटा साझा करना",
+        "outcome": "मरम्मत की योजना फिर भी बन सकती है और निजता बेहतर सुरक्षित रहती है, पर समय अधिक लगता है और कंपनी कह सकती है कि डेटा कम उपयोगी है।",
+        "values": "नवाचार के साथ उद्देश्य सीमा और निजता"
+      },
+      {
+        "label": "शहर की डेटा साझेदारी नीति बनने तक मना करना",
+        "outcome": "कोई व्यक्तिगत डेटा जोखिम में नहीं आता, पर शहर एक मुफ़्त उपकरण खो सकता है और महापौर नाखुश हो सकते हैं।",
+        "values": "गति से ऊपर सावधानी और डेटा संरक्षण"
+      }
+    ],
+    "reflect": "सेवा पाने के लिए नागरिक जो डेटा राज्य को देते हैं, उसका मालिक कौन है, और उसके दूसरे उपयोग कौन तय कर सकता है?"
+  },
+  "sources": {
+    "en": "Original practice case written for GS4; no external facts used",
+    "hi": "GS4 के लिए लिखा गया मौलिक अभ्यास केस; कोई बाहरी तथ्य प्रयुक्त नहीं"
+  },
+  "schema": "upsc-pods/ethics-dilemma@1",
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Generated from a template. Needs an editor check for EN and HI before publishing."
+  },
+  "provenance": {
+    "generator": "Claude (thread: Make Aspiran practice batch X11)",
+    "createdOn": "2026-11-04",
+    "note": "Written from general knowledge, not from a source text. A subject editor checks every fact."
+  }
+}
