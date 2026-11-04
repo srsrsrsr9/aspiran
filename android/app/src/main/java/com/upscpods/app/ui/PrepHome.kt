@@ -50,6 +50,7 @@ import com.upscpods.app.data.LibraryItem
 import com.upscpods.app.data.PlusGate
 import com.upscpods.app.data.Prep
 import com.upscpods.app.data.SYLLABUS
+import com.upscpods.app.data.SYLLABUS_LINES
 import com.upscpods.app.data.SyllabusPaper
 import com.upscpods.app.data.SyllabusTopic
 import com.upscpods.app.data.MapNode
@@ -175,12 +176,20 @@ fun SyllabusTab(
     // A paper opened from a link (a node in a mock or PYQ) keeps its chip even when it isn't the member's optional.
     val shown = syllabusFor(optional).let { if (current in it) it else it + current }
     Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("The UPSC syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
+        Text("The whole syllabus. Every line of it.", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold)
         PauseLine("syllabus-first-open")
         Text("Every paper and every topic, straight from the official notification. Tap a topic to learn it here. Each one moves from Not started to Met, then Can recall, then Can use. Only you see this.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(SyllabusMap.line(map.values.groupingBy { it.state() }.eachCount()), style = MaterialTheme.typography.labelLarge)
-        SkySection(shown, map, current, onPaper)
+        val vines = remember(map, optional) { vinesOf(syllabusFor(optional), map, !optional.isNullOrBlank()) }
+        GardenSection(vines, onVine = { id ->
+            when (id) {
+                "optional" -> shown.firstOrNull { it.forOptional != null }?.let { onPaper(it.id) }
+                "qualifying" -> onPaper("lang")
+                else -> onPaper(id)
+            }
+        })
+        Text("Topic by topic", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold)
         Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             shown.forEach { p -> FilterChip(selected = p.id == current.id, onClick = { onPaper(p.id) }, label = { Text(p.short) }) }
         }
@@ -229,6 +238,9 @@ private fun TopicCard(
     val state = node?.state() ?: MapState.NONE
     FlatCard(Modifier.clickable { open = !open }) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            // The topic as a branch of its paper's creeper: one leaf per line of UPSC's syllabus.
+            val lines = SYLLABUS_LINES[id]
+            if (lines != null) TopicBranch(lines, state, id)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(topic.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                 Text("${state.mark} ${state.label}  ", style = MaterialTheme.typography.labelMedium,
@@ -245,6 +257,7 @@ private fun TopicCard(
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             if (open) {
+                if (lines != null) Text("UPSC's lines: " + lines.joinToString(" · "), style = MaterialTheme.typography.bodySmall)
                 Spacer(Modifier.size(2.dp))
                 MapStep(id, node, state, onMeet, onUse, onReset, onOpenReview)
                 if (pyqs > 0) TopicRow("Past UPSC questions", "$pyqs from the official papers. See how UPSC asks it.", Color(0xFFB45309), done = false, onClick = onPyq)

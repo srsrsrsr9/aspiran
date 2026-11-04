@@ -1,6 +1,5 @@
 package com.upscpods.app.ui
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -103,7 +102,7 @@ private val AppShapes = Shapes(
 @Composable
 fun PodsTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) Dark else Light,
+        colorScheme = if (isDark()) Dark else Light,
         typography = AppTypography,
         shapes = AppShapes,
         content = content,

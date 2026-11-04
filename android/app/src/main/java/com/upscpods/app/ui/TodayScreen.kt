@@ -73,6 +73,8 @@ fun TodayScreen(
     /** The syllabus map's counts ("3 met · 1 can recall"), and opening it. */
     mapLine: String? = null,
     onOpenMap: () -> Unit = {},
+    /** The whole syllabus as a creeper garden (VineGarden.kt), shown in place of the map line when given. */
+    vines: List<Vine>? = null,
 ) {
     val evening = now.hour >= 20
     var full by rememberSaveable { mutableStateOf(false) }
@@ -97,7 +99,15 @@ fun TodayScreen(
             }
             TodaysThree(brief, day, persona, now, primary = false, mainsTopic, onFiveMinutes, onWhy, open)
         }
-        mapLine?.let { line ->
+        if (vines != null) FlatCard {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                    Text("Your syllabus", style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
+                    TextButton(onClick = onOpenMap) { Text("All of it →") }
+                }
+                GardenSection(vines, onVine = { onOpenMap() }, height = 300f, note = false, small = true)
+            }
+        } else mapLine?.let { line ->
             FlatCard(Modifier.clickable(onClick = onOpenMap)) {
                 Column(Modifier.padding(16.dp)) {
                     Text("Your syllabus map →", style = MaterialTheme.typography.titleMedium)

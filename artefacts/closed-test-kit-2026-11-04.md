@@ -11,7 +11,7 @@ now. Build version 3 tonight and send it to the same testers as an update. An up
 
 ## Part 1. What to test (about 20 minutes)
 
-The phone has version 2. The new views (Your sky, audio lectures, printable sheets) are in version 3, which you
+The phone has version 2. The new views (the syllabus garden, dark mode, audio lectures, printable sheets) are in version 3, which you
 haven't built yet, but they are already live on the **web app**, so test them there first. I checked all three at
 phone size today; they work.
 
@@ -30,18 +30,26 @@ phone size today; they work.
 
 ### The new views (live on the web now; in the phone app from version 3)
 Open https://upsc-pods-production.chotu-aec.workers.dev/app/ on your phone's browser (Chrome) and sign in. Everything
-is under **Prep → Practice**, near the bottom. In version 3 of the phone app it's in the same place, and Your sky is on
+is under **Prep → Practice**, near the bottom. In version 3 of the phone app it's in the same place, and the syllabus garden is on
 **Prep → Syllabus**.
 
-**Your sky** (Practice → **Your syllabus map**; scroll a little to "Your sky")
+**The syllabus garden** (replaced "Your sky" on 4 Nov evening). Web: Prep → Syllabus, and the "Your syllabus" card on
+Today. App: Prep → Syllabus, the Today card, and a new step in first-run.
 | # | Try this | It should |
 |---|---|---|
-| 10 | Look at the cards | One dark night-sky card per paper (Prelims, CSAT, GS1–GS4, Essay), in light and dark mode alike |
-| 11 | Read a card's top line | Counts in words, like "4 of 7 lit · 1 can use". No percentages anywhere |
-| 12 | Tap the GS2 card | The page jumps to the GS2 topic list below, and the GS2 card gets a gold border |
-| 13 | Open a GS2 topic, mark it **Met**, come back | One more star is lit on GS2 |
-| 14 | Mark the topic next to it as Met too | A gold line now joins the two stars |
-| 15 | Leave the page and come back tomorrow | The stars are in exactly the same places |
+| 10 | Open Prep → Syllabus | Nine vines side by side (Prelims, CSAT, GS1–GS4, Essay, Optional, Lang) with counts: 9 papers · 59 topics · 297 lines to learn |
+| 11 | Look closely | Every leaf is one line of UPSC's syllabus. Not-started leaves are silvery; nothing says a percentage |
+| 12 | Tap the GS2 vine | Web: GS2's page, a branch per topic with its lines. App: the GS2 topics below, each card with its branch |
+| 13 | Mark a GS2 topic **Met**, come back | Its leaves are green and glow |
+| 14 | Switch dark mode on and off (☀ / ☾ at the top) | Day: a pale sky. Night: stars, and the lit leaves glow |
+| 15 | Turn off animations (phone accessibility settings) | The vines appear at once, without growing in |
+
+**Dark mode** (new on 4 Nov evening)
+| # | Try this | It should |
+|---|---|---|
+| 15a | Open the app fresh | It's dark, even if the phone is in light mode |
+| 15b | Tap **☀ Light** at the top | Everything turns light, and stays light next time |
+| 15c | Me → Appearance | Three choices: Dark (the default), Light, Match my phone |
 
 **Audio lectures** (Practice → **Audio lectures**)
 | # | Try this | It should |
@@ -74,7 +82,8 @@ Note anything odd in one line each (screen, what you did, what happened) and sen
 
 ## Part 2. Build version 3 and send it out (about 20 minutes, tonight)
 
-Version 3 is ready in the project (`versionCode 3`, version name 0.3.0). Same steps as your first release
+Version 3 is ready in the project (`versionCode 4`, version name 0.4.0: raised on 4 Nov evening for the syllabus
+garden and dark mode, so the number is free even if you had already uploaded a 3). Same steps as your first release
 (`play-store-first-release-mac.md`, steps 1–3):
 1. Android Studio → File → **Sync Project with Gradle Files**.
    - Success: "Gradle sync finished" at the bottom. Failure: send me the red text.
@@ -83,8 +92,8 @@ Version 3 is ready in the project (`versionCode 3`, version name 0.3.0). Same st
    **release** → Create.
    - Success: "App bundle(s) generated successfully". Failure: send me the message.
 4. Play Console → Test and release → **Internal testing** → Create new release → upload `app-release.aab` →
-   release notes: *"Your sky, audio lectures and printable sheets."* → Next → Save and publish.
-   - Failure: "Version code 3 has already been used". Tell me and I'll raise it.
+   release notes: *"The whole syllabus as a creeper garden, dark mode by default, audio lectures and printable sheets."* → Next → Save and publish.
+   - Failure: "Version code 4 has already been used". Tell me and I'll raise it.
 5. Install it on your phone from Play (it may take up to an hour to show) and run tests 10–26 in the app.
 6. If it's fine: Closed testing → Create new release → **Add from library** → version 3 → Start rollout.
 
@@ -156,7 +165,7 @@ Thank you!
 | 8 | Ask Chotu (the AI buddy) one doubt about a topic |
 | 9 | Do a flashcard deck |
 | 10 | Open a GS4 case and write a short answer |
-| 11 | Look at Your sky in Prep → Syllabus (after the version 3 update) |
+| 11 | Look at the syllabus garden in Prep → Syllabus and tap a vine (after the version 3 update) |
 | 12 | Listen to an audio lecture (Prep → Practice) |
 | 13 | Open a printable sheet (Prep → Practice) |
 | 14 | Tell me the one thing you'd change |

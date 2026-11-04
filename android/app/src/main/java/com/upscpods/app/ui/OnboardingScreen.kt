@@ -36,6 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -55,13 +56,14 @@ import com.upscpods.app.data.Persona
 import com.upscpods.app.data.ReadingLanguage
 import com.upscpods.app.data.Stage
 import com.upscpods.app.data.StudyHours
+import com.upscpods.app.data.syllabusFor
 
-private enum class Step { WELCOME, LANGUAGE, SIGN_IN, CONSENT, NAME, MEET }
+private enum class Step { WELCOME, LANGUAGE, SIGN_IN, CONSENT, NAME, SYLLABUS, MEET }
 
 /**
  * First run, community-first: a welcome in eleven languages, then language (with "Request your language"), then sign in
  * (phone or Google; [signIn] is null when the server doesn't require it yet), then 18+ and consent, then a nickname,
- * then Meet Chotu, then the Adda.
+ * then the whole syllabus as a creeper garden (so the breadth is seen on day one), then Meet Chotu, then the Adda.
  * Everything else about you is asked later, one small question at a time, when it helps (Me → Profile).
  * Consent and the 18+ check come before any question about you. "Not now" on consent still opens the app.
  */
@@ -96,7 +98,7 @@ fun OnboardingScreen(
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                if (step == Step.LANGUAGE || step == Step.SIGN_IN || step == Step.NAME || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
+                if (step == Step.LANGUAGE || step == Step.SIGN_IN || step == Step.NAME || step == Step.SYLLABUS || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
                 Spacer(Modifier.weight(1f))
                 if (step == Step.NAME) TextButton(onClick = { next() }) { Text("Skip") }
             }
@@ -153,6 +155,14 @@ fun OnboardingScreen(
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth(),
                             )
+                        }
+                        Step.SYLLABUS -> {
+                            Text("This is the whole syllabus", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                            val vines = remember { vinesOf(syllabusFor(null), emptyMap(), hasOptional = false) }
+                            GardenSection(vines, onVine = {}, height = 380f, note = false)
+                            Text("Every leaf is one line of UPSC's syllabus. It looks like a lot because it is, and that's why we take it a leaf at a time. Each one lights up as you meet its topic, and blooms when you can use it in an answer.",
+                                style = ReadingText)
+                            GardenKey()
                         }
                         Step.MEET -> {
                             ChotuSays(

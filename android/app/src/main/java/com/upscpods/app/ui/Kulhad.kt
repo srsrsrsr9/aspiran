@@ -8,7 +8,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -319,7 +318,7 @@ private val PrepDark = darkColorScheme(
 @Composable
 fun PrepSpace(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) PrepDark else PrepLight,
+        colorScheme = if (isDark()) PrepDark else PrepLight,
         typography = MaterialTheme.typography,
         shapes = MaterialTheme.shapes,
         content = content,

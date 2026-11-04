@@ -80,6 +80,7 @@ fun MeTab(
         when (page) {
             MePage.HOME -> {
                 persona?.name?.takeIf { it.isNotBlank() }?.let { Text("Hi, $it.", style = MaterialTheme.typography.bodyLarge) }
+                AppearanceCard(androidx.compose.ui.platform.LocalContext.current)
                 MeRow("Profile", "What the app knows about you, and where it's kept") { onPage(MePage.PROFILE) }
                 MeRow("Stamp book", "${staged.stamps.size} " + (if (staged.stamps.size == 1) "stamp" else "stamps") + ". None are ever lost") { onPage(MePage.STAMPS) }
                 if (room != null) MeRow("Your room", "Sleep, notes, to-dos and your journal. Private, never scored, yours to export") { onPage(MePage.ROOM) }

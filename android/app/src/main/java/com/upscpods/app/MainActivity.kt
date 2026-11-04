@@ -38,6 +38,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
@@ -122,6 +123,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.delay
 import com.upscpods.app.ui.RatingSheet
 import com.upscpods.app.ui.PodsTheme
+import com.upscpods.app.ui.ThemeChoice
+import com.upscpods.app.ui.ThemeToggle
+import com.upscpods.app.ui.isDark
+import com.upscpods.app.ui.vinesOf
+import com.upscpods.app.data.syllabusFor
 import com.upscpods.app.ui.MainsScreen
 import com.upscpods.app.ui.PracticeTab
 import com.upscpods.app.ui.PrelimsScreen
@@ -204,6 +210,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Auth.init(this)
+        ThemeChoice.init(this)
         enableEdgeToEdge()
         val brief = BriefRepository.loadBundled(this)
         // Opened from a ritual nudge (data/Rituals.kt): straight into its action. Morning Chai goes to Today's Chai.
@@ -213,6 +220,13 @@ class MainActivity : AppCompatActivity() {
         // Members only: someone new gets the full eleven-language welcome as the first onboarding screen.
         val greet = savedInstanceState == null && !fromNudge && ritual == null && ProfileStore.load(this).onboarded
         setContent {
+            // The status and navigation bar icons follow the app's own light or dark, not the phone's.
+            val dark = isDark()
+            LaunchedEffect(dark) {
+                val bars = if (dark) SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+                else SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT)
+                enableEdgeToEdge(statusBarStyle = bars, navigationBarStyle = bars)
+            }
             PodsTheme {
                 var welcome by rememberSaveable { mutableStateOf(greet) }
                 Box(Modifier.fillMaxSize()) {
@@ -761,6 +775,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     title = { Text(if (inMePage) mePage.title else tab.label) },
                     navigationIcon = { if (inMePage) TextButton(onClick = { mePage = MePage.HOME }) { Text("←") } },
                     actions = {
+                        ThemeToggle(context)
                         // Need to talk is always one tap away, on every tab.
                         TextButton(onClick = { needToTalk = true }) { Text("Need to talk?") }
                     },
@@ -875,6 +890,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 reviewed = syllabusMap.reviewedOn == LocalDate.now().toString(),
                                 onOpenReview = { overlay = Overlay.REVIEW },
                                 mapLine = remember(mapTick) { SyllabusMap.line(syllabusMap.counts()) },
+                                vines = remember(mapTick) { staged.value("optional_subject").let { o -> vinesOf(syllabusFor(o), syllabusMap.nodes(), !o.isNullOrBlank()) } },
                                 onOpenMap = { prepSub = PrepSub.SYLLABUS },
                                 modifier = inner,
                                 pod = pod,

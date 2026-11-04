@@ -419,10 +419,10 @@ function render() {
   const prepRail = space === "prep" && !immersive && h("nav.subrail", { "aria-label": "Prep" },
     PREP_TABS.map(([id, label]) => h("a.subtab", { href: "#" + id, "aria-current": sub === id ? "page" : null }, tr(label))));
   put(root, h("div.shell",
-    h("nav.side", { "aria-label": "Main" }, h("div.brand", "Aspiran"), navLinks(), h("div.spacer"),
+    h("nav.side", { "aria-label": "Main" }, h("div.brand", "Aspiran"), navLinks(), h("div.spacer"), themeButton(),
       h("a.tab", { href: "#calm", "aria-current": r.name === "calm" ? "page" : null }, h("span", { "aria-hidden": "true" }, "◌"), tr("nav.calm")),
       h("a.tab", { href: "#talk", "aria-current": r.name === "talk" ? "page" : null }, h("span", { "aria-hidden": "true" }, "♡"), tr("nav.talk"))),
-    h("main", { id: "main" }, h("div.mobilebar", h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, offlineBanner(), on("announcements") && space === "adda" ? banner() : null, view),
+    h("main", { id: "main" }, h("div.mobilebar", themeButton(true), h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, offlineBanner(), on("announcements") && space === "adda" ? banner() : null, view),
     h("nav.bottom", { "aria-label": "Main" }, navLinks()),
   ));
   tick();
@@ -1781,13 +1781,33 @@ function readAloud(text, lang) {
   return h("span", btn, note);
 }
 
+// --- Light and dark ---------------------------------------------------------------------------
+// Dark is the default (owner, 4 Nov 2026). "system" follows the device. The button on every screen flips between the
+// two; Me → Appearance has all three. index.html sets the stored choice before the first paint, so nothing flashes.
+const themeChoice = () => store.get("theme", "dark");
+const darkNow = () => { const t = themeChoice(); return t === "system" ? matchMedia("(prefers-color-scheme: dark)").matches : t === "dark"; };
+function applyTheme(t) {
+  store.set("theme", t);
+  if (t === "system") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", darkNow() ? "#17100B" : "#9A4E0E");
+}
+const toggleTheme = () => { applyTheme(darkNow() ? "light" : "dark"); render(); };
+const themeButton = (short = false) => h("button.themebtn", { type: "button", onclick: toggleTheme, "aria-label": darkNow() ? "Switch to light mode" : "Switch to dark mode" },
+  h("span", { "aria-hidden": "true" }, darkNow() ? "☀" : "☾"), (darkNow() ? " Light" : " Dark") + (short ? "" : " mode"));
+function appearanceCard() {
+  const opt = (v, label) => h("label.choice", h("input", { type: "radio", name: "theme", value: v, checked: themeChoice() === v, onchange: () => { applyTheme(v); render(); } }), " " + label);
+  return h("div.card", { id: "appearance" }, h("h3", { style: { marginTop: 0 } }, "Appearance"),
+    h("div.col", { style: { gap: "6px" } }, opt("dark", "Dark (the default)"), opt("light", "Light"), opt("system", "Match my device")),
+    h("p.small.muted", "The ☀ / ☾ button at the top of every screen switches too."));
+}
+
 function readerTools() {
   const size = store.get("readSize", 20);
   document.documentElement.style.setProperty("--read-size", size + "px");
   const setSize = (s) => { store.set("readSize", s); document.documentElement.style.setProperty("--read-size", s + "px"); };
   return h("div.row", h("button.ghost", { "aria-label": "Smaller text", onclick: () => setSize(Math.max(15, store.get("readSize", 20) - 1)) }, "A−"),
     h("button.ghost", { "aria-label": "Larger text", onclick: () => setSize(Math.min(30, store.get("readSize", 20) + 1)) }, "A+"),
-    h("button.ghost", { onclick: () => { const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark"; document.documentElement.dataset.theme = t; store.set("theme", t); } }, "Light / dark"));
+    h("button.ghost", { onclick: toggleTheme }, darkNow() ? "☀ Light mode" : "☾ Dark mode"));
 }
 
 function reader(id) {
@@ -2803,6 +2823,7 @@ function viewMe() {
   const s = stamps();
   const link = (href, title, sub) => h("a.card.link", { href }, h("div.row.between", h("div", h("strong", title), sub && h("div.small.muted", sub)), h("span", "→")));
   return h("div.col", h("h1", p.name),
+    h("div.card.row.between", h("div", h("strong", "Appearance"), h("div.small.muted", { "aria-live": "polite" }, darkNow() ? "Dark mode is on" : "Light mode is on")), themeButton()),
     link("#profile", "Profile", "What the app knows about you, where it's kept, and how to delete it"),
     link("#room", "Your room", "Sleep, notes, to-dos and your journal. Private, never scored, yours to download"),
     link("#rhythm", "Rhythm", "The days you closed. No streaks."),
@@ -2829,7 +2850,8 @@ function viewMe() {
         : installPrompt ? h("div", h("p", "Install Aspiran as an app on this computer. It opens in its own window and works offline."), h("button.primary", { onclick: async () => { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; render(); } }, "Install the desktop app"))
           : h("p", "In Chrome or Edge, use the install icon in the address bar (or menu → Apps → Install Aspiran). It opens in its own window and works offline.")),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Data saver"),
-      h("label", h("input", { type: "checkbox", checked: !!store.get("dataSaver"), onchange: (e) => store.set("dataSaver", e.target.checked) }), " Skip drawings on cards")));
+      h("label", h("input", { type: "checkbox", checked: !!store.get("dataSaver"), onchange: (e) => store.set("dataSaver", e.target.checked) }), " Skip drawings on cards")),
+    appearanceCard());
 }
 
 function viewProfile() {
@@ -3979,7 +4001,7 @@ setInterval(() => { const el = $("#focusBig"); const f = focus.active; if (el &&
 
 // --- Start -------------------------------------------------------------------------------------
 
-const theme = store.get("theme"); if (theme) document.documentElement.dataset.theme = theme;
+applyTheme(themeChoice());
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
 await Promise.all([loadAll(), P.loadProfile(), Auth.init(config.auth, { onSuspend: onAccountSuspended })]);
 // Content needs sign-in: if the first load ran before the token was ready (so it fell back to the copy saved on the
