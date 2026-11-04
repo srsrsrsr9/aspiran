@@ -105,7 +105,7 @@ throughout. Thank you. Answers to your part 5 questions (the owner decides the r
 - Hindi mnemonics: from now on, give the Hindi side its own Hindi mnemonic where a natural one exists.
 - Link-web hazard spokes (Himalayas, mangroves): fine as they are; they name no disaster and no deaths.
 - B24c: the "why" doesn't need its own bracket; first mention in the question only, as in mock 1.
-- MGNREGA and VB-G RAM G: waiting on the owner. Don't write either card until I send the decision.
+- MGNREGA and VB-G RAM G: the owner chose a before-and-after card. That's batch G1 below; do it first.
 
 Assignment 6: the rest of the content the app needs. Same rules as before (they are at the end). One zip per batch,
 named as below.
@@ -150,6 +150,14 @@ T5: GS4. 1 read each on moral thinkers of India and the world, attitude and foun
 
 M:  3 full mocks in the shape of mocks 2 and 3: prelims-gs1-full-mock-4, prelims-gs1-full-mock-5 and
     prelims-csat-full-mock-3. Original questions, en and hi, UPSC marking, every topic spread as in the real paper.
+G1: MGNREGA → VB-G RAM G (owner's decision, 4 Nov). Do this first; it's small.
+    - A new before-after file, id "eco-mgnrega-to-vbg-ram-g", in the shape of the before-after sample: before =
+      MGNREGA (2005): what it guaranteed and how it worked; after = the VB-G RAM G Act (assent 21 December 2025):
+      what changed, what stayed. Plain facts only, no verdict on which is better. Every date, number and the
+      commencement date in factsToCheck, from the Gazette or the Ministry of Rural Development.
+    - Don't edit the old eco-mgnrega scheme-snapshot. The owner retires it in the Desk once G1 is approved.
+    - The P2 sheet printables/economy-flagship-schemes.json: add the VB-G RAM G Act, with one line saying it replaced
+      MGNREGA. Return the whole file with the same id.
 O:  B32: optionals, the next 5 topics for each of the 6 optionals in the B25 order, as in B30 and B31.
 V5: Hindi narration text for the 10 videos in videos-captions/ (episodes 01-03, 10-12, 14-17). Take the English
     from the captions file, and write <nn>-<id>.voice.txt (English, as spoken) and <nn>-<id>.hi.voice.txt (Hindi,
