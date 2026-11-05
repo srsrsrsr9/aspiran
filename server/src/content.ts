@@ -310,7 +310,8 @@ export async function contentApi(req: Request, env: Env, path: string, s: Staff)
     const bytes = new Uint8Array(await req.arrayBuffer());
     if (bytes.length > 90_000_000) return bad("Keep zips under 90 MB");
     if (bytes[0] !== 0x50 || bytes[1] !== 0x4b) return bad("That isn't a .zip file");
-    const key = `inbox/${new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-")}-${inbox[1]}`;
+    // The key is the path the audit log records ("desk: PUT inbox/<name>"), so Claude finds it with one D1 query.
+    const key = `inbox/${inbox[1]}`;
     await env.BACKUPS.put(key, bytes, { httpMetadata: { contentType: "application/zip" }, customMetadata: { by: s.name ?? "" } });
     return json({ ok: true, key, size: bytes.length });
   }
