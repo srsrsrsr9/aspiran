@@ -78,3 +78,12 @@ step("re-import keeps one copy, same text");
 await call(`/desk/api/library/${row.id}/unapprove`, { method: "POST" });
 assert.equal((await call(`/desk/api/library/${row.id}/delete`, { method: "POST" })).status, 200);
 step("cleaned up");
+
+// The Desk inbox: a content zip for Claude Code, kept private in the backups bucket and never served.
+const zip = Buffer.from([0x50, 0x4b, 0x03, 0x04, ...Buffer.from("test zip")]);
+assert.equal((await call("/desk/api/inbox/part-test.zip", { method: "PUT", raw: zip })).status, 200);
+assert.equal((await call("/desk/api/inbox/not-a-zip.zip", { method: "PUT", raw: Buffer.from("hello") })).status, 400);
+const inbox = await call("/desk/api/inbox");
+assert.ok(inbox.data.some((r) => r.key.endsWith("-part-test.zip")));
+assert.equal((await fetch(BASE + "/desk/api/inbox")).status, 401);
+step("content zip goes to the private inbox; not a zip or no key is refused");

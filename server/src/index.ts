@@ -43,6 +43,12 @@ export default {
         headers: { "access-control-allow-origin": "*", "access-control-allow-headers": "authorization, content-type", "access-control-allow-methods": "GET, POST, PUT, DELETE" },
       });
     }
+    // aspiran.in subdomains: app.aspiran.in opens the web app, admin.aspiran.in the admin console (and the Desk).
+    // The workers.dev address keeps working for the Android app.
+    const host = url.hostname;
+    if (host === "app.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/app/`, 302);
+    if (host === "admin.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/admin`, 302);
+    if (host === "app.aspiran.in" && (path === "/admin" || path === "/desk")) return Response.redirect(`https://admin.aspiran.in${path}`, 302);
     if (path === "/" || path === "/health") return json({ ok: true, service: "upsc-pods", day: istDay() });
     const count = (metric: string) => ctx.waitUntil(bump(env, metric));
 

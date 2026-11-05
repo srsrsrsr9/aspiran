@@ -212,6 +212,12 @@
       <div class="row"><span class="muted">Or one translation file (like <code>five-writs-mnemonic.te.json</code>):</span><input id="tr-file" type="file" accept=".json" multiple><button id="tr-go">Add translation</button></div>
     </div>
     <div class="card">
+      <h3>Send a content zip to Claude</h3>
+      <p class="muted">For a zip straight from the content Project, from any phone or computer. It waits, unopened and private, until Claude Code checks it and imports it as drafts. Then tell Claude "new zip in the Desk inbox".</p>
+      <div class="row"><input id="inbox-file" type="file" accept=".zip,application/zip"><button id="inbox-go" class="primary">Send to Claude</button></div>
+      <pre id="inbox-log" class="muted" style="white-space:pre-wrap"></pre>
+    </div>
+    <div class="card">
       <h3>Write something new</h3>
       <p class="muted">Starts a draft from a template. Fill in both languages in the editor, then approve. For pictures or sounds, upload the file first and paste the link it gives you.</p>
       <div class="row">
@@ -629,6 +635,7 @@ let libKind = "";
 let libRows = [];
 
 async function loadLibrary() {
+  showInbox();
   libRows = await api("/desk/api/library");
   const counts = {};
   libRows.forEach((r) => counts[r.kind] = (counts[r.kind] || 0) + 1);
@@ -798,6 +805,26 @@ $("#up-go").onclick = async () => {
     $("#up-path").select();
     ok("Uploaded. The link is selected in the box: paste it into the item.");
   } catch (err) { if (!err.shown) oops("Upload failed: " + err.message); }
+};
+
+async function showInbox() {
+  try {
+    const rows = await api("/desk/api/inbox");
+    $("#inbox-log").textContent = rows.length ? "Waiting for Claude:\n" + rows.slice(0, 8).map((r) => `  ${r.key.replace(/^inbox\//, "")}  (${Math.round(r.size / 1024)} KB)`).join("\n") : "";
+  } catch {}
+}
+$("#inbox-go").onclick = async () => {
+  const f = $("#inbox-file").files[0];
+  if (!f) return oops("Pick the zip first.");
+  if (!/\.zip$/i.test(f.name)) return oops("That isn't a .zip file.");
+  $("#inbox-go").disabled = true;
+  try {
+    await putFile("/desk/api/inbox/" + encodeURIComponent(f.name.replace(/[^\w.-]/g, "_")), f);
+    ok("Sent. Tell Claude: new zip in the Desk inbox.");
+    $("#inbox-file").value = "";
+    showInbox();
+  } catch (err) { if (!err.shown) oops("Sending failed: " + err.message); }
+  finally { $("#inbox-go").disabled = false; }
 };
 
 $("#pack-go").onclick = async () => {

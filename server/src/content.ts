@@ -302,6 +302,24 @@ export async function contentApi(req: Request, env: Env, path: string, s: Staff)
     return json(results.map((r: any) => ({ ...r, log: JSON.parse(r.log ?? "[]") })));
   }
 
+  // A content zip for Claude Code to pick up (the owner's way in while away from the laptop). Kept in the private
+  // backups bucket, never served: Claude fetches it with wrangler, checks it and imports it as drafts.
+  const inbox = path.match(/^inbox\/([\w.-]+\.zip)$/i);
+  if (inbox && req.method === "PUT") {
+    if (!env.BACKUPS) return bad("No BACKUPS bucket bound", 503);
+    const bytes = new Uint8Array(await req.arrayBuffer());
+    if (bytes.length > 90_000_000) return bad("Keep zips under 90 MB");
+    if (bytes[0] !== 0x50 || bytes[1] !== 0x4b) return bad("That isn't a .zip file");
+    const key = `inbox/${new Date().toISOString().slice(0, 16).replace(/[:T]/g, "-")}-${inbox[1]}`;
+    await env.BACKUPS.put(key, bytes, { httpMetadata: { contentType: "application/zip" }, customMetadata: { by: s.name ?? "" } });
+    return json({ ok: true, key, size: bytes.length });
+  }
+  if (path === "inbox" && req.method === "GET") {
+    if (!env.BACKUPS) return json([]);
+    const list = await env.BACKUPS.list({ prefix: "inbox/" });
+    return json(list.objects.map((o) => ({ key: o.key, size: o.size, uploaded: o.uploaded })).reverse());
+  }
+
   // A single file from the desk (a new illustration or sound), stored under its own hash.
   const up = path.match(/^uploads\/([\w.-]+)$/);
   if (up && req.method === "PUT") {
