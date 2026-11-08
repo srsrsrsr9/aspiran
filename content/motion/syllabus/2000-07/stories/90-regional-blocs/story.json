@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "regional-blocs",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Regions organise themselves",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-10"
+ ],
+ "sources": [
+  "Treaty on European Union (Maastricht, 1992)",
+  "ASEAN Declaration (Bangkok, 1967)",
+  "SAARC Charter (Dhaka, 1985)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "regional-blocs-q1",
+   "q": "ASEAN was founded in:",
+   "options": [
+    "1955",
+    "1967",
+    "1985",
+    "1992"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 1967, Bangkok Declaration."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "After 1945, regions started building their own institutions."
+    },
+    {
+     "spk": "B",
+     "say": "Some went much further than others."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "Regionalisation: EU, ASEAN, SAARC",
+    "illustration": "illustrations/syllabus/handshake.svg"
+   },
+   "say": "After 1945, regions started building their own institutions. Some went much further than others."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "ASEAN was founded in Bangkok in 1967. SAARC in Dhaka in 1985."
+    },
+    {
+     "spk": "B",
+     "say": "The Maastricht Treaty, signed in 1992, created the European Union."
+    }
+   ],
+   "data": {
+    "kicker": "Founding years",
+    "points": [
+     {
+      "year": 1967,
+      "label": "ASEAN, Bangkok",
+      "cue": "1967"
+     },
+     {
+      "year": 1985,
+      "label": "SAARC, Dhaka",
+      "cue": "1985"
+     },
+     {
+      "year": 1992,
+      "label": "EU, Maastricht",
+      "cue": "1992"
+     }
+    ]
+   },
+   "say": "ASEAN was founded in Bangkok in 1967. SAARC in Dhaka in 1985. The Maastricht Treaty, signed in 1992, created the European Union."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The EU has a single market, and a common currency for many members. ASEAN works by consensus."
+    },
+    {
+     "spk": "B",
+     "say": "SAARC has been held back by India–Pakistan tensions."
+    }
+   ],
+   "data": {
+    "kicker": "How deep",
+    "title": "Compare",
+    "items": [
+     {
+      "text": "EU",
+      "sub": "Single market, common currency for many",
+      "cue": "EU"
+     },
+     {
+      "text": "ASEAN",
+      "sub": "Consensus and non-interference",
+      "cue": "ASEAN"
+     },
+     {
+      "text": "SAARC",
+      "sub": "Stalled by India–Pakistan tension",
+      "cue": "SAARC"
+     }
+    ]
+   },
+   "say": "The EU has a single market, and a common currency for many members. ASEAN works by consensus. SAARC has been held back by India–Pakistan tensions."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India has leaned on BIMSTEC"
+    },
+    {
+     "spk": "B",
+     "say": "as a way around SAARC's deadlock."
+    }
+   ],
+   "data": {
+    "kicker": "For India",
+    "text": "BIMSTEC as a way around SAARC's deadlock."
+   },
+   "say": "India has leaned on BIMSTEC as a way around SAARC's deadlock."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was ASEAN founded?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "ASEAN was founded in:",
+    "options": [
+     "1955",
+     "1967",
+     "1985",
+     "1992"
+    ]
+   },
+   "say": "Your turn. When was ASEAN founded?"
+  }
+ ]
+}

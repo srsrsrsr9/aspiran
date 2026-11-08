@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "bretton-woods",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The post-war economy was planned in a New Hampshire hotel",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-8"
+ ],
+ "sources": [
+  "IMF and World Bank histories",
+  "WTO (wto.org)",
+  "UN General Assembly, Declaration on the NIEO (1974)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "bretton-woods-q1",
+   "q": "The WTO replaced GATT in:",
+   "options": [
+    "1947",
+    "1971",
+    "1995",
+    "2001"
+   ],
+   "answerIndex": 2,
+   "why": "Right. 1 January 1995."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1944, delegates met at Bretton Woods, in the United States."
+    },
+    {
+     "spk": "B",
+     "say": "They designed the world's economic order."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "Bretton Woods to the WTO",
+    "illustration": "illustrations/syllabus/economy.svg"
+   },
+   "say": "In 1944, delegates met at Bretton Woods, in the United States. They designed the world's economic order."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Bretton Woods created the IMF and the World Bank in 1944. GATT followed in 1947."
+    },
+    {
+     "spk": "B",
+     "say": "The WTO replaced GATT in 1995."
+    }
+   ],
+   "data": {
+    "kicker": "Milestones",
+    "points": [
+     {
+      "year": 1944,
+      "label": "Bretton Woods: IMF, World Bank",
+      "cue": "1944"
+     },
+     {
+      "year": 1947,
+      "label": "GATT",
+      "cue": "1947"
+     },
+     {
+      "year": 1995,
+      "label": "WTO",
+      "cue": "1995"
+     }
+    ]
+   },
+   "say": "Bretton Woods created the IMF and the World Bank in 1944. GATT followed in 1947. The WTO replaced GATT in 1995."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1974, developing countries won a UN declaration"
+    },
+    {
+     "spk": "B",
+     "say": "calling for a New International Economic Order."
+    }
+   ],
+   "data": {
+    "kicker": "The Global South's demand",
+    "text": "A New International Economic Order (UN, 1974)."
+   },
+   "say": "In 1974, developing countries won a UN declaration calling for a New International Economic Order."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The debates today: IMF voting shares,"
+    },
+    {
+     "spk": "B",
+     "say": "and the WTO's stalled Appellate Body."
+    }
+   ],
+   "data": {
+    "kicker": "Today",
+    "title": "Debates",
+    "items": [
+     {
+      "text": "Voting shares",
+      "sub": "Reform of IMF quotas",
+      "cue": "imf"
+     },
+     {
+      "text": "Trade disputes",
+      "sub": "WTO's Appellate Body stalled",
+      "cue": "Appellate"
+     }
+    ]
+   },
+   "say": "The debates today: IMF voting shares, and the WTO's stalled Appellate Body."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When did the WTO replace GATT?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The WTO replaced GATT in:",
+    "options": [
+     "1947",
+     "1971",
+     "1995",
+     "2001"
+    ]
+   },
+   "say": "Your turn. When did the WTO replace GATT?"
+  }
+ ]
+}
