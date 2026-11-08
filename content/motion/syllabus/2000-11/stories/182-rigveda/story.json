@@ -1,0 +1,230 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "rigveda",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The Rigveda has ten books and 1,028 hymns",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "hist1-5"
+ ],
+ "sources": [
+  "R. S. Sharma, India's Ancient Past",
+  "NCERT (old), Ancient India"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "rigveda-q1",
+   "q": "How many mandalas does the Rigveda have?",
+   "options": [
+    "4",
+    "8",
+    "10",
+    "12"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Ten."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The oldest Indian text is the Rigveda."
+    },
+    {
+     "spk": "B",
+     "say": "It's mostly hymns to gods of nature."
+    }
+   ],
+   "data": {
+    "kicker": "History I · Syllabus · AI voices",
+    "headline": "The Vedic period",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "The oldest Indian text is the Rigveda. It's mostly hymns to gods of nature."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It has 10 books, called mandalas,"
+    },
+    {
+     "spk": "B",
+     "say": "with 1,028 hymns."
+    }
+   ],
+   "data": {
+    "kicker": "The Rigveda",
+    "items": [
+     {
+      "value": 10,
+      "suffix": "",
+      "label": "books (mandalas)",
+      "cue": "10"
+     },
+     {
+      "value": 1028,
+      "suffix": "",
+      "label": "hymns",
+      "cue": "1,028"
+     }
+    ]
+   },
+   "say": "It has 10 books, called mandalas, with 1,028 hymns."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Early Vedic society was mostly pastoral, with assemblies like the sabha and samiti."
+    },
+    {
+     "spk": "B",
+     "say": "Later Vedic society farmed with iron, and kings grew stronger."
+    }
+   ],
+   "data": {
+    "kicker": "Early vs later Vedic",
+    "title": "Compare",
+    "items": [
+     {
+      "text": "Early",
+      "sub": "Pastoral; sabha and samiti strong",
+      "cue": "Early"
+     },
+     {
+      "text": "Later",
+      "sub": "Farming, iron; kingship grows",
+      "cue": "Later"
+     }
+    ]
+   },
+   "say": "Early Vedic society was mostly pastoral, with assemblies like the sabha and samiti. Later Vedic society farmed with iron, and kings grew stronger."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The main gods were Indra, Agni"
+    },
+    {
+     "spk": "B",
+     "say": "and Varuna."
+    }
+   ],
+   "data": {
+    "kicker": "Gods",
+    "title": "Rigvedic",
+    "items": [
+     {
+      "text": "Indra · Agni · Varuna",
+      "sub": "",
+      "cue": "Indra"
+     }
+    ]
+   },
+   "say": "The main gods were Indra, Agni and Varuna."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How many mandalas?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "How many mandalas does the Rigveda have?",
+    "options": [
+     "4",
+     "8",
+     "10",
+     "12"
+    ]
+   },
+   "say": "Your turn. How many mandalas?"
+  }
+ ]
+}
