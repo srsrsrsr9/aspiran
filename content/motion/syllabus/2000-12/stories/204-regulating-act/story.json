@@ -1,0 +1,228 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "regulating-act",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Parliament began to rein in the Company in 1773",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs",
+  "mains-gs1",
+  "mains-gs2"
+ ],
+ "syllabusNodes": [
+  "hist2-3"
+ ],
+ "sources": [
+  "Regulating Act, 1773",
+  "Pitt's India Act, 1784"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "regulating-act-q1",
+   "q": "Who was the first Governor-General of Bengal under the Regulating Act?",
+   "options": [
+    "Robert Clive",
+    "Warren Hastings",
+    "Cornwallis",
+    "Wellesley"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Warren Hastings."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The East India Company ruled Bengal."
+    },
+    {
+     "spk": "B",
+     "say": "But who controlled the Company?"
+    }
+   ],
+   "data": {
+    "kicker": "History II · Syllabus · AI voices",
+    "headline": "Early structure of the Raj",
+    "illustration": "illustrations/syllabus/parliament.svg"
+   },
+   "say": "The East India Company ruled Bengal. But who controlled the Company?"
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Regulating Act of 1773 made Warren Hastings Governor-General of Bengal."
+    },
+    {
+     "spk": "B",
+     "say": "A Supreme Court at Calcutta followed in 1774, and Pitt's India Act in 1784."
+    }
+   ],
+   "data": {
+    "kicker": "The Acts",
+    "points": [
+     {
+      "year": 1773,
+      "label": "Regulating Act",
+      "cue": "1773"
+     },
+     {
+      "year": 1774,
+      "label": "Supreme Court at Calcutta",
+      "cue": "1774"
+     },
+     {
+      "year": 1784,
+      "label": "Pitt's India Act",
+      "cue": "1784"
+     }
+    ]
+   },
+   "say": "The Regulating Act of 1773 made Warren Hastings Governor-General of Bengal. A Supreme Court at Calcutta followed in 1774, and Pitt's India Act in 1784."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Pitt's Act set up a Board of Control in London."
+    },
+    {
+     "spk": "B",
+     "say": "The Court of Directors kept the commercial side."
+    }
+   ],
+   "data": {
+    "kicker": "Pitt's Act",
+    "title": "Dual control",
+    "items": [
+     {
+      "text": "Board of Control",
+      "sub": "In London, for the government",
+      "cue": "Board"
+     },
+     {
+      "text": "Court of Directors",
+      "sub": "For the Company's commerce",
+      "cue": "Court"
+     }
+    ]
+   },
+   "say": "Pitt's Act set up a Board of Control in London. The Court of Directors kept the commercial side."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Every later Charter Act moved more power"
+    },
+    {
+     "spk": "B",
+     "say": "from the Company to Parliament."
+    }
+   ],
+   "data": {
+    "kicker": "The pattern",
+    "text": "Each Act moved power from the Company to Parliament."
+   },
+   "say": "Every later Charter Act moved more power from the Company to Parliament."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who was the first?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who was the first Governor-General of Bengal under the Regulating Act?",
+    "options": [
+     "Robert Clive",
+     "Warren Hastings",
+     "Cornwallis",
+     "Wellesley"
+    ]
+   },
+   "say": "Your turn. Who was the first?"
+  }
+ ]
+}
