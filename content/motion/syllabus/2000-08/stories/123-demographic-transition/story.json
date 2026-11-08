@@ -1,0 +1,241 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "demographic-transition",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India's fertility has fallen below replacement",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio2-14"
+ ],
+ "sources": [
+  "National Family Health Survey-5 (2019–21)",
+  "Demographic transition theory"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "demographic-transition-q1",
+   "q": "According to NFHS-5, India's total fertility rate is about:",
+   "options": [
+    "1.5",
+    "2.0",
+    "2.7",
+    "3.2"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 2.0, below the replacement level of 2.1."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India is the world's most populous country."
+    },
+    {
+     "spk": "B",
+     "say": "Yet its families are now smaller than ever."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology II · Syllabus · AI voices",
+    "headline": "Population dynamics",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "India is the world's most populous country. Yet its families are now smaller than ever."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "First, high births and high deaths. Then deaths fall, and population booms."
+    },
+    {
+     "spk": "B",
+     "say": "Then births fall too, and growth slows."
+    }
+   ],
+   "data": {
+    "kicker": "Demographic transition",
+    "title": "Stages",
+    "items": [
+     {
+      "text": "High births, high deaths",
+      "sub": "",
+      "cue": "High"
+     },
+     {
+      "text": "Deaths fall first",
+      "sub": "Population booms",
+      "cue": "Deaths"
+     },
+     {
+      "text": "Births fall too",
+      "sub": "Growth slows",
+      "cue": "Births"
+     }
+    ]
+   },
+   "say": "First, high births and high deaths. Then deaths fall, and population booms. Then births fall too, and growth slows."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "N-F-H-S-5 found a total fertility rate of 2.0."
+    },
+    {
+     "spk": "B",
+     "say": "Below the replacement level of 2.1."
+    }
+   ],
+   "data": {
+    "kicker": "India's TFR",
+    "items": [
+     {
+      "value": 2.0,
+      "suffix": "",
+      "label": "children per woman (NFHS-5)",
+      "cue": "2",
+      "decimals": 1
+     },
+     {
+      "value": 2.1,
+      "suffix": "",
+      "label": "replacement level",
+      "cue": "replacement",
+      "decimals": 1
+     }
+    ]
+   },
+   "say": "N-F-H-S-5 found a total fertility rate of 2.0. Below the replacement level of 2.1."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The young workforce is a demographic dividend."
+    },
+    {
+     "spk": "B",
+     "say": "But ageing and the sex ratio are coming challenges."
+    }
+   ],
+   "data": {
+    "kicker": "For Mains",
+    "title": "Issues",
+    "items": [
+     {
+      "text": "Demographic dividend",
+      "sub": "A young workforce",
+      "cue": "dividend"
+     },
+     {
+      "text": "Ageing, sex ratio",
+      "sub": "Coming challenges",
+      "cue": "Ageing"
+     }
+    ]
+   },
+   "say": "The young workforce is a demographic dividend. But ageing and the sex ratio are coming challenges."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What's the T-F-R?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "According to NFHS-5, India's total fertility rate is about:",
+    "options": [
+     "1.5",
+     "2.0",
+     "2.7",
+     "3.2"
+    ]
+   },
+   "say": "Your turn. What's the T-F-R?"
+  }
+ ]
+}
