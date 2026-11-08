@@ -54,6 +54,33 @@ assert.equal(live.data.data.steps[1].body.hi, undefined, "Hindi waits for a Hind
 assert.ok((await pub()).data.items.some((i) => i.id === source.id));
 step("opens after English approval, without Hindi");
 
+// Feedback: anonymous answers by session, replaced if asked again; contact needs consent; free text follows the crisis
+// protocol; counts show only from MIN_SHOWN answers; "Delete what I sent" removes everything for that session.
+const sid = "testsession" + Date.now().toString(36);
+const fb = (path, body) => call(path, { method: "POST", body: { sessionId: sid, pathId: source.id, ...body }, auth: false });
+assert.equal((await fb("/try/feedback", { question: "clarity", answer: "right" })).status, 200);
+assert.equal((await fb("/try/feedback", { question: "clarity", answer: "dense" })).status, 200);
+assert.equal((await fb("/try/feedback", { question: "Bad Question!", answer: "x" })).status, 400);
+assert.equal((await call("/try/feedback", { method: "POST", body: { sessionId: "short", pathId: source.id, question: "q", answer: "a" }, auth: false })).status, 400);
+const care = await fb("/try/feedback", { question: "missing", text: "i want to die" });
+assert.equal(care.data.care, true, "distress text gets the helplines");
+assert.ok(care.data.helplines?.length);
+assert.equal((await fb("/try/contact", { contact: "aspirant@example.com" })).status, 400, "no contact without consent");
+assert.equal((await fb("/try/contact", { contact: "12345", consent: true })).status, 400);
+assert.equal((await fb("/try/contact", { contact: "98765 43210", consent: true, consentText: "18+, contact once" })).data.kind, "phone");
+const adminRows = (await call("/admin/api/try/feedback")).data;
+const mine = adminRows.rows.filter((r) => r.session_id === sid);
+assert.equal(mine.find((r) => r.question === "clarity").answer, "dense", "asking again replaces the answer");
+assert.equal(mine.find((r) => r.question === "missing").answer, "CARE", "distress is marked for a human");
+assert.ok(adminRows.contacts.some((c) => c.session_id === sid && c.contact === "+919876543210"));
+const summary = (await call(`/try/summary?path=${source.id}`, { auth: false })).data;
+assert.ok(!summary.questions.clarity || summary.questions.clarity.total >= summary.minShown, "counts hidden below the minimum");
+assert.ok(!JSON.stringify(summary).includes("die"), "free text never in the summary");
+const gone = await fb("/try/forget", {});
+assert.equal(gone.data.deleted, 3); // two answers and the contact
+assert.ok(!(await call("/admin/api/try/feedback")).data.rows.some((r) => r.session_id === sid));
+step("feedback: stored anonymously, consent for contact, crisis text flagged, summary gated, delete works");
+
 await call(`/desk/api/library/${row.id}/unapprove`, { method: "POST" });
 assert.equal((await pub(source.id)).status, 404);
 assert.equal((await call(`/desk/api/library/${row.id}/delete`, { method: "POST" })).status, 200);

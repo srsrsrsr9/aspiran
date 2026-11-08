@@ -591,6 +591,16 @@ function withMediaPaths(kind: string, pack: string, d: any, warnings: string[]) 
     out.scenes = compileScenes(out, warnings);
   }
   if (kind === "winddown" && out.audio?.file) out.audio.file = media(pack, out.audio.file);
+  // A topic path's videos (mp4, captions, poster) and essay page images ship in its pack.
+  if (kind === "topic-path") {
+    const fix = (o: any): void => {
+      if (Array.isArray(o)) return o.forEach(fix);
+      if (!o || typeof o !== "object") return;
+      for (const k of ["mp4", "vtt", "poster", "image"]) if (typeof o[k] === "string" && !/^(\/|https?:)/.test(o[k])) o[k] = media(pack, o[k]);
+      Object.values(o).forEach(fix);
+    };
+    fix(out.steps);
+  }
   // A talk's recorded parts, in order, per language.
   if (kind === "audio-lecture" && out.recording) for (const l of Object.keys(out.recording)) out.recording[l] = (out.recording[l] ?? []).map((p: string) => media(pack, p));
   // The Hidden Why names its drawing by scene; a missing file leaves a plain paper background.
@@ -918,7 +928,7 @@ export function checkTopicPath(d: any): string[] {
   if (!steps.length) return ["No steps"];
   const types = new Set(steps.map((s) => s.type));
   for (const t of ["read", "recall", "keep", "finish"]) if (!types.has(t)) flags.push(`No ${t} step`);
-  const mcqs = steps.flatMap((s) => [...(s.questions ?? []), ...(s.check ?? []), ...(s.cards ?? [])]).filter((q) => q.options);
+  const mcqs = steps.filter((s) => s.type !== "survey").flatMap((s) => [...(s.questions ?? []), ...(s.check ?? []), ...(s.cards ?? []).map((c: any) => c.mcq ?? c)]).filter((q) => q.options);
   const bad = mcqs.filter((q) => q.options.length !== 4 || !Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3 || !q.why?.en).length;
   if (bad) flags.push(`${bad} question${bad > 1 ? "s need" : " needs"} four options, an answer 0 to 3 and a why`);
   let texts = 0, hindi = 0;

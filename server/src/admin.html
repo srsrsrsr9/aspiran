@@ -245,7 +245,7 @@ function signInView(msg, kind = "err") {
 const SECTIONS = [
   ["overview", "Overview", "analytics"], ["content", "Content", "content"], ["moderation", "Moderation", "moderate"],
   ["safety", "Safety queue", "safety"], ["members", "Members", "members"], ["privacy", "Data requests", "privacy"],
-  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
+  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["trytopic", "Try one topic", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
   ["announcements", "Announcements", "announce"], ["incidents", "Status and incidents", "incidents"],
   ["staff", "Staff and roles", "staff"], ["languages", "Languages", "staff"], ["backups", "Backups", "backups"], ["audit", "Audit log", "audit"],
 ];
@@ -613,6 +613,41 @@ views.growth = async () => {
       h("div.tile", {}, h("div.n", {}, num(f.checkoutStarted)), h("div.l", {}, `checkouts started · ${p(f.checkoutPerOfferPct)} of offers`)),
       h("div.tile", {}, h("div.n", {}, num(f.paid)), h("div.l", {}, `paid · ${p(f.paidPerCheckoutPct)} of checkouts`)),
       h("div.tile", {}, h("div.n", {}, num(f.refunded)), h("div.l", {}, "refunded"))),
+  ];
+};
+
+// "Try one topic" (try.ts): what visitors told us on the open sample. Counts per question, every free-text answer
+// (CARE rows first: the crisis protocol applies, a human reads them), and contacts left with consent. Preview taps by
+// editors are tagged "draft:" and left out.
+views.trytopic = async () => {
+  const d = await api("try/feedback?limit=10000");
+  const rows = d.rows.filter((r) => !r.question.startsWith("draft:"));
+  const sessions = new Set(rows.map((r) => r.session_id)).size;
+  const byQ = {};
+  for (const r of rows) if (r.answer && r.answer !== "CARE") for (const a of r.answer.split("|")) { const q = (byQ[r.question] ??= {}); q[a] = (q[a] || 0) + 1; }
+  const texts = rows.filter((r) => r.text).sort((a, b) => (b.answer === "CARE") - (a.answer === "CARE"));
+  const csv = async () => {
+    const res = await fetch("/admin/api/try/feedback?format=csv", { headers: { authorization: "Bearer " + key } });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(await res.blob()); a.download = "aspiran-try-feedback.csv"; a.click();
+  };
+  const order = ["route", "stage", "medium", "liked", "replace", "price", "recommend", "clarity", "interleave", "recall-did", "sure-tick", "games", "games-gst", "mains-did", "no-more-asks"];
+  const qs = Object.keys(byQ).sort((a, b) => (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99) || a.localeCompare(b));
+  return [h("h2", {}, "Try one topic"),
+    h("p.lead", {}, "What visitors told us on the open sample (no account; a random id per browser). Editors' preview taps are left out."),
+    h("div.tiles", {}, h("div.tile", {}, h("div.n", {}, num(sessions)), h("div.l", {}, "visitors who answered anything")),
+      h("div.tile", {}, h("div.n", {}, num(texts.length)), h("div.l", {}, "written answers")),
+      h("div.tile" + (texts.some((t) => t.answer === "CARE") ? ".warn" : ""), {}, h("div.n", {}, num(texts.filter((t) => t.answer === "CARE").length)), h("div.l", {}, "flagged for care (read these first)")),
+      h("div.tile", {}, h("div.n", {}, num(d.contacts.length)), h("div.l", {}, "left a contact, with consent"))),
+    h("div.row", {}, h("button", { onclick: csv }, "Download everything (CSV)")),
+    h("h3", {}, "Answers by question"),
+    qs.length ? qs.map((q) => h("div.card", {}, h("b", {}, q), h("table", {}, Object.entries(byQ[q]).sort((a, b) => b[1] - a[1]).map(([a, n]) => h("tr", {}, h("td", {}, a), h("td", {}, num(n))))))) : h("p.muted", {}, "Nothing yet."),
+    h("h3", {}, "In their words"),
+    texts.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["When", "Question", "Answer", "Lang"].map((x) => h("th", {}, x))),
+      texts.map((t) => h("tr", {}, h("td", {}, ago(t.at)), h("td", {}, t.question), h("td", {}, t.answer === "CARE" ? h("b", {}, "CARE · ", t.text) : t.text), h("td", {}, t.lang))))) : h("p.muted", {}, "Nothing yet."),
+    h("h3", {}, "Contacts"),
+    h("p.muted", {}, "Each person agreed to be contacted once, about the full app opening or what they asked for. Nothing else. They can delete it themselves from the sample's last screen."),
+    d.contacts.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["When", "Contact", "Consent text", "Lang"].map((x) => h("th", {}, x))),
+      d.contacts.map((c) => h("tr", {}, h("td", {}, ago(c.at)), h("td.mono", {}, c.contact), h("td", {}, c.consent_text), h("td", {}, c.lang))))) : h("p.muted", {}, "None yet."),
   ];
 };
 

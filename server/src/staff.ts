@@ -303,6 +303,12 @@ export const ADMIN_SCHEMA = [
     lang TEXT, consent_at TEXT, source TEXT, first_seen TEXT NOT NULL, last_seen TEXT NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS web_leads_seen ON web_leads(last_seen)`,
   `CREATE TABLE IF NOT EXISTS web_rate (k TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL, PRIMARY KEY (k, day))`,
+  // "Try one topic" (try.ts): visitors' answers as they go, and a contact only if they chose to leave one.
+  `CREATE TABLE IF NOT EXISTS try_feedback (id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT NOT NULL, path_id TEXT NOT NULL,
+    question TEXT NOT NULL, answer TEXT, text TEXT, lang TEXT, day TEXT NOT NULL, at TEXT NOT NULL, UNIQUE (session_id, path_id, question))`,
+  `CREATE INDEX IF NOT EXISTS try_feedback_q ON try_feedback(path_id, question)`,
+  `CREATE TABLE IF NOT EXISTS try_contacts (session_id TEXT PRIMARY KEY, path_id TEXT NOT NULL, contact TEXT NOT NULL, contact_kind TEXT NOT NULL,
+    consent_text TEXT NOT NULL, lang TEXT, at TEXT NOT NULL)`,
 ];
 
 const ALTERS = [

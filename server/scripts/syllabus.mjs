@@ -140,7 +140,9 @@ function check() {
     if (missingHi.length) errs.push(`${p}: no Hindi at ${missingHi.slice(0, 5).join(", ")}${missingHi.length > 5 ? ` and ${missingHi.length - 5} more` : ""}`);
     for (const [i, st] of (d.steps ?? []).entries()) {
       const at = `${p} step ${i + 1} (${st.type})`;
-      for (const q of [...(st.questions ?? []), ...(st.check ?? []), ...(st.cards ?? [])]) {
+      if (st.type === "survey") continue; // opinions, not answers
+      const mcqs = [...(st.questions ?? []), ...(st.check ?? []), ...(st.cards ?? []).map((c) => c.mcq ?? c), ...(st.express?.check ?? [])];
+      for (const q of mcqs) {
         if (!q.options) continue;
         qs++;
         if (q.options.length !== 4 || new Set(q.options.map((o) => norm(o.en))).size !== 4) errs.push(`${at}: "${q.q?.en?.slice(0, 40)}" needs four different options`);
@@ -150,6 +152,11 @@ function check() {
       if (st.type === "pyq") for (const q of st.questions) if (!q.source?.paper || !q.source?.n) errs.push(`${at}: every PYQ needs source.paper and source.n`);
       if (st.type === "sort") for (const it of st.items ?? []) if (!(it.bucket >= 0 && it.bucket < (st.buckets?.length ?? 0))) errs.push(`${at}: ${it.text?.en} has no bucket`);
     }
+    // Media named as "media:<path under content/>" must exist; the pack copies them in.
+    const media = [];
+    JSON.stringify(d, (k, v) => { if (typeof v === "string" && v.startsWith("media:")) media.push(v.slice(6)); return v; });
+    for (const m of media) if (!existsSync(join(CONTENT, m))) errs.push(`${p}: media file ${m} is missing`);
+    for (const r of Object.values(d.routes ?? {})) for (const sid of r.steps) if (!d.steps.some((x) => x.id === sid)) errs.push(`${p}: route step ${sid} doesn't exist`);
     // PYQ answers must match the official key in content/pyq/pyq.json, question for question.
     const bank = existsSync(join(CONTENT, "pyq", "pyq.json")) ? load("pyq/pyq.json") : { papers: [] };
     for (const st of (d.steps ?? []).filter((x) => x.type === "pyq")) for (const q of st.questions) {
@@ -259,7 +266,22 @@ if (cmd === "check" || cmd === "pack") {
     for (const p of list("syllabus")) { const d = load(p); for (const n of d.notes) write(`long-read/${n.id}.json`, toRead(d, n), reads); }
     for (const p of list("csat")) { const d = load(p); write(`mock-paper/${d.id}.json`, toCsatMock(d), mocks); }
     for (const p of list("mocks")) { const d = load(p); write(`mock-paper/${d.id}.json`, toMock(d), mocks); }
-    for (const p of list("topic-paths")) { const d = load(p); write(`topic-path/${d.id}.json`, d, paths); }
+    for (const p of list("topic-paths")) {
+      const d = load(p);
+      // Videos and images ride in the pack; the import rewrites their paths to /media/<pack>/... (withMediaPaths).
+      const text = JSON.stringify(d, (k, v) => {
+        if (typeof v !== "string" || !v.startsWith("media:")) return v;
+        const src = v.slice(6), dst = `topic-path/media/${src.split("/").pop()}`;
+        if (!files.some((f) => f.path === dst)) {
+          const body = readFileSync(join(CONTENT, src));
+          mkdirSync(dirname(join(out, dst)), { recursive: true });
+          writeFileSync(join(out, dst), body);
+          files.push({ path: dst, bytes: body.length, sha256: createHash("sha256").update(body).digest("hex") });
+        }
+        return dst;
+      });
+      write(`topic-path/${d.id}.json`, JSON.parse(text), paths);
+    }
     const manifest = {
       schema: "upsc-pods/pack-manifest@1", packId, createdOn: today(), status: "draft, not editor-approved",
       entry: { reads, mocks, paths }, files, totalBytes: files.reduce((s, f) => s + f.bytes, 0),

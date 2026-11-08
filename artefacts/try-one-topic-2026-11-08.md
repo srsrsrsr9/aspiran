@@ -1,65 +1,120 @@
-# Try one topic: Federalism, open without an account
+# Try one topic: the Federalism demo (version 2)
 
 8 November 2026. Branch `sample-topic-open-access`. Not deployed, not merged.
 
-## What it is
+## Decisions for you (blocking before it goes public)
 
-A visitor opens `aspiran.in/app/#try` (or "Try one whole topic first" on the welcome screen) and works through one
-whole topic, start to finish, with no account. The topic is **Federalism and Centre–state relations** (GS2 and Prelims).
-I chose it because it had the most material already, and because UPSC asks it most: at least 11 Prelims questions in
-2018–2025 and a 15-mark GS2 question in Mains 2025.
+1. **Price question in the survey.** It says: "Plus (every mock paper, mock insights with an error log, the weekly Chai
+   test and the monthly compilation) costs ₹9,999 a year. The first 300 people who buy on our website pay ₹999 instead."
+   - Is that the right one-line description of Plus?
+   - Does the ₹999 renew at ₹999 or at ₹9,999? If it renews at ₹9,999, the question must say so.
+2. **AI marking of a photographed answer: free or Plus?** The essay screen says this is "still being decided" until you
+   choose.
+3. **Contact consent.** Contacts are kept until the person deletes them (there's a button), and are used once.
+   - Choose how long we keep them if nobody asks to delete (suggested: 12 months after the demo ends).
+   - Choose a grievance contact.
+   - Have a lawyer read the consent line (DPDP Rules 2025).
+4. **Essay pages.** The three "handwritten" pages are drawn on screen in a handwriting font and labelled "written by our
+   team for this demo". You make all content, so you may want to replace them with three real photographed pages.
+   The margin notes stay the same.
+5. **The videos use a synthetic voice** (Sarvam Bulbul). The cover and the video screen say so. Keep, or wait for
+   recorded voice?
+6. **Prelims 2026.** The path counts five papers (2018–2025) and says plainly that 2026 isn't counted yet. Adding the
+   2026 paper to `content/pyq/pyq.json` would strengthen the "why this topic" line.
 
-About 75 minutes in three sittings. One thing on screen at a time. It keeps the reader's place.
+## What a visitor gets
 
-| Step | What the reader does | Why (teaching plan) |
-|---|---|---|
-| 1. Guess first | 3 questions before reading | Pretesting: a wrong guess followed by the answer sticks |
-| 2–7. Five short reads | 4–5 minutes each, a check after each, plus "Which list?" (sort 12 subjects) | Recall straight after reading; lookalikes mixed together |
-| 8. Say it from memory | Write or say everything, then tick 10 points | Free recall; the unticked points are "your real syllabus" |
-| 9. What UPSC asked | 8 real PYQs (2018–2025), "Sure / Not sure" before answering | PYQ-first; calibration for negative marking |
-| 10. Use it | 3 situations (Article 252, Article 254(2), a Bommai-type case) | Transfer: applying it, not just recalling it |
-| 11. Plan a Mains answer | Pick Mains 2025 GS2 Q14 or a Governor question, plan in about 2 minutes, then our skeleton, a self-check, and "better conclusion" | Try before show; one answer shape everywhere |
-| 12. Keep it | 8 cards into the review queue (FSRS); topic marked Met on the syllabus map | Spacing |
-| 13. Finish | What you can now do; join free | Every piece ends |
+**Cover:** "Learn one UPSC topic properly. Judge us by it." with two doors.
 
-Rules kept: no timers, streaks or public scores (counts are private, on the device); no sound or motion; no AI; no
-upsell inside the path (one quiet "Join free" at the end); English and Hindi, with a language switch on every step.
+- **Express, about 15 minutes, 8 screens:**
+  1. Guess first.
+  2. The Governor and state bills.
+  3. The Governor's desk (game).
+  4. Which list? (six lookalikes).
+  5. Three 2025 and 2018 PYQs with "how sure?".
+  6. Plan a Mains answer.
+  7. Keep it.
+  8. Finish, with the survey.
+- **Whole topic, about 75 minutes, 17 screens in three sittings:**
+  1. Guess first.
+  2. Five short reads.
+  3. Which list? (12 items).
+  4. Two "good place to stop" cards.
+  5. The Governor's desk.
+  6. The GST Council vote (game).
+  7. Say it from memory.
+  8. Eight PYQs.
+  9. Three situations.
+  10. Mains plan.
+  11. Keep it.
+  12. Finish.
+- **Side doors (optional, never numbered):**
+  - two 52-second videos (Governors and the clock; when Union and State laws clash);
+  - four news cards (the Governor ruling, the 16th Finance Commission, the failed 131st Amendment, GST 2.0);
+  - an essay in three snaps (skeleton, outline, page, with S/C/E margin notes, plus "try yours" by photo, which never
+    leaves the phone);
+  - a tour of the app.
 
-## Content quality
+**Showing our thinking:**
+- Every step has a folded "Why we do it this way" note: plain English and Hindi, the study it rests on, and how strong
+  that evidence is (bands A to E).
+- One dry joke per step, never about results or wellbeing.
 
-- I checked the existing federalism note, walk, audio, practice and skeletons. They were accurate, but they left out
-  what Mains now asks:
-  - the Governor and bills (the 2025 rulings);
-  - Article 356 and S.R. Bommai;
-  - the GST Council's voting maths and Mohit Minerals;
-  - cesses outside the divisible pool;
-  - borrowing limits.
-- The path covers these in new text. It reuses the strongest existing pieces: the skeleton for Mains 2025 Q14 and two
-  of the "better conclusion" pairs.
-- All 8 PYQ answers are checked automatically against UPSC's official keys in `content/pyq/pyq.json`.
-- **You said on 2 Nov that you make all content.** You asked for content here, so I wrote it, and it is a draft like
-  everything else.
+**Collecting feedback:**
+- Up to five one-tap questions, each saying what we'll decide with the answer. They only appear after a step is done,
+  and a "No more questions" link turns them all off.
+- A six-question end survey: stage, language, most useful part, what's missing, what it would replace, price, and
+  0 to 10 likelihood to recommend.
+- An optional contact field with a consent box.
+- A "Delete what I sent" button.
+- After sending, the visitor sees what others said, once at least 20 people have answered.
+- You read it all in **Admin → Try one topic**, with a CSV download. Written answers that match the crisis-protocol
+  phrases show the helplines at once and are marked CARE at the top.
 
-## Before it opens (owner and editors)
+## What changed after the expert reviews
 
-1. **Polity editor:** check the 13 facts in `factsToCheck`. The most date-sensitive is the Presidential Reference
-   opinion of November 2025 (no court-set time limits for Governors, no "deemed assent"). Also check whether Kerala's
-   borrowing case has been decided, and whether the 16th Finance Commission's share has been published.
-2. **Hindi editor (Pooja):** the whole Hindi text. The Hindi PYQ text is our own translation, not UPSC's Hindi paper.
-3. Import and approve: `node scripts/syllabus.mjs pack`, then `npm run import -- <folder>`, then approve English on the
-   desk. It shows to visitors only after that. Hindi shows only after the Hindi approval.
-4. Walk the draft yourself first: `/app/#try/path-pol-federalism?preview` (it asks for your desk key).
+I asked three specialist reviewers (UPSC Polity faculty, a learning scientist, a UX and sales lead) for independent
+reviews. Their full reports are in `artefacts/try-one-topic-reviews/`. Most important changes:
 
-## Built
+- **Facts brought to November 2026.** The first version was out of date in places:
+  - The 16th Finance Commission kept 41% with new weights; the government accepted it on 1 Feb 2026.
+  - The Supreme Court's 20 Nov 2025 opinion: a Governor has three options, not four, and may reserve a re-passed bill.
+  - Also added: the failed 131st Amendment on Lok Sabha seats (17 Apr 2026), Census 2027, GST 2.0 and the end of the
+    compensation cess, Manipur's President's Rule (2025–26), Keralam, and Tamil Nadu's Kurian Joseph committee.
+- **Learning design:**
+  - The text folds away before each check.
+  - "Keep it" asks the cards cold and grades them; it no longer marks all eight as known.
+  - The warm-up guesses come back at the end.
+  - The recall checklist opens only after a try.
+  - Three confidence levels, with the negative-marking maths.
+  - A worked plan is offered to Mains beginners.
+- **UX:** the Express door, a slim header with named stages (Learn, Practise, Write, Keep), one PYQ per screen,
+  answers labelled in words ("Right answer", "your pick"), and no Join button inside the path.
+- **Honesty:** the old line "nothing is sent anywhere" became untrue once feedback existed. Now the first quick question
+  says exactly what is sent, and the cover says the videos use a synthetic voice.
 
-- `content/topic-paths/federalism.json`: the path (new content type `aspiran/topic-path@1`).
-- `server/src/try.ts`: `/try` serves approved paths only; a desk key can preview drafts.
-- `server/public/app/try.js`: the screen. Linked from the welcome screen, sign-in and Practice.
-- `server/scripts/syllabus.mjs`: checks and packs topic paths.
-- `server/test/try.mjs` (`npm run test:try`): checks the gate.
+## Before it opens (editors)
 
-## Not done (your call)
+1. **Polity editor:** check the 18 items in `factsToCheck`. The reviewers could reach news and legal sites, but not the
+   judgment PDFs, the Finance Commission report or PRS. So the primary documents still need a human check.
+2. **Hindi editor (Pooja):** all the Hindi. The PYQ and video-transcript Hindi is our own translation.
+3. **Import and approve:**
+   1. Run `node scripts/syllabus.mjs pack`. The videos ride in the pack.
+   2. Run `npm run import -- <folder>`.
+   3. Approve English on the desk. Visitors see nothing until then.
+4. **Deploy:** it needs migration 0009 (`try_feedback`, `try_contacts`). The Worker also creates these tables itself on
+   first use. Deploying needs Cloudflare access, which this cloud session doesn't have.
 
-- The website (aspiran-web) doesn't link to it yet.
-- The Android app has no screen for it. Visitors use the web app, which works on phones.
-- The status page isn't updated. I'll update it once this branch is merged and deployed.
+## Tested
+
+- Walked in a phone-sized browser: Express end to end, every side door, the full-route screens, Hindi, and the admin
+  view. No page errors.
+- Survey answers reach the database. Preview taps are tagged "draft:" and left out of admin.
+- `npm run test:try` passes: gate, Hindi stripping, feedback, consent, the distress flag, the summary minimum, and
+  delete. The smoke, mocks and pyq suites pass. Type check passes.
+
+## Not done
+
+- No link from the website (aspiran-web) yet.
+- The Android app has no screen for it; phones use the web app.
+- The status page is unchanged, because nothing is deployed.

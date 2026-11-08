@@ -401,7 +401,7 @@ function render() {
     // The shelf's honest tools work before (and without) signing up or signing in.
     if (PUBLIC.has(r.name)) {
       put(root, h("div.shell.public", h("main", { id: "main" },
-        h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: r.name === "try" ? "#try" : "#shelf" }, r.name === "try" ? "Aspiran · Try one topic" : "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
+        r.name !== "try" && h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
         VIEWS[r.name](r.arg))));
       return;
     }
@@ -3909,7 +3909,7 @@ function viewRoutine() {
 }
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
-TRY.init({ h, put, store, lang, profile, today });
+TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false) });
 BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud });
 
 const VIEWS = {
