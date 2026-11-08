@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "english-usage",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Most English errors are the same ten",
+ "gsPaper": [
+  "mains-english"
+ ],
+ "syllabusNodes": [
+  "english-3"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "english-usage-q1",
+   "q": "Choose the correct sentence:",
+   "options": [
+    "One of my friends live here.",
+    "One of my friends lives here.",
+    "One of my friend lives here.",
+    "One of my friend live here."
+   ],
+   "answerIndex": 1,
+   "why": "Right. 'One of my friends lives…': the subject is 'one'."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Paper B's usage section keeps testing the same few things."
+    },
+    {
+     "spk": "B",
+     "say": "Learn them once."
+    }
+   ],
+   "data": {
+    "kicker": "English paper · Syllabus · AI voices",
+    "headline": "Paper B: usage and vocabulary",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "Paper B's usage section keeps testing the same few things. Learn them once."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Subject–verb agreement. One of the boys is, not are. Articles."
+    },
+    {
+     "spk": "B",
+     "say": "And prepositions: different from, senior to."
+    }
+   ],
+   "data": {
+    "kicker": "Common errors",
+    "title": "Watch for",
+    "items": [
+     {
+      "text": "Subject–verb agreement",
+      "sub": "\"One of the boys is…\"",
+      "cue": "agreement"
+     },
+     {
+      "text": "Articles",
+      "sub": "a, an, the",
+      "cue": "Articles"
+     },
+     {
+      "text": "Prepositions",
+      "sub": "\"Different from\", \"senior to\"",
+      "cue": "Prepositions"
+     }
+    ]
+   },
+   "say": "Subject–verb agreement. One of the boys is, not are. Articles. And prepositions: different from, senior to."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Each of the students has a book."
+    },
+    {
+     "spk": "B",
+     "say": "Each takes a singular verb."
+    }
+   ],
+   "data": {
+    "kicker": "A test",
+    "text": "\"Each of the students has a book.\" Each takes a singular verb."
+   },
+   "say": "Each of the students has a book. Each takes a singular verb."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Learn new words inside sentences,"
+    },
+    {
+     "spk": "B",
+     "say": "not from lists."
+    }
+   ],
+   "data": {
+    "kicker": "Vocabulary",
+    "title": "Build it",
+    "items": [
+     {
+      "text": "Learn words in sentences",
+      "sub": "Not lists",
+      "cue": "sentences"
+     }
+    ]
+   },
+   "say": "Learn new words inside sentences, not from lists."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which sentence is correct?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Choose the correct sentence:",
+    "options": [
+     "One of my friends live here.",
+     "One of my friends lives here.",
+     "One of my friend lives here.",
+     "One of my friend live here."
+    ]
+   },
+   "say": "Your turn. Which sentence is correct?"
+  }
+ ]
+}

@@ -1,0 +1,254 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "tropic-of-cancer",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The Tropic of Cancer crosses eight Indian states",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "pre-3"
+ ],
+ "sources": [
+  "NCERT Class 9, Contemporary India I, ch. 1 'India: Size and Location'",
+  "Survey of India"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "tropic-of-cancer-q1",
+   "q": "Which of these states does the Tropic of Cancer NOT pass through?",
+   "options": [
+    "Tripura",
+    "Odisha",
+    "Jharkhand",
+    "Chhattisgarh"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Odisha lies south of the Tropic of Cancer."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "One line of latitude runs right across India."
+    },
+    {
+     "spk": "B",
+     "say": "The Tropic of Cancer, at about twenty-three and a half degrees north."
+    }
+   ],
+   "data": {
+    "kicker": "Prelims · Syllabus · AI voices",
+    "headline": "Eight states on one line of latitude",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "One line of latitude runs right across India. The Tropic of Cancer, at about twenty-three and a half degrees north."
+  },
+  {
+   "shot": "map",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It enters India in Gujarat."
+    },
+    {
+     "spk": "B",
+     "say": "And leaves through Mizoram, in the east."
+    }
+   ],
+   "data": {
+    "lon0": 0,
+    "start": {
+     "center": [
+      80,
+      22
+     ],
+     "zoom": 2.4
+    },
+    "moves": [
+     {
+      "cue": "Gujarat",
+      "center": [
+       72,
+       23.5
+      ],
+      "zoom": 4.2,
+      "d": 1.6
+     },
+     {
+      "cue": "Mizoram",
+      "center": [
+       90,
+       23.5
+      ],
+      "zoom": 4.2,
+      "d": 1.6
+     }
+    ],
+    "pins": [
+     {
+      "at": [
+       69.5,
+       23.44
+      ],
+      "label": "Gujarat · west end",
+      "cue": "Gujarat"
+     },
+     {
+      "at": [
+       92.8,
+       23.44
+      ],
+      "label": "Mizoram · east end",
+      "cue": "Mizoram"
+     }
+    ]
+   },
+   "say": "It enters India in Gujarat. And leaves through Mizoram, in the east."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh."
+    },
+    {
+     "spk": "B",
+     "say": "Then Jharkhand, West Bengal, Tripura and Mizoram."
+    }
+   ],
+   "data": {
+    "kicker": "The eight states",
+    "title": "West to east",
+    "items": [
+     {
+      "text": "Gujarat · Rajasthan · Madhya Pradesh · Chhattisgarh",
+      "sub": "The western half",
+      "cue": "Rajasthan"
+     },
+     {
+      "text": "Jharkhand · West Bengal · Tripura · Mizoram",
+      "sub": "The eastern half",
+      "cue": "Jharkhand"
+     }
+    ]
+   },
+   "say": "Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh. Then Jharkhand, West Bengal, Tripura and Mizoram."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It roughly divides the country in half."
+    },
+    {
+     "spk": "B",
+     "say": "Which is why it shows up in so many map questions."
+    }
+   ],
+   "data": {
+    "kicker": "A handy trick",
+    "text": "It splits India into two nearly equal halves: north and south."
+   },
+   "say": "It roughly divides the country in half. Which is why it shows up in so many map questions."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which state does it not pass through?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which of these states does the Tropic of Cancer NOT pass through?",
+    "options": [
+     "Tripura",
+     "Odisha",
+     "Jharkhand",
+     "Chhattisgarh"
+    ]
+   },
+   "say": "Your turn. Which state does it not pass through?"
+  }
+ ]
+}

@@ -1,0 +1,222 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "eia",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Big projects must be judged before they're built",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs3-6"
+ ],
+ "sources": [
+  "EIA Notification, 2006, under the Environment (Protection) Act, 1986",
+  "MoEFCC (parivesh.nic.in)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "eia-q1",
+   "q": "The EIA Notification, 2006 was issued under:",
+   "options": [
+    "The Forest Conservation Act",
+    "Environment (Protection) Act",
+    "The Wildlife Protection Act",
+    "The Water Act"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The Environment (Protection) Act, 1986."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Before a dam, a mine or a highway is built,"
+    },
+    {
+     "spk": "B",
+     "say": "its effect on the environment must be assessed. That's E-I-A."
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Environmental Impact Assessment",
+    "illustration": "illustrations/syllabus/forest.svg"
+   },
+   "say": "Before a dam, a mine or a highway is built, its effect on the environment must be assessed. That's E-I-A."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Category A projects are cleared by the Union environment ministry."
+    },
+    {
+     "spk": "B",
+     "say": "Category B projects by state-level authorities."
+    }
+   ],
+   "data": {
+    "kicker": "The rule",
+    "title": "EIA Notification, 2006",
+    "items": [
+     {
+      "text": "Category A",
+      "sub": "Cleared by the Centre (MoEFCC)",
+      "cue": "Category"
+     },
+     {
+      "text": "Category B",
+      "sub": "Cleared by state authorities (SEIAA)",
+      "cue": "B"
+     }
+    ]
+   },
+   "say": "Category A projects are cleared by the Union environment ministry. Category B projects by state-level authorities."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Screening and scoping decide what must be studied."
+    },
+    {
+     "spk": "B",
+     "say": "Then public consultation, and an expert appraisal."
+    }
+   ],
+   "data": {
+    "kicker": "The four stages",
+    "title": "In order",
+    "items": [
+     {
+      "text": "Screening · Scoping",
+      "sub": "Does it need a full study? What should it cover?",
+      "cue": "Screening"
+     },
+     {
+      "text": "Public consultation · Appraisal",
+      "sub": "Hear the people; experts review",
+      "cue": "Public"
+     }
+    ]
+   },
+   "say": "Screening and scoping decide what must be studied. Then public consultation, and an expert appraisal."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The notification comes under the Environment Protection Act of 1986,"
+    },
+    {
+     "spk": "B",
+     "say": "passed after the Bhopal gas tragedy."
+    }
+   ],
+   "data": {
+    "kicker": "The law behind it",
+    "text": "The Environment (Protection) Act, 1986, passed after the Bhopal gas tragedy."
+   },
+   "say": "The notification comes under the Environment Protection Act of 1986, passed after the Bhopal gas tragedy."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Under which law?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The EIA Notification, 2006 was issued under:",
+    "options": [
+     "The Forest Conservation Act",
+     "Environment (Protection) Act",
+     "The Wildlife Protection Act",
+     "The Water Act"
+    ]
+   },
+   "say": "Your turn. Under which law?"
+  }
+ ]
+}

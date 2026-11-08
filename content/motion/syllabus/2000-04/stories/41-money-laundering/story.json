@@ -1,0 +1,238 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "money-laundering",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Dirty money is washed in three steps",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs3-8"
+ ],
+ "sources": [
+  "Prevention of Money-laundering Act, 2002",
+  "Financial Action Task Force (fatf-gafi.org)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "money-laundering-q1",
+   "q": "Which stage hides the money's origin through many transactions?",
+   "options": [
+    "Placement",
+    "Layering",
+    "Integration",
+    "Structuring"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Layering."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "How does illegal money become clean?"
+    },
+    {
+     "spk": "B",
+     "say": "In three steps."
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Money laundering and the PMLA",
+    "illustration": "illustrations/syllabus/shield.svg"
+   },
+   "say": "How does illegal money become clean? In three steps."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Placement puts the cash into the system. Layering hides the trail."
+    },
+    {
+     "spk": "B",
+     "say": "Integration brings it back, looking legal."
+    }
+   ],
+   "data": {
+    "kicker": "The three stages",
+    "title": "Laundering",
+    "items": [
+     {
+      "text": "Placement",
+      "sub": "Cash enters the system",
+      "cue": "Placement"
+     },
+     {
+      "text": "Layering",
+      "sub": "Many transfers hide the trail",
+      "cue": "Layering"
+     },
+     {
+      "text": "Integration",
+      "sub": "It returns as clean money",
+      "cue": "Integration"
+     }
+    ]
+   },
+   "say": "Placement puts the cash into the system. Layering hides the trail. Integration brings it back, looking legal."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Prevention of Money Laundering Act was passed in 2002,"
+    },
+    {
+     "spk": "B",
+     "say": "and came into force in 2005. The Enforcement Directorate investigates under it."
+    }
+   ],
+   "data": {
+    "kicker": "India's law",
+    "points": [
+     {
+      "year": 2002,
+      "label": "PMLA passed",
+      "cue": "2002"
+     },
+     {
+      "year": 2005,
+      "label": "In force",
+      "cue": "2005"
+     }
+    ]
+   },
+   "say": "The Prevention of Money Laundering Act was passed in 2002, and came into force in 2005. The Enforcement Directorate investigates under it."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Financial Action Task Force was set up by the G7 in 1989."
+    },
+    {
+     "spk": "B",
+     "say": "India became a member in 2010."
+    }
+   ],
+   "data": {
+    "kicker": "The global watchdog",
+    "title": "FATF",
+    "items": [
+     {
+      "text": "Set up in 1989",
+      "sub": "By the G7",
+      "cue": "1989"
+     },
+     {
+      "text": "India a member since 2010",
+      "sub": "Grey and black lists",
+      "cue": "member"
+     }
+    ]
+   },
+   "say": "The Financial Action Task Force was set up by the G7 in 1989. India became a member in 2010."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which stage hides the trail?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which stage hides the money's origin through many transactions?",
+    "options": [
+     "Placement",
+     "Layering",
+     "Integration",
+     "Structuring"
+    ]
+   },
+   "say": "Your turn. Which stage hides the trail?"
+  }
+ ]
+}

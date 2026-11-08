@@ -1,0 +1,238 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "collegium",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Judges choose judges in India",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "syllabusNodes": [
+  "gs2-4"
+ ],
+ "sources": [
+  "S. P. Gupta v. Union of India (1981)",
+  "SC Advocates-on-Record Assn. v. Union of India (1993, 2015)",
+  "In re Special Reference 1 of 1998"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "collegium-q1",
+   "q": "The NJAC was struck down in:",
+   "options": [
+    "1998",
+    "2010",
+    "2015",
+    "2019"
+   ],
+   "answerIndex": 2,
+   "why": "Right. In October 2015, in the Fourth Judges case."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In most countries, the government appoints judges."
+    },
+    {
+     "spk": "B",
+     "say": "In India, senior judges choose them. How did that happen?"
+    }
+   ],
+   "data": {
+    "kicker": "GS2 · Syllabus · AI voices",
+    "headline": "The collegium: three cases and one Act",
+    "illustration": "illustrations/syllabus/court.svg"
+   },
+   "say": "In most countries, the government appoints judges. In India, senior judges choose them. How did that happen?"
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1981, the First Judges case gave the government the upper hand."
+    },
+    {
+     "spk": "B",
+     "say": "The Second, in 1993, created the collegium. The Third, in 1998, set it at the Chief Justice and four senior-most judges."
+    }
+   ],
+   "data": {
+    "kicker": "The Judges cases",
+    "points": [
+     {
+      "year": 1981,
+      "label": "First: the executive has primacy",
+      "cue": "1981"
+     },
+     {
+      "year": 1993,
+      "label": "Second: the collegium is born",
+      "cue": "1993"
+     },
+     {
+      "year": 1998,
+      "label": "Third: CJI plus four",
+      "cue": "1998"
+     }
+    ]
+   },
+   "say": "In 1981, the First Judges case gave the government the upper hand. The Second, in 1993, created the collegium. The Third, in 1998, set it at the Chief Justice and four senior-most judges."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 2014, Parliament replaced it with a National Judicial Appointments Commission."
+    },
+    {
+     "spk": "B",
+     "say": "In 2015, the Supreme Court struck that down, citing judicial independence."
+    }
+   ],
+   "data": {
+    "kicker": "The NJAC",
+    "points": [
+     {
+      "year": 2014,
+      "label": "99th Amendment creates NJAC",
+      "cue": "2014"
+     },
+     {
+      "year": 2015,
+      "label": "Struck down",
+      "cue": "2015"
+     }
+    ]
+   },
+   "say": "In 2014, Parliament replaced it with a National Judicial Appointments Commission. In 2015, the Supreme Court struck that down, citing judicial independence."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Supporters say it protects independence."
+    },
+    {
+     "spk": "B",
+     "say": "Critics say it is opaque. Your answer should weigh both."
+    }
+   ],
+   "data": {
+    "kicker": "The debate",
+    "title": "For Mains",
+    "items": [
+     {
+      "text": "For",
+      "sub": "Independence from the executive",
+      "cue": "independence"
+     },
+     {
+      "text": "Against",
+      "sub": "Opacity; judges choosing judges",
+      "cue": "answer"
+     }
+    ]
+   },
+   "say": "Supporters say it protects independence. Critics say it is opaque. Your answer should weigh both."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was the N-J-A-C struck down?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The NJAC was struck down in:",
+    "options": [
+     "1998",
+     "2010",
+     "2015",
+     "2019"
+    ]
+   },
+   "say": "Your turn. When was the N-J-A-C struck down?"
+  }
+ ]
+}

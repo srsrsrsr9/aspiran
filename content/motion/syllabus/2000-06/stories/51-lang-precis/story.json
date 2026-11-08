@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "lang-precis",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "A précis keeps the meaning in a third of the words",
+ "gsPaper": [
+  "mains-lang"
+ ],
+ "syllabusNodes": [
+  "lang-2"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "lang-precis-q1",
+   "q": "A précis should usually be about:",
+   "options": [
+    "Half the original",
+    "One-third of the original",
+    "The same length",
+    "Twice as long"
+   ],
+   "answerIndex": 1,
+   "why": "Right. About a third."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A précis is a shorter version of a passage."
+    },
+    {
+     "spk": "B",
+     "say": "Usually about a third of its length."
+    }
+   ],
+   "data": {
+    "kicker": "Language paper · Syllabus · AI voices",
+    "headline": "Paper A: précis writing",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "A précis is a shorter version of a passage. Usually about a third of its length."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Read it twice, and find the central idea. Cut the examples and repetition."
+    },
+    {
+     "spk": "B",
+     "say": "Then write it in your own words, and count."
+    }
+   ],
+   "data": {
+    "kicker": "The steps",
+    "title": "Writing a précis",
+    "items": [
+     {
+      "text": "Read twice",
+      "sub": "Find the central idea",
+      "cue": "twice"
+     },
+     {
+      "text": "Cut examples and repetition",
+      "sub": "Keep the argument",
+      "cue": "Cut"
+     },
+     {
+      "text": "Write in your own words",
+      "sub": "Count the words",
+      "cue": "own"
+     }
+    ]
+   },
+   "say": "Read it twice, and find the central idea. Cut the examples and repetition. Then write it in your own words, and count."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Aim for about one-third of the original."
+    },
+    {
+     "spk": "B",
+     "say": "The paper usually states the exact limit."
+    }
+   ],
+   "data": {
+    "kicker": "Length",
+    "items": [
+     {
+      "value": 33,
+      "suffix": "%",
+      "label": "of the original length",
+      "cue": "aim"
+     }
+    ]
+   },
+   "say": "Aim for about one-third of the original. The paper usually states the exact limit."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Never add your own opinion."
+    },
+    {
+     "spk": "B",
+     "say": "A précis only says what the author said, shorter."
+    }
+   ],
+   "data": {
+    "kicker": "Don't add",
+    "text": "No opinions, no new facts. Only what the author said."
+   },
+   "say": "Never add your own opinion. A précis only says what the author said, shorter."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How long should a précis be?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A précis should usually be about:",
+    "options": [
+     "Half the original",
+     "One-third of the original",
+     "The same length",
+     "Twice as long"
+    ]
+   },
+   "say": "Your turn. How long should a précis be?"
+  }
+ ]
+}

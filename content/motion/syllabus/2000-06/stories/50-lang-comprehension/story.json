@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "lang-comprehension",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The language paper is qualifying, but it can sink you",
+ "gsPaper": [
+  "mains-lang"
+ ],
+ "syllabusNodes": [
+  "lang-1"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "lang-comprehension-q1",
+   "q": "To qualify in the language paper you need:",
+   "options": [
+    "10%",
+    "25%",
+    "33%",
+    "40%"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 25%."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Indian language paper doesn't count in your rank."
+    },
+    {
+     "spk": "B",
+     "say": "But fail it, and your other Mains papers aren't marked."
+    }
+   ],
+   "data": {
+    "kicker": "Language paper · Syllabus · AI voices",
+    "headline": "Paper A: comprehension",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "The Indian language paper doesn't count in your rank. But fail it, and your other Mains papers aren't marked."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It carries 300 marks."
+    },
+    {
+     "spk": "B",
+     "say": "You need 25 percent to qualify."
+    }
+   ],
+   "data": {
+    "kicker": "The paper",
+    "items": [
+     {
+      "value": 300,
+      "suffix": "",
+      "label": "marks",
+      "cue": "300"
+     },
+     {
+      "value": 25,
+      "suffix": "%",
+      "label": "needed to qualify",
+      "cue": "25"
+     }
+    ]
+   },
+   "say": "It carries 300 marks. You need 25 percent to qualify."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Read the questions before the passage."
+    },
+    {
+     "spk": "B",
+     "say": "Then answer in your own words, not by copying whole lines."
+    }
+   ],
+   "data": {
+    "kicker": "Comprehension",
+    "title": "How to read",
+    "items": [
+     {
+      "text": "Read the questions first",
+      "sub": "Then the passage",
+      "cue": "questions"
+     },
+     {
+      "text": "Answer in your own words",
+      "sub": "Don't copy whole lines",
+      "cue": "own"
+     }
+    ]
+   },
+   "say": "Read the questions before the passage. Then answer in your own words, not by copying whole lines."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Some candidates are exempt,"
+    },
+    {
+     "spk": "B",
+     "say": "including those from certain north-eastern states and Sikkim. Check the notice."
+    }
+   ],
+   "data": {
+    "kicker": "Who's exempt",
+    "text": "Some candidates, including those from certain north-eastern states and Sikkim, are exempt."
+   },
+   "say": "Some candidates are exempt, including those from certain north-eastern states and Sikkim. Check the notice."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What do you need to qualify?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "To qualify in the language paper you need:",
+    "options": [
+     "10%",
+     "25%",
+     "33%",
+     "40%"
+    ]
+   },
+   "say": "Your turn. What do you need to qualify?"
+  }
+ ]
+}

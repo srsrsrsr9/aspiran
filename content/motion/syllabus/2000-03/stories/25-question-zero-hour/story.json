@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "question-zero-hour",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Zero Hour isn't in the rule book",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "syllabusNodes": [
+  "gs2-3"
+ ],
+ "sources": [
+  "Rules of Procedure and Conduct of Business in Lok Sabha",
+  "M. Laxmikanth, Indian Polity, ch. 'Parliament'"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "question-zero-hour-q1",
+   "q": "Which question allows supplementary questions?",
+   "options": [
+    "Unstarred",
+    "Starred",
+    "Written",
+    "Private member's"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Starred questions are answered orally, so supplementaries can follow."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The first hour of a sitting is Question Hour."
+    },
+    {
+     "spk": "B",
+     "say": "What comes right after it isn't in any rule."
+    }
+   ],
+   "data": {
+    "kicker": "GS2 · Syllabus · AI voices",
+    "headline": "Question Hour and Zero Hour",
+    "illustration": "illustrations/syllabus/parliament.svg"
+   },
+   "say": "The first hour of a sitting is Question Hour. What comes right after it isn't in any rule."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Starred questions get oral answers, and members can ask follow-ups."
+    },
+    {
+     "spk": "B",
+     "say": "Unstarred ones are answered in writing. Short notice questions deal with urgent matters."
+    }
+   ],
+   "data": {
+    "kicker": "Kinds of questions",
+    "title": "Question Hour",
+    "items": [
+     {
+      "text": "Starred",
+      "sub": "Answered orally; supplementaries allowed",
+      "cue": "Starred"
+     },
+     {
+      "text": "Unstarred",
+      "sub": "Answered in writing",
+      "cue": "Unstarred"
+     },
+     {
+      "text": "Short notice",
+      "sub": "On urgent matters, at less than ten days' notice",
+      "cue": "Short"
+     }
+    ]
+   },
+   "say": "Starred questions get oral answers, and members can ask follow-ups. Unstarred ones are answered in writing. Short notice questions deal with urgent matters."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Zero Hour began as a practice in the early 1960s."
+    },
+    {
+     "spk": "B",
+     "say": "Members raise urgent issues without prior notice. It's an Indian innovation."
+    }
+   ],
+   "data": {
+    "kicker": "Zero Hour",
+    "points": [
+     {
+      "year": 1962,
+      "label": "Practice begins",
+      "cue": "zero"
+     }
+    ]
+   },
+   "say": "Zero Hour began as a practice in the early 1960s. Members raise urgent issues without prior notice. It's an Indian innovation."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In G-S-two, use them as tools of accountability."
+    },
+    {
+     "spk": "B",
+     "say": "And note how often disruptions cut them short."
+    }
+   ],
+   "data": {
+    "kicker": "For Mains",
+    "text": "Both are tools of executive accountability."
+   },
+   "say": "In G-S-two, use them as tools of accountability. And note how often disruptions cut them short."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which one allows supplementaries?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which question allows supplementary questions?",
+    "options": [
+     "Unstarred",
+     "Starred",
+     "Written",
+     "Private member's"
+    ]
+   },
+   "say": "Your turn. Which one allows supplementaries?"
+  }
+ ]
+}

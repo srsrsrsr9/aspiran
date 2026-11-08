@@ -1,0 +1,209 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "syllogism",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Some is not the same as all",
+ "gsPaper": [
+  "prelims-csat"
+ ],
+ "syllabusNodes": [
+  "csat-2"
+ ],
+ "sources": [
+  "UPSC CSE notice: Prelims Paper II syllabus",
+  "Standard logic texts on categorical syllogisms"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "syllogism-q1",
+   "q": "All pens are blue. Some blue things are cheap. Which follows?",
+   "options": [
+    "Some pens are cheap",
+    "No pen is cheap",
+    "Neither conclusion follows",
+    "All cheap things are pens"
+   ],
+   "answerIndex": 2,
+   "why": "Right. The cheap blue things may not be pens, and nothing rules out a cheap pen either."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "All doctors are graduates. Some graduates are singers."
+    },
+    {
+     "spk": "B",
+     "say": "So, are some doctors singers? Not necessarily."
+    }
+   ],
+   "data": {
+    "kicker": "CSAT · Syllabus · AI voices",
+    "headline": "Syllogisms: draw the circles",
+    "illustration": "illustrations/syllabus/puzzle.svg"
+   },
+   "say": "All doctors are graduates. Some graduates are singers. So, are some doctors singers? Not necessarily."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Draw a circle for graduates, with doctors inside it."
+    },
+    {
+     "spk": "B",
+     "say": "The singers can sit in the part of the graduate circle that has no doctors."
+    }
+   ],
+   "data": {
+    "kicker": "Why not",
+    "text": "The singers may be graduates who are not doctors."
+   },
+   "say": "Draw a circle for graduates, with doctors inside it. The singers can sit in the part of the graduate circle that has no doctors."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "If all A are B, and all B are C, then all A are C."
+    },
+    {
+     "spk": "B",
+     "say": "And if some A are B, then some B are A. That one always reverses."
+    }
+   ],
+   "data": {
+    "kicker": "Safe rules",
+    "title": "What does follow",
+    "items": [
+     {
+      "text": "All A are B + All B are C",
+      "sub": "→ All A are C",
+      "cue": "All"
+     },
+     {
+      "text": "Some A are B",
+      "sub": "→ Some B are A",
+      "cue": "Some"
+     }
+    ]
+   },
+   "say": "If all A are B, and all B are C, then all A are C. And if some A are B, then some B are A. That one always reverses."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Try to build one picture where the conclusion fails."
+    },
+    {
+     "spk": "B",
+     "say": "If you can, the conclusion does not follow."
+    }
+   ],
+   "data": {
+    "kicker": "The habit",
+    "text": "If a counter-example exists, the conclusion does not follow."
+   },
+   "say": "Try to build one picture where the conclusion fails. If you can, the conclusion does not follow."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which conclusion follows?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "All pens are blue. Some blue things are cheap. Which follows?",
+    "options": [
+     "Some pens are cheap",
+     "No pen is cheap",
+     "Neither conclusion follows",
+     "All cheap things are pens"
+    ]
+   },
+   "say": "Your turn. Which conclusion follows?"
+  }
+ ]
+}

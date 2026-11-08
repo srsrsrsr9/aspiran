@@ -1,0 +1,213 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "tsunami-2004",
+ "card": null,
+ "lang": "en",
+ "tone": "SERIOUS",
+ "title": "After 2004, India built a tsunami warning centre",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs1-9"
+ ],
+ "sources": [
+  "INCOIS, Indian Tsunami Early Warning Centre (incois.gov.in)",
+  "NCERT Class 11, ch. on natural hazards"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "tsunami-2004-q1",
+   "q": "India's Tsunami Early Warning Centre is run by:",
+   "options": [
+    "IMD",
+    "INCOIS",
+    "ISRO",
+    "NDMA"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The Indian National Centre for Ocean Information Services, Hyderabad."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check magnitude (9.1, USGS) and the centre's year (2007). Kept factual; no casualty figures."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "On the twenty-sixth of December 2004, a great earthquake struck off Sumatra."
+    },
+    {
+     "spk": "B",
+     "say": "Hours later, waves reached India's coasts with no warning."
+    }
+   ],
+   "data": {
+    "kicker": "GS1 · Syllabus · AI voices",
+    "headline": "Tsunamis: the 2004 lesson",
+    "illustration": "illustrations/syllabus/disaster.svg"
+   },
+   "say": "On the twenty-sixth of December 2004, a great earthquake struck off Sumatra. Hours later, waves reached India's coasts with no warning."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It was of magnitude 9.1,"
+    },
+    {
+     "spk": "B",
+     "say": "one of the largest ever recorded."
+    }
+   ],
+   "data": {
+    "kicker": "The quake",
+    "items": [
+     {
+      "value": 9.1,
+      "suffix": "",
+      "label": "magnitude, off Sumatra",
+      "cue": "9",
+      "decimals": 1
+     }
+    ]
+   },
+   "say": "It was of magnitude 9.1, one of the largest ever recorded."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A tsunami is a series of waves set off when the sea floor suddenly moves."
+    },
+    {
+     "spk": "B",
+     "say": "In deep water it's low and fast. Near the coast it piles up."
+    }
+   ],
+   "data": {
+    "kicker": "What a tsunami is",
+    "text": "A series of waves caused when the sea floor suddenly moves."
+   },
+   "say": "A tsunami is a series of waves set off when the sea floor suddenly moves. In deep water it's low and fast. Near the coast it piles up."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 2007, India set up its tsunami early warning centre at INCOIS, in Hyderabad."
+    },
+    {
+     "spk": "B",
+     "say": "It now serves the whole Indian Ocean region."
+    }
+   ],
+   "data": {
+    "kicker": "India's answer",
+    "points": [
+     {
+      "year": 2007,
+      "label": "Warning centre at INCOIS, Hyderabad",
+      "cue": "2007"
+     }
+    ]
+   },
+   "say": "In 2007, India set up its tsunami early warning centre at INCOIS, in Hyderabad. It now serves the whole Indian Ocean region."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who runs India's tsunami warning centre?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "India's Tsunami Early Warning Centre is run by:",
+    "options": [
+     "IMD",
+     "INCOIS",
+     "ISRO",
+     "NDMA"
+    ]
+   },
+   "say": "Your turn. Who runs India's tsunami warning centre?"
+  }
+ ]
+}

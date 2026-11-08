@@ -1,0 +1,222 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "urbanisation",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "A town in the census can be a village on paper",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "gs1-6"
+ ],
+ "sources": [
+  "Census of India 2011, Provisional Population Totals, Urban Agglomerations and Cities"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "urbanisation-q1",
+   "q": "Which is NOT a criterion for a census town?",
+   "options": [
+    "Population of at least 5,000",
+    "75% men in non-farm work",
+    "A municipal corporation",
+    "Density of 400 per sq km"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Census towns have no urban local body; that is what separates them from statutory towns."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is a place a town or a village?"
+    },
+    {
+     "spk": "B",
+     "say": "The census has its own test, and it's stricter than you think."
+    }
+   ],
+   "data": {
+    "kicker": "GS1 · Syllabus · AI voices",
+    "headline": "Urbanisation: who counts as urban?",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "Is a place a town or a village? The census has its own test, and it's stricter than you think."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 2011, 31.1 percent of Indians lived in urban areas."
+    },
+    {
+     "spk": "B",
+     "say": "Up from about 27.8 percent in 2001."
+    }
+   ],
+   "data": {
+    "kicker": "Census 2011",
+    "items": [
+     {
+      "value": 31.1,
+      "suffix": "%",
+      "label": "of Indians lived in urban areas",
+      "cue": "31",
+      "decimals": 1
+     }
+    ]
+   },
+   "say": "In 2011, 31.1 percent of Indians lived in urban areas. Up from about 27.8 percent in 2001."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "At least five thousand people. At least 75 percent of working men outside farming."
+    },
+    {
+     "spk": "B",
+     "say": "And a density of at least 400 people per square kilometre."
+    }
+   ],
+   "data": {
+    "kicker": "All three needed",
+    "title": "The test",
+    "items": [
+     {
+      "text": "5,000+ people",
+      "sub": "Population",
+      "cue": "people"
+     },
+     {
+      "text": "75% of men in non-farm work",
+      "sub": "Main male workers",
+      "cue": "75"
+     },
+     {
+      "text": "400 per sq km",
+      "sub": "Density",
+      "cue": "400"
+     }
+    ]
+   },
+   "say": "At least five thousand people. At least 75 percent of working men outside farming. And a density of at least 400 people per square kilometre."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Many census towns are still run by panchayats."
+    },
+    {
+     "spk": "B",
+     "say": "That gap shows up in water, sanitation and planning."
+    }
+   ],
+   "data": {
+    "kicker": "For Mains",
+    "text": "Census towns are urban in character but often governed as villages."
+   },
+   "say": "Many census towns are still run by panchayats. That gap shows up in water, sanitation and planning."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which is not a criterion?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which is NOT a criterion for a census town?",
+    "options": [
+     "Population of at least 5,000",
+     "75% men in non-farm work",
+     "A municipal corporation",
+     "Density of 400 per sq km"
+    ]
+   },
+   "say": "Your turn. Which is not a criterion?"
+  }
+ ]
+}

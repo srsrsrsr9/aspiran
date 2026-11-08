@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "csat-qualifying",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "CSAT only needs 33 percent, but it must be cleared",
+ "gsPaper": [
+  "prelims-csat"
+ ],
+ "syllabusNodes": [
+  "csat-3"
+ ],
+ "sources": [
+  "UPSC CSE notice (2015 onwards): Paper II qualifying at 33%"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "csat-qualifying-q1",
+   "q": "From 2015, CSAT has been:",
+   "options": [
+    "Counted fully in the cutoff",
+    "Qualifying at 33%",
+    "Removed",
+    "Optional"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Since 2015 it is qualifying, with 33% needed."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Decision-making node: this episode covers how the paper is judged; check the 2015 notice wording."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your CSAT marks don't count in the merit list."
+    },
+    {
+     "spk": "B",
+     "say": "But fail it, and your GS score is never even checked."
+    }
+   ],
+   "data": {
+    "kicker": "CSAT · Syllabus · AI voices",
+    "headline": "CSAT: qualifying, not counted",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Your CSAT marks don't count in the merit list. But fail it, and your GS score is never even checked."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It has 80 questions"
+    },
+    {
+     "spk": "B",
+     "say": "for 200 marks, in two hours."
+    }
+   ],
+   "data": {
+    "kicker": "The paper",
+    "items": [
+     {
+      "value": 80,
+      "suffix": "",
+      "label": "questions",
+      "cue": "80"
+     },
+     {
+      "value": 200,
+      "suffix": "",
+      "label": "marks, 2 hours",
+      "cue": "200"
+     }
+    ]
+   },
+   "say": "It has 80 questions for 200 marks, in two hours."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "You need 33 percent."
+    },
+    {
+     "spk": "B",
+     "say": "That's 66 marks out of 200."
+    }
+   ],
+   "data": {
+    "kicker": "The bar",
+    "items": [
+     {
+      "value": 33,
+      "suffix": "%",
+      "label": "to qualify: 66 of 200",
+      "cue": "33"
+     }
+    ]
+   },
+   "say": "You need 33 percent. That's 66 marks out of 200."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "CSAT came in 2011, and counted towards the cutoff."
+    },
+    {
+     "spk": "B",
+     "say": "From 2015, it became qualifying only."
+    }
+   ],
+   "data": {
+    "kicker": "Why it changed",
+    "points": [
+     {
+      "year": 2011,
+      "label": "CSAT introduced",
+      "cue": "2011"
+     },
+     {
+      "year": 2015,
+      "label": "Made qualifying",
+      "cue": "2015"
+     }
+    ]
+   },
+   "say": "CSAT came in 2011, and counted towards the cutoff. From 2015, it became qualifying only."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What has CSAT been since 2015?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "From 2015, CSAT has been:",
+    "options": [
+     "Counted fully in the cutoff",
+     "Qualifying at 33%",
+     "Removed",
+     "Optional"
+    ]
+   },
+   "say": "Your turn. What has CSAT been since 2015?"
+  }
+ ]
+}

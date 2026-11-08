@@ -1,0 +1,229 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "answer-word-limits",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "150 words for 10 marks, 250 for 15",
+ "gsPaper": [
+  "mains-gs1",
+  "mains-gs2",
+  "mains-gs3",
+  "mains-gs4"
+ ],
+ "syllabusNodes": [
+  "essay-2"
+ ],
+ "sources": [
+  "UPSC Mains question papers (GS I to IV)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "answer-word-limits-q1",
+   "q": "About how many words does a 15-mark GS answer ask for?",
+   "options": [
+    "100",
+    "150",
+    "250",
+    "400"
+   ],
+   "answerIndex": 2,
+   "why": "Right. About 250 words."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A Mains answer has to fit a word limit."
+    },
+    {
+     "spk": "B",
+     "say": "And the limit tells you how deep to go."
+    }
+   ],
+   "data": {
+    "kicker": "Essay · Syllabus · AI voices",
+    "headline": "Mains answers: structure and word limits",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "A Mains answer has to fit a word limit. And the limit tells you how deep to go."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A ten-mark question asks for about 150 words."
+    },
+    {
+     "spk": "B",
+     "say": "A fifteen-marker, about 250."
+    }
+   ],
+   "data": {
+    "kicker": "Word limits",
+    "items": [
+     {
+      "value": 150,
+      "suffix": " words",
+      "label": "for a 10-mark question",
+      "cue": "150"
+     },
+     {
+      "value": 250,
+      "suffix": " words",
+      "label": "for a 15-mark question",
+      "cue": "250"
+     }
+    ]
+   },
+   "say": "A ten-mark question asks for about 150 words. A fifteen-marker, about 250."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Two lines of introduction. A body of clear points, with examples."
+    },
+    {
+     "spk": "B",
+     "say": "And a short way forward to close."
+    }
+   ],
+   "data": {
+    "kicker": "The shape",
+    "title": "Intro, body, conclusion",
+    "items": [
+     {
+      "text": "Intro",
+      "sub": "Two lines: define or set context",
+      "cue": "Intro"
+     },
+     {
+      "text": "Body",
+      "sub": "Points under headings, with examples",
+      "cue": "Body"
+     },
+     {
+      "text": "Conclusion",
+      "sub": "A way forward",
+      "cue": "forward"
+     }
+    ]
+   },
+   "say": "Two lines of introduction. A body of clear points, with examples. And a short way forward to close."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Read the directive word first."
+    },
+    {
+     "spk": "B",
+     "say": "Discuss, examine, critically analyse. Each wants a different answer."
+    }
+   ],
+   "data": {
+    "kicker": "Read the directive",
+    "text": "Discuss, examine, critically analyse: each asks for something different."
+   },
+   "say": "Read the directive word first. Discuss, examine, critically analyse. Each wants a different answer."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How many words for fifteen marks?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "About how many words does a 15-mark GS answer ask for?",
+    "options": [
+     "100",
+     "150",
+     "250",
+     "400"
+    ]
+   },
+   "say": "Your turn. How many words for fifteen marks?"
+  }
+ ]
+}
