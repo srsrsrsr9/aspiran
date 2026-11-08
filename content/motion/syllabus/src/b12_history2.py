@@ -157,7 +157,7 @@ E(214, "princely-integration", "hist2-13", PG + ["mains-gs2"], "Over 500 princel
       "A: Junagadh joined after a plebiscite in 1948. | B: Hyderabad was integrated after police action in September 1948."),
    QT("The tool", "The Instrument of Accession: defence, external affairs and communications.",
       "A: Rulers signed an Instrument of Accession, | B: first ceding only defence, external affairs and communications.")],
-  QZ("Which three subjects did the Instrument of Accession first cover?", ["Defence, finance, law", "Defence, foreign, communications", "Police, land, revenue", "Health, schools, railways"], 1,
+  QZ("Which three subjects did the Instrument of Accession first cover?", ["Defence, finance, law", "Defence, external, comms", "Police, land, revenue", "Health, schools, railways"], 1,
      "Right. Defence, external affairs and communications.", "A: Your turn. | B: Which three subjects?"))
 
 E(215, "ambedkar-1956", "hist2-14", PG, "Ambedkar turned to Buddhism in 1956", "Caste after 1947", "people",
