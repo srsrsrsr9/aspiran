@@ -324,7 +324,7 @@ E(171, "westernisation", "anthro2-12", P, "Change can come from inside or outsid
       "A: Sanskritisation is an indigenous process. | B: Westernisation and modernisation came from outside."),
    TL("Srinivas", [(1966, "Social Change in Modern India", "1966")],
       "A: Srinivas defined westernisation in 1966 | B: as changes from British rule: in technology, institutions, ideology and values."),
-   QT("Westernisation vs modernisation", "One is about a source; the other about a direction.",
+   QT("Source vs direction", "One is about a source; the other about a direction.",
       "A: Westernisation names where change came from. | B: Modernisation names where it is heading.")],
   QZ("Sanskritisation is an example of:", ["Exogenous change", "Indigenous change", "Globalisation", "Urbanisation"], 1,
      "Right. Indigenous change.", "A: Your turn. | B: What kind of change?"))
