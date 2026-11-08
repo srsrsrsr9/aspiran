@@ -1,0 +1,222 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "santhal-indigo",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Before 1857, peasants and tribes rose first",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "hist2-7"
+ ],
+ "sources": [
+  "NCERT Class 8, Our Pasts III, ch. 3 and 4",
+  "Dinabandhu Mitra, Nil Darpan (1860)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "santhal-indigo-q1",
+   "q": "The play 'Nil Darpan' is about:",
+   "options": [
+    "The Santhal revolt",
+    "Indigo planters' oppression",
+    "The 1857 revolt",
+    "Famine"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The oppression of indigo cultivators."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "1857 is famous."
+    },
+    {
+     "spk": "B",
+     "say": "But peasants and tribes had risen before, and after."
+    }
+   ],
+   "data": {
+    "kicker": "History II · Syllabus · AI voices",
+    "headline": "Indian response: Santhal and Indigo revolts",
+    "illustration": "illustrations/syllabus/forest.svg"
+   },
+   "say": "1857 is famous. But peasants and tribes had risen before, and after."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Santhals rose in 1855, led by Sidhu and Kanhu."
+    },
+    {
+     "spk": "B",
+     "say": "Bengal's indigo farmers revolted in 1859."
+    }
+   ],
+   "data": {
+    "kicker": "Revolts",
+    "points": [
+     {
+      "year": 1855,
+      "label": "Santhal Hul",
+      "cue": "1855"
+     },
+     {
+      "year": 1859,
+      "label": "Indigo revolt, Bengal",
+      "cue": "1859"
+     }
+    ]
+   },
+   "say": "The Santhals rose in 1855, led by Sidhu and Kanhu. Bengal's indigo farmers revolted in 1859."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Santhals fought moneylenders and land loss."
+    },
+    {
+     "spk": "B",
+     "say": "Indigo farmers refused to grow the crop for planters."
+    }
+   ],
+   "data": {
+    "kicker": "Why",
+    "title": "Causes",
+    "items": [
+     {
+      "text": "Santhals",
+      "sub": "Moneylenders, land loss",
+      "cue": "Santhals"
+     },
+     {
+      "text": "Indigo",
+      "sub": "Forced cultivation by planters",
+      "cue": "Indigo"
+     }
+    ]
+   },
+   "say": "The Santhals fought moneylenders and land loss. Indigo farmers refused to grow the crop for planters."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Dinabandhu Mitra's play Nil Darpan, in 1860,"
+    },
+    {
+     "spk": "B",
+     "say": "exposed the planters' cruelty."
+    }
+   ],
+   "data": {
+    "kicker": "A play",
+    "text": "Nil Darpan (1860) exposed the planters' cruelty."
+   },
+   "say": "Dinabandhu Mitra's play Nil Darpan, in 1860, exposed the planters' cruelty."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What is it about?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The play 'Nil Darpan' is about:",
+    "options": [
+     "The Santhal revolt",
+     "Indigo planters' oppression",
+     "The 1857 revolt",
+     "Famine"
+    ]
+   },
+   "say": "Your turn. What is it about?"
+  }
+ ]
+}

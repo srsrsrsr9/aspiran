@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "russian-chinese-revolutions",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Two revolutions, 32 years apart",
+ "gsPaper": [
+  "optional-history"
+ ],
+ "syllabusNodes": [
+  "hist2-21"
+ ],
+ "sources": [
+  "NCERT Class 9, India and the Contemporary World I, ch. 2",
+  "NCERT Class 11, Themes in World History"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "russian-chinese-revolutions-q1",
+   "q": "The People's Republic of China was proclaimed in:",
+   "options": [
+    "1911",
+    "1937",
+    "1949",
+    "1966"
+   ],
+   "answerIndex": 2,
+   "why": "Right. 1 October 1949."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The twentieth century's two great communist revolutions"
+    },
+    {
+     "spk": "B",
+     "say": "came in Russia, and in China."
+    }
+   ],
+   "data": {
+    "kicker": "History II · Syllabus · AI voices",
+    "headline": "Revolution and counter-revolution",
+    "illustration": "illustrations/syllabus/scroll.svg"
+   },
+   "say": "The twentieth century's two great communist revolutions came in Russia, and in China."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1917, the Bolsheviks took power in Russia."
+    },
+    {
+     "spk": "B",
+     "say": "In 1949, Mao proclaimed the People's Republic of China."
+    }
+   ],
+   "data": {
+    "kicker": "Revolutions",
+    "points": [
+     {
+      "year": 1917,
+      "label": "Russian Revolution",
+      "cue": "1917"
+     },
+     {
+      "year": 1949,
+      "label": "People's Republic of China",
+      "cue": "1949"
+     }
+    ]
+   },
+   "say": "In 1917, the Bolsheviks took power in Russia. In 1949, Mao proclaimed the People's Republic of China."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In February, the Tsar fell."
+    },
+    {
+     "spk": "B",
+     "say": "In October, Lenin's Bolsheviks seized power."
+    }
+   ],
+   "data": {
+    "kicker": "Russia, 1917",
+    "title": "Two revolutions",
+    "items": [
+     {
+      "text": "February",
+      "sub": "The Tsar falls",
+      "cue": "February"
+     },
+     {
+      "text": "October",
+      "sub": "Lenin's Bolsheviks seize power",
+      "cue": "October"
+     }
+    ]
+   },
+   "say": "In February, the Tsar fell. In October, Lenin's Bolsheviks seized power."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Counter-revolution came too:"
+    },
+    {
+     "spk": "B",
+     "say": "fascism in Italy, and Nazism in Germany."
+    }
+   ],
+   "data": {
+    "kicker": "Counter-revolution",
+    "title": "Also",
+    "items": [
+     {
+      "text": "Fascism · Nazism",
+      "sub": "Italy, Germany",
+      "cue": "Fascism"
+     }
+    ]
+   },
+   "say": "Counter-revolution came too: fascism in Italy, and Nazism in Germany."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was it proclaimed?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The People's Republic of China was proclaimed in:",
+    "options": [
+     "1911",
+     "1937",
+     "1949",
+     "1966"
+    ]
+   },
+   "say": "Your turn. When was it proclaimed?"
+  }
+ ]
+}

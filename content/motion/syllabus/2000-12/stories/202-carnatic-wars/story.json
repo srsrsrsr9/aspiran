@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "carnatic-wars",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Britain and France fought for India in the Carnatic",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "hist2-1"
+ ],
+ "sources": [
+  "Spectrum / Bipan Chandra, Modern India",
+  "NCERT Class 8, Our Pasts III, ch. 2"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "carnatic-wars-q1",
+   "q": "The Battle of Wandiwash (1760) was fought between:",
+   "options": [
+    "British and Dutch",
+    "British and French",
+    "French and Portuguese",
+    "British and Marathas"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The British and the French."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Before Britain ruled India, it had to beat France here."
+    },
+    {
+     "spk": "B",
+     "say": "That happened in the Carnatic."
+    }
+   ],
+   "data": {
+    "kicker": "History II · Syllabus · AI voices",
+    "headline": "European penetration: the Carnatic Wars",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "Before Britain ruled India, it had to beat France here. That happened in the Carnatic."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Three Carnatic Wars ran from 1746 to 1763."
+    },
+    {
+     "spk": "B",
+     "say": "The British victory at Wandiwash in 1760 ended French hopes."
+    }
+   ],
+   "data": {
+    "kicker": "The wars",
+    "points": [
+     {
+      "year": 1746,
+      "label": "First Carnatic War",
+      "cue": "1746"
+     },
+     {
+      "year": 1760,
+      "label": "Battle of Wandiwash",
+      "cue": "1760"
+     },
+     {
+      "year": 1763,
+      "label": "Treaty of Paris",
+      "cue": "1763"
+     }
+    ]
+   },
+   "say": "Three Carnatic Wars ran from 1746 to 1763. The British victory at Wandiwash in 1760 ended French hopes."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Dupleix led the French,"
+    },
+    {
+     "spk": "B",
+     "say": "and Robert Clive made his name for the British."
+    }
+   ],
+   "data": {
+    "kicker": "Key figures",
+    "title": "Who",
+    "items": [
+     {
+      "text": "Dupleix",
+      "sub": "French governor",
+      "cue": "Dupleix"
+     },
+     {
+      "text": "Robert Clive",
+      "sub": "British commander",
+      "cue": "Clive"
+     }
+    ]
+   },
+   "say": "Dupleix led the French, and Robert Clive made his name for the British."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The lesson:"
+    },
+    {
+     "spk": "B",
+     "say": "small, drilled European armies could decide who ruled Indian states."
+    }
+   ],
+   "data": {
+    "kicker": "The lesson",
+    "text": "Small European armies could decide Indian successions."
+   },
+   "say": "The lesson: small, drilled European armies could decide who ruled Indian states."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who fought at Wandiwash?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Battle of Wandiwash (1760) was fought between:",
+    "options": [
+     "British and Dutch",
+     "British and French",
+     "French and Portuguese",
+     "British and Marathas"
+    ]
+   },
+   "say": "Your turn. Who fought at Wandiwash?"
+  }
+ ]
+}
