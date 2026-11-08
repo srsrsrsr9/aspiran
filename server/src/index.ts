@@ -29,6 +29,7 @@ import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
 
 import { webRoute } from "./web";
+import { tryRoute } from "./try";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -149,6 +150,8 @@ export default {
 
     // --- Content library (approved items only) and the files it points at. Members only (isContentRoute); the Free
     // Shelf's calm scripts and routines stay open to visitors at /library/shelf.
+    // "Try one topic" (try.ts): one whole syllabus topic, open to visitors. Approved only, like the shelf.
+    { const r = await tryRoute(req, env, path, url); if (r) return r; }
     if (path === "/library/shelf") {
       if (!(await flags(env)).library) return json({ items: [], paused: true });
       const data = await (await publicLibrary(env)).json<{ items: { kind: string }[] }>();

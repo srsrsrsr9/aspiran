@@ -4,6 +4,8 @@
 // Sources (all English, all drafts):
 //   content/syllabus/<subject>.json   upsc-pods/syllabus-notes@1: one long read per syllabus topic
 //   content/csat/<set>.json           upsc-pods/csat-passages@1: passages with their questions
+//   content/topic-paths/<topic>.json  aspiran/topic-path@1: one whole topic as a guided path (the open "Try one
+//                                     topic" sample at /try). Already in the app's shape; packed as it is.
 //   content/mocks/<mock>.json         upsc-pods/mock-source@1: a full paper of questions. Optional per question:
 //                                     "hi" (q, statements, ask, options, why), "passage" (an id in the file's
 //                                     "passages" list) and "table" (rows of strings, header first; "hi.table" too).
@@ -117,6 +119,47 @@ function check() {
     });
     counts.mocks[d.id] = { questions: d.questions.length, topics };
   }
+  counts.paths = {};
+  for (const p of list("topic-paths")) {
+    const d = load(p);
+    if (d.schema !== "aspiran/topic-path@1") { errs.push(`${p}: schema should be aspiran/topic-path@1`); continue; }
+    if (ids.has(d.id)) errs.push(`${p}: id ${d.id} used twice`);
+    ids.add(d.id);
+    for (const x of d.nodes ?? []) { const e = nodeErr(x); if (e) errs.push(`${p}: ${e}`); }
+    if (!d.nodes?.includes(d.node)) errs.push(`${p}: node ${d.node} should be in nodes`);
+    if (d.review?.status !== "draft") errs.push(`${p}: a source file is always a draft; editors approve on the desk`);
+    let qs = 0;
+    const missingHi = [];
+    const walk = (o, at) => {
+      if (Array.isArray(o)) return o.forEach((x, i) => walk(x, `${at}[${i}]`));
+      if (!o || typeof o !== "object") return;
+      if (typeof o.en === "string" && o.en && !o.hi && !at.endsWith("sources") && !at.includes("hiNote")) missingHi.push(at);
+      for (const [k, v] of Object.entries(o)) walk(v, `${at}.${k}`);
+    };
+    walk(d, d.id);
+    if (missingHi.length) errs.push(`${p}: no Hindi at ${missingHi.slice(0, 5).join(", ")}${missingHi.length > 5 ? ` and ${missingHi.length - 5} more` : ""}`);
+    for (const [i, st] of (d.steps ?? []).entries()) {
+      const at = `${p} step ${i + 1} (${st.type})`;
+      for (const q of [...(st.questions ?? []), ...(st.check ?? []), ...(st.cards ?? [])]) {
+        if (!q.options) continue;
+        qs++;
+        if (q.options.length !== 4 || new Set(q.options.map((o) => norm(o.en))).size !== 4) errs.push(`${at}: "${q.q?.en?.slice(0, 40)}" needs four different options`);
+        if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3) errs.push(`${at}: answer should be 0 to 3`);
+        if (!q.why?.en) errs.push(`${at}: no why`);
+      }
+      if (st.type === "pyq") for (const q of st.questions) if (!q.source?.paper || !q.source?.n) errs.push(`${at}: every PYQ needs source.paper and source.n`);
+      if (st.type === "sort") for (const it of st.items ?? []) if (!(it.bucket >= 0 && it.bucket < (st.buckets?.length ?? 0))) errs.push(`${at}: ${it.text?.en} has no bucket`);
+    }
+    // PYQ answers must match the official key in content/pyq/pyq.json, question for question.
+    const bank = existsSync(join(CONTENT, "pyq", "pyq.json")) ? load("pyq/pyq.json") : { papers: [] };
+    for (const st of (d.steps ?? []).filter((x) => x.type === "pyq")) for (const q of st.questions) {
+      const paper = bank.papers.find((x) => x.id === q.source.paper);
+      const orig = paper?.questions.find((x) => String(x.n) === String(q.source.n));
+      if (!orig) errs.push(`${p}: ${q.source.paper} Q${q.source.n} isn't in pyq.json`);
+      else if (orig.answer !== q.answer) errs.push(`${p}: ${q.source.paper} Q${q.source.n} answer ${q.answer}, but the official key in pyq.json says ${orig.answer}`);
+    }
+    counts.paths[d.id] = { steps: d.steps.length, questions: qs };
+  }
   return { errs, counts };
 }
 
@@ -200,11 +243,12 @@ if (cmd === "check" || cmd === "pack") {
   if (errs.length) { for (const e of errs) console.error("  " + e); process.exit(1); }
   console.log("Notes: " + Object.entries(counts.notes).map(([s, n]) => `${s} ${n}`).join(", "));
   console.log(`CSAT: ${counts.passages} passages, ${counts.passageQuestions} questions`);
+  for (const [id, x] of Object.entries(counts.paths)) console.log(`Topic path ${id}: ${x.steps} steps, ${x.questions} questions`);
   for (const [id, m] of Object.entries(counts.mocks)) console.log(`Mock ${id}: ${m.questions} questions (${Object.entries(m.topics).map(([t, n]) => `${t} ${n}`).join(", ")})`);
   if (cmd === "pack") {
     const packId = `syllabus-${today()}`;
     const out = args[0] ?? join(ROOT, "server", "content", packId);
-    const files = [], reads = [], mocks = [];
+    const files = [], reads = [], mocks = [], paths = [];
     const write = (path, data, into) => {
       mkdirSync(dirname(join(out, path)), { recursive: true });
       const body = Buffer.from(JSON.stringify(data, null, 2) + "\n");
@@ -215,12 +259,13 @@ if (cmd === "check" || cmd === "pack") {
     for (const p of list("syllabus")) { const d = load(p); for (const n of d.notes) write(`long-read/${n.id}.json`, toRead(d, n), reads); }
     for (const p of list("csat")) { const d = load(p); write(`mock-paper/${d.id}.json`, toCsatMock(d), mocks); }
     for (const p of list("mocks")) { const d = load(p); write(`mock-paper/${d.id}.json`, toMock(d), mocks); }
+    for (const p of list("topic-paths")) { const d = load(p); write(`topic-path/${d.id}.json`, d, paths); }
     const manifest = {
       schema: "upsc-pods/pack-manifest@1", packId, createdOn: today(), status: "draft, not editor-approved",
-      entry: { reads, mocks }, files, totalBytes: files.reduce((s, f) => s + f.bytes, 0),
+      entry: { reads, mocks, paths }, files, totalBytes: files.reduce((s, f) => s + f.bytes, 0),
     };
     writeFileSync(join(out, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
-    console.log(`Pack ${packId}: ${reads.length} reads, ${mocks.length} mocks, written to ${out}. Next: npm run import -- ${out}`);
+    console.log(`Pack ${packId}: ${reads.length} reads, ${mocks.length} mocks, ${paths.length} topic paths, written to ${out}. Next: npm run import -- ${out}`);
   }
 } else {
   console.log("Commands: check, pack (see the top of scripts/syllabus.mjs)");

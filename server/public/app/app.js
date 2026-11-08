@@ -23,6 +23,7 @@ import * as MP from "./map.js";
 import * as X from "./explore.js";
 import * as BR from "./brief.js";
 import * as SKY from "./sky.js";
+import * as TRY from "./try.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -312,12 +313,13 @@ const PREP_TABS = [
 const TAB_OF = {
   pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
   prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
-  learn: "prep", upgrade: "prep", skeletons: "prep", cases: "prep", csat: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
+  learn: "prep", try: "prep", upgrade: "prep", skeletons: "prep", cases: "prep", csat: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
-const PREP_OF = { skeletons: "practice", cases: "practice", csat: "practice", walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
+const PREP_OF = { try: "learn", skeletons: "practice", cases: "practice", csat: "practice", walk: "practice", print: "practice", optional: "practice", terms: "practice", review: "today", map: "plan", ptest: "practice", pcompile: "practice", insights: "practice", revise: "practice", prelims: "practice", mains: "practice", essay: "practice", interview: "practice", casefile: "practice", progress: "practice", routine: "plan", roadmap: "plan", prep: "today" };
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
-const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk"]);
+// "Try one topic" (try.js) too: one whole syllabus topic, open to anyone.
+const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk", "try"]);
 
 function route() {
   const [name, ...rest] = (location.hash.slice(1) || "adda").split("/");
@@ -399,7 +401,7 @@ function render() {
     // The shelf's honest tools work before (and without) signing up or signing in.
     if (PUBLIC.has(r.name)) {
       put(root, h("div.shell.public", h("main", { id: "main" },
-        h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
+        h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: r.name === "try" ? "#try" : "#shelf" }, r.name === "try" ? "Aspiran · Try one topic" : "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
         VIEWS[r.name](r.arg))));
       return;
     }
@@ -454,13 +456,13 @@ function onboarding() {
         langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); }),
         h("p.small.muted", tl("lang.note"))),
       requestPanel(),
-      h("p.small.center", h("a", { href: "#shelf" }, "Look around the Free Shelf first"))];
+      h("p.small.center", h("a", { href: "#try" }, "Try one whole topic first, no account needed"), " · ", h("a", { href: "#shelf" }, "Look around the Free Shelf"))];
   } else if (o.step === 1) {
     body = [h("h1", "Sign in"),
       h("p", "So your pod, stamps and settings stay yours, and so the Adda stays safe. Sign in with Google, or with a username and password. Your email or username is only for signing in: your pod never sees it, and it never goes to Chotu."),
       signInPanel(null, (memberId) => { o.memberId = memberId; step(2); }),
       h("div.row", h("button", { onclick: () => step(0) }, "Back")),
-      h("p.small.center", h("a", { href: "#shelf" }, "Just looking? The Free Shelf works without an account"))];
+      h("p.small.center", "Just looking? ", h("a", { href: "#try" }, "Try one topic"), " or the ", h("a", { href: "#shelf" }, "Free Shelf"), ", no account needed")];
   } else if (o.step === 2) {
     const adult = h("input", { type: "checkbox", id: "adult", checked: o.adult, onchange: (e) => { o.adult = e.target.checked; go.disabled = !(o.adult && o.consent); } });
     const consent = h("input", { type: "checkbox", id: "consent", checked: o.consent, onchange: (e) => { o.consent = e.target.checked; go.disabled = !(o.adult && o.consent); } });
@@ -758,6 +760,7 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Mock interview"), h("div.small.muted", libraryOf("interview-bank").length ? "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." : "Opens once the interview questions are approved.")), h("a.btn", { href: "#interview" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
+    h("a.card.link", { href: "#try" }, h("div.row.between", h("div", h("strong", "One topic, start to finish"), h("div.small.muted", "Federalism: guess, read, recall, real PYQs, a Mains plan, then into your review. About 75 minutes.")), h("span", "→"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
     h("h2", "Away from the screen"),
     h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", `Earphones in: the device voice names a topic or reads a card, you say three points aloud.${libraryOf("walk-script").length ? ` Plus ${libraryOf("walk-script").length} guided walks.` : ""}`)), h("span", "→"))),
@@ -3906,13 +3909,14 @@ function viewRoutine() {
 }
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
+TRY.init({ h, put, store, lang, profile, today });
 BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud });
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks,
-  learn: X.viewLearn, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
+  learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
   shelf: viewShelf, compass: viewCompass, cost: viewCost, maps: viewMaps, thinker: viewThinker,

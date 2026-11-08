@@ -1,0 +1,616 @@
+{
+  "schema": "aspiran/topic-path@1",
+  "id": "path-pol-federalism",
+  "version": 1,
+  "tone": "NEUTRAL",
+  "subject": "pol",
+  "node": "gs2-2",
+  "nodes": ["gs2-2", "pre-4"],
+  "gsPaper": "GS2",
+  "title": { "en": "Federalism and Centre–state relations", "hi": "संघवाद और केंद्र-राज्य संबंध" },
+  "promise": {
+    "en": "One topic, start to finish: learn it, recall it, practise it the way UPSC asks it, and keep it.",
+    "hi": "एक topic, शुरू से आख़िर तक: समझिए, याद से निकालिए, वैसे practice कीजिए जैसे UPSC पूछता है, और उसे याद रखिए।"
+  },
+  "canDo": [
+    { "en": "Explain why India is a federation with a strong centre, with four features on each side.", "hi": "समझा सकें कि भारत सशक्त केंद्र वाला संघ क्यों है, दोनों पक्षों की चार-चार विशेषताओं के साथ।" },
+    { "en": "Place a subject in the Union, State or Concurrent List, and name the Articles that let Parliament enter the State List.", "hi": "किसी विषय को संघ, राज्य या समवर्ती सूची में रख सकें, और वे अनुच्छेद बता सकें जिनसे संसद राज्य सूची में विधि बना सकती है।" },
+    { "en": "Say what the Governor, Article 356, the Finance Commission and the GST Council each do to the balance, with one case or number for each.", "hi": "बता सकें कि राज्यपाल, अनुच्छेद 356, वित्त आयोग और GST परिषद संतुलन पर क्या असर डालते हैं, हर एक के लिए एक केस या आँकड़े के साथ।" },
+    { "en": "Plan a 250-word Mains answer on fiscal federalism or the Governor in about two minutes.", "hi": "राजकोषीय संघवाद या राज्यपाल पर 250 शब्दों के Mains answer का ढाँचा लगभग दो मिनट में बना सकें।" }
+  ],
+  "sittings": {
+    "en": "About 75 minutes in all, best in three sittings: read and check (25), practise (25), write and keep (25). Stop anywhere; this page keeps your place. No clock runs.",
+    "hi": "कुल लगभग 75 मिनट, तीन बार में सबसे अच्छा: पढ़िए और जाँचिए (25), practice (25), लिखिए और सहेजिए (25)। कहीं भी रुकिए; यह पेज आपकी जगह याद रखता है। कोई घड़ी नहीं चलती।"
+  },
+  "why": {
+    "en": "Why this topic first: in the five Prelims papers we hold (2018, 2019, 2021, 2023 and 2025), at least 11 questions came straight from it, and 2025 alone had five. In Mains 2025, GS2 asked about fiscal federalism for 15 marks. It also sits under almost every news story about Governors, GST and state finances.",
+    "hi": "यह topic पहले क्यों: हमारे पास मौजूद पाँच Prelims papers (2018, 2019, 2021, 2023 और 2025) में कम से कम 11 सवाल सीधे इसी से आए, और अकेले 2025 में पाँच। Mains 2025 के GS2 में राजकोषीय संघवाद पर 15 अंकों का सवाल था। राज्यपाल, GST और राज्यों के वित्त से जुड़ी लगभग हर ख़बर के नीचे यही topic है।"
+  },
+  "steps": [
+    {
+      "type": "warmup",
+      "id": "warmup",
+      "title": { "en": "Guess first", "hi": "पहले अंदाज़ा लगाइए" },
+      "lead": {
+        "en": "Three questions before you read anything. Guess if you don't know. A wrong guess followed by the answer sticks better than reading alone. Nothing here is scored.",
+        "hi": "कुछ भी पढ़ने से पहले तीन सवाल। पता न हो तो अंदाज़ा लगाइए। गलत अंदाज़ा और फिर जवाब, सिर्फ़ पढ़ने से ज़्यादा टिकता है। यहाँ कोई नंबर नहीं गिने जाते।"
+      },
+      "questions": [
+        {
+          "q": { "en": "In India, the power to make laws on a subject that is in none of the three lists lies with:", "hi": "भारत में, जो विषय तीनों में से किसी सूची में नहीं है, उस पर विधि बनाने की शक्ति किसके पास है?" },
+          "options": [
+            { "en": "Parliament", "hi": "संसद" },
+            { "en": "The state legislatures", "hi": "राज्य विधानमंडल" },
+            { "en": "The President, by ordinance", "hi": "राष्ट्रपति, अध्यादेश द्वारा" },
+            { "en": "Parliament and the states together", "hi": "संसद और राज्य मिलकर" }
+          ],
+          "answer": 0,
+          "why": { "en": "Residuary powers lie with Parliament (Article 248 and Entry 97 of the Union List). In the USA they lie with the states. You'll meet this again in part 2.", "hi": "अवशिष्ट शक्तियाँ संसद के पास हैं (अनुच्छेद 248 और संघ सूची की प्रविष्टि 97)। अमेरिका में ये राज्यों के पास हैं। भाग 2 में यह फिर आएगा।" }
+        },
+        {
+          "q": { "en": "How does the GST Council take a decision when members disagree?", "hi": "मतभेद होने पर GST परिषद निर्णय कैसे लेती है?" },
+          "options": [
+            { "en": "A simple majority of the states present", "hi": "उपस्थित राज्यों का साधारण बहुमत" },
+            { "en": "The Union Finance Minister decides alone", "hi": "केंद्रीय वित्त मंत्री अकेले तय करते हैं" },
+            { "en": "Three-fourths of the weighted votes, with the Centre holding one-third", "hi": "भारित मतों का तीन-चौथाई, जिसमें केंद्र के पास एक-तिहाई मत हैं" },
+            { "en": "Only by consensus; there is no vote", "hi": "केवल सर्वसम्मति से; मतदान नहीं होता" }
+          ],
+          "answer": 2,
+          "why": { "en": "Article 279A: a decision needs three-fourths of the weighted votes of members present and voting. The Centre's vote counts for one-third, all the states together two-thirds. Part 4 shows why this means neither side can push a decision through alone.", "hi": "अनुच्छेद 279क: निर्णय के लिए उपस्थित और मत देने वाले सदस्यों के भारित मतों का तीन-चौथाई चाहिए। केंद्र का मत एक-तिहाई गिना जाता है, सभी राज्यों का मिलाकर दो-तिहाई। भाग 4 बताएगा कि इसका मतलब क्यों है कि कोई भी पक्ष अकेले फ़ैसला नहीं करा सकता।" }
+        },
+        {
+          "q": { "en": "In the S.R. Bommai case (1994), the Supreme Court said the proper place to test whether a state government still has a majority is:", "hi": "एस.आर. बोम्मई केस (1994) में सुप्रीम कोर्ट ने कहा कि किसी राज्य सरकार का बहुमत परखने की सही जगह है:" },
+          "options": [
+            { "en": "Raj Bhavan, by the Governor counting letters of support", "hi": "राजभवन, जहाँ राज्यपाल समर्थन-पत्र गिनें" },
+            { "en": "The floor of the Assembly", "hi": "विधानसभा का पटल" },
+            { "en": "Parliament", "hi": "संसद" },
+            { "en": "The Election Commission", "hi": "निर्वाचन आयोग" }
+          ],
+          "answer": 1,
+          "why": { "en": "The floor test. Bommai also made President's Rule open to judicial review and held federalism to be part of the basic structure. Part 3 covers it.", "hi": "फ़्लोर टेस्ट। बोम्मई केस ने राष्ट्रपति शासन को न्यायिक समीक्षा के दायरे में भी लाया और संघवाद को मूल ढाँचे का हिस्सा माना। भाग 3 में यह विस्तार से है।" }
+        }
+      ]
+    },
+    {
+      "type": "read",
+      "id": "read-1",
+      "part": 1,
+      "title": { "en": "What kind of federation India is", "hi": "भारत किस तरह का संघ है" },
+      "minutes": 4,
+      "body": {
+        "en": "Article 1 says: \"India, that is Bharat, shall be a Union of States.\" The word federation appears nowhere. In the Constituent Assembly, Dr B.R. Ambedkar explained the choice: the Indian federation was not the result of an agreement among states, as in the USA, and no state has the right to leave it.\n\nThat is why India is often called a \"holding-together\" federation. The USA came together: separate states agreed to join. India held together: one country divided power so that it could stay one.\n\nThe federal side: two levels of government, each with its own powers; a written Constitution that is supreme; a division of powers in the Seventh Schedule; an amendment process that needs half the states for federal provisions; an independent judiciary to settle disputes; and the Rajya Sabha as a House for the states.\n\nThe unitary side: a single Constitution and single citizenship; one integrated judiciary; All-India Services that serve both levels; a Governor appointed by the Centre; emergency powers; unequal representation of states in the Rajya Sabha; and Article 3, under which Parliament can form new states or change a state's boundaries or name by ordinary law. The state's legislature is consulted, but its view does not bind Parliament.\n\nK.C. Wheare called the Constitution \"quasi-federal\". In S.R. Bommai v. Union of India (1994), the Supreme Court held that federalism is part of the basic structure, so no amendment can remove it.\n\nThe design is also asymmetric: not every state is treated the same. Article 371 and its sub-articles give special provisions to several states, and the Fifth and Sixth Schedules give tribal areas their own arrangements. Article 370, which gave Jammu and Kashmir a special status, was made inoperative in 2019, and the Supreme Court upheld this in December 2023.",
+        "hi": "अनुच्छेद 1 कहता है: \"भारत, अर्थात इंडिया, राज्यों का संघ होगा।\" \"फ़ेडरेशन\" शब्द कहीं नहीं है। संविधान सभा में डॉ. बी.आर. आंबेडकर ने इसका कारण समझाया: भारतीय संघ अमेरिका की तरह राज्यों के किसी समझौते का परिणाम नहीं है, और किसी राज्य को इससे अलग होने का अधिकार नहीं है।\n\nइसीलिए भारत को अक्सर \"होल्डिंग-टुगेदर\" (साथ बनाए रखने वाला) संघ कहा जाता है। अमेरिका \"कमिंग-टुगेदर\" था: अलग-अलग राज्य जुड़ने पर सहमत हुए। भारत ने एक देश के रूप में शक्ति बाँटी ताकि वह एक बना रहे।\n\nसंघीय पक्ष: शासन के दो स्तर, दोनों की अपनी शक्तियाँ; सर्वोच्च लिखित संविधान; सातवीं अनुसूची में शक्तियों का बँटवारा; संघीय उपबंधों के संशोधन के लिए आधे राज्यों का अनुसमर्थन; विवाद सुलझाने के लिए स्वतंत्र न्यायपालिका; और राज्यों के सदन के रूप में राज्यसभा।\n\nएकात्मक पक्ष: एक ही संविधान और एकल नागरिकता; एकीकृत न्यायपालिका; दोनों स्तरों पर काम करने वाली अखिल भारतीय सेवाएँ; केंद्र द्वारा नियुक्त राज्यपाल; आपातकालीन शक्तियाँ; राज्यसभा में राज्यों का असमान प्रतिनिधित्व; और अनुच्छेद 3, जिसके तहत संसद साधारण विधि से नए राज्य बना सकती है या किसी राज्य की सीमा या नाम बदल सकती है। राज्य विधानमंडल की राय ली जाती है, पर वह संसद पर बाध्यकारी नहीं है।\n\nके.सी. व्हेयर ने संविधान को \"अर्ध-संघीय\" कहा। एस.आर. बोम्मई बनाम भारत संघ (1994) में सुप्रीम कोर्ट ने माना कि संघवाद मूल ढाँचे का हिस्सा है, इसलिए कोई संशोधन इसे हटा नहीं सकता।\n\nयह ढाँचा असममित भी है: हर राज्य के साथ एक जैसा व्यवहार नहीं होता। अनुच्छेद 371 और उसके उप-अनुच्छेद कई राज्यों को विशेष उपबंध देते हैं, और पाँचवीं व छठी अनुसूची जनजातीय क्षेत्रों को अपनी अलग व्यवस्था देती हैं। जम्मू-कश्मीर को विशेष दर्जा देने वाला अनुच्छेद 370 2019 में निष्प्रभावी किया गया, और सुप्रीम कोर्ट ने दिसंबर 2023 में इसे सही ठहराया।"
+      },
+      "check": [
+        {
+          "q": { "en": "Which of these is a unitary feature, not a federal one?", "hi": "इनमें से कौन-सी एकात्मक विशेषता है, संघीय नहीं?" },
+          "options": [
+            { "en": "A written Constitution that is supreme", "hi": "सर्वोच्च लिखित संविधान" },
+            { "en": "Parliament can change a state's boundaries by ordinary law (Article 3)", "hi": "संसद साधारण विधि से किसी राज्य की सीमा बदल सकती है (अनुच्छेद 3)" },
+            { "en": "An independent judiciary to settle Centre–state disputes", "hi": "केंद्र-राज्य विवाद सुलझाने के लिए स्वतंत्र न्यायपालिका" },
+            { "en": "A division of powers in the Seventh Schedule", "hi": "सातवीं अनुसूची में शक्तियों का बँटवारा" }
+          ],
+          "answer": 1,
+          "why": { "en": "In a classic federation, a state's territory can't be changed without its consent. In India, Parliament can do it under Article 3; the state is only consulted. The other three are federal features.", "hi": "पारंपरिक संघ में किसी राज्य का क्षेत्र उसकी सहमति के बिना नहीं बदला जा सकता। भारत में संसद अनुच्छेद 3 के तहत ऐसा कर सकती है; राज्य से केवल राय ली जाती है। बाक़ी तीनों संघीय विशेषताएँ हैं।" }
+        }
+      ]
+    },
+    {
+      "type": "read",
+      "id": "read-2",
+      "part": 2,
+      "title": { "en": "Sharing law-making: the three lists", "hi": "विधि बनाने का बँटवारा: तीन सूचियाँ" },
+      "minutes": 4,
+      "body": {
+        "en": "Article 246 and the Seventh Schedule divide law-making power into three lists.\n\nThe Union List: subjects that need one national rule, such as defence, foreign affairs, banking, currency, railways, atomic energy, inter-state rivers and the census. The State List: subjects best handled close to people, such as public order, police, prisons, public health, agriculture, water supply and irrigation, local government, and betting and gambling. The Concurrent List: subjects where both can make laws, such as criminal law, marriage and divorce, education, forests, electricity, trade unions and population control.\n\nAs adopted in 1950, the lists had 97, 66 and 47 entries. The 42nd Amendment (1976) moved five subjects from the State List to the Concurrent List: education, forests, weights and measures, protection of wild animals and birds, and the administration of justice.\n\nResiduary powers, for subjects in no list, lie with Parliament (Article 248 and Entry 97 of the Union List). In the USA they lie with the states. In the Government of India Act, 1935, they lay with the Governor-General.\n\nIf a central law and a state law on a Concurrent subject conflict, the central law prevails (Article 254). The exception: a state law that was reserved for the President and received assent prevails in that state, until Parliament makes a fresh law on the same matter.\n\nParliament can make laws on State List subjects in five situations: a Rajya Sabha resolution in the national interest, passed by two-thirds of members present and voting (Article 249); a national emergency (Article 250); when two or more states ask for it (Article 252); to implement an international treaty or agreement (Article 253); and during President's Rule in a state (Article 357).\n\nTax is the one big exception to clean lists. Since the 101st Amendment (2016), Article 246A lets Parliament and every state legislature make laws on GST at the same time.",
+        "hi": "अनुच्छेद 246 और सातवीं अनुसूची विधि बनाने की शक्ति को तीन सूचियों में बाँटते हैं।\n\nसंघ सूची: वे विषय जिन पर पूरे देश का एक नियम चाहिए, जैसे रक्षा, विदेश मामले, बैंकिंग, मुद्रा, रेलवे, परमाणु ऊर्जा, अंतरराज्यीय नदियाँ और जनगणना। राज्य सूची: वे विषय जो लोगों के पास रहकर बेहतर सँभलते हैं, जैसे लोक व्यवस्था, पुलिस, जेल, लोक स्वास्थ्य, कृषि, जल आपूर्ति और सिंचाई, स्थानीय शासन, और सट्टा व जुआ। समवर्ती सूची: वे विषय जिन पर दोनों विधि बना सकते हैं, जैसे दंड विधि, विवाह और तलाक, शिक्षा, वन, बिजली, श्रमिक संघ और जनसंख्या नियंत्रण।\n\n1950 में अंगीकार के समय इन सूचियों में 97, 66 और 47 प्रविष्टियाँ थीं। 42वें संशोधन (1976) ने पाँच विषय राज्य सूची से समवर्ती सूची में डाले: शिक्षा, वन, नाप-तौल, वन्य पशुओं और पक्षियों का संरक्षण, और न्याय प्रशासन।\n\nजो विषय किसी सूची में नहीं, उनकी अवशिष्ट शक्ति संसद के पास है (अनुच्छेद 248 और संघ सूची की प्रविष्टि 97)। अमेरिका में यह राज्यों के पास है। भारत शासन अधिनियम, 1935 में यह गवर्नर-जनरल के पास थी।\n\nअगर किसी समवर्ती विषय पर केंद्र और राज्य की विधि टकराएँ, तो केंद्र की विधि प्रबल होती है (अनुच्छेद 254)। अपवाद: जो राज्य विधि राष्ट्रपति के विचार के लिए आरक्षित होकर स्वीकृति पा चुकी है, वह उस राज्य में प्रबल होती है, जब तक संसद उसी विषय पर नई विधि न बना दे।\n\nसंसद पाँच स्थितियों में राज्य सूची के विषयों पर विधि बना सकती है: राष्ट्रीय हित में राज्यसभा का संकल्प, उपस्थित और मत देने वाले सदस्यों के दो-तिहाई से पारित (अनुच्छेद 249); राष्ट्रीय आपातकाल (अनुच्छेद 250); जब दो या अधिक राज्य अनुरोध करें (अनुच्छेद 252); किसी अंतरराष्ट्रीय संधि या समझौते को लागू करने के लिए (अनुच्छेद 253); और किसी राज्य में राष्ट्रपति शासन के दौरान (अनुच्छेद 357)।\n\nकर इस साफ़ बँटवारे का सबसे बड़ा अपवाद है। 101वें संशोधन (2016) के बाद से अनुच्छेद 246क संसद और हर राज्य विधानमंडल को एक साथ GST पर विधि बनाने देता है।"
+      },
+      "check": [
+        {
+          "q": { "en": "Which of these does NOT let Parliament make a law on a State List subject?", "hi": "इनमें से कौन-सा संसद को राज्य सूची के विषय पर विधि बनाने की अनुमति नहीं देता?" },
+          "options": [
+            { "en": "A Rajya Sabha resolution in the national interest (Article 249)", "hi": "राष्ट्रीय हित में राज्यसभा का संकल्प (अनुच्छेद 249)" },
+            { "en": "A request from two or more states (Article 252)", "hi": "दो या अधिक राज्यों का अनुरोध (अनुच्छेद 252)" },
+            { "en": "A resolution of the Lok Sabha alone", "hi": "केवल लोकसभा का संकल्प" },
+            { "en": "Implementing an international agreement (Article 253)", "hi": "किसी अंतरराष्ट्रीय समझौते को लागू करना (अनुच्छेद 253)" }
+          ],
+          "answer": 2,
+          "why": { "en": "Only the Rajya Sabha, the House of the states, can open a State List subject to Parliament by resolution. The Lok Sabha has no such power. This is a favourite Prelims trap.", "hi": "केवल राज्यसभा, यानी राज्यों का सदन, संकल्प से राज्य सूची का विषय संसद के लिए खोल सकती है। लोकसभा के पास ऐसी शक्ति नहीं है। यह Prelims का पसंदीदा जाल है।" }
+        },
+        {
+          "q": { "en": "Which subject did the 42nd Amendment NOT move to the Concurrent List?", "hi": "42वें संशोधन ने कौन-सा विषय समवर्ती सूची में नहीं डाला?" },
+          "options": [
+            { "en": "Education", "hi": "शिक्षा" },
+            { "en": "Forests", "hi": "वन" },
+            { "en": "Police", "hi": "पुलिस" },
+            { "en": "Weights and measures", "hi": "नाप-तौल" }
+          ],
+          "answer": 2,
+          "why": { "en": "Police and public order are still on the State List. The five moved were education, forests, weights and measures, protection of wild animals and birds, and administration of justice.", "hi": "पुलिस और लोक व्यवस्था अब भी राज्य सूची में हैं। जो पाँच विषय डाले गए: शिक्षा, वन, नाप-तौल, वन्य पशुओं और पक्षियों का संरक्षण, और न्याय प्रशासन।" }
+        }
+      ]
+    },
+    {
+      "type": "sort",
+      "id": "sort-lists",
+      "title": { "en": "Which list?", "hi": "कौन-सी सूची?" },
+      "lead": {
+        "en": "Twelve subjects, mixed up on purpose. Put each in its list. The lookalikes (water and inter-state rivers; prisons and criminal law) are where Prelims catches people.",
+        "hi": "बारह विषय, जानबूझकर मिलाए हुए। हर एक को उसकी सूची में रखिए। मिलते-जुलते जोड़े (जल और अंतरराज्यीय नदियाँ; जेल और दंड विधि) ही वह जगह हैं जहाँ Prelims लोगों को पकड़ता है।"
+      },
+      "buckets": [
+        { "en": "Union", "hi": "संघ" },
+        { "en": "State", "hi": "राज्य" },
+        { "en": "Concurrent", "hi": "समवर्ती" }
+      ],
+      "items": [
+        { "text": { "en": "Census", "hi": "जनगणना" }, "bucket": 0, "why": { "en": "Union List. One national count.", "hi": "संघ सूची। पूरे देश की एक गिनती।" } },
+        { "text": { "en": "Prisons", "hi": "जेल" }, "bucket": 1, "why": { "en": "State List, next to police and public order. Criminal law is Concurrent; running prisons is the state's job.", "hi": "राज्य सूची, पुलिस और लोक व्यवस्था के साथ। दंड विधि समवर्ती है; जेल चलाना राज्य का काम है।" } },
+        { "text": { "en": "Criminal law", "hi": "दंड विधि" }, "bucket": 2, "why": { "en": "Concurrent. That's why there is one national criminal code that states can amend for themselves, with the President's assent.", "hi": "समवर्ती। इसीलिए पूरे देश की एक दंड संहिता है, जिसे राज्य राष्ट्रपति की स्वीकृति से अपने लिए संशोधित कर सकते हैं।" } },
+        { "text": { "en": "Water supply and irrigation", "hi": "जल आपूर्ति और सिंचाई" }, "bucket": 1, "why": { "en": "State List, but subject to the Union entry on inter-state rivers.", "hi": "राज्य सूची, पर अंतरराज्यीय नदियों वाली संघ प्रविष्टि के अधीन।" } },
+        { "text": { "en": "Regulating inter-state rivers and river valleys", "hi": "अंतरराज्यीय नदियों और नदी घाटियों का विनियमन" }, "bucket": 0, "why": { "en": "Union List, to the extent Parliament declares it in the public interest.", "hi": "संघ सूची, उस सीमा तक जितना संसद लोकहित में घोषित करे।" } },
+        { "text": { "en": "Education", "hi": "शिक्षा" }, "bucket": 2, "why": { "en": "Concurrent since the 42nd Amendment (1976). Before that it was a State subject.", "hi": "42वें संशोधन (1976) से समवर्ती। उससे पहले यह राज्य का विषय था।" } },
+        { "text": { "en": "Agriculture", "hi": "कृषि" }, "bucket": 1, "why": { "en": "State List. This is why farm laws raise federal questions.", "hi": "राज्य सूची। इसीलिए कृषि क़ानूनों पर संघीय सवाल उठते हैं।" } },
+        { "text": { "en": "Electricity", "hi": "बिजली" }, "bucket": 2, "why": { "en": "Concurrent. The Electricity Act, 2003 is central; states run their own boards and regulators.", "hi": "समवर्ती। विद्युत अधिनियम, 2003 केंद्रीय है; राज्य अपने बोर्ड और नियामक चलाते हैं।" } },
+        { "text": { "en": "Atomic energy", "hi": "परमाणु ऊर्जा" }, "bucket": 0, "why": { "en": "Union List.", "hi": "संघ सूची।" } },
+        { "text": { "en": "Betting and gambling", "hi": "सट्टा और जुआ" }, "bucket": 1, "why": { "en": "State List. That's why states make their own laws on online gaming and betting.", "hi": "राज्य सूची। इसीलिए ऑनलाइन गेमिंग और सट्टे पर राज्य अपने क़ानून बनाते हैं।" } },
+        { "text": { "en": "Population control and family planning", "hi": "जनसंख्या नियंत्रण और परिवार नियोजन" }, "bucket": 2, "why": { "en": "Concurrent. It was added to the Concurrent List by the 42nd Amendment as a new entry, not moved from the State List.", "hi": "समवर्ती। इसे 42वें संशोधन ने समवर्ती सूची में नई प्रविष्टि के रूप में जोड़ा, राज्य सूची से हटाकर नहीं।" } },
+        { "text": { "en": "Banking", "hi": "बैंकिंग" }, "bucket": 0, "why": { "en": "Union List. Co-operative societies are a State subject, which is why co-operative banks have two regulators.", "hi": "संघ सूची। सहकारी समितियाँ राज्य का विषय हैं, इसीलिए सहकारी बैंकों पर दो नियामक हैं।" } }
+      ]
+    },
+    {
+      "type": "read",
+      "id": "read-3",
+      "part": 3,
+      "title": { "en": "The Centre's reach: directions, Governors and Article 356", "hi": "केंद्र की पहुँच: निर्देश, राज्यपाल और अनुच्छेद 356" },
+      "minutes": 5,
+      "body": {
+        "en": "States must use their executive power so as to comply with laws made by Parliament (Article 256), and the Centre may give them directions in certain matters (Article 257). If a state does not follow valid directions, the President may hold that its government cannot be carried on in line with the Constitution (Article 365).\n\nThe Governor is the hinge. The President appoints the Governor (Article 155), who holds office during the President's pleasure (Article 156). In B.P. Singhal (2010), the Supreme Court said this does not allow removal on a whim: there must be a valid reason, and a removal can be reviewed by a court in a limited way. The Constitution names some matters where the Governor acts in their own discretion (Article 163).\n\nBills are the sharpest friction today. Under Article 200, when a state bill reaches the Governor, the Governor can give assent, withhold assent, return a non-money bill with a message, or reserve it for the President. If the Assembly passes a returned bill again, the Governor shall not withhold assent from it. The Constitution sets no time limit. In April 2025, in State of Tamil Nadu v. Governor of Tamil Nadu, the Supreme Court set time limits and treated ten long-pending bills as assented. On a Presidential Reference under Article 143, a five-judge Constitution Bench then advised in November 2025 that courts cannot fix time limits for the Governor or the President, nor treat a bill as \"deemed\" assented; but a Governor cannot sit on a bill forever, and long, unexplained inaction can be brought before a court in a limited way.\n\nArticle 356 allows President's Rule when the President, on the Governor's report or otherwise, is satisfied that a state's government cannot be carried on in line with the Constitution. Both Houses of Parliament must approve within two months. It lasts six months at a time, up to three years, and beyond one year only under strict conditions added by the 44th Amendment. While it lasts, Parliament exercises the state legislature's powers; the Assembly is not dissolved automatically.\n\nArticle 356 was used more than a hundred times, often against governments of other parties. S.R. Bommai (1994) changed that: a proclamation can be reviewed by the courts; majority is tested on the floor of the Assembly, not in Raj Bhavan; the Assembly should only be suspended, not dissolved, until Parliament approves; and secularism and federalism are part of the basic structure. Ambedkar had hoped the Article would remain a \"dead letter\". Article 355 sets the other side of it: the Union has a duty to protect every state against external aggression and internal disturbance.",
+        "hi": "राज्यों को अपनी कार्यपालिका शक्ति इस तरह इस्तेमाल करनी होती है कि संसद की बनाई विधियों का पालन हो (अनुच्छेद 256), और केंद्र कुछ मामलों में उन्हें निर्देश दे सकता है (अनुच्छेद 257)। अगर कोई राज्य वैध निर्देश न माने, तो राष्ट्रपति यह मान सकते हैं कि उसका शासन संविधान के अनुसार नहीं चल सकता (अनुच्छेद 365)।\n\nराज्यपाल इस व्यवस्था की धुरी हैं। राष्ट्रपति राज्यपाल को नियुक्त करते हैं (अनुच्छेद 155), और राज्यपाल राष्ट्रपति के प्रसादपर्यंत पद पर रहते हैं (अनुच्छेद 156)। बी.पी. सिंघल (2010) में सुप्रीम कोर्ट ने कहा कि इसका मतलब मनमाने ढंग से हटाना नहीं है: वैध कारण होना चाहिए, और हटाने की सीमित न्यायिक समीक्षा हो सकती है। संविधान कुछ मामलों का नाम लेता है जिनमें राज्यपाल अपने विवेक से काम करते हैं (अनुच्छेद 163)।\n\nआज सबसे तीखा टकराव विधेयकों पर है। अनुच्छेद 200 के तहत, जब राज्य का कोई विधेयक राज्यपाल के पास पहुँचता है, तो वे स्वीकृति दे सकते हैं, स्वीकृति रोक सकते हैं, धन विधेयक के अलावा किसी विधेयक को संदेश के साथ लौटा सकते हैं, या उसे राष्ट्रपति के विचार के लिए आरक्षित कर सकते हैं। अगर विधानसभा लौटाए गए विधेयक को फिर से पारित कर दे, तो राज्यपाल उस पर स्वीकृति नहीं रोकेंगे। संविधान कोई समय-सीमा तय नहीं करता। अप्रैल 2025 में, तमिलनाडु राज्य बनाम तमिलनाडु के राज्यपाल केस में सुप्रीम कोर्ट ने समय-सीमाएँ तय कीं और लंबे समय से लंबित दस विधेयकों को स्वीकृत माना। इसके बाद अनुच्छेद 143 के तहत राष्ट्रपति के संदर्भ पर पाँच न्यायाधीशों की संविधान पीठ ने नवंबर 2025 में राय दी कि अदालतें राज्यपाल या राष्ट्रपति के लिए समय-सीमा तय नहीं कर सकतीं, न ही किसी विधेयक को \"मानित\" स्वीकृति दे सकती हैं; पर राज्यपाल किसी विधेयक को हमेशा के लिए रोककर नहीं बैठ सकते, और लंबी, बिना कारण की निष्क्रियता को सीमित रूप में अदालत में ले जाया जा सकता है।\n\nअनुच्छेद 356 राष्ट्रपति शासन की अनुमति देता है, जब राष्ट्रपति, राज्यपाल की रिपोर्ट पर या अन्यथा, संतुष्ट हों कि किसी राज्य का शासन संविधान के अनुसार नहीं चल सकता। संसद के दोनों सदनों को दो महीने के भीतर इसका अनुमोदन करना होता है। यह एक बार में छह महीने चलता है, अधिकतम तीन वर्ष तक, और एक वर्ष से आगे केवल 44वें संशोधन द्वारा जोड़ी गई कड़ी शर्तों पर। इस दौरान राज्य विधानमंडल की शक्तियाँ संसद इस्तेमाल करती है; विधानसभा अपने आप भंग नहीं होती।\n\nअनुच्छेद 356 का इस्तेमाल सौ से ज़्यादा बार हुआ, अक्सर दूसरे दलों की सरकारों के ख़िलाफ़। एस.आर. बोम्मई (1994) ने इसे बदला: उद्घोषणा की न्यायिक समीक्षा हो सकती है; बहुमत विधानसभा के पटल पर परखा जाता है, राजभवन में नहीं; संसद के अनुमोदन तक विधानसभा को केवल निलंबित रखा जाए, भंग नहीं; और पंथनिरपेक्षता व संघवाद मूल ढाँचे का हिस्सा हैं। आंबेडकर को उम्मीद थी कि यह अनुच्छेद \"मृत पत्र\" बना रहेगा। अनुच्छेद 355 इसका दूसरा पहलू है: बाहरी आक्रमण और आंतरिक अशांति से हर राज्य की रक्षा करना संघ का कर्तव्य है।"
+      },
+      "check": [
+        {
+          "q": { "en": "When President's Rule is imposed under Article 356, what happens to the state legislature's law-making powers?", "hi": "अनुच्छेद 356 के तहत राष्ट्रपति शासन लगने पर राज्य विधानमंडल की विधि बनाने की शक्तियों का क्या होता है?" },
+          "options": [
+            { "en": "The Assembly is automatically dissolved and no laws can be made", "hi": "विधानसभा अपने आप भंग हो जाती है और कोई विधि नहीं बन सकती" },
+            { "en": "They are exercised by or under the authority of Parliament", "hi": "उनका प्रयोग संसद द्वारा या उसके प्राधिकार से होता है" },
+            { "en": "The Governor makes all laws by ordinance", "hi": "राज्यपाल सारी विधियाँ अध्यादेश से बनाते हैं" },
+            { "en": "The High Court makes interim rules", "hi": "उच्च न्यायालय अंतरिम नियम बनाता है" }
+          ],
+          "answer": 1,
+          "why": { "en": "Article 356(1)(b). The Assembly is suspended or dissolved by a separate decision, and after Bommai it should not be dissolved before Parliament approves. UPSC asked exactly this in 2018.", "hi": "अनुच्छेद 356(1)(ख)। विधानसभा को निलंबित या भंग करना अलग निर्णय है, और बोम्मई के बाद संसद के अनुमोदन से पहले उसे भंग नहीं किया जाना चाहिए। UPSC ने 2018 में ठीक यही पूछा था।" }
+        },
+        {
+          "q": { "en": "A Governor returns a state bill (not a Money Bill) with a message. The Assembly passes it again without changes. What does Article 200 say next?", "hi": "राज्यपाल एक राज्य विधेयक (धन विधेयक नहीं) संदेश के साथ लौटाते हैं। विधानसभा उसे बिना बदलाव के फिर पारित करती है। अनुच्छेद 200 आगे क्या कहता है?" },
+          "options": [
+            { "en": "The Governor may return it again, as many times as needed", "hi": "राज्यपाल इसे ज़रूरत भर जितनी बार चाहें लौटा सकते हैं" },
+            { "en": "The bill becomes law automatically after 30 days", "hi": "विधेयक 30 दिन बाद अपने आप क़ानून बन जाता है" },
+            { "en": "The Governor shall not withhold assent from it", "hi": "राज्यपाल उस पर स्वीकृति नहीं रोकेंगे" },
+            { "en": "It must go to Parliament for approval", "hi": "इसे अनुमोदन के लिए संसद में जाना होगा" }
+          ],
+          "answer": 2,
+          "why": { "en": "The first proviso to Article 200: once the House passes the bill again, \"the Governor shall not withhold assent therefrom\". There is no automatic 30-day rule in the Constitution.", "hi": "अनुच्छेद 200 का पहला परंतुक: सदन के दोबारा पारित करने पर \"राज्यपाल उस पर अनुमति नहीं रोकेगा\"। संविधान में 30 दिन का कोई स्वचालित नियम नहीं है।" }
+        }
+      ]
+    },
+    {
+      "type": "read",
+      "id": "read-4",
+      "part": 4,
+      "title": { "en": "Money: Finance Commissions, GST and the states' purse", "hi": "पैसा: वित्त आयोग, GST और राज्यों का ख़ज़ाना" },
+      "minutes": 5,
+      "body": {
+        "en": "Money is the hardest test of federalism. The Centre holds the buoyant taxes, such as income tax and corporation tax, while states carry most of the spending on health, police, schools and farms. The gap between who raises and who spends is called vertical imbalance.\n\nThe Finance Commission (Article 280) bridges it. The President appoints one every five years. It recommends two shares: how much of the divisible pool of central taxes goes to the states (vertical), and how that is split among states (horizontal). The 14th Commission raised the states' share to 42%; the 15th set it at 41% after Jammu and Kashmir became a Union Territory. For the split among states, the 15th used income distance (45%), population (15%), area (15%), forest and ecology (10%), demographic performance (12.5%) and tax and fiscal effort (2.5%). The 16th Finance Commission, chaired by Arvind Panagariya, covers 2026–31.\n\nTwo leaks from the pool worry states. Cesses and surcharges are not part of the divisible pool, so the Centre keeps all of them, and their share of central revenue has grown. And grants can come with conditions: Article 275 grants follow the Finance Commission, while Article 282 lets the Centre give discretionary grants, the route used for many centrally sponsored schemes.\n\nGST, from 1 July 2017 under the 101st Amendment (2016), pooled most indirect taxes. States gave up taxes they once set alone. In return they got a seat at a shared table: the GST Council (Article 279A), chaired by the Union Finance Minister, with every state's finance minister. A decision needs three-fourths of the weighted votes present. The Centre's vote counts for one-third and all the states together two-thirds. So the Centre can block any proposal, and the states can block one only by acting together; neither can pass one alone. In Mohit Minerals (2022), the Supreme Court said the Council's recommendations persuade but do not bind: Parliament and the state legislatures both keep the power to legislate. States were promised compensation for lost revenue for five years, which ended in June 2022.\n\nBorrowing is the newest front. Under Article 293(3), a state that owes money to the Centre needs its consent to borrow more. Kerala challenged the Centre's limits on its borrowing in the Supreme Court in 2023, and in 2024 the Court sent the questions to a Constitution Bench.\n\nPlanning changed too. The Planning Commission, which gave plan grants, was replaced on 1 January 2015 by NITI Aayog, a think tank whose Governing Council includes every Chief Minister. Its stated idea is \"cooperative and competitive federalism\": states work with the Centre and compete with each other on indices.",
+        "hi": "पैसा संघवाद की सबसे कड़ी परीक्षा है। आयकर और निगम कर जैसे तेज़ी से बढ़ने वाले कर केंद्र के पास हैं, जबकि स्वास्थ्य, पुलिस, स्कूल और खेती पर ज़्यादातर ख़र्च राज्य करते हैं। कौन कमाता है और कौन ख़र्च करता है, इस अंतर को ऊर्ध्वाधर असंतुलन कहते हैं।\n\nवित्त आयोग (अनुच्छेद 280) यह अंतर पाटता है। राष्ट्रपति हर पाँच वर्ष में इसे नियुक्त करते हैं। यह दो हिस्सों की सिफ़ारिश करता है: केंद्रीय करों के विभाज्य पूल का कितना हिस्सा राज्यों को जाए (ऊर्ध्वाधर), और वह राज्यों में कैसे बँटे (क्षैतिज)। 14वें आयोग ने राज्यों का हिस्सा बढ़ाकर 42% किया; जम्मू-कश्मीर के केंद्रशासित प्रदेश बनने के बाद 15वें ने इसे 41% रखा। राज्यों के बीच बँटवारे के लिए 15वें आयोग ने आय-अंतर (45%), जनसंख्या (15%), क्षेत्रफल (15%), वन और पारिस्थितिकी (10%), जनसांख्यिकीय प्रदर्शन (12.5%) और कर व राजकोषीय प्रयास (2.5%) को आधार बनाया। अरविंद पनगढ़िया की अध्यक्षता वाला 16वाँ वित्त आयोग 2026–31 की अवधि के लिए है।\n\nपूल से दो रिसाव राज्यों को चिंतित करते हैं। उपकर (cess) और अधिभार (surcharge) विभाज्य पूल में नहीं आते, इसलिए ये पूरे केंद्र के पास रहते हैं, और केंद्रीय राजस्व में इनका हिस्सा बढ़ा है। और अनुदान शर्तों के साथ आ सकते हैं: अनुच्छेद 275 के अनुदान वित्त आयोग के अनुसार होते हैं, जबकि अनुच्छेद 282 केंद्र को विवेकाधीन अनुदान देने देता है, जिस रास्ते से कई केंद्र प्रायोजित योजनाएँ चलती हैं।\n\nGST, 101वें संशोधन (2016) के तहत 1 जुलाई 2017 से, ज़्यादातर अप्रत्यक्ष करों को एक जगह ले आया। राज्यों ने वे कर छोड़े जो वे पहले अकेले तय करते थे। बदले में उन्हें एक साझा मेज़ पर जगह मिली: GST परिषद (अनुच्छेद 279क), जिसकी अध्यक्षता केंद्रीय वित्त मंत्री करते हैं और जिसमें हर राज्य के वित्त मंत्री हैं। निर्णय के लिए उपस्थित भारित मतों का तीन-चौथाई चाहिए। केंद्र का मत एक-तिहाई गिना जाता है और सभी राज्यों का मिलाकर दो-तिहाई। इसलिए केंद्र किसी भी प्रस्ताव को रोक सकता है, और राज्य मिलकर ही किसी प्रस्ताव को रोक सकते हैं; कोई भी पक्ष अकेले प्रस्ताव पारित नहीं करा सकता। मोहित मिनरल्स (2022) में सुप्रीम कोर्ट ने कहा कि परिषद की सिफ़ारिशें मार्गदर्शक हैं, बाध्यकारी नहीं: संसद और राज्य विधानमंडल दोनों के पास विधि बनाने की शक्ति बनी रहती है। राज्यों को राजस्व के नुकसान की भरपाई का वादा पाँच वर्ष के लिए था, जो जून 2022 में ख़त्म हुआ।\n\nउधार लेना सबसे नया मोर्चा है। अनुच्छेद 293(3) के तहत, जिस राज्य पर केंद्र का कर्ज़ बकाया है, उसे और उधार लेने के लिए केंद्र की सहमति चाहिए। केरल ने 2023 में अपने उधार पर केंद्र की सीमाओं को सुप्रीम कोर्ट में चुनौती दी, और 2024 में कोर्ट ने ये सवाल संविधान पीठ को भेज दिए।\n\nयोजना की व्यवस्था भी बदली। योजना अनुदान देने वाले योजना आयोग की जगह 1 जनवरी 2015 को नीति आयोग आया, एक थिंक टैंक जिसकी गवर्निंग काउंसिल में हर मुख्यमंत्री है। इसका घोषित विचार है \"सहकारी और प्रतिस्पर्धी संघवाद\": राज्य केंद्र के साथ काम करें और सूचकांकों पर आपस में प्रतिस्पर्धा करें।"
+      },
+      "check": [
+        {
+          "q": { "en": "Every state votes yes in the GST Council; the Centre votes no. All members are present. What happens?", "hi": "GST परिषद में हर राज्य हाँ में वोट देता है; केंद्र ना में। सभी सदस्य उपस्थित हैं। क्या होगा?" },
+          "options": [
+            { "en": "It passes: the states hold two-thirds of the votes", "hi": "पारित: राज्यों के पास दो-तिहाई मत हैं" },
+            { "en": "It fails: two-thirds is less than the three-fourths needed", "hi": "गिर जाएगा: दो-तिहाई, ज़रूरी तीन-चौथाई से कम है" },
+            { "en": "It goes to the Finance Commission to decide", "hi": "यह फ़ैसले के लिए वित्त आयोग के पास जाएगा" },
+            { "en": "The President decides", "hi": "राष्ट्रपति तय करेंगे" }
+          ],
+          "answer": 1,
+          "why": { "en": "All the states together hold two-thirds (about 67%) of the weighted votes; a decision needs three-fourths (75%). So the Centre alone can block. The reverse is also true: the Centre's one-third needs most of the states with it.", "hi": "सभी राज्यों के पास मिलाकर भारित मतों का दो-तिहाई (लगभग 67%) है; निर्णय के लिए तीन-चौथाई (75%) चाहिए। इसलिए केंद्र अकेले रोक सकता है। उलटा भी सच है: केंद्र के एक-तिहाई को ज़्यादातर राज्यों का साथ चाहिए।" }
+        },
+        {
+          "q": { "en": "Why do states object to the rising share of cesses and surcharges in central revenue?", "hi": "केंद्रीय राजस्व में उपकर और अधिभार के बढ़ते हिस्से पर राज्य आपत्ति क्यों करते हैं?" },
+          "options": [
+            { "en": "They are collected by the states and handed to the Centre", "hi": "इन्हें राज्य वसूलते हैं और केंद्र को देते हैं" },
+            { "en": "They are outside the divisible pool, so states get no share", "hi": "ये विभाज्य पूल से बाहर हैं, इसलिए राज्यों को हिस्सा नहीं मिलता" },
+            { "en": "They need the GST Council's approval", "hi": "इनके लिए GST परिषद की मंज़ूरी चाहिए" },
+            { "en": "They are unconstitutional", "hi": "ये असंवैधानिक हैं" }
+          ],
+          "answer": 1,
+          "why": { "en": "The Finance Commission's share applies to the divisible pool. Cesses and surcharges sit outside it, so every rupee raised that way stays with the Centre.", "hi": "वित्त आयोग का हिस्सा विभाज्य पूल पर लागू होता है। उपकर और अधिभार उससे बाहर हैं, इसलिए इस तरह जुटाया हर रुपया केंद्र के पास रहता है।" }
+        }
+      ]
+    },
+    {
+      "type": "read",
+      "id": "read-5",
+      "part": 5,
+      "title": { "en": "Forums, disputes and the debates to watch", "hi": "मंच, विवाद और नज़र रखने लायक बहसें" },
+      "minutes": 4,
+      "body": {
+        "en": "When the Centre and a state, or two states, disagree in law, the Supreme Court hears the case directly under Article 131. Disputes over inter-state river waters are different: under Article 262, Parliament made the Inter-State River Water Disputes Act, 1956, which sends them to tribunals, and Parliament has barred courts from hearing them.\n\nSome forums exist to talk before anyone sues. The Inter-State Council under Article 263 is the only one of them set up under the Constitution itself; it was formed in 1990, on the Sarkaria Commission's advice, and has met rarely. The five Zonal Councils, chaired by the Union Home Minister, were set up by the States Reorganisation Act, 1956, so they are statutory, not constitutional. NITI Aayog's Governing Council is set up by an executive resolution.\n\nTwo commissions reviewed the whole relationship. The Sarkaria Commission (set up 1983, report 1988) said the Governor should be an eminent person from outside the state, detached from politics, and that Article 356 should be a last resort. The Punchhi Commission (set up 2007, report 2010) proposed a fixed five-year term for Governors, a time limit of six months for the Governor to decide on a bill, and allowing emergency provisions to apply to a district or part of a state instead of the whole of it.\n\nDebates to watch: Governors and bills (part 3); the shrinking divisible pool and borrowing limits (part 4); delimitation, because seats in the Lok Sabha were frozen on the 1971 census until the first census after 2026, and states that slowed their population growth fear losing weight; and \"One Nation, One Election\", the Constitution (129th Amendment) Bill, 2024, sent to a Joint Parliamentary Committee, which states see as a question about their own terms.\n\nThe balanced reading for Mains: the Constitution leans to the Centre by design, and the courts and shared bodies have pulled it back towards the states. Whether India is more cooperative or more centralised depends less on the text than on how Governors, Article 356, grants and the GST Council are used.",
+        "hi": "जब केंद्र और किसी राज्य, या दो राज्यों के बीच क़ानूनी असहमति हो, तो सुप्रीम कोर्ट अनुच्छेद 131 के तहत सीधे मामला सुनता है। अंतरराज्यीय नदी जल विवाद अलग हैं: अनुच्छेद 262 के तहत संसद ने अंतरराज्यीय नदी जल विवाद अधिनियम, 1956 बनाया, जो इन्हें अधिकरणों के पास भेजता है, और संसद ने अदालतों को इन्हें सुनने से रोक दिया है।\n\nकुछ मंच मुक़दमे से पहले बातचीत के लिए हैं। अनुच्छेद 263 के तहत अंतरराज्यीय परिषद इनमें अकेली है जो स्वयं संविधान के तहत बनी; यह 1990 में सरकारिया आयोग की सलाह पर बनी, और इसकी बैठकें कम ही हुई हैं। केंद्रीय गृह मंत्री की अध्यक्षता वाली पाँच क्षेत्रीय परिषदें राज्य पुनर्गठन अधिनियम, 1956 से बनीं, इसलिए वे सांविधिक हैं, संवैधानिक नहीं। नीति आयोग की गवर्निंग काउंसिल एक कार्यकारी संकल्प से बनी है।\n\nदो आयोगों ने पूरे संबंध की समीक्षा की। सरकारिया आयोग (गठन 1983, रिपोर्ट 1988) ने कहा कि राज्यपाल राज्य के बाहर का कोई प्रतिष्ठित व्यक्ति हो, राजनीति से अलग, और अनुच्छेद 356 अंतिम उपाय हो। पुंछी आयोग (गठन 2007, रिपोर्ट 2010) ने राज्यपालों के लिए पाँच वर्ष का निश्चित कार्यकाल, विधेयक पर निर्णय के लिए राज्यपाल को छह महीने की समय-सीमा, और आपातकालीन उपबंधों को पूरे राज्य की जगह किसी ज़िले या हिस्से पर लागू करने की अनुमति का प्रस्ताव दिया।\n\nनज़र रखने लायक बहसें: राज्यपाल और विधेयक (भाग 3); सिकुड़ता विभाज्य पूल और उधार की सीमाएँ (भाग 4); परिसीमन, क्योंकि लोकसभा की सीटें 1971 की जनगणना पर 2026 के बाद की पहली जनगणना तक स्थिर रखी गई हैं, और जिन राज्यों ने अपनी जनसंख्या वृद्धि धीमी की, उन्हें प्रतिनिधित्व घटने का डर है; और \"एक राष्ट्र, एक चुनाव\", यानी संविधान (129वाँ संशोधन) विधेयक, 2024, जो संयुक्त संसदीय समिति को भेजा गया, और जिसे राज्य अपने कार्यकाल से जुड़ा सवाल मानते हैं।\n\nMains के लिए संतुलित दृष्टि: संविधान डिज़ाइन से केंद्र की ओर झुका है, और अदालतों व साझा संस्थाओं ने इसे राज्यों की ओर वापस खींचा है। भारत ज़्यादा सहकारी है या ज़्यादा केंद्रीकृत, यह पाठ से कम और इस बात से ज़्यादा तय होता है कि राज्यपाल, अनुच्छेद 356, अनुदान और GST परिषद का इस्तेमाल कैसे होता है।"
+      },
+      "check": [
+        {
+          "q": { "en": "Which of these was set up under a provision of the Constitution itself?", "hi": "इनमें से कौन-सा स्वयं संविधान के किसी उपबंध के तहत बना?" },
+          "options": [
+            { "en": "The Zonal Councils", "hi": "क्षेत्रीय परिषदें" },
+            { "en": "NITI Aayog", "hi": "नीति आयोग" },
+            { "en": "The Inter-State Council", "hi": "अंतरराज्यीय परिषद" },
+            { "en": "River water tribunals", "hi": "नदी जल अधिकरण" }
+          ],
+          "answer": 2,
+          "why": { "en": "Article 263 provides for the Inter-State Council. Zonal Councils come from the States Reorganisation Act, 1956; NITI Aayog from an executive resolution; water tribunals from the 1956 Water Disputes Act (made under Article 262, but the tribunals themselves are statutory).", "hi": "अनुच्छेद 263 अंतरराज्यीय परिषद का उपबंध करता है। क्षेत्रीय परिषदें राज्य पुनर्गठन अधिनियम, 1956 से; नीति आयोग कार्यकारी संकल्प से; जल अधिकरण 1956 के जल विवाद अधिनियम से (जो अनुच्छेद 262 के तहत बना, पर अधिकरण स्वयं सांविधिक हैं)।" }
+        }
+      ]
+    },
+    {
+      "type": "recall",
+      "id": "recall",
+      "title": { "en": "Say it from memory", "hi": "याद से कहिए" },
+      "pause": { "en": "Re-reading feels like learning. Recalling is what actually builds memory.", "hi": "दोबारा पढ़ना learning जैसा लगता है। याद करके निकालना ही असल में याद पक्की करता है।" },
+      "prompt": {
+        "en": "Close your notes. Write, or say aloud, everything you remember about Indian federalism: the two sides, the lists, the Governor, Article 356, the money. Rough is fine. Then tick what you got.",
+        "hi": "नोट्स बंद कीजिए। भारतीय संघवाद के बारे में जो याद है, सब लिखिए या ज़ोर से बोलिए: दोनों पक्ष, सूचियाँ, राज्यपाल, अनुच्छेद 356, पैसा। कच्चा भी चलेगा। फिर जो आया, उस पर टिक कीजिए।"
+      },
+      "points": [
+        { "en": "Union of States (Article 1): no agreement among states, no right to leave; a holding-together federation", "hi": "राज्यों का संघ (अनुच्छेद 1): राज्यों का समझौता नहीं, अलग होने का अधिकार नहीं; होल्डिंग-टुगेदर संघ" },
+        { "en": "Federal features: two levels, written supreme Constitution, divided powers, independent courts, Rajya Sabha", "hi": "संघीय विशेषताएँ: दो स्तर, सर्वोच्च लिखित संविधान, बँटी शक्तियाँ, स्वतंत्र न्यायपालिका, राज्यसभा" },
+        { "en": "Unitary features: single citizenship, integrated courts, All-India Services, appointed Governor, emergency, Article 3", "hi": "एकात्मक विशेषताएँ: एकल नागरिकता, एकीकृत न्यायपालिका, अखिल भारतीय सेवाएँ, नियुक्त राज्यपाल, आपातकाल, अनुच्छेद 3" },
+        { "en": "Three lists in the Seventh Schedule; residuary powers with Parliament (Article 248); central law prevails in a conflict (Article 254)", "hi": "सातवीं अनुसूची में तीन सूचियाँ; अवशिष्ट शक्ति संसद के पास (अनुच्छेद 248); टकराव में केंद्र की विधि प्रबल (अनुच्छेद 254)" },
+        { "en": "Parliament on the State List: Articles 249, 250, 252, 253 (and 357)", "hi": "राज्य सूची पर संसद: अनुच्छेद 249, 250, 252, 253 (और 357)" },
+        { "en": "Governor: Articles 155, 156, 163, 200; B.P. Singhal (2010); the 2025 rulings on bills", "hi": "राज्यपाल: अनुच्छेद 155, 156, 163, 200; बी.पी. सिंघल (2010); विधेयकों पर 2025 के फ़ैसले" },
+        { "en": "Article 356 and S.R. Bommai (1994): judicial review, floor test, federalism is basic structure", "hi": "अनुच्छेद 356 और एस.आर. बोम्मई (1994): न्यायिक समीक्षा, फ़्लोर टेस्ट, संघवाद मूल ढाँचा" },
+        { "en": "Finance Commission (Article 280): 41% to states under the 15th; cesses and surcharges outside the pool", "hi": "वित्त आयोग (अनुच्छेद 280): 15वें के तहत राज्यों को 41%; उपकर और अधिभार पूल से बाहर" },
+        { "en": "GST Council (Article 279A): three-fourths of weighted votes, Centre one-third; Mohit Minerals (2022): not binding", "hi": "GST परिषद (अनुच्छेद 279क): भारित मतों का तीन-चौथाई, केंद्र एक-तिहाई; मोहित मिनरल्स (2022): बाध्यकारी नहीं" },
+        { "en": "Forums: Inter-State Council (Article 263, 1990), Zonal Councils (1956 Act); Sarkaria and Punchhi Commissions", "hi": "मंच: अंतरराज्यीय परिषद (अनुच्छेद 263, 1990), क्षेत्रीय परिषदें (1956 अधिनियम); सरकारिया और पुंछी आयोग" }
+      ],
+      "after": {
+        "en": "The points you didn't tick are your real syllabus for this topic. They come back first in your review.",
+        "hi": "जिन पर टिक नहीं लगा, वही इस topic का आपका असली syllabus है। आपके review में ये सबसे पहले लौटेंगे।"
+      }
+    },
+    {
+      "type": "pyq",
+      "id": "pyq",
+      "title": { "en": "What UPSC actually asked", "hi": "UPSC ने असल में क्या पूछा" },
+      "lead": {
+        "en": "Eight real Prelims questions on this topic, from 2018 to 2025, in mixed order. Answers are from UPSC's official keys. Before you pick, mark how sure you are: Prelims takes away a third of the marks for a wrong answer, so knowing when you're guessing matters.",
+        "hi": "इस topic पर 2018 से 2025 तक के आठ असली Prelims सवाल, मिले-जुले क्रम में। जवाब UPSC की आधिकारिक कुंजियों से हैं। चुनने से पहले बताइए कि आप कितने पक्के हैं: Prelims में गलत जवाब पर एक-तिहाई अंक कटते हैं, इसलिए यह जानना ज़रूरी है कि कब आप अंदाज़ा लगा रहे हैं।"
+      },
+      "hiNote": { "en": "", "hi": "हिंदी पाठ हमारा अनुवाद है; UPSC के हिंदी प्रश्नपत्र के शब्द थोड़े अलग हो सकते हैं।" },
+      "questions": [
+        {
+          "source": { "paper": "csp-2025-gs1", "n": 53, "label": "Prelims 2025" },
+          "q": { "en": "With reference to India, consider the following:\nI. The Inter-State Council\nII. The National Security Council\nIII. Zonal Councils\nHow many of the above were established as per the provisions of the Constitution of India?", "hi": "भारत के संदर्भ में, निम्नलिखित पर विचार कीजिए:\nI. अंतरराज्यीय परिषद\nII. राष्ट्रीय सुरक्षा परिषद\nIII. क्षेत्रीय परिषदें\nउपर्युक्त में से कितनी भारत के संविधान के उपबंधों के अनुसार स्थापित की गईं?" },
+          "options": [
+            { "en": "Only one", "hi": "केवल एक" },
+            { "en": "Only two", "hi": "केवल दो" },
+            { "en": "All the three", "hi": "तीनों" },
+            { "en": "None", "hi": "कोई नहीं" }
+          ],
+          "answer": 0,
+          "why": { "en": "Only the Inter-State Council (Article 263). The National Security Council (1998) was set up by an executive order; the Zonal Councils by the States Reorganisation Act, 1956.", "hi": "केवल अंतरराज्यीय परिषद (अनुच्छेद 263)। राष्ट्रीय सुरक्षा परिषद (1998) कार्यकारी आदेश से बनी; क्षेत्रीय परिषदें राज्य पुनर्गठन अधिनियम, 1956 से।" }
+        },
+        {
+          "source": { "paper": "csp-2018-gs1", "n": 53, "label": "Prelims 2018" },
+          "q": { "en": "If the President of India exercises his power as provided under Article 356 of the Constitution in respect of a particular State, then", "hi": "यदि भारत के राष्ट्रपति किसी विशेष राज्य के संबंध में संविधान के अनुच्छेद 356 में दी गई अपनी शक्ति का प्रयोग करते हैं, तो" },
+          "options": [
+            { "en": "the Assembly of the State is automatically dissolved", "hi": "उस राज्य की विधानसभा अपने आप भंग हो जाती है" },
+            { "en": "the powers of the Legislature of that State shall be exercisable by or under the authority of the Parliament", "hi": "उस राज्य के विधानमंडल की शक्तियाँ संसद द्वारा या उसके प्राधिकार के अधीन प्रयोग की जाएँगी" },
+            { "en": "Article 19 is suspended in that State", "hi": "उस राज्य में अनुच्छेद 19 निलंबित हो जाता है" },
+            { "en": "the President can make laws relating to that State", "hi": "राष्ट्रपति उस राज्य से संबंधित विधियाँ बना सकते हैं" }
+          ],
+          "answer": 1,
+          "why": { "en": "Article 356(1)(b). (a) Dissolution is not automatic, and after Bommai it waits for Parliament. (c) Article 19 is suspended only in a national emergency on grounds of war or external aggression (Article 358), not under Article 356. (d) Parliament, not the President, gets the law-making power, though it can delegate it.", "hi": "अनुच्छेद 356(1)(ख)। (क) भंग होना अपने आप नहीं होता, और बोम्मई के बाद यह संसद के अनुमोदन का इंतज़ार करता है। (ग) अनुच्छेद 19 केवल युद्ध या बाहरी आक्रमण के आधार पर राष्ट्रीय आपातकाल में निलंबित होता है (अनुच्छेद 358), अनुच्छेद 356 में नहीं। (घ) विधि बनाने की शक्ति संसद को मिलती है, राष्ट्रपति को नहीं, हालाँकि संसद इसे प्रत्यायोजित कर सकती है।" }
+        },
+        {
+          "source": { "paper": "csp-2025-gs1", "n": 54, "label": "Prelims 2025" },
+          "q": { "en": "Consider the following statements:\nI. The Constitution of India explicitly mentions that in certain spheres the Governor of a State acts in his/her own discretion.\nII. The President of India can, of his/her own, reserve a bill passed by a State Legislature for his/her consideration without it being forwarded by the Governor of the State concerned.\nWhich of the statements given above is/are correct?", "hi": "निम्नलिखित कथनों पर विचार कीजिए:\nI. भारत का संविधान स्पष्ट रूप से उल्लेख करता है कि कुछ क्षेत्रों में किसी राज्य के राज्यपाल अपने विवेक से कार्य करते हैं।\nII. भारत के राष्ट्रपति, संबंधित राज्य के राज्यपाल द्वारा भेजे बिना, किसी राज्य विधानमंडल द्वारा पारित विधेयक को स्वयं अपने विचार के लिए आरक्षित कर सकते हैं।\nउपर्युक्त कथनों में से कौन-सा/से सही है/हैं?" },
+          "options": [
+            { "en": "I only", "hi": "केवल I" },
+            { "en": "II only", "hi": "केवल II" },
+            { "en": "Both I and II", "hi": "I और II दोनों" },
+            { "en": "Neither I nor II", "hi": "न तो I, न ही II" }
+          ],
+          "answer": 0,
+          "why": { "en": "I is right: Article 163 speaks of functions the Governor exercises \"in his discretion\", and some Articles name them, such as Sixth Schedule matters. II is wrong: only the Governor can reserve a state bill for the President (Article 200); the President cannot pull one in.", "hi": "I सही है: अनुच्छेद 163 उन कार्यों की बात करता है जिन्हें राज्यपाल \"अपने विवेक से\" करते हैं, और कुछ अनुच्छेद उनका नाम लेते हैं, जैसे छठी अनुसूची के मामले। II गलत है: केवल राज्यपाल ही राज्य विधेयक को राष्ट्रपति के लिए आरक्षित कर सकते हैं (अनुच्छेद 200); राष्ट्रपति स्वयं उसे नहीं मँगा सकते।" }
+        },
+        {
+          "source": { "paper": "csp-2018-gs1", "n": 38, "label": "Prelims 2018" },
+          "q": { "en": "In the Federation established by the Government of India Act of 1935, residuary powers were given to the", "hi": "भारत शासन अधिनियम, 1935 द्वारा स्थापित संघ में अवशिष्ट शक्तियाँ किसे दी गई थीं?" },
+          "options": [
+            { "en": "Federal Legislature", "hi": "संघीय विधानमंडल" },
+            { "en": "Governor-General", "hi": "गवर्नर-जनरल" },
+            { "en": "Provincial Legislature", "hi": "प्रांतीय विधानमंडल" },
+            { "en": "Provincial Governors", "hi": "प्रांतीय गवर्नर" }
+          ],
+          "answer": 1,
+          "why": { "en": "Under the 1935 Act, residuary powers went to the Governor-General. The Constitution moved them to Parliament (Article 248). A neat contrast for Mains too: same idea of a strong centre, now with an elected body.", "hi": "1935 के अधिनियम में अवशिष्ट शक्तियाँ गवर्नर-जनरल को दी गईं। संविधान ने इन्हें संसद को दिया (अनुच्छेद 248)। Mains के लिए भी अच्छा अंतर: वही सशक्त केंद्र का विचार, पर अब एक निर्वाचित संस्था के साथ।" }
+        },
+        {
+          "source": { "paper": "csp-2025-gs1", "n": 58, "label": "Prelims 2025" },
+          "q": { "en": "Consider the following subjects under the Constitution of India:\nI. List I – Union List, in the Seventh Schedule\nII. Extent of the executive power of a State\nIII. Conditions of the Governor's office\nFor a constitutional amendment with respect to which of the above, ratification by the Legislatures of not less than one-half of the States is required before presenting the bill to the President of India for assent?", "hi": "भारत के संविधान के अंतर्गत निम्नलिखित विषयों पर विचार कीजिए:\nI. सातवीं अनुसूची में सूची I – संघ सूची\nII. किसी राज्य की कार्यपालिका शक्ति का विस्तार\nIII. राज्यपाल के पद की शर्तें\nउपर्युक्त में से किसके संबंध में संविधान संशोधन के लिए, विधेयक को स्वीकृति हेतु राष्ट्रपति के समक्ष रखने से पहले कम से कम आधे राज्यों के विधानमंडलों का अनुसमर्थन आवश्यक है?" },
+          "options": [
+            { "en": "I and II only", "hi": "केवल I और II" },
+            { "en": "II and III only", "hi": "केवल II और III" },
+            { "en": "I and III only", "hi": "केवल I और III" },
+            { "en": "I, II and III", "hi": "I, II और III" }
+          ],
+          "answer": 0,
+          "why": { "en": "Article 368(2) lists the provisions that need ratification by half the states: among them the lists in the Seventh Schedule and the extent of executive power of the Union and the states (Articles 73 and 162). The conditions of the Governor's office (Article 158) are not on the list.", "hi": "अनुच्छेद 368(2) उन उपबंधों की सूची देता है जिनके लिए आधे राज्यों का अनुसमर्थन चाहिए: इनमें सातवीं अनुसूची की सूचियाँ और संघ व राज्यों की कार्यपालिका शक्ति का विस्तार (अनुच्छेद 73 और 162) शामिल हैं। राज्यपाल के पद की शर्तें (अनुच्छेद 158) इस सूची में नहीं हैं।" }
+        },
+        {
+          "source": { "paper": "csp-2021-gs1", "n": 86, "label": "Prelims 2021" },
+          "q": { "en": "Which one of the following in Indian polity is an essential feature that indicates that it is federal in character?", "hi": "भारतीय राजव्यवस्था में निम्नलिखित में से कौन-सी एक अनिवार्य विशेषता है जो दर्शाती है कि उसका स्वरूप संघीय है?" },
+          "options": [
+            { "en": "The independence of judiciary is safeguarded.", "hi": "न्यायपालिका की स्वतंत्रता सुरक्षित है।" },
+            { "en": "The Union Legislature has elected representatives from constituent units.", "hi": "संघ के विधानमंडल में घटक इकाइयों के निर्वाचित प्रतिनिधि हैं।" },
+            { "en": "The Union Cabinet can have elected representatives from regional parties.", "hi": "संघ के मंत्रिमंडल में क्षेत्रीय दलों के निर्वाचित प्रतिनिधि हो सकते हैं।" },
+            { "en": "The Fundamental Rights are enforceable by Courts of Law.", "hi": "मौलिक अधिकार न्यायालयों द्वारा प्रवर्तनीय हैं।" }
+          ],
+          "answer": 0,
+          "why": { "en": "A federation needs an independent umpire to settle disputes between the two levels, so the independence of the judiciary is the essential federal feature. (b) and (c) can exist in unitary states too; (d) is about rights, not the division of power.", "hi": "संघ को दोनों स्तरों के बीच विवाद सुलझाने के लिए एक स्वतंत्र निर्णायक चाहिए, इसलिए न्यायपालिका की स्वतंत्रता अनिवार्य संघीय विशेषता है। (ख) और (ग) एकात्मक राज्यों में भी हो सकते हैं; (घ) अधिकारों के बारे में है, शक्ति के बँटवारे के बारे में नहीं।" }
+        },
+        {
+          "source": { "paper": "csp-2019-gs1", "n": 66, "label": "Prelims 2019" },
+          "q": { "en": "Which one of the following suggested that the Governor should be an eminent person from outside the State and should be a detached figure without intense political links or should not have taken part in politics in the recent past?", "hi": "निम्नलिखित में से किसने सुझाव दिया कि राज्यपाल राज्य के बाहर का कोई प्रतिष्ठित व्यक्ति हो, गहरे राजनीतिक संबंधों से अलग हो, या हाल के दिनों में राजनीति में भाग न लिया हो?" },
+          "options": [
+            { "en": "First Administrative Reforms Commission (1966)", "hi": "प्रथम प्रशासनिक सुधार आयोग (1966)" },
+            { "en": "Rajamannar Committee (1969)", "hi": "राजमन्नार समिति (1969)" },
+            { "en": "Sarkaria Commission (1983)", "hi": "सरकारिया आयोग (1983)" },
+            { "en": "National Commission to Review the Working of the Constitution (2000)", "hi": "संविधान के कार्यकरण की समीक्षा के लिए राष्ट्रीय आयोग (2000)" }
+          ],
+          "answer": 2,
+          "why": { "en": "Sarkaria. The Rajamannar Committee was set up by Tamil Nadu in 1969 to argue for state autonomy; it wanted Article 356 deleted or curbed. Knowing who said what is the whole question here.", "hi": "सरकारिया। राजमन्नार समिति को तमिलनाडु ने 1969 में राज्य स्वायत्तता की वकालत के लिए बनाया था; वह अनुच्छेद 356 को हटाना या सीमित करना चाहती थी। यहाँ पूरा सवाल यही है कि किसने क्या कहा।" }
+        },
+        {
+          "source": { "paper": "csp-2023-gs1", "n": 29, "label": "Prelims 2023" },
+          "q": { "en": "Consider the following:\n1. Demographic performance\n2. Forest and ecology\n3. Governance reforms\n4. Stable government\n5. Tax and fiscal efforts\nFor the horizontal tax devolution, the Fifteenth Finance Commission used how many of the above as criteria other than population, area and income distance?", "hi": "निम्नलिखित पर विचार कीजिए:\n1. जनसांख्यिकीय प्रदर्शन\n2. वन और पारिस्थितिकी\n3. शासन सुधार\n4. स्थिर सरकार\n5. कर और राजकोषीय प्रयास\nक्षैतिज कर हस्तांतरण के लिए पंद्रहवें वित्त आयोग ने जनसंख्या, क्षेत्रफल और आय-अंतर के अलावा उपर्युक्त में से कितने मानदंडों का उपयोग किया?" },
+          "options": [
+            { "en": "Only two", "hi": "केवल दो" },
+            { "en": "Only three", "hi": "केवल तीन" },
+            { "en": "Only four", "hi": "केवल चार" },
+            { "en": "All five", "hi": "पाँचों" }
+          ],
+          "answer": 1,
+          "why": { "en": "Three: demographic performance (12.5%), forest and ecology (10%), and tax and fiscal efforts (2.5%). Governance reforms and stable government were not criteria. You read these weights in part 4.", "hi": "तीन: जनसांख्यिकीय प्रदर्शन (12.5%), वन और पारिस्थितिकी (10%), और कर व राजकोषीय प्रयास (2.5%)। शासन सुधार और स्थिर सरकार मानदंड नहीं थे। ये भार आपने भाग 4 में पढ़े।" }
+        }
+      ]
+    },
+    {
+      "type": "apply",
+      "id": "apply",
+      "title": { "en": "Use it: three situations", "hi": "इस्तेमाल कीजिए: तीन स्थितियाँ" },
+      "lead": {
+        "en": "Not facts this time: situations. Pick what the Constitution says happens next. This is how both Prelims statements and Mains examples test you.",
+        "hi": "इस बार facts नहीं, स्थितियाँ। चुनिए कि संविधान के अनुसार आगे क्या होता है। Prelims के कथन और Mains के उदाहरण, दोनों आपको ऐसे ही परखते हैं।"
+      },
+      "questions": [
+        {
+          "q": { "en": "Three neighbouring states want one common law on a State List subject, and none of them wants to draft its own. What is the constitutional route?", "hi": "तीन पड़ोसी राज्य राज्य सूची के किसी विषय पर एक साझा क़ानून चाहते हैं, और कोई भी अपना अलग मसौदा नहीं बनाना चाहता। संवैधानिक रास्ता क्या है?" },
+          "options": [
+            { "en": "Their legislatures pass resolutions; Parliament makes the law for them, and other states may adopt it (Article 252)", "hi": "उनके विधानमंडल संकल्प पारित करें; संसद उनके लिए विधि बनाए, और दूसरे राज्य उसे अपना सकते हैं (अनुच्छेद 252)" },
+            { "en": "The Inter-State Council makes the law", "hi": "अंतरराज्यीय परिषद विधि बनाए" },
+            { "en": "The Governors issue a joint ordinance", "hi": "राज्यपाल संयुक्त अध्यादेश जारी करें" },
+            { "en": "They need a constitutional amendment to move the subject to the Union List", "hi": "विषय को संघ सूची में ले जाने के लिए संविधान संशोधन चाहिए" }
+          ],
+          "answer": 0,
+          "why": { "en": "Article 252. One catch worth remembering: once Parliament makes such a law, only Parliament can amend or repeal it, even for the states that asked.", "hi": "अनुच्छेद 252। एक बात याद रखने लायक: एक बार संसद ऐसी विधि बना दे, तो उसे संशोधित या निरस्त केवल संसद कर सकती है, उन राज्यों के लिए भी जिन्होंने अनुरोध किया था।" }
+        },
+        {
+          "q": { "en": "A state amends a central law on a Concurrent subject for itself. The bill is reserved, and the President assents. Two years later Parliament passes a new law on the same matter. Which law now applies in that state?", "hi": "एक राज्य समवर्ती विषय के किसी केंद्रीय क़ानून को अपने लिए संशोधित करता है। विधेयक आरक्षित होता है और राष्ट्रपति स्वीकृति देते हैं। दो साल बाद संसद उसी विषय पर नया क़ानून पारित करती है। अब उस राज्य में कौन-सा क़ानून लागू होगा?" },
+          "options": [
+            { "en": "The state law, forever, because it had the President's assent", "hi": "राज्य का क़ानून, हमेशा के लिए, क्योंकि उसे राष्ट्रपति की स्वीकृति मिली थी" },
+            { "en": "Parliament's new law, which can override or repeal the state law", "hi": "संसद का नया क़ानून, जो राज्य के क़ानून को ओवरराइड या निरस्त कर सकता है" },
+            { "en": "Neither, until the Supreme Court decides", "hi": "कोई नहीं, जब तक सुप्रीम कोर्ट तय न करे" },
+            { "en": "Whichever the Governor chooses", "hi": "जिसे राज्यपाल चुनें" }
+          ],
+          "answer": 1,
+          "why": { "en": "Article 254(2): the President's assent protects the state law only until Parliament legislates again on the same matter. The proviso lets Parliament add to, amend, vary or repeal it.", "hi": "अनुच्छेद 254(2): राष्ट्रपति की स्वीकृति राज्य के क़ानून की रक्षा तभी तक करती है जब तक संसद उसी विषय पर फिर से विधि न बनाए। परंतुक संसद को उसमें जोड़ने, संशोधित करने, बदलने या निरस्त करने देता है।" }
+        },
+        {
+          "q": { "en": "A Governor recommends President's Rule, saying the Chief Minister has lost majority, based on letters some MLAs sent to Raj Bhavan. No floor test is held. After Bommai, what is the weakness in this?", "hi": "एक राज्यपाल राष्ट्रपति शासन की सिफ़ारिश करते हैं, कहते हैं कि मुख्यमंत्री बहुमत खो चुके हैं, कुछ विधायकों के राजभवन भेजे पत्रों के आधार पर। कोई फ़्लोर टेस्ट नहीं होता। बोम्मई के बाद इसमें कमज़ोरी क्या है?" },
+          "options": [
+            { "en": "None: the Governor's satisfaction is final", "hi": "कोई नहीं: राज्यपाल की संतुष्टि अंतिम है" },
+            { "en": "Majority must be tested on the floor of the House, and the proclamation can be reviewed by a court", "hi": "बहुमत सदन के पटल पर परखा जाना चाहिए, और उद्घोषणा की न्यायिक समीक्षा हो सकती है" },
+            { "en": "Only the Lok Sabha can decide a state government's majority", "hi": "केवल लोकसभा किसी राज्य सरकार का बहुमत तय कर सकती है" },
+            { "en": "The Chief Minister must first resign", "hi": "मुख्यमंत्री को पहले इस्तीफ़ा देना होगा" }
+          ],
+          "answer": 1,
+          "why": { "en": "This is close to the facts of Bommai itself (Karnataka, 1989). The Court held that the floor of the House is the place to test majority, and that a proclamation resting on irrelevant or no material can be struck down.", "hi": "यह लगभग बोम्मई केस (कर्नाटक, 1989) के ही तथ्य हैं। कोर्ट ने माना कि बहुमत परखने की जगह सदन का पटल है, और अप्रासंगिक या बिना आधार वाली उद्घोषणा रद्द की जा सकती है।" }
+        }
+      ]
+    },
+    {
+      "type": "mains",
+      "id": "mains",
+      "title": { "en": "Plan a Mains answer", "hi": "Mains answer का ढाँचा बनाइए" },
+      "pause": { "en": "Two minutes of planning saves many minutes of wandering.", "hi": "दो मिनट की planning, लिखते वक़्त भटकने के कई मिनट बचाती है।" },
+      "lead": {
+        "en": "Pick one question. Spend about two minutes planning before you look at ours: one line to open, three or four points, each with an example, and a way forward. No clock runs. If you want the full practice, write the answer by hand on paper afterwards; the exam is on paper.",
+        "hi": "एक सवाल चुनिए। हमारा ढाँचा देखने से पहले लगभग दो मिनट planning कीजिए: शुरुआत की एक पंक्ति, तीन-चार बिंदु, हर एक के साथ एक उदाहरण, और आगे का रास्ता। कोई घड़ी नहीं चलती। पूरी practice चाहिए तो बाद में answer काग़ज़ पर हाथ से लिखिए; exam काग़ज़ पर ही होता है।"
+      },
+      "questions": [
+        {
+          "id": "fiscal",
+          "source": { "paper": "csm-2025-gs2", "n": 14, "label": "Mains 2025, GS2, Q14" },
+          "q": { "en": "Examine the evolving pattern of Centre-State financial relations in the context of planned development in India. How far have the recent reforms impacted the fiscal federalism in India?", "hi": "भारत में नियोजित विकास के संदर्भ में केंद्र-राज्य वित्तीय संबंधों के बदलते स्वरूप का परीक्षण कीजिए। हाल के सुधारों ने भारत में राजकोषीय संघवाद को किस हद तक प्रभावित किया है?" },
+          "marks": 15,
+          "words": 250,
+          "directive": { "en": "Two parts. \"Examine\": trace how the pattern changed, with reasons. \"How far\": a judgement, both ways, not just a list of reforms.", "hi": "दो हिस्से। \"परीक्षण\": बदलाव कैसे हुआ, कारणों के साथ। \"किस हद तक\": दोनों पक्षों के साथ एक निर्णय, केवल सुधारों की सूची नहीं।" },
+          "skeleton": {
+            "intro": { "en": "The Constitution gives the Centre the buoyant taxes and the states the heavy spending, so transfers decide how federal India is in practice.", "hi": "संविधान केंद्र को तेज़ी से बढ़ने वाले कर और राज्यों को भारी ख़र्च देता है, इसलिए व्यवहार में भारत कितना संघीय है, यह हस्तांतरण तय करते हैं।" },
+            "points": [
+              { "en": "Planning era: two channels, the Finance Commission (Article 280) for tax shares and the Planning Commission for plan grants (Gadgil formula, 1969); plan grants carried central priorities.", "hi": "योजना काल: दो रास्ते, कर-हिस्से के लिए वित्त आयोग (अनुच्छेद 280) और योजना अनुदान के लिए योजना आयोग (गाडगिल फ़ॉर्मूला, 1969); योजना अनुदानों के साथ केंद्र की प्राथमिकताएँ आती थीं।" },
+              { "en": "Shift after 2015: NITI Aayog replaced the Planning Commission; the 14th Finance Commission raised states' share to 42% (15th: 41%), so more money came untied.", "hi": "2015 के बाद बदलाव: नीति आयोग ने योजना आयोग की जगह ली; 14वें वित्त आयोग ने राज्यों का हिस्सा 42% किया (15वें में 41%), यानी ज़्यादा पैसा बिना शर्त आया।" },
+              { "en": "GST (2017): pooled sovereignty in the GST Council (Article 279A), cooperative in form; but states lost independent tax room, and compensation ended in June 2022.", "hi": "GST (2017): GST परिषद (अनुच्छेद 279क) में साझा संप्रभुता, स्वरूप में सहकारी; पर राज्यों ने स्वतंत्र कर-क्षमता खोई, और भरपाई जून 2022 में ख़त्म हुई।" },
+              { "en": "Counter-trend: cesses and surcharges outside the divisible pool, conditional centrally sponsored schemes (Article 282), borrowing limits under Article 293 (Kerala's case).", "hi": "उलटी प्रवृत्ति: विभाज्य पूल से बाहर उपकर और अधिभार, शर्तों वाली केंद्र प्रायोजित योजनाएँ (अनुच्छेद 282), अनुच्छेद 293 के तहत उधार की सीमाएँ (केरल का मामला)।" }
+            ],
+            "wayForward": { "en": "Judgement: more cooperative in form, still centralising in money. Way forward: bring cesses into the pool or cap them, a GST dispute mechanism, and predictable untied funds, as the 16th Finance Commission weighs.", "hi": "निर्णय: स्वरूप में ज़्यादा सहकारी, पैसे में अब भी केंद्रीकरण। आगे का रास्ता: उपकरों को पूल में लाना या उन पर सीमा, GST विवाद-निवारण तंत्र, और अनुमानित बिना-शर्त राशि, जिन पर 16वाँ वित्त आयोग विचार कर रहा है।" }
+          },
+          "commonMistake": { "en": "Writing only about GST and skipping the planning-era background the first part asks for.", "hi": "केवल GST पर लिखना और योजना काल की वह पृष्ठभूमि छोड़ देना जो पहला हिस्सा माँगता है।" }
+        },
+        {
+          "id": "governor",
+          "source": { "label": "Practice question (written by us, not from a UPSC paper)" },
+          "q": { "en": "\"The office of the Governor was meant to be a bridge between the Centre and the states, but has often become a point of friction.\" Discuss with reference to recent judicial pronouncements.", "hi": "\"राज्यपाल का पद केंद्र और राज्यों के बीच सेतु बनने के लिए था, पर अक्सर टकराव का बिंदु बन गया है।\" हाल के न्यायिक निर्णयों के संदर्भ में चर्चा कीजिए।" },
+          "marks": 15,
+          "words": 250,
+          "directive": { "en": "\"Discuss\": both sides of the statement, the intended role and the friction, then a reasoned view.", "hi": "\"चर्चा\": कथन के दोनों पक्ष, अपेक्षित भूमिका और टकराव, फिर एक तर्कपूर्ण राय।" },
+          "skeleton": {
+            "intro": { "en": "The Constituent Assembly chose an appointed Governor (Articles 155, 156) as a constitutional head and the Centre's link with the state, acting mostly on the advice of the state's ministers.", "hi": "संविधान सभा ने नियुक्त राज्यपाल (अनुच्छेद 155, 156) को संवैधानिक प्रमुख और राज्य से केंद्र की कड़ी के रूप में चुना, जो ज़्यादातर राज्य के मंत्रियों की सलाह पर काम करते हैं।" },
+            "points": [
+              { "en": "Bridge: reports to the Centre, reserves bills that touch national matters, discretion in hung Assemblies; the Sarkaria Commission wanted a detached, eminent outsider.", "hi": "सेतु: केंद्र को रिपोर्ट, राष्ट्रीय मामलों से जुड़े विधेयकों को आरक्षित करना, त्रिशंकु विधानसभा में विवेक; सरकारिया आयोग एक तटस्थ, प्रतिष्ठित बाहरी व्यक्ति चाहता था।" },
+              { "en": "Friction 1, Article 356: misuse before 1994; S.R. Bommai brought judicial review and the floor test.", "hi": "टकराव 1, अनुच्छेद 356: 1994 से पहले दुरुपयोग; एस.आर. बोम्मई ने न्यायिक समीक्षा और फ़्लोर टेस्ट दिए।" },
+              { "en": "Friction 2, bills: long delays under Article 200; Tamil Nadu case (April 2025) set time limits; the Presidential Reference opinion (November 2025) said courts can't fix them, but indefinite inaction can be challenged.", "hi": "टकराव 2, विधेयक: अनुच्छेद 200 के तहत लंबी देरी; तमिलनाडु केस (अप्रैल 2025) ने समय-सीमाएँ तय कीं; राष्ट्रपति संदर्भ पर राय (नवंबर 2025) ने कहा कि अदालतें इन्हें तय नहीं कर सकतीं, पर अनिश्चित निष्क्रियता को चुनौती दी जा सकती है।" },
+              { "en": "Friction 3, tenure: removal at pleasure; B.P. Singhal (2010) required valid reasons.", "hi": "टकराव 3, कार्यकाल: प्रसादपर्यंत हटाना; बी.पी. सिंघल (2010) ने वैध कारण ज़रूरी किए।" }
+            ],
+            "wayForward": { "en": "Punchhi Commission: fixed five-year term, time-bound decisions on bills; a convention of consultation with the Chief Minister on appointment. The office works when it is used as a bridge, not a lever.", "hi": "पुंछी आयोग: पाँच वर्ष का निश्चित कार्यकाल, विधेयकों पर समयबद्ध निर्णय; नियुक्ति पर मुख्यमंत्री से परामर्श की परंपरा। यह पद तब काम करता है जब इसे सेतु की तरह इस्तेमाल किया जाए, लीवर की तरह नहीं।" }
+          },
+          "commonMistake": { "en": "Calling for the office to be abolished without arguing for it, or listing powers without showing where friction arises.", "hi": "बिना तर्क दिए पद को ख़त्म करने की माँग, या यह दिखाए बिना शक्तियों की सूची देना कि टकराव कहाँ होता है।" }
+        }
+      ],
+      "selfCheck": [
+        { "en": "I answered every part of the question, not just the first.", "hi": "मैंने सवाल के हर हिस्से का जवाब दिया, केवल पहले का नहीं।" },
+        { "en": "Each point has one concrete example: an Article, a case, a number or a year.", "hi": "हर बिंदु के साथ एक ठोस उदाहरण है: अनुच्छेद, केस, आँकड़ा या वर्ष।" },
+        { "en": "I showed both sides before giving a view.", "hi": "राय देने से पहले मैंने दोनों पक्ष रखे।" },
+        { "en": "My way forward is specific (who should do what), not \"Centre and states should work together\".", "hi": "मेरा आगे का रास्ता ठोस है (किसे क्या करना चाहिए), \"केंद्र और राज्य मिलकर काम करें\" जैसा नहीं।" },
+        { "en": "It would fit in about 250 words.", "hi": "यह लगभग 250 शब्दों में आ जाएगा।" }
+      ],
+      "conclusions": {
+        "title": { "en": "Which conclusion is better?", "hi": "कौन-सा निष्कर्ष बेहतर है?" },
+        "pairs": [
+          {
+            "q": { "en": "Is Indian federalism moving towards greater centralisation? Discuss.", "hi": "क्या भारतीय संघवाद अधिक केंद्रीकरण की ओर बढ़ रहा है? चर्चा कीजिए।" },
+            "a": { "en": "In conclusion, India is federal and also unitary. Both have good and bad points. The Centre and states should work together.", "hi": "निष्कर्ष में, भारत संघीय भी है और एकात्मक भी। दोनों के अच्छे और बुरे पहलू हैं। केंद्र और राज्यों को मिलकर काम करना चाहिए।" },
+            "b": { "en": "Wider central schemes and the states' dependence on transfers point to centralisation, while the GST Council and larger untied tax shares show shared decision-making. The balance depends less on the text than on how its institutions are used.", "hi": "केंद्रीय योजनाओं का फैलाव और हस्तांतरण पर राज्यों की निर्भरता केंद्रीकरण की ओर इशारा करते हैं, जबकि GST परिषद और बिना शर्त कर-हिस्से का बढ़ना साझा निर्णय दिखाते हैं। संतुलन पाठ से कम, और इस बात से ज़्यादा तय होता है कि संस्थाओं का इस्तेमाल कैसे होता है।" },
+            "better": 1,
+            "why": { "en": "B weighs both trends and gives a reasoned judgement. A restates a textbook phrase and ends with a platitude.", "hi": "B दोनों प्रवृत्तियों को तौलता है और तर्कपूर्ण निर्णय देता है। A पाठ्यपुस्तक का वाक्य दोहराता है और एक घिसी-पिटी बात पर ख़त्म होता है।" }
+          },
+          {
+            "q": { "en": "Examine the role of the Inter-State Council in cooperative federalism.", "hi": "सहकारी संघवाद में अंतरराज्यीय परिषद की भूमिका का परीक्षण कीजिए।" },
+            "a": { "en": "The Inter-State Council under Article 263 offers a standing forum for the Centre and the states, but it has met rarely. Regular meetings and a small permanent secretariat would let it do what the Sarkaria Commission hoped: settle disputes before they reach the courts.", "hi": "अनुच्छेद 263 के तहत अंतरराज्यीय परिषद केंद्र और राज्यों के लिए स्थायी मंच देती है, पर इसकी बैठकें कम ही हुई हैं। नियमित बैठकें और एक छोटा स्थायी सचिवालय इसे वह करने देंगे जिसकी सरकारिया आयोग को उम्मीद थी: विवादों को अदालत पहुँचने से पहले सुलझाना।" },
+            "b": { "en": "Thus the Inter-State Council is a very important body. It should be made stronger so that India becomes strong.", "hi": "अतः अंतरराज्यीय परिषद एक बहुत महत्वपूर्ण संस्था है। इसे मज़बूत बनाना चाहिए ताकि भारत मज़बूत बने।" },
+            "better": 0,
+            "why": { "en": "A ends with a precise suggestion tied to the gap it found. B is vague.", "hi": "A अपने पाए गए अंतर से जुड़े एक सटीक सुझाव पर ख़त्म होता है। B अस्पष्ट है।" }
+          }
+        ]
+      }
+    },
+    {
+      "type": "keep",
+      "id": "keep",
+      "title": { "en": "Keep it", "hi": "इसे याद रखिए" },
+      "lead": {
+        "en": "Eight short questions now go into your review. Each comes back just before you'd be likely to forget it: first in a few days, then further apart each time you get it right. The topic also goes on your syllabus map as Met.",
+        "hi": "आठ छोटे सवाल अब आपके review में जाते हैं। हर एक तब लौटेगा जब उसके भूलने की संभावना हो: पहले कुछ दिनों में, फिर हर सही जवाब के साथ और दूर। यह topic आपके syllabus map पर भी Met के रूप में जुड़ जाता है।"
+      },
+      "cards": [
+        {
+          "id": "fed-k1",
+          "q": { "en": "Residuary powers of legislation in India lie with:", "hi": "भारत में विधि बनाने की अवशिष्ट शक्तियाँ किसके पास हैं?" },
+          "options": [{ "en": "Parliament", "hi": "संसद" }, { "en": "State legislatures", "hi": "राज्य विधानमंडल" }, { "en": "The President", "hi": "राष्ट्रपति" }, { "en": "The Supreme Court", "hi": "सुप्रीम कोर्ट" }],
+          "answer": 0,
+          "why": { "en": "Article 248 and Entry 97 of the Union List.", "hi": "अनुच्छेद 248 और संघ सूची की प्रविष्टि 97।" }
+        },
+        {
+          "id": "fed-k2",
+          "q": { "en": "Under which Article can Parliament legislate on a State List subject after a Rajya Sabha resolution?", "hi": "किस अनुच्छेद के तहत राज्यसभा के संकल्प के बाद संसद राज्य सूची के विषय पर विधि बना सकती है?" },
+          "options": [{ "en": "249", "hi": "249" }, { "en": "250", "hi": "250" }, { "en": "252", "hi": "252" }, { "en": "253", "hi": "253" }],
+          "answer": 0,
+          "why": { "en": "249: Rajya Sabha resolution, two-thirds present and voting. 250: national emergency. 252: two or more states ask. 253: treaties.", "hi": "249: राज्यसभा का संकल्प, उपस्थित और मत देने वालों का दो-तिहाई। 250: राष्ट्रीय आपातकाल। 252: दो या अधिक राज्यों का अनुरोध। 253: संधियाँ।" }
+        },
+        {
+          "id": "fed-k3",
+          "q": { "en": "Which of these did the 42nd Amendment NOT move to the Concurrent List?", "hi": "इनमें से किसे 42वें संशोधन ने समवर्ती सूची में नहीं डाला?" },
+          "options": [{ "en": "Public health", "hi": "लोक स्वास्थ्य" }, { "en": "Forests", "hi": "वन" }, { "en": "Administration of justice", "hi": "न्याय प्रशासन" }, { "en": "Protection of wild animals and birds", "hi": "वन्य पशुओं और पक्षियों का संरक्षण" }],
+          "answer": 0,
+          "why": { "en": "Public health is still a State subject. The five: education, forests, weights and measures, wild animals and birds, administration of justice.", "hi": "लोक स्वास्थ्य अब भी राज्य का विषय है। पाँच विषय: शिक्षा, वन, नाप-तौल, वन्य पशु और पक्षी, न्याय प्रशासन।" }
+        },
+        {
+          "id": "fed-k4",
+          "q": { "en": "S.R. Bommai (1994) held all of these EXCEPT:", "hi": "एस.आर. बोम्मई (1994) ने इनमें से सब माना, सिवाय:" },
+          "options": [{ "en": "A proclamation under Article 356 can be reviewed by the courts", "hi": "अनुच्छेद 356 की उद्घोषणा की न्यायिक समीक्षा हो सकती है" }, { "en": "Majority is tested on the floor of the House", "hi": "बहुमत सदन के पटल पर परखा जाता है" }, { "en": "Federalism is part of the basic structure", "hi": "संघवाद मूल ढाँचे का हिस्सा है" }, { "en": "Governors can only be removed for valid reasons", "hi": "राज्यपाल को केवल वैध कारणों से हटाया जा सकता है" }],
+          "answer": 3,
+          "why": { "en": "The removal of Governors was B.P. Singhal (2010), not Bommai.", "hi": "राज्यपालों को हटाने का मामला बी.पी. सिंघल (2010) था, बोम्मई नहीं।" }
+        },
+        {
+          "id": "fed-k5",
+          "q": { "en": "In the GST Council, the Centre's vote carries what weight, and what is needed to decide?", "hi": "GST परिषद में केंद्र के मत का भार कितना है, और निर्णय के लिए क्या चाहिए?" },
+          "options": [{ "en": "One-third; three-fourths of weighted votes", "hi": "एक-तिहाई; भारित मतों का तीन-चौथाई" }, { "en": "One-half; two-thirds", "hi": "आधा; दो-तिहाई" }, { "en": "One-third; a simple majority", "hi": "एक-तिहाई; साधारण बहुमत" }, { "en": "Two-thirds; three-fourths", "hi": "दो-तिहाई; तीन-चौथाई" }],
+          "answer": 0,
+          "why": { "en": "Article 279A. The states together hold two-thirds. So the Centre can block alone; the states can block only together.", "hi": "अनुच्छेद 279क। राज्यों के पास मिलाकर दो-तिहाई। इसलिए केंद्र अकेले रोक सकता है; राज्य केवल मिलकर।" }
+        },
+        {
+          "id": "fed-k6",
+          "q": { "en": "What share of the divisible pool did the 15th Finance Commission recommend for the states?", "hi": "15वें वित्त आयोग ने विभाज्य पूल का कितना हिस्सा राज्यों के लिए सुझाया?" },
+          "options": [{ "en": "32%", "hi": "32%" }, { "en": "41%", "hi": "41%" }, { "en": "42%", "hi": "42%" }, { "en": "45%", "hi": "45%" }],
+          "answer": 1,
+          "why": { "en": "41%. The 14th gave 42%; the 13th, 32%. UPSC 2025 offered 45% as a trap.", "hi": "41%। 14वें ने 42% दिया था; 13वें ने 32%। UPSC 2025 ने 45% को जाल के रूप में रखा था।" }
+        },
+        {
+          "id": "fed-k7",
+          "q": { "en": "Which body was set up under a provision of the Constitution?", "hi": "कौन-सी संस्था संविधान के किसी उपबंध के तहत बनी?" },
+          "options": [{ "en": "Zonal Councils", "hi": "क्षेत्रीय परिषदें" }, { "en": "Inter-State Council", "hi": "अंतरराज्यीय परिषद" }, { "en": "NITI Aayog", "hi": "नीति आयोग" }, { "en": "National Security Council", "hi": "राष्ट्रीय सुरक्षा परिषद" }],
+          "answer": 1,
+          "why": { "en": "Article 263, set up in 1990. Zonal Councils: States Reorganisation Act, 1956. NITI Aayog and the NSC: executive decisions.", "hi": "अनुच्छेद 263, 1990 में बनी। क्षेत्रीय परिषदें: राज्य पुनर्गठन अधिनियम, 1956। नीति आयोग और NSC: कार्यकारी निर्णय।" }
+        },
+        {
+          "id": "fed-k8",
+          "q": { "en": "Who recommended a fixed five-year term for Governors and a six-month limit to decide on bills?", "hi": "राज्यपालों के लिए पाँच वर्ष का निश्चित कार्यकाल और विधेयकों पर निर्णय के लिए छह महीने की सीमा किसने सुझाई?" },
+          "options": [{ "en": "Sarkaria Commission", "hi": "सरकारिया आयोग" }, { "en": "Punchhi Commission", "hi": "पुंछी आयोग" }, { "en": "Rajamannar Committee", "hi": "राजमन्नार समिति" }, { "en": "First Administrative Reforms Commission", "hi": "प्रथम प्रशासनिक सुधार आयोग" }],
+          "answer": 1,
+          "why": { "en": "Punchhi (2007–2010). Sarkaria (1983–1988) is the one that wanted an eminent outsider, detached from politics.", "hi": "पुंछी (2007–2010)। सरकारिया (1983–1988) वह था जो राजनीति से अलग, प्रतिष्ठित बाहरी व्यक्ति चाहता था।" }
+        }
+      ]
+    },
+    {
+      "type": "finish",
+      "id": "finish",
+      "title": { "en": "That's the topic.", "hi": "Topic पूरा हुआ।" },
+      "pause": { "en": "The exam doesn't ask what you read. It asks what you can still find.", "hi": "Exam यह नहीं पूछता कि आपने क्या पढ़ा। वह पूछता है कि आप अब भी क्या ढूँढ सकते हैं।" },
+      "next": {
+        "en": "What comes next in the app: these cards come back in your review, your pod compares skeletons on Fridays, and the next topic in the same paper, Parliament and state legislatures, picks up from here.",
+        "hi": "App में आगे क्या: ये cards आपके review में लौटेंगे, आपका pod शुक्रवार को ढाँचों की तुलना करता है, और इसी paper का अगला topic, संसद और राज्य विधानमंडल, यहीं से आगे बढ़ता है।"
+      }
+    }
+  ],
+  "sources": {
+    "en": "The Constitution of India (bare text): Articles 1, 3, 73, 131, 155, 156, 158, 162, 163, 200, 201, 246, 246A, 248 to 254, 256, 257, 261 to 263, 268 to 293, 279A, 280, 282, 293, 355 to 358, 365, 368 and the Seventh Schedule; NCERT Class XI, Indian Constitution at Work, chapter 7; S.R. Bommai v. Union of India (1994) 3 SCC 1; B.P. Singhal v. Union of India (2010) 6 SCC 331; Union of India v. Mohit Minerals (2022); State of Tamil Nadu v. Governor of Tamil Nadu (8 April 2025); Special Reference No. 1 of 2025 (Constitution Bench opinion, November 2025); Report of the Fifteenth Finance Commission (2021–26); Sarkaria Commission Report (1988); Punchhi Commission Report (2010); UPSC Civil Services Prelims papers 2018, 2019, 2021, 2023 and 2025 and official answer keys; UPSC Civil Services Mains 2025, GS Paper II."
+  },
+  "factsToCheck": [
+    "Presidential Reference (Special Reference No. 1 of 2025): date of the Constitution Bench opinion (November 2025) and its holdings as summarised: no court-fixed time limits for the Governor or President, no 'deemed assent', limited review of prolonged unexplained inaction. Check the exact wording before approving; this is the most date-sensitive line in the path.",
+    "State of Tamil Nadu v. Governor of Tamil Nadu (8 April 2025): time limits set, ten bills treated as assented (Article 142).",
+    "Kerala's borrowing suit (Article 131) and the April 2024 reference to a Constitution Bench: check whether it has since been decided.",
+    "16th Finance Commission: chaired by Arvind Panagariya, award period 2026–31. If its report has been tabled, consider adding its vertical share to part 4 and card fed-k6.",
+    "15th Finance Commission horizontal weights: income distance 45, population 15, area 15, forest and ecology 10, demographic performance 12.5, tax and fiscal effort 2.5.",
+    "Constitution (129th Amendment) Bill, 2024 (One Nation, One Election): with a Joint Parliamentary Committee; check its current status.",
+    "Article 370 made inoperative in 2019; upheld by the Supreme Court on 11 December 2023.",
+    "Lok Sabha seat freeze: based on the 1971 census until the first census after 2026 (84th Amendment, 2001).",
+    "Article 356 used 'more than a hundred times': keep as a round figure; no exact count is stated.",
+    "Punchhi Commission: fixed five-year term for Governors, six-month limit to decide on bills, 'localised' emergency under Articles 355 and 356.",
+    "Population control and family planning: added to the Concurrent List by the 42nd Amendment as a new entry (20A).",
+    "Official answer keys used: CSP 2025 Q53 (a), Q54 (a), Q58 (a); CSP 2023 Q29 (b); CSP 2021 Q86 (a); CSP 2019 Q66 (c); CSP 2018 Q38 (b), Q53 (b). Check each against UPSC's PDF.",
+    "Hindi PYQ text is our translation, not UPSC's Hindi paper; the Hindi editor may prefer UPSC's own wording."
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English and Hindi. A Polity editor checks every fact (see factsToCheck), and a Hindi editor checks the Hindi, before this opens to visitors."
+  },
+  "provenance": {
+    "generator": "Claude (topic path build, 8 Nov 2026)",
+    "createdOn": "2026-11-08",
+    "note": "Built from the federalism syllabus note (pol-syl-federalism-centre-state), the walk, audio, practice and skeleton items on this topic, and the PYQ bank. New text written from the named sources and general knowledge. Not copied from any coaching material."
+  }
+}

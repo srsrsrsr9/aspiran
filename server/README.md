@@ -162,6 +162,21 @@ editor checks, practice questions, library and pods as the phone.
   `routine-card@1` items show under "Borrow from others", each with what not to copy.
 - Languages: the reading language list comes from /config, so a language appears once it's live.
 
+### Try one topic (`#try`, open to visitors)
+
+One whole syllabus topic, start to finish, with no account: a topic path (`aspiran/topic-path@1`, source files in
+`content/topic-paths/`, packed by `node scripts/syllabus.mjs pack` with the notes and mocks). The first is Federalism
+and Centre–state relations. Steps: guess first, five short reads with a check after each, sort the three lists, say it
+from memory, eight real Prelims PYQs with a "how sure?" tick (answers checked against `content/pyq/pyq.json` by
+`syllabus.mjs check`), three situations, plan a Mains answer (our skeleton opens only after you plan yours), keep it
+(eight cards go into the review queue and the topic goes on the syllabus map as Met), finish. No timers, scores
+only private, no sound. Progress stays in the browser.
+
+- `GET /try` lists approved paths; `GET /try/<id>` serves one, with Hindi only once a Hindi editor approves it.
+- Nothing shows to visitors until an English editor approves it on the desk. Editors can walk a draft at
+  `/app/#try/<id>?preview` (it asks for the desk key).
+- `npm run test:try` checks the gate.
+
 Locally, open http://localhost:8787/app/. To use it as a **desktop app**, open it in Chrome or Edge and
 choose Install (the address-bar icon, or My Path → Install). It then opens in its own window, with shortcuts
 to Focus, Mock papers and Chai, and works offline from the last copy. No separate desktop codebase is needed.
