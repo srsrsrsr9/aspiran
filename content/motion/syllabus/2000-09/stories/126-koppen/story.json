@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "koppen",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Five letters sort the world's climates",
+ "gsPaper": [
+  "optional-geography",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "geog1-2"
+ ],
+ "sources": [
+  "Wladimir Köppen's climate classification",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 12"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "koppen-q1",
+   "q": "In Köppen's scheme, the letter B stands for:",
+   "options": [
+    "Tropical",
+    "Dry",
+    "Cold",
+    "Polar"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Dry climates."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "How do you sort every climate on Earth?"
+    },
+    {
+     "spk": "B",
+     "say": "Wladimir Köppen used five capital letters."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Climatology: Köppen's scheme",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "How do you sort every climate on Earth? Wladimir Köppen used five capital letters."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A for tropical, B for dry, C for warm temperate."
+    },
+    {
+     "spk": "B",
+     "say": "D for cold, snowy climates, and E for polar."
+    }
+   ],
+   "data": {
+    "kicker": "The five groups",
+    "title": "Köppen",
+    "items": [
+     {
+      "text": "A tropical · B dry",
+      "sub": "Hot and wet · deserts and steppes",
+      "cue": "tropical"
+     },
+     {
+      "text": "C warm temperate · D cold",
+      "sub": "Mild winters · snowy winters",
+      "cue": "temperate"
+     },
+     {
+      "text": "E polar",
+      "sub": "Tundra and ice",
+      "cue": "polar"
+     }
+    ]
+   },
+   "say": "A for tropical, B for dry, C for warm temperate. D for cold, snowy climates, and E for polar."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's west coast is A-m-w, monsoon with a short dry season."
+    },
+    {
+     "spk": "B",
+     "say": "Western Rajasthan is B-W-h-w, a hot desert."
+    }
+   ],
+   "data": {
+    "kicker": "In India",
+    "title": "Examples",
+    "items": [
+     {
+      "text": "Amw",
+      "sub": "Monsoon with short dry season: west coast",
+      "cue": "a-m-w"
+     },
+     {
+      "text": "BWhw",
+      "sub": "Hot desert: western Rajasthan",
+      "cue": "b-w-h-w"
+     }
+    ]
+   },
+   "say": "India's west coast is A-m-w, monsoon with a short dry season. Western Rajasthan is B-W-h-w, a hot desert."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Köppen based it on temperature and rainfall,"
+    },
+    {
+     "spk": "B",
+     "say": "matched to natural vegetation."
+    }
+   ],
+   "data": {
+    "kicker": "The basis",
+    "text": "Temperature and rainfall, matched to natural vegetation."
+   },
+   "say": "Köppen based it on temperature and rainfall, matched to natural vegetation."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does B stand for?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In Köppen's scheme, the letter B stands for:",
+    "options": [
+     "Tropical",
+     "Dry",
+     "Cold",
+     "Polar"
+    ]
+   },
+   "say": "Your turn. What does B stand for?"
+  }
+ ]
+}

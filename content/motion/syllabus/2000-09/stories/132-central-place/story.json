@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "central-place",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Towns arrange themselves in hexagons",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-8"
+ ],
+ "sources": [
+  "Walter Christaller, Central Places in Southern Germany (1933)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "central-place-q1",
+   "q": "In Christaller's theory, market areas are shaped as:",
+   "options": [
+    "Circles",
+    "Squares",
+    "Hexagons",
+    "Triangles"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Hexagons, which fit together without gaps or overlaps."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why are big cities far apart, with small towns in between?"
+    },
+    {
+     "spk": "B",
+     "say": "Walter Christaller had a theory."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Settlement geography: central place theory",
+    "illustration": "illustrations/syllabus/village.svg"
+   },
+   "say": "Why are big cities far apart, with small towns in between? Walter Christaller had a theory."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Christaller published central place theory in 1933,"
+    },
+    {
+     "spk": "B",
+     "say": "from his study of southern Germany."
+    }
+   ],
+   "data": {
+    "kicker": "The theory",
+    "points": [
+     {
+      "year": 1933,
+      "label": "Christaller",
+      "cue": "1933"
+     }
+    ]
+   },
+   "say": "Christaller published central place theory in 1933, from his study of southern Germany."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Each service needs a threshold of customers, and has a range people will travel."
+    },
+    {
+     "spk": "B",
+     "say": "Market areas pack together as hexagons."
+    }
+   ],
+   "data": {
+    "kicker": "Key ideas",
+    "title": "Central places",
+    "items": [
+     {
+      "text": "Threshold",
+      "sub": "Minimum customers to survive",
+      "cue": "Threshold"
+     },
+     {
+      "text": "Range",
+      "sub": "How far people travel for it",
+      "cue": "Range"
+     },
+     {
+      "text": "Hexagons",
+      "sub": "Market areas without gaps",
+      "cue": "Hexagons"
+     }
+    ]
+   },
+   "say": "Each service needs a threshold of customers, and has a range people will travel. Market areas pack together as hexagons."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "He described a marketing principle, a transport principle,"
+    },
+    {
+     "spk": "B",
+     "say": "and an administrative one."
+    }
+   ],
+   "data": {
+    "kicker": "Principles",
+    "title": "K values",
+    "items": [
+     {
+      "text": "K = 3 marketing",
+      "sub": "K = 4 transport",
+      "cue": "marketing"
+     },
+     {
+      "text": "K = 7 administrative",
+      "sub": "",
+      "cue": "administrative"
+     }
+    ]
+   },
+   "say": "He described a marketing principle, a transport principle, and an administrative one."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What shape?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In Christaller's theory, market areas are shaped as:",
+    "options": [
+     "Circles",
+     "Squares",
+     "Hexagons",
+     "Triangles"
+    ]
+   },
+   "say": "Your turn. What shape?"
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "golden-quadrilateral",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Four metros joined by one highway loop",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog2-5"
+ ],
+ "sources": [
+  "National Highways Authority of India, NHDP Phase I"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "golden-quadrilateral-q1",
+   "q": "The Golden Quadrilateral connects Delhi, Mumbai, Chennai and:",
+   "options": [
+    "Bengaluru",
+    "Kolkata",
+    "Hyderabad",
+    "Ahmedabad"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Kolkata."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Delhi, Mumbai, Chennai, Kolkata."
+    },
+    {
+     "spk": "B",
+     "say": "One highway loop links all four."
+    }
+   ],
+   "data": {
+    "kicker": "Geography II · Syllabus · AI voices",
+    "headline": "Transport: the Golden Quadrilateral",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "Delhi, Mumbai, Chennai, Kolkata. One highway loop links all four."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Golden Quadrilateral runs about 5,846 kilometres,"
+    },
+    {
+     "spk": "B",
+     "say": "under the National Highways Development Project."
+    }
+   ],
+   "data": {
+    "kicker": "The loop",
+    "items": [
+     {
+      "value": 5846,
+      "suffix": " km",
+      "label": "Golden Quadrilateral",
+      "cue": "5"
+     }
+    ]
+   },
+   "say": "The Golden Quadrilateral runs about 5,846 kilometres, under the National Highways Development Project."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The North–South corridor runs from Srinagar to Kanyakumari."
+    },
+    {
+     "spk": "B",
+     "say": "The East–West, from Silchar to Porbandar."
+    }
+   ],
+   "data": {
+    "kicker": "Also",
+    "title": "Corridors",
+    "items": [
+     {
+      "text": "North–South",
+      "sub": "Srinagar to Kanyakumari",
+      "cue": "North"
+     },
+     {
+      "text": "East–West",
+      "sub": "Silchar to Porbandar",
+      "cue": "East"
+     }
+    ]
+   },
+   "say": "The North–South corridor runs from Srinagar to Kanyakumari. The East–West, from Silchar to Porbandar."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The topic also covers railways, ports and airports,"
+    },
+    {
+     "spk": "B",
+     "say": "and India's trade and communication networks."
+    }
+   ],
+   "data": {
+    "kicker": "Other networks",
+    "title": "Syllabus",
+    "items": [
+     {
+      "text": "Railways · ports · airports",
+      "sub": "",
+      "cue": "Railways"
+     },
+     {
+      "text": "Trade and communication",
+      "sub": "",
+      "cue": "Trade"
+     }
+    ]
+   },
+   "say": "The topic also covers railways, ports and airports, and India's trade and communication networks."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which is the fourth city?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Golden Quadrilateral connects Delhi, Mumbai, Chennai and:",
+    "options": [
+     "Bengaluru",
+     "Kolkata",
+     "Hyderabad",
+     "Ahmedabad"
+    ]
+   },
+   "say": "Your turn. Which is the fourth city?"
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "research-methods",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Good research is reliable and valid",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio1-3"
+ ],
+ "sources": [
+  "Haralambos and Holborn, ch. on methods",
+  "Bronisław Malinowski, Argonauts of the Western Pacific (1922)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "research-methods-q1",
+   "q": "A method that gives the same result when repeated is:",
+   "options": [
+    "Valid",
+    "Reliable",
+    "Representative",
+    "Objective"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Reliable."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Two words decide whether research can be trusted."
+    },
+    {
+     "spk": "B",
+     "say": "Reliability and validity."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology I · Syllabus · AI voices",
+    "headline": "Research methods: reliability and validity",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Two words decide whether research can be trusted. Reliability and validity."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Reliability means you'd get the same result if you repeated it."
+    },
+    {
+     "spk": "B",
+     "say": "Validity means it measures what it claims to measure."
+    }
+   ],
+   "data": {
+    "kicker": "The two tests",
+    "title": "Research quality",
+    "items": [
+     {
+      "text": "Reliability",
+      "sub": "Same result if repeated",
+      "cue": "Reliability"
+     },
+     {
+      "text": "Validity",
+      "sub": "Measures what it claims",
+      "cue": "Validity"
+     }
+    ]
+   },
+   "say": "Reliability means you'd get the same result if you repeated it. Validity means it measures what it claims to measure."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Quantitative methods, like surveys, tend to be reliable."
+    },
+    {
+     "spk": "B",
+     "say": "Qualitative ones, like participant observation, tend to be valid."
+    }
+   ],
+   "data": {
+    "kicker": "Methods",
+    "title": "Two families",
+    "items": [
+     {
+      "text": "Quantitative",
+      "sub": "Surveys, statistics: often reliable",
+      "cue": "Quantitative"
+     },
+     {
+      "text": "Qualitative",
+      "sub": "Interviews, observation: often valid",
+      "cue": "Qualitative"
+     }
+    ]
+   },
+   "say": "Quantitative methods, like surveys, tend to be reliable. Qualitative ones, like participant observation, tend to be valid."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Malinowski's study of the Trobriand Islanders, published in 1922,"
+    },
+    {
+     "spk": "B",
+     "say": "made participant observation famous."
+    }
+   ],
+   "data": {
+    "kicker": "A classic",
+    "points": [
+     {
+      "year": 1922,
+      "label": "Malinowski: Trobriand Islands",
+      "cue": "1922"
+     }
+    ]
+   },
+   "say": "Malinowski's study of the Trobriand Islanders, published in 1922, made participant observation famous."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What do we call that?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A method that gives the same result when repeated is:",
+    "options": [
+     "Valid",
+     "Reliable",
+     "Representative",
+     "Objective"
+    ]
+   },
+   "say": "Your turn. What do we call that?"
+  }
+ ]
+}

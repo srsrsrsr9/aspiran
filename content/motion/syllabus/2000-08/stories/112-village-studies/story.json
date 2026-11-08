@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "village-studies",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The Indian village was never a little republic",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio2-3"
+ ],
+ "sources": [
+  "Charles Metcalfe, minute (1830)",
+  "S. C. Dube, Indian Village (1955)",
+  "M. N. Srinivas, The Remembered Village (1976)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "village-studies-q1",
+   "q": "'The Remembered Village' is about:",
+   "options": [
+    "Shamirpet",
+    "Rampura",
+    "Senapur",
+    "Kishan Garhi"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Rampura, near Mysore."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "British officials called Indian villages little republics."
+    },
+    {
+     "spk": "B",
+     "say": "Fieldwork told a different story."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology II · Syllabus · AI voices",
+    "headline": "The Indian village: myth and studies",
+    "illustration": "illustrations/syllabus/village.svg"
+   },
+   "say": "British officials called Indian villages little republics. Fieldwork told a different story."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Charles Metcalfe, around 1830, described villages as little republics."
+    },
+    {
+     "spk": "B",
+     "say": "Self-sufficient and unchanging."
+    }
+   ],
+   "data": {
+    "kicker": "The myth",
+    "text": "Self-sufficient, unchanging 'little republics'."
+   },
+   "say": "Charles Metcalfe, around 1830, described villages as little republics. Self-sufficient and unchanging."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "S. C. Dube's Indian Village came in 1955."
+    },
+    {
+     "spk": "B",
+     "say": "Srinivas's The Remembered Village, about Rampura, in 1976."
+    }
+   ],
+   "data": {
+    "kicker": "Village studies",
+    "points": [
+     {
+      "year": 1955,
+      "label": "Dube, Indian Village",
+      "cue": "1955"
+     },
+     {
+      "year": 1976,
+      "label": "Srinivas, The Remembered Village",
+      "cue": "1976"
+     }
+    ]
+   },
+   "say": "S. C. Dube's Indian Village came in 1955. Srinivas's The Remembered Village, about Rampura, in 1976."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Villages were linked to markets and towns."
+    },
+    {
+     "spk": "B",
+     "say": "And divided by caste and land."
+    }
+   ],
+   "data": {
+    "kicker": "What they found",
+    "title": "Reality",
+    "items": [
+     {
+      "text": "Linked to markets and towns",
+      "sub": "Never isolated",
+      "cue": "Linked"
+     },
+     {
+      "text": "Deep inequality",
+      "sub": "Caste and land",
+      "cue": "caste"
+     }
+    ]
+   },
+   "say": "Villages were linked to markets and towns. And divided by caste and land."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which village?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "'The Remembered Village' is about:",
+    "options": [
+     "Shamirpet",
+     "Rampura",
+     "Senapur",
+     "Kishan Garhi"
+    ]
+   },
+   "say": "Your turn. Which village?"
+  }
+ ]
+}

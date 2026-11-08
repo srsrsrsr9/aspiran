@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "democracy-models",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Democracy can mean voting, or reasoning together",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-6"
+ ],
+ "sources": [
+  "Joseph Schumpeter, Capitalism, Socialism and Democracy (1942)",
+  "Jürgen Habermas"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "democracy-models-q1",
+   "q": "Who saw democracy as competition among elites for votes?",
+   "options": [
+    "Rousseau",
+    "Schumpeter",
+    "Habermas",
+    "Mill"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Schumpeter, 1942."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is democracy just choosing leaders?"
+    },
+    {
+     "spk": "B",
+     "say": "Or something more?"
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Democracy: elite, participatory, deliberative",
+    "illustration": "illustrations/syllabus/ballot.svg"
+   },
+   "say": "Is democracy just choosing leaders? Or something more?"
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Joseph Schumpeter, in 1942, saw democracy as a method."
+    },
+    {
+     "spk": "B",
+     "say": "Elites compete for the people's vote."
+    }
+   ],
+   "data": {
+    "kicker": "Schumpeter",
+    "text": "Democracy is a competition between elites for the people's vote."
+   },
+   "say": "Joseph Schumpeter, in 1942, saw democracy as a method. Elites compete for the people's vote."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Participatory democrats want people involved beyond voting."
+    },
+    {
+     "spk": "B",
+     "say": "Deliberative democrats, like Habermas, stress public reasoning before decisions."
+    }
+   ],
+   "data": {
+    "kicker": "Other models",
+    "title": "Compare",
+    "items": [
+     {
+      "text": "Participatory",
+      "sub": "People take part beyond voting",
+      "cue": "Participatory"
+     },
+     {
+      "text": "Deliberative",
+      "sub": "Decisions through public reasoning (Habermas)",
+      "cue": "Deliberative"
+     }
+    ]
+   },
+   "say": "Participatory democrats want people involved beyond voting. Deliberative democrats, like Habermas, stress public reasoning before decisions."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Gram sabhas are a case of participation."
+    },
+    {
+     "spk": "B",
+     "say": "Parliamentary committees, of deliberation."
+    }
+   ],
+   "data": {
+    "kicker": "In India",
+    "title": "Examples",
+    "items": [
+     {
+      "text": "Gram sabhas",
+      "sub": "Participation",
+      "cue": "Gram"
+     },
+     {
+      "text": "Parliamentary committees",
+      "sub": "Deliberation",
+      "cue": "committees"
+     }
+    ]
+   },
+   "say": "Gram sabhas are a case of participation. Parliamentary committees, of deliberation."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Whose view is this?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who saw democracy as competition among elites for votes?",
+    "options": [
+     "Rousseau",
+     "Schumpeter",
+     "Habermas",
+     "Mill"
+    ]
+   },
+   "say": "Your turn. Whose view is this?"
+  }
+ ]
+}

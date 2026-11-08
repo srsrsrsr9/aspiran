@@ -1,0 +1,225 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "band-to-state",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Band, tribe, chiefdom, state",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-8"
+ ],
+ "sources": [
+  "Elman Service, Primitive Social Organization (1962)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "band-to-state-q1",
+   "q": "A society with a ranked hereditary leader but no bureaucracy is a:",
+   "options": [
+    "Band",
+    "Tribe",
+    "Chiefdom",
+    "State"
+   ],
+   "answerIndex": 2,
+   "why": "Right. A chiefdom."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Not every society has a government."
+    },
+    {
+     "spk": "B",
+     "say": "Elman Service ordered them in four types."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Political organisation: Service's scheme",
+    "illustration": "illustrations/syllabus/parliament.svg"
+   },
+   "say": "Not every society has a government. Elman Service ordered them in four types."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Bands are small and egalitarian. Tribes have villages but no central ruler."
+    },
+    {
+     "spk": "B",
+     "say": "Chiefdoms have a ranked chief. States have bureaucracy and a monopoly on force."
+    }
+   ],
+   "data": {
+    "kicker": "Four types",
+    "title": "Service, 1962",
+    "items": [
+     {
+      "text": "Band",
+      "sub": "Small, mobile, egalitarian",
+      "cue": "Band"
+     },
+     {
+      "text": "Tribe",
+      "sub": "Villages, no central ruler",
+      "cue": "Tribe"
+     },
+     {
+      "text": "Chiefdom",
+      "sub": "A ranked chief",
+      "cue": "Chiefdom"
+     },
+     {
+      "text": "State",
+      "sub": "Bureaucracy and force",
+      "cue": "State"
+     }
+    ]
+   },
+   "say": "Bands are small and egalitarian. Tribes have villages but no central ruler. Chiefdoms have a ranked chief. States have bureaucracy and a monopoly on force."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Without courts or police,"
+    },
+    {
+     "spk": "B",
+     "say": "gossip, ridicule, and ritual keep order."
+    }
+   ],
+   "data": {
+    "kicker": "Social control",
+    "text": "Without courts, gossip, ridicule and ritual keep order."
+   },
+   "say": "Without courts or police, gossip, ridicule, and ritual keep order."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Customary law is settled by elders and councils,"
+    },
+    {
+     "spk": "B",
+     "say": "like caste and tribal panchayats in India."
+    }
+   ],
+   "data": {
+    "kicker": "Law",
+    "title": "In simple societies",
+    "items": [
+     {
+      "text": "Customary law",
+      "sub": "Settled by elders and councils",
+      "cue": "Customary"
+     }
+    ]
+   },
+   "say": "Customary law is settled by elders and councils, like caste and tribal panchayats in India."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What is it called?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A society with a ranked hereditary leader but no bureaucracy is a:",
+    "options": [
+     "Band",
+     "Tribe",
+     "Chiefdom",
+     "State"
+    ]
+   },
+   "say": "Your turn. What is it called?"
+  }
+ ]
+}

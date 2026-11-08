@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "climate-regime",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Rich and poor countries owe different things to the climate",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-11"
+ ],
+ "sources": [
+  "UNFCCC (1992)",
+  "Kyoto Protocol (1997)",
+  "Paris Agreement (2015)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "climate-regime-q1",
+   "q": "Which agreement asked all countries to submit Nationally Determined Contributions?",
+   "options": [
+    "Kyoto Protocol",
+    "Montreal Protocol",
+    "Paris Agreement",
+    "Rio Declaration"
+   ],
+   "answerIndex": 2,
+   "why": "Right. The Paris Agreement, 2015."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Climate change is a global problem."
+    },
+    {
+     "spk": "B",
+     "say": "But who should do how much to fix it?"
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "Global concerns: the climate regime",
+    "illustration": "illustrations/syllabus/forest.svg"
+   },
+   "say": "Climate change is a global problem. But who should do how much to fix it?"
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The UN climate convention was agreed at Rio in 1992. Kyoto, in 1997, set binding cuts for rich countries."
+    },
+    {
+     "spk": "B",
+     "say": "Paris, in 2015, asked every country to set its own targets."
+    }
+   ],
+   "data": {
+    "kicker": "The regime",
+    "points": [
+     {
+      "year": 1992,
+      "label": "UNFCCC, Rio",
+      "cue": "1992"
+     },
+     {
+      "year": 1997,
+      "label": "Kyoto Protocol",
+      "cue": "1997"
+     },
+     {
+      "year": 2015,
+      "label": "Paris Agreement",
+      "cue": "2015"
+     }
+    ]
+   },
+   "say": "The UN climate convention was agreed at Rio in 1992. Kyoto, in 1997, set binding cuts for rich countries. Paris, in 2015, asked every country to set its own targets."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's core principle is C-B-D-R:"
+    },
+    {
+     "spk": "B",
+     "say": "common but differentiated responsibilities."
+    }
+   ],
+   "data": {
+    "kicker": "CBDR",
+    "text": "Common but differentiated responsibilities and respective capabilities."
+   },
+   "say": "India's core principle is C-B-D-R: common but differentiated responsibilities."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Paris aims to keep warming well below two degrees, and to pursue one and a half."
+    },
+    {
+     "spk": "B",
+     "say": "Through nationally determined contributions."
+    }
+   ],
+   "data": {
+    "kicker": "Paris goals",
+    "title": "Temperature",
+    "items": [
+     {
+      "text": "Well below 2°C",
+      "sub": "Pursue 1.5°C",
+      "cue": "below"
+     },
+     {
+      "text": "NDCs",
+      "sub": "Nationally Determined Contributions",
+      "cue": "half"
+     }
+    ]
+   },
+   "say": "Paris aims to keep warming well below two degrees, and to pursue one and a half. Through nationally determined contributions."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which agreement?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which agreement asked all countries to submit Nationally Determined Contributions?",
+    "options": [
+     "Kyoto Protocol",
+     "Montreal Protocol",
+     "Paris Agreement",
+     "Rio Declaration"
+    ]
+   },
+   "say": "Your turn. Which agreement?"
+  }
+ ]
+}

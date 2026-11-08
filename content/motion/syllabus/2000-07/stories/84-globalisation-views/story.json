@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "globalisation-views",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Is the world becoming one? Three answers",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-4"
+ ],
+ "sources": [
+  "David Held and Anthony McGrew et al., Global Transformations (1999)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "globalisation-views-q1",
+   "q": "Who argue that states are changing rather than disappearing?",
+   "options": [
+    "Hyperglobalists",
+    "Sceptics",
+    "Transformationalists",
+    "Realists"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Transformationalists."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is globalisation making nation-states irrelevant?"
+    },
+    {
+     "spk": "B",
+     "say": "Scholars give three answers."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "Globalisation: three views",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "Is globalisation making nation-states irrelevant? Scholars give three answers."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Hyperglobalists say states are fading. Sceptics say nothing much is new."
+    },
+    {
+     "spk": "B",
+     "say": "Transformationalists say states are changing, not vanishing."
+    }
+   ],
+   "data": {
+    "kicker": "Three views",
+    "title": "Held and McGrew",
+    "items": [
+     {
+      "text": "Hyperglobalists",
+      "sub": "States are fading",
+      "cue": "Hyperglobalists"
+     },
+     {
+      "text": "Sceptics",
+      "sub": "Nothing very new",
+      "cue": "Sceptics"
+     },
+     {
+      "text": "Transformationalists",
+      "sub": "States are changing, not vanishing",
+      "cue": "Transformationalists"
+     }
+    ]
+   },
+   "say": "Hyperglobalists say states are fading. Sceptics say nothing much is new. Transformationalists say states are changing, not vanishing."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The World Trade Organization began in 1995,"
+    },
+    {
+     "spk": "B",
+     "say": "a symbol of economic globalisation."
+    }
+   ],
+   "data": {
+    "kicker": "A marker",
+    "points": [
+     {
+      "year": 1995,
+      "label": "WTO begins",
+      "cue": "1995"
+     }
+    ]
+   },
+   "say": "The World Trade Organization began in 1995, a symbol of economic globalisation."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Developing countries saw gains in growth and technology."
+    },
+    {
+     "spk": "B",
+     "say": "And worries about inequality and loss of policy space."
+    }
+   ],
+   "data": {
+    "kicker": "Responses",
+    "title": "From the Global South",
+    "items": [
+     {
+      "text": "Gains",
+      "sub": "Growth, jobs, technology",
+      "cue": "Gains"
+     },
+     {
+      "text": "Worries",
+      "sub": "Inequality, loss of policy space",
+      "cue": "Worries"
+     }
+    ]
+   },
+   "say": "Developing countries saw gains in growth and technology. And worries about inequality and loss of policy space."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which view is this?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who argue that states are changing rather than disappearing?",
+    "options": [
+     "Hyperglobalists",
+     "Sceptics",
+     "Transformationalists",
+     "Realists"
+    ]
+   },
+   "say": "Your turn. Which view is this?"
+  }
+ ]
+}

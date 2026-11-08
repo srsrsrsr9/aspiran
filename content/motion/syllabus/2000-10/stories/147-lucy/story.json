@@ -1,0 +1,219 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "lucy",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Lucy walked upright 3.2 million years ago",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-3"
+ ],
+ "sources": [
+  "Donald Johanson, discovery of A.L. 288-1 'Lucy' (1974)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "lucy-q1",
+   "q": "Lucy belongs to the species:",
+   "options": [
+    "Homo erectus",
+    "Australopithecus afarensis",
+    "Homo habilis",
+    "Neanderthal"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Australopithecus afarensis."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1974, in Ethiopia, scientists found a skeleton about 3.2 million years old."
+    },
+    {
+     "spk": "B",
+     "say": "They named her Lucy."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Fossil evidence: Australopithecus",
+    "illustration": "illustrations/syllabus/dna.svg"
+   },
+   "say": "In 1974, in Ethiopia, scientists found a skeleton about 3.2 million years old. They named her Lucy."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Lucy is an Australopithecus afarensis, found at Hadar."
+    },
+    {
+     "spk": "B",
+     "say": "Her pelvis and legs show she walked upright."
+    }
+   ],
+   "data": {
+    "kicker": "Key fossils",
+    "points": [
+     {
+      "year": 1974,
+      "label": "Lucy, Hadar, Ethiopia",
+      "cue": "lucy"
+     }
+    ]
+   },
+   "say": "Lucy is an Australopithecus afarensis, found at Hadar. Her pelvis and legs show she walked upright."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Australopithecines walked upright with small brains. Homo erectus left Africa, and used fire."
+    },
+    {
+     "spk": "B",
+     "say": "Then Neanderthals, and our own species."
+    }
+   ],
+   "data": {
+    "kicker": "The sequence",
+    "title": "Broadly",
+    "items": [
+     {
+      "text": "Australopithecus",
+      "sub": "Upright, small brain",
+      "cue": "with"
+     },
+     {
+      "text": "Homo erectus",
+      "sub": "Left Africa, used fire",
+      "cue": "erectus"
+     },
+     {
+      "text": "Neanderthals · Homo sapiens",
+      "sub": "",
+      "cue": "Neanderthals"
+     }
+    ]
+   },
+   "say": "Australopithecines walked upright with small brains. Homo erectus left Africa, and used fire. Then Neanderthals, and our own species."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Lucy's lesson:"
+    },
+    {
+     "spk": "B",
+     "say": "walking upright came long before big brains."
+    }
+   ],
+   "data": {
+    "kicker": "The lesson",
+    "text": "Walking upright came before big brains."
+   },
+   "say": "Lucy's lesson: walking upright came long before big brains."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which species?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Lucy belongs to the species:",
+    "options": [
+     "Homo erectus",
+     "Australopithecus afarensis",
+     "Homo habilis",
+     "Neanderthal"
+    ]
+   },
+   "say": "Your turn. Which species?"
+  }
+ ]
+}

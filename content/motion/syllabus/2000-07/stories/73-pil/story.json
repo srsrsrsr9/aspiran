@@ -1,0 +1,232 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "pil",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "PIL let anyone knock on the court's door for others",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-14"
+ ],
+ "sources": [
+  "S. P. Gupta v. Union of India (1981)",
+  "Hussainara Khatoon v. State of Bihar (1979)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "pil-q1",
+   "q": "PIL mainly relaxed the rule of:",
+   "options": [
+    "Separation of powers",
+    "Locus standi (who can sue)",
+    "Double jeopardy",
+    "Res judicata"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Locus standi."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Normally, only the person harmed can go to court."
+    },
+    {
+     "spk": "B",
+     "say": "Public Interest Litigation changed that."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Judicial activism and PIL",
+    "illustration": "illustrations/syllabus/court.svg"
+   },
+   "say": "Normally, only the person harmed can go to court. Public Interest Litigation changed that."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1979, Hussainara Khatoon exposed thousands of undertrials held without trial."
+    },
+    {
+     "spk": "B",
+     "say": "In 1981, the S. P. Gupta case relaxed the rules on who can sue."
+    }
+   ],
+   "data": {
+    "kicker": "The rise of PIL",
+    "points": [
+     {
+      "year": 1979,
+      "label": "Hussainara Khatoon: undertrials",
+      "cue": "1979"
+     },
+     {
+      "year": 1981,
+      "label": "S. P. Gupta: standing relaxed",
+      "cue": "1981"
+     }
+    ]
+   },
+   "say": "In 1979, Hussainara Khatoon exposed thousands of undertrials held without trial. In 1981, the S. P. Gupta case relaxed the rules on who can sue."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Justices P. N. Bhagwati"
+    },
+    {
+     "spk": "B",
+     "say": "and V. R. Krishna Iyer led the way."
+    }
+   ],
+   "data": {
+    "kicker": "Pioneers",
+    "title": "Judges",
+    "items": [
+     {
+      "text": "Justice P. N. Bhagwati",
+      "sub": "",
+      "cue": "Bhagwati"
+     },
+     {
+      "text": "Justice V. R. Krishna Iyer",
+      "sub": "",
+      "cue": "Krishna"
+     }
+    ]
+   },
+   "say": "Justices P. N. Bhagwati and V. R. Krishna Iyer led the way."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Supporters say it gives the voiceless a way into court."
+    },
+    {
+     "spk": "B",
+     "say": "Critics worry about judges doing the executive's job."
+    }
+   ],
+   "data": {
+    "kicker": "The debate",
+    "title": "For Mains",
+    "items": [
+     {
+      "text": "For",
+      "sub": "Access to justice for the voiceless",
+      "cue": "the"
+     },
+     {
+      "text": "Against",
+      "sub": "Courts doing the executive's job",
+      "cue": "judges"
+     }
+    ]
+   },
+   "say": "Supporters say it gives the voiceless a way into court. Critics worry about judges doing the executive's job."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which rule did PIL relax?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "PIL mainly relaxed the rule of:",
+    "options": [
+     "Separation of powers",
+     "Locus standi (who can sue)",
+     "Double jeopardy",
+     "Res judicata"
+    ]
+   },
+   "say": "Your turn. Which rule did PIL relax?"
+  }
+ ]
+}

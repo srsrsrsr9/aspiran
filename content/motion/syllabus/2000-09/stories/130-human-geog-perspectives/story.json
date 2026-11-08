@@ -1,0 +1,225 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "human-geog-perspectives",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Geography moved from describing regions to modelling them",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-6"
+ ],
+ "sources": [
+  "Richard Hartshorne, The Nature of Geography (1939)",
+  "Fred Schaefer, 'Exceptionalism in Geography' (1953)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "human-geog-perspectives-q1",
+   "q": "Who wrote 'Exceptionalism in Geography' (1953)?",
+   "options": [
+    "Hartshorne",
+    "Schaefer",
+    "Harvey",
+    "Tuan"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Fred Schaefer."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is geography about what makes each place unique,"
+    },
+    {
+     "spk": "B",
+     "say": "or about general laws? The discipline has swung both ways."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Perspectives in human geography",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "Is geography about what makes each place unique, or about general laws? The discipline has swung both ways."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1939, Hartshorne said geography studies how areas differ."
+    },
+    {
+     "spk": "B",
+     "say": "In 1953, Fred Schaefer argued it should seek laws, opening the quantitative revolution."
+    }
+   ],
+   "data": {
+    "kicker": "The swings",
+    "points": [
+     {
+      "year": 1939,
+      "label": "Hartshorne: areal differentiation",
+      "cue": "1939"
+     },
+     {
+      "year": 1953,
+      "label": "Schaefer: search for laws",
+      "cue": "1953"
+     }
+    ]
+   },
+   "say": "In 1939, Hartshorne said geography studies how areas differ. In 1953, Fred Schaefer argued it should seek laws, opening the quantitative revolution."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Behavioural geographers studied how people perceive space. Radical geographers looked at inequality."
+    },
+    {
+     "spk": "B",
+     "say": "Humanistic geographers, at meaning and place."
+    }
+   ],
+   "data": {
+    "kicker": "Then came",
+    "title": "Reactions",
+    "items": [
+     {
+      "text": "Behavioural",
+      "sub": "How people perceive space",
+      "cue": "Behavioural"
+     },
+     {
+      "text": "Radical",
+      "sub": "Inequality and power",
+      "cue": "Radical"
+     },
+     {
+      "text": "Humanistic",
+      "sub": "Meaning and place",
+      "cue": "Humanistic"
+     }
+    ]
+   },
+   "say": "Behavioural geographers studied how people perceive space. Radical geographers looked at inequality. Humanistic geographers, at meaning and place."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The syllabus also lists cultural regions"
+    },
+    {
+     "spk": "B",
+     "say": "and welfare approaches."
+    }
+   ],
+   "data": {
+    "kicker": "Also",
+    "text": "Cultural regions and welfare: the syllabus lists both."
+   },
+   "say": "The syllabus also lists cultural regions and welfare approaches."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who wrote it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who wrote 'Exceptionalism in Geography' (1953)?",
+    "options": [
+     "Hartshorne",
+     "Schaefer",
+     "Harvey",
+     "Tuan"
+    ]
+   },
+   "say": "Your turn. Who wrote it?"
+  }
+ ]
+}

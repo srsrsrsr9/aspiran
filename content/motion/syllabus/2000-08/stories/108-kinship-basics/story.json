@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "kinship-basics",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Kinship has rules for descent and residence",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio1-9"
+ ],
+ "sources": [
+  "Robin Fox, Kinship and Marriage",
+  "G. P. Murdock, Social Structure (1949)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "kinship-basics-q1",
+   "q": "A system where descent is traced through the mother is:",
+   "options": [
+    "Patrilineal",
+    "Matrilineal",
+    "Bilateral",
+    "Neolocal"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Matrilineal."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Whose family do you belong to, your father's or your mother's?"
+    },
+    {
+     "spk": "B",
+     "say": "Kinship systems answer that differently."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology I · Syllabus · AI voices",
+    "headline": "Kinship: descent and residence",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "Whose family do you belong to, your father's or your mother's? Kinship systems answer that differently."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Patrilineal systems trace descent through the father. Matrilineal, through the mother."
+    },
+    {
+     "spk": "B",
+     "say": "Bilateral, through both."
+    }
+   ],
+   "data": {
+    "kicker": "Descent",
+    "title": "Who you trace through",
+    "items": [
+     {
+      "text": "Patrilineal",
+      "sub": "Through the father",
+      "cue": "Patrilineal"
+     },
+     {
+      "text": "Matrilineal",
+      "sub": "Through the mother",
+      "cue": "Matrilineal"
+     },
+     {
+      "text": "Bilateral",
+      "sub": "Both sides",
+      "cue": "Bilateral"
+     }
+    ]
+   },
+   "say": "Patrilineal systems trace descent through the father. Matrilineal, through the mother. Bilateral, through both."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Couples may live with the husband's family, or the wife's."
+    },
+    {
+     "spk": "B",
+     "say": "Or set up a new home."
+    }
+   ],
+   "data": {
+    "kicker": "Residence",
+    "title": "Where couples live",
+    "items": [
+     {
+      "text": "Patrilocal",
+      "sub": "With the husband's family",
+      "cue": "live"
+     },
+     {
+      "text": "Matrilocal",
+      "sub": "With the wife's family",
+      "cue": "wifes"
+     },
+     {
+      "text": "Neolocal",
+      "sub": "A new home",
+      "cue": "new"
+     }
+    ]
+   },
+   "say": "Couples may live with the husband's family, or the wife's. Or set up a new home."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Murdock claimed in 1949 that the nuclear family is universal."
+    },
+    {
+     "spk": "B",
+     "say": "Studies of matrilineal groups, like the Nayars, challenge that."
+    }
+   ],
+   "data": {
+    "kicker": "Murdock, 1949",
+    "text": "He claimed the nuclear family is universal. Many disagree."
+   },
+   "say": "Murdock claimed in 1949 that the nuclear family is universal. Studies of matrilineal groups, like the Nayars, challenge that."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What is it called?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A system where descent is traced through the mother is:",
+    "options": [
+     "Patrilineal",
+     "Matrilineal",
+     "Bilateral",
+     "Neolocal"
+    ]
+   },
+   "say": "Your turn. What is it called?"
+  }
+ ]
+}

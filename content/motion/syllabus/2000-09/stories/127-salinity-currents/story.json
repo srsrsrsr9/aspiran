@@ -1,0 +1,216 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "salinity-currents",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Warm currents warm coasts, cold ones dry them",
+ "gsPaper": [
+  "optional-geography",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "geog1-3"
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 13–14"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "salinity-currents-q1",
+   "q": "The Humboldt (Peru) current is:",
+   "options": [
+    "Warm",
+    "Cold",
+    "A tide",
+    "A wind"
+   ],
+   "answerIndex": 1,
+   "why": "Right. A cold current."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why is Peru's coast a desert, right next to the ocean?"
+    },
+    {
+     "spk": "B",
+     "say": "A cold current runs along it."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Oceanography: salinity and currents",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "Why is Peru's coast a desert, right next to the ocean? A cold current runs along it."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The oceans average about 35 parts per thousand of salt."
+    },
+    {
+     "spk": "B",
+     "say": "Evaporation raises it. Rivers and rain lower it."
+    }
+   ],
+   "data": {
+    "kicker": "Salinity",
+    "items": [
+     {
+      "value": 35,
+      "suffix": " ‰",
+      "label": "average ocean salinity (parts per thousand)",
+      "cue": "35"
+     }
+    ]
+   },
+   "say": "The oceans average about 35 parts per thousand of salt. Evaporation raises it. Rivers and rain lower it."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The warm Gulf Stream keeps north-western Europe mild."
+    },
+    {
+     "spk": "B",
+     "say": "The cold Humboldt current helps make the Atacama one of the driest places on Earth."
+    }
+   ],
+   "data": {
+    "kicker": "Two currents",
+    "title": "Compare",
+    "items": [
+     {
+      "text": "Gulf Stream",
+      "sub": "Warm: keeps north-west Europe mild",
+      "cue": "Gulf"
+     },
+     {
+      "text": "Humboldt (Peru)",
+      "sub": "Cold: helps make the Atacama dry",
+      "cue": "Humboldt"
+     }
+    ]
+   },
+   "say": "The warm Gulf Stream keeps north-western Europe mild. The cold Humboldt current helps make the Atacama one of the driest places on Earth."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Cold currents often come with upwelling,"
+    },
+    {
+     "spk": "B",
+     "say": "which brings nutrients up, and with them, fish."
+    }
+   ],
+   "data": {
+    "kicker": "Cold water, more fish",
+    "text": "Upwelling brings nutrients to the surface."
+   },
+   "say": "Cold currents often come with upwelling, which brings nutrients up, and with them, fish."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Is it warm or cold?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Humboldt (Peru) current is:",
+    "options": [
+     "Warm",
+     "Cold",
+     "A tide",
+     "A wind"
+    ]
+   },
+   "say": "Your turn. Is it warm or cold?"
+  }
+ ]
+}

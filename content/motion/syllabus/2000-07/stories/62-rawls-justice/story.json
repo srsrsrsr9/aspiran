@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "rawls-justice",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Choose rules without knowing who you'll be",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-3"
+ ],
+ "sources": [
+  "John Rawls, A Theory of Justice (1971)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "rawls-justice-q1",
+   "q": "Rawls's 'difference principle' allows inequalities only if they:",
+   "options": [
+    "Reward merit",
+    "Benefit the least advantaged",
+    "Are chosen by the majority",
+    "Are temporary"
+   ],
+   "answerIndex": 1,
+   "why": "Right. They must benefit the least advantaged."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Imagine choosing the rules of society,"
+    },
+    {
+     "spk": "B",
+     "say": "without knowing whether you'll be rich or poor."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Rawls and the veil of ignorance",
+    "illustration": "illustrations/syllabus/scales.svg"
+   },
+   "say": "Imagine choosing the rules of society, without knowing whether you'll be rich or poor."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "That's John Rawls's veil of ignorance,"
+    },
+    {
+     "spk": "B",
+     "say": "from A Theory of Justice, 1971."
+    }
+   ],
+   "data": {
+    "kicker": "The book",
+    "points": [
+     {
+      "year": 1971,
+      "label": "A Theory of Justice",
+      "cue": "1971"
+     }
+    ]
+   },
+   "say": "That's John Rawls's veil of ignorance, from A Theory of Justice, 1971."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "First, equal basic liberties for all."
+    },
+    {
+     "spk": "B",
+     "say": "Second, inequalities are allowed only if they benefit the least advantaged, with fair equality of opportunity."
+    }
+   ],
+   "data": {
+    "kicker": "Two principles",
+    "title": "Justice as fairness",
+    "items": [
+     {
+      "text": "Equal basic liberties",
+      "sub": "For everyone",
+      "cue": "liberties"
+     },
+     {
+      "text": "Difference principle",
+      "sub": "Inequalities must benefit the least advantaged",
+      "cue": "advantaged"
+     }
+    ]
+   },
+   "say": "First, equal basic liberties for all. Second, inequalities are allowed only if they benefit the least advantaged, with fair equality of opportunity."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Robert Nozick argued that justice is about fair process, not patterns."
+    },
+    {
+     "spk": "B",
+     "say": "Communitarians like Michael Sandel said Rawls ignored community."
+    }
+   ],
+   "data": {
+    "kicker": "Critics",
+    "title": "Know two",
+    "items": [
+     {
+      "text": "Nozick",
+      "sub": "Entitlement: a fair process is enough",
+      "cue": "Nozick"
+     },
+     {
+      "text": "Communitarians",
+      "sub": "Sandel: the self isn't unencumbered",
+      "cue": "Communitarians"
+     }
+    ]
+   },
+   "say": "Robert Nozick argued that justice is about fair process, not patterns. Communitarians like Michael Sandel said Rawls ignored community."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When are inequalities allowed?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Rawls's 'difference principle' allows inequalities only if they:",
+    "options": [
+     "Reward merit",
+     "Benefit the least advantaged",
+     "Are chosen by the majority",
+     "Are temporary"
+    ]
+   },
+   "say": "Your turn. When are inequalities allowed?"
+  }
+ ]
+}

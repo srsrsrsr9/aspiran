@@ -1,0 +1,230 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "bmi-applied",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Anthropology measures bodies to help people",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-15"
+ ],
+ "sources": [
+  "World Health Organization, BMI classification"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "bmi-applied-q1",
+   "q": "A BMI of 22 for an adult is classed by the WHO as:",
+   "options": [
+    "Underweight",
+    "Normal",
+    "Overweight",
+    "Obese"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Normal (18.5–24.9)."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Asian cut-offs are lower in some guidelines; kept to the WHO general scale."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Anthropologists measure growth, nutrition and bodies."
+    },
+    {
+     "spk": "B",
+     "say": "That work has real uses."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Human growth and applied anthropology",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Anthropologists measure growth, nutrition and bodies. That work has real uses."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Body mass index is weight in kilograms"
+    },
+    {
+     "spk": "B",
+     "say": "divided by height in metres, squared."
+    }
+   ],
+   "data": {
+    "kicker": "Body Mass Index",
+    "text": "BMI = weight (kg) ÷ height (m)²"
+   },
+   "say": "Body mass index is weight in kilograms divided by height in metres, squared."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Below 18.5 is underweight. 18.5 to 24.9 is normal."
+    },
+    {
+     "spk": "B",
+     "say": "25 and above is overweight."
+    }
+   ],
+   "data": {
+    "kicker": "WHO cut-offs",
+    "title": "Adults",
+    "items": [
+     {
+      "text": "Below 18.5",
+      "sub": "Underweight",
+      "cue": "18"
+     },
+     {
+      "text": "18.5 to 24.9",
+      "sub": "Normal",
+      "cue": "24"
+     },
+     {
+      "text": "25 and above",
+      "sub": "Overweight",
+      "cue": "25"
+     }
+    ]
+   },
+   "say": "Below 18.5 is underweight. 18.5 to 24.9 is normal. 25 and above is overweight."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Forensic anthropology identifies remains."
+    },
+    {
+     "spk": "B",
+     "say": "Others work in nutrition, health, and ergonomic design."
+    }
+   ],
+   "data": {
+    "kicker": "Applied anthropology",
+    "title": "Fields",
+    "items": [
+     {
+      "text": "Forensic",
+      "sub": "Identifying remains",
+      "cue": "Forensic"
+     },
+     {
+      "text": "Nutrition and health",
+      "sub": "",
+      "cue": "Nutrition"
+     },
+     {
+      "text": "Design",
+      "sub": "Ergonomics",
+      "cue": "Design"
+     }
+    ]
+   },
+   "say": "Forensic anthropology identifies remains. Others work in nutrition, health, and ergonomic design."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How is a B-M-I of 22 classed?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A BMI of 22 for an adult is classed by the WHO as:",
+    "options": [
+     "Underweight",
+     "Normal",
+     "Overweight",
+     "Obese"
+    ]
+   },
+   "say": "Your turn. How is a B-M-I of 22 classed?"
+  }
+ ]
+}

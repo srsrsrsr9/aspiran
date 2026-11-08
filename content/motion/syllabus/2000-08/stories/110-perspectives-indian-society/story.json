@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "perspectives-indian-society",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Three ways to study Indian society",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio2-1"
+ ],
+ "sources": [
+  "G. S. Ghurye, Caste and Race in India (1932)",
+  "M. N. Srinivas, Religion and Society among the Coorgs (1952)",
+  "A. R. Desai, Social Background of Indian Nationalism (1948)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "perspectives-indian-society-q1",
+   "q": "The 'field view' of Indian society is linked with:",
+   "options": [
+    "G. S. Ghurye",
+    "M. N. Srinivas",
+    "A. R. Desai",
+    "Louis Dumont"
+   ],
+   "answerIndex": 1,
+   "why": "Right. M. N. Srinivas."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "How should you study Indian society?"
+    },
+    {
+     "spk": "B",
+     "say": "Through its texts, its villages, or its classes?"
+    }
+   ],
+   "data": {
+    "kicker": "Sociology II · Syllabus · AI voices",
+    "headline": "Indology, structural-functionalism, Marxism",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "How should you study Indian society? Through its texts, its villages, or its classes?"
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Indologists like G. S. Ghurye studied society through classical texts."
+    },
+    {
+     "spk": "B",
+     "say": "Srinivas used fieldwork in villages. A. R. Desai used class analysis."
+    }
+   ],
+   "data": {
+    "kicker": "Three perspectives",
+    "title": "And a scholar each",
+    "items": [
+     {
+      "text": "Indology",
+      "sub": "G. S. Ghurye: through texts",
+      "cue": "ghurye"
+     },
+     {
+      "text": "Structural-functionalism",
+      "sub": "M. N. Srinivas: through fieldwork",
+      "cue": "srinivas"
+     },
+     {
+      "text": "Marxist",
+      "sub": "A. R. Desai: through class",
+      "cue": "desai"
+     }
+    ]
+   },
+   "say": "Indologists like G. S. Ghurye studied society through classical texts. Srinivas used fieldwork in villages. A. R. Desai used class analysis."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Srinivas called it the book view versus the field view."
+    },
+    {
+     "spk": "B",
+     "say": "Texts and real life don't always match."
+    }
+   ],
+   "data": {
+    "kicker": "Book view vs field view",
+    "text": "What texts say, and what people actually do, can differ."
+   },
+   "say": "Srinivas called it the book view versus the field view. Texts and real life don't always match."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Cite Louis Dumont on purity and pollution,"
+    },
+    {
+     "spk": "B",
+     "say": "and D. P. Mukerji on tradition."
+    }
+   ],
+   "data": {
+    "kicker": "Others to cite",
+    "title": "Also",
+    "items": [
+     {
+      "text": "Louis Dumont",
+      "sub": "Purity and pollution",
+      "cue": "Dumont"
+     },
+     {
+      "text": "D. P. Mukerji",
+      "sub": "Tradition and modernity",
+      "cue": "Mukerji"
+     }
+    ]
+   },
+   "say": "Cite Louis Dumont on purity and pollution, and D. P. Mukerji on tradition."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who's linked to the field view?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The 'field view' of Indian society is linked with:",
+    "options": [
+     "G. S. Ghurye",
+     "M. N. Srinivas",
+     "A. R. Desai",
+     "Louis Dumont"
+    ]
+   },
+   "say": "Your turn. Who's linked to the field view?"
+  }
+ ]
+}

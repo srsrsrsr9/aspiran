@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "social-contract",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Three thinkers, three social contracts",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-10"
+ ],
+ "sources": [
+  "Thomas Hobbes, Leviathan (1651)",
+  "John Locke, Two Treatises of Government (1689)",
+  "J.-J. Rousseau, The Social Contract (1762)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "social-contract-q1",
+   "q": "Who argued for limited government to protect life, liberty and property?",
+   "options": [
+    "Hobbes",
+    "Locke",
+    "Rousseau",
+    "Machiavelli"
+   ],
+   "answerIndex": 1,
+   "why": "Right. John Locke."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why do people accept a government at all?"
+    },
+    {
+     "spk": "B",
+     "say": "Three thinkers said: because of a contract."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Hobbes, Locke and Rousseau",
+    "illustration": "illustrations/syllabus/scroll.svg"
+   },
+   "say": "Why do people accept a government at all? Three thinkers said: because of a contract."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Hobbes wrote Leviathan in 1651. Locke, the Two Treatises, in 1689."
+    },
+    {
+     "spk": "B",
+     "say": "And Rousseau, The Social Contract, in 1762."
+    }
+   ],
+   "data": {
+    "kicker": "The books",
+    "points": [
+     {
+      "year": 1651,
+      "label": "Hobbes, Leviathan",
+      "cue": "1651"
+     },
+     {
+      "year": 1689,
+      "label": "Locke, Two Treatises",
+      "cue": "1689"
+     },
+     {
+      "year": 1762,
+      "label": "Rousseau, Social Contract",
+      "cue": "1762"
+     }
+    ]
+   },
+   "say": "Hobbes wrote Leviathan in 1651. Locke, the Two Treatises, in 1689. And Rousseau, The Social Contract, in 1762."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "For Hobbes, life without government was nasty, brutish and short, so he wanted an absolute sovereign."
+    },
+    {
+     "spk": "B",
+     "say": "Locke wanted limited government to protect life, liberty and property. Rousseau, rule by the general will."
+    }
+   ],
+   "data": {
+    "kicker": "Their states of nature",
+    "title": "Before government",
+    "items": [
+     {
+      "text": "Hobbes",
+      "sub": "War of all against all → absolute sovereign",
+      "cue": "Hobbes"
+     },
+     {
+      "text": "Locke",
+      "sub": "Natural rights → limited government",
+      "cue": "Locke"
+     },
+     {
+      "text": "Rousseau",
+      "sub": "Free and good → the general will",
+      "cue": "Rousseau"
+     }
+    ]
+   },
+   "say": "For Hobbes, life without government was nasty, brutish and short, so he wanted an absolute sovereign. Locke wanted limited government to protect life, liberty and property. Rousseau, rule by the general will."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Link Locke to the American Revolution,"
+    },
+    {
+     "spk": "B",
+     "say": "and Rousseau to the French."
+    }
+   ],
+   "data": {
+    "kicker": "For your answers",
+    "text": "Locke's ideas run through the US Declaration of Independence."
+   },
+   "say": "Link Locke to the American Revolution, and Rousseau to the French."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who argued this?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who argued for limited government to protect life, liberty and property?",
+    "options": [
+     "Hobbes",
+     "Locke",
+     "Rousseau",
+     "Machiavelli"
+    ]
+   },
+   "say": "Your turn. Who argued this?"
+  }
+ ]
+}

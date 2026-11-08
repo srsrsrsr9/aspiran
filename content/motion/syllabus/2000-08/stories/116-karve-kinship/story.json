@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "karve-kinship",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "North and south India marry differently",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio2-7"
+ ],
+ "sources": [
+  "Irawati Karve, Kinship Organisation in India (1953)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "karve-kinship-q1",
+   "q": "Who wrote 'Kinship Organisation in India'?",
+   "options": [
+    "Leela Dube",
+    "Irawati Karve",
+    "T. N. Madan",
+    "Patricia Uberoi"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Irawati Karve."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In much of the south, marrying a cousin is preferred."
+    },
+    {
+     "spk": "B",
+     "say": "In much of the north, it's forbidden."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology II · Syllabus · AI voices",
+    "headline": "Kinship in India: Irawati Karve",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "In much of the south, marrying a cousin is preferred. In much of the north, it's forbidden."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Irawati Karve mapped kinship zones in 1953."
+    },
+    {
+     "spk": "B",
+     "say": "North, south, central and east."
+    }
+   ],
+   "data": {
+    "kicker": "The study",
+    "points": [
+     {
+      "year": 1953,
+      "label": "Kinship Organisation in India",
+      "cue": "1953"
+     }
+    ]
+   },
+   "say": "Irawati Karve mapped kinship zones in 1953. North, south, central and east."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The north prefers marrying outside the village, and bans cousin marriage."
+    },
+    {
+     "spk": "B",
+     "say": "The south often prefers cross-cousin marriage."
+    }
+   ],
+   "data": {
+    "kicker": "Two patterns",
+    "title": "Compare",
+    "items": [
+     {
+      "text": "North",
+      "sub": "Village exogamy; no cousin marriage",
+      "cue": "North"
+     },
+     {
+      "text": "South",
+      "sub": "Cross-cousin marriage common",
+      "cue": "South"
+     }
+    ]
+   },
+   "say": "The north prefers marrying outside the village, and bans cousin marriage. The south often prefers cross-cousin marriage."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Households are getting smaller,"
+    },
+    {
+     "spk": "B",
+     "say": "and women's property rights are changing inheritance."
+    }
+   ],
+   "data": {
+    "kicker": "Changes",
+    "title": "Today",
+    "items": [
+     {
+      "text": "Smaller households",
+      "sub": "Women's property rights",
+      "cue": "Smaller"
+     }
+    ]
+   },
+   "say": "Households are getting smaller, and women's property rights are changing inheritance."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who wrote it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who wrote 'Kinship Organisation in India'?",
+    "options": [
+     "Leela Dube",
+     "Irawati Karve",
+     "T. N. Madan",
+     "Patricia Uberoi"
+    ]
+   },
+   "say": "Your turn. Who wrote it?"
+  }
+ ]
+}
