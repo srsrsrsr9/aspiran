@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "mendel-hardy",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Pea plants explained inheritance",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-13"
+ ],
+ "sources": [
+  "Gregor Mendel (1866)",
+  "G. H. Hardy and Wilhelm Weinberg (1908)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "mendel-hardy-q1",
+   "q": "Which force does NOT disturb Hardy–Weinberg equilibrium?",
+   "options": [
+    "Mutation",
+    "Natural selection",
+    "Random mating",
+    "Migration"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Random mating is an assumption of the equilibrium, not a force against it."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The laws of inheritance were found in a monastery garden."
+    },
+    {
+     "spk": "B",
+     "say": "With pea plants."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Human genetics: Mendel and Hardy–Weinberg",
+    "illustration": "illustrations/syllabus/dna.svg"
+   },
+   "say": "The laws of inheritance were found in a monastery garden. With pea plants."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Gregor Mendel published his pea experiments in 1866."
+    },
+    {
+     "spk": "B",
+     "say": "In 1908, Hardy and Weinberg described populations in genetic balance."
+    }
+   ],
+   "data": {
+    "kicker": "Milestones",
+    "points": [
+     {
+      "year": 1866,
+      "label": "Mendel publishes",
+      "cue": "1866"
+     },
+     {
+      "year": 1908,
+      "label": "Hardy–Weinberg",
+      "cue": "1908"
+     }
+    ]
+   },
+   "say": "Gregor Mendel published his pea experiments in 1866. In 1908, Hardy and Weinberg described populations in genetic balance."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Segregation: each parent passes on one allele for a trait."
+    },
+    {
+     "spk": "B",
+     "say": "Independent assortment: different traits sort independently."
+    }
+   ],
+   "data": {
+    "kicker": "Mendel's laws",
+    "title": "Two",
+    "items": [
+     {
+      "text": "Segregation",
+      "sub": "Each parent passes one allele",
+      "cue": "Segregation"
+     },
+     {
+      "text": "Independent assortment",
+      "sub": "Traits sort independently",
+      "cue": "Independent"
+     }
+    ]
+   },
+   "say": "Segregation: each parent passes on one allele for a trait. Independent assortment: different traits sort independently."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Allele frequencies stay the same across generations"
+    },
+    {
+     "spk": "B",
+     "say": "unless mutation, selection, migration or drift change them."
+    }
+   ],
+   "data": {
+    "kicker": "Hardy–Weinberg",
+    "text": "Allele frequencies stay constant unless something changes them."
+   },
+   "say": "Allele frequencies stay the same across generations unless mutation, selection, migration or drift change them."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which one doesn't disturb it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which force does NOT disturb Hardy–Weinberg equilibrium?",
+    "options": [
+     "Mutation",
+     "Natural selection",
+     "Random mating",
+     "Migration"
+    ]
+   },
+   "say": "Your turn. Which one doesn't disturb it?"
+  }
+ ]
+}

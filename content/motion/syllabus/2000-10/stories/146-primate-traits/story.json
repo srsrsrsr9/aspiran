@@ -1,0 +1,238 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "primate-traits",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "What makes a primate a primate",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-2"
+ ],
+ "sources": [
+  "Nadeem Hasnain, Physical Anthropology",
+  "P. Nath, Physical Anthropology"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "primate-traits-q1",
+   "q": "Which trait most clearly separates hominins from other primates?",
+   "options": [
+    "Opposable thumbs",
+    "Bipedalism",
+    "Colour vision",
+    "Nails"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Habitual walking on two legs."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Humans are primates."
+    },
+    {
+     "spk": "B",
+     "say": "So what do we share with monkeys and apes?"
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Human evolution: primate characteristics",
+    "illustration": "illustrations/syllabus/dna.svg"
+   },
+   "say": "Humans are primates. So what do we share with monkeys and apes?"
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Forward-facing eyes with depth and colour vision. Grasping hands with opposable thumbs."
+    },
+    {
+     "spk": "B",
+     "say": "Large brains, long childhoods, and rich social lives."
+    }
+   ],
+   "data": {
+    "kicker": "Primate traits",
+    "title": "Shared",
+    "items": [
+     {
+      "text": "Binocular, colour vision",
+      "sub": "Depth perception",
+      "cue": "depth"
+     },
+     {
+      "text": "Grasping hands",
+      "sub": "Opposable thumbs, nails not claws",
+      "cue": "Grasping"
+     },
+     {
+      "text": "Large brains",
+      "sub": "Long childhood, social life",
+      "cue": "brains"
+     }
+    ]
+   },
+   "say": "Forward-facing eyes with depth and colour vision. Grasping hands with opposable thumbs. Large brains, long childhoods, and rich social lives."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "What sets hominins apart is walking upright,"
+    },
+    {
+     "spk": "B",
+     "say": "and later, very large brains, culture and language."
+    }
+   ],
+   "data": {
+    "kicker": "Human specialties",
+    "title": "Hominins",
+    "items": [
+     {
+      "text": "Bipedalism",
+      "sub": "Walking upright",
+      "cue": "apart"
+     },
+     {
+      "text": "Very large brain",
+      "sub": "Culture and language",
+      "cue": "Very"
+     }
+    ]
+   },
+   "say": "What sets hominins apart is walking upright, and later, very large brains, culture and language."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The order splits into prosimians, like lemurs and lorises,"
+    },
+    {
+     "spk": "B",
+     "say": "and anthropoids: monkeys, apes and humans."
+    }
+   ],
+   "data": {
+    "kicker": "Classification",
+    "title": "Order Primates",
+    "items": [
+     {
+      "text": "Prosimians",
+      "sub": "Lemurs, lorises",
+      "cue": "Prosimians"
+     },
+     {
+      "text": "Anthropoids",
+      "sub": "Monkeys, apes, humans",
+      "cue": "Anthropoids"
+     }
+    ]
+   },
+   "say": "The order splits into prosimians, like lemurs and lorises, and anthropoids: monkeys, apes and humans."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which trait separates hominins?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which trait most clearly separates hominins from other primates?",
+    "options": [
+     "Opposable thumbs",
+     "Bipedalism",
+     "Colour vision",
+     "Nails"
+    ]
+   },
+   "say": "Your turn. Which trait separates hominins?"
+  }
+ ]
+}

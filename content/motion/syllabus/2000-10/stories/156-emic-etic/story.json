@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "emic-etic",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Inside view or outside view?",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-12"
+ ],
+ "sources": [
+  "Kenneth Pike (1954)",
+  "W. H. R. Rivers, genealogical method (1910)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "emic-etic-q1",
+   "q": "An account using the insider's own categories is:",
+   "options": [
+    "Etic",
+    "Emic",
+    "Statistical",
+    "Comparative"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Emic."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Should you describe a culture in its own terms,"
+    },
+    {
+     "spk": "B",
+     "say": "or in the observer's?"
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Research methods: emic and etic",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Should you describe a culture in its own terms, or in the observer's?"
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Emic accounts use the insider's own categories."
+    },
+    {
+     "spk": "B",
+     "say": "Etic accounts use the observer's, for comparison."
+    }
+   ],
+   "data": {
+    "kicker": "Two views",
+    "title": "Pike, 1954",
+    "items": [
+     {
+      "text": "Emic",
+      "sub": "The insider's categories",
+      "cue": "Emic"
+     },
+     {
+      "text": "Etic",
+      "sub": "The observer's categories",
+      "cue": "Etic"
+     }
+    ]
+   },
+   "say": "Emic accounts use the insider's own categories. Etic accounts use the observer's, for comparison."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Participant observation means living with the people."
+    },
+    {
+     "spk": "B",
+     "say": "The genealogical method, from W. H. R. Rivers, maps kin to understand society."
+    }
+   ],
+   "data": {
+    "kicker": "Fieldwork tools",
+    "title": "Classic",
+    "items": [
+     {
+      "text": "Participant observation",
+      "sub": "Live with the people",
+      "cue": "Participant"
+     },
+     {
+      "text": "Genealogical method",
+      "sub": "Rivers, 1910",
+      "cue": "Genealogical"
+     }
+    ]
+   },
+   "say": "Participant observation means living with the people. The genealogical method, from W. H. R. Rivers, maps kin to understand society."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Add case studies, interviews,"
+    },
+    {
+     "spk": "B",
+     "say": "schedules and questionnaires."
+    }
+   ],
+   "data": {
+    "kicker": "Others",
+    "text": "Case study, interview, schedule and questionnaire."
+   },
+   "say": "Add case studies, interviews, schedules and questionnaires."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What do we call it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "An account using the insider's own categories is:",
+    "options": [
+     "Etic",
+     "Emic",
+     "Statistical",
+     "Comparative"
+    ]
+   },
+   "say": "Your turn. What do we call it?"
+  }
+ ]
+}

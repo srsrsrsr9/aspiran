@@ -1,0 +1,215 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "race-variation",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Most human variation is within groups, not between them",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-14"
+ ],
+ "sources": [
+  "UNESCO, Statement on Race (1950)",
+  "Richard Lewontin, 'The Apportionment of Human Diversity' (1972)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "race-variation-q1",
+   "q": "Lewontin found that most human genetic variation lies:",
+   "options": [
+    "Between races",
+    "Within populations",
+    "Only in Africa",
+    "In blood groups only"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Within populations."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Are human races biologically real?"
+    },
+    {
+     "spk": "B",
+     "say": "Genetics says the picture is more complicated."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Race and biological variation",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "Are human races biologically real? Genetics says the picture is more complicated."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1950, UNESCO issued its first statement on race."
+    },
+    {
+     "spk": "B",
+     "say": "In 1972, Richard Lewontin measured where genetic variation lies."
+    }
+   ],
+   "data": {
+    "kicker": "Turning points",
+    "points": [
+     {
+      "year": 1950,
+      "label": "UNESCO Statement on Race",
+      "cue": "1950"
+     },
+     {
+      "year": 1972,
+      "label": "Lewontin's study",
+      "cue": "1972"
+     }
+    ]
+   },
+   "say": "In 1950, UNESCO issued its first statement on race. In 1972, Richard Lewontin measured where genetic variation lies."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "He found about 85 percent of genetic variation is within populations,"
+    },
+    {
+     "spk": "B",
+     "say": "and only a small share between so-called races."
+    }
+   ],
+   "data": {
+    "kicker": "Lewontin",
+    "items": [
+     {
+      "value": 85,
+      "suffix": "%",
+      "label": "of variation is within populations",
+      "cue": "85"
+     }
+    ]
+   },
+   "say": "He found about 85 percent of genetic variation is within populations, and only a small share between so-called races."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Traits like skin colour change gradually across space."
+    },
+    {
+     "spk": "B",
+     "say": "Anthropologists call these clines. Racism has no biological basis."
+    }
+   ],
+   "data": {
+    "kicker": "Clines",
+    "text": "Traits change gradually across space, not in sharp blocks."
+   },
+   "say": "Traits like skin colour change gradually across space. Anthropologists call these clines. Racism has no biological basis."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Where does most variation lie?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Lewontin found that most human genetic variation lies:",
+    "options": [
+     "Between races",
+     "Within populations",
+     "Only in Africa",
+     "In blood groups only"
+    ]
+   },
+   "say": "Your turn. Where does most variation lie?"
+  }
+ ]
+}
