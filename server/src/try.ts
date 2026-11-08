@@ -109,6 +109,15 @@ async function summary(env: Env, pathId: string): Promise<Response> {
   });
 }
 
+/** "You asked, we did": the latest lines the team wrote, newest first. Written by staff in admin, never by visitors. */
+export async function tryUpdates(env: Env, pathId: string, all = false) {
+  await ensureSchema(env);
+  const { results } = await env.DB.prepare(
+    `SELECT id, text_en, text_hi, done_on, hidden, created_by, created_at FROM try_updates WHERE path_id = ? ${all ? "" : "AND hidden = 0"} ORDER BY done_on DESC, id DESC LIMIT ?`,
+  ).bind(pathId, all ? 100 : 5).all<any>();
+  return results;
+}
+
 /** For the admin console: every answer, newest first, and contacts left with consent. */
 export async function tryFeedbackRows(env: Env, limit: number) {
   await ensureSchema(env);
@@ -124,6 +133,11 @@ export async function tryRoute(req: Request, env: Env, path: string, url: URL): 
   if (req.method === "POST" && ["/try/feedback", "/try/contact", "/try/forget"].includes(path)) return feedback(req, env, path);
   if (req.method !== "GET") return json({ error: "Use GET." }, 405);
   if (path === "/try/summary") return summary(env, str(url.searchParams.get("path"), 64));
+  if (path === "/try/updates") {
+    const rows = await tryUpdates(env, str(url.searchParams.get("path"), 64));
+    return new Response(JSON.stringify({ updates: rows.map((r) => ({ en: r.text_en, hi: r.text_hi, on: r.done_on })) }), {
+      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "max-age=300" } });
+  }
   if (!(await flags(env)).library) return json({ items: [], paused: true });
   const id = decodeURIComponent(path.slice("/try/".length));
 

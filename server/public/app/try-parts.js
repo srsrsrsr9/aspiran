@@ -326,7 +326,11 @@ async function summaryInto(st) {
   const el = document.querySelector(".try-summary");
   if (!el || el.dataset.done) return;
   el.dataset.done = "1";
-  const d = await fetch("/try/summary?path=" + encodeURIComponent(K.pathId())).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const [d, up] = await Promise.all([
+    fetch("/try/summary?path=" + encodeURIComponent(K.pathId())).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch("/try/updates?path=" + encodeURIComponent(K.pathId())).then((r) => (r.ok ? r.json() : null)).catch(() => null)]);
+  // "You asked, we did": written by the team, newest first. Shown only when there's something real to show.
+  if (up?.updates?.length) el.before(h("div.try-did", h("h3", L(st.didTitle)), h("ul", up.updates.map((x) => h("li", L(x), h("span.small.muted", ` · ${x.on}`))))));
   const qs = st.questions.filter((q) => q.kind !== "text" && d?.questions?.[q.id]);
   if (!qs.length) { put(el, h("p.small.muted", L(st.summaryEmpty))); return; }
   put(el, h("h3", L(st.summaryTitle)), qs.map((q) => {

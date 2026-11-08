@@ -381,7 +381,7 @@ const STEP = {
     const box = h("div");
     const drawR = () => {
       const tested = getA(st.id + ":tested", false) && (st.check ?? []).length > 0;
-      const text = [h("div.reader.try-reader", paras.map((t) => h("p", rich(t)))), st.remember && h("div.card.soft.try-remember", rich(L(st.remember)))];
+      const text = [h("div.reader.try-reader", paras.map((t) => h("p", rich(t)))), st.chart && chart(st.chart), st.remember && h("div.card.soft.try-remember", rich(L(st.remember)))];
       if (!(st.check ?? []).length) return put(box, text);
       if (!tested) return put(box, text, h("button.primary", { onclick: () => { setA(st.id + ":tested", true); drawR(); focusTop(); } }, u("doneReading") + " →"));
       put(box, h("h2", u("readCheck")), (st.check ?? []).map((q, n) => h("div.card", mcq(q, `${st.id}:${n}`))),
@@ -605,6 +605,25 @@ const STEP = {
   survey: (st) => P.survey(st),
 };
 
+/**
+ * One series of bars (a number per label): one hue, thin bars from a zero baseline, the value written beside each bar,
+ * a tooltip on hover or tap, and the numbers as a list for screen readers. Single series, so no legend: the title names it.
+ */
+function chart(c) {
+  const max = c.max ?? Math.max(...c.bars.map((b) => b.value));
+  const tip = h("div.try-tip", { role: "status", "aria-live": "polite" });
+  return h("figure.try-chart",
+    h("figcaption", h("strong", L(c.title))),
+    h("div.try-bars", { "aria-hidden": "true" }, c.bars.map((b) => h("div.try-barrow",
+      { tabindex: "0", onmouseenter: () => (tip.textContent = `${L(b.label)}: ${b.value}${c.unit}`), onfocus: () => (tip.textContent = `${L(b.label)}: ${b.value}${c.unit}`), onclick: () => (tip.textContent = `${L(b.label)}: ${b.value}${c.unit}`) },
+      h("span.small", L(b.label)),
+      h("span.try-track", h("i", { style: { width: `${(100 * b.value) / max}%` } })),
+      h("span.small.try-val", `${b.value}${c.unit}`)))),
+    h("ul.sr-only", c.bars.map((b) => h("li", `${L(b.label)}: ${b.value}${c.unit}`))),
+    tip,
+    c.note && h("p.small.muted", L(c.note)));
+}
+
 /** "Spot the better conclusion": two answers, pick one, then why. */
 function betterPick(pr, k) {
   const box = h("div.card");
@@ -674,6 +693,17 @@ function injectStyles() {
 .try :lang(hi) p, .try:lang(hi) p, .try [lang="hi"] p, .try [lang="hi"] li { line-height: 1.85; }
 .try-remember { font-size: 15px; }
 .try-reread { margin-top: 14px; }
+.try-chart { margin: 8px 0 18px; }
+.try-bars { display: grid; gap: 6px; margin-top: 8px; }
+.try-barrow { display: grid; grid-template-columns: 7.5em 1fr 3em; align-items: center; gap: 8px; padding: 4px 0; cursor: default; }
+.try-track { position: relative; height: 10px; border-left: 1px solid var(--muted, #8888); }
+.try-track i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 4px 4px 0; background: var(--try-bar); }
+.try { --try-bar: #9A4E0E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .try { --try-bar: #C4772A; } }
+:root[data-theme="dark"] .try { --try-bar: #C4772A; }
+.try-barrow:hover .try-track i, .try-barrow:focus .try-track i { filter: brightness(1.15); }
+.try-val { text-align: right; font-variant-numeric: tabular-nums; }
+.try-tip { min-height: 1.4em; font-size: 13px; }
 .try-sure .row { flex-wrap: wrap; }
 .try-stem { white-space: pre-line; font-weight: 600; }
 .try-opts { display: grid; gap: 8px; }

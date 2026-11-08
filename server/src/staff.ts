@@ -309,6 +309,8 @@ export const ADMIN_SCHEMA = [
   `CREATE INDEX IF NOT EXISTS try_feedback_q ON try_feedback(path_id, question)`,
   `CREATE TABLE IF NOT EXISTS try_contacts (session_id TEXT PRIMARY KEY, path_id TEXT NOT NULL, contact TEXT NOT NULL, contact_kind TEXT NOT NULL,
     consent_text TEXT NOT NULL, lang TEXT, at TEXT NOT NULL)`,
+  `CREATE TABLE IF NOT EXISTS try_updates (id INTEGER PRIMARY KEY AUTOINCREMENT, path_id TEXT NOT NULL, text_en TEXT NOT NULL, text_hi TEXT,
+    done_on TEXT NOT NULL, hidden INTEGER NOT NULL DEFAULT 0, created_by TEXT, created_at TEXT NOT NULL)`,
 ];
 
 const ALTERS = [

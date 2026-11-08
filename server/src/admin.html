@@ -620,7 +620,7 @@ views.growth = async () => {
 // (CARE rows first: the crisis protocol applies, a human reads them), and contacts left with consent. Preview taps by
 // editors are tagged "draft:" and left out.
 views.trytopic = async () => {
-  const d = await api("try/feedback?limit=10000");
+  const [d, up] = await Promise.all([api("try/feedback?limit=10000"), api("try/updates")]);
   const rows = d.rows.filter((r) => !r.question.startsWith("draft:"));
   const sessions = new Set(rows.map((r) => r.session_id)).size;
   const byQ = {};
@@ -644,6 +644,17 @@ views.trytopic = async () => {
     h("h3", {}, "In their words"),
     texts.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["When", "Question", "Answer", "Lang"].map((x) => h("th", {}, x))),
       texts.map((t) => h("tr", {}, h("td", {}, ago(t.at)), h("td", {}, t.question), h("td", {}, t.answer === "CARE" ? h("b", {}, "CARE · ", t.text) : t.text), h("td", {}, t.lang))))) : h("p.muted", {}, "Nothing yet."),
+    h("h3", {}, "You asked, we did"),
+    h("p.muted", {}, "Visitors see the newest five after they send their answers. One line each: what people asked for (with a real count if you have one) and what you did. Never quote anyone; never promise what isn't built."),
+    can("announce") ? (() => {
+      const en = h("input", { placeholder: "e.g. More Hindi PYQ explanations (asked 140 times) → added to Polity", maxlength: 240, style: "width:100%" });
+      const hi = h("input", { placeholder: "हिंदी में वही पंक्ति (वैकल्पिक, पर दीजिए)", maxlength: 240, style: "width:100%;margin-top:6px" });
+      const on = h("input", { type: "date", value: new Date().toISOString().slice(0, 10), style: "margin-top:6px" });
+      return h("div.card", {}, en, hi, h("div.row", { style: "margin-top:6px" }, on, h("button", { onclick: () => act(() => api("try/updates", { body: { en: en.value, hi: hi.value, doneOn: on.value } }), "Added").then(() => show("trytopic")) }, "Add")));
+    })() : null,
+    up.updates.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["Done on", "English", "Hindi", "By", ""].map((x) => h("th", {}, x))),
+      up.updates.map((u) => h("tr", {}, h("td", {}, u.done_on), h("td", {}, u.hidden ? h("s", {}, u.text_en) : u.text_en), h("td", {}, u.text_hi || "–"), h("td", {}, u.created_by || ""),
+        h("td", {}, can("announce") ? h("button", { onclick: () => act(() => api(`try/updates/${u.id}/${u.hidden ? "show" : "hide"}`, { body: {} }), "Saved").then(() => show("trytopic")) }, u.hidden ? "Show" : "Hide") : null))))) : h("p.muted", {}, "None yet."),
     h("h3", {}, "Contacts"),
     h("p.muted", {}, "Each person agreed to be contacted once, about the full app opening or what they asked for. Nothing else. They can delete it themselves from the sample's last screen."),
     d.contacts.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["When", "Contact", "Consent text", "Lang"].map((x) => h("th", {}, x))),

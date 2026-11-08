@@ -79,6 +79,13 @@ assert.ok(!JSON.stringify(summary).includes("die"), "free text never in the summ
 const gone = await fb("/try/forget", {});
 assert.equal(gone.data.deleted, 3); // two answers and the contact
 assert.ok(!(await call("/admin/api/try/feedback")).data.rows.some((r) => r.session_id === sid));
+// "You asked, we did": staff write, visitors read the visible ones only.
+assert.equal((await call("/admin/api/try/updates", { method: "POST", body: { pathId: source.id, en: "short" } })).status, 400);
+assert.equal((await call("/admin/api/try/updates", { method: "POST", body: { pathId: source.id, en: "Test line: more Hindi PYQ explanations, added", hi: "परीक्षण पंक्ति", doneOn: "2026-11-08" } })).status, 200);
+const upd = (await call(`/admin/api/try/updates?path=${source.id}`)).data.updates.find((x) => x.text_en.startsWith("Test line"));
+assert.ok((await call(`/try/updates?path=${source.id}`, { auth: false })).data.updates.some((x) => x.en.startsWith("Test line")));
+await call(`/admin/api/try/updates/${upd.id}/hide`, { method: "POST", body: {} });
+assert.ok(!(await call(`/try/updates?path=${source.id}&x=1`, { auth: false })).data.updates.some((x) => x.en.startsWith("Test line")), "hidden lines don't show");
 step("feedback: stored anonymously, consent for contact, crisis text flagged, summary gated, delete works");
 
 await call(`/desk/api/library/${row.id}/unapprove`, { method: "POST" });
