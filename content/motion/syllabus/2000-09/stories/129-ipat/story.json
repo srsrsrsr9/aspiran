@@ -1,0 +1,213 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "ipat",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Impact equals population times affluence times technology",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-5"
+ ],
+ "sources": [
+  "Paul Ehrlich and John Holdren, 'Impact of Population Growth', Science (1971)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "ipat-q1",
+   "q": "In IPAT, 'A' stands for:",
+   "options": [
+    "Area",
+    "Affluence",
+    "Agriculture",
+    "Atmosphere"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Affluence, or consumption per person."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "What drives our impact on the planet?"
+    },
+    {
+     "spk": "B",
+     "say": "In 1971, one equation tried to answer."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Environmental geography: IPAT",
+    "illustration": "illustrations/syllabus/forest.svg"
+   },
+   "say": "What drives our impact on the planet? In 1971, one equation tried to answer."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Impact equals population, times affluence, times technology."
+    },
+    {
+     "spk": "B",
+     "say": "Ehrlich and Holdren set it out in 1971."
+    }
+   ],
+   "data": {
+    "kicker": "IPAT",
+    "text": "I = P × A × T"
+   },
+   "say": "Impact equals population, times affluence, times technology. Ehrlich and Holdren set it out in 1971."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Impact grows with numbers and with consumption."
+    },
+    {
+     "spk": "B",
+     "say": "Cleaner technology can bring it down."
+    }
+   ],
+   "data": {
+    "kicker": "What it shows",
+    "title": "Three levers",
+    "items": [
+     {
+      "text": "Population",
+      "sub": "How many of us",
+      "cue": "with"
+     },
+     {
+      "text": "Affluence",
+      "sub": "How much each consumes",
+      "cue": "consumption"
+     },
+     {
+      "text": "Technology",
+      "sub": "How clean the production is",
+      "cue": "Technology"
+     }
+    ]
+   },
+   "say": "Impact grows with numbers and with consumption. Cleaner technology can bring it down."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Link it to carrying capacity:"
+    },
+    {
+     "spk": "B",
+     "say": "the largest population an environment can support without damage."
+    }
+   ],
+   "data": {
+    "kicker": "Carrying capacity",
+    "text": "The largest population an environment can support without degrading."
+   },
+   "say": "Link it to carrying capacity: the largest population an environment can support without damage."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does A stand for?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In IPAT, 'A' stands for:",
+    "options": [
+     "Area",
+     "Affluence",
+     "Agriculture",
+     "Atmosphere"
+    ]
+   },
+   "say": "Your turn. What does A stand for?"
+  }
+ ]
+}

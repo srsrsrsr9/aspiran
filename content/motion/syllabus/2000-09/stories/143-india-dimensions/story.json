@@ -1,0 +1,223 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "india-dimensions",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India's coastline is longer than its width",
+ "gsPaper": [
+  "optional-geography",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "geog2-9"
+ ],
+ "sources": [
+  "NCERT Class 9, Contemporary India I, ch. 1 'India: Size and Location'"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "india-dimensions-q1",
+   "q": "India's coastline, including islands, is about:",
+   "options": [
+    "5,500 km",
+    "7,516 km",
+    "10,200 km",
+    "15,200 km"
+   ],
+   "answerIndex": 1,
+   "why": "Right. About 7,516.6 km."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. No map shot used, on purpose: boundaries are sensitive. Figures from NCERT."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India touches seven countries by land,"
+    },
+    {
+     "spk": "B",
+     "say": "and has one of the longest coastlines in Asia."
+    }
+   ],
+   "data": {
+    "kicker": "Geography II · Syllabus · AI voices",
+    "headline": "Political aspects: India's frontiers",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "India touches seven countries by land, and has one of the longest coastlines in Asia."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's land frontier is about 15,200 kilometres."
+    },
+    {
+     "spk": "B",
+     "say": "Its coastline, including the islands, is about 7,516.6 kilometres."
+    }
+   ],
+   "data": {
+    "kicker": "Lengths",
+    "items": [
+     {
+      "value": 15200,
+      "suffix": " km",
+      "label": "land frontier",
+      "cue": "15"
+     },
+     {
+      "value": 7516.6,
+      "suffix": " km",
+      "label": "coastline, with islands",
+      "cue": "7",
+      "decimals": 1
+     }
+    ]
+   },
+   "say": "India's land frontier is about 15,200 kilometres. Its coastline, including the islands, is about 7,516.6 kilometres."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The topic covers the geographical basis of federalism,"
+    },
+    {
+     "spk": "B",
+     "say": "and how states were reorganised."
+    }
+   ],
+   "data": {
+    "kicker": "Political geography",
+    "title": "Syllabus",
+    "items": [
+     {
+      "text": "Geographical basis of federalism",
+      "sub": "",
+      "cue": "Geographical"
+     },
+     {
+      "text": "State reorganisation",
+      "sub": "",
+      "cue": "State"
+     }
+    ]
+   },
+   "say": "The topic covers the geographical basis of federalism, and how states were reorganised."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Questions on international boundaries need official maps."
+    },
+    {
+     "spk": "B",
+     "say": "Use the Survey of India's."
+    }
+   ],
+   "data": {
+    "kicker": "A neutral note",
+    "text": "Maps in this series show land only, without boundaries."
+   },
+   "say": "Questions on international boundaries need official maps. Use the Survey of India's."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How long is the coastline?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "India's coastline, including islands, is about:",
+    "options": [
+     "5,500 km",
+     "7,516 km",
+     "10,200 km",
+     "15,200 km"
+    ]
+   },
+   "say": "Your turn. How long is the coastline?"
+  }
+ ]
+}

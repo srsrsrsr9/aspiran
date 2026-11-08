@@ -1,0 +1,215 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "rank-size",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The second city is half the size of the first, or is it?",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-10"
+ ],
+ "sources": [
+  "Mark Jefferson, 'The Law of the Primate City' (1939)",
+  "G. K. Zipf, Human Behavior and the Principle of Least Effort (1949)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "rank-size-q1",
+   "q": "Under the rank-size rule, the third-largest city is about:",
+   "options": [
+    "Half the largest",
+    "A third of the largest",
+    "Twice the largest",
+    "The same size"
+   ],
+   "answerIndex": 1,
+   "why": "Right. One-third."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is a country's second city half the size of its first?"
+    },
+    {
+     "spk": "B",
+     "say": "That's the rank-size rule."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Models: rank-size rule and primate city",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Is a country's second city half the size of its first? That's the rank-size rule."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Zipf's rank-size rule says the city ranked n is one-nth the size of the largest."
+    },
+    {
+     "spk": "B",
+     "say": "The second is half, the third a third."
+    }
+   ],
+   "data": {
+    "kicker": "Rank-size rule",
+    "text": "The nth city is 1/n the size of the largest."
+   },
+   "say": "Zipf's rank-size rule says the city ranked n is one-nth the size of the largest. The second is half, the third a third."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Mark Jefferson, in 1939, described primate cities:"
+    },
+    {
+     "spk": "B",
+     "say": "one city far bigger than all the rest."
+    }
+   ],
+   "data": {
+    "kicker": "Primate city",
+    "points": [
+     {
+      "year": 1939,
+      "label": "Mark Jefferson",
+      "cue": "1939"
+     }
+    ]
+   },
+   "say": "Mark Jefferson, in 1939, described primate cities: one city far bigger than all the rest."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The syllabus also covers Rostow's stages of growth,"
+    },
+    {
+     "spk": "B",
+     "say": "and demographic transition."
+    }
+   ],
+   "data": {
+    "kicker": "Other models",
+    "title": "Syllabus",
+    "items": [
+     {
+      "text": "Rostow's stages of growth",
+      "sub": "1960",
+      "cue": "Rostow"
+     },
+     {
+      "text": "Demographic transition",
+      "sub": "",
+      "cue": "Demographic"
+     }
+    ]
+   },
+   "say": "The syllabus also covers Rostow's stages of growth, and demographic transition."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How big is the third city?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Under the rank-size rule, the third-largest city is about:",
+    "options": [
+     "Half the largest",
+     "A third of the largest",
+     "Twice the largest",
+     "The same size"
+    ]
+   },
+   "say": "Your turn. How big is the third city?"
+  }
+ ]
+}

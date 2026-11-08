@@ -1,0 +1,228 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "language-families",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Four language families share India",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog2-6"
+ ],
+ "sources": [
+  "NCERT Class 12, India: People and Economy",
+  "Constitution of India, Eighth Schedule"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "language-families-q1",
+   "q": "Santali belongs to which language family?",
+   "options": [
+    "Indo-Aryan",
+    "Dravidian",
+    "Austro-Asiatic",
+    "Tibeto-Burman"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Austro-Asiatic."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India speaks hundreds of languages."
+    },
+    {
+     "spk": "B",
+     "say": "Most belong to just four families."
+    }
+   ],
+   "data": {
+    "kicker": "Geography II · Syllabus · AI voices",
+    "headline": "Cultural setting: languages",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "India speaks hundreds of languages. Most belong to just four families."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Indo-Aryan languages are spoken by most Indians. Dravidian languages, mainly in the south."
+    },
+    {
+     "spk": "B",
+     "say": "Austro-Asiatic languages like Santali, and Tibeto-Burman ones in the north-east."
+    }
+   ],
+   "data": {
+    "kicker": "Four families",
+    "title": "Indian languages",
+    "items": [
+     {
+      "text": "Indo-Aryan",
+      "sub": "Hindi, Bengali, Marathi…",
+      "cue": "Indo"
+     },
+     {
+      "text": "Dravidian",
+      "sub": "Tamil, Telugu, Kannada, Malayalam",
+      "cue": "Dravidian"
+     },
+     {
+      "text": "Austro-Asiatic · Tibeto-Burman",
+      "sub": "Santali · Bodo, Manipuri",
+      "cue": "Austro"
+     }
+    ]
+   },
+   "say": "Indo-Aryan languages are spoken by most Indians. Dravidian languages, mainly in the south. Austro-Asiatic languages like Santali, and Tibeto-Burman ones in the north-east."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Eighth Schedule lists 22 languages,"
+    },
+    {
+     "spk": "B",
+     "say": "with four added in 2003."
+    }
+   ],
+   "data": {
+    "kicker": "Eighth Schedule",
+    "items": [
+     {
+      "value": 22,
+      "suffix": "",
+      "label": "scheduled languages",
+      "cue": "22"
+     }
+    ]
+   },
+   "say": "The Eighth Schedule lists 22 languages, with four added in 2003."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The topic also covers religion"
+    },
+    {
+     "spk": "B",
+     "say": "and tribal regions."
+    }
+   ],
+   "data": {
+    "kicker": "Also",
+    "title": "Cultural setting",
+    "items": [
+     {
+      "text": "Religions · tribal areas",
+      "sub": "",
+      "cue": "the"
+     }
+    ]
+   },
+   "say": "The topic also covers religion and tribal regions."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which family?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Santali belongs to which language family?",
+    "options": [
+     "Indo-Aryan",
+     "Dravidian",
+     "Austro-Asiatic",
+     "Tibeto-Burman"
+    ]
+   },
+   "say": "Your turn. Which family?"
+  }
+ ]
+}
