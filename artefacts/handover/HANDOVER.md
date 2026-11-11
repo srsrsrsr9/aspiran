@@ -101,3 +101,17 @@ Local copies are in `artefacts/` (the sell-first rework plan has no local copy; 
 ## 10. First prompt for the new account (cheap start)
 > Read CLAUDE.md and artefacts/handover/HANDOVER.md only. Don't scan the repo. Then tell me in five lines
 > what's pending and wait.
+
+## 11 Nov 2026 (reconcile after cloud work)
+- Cloud sessions (8 Nov) had branched from GitHub `main` (d22ebdd), which was 21 commits behind local master. Merged into
+  master: `claude/syllabus-videos` (228 videos; the six `-2000-NN` batch branches are fully inside it) and
+  `sample-topic-open-access` (Try one topic). Its migration became `0010_try_feedback.sql` (0009 is `web_chats`, live).
+  `content.ts` came back from the cloud with LF endings; merged keeping CRLF. Service worker shell v35.
+- Pushed master to both GitHub `main` and `master` (they had drifted apart). Keep pushing to both.
+- All 16 suites pass locally. Local test DB needs `schema.sql`, then migrations, then growth threshold 0.
+- NOT deployed: Try one topic waits on the owner's four questions and editor approval. Migration 0010 must be applied before
+  the next deploy.
+- `claude/syllabus-interactives` (60 interactives, published on the status page 8 Nov) was never pushed to GitHub; it is only in
+  its cloud session. Owner to ask that session to push; then merge.
+- Android: no cloud work touched `android/`. versionCode 7 / 0.4.2 (5 Nov) is still the build to publish.
+- Website visit counts are off (Umami ID empty in aspiran-web BaseLayout). Leads keep `source` (utm or referrer or "direct").
