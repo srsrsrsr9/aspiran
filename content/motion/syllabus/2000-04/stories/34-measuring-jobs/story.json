@@ -1,0 +1,232 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "measuring-jobs",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "How long you look back changes the jobless rate",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "sources": [
+  "Periodic Labour Force Survey (PLFS), National Statistics Office, concepts and definitions"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "measuring-jobs-q1",
+   "q": "Current weekly status measures activity over:",
+   "options": [
+    "The past day",
+    "The past 7 days",
+    "The past 30 days",
+    "The past 365 days"
+   ],
+   "answerIndex": 1,
+   "why": "Right. A reference week of 7 days."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Were you unemployed last week? Or last year?"
+    },
+    {
+     "spk": "B",
+     "say": "The answer changes India's jobless rate."
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Measuring unemployment: PLFS",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "Were you unemployed last week? Or last year? The answer changes India's jobless rate."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Usual status asks what you mostly did over the past year."
+    },
+    {
+     "spk": "B",
+     "say": "Current weekly status asks about just the past seven days."
+    }
+   ],
+   "data": {
+    "kicker": "Two ways to count",
+    "title": "The PLFS",
+    "items": [
+     {
+      "text": "Usual status",
+      "sub": "Looks back 365 days",
+      "cue": "Usual"
+     },
+     {
+      "text": "Current weekly status",
+      "sub": "Looks back 7 days",
+      "cue": "weekly"
+     }
+    ]
+   },
+   "say": "Usual status asks what you mostly did over the past year. Current weekly status asks about just the past seven days."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Periodic Labour Force Survey began in 2017."
+    },
+    {
+     "spk": "B",
+     "say": "It replaced the older five-yearly employment surveys of the N-S-S-O."
+    }
+   ],
+   "data": {
+    "kicker": "The survey",
+    "points": [
+     {
+      "year": 2017,
+      "label": "PLFS begins",
+      "cue": "2017"
+     }
+    ]
+   },
+   "say": "The Periodic Labour Force Survey began in 2017. It replaced the older five-yearly employment surveys of the N-S-S-O."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Labour force participation counts those working or looking for work."
+    },
+    {
+     "spk": "B",
+     "say": "The unemployment rate is the share of that labour force without work."
+    }
+   ],
+   "data": {
+    "kicker": "Key ratios",
+    "title": "Learn the three",
+    "items": [
+     {
+      "text": "Labour force participation",
+      "sub": "Working or looking for work",
+      "cue": "participation"
+     },
+     {
+      "text": "Worker population ratio",
+      "sub": "Actually working",
+      "cue": "unemployment"
+     },
+     {
+      "text": "Unemployment rate",
+      "sub": "Looking, but not working",
+      "cue": "Unemployment"
+     }
+    ]
+   },
+   "say": "Labour force participation counts those working or looking for work. The unemployment rate is the share of that labour force without work."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What period does current weekly status cover?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Current weekly status measures activity over:",
+    "options": [
+     "The past day",
+     "The past 7 days",
+     "The past 30 days",
+     "The past 365 days"
+    ]
+   },
+   "say": "Your turn. What period does current weekly status cover?"
+  }
+ ]
+}

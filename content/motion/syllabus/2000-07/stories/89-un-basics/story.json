@@ -1,0 +1,216 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "un-basics",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Five countries can block any Security Council decision",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-9"
+ ],
+ "sources": [
+  "Charter of the United Nations (1945)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "un-basics-q1",
+   "q": "UN Day is observed on:",
+   "options": [
+    "26 June",
+    "24 October",
+    "10 December",
+    "1 January"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 24 October, when the Charter came into force."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The UN Charter was signed in San Francisco in 1945."
+    },
+    {
+     "spk": "B",
+     "say": "Its Security Council still has the same five permanent members."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "The United Nations",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "The UN Charter was signed in San Francisco in 1945. Its Security Council still has the same five permanent members."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Charter was signed on the twenty-sixth of June, 1945."
+    },
+    {
+     "spk": "B",
+     "say": "It came into force on the twenty-fourth of October: UN Day."
+    }
+   ],
+   "data": {
+    "kicker": "Founding",
+    "points": [
+     {
+      "year": 1945,
+      "label": "Charter signed 26 June; in force 24 Oct",
+      "cue": "1945"
+     }
+    ]
+   },
+   "say": "The Charter was signed on the twenty-sixth of June, 1945. It came into force on the twenty-fourth of October: UN Day."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The UN has six principal organs,"
+    },
+    {
+     "spk": "B",
+     "say": "including the General Assembly, the Security Council and the International Court of Justice."
+    }
+   ],
+   "data": {
+    "kicker": "Principal organs",
+    "items": [
+     {
+      "value": 6,
+      "suffix": "",
+      "label": "principal organs",
+      "cue": "six"
+     }
+    ]
+   },
+   "say": "The UN has six principal organs, including the General Assembly, the Security Council and the International Court of Justice."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The five permanent members have a veto."
+    },
+    {
+     "spk": "B",
+     "say": "That's why reform keeps stalling."
+    }
+   ],
+   "data": {
+    "kicker": "The veto",
+    "title": "P5",
+    "items": [
+     {
+      "text": "US · UK · France · Russia · China",
+      "sub": "Any one can block a resolution",
+      "cue": "veto"
+     }
+    ]
+   },
+   "say": "The five permanent members have a veto. That's why reform keeps stalling."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When is UN Day?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "UN Day is observed on:",
+    "options": [
+     "26 June",
+     "24 October",
+     "10 December",
+     "1 January"
+    ]
+   },
+   "say": "Your turn. When is UN Day?"
+  }
+ ]
+}

@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "english-short-essay",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Paper B's essay rewards clarity",
+ "gsPaper": [
+  "mains-english"
+ ],
+ "syllabusNodes": [
+  "english-4"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "english-short-essay-q1",
+   "q": "Paper B's essay mainly tests:",
+   "options": [
+    "Depth of argument",
+    "Clear and correct English",
+    "Statistics",
+    "Quotations"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Clear, correct English."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The English paper's essay isn't the Essay paper."
+    },
+    {
+     "spk": "B",
+     "say": "It wants clear, correct English, not deep arguments."
+    }
+   ],
+   "data": {
+    "kicker": "English paper · Syllabus · AI voices",
+    "headline": "Paper B: the short essay",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "The English paper's essay isn't the Essay paper. It wants clear, correct English, not deep arguments."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Introduce the topic in two lines. Three points, one paragraph each."
+    },
+    {
+     "spk": "B",
+     "say": "Two lines to conclude."
+    }
+   ],
+   "data": {
+    "kicker": "Plan",
+    "title": "Simple shape",
+    "items": [
+     {
+      "text": "Introduce the topic",
+      "sub": "Two lines",
+      "cue": "Introduce"
+     },
+     {
+      "text": "Three points",
+      "sub": "One paragraph each",
+      "cue": "Three"
+     },
+     {
+      "text": "Conclude",
+      "sub": "Two lines",
+      "cue": "Conclude"
+     }
+    ]
+   },
+   "say": "Introduce the topic in two lines. Three points, one paragraph each. Two lines to conclude."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Keep sentences short,"
+    },
+    {
+     "spk": "B",
+     "say": "fifteen to twenty words is plenty."
+    }
+   ],
+   "data": {
+    "kicker": "Keep sentences short",
+    "text": "Fifteen to twenty words is plenty."
+   },
+   "say": "Keep sentences short, fifteen to twenty words is plenty."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Check tenses, articles"
+    },
+    {
+     "spk": "B",
+     "say": "and spelling."
+    }
+   ],
+   "data": {
+    "kicker": "Check",
+    "title": "Before you finish",
+    "items": [
+     {
+      "text": "Tenses, articles, spelling",
+      "sub": "",
+      "cue": "Tenses"
+     }
+    ]
+   },
+   "say": "Check tenses, articles and spelling."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does it test?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Paper B's essay mainly tests:",
+    "options": [
+     "Depth of argument",
+     "Clear and correct English",
+     "Statistics",
+     "Quotations"
+    ]
+   },
+   "say": "Your turn. What does it test?"
+  }
+ ]
+}

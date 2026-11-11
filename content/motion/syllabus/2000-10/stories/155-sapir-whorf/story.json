@@ -1,0 +1,215 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "sapir-whorf",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Does your language shape your thoughts?",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro1-11"
+ ],
+ "sources": [
+  "Edward Sapir and Benjamin Lee Whorf, linguistic relativity"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "sapir-whorf-q1",
+   "q": "The weak form of Sapir–Whorf says language:",
+   "options": [
+    "Determines thought",
+    "Influences thought",
+    "Has no effect",
+    "Is innate"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Influences thought."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Does the language you speak change how you see the world?"
+    },
+    {
+     "spk": "B",
+     "say": "That's the Sapir–Whorf hypothesis."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology I · Syllabus · AI voices",
+    "headline": "Language and culture: Sapir–Whorf",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "Does the language you speak change how you see the world? That's the Sapir–Whorf hypothesis."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The strong version says language determines thought."
+    },
+    {
+     "spk": "B",
+     "say": "The weak version, now more accepted, says it influences thought."
+    }
+   ],
+   "data": {
+    "kicker": "Two versions",
+    "title": "Sapir–Whorf",
+    "items": [
+     {
+      "text": "Strong",
+      "sub": "Language determines thought",
+      "cue": "Strong"
+     },
+     {
+      "text": "Weak",
+      "sub": "Language influences thought",
+      "cue": "Weak"
+     }
+    ]
+   },
+   "say": "The strong version says language determines thought. The weak version, now more accepted, says it influences thought."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Whorf argued that the Hopi language treats time differently from English."
+    },
+    {
+     "spk": "B",
+     "say": "Later research questioned that."
+    }
+   ],
+   "data": {
+    "kicker": "Whorf's example",
+    "text": "Hopi, he argued, treats time differently from English."
+   },
+   "say": "Whorf argued that the Hopi language treats time differently from English. Later research questioned that."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The topic also covers non-verbal communication:"
+    },
+    {
+     "spk": "B",
+     "say": "gesture, space, and even silence."
+    }
+   ],
+   "data": {
+    "kicker": "Communication",
+    "title": "Also",
+    "items": [
+     {
+      "text": "Verbal and non-verbal",
+      "sub": "Gesture, space, silence",
+      "cue": "the"
+     }
+    ]
+   },
+   "say": "The topic also covers non-verbal communication: gesture, space, and even silence."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does the weak form say?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The weak form of Sapir–Whorf says language:",
+    "options": [
+     "Determines thought",
+     "Influences thought",
+     "Has no effect",
+     "Is innate"
+    ]
+   },
+   "say": "Your turn. What does the weak form say?"
+  }
+ ]
+}

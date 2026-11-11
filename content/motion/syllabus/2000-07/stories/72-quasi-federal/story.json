@@ -1,0 +1,214 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "quasi-federal",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India is federal, with a unitary tilt",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-13"
+ ],
+ "sources": [
+  "K. C. Wheare, Federal Government",
+  "Granville Austin, The Indian Constitution: Cornerstone of a Nation (1966)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "quasi-federal-q1",
+   "q": "Who described India as 'quasi-federal'?",
+   "options": [
+    "Granville Austin",
+    "K. C. Wheare",
+    "Ivor Jennings",
+    "D. D. Basu"
+   ],
+   "answerIndex": 1,
+   "why": "Right. K. C. Wheare."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is India federal?"
+    },
+    {
+     "spk": "B",
+     "say": "Mostly, but with a strong centre."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Salient features: quasi-federal",
+    "illustration": "illustrations/syllabus/constitution.svg"
+   },
+   "say": "Is India federal? Mostly, but with a strong centre."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "K. C. Wheare called India quasi-federal."
+    },
+    {
+     "spk": "B",
+     "say": "Federal in form, with a strong unitary pull."
+    }
+   ],
+   "data": {
+    "kicker": "Wheare's phrase",
+    "text": "Quasi-federal: a unitary state with subsidiary federal features."
+   },
+   "say": "K. C. Wheare called India quasi-federal. Federal in form, with a strong unitary pull."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Centre holds residuary powers. Emergencies can turn the system unitary."
+    },
+    {
+     "spk": "B",
+     "say": "There is one constitution, one citizenship, and all-India services."
+    }
+   ],
+   "data": {
+    "kicker": "Unitary features",
+    "title": "Why the tilt",
+    "items": [
+     {
+      "text": "Strong Centre",
+      "sub": "Residuary powers, Union List",
+      "cue": "residuary"
+     },
+     {
+      "text": "Emergency provisions",
+      "sub": "Federal becomes unitary",
+      "cue": "unitary"
+     },
+     {
+      "text": "Single constitution, single citizenship",
+      "sub": "All-India services",
+      "cue": "citizenship"
+     }
+    ]
+   },
+   "say": "The Centre holds residuary powers. Emergencies can turn the system unitary. There is one constitution, one citizenship, and all-India services."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Granville Austin called the Constitution a seamless web"
+    },
+    {
+     "spk": "B",
+     "say": "of national unity, democracy and social revolution."
+    }
+   ],
+   "data": {
+    "kicker": "Granville Austin",
+    "text": "The Constitution is 'a seamless web' of unity, democracy and social revolution."
+   },
+   "say": "Granville Austin called the Constitution a seamless web of national unity, democracy and social revolution."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who called India quasi-federal?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who described India as 'quasi-federal'?",
+    "options": [
+     "Granville Austin",
+     "K. C. Wheare",
+     "Ivor Jennings",
+     "D. D. Basu"
+    ]
+   },
+   "say": "Your turn. Who called India quasi-federal?"
+  }
+ ]
+}

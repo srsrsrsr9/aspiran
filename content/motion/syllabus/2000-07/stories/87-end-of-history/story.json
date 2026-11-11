@@ -1,0 +1,230 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "end-of-history",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "After the Cold War, two famous predictions",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-7"
+ ],
+ "sources": [
+  "Francis Fukuyama, 'The End of History?' (1989)",
+  "Samuel Huntington, 'The Clash of Civilizations?' (1993)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "end-of-history-q1",
+   "q": "'The Clash of Civilizations' was argued by:",
+   "options": [
+    "Fukuyama",
+    "Huntington",
+    "Kissinger",
+    "Nye"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Samuel Huntington."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "When the Cold War ended, two scholars made bold predictions."
+    },
+    {
+     "spk": "B",
+     "say": "They couldn't both be right."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "The changing world order",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "When the Cold War ended, two scholars made bold predictions. They couldn't both be right."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1989, Fukuyama argued liberal democracy had won the battle of ideas."
+    },
+    {
+     "spk": "B",
+     "say": "In 1993, Huntington predicted conflict along cultural lines."
+    }
+   ],
+   "data": {
+    "kicker": "The predictions",
+    "points": [
+     {
+      "year": 1989,
+      "label": "Fukuyama: End of History",
+      "cue": "1989"
+     },
+     {
+      "year": 1991,
+      "label": "USSR dissolves",
+      "cue": "ideas"
+     },
+     {
+      "year": 1993,
+      "label": "Huntington: Clash of Civilizations",
+      "cue": "1993"
+     }
+    ]
+   },
+   "say": "In 1989, Fukuyama argued liberal democracy had won the battle of ideas. In 1993, Huntington predicted conflict along cultural lines."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "From bipolar, to a unipolar moment after 1991,"
+    },
+    {
+     "spk": "B",
+     "say": "to an emerging multipolar order."
+    }
+   ],
+   "data": {
+    "kicker": "The orders",
+    "title": "Phases",
+    "items": [
+     {
+      "text": "Bipolar",
+      "sub": "US vs USSR",
+      "cue": "Bipolar"
+     },
+     {
+      "text": "Unipolar",
+      "sub": "US primacy after 1991",
+      "cue": "Unipolar"
+     },
+     {
+      "text": "Multipolar?",
+      "sub": "China, India and others rising",
+      "cue": "Multipolar"
+     }
+    ]
+   },
+   "say": "From bipolar, to a unipolar moment after 1991, to an emerging multipolar order."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's answer has been multi-alignment."
+    },
+    {
+     "spk": "B",
+     "say": "Partners with many, allied with none."
+    }
+   ],
+   "data": {
+    "kicker": "For India",
+    "text": "Multi-alignment: partners with many, allied with none."
+   },
+   "say": "India's answer has been multi-alignment. Partners with many, allied with none."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Whose argument?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "'The Clash of Civilizations' was argued by:",
+    "options": [
+     "Fukuyama",
+     "Huntington",
+     "Kissinger",
+     "Nye"
+    ]
+   },
+   "say": "Your turn. Whose argument?"
+  }
+ ]
+}

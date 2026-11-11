@@ -1,0 +1,225 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "caste-politics",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Caste didn't vanish in politics, it adapted",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-19"
+ ],
+ "sources": [
+  "Rajni Kothari (ed.), Caste in Indian Politics (1970)",
+  "Indra Sawhney v. Union of India (1992)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "caste-politics-q1",
+   "q": "Indra Sawhney (1992) set a general ceiling on reservations of:",
+   "options": [
+    "33%",
+    "50%",
+    "60%",
+    "27%"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 50%, barring extraordinary cases."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Did democracy weaken caste?"
+    },
+    {
+     "spk": "B",
+     "say": "Or did caste learn to use democracy?"
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Caste and Indian politics",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "Did democracy weaken caste? Or did caste learn to use democracy?"
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Rajni Kothari argued in 1970 that politics politicises caste."
+    },
+    {
+     "spk": "B",
+     "say": "Caste becomes a vehicle for organising and bargaining."
+    }
+   ],
+   "data": {
+    "kicker": "Kothari's argument",
+    "text": "Politics politicises caste, and caste shapes politics."
+   },
+   "say": "Rajni Kothari argued in 1970 that politics politicises caste. Caste becomes a vehicle for organising and bargaining."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Mandal Commission reported in 1980. Its OBC reservation was implemented in 1990."
+    },
+    {
+     "spk": "B",
+     "say": "In 1992, Indra Sawhney upheld it, with a 50 percent ceiling and a creamy layer."
+    }
+   ],
+   "data": {
+    "kicker": "Mandal",
+    "points": [
+     {
+      "year": 1980,
+      "label": "Mandal report submitted",
+      "cue": "1980"
+     },
+     {
+      "year": 1990,
+      "label": "Implemented",
+      "cue": "1990"
+     },
+     {
+      "year": 1992,
+      "label": "Indra Sawhney judgment",
+      "cue": "1992"
+     }
+    ]
+   },
+   "say": "The Mandal Commission reported in 1980. Its OBC reservation was implemented in 1990. In 1992, Indra Sawhney upheld it, with a 50 percent ceiling and a creamy layer."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The same topic covers religion and communalism,"
+    },
+    {
+     "spk": "B",
+     "say": "and regional and ethnic movements."
+    }
+   ],
+   "data": {
+    "kicker": "Also on the syllabus",
+    "title": "Religion and ethnicity",
+    "items": [
+     {
+      "text": "Communalism",
+      "sub": "",
+      "cue": "Communalism"
+     },
+     {
+      "text": "Regional and ethnic movements",
+      "sub": "",
+      "cue": "ethnic"
+     }
+    ]
+   },
+   "say": "The same topic covers religion and communalism, and regional and ethnic movements."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What ceiling did it set?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Indra Sawhney (1992) set a general ceiling on reservations of:",
+    "options": [
+     "33%",
+     "50%",
+     "60%",
+     "27%"
+    ]
+   },
+   "say": "Your turn. What ceiling did it set?"
+  }
+ ]
+}

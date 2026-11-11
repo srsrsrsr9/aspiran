@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "coriolis",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Cyclones can't form right on the equator",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 10 'Atmospheric Circulation and Weather Systems'"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "coriolis-q1",
+   "q": "The Coriolis force is greatest at:",
+   "options": [
+    "The equator",
+    "The tropics",
+    "The poles",
+    "30° latitude"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Zero at the equator, maximum at the poles."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why do cyclones spin anticlockwise in the north,"
+    },
+    {
+     "spk": "B",
+     "say": "and clockwise in the south?"
+    }
+   ],
+   "data": {
+    "kicker": "GS1 · Syllabus · AI voices",
+    "headline": "The Coriolis effect bends the winds",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "Why do cyclones spin anticlockwise in the north, and clockwise in the south?"
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Earth's rotation deflects moving air."
+    },
+    {
+     "spk": "B",
+     "say": "To the right in the northern hemisphere, and to the left in the southern."
+    }
+   ],
+   "data": {
+    "kicker": "The Coriolis force",
+    "title": "Because the Earth rotates",
+    "items": [
+     {
+      "text": "Northern hemisphere",
+      "sub": "Winds bend to the right",
+      "cue": "Northern"
+     },
+     {
+      "text": "Southern hemisphere",
+      "sub": "Winds bend to the left",
+      "cue": "Southern"
+     }
+    ]
+   },
+   "say": "The Earth's rotation deflects moving air. To the right in the northern hemisphere, and to the left in the southern."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "At the equator, the force is zero."
+    },
+    {
+     "spk": "B",
+     "say": "That's why tropical cyclones rarely form within about 5 degrees of it."
+    }
+   ],
+   "data": {
+    "kicker": "At the equator",
+    "text": "The Coriolis force is zero at the equator, and greatest at the poles."
+   },
+   "say": "At the equator, the force is zero. That's why tropical cyclones rarely form within about 5 degrees of it."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "It explains the direction of the trade winds and westerlies,"
+    },
+    {
+     "spk": "B",
+     "say": "and the spin of cyclones."
+    }
+   ],
+   "data": {
+    "kicker": "Where it shows up",
+    "title": "Exam links",
+    "items": [
+     {
+      "text": "Trade winds and westerlies",
+      "sub": "Their direction",
+      "cue": "Trade"
+     },
+     {
+      "text": "Cyclones",
+      "sub": "Their spin",
+      "cue": "Cyclones"
+     }
+    ]
+   },
+   "say": "It explains the direction of the trade winds and westerlies, and the spin of cyclones."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Where is it greatest?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Coriolis force is greatest at:",
+    "options": [
+     "The equator",
+     "The tropics",
+     "The poles",
+     "30° latitude"
+    ]
+   },
+   "say": "Your turn. Where is it greatest?"
+  }
+ ]
+}

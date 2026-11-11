@@ -1,0 +1,219 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "von-thunen",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Crops form rings around a city",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-7"
+ ],
+ "sources": [
+  "J. H. von Thünen, The Isolated State (1826)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "von-thunen-q1",
+   "q": "In von Thünen's model, the ring nearest the city grows:",
+   "options": [
+    "Wheat",
+    "Perishables and dairy",
+    "Ranching",
+    "Forest"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Perishables and dairy."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why do vegetables grow near cities, and cattle graze far away?"
+    },
+    {
+     "spk": "B",
+     "say": "Von Thünen explained it in 1826."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Economic geography: von Thünen",
+    "illustration": "illustrations/syllabus/farm.svg"
+   },
+   "say": "Why do vegetables grow near cities, and cattle graze far away? Von Thünen explained it in 1826."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Johann Heinrich von Thünen imagined one city on a flat plain."
+    },
+    {
+     "spk": "B",
+     "say": "Farmers choose crops by the cost of getting them to market."
+    }
+   ],
+   "data": {
+    "kicker": "The model",
+    "points": [
+     {
+      "year": 1826,
+      "label": "The Isolated State",
+      "cue": "johann"
+     }
+    ]
+   },
+   "say": "Johann Heinrich von Thünen imagined one city on a flat plain. Farmers choose crops by the cost of getting them to market."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Perishables and dairy near the city. Then forest, because wood is heavy."
+    },
+    {
+     "spk": "B",
+     "say": "Then grain, and ranching farthest out."
+    }
+   ],
+   "data": {
+    "kicker": "The rings",
+    "title": "From the city out",
+    "items": [
+     {
+      "text": "Market gardens, dairy",
+      "sub": "Perishable, close in",
+      "cue": "near"
+     },
+     {
+      "text": "Forest",
+      "sub": "Heavy fuel wood",
+      "cue": "Forest"
+     },
+     {
+      "text": "Grain, then ranching",
+      "sub": "Further out",
+      "cue": "Grain"
+     }
+    ]
+   },
+   "say": "Perishables and dairy near the city. Then forest, because wood is heavy. Then grain, and ranching farthest out."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The key idea:"
+    },
+    {
+     "spk": "B",
+     "say": "land rent falls as distance to the market rises."
+    }
+   ],
+   "data": {
+    "kicker": "Key idea",
+    "text": "Location rent falls with distance from the market."
+   },
+   "say": "The key idea: land rent falls as distance to the market rises."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What grows nearest?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In von Thünen's model, the ring nearest the city grows:",
+    "options": [
+     "Wheat",
+     "Perishables and dairy",
+     "Ranching",
+     "Forest"
+    ]
+   },
+   "say": "Your turn. What grows nearest?"
+  }
+ ]
+}

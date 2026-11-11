@@ -1,0 +1,249 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "wallace-line",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "An invisible line splits Asia's animals from Australia's",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-4"
+ ],
+ "sources": [
+  "Alfred Russel Wallace, 'On the Zoological Geography of the Malay Archipelago' (1859)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "wallace-line-q1",
+   "q": "The Wallace Line separates the animals of:",
+   "options": [
+    "Africa and Asia",
+    "Asia and Australia",
+    "Europe and Asia",
+    "The Americas"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Asia and Australia."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Map is schematic land-only; no borders drawn."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Bali and Lombok are only about 35 kilometres apart."
+    },
+    {
+     "spk": "B",
+     "say": "Yet their animals are strikingly different."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Biogeography: the Wallace Line",
+    "illustration": "illustrations/syllabus/forest.svg"
+   },
+   "say": "Bali and Lombok are only about 35 kilometres apart. Yet their animals are strikingly different."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1859, Alfred Russel Wallace drew a line through the Malay Archipelago."
+    },
+    {
+     "spk": "B",
+     "say": "Asian animals on one side, Australian on the other."
+    }
+   ],
+   "data": {
+    "kicker": "The line",
+    "points": [
+     {
+      "year": 1859,
+      "label": "Wallace describes it",
+      "cue": "1859"
+     }
+    ]
+   },
+   "say": "In 1859, Alfred Russel Wallace drew a line through the Malay Archipelago. Asian animals on one side, Australian on the other."
+  },
+  {
+   "shot": "map",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Bali sits on the Asian side."
+    },
+    {
+     "spk": "B",
+     "say": "Lombok, on the Australian side. A deep-water channel kept them apart, even in the ice ages."
+    }
+   ],
+   "data": {
+    "lon0": 0,
+    "start": {
+     "center": [
+      118,
+      -5
+     ],
+     "zoom": 2.2
+    },
+    "moves": [
+     {
+      "cue": "Bali",
+      "center": [
+       116,
+       -8.5
+      ],
+      "zoom": 4.0,
+      "d": 1.6
+     }
+    ],
+    "pins": [
+     {
+      "at": [
+       115.1,
+       -8.4
+      ],
+      "label": "Bali · Asian side",
+      "cue": "Bali"
+     },
+     {
+      "at": [
+       116.3,
+       -8.6
+      ],
+      "label": "Lombok · Australian side",
+      "cue": "Lombok"
+     }
+    ]
+   },
+   "say": "Bali sits on the Asian side. Lombok, on the Australian side. A deep-water channel kept them apart, even in the ice ages."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The topic also covers soils and vegetation,"
+    },
+    {
+     "spk": "B",
+     "say": "and deforestation and conservation."
+    }
+   ],
+   "data": {
+    "kicker": "Biogeography",
+    "title": "Covers",
+    "items": [
+     {
+      "text": "Soils and vegetation",
+      "sub": "",
+      "cue": "Soils"
+     },
+     {
+      "text": "Deforestation and conservation",
+      "sub": "",
+      "cue": "Deforestation"
+     }
+    ]
+   },
+   "say": "The topic also covers soils and vegetation, and deforestation and conservation."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does it separate?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Wallace Line separates the animals of:",
+    "options": [
+     "Africa and Asia",
+     "Asia and Australia",
+     "Europe and Asia",
+     "The Americas"
+    ]
+   },
+   "say": "Your turn. What does it separate?"
+  }
+ ]
+}

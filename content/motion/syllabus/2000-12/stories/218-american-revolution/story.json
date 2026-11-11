@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "american-revolution",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "No taxation without representation",
+ "gsPaper": [
+  "optional-history"
+ ],
+ "syllabusNodes": [
+  "hist2-17"
+ ],
+ "sources": [
+  "US Declaration of Independence (1776)",
+  "US Constitution (1787)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "american-revolution-q1",
+   "q": "The US Declaration of Independence was adopted in:",
+   "options": [
+    "1765",
+    "1776",
+    "1787",
+    "1789"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 1776."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Thirteen colonies broke from Britain over taxes and rights."
+    },
+    {
+     "spk": "B",
+     "say": "They wrote the first modern written constitution."
+    }
+   ],
+   "data": {
+    "kicker": "History II · Syllabus · AI voices",
+    "headline": "Origins of modern politics: America",
+    "illustration": "illustrations/syllabus/constitution.svg"
+   },
+   "say": "Thirteen colonies broke from Britain over taxes and rights. They wrote the first modern written constitution."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Declaration of Independence came in 1776."
+    },
+    {
+     "spk": "B",
+     "say": "The US Constitution was written in 1787."
+    }
+   ],
+   "data": {
+    "kicker": "Milestones",
+    "points": [
+     {
+      "year": 1776,
+      "label": "Declaration of Independence",
+      "cue": "1776"
+     },
+     {
+      "year": 1787,
+      "label": "US Constitution",
+      "cue": "1787"
+     }
+    ]
+   },
+   "say": "The Declaration of Independence came in 1776. The US Constitution was written in 1787."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The colonists' slogan:"
+    },
+    {
+     "spk": "B",
+     "say": "no taxation without representation."
+    }
+   ],
+   "data": {
+    "kicker": "The slogan",
+    "text": "No taxation without representation."
+   },
+   "say": "The colonists' slogan: no taxation without representation."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India borrowed ideas from it: a written constitution,"
+    },
+    {
+     "spk": "B",
+     "say": "judicial review, and a bill of rights."
+    }
+   ],
+   "data": {
+    "kicker": "Legacy",
+    "title": "For India",
+    "items": [
+     {
+      "text": "Written constitution",
+      "sub": "",
+      "cue": "Written"
+     },
+     {
+      "text": "Judicial review · Bill of Rights",
+      "sub": "Echoes in Part III",
+      "cue": "Judicial"
+     }
+    ]
+   },
+   "say": "India borrowed ideas from it: a written constitution, judicial review, and a bill of rights."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was it adopted?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The US Declaration of Independence was adopted in:",
+    "options": [
+     "1765",
+     "1776",
+     "1787",
+     "1789"
+    ]
+   },
+   "say": "Your turn. When was it adopted?"
+  }
+ ]
+}

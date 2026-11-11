@@ -1,0 +1,223 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "cyclone-names",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Thirteen countries take turns naming cyclones",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "gs3-7"
+ ],
+ "sources": [
+  "India Meteorological Department, RSMC New Delhi: list of tropical cyclone names (2020)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "cyclone-names-q1",
+   "q": "Cyclones in the north Indian Ocean are named from a list kept by:",
+   "options": [
+    "NASA",
+    "IMD's RSMC New Delhi",
+    "NDMA",
+    "The UN Secretary-General"
+   ],
+   "answerIndex": 1,
+   "why": "Right. IMD's Regional Specialised Meteorological Centre, New Delhi."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Biparjoy, Mocha, Tauktae."
+    },
+    {
+     "spk": "B",
+     "say": "Who picks the names of cyclones in our region?"
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Who names cyclones?",
+    "illustration": "illustrations/syllabus/disaster.svg"
+   },
+   "say": "Biparjoy, Mocha, Tauktae. Who picks the names of cyclones in our region?"
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Thirteen countries around the north Indian Ocean contribute names."
+    },
+    {
+     "spk": "B",
+     "say": "In 2020, a new list of 169 names was released, thirteen from each."
+    }
+   ],
+   "data": {
+    "kicker": "The list",
+    "items": [
+     {
+      "value": 13,
+      "suffix": "",
+      "label": "countries",
+      "cue": "indian"
+     },
+     {
+      "value": 169,
+      "suffix": "",
+      "label": "names, released in 2020",
+      "cue": "169"
+     }
+    ]
+   },
+   "say": "Thirteen countries around the north Indian Ocean contribute names. In 2020, a new list of 169 names was released, thirteen from each."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's weather department runs the regional centre in New Delhi"
+    },
+    {
+     "spk": "B",
+     "say": "that names cyclones in this basin."
+    }
+   ],
+   "data": {
+    "kicker": "Who keeps it",
+    "text": "IMD's Regional Specialised Meteorological Centre, New Delhi."
+   },
+   "say": "India's weather department runs the regional centre in New Delhi that names cyclones in this basin."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Names must be short, neutral and easy to say."
+    },
+    {
+     "spk": "B",
+     "say": "And each name is used only once."
+    }
+   ],
+   "data": {
+    "kicker": "The rules",
+    "title": "A good name is",
+    "items": [
+     {
+      "text": "Short and easy to say",
+      "sub": "Not offensive",
+      "cue": "Short"
+     },
+     {
+      "text": "Used once",
+      "sub": "Names are not reused",
+      "cue": "once"
+     }
+    ]
+   },
+   "say": "Names must be short, neutral and easy to say. And each name is used only once."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who keeps the list?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Cyclones in the north Indian Ocean are named from a list kept by:",
+    "options": [
+     "NASA",
+     "IMD's RSMC New Delhi",
+     "NDMA",
+     "The UN Secretary-General"
+    ]
+   },
+   "say": "Your turn. Who keeps the list?"
+  }
+ ]
+}

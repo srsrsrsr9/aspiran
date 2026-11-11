@@ -1,0 +1,216 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "vitamins",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Four vitamins dissolve in fat, the rest in water",
+ "gsPaper": [
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "pre-7"
+ ],
+ "sources": [
+  "NCERT Class 6 Science, 'Components of Food'",
+  "NCERT Class 10 and 11 Biology"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "vitamins-q1",
+   "q": "Which of these is a water-soluble vitamin?",
+   "options": [
+    "Vitamin A",
+    "Vitamin C",
+    "Vitamin D",
+    "Vitamin K"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Vitamin C is water-soluble; A, D, E and K are fat-soluble."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "General science questions love vitamins."
+    },
+    {
+     "spk": "B",
+     "say": "Two lists cover most of them."
+    }
+   ],
+   "data": {
+    "kicker": "Prelims · Syllabus · AI voices",
+    "headline": "Vitamins: what's missing shows up",
+    "illustration": "illustrations/syllabus/science.svg"
+   },
+   "say": "General science questions love vitamins. Two lists cover most of them."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Vitamins A, D, E and K dissolve in fat."
+    },
+    {
+     "spk": "B",
+     "say": "The body stores them, so too much can build up."
+    }
+   ],
+   "data": {
+    "kicker": "Fat-soluble",
+    "title": "Stored in the body",
+    "items": [
+     {
+      "text": "A · D · E · K",
+      "sub": "Taken in with fats, stored in the liver and fat",
+      "cue": "A"
+     }
+    ]
+   },
+   "say": "Vitamins A, D, E and K dissolve in fat. The body stores them, so too much can build up."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Too little vitamin A, and you get night blindness. Too little D, rickets."
+    },
+    {
+     "spk": "B",
+     "say": "Too little C causes scurvy. And too little B one, beriberi."
+    }
+   ],
+   "data": {
+    "kicker": "Deficiency diseases",
+    "title": "Learn the pairs",
+    "items": [
+     {
+      "text": "A → night blindness",
+      "sub": "D → rickets",
+      "cue": "night"
+     },
+     {
+      "text": "C → scurvy",
+      "sub": "B1 → beriberi",
+      "cue": "scurvy"
+     }
+    ]
+   },
+   "say": "Too little vitamin A, and you get night blindness. Too little D, rickets. Too little C causes scurvy. And too little B one, beriberi."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Vitamin D is the one your skin can make."
+    },
+    {
+     "spk": "B",
+     "say": "In sunlight."
+    }
+   ],
+   "data": {
+    "kicker": "Sunlight vitamin",
+    "text": "Skin makes vitamin D when sunlight falls on it."
+   },
+   "say": "Vitamin D is the one your skin can make. In sunlight."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which one is water-soluble?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which of these is a water-soluble vitamin?",
+    "options": [
+     "Vitamin A",
+     "Vitamin C",
+     "Vitamin D",
+     "Vitamin K"
+    ]
+   },
+   "say": "Your turn. Which one is water-soluble?"
+  }
+ ]
+}

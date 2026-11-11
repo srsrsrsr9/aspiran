@@ -1,0 +1,208 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "duverger",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "First-past-the-post tends to make two parties",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-3"
+ ],
+ "sources": [
+  "Maurice Duverger, Political Parties (1951)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "duverger-q1",
+   "q": "Duverger's law links plurality (FPTP) voting with:",
+   "options": [
+    "Many parties",
+    "Two-party systems",
+    "No parties",
+    "Coalitions always"
+   ],
+   "answerIndex": 1,
+   "why": "Right. A tendency towards two parties."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why does the US have two big parties,"
+    },
+    {
+     "spk": "B",
+     "say": "while many European countries have several?"
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "Representation: Duverger's law",
+    "illustration": "illustrations/syllabus/ballot.svg"
+   },
+   "say": "Why does the US have two big parties, while many European countries have several?"
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Maurice Duverger observed that first-past-the-post voting"
+    },
+    {
+     "spk": "B",
+     "say": "tends to produce two parties. Proportional systems allow many."
+    }
+   ],
+   "data": {
+    "kicker": "Duverger's law",
+    "text": "Single-member, plurality voting tends to produce a two-party system."
+   },
+   "say": "Maurice Duverger observed that first-past-the-post voting tends to produce two parties. Proportional systems allow many."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Small parties win few seats."
+    },
+    {
+     "spk": "B",
+     "say": "And voters avoid wasting votes on them."
+    }
+   ],
+   "data": {
+    "kicker": "Why",
+    "title": "Two effects",
+    "items": [
+     {
+      "text": "Mechanical",
+      "sub": "Small parties win few seats",
+      "cue": "few"
+     },
+     {
+      "text": "Psychological",
+      "sub": "Voters avoid 'wasting' votes",
+      "cue": "votes"
+     }
+    ]
+   },
+   "say": "Small parties win few seats. And voters avoid wasting votes on them."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India uses first-past-the-post, yet has many parties."
+    },
+    {
+     "spk": "B",
+     "say": "Because parties are strong in different states."
+    }
+   ],
+   "data": {
+    "kicker": "India: the exception",
+    "text": "First-past-the-post, yet many parties."
+   },
+   "say": "India uses first-past-the-post, yet has many parties. Because parties are strong in different states."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What does F-P-T-P tend to produce?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Duverger's law links plurality (FPTP) voting with:",
+    "options": [
+     "Many parties",
+     "Two-party systems",
+     "No parties",
+     "Coalitions always"
+    ]
+   },
+   "say": "Your turn. What does F-P-T-P tend to produce?"
+  }
+ ]
+}

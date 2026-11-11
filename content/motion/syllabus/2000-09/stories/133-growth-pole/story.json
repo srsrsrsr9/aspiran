@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "growth-pole",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Growth starts at poles, then spreads, or doesn't",
+ "gsPaper": [
+  "optional-geography"
+ ],
+ "syllabusNodes": [
+  "geog1-9"
+ ],
+ "sources": [
+  "François Perroux (1955)",
+  "Gunnar Myrdal, Economic Theory and Underdeveloped Regions (1957)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "growth-pole-q1",
+   "q": "'Backwash effects' were described by:",
+   "options": [
+    "Perroux",
+    "Myrdal",
+    "Hirschman",
+    "Rostow"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Gunnar Myrdal."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Should a poor region get many small projects,"
+    },
+    {
+     "spk": "B",
+     "say": "or one big centre of growth?"
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Regional planning: growth poles",
+    "illustration": "illustrations/syllabus/economy.svg"
+   },
+   "say": "Should a poor region get many small projects, or one big centre of growth?"
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "François Perroux argued in 1955 that growth appears at poles, not everywhere."
+    },
+    {
+     "spk": "B",
+     "say": "In 1957, Gunnar Myrdal warned that poles can drain their surroundings."
+    }
+   ],
+   "data": {
+    "kicker": "Ideas",
+    "points": [
+     {
+      "year": 1955,
+      "label": "Perroux: growth poles",
+      "cue": "1955"
+     },
+     {
+      "year": 1957,
+      "label": "Myrdal: backwash effects",
+      "cue": "1957"
+     }
+    ]
+   },
+   "say": "François Perroux argued in 1955 that growth appears at poles, not everywhere. In 1957, Gunnar Myrdal warned that poles can drain their surroundings."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Spread effects carry growth outwards."
+    },
+    {
+     "spk": "B",
+     "say": "Backwash effects pull labour and capital in, leaving the hinterland poorer."
+    }
+   ],
+   "data": {
+    "kicker": "Two effects",
+    "title": "Myrdal",
+    "items": [
+     {
+      "text": "Spread",
+      "sub": "Growth reaches the hinterland",
+      "cue": "Spread"
+     },
+     {
+      "text": "Backwash",
+      "sub": "Labour and capital pulled away",
+      "cue": "Backwash"
+     }
+    ]
+   },
+   "say": "Spread effects carry growth outwards. Backwash effects pull labour and capital in, leaving the hinterland poorer."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's answer has included multi-level planning,"
+    },
+    {
+     "spk": "B",
+     "say": "at district and block levels."
+    }
+   ],
+   "data": {
+    "kicker": "In India",
+    "title": "Planning",
+    "items": [
+     {
+      "text": "Multi-level planning",
+      "sub": "District and block plans",
+      "cue": "Multi"
+     }
+    ]
+   },
+   "say": "India's answer has included multi-level planning, at district and block levels."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who described backwash effects?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "'Backwash effects' were described by:",
+    "options": [
+     "Perroux",
+     "Myrdal",
+     "Hirschman",
+     "Rostow"
+    ]
+   },
+   "say": "Your turn. Who described backwash effects?"
+  }
+ ]
+}

@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "english-comprehension",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Paper B is English, and it's qualifying too",
+ "gsPaper": [
+  "mains-english"
+ ],
+ "syllabusNodes": [
+  "english-1"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "english-comprehension-q1",
+   "q": "Paper B (English) is:",
+   "options": [
+    "Counted in the merit list",
+    "Qualifying at 25%",
+    "Optional",
+    "Only for some states"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Qualifying at 25%."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Paper B tests English, also at 25 percent to qualify."
+    },
+    {
+     "spk": "B",
+     "say": "Comprehension is the first section."
+    }
+   ],
+   "data": {
+    "kicker": "English paper · Syllabus · AI voices",
+    "headline": "Paper B: English comprehension",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "Paper B tests English, also at 25 percent to qualify. Comprehension is the first section."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Three hundred marks,"
+    },
+    {
+     "spk": "B",
+     "say": "and 25 percent to qualify."
+    }
+   ],
+   "data": {
+    "kicker": "The paper",
+    "items": [
+     {
+      "value": 300,
+      "suffix": "",
+      "label": "marks",
+      "cue": "marks"
+     },
+     {
+      "value": 25,
+      "suffix": "%",
+      "label": "to qualify",
+      "cue": "25"
+     }
+    ]
+   },
+   "say": "Three hundred marks, and 25 percent to qualify."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Find the line in the passage that answers the question, then rephrase it."
+    },
+    {
+     "spk": "B",
+     "say": "Keep answers to two or three lines."
+    }
+   ],
+   "data": {
+    "kicker": "Comprehension",
+    "title": "Answer well",
+    "items": [
+     {
+      "text": "Find the sentence that answers",
+      "sub": "Then rephrase it",
+      "cue": "passage"
+     },
+     {
+      "text": "Keep it short",
+      "sub": "Two or three lines",
+      "cue": "two"
+     }
+    ]
+   },
+   "say": "Find the line in the passage that answers the question, then rephrase it. Keep answers to two or three lines."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Most candidates don't need special coaching for it."
+    },
+    {
+     "spk": "B",
+     "say": "Steady reading and two practice papers are enough."
+    }
+   ],
+   "data": {
+    "kicker": "Don't over-prepare",
+    "text": "Steady reading is enough for most candidates."
+   },
+   "say": "Most candidates don't need special coaching for it. Steady reading and two practice papers are enough."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What is Paper B?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Paper B (English) is:",
+    "options": [
+     "Counted in the merit list",
+     "Qualifying at 25%",
+     "Optional",
+     "Only for some states"
+    ]
+   },
+   "say": "Your turn. What is Paper B?"
+  }
+ ]
+}

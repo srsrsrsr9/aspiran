@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "lang-short-essay",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Keep the language-paper essay simple",
+ "gsPaper": [
+  "mains-lang"
+ ],
+ "syllabusNodes": [
+  "lang-4"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "lang-short-essay-q1",
+   "q": "In the language-paper essay, the safest approach is:",
+   "options": [
+    "Fancy words",
+    "Clear, simple, correct writing",
+    "Very long sentences",
+    "Bullet points only"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Clear and correct is what qualifies."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The language paper has a short essay."
+    },
+    {
+     "spk": "B",
+     "say": "Here, clear beats clever."
+    }
+   ],
+   "data": {
+    "kicker": "Language paper · Syllabus · AI voices",
+    "headline": "Paper A: the short essay",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "The language paper has a short essay. Here, clear beats clever."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Say what the topic means. Make two or three points, one paragraph each."
+    },
+    {
+     "spk": "B",
+     "say": "Close in a line."
+    }
+   ],
+   "data": {
+    "kicker": "A simple plan",
+    "title": "Three parts",
+    "items": [
+     {
+      "text": "Intro",
+      "sub": "What the topic means",
+      "cue": "the"
+     },
+     {
+      "text": "Two or three points",
+      "sub": "One paragraph each",
+      "cue": "points"
+     },
+     {
+      "text": "Close",
+      "sub": "One line",
+      "cue": "Close"
+     }
+    ]
+   },
+   "say": "Say what the topic means. Make two or three points, one paragraph each. Close in a line."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Use words you're sure of."
+    },
+    {
+     "spk": "B",
+     "say": "A small, correct vocabulary beats a big, shaky one."
+    }
+   ],
+   "data": {
+    "kicker": "Use words you're sure of",
+    "text": "A small, correct vocabulary beats a large, shaky one."
+   },
+   "say": "Use words you're sure of. A small, correct vocabulary beats a big, shaky one."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Save two minutes at the end"
+    },
+    {
+     "spk": "B",
+     "say": "to check spelling and the word count."
+    }
+   ],
+   "data": {
+    "kicker": "Check",
+    "title": "Last two minutes",
+    "items": [
+     {
+      "text": "Spelling and word count",
+      "sub": "",
+      "cue": "Spelling"
+     }
+    ]
+   },
+   "say": "Save two minutes at the end to check spelling and the word count."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What's the safest approach?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In the language-paper essay, the safest approach is:",
+    "options": [
+     "Fancy words",
+     "Clear, simple, correct writing",
+     "Very long sentences",
+     "Bullet points only"
+    ]
+   },
+   "say": "Your turn. What's the safest approach?"
+  }
+ ]
+}

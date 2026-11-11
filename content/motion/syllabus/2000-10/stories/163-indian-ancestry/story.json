@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "indian-ancestry",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Most Indians descend from two ancient populations",
+ "gsPaper": [
+  "optional-anthropology"
+ ],
+ "syllabusNodes": [
+  "anthro2-4"
+ ],
+ "sources": [
+  "B. S. Guha, Census of India 1931 racial classification",
+  "Reich et al., 'Reconstructing Indian Population History', Nature (2009)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "indian-ancestry-q1",
+   "q": "The 2009 study described most Indians as a mix of:",
+   "options": [
+    "Six races",
+    "ANI and ASI",
+    "Aryans and Dravidians only",
+    "Negritos and Mongoloids"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Ancestral North Indians and Ancestral South Indians."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Sensitive topic: racial typologies presented as history only."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Old textbooks split Indians into races."
+    },
+    {
+     "spk": "B",
+     "say": "Genetics now tells a story of mixing."
+    }
+   ],
+   "data": {
+    "kicker": "Anthropology II · Syllabus · AI voices",
+    "headline": "Demographic profile: ancestry",
+    "illustration": "illustrations/syllabus/people.svg"
+   },
+   "say": "Old textbooks split Indians into races. Genetics now tells a story of mixing."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "B. S. Guha's 1931 scheme listed six racial elements."
+    },
+    {
+     "spk": "B",
+     "say": "A 2009 genetic study found most Indians descend from two ancient groups, mixed over time."
+    }
+   ],
+   "data": {
+    "kicker": "Two views",
+    "points": [
+     {
+      "year": 1931,
+      "label": "Guha's six racial elements",
+      "cue": "1931"
+     },
+     {
+      "year": 2009,
+      "label": "Genetics: ANI and ASI",
+      "cue": "2009"
+     }
+    ]
+   },
+   "say": "B. S. Guha's 1931 scheme listed six racial elements. A 2009 genetic study found most Indians descend from two ancient groups, mixed over time."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Ancestral North Indians, related to West Eurasians."
+    },
+    {
+     "spk": "B",
+     "say": "And Ancestral South Indians, found only in India."
+    }
+   ],
+   "data": {
+    "kicker": "The 2009 finding",
+    "title": "Reich et al.",
+    "items": [
+     {
+      "text": "Ancestral North Indians",
+      "sub": "Related to West Eurasians",
+      "cue": "North"
+     },
+     {
+      "text": "Ancestral South Indians",
+      "sub": "Distinct to India",
+      "cue": "South"
+     }
+    ]
+   },
+   "say": "Ancestral North Indians, related to West Eurasians. And Ancestral South Indians, found only in India."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Cite Guha as a historical scheme."
+    },
+    {
+     "spk": "B",
+     "say": "Use genetics for the current understanding."
+    }
+   ],
+   "data": {
+    "kicker": "For your answer",
+    "text": "Use Guha as history; use genetics for the current view."
+   },
+   "say": "Cite Guha as a historical scheme. Use genetics for the current understanding."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "A mix of what?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The 2009 study described most Indians as a mix of:",
+    "options": [
+     "Six races",
+     "ANI and ASI",
+     "Aryans and Dravidians only",
+     "Negritos and Mongoloids"
+    ]
+   },
+   "say": "Your turn. A mix of what?"
+  }
+ ]
+}

@@ -1,0 +1,227 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "saarc-bimstec",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "When SAARC stalled, India looked to BIMSTEC",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-14"
+ ],
+ "sources": [
+  "SAARC Secretariat",
+  "BIMSTEC Secretariat",
+  "Agreement on SAFTA (2004)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "saarc-bimstec-q1",
+   "q": "How many members does BIMSTEC have?",
+   "options": [
+    "Five",
+    "Seven",
+    "Eight",
+    "Ten"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Seven."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "South Asia is one of the least integrated regions in the world."
+    },
+    {
+     "spk": "B",
+     "say": "India has tried two groupings."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "India and South Asia",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "South Asia is one of the least integrated regions in the world. India has tried two groupings."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "SAARC began in 1985. BIMSTEC, linking South and Southeast Asia, in 1997."
+    },
+    {
+     "spk": "B",
+     "say": "The South Asian Free Trade Area agreement was signed in 2004."
+    }
+   ],
+   "data": {
+    "kicker": "Groupings",
+    "points": [
+     {
+      "year": 1985,
+      "label": "SAARC",
+      "cue": "1985"
+     },
+     {
+      "year": 1997,
+      "label": "BIMSTEC",
+      "cue": "1997"
+     },
+     {
+      "year": 2004,
+      "label": "SAFTA signed",
+      "cue": "2004"
+     }
+    ]
+   },
+   "say": "SAARC began in 1985. BIMSTEC, linking South and Southeast Asia, in 1997. The South Asian Free Trade Area agreement was signed in 2004."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "SAARC has eight members, with Afghanistan joining in 2007."
+    },
+    {
+     "spk": "B",
+     "say": "BIMSTEC has seven, around the Bay of Bengal."
+    }
+   ],
+   "data": {
+    "kicker": "Members",
+    "items": [
+     {
+      "value": 8,
+      "suffix": "",
+      "label": "SAARC members",
+      "cue": "eight"
+     },
+     {
+      "value": 7,
+      "suffix": "",
+      "label": "BIMSTEC members",
+      "cue": "seven"
+     }
+    ]
+   },
+   "say": "SAARC has eight members, with Afghanistan joining in 2007. BIMSTEC has seven, around the Bay of Bengal."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Frame answers around Neighbourhood First:"
+    },
+    {
+     "spk": "B",
+     "say": "connectivity, trade, and trust."
+    }
+   ],
+   "data": {
+    "kicker": "For Mains",
+    "text": "Neighbourhood First: connectivity, trade and trust."
+   },
+   "say": "Frame answers around Neighbourhood First: connectivity, trade, and trust."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How many members?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "How many members does BIMSTEC have?",
+    "options": [
+     "Five",
+     "Seven",
+     "Eight",
+     "Ten"
+    ]
+   },
+   "say": "Your turn. How many members?"
+  }
+ ]
+}

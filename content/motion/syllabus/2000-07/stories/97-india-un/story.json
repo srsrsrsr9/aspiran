@@ -1,0 +1,218 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "india-un",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India has sat on the Security Council eight times",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-17"
+ ],
+ "sources": [
+  "Ministry of External Affairs",
+  "UN Peacekeeping (peacekeeping.un.org)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "india-un-q1",
+   "q": "The G4 seeking UNSC reform includes India, Brazil, Germany and:",
+   "options": [
+    "South Africa",
+    "Japan",
+    "Nigeria",
+    "Indonesia"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Japan."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Peacekeeping rank changes yearly; kept as 'among the largest'."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India is a founding member of the UN."
+    },
+    {
+     "spk": "B",
+     "say": "But not a permanent member of the Security Council."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "India and the UN system",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "India is a founding member of the UN. But not a permanent member of the Security Council."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India has been elected a non-permanent member 8 times."
+    },
+    {
+     "spk": "B",
+     "say": "Most recently for 2021 to 2022."
+    }
+   ],
+   "data": {
+    "kicker": "Non-permanent seats",
+    "items": [
+     {
+      "value": 8,
+      "suffix": "",
+      "label": "terms on the Security Council",
+      "cue": "8"
+     }
+    ]
+   },
+   "say": "India has been elected a non-permanent member 8 times. Most recently for 2021 to 2022."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India has long been among the largest contributors to UN peacekeeping,"
+    },
+    {
+     "spk": "B",
+     "say": "since the 1950s."
+    }
+   ],
+   "data": {
+    "kicker": "Peacekeeping",
+    "title": "A big contributor",
+    "items": [
+     {
+      "text": "Among the largest troop contributors",
+      "sub": "Since the 1950s",
+      "cue": "largest"
+     }
+    ]
+   },
+   "say": "India has long been among the largest contributors to UN peacekeeping, since the 1950s."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "With Brazil, Germany and Japan, India forms the G4,"
+    },
+    {
+     "spk": "B",
+     "say": "pushing for Security Council reform."
+    }
+   ],
+   "data": {
+    "kicker": "Reform push",
+    "title": "The G4",
+    "items": [
+     {
+      "text": "India · Brazil · Germany · Japan",
+      "sub": "Seek permanent seats",
+      "cue": "G4"
+     }
+    ]
+   },
+   "say": "With Brazil, Germany and Japan, India forms the G4, pushing for Security Council reform."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who's the fourth?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The G4 seeking UNSC reform includes India, Brazil, Germany and:",
+    "options": [
+     "South Africa",
+     "Japan",
+     "Nigeria",
+     "Indonesia"
+    ]
+   },
+   "say": "Your turn. Who's the fourth?"
+  }
+ ]
+}

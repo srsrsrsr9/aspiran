@@ -1,0 +1,232 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "chandrayaan-3",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India landed near the Moon's south pole first",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "sources": [
+  "ISRO (isro.gov.in), Chandrayaan-3 mission pages"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "chandrayaan-3-q1",
+   "q": "Chandrayaan-3's rover was called:",
+   "options": [
+    "Vikram",
+    "Pragyan",
+    "Aditya",
+    "Gaganyaan"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Pragyan was the rover; Vikram the lander."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "On the twenty-third of August 2023, India landed on the Moon."
+    },
+    {
+     "spk": "B",
+     "say": "Near its south pole, where no one had landed before."
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Chandrayaan-3: 23 August 2023",
+    "illustration": "illustrations/syllabus/rocket.svg"
+   },
+   "say": "On the twenty-third of August 2023, India landed on the Moon. Near its south pole, where no one had landed before."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Chandrayaan-1 in 2008 helped find signs of water on the Moon."
+    },
+    {
+     "spk": "B",
+     "say": "Chandrayaan-2's lander crashed in 2019. Chandrayaan-3 landed in 2023."
+    }
+   ],
+   "data": {
+    "kicker": "India's Moon missions",
+    "points": [
+     {
+      "year": 2008,
+      "label": "Chandrayaan-1",
+      "cue": "2008"
+     },
+     {
+      "year": 2019,
+      "label": "Chandrayaan-2",
+      "cue": "2019"
+     },
+     {
+      "year": 2023,
+      "label": "Chandrayaan-3 lands",
+      "cue": "2023"
+     }
+    ]
+   },
+   "say": "Chandrayaan-1 in 2008 helped find signs of water on the Moon. Chandrayaan-2's lander crashed in 2019. Chandrayaan-3 landed in 2023."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The lander was called Vikram."
+    },
+    {
+     "spk": "B",
+     "say": "And the rover, Pragyan."
+    }
+   ],
+   "data": {
+    "kicker": "The pieces",
+    "title": "Chandrayaan-3",
+    "items": [
+     {
+      "text": "Vikram",
+      "sub": "The lander",
+      "cue": "Vikram"
+     },
+     {
+      "text": "Pragyan",
+      "sub": "The rover",
+      "cue": "Pragyan"
+     }
+    ]
+   },
+   "say": "The lander was called Vikram. And the rover, Pragyan."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India became the fourth country to soft-land on the Moon,"
+    },
+    {
+     "spk": "B",
+     "say": "and the twenty-third of August is now National Space Day."
+    }
+   ],
+   "data": {
+    "kicker": "India's place",
+    "items": [
+     {
+      "value": 4,
+      "suffix": "th",
+      "label": "country to soft-land on the Moon",
+      "cue": "fourth"
+     }
+    ]
+   },
+   "say": "India became the fourth country to soft-land on the Moon, and the twenty-third of August is now National Space Day."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What was the rover called?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Chandrayaan-3's rover was called:",
+    "options": [
+     "Vikram",
+     "Pragyan",
+     "Aditya",
+     "Gaganyaan"
+    ]
+   },
+   "say": "Your turn. What was the rover called?"
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "guptas",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The Gupta age gave us Aryabhata and Kalidasa",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "hist1-10"
+ ],
+ "sources": [
+  "Allahabad Pillar Inscription (Harisena)",
+  "Upinder Singh, ch. 9"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "guptas-q1",
+   "q": "The Allahabad Pillar inscription praising Samudragupta was composed by:",
+   "options": [
+    "Kalidasa",
+    "Harisena",
+    "Banabhatta",
+    "Ravikirti"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Harisena."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Why is the Gupta age called classical?"
+    },
+    {
+     "spk": "B",
+     "say": "Because of its science, literature and art."
+    }
+   ],
+   "data": {
+    "kicker": "History I · Syllabus · AI voices",
+    "headline": "Guptas, Vakatakas and Vardhanas",
+    "illustration": "illustrations/syllabus/science.svg"
+   },
+   "say": "Why is the Gupta age called classical? Because of its science, literature and art."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Samudragupta's conquests are praised on the Allahabad pillar, written by Harisena."
+    },
+    {
+     "spk": "B",
+     "say": "Fa-Hien visited under Chandragupta the second."
+    }
+   ],
+   "data": {
+    "kicker": "Rulers",
+    "title": "Guptas",
+    "items": [
+     {
+      "text": "Samudragupta",
+      "sub": "Allahabad pillar, by Harisena",
+      "cue": "Samudragupta"
+     },
+     {
+      "text": "Chandragupta II",
+      "sub": "Fa-Hien visited",
+      "cue": "Chandragupta"
+     }
+    ]
+   },
+   "say": "Samudragupta's conquests are praised on the Allahabad pillar, written by Harisena. Fa-Hien visited under Chandragupta the second."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Aryabhata wrote the Aryabhatiya around 499 CE."
+    },
+    {
+     "spk": "B",
+     "say": "He argued the Earth rotates on its axis."
+    }
+   ],
+   "data": {
+    "kicker": "Science",
+    "points": [
+     {
+      "year": 499,
+      "label": "Aryabhatiya (CE)",
+      "cue": "499"
+     }
+    ]
+   },
+   "say": "Aryabhata wrote the Aryabhatiya around 499 CE. He argued the Earth rotates on its axis."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Later, Harsha ruled from Kannauj."
+    },
+    {
+     "spk": "B",
+     "say": "The Chinese pilgrim Hiuen Tsang wrote about his court."
+    }
+   ],
+   "data": {
+    "kicker": "After the Guptas",
+    "title": "Vardhanas",
+    "items": [
+     {
+      "text": "Harsha",
+      "sub": "Kannauj; Hiuen Tsang visited",
+      "cue": "Harsha"
+     }
+    ]
+   },
+   "say": "Later, Harsha ruled from Kannauj. The Chinese pilgrim Hiuen Tsang wrote about his court."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who composed it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Allahabad Pillar inscription praising Samudragupta was composed by:",
+    "options": [
+     "Kalidasa",
+     "Harisena",
+     "Banabhatta",
+     "Ravikirti"
+    ]
+   },
+   "say": "Your turn. Who composed it?"
+  }
+ ]
+}

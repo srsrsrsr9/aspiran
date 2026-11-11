@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "elite-theory",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Every organisation ends up run by a few",
+ "gsPaper": [
+  "optional-sociology"
+ ],
+ "syllabusNodes": [
+  "socio1-7"
+ ],
+ "sources": [
+  "Vilfredo Pareto, The Mind and Society",
+  "Robert Michels, Political Parties (1911)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "elite-theory-q1",
+   "q": "The 'iron law of oligarchy' was proposed by:",
+   "options": [
+    "Mosca",
+    "Pareto",
+    "Michels",
+    "Mills"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Robert Michels, 1911."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Even democratic parties end up run by a few people."
+    },
+    {
+     "spk": "B",
+     "say": "Robert Michels called it a law."
+    }
+   ],
+   "data": {
+    "kicker": "Sociology I · Syllabus · AI voices",
+    "headline": "Politics: elites and the iron law",
+    "illustration": "illustrations/syllabus/parliament.svg"
+   },
+   "say": "Even democratic parties end up run by a few people. Robert Michels called it a law."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Pareto described elites circulating, lions and foxes. Mosca wrote of the ruling class."
+    },
+    {
+     "spk": "B",
+     "say": "And Michels, of the iron law of oligarchy."
+    }
+   ],
+   "data": {
+    "kicker": "Elite theorists",
+    "title": "Three names",
+    "items": [
+     {
+      "text": "Pareto",
+      "sub": "Circulation of elites: lions and foxes",
+      "cue": "Pareto"
+     },
+     {
+      "text": "Mosca",
+      "sub": "The ruling class",
+      "cue": "Mosca"
+     },
+     {
+      "text": "Michels",
+      "sub": "Iron law of oligarchy",
+      "cue": "Michels"
+     }
+    ]
+   },
+   "say": "Pareto described elites circulating, lions and foxes. Mosca wrote of the ruling class. And Michels, of the iron law of oligarchy."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In 1911, Michels studied Germany's socialist party."
+    },
+    {
+     "spk": "B",
+     "say": "He found that organisation itself produces oligarchy."
+    }
+   ],
+   "data": {
+    "kicker": "The iron law",
+    "points": [
+     {
+      "year": 1911,
+      "label": "Michels, Political Parties",
+      "cue": "1911"
+     }
+    ]
+   },
+   "say": "In 1911, Michels studied Germany's socialist party. He found that organisation itself produces oligarchy."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Compare with C. Wright Mills's power elite,"
+    },
+    {
+     "spk": "B",
+     "say": "and with pluralists like Robert Dahl, who saw power spread out."
+    }
+   ],
+   "data": {
+    "kicker": "Against",
+    "text": "C. Wright Mills's 'power elite' and pluralists like Dahl."
+   },
+   "say": "Compare with C. Wright Mills's power elite, and with pluralists like Robert Dahl, who saw power spread out."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who proposed it?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The 'iron law of oligarchy' was proposed by:",
+    "options": [
+     "Mosca",
+     "Pareto",
+     "Michels",
+     "Mills"
+    ]
+   },
+   "say": "Your turn. Who proposed it?"
+  }
+ ]
+}

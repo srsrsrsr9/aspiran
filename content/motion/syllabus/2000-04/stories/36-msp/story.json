@@ -1,0 +1,217 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "msp",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "MSP is announced for 22 crops",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs3-3"
+ ],
+ "sources": [
+  "Commission for Agricultural Costs and Prices (cacp.dacnet.nic.in)",
+  "Union Budget 2018–19"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "msp-q1",
+   "q": "MSP is recommended by:",
+   "options": [
+    "NITI Aayog",
+    "CACP",
+    "FCI",
+    "NABARD"
+   ],
+   "answerIndex": 1,
+   "why": "Right. The Commission for Agricultural Costs and Prices."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Before sowing, the government announces a floor price for many crops."
+    },
+    {
+     "spk": "B",
+     "say": "That's the Minimum Support Price."
+    }
+   ],
+   "data": {
+    "kicker": "GS3 · Syllabus · AI voices",
+    "headline": "Minimum Support Price, explained",
+    "illustration": "illustrations/syllabus/farm.svg"
+   },
+   "say": "Before sowing, the government announces a floor price for many crops. That's the Minimum Support Price."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "MSP is announced for 22 mandated crops,"
+    },
+    {
+     "spk": "B",
+     "say": "and a fair price for sugarcane is set separately."
+    }
+   ],
+   "data": {
+    "kicker": "Coverage",
+    "items": [
+     {
+      "value": 22,
+      "suffix": "",
+      "label": "mandated crops",
+      "cue": "22"
+     }
+    ]
+   },
+   "say": "MSP is announced for 22 mandated crops, and a fair price for sugarcane is set separately."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Commission for Agricultural Costs and Prices recommends it."
+    },
+    {
+     "spk": "B",
+     "say": "The Cabinet Committee on Economic Affairs decides."
+    }
+   ],
+   "data": {
+    "kicker": "Who decides",
+    "title": "The process",
+    "items": [
+     {
+      "text": "CACP recommends",
+      "sub": "Commission for Agricultural Costs and Prices",
+      "cue": "recommends"
+     },
+     {
+      "text": "Cabinet decides",
+      "sub": "Cabinet Committee on Economic Affairs",
+      "cue": "Cabinet"
+     }
+    ]
+   },
+   "say": "The Commission for Agricultural Costs and Prices recommends it. The Cabinet Committee on Economic Affairs decides."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Since 2018–19, MSP has been set at least one and a half times paid-out costs plus family labour."
+    },
+    {
+     "spk": "B",
+     "say": "Farmer groups ask for a wider cost measure, C two."
+    }
+   ],
+   "data": {
+    "kicker": "Since 2018–19",
+    "text": "MSP set at least 1.5 times the cost of production (A2 + FL)."
+   },
+   "say": "Since 2018–19, MSP has been set at least one and a half times paid-out costs plus family labour. Farmer groups ask for a wider cost measure, C two."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Who recommends MSP?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "MSP is recommended by:",
+    "options": [
+     "NITI Aayog",
+     "CACP",
+     "FCI",
+     "NABARD"
+    ]
+   },
+   "say": "Your turn. Who recommends MSP?"
+  }
+ ]
+}

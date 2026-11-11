@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "rights-generations",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Rights came in three generations",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-5"
+ ],
+ "sources": [
+  "Universal Declaration of Human Rights (1948)",
+  "Karel Vasak (1977)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "rights-generations-q1",
+   "q": "The right to education is usually classed as a:",
+   "options": [
+    "First-generation right",
+    "Second-generation right",
+    "Third-generation right",
+    "Natural right only"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Economic, social and cultural: second generation."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_psi"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Rights weren't all claimed at once."
+    },
+    {
+     "spk": "B",
+     "say": "Scholars describe them in three generations."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Rights: three generations",
+    "illustration": "illustrations/syllabus/constitution.svg"
+   },
+   "say": "Rights weren't all claimed at once. Scholars describe them in three generations."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "First, civil and political rights: speech, vote, fair trial. Second, economic and social rights: work, health, education."
+    },
+    {
+     "spk": "B",
+     "say": "Third, collective rights, like development and a clean environment."
+    }
+   ],
+   "data": {
+    "kicker": "The generations",
+    "title": "Karel Vasak, 1977",
+    "items": [
+     {
+      "text": "First",
+      "sub": "Civil and political: speech, vote",
+      "cue": "First"
+     },
+     {
+      "text": "Second",
+      "sub": "Economic and social: work, education",
+      "cue": "Second"
+     },
+     {
+      "text": "Third",
+      "sub": "Collective: development, environment",
+      "cue": "Third"
+     }
+    ]
+   },
+   "say": "First, civil and political rights: speech, vote, fair trial. Second, economic and social rights: work, health, education. Third, collective rights, like development and a clean environment."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Universal Declaration of Human Rights was adopted on the tenth of December, 1948."
+    },
+    {
+     "spk": "B",
+     "say": "That's why Human Rights Day falls on that date."
+    }
+   ],
+   "data": {
+    "kicker": "A landmark",
+    "points": [
+     {
+      "year": 1948,
+      "label": "UDHR, 10 December",
+      "cue": "1948"
+     }
+    ]
+   },
+   "say": "The Universal Declaration of Human Rights was adopted on the tenth of December, 1948. That's why Human Rights Day falls on that date."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's Fundamental Rights are mostly first-generation."
+    },
+    {
+     "spk": "B",
+     "say": "The Directive Principles cover much of the second."
+    }
+   ],
+   "data": {
+    "kicker": "In India",
+    "text": "Fundamental Rights are mostly first-generation; Directive Principles, mostly second."
+   },
+   "say": "India's Fundamental Rights are mostly first-generation. The Directive Principles cover much of the second."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which generation?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The right to education is usually classed as a:",
+    "options": [
+     "First-generation right",
+     "Second-generation right",
+     "Third-generation right",
+     "Natural right only"
+    ]
+   },
+   "say": "Your turn. Which generation?"
+  }
+ ]
+}

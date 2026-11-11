@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "percent-change",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Up 20, down 20 is not back to start",
+ "gsPaper": [
+  "prelims-csat"
+ ],
+ "syllabusNodes": [
+  "csat-5"
+ ],
+ "sources": [
+  "Standard quantitative aptitude texts"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "percent-change-q1",
+   "q": "A salary is raised 10% and then cut 10%. The net change is:",
+   "options": [
+    "No change",
+    "1% fall",
+    "1% rise",
+    "2% fall"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 10 − 10 − (10×10/100) = −1%."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "A price rises 20 percent, then falls 20 percent."
+    },
+    {
+     "spk": "B",
+     "say": "Is it back where it started? No."
+    }
+   ],
+   "data": {
+    "kicker": "CSAT · Syllabus · AI voices",
+    "headline": "Percentages: the base changes",
+    "illustration": "illustrations/syllabus/chart.svg"
+   },
+   "say": "A price rises 20 percent, then falls 20 percent. Is it back where it started? No."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Start at 100. Up 20 percent makes 120."
+    },
+    {
+     "spk": "B",
+     "say": "Down 20 percent of 120 is 24. That leaves 96."
+    }
+   ],
+   "data": {
+    "kicker": "Step by step",
+    "items": [
+     {
+      "value": 120,
+      "suffix": "",
+      "label": "after +20% on 100",
+      "cue": "120"
+     },
+     {
+      "value": 96,
+      "suffix": "",
+      "label": "after −20% on 120",
+      "cue": "96"
+     }
+    ]
+   },
+   "say": "Start at 100. Up 20 percent makes 120. Down 20 percent of 120 is 24. That leaves 96."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Add the two changes, plus their product over 100."
+    },
+    {
+     "spk": "B",
+     "say": "20 minus 20, minus 4. A net fall of 4 percent."
+    }
+   ],
+   "data": {
+    "kicker": "The shortcut",
+    "text": "Net change = a + b + (a × b ÷ 100)"
+   },
+   "say": "Add the two changes, plus their product over 100. 20 minus 20, minus 4. A net fall of 4 percent."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Percent change and percentage points are different."
+    },
+    {
+     "spk": "B",
+     "say": "A rate going from 4 to 5 percent is one point, but a 25 percent rise."
+    }
+   ],
+   "data": {
+    "kicker": "In data tables",
+    "title": "Read the base",
+    "items": [
+     {
+      "text": "Percent change",
+      "sub": "Grows or falls from the old value",
+      "cue": "Percent"
+     },
+     {
+      "text": "Percentage points",
+      "sub": "A plain difference of two rates",
+      "cue": "points"
+     }
+    ]
+   },
+   "say": "Percent change and percentage points are different. A rate going from 4 to 5 percent is one point, but a 25 percent rise."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What's the net change?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A salary is raised 10% and then cut 10%. The net change is:",
+    "options": [
+     "No change",
+     "1% fall",
+     "1% rise",
+     "2% fall"
+    ]
+   },
+   "say": "Your turn. What's the net change?"
+  }
+ ]
+}

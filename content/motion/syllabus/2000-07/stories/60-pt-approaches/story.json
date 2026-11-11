@@ -1,0 +1,215 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "pt-approaches",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Political theory asks what is, and what ought to be",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir1-1"
+ ],
+ "sources": [
+  "O. P. Gauba, An Introduction to Political Theory",
+  "David Easton, The Political System (1953)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "pt-approaches-q1",
+   "q": "Who defined politics as 'the authoritative allocation of values'?",
+   "options": [
+    "Harold Lasswell",
+    "David Easton",
+    "Robert Dahl",
+    "Max Weber"
+   ],
+   "answerIndex": 1,
+   "why": "Right. David Easton."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Political theory asks two kinds of questions."
+    },
+    {
+     "spk": "B",
+     "say": "What is the case, and what ought to be."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR I · Syllabus · AI voices",
+    "headline": "Political theory: normative and empirical",
+    "illustration": "illustrations/syllabus/lamp.svg"
+   },
+   "say": "Political theory asks two kinds of questions. What is the case, and what ought to be."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Normative theory asks what ought to be: what is just, or right."
+    },
+    {
+     "spk": "B",
+     "say": "Empirical theory studies what is, through observation and evidence."
+    }
+   ],
+   "data": {
+    "kicker": "Two approaches",
+    "title": "The divide",
+    "items": [
+     {
+      "text": "Normative",
+      "sub": "What ought to be: justice, rights, the good life",
+      "cue": "Normative"
+     },
+     {
+      "text": "Empirical",
+      "sub": "What is: observe, measure, explain",
+      "cue": "Empirical"
+     }
+    ]
+   },
+   "say": "Normative theory asks what ought to be: what is just, or right. Empirical theory studies what is, through observation and evidence."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "In the 1950s, behaviouralists like David Easton pushed for a science of politics."
+    },
+    {
+     "spk": "B",
+     "say": "Easton defined politics as the authoritative allocation of values."
+    }
+   ],
+   "data": {
+    "kicker": "The behavioural turn",
+    "points": [
+     {
+      "year": 1953,
+      "label": "Easton's The Political System",
+      "cue": "the"
+     }
+    ]
+   },
+   "say": "In the 1950s, behaviouralists like David Easton pushed for a science of politics. Easton defined politics as the authoritative allocation of values."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "By 1969, Easton himself called for post-behaviouralism."
+    },
+    {
+     "spk": "B",
+     "say": "Research had to be relevant to real problems."
+    }
+   ],
+   "data": {
+    "kicker": "Post-behaviouralism",
+    "text": "Relevance and action: facts alone are not enough."
+   },
+   "say": "By 1969, Easton himself called for post-behaviouralism. Research had to be relevant to real problems."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Whose definition is this?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Who defined politics as 'the authoritative allocation of values'?",
+    "options": [
+     "Harold Lasswell",
+     "David Easton",
+     "Robert Dahl",
+     "Max Weber"
+    ]
+   },
+   "say": "Your turn. Whose definition is this?"
+  }
+ ]
+}

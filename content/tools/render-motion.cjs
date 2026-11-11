@@ -26,7 +26,7 @@ async function main() {
   await new Promise(r => server.listen(0, r));
   const port = server.address().port, rel = path.relative(absRoot, path.join(absRoot, storyRel)).split(path.sep).join("/");
   const url = `http://127.0.0.1:${port}/motion/engine/player.html?render=1&root=/&story=/${rel}${cut === "app" ? "&captions=0" : ""}`;
-  const browser = await chromium.launch(), page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
+  const browser = await chromium.launch(), page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: cut === "app" ? 2 / 3 : 1 }); // app cut captured at 720x1280 directly
   page.on("pageerror", e => console.error("page error:", e.message));
   await page.goto(url); await page.waitForFunction(() => window.MOTION && window.MOTION.ready, null, { timeout: 30000 });
   const { total, fps, audio, cues, tone } = await page.evaluate(() => ({ total: MOTION.total, fps: MOTION.fps, audio: MOTION.audio, cues: MOTION.cues, tone: MOTION.tone }));
@@ -42,8 +42,7 @@ async function main() {
   const frames = Math.ceil(total * fps), video = path.join(tmp, "video.mp4"), posterAt = Math.min(2.2, total / 2);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   const ff = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(fps), "-c:v", "mjpeg", "-i", "-",
-    ...(cut === "app" ? ["-vf", "scale=720:1280:flags=lanczos"] : []),
-    "-c:v", "libx264", "-preset", "medium", "-crf", cut === "app" ? "25" : "20", "-pix_fmt", "yuv420p", "-r", String(fps), video], { stdio: ["pipe", "inherit", "inherit"] });
+        "-c:v", "libx264", "-preset", "medium", "-crf", cut === "app" ? "25" : "20", "-pix_fmt", "yuv420p", "-r", String(fps), video], { stdio: ["pipe", "inherit", "inherit"] });
   const t0 = Date.now();
   for (let f = 0; f < frames; f++) {
     await page.evaluate(t => MOTION.seek(t), f / fps);

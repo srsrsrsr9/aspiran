@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "ca-to-static",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Every news story hides a static topic",
+ "gsPaper": [
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "pre-1"
+ ],
+ "sources": [
+  "UPSC Civil Services Examination notice: Prelims GS Paper I syllabus",
+  "Press Information Bureau (pib.gov.in)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "ca-to-static-q1",
+   "q": "A wetland is in the news as a new Ramsar site. Which static fact is most worth checking?",
+   "options": [
+    "The town's population",
+    "The convention's year and place",
+    "The reporter's name",
+    "The day of the announcement"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Prelims usually asks about the convention: Ramsar, Iran, 1971."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece; the only fact is the Ramsar Convention (1971, Ramsar, Iran)."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_beta"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Current affairs feels endless. How do you prepare for it?"
+    },
+    {
+     "spk": "B",
+     "say": "By treating every news story as a doorway to a topic you already study."
+    }
+   ],
+   "data": {
+    "kicker": "Prelims · Syllabus · AI voices",
+    "headline": "Current affairs: read the news, answer from the book",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "Current affairs feels endless. How do you prepare for it? By treating every news story as a doorway to a topic you already study."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "For each story, ask what happened, in one line."
+    },
+    {
+     "spk": "B",
+     "say": "Then ask which syllabus topic it belongs to, and what static fact sits behind it."
+    }
+   ],
+   "data": {
+    "kicker": "The method",
+    "title": "Ask three things",
+    "items": [
+     {
+      "text": "What happened?",
+      "sub": "One line, no more",
+      "cue": "happened"
+     },
+     {
+      "text": "Which syllabus topic?",
+      "sub": "Polity, economy, environment…",
+      "cue": "syllabus"
+     },
+     {
+      "text": "What is static behind it?",
+      "sub": "The Act, the body, the place",
+      "cue": "static"
+     }
+    ]
+   },
+   "say": "For each story, ask what happened, in one line. Then ask which syllabus topic it belongs to, and what static fact sits behind it."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Say a wetland becomes a Ramsar site."
+    },
+    {
+     "spk": "B",
+     "say": "The question may ask about the convention itself, signed in Iran in 1971."
+    }
+   ],
+   "data": {
+    "kicker": "An example",
+    "text": "News: a new Ramsar site. Static: the Ramsar Convention, 1971."
+   },
+   "say": "Say a wetland becomes a Ramsar site. The question may ask about the convention itself, signed in Iran in 1971."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Read the press release, not only the commentary."
+    },
+    {
+     "spk": "B",
+     "say": "And keep the Budget and the Economic Survey close."
+    }
+   ],
+   "data": {
+    "kicker": "Where to read",
+    "title": "Primary sources first",
+    "items": [
+     {
+      "text": "PIB",
+      "sub": "What the government actually said",
+      "cue": "not"
+     },
+     {
+      "text": "Official reports",
+      "sub": "Budget, Economic Survey, India Year Book",
+      "cue": "economic"
+     }
+    ]
+   },
+   "say": "Read the press release, not only the commentary. And keep the Budget and the Economic Survey close."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which static fact is most worth checking?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A wetland is in the news as a new Ramsar site. Which static fact is most worth checking?",
+    "options": [
+     "The town's population",
+     "The convention's year and place",
+     "The reporter's name",
+     "The day of the announcement"
+    ]
+   },
+   "say": "Your turn. Which static fact is most worth checking?"
+  }
+ ]
+}

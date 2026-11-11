@@ -1,0 +1,140 @@
+from dsl import *
+P = ["mains-gs2"]
+PP = ["prelims-gs", "mains-gs2"]
+
+E(23, "article-368", "gs2-1", PP, "Not every amendment needs the states, but some do", "Article 368: three ways to amend", "constitution",
+  ["Constitution of India, Article 368", "M. Laxmikanth, Indian Polity, ch. 'Amendment of the Constitution'"],
+  "A: Changing the Constitution isn't one procedure. | B: It's three, and the hardest one needs the states to agree.",
+  [CH("Three ways", "From easiest to hardest", [("Simple majority", "Outside Article 368: new states, Rajya Sabha rules on quorum…", "Simple"), ("Special majority", "Two-thirds present and voting, and a majority of total membership", "Special"), ("Special majority + half the states", "For federal provisions", "states")],
+      "A: Some provisions change by a simple majority, and don't count as amendments under Article 368. | B: Most need a special majority in each House. Federal provisions also need half the state legislatures."),
+   CH("Needs the states", "Examples", [("Election of the President", "Articles 54 and 55", "President"), ("The lists in the Seventh Schedule", "And representation of states in Parliament", "Seventh")],
+      "A: The election of the President needs the states. | B: So do the Seventh Schedule's lists, and the states' representation in Parliament."),
+   QT("No joint sitting", "If the Houses disagree on an amendment bill, it fails. There's no joint sitting.",
+      "A: One more trap. | B: For an amendment bill, there is no joint sitting if the Houses disagree.")],
+  QZ("A constitutional amendment bill on which the two Houses disagree:", ["Goes to a joint sitting", "Fails", "Goes to the Supreme Court", "Passes by Lok Sabha alone"], 1,
+     "Right. Article 368 has no joint-sitting provision, so the bill fails.", "A: Your turn. | B: What happens if the Houses disagree?"))
+
+E(24, "finance-commission", "gs2-2", PP + ["mains-gs3"], "Every five years, a commission splits the tax pool", "The Finance Commission: Article 280", "budget",
+  ["Constitution of India, Article 280", "Report of the Fifteenth Finance Commission (2021–26)"],
+  "A: The Centre collects most taxes. The states do most of the spending. | B: So who decides how the money is shared?",
+  [QT("Article 280", "The President sets up a Finance Commission every five years, or earlier.",
+      "A: Under Article 280, the President sets up a Finance Commission every five years. | B: It recommends how central taxes are shared with the states."),
+   ST("The Fifteenth Commission", [(41, "%", "of the divisible pool to states, 2021–26", "41")],
+      "A: The Fifteenth Commission, chaired by N. K. Singh, | B: gave the states 41 percent of the divisible pool."),
+   CH("Sharing among states", "Main criteria", [("Income distance", "Poorer states get more", "Income"), ("Population and area", "Need", "Population"), ("Forest, and demographic performance", "Rewarding good outcomes", "Forest")],
+      "A: Poorer states get more, through income distance. | B: Population, area, forest cover, and demographic performance also count.")],
+  QZ("The Finance Commission is constituted under:", ["Article 263", "Article 280", "Article 324", "Article 356"], 1,
+     "Right. Article 280.", "A: Your turn. | B: Which Article sets it up?"),
+  note="Kept to the Fifteenth Commission; update when the Sixteenth Commission's devolution share is confirmed.")
+
+E(25, "question-zero-hour", "gs2-3", PP, "Zero Hour isn't in the rule book", "Question Hour and Zero Hour", "parliament",
+  ["Rules of Procedure and Conduct of Business in Lok Sabha", "M. Laxmikanth, Indian Polity, ch. 'Parliament'"],
+  "A: The first hour of a sitting is Question Hour. | B: What comes right after it isn't in any rule.",
+  [CH("Kinds of questions", "Question Hour", [("Starred", "Answered orally; supplementaries allowed", "Starred"), ("Unstarred", "Answered in writing", "Unstarred"), ("Short notice", "On urgent matters, at less than ten days' notice", "Short")],
+      "A: Starred questions get oral answers, and members can ask follow-ups. | B: Unstarred ones are answered in writing. Short notice questions deal with urgent matters."),
+   TL("Zero Hour", [(1962, "Practice begins", "1962")],
+      "A: Zero Hour began as a practice in the early 1960s. | B: Members raise urgent issues without prior notice. It's an Indian innovation."),
+   QT("For Mains", "Both are tools of executive accountability.",
+      "A: In G-S-two, use them as tools of accountability. | B: And note how often disruptions cut them short.")],
+  QZ("Which question allows supplementary questions?", ["Unstarred", "Starred", "Written", "Private member's"], 1,
+     "Right. Starred questions are answered orally, so supplementaries can follow.", "A: Your turn. | B: Which one allows supplementaries?"))
+
+E(26, "collegium", "gs2-4", PP, "Judges choose judges in India", "The collegium: three cases and one Act", "court",
+  ["S. P. Gupta v. Union of India (1981)", "SC Advocates-on-Record Assn. v. Union of India (1993, 2015)", "In re Special Reference 1 of 1998"],
+  "A: In most countries, the government appoints judges. | B: In India, senior judges choose them. How did that happen?",
+  [TL("The Judges cases", [(1981, "First: the executive has primacy", "1981"), (1993, "Second: the collegium is born", "1993"), (1998, "Third: CJI plus four", "1998")],
+      "A: In 1981, the First Judges case gave the government the upper hand. | B: The Second, in 1993, created the collegium. The Third, in 1998, set it at the Chief Justice and four senior-most judges."),
+   TL("The NJAC", [(2014, "99th Amendment creates NJAC", "2014"), (2015, "Struck down", "2015")],
+      "A: In 2014, Parliament replaced it with a National Judicial Appointments Commission. | B: In 2015, the Supreme Court struck that down, citing judicial independence."),
+   CH("The debate", "For Mains", [("For", "Independence from the executive", "independence"), ("Against", "Opacity; judges choosing judges", "Opacity")],
+      "A: Supporters say it protects independence. | B: Critics say it is opaque. Your answer should weigh both.")],
+  QZ("The NJAC was struck down in:", ["1998", "2010", "2015", "2019"], 2,
+     "Right. In October 2015, in the Fourth Judges case.", "A: Your turn. | B: When was the N-J-A-C struck down?"))
+
+E(27, "rpa-1950-1951", "gs2-5", PP, "Two election laws, one year apart", "RPA 1950 and RPA 1951", "ballot",
+  ["Representation of the People Act, 1950", "Representation of the People Act, 1951", "Lily Thomas v. Union of India (2013)"],
+  "A: Two laws run India's elections. | B: Passed a year apart, they do different jobs.",
+  [CH("Who does what", "The two Acts", [("RPA 1950", "Seats, constituencies and electoral rolls", "1950"), ("RPA 1951", "Conduct of elections, disqualification, corrupt practices", "1951")],
+      "A: The 1950 Act deals with seats and electoral rolls: who votes, and where. | B: The 1951 Act covers how elections are run, who can stand, and corrupt practices."),
+   ST("Disqualification", [(2, " years", "prison term that disqualifies", "2")],
+      "A: Under Section 8 of the 1951 Act, a conviction with 2 years or more in prison disqualifies a lawmaker. | B: For the jail term, and six years after release."),
+   TL("No more grace period", [(2013, "Lily Thomas case", "2013")],
+      "A: Sitting members once had three months to appeal before losing their seat. | B: In Lily Thomas, 2013, the Supreme Court struck that protection down.")],
+  QZ("Preparation of electoral rolls is governed by:", ["RPA 1950", "RPA 1951", "The Delimitation Act", "Article 356"], 0,
+     "Right. Electoral rolls fall under the 1950 Act.", "A: Your turn. | B: Which Act covers electoral rolls?"))
+
+E(28, "constitutional-statutory", "gs2-6", PP, "Where a body comes from decides how safe it is", "Constitutional, statutory, regulatory", "constitution",
+  ["Constitution of India, Articles 148, 280, 315, 324", "Protection of Human Rights Act, 1993", "SEBI Act, 1992"],
+  "A: The CAG and the NHRC both watch the government. | B: But one is in the Constitution, and one is not.",
+  [CH("Constitutional bodies", "Named in the Constitution", [("Election Commission · Article 324", "UPSC · Article 315", "Election"), ("CAG · Article 148", "Finance Commission · Article 280", "Article")],
+      "A: Constitutional bodies are named in the Constitution itself. | B: The Election Commission, the U-P-S-C, the C-A-G and the Finance Commission."),
+   CH("Statutory and regulatory", "Made by Acts of Parliament", [("NHRC", "Protection of Human Rights Act, 1993", "NHRC"), ("SEBI", "SEBI Act, 1992", "SEBI")],
+      "A: Statutory bodies come from ordinary laws, like the N-H-R-C, from 1993. | B: Regulators like SEBI, from 1992, are statutory too."),
+   QT("Why it matters", "A law can be changed by a simple majority. The Constitution can't.",
+      "A: A statutory body can be reshaped by a simple law. | B: A constitutional one needs an amendment. That's real protection.")],
+  QZ("Which of these is a statutory body?", ["Election Commission", "Finance Commission", "NHRC", "UPSC"], 2,
+     "Right. The NHRC was set up under the Protection of Human Rights Act, 1993.", "A: Your turn. | B: Which one is statutory?"))
+
+E(29, "rti-act", "gs2-7", PP, "Thirty days to answer, 48 hours if a life is at stake", "The RTI Act, 2005", "pen",
+  ["Right to Information Act, 2005"],
+  "A: Since 2005, any citizen can ask a public office for information. | B: And the law sets a clock on the answer.",
+  [ST("Time limits", [(30, " days", "for a normal request", "30"), (48, " hours", "if life or liberty is at stake", "48")],
+      "A: The office must reply within 30 days. | B: Or within 48 hours, if a person's life or liberty is involved."),
+   CH("Key sections", "Learn three", [("Section 4", "Publish information on your own", "4"), ("Section 8", "Exemptions, like security", "8"), ("Section 24", "Some security agencies excluded", "24")],
+      "A: Section 4 asks offices to publish information without being asked. | B: Section 8 lists exemptions, and Section 24 leaves out some security agencies."),
+   QT("For Mains", "Transparency works best when disclosure is the default.",
+      "A: Use it in G-S-two on transparency and accountability. | B: The best R-T-I is the one nobody had to file.")],
+  QZ("Under the RTI Act, information about a person's life or liberty must be given within:", ["24 hours", "48 hours", "7 days", "30 days"], 1,
+     "Right. 48 hours.", "A: Your turn. | B: What's the time limit for life or liberty?"))
+
+E(30, "nfsa", "gs2-8", PP + ["mains-gs3"], "Food became a legal right in 2013", "The National Food Security Act", "farm",
+  ["National Food Security Act, 2013", "Department of Food and Public Distribution"],
+  "A: Cheap grain through ration shops is old. | B: Making it a legal entitlement came in 2013.",
+  [ST("Who's covered", [(75, "%", "of the rural population", "75"), (50, "%", "of the urban population", "50")],
+      "A: The Act covers up to 75 percent of the rural population | B: and up to 50 percent of the urban population."),
+   ST("How much", [(5, " kg", "grain per person per month", "5"), (35, " kg", "per Antyodaya household", "35")],
+      "A: Priority households get 5 kilograms of grain per person, every month. | B: The poorest, Antyodaya households, get 35 kilograms per household."),
+   CH("Also in the Act", "Beyond grain", [("Mothers", "Maternity benefit of at least ₹6,000", "Mothers"), ("Children", "Meals through anganwadis and schools", "Children")],
+      "A: Pregnant women and mothers get a maternity benefit of at least six thousand rupees. | B: And children get meals through anganwadis and schools.")],
+  QZ("Under the NFSA, an Antyodaya household gets how much grain a month?", ["5 kg", "20 kg", "35 kg", "50 kg"], 2,
+     "Right. 35 kg per household.", "A: Your turn. | B: How much for an Antyodaya household?"))
+
+E(31, "panchsheel", "gs2-9", PP, "Five principles that didn't stop a war", "Panchsheel, 1954", "handshake",
+  ["Agreement between India and China on Trade and Intercourse between Tibet Region and India, 1954", "Ministry of External Affairs"],
+  "A: In 1954, India and China signed five principles of peaceful coexistence. | B: Eight years later, they fought a war.",
+  [TL("The arc", [(1954, "Panchsheel agreement", "1954"), (1962, "India–China war", "1962")],
+      "A: Panchsheel was part of a 1954 agreement on trade with the Tibet region. | B: In 1962, the two countries went to war."),
+   CH("The five principles", "Panchsheel", [("Respect for territory and sovereignty", "Non-aggression", "Respect"), ("Non-interference", "Equality and mutual benefit", "interference"), ("Peaceful coexistence", "", "coexistence")],
+      "A: Respect for each other's territory, non-aggression, and non-interference. | B: Equality and mutual benefit. And peaceful coexistence."),
+   QT("For Mains", "Principles need power and trust behind them.",
+      "A: In G-S-two, use it to discuss idealism in foreign policy. | B: Principles help, but they need power and trust behind them.")],
+  QZ("Panchsheel was first set out in an agreement between India and:", ["Pakistan", "Nepal", "China", "Sri Lanka"], 2,
+     "Right. The 1954 India–China agreement on Tibet.", "A: Your turn. | B: With which country?"))
+
+E(32, "brics", "gs2-10", PP, "BRICS began with four letters", "BRICS: from four to many", "globe",
+  ["BRICS official portal", "New Development Bank (ndb.int)"],
+  "A: BRICS started as BRIC, an economist's label. | B: Then it became a real grouping.",
+  [TL("How it grew", [(2009, "First BRIC summit", "2009"), (2010, "South Africa invited", "2010"), (2024, "Four new members", "2024")],
+      "A: The first BRIC summit was in Russia in 2009. | B: South Africa was invited in 2010. In 2024, Egypt, Ethiopia, Iran and the U-A-E joined."),
+   QT("Its bank", "The New Development Bank, headquartered in Shanghai.",
+      "A: BRICS set up the New Development Bank, agreed in 2014. | B: It's headquartered in Shanghai."),
+   CH("India's view", "For Mains", [("A voice for the Global South", "Reform of global institutions", "voice"), ("A careful balance", "Not an anti-West bloc", "balance")],
+      "A: India uses BRICS to push for reform of global institutions. | B: While making sure it doesn't become an anti-West bloc.")],
+  QZ("The New Development Bank is headquartered in:", ["New Delhi", "Moscow", "Shanghai", "Johannesburg"], 2,
+     "Right. Shanghai.", "A: Your turn. | B: Where is the N-D-B based?"),
+  note="Membership changes often: check the current list (Indonesia joined in 2025) before approval.")
+
+E(33, "diaspora-oci", "gs2-11", PP, "OCI is not dual citizenship", "The diaspora: OCI and 9 January", "people",
+  ["Citizenship Act, 1955, Section 7A to 7D", "Ministry of External Affairs, Pravasi Bharatiya Divas"],
+  "A: People of Indian origin live in almost every country. | B: How does India keep them close?",
+  [QT("Overseas Citizen of India", "A lifelong visa and many rights, but no vote and no public office.",
+      "A: An O-C-I card gives a lifelong visa and many rights. | B: But it isn't citizenship. No vote, and no constitutional office."),
+   TL("Pravasi Bharatiya Divas", [(1915, "Gandhi returns from South Africa, 9 Jan", "1915"), (2003, "First Pravasi Bharatiya Divas", "2003")],
+      "A: Pravasi Bharatiya Divas falls on the ninth of January. | B: The day Gandhi came back from South Africa in 1915. It was first held in 2003."),
+   CH("Why it matters", "For Mains", [("Remittances", "India receives the most in the world", "Remittances"), ("Soft power", "Culture, skills and networks", "Soft")],
+      "A: India receives more remittances than any other country. | B: And the diaspora carries India's soft power.")],
+  QZ("Pravasi Bharatiya Divas is held on 9 January because on that day:", ["India became a republic", "Gandhi came back to India", "The OCI scheme began", "A diaspora ministry opened"], 1,
+     "Right. Gandhi returned to India on 9 January 1915.", "A: Your turn. | B: Why the ninth of January?"),
+  note="Remittance ranking from the World Bank; check the latest year before approval.")
+
+out()

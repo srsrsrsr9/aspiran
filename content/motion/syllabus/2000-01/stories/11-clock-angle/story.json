@@ -1,0 +1,216 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "clock-angle",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "One formula solves clock angles",
+ "gsPaper": [
+  "prelims-csat"
+ ],
+ "syllabusNodes": [
+  "csat-4"
+ ],
+ "sources": [
+  "Standard quantitative aptitude texts"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "clock-angle-q1",
+   "q": "What is the angle between the hands at 9:00?",
+   "options": [
+    "45°",
+    "90°",
+    "180°",
+    "270°"
+   ],
+   "answerIndex": 1,
+   "why": "Right. |30×9 − 0| = 270°, and the smaller angle is 360 − 270 = 90°."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. If the formula gives more than 180°, take 360 minus it."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "What's the angle between the hands at 3:15?"
+    },
+    {
+     "spk": "B",
+     "say": "Not zero. Here's why."
+    }
+   ],
+   "data": {
+    "kicker": "CSAT · Syllabus · AI voices",
+    "headline": "Clock angles: 30H minus 5.5M",
+    "illustration": "illustrations/syllabus/compass.svg"
+   },
+   "say": "What's the angle between the hands at 3:15? Not zero. Here's why."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The minute hand moves 6 degrees a minute."
+    },
+    {
+     "spk": "B",
+     "say": "The hour hand moves half a degree a minute, so it creeps forward too."
+    }
+   ],
+   "data": {
+    "kicker": "The speeds",
+    "title": "Per minute",
+    "items": [
+     {
+      "text": "Minute hand: 6°",
+      "sub": "360° in 60 minutes",
+      "cue": "Minute"
+     },
+     {
+      "text": "Hour hand: 0.5°",
+      "sub": "30° in 60 minutes",
+      "cue": "Hour"
+     }
+    ]
+   },
+   "say": "The minute hand moves 6 degrees a minute. The hour hand moves half a degree a minute, so it creeps forward too."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Angle equals 30 times the hour, minus 5.5 times the minutes."
+    },
+    {
+     "spk": "B",
+     "say": "Take the size, ignore the sign."
+    }
+   ],
+   "data": {
+    "kicker": "The formula",
+    "text": "Angle = | 30 × H − 5.5 × M |"
+   },
+   "say": "Angle equals 30 times the hour, minus 5.5 times the minutes. Take the size, ignore the sign."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "30 times 3 is 90. 5.5 times 15 is 82.5."
+    },
+    {
+     "spk": "B",
+     "say": "So the angle is 7.5 degrees."
+    }
+   ],
+   "data": {
+    "kicker": "At 3:15",
+    "items": [
+     {
+      "value": 7.5,
+      "suffix": "°",
+      "label": "not zero",
+      "cue": "7",
+      "decimals": 1
+     }
+    ]
+   },
+   "say": "30 times 3 is 90. 5.5 times 15 is 82.5. So the angle is 7.5 degrees."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What's the angle at nine o'clock?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "What is the angle between the hands at 9:00?",
+    "options": [
+     "45°",
+     "90°",
+     "180°",
+     "270°"
+    ]
+   },
+   "say": "Your turn. What's the angle at nine o'clock?"
+  }
+ ]
+}

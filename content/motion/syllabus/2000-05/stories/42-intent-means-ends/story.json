@@ -1,0 +1,215 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "intent-means-ends",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Law is the floor, ethics is the ceiling",
+ "gsPaper": [
+  "mains-gs4"
+ ],
+ "syllabusNodes": [
+  "gs4-1"
+ ],
+ "sources": [
+  "UPSC CSE syllabus, GS Paper IV",
+  "Lexicon / standard GS4 texts on ethics and human interface"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "intent-means-ends-q1",
+   "q": "Which statement best describes the link between law and ethics?",
+   "options": [
+    "They are identical",
+    "Law is ethics' minimum",
+    "Ethics is always written down",
+    "Law always overrides ethics"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Law is often called the minimum of ethics."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Is something right just because it's legal?"
+    },
+    {
+     "spk": "B",
+     "say": "Ethics asks a bigger question than the law does."
+    }
+   ],
+   "data": {
+    "kicker": "GS4 · Syllabus · AI voices",
+    "headline": "Ethics: intention, means and consequences",
+    "illustration": "illustrations/syllabus/scales.svg"
+   },
+   "say": "Is something right just because it's legal? Ethics asks a bigger question than the law does."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Law tells you the minimum you must do."
+    },
+    {
+     "spk": "B",
+     "say": "Ethics asks what is right, even where the law is silent."
+    }
+   ],
+   "data": {
+    "kicker": "A useful line",
+    "text": "Law sets the minimum. Ethics asks what is right beyond it."
+   },
+   "say": "Law tells you the minimum you must do. Ethics asks what is right, even where the law is silent."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Look at the intention behind an act, and the means used."
+    },
+    {
+     "spk": "B",
+     "say": "And at its consequences, for everyone affected."
+    }
+   ],
+   "data": {
+    "kicker": "Judging an action",
+    "title": "Look at three things",
+    "items": [
+     {
+      "text": "Intention",
+      "sub": "Why was it done?",
+      "cue": "Intention"
+     },
+     {
+      "text": "Means",
+      "sub": "How was it done?",
+      "cue": "Means"
+     },
+     {
+      "text": "Consequences",
+      "sub": "What did it lead to?",
+      "cue": "Consequences"
+     }
+    ]
+   },
+   "say": "Look at the intention behind an act, and the means used. And at its consequences, for everyone affected."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Gandhi held that good ends never justify bad means."
+    },
+    {
+     "spk": "B",
+     "say": "He said the means are like a seed, and the end, the tree."
+    }
+   ],
+   "data": {
+    "kicker": "Gandhi on means",
+    "text": "\"The means may be likened to a seed, the end to a tree.\"",
+    "by": "M. K. Gandhi, Hind Swaraj (1909)"
+   },
+   "say": "Gandhi held that good ends never justify bad means. He said the means are like a seed, and the end, the tree."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How are law and ethics linked?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which statement best describes the link between law and ethics?",
+    "options": [
+     "They are identical",
+     "Law is ethics' minimum",
+     "Ethics is always written down",
+     "Law always overrides ethics"
+    ]
+   },
+   "say": "Your turn. How are law and ethics linked?"
+  }
+ ]
+}

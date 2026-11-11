@@ -1,0 +1,233 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "aurangzeb-shivaji",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The empire's widest reach, and its strain",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "hist1-21"
+ ],
+ "sources": [
+  "Satish Chandra, Medieval India",
+  "NCERT Class 7, Our Pasts II"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "aurangzeb-shivaji-q1",
+   "q": "Shivaji was crowned in:",
+   "options": [
+    "1658",
+    "1666",
+    "1674",
+    "1707"
+   ],
+   "answerIndex": 2,
+   "why": "Right. 1674, at Raigad."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Under Aurangzeb, the Mughal empire was at its largest."
+    },
+    {
+     "spk": "B",
+     "say": "It was also under great strain."
+    }
+   ],
+   "data": {
+    "kicker": "History I · Syllabus · AI voices",
+    "headline": "The Mughal Empire in the seventeenth century",
+    "illustration": "illustrations/syllabus/scroll.svg"
+   },
+   "say": "Under Aurangzeb, the Mughal empire was at its largest. It was also under great strain."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Aurangzeb took the throne in 1658. Shivaji was crowned at Raigad in 1674."
+    },
+    {
+     "spk": "B",
+     "say": "Aurangzeb died in 1707, still at war in the Deccan."
+    }
+   ],
+   "data": {
+    "kicker": "Key dates",
+    "points": [
+     {
+      "year": 1658,
+      "label": "Aurangzeb accedes",
+      "cue": "1658"
+     },
+     {
+      "year": 1674,
+      "label": "Shivaji crowned",
+      "cue": "1674"
+     },
+     {
+      "year": 1707,
+      "label": "Aurangzeb dies",
+      "cue": "1707"
+     }
+    ]
+   },
+   "say": "Aurangzeb took the throne in 1658. Shivaji was crowned at Raigad in 1674. Aurangzeb died in 1707, still at war in the Deccan."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Long wars in the Deccan drained the treasury."
+    },
+    {
+     "spk": "B",
+     "say": "And there was not enough land to pay all the nobles."
+    }
+   ],
+   "data": {
+    "kicker": "Pressures",
+    "title": "Why",
+    "items": [
+     {
+      "text": "Long Deccan wars",
+      "sub": "",
+      "cue": "Deccan"
+     },
+     {
+      "text": "Jagirdari crisis",
+      "sub": "Too many nobles, too little land",
+      "cue": "pay"
+     }
+    ]
+   },
+   "say": "Long wars in the Deccan drained the treasury. And there was not enough land to pay all the nobles."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Under Jahangir and Shah Jahan,"
+    },
+    {
+     "spk": "B",
+     "say": "art and architecture peaked."
+    }
+   ],
+   "data": {
+    "kicker": "Before him",
+    "title": "Jahangir and Shah Jahan",
+    "items": [
+     {
+      "text": "Art and architecture",
+      "sub": "Peak of patronage",
+      "cue": "Art"
+     }
+    ]
+   },
+   "say": "Under Jahangir and Shah Jahan, art and architecture peaked."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was Shivaji crowned?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Shivaji was crowned in:",
+    "options": [
+     "1658",
+     "1666",
+     "1674",
+     "1707"
+    ]
+   },
+   "say": "Your turn. When was Shivaji crowned?"
+  }
+ ]
+}

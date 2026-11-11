@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "english-precis",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "A good précis has a title and one idea",
+ "gsPaper": [
+  "mains-english"
+ ],
+ "syllabusNodes": [
+  "english-2"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "english-precis-q1",
+   "q": "Which should you usually remove in a précis?",
+   "options": [
+    "The main argument",
+    "Examples and repetition",
+    "The conclusion",
+    "Key facts"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Examples and repetition."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_omega",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The English précis has the same rules as the language paper."
+    },
+    {
+     "spk": "B",
+     "say": "About a third of the length, in your own words."
+    }
+   ],
+   "data": {
+    "kicker": "English paper · Syllabus · AI voices",
+    "headline": "Paper B: précis",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "The English précis has the same rules as the language paper. About a third of the length, in your own words."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "About one-third the length. Write in the third person, and in reported speech."
+    },
+    {
+     "spk": "B",
+     "say": "Add a short title if asked."
+    }
+   ],
+   "data": {
+    "kicker": "Rules",
+    "title": "Précis",
+    "items": [
+     {
+      "text": "One-third length",
+      "sub": "Unless told otherwise",
+      "cue": "third"
+     },
+     {
+      "text": "Third person, past tense",
+      "sub": "Reported speech",
+      "cue": "Third"
+     },
+     {
+      "text": "A short title",
+      "sub": "If asked",
+      "cue": "title"
+     }
+    ]
+   },
+   "say": "About one-third the length. Write in the third person, and in reported speech. Add a short title if asked."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Examples, repetition, and decoration go first."
+    },
+    {
+     "spk": "B",
+     "say": "The argument stays."
+    }
+   ],
+   "data": {
+    "kicker": "Cut",
+    "text": "Examples, repetition, and decoration go first."
+   },
+   "say": "Examples, repetition, and decoration go first. The argument stays."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Write the word count at the end"
+    },
+    {
+     "spk": "B",
+     "say": "if the paper asks for it."
+    }
+   ],
+   "data": {
+    "kicker": "Count",
+    "title": "Word count",
+    "items": [
+     {
+      "text": "Write the count at the end",
+      "sub": "If the paper asks",
+      "cue": "count"
+     }
+    ]
+   },
+   "say": "Write the word count at the end if the paper asks for it."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What goes first?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Which should you usually remove in a précis?",
+    "options": [
+     "The main argument",
+     "Examples and repetition",
+     "The conclusion",
+     "Key facts"
+    ]
+   },
+   "say": "Your turn. What goes first?"
+  }
+ ]
+}

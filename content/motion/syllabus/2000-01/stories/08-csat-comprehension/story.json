@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "csat-comprehension",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "In CSAT, the passage is the only truth",
+ "gsPaper": [
+  "prelims-csat"
+ ],
+ "syllabusNodes": [
+  "csat-1"
+ ],
+ "sources": [
+  "UPSC CSE notice: Prelims Paper II syllabus"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "csat-comprehension-q1",
+   "q": "In an inference question, the right option must be:",
+   "options": [
+    "True in real life",
+    "Supported by the passage",
+    "The longest option",
+    "Stated in the first line"
+   ],
+   "answerIndex": 1,
+   "why": "Right. An inference must follow from the passage itself."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece; no factual claims beyond the syllabus wording."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The commonest CSAT mistake?"
+    },
+    {
+     "spk": "B",
+     "say": "Answering from what you know, instead of what the passage says."
+    }
+   ],
+   "data": {
+    "kicker": "CSAT · Syllabus · AI voices",
+    "headline": "Comprehension: answer from the passage",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "The commonest CSAT mistake? Answering from what you know, instead of what the passage says."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Main idea asks what the whole passage is about."
+    },
+    {
+     "spk": "B",
+     "say": "Inference asks what must follow. Assumption asks what the author takes for granted."
+    }
+   ],
+   "data": {
+    "kicker": "Three question types",
+    "title": "Know what's asked",
+    "items": [
+     {
+      "text": "Main idea",
+      "sub": "What is the whole passage about?",
+      "cue": "Main"
+     },
+     {
+      "text": "Inference",
+      "sub": "What must be true, given the passage?",
+      "cue": "Inference"
+     },
+     {
+      "text": "Assumption",
+      "sub": "What does the author take for granted?",
+      "cue": "Assumption"
+     }
+    ]
+   },
+   "say": "Main idea asks what the whole passage is about. Inference asks what must follow. Assumption asks what the author takes for granted."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Watch for options that are true in the real world"
+    },
+    {
+     "spk": "B",
+     "say": "but not supported by the passage. Those are wrong."
+    }
+   ],
+   "data": {
+    "kicker": "A trap to spot",
+    "text": "An option can be true in real life and still be wrong."
+   },
+   "say": "Watch for options that are true in the real world but not supported by the passage. Those are wrong."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Options with always, never or only"
+    },
+    {
+     "spk": "B",
+     "say": "are usually too strong to be the answer."
+    }
+   ],
+   "data": {
+    "kicker": "Extreme words",
+    "title": "Treat with suspicion",
+    "items": [
+     {
+      "text": "always · never · only · all",
+      "sub": "Rarely the right inference",
+      "cue": "always"
+     }
+    ]
+   },
+   "say": "Options with always, never or only are usually too strong to be the answer."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What must the right option be?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "In an inference question, the right option must be:",
+    "options": [
+     "True in real life",
+     "Supported by the passage",
+     "The longest option",
+     "Stated in the first line"
+    ]
+   },
+   "say": "Your turn. What must the right option be?"
+  }
+ ]
+}

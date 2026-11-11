@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "essay-paper",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Two essays, one from each section",
+ "gsPaper": [
+  "mains-essay"
+ ],
+ "syllabusNodes": [
+  "essay-1"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains Essay paper"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "essay-paper-q1",
+   "q": "How many essays do you write in the Essay paper?",
+   "options": [
+    "One",
+    "Two",
+    "Three",
+    "Four"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Two, one from each section."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check the section format against the latest UPSC notice."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Essay paper carries 250 marks."
+    },
+    {
+     "spk": "B",
+     "say": "And it's the paper most people practise least."
+    }
+   ],
+   "data": {
+    "kicker": "Essay · Syllabus · AI voices",
+    "headline": "The Essay paper: two in three hours",
+    "illustration": "illustrations/syllabus/pen.svg"
+   },
+   "say": "The Essay paper carries 250 marks. And it's the paper most people practise least."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "You write 2 essays, one from each of two sections."
+    },
+    {
+     "spk": "B",
+     "say": "For 250 marks, in three hours."
+    }
+   ],
+   "data": {
+    "kicker": "The paper",
+    "items": [
+     {
+      "value": 2,
+      "suffix": "",
+      "label": "essays, one from each section",
+      "cue": "2"
+     },
+     {
+      "value": 250,
+      "suffix": "",
+      "label": "marks in three hours",
+      "cue": "250"
+     }
+    ]
+   },
+   "say": "You write 2 essays, one from each of two sections. For 250 marks, in three hours."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Open with a story, a fact, or a question. Then cover many angles."
+    },
+    {
+     "spk": "B",
+     "say": "And close on a balanced, forward-looking note."
+    }
+   ],
+   "data": {
+    "kicker": "A dependable structure",
+    "title": "Plan before you write",
+    "items": [
+     {
+      "text": "Opening",
+      "sub": "A story, a fact or a question",
+      "cue": "story"
+     },
+     {
+      "text": "Body",
+      "sub": "Many angles: social, economic, political, ethical",
+      "cue": "cover"
+     },
+     {
+      "text": "Conclusion",
+      "sub": "A balanced, forward-looking close",
+      "cue": "balanced"
+     }
+    ]
+   },
+   "say": "Open with a story, a fact, or a question. Then cover many angles. And close on a balanced, forward-looking note."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Spend the first twenty to thirty minutes planning each one."
+    },
+    {
+     "spk": "B",
+     "say": "A planned essay rarely loses its way."
+    }
+   ],
+   "data": {
+    "kicker": "Planning time",
+    "text": "Spend the first 20 to 30 minutes of each essay planning."
+   },
+   "say": "Spend the first twenty to thirty minutes planning each one. A planned essay rarely loses its way."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How many essays?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "How many essays do you write in the Essay paper?",
+    "options": [
+     "One",
+     "Two",
+     "Three",
+     "Four"
+    ]
+   },
+   "say": "Your turn. How many essays?"
+  }
+ ]
+}

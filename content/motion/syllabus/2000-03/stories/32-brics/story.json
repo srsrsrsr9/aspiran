@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "brics",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "BRICS began with four letters",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2"
+ ],
+ "syllabusNodes": [
+  "gs2-10"
+ ],
+ "sources": [
+  "BRICS official portal",
+  "New Development Bank (ndb.int)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "brics-q1",
+   "q": "The New Development Bank is headquartered in:",
+   "options": [
+    "New Delhi",
+    "Moscow",
+    "Shanghai",
+    "Johannesburg"
+   ],
+   "answerIndex": 2,
+   "why": "Right. Shanghai."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Membership changes often: check the current list (Indonesia joined in 2025) before approval."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "BRICS started as BRIC, an economist's label."
+    },
+    {
+     "spk": "B",
+     "say": "Then it became a real grouping."
+    }
+   ],
+   "data": {
+    "kicker": "GS2 · Syllabus · AI voices",
+    "headline": "BRICS: from four to many",
+    "illustration": "illustrations/syllabus/globe.svg"
+   },
+   "say": "BRICS started as BRIC, an economist's label. Then it became a real grouping."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The first BRIC summit was in Russia in 2009."
+    },
+    {
+     "spk": "B",
+     "say": "South Africa was invited in 2010. In 2024, Egypt, Ethiopia, Iran and the U-A-E joined."
+    }
+   ],
+   "data": {
+    "kicker": "How it grew",
+    "points": [
+     {
+      "year": 2009,
+      "label": "First BRIC summit",
+      "cue": "2009"
+     },
+     {
+      "year": 2010,
+      "label": "South Africa invited",
+      "cue": "2010"
+     },
+     {
+      "year": 2024,
+      "label": "Four new members",
+      "cue": "2024"
+     }
+    ]
+   },
+   "say": "The first BRIC summit was in Russia in 2009. South Africa was invited in 2010. In 2024, Egypt, Ethiopia, Iran and the U-A-E joined."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "BRICS set up the New Development Bank, agreed in 2014."
+    },
+    {
+     "spk": "B",
+     "say": "It's headquartered in Shanghai."
+    }
+   ],
+   "data": {
+    "kicker": "Its bank",
+    "text": "The New Development Bank, headquartered in Shanghai."
+   },
+   "say": "BRICS set up the New Development Bank, agreed in 2014. It's headquartered in Shanghai."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India uses BRICS to push for reform of global institutions."
+    },
+    {
+     "spk": "B",
+     "say": "While making sure it doesn't become an anti-West bloc."
+    }
+   ],
+   "data": {
+    "kicker": "India's view",
+    "title": "For Mains",
+    "items": [
+     {
+      "text": "A voice for the Global South",
+      "sub": "Reform of global institutions",
+      "cue": "push"
+     },
+     {
+      "text": "A careful balance",
+      "sub": "Not an anti-West bloc",
+      "cue": "doesnt"
+     }
+    ]
+   },
+   "say": "India uses BRICS to push for reform of global institutions. While making sure it doesn't become an anti-West bloc."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Where is the N-D-B based?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The New Development Bank is headquartered in:",
+    "options": [
+     "New Delhi",
+     "Moscow",
+     "Shanghai",
+     "Johannesburg"
+    ]
+   },
+   "say": "Your turn. Where is the N-D-B based?"
+  }
+ ]
+}

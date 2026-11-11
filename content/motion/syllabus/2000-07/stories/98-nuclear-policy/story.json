@@ -1,0 +1,230 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "nuclear-policy",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "India tested in 1974 and 1998, and promised no first use",
+ "gsPaper": [
+  "optional-psir"
+ ],
+ "syllabusNodes": [
+  "psir2-18"
+ ],
+ "sources": [
+  "Cabinet Committee on Security, review of nuclear doctrine (January 2003)",
+  "NSG statement on civil nuclear cooperation with India (2008)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "nuclear-policy-q1",
+   "q": "India's 1998 nuclear tests are known as:",
+   "options": [
+    "Smiling Buddha",
+    "Pokhran-II (Operation Shakti)",
+    "Operation Vijay",
+    "Agni"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Pokhran-II, Operation Shakti."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India has nuclear weapons, but hasn't signed the Non-Proliferation Treaty."
+    },
+    {
+     "spk": "B",
+     "say": "Here's how that came about."
+    }
+   ],
+   "data": {
+    "kicker": "PSIR II · Syllabus · AI voices",
+    "headline": "India and the nuclear question",
+    "illustration": "illustrations/syllabus/shield.svg"
+   },
+   "say": "India has nuclear weapons, but hasn't signed the Non-Proliferation Treaty. Here's how that came about."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India's first test was at Pokhran in 1974. Five more followed in May 1998."
+    },
+    {
+     "spk": "B",
+     "say": "In 2008, the Nuclear Suppliers Group gave India a waiver for civil trade."
+    }
+   ],
+   "data": {
+    "kicker": "Tests and deals",
+    "points": [
+     {
+      "year": 1974,
+      "label": "Pokhran-I",
+      "cue": "1974"
+     },
+     {
+      "year": 1998,
+      "label": "Pokhran-II",
+      "cue": "1998"
+     },
+     {
+      "year": 2008,
+      "label": "NSG waiver",
+      "cue": "2008"
+     }
+    ]
+   },
+   "say": "India's first test was at Pokhran in 1974. Five more followed in May 1998. In 2008, the Nuclear Suppliers Group gave India a waiver for civil trade."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The doctrine of 2003: no first use, and credible minimum deterrence."
+    },
+    {
+     "spk": "B",
+     "say": "And no use against countries without nuclear weapons."
+    }
+   ],
+   "data": {
+    "kicker": "The doctrine",
+    "title": "2003",
+    "items": [
+     {
+      "text": "No first use",
+      "sub": "Retaliation only",
+      "cue": "No"
+     },
+     {
+      "text": "Credible minimum deterrence",
+      "sub": "",
+      "cue": "Credible"
+     },
+     {
+      "text": "No use against non-nuclear states",
+      "sub": "",
+      "cue": "countries"
+     }
+    ]
+   },
+   "say": "The doctrine of 2003: no first use, and credible minimum deterrence. And no use against countries without nuclear weapons."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "India sees the N-P-T as discriminatory."
+    },
+    {
+     "spk": "B",
+     "say": "It freezes which countries may hold weapons."
+    }
+   ],
+   "data": {
+    "kicker": "Why not the NPT",
+    "text": "India calls it discriminatory: it freezes who may hold weapons."
+   },
+   "say": "India sees the N-P-T as discriminatory. It freezes which countries may hold weapons."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What are the 1998 tests called?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "India's 1998 nuclear tests are known as:",
+    "options": [
+     "Smiling Buddha",
+     "Pokhran-II (Operation Shakti)",
+     "Operation Vijay",
+     "Agni"
+    ]
+   },
+   "say": "Your turn. What are the 1998 tests called?"
+  }
+ ]
+}

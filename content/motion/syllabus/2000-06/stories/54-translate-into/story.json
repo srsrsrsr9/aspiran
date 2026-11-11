@@ -1,0 +1,220 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "translate-into",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Translate the meaning, not the words",
+ "gsPaper": [
+  "mains-lang"
+ ],
+ "syllabusNodes": [
+  "lang-5"
+ ],
+ "sources": [
+  "UPSC CSE notice: Mains qualifying papers (Paper A, Indian language; Paper B, English)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "translate-into-q1",
+   "q": "The best translation is:",
+   "options": [
+    "Word for word",
+    "True to meaning, natural",
+    "Shorter than the original",
+    "In formal English"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Meaning first, in natural language."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Method piece. 'Many PIB releases are bilingual' is general; check before approval."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Word-for-word translation sounds strange."
+    },
+    {
+     "spk": "B",
+     "say": "Translate the meaning instead."
+    }
+   ],
+   "data": {
+    "kicker": "Language paper · Syllabus · AI voices",
+    "headline": "Translation: English into your language",
+    "illustration": "illustrations/syllabus/book.svg"
+   },
+   "say": "Word-for-word translation sounds strange. Translate the meaning instead."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Read the whole sentence first. Write it the way a native speaker would."
+    },
+    {
+     "spk": "B",
+     "say": "Then check nothing is lost: numbers, names, and negatives."
+    }
+   ],
+   "data": {
+    "kicker": "How",
+    "title": "Three steps",
+    "items": [
+     {
+      "text": "Read the whole sentence",
+      "sub": "Get its meaning",
+      "cue": "whole"
+     },
+     {
+      "text": "Write it as a native speaker would",
+      "sub": "Natural word order",
+      "cue": "native"
+     },
+     {
+      "text": "Check nothing is lost",
+      "sub": "Numbers, names, negatives",
+      "cue": "lost"
+     }
+    ]
+   },
+   "say": "Read the whole sentence first. Write it the way a native speaker would. Then check nothing is lost: numbers, names, and negatives."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "If there's an idiom, find a matching one."
+    },
+    {
+     "spk": "B",
+     "say": "If there isn't, just say the meaning plainly."
+    }
+   ],
+   "data": {
+    "kicker": "Idioms",
+    "text": "Find the matching idiom, or say it plainly."
+   },
+   "say": "If there's an idiom, find a matching one. If there isn't, just say the meaning plainly."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Government press releases often come in two languages."
+    },
+    {
+     "spk": "B",
+     "say": "Compare them to practise."
+    }
+   ],
+   "data": {
+    "kicker": "Practise with",
+    "title": "Free material",
+    "items": [
+     {
+      "text": "Government press releases",
+      "sub": "Many come in both languages",
+      "cue": "press"
+     }
+    ]
+   },
+   "say": "Government press releases often come in two languages. Compare them to practise."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What's the best translation?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The best translation is:",
+    "options": [
+     "Word for word",
+     "True to meaning, natural",
+     "Shorter than the original",
+     "In formal English"
+    ]
+   },
+   "say": "Your turn. What's the best translation?"
+  }
+ ]
+}

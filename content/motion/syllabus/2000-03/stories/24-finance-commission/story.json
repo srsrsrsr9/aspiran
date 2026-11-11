@@ -1,0 +1,223 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "finance-commission",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Every five years, a commission splits the tax pool",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs2-2"
+ ],
+ "sources": [
+  "Constitution of India, Article 280",
+  "Report of the Fifteenth Finance Commission (2021–26)"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "finance-commission-q1",
+   "q": "The Finance Commission is constituted under:",
+   "options": [
+    "Article 263",
+    "Article 280",
+    "Article 324",
+    "Article 356"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Article 280."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Kept to the Fifteenth Commission; update when the Sixteenth Commission's devolution share is confirmed."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Centre collects most taxes. The states do most of the spending."
+    },
+    {
+     "spk": "B",
+     "say": "So who decides how the money is shared?"
+    }
+   ],
+   "data": {
+    "kicker": "GS2 · Syllabus · AI voices",
+    "headline": "The Finance Commission: Article 280",
+    "illustration": "illustrations/syllabus/budget.svg"
+   },
+   "say": "The Centre collects most taxes. The states do most of the spending. So who decides how the money is shared?"
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Under Article 280, the President sets up a Finance Commission every five years."
+    },
+    {
+     "spk": "B",
+     "say": "It recommends how central taxes are shared with the states."
+    }
+   ],
+   "data": {
+    "kicker": "Article 280",
+    "text": "The President sets up a Finance Commission every five years, or earlier."
+   },
+   "say": "Under Article 280, the President sets up a Finance Commission every five years. It recommends how central taxes are shared with the states."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Fifteenth Commission, chaired by N. K. Singh,"
+    },
+    {
+     "spk": "B",
+     "say": "gave the states 41 percent of the divisible pool."
+    }
+   ],
+   "data": {
+    "kicker": "The Fifteenth Commission",
+    "items": [
+     {
+      "value": 41,
+      "suffix": "%",
+      "label": "of the divisible pool to states, 2021–26",
+      "cue": "41"
+     }
+    ]
+   },
+   "say": "The Fifteenth Commission, chaired by N. K. Singh, gave the states 41 percent of the divisible pool."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Poorer states get more, through income distance."
+    },
+    {
+     "spk": "B",
+     "say": "Population, area, forest cover, and demographic performance also count."
+    }
+   ],
+   "data": {
+    "kicker": "Sharing among states",
+    "title": "Main criteria",
+    "items": [
+     {
+      "text": "Income distance",
+      "sub": "Poorer states get more",
+      "cue": "Income"
+     },
+     {
+      "text": "Population and area",
+      "sub": "Need",
+      "cue": "Population"
+     },
+     {
+      "text": "Forest, and demographic performance",
+      "sub": "Rewarding good outcomes",
+      "cue": "Forest"
+     }
+    ]
+   },
+   "say": "Poorer states get more, through income distance. Population, area, forest cover, and demographic performance also count."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which Article sets it up?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Finance Commission is constituted under:",
+    "options": [
+     "Article 263",
+     "Article 280",
+     "Article 324",
+     "Article 356"
+    ]
+   },
+   "say": "Your turn. Which Article sets it up?"
+  }
+ ]
+}

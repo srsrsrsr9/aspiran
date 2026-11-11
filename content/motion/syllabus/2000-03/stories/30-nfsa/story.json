@@ -1,0 +1,237 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "nfsa",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Food became a legal right in 2013",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs2",
+  "mains-gs3"
+ ],
+ "syllabusNodes": [
+  "gs2-8"
+ ],
+ "sources": [
+  "National Food Security Act, 2013",
+  "Department of Food and Public Distribution"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "nfsa-q1",
+   "q": "Under the NFSA, an Antyodaya household gets how much grain a month?",
+   "options": [
+    "5 kg",
+    "20 kg",
+    "35 kg",
+    "50 kg"
+   ],
+   "answerIndex": 2,
+   "why": "Right. 35 kg per household."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Cheap grain through ration shops is old."
+    },
+    {
+     "spk": "B",
+     "say": "Making it a legal entitlement came in 2013."
+    }
+   ],
+   "data": {
+    "kicker": "GS2 · Syllabus · AI voices",
+    "headline": "The National Food Security Act",
+    "illustration": "illustrations/syllabus/farm.svg"
+   },
+   "say": "Cheap grain through ration shops is old. Making it a legal entitlement came in 2013."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Act covers up to 75 percent of the rural population"
+    },
+    {
+     "spk": "B",
+     "say": "and up to 50 percent of the urban population."
+    }
+   ],
+   "data": {
+    "kicker": "Who's covered",
+    "items": [
+     {
+      "value": 75,
+      "suffix": "%",
+      "label": "of the rural population",
+      "cue": "75"
+     },
+     {
+      "value": 50,
+      "suffix": "%",
+      "label": "of the urban population",
+      "cue": "50"
+     }
+    ]
+   },
+   "say": "The Act covers up to 75 percent of the rural population and up to 50 percent of the urban population."
+  },
+  {
+   "shot": "stat",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Priority households get 5 kilograms of grain per person, every month."
+    },
+    {
+     "spk": "B",
+     "say": "The poorest, Antyodaya households, get 35 kilograms per household."
+    }
+   ],
+   "data": {
+    "kicker": "How much",
+    "items": [
+     {
+      "value": 5,
+      "suffix": " kg",
+      "label": "grain per person per month",
+      "cue": "5"
+     },
+     {
+      "value": 35,
+      "suffix": " kg",
+      "label": "per Antyodaya household",
+      "cue": "35"
+     }
+    ]
+   },
+   "say": "Priority households get 5 kilograms of grain per person, every month. The poorest, Antyodaya households, get 35 kilograms per household."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Pregnant women and mothers get a maternity benefit of at least six thousand rupees."
+    },
+    {
+     "spk": "B",
+     "say": "And children get meals through anganwadis and schools."
+    }
+   ],
+   "data": {
+    "kicker": "Also in the Act",
+    "title": "Beyond grain",
+    "items": [
+     {
+      "text": "Mothers",
+      "sub": "Maternity benefit of at least ₹6,000",
+      "cue": "Mothers"
+     },
+     {
+      "text": "Children",
+      "sub": "Meals through anganwadis and schools",
+      "cue": "Children"
+     }
+    ]
+   },
+   "say": "Pregnant women and mothers get a maternity benefit of at least six thousand rupees. And children get meals through anganwadis and schools."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "How much for an Antyodaya household?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "Under the NFSA, an Antyodaya household gets how much grain a month?",
+    "options": [
+     "5 kg",
+     "20 kg",
+     "35 kg",
+     "50 kg"
+    ]
+   },
+   "say": "Your turn. How much for an Antyodaya household?"
+  }
+ ]
+}

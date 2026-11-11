@@ -1,0 +1,221 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "nagara-dravida",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "North and south Indian temples tell you apart by the tower",
+ "gsPaper": [
+  "prelims-gs",
+  "mains-gs1"
+ ],
+ "syllabusNodes": [
+  "gs1-1"
+ ],
+ "sources": [
+  "NCERT Class 11, An Introduction to Indian Art, ch. 6 'Temple Architecture and Sculpture'"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "nagara-dravida-q1",
+   "q": "A gopuram is:",
+   "options": [
+    "The sanctum of a temple",
+    "A Dravida gateway tower",
+    "A Nagara curved tower",
+    "A pillared hall"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Gopurams are the gateway towers of Dravida temple compounds."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Vesara (mixed) style left out for length."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_beta",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Look at the tower, and you can tell where a temple comes from."
+    },
+    {
+     "spk": "B",
+     "say": "Curved in the north. Stepped like a pyramid in the south."
+    }
+   ],
+   "data": {
+    "kicker": "GS1 · Syllabus · AI voices",
+    "headline": "Nagara and Dravida: two temple styles",
+    "illustration": "illustrations/syllabus/temple.svg"
+   },
+   "say": "Look at the tower, and you can tell where a temple comes from. Curved in the north. Stepped like a pyramid in the south."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Nagara temples have a curving tower called the shikhara."
+    },
+    {
+     "spk": "B",
+     "say": "They usually sit on a raised platform, often without big boundary walls."
+    }
+   ],
+   "data": {
+    "kicker": "Nagara",
+    "title": "North India",
+    "items": [
+     {
+      "text": "Shikhara",
+      "sub": "A curving tower over the sanctum",
+      "cue": "Shikhara"
+     },
+     {
+      "text": "Usually no boundary wall",
+      "sub": "Built on a raised platform",
+      "cue": "platform"
+     }
+    ]
+   },
+   "say": "Nagara temples have a curving tower called the shikhara. They usually sit on a raised platform, often without big boundary walls."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Dravida temples have a stepped tower called the vimana."
+    },
+    {
+     "spk": "B",
+     "say": "And a walled compound entered through tall gateways called gopurams."
+    }
+   ],
+   "data": {
+    "kicker": "Dravida",
+    "title": "South India",
+    "items": [
+     {
+      "text": "Vimana",
+      "sub": "A stepped, pyramid-like tower",
+      "cue": "vimana"
+     },
+     {
+      "text": "Gopuram",
+      "sub": "Tall gateways in a walled compound",
+      "cue": "gopuram"
+     }
+    ]
+   },
+   "say": "Dravida temples have a stepped tower called the vimana. And a walled compound entered through tall gateways called gopurams."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "The Kandariya Mahadeva temple at Khajuraho is Nagara."
+    },
+    {
+     "spk": "B",
+     "say": "The Brihadeeswarar temple at Thanjavur, built under Rajaraja Chola, is Dravida."
+    }
+   ],
+   "data": {
+    "kicker": "An example of each",
+    "text": "Kandariya Mahadeva, Khajuraho: Nagara. Brihadeeswarar, Thanjavur: Dravida."
+   },
+   "say": "The Kandariya Mahadeva temple at Khajuraho is Nagara. The Brihadeeswarar temple at Thanjavur, built under Rajaraja Chola, is Dravida."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "What is a gopuram?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "A gopuram is:",
+    "options": [
+     "The sanctum of a temple",
+     "A Dravida gateway tower",
+     "A Nagara curved tower",
+     "A pillared hall"
+    ]
+   },
+   "say": "Your turn. What is a gopuram?"
+  }
+ ]
+}

@@ -1,0 +1,226 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "tarain-sultanate",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "Two battles at Tarain opened the way to Delhi",
+ "gsPaper": [
+  "optional-history",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "hist1-15"
+ ],
+ "sources": [
+  "Satish Chandra, History of Medieval India",
+  "NCERT Class 7, Our Pasts II"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "tarain-sultanate-q1",
+   "q": "The Second Battle of Tarain was fought in:",
+   "options": [
+    "1191",
+    "1192",
+    "1206",
+    "1236"
+   ],
+   "answerIndex": 1,
+   "why": "Right. 1192."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hf_alpha",
+   "B": "hm_omega"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Prithviraj Chauhan won the first battle of Tarain."
+    },
+    {
+     "spk": "B",
+     "say": "He lost the second, a year later."
+    }
+   ],
+   "data": {
+    "kicker": "History I · Syllabus · AI voices",
+    "headline": "The thirteenth century: the Sultanate",
+    "illustration": "illustrations/syllabus/scroll.svg"
+   },
+   "say": "Prithviraj Chauhan won the first battle of Tarain. He lost the second, a year later."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Prithviraj won at Tarain in 1191. Muhammad Ghori won in 1192."
+    },
+    {
+     "spk": "B",
+     "say": "In 1206, Qutbuddin Aibak founded the Delhi Sultanate."
+    }
+   ],
+   "data": {
+    "kicker": "The rise",
+    "points": [
+     {
+      "year": 1191,
+      "label": "First Tarain",
+      "cue": "1191"
+     },
+     {
+      "year": 1192,
+      "label": "Second Tarain",
+      "cue": "1192"
+     },
+     {
+      "year": 1206,
+      "label": "Aibak: Sultanate begins",
+      "cue": "1206"
+     }
+    ]
+   },
+   "say": "Prithviraj won at Tarain in 1191. Muhammad Ghori won in 1192. In 1206, Qutbuddin Aibak founded the Delhi Sultanate."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Iltutmish consolidated it with the iqta system of revenue assignments,"
+    },
+    {
+     "spk": "B",
+     "say": "and the group of forty nobles."
+    }
+   ],
+   "data": {
+    "kicker": "Iltutmish",
+    "title": "Consolidator",
+    "items": [
+     {
+      "text": "Iqta system",
+      "sub": "Land revenue assignments",
+      "cue": "Iqta"
+     },
+     {
+      "text": "Chahalgani",
+      "sub": "The 'Forty' nobles",
+      "cue": "group"
+     }
+    ]
+   },
+   "say": "Iltutmish consolidated it with the iqta system of revenue assignments, and the group of forty nobles."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "His daughter Raziya was the first woman"
+    },
+    {
+     "spk": "B",
+     "say": "to rule from Delhi's throne."
+    }
+   ],
+   "data": {
+    "kicker": "Raziya",
+    "text": "The first, and only, woman to rule the Delhi Sultanate."
+   },
+   "say": "His daughter Raziya was the first woman to rule from Delhi's throne."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "When was the second battle?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Second Battle of Tarain was fought in:",
+    "options": [
+     "1191",
+     "1192",
+     "1206",
+     "1236"
+    ]
+   },
+   "say": "Your turn. When was the second battle?"
+  }
+ ]
+}

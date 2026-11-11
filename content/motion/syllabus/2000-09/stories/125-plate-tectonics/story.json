@@ -1,0 +1,231 @@
+{
+ "schema": "upsc-pods/motion@1",
+ "kind": "ca-scene",
+ "series": "syllabus-in-a-minute",
+ "id": "plate-tectonics",
+ "card": null,
+ "lang": "en",
+ "tone": "NEUTRAL",
+ "title": "The continents were once one",
+ "gsPaper": [
+  "optional-geography",
+  "prelims-gs"
+ ],
+ "syllabusNodes": [
+  "geog1-1"
+ ],
+ "sources": [
+  "Alfred Wegener, The Origin of Continents and Oceans (1915)",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 4"
+ ],
+ "free": true,
+ "quiz": [
+  {
+   "id": "plate-tectonics-q1",
+   "q": "The Himalaya formed at which type of plate boundary?",
+   "options": [
+    "Divergent",
+    "Convergent",
+    "Transform",
+    "Passive"
+   ],
+   "answerIndex": 1,
+   "why": "Right. Convergent: the Indian plate colliding with the Eurasian plate."
+  }
+ ],
+ "review": {
+  "status": "draft",
+  "checkedBy": null,
+  "checkedOn": null,
+  "note": "Written and voiced by Claude (AI voices, Kokoro), 8 Nov 2026. Not yet checked by a subject or Hindi editor. Check every number and date against the listed sources."
+ },
+ "format": {
+  "w": 1080,
+  "h": 1920,
+  "fps": 30
+ },
+ "voice": {
+  "provider": "kokoro",
+  "speakers": {
+   "A": "hm_psi",
+   "B": "hf_alpha"
+  },
+  "speed": 1.04
+ },
+ "music": {
+  "bed": "audio/bed.m4a",
+  "gain": 0.26,
+  "duck": true,
+  "end": "audio/motif.m4a"
+ },
+ "display": {
+  "G-S-one": "GS1",
+  "G-S-one,": "GS1,",
+  "G-S-one.": "GS1.",
+  "G-S-one?": "GS1?",
+  "G-S-one:": "GS1:",
+  "G-S-one's": "GS1's",
+  "G-S-two": "GS2",
+  "G-S-two,": "GS2,",
+  "G-S-two.": "GS2.",
+  "G-S-two?": "GS2?",
+  "G-S-two:": "GS2:",
+  "G-S-two's": "GS2's",
+  "G-S-three": "GS3",
+  "G-S-three,": "GS3,",
+  "G-S-three.": "GS3.",
+  "G-S-three?": "GS3?",
+  "G-S-three:": "GS3:",
+  "G-S-three's": "GS3's",
+  "G-S-four": "GS4",
+  "G-S-four,": "GS4,",
+  "G-S-four.": "GS4.",
+  "G-S-four?": "GS4?",
+  "G-S-four:": "GS4:",
+  "G-S-four's": "GS4's",
+  "C-SAT": "CSAT",
+  "C-SAT,": "CSAT,",
+  "C-SAT.": "CSAT.",
+  "C-SAT?": "CSAT?",
+  "C-SAT:": "CSAT:",
+  "C-SAT's": "CSAT's",
+  "P-S-I-R": "PSIR",
+  "P-S-I-R,": "PSIR,",
+  "P-S-I-R.": "PSIR.",
+  "P-S-I-R?": "PSIR?",
+  "P-S-I-R:": "PSIR:",
+  "P-S-I-R's": "PSIR's"
+ },
+ "beats": [
+  {
+   "shot": "ca-open",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Look at a map, and South America seems to fit into Africa."
+    },
+    {
+     "spk": "B",
+     "say": "Alfred Wegener took that seriously."
+    }
+   ],
+   "data": {
+    "kicker": "Geography I · Syllabus · AI voices",
+    "headline": "Geomorphology: from drift to plates",
+    "illustration": "illustrations/syllabus/mountain.svg"
+   },
+   "say": "Look at a map, and South America seems to fit into Africa. Alfred Wegener took that seriously."
+  },
+  {
+   "shot": "timeline",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Wegener proposed continental drift in 1912, with one supercontinent, Pangaea."
+    },
+    {
+     "spk": "B",
+     "say": "In the 1960s, Harry Hess's sea-floor spreading led to plate tectonics."
+    }
+   ],
+   "data": {
+    "kicker": "From drift to plates",
+    "points": [
+     {
+      "year": 1912,
+      "label": "Wegener: continental drift",
+      "cue": "1912"
+     },
+     {
+      "year": 1960,
+      "label": "Hess: sea-floor spreading",
+      "cue": "1960"
+     },
+     {
+      "year": 1967,
+      "label": "Plate tectonics",
+      "cue": "led"
+     }
+    ]
+   },
+   "say": "Wegener proposed continental drift in 1912, with one supercontinent, Pangaea. In the 1960s, Harry Hess's sea-floor spreading led to plate tectonics."
+  },
+  {
+   "shot": "chips",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "At divergent boundaries, plates move apart. At convergent ones, they collide, as India did with Asia."
+    },
+    {
+     "spk": "B",
+     "say": "At transform boundaries, they slide past each other."
+    }
+   ],
+   "data": {
+    "kicker": "Plate boundaries",
+    "title": "Three kinds",
+    "items": [
+     {
+      "text": "Divergent",
+      "sub": "Plates move apart: mid-ocean ridges",
+      "cue": "Divergent"
+     },
+     {
+      "text": "Convergent",
+      "sub": "Plates collide: the Himalaya",
+      "cue": "Convergent"
+     },
+     {
+      "text": "Transform",
+      "sub": "Plates slide past: San Andreas",
+      "cue": "Transform"
+     }
+    ]
+   },
+   "say": "At divergent boundaries, plates move apart. At convergent ones, they collide, as India did with Asia. At transform boundaries, they slide past each other."
+  },
+  {
+   "shot": "quote",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Wegener's idea was rejected for decades,"
+    },
+    {
+     "spk": "B",
+     "say": "because he couldn't explain the force that moved continents."
+    }
+   ],
+   "data": {
+    "kicker": "Why it was doubted",
+    "text": "He couldn't explain what force moved the continents."
+   },
+   "say": "Wegener's idea was rejected for decades, because he couldn't explain the force that moved continents."
+  },
+  {
+   "shot": "quiz",
+   "lines": [
+    {
+     "spk": "A",
+     "say": "Your turn."
+    },
+    {
+     "spk": "B",
+     "say": "Which type of boundary?"
+    }
+   ],
+   "data": {
+    "kicker": "Your turn",
+    "q": "The Himalaya formed at which type of plate boundary?",
+    "options": [
+     "Divergent",
+     "Convergent",
+     "Transform",
+     "Passive"
+    ]
+   },
+   "say": "Your turn. Which type of boundary?"
+  }
+ ]
+}
