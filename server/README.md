@@ -162,6 +162,31 @@ editor checks, practice questions, library and pods as the phone.
   `routine-card@1` items show under "Borrow from others", each with what not to copy.
 - Languages: the reading language list comes from /config, so a language appears once it's live.
 
+### Try one topic (`#try`, open to visitors)
+
+One whole syllabus topic with no account: a topic path (`aspiran/topic-path@1`, source in `content/topic-paths/`, packed
+by `node scripts/syllabus.mjs pack` with the notes and mocks; videos named `media:<path under content/>` ride in the pack).
+The first is Federalism and Centre–state relations. Screens: `server/public/app/try.js` (frame, routes, core steps) and
+`try-parts.js` (videos, the two games, essay snaps, news cards, tour, feedback).
+
+- **Two routes** over one set of answers: Express (8 screens, about 15 min, the default) and Whole topic (17 screens,
+  about 75 min in three sittings). Extras are optional side doors inside a step: two 52-second videos (synthetic voice,
+  captions on, nothing loads on mobile data until tapped), the GST Council vote, essay in three snaps, four news cards,
+  a tour of the app.
+- **Learning design**: guess first; the text folds away before each check; mixed sort of lookalikes; recall checklist
+  opens only after a try, with a second go on the misses; PYQs one per screen with three confidence levels and the
+  negative-marking maths; skeleton opens only after you plan; Keep it brings back the warm-up guesses and asks each card
+  cold, grading it into the FSRS review queue (a miss returns tomorrow). Each step has a "why we do it" note with its
+  citation and evidence band. No timers, scores only private, no sound.
+- `GET /try`, `GET /try/<id>`: approved paths only; Hindi only after a Hindi editor approves. Editors preview a draft at
+  `/app/#try/<id>?preview` with their desk key.
+- **Feedback**: `POST /try/feedback` (one-tap questions and the end survey, anonymous, a random id per browser, one
+  answer per question, free text runs through the distress check and is marked CARE), `POST /try/contact` (only with the
+  consent box), `POST /try/forget` (the visitor's "Delete what I sent"), `GET /try/summary` (chip counts only, from 20
+  answers). Admin → **Try one topic** shows it all, with a CSV download. Tables `try_feedback`, `try_contacts`
+  (migration 0009; also created on first use).
+- `npm run test:try` checks the gate and the feedback rules.
+
 Locally, open http://localhost:8787/app/. To use it as a **desktop app**, open it in Chrome or Edge and
 choose Install (the address-bar icon, or My Path → Install). It then opens in its own window, with shortcuts
 to Focus, Mock papers and Chai, and works offline from the last copy. No separate desktop codebase is needed.

@@ -16,6 +16,7 @@ import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
 import { listLeads, listWebChats, webChat } from "./web";
+import { tryFeedbackRows, tryUpdates } from "./try";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
@@ -440,6 +441,29 @@ route("GET", /^analytics$/, "analytics", async ({ env, url }) => {
 route("GET", /^community$/, "analytics", async ({ env }) => json(await communityMetrics(env)));
 // Growth: installs by source, activation, return by signup week, feedback, the paid funnel and the pod test (metrics.ts).
 route("GET", /^growth$/, "analytics", async ({ env }) => json(await growthReport(env)));
+// "Try one topic" (try.ts): what visitors answered as they went, and contacts they chose to leave. ?format=csv to download.
+route("GET", /^try\/feedback$/, "analytics", async ({ env, url }) => {
+  const { rows, contacts } = await tryFeedbackRows(env, page(url, 10000));
+  if (url.searchParams.get("format") !== "csv") return json({ rows, contacts });
+  const cell = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [["at", "session_id", "path_id", "question", "answer", "text", "lang", "contact"].join(",")]
+    .concat(rows.map((r: any) => [r.at, r.session_id, r.path_id, r.question, r.answer, r.text, r.lang, r.contact].map(cell).join(",")));
+  return new Response(lines.join("\n"), { headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="aspiran-try-feedback-${istDay()}.csv"` } });
+});
+// "You asked, we did" (try.ts): short public lines, each about something visitors asked for and we did. Announcers write them.
+route("GET", /^try\/updates$/, "analytics", async ({ env, url }) => json({ updates: await tryUpdates(env, url.searchParams.get("path") || "path-pol-federalism", true) }));
+route("POST", /^try\/updates$/, "announce", async ({ env, s, body }) => {
+  const en = String(body?.en ?? "").trim().slice(0, 240), hi = String(body?.hi ?? "").trim().slice(0, 240);
+  const on = /^\d{4}-\d{2}-\d{2}$/.test(String(body?.doneOn ?? "")) ? body.doneOn : istDay();
+  if (en.length < 10) return bad("Write the line in English (at least a few words).");
+  await env.DB.prepare("INSERT INTO try_updates (path_id, text_en, text_hi, done_on, created_by, created_at) VALUES (?, ?, ?, ?, ?, ?)")
+    .bind(String(body?.pathId || "path-pol-federalism").slice(0, 64), en, hi || null, on, s.name ?? s.id, new Date().toISOString()).run();
+  return json({ ok: true });
+});
+route("POST", /^try\/updates\/(\d+)\/(hide|show)$/, "announce", async ({ env, m }) => {
+  await env.DB.prepare("UPDATE try_updates SET hidden = ? WHERE id = ?").bind(m[2] === "hide" ? 1 : 0, Number(m[1])).run();
+  return json({ ok: true });
+});
 // Website visitors who talked to Chotu (web.ts). ?contact=1 for only those who left a number or email; ?format=csv to download.
 route("GET", /^web\/leads$/, "analytics", async ({ env, url }) => {
   const rows = await listLeads(env, page(url, 5000), url.searchParams.get("contact") === "1");

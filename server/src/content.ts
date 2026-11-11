@@ -61,12 +61,13 @@ const SCHEMA_KIND: Record<string, string> = {
   "aspiran/restart-day@1": "restart-day",
   "aspiran/printable@1": "printable",
   "aspiran/audio-lecture@1": "audio-lecture",
+  "aspiran/topic-path@1": "topic-path",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
 /** Manifest entry lists that hold library items. */
 const ITEM_LISTS = ["explainers", "timelines", "games", "quizzes", "maps", "numbers", "myths", "debates", "winddown",
-  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs", "brief"];
+  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs", "brief", "paths"];
 /** Files the desk never needs: share PNGs are drawn on the phone, the rest are tools for writers. */
 const OPTIONAL = /^(share|templates|tools|jobs|_generated)\/|^README\.md$/;
 export const KINDS = [...Object.values(SCHEMA_KIND), ...Object.keys(ENGINE_KINDS)];
@@ -609,6 +610,16 @@ function withMediaPaths(kind: string, pack: string, d: any, warnings: string[]) 
     out.scenes = compileScenes(out, warnings);
   }
   if (kind === "winddown" && out.audio?.file) out.audio.file = media(pack, out.audio.file);
+  // A topic path's videos (mp4, captions, poster) and essay page images ship in its pack.
+  if (kind === "topic-path") {
+    const fix = (o: any): void => {
+      if (Array.isArray(o)) return o.forEach(fix);
+      if (!o || typeof o !== "object") return;
+      for (const k of ["mp4", "vtt", "poster", "image"]) if (typeof o[k] === "string" && !/^(\/|https?:)/.test(o[k])) o[k] = media(pack, o[k]);
+      Object.values(o).forEach(fix);
+    };
+    fix(out.steps);
+  }
   // A talk's recorded parts, in order, per language.
   if (kind === "audio-lecture" && out.recording) for (const l of Object.keys(out.recording)) out.recording[l] = (out.recording[l] ?? []).map((p: string) => media(pack, p));
   // The Hidden Why names its drawing by scene; a missing file leaves a plain paper background.
@@ -926,6 +937,36 @@ function checkPyq(d: any): string[] {
   return flags;
 }
 
+/**
+ * A topic path (aspiran/topic-path@1, served to visitors at /try): one syllabus topic as a guided run of steps. Every
+ * text is { en, hi }, so the public copy can drop the Hindi until a Hindi editor approves it.
+ */
+export function checkTopicPath(d: any): string[] {
+  const flags: string[] = [];
+  const steps: any[] = Array.isArray(d.steps) ? d.steps : [];
+  if (!steps.length) return ["No steps"];
+  const types = new Set(steps.map((s) => s.type));
+  for (const t of ["read", "recall", "keep", "finish"]) if (!types.has(t)) flags.push(`No ${t} step`);
+  const mcqs = steps.filter((s) => s.type !== "survey").flatMap((s) => [...(s.questions ?? []), ...(s.check ?? []), ...(s.cards ?? []).map((c: any) => c.mcq ?? c)]).filter((q) => q.options);
+  const bad = mcqs.filter((q) => q.options.length !== 4 || !Number.isInteger(q.answer) || q.answer < 0 || q.answer > 3 || !q.why?.en).length;
+  if (bad) flags.push(`${bad} question${bad > 1 ? "s need" : " needs"} four options, an answer 0 to 3 and a why`);
+  let texts = 0, hindi = 0;
+  const walk = (o: any) => {
+    if (Array.isArray(o)) return o.forEach(walk);
+    if (!o || typeof o !== "object") return;
+    if (typeof o.en === "string" && o.en) { texts++; if (typeof o.hi === "string" && o.hi) hindi++; }
+    Object.values(o).forEach(walk);
+  };
+  walk(steps);
+  if (hindi < texts) flags.push(`${texts - hindi} of ${texts} texts have no Hindi`);
+  const keep = steps.find((s) => s.type === "keep");
+  if (keep && !(keep.cards?.length >= 4)) flags.push("Keep it needs at least 4 review cards");
+  const pyq = steps.find((s) => s.type === "pyq");
+  if (pyq?.questions?.some((q: any) => !q.source?.paper)) flags.push("Every PYQ needs its paper and number, so the answer can be checked against UPSC's key");
+  d.shareable = false;
+  return flags;
+}
+
 /** The brief asks writers to list every fact that needs checking against a source; the editor clears them. */
 function factFlags(d: any): string[] {
   const facts: string[] = Array.isArray(d.factsToCheck) ? d.factsToCheck.map(String) : [];
@@ -936,6 +977,7 @@ function factFlags(d: any): string[] {
 export function checkItem(kind: string, d: any): string[] {
   if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d), ...factFlags(d)];
   if (kind === "pyq") return checkPyq(d);
+  if (kind === "topic-path") return [...checkTopicPath(d), ...factFlags(d)];
   const flags: string[] = [];
   flags.push(...factFlags(d));
   if (kind === "essay" && !(d.snap1Skeleton && d.snap2Outline && d.snap3Watch)) flags.push("Missing one of the three snaps (skeleton, outline, what to watch)");
