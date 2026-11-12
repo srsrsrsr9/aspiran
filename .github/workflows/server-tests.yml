@@ -1,0 +1,26 @@
+# Runs the server's type check and all its test suites on every push that touches the server.
+# Nothing here deploys: deploying stays a deliberate step (npm run deploy), done after these pass.
+name: Server tests
+on:
+  push:
+    branches: [main]
+    paths: ["server/**", "android/app/src/main/assets/prelims_bank.json", ".github/workflows/server-tests.yml"]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: sudo apt-get update && sudo apt-get install -y zsh lsof
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test:all

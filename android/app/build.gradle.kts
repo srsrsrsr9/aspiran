@@ -31,8 +31,8 @@ android {
         applicationId = "in.aspiran.app" // owner, 31 Oct 2026: set before the first Play upload; never change it after
         minSdk = 26
         targetSdk = 36
-        versionCode = 7
-        versionName = "0.4.2"
+        versionCode = 8
+        versionName = "0.5.0"
         // Sign-in (auth-build.md). No google-services.json: the four Firebase values come from local.properties
         // (firebase.apiKey, firebase.appId, firebase.projectId, firebase.webClientId), -Pupsc.firebase.<key>=..., or env.
         firebaseConfig.forEach { (field, value) -> buildConfigField("String", field, "\"$value\"") }
@@ -43,6 +43,10 @@ android {
         // review builds leave it out (src/release and src/review AndroidManifest.xml) until Play has approved the
         // accessibility declaration; to put it back, delete src/release/AndroidManifest.xml and set this to true there.
         buildConfigField("boolean", "FOCUS_GUARD", "true")
+        // Usage analytics (data/Metrics.kt): PostHog's project token is write-only and public by design, not a secret.
+        // Events, screen names and crashes only; no session replay on Android. Empty switches it off.
+        buildConfigField("String", "POSTHOG_KEY", "\"phc_w8BUoc6nfx5UU7HFg2w5kZKTySWPBQKF6TbsQPPs8Sbx\"")
+        buildConfigField("String", "POSTHOG_HOST", "\"https://us.i.posthog.com\"")
     }
 
     // Release signing. The keystore and its passwords never live in this repo: they come from
@@ -85,7 +89,7 @@ android {
             isMinifyEnabled = false
             // The pod server release builds talk to (the live workers.dev address; change this line for a custom domain).
             // Release builds accept https only (see data/ServerPolicy.kt).
-            buildConfigField("String", "DEFAULT_SERVER", "\"https://upsc-pods-production.chotu-aec.workers.dev\"")
+            buildConfigField("String", "DEFAULT_SERVER", "\"https://app.aspiran.in\"")
             buildConfigField("boolean", "FOCUS_GUARD", "false")
             signingConfig = signingConfigs.getByName("release")
         }
@@ -167,5 +171,6 @@ dependencies {
     implementation(libs.androidx.media3.datasource)
     implementation(libs.androidx.media3.database)
     implementation(libs.play.billing)
+    implementation("com.posthog:posthog-android:3.76.2")
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

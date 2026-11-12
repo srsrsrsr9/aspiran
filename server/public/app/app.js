@@ -391,6 +391,7 @@ function render() {
   const r = route();
   const space = spaceOf(r.name);
   document.documentElement.dataset.space = space;
+  M.startAnalytics(config?.posthog); M.screen(profile() ? r.name.split("=")[0] : r.name === "try" || r.name === "shelf" ? r.name : "first-run", !profile());
   // A link from a "Reset your password" email: #reset=<code>.
   if (r.name.startsWith("reset=")) { put(root, resetScreen(r.name.slice(6))); return; }
   // Sign-in (auth.js): a switched-off account, or an install that hasn't signed in yet. Offline (even past the 72-hour
@@ -489,7 +490,7 @@ function onboarding() {
         h("p", h("label", adult, " ", tl("onboard.adult"))),
         h("p", h("label", consent, " ", tl("onboard.kind"))),
         h("details", h("summary.small", hi ? "हम क्या रखते हैं" : "What we keep"),
-          h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). ",
+          h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). Which screens you open and what you tap go to PostHog, an analytics service, with every word on the screen hidden; you can switch that off in Me → Privacy. ",
             h("a", { href: "/legal/privacy.html", target: "_blank" }, "Privacy policy"), "."))),
       h("div.card", h("div.row", kulhad("warm", 48), h("div", h("strong", "Chotu"), " ", h("span.ai-tag", "Chotu · AI"),
         h("p.small", { style: { margin: "4px 0 0" } }, hi ? "आपका स्टडी साथी एक AI है। वह रैंक या नतीजे नहीं बताता, और मुश्किल घड़ी में असली लोगों तक पहुँचाता है।"
@@ -3032,6 +3033,9 @@ function viewPrivacy() {
       h("p.small", "No questions, no offers and no nudges. Your pod and tools stay open."),
       pausedNow ? h("button", { onclick: () => { store.del("pausedUntil"); render(); } }, "I'm back")
         : h("div.row", h("button", { onclick: () => { store.set("pausedUntil", Date.now() + 7 * 86400_000); render(); } }, "Pause for a week"), h("button", { onclick: () => { store.set("pausedUntil", Date.now() + 30 * 86400_000); render(); } }, "Pause for a month"))),
+    config?.posthog?.key && h("div.card", h("h3", { style: { marginTop: 0 } }, "Usage analytics"),
+      h("label", h("input", { type: "checkbox", checked: M.analyticsOn(), onchange: (e) => { M.setAnalytics(e.target.checked); } }), " Help make Aspiran better by sharing how I use it"),
+      h("p.small.muted", "Which screens you open, what you tap and where the app breaks go to PostHog, an analytics service, under your random member id (never your name or email). Session replays hide every word on the screen and everything you type. Your pod, rooms, Chotu's Talk, Calm, Close the Day and Your room are never recorded. Switch it off here any time.")),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Smarter Chotu"),
       h("label", h("input", { type: "checkbox", checked: !!store.get("smarterChotu"), onchange: (e) => { store.set("smarterChotu", e.target.checked); } }), " Send my approved notes to Chotu with each question"),
       h("p.small.muted", `Off by default. Only the ${P.memory().length} note(s) you approved in Profile, nothing else.`)),

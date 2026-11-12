@@ -515,6 +515,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         }
     }
     var tab by rememberSaveable { mutableStateOf(when (ritual) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; else -> Tab.ADDA }) }
+    // Usage analytics: the screen's name only (Metrics.screen skips the private ones).
+    LaunchedEffect(tab, overlay) { Metrics.screen(if (overlay != Overlay.NONE) overlay.name else tab.name) }
     // With a matched pod, the open rooms are one tap away on the Pod tab.
     var showRooms by rememberSaveable { mutableStateOf(false) }
     // Me's open page lives here so the top bar can show its title and a back arrow.

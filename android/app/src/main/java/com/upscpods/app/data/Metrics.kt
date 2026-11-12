@@ -18,6 +18,11 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import com.posthog.PostHog
+import com.posthog.android.PostHogAndroid
+import com.posthog.android.PostHogAndroidConfig
+import com.upscpods.app.BuildConfig
+import kotlinx.serialization.json.JsonPrimitive
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -48,7 +53,47 @@ object Metrics {
 
     fun init(context: Context, server: () -> String, memberId: () -> String?) {
         app = context.applicationContext; this.server = server; this.memberId = memberId
+        startAnalytics()
     }
+
+    // --- PostHog (owner, 12 Nov 2026): the same event names, which screen was opened, and crashes, under the random
+    // member id (never a name or an email). No session replay on Android, and the screens where people talk or write
+    // about themselves are never named. Me → Privacy → Usage analytics switches it off on this phone.
+    private var analytics = false
+    private var lastScreen: String? = null
+    private val PRIVATE = setOf("ADDA", "POD", "MASCOT", "ME", "CLOSE_DAY", "LAMP", "SHOULDERS", "TOOL")
+
+    var analyticsOn: Boolean
+        get() = ::app.isInitialized && prefs.getBoolean("analytics", true)
+        set(on) {
+            prefs.edit().putBoolean("analytics", on).apply()
+            if (on) { if (analytics) PostHog.optIn() else startAnalytics() } else if (analytics) PostHog.optOut()
+        }
+
+    private fun startAnalytics() {
+        if (analytics || BuildConfig.POSTHOG_KEY.isBlank() || !analyticsOn) return
+        runCatching {
+            PostHogAndroid.setup(app, PostHogAndroidConfig(BuildConfig.POSTHOG_KEY, BuildConfig.POSTHOG_HOST).apply {
+                captureScreenViews = false // one activity; screens are named below
+                captureDeepLinks = false
+                captureApplicationLifecycleEvents = true
+                sessionReplay = false
+            })
+            PostHog.register("platform", "android")
+            analytics = true
+        }
+    }
+
+    /** A screen was opened: its name only. Private screens are skipped. */
+    fun screen(name: String) {
+        if (!analytics || name == lastScreen) return
+        lastScreen = name
+        if (name in PRIVATE) return
+        runCatching { memberId()?.let { PostHog.identify(it) }; PostHog.screen(name) }
+    }
+
+    /** On "Delete my data": the analytics id on this phone goes too. */
+    fun forgetAnalytics() { if (analytics) runCatching { PostHog.reset() } }
 
     val installId: String
         get() = prefs.getString("installId", null) ?: UUID.randomUUID().toString().replace("-", "").also { prefs.edit().putString("installId", it).apply() }
@@ -72,6 +117,7 @@ object Metrics {
     /** One event, fire and forget. */
     fun track(name: String, props: JsonObject = JsonObject(emptyMap())) {
         if (!::app.isInitialized) return
+        if (analytics) runCatching { PostHog.capture(name, properties = props.mapValues { (_, v) -> (v as? JsonPrimitive)?.content ?: v.toString() }) }
         io.launch { post("/events", buildJsonObject { put("events", buildJsonArray { add(buildJsonObject { put("name", name); put("props", props) }) }) }) }
     }
 

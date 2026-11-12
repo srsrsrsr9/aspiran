@@ -236,6 +236,18 @@ fun Rhythm(closedDays: List<LocalDate>, weeks: Int = 4) {
 @Composable
 private fun PrivacyPage(staged: StagedProfile, adminResult: Boolean) {
     var smarter by remember { mutableStateOf(staged.smarterChotu) }
+    var analytics by remember { mutableStateOf(com.upscpods.app.data.Metrics.analyticsOn) }
+    FlatCard {
+        Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text("Usage analytics", style = MaterialTheme.typography.titleSmall)
+                    Text("Which screens you open, what you do and where the app crashes go to PostHog, an analytics service, under your random member id, never your name or email. Your pod, the Adda, ${Brand.MASCOT_SHORT} and Me are never included, and nothing you write is sent.", style = MaterialTheme.typography.bodySmall)
+                }
+                Switch(checked = analytics, onCheckedChange = { analytics = it; com.upscpods.app.data.Metrics.analyticsOn = it })
+            }
+        }
+    }
     FlatCard {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {

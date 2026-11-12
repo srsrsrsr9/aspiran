@@ -102,6 +102,21 @@ try {
     assert.equal((await post("/plus/status", { memberId: m3 })).data.plan, null, "wrong amount: no Plus");
     step("the return check, and a wrong amount never grants");
 
+    // A failed attempt and then a successful retry inside the same order (Cashfree allows it): Plus is still granted.
+    const m4 = rid();
+    const o4 = (await post("/plus/pay/order", { memberId: m4, phone: "9123456781" })).data;
+    assert.equal((await webhook({ type: "PAYMENT_FAILED_WEBHOOK", data: { order: { order_id: o4.orderId }, payment: { payment_status: "FAILED" } } })).status, 200);
+    assert.equal((await post("/plus/pay/verify", { memberId: m4, orderId: o4.orderId })).data.status, "failed");
+    assert.equal((await post("/plus/status", { memberId: m4 })).data.plan, null, "a failed attempt grants nothing");
+    assert.equal((await webhook(success(o4.orderId, o4.amountInr))).status, 200);
+    assert.equal((await post("/plus/status", { memberId: m4 })).data.plan?.source, "cashfree", "the retry that succeeded is honoured");
+    const m5 = rid();
+    const o5 = (await post("/plus/pay/order", { memberId: m5, phone: "9123456782" })).data;
+    await webhook({ type: "PAYMENT_FAILED_WEBHOOK", data: { order: { order_id: o5.orderId }, payment: { payment_status: "FAILED" } } });
+    orders.get(o5.orderId).order_status = "PAID";
+    assert.equal((await post("/plus/pay/verify", { memberId: m5, orderId: o5.orderId })).data.status, "paid", "the return check finds a paid retry too");
+    step("a failed attempt followed by a paid retry still gets Plus");
+
     // Founding seats run out: the next price is the yearly one.
     await admin("pricing", { pricing: { yearlyInr: 2499, foundingInr: 999, foundingSeats: 2, foundingOn: true } });
     const p2 = (await post("/plus/status", { memberId: rid() })).data.payments;

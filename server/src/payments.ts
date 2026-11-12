@@ -59,11 +59,15 @@ interface PaymentRow {
   cf_payment_id: string | null; created_at: string; paid_at: string | null; refunded_at: string | null; refund_inr: number | null; refund_note: string | null;
 }
 
-/** What a year costs right now, and how many founding seats are left. Founding seats count paid, unrefunded orders. */
+/** A checkout that has started holds its founding seat this long, so two people can't both buy the last one. */
+const HOLD_MINUTES = 30;
+
+/** What a year costs right now, and how many founding seats are left: paid, unrefunded orders, plus checkouts in progress. */
 export async function currentPrice(env: Env) {
   const p = await pricing(env);
   await ensureSchema(env);
-  const taken = (await env.DB.prepare("SELECT COUNT(*) AS n FROM payments WHERE founding = 1 AND status = 'paid'").first<{ n: number }>())?.n ?? 0;
+  const taken = (await env.DB.prepare("SELECT COUNT(*) AS n FROM payments WHERE founding = 1 AND (status = 'paid' OR (status = 'created' AND created_at > ?))")
+    .bind(new Date(Date.now() - HOLD_MINUTES * 60_000).toISOString()).first<{ n: number }>())?.n ?? 0;
   const left = p.foundingOn ? Math.max(0, p.foundingSeats - taken) : 0;
   return { amountInr: left > 0 ? p.foundingInr : p.yearlyInr, founding: left > 0, foundingLeft: left, foundingSeats: p.foundingSeats, yearlyInr: p.yearlyInr, foundingInr: p.foundingInr };
 }
@@ -82,10 +86,12 @@ async function markPaid(env: Env, orderId: string, amount: number, cfPaymentId: 
   const row = await env.DB.prepare("SELECT * FROM payments WHERE order_id = ?").bind(orderId).first<PaymentRow>();
   if (!row) return false;
   if (Math.round(amount * 100) !== Math.round(row.amount_inr * 100)) { await bump(env, "payment_amount_mismatch"); return false; }
-  const res = await env.DB.prepare("UPDATE payments SET status = 'paid', paid_at = ?, cf_payment_id = COALESCE(?, cf_payment_id) WHERE order_id = ? AND status = 'created'")
+  const res = await env.DB.prepare("UPDATE payments SET status = 'paid', paid_at = ?, cf_payment_id = COALESCE(?, cf_payment_id) WHERE order_id = ? AND status IN ('created', 'failed')")
     .bind(new Date().toISOString(), cfPaymentId, orderId).run();
   if (!res.meta.changes) return false;
-  await grant(env, row.member_id, "yearly", "cashfree", YEAR_DAYS, false, false);
+  // Cashfree lets a payer try again inside one order, so a success can follow a failed attempt: 'failed' is not final.
+  // A sandbox order moved no money: its year is marked as a test entitlement.
+  await grant(env, row.member_id, "yearly", "cashfree", YEAR_DAYS, false, row.mode === "sandbox");
   await bump(env, "plus_purchases");
   await logEvent(env, "paid", { memberId: row.member_id }, { amount: row.amount_inr, founding: !!row.founding });
   return true;
@@ -157,13 +163,15 @@ export async function paymentsRoute(req: Request, env: Env, path: string, url: U
     if (!isOrderId(orderId)) return bad("orderId is required");
     const row = await env.DB.prepare("SELECT * FROM payments WHERE order_id = ? AND member_id = ?").bind(orderId, memberId).first<PaymentRow>();
     if (!row) return bad("That order isn't yours or doesn't exist.", 404);
-    if (row.status !== "created") return json({ status: row.status });
+    if (row.status !== "created" && row.status !== "failed") return json({ status: row.status });
+    // Ask Cashfree even after a failed attempt: the same order may have been paid on a retry.
     const r = await cf(env, "GET", `/orders/${orderId}`);
-    if (r.status >= 300) return json({ status: "pending" });
+    if (r.status >= 300) return json({ status: row.status === "failed" ? "failed" : "pending" });
     if (r.data?.order_status === "PAID") {
       await markPaid(env, orderId, Number(r.data.order_amount), null);
       return json({ status: "paid" });
     }
+    if (row.status === "failed") return json({ status: "failed" });
     return json({ status: r.data?.order_status === "ACTIVE" ? "pending" : String(r.data?.order_status ?? "pending").toLowerCase() });
   }
   return bad("Not found", 404);

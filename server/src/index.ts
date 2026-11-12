@@ -90,7 +90,9 @@ export default {
         : [];
       // Languages members can pick, and the extra distress phrases the app checks on the device too.
       const results = await resultDays(env);
-      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), pods: await podMode(env), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login) }), { headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" } });
+      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), pods: await podMode(env), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login),
+        // Analytics for the web app (metrics.js): the public project token, or null when none is set.
+        posthog: /^phc_\w{20,80}$/.test(env.POSTHOG_KEY ?? "") ? { key: env.POSTHOG_KEY, host: env.POSTHOG_HOST || "https://us.i.posthog.com" } : null }), { headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" } });
     }
 
     // --- Growth metrics (metrics.ts): our own events and one-tap feedback. No third-party trackers, never free text.
@@ -246,13 +248,13 @@ export default {
     }
 
     // --- News desk and moderation
-    if (path === "/desk") return new Response(DESK_HTML, { headers: { "content-type": "text/html; charset=utf-8" } });
+    if (path === "/desk") return new Response(DESK_HTML, { headers: { "content-type": "text/html; charset=utf-8", ...STAFF_PAGE } });
     // Library ids have colons in them, which the desk page escapes as %3A.
     if (path.startsWith("/desk/api/")) return deskApi(req, env, safeDecode(path.slice("/desk/api/".length)));
     if (path.startsWith("/mod/api/")) return modApi(req, env, path.slice("/mod/api/".length));
 
     // --- Admin console
-    if (path === "/admin") return new Response(ADMIN_HTML, { headers: { "content-type": "text/html; charset=utf-8", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+    if (path === "/admin") return new Response(ADMIN_HTML, { headers: { "content-type": "text/html; charset=utf-8", ...STAFF_PAGE } });
     if (path.startsWith("/admin/api/")) return adminApi(req, env, path.slice("/admin/api/".length));
 
     return bad("Not found", 404);
@@ -297,6 +299,16 @@ export default {
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },
 } satisfies ExportedHandler<Env>;
+
+/**
+ * The Desk and Admin pages: never framed, never cached, and only allowed to load their own inline code and talk to
+ * this server. Both pages are single files with inline scripts and styles, hence 'unsafe-inline'; what the policy
+ * stops is a script or a form pointing anywhere else.
+ */
+const STAFF_PAGE = {
+  "x-frame-options": "DENY", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "cache-control": "no-store",
+  "content-security-policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; font-src 'self' data:; form-action 'none'; base-uri 'none'; frame-ancestors 'none'",
+};
 
 /** What the Free Shelf shows visitors with no account. */
 const SHELF_KINDS = new Set(["calm", "routine", "pause-lines"]);

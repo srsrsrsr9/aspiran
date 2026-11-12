@@ -20,6 +20,7 @@ const MAX_TURNS = 8;
 const MAX_CHARS = 600;
 const PER_VISITOR = 15; // AI replies a day
 const PER_NETWORK = 60; // AI replies a day from one IP (shared Wi-Fi, hostels)
+const PER_NETWORK_LEADS = 200; // saves a day from one IP (each scroll answer is a save)
 
 const DETAIL_KEYS = ["name", "attempt", "medium", "stage", "optional", "city", "year", "hours", "worry", "sleep", "recall", "calibration", "pluck", "chai", "path"] as const;
 
@@ -193,6 +194,10 @@ async function webLead(req: Request, env: Env): Promise<Response> {
   const b = await req.json<any>().catch(() => null);
   if (!b || !visitorIdOk(b.visitorId)) return bad("visitorId is required");
   if (String(b.company ?? "")) return json({ ok: true }); // the hidden field only bots fill
+  // A cap per network per day: far above a hostel's worth of real visitors, far below a flood.
+  await ensureSchema(env);
+  const net = "lead:" + (await sha256Hex((req.headers.get("cf-connecting-ip") ?? "local") + ":" + istDay())).slice(0, 24);
+  if (!(await takeTurn(env, net, PER_NETWORK_LEADS))) return json({ error: "That's a lot from one place today. Try again tomorrow, or WhatsApp us." }, 429);
   const details = cleanDetails(b.details);
   let contact = str(b.contact, 80);
   let kind = "";

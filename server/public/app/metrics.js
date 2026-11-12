@@ -1,6 +1,12 @@
 // Usage counts for the Growth page: what happened, never what was said. Events carry a random install id and
-// (once signed in) the member id, plus small codes and numbers. No mood, journal or chat text ever goes here, and
-// there are no third-party trackers. Ratings are one tap; the day-7 check-in is two taps.
+// (once signed in) the member id, plus small codes and numbers. No mood, journal or chat text ever goes here.
+// Ratings are one tap; the day-7 check-in is two taps.
+//
+// PostHog (owner, 12 Nov 2026) gets the same event names, which screen was opened, taps, errors, and a replay of the
+// session in which every word on the screen and everything typed is hidden, so a replay shows where someone tapped
+// and got stuck, never what they read or wrote. Screens where people talk or write about themselves (the pod, rooms,
+// Chotu's Talk, Calm, Close the Day, Your room, Me) are never recorded at all. The person is a random member id, never
+// an email or a name. Me → Privacy → "Usage analytics" switches all of it off on this device.
 
 const KEY = "upsc:metrics";
 const mem = {};
@@ -27,7 +33,54 @@ async function post(path, body) {
 }
 
 /** One event. Fire and forget. */
-export function track(name, props = {}) { post("/events", { events: [{ name, props }] }); }
+export function track(name, props = {}) { post("/events", { events: [{ name, props }] }); ph()?.capture(name, props); }
+
+// --- PostHog ------------------------------------------------------------------------------------
+
+const OFF = "upsc:analytics-off";
+/** Never recorded, and never autocaptured: where people talk or write about themselves. */
+const PRIVATE = new Set(["adda", "pod", "rooms", "room", "commons", "talk", "calm", "close", "journal", "notes", "yours", "me", "profile", "privacy", "receipts", "paid", "gift"]);
+let started = false, privateNow = false, lastScreen = null;
+const ph = () => (started && !privateNow && window.posthog?.capture ? window.posthog : null);
+
+export const analyticsOn = () => { try { return localStorage.getItem(OFF) !== "1"; } catch { return true; } };
+export function setAnalytics(on) {
+  try { on ? localStorage.removeItem(OFF) : localStorage.setItem(OFF, "1"); } catch {}
+  if (!started) return;
+  if (on) window.posthog.opt_in_capturing(); else { window.posthog.stopSessionRecording?.(); window.posthog.opt_out_capturing(); }
+}
+
+/** cfg is /config's `posthog` ({ key, host }) or null. Does nothing without a key, or once switched off on this device. */
+export function startAnalytics(cfg) {
+  if (started || !cfg?.key || !analyticsOn()) return;
+  // PostHog's own loader: it queues calls until the library arrives.
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify reset register opt_out_capturing opt_in_capturing startSessionRecording stopSessionRecording captureException".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  window.posthog.init(cfg.key, {
+    api_host: cfg.host || "https://us.i.posthog.com", persistence: "localStorage", person_profiles: "identified_only",
+    capture_pageview: false, capture_pageleave: false, capture_exceptions: true,
+    // Taps are counted by element, never by the words on it.
+    autocapture: true, mask_all_text: true, mask_all_element_attributes: true,
+    disable_session_recording: true, // started per screen, below
+    session_recording: { maskAllInputs: true, maskTextSelector: "*" },
+  });
+  window.posthog.register({ platform: "web" });
+  started = true;
+  const id = memberOf();
+  if (id) window.posthog.identify(id);
+}
+
+/** Called on every screen change with the route's name only (never its argument: ids, codes). */
+export function screen(name, signedOut = false) {
+  if (!started || !analyticsOn()) return;
+  const id = memberOf();
+  if (id) window.posthog.identify(id);
+  if (name === lastScreen) return; // the app redraws a screen often; count each visit once
+  lastScreen = name;
+  privateNow = PRIVATE.has(name);
+  if (privateNow) { window.posthog.stopSessionRecording?.(); return; }
+  window.posthog.startSessionRecording?.();
+  window.posthog.capture("$pageview", { $current_url: `${location.origin}/app/#${name}`, screen: name, signed_out: signedOut });
+}
 
 /** first_open once per browser (with ?src= / ?invite= from the link that brought them), app_open once a day. */
 export async function boot() {
@@ -100,4 +153,4 @@ export function checkinCard(h, createdOn) {
 }
 
 /** On delete: forget this browser's install id too. */
-export function forget() { try { localStorage.removeItem(KEY); } catch {} for (const k of Object.keys(mem)) delete mem[k]; }
+export function forget() { if (started) window.posthog.reset?.(); try { localStorage.removeItem(KEY); } catch {} for (const k of Object.keys(mem)) delete mem[k]; }
