@@ -78,6 +78,7 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
   await env.DB.prepare("DELETE FROM room_starters WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await env.DB.prepare("DELETE FROM interview_uses WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await env.DB.prepare("DELETE FROM pod_merge_optouts WHERE member_id = ?").bind(memberId).run().catch(() => {});
+  await env.DB.prepare("DELETE FROM pod_lead_plus WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await sweepPhotos(env, { member: memberId }).catch(() => null);
   await forgetAccount(env, memberId);
   await logRequest(env, "delete", memberId, via, by);

@@ -20,6 +20,8 @@ export const LIMITS = { free: { feedbackPerWeek: 3, mocksPerMonth: 1, cloudChotu
 // One price on show: a year of Plus at ₹9,999 (owner, 23 Oct). Monthly stays only for test-mode purchases and gifts; it is never shown.
 export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 9999, days: 365 } } as const;
 const TRIAL_DAYS = 7;
+/** How long a pod lead's free Plus lasts, counted from the day they first qualified. */
+export const LEAD_PLUS_DAYS = 365;
 const DAY = 86400_000;
 
 /** The only surface an offer may appear on. */
@@ -58,10 +60,15 @@ interface Ent { member_id: string; plan: string; source: string; starts_at: stri
 async function entitlement(env: Env, memberId: string): Promise<{ plan: string; source: string; endsAt: string; cancelled: boolean; trial: boolean } | null> {
   const e = await env.DB.prepare("SELECT * FROM entitlements WHERE member_id = ?").bind(memberId).first<Ent>();
   if (e && e.ends_at > new Date().toISOString()) return { plan: e.plan, source: e.source, endsAt: e.ends_at, cancelled: !!e.cancelled_at, trial: e.source === "trial" };
-  // Active pod leads get Plus free (a pod with 3 or more people).
+  // Active pod leads get Plus free (a pod with 3 or more people), for one year in all (owner, 12 Nov 2026). The year
+  // starts the first time they qualify and is theirs once: leading another pod later doesn't start a new one.
   const lead = await env.DB.prepare("SELECT id FROM pods WHERE lead_member = ? AND size >= 3 AND merged_into IS NULL").bind(memberId).first();
-  if (lead) return { plan: "plus", source: "pod-lead", endsAt: "", cancelled: false, trial: false };
-  return null;
+  if (!lead) return null;
+  await env.DB.prepare("INSERT OR IGNORE INTO pod_lead_plus (member_id, started_at) VALUES (?, ?)").bind(memberId, new Date().toISOString()).run();
+  const row = await env.DB.prepare("SELECT started_at FROM pod_lead_plus WHERE member_id = ?").bind(memberId).first<{ started_at: string }>();
+  const endsAt = new Date(Date.parse(row?.started_at ?? new Date().toISOString()) + LEAD_PLUS_DAYS * DAY).toISOString();
+  if (endsAt <= new Date().toISOString()) return null;
+  return { plan: "plus", source: "pod-lead", endsAt, cancelled: false, trial: false };
 }
 
 async function used(env: Env, memberId: string) {
