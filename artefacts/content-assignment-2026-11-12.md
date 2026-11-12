@@ -82,6 +82,22 @@ checks/manifest-<batch>.json
 
 ## The batches, in order
 
+### G0. The week's Chai stories (every week, 20 minutes; do this before anything else)
+
+The app's own news reader only reaches the Reserve Bank's feed, so the daily Chai has almost nothing to choose from.
+Until that changes, a week of stories comes from you, once a week.
+
+- Hand back **one file**, `chai/week-<Monday's date>.json`: a list of 35 stories, five for each of the coming seven
+  days, each `{ "day": "YYYY-MM-DD", "title", "sourceName", "sourceUrl", "text" }`.
+- **Sources: official ones only.** PIB releases, ministry and regulator notices, PRS bill summaries, Supreme Court
+  judgments, reports of commissions, UN and World Bank reports. No newspapers, no coaching sites.
+- `text` is the **source's own words**, copied from the page (up to about 1,500 words), not your summary. The app
+  writes the card from it and checks every number and name in the card against this text, so nothing may be added.
+- Pick stories from the last ten days that tie to a syllabus line, and spread them: polity and governance, economy,
+  environment, science, international relations, society. One light story a day at most. **No** deaths, disasters,
+  crime, or anything about one person's court case: those need a human and will be held back.
+- You do not write the card, the quiz or the Hindi. The app does, and labels what no editor has checked.
+
 ### G1. Fact refresh of the 98 existing notes (do this first)
 
 A review of one flagship topic found nine wrong or out-of-date facts. Assume the rest are the same.

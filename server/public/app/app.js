@@ -438,61 +438,66 @@ loadConfig();
 // stage, attempts, age or mood is asked here: those come later, one at a time, when they help.
 
 function onboarding() {
-  const o = (onboarding.state ??= { step: 0, lang: langOptions().some((x) => x.code === navigator.language?.slice(0, 2)) ? navigator.language.slice(0, 2) : "en", adult: false, consent: false, name: "" });
+  const o = (onboarding.state ??= { step: 0, lang: langOptions().some((x) => x.code === navigator.language?.slice(0, 2)) ? navigator.language.slice(0, 2) : "en", adult: false, consent: false, name: "", pick: null });
   const tl = (k) => t(k, o.lang);
+  const hi = o.lang === "hi";
   const redraw = () => put($("#root"), onboarding());
-  const step = (n) => { o.step = n; redraw(); };
-  const dots = o.step === 0 ? null : h("div.dots", { "aria-label": `Step ${Math.min(o.step + 1, 5)} of 5` }, [0, 1, 2, 3, 4].map((i) => h("i" + (i === o.step ? ".on" : ""))));
+  const step = (n) => { o.step = n; redraw(); window.scrollTo(0, 0); };
   let body;
   if (o.step === 0) {
-    // The home page for anyone new: a welcome in eleven languages, the app in English (Hindi where it exists),
-    // and a prominent way to ask for your own language.
-    // The whole syllabus and the way Aspiran teaches it come first (owner, 4 Nov 2026): the breadth is the honest
-    // picture, and every leaf starts dark. Then the welcome.
-    body = [h("p.small.muted.center", { style: { margin: 0 } }, tl("onboard.title")),
-      h("h1.center", "The whole UPSC syllabus. Every line of it."),
-      gardenSection({ hero: false, note: false, height: 360 }),
-      h("p.center", "Every leaf is one line of UPSC's syllabus. It's meant to look like a lot, because it is. Each leaf lights up as you meet its topic, and deepens as you recall it and use it."),
-      pitchCard(),
-      welcomeScene(kulhad),
-      h("h2.center", "Welcome to the Adda"),
-      h("p.center", "Pull up a chair. A pod of people at your stage, Chotu, Calm and today's Chai. Free, no card needed."),
-      h("div.center", { style: { margin: "12px 0 4px" } }, h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(Auth.optional() || (o.memberId && Auth.signedIn()) ? 2 : 1) }, "Come in")),
-      h("div.card", h("h3", { style: { marginTop: 0 } }, tl("lang.label")),
-        langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); }),
-        h("p.small.muted", tl("lang.note"))),
-      requestPanel(),
-      h("p.small.center", h("a", { href: "#try" }, "Try one whole topic first, no account needed"), " · ", h("a", { href: "#shelf" }, "Look around the Free Shelf"))];
-  } else if (o.step === 1) {
-    body = [h("h1", "Sign in"),
-      h("p", "So your pod, stamps and settings stay yours, and so the Adda stays safe. Sign in with Google, or with a username and password. Your email or username is only for signing in: your pod never sees it, and it never goes to Chotu."),
-      signInPanel(null, (memberId) => { o.memberId = memberId; step(2); }),
-      h("div.row", h("button", { onclick: () => step(0) }, "Back")),
-      h("p.small.center", "Just looking? ", h("a", { href: "#try" }, "Try one topic"), " or the ", h("a", { href: "#shelf" }, "Free Shelf"), ", no account needed")];
-  } else if (o.step === 2) {
-    const adult = h("input", { type: "checkbox", id: "adult", checked: o.adult, onchange: (e) => { o.adult = e.target.checked; go.disabled = !(o.adult && o.consent); } });
-    const consent = h("input", { type: "checkbox", id: "consent", checked: o.consent, onchange: (e) => { o.consent = e.target.checked; go.disabled = !(o.adult && o.consent); } });
-    const go = h("button.primary", { disabled: !(o.adult && o.consent), onclick: () => step(3) }, "Next");
-    body = [h("h1", "Two quick things"),
+    // Two screens in all (12 Nov 2026; it was five, and 44% left before the end). First: one question to answer before
+    // anything is asked of you, then sign in right here. The garden and the six ideas wait below for whoever wants them;
+    // they open Today for everyone anyway.
+    const Q = hi
+      ? { q: "संविधान की प्रस्तावना में अब तक कितनी बार संशोधन हुआ है?", opts: ["कभी नहीं", "एक बार", "दो बार", "पता नहीं"], right: 1,
+          yes: "सही। 1976 में, 42वें संशोधन से: समाजवादी, पंथनिरपेक्ष और अखंडता जोड़े गए।", no: "एक बार: 1976 में, 42वें संशोधन से (समाजवादी, पंथनिरपेक्ष, अखंडता)।",
+          after: "पहले जवाब, फिर देखना: यही Aspiran का तरीक़ा है। यह सवाल एक हफ़्ते बाद फिर आएगा, ठीक भूलने से पहले।" }
+      : { q: "How many times has the Preamble to the Constitution been amended?", opts: ["Never", "Once", "Twice", "No idea"], right: 1,
+          yes: "Right. Once, in 1976: the 42nd Amendment added socialist, secular and integrity.", no: "Once, in 1976: the 42nd Amendment added socialist, secular and integrity.",
+          after: "You answered first, then looked. That's how Aspiran works, and this one comes back in a week, just before you'd forget it." };
+    const answered = o.pick != null;
+    const enter = Auth.optional() || (o.memberId && Auth.signedIn())
+      ? h("div.center", h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(1) }, hi ? "अंदर आइए" : "Come in"))
+      : signInPanel(null, (memberId) => { o.memberId = memberId; step(1); });
+    body = [
+      h("div.row.between", h("strong", "Aspiran"), langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); })),
+      h("h1", hi ? "जो पढ़ा, वह याद रहे।" : "Remember what you read."),
+      h("p", hi ? "UPSC की तैयारी, अकेले नहीं। पहले एक सवाल:" : "UPSC prep that sticks, and never alone. One question first:"),
+      h("div.card", h("p", h("strong", Q.q)),
+        h("div.col", Q.opts.map((label, i) => h("button" + (answered && i === Q.right ? ".primary" : ""), { disabled: answered, "aria-pressed": String(o.pick === i), onclick: () => { o.pick = i; redraw(); } }, label))),
+        answered && h("p", { role: "status" }, o.pick === Q.right ? Q.yes : Q.no),
+        answered && h("p.small.muted", Q.after)),
+      h("div.card", h("h2", { style: { marginTop: 0 } }, hi ? "मुफ़्त में शुरू करें" : "Start free"),
+        h("p.small", hi ? "आपका पॉड, रोज़ की चाय, अभ्यास और Chotu। कार्ड नहीं चाहिए। आपका ईमेल सिर्फ़ साइन-इन के लिए है: पॉड उसे नहीं देखता, और वह Chotu तक नहीं जाता।"
+          : "Your pod, the daily Chai, practice and Chotu. No card needed. Your email is only for signing in: your pod never sees it, and it never goes to Chotu."),
+        enter),
+      h("p.center", h("a", { href: "#try" }, hi ? "पहले एक पूरा टॉपिक आज़माएँ, बिना अकाउंट के" : "Or try one whole topic first, no account needed")),
+      h("details", h("summary", hi ? "Aspiran कैसे पढ़ाता है" : "How Aspiran teaches, and the whole syllabus"),
+        gardenSection({ hero: false, note: false, height: 300 }), pitchCard(), requestPanel(),
+        h("p.small.center", h("a", { href: "#shelf" }, "Look around the Free Shelf")))];
+  } else {
+    // Everything else on one screen: a name, the two things the law and the pod need, and who Chotu is.
+    const ready = () => o.adult && o.consent;
+    const go = h("button.primary", { disabled: !ready(), style: { padding: "12px 28px", fontSize: "17px" }, onclick: finishOnboarding }, hi ? "अड्डे पर चलें" : "Take me in");
+    const sync = () => { go.disabled = !ready(); };
+    const name = h("input", { type: "text", maxLength: 40, placeholder: tl("onboard.namePh"), autocomplete: "nickname", value: o.name, oninput: (e) => (o.name = e.target.value) });
+    const adult = h("input", { type: "checkbox", id: "adult", checked: o.adult, onchange: (e) => { o.adult = e.target.checked; sync(); } });
+    const consent = h("input", { type: "checkbox", id: "consent", checked: o.consent, onchange: (e) => { o.consent = e.target.checked; sync(); } });
+    body = [h("h1", hi ? "बस एक मिनट" : "One last screen"),
       h("div.card",
+        h("label", h("strong", tl("onboard.name")), name), h("p.small.muted", hi ? "सिर्फ़ आपका पॉड इसे देखता है। खाली छोड़ सकते हैं।" : "Only your pod sees it. You can leave it empty."),
         h("p", h("label", adult, " ", tl("onboard.adult"))),
         h("p", h("label", consent, " ", tl("onboard.kind"))),
-        h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time)."),
-        h("div.row", h("button", { onclick: () => step(Auth.optional() ? 0 : 1) }, "Back"), go))];
-  } else if (o.step === 3) {
-    const name = h("input", { type: "text", maxLength: 40, placeholder: tl("onboard.namePh"), autocomplete: "nickname", value: o.name, oninput: (e) => (o.name = e.target.value) });
-    body = [h("h1", tl("onboard.name")),
-      h("div.card", name, h("p.small.muted", "Only your pod sees it. It never goes to Chotu."),
-        h("div.row", { style: { marginTop: "12px" } }, h("button", { onclick: () => step(2) }, "Back"), h("button.primary", { onclick: () => step(4) }, "Next")))];
+        h("details", h("summary.small", hi ? "हम क्या रखते हैं" : "What we keep"),
+          h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). ",
+            h("a", { href: "/legal/privacy.html", target: "_blank" }, "Privacy policy"), "."))),
+      h("div.card", h("div.row", kulhad("warm", 48), h("div", h("strong", "Chotu"), " ", h("span.ai-tag", "Chotu · AI"),
+        h("p.small", { style: { margin: "4px 0 0" } }, hi ? "आपका स्टडी साथी एक AI है। वह रैंक या नतीजे नहीं बताता, और मुश्किल घड़ी में असली लोगों तक पहुँचाता है।"
+          : "Your study buddy is an AI. It explains, quizzes and plans a day of at most three things. It doesn't predict ranks or results, and if things feel heavy it points you to real people.")))),
+      h("div.center", go)];
     setTimeout(() => name.focus(), 0);
-  } else {
-    body = [h("div.center", kulhad("warm", 96)), h("h1.center", "Meet Chotu"), h("p.center", h("span.ai-tag", "Chotu · AI")),
-      h("div.card",
-        h("p", "I'm a small clay kulhad that has sat on a lot of library desks. I can keep you company, explain a Chai card, quiz you, or plan a day of at most three things."),
-        h("p", "I'm an AI. I don't predict ranks or results, I won't tell you whether to keep going or stop, and if things feel heavy I'll point you to real people who can help."),
-        h("button.primary", { onclick: finishOnboarding }, "Take me to the Adda"))];
   }
-  return h("main", { lang: o.lang }, h("div.col", dots, body));
+  return h("main", { lang: o.lang }, h("div.col", body));
 }
 
 function finishOnboarding() {
@@ -1081,7 +1086,7 @@ function viewMains() {
     ];
     if (!w.ai) {
       const note = h("p.muted", "Reading your answer…");
-      post("/answers/evaluate", { memberId: profile().memberId, question, words: w.target, text }).then((r) => {
+      post("/answers/evaluate", { memberId: profile().memberId, question, words: w.target, text, lang: lang() }).then((r) => {
         if (r?.care) { pod.care = true; put(note, careBox()); return; }
         if (!r || r.error) { put(note, h("p", r?.error ?? "Couldn't reach the reviewer. Check your connection."), h("button", { onclick: () => go("rewrite") }, "Go to the rewrite")); return; }
         w.ai = { areas: r.areas ?? {}, summary: r.summary ?? "", wordCount: r.wordCount ?? 0, skeleton: r.skeleton ?? null, left: r.left ?? null };

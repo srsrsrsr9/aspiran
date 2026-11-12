@@ -1,5 +1,5 @@
 import { publicLibrary, serveMedia } from "./content";
-import { deskApi, modApi, postRitual, publish } from "./desk";
+import { autoPick, chaiDigest, deskApi, modApi, postRitual, publish } from "./desk";
 import DESK_HTML from "./desk.html";
 import { runPipeline } from "./pipeline";
 import { adminApi } from "./admin";
@@ -30,6 +30,7 @@ import { roadmapRoute } from "./roadmap";
 
 import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
+import { learnRoute } from "./learn";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -50,6 +51,8 @@ export default {
     if (host === "app.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/app/`, 302);
     if (host === "admin.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/admin`, 302);
     if (host === "app.aspiran.in" && (path === "/admin" || path === "/desk")) return Response.redirect(`https://admin.aspiran.in${path}`, 302);
+    // Public topic pages for search (learn.ts): a taste of each syllabus topic, never the library.
+    { const r = await learnRoute(req, env, path, ctx); if (r) return r; }
     if (path === "/" || path === "/health") return json({ ok: true, service: "upsc-pods", day: istDay() });
     const count = (metric: string) => ctx.waitUntil(bump(env, metric));
 
@@ -279,7 +282,14 @@ export default {
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));
     if (hm === "07:00") {
       // Publish what the editor approved, then tell the pods (through the host gate).
-      ctx.waitUntil(publish(env).then(async (r) => { console.log(JSON.stringify(r)); if (r.published) await postRitual(env, "chai"); })
+      ctx.waitUntil((async () => {
+        // The automatic Chai (flag chai_auto): fills the day from checked drafts when no editor has been in.
+        const auto = (await flags(env)).chai_auto ? await autoPick(env).catch((e) => { console.log("auto chai failed", String(e)); return null; }) : null;
+        const r = await publish(env);
+        console.log(JSON.stringify({ ...r, auto }));
+        if (r.published) await postRitual(env, "chai");
+        await chaiDigest(env, istDay(), auto, r).catch(() => {});
+      })()
         // Then each open room's pinned question, from what was just published.
         .then(() => runJob(env, "pins", at)).then(log("pins"), fail("pins")));
     }

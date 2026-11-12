@@ -228,11 +228,12 @@ class Community(private val server: () -> String, private val memberId: () -> St
      * Answer Studio: rubric feedback on one answer, typed or as a JPEG of the handwritten sheet. The server reads
      * the photo and doesn't keep it. Error replies (allowance used, offline) come back as [AnswerFeedback.error].
      */
-    suspend fun evaluate(question: String, words: Int, text: String?, jpeg: ByteArray?): AnswerFeedback = withContext(Dispatchers.IO) {
+    suspend fun evaluate(question: String, words: Int, text: String?, jpeg: ByteArray?, hindi: Boolean = false): AnswerFeedback = withContext(Dispatchers.IO) {
         val base = server()
         if (base.isBlank()) return@withContext AnswerFeedback(error = "Answer review needs the pod server. Set it in Me → My Path.")
         val body = buildJsonObject {
             put("memberId", memberId()); put("question", question); put("words", words)
+            if (hindi) put("lang", "hi")
             text?.takeIf { it.isNotBlank() }?.let { put("text", it) }
             jpeg?.let { put("image", buildJsonObject { put("mime", "image/jpeg"); put("data", android.util.Base64.encodeToString(it, android.util.Base64.NO_WRAP)) }) }
         }

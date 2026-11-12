@@ -22,13 +22,15 @@
     "import": "node scripts/import-pack.mjs",
     "import:brief": "node scripts/import-brief.mjs",
     "import:ca": "node scripts/import-ca.mjs",
+    "import:chai": "node scripts/import-chai.mjs",
     "test:roadmap": "node test/roadmap.mjs",
     "test:payments": "node --import ./test/dev-auth.mjs test/payments.mjs",
     "test:password": "node test/password.mjs",
     "test:rooms": "node --import ./test/dev-auth.mjs test/rooms.mjs",
     "test:ca": "node test/ca.mjs",
     "test:pyq": "node --import ./test/dev-auth.mjs test/pyq.mjs",
-    "test:try": "node test/try.mjs"
+    "test:try": "node test/try.mjs",
+    "test:all": "zsh scripts/test-all.sh"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20260901.0",

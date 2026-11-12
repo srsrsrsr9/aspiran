@@ -83,7 +83,10 @@ fun OnboardingScreen(
     val context = LocalContext.current
     var chaiTime by rememberSaveable { mutableStateOf(Nudge.time(context)) }
 
-    val steps = Step.entries.filter { it != Step.SIGN_IN || signIn != null }
+    // Four screens at most (12 Nov 2026; it was six, and 44% of people left before the end): a question and the language,
+    // sign in, the consent, then name and Chotu together. The garden and the six ideas open Today for everyone anyway.
+    val steps = Step.entries.filter { it != Step.LANGUAGE && it != Step.NAME && (it != Step.SIGN_IN || signIn != null) }
+    var pick by rememberSaveable { mutableStateOf(-1) }
     fun next() { step = steps[steps.indexOf(step) + 1] }
     fun back() { if (steps.indexOf(step) > 0) step = steps[steps.indexOf(step) - 1] }
     // Stage, attempts and hours start neutral; the staged questions fill in the real answers later.
@@ -98,9 +101,8 @@ fun OnboardingScreen(
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                if (step == Step.LANGUAGE || step == Step.SIGN_IN || step == Step.NAME || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
+                if (step == Step.SIGN_IN || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
                 Spacer(Modifier.weight(1f))
-                if (step == Step.NAME) TextButton(onClick = { next() }) { Text("Skip") }
             }
             if (step != Step.WELCOME) StepDots(total = steps.size - 1, current = steps.indexOf(step) - 1)
 
@@ -116,22 +118,31 @@ fun OnboardingScreen(
                 ) {
                     when (s) {
                         Step.WELCOME -> {
-                            // The whole syllabus and the way Aspiran teaches it come first (owner, 4 Nov 2026): the breadth is
-                            // the honest picture, and every leaf starts dark. Then the welcome, hello in eleven languages.
-                            Text("The whole UPSC syllabus. Every line of it.", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold,
-                                modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-                            val vines = remember { vinesOf(syllabusFor(null), emptyMap(), hasOptional = false) }
-                            GardenSection(vines, onVine = {}, height = 380f, note = false)
-                            Text("Every leaf is one line of UPSC's syllabus. It looks like a lot because it is, and that's why we take it a leaf at a time. Each one lights up as you meet its topic, and blooms when you can use it in an answer.",
-                                style = ReadingText)
-                            GardenKey()
-                            PedagogyCard()
-                            WelcomeScene()
-                            Text("Welcome to the Adda", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold,
-                                modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-                            Text("Pull up a chair. A pod of people at your stage, ${Brand.MASCOT_SHORT}, calm tools and today's Chai. Free, no card needed.",
-                                style = ReadingText, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-                            ChotuSays("Namaste! I'm ${Brand.MASCOT_SHORT}. Pull up a chair, I'll show you around. It takes a minute.")
+                            // One question to answer before anything is asked of you: the method, felt in ten seconds.
+                            Text("Remember what you read.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
+                            Text("UPSC prep that sticks, and never alone. One question first:", style = ReadingText)
+                            FlatCard {
+                                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    Text("How many times has the Preamble to the Constitution been amended?", fontWeight = FontWeight.Bold)
+                                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        listOf("Never", "Once", "Twice", "No idea").forEachIndexed { i, label ->
+                                            FilterChip(selected = pick == i || (pick >= 0 && i == 1), enabled = pick < 0 || pick == i || i == 1, onClick = { if (pick < 0) pick = i }, label = { Text(label) })
+                                        }
+                                    }
+                                    if (pick >= 0) {
+                                        Text((if (pick == 1) "Right. " else "") + "Once, in 1976: the 42nd Amendment added socialist, secular and integrity.")
+                                        Text("You answered first, then looked. That's how Aspiran works, and this one comes back in a week, just before you'd forget it.",
+                                            style = MaterialTheme.typography.bodySmall)
+                                    }
+                                }
+                            }
+                            Label("Which language do you read in? · आप किस भाषा में पढ़ते हैं?")
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                ReadingLanguage.entries.forEach { l ->
+                                    FilterChip(selected = language == l, onClick = { language = l }, label = { Text(l.label) })
+                                }
+                            }
+                            Text("Your pod, the daily Chai, practice and ${Brand.MASCOT_SHORT}. Free, no card needed.", style = MaterialTheme.typography.bodySmall)
                         }
                         // From here Chotu hosts each step in a speech bubble.
                         Step.LANGUAGE -> {
@@ -166,9 +177,16 @@ fun OnboardingScreen(
                             )
                         }
                         Step.MEET -> {
+                            Label("What should we call you in your pod?")
+                            OutlinedTextField(
+                                value = name,
+                                onValueChange = { name = it.take(24) },
+                                placeholder = { Text("A first name or a nickname. You can leave it empty.") },
+                                singleLine = true,
+                                modifier = Modifier.fillMaxWidth(),
+                            )
                             ChotuSays(
-                                (if (name.isNotBlank()) "Nice to meet you, ${name.trim()}! " else "Nice to meet you! ") +
-                                    "I'm the app's AI. I keep your pod company, explain the news simply, and stay quiet unless you ask. " +
+                                "I'm ${Brand.MASCOT_SHORT}, the app's AI. I keep your pod company, explain the news simply, and stay quiet unless you ask. " +
                                     "I can be wrong, I'm not a counsellor, and I never predict ranks.",
                                 ChotuMood.PROUD,
                             )

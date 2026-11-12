@@ -8,7 +8,8 @@ import { clip, readFeedback, wordsIn } from "./rubric";
 
 /**
  * Answer Studio (sell-first plan, W5): rubric feedback on one Mains answer, from a photo of the handwritten sheet
- * or typed text. POST /answers/evaluate {memberId, question, words: 150 | 250, text?, image?: {mime, data (base64)}}.
+ * or typed text. POST /answers/evaluate {memberId, question, words: 150 | 250, text?, image?: {mime, data (base64)}, lang?: "hi"}.
+ * Hindi-medium answers are marked by the same rubric with the feedback in Hindi (LANG_RULES).
  *
  * Five areas, each with a band against a typical scoring answer (below, at or above) and one fix: the directive
  * word, structure, content coverage, examples and data, and the conclusion. Plus a word count and a model-answer
@@ -34,7 +35,31 @@ export const TYPED_EVAL_HOPS: Hop[] = [
   ...EVAL_HOPS,
 ];
 
-const PROMPT = (question: string, words: number, source: string) => `You are an experienced UPSC Civil Services Mains evaluator. Grade one answer to this question, written for a ${words}-word limit:
+/** Hindi-medium answers: the model that reads and writes Hindi best goes first, typed or photographed. */
+export const HINDI_EVAL_HOPS: Hop[] = [EVAL_HOPS[0], TYPED_EVAL_HOPS[0], ...EVAL_HOPS.slice(1)];
+
+const DEVANAGARI = /[\u0900-\u097F]/g;
+/** Mostly Devanagari? Then it is a Hindi-medium answer, whatever the app said. */
+export const looksHindi = (t: string) => { const letters = t.replace(/[\s\d\p{P}]/gu, ""); return letters.length > 0 && (t.match(DEVANAGARI)?.length ?? 0) > letters.length * 0.4; };
+
+/**
+ * The language line. "hi": a Hindi-medium answer, marked as UPSC marks Hindi-medium copies, feedback in Hindi.
+ * "auto": a photo from an app that didn't say (older Android builds), so the model follows the sheet's language.
+ */
+const LANG_RULES = {
+  en: "",
+  hi: `
+
+This is a Hindi-medium answer. Mark it exactly as a Hindi-medium copy is marked in the real exam: the same five areas, the same standard. Do not mark it down for being in Hindi, for standard Hindi administrative terms, or for an English term written in brackets or in Roman script where that is the usual practice (for example GDP, GST, NITI Aayog). Do mark down unclear Hindi, literal translation that hides the meaning, and wrong Hindi terms for constitutional or economic ideas, and give the correct term in the fix.
+Write every "note", every "fix", the whole "skeleton" and the "summary" in simple, standard Hindi in Devanagari script, the way a good Hindi-medium teacher writes in the margin. Keep the JSON keys and the band values ("below", "at", "above") in English exactly as given.`,
+  auto: `
+
+If the answer is written in Hindi, treat it as a Hindi-medium answer: mark it by the same standard, never mark it down for being in Hindi, and write every "note", "fix", the "skeleton" and the "summary" in simple Hindi in Devanagari script. Otherwise write them in English. Keep the JSON keys and the band values in English either way.`,
+};
+
+const PROMPT = (question: string, words: number, source: string, lang: keyof typeof LANG_RULES = "en") => BASE_PROMPT(question, words, source) + LANG_RULES[lang];
+
+const BASE_PROMPT = (question: string, words: number, source: string) => `You are an experienced UPSC Civil Services Mains evaluator. Grade one answer to this question, written for a ${words}-word limit:
 
 "${question}"
 
@@ -79,7 +104,11 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
   }
 
   const source = img ? "in the photo of a handwritten sheet below" : "typed below";
-  const content: VisionTurn["content"] = [{ type: "text", text: PROMPT(question, words, source) + (text ? `\n\nANSWER:\n${text}` : "") }];
+  // Hindi when the app says so, or when the typed answer or the question is in Devanagari. A photo with no word
+  // from the app lets the model follow the sheet.
+  const saidHindi = /^hi/i.test(String(body.lang ?? "")) || body.hindi === true;
+  const lang = saidHindi || (text && looksHindi(text)) || looksHindi(question) ? "hi" : img ? "auto" : "en";
+  const content: VisionTurn["content"] = [{ type: "text", text: PROMPT(question, words, source, lang) + (text ? `\n\nANSWER:\n${text}` : "") }];
   if (img) content.push({ type: "image_url", image_url: { url: `data:${img.mime};base64,${img.data}` } });
 
   try {
@@ -88,16 +117,16 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
     for (let i = 0; i < 2 && !fb; i++) {
       const out = img
         ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS)
-        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], TYPED_EVAL_HOPS);
+        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], lang === "hi" ? HINDI_EVAL_HOPS : TYPED_EVAL_HOPS);
       fb = readFeedback(out.text, text && !img ? wordsIn(text) : null);
       model = out.model;
     }
     if (!fb) return json({ error: "The reviewer's reply didn't come through properly. Try again in a minute; this one isn't counted." }, 502);
     await recordFeedback(env, memberId);
     await bump(env, "answer_evals");
-    await logEvent(env, "answer_evaluated", { memberId }, { words: String(words), via: img ? "photo" : "text" });
+    await logEvent(env, "answer_evaluated", { memberId }, { words: String(words), via: img ? "photo" : "text", lang });
     const left = allowance.left === null ? null : Math.max(0, allowance.left - 1);
-    return json({ ...fb, words, limitWords: words, overLimit: fb.wordCount > words * 1.1, model, ai: true, left, limit: allowance.limit });
+    return json({ ...fb, lang, words, limitWords: words, overLimit: fb.wordCount > words * 1.1, model, ai: true, left, limit: allowance.limit });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Answer review is offline right now.", offline: true }, 503);
     return json({ error: "Couldn't review the answer just now. Try again in a minute; this one isn't counted." }, 502);

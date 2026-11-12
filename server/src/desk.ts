@@ -5,6 +5,15 @@ import { caDeskApi } from "./ca";
 import { addNote, listNotes } from "./library";
 import { addCandidate, autoChecks } from "./pipeline";
 import { type Env, bad, istDay, json } from "./shared";
+import { type Hop, callChat } from "./ai";
+import { business } from "./payments";
+import { mailOn, sendMail } from "./mail";
+
+// The drafts come from Llama on Workers AI; the second read is another family, steady and strict.
+const AUTO_HOPS: Hop[] = [
+  { provider: "groq", model: "openai/gpt-oss-120b", extra: { temperature: 0, reasoning_effort: "medium", include_reasoning: false, max_completion_tokens: 300 }, timeoutMs: 30_000 },
+  { provider: "google", model: "gemini-3.8-flash", extra: { temperature: 0, reasoning_effort: "low", max_tokens: 300 }, timeoutMs: 30_000 },
+];
 import { type Staff, approverName, audit, auditDetail, can, label, recordVersion, requireStaff } from "./staff";
 import seedNotes from "../seed/notes.json";
 
@@ -38,19 +47,27 @@ interface CandidateRow {
 /** Builds the day's brief from approved cards. A card needs English approval; Hindi ships only if approved. */
 export async function publish(env: Env, day = istDay()) {
   const { results } = await env.DB.prepare(
-    `SELECT * FROM candidates WHERE day = ? AND status = 'approved' AND en_editor IS NOT NULL
-     ORDER BY COALESCE(position, 999), score DESC LIMIT ?`,
+    `SELECT * FROM candidates WHERE day = ? AND ((status = 'approved' AND en_editor IS NOT NULL) OR status = 'auto')
+     ORDER BY status = 'auto', COALESCE(position, 999), score DESC LIMIT ?`,
   ).bind(day, MAX_CARDS).all<CandidateRow>();
   if (!results.length) return { published: false, reason: "No approved cards for " + day };
   const items = results.map((r) => {
     const card = JSON.parse(r.card_json);
-    card.checkedBy = r.en_editor;
-    card.checkedOn = r.en_checked_on;
-    if (card.hi && r.hi_editor) {
-      card.hi.checkedBy = r.hi_editor;
-      card.hi.checkedOn = r.hi_checked_on;
+    if (r.status === "auto") {
+      // Sent out by the automatic check (autoPick): no editor's name goes on it, so the apps show
+      // "Not yet checked by an editor" on the card, in English and in Hindi.
+      card.auto = true;
+      delete card.checkedBy; delete card.checkedOn;
+      if (card.hi) { delete card.hi.checkedBy; delete card.hi.checkedOn; }
     } else {
-      delete card.hi;
+      card.checkedBy = r.en_editor;
+      card.checkedOn = r.en_checked_on;
+      if (card.hi && r.hi_editor) {
+        card.hi.checkedBy = r.hi_editor;
+        card.hi.checkedOn = r.hi_checked_on;
+      } else {
+        delete card.hi;
+      }
     }
     if (card.tone !== "light") delete card.chotu;
     return card;
@@ -59,6 +76,70 @@ export async function publish(env: Env, day = istDay()) {
   await env.DB.prepare("INSERT OR REPLACE INTO briefs (day, json, published_at) VALUES (?, ?, ?)")
     .bind(day, JSON.stringify(brief), new Date().toISOString()).run();
   return { published: true, cards: items.length };
+}
+
+/** How many cards the automatic Chai sends out on a day when no editor has been in. */
+const AUTO_CARDS = 5;
+
+const AUTO_CHECK = (card: any, source: string) => `You are a strict fact checker for a study app for India's UPSC exam.
+Below is a news SOURCE and a short CARD written from it. Decide whether the card may be sent to students with no human check.
+
+Say "pass" only if ALL of these hold:
+- Every fact, number, date, name and claim in the card is stated in the source. Nothing is added or guessed.
+- The card is neutral: no opinion, no praise or blame of a party, leader, religion, caste, community or region.
+- The story is not about deaths, disasters, violence, crime against a person, a court case about an individual, or anything a reader could find upsetting.
+- The quiz question (if any) has exactly one correct option, and the source supports it.
+
+Reply with JSON only: {"verdict": "pass" | "fail", "reason": "one short sentence"}
+
+SOURCE:
+${source.slice(0, 6000)}
+
+CARD:
+${JSON.stringify({ headline: card.headline, summary: card.summary, whyForUpsc: card.whyForUpsc, examCorner: card.examCorner }).slice(0, 4000)}`;
+
+/**
+ * The automatic Chai (flag chai_auto, off unless the owner switches it on): at 07:00 IST, if fewer than AUTO_CARDS
+ * cards have an editor's approval for the day, the best remaining drafts go out on their own. A draft qualifies only
+ * if the pipeline's own checks raised no flag, its tone is light or neutral (serious and tragic always wait for a
+ * person), and a second model from a different family reads the card against its source and passes it. These rows get
+ * status 'auto', never an editor's name, so every app shows them as "Not yet checked by an editor". An editor can
+ * still approve or reject any of them in the Desk afterwards and publish again.
+ */
+export async function autoPick(env: Env, day = istDay()) {
+  const { results } = await env.DB.prepare("SELECT * FROM candidates WHERE day = ? AND status IN ('draft', 'approved', 'auto') ORDER BY score DESC").bind(day).all<CandidateRow>();
+  let have = results.filter((r) => (r.status === "approved" && r.en_editor) || r.status === "auto").length;
+  const picked: string[] = [], held: string[] = [];
+  for (const r of results) {
+    if (have >= AUTO_CARDS) break;
+    if (r.status !== "draft" || !r.card_json) continue;
+    let card: any; let flagged: unknown[] = [];
+    try { card = JSON.parse(r.card_json); flagged = JSON.parse(r.flags || "[]"); } catch { continue; }
+    if (flagged.length || !card.summary || !card.headline || !["light", "neutral"].includes(card.tone)) { held.push(r.title); continue; }
+    let pass = false;
+    try {
+      const out = await callChat(env, "guard", [{ role: "user", content: AUTO_CHECK(card, r.source_text) }], AUTO_HOPS);
+      const m = out.text.match(/\{[\s\S]*\}/);
+      pass = !!m && JSON.parse(m[0]).verdict === "pass";
+    } catch { pass = false; } // no second check, no auto card
+    if (!pass) { held.push(r.title); continue; }
+    await env.DB.prepare("UPDATE candidates SET status = 'auto' WHERE id = ? AND status = 'draft'").bind(r.id).run();
+    picked.push(card.headline); have++;
+  }
+  return { picked, held: held.length };
+}
+
+/** Tells the owner by email what went out, so nobody has to open the Desk to know. Quietly skipped if mail is off. */
+export async function chaiDigest(env: Env, day: string, auto: { picked: string[]; held: number } | null, result: { published: boolean; cards?: number; reason?: string }) {
+  const to = (await business(env)).email;
+  if (!mailOn(env) || !/^\S+@\S+\.\S+$/.test(to)) return;
+  const base = (env.PUBLIC_BASE_URL || "").replace(/\/$/, "");
+  const lines = result.published
+    ? [`Today's Chai (${day}) is out: ${result.cards} card${result.cards === 1 ? "" : "s"}.`,
+       ...(auto?.picked.length ? ["", "Sent by the automatic check (shown in the app as not yet checked by an editor):", ...auto.picked.map((t) => "- " + t)] : []),
+       ...(auto?.held ? ["", `${auto.held} more draft${auto.held === 1 ? " is" : "s are"} waiting for a person in the Desk.`] : [])]
+    : [`No Chai went out today (${day}). ${result.reason ?? ""}`, auto ? "The automatic check found no draft it could pass on its own." : "The automatic Chai is switched off (Admin, Flags, chai_auto)."];
+  await sendMail(env, { to, subject: result.published ? `Chai out: ${result.cards} cards, ${day}` : `No Chai today, ${day}`, text: [...lines, "", `Desk: ${base.replace("//app.", "//admin.")}/desk`].join("\n") });
 }
 
 export type Ritual = "chai" | "quiz" | "mains" | "close";
@@ -135,8 +216,13 @@ async function deskInner(req: Request, env: Env, path: string, s: Staff): Promis
   if (path === "stories" && req.method === "POST") {
     // An editor adds a story by hand, e.g. from a newspaper: our own summary, their link.
     if (!body.title || !body.sourceUrl) return bad("title and sourceUrl are required");
-    const id = await addCandidate(env, { title: String(body.title), sourceName: String(body.sourceName || "Editor"), sourceUrl: String(body.sourceUrl), text: String(body.text ?? "") });
-    return json({ id });
+    // day: queue it for a coming morning (a week's stories sent in one go, scripts/import-chai.mjs); today if left out.
+    const day = /^\d{4}-\d{2}-\d{2}$/.test(String(body.day ?? "")) ? String(body.day) : now;
+    const ahead = (Date.parse(day) - Date.parse(now)) / 86400_000;
+    if (ahead < 0 || ahead > 21) return bad("day must be today or within the next three weeks");
+    if (await env.DB.prepare("SELECT 1 FROM candidates WHERE day = ? AND source_url = ?").bind(day, String(body.sourceUrl)).first()) return json({ id: null, duplicate: true });
+    const id = await addCandidate(env, { title: String(body.title), sourceName: String(body.sourceName || "Editor"), sourceUrl: String(body.sourceUrl), text: String(body.text ?? "").slice(0, 12000) }, day);
+    return json({ id, day });
   }
 
   const card = path.match(/^cards\/([\w-]+)(?:\/(\w[\w-]*))?$/);

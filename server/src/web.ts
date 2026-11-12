@@ -2,6 +2,7 @@ import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai"
 import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istDay, istNow, json } from "./shared";
 import { ensureSchema, sha256Hex } from "./staff";
+import { mailOn, sendMail } from "./mail";
 
 /**
  * The website (aspiran.in) talks to two routes here:
@@ -45,14 +46,14 @@ What you never do:
 
 Facts about Aspiran (use only these):
 - Small pods of 6 to 8 aspirants at the same stage. Alone first, then together: you answer alone, then compare and discuss.
-- The syllabus is a map of stars. Each topic goes from Met (read once) to Can recall (passed a check a week or more later) to Can use (wrote an answer on it).
+- The whole syllabus is a garden: every line of UPSC's syllabus is a leaf. Each topic goes from Met (read once) to Can recall (passed a check a week or more later) to Can use (wrote an answer on it).
 - A short daily review that brings back old topics just before you would forget them. It ends every day; nothing piles up into guilt.
 - Mains answer writing from week two: a 2-minute skeleton drill, write by hand, mark it yourself first, then see the AI's marks next to yours, then rewrite the weakest part.
 - Chai: a few current-affairs cards a day, each tied to a syllabus topic, with "Keep for Mains" to save a usable example.
 - CSAT: a check in week one; extra practice only if you need it.
 - Your own space: notes (typed or spoken), a journal, your to-dos, and sleep. Aspiran doesn't touch it; it's yours.
 - No streaks, no leaderboards, no public scores, no rank predictions, no notifications that chase you. You are compared only with your own past self.
-- Hindi and English. Android first; the website will say when it opens.
+- Hindi and English. It is open now: the web app is at app.aspiran.in, and anyone can try one whole topic free there with no account (app.aspiran.in/app/#try). The Android app is in testing on Google Play.
 - Free to join. Plus is ₹9,999 a year; the first 300 people who buy on the website pay ₹999 for the first year.
 - AI is always labelled AI. Content is a draft until editors check it.
 
@@ -67,8 +68,8 @@ const QUIET_LINE = {
 };
 
 const LIMIT_LINE = {
-  en: "That's all my chat for today on the website. The app has much more of me. Leave your details and we'll tell you when it opens.",
-  hi: "वेबसाइट पर आज के लिए मेरी बातें बस इतनी। ऐप में मैं और ज़्यादा हूँ। अपनी जानकारी छोड़ दीजिए, खुलते ही हम बताएँगे।",
+  en: "That's all my chat for today on the website. The app has much more of me: app.aspiran.in. You can try one whole topic there, free, with no account.",
+  hi: "वेबसाइट पर आज के लिए मेरी बातें बस इतनी। ऐप में मैं और ज़्यादा हूँ। app.aspiran.in पर एक पूरा टॉपिक मुफ़्त आज़माइए, बिना अकाउंट के।",
 };
 
 // The website wants a quick reply more than the strongest one: Groq first in English, the slower NVIDIA model last.
@@ -216,7 +217,19 @@ async function webLead(req: Request, env: Env): Promise<Response> {
     b.visitorId, merged.name ?? null, JSON.stringify(merged), contact || null, kind || null,
     b.lang === "hi" ? "hi" : "en", contact ? now : null, str(b.source, 120) || null, now, now,
   ).run();
-  return json({ ok: true, saved: Object.keys(merged).length, contact: !!contact });
+  // The first time someone leaves an email, they hear back at once with the way in. (A phone number gets the same
+  // link on the page itself; we don't message WhatsApp numbers from here.)
+  const hadContact = !!(prev && (await env.DB.prepare("SELECT welcomed_at FROM web_leads WHERE visitor_id = ?").bind(b.visitorId).first<{ welcomed_at: string | null }>())?.welcomed_at);
+  if (kind === "email" && !hadContact && mailOn(env)) {
+    const app = (env.PUBLIC_BASE_URL || "https://app.aspiran.in").replace(/\/$/, "");
+    const hi = b.lang === "hi";
+    const sent = await sendMail(env, { to: contact, subject: hi ? "Aspiran: आपकी जगह पक्की है" : "Your seat at Aspiran, and the way in",
+      text: (hi
+        ? [`नमस्ते${merged.name ? " " + merged.name : ""},`, "", "आपकी जगह पक्की है। इंतज़ार की ज़रूरत नहीं: Aspiran अभी खुला है।", "", `एक पूरा टॉपिक मुफ़्त आज़माइए, बिना अकाउंट के: ${app}/app/#try`, `या सीधे अंदर आइए: ${app}/app/`, "", "कोई सवाल हो तो इसी ईमेल का जवाब दीजिए।", "", "Aspiran"]
+        : [`Hello${merged.name ? " " + merged.name : ""},`, "", "Your seat is saved. And there's no need to wait: Aspiran is open now.", "", `Try one whole topic free, no account needed: ${app}/app/#try`, `Or come straight in: ${app}/app/`, "", "Reply to this email if you have a question. A person reads it.", "", "Aspiran"]).join("\n") }).catch(() => false);
+    if (sent) await env.DB.prepare("UPDATE web_leads SET welcomed_at = ? WHERE visitor_id = ?").bind(now, b.visitorId).run().catch(() => {});
+  }
+  return json({ ok: true, saved: Object.keys(merged).length, contact: !!contact, app: (env.PUBLIC_BASE_URL || "https://app.aspiran.in").replace(/\/$/, "") + "/app/#try" });
 }
 
 /** For the admin list: newest first, with contact details only for rows that have them. */

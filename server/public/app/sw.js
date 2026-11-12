@@ -2,7 +2,7 @@
 // The day-1 reads (today's brief, the library with PYQs, practice questions, /config) are network-first with the last
 // copy as a fallback, so what the first online visit loaded stays readable offline. Only public reads are cached here:
 // member routes (pods, Chotu, Plus, privacy), sockets and media pass straight through.
-const SHELL = "upsc-shell-v35";
+const SHELL = "upsc-shell-v36";
 const FILES = ["./", "index.html", "app.js", "strings.js", "profile-db.js", "kulhad.js", "honest.js", "welcome.js", "auth.js", "metrics.js", "fsrs.js", "syllabus.js", "map.js", "videos.js", "calm-audio.js", "calm-scripts.js", "explore.js", "brief.js",  "vine.js", "try.js", "try-parts.js", "syllabus-lines.js", "fonts/martel-latin-800-normal.woff2", "fonts/martel-devanagari-800-normal.woff2", "plus-page.js", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png"];
 const DATA = /^\/(brief\/latest|library|practice\/questions|config)$/;
 

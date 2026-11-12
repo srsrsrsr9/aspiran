@@ -279,7 +279,7 @@ fun AnswerStudioScreen(
                             busy = true; error = null
                             scope.launch {
                                 val jpeg = photoPath?.let { p -> withContext(Dispatchers.IO) { shrink(p) } }
-                                val fb = community.evaluate(prompt, words, if (jpeg == null) text else null, jpeg)
+                                val fb = community.evaluate(prompt, words, if (jpeg == null) text else null, jpeg, hindi)
                                 busy = false
                                 when {
                                     fb.care -> onOpenNeedToTalk()

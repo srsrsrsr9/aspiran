@@ -450,6 +450,7 @@ async function loadQueue() {
         <span class="chip">${esc(c.gsPaper)} · ${esc(c.topic)}</span>
         <span class="chip">${esc(c.examType)}</span>
         <span class="chip">score ${Math.round(r.score)}</span>
+        ${r.status === "auto" ? `<span class="chip" title="Passed two automatic checks and went out at 7 with no editor's name. Approve it to put a name on it, or reject it and publish again to pull it.">sent automatically</span>` : ""}
         ${r.source_url ? `<a class="muted" href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_name)}</a>` : `<span class="muted">${esc(r.source_name)}</span>`}
         ${c.shareable === false ? '<span class="chip">not shareable</span>' : ""}
         <span style="margin-left:auto" class="muted">#<input type="number" min="1" max="12" value="${r.position ?? ""}" data-act="position" style="width:56px"></span>

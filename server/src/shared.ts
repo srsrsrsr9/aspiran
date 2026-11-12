@@ -14,6 +14,9 @@ export interface Env {
   SESSION_SECRET?: string;
   /** Resend key for password recovery email (mail.ts). A secret (`wrangler secret put`), never in files or chat. */
   RESEND_API_KEY?: string;
+  /** PostHog project key (public, starts phc_) for the public topic pages (learn.ts). Empty: no analytics script. */
+  POSTHOG_KEY?: string;
+  POSTHOG_HOST?: string;
   /** The sender for recovery email, e.g. "Aspiran <no-reply@example.com>", on a domain verified with Resend. */
   MAIL_FROM?: string;
   /** Optional owner key. Without it, EDITOR_TOKEN is the owner key. */
