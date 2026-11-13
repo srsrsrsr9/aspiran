@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Aspiran trailer</title><style>
+@font-face{font-family:'Martel';font-weight:400;src:url('fonts/martel-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Martel';font-weight:400;src:url('fonts/martel-devanagari-400-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Martel';font-weight:700;src:url('fonts/martel-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Martel';font-weight:700;src:url('fonts/martel-devanagari-700-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Martel';font-weight:800;src:url('fonts/martel-latin-800-normal.woff2') format('woff2');}
+@font-face{font-family:'Mukta';font-weight:400;src:url('fonts/mukta-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Mukta';font-weight:400;src:url('fonts/mukta-devanagari-400-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Mukta';font-weight:600;src:url('fonts/mukta-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Mukta';font-weight:600;src:url('fonts/mukta-devanagari-600-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Mukta';font-weight:700;src:url('fonts/mukta-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Mukta';font-weight:700;src:url('fonts/mukta-devanagari-700-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Yatra';font-weight:400;src:url('fonts/yatra-one-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Yatra';font-weight:400;src:url('fonts/yatra-one-devanagari-400-normal.woff2') format('woff2');unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF;}
+@font-face{font-family:'Plex';font-weight:400;src:url('fonts/ibm-plex-mono-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Plex';font-weight:600;src:url('fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Plex';font-weight:700;src:url('fonts/ibm-plex-mono-latin-600-normal.woff2') format('woff2');}
+html,body{margin:0;background:#06070F;overflow:hidden}
+</style></head><body>
+<div style="position:absolute;opacity:0;font-family:Martel">a<b>b</b><span style="font-family:Mukta">aअ<b>b</b></span><span style="font-family:Yatra">aअ</span><span style="font-family:Plex">a<b>b</b></span><span style="font-family:Martel;font-weight:800">a</span></div>
+<script src="timeline.js"></script><script src="chars.js"></script><script src="film.js"></script>
+<script>
+// Preview: open this file in Chrome; ?t=12.5 shows one frame; no t plays in real time (no sound).
+const q = new URLSearchParams(location.search);
+const go = () => { if (!window.FILM || !FILM.ready) return setTimeout(go, 50);
+  if (q.has("render")) return; if (q.has("t")) return FILM.seek(+q.get("t"));
+  const t0 = performance.now(), loop = () => { FILM.seek(((performance.now() - t0) / 1000) % FILM.total); requestAnimationFrame(loop); }; loop(); };
+go();
+</script></body></html>
