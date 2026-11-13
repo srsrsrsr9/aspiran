@@ -20,8 +20,7 @@ import { PRICES, grant } from "./plus";
  * TODO(owner): the Play service account. Until PLAY_SERVICE_ACCOUNT_JSON is set (`wrangler secret put`, never in files
  * or chat), verify answers 503 "Play verification isn't set up". The token exchange below (an RS256 JWT signed with
  * WebCrypto, swapped for an access token at Google's OAuth endpoint) hasn't run against Google yet: try it with a
- * license tester before switching the flag on. Voided purchases (refunds through Play) aren't read yet either; a
- * Play refund needs ending the entitlement from admin by hand for now.
+ * license tester before switching the flag on. Refunds through Play are read once a day (playVoided, below).
  */
 
 export const PLAY_PRODUCT = "plus_yearly";
@@ -74,6 +73,44 @@ async function playPurchase(env: Env, productId: string, token: string): Promise
     headers: { authorization: "Bearer " + at, accept: "application/json" },
   });
   return { status: res.status, data: await res.json<any>().catch(() => ({})) };
+}
+
+// --- Refunds through Play ---------------------------------------------------------------------------------------
+
+/**
+ * Daily: purchases Google has voided (refunded, charged back or revoked) in the last few days end the Plus they
+ * bought. Google lists them by purchase token; ours are kept as SHA-256, so each listed token is hashed and looked up.
+ * Does nothing until Play Billing is set up. Not yet run against Google: check the first real refund by hand.
+ */
+export async function playVoided(env: Env): Promise<{ checked: number; ended: number } | { skipped: string }> {
+  if (!playConfigured(env)) return { skipped: "Play isn't set up" };
+  await ensureSchema(env);
+  const at = await accessToken(env);
+  if (!at) return { skipped: "no access token" };
+  const pkg = env.PLAY_PACKAGE_NAME || PACKAGE;
+  const since = Date.now() - 7 * 86400_000;
+  let checked = 0, ended = 0, pageToken = "";
+  for (let page = 0; page < 10; page++) {
+    const res = await fetch(`${API}/applications/${encodeURIComponent(pkg)}/purchases/voidedpurchases?startTime=${since}&maxResults=100${pageToken ? `&token=${encodeURIComponent(pageToken)}` : ""}`, {
+      headers: { authorization: "Bearer " + at, accept: "application/json" },
+    });
+    if (!res.ok) return { skipped: "Google answered " + res.status };
+    const data = await res.json<any>().catch(() => ({}));
+    for (const v of data.voidedPurchases ?? []) {
+      if (typeof v?.purchaseToken !== "string") continue;
+      checked++;
+      const row = await env.DB.prepare("SELECT member_id, status FROM play_purchases WHERE token_hash = ?").bind(await sha256Hex(v.purchaseToken)).first<{ member_id: string; status: string }>();
+      if (!row || row.status === "voided") continue;
+      const now = new Date().toISOString();
+      await env.DB.prepare("UPDATE play_purchases SET status = 'voided' WHERE token_hash = ?").bind(await sha256Hex(v.purchaseToken)).run();
+      await env.DB.prepare("UPDATE entitlements SET ends_at = ?, cancelled_at = ? WHERE member_id = ? AND source = 'play'").bind(now, now, row.member_id).run();
+      await logEvent(env, "refunded", { memberId: row.member_id }, { via: "play" });
+      ended++;
+    }
+    pageToken = data.tokenPagination?.nextPageToken ?? "";
+    if (!pageToken) break;
+  }
+  return { checked, ended };
 }
 
 // --- Route ------------------------------------------------------------------------------------------------------

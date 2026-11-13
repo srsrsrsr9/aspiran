@@ -279,7 +279,7 @@ class Community(private val server: () -> String, private val memberId: () -> St
     }
 
     /** "Delete my data": erases the pod membership, messages, consent record and sign-in account on the server. */
-    suspend fun privacyDelete(): Boolean = post("/privacy/delete", buildJsonObject { put("memberId", memberId()) }) != null
+    suspend fun privacyDelete(): Boolean { Metrics.forgetAnalytics(); return post("/privacy/delete", buildJsonObject { put("memberId", memberId()) }) != null }
 
     private suspend fun get(path: String): JsonObject? = call(path) { url(it) }
     private suspend fun post(path: String, body: JsonObject): JsonObject? =

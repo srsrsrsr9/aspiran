@@ -23,4 +23,5 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y zsh lsof
       - run: npm ci
       - run: npm run check
+      - run: npm run check:schema
       - run: npm run test:all

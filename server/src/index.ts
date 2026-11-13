@@ -21,7 +21,7 @@ import { interviewRoute } from "./interview";
 import { plusRoute, useAllowance } from "./plus";
 import { caMediaGate, publicCa } from "./ca";
 import { paymentsRoute } from "./payments";
-import { playRoute } from "./play";
+import { playRoute, playVoided } from "./play";
 import { activeResult, resultDays } from "./results";
 import { authRoute, isContentRoute, isMemberRoute, memberGate, publicAuthConfig } from "./auth";
 import { passwordRoute } from "./password";
@@ -279,6 +279,8 @@ export default {
       ctx.waitUntil(runJob(env, "photos", at).then(log("photos"), fail("photos")));
       // Website Chotu chats go after 180 days.
       ctx.waitUntil(pruneWebChats(env).then(log("web chats"), fail("web chats")));
+      // Purchases refunded through Google Play end the Plus they bought (does nothing until Play Billing is set up).
+      ctx.waitUntil(playVoided(env).then(log("play refunds"), fail("play refunds")));
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));

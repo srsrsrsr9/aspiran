@@ -91,7 +91,10 @@ async function markPaid(env: Env, orderId: string, amount: number, cfPaymentId: 
   if (!res.meta.changes) return false;
   // Cashfree lets a payer try again inside one order, so a success can follow a failed attempt: 'failed' is not final.
   // A sandbox order moved no money: its year is marked as a test entitlement.
-  await grant(env, row.member_id, "yearly", "cashfree", YEAR_DAYS, false, row.mode === "sandbox");
+  // On the live server a sandbox payment (no money moved) gives one day, enough to see the whole flow work and
+  // nothing worth gaming. Local test servers (AUTH_MODE=dev) still give the year, so the suites can check it.
+  const sandbox = row.mode === "sandbox";
+  await grant(env, row.member_id, "yearly", "cashfree", sandbox && env.AUTH_MODE !== "dev" ? 1 : YEAR_DAYS, false, sandbox);
   await bump(env, "plus_purchases");
   await logEvent(env, "paid", { memberId: row.member_id }, { amount: row.amount_inr, founding: !!row.founding });
   return true;
