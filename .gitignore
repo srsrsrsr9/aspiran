@@ -45,3 +45,9 @@ project-files/**/*.png
 
 # Sarvam recordings (300+ MB): the source zips stay in docs/content, and the import puts them in R2.
 content/audio/recordings/**/*.mp3
+
+# Marketing pack: images and the zip are rebuilt by artefacts/marketing-pack-*/_build/build.py
+artefacts/marketing-pack-*/**/*.png
+artefacts/marketing-pack-*/_build/pylib/
+artefacts/marketing-pack-*/_build/html/
+artefacts/aspiran-marketing-pack-*.zip
