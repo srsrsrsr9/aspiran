@@ -285,7 +285,8 @@ fun WalkScripts(library: ContentLibrary?, hindi: Boolean, onOpen: (String) -> Un
     val all = remember(library?.items, hindi) { library?.data("walk-script").orEmpty().sortedBy { it["topic"].biText(hindi) } }
     if (all.isEmpty()) return
     Text("Guided walks", style = MaterialTheme.typography.titleMedium)
-    Text("One topic, one question, about six minutes. The phone reads it; you answer aloud.", style = MaterialTheme.typography.bodySmall)
+    Text(if (all.any { it["audio"] != null }) "One topic, one question, about six minutes. An AI voice reads it; you answer aloud."
+        else "One topic, one question, about six minutes. The phone reads it; you answer aloud.", style = MaterialTheme.typography.bodySmall)
     all.forEach { d -> Row2(d["topic"].biText(hindi) ?: "", "${d.str("minutes") ?: "6"} min") { onOpen(d.str("id") ?: "") } }
 }
 
@@ -295,7 +296,8 @@ fun WalkScriptPage(library: ContentLibrary?, hindi: Boolean, id: String) {
     val text = d["script"].biText(hindi) ?: ""
     Text(d["topic"].biText(hindi) ?: "", style = MaterialTheme.typography.titleLarge)
     Text("About ${d.str("minutes") ?: "6"} minutes · earphones in", style = MaterialTheme.typography.labelMedium)
-    ReadAloudButton(text)
+    val lang = if (hindi && (d["script"] as? JsonObject)?.get("hi") != null) "hi" else "en"
+    if (library == null || !AiVoiceAudio(d, lang, library::url)) ReadAloudButton(text)
     FlatCard(Modifier.fillMaxWidth()) { Text(text, style = if (hindi) ReadingHindi else ReadingText, modifier = Modifier.padding(12.dp)) }
     d["pronounce"].arr().takeIf { it.isNotEmpty() }?.let { ps -> Block("Say it right", soft = true) { ps.forEach { Text("${it.str("term")} · ${it.str("say")}") } } }
     Text("When it ends, say your answer aloud once, then walk on. Nothing is recorded.", style = MaterialTheme.typography.bodySmall)
