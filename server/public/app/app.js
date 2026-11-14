@@ -449,13 +449,26 @@ function onboarding() {
     // Two screens in all (12 Nov 2026; it was five, and 44% left before the end). First: one question to answer before
     // anything is asked of you, then sign in right here. The garden and the six ideas wait below for whoever wants them;
     // they open Today for everyone anyway.
-    const Q = hi
-      ? { q: "संविधान की प्रस्तावना में अब तक कितनी बार संशोधन हुआ है?", opts: ["कभी नहीं", "एक बार", "दो बार", "पता नहीं"], right: 1,
-          yes: "सही। 1976 में, 42वें संशोधन से: समाजवादी, पंथनिरपेक्ष और अखंडता जोड़े गए।", no: "एक बार: 1976 में, 42वें संशोधन से (समाजवादी, पंथनिरपेक्ष, अखंडता)।",
-          after: "पहले जवाब, फिर देखना: यही Aspiran का तरीक़ा है। यह सवाल एक हफ़्ते बाद फिर आएगा, ठीक भूलने से पहले।" }
-      : { q: "How many times has the Preamble to the Constitution been amended?", opts: ["Never", "Once", "Twice", "No idea"], right: 1,
-          yes: "Right. Once, in 1976: the 42nd Amendment added socialist, secular and integrity.", no: "Once, in 1976: the 42nd Amendment added socialist, secular and integrity.",
-          after: "You answered first, then looked. That's how Aspiran works, and this one comes back in a week, just before you'd forget it." };
+    const QS = {
+      hi: { q: "संविधान की प्रस्तावना में अब तक कितनी बार संशोधन हुआ है?", opts: ["कभी नहीं", "एक बार", "दो बार", "पता नहीं"], right: 1,
+        yes: "सही। 1976 में, 42वें संशोधन से: समाजवादी, पंथनिरपेक्ष और अखंडता जोड़े गए।", no: "एक बार: 1976 में, 42वें संशोधन से (समाजवादी, पंथनिरपेक्ष, अखंडता)।" },
+      en: { q: "How many times has the Preamble to the Constitution been amended?", opts: ["Never", "Once", "Twice", "No idea"], right: 1,
+        yes: "Right. Once, in 1976: the 42nd Amendment added socialist, secular and integrity.", no: "Once, in 1976: the 42nd Amendment added socialist, secular and integrity." } };
+    const Q = hi ? QS.hi : QS.en;
+    // The answer goes into the review queue with its real FSRS date (trailer claim 1): right comes back in 3 days, a
+    // miss or "No idea" tomorrow. The line says the actual gap.
+    const gap = o.due ? F.daysBetween(today(), o.due) : 0;
+    const when = hi ? (gap <= 1 ? "कल" : `${gap} दिन बाद`) : (gap <= 1 ? "tomorrow" : `in ${gap} days`);
+    Q.after = hi ? `पहले जवाब, फिर देखना: यही Aspiran का तरीक़ा है। यह सवाल ${when} फिर आएगा, ठीक भूलने से पहले, और फिर हर बार थोड़ा और देर से।`
+      : `You answered first, then looked. That's how Aspiran works, and this one comes back ${when}, just before you'd forget it, then a little later each time.`;
+    const pick = (i) => {
+      o.pick = i;
+      const mcq = (x) => ({ question: x.q, options: x.opts.slice(0, 3), answerIndex: x.right, explanation: x.no });
+      const all = reviewQueue(), f = F.review(null, i === Q.right ? F.GOOD : F.AGAIN, today());
+      all["first-preamble"] = { q: { id: "first-preamble", topic: "Polity", en: mcq(QS.en), hi: mcq(QS.hi) }, f };
+      store.set("reviews", all);
+      o.due = f.due; redraw();
+    };
     const answered = o.pick != null;
     const enter = Auth.optional() || (o.memberId && Auth.signedIn())
       ? h("div.center", h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(1) }, hi ? "अंदर आइए" : "Come in"))
@@ -465,7 +478,7 @@ function onboarding() {
       h("h1", hi ? "जो पढ़ा, वह याद रहे।" : "Remember what you read."),
       h("p", hi ? "UPSC की तैयारी, अकेले नहीं। पहले एक सवाल:" : "UPSC prep that sticks, and never alone. One question first:"),
       h("div.card", h("p", h("strong", Q.q)),
-        h("div.col", Q.opts.map((label, i) => h("button" + (answered && i === Q.right ? ".primary" : ""), { disabled: answered, "aria-pressed": String(o.pick === i), onclick: () => { o.pick = i; redraw(); } }, label))),
+        h("div.col", Q.opts.map((label, i) => h("button" + (answered && i === Q.right ? ".primary" : ""), { disabled: answered, "aria-pressed": String(o.pick === i), onclick: () => pick(i) }, label))),
         answered && h("p", { role: "status" }, o.pick === Q.right ? Q.yes : Q.no),
         answered && h("p.small.muted", Q.after)),
       h("div.card", h("h2", { style: { marginTop: 0 } }, hi ? "मुफ़्त में शुरू करें" : "Start free"),
@@ -651,13 +664,21 @@ function cardText(it) {
 }
 const chipsOf = (it, t) => (t.chips ?? (it.chips?.length ? it.chips : [it.gsPaper, it.topic, it.examType === "both" ? "Prelims + Mains" : it.examType, it.staticLink].filter(Boolean))).slice(0, 4);
 
+// Calibration (trailer claim 2, 14 Nov 2026): every practice question asks "How sure are you?" before the options
+// open. Sure and not-sure answers are tallied per day on this device only (sureLog, 120 days) for You vs. you.
+const logSure = (sure, ok) => { const d = store.get("sureLog", {}), t = today(), x = d[t] ?? [0, 0, 0, 0]; x[sure ? 0 : 2] += ok ? 1 : 0; x[sure ? 1 : 3]++; d[t] = x;
+  store.set("sureLog", Object.fromEntries(Object.entries(d).sort().slice(-120))); };
 function mcqBlock(mcq, onAnswer) {
-  let picked = null;
+  let picked = null, sure = null;
   const box = h("div");
   const draw = () => put(box, h("p", h("strong", mcq.question)),
-    mcq.options.map((o, i) => h("button.opt" + (picked == null ? "" : i === mcq.answerIndex ? ".right" : i === picked ? ".wrong" : ""),
-      { disabled: picked != null, onclick: () => { picked = i; onAnswer?.(i === mcq.answerIndex); draw(); } }, o)),
-    picked != null && h("p", (picked === mcq.answerIndex ? "✓ Right. " : "○ Not quite. ") + (mcq.explanation ?? "")));
+    sure == null
+      ? h("div.card.soft", h("div.small.muted", hindi() ? "देखने से पहले" : "Before you look"), h("p", { style: { margin: "4px 0 8px" } }, h("strong", hindi() ? "कितने पक्के हैं?" : "How sure are you?")),
+        h("div.row", h("button", { onclick: () => { sure = true; draw(); } }, hindi() ? "पक्का" : "Sure"), h("button", { onclick: () => { sure = false; draw(); } }, hindi() ? "पक्का नहीं" : "Not sure")))
+      : mcq.options.map((o, i) => h("button.opt" + (picked == null ? "" : i === mcq.answerIndex ? ".right" : i === picked ? ".wrong" : ""),
+        { disabled: picked != null, onclick: () => { picked = i; logSure(sure, i === mcq.answerIndex); onAnswer?.(i === mcq.answerIndex); draw(); } }, o)),
+    picked != null && h("p", (picked === mcq.answerIndex ? "✓ Right. " : "○ Not quite. ") + (mcq.explanation ?? "")),
+    picked != null && sure && picked !== mcq.answerIndex && h("p.small.muted", hindi() ? "आप पक्के थे, फिर भी ग़लत: Prelims में यही सबसे महँगा पड़ता है (−⅓)। यह अब याद रहेगा।" : "You were sure, and it was wrong: in Prelims that's the costly kind (−⅓). It'll stick now."));
   draw();
   return box;
 }
@@ -820,7 +841,8 @@ function viewPrelims() {
   };
   const next = h("button.primary", { onclick: () => { i++; draw(); } }, "Next");
   draw();
-  return h("div.col", h("h1", "Prelims practice"), box);
+  return h("div.col", h("h1", "Prelims practice"),
+    h("p.small.muted", "In the real Prelims a wrong answer costs a third of its marks (−⅓ for a wrong answer, 0 if you leave it), so say how sure you are before you look. Here nothing is scored."), box);
 }
 
 // --- Review: the one queue (teaching plan, build step 1) -----------------------------------------------
@@ -834,7 +856,16 @@ function reviewItems(day = today()) {
   const m = nodes();
   const topics = Object.entries(m).filter(([id, n]) => MP.isDue(n, day) && SY.nodeById(id))
     .sort((a, b) => a[1].f.due.localeCompare(b[1].f.due)).map(([id]) => ({ node: id }));
-  return [...topics, ...dueReviews(day).map((q) => ({ q }))].slice(0, REVIEW_MAX);
+  return interleave([...topics, ...dueReviews(day).map((q) => ({ q }))].slice(0, REVIEW_MAX));
+}
+/** Mix subjects (interleaving): round-robin across papers and topics, so two of a kind rarely sit side by side. */
+function interleave(items) {
+  const key = (it) => (it.node ? SY.nodeById(it.node)?.paper?.short : it.q?.topic) ?? "other";
+  const groups = new Map();
+  for (const it of items) { const k = key(it); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(it); }
+  const out = [], lists = [...groups.values()];
+  while (out.length < items.length) for (const l of lists) if (l.length) out.push(l.shift());
+  return out;
 }
 const reviewMinutes = (n) => Math.max(2, Math.ceil(n / 2));
 function reviewLine() {
@@ -882,7 +913,7 @@ function viewReview() {
     next.disabled = true;
   };
   draw();
-  return h("div.col", h("h1", "Review"), pauseLine("first-review"), h("p.small.muted", "Recall first. Nothing here is scored or shared. It works offline too: everything due is on this device."), box);
+  return h("div.col", h("h1", "Review"), pauseLine("first-review"), h("p.small.muted", `Recall first, subjects mixed. At most ${REVIEW_MAX} a day, about ${reviewMinutes(set.length)} minutes, then it ends; the rest waits for tomorrow. Nothing here is scored or shared. It works offline too: everything due is on this device.`), box);
 }
 
 // --- Syllabus map (teaching plan, build step 2) ------------------------------------------------------
@@ -1038,6 +1069,14 @@ const BANDS = [["below", "Below"], ["at", "At"], ["above", "Above"]];
 const BAND_RANK = { below: 0, at: 1, above: 2 };
 const words = (t) => (String(t ?? "").match(/\S+/g) ?? []).length;
 
+/** The part to rewrite: the lowest band the second opinion gave (ties: your own lower mark first), else your own lowest. */
+function weakestPart(w) {
+  const rank = (b) => BAND_RANK[b] ?? 9;
+  const by = (src) => AREAS.filter(([k]) => src?.[k]).sort((a, b) => rank(src[a[0]]) - rank(src[b[0]]) || rank(w.self?.[a[0]]) - rank(w.self?.[b[0]]))[0];
+  const ai = w.ai ? Object.fromEntries(AREAS.map(([k]) => [k, w.ai.areas?.[k]?.band]).filter(([, b]) => b)) : null;
+  return (by(ai) ?? by(w.self))?.[1] ?? null;
+}
+
 function viewMains() {
   const day = today();
   const fromCard = (data.brief?.items ?? []).map(cardText).find((t) => t.mains);
@@ -1109,7 +1148,8 @@ function viewMains() {
       w.ai.skeleton?.body?.length > 0 && h("details.card", h("summary", "A model answer's skeleton"),
         w.ai.skeleton.intro && h("p", h("strong", "Intro: "), w.ai.skeleton.intro), h("ul", w.ai.skeleton.body.map((b) => h("li", b))), w.ai.skeleton.conclusion && h("p", h("strong", "Conclusion: "), w.ai.skeleton.conclusion)),
       h("p.small.muted", "A second opinion by AI, next to your own marks. It can be wrong; your pod and your own judgement come first."),
-      h("div.row", h("button.primary", { onclick: () => go("rewrite") }, "Rewrite it with one fix →")),
+      weakestPart(w) && h("p", h("strong", "Weakest part: "), weakestPart(w)),
+      h("div.row", h("button.primary", { onclick: () => go("rewrite") }, "Rewrite the weakest part →")),
     ];
   }
 
@@ -1117,10 +1157,12 @@ function viewMains() {
     // Your own fix first; otherwise the AI's fix for the part it rated lowest.
     const low = w.ai ? AREAS.map(([k]) => [k, w.ai.areas[k]]).filter(([, a]) => a?.fix).sort((a, b) => BAND_RANK[a[1].band] - BAND_RANK[b[1].band])[0] : null;
     const fix = w.fix || low?.[1].fix || "Make the conclusion answer the question's directive word.";
+    // The weakest part, named (trailer claim 5): the second opinion's lowest band, else your own lowest mark.
+    const weak = weakestPart(w);
     const ta = h("textarea", { rows: 14, value: w.v2 ?? store.get(key, ""), style: { fontFamily: "var(--read-font)", fontSize: "18px" }, oninput: (e) => { w.v2 = e.target.value; save(); } });
     return [
-      h("div.card.soft", h("strong", "Your one fix: "), fix),
-      h("p", "Rewrite the answer with just that change. One fix, done well, sticks better than five half-done."),
+      h("div.card.soft", weak && h("div", h("strong", "Rewrite the weakest part: "), weak), h("div", h("strong", "Your one fix: "), fix)),
+      h("p", "Rewrite that part with just that change. One fix, done well, sticks better than five half-done."),
       ta,
       h("div.row",
         h("button.primary", { onclick: () => {
@@ -1254,11 +1296,13 @@ function viewProgress() {
       h("p.small.muted", "1 is below a typical scoring answer, 2 at it, 3 above it.")];
   } else writing = [h("p.small.muted", `After six answers with a second opinion (${wl.length} so far), this compares your first five with your last five.`)];
   // Calibration: how often "sure" answers were right, against the ones you marked as a guess.
-  const sure = hist.reduce((a, r) => [a[0] + (r.right - (r.unsureRight ?? 0)), a[1] + (r.attempted - (r.unsureTotal ?? 0))], [0, 0]);
-  const guess = hist.reduce((a, r) => [a[0] + (r.unsureRight ?? 0), a[1] + (r.unsureTotal ?? 0)], [0, 0]);
+  // Mocks (the "Not sure" tick) plus every practice question's "How sure are you?" (sureLog).
+  const daily = Object.values(store.get("sureLog", {}));
+  const sure = hist.reduce((a, r) => [a[0] + (r.right - (r.unsureRight ?? 0)), a[1] + (r.attempted - (r.unsureTotal ?? 0))], daily.reduce((a, x) => [a[0] + x[0], a[1] + x[1]], [0, 0]));
+  const guess = hist.reduce((a, r) => [a[0] + (r.unsureRight ?? 0), a[1] + (r.unsureTotal ?? 0)], daily.reduce((a, x) => [a[0] + x[2], a[1] + x[3]], [0, 0]));
   const calib = sure[1] >= 20 && guess[1] >= 10
     ? h("p", `When you were sure: ${Math.round(100 * sure[0] / sure[1])}% right. When you marked a guess: ${Math.round(100 * guess[0] / guess[1])}%. ${guess[0] / guess[1] > 0.45 ? "Your guesses do better than you think; trust them a little more." : guess[0] / guess[1] < 0.3 ? "Guesses cost you marks; skip more of them." : "Your sense of what you know is about right."}`)
-    : h("p.small.muted", "Mark answers “Not sure” in mocks. After a few papers this shows how far your sense of sure matches your marks.");
+    : h("p.small.muted", "Every practice question asks how sure you are before you look, and mocks have a “Not sure” tick. After about 30 answers this shows how far your sense of sure matches your marks.");
   // Markers: the date you first reached each one. Not targets, not cut-offs.
   const vals = Object.values(m), metDays = vals.map((n) => n.met).filter(Boolean).sort();
   const recallDays = vals.map((n) => n.recalledOn).filter(Boolean).sort(), useDays = vals.map((n) => n.usedOn).filter(Boolean).sort();
@@ -1594,7 +1638,7 @@ function mockStart(p) {
   const d = h("dialog",
     h("h2", p.title),
     h("ul", h("li", p.countUp ? `${p.questions.length} questions. Suggested time: about ${p.minutes} minutes, just a guide.` : `${p.questions.length} questions in ${p.minutes} minutes.`),
-      h("li", `+${p.marking.right} for a right answer, ${p.marking.wrong} for a wrong one, 0 if you leave it.`),
+      h("li", `+${p.marking.right} for a right answer, ${p.marking.wrong} for a wrong one${Math.abs(p.marking.wrong * 3 + p.marking.right) < 0.05 ? " (−⅓ of the marks, as in Prelims)" : ""}, 0 if you leave it.`),
       h("li", "Tick “Not sure” when you guess. Afterwards you'll see whether your guesses are paying off."),
       p.countUp ? h("li", `No countdown. ${p.timerOff ? "The timer is off; switch on an upward timer if you want one." : "The timer counts up."} You submit when you're done.`)
         : h("li", "The paper submits itself when time runs out.")),
@@ -1935,7 +1979,7 @@ function viewFocus() {
 
 /// --- Open rooms (server rooms.ts) ----------------------------------------------------------------
 // Joined like channels: language, where you are, goal, optional, region. Real member counts, Chotu and the study
-// friends always labelled AI. The room board ranks rooms by their shared Quiz Night score, never people.
+// friends always labelled AI. Quiz Night shows a room only its own shared score: no ranks, of people or rooms.
 
 const ROOM_GROUPS = [["language", "Language"], ["attempt", "Where you are"], ["goal", "Goal"], ["optional", "Optionals"], ["region", "Region"]];
 const rooms = { list: null, board: null, error: null, busy: null, id: null, ws: null, status: "off", messages: [], pinned: null, photos: {} };
@@ -2008,14 +2052,17 @@ function roomPhoto(id) {
 }
 const PHOTO_REF = /\bphoto:([0-9a-f]{32})\b/g;
 
+// No leaderboards (trailer claim 8, 14 Nov 2026): Quiz Night shows only your own rooms' shared result, never a ranked
+// list of rooms. The server's /rooms/leaderboard stays for older Android builds.
 function roomBoardCard(mine) {
   const b = rooms.board;
   if (!b) return null;
+  const own = b.rooms.filter((r) => mine.has(r.id)).sort((x, y) => x.name.localeCompare(y.name));
   return h("div.card",
-    h("strong", "Room board 🎯"),
-    h("p.small.muted", "Friday's Room Quiz Night: the same 5 questions in every room, one shared score per room. People are never ranked."),
-    b.rooms.length === 0 ? h("p", `No room has ${b.minAnswers} answers yet this week. Friday, 20:00.`)
-      : h("ol", { style: { margin: "4px 0", paddingLeft: "20px" } }, b.rooms.slice(0, 5).map((r) => h("li", { style: { fontWeight: mine.has(r.id) ? "700" : "400" } }, `${r.name} · ${r.pct}% · ${r.answered} answers`))));
+    h("strong", "Quiz Night 🎯"),
+    h("p.small.muted", "Friday, 20:00: the same 5 questions in every room, answered together. Your room's result is just for your room. No ranks, of people or rooms."),
+    own.length === 0 ? h("p", `Your rooms show their result here once they have ${b.minAnswers} answers this week.`)
+      : h("ul", { style: { margin: "4px 0", paddingLeft: "20px" } }, own.map((r) => h("li", `${r.name} · ${r.pct}% right · ${r.answered} answers`))));
 }
 
 function roomPinnedCard() {

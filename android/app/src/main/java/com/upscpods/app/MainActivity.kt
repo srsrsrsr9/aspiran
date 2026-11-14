@@ -1,5 +1,6 @@
 package com.upscpods.app
 
+import com.upscpods.app.ui.interleaveBy
 import com.upscpods.app.ui.LampOff
 import com.upscpods.app.ui.LibraryScreen
 import com.upscpods.app.data.ContentLibrary
@@ -424,9 +425,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         val nodes = syllabusMap.nodes()
         reviewTopics = syllabusMap.due().mapNotNull { id ->
             syllabusNode(id)?.let { (p, t) -> t?.let { TopicCheck(id, p.short, it.name, nodes[id]?.note ?: "") } }
-        }.take(SyllabusMap.REVIEW_MAX)
+        }.take(SyllabusMap.REVIEW_MAX).let { l -> interleaveBy(l) { it.paper } }
         reviewQs = repo.dueCards().mapNotNull { item -> item.text(hindi).mcq?.let { PracticeQuestion("card-${item.id}", item.topic, it, item.id, true) } }
-            .take(SyllabusMap.REVIEW_MAX - reviewTopics.size)
+            .take(SyllabusMap.REVIEW_MAX - reviewTopics.size).let { l -> interleaveBy(l) { it.topic } }
     }
     // "Just 5 minutes": when it started, while it runs.
     var fiveAt by rememberSaveable { mutableStateOf<Long?>(null) }

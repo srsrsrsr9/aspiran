@@ -419,7 +419,7 @@ export async function hostTick(env: Env, at = new Date()) {
   return { pods: results.length, rooms: OPEN_ROOMS.length, posted, friendPosts };
 }
 
-const ROOM_QUIZ_TEXT = "Room Quiz Night 🎯 5 questions from this week's Chai, the same in every room. This room's one shared score goes on the room board against the other rooms. People are never ranked.";
+const ROOM_QUIZ_TEXT = "Room Quiz Night 🎯 5 questions from this week's Chai, the same in every room. Answered together, one shared score for this room only. No ranks, of people or rooms.";
 
 /**
  * Each open room's pinned question for the day (07:00, the "pins" job): the answer-writing room gets today's Mains

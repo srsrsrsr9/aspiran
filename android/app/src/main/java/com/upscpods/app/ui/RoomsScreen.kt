@@ -162,22 +162,18 @@ fun RoomsScreen(
     }
 }
 
-/** Room Quiz Night's board: the top rooms by their one shared score this week. No person is on it. */
+/** Quiz Night: only your own rooms' shared result, never a ranked list of rooms (no leaderboards, trailer claim 8,
+ * 14 Nov 2026; web roomBoardCard). Nobody, person or room, is ranked. */
 @Composable
 private fun BoardCard(b: RoomBoard, mine: Set<String>) {
+    val own = b.rooms.filter { it.id in mine }.sortedBy { it.name }
     FlatCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("Room board 🎯", style = MaterialTheme.typography.titleSmall)
-            Text("Friday's Room Quiz Night: the same 5 questions in every room, one shared score per room. People are never ranked.",
+            Text("Quiz Night 🎯", style = MaterialTheme.typography.titleSmall)
+            Text("Friday, 20:00: the same 5 questions in every room, answered together. Your room's result is just for your room. No ranks, of people or rooms.",
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            if (b.rooms.isEmpty()) Text("No room has ${b.minAnswers} answers yet this week. Friday, 20:00.", style = MaterialTheme.typography.bodyMedium)
-            b.rooms.take(5).forEach { r ->
-                Text("${r.rank}. ${r.name} · ${r.pct}% · ${r.answered} answers", style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = if (r.id in mine) FontWeight.Bold else FontWeight.Normal)
-            }
-            b.rooms.firstOrNull { it.id in mine && it.rank > 5 }?.let { r ->
-                Text("${r.rank}. ${r.name} · ${r.pct}%", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
-            }
+            if (own.isEmpty()) Text("Your rooms show their result here once they have ${b.minAnswers} answers this week.", style = MaterialTheme.typography.bodyMedium)
+            own.forEach { r -> Text("${r.name} · ${r.pct}% right · ${r.answered} answers", style = MaterialTheme.typography.bodyMedium) }
         }
     }
 }

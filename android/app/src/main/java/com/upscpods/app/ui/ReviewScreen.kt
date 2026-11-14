@@ -28,6 +28,14 @@ import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.Fsrs
 import com.upscpods.app.data.PracticeQuestion
 
+/** Mix subjects (interleaving): round-robin across [key]s, so two of a kind rarely sit side by side. As the web review. */
+fun <T> interleaveBy(items: List<T>, key: (T) -> String): List<T> {
+    val lists = items.groupBy(key).values.map { it.toMutableList() }
+    val out = ArrayList<T>(items.size)
+    while (out.size < items.size) lists.forEach { l -> if (l.isNotEmpty()) out += l.removeAt(0) }
+    return out
+}
+
 /** A syllabus topic due a recall check: its node id, paper, name and the note written when it was met. */
 data class TopicCheck(val id: String, val paper: String, val name: String, val note: String)
 
@@ -68,6 +76,8 @@ fun ReviewScreen(
             Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
+            if (!finished && index == 0) Text("Recall first, subjects mixed. At most 20 a day, about 10 minutes, then it ends; the rest waits for tomorrow.",
+                style = MaterialTheme.typography.bodySmall)
             if (finished) {
                 Text(if (topics.isEmpty()) "Nothing due today." else "That's today's review.", style = MaterialTheme.typography.headlineSmall)
                 Text("Each one comes back just before you'd forget it. The ones you knew well wait longer.", style = MaterialTheme.typography.bodyLarge)

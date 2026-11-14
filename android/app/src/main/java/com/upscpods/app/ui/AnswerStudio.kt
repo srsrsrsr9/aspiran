@@ -74,6 +74,15 @@ private enum class StudioStep { PICK, WRITE, SUBMIT, SELF, FEEDBACK, REWRITE }
 private val BANDS = listOf("below" to "Below", "at" to "At", "above" to "Above")
 private fun bandName(b: String?) = BANDS.firstOrNull { it.first == b }?.second ?: "–"
 
+/** The part to rewrite (trailer claim 5, 14 Nov 2026; web weakestPart): the second opinion's lowest band, ties broken
+ * by your own lower mark; without a second opinion, your own lowest. */
+private fun weakestPart(fb: AnswerFeedback?, self: Map<String, String>): String? {
+    val rank = mapOf("below" to 0, "at" to 1, "above" to 2)
+    fun pick(src: Map<String, String?>) = AREA_NAMES.filter { src[it.first] != null }
+        .minWithOrNull(compareBy<Pair<String, String>>({ rank[src[it.first]] ?: 9 }, { rank[self[it.first]] ?: 9 }))?.second
+    return (fb?.areas?.mapValues { it.value.band }?.let { pick(it) }) ?: pick(self)
+}
+
 /** 7 minutes for a 150-word answer, 11 for 250: the exam's pace. */
 private fun minutesFor(words: Int) = if (words == 250) 11 else 7
 
@@ -306,7 +315,8 @@ fun AnswerStudioScreen(
 
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
                     FeedbackView(fb, words, focusArea, selfMarks)
-                    Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite it with one fix →") }
+                    weakestPart(fb, selfMarks)?.let { Text("Weakest part: $it", style = MaterialTheme.typography.titleSmall) }
+                    Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite the weakest part →") }
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                         TextButton(onClick = { sending = true }) { Text("Send to pod") }
                         TextButton(onClick = { text = ""; typing = false; feedback = null; reviewedJpeg = null; step = StudioStep.PICK }) { Text("Another question") }
@@ -318,9 +328,10 @@ fun AnswerStudioScreen(
                     val rank = mapOf("below" to 0, "at" to 1, "above" to 2)
                     val aiFix = feedback?.areas?.values?.filter { it.fix.isNotBlank() }?.minByOrNull { rank[it.band] ?: 1 }?.fix
                     val fix = myFix.ifBlank { aiFix ?: "Make the conclusion answer the question's directive word." }
-                    Text("Rewrite with one fix", style = MaterialTheme.typography.titleMedium)
+                    val weak = weakestPart(feedback, selfMarks)
+                    Text(if (weak != null) "Rewrite the weakest part: $weak" else "Rewrite with one fix", style = MaterialTheme.typography.titleMedium)
                     FlatCard(Modifier.fillMaxWidth()) { Text("Your one fix: $fix", Modifier.padding(12.dp), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold) }
-                    Text("Write the answer again with just that change, on paper or here. One fix, done well, sticks better than five half-done.", style = MaterialTheme.typography.bodyMedium)
+                    Text("Write that part again with just that change, on paper or here. One fix, done well, sticks better than five half-done.", style = MaterialTheme.typography.bodyMedium)
                     OutlinedTextField(value = text, onValueChange = { text = it }, modifier = Modifier.fillMaxWidth().heightIn(min = 200.dp),
                         textStyle = if (hindi) ReadingHindi else ReadingText, placeholder = { Text("Optional: type the rewrite") })
                     Button(
