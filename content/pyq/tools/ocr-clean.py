@@ -24,9 +24,29 @@ def fix(s):
     s = re.sub(r"\s+([,.;:?])", r"\1", s).replace(" :", ":")
     return s.strip()
 
+HEADER = re.compile(r"^[\W_]*[HA]?GY-P-JHK[I!|\]]\W*(\(?\s*\d+\s*[-\u2013\u2014+.]*\s*[A/]?\s*\)?\.?)?\s*")
+CODE = re.compile(r"^[\dLlsi,\s.]*(and|ang|only|Both|Neither)?[\dLlsi,\s.and]*(only)?\W*$")
+
+def fix_code(o):
+    """Answer codes like "1, 2 and 3 only": OCR reads 3 as 8, 38 or 83, "1 and" as "land", "1" as "od"."""
+    o = re.sub(r"^[^\w(]+", "", o)
+    if not re.search(r"\d|^od\b", o) or len(o) > 30 or re.search(r"[a-z]{4,}", o.replace("only", "")): return o
+    o = re.sub(r"\b(?:[Ll]and|ang)\b", lambda m: "1 and" if m.group(0)[0] in "Ll" else "and", o)
+    o = re.sub(r"\bod\b", "1", o)
+    o = re.sub(r"\b(?:83|38|s8|8|30)\b", "3", o)
+    o = re.sub(r"\bonly\b.*$", "only", o)
+    o = re.sub(r"\s+[*{}>~\-\u2014.\d]+$", "", o) if not o.rstrip().endswith("only") and re.search(r"\d\s+\d+$", o) else re.sub(r"\s*[*{}>~\-\u2014]+$", "", o)
+    return o.strip()
+
+def money(s):
+    s = re.sub(r"(\d{1,2}), ?(\d\d), ?(\d{3})\b", r"\1,\2,\3", s)
+    return re.sub(r"(?:= ?|\u20b9 ?)(?=\d{1,2},\d\d,\d{3})", "\u20b9", s)
+
 def fix_stem(s):
+    s = money(s)
     out = []
     for line in s.split("\n"):
+        line = HEADER.sub("", line.strip())
         line = re.sub(r"^[|'\"‘’“.]+\s*", "", line.strip())
         line = re.sub(r"\s+[|<>~—]+\s*$", "", line)
         if not line: continue
@@ -44,7 +64,7 @@ def fix_stem(s):
         got = m.group(1)
         if got == str(want) or (got in "iI" and want == 1) or (got in ("8", "38") and want == 3) or (got == "65" and want == 5):
             out[i] = f"{want}. " + l[m.end():]; k = want
-    return "\\n".join(fix(l) for l in out)
+    return "\\n".join(money(fix(l)) for l in out)
 
 qs = json.load(open(sys.argv[1], encoding="utf-8"))
 # Corrections a person made against the PDF: <paper>.fixes.json beside the OCR, {"n": [["old", "new"], ...]}.
@@ -56,7 +76,7 @@ if len(sys.argv) > 2:
     for l in open(sys.argv[2], encoding="utf-8"):
         if l.strip(): n, v = l.split(); nodes[n] = v
 for q in qs:
-    row = "\t".join([fix_stem(q["q"])] + [fix(o) for o in q["options"]])
+    row = "\t".join([fix_stem(q["q"])] + [fix_code(money(fix(o))) for o in q["options"]])
     for old, new in FIXES.get(str(q["n"]), []):
         if old not in row: print(f"Q{q['n']}: fix not found: {old}", file=sys.stderr)
         row = row.replace(old, new)

@@ -6,16 +6,29 @@ lines in the margin, so they are ignored and questions are counted in order.
 OCR misreads 1/l, quotes and line breaks: a person checks the result against the PDF. Problems go to stderr."""
 import csv, json, re, sys, collections
 
-OPT = re.compile(r"^[\s_.,'‘’“\"]*[\(\[\{|]\s*(a|b|c|d|ce|©|e|@|ec|dq|aq|cq|bq|d\))\s*[\)\]\}|][.,]?\s*", re.I)
-INLINE = re.compile(r"\s+[_.]?\(([a-d]|ce|ec)\)\s*")
+OPT = re.compile(r"^[\s_.,'\u2018\u2019\u201c\"~-]*[\(\[\{|]\s*(a|b|c|d|ce|\u00a9|e|@|ec|dq|aq|cq|bq|da|bo|d\))\s*[\)\]\}|\u2019'][.,]?\s*", re.I)
+NUM = re.compile(r"^[\W_]{0,2}\d{1,3}\s*[.,]\s+(?=[A-Z\u201c\u2018\"'(])")
+OPENING = re.compile(r"^(Consider|Which|With reference|In the context|In India|What|Who|If |Under|According|Among|The term|One of|How many|Select|Recently|\u201c|\")")
+INLINE = re.compile(r"\s+[-_.]?(?:[\(\[]\s*(?:[a-d]|ce|ec|bo|da|dq|aq|cq|bq)\s*[\)\]\u2019']|\(([a-d])(?=\s)|@)\s*")
 lines = []  # (x relative to the column's text edge, text)
 for path in sys.argv[1:]:
     rows = list(csv.DictReader(open(path, encoding="utf-8", errors="ignore"), delimiter="\t", quoting=csv.QUOTE_NONE))
+    # Tesseract's lines, then a line joins one beside it at the same height (options are tabbed, so "(a)" and its
+    # text can come back as two lines). Word order inside a line stays tesseract's.
     ls = collections.OrderedDict()
     for r in rows:
         if r["level"] == "5" and r["text"].strip():
             ls.setdefault((r["block_num"], r["par_num"], r["line_num"]), []).append(r)
-    items = sorted(((int(ws[0]["top"]), int(ws[0]["left"]), " ".join(w["text"] for w in ws)) for ws in ls.values()))
+    segs = sorted((min(int(w["top"]) for w in ws), max(int(w["top"]) + int(w["height"]) for w in ws), int(ws[0]["left"]), int(ws[-1]["left"]) + int(ws[-1]["width"]), " ".join(w["text"] for w in ws)) for ws in ls.values())
+    rws = []  # [top, bottom, [(left, right, text)]]
+    for top, bot, left, right, text in segs:
+        for rw in rws[-4:]:
+            overlap = min(bot, rw[1]) - max(top, rw[0])
+            if overlap > 0.5 * min(bot - top, rw[1] - rw[0]) and all(right < l or left > r for l, r, _ in rw[2]):
+                rw[2].append((left, right, text)); rw[0] = min(rw[0], top); rw[1] = max(rw[1], bot); break
+        else:
+            rws.append([top, bot, [(left, right, text)]])
+    items = sorted((top, min(l for l, _, _ in ws), " ".join(t for _, _, t in sorted(ws))) for top, _, ws in rws)
     items = [(x, t) for _, x, t in items if not re.match(r"^(VGYH|[A-Z]{4}-[A-Z]-[A-Z]{3}|SPACE FOR ROUGH|ROUGH WORK)", t)]
     if not items: continue
     edge = sorted(x for x, _ in items)[len(items) // 2]
@@ -32,7 +45,14 @@ for path in sys.argv[1:]:
 qs, cur, opts = [], None, 0
 after_d = False
 for dx, t in lines:
-    is_opt = bool(OPT.match(t)) and dx < 40
+    t = re.sub(r"^\s*[@\u00a9]\s*(?=\S|$)", "(d) ", t)  # an option letter read as @ or ©
+    is_opt = bool(OPT.match(t)) and dx < 80  # 2020 indents the option letters about 45 px
+    # Papers that print the number inline ("7. A constitutional...", 2020) or whose wrapped lines sit at the same
+    # indent as the stem: after (d), a numbered line or a usual opening also starts the next question.
+    numbered = bool(NUM.match(t))
+    if after_d and not is_opt and (numbered or (dx < 90 and OPENING.match(t))):
+        t = NUM.sub("", t, count=1) if numbered else t
+        cur = None
     if cur is None or (after_d and dx < 40 and not is_opt):
         cur = {"stem": [], "opts": []}; qs.append(cur); after_d = False
     if is_opt and len(cur["opts"]) < 4:
