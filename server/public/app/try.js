@@ -385,7 +385,8 @@ const STEP = {
       if (!(st.check ?? []).length) return put(box, text);
       if (!tested) return put(box, text, h("button.primary", { onclick: () => { setA(st.id + ":tested", true); drawR(); focusTop(); } }, u("doneReading") + " →"));
       put(box, h("h2", u("readCheck")), (st.check ?? []).map((q, n) => h("div.card", mcq(q, `${st.id}:${n}`))),
-        h("details.try-reread", h("summary.small", u("showText")), text));
+        // Jeetu (jeetu.js) at the moment of re-reading instead of answering: shown only once the text is opened again.
+        h("details.try-reread", h("summary.small", u("showText")), C.jeetu?.("reread"), text));
     };
     drawR();
     return [

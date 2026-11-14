@@ -24,6 +24,7 @@ import * as X from "./explore.js";
 import * as BR from "./brief.js";
 import * as VINE from "./vine.js";
 import * as TRY from "./try.js";
+import * as J from "./jeetu.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -467,7 +468,7 @@ function onboarding() {
       h("div.card", h("p", h("strong", Q.q)),
         h("div.col", Q.opts.map((label, i) => h("button" + (answered && i === Q.right ? ".primary" : ""), { disabled: answered, "aria-pressed": String(o.pick === i), onclick: () => { o.pick = i; redraw(); } }, label))),
         answered && h("p", { role: "status" }, o.pick === Q.right ? Q.yes : Q.no),
-        answered && h("p.small.muted", Q.after)),
+        answered && h("p.small.muted", Q.after), answered && J.say("intro", { l: o.lang })),
       h("div.card", h("h2", { style: { marginTop: 0 } }, hi ? "मुफ़्त में शुरू करें" : "Start free"),
         h("p.small", hi ? "आपका पॉड, रोज़ की चाय, अभ्यास और Chotu। कार्ड नहीं चाहिए। आपका ईमेल सिर्फ़ साइन-इन के लिए है: पॉड उसे नहीं देखता, और वह Chotu तक नहीं जाता।"
           : "Your pod, the daily Chai, practice and Chotu. No card needed. Your email is only for signing in: your pod never sees it, and it never goes to Chotu."),
@@ -858,7 +859,7 @@ function viewReview() {
       const d = dayState(); d.reviewed = true; saveDay(d);
       put(box, h("h2", "That's today's review."),
         asked > 0 && h("p", `${right} of ${asked} question${asked === 1 ? "" : "s"} came back right.`),
-        h("p.muted", "Each one returns just before you'd forget it. The ones you knew well wait longer."),
+        h("p.muted", "Each one returns just before you'd forget it. The ones you knew well wait longer."), J.say("reviewEnd"),
         h("a.btn.primary", { href: "#today" }, "Next step"));
       return;
     }
@@ -882,7 +883,7 @@ function viewReview() {
     next.disabled = true;
   };
   draw();
-  return h("div.col", h("h1", "Review"), pauseLine("first-review"), h("p.small.muted", "Recall first. Nothing here is scored or shared. It works offline too: everything due is on this device."), box);
+  return h("div.col", h("h1", "Review"), pauseLine("first-review"), J.say("reviewStart"), h("p.small.muted", "Recall first. Nothing here is scored or shared. It works offline too: everything due is on this device."), box);
 }
 
 // --- Syllabus map (teaching plan, build step 2) ------------------------------------------------------
@@ -1069,6 +1070,7 @@ function viewMains() {
     const all = AREAS.every(([k]) => w.self[k]);
     const fix = h("input", { type: "text", maxLength: 200, value: w.fix, placeholder: "The one thing I'd change first", oninput: (e) => { w.fix = e.target.value; save(); } });
     return [
+      J.say("selfMark"),
       h("p", "Mark it yourself first. For each part: below, at or above a typical scoring answer. Your own eye is the skill that matters on the day."),
       AREAS.map(([k, name]) => h("div.card", h("div.row.between", h("strong", name),
         h("div.row", BANDS.map(([b, label]) => h("button.small" + (w.self[k] === b ? ".primary" : ".ghost"), { "aria-pressed": String(w.self[k] === b), onclick: () => { w.self[k] = b; save(); draw(); } }, label)))))),
@@ -1098,6 +1100,7 @@ function viewMains() {
     }
     const agree = AREAS.filter(([k]) => w.ai.areas[k]?.band === w.self[k]).length;
     return [
+      J.say("second"),
       h("p", w.ai.summary),
       h("p.small.muted", [w.ai.wordCount ? `${w.ai.wordCount} words of ${w.target}` : null, w.ai.left != null ? `${w.ai.left} free review${w.ai.left === 1 ? "" : "s"} left this week` : null].filter(Boolean).join(" · ")),
       h("div.tbl", h("table", h("thead", h("tr", h("th", "Part"), h("th", "You"), h("th", "Second opinion"))),
@@ -1119,6 +1122,7 @@ function viewMains() {
     const fix = w.fix || low?.[1].fix || "Make the conclusion answer the question's directive word.";
     const ta = h("textarea", { rows: 14, value: w.v2 ?? store.get(key, ""), style: { fontFamily: "var(--read-font)", fontSize: "18px" }, oninput: (e) => { w.v2 = e.target.value; save(); } });
     return [
+      J.say("rewrite"),
       h("div.card.soft", h("strong", "Your one fix: "), fix),
       h("p", "Rewrite the answer with just that change. One fix, done well, sticks better than five half-done."),
       ta,
@@ -1272,6 +1276,7 @@ function viewProgress() {
   const weeks = /^\d{4}$/.test(ty ?? "") ? Math.round((Date.parse(`${ty}-05-25`) - Date.now()) / (7 * 86400_000)) : null;
   return h("div.col", h("h1", "You vs. you"), pauseLine("you-vs-you"),
     h("p.muted", "Only against your own past. No ranks, no cut-offs, nobody else's numbers."),
+    J.weekly(store.get("rightDays", {}), day),
     weeks != null && weeks > 0 && h("p", `Prelims ${ty} is about ${weeks} weeks away (UPSC usually holds it in late May; check the official calendar).`),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Your syllabus map"), h("p", `${counts.met} Met · ${counts.recall} Can recall · ${counts.use} Can use, out of ${SY.NODES.length} topics.`)),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Writing"), writing),
@@ -2783,6 +2788,7 @@ function viewChotu() {
       h("div.center", kulhad(toneNow({ care: chotu.care, thinking: chotu.busy }), 72)), h("p.center", h("span.ai-tag", "Chotu · AI")),
       h("div.chips.center", { role: "tablist" }, CHOTU_MODES.map(([m, l]) => h("button.chip", { role: "tab", "aria-pressed": String(chotu.mode === m), onclick: () => { chotu.mode = m; input.placeholder = CHOTU_HINT[m]; draw(); } }, l))),
       chotu.care && careBox(),
+      on("jeetu") && h("p.small.center", h("a", { href: "#jeetu" }, "A question about how to study? Ask Jeetu · AI →")),
       chotu.mode === "plan" && h("a.card.link", { href: "#roadmap" }, h("div.row.between", h("div", h("strong", store.get("roadmap") ? "Your roadmap and this week's plan" : "Build your free roadmap"),
         h("div.small.muted", "Exam year, hours and weak papers in, a one-page plan to Prelims out.")), h("span", "→"))),
       h("div.card.chat",
@@ -3004,7 +3010,7 @@ function viewRhythm() {
   const recent = Object.entries(weeks).sort().slice(-4);
   return h("div.col", h("h1", "Rhythm"),
     h("p.muted", "The days you closed, week by week. A rhythm is coming back, not never missing."),
-    h("div.card", rhythmDots(false)),
+    h("div.card", rhythmDots(false)), J.doubleAct(),
     recent.length > 0 && h("div.card", h("h3", { style: { marginTop: 0 } }, "Focused time by week"),
       recent.map(([wk, m]) => h("div.row.between", h("span", "Week of " + new Date(wk + "T12:00").toLocaleDateString(undefined, { day: "numeric", month: "short" })), h("span", `${Math.round(m / 60 * 10) / 10} h`)))),
     h("a.btn", { href: "#close" }, "Close today"));
@@ -4007,11 +4013,13 @@ function viewRoutine() {
 }
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
-TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false) });
-BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud });
+TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false), jeetu: (k) => J.say(k) });
+BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud, jeetu: (k) => J.say(k) });
+// Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
+J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang });
 
 const VIEWS = {
-  adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
+  adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu, jeetu: () => J.viewJeetu(),
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch,
   learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,

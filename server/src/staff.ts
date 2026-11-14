@@ -129,6 +129,7 @@ export const FLAG_INFO = {
   pod_join: "New members can join pods",
   pod_chat: "Pod chat, pings and the study room",
   chotu: "Chotu's jokes on light Chai cards",
+  jeetu: "Jeetu · AI, the method coach: his short lines in Review, Mains, first run and Progress, and Ask Jeetu. Never feelings, ranks or results; quiet 23:30-07:00. Off: he disappears from both apps",
   mocks: "Mock papers",
   long_reads: "Long reads",
   library: "Content library (explainers, games, maps and the rest)",

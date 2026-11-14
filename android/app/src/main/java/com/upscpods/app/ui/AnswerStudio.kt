@@ -267,6 +267,7 @@ fun AnswerStudioScreen(
 
                 StudioStep.SELF -> {
                     Text("Mark it yourself first", style = MaterialTheme.typography.titleMedium)
+                    JeetuNote("selfMark", hindi)
                     Text("For each part: below, at or above a typical scoring answer. Your own eye is the skill that matters on the day.", style = MaterialTheme.typography.bodyMedium)
                     AREA_NAMES.forEach { (key, name) ->
                         Text(name, style = MaterialTheme.typography.titleSmall)
@@ -305,6 +306,7 @@ fun AnswerStudioScreen(
                 }
 
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
+                    JeetuNote("second", hindi)
                     FeedbackView(fb, words, focusArea, selfMarks)
                     Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite it with one fix →") }
                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
@@ -319,6 +321,7 @@ fun AnswerStudioScreen(
                     val aiFix = feedback?.areas?.values?.filter { it.fix.isNotBlank() }?.minByOrNull { rank[it.band] ?: 1 }?.fix
                     val fix = myFix.ifBlank { aiFix ?: "Make the conclusion answer the question's directive word." }
                     Text("Rewrite with one fix", style = MaterialTheme.typography.titleMedium)
+                    JeetuNote("rewrite", hindi)
                     FlatCard(Modifier.fillMaxWidth()) { Text("Your one fix: $fix", Modifier.padding(12.dp), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold) }
                     Text("Write the answer again with just that change, on paper or here. One fix, done well, sticks better than five half-done.", style = MaterialTheme.typography.bodyMedium)
                     OutlinedTextField(value = text, onValueChange = { text = it }, modifier = Modifier.fillMaxWidth().heightIn(min = 200.dp),

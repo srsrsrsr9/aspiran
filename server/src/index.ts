@@ -5,6 +5,7 @@ import DESK_HTML from "./desk.html";
 import { runPipeline } from "./pipeline";
 import { adminApi } from "./admin";
 import { chotuChat, modelsRoute } from "./chotu";
+import { jeetuRoute } from "./jeetu";
 import { extraDistress, publicLangs } from "./langs";
 import { REQUESTABLE, requestLanguage } from "./requests";
 import ADMIN_HTML from "./admin.html";
@@ -199,6 +200,8 @@ export default {
         .bind(id, String(b.text ?? "").slice(0, 2000), String(b.reason ?? "Reported").slice(0, 300), new Date().toISOString()).run();
       return json({ ok: true });
     }
+    // --- Jeetu · AI, the method coach (jeetu.ts)
+    if (path === "/jeetu" || path === "/jeetu/report") { const r = await jeetuRoute(req, env, path); if (r) return r; }
     // --- The website (aspiran.in): Chotu as the guide, and what visitors tell it (web.ts)
     if (path.startsWith("/web/")) { const r = await webRoute(req, env, path); if (r) return r; }
     if (path === "/chotu" && req.method === "POST") {

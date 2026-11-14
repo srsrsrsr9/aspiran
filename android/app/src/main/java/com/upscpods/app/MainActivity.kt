@@ -253,7 +253,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -397,6 +397,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     }
     val hindi = persona?.language == ReadingLanguage.HINDI
     com.upscpods.app.ui.PauseSource.library = library; com.upscpods.app.ui.PauseSource.hindi = hindi
+    // Jeetu · AI, the method coach: on with the server's flag, off in result week (quiet hours are his own check).
+    com.upscpods.app.data.Jeetu.enabled = config.on("jeetu") && result == null; com.upscpods.app.data.Jeetu.hindi = hindi
+    val jeetu = remember { com.upscpods.app.data.JeetuClient { pod.serverUrl } }
     val bank = remember { Practice.loadBank(context) }
     val mains = remember(brief, hindi) { Practice.mainsTask(brief, hindi) }
     var questions by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
@@ -745,7 +748,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         )
         Overlay.ESSAY -> EssayScreen(library, hindi, onClose = { overlay = Overlay.NONE })
         Overlay.CASE_FILE -> com.upscpods.app.ui.CaseFileScreen(caseFile, onClose = { overlay = Overlay.NONE })
-        Overlay.PROGRESS -> com.upscpods.app.ui.ProgressScreen(answerLog, mocks, syllabusMap, caseFile, staged.value("target_year"), onClose = { overlay = Overlay.NONE })
+        Overlay.PROGRESS -> com.upscpods.app.ui.ProgressScreen(answerLog, mocks, syllabusMap, caseFile, staged.value("target_year"), onClose = { overlay = Overlay.NONE },
+            rightDays = room.rightDays(), onAskJeetu = { overlay = Overlay.JEETU })
+        Overlay.JEETU -> com.upscpods.app.ui.AskJeetuScreen(jeetu, onOpenChotu = null, onClose = { overlay = Overlay.PROGRESS })
         Overlay.WALK -> com.upscpods.app.ui.WalkScreen(reviewTopics.map { it.id to it.name }, brief.items, hindi, library, onClose = { overlay = Overlay.NONE })
         Overlay.PRINT -> com.upscpods.app.ui.PrintScreen(syllabusMap, reviewQs.map { it.mcq.question }, mocks.papers(library), hindi, library, onClose = { overlay = Overlay.NONE })
         Overlay.OPTIONAL -> com.upscpods.app.ui.OptionalScreen(library, hindi, onClose = { overlay = Overlay.NONE })

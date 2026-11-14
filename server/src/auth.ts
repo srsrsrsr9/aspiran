@@ -198,6 +198,7 @@ export function isMemberRoute(path: string): boolean {
   return /^\/pods\/(join|leave|me|choose|merge-stay)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
     || path === "/members/profile" || /^\/commons\/[\w-]+\/ws$/.test(path) || path === "/season/add" || path === "/mocks/band"
     || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
+    || path === "/jeetu" || path === "/jeetu/report"
     || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)
     || /^\/rooms\/(list|join|leave|photo)$/.test(path) || /^\/rooms\/[\w-]+\/ws$/.test(path) || /^\/rooms\/photo\/\w+$/.test(path)
     || path === "/answers/evaluate" || path === "/interview/follow" || isContentRoute(path);
@@ -207,7 +208,7 @@ export const isContentRoute = (path: string): boolean => /^\/(library|practice\/
 /** A suspended person can still get or erase their data (DPDP). */
 const OPEN_WHEN_SUSPENDED = /^\/privacy\/(export|delete)$/;
 /** Bodies that are anonymous by design: no member id is added if the client didn't send one. */
-const ANON_BODY = new Set(["/chotu", "/chotu/report", "/season/add", "/mocks/band"]);
+const ANON_BODY = new Set(["/chotu", "/chotu/report", "/jeetu", "/jeetu/report", "/season/add", "/mocks/band"]);
 
 /**
  * Returns a Response to send back (401/403) or the request to carry on with, rewritten so its memberId (body) and

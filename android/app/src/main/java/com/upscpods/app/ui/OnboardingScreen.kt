@@ -133,6 +133,7 @@ fun OnboardingScreen(
                                         Text((if (pick == 1) "Right. " else "") + "Once, in 1976: the 42nd Amendment added socialist, secular and integrity.")
                                         Text("You answered first, then looked. That's how Aspiran works, and this one comes back in a week, just before you'd forget it.",
                                             style = MaterialTheme.typography.bodySmall)
+                                        JeetuNote("intro", hindi = false)
                                     }
                                 }
                             }

@@ -269,6 +269,13 @@ admin switches and daily caps as the other AI ("Chotu (cloud)" in /admin, AI usa
 logged, never the chat. Distress is checked on the phone and again here; a match never reaches the model.
 The system prompt is `src/chotu-prompt.txt`. Test with `node test/chotu.mjs`.
 
+**Jeetu · AI, the method coach.** `POST /jeetu` (`src/jeetu.ts`, prompt in `src/jeetu-prompt.txt`) answers questions
+about how to study, in the trailer mentor's voice, on the same models and "chotu" AI switch as cloud Chotu. Before any
+model is called the server checks the `jeetu` flag (off: 503), distress (the care reply), quiet hours (23:30 to 07:00
+IST: one fixed line) and ranks, results or feelings (one fixed line each). `POST /jeetu/report` sends one reply to the
+Chotu reports queue as "Jeetu · AI". His scripted lines live in the apps (`public/app/jeetu.js`, Android
+`data/Jeetu.kt`). Design note: `artefacts/jeetu-2026-11-14.md`. Test with `npm run test:all -- jeetu`.
+
 ## AI on the server (public news only)
 
 Locally there is no AI: stories go into the queue as headline-and-link cards marked

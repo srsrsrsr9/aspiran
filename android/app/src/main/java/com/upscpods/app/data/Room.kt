@@ -59,6 +59,9 @@ class RoomStore(context: Context) {
     private fun saveTodos() = write("todos", ListSerializer(RoomTodo.serializer()), todos)
 
     /** One answer or topic check, right or not. Kept 120 days, only for [sleepView]. */
+    /** Day → [right, total], for Jeetu's weekly note (only ever against your own past). */
+    fun rightDays(): Map<String, List<Int>> = rightDays
+
     fun logRight(ok: Boolean) {
         val day = LocalDate.now().toString()
         val (r, t) = rightDays[day]?.let { it[0] to it[1] } ?: (0 to 0)
