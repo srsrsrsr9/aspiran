@@ -131,7 +131,10 @@ fun OnboardingScreen(
                                     }
                                     if (pick >= 0) {
                                         Text((if (pick == 1) "Right. " else "") + "Once, in 1976: the 42nd Amendment added socialist, secular and integrity.")
-                                        Text("You answered first, then looked. That's how Aspiran works, and this one comes back in a week, just before you'd forget it.",
+                                        // The real FSRS gaps (data/Fsrs.kt): a miss comes back tomorrow, a first right answer in 3 days, then about
+                                        // 11, 35 and 100 days. Trailer claim 1, 14 Nov 2026 (it said "a week").
+                                        Text("You answered first, then looked. That's how Aspiran works: what you practise here comes back just before you'd forget it, " +
+                                            (if (pick == 1) "a right answer in 3 days, then further out each time." else "a miss tomorrow, then further out each time."),
                                             style = MaterialTheme.typography.bodySmall)
                                     }
                                 }

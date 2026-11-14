@@ -317,6 +317,8 @@ fun PrelimsScreen(
     // Peak-end (playbook A7): the finished screen names one specific thing they got right.
     var firstRight by rememberSaveable { mutableStateOf<String?>(null) }
     var picked by rememberSaveable(index) { mutableStateOf<Int?>(null) }
+    var sure by rememberSaveable(index) { mutableStateOf<Boolean?>(null) }
+    val context = androidx.compose.ui.platform.LocalContext.current
     val finished = index >= questions.size
 
     LaunchedEffect(finished) { if (finished) onFinished() }
@@ -364,12 +366,14 @@ fun PrelimsScreen(
                 return@Column
             }
             val q = questions[index]
+            if (index == 0) Text("In the real Prelims a wrong answer costs a third of its marks (−⅓ for a wrong answer, 0 if you leave it), so say how sure you are before you look. Here nothing is scored.",
+                style = MaterialTheme.typography.bodySmall)
             Text(
                 q.topic + if (q.isReview) " · revision" else "",
                 style = MaterialTheme.typography.labelMedium,
             )
             Text(q.mcq.question, style = MaterialTheme.typography.titleMedium)
-            q.mcq.options.forEachIndexed { i, opt ->
+            if (sure == null) SureFirst { sure = it } else q.mcq.options.forEachIndexed { i, opt ->
                 FilterChip(
                     selected = picked == i,
                     onClick = {
@@ -377,6 +381,7 @@ fun PrelimsScreen(
                             picked = i
                             val right = i == q.mcq.answerIndex
                             if (right) { rightCount++; if (firstRight == null) firstRight = q.topic }
+                            Calibration.log(context, sure == true, right)
                             onAnswer(q, right)
                         }
                     },
@@ -391,6 +396,7 @@ fun PrelimsScreen(
                         q.mcq.explanation,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+                if (!right && sure == true) Text(sureWrongLine(), style = MaterialTheme.typography.bodySmall)
             }
         }
     }

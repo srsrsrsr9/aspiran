@@ -345,24 +345,28 @@ private fun McqRun(qs: List<PrepQ>, title: String, onAnswer: (PrepQ, Boolean) ->
     var i by rememberSaveable(qs.size, limit) { mutableIntStateOf(0) }
     var right by rememberSaveable(qs.size, limit) { mutableIntStateOf(0) }
     var picked by rememberSaveable(i) { mutableIntStateOf(-1) }
+    var sure by rememberSaveable(i) { mutableStateOf<Boolean?>(null) }
+    val context = LocalContext.current
     if (n == 0) return
     if (i >= n) return done(right, n)
     val q = qs[i]
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Muted("$title · ${i + 1} of $n" + if (q.topic.isNotBlank()) " · ${q.topic}" else "")
         Text(q.q.question, style = MaterialTheme.typography.titleMedium)
-        q.q.options.forEachIndexed { k, opt ->
+        if (sure == null) SureFirst { sure = it } else q.q.options.forEachIndexed { k, opt ->
             FilterChip(selected = picked == k, onClick = {
                 if (picked >= 0) return@FilterChip
                 picked = k
                 val ok = k == q.q.answerIndex
                 if (ok) right++
+                Calibration.log(context, sure == true, ok)
                 onAnswer(q, ok)
             }, label = { Text(opt, modifier = Modifier.padding(vertical = 8.dp)) }, modifier = Modifier.fillMaxWidth())
         }
         if (picked >= 0) {
             val ok = picked == q.q.answerIndex
             Text((if (ok) "✓ Right. " else "○ Not quite. The answer is ${q.q.options.getOrElse(q.q.answerIndex) { "" }}. ") + q.q.explanation, style = MaterialTheme.typography.bodyLarge)
+            if (!ok && sure == true) Text(sureWrongLine(), style = MaterialTheme.typography.bodySmall)
             Button(onClick = { i++ }) { Text(if (i + 1 < n) "Next" else "Finish") }
         }
     }

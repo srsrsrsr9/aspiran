@@ -310,15 +310,17 @@ private fun ChaiCardPage(item: NewsItem, preferHindi: Boolean, showJoke: Boolean
 private fun ExamCornerView(id: String, v: CardView, pyq: String?, onAnswer: ((String, Boolean) -> Unit)?, onWhy: (() -> Unit)?) {
     val l = v.labels
     var picked by rememberSaveable(id + "mcq" + l.hindi) { mutableStateOf<Int?>(null) }
+    var sure by rememberSaveable(id + "sure") { mutableStateOf<Boolean?>(null) }
+    val context = androidx.compose.ui.platform.LocalContext.current
     Column(Modifier.padding(bottom = 8.dp)) {
         v.mcq?.let { mcq ->
             Text(mcq.question, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold)
-            mcq.options.forEachIndexed { i, opt ->
+            if (sure == null) SureFirst(l.hindi) { sure = it } else mcq.options.forEachIndexed { i, opt ->
                 FilterChip(
                     selected = picked == i,
                     onClick = {
                         // The first pick is the one that counts for recall.
-                        if (picked == null) onAnswer?.invoke(id, i == mcq.answerIndex)
+                        if (picked == null) { Calibration.log(context, sure == true, i == mcq.answerIndex); onAnswer?.invoke(id, i == mcq.answerIndex) }
                         picked = i
                     },
                     label = { Text(opt) },
@@ -331,6 +333,7 @@ private fun ExamCornerView(id: String, v: CardView, pyq: String?, onAnswer: ((St
                     (if (right) l.right else l.wrong) + mcq.explanation,
                     style = MaterialTheme.typography.bodyMedium,
                 )
+                if (!right && sure == true) Text(sureWrongLine(l.hindi), style = MaterialTheme.typography.bodySmall)
             }
         }
         v.mainsPrompt?.let {

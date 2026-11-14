@@ -120,13 +120,15 @@ fun ProgressScreen(answerLog: AnswerLog, mocks: Mocks, syllabusMap: SyllabusMap,
             }
             val hist = mocks.history()
             Section("Sure and not sure") {
-                val sureR = hist.sumOf { it.right - it.unsureRight }; val sureT = hist.sumOf { it.attempted - it.unsureTotal }
-                val gR = hist.sumOf { it.unsureRight }; val gT = hist.sumOf { it.unsureTotal }
+                // Mocks (the "Not sure" tick) plus every practice question's "How sure are you?" (SureFirst.kt).
+                val c = Calibration.tally(context)
+                val sureR = hist.sumOf { it.right - it.unsureRight } + c.sureRight; val sureT = hist.sumOf { it.attempted - it.unsureTotal } + c.sureTotal
+                val gR = hist.sumOf { it.unsureRight } + c.unsureRight; val gT = hist.sumOf { it.unsureTotal } + c.unsureTotal
                 if (sureT >= 20 && gT >= 10) {
                     val g = gR.toDouble() / gT
                     Text("When you were sure: ${100 * sureR / sureT}% right. When you marked a guess: ${100 * gR / gT}%. " +
                         when { g > 0.45 -> "Your guesses do better than you think; trust them a little more."; g < 0.3 -> "Guesses cost you marks; skip more of them."; else -> "Your sense of what you know is about right." })
-                } else Text("Mark answers “Not sure” in mocks. After a few papers this shows how far your sense of sure matches your marks.", style = MaterialTheme.typography.bodySmall)
+                } else Text("Every practice question asks how sure you are before you look, and mocks have a “Not sure” tick. After about 30 answers this shows how far your sense of sure matches your marks.", style = MaterialTheme.typography.bodySmall)
             }
             val nodes = syllabusMap.nodes().values
             val met = nodes.map { it.met }.sorted(); val recalled = nodes.mapNotNull { it.recalledOn }.sorted(); val used = nodes.mapNotNull { it.usedOn }.sorted()

@@ -60,9 +60,9 @@ class AnswerLog(context: Context) {
 
     private fun update(id: String, f: (AnswerAttempt) -> AnswerAttempt) = save(all().map { if (it.id == id) f(it) else it })
 
-    data class Week(val started: Int, val finished: Int, val abandoned: Int, val streakDays: Int, val lastFinished: LocalDate?)
+    data class Week(val started: Int, val finished: Int, val abandoned: Int, val lastFinished: LocalDate?)
 
-    /** This week (from Monday): how many started and finished, and how many days in a row ended with a finished one. */
+    /** This week (from Monday): how many started and finished. No days-in-a-row count: no streaks (trailer claim 8). */
     fun week(today: LocalDate = LocalDate.now()): Week {
         val zone = ZoneId.systemDefault()
         val day = { ms: Long -> Instant.ofEpochMilli(ms).atZone(zone).toLocalDate() }
@@ -70,14 +70,10 @@ class AnswerLog(context: Context) {
         val log = all()
         val thisWeek = log.filter { !day(it.startedAt).isBefore(monday) }
         val finishedDays = log.filter { it.outcome == "finished" }.map { day(it.startedAt) }.toSet()
-        var streak = 0
-        var d = if (today in finishedDays) today else today.minusDays(1)
-        while (d in finishedDays) { streak++; d = d.minusDays(1) }
         return Week(
             started = thisWeek.size,
             finished = thisWeek.count { it.outcome == "finished" },
             abandoned = thisWeek.count { it.outcome == "abandoned" },
-            streakDays = streak,
             lastFinished = finishedDays.maxOrNull(),
         )
     }
@@ -92,7 +88,6 @@ class AnswerLog(context: Context) {
             w.started == 0 -> if (hindi) "नया हफ़्ता। आज एक उत्तर पूरा करें, बस 7 मिनट।" else "New week. Let's finish one today, just 7 minutes."
             w.finished == 0 -> if (hindi) "इस हफ़्ते ${w.started} शुरू किए। आज एक पूरा करें, बस 7 मिनट। अधूरा भी चलेगा, बस आख़िर तक लिखो।" else "You started ${w.started} this week. Let's finish one today, just 7 minutes. Rough is fine, just get to the end."
             w.finished < w.started -> if (hindi) "इस हफ़्ते ${w.started} शुरू किए और ${w.finished} पूरे। आज एक और पूरा करें, बस 7 मिनट।" else "You started ${w.started} and finished ${w.finished} this week. Let's finish one today, just 7 minutes."
-            w.streakDays >= 2 -> if (hindi) "लगातार ${w.streakDays} दिन उत्तर पूरे। आज का भी 7 मिनट में।" else "${w.streakDays} days in a row with a finished answer. Today's is 7 minutes too."
             else -> if (hindi) "इस हफ़्ते ${w.finished} पूरे किए। अगला 7 मिनट का?" else "You finished ${w.finished} this week, every one you started. Another 7 minutes?"
         }
     }
