@@ -1,6 +1,6 @@
 # Aspiran go-live: what only you can do (14 Nov 2026)
 
-Everything else is live: server version f5e87433 (14 Nov), 1,175 content items switched on, the free topic demo
+Everything else is live: server version 019898bd (14 Nov), every content item switched on (videos included: Practice → Videos), the new short home page on aspiran.in, the free topic demo
 working again, the daily fact watch running at 05:30 IST. These steps need your accounts, keys or phone.
 Do them in order. Terminal steps are for macOS Terminal (zsh), one command at a time.
 
@@ -57,7 +57,7 @@ Set to hello@aspiran.in on 14 Nov and deployed. Make sure that inbox is read dai
 ## 5. Android 0.5.3 (version code 11)
 
 This version wraps the action buttons on small screens and has no helpline numbers: Need to talk and Close the day offer
-only "Call Emergency 112" (your decision, 14 Nov).
+only "Call Emergency 112" (your decision, 14 Nov). It also adds the "Syllabus in a minute" videos under the week's current-affairs scenes.
 
 1. Android Studio → Build → Generate Signed App Bundle → `release`, with your `upload.jks`.
 2. Play Console → App content → **Data safety**: declare "App interactions" and "Crash logs" as collected for
@@ -77,6 +77,6 @@ was down or changed. You also get an email only when something changes or needs 
 ## Not urgent, still open
 
 - A lawyer's read of analytics being on by default (opt-out, with notice) under the DPDP Act.
-- 258 videos and 60 interactives are made but not in the app yet: next build work.
-- More past papers: 2022 Prelims GS1 is now in (5 Prelims papers, 4 Mains). 2020 and 2024 need the same
-  OCR and checking; UPSC's 2024 key wasn't found on its site yet.
+- The 60 syllabus interactives exist only in the cloud session that made them (branch `claude/syllabus-interactives`). Open that session and ask it to push the branch; then Claude merges and publishes them.
+- More past papers: 2022 and 2020 Prelims GS1 are now in (7 Prelims papers, 4 Mains). 2024 waits for UPSC's key.
+- Chai: 107 machine-written drafts (mostly RBI notices) are not published. Say if you want them out.
