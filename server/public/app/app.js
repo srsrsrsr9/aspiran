@@ -106,7 +106,7 @@ const distress = (text) => {
   const low = text.toLowerCase();
   return DISTRESS.some((p) => low.includes(p)) || (config.distress || []).some((p) => low.includes(p));
 };
-const HELPLINES = [["Tele-MANAS", "14416"], ["Tele-MANAS (toll-free)", "1-800-891-4416"], ["Emergency", "112"]];
+const HELPLINES = [["Vandrevala Foundation (24x7, call or WhatsApp)", "+91 9999 666 555"], ["iCall (Mon to Sat, 10 am to 8 pm)", "+91 91529 87821"], ["Emergency", "112"]];
 const careBox = (calm = true) => h("div.card.soft", { role: "status" },
   h("strong", tr("care.title")),
   h("p", tr("care.body")),

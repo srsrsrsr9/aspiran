@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import androidx.compose.foundation.layout.Arrangement
@@ -111,7 +113,7 @@ fun AddaTab(
                     Kulhad(KulhadTone.QUIET, 72.dp)
                     Text("Whatever happened, you're more than a roll number.", style = ReadingText)
                     Text(result, style = MaterialTheme.typography.bodySmall)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                         OutlinedButton(onClick = onOpenNeedToTalk) { Text("Need to talk?") }
                         OutlinedButton(onClick = onOpenPod) { Text("Your pod") }
                     }
@@ -206,7 +208,7 @@ private fun DayTwoRituals(staged: StagedProfile, inPod: Boolean, hindi: Boolean)
         ChotuMood.HAPPY,
     ) {
         RitualPicker(picks, chai, hindi, inPod) { p, t -> picks = p; chai = t }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             Button(onClick = { Rituals.set(context, picks, chai); staged.nextDayTwoStep() }) {
                 Text(if (hindi) "मेरी रस्में सेव करें" else "Save my rituals")
             }
@@ -230,7 +232,7 @@ private fun DayTwoRubric(staged: StagedProfile, hindi: Boolean) {
             q.opts.forEach { (v, label) -> FilterChip(selected = pick == v, onClick = { pick = v }, label = { Text(label) }) }
         }
         q.note?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             Button(onClick = { pick?.let { staged.set(q.key, it, "asked") }; staged.nextDayTwoStep() }, enabled = pick != null) {
                 Text(if (hindi) "सेव करें" else "Save")
             }
@@ -258,7 +260,7 @@ private fun DayTwoPersona(staged: StagedProfile, hindi: Boolean, onSynced: () ->
         }
         Text(if (hindi) "मैचिंग के लिए सिर्फ़ प्रयासों की संख्या पॉड सर्वर पर जाती है; बाक़ी इसी फ़ोन पर रहता है।" else "Only your attempts go to the pod server, for matching. The rest stays on this phone.",
             style = MaterialTheme.typography.labelSmall)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             Button(onClick = {
                 questions.forEach { q -> answers[q.key]?.takeIf { it.isNotBlank() }?.let { staged.set(q.key, it.trim(), "asked") } ?: staged.skip(q.key) }
                 if (questions.any { it.key in StagedProfile.SYNCED && answers[it.key] != null }) onSynced()
@@ -508,7 +510,7 @@ fun ProfileAskCard(staged: StagedProfile, context: String, quiet: Boolean = fals
                     q.opts.forEach { (v, label) -> FilterChip(selected = answers[q.key] == v, onClick = { answers = answers + (q.key to v) }, label = { Text(label) }) }
                 } else OutlinedTextField(value = answers[q.key] ?: "", onValueChange = { answers = answers + (q.key to it.take(80)) }, placeholder = { Text(q.text ?: "") }, singleLine = true)
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 TextButton(onClick = {
                     questions.forEach { q -> answers[q.key]?.takeIf { it.isNotBlank() }?.let { staged.set(q.key, it.trim(), "asked") } ?: staged.skip(q.key) }
                     if (questions.any { it.key in StagedProfile.SYNCED && answers[it.key] != null }) onSynced()
@@ -530,7 +532,7 @@ fun StayOrMoveCard(pod: PodClient, staged: StagedProfile, onChoose: (stay: Boole
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(note.text, style = MaterialTheme.typography.bodyMedium)
             Text("Only you see this. Nobody is moved without choosing.", style = MaterialTheme.typography.labelSmall)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(onClick = { staged.markChoice(note.id); done = true; onChoose(true) }) { Text("Stay") }
                 OutlinedButton(onClick = { staged.markChoice(note.id); done = true; onChoose(false) }) { Text("Move to a more active pod") }
             }

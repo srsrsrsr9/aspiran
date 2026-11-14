@@ -16,10 +16,10 @@ data class Helpline(val label: String, val dial: String)
 
 /** Test-dial every number before shipping (ux-guide.md, "Before shipping"). */
 object Helplines {
-    val teleManas = Helpline("Tele-MANAS 14416", "14416")
+    val main = Helpline("Vandrevala Foundation 9999 666 555", "+919999666555")
     val all = listOf(
-        teleManas,
-        Helpline("Tele-MANAS 1-800-891-4416", "18008914416"),
+        main,
+        Helpline("iCall 91529 87821 (Mon to Sat, 10 am to 8 pm)", "+919152987821"),
         Helpline("Emergency 112", "112"),
     )
 }

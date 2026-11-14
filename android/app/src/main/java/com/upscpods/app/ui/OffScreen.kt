@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.content.Context
@@ -187,7 +189,7 @@ fun WalkScreen(topics: List<Pair<String, String>>, cards: List<NewsItem>, hindi:
                         Text("Your turn. Say three points aloud. No need to be right; it's the trying that helps.")
                     }
                 }
-                if (phase != "ready") Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                if (phase != "ready") FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     OutlinedButton(onClick = { tts?.stop(); play() }) { Text("Again") }
                     Button(onClick = { tts?.stop(); i++; phase = "ready"; if (i < steps.size) play() }) { Text("Next") }
                 }

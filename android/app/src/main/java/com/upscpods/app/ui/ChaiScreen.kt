@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import androidx.compose.animation.AnimatedVisibility
@@ -264,7 +266,7 @@ private fun ChaiCardPage(item: NewsItem, preferHindi: Boolean, showJoke: Boolean
                 Text("“$joke”", fontStyle = FontStyle.Italic, style = MaterialTheme.typography.bodyLarge)
             }
 
-            Row {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 TextButton(onClick = onToggleSave) {
                     Text(if (saved) l.saved else l.save)
                 }
@@ -432,7 +434,7 @@ private fun KeepForm(item: NewsItem, headline: String, fact: String?, caseFile: 
                 caseFile.topicsOf(paper).forEach { (id, name) -> FilterChip(selected = node == id, onClick = { node = if (node == id) null else id }, label = { Text(name, maxLines = 1) }) }
             }
             OutlinedTextField(value = line, onValueChange = { line = it }, modifier = Modifier.fillMaxWidth())
-            Row {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 TextButton(onClick = { if (line.isNotBlank()) { caseFile.keep(item.id, paper, node, line.trim(), headline); onDone() } }) { Text("Keep it") }
                 TextButton(onClick = onDone) { Text("Cancel") }
             }

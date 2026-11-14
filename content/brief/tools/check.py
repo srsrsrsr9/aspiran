@@ -70,7 +70,7 @@ for f in sorted(glob.glob("**/*.json", recursive=True)):
                 if n and ex.get("tone") != "LIGHT": add(f, f"{ex['key']}: emoji on non-LIGHT ({ex.get('tone')})")
             if not r.get("hinglish"): add(f, f"{ex['key']}: no Hinglish")
             low = (ex["key"] + ex["situation"]["en"]).lower()
-            if any(w in low for w in ("feel", "sad", "anxious", "stress", "low")) and "14416" not in r["en"]: add(f, f"{ex['key']}: feelings reply without Tele-MANAS 14416")
+            if any(w in low for w in ("feel", "sad", "anxious", "stress", "low")) and "9999 666 555" not in r["en"]: add(f, f"{ex['key']}: feelings reply without the Vandrevala helpline 9999 666 555")
         cover = " ".join(ex["key"] + " " + ex["situation"]["en"] for ex in d["examples"]).lower()
         for need in ["greet", "correct", "wrong", "skeleton", "rewrite", "doubt", "night", "feel", "rank", "tragic", "pod"]:
             if need not in cover: add(f, f"examples may not cover: {need}")

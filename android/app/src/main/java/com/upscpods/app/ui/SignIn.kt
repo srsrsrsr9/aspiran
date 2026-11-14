@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -180,7 +184,7 @@ private fun PasswordForm(server: String, memberIdHint: String?, open: Boolean, r
                 if (recovery) "After signing in you can add a recovery email in Me, in case you forget it." else "Keep your password safe: if you forget it, write to support and we'll set a temporary one.",
                 style = MaterialTheme.typography.bodySmall)
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             Button(enabled = !busy, onClick = { submit() }) { Text(if (signUp) "Create account" else "Sign in") }
             TextButton(enabled = !busy, onClick = { signUp = !signUp; msg = null }) { Text(if (signUp) "I have an account" else "New here? Create an account") }
         }
@@ -209,7 +213,7 @@ private fun ForgotPasswordForm(server: String, onDone: (AuthSession) -> Unit) {
         Text("If you added a recovery email, we'll send a code to it. It works once, for 30 minutes.", style = MaterialTheme.typography.bodySmall)
         OutlinedTextField(who, { who = it.take(200) }, singleLine = true, label = { Text("Username or recovery email") }, modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false))
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             OutlinedButton(enabled = !busy, onClick = {
                 if (who.isBlank()) { msg = "Type your username or your recovery email."; return@OutlinedButton }
                 busy = true; msg = "Sending…"
@@ -285,7 +289,7 @@ fun RecoveryEmailForm(server: String, onDone: () -> Unit) {
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, autoCorrectEnabled = false))
             }
         }
-        Row {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             if (st?.mail == true) OutlinedButton(enabled = !busy, onClick = { act("Sending a code…") { Auth.recoveryAdd(server, email) } }) { Text(if (st?.email != null) "Change email" else "Send a code") }
             if (st?.email != null) TextButton(enabled = !busy, onClick = { act("Removing…") { Auth.recoveryRemove(server) } }) { Text("Remove") }
             TextButton(enabled = !busy, onClick = onDone) { Text("Close") }
@@ -314,7 +318,7 @@ fun ChangePasswordForm(server: String, forced: Boolean, onDone: () -> Unit) {
             OutlinedTextField(value, { set(it.take(200)) }, singleLine = true, label = { Text(label) }, modifier = Modifier.fillMaxWidth(),
                 visualTransformation = PasswordVisualTransformation(), keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password))
         }
-        Row {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             Button(enabled = !busy, onClick = {
                 when {
                     next.length < 8 -> msg = "Use at least 8 characters."

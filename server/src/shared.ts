@@ -107,7 +107,7 @@ export function distress(text: string, extra: string[] = []): boolean {
 export const BUILTIN_DISTRESS = DISTRESS;
 
 export const HELPLINES = [
-  { name: "Tele-MANAS", number: "14416" },
-  { name: "Tele-MANAS (toll-free)", number: "1-800-891-4416" },
+  { name: "Vandrevala Foundation (24x7, call or WhatsApp)", number: "+91 9999 666 555" },
+  { name: "iCall (Mon to Sat, 10 am to 8 pm)", number: "+91 91529 87821" },
   { name: "Emergency", number: "112" },
 ];

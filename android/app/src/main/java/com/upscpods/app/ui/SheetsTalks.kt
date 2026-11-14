@@ -1,5 +1,10 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -152,7 +157,7 @@ private fun PartsPlayer(urls: List<String>) {
         player.addListener(l)
         onDispose { player.removeListener(l); player.release() }
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
         Button(onClick = { if (playing) player.pause() else { if (ended) { player.seekTo(0, 0); ended = false }; player.play() } }) { Text(if (playing) "Pause" else "Play") }
         OutlinedButton(onClick = { player.seekBack() }) { Text("Back 10 s") }
         if (part + 1 < urls.size) OutlinedButton(onClick = { player.seekToNextMediaItem() }) { Text("Next part") }

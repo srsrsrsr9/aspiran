@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -268,7 +272,7 @@ private fun FirstStepRow(plan: DayState.Plan, done: Boolean, filled: Boolean, on
     Column(Modifier.fillMaxWidth().padding(vertical = 6.dp)) {
         Text("5 min · Your first step", style = MaterialTheme.typography.titleMedium)
         Text(plan.line + if (done) " · ✓ Done" else "", style = MaterialTheme.typography.bodySmall)
-        if (!done) Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+        if (!done) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             if (filled) {
                 Button(onClick = onStart, modifier = Modifier.height(MainActionHeight)) { Text("Just 5 minutes") }
             } else {
@@ -288,7 +292,7 @@ private fun TaskRow(
         Text(title, style = MaterialTheme.typography.titleMedium)
         Text("$detail · $status", style = MaterialTheme.typography.bodySmall)
         if (isNext) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 // "Just 5 minutes" is the easy way in; stopping at 5 still counts as started.
                 if (filled) {
                     Button(onClick = onFive, modifier = Modifier.height(MainActionHeight)) { Text("Just 5 minutes") }
@@ -330,7 +334,7 @@ fun FiveMinutePill(startedAt: Long, onStop: () -> Unit, onKeepGoing: () -> Unit,
         } else {
             Column(Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                 Text("Five minutes done. You started, and that counts.", style = MaterialTheme.typography.bodyMedium)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = onStop) { Text("Stop here") }
                     TextButton(onClick = onKeepGoing) { Text("Keep going") }
                 }

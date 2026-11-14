@@ -1,0 +1,149 @@
+<title>Aspiran Content Fact Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, a summary strip, then dense tables that scroll inside their own boxes on phones */
+:root{
+  --bg:#f6f7f5; --panel:#ffffff; --ink:#1d2622; --muted:#5d6a64; --line:#d9dfdb;
+  --accent:#0f6b5c; --accent-soft:#e2efeb; --warn:#9a5b00; --warn-soft:#f6ecd9;
+  --display:"Literata",Georgia,serif; --body:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121715; --panel:#1a211e; --ink:#e4ebe7; --muted:#9aa8a1; --line:#2d3833;
+  --accent:#5cc2ad; --accent-soft:#18332d; --warn:#e7b25c; --warn-soft:#352a17; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715; --panel:#1a211e; --ink:#e4ebe7; --muted:#9aa8a1; --line:#2d3833;
+  --accent:#5cc2ad; --accent-soft:#18332d; --warn:#e7b25c; --warn-soft:#352a17; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--body)}
+.wrap{max-width:920px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:36px}
+h1,h2{font-family:var(--display);font-weight:650;text-wrap:balance;margin:0;line-height:1.2}
+h1{font-size:2rem}
+h2{font-size:1.3rem}
+p{margin:0;max-width:68ch}
+.eyebrow{font:500 .75rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.head{display:flex;flex-direction:column;gap:10px}
+.lede{color:var(--muted)}
+section{display:flex;flex-direction:column;gap:14px}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.stat{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font:500 1.6rem var(--mono);font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-size:.85rem}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tr.total td{font-weight:600;background:var(--accent-soft)}
+.pill{display:inline-block;font:500 .72rem var(--mono);padding:1px 7px;border-radius:99px;white-space:nowrap}
+.live{background:var(--accent-soft);color:var(--accent)}
+.draft{background:var(--warn-soft);color:var(--warn)}
+.thin{color:var(--warn);font-weight:600}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;max-width:72ch}
+.note{font-size:.85rem;color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">Aspiran · content as of 14 Nov 2026, after publishing</div>
+    <h1>What learners can study, by subject</h1>
+    <p class="lede">Counted from the live database and the content folders. <span class="pill live">Live</span> means it is in the app now. <span class="pill draft">Not in the app</span> means made but not yet in the app. On 14 Nov everything that could go in was published. No human editor has checked it yet. Minutes are reading or listening time at a normal pace.</p>
+  </header>
+
+  <section>
+    <h2>At a glance</h2>
+    <div class="strip">
+      <div class="stat"><b>1,175</b><span>items live in the app (586 before today)</span></div>
+      <div class="stat"><b>29.5 h</b><span>live lessons: notes, topic paths, audio, walk scripts</span></div>
+      <div class="stat"><b>1,833</b><span>live exam-style questions</span></div>
+      <div class="stat"><b>258</b><span>short videos, 2.8 h, not yet in the app</span></div>
+      <div class="stat"><b>569</b><span>learning-game rounds across 27 game types</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lessons and hours</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Kind</th><th class="n">Count</th><th class="n">Hours</th><th>State</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td>Syllabus notes</td><td class="n">150</td><td class="n">21.3</td><td><span class="pill live">Live</span></td><td>120 of 150 also in Hindi</td></tr>
+        <tr><td>Topic paths (guided lessons)</td><td class="n">8</td><td class="n">3.5</td><td><span class="pill live">Live</span></td><td>Federalism plus 7 Polity paths: 120 steps, 199 MCQs, 93 flashcards, 2 short videos</td></tr>
+        <tr><td>Audio lectures</td><td class="n">12</td><td class="n">2.7</td><td><span class="pill live">Live</span></td><td>Recorded in English and Hindi</td></tr>
+        <tr><td>Walk scripts</td><td class="n">20</td><td class="n">2.0</td><td><span class="pill live">Live</span></td><td>Revision you listen to on a walk</td></tr>
+        <tr class="total"><td>Live total</td><td class="n">190</td><td class="n">29.5</td><td></td><td></td></tr>
+        <tr><td>"Syllabus in a minute" videos</td><td class="n">228</td><td class="n">2.4</td><td><span class="pill draft">Not in the app</span></td><td>One per syllabus topic, two AI hosts. The app has no video shelf yet</td></tr>
+        <tr><td>Current-affairs videos</td><td class="n">30</td><td class="n">0.4</td><td><span class="pill draft">Not in the app</span></td><td>Short Chai episodes</td></tr>
+        <tr><td>Syllabus interactives</td><td class="n">60</td><td class="n">n/a</td><td><span class="pill draft">Not in the app</span></td><td>Built in a separate branch, not merged yet</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Coverage by GS subject (live)</h2>
+    <p class="note">Highlighted cells are the thin spots.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Subject</th><th class="n">Notes</th><th class="n">Minutes</th><th class="n">In Hindi</th><th class="n">Mock Qs</th></tr></thead>
+      <tbody>
+        <tr><td>Polity and governance</td><td class="n">29</td><td class="n">256</td><td class="n">29</td><td class="n">98</td></tr>
+        <tr><td>Modern and world history</td><td class="n">13</td><td class="n">115</td><td class="n thin">5</td><td class="n">74</td></tr>
+        <tr><td>Ancient and medieval history</td><td class="n">9</td><td class="n">85</td><td class="n">9</td><td class="n">43</td></tr>
+        <tr><td>Art and culture</td><td class="n thin">1</td><td class="n thin">6</td><td class="n">1</td><td class="n">31</td></tr>
+        <tr><td>Economy</td><td class="n">16</td><td class="n">125</td><td class="n thin">8</td><td class="n">98</td></tr>
+        <tr><td>Environment</td><td class="n">8</td><td class="n">68</td><td class="n thin">2</td><td class="n">73</td></tr>
+        <tr><td>Geography</td><td class="n">9</td><td class="n">77</td><td class="n thin">1</td><td class="n">92</td></tr>
+        <tr><td>International relations</td><td class="n">9</td><td class="n">72</td><td class="n">9</td><td class="n">58</td></tr>
+        <tr><td>Science and technology</td><td class="n">10</td><td class="n">85</td><td class="n">10</td><td class="n">58</td></tr>
+        <tr><td>Internal security</td><td class="n">6</td><td class="n">54</td><td class="n">6</td><td class="n thin">0</td></tr>
+        <tr><td>Society</td><td class="n">6</td><td class="n">51</td><td class="n">6</td><td class="n">25</td></tr>
+        <tr><td>Ethics (GS4)</td><td class="n">18</td><td class="n">152</td><td class="n">18</td><td class="n">n/a</td></tr>
+        <tr><td>CSAT</td><td class="n">12</td><td class="n">98</td><td class="n">12</td><td class="n">405</td></tr>
+        <tr><td>Essay</td><td class="n thin">4</td><td class="n">33</td><td class="n">4</td><td class="n">n/a</td></tr>
+        <tr class="total"><td>Total</td><td class="n">150</td><td class="n">1,277</td><td class="n">120</td><td class="n">1,055</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Questions (live)</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Set</th><th class="n">Sets</th><th class="n">Questions</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Mock tests</td><td class="n">22</td><td class="n">875</td><td>5 full papers (3 GS × 100, 2 CSAT × 80), 16 sectionals × 25, a CSAT comprehension set of 15</td></tr>
+        <tr><td>CSAT practice sets</td><td class="n">12</td><td class="n">180</td><td>Written by us; all 180 answers checked by a blind solve</td></tr>
+        <tr><td>Past UPSC papers</td><td class="n">9</td><td class="n">579</td><td>Prelims GS 2018, 2019, 2021, 2023, 2025 with UPSC's own keys; Mains 2025 GS1 to GS4</td></tr>
+        <tr><td>Topic-path MCQs</td><td class="n">8</td><td class="n">199</td><td>Inside the guided lessons</td></tr>
+        <tr class="total"><td>Total</td><td class="n">51</td><td class="n">1,833</td><td>Plus 300 interview questions and 24 trap-spotter sets</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Mains, optionals and other assets (live)</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Asset</th><th class="n">Count</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Mains answer skeletons</td><td class="n">70</td><td>60 by topic, 10 worked answers</td></tr>
+        <tr><td>Essay prompts with plans</td><td class="n">24</td><td></td></tr>
+        <tr><td>GS4 case studies</td><td class="n">24</td><td>Plus 25 ethics dilemmas</td></tr>
+        <tr><td>Optional subject nodes</td><td class="n">126</td><td>Anthropology 23, PSIR 23, Sociology 23, Geography 21, History 18, Public Administration 18; each with syllabus and priorities</td></tr>
+        <tr><td>Flashcard decks</td><td class="n">36</td><td>432 cards</td></tr>
+        <tr><td>Learning games</td><td class="n">569</td><td>27 game types, such as two truths, odd one out, timeline shuffle and assertion–reason</td></tr>
+        <tr><td>Printables</td><td class="n">40</td><td>One-page sheets</td></tr>
+        <tr><td>Interview bank</td><td class="n">3</td><td>300 questions</td></tr>
+        <tr><td>CSAT weeks, restart days, term plans</td><td class="n">28</td><td>8 + 12 + 8</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Gaps to close</h2>
+    <ul>
+      <li><b>Not checked by a human editor.</b> Everything was published on 14 Nov at the owner's call. 182 facts are still marked "unverified" in the notes.</li>
+      <li><b>Art and culture</b> has one note. It is the biggest gap in Prelims GS.</li>
+      <li><b>Internal security</b> has no mock questions.</li>
+      <li><b>Hindi</b>: 30 notes are English only (Economy 8, Modern history 8, Geography 8, Environment 6).</li>
+      <li><b>Past papers</b>: Prelims 2016, 2017, 2020, 2022, 2024 and 2026, and Mains before 2025, are not in yet. UPSC's own keys for 2020 and 2022 have been found and downloaded.</li>
+      <li><b>Videos and interactives</b> need a shelf in the app before they can go live.</li>
+    </ul>
+  </section>
+</div>

@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -177,7 +181,7 @@ fun WoopCard(quote: Quote?, hindi: Boolean, canShare: Boolean, onSave: (Week.Woo
                 Text("Share only my wish with my pod", style = MaterialTheme.typography.bodyMedium)
             }
             quote?.let { QuoteLine(it, hindi, onReadMore) }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(
                     onClick = { onSave(Week.Woop(wish.trim(), outcome.trim(), obstacle.trim(), plan.trim()), share && wish.isNotBlank()) },
                     enabled = wish.isNotBlank(),
@@ -219,7 +223,7 @@ fun PlanningMirror(tenths: Int, target: Int, onSize: (Int) -> Unit, onLeave: () 
             "You usually finish about $tenths of every 10 planned minutes. Most plans start from the best day, not the usual one.",
             style = MaterialTheme.typography.bodyMedium,
         )
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             if (sized < target) OutlinedButton(onClick = { onSize(sized) }) { Text("Aim for $sized days") }
             TextButton(onClick = onLeave) { Text(if (sized < target) "Keep $target" else "Got it") }
         }
@@ -303,7 +307,7 @@ fun KnowThePaper(weak: List<Pair<String, Int>>, quote: Quote?, hindi: Boolean, o
 fun HonestGuideLinks(onOpenShelf: () -> Unit, onOpenShoulders: () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text("Honest Guide", style = MaterialTheme.typography.titleMedium)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             OutlinedButton(onClick = onOpenShelf) { Text("Reading shelf") }
             OutlinedButton(onClick = onOpenShoulders) { Text("Why this works") }
         }

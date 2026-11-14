@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.content.Context
@@ -155,7 +157,7 @@ private fun PlusNote(what: String, quiet: Boolean, onSeePlus: () -> Unit, onNotN
             Text(if (quiet) "That was the preview. This is a Plus tool."
                 else "That was the preview. This is a Plus tool: the rest opens with Plus, along with every mock paper, full mock insights and the monthly compilation.",
                 style = MaterialTheme.typography.bodyMedium)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 if (!quiet) OutlinedButton(onClick = onSeePlus) { Text("See what Plus adds") }
                 TextButton(onClick = onNotNow) { Text(if (quiet) "Back" else "Not now") }
             }
@@ -296,7 +298,7 @@ fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: 
     var checked by rememberSaveable(item.id) { mutableStateOf(false) }
     val body = MaterialTheme.typography.bodyLarge.copy(fontSize = size.sp, lineHeight = (size * 1.55f).sp)
     PrepPage("Long read", onClose) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = { size = (size - 1).coerceAtLeast(14); prep.readSize = size }, modifier = Modifier.semantics { contentDescription = "Smaller text" }) { Text("A−") }
             TextButton(onClick = { size = (size + 1).coerceAtMost(28); prep.readSize = size }, modifier = Modifier.semantics { contentDescription = "Larger text" }) { Text("A+") }
             if (onFocus != null) {

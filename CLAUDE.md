@@ -33,12 +33,13 @@ English and Hindi first; Telugu is the pilot language.
 - `npm run import -- <pack folder>` imports a content pack. Everything lands as drafts.
 
 ## Standing rules
-- Never change a live flag, type a password or approve content. For anything the owner must run (secrets, Play Console,
+- Never change a live flag or type a password. For anything the owner must run (secrets, Play Console,
   Android releases), write a macOS Terminal (zsh) runbook (one command at a time, success and failure notes per step) in `artefacts/`.
 - Commit locally and push to GitHub (`origin` = github.com/srsrsrsr9/aspiran) at sensible checkpoints. Never commit secrets.
 - Secrets go in with `npx wrangler secret put NAME --env production`, typed by the owner. Never in files or chat.
-- Content is always a draft until an English and a Hindi editor approve it. Don't claim content is
-  "checked by a human editor" anywhere until that's true.
+- Content publishing (owner decided 14 Nov 2026): Claude imports content and switches it on as approved by default,
+  unless the owner says otherwise for a batch. Approvals are recorded as "Aspiran (owner publish)". Fix known errors
+  before publishing. Still don't claim content is "checked by a human editor" anywhere until that's true.
 - Content rules: sound off by default and never autoplays; reduced motion respected; every piece ends;
   no timers, streaks or public scores; TRAGIC tone gets no sound, motion, emoji or joke and isn't shareable;
   maps are schematic with no national borders.
@@ -50,7 +51,7 @@ English and Hindi first; Telugu is the pilot language.
 - Status page: https://claude.ai/artifact/1jENbW7xHRqPTYw1B4zjVF (source `artefacts/status/aspiran-status.html`). When work
   changes what's done, pending, content coverage, the website or the teaching-plan build, edit the file, update its date,
   and republish with the Artifact tool, passing that URL as `url` (read it first). Commit the file with the work.
-- The owner makes all content, videos included (2 Nov 2026). Claude checks, formats and imports it as drafts, and puts
+- The owner makes all content, videos included (2 Nov 2026). Claude checks, formats, imports and publishes it, and puts
   new content needs in the owner's assignment (`artefacts/content-assignment-*.md`). Claude's own focus: pedagogy, app builds,
   website, marketing and the quality of the whole user journey.
 - Write for a non-developer owner: plain words, short replies, decisions up front.

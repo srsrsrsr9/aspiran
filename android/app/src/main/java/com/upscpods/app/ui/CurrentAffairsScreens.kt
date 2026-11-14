@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.graphics.BitmapFactory
@@ -467,7 +469,7 @@ private fun QuizPanel(ca: CurrentAffairs, e: CaEpisode, hindi: Boolean, last: Bo
             }
         }
         val done = e.quiz.all { ca.answer(it.id) != null }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             OutlinedButton(onClick = onAgain) { Text(if (hindi) "फिर से देखें" else "Watch again", color = CA_CREAM) }
             if (done || e.quiz.isEmpty()) Button(onClick = onNext, colors = ButtonDefaults.buttonColors(containerColor = CA_GOLD, contentColor = Color(0xFF2A1300))) {
                 Text(if (last) (if (hindi) "हो गया" else "Done") else (if (hindi) "अगला दृश्य ↓" else "Next scene ↓"), fontWeight = FontWeight.ExtraBold)

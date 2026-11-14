@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.Manifest
@@ -305,7 +307,7 @@ private fun ColumnScope.Chat(
             Turn(t, onOpenNeedToTalk)
             // Report and Remember sit under each finished reply (not care replies, not while streaming).
             if (!t.fromUser && !t.care && t.text.isNotBlank() && !(chotu.thinking && i == turns.lastIndex)) {
-                Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     if (t.id in reported) Text("Reported. Thank you.", style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(12.dp))
                     else TextButton(onClick = { reporting = t }) { Text("Report") }
                     if (onRemember != null) {

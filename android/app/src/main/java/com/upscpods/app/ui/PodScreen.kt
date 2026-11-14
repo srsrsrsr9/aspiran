@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import kotlinx.coroutines.launch
@@ -215,7 +217,7 @@ private fun GoalCard(pod: PodClient) {
             Text("This week's pod goal", style = MaterialTheme.typography.titleSmall)
             if (g == null) Text(if (canSet) "No goal yet. Set one small thing the pod does together." else "Your lead hasn't set one yet.", style = MaterialTheme.typography.bodySmall)
             else Text("${g.text}: ${g.done} of ${g.target} ${g.unit}. Who added what isn't kept.", style = MaterialTheme.typography.bodySmall)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 if (g != null) TextButton(onClick = { pod.addToGoal(1) }, enabled = pod.status == PodStatus.ONLINE) { Text("I did one") }
                 if (canSet) TextButton(onClick = { editing = true }, enabled = pod.status == PodStatus.ONLINE) { Text(if (g == null) "Set a goal" else "Change") }
             }
@@ -321,14 +323,14 @@ private fun StudyRoomCard(pod: PodClient, library: ContentLibrary?) {
                     if (room.studying.isEmpty()) "Nobody studying yet" else "Studying now: ${room.studying.joinToString(", ")}",
                     style = MaterialTheme.typography.bodySmall,
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = { pod.joinRoom() }) { Text("Join") }
                     TextButton(onClick = { pod.leaveRoom() }) { Text("Leave") }
                 }
             } else {
                 Text("Study room", style = MaterialTheme.typography.titleSmall)
                 Text("Start a quiet session; your pod sees who's in. No camera, no mic.", style = MaterialTheme.typography.bodySmall)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = { pod.startRoom(25) }, enabled = pod.status == PodStatus.ONLINE) { Text("25 min") }
                     TextButton(onClick = { pod.startRoom(50) }, enabled = pod.status == PodStatus.ONLINE) { Text("50 min") }
                 }
@@ -368,7 +370,7 @@ private fun FocusBlock() {
         }
         else -> Text("Block done. Another one, or call it here.", style = MaterialTheme.typography.bodyMedium)
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
         if (sec >= 30 * 60) TextButton(onClick = { startedAt = System.currentTimeMillis() }) { Text("Another block") }
         TextButton(onClick = { startedAt = null }) { Text(if (sec >= 30 * 60) "Done" else "Stop") }
     }
@@ -691,7 +693,7 @@ private fun AnswerHourCard(pod: PodClient, library: ContentLibrary?, hindi: Bool
                     }
                 }
                 OutlinedTextField(value = reason, onValueChange = { reason = it.take(300) }, placeholder = { Text("One reason (about the answers, not the people)") }, modifier = Modifier.fillMaxWidth())
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     TextButton(onClick = { pod.pair = null }) { Text("Not now") }
                     Button(enabled = online && pick != null && reason.trim().length >= 3, onClick = {
                         if (DistressMatcher.matches(reason)) onOpenNeedToTalk()

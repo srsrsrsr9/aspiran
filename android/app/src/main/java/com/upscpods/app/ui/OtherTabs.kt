@@ -1,5 +1,8 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -143,7 +146,7 @@ fun MyPathTab(
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text("My journal", style = MaterialTheme.typography.titleMedium)
             Text("Close the Day entries are encrypted on this phone. Only you can see them.", style = MaterialTheme.typography.bodySmall)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(onClick = onExportJournal) { Text("Export") }
                 if (!confirmJournal) {
                     OutlinedButton(onClick = { confirmJournal = true }) { Text("Delete journal") }
@@ -180,7 +183,7 @@ fun MyPathTab(
             TextButton(onClick = { confirmDelete = true }) { Text("Delete my account and data") }
         } else {
             Text("This deletes your account: your sign-in, pod membership, messages and consent record on our server, and your profile, answers and journal on this phone. It can't be undone.", style = MaterialTheme.typography.bodySmall)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 OutlinedButton(onClick = { confirmDelete = false }) { Text("Keep it") }
                 OutlinedButton(onClick = onDeleteData) { Text("Delete my account") }
             }

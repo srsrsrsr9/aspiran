@@ -224,7 +224,7 @@ private fun SupportLine(onDial: (String) -> Unit, onOpenNeedToTalk: () -> Unit) 
         Text("Rough day. Want to talk to someone?", style = MaterialTheme.typography.bodyLarge)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = onOpenNeedToTalk) { Text("Pod or buddy") }
-            OutlinedButton(onClick = { onDial(Helplines.teleManas.dial) }) { Text("Call ${Helplines.teleManas.label}") }
+            OutlinedButton(onClick = { onDial(Helplines.main.dial) }) { Text("Call ${Helplines.main.label}") }
         }
     }
 }

@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -308,7 +312,7 @@ private fun MapStep(
             }
             MapState.RECALL -> {
                 Text("You can recall it. To reach Can use, use it: write an answer on it, or try a set of past questions on it.", style = MaterialTheme.typography.bodyMedium)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     OutlinedButton(onClick = { onUse(id, "answer") }) { Text("I wrote an answer") }
                     OutlinedButton(onClick = { onUse(id, "pyq") }) { Text("I did past questions") }
                 }

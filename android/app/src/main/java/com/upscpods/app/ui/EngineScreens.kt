@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.content.ClipData
@@ -536,7 +538,7 @@ private fun HiddenWhyEngine(p: Play, hindi: Boolean, sfx: Sfx, still: Boolean, l
         PictureFrames(p, at, hindi, still, library, onBack = { go(at - 1) }, onNext = { go(at + 1) })
     } else {
         HiddenWhyCards(p, hindi)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = { go(frames.size - 1) }) { Text(if (hindi) "← पीछे" else "← Back") }
             TextButton(onClick = { at = 0 }) { Text(if (hindi) "शुरू से" else "From the start") }
         }

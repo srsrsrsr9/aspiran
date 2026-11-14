@@ -389,7 +389,7 @@ views.safety = async () => {
             h("button.primary", { onclick: () => act(() => api(`reports/${r.id}/care`, { body: { text: care.value } }), (x) => (x.delivered ? "Sent; they're online now" : "Sent; they'll see it when they next open their pod")) }, "Send privately")) : null,
           h("div.row", { style: "margin-top:8px" },
             step(r, "reached_out", "Mark reached out"),
-            step(r, "escalated", "Escalate…", "Who did you escalate to, and how? (for example: called Tele-MANAS 14416 with the member's consent)"),
+            step(r, "escalated", "Escalate…", "Who did you escalate to, and how? (for example: called the Vandrevala helpline 9999 666 555 with the member's consent)"),
             step(r, "note", "Add a note…", "Note"),
             step(r, "resolved", "Resolve…", "What was the outcome?"))] : null);
     }) : h("div.card.muted", {}, "No open alerts."),

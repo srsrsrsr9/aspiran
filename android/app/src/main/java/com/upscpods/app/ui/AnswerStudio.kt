@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -255,7 +259,7 @@ fun AnswerStudioScreen(
                     }
                     error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium) }
                     Button(onClick = { step = StudioStep.SELF }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Mark it yourself →") }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                         TextButton(onClick = { sending = true }) { Text("Send to pod") }
                         TextButton(onClick = { deletePhoto(); text = ""; typing = false; step = StudioStep.PICK }) { Text("Another question") }
                     }
@@ -303,7 +307,7 @@ fun AnswerStudioScreen(
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
                     FeedbackView(fb, words, focusArea, selfMarks)
                     Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite it with one fix →") }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                         TextButton(onClick = { sending = true }) { Text("Send to pod") }
                         TextButton(onClick = { text = ""; typing = false; feedback = null; reviewedJpeg = null; step = StudioStep.PICK }) { Text("Another question") }
                     }

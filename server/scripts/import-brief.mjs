@@ -42,7 +42,11 @@ const byPath = new Map();
 const later = (n) => (/-(fix|rest)\.json$/.test(n) ? 1 : 0);
 for (const f of readdirSync(checks).filter((n) => /^manifest-.+\.json$/.test(n)).sort((a, b) => later(a) - later(b) || a.localeCompare(b))) {
   const m = JSON.parse(readFileSync(join(checks, f), "utf8"));
-  for (const file of m.files ?? []) byPath.set(file.path, { path: file.path, batch: m.batch });
+  // Syllabus notes and topic paths go in with scripts/syllabus.mjs; reports (.md) are not content.
+  for (const file of m.files ?? []) {
+    if (!file.path.endsWith(".json") || /^(syllabus|topic-paths|checks)\//.test(file.path)) continue;
+    byPath.set(file.path, { path: file.path, batch: m.batch });
+  }
 }
 const listed = [...byPath.values()];
 

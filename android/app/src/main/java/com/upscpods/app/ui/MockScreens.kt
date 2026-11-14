@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.app.Activity
@@ -398,7 +400,7 @@ fun MockResultScreen(
                             Text("Share your percent for this paper anonymously (no member id, no name) and see a band once 30 people have. Never a rank.",
                                 style = MaterialTheme.typography.bodyMedium)
                             bandError?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error) }
-                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                                 OutlinedButton(enabled = !asking, onClick = {
                                     asking = true; bandError = null
                                     scope.launch {

@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import android.content.Context
@@ -103,7 +105,7 @@ private fun RoadmapForm(store: RoadmapStore, start: RoadmapGoal?, onBuilt: () ->
                 PAPER_CHOICES.forEach { p -> FilterChip(selected = p in weak, onClick = { weak = if (p in weak) weak - p else weak + p }, label = { Text(p) }) }
             }
             error?.let { Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 Button(enabled = !busy, onClick = {
                     val h = hours.toDoubleOrNull()
                     if (h == null || h < 1 || h > 14) { error = "Hours a day: between 1 and 14."; return@Button }
@@ -140,7 +142,7 @@ private fun RoadmapView(store: RoadmapStore, p: RoadmapPlan, onEdit: () -> Unit,
                 }
                 Text("About ${p.hoursPerWeek} hours a week, ${p.studyDays} days, one day off. ${if (p.goal.working) "Working and studying." else "Full-time."}", style = MaterialTheme.typography.bodyMedium)
                 Text("A week: GS ${p.split.gs}%${if (p.split.optional > 0) ", optional ${p.split.optional}%" else ""}, answers ${p.split.answers}%, current affairs ${p.split.current}%, tests ${p.split.tests}%.", style = MaterialTheme.typography.bodySmall)
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                     OutlinedButton(onClick = { shareRoadmap(context, p) }) { Text("Share as image") }
                     TextButton(onClick = onEdit) { Text("Change my goal") }
                 }

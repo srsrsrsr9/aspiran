@@ -1,5 +1,9 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -122,7 +126,7 @@ private fun AccountCard(onSignOut: () -> Unit, onDeleteAccount: () -> Unit, serv
             if (isPassword && changing) ChangePasswordForm(server, forced = false) { changing = false }
             if (isPassword && recovering) RecoveryEmailForm(server) { recovering = false }
             if (isPassword && !changing && !recovering) TextButton(onClick = { recovering = true }) { Text("Add a recovery email") }
-            Row {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 if (isPassword && !changing) TextButton(onClick = { changing = true }) { Text("Change password") }
                 TextButton(onClick = { confirm = true }) { Text("Sign out") }
                 TextButton(onClick = onDeleteAccount) { Text("Delete my account") }

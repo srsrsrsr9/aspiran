@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package com.upscpods.app.ui
 
 import androidx.compose.animation.core.Animatable
@@ -256,7 +258,7 @@ fun ExplainerPlayer(ex: Explainer, hindi: Boolean, library: ContentLibrary) {
     ExplainerStage(ex, scene, if (still) 99f else t, hindi)
     Text(s.caption.pick(hindi), style = if (hindi) ReadingHindi else ReadingText, modifier = Modifier.height(if (hindi) 120.dp else 110.dp))
     LinearProgressIndicator(progress = { (elapsed / total).coerceIn(0f, 1f) }, modifier = Modifier.fillMaxWidth())
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
         TextButton(onClick = { if (scene > 0) { scene--; t = 0f } }, enabled = scene > 0) { Text("◀") }
         val ended = scene == scenes.lastIndex && t >= s.seconds
         Button(onClick = {
@@ -476,7 +478,7 @@ private fun QuizNight(quiz: QuizPack, hindi: Boolean) {
         )
     }
     if (revealed) Text(q.explanation, style = MaterialTheme.typography.bodyMedium)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
         if (!revealed) Button(onClick = { revealed = true }) { Text(if (hindi) "जवाब दिखाएँ" else "Reveal the answer") }
         else Button(onClick = { i++ }) { Text(if (i == quiz.questions.lastIndex) (if (hindi) "पूरा करें" else "Finish") else (if (hindi) "अगला सवाल →" else "Next question →")) }
     }
