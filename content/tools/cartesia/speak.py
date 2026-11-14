@@ -40,6 +40,8 @@ FRACS_EN = {"1/2": "one half", "1/3": "one-third", "2/3": "two-thirds", "1/4": "
 UNITS_EN = {"km/h": "kilometres per hour", "m/s": "metres per second", "km": "kilometres", "kg": "kilograms", "mm": "millimetres", "cm": "centimetres",
             "GW": "gigawatts", "MW": "megawatts", "sq km": "square kilometres", "ha": "hectares", "µg/m³": "micrograms per cubic metre"}
 
+SAY_EN = {"NCIIPC": "N C I I P C", "CERT-In": "Sert In"}   # letter runs the voices stumble on
+
 def money_en(m):
     cur, num, unit = m.group(1), m.group(2), (m.group(3) or "").strip()
     word = {"₹": "rupees", "Rs": "rupees", "Rs.": "rupees", "$": "dollars", "US$": "dollars"}.get(cur, "rupees")
@@ -74,6 +76,7 @@ def english(t):
     t = re.sub(r"\b\d{6,}\b", lambda m: en_num(m.group(0)), t)
     t = re.sub(r"\bGS(\d)\b", r"G S \1", t)
     t = re.sub(r"\b(COP|G|PSLV-C|SLV-|GSLV-|Chandrayaan-|Gaganyaan-|Mangalyaan-|INS-)(\d+)", lambda m: m.group(1).rstrip("-") + " " + m.group(2), t)
+    for k, v in SAY_EN.items(): t = t.replace(k, v)
     t = re.sub(r"\bvs\.?\s", "versus ", t)
     t = t.replace("e.g.", "for example").replace("i.e.", "that is").replace("etc.", "and so on")
     return tidy(t)
