@@ -69,6 +69,16 @@ assert.equal(week.base, `/media/ca/${WEEK}/`);
 assert.ok(week.episodes.every((e) => !("mp4Social" in e)));
 step("approved scenes go out, in order");
 
+// A series in a reserved week stays off the weekly shelf and lists under ?series=, with its title.
+const SW = "1999-09";
+const sm = { ...manifest(["approved", "approved", "approved"]), week: SW, series: "syllabus-in-a-minute", title: "GS2", titleHi: "GS2" };
+assert.equal((await fetch(`${BASE}/desk/api/ca/${SW}/files/manifest.json`, { method: "PUT", headers: { authorization: "Bearer " + TOKEN }, body: JSON.stringify(sm) })).status, 200);
+assert.ok(!(await get("/ca")).data.weeks.some((x) => x.week === SW));
+const sl = (await get("/ca?series=syllabus-in-a-minute")).data.weeks;
+assert.deepEqual(sl.map((x) => [x.week, x.title, x.scenes]), [[SW, "GS2", 3]]);
+assert.equal((await get(`/ca/${SW}`)).data.title, "GS2");
+step("a series has its own shelf, off the weekly one");
+
 // The player reads videos in ranges.
 const full = await fetch(`${BASE}${week.base}1-gi-tag.mp4`);
 assert.equal(full.status, 200);

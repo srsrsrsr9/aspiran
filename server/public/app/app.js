@@ -783,6 +783,7 @@ function viewPractice() {
     h("h2", "Away from the screen"),
     h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", `Earphones in: the device voice names a topic or reads a card, you say three points aloud.${libraryOf("walk-script").length ? ` Plus ${libraryOf("walk-script").length} guided walks.` : ""}`)), h("span", "→"))),
     h("a.card.link", { href: "#print" }, h("div.row.between", h("div", h("strong", "Print this week's set"), h("div.small.muted", "A recall card, a mixed CSAT set and your own one-pagers, on paper.")), h("span", "→"))),
+    h("a.card.link", { href: "#watch" }, h("div.row.between", h("div", h("strong", "Videos"), h("div.small.muted", "Current affairs week by week, and Syllabus in a minute: one short video for every topic.")), h("span", "→"))),
     libraryOf("audio-lecture").length > 0 && h("a.card.link", { href: "#talks" }, h("div.row.between", h("div", h("strong", "Audio lectures"), h("div.small.muted", `${libraryOf("audio-lecture").length} talks of 10 to 15 minutes, each with three quick checks.`)), h("span", "→"))),
     libraryOf("printable").length > 0 && h("a.card.link", { href: "#sheets" }, h("div.row.between", h("div", h("strong", "Printable sheets"), h("div.small.muted", `${libraryOf("printable").length} one-page tables, timelines and lists to print and pin up.`)), h("span", "→"))),
     h("h2", "Optional and terms"),
@@ -4012,7 +4013,7 @@ BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAl
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
-  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks,
+  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch,
   learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

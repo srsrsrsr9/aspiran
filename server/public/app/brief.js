@@ -295,3 +295,66 @@ export function viewTalks(arg) {
       items.map((x) => h("a.card.link", { href: "#talks/" + x.id }, h("div.row.between",
         h("div", h("strong", T(x)?.title), h("div.small.muted", [x.minutes && `${x.minutes} min`, x.recording?.[C.lang() === "hi" ? "hi" : "en"]?.length ? "recorded" : "device voice", heard[x.id] && "heard"].filter(Boolean).join(" · "))), h("span", "→")))))));
 }
+
+// --- Short videos: weekly current affairs and "Syllabus in a minute" (GET /ca, /ca?series=, /ca/<week>; ca.ts) ---
+// Never autoplays and starts muted (sound is the member's choice); captions on; on mobile data nothing is fetched
+// until play. Scenes that aren't free stay in Plus (the phone app unlocks them); the web shows their poster only.
+
+const SERIES = "syllabus-in-a-minute";
+/** "2026-45" (ISO week) → "2–8 Nov". */
+function weekDates(w) {
+  const [y, n] = w.split("-").map(Number);
+  const jan4 = new Date(Date.UTC(y, 0, 4));
+  const mon = new Date(jan4.getTime() + ((n - 1) * 7 - ((jan4.getUTCDay() + 6) % 7)) * 864e5);
+  const sun = new Date(mon.getTime() + 6 * 864e5);
+  const f = (d, m) => d.toLocaleDateString("en-IN", { day: "numeric", ...(m ? { month: "short" } : {}), timeZone: "UTC" });
+  return `${f(mon, mon.getUTCMonth() !== sun.getUTCMonth())}–${f(sun, true)}`;
+}
+const metered = () => { const c = navigator.connection; return !!(c && (c.saveData || c.type === "cellular")); };
+const getJson = (p) => fetch(p, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+
+export function viewWatch(arg) {
+  const box = h("div.col", back("#practice", "Practice"), h("p.muted", "Loading…"));
+  const hi = C.lang() === "hi";
+  if (arg) {
+    getJson(`/ca/${encodeURIComponent(arg)}`).then((w) => {
+      if (!w) return put(box, back("#watch", "Videos"), h("p", "This set isn't available. Check your connection and try again."));
+      const title = w.series ? (hi && w.titleHi) || w.title : `Current affairs, ${weekDates(w.week)}`;
+      const seen = C.store.get("videosSeen", {});
+      put(box, back("#watch", "Videos"), h("h1", title),
+        h("p.small.muted", `${w.episodes.length} short videos, under a minute each. Two AI voices. Sound starts off; captions are on.`),
+        w.episodes.map((e) => {
+          const src = w.base + e.mp4;
+          const media = e.free
+            ? h("video", { controls: true, muted: true, playsinline: true, preload: metered() ? "none" : "metadata", poster: w.base + e.poster,
+                style: { width: "100%", maxHeight: "70vh", borderRadius: "12px", background: "#000" },
+                onended: () => { const s = C.store.get("videosSeen", {}); s[w.week + "/" + e.id] = C.today(); C.store.set("videosSeen", s); } },
+                h("source", { src, type: "video/mp4" }), h("track", { kind: "captions", src: w.base + e.vtt, srclang: "en", label: "English", default: true }))
+            : h("div", h("img", { src: w.base + e.poster, alt: "", style: { width: "100%", maxHeight: "50vh", objectFit: "cover", borderRadius: "12px", filter: "blur(6px)" } }),
+                h("p.small", "This one is in Plus, in the Android app. ", h("a", { href: "#upgrade" }, "See Plus →")));
+          const quiz = (e.quiz ?? []).map((q) => C.mcqBlock({ question: q.q, options: q.options, answerIndex: q.answerIndex, explanation: q.why }, () => {}));
+          return h("div.card", h("strong", `${e.n}. ${e.title}`), seen[w.week + "/" + e.id] && h("span.small.muted", " · watched"), media,
+            quiz.length && e.free && h("details", h("summary", "One question"), quiz),
+            e.sources?.length && h("p.small.muted", "Sources: " + e.sources.map((s) => (typeof s === "string" ? s : s.name)).join("; ")));
+        }),
+        h("p.small.muted", "That's the set. Stop here, or pick another."), h("a.btn", { href: "#watch" }, "All videos"));
+    });
+    return box;
+  }
+  Promise.all([getJson("/ca"), getJson(`/ca?series=${SERIES}`)]).then(([ca, syl]) => {
+    const weeks = ca?.weeks ?? [], papers = syl?.weeks ?? [];
+    if (!weeks.length && !papers.length) return put(box, back("#practice", "Practice"), h("h1", "Videos"), h("p", "No videos yet, or you're offline."));
+    const row = (href, poster, strong, small) => h("a.card.link", { href }, h("div.row.between",
+      h("div.row", { style: { gap: "12px", alignItems: "center" } }, h("img", { src: poster, alt: "", loading: "lazy", style: { width: "48px", height: "85px", objectFit: "cover", borderRadius: "8px" } }),
+        h("div", h("strong", strong), h("div.small.muted", small))), h("span", "→")));
+    const mins = (s) => `${Math.max(1, Math.round(s / 60))} min`;
+    put(box, back("#practice", "Practice"), h("h1", "Videos"),
+      h("p.muted", "Short videos, under a minute each, with one question after. Nothing plays until you press play."),
+      weeks.length > 0 && h("h2", "Current affairs, week by week"),
+      weeks.map((w) => row("#watch/" + w.week, w.poster, weekDates(w.week), `${w.scenes} videos · ${mins(w.seconds)}${w.free < w.scenes ? ` · ${w.free} free` : ""}`)),
+      papers.length > 0 && h("h2", "Syllabus in a minute"),
+      papers.length > 0 && h("p.small.muted", "One video for every topic in the UPSC syllabus, paper by paper."),
+      papers.map((w) => row("#watch/" + w.week, w.poster, (hi && w.titleHi) || w.title, `${w.scenes} videos · ${mins(w.seconds)}`)));
+  });
+  return box;
+}

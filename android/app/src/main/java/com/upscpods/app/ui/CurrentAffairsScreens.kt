@@ -208,6 +208,23 @@ fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolea
                 }
             }
         }
+        if (ca.syllabus.isNotEmpty()) {
+            Text(if (hindi) "एक मिनट में सिलेबस" else "SYLLABUS IN A MINUTE", color = CA_GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.6.sp)
+            Text(if (hindi) "सिलेबस के हर विषय पर एक छोटा वीडियो, पेपर के हिसाब से।" else "One short video for every syllabus topic, paper by paper.",
+                color = CA_CREAM.copy(alpha = .8f), fontSize = 13.sp)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                ca.syllabus.forEach { set ->
+                    Row(Modifier.clip(RoundedCornerShape(12.dp)).background(Color.White.copy(alpha = .08f)).clickable { onOpen(set.week, 0) }.padding(6.dp),
+                        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        CaPoster(ca, set.poster, Modifier.width(36.dp).height(64.dp).clip(RoundedCornerShape(8.dp)))
+                        Column(Modifier.padding(end = 6.dp)) {
+                            Text((if (hindi) set.titleHi else null) ?: set.title ?: set.week, color = CA_CREAM, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                            Text(if (hindi) "${set.scenes} वीडियो" else "${set.scenes} videos", color = CA_CREAM.copy(alpha = .7f), fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -261,7 +278,7 @@ fun CaPlayerScreen(
         var current by remember { mutableIntStateOf(pager.settledPage) }
         val checkWeekDone = {
             val openScenes = scenes.filter { caOpen(it, gate) }
-            if (openScenes.isNotEmpty() && openScenes.all { e -> ca.watched(w.week, e.id) && e.quiz.all { ca.answer(it.id) != null } }) onWeekDone()
+            if (w.series == null && openScenes.isNotEmpty() && openScenes.all { e -> ca.watched(w.week, e.id) && e.quiz.all { ca.answer(it.id) != null } }) onWeekDone()
         }
         DisposableEffect(player) {
             val l = object : Player.Listener {
@@ -359,7 +376,7 @@ fun CaPlayerScreen(
             Column(Modifier.weight(1f)) {
                 Text(if (hindi) "दृश्य ${scenes[pager.currentPage].n} / ${scenes.size}" else "Scene ${scenes[pager.currentPage].n} of ${scenes.size}",
                     color = Color.White, fontWeight = FontWeight.Bold)
-                Text(CurrentAffairs.dates(w.week), color = Color.White.copy(alpha = .7f), fontSize = 12.sp)
+                Text(w.title?.let { if (hindi) w.titleHi ?: it else it } ?: CurrentAffairs.dates(w.week), color = Color.White.copy(alpha = .7f), fontSize = 12.sp)
             }
             if (BuildConfig.DEBUG && scenes[pager.currentPage].draft) DraftTag()
             if (caOpen(scenes[pager.currentPage], gate) && scenes[pager.currentPage].vtt != null) {

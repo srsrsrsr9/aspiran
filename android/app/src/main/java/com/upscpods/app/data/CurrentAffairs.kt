@@ -51,6 +51,9 @@ import java.time.DayOfWeek
 class CurrentAffairs(private val context: Context, private val member: () -> String = { "" }, private val server: () -> String) {
     var weeks by mutableStateOf<List<CaWeekSummary>>(emptyList())
         private set
+    /** "Syllabus in a minute": one short video per syllabus topic, a set per paper (GET /ca?series=..., in order). */
+    var syllabus by mutableStateOf<List<CaWeekSummary>>(emptyList())
+        private set
 
     private val http = OkHttpClient()
     private val authed = OkHttpClient.Builder().addInterceptor(AuthInterceptor).build()
@@ -80,7 +83,20 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
                 File(dir, WEEKS).writeText(text)
             }
         }
+        if (syllabus.isEmpty()) runCatching { syllabus = parseSeries(File(dir, SERIES_FILE).readText()) }
+        runCatching {
+            val more = if (BuildConfig.DEBUG) "&drafts=1" else ""
+            http.newCall(Request.Builder().url("$base/ca?series=$SERIES$more").build()).execute().use { r ->
+                if (!r.isSuccessful) return@use
+                val text = r.body.string()
+                syllabus = parseSeries(text)
+                File(dir, SERIES_FILE).writeText(text)
+            }
+        }
     }
+
+    private fun parseSeries(text: String) =
+        ContentLibrary.JSON.decodeFromString(CaWeekList.serializer(), text).weeks.sortedBy { it.week }
 
     /** One week, fresh from the server when it can be reached, else as last seen. Null if never seen and offline. */
     suspend fun week(id: String): CaWeek? = withContext(Dispatchers.IO) {
@@ -176,6 +192,8 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
 
     companion object {
         private const val WEEKS = "weeks.json"
+        private const val SERIES = "syllabus-in-a-minute"
+        private const val SERIES_FILE = "syllabus.json"
 
         /** The weeks as last fetched, for the Sunday ritual nudge (no network from a worker that only needs a count). */
         fun cachedWeeks(context: Context): List<CaWeekSummary> = runCatching {
@@ -226,6 +244,10 @@ data class CaWeekSummary(
     val free: Int = 0,
     val seconds: Double = 0.0,
     val poster: String? = null,
+    /** Set for a series (e.g. "syllabus-in-a-minute"): its paper's name in place of the week's dates. */
+    val series: String? = null,
+    val title: String? = null,
+    val titleHi: String? = null,
 )
 
 @Serializable
@@ -236,6 +258,9 @@ data class CaWeek(
     val weekMp4: String? = null,
     /** The folder the paths below sit in, e.g. /media/ca/2026-41/. */
     val base: String,
+    val series: String? = null,
+    val title: String? = null,
+    val titleHi: String? = null,
     val episodes: List<CaEpisode> = emptyList(),
 )
 

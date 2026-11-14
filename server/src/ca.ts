@@ -127,7 +127,8 @@ export function publicWeek(m: any, drafts: boolean) {
     .filter((e: any) => drafts || e.review?.status === "approved")
     .map(({ mp4Social, ...e }: any) => e)
     .sort((a: any, b: any) => a.n - b.n);
-  return { schema: m.schema, week: m.week, lang: m.lang, generatedAt: m.generatedAt, voice: m.voice, weekMp4: m.weekMp4, base: `/media/ca/${m.week}/`, episodes };
+  return { schema: m.schema, week: m.week, lang: m.lang, generatedAt: m.generatedAt, voice: m.voice, weekMp4: m.weekMp4, base: `/media/ca/${m.week}/`,
+    ...(m.series ? { series: m.series, title: m.title, titleHi: m.titleHi } : {}), episodes };
 }
 
 async function readManifest(env: Env, week: string): Promise<any | null> {
@@ -154,10 +155,14 @@ export async function publicCa(req: Request, env: Env, path: string): Promise<Re
   const drafts = url.searchParams.get("drafts") === "1" && devTokenAllowed(env.AUTH_MODE, url);
   const headers = { "access-control-allow-origin": "*", "cache-control": "no-cache" };
   if (path === "/ca") {
+    // A series (e.g. "syllabus-in-a-minute", in reserved weeks 2000-NN) is its own shelf: GET /ca?series=<name>.
+    // Without the query only the real weekly current affairs come back, so older apps never see a series as weeks.
+    const series = url.searchParams.get("series");
     const weeks = [];
     for (const w of await allWeeks(env)) {
       const m = await readManifest(env, w).catch(() => null);
       if (!m) continue;
+      if ((m.series ?? null) !== series) continue;
       const p = publicWeek(m, drafts);
       if (!p.episodes.length) continue;
       weeks.push({
@@ -165,8 +170,10 @@ export async function publicCa(req: Request, env: Env, path: string): Promise<Re
         free: p.episodes.filter((e: any) => e.free).length,
         seconds: p.episodes.reduce((s: number, e: any) => s + (e.durationSec ?? 0), 0),
         poster: p.base + p.episodes[0].poster,
+        ...(m.series ? { series: m.series, title: m.title, titleHi: m.titleHi } : {}),
       });
     }
+    if (series) weeks.reverse(); // a series reads in order: 2000-01 first
     return Response.json({ weeks }, { headers });
   }
   const week = path.slice("/ca/".length);
