@@ -1,350 +1,473 @@
 {
-  "schema": "upsc-pods/syllabus-notes@1",
-  "subject": "his",
-  "topic": "Modern history",
-  "note": "One note per major Modern History topic of the syllabus. English only. Drafts: an editor checks every date and name before approving. Pack with server/scripts/syllabus.mjs.",
-  "notes": [
+ "schema": "upsc-pods/syllabus-notes@1",
+ "subject": "his",
+ "topic": "Modern history",
+ "note": "One note per major Modern History topic of the syllabus. English only. Drafts: an editor checks every date and name before approving. Pack with server/scripts/syllabus.mjs.",
+ "notes": [
+  {
+   "id": "his-syl-british-expansion",
+   "title": "British expansion in India: from Plassey to paramountcy",
+   "nodes": [
+    "gs1-2",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will know how the East India Company went from trader to ruler, the wars that got it there, and the tools it used.",
+   "sections": [
     {
-      "id": "his-syl-british-expansion",
-      "title": "British expansion in India: from Plassey to paramountcy",
-      "nodes": ["gs1-2", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will know how the East India Company went from trader to ruler, the wars that got it there, and the tools it used.",
-      "sections": [
-        {
-          "head": "A fading empire, rising regional powers",
-          "body": "After Aurangzeb died in 1707, Mughal power weakened. Regional states rose: some were successor states run by Mughal governors who became independent, such as Bengal, Awadh and Hyderabad; others were new powers, such as the Marathas, the Sikhs and Mysore.\n\nEuropean companies traded along the coasts. In the south, the English and French East India Companies fought three Carnatic Wars (1746-1763) by backing rival Indian claimants. The English came out on top, and the French were confined to a few trading posts such as Pondicherry."
-        },
-        {
-          "head": "Bengal: Plassey and Buxar",
-          "body": "At the Battle of Plassey on 23 June 1757, Robert Clive defeated Siraj-ud-Daulah, the Nawab of Bengal. The victory owed more to the betrayal of Mir Jafar, the Nawab's commander, than to fighting. Mir Jafar was made Nawab.\n\nWhen his successor Mir Qasim tried to assert himself, he allied with Shuja-ud-Daulah of Awadh and the Mughal emperor Shah Alam II. The Company defeated all three at the Battle of Buxar on 22 October 1764. Buxar was the more decisive battle.\n\nBy the Treaty of Allahabad (1765), Shah Alam II gave the Company the diwani, the right to collect revenue, of Bengal, Bihar and Orissa. Clive then set up the 'dual government': the Company collected revenue while the Nawab kept responsibility for administration, without the means to carry it out."
-        },
-        {
-          "head": "Mysore, the Marathas and the Sikhs",
-          "body": "Four Anglo-Mysore Wars (1767-1799) were fought against Haidar Ali and his son Tipu Sultan. Tipu died defending Srirangapatna in 1799, and Mysore was handed to the Wodeyars under British control.\n\nThree Anglo-Maratha Wars followed. The first (1775-1782) ended with the Treaty of Salbai. The second (1803-1805) broke Maratha power in the north. The third (1817-1818) ended the Peshwa's rule; his lands were annexed.\n\nAfter Ranjit Singh died in 1839, the Sikh kingdom weakened. Two Anglo-Sikh Wars (1845-1846 and 1848-1849) followed, and Lord Dalhousie annexed Punjab in 1849."
-        },
-        {
-          "head": "The tools of expansion",
-          "body": "The Subsidiary Alliance, used widely by Lord Wellesley from 1798, made an Indian ruler keep a British force in his state and pay for it, accept a British Resident at his court, and give up the right to deal with other powers without British consent. Hyderabad was the first to accept it, in 1798.\n\nThe Doctrine of Lapse, applied by Lord Dalhousie, annexed a dependent state when its ruler died without a natural male heir; adopted sons could not inherit the state. Satara (1848), Jhansi (1853) and Nagpur (1854) were taken this way. Awadh was annexed in 1856 on the ground of misgovernment.\n\nRevenue paid for it all. The Permanent Settlement (1793, under Cornwallis) fixed revenue forever with zamindars in Bengal. The Ryotwari system, linked with Thomas Munro, dealt directly with cultivators in Madras and Bombay. The Mahalwari system settled revenue with village communities in the North-Western Provinces and Punjab. Dadabhai Naoroji's 'drain theory' later argued that Britain was draining India's wealth."
-        }
-      ],
-      "keyFacts": [
-        "Plassey: 23 June 1757 (Clive vs Siraj-ud-Daulah; Mir Jafar's betrayal).",
-        "Buxar: 22 October 1764 (vs Mir Qasim, Shuja-ud-Daulah, Shah Alam II).",
-        "Treaty of Allahabad 1765: diwani of Bengal, Bihar and Orissa.",
-        "Tipu Sultan died at Srirangapatna, 1799; Peshwa's rule ended in 1818; Punjab annexed 1849.",
-        "Subsidiary Alliance: Wellesley; Hyderabad first (1798).",
-        "Doctrine of Lapse: Dalhousie; Satara 1848, Jhansi 1853, Nagpur 1854; Awadh annexed 1856 for misgovernment.",
-        "Permanent Settlement 1793 (Cornwallis); Ryotwari (Munro); Mahalwari (NW Provinces)."
-      ],
-      "examAngle": "Prelims asks chronology, who used which policy, which state accepted the Subsidiary Alliance first, and which revenue system applied where. Mains asks how the Company moved from trade to political power.",
-      "selfCheck": [
-        "Why is Buxar considered more decisive than Plassey?",
-        "What did a ruler give up under the Subsidiary Alliance?",
-        "On what ground was Awadh annexed?"
-      ],
-      "sources": ["NCERT Class VIII Our Pasts III, chapters on the Company and rural life", "NCERT Class XII Themes in Indian History Part III (Colonialism and the Countryside)", "Bipan Chandra, History of Modern India (Orient BlackSwan)"],
-      "verify": "Check battle dates, the first state to accept the Subsidiary Alliance, and the annexation years under the Doctrine of Lapse."
+     "head": "A fading empire, rising regional powers",
+     "body": "After Aurangzeb died in 1707, Mughal power weakened. Regional states rose: some were successor states run by Mughal governors who became independent, such as Bengal, Awadh and Hyderabad; others were new powers, such as the Marathas, the Sikhs and Mysore.\n\nEuropean companies traded along the coasts. In the south, the English and French East India Companies fought three Carnatic Wars (1746-1763) by backing rival Indian claimants. The English came out on top, and the French were confined to a few trading posts such as Pondicherry."
     },
     {
-      "id": "his-syl-1857",
-      "title": "The Revolt of 1857: causes, course and consequences",
-      "nodes": ["gs1-2", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 8,
-      "dek": "By the end, you will know why 1857 happened, where it spread and who led it, how historians describe it, and what it changed.",
-      "sections": [
-        {
-          "head": "Causes",
-          "body": "Political causes: annexations under the Doctrine of Lapse and the annexation of Awadh in 1856 angered rulers and their followers. Economic causes: heavy land revenue, loss of land by the old landed classes, and the ruin of artisans by British imports.\n\nSocial and religious causes: many feared that British reforms and missionaries aimed at conversion. The Religious Disabilities Act, 1850 let converts inherit ancestral property.\n\nMilitary causes: Indian sepoys were paid less than British soldiers and had little hope of promotion. The General Service Enlistment Act, 1856 required new recruits to serve overseas if ordered, which many high-caste sepoys saw as a threat to caste. The immediate spark was the new Enfield rifle, whose cartridges were rumoured to be greased with cow and pig fat."
-        },
-        {
-          "head": "Course and leaders",
-          "body": "Mangal Pandey attacked his officers at Barrackpore on 29 March 1857. The revolt proper began at Meerut on 10 May 1857. The sepoys marched to Delhi and proclaimed the aged Bahadur Shah Zafar emperor of Hindustan.\n\nIt spread across north and central India. Nana Saheb and Tantia Tope led at Kanpur; Begum Hazrat Mahal at Lucknow; Rani Lakshmibai at Jhansi; Kunwar Singh, an elderly zamindar of Jagdishpur, in Bihar; Khan Bahadur Khan at Bareilly; and Maulvi Ahmadullah at Faizabad.\n\nThe British retook Delhi in September 1857. Rani Lakshmibai died fighting near Gwalior in June 1858. Bahadur Shah Zafar was exiled to Rangoon. By the end of 1858 the revolt had been put down. Much of the south, Bengal, Punjab and many princely states stayed loyal or quiet."
-        },
-        {
-          "head": "What was it?",
-          "body": "Historians disagree on how to describe 1857. Many British writers of the time called it a 'sepoy mutiny'. V.D. Savarkar called it 'The Indian War of Independence' in his book of 1909. R.C. Majumdar argued it was neither the first, nor national, nor a war of independence. S.N. Sen wrote the official centenary history in 1957.\n\nA balanced view: it began as a sepoy revolt, drew in peasants, artisans and dispossessed rulers in many regions, and showed Hindu-Muslim unity. But it lacked a common programme, a unified leadership and support across all of India."
-        },
-        {
-          "head": "Consequences",
-          "body": "The Government of India Act, 1858 ended the East India Company's rule. Power passed to the British Crown. A Secretary of State for India, a member of the British cabinet, was helped by a Council of India. The Governor-General also became the Viceroy, the Crown's representative.\n\nQueen Victoria's Proclamation, read by Lord Canning at Allahabad on 1 November 1858, promised to respect the rights of Indian princes, ended annexations and the Doctrine of Lapse, and promised religious tolerance.\n\nThe army was reorganised: the share of European soldiers was raised, and recruitment shifted to groups the British now called 'martial races'. The British grew wary of social reform and relied more on princes and landlords as allies."
-        }
-      ],
-      "keyFacts": [
-        "Mangal Pandey at Barrackpore: 29 March 1857; Meerut: 10 May 1857.",
-        "Leaders: Nana Saheb and Tantia Tope (Kanpur), Begum Hazrat Mahal (Lucknow), Rani Lakshmibai (Jhansi), Kunwar Singh (Bihar), Khan Bahadur Khan (Bareilly), Maulvi Ahmadullah (Faizabad).",
-        "General Service Enlistment Act 1856; Religious Disabilities Act 1850.",
-        "Savarkar: 'The Indian War of Independence' (1909); S.N. Sen: official history (1957).",
-        "Government of India Act 1858: Crown rule; Secretary of State with a Council of India.",
-        "Queen's Proclamation: 1 November 1858, read at Allahabad by Canning."
-      ],
-      "examAngle": "Prelims pairs leaders with places and asks the sequence of events. Mains asks about the nature of the revolt and why it failed.",
-      "selfCheck": [
-        "Name the leaders at Kanpur, Lucknow and Jhansi.",
-        "What did the Government of India Act, 1858 change?",
-        "Give two reasons the revolt failed."
-      ],
-      "sources": ["NCERT Class VIII Our Pasts III, chapter 'When People Rebel'", "NCERT Class XII Themes in Indian History Part III, 'Rebels and the Raj'", "S.N. Sen, Eighteen Fifty-Seven (Publications Division, 1957)"],
-      "verify": "Check the dates for Barrackpore and Meerut, the month of Rani Lakshmibai's death, and the date and place of the Proclamation."
+     "head": "Bengal: Plassey and Buxar",
+     "body": "At the Battle of Plassey on 23 June 1757, Robert Clive defeated Siraj-ud-Daulah, the Nawab of Bengal. The victory owed more to the betrayal of Mir Jafar, the Nawab's commander, than to fighting. Mir Jafar was made Nawab.\n\nWhen his successor Mir Qasim tried to assert himself, he allied with Shuja-ud-Daulah of Awadh and the Mughal emperor Shah Alam II. The Company defeated all three at the Battle of Buxar on 22 October 1764. Buxar was the more decisive battle.\n\nBy the Treaty of Allahabad (1765), Shah Alam II gave the Company the diwani, the right to collect revenue, of Bengal, Bihar and Orissa. Clive then set up the 'dual government': the Company collected revenue while the Nawab kept responsibility for administration, without the means to carry it out."
     },
     {
-      "id": "his-syl-reform",
-      "title": "Socio-religious reform movements in modern India",
-      "nodes": ["gs1-2", "pre-2", "gs1-6"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will be able to match each reform movement with its founder, year and aims, and explain what the movements achieved.",
-      "sections": [
-        {
-          "head": "Bengal and Bombay",
-          "body": "Raja Ram Mohan Roy founded the Brahmo Sabha in 1828, later the Brahmo Samaj. He opposed idol worship, sati and polygamy, and supported modern education. Lord William Bentinck banned sati by Regulation XVII of 1829. Debendranath Tagore led the Brahmo Samaj later and set up the Tattvabodhini Sabha (1839). Keshab Chandra Sen took it further, and the movement split.\n\nIshwar Chandra Vidyasagar campaigned for widow remarriage; the Hindu Widows' Remarriage Act was passed in 1856.\n\nIn Bombay, the Prarthana Samaj was founded in 1867 by Atmaram Pandurang, with M.G. Ranade and R.G. Bhandarkar among its leaders. It worked for women's education, widow remarriage and against caste barriers."
-        },
-        {
-          "head": "Revival and new faiths",
-          "body": "Swami Dayanand Saraswati founded the Arya Samaj in Bombay in 1875. His book 'Satyarth Prakash' called for a return to the Vedas, which he saw as the source of truth. The Arya Samaj opposed idol worship, child marriage and caste by birth, ran DAV schools, and started 'shuddhi', reconversion to Hinduism.\n\nSwami Vivekananda, a disciple of Ramakrishna Paramahamsa, founded the Ramakrishna Mission in 1897. He spoke at the Parliament of the World's Religions in Chicago in 1893. The Mission joined spiritual teaching with social service.\n\nThe Theosophical Society was founded in New York in 1875 by Madame Blavatsky and Colonel Olcott, and moved its headquarters to Adyar, near Madras, in 1882. Annie Besant later led it and was active in the Home Rule movement."
-        },
-        {
-          "head": "Muslim, Sikh and Parsi reform",
-          "body": "Sir Syed Ahmad Khan led the Aligarh movement. He founded the Muhammadan Anglo-Oriental College at Aligarh in 1875, which later became Aligarh Muslim University. He urged Muslims to take up modern education.\n\nThe Deoband school, founded in 1866, was a revivalist movement that trained religious scholars on traditional lines. The Ahmadiyya movement was founded by Mirza Ghulam Ahmad in 1889.\n\nAmong Sikhs, the Singh Sabha movement began at Amritsar in 1873. The Akali movement of the 1920s fought to free gurdwaras from corrupt mahants and led to the Sikh Gurdwaras Act, 1925. Among Parsis, the Rahnumai Mazdayasnan Sabha (1851) worked for social reform and women's education."
-        },
-        {
-          "head": "Against caste",
-          "body": "Jyotiba Phule founded the Satyashodhak Samaj in 1873 and wrote 'Gulamgiri' (Slavery). With Savitribai Phule he opened schools for girls and for children of lower castes.\n\nIn Kerala, Sri Narayana Guru led the movement for the Ezhava community; the SNDP Yogam was founded in 1903. The Vaikom Satyagraha (1924-1925) demanded that lower castes be allowed to use the roads near the Vaikom temple.\n\nE.V. Ramasamy (Periyar) started the Self-Respect Movement in 1925. B.R. Ambedkar founded the Bahishkrit Hitakarini Sabha in 1924 and led the Mahad Satyagraha in 1927 for the right to draw water from a public tank.\n\nLaws followed some of these campaigns: the Age of Consent Act, 1891 and the Child Marriage Restraint Act, 1929 (the Sarda Act)."
-        }
-      ],
-      "keyFacts": [
-        "Brahmo Sabha 1828 (Ram Mohan Roy); sati banned 1829 (Bentinck).",
-        "Widow Remarriage Act 1856 (Vidyasagar's campaign).",
-        "Prarthana Samaj 1867 (Atmaram Pandurang); Arya Samaj 1875 (Dayanand); Ramakrishna Mission 1897 (Vivekananda).",
-        "Theosophical Society: New York 1875; Adyar 1882.",
-        "MAO College Aligarh 1875; Deoband 1866; Ahmadiyya 1889; Singh Sabha 1873.",
-        "Satyashodhak Samaj 1873 (Phule); SNDP Yogam 1903; Self-Respect Movement 1925; Mahad Satyagraha 1927.",
-        "Sarda Act (Child Marriage Restraint Act) 1929."
-      ],
-      "examAngle": "Prelims pairs founders, organisations and years. Mains asks how far reform movements were limited to the elite, and how they fed into nationalism.",
-      "selfCheck": [
-        "Who founded the Arya Samaj, and where?",
-        "What was the Vaikom Satyagraha about?",
-        "Which law of 1929 fixed a minimum age for marriage?"
-      ],
-      "sources": ["NCERT Class VIII Our Pasts III, chapters on women, caste and reform", "Bipan Chandra, History of Modern India (Orient BlackSwan)", "Sekhar Bandyopadhyay, From Plassey to Partition (Orient BlackSwan)"],
-      "verify": "Check every founding year (founding years differ between sources for the Brahmo Samaj, Prarthana Samaj and Singh Sabha), and the dates of the Vaikom Satyagraha."
+     "head": "Mysore, the Marathas and the Sikhs",
+     "body": "Four Anglo-Mysore Wars (1767-1799) were fought against Haidar Ali and his son Tipu Sultan. Tipu died defending Srirangapatna in 1799, and Mysore was handed to the Wodeyars under British control.\n\nThree Anglo-Maratha Wars followed. The first (1775-1782) ended with the Treaty of Salbai. The second (1803-1805) broke Maratha power in the north. The third (1817-1818) ended the Peshwa's rule; his lands were annexed.\n\nAfter Ranjit Singh died in 1839, the Sikh kingdom weakened. Two Anglo-Sikh Wars (1845-1846 and 1848-1849) followed, and Lord Dalhousie annexed Punjab in 1849."
     },
     {
-      "id": "his-syl-constitutional",
-      "title": "Constitutional development under British rule: 1773 to 1947",
-      "nodes": ["gs1-2", "pre-2", "pre-4"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will be able to list each Act from 1773 to 1947 with its main change, and see how they led to the Constitution.",
-      "sections": [
-        {
-          "head": "The Company years",
-          "body": "The Regulating Act, 1773 was the first step by the British Parliament to control the Company. It made the Governor of Bengal the Governor-General of Bengal (Warren Hastings was the first), with a council of four, and provided for a Supreme Court at Calcutta, set up in 1774.\n\nPitt's India Act, 1784 created a Board of Control in London to oversee the Company's political affairs, while the Court of Directors kept commercial matters. This was the 'dual system'.\n\nThe Charter Act, 1813 ended the Company's trade monopoly in India, except for trade in tea and with China, and set aside a sum of one lakh rupees a year for education. The Charter Act, 1833 made the Governor-General of Bengal the Governor-General of India (Lord William Bentinck was the first) and ended the Company's trading role. The Charter Act, 1853 separated the Governor-General's legislative and executive functions and introduced open competition for the civil services."
-        },
-        {
-          "head": "Crown rule and the councils",
-          "body": "The Government of India Act, 1858 transferred power to the Crown after the revolt.\n\nThe Indian Councils Act, 1861 brought some Indians into the legislative council as nominated non-official members, and gave legal backing to Lord Canning's portfolio system. The Indian Councils Act, 1892 allowed members to discuss the budget and ask questions, and introduced indirect election in a limited form.\n\nThe Indian Councils Act, 1909, known as the Morley-Minto Reforms, enlarged the councils and introduced separate electorates for Muslims. Satyendra Prasad Sinha became the first Indian member of the Viceroy's Executive Council."
-        },
-        {
-          "head": "1919 and 1935",
-          "body": "The Government of India Act, 1919, the Montagu-Chelmsford Reforms, introduced dyarchy in the provinces: 'transferred' subjects went to ministers answerable to the legislature, while 'reserved' subjects stayed with the Governor. It made the central legislature bicameral, introduced direct elections on a limited franchise, and extended separate electorates to Sikhs and others. It provided for a statutory commission after ten years, which came as the Simon Commission (1927).\n\nThe Government of India Act, 1935 was long and detailed. It proposed an All-India Federation of provinces and princely states, which never came into being because the princes did not join. It ended dyarchy in the provinces and gave them autonomy, and proposed dyarchy at the centre, which never worked. It divided powers into three lists (federal, provincial and concurrent), set up a Federal Court (1937), and provided for the Reserve Bank of India. Much of the Constitution's administrative structure comes from this Act."
-        },
-        {
-          "head": "Independence",
-          "body": "The Indian Independence Act, 1947, passed by the British Parliament and given assent on 18 July 1947, ended British rule from 15 August 1947. It created two dominions, India and Pakistan, with the right to leave the Commonwealth. It made the Constituent Assemblies sovereign, and ended the British Crown's paramountcy over the princely states.\n\nThe Constituent Assembly then acted both as a constitution-making body and as the dominion legislature until the Constitution came into force on 26 January 1950."
-        }
-      ],
-      "keyFacts": [
-        "Regulating Act 1773: Governor-General of Bengal (Hastings); Supreme Court at Calcutta (1774).",
-        "Pitt's India Act 1784: Board of Control; dual system.",
-        "Charter Act 1813: trade monopoly ended except tea and China; ₹1 lakh for education.",
-        "Charter Act 1833: Governor-General of India (Bentinck); 1853: open competition for civil services.",
-        "Indian Councils Acts 1861, 1892, 1909 (separate electorates for Muslims).",
-        "GoI Act 1919: provincial dyarchy; bicameral centre. GoI Act 1935: provincial autonomy, three lists, Federal Court.",
-        "Indian Independence Act: assent 18 July 1947."
-      ],
-      "examAngle": "Prelims asks which Act did what: first Governor-General of India, separate electorates, dyarchy, three lists. Mains asks how far the 1935 Act shaped the Constitution.",
-      "selfCheck": [
-        "Which Act made the Governor-General of Bengal the Governor-General of India?",
-        "What was dyarchy, and under which Act was it introduced in the provinces?",
-        "Why did the All-India Federation of 1935 never come into being?"
-      ],
-      "sources": ["NCERT Class XI Indian Constitution at Work, Chapter 1", "M. Laxmikanth, Indian Polity, chapter on historical background (McGraw Hill)", "Bipan Chandra, History of Modern India (Orient BlackSwan)"],
-      "verify": "Check the assent date of the Indian Independence Act and the Supreme Court at Calcutta's founding year (1774)."
-    },
-    {
-      "id": "his-syl-early-nationalism",
-      "title": "Early nationalism: the Congress, Moderates, Extremists and Swadeshi",
-      "nodes": ["gs1-3", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will know how the Congress began, what the Moderates and Extremists wanted, and how Swadeshi changed the movement.",
-      "sections": [
-        {
-          "head": "Before the Congress",
-          "body": "Political associations came first. The Landholders' Society (1838) and the British Indian Association (1851) represented landed interests in Bengal. Dadabhai Naoroji founded the East India Association in London in 1866. The Poona Sarvajanik Sabha began in 1870. The Indian Association of Calcutta, founded in 1876 by Surendranath Banerjea and Anandamohan Bose, campaigned on civil service exams and the press. The Madras Mahajan Sabha followed in 1884.\n\nThe Indian National Congress held its first session in Bombay in December 1885, with 72 delegates. W.C. Bonnerjee presided. A.O. Hume, a retired British civil servant, helped found it. The 'safety valve' theory says the British wanted the Congress as an outlet for discontent; most historians today see it as the work of Indians who used Hume as a 'lightning conductor'."
-        },
-        {
-          "head": "The Moderates, 1885-1905",
-          "body": "The early leaders, among them Dadabhai Naoroji, Pherozeshah Mehta, Gopal Krishna Gokhale and Surendranath Banerjea, believed in British justice. They used petitions, resolutions and speeches.\n\nTheir biggest contribution was the economic critique of colonial rule. Naoroji's 'Poverty and Un-British Rule in India' set out the drain theory: Britain was taking India's wealth through home charges, salaries and profits. R.C. Dutt's 'Economic History of India' made a similar case.\n\nThey asked for more Indians in the councils, simultaneous civil service exams in India and England, lower military spending and less land revenue. Their methods won little, but they built a national public opinion."
-        },
-        {
-          "head": "Partition and Swadeshi",
-          "body": "Lord Curzon announced the partition of Bengal in July 1905; it came into effect on 16 October 1905. The official reason was administrative convenience; nationalists saw an attempt to divide Bengali Hindus and Muslims and weaken Bengal's politics.\n\nThe Swadeshi movement was formally launched with the boycott resolution at the Calcutta Town Hall on 7 August 1905. People boycotted British goods, burnt foreign cloth, and set up swadeshi industries and national schools such as the Bengal National College. Rabindranath Tagore wrote songs for the movement, and 16 October was observed as a day of mourning, with people tying rakhis to each other.\n\nThe 'Extremists', led by Lala Lajpat Rai, Bal Gangadhar Tilak and Bipin Chandra Pal (Lal-Bal-Pal) with Aurobindo Ghosh, wanted swaraj and mass action. The Congress split at Surat in 1907. The All-India Muslim League was founded at Dacca in 1906. The partition was annulled in 1911, and the capital moved from Calcutta to Delhi."
-        },
-        {
-          "head": "Revolutionaries, Home Rule and Lucknow",
-          "body": "Revolutionary groups such as the Anushilan Samiti and Jugantar grew in Bengal. In 1908 Khudiram Bose and Prafulla Chaki threw a bomb at a carriage in Muzaffarpur. The Ghadar Party was founded on the Pacific coast of the United States in 1913, with Lala Har Dayal among its leaders.\n\nTwo Home Rule Leagues began in 1916: Tilak's in April, working in Maharashtra and Karnataka, and Annie Besant's in September, across the rest of India.\n\nAt Lucknow in 1916 the Moderates and Extremists reunited, and the Congress and the Muslim League signed the Lucknow Pact. The Congress accepted separate electorates for Muslims in return for joint demands for self-government."
-        }
-      ],
-      "keyFacts": [
-        "East India Association 1866 (London, Naoroji); Indian Association 1876 (Banerjea, A.M. Bose).",
-        "First Congress: Bombay, December 1885; 72 delegates; W.C. Bonnerjee presided.",
-        "Partition of Bengal: effective 16 October 1905; boycott resolution 7 August 1905.",
-        "Surat split 1907; Muslim League founded at Dacca 1906; partition annulled 1911.",
-        "Ghadar Party 1913; Home Rule Leagues 1916 (Tilak April, Besant September).",
-        "Lucknow Pact 1916: Congress-League pact; Moderates and Extremists reunited."
-      ],
-      "examAngle": "Prelims asks founders and years of associations, the sequence 1905-1916, and who led which Home Rule League. Mains asks about the Moderates' contribution and the methods of the Swadeshi movement.",
-      "selfCheck": [
-        "What was the drain theory, and who put it forward?",
-        "Why did the Congress split at Surat?",
-        "What did the Congress accept in the Lucknow Pact?"
-      ],
-      "sources": ["NCERT Class VIII Our Pasts III, chapter on the making of the national movement", "Bipan Chandra et al., India's Struggle for Independence (Penguin)", "Spectrum, A Brief History of Modern India (for chronology)"],
-      "verify": "Check the dates of the boycott resolution and partition, and the months of the two Home Rule Leagues."
-    },
-    {
-      "id": "his-syl-gandhian",
-      "title": "The Gandhian phase of the freedom struggle, 1917-1934: a timeline",
-      "nodes": ["gs1-3", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will have the Gandhian movements from Champaran to the Poona Pact in order, with what each one won.",
-      "sections": [
-        {
-          "head": "First experiments, 1917-1918",
-          "body": "Gandhi returned from South Africa in January 1915. His first satyagrahas in India were local.\n\nAt Champaran in Bihar (1917), he took up the cause of peasants forced by European planters to grow indigo under the tinkathia system. At Ahmedabad (1918), he supported mill workers in a wage dispute and went on his first hunger strike in India. At Kheda in Gujarat (1918), he backed peasants who could not pay revenue after crop failure; Vallabhbhai Patel joined him here.\n\nThese campaigns made Gandhi known as a leader who could mobilise peasants and workers."
-        },
-        {
-          "head": "Rowlatt, Jallianwala and Non-Cooperation",
-          "body": "The Rowlatt Act of March 1919 allowed detention without trial. Gandhi called a nationwide satyagraha in April 1919. On 13 April 1919, General Dyer's troops fired on an unarmed crowd at Jallianwala Bagh in Amritsar, killing hundreds. Tagore gave up his knighthood in protest. The Government's Hunter Committee inquired into the events.\n\nThe Non-Cooperation Movement, joined with the Khilafat movement, began on 1 August 1920 and was approved at the Calcutta special session (September 1920) and the Nagpur session (December 1920). People returned titles, boycotted schools, courts, councils and foreign cloth, and took up khadi.\n\nAfter a crowd burnt a police station at Chauri Chaura on 5 February 1922, Gandhi withdrew the movement. The Swaraj Party, formed in 1923 by C.R. Das and Motilal Nehru, then contested council elections to oppose the Government from within."
-        },
-        {
-          "head": "Simon, Purna Swaraj and the Salt March",
-          "body": "The Simon Commission, appointed in 1927 with no Indian member, was met with 'Simon Go Back' protests in 1928. Lala Lajpat Rai died after a police lathi charge in Lahore. The Nehru Report (1928) proposed dominion status.\n\nAt the Lahore session in December 1929, under Jawaharlal Nehru, the Congress adopted Purna Swaraj, complete independence, as its goal. 26 January 1930 was celebrated as Independence Day.\n\nThe Civil Disobedience Movement began with the Salt March from Sabarmati to Dandi, from 12 March to 6 April 1930. Salt laws were broken across India. In the North-West Frontier, Khan Abdul Ghaffar Khan's Khudai Khidmatgars joined the movement."
-        },
-        {
-          "head": "Pact, conference and Poona",
-          "body": "The Gandhi-Irwin Pact of March 1931 suspended civil disobedience; the Government agreed to release prisoners not convicted of violence. The Karachi session of 1931, under Vallabhbhai Patel, passed resolutions on Fundamental Rights and economic policy.\n\nGandhi was the Congress's only representative at the Second Round Table Conference in London (September to December 1931), which failed. Civil disobedience resumed in 1932.\n\nThe Communal Award of August 1932, announced by Ramsay MacDonald, gave separate electorates to the depressed classes. Gandhi began a fast against it in Yerawada jail. The Poona Pact of September 1932 between Gandhi and B.R. Ambedkar replaced separate electorates with reserved seats for the depressed classes within a joint electorate. The movement was formally withdrawn in 1934."
-        }
-      ],
-      "keyFacts": [
-        "Champaran 1917 (indigo); Ahmedabad 1918 (mill workers, first hunger strike); Kheda 1918.",
-        "Rowlatt Act March 1919; Jallianwala Bagh 13 April 1919.",
-        "Non-Cooperation from 1 August 1920; withdrawn after Chauri Chaura (5 February 1922).",
-        "Swaraj Party 1923 (C.R. Das, Motilal Nehru).",
-        "Lahore session December 1929: Purna Swaraj; 26 January 1930 Independence Day.",
-        "Salt March 12 March - 6 April 1930; Gandhi-Irwin Pact March 1931.",
-        "Communal Award August 1932; Poona Pact September 1932."
-      ],
-      "examAngle": "Prelims asks the order of events, who presided over which session, and what each pact said. Mains asks how Gandhi turned the Congress into a mass movement and why he withdrew movements when he did.",
-      "selfCheck": [
-        "Why did Gandhi withdraw the Non-Cooperation Movement?",
-        "What did the Lahore session of 1929 decide?",
-        "What did the Poona Pact replace separate electorates with?"
-      ],
-      "sources": ["NCERT Class XII Themes in Indian History Part III, 'Mahatma Gandhi and the Nationalist Movement'", "NCERT Class X India and the Contemporary World II, 'Nationalism in India'", "Bipan Chandra et al., India's Struggle for Independence (Penguin)"],
-      "verify": "Overlaps the existing long read his-gandhian-mass-movements: the editor may approve only one. Check all dates, especially the start of Non-Cooperation and the Gandhi-Irwin Pact."
-    },
-    {
-      "id": "his-syl-towards-freedom",
-      "title": "Towards freedom: Quit India, the INA and the transfer of power, 1935-1947",
-      "nodes": ["gs1-3", "gs1-4", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will have the last decade of the freedom struggle in order: ministries, war, Quit India, the INA and the road to partition.",
-      "sections": [
-        {
-          "head": "Ministries and war, 1937-1941",
-          "body": "Elections under the 1935 Act were held in early 1937. The Congress won a majority in most provinces and formed ministries. In October 1939, after the Viceroy declared India at war with Germany without consulting Indians, the Congress ministries resigned. The Muslim League marked their exit as a 'Day of Deliverance'.\n\nIn March 1940 the League passed the Lahore Resolution, calling for independent states in the Muslim-majority areas; it came to be called the Pakistan Resolution. The August Offer of 1940 promised dominion status after the war. The Congress rejected it, and Gandhi launched individual satyagraha in October 1940; Vinoba Bhave was the first satyagrahi."
-        },
-        {
-          "head": "Cripps and Quit India",
-          "body": "The Cripps Mission came in March 1942. It offered dominion status after the war, with the right of provinces to stay out of the new union. Gandhi is said to have called it a 'post-dated cheque'. It failed.\n\nThe Quit India resolution was passed in Bombay on 8 August 1942, at the Gowalia Tank maidan. Gandhi gave the call 'Do or Die'. The top leaders were arrested early the next morning. With them in jail, the movement was led by younger leaders and by people themselves: strikes, attacks on railways and telegraph lines, and underground work. Aruna Asaf Ali hoisted the flag at Gowalia Tank; Usha Mehta ran an underground Congress radio; Jayaprakash Narayan and Ram Manohar Lohia were active underground.\n\nParallel governments were set up in Ballia (under Chittu Pandey), Tamluk in Midnapore (the Tamralipta Jatiya Sarkar) and Satara (the Prati Sarkar)."
-        },
-        {
-          "head": "Bose and the INA",
-          "body": "The Indian National Army was first organised by Mohan Singh, with Indian prisoners of war captured by Japan. Subhas Chandra Bose took over in 1943 in Singapore, and formed the Provisional Government of Free India on 21 October 1943. His call was 'Delhi Chalo'. The INA fought alongside the Japanese on the Burma front, including in Manipur, but retreated with the Japanese defeat.\n\nThe INA trials at the Red Fort in late 1945 of Shah Nawaz Khan, Prem Sahgal and Gurbaksh Singh Dhillon caused a nationwide wave of support. Bhulabhai Desai, Tej Bahadur Sapru and Jawaharlal Nehru were among the defence lawyers. In February 1946 ratings of the Royal Indian Navy mutinied in Bombay. Both showed the British that the loyalty of Indian forces could no longer be assumed."
-        },
-        {
-          "head": "The transfer of power",
-          "body": "The Wavell Plan and the Simla Conference (June 1945) failed over the League's claim to name all Muslim members. The Cabinet Mission (March to June 1946) proposed a loose union with grouping of provinces and a Constituent Assembly. The League called for 'Direct Action' on 16 August 1946, which led to communal killings in Calcutta. An interim government led by Nehru took office in September 1946.\n\nOn 20 February 1947, British Prime Minister Attlee announced that Britain would leave India by June 1948. Lord Mountbatten's plan of 3 June 1947 provided for partition, and the date was brought forward. The Indian Independence Act gave effect to it, and India became independent on 15 August 1947. Cyril Radcliffe drew the boundaries in Punjab and Bengal."
-        }
-      ],
-      "keyFacts": [
-        "Congress ministries resigned October-November 1939; League's 'Day of Deliverance', December 1939.",
-        "Lahore (Pakistan) Resolution: March 1940; August Offer 1940; individual satyagraha October 1940 (Vinoba Bhave first).",
-        "Cripps Mission March 1942; Quit India resolution 8 August 1942 at Gowalia Tank.",
-        "Parallel governments: Ballia, Tamluk, Satara.",
-        "Provisional Government of Free India: 21 October 1943, Singapore.",
-        "INA trials late 1945; RIN mutiny February 1946.",
-        "Cabinet Mission 1946; Direct Action Day 16 August 1946; Attlee's statement 20 February 1947; Mountbatten Plan 3 June 1947."
-      ],
-      "examAngle": "Prelims asks the order of missions and plans, who led parallel governments, and what each plan offered. Mains asks why the British left in 1947 and why partition happened.",
-      "selfCheck": [
-        "Why did the Congress ministries resign in 1939?",
-        "What did the Cripps Mission offer, and why was it rejected?",
-        "Name two events of 1945-1946 that showed the British the forces' loyalty was slipping."
-      ],
-      "sources": ["NCERT Class XII Themes in Indian History Part III, 'Understanding Partition' and 'Mahatma Gandhi and the Nationalist Movement'", "Bipan Chandra et al., India's Struggle for Independence (Penguin)", "Sekhar Bandyopadhyay, From Plassey to Partition (Orient BlackSwan)"],
-      "verify": "Check the dates of the ministries' resignation, the August Offer, and the Provisional Government, and the names of the three INA officers tried."
-    },
-    {
-      "id": "his-syl-consolidation",
-      "title": "After 1947: partition, integration of princely states and states reorganisation",
-      "nodes": ["gs1-4", "pre-2"],
-      "gsPaper": "GS1",
-      "minutes": 9,
-      "dek": "By the end, you will know how the princely states joined India, how the map was redrawn on linguistic lines, and the other tasks of the first years.",
-      "sections": [
-        {
-          "head": "Partition and its aftermath",
-          "body": "Partition in August 1947 led to one of the largest migrations in history. Millions crossed the new borders in Punjab and Bengal, and very large numbers were killed in communal violence. Gandhi was assassinated on 30 January 1948.\n\nRefugee rehabilitation was the new state's first huge task. The Government set up camps, gave land and loans, and built new towns, such as Faridabad and the Nilokheri settlement. The scars of partition shaped Indian politics for decades."
-        },
-        {
-          "head": "Integrating the princely states",
-          "body": "When the British left, there were over 500 princely states. The States Department, led by Vallabhbhai Patel with V.P. Menon as secretary, persuaded almost all rulers to sign an Instrument of Accession before 15 August 1947. At first they ceded only defence, external affairs and communications. A Standstill Agreement kept existing arrangements going.\n\nThree states held out. Junagadh's Nawab acceded to Pakistan; after unrest, a plebiscite in February 1948 went overwhelmingly for India. Hyderabad's Nizam sought independence; Indian forces moved in under 'Operation Polo' in September 1948. Kashmir's Maharaja Hari Singh signed the Instrument of Accession on 26 October 1947, after an invasion by tribesmen from Pakistan.\n\nManipur's ruler signed a merger agreement in September 1949. French settlements came back peacefully: Chandernagore after a referendum, and Pondicherry with the de facto transfer of 1954. Portugal's Goa, Daman and Diu were taken in December 1961. Sikkim became a state in 1975 by the 36th Amendment."
-        },
-        {
-          "head": "Linguistic states",
-          "body": "The Congress had promised linguistic provinces since the 1920s, but after partition the leaders feared further division. The Dhar Commission (1948) advised against linguistic states, and the JVP Committee (Jawaharlal Nehru, Vallabhbhai Patel and Pattabhi Sitaramayya) advised waiting.\n\nPotti Sriramulu died on 15 December 1952 after a long fast for a Telugu state. Andhra State was formed on 1 October 1953.\n\nThe States Reorganisation Commission, headed by Fazl Ali with K.M. Panikkar and H.N. Kunzru as members, reported in 1955. The States Reorganisation Act, 1956 created 14 states and 6 Union Territories, and the Seventh Amendment (1956) ended the old classification into Part A, B, C and D states. Bombay was split into Maharashtra and Gujarat in 1960; Nagaland became a state in 1963; Punjab was divided in 1966 to create Haryana."
-        },
-        {
-          "head": "Other foundations",
-          "body": "Besides the map, the early years laid down the institutions. The Constitution came into force on 26 January 1950. The Planning Commission was set up in March 1950, and the First Five Year Plan began in 1951. The first general elections were held in 1951-1952, on universal adult franchise.\n\nStates abolished zamindari and passed land reform laws. In foreign policy, India chose non-alignment. Historians often point out that India held together and stayed democratic, despite partition, poverty and great diversity, while many newly independent countries did not."
-        }
-      ],
-      "keyFacts": [
-        "States Department: Patel, with V.P. Menon as secretary; Instrument of Accession (defence, external affairs, communications).",
-        "Junagadh plebiscite February 1948; Hyderabad 'Operation Polo' September 1948; Kashmir accession 26 October 1947.",
-        "Goa, Daman and Diu: December 1961; Sikkim: 36th Amendment, 1975.",
-        "Potti Sriramulu died 15 December 1952; Andhra State 1 October 1953.",
-        "SRC: Fazl Ali, K.M. Panikkar, H.N. Kunzru; report 1955.",
-        "States Reorganisation Act 1956: 14 states, 6 UTs; Seventh Amendment 1956.",
-        "Maharashtra and Gujarat 1960; Nagaland 1963; Haryana 1966."
-      ],
-      "examAngle": "Prelims asks the order of states' creation, the SRC's members, and how each holdout state joined. Mains asks whether linguistic states strengthened or weakened national unity.",
-      "selfCheck": [
-        "Which three subjects did rulers first cede under the Instrument of Accession?",
-        "What led to the creation of Andhra State?",
-        "What did the Seventh Amendment of 1956 abolish?"
-      ],
-      "sources": ["NCERT Class XII Politics in India since Independence, Chapter 1 (Challenges of Nation Building)", "Bipan Chandra et al., India since Independence (Penguin)", "V.P. Menon, The Story of the Integration of the Indian States"],
-      "verify": "Check the number of princely states (sources differ between about 550 and 565), the Manipur merger date, and the year each French settlement came to India."
+     "head": "The tools of expansion",
+     "body": "The Subsidiary Alliance, used widely by Lord Wellesley from 1798, made an Indian ruler keep a British force in his state and pay for it, accept a British Resident at his court, and give up the right to deal with other powers without British consent. Hyderabad was the first to accept it, in 1798.\n\nThe Doctrine of Lapse, applied by Lord Dalhousie, annexed a dependent state when its ruler died without a natural male heir; adopted sons could not inherit the state. Satara (1848), Jhansi (1853) and Nagpur (1854) were taken this way. Awadh was annexed in 1856 on the ground of misgovernment.\n\nRevenue paid for it all. The Permanent Settlement (1793, under Cornwallis) fixed revenue forever with zamindars in Bengal. The Ryotwari system, linked with Thomas Munro, dealt directly with cultivators in Madras and Bombay. The Mahalwari system settled revenue with village communities in the North-Western Provinces and Punjab. Dadabhai Naoroji's 'drain theory' later argued that Britain was draining India's wealth."
     }
-  ]
+   ],
+   "keyFacts": [
+    "Plassey: 23 June 1757 (Clive vs Siraj-ud-Daulah; Mir Jafar's betrayal).",
+    "Buxar: 22 October 1764 (vs Mir Qasim, Shuja-ud-Daulah, Shah Alam II).",
+    "Treaty of Allahabad 1765: diwani of Bengal, Bihar and Orissa.",
+    "Tipu Sultan died at Srirangapatna, 1799; Peshwa's rule ended in 1818; Punjab annexed 1849.",
+    "Subsidiary Alliance: Wellesley; Hyderabad first (1798).",
+    "Doctrine of Lapse: Dalhousie; Satara 1848, Jhansi 1853, Nagpur 1854; Awadh annexed 1856 for misgovernment.",
+    "Permanent Settlement 1793 (Cornwallis); Ryotwari (Munro); Mahalwari (NW Provinces)."
+   ],
+   "examAngle": "Prelims asks chronology, who used which policy, which state accepted the Subsidiary Alliance first, and which revenue system applied where. Mains asks how the Company moved from trade to political power.",
+   "selfCheck": [
+    "Why is Buxar considered more decisive than Plassey?",
+    "What did a ruler give up under the Subsidiary Alliance?",
+    "On what ground was Awadh annexed?"
+   ],
+   "sources": [
+    "NCERT Class VIII Our Pasts III, chapters on the Company and rural life",
+    "NCERT Class XII Themes in Indian History Part III (Colonialism and the Countryside)",
+    "Bipan Chandra, History of Modern India (Orient BlackSwan)"
+   ],
+   "verify": "Check battle dates, the first state to accept the Subsidiary Alliance, and the annexation years under the Doctrine of Lapse.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-1857",
+   "title": "The Revolt of 1857: causes, course and consequences",
+   "nodes": [
+    "gs1-2",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 8,
+   "dek": "By the end, you will know why 1857 happened, where it spread and who led it, how historians describe it, and what it changed.",
+   "sections": [
+    {
+     "head": "Causes",
+     "body": "Political causes: annexations under the Doctrine of Lapse and the annexation of Awadh in 1856 angered rulers and their followers. Economic causes: heavy land revenue, loss of land by the old landed classes, and the ruin of artisans by British imports.\n\nSocial and religious causes: many feared that British reforms and missionaries aimed at conversion. The Religious Disabilities Act, 1850 let converts inherit ancestral property.\n\nMilitary causes: Indian sepoys were paid less than British soldiers and had little hope of promotion. The General Service Enlistment Act, 1856 required new recruits to serve overseas if ordered, which many high-caste sepoys saw as a threat to caste. The immediate spark was the new Enfield rifle, whose cartridges were rumoured to be greased with cow and pig fat."
+    },
+    {
+     "head": "Course and leaders",
+     "body": "Mangal Pandey attacked his officers at Barrackpore on 29 March 1857. The revolt proper began at Meerut on 10 May 1857. The sepoys marched to Delhi and proclaimed the aged Bahadur Shah Zafar emperor of Hindustan.\n\nIt spread across north and central India. Nana Saheb and Tantia Tope led at Kanpur; Begum Hazrat Mahal at Lucknow; Rani Lakshmibai at Jhansi; Kunwar Singh, an elderly zamindar of Jagdishpur, in Bihar; Khan Bahadur Khan at Bareilly; and Maulvi Ahmadullah at Faizabad.\n\nThe British retook Delhi in September 1857. Rani Lakshmibai died fighting near Gwalior in June 1858. Bahadur Shah Zafar was exiled to Rangoon. By the end of 1858 the revolt had been put down. Much of the south, Bengal, Punjab and many princely states stayed loyal or quiet."
+    },
+    {
+     "head": "What was it?",
+     "body": "Historians disagree on how to describe 1857. Many British writers of the time called it a 'sepoy mutiny'. V.D. Savarkar called it 'The Indian War of Independence' in his book of 1909. R.C. Majumdar argued it was neither the first, nor national, nor a war of independence. S.N. Sen wrote the official centenary history in 1957.\n\nA balanced view: it began as a sepoy revolt, drew in peasants, artisans and dispossessed rulers in many regions, and showed Hindu-Muslim unity. But it lacked a common programme, a unified leadership and support across all of India."
+    },
+    {
+     "head": "Consequences",
+     "body": "The Government of India Act, 1858 ended the East India Company's rule. Power passed to the British Crown. A Secretary of State for India, a member of the British cabinet, was helped by a Council of India. The Governor-General also became the Viceroy, the Crown's representative.\n\nQueen Victoria's Proclamation, read by Lord Canning at Allahabad on 1 November 1858, promised to respect the rights of Indian princes, ended annexations and the Doctrine of Lapse, and promised religious tolerance.\n\nThe army was reorganised: the share of European soldiers was raised, and recruitment shifted to groups the British now called 'martial races'. The British grew wary of social reform and relied more on princes and landlords as allies."
+    }
+   ],
+   "keyFacts": [
+    "Mangal Pandey at Barrackpore: 29 March 1857; Meerut: 10 May 1857.",
+    "Leaders: Nana Saheb and Tantia Tope (Kanpur), Begum Hazrat Mahal (Lucknow), Rani Lakshmibai (Jhansi), Kunwar Singh (Bihar), Khan Bahadur Khan (Bareilly), Maulvi Ahmadullah (Faizabad).",
+    "General Service Enlistment Act 1856; Religious Disabilities Act 1850.",
+    "Savarkar: 'The Indian War of Independence' (1909); S.N. Sen: official history (1957).",
+    "Government of India Act 1858: Crown rule; Secretary of State with a Council of India.",
+    "Queen's Proclamation: 1 November 1858, read at Allahabad by Canning."
+   ],
+   "examAngle": "Prelims pairs leaders with places and asks the sequence of events. Mains asks about the nature of the revolt and why it failed.",
+   "selfCheck": [
+    "Name the leaders at Kanpur, Lucknow and Jhansi.",
+    "What did the Government of India Act, 1858 change?",
+    "Give two reasons the revolt failed."
+   ],
+   "sources": [
+    "NCERT Class VIII Our Pasts III, chapter 'When People Rebel'",
+    "NCERT Class XII Themes in Indian History Part III, 'Rebels and the Raj'",
+    "S.N. Sen, Eighteen Fifty-Seven (Publications Division, 1957)"
+   ],
+   "verify": "Check the dates for Barrackpore and Meerut, the month of Rani Lakshmibai's death, and the date and place of the Proclamation.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-reform",
+   "title": "Socio-religious reform movements in modern India",
+   "nodes": [
+    "gs1-2",
+    "pre-2",
+    "gs1-6"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will be able to match each reform movement with its founder, year and aims, and explain what the movements achieved.",
+   "sections": [
+    {
+     "head": "Bengal and Bombay",
+     "body": "Raja Ram Mohan Roy founded the Brahmo Sabha in 1828, later the Brahmo Samaj. He opposed idol worship, sati and polygamy, and supported modern education. Lord William Bentinck banned sati by Regulation XVII of 1829. Debendranath Tagore led the Brahmo Samaj later and set up the Tattvabodhini Sabha (1839). Keshab Chandra Sen took it further, and the movement split.\n\nIshwar Chandra Vidyasagar campaigned for widow remarriage; the Hindu Widows' Remarriage Act was passed in 1856.\n\nIn Bombay, the Prarthana Samaj was founded in 1867 by Atmaram Pandurang, with M.G. Ranade and R.G. Bhandarkar among its leaders. It worked for women's education, widow remarriage and against caste barriers."
+    },
+    {
+     "head": "Revival and new faiths",
+     "body": "Swami Dayanand Saraswati founded the Arya Samaj in Bombay in 1875. His book 'Satyarth Prakash' called for a return to the Vedas, which he saw as the source of truth. The Arya Samaj opposed idol worship, child marriage and caste by birth, ran DAV schools, and started 'shuddhi', reconversion to Hinduism.\n\nSwami Vivekananda, a disciple of Ramakrishna Paramahamsa, founded the Ramakrishna Mission in 1897. He spoke at the Parliament of the World's Religions in Chicago in 1893. The Mission joined spiritual teaching with social service.\n\nThe Theosophical Society was founded in New York in 1875 by Madame Blavatsky and Colonel Olcott, and moved its headquarters to Adyar, near Madras, in 1882. Annie Besant later led it and was active in the Home Rule movement."
+    },
+    {
+     "head": "Muslim, Sikh and Parsi reform",
+     "body": "Sir Syed Ahmad Khan led the Aligarh movement. He founded the Muhammadan Anglo-Oriental College at Aligarh in 1875, which later became Aligarh Muslim University. He urged Muslims to take up modern education.\n\nThe Deoband school, founded in 1866, was a revivalist movement that trained religious scholars on traditional lines. The Ahmadiyya movement was founded by Mirza Ghulam Ahmad in 1889.\n\nAmong Sikhs, the Singh Sabha movement began at Amritsar in 1873. The Akali movement of the 1920s fought to free gurdwaras from corrupt mahants and led to the Sikh Gurdwaras Act, 1925. Among Parsis, the Rahnumai Mazdayasnan Sabha (1851) worked for social reform and women's education."
+    },
+    {
+     "head": "Against caste",
+     "body": "Jyotiba Phule founded the Satyashodhak Samaj in 1873 and wrote 'Gulamgiri' (Slavery). With Savitribai Phule he opened schools for girls and for children of lower castes.\n\nIn Kerala, Sri Narayana Guru led the movement for the Ezhava community; the SNDP Yogam was founded in 1903. The Vaikom Satyagraha (1924-1925) demanded that lower castes be allowed to use the roads near the Vaikom temple.\n\nE.V. Ramasamy (Periyar) started the Self-Respect Movement in 1925. B.R. Ambedkar founded the Bahishkrit Hitakarini Sabha in 1924 and led the Mahad Satyagraha in 1927 for the right to draw water from a public tank.\n\nLaws followed some of these campaigns: the Age of Consent Act, 1891 and the Child Marriage Restraint Act, 1929 (the Sarda Act)."
+    }
+   ],
+   "keyFacts": [
+    "Brahmo Sabha 1828 (Ram Mohan Roy); sati banned 1829 (Bentinck).",
+    "Widow Remarriage Act 1856 (Vidyasagar's campaign).",
+    "Prarthana Samaj 1867 (Atmaram Pandurang); Arya Samaj 1875 (Dayanand); Ramakrishna Mission 1897 (Vivekananda).",
+    "Theosophical Society: New York 1875; Adyar 1882.",
+    "MAO College Aligarh 1875; Deoband 1866; Ahmadiyya 1889; Singh Sabha 1873.",
+    "Satyashodhak Samaj 1873 (Phule); SNDP Yogam 1903; Self-Respect Movement 1925; Mahad Satyagraha 1927.",
+    "Sarda Act (Child Marriage Restraint Act) 1929."
+   ],
+   "examAngle": "Prelims pairs founders, organisations and years. Mains asks how far reform movements were limited to the elite, and how they fed into nationalism.",
+   "selfCheck": [
+    "Who founded the Arya Samaj, and where?",
+    "What was the Vaikom Satyagraha about?",
+    "Which law of 1929 fixed a minimum age for marriage?"
+   ],
+   "sources": [
+    "NCERT Class VIII Our Pasts III, chapters on women, caste and reform",
+    "Bipan Chandra, History of Modern India (Orient BlackSwan)",
+    "Sekhar Bandyopadhyay, From Plassey to Partition (Orient BlackSwan)"
+   ],
+   "verify": "Check every founding year (founding years differ between sources for the Brahmo Samaj, Prarthana Samaj and Singh Sabha), and the dates of the Vaikom Satyagraha.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-constitutional",
+   "title": "Constitutional development under British rule: 1773 to 1947",
+   "nodes": [
+    "gs1-2",
+    "pre-2",
+    "pre-4"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will be able to list each Act from 1773 to 1947 with its main change, and see how they led to the Constitution.",
+   "sections": [
+    {
+     "head": "The Company years",
+     "body": "The Regulating Act, 1773 was the first step by the British Parliament to control the Company. It made the Governor of Bengal the Governor-General of Bengal (Warren Hastings was the first), with a council of four, and provided for a Supreme Court at Calcutta, set up in 1774.\n\nPitt's India Act, 1784 created a Board of Control in London to oversee the Company's political affairs, while the Court of Directors kept commercial matters. This was the 'dual system'.\n\nThe Charter Act, 1813 ended the Company's trade monopoly in India, except for trade in tea and with China, and set aside a sum of one lakh rupees a year for education. The Charter Act, 1833 made the Governor-General of Bengal the Governor-General of India (Lord William Bentinck was the first) and ended the Company's trading role. The Charter Act, 1853 separated the Governor-General's legislative and executive functions and introduced open competition for the civil services."
+    },
+    {
+     "head": "Crown rule and the councils",
+     "body": "The Government of India Act, 1858 transferred power to the Crown after the revolt.\n\nThe Indian Councils Act, 1861 brought some Indians into the legislative council as nominated non-official members, and gave legal backing to Lord Canning's portfolio system. The Indian Councils Act, 1892 allowed members to discuss the budget and ask questions, and introduced indirect election in a limited form.\n\nThe Indian Councils Act, 1909, known as the Morley-Minto Reforms, enlarged the councils and introduced separate electorates for Muslims. Satyendra Prasad Sinha became the first Indian member of the Viceroy's Executive Council."
+    },
+    {
+     "head": "1919 and 1935",
+     "body": "The Government of India Act, 1919, the Montagu-Chelmsford Reforms, introduced dyarchy in the provinces: 'transferred' subjects went to ministers answerable to the legislature, while 'reserved' subjects stayed with the Governor. It made the central legislature bicameral, introduced direct elections on a limited franchise, and extended separate electorates to Sikhs and others. It provided for a statutory commission after ten years, which came as the Simon Commission (1927).\n\nThe Government of India Act, 1935 was long and detailed. It proposed an All-India Federation of provinces and princely states, which never came into being because the princes did not join. It ended dyarchy in the provinces and gave them autonomy, and proposed dyarchy at the centre, which never worked. It divided powers into three lists (federal, provincial and concurrent), set up a Federal Court (1937), and provided for the Reserve Bank of India. Much of the Constitution's administrative structure comes from this Act."
+    },
+    {
+     "head": "Independence",
+     "body": "The Indian Independence Act, 1947, passed by the British Parliament and given assent on 18 July 1947, ended British rule from 15 August 1947. It created two dominions, India and Pakistan, with the right to leave the Commonwealth. It made the Constituent Assemblies sovereign, and ended the British Crown's paramountcy over the princely states.\n\nThe Constituent Assembly then acted both as a constitution-making body and as the dominion legislature until the Constitution came into force on 26 January 1950."
+    }
+   ],
+   "keyFacts": [
+    "Regulating Act 1773: Governor-General of Bengal (Hastings); Supreme Court at Calcutta (1774).",
+    "Pitt's India Act 1784: Board of Control; dual system.",
+    "Charter Act 1813: trade monopoly ended except tea and China; ₹1 lakh for education.",
+    "Charter Act 1833: Governor-General of India (Bentinck); 1853: open competition for civil services.",
+    "Indian Councils Acts 1861, 1892, 1909 (separate electorates for Muslims).",
+    "GoI Act 1919: provincial dyarchy; bicameral centre. GoI Act 1935: provincial autonomy, three lists, Federal Court.",
+    "Indian Independence Act: assent 18 July 1947."
+   ],
+   "examAngle": "Prelims asks which Act did what: first Governor-General of India, separate electorates, dyarchy, three lists. Mains asks how far the 1935 Act shaped the Constitution.",
+   "selfCheck": [
+    "Which Act made the Governor-General of Bengal the Governor-General of India?",
+    "What was dyarchy, and under which Act was it introduced in the provinces?",
+    "Why did the All-India Federation of 1935 never come into being?"
+   ],
+   "sources": [
+    "NCERT Class XI Indian Constitution at Work, Chapter 1",
+    "M. Laxmikanth, Indian Polity, chapter on historical background (McGraw Hill)",
+    "Bipan Chandra, History of Modern India (Orient BlackSwan)"
+   ],
+   "verify": "Check the assent date of the Indian Independence Act and the Supreme Court at Calcutta's founding year (1774).",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-early-nationalism",
+   "title": "Early nationalism: the Congress, Moderates, Extremists and Swadeshi",
+   "nodes": [
+    "gs1-3",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will know how the Congress began, what the Moderates and Extremists wanted, and how Swadeshi changed the movement.",
+   "sections": [
+    {
+     "head": "Before the Congress",
+     "body": "Political associations came first. The Landholders' Society (1838) and the British Indian Association (1851) represented landed interests in Bengal. Dadabhai Naoroji founded the East India Association in London in 1866. The Poona Sarvajanik Sabha began in 1870. The Indian Association of Calcutta, founded in 1876 by Surendranath Banerjea and Anandamohan Bose, campaigned on civil service exams and the press. The Madras Mahajan Sabha followed in 1884.\n\nThe Indian National Congress held its first session in Bombay in December 1885, with 72 delegates. W.C. Bonnerjee presided. A.O. Hume, a retired British civil servant, helped found it. The 'safety valve' theory says the British wanted the Congress as an outlet for discontent; most historians today see it as the work of Indians who used Hume as a 'lightning conductor'."
+    },
+    {
+     "head": "The Moderates, 1885-1905",
+     "body": "The early leaders, among them Dadabhai Naoroji, Pherozeshah Mehta, Gopal Krishna Gokhale and Surendranath Banerjea, believed in British justice. They used petitions, resolutions and speeches.\n\nTheir biggest contribution was the economic critique of colonial rule. Naoroji's 'Poverty and Un-British Rule in India' set out the drain theory: Britain was taking India's wealth through home charges, salaries and profits. R.C. Dutt's 'Economic History of India' made a similar case.\n\nThey asked for more Indians in the councils, simultaneous civil service exams in India and England, lower military spending and less land revenue. Their methods won little, but they built a national public opinion."
+    },
+    {
+     "head": "Partition and Swadeshi",
+     "body": "Lord Curzon announced the partition of Bengal in July 1905; it came into effect on 16 October 1905. The official reason was administrative convenience; nationalists saw an attempt to divide Bengali Hindus and Muslims and weaken Bengal's politics.\n\nThe Swadeshi movement was formally launched with the boycott resolution at the Calcutta Town Hall on 7 August 1905. People boycotted British goods, burnt foreign cloth, and set up swadeshi industries and national schools such as the Bengal National College. Rabindranath Tagore wrote songs for the movement, and 16 October was observed as a day of mourning, with people tying rakhis to each other.\n\nThe 'Extremists', led by Lala Lajpat Rai, Bal Gangadhar Tilak and Bipin Chandra Pal (Lal-Bal-Pal) with Aurobindo Ghosh, wanted swaraj and mass action. The Congress split at Surat in 1907. The All-India Muslim League was founded at Dacca in 1906. The partition was annulled in 1911, and the capital moved from Calcutta to Delhi."
+    },
+    {
+     "head": "Revolutionaries, Home Rule and Lucknow",
+     "body": "Revolutionary groups such as the Anushilan Samiti and Jugantar grew in Bengal. In 1908 Khudiram Bose and Prafulla Chaki threw a bomb at a carriage in Muzaffarpur. The Ghadar Party was founded on the Pacific coast of the United States in 1913, with Lala Har Dayal among its leaders.\n\nTwo Home Rule Leagues began in 1916: Tilak's in April, working in Maharashtra and Karnataka, and Annie Besant's in September, across the rest of India.\n\nAt Lucknow in 1916 the Moderates and Extremists reunited, and the Congress and the Muslim League signed the Lucknow Pact. The Congress accepted separate electorates for Muslims in return for joint demands for self-government."
+    }
+   ],
+   "keyFacts": [
+    "East India Association 1866 (London, Naoroji); Indian Association 1876 (Banerjea, A.M. Bose).",
+    "First Congress: Bombay, December 1885; 72 delegates; W.C. Bonnerjee presided.",
+    "Partition of Bengal: effective 16 October 1905; boycott resolution 7 August 1905.",
+    "Surat split 1907; Muslim League founded at Dacca 1906; partition annulled 1911.",
+    "Ghadar Party 1913; Home Rule Leagues 1916 (Tilak April, Besant September).",
+    "Lucknow Pact 1916: Congress-League pact; Moderates and Extremists reunited."
+   ],
+   "examAngle": "Prelims asks founders and years of associations, the sequence 1905-1916, and who led which Home Rule League. Mains asks about the Moderates' contribution and the methods of the Swadeshi movement.",
+   "selfCheck": [
+    "What was the drain theory, and who put it forward?",
+    "Why did the Congress split at Surat?",
+    "What did the Congress accept in the Lucknow Pact?"
+   ],
+   "sources": [
+    "NCERT Class VIII Our Pasts III, chapter on the making of the national movement",
+    "Bipan Chandra et al., India's Struggle for Independence (Penguin)",
+    "Spectrum, A Brief History of Modern India (for chronology)"
+   ],
+   "verify": "Check the dates of the boycott resolution and partition, and the months of the two Home Rule Leagues.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-gandhian",
+   "title": "The Gandhian phase of the freedom struggle, 1917-1934: a timeline",
+   "nodes": [
+    "gs1-3",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will have the Gandhian movements from Champaran to the Poona Pact in order, with what each one won.",
+   "sections": [
+    {
+     "head": "First experiments, 1917-1918",
+     "body": "Gandhi returned from South Africa in January 1915. His first satyagrahas in India were local.\n\nAt Champaran in Bihar (1917), he took up the cause of peasants forced by European planters to grow indigo under the tinkathia system. At Ahmedabad (1918), he supported mill workers in a wage dispute and went on his first hunger strike in India. At Kheda in Gujarat (1918), he backed peasants who could not pay revenue after crop failure; Vallabhbhai Patel joined him here.\n\nThese campaigns made Gandhi known as a leader who could mobilise peasants and workers."
+    },
+    {
+     "head": "Rowlatt, Jallianwala and Non-Cooperation",
+     "body": "The Rowlatt Act of March 1919 allowed detention without trial. Gandhi called a nationwide satyagraha in April 1919. On 13 April 1919, General Dyer's troops fired on an unarmed crowd at Jallianwala Bagh in Amritsar, killing hundreds. Tagore gave up his knighthood in protest. The Government's Hunter Committee inquired into the events.\n\nThe Non-Cooperation Movement, joined with the Khilafat movement, began on 1 August 1920 and was approved at the Calcutta special session (September 1920) and the Nagpur session (December 1920). People returned titles, boycotted schools, courts, councils and foreign cloth, and took up khadi.\n\nAfter a crowd burnt a police station at Chauri Chaura on 5 February 1922, Gandhi withdrew the movement. The Swaraj Party, formed in 1923 by C.R. Das and Motilal Nehru, then contested council elections to oppose the Government from within."
+    },
+    {
+     "head": "Simon, Purna Swaraj and the Salt March",
+     "body": "The Simon Commission, appointed in 1927 with no Indian member, was met with 'Simon Go Back' protests in 1928. Lala Lajpat Rai died after a police lathi charge in Lahore. The Nehru Report (1928) proposed dominion status.\n\nAt the Lahore session in December 1929, under Jawaharlal Nehru, the Congress adopted Purna Swaraj, complete independence, as its goal. 26 January 1930 was celebrated as Independence Day.\n\nThe Civil Disobedience Movement began with the Salt March from Sabarmati to Dandi, from 12 March to 6 April 1930. Salt laws were broken across India. In the North-West Frontier, Khan Abdul Ghaffar Khan's Khudai Khidmatgars joined the movement."
+    },
+    {
+     "head": "Pact, conference and Poona",
+     "body": "The Gandhi-Irwin Pact of March 1931 suspended civil disobedience; the Government agreed to release prisoners not convicted of violence. The Karachi session of 1931, under Vallabhbhai Patel, passed resolutions on Fundamental Rights and economic policy.\n\nGandhi was the Congress's only representative at the Second Round Table Conference in London (September to December 1931), which failed. Civil disobedience resumed in 1932.\n\nThe Communal Award of August 1932, announced by Ramsay MacDonald, gave separate electorates to the depressed classes. Gandhi began a fast against it in Yerawada jail. The Poona Pact of September 1932 between Gandhi and B.R. Ambedkar replaced separate electorates with reserved seats for the depressed classes within a joint electorate. The movement was formally withdrawn in 1934."
+    }
+   ],
+   "keyFacts": [
+    "Champaran 1917 (indigo); Ahmedabad 1918 (mill workers, first hunger strike); Kheda 1918.",
+    "Rowlatt Act March 1919; Jallianwala Bagh 13 April 1919.",
+    "Non-Cooperation from 1 August 1920; withdrawn after Chauri Chaura (5 February 1922).",
+    "Swaraj Party 1923 (C.R. Das, Motilal Nehru).",
+    "Lahore session December 1929: Purna Swaraj; 26 January 1930 Independence Day.",
+    "Salt March 12 March - 6 April 1930; Gandhi-Irwin Pact March 1931.",
+    "Communal Award August 1932; Poona Pact September 1932."
+   ],
+   "examAngle": "Prelims asks the order of events, who presided over which session, and what each pact said. Mains asks how Gandhi turned the Congress into a mass movement and why he withdrew movements when he did.",
+   "selfCheck": [
+    "Why did Gandhi withdraw the Non-Cooperation Movement?",
+    "What did the Lahore session of 1929 decide?",
+    "What did the Poona Pact replace separate electorates with?"
+   ],
+   "sources": [
+    "NCERT Class XII Themes in Indian History Part III, 'Mahatma Gandhi and the Nationalist Movement'",
+    "NCERT Class X India and the Contemporary World II, 'Nationalism in India'",
+    "Bipan Chandra et al., India's Struggle for Independence (Penguin)"
+   ],
+   "verify": "Overlaps the existing long read his-gandhian-mass-movements: the editor may approve only one. Check all dates, especially the start of Non-Cooperation and the Gandhi-Irwin Pact.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-towards-freedom",
+   "title": "Towards freedom: Quit India, the INA and the transfer of power, 1935-1947",
+   "nodes": [
+    "gs1-3",
+    "gs1-4",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will have the last decade of the freedom struggle in order: ministries, war, Quit India, the INA and the road to partition.",
+   "sections": [
+    {
+     "head": "Ministries and war, 1937-1941",
+     "body": "Elections under the 1935 Act were held in early 1937. The Congress won a majority in most provinces and formed ministries. In October 1939, after the Viceroy declared India at war with Germany without consulting Indians, the Congress ministries resigned. The Muslim League marked their exit as a 'Day of Deliverance'.\n\nIn March 1940 the League passed the Lahore Resolution, calling for independent states in the Muslim-majority areas; it came to be called the Pakistan Resolution. The August Offer of 1940 promised dominion status after the war. The Congress rejected it, and Gandhi launched individual satyagraha in October 1940; Vinoba Bhave was the first satyagrahi."
+    },
+    {
+     "head": "Cripps and Quit India",
+     "body": "The Cripps Mission came in March 1942. It offered dominion status after the war, with the right of provinces to stay out of the new union. Gandhi is said to have called it a 'post-dated cheque'. It failed.\n\nThe Quit India resolution was passed in Bombay on 8 August 1942, at the Gowalia Tank maidan. Gandhi gave the call 'Do or Die'. The top leaders were arrested early the next morning. With them in jail, the movement was led by younger leaders and by people themselves: strikes, attacks on railways and telegraph lines, and underground work. Aruna Asaf Ali hoisted the flag at Gowalia Tank; Usha Mehta ran an underground Congress radio; Jayaprakash Narayan and Ram Manohar Lohia were active underground.\n\nParallel governments were set up in Ballia (under Chittu Pandey), Tamluk in Midnapore (the Tamralipta Jatiya Sarkar) and Satara (the Prati Sarkar)."
+    },
+    {
+     "head": "Bose and the INA",
+     "body": "The Indian National Army was first organised by Mohan Singh, with Indian prisoners of war captured by Japan. Subhas Chandra Bose took over in 1943 in Singapore, and formed the Provisional Government of Free India on 21 October 1943. His call was 'Delhi Chalo'. The INA fought alongside the Japanese on the Burma front, including in Manipur, but retreated with the Japanese defeat.\n\nThe INA trials at the Red Fort in late 1945 of Shah Nawaz Khan, Prem Sahgal and Gurbaksh Singh Dhillon caused a nationwide wave of support. Bhulabhai Desai, Tej Bahadur Sapru and Jawaharlal Nehru were among the defence lawyers. In February 1946 ratings of the Royal Indian Navy mutinied in Bombay. Both showed the British that the loyalty of Indian forces could no longer be assumed."
+    },
+    {
+     "head": "The transfer of power",
+     "body": "The Wavell Plan and the Simla Conference (June 1945) failed over the League's claim to name all Muslim members. The Cabinet Mission (March to June 1946) proposed a loose union with grouping of provinces and a Constituent Assembly. The League called for 'Direct Action' on 16 August 1946, which led to communal killings in Calcutta. An interim government led by Nehru took office in September 1946.\n\nOn 20 February 1947, British Prime Minister Attlee announced that Britain would leave India by June 1948. Lord Mountbatten's plan of 3 June 1947 provided for partition, and the date was brought forward. The Indian Independence Act gave effect to it, and India became independent on 15 August 1947. Cyril Radcliffe drew the boundaries in Punjab and Bengal."
+    }
+   ],
+   "keyFacts": [
+    "Congress ministries resigned October-November 1939; League's 'Day of Deliverance', December 1939.",
+    "Lahore (Pakistan) Resolution: March 1940; August Offer 1940; individual satyagraha October 1940 (Vinoba Bhave first).",
+    "Cripps Mission March 1942; Quit India resolution 8 August 1942 at Gowalia Tank.",
+    "Parallel governments: Ballia, Tamluk, Satara.",
+    "Provisional Government of Free India: 21 October 1943, Singapore.",
+    "INA trials late 1945; RIN mutiny February 1946.",
+    "Cabinet Mission 1946; Direct Action Day 16 August 1946; Attlee's statement 20 February 1947; Mountbatten Plan 3 June 1947."
+   ],
+   "examAngle": "Prelims asks the order of missions and plans, who led parallel governments, and what each plan offered. Mains asks why the British left in 1947 and why partition happened.",
+   "selfCheck": [
+    "Why did the Congress ministries resign in 1939?",
+    "What did the Cripps Mission offer, and why was it rejected?",
+    "Name two events of 1945-1946 that showed the British the forces' loyalty was slipping."
+   ],
+   "sources": [
+    "NCERT Class XII Themes in Indian History Part III, 'Understanding Partition' and 'Mahatma Gandhi and the Nationalist Movement'",
+    "Bipan Chandra et al., India's Struggle for Independence (Penguin)",
+    "Sekhar Bandyopadhyay, From Plassey to Partition (Orient BlackSwan)"
+   ],
+   "verify": "Check the dates of the ministries' resignation, the August Offer, and the Provisional Government, and the names of the three INA officers tried.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  },
+  {
+   "id": "his-syl-consolidation",
+   "title": "After 1947: partition, integration of princely states and states reorganisation",
+   "nodes": [
+    "gs1-4",
+    "pre-2"
+   ],
+   "gsPaper": "GS1",
+   "minutes": 9,
+   "dek": "By the end, you will know how the princely states joined India, how the map was redrawn on linguistic lines, and the other tasks of the first years.",
+   "sections": [
+    {
+     "head": "Partition and its aftermath",
+     "body": "Partition in August 1947 led to one of the largest migrations in history. Millions crossed the new borders in Punjab and Bengal, and very large numbers were killed in communal violence. Gandhi was assassinated on 30 January 1948.\n\nRefugee rehabilitation was the new state's first huge task. The Government set up camps, gave land and loans, and built new towns, such as Faridabad and the Nilokheri settlement. The scars of partition shaped Indian politics for decades."
+    },
+    {
+     "head": "Integrating the princely states",
+     "body": "When the British left, there were over 500 princely states. The States Department, led by Vallabhbhai Patel with V.P. Menon as secretary, persuaded almost all rulers to sign an Instrument of Accession before 15 August 1947. At first they ceded only defence, external affairs and communications. A Standstill Agreement kept existing arrangements going.\n\nThree states held out. Junagadh's Nawab acceded to Pakistan; after unrest, a plebiscite in February 1948 went overwhelmingly for India. Hyderabad's Nizam sought independence; Indian forces moved in under 'Operation Polo' in September 1948. Kashmir's Maharaja Hari Singh signed the Instrument of Accession on 26 October 1947, after an invasion by tribesmen from Pakistan.\n\nManipur's ruler signed a merger agreement in September 1949. French settlements came back peacefully: Chandernagore after a referendum, and Pondicherry with the de facto transfer of 1954. Portugal's Goa, Daman and Diu were taken in December 1961. Sikkim became a state in 1975 by the 36th Amendment."
+    },
+    {
+     "head": "Linguistic states",
+     "body": "The Congress had promised linguistic provinces since the 1920s, but after partition the leaders feared further division. The Dhar Commission (1948) advised against linguistic states, and the JVP Committee (Jawaharlal Nehru, Vallabhbhai Patel and Pattabhi Sitaramayya) advised waiting.\n\nPotti Sriramulu died on 15 December 1952 after a long fast for a Telugu state. Andhra State was formed on 1 October 1953.\n\nThe States Reorganisation Commission, headed by Fazl Ali with K.M. Panikkar and H.N. Kunzru as members, reported in 1955. The States Reorganisation Act, 1956 created 14 states and 6 Union Territories, and the Seventh Amendment (1956) ended the old classification into Part A, B, C and D states. Bombay was split into Maharashtra and Gujarat in 1960; Nagaland became a state in 1963; Punjab was divided in 1966 to create Haryana."
+    },
+    {
+     "head": "Other foundations",
+     "body": "Besides the map, the early years laid down the institutions. The Constitution came into force on 26 January 1950. The Planning Commission was set up in March 1950, and the First Five Year Plan began in 1951. The first general elections were held in 1951-1952, on universal adult franchise.\n\nStates abolished zamindari and passed land reform laws. In foreign policy, India chose non-alignment. Historians often point out that India held together and stayed democratic, despite partition, poverty and great diversity, while many newly independent countries did not."
+    }
+   ],
+   "keyFacts": [
+    "States Department: Patel, with V.P. Menon as secretary; Instrument of Accession (defence, external affairs, communications).",
+    "Junagadh plebiscite February 1948; Hyderabad 'Operation Polo' September 1948; Kashmir accession 26 October 1947.",
+    "Goa, Daman and Diu: December 1961; Sikkim: 36th Amendment, 1975.",
+    "Potti Sriramulu died 15 December 1952; Andhra State 1 October 1953.",
+    "SRC: Fazl Ali, K.M. Panikkar, H.N. Kunzru; report 1955.",
+    "States Reorganisation Act 1956: 14 states, 6 UTs; Seventh Amendment 1956.",
+    "Maharashtra and Gujarat 1960; Nagaland 1963; Haryana 1966."
+   ],
+   "examAngle": "Prelims asks the order of states' creation, the SRC's members, and how each holdout state joined. Mains asks whether linguistic states strengthened or weakened national unity.",
+   "selfCheck": [
+    "Which three subjects did rulers first cede under the Instrument of Accession?",
+    "What led to the creation of Andhra State?",
+    "What did the Seventh Amendment of 1956 abolish?"
+   ],
+   "sources": [
+    "NCERT Class XII Politics in India since Independence, Chapter 1 (Challenges of Nation Building)",
+    "Bipan Chandra et al., India since Independence (Penguin)",
+    "V.P. Menon, The Story of the Integration of the Indian States"
+   ],
+   "verify": "Check the number of princely states (sources differ between about 550 and 565), the Manipur merger date, and the year each French settlement came to India.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2028-11-12",
+    "recheckWhen": "Settled material; recheck only against a new NCERT edition or a change in the bare text cited"
+   }
+  }
+ ]
 }

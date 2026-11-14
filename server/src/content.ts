@@ -969,7 +969,11 @@ export function checkTopicPath(d: any): string[] {
 
 /** The brief asks writers to list every fact that needs checking against a source; the editor clears them. */
 function factFlags(d: any): string[] {
-  const facts: string[] = Array.isArray(d.factsToCheck) ? d.factsToCheck.map(String) : [];
+  // Older packs list plain strings; newer ones list {claim, source, url, opened, status}. Unverified ones go first.
+  const one = (f: any) => typeof f === "string" ? f
+    : [f?.claim, f?.status === "unverified" ? "(unverified)" : f?.source ? `(source: ${f.source})` : null].filter(Boolean).join(" ") || JSON.stringify(f);
+  const list: any[] = Array.isArray(d.factsToCheck) ? d.factsToCheck : [];
+  const facts: string[] = [...list.filter((f) => f?.status === "unverified"), ...list.filter((f) => f?.status !== "unverified")].map(one);
   return facts.length ? [`${facts.length > 1 ? `Check these ${facts.length} facts` : "Check this fact"} against a source before approving: ${facts.join("; ")}`.slice(0, 600)] : [];
 }
 

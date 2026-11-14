@@ -1,0 +1,113 @@
+{
+ "batch": "G1",
+ "made": "2026-11-12",
+ "model": "Claude Fable 5.2",
+ "checkedBy": "Claude Sonnet (second read of all 52 edits against the cited sources)",
+ "files": [
+  {
+   "path": "syllabus/polity-1.json",
+   "id": "pol",
+   "items": 8
+  },
+  {
+   "path": "syllabus/polity-2.json",
+   "id": "pol",
+   "items": 8
+  },
+  {
+   "path": "syllabus/economy.json",
+   "id": "eco",
+   "items": 8
+  },
+  {
+   "path": "syllabus/governance.json",
+   "id": "pol",
+   "items": 8
+  },
+  {
+   "path": "syllabus/international-relations.json",
+   "id": "ir",
+   "items": 6
+  },
+  {
+   "path": "syllabus/environment.json",
+   "id": "env",
+   "items": 6
+  },
+  {
+   "path": "syllabus/science-technology.json",
+   "id": "sci",
+   "items": 8
+  },
+  {
+   "path": "syllabus/internal-security.json",
+   "id": "sec",
+   "items": 6
+  },
+  {
+   "path": "syllabus/geography.json",
+   "id": "geo",
+   "items": 8
+  },
+  {
+   "path": "syllabus/society.json",
+   "id": "soc",
+   "items": 4
+  },
+  {
+   "path": "syllabus/modern-history.json",
+   "id": "his",
+   "items": 8
+  },
+  {
+   "path": "syllabus/ancient-medieval-culture.json",
+   "id": "anc",
+   "items": 8
+  },
+  {
+   "path": "syllabus/world-history.json",
+   "id": "his",
+   "items": 4
+  },
+  {
+   "path": "syllabus/ethics.json",
+   "id": "eth",
+   "items": 8
+  },
+  {
+   "path": "checks/G1-changes.md",
+   "id": "g1-changes",
+   "items": 52
+  }
+ ],
+ "counts": {
+  "notes": 98,
+  "notesWithTextChanged": 23,
+  "edits": 52,
+  "factsVerified": 16,
+  "factsUnverified": 88,
+  "factsNotRechecked": 798,
+  "notesWithoutHindi": 30
+ },
+ "unverifiedFacts": 88,
+ "secondRead": {
+  "editsFullyConfirmed": 29,
+  "editsPartlyConfirmed": 22,
+  "editsNotCheckable": 1,
+  "note": "Counts are from the second read, before fixes. After it, these wordings were tightened to what the sources say: the Election Commissioners Act referral (the order places the papers before the Chief Justice; it does not itself send the case to five judges), the coastline line (a claim that no land was added was removed), the NDC approval date, the trade agreements with New Zealand and the EU, the seismic map and the Indus Waters Treaty lines. The SHANTI entries were downgraded from verified to unverified. The one edit not checkable is pol-syl-state-executive."
+ },
+ "openQuestions": [
+  "factsToCheck is now a list of objects (claim, source, url, opened, status) as the brief asks. The existing notes and the sample note use plain strings, so please confirm the importer accepts objects.",
+  "Three status values are used. verified: the primary source at the url was opened on 12 November 2026. unverified: a time-sensitive claim whose primary source could not be opened; where a url is given it is the secondary report the wording rests on. not-rechecked: the 798 settled lines carried over from the old factsToCheck lists (articles, dates, textbook facts), which were read for consistency but not reopened one by one in G1.",
+  "30 notes have no Hindi at all: every note in economy.json, environment.json, geography.json and modern-history.json. G1 corrected their English only and did not translate them. Please say whether Hindi for these 30 should be a batch of its own.",
+  "pol-syl-state-executive: the new wording on Article 200 rests on reports of the Supreme Court's opinion of 20 November 2025 (2025 INSC 1333). The opinion itself was not opened and the second reader could not confirm the wording from the cited page. Please check this note against the opinion before it ships.",
+  "Other unverified changes that need an owner check: Supreme Court strength of 38 (Gazette not opened); the Tribunals Reforms Act ruling of 19 November 2025; the inflation target for 2026 to 2031; iron ore as a ninth core industry and the July 2026 release; BRICS membership and joining years (Saudi Arabia is left out of the note because sources differ); the re-measured coastline of about 11,099 km; the Disaster Management (Amendment) Act, 2025; the Indus Waters Treaty status; the seismic zone map; MAHASAGAR; the Ganga Water Treaty expiry date.",
+  "The SHANTI Act: the PIB note opened is about the Bill. Passage and assent are from news reports and the commencement date was not found, so the notes say 'passed in December 2025' and ask the reader to check the date in force.",
+  "The award period 2026 to 2031 for the 16th Finance Commission is taken from the brief. The Budget speech confirms the report date (17 November 2025) and the 41 per cent share but does not state the period.",
+  "IIP base 2022-23: the press note opened was issued before the launch set for 1 June 2026; the launch release was not opened.",
+  "eco-syl-employment: the line that one-third of MGNREGA workers should be women was removed with the repeal. Whether the VB-G RAM G Act keeps a similar share was not checked.",
+  "Blind solving: G1 adds no new questions. The two selfCheck prompts that were reworded (eco-syl-industry-infra, eco-syl-employment) can be answered from the note text.",
+  "tools/check.py stops with FileNotFoundError when interview/personas.json is absent, before it prints issues. It was run on a copy of this folder with an empty personas stub: the 14 syllabus files have zero issues. It reports the manifest itself as missing id, version, tone, factsToCheck and review, because it treats every json outside syllabus/ as content.",
+  "env-syl-climate has recheckBy 2026-12-15 because COP31 falls in November 2026, and ir-syl-bilateral-neighbours has 2026-12-31 because the Ganga Water Treaty's 30 years end on 12 December 2026."
+ ]
+}

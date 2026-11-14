@@ -1,346 +1,734 @@
 {
-  "schema": "upsc-pods/syllabus-notes@1",
-  "subject": "eco",
-  "topic": "Economy",
-  "note": "One note per major Economy topic of the syllabus. English only. Drafts: an editor checks every figure and date before approving. Pack with server/scripts/syllabus.mjs.",
-  "notes": [
+ "schema": "upsc-pods/syllabus-notes@1",
+ "subject": "eco",
+ "topic": "Economy",
+ "note": "One note per major Economy topic of the syllabus. English only. Drafts: an editor checks every figure and date before approving. Pack with server/scripts/syllabus.mjs.",
+ "notes": [
+  {
+   "id": "eco-syl-national-income",
+   "title": "Measuring growth: GDP, GVA and national income",
+   "nodes": [
+    "gs3-1",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 8,
+   "dek": "By the end, you will know what GDP and GVA measure, how India estimates them, and what they leave out.",
+   "sections": [
     {
-      "id": "eco-syl-national-income",
-      "title": "Measuring growth: GDP, GVA and national income",
-      "nodes": ["gs3-1", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 8,
-      "dek": "By the end, you will know what GDP and GVA measure, how India estimates them, and what they leave out.",
-      "sections": [
-        {
-          "head": "What GDP counts",
-          "body": "Gross Domestic Product (GDP) is the market value of all final goods and services produced within a country's borders in a given period, usually a year or a quarter. Only final goods count. Counting the steel and then the car made from it would count the steel twice.\n\nGross National Product (GNP) adds net factor income from abroad: what Indians earn abroad minus what foreigners earn in India. Net National Product (NNP) is GNP minus depreciation, the wear and tear of machines and buildings. National income, in the textbook sense, is NNP at factor cost.\n\nNominal GDP uses the prices of the year itself. Real GDP uses the prices of a fixed base year, so it shows how much more was produced, not how much prices rose. The GDP deflator is nominal GDP divided by real GDP, times 100. It is a broad measure of inflation because it covers everything produced, not a fixed basket."
-        },
-        {
-          "head": "GVA and the 2011-12 series",
-          "body": "In January 2015 the Central Statistics Office moved the national accounts to a new base year, 2011-12, from 2004-05. It also changed the method, following the UN System of National Accounts 2008.\n\nTwo changes matter for the exam. First, sectoral growth is now measured as Gross Value Added (GVA) at basic prices. Second, headline GDP is built from GVA: GDP at market prices equals GVA at basic prices plus product taxes minus product subsidies.\n\nThe estimates come from the National Statistics Office (NSO), under the Ministry of Statistics and Programme Implementation (MoSPI). The NSO was formed in 2019 by merging the Central Statistics Office and the National Sample Survey Office. A newer series with a more recent base year has been in preparation; check which base year is current before you write it in an answer."
-        },
-        {
-          "head": "Three ways to the same number",
-          "body": "GDP can be measured three ways, and in principle they give the same figure.\n\nThe production method adds the value added by every sector: agriculture, industry and services. The income method adds what the factors of production earn: wages, rent, interest and profit. The expenditure method adds what is spent on final goods: private consumption, investment, government spending and net exports (C + I + G + X − M).\n\nIn India, private final consumption expenditure is the largest part of GDP by expenditure, and services are the largest part of GVA by sector. Agriculture's share of GVA is small, but it employs a much larger share of workers. That gap is the core of many Mains questions on jobs and productivity."
-        },
-        {
-          "head": "What GDP misses",
-          "body": "GDP is a measure of output, not of welfare. It leaves out unpaid work at home, most of which women do. It captures the informal sector only through estimates. It counts the timber from a felled forest but not the loss of the forest. It says nothing about how income is shared.\n\nOther measures fill some of these gaps. The Human Development Index of the UNDP combines life expectancy, education and income per head. Green GDP tries to subtract the cost of environmental damage. Multidimensional poverty indices look at health, education and living standards together.\n\nPer capita income, GDP divided by population, is a better guide to average living standards than total GDP. Purchasing power parity (PPP) comparisons adjust for the fact that money buys more in some countries than in others."
-        }
-      ],
-      "keyFacts": [
-        "GDP at market prices = GVA at basic prices + product taxes − product subsidies.",
-        "GNP = GDP + net factor income from abroad; NNP = GNP − depreciation.",
-        "Base year 2011-12 since the January 2015 revision; the method follows the UN SNA 2008.",
-        "The NSO under MoSPI was formed in 2019 by merging the CSO and the NSSO.",
-        "GDP deflator = nominal GDP ÷ real GDP × 100.",
-        "The HDI (UNDP) combines health, education and income."
-      ],
-      "examAngle": "Prelims asks for definitions: GDP vs GNP, factor cost vs market prices, what the deflator covers. Mains asks why GDP growth may not mean better lives, and about the gap between agriculture's share of output and its share of jobs.",
-      "selfCheck": [
-        "Why does GDP count only final goods?",
-        "How do you get from GVA at basic prices to GDP at market prices?",
-        "Name two things GDP leaves out and one measure that tries to include them."
-      ],
-      "sources": ["NCERT Class XII Introductory Macroeconomics, Chapter 2 (National Income Accounting)", "MoSPI, National Accounts Statistics (mospi.gov.in)", "Economic Survey, Ministry of Finance (indiabudget.gov.in)"],
-      "verify": "Check the current base year of the national accounts (a new series was in preparation) and the NSO's formation year. No growth figures are quoted on purpose."
+     "head": "What GDP counts",
+     "body": "Gross Domestic Product (GDP) is the market value of all final goods and services produced within a country's borders in a given period, usually a year or a quarter. Only final goods count. Counting the steel and then the car made from it would count the steel twice.\n\nGross National Product (GNP) adds net factor income from abroad: what Indians earn abroad minus what foreigners earn in India. Net National Product (NNP) is GNP minus depreciation, the wear and tear of machines and buildings. National income, in the textbook sense, is NNP at factor cost.\n\nNominal GDP uses the prices of the year itself. Real GDP uses the prices of a fixed base year, so it shows how much more was produced, not how much prices rose. The GDP deflator is nominal GDP divided by real GDP, times 100. It is a broad measure of inflation because it covers everything produced, not a fixed basket."
     },
     {
-      "id": "eco-syl-inflation",
-      "title": "Inflation and monetary policy: how India measures prices and how the RBI targets them",
-      "nodes": ["gs3-1", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 9,
-      "dek": "By the end, you will know CPI from WPI, the kinds of inflation, the inflation-targeting law and the RBI's tools.",
-      "sections": [
-        {
-          "head": "Two price indices",
-          "body": "India has two main measures of inflation. The Consumer Price Index (CPI) tracks the prices households pay. The NSO publishes CPI-Rural, CPI-Urban and CPI-Combined; the series has used 2012 as its base year. Food has a large weight in the CPI, close to half of the basket, which is why vegetable and pulse prices move headline inflation so much.\n\nThe Wholesale Price Index (WPI) tracks prices at the wholesale level. The Office of the Economic Adviser in the Department for Promotion of Industry and Internal Trade (DPIIT) publishes it, with base year 2011-12. The WPI has no services in it.\n\nSince 2014 the RBI has used CPI-Combined, not WPI, as its main measure. Core inflation is headline inflation without food and fuel, the most volatile items. A revised CPI series with a newer base year has been in preparation; check which series is current."
-        },
-        {
-          "head": "Kinds of inflation",
-          "body": "Demand-pull inflation happens when demand runs ahead of what the economy can supply. Cost-push inflation happens when costs rise, for example when oil prices jump or a bad monsoon cuts food supply.\n\nStagflation is high inflation together with slow growth and high unemployment, as many countries saw in the 1970s oil shocks. Disinflation is a fall in the rate of inflation: prices still rise, only more slowly. Deflation is a fall in the price level itself. Deflation can be harmful because people delay spending and the real burden of debt rises.\n\nInflation hurts people on fixed incomes and savers most. It helps borrowers, because they repay in money that is worth less. That is why it is often called a hidden tax on the poor."
-        },
-        {
-          "head": "The inflation-targeting law",
-          "body": "In 2016 the Finance Act amended the Reserve Bank of India Act, 1934. The amended preamble says the primary objective of monetary policy is price stability, while keeping in mind the objective of growth.\n\nUnder Section 45ZA, the Government, in consultation with the RBI, sets the inflation target once every five years. The target has been 4 per cent CPI inflation, with a tolerance band of 2 per cent on either side, so 2 to 6 per cent. It was first set for August 2016 to March 2021 and retained for April 2021 to March 2026.\n\nThe RBI fails the target if average inflation stays outside the band for three consecutive quarters. It must then write to the Government explaining why, what it will do, and how long it expects to take.\n\nThe Monetary Policy Committee (MPC) sets the policy repo rate. It has six members: three from the RBI, including the Governor, who chairs it, and three external members appointed by the Government for four years. It meets at least four times a year. The Governor has a casting vote in a tie."
-        },
-        {
-          "head": "The RBI's tools",
-          "body": "The repo rate is the rate at which the RBI lends to banks overnight against government securities. It is the policy rate. The Standing Deposit Facility (SDF), introduced in April 2022, is the rate at which the RBI absorbs surplus money from banks without giving securities; it is the floor of the corridor. The Marginal Standing Facility (MSF) lets banks borrow overnight above the repo rate in an emergency; it is the ceiling. The Bank Rate is aligned with the MSF rate.\n\nThe Cash Reserve Ratio (CRR) is the share of a bank's net demand and time liabilities kept with the RBI as cash. Banks earn no interest on it. The Statutory Liquidity Ratio (SLR) is the share banks must keep in safe liquid assets, such as government securities, gold and cash.\n\nOpen Market Operations (OMOs) are the RBI's purchases and sales of government securities. Buying adds money to the system; selling takes it out. Rate changes reach borrowers only slowly, so the RBI has pushed banks to link loan rates to external benchmarks such as the repo rate."
-        }
-      ],
-      "keyFacts": [
-        "CPI (NSO, base 2012) is the target measure; WPI (Office of the Economic Adviser, DPIIT, base 2011-12) has no services.",
-        "Target: 4% CPI inflation, band 2 to 6%, set by the Government with the RBI every five years (Section 45ZA).",
-        "Failure: average inflation outside the band for three consecutive quarters.",
-        "MPC: six members, three from the RBI and three external; the Governor chairs and has a casting vote.",
-        "SDF (April 2022) is the floor of the corridor; MSF is the ceiling; the Bank Rate is aligned with the MSF.",
-        "No interest is paid on CRR balances."
-      ],
-      "examAngle": "Prelims tests the MPC's make-up, which index excludes services, what the SDF and MSF do, and the effect of a CRR or repo change. Mains asks whether inflation targeting has worked and why transmission is slow.",
-      "selfCheck": [
-        "Who sets the inflation target, and how often?",
-        "What happens when the RBI misses the target?",
-        "Does an OMO purchase add money to the system or take it out?"
-      ],
-      "sources": ["Reserve Bank of India Act, 1934, as amended by the Finance Act, 2016 (rbi.org.in)", "RBI Monetary Policy Statements and Report on Currency and Finance", "MoSPI CPI releases (mospi.gov.in); Office of the Economic Adviser, DPIIT (eaindustry.nic.in)"],
-      "verify": "Check the inflation target and band for the period from April 2026 (the 2021-26 target ran to March 2026), the current CPI base year, and the CPI food weight. No current repo, CRR or SLR values are quoted on purpose."
+     "head": "GVA and the base year",
+     "body": "In January 2015 the Central Statistics Office moved the national accounts to the base year 2011-12, from 2004-05, and changed the method to follow the UN System of National Accounts 2008. On 27 February 2026 the National Statistics Office released a new series with base year 2022-23. It still follows SNA 2008; a move to SNA 2025 is planned for the next revision.\n\nTwo changes matter for the exam. First, sectoral growth is now measured as Gross Value Added (GVA) at basic prices. Second, headline GDP is built from GVA: GDP at market prices equals GVA at basic prices plus product taxes minus product subsidies.\n\nThe estimates come from the National Statistics Office (NSO), under the Ministry of Statistics and Programme Implementation (MoSPI). The NSO was formed in 2019 by merging the Central Statistics Office and the National Sample Survey Office. The 2022-23 series is the current one. Figures for the years before 2022-23 on the new base are being released separately, so check which series a number comes from before you quote it."
     },
     {
-      "id": "eco-syl-banking",
-      "title": "Banking in India: structure, bad loans and inclusion",
-      "nodes": ["gs3-1", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 8,
-      "dek": "By the end, you will know the kinds of banks in India, why bad loans piled up, how they were cleaned up and how banks reach the poor.",
-      "sections": [
-        {
-          "head": "Who is who in banking",
-          "body": "The Reserve Bank of India began work on 1 April 1935 under the RBI Act, 1934, and was nationalised in 1949. The Banking Regulation Act, 1949 is the main law that lets it license and regulate banks.\n\nScheduled commercial banks include public sector banks, private banks, foreign banks, Regional Rural Banks (RRBs), small finance banks and payments banks. RRBs were set up in 1975 and given a law in 1976; they are owned jointly by the Centre, the state and a sponsor bank. Small finance banks and payments banks were licensed from 2015 after the Nachiket Mor committee (2014) on financial inclusion. A payments bank can take deposits but cannot lend.\n\nFourteen large banks were nationalised in July 1969, and six more in 1980. In 2019-20 the Government merged ten public sector banks into four, effective 1 April 2020. Cooperative banks long faced dual control by the RBI and the state registrar; a 2020 amendment to the Banking Regulation Act brought them more firmly under the RBI."
-        },
-        {
-          "head": "The bad-loan problem",
-          "body": "A loan becomes a non-performing asset (NPA) when interest or principal is overdue for more than 90 days.\n\nBank lending boomed in the mid-2000s, much of it to infrastructure and steel. Many projects stalled. The RBI's Asset Quality Review of 2015 made banks recognise bad loans they had been rolling over. The Economic Survey 2016-17 called the result the 'twin balance sheet problem': over-stretched companies on one side and stressed banks on the other.\n\nThe response came in several parts. The Insolvency and Bankruptcy Code, 2016 set a time-bound process to resolve failing companies. The Government recapitalised public sector banks. The SARFAESI Act, 2002 already let lenders seize secured assets without going to court. The National Asset Reconstruction Company (NARCL) was set up in 2021 to take over large bad loans. Gross NPA ratios have since fallen sharply; check the latest figure in the RBI's Financial Stability Report."
-        },
-        {
-          "head": "Rules that keep banks safe",
-          "body": "The Basel norms, set by the Basel Committee on Banking Supervision at the Bank for International Settlements, tell banks how much capital to hold against risky assets. India follows Basel III. The RBI's minimum capital to risk-weighted assets ratio (CRAR) is stricter than the Basel minimum.\n\nDeposit insurance comes from the Deposit Insurance and Credit Guarantee Corporation (DICGC), an RBI subsidiary. It covers up to ₹5 lakh per depositor per bank, a limit raised from ₹1 lakh in 2020.\n\nPriority sector lending rules require domestic scheduled commercial banks to lend 40 per cent of adjusted net bank credit to sectors such as agriculture, small enterprises, education and housing for the poor."
-        },
-        {
-          "head": "Reaching people outside the system",
-          "body": "Financial inclusion means affordable access to savings, credit, insurance and payments for everyone. The Pradhan Mantri Jan Dhan Yojana (2014) opened basic bank accounts on a mass scale. Joined with Aadhaar and mobile phones, the 'JAM trinity' (a term from the Economic Survey 2014-15) made direct benefit transfers possible.\n\nOther tools include business correspondents who act as bank agents in villages, self-help group bank linkage, the MUDRA loans (2015) for small businesses, and the Unified Payments Interface (UPI, 2016) run by the National Payments Corporation of India.\n\nThe remaining gaps are use, not access: many accounts see few transactions, and credit to the smallest borrowers is still thin."
-        }
-      ],
-      "keyFacts": [
-        "RBI: started 1 April 1935, nationalised 1949.",
-        "Bank nationalisation: 14 banks in 1969, 6 in 1980; ten PSBs merged into four from 1 April 2020.",
-        "NPA: overdue for more than 90 days.",
-        "IBC 2016; SARFAESI 2002; NARCL 2021; Asset Quality Review 2015.",
-        "DICGC deposit cover: ₹5 lakh per depositor per bank since 2020.",
-        "Priority sector target for domestic banks: 40% of adjusted net bank credit."
-      ],
-      "examAngle": "Prelims asks what a payments bank can and cannot do, what DICGC covers, and what an NPA is. Mains asks about the twin balance sheet problem, whether bank mergers worked, and how to deepen financial inclusion.",
-      "selfCheck": [
-        "What can a payments bank not do?",
-        "What was the 'twin balance sheet problem'?",
-        "Name three steps taken to clean up bad loans."
-      ],
-      "sources": ["RBI Financial Stability Report and Report on Trend and Progress of Banking in India (rbi.org.in)", "Economic Survey 2016-17, Chapter 4 (indiabudget.gov.in)", "Department of Financial Services, Ministry of Finance (financialservices.gov.in)"],
-      "verify": "Check the number of public sector banks today, the CRAR minimum the RBI requires, the DICGC limit, and the latest gross NPA ratio before adding any figure."
+     "head": "Three ways to the same number",
+     "body": "GDP can be measured three ways, and in principle they give the same figure.\n\nThe production method adds the value added by every sector: agriculture, industry and services. The income method adds what the factors of production earn: wages, rent, interest and profit. The expenditure method adds what is spent on final goods: private consumption, investment, government spending and net exports (C + I + G + X − M).\n\nIn India, private final consumption expenditure is the largest part of GDP by expenditure, and services are the largest part of GVA by sector. Agriculture's share of GVA is small, but it employs a much larger share of workers. That gap is the core of many Mains questions on jobs and productivity."
     },
     {
-      "id": "eco-syl-budget-tax",
-      "title": "Government budgeting and taxation: the Budget, deficits, FRBM and GST",
-      "nodes": ["gs3-2", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 10,
-      "dek": "By the end, you will know the Budget's constitutional basis, the kinds of deficit, the fiscal rules and how GST works.",
-      "sections": [
-        {
-          "head": "The Budget in the Constitution",
-          "body": "The Constitution never uses the word 'budget'. Article 112 calls it the Annual Financial Statement. Article 265 says no tax can be levied or collected except by authority of law.\n\nArticle 266 sets up the Consolidated Fund of India, into which all revenue and loans go, and the Public Account, which holds money the Government holds for others, such as provident funds. Article 267 sets up the Contingency Fund for unforeseen spending, placed at the disposal of the President.\n\nThe Lok Sabha votes on demands for grants (Article 113). The Appropriation Bill (Article 114) then authorises withdrawals from the Consolidated Fund. The Finance Bill carries the tax proposals. Since 2017 the Budget has been presented on 1 February, the Railway Budget has been merged with it, and the old Plan and non-Plan split has been dropped."
-        },
-        {
-          "head": "Receipts, spending and deficits",
-          "body": "Revenue receipts neither create a liability nor reduce assets: taxes, and non-tax revenue such as dividends and fees. Capital receipts do one or the other: borrowings, recovery of loans and disinvestment.\n\nRevenue expenditure does not create assets: salaries, interest, subsidies. Capital expenditure does: roads, machines, loans given out.\n\nRevenue deficit = revenue expenditure − revenue receipts. Effective revenue deficit = revenue deficit − grants for creating capital assets. Fiscal deficit = total expenditure − (revenue receipts + non-debt capital receipts); it is the Government's total borrowing need. Primary deficit = fiscal deficit − interest payments; it shows the borrowing needed for this year's choices, leaving out past debt."
-        },
-        {
-          "head": "Fiscal rules",
-          "body": "The Fiscal Responsibility and Budget Management (FRBM) Act, 2003 set targets to bring down deficits. Its targets have been revised several times and suspended in crises such as 2008 and 2020.\n\nThe N.K. Singh committee (report 2017) proposed debt as the main anchor, with a target for general government debt of 60 per cent of GDP (40 per cent for the Centre, 20 per cent for the states), and the fiscal deficit as the operating target.\n\nAfter the pandemic, the Centre set a glide path to bring the fiscal deficit below 4.5 per cent of GDP by 2025-26. The Budget for 2025-26 said that from 2026-27 the Centre would aim to keep its debt on a declining path as a share of GDP. Check the current year's targets before quoting any number."
-        },
-        {
-          "head": "Taxes and GST",
-          "body": "Direct taxes fall on the person who pays them: income tax and corporation tax. Indirect taxes can be passed on: GST and customs duty. Direct taxes are usually progressive; indirect taxes tend to be regressive, because the poor spend more of their income.\n\nThe Goods and Services Tax began on 1 July 2017 under the 101st Constitutional Amendment Act, 2016. Article 246A gives both Parliament and state legislatures the power to tax goods and services. Article 269A covers inter-state supplies (IGST), collected by the Centre and shared with states. Article 279A creates the GST Council, chaired by the Union Finance Minister, with state finance ministers as members. A decision needs three-fourths of the weighted votes present: the Centre has one-third of the weight and the states together two-thirds.\n\nAlcohol for human consumption is outside GST. Five petroleum products are within GST in law but not yet taxed under it. The rate structure was simplified in September 2025; check the current slabs before quoting them.\n\nThe Finance Commission (Article 280) recommends how taxes are shared between the Centre and the states. The Fifteenth Finance Commission set the states' share of the divisible pool at 41 per cent."
-        }
-      ],
-      "keyFacts": [
-        "Article 112: Annual Financial Statement; Art 265: no tax without law; Art 266: Consolidated Fund and Public Account; Art 267: Contingency Fund.",
-        "Fiscal deficit = total expenditure − (revenue receipts + non-debt capital receipts).",
-        "Primary deficit = fiscal deficit − interest payments.",
-        "FRBM Act 2003; N.K. Singh committee proposed debt as the anchor.",
-        "GST from 1 July 2017; 101st Amendment; Articles 246A, 269A and 279A.",
-        "GST Council decisions: three-fourths of weighted votes; Centre one-third, states two-thirds.",
-        "Fifteenth Finance Commission: 41% of the divisible pool to states."
-      ],
-      "examAngle": "Prelims asks which items are capital receipts, how each deficit is defined, which Article covers what, and how the GST Council votes. Mains asks about fiscal federalism, the quality of spending (capital vs revenue), and GST's record.",
-      "selfCheck": [
-        "Is disinvestment a revenue or a capital receipt?",
-        "What does the primary deficit leave out, and why does that matter?",
-        "How are votes weighted in the GST Council?"
-      ],
-      "sources": ["Constitution of India, Articles 112-117, 246A, 265-267, 269A, 279A, 280 (legislative.gov.in)", "Union Budget documents and Economic Survey (indiabudget.gov.in)", "NCERT Class XII Introductory Macroeconomics, Chapter 5 (Government Budget and the Economy)", "GST Council (gstcouncil.gov.in)"],
-      "verify": "Check the current fiscal deficit target and the debt anchor from the latest Budget, the GST slabs after the September 2025 changes, and whether the Sixteenth Finance Commission's share for states (2026-31) has been accepted."
-    },
-    {
-      "id": "eco-syl-agriculture",
-      "title": "Agriculture: MSP, procurement, the PDS and farm support",
-      "nodes": ["gs3-3", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 9,
-      "dek": "By the end, you will know how MSP is set, how grain moves from farm to ration shop, and the main farm support schemes.",
-      "sections": [
-        {
-          "head": "Minimum Support Price",
-          "body": "The Minimum Support Price (MSP) is the price at which the Government offers to buy a crop from farmers. It is announced before the sowing season. The Commission for Agricultural Costs and Prices (CACP), set up in 1965 as the Agricultural Prices Commission, recommends MSPs; the Cabinet Committee on Economic Affairs decides them.\n\nMSP is announced for 22 mandated crops: 14 kharif crops, 6 rabi crops and 2 commercial crops (jute and copra). Sugarcane has a Fair and Remunerative Price (FRP) instead, fixed under the Sugarcane (Control) Order, 1966.\n\nSince 2018-19 the Government has set MSPs at least 1.5 times the cost of production, measured as A2+FL (paid-out costs plus the value of family labour). MSP has no statutory backing. In practice, procurement at MSP is large for rice and wheat and in a few states, and thin for most other crops."
-        },
-        {
-          "head": "From procurement to ration shop",
-          "body": "The Food Corporation of India (FCI), set up in 1965 under the Food Corporations Act, 1964, buys grain, stores it and moves it across the country. Under decentralised procurement, begun in 1997-98, some states buy and distribute grain themselves.\n\nThe National Food Security Act, 2013 covers up to 75 per cent of the rural and 50 per cent of the urban population. Priority households get 5 kg of grain per person per month. Antyodaya Anna Yojana households, the poorest, get 35 kg per household per month. The Act also gives entitlements to pregnant women, lactating mothers and children, and treats the eldest woman of the household as its head for ration cards.\n\nFrom January 2023 grain under the Act has been free, and this was extended for five years from January 2024. One Nation One Ration Card lets a beneficiary draw rations from any fair price shop in the country. The Government also keeps buffer stocks against bad years."
-        },
-        {
-          "head": "Farm support schemes",
-          "body": "PM-KISAN (2019) pays eligible farmer families ₹6,000 a year in three instalments, directly into bank accounts.\n\nThe Pradhan Mantri Fasal Bima Yojana (2016) insures crops. Farmers pay a premium of 2 per cent for kharif crops, 1.5 per cent for rabi crops and 5 per cent for commercial and horticultural crops; the governments pay the rest.\n\nThe Pradhan Mantri Krishi Sinchayee Yojana (2015) aims at 'Har Khet Ko Pani' (water for every field) and 'Per Drop More Crop' (micro-irrigation). Soil Health Cards (2015) tell farmers which nutrients their soil needs. e-NAM (2016) is an online trading platform that links agricultural markets (APMC mandis).\n\nFood processing reduces waste and raises farm incomes. The Ministry of Food Processing Industries runs schemes for cold chains, food parks and micro food enterprises."
-        },
-        {
-          "head": "Land reforms and the deeper problem",
-          "body": "After independence, states abolished the zamindari system, regulated tenancy and set ceilings on land holdings. Zamindari abolition went furthest; tenancy reform and ceilings were patchy, and much surplus land was never redistributed.\n\nThe deeper problem is small farms. Most Indian holdings are marginal, under one hectare, according to the Agriculture Census. Small plots make machines, credit and bargaining harder. Agriculture's share of GVA has fallen, but its share of workers has fallen much more slowly.\n\nMains answers usually weigh three questions: how to raise income rather than only output, how to grow crops that suit the water available, and how to reach farmers who grow crops that are rarely procured."
-        }
-      ],
-      "keyFacts": [
-        "CACP recommends, the CCEA decides MSP; 22 mandated crops (14 kharif, 6 rabi, jute and copra); sugarcane has an FRP.",
-        "Since 2018-19, MSP ≥ 1.5 × A2+FL cost.",
-        "FCI set up in 1965; decentralised procurement from 1997-98.",
-        "NFSA 2013: up to 75% rural and 50% urban; 5 kg per person per month; AAY 35 kg per household.",
-        "PM-KISAN ₹6,000 a year in three instalments; PMFBY premium 2% kharif, 1.5% rabi, 5% commercial.",
-        "e-NAM 2016; PMKSY 2015; Soil Health Card 2015."
-      ],
-      "examAngle": "Prelims asks which crops get MSP, who recommends it, and the NFSA entitlements. Mains asks about legal MSP, crop diversification away from water-hungry rice and wheat, and PDS leakages.",
-      "selfCheck": [
-        "Which body recommends MSP and which body decides it?",
-        "What does a priority household get under the NFSA?",
-        "Why do small holdings make farm reform hard?"
-      ],
-      "sources": ["CACP price policy reports (cacp.da.gov.in)", "National Food Security Act, 2013 and Department of Food and Public Distribution (dfpd.gov.in)", "Economic Survey, chapter on agriculture (indiabudget.gov.in)", "NCERT Class XI Indian Economic Development, Chapters 3 and 6"],
-      "verify": "Check the count of mandated MSP crops, the free-grain period under PMGKAY, and the current PMFBY premium rates."
-    },
-    {
-      "id": "eco-syl-industry-infra",
-      "title": "Industry, liberalisation and infrastructure since 1991",
-      "nodes": ["gs3-4", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 9,
-      "dek": "By the end, you will know what the 1991 reforms changed, how industry is measured, and how India builds and pays for infrastructure.",
-      "sections": [
-        {
-          "head": "The 1991 reforms",
-          "body": "In 1991 India faced a balance of payments crisis. Foreign exchange reserves were enough for only a few weeks of imports. The Government responded with reforms often summed up as LPG: liberalisation, privatisation and globalisation.\n\nThe New Industrial Policy of July 1991 abolished industrial licensing for all but a short list of industries. It cut the list of sectors reserved for the public sector; today only atomic energy and railway operations remain reserved. It removed the need for prior approval under the MRTP Act for big firms to expand, and it opened the door to foreign direct investment.\n\nThe rupee was devalued in July 1991, import tariffs were cut over the decade, and the financial sector was reformed after the Narasimham Committee (1991)."
-        },
-        {
-          "head": "Measuring industry",
-          "body": "The Index of Industrial Production (IIP), base year 2011-12, measures the volume of industrial output each month. It covers mining, manufacturing and electricity; manufacturing has by far the largest weight.\n\nThe Index of Eight Core Industries covers coal, crude oil, natural gas, refinery products, fertilisers, steel, cement and electricity. Together they make up about 40 per cent of the IIP's weight. Refinery products carry the largest weight among the eight.\n\nMicro, small and medium enterprises (MSMEs) are classified by both investment in plant and machinery and turnover, a composite rule adopted in 2020. The thresholds were raised again from April 2025. MSMEs employ far more people than large firms, which is why their access to credit is a frequent Mains theme."
-        },
-        {
-          "head": "Policies for manufacturing",
-          "body": "Make in India (2014) aimed to make India a manufacturing hub. Production Linked Incentive (PLI) schemes, launched from 2020, pay firms a share of their extra sales in sectors such as mobile phones, pharmaceuticals, automobiles and solar modules.\n\nOther measures include the cut in corporate tax rates in 2019, labour law codification, and industrial corridors such as the Delhi-Mumbai Industrial Corridor.\n\nThe persistent concern is that manufacturing's share of GDP has stayed roughly flat for decades, while services grew. Labour-intensive manufacturing, such as textiles and footwear, is where jobs for low-skilled workers would come from."
-        },
-        {
-          "head": "Infrastructure and how it is financed",
-          "body": "The National Infrastructure Pipeline (2019) listed planned projects across sectors. PM Gati Shakti, the National Master Plan launched in October 2021, puts the plans of different ministries on one digital map so that roads, railways, ports and pipelines are planned together. The National Monetisation Pipeline (2021) leases existing public assets to private operators to raise money for new ones.\n\nPublic-private partnership (PPP) models include Build-Operate-Transfer (BOT), where the private partner builds, runs and earns from a project before handing it back, and the Hybrid Annuity Model (HAM), used for highways since 2016, where the Government pays 40 per cent of the cost during construction and the rest as annuities.\n\nFlagship programmes include Bharatmala (roads), Sagarmala (ports), dedicated freight corridors (rail) and UDAN (regional air links, 2016). The National Investment and Infrastructure Fund (NIIF) was set up in 2015."
-        }
-      ],
-      "keyFacts": [
-        "New Industrial Policy, July 1991: licensing abolished for most industries; reserved list cut.",
-        "Reserved for the public sector today: atomic energy and railway operations.",
-        "IIP base 2011-12; eight core industries ≈ 40% of IIP weight; refinery products weigh most.",
-        "MSME definition: composite of investment and turnover since 2020; thresholds raised from April 2025.",
-        "PM Gati Shakti: October 2021; National Monetisation Pipeline: 2021; NIP: 2019.",
-        "HAM: Government pays 40% during construction, the rest as annuities."
-      ],
-      "examAngle": "Prelims asks which industries are in the core eight, what HAM and BOT mean, and what Gati Shakti does. Mains asks why manufacturing has not created enough jobs and how to finance infrastructure without stressing banks.",
-      "selfCheck": [
-        "Which two sectors are still reserved for the public sector?",
-        "How does HAM share risk between the Government and the private partner?",
-        "Why do MSMEs matter more for jobs than for output?"
-      ],
-      "sources": ["NCERT Class XI Indian Economic Development, Chapter 3 (Liberalisation, Privatisation and Globalisation)", "Office of the Economic Adviser, DPIIT, Index of Eight Core Industries (eaindustry.nic.in)", "Ministry of MSME (msme.gov.in)", "Economic Survey, chapters on industry and infrastructure"],
-      "verify": "Check the current MSME thresholds (revised from April 2025), the eight core industries' combined weight, and the number of PLI sectors."
-    },
-    {
-      "id": "eco-syl-external",
-      "title": "External sector and growth: balance of payments, the rupee and trade",
-      "nodes": ["gs3-1", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 8,
-      "dek": "By the end, you will be able to read India's balance of payments, explain how the rupee's value is set, and list the main trade rules.",
-      "sections": [
-        {
-          "head": "Reading the balance of payments",
-          "body": "The balance of payments (BoP) records all of a country's transactions with the rest of the world in a period.\n\nThe current account covers trade in goods (merchandise), trade in services, primary income (such as interest and dividends) and secondary income (mostly remittances sent home by workers abroad). India usually runs a large deficit in goods, a surplus in services led by software and business services, and a big inflow of remittances. India has been the world's largest recipient of remittances for several years.\n\nThe capital and financial account covers investment and borrowing: foreign direct investment (FDI), foreign portfolio investment (FPI), external commercial borrowing and NRI deposits. If the two accounts together leave a surplus, the RBI's foreign exchange reserves rise; a deficit draws them down."
-        },
-        {
-          "head": "How the rupee's value is set",
-          "body": "Before 1991 the rupee was pegged and devalued from time to time. After the 1991 crisis, India moved to a dual exchange rate in 1992 under the Liberalised Exchange Rate Management System, and to a single market-determined rate in March 1993.\n\nThe rupee's value is now set by the market, but the RBI buys and sells dollars to smooth sharp swings. It does not target a level. The nominal effective exchange rate (NEER) compares the rupee with a basket of currencies; the real effective exchange rate (REER) also adjusts for inflation differences.\n\nThe rupee became convertible on the current account in August 1994, when India accepted the IMF's Article VIII obligations. The capital account is only partly convertible, as recommended by the Tarapore committees (1997 and 2006), so large outflows still face limits."
-        },
-        {
-          "head": "Rules for trade and investment",
-          "body": "The Foreign Exchange Management Act (FEMA), 1999 replaced the stricter Foreign Exchange Regulation Act (FERA), 1973. FEMA treats foreign exchange violations as civil matters, not crimes.\n\nFDI comes in by two routes: the automatic route, with no prior approval, and the government route, which needs approval. Some sectors are capped and a few are closed.\n\nThe Foreign Trade Policy 2023, issued by the Directorate General of Foreign Trade, came into force on 1 April 2023 with no fixed end date. India has signed trade agreements with the UAE (2022), Australia (2022) and the European Free Trade Association (2024), among others. Check the status of newer agreements before writing them in an answer, because talks move fast."
-        },
-        {
-          "head": "Why it matters",
-          "body": "A wide current account deficit financed by short-term flows makes a country vulnerable. That is what happened in 1991, when reserves fell to a few weeks of imports and gold had to be pledged. In 2013, the 'taper tantrum' showed how quickly portfolio money can leave.\n\nLarge reserves, mostly built since 2000, act as insurance. A rising share of services exports and remittances also steadies the current account. Mains answers often link the external sector to growth: exports create jobs, but they need competitive logistics, stable policy and access to markets."
-        }
-      ],
-      "keyFacts": [
-        "Current account: goods, services, primary income, secondary income (remittances).",
-        "Market-determined exchange rate since March 1993; LERMS (dual rate) in 1992.",
-        "Current account convertibility: August 1994 (IMF Article VIII).",
-        "Capital account: partly convertible; Tarapore committees 1997 and 2006.",
-        "FEMA 1999 replaced FERA 1973; violations are civil.",
-        "Foreign Trade Policy 2023: from 1 April 2023, open-ended."
-      ],
-      "examAngle": "Prelims asks which items fall in the current account, what REER means, and what convertibility India has. Mains asks how to narrow the trade deficit and whether trade agreements have helped India.",
-      "selfCheck": [
-        "Where do remittances sit in the balance of payments?",
-        "What is the difference between NEER and REER?",
-        "Why did the 1991 crisis happen?"
-      ],
-      "sources": ["RBI data on India's balance of payments (rbi.org.in)", "NCERT Class XII Introductory Macroeconomics, Chapter 6 (Open Economy Macroeconomics)", "Directorate General of Foreign Trade, Foreign Trade Policy 2023 (dgft.gov.in)", "Economic Survey, chapter on the external sector"],
-      "verify": "Check that India is still the largest recipient of remittances (World Bank data) and the list and status of trade agreements in force; the note avoids reserve and deficit figures on purpose."
-    },
-    {
-      "id": "eco-syl-employment",
-      "title": "Employment, poverty and inclusive growth",
-      "nodes": ["gs3-1", "gs2-8", "pre-5"],
-      "gsPaper": "GS3",
-      "minutes": 8,
-      "dek": "By the end, you will know how India measures jobs and poverty, and the main laws and schemes for inclusion.",
-      "sections": [
-        {
-          "head": "Measuring jobs",
-          "body": "The Periodic Labour Force Survey (PLFS) of the NSO, begun in 2017-18, is India's main source on jobs. It reports three ratios. The labour force participation rate (LFPR) is the share of people working or looking for work. The worker population ratio (WPR) is the share of people working. The unemployment rate is the share of the labour force without work.\n\nIt uses two reference periods. 'Usual status' looks at the past year. 'Current weekly status' looks at the past week. The same person can be counted differently under each.\n\nMost Indian workers are self-employed or casual, and most work in the informal sector, without written contracts or social security. Women's labour force participation has been low by world standards, though PLFS rounds since 2017-18 show it rising. Check the latest PLFS figures before quoting any number."
-        },
-        {
-          "head": "Measuring poverty",
-          "body": "India has measured poverty by a poverty line of consumption. The Tendulkar committee method gave a poverty ratio of 21.9 per cent for 2011-12. The Rangarajan committee (2014) gave 29.5 per cent for the same year with a higher line; its method was never formally adopted.\n\nMultidimensional poverty looks beyond income, at health, education and living standards. The Global MPI is published by the UNDP and the Oxford Poverty and Human Development Initiative. NITI Aayog publishes a national MPI using National Family Health Survey data. It reported a large fall in multidimensional poverty over the decade to 2022-23.\n\nThe Planning Commission, which set poverty lines and five-year plans, was replaced by NITI Aayog on 1 January 2015."
-        },
-        {
-          "head": "Laws and schemes for inclusion",
-          "body": "The Mahatma Gandhi National Rural Employment Guarantee Act, 2005 gives every rural household a legal right to 100 days of unskilled wage work a year, on demand. At least one-third of workers should be women. If work is not given within 15 days, an unemployment allowance is due.\n\nParliament passed four labour codes in 2019 and 2020, folding 29 central labour laws into four: wages, industrial relations, social security, and occupational safety, health and working conditions. Check the date from which all four are in force.\n\nThe Deendayal Antyodaya Yojana-National Rural Livelihoods Mission (2011) organises poor rural women into self-help groups. Stand-Up India (2016) supports bank loans to SC, ST and women entrepreneurs. Skill India and the PM Kaushal Vikas Yojana (2015) train workers."
-        },
-        {
-          "head": "Inclusive growth",
-          "body": "Inclusive growth means growth whose benefits reach the poor, the regions left behind, and groups such as women, SCs and STs. It was the theme of the Eleventh Five Year Plan (2007-12): 'faster and more inclusive growth'.\n\nGrowth alone may not create enough good jobs. India's growth has been led by services and capital-intensive industry, while most workers are in farming, construction and petty trade. Mains answers often argue for labour-intensive manufacturing, better skills, women's work and stronger social security for informal workers."
-        }
-      ],
-      "keyFacts": [
-        "PLFS (NSO) since 2017-18; usual status vs current weekly status.",
-        "LFPR = working or seeking work; WPR = working; UR = without work ÷ labour force.",
-        "Tendulkar poverty ratio for 2011-12: 21.9%; Rangarajan: 29.5%.",
-        "Global MPI: UNDP and OPHI; national MPI: NITI Aayog, from NFHS data.",
-        "MGNREGA 2005: 100 days on demand; one-third women; allowance if no work in 15 days.",
-        "Four labour codes replace 29 central laws.",
-        "NITI Aayog replaced the Planning Commission on 1 January 2015."
-      ],
-      "examAngle": "Prelims asks the definitions of LFPR and WPR, MGNREGA's provisions, and who publishes which index. Mains asks about jobless growth, women's work and social security for gig and informal workers.",
-      "selfCheck": [
-        "What is the difference between LFPR and WPR?",
-        "What does MGNREGA guarantee, and to whom?",
-        "Why can GDP grow fast without many new jobs?"
-      ],
-      "sources": ["PLFS annual reports, MoSPI (mospi.gov.in)", "NITI Aayog, National Multidimensional Poverty Index (niti.gov.in)", "Ministry of Rural Development, MGNREGA (nrega.nic.in)", "Ministry of Labour and Employment, labour codes (labour.gov.in)"],
-      "verify": "Check the date all four labour codes came into force, the latest PLFS ratios (none quoted), and NITI Aayog's latest MPI headline figure before adding it."
+     "head": "What GDP misses",
+     "body": "GDP is a measure of output, not of welfare. It leaves out unpaid work at home, most of which women do. It captures the informal sector only through estimates. It counts the timber from a felled forest but not the loss of the forest. It says nothing about how income is shared.\n\nOther measures fill some of these gaps. The Human Development Index of the UNDP combines life expectancy, education and income per head. Green GDP tries to subtract the cost of environmental damage. Multidimensional poverty indices look at health, education and living standards together.\n\nPer capita income, GDP divided by population, is a better guide to average living standards than total GDP. Purchasing power parity (PPP) comparisons adjust for the fact that money buys more in some countries than in others."
     }
-  ]
+   ],
+   "keyFacts": [
+    "GDP at market prices = GVA at basic prices + product taxes − product subsidies.",
+    "GNP = GDP + net factor income from abroad; NNP = GNP − depreciation.",
+    "Base year 2022-23 since 27 February 2026 (2011-12 before that, from the January 2015 revision); the method follows the UN SNA 2008.",
+    "The NSO under MoSPI was formed in 2019 by merging the CSO and the NSSO.",
+    "GDP deflator = nominal GDP ÷ real GDP × 100.",
+    "The HDI (UNDP) combines health, education and income."
+   ],
+   "examAngle": "Prelims asks for definitions: GDP vs GNP, factor cost vs market prices, what the deflator covers. Mains asks why GDP growth may not mean better lives, and about the gap between agriculture's share of output and its share of jobs.",
+   "selfCheck": [
+    "Why does GDP count only final goods?",
+    "How do you get from GVA at basic prices to GDP at market prices?",
+    "Name two things GDP leaves out and one measure that tries to include them."
+   ],
+   "sources": [
+    "NCERT Class XII Introductory Macroeconomics, Chapter 2 (National Income Accounting)",
+    "MoSPI, National Accounts Statistics (mospi.gov.in)",
+    "Economic Survey, Ministry of Finance (indiabudget.gov.in)",
+    "MoSPI press note on the new series of national accounts, base 2022-23, 27 February 2026 (PIB). The SNA 2008 and SNA 2025 points are from the PIB FAQ on the new series, https://www.pib.gov.in/FaqDetails.aspx?NoteId=157582"
+   ],
+   "verify": "Check the current base year of the national accounts (a new series was in preparation) and the NSO's formation year. No growth figures are quoted on purpose.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "National accounts base year is 2022-23 from 27 February 2026 (2011-12 before); still on SNA 2008; GVA at basic prices remains the sectoral measure.",
+     "source": "MoSPI press note on the new series of national accounts, base 2022-23, 27 February 2026 (PIB). The SNA 2008 and SNA 2025 points are from the PIB FAQ on the new series, https://www.pib.gov.in/FaqDetails.aspx?NoteId=157582",
+     "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc2026227806401.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-02-28",
+    "recheckWhen": "Release of the back series on base 2022-23; any further base revision"
+   }
+  },
+  {
+   "id": "eco-syl-inflation",
+   "title": "Inflation and monetary policy: how India measures prices and how the RBI targets them",
+   "nodes": [
+    "gs3-1",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 9,
+   "dek": "By the end, you will know CPI from WPI, the kinds of inflation, the inflation-targeting law and the RBI's tools.",
+   "sections": [
+    {
+     "head": "Two price indices",
+     "body": "India has two main measures of inflation. The Consumer Price Index (CPI) tracks the prices households pay. The NSO publishes CPI-Rural, CPI-Urban and CPI-Combined; since February 2026 the series has used 2024 as its base year (2012 before that). Food and beverages carry a large weight in the CPI, about 37 per cent of the combined basket in the new series, which is why vegetable and pulse prices move headline inflation so much.\n\nThe Wholesale Price Index (WPI) tracks prices at the wholesale level. The Office of the Economic Adviser in the Department for Promotion of Industry and Internal Trade (DPIIT) publishes it. A new series with base year 2022-23 (2011-12 before that) was released on 15 June 2026. The WPI has no services in it; Producer Price Indices, including some for services, were launched alongside it.\n\nSince 2014 the RBI has used CPI-Combined, not WPI, as its main measure. Core inflation is headline inflation without food and fuel, the most volatile items. The CPI series with base 2024 is the current one."
+    },
+    {
+     "head": "Kinds of inflation",
+     "body": "Demand-pull inflation happens when demand runs ahead of what the economy can supply. Cost-push inflation happens when costs rise, for example when oil prices jump or a bad monsoon cuts food supply.\n\nStagflation is high inflation together with slow growth and high unemployment, as many countries saw in the 1970s oil shocks. Disinflation is a fall in the rate of inflation: prices still rise, only more slowly. Deflation is a fall in the price level itself. Deflation can be harmful because people delay spending and the real burden of debt rises.\n\nInflation hurts people on fixed incomes and savers most. It helps borrowers, because they repay in money that is worth less. That is why it is often called a hidden tax on the poor."
+    },
+    {
+     "head": "The inflation-targeting law",
+     "body": "In 2016 the Finance Act amended the Reserve Bank of India Act, 1934. The amended preamble says the primary objective of monetary policy is price stability, while keeping in mind the objective of growth.\n\nUnder Section 45ZA, the Government, in consultation with the RBI, sets the inflation target once every five years. The target has been 4 per cent CPI inflation, with a tolerance band of 2 per cent on either side, so 2 to 6 per cent. It was first set for August 2016 to March 2021, retained for April 2021 to March 2026, and retained again in March 2026 for April 2026 to March 2031.\n\nThe RBI fails the target if average inflation stays outside the band for three consecutive quarters. It must then write to the Government explaining why, what it will do, and how long it expects to take.\n\nThe Monetary Policy Committee (MPC) sets the policy repo rate. It has six members: three from the RBI, including the Governor, who chairs it, and three external members appointed by the Government for four years. It meets at least four times a year. The Governor has a casting vote in a tie."
+    },
+    {
+     "head": "The RBI's tools",
+     "body": "The repo rate is the rate at which the RBI lends to banks overnight against government securities. It is the policy rate. The Standing Deposit Facility (SDF), introduced in April 2022, is the rate at which the RBI absorbs surplus money from banks without giving securities; it is the floor of the corridor. The Marginal Standing Facility (MSF) lets banks borrow overnight above the repo rate in an emergency; it is the ceiling. The Bank Rate is aligned with the MSF rate.\n\nThe Cash Reserve Ratio (CRR) is the share of a bank's net demand and time liabilities kept with the RBI as cash. Banks earn no interest on it. The Statutory Liquidity Ratio (SLR) is the share banks must keep in safe liquid assets, such as government securities, gold and cash.\n\nOpen Market Operations (OMOs) are the RBI's purchases and sales of government securities. Buying adds money to the system; selling takes it out. Rate changes reach borrowers only slowly, so the RBI has pushed banks to link loan rates to external benchmarks such as the repo rate."
+    }
+   ],
+   "keyFacts": [
+    "CPI (NSO, base 2024 since February 2026) is the target measure; WPI (Office of the Economic Adviser, DPIIT, base 2022-23 since June 2026) has no services.",
+    "Target: 4% CPI inflation, band 2 to 6%, set by the Government with the RBI every five years (Section 45ZA).",
+    "Failure: average inflation outside the band for three consecutive quarters.",
+    "MPC: six members, three from the RBI and three external; the Governor chairs and has a casting vote.",
+    "SDF (April 2022) is the floor of the corridor; MSF is the ceiling; the Bank Rate is aligned with the MSF.",
+    "No interest is paid on CRR balances."
+   ],
+   "examAngle": "Prelims tests the MPC's make-up, which index excludes services, what the SDF and MSF do, and the effect of a CRR or repo change. Mains asks whether inflation targeting has worked and why transmission is slow.",
+   "selfCheck": [
+    "Who sets the inflation target, and how often?",
+    "What happens when the RBI misses the target?",
+    "Does an OMO purchase add money to the system or take it out?"
+   ],
+   "sources": [
+    "Reserve Bank of India Act, 1934, as amended by the Finance Act, 2016 (rbi.org.in)",
+    "RBI Monetary Policy Statements and Report on Currency and Finance",
+    "MoSPI CPI releases (mospi.gov.in); Office of the Economic Adviser, DPIIT (eaindustry.nic.in)",
+    "MoSPI press release, Consumer Price Index on base 2024=100, 12 February 2026 (PIB PRID 2227012)",
+    "Office of the Economic Adviser, DPIIT, press release of 15 June 2026 on the WPI and Producer Price Indices, base 2022-23"
+   ],
+   "verify": "Check the inflation target and band for the period from April 2026 (the 2021-26 target ran to March 2026), the current CPI base year, and the CPI food weight. No current repo, CRR or SLR values are quoted on purpose.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "CPI base is 2024=100 from the release of 12 February 2026; food and beverages weight 36.75% in the combined basket (it was close to 46% in the 2012 series).",
+     "source": "MoSPI press release, Consumer Price Index on base 2024=100, 12 February 2026 (PIB PRID 2227012)",
+     "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2227012",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "WPI base is 2022-23 from 15 June 2026; the WPI still has no services; Producer Price Indices (including quarterly ones for seven services) launched the same day.",
+     "source": "Office of the Economic Adviser, DPIIT, press release of 15 June 2026 on the WPI and Producer Price Indices, base 2022-23",
+     "url": "https://www.eaindustry.nic.in/press_release/press_release_202606.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "Inflation target of 4% with a 2 to 6% band retained for 1 April 2026 to 31 March 2031.",
+     "source": "Ministry of Finance notification S.O. 1580(E), 25 March 2026, under section 45ZA of the RBI Act. Gazette not opened; seen only in secondary reports",
+     "url": "https://www.businesstoday.in/latest/economy/story/govt-retains-inflation-target-at-4-with-2-6-band-for-next-five-years-522390-2026-03-25",
+     "opened": "2026-11-12",
+     "status": "unverified"
+    },
+    {
+     "claim": "MPC: six members, three external members with four-year terms, Governor has a casting vote",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "SDF introduced April 2022 as the floor of the corridor",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Failure of the target: three consecutive quarters outside the band",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-06-30",
+    "recheckWhen": "A change to the inflation target or the MPC; any re-basing of the CPI or WPI; withdrawal of the WPI in favour of the PPI"
+   }
+  },
+  {
+   "id": "eco-syl-banking",
+   "title": "Banking in India: structure, bad loans and inclusion",
+   "nodes": [
+    "gs3-1",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 8,
+   "dek": "By the end, you will know the kinds of banks in India, why bad loans piled up, how they were cleaned up and how banks reach the poor.",
+   "sections": [
+    {
+     "head": "Who is who in banking",
+     "body": "The Reserve Bank of India began work on 1 April 1935 under the RBI Act, 1934, and was nationalised in 1949. The Banking Regulation Act, 1949 is the main law that lets it license and regulate banks.\n\nScheduled commercial banks include public sector banks, private banks, foreign banks, Regional Rural Banks (RRBs), small finance banks and payments banks. RRBs were set up in 1975 and given a law in 1976; they are owned jointly by the Centre, the state and a sponsor bank. Small finance banks and payments banks were licensed from 2015 after the Nachiket Mor committee (2014) on financial inclusion. A payments bank can take deposits but cannot lend.\n\nFourteen large banks were nationalised in July 1969, and six more in 1980. In 2019-20 the Government merged ten public sector banks into four, effective 1 April 2020. Cooperative banks long faced dual control by the RBI and the state registrar; a 2020 amendment to the Banking Regulation Act brought them more firmly under the RBI."
+    },
+    {
+     "head": "The bad-loan problem",
+     "body": "A loan becomes a non-performing asset (NPA) when interest or principal is overdue for more than 90 days.\n\nBank lending boomed in the mid-2000s, much of it to infrastructure and steel. Many projects stalled. The RBI's Asset Quality Review of 2015 made banks recognise bad loans they had been rolling over. The Economic Survey 2016-17 called the result the 'twin balance sheet problem': over-stretched companies on one side and stressed banks on the other.\n\nThe response came in several parts. The Insolvency and Bankruptcy Code, 2016 set a time-bound process to resolve failing companies. The Government recapitalised public sector banks. The SARFAESI Act, 2002 already let lenders seize secured assets without going to court. The National Asset Reconstruction Company (NARCL) was set up in 2021 to take over large bad loans. Gross NPA ratios have since fallen sharply; check the latest figure in the RBI's Financial Stability Report."
+    },
+    {
+     "head": "Rules that keep banks safe",
+     "body": "The Basel norms, set by the Basel Committee on Banking Supervision at the Bank for International Settlements, tell banks how much capital to hold against risky assets. India follows Basel III. The RBI's minimum capital to risk-weighted assets ratio (CRAR) is stricter than the Basel minimum.\n\nDeposit insurance comes from the Deposit Insurance and Credit Guarantee Corporation (DICGC), an RBI subsidiary. It covers up to ₹5 lakh per depositor per bank, a limit raised from ₹1 lakh in 2020.\n\nPriority sector lending rules require domestic scheduled commercial banks to lend 40 per cent of adjusted net bank credit to sectors such as agriculture, small enterprises, education and housing for the poor."
+    },
+    {
+     "head": "Reaching people outside the system",
+     "body": "Financial inclusion means affordable access to savings, credit, insurance and payments for everyone. The Pradhan Mantri Jan Dhan Yojana (2014) opened basic bank accounts on a mass scale. Joined with Aadhaar and mobile phones, the 'JAM trinity' (a term from the Economic Survey 2014-15) made direct benefit transfers possible.\n\nOther tools include business correspondents who act as bank agents in villages, self-help group bank linkage, the MUDRA loans (2015) for small businesses, and the Unified Payments Interface (UPI, 2016) run by the National Payments Corporation of India.\n\nThe remaining gaps are use, not access: many accounts see few transactions, and credit to the smallest borrowers is still thin."
+    }
+   ],
+   "keyFacts": [
+    "RBI: started 1 April 1935, nationalised 1949.",
+    "Bank nationalisation: 14 banks in 1969, 6 in 1980; ten PSBs merged into four from 1 April 2020.",
+    "NPA: overdue for more than 90 days.",
+    "IBC 2016; SARFAESI 2002; NARCL 2021; Asset Quality Review 2015.",
+    "DICGC deposit cover: ₹5 lakh per depositor per bank since 2020.",
+    "Priority sector target for domestic banks: 40% of adjusted net bank credit."
+   ],
+   "examAngle": "Prelims asks what a payments bank can and cannot do, what DICGC covers, and what an NPA is. Mains asks about the twin balance sheet problem, whether bank mergers worked, and how to deepen financial inclusion.",
+   "selfCheck": [
+    "What can a payments bank not do?",
+    "What was the 'twin balance sheet problem'?",
+    "Name three steps taken to clean up bad loans."
+   ],
+   "sources": [
+    "RBI Financial Stability Report and Report on Trend and Progress of Banking in India (rbi.org.in)",
+    "Economic Survey 2016-17, Chapter 4 (indiabudget.gov.in)",
+    "Department of Financial Services, Ministry of Finance (financialservices.gov.in)"
+   ],
+   "verify": "Check the number of public sector banks today, the CRAR minimum the RBI requires, the DICGC limit, and the latest gross NPA ratio before adding any figure.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "DICGC deposit cover is ₹5 lakh per depositor per bank (a higher limit has been under discussion since 2025; DICGC's own page not opened)",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Priority sector lending target for domestic scheduled commercial banks: 40% of adjusted net bank credit",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Ten public sector banks merged into four from 1 April 2020",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "NARCL set up in 2021",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-05-12",
+    "recheckWhen": "A change in the DICGC deposit insurance limit; new bank mergers; the next RBI Financial Stability Report"
+   }
+  },
+  {
+   "id": "eco-syl-budget-tax",
+   "title": "Government budgeting and taxation: the Budget, deficits, FRBM and GST",
+   "nodes": [
+    "gs3-2",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 10,
+   "dek": "By the end, you will know the Budget's constitutional basis, the kinds of deficit, the fiscal rules and how GST works.",
+   "sections": [
+    {
+     "head": "The Budget in the Constitution",
+     "body": "The Constitution never uses the word 'budget'. Article 112 calls it the Annual Financial Statement. Article 265 says no tax can be levied or collected except by authority of law.\n\nArticle 266 sets up the Consolidated Fund of India, into which all revenue and loans go, and the Public Account, which holds money the Government holds for others, such as provident funds. Article 267 sets up the Contingency Fund for unforeseen spending, placed at the disposal of the President.\n\nThe Lok Sabha votes on demands for grants (Article 113). The Appropriation Bill (Article 114) then authorises withdrawals from the Consolidated Fund. The Finance Bill carries the tax proposals. Since 2017 the Budget has been presented on 1 February, the Railway Budget has been merged with it, and the old Plan and non-Plan split has been dropped."
+    },
+    {
+     "head": "Receipts, spending and deficits",
+     "body": "Revenue receipts neither create a liability nor reduce assets: taxes, and non-tax revenue such as dividends and fees. Capital receipts do one or the other: borrowings, recovery of loans and disinvestment.\n\nRevenue expenditure does not create assets: salaries, interest, subsidies. Capital expenditure does: roads, machines, loans given out.\n\nRevenue deficit = revenue expenditure − revenue receipts. Effective revenue deficit = revenue deficit − grants for creating capital assets. Fiscal deficit = total expenditure − (revenue receipts + non-debt capital receipts); it is the Government's total borrowing need. Primary deficit = fiscal deficit − interest payments; it shows the borrowing needed for this year's choices, leaving out past debt."
+    },
+    {
+     "head": "Fiscal rules",
+     "body": "The Fiscal Responsibility and Budget Management (FRBM) Act, 2003 set targets to bring down deficits. Its targets have been revised several times and suspended in crises such as 2008 and 2020.\n\nThe N.K. Singh committee (report 2017) proposed debt as the main anchor, with a target for general government debt of 60 per cent of GDP (40 per cent for the Centre, 20 per cent for the states), and the fiscal deficit as the operating target.\n\nAfter the pandemic, the Centre set a glide path to bring the fiscal deficit below 4.5 per cent of GDP by 2025-26. The Revised Estimate for 2025-26 is 4.4 per cent. From 2026-27 the anchor is debt. The Centre aims for a debt-to-GDP ratio of 50 per cent, give or take one point, by 2030-31. The Budget for 2026-27 puts the fiscal deficit at 4.3 per cent of GDP and central debt at 55.6 per cent of GDP. These numbers change with every Budget, so quote them with the year."
+    },
+    {
+     "head": "Taxes and GST",
+     "body": "Direct taxes fall on the person who pays them: income tax and corporation tax. Indirect taxes can be passed on: GST and customs duty. Direct taxes are usually progressive; indirect taxes tend to be regressive, because the poor spend more of their income.\n\nThe Goods and Services Tax began on 1 July 2017 under the 101st Constitutional Amendment Act, 2016. Article 246A gives both Parliament and state legislatures the power to tax goods and services. Article 269A covers inter-state supplies (IGST), collected by the Centre and shared with states. Article 279A creates the GST Council, chaired by the Union Finance Minister, with state finance ministers as members. A decision needs three-fourths of the weighted votes present: the Centre has one-third of the weight and the states together two-thirds.\n\nAlcohol for human consumption is outside GST. Five petroleum products are within GST in law but not yet taxed under it. The rate structure was simplified after the 56th GST Council meeting of 3 September 2025. From 22 September 2025 there are two main rates, a merit rate of 5 per cent and a standard rate of 18 per cent, with a special rate of 40 per cent on a short list of goods and services.\n\nThe Finance Commission (Article 280) recommends how taxes are shared between the Centre and the states. The Fifteenth Finance Commission set the states' share of the divisible pool at 41 per cent, and the Sixteenth, which reported in November 2025, kept it at 41 per cent for 2026 to 2031."
+    }
+   ],
+   "keyFacts": [
+    "Article 112: Annual Financial Statement; Art 265: no tax without law; Art 266: Consolidated Fund and Public Account; Art 267: Contingency Fund.",
+    "Fiscal deficit = total expenditure − (revenue receipts + non-debt capital receipts).",
+    "Primary deficit = fiscal deficit − interest payments.",
+    "FRBM Act 2003; N.K. Singh committee proposed debt as the anchor.",
+    "GST from 1 July 2017; 101st Amendment; Articles 246A, 269A and 279A.",
+    "GST Council decisions: three-fourths of weighted votes; Centre one-third, states two-thirds.",
+    "Fifteenth and Sixteenth Finance Commissions: 41% of the divisible pool to states (the Sixteenth for 2026 to 2031)."
+   ],
+   "examAngle": "Prelims asks which items are capital receipts, how each deficit is defined, which Article covers what, and how the GST Council votes. Mains asks about fiscal federalism, the quality of spending (capital vs revenue), and GST's record.",
+   "selfCheck": [
+    "Is disinvestment a revenue or a capital receipt?",
+    "What does the primary deficit leave out, and why does that matter?",
+    "How are votes weighted in the GST Council?"
+   ],
+   "sources": [
+    "Constitution of India, Articles 112-117, 246A, 265-267, 269A, 279A, 280 (legislative.gov.in)",
+    "Union Budget documents and Economic Survey (indiabudget.gov.in)",
+    "NCERT Class XII Introductory Macroeconomics, Chapter 5 (Government Budget and the Economy)",
+    "GST Council (gstcouncil.gov.in)",
+    "Budget 2026-2027, Speech of the Minister of Finance, 1 February 2026, paras 91 to 94 (Ministry of Finance)",
+    "PIB, Ministry of Finance, Recommendations of the 56th Meeting of the GST Council, 3 September 2025 (PRID 2163555)"
+   ],
+   "verify": "Check the current fiscal deficit target and the debt anchor from the latest Budget, the GST slabs after the September 2025 changes, and whether the Sixteenth Finance Commission's share for states (2026-31) has been accepted.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "Fiscal deficit 4.4% of GDP in RE 2025-26 and 4.3% in BE 2026-27; central debt 56.1% (RE 2025-26) and 55.6% (BE 2026-27); target of 50 plus or minus 1% by 2030-31.",
+     "source": "Budget 2026-2027, Speech of the Minister of Finance, 1 February 2026, paras 91 to 94 (Ministry of Finance)",
+     "url": "https://www.indiabudget.gov.in/doc/budget_speech.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "GST from 22 September 2025: merit rate 5%, standard rate 18%, special de-merit rate 40% (56th Council meeting, 3 September 2025).",
+     "source": "PIB, Ministry of Finance, Recommendations of the 56th Meeting of the GST Council, 3 September 2025 (PRID 2163555)",
+     "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2163555",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "16th Finance Commission kept the states' share at 41%; accepted by the Government (Budget speech 2026-27, para 91).",
+     "source": "Budget 2026-2027, Speech of the Minister of Finance, 1 February 2026, paras 91 to 94 (Ministry of Finance)",
+     "url": "https://www.indiabudget.gov.in/doc/budget_speech.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "GST Council voting: three-fourths of weighted votes; Centre one-third, states two-thirds (Article 279A)",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "GST compensation cess reported ended from 1 February 2026 (not stated in the note; notification not opened)",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-02-01",
+    "recheckWhen": "Next Union Budget (1 February 2027); any GST Council change to the rates"
+   }
+  },
+  {
+   "id": "eco-syl-agriculture",
+   "title": "Agriculture: MSP, procurement, the PDS and farm support",
+   "nodes": [
+    "gs3-3",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 9,
+   "dek": "By the end, you will know how MSP is set, how grain moves from farm to ration shop, and the main farm support schemes.",
+   "sections": [
+    {
+     "head": "Minimum Support Price",
+     "body": "The Minimum Support Price (MSP) is the price at which the Government offers to buy a crop from farmers. It is announced before the sowing season. The Commission for Agricultural Costs and Prices (CACP), set up in 1965 as the Agricultural Prices Commission, recommends MSPs; the Cabinet Committee on Economic Affairs decides them.\n\nMSP is announced for 22 mandated crops: 14 kharif crops, 6 rabi crops and 2 commercial crops (jute and copra). Sugarcane has a Fair and Remunerative Price (FRP) instead, fixed under the Sugarcane (Control) Order, 1966.\n\nSince 2018-19 the Government has set MSPs at least 1.5 times the cost of production, measured as A2+FL (paid-out costs plus the value of family labour). MSP has no statutory backing. In practice, procurement at MSP is large for rice and wheat and in a few states, and thin for most other crops."
+    },
+    {
+     "head": "From procurement to ration shop",
+     "body": "The Food Corporation of India (FCI), set up in 1965 under the Food Corporations Act, 1964, buys grain, stores it and moves it across the country. Under decentralised procurement, begun in 1997-98, some states buy and distribute grain themselves.\n\nThe National Food Security Act, 2013 covers up to 75 per cent of the rural and 50 per cent of the urban population. Priority households get 5 kg of grain per person per month. Antyodaya Anna Yojana households, the poorest, get 35 kg per household per month. The Act also gives entitlements to pregnant women, lactating mothers and children, and treats the eldest woman of the household as its head for ration cards.\n\nFrom January 2023 grain under the Act has been free, and this was extended for five years from January 2024. One Nation One Ration Card lets a beneficiary draw rations from any fair price shop in the country. The Government also keeps buffer stocks against bad years."
+    },
+    {
+     "head": "Farm support schemes",
+     "body": "PM-KISAN (2019) pays eligible farmer families ₹6,000 a year in three instalments, directly into bank accounts.\n\nThe Pradhan Mantri Fasal Bima Yojana (2016) insures crops. Farmers pay a premium of 2 per cent for kharif crops, 1.5 per cent for rabi crops and 5 per cent for commercial and horticultural crops; the governments pay the rest.\n\nThe Pradhan Mantri Krishi Sinchayee Yojana (2015) aims at 'Har Khet Ko Pani' (water for every field) and 'Per Drop More Crop' (micro-irrigation). Soil Health Cards (2015) tell farmers which nutrients their soil needs. e-NAM (2016) is an online trading platform that links agricultural markets (APMC mandis).\n\nFood processing reduces waste and raises farm incomes. The Ministry of Food Processing Industries runs schemes for cold chains, food parks and micro food enterprises."
+    },
+    {
+     "head": "Land reforms and the deeper problem",
+     "body": "After independence, states abolished the zamindari system, regulated tenancy and set ceilings on land holdings. Zamindari abolition went furthest; tenancy reform and ceilings were patchy, and much surplus land was never redistributed.\n\nThe deeper problem is small farms. Most Indian holdings are marginal, under one hectare, according to the Agriculture Census. Small plots make machines, credit and bargaining harder. Agriculture's share of GVA has fallen, but its share of workers has fallen much more slowly.\n\nMains answers usually weigh three questions: how to raise income rather than only output, how to grow crops that suit the water available, and how to reach farmers who grow crops that are rarely procured."
+    }
+   ],
+   "keyFacts": [
+    "CACP recommends, the CCEA decides MSP; 22 mandated crops (14 kharif, 6 rabi, jute and copra); sugarcane has an FRP.",
+    "Since 2018-19, MSP ≥ 1.5 × A2+FL cost.",
+    "FCI set up in 1965; decentralised procurement from 1997-98.",
+    "NFSA 2013: up to 75% rural and 50% urban; 5 kg per person per month; AAY 35 kg per household.",
+    "PM-KISAN ₹6,000 a year in three instalments; PMFBY premium 2% kharif, 1.5% rabi, 5% commercial.",
+    "e-NAM 2016; PMKSY 2015; Soil Health Card 2015."
+   ],
+   "examAngle": "Prelims asks which crops get MSP, who recommends it, and the NFSA entitlements. Mains asks about legal MSP, crop diversification away from water-hungry rice and wheat, and PDS leakages.",
+   "selfCheck": [
+    "Which body recommends MSP and which body decides it?",
+    "What does a priority household get under the NFSA?",
+    "Why do small holdings make farm reform hard?"
+   ],
+   "sources": [
+    "CACP price policy reports (cacp.da.gov.in)",
+    "National Food Security Act, 2013 and Department of Food and Public Distribution (dfpd.gov.in)",
+    "Economic Survey, chapter on agriculture (indiabudget.gov.in)",
+    "NCERT Class XI Indian Economic Development, Chapters 3 and 6"
+   ],
+   "verify": "Check the count of mandated MSP crops, the free-grain period under PMGKAY, and the current PMFBY premium rates.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "MSP announced for 22 mandated crops; sugarcane has an FRP",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "MSP at least 1.5 times A2+FL cost since 2018-19",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Free grain under the NFSA extended for five years from 1 January 2024",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "PM-KISAN pays ₹6,000 a year in three instalments",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "PMFBY farmer premium: 2% kharif, 1.5% rabi, 5% commercial and horticultural crops",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-06-30",
+    "recheckWhen": "MSP announcements for the next kharif season; any change to the NFSA free-grain period, PM-KISAN or PMFBY"
+   }
+  },
+  {
+   "id": "eco-syl-industry-infra",
+   "title": "Industry, liberalisation and infrastructure since 1991",
+   "nodes": [
+    "gs3-4",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 9,
+   "dek": "By the end, you will know what the 1991 reforms changed, how industry is measured, and how India builds and pays for infrastructure.",
+   "sections": [
+    {
+     "head": "The 1991 reforms",
+     "body": "In 1991 India faced a balance of payments crisis. Foreign exchange reserves were enough for only a few weeks of imports. The Government responded with reforms often summed up as LPG: liberalisation, privatisation and globalisation.\n\nThe New Industrial Policy of July 1991 abolished industrial licensing for all but a short list of industries. It cut the list of sectors reserved for the public sector; in time only atomic energy and railway operations remained reserved. The SHANTI Act, passed in December 2025, allows licensed private companies into nuclear power generation, while sensitive fuel-cycle work stays with the Government. It removed the need for prior approval under the MRTP Act for big firms to expand, and it opened the door to foreign direct investment.\n\nThe rupee was devalued in July 1991, import tariffs were cut over the decade, and the financial sector was reformed after the Narasimham Committee (1991)."
+    },
+    {
+     "head": "Measuring industry",
+     "body": "The Index of Industrial Production (IIP), on base year 2022-23 since June 2026 (2011-12 before that), measures the volume of industrial output each month. It covers mining, manufacturing and electricity; manufacturing has by far the largest weight.\n\nThe Index of Eight Core Industries covers coal, crude oil, natural gas, refinery products, fertilisers, steel, cement and electricity. In the 2011-12 series they made up about 40 per cent of the IIP's weight, and refinery products carried the largest weight among the eight. A revised Index of Core Industries on base 2022-23, released in July 2026, adds iron ore as a ninth industry; check the new weights before quoting them.\n\nMicro, small and medium enterprises (MSMEs) are classified by both investment in plant and machinery and turnover, a composite rule adopted in 2020. The thresholds were raised again from April 2025. MSMEs employ far more people than large firms, which is why their access to credit is a frequent Mains theme."
+    },
+    {
+     "head": "Policies for manufacturing",
+     "body": "Make in India (2014) aimed to make India a manufacturing hub. Production Linked Incentive (PLI) schemes, launched from 2020, pay firms a share of their extra sales in sectors such as mobile phones, pharmaceuticals, automobiles and solar modules.\n\nOther measures include the cut in corporate tax rates in 2019, labour law codification, and industrial corridors such as the Delhi-Mumbai Industrial Corridor.\n\nThe persistent concern is that manufacturing's share of GDP has stayed roughly flat for decades, while services grew. Labour-intensive manufacturing, such as textiles and footwear, is where jobs for low-skilled workers would come from."
+    },
+    {
+     "head": "Infrastructure and how it is financed",
+     "body": "The National Infrastructure Pipeline (2019) listed planned projects across sectors. PM Gati Shakti, the National Master Plan launched in October 2021, puts the plans of different ministries on one digital map so that roads, railways, ports and pipelines are planned together. The National Monetisation Pipeline (2021) leases existing public assets to private operators to raise money for new ones.\n\nPublic-private partnership (PPP) models include Build-Operate-Transfer (BOT), where the private partner builds, runs and earns from a project before handing it back, and the Hybrid Annuity Model (HAM), used for highways since 2016, where the Government pays 40 per cent of the cost during construction and the rest as annuities.\n\nFlagship programmes include Bharatmala (roads), Sagarmala (ports), dedicated freight corridors (rail) and UDAN (regional air links, 2016). The National Investment and Infrastructure Fund (NIIF) was set up in 2015."
+    }
+   ],
+   "keyFacts": [
+    "New Industrial Policy, July 1991: licensing abolished for most industries; reserved list cut.",
+    "Reserved for the public sector after the reforms: atomic energy and railway operations; a December 2025 law (SHANTI) lets licensed private firms into nuclear power.",
+    "IIP base 2022-23 since June 2026; in the 2011-12 series the eight core industries were ≈ 40% of IIP weight and refinery products weighed most; iron ore became the ninth core industry in July 2026.",
+    "MSME definition: composite of investment and turnover since 2020; thresholds raised from April 2025.",
+    "PM Gati Shakti: October 2021; National Monetisation Pipeline: 2021; NIP: 2019.",
+    "HAM: Government pays 40% during construction, the rest as annuities."
+   ],
+   "examAngle": "Prelims asks which industries are in the core index, what HAM and BOT mean, and what Gati Shakti does. Mains asks why manufacturing has not created enough jobs and how to finance infrastructure without stressing banks.",
+   "selfCheck": [
+    "Which two sectors stayed reserved for the public sector after the 1991 reforms, and what changed for one of them in 2025?",
+    "How does HAM share risk between the Government and the private partner?",
+    "Why do MSMEs matter more for jobs than for output?"
+   ],
+   "sources": [
+    "NCERT Class XI Indian Economic Development, Chapter 3 (Liberalisation, Privatisation and Globalisation)",
+    "Office of the Economic Adviser, DPIIT, Index of Eight Core Industries (eaindustry.nic.in)",
+    "Ministry of MSME (msme.gov.in)",
+    "Economic Survey, chapters on industry and infrastructure",
+    "MoSPI press note on the report of the Technical Advisory Committee for the IIP base revision to 2022-23, May 2026 (PIB)"
+   ],
+   "verify": "Check the current MSME thresholds (revised from April 2025), the eight core industries' combined weight, and the number of PLI sectors.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "SHANTI law (December 2025) allows private companies in nuclear power generation; reprocessing, high-level waste and heavy water stay with the Central Government.",
+     "source": "PIB note on the SHANTI Bill, 2025, 19 December 2025, opened for the provisions. Passage and assent are from news reports only; the Act and its commencement notification were not opened",
+     "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/dec/doc20251219739001.pdf",
+     "opened": "2026-11-12",
+     "status": "unverified"
+    },
+    {
+     "claim": "IIP base year is 2022-23. The press note opened was issued ahead of the launch set for 1 June 2026; the launch release itself was not opened.",
+     "source": "MoSPI press note on the report of the Technical Advisory Committee for the IIP base revision to 2022-23, May 2026 (PIB)",
+     "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/may/doc2026525875601.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "Index of Core Industries revised to base 2022-23, with iron ore added as a ninth industry. The report seen was written before the release set for 20 July 2026. New weights not seen.",
+     "source": "Office of the Economic Adviser, DPIIT, revised Index of Core Industries, 20 July 2026. Seen only in an IANS report",
+     "url": "https://ianslive.in/govt-to-release-revised-index-of-core-industries-series-with-new-base-year-of-202223--20260717163003",
+     "opened": "2026-11-12",
+     "status": "unverified"
+    },
+    {
+     "claim": "MSME thresholds raised from 1 April 2025",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "HAM: 40% of cost paid by the Government during construction",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Eight core industries were about 40% (40.27%) of the weight of the 2011-12 IIP",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-06-30",
+    "recheckWhen": "Weights of the new IIP and core industries series; commencement of the SHANTI Act; new MSME thresholds"
+   }
+  },
+  {
+   "id": "eco-syl-external",
+   "title": "External sector and growth: balance of payments, the rupee and trade",
+   "nodes": [
+    "gs3-1",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 8,
+   "dek": "By the end, you will be able to read India's balance of payments, explain how the rupee's value is set, and list the main trade rules.",
+   "sections": [
+    {
+     "head": "Reading the balance of payments",
+     "body": "The balance of payments (BoP) records all of a country's transactions with the rest of the world in a period.\n\nThe current account covers trade in goods (merchandise), trade in services, primary income (such as interest and dividends) and secondary income (mostly remittances sent home by workers abroad). India usually runs a large deficit in goods, a surplus in services led by software and business services, and a big inflow of remittances. India has been the world's largest recipient of remittances for several years.\n\nThe capital and financial account covers investment and borrowing: foreign direct investment (FDI), foreign portfolio investment (FPI), external commercial borrowing and NRI deposits. If the two accounts together leave a surplus, the RBI's foreign exchange reserves rise; a deficit draws them down."
+    },
+    {
+     "head": "How the rupee's value is set",
+     "body": "Before 1991 the rupee was pegged and devalued from time to time. After the 1991 crisis, India moved to a dual exchange rate in 1992 under the Liberalised Exchange Rate Management System, and to a single market-determined rate in March 1993.\n\nThe rupee's value is now set by the market, but the RBI buys and sells dollars to smooth sharp swings. It does not target a level. The nominal effective exchange rate (NEER) compares the rupee with a basket of currencies; the real effective exchange rate (REER) also adjusts for inflation differences.\n\nThe rupee became convertible on the current account in August 1994, when India accepted the IMF's Article VIII obligations. The capital account is only partly convertible, as recommended by the Tarapore committees (1997 and 2006), so large outflows still face limits."
+    },
+    {
+     "head": "Rules for trade and investment",
+     "body": "The Foreign Exchange Management Act (FEMA), 1999 replaced the stricter Foreign Exchange Regulation Act (FERA), 1973. FEMA treats foreign exchange violations as civil matters, not crimes.\n\nFDI comes in by two routes: the automatic route, with no prior approval, and the government route, which needs approval. Some sectors are capped and a few are closed.\n\nThe Foreign Trade Policy 2023, issued by the Directorate General of Foreign Trade, came into force on 1 April 2023 with no fixed end date. India has signed trade agreements with the UAE (2022), Australia (2022), the European Free Trade Association (2024), the United Kingdom (24 July 2025) and Oman (18 December 2025), among others. Agreements with New Zealand and with the European Union were announced on 22 December 2025 and 27 January 2026. Signing and entry into force come at different times for each, so check the status before writing them in an answer."
+    },
+    {
+     "head": "Why it matters",
+     "body": "A wide current account deficit financed by short-term flows makes a country vulnerable. That is what happened in 1991, when reserves fell to a few weeks of imports and gold had to be pledged. In 2013, the 'taper tantrum' showed how quickly portfolio money can leave.\n\nLarge reserves, mostly built since 2000, act as insurance. A rising share of services exports and remittances also steadies the current account. Mains answers often link the external sector to growth: exports create jobs, but they need competitive logistics, stable policy and access to markets."
+    }
+   ],
+   "keyFacts": [
+    "Current account: goods, services, primary income, secondary income (remittances).",
+    "Market-determined exchange rate since March 1993; LERMS (dual rate) in 1992.",
+    "Current account convertibility: August 1994 (IMF Article VIII).",
+    "Capital account: partly convertible; Tarapore committees 1997 and 2006.",
+    "FEMA 1999 replaced FERA 1973; violations are civil.",
+    "Foreign Trade Policy 2023: from 1 April 2023, open-ended."
+   ],
+   "examAngle": "Prelims asks which items fall in the current account, what REER means, and what convertibility India has. Mains asks how to narrow the trade deficit and whether trade agreements have helped India.",
+   "selfCheck": [
+    "Where do remittances sit in the balance of payments?",
+    "What is the difference between NEER and REER?",
+    "Why did the 1991 crisis happen?"
+   ],
+   "sources": [
+    "RBI data on India's balance of payments (rbi.org.in)",
+    "NCERT Class XII Introductory Macroeconomics, Chapter 6 (Open Economy Macroeconomics)",
+    "Directorate General of Foreign Trade, Foreign Trade Policy 2023 (dgft.gov.in)",
+    "Economic Survey, chapter on the external sector",
+    "Department of Commerce, note on trade agreements, March 2026"
+   ],
+   "verify": "Check that India is still the largest recipient of remittances (World Bank data) and the list and status of trade agreements in force; the note avoids reserve and deficit figures on purpose.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "India-UK CETA signed 24 July 2025; India-Oman CEPA signed 18 December 2025; India-New Zealand FTA announced 22 December 2025; India-EU FTA announced 27 January 2026. Entry-into-force dates not given in the source.",
+     "source": "Department of Commerce, note on trade agreements, March 2026",
+     "url": "https://www.commerce.gov.in/wp-content/uploads/2026/03/FTAs-achievement.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "Foreign Trade Policy 2023 in force from 1 April 2023 with no end date",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "India is the world's largest recipient of remittances",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-05-12",
+    "recheckWhen": "Signing or entry into force of the UK, Oman, New Zealand and EU agreements; a new Foreign Trade Policy"
+   }
+  },
+  {
+   "id": "eco-syl-employment",
+   "title": "Employment, poverty and inclusive growth",
+   "nodes": [
+    "gs3-1",
+    "gs2-8",
+    "pre-5"
+   ],
+   "gsPaper": "GS3",
+   "minutes": 8,
+   "dek": "By the end, you will know how India measures jobs and poverty, and the main laws and schemes for inclusion.",
+   "sections": [
+    {
+     "head": "Measuring jobs",
+     "body": "The Periodic Labour Force Survey (PLFS) of the NSO, begun in 2017-18, is India's main source on jobs. It reports three ratios. The labour force participation rate (LFPR) is the share of people working or looking for work. The worker population ratio (WPR) is the share of people working. The unemployment rate is the share of the labour force without work.\n\nIt uses two reference periods. 'Usual status' looks at the past year. 'Current weekly status' looks at the past week. The same person can be counted differently under each.\n\nMost Indian workers are self-employed or casual, and most work in the informal sector, without written contracts or social security. Women's labour force participation has been low by world standards, though PLFS rounds since 2017-18 show it rising. Check the latest PLFS figures before quoting any number."
+    },
+    {
+     "head": "Measuring poverty",
+     "body": "India has measured poverty by a poverty line of consumption. The Tendulkar committee method gave a poverty ratio of 21.9 per cent for 2011-12. The Rangarajan committee (2014) gave 29.5 per cent for the same year with a higher line; its method was never formally adopted.\n\nMultidimensional poverty looks beyond income, at health, education and living standards. The Global MPI is published by the UNDP and the Oxford Poverty and Human Development Initiative. NITI Aayog publishes a national MPI using National Family Health Survey data. It reported a large fall in multidimensional poverty over the decade to 2022-23.\n\nThe Planning Commission, which set poverty lines and five-year plans, was replaced by NITI Aayog on 1 January 2015."
+    },
+    {
+     "head": "Laws and schemes for inclusion",
+     "body": "The Mahatma Gandhi National Rural Employment Guarantee Act, 2005 gave every rural household a legal right to 100 days of unskilled wage work a year, on demand. It was repealed from 1 July 2026 and replaced by the Viksit Bharat - Guarantee for Rozgar and Ajeevika Mission (Gramin) Act, 2025, known as VB-G RAM G. The new Act guarantees 125 days a year. States may pause public works for up to 60 days in all during peak sowing and harvesting. If work is not given within 15 days, an unemployment allowance is due. The Centre and most states share the cost in a 60:40 ratio.\n\nParliament passed four labour codes in 2019 and 2020, folding 29 central labour laws into four: wages, industrial relations, social security, and occupational safety, health and working conditions. All four came into force on 21 November 2025.\n\nThe Deendayal Antyodaya Yojana-National Rural Livelihoods Mission (2011) organises poor rural women into self-help groups. Stand-Up India (2016) supports bank loans to SC, ST and women entrepreneurs. Skill India and the PM Kaushal Vikas Yojana (2015) train workers."
+    },
+    {
+     "head": "Inclusive growth",
+     "body": "Inclusive growth means growth whose benefits reach the poor, the regions left behind, and groups such as women, SCs and STs. It was the theme of the Eleventh Five Year Plan (2007-12): 'faster and more inclusive growth'.\n\nGrowth alone may not create enough good jobs. India's growth has been led by services and capital-intensive industry, while most workers are in farming, construction and petty trade. Mains answers often argue for labour-intensive manufacturing, better skills, women's work and stronger social security for informal workers."
+    }
+   ],
+   "keyFacts": [
+    "PLFS (NSO) since 2017-18; usual status vs current weekly status.",
+    "LFPR = working or seeking work; WPR = working; UR = without work ÷ labour force.",
+    "Tendulkar poverty ratio for 2011-12: 21.9%; Rangarajan: 29.5%.",
+    "Global MPI: UNDP and OPHI; national MPI: NITI Aayog, from NFHS data.",
+    "MGNREGA 2005 (100 days) was replaced from 1 July 2026 by the VB-G RAM G Act, 2025: 125 days on demand; allowance if no work in 15 days.",
+    "Four labour codes replace 29 central laws; all four are in force from 21 November 2025.",
+    "NITI Aayog replaced the Planning Commission on 1 January 2015."
+   ],
+   "examAngle": "Prelims asks the definitions of LFPR and WPR, the provisions of the rural employment guarantee, and who publishes which index. Mains asks about jobless growth, women's work and social security for gig and informal workers.",
+   "selfCheck": [
+    "What is the difference between LFPR and WPR?",
+    "What does the rural employment guarantee law promise, and to whom?",
+    "Why can GDP grow fast without many new jobs?"
+   ],
+   "sources": [
+    "PLFS annual reports, MoSPI (mospi.gov.in)",
+    "NITI Aayog, National Multidimensional Poverty Index (niti.gov.in)",
+    "Ministry of Rural Development, MGNREGA (nrega.nic.in)",
+    "Ministry of Labour and Employment, labour codes (labour.gov.in)",
+    "Ministry of Rural Development and PIB note on the commencement of the VB-G RAM G Act, 2025, 11 May 2026; PIB backgrounder of 18 December 2025 (PRID 2205734)",
+    "PIB, Ministry of Labour and Employment, release of 21 November 2025 on the four Labour Codes (PRID 2192463)"
+   ],
+   "verify": "Check the date all four labour codes came into force, the latest PLFS ratios (none quoted), and NITI Aayog's latest MPI headline figure before adding it.",
+   "tone": "NEUTRAL",
+   "factsToCheck": [
+    {
+     "claim": "MGNREGA, 2005 repealed from 1 July 2026; VB-G RAM G Act, 2025 in force from that date: 125 days, pause of up to 60 days, unemployment allowance after 15 days, 60:40 cost share (90:10 for North Eastern and Himalayan states).",
+     "source": "Ministry of Rural Development and PIB note on the commencement of the VB-G RAM G Act, 2025, 11 May 2026; PIB backgrounder of 18 December 2025 (PRID 2205734)",
+     "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/may/doc2026511867601.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "All four Labour Codes in force from 21 November 2025; they replace 29 central laws.",
+     "source": "PIB, Ministry of Labour and Employment, release of 21 November 2025 on the four Labour Codes (PRID 2192463)",
+     "url": "https://labour.gov.in/sites/default/files/pib2192463.pdf",
+     "opened": "2026-11-12",
+     "status": "verified"
+    },
+    {
+     "claim": "Tendulkar poverty ratio for 2011-12: 21.9%; Rangarajan: 29.5%",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "NITI Aayog national MPI: large fall in multidimensional poverty over the decade to 2022-23",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    },
+    {
+     "claim": "Whether the VB-G RAM G Act keeps a one-third share for women workers was not checked; the line was removed from the note",
+     "source": "Primary source not opened in G1",
+     "url": "",
+     "opened": "",
+     "status": "unverified"
+    }
+   ],
+   "review": {
+    "status": "draft",
+    "asOf": "2026-11-12",
+    "recheckBy": "2027-05-12",
+    "recheckWhen": "Rules under the VB-G RAM G Act; the next PLFS annual report; any new official poverty estimate"
+   }
+  }
+ ]
 }

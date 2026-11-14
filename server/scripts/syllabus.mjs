@@ -67,7 +67,7 @@ function check() {
     const d = load(p);
     if (d.schema !== "upsc-pods/syllabus-notes@1") { errs.push(`${p}: schema should be upsc-pods/syllabus-notes@1`); continue; }
     if (!SUBJECTS.includes(d.subject)) errs.push(`${p}: subject ${d.subject} isn't a Prep subject key`);
-    counts.notes[d.subject] = d.notes.length;
+    counts.notes[d.subject] = (counts.notes[d.subject] ?? 0) + d.notes.length;
     for (const n of d.notes) {
       const at = `${p} ${n.id}`;
       if (ids.has(n.id)) errs.push(`${at}: id used twice`);
@@ -81,6 +81,13 @@ function check() {
       if (!n.verify?.trim()) errs.push(`${at}: no editor flag (verify)`);
       if (!n.nodes?.length) errs.push(`${at}: no syllabus node`);
       for (const x of n.nodes ?? []) { const e = nodeErr(x); if (e) errs.push(`${at}: ${e}`); }
+      // Worked questions (CSAT method notes) become a practice set of their own when packed.
+      const passages = new Set((n.passages ?? []).map((x) => x.id));
+      (n.worked ?? []).forEach((w, i) => {
+        const wat = `${at} worked ${i + 1}`;
+        checkMcq({ q: w.q, options: w.options, answerIndex: w.answer, why: w.solution, nodes: n.nodes }, wat, errs);
+        if (w.passage && !passages.has(w.passage)) errs.push(`${wat}: passage ${w.passage} isn't in the note's passages`);
+      });
     }
   }
   for (const p of list("csat")) {
@@ -231,6 +238,33 @@ function toMock(d) {
   };
 }
 
+/**
+ * A note's worked questions as a practice set (CSAT method notes carry 15 each). Written by us, so labelled practice,
+ * never PYQ. The passage, when there is one, goes above the question.
+ */
+function toWorked(d, n) {
+  const passages = Object.fromEntries((n.passages ?? []).map((p) => [p.id, p]));
+  const hiOk = n.worked.every((w) => w.hi);
+  const lang = (w, l) => {
+    const m = l === "hi" ? w.hi : w, p = passages[w.passage];
+    const pass = p ? (l === "hi" ? p.hi?.text : p.text) : null;
+    return { stem: [pass, m.q].filter(Boolean).join("\n\n"), statements: [], ask: null, options: m.options, why: m.solution };
+  };
+  return {
+    ...MOCK_LOOK, marking: { right: 2.5, wrong: -0.83, blank: 0 },
+    tags: { stage: ["prelims"], papers: ["prelims-csat"] },
+    id: `${n.id}-practice`, tone: "NEUTRAL",
+    title: n.hi?.title ? { en: `Practice: ${n.title}`, hi: `अभ्यास: ${n.hi.title}` } : { en: `Practice: ${n.title}` },
+    paper: "prelims-csat", section: `Practice (written by us, not from a UPSC paper): ${n.title}`, minutes: Math.max(10, n.worked.length * 2),
+    questions: n.worked.map((w) => ({ format: "direct", node: n.nodes[0], nodes: n.nodes, topic: d.topic, answer: w.answer, difficulty: "medium",
+      en: lang(w, "en"), ...(hiOk ? { hi: lang(w, "hi") } : {}) })),
+    sources: { en: n.sources.join("; ") }, schema: "upsc-pods/mock-paper@1",
+    ...(n.factsToCheck?.length ? { factsToCheck: n.factsToCheck } : {}),
+    review: REVIEW(`Draft, ${hiOk ? "English and Hindi" : "English only, Hindi still to come"}. Practice questions written for the note "${n.title}". All ${n.worked.length} answers were solved blind and matched the key (14 Nov 2026). ${n.verify}`),
+    provenance: PROVENANCE,
+  };
+}
+
 /** CSAT passages: every question carries its passage, because the player shows one question at a time. */
 function toCsatMock(d) {
   const questions = d.sets.flatMap((s, i) => s.questions.map((q) => toMockQ(q, `Passage ${i + 1}: ${s.title}\n\n${s.passage}\n\n${q.q}`)));
@@ -263,7 +297,10 @@ if (cmd === "check" || cmd === "pack") {
       files.push({ path, bytes: body.length, sha256: createHash("sha256").update(body).digest("hex") });
       into.push(path);
     };
-    for (const p of list("syllabus")) { const d = load(p); for (const n of d.notes) write(`long-read/${n.id}.json`, toRead(d, n), reads); }
+    for (const p of list("syllabus")) { const d = load(p); for (const n of d.notes) {
+      write(`long-read/${n.id}.json`, toRead(d, n), reads);
+      if (n.worked?.length) write(`mock-paper/${n.id}-practice.json`, toWorked(d, n), mocks);
+    } }
     for (const p of list("csat")) { const d = load(p); write(`mock-paper/${d.id}.json`, toCsatMock(d), mocks); }
     for (const p of list("mocks")) { const d = load(p); write(`mock-paper/${d.id}.json`, toMock(d), mocks); }
     for (const p of list("topic-paths")) {

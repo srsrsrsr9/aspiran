@@ -1,0 +1,1965 @@
+{
+ "schema": "aspiran/topic-path@1",
+ "id": "path-pol-parliament",
+ "version": 1,
+ "tone": "NEUTRAL",
+ "subject": "pol",
+ "node": "gs2-3",
+ "nodes": [
+  "gs2-3",
+  "pre-4"
+ ],
+ "gsPaper": "GS2",
+ "title": {
+  "en": "Parliament: structure, law-making, the Budget and committees",
+  "hi": "संसद: संरचना, विधि-निर्माण, बजट और समितियाँ"
+ },
+ "promise": {
+  "en": "One topic, start to finish: learn it, recall it, practise it the way UPSC asks it, and keep it.",
+  "hi": "एक topic, शुरू से आख़िर तक: समझिए, याद से निकालिए, वैसे practice कीजिए जैसे UPSC पूछता है, और उसे याद रखिए।"
+ },
+ "canDo": [
+  {
+   "en": "State how each House is composed, how long it lasts, and who presides over it, with the Article for each.",
+   "hi": "बता सकें कि हर सदन कैसे बनता है, कितने समय चलता है, और उसकी अध्यक्षता कौन करता है, हर एक के अनुच्छेद के साथ।"
+  },
+  {
+   "en": "Tell an ordinary bill, a Money Bill, a Financial Bill and a Constitution amendment bill apart by five tests.",
+   "hi": "साधारण विधेयक, धन विधेयक, वित्त विधेयक और संविधान संशोधन विधेयक को पाँच कसौटियों से अलग कर सकें।"
+  },
+  {
+   "en": "Walk through the Budget in Parliament, from the annual financial statement to the Finance Bill.",
+   "hi": "संसद में बजट की यात्रा बता सकें, वार्षिक वित्तीय विवरण से वित्त विधेयक तक।"
+  },
+  {
+   "en": "Plan a Mains answer on committees, the Money Bill route or privileges in about two minutes.",
+   "hi": "समितियों, धन विधेयक के रास्ते या विशेषाधिकारों पर Mains answer का ढाँचा लगभग दो मिनट में बना सकें।"
+  }
+ ],
+ "sittings": {
+  "en": "Whole topic: about 60 minutes, best in two or three sittings. Express: about 15 minutes. Stop anywhere; this page keeps your place. No clock runs.",
+  "hi": "पूरा topic: लगभग 60 मिनट, दो या तीन बैठकों में सबसे अच्छा। Express: लगभग 15 मिनट। कहीं भी रुकिए; यह पेज आपकी जगह याद रखता है। कोई घड़ी नहीं चलती।"
+ },
+ "why": {
+  "en": "Why this topic: Parliament is where the rules are exact and the lookalikes are many. Prorogation and adjournment, a Money Bill and a Financial Bill, a simple and a special majority: Prelims statements turn on these differences, and Mains asks how well the institution works. The past questions on this page will be added from UPSC's own papers once they are in hand; until then nothing here is called a past question.",
+  "hi": "यह topic क्यों: संसद में नियम सटीक हैं और मिलते-जुलते शब्द बहुत। सत्रावसान और स्थगन, धन विधेयक और वित्त विधेयक, साधारण और विशेष बहुमत: Prelims के कथन इन्हीं फ़र्क़ों पर टिके होते हैं, और Mains पूछता है कि यह संस्था कितनी अच्छी तरह काम करती है। इस पेज के पिछले वर्षों के प्रश्न UPSC के अपने प्रश्नपत्रों से तब जोड़े जाएँगे जब वे हाथ में होंगे; तब तक यहाँ किसी प्रश्न को PYQ नहीं कहा गया है।"
+ },
+ "steps": [
+  {
+   "type": "warmup",
+   "id": "warmup",
+   "title": {
+    "en": "Guess first",
+    "hi": "पहले अंदाज़ा लगाइए"
+   },
+   "lead": {
+    "en": "Three questions before you read anything. Guess if you don't know. A wrong guess followed by the answer sticks better than reading alone. Nothing here is scored.",
+    "hi": "कुछ भी पढ़ने से पहले तीन सवाल। पता न हो तो अंदाज़ा लगाइए। गलत अंदाज़ा और फिर जवाब, सिर्फ़ पढ़ने से ज़्यादा टिकता है। यहाँ कोई नंबर नहीं गिने जाते।"
+   },
+   "questions": [
+    {
+     "q": {
+      "en": "The quorum to hold a sitting of either House of Parliament is:",
+      "hi": "संसद के किसी सदन की बैठक के लिए गणपूर्ति (quorum) है:"
+     },
+     "options": [
+      {
+       "en": "One-third of the total membership",
+       "hi": "कुल सदस्य संख्या का एक-तिहाई"
+      },
+      {
+       "en": "One-fourth of the members present",
+       "hi": "उपस्थित सदस्यों का एक-चौथाई"
+      },
+      {
+       "en": "One-tenth of the total membership",
+       "hi": "कुल सदस्य संख्या का दसवाँ भाग"
+      },
+      {
+       "en": "Fifty members",
+       "hi": "पचास सदस्य"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "One-tenth of the total membership of the House, under Article 100. Part 1 has it with the other numbers.",
+      "hi": "सदन की कुल सदस्य संख्या का दसवाँ भाग, अनुच्छेद 100 के तहत। बाक़ी संख्याओं के साथ यह भाग 1 में है।"
+     }
+    },
+    {
+     "q": {
+      "en": "Who presides over a joint sitting of the two Houses?",
+      "hi": "दोनों सदनों की संयुक्त बैठक की अध्यक्षता कौन करता है?"
+     },
+     "options": [
+      {
+       "en": "The Speaker of the Lok Sabha",
+       "hi": "लोकसभा के अध्यक्ष"
+      },
+      {
+       "en": "The Vice-President",
+       "hi": "उपराष्ट्रपति"
+      },
+      {
+       "en": "The President",
+       "hi": "राष्ट्रपति"
+      },
+      {
+       "en": "The senior-most member of either House",
+       "hi": "किसी भी सदन के वरिष्ठतम सदस्य"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "The Speaker. The President summons the joint sitting under Article 108 but does not preside. The Vice-President chairs only the Rajya Sabha.",
+      "hi": "अध्यक्ष। राष्ट्रपति अनुच्छेद 108 के तहत संयुक्त बैठक बुलाते हैं, पर अध्यक्षता नहीं करते। उपराष्ट्रपति केवल राज्यसभा के सभापति हैं।"
+     }
+    },
+    {
+     "q": {
+      "en": "By a convention followed since 1967, the chairperson of the Public Accounts Committee comes from:",
+      "hi": "1967 से चली आ रही परंपरा के अनुसार लोक लेखा समिति के अध्यक्ष कहाँ से आते हैं?"
+     },
+     "options": [
+      {
+       "en": "The ruling party",
+       "hi": "सत्तारूढ़ दल"
+      },
+      {
+       "en": "The Rajya Sabha",
+       "hi": "राज्यसभा"
+      },
+      {
+       "en": "The Council of Ministers",
+       "hi": "मंत्रिपरिषद"
+      },
+      {
+       "en": "The opposition",
+       "hi": "विपक्ष"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "The opposition. It is a convention, not a rule in the Constitution. A minister cannot be a member of the committee.",
+      "hi": "विपक्ष से। यह परंपरा है, संविधान का नियम नहीं। कोई मंत्री इस समिति का सदस्य नहीं हो सकता।"
+     }
+    }
+   ],
+   "stage": "learn",
+   "why": {
+    "en": "Guessing before you read primes your brain to notice the answer when it turns up. A wrong guess followed by the right answer often sticks better than reading alone. It feels uncomfortable because you're asked something you haven't been taught yet, and that discomfort is part of how it works.",
+    "hi": "पढ़ने से पहले अंदाज़ा लगाने से दिमाग़ जवाब के आने पर उसे पकड़ने के लिए तैयार रहता है। गलत अंदाज़ा और फिर सही जवाब, अक्सर सिर्फ़ पढ़ने से ज़्यादा टिकता है। अजीब इसलिए लगता है क्योंकि आपसे वह पूछा जा रहा है जो अभी पढ़ाया ही नहीं गया, और यही असहजता इसके काम करने का हिस्सा है।",
+    "cite": "Pan & Carpenter (2023), Educational Psychology Review: prequestioning and pretesting effects",
+    "band": "C"
+   }
+  },
+  {
+   "type": "read",
+   "id": "read-1",
+   "part": 1,
+   "title": {
+    "en": "The two Houses: members, terms and sessions",
+    "hi": "दोनों सदन: सदस्य, कार्यकाल और सत्र"
+   },
+   "minutes": 4,
+   "body": {
+    "en": "**What Parliament is made of.** Article 79 says Parliament consists of the President and two Houses: the Council of States (Rajya Sabha) and the House of the People (Lok Sabha). The President is not a member of either House but is part of Parliament, because no bill becomes law without the President's assent.\n\nThe Lok Sabha represents the people. Under Article 81, it can have up to 550 elected members: up to 530 from the states and up to 20 from the Union territories. Its present strength is 543 elected seats, filled by direct election from territorial constituencies. The 104th Amendment of 2019 ended the nomination of two Anglo-Indian members under Article 331.\n\nThe Rajya Sabha represents the states. Under Article 80, it can have up to 250 members: up to 238 representatives of the states and Union territories, and 12 nominated by the President for special knowledge or practical experience in literature, science, art and social service. State representatives are elected by the elected members of the state legislative assemblies, by proportional representation through the single transferable vote. The Fourth Schedule allocates the seats.\n\n**Terms, membership and sessions.** The Lok Sabha has a term of five years from its first meeting, unless dissolved earlier (Article 83). During a national emergency, Parliament can extend it by law, one year at a time. The Rajya Sabha is permanent and is never dissolved. One-third of its members retire every second year, and a member's term is six years under the Representation of the People Act, 1951.\n\nA member must be a citizen of India, at least 25 years old for the Lok Sabha and 30 for the Rajya Sabha (Article 84).\n\nThe President summons and prorogues the Houses and can dissolve the Lok Sabha (Article 85). Six months must not pass between the last sitting of one session and the first sitting of the next. By convention there are three sessions a year: Budget, Monsoon and Winter.\n\nAdjournment suspends a sitting and is done by the presiding officer. Prorogation ends a session and is done by the President. Dissolution ends the life of the Lok Sabha itself. The quorum is one-tenth of the total membership of a House (Article 100).",
+    "hi": "**संसद किससे मिलकर बनती है।** अनुच्छेद 79 कहता है कि संसद राष्ट्रपति और दो सदनों से मिलकर बनती है: राज्यसभा और लोकसभा। राष्ट्रपति किसी सदन के सदस्य नहीं होते, फिर भी संसद का भाग हैं, क्योंकि उनकी स्वीकृति के बिना कोई विधेयक विधि नहीं बनता।\n\nलोकसभा जनता का प्रतिनिधित्व करती है। अनुच्छेद 81 के तहत इसमें अधिकतम 550 निर्वाचित सदस्य हो सकते हैं: राज्यों से अधिकतम 530 और संघ राज्यक्षेत्रों से अधिकतम 20। इसकी वर्तमान संख्या 543 निर्वाचित सीटें है, जो प्रादेशिक निर्वाचन क्षेत्रों से प्रत्यक्ष चुनाव द्वारा भरी जाती हैं। 2019 के 104वें संशोधन ने अनुच्छेद 331 के तहत दो आंग्ल-भारतीय सदस्यों का नामांकन समाप्त कर दिया।\n\nराज्यसभा राज्यों का प्रतिनिधित्व करती है। अनुच्छेद 80 के तहत इसमें अधिकतम 250 सदस्य हो सकते हैं: राज्यों और संघ राज्यक्षेत्रों के अधिकतम 238 प्रतिनिधि, और साहित्य, विज्ञान, कला और समाज सेवा में विशेष ज्ञान या व्यावहारिक अनुभव के लिए राष्ट्रपति द्वारा नामित 12 सदस्य। राज्यों के प्रतिनिधि राज्य विधानसभाओं के निर्वाचित सदस्यों द्वारा, एकल संक्रमणीय मत के ज़रिए आनुपातिक प्रतिनिधित्व पद्धति से, चुने जाते हैं। चौथी अनुसूची सीटों का आवंटन करती है।\n\n**कार्यकाल, सदस्यता और सत्र।** लोकसभा का कार्यकाल उसकी पहली बैठक से पाँच वर्ष है, जब तक उसे पहले भंग न किया जाए (अनुच्छेद 83)। राष्ट्रीय आपातकाल में संसद विधि द्वारा इसे एक बार में एक वर्ष के लिए बढ़ा सकती है। राज्यसभा स्थायी सदन है और कभी भंग नहीं होती। इसके एक-तिहाई सदस्य हर दूसरे वर्ष सेवानिवृत्त होते हैं, और लोक प्रतिनिधित्व अधिनियम, 1951 के तहत सदस्य का कार्यकाल छह वर्ष है।\n\nसदस्य बनने के लिए व्यक्ति को भारत का नागरिक होना चाहिए, लोकसभा के लिए कम से कम 25 वर्ष और राज्यसभा के लिए 30 वर्ष का होना चाहिए (अनुच्छेद 84)।\n\nराष्ट्रपति सदनों को आहूत करते हैं, उनका सत्रावसान करते हैं और लोकसभा को भंग कर सकते हैं (अनुच्छेद 85)। एक सत्र की अंतिम बैठक और अगले सत्र की पहली बैठक के बीच छह महीने का अंतर नहीं होना चाहिए। परंपरा से वर्ष में तीन सत्र होते हैं: बजट, मानसून और शीतकालीन।\n\nस्थगन किसी बैठक को रोकता है और यह पीठासीन अधिकारी करता है। सत्रावसान सत्र को समाप्त करता है और यह राष्ट्रपति करते हैं। विघटन स्वयं लोकसभा का जीवन समाप्त करता है। गणपूर्ति सदन की कुल सदस्य संख्या का दसवाँ भाग है (अनुच्छेद 100)।"
+   },
+   "check": [
+    {
+     "q": {
+      "en": "Representatives of the states in the Rajya Sabha are elected by:",
+      "hi": "राज्यसभा में राज्यों के प्रतिनिधि किसके द्वारा चुने जाते हैं?"
+     },
+     "options": [
+      {
+       "en": "All members of the state legislature, by simple majority",
+       "hi": "राज्य विधानमंडल के सभी सदस्य, साधारण बहुमत से"
+      },
+      {
+       "en": "Elected members of the legislative assembly, by proportional representation through the single transferable vote",
+       "hi": "विधानसभा के निर्वाचित सदस्य, एकल संक्रमणीय मत द्वारा आनुपातिक प्रतिनिधित्व से"
+      },
+      {
+       "en": "The voters of the state, directly",
+       "hi": "राज्य के मतदाता, सीधे"
+      },
+      {
+       "en": "Members of the Lok Sabha from that state",
+       "hi": "उस राज्य के लोकसभा सदस्य"
+      }
+     ],
+     "answer": 1,
+     "why": {
+      "en": "Only the elected members of the assembly vote, and the method is proportional representation by the single transferable vote.",
+      "hi": "केवल विधानसभा के निर्वाचित सदस्य मत देते हैं, और पद्धति एकल संक्रमणीय मत द्वारा आनुपातिक प्रतिनिधित्व की है।"
+     }
+    }
+   ],
+   "remember": {
+    "en": "**Remember:** Parliament = President + two Houses (Article 79) · Lok Sabha up to 550 elected, 543 now · Rajya Sabha up to 250, 12 nominated · ages 25 and 30 · six months' maximum gap · adjourn (presiding officer), prorogue (President), dissolve (Lok Sabha only) · quorum one-tenth.",
+    "hi": "**याद रखिए:** संसद = राष्ट्रपति + दो सदन (अनुच्छेद 79) · लोकसभा अधिकतम 550 निर्वाचित, अभी 543 · राज्यसभा अधिकतम 250, 12 मनोनीत · आयु 25 और 30 · अधिकतम छह माह का अंतर · स्थगन (पीठासीन अधिकारी), सत्रावसान (राष्ट्रपति), विघटन (केवल लोकसभा) · गणपूर्ति दसवाँ भाग।"
+   },
+   "ask": {
+    "id": "clarity",
+    "q": {
+     "en": "For you, this part was…",
+     "hi": "आपके लिए यह हिस्सा…"
+    },
+    "chips": [
+     {
+      "id": "basic",
+      "label": {
+       "en": "Too basic",
+       "hi": "बहुत आसान"
+      }
+     },
+     {
+      "id": "right",
+      "label": {
+       "en": "About right",
+       "hi": "ठीक"
+      }
+     },
+     {
+      "id": "dense",
+      "label": {
+       "en": "Too dense",
+       "hi": "बहुत भारी"
+      }
+     },
+     {
+      "id": "hindi",
+      "label": {
+       "en": "Hindi wording unclear",
+       "hi": "हिंदी शब्द अस्पष्ट"
+      }
+     }
+    ],
+    "why": {
+     "en": "If many say \"too dense\", we cut parts to about three minutes.",
+     "hi": "अगर बहुत लोग \"बहुत भारी\" कहें, तो हम हिस्सों को लगभग तीन मिनट का करेंगे।"
+    }
+   },
+   "stage": "learn",
+   "why": {
+    "en": "Short parts with a question after each keep your mind from drifting and make you pull the idea back out straight away. That's why the text folds away before the check: answering from memory builds memory; scrolling back to find the line doesn't. It feels slower than reading on, but you keep what you read.",
+    "hi": "छोटे हिस्से और हर एक के बाद एक सवाल, ध्यान भटकने नहीं देते और बात को तुरंत याद से निकलवाते हैं। इसीलिए जाँच से पहले पाठ बंद हो जाता है: याद से जवाब देना ही याद बनाता है; वापस scroll करके पंक्ति ढूँढना नहीं। आगे पढ़ते जाने से धीमा लगता है, पर जो पढ़ा वह सच में आपके पास रहता है।",
+    "cite": "Szpunar, Khan & Schacter (2013), PNAS: interpolated tests reduce mind wandering",
+    "band": "B"
+   }
+  },
+  {
+   "type": "read",
+   "id": "read-2",
+   "part": 2,
+   "title": {
+    "en": "Presiding officers and privileges",
+    "hi": "पीठासीन अधिकारी और विशेषाधिकार"
+   },
+   "minutes": 4,
+   "body": {
+    "en": "**Presiding officers.** The Lok Sabha elects a Speaker and a Deputy Speaker from among its members (Article 93). The Speaker can be removed by a resolution passed by a majority of all the then members of the House, after at least 14 days' notice (Article 94). When the Lok Sabha is dissolved, the Speaker stays in office until just before the first meeting of the new House.\n\nThe Speaker decides whether a bill is a Money Bill, and that decision is final (Article 110). The Speaker presides over a joint sitting of the two Houses (Article 118). The Speaker has a casting vote in a tie (Article 100). Under the Tenth Schedule, the Speaker decides questions of disqualification for defection.\n\nThe Vice-President is the ex officio Chairman of the Rajya Sabha (Article 89). Unlike the Speaker, the Chairman is not a member of the House. The Rajya Sabha elects its own Deputy Chairman.\n\nAfter a general election, the President appoints a pro tem Speaker, usually a senior member, who presides over the first sitting and administers the oath to new members.\n\n**Parliamentary privileges.** Privileges are special rights of the Houses, their committees and members, so they can work without fear or obstruction. Article 105 deals with them for Parliament.\n\nSome privileges belong to members individually. Members have freedom of speech in Parliament. No member can be taken to court for anything said or any vote given in Parliament or its committees. Members are also free from arrest in civil cases during a session and for 40 days before and after it, a rule that comes from the Code of Civil Procedure; this does not cover criminal cases or preventive detention.\n\nOther privileges belong to each House collectively. A House can publish its reports and proceedings and bar others from publishing them. It can exclude strangers and hold secret sittings. It can punish members and outsiders for breach of privilege or contempt. Under Article 122, courts cannot question its proceedings on the ground of irregular procedure.\n\nParliament has not codified its privileges in one law. Some argue codification would make them clearer and protect the press and citizens. Others argue it would bring privileges under court review and weaken the Houses' independence.",
+    "hi": "**पीठासीन अधिकारी।** लोकसभा अपने सदस्यों में से एक अध्यक्ष और एक उपाध्यक्ष चुनती है (अनुच्छेद 93)। अध्यक्ष को कम से कम 14 दिन की सूचना के बाद, सदन के तत्कालीन सभी सदस्यों के बहुमत से पारित संकल्प द्वारा हटाया जा सकता है (अनुच्छेद 94)। लोकसभा भंग होने पर अध्यक्ष नई लोकसभा की पहली बैठक से ठीक पहले तक पद पर बने रहते हैं।\n\nकोई विधेयक धन विधेयक है या नहीं, यह अध्यक्ष तय करते हैं, और उनका निर्णय अंतिम होता है (अनुच्छेद 110)। अध्यक्ष दोनों सदनों की संयुक्त बैठक की अध्यक्षता करते हैं (अनुच्छेद 118)। बराबरी की स्थिति में अध्यक्ष निर्णायक मत देते हैं (अनुच्छेद 100)। दसवीं अनुसूची के तहत दल-बदल के आधार पर निरर्हता के प्रश्न अध्यक्ष तय करते हैं।\n\nउपराष्ट्रपति राज्यसभा के पदेन सभापति होते हैं (अनुच्छेद 89)। अध्यक्ष के विपरीत, सभापति सदन के सदस्य नहीं होते। राज्यसभा अपना उपसभापति स्वयं चुनती है।\n\nआम चुनाव के बाद राष्ट्रपति एक अस्थायी (प्रोटेम) अध्यक्ष नियुक्त करते हैं, जो आम तौर पर कोई वरिष्ठ सदस्य होता है। वह पहली बैठक की अध्यक्षता करता है और नए सदस्यों को शपथ दिलाता है।\n\n**संसदीय विशेषाधिकार।** विशेषाधिकार सदनों, उनकी समितियों और सदस्यों के विशेष अधिकार हैं, ताकि वे बिना डर या बाधा के काम कर सकें। संसद के लिए अनुच्छेद 105 इनसे जुड़ा है।\n\nकुछ विशेषाधिकार सदस्यों के व्यक्तिगत हैं। सदस्यों को संसद में वाक् स्वतंत्रता है। संसद या उसकी समितियों में कही गई किसी बात या दिए गए किसी मत के लिए किसी सदस्य पर न्यायालय में कार्यवाही नहीं हो सकती। सत्र के दौरान और उसके 40 दिन पहले और बाद तक सदस्य दीवानी मामलों में गिरफ्तारी से भी मुक्त होते हैं, जो नियम सिविल प्रक्रिया संहिता से आता है; यह छूट आपराधिक मामलों या निवारक निरोध पर लागू नहीं होती।\n\nअन्य विशेषाधिकार हर सदन के सामूहिक हैं। सदन अपनी रिपोर्टें और कार्यवाही प्रकाशित कर सकता है और दूसरों को उन्हें प्रकाशित करने से रोक सकता है। वह बाहरी लोगों को बाहर रख सकता है और गुप्त बैठक कर सकता है। वह विशेषाधिकार हनन या अवमानना के लिए सदस्यों और बाहरी लोगों को दंड दे सकता है। अनुच्छेद 122 के तहत न्यायालय प्रक्रिया की अनियमितता के आधार पर उसकी कार्यवाही पर प्रश्न नहीं उठा सकते।\n\nसंसद ने अपने विशेषाधिकारों को किसी एक विधि में संहिताबद्ध नहीं किया है। कुछ लोगों का तर्क है कि संहिताकरण से वे अधिक स्पष्ट होंगे और प्रेस और नागरिकों की रक्षा होगी। अन्य का तर्क है कि इससे विशेषाधिकार न्यायिक समीक्षा के दायरे में आ जाएँगे और सदनों की स्वतंत्रता कमज़ोर होगी।"
+   },
+   "check": [
+    {
+     "q": {
+      "en": "The Speaker of the Lok Sabha can be removed by:",
+      "hi": "लोकसभा के अध्यक्ष को कैसे हटाया जा सकता है?"
+     },
+     "options": [
+      {
+       "en": "An order of the President",
+       "hi": "राष्ट्रपति के आदेश से"
+      },
+      {
+       "en": "A two-thirds majority of members present and voting",
+       "hi": "उपस्थित और मत देने वाले सदस्यों के दो-तिहाई बहुमत से"
+      },
+      {
+       "en": "A resolution of both Houses",
+       "hi": "दोनों सदनों के संकल्प से"
+      },
+      {
+       "en": "A resolution passed by a majority of all the then members of the House, after 14 days' notice",
+       "hi": "सदन के तत्कालीन समस्त सदस्यों के बहुमत से पारित संकल्प से, 14 दिन की सूचना के बाद"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "Article 94. The majority is counted on all the then members of the House, which is stricter than a majority of those present and voting.",
+      "hi": "अनुच्छेद 94। बहुमत सदन के तत्कालीन समस्त सदस्यों पर गिना जाता है, जो उपस्थित और मत देने वालों के बहुमत से कड़ा है।"
+     }
+    }
+   ],
+   "remember": {
+    "en": "**Remember:** Speaker elected by the House (Article 93), removed by a majority of all the then members · certifies Money Bills, presides over joint sittings, casting vote · Vice-President chairs the Rajya Sabha but is not its member · pro tem Speaker appointed by the President · Article 105: privileges · Code of Civil Procedure: no arrest in civil cases 40 days before and after a session.",
+    "hi": "**याद रखिए:** अध्यक्ष सदन द्वारा निर्वाचित (अनुच्छेद 93), तत्कालीन समस्त सदस्यों के बहुमत से हटाए जाते हैं · धन विधेयक प्रमाणित करते हैं, संयुक्त बैठक की अध्यक्षता, निर्णायक मत · उपराष्ट्रपति राज्यसभा के सभापति हैं पर सदस्य नहीं · सामयिक अध्यक्ष की नियुक्ति राष्ट्रपति करते हैं · अनुच्छेद 105: विशेषाधिकार · सिविल प्रक्रिया संहिता: सत्र के 40 दिन पहले और बाद तक सिविल मामलों में गिरफ़्तारी नहीं।"
+   },
+   "stage": "learn",
+   "why": {
+    "en": "Short parts with a question after each keep your mind from drifting and make you pull the idea back out straight away. That's why the text folds away before the check: answering from memory builds memory; scrolling back to find the line doesn't. It feels slower than reading on, but you keep what you read.",
+    "hi": "छोटे हिस्से और हर एक के बाद एक सवाल, ध्यान भटकने नहीं देते और बात को तुरंत याद से निकलवाते हैं। इसीलिए जाँच से पहले पाठ बंद हो जाता है: याद से जवाब देना ही याद बनाता है; वापस scroll करके पंक्ति ढूँढना नहीं। आगे पढ़ते जाने से धीमा लगता है, पर जो पढ़ा वह सच में आपके पास रहता है।",
+    "cite": "Szpunar, Khan & Schacter (2013), PNAS: interpolated tests reduce mind wandering",
+    "band": "B"
+   }
+  },
+  {
+   "type": "read",
+   "id": "read-3",
+   "part": 3,
+   "title": {
+    "en": "How bills become law",
+    "hi": "विधेयक विधि कैसे बनते हैं"
+   },
+   "minutes": 4,
+   "body": {
+    "en": "**How an ordinary bill becomes law.** A minister introduces a government bill; any other member, a private member's bill. An ordinary bill can start in either House.\n\nEach bill passes through three readings in each House. At the first reading, it is introduced. At the second, there is general discussion, the bill may go to a committee, and the House considers it clause by clause. At the third reading, the House passes or rejects the bill as a whole. It then goes to the other House.\n\nIf the second House rejects the bill, the Houses disagree on amendments, or more than six months pass without it being passed, the President can call a joint sitting (Article 108). The Speaker presides; a majority of members present and voting decides. A joint sitting cannot be held on a Money Bill, which Article 108 excludes, or on a constitutional amendment bill, which Article 368 requires each House to pass separately.\n\nA passed bill goes to the President (Article 111). The President can give assent, withhold it, or return a bill, other than a Money Bill, once for reconsideration. If the Houses pass it again, the President must assent.\n\n**Money Bills and Financial Bills.** Article 110 defines a Money Bill. It contains only matters such as imposing or changing a tax, government borrowing, the custody of the Consolidated Fund and spending from it. The Speaker's certificate on this is final.\n\nA Money Bill can be introduced only in the Lok Sabha, and only on the President's recommendation. The Rajya Sabha cannot reject or amend it. It must return it within 14 days with any recommendations, which the Lok Sabha may accept or reject. If it does not, the bill is deemed passed by both Houses. The President may assent or withhold assent but does not return a Money Bill.\n\nA Financial Bill (I) under Article 117 contains Money Bill matters along with other matters. It too can start only in the Lok Sabha on the President's recommendation, but is then treated like an ordinary bill, so the Rajya Sabha can amend or reject it. A Financial Bill (II) involves spending from the Consolidated Fund but no Article 110 matters. Neither House can pass it unless the President recommends that the House consider it.",
+    "hi": "**साधारण विधेयक विधि कैसे बनता है।** सरकारी विधेयक कोई मंत्री पेश करता है; कोई भी अन्य सदस्य गैर-सरकारी सदस्य विधेयक पेश कर सकता है। साधारण विधेयक किसी भी सदन में शुरू हो सकता है।\n\nहर विधेयक हर सदन में तीन वाचनों से गुज़रता है। पहले वाचन में उसे पेश किया जाता है। दूसरे वाचन में सामान्य चर्चा होती है, विधेयक किसी समिति को भेजा जा सकता है, और सदन उस पर खंडवार विचार करता है। तीसरे वाचन में सदन पूरे विधेयक को पारित या अस्वीकार करता है। फिर वह दूसरे सदन में जाता है।\n\nअगर दूसरा सदन विधेयक अस्वीकार कर दे, सदन संशोधनों पर असहमत हों, या छह महीने से अधिक समय तक वह पारित न हो, तो राष्ट्रपति संयुक्त बैठक बुला सकते हैं (अनुच्छेद 108)। लोकसभा अध्यक्ष इसकी अध्यक्षता करते हैं, और उपस्थित और मत देने वाले सदस्यों का बहुमत फ़ैसला करता है। धन विधेयक पर संयुक्त बैठक नहीं हो सकती, क्योंकि अनुच्छेद 108 उसे बाहर रखता है, और संविधान संशोधन विधेयक पर भी नहीं, क्योंकि अनुच्छेद 368 के तहत हर सदन को उसे अलग-अलग पारित करना होता है।\n\nपारित विधेयक राष्ट्रपति के पास जाता है (अनुच्छेद 111)। राष्ट्रपति स्वीकृति दे सकते हैं, उसे रोक सकते हैं, या धन विधेयक के अलावा किसी विधेयक को एक बार पुनर्विचार के लिए लौटा सकते हैं। अगर सदन उसे फिर पारित कर दें, तो राष्ट्रपति को स्वीकृति देनी होती है।\n\n**धन विधेयक और वित्त विधेयक।** धन विधेयक की परिभाषा अनुच्छेद 110 में है। इसमें केवल ऐसे विषय होते हैं जैसे कोई कर लगाना या बदलना, सरकार का उधार लेना, संचित निधि की अभिरक्षा और उससे खर्च। इस पर लोकसभा अध्यक्ष का प्रमाणपत्र अंतिम होता है।\n\nधन विधेयक केवल लोकसभा में, और केवल राष्ट्रपति की सिफ़ारिश पर, पेश किया जा सकता है। राज्यसभा इसे न अस्वीकार कर सकती है, न संशोधित। उसे 14 दिन के भीतर विधेयक लौटाना होता है, किसी सिफ़ारिश के साथ, जिसे लोकसभा माने या न माने। अगर वह ऐसा न करे, तो विधेयक दोनों सदनों द्वारा पारित माना जाता है। राष्ट्रपति स्वीकृति दे सकते हैं या रोक सकते हैं, पर धन विधेयक को लौटाते नहीं।\n\nअनुच्छेद 117 के तहत वित्त विधेयक (I) में धन विधेयक के विषयों के साथ अन्य विषय भी होते हैं। यह भी केवल लोकसभा में राष्ट्रपति की सिफ़ारिश पर शुरू हो सकता है, पर फिर इसे साधारण विधेयक की तरह माना जाता है, इसलिए राज्यसभा इसे संशोधित या अस्वीकार कर सकती है। वित्त विधेयक (II) में संचित निधि से खर्च शामिल होता है, पर अनुच्छेद 110 का कोई विषय नहीं होता। कोई भी सदन इसे तब तक पारित नहीं कर सकता जब तक राष्ट्रपति उस सदन से इस पर विचार की सिफ़ारिश न करें।"
+   },
+   "check": [
+    {
+     "q": {
+      "en": "How does a Financial Bill (I) under Article 117 differ from a Money Bill?",
+      "hi": "अनुच्छेद 117 के तहत वित्त विधेयक (I), धन विधेयक से कैसे अलग है?"
+     },
+     "options": [
+      {
+       "en": "The Rajya Sabha can amend or reject it",
+       "hi": "राज्यसभा उसे संशोधित या अस्वीकार कर सकती है"
+      },
+      {
+       "en": "It can be introduced in either House",
+       "hi": "वह किसी भी सदन में प्रस्तुत हो सकता है"
+      },
+      {
+       "en": "It does not need the President's recommendation",
+       "hi": "उसे राष्ट्रपति की सिफ़ारिश नहीं चाहिए"
+      },
+      {
+       "en": "The President cannot withhold assent from it",
+       "hi": "राष्ट्रपति उस पर अनुमति नहीं रोक सकते"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "Both start only in the Lok Sabha on the President's recommendation. After that a Financial Bill (I) is treated as an ordinary bill, so the Rajya Sabha has its full powers.",
+      "hi": "दोनों केवल लोकसभा में, राष्ट्रपति की सिफ़ारिश पर शुरू होते हैं। उसके बाद वित्त विधेयक (I) साधारण विधेयक की तरह चलता है, इसलिए राज्यसभा के पास पूरी शक्तियाँ रहती हैं।"
+     }
+    }
+   ],
+   "remember": {
+    "en": "**Remember:** three readings in each House · joint sitting under Article 108, never for a Money Bill or an amendment bill · Money Bill: Article 110, Lok Sabha only, Speaker's certificate final, Rajya Sabha 14 days · Financial Bill (I): Lok Sabha start, then ordinary · President can return an ordinary bill once.",
+    "hi": "**याद रखिए:** हर सदन में तीन वाचन · अनुच्छेद 108 के तहत संयुक्त बैठक, धन विधेयक या संशोधन विधेयक पर कभी नहीं · धन विधेयक: अनुच्छेद 110, केवल लोकसभा, अध्यक्ष का प्रमाणपत्र अंतिम, राज्यसभा के पास 14 दिन · वित्त विधेयक (I): लोकसभा में शुरू, फिर साधारण · राष्ट्रपति साधारण विधेयक एक बार लौटा सकते हैं।"
+   },
+   "stage": "learn",
+   "why": {
+    "en": "Short parts with a question after each keep your mind from drifting and make you pull the idea back out straight away. That's why the text folds away before the check: answering from memory builds memory; scrolling back to find the line doesn't. It feels slower than reading on, but you keep what you read.",
+    "hi": "छोटे हिस्से और हर एक के बाद एक सवाल, ध्यान भटकने नहीं देते और बात को तुरंत याद से निकलवाते हैं। इसीलिए जाँच से पहले पाठ बंद हो जाता है: याद से जवाब देना ही याद बनाता है; वापस scroll करके पंक्ति ढूँढना नहीं। आगे पढ़ते जाने से धीमा लगता है, पर जो पढ़ा वह सच में आपके पास रहता है।",
+    "cite": "Szpunar, Khan & Schacter (2013), PNAS: interpolated tests reduce mind wandering",
+    "band": "B"
+   }
+  },
+  {
+   "type": "read",
+   "id": "read-4",
+   "part": 4,
+   "title": {
+    "en": "The Budget and the committees",
+    "hi": "बजट और समितियाँ"
+   },
+   "minutes": 4,
+   "body": {
+    "en": "**The Budget in Parliament.** The Constitution never says budget. Article 112 calls it the annual financial statement: the estimated receipts and expenditure of the Government of India for a year, laid before both Houses.\n\nSome spending is charged on the Consolidated Fund, such as the President's emoluments and the salaries of Supreme Court judges and the Comptroller and Auditor General (CAG). Charged expenditure can be discussed but is not voted on (Article 113). The rest is voted as demands for grants.\n\nThe stages are: presentation, general discussion, scrutiny by departmental standing committees, voting on demands for grants, the Appropriation Bill, and the Finance Bill. Only the Lok Sabha votes on demands for grants. Members may move cut motions: a policy cut reduces a demand to Re 1, an economy cut by a stated amount, and a token cut by Rs 100.\n\nMoney leaves the Consolidated Fund only under an appropriation made by law (Article 114). The Finance Bill gives effect to tax proposals, since Article 265 allows no tax without authority of law. A vote on account (Article 116) allows interim spending.\n\n**Parliamentary committees.** Committees do much of Parliament's detailed work, in more depth than a full House can.\n\nStanding committees are permanent. The Public Accounts Committee has 22 members, 15 from the Lok Sabha and 7 from the Rajya Sabha. It examines CAG reports on government spending. By convention since 1967, its chairperson comes from the opposition. The Estimates Committee has 30 members, all from the Lok Sabha, and suggests economies in spending. The Committee on Public Undertakings has 22 members and examines public sector enterprises.\n\nDepartmentally related standing committees began in 1993. Each covers one or more ministries and examines their demands for grants and the bills referred to it. There are now 24, each with 31 members: 21 from the Lok Sabha and 10 from the Rajya Sabha.\n\nAd hoc committees, such as a select or joint committee on a bill, end when their task is done.\n\nSupporters say committees allow calm, cross-party scrutiny. Critics note that referring a bill to a committee is not compulsory, so how often it happens varies.",
+    "hi": "**संसद में बजट।** संविधान में \"बजट\" शब्द नहीं है। अनुच्छेद 112 इसे वार्षिक वित्तीय विवरण कहता है: भारत सरकार की एक वर्ष की अनुमानित प्राप्तियाँ और व्यय, जो दोनों सदनों के सामने रखे जाते हैं।\n\nकुछ व्यय संचित निधि पर भारित होता है, जैसे राष्ट्रपति की उपलब्धियाँ और सर्वोच्च न्यायालय के न्यायाधीशों और नियंत्रक-महालेखापरीक्षक (CAG) के वेतन। भारित व्यय पर चर्चा हो सकती है, पर मतदान नहीं होता (अनुच्छेद 113)। बाकी व्यय पर अनुदान की माँगों के रूप में मतदान होता है।\n\nचरण ये हैं: प्रस्तुति, सामान्य चर्चा, विभागीय स्थायी समितियों द्वारा जाँच, अनुदान की माँगों पर मतदान, विनियोग विधेयक, और वित्त विधेयक। अनुदान की माँगों पर केवल लोकसभा मतदान करती है। सदस्य कटौती प्रस्ताव ला सकते हैं: नीति कटौती माँग को घटाकर 1 रुपया कर देती है, मितव्ययिता कटौती एक तय राशि से घटाती है, और सांकेतिक कटौती 100 रुपये से।\n\nसंचित निधि से धन केवल विधि द्वारा किए गए विनियोग के तहत निकलता है (अनुच्छेद 114)। वित्त विधेयक कर प्रस्तावों को लागू करता है, क्योंकि अनुच्छेद 265 विधि के प्राधिकार के बिना कोई कर लगाने की अनुमति नहीं देता। लेखानुदान (अनुच्छेद 116) अंतरिम खर्च की अनुमति देता है।\n\n**संसदीय समितियाँ।** समितियाँ संसद का बहुत-सा विस्तृत काम पूरे सदन से ज़्यादा गहराई से करती हैं।\n\nस्थायी समितियाँ स्थायी होती हैं। लोक लेखा समिति में 22 सदस्य होते हैं, 15 लोकसभा से और 7 राज्यसभा से। यह सरकारी खर्च पर CAG की रिपोर्टों की जाँच करती है। 1967 से चली परंपरा के अनुसार इसका अध्यक्ष विपक्ष से होता है। प्राक्कलन समिति में 30 सदस्य होते हैं, सभी लोकसभा से, और यह खर्च में मितव्ययिता के सुझाव देती है। सार्वजनिक उपक्रम समिति में 22 सदस्य होते हैं और यह सार्वजनिक क्षेत्र के उद्यमों की जाँच करती है।\n\nविभाग-संबंधित स्थायी समितियाँ 1993 में शुरू हुईं। हर समिति एक या अधिक मंत्रालयों को देखती है और उनकी अनुदान की माँगों और उसे भेजे गए विधेयकों की जाँच करती है। अब ये 24 हैं, हर एक में 31 सदस्य: 21 लोकसभा से और 10 राज्यसभा से।\n\nतदर्थ समितियाँ, जैसे किसी विधेयक पर प्रवर समिति या संयुक्त समिति, अपना काम पूरा होने पर समाप्त हो जाती हैं।\n\nसमर्थक कहते हैं कि समितियाँ शांत और दलों से ऊपर उठकर जाँच का मौका देती हैं। आलोचक कहते हैं कि विधेयक को समिति के पास भेजना अनिवार्य नहीं है, इसलिए ऐसा कितनी बार होता है, यह बदलता रहता है।"
+   },
+   "check": [
+    {
+     "q": {
+      "en": "Which of these committees draws all its members from the Lok Sabha?",
+      "hi": "इनमें से किस समिति के सभी सदस्य लोकसभा से होते हैं?"
+     },
+     "options": [
+      {
+       "en": "Public Accounts Committee",
+       "hi": "लोक लेखा समिति"
+      },
+      {
+       "en": "Committee on Public Undertakings",
+       "hi": "सार्वजनिक उपक्रम समिति"
+      },
+      {
+       "en": "Estimates Committee",
+       "hi": "प्राक्कलन समिति"
+      },
+      {
+       "en": "A departmentally related standing committee",
+       "hi": "विभाग-संबंधित स्थायी समिति"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "The Estimates Committee has 30 members, all from the Lok Sabha. The other three have members from both Houses.",
+      "hi": "प्राक्कलन समिति में 30 सदस्य होते हैं, सभी लोकसभा से। बाक़ी तीनों में दोनों सदनों के सदस्य होते हैं।"
+     }
+    }
+   ],
+   "remember": {
+    "en": "**Remember:** Article 112: annual financial statement · charged expenditure is discussed, not voted · only the Lok Sabha votes demands for grants · policy cut Re 1, token cut Rs 100 · Appropriation Bill (Article 114), Finance Bill (Article 265), vote on account (Article 116) · PAC 22, Estimates 30, departmental committees since 1993.",
+    "hi": "**याद रखिए:** अनुच्छेद 112: वार्षिक वित्तीय विवरण · भारित व्यय पर चर्चा होती है, मतदान नहीं · अनुदान की माँगों पर केवल लोकसभा मत देती है · नीति कटौती 1 रुपया, सांकेतिक कटौती 100 रुपये · विनियोग विधेयक (अनुच्छेद 114), वित्त विधेयक (अनुच्छेद 265), लेखानुदान (अनुच्छेद 116) · लोक लेखा समिति 22, प्राक्कलन समिति 30, विभागीय समितियाँ 1993 से।"
+   },
+   "stage": "learn",
+   "why": {
+    "en": "Short parts with a question after each keep your mind from drifting and make you pull the idea back out straight away. That's why the text folds away before the check: answering from memory builds memory; scrolling back to find the line doesn't. It feels slower than reading on, but you keep what you read.",
+    "hi": "छोटे हिस्से और हर एक के बाद एक सवाल, ध्यान भटकने नहीं देते और बात को तुरंत याद से निकलवाते हैं। इसीलिए जाँच से पहले पाठ बंद हो जाता है: याद से जवाब देना ही याद बनाता है; वापस scroll करके पंक्ति ढूँढना नहीं। आगे पढ़ते जाने से धीमा लगता है, पर जो पढ़ा वह सच में आपके पास रहता है।",
+    "cite": "Szpunar, Khan & Schacter (2013), PNAS: interpolated tests reduce mind wandering",
+    "band": "B"
+   }
+  },
+  {
+   "type": "sort",
+   "id": "sort",
+   "title": {
+    "en": "Which bill?",
+    "hi": "कौन-सा विधेयक?"
+   },
+   "lead": {
+    "en": "Twelve rules, mixed up on purpose. Put each under the kind of bill it describes. The differences between the three are a Prelims favourite.",
+    "hi": "बारह नियम, जानबूझकर मिलाए गए। हर एक को उस विधेयक के नीचे रखिए जिसका वह वर्णन करता है। इन तीनों के फ़र्क़ Prelims को बहुत प्रिय हैं।"
+   },
+   "buckets": [
+    {
+     "en": "Ordinary bill",
+     "hi": "साधारण विधेयक"
+    },
+    {
+     "en": "Money Bill",
+     "hi": "धन विधेयक"
+    },
+    {
+     "en": "Constitution amendment bill",
+     "hi": "संविधान संशोधन विधेयक"
+    }
+   ],
+   "items": [
+    {
+     "text": {
+      "en": "Can be introduced only in the Lok Sabha",
+      "hi": "केवल लोकसभा में प्रस्तुत हो सकता है"
+     },
+     "bucket": 1,
+     "why": {
+      "en": "Article 109. The other two can start in either House.",
+      "hi": "अनुच्छेद 109। बाक़ी दोनों किसी भी सदन में शुरू हो सकते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "If the Houses stay deadlocked for more than six months, the President may summon them to sit together",
+      "hi": "यदि सदनों में छह माह से अधिक गतिरोध रहे, तो राष्ट्रपति उन्हें साथ बैठने के लिए बुला सकते हैं"
+     },
+     "bucket": 0,
+     "why": {
+      "en": "Article 108. No joint sitting exists for the other two.",
+      "hi": "अनुच्छेद 108। बाक़ी दोनों के लिए संयुक्त बैठक नहीं होती।"
+     }
+    },
+    {
+     "text": {
+      "en": "The Rajya Sabha must return it within 14 days",
+      "hi": "राज्यसभा को इसे 14 दिन में लौटाना होता है"
+     },
+     "bucket": 1,
+     "why": {
+      "en": "With recommendations, which the Lok Sabha may accept or reject.",
+      "hi": "सिफ़ारिशों के साथ, जिन्हें लोकसभा मान भी सकती है और ठुकरा भी सकती है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Needs a majority of the total membership and two-thirds of members present and voting, in each House",
+      "hi": "हर सदन में कुल सदस्य संख्या का बहुमत और उपस्थित और मत देने वाले सदस्यों का दो-तिहाई चाहिए"
+     },
+     "bucket": 2,
+     "why": {
+      "en": "The special majority of Article 368.",
+      "hi": "अनुच्छेद 368 का विशेष बहुमत।"
+     }
+    },
+    {
+     "text": {
+      "en": "The President may return it once for reconsideration",
+      "hi": "राष्ट्रपति इसे एक बार पुनर्विचार के लिए लौटा सकते हैं"
+     },
+     "bucket": 0,
+     "why": {
+      "en": "Article 111. A Money Bill is not returned, and assent to an amendment bill is obligatory.",
+      "hi": "अनुच्छेद 111। धन विधेयक लौटाया नहीं जाता, और संशोधन विधेयक पर अनुमति देना बाध्यकारी है।"
+     }
+    },
+    {
+     "text": {
+      "en": "The President must give assent",
+      "hi": "राष्ट्रपति को अनुमति देनी ही होती है"
+     },
+     "bucket": 2,
+     "why": {
+      "en": "Made obligatory by the 24th Amendment, 1971.",
+      "hi": "24वें संशोधन, 1971 से बाध्यकारी।"
+     }
+    },
+    {
+     "text": {
+      "en": "The Speaker's certificate about its nature is final",
+      "hi": "इसके स्वरूप पर अध्यक्ष का प्रमाणपत्र अंतिम है"
+     },
+     "bucket": 1,
+     "why": {
+      "en": "Article 110.",
+      "hi": "अनुच्छेद 110।"
+     }
+    },
+    {
+     "text": {
+      "en": "Needs the President's recommendation before it is introduced",
+      "hi": "प्रस्तुत होने से पहले राष्ट्रपति की सिफ़ारिश चाहिए"
+     },
+     "bucket": 1,
+     "why": {
+      "en": "Article 117. An amendment bill needs no prior permission of the President.",
+      "hi": "अनुच्छेद 117। संशोधन विधेयक के लिए राष्ट्रपति की पूर्व अनुमति नहीं चाहिए।"
+     }
+    },
+    {
+     "text": {
+      "en": "Each House must pass it separately; if they disagree, it fails",
+      "hi": "हर सदन को इसे अलग-अलग पारित करना होता है; असहमति हो तो यह गिर जाता है"
+     },
+     "bucket": 2,
+     "why": {
+      "en": "No joint sitting, and the Rajya Sabha has equal power here.",
+      "hi": "संयुक्त बैठक नहीं होती, और यहाँ राज्यसभा की शक्ति बराबर है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Passed by a simple majority of members present and voting, and may start in either House",
+      "hi": "उपस्थित और मत देने वाले सदस्यों के साधारण बहुमत से पारित, और किसी भी सदन में शुरू हो सकता है"
+     },
+     "bucket": 0,
+     "why": {
+      "en": "The default rule for legislation.",
+      "hi": "विधि-निर्माण का सामान्य नियम।"
+     }
+    },
+    {
+     "text": {
+      "en": "In some cases it needs ratification by the legislatures of at least half the states",
+      "hi": "कुछ मामलों में इसे कम से कम आधे राज्यों के विधानमंडलों का अनुसमर्थन चाहिए"
+     },
+     "bucket": 2,
+     "why": {
+      "en": "For provisions that touch the federal balance.",
+      "hi": "उन उपबंधों के लिए जो संघीय संतुलन को छूते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Deemed passed by both Houses if the Rajya Sabha does not return it in time",
+      "hi": "यदि राज्यसभा समय पर न लौटाए तो दोनों सदनों से पारित माना जाता है"
+     },
+     "bucket": 1,
+     "why": {
+      "en": "Article 109, in the form passed by the Lok Sabha.",
+      "hi": "अनुच्छेद 109, उसी रूप में जिसमें लोकसभा ने पारित किया।"
+     }
+    }
+   ],
+   "ask": {
+    "id": "interleave",
+    "q": {
+     "en": "Mixing the subjects on purpose felt…",
+     "hi": "विषयों को जानबूझकर मिलाना कैसा लगा?"
+    },
+    "chips": [
+     {
+      "id": "helped",
+      "label": {
+       "en": "Helped me spot lookalikes",
+       "hi": "मिलते-जुलते पहचानने में मदद"
+      }
+     },
+     {
+      "id": "trick",
+      "label": {
+       "en": "Felt like a trick",
+       "hi": "चाल जैसा लगा"
+      }
+     },
+     {
+      "id": "fiddly",
+      "label": {
+       "en": "Fiddly on my phone",
+       "hi": "फ़ोन पर झंझट"
+      }
+     }
+    ],
+    "why": {
+     "en": "This decides whether every topic gets a mixed sort like this one.",
+     "hi": "इससे तय होगा कि हर topic में ऐसा मिला-जुला sort हो या नहीं।"
+    }
+   },
+   "stage": "practise",
+   "why": {
+    "en": "Mixing the three kinds of bill makes you decide each time which procedure applies, which is exactly what a Prelims option asks. Learning one procedure at a time feels smoother but teaches you less about the differences. Expect more mistakes here; that is the lookalikes doing their job.",
+    "hi": "तीनों तरह के विधेयकों को मिलाने से हर बार आपको तय करना पड़ता है कि कौन-सी प्रक्रिया लागू है, और Prelims का विकल्प ठीक यही पूछता है। एक-एक प्रक्रिया पढ़ना आसान लगता है, पर फ़र्क़ कम सिखाता है। यहाँ ज़्यादा गलतियाँ होंगी; मिलते-जुलते नियम अपना काम कर रहे हैं।"
+   }
+  },
+  {
+   "type": "recall",
+   "id": "recall",
+   "title": {
+    "en": "Say it from memory",
+    "hi": "याद से कहिए"
+   },
+   "pause": {
+    "en": "Re-reading feels like learning. Recalling is what actually builds memory.",
+    "hi": "दोबारा पढ़ना learning जैसा लगता है। याद करके निकालना ही असल में याद पक्की करता है।"
+   },
+   "prompt": {
+    "en": "Close your notes. Write, or say aloud, everything you remember about Parliament: the two Houses and their numbers, sessions, the presiding officers, privileges, the kinds of bill, the Budget stages and the committees. Rough is fine. Then tick what you got.",
+    "hi": "नोट्स बंद कीजिए। संसद के बारे में जो भी याद है, लिखिए या बोलिए: दोनों सदन और उनकी संख्याएँ, सत्र, पीठासीन अधिकारी, विशेषाधिकार, विधेयकों के प्रकार, बजट के चरण और समितियाँ। कच्चा चलेगा। फिर जो आया उस पर टिक लगाइए।"
+   },
+   "points": [
+    {
+     "en": "Article 79: Parliament is the President, the Rajya Sabha and the Lok Sabha.",
+     "hi": "अनुच्छेद 79: संसद = राष्ट्रपति, राज्यसभा और लोकसभा।"
+    },
+    {
+     "en": "Lok Sabha: up to 550 elected members (Article 81); Rajya Sabha: up to 250, including 12 nominated (Article 80).",
+     "hi": "लोकसभा: अधिकतम 550 निर्वाचित सदस्य (अनुच्छेद 81); राज्यसभा: अधिकतम 250, जिनमें 12 नामित (अनुच्छेद 80)।"
+    },
+    {
+     "en": "Rajya Sabha members are elected by elected MLAs by proportional representation through the single transferable vote.",
+     "hi": "राज्यसभा सदस्य निर्वाचित विधायकों द्वारा एकल संक्रमणीय मत के ज़रिए आनुपातिक प्रतिनिधित्व से चुने जाते हैं।"
+    },
+    {
+     "en": "Lok Sabha term is five years (Article 83); the Rajya Sabha is permanent, with one-third retiring every second year.",
+     "hi": "लोकसभा का कार्यकाल पाँच वर्ष (अनुच्छेद 83); राज्यसभा स्थायी है, जिसके एक-तिहाई सदस्य हर दूसरे वर्ष सेवानिवृत्त होते हैं।"
+    },
+    {
+     "en": "Not more than six months may pass between two sessions (Article 85).",
+     "hi": "दो सत्रों के बीच छह महीने से अधिक का अंतर नहीं हो सकता (अनुच्छेद 85)।"
+    },
+    {
+     "en": "The Speaker certifies Money Bills, presides over joint sittings and has a casting vote; the Vice-President chairs the Rajya Sabha.",
+     "hi": "अध्यक्ष धन विधेयक प्रमाणित करते हैं, संयुक्त बैठक की अध्यक्षता करते हैं और निर्णायक मत देते हैं; उपराष्ट्रपति राज्यसभा के सभापति हैं।"
+    },
+    {
+     "en": "No joint sitting is possible on a Money Bill or a constitutional amendment bill.",
+     "hi": "धन विधेयक या संविधान संशोधन विधेयक पर संयुक्त बैठक संभव नहीं है।"
+    },
+    {
+     "en": "Money Bill (Article 110): Lok Sabha only, on the President's recommendation; the Speaker's certificate is final.",
+     "hi": "धन विधेयक (अनुच्छेद 110): केवल लोकसभा में, राष्ट्रपति की सिफ़ारिश पर; अध्यक्ष का प्रमाणपत्र अंतिम।"
+    },
+    {
+     "en": "The Rajya Sabha must return a Money Bill within 14 days and cannot amend or reject it.",
+     "hi": "राज्यसभा को धन विधेयक 14 दिन के भीतर लौटाना होता है और वह इसे संशोधित या अस्वीकार नहीं कर सकती।"
+    },
+    {
+     "en": "Article 112: annual financial statement; charged expenditure is discussed but not voted (Article 113).",
+     "hi": "अनुच्छेद 112: वार्षिक वित्तीय विवरण; भारित व्यय पर चर्चा होती है पर मतदान नहीं (अनुच्छेद 113)।"
+    },
+    {
+     "en": "Cut motions: policy cut (Re 1), economy cut, token cut (Rs 100); vote on account under Article 116.",
+     "hi": "कटौती प्रस्ताव: नीति कटौती (1 रुपया), मितव्ययिता कटौती, सांकेतिक कटौती (100 रुपये); लेखानुदान अनुच्छेद 116 के तहत।"
+    },
+    {
+     "en": "Public Accounts Committee: 22 members (15 Lok Sabha, 7 Rajya Sabha), examines CAG reports; Estimates Committee: 30 Lok Sabha members.",
+     "hi": "लोक लेखा समिति: 22 सदस्य (15 लोकसभा, 7 राज्यसभा), CAG रिपोर्टों की जाँच; प्राक्कलन समिति: लोकसभा के 30 सदस्य।"
+    }
+   ],
+   "after": {
+    "en": "The points you didn't tick are your real syllabus for this topic. They come back first in your review.",
+    "hi": "जिन पर टिक नहीं लगा, वही इस topic का आपका असली syllabus है। आपके review में ये सबसे पहले लौटेंगे।"
+   },
+   "ask": {
+    "id": "recall-did",
+    "q": {
+     "en": "What did you actually do?",
+     "hi": "आपने असल में क्या किया?"
+    },
+    "chips": [
+     {
+      "id": "wrote",
+      "label": {
+       "en": "Wrote it",
+       "hi": "लिखा"
+      }
+     },
+     {
+      "id": "aloud",
+      "label": {
+       "en": "Said it aloud",
+       "hi": "बोला"
+      }
+     },
+     {
+      "id": "head",
+      "label": {
+       "en": "Thought it in my head",
+       "hi": "मन में सोचा"
+      }
+     },
+     {
+      "id": "list",
+      "label": {
+       "en": "Went straight to the list",
+       "hi": "सीधे सूची खोली"
+      }
+     }
+    ],
+    "why": {
+     "en": "If many say it aloud, voice input moves up our list.",
+     "hi": "अगर बहुत लोग बोलकर करते हैं, तो voice input हमारी सूची में ऊपर आएगा।"
+    }
+   },
+   "stage": "practise",
+   "why": {
+    "en": "Writing down everything you remember, with notes shut, is one of the best-tested ways to make learning last. It feels worse than re-reading because you see the gaps, and re-reading hides them. The gaps you find now are the ones you'll fix.",
+    "hi": "नोट्स बंद करके जो याद है सब लिख देना, सीखी बात को टिकाने के सबसे ज़्यादा परखे गए तरीक़ों में से है। दोबारा पढ़ने से बुरा लगता है क्योंकि कमियाँ दिखती हैं, और दोबारा पढ़ना उन्हें छिपा देता है। जो कमियाँ अभी दिखीं, वही आप ठीक करेंगे।",
+    "cite": "Karpicke & Blunt (2011), Science: retrieval practice beats concept mapping",
+    "band": "A"
+   }
+  },
+  {
+   "type": "apply",
+   "id": "apply",
+   "title": {
+    "en": "Use it: three situations",
+    "hi": "इस्तेमाल कीजिए: तीन स्थितियाँ"
+   },
+   "lead": {
+    "en": "Not facts this time: situations. Pick what the Constitution says happens next. This is how both Prelims statements and Mains examples test you.",
+    "hi": "इस बार facts नहीं: स्थितियाँ। चुनिए कि संविधान के अनुसार आगे क्या होता है। Prelims के कथन और Mains के उदाहरण, दोनों आपको इसी तरह परखते हैं।"
+   },
+   "questions": [
+    {
+     "q": {
+      "en": "The Lok Sabha passes a Money Bill and sends it to the Rajya Sabha, which takes no action for 14 days. What happens?",
+      "hi": "लोकसभा एक धन विधेयक पारित करके राज्यसभा को भेजती है, जो 14 दिन तक कोई कार्रवाई नहीं करती। क्या होता है?"
+     },
+     "options": [
+      {
+       "en": "The bill lapses",
+       "hi": "विधेयक व्यपगत हो जाता है"
+      },
+      {
+       "en": "The President calls a joint sitting",
+       "hi": "राष्ट्रपति संयुक्त बैठक बुलाते हैं"
+      },
+      {
+       "en": "The bill is deemed passed by both Houses in the form passed by the Lok Sabha",
+       "hi": "विधेयक उसी रूप में दोनों सदनों से पारित माना जाता है जिसमें लोकसभा ने पारित किया"
+      },
+      {
+       "en": "The Speaker extends the time by another 14 days",
+       "hi": "अध्यक्ष समय 14 दिन और बढ़ा देते हैं"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "Article 109(5). The Rajya Sabha can delay a Money Bill for 14 days at most.",
+      "hi": "अनुच्छेद 109(5)। राज्यसभा धन विधेयक को अधिकतम 14 दिन रोक सकती है।"
+     }
+    },
+    {
+     "q": {
+      "en": "A bill passed by the Lok Sabha is pending in the Rajya Sabha when the Lok Sabha is dissolved. What happens to the bill?",
+      "hi": "लोकसभा से पारित एक विधेयक राज्यसभा में लंबित है, तभी लोकसभा विघटित हो जाती है। विधेयक का क्या होता है?"
+     },
+     "options": [
+      {
+       "en": "It lapses",
+       "hi": "वह व्यपगत हो जाता है"
+      },
+      {
+       "en": "It continues, because the Rajya Sabha is a permanent House",
+       "hi": "वह चलता रहता है, क्योंकि राज्यसभा स्थायी सदन है"
+      },
+      {
+       "en": "It is deemed passed",
+       "hi": "वह पारित माना जाता है"
+      },
+      {
+       "en": "It goes to a joint sitting of the new Lok Sabha and the Rajya Sabha",
+       "hi": "वह नई लोकसभा और राज्यसभा की संयुक्त बैठक में जाता है"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "Article 107(5). A bill that started in the Rajya Sabha and was never passed by the Lok Sabha does not lapse (Article 107(4)); this one had been passed by the Lok Sabha, so it does.",
+      "hi": "अनुच्छेद 107(5)। जो विधेयक राज्यसभा में शुरू हुआ और लोकसभा से कभी पारित नहीं हुआ, वह व्यपगत नहीं होता (अनुच्छेद 107(4)); यह लोकसभा से पारित हो चुका था, इसलिए व्यपगत होता है।"
+     }
+    },
+    {
+     "q": {
+      "en": "In a speech in the Lok Sabha, a member makes a damaging remark about a private citizen. The citizen files a defamation suit against the member. What is the position?",
+      "hi": "लोकसभा में भाषण के दौरान एक सदस्य किसी निजी नागरिक के बारे में हानिकारक टिप्पणी करता है। नागरिक सदस्य पर मानहानि का वाद दायर करता है। स्थिति क्या है?"
+     },
+     "options": [
+      {
+       "en": "The suit can go on like any other",
+       "hi": "वाद किसी भी अन्य वाद की तरह चलेगा"
+      },
+      {
+       "en": "The suit can go on only with the Speaker's sanction",
+       "hi": "वाद केवल अध्यक्ष की मंज़ूरी से चल सकता है"
+      },
+      {
+       "en": "The suit can go on once the session ends",
+       "hi": "सत्र समाप्त होने पर वाद चल सकता है"
+      },
+      {
+       "en": "No court proceedings lie for anything said in Parliament; only the House can act on it",
+       "hi": "संसद में कही गई किसी बात पर न्यायालय में कार्यवाही नहीं हो सकती; केवल सदन कार्रवाई कर सकता है"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "Article 105(2). The protection covers what is said or voted inside the House and its committees. It does not cover what a member says outside.",
+      "hi": "अनुच्छेद 105(2)। यह संरक्षण सदन और उसकी समितियों के भीतर कही गई बात और दिए गए मत को मिलता है। सदन के बाहर कही गई बात को नहीं।"
+     }
+    }
+   ],
+   "stage": "practise",
+   "why": {
+    "en": "Using a rule in a new situation is harder than recognising it, and it's what UPSC actually tests. Practice helps most when the later question looks different from the practice one, which is why these aren't repeats. It feels like the ground moved; it did, on purpose.",
+    "hi": "किसी नियम को नई स्थिति में लगाना उसे पहचानने से कठिन है, और UPSC असल में यही परखता है। Practice सबसे ज़्यादा तब काम आती है जब बाद का सवाल practice वाले से अलग दिखे, इसीलिए ये दोहराव नहीं हैं। लगता है ज़मीन खिसक गई; जानबूझकर खिसकाई गई है।",
+    "cite": "Pan & Rickard (2018), Psychological Bulletin: transfer of test-enhanced learning",
+    "band": "B"
+   }
+  },
+  {
+   "type": "mains",
+   "id": "mains",
+   "title": {
+    "en": "Plan a Mains answer",
+    "hi": "Mains answer का ढाँचा बनाइए"
+   },
+   "pause": {
+    "en": "Two minutes of planning saves many minutes of wandering.",
+    "hi": "दो मिनट की planning, लिखते वक़्त भटकने के कई मिनट बचाती है।"
+   },
+   "lead": {
+    "en": "Pick one question. Spend about two minutes planning before you look at ours: one line to open, three or four points, each with an example, and a way forward. No clock runs. If you want the full practice, write the answer by hand on paper afterwards; the exam is on paper.",
+    "hi": "एक सवाल चुनिए। हमारा ढाँचा देखने से पहले लगभग दो मिनट planning कीजिए: शुरुआत की एक पंक्ति, तीन-चार बिंदु, हर एक के साथ एक उदाहरण, और आगे का रास्ता। कोई घड़ी नहीं चलती। पूरी practice चाहिए तो बाद में answer काग़ज़ पर हाथ से लिखिए; exam काग़ज़ पर ही होता है।"
+   },
+   "questions": [
+    {
+     "id": "money-bill",
+     "source": {
+      "label": "Practice question (written by us, not from a UPSC paper)"
+     },
+     "q": {
+      "en": "\"The Money Bill route can be used to pass laws without the consent of the Rajya Sabha.\" Examine this concern with reference to Article 110 and the role of the Speaker.",
+      "hi": "\"धन विधेयक के रास्ते का प्रयोग राज्यसभा की सहमति के बिना विधि पारित करने के लिए किया जा सकता है।\" अनुच्छेद 110 और अध्यक्ष की भूमिका के संदर्भ में इस चिंता का परीक्षण कीजिए।"
+     },
+     "marks": 15,
+     "words": 250,
+     "directive": {
+      "en": "\"Examine\": set out what Article 110 allows, why the concern arises, what the courts have said, and what would answer it.",
+      "hi": "\"परीक्षण कीजिए\": बताइए कि अनुच्छेद 110 क्या अनुमति देता है, चिंता क्यों उठती है, न्यायालयों ने क्या कहा है, और इसका उत्तर क्या हो सकता है।"
+     },
+     "skeleton": {
+      "intro": {
+       "en": "Article 110 defines a Money Bill as one that contains only provisions on tax, borrowing, the Consolidated Fund and matters incidental to them; on such a bill the Rajya Sabha can only recommend.",
+       "hi": "अनुच्छेद 110 धन विधेयक को ऐसा विधेयक बताता है जिसमें केवल कर, उधार, संचित निधि और उनसे जुड़े आनुषंगिक विषयों के उपबंध हों; ऐसे विधेयक पर राज्यसभा केवल सिफ़ारिश कर सकती है।"
+      },
+      "points": [
+       {
+        "en": "Why the route exists: money is the business of the directly elected House, to which the Council of Ministers is responsible (Article 75); the 14-day rule prevents a deadlock over finance.",
+        "hi": "यह रास्ता क्यों है: धन सीधे निर्वाचित सदन का विषय है, जिसके प्रति मंत्रिपरिषद उत्तरदायी है (अनुच्छेद 75); 14 दिन का नियम वित्त पर गतिरोध रोकता है।"
+       },
+       {
+        "en": "Why the concern arises: the word only is the test, but the Speaker's certificate is final under Article 110(3); a bill with wider content, once certified, bypasses the second House.",
+        "hi": "चिंता क्यों उठती है: कसौटी \"केवल\" शब्द है, पर अनुच्छेद 110(3) के तहत अध्यक्ष का प्रमाणपत्र अंतिम है; व्यापक विषय-वस्तु वाला विधेयक प्रमाणित होते ही दूसरे सदन को किनारे कर देता है।"
+       },
+       {
+        "en": "What the courts have said: the Aadhaar Act's passage as a Money Bill was upheld by a majority in 2018; in Rojer Mathew (2019) the Court referred the scope of Article 110 and of the Speaker's certificate to a larger bench.",
+        "hi": "न्यायालयों ने क्या कहा: आधार अधिनियम का धन विधेयक के रूप में पारित होना 2018 में बहुमत से कायम रखा गया; रोजर मैथ्यू (2019) में न्यायालय ने अनुच्छेद 110 और अध्यक्ष के प्रमाणपत्र की सीमा का प्रश्न बड़ी पीठ को भेजा।"
+       },
+       {
+        "en": "What is at stake: the Rajya Sabha speaks for the states and gives a second look; using the route narrowly keeps both the Lok Sabha's primacy on money and bicameral scrutiny.",
+        "hi": "दाँव पर क्या है: राज्यसभा राज्यों की आवाज़ है और दूसरी नज़र देती है; इस रास्ते का सीमित प्रयोग धन पर लोकसभा की प्रधानता और द्विसदनीय जाँच, दोनों को बचाता है।"
+       }
+      ],
+      "wayForward": {
+       "en": "Way forward: a reasoned certificate from the Speaker, advice from a small committee of both Houses in doubtful cases, and an early ruling from the larger bench on how far courts may review the certificate.",
+       "hi": "आगे का रास्ता: अध्यक्ष का सकारण प्रमाणपत्र, संदेह वाले मामलों में दोनों सदनों की एक छोटी समिति की सलाह, और बड़ी पीठ का शीघ्र निर्णय कि न्यायालय प्रमाणपत्र की कितनी समीक्षा कर सकते हैं।"
+      }
+     },
+     "earnsMarks": {
+      "examples": [
+       {
+        "en": "The Aadhaar Act, 2016, passed as a Money Bill.",
+        "hi": "आधार अधिनियम, 2016, धन विधेयक के रूप में पारित।"
+       },
+       {
+        "en": "The Finance Act, 2017, whose provisions on tribunals led to the reference in Rojer Mathew.",
+        "hi": "वित्त अधिनियम, 2017, जिसके अधिकरण संबंधी उपबंधों से रोजर मैथ्यू का संदर्भ उठा।"
+       }
+      ],
+      "caseOrReport": {
+       "en": "Rojer Mathew v South Indian Bank (2019), read with the Aadhaar judgment, K.S. Puttaswamy v Union of India (2018).",
+       "hi": "रोजर मैथ्यू बनाम साउथ इंडियन बैंक (2019), आधार निर्णय के. एस. पुट्टस्वामी बनाम भारत संघ (2018) के साथ।"
+      }
+     },
+     "model": {
+      "en": "Article 110 treats a bill as a Money Bill only if it deals with taxes, borrowing, the Consolidated Fund and matters incidental to them. Such a bill starts in the Lok Sabha, and the Rajya Sabha can only make recommendations within 14 days. The design is sound: the Council of Ministers answers to the Lok Sabha, and finance cannot wait on a deadlock. The concern is about classification. The Speaker's certificate is final, so a bill with wider content, once certified, escapes the second House. The Aadhaar Act, 2016 was passed this way and upheld by a majority in 2018. In Rojer Mathew (2019), which arose from the Finance Act, 2017, the Supreme Court referred the scope of Article 110 to a larger bench. The stakes are federal as well as procedural, since the Rajya Sabha speaks for the states. A reasoned certificate, committee advice in doubtful cases and a clear ruling on judicial review would answer the concern.",
+      "hi": "अनुच्छेद 110 किसी विधेयक को धन विधेयक तभी मानता है जब वह केवल कर, उधार, संचित निधि और उनसे जुड़े आनुषंगिक विषयों से संबंधित हो। ऐसा विधेयक लोकसभा में शुरू होता है, और राज्यसभा 14 दिन के भीतर केवल सिफ़ारिशें कर सकती है। यह व्यवस्था तर्कसंगत है: मंत्रिपरिषद लोकसभा के प्रति उत्तरदायी है, और वित्त गतिरोध का इंतज़ार नहीं कर सकता। चिंता वर्गीकरण को लेकर है। अध्यक्ष का प्रमाणपत्र अंतिम है, इसलिए व्यापक विषय-वस्तु वाला विधेयक प्रमाणित होते ही दूसरे सदन से बच निकलता है। आधार अधिनियम, 2016 इसी तरह पारित हुआ और 2018 में बहुमत से कायम रखा गया। रोजर मैथ्यू (2019) में, जो वित्त अधिनियम, 2017 से उठा, सर्वोच्च न्यायालय ने अनुच्छेद 110 की सीमा का प्रश्न बड़ी पीठ को भेजा। दाँव प्रक्रिया के साथ-साथ संघीय भी है, क्योंकि राज्यसभा राज्यों की आवाज़ है। सकारण प्रमाणपत्र, संदेह वाले मामलों में समिति की सलाह और न्यायिक समीक्षा पर स्पष्ट निर्णय इस चिंता का उत्तर होंगे।"
+     },
+     "commonMistake": {
+      "en": "Describing the Money Bill procedure at length and never reaching the concern about classification.",
+      "hi": "धन विधेयक की प्रक्रिया का लंबा वर्णन करना और वर्गीकरण की चिंता तक पहुँचना ही नहीं।"
+     }
+    },
+    {
+     "id": "committees",
+     "source": {
+      "label": "Practice question (written by us, not from a UPSC paper)"
+     },
+     "q": {
+      "en": "Parliamentary committees do much of Parliament's detailed work. Examine their role and the limits on their effectiveness.",
+      "hi": "संसदीय समितियाँ संसद का बहुत-सा विस्तृत काम करती हैं। उनकी भूमिका और उनकी प्रभावशीलता की सीमाओं का परीक्षण कीजिए।"
+     },
+     "marks": 10,
+     "words": 150,
+     "directive": {
+      "en": "\"Examine\": two halves of equal weight. What committees add, then what holds them back, with a named committee in each half.",
+      "hi": "\"परीक्षण कीजिए\": बराबर वज़न के दो हिस्से। समितियाँ क्या जोड़ती हैं, फिर उन्हें क्या रोकता है, हर हिस्से में एक समिति के नाम के साथ।"
+     },
+     "skeleton": {
+      "intro": {
+       "en": "A full House has little time for detail, so Parliament works through standing and ad hoc committees.",
+       "hi": "पूरे सदन के पास ब्योरे के लिए कम समय होता है, इसलिए संसद स्थायी और तदर्थ समितियों के माध्यम से काम करती है।"
+      },
+      "points": [
+       {
+        "en": "Financial control: the Public Accounts Committee examines CAG reports; the Estimates Committee suggests economies; the Committee on Public Undertakings examines public enterprises.",
+        "hi": "वित्तीय नियंत्रण: लोक लेखा समिति CAG की रिपोर्टों की जाँच करती है; प्राक्कलन समिति मितव्ययिता सुझाती है; सार्वजनिक उपक्रम समिति सार्वजनिक उद्यमों की जाँच करती है।"
+       },
+       {
+        "en": "Scrutiny of bills and budgets: the departmentally related standing committees, set up in 1993, examine demands for grants and the bills referred to them.",
+        "hi": "विधेयकों और बजट की जाँच: 1993 में बनी विभाग-संबंधित स्थायी समितियाँ अनुदान की माँगों और उन्हें भेजे गए विधेयकों की जाँच करती हैं।"
+       },
+       {
+        "en": "Why they work: smaller groups, members from both Houses and across parties, and time to hear officials and experts.",
+        "hi": "वे क्यों काम करती हैं: छोटे समूह, दोनों सदनों और सभी दलों के सदस्य, और अधिकारियों और विशेषज्ञों को सुनने का समय।"
+       },
+       {
+        "en": "Limits: referring a bill to a committee is not compulsory; reports are advisory; the PAC examines spending after it has happened.",
+        "hi": "सीमाएँ: विधेयक को समिति को भेजना अनिवार्य नहीं है; रिपोर्टें सलाहकारी हैं; लोक लेखा समिति व्यय की जाँच उसके हो जाने के बाद करती है।"
+       }
+      ],
+      "wayForward": {
+       "en": "Way forward: refer every major bill as a rule, give committees research staff, and have the government reply to each report within a fixed time.",
+       "hi": "आगे का रास्ता: नियम के तौर पर हर बड़ा विधेयक समिति को भेजा जाए, समितियों को शोध कर्मचारी मिलें, और सरकार हर रिपोर्ट का उत्तर निश्चित समय में दे।"
+      }
+     },
+     "earnsMarks": {
+      "examples": [
+       {
+        "en": "The Public Accounts Committee: 22 members, with a chairperson from the opposition by convention since 1967.",
+        "hi": "लोक लेखा समिति: 22 सदस्य, और 1967 से परंपरा के अनुसार विपक्ष से अध्यक्ष।"
+       },
+       {
+        "en": "The 24 departmentally related standing committees, each with 31 members from both Houses.",
+        "hi": "24 विभाग-संबंधित स्थायी समितियाँ, हर एक में दोनों सदनों के 31 सदस्य।"
+       }
+      ],
+      "caseOrReport": {
+       "en": "The Rules of Procedure and Conduct of Business in Lok Sabha, which set up the departmentally related standing committees in 1993.",
+       "hi": "लोकसभा के प्रक्रिया तथा कार्य संचालन नियम, जिनके तहत 1993 में विभाग-संबंधित स्थायी समितियाँ बनीं।"
+      }
+     },
+     "model": {
+      "en": "A full House has little time for detail, so Parliament does much of its scrutiny through committees. On money, the Public Accounts Committee examines the CAG's reports, the Estimates Committee suggests economies, and the Committee on Public Undertakings looks at public enterprises. On laws and budgets, the 24 departmentally related standing committees, set up in 1993, examine the demands for grants and the bills sent to them. Committees work because they are small, draw members from both Houses and all parties, and can hear officials and experts. Their limits are real. Referring a bill to a committee is not compulsory, so the practice varies. Their reports are advisory. The Public Accounts Committee looks at spending only after it has been made. The remedies are procedural: refer every major bill as a rule, give committees research support, and require the government to respond to each report within a fixed time.",
+      "hi": "पूरे सदन के पास ब्योरे के लिए कम समय होता है, इसलिए संसद अपनी बहुत-सी जाँच समितियों के माध्यम से करती है। धन के मामले में लोक लेखा समिति CAG की रिपोर्टों की जाँच करती है, प्राक्कलन समिति मितव्ययिता सुझाती है, और सार्वजनिक उपक्रम समिति सार्वजनिक उद्यमों को देखती है। विधि और बजट के मामले में 1993 में बनी 24 विभाग-संबंधित स्थायी समितियाँ अनुदान की माँगों और उन्हें भेजे गए विधेयकों की जाँच करती हैं। समितियाँ इसलिए काम करती हैं कि वे छोटी होती हैं, दोनों सदनों और सभी दलों के सदस्य लेती हैं, और अधिकारियों और विशेषज्ञों को सुन सकती हैं। उनकी सीमाएँ भी वास्तविक हैं। विधेयक को समिति को भेजना अनिवार्य नहीं है, इसलिए यह चलन बदलता रहता है। उनकी रिपोर्टें सलाहकारी हैं। लोक लेखा समिति व्यय को उसके हो जाने के बाद ही देखती है। उपाय प्रक्रिया से जुड़े हैं: हर बड़ा विधेयक नियम के तौर पर भेजा जाए, समितियों को शोध सहायता मिले, और सरकार हर रिपोर्ट का उत्तर निश्चित समय में दे।"
+     },
+     "commonMistake": {
+      "en": "Listing committees with their member counts and giving no assessment of how well they work.",
+      "hi": "समितियों और उनकी सदस्य संख्या की सूची देना और यह आकलन न करना कि वे कितनी अच्छी तरह काम करती हैं।"
+     }
+    },
+    {
+     "id": "privileges",
+     "source": {
+      "label": "Practice question (written by us, not from a UPSC paper)"
+     },
+     "q": {
+      "en": "Should parliamentary privileges be codified? Give arguments on both sides.",
+      "hi": "क्या संसदीय विशेषाधिकारों को संहिताबद्ध किया जाना चाहिए? दोनों पक्षों के तर्क दीजिए।"
+     },
+     "marks": 10,
+     "words": 150,
+     "directive": {
+      "en": "A direct question that asks for both sides. Give each side two reasons, then a view.",
+      "hi": "सीधा सवाल, जो दोनों पक्ष माँगता है। हर पक्ष के दो कारण दीजिए, फिर अपनी राय।"
+     },
+     "skeleton": {
+      "intro": {
+       "en": "Article 105 gives members freedom of speech in Parliament and leaves the other privileges to be defined by law; Parliament has not passed such a law.",
+       "hi": "अनुच्छेद 105 सदस्यों को संसद में वाक्-स्वातंत्र्य देता है और बाक़ी विशेषाधिकारों को विधि द्वारा परिभाषित करने के लिए छोड़ता है; संसद ने ऐसी विधि पारित नहीं की है।"
+      },
+      "points": [
+       {
+        "en": "For codification: citizens and the press would know in advance what counts as a breach; a House would not be judge in its own cause without a written standard.",
+        "hi": "संहिताकरण के पक्ष में: नागरिकों और प्रेस को पहले से पता होगा कि उल्लंघन क्या है; सदन लिखित मानक के बिना अपने ही मामले में न्यायाधीश नहीं बनेगा।"
+       },
+       {
+        "en": "For codification: a law would have to fit with the Fundamental Rights, especially Article 19(1)(a).",
+        "hi": "संहिताकरण के पक्ष में: विधि को मौलिक अधिकारों के अनुरूप होना होगा, विशेषकर अनुच्छेद 19(1)(क) के।"
+       },
+       {
+        "en": "Against: a code would bring every privilege question before the courts and weaken the Houses' control over their own proceedings (Article 122).",
+        "hi": "विपक्ष में: संहिता हर विशेषाधिकार के प्रश्न को न्यायालयों के सामने ले आएगी और सदनों का अपनी कार्यवाही पर नियंत्रण कमज़ोर करेगी (अनुच्छेद 122)।"
+       },
+       {
+        "en": "Against: privileges need to stay flexible to meet new kinds of obstruction; a fixed list could leave gaps.",
+        "hi": "विपक्ष में: नई तरह की बाधाओं से निपटने के लिए विशेषाधिकारों का लचीला रहना ज़रूरी है; तय सूची में कमियाँ रह सकती हैं।"
+       }
+      ],
+      "wayForward": {
+       "en": "A middle course: codify the penal powers and the procedure for hearing a person accused of breach, and leave the internal working of the Houses to their rules.",
+       "hi": "बीच का रास्ता: दंड की शक्तियों और उल्लंघन के आरोपी व्यक्ति को सुनने की प्रक्रिया को संहिताबद्ध किया जाए, और सदनों का आंतरिक कामकाज उनके नियमों पर छोड़ा जाए।"
+      }
+     },
+     "earnsMarks": {
+      "examples": [
+       {
+        "en": "Freedom from arrest in civil cases during a session and for 40 days before and after it.",
+        "hi": "सत्र के दौरान और उसके 40 दिन पहले और बाद तक सिविल मामलों में गिरफ़्तारी से छूट।"
+       },
+       {
+        "en": "A House's power to punish members and outsiders for breach of privilege or contempt.",
+        "hi": "विशेषाधिकार हनन या अवमानना के लिए सदस्यों और बाहरी व्यक्तियों को दंड देने की सदन की शक्ति।"
+       }
+      ],
+      "caseOrReport": {
+       "en": "Sita Soren v Union of India (2024), where seven judges held that a member who takes a bribe for a vote or speech is not protected by Article 105(2).",
+       "hi": "सीता सोरेन बनाम भारत संघ (2024), जिसमें सात न्यायाधीशों ने कहा कि मत या भाषण के लिए रिश्वत लेने वाले सदस्य को अनुच्छेद 105(2) का संरक्षण नहीं है।"
+      }
+     },
+     "model": {
+      "en": "Article 105 guarantees freedom of speech in Parliament and protects members from court proceedings for anything said or any vote given there. The other privileges were left to be defined by law, and Parliament has not made that law. Those who favour codification say that citizens and the press should know in advance what counts as a breach, that a House should not judge its own cause without a written standard, and that a law would have to respect the Fundamental Rights. Those against it say that a code would bring every privilege dispute before the courts, weakening the Houses' control over their proceedings under Article 122, and that privileges must stay flexible. The courts have already drawn one line: in Sita Soren (2024), seven judges held that taking a bribe for a vote is not protected. A middle course would codify the penal powers and the hearing procedure, and leave the internal working of the Houses to their own rules.",
+      "hi": "अनुच्छेद 105 संसद में वाक्-स्वातंत्र्य की गारंटी देता है और सदस्यों को वहाँ कही गई किसी बात या दिए गए किसी मत के लिए न्यायालय की कार्यवाही से बचाता है। बाक़ी विशेषाधिकार विधि द्वारा परिभाषित किए जाने के लिए छोड़े गए, और संसद ने वह विधि नहीं बनाई है। संहिताकरण के समर्थक कहते हैं कि नागरिकों और प्रेस को पहले से पता होना चाहिए कि उल्लंघन क्या है, कि सदन लिखित मानक के बिना अपने ही मामले में निर्णय न करे, और कि विधि को मौलिक अधिकारों का सम्मान करना होगा। विरोधी कहते हैं कि संहिता हर विशेषाधिकार विवाद को न्यायालयों के सामने ले आएगी, जिससे अनुच्छेद 122 के तहत सदनों का अपनी कार्यवाही पर नियंत्रण कमज़ोर होगा, और कि विशेषाधिकारों का लचीला रहना ज़रूरी है। न्यायालय एक रेखा पहले ही खींच चुके हैं: सीता सोरेन (2024) में सात न्यायाधीशों ने कहा कि मत के लिए रिश्वत लेना संरक्षित नहीं है। बीच का रास्ता यह है कि दंड की शक्तियाँ और सुनवाई की प्रक्रिया संहिताबद्ध हों, और सदनों का आंतरिक कामकाज उनके अपने नियमों पर छोड़ा जाए।"
+     },
+     "commonMistake": {
+      "en": "Taking one side from the first line, when the question asks for both.",
+      "hi": "पहली पंक्ति से ही एक पक्ष ले लेना, जबकि सवाल दोनों पक्ष माँगता है।"
+     }
+    }
+   ],
+   "selfCheck": [
+    {
+     "en": "I answered every part of the question, not just the first.",
+     "hi": "मैंने सवाल के हर हिस्से का जवाब दिया, केवल पहले का नहीं।"
+    },
+    {
+     "en": "Each point has one concrete example: an Article, a case, a number or a year.",
+     "hi": "हर बिंदु के साथ एक ठोस उदाहरण है: अनुच्छेद, केस, आँकड़ा या वर्ष।"
+    },
+    {
+     "en": "I showed both sides before giving a view.",
+     "hi": "राय देने से पहले मैंने दोनों पक्ष रखे।"
+    },
+    {
+     "en": "My way forward is specific (who should do what), not \"Centre and states should work together\".",
+     "hi": "मेरा आगे का रास्ता ठोस है (किसे क्या करना चाहिए), \"केंद्र और राज्य मिलकर काम करें\" जैसा नहीं।"
+    },
+    {
+     "en": "It would fit in about 250 words.",
+     "hi": "यह लगभग 250 शब्दों में आ जाएगा।"
+    }
+   ],
+   "ask": {
+    "id": "mains-did",
+    "q": {
+     "en": "Before you saw our plan, you…",
+     "hi": "हमारा ढाँचा देखने से पहले आपने…"
+    },
+    "chips": [
+     {
+      "id": "own",
+      "label": {
+       "en": "Planned my own",
+       "hi": "अपना बनाया"
+      }
+     },
+     {
+      "id": "little",
+      "label": {
+       "en": "Wrote a little, then looked",
+       "hi": "थोड़ा लिखा, फिर देखा"
+      }
+     },
+     {
+      "id": "paper",
+      "label": {
+       "en": "Wrote it on paper",
+       "hi": "काग़ज़ पर लिखा"
+      }
+     },
+     {
+      "id": "skipped",
+      "label": {
+       "en": "Skipped planning",
+       "hi": "planning छोड़ दी"
+      }
+     }
+    ],
+    "why": {
+     "en": "If many plan on paper, photo feedback on handwritten answers moves up.",
+     "hi": "अगर बहुत लोग काग़ज़ पर बनाते हैं, तो हाथ से लिखे answers की फ़ोटो पर feedback ऊपर आएगा।"
+    }
+   },
+   "stage": "write",
+   "why": {
+    "en": "Planning your own answer before seeing ours makes you notice what you didn't know, so our skeleton lands on prepared ground. Ticking your plan against a checklist trains the eye you'll need for your own answers. If you're brand new to Mains, looking at one worked plan first is fine: beginners learn more from examples, experienced writers less.",
+    "hi": "हमारा ढाँचा देखने से पहले अपना बनाने से पता चलता है कि क्या नहीं आता, और फिर हमारा ढाँचा तैयार ज़मीन पर उतरता है। अपने plan को checklist से मिलाना वह नज़र बनाता है जो अपने answers जाँचने में चाहिए। अगर Mains बिलकुल नया है, तो पहले एक बना हुआ ढाँचा देखना ठीक है: नए लोग उदाहरण से ज़्यादा सीखते हैं, अनुभवी कम।",
+    "cite": "Sinha & Kapur (2021), Review of Educational Research: productive failure; Kalyuga et al. (2003): expertise reversal",
+    "band": "B"
+   }
+  },
+  {
+   "type": "keep",
+   "id": "keep",
+   "title": {
+    "en": "Keep it",
+    "hi": "इसे याद रखिए"
+   },
+   "lead": {
+    "en": "First, the three questions you guessed at the start. Then the cards, one at a time, from memory. Each goes into your review: the ones you get right come back in a few days, the ones you miss come back tomorrow. The topic goes on your syllabus map too.",
+    "hi": "पहले, वे तीन सवाल जिन पर आपने शुरू में अंदाज़ा लगाया था। फिर cards, एक-एक करके, याद से। हर एक आपके review में जाता है: जो सही हुए वे कुछ दिनों में लौटेंगे, जो छूटे वे कल लौटेंगे। यह topic आपके syllabus map पर भी जुड़ जाता है।"
+   },
+   "cards": [
+    {
+     "id": "par-k1",
+     "q": {
+      "en": "Under Article 79, Parliament consists of:",
+      "hi": "अनुच्छेद 79 के अनुसार संसद किससे मिलकर बनती है?"
+     },
+     "options": [
+      {
+       "en": "The Lok Sabha and the Rajya Sabha",
+       "hi": "लोकसभा और राज्यसभा"
+      },
+      {
+       "en": "The President, the Rajya Sabha and the Lok Sabha",
+       "hi": "राष्ट्रपति, राज्यसभा और लोकसभा"
+      },
+      {
+       "en": "The President, the Vice-President and the two Houses",
+       "hi": "राष्ट्रपति, उपराष्ट्रपति और दोनों सदन"
+      },
+      {
+       "en": "The two Houses and the Council of Ministers",
+       "hi": "दोनों सदन और मंत्रिपरिषद"
+      }
+     ],
+     "answer": 1,
+     "why": {
+      "en": "The President is part of Parliament though not a member of either House.",
+      "hi": "राष्ट्रपति संसद का अंग हैं, हालाँकि किसी सदन के सदस्य नहीं।"
+     }
+    },
+    {
+     "id": "par-k2",
+     "q": {
+      "en": "The maximum strength of the Rajya Sabha under Article 80 is:",
+      "hi": "अनुच्छेद 80 के तहत राज्यसभा की अधिकतम संख्या है:"
+     },
+     "options": [
+      {
+       "en": "238 members",
+       "hi": "238 सदस्य"
+      },
+      {
+       "en": "245 members",
+       "hi": "245 सदस्य"
+      },
+      {
+       "en": "250 members",
+       "hi": "250 सदस्य"
+      },
+      {
+       "en": "260 members",
+       "hi": "260 सदस्य"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "250: up to 238 representatives of states and Union territories, and 12 nominated by the President.",
+      "hi": "250: राज्यों और केंद्र शासित प्रदेशों के अधिकतम 238 प्रतिनिधि, और राष्ट्रपति द्वारा मनोनीत 12।"
+     }
+    },
+    {
+     "id": "par-k3",
+     "q": {
+      "en": "The minimum age to be a member of the Rajya Sabha is:",
+      "hi": "राज्यसभा का सदस्य होने की न्यूनतम आयु है:"
+     },
+     "options": [
+      {
+       "en": "30 years",
+       "hi": "30 वर्ष"
+      },
+      {
+       "en": "25 years",
+       "hi": "25 वर्ष"
+      },
+      {
+       "en": "35 years",
+       "hi": "35 वर्ष"
+      },
+      {
+       "en": "21 years",
+       "hi": "21 वर्ष"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "30 for the Rajya Sabha and 25 for the Lok Sabha (Article 84).",
+      "hi": "राज्यसभा के लिए 30 और लोकसभा के लिए 25 (अनुच्छेद 84)।"
+     }
+    },
+    {
+     "id": "par-k4",
+     "q": {
+      "en": "The longest gap allowed between two sessions of a House is:",
+      "hi": "किसी सदन के दो सत्रों के बीच अधिकतम कितना अंतर हो सकता है?"
+     },
+     "options": [
+      {
+       "en": "Three months",
+       "hi": "तीन माह"
+      },
+      {
+       "en": "One year",
+       "hi": "एक वर्ष"
+      },
+      {
+       "en": "Four months",
+       "hi": "चार माह"
+      },
+      {
+       "en": "Six months",
+       "hi": "छह माह"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "Article 85: six months must not pass between the last sitting of one session and the first sitting of the next.",
+      "hi": "अनुच्छेद 85: एक सत्र की अंतिम बैठक और अगले सत्र की पहली बैठक के बीच छह माह नहीं बीतने चाहिए।"
+     }
+    },
+    {
+     "id": "par-k5",
+     "q": {
+      "en": "Who prorogues a House of Parliament?",
+      "hi": "संसद के किसी सदन का सत्रावसान कौन करता है?"
+     },
+     "options": [
+      {
+       "en": "The Speaker or the Chairman",
+       "hi": "अध्यक्ष या सभापति"
+      },
+      {
+       "en": "The Prime Minister",
+       "hi": "प्रधानमंत्री"
+      },
+      {
+       "en": "The President",
+       "hi": "राष्ट्रपति"
+      },
+      {
+       "en": "The Minister of Parliamentary Affairs",
+       "hi": "संसदीय कार्य मंत्री"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "The President prorogues; the presiding officer only adjourns a sitting.",
+      "hi": "सत्रावसान राष्ट्रपति करते हैं; पीठासीन अधिकारी केवल बैठक स्थगित करते हैं।"
+     }
+    },
+    {
+     "id": "par-k6",
+     "q": {
+      "en": "The Chairman of the Rajya Sabha is:",
+      "hi": "राज्यसभा के सभापति हैं:"
+     },
+     "options": [
+      {
+       "en": "Elected by the Rajya Sabha from among its members",
+       "hi": "राज्यसभा द्वारा अपने सदस्यों में से निर्वाचित"
+      },
+      {
+       "en": "The Vice-President, ex officio, who is not a member of the House",
+       "hi": "उपराष्ट्रपति, पदेन, जो सदन के सदस्य नहीं हैं"
+      },
+      {
+       "en": "Nominated by the President",
+       "hi": "राष्ट्रपति द्वारा मनोनीत"
+      },
+      {
+       "en": "The senior-most member of the House",
+       "hi": "सदन के वरिष्ठतम सदस्य"
+      }
+     ],
+     "answer": 1,
+     "why": {
+      "en": "Article 89. The House elects only its Deputy Chairman.",
+      "hi": "अनुच्छेद 89। सदन केवल अपने उपसभापति को चुनता है।"
+     }
+    },
+    {
+     "id": "par-k7",
+     "q": {
+      "en": "Who appoints the pro tem Speaker after a general election?",
+      "hi": "आम चुनाव के बाद सामयिक अध्यक्ष (pro tem Speaker) की नियुक्ति कौन करता है?"
+     },
+     "options": [
+      {
+       "en": "The President",
+       "hi": "राष्ट्रपति"
+      },
+      {
+       "en": "The outgoing Speaker",
+       "hi": "निवर्तमान अध्यक्ष"
+      },
+      {
+       "en": "The Prime Minister",
+       "hi": "प्रधानमंत्री"
+      },
+      {
+       "en": "The Lok Sabha, by election",
+       "hi": "लोकसभा, निर्वाचन द्वारा"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "The President, usually choosing a senior member, to preside over the first sitting and administer the oath.",
+      "hi": "राष्ट्रपति, प्रायः किसी वरिष्ठ सदस्य को चुनकर, ताकि वे पहली बैठक की अध्यक्षता करें और शपथ दिलाएँ।"
+     }
+    },
+    {
+     "id": "par-k8",
+     "q": {
+      "en": "A member's freedom from arrest during a session covers:",
+      "hi": "सत्र के दौरान सदस्य की गिरफ़्तारी से छूट किस पर लागू है?"
+     },
+     "options": [
+      {
+       "en": "Civil and criminal cases",
+       "hi": "सिविल और आपराधिक मामले"
+      },
+      {
+       "en": "Criminal cases only",
+       "hi": "केवल आपराधिक मामले"
+      },
+      {
+       "en": "Preventive detention only",
+       "hi": "केवल निवारक निरोध"
+      },
+      {
+       "en": "Civil cases only, and for 40 days before and after the session",
+       "hi": "केवल सिविल मामले, और सत्र के 40 दिन पहले और बाद तक"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "It does not cover criminal cases or preventive detention.",
+      "hi": "यह आपराधिक मामलों या निवारक निरोध पर लागू नहीं है।"
+     }
+    },
+    {
+     "id": "par-k9",
+     "q": {
+      "en": "Which Article defines a Money Bill?",
+      "hi": "कौन-सा अनुच्छेद धन विधेयक को परिभाषित करता है?"
+     },
+     "options": [
+      {
+       "en": "Article 108",
+       "hi": "अनुच्छेद 108"
+      },
+      {
+       "en": "Article 112",
+       "hi": "अनुच्छेद 112"
+      },
+      {
+       "en": "Article 110",
+       "hi": "अनुच्छेद 110"
+      },
+      {
+       "en": "Article 117",
+       "hi": "अनुच्छेद 117"
+      }
+     ],
+     "answer": 2,
+     "why": {
+      "en": "110 defines it; 108 is the joint sitting, 112 the annual financial statement, 117 Financial Bills.",
+      "hi": "110 इसे परिभाषित करता है; 108 संयुक्त बैठक, 112 वार्षिक वित्तीय विवरण, 117 वित्त विधेयक।"
+     }
+    },
+    {
+     "id": "par-k10",
+     "q": {
+      "en": "A policy cut motion seeks to reduce a demand for grant:",
+      "hi": "नीति कटौती प्रस्ताव किसी अनुदान की माँग को घटाने की माँग करता है:"
+     },
+     "options": [
+      {
+       "en": "To Re 1",
+       "hi": "1 रुपया कर देने की"
+      },
+      {
+       "en": "By Rs 100",
+       "hi": "100 रुपये से"
+      },
+      {
+       "en": "By a stated amount",
+       "hi": "एक बताई गई राशि से"
+      },
+      {
+       "en": "To zero",
+       "hi": "शून्य कर देने की"
+      }
+     ],
+     "answer": 0,
+     "why": {
+      "en": "To Re 1, to show disapproval of the policy. A token cut is by Rs 100; an economy cut is by a stated amount.",
+      "hi": "1 रुपया कर देने की, ताकि नीति से असहमति दिखे। सांकेतिक कटौती 100 रुपये की होती है; मितव्ययिता कटौती बताई गई राशि की।"
+     }
+    },
+    {
+     "id": "par-k11",
+     "q": {
+      "en": "The Public Accounts Committee has:",
+      "hi": "लोक लेखा समिति में होते हैं:"
+     },
+     "options": [
+      {
+       "en": "30 members, all from the Lok Sabha",
+       "hi": "30 सदस्य, सभी लोकसभा से"
+      },
+      {
+       "en": "22 members: 15 from the Lok Sabha and 7 from the Rajya Sabha",
+       "hi": "22 सदस्य: 15 लोकसभा से और 7 राज्यसभा से"
+      },
+      {
+       "en": "31 members: 21 from the Lok Sabha and 10 from the Rajya Sabha",
+       "hi": "31 सदस्य: 21 लोकसभा से और 10 राज्यसभा से"
+      },
+      {
+       "en": "15 members, all from the Rajya Sabha",
+       "hi": "15 सदस्य, सभी राज्यसभा से"
+      }
+     ],
+     "answer": 1,
+     "why": {
+      "en": "22 members. Thirty, all from the Lok Sabha, is the Estimates Committee; 31 is a departmentally related standing committee.",
+      "hi": "22 सदस्य। तीस, सभी लोकसभा से, प्राक्कलन समिति है; 31 विभाग-संबंधित स्थायी समिति है।"
+     }
+    },
+    {
+     "id": "par-k12",
+     "q": {
+      "en": "Charged expenditure on the Consolidated Fund of India is:",
+      "hi": "भारत की संचित निधि पर भारित व्यय:"
+     },
+     "options": [
+      {
+       "en": "Voted by both Houses",
+       "hi": "दोनों सदनों के मतदान से पारित होता है"
+      },
+      {
+       "en": "Neither discussed nor voted",
+       "hi": "पर न चर्चा होती है, न मतदान"
+      },
+      {
+       "en": "Voted by the Lok Sabha only",
+       "hi": "पर केवल लोकसभा मत देती है"
+      },
+      {
+       "en": "Discussed but not voted",
+       "hi": "पर चर्चा होती है, मतदान नहीं"
+      }
+     ],
+     "answer": 3,
+     "why": {
+      "en": "Article 113. Examples are the President's emoluments and the salaries of Supreme Court judges and the CAG.",
+      "hi": "अनुच्छेद 113। उदाहरण हैं राष्ट्रपति की परिलब्धियाँ और सर्वोच्च न्यायालय के न्यायाधीशों और CAG के वेतन।"
+     }
+    }
+   ],
+   "stage": "keep",
+   "why": {
+    "en": "Each card comes back just before you'd forget it, and each right answer pushes the next return further away. That's why you try them cold first: the schedule should follow your memory, not a button. Coming back after a gap feels harder than revising tonight, and that effort is what makes memory last months, not days.",
+    "hi": "हर card ठीक तब लौटता है जब आप उसे भूलने वाले होते हैं, और हर सही जवाब अगली वापसी को और दूर कर देता है। इसीलिए पहले बिना देखे कोशिश: तारीख़ आपकी याद से तय हो, किसी बटन से नहीं। अंतराल के बाद लौटना आज रात दोहराने से कठिन लगता है, और यही मेहनत याद को दिनों नहीं, महीनों तक टिकाती है।",
+    "cite": "Cepeda et al. (2006), Psychological Bulletin: distributed practice; Rawson, Dunlosky & Sciartelli (2013): successive relearning",
+    "band": "A"
+   },
+   "revisit": {
+    "en": "Your guesses from the start: try them again now.",
+    "hi": "शुरुआत के आपके अंदाज़े: अब फिर से कोशिश कीजिए।"
+   }
+  },
+  {
+   "type": "finish",
+   "id": "finish",
+   "title": {
+    "en": "That's the topic.",
+    "hi": "Topic पूरा हुआ।"
+   },
+   "pause": {
+    "en": "The exam doesn't ask what you read. It asks what you can still find.",
+    "hi": "Exam यह नहीं पूछता कि आपने क्या पढ़ा। वह पूछता है कि आप अब भी क्या ढूँढ सकते हैं।"
+   },
+   "next": {
+    "en": "What comes next in the app: these cards come back in your review, and the next topic in the same paper, the executive and the judiciary, picks up from here.",
+    "hi": "App में आगे क्या: ये cards आपके review में लौटेंगे, और इसी paper का अगला topic, कार्यपालिका और न्यायपालिका, यहीं से आगे बढ़ता है।"
+   },
+   "stage": "keep",
+   "why": {
+    "en": "Ending with what you can now do, and when you'll next meet these cards, turns a good intention into a plan. A plan that says \"when X, I'll do Y\" is followed far more often than \"I'll revise later\".",
+    "hi": "अंत में यह देखना कि अब आप क्या कर सकते हैं, और ये cards अगली बार कब मिलेंगे, एक अच्छे इरादे को plan बना देता है। \"जब X होगा, मैं Y करूँगा\" वाला plan \"बाद में दोहरा लूँगा\" से कहीं ज़्यादा निभता है।",
+    "cite": "Gollwitzer & Sheeran (2006), meta-analysis of implementation intentions",
+    "band": "B"
+   }
+  },
+  {
+   "type": "stop",
+   "id": "stop-1",
+   "stage": "learn",
+   "title": {
+    "en": "A good place to stop",
+    "hi": "रुकने की अच्छी जगह"
+   },
+   "body": {
+    "en": "Sitting 1 done: the two Houses, the presiding officers and privileges. Everything is saved on this device. Next: bills, the Budget and committees (about 20 minutes). Come back whenever you like.",
+    "hi": "बैठक 1 पूरी: दोनों सदन, पीठासीन अधिकारी और विशेषाधिकार। सब कुछ इसी device पर सहेजा गया है। अगला: विधेयक, बजट और समितियाँ (लगभग 20 मिनट)। जब चाहें लौटिए।"
+   }
+  },
+  {
+   "type": "stop",
+   "id": "stop-2",
+   "stage": "practise",
+   "title": {
+    "en": "A good place to stop",
+    "hi": "रुकने की अच्छी जगह"
+   },
+   "body": {
+    "en": "Sitting 2 done: bills, the Budget, committees and your own recall. Everything is saved on this device. Next: three situations, a Mains plan and keeping it (about 20 minutes). Come back whenever you like.",
+    "hi": "बैठक 2 पूरी: विधेयक, बजट, समितियाँ और आपकी अपनी याद। सब कुछ इसी device पर सहेजा गया है। अगला: तीन स्थितियाँ, एक Mains ढाँचा और उसे याद रखना (लगभग 20 मिनट)। जब चाहें लौटिए।"
+   }
+  }
+ ],
+ "sources": {
+  "en": "The Constitution of India (bare text, as on 1 May 2024, Legislative Department): Articles 79 to 122, 265, 368 and the Fourth and Tenth Schedules; the Representation of the People Act, 1951; Rules of Procedure and Conduct of Business in Lok Sabha; NCERT Class XI, Indian Constitution at Work, chapter 5; K.S. Puttaswamy v Union of India (Aadhaar, 2018); Rojer Mathew v South Indian Bank (2019); Sita Soren v Union of India (2024). The reads are taken from the two syllabus notes on this node as corrected in batch G1.",
+  "hi": "भारत का संविधान (मूल पाठ, 1 मई 2024 की स्थिति, विधायी विभाग): अनुच्छेद 79 से 122, 265, 368 और चौथी तथा दसवीं अनुसूची; लोक प्रतिनिधित्व अधिनियम, 1951; लोकसभा के प्रक्रिया तथा कार्य संचालन नियम; NCERT कक्षा XI, भारत का संविधान: सिद्धांत और व्यवहार, अध्याय 5; के. एस. पुट्टस्वामी बनाम भारत संघ (आधार, 2018); रोजर मैथ्यू बनाम साउथ इंडियन बैंक (2019); सीता सोरेन बनाम भारत संघ (2024)। पढ़ने के हिस्से इस node के दो syllabus notes से लिए गए हैं, जैसे वे batch G1 में सुधारे गए।"
+ },
+ "factsToCheck": [
+  {
+   "claim": "Article 107(5): a bill passed by the Lok Sabha and pending in the Rajya Sabha lapses on dissolution of the Lok Sabha; Article 107(4): a bill pending in the Rajya Sabha and not passed by the Lok Sabha does not lapse",
+   "source": "The Constitution of India, as on 1 May 2024, Article 107",
+   "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2024/07/20240716890312078.pdf",
+   "opened": "2026-11-12",
+   "status": "verified"
+  },
+  {
+   "claim": "Article 109(5): a Money Bill not returned by the Rajya Sabha within 14 days is deemed passed by both Houses in the form passed by the Lok Sabha",
+   "source": "The Constitution of India, as on 1 May 2024, Article 109",
+   "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2024/07/20240716890312078.pdf",
+   "opened": "2026-11-12",
+   "status": "verified"
+  },
+  {
+   "claim": "Article 105(2): no member is liable to any proceedings in any court for anything said or any vote given in Parliament or its committees",
+   "source": "The Constitution of India, as on 1 May 2024, Article 105",
+   "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2024/07/20240716890312078.pdf",
+   "opened": "2026-11-12",
+   "status": "verified"
+  },
+  {
+   "claim": "Article 94: Speaker removed by a resolution passed by a majority of all the then members of the House, after at least 14 days' notice",
+   "source": "The Constitution of India, as on 1 May 2024, Article 94",
+   "url": "https://cdnbbsr.s3waas.gov.in/s380537a945c7aaa788ccfcdf1b99b5d8f/uploads/2024/07/20240716890312078.pdf",
+   "opened": "2026-11-12",
+   "status": "verified"
+  },
+  {
+   "claim": "Aadhaar Act, 2016 was passed as a Money Bill and this was upheld by a majority in K.S. Puttaswamy v Union of India (26 September 2018)",
+   "source": "Judgment not opened",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Rojer Mathew v South Indian Bank (13 November 2019) referred the scope of Article 110 and of the Speaker's certificate to a larger bench; whether that bench has since decided was not checked",
+   "source": "Judgment not opened",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Sita Soren v Union of India (4 March 2024): seven judges held that bribery for a vote or speech is not protected by Articles 105(2) and 194(2), overruling P.V. Narasimha Rao (1998)",
+   "source": "Judgment not opened",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "A minister cannot be a member of the Public Accounts Committee",
+   "source": "Rules of Procedure and Conduct of Business in Lok Sabha; not opened",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "24 departmentally related standing committees, each with 31 members (21 Lok Sabha, 10 Rajya Sabha)",
+   "source": "Lok Sabha Rules; current number not opened in a primary source",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Present strength of the Lok Sabha: 543 elected seats. The Constitution (131st Amendment) Bill, 2026 to raise it was introduced on 16 April 2026 and negatived on 17 April 2026.",
+   "source": "PRS Legislative Research bill page (opened by the second reader); Lok Sabha records not opened",
+   "url": "https://prsindia.org/billtrack/the-constitution-131st-amendment-bill-2026",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Article 79 composition of Parliament",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 81: up to 550 elected (530 states, 20 UTs); present strength 543",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "104th Amendment, 2019: ended Anglo-Indian nomination under Article 331",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 80: up to 250 (238 elected, 12 nominated for literature, science, art, social service)",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Rajya Sabha elected by elected MLAs by proportional representation through single transferable vote; Fourth Schedule",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 83: Lok Sabha five years; extension one year at a time in national emergency",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Rajya Sabha permanent; one-third retire every second year; six-year term under Representation of the People Act, 1951",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 84: citizen; age 25 (Lok Sabha), 30 (Rajya Sabha)",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 85: summon, prorogue, dissolve; six-month gap rule",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 100: quorum one-tenth; casting vote",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 93 Speaker and Deputy Speaker; Article 94 removal by majority of all the then members, 14 days' notice",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 110: Speaker's decision on Money Bill final; Article 118: Speaker presides joint sitting",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Tenth Schedule: Speaker decides defection disqualification",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 89: Vice-President ex officio Chairman of Rajya Sabha",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Pro tem Speaker appointed by the President after a general election",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 105: privileges. Freedom from civil arrest during a session and 40 days before and after it comes from the Code of Civil Procedure, section 135A, not from Article 105.",
+   "source": "Code of Civil Procedure, 1908, section 135A; Code not opened",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Article 122: courts cannot question proceedings on the ground of irregular procedure",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Privileges not codified",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "24 departmentally related standing committees, each with 31 members",
+   "source": "Primary source not opened in G1",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "PAC chairperson from the opposition by convention since 1967",
+   "source": "Primary source not opened in G1",
+   "url": "",
+   "opened": "",
+   "status": "unverified"
+  },
+  {
+   "claim": "Three readings of a bill in each House",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 108 joint sitting: conditions including six months; Speaker presides; majority of members present and voting",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "No joint sitting on a Money Bill (Article 108(1) proviso) or on a constitutional amendment bill (follows from Article 368(2), each House passing it separately)",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 111 President's options; return once for reconsideration; not for Money Bills",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 110 Money Bill matters; Speaker's decision final",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Money Bill: Lok Sabha only, President's recommendation; Rajya Sabha returns within 14 days; deemed passed",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 117: Financial Bill (I) and (II) rules as stated",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 112 annual financial statement; Article 113 charged expenditure not voted",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Examples of charged expenditure: President's emoluments, salaries of Supreme Court judges and CAG",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Budget stages in order as listed",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Cut motions: policy cut Re 1, economy cut, token cut Rs 100",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Article 114 appropriation; Article 265 no tax without authority of law; Article 116 vote on account",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Public Accounts Committee: 22 members (15 Lok Sabha, 7 Rajya Sabha); opposition chair by convention since 1967",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Estimates Committee: 30 members, all Lok Sabha",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Committee on Public Undertakings: 22 members",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  },
+  {
+   "claim": "Departmentally related standing committees from 1993; now 24, each 31 members (21 Lok Sabha, 10 Rajya Sabha)",
+   "source": "As listed in this note's sources; not reopened in G1",
+   "url": "",
+   "opened": "",
+   "status": "not-rechecked"
+  }
+ ],
+ "review": {
+  "status": "draft"
+ },
+ "reviewDates": {
+  "asOf": "2026-11-12",
+  "recheckBy": "2027-11-12",
+  "recheckWhen": "A larger-bench ruling on Money Bills; any constitutional amendment on the number of Lok Sabha seats; a change in the number of departmentally related standing committees; UPSC papers arriving, so the past-question step can be added"
+ },
+ "provenance": {
+  "generator": "Claude (assignment 8, batch G2, 12 Nov 2026)",
+  "createdOn": "2026-11-12",
+  "note": "Reads are assembled from the two existing syllabus notes on this node (pol-syl-parliament-structure, pol-syl-parliament-lawmaking) as corrected in G1. Questions, the sort, answer frames and cards are new, written from the bare text and the cases named. Step titles, leads and the research notes under each step are copied from the federalism sample. No past-question step yet: UPSC's papers and keys could not be opened. Not copied from any coaching material."
+ },
+ "short": {
+  "en": "Parliament",
+  "hi": "संसद"
+ },
+ "routes": {
+  "express": {
+   "label": {
+    "en": "Express",
+    "hi": "संक्षिप्त (Express)"
+   },
+   "minutes": 15,
+   "note": {
+    "en": "6 screens: the core of the topic.",
+    "hi": "6 स्क्रीन: topic का मूल भाग।"
+   },
+   "steps": [
+    "warmup",
+    "read-3",
+    "sort",
+    "mains",
+    "keep",
+    "finish"
+   ]
+  },
+  "full": {
+   "label": {
+    "en": "Whole topic",
+    "hi": "पूरा topic"
+   },
+   "minutes": 60,
+   "note": {
+    "en": "Every part, in three sittings. Picks up anything you did in Express.",
+    "hi": "हर हिस्सा, तीन बैठकों में। Express में जो किया, वह साथ चलता है।"
+   },
+   "steps": [
+    "warmup",
+    "read-1",
+    "read-2",
+    "sort",
+    "stop-1",
+    "read-3",
+    "read-4",
+    "recall",
+    "stop-2",
+    "apply",
+    "mains",
+    "keep",
+    "finish"
+   ]
+  }
+ }
+}

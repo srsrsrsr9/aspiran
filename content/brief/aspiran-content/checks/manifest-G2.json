@@ -1,0 +1,87 @@
+{
+ "batch": "G2",
+ "made": "2026-11-13",
+ "model": "Claude Fable 5.2",
+ "checkedBy": "Claude Sonnet 5.5 (second read of the English text of all seven files against the Constitution's bare text and such Acts, orders and PRS pages as it could open; separate blind solve of every multiple-choice question)",
+ "files": [
+  {
+   "path": "topic-paths/gs2-1.json",
+   "id": "path-pol-constitution",
+   "items": 15
+  },
+  {
+   "path": "topic-paths/gs2-3.json",
+   "id": "path-pol-parliament",
+   "items": 13
+  },
+  {
+   "path": "topic-paths/gs2-4.json",
+   "id": "path-pol-executive-judiciary",
+   "items": 15
+  },
+  {
+   "path": "topic-paths/gs2-5.json",
+   "id": "path-pol-elections",
+   "items": 13
+  },
+  {
+   "path": "topic-paths/gs2-6.json",
+   "id": "path-pol-bodies",
+   "items": 13
+  },
+  {
+   "path": "topic-paths/gs2-7.json",
+   "id": "path-pol-governance",
+   "items": 13
+  },
+  {
+   "path": "topic-paths/pre-4.json",
+   "id": "path-pol-prelims-polity",
+   "items": 15
+  },
+  {
+   "path": "checks/manifest-G2.json",
+   "id": "manifest-g2",
+   "items": 1
+  }
+ ],
+ "counts": {
+  "topicPaths": 7,
+  "reads": 34,
+  "multipleChoiceQuestions": 160,
+  "sortItems": 84,
+  "mainsPracticeQuestions": 21,
+  "reviewCards": 84,
+  "pyqSteps": 0,
+  "factsVerified": 24,
+  "factsUnverified": 41,
+  "factsNotRechecked": 334
+ },
+ "unverifiedFacts": 41,
+ "unverifiedFactsInPyqStep": 0,
+ "blindSolve": {
+  "questions": 160,
+  "agreeWithKey": 160,
+  "agreementRate": "100%",
+  "note": "Solver saw only the questions and options. It added a caution on four questions (Article 169, Rajya Sabha maximum, charged expenditure, panchayat committees); all four keys stand."
+ },
+ "secondRead": {
+  "findings": 33,
+  "fixed": 24,
+  "note": "Fixed after the second read: Article 30 removed from the citizens-only list; Article 21A now gives its in-force date (1 April 2010); Article 169 now mentions the Assembly resolution; the 40-day civil arrest rule is attributed to the Code of Civil Procedure, not Article 105; the bar on joint sittings for amendment bills is attributed to Article 368; the Governor and death sentences is worded as the standard reading with Article 72(3); the reason for appointing Governors is no longer attributed to the Constituent Assembly; Article 124(2) consultation wording; Gram Sabha citation; direct election wording for panchayats; Section 8 of the 1951 Act now has its three tiers; two sort items on the 1950 Act and one on social audit reworded so that only one bucket fits; Joint State PSC and Article 88 wording; Articles 315 and 320. Left as written and listed under open questions: textbook-level statements the reader could not open a primary source for."
+ },
+ "checker": "python3 tools/check.py reports zero issues for the seven topic-path files. It flags this manifest itself (no id, tone or review block, as in the sample manifest) and stops unless interview/personas.json exists, so it was run on a copy with an empty stub of that file.",
+ "openQuestions": [
+  "No past-question step in any of the seven files. UPSC's site could not be opened from here (connection reset, robots block), so no Prelims 2011-2026 or Mains 2013-2025 question is quoted and nothing is labelled a past question. The builder adds the step as soon as the question papers and keys are supplied as PDFs. By the brief's own test G2 is therefore not done yet.",
+  "The checker requires review to be exactly {\"status\":\"draft\"} and version 1, while the federalism sample has version 2 and a fuller review block. Files follow the checker; asOf, recheckBy and recheckWhen sit in a sibling block called reviewDates. Say if you want them moved.",
+  "Mains questions are all practice questions written by us and labelled so. Each carries the sample's fields plus two extra keys, earnsMarks (two examples and one case or report) and model (the model answer; 150 to 200 words).",
+  "Steps not built because they need assets or a human: cover image, video, simulation, news, essay, tour and survey steps from the sample.",
+  "Reads are assembled from the G1-corrected syllabus notes so that English and Hindi stay consistent; gs2-5 has two newly written reads. Corrections made to reads here after the second read (listed under secondRead) should also be made in the source notes: pol-syl-fundamental-rights, pol-syl-amendment-basic-structure, pol-syl-parliament-structure, pol-syl-parliament-lawmaking, pol-syl-president-vp, pol-syl-state-executive, pol-syl-supreme-court, pol-syl-local-government, pol-syl-constitutional-bodies, pol-gov-civil-services. This can go into a G1 follow-up.",
+  "Supreme Court strength: the text says the Supreme Court (Number of Judges) Amendment Act, 2026 raised the strength from 34 to 38. The second reader found on PRS only that the Bill was passed by both Houses in August 2026; assent and the Act's title were not confirmed in the Gazette. Please confirm.",
+  "Pressure groups are covered inside gs2-7 (civil society), not as a path of their own.",
+  "pre-4 uses sections of the polity notes that the GS2 paths do not use (local government, Directive Principles, removal of the President, Vice-President, ministers, judges). It does not repeat federalism, Parliament or the bodies.",
+  "Hindi was written with the English and checked by the builder for presence and script, not read by a second Hindi reader. The second read covered the English text only.",
+  "Facts marked unverified are mostly Acts, judgments and committee reports whose official text could not be opened (India Code and several court pages block automated reading). The largest groups: Representation of the People Act sections, RTI Act sections, Supreme Court judgments by name and year, ARC and Law Commission report titles. Facts marked not-rechecked came with the source notes and were not reopened in this batch.",
+  "Node ids: the syllabus-lines file gives gs4-3 as emotional intelligence and gs4-4 as moral thinkers, but two existing ethics notes are tagged the other way. Not changed here; it matters for G3."
+ ]
+}
