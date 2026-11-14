@@ -88,13 +88,17 @@ private fun one(x: Double) = ((x * 10).roundToInt() / 10.0).toString()
 /** You vs. you: only against your own past. The web copy is viewProgress in app.js. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProgressScreen(answerLog: AnswerLog, mocks: Mocks, syllabusMap: SyllabusMap, caseFile: CaseFile, targetYear: String?, onClose: () -> Unit) {
+fun ProgressScreen(answerLog: AnswerLog, mocks: Mocks, syllabusMap: SyllabusMap, caseFile: CaseFile, targetYear: String?, onClose: () -> Unit,
+    /** Day → [right, total] from Your room, for Jeetu's weekly note. */
+    rightDays: Map<String, List<Int>> = emptyMap(), onAskJeetu: (() -> Unit)? = null) {
     val context = LocalContext.current
     BackHandler(onBack = onClose)
     Scaffold(topBar = { TopAppBar(title = { Text("You vs. you") }, navigationIcon = { TextButton(onClick = onClose) { Text("← Back") } }) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             PauseLine("you-vs-you")
             Text("Only against your own past. No ranks, no cut-offs, nobody else's numbers.")
+            JeetuWeekly(rightDays, onAskJeetu)
+            JeetuDoubleAct()
             targetYear?.toIntOrNull()?.let { y ->
                 val weeks = java.time.temporal.ChronoUnit.WEEKS.between(java.time.LocalDate.now(), java.time.LocalDate.of(y, 5, 25))
                 if (weeks > 0) Text("Prelims $y is about $weeks weeks away (UPSC usually holds it in late May; check the official calendar).")

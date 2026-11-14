@@ -1,0 +1,403 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ]
+  },
+  "id": "csat-syl-numbers-percent-ratio-practice",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Practice: Numbers, percentages and ratios: methods that save time",
+    "hi": "अभ्यास: संख्याएँ, प्रतिशत और अनुपात: समय बचाने वाली विधियाँ"
+  },
+  "paper": "prelims-csat",
+  "section": "Practice (written by us, not from a UPSC paper): Numbers, percentages and ratios: methods that save time",
+  "minutes": 30,
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the largest number that divides both 84 and 126 exactly?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "21",
+          "42",
+          "14",
+          "6"
+        ],
+        "why": "84 = 2 x 2 x 3 x 7 and 126 = 2 x 3 x 3 x 7. Common primes at the lowest power: 2 x 3 x 7 = 42. Check: 84 / 42 = 2 and 126 / 42 = 3."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Three bells ring at intervals of 12, 18 and 30 minutes. If they ring together now, after how many minutes will they next ring together?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "90 minutes",
+          "360 minutes",
+          "180 minutes",
+          "120 minutes"
+        ],
+        "why": "Next time together means LCM. 12 = 2 x 2 x 3, 18 = 2 x 3 x 3, 30 = 2 x 3 x 5. LCM = 2 x 2 x 3 x 3 x 5 = 180. Check: 90 is not divisible by 12."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the unit digit of 7 raised to the power 83?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "7",
+          "9",
+          "1",
+          "3"
+        ],
+        "why": "Unit digits of powers of 7 repeat as 7, 9, 3, 1. 83 divided by 4 leaves remainder 3, so take the third term: 3."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the remainder when 2 raised to the power 10 is divided by 7?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2",
+          "4",
+          "1",
+          "6"
+        ],
+        "why": "2 cubed is 8, which leaves remainder 1 with 7. So 2 to the power 9 leaves remainder 1, and one more factor of 2 gives remainder 2. Direct check: 1024 = 7 x 146 + 2."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the smallest number that leaves remainder 4 when divided by 6 and remainder 6 when divided by 8?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "46",
+          "34",
+          "22",
+          "70"
+        ],
+        "why": "The shortfall is 2 in both cases (6 - 4 and 8 - 6). LCM of 6 and 8 is 24, so the number is 24 - 2 = 22. Check: 22 = 6 x 3 + 4 and 22 = 8 x 2 + 6. 46 and 70 also fit but are not the smallest."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The price of sugar rises by 25%. By what per cent must a household cut its consumption so that its spending on sugar does not change?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "25%",
+          "15%",
+          "16.67%",
+          "20%"
+        ],
+        "why": "New price is 5/4 of the old. For the same spend, quantity must be 4/5 of the old, a cut of 1/5 = 20%. Check with numbers: 100 units at 1 rupee = 100; 80 units at 1.25 rupees = 100."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A shopkeeper raises the price of an article by 20% and then reduces the new price by 20%. Compared with the original price, the final price is:",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The same",
+          "4% lower",
+          "4% higher",
+          "2% lower"
+        ],
+        "why": "Take the original as 100. After the rise it is 120. A 20% cut on 120 is 24, giving 96. That is 4% below 100."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The pass mark in an examination is 40% of the maximum. A candidate who scores 150 marks fails by 30 marks. What is the maximum mark?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "450",
+          "400",
+          "500",
+          "375"
+        ],
+        "why": "Pass mark = 150 + 30 = 180. So 40% of the maximum is 180, and the maximum is 180 / 0.4 = 450. Check: 40% of 450 is 180."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A town has 80,000 people. Its population grows by 10% in the first year and by 5% in the second. What is the population after two years?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "92,000",
+          "88,400",
+          "92,400",
+          "93,200"
+        ],
+        "why": "After year one: 80,000 x 1.1 = 88,000. After year two: 88,000 x 1.05 = 92,400. Adding 10% and 5% to get 15% gives 92,000, which is the trap."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A's salary is 20% more than B's. By what per cent is B's salary less than A's?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "16.67%",
+          "20%",
+          "25%",
+          "15%"
+        ],
+        "why": "Take B as 100, so A is 120. B is less than A by 20 out of 120 = 1/6 = 16.67%. The base is now A, not B."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A sum of 720 rupees is divided among three people in the ratio 2 : 3 : 4. What is the largest share?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "240 rupees",
+          "320 rupees",
+          "360 rupees",
+          "280 rupees"
+        ],
+        "why": "Total parts = 9. One part = 720 / 9 = 80. Largest share = 4 x 80 = 320. Check: 160 + 240 + 320 = 720."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "If A : B = 2 : 3 and B : C = 4 : 5, what is A : C?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2 : 5",
+          "3 : 10",
+          "2 : 3",
+          "8 : 15"
+        ],
+        "why": "Make B equal to 12 in both. A : B = 8 : 12 and B : C = 12 : 15. So A : C = 8 : 15. Taking 2 : 5 directly ignores that B is 3 in one ratio and 4 in the other."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In a class the ratio of boys to girls is 5 : 3. There are 16 more boys than girls. How many students are there in the class?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "48",
+          "56",
+          "64",
+          "72"
+        ],
+        "why": "Difference = 2 parts = 16, so one part = 8. Total = 8 parts = 64. Check: 40 boys and 24 girls; 40 - 24 = 16."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A 60 litre mixture has milk and water in the ratio 2 : 1. How much water must be added to make the ratio of milk to water 1 : 2?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "60 litres",
+          "40 litres",
+          "20 litres",
+          "80 litres"
+        ],
+        "why": "Milk = 40 litres, water = 20 litres. Milk does not change. For 1 : 2, water must be 80 litres, so add 80 - 20 = 60. The option 80 is the final water, not the water added."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The incomes of A and B are in the ratio 5 : 4 and their expenses in the ratio 3 : 2. Each saves 2,000 rupees. What is A's income?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "4,000 rupees",
+          "6,000 rupees",
+          "8,000 rupees",
+          "5,000 rupees"
+        ],
+        "why": "Incomes 5x and 4x, expenses 3y and 2y. 5x - 3y = 2000 and 4x - 2y = 2000. From the second, y = 2x - 1000. Put it in the first: 5x - 6x + 3000 = 2000, so x = 1000. A's income = 5,000. Check: y = 1000; A saves 5000 - 3000, B saves 4000 - 2000."
+      }
+    }
+  ],
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (basic numeracy, Class X level); NCERT Mathematics textbooks, Classes VI to X: chapters on playing with numbers, comparing quantities, ratio and proportion, and real numbers"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "factsToCheck": [
+    {
+      "claim": "Paper II (CSAT) is qualifying; the syllabus lists basic numeracy (numbers and their relations, orders of magnitude, etc.) at Class X level",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    },
+    {
+      "claim": "A wrong answer in the Preliminary Examination carries a penalty (the note does not state the fraction)",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only, Hindi still to come. Practice questions written for the note \"Numbers, percentages and ratios: methods that save time\". All 15 answers were solved blind and matched the key (14 Nov 2026). Check the Paper II syllabus wording and the qualifying rule against the current UPSC notification. Rework all fifteen questions independently. All numbers in the questions are made up for practice and describe no real place or person."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

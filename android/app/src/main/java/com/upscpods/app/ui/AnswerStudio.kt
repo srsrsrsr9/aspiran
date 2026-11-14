@@ -276,6 +276,7 @@ fun AnswerStudioScreen(
 
                 StudioStep.SELF -> {
                     Text("Mark it yourself first", style = MaterialTheme.typography.titleMedium)
+                    JeetuNote("selfMark", hindi)
                     Text("For each part: below, at or above a typical scoring answer. Your own eye is the skill that matters on the day.", style = MaterialTheme.typography.bodyMedium)
                     AREA_NAMES.forEach { (key, name) ->
                         Text(name, style = MaterialTheme.typography.titleSmall)
@@ -314,6 +315,7 @@ fun AnswerStudioScreen(
                 }
 
                 StudioStep.FEEDBACK -> feedback?.let { fb ->
+                    JeetuNote("second", hindi)
                     FeedbackView(fb, words, focusArea, selfMarks)
                     weakestPart(fb, selfMarks)?.let { Text("Weakest part: $it", style = MaterialTheme.typography.titleSmall) }
                     Button(onClick = { step = StudioStep.REWRITE }, modifier = Modifier.fillMaxWidth().height(MainActionHeight)) { Text("Rewrite the weakest part →") }
@@ -330,6 +332,7 @@ fun AnswerStudioScreen(
                     val fix = myFix.ifBlank { aiFix ?: "Make the conclusion answer the question's directive word." }
                     val weak = weakestPart(feedback, selfMarks)
                     Text(if (weak != null) "Rewrite the weakest part: $weak" else "Rewrite with one fix", style = MaterialTheme.typography.titleMedium)
+                    JeetuNote("rewrite", hindi)
                     FlatCard(Modifier.fillMaxWidth()) { Text("Your one fix: $fix", Modifier.padding(12.dp), style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.SemiBold) }
                     Text("Write that part again with just that change, on paper or here. One fix, done well, sticks better than five half-done.", style = MaterialTheme.typography.bodyMedium)
                     OutlinedTextField(value = text, onValueChange = { text = it }, modifier = Modifier.fillMaxWidth().heightIn(min = 200.dp),

@@ -1,0 +1,127 @@
+{
+  "schema": "upsc-pods/long-read@1",
+  "id": "csat-syl-speed-work-averages-data",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Speed, work, averages, tables and data sufficiency",
+    "hi": "चाल, कार्य, औसत, सारणियाँ और आँकड़ों की पर्याप्तता"
+  },
+  "node": "csat-5",
+  "nodes": [
+    "csat-5"
+  ],
+  "topic": "CSAT",
+  "gsPaper": "CSAT",
+  "minutes": 9,
+  "en": {
+    "dek": "By the end, you will have one method each for questions on speed and distance, work and pipes, averages and mixtures, reading a table or chart, and deciding whether the given data are enough.",
+    "sections": [
+      {
+        "head": "Speed, time and distance",
+        "body": "Everything here comes from one relation: distance = speed x time. Before using it, make the units agree. To change kilometres per hour into metres per second, multiply by 5/18. So 54 km/h is 15 m/s and 90 km/h is 25 m/s.\n\nWhen a train crosses a pole or a standing person, it covers its own length. When it crosses a platform or another train, it covers the sum of the two lengths. A train 150 metres long at 15 m/s passes a pole in 10 seconds.\n\nWhen two bodies move, use relative speed. Moving towards each other, add the speeds. Moving in the same direction, subtract them. Two trains at 40 and 50 km/h in opposite directions close at 90 km/h.\n\nAverage speed is total distance divided by total time. It is not the average of the speeds. If a journey is made at 40 km/h and the return over the same distance at 60 km/h, the average is 2 x 40 x 60 / (40 + 60) = 48 km/h, because more time is spent at the lower speed.\n\nFor boats, speed downstream is the speed in still water plus the speed of the stream, and upstream is the difference. A boat that does 12 km/h in still water, on a stream of 3 km/h, moves at 15 km/h downstream and 9 km/h upstream."
+      },
+      {
+        "head": "Work, pipes and people",
+        "body": "Think of work as a rate: the fraction of the job done in one day or one hour. If A finishes a job in 12 days, A does 1/12 of it each day. Rates add. With B, who takes 18 days, the two together do 1/12 + 1/18 = 5/36 of the job each day, so they need 36/5 = 7.2 days.\n\nThe same idea runs backwards. If A and B together take 10 days and A alone takes 15, then B's daily rate is 1/10 - 1/15 = 1/30, and B alone needs 30 days.\n\nPipes and tanks are work questions with one change: a leak or an outlet has a negative rate. A pipe that fills a tank in 6 hours, working against a leak that would empty it in 12, fills 1/6 - 1/12 = 1/12 of the tank each hour, and needs 12 hours.\n\nWhen the question is about numbers of workers, count the work in person-days. Twelve people for 15 days is 180 person-days. To finish in 9 days you need 180 / 9 = 20 people. This assumes every person works at the same rate, which such questions take for granted unless they say otherwise.\n\nA useful shortcut is to take the total work as the LCM of the given days. For 12 and 18 days, call the work 36 units. A does 3 units a day and B does 2, so together they do 5, and 36 / 5 = 7.2 days. This avoids fractions."
+      },
+      {
+        "head": "Averages and mixtures",
+        "body": "An average is a total divided by a count, so the total is the average times the count. Nearly every average question is solved by moving to totals.\n\nIf five numbers have an average of 24, their total is 120. If one is removed and the other four average 22, their total is 88, so the number removed is 32.\n\nIf 30 students have an average age of 14, the total is 420. When the teacher is included, 31 people average 15, a total of 465. The teacher is 45. A quicker way to see it: the teacher must supply the new average, 15, plus one extra year for each of the 30 students, which is 15 + 30 = 45.\n\nA mixture is a weighted average. When 20 kg of tea at 300 rupees a kilogram is mixed with 30 kg at 400 rupees, the cost of the mixture is (20 x 300 + 30 x 400) / 50 = 360 rupees a kilogram. The answer must lie between the two prices and nearer to the price of the larger quantity. That gives a quick check: 360 is nearer to 400 than to 300, as it should be with more of the dearer tea.\n\nThe same reasoning shows why the average speed over equal distances is nearer to the lower speed: more time, and so more weight, goes to the slower part."
+      },
+      {
+        "head": "Tables, charts and graphs",
+        "body": "Data interpretation questions give the numbers in a table, bar chart, line graph or pie chart, and ask for a comparison. The arithmetic is light. The care goes into reading.\n\nRead the title, the units and any note before the questions. Check whether figures are in thousands or lakhs, and whether a pie chart shows degrees or percentages.\n\nKeep three measures apart. A share is a part divided by the whole: if sales in four quarters are 120, 150, 180 and 150, the third quarter's share is 180 out of 600, or 30%. A percentage change is the change divided by the earlier value: from 120 to 180 is a rise of 60 on 120, or 50%. A difference in percentage points is a subtraction of two percentages: a share that moves from 20% to 30% has risen by 10 percentage points, which is a 50% rise in the share.\n\nApproximate before you calculate. If the options are far apart, rounding 148 to 150 is safe. If they are close, work exactly.\n\nIn a pie chart, the whole is 360 degrees or 100%, so 1% is 3.6 degrees. In a line graph, the steepest segment shows the largest absolute change, not necessarily the largest percentage change, because the starting values differ."
+      },
+      {
+        "head": "Data sufficiency",
+        "body": "A data sufficiency question gives a question and two statements. You are not asked for the answer. You are asked whether the statements give enough information to find it.\n\nFollow a fixed order. First, read the question and note what would settle it: one value, or a yes or no. Second, take statement 1 alone and forget statement 2. Third, take statement 2 alone and forget statement 1. Only if neither is enough alone, put them together.\n\nSufficient means that exactly one answer follows. If a statement allows two values, it is not sufficient. For a yes-or-no question, a statement that always gives no is sufficient, because the question is settled.\n\nDo not carry the calculation to the end. To know that x + y = 10 and x - y = 4 fix x, it is enough to see two different equations in two unknowns. Stopping there saves time.\n\nTwo cautions. Do not bring in facts that are not given. And check whether the two statements say the same thing in different words, such as x + y = 10 and 2x + 2y = 20. Together they are still one equation and still not enough."
+      }
+    ],
+    "keyFacts": [
+      "km/h to m/s: multiply by 5/18.",
+      "Crossing a pole: own length. Crossing a platform or train: sum of lengths.",
+      "Opposite directions: add speeds. Same direction: subtract.",
+      "Average speed over equal distances at a and b: 2ab / (a + b).",
+      "Work rates add; a leak has a negative rate.",
+      "Total = average x count; solve average questions through totals.",
+      "A mixture's price lies between the two prices, nearer the larger quantity.",
+      "Share, percentage change and percentage points are three different measures.",
+      "Data sufficiency: test each statement alone, then together; sufficient means one answer only."
+    ],
+    "examAngle": "These questions reward a fixed routine more than speed. Write the units, move averages to totals, treat work as a rate, and in data sufficiency stop as soon as you can see whether one answer follows. In tables and charts, most marks are lost by misreading the units or the base of a percentage, so read the heading first.",
+    "selfCheck": [
+      "Why is the average speed for equal distances at 40 and 60 km/h not 50 km/h?",
+      "A takes 10 days and B takes 15 days for a job. How long do they take together?",
+      "The average of six numbers is 20. A seventh number makes the average 21. What is the seventh number?",
+      "A share rises from 25% to 30%. State the change in percentage points and as a percentage.",
+      "In data sufficiency, what does sufficient mean, and in what order do you test the statements?"
+    ]
+  },
+  "hi": {
+    "dek": "इस नोट के अंत तक आपके पास चाल और दूरी, कार्य और नल, औसत और मिश्रण, सारणी या चार्ट पढ़ने, और दिए गए आँकड़े पर्याप्त हैं या नहीं यह तय करने के प्रश्नों के लिए एक-एक विधि होगी।",
+    "sections": [
+      {
+        "head": "चाल, समय और दूरी",
+        "body": "यहाँ सब कुछ एक संबंध से निकलता है: दूरी = चाल x समय। इसे बरतने से पहले इकाइयाँ एक-सी कीजिए। किलोमीटर प्रति घंटा को मीटर प्रति सेकंड में बदलने के लिए 5/18 से गुणा कीजिए। इसलिए 54 किमी/घंटा 15 मी/से है और 90 किमी/घंटा 25 मी/से।\n\nजब रेलगाड़ी किसी खंभे या खड़े व्यक्ति को पार करती है, तो वह अपनी लंबाई तय करती है। जब वह प्लेटफ़ॉर्म या दूसरी गाड़ी को पार करती है, तो दोनों लंबाइयों का योग तय करती है। 150 मीटर लंबी गाड़ी 15 मी/से की चाल से खंभे को 10 सेकंड में पार करती है।\n\nजब दो वस्तुएँ चल रही हों, तो सापेक्ष चाल लीजिए। एक-दूसरे की ओर चलने पर चालें जोड़िए। एक ही दिशा में चलने पर घटाइए। 40 और 50 किमी/घंटा की दो गाड़ियाँ विपरीत दिशाओं में 90 किमी/घंटा से पास आती हैं।\n\nऔसत चाल कुल दूरी को कुल समय से भाग देने पर मिलती है। यह चालों का औसत नहीं है। यदि यात्रा 40 किमी/घंटा से और उतनी ही दूरी की वापसी 60 किमी/घंटा से हो, तो औसत 2 x 40 x 60 / (40 + 60) = 48 किमी/घंटा है, क्योंकि कम चाल पर अधिक समय लगता है।\n\nनाव के लिए, धारा के अनुकूल चाल शांत जल की चाल और धारा की चाल का योग है, और धारा के प्रतिकूल चाल उनका अंतर। जो नाव शांत जल में 12 किमी/घंटा चलती है, वह 3 किमी/घंटा की धारा में अनुकूल दिशा में 15 और प्रतिकूल दिशा में 9 किमी/घंटा चलती है।"
+      },
+      {
+        "head": "कार्य, नल और लोग",
+        "body": "कार्य को दर की तरह सोचिए: एक दिन या एक घंटे में काम का कितना अंश होता है। यदि A कोई काम 12 दिन में पूरा करता है, तो A हर दिन उसका 1/12 करता है। दरें जुड़ती हैं। B के साथ, जो 18 दिन लेता है, दोनों मिलकर हर दिन काम का 1/12 + 1/18 = 5/36 करते हैं, इसलिए उन्हें 36/5 = 7.2 दिन चाहिए।\n\nयही विचार उलटा भी चलता है। यदि A और B मिलकर 10 दिन लेते हैं और अकेला A 15 दिन, तो B की दैनिक दर 1/10 - 1/15 = 1/30 है, और अकेले B को 30 दिन चाहिए।\n\nनल और टंकी के प्रश्न कार्य के ही प्रश्न हैं, एक बदलाव के साथ: रिसाव या निकास की दर ऋणात्मक होती है। जो नल टंकी को 6 घंटे में भरता है, वह उस रिसाव के विरुद्ध, जो उसे 12 घंटे में ख़ाली कर दे, हर घंटे टंकी का 1/6 - 1/12 = 1/12 भरता है, और उसे 12 घंटे चाहिए।\n\nजब प्रश्न काम करने वालों की संख्या पर हो, तो काम को व्यक्ति-दिनों में गिनिए। 15 दिन के लिए बारह लोग 180 व्यक्ति-दिन हैं। 9 दिन में पूरा करने के लिए 180 / 9 = 20 लोग चाहिए। यह मानकर कि हर व्यक्ति एक ही दर से काम करता है, जो ऐसे प्रश्न तब तक मानकर चलते हैं जब तक कुछ और न कहा जाए।\n\nएक काम का तरीक़ा है कुल काम को दिए गए दिनों का LCM मान लेना। 12 और 18 दिन के लिए काम को 36 इकाई मानिए। A रोज़ 3 इकाई करता है और B 2, इसलिए दोनों मिलकर 5 करते हैं, और 36 / 5 = 7.2 दिन। इससे भिन्नों से बचा जाता है।"
+      },
+      {
+        "head": "औसत और मिश्रण",
+        "body": "औसत कुल को गिनती से भाग देने पर मिलता है, इसलिए कुल, औसत और गिनती का गुणनफल है। औसत का लगभग हर प्रश्न कुल पर जाकर हल होता है।\n\nयदि पाँच संख्याओं का औसत 24 है, तो उनका कुल 120 है। यदि एक हटा दी जाए और बाक़ी चार का औसत 22 हो, तो उनका कुल 88 है, इसलिए हटाई गई संख्या 32 है।\n\nयदि 30 विद्यार्थियों की औसत आयु 14 है, तो कुल 420 है। शिक्षक को शामिल करने पर 31 लोगों का औसत 15 है, यानी कुल 465। शिक्षक 45 वर्ष के हैं। इसे देखने का तेज़ तरीक़ा: शिक्षक को नया औसत, 15, देना है और 30 विद्यार्थियों में से हर एक के लिए एक अतिरिक्त वर्ष, यानी 15 + 30 = 45।\n\nमिश्रण भारित औसत है। जब 300 रुपये प्रति किलोग्राम की 20 किग्रा चाय को 400 रुपये की 30 किग्रा चाय में मिलाया जाता है, तो मिश्रण का मूल्य (20 x 300 + 30 x 400) / 50 = 360 रुपये प्रति किलोग्राम है। उत्तर दोनों मूल्यों के बीच और बड़ी मात्रा के मूल्य के पास होना चाहिए। इससे त्वरित जाँच मिलती है: 360, 300 की तुलना में 400 के पास है, जैसा महँगी चाय अधिक होने पर होना चाहिए।\n\nयही तर्क बताता है कि बराबर दूरियों पर औसत चाल कम चाल के पास क्यों होती है: धीमे हिस्से को अधिक समय, और इसलिए अधिक भार, मिलता है।"
+      },
+      {
+        "head": "सारणियाँ, चार्ट और ग्राफ़",
+        "body": "आँकड़ों की व्याख्या के प्रश्न संख्याएँ सारणी, दंड चार्ट, रेखा ग्राफ़ या वृत्त चार्ट में देते हैं, और तुलना पूछते हैं। अंकगणित हल्का होता है। सावधानी पढ़ने में लगती है।\n\nप्रश्नों से पहले शीर्षक, इकाइयाँ और कोई टिप्पणी पढ़िए। देखिए कि आँकड़े हज़ार में हैं या लाख में, और वृत्त चार्ट अंश दिखाता है या प्रतिशत।\n\nतीन मापों को अलग रखिए। हिस्सा, भाग को पूरे से भाग देने पर मिलता है: यदि चार तिमाहियों की बिक्री 120, 150, 180 और 150 है, तो तीसरी तिमाही का हिस्सा 600 में से 180, यानी 30% है। प्रतिशत परिवर्तन, परिवर्तन को पहले के मान से भाग देने पर मिलता है: 120 से 180 होना 120 पर 60 की वृद्धि, यानी 50% है। प्रतिशत अंकों का अंतर दो प्रतिशतों का घटाव है: जो हिस्सा 20% से 30% होता है वह 10 प्रतिशत अंक बढ़ा है, जो हिस्से में 50% की वृद्धि है।\n\nगणना से पहले सन्निकट मान लीजिए। यदि विकल्प दूर-दूर हैं, तो 148 को 150 मानना सुरक्षित है। यदि पास-पास हैं, तो ठीक-ठीक हल कीजिए।\n\nवृत्त चार्ट में पूरा 360 अंश या 100% है, इसलिए 1%, 3.6 अंश है। रेखा ग्राफ़ में सबसे खड़ा खंड सबसे बड़ा निरपेक्ष परिवर्तन दिखाता है, ज़रूरी नहीं कि सबसे बड़ा प्रतिशत परिवर्तन, क्योंकि शुरुआती मान अलग-अलग होते हैं।"
+      },
+      {
+        "head": "आँकड़ों की पर्याप्तता",
+        "body": "आँकड़ों की पर्याप्तता का प्रश्न एक प्रश्न और दो कथन देता है। आपसे उत्तर नहीं पूछा जाता। पूछा जाता है कि कथन उसे निकालने के लिए पर्याप्त जानकारी देते हैं या नहीं।\n\nएक तय क्रम अपनाइए। पहले, प्रश्न पढ़िए और नोट कीजिए कि उसे क्या तय करेगा: एक मान, या हाँ या नहीं। दूसरे, कथन 1 को अकेले लीजिए और कथन 2 को भूल जाइए। तीसरे, कथन 2 को अकेले लीजिए और कथन 1 को भूल जाइए। केवल तब, जब कोई अकेला पर्याप्त न हो, दोनों को साथ रखिए।\n\nपर्याप्त का अर्थ है कि ठीक एक उत्तर निकलता है। यदि कोई कथन दो मान होने देता है, तो वह पर्याप्त नहीं है। हाँ-या-नहीं वाले प्रश्न में, जो कथन हमेशा नहीं देता है वह पर्याप्त है, क्योंकि प्रश्न तय हो गया।\n\nगणना को अंत तक मत ले जाइए। यह जानने के लिए कि x + y = 10 और x - y = 4 से x तय होता है, इतना देखना काफ़ी है कि दो अज्ञात में दो अलग समीकरण हैं। वहीं रुकने से समय बचता है।\n\nदो सावधानियाँ। जो तथ्य दिए नहीं गए उन्हें मत लाइए। और जाँचिए कि दोनों कथन अलग शब्दों में एक ही बात तो नहीं कह रहे, जैसे x + y = 10 और 2x + 2y = 20। साथ मिलकर भी वे एक ही समीकरण हैं और फिर भी पर्याप्त नहीं।"
+      }
+    ],
+    "keyFacts": [
+      "किमी/घंटा से मी/से: 5/18 से गुणा।",
+      "खंभा पार करना: अपनी लंबाई। प्लेटफ़ॉर्म या गाड़ी पार करना: लंबाइयों का योग।",
+      "विपरीत दिशाएँ: चालें जोड़िए। एक ही दिशा: घटाइए।",
+      "a और b चाल से बराबर दूरियों पर औसत चाल: 2ab / (a + b)।",
+      "कार्य की दरें जुड़ती हैं; रिसाव की दर ऋणात्मक होती है।",
+      "कुल = औसत x गिनती; औसत के प्रश्न कुल से हल कीजिए।",
+      "मिश्रण का मूल्य दोनों मूल्यों के बीच, बड़ी मात्रा के पास होता है।",
+      "हिस्सा, प्रतिशत परिवर्तन और प्रतिशत अंक तीन अलग माप हैं।",
+      "आँकड़ों की पर्याप्तता: हर कथन अकेले, फिर साथ; पर्याप्त यानी केवल एक उत्तर।"
+    ],
+    "examAngle": "ये प्रश्न गति से ज़्यादा तय क्रम पर अंक देते हैं। इकाइयाँ लिखिए, औसत को कुल में बदलिए, कार्य को दर मानिए, और आँकड़ों की पर्याप्तता में जैसे ही दिख जाए कि एक उत्तर निकलता है या नहीं, रुक जाइए। सारणियों और चार्टों में अधिकतर अंक इकाई या प्रतिशत का आधार गलत पढ़ने से कटते हैं, इसलिए पहले शीर्षक पढ़िए।",
+    "selfCheck": [
+      "40 और 60 किमी/घंटा से बराबर दूरियों की औसत चाल 50 किमी/घंटा क्यों नहीं है?",
+      "A किसी काम में 10 दिन और B 15 दिन लेता है। दोनों मिलकर कितना समय लेंगे?",
+      "छह संख्याओं का औसत 20 है। सातवीं संख्या से औसत 21 हो जाता है। सातवीं संख्या क्या है?",
+      "एक हिस्सा 25% से 30% हो जाता है। परिवर्तन प्रतिशत अंकों में और प्रतिशत में बताइए।",
+      "आँकड़ों की पर्याप्तता में पर्याप्त का क्या अर्थ है, और कथनों को किस क्रम में जाँचते हैं?"
+    ]
+  },
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (basic numeracy and data interpretation, Class X level); NCERT Mathematics textbooks, Classes VI to X: chapters on comparing quantities, direct and inverse proportion, data handling and statistics"
+  },
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists data interpretation (charts, graphs, tables, data sufficiency etc.) at Class X level",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English and Hindi. Verify: Check the Paper II syllabus wording against the current UPSC notification, including that data interpretation covers charts, graphs, tables and data sufficiency. Rework all fifteen questions independently. All figures are made up for practice and describe no real firm, place or person."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

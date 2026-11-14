@@ -1,0 +1,125 @@
+{
+  "schema": "upsc-pods/long-read@1",
+  "id": "csat-syl-puzzles-visual-reasoning",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Puzzles and visual reasoning: sets, counting, cubes and mirrors",
+    "hi": "पहेलियाँ और दृश्य तर्क: समुच्चय, गिनती, घन और दर्पण"
+  },
+  "node": "csat-4",
+  "nodes": [
+    "csat-4"
+  ],
+  "topic": "CSAT",
+  "gsPaper": "CSAT",
+  "minutes": 9,
+  "en": {
+    "dek": "By the end, you will be able to turn a word puzzle into an equation or a diagram, count figures without missing any, and handle cube, dice, mirror and paper-folding questions by rule.",
+    "sections": [
+      {
+        "head": "Word puzzles: name the unknown",
+        "body": "A puzzle looks hard because the information is wrapped in a story. Unwrap it by giving a letter to what is not known and writing each sentence as a relation.\n\nA father is three times as old as his son. Twelve years from now he will be twice as old. Call the son's age x. The father is 3x. In twelve years, 3x + 12 = 2 (x + 12). So x = 12. Check: 36 and 12 now, 48 and 24 later.\n\nSome puzzles have two unknowns and two facts. A farm has hens and goats, 20 heads and 56 legs in all. A shortcut avoids algebra. Suppose all 20 were hens: that gives 40 legs. The extra 16 legs come from goats, at two extra legs for each goat. So there are 8 goats and 12 hens.\n\nWeighing puzzles ask for the fewest weighings on a balance to find one odd coin. Each weighing has three outcomes: left heavier, right heavier, or equal. So divide the coins into three groups, not two. Among 8 coins with one heavier, weigh three against three. If they balance, the heavy coin is among the remaining two and one more weighing finds it. If not, take the heavier three and weigh one against one. Two weighings are enough.\n\nIn every puzzle, put the answer back into the story as a last step. A puzzle answer that fits every sentence is right."
+      },
+      {
+        "head": "Sets and Venn diagrams",
+        "body": "When people or things belong to overlapping groups, draw two overlapping circles inside a box. The box is everyone. The overlap is those in both groups.\n\nThe key relation is this: the number in at least one group equals the first group plus the second group minus the overlap. The overlap is subtracted because it has been counted twice.\n\nIn a class of 50, 30 play cricket, 25 play football and 10 play both. Those who play at least one game number 30 + 25 - 10 = 45. So 5 play neither.\n\nThe same relation finds the overlap. Forty people each like tea or coffee or both. Twenty-eight like tea and 22 like coffee. Then 28 + 22 - both = 40, so 10 like both.\n\nFill the diagram from the inside outwards. Write the overlap first. Then the part of each circle outside the overlap: 20 play only cricket and 15 play only football. Then the part of the box outside both circles. Questions that ask for only one game, exactly one game or at least one game can then be read directly from the picture.\n\nWatch the wording. Thirty play cricket includes those who also play football. Thirty play only cricket does not. Reading one for the other is the most common mistake in these questions."
+      },
+      {
+        "head": "Counting without missing any",
+        "body": "Counting questions are lost by counting in no particular order. Count by size or by type, one class at a time.\n\nFor squares in a grid of 3 by 3 small squares, count by size. There are 9 squares of side one, 4 of side two and 1 of side three, making 14.\n\nFor a square with both diagonals drawn, count triangles by how many small pieces each uses. There are 4 small triangles. Two neighbouring small triangles join to make a larger one, and there are 4 such pairs. No triangle uses three pieces, and four pieces make the square itself. The total is 8.\n\nFor pairs chosen from a group, such as handshakes, each of n people shakes hands with n - 1 others, and each handshake is counted twice in that product. So the number is n (n - 1) / 2. Ten people give 10 x 9 / 2 = 45 handshakes. The same count gives the number of matches when every team plays every other team once, and the number of lines joining n points when no three lie on one line.\n\nWhen the order matters, as with seats or ranks, do not divide by two. Ask each time: would swapping the two give a different outcome? If not, the pair has been counted twice."
+      },
+      {
+        "head": "Cubes and dice",
+        "body": "A large cube is painted on all faces and then cut into small equal cubes, n along each edge. The small cubes fall into four classes by position.\n\nCorner cubes have three painted faces. There are always 8.\n\nCubes along an edge but not at a corner have two painted faces. Each of the 12 edges has n - 2 of them, so there are 12 (n - 2).\n\nCubes in the middle of a face have one painted face. Each of the 6 faces has (n - 2) squared of them.\n\nCubes inside have no painted face. They form a smaller cube of side n - 2, so there are (n - 2) cubed.\n\nFor 27 small cubes, n is 3: 8 corners, 12 with two faces, 6 with one face and 1 with none. For 64 small cubes, n is 4: 8, 24, 24 and 8. The four numbers must add up to the total, which is a ready check.\n\nOn a standard die the numbers on opposite faces add up to 7, so 1 is opposite 6, 2 is opposite 5 and 3 is opposite 4. If the question does not call the die standard, use the views given. Two numbers that appear together in any view are on neighbouring faces and cannot be opposite each other. A number that is seen next to four different numbers must have the remaining number opposite it."
+      },
+      {
+        "head": "Mirrors, folds and symmetry",
+        "body": "A mirror placed beside an object swaps left and right and leaves top and bottom alone. So the mirror image of a word has its letters in reverse order, and each letter is flipped left to right. Letters such as A, H, I, M, O, T, U, V, W, X and Y look the same when flipped this way. A word reads the same in the mirror only if it is made of such letters and is spelt the same backwards, as MOM is.\n\nFor a clock seen in a mirror, subtract the time shown from 12 hours. Write 12:00 as 11:60 to make the subtraction easy. A mirror showing 3:15 means the real time is 11:60 - 3:15 = 8:45.\n\nA mirror placed below an object, or a reflection in water, swaps top and bottom and leaves left and right alone.\n\nIn paper-folding questions, each fold doubles the number of layers. A hole punched through all layers appears once in each layer. A sheet folded in half twice has four layers, so one punch gives four holes when the sheet is opened, as long as the hole is not on a fold line. Their positions are mirror images of one another across each fold line. To be sure, unfold one step at a time in your sketch and reflect the holes across the fold just opened."
+      }
+    ],
+    "keyFacts": [
+      "At least one group = first + second - both.",
+      "Pairs from n things: n (n - 1) / 2.",
+      "Squares in a 3 by 3 grid: 9 + 4 + 1 = 14.",
+      "Painted cube cut n to an edge: 8 corners; 12 (n - 2) with two faces; 6 (n - 2) squared with one; (n - 2) cubed with none.",
+      "Standard die: opposite faces add up to 7.",
+      "A balance has three outcomes, so split coins into three groups.",
+      "Clock in a mirror: real time = 11:60 minus the time shown.",
+      "Each fold doubles the layers; one punch gives one hole per layer."
+    ],
+    "examAngle": "Most of these questions have a formula or a fixed way of counting behind them, so they are quick for a prepared candidate and slow for anyone working from first principles in the hall. Learn the cube counts and the pair formula, draw the Venn diagram every time, and put each puzzle answer back into the story before marking it.",
+    "selfCheck": [
+      "In a group of 60, 35 read Hindi papers, 30 read English papers and 15 read both. How many read neither?",
+      "Why are coins split into three groups in a weighing puzzle?",
+      "A painted cube is cut into 125 small cubes. How many have no painted face?",
+      "Six teams play each other once. How many matches are played?",
+      "A clock in a mirror shows 7:20. What is the real time?"
+    ]
+  },
+  "hi": {
+    "dek": "इस नोट के अंत तक आप शाब्दिक पहेली को समीकरण या आरेख में बदल सकेंगे, आकृतियों को बिना छोड़े गिन सकेंगे, और घन, पासे, दर्पण और काग़ज़ मोड़ने के प्रश्न नियम से हल कर सकेंगे।",
+    "sections": [
+      {
+        "head": "शाब्दिक पहेलियाँ: अज्ञात को नाम दीजिए",
+        "body": "पहेली इसलिए कठिन लगती है कि जानकारी कहानी में लिपटी होती है। उसे खोलिए: जो ज्ञात नहीं है उसे एक अक्षर दीजिए और हर वाक्य को संबंध के रूप में लिखिए।\n\nएक पिता की आयु अपने पुत्र की तीन गुनी है। बारह वर्ष बाद वह दुगुनी होगी। पुत्र की आयु को x कहिए। पिता 3x है। बारह वर्ष बाद, 3x + 12 = 2 (x + 12)। इसलिए x = 12। जाँच: अभी 36 और 12, बाद में 48 और 24।\n\nकुछ पहेलियों में दो अज्ञात और दो तथ्य होते हैं। एक खेत में मुर्गियाँ और बकरियाँ हैं, कुल 20 सिर और 56 पैर। एक छोटा रास्ता बीजगणित से बचाता है। मान लीजिए सभी 20 मुर्गियाँ होतीं: तब 40 पैर होते। अतिरिक्त 16 पैर बकरियों से आते हैं, हर बकरी के दो अतिरिक्त पैर। इसलिए 8 बकरियाँ और 12 मुर्गियाँ हैं।\n\nतौलने की पहेलियाँ पूछती हैं कि एक अलग सिक्का खोजने के लिए तराज़ू पर कम से कम कितनी बार तौलना होगा। हर तौल के तीन परिणाम होते हैं: बायाँ भारी, दायाँ भारी, या बराबर। इसलिए सिक्कों को तीन समूहों में बाँटिए, दो में नहीं। 8 सिक्कों में, जिनमें एक भारी है, तीन को तीन के सामने तौलिए। यदि बराबर हों, तो भारी सिक्का बचे हुए दो में है और एक और तौल उसे खोज देती है। यदि नहीं, तो भारी वाले तीन लीजिए और एक को एक के सामने तौलिए। दो तौल काफ़ी हैं।\n\nहर पहेली में आख़िरी कदम के रूप में उत्तर को कहानी में वापस रखिए। जो उत्तर हर वाक्य पर ठीक बैठे, वह सही है।"
+      },
+      {
+        "head": "समुच्चय और वेन आरेख",
+        "body": "जब लोग या वस्तुएँ एक-दूसरे को काटते समूहों में हों, तो एक आयत के भीतर एक-दूसरे को काटते दो वृत्त बनाइए। आयत सब लोग हैं। साझा हिस्सा वे हैं जो दोनों समूहों में हैं।\n\nमुख्य संबंध यह है: कम से कम एक समूह वालों की संख्या पहले समूह और दूसरे समूह के योग में से साझा हिस्सा घटाने पर मिलती है। साझा हिस्सा इसलिए घटाया जाता है कि वह दो बार गिना गया है।\n\n50 की कक्षा में 30 क्रिकेट खेलते हैं, 25 फ़ुटबॉल खेलते हैं और 10 दोनों। कम से कम एक खेल खेलने वाले 30 + 25 - 10 = 45 हैं। इसलिए 5 कोई नहीं खेलते।\n\nयही संबंध साझा हिस्सा भी निकालता है। चालीस लोगों में हर एक को चाय या कॉफ़ी या दोनों पसंद है। अट्ठाईस को चाय और 22 को कॉफ़ी पसंद है। तब 28 + 22 - दोनों = 40, इसलिए 10 को दोनों पसंद हैं।\n\nआरेख को भीतर से बाहर की ओर भरिए। पहले साझा हिस्सा लिखिए। फिर हर वृत्त का वह भाग जो साझा हिस्से के बाहर है: 20 केवल क्रिकेट खेलते हैं और 15 केवल फ़ुटबॉल। फिर आयत का वह भाग जो दोनों वृत्तों के बाहर है। तब केवल एक खेल, ठीक एक खेल या कम से कम एक खेल पूछने वाले प्रश्न सीधे चित्र से पढ़े जा सकते हैं।\n\nशब्दों पर ध्यान रखिए। तीस क्रिकेट खेलते हैं में वे भी शामिल हैं जो फ़ुटबॉल भी खेलते हैं। तीस केवल क्रिकेट खेलते हैं में नहीं। एक को दूसरा पढ़ लेना इन प्रश्नों की सबसे आम भूल है।"
+      },
+      {
+        "head": "बिना छोड़े गिनना",
+        "body": "गिनती के प्रश्न बिना किसी क्रम के गिनने से बिगड़ते हैं। आकार या प्रकार के अनुसार गिनिए, एक बार में एक वर्ग।\n\n3 गुणा 3 छोटे वर्गों की जाली में वर्गों को आकार के अनुसार गिनिए। भुजा एक के 9 वर्ग हैं, भुजा दो के 4 और भुजा तीन का 1, कुल 14।\n\nजिस वर्ग में दोनों विकर्ण खिंचे हों, उसमें त्रिभुजों को इस आधार पर गिनिए कि हर एक में कितने छोटे टुकड़े लगे हैं। 4 छोटे त्रिभुज हैं। दो पड़ोसी छोटे त्रिभुज मिलकर एक बड़ा बनाते हैं, और ऐसे 4 जोड़े हैं। कोई त्रिभुज तीन टुकड़ों से नहीं बनता, और चार टुकड़े स्वयं वर्ग बनाते हैं। कुल 8।\n\nसमूह में से चुने गए जोड़ों के लिए, जैसे हाथ मिलाना, n में से हर व्यक्ति n - 1 लोगों से हाथ मिलाता है, और उस गुणनफल में हर हाथ मिलाना दो बार गिना जाता है। इसलिए संख्या n (n - 1) / 2 है। दस लोगों से 10 x 9 / 2 = 45 बार हाथ मिलते हैं। यही गिनती तब मैचों की संख्या देती है जब हर टीम हर दूसरी टीम से एक बार खेले, और n बिंदुओं को जोड़ने वाली रेखाओं की संख्या, जब कोई तीन एक रेखा पर न हों।\n\nजब क्रम मायने रखता हो, जैसे स्थान या रैंक में, तो दो से भाग मत दीजिए। हर बार पूछिए: क्या दोनों को बदलने से अलग परिणाम मिलेगा? यदि नहीं, तो जोड़ा दो बार गिना गया है।"
+      },
+      {
+        "head": "घन और पासे",
+        "body": "एक बड़े घन को सभी फलकों पर रँगा जाता है और फिर छोटे बराबर घनों में काटा जाता है, हर किनारे पर n। छोटे घन स्थिति के अनुसार चार वर्गों में बँटते हैं।\n\nकोने के घनों के तीन फलक रँगे होते हैं। ये हमेशा 8 होते हैं।\n\nजो घन किनारे पर हैं पर कोने पर नहीं, उनके दो फलक रँगे होते हैं। 12 किनारों में से हर एक पर ऐसे n - 2 घन हैं, इसलिए कुल 12 (n - 2)।\n\nफलक के बीच के घनों का एक फलक रँगा होता है। 6 फलकों में से हर एक पर ऐसे (n - 2) का वर्ग घन हैं।\n\nभीतर के घनों का कोई फलक रँगा नहीं होता। वे भुजा n - 2 का छोटा घन बनाते हैं, इसलिए (n - 2) का घन।\n\n27 छोटे घनों के लिए n, 3 है: 8 कोने, 12 दो फलक वाले, 6 एक फलक वाले और 1 बिना रँगा। 64 छोटे घनों के लिए n, 4 है: 8, 24, 24 और 8। चारों संख्याओं का योग कुल के बराबर होना चाहिए, जो एक तैयार जाँच है।\n\nमानक पासे में आमने-सामने के फलकों की संख्याओं का योग 7 होता है, इसलिए 1 के सामने 6, 2 के सामने 5 और 3 के सामने 4 है। यदि प्रश्न पासे को मानक न कहे, तो दिए गए दृश्यों का उपयोग कीजिए। जो दो संख्याएँ किसी दृश्य में साथ दिखें वे पड़ोसी फलकों पर हैं और आमने-सामने नहीं हो सकतीं। जो संख्या चार अलग संख्याओं के बग़ल में दिखे, उसके सामने बची हुई संख्या ही होगी।"
+      },
+      {
+        "head": "दर्पण, मोड़ और सममिति",
+        "body": "वस्तु के बग़ल में रखा दर्पण बाएँ और दाएँ को बदल देता है और ऊपर-नीचे को वैसा ही रहने देता है। इसलिए किसी शब्द के दर्पण प्रतिबिंब में अक्षर उलटे क्रम में होते हैं, और हर अक्षर बाएँ से दाएँ पलट जाता है। A, H, I, M, O, T, U, V, W, X और Y जैसे अक्षर इस तरह पलटने पर वैसे ही दिखते हैं। कोई शब्द दर्पण में तभी वैसा ही पढ़ा जाता है जब वह ऐसे अक्षरों से बना हो और उलटा लिखने पर भी वही रहे, जैसे MOM।\n\nदर्पण में दिखती घड़ी के लिए दिखाए गए समय को 12 घंटे में से घटाइए। घटाना आसान करने के लिए 12:00 को 11:60 लिखिए। दर्पण में 3:15 दिखने का अर्थ है कि वास्तविक समय 11:60 - 3:15 = 8:45 है।\n\nवस्तु के नीचे रखा दर्पण, या पानी में प्रतिबिंब, ऊपर और नीचे को बदल देता है और बाएँ-दाएँ को वैसा ही रहने देता है।\n\nकाग़ज़ मोड़ने के प्रश्नों में हर मोड़ परतों की संख्या दुगुनी कर देता है। सभी परतों में किया गया छेद हर परत में एक बार आता है। दो बार आधा मोड़े गए काग़ज़ में चार परतें होती हैं, इसलिए एक छेद से काग़ज़ खोलने पर चार छेद मिलते हैं, बशर्ते छेद मोड़ की रेखा पर न हो। उनकी स्थितियाँ हर मोड़ की रेखा के आर-पार एक-दूसरे का दर्पण प्रतिबिंब होती हैं। पक्का करने के लिए अपने रेखाचित्र में एक बार में एक मोड़ खोलिए और छेदों को अभी खोले गए मोड़ के आर-पार प्रतिबिंबित कीजिए।"
+      }
+    ],
+    "keyFacts": [
+      "कम से कम एक समूह = पहला + दूसरा - दोनों।",
+      "n वस्तुओं में से जोड़े: n (n - 1) / 2।",
+      "3 गुणा 3 जाली में वर्ग: 9 + 4 + 1 = 14।",
+      "रँगा घन, हर किनारे पर n: 8 कोने; दो फलक वाले 12 (n - 2); एक फलक वाले 6 (n - 2) का वर्ग; बिना रँगे (n - 2) का घन।",
+      "मानक पासा: आमने-सामने के फलकों का योग 7।",
+      "तराज़ू के तीन परिणाम होते हैं, इसलिए सिक्कों को तीन समूहों में बाँटिए।",
+      "दर्पण में घड़ी: वास्तविक समय = 11:60 में से दिखाया गया समय घटाकर।",
+      "हर मोड़ परतें दुगुनी करता है; एक छेद से हर परत में एक छेद।"
+    ],
+    "examAngle": "इनमें से अधिकतर प्रश्नों के पीछे कोई सूत्र या गिनने का तय तरीक़ा है, इसलिए तैयार अभ्यर्थी के लिए ये तेज़ हैं और जो परीक्षा कक्ष में शुरू से सोचता है उसके लिए धीमे। घन की गिनतियाँ और जोड़ों का सूत्र सीखिए, हर बार वेन आरेख बनाइए, और हर पहेली का उत्तर चिह्नित करने से पहले कहानी में वापस रखिए।",
+    "selfCheck": [
+      "60 के समूह में 35 हिंदी अख़बार पढ़ते हैं, 30 अंग्रेज़ी अख़बार और 15 दोनों। कितने कोई नहीं पढ़ते?",
+      "तौलने की पहेली में सिक्कों को तीन समूहों में क्यों बाँटा जाता है?",
+      "एक रँगे घन को 125 छोटे घनों में काटा जाता है। कितनों का कोई फलक रँगा नहीं है?",
+      "छह टीमें एक-दूसरे से एक बार खेलती हैं। कितने मैच खेले जाते हैं?",
+      "दर्पण में घड़ी 7:20 दिखाती है। वास्तविक समय क्या है?"
+    ]
+  },
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (general mental ability; decision making and problem solving); NCERT Mathematics textbooks, Classes VI to VIII: chapters on visualising solid shapes and symmetry"
+  },
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists general mental ability",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English and Hindi. Verify: Check the Paper II syllabus wording against the current UPSC notification. Rework all fifteen questions independently; for the counting questions, draw the figure and count by size. All situations are made up for practice."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

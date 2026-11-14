@@ -1,0 +1,396 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ]
+  },
+  "id": "csat-syl-syllogisms-statements-practice",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Practice: Syllogisms and statements: what follows and what does not",
+    "hi": "अभ्यास: न्यायवाक्य और कथन: क्या निकलता है और क्या नहीं"
+  },
+  "paper": "prelims-csat",
+  "section": "Practice (written by us, not from a UPSC paper): Syllogisms and statements: what follows and what does not",
+  "minutes": 30,
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: All pens are books. All books are tables. Conclusions: I. All pens are tables. II. Some tables are pens.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Both I and II follow",
+          "Neither I nor II follows"
+        ],
+        "why": "Pens lie inside books and books inside tables, so all pens are tables. Since pens exist by convention, some tables are pens. Both follow."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: Some cats are dogs. All dogs are animals. Conclusions: I. Some cats are animals. II. All animals are dogs.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Both I and II follow",
+          "Neither I nor II follows"
+        ],
+        "why": "The cats that are dogs are inside animals, so I follows. II turns round an all statement; the animal circle can be larger than the dog circle."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: No fruit is a stone. Some stones are red. Conclusions: I. Some red things are not fruits. II. No red thing is a fruit.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Both I and II follow",
+          "Only conclusion II follows",
+          "Only conclusion I follows",
+          "Neither I nor II follows"
+        ],
+        "why": "The red stones are stones, so they are not fruits: I follows. II goes too far, since other red things could be fruits."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: All teachers are readers. Some readers are writers. Conclusions: I. Some teachers are writers. II. Some writers are readers.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Both I and II follow",
+          "Neither I nor II follows"
+        ],
+        "why": "The readers who write may all be outside the teacher circle, so I fails. II is the second statement turned round, which is allowed for some."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: Some doctors are singers. Some singers are painters. Conclusions: I. Some doctors are painters. II. No doctor is a painter.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Either I or II follows",
+          "Both I and II follow"
+        ],
+        "why": "Two some statements give nothing definite, so neither follows alone. But I and II are a complementary pair: one of them must be true. So either I or II follows."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: All roses are flowers. No flower is a tree. Conclusions: I. No rose is a tree. II. Some trees are roses.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Neither I nor II follows",
+          "Both I and II follow",
+          "Only conclusion II follows",
+          "Only conclusion I follows"
+        ],
+        "why": "Roses are inside flowers, and flowers and trees do not touch, so no rose is a tree. II contradicts I."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "All squares are rectangles. All rectangles are polygons. Which of the following must be true?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "All polygons are squares",
+          "Some polygons are squares",
+          "No polygon is a square",
+          "Some squares are not rectangles"
+        ],
+        "why": "All squares are polygons, and squares exist, so some polygons are squares. The first option turns round an all statement; the last two contradict the statements."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statement: The city has banned plastic bags from next month. Conclusions: I. Plastic bags harm the environment. II. Shops in the city may not give out plastic bags from next month.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion I follows",
+          "Only conclusion II follows",
+          "Both I and II follow",
+          "Neither I nor II follows"
+        ],
+        "why": "II restates what a ban means. I may be the reason, but the statement gives no reason, so it is added from outside."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: Only graduates are eligible for the post. Meena is eligible for the post. Conclusions: I. Meena is a graduate. II. All graduates are eligible for the post.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion II follows",
+          "Only conclusion I follows",
+          "Both I and II follow",
+          "Neither I nor II follows"
+        ],
+        "why": "Only graduates are eligible means every eligible person is a graduate, so I follows. It does not mean every graduate is eligible; there may be other conditions."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statement: A notice reads, \"Please use the stairs. The lift is under repair.\" Assumptions: I. People are able to use the stairs. II. The lift will never work again.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only assumption II is implicit",
+          "Both I and II are implicit",
+          "Neither I nor II is implicit",
+          "Only assumption I is implicit"
+        ],
+        "why": "Deny I and the request becomes pointless, so I is implicit. A repair suggests the lift will work again, so II is not assumed."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Question: Should schools open one hour later in winter? Arguments: I. Yes, children travel in cold and fog, which affects their safety and attendance. II. No, schools have always opened at the same time.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only argument II is strong",
+          "Both arguments are strong",
+          "Only argument I is strong",
+          "Neither argument is strong"
+        ],
+        "why": "I gives a real consequence directly related to the question. II only appeals to past practice, which is not a reason."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "If it rains, the match is cancelled. The match was not cancelled. What can be concluded?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It rained",
+          "It did not rain",
+          "It may or may not have rained",
+          "The match was played in the rain"
+        ],
+        "why": "Had it rained, the match would have been cancelled. It was not, so it did not rain."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "If it rains, the match is cancelled. The match was cancelled. What can be concluded?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "It certainly rained",
+          "It certainly did not rain",
+          "It rained heavily",
+          "Nothing certain can be said about rain"
+        ],
+        "why": "The statement says what rain leads to. It does not say that rain is the only cause of cancellation, so the match may have been cancelled for another reason."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statements: All managers are graduates. Some employees are not graduates. Conclusions: I. Some employees are not managers. II. Some managers are employees.",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Only conclusion II follows",
+          "Both I and II follow",
+          "Neither I nor II follows",
+          "Only conclusion I follows"
+        ],
+        "why": "The employees who are not graduates cannot be managers, since every manager is a graduate. So I follows. Nothing forces the manager and employee circles to overlap, so II fails."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-2",
+      "nodes": [
+        "csat-2"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Statement: A shop's records show that it sold more umbrellas in July than in June. Which of the following follows?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "The shop's umbrella sales in June were lower than in July",
+          "It rained every day in July",
+          "Umbrellas were cheaper in July",
+          "Every customer bought an umbrella in July"
+        ],
+        "why": "The first option only restates the statement from the other side. The others give a cause or an extreme claim that the records do not show."
+      }
+    }
+  ],
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (logical reasoning and analytical ability); Standard rules of categorical logic as taught in school and undergraduate texts; the convention that named groups have members is the one these questions use"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists logical reasoning and analytical ability",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only, Hindi still to come. Practice questions written for the note \"Syllogisms and statements: what follows and what does not\". All 15 answers were solved blind and matched the key (14 Nov 2026). Check the Paper II syllabus wording against the current UPSC notification. Rework all fifteen questions independently; in each syllogism, try to draw a case that breaks the keyed answer. All statements are made up for practice."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

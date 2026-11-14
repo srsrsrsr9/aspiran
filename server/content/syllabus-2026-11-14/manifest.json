@@ -1,0 +1,935 @@
+{
+  "schema": "upsc-pods/pack-manifest@1",
+  "packId": "syllabus-2026-11-14",
+  "createdOn": "2026-11-14",
+  "status": "draft, not editor-approved",
+  "entry": {
+    "reads": [
+      "long-read/anc-syl-harappan-civilisation.json",
+      "long-read/anc-syl-vedic-age.json",
+      "long-read/anc-syl-buddhism-jainism.json",
+      "long-read/anc-syl-mauryas-ashoka-dhamma.json",
+      "long-read/anc-syl-gupta-age.json",
+      "long-read/anc-syl-temple-architecture.json",
+      "long-read/anc-syl-sultanate-mughal-rule-and-buildings.json",
+      "long-read/anc-syl-bhakti-sufi-movements.json",
+      "long-read/csat-syl-reading-main-idea.json",
+      "long-read/csat-syl-inference-assumption-tone.json",
+      "long-read/csat-syl-syllogisms-statements.json",
+      "long-read/csat-syl-arrangements-relations-directions-coding.json",
+      "long-read/csat-syl-decision-reading-situation.json",
+      "long-read/csat-syl-priorities-problem-solving.json",
+      "long-read/csat-syl-series-clocks-calendars.json",
+      "long-read/csat-syl-puzzles-visual-reasoning.json",
+      "long-read/csat-syl-numbers-percent-ratio.json",
+      "long-read/csat-syl-speed-work-averages-data.json",
+      "long-read/csat-syl-listening-responding.json",
+      "long-read/csat-syl-work-situations-public-dealing.json",
+      "long-read/eco-syl-budget-documents-process.json",
+      "long-read/eco-syl-deficits-debt-frbm.json",
+      "long-read/eco-syl-fiscal-federalism-sharing.json",
+      "long-read/eco-syl-industrial-policy-1991-pli.json",
+      "long-read/eco-syl-infrastructure-sectors-planning.json",
+      "long-read/eco-syl-infrastructure-investment-models.json",
+      "long-read/eco-syl-national-income.json",
+      "long-read/eco-syl-inflation.json",
+      "long-read/eco-syl-banking.json",
+      "long-read/eco-syl-budget-tax.json",
+      "long-read/eco-syl-agriculture.json",
+      "long-read/eco-syl-industry-infra.json",
+      "long-read/eco-syl-external.json",
+      "long-read/eco-syl-employment.json",
+      "long-read/env-syl-ecology.json",
+      "long-read/env-syl-biodiversity.json",
+      "long-read/env-syl-laws.json",
+      "long-read/env-syl-climate.json",
+      "long-read/env-syl-pollution.json",
+      "long-read/env-syl-disaster.json",
+      "long-read/ess-syl-topic-thesis.json",
+      "long-read/ess-syl-structure-opening-close.json",
+      "long-read/ess-syl-examples-other-side.json",
+      "long-read/ess-syl-themes.json",
+      "long-read/eth-syl-case-reading-stakeholders.json",
+      "long-read/eth-syl-case-options.json",
+      "long-read/eth-syl-case-choosing-justifying.json",
+      "long-read/eth-syl-ei-four-abilities.json",
+      "long-read/eth-syl-ei-administration-situations.json",
+      "long-read/eth-syl-thinkers-aristotle-kant-mill-texts.json",
+      "long-read/eth-syl-thinkers-gandhi-ambedkar-texts.json",
+      "long-read/eth-syl-thinkers-dhammapada-kautilya-confucius-tagore-texts.json",
+      "long-read/eth-syl-thinkers-plato-ring-using-thinkers.json",
+      "long-read/eth-syl-ethics-human-interface.json",
+      "long-read/eth-syl-private-public-values.json",
+      "long-read/eth-syl-attitude-structure-function.json",
+      "long-read/eth-syl-attitude-influence-persuasion.json",
+      "long-read/eth-syl-aptitude-foundational-values.json",
+      "long-read/eth-syl-emotional-intelligence.json",
+      "long-read/eth-syl-indian-moral-thinkers.json",
+      "long-read/eth-syl-world-moral-thinkers.json",
+      "long-read/geo-syl-earth-interior.json",
+      "long-read/geo-syl-atmosphere.json",
+      "long-read/geo-syl-monsoon.json",
+      "long-read/geo-syl-oceans.json",
+      "long-read/geo-syl-hazards.json",
+      "long-read/geo-syl-physiography.json",
+      "long-read/geo-syl-resources.json",
+      "long-read/geo-syl-agriculture.json",
+      "long-read/pol-gov-transparency-accountability.json",
+      "long-read/pol-gov-e-governance.json",
+      "long-read/pol-gov-civil-services.json",
+      "long-read/pol-gov-civil-society.json",
+      "long-read/pol-gov-vulnerable-sections.json",
+      "long-read/pol-gov-health.json",
+      "long-read/pol-gov-education.json",
+      "long-read/pol-gov-poverty-hunger.json",
+      "long-read/sec-syl-is-extremism-development.json",
+      "long-read/sec-syl-is-terrorism-law.json",
+      "long-read/sec-syl-is-cyber-media.json",
+      "long-read/sec-syl-is-money-laundering.json",
+      "long-read/sec-syl-is-border-coastal.json",
+      "long-read/sec-syl-is-forces-agencies.json",
+      "long-read/ir-syl-imf-world-bank-wto.json",
+      "long-read/ir-syl-other-countries-policies-india.json",
+      "long-read/ir-syl-neighbourhood-policy.json",
+      "long-read/ir-syl-bilateral-neighbours.json",
+      "long-read/ir-syl-regional-groupings.json",
+      "long-read/ir-syl-global-groupings.json",
+      "long-read/ir-syl-nonalignment-autonomy.json",
+      "long-read/ir-syl-diaspora.json",
+      "long-read/his-syl-british-expansion.json",
+      "long-read/his-syl-1857.json",
+      "long-read/his-syl-reform.json",
+      "long-read/his-syl-constitutional.json",
+      "long-read/his-syl-early-nationalism.json",
+      "long-read/his-syl-gandhian.json",
+      "long-read/his-syl-towards-freedom.json",
+      "long-read/his-syl-consolidation.json",
+      "long-read/pol-syl-making-preamble.json",
+      "long-read/pol-syl-fundamental-rights.json",
+      "long-read/pol-syl-dpsp-duties.json",
+      "long-read/pol-syl-amendment-basic-structure.json",
+      "long-read/pol-syl-federalism-centre-state.json",
+      "long-read/pol-syl-local-government.json",
+      "long-read/pol-syl-parliament-structure.json",
+      "long-read/pol-syl-parliament-lawmaking.json",
+      "long-read/pol-syl-president-vp.json",
+      "long-read/pol-syl-pm-council.json",
+      "long-read/pol-syl-state-executive.json",
+      "long-read/pol-syl-supreme-court.json",
+      "long-read/pol-syl-high-courts-review.json",
+      "long-read/pol-syl-elections.json",
+      "long-read/pol-syl-constitutional-bodies.json",
+      "long-read/pol-syl-statutory-bodies.json",
+      "long-read/pol-syl-constitutional-posts-appointment.json",
+      "long-read/pol-syl-rpa-qualification-disqualification.json",
+      "long-read/pol-syl-electoral-reforms.json",
+      "long-read/sci-syl-cell-genetics.json",
+      "long-read/sci-syl-nutrition-human-body.json",
+      "long-read/sci-syl-microbes-immunity.json",
+      "long-read/sci-syl-everyday-physics.json",
+      "long-read/sci-syl-everyday-chemistry.json",
+      "long-read/sci-syl-space-technology.json",
+      "long-read/sci-syl-nuclear-energy.json",
+      "long-read/sci-syl-biotech-emerging-tech.json",
+      "long-read/soc-syl-features-diversity.json",
+      "long-read/soc-syl-women-organisations.json",
+      "long-read/soc-syl-population-urbanisation.json",
+      "long-read/soc-syl-communalism-regionalism-secularism.json",
+      "long-read/his-syl-industrial-revolution.json",
+      "long-read/his-syl-american-french-revolutions.json",
+      "long-read/his-syl-colonialism-decolonisation.json",
+      "long-read/his-syl-world-wars-cold-war.json"
+    ],
+    "mocks": [
+      "mock-paper/csat-syl-reading-main-idea-practice.json",
+      "mock-paper/csat-syl-inference-assumption-tone-practice.json",
+      "mock-paper/csat-syl-syllogisms-statements-practice.json",
+      "mock-paper/csat-syl-arrangements-relations-directions-coding-practice.json",
+      "mock-paper/csat-syl-decision-reading-situation-practice.json",
+      "mock-paper/csat-syl-priorities-problem-solving-practice.json",
+      "mock-paper/csat-syl-series-clocks-calendars-practice.json",
+      "mock-paper/csat-syl-puzzles-visual-reasoning-practice.json",
+      "mock-paper/csat-syl-numbers-percent-ratio-practice.json",
+      "mock-paper/csat-syl-speed-work-averages-data-practice.json",
+      "mock-paper/csat-syl-listening-responding-practice.json",
+      "mock-paper/csat-syl-work-situations-public-dealing-practice.json"
+    ],
+    "paths": [
+      "topic-path/path-pol-constitution.json",
+      "topic-path/path-pol-parliament.json",
+      "topic-path/path-pol-executive-judiciary.json",
+      "topic-path/path-pol-elections.json",
+      "topic-path/path-pol-bodies.json",
+      "topic-path/path-pol-governance.json",
+      "topic-path/path-pol-prelims-polity.json"
+    ]
+  },
+  "files": [
+    {
+      "path": "long-read/anc-syl-harappan-civilisation.json",
+      "bytes": 24367,
+      "sha256": "90b170e45384557481de1baddf4408519e1186e357cb5a073cdacd4a5d3354f5"
+    },
+    {
+      "path": "long-read/anc-syl-vedic-age.json",
+      "bytes": 22058,
+      "sha256": "bbd8ff8bf9f67a470d25ddbf3ab7d1d094bea0ace17e38f9bf623c6b0445d815"
+    },
+    {
+      "path": "long-read/anc-syl-buddhism-jainism.json",
+      "bytes": 22267,
+      "sha256": "c682da0f829807f729ec85f17a72dd7be8957b8633f5d9ad23ccff4b7ff02b21"
+    },
+    {
+      "path": "long-read/anc-syl-mauryas-ashoka-dhamma.json",
+      "bytes": 22873,
+      "sha256": "71d696c7c63aad0a6e9d465f96489699f8f67f2d0bc8a1f1019df493240f9efc"
+    },
+    {
+      "path": "long-read/anc-syl-gupta-age.json",
+      "bytes": 23116,
+      "sha256": "ee47998d943659b6b0d484a2e0213f3b9fb8692487015ec3d1adab155b0faf43"
+    },
+    {
+      "path": "long-read/anc-syl-temple-architecture.json",
+      "bytes": 23515,
+      "sha256": "e15d3e3f886e9bc548d9be093cc94443de53af63594b2e18f1602fbe1aea3218"
+    },
+    {
+      "path": "long-read/anc-syl-sultanate-mughal-rule-and-buildings.json",
+      "bytes": 25366,
+      "sha256": "36edc12f7aa18938247a5b87bc7b2be0e99367a617aa72be97a8acea853c590d"
+    },
+    {
+      "path": "long-read/anc-syl-bhakti-sufi-movements.json",
+      "bytes": 22667,
+      "sha256": "791a2e58b0aa51f451779a3082aad53ade2270d1cb51102dbe8d97ae6a39c0ed"
+    },
+    {
+      "path": "long-read/csat-syl-reading-main-idea.json",
+      "bytes": 27376,
+      "sha256": "018d1166b43403a9b869fa6397a6454bde40344e06eeeb4810caafdc5881c09a"
+    },
+    {
+      "path": "mock-paper/csat-syl-reading-main-idea-practice.json",
+      "bytes": 22562,
+      "sha256": "90767d2579b05cb9996c1241e416cf9b63a682b508b64d5234e71793836f4c6c"
+    },
+    {
+      "path": "long-read/csat-syl-inference-assumption-tone.json",
+      "bytes": 27210,
+      "sha256": "e35aec372499561dffe2671c18a97fa7e96a3848843a329fd71572f2cbd6ba50"
+    },
+    {
+      "path": "mock-paper/csat-syl-inference-assumption-tone-practice.json",
+      "bytes": 22168,
+      "sha256": "1479056d99b68190ccf2fb58eb379a575d88c4b4a5d25c1d69795ddfaa6e0fc9"
+    },
+    {
+      "path": "long-read/csat-syl-syllogisms-statements.json",
+      "bytes": 28537,
+      "sha256": "addcf24e12bc43ec48504e4e0c37e5f89a943543d53aff1cfb3ae121a641c5fa"
+    },
+    {
+      "path": "mock-paper/csat-syl-syllogisms-statements-practice.json",
+      "bytes": 13556,
+      "sha256": "99e138b2f0787a271d5867490436d794f8d39bb0ae57ac148765493627a963d4"
+    },
+    {
+      "path": "long-read/csat-syl-arrangements-relations-directions-coding.json",
+      "bytes": 28259,
+      "sha256": "44749be6c070502dc652eb15cf44ef4d3f0d6f229fc849d4e46a47b885ba5f23"
+    },
+    {
+      "path": "mock-paper/csat-syl-arrangements-relations-directions-coding-practice.json",
+      "bytes": 11698,
+      "sha256": "c218b216e75ba74dead4cb6b2fe3ac0cea9ac94bc5e29813dab9d414fcabe6e1"
+    },
+    {
+      "path": "long-read/csat-syl-decision-reading-situation.json",
+      "bytes": 25535,
+      "sha256": "5f9501b0fd7dda77f181fcfc55b135853c05dc7029197f671e5abaaa6930405e"
+    },
+    {
+      "path": "mock-paper/csat-syl-decision-reading-situation-practice.json",
+      "bytes": 17012,
+      "sha256": "8212690cc20a0fb89367f5a92e0284c5c5be694b638579f0263a2438c080c460"
+    },
+    {
+      "path": "long-read/csat-syl-priorities-problem-solving.json",
+      "bytes": 25101,
+      "sha256": "a72b0b22bc2eb8e7e5b08b946fb84646f35aeeff08297381d021f81be4f4f777"
+    },
+    {
+      "path": "mock-paper/csat-syl-priorities-problem-solving-practice.json",
+      "bytes": 14175,
+      "sha256": "b65c0101153fa297e45db503f48e2782a1fd8b9c5d81df0606307bf38a7913ed"
+    },
+    {
+      "path": "long-read/csat-syl-series-clocks-calendars.json",
+      "bytes": 24700,
+      "sha256": "857895db761ba7dc5c6b6fa3a4249dbb0e73a8efe13cc5468cf3e58a0eccd7a4"
+    },
+    {
+      "path": "mock-paper/csat-syl-series-clocks-calendars-practice.json",
+      "bytes": 10976,
+      "sha256": "a049679d16e7ceddfcea9a0965ced50e0bdc677050f07437ffc5fba46dedf8e1"
+    },
+    {
+      "path": "long-read/csat-syl-puzzles-visual-reasoning.json",
+      "bytes": 27125,
+      "sha256": "fac943641e2077ec96edb308948eda13588034d0cdae6866a98b7f33fb60b303"
+    },
+    {
+      "path": "mock-paper/csat-syl-puzzles-visual-reasoning-practice.json",
+      "bytes": 11065,
+      "sha256": "f7d19b08401ff48d8a2f8f333a7862cf63d10e362b7f9bcc6821a94205605c48"
+    },
+    {
+      "path": "long-read/csat-syl-numbers-percent-ratio.json",
+      "bytes": 26662,
+      "sha256": "d47cca48514f48ffac71ca7717acd9775778aa90343472361f3a7246fea53048"
+    },
+    {
+      "path": "mock-paper/csat-syl-numbers-percent-ratio-practice.json",
+      "bytes": 12411,
+      "sha256": "401b6ed4ced5ee874967bdf5872b7880c7fdd443e595e673f0666a461f13bbc7"
+    },
+    {
+      "path": "long-read/csat-syl-speed-work-averages-data.json",
+      "bytes": 26858,
+      "sha256": "d37ec6886e3bd1cdd4c0c1167914121d06eaa62ffd04aada572f64ee06a7eb54"
+    },
+    {
+      "path": "mock-paper/csat-syl-speed-work-averages-data-practice.json",
+      "bytes": 12007,
+      "sha256": "0cbf6a7602f5bbc9d82f1100934f1d91a993df610fef8788a3fc4d852afc931b"
+    },
+    {
+      "path": "long-read/csat-syl-listening-responding.json",
+      "bytes": 25326,
+      "sha256": "be98671167df2b88fb0cd0978cb134179e76157f5dd1c479b7eb38693bbd3572"
+    },
+    {
+      "path": "mock-paper/csat-syl-listening-responding-practice.json",
+      "bytes": 14265,
+      "sha256": "e9e8bfc657e9f1023addecf2390b7108810409de272f8789f9d121f7795d0e80"
+    },
+    {
+      "path": "long-read/csat-syl-work-situations-public-dealing.json",
+      "bytes": 27174,
+      "sha256": "5e2812560ee5f6c544ed7a84cdf9aecf1c87a02ce76952a7dfa2e7b10f227625"
+    },
+    {
+      "path": "mock-paper/csat-syl-work-situations-public-dealing-practice.json",
+      "bytes": 14700,
+      "sha256": "ce2a477e4c73211d38e080cc8dcf9f2f58ae2f3d3c20c248665d16b09e308dd6"
+    },
+    {
+      "path": "long-read/eco-syl-budget-documents-process.json",
+      "bytes": 28924,
+      "sha256": "ce91447fb01daface138966760a36218f61a3424d85e4f8d7426eae74b240ff0"
+    },
+    {
+      "path": "long-read/eco-syl-deficits-debt-frbm.json",
+      "bytes": 27362,
+      "sha256": "fcfd570260d60dfba4d765bbdd3dee780a470a7ed7c4026b944c1d121ed1b824"
+    },
+    {
+      "path": "long-read/eco-syl-fiscal-federalism-sharing.json",
+      "bytes": 29459,
+      "sha256": "40ec0b6737cdf3b72aa3fdc72e2bfe7eb8dc4b02dbb13366b0825aa2bd0bcbc9"
+    },
+    {
+      "path": "long-read/eco-syl-industrial-policy-1991-pli.json",
+      "bytes": 29517,
+      "sha256": "89e51614a37fc43d4b4ead6706179d934a0421d6a435cfaec72e78dc66f31074"
+    },
+    {
+      "path": "long-read/eco-syl-infrastructure-sectors-planning.json",
+      "bytes": 30129,
+      "sha256": "8e1a8e289b42ddd451a89ee79e15dc3f14af2a61778ec8f2cca41d1bb4572985"
+    },
+    {
+      "path": "long-read/eco-syl-infrastructure-investment-models.json",
+      "bytes": 30545,
+      "sha256": "2ee5c1d06c8f3122b9c413847828bca26ee884dd57f1b03a134fcc621c6e7e66"
+    },
+    {
+      "path": "long-read/eco-syl-national-income.json",
+      "bytes": 6786,
+      "sha256": "b810fdc21c84952e284540ae1af2089d66aa428de1075d06dea0dc156a996c20"
+    },
+    {
+      "path": "long-read/eco-syl-inflation.json",
+      "bytes": 8939,
+      "sha256": "3ab32488e367f6c6c06aea5aa2bc7064caa8253fb4904412a3b6f646ea87143e"
+    },
+    {
+      "path": "long-read/eco-syl-banking.json",
+      "bytes": 6736,
+      "sha256": "e2b47b076ef9c328bf1d3204f3665136e40a7f74a6da205bd0ca638651e024d1"
+    },
+    {
+      "path": "long-read/eco-syl-budget-tax.json",
+      "bytes": 8892,
+      "sha256": "8a2fecdb06cc7b384913f355ee569d51be93ceb745b8e5330797922396138bf2"
+    },
+    {
+      "path": "long-read/eco-syl-agriculture.json",
+      "bytes": 6912,
+      "sha256": "090cd58b971f749f56d88b0cb7032f1f1b1d78938d086ef886d0c690aa95f193"
+    },
+    {
+      "path": "long-read/eco-syl-industry-infra.json",
+      "bytes": 8814,
+      "sha256": "085af1a2b228aa02816254ad3cea1351105e7cc79df167e1bcf6d087ecfb20cb"
+    },
+    {
+      "path": "long-read/eco-syl-external.json",
+      "bytes": 6668,
+      "sha256": "78a426724e0d7a8ade97ac6c3afb10efd72d36070af8fa295e9f36fa84471696"
+    },
+    {
+      "path": "long-read/eco-syl-employment.json",
+      "bytes": 7831,
+      "sha256": "ec2708da61ffde737b5b036c4a597d1eb445263f9698d481ab9fc6fe54dce69b"
+    },
+    {
+      "path": "long-read/env-syl-ecology.json",
+      "bytes": 5767,
+      "sha256": "ddbaf8f54298ccdd3b0c6b3a4937f2fa216c9da7ae001fe2bbf7ce92d7c8333c"
+    },
+    {
+      "path": "long-read/env-syl-biodiversity.json",
+      "bytes": 7681,
+      "sha256": "e9d5dfe5897097bc72d5f16adba1dbfe54e9427e7d65000d7128d1b12c1593a9"
+    },
+    {
+      "path": "long-read/env-syl-laws.json",
+      "bytes": 6919,
+      "sha256": "5666fde99ba0071b380a3de38f753023959a633bd312184888aa7e64be5d31ca"
+    },
+    {
+      "path": "long-read/env-syl-climate.json",
+      "bytes": 8191,
+      "sha256": "2b72e6dc7bb23d979bacabfe4e7f4f49627c4e78294b6e4ca2d9c69b974a548b"
+    },
+    {
+      "path": "long-read/env-syl-pollution.json",
+      "bytes": 7571,
+      "sha256": "8ef73da81a622a50bb81bffcc088b63c6d8edc38742a33c118cd08eea6873014"
+    },
+    {
+      "path": "long-read/env-syl-disaster.json",
+      "bytes": 7092,
+      "sha256": "456efd8e1fabc1f0bbcc7b3c75be6a0d24a6f156df888e83d2b31d67184b2cd4"
+    },
+    {
+      "path": "long-read/ess-syl-topic-thesis.json",
+      "bytes": 27248,
+      "sha256": "a560e306d20cccb619b7ca748e0e53944b00b878fe5b18e3947e8fa8d9828feb"
+    },
+    {
+      "path": "long-read/ess-syl-structure-opening-close.json",
+      "bytes": 28816,
+      "sha256": "e5b4db6fbe2cd2713d604c37da90b00a7b98e791ecaf8ef8499eccb42277cc7a"
+    },
+    {
+      "path": "long-read/ess-syl-examples-other-side.json",
+      "bytes": 27788,
+      "sha256": "890ab8503861f640397c464ea41d55738f329a97fee9b55f616cd2d7c4818103"
+    },
+    {
+      "path": "long-read/ess-syl-themes.json",
+      "bytes": 31104,
+      "sha256": "4c340e1b3008160a98739e561471dbfe4d30f43717ead66888ef9716b9fd8d40"
+    },
+    {
+      "path": "long-read/eth-syl-case-reading-stakeholders.json",
+      "bytes": 29985,
+      "sha256": "cbb541a01417164a9283a53c24b2f6eafdd5f5971e46730f22415bc6ed0c0139"
+    },
+    {
+      "path": "long-read/eth-syl-case-options.json",
+      "bytes": 28535,
+      "sha256": "71bbd0ee915f47f4a76eafbcb6b2fea16e496639e2c94b36492ae589911fc481"
+    },
+    {
+      "path": "long-read/eth-syl-case-choosing-justifying.json",
+      "bytes": 29048,
+      "sha256": "03f0c1f062b16e39d838e40a229b2c2430bb4483af278834323e901971391295"
+    },
+    {
+      "path": "long-read/eth-syl-ei-four-abilities.json",
+      "bytes": 32496,
+      "sha256": "34e607a79ee7072b2ca9dd14c74e5291d8f991d2cd23f4145fcc915726bbdc66"
+    },
+    {
+      "path": "long-read/eth-syl-ei-administration-situations.json",
+      "bytes": 32126,
+      "sha256": "14a4abbeefacf58266f68dd2be5df43ab9ef01bd841c5f39474fd11389dcb435"
+    },
+    {
+      "path": "long-read/eth-syl-thinkers-aristotle-kant-mill-texts.json",
+      "bytes": 35750,
+      "sha256": "b581958dfcc4f26c93a64d06ef14c3bc557ad89875ad2745a0ad8f38adf80d8a"
+    },
+    {
+      "path": "long-read/eth-syl-thinkers-gandhi-ambedkar-texts.json",
+      "bytes": 37317,
+      "sha256": "91f0bda579e0c537ed16eb5543f3ba9f94d61fe44f9c374a9b88537b4464687b"
+    },
+    {
+      "path": "long-read/eth-syl-thinkers-dhammapada-kautilya-confucius-tagore-texts.json",
+      "bytes": 33852,
+      "sha256": "5164e2cffb54ffe06af8fc1616aa75cb4a81016b7565ba5268e871a60751448e"
+    },
+    {
+      "path": "long-read/eth-syl-thinkers-plato-ring-using-thinkers.json",
+      "bytes": 31445,
+      "sha256": "8b4e684c40b9db26586623056bd7c283dd8260b18d245934650c3c4699e048dc"
+    },
+    {
+      "path": "long-read/eth-syl-ethics-human-interface.json",
+      "bytes": 21560,
+      "sha256": "67d3ac0a5150fb525baca31f7d6549b23030337b9cfa622dcafbd33238486cff"
+    },
+    {
+      "path": "long-read/eth-syl-private-public-values.json",
+      "bytes": 22136,
+      "sha256": "90e17efa96a936e720f73e1ea55a69afb8bff27cb9f0fb8a361d723a0aa7763b"
+    },
+    {
+      "path": "long-read/eth-syl-attitude-structure-function.json",
+      "bytes": 21403,
+      "sha256": "2777b8173efb69f56c90c76fbd5327058af944641d3a4255e1f50ffc45994cc1"
+    },
+    {
+      "path": "long-read/eth-syl-attitude-influence-persuasion.json",
+      "bytes": 23903,
+      "sha256": "c331517318b4f977de82085311ca9857d0dc7b0d478a6143dd4c71316d5ebb25"
+    },
+    {
+      "path": "long-read/eth-syl-aptitude-foundational-values.json",
+      "bytes": 22492,
+      "sha256": "44ffb9f26908d3012009f3cce04870683302ce14885d2f415fe8a97951a5ef59"
+    },
+    {
+      "path": "long-read/eth-syl-emotional-intelligence.json",
+      "bytes": 21576,
+      "sha256": "0d5222f4567fc47d15f6330a947715dc90bb284c4008ed5a43c68b833e8813c9"
+    },
+    {
+      "path": "long-read/eth-syl-indian-moral-thinkers.json",
+      "bytes": 23126,
+      "sha256": "b8277077895042a00bf501849eddcd1b2342b28058fc52b13593048498c5c181"
+    },
+    {
+      "path": "long-read/eth-syl-world-moral-thinkers.json",
+      "bytes": 22298,
+      "sha256": "b1ab746ebe63c67b2a064f3358a211c13cf23af96fe0a6e63138dcc0a5b4bb7b"
+    },
+    {
+      "path": "long-read/geo-syl-earth-interior.json",
+      "bytes": 5882,
+      "sha256": "6f3690612fb5d1fc2223b62358de32fc752db37d331095e13b8e03ed7615a09d"
+    },
+    {
+      "path": "long-read/geo-syl-atmosphere.json",
+      "bytes": 6071,
+      "sha256": "ba79f8f66015c675b109d184afabdc499ea6ee6fb853921e91d4c0735c4af762"
+    },
+    {
+      "path": "long-read/geo-syl-monsoon.json",
+      "bytes": 5877,
+      "sha256": "346fdd462ffad66dbd73a8abf094106fcaf6c01282e27b525e67f31b53db620c"
+    },
+    {
+      "path": "long-read/geo-syl-oceans.json",
+      "bytes": 5629,
+      "sha256": "014bbb3428f370b2d8715bdcdb7f0a74e9ceed1768f981a53d7d69b0b3a38c7b"
+    },
+    {
+      "path": "long-read/geo-syl-hazards.json",
+      "bytes": 6611,
+      "sha256": "a0247e35a1b0a9fcb0751b8c5e864590d8e27925f8c6747121ec2cc6b1771840"
+    },
+    {
+      "path": "long-read/geo-syl-physiography.json",
+      "bytes": 7242,
+      "sha256": "411329accc7b3f0b87c2e2dd4948443e5788637d2b4a22be43bd6109649d8ff0"
+    },
+    {
+      "path": "long-read/geo-syl-resources.json",
+      "bytes": 6385,
+      "sha256": "fa3923448373d03dad0d6f6581539dd22b15757a19eb10358c2f639ec57e8eed"
+    },
+    {
+      "path": "long-read/geo-syl-agriculture.json",
+      "bytes": 6151,
+      "sha256": "1ca15445cc21493aff39e67b09fa6dfd59d2697b80ff1c88af597a5078f705bd"
+    },
+    {
+      "path": "long-read/pol-gov-transparency-accountability.json",
+      "bytes": 27501,
+      "sha256": "6134b4490eca887a898972b57ef378b187af5273a0ca656d811e01390931ba40"
+    },
+    {
+      "path": "long-read/pol-gov-e-governance.json",
+      "bytes": 23729,
+      "sha256": "7d55b029b8385cd9f5a6068ce0ee8f4110ec5dd3a10bc5c3a7d19f98c7186b27"
+    },
+    {
+      "path": "long-read/pol-gov-civil-services.json",
+      "bytes": 25900,
+      "sha256": "61a24dd65cdc19d55aaf90ee6155d26f3c418a34b7474354c54106f3b32e67ea"
+    },
+    {
+      "path": "long-read/pol-gov-civil-society.json",
+      "bytes": 25405,
+      "sha256": "da91166961da280d3e3763b847a7b518981149e081f759a7dde61966de783b6f"
+    },
+    {
+      "path": "long-read/pol-gov-vulnerable-sections.json",
+      "bytes": 26828,
+      "sha256": "931cfb0bcb796283031da8063deca427e4d1f2b9c5c0969a7d2a7e429a328cc8"
+    },
+    {
+      "path": "long-read/pol-gov-health.json",
+      "bytes": 26835,
+      "sha256": "3936bd11dacbd959a0a4473faec660ece2a45b4a6276cd0d69450ee38e0aca3e"
+    },
+    {
+      "path": "long-read/pol-gov-education.json",
+      "bytes": 27029,
+      "sha256": "1cde2985a6db3dbc9c2a865915178a1bc51e0005dfcdb3f22712eeec67f886c3"
+    },
+    {
+      "path": "long-read/pol-gov-poverty-hunger.json",
+      "bytes": 28055,
+      "sha256": "2ff821afcb245ec7a69402a3e48075b9109a0a3cb3cecc2c95d5b3ac6a8a2044"
+    },
+    {
+      "path": "long-read/sec-syl-is-extremism-development.json",
+      "bytes": 23817,
+      "sha256": "f351d4bbfda02ebae403ecf916cb521fb6c863536cdc4660560e8561d5fe3f21"
+    },
+    {
+      "path": "long-read/sec-syl-is-terrorism-law.json",
+      "bytes": 22205,
+      "sha256": "c212567a3340f2fe7a7a6061a0586efa48afd7893d6802923a245db7f1378367"
+    },
+    {
+      "path": "long-read/sec-syl-is-cyber-media.json",
+      "bytes": 22912,
+      "sha256": "265ab3c1b9250482d1806ff03f7fc32d68bf04651250fc045fd35b70a2f75c7a"
+    },
+    {
+      "path": "long-read/sec-syl-is-money-laundering.json",
+      "bytes": 24299,
+      "sha256": "0ff26fe2bc458560fcbcbe91a00cc479fb63802a2b534b6772738983df9d1643"
+    },
+    {
+      "path": "long-read/sec-syl-is-border-coastal.json",
+      "bytes": 25708,
+      "sha256": "79e3a25a24950b18feef11525e4405dba88afc86cfc02d04b8aebcec57b21fbd"
+    },
+    {
+      "path": "long-read/sec-syl-is-forces-agencies.json",
+      "bytes": 26420,
+      "sha256": "ceb4f51624d6fa7e2fec38bb4a581e59f57e0c6d1584cc5d82238002453fbfd5"
+    },
+    {
+      "path": "long-read/ir-syl-imf-world-bank-wto.json",
+      "bytes": 29372,
+      "sha256": "1c7c462ebe67e58b500e7315da300ca4d49543f69248a0ad6ae5f903de39089e"
+    },
+    {
+      "path": "long-read/ir-syl-other-countries-policies-india.json",
+      "bytes": 29996,
+      "sha256": "4038853cad97bacf11a2d7d436da53b07044a273c6500565b9088f4272490a81"
+    },
+    {
+      "path": "long-read/ir-syl-neighbourhood-policy.json",
+      "bytes": 23893,
+      "sha256": "bd76a04e2739a2df2ea0afaa409ea039029466f7be082c75a893df13599d564c"
+    },
+    {
+      "path": "long-read/ir-syl-bilateral-neighbours.json",
+      "bytes": 25778,
+      "sha256": "fbff40483708269a6d7382383c012312ee439ffe5f4b4d1d02d57971b8579a1b"
+    },
+    {
+      "path": "long-read/ir-syl-regional-groupings.json",
+      "bytes": 21866,
+      "sha256": "bc15fdca449dc99e335790373b15c49034aca8312387d5c9862cc3203ec9b067"
+    },
+    {
+      "path": "long-read/ir-syl-global-groupings.json",
+      "bytes": 25093,
+      "sha256": "de87c7719f33a370e76915e6dc4b822da4df9214b4cf32a4cc6df451308d03f5"
+    },
+    {
+      "path": "long-read/ir-syl-nonalignment-autonomy.json",
+      "bytes": 21968,
+      "sha256": "4172c6f7aac668338395c1bfa2cfdf0658563454f6059567325cede419552297"
+    },
+    {
+      "path": "long-read/ir-syl-diaspora.json",
+      "bytes": 23220,
+      "sha256": "d106fb42fca023316802a6ee9b3aadaeebba670e96940d6507934065ab40efe3"
+    },
+    {
+      "path": "long-read/his-syl-british-expansion.json",
+      "bytes": 5511,
+      "sha256": "84449fcba1685dfcace3970880f5a56c445df3cfd1f3b6ae34ab894e8db87a0f"
+    },
+    {
+      "path": "long-read/his-syl-1857.json",
+      "bytes": 5285,
+      "sha256": "cfb209c86d78b8ef9932e9e995f0829edebf9b3e78a772131f606440965e7eef"
+    },
+    {
+      "path": "long-read/his-syl-reform.json",
+      "bytes": 5351,
+      "sha256": "56789362b17d809c35d4ee4cd6a6c3308cebaa31e17f7aa3412009bf261e192b"
+    },
+    {
+      "path": "long-read/his-syl-constitutional.json",
+      "bytes": 5689,
+      "sha256": "35d2839b46c423a8f4ff8c1626f9c44b4e2e60bc03e3dc09e4dcc792ff2a4448"
+    },
+    {
+      "path": "long-read/his-syl-early-nationalism.json",
+      "bytes": 5672,
+      "sha256": "dc198270eaa2c9486a077528a031f8f84a3cfb50e5452127af27325eb70b32be"
+    },
+    {
+      "path": "long-read/his-syl-gandhian.json",
+      "bytes": 5534,
+      "sha256": "c89ff45058697db324cc65313e1d95077634199c29967d97829bc8dc6a20160e"
+    },
+    {
+      "path": "long-read/his-syl-towards-freedom.json",
+      "bytes": 5804,
+      "sha256": "7e5a7a798ed28c6ff1c8e8e3cd7879a0143826127357884d0174bbabc5ab0acd"
+    },
+    {
+      "path": "long-read/his-syl-consolidation.json",
+      "bytes": 5584,
+      "sha256": "f8b88e3a6310966cf0afa90de1f3a10df6ea4277e6809347cf1c536026132cad"
+    },
+    {
+      "path": "long-read/pol-syl-making-preamble.json",
+      "bytes": 27224,
+      "sha256": "9babbf558e4b7cb1aa48dce89ce5f4821ae73f71766ab1b97858f0b90a06cfdc"
+    },
+    {
+      "path": "long-read/pol-syl-fundamental-rights.json",
+      "bytes": 28548,
+      "sha256": "5603847fe7d5c9945686a9c7128dca1e0405fab8dbc98f1052536fd138bec6b5"
+    },
+    {
+      "path": "long-read/pol-syl-dpsp-duties.json",
+      "bytes": 28065,
+      "sha256": "111114e60399a11b46b6bae348a435972535c8fc316c9dbe175de9b05625c4ae"
+    },
+    {
+      "path": "long-read/pol-syl-amendment-basic-structure.json",
+      "bytes": 26503,
+      "sha256": "9da66bdf71a38e8d7fa2a32915b5492f42074308760866348bae4e03734ff2b0"
+    },
+    {
+      "path": "long-read/pol-syl-federalism-centre-state.json",
+      "bytes": 28321,
+      "sha256": "f483541cd3b280231cd403913a5d8748c590e0e97e82be35a77b165897b1f154"
+    },
+    {
+      "path": "long-read/pol-syl-local-government.json",
+      "bytes": 28515,
+      "sha256": "3c92b87d9f180a8bac3e2d9e4c6b1e0cd512af89f02b4b6b6e761fd74cc1bcc9"
+    },
+    {
+      "path": "long-read/pol-syl-parliament-structure.json",
+      "bytes": 28447,
+      "sha256": "6817c5384800316013858c8d40244054bf02cbb604dc53f4fa6789654da7a342"
+    },
+    {
+      "path": "long-read/pol-syl-parliament-lawmaking.json",
+      "bytes": 28261,
+      "sha256": "463129b1132861ba7f5d67bcf1d4d0d4e4176f447ea78d0360d768137e62618c"
+    },
+    {
+      "path": "long-read/pol-syl-president-vp.json",
+      "bytes": 30112,
+      "sha256": "19857a3089a587dd6cb2cb8ff3b0a9a0172ce9a56485bba237a1ee3bfebdbb50"
+    },
+    {
+      "path": "long-read/pol-syl-pm-council.json",
+      "bytes": 23711,
+      "sha256": "53811beccc432e9527495f333d467326b8aa4a80061f7c07eea74bdbc0b4eb7c"
+    },
+    {
+      "path": "long-read/pol-syl-state-executive.json",
+      "bytes": 27536,
+      "sha256": "3473e94580091a351eb6607daa3f8d1feef995d4b919231de5997f4a364b16d3"
+    },
+    {
+      "path": "long-read/pol-syl-supreme-court.json",
+      "bytes": 27853,
+      "sha256": "a50c05e37a75d62620828e70a457c06f910ac65e3c1047ae2055e6201c969ca7"
+    },
+    {
+      "path": "long-read/pol-syl-high-courts-review.json",
+      "bytes": 26796,
+      "sha256": "2829e4f33c89eb8424e108a144a3dd0ff700bfb86ee11bab5bde40589e0c0e56"
+    },
+    {
+      "path": "long-read/pol-syl-elections.json",
+      "bytes": 29414,
+      "sha256": "b5ca7ee38f7b13e6c5ac09206ed59c2158d9c3a08257442287d02590b180cb52"
+    },
+    {
+      "path": "long-read/pol-syl-constitutional-bodies.json",
+      "bytes": 26309,
+      "sha256": "946ca67f7c24dfedc10e26803e10b902d972e3cd5d68bff61334ff21056fa9fc"
+    },
+    {
+      "path": "long-read/pol-syl-statutory-bodies.json",
+      "bytes": 27565,
+      "sha256": "6e574aba9ee795f6591f9cef6723a81a2b86aaa01f1f807936c29b770d8dbd8a"
+    },
+    {
+      "path": "long-read/pol-syl-constitutional-posts-appointment.json",
+      "bytes": 43366,
+      "sha256": "cd6b6a3745af4e8ae50a6a1725c0dcb57f0479c4adbcfeb261bce4089d5c6c93"
+    },
+    {
+      "path": "long-read/pol-syl-rpa-qualification-disqualification.json",
+      "bytes": 40788,
+      "sha256": "e4e8cd4bdb95f7765378e533e7a97d947829d31c3163c076bcf45fdde9e82175"
+    },
+    {
+      "path": "long-read/pol-syl-electoral-reforms.json",
+      "bytes": 33550,
+      "sha256": "294a2be12b3a7c3ef5ebf1cc7741506ec7e268c4db9f40ab0149134a009272fc"
+    },
+    {
+      "path": "long-read/sci-syl-cell-genetics.json",
+      "bytes": 20488,
+      "sha256": "8e4f50f8e5da3f635fd7cdacb83e476cb63ef8ae66ea655603287c0c8220eb6f"
+    },
+    {
+      "path": "long-read/sci-syl-nutrition-human-body.json",
+      "bytes": 21215,
+      "sha256": "6fd9a4406ac27f27d5cdaff88e51f0041d680029da756efe8ae19d3de5cb83f7"
+    },
+    {
+      "path": "long-read/sci-syl-microbes-immunity.json",
+      "bytes": 21879,
+      "sha256": "1150df38545c81f80067e2e532c6cf902b011e34e3ebc628755e476cc1c35288"
+    },
+    {
+      "path": "long-read/sci-syl-everyday-physics.json",
+      "bytes": 21565,
+      "sha256": "d419f554b5bbca4b87cc71e815b11afd929284987209182a6c2128ce1f8dd8be"
+    },
+    {
+      "path": "long-read/sci-syl-everyday-chemistry.json",
+      "bytes": 22341,
+      "sha256": "9f849d6c7a11a3602001cc6218285e7fec73a17657e4be023b0294b28d71b4e6"
+    },
+    {
+      "path": "long-read/sci-syl-space-technology.json",
+      "bytes": 23954,
+      "sha256": "43e0335842fdcb4909eec591b290d88a685fd69c725608ca135f3bebef78584a"
+    },
+    {
+      "path": "long-read/sci-syl-nuclear-energy.json",
+      "bytes": 25537,
+      "sha256": "c159de49212c34dd2fe69ae4c9c4d3c44011962bc703baa52b1cb6dd4c85b3e0"
+    },
+    {
+      "path": "long-read/sci-syl-biotech-emerging-tech.json",
+      "bytes": 23775,
+      "sha256": "1b41d487dee6e2878028f9d5c1b9151b5922b5cf02f44f645be2203bb3afd1b1"
+    },
+    {
+      "path": "long-read/soc-syl-features-diversity.json",
+      "bytes": 22126,
+      "sha256": "08c8bb288f18c675034cac743f12b0ac2b4160b7e451dc337875a9e658888ebe"
+    },
+    {
+      "path": "long-read/soc-syl-women-organisations.json",
+      "bytes": 24603,
+      "sha256": "3e0974e5acd972716e10610df0f7927f42e0a563d447b86ee4ca57a2c8b356b9"
+    },
+    {
+      "path": "long-read/soc-syl-population-urbanisation.json",
+      "bytes": 22966,
+      "sha256": "ebb46d5ed0826cb311eeb049ede6c0b42bd12af098ea746ab0d194d693670530"
+    },
+    {
+      "path": "long-read/soc-syl-communalism-regionalism-secularism.json",
+      "bytes": 24644,
+      "sha256": "029a1d6f92afe53da0a5fb4b350b1dfbc8ca592ba3711645ff5393974edb55c2"
+    },
+    {
+      "path": "long-read/his-syl-industrial-revolution.json",
+      "bytes": 24387,
+      "sha256": "5265bf104c1213e9cc5c66f1e5bb5ee4bf5694f9542c31b2eca7d9182ccf8ec8"
+    },
+    {
+      "path": "long-read/his-syl-american-french-revolutions.json",
+      "bytes": 25617,
+      "sha256": "b5f5caf289ece930a5e0cfcb0709e7f61b25546462d22d5878e504c9cb6fbc35"
+    },
+    {
+      "path": "long-read/his-syl-colonialism-decolonisation.json",
+      "bytes": 24728,
+      "sha256": "c23ec6054e219b92616471807fafd449fd2755c0856ee2387bf5aa531316a80e"
+    },
+    {
+      "path": "long-read/his-syl-world-wars-cold-war.json",
+      "bytes": 26843,
+      "sha256": "2e9b07cfead683df2b6480cc1bab78020bb37de65bee6d731f41d8748b95ca4f"
+    },
+    {
+      "path": "topic-path/path-pol-constitution.json",
+      "bytes": 188008,
+      "sha256": "8d839152e64df667be36c4801f07beb4223c862a4323d8c73a5fb9671edfeae5"
+    },
+    {
+      "path": "topic-path/path-pol-parliament.json",
+      "bytes": 161154,
+      "sha256": "ace2f1cccf4d55b85f0f0636a4cc2f9622bc5e0f1f9415f53618994eb2cf17c0"
+    },
+    {
+      "path": "topic-path/path-pol-executive-judiciary.json",
+      "bytes": 195039,
+      "sha256": "6960c8bc1003e19614f315e25644173896049df6d52167ab39f26319c282eb40"
+    },
+    {
+      "path": "topic-path/path-pol-elections.json",
+      "bytes": 161662,
+      "sha256": "521764e74cd87e97d85eee67a519f7714c57135b214e436aeeeefdfc365c7289"
+    },
+    {
+      "path": "topic-path/path-pol-bodies.json",
+      "bytes": 158515,
+      "sha256": "8e98c6a986b7e4ab8619d2e7bf2e2c0c4554dc52ae33eaf5065fe7eecf52121d"
+    },
+    {
+      "path": "topic-path/path-pol-governance.json",
+      "bytes": 159601,
+      "sha256": "3807f32b69b0823a4bbc484379d28b073fe3e7d12e6ce33a2e67cb81fe6b7af5"
+    },
+    {
+      "path": "topic-path/path-pol-prelims-polity.json",
+      "bytes": 195529,
+      "sha256": "89db1d14423e7e841b1f32169cdf7c4198572d775e432113976b966fa7705443"
+    }
+  ],
+  "totalBytes": 4356593
+}

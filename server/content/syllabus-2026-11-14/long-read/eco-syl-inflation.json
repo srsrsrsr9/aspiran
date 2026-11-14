@@ -1,0 +1,109 @@
+{
+  "schema": "upsc-pods/long-read@1",
+  "id": "eco-syl-inflation",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Inflation and monetary policy: how India measures prices and how the RBI targets them"
+  },
+  "node": "gs3-1",
+  "nodes": [
+    "gs3-1",
+    "pre-5"
+  ],
+  "topic": "Economy",
+  "gsPaper": "GS3",
+  "minutes": 9,
+  "en": {
+    "dek": "By the end, you will know CPI from WPI, the kinds of inflation, the inflation-targeting law and the RBI's tools.",
+    "sections": [
+      {
+        "head": "Two price indices",
+        "body": "India has two main measures of inflation. The Consumer Price Index (CPI) tracks the prices households pay. The NSO publishes CPI-Rural, CPI-Urban and CPI-Combined; since February 2026 the series has used 2024 as its base year (2012 before that). Food and beverages carry a large weight in the CPI, about 37 per cent of the combined basket in the new series, which is why vegetable and pulse prices move headline inflation so much.\n\nThe Wholesale Price Index (WPI) tracks prices at the wholesale level. The Office of the Economic Adviser in the Department for Promotion of Industry and Internal Trade (DPIIT) publishes it. A new series with base year 2022-23 (2011-12 before that) was released on 15 June 2026. The WPI has no services in it; Producer Price Indices, including some for services, were launched alongside it.\n\nSince 2014 the RBI has used CPI-Combined, not WPI, as its main measure. Core inflation is headline inflation without food and fuel, the most volatile items. The CPI series with base 2024 is the current one."
+      },
+      {
+        "head": "Kinds of inflation",
+        "body": "Demand-pull inflation happens when demand runs ahead of what the economy can supply. Cost-push inflation happens when costs rise, for example when oil prices jump or a bad monsoon cuts food supply.\n\nStagflation is high inflation together with slow growth and high unemployment, as many countries saw in the 1970s oil shocks. Disinflation is a fall in the rate of inflation: prices still rise, only more slowly. Deflation is a fall in the price level itself. Deflation can be harmful because people delay spending and the real burden of debt rises.\n\nInflation hurts people on fixed incomes and savers most. It helps borrowers, because they repay in money that is worth less. That is why it is often called a hidden tax on the poor."
+      },
+      {
+        "head": "The inflation-targeting law",
+        "body": "In 2016 the Finance Act amended the Reserve Bank of India Act, 1934. The amended preamble says the primary objective of monetary policy is price stability, while keeping in mind the objective of growth.\n\nUnder Section 45ZA, the Government, in consultation with the RBI, sets the inflation target once every five years. The target has been 4 per cent CPI inflation, with a tolerance band of 2 per cent on either side, so 2 to 6 per cent. It was first set for August 2016 to March 2021, retained for April 2021 to March 2026, and retained again in March 2026 for April 2026 to March 2031.\n\nThe RBI fails the target if average inflation stays outside the band for three consecutive quarters. It must then write to the Government explaining why, what it will do, and how long it expects to take.\n\nThe Monetary Policy Committee (MPC) sets the policy repo rate. It has six members: three from the RBI, including the Governor, who chairs it, and three external members appointed by the Government for four years. It meets at least four times a year. The Governor has a casting vote in a tie."
+      },
+      {
+        "head": "The RBI's tools",
+        "body": "The repo rate is the rate at which the RBI lends to banks overnight against government securities. It is the policy rate. The Standing Deposit Facility (SDF), introduced in April 2022, is the rate at which the RBI absorbs surplus money from banks without giving securities; it is the floor of the corridor. The Marginal Standing Facility (MSF) lets banks borrow overnight above the repo rate in an emergency; it is the ceiling. The Bank Rate is aligned with the MSF rate.\n\nThe Cash Reserve Ratio (CRR) is the share of a bank's net demand and time liabilities kept with the RBI as cash. Banks earn no interest on it. The Statutory Liquidity Ratio (SLR) is the share banks must keep in safe liquid assets, such as government securities, gold and cash.\n\nOpen Market Operations (OMOs) are the RBI's purchases and sales of government securities. Buying adds money to the system; selling takes it out. Rate changes reach borrowers only slowly, so the RBI has pushed banks to link loan rates to external benchmarks such as the repo rate."
+      }
+    ],
+    "keyFacts": [
+      "CPI (NSO, base 2024 since February 2026) is the target measure; WPI (Office of the Economic Adviser, DPIIT, base 2022-23 since June 2026) has no services.",
+      "Target: 4% CPI inflation, band 2 to 6%, set by the Government with the RBI every five years (Section 45ZA).",
+      "Failure: average inflation outside the band for three consecutive quarters.",
+      "MPC: six members, three from the RBI and three external; the Governor chairs and has a casting vote.",
+      "SDF (April 2022) is the floor of the corridor; MSF is the ceiling; the Bank Rate is aligned with the MSF.",
+      "No interest is paid on CRR balances."
+    ],
+    "examAngle": "Prelims tests the MPC's make-up, which index excludes services, what the SDF and MSF do, and the effect of a CRR or repo change. Mains asks whether inflation targeting has worked and why transmission is slow.",
+    "selfCheck": [
+      "Who sets the inflation target, and how often?",
+      "What happens when the RBI misses the target?",
+      "Does an OMO purchase add money to the system or take it out?"
+    ]
+  },
+  "sources": {
+    "en": "Reserve Bank of India Act, 1934, as amended by the Finance Act, 2016 (rbi.org.in); RBI Monetary Policy Statements and Report on Currency and Finance; MoSPI CPI releases (mospi.gov.in); Office of the Economic Adviser, DPIIT (eaindustry.nic.in); MoSPI press release, Consumer Price Index on base 2024=100, 12 February 2026 (PIB PRID 2227012); Office of the Economic Adviser, DPIIT, press release of 15 June 2026 on the WPI and Producer Price Indices, base 2022-23"
+  },
+  "factsToCheck": [
+    {
+      "claim": "CPI base is 2024=100 from the release of 12 February 2026; food and beverages weight 36.75% in the combined basket (it was close to 46% in the 2012 series).",
+      "source": "MoSPI press release, Consumer Price Index on base 2024=100, 12 February 2026 (PIB PRID 2227012)",
+      "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2227012",
+      "opened": "2026-11-12",
+      "status": "verified"
+    },
+    {
+      "claim": "WPI base is 2022-23 from 15 June 2026; the WPI still has no services; Producer Price Indices (including quarterly ones for seven services) launched the same day.",
+      "source": "Office of the Economic Adviser, DPIIT, press release of 15 June 2026 on the WPI and Producer Price Indices, base 2022-23",
+      "url": "https://www.eaindustry.nic.in/press_release/press_release_202606.pdf",
+      "opened": "2026-11-12",
+      "status": "verified"
+    },
+    {
+      "claim": "Inflation target of 4% with a 2 to 6% band retained for 1 April 2026 to 31 March 2031.",
+      "source": "Ministry of Finance notification S.O. 1580(E), 25 March 2026, under section 45ZA of the RBI Act. Gazette not opened; seen only in secondary reports",
+      "url": "https://www.businesstoday.in/latest/economy/story/govt-retains-inflation-target-at-4-with-2-6-band-for-next-five-years-522390-2026-03-25",
+      "opened": "2026-11-12",
+      "status": "unverified"
+    },
+    {
+      "claim": "MPC: six members, three external members with four-year terms, Governor has a casting vote",
+      "source": "Primary source not opened in G1",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    },
+    {
+      "claim": "SDF introduced April 2022 as the floor of the corridor",
+      "source": "Primary source not opened in G1",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    },
+    {
+      "claim": "Failure of the target: three consecutive quarters outside the band",
+      "source": "Primary source not opened in G1",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only. Verify: Check the inflation target and band for the period from April 2026 (the 2021-26 target ran to March 2026), the current CPI base year, and the CPI food weight. No current repo, CRR or SLR values are quoted on purpose."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

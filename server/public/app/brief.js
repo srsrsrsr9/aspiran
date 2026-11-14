@@ -103,7 +103,11 @@ export function viewCases(arg) {
     return h("div.col", ...head(), h("div.small.muted", `Case ${k + 1} of ${cases.length}${c.tension ? " · " + T(c.tension) : ""}`),
       h("div.card", h("p", { style: { whiteSpace: "pre-line", fontFamily: "var(--read-font)" } }, T(c.case)), h("p", h("strong", T(c.question)))),
       h("label.small", "Your answer first"), ta,
-      reveal, h("button.primary", { onclick: (e) => { e.target.remove(); show(); } }, "Compare with the guide"),
+      // An empty answer gets Jeetu's "Answer first" once (when he's on); the second tap compares anyway.
+      reveal, h("button.primary", { onclick: (e) => {
+        const nudge = !ta.value.trim() && !e.target.dataset.nudged && C.jeetu?.("reread");
+        if (nudge) { e.target.dataset.nudged = "1"; e.target.before(nudge); e.target.textContent = "Compare anyway"; return; }
+        e.target.remove(); show(); } }, "Compare with the guide"),
       next && h("a.btn", { href: "#cases/" + next.id }, "Next case"));
   }
   return h("div.col", ...head("Case studies in the GS4 style. Read the case, write your options and your choice, then compare with a guide that maps who has a stake and why."),

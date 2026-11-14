@@ -81,17 +81,20 @@ fun ReviewScreen(
             if (finished) {
                 Text(if (topics.isEmpty()) "Nothing due today." else "That's today's review.", style = MaterialTheme.typography.headlineSmall)
                 Text("Each one comes back just before you'd forget it. The ones you knew well wait longer.", style = MaterialTheme.typography.bodyLarge)
+                if (topics.isNotEmpty()) JeetuNote("reviewEnd")
                 OutlinedButton(onClick = onClose) { Text("Back") }
                 return@Column
             }
             val t = topics[index]
             PauseLine("first-review")
+            // Jeetu · AI opens the review; before the note is opened he asks for the answer first.
+            if (index == 0) JeetuNote("reviewStart")
             Text("${t.paper} · Topic check", style = MaterialTheme.typography.labelMedium)
             Text(t.name, style = MaterialTheme.typography.headlineSmall)
             Text("Close your notes. Say or write the main points from memory, then check them.", style = MaterialTheme.typography.bodyLarge)
             if (t.note.isNotBlank()) {
                 if (showNote) Text(t.note, style = MaterialTheme.typography.bodyMedium)
-                else TextButton(onClick = { showNote = true }) { Text("Check against what you wrote when you met it") }
+                else { if (index > 0) JeetuNote("reread"); TextButton(onClick = { showNote = true }) { Text("Check against what you wrote when you met it") } }
             }
             notesFor(t.id).takeIf { it.isNotEmpty() }?.let { mine ->
                 Text("Your notes on this", style = MaterialTheme.typography.labelLarge)

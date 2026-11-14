@@ -1,0 +1,403 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ]
+  },
+  "id": "csat-syl-series-clocks-calendars-practice",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Practice: Series, clocks and calendars: finding the rule",
+    "hi": "अभ्यास: शृंखला, घड़ी और कैलेंडर: नियम खोजना"
+  },
+  "paper": "prelims-csat",
+  "section": "Practice (written by us, not from a UPSC paper): Series, clocks and calendars: finding the rule",
+  "minutes": 30,
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next term: 2, 6, 12, 20, 30, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "40",
+          "42",
+          "44",
+          "36"
+        ],
+        "why": "Differences are 4, 6, 8, 10, so the next is 12: 30 + 12 = 42. The terms are also 1 x 2, 2 x 3, up to 6 x 7 = 42."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next term: 3, 6, 11, 18, 27, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "36",
+          "37",
+          "38",
+          "39"
+        ],
+        "why": "Differences are 3, 5, 7, 9. The next difference is 11, so the term is 27 + 11 = 38."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next term: 2, 3, 5, 8, 13, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "18",
+          "20",
+          "19",
+          "21"
+        ],
+        "why": "Each term is the sum of the two before it: 8 + 13 = 21."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next term: 2, 5, 10, 17, 26, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "37",
+          "35",
+          "36",
+          "38"
+        ],
+        "why": "Each term is a square plus one: 1 + 1, 4 + 1, 9 + 1, 16 + 1, 25 + 1. Next is 36 + 1 = 37. The differences 3, 5, 7, 9, 11 give the same answer."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next letter: A, C, F, J, O, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "T",
+          "U",
+          "V",
+          "S"
+        ],
+        "why": "Positions are 1, 3, 6, 10, 15. Differences are 2, 3, 4, 5, so add 6: 21, which is U."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which number does not belong with the others: 8, 27, 64, 100, 125?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "27",
+          "64",
+          "100",
+          "125"
+        ],
+        "why": "8, 27, 64 and 125 are the cubes of 2, 3, 4 and 5. 100 is not a cube."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Find the next term: 4, 7, 8, 14, 12, 21, ?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "28",
+          "24",
+          "18",
+          "16"
+        ],
+        "why": "Two series are mixed. Odd places: 4, 8, 12, next 16. Even places: 7, 14, 21. The next term is in an odd place, so it is 16. The option 28 continues the wrong series."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "What is the angle between the hour hand and the minute hand of a clock at 3:30?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "75 degrees",
+          "90 degrees",
+          "60 degrees",
+          "105 degrees"
+        ],
+        "why": "Minute hand: 30 x 6 = 180 degrees. Hour hand: 3.5 x 30 = 105 degrees. Difference = 75 degrees. Ninety ignores the movement of the hour hand."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "At what time between 4 and 5 o'clock are the two hands of a clock together?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "20 minutes past 4",
+          "21 and 9/11 minutes past 4",
+          "22 minutes past 4",
+          "24 minutes past 4"
+        ],
+        "why": "At 4:00 the hour hand is 120 degrees ahead. The minute hand gains 5.5 degrees a minute, so it needs 120 / 5.5 = 240 / 11 = 21 and 9/11 minutes."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A clock gains 5 minutes every hour. It is set right at 8 a.m. What time will it show when the correct time is 8 p.m. on the same day?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "8:55 p.m.",
+          "9:05 p.m.",
+          "9:00 p.m.",
+          "8:05 p.m."
+        ],
+        "why": "True time elapsed = 12 hours. Gain = 12 x 5 = 60 minutes. The clock shows 9:00 p.m."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "How many times do the hour hand and the minute hand of a clock coincide in 12 hours?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "12",
+          "24",
+          "22",
+          "11"
+        ],
+        "why": "The hands meet once in a little over 65 minutes, so in 12 hours they meet 11 times. Between 11 and 1 they meet only once, at 12."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "If 1 March of a year is a Monday, what day of the week is 1 April of the same year?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Thursday",
+          "Wednesday",
+          "Friday",
+          "Tuesday"
+        ],
+        "why": "March has 31 days, which is 4 weeks and 3 odd days. Three days after Monday is Thursday."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "15 August 2021 was a Sunday. What day of the week was 15 August 2022?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Sunday",
+          "Tuesday",
+          "Monday",
+          "Saturday"
+        ],
+        "why": "The period has 365 days, since no 29 February falls in it (2022 is not a leap year). One odd day: Sunday moves to Monday."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Which of the following is a leap year?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "1900",
+          "2000",
+          "2100",
+          "2022"
+        ],
+        "why": "A century year is a leap year only if divisible by 400. 2000 is; 1900 and 2100 are not. 2022 is not divisible by 4."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Today is Wednesday. What day of the week will it be 100 days from today?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Thursday",
+          "Saturday",
+          "Sunday",
+          "Friday"
+        ],
+        "why": "100 = 14 x 7 + 2, so there are 2 odd days. Two days after Wednesday is Friday."
+      }
+    }
+  ],
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (general mental ability); The Gregorian calendar's leap-year rule (divisible by 4; century years only if divisible by 400)"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists general mental ability",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    },
+    {
+      "claim": "15 August 2021 was a Sunday and 15 August 2022 was a Monday",
+      "source": "Gregorian calendar calculation (computed, not read from a source)",
+      "url": "",
+      "opened": "2026-11-12",
+      "status": "verified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only, Hindi still to come. Practice questions written for the note \"Series, clocks and calendars: finding the rule\". All 15 answers were solved blind and matched the key (14 Nov 2026). Check the Paper II syllabus wording against the current UPSC notification. Rework all fifteen questions independently. The one real date used (15 August 2021, a Sunday, and 15 August 2022, a Monday) was checked with a calendar calculation."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "upsc-pods/long-read@1",
+  "id": "csat-syl-series-clocks-calendars",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Series, clocks and calendars: finding the rule",
+    "hi": "शृंखला, घड़ी और कैलेंडर: नियम खोजना"
+  },
+  "node": "csat-4",
+  "nodes": [
+    "csat-4"
+  ],
+  "topic": "CSAT",
+  "gsPaper": "CSAT",
+  "minutes": 9,
+  "en": {
+    "dek": "By the end, you will have a fixed order of checks for a number or letter series, two facts that solve most clock questions, and the odd-days method for calendars.",
+    "sections": [
+      {
+        "head": "Number series: a fixed order of checks",
+        "body": "A series question gives a few terms and asks for the next one or the missing one. Every series follows a rule. The quickest way to find it is to run the same checks in the same order every time.\n\nFirst, write the differences between neighbouring terms. For 3, 6, 11, 18, 27 the differences are 3, 5, 7, 9. They rise by 2, so the next difference is 11 and the next term is 38. If the first row of differences shows no pattern, take the differences of the differences.\n\nSecond, if the terms grow fast, try ratios. In 5, 10, 20, 40 each term is double the one before.\n\nThird, compare the terms with known sets: squares 1, 4, 9, 16, 25; cubes 1, 8, 27, 64, 125; primes 2, 3, 5, 7, 11, 13. The series 2, 5, 10, 17, 26 is each square plus one. The series 2, 6, 12, 20, 30 is each number multiplied by the next: 1 x 2, 2 x 3, 3 x 4.\n\nFourth, see whether each term is built from the ones before it. In 2, 3, 5, 8, 13 each term is the sum of the previous two.\n\nFifth, if the terms rise and fall, or if there are six or more of them, suspect two series mixed together. Read the first, third and fifth terms as one series and the second, fourth and sixth as another."
+      },
+      {
+        "head": "Letter series and the odd one out",
+        "body": "A letter series is a number series in disguise. Replace each letter by its position in the alphabet and apply the same checks. A, C, F, J, O becomes 1, 3, 6, 10, 15. The differences are 2, 3, 4, 5, so the next difference is 6 and the next term is 21, which is U.\n\nWhen the positions pass 26, go round to the start again: 27 is A and 28 is B. Keep the anchors E 5, J 10, O 15, T 20 and Y 25 in mind so that you do not have to count from A each time.\n\nIn mixed series of letters and numbers, treat the letters and the numbers as two separate series running side by side.\n\nOdd one out questions give four or five items of which all but one share a property. Do not look for what is strange about one item. Look for what is common to most of them. In 8, 27, 64, 100, 125, four are cubes and 100 is not. If two different properties each point to a different item, choose the property that covers all the other items exactly.\n\nIn every series question, test your rule on all the given terms before you use it. A rule that explains only the first three terms is a coincidence. And use the options: if your answer is not among them, the rule is wrong, and it is quicker to look again than to force it."
+      },
+      {
+        "head": "Clocks",
+        "body": "Two facts solve most clock questions. The minute hand goes round the full 360 degrees in 60 minutes, so it moves 6 degrees a minute. The hour hand covers 30 degrees in an hour, so it moves half a degree a minute.\n\nTo find the angle between the hands at a given time, find where each hand is, measured from 12. At 3:30 the minute hand is at 30 x 6 = 180 degrees. The hour hand has moved three and a half hours, so it is at 3.5 x 30 = 105 degrees. The angle between them is 75 degrees. It is not 90, because the hour hand has moved on from the 3. If the result is more than 180, subtract it from 360 to get the smaller angle.\n\nThe minute hand gains 5.5 degrees on the hour hand every minute. This gives the time at which the hands meet. At 4 o'clock the hour hand is 120 degrees ahead. The minute hand closes that gap in 120 / 5.5 minutes, which is 21 and 9/11 minutes. So the hands are together at 21 and 9/11 minutes past 4.\n\nBecause the minute hand needs a little over 65 minutes to catch the hour hand each time, the hands coincide 11 times in 12 hours, not 12, and 22 times in a day.\n\nFor a clock that gains or loses time, find the gain per hour and multiply by the true hours elapsed. A clock that gains 5 minutes an hour is 60 minutes ahead after 12 true hours."
+      },
+      {
+        "head": "Calendars: the odd-days method",
+        "body": "The days of the week repeat every seven days. So to move forward from a known day, you only need the remainder when the number of days is divided by 7. That remainder is called the number of odd days.\n\nIf today is Wednesday, the day 100 days from now is found from 100 divided by 7, which leaves 2. Two days after Wednesday is Friday.\n\nAn ordinary year has 365 days, which is 52 weeks and 1 day. So the same date in the next year falls one weekday later. A leap year has 366 days, giving 2 odd days. If the period between the two dates includes 29 February, move two weekdays forward.\n\nA year is a leap year if it is divisible by 4. Century years are an exception: they are leap years only if divisible by 400. So 2000 was a leap year, and 1900 and 2100 are not.\n\nFor months, use the odd days of each month. A month of 31 days has 3 odd days, a month of 30 days has 2, and February has 0, or 1 in a leap year. If 1 March is a Monday, 1 April is three weekdays later, a Thursday.\n\nFor a date far from the known one, add the odd days year by year and month by month, and reduce the total by sevens as you go. Keeping the running total small avoids arithmetic slips."
+      },
+      {
+        "head": "A routine, and when to move on",
+        "body": "For a series, give yourself about a minute. Run the five checks in order: differences, ratios, known sets, earlier terms, two mixed series. If none fits, mark the question and move on. Series questions are quick when the rule shows itself and slow when it does not, and there is no way to force it.\n\nFor a clock, write the position of each hand in degrees before doing anything else. For a calendar, write the known day, count the odd days, and step forward.\n\nIn all three, a small check is available. Put your answer into the series and see that the rule still holds. For a clock angle, ask whether the size is sensible from a mental picture of the dial. For a date, check a nearby date you are sure of."
+      }
+    ],
+    "keyFacts": [
+      "Series checks, in order: differences, ratios, known sets, earlier terms, two mixed series.",
+      "Letter positions: E 5, J 10, O 15, T 20, Y 25.",
+      "Minute hand: 6 degrees a minute. Hour hand: half a degree a minute.",
+      "The minute hand gains 5.5 degrees a minute on the hour hand.",
+      "The hands coincide 11 times in 12 hours and 22 times in a day.",
+      "Odd days: ordinary year 1, leap year 2; month of 31 days 3, of 30 days 2.",
+      "Leap year: divisible by 4; a century year only if divisible by 400."
+    ],
+    "examAngle": "Series questions are worth a minute each and no more. Clock and calendar questions are fully mechanical once the two clock rates and the odd-day counts are known, so they are safe marks for anyone who has practised them a few times.",
+    "selfCheck": [
+      "List the five checks for a number series in order.",
+      "What is the next term in 1, 2, 4, 7, 11?",
+      "What is the angle between the hands at 6:30, and why is it not zero?",
+      "Why do the hands of a clock coincide only 11 times in 12 hours?",
+      "Is 2100 a leap year? State the rule."
+    ]
+  },
+  "hi": {
+    "dek": "इस नोट के अंत तक आपके पास संख्या या अक्षर शृंखला के लिए जाँचों का एक तय क्रम, घड़ी के अधिकतर प्रश्न हल करने वाले दो तथ्य, और कैलेंडर के लिए विषम दिनों की विधि होगी।",
+    "sections": [
+      {
+        "head": "संख्या शृंखला: जाँचों का तय क्रम",
+        "body": "शृंखला का प्रश्न कुछ पद देता है और अगला या लुप्त पद पूछता है। हर शृंखला किसी नियम पर चलती है। उसे खोजने का सबसे तेज़ तरीक़ा है हर बार वही जाँचें उसी क्रम में करना।\n\nपहली, पड़ोसी पदों के अंतर लिखिए। 3, 6, 11, 18, 27 के अंतर 3, 5, 7, 9 हैं। वे 2 से बढ़ते हैं, इसलिए अगला अंतर 11 और अगला पद 38 है। यदि अंतरों की पहली पंक्ति में कोई ढाँचा न दिखे, तो अंतरों के अंतर लीजिए।\n\nदूसरी, यदि पद तेज़ी से बढ़ते हों, तो अनुपात आज़माइए। 5, 10, 20, 40 में हर पद पिछले का दुगुना है।\n\nतीसरी, पदों की तुलना जाने-पहचाने समूहों से कीजिए: वर्ग 1, 4, 9, 16, 25; घन 1, 8, 27, 64, 125; अभाज्य 2, 3, 5, 7, 11, 13। शृंखला 2, 5, 10, 17, 26 में हर पद एक वर्ग में एक जोड़कर बना है। शृंखला 2, 6, 12, 20, 30 में हर संख्या को अगली से गुणा किया गया है: 1 x 2, 2 x 3, 3 x 4।\n\nचौथी, देखिए कि हर पद अपने से पहले के पदों से तो नहीं बना। 2, 3, 5, 8, 13 में हर पद पिछले दो का योग है।\n\nपाँचवीं, यदि पद बढ़ते-घटते हों, या छह या अधिक हों, तो दो शृंखलाओं के मिले होने का संदेह कीजिए। पहले, तीसरे और पाँचवें पद को एक शृंखला और दूसरे, चौथे और छठे को दूसरी शृंखला की तरह पढ़िए।"
+      },
+      {
+        "head": "अक्षर शृंखला और बेमेल पद",
+        "body": "अक्षर शृंखला भेष बदली हुई संख्या शृंखला है। हर अक्षर की जगह वर्णमाला में उसका क्रमांक रखिए और वही जाँचें लगाइए। A, C, F, J, O बन जाता है 1, 3, 6, 10, 15। अंतर 2, 3, 4, 5 हैं, इसलिए अगला अंतर 6 और अगला पद 21 है, जो U है।\n\nजब क्रमांक 26 से आगे निकलें, तो फिर शुरू से घूमिए: 27 A है और 28 B। E 5, J 10, O 15, T 20 और Y 25 के सहारे याद रखिए ताकि हर बार A से गिनना न पड़े।\n\nअक्षरों और संख्याओं की मिली-जुली शृंखला में अक्षरों और संख्याओं को साथ-साथ चलती दो अलग शृंखलाएँ मानिए।\n\nबेमेल पद के प्रश्न चार या पाँच पद देते हैं जिनमें एक को छोड़ बाक़ी सबमें कोई गुण साझा होता है। यह मत खोजिए कि किसी एक पद में क्या अजीब है। खोजिए कि अधिकतर में क्या साझा है। 8, 27, 64, 100, 125 में चार घन हैं और 100 नहीं है। यदि दो अलग गुण दो अलग पदों की ओर इशारा करें, तो वह गुण चुनिए जो बाक़ी सभी पदों पर ठीक-ठीक बैठता हो।\n\nशृंखला के हर प्रश्न में अपने नियम को बरतने से पहले सभी दिए गए पदों पर जाँचिए। जो नियम केवल पहले तीन पदों को समझाए, वह संयोग है। और विकल्पों का उपयोग कीजिए: यदि आपका उत्तर उनमें नहीं है, तो नियम गलत है, और उसे ज़बरदस्ती बैठाने से दोबारा देखना जल्दी होता है।"
+      },
+      {
+        "head": "घड़ी",
+        "body": "दो तथ्य घड़ी के अधिकतर प्रश्न हल कर देते हैं। मिनट की सुई 60 मिनट में पूरे 360 अंश घूमती है, इसलिए वह एक मिनट में 6 अंश चलती है। घंटे की सुई एक घंटे में 30 अंश चलती है, इसलिए वह एक मिनट में आधा अंश चलती है।\n\nकिसी समय पर सुइयों के बीच का कोण निकालने के लिए देखिए कि हर सुई 12 से नापने पर कहाँ है। 3:30 पर मिनट की सुई 30 x 6 = 180 अंश पर है। घंटे की सुई साढ़े तीन घंटे चल चुकी है, इसलिए वह 3.5 x 30 = 105 अंश पर है। उनके बीच का कोण 75 अंश है। यह 90 नहीं है, क्योंकि घंटे की सुई 3 से आगे बढ़ चुकी है। यदि परिणाम 180 से अधिक आए, तो छोटा कोण पाने के लिए उसे 360 में से घटाइए।\n\nमिनट की सुई हर मिनट घंटे की सुई पर 5.5 अंश की बढ़त बनाती है। इससे वह समय मिलता है जब सुइयाँ मिलती हैं। 4 बजे घंटे की सुई 120 अंश आगे है। मिनट की सुई यह अंतर 120 / 5.5 मिनट में पाटती है, जो 21 सही 9/11 मिनट है। इसलिए सुइयाँ 4 बजकर 21 सही 9/11 मिनट पर साथ होती हैं।\n\nचूँकि मिनट की सुई को हर बार घंटे की सुई तक पहुँचने में 65 मिनट से कुछ अधिक लगते हैं, सुइयाँ 12 घंटे में 11 बार मिलती हैं, 12 बार नहीं, और एक दिन में 22 बार।\n\nजो घड़ी तेज़ या धीमी चलती हो, उसके लिए प्रति घंटे की बढ़त निकालिए और बीते हुए सही घंटों से गुणा कीजिए। जो घड़ी एक घंटे में 5 मिनट तेज़ होती है, वह 12 सही घंटों के बाद 60 मिनट आगे होती है।"
+      },
+      {
+        "head": "कैलेंडर: विषम दिनों की विधि",
+        "body": "सप्ताह के दिन हर सात दिन में दोहराते हैं। इसलिए किसी ज्ञात दिन से आगे बढ़ने के लिए केवल वह शेष चाहिए जो दिनों की संख्या को 7 से भाग देने पर बचता है। उस शेष को विषम दिनों की संख्या कहते हैं।\n\nयदि आज बुधवार है, तो अब से 100 दिन बाद का दिन 100 को 7 से भाग देकर मिलता है, जिसमें 2 शेष बचता है। बुधवार के दो दिन बाद शुक्रवार है।\n\nसाधारण वर्ष में 365 दिन होते हैं, यानी 52 सप्ताह और 1 दिन। इसलिए अगले वर्ष वही तारीख़ सप्ताह के एक दिन बाद पड़ती है। अधिवर्ष (लीप वर्ष) में 366 दिन होते हैं, जिससे 2 विषम दिन मिलते हैं। यदि दोनों तारीख़ों के बीच 29 फ़रवरी आती है, तो सप्ताह के दो दिन आगे बढ़िए।\n\nकोई वर्ष अधिवर्ष है यदि वह 4 से विभाज्य हो। शताब्दी वर्ष अपवाद हैं: वे तभी अधिवर्ष हैं जब 400 से विभाज्य हों। इसलिए 2000 अधिवर्ष था, और 1900 तथा 2100 नहीं हैं।\n\nमहीनों के लिए हर महीने के विषम दिन लीजिए। 31 दिन के महीने में 3 विषम दिन होते हैं, 30 दिन के महीने में 2, और फ़रवरी में 0, या अधिवर्ष में 1। यदि 1 मार्च सोमवार है, तो 1 अप्रैल सप्ताह के तीन दिन बाद, यानी गुरुवार है।\n\nज्ञात तारीख़ से दूर की तारीख़ के लिए विषम दिनों को वर्ष-दर-वर्ष और महीने-दर-महीने जोड़िए, और चलते-चलते कुल में से सात-सात घटाते रहिए। चालू योग छोटा रखने से गणना की चूकें नहीं होतीं।"
+      },
+      {
+        "head": "एक क्रम, और कब आगे बढ़ें",
+        "body": "शृंखला के लिए स्वयं को लगभग एक मिनट दीजिए। पाँचों जाँचें क्रम से कीजिए: अंतर, अनुपात, जाने-पहचाने समूह, पिछले पद, दो मिली-जुली शृंखलाएँ। यदि कोई न बैठे, तो प्रश्न को चिह्नित करके आगे बढ़िए। शृंखला के प्रश्न तब तेज़ होते हैं जब नियम स्वयं दिख जाए और तब धीमे जब न दिखे, और इसे ज़बरदस्ती निकालने का कोई तरीक़ा नहीं है।\n\nघड़ी के लिए कुछ और करने से पहले हर सुई का स्थान अंशों में लिखिए। कैलेंडर के लिए ज्ञात दिन लिखिए, विषम दिन गिनिए, और आगे बढ़िए।\n\nतीनों में एक छोटी जाँच उपलब्ध है। अपना उत्तर शृंखला में रखिए और देखिए कि नियम अब भी चलता है। घड़ी के कोण के लिए डायल की मन में बनी तस्वीर से पूछिए कि आकार ठीक लगता है या नहीं। तारीख़ के लिए पास की कोई ऐसी तारीख़ जाँचिए जिस पर आपको भरोसा हो।"
+      }
+    ],
+    "keyFacts": [
+      "शृंखला की जाँचें, क्रम से: अंतर, अनुपात, जाने-पहचाने समूह, पिछले पद, दो मिली-जुली शृंखलाएँ।",
+      "अक्षरों के क्रमांक: E 5, J 10, O 15, T 20, Y 25।",
+      "मिनट की सुई: 6 अंश प्रति मिनट। घंटे की सुई: आधा अंश प्रति मिनट।",
+      "मिनट की सुई घंटे की सुई पर हर मिनट 5.5 अंश की बढ़त बनाती है।",
+      "सुइयाँ 12 घंटे में 11 बार और एक दिन में 22 बार मिलती हैं।",
+      "विषम दिन: साधारण वर्ष 1, अधिवर्ष 2; 31 दिन का महीना 3, 30 दिन का 2।",
+      "अधिवर्ष: 4 से विभाज्य; शताब्दी वर्ष तभी जब 400 से विभाज्य हो।"
+    ],
+    "examAngle": "शृंखला के प्रश्न एक-एक मिनट के लायक़ हैं, उससे ज़्यादा नहीं। घड़ी और कैलेंडर के प्रश्न सुइयों की दो दरें और विषम दिनों की गिनती जान लेने पर पूरी तरह यांत्रिक हो जाते हैं, इसलिए जिसने इनका कुछ बार अभ्यास किया है उसके लिए ये सुरक्षित अंक हैं।",
+    "selfCheck": [
+      "संख्या शृंखला की पाँच जाँचें क्रम से बताइए।",
+      "1, 2, 4, 7, 11 में अगला पद क्या है?",
+      "6:30 पर सुइयों के बीच का कोण क्या है, और वह शून्य क्यों नहीं है?",
+      "घड़ी की सुइयाँ 12 घंटे में केवल 11 बार क्यों मिलती हैं?",
+      "क्या 2100 अधिवर्ष है? नियम बताइए।"
+    ]
+  },
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (general mental ability); The Gregorian calendar's leap-year rule (divisible by 4; century years only if divisible by 400)"
+  },
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists general mental ability",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    },
+    {
+      "claim": "15 August 2021 was a Sunday and 15 August 2022 was a Monday",
+      "source": "Gregorian calendar calculation (computed, not read from a source)",
+      "url": "",
+      "opened": "2026-11-12",
+      "status": "verified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English and Hindi. Verify: Check the Paper II syllabus wording against the current UPSC notification. Rework all fifteen questions independently. The one real date used (15 August 2021, a Sunday, and 15 August 2022, a Monday) was checked with a calendar calculation."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

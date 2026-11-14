@@ -1,0 +1,396 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ]
+  },
+  "id": "csat-syl-speed-work-averages-data-practice",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Practice: Speed, work, averages, tables and data sufficiency",
+    "hi": "अभ्यास: चाल, कार्य, औसत, सारणियाँ और आँकड़ों की पर्याप्तता"
+  },
+  "paper": "prelims-csat",
+  "section": "Practice (written by us, not from a UPSC paper): Speed, work, averages, tables and data sufficiency",
+  "minutes": 30,
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A train 150 metres long runs at 54 km/h. How long does it take to pass a signal pole?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "10 seconds",
+          "12 seconds",
+          "15 seconds",
+          "9 seconds"
+        ],
+        "why": "54 km/h = 54 x 5/18 = 15 m/s. To pass a pole the train covers its own length: 150 / 15 = 10 seconds."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Two trains, 120 metres and 180 metres long, run towards each other on parallel tracks at 40 km/h and 50 km/h. How long do they take to cross each other?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "10.8 seconds",
+          "24 seconds",
+          "15 seconds",
+          "12 seconds"
+        ],
+        "why": "Relative speed = 40 + 50 = 90 km/h = 25 m/s. Distance = 120 + 180 = 300 m. Time = 300 / 25 = 12 seconds."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A person drives from P to Q at 40 km/h and returns by the same road at 60 km/h. What is the average speed for the whole journey?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "50 km/h",
+          "48 km/h",
+          "52 km/h",
+          "45 km/h"
+        ],
+        "why": "Take the distance as 120 km each way. Time out = 3 hours, time back = 2 hours. Average = 240 / 5 = 48 km/h. The formula 2ab / (a + b) gives the same."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A can finish a job in 12 days and B in 18 days. Working together, how long will they take?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "15 days",
+          "6 days",
+          "7.2 days",
+          "9 days"
+        ],
+        "why": "Take the work as 36 units. A does 3 a day, B does 2, together 5. Time = 36 / 5 = 7.2 days. The answer must be less than 12, which removes 15."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A and B together finish a job in 10 days. A alone would take 15 days. How long would B alone take?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "25 days",
+          "30 days",
+          "20 days",
+          "45 days"
+        ],
+        "why": "B's daily rate = 1/10 - 1/15 = 3/30 - 2/30 = 1/30. B alone takes 30 days."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A pipe can fill a tank in 6 hours. A leak at the bottom can empty the full tank in 12 hours. With the leak, how long does the pipe take to fill the tank?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "9 hours",
+          "8 hours",
+          "18 hours",
+          "12 hours"
+        ],
+        "why": "Net rate = 1/6 - 1/12 = 1/12 of the tank per hour. Time = 12 hours."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Twelve workers can finish a job in 15 days. How many workers, at the same rate, are needed to finish it in 9 days?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "20",
+          "18",
+          "25",
+          "16"
+        ],
+        "why": "Work = 12 x 15 = 180 person-days. Workers needed = 180 / 9 = 20."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The average of five numbers is 24. When one number is removed, the average of the remaining four is 22. Which number was removed?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "26",
+          "30",
+          "32",
+          "34"
+        ],
+        "why": "Total of five = 120. Total of four = 88. Removed = 120 - 88 = 32."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "The average age of 30 students in a class is 14 years. When the teacher's age is included, the average becomes 15 years. What is the teacher's age?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "44 years",
+          "45 years",
+          "46 years",
+          "29 years"
+        ],
+        "why": "Total of students = 420. Total of 31 people = 465. Teacher = 465 - 420 = 45 years."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A batter has an average of 40 runs over 9 innings. How many runs are needed in the tenth innings to raise the average to 42?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "42",
+          "52",
+          "62",
+          "60"
+        ],
+        "why": "Total so far = 360. Total needed for 42 over 10 innings = 420. Runs needed = 60."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Twenty kilograms of tea costing 300 rupees a kilogram are mixed with 30 kilograms costing 400 rupees a kilogram. What is the cost of the mixture per kilogram?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "350 rupees",
+          "340 rupees",
+          "360 rupees",
+          "370 rupees"
+        ],
+        "why": "Total cost = 6,000 + 12,000 = 18,000 rupees for 50 kg. Cost = 360 rupees a kilogram. It is nearer 400 because there is more of the dearer tea."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A firm's sales in the four quarters of a year were 120, 150, 180 and 150 lakh rupees. What share of the year's sales came in the third quarter?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "30%",
+          "25%",
+          "36%",
+          "33.33%"
+        ],
+        "why": "Total = 600. Share of the third quarter = 180 / 600 = 30%."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Using the same figures (120, 150, 180 and 150 lakh rupees), by what per cent did sales rise from the first quarter to the third?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "33.33%",
+          "60%",
+          "40%",
+          "50%"
+        ],
+        "why": "Change = 180 - 120 = 60. Base is the earlier value, 120. Rise = 60 / 120 = 50%. Dividing by 180 gives 33.33%, which is the trap."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A boat moves at 12 km/h in still water. The stream flows at 3 km/h. How long does the boat take to travel 45 km downstream?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "3.75 hours",
+          "5 hours",
+          "3 hours",
+          "4 hours"
+        ],
+        "why": "Downstream speed = 12 + 3 = 15 km/h. Time = 45 / 15 = 3 hours. Five hours is the time upstream."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-5",
+      "nodes": [
+        "csat-5"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Question: What is the value of x? Statement 1: x + y = 10. Statement 2: x - y = 4. Which is correct?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "Statement 1 alone is sufficient",
+          "Both statements together are needed",
+          "Statement 2 alone is sufficient",
+          "Even both statements together are not sufficient"
+        ],
+        "why": "Each statement alone has two unknowns and allows many values of x. Together they are two different equations in two unknowns, which fix x (x = 7). There is no need to solve to see that."
+      }
+    }
+  ],
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (basic numeracy and data interpretation, Class X level); NCERT Mathematics textbooks, Classes VI to X: chapters on comparing quantities, direct and inverse proportion, data handling and statistics"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists data interpretation (charts, graphs, tables, data sufficiency etc.) at Class X level",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only, Hindi still to come. Practice questions written for the note \"Speed, work, averages, tables and data sufficiency\". All 15 answers were solved blind and matched the key (14 Nov 2026). Check the Paper II syllabus wording against the current UPSC notification, including that data interpretation covers charts, graphs, tables and data sufficiency. Rework all fifteen questions independently. All figures are made up for practice and describe no real firm, place or person."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

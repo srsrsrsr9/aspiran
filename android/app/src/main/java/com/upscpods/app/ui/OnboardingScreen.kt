@@ -136,6 +136,7 @@ fun OnboardingScreen(
                                         Text("You answered first, then looked. That's how Aspiran works: what you practise here comes back just before you'd forget it, " +
                                             (if (pick == 1) "a right answer in 3 days, then further out each time." else "a miss tomorrow, then further out each time."),
                                             style = MaterialTheme.typography.bodySmall)
+                                        JeetuNote("intro", hindi = false)
                                     }
                                 }
                             }

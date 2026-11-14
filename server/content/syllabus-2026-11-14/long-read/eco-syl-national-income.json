@@ -1,0 +1,74 @@
+{
+  "schema": "upsc-pods/long-read@1",
+  "id": "eco-syl-national-income",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Measuring growth: GDP, GVA and national income"
+  },
+  "node": "gs3-1",
+  "nodes": [
+    "gs3-1",
+    "pre-5"
+  ],
+  "topic": "Economy",
+  "gsPaper": "GS3",
+  "minutes": 8,
+  "en": {
+    "dek": "By the end, you will know what GDP and GVA measure, how India estimates them, and what they leave out.",
+    "sections": [
+      {
+        "head": "What GDP counts",
+        "body": "Gross Domestic Product (GDP) is the market value of all final goods and services produced within a country's borders in a given period, usually a year or a quarter. Only final goods count. Counting the steel and then the car made from it would count the steel twice.\n\nGross National Product (GNP) adds net factor income from abroad: what Indians earn abroad minus what foreigners earn in India. Net National Product (NNP) is GNP minus depreciation, the wear and tear of machines and buildings. National income, in the textbook sense, is NNP at factor cost.\n\nNominal GDP uses the prices of the year itself. Real GDP uses the prices of a fixed base year, so it shows how much more was produced, not how much prices rose. The GDP deflator is nominal GDP divided by real GDP, times 100. It is a broad measure of inflation because it covers everything produced, not a fixed basket."
+      },
+      {
+        "head": "GVA and the base year",
+        "body": "In January 2015 the Central Statistics Office moved the national accounts to the base year 2011-12, from 2004-05, and changed the method to follow the UN System of National Accounts 2008. On 27 February 2026 the National Statistics Office released a new series with base year 2022-23. It still follows SNA 2008; a move to SNA 2025 is planned for the next revision.\n\nTwo changes matter for the exam. First, sectoral growth is now measured as Gross Value Added (GVA) at basic prices. Second, headline GDP is built from GVA: GDP at market prices equals GVA at basic prices plus product taxes minus product subsidies.\n\nThe estimates come from the National Statistics Office (NSO), under the Ministry of Statistics and Programme Implementation (MoSPI). The NSO was formed in 2019 by merging the Central Statistics Office and the National Sample Survey Office. The 2022-23 series is the current one. Figures for the years before 2022-23 on the new base are being released separately, so check which series a number comes from before you quote it."
+      },
+      {
+        "head": "Three ways to the same number",
+        "body": "GDP can be measured three ways, and in principle they give the same figure.\n\nThe production method adds the value added by every sector: agriculture, industry and services. The income method adds what the factors of production earn: wages, rent, interest and profit. The expenditure method adds what is spent on final goods: private consumption, investment, government spending and net exports (C + I + G + X − M).\n\nIn India, private final consumption expenditure is the largest part of GDP by expenditure, and services are the largest part of GVA by sector. Agriculture's share of GVA is small, but it employs a much larger share of workers. That gap is the core of many Mains questions on jobs and productivity."
+      },
+      {
+        "head": "What GDP misses",
+        "body": "GDP is a measure of output, not of welfare. It leaves out unpaid work at home, most of which women do. It captures the informal sector only through estimates. It counts the timber from a felled forest but not the loss of the forest. It says nothing about how income is shared.\n\nOther measures fill some of these gaps. The Human Development Index of the UNDP combines life expectancy, education and income per head. Green GDP tries to subtract the cost of environmental damage. Multidimensional poverty indices look at health, education and living standards together.\n\nPer capita income, GDP divided by population, is a better guide to average living standards than total GDP. Purchasing power parity (PPP) comparisons adjust for the fact that money buys more in some countries than in others."
+      }
+    ],
+    "keyFacts": [
+      "GDP at market prices = GVA at basic prices + product taxes − product subsidies.",
+      "GNP = GDP + net factor income from abroad; NNP = GNP − depreciation.",
+      "Base year 2022-23 since 27 February 2026 (2011-12 before that, from the January 2015 revision); the method follows the UN SNA 2008.",
+      "The NSO under MoSPI was formed in 2019 by merging the CSO and the NSSO.",
+      "GDP deflator = nominal GDP ÷ real GDP × 100.",
+      "The HDI (UNDP) combines health, education and income."
+    ],
+    "examAngle": "Prelims asks for definitions: GDP vs GNP, factor cost vs market prices, what the deflator covers. Mains asks why GDP growth may not mean better lives, and about the gap between agriculture's share of output and its share of jobs.",
+    "selfCheck": [
+      "Why does GDP count only final goods?",
+      "How do you get from GVA at basic prices to GDP at market prices?",
+      "Name two things GDP leaves out and one measure that tries to include them."
+    ]
+  },
+  "sources": {
+    "en": "NCERT Class XII Introductory Macroeconomics, Chapter 2 (National Income Accounting); MoSPI, National Accounts Statistics (mospi.gov.in); Economic Survey, Ministry of Finance (indiabudget.gov.in); MoSPI press note on the new series of national accounts, base 2022-23, 27 February 2026 (PIB). The SNA 2008 and SNA 2025 points are from the PIB FAQ on the new series, https://www.pib.gov.in/FaqDetails.aspx?NoteId=157582"
+  },
+  "factsToCheck": [
+    {
+      "claim": "National accounts base year is 2022-23 from 27 February 2026 (2011-12 before); still on SNA 2008; GVA at basic prices remains the sectoral measure.",
+      "source": "MoSPI press note on the new series of national accounts, base 2022-23, 27 February 2026 (PIB). The SNA 2008 and SNA 2025 points are from the PIB FAQ on the new series, https://www.pib.gov.in/FaqDetails.aspx?NoteId=157582",
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/feb/doc2026227806401.pdf",
+      "opened": "2026-11-12",
+      "status": "verified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only. Verify: Check the current base year of the national accounts (a new series was in preparation) and the NSO's formation year. No growth figures are quoted on purpose."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}

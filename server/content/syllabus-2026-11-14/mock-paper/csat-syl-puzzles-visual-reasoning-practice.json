@@ -1,0 +1,396 @@
+{
+  "mood": {
+    "bed": null,
+    "sfx": true,
+    "motion": "crisp"
+  },
+  "sfx": {
+    "pick": "sfx/tick",
+    "right": null,
+    "wrong": null,
+    "done": "sfx/chime"
+  },
+  "timer": {
+    "default": "off",
+    "counts": "up",
+    "note": "Never a countdown. A member may switch on an upward timer; the suggested time is shown as plain text."
+  },
+  "marking": {
+    "right": 2.5,
+    "wrong": -0.83,
+    "blank": 0
+  },
+  "tags": {
+    "stage": [
+      "prelims"
+    ],
+    "papers": [
+      "prelims-csat"
+    ]
+  },
+  "id": "csat-syl-puzzles-visual-reasoning-practice",
+  "tone": "NEUTRAL",
+  "title": {
+    "en": "Practice: Puzzles and visual reasoning: sets, counting, cubes and mirrors",
+    "hi": "अभ्यास: पहेलियाँ और दृश्य तर्क: समुच्चय, गिनती, घन और दर्पण"
+  },
+  "paper": "prelims-csat",
+  "section": "Practice (written by us, not from a UPSC paper): Puzzles and visual reasoning: sets, counting, cubes and mirrors",
+  "minutes": 30,
+  "questions": [
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A cube is painted on all its faces and then cut into 27 equal small cubes. How many small cubes have exactly two faces painted?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "8",
+          "12",
+          "6",
+          "1"
+        ],
+        "why": "n = 3. Two-face cubes lie on edges, not at corners: 12 x (3 - 2) = 12. Check: 8 + 12 + 6 + 1 = 27."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A painted cube is cut into 64 equal small cubes. How many small cubes have no face painted?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "8",
+          "4",
+          "16",
+          "0"
+        ],
+        "why": "n = 4. Inside cubes form a cube of side 4 - 2 = 2, so there are 2 x 2 x 2 = 8."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In the same cube cut into 64 small cubes, how many have exactly one face painted?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "16",
+          "8",
+          "36",
+          "24"
+        ],
+        "why": "Each face has (4 - 2) squared = 4 such cubes, and there are 6 faces: 24. Check: 8 + 24 + 24 + 8 = 64."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "On a standard die, which number is on the face opposite 3?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6",
+          "5",
+          "4",
+          "1"
+        ],
+        "why": "Opposite faces of a standard die add up to 7, so 4 is opposite 3."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A clock seen in a mirror shows 3:15. What is the actual time?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "9:45",
+          "8:45",
+          "9:15",
+          "2:45"
+        ],
+        "why": "Real time = 11:60 - 3:15 = 8:45."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Both diagonals of a square are drawn. How many triangles are there in the figure?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "4",
+          "6",
+          "8",
+          "10"
+        ],
+        "why": "Four small triangles, plus four larger ones each made of two neighbouring small triangles: 8."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A large square is divided into a grid of 3 by 3 small squares. How many squares of all sizes are there?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "9",
+          "10",
+          "13",
+          "14"
+        ],
+        "why": "Side one: 9. Side two: 4. Side three: 1. Total 14."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "In a class of 50 students, 30 play cricket, 25 play football and 10 play both. How many play neither game?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "5",
+          "15",
+          "10",
+          "0"
+        ],
+        "why": "At least one game: 30 + 25 - 10 = 45. Neither: 50 - 45 = 5."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Each of 40 people likes tea or coffee or both. 28 like tea and 22 like coffee. How many like both?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "6",
+          "12",
+          "10",
+          "50"
+        ],
+        "why": "28 + 22 - both = 40, so both = 10. Check: 18 only tea, 12 only coffee, 10 both, total 40."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "There are 8 coins that look alike. One is heavier than the rest. What is the smallest number of weighings on a two-pan balance that is sure to find it?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2",
+          "3",
+          "4",
+          "1"
+        ],
+        "why": "Weigh 3 against 3. If equal, weigh the remaining 2 against each other. If not, take the heavier 3 and weigh 1 against 1; if these balance, the third is heavy. Two weighings always suffice, and one cannot separate 8 cases."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 1,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A father is three times as old as his son. Twelve years from now he will be twice as old as his son. How old is the son now?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "10 years",
+          "12 years",
+          "15 years",
+          "18 years"
+        ],
+        "why": "Son x, father 3x. 3x + 12 = 2 (x + 12), so x = 12. Check: 36 and 12 now; 48 and 24 in twelve years."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "Ten people meet, and each shakes hands once with every other person. How many handshakes take place?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "90",
+          "100",
+          "50",
+          "45"
+        ],
+        "why": "10 x 9 / 2 = 45. Ninety counts every handshake twice."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 2,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A farm has only hens and goats. There are 20 heads and 56 legs in all. How many goats are there?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "12",
+          "6",
+          "8",
+          "10"
+        ],
+        "why": "If all 20 were hens there would be 40 legs. The extra 16 legs mean 16 / 2 = 8 goats. Check: 8 x 4 + 12 x 2 = 56."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 0,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A mirror is placed to the right of a word written in capital letters. Which of these words looks the same in the mirror?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "MOM",
+          "DAD",
+          "BOB",
+          "NOON"
+        ],
+        "why": "The word must read the same backwards and use only letters that look the same when flipped left to right. M and O do. D, B and N do not."
+      }
+    },
+    {
+      "format": "direct",
+      "node": "csat-4",
+      "nodes": [
+        "csat-4"
+      ],
+      "topic": "CSAT",
+      "answer": 3,
+      "difficulty": "medium",
+      "en": {
+        "stem": "A square sheet of paper is folded in half, and then in half again. One hole is punched through all the layers, away from the folds. How many holes are there when the sheet is opened out?",
+        "statements": [],
+        "ask": null,
+        "options": [
+          "2",
+          "1",
+          "8",
+          "4"
+        ],
+        "why": "Two folds give 2 x 2 = 4 layers. One punch makes one hole in each layer: 4 holes."
+      }
+    }
+  ],
+  "sources": {
+    "en": "UPSC Civil Services Examination notification: syllabus of Preliminary Examination Paper II (general mental ability; decision making and problem solving); NCERT Mathematics textbooks, Classes VI to VIII: chapters on visualising solid shapes and symmetry"
+  },
+  "schema": "upsc-pods/mock-paper@1",
+  "factsToCheck": [
+    {
+      "claim": "Paper II syllabus lists general mental ability",
+      "source": "UPSC CSE notification; upsc.gov.in could not be opened",
+      "url": "",
+      "opened": "",
+      "status": "unverified"
+    }
+  ],
+  "review": {
+    "status": "draft",
+    "checkedBy": null,
+    "checkedOn": null,
+    "note": "Draft, English only, Hindi still to come. Practice questions written for the note \"Puzzles and visual reasoning: sets, counting, cubes and mirrors\". All 15 answers were solved blind and matched the key (14 Nov 2026). Check the Paper II syllabus wording against the current UPSC notification. Rework all fifteen questions independently; for the counting questions, draw the figure and count by size. All situations are made up for practice."
+  },
+  "provenance": {
+    "generator": "Claude (syllabus content drafts)",
+    "createdOn": "2026-11-14",
+    "note": "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact."
+  }
+}
