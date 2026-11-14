@@ -34,6 +34,25 @@
         "AUTH_MODE:dev"
       ],
       "port": 8794
+    },
+    {
+      "name": "app-local",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/srinivasvedantam/Documents/app/server",
+        "wrangler",
+        "dev",
+        "--config",
+        "/Users/srinivasvedantam/Documents/app/server/wrangler.jsonc",
+        "--port",
+        "8797",
+        "--persist-to",
+        "/Users/srinivasvedantam/Documents/app/server/.wrangler-publish",
+        "--var",
+        "AUTH_MODE:dev"
+      ],
+      "port": 8797
     }
   ]
 }

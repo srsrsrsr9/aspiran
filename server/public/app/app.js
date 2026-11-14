@@ -784,6 +784,33 @@ function prelimsSet() {
   return set;
 }
 
+// "Everything here": the whole library on one card, each kind with its size and one tap to it, so nothing has to be hunted for.
+// Only what is actually loaded is counted; a kind with nothing in it is left out.
+function contentsCard() {
+  const n = (k) => libraryOf(k).length;
+  const en = audioPieces("en"), hi = audioPieces("hi");
+  const bank = (data.questions?.bank ?? []).length;
+  const rows = [
+    bank && ["#prelims", "Practice questions", `${bank.toLocaleString("en-IN")}`],
+    n("mock") && ["#mock", "Mock and past papers", n("mock")],
+    n("read") && ["#read", "Notes and long reads", n("read")],
+    (en.length || hi.length) && ["#listen", "Listen", hoursText(audioSeconds(en) + audioSeconds(hi))],
+    ["#watch", "Videos", null],
+    n("interactive") && ["#tryit", "Try it yourself", n("interactive")],
+    n("mains-skeleton") && ["#skeletons", "Answer skeletons", n("mains-skeleton")],
+    n("gs4-case") && ["#cases", "Ethics cases", n("gs4-case")],
+    n("csat-week") && ["#csat", "CSAT sets", n("csat-week")],
+    n("essay") && ["#essay", "Essay topics", n("essay")],
+    n("walk-script") && ["#walk", "Guided walks", n("walk-script")],
+    n("audio-lecture") && ["#talks", "Audio lectures", n("audio-lecture")],
+    n("printable") && ["#sheets", "Printable sheets", n("printable")],
+    n("terms") && ["#terms", "English–Hindi terms", libraryOf("terms").reduce((t, i) => t + (i.data.terms?.length ?? 0), 0)],
+  ].filter(Boolean);
+  if (rows.length < 4) return null;
+  return h("div.card", h("strong", "Everything here"), h("div.small.muted", "The whole library, one tap each."),
+    h("div.chips", { style: { marginTop: "8px" } }, rows.map(([href, label, size]) => h("a.chip", { href }, size == null ? label : `${label} · ${size}`))));
+}
+
 function viewPractice() {
   const s = dayState();
   const mocks = libraryOf("mock");
@@ -791,6 +818,7 @@ function viewPractice() {
   return h("div.col", X.plusBanner(), h("h1", "Practice"),
     h("div.card", { style: { padding: "14px" } }, gardenSection({ height: 360, hero: true, note: false }), h("a.btn", { href: "#map" }, "Open the whole garden →")),
     pitchCard(),
+    contentsCard(),
     h("div.card", h("div.row.between", h("div", h("strong", "Prelims: 5 questions"), h("div.small.muted", s.done.includes("PRELIMS") ? "Done today." : "About 5 minutes. Today's new questions.")), h("a.btn.primary", { href: "#prelims" }, "Start"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Review"), h("div.small.muted", reviewLine())), h("a.btn", { href: "#review" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mains answer"), h("div.small.muted", s.done.includes("MAINS") ? "Written, marked and rewritten today." : "Write, mark it yourself, get a second opinion, rewrite. About 30 minutes.")), h("a.btn", { href: "#mains" }, "Write"))),
@@ -806,6 +834,7 @@ function viewPractice() {
     h("a.card.link", { href: "#try" }, h("div.row.between", h("div", h("strong", "One topic, start to finish"), h("div.small.muted", "Federalism: guess, read, recall, real PYQs, a Mains plan, then into your review. About 75 minutes.")), h("span", "→"))),
     h("a.card.link", { href: "#learn" }, h("div.row.between", h("div", h("strong", "Learn and play"), h("div.small.muted", `${(data.library?.items ?? []).filter((i) => i.data?.play).length} flashcard decks, matches, timelines, quizzes and answer skeletons. Free.`)), h("span", "→"))),
     h("h2", "Away from the screen"),
+    audioLine() && h("a.card.link", { href: "#listen" }, h("div.row.between", h("div", h("strong", "Listen"), h("div.small.muted", audioLine())), h("span", "→"))),
     h("a.card.link", { href: "#walk" }, h("div.row.between", h("div", h("strong", "Walk mode"), h("div.small.muted", `Earphones in: the device voice names a topic or reads a card, you say three points aloud.${libraryOf("walk-script").length ? ` Plus ${libraryOf("walk-script").length} guided walks.` : ""}`)), h("span", "→"))),
     h("a.card.link", { href: "#print" }, h("div.row.between", h("div", h("strong", "Print this week's set"), h("div.small.muted", "A recall card, a mixed CSAT set and your own one-pagers, on paper.")), h("span", "→"))),
     h("a.card.link", { href: "#watch" }, h("div.row.between", h("div", h("strong", "Videos"), h("div.small.muted", "Current affairs week by week, and Syllabus in a minute: one short video for every topic.")), h("span", "→"))),
@@ -1853,6 +1882,63 @@ function voiceAudio(a, lang) {
       h("div.col", { style: { gap: "4px", marginTop: "6px" } }, a.chapters.map((c) => h("button.ghost", { style: { textAlign: "left" }, onclick: () => jump(c.t) },
         `${Math.floor(c.t / 60)}:${String(Math.floor(c.t % 60)).padStart(2, "0")} · ${c.title}`)))),
     h("p.small.muted", hi ? "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं। पूरा पाठ इसी पेज पर है।" : "Read by an AI voice, not a person. The full text is on this page."));
+}
+
+// --- Listen: every recorded AI-voice reading in one place ---------------------------------------------
+// Notes and guided walks that have a recording, grouped by subject, with the total up front so the size is plain.
+// One player; nothing starts until a piece is tapped. The text of each piece is one tap away.
+// Topic names differ only by capitals in places ("International Relations"): one subject, the listed spelling.
+const listenSubject = (it) => { const t = readSubject(it); return READ_SUBJECTS.find((x) => x.toLowerCase() === t.toLowerCase()) ?? t; };
+const audioPieces = (lng) => [
+  ...libraryOf("read").filter((it) => it.data.audio?.[lng]?.url).map((it) => ({ id: it.id, kind: "note", subject: listenSubject(it), title: bi(it.data.title), a: it.data.audio[lng], href: "#read/" + encodeURIComponent(it.id) })),
+  ...libraryOf("walk-script").filter((it) => it.data.audio?.[lng]?.url).map((it) => ({ id: it.id, kind: "walk", subject: "Guided walks", title: bi(it.data.topic), a: it.data.audio[lng], href: "#walk/" + it.data.id })),
+];
+const audioSeconds = (list) => list.reduce((n, p) => n + (p.a.seconds ?? 0), 0);
+const hoursText = (sec) => { const m = Math.round(sec / 60); return m < 90 ? `${m} min` : `${(m / 60).toFixed(m % 60 === 0 ? 0 : 1)} hours`; };
+// One line for the shelves: "11.8 hours in English and Hindi", or null when nothing is recorded.
+function audioLine() {
+  const en = audioPieces("en"), hi = audioPieces("hi");
+  if (!en.length && !hi.length) return null;
+  return `${hoursText(audioSeconds(en) + audioSeconds(hi))} of notes and guided walks read aloud: ${en.length} in English, ${hi.length} in Hindi. AI voices.`;
+}
+function viewListen() {
+  const has = { en: audioPieces("en").length, hi: audioPieces("hi").length };
+  let lng = store.get("listenLang", lang() === "hi" ? "hi" : "en");
+  if (!has[lng]) lng = lng === "hi" ? "en" : "hi";
+  const all = audioPieces(lng);
+  if (!all.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Listen"), h("p", Auth.signedIn() ? "Recorded readings appear here as they are made." : "Sign in to hear the recorded notes and guided walks."));
+  const order = (x) => (x === "Guided walks" ? 998 : x === "Other" ? 999 : READ_SUBJECTS.indexOf(x) < 0 ? 900 : READ_SUBJECTS.indexOf(x));
+  const subjects = [...new Set(all.map((p) => p.subject))].sort((a, b) => order(a) - order(b));
+  const pick = subjects.includes(store.get("listenSubject", "")) ? store.get("listenSubject", "") : "";
+  const heard = store.get("listenHeard", {});
+  const audio = h("audio", { controls: true, preload: "none", style: { width: "100%" } });
+  cleanup.push(() => audio.pause());
+  const now = h("div.small.muted", "Tap a piece to play it. Nothing starts by itself.");
+  let current = null;
+  const rows = new Map();
+  const play = (p) => {
+    current = p; audio.src = p.a.url; audio.play().catch(() => {});
+    put(now, h("strong", p.title), ` · ${p.subject} · `, h("a", { href: p.href }, lng === "hi" ? "पाठ पढ़ें" : "Read the text"));
+    rows.forEach((el, id) => el.setAttribute("aria-current", String(id === p.id)));
+  };
+  audio.addEventListener("ended", () => { if (!current) return; const hd = store.get("listenHeard", {}); hd[current.id + "." + lng] = today(); store.set("listenHeard", hd); });
+  const row = (p) => {
+    const el = h("button.card.link", { style: { textAlign: "left", width: "100%" }, onclick: () => play(p) },
+      h("div.row.between", h("div", h("strong", p.title), h("div.small.muted", [p.kind === "walk" ? "Guided walk" : "Note", `${Math.max(1, Math.round((p.a.seconds ?? 0) / 60))} min`, p.a.voice && `AI voice ${p.a.voice}`, heard[p.id + "." + lng] && "heard"].filter(Boolean).join(" · "))), h("span", { "aria-hidden": "true" }, "▶")));
+    rows.set(p.id, el);
+    return el;
+  };
+  const shown = pick ? [pick] : subjects;
+  const of = (s) => all.filter((p) => p.subject === s);
+  return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Listen"),
+    h("p.muted", `${hoursText(audioSeconds(all))} in ${lng === "hi" ? "Hindi" : "English"}: ${all.length} pieces across ${subjects.length} subjects. Read by AI voices, not people; the full text of each piece is one tap away. Each piece ends, and nothing plays next by itself.`),
+    has.en > 0 && has.hi > 0 && h("div.chips", { role: "group", "aria-label": "Language" },
+      [["en", "English"], ["hi", "हिन्दी"]].map(([k, label]) => h("button.chip", { "aria-pressed": String(lng === k), onclick: () => { store.set("listenLang", k); render(); } }, `${label} · ${has[k]}`))),
+    h("div.card", { style: { position: "sticky", top: "8px", zIndex: 2 } }, now, audio),
+    h("div.chips", { role: "group", "aria-label": "Subject" },
+      h("button.chip", { "aria-pressed": String(!pick), onclick: () => { store.set("listenSubject", ""); render(); } }, `All · ${all.length}`),
+      subjects.map((s) => h("button.chip", { "aria-pressed": String(pick === s), onclick: () => { store.set("listenSubject", s); render(); } }, `${s} · ${of(s).length}`))),
+    shown.map((s) => h("section", h("h2", s), h("p.small.muted", `${of(s).length} pieces · ${hoursText(audioSeconds(of(s)))}`), of(s).map(row))));
 }
 
 // "Read aloud · device voice": the browser's own speech, on a tap only. Nothing is sent anywhere; no AI voice.
@@ -4091,7 +4177,7 @@ IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Au
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu, jeetu: () => J.viewJeetu(),
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
-  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch, tryit: IT.viewTryIt,
+  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch, tryit: IT.viewTryIt, listen: viewListen,
   learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
