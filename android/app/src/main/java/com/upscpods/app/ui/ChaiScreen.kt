@@ -47,6 +47,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.semantics.contentDescription
@@ -126,7 +127,7 @@ fun ChaiScreen(brief: Brief, day: DayState, preferHindi: Boolean, onClose: () ->
                     Button(
                         onClick = { scope.launch { pager.animateScrollToPage(pager.currentPage + 1) } },
                         modifier = Modifier.fillMaxWidth().height(MainActionHeight),
-                    ) { Text("Next card →") }
+                    ) { Text(if (pager.currentPage == cards.size - 1) "Finish" else "Next card →") }
                 }
             }
         },
@@ -175,7 +176,7 @@ fun ChaiScreen(brief: Brief, day: DayState, preferHindi: Boolean, onClose: () ->
                             caseFile = caseFile,
                         )
                     } else {
-                        EndCard(archive, onClose)
+                        EndCard(archive, preferHindi, cards.size, onClose)
                     }
                 }
             }
@@ -371,14 +372,27 @@ private fun RecallCard(q: PracticeQuestion, picked: Int?, onWhy: (() -> Unit)?, 
 }
 
 @Composable
-private fun EndCard(archive: Boolean, onClose: () -> Unit) {
+private fun EndCard(archive: Boolean, preferHindi: Boolean, count: Int, onClose: () -> Unit) {
     Column(
         Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(if (archive) "That's the pack ☕" else "That's today's Chai ☕", style = MaterialTheme.typography.headlineSmall)
-        if (!archive) { Spacer(Modifier.height(8.dp)); PauseLine("news-enough") }
+        // The trailer's promise, word for word: three cards, then it ends.
+        Text(
+            when {
+                archive -> "That's the pack ☕"
+                preferHindi -> "आज की चाय बस इतनी। यहीं ख़त्म।"
+                else -> "That's today's Chai. It ends."
+            },
+            style = MaterialTheme.typography.headlineSmall,
+            textAlign = TextAlign.Center,
+        )
+        if (!archive) {
+            Spacer(Modifier.height(8.dp))
+            Text(if (preferHindi) "$count कार्ड। कल सुबह फिर मिलेंगे।" else "$count cards. See you tomorrow morning.", style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(8.dp)); PauseLine("news-enough")
+        }
         Spacer(Modifier.height(16.dp))
         OutlinedButton(onClick = onClose) { Text(if (archive) "Back" else "Back to Today") }
     }

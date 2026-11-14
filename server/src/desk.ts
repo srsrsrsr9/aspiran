@@ -3,7 +3,7 @@ import { contentApi } from "./content";
 import { coverage } from "./coverage";
 import { caDeskApi } from "./ca";
 import { addNote, listNotes } from "./library";
-import { addCandidate, autoChecks } from "./pipeline";
+import { addCandidate, autoChecks, gsOf } from "./pipeline";
 import { type Env, bad, istDay, json } from "./shared";
 import { type Hop, callChat } from "./ai";
 import { business } from "./payments";
@@ -22,7 +22,11 @@ import seedNotes from "../seed/notes.json";
  * approved separately, by their own editors. Also holds the moderator queue and the notes library.
  */
 
-const MAX_CARDS = 7;
+/**
+ * The product rule: three cards a day ("Three cards a day. Not three hundred pages."). The Desk may approve more;
+ * only three go out. Briefs published before 14 Nov 2026 kept their 4 to 7 cards and are left as they are.
+ */
+export const CHAI_CARDS = 3;
 
 interface CandidateRow {
   id: string;
@@ -44,12 +48,35 @@ interface CandidateRow {
 
 // --- Publishing and rituals -----------------------------------------------------
 
+const paperOf = (r: CandidateRow) => { try { return gsOf(JSON.parse(r.card_json).gsPaper); } catch { return ""; } };
+
+/**
+ * The day's three. Cards an editor put in order (a position) come first, in that order. The rest are filled from the
+ * approved cards (an editor's approval before the automatic check's), best first, taking a paper the brief doesn't
+ * have yet whenever there is one, so a usual day reads GS2, GS3, GS1 rather than three RBI notices.
+ */
+export function chooseThree(rows: CandidateRow[], n = CHAI_CARDS): CandidateRow[] {
+  const placed = rows.filter((r) => r.position != null).sort((a, b) => (a.position ?? 0) - (b.position ?? 0)).slice(0, n);
+  const rest = rows.filter((r) => r.position == null)
+    .sort((a, b) => Number(a.status === "auto") - Number(b.status === "auto") || b.score - a.score);
+  const out = [...placed];
+  const papers = new Set(out.map(paperOf));
+  while (out.length < n && rest.length) {
+    let i = rest.findIndex((r) => !papers.has(paperOf(r)));
+    if (i < 0) i = 0;
+    const [r] = rest.splice(i, 1);
+    out.push(r);
+    papers.add(paperOf(r));
+  }
+  return out;
+}
+
 /** Builds the day's brief from approved cards. A card needs English approval; Hindi ships only if approved. */
 export async function publish(env: Env, day = istDay()) {
-  const { results } = await env.DB.prepare(
-    `SELECT * FROM candidates WHERE day = ? AND ((status = 'approved' AND en_editor IS NOT NULL) OR status = 'auto')
-     ORDER BY status = 'auto', COALESCE(position, 999), score DESC LIMIT ?`,
-  ).bind(day, MAX_CARDS).all<CandidateRow>();
+  const { results: all } = await env.DB.prepare(
+    `SELECT * FROM candidates WHERE day = ? AND ((status = 'approved' AND en_editor IS NOT NULL) OR status = 'auto')`,
+  ).bind(day).all<CandidateRow>();
+  const results = chooseThree(all);
   if (!results.length) return { published: false, reason: "No approved cards for " + day };
   const items = results.map((r) => {
     const card = JSON.parse(r.card_json);
@@ -78,8 +105,8 @@ export async function publish(env: Env, day = istDay()) {
   return { published: true, cards: items.length };
 }
 
-/** How many cards the automatic Chai sends out on a day when no editor has been in. */
-const AUTO_CARDS = 5;
+/** How many cards the automatic Chai sends out on a day when no editor has been in: the day's three. */
+const AUTO_CARDS = CHAI_CARDS;
 
 const AUTO_CHECK = (card: any, source: string) => `You are a strict fact checker for a study app for India's UPSC exam.
 Below is a news SOURCE and a short CARD written from it. Decide whether the card may be sent to students with no human check.
@@ -100,7 +127,8 @@ ${JSON.stringify({ headline: card.headline, summary: card.summary, whyForUpsc: c
 
 /**
  * The automatic Chai (flag chai_auto, off unless the owner switches it on): at 07:00 IST, if fewer than AUTO_CARDS
- * cards have an editor's approval for the day, the best remaining drafts go out on their own. A draft qualifies only
+ * cards have an editor's approval for the day, the best remaining drafts go out on their own, a paper the day doesn't
+ * have yet first (GS1, GS2, GS3), then the best of the rest. A draft qualifies only
  * if the pipeline's own checks raised no flag, its tone is light or neutral (serious and tragic always wait for a
  * person), and a second model from a different family reads the card against its source and passes it. These rows get
  * status 'auto', never an editor's name, so every app shows them as "Not yet checked by an editor". An editor can
@@ -108,11 +136,15 @@ ${JSON.stringify({ headline: card.headline, summary: card.summary, whyForUpsc: c
  */
 export async function autoPick(env: Env, day = istDay()) {
   const { results } = await env.DB.prepare("SELECT * FROM candidates WHERE day = ? AND status IN ('draft', 'approved', 'auto') ORDER BY score DESC").bind(day).all<CandidateRow>();
-  let have = results.filter((r) => (r.status === "approved" && r.en_editor) || r.status === "auto").length;
+  const ready = results.filter((r) => (r.status === "approved" && r.en_editor) || r.status === "auto");
+  let have = ready.length;
+  const papers = new Set(ready.map(paperOf));
+  const queue = results.filter((r) => r.status === "draft" && r.card_json);
   const picked: string[] = [], held: string[] = [];
-  for (const r of results) {
-    if (have >= AUTO_CARDS) break;
-    if (r.status !== "draft" || !r.card_json) continue;
+  while (have < AUTO_CARDS && queue.length) {
+    let i = queue.findIndex((q) => !papers.has(paperOf(q)));
+    if (i < 0) i = 0;
+    const [r] = queue.splice(i, 1);
     let card: any; let flagged: unknown[] = [];
     try { card = JSON.parse(r.card_json); flagged = JSON.parse(r.flags || "[]"); } catch { continue; }
     if (flagged.length || !card.summary || !card.headline || !["light", "neutral"].includes(card.tone)) { held.push(r.title); continue; }
@@ -125,6 +157,7 @@ export async function autoPick(env: Env, day = istDay()) {
     if (!pass) { held.push(r.title); continue; }
     await env.DB.prepare("UPDATE candidates SET status = 'auto' WHERE id = ? AND status = 'draft'").bind(r.id).run();
     picked.push(card.headline); have++;
+    papers.add(paperOf(r));
   }
   return { picked, held: held.length };
 }
