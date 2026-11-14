@@ -1163,11 +1163,34 @@ export function staleFlags(data: any, trs: Record<string, Translation>): string[
   });
 }
 
+/** The text a recorded AI-voice reading was made from, per kind. A reading whose text hasn't changed survives a re-import. */
+const SPOKEN: Record<string, (d: any, lang: string) => unknown> = {
+  read: (d, l) => d.sections?.[l],
+  "walk-script": (d, l) => d.script?.[l],
+};
+export async function spokenHash(kind: string, d: any, lang: string): Promise<string | null> {
+  const src = SPOKEN[kind]?.(d, lang);
+  if (src == null) return null;
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(src)));
+  return [...new Uint8Array(buf)].slice(0, 8).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+/** Carries `audio` ({ en: { url, src, ... } }) from the stored item into a re-imported one, language by language, while its text is unchanged. */
+export async function keepAudio(kind: string, data: any, oldJson: string): Promise<any> {
+  if (!SPOKEN[kind] || data?.audio) return data;
+  let prev: any;
+  try { prev = JSON.parse(oldJson)?.audio; } catch { return data; }
+  if (!prev || typeof prev !== "object") return data;
+  const audio: Record<string, unknown> = {};
+  for (const [lang, a] of Object.entries<any>(prev)) if (a?.src && a.src === (await spokenHash(kind, data, lang))) audio[lang] = a;
+  return Object.keys(audio).length ? { ...data, audio } : data;
+}
+
 export async function upsertItem(env: Env, kind: string, pack: string | null, data: any, flags: string[], who = "Pack import") {
   const id = `${kind}:${data.id}`;
   const now = new Date().toISOString();
-  const body = JSON.stringify(data);
   const old = await env.DB.prepare("SELECT json FROM library WHERE id = ?").bind(id).first<{ json: string }>();
+  if (old) data = await keepAudio(kind, data, old.json);
+  const body = JSON.stringify(data);
   if (old?.json === body) return "unchanged";
   if (old) {
     await env.DB.prepare(

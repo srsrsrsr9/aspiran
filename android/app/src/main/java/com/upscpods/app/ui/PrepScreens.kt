@@ -282,7 +282,7 @@ fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi:
                 FlatCard(Modifier.clickable { onOpen(item.id) }) {
                     Column(Modifier.padding(16.dp)) {
                         Text(r.title.pick(hindi && item.hindi), style = MaterialTheme.typography.titleMedium)
-                        Muted("${r.minutes} min" + if (done[item.id] != null) " · Read" else "")
+                        Muted("${r.minutes} min" + (if (item.data["audio"] != null) " · Listen (AI voice)" else "") + if (done[item.id] != null) " · Read" else "")
                     }
                 }
             }
@@ -291,7 +291,7 @@ fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi:
 }
 
 @Composable
-fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: Boolean, onFocus: ((Int) -> Unit)?, onClose: () -> Unit) {
+fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: Boolean, onFocus: ((Int) -> Unit)?, onClose: () -> Unit, mediaUrl: (String) -> String = { it }) {
     val hindi = hindiPreferred && item.hindi
     var size by remember { mutableIntStateOf(prep.readSize) }
     var recall by rememberSaveable(item.id) { mutableStateOf(prep.readNote(item.id)) }
@@ -308,7 +308,7 @@ fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: 
         }
         Text(read.title.pick(hindi), style = MaterialTheme.typography.headlineSmall)
         Muted("${read.minutes} min · ${read.review.line(hindi)}")
-        ReadAloudButton(remember(read, hindi) {
+        if (!AiVoiceAudio(item.data, if (hindi) "hi" else "en", mediaUrl)) ReadAloudButton(remember(read, hindi) {
             (listOf(read.title.pick(hindi), read.dekFor(hindi)) + read.sectionsFor(hindi).flatMap { listOf(it.heading, it.body) })
                 .filter { it.isNotBlank() }.joinToString("\n")
         })

@@ -1824,7 +1824,7 @@ function viewRead(arg) {
   const pick = subjects.includes(store.get("readSubject", "")) ? store.get("readSubject", "") : "";
   const shown = subjects.filter((s) => !pick || s === pick);
   const row = (it) => h("div.card", h("div.row.between",
-    h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min${done[it.id] ? " · Read" : ""}`)),
+    h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min${it.data.audio?.[lang_()] || it.data.audio?.en ? " · Listen (AI voice)" : ""}${done[it.id] ? " · Read" : ""}`)),
     h("a.btn", { href: "#read/" + encodeURIComponent(it.id) }, "Read")));
   const choose = (s) => { store.set("readSubject", s); render(); };
   return h("div.col", h("h1", "Long reads"),
@@ -1835,6 +1835,24 @@ function viewRead(arg) {
       subjects.map((s) => h("button.chip", { "aria-pressed": String(pick === s), onclick: () => choose(s) }, `${s} · ${reads.filter((it) => readSubject(it) === s).length}`))),
     shown.map((s) => h("section", h("h2", s), reads.filter((it) => readSubject(it) === s).map(row))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved Chai cards"), h("div.small.muted", `${store.get("saved", []).length} saved`)), h("a.btn", { href: "#read/saved" }, "Read"))));
+}
+
+// A recorded reading in an AI voice (Cartesia), where one exists: { url, seconds, voice, chapters: [{ t, title }] }.
+// Never starts by itself; the page it sits on is the full transcript. Labelled AI every time.
+function voiceAudio(a, lang) {
+  if (!a?.url) return null;
+  const hi = lang === "hi";
+  const audio = h("audio", { controls: true, preload: "none", src: a.url, style: { width: "100%" } });
+  cleanup.push(() => audio.pause());
+  const jump = (t) => { audio.currentTime = t; audio.play().catch(() => {}); };
+  const mins = Math.max(1, Math.round((a.seconds ?? 0) / 60));
+  return h("div.card", { lang },
+    h("div.row.between", h("strong", hi ? "सुनें" : "Listen"), h("span.small.muted", [hi ? "AI आवाज़" : "AI voice", a.voice, `${mins} min`].filter(Boolean).join(" · "))),
+    audio,
+    a.chapters?.length > 1 && h("details", h("summary.small", hi ? "हिस्से" : "Parts"),
+      h("div.col", { style: { gap: "4px", marginTop: "6px" } }, a.chapters.map((c) => h("button.ghost", { style: { textAlign: "left" }, onclick: () => jump(c.t) },
+        `${Math.floor(c.t / 60)}:${String(Math.floor(c.t % 60)).padStart(2, "0")} · ${c.title}`)))),
+    h("p.small.muted", hi ? "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं। पूरा पाठ इसी पेज पर है।" : "Read by an AI voice, not a person. The full text is on this page."));
 }
 
 // "Read aloud · device voice": the browser's own speech, on a tap only. Nothing is sent anywhere; no AI voice.
@@ -1912,7 +1930,7 @@ function reader(id) {
       h("div.bar", progress)),
     h("article.reader", { lang },
       h("h1", { style: { fontFamily: "var(--ui-font)" } }, bi(d.title)),
-      h("div", { style: { fontFamily: "var(--ui-font)" } }, readAloud([bi(d.title), ...sections.flatMap((s) => [s.heading, s.body])].filter(Boolean).join("\n"), lang)),
+      h("div", { style: { fontFamily: "var(--ui-font)" } }, voiceAudio(d.audio?.[lang], lang) ?? readAloud([bi(d.title), ...sections.flatMap((s) => [s.heading, s.body])].filter(Boolean).join("\n"), lang)),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, `${d.minutes} min · ${checked?.checkedBy ? `Checked by ${checked.checkedBy}, ${checked.checkedOn} ✓` : "Not yet checked by an editor"}`),
       sections.map((s) => [s.heading && h("h2", s.heading), String(s.body ?? "").split(/\n{2,}/).map((para) => h("p", para))]),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, "Sources: " + bi(d.sources))),
@@ -4065,7 +4083,7 @@ function viewRoutine() {
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
 TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false), jeetu: (k) => J.say(k) });
-BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud, jeetu: (k) => J.say(k) });
+BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud, voiceAudio, jeetu: (k) => J.say(k) });
 // Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
 J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang });
 IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Auth.signedIn() });

@@ -161,15 +161,16 @@ export function viewCsat(arg) {
 export function walkScripts() {
   const all = lib("walk-script").sort((a, b) => T(a.topic).localeCompare(T(b.topic)));
   if (!all.length) return null;
-  return h("div", h("h2", "Guided walks"), h("p.small.muted", "One topic, one question, about six minutes. The device voice reads it; you answer aloud."),
+  return h("div", h("h2", "Guided walks"), h("p.small.muted", all.some((d) => d.audio) ? "One topic, one question, about six minutes. An AI voice reads it; you answer aloud." : "One topic, one question, about six minutes. The device voice reads it; you answer aloud."),
     all.map((d) => h("a.card.link", { href: "#walk/" + d.id }, h("div.row.between", h("div", h("strong", T(d.topic)), h("div.small.muted", `${d.minutes ?? 6} min`)), h("span", "→")))));
 }
 export function viewWalkScript(id) {
   const d = lib("walk-script").find((x) => x.id === id);
   if (!d) return h("div.col", back("#walk", "Walk mode"), h("p", "That walk isn't here."));
-  const text = T(d.script);
+  const text = T(d.script), lang = d.script?.[C.lang()] ? C.lang() : "en";
   return h("div.col", back("#walk", "Walk mode"), h("h1", T(d.topic)), h("p.small.muted", `About ${d.minutes ?? 6} minutes · earphones in`),
-    h("div.card", h("div.row.between", h("strong", "Listen"), C.readAloud(text, C.lang())),
+    C.voiceAudio?.(d.audio?.[lang], lang),
+    h("div.card", d.audio?.[lang] ? h("strong", "Read along") : h("div.row.between", h("strong", "Listen"), C.readAloud(text, C.lang())),
       h("div", { style: { whiteSpace: "pre-wrap", fontFamily: "var(--read-font)", marginTop: "8px" } }, text)),
     d.pronounce?.length && h("div.card.soft", h("strong", "Say it right"), h("ul", d.pronounce.map((p) => h("li", h("strong", p.term), " · ", p.say)))),
     h("p.small.muted", "When it ends, say your answer aloud once, then walk on. Nothing is recorded."));

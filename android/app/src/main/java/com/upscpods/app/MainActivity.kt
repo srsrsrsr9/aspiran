@@ -728,7 +728,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         Overlay.LEARN -> LearnHubScreen(library, prep, hindi, plusMember != true, onOpen = openItem, onTool = openTool, onClose = { overlay = Overlay.NONE })
         Overlay.READS -> LongReadsScreen(prep.reads(library), prep, hindi, onOpen = { readId = it; overlay = Overlay.READER }, onClose = { overlay = Overlay.NONE })
         Overlay.READER -> prep.reads(library).firstOrNull { it.first.id == readId }?.let { (item, r) ->
-            ReaderScreen(item, r, prep, hindi, onFocus = { mins -> Focus.start(context, mins, "Reading") }, onClose = { overlay = Overlay.READS })
+            ReaderScreen(item, r, prep, hindi, onFocus = { mins -> Focus.start(context, mins, "Reading") }, onClose = { overlay = Overlay.READS }, mediaUrl = library::url)
         } ?: run { overlay = Overlay.READS }
         Overlay.PREP_TOOL -> {
             val back = { overlay = prepBack }
