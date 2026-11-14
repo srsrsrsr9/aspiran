@@ -1,18 +1,14 @@
 # Content assignment 9, 14 Nov 2026: what assignment 8 left open
 
-**For the owner.** Assignment 8 is checked and ready to import as drafts. These are the gaps it left. Items 1 and 2 are
-yours; paste the rest (below the line) into the other AI with the same reference zip as before
-(`artefacts/content-reference-part8.zip`).
+**For the owner.** Assignment 8 is live (published 14 Nov). These are the gaps it left. Paste everything below the line
+into the other AI with the same reference zip as before (`artefacts/content-reference-part8.zip`).
 
-## Yours
+## Settled on 14 Nov (nothing for you to do)
 
-1. **Supreme Court strength: 34 or 38?** The new Polity paths say the Supreme Court (Number of Judges) Amendment Act,
-   2026 raised it to 38. Only the Bill's passage (Aug 2026) is confirmed; the Gazette notification is not. The older
-   note still says 34. Find the Gazette notice (egazette.gov.in) or tell me to keep 34 until it's confirmed.
-2. **UPSC question papers as PDFs.** The other AI can't open upsc.gov.in, so there are no past questions in any of the
-   seven new Polity paths, and G5 can't start. Download from upsc.gov.in → Examinations → Previous Question Papers:
-   Prelims GS Paper I and CSAT 2011 to 2026, Mains GS1 to GS4 and Essay 2013 to 2024, with the answer keys. Put them in
-   one folder and send it with the next batch.
+1. **Supreme Court strength is 38.** Ordinance gazetted 16 May 2026; the Act got assent on 11 Aug 2026, in force from
+   16 May. Every note now says 38, and the daily fact watch will catch the next change.
+2. **UPSC papers.** Claude downloads them from upsc.gov.in directly, so you don't need to. Prelims 2022 GS1 is in (with
+   UPSC's key); the others follow. For H3, Claude sends the other AI the past questions as text.
 
 ---
 
@@ -38,9 +34,10 @@ Same rules, formats, checks and manifest as assignment 8. Hand back one zip per 
   sectors; infrastructure investment models. Time-sensitive first: 2025 US tariffs, CBAM dates, labour codes in force
   from 21 Nov 2025, MSME limits from April 2025, the 129th Amendment Bill.
 
-### H3. Past-question steps for the seven Polity paths (when the PDFs arrive)
+### H3. Past-question steps for the seven Polity paths
 
-Add the `pyq` step to `gs2-1`, `gs2-3` to `gs2-7` and `pre-4`, word for word from the PDFs, with year, paper and number.
+Add the `pyq` step to `gs2-1`, `gs2-3` to `gs2-7` and `pre-4`, word for word from the past questions Aspiran sends
+as text (from UPSC's own papers), with year, paper and number.
 
 ### H4. G4 book map and G8 mocks
 
