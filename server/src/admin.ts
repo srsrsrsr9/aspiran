@@ -1,4 +1,5 @@
 import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backups";
+import { factWatchApi } from "./factwatch";
 import { checkItem, prepareEdit, titleOf } from "./content";
 import { coverage } from "./coverage";
 import { autoChecks } from "./pipeline";
@@ -294,6 +295,9 @@ route("GET", /^content$/, "content", async ({ env, url }) => {
   ).all()).results;
   return json({ cards, library, deleted });
 });
+// --- Fact watch (factwatch.ts): the daily check of facts that change over time ------------------
+route("GET", /^factwatch$/, "content", async ({ env }) => (await factWatchApi(env, "factwatch", "GET"))!);
+route("POST", /^factwatch\/run$/, "content", async ({ env, body }) => (await factWatchApi(env, "factwatch/run", "POST", body))!);
 route("GET", /^coverage$/, "content", async ({ env }) => json(await coverage(env)));
 route("GET", /^versions\/(card|library)\/(.+)$/, "content", async ({ env, m }) => {
   const { results } = await env.DB.prepare("SELECT id, action, actor, at, length(json) AS size FROM content_versions WHERE item_type = ? AND item_id = ? ORDER BY id DESC")
@@ -357,7 +361,7 @@ route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
   const next = {
     enabled: body.enabled ?? c.enabled,
     purposes: { draft: body.purposes?.draft ?? c.purposes.draft, guard: body.purposes?.guard ?? c.purposes.guard, embed: body.purposes?.embed ?? c.purposes.embed,
-      author: body.purposes?.author ?? c.purposes.author, chotu: body.purposes?.chotu ?? c.purposes.chotu, evaluate: body.purposes?.evaluate ?? c.purposes.evaluate },
+      author: body.purposes?.author ?? c.purposes.author, chotu: body.purposes?.chotu ?? c.purposes.chotu, evaluate: body.purposes?.evaluate ?? c.purposes.evaluate, watch: body.purposes?.watch ?? c.purposes.watch ?? true },
     draftModel: DRAFT_MODELS.includes(body.draftModel) ? body.draftModel : c.draftModel,
     authorModel: AUTHOR_MODELS.includes(body.authorModel) ? body.authorModel : c.authorModel,
     dailyCallCap: num(body.dailyCallCap, 0, 100_000, c.dailyCallCap),
@@ -366,7 +370,7 @@ route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
     temperature: num(body.temperature, 0, 1, c.temperature),
   };
   for (const k of ["enabled"] as const) next[k] = !!next[k];
-  for (const k of ["draft", "guard", "embed", "author", "chotu", "evaluate"] as const) next.purposes[k] = !!next.purposes[k];
+  for (const k of ["draft", "guard", "embed", "author", "chotu", "evaluate", "watch"] as const) next.purposes[k] = !!next.purposes[k];
   await setSetting(env, "llm", next, label(s));
   return json(next);
 });

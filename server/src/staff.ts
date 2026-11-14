@@ -152,7 +152,7 @@ export const AUTHOR_MODELS = ["claude-haiku-5-5", "claude-sonnet-5-5"];
 export interface LlmControls {
   enabled: boolean;
   /** evaluate: Answer Studio's rubric feedback (answers.ts). */
-  purposes: { draft: boolean; guard: boolean; embed: boolean; author: boolean; chotu: boolean; evaluate: boolean };
+  purposes: { draft: boolean; guard: boolean; embed: boolean; author: boolean; chotu: boolean; evaluate: boolean; watch: boolean };
   draftModel: string;
   /** Claude model for the desk's Author tab (needs ANTHROPIC_API_KEY). */
   authorModel: string;
@@ -163,7 +163,7 @@ export interface LlmControls {
 }
 export const DEFAULT_LLM: LlmControls = {
   enabled: true,
-  purposes: { draft: true, guard: true, embed: true, author: true, chotu: true, evaluate: true },
+  purposes: { draft: true, guard: true, embed: true, author: true, chotu: true, evaluate: true, watch: true },
   draftModel: DRAFT_MODELS[0],
   authorModel: AUTHOR_MODELS[0],
   dailyCallCap: 300,
@@ -229,6 +229,8 @@ export const ADMIN_SCHEMA = [
   `CREATE TABLE IF NOT EXISTS llm_calls (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, day TEXT NOT NULL, purpose TEXT NOT NULL,
     model TEXT NOT NULL, status TEXT NOT NULL, ms INTEGER, tokens_in INTEGER, tokens_out INTEGER, error TEXT)`,
   `CREATE INDEX IF NOT EXISTS llm_calls_day ON llm_calls(day)`,
+  `CREATE TABLE IF NOT EXISTS fact_watch (id TEXT PRIMARY KEY, value TEXT NOT NULL, candidate TEXT, candidate_since TEXT, checked_at TEXT,
+    status TEXT, note TEXT, quote TEXT)`,
   `CREATE TABLE IF NOT EXISTS daily_counts (day TEXT NOT NULL, metric TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, metric))`,
   `CREATE TABLE IF NOT EXISTS consents (member_id TEXT NOT NULL, version TEXT NOT NULL, purposes TEXT NOT NULL, at TEXT NOT NULL,
     withdrawn_at TEXT, PRIMARY KEY (member_id, version))`,

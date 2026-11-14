@@ -1,3 +1,4 @@
+import { runFactWatch } from "./factwatch";
 import { publicLibrary, serveMedia } from "./content";
 import { autoPick, chaiDigest, deskApi, modApi, postRitual, publish } from "./desk";
 import DESK_HTML from "./desk.html";
@@ -281,6 +282,8 @@ export default {
       ctx.waitUntil(pruneWebChats(env).then(log("web chats"), fail("web chats")));
       // Purchases refunded through Google Play end the Plus they bought (does nothing until Play Billing is set up).
       ctx.waitUntil(playVoided(env).then(log("play refunds"), fail("play refunds")));
+      // Facts that change over time (Supreme Court strength, RBI ratios, helplines): checked, and updated when two days agree.
+      ctx.waitUntil(runFactWatch(env).then(log("fact watch"), fail("fact watch")));
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));

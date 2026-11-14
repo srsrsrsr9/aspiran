@@ -187,3 +187,5 @@ CREATE INDEX IF NOT EXISTS password_resets_uid ON password_resets(uid);
 -- Open pods (src/rooms.ts): which pre-set rooms a member joined. A member can be in several.
 CREATE TABLE IF NOT EXISTS room_members (member_id TEXT NOT NULL, room_id TEXT NOT NULL, joined_at TEXT NOT NULL, PRIMARY KEY (member_id, room_id));
 CREATE INDEX IF NOT EXISTS room_members_room ON room_members(room_id);
+CREATE TABLE IF NOT EXISTS fact_watch (id TEXT PRIMARY KEY, value TEXT NOT NULL, candidate TEXT, candidate_since TEXT, checked_at TEXT,
+  status TEXT, note TEXT, quote TEXT);

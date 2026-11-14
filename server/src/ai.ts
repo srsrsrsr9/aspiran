@@ -8,7 +8,7 @@ import { ensureSchema, llmControls } from "./staff";
  * one row per call: purpose, model, status, time taken and tokens. Never the prompt or the output.
  */
 
-export type Purpose = "draft" | "guard" | "embed" | "author" | "chotu" | "evaluate";
+export type Purpose = "draft" | "guard" | "embed" | "author" | "chotu" | "evaluate" | "watch";
 
 export class AiBlocked extends Error {}
 

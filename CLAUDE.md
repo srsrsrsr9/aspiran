@@ -25,7 +25,7 @@ English and Hindi first; Telugu is the pilot language.
 - `keys/`, `server/.dev.vars`, `android/local.properties`, `*.jks`: secrets. Never read, print, copy or commit.
 
 ## Commands (in `server/`)
-- `npm run dev` (local), `npm run check` (tsc and a syntax check of the web app), `npm run test:all` (all 16 suites, each on its own
+- `npm run dev` (local), `npm run check` (tsc and a syntax check of the web app), `npm run test:all` (all 17 suites, each on its own
   fresh local server; `npm run test:all -- auth rooms` for some), `npm run check:schema` (the database files against what the server creates).
   GitHub runs all three on every push that touches `server/`.
 - `npm run deploy` deploys production. Claude runs it (owner decided 1 Nov 2026) after `npm run check` and the tests pass,

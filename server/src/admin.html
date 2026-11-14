@@ -295,13 +295,14 @@ views.overview = async () => {
 // Content: one list with history and restore. Writing happens on the desk.
 views.content = async () => {
   const q = views.content.q || "";
-  const [d, cov] = await Promise.all([api("content?q=" + encodeURIComponent(q)), api("coverage")]);
+  const [d, cov, fw] = await Promise.all([api("content?q=" + encodeURIComponent(q)), api("coverage"), api("factwatch").catch(() => null)]);
   const search = h("input", { placeholder: "Search titles", value: q, onchange: (e) => { views.content.q = e.target.value; show("content"); } });
   const status = (r) => [r.en_editor ? h("span.chip.ok", {}, "EN ✓ " + r.en_editor) : h("span.chip", {}, r.status), r.hi_editor ? h("span.chip.ok", {}, "HI ✓ " + r.hi_editor) : null];
   const histBtn = (type, id, n) => h("button", { onclick: () => history(type, id) }, `History (${n})`);
   return [h("h2", {}, "Content"), h("p.lead", {}, "Every card and library item, with its full history. Restoring an old version brings it back as a draft that needs approving again. To write or approve, use the News desk."),
     h("div.row", { style: "margin-bottom:12px" }, search, h("a", { href: "/desk" }, h("button.primary", {}, "Open the News desk"))),
     coverageCard(cov),
+    fw ? factWatchCard(fw) : null,
     h("h3", {}, "Chai cards"),
     h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Day"), h("th", {}, "Headline"), h("th", {}, "Status"), h("th", {}, "")),
       d.cards.map((r) => h("tr", {}, h("td", {}, r.day), h("td", {}, r.headline || r.title), h("td", {}, status(r)), h("td", {}, histBtn("card", r.id, r.versions)))))),
@@ -311,6 +312,17 @@ views.content = async () => {
     d.deleted.length ? [h("h3", {}, "Deleted (can be restored)"), h("div.card", {}, d.deleted.map((r) => h("div.row", {}, h("span.mono", {}, r.id), h("span.muted", {}, `deleted ${when(r.at)} by ${r.actor}`), histBtn("library", r.id, "…"))))] : null,
   ];
 };
+/** The daily fact watch: facts that change over time, the value our content uses, and what the source said last. */
+function factWatchCard(fw) {
+  const chip = { same: ["ok", "Same"], candidate: ["warn", "Changed? Waiting for a second day"], updated: ["ok", "Updated"], "needs-person": ["bad", "Needs a person"] };
+  const run = h("button", { onclick: async (e) => { e.target.disabled = true; e.target.textContent = "Checking…"; await api("factwatch/run", { method: "POST" }).catch((x) => toast(x.message, "err")); show("content"); } }, "Check now");
+  return [h("h3", {}, "Fact watch"),
+    h("p.muted", {}, "Checked every morning at 5:30. A new value is written into the content only when the source shows it two days running; you get an email when anything changes or can't be checked."),
+    h("div.row", { style: "margin-bottom:8px" }, run),
+    h("div.card.scroll", {}, h("table", {}, h("tr", {}, h("th", {}, "Fact"), h("th", {}, "In our content"), h("th", {}, "Last check"), h("th", {}, "Note")),
+      fw.facts.map((f) => { const [c, l] = chip[f.status] || ["", "Not checked yet"]; return h("tr", {}, h("td", {}, h("a", { href: f.source, target: "_blank", rel: "noopener" }, f.label)), h("td.mono", {}, f.value),
+        h("td", {}, h("span.chip" + (c ? "." + c : ""), {}, l), f.checked_at ? h("div.muted", {}, when(f.checked_at)) : null), h("td.muted", {}, f.note || "")); })))];
+}
 /** Per paper and subject: what exists, and how far English and Hindi have got. The desk's Coverage tab has the same numbers. */
 function coverageCard(cov) {
   const t = cov.totals;
