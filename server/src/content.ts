@@ -206,12 +206,24 @@ const media = (pack: string, path: string | null | undefined) => (path ? `/media
  * Approved library items for phones. A language ships only if it's live and an editor for it approved
  * this item: Hindi needs a Hindi editor, Telugu (and the rest) a language editor. Other texts are removed.
  */
-export async function publicLibrary(env: Env): Promise<Response> {
+export async function publicLibrary(env: Env, kinds?: string[]): Promise<Response> {
   await ensureSchema(env);
   const live = await liveLangs(env);
-  const { results } = await env.DB.prepare(
-    "SELECT * FROM library WHERE en_editor IS NOT NULL AND status = 'approved' ORDER BY kind, updated_at DESC",
-  ).all<LibraryRow>();
+  const headers = { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" };
+  // The whole library is about 12 MB of JSON: building it on every request ran out of CPU. A page that needs a few kinds
+  // reads only those; the whole thing is built once per change and kept in R2 (an hour at most, in case a change slips by).
+  const where = "en_editor IS NOT NULL AND status = 'approved'" + (kinds?.length ? ` AND kind IN (${kinds.map(() => "?").join(",")})` : "");
+  let mark = "";
+  if (!kinds?.length && env.MEDIA) {
+    const s = await env.DB.prepare(`SELECT count(*) n, max(updated_at) u, total(length(json)) j, total(length(en_editor) + length(coalesce(hi_editor, ''))
+      + length(coalesce(hi_checked_on, '')) + length(coalesce(approvals, '')) + length(coalesce(translations, ''))) a FROM library WHERE ${where}`)
+      .first<{ n: number; u: string | null; j: number; a: number }>();
+    mark = [s?.n, s?.u, s?.j, s?.a, live.join(","), Math.floor(Date.now() / 3_600_000)].join("|");
+    const hit = await env.MEDIA.get(LIBRARY_CACHE);
+    if (hit && hit.customMetadata?.mark === mark) return new Response(hit.body, { headers });
+  }
+  const { results } = await env.DB.prepare(`SELECT * FROM library WHERE ${where} ORDER BY kind, updated_at DESC`)
+    .bind(...(kinds ?? [])).all<LibraryRow>();
   const items = results.map((r) => {
     let data = JSON.parse(r.json);
     const approvals = rowApprovals(r), trs = rowTranslations(r);
@@ -234,10 +246,13 @@ export async function publicLibrary(env: Env): Promise<Response> {
     data.languages = langs;
     return { id: r.id, kind: r.kind, updatedAt: r.updated_at, hindi: langs.includes("hi"), languages: langs, data };
   });
-  return new Response(JSON.stringify({ items }), {
-    headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" },
-  });
+  const body = JSON.stringify({ items });
+  if (mark) await env.MEDIA!.put(LIBRARY_CACHE, body, { httpMetadata: { contentType: headers["content-type"] }, customMetadata: { mark } }).catch(() => {});
+  return new Response(body, { headers });
 }
+
+/** The built library, kept between requests. serveMedia refuses _cache/, so it is never served at /media. */
+const LIBRARY_CACHE = "_cache/library.json";
 
 /** Removes every language text not in `keep` from { en, hi, te, ... } objects. */
 export function keepLangs(node: any, keep: string[]) {
@@ -250,7 +265,7 @@ export function keepLangs(node: any, keep: string[]) {
 /** [signed]: a Plus file opened with a signed query (ca.ts), which no shared cache should keep. */
 export async function serveMedia(env: Env, key: string, req?: Request, signed = false): Promise<Response> {
   if (!env.MEDIA) return bad("No MEDIA bucket bound", 503);
-  if (!SAFE_PATH.test(key)) return bad("Bad path");
+  if (!SAFE_PATH.test(key) || key.startsWith("_cache/")) return bad("Bad path");
   // Videos (current-affairs scenes) are read in ranges: the player seeks, and resumes a half-cached file.
   const want = req?.headers.get("range")?.match(/^bytes=(\d*)-(\d*)$/);
   const range: R2Range | undefined = want && (want[1] || want[2])

@@ -166,8 +166,7 @@ export default {
     { const r = await tryRoute(req, env, path, url); if (r) return r; }
     if (path === "/library/shelf") {
       if (!(await flags(env)).library) return json({ items: [], paused: true });
-      const data = await (await publicLibrary(env)).json<{ items: { kind: string }[] }>();
-      data.items = data.items.filter((i) => SHELF_KINDS.has(i.kind));
+      const data = await (await publicLibrary(env, [...SHELF_KINDS])).json<{ items: { kind: string }[] }>();
       return json(data);
     }
     if (path === "/library") {

@@ -22,7 +22,7 @@ import { extraDistress } from "./langs";
 type Item = { id: string; kind: string; languages: string[]; data: any };
 
 async function approvedPaths(env: Env): Promise<Item[]> {
-  const data = await (await publicLibrary(env)).json<{ items: Item[] }>();
+  const data = await (await publicLibrary(env, ["topic-path"])).json<{ items: Item[] }>();
   return data.items.filter((i) => i.kind === "topic-path");
 }
 
