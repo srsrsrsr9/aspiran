@@ -20,6 +20,7 @@ import com.upscpods.app.ui.SevenWays
 import com.upscpods.app.ui.CaPlayerScreen
 import com.upscpods.app.ui.CaWeekCard
 import com.upscpods.app.data.CurrentAffairs
+import com.upscpods.app.data.interactives
 import com.upscpods.app.ui.SyllabusStrip
 import com.upscpods.app.ui.SyllabusTab
 import com.upscpods.app.ui.plusWays
@@ -765,6 +766,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             onSeePlus = openPlusInfo,
             onWeekDone = { ritualDone(Ritual.SUNDAY_CA) },
             onClose = { if (arrived == Ritual.SUNDAY_CA) { tab = Tab.PREP; prepSub = PrepSub.TODAY }; overlay = Overlay.NONE; arrived = null },
+            tryIt = library.interactives(),
         )
         Overlay.LAMP -> library.lampOff()?.let { w ->
             LampOff(w, library, hindi && library.items.any { it.kind == "winddown" && it.hindi }, onClose = { overlay = Overlay.NONE })
@@ -901,7 +903,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                 onWhy = { openWhy(Guide.WHY_TODAY) },
                                 weekly = {
                                     // The week in scenes (W7), then the earlier weeks on its shelf.
-                                    CaWeekCard(ca, plusGate, plusQuiet, hindi) { w, n -> caWeek = w; caScene = n; overlay = Overlay.CA }
+                                    CaWeekCard(ca, plusGate, plusQuiet, hindi, tryIt = library.interactives()) { w, n -> caWeek = w; caScene = n; overlay = Overlay.CA }
                                     // The variety, shown off: today's topic in every format we have for it.
                                     SevenWays(library, prep, hindi, onOpen = openItem, onSeeAll = { overlay = Overlay.LEARN })
                                     // Week one: target year, Mains medium, working, one a day.

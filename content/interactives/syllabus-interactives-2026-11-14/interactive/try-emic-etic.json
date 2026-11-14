@@ -1,0 +1,102 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-emic-etic",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-10",
+ "episode": "emic-etic",
+ "episodeN": 156,
+ "episodeTitle": "Inside view or outside view?",
+ "node": "anthro1-12",
+ "paper": {
+  "en": "Anthropology optional",
+  "hi": "मानवविज्ञान वैकल्पिक"
+ },
+ "free": false,
+ "title": {
+  "en": "Inside view or outside view?",
+  "hi": "भीतरी दृष्टि या बाहरी दृष्टि?"
+ },
+ "prompt": {
+  "en": "You are studying a village harvest festival. Decide which question gives which view.",
+  "hi": "आप गाँव के फ़सल उत्सव का अध्ययन कर रहे हैं। तय कीजिए कौन-सा प्रश्न कौन-सी दृष्टि देता है।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "You want the emic (insider's) view. Which question do you ask?",
+    "hi": "आपको एमिक (भीतरी) दृष्टि चाहिए। कौन-सा प्रश्न पूछेंगे?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "“What does this festival mean to you, and why do you do it this way?”",
+      "hi": "“यह उत्सव आपके लिए क्या मायने रखता है, और आप इसे ऐसे क्यों करते हैं?”"
+     },
+     "best": true,
+     "why": {
+      "en": "It records the people's own categories and reasons.",
+      "hi": "यह लोगों की अपनी श्रेणियाँ और कारण दर्ज करता है।"
+     }
+    },
+    {
+     "text": {
+      "en": "“How many calories are shared at the feast per household?”",
+      "hi": "“भोज में हर परिवार को कितनी कैलोरी मिलती है?”"
+     },
+     "best": false,
+     "why": {
+      "en": "That's the observer's measure, an etic question.",
+      "hi": "यह पर्यवेक्षक का माप है, एटिक प्रश्न।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Now you want the etic (outsider's, comparative) view.",
+    "hi": "अब आपको एटिक (बाहरी, तुलनात्मक) दृष्टि चाहिए।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "“Which god does the festival honour, in your words?”",
+      "hi": "“आपके शब्दों में, यह उत्सव किस देवता के लिए है?”"
+     },
+     "best": false,
+     "why": {
+      "en": "In their words: that's emic.",
+      "hi": "उनके शब्दों में: यह एमिक है।"
+     }
+    },
+    {
+     "text": {
+      "en": "“Does the feast move food from richer to poorer households, as in other societies?”",
+      "hi": "“क्या भोज, दूसरे समाजों की तरह, अमीर परिवारों से ग़रीब परिवारों तक भोजन पहुँचाता है?”"
+     },
+     "best": true,
+     "why": {
+      "en": "It uses the analyst's terms so you can compare across cultures.",
+      "hi": "यह विश्लेषक के शब्दों में है ताकि संस्कृतियों की तुलना हो सके।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "Kenneth Pike coined the terms (1954); Marvin Harris used them in anthropology. Good fieldwork needs both: the meaning inside and the pattern outside.",
+  "hi": "केनेथ पाइक ने ये शब्द गढ़े (1954); मार्विन हैरिस ने इन्हें मानवविज्ञान में अपनाया। अच्छे फ़ील्डवर्क में दोनों चाहिए: भीतर का अर्थ और बाहर का ढर्रा।"
+ },
+ "sources": [
+  "Kenneth L. Pike, Language in Relation to a Unified Theory of the Structure of Human Behavior (1954)",
+  "Marvin Harris, The Rise of Anthropological Theory (1968)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

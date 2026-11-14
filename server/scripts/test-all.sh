@@ -4,13 +4,13 @@
 # so one suite can't upset the next. Nothing here touches production. Takes about five minutes.
 cd "$(dirname "$0")/.."
 TOKEN=test-all-token
-PORT=8790
+PORT=${TEST_PORT:-8790}   # TEST_PORT and TEST_DIR let two runs go side by side (two sessions on one Mac)
 LOG=$(mktemp -d)
 typeset -A EXTRA
 EXTRA[payments]="--var CASHFREE_APP_ID:local-test-app --var CASHFREE_SECRET_KEY:local-test-secret --var CASHFREE_API_BASE:http://127.0.0.1:8799/pg"
 EXTRA[models-hf]="--var MODEL_FILES_URL:"
 NOAUTH=(auth metrics password roadmap try models-hf)   # suites that sign in by themselves
-SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu languages mocks metrics roadmap payments password ca pyq try models-hf factwatch)
+SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives)
 # Whatever is still listening on the test port goes: the server's own worker process can outlive it.
 free_port() {
   pkill -9 -f "dev --port $PORT" 2>/dev/null
@@ -21,7 +21,7 @@ free_port() {
 pass=(); fail=()
 free_port
 for s in $SUITES; do
-  dir=".wrangler-test-$s"; rm -rf "$dir"
+  dir="${TEST_DIR:-.wrangler-test}-$s"; rm -rf "$dir"
   for f in schema.sql migrations/*.sql; do
     npx wrangler d1 execute upsc-pods --local --persist-to "$dir" --file="$f" >/dev/null 2>&1
   done

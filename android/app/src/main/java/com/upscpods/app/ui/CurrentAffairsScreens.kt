@@ -50,6 +50,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import com.upscpods.app.data.Interactive
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -136,7 +137,7 @@ private fun DraftTag(modifier: Modifier = Modifier) {
  * Watch button for the next one to see, and the earlier weeks on a shelf under it.
  */
 @Composable
-fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolean, onOpen: (week: String, scene: Int) -> Unit) {
+fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolean, tryIt: List<Interactive> = emptyList(), onOpen: (week: String, scene: Int) -> Unit) {
     val latest = ca.weeks.firstOrNull() ?: return
     val week by produceState<CaWeek?>(null, latest.week, latest.generatedAt) { value = ca.week(latest.week) }
     val w = week ?: return
@@ -219,7 +220,9 @@ fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolea
                         CaPoster(ca, set.poster, Modifier.width(36.dp).height(64.dp).clip(RoundedCornerShape(8.dp)))
                         Column(Modifier.padding(end = 6.dp)) {
                             Text((if (hindi) set.titleHi else null) ?: set.title ?: set.week, color = CA_CREAM, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                            Text(if (hindi) "${set.scenes} वीडियो" else "${set.scenes} videos", color = CA_CREAM.copy(alpha = .7f), fontSize = 12.sp)
+                            val toTry = tryIt.count { it.week == set.week }
+                            Text((if (hindi) "${set.scenes} वीडियो" else "${set.scenes} videos") + if (toTry > 0) (if (hindi) " · $toTry अभ्यास" else " · $toTry to try") else "",
+                                color = CA_CREAM.copy(alpha = .7f), fontSize = 12.sp)
                         }
                     }
                 }
@@ -239,8 +242,11 @@ fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolea
 fun CaPlayerScreen(
     ca: CurrentAffairs, weekId: String?, start: Int, gate: PlusGate, quiet: Boolean, hindi: Boolean,
     onNode: (paper: String, topic: String?) -> Unit, onSeePlus: () -> Unit, onWeekDone: () -> Unit, onClose: () -> Unit,
+    tryIt: List<Interactive> = emptyList(),
 ) {
     BackHandler(onBack = onClose)
+    // "Try it yourself" for the scene that just ended, over the player (which is stopped on its last frame).
+    var trying by remember { mutableStateOf<Interactive?>(null) }
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val id = weekId ?: ca.weeks.firstOrNull()?.week
@@ -360,6 +366,7 @@ fun CaPlayerScreen(
                 }
                 if (page in ended) {
                     QuizPanel(ca, e, hindi, last = page == scenes.lastIndex, modifier = Modifier.align(Alignment.BottomCenter),
+                        tryPiece = tryIt.firstOrNull { it.week == w.week && it.episode == e.id }, onTry = { trying = it },
                         onAnswered = { checkWeekDone() },
                         onAgain = { ended = ended - page; player.seekTo(0); player.play() },
                         onNext = { scope.launch { if (page < scenes.lastIndex) pager.animateScrollToPage(page + 1) else onClose() } })
@@ -388,6 +395,7 @@ fun CaPlayerScreen(
             }
             SaveOffline(ca, w, gate, hindi)
         }
+        trying?.let { piece -> InteractiveScreen(piece, hindi, onClose = { trying = null }) }
     }
 }
 
@@ -446,7 +454,7 @@ private fun SceneFooter(e: CaEpisode, hindi: Boolean, caption: String?, modifier
 
 /** The scene's question(s), right after it, with the why once answered. Answers are kept. */
 @Composable
-private fun QuizPanel(ca: CurrentAffairs, e: CaEpisode, hindi: Boolean, last: Boolean, modifier: Modifier, onAnswered: () -> Unit, onAgain: () -> Unit, onNext: () -> Unit) {
+private fun QuizPanel(ca: CurrentAffairs, e: CaEpisode, hindi: Boolean, last: Boolean, modifier: Modifier, tryPiece: Interactive? = null, onTry: (Interactive) -> Unit = {}, onAnswered: () -> Unit, onAgain: () -> Unit, onNext: () -> Unit) {
     @Suppress("UNUSED_VARIABLE") val tick = ca.progress
     // The whole frame, so the video's own "Your turn" card doesn't show through as a second copy of the question.
     Box(modifier.fillMaxSize().background(CA_INK).statusBarsPadding().navigationBarsPadding().padding(top = 56.dp), contentAlignment = Alignment.BottomCenter) {
@@ -486,6 +494,13 @@ private fun QuizPanel(ca: CurrentAffairs, e: CaEpisode, hindi: Boolean, last: Bo
             }
         }
         val done = e.quiz.all { ca.answer(it.id) != null }
+        if (tryPiece != null && (done || e.quiz.isEmpty())) {
+            Column(Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(Color.White.copy(alpha = .08f)).clickable { onTry(tryPiece) }.padding(horizontal = 14.dp, vertical = 11.dp)) {
+                Text(listOfNotNull(if (hindi) "ख़ुद करके देखें" else "TRY IT YOURSELF", tryPiece.typeName?.pick(hindi)).joinToString(" · "),
+                    color = CA_GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.4.sp)
+                Text(tryPiece.title.pick(hindi) + " →", color = CA_CREAM, fontWeight = FontWeight.Bold, fontSize = 15.sp)
+            }
+        }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
             OutlinedButton(onClick = onAgain) { Text(if (hindi) "फिर से देखें" else "Watch again", color = CA_CREAM) }
             if (done || e.quiz.isEmpty()) Button(onClick = onNext, colors = ButtonDefaults.buttonColors(containerColor = CA_GOLD, contentColor = Color(0xFF2A1300))) {

@@ -166,7 +166,9 @@ export default {
     { const r = await tryRoute(req, env, path, url); if (r) return r; }
     if (path === "/library/shelf") {
       if (!(await flags(env)).library) return json({ items: [], paused: true });
-      const data = await (await publicLibrary(env, [...SHELF_KINDS])).json<{ items: { kind: string }[] }>();
+      const data = await (await publicLibrary(env, [...SHELF_KINDS, "interactive"])).json<{ items: { kind: string; data: any }[] }>();
+      // "Try it yourself": only the pieces marked free (12, Prelims/CSAT and GS) are open to visitors.
+      data.items = data.items.filter((i) => i.kind !== "interactive" || i.data?.free === true);
       return json(data);
     }
     if (path === "/library") {

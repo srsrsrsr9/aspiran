@@ -1,0 +1,124 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-case-study-method",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-05",
+ "episode": "case-study-method",
+ "episodeN": 47,
+ "episodeTitle": "A GS4 case study has a shape",
+ "node": "gs4-6",
+ "paper": {
+  "en": "GS4 and Essay",
+  "hi": "GS4 और निबंध"
+ },
+ "free": true,
+ "title": {
+  "en": "A school built with bad cement",
+  "hi": "घटिया सीमेंट से बना स्कूल"
+ },
+ "prompt": {
+  "en": "A GS4-style case in two moves. Pick the stronger answer each time.",
+  "hi": "GS4 जैसा एक केस, दो क़दमों में। हर बार बेहतर उत्तर चुनिए।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "You are a district officer. You learn that a school building already in use was built with poor cement by a contractor close to a minister.",
+    "hi": "आप ज़िला अधिकारी हैं। पता चलता है कि उपयोग में आ चुकी एक स्कूल इमारत मंत्री के क़रीबी ठेकेदार ने घटिया सीमेंट से बनाई है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "It's not your department. Leave it.",
+      "hi": "यह आपका विभाग नहीं। छोड़ दीजिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "Children's safety is at stake and you know about it. Silence makes you part of the risk.",
+      "hi": "बच्चों की सुरक्षा दाँव पर है और आपको पता है। चुप रहना आपको भी जोखिम का हिस्सा बनाता है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Order a structural check, move the children to safe rooms now, and report in writing.",
+      "hi": "ढाँचे की जाँच का आदेश दीजिए, बच्चों को अभी सुरक्षित कमरों में भेजिए, और लिखित रिपोर्ट दीजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "Safety first, then evidence, then the record: you act within your powers and leave a paper trail.",
+      "hi": "पहले सुरक्षा, फिर सबूत, फिर रिकॉर्ड: आप अपने अधिकार में रहकर काम करते हैं और लिखित निशान छोड़ते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Tell a journalist so the story comes out.",
+      "hi": "किसी पत्रकार को बता दीजिए ताकि मामला सामने आए।"
+     },
+     "best": false,
+     "why": {
+      "en": "It skips the steps that actually make the building safe, and breaks service rules.",
+      "hi": "इससे वे क़दम छूट जाते हैं जो इमारत को सचमुच सुरक्षित बनाते, और सेवा नियम भी टूटते हैं।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Your report is ready. Your senior says: keep it quiet until after the inauguration of a new block next week.",
+    "hi": "आपकी रिपोर्ट तैयार है। वरिष्ठ कहते हैं: अगले हफ़्ते नए भवन के उद्घाटन तक इसे दबाकर रखिए।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Agree; a week won't matter.",
+      "hi": "मान लीजिए; एक हफ़्ते से क्या फ़र्क़ पड़ेगा।"
+     },
+     "best": false,
+     "why": {
+      "en": "A week is long if a wall gives way. The risk falls on children who had no say.",
+      "hi": "अगर दीवार गिर जाए तो एक हफ़्ता बहुत है। जोखिम उन बच्चों पर है जिनकी कोई आवाज़ नहीं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Put your findings on file and send the report through proper channels, explaining the safety risk.",
+      "hi": "अपने निष्कर्ष फ़ाइल पर रखिए और सुरक्षा का ख़तरा समझाते हुए रिपोर्ट सही माध्यम से भेजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "You stay respectful and within the rules, but the facts reach those who must act.",
+      "hi": "आप सम्मान और नियमों के भीतर रहते हैं, पर तथ्य उन तक पहुँचते हैं जिन्हें क़दम उठाना है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Resign in protest.",
+      "hi": "विरोध में इस्तीफ़ा दे दीजिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "Resigning leaves the children no safer. Use your office first.",
+      "hi": "इस्तीफ़े से बच्चे सुरक्षित नहीं होते। पहले अपने पद का उपयोग कीजिए।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "A good case answer names the stakeholders, weighs the options, acts within the rules, and puts life and safety first.",
+  "hi": "अच्छा केस उत्तर हितधारकों को पहचानता है, विकल्पों को तौलता है, नियमों के भीतर काम करता है, और जीवन व सुरक्षा को पहले रखता है।"
+ },
+ "sources": [
+  "UPSC CSE notice, GS Paper IV syllabus: 'Case studies on the above issues'",
+  "Second Administrative Reforms Commission, 4th report 'Ethics in Governance' (2007)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

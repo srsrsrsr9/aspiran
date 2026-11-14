@@ -62,12 +62,14 @@ const SCHEMA_KIND: Record<string, string> = {
   "aspiran/printable@1": "printable",
   "aspiran/audio-lecture@1": "audio-lecture",
   "aspiran/topic-path@1": "topic-path",
+  // "Try it yourself": hands-on pieces after the Syllabus in a minute videos (content/interactives/, interactives.js).
+  "aspiran/syllabus-interactive@1": "interactive",
 };
 /** Where the app may show an approved quote: one per screen at most, never on TRAGIC cards or in distress flows. */
 const QUOTE_MOMENTS = ["night", "if-then", "know-yourself", "monday", "finish", "exam-trap"];
 /** Manifest entry lists that hold library items. */
 const ITEM_LISTS = ["explainers", "timelines", "games", "quizzes", "maps", "numbers", "myths", "debates", "winddown",
-  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs", "brief", "paths"];
+  "scratch", "journeys", "radio", "assemble", "chains", "thenNow", "postcards", "quotes", "mocks", "reads", "calm", "routines", "pyqs", "brief", "paths", "interactives"];
 /** Files the desk never needs: share PNGs are drawn on the phone, the rest are tools for writers. */
 const OPTIONAL = /^(share|templates|tools|jobs|_generated)\/|^README\.md$/;
 export const KINDS = [...Object.values(SCHEMA_KIND), ...Object.keys(ENGINE_KINDS)];
@@ -852,8 +854,33 @@ const BRIEF_TITLE: Record<string, (d: any) => string | undefined> = {
   "walk-script": (d) => `Walk: ${d.topic?.en ?? d.id}`,
   "restart-day": (d) => `Welcome back (${String(d.when ?? "").replace(/-/g, " ")}): ${d.headline?.en ?? ""}`,
   printable: (d) => `Printable sheet: ${d.en?.title ?? d.id}`,
+  interactive: (d) => `Try it: ${d.title?.en ?? d.id} (${d.typeName?.en ?? d.type}, video ${d.week}/${d.episode})`,
   "audio-lecture": (d) => `Audio lecture: ${d.en?.title ?? cap(String(d.id))}${d.minutes ? ` (${d.minutes} min)` : ""}`,
 };
+
+/** The six kinds of "Try it yourself" piece, and what each needs to be playable to the end. */
+export const INTERACTIVE_TYPES = ["decide", "order", "sort", "match", "statements", "dial"];
+export function checkInteractive(d: any): string[] {
+  const flags: string[] = [];
+  const both = (v: any) => !!(v && String(v.en ?? "").trim() && String(v.hi ?? "").trim());
+  if (!INTERACTIVE_TYPES.includes(d.type)) flags.push(`Unknown type ${d.type}; the apps can't play it`);
+  if (!/^\d{4}-\d{2}$/.test(String(d.week ?? "")) || !d.episode) flags.push("Not tied to a video (week and episode)");
+  if (!d.node) flags.push("No syllabus node");
+  if (!d.sources?.length) flags.push("No sources");
+  if (!both(d.title) || !both(d.prompt) || !both(d.takeaway)) flags.push("Title, prompt or takeaway is missing English or Hindi");
+  const n = (a: any) => (Array.isArray(a) ? a.length : 0);
+  if (d.type === "decide" && (!n(d.rounds) || d.rounds.some((r: any) => n(r.options) < 2 || r.options.filter((o: any) => o.best).length !== 1)))
+    flags.push("Every round needs two or more options and exactly one best");
+  if (d.type === "order" && n(d.items) < 3) flags.push("Put in order needs at least 3 items");
+  if (d.type === "sort" && (n(d.buckets) < 2 || n(d.items) < 4 || d.items.some((x: any) => !(x.bucket >= 0 && x.bucket < n(d.buckets)))))
+    flags.push("Sort needs 2+ buckets, 4+ items, each in a bucket");
+  if (d.type === "match" && n(d.pairs) < 3) flags.push("Match needs at least 3 pairs");
+  if (d.type === "statements" && (n(d.statements) < 3 || d.statements.every((x: any) => x.answer) || d.statements.every((x: any) => !x.answer)))
+    flags.push("Statements needs 3+ statements, some true and some false");
+  if (d.type === "dial" && !(Number(d.min) <= Number(d.answer) && Number(d.answer) <= Number(d.max) && Number(d.step) > 0))
+    flags.push("The dial's answer must sit between its min and max");
+  return flags;
+}
 
 export function titleOf(kind: string, d: any): string {
   const brief = BRIEF_TITLE[kind]?.(d);
@@ -997,6 +1024,7 @@ export function checkItem(kind: string, d: any): string[] {
   if (ENGINE_KINDS[kind]) return [...checkPlay(kind, d), ...engineTextFlags(d), ...factFlags(d)];
   if (kind === "pyq") return checkPyq(d);
   if (kind === "topic-path") return [...checkTopicPath(d), ...factFlags(d)];
+  if (kind === "interactive") return checkInteractive(d);
   const flags: string[] = [];
   flags.push(...factFlags(d));
   if (kind === "essay" && !(d.snap1Skeleton && d.snap2Outline && d.snap3Watch)) flags.push("Missing one of the three snaps (skeleton, outline, what to watch)");

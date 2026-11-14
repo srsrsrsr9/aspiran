@@ -1,0 +1,54 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-urbanisation",
+ "type": "dial",
+ "typeName": {
+  "en": "Dial",
+  "hi": "डायल"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-02",
+ "episode": "urbanisation",
+ "episodeN": 19,
+ "episodeTitle": "A town in the census can be a village on paper",
+ "node": "gs1-6",
+ "paper": {
+  "en": "GS1",
+  "hi": "GS1"
+ },
+ "free": false,
+ "title": {
+  "en": "When is a village a town?",
+  "hi": "गाँव कब कस्बा बनता है?"
+ },
+ "prompt": {
+  "en": "A census town needs at least 5,000 people and 400 people per sq km. What share of its male main workers must work outside farming?",
+  "hi": "जनगणना कस्बे के लिए कम से कम 5,000 लोग और 400 लोग प्रति वर्ग किमी चाहिए। उसके पुरुष मुख्य कामगारों का कितना हिस्सा खेती से बाहर काम करना चाहिए?"
+ },
+ "unit": {
+  "en": "percent",
+  "hi": "प्रतिशत"
+ },
+ "min": 0,
+ "max": 100,
+ "step": 5,
+ "start": 50,
+ "answer": 75,
+ "near": 5,
+ "explain": {
+  "en": "At least 75 percent of male main workers must be in non-agricultural work. Places that meet all three tests are 'census towns', even if they're still governed as villages.",
+  "hi": "पुरुष मुख्य कामगारों में कम से कम 75 प्रतिशत ग़ैर-कृषि काम में हों। जो जगहें तीनों शर्तें पूरी करें वे 'जनगणना कस्बे' हैं, भले ही उनका शासन अब भी गाँव की तरह चलता हो।"
+ },
+ "takeaway": {
+  "en": "Census towns (by the census) and statutory towns (with a municipality) are different things. Census 2011 counted 3,894 census towns.",
+  "hi": "जनगणना कस्बे (जनगणना की परिभाषा) और वैधानिक कस्बे (जहाँ नगरपालिका है) अलग चीज़ें हैं। जनगणना 2011 में 3,894 जनगणना कस्बे गिने गए।"
+ },
+ "sources": [
+  "Census of India 2011, 'Urban Area' definitions (censusindia.gov.in)",
+  "NCERT Class 12, India People and Economy, ch. 'Human Settlements'"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

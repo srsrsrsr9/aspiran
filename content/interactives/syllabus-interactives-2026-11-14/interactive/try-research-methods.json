@@ -1,0 +1,131 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-research-methods",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-08",
+ "episode": "research-methods",
+ "episodeN": 102,
+ "episodeTitle": "Good research is reliable and valid",
+ "node": "socio1-3",
+ "paper": {
+  "en": "Sociology optional",
+  "hi": "समाजशास्त्र वैकल्पिक"
+ },
+ "free": false,
+ "title": {
+  "en": "Pick the method",
+  "hi": "तरीक़ा चुनिए"
+ },
+ "prompt": {
+  "en": "Three research questions. Choose the method that fits each.",
+  "hi": "शोध के तीन प्रश्न। हर एक के लिए सही तरीक़ा चुनिए।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "What share of households in a district own a smartphone?",
+    "hi": "किसी ज़िले के कितने प्रतिशत परिवारों के पास स्मार्टफ़ोन है?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "A survey of a random sample of households.",
+      "hi": "परिवारों के यादृच्छिक नमूने का सर्वेक्षण।"
+     },
+     "best": true,
+     "why": {
+      "en": "A 'how many' question needs a representative sample.",
+      "hi": "'कितने' वाले प्रश्न के लिए प्रतिनिधि नमूना चाहिए।"
+     }
+    },
+    {
+     "text": {
+      "en": "Living with one family for a month.",
+      "hi": "एक परिवार के साथ एक महीना रहना।"
+     },
+     "best": false,
+     "why": {
+      "en": "Rich detail, but one family can't tell you a district's share.",
+      "hi": "गहरी जानकारी, पर एक परिवार से पूरे ज़िले का अनुपात नहीं मिलता।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "How do migrant workers in a city hostel make friends and find work?",
+    "hi": "शहर के हॉस्टल में रहने वाले प्रवासी मज़दूर दोस्त और काम कैसे ढूँढते हैं?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "A short questionnaire with tick boxes.",
+      "hi": "टिक-बॉक्स वाली छोटी प्रश्नावली।"
+     },
+     "best": false,
+     "why": {
+      "en": "Tick boxes miss how relationships actually form.",
+      "hi": "टिक-बॉक्स यह नहीं पकड़ते कि रिश्ते असल में कैसे बनते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Participant observation and long interviews.",
+      "hi": "सहभागी अवलोकन और लंबे साक्षात्कार।"
+     },
+     "best": true,
+     "why": {
+      "en": "A 'how' question about everyday life needs time inside it.",
+      "hi": "रोज़मर्रा के 'कैसे' वाले प्रश्न के लिए उसके भीतर समय बिताना पड़ता है।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Has literacy risen in every state since 2001?",
+    "hi": "क्या 2001 के बाद हर राज्य में साक्षरता बढ़ी है?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Census data from 2001 and 2011.",
+      "hi": "2001 और 2011 की जनगणना के आँकड़े।"
+     },
+     "best": true,
+     "why": {
+      "en": "Secondary data already covers every state the same way.",
+      "hi": "द्वितीयक आँकड़े हर राज्य को एक ही तरह से पहले से कवर करते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Interviews in two villages.",
+      "hi": "दो गाँवों में साक्षात्कार।"
+     },
+     "best": false,
+     "why": {
+      "en": "Two villages can't speak for every state.",
+      "hi": "दो गाँव हर राज्य की बात नहीं कह सकते।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "'How many' points to surveys, 'how' and 'why' to fieldwork, 'what changed across the country' to existing data like the census.",
+  "hi": "'कितने' के लिए सर्वेक्षण, 'कैसे' और 'क्यों' के लिए फ़ील्डवर्क, 'देश भर में क्या बदला' के लिए जनगणना जैसे मौजूदा आँकड़े।"
+ },
+ "sources": [
+  "NCERT Class 11, Introducing Sociology, ch. 5 'Doing Sociology: Research Methods'"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

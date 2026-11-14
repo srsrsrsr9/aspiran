@@ -1,0 +1,132 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-translate-into",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-06",
+ "episode": "translate-into",
+ "episodeN": 54,
+ "episodeTitle": "Translate the meaning, not the words",
+ "node": "lang-5",
+ "paper": {
+  "en": "Language papers A and B",
+  "hi": "भाषा पेपर A और B"
+ },
+ "free": false,
+ "title": {
+  "en": "Meaning, not words",
+  "hi": "अर्थ, शब्द नहीं"
+ },
+ "prompt": {
+  "en": "Pick the better Hindi translation. (Paper A can be in any scheduled language; Hindi is the example here.)",
+  "hi": "बेहतर हिंदी अनुवाद चुनिए। (पेपर A किसी भी अनुसूचित भाषा में हो सकता है; यहाँ उदाहरण हिंदी है।)"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "“It's raining cats and dogs.”",
+    "hi": "“It's raining cats and dogs.”"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "बिल्लियाँ और कुत्ते बरस रहे हैं।",
+      "hi": "बिल्लियाँ और कुत्ते बरस रहे हैं।"
+     },
+     "best": false,
+     "why": {
+      "en": "Word for word, and meaningless in Hindi.",
+      "hi": "शब्दशः, और हिंदी में अर्थहीन।"
+     }
+    },
+    {
+     "text": {
+      "en": "मूसलाधार बारिश हो रही है।",
+      "hi": "मूसलाधार बारिश हो रही है।"
+     },
+     "best": true,
+     "why": {
+      "en": "The idiom means very heavy rain, so say that.",
+      "hi": "मुहावरे का अर्थ है बहुत तेज़ बारिश, तो वही कहिए।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "“The ball is in your court now.”",
+    "hi": "“The ball is in your court now.”"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "अब गेंद आपके कोर्ट में है।",
+      "hi": "अब गेंद आपके कोर्ट में है।"
+     },
+     "best": false,
+     "why": {
+      "en": "Readers may get it, but it's English in Hindi words.",
+      "hi": "पाठक शायद समझ लें, पर यह हिंदी शब्दों में अंग्रेज़ी है।"
+     }
+    },
+    {
+     "text": {
+      "en": "अब फ़ैसला आपके हाथ में है।",
+      "hi": "अब फ़ैसला आपके हाथ में है।"
+     },
+     "best": true,
+     "why": {
+      "en": "Natural Hindi with the same meaning.",
+      "hi": "वही अर्थ, स्वाभाविक हिंदी में।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "“The committee will look into the matter.”",
+    "hi": "“The committee will look into the matter.”"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "समिति मामले की जाँच करेगी।",
+      "hi": "समिति मामले की जाँच करेगी।"
+     },
+     "best": true,
+     "why": {
+      "en": "'Look into' means examine. Short and exact.",
+      "hi": "'Look into' का अर्थ है जाँचना। छोटा और सटीक।"
+     }
+    },
+    {
+     "text": {
+      "en": "समिति मामले के अंदर देखेगी।",
+      "hi": "समिति मामले के अंदर देखेगी।"
+     },
+     "best": false,
+     "why": {
+      "en": "Translates the words, loses the sense.",
+      "hi": "शब्दों का अनुवाद, अर्थ खो गया।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "Read the whole sentence, ask what it means, then say that in the other language. Idioms almost never go word for word.",
+  "hi": "पूरा वाक्य पढ़िए, पूछिए इसका अर्थ क्या है, फिर वही दूसरी भाषा में कहिए। मुहावरे लगभग कभी शब्दशः नहीं जाते।"
+ },
+ "sources": [
+  "UPSC CSE notice, syllabus of Paper A: 'Translation from English to the Indian language'",
+  "Oxford Learner's Dictionaries, idiom entries (oxfordlearnersdictionaries.com)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-msp",
+ "type": "sort",
+ "typeName": {
+  "en": "Sort",
+  "hi": "छाँटिए"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-04",
+ "episode": "msp",
+ "episodeN": 36,
+ "episodeTitle": "MSP is announced for 22 crops",
+ "node": "gs3-3",
+ "paper": {
+  "en": "GS3",
+  "hi": "GS3"
+ },
+ "free": true,
+ "title": {
+  "en": "Which season's crop?",
+  "hi": "किस मौसम की फ़सल?"
+ },
+ "prompt": {
+  "en": "MSP is announced for 22 crops. Sort these by season.",
+  "hi": "MSP 22 फ़सलों के लिए घोषित होता है। इन्हें मौसम के हिसाब से छाँटिए।"
+ },
+ "buckets": [
+  {
+   "en": "Kharif (sown with the monsoon)",
+   "hi": "ख़रीफ़ (मानसून के साथ बोई)"
+  },
+  {
+   "en": "Rabi (sown in winter)",
+   "hi": "रबी (सर्दियों में बोई)"
+  },
+  {
+   "en": "Commercial crops",
+   "hi": "वाणिज्यिक फ़सलें"
+  }
+ ],
+ "items": [
+  {
+   "text": {
+    "en": "Paddy",
+    "hi": "धान"
+   },
+   "bucket": 0
+  },
+  {
+   "text": {
+    "en": "Cotton",
+    "hi": "कपास"
+   },
+   "bucket": 0
+  },
+  {
+   "text": {
+    "en": "Groundnut",
+    "hi": "मूँगफली"
+   },
+   "bucket": 0
+  },
+  {
+   "text": {
+    "en": "Tur (arhar)",
+    "hi": "तूर (अरहर)"
+   },
+   "bucket": 0
+  },
+  {
+   "text": {
+    "en": "Wheat",
+    "hi": "गेहूँ"
+   },
+   "bucket": 1
+  },
+  {
+   "text": {
+    "en": "Gram",
+    "hi": "चना"
+   },
+   "bucket": 1
+  },
+  {
+   "text": {
+    "en": "Rapeseed and mustard",
+    "hi": "रेपसीड और सरसों"
+   },
+   "bucket": 1
+  },
+  {
+   "text": {
+    "en": "Jute",
+    "hi": "जूट"
+   },
+   "bucket": 2
+  },
+  {
+   "text": {
+    "en": "Copra",
+    "hi": "खोपरा"
+   },
+   "bucket": 2
+  }
+ ],
+ "takeaway": {
+  "en": "14 kharif crops, 6 rabi crops and 2 commercial ones (jute and copra) make the 22. Sugarcane gets a 'fair and remunerative price' instead.",
+  "hi": "14 ख़रीफ़, 6 रबी और 2 वाणिज्यिक फ़सलें (जूट और खोपरा) मिलकर 22 होती हैं। गन्ने के लिए 'उचित और लाभकारी मूल्य' अलग से तय होता है।"
+ },
+ "sources": [
+  "Commission for Agricultural Costs and Prices (cacp.dacnet.nic.in)",
+  "Press Information Bureau, Cabinet decisions on kharif and rabi MSP (pib.gov.in)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

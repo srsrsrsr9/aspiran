@@ -1,0 +1,132 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-sources-brahmi",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-11",
+ "episode": "sources-brahmi",
+ "episodeN": 178,
+ "episodeTitle": "Ashoka's edicts were unreadable until 1837",
+ "node": "hist1-1",
+ "paper": {
+  "en": "History optional, Paper I",
+  "hi": "इतिहास वैकल्पिक, पेपर I"
+ },
+ "free": false,
+ "title": {
+  "en": "Which source would you use?",
+  "hi": "आप कौन-सा स्रोत लेंगे?"
+ },
+ "prompt": {
+  "en": "Three questions about early India. Pick the best source for each.",
+  "hi": "प्राचीन भारत के तीन प्रश्न। हर एक के लिए सबसे अच्छा स्रोत चुनिए।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "What did Ashoka himself say about dhamma?",
+    "hi": "अशोक ने धम्म के बारे में ख़ुद क्या कहा?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "His rock and pillar edicts.",
+      "hi": "उसके शिलालेख और स्तंभलेख।"
+     },
+     "best": true,
+     "why": {
+      "en": "His own words, mostly in Prakrit in the Brahmi script. James Prinsep read them in 1837.",
+      "hi": "उसके अपने शब्द, अधिकतर ब्राह्मी लिपि में प्राकृत में। जेम्स प्रिंसेप ने 1837 में इन्हें पढ़ा।"
+     }
+    },
+    {
+     "text": {
+      "en": "A Gupta-period play.",
+      "hi": "गुप्त काल का कोई नाटक।"
+     },
+     "best": false,
+     "why": {
+      "en": "Written centuries later; not Ashoka's voice.",
+      "hi": "सदियों बाद लिखा गया; अशोक की अपनी आवाज़ नहीं।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Which kings did Samudragupta defeat?",
+    "hi": "समुद्रगुप्त ने किन राजाओं को हराया?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "The Prayaga (Allahabad) pillar inscription by his poet Harishena.",
+      "hi": "उसके कवि हरिषेण का प्रयाग (इलाहाबाद) स्तंभ अभिलेख।"
+     },
+     "best": true,
+     "why": {
+      "en": "A prashasti, a poem of praise, listing his campaigns. Read it critically: it was written to flatter.",
+      "hi": "एक प्रशस्ति, यानी प्रशंसा-काव्य, जिसमें उसके अभियान गिनाए गए हैं। आलोचनात्मक पढ़िए: यह प्रशंसा के लिए लिखी गई।"
+     }
+    },
+    {
+     "text": {
+      "en": "Megasthenes' Indica.",
+      "hi": "मेगस्थनीज़ की इंडिका।"
+     },
+     "best": false,
+     "why": {
+      "en": "Megasthenes wrote about the Mauryas, six centuries earlier.",
+      "hi": "मेगस्थनीज़ ने लगभग छह सदी पहले मौर्यों के बारे में लिखा।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Did a southern king really stop Harsha?",
+    "hi": "क्या सचमुच किसी दक्षिणी राजा ने हर्ष को रोका?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "The Aihole inscription of Pulakeshin II, by Ravikirti.",
+      "hi": "रविकीर्ति का लिखा पुलकेशिन द्वितीय का ऐहोल अभिलेख।"
+     },
+     "best": true,
+     "why": {
+      "en": "It records Pulakeshin II's victory over Harsha.",
+      "hi": "इसमें हर्ष पर पुलकेशिन द्वितीय की जीत दर्ज है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Banabhatta's Harshacharita.",
+      "hi": "बाणभट्ट का हर्षचरित।"
+     },
+     "best": false,
+     "why": {
+      "en": "Harsha's court poet is unlikely to record his defeat.",
+      "hi": "हर्ष का दरबारी कवि उसकी हार दर्ज करे, इसकी संभावना कम है।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "Ask who wrote it, when and why. Inscriptions are contemporary but often written to praise; read them against other sources.",
+  "hi": "पूछिए किसने, कब और क्यों लिखा। अभिलेख समकालीन होते हैं पर अक्सर प्रशंसा के लिए लिखे जाते हैं; उन्हें दूसरे स्रोतों से मिलाकर पढ़िए।"
+ },
+ "sources": [
+  "NCERT Class 12, Themes in Indian History I, ch. 2 'Kings, Farmers and Towns'",
+  "NCERT Class 6, Our Pasts I, ch. 'New Empires and Kingdoms'"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

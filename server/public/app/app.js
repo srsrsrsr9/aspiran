@@ -24,6 +24,7 @@ import * as X from "./explore.js";
 import * as BR from "./brief.js";
 import * as VINE from "./vine.js";
 import * as TRY from "./try.js";
+import * as IT from "./interactives.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -319,7 +320,7 @@ const PREP_OF = { try: "learn", skeletons: "practice", cases: "practice", csat: 
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 // "Try one topic" (try.js) too: one whole syllabus topic, open to anyone.
-const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk", "try"]);
+const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk", "try", "tryit"]);
 
 function route() {
   const [name, ...rest] = (location.hash.slice(1) || "adda").split("/");
@@ -3604,6 +3605,7 @@ function viewShelf() {
     ["#thinker", "Thinker of the week", "One idea, where it comes from, and how to use it in an answer."],
     ["#routine", "Routine builder", "A week that fits you, in blocks."],
     ["#calm", "Calm", "Breathing and grounding, with sound off until you press it."]];
+  if (libraryOf("interactive").length) tools.push(["#tryit", "Try it yourself", "Short hands-on pieces from the Syllabus in a minute videos: decide, order, sort, match. Nothing is scored."]);
   return h("div.col", h("h1", "Free Shelf"), h("p.muted", "Free, no card needed. These work without an account, and nothing you type here leaves this browser."),
     tools.map(([href, t, s]) => h("a.card.link", { href }, h("div.row.between", h("div", h("strong", t), h("div.small.muted", s)), h("span", "→")))));
 }
@@ -4009,11 +4011,12 @@ function viewRoutine() {
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
 TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false) });
 BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud });
+IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Auth.signedIn() });
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu,
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
-  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch,
+  skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch, tryit: IT.viewTryIt,
   learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,

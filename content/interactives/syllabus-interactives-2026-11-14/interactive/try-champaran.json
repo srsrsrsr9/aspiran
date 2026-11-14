@@ -1,0 +1,113 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-champaran",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-12",
+ "episode": "champaran",
+ "episodeN": 210,
+ "episodeTitle": "Gandhi's first Indian satyagraha was for indigo farmers",
+ "node": "hist2-9",
+ "paper": {
+  "en": "History optional, Paper II",
+  "hi": "इतिहास वैकल्पिक, पेपर II"
+ },
+ "free": false,
+ "title": {
+  "en": "Champaran, 1917",
+  "hi": "चंपारण, 1917"
+ },
+ "prompt": {
+  "en": "You are in Gandhi's place. Decide, then see what he did.",
+  "hi": "आप गांधी की जगह हैं। तय कीजिए, फिर देखिए उन्होंने क्या किया।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "You've come to look into the indigo farmers' complaints. The district magistrate orders you to leave Champaran.",
+    "hi": "आप नील किसानों की शिकायतें देखने आए हैं। ज़िला मजिस्ट्रेट आपको चंपारण छोड़ने का आदेश देता है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Leave quietly, and write to the newspapers.",
+      "hi": "चुपचाप चले जाइए, और अख़बारों को लिखिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "Gandhi didn't leave.",
+      "hi": "गांधी नहीं गए।"
+     }
+    },
+    {
+     "text": {
+      "en": "Tell the court you will disobey the order and accept the penalty.",
+      "hi": "अदालत से कहिए कि आप आदेश नहीं मानेंगे और सज़ा स्वीकार करेंगे।"
+     },
+     "best": true,
+     "why": {
+      "en": "This is what he did. The case against him was withdrawn.",
+      "hi": "उन्होंने यही किया। उन पर मुक़दमा वापस ले लिया गया।"
+     }
+    },
+    {
+     "text": {
+      "en": "Go into hiding and keep working.",
+      "hi": "छिपकर काम करते रहिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "Satyagraha was open: break the unjust order publicly and take the consequence.",
+      "hi": "सत्याग्रह खुला था: अन्यायपूर्ण आदेश सबके सामने तोड़िए और परिणाम स्वीकार कीजिए।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "You can stay. What do you do first?",
+    "hi": "आप रुक सकते हैं। पहले क्या करेंगे?"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Record the peasants' statements, one by one.",
+      "hi": "किसानों के बयान, एक-एक कर, दर्ज कीजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "Gandhi and his colleagues, Rajendra Prasad among them, took thousands of statements. The evidence led to an inquiry committee with Gandhi as a member.",
+      "hi": "गांधी और उनके साथियों, राजेंद्र प्रसाद समेत, ने हज़ारों बयान लिए। इन सबूतों से एक जाँच समिति बनी जिसमें गांधी सदस्य थे।"
+     }
+    },
+    {
+     "text": {
+      "en": "Call a strike across Bihar.",
+      "hi": "पूरे बिहार में हड़ताल बुलाइए।"
+     },
+     "best": false,
+     "why": {
+      "en": "He began with facts, not a mass strike.",
+      "hi": "उन्होंने तथ्यों से शुरुआत की, आम हड़ताल से नहीं।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "Champaran was Gandhi's first satyagraha in India. The Champaran Agrarian Act (1918) ended the tinkathia system of forced indigo planting.",
+  "hi": "चंपारण भारत में गांधी का पहला सत्याग्रह था। चंपारण कृषि अधिनियम (1918) ने ज़बरन नील बोने की तिनकठिया प्रथा ख़त्म की।"
+ },
+ "sources": [
+  "NCERT Class 12, Themes in Indian History III, ch. 13 'Mahatma Gandhi and the Nationalist Movement'",
+  "M. K. Gandhi, An Autobiography or The Story of My Experiments with Truth, Part V"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

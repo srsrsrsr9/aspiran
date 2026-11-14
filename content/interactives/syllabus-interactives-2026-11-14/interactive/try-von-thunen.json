@@ -1,0 +1,132 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-von-thunen",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-09",
+ "episode": "von-thunen",
+ "episodeN": 131,
+ "episodeTitle": "Crops form rings around a city",
+ "node": "geog1-7",
+ "paper": {
+  "en": "Geography optional",
+  "hi": "भूगोल वैकल्पिक"
+ },
+ "free": false,
+ "title": {
+  "en": "What grows where?",
+  "hi": "कहाँ क्या उगेगा?"
+ },
+ "prompt": {
+  "en": "You farm on a flat plain around one market town, as in von Thünen's model (1826). Decide what each ring grows.",
+  "hi": "आप एक बाज़ार-शहर के चारों ओर समतल मैदान पर खेती करते हैं, जैसा फ़ॉन थ्यूनेन के मॉडल (1826) में है। तय कीजिए हर घेरे में क्या उगेगा।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "The ring right next to the town.",
+    "hi": "शहर से सटा पहला घेरा।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Fresh milk and vegetables.",
+      "hi": "ताज़ा दूध और सब्ज़ियाँ।"
+     },
+     "best": true,
+     "why": {
+      "en": "They spoil fast and are bulky for their value, so they're grown closest.",
+      "hi": "ये जल्दी ख़राब होते हैं, इसलिए सबसे पास उगाए जाते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Cattle ranching.",
+      "hi": "पशु-पालन के बड़े चरागाह।"
+     },
+     "best": false,
+     "why": {
+      "en": "Ranching needs lots of land and the animals can walk to market, so it goes furthest out.",
+      "hi": "चरागाह को बहुत ज़मीन चाहिए और पशु ख़ुद चलकर बाज़ार जा सकते हैं, इसलिए यह सबसे दूर।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "The second ring.",
+    "hi": "दूसरा घेरा।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Wheat.",
+      "hi": "गेहूँ।"
+     },
+     "best": false,
+     "why": {
+      "en": "Grain keeps well and can travel further. It comes next, in the third ring.",
+      "hi": "अनाज टिकता है और दूर जा सकता है। यह अगले, तीसरे घेरे में।"
+     }
+    },
+    {
+     "text": {
+      "en": "Forest, for firewood and timber.",
+      "hi": "जंगल, ईंधन की लकड़ी और इमारती लकड़ी के लिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "In 1826 towns burned wood, and wood is heavy to carry, so forest came second.",
+      "hi": "1826 में शहर लकड़ी जलाते थे, और लकड़ी ढोना भारी है, इसलिए जंगल दूसरे घेरे में।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "The outermost ring, before the wilderness.",
+    "hi": "सबसे बाहरी घेरा, बंजर से पहले।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Livestock ranching.",
+      "hi": "पशु-पालन।"
+     },
+     "best": true,
+     "why": {
+      "en": "Cheap land far out suits extensive grazing.",
+      "hi": "दूर की सस्ती ज़मीन चराई के लिए ठीक है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Market gardens.",
+      "hi": "सब्ज़ी के बाग़।"
+     },
+     "best": false,
+     "why": {
+      "en": "Too far for crops that spoil.",
+      "hi": "जल्दी ख़राब होने वाली फ़सलों के लिए बहुत दूर।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "Transport cost decides land use: perishable and heavy near the town, durable and extensive far away. The rings bend when a river or road cuts transport costs.",
+  "hi": "परिवहन लागत भूमि उपयोग तय करती है: जल्दी ख़राब होने वाला और भारी शहर के पास, टिकाऊ और फैलाव वाला दूर। नदी या सड़क से लागत घटे तो घेरे मुड़ जाते हैं।"
+ },
+ "sources": [
+  "J. H. von Thünen, The Isolated State (Der isolierte Staat), 1826",
+  "UPSC CSE notice, Geography optional Paper I: 'Models, theories and laws in human geography'"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

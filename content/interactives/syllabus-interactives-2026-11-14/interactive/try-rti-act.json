@@ -1,0 +1,131 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-rti-act",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-03",
+ "episode": "rti-act",
+ "episodeN": 29,
+ "episodeTitle": "Thirty days to answer, 48 hours if a life is at stake",
+ "node": "gs2-7",
+ "paper": {
+  "en": "GS2",
+  "hi": "GS2"
+ },
+ "free": true,
+ "title": {
+  "en": "You're the information officer",
+  "hi": "आप सूचना अधिकारी हैं"
+ },
+ "prompt": {
+  "en": "Three requests reach your desk under the RTI Act. Decide each one.",
+  "hi": "RTI अधिनियम के तहत तीन आवेदन आपकी मेज़ पर हैं। हर एक पर फ़ैसला कीजिए।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "A request asks about a detained man's whereabouts. His family fears for his life.",
+    "hi": "एक आवेदन में हिरासत में लिए गए व्यक्ति के बारे में पूछा गया है। परिवार को उसकी जान का डर है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Reply within 48 hours.",
+      "hi": "48 घंटे में जवाब दीजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "Section 7(1): where information concerns the life or liberty of a person, it must be given within 48 hours.",
+      "hi": "धारा 7(1): जहाँ सूचना किसी व्यक्ति के जीवन या स्वतंत्रता से जुड़ी हो, 48 घंटे में देनी होती है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Reply within 30 days, like any request.",
+      "hi": "बाक़ी आवेदनों की तरह 30 दिन में जवाब दीजिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "30 days is the normal limit, but life or liberty cuts it to 48 hours.",
+      "hi": "सामान्य सीमा 30 दिन है, पर जीवन या स्वतंत्रता के मामले में यह 48 घंटे है।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "An ordinary request about road repair spending arrives through an Assistant PIO at a sub-office.",
+    "hi": "सड़क मरम्मत के ख़र्च पर एक सामान्य आवेदन उप-कार्यालय के सहायक लोक सूचना अधिकारी के ज़रिए आया है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "30 days.",
+      "hi": "30 दिन।"
+     },
+     "best": false,
+     "why": {
+      "en": "Close, but routing through an Assistant PIO adds five days.",
+      "hi": "क़रीब है, पर सहायक अधिकारी के ज़रिए आने पर पाँच दिन और जुड़ते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "35 days.",
+      "hi": "35 दिन।"
+     },
+     "best": true,
+     "why": {
+      "en": "30 days plus 5 when the request comes through an Assistant PIO (sections 5(2) and 7(1)).",
+      "hi": "30 दिन, और सहायक अधिकारी के ज़रिए आने पर 5 दिन और (धारा 5(2) और 7(1))।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "A request asks for the deployment plan of troops on a border.",
+    "hi": "एक आवेदन में सीमा पर सैनिकों की तैनाती योजना माँगी गई है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Refuse in writing, citing Section 8(1)(a), with reasons and the appeal route.",
+      "hi": "धारा 8(1)(a) का हवाला देकर, कारण और अपील का रास्ता बताते हुए लिखित में मना कीजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "Information that would harm security can be withheld, but the refusal must give reasons and say how to appeal.",
+      "hi": "सुरक्षा को नुक़सान पहुँचाने वाली सूचना रोकी जा सकती है, पर मना करते समय कारण और अपील का तरीक़ा बताना ज़रूरी है।"
+     }
+    },
+    {
+     "text": {
+      "en": "Ignore it; it's obviously secret.",
+      "hi": "अनदेखा कर दीजिए; यह तो साफ़ गोपनीय है।"
+     },
+     "best": false,
+     "why": {
+      "en": "Silence counts as a refusal and can be penalised. Exemptions must be used openly.",
+      "hi": "चुप रहना भी इनकार माना जाता है और उस पर जुर्माना हो सकता है। छूट खुलकर लागू करनी होती है।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "30 days is the rule; 48 hours for life or liberty; 5 days more through an Assistant PIO; and every refusal needs reasons.",
+  "hi": "नियम 30 दिन का है; जीवन या स्वतंत्रता के लिए 48 घंटे; सहायक अधिकारी के ज़रिए 5 दिन और; और हर इनकार के साथ कारण ज़रूरी।"
+ },
+ "sources": [
+  "Right to Information Act, 2005, sections 5, 7 and 8 (rti.gov.in)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

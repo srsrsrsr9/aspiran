@@ -1,0 +1,124 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-csat-communication",
+ "type": "decide",
+ "typeName": {
+  "en": "You decide",
+  "hi": "आप तय करें"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-01",
+ "episode": "csat-communication",
+ "episodeN": 13,
+ "episodeTitle": "The best answer is calm, honest and practical",
+ "node": "csat-6",
+ "paper": {
+  "en": "Prelims GS I and CSAT",
+  "hi": "प्रारंभिक GS I और CSAT"
+ },
+ "free": true,
+ "title": {
+  "en": "At the help desk",
+  "hi": "हेल्प डेस्क पर"
+ },
+ "prompt": {
+  "en": "Two moments from a public office. Pick the response you'd give.",
+  "hi": "एक सरकारी दफ़्तर के दो पल। आप क्या जवाब देंगे, चुनिए।"
+ },
+ "rounds": [
+  {
+   "situation": {
+    "en": "A farmer has come to your counter for the third time about a delayed payment. He raises his voice.",
+    "hi": "एक किसान रुके हुए भुगतान के लिए तीसरी बार आपकी खिड़की पर आया है। वह ऊँची आवाज़ में बोल रहा है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Tell him to calm down or leave the office.",
+      "hi": "उससे कहिए कि शांत हो जाए या दफ़्तर से चला जाए।"
+     },
+     "best": false,
+     "why": {
+      "en": "This ends the shouting but not the problem, and he'll be back a fourth time.",
+      "hi": "चिल्लाना रुकेगा पर समस्या नहीं, और वह चौथी बार आएगा।"
+     }
+    },
+    {
+     "text": {
+      "en": "Listen, say sorry for the delay, open his file with him and give a date you can keep.",
+      "hi": "सुनिए, देरी के लिए खेद जताइए, उसके सामने फ़ाइल खोलिए और ऐसी तारीख़ दीजिए जिसे निभा सकें।"
+     },
+     "best": true,
+     "why": {
+      "en": "Calm, honest and practical: you take the feeling seriously and do something about the cause.",
+      "hi": "शांत, ईमानदार और व्यावहारिक: आप उसकी नाराज़गी को गंभीरता से लेते हैं और कारण पर काम करते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Explain that payments are handled by another section.",
+      "hi": "बताइए कि भुगतान दूसरा विभाग देखता है।"
+     },
+     "best": false,
+     "why": {
+      "en": "It may be true, but passing him on without helping is the reason he's angry.",
+      "hi": "शायद सच हो, पर बिना मदद आगे भेज देना ही उसके ग़ुस्से की वजह है।"
+     }
+    }
+   ]
+  },
+  {
+   "situation": {
+    "en": "Your senior asks you to sign a register saying a site inspection was done. It wasn't.",
+    "hi": "आपके वरिष्ठ कहते हैं कि रजिस्टर में लिख दें कि स्थल निरीक्षण हो गया। हुआ नहीं है।"
+   },
+   "options": [
+    {
+     "text": {
+      "en": "Sign it. The senior takes responsibility.",
+      "hi": "दस्तख़त कर दीजिए। ज़िम्मेदारी वरिष्ठ की है।"
+     },
+     "best": false,
+     "why": {
+      "en": "Your signature is your statement. A false record stays false whoever asked for it.",
+      "hi": "दस्तख़त आपका अपना बयान है। झूठा रिकॉर्ड झूठा ही रहता है, चाहे किसी ने भी कहा हो।"
+     }
+    },
+    {
+     "text": {
+      "en": "Politely decline, and offer to do the inspection today.",
+      "hi": "विनम्रता से मना कीजिए और आज ही निरीक्षण करने की पेशकश कीजिए।"
+     },
+     "best": true,
+     "why": {
+      "en": "You refuse the wrong act without a fight, and you solve the senior's real problem.",
+      "hi": "आप बिना टकराव ग़लत काम से मना करते हैं और वरिष्ठ की असली समस्या भी हल करते हैं।"
+     }
+    },
+    {
+     "text": {
+      "en": "Sign it, but tell a colleague what happened.",
+      "hi": "दस्तख़त कर दीजिए, पर किसी साथी को बता दीजिए।"
+     },
+     "best": false,
+     "why": {
+      "en": "Telling someone doesn't undo a false record.",
+      "hi": "किसी को बताने से झूठा रिकॉर्ड सही नहीं हो जाता।"
+     }
+    }
+   ]
+  }
+ ],
+ "takeaway": {
+  "en": "In these questions the best answer is usually calm, honest and practical: it neither gives in nor picks a fight, and it fixes the cause.",
+  "hi": "ऐसे सवालों में सबसे अच्छा उत्तर अक्सर शांत, ईमानदार और व्यावहारिक होता है: न झुकता है, न लड़ता है, और कारण को ठीक करता है।"
+ },
+ "sources": [
+  "UPSC CSE notice, CSAT syllabus: 'Interpersonal skills including communication skills', 'Decision making and problem solving'",
+  "Second Administrative Reforms Commission, 12th report 'Citizen Centric Administration' (2009)"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

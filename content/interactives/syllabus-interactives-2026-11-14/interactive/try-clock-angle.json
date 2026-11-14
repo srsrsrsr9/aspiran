@@ -1,0 +1,54 @@
+{
+ "schema": "aspiran/syllabus-interactive@1",
+ "id": "try-clock-angle",
+ "type": "dial",
+ "typeName": {
+  "en": "Dial",
+  "hi": "डायल"
+ },
+ "series": "syllabus-in-a-minute",
+ "week": "2000-01",
+ "episode": "clock-angle",
+ "episodeN": 11,
+ "episodeTitle": "One formula solves clock angles",
+ "node": "csat-4",
+ "paper": {
+  "en": "Prelims GS I and CSAT",
+  "hi": "प्रारंभिक GS I और CSAT"
+ },
+ "free": true,
+ "title": {
+  "en": "Set the angle",
+  "hi": "कोण बताइए"
+ },
+ "prompt": {
+  "en": "A clock shows 3:40. What is the smaller angle between the hour hand and the minute hand?",
+  "hi": "घड़ी में 3:40 बजे हैं। घंटे और मिनट की सुई के बीच छोटा कोण कितना है?"
+ },
+ "unit": {
+  "en": "degrees",
+  "hi": "डिग्री"
+ },
+ "min": 0,
+ "max": 180,
+ "step": 5,
+ "start": 90,
+ "answer": 130,
+ "near": 5,
+ "explain": {
+  "en": "Angle = |30 × H − 5.5 × M| = |30 × 3 − 5.5 × 40| = |90 − 220| = 130°. The hour hand moves too: half a degree every minute, which is where the 5.5 comes from (6 − 0.5).",
+  "hi": "कोण = |30 × H − 5.5 × M| = |30 × 3 − 5.5 × 40| = |90 − 220| = 130°। घंटे की सुई भी चलती है: हर मिनट आधा डिग्री, इसी से 5.5 आता है (6 − 0.5)।"
+ },
+ "takeaway": {
+  "en": "One formula, |30H − 5.5M|. If the answer is over 180°, subtract it from 360° for the smaller angle.",
+  "hi": "एक सूत्र, |30H − 5.5M|। उत्तर 180° से ज़्यादा आए तो छोटे कोण के लिए उसे 360° से घटाइए।"
+ },
+ "sources": [
+  "UPSC CSE notice, CSAT syllabus: 'General mental ability'",
+  "Worked from first principles: the minute hand turns 6° a minute, the hour hand 0.5°"
+ ],
+ "review": {
+  "status": "draft",
+  "note": "Written by Claude from the listed sources, 14 Nov 2026. Hindi by Claude. Not yet checked by a subject or Hindi editor."
+ }
+}

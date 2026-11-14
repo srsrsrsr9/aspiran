@@ -6,6 +6,8 @@
 // Same rules as the rest of Prep: no clock, no score kept anywhere but this device, every piece ends, and nothing
 // here speaks about feelings, ranks or results beyond the one line a welcome-back day carries.
 
+import * as IT from "./interactives.js";
+
 let C = null;
 /** app.js hands over its helpers once at start. */
 export function init(ctx) { C = ctx; }
@@ -333,8 +335,10 @@ export function viewWatch(arg) {
             : h("div", h("img", { src: w.base + e.poster, alt: "", style: { width: "100%", maxHeight: "50vh", objectFit: "cover", borderRadius: "12px", filter: "blur(6px)" } }),
                 h("p.small", "This one is in Plus, in the Android app. ", h("a", { href: "#upgrade" }, "See Plus →")));
           const quiz = (e.quiz ?? []).map((q) => C.mcqBlock({ question: q.q, options: q.options, answerIndex: q.answerIndex, explanation: q.why }, () => {}));
+          const it = IT.forEpisode(w.week, e.id);
           return h("div.card", h("strong", `${e.n}. ${e.title}`), seen[w.week + "/" + e.id] && h("span.small.muted", " · watched"), media,
             quiz.length && e.free && h("details", h("summary", "One question"), quiz),
+            it && h("a.btn", { href: "#tryit/" + it.id, style: { marginTop: "8px" } }, `Try it yourself: ${C.bi(it.title)} (${IT.typeName(it)})${IT.tried(it.id) ? " · tried" : ""}`),
             e.sources?.length && h("p.small.muted", "Sources: " + e.sources.map((s) => (typeof s === "string" ? s : s.name)).join("; ")));
         }),
         h("p.small.muted", "That's the set. Stop here, or pick another."), h("a.btn", { href: "#watch" }, "All videos"));
@@ -354,7 +358,9 @@ export function viewWatch(arg) {
       weeks.map((w) => row("#watch/" + w.week, w.poster, weekDates(w.week), `${w.scenes} videos · ${mins(w.seconds)}${w.free < w.scenes ? ` · ${w.free} free` : ""}`)),
       papers.length > 0 && h("h2", "Syllabus in a minute"),
       papers.length > 0 && h("p.small.muted", "One video for every topic in the UPSC syllabus, paper by paper."),
-      papers.map((w) => row("#watch/" + w.week, w.poster, (hi && w.titleHi) || w.title, `${w.scenes} videos · ${mins(w.seconds)}`)));
+      papers.map((w) => row("#watch/" + w.week, w.poster, (hi && w.titleHi) || w.title, `${w.scenes} videos · ${mins(w.seconds)}${IT.countFor(w.week) ? ` · ${IT.countFor(w.week)} to try` : ""}`)),
+      papers.length > 0 && C.libraryOf("interactive").length > 0 && h("a.card.link", { href: "#tryit" }, h("div.row.between",
+        h("div", h("strong", "Try it yourself"), h("div.small.muted", "Hands-on pieces that go with these videos: decide, order, sort, match, statements, dials.")), h("span", "→"))));
   });
   return box;
 }

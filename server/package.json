@@ -30,6 +30,7 @@
     "test:ca": "node test/ca.mjs",
     "test:pyq": "node --import ./test/dev-auth.mjs test/pyq.mjs",
     "test:try": "node test/try.mjs",
+    "test:interactives": "node --import ./test/dev-auth.mjs test/interactives.mjs",
     "test:all": "zsh scripts/test-all.sh",
     "check:schema": "zsh scripts/check-schema.sh"
   },
