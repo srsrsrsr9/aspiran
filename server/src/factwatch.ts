@@ -6,16 +6,16 @@ import { ensureSchema, recordVersion } from "./staff";
 
 /**
  * Fact watch: the one daily job whose only work is to check facts in our content that change over time (the
- * Supreme Court's strength, RBI's reserve ratios, helpline numbers...) and update them.
+ * Supreme Court's strength, RBI's reserve ratios, the inflation target...) and update them.
  *
  * Each watched fact names the value our content uses, one source page, and the exact phrases the value appears in.
- * Every morning (05:30 IST) the job reads each source. A "contains" fact is a plain text check (a helpline number is
+ * Every morning (05:30 IST) the job reads each source. A "contains" fact is a plain text check (a number is
  * still on its own site). An "ask" fact goes to Groq, which must answer with the value and the sentence it read it
  * in; the sentence has to be on the page and contain the value, or the answer is ignored.
  *
  * A new value is only acted on when two daily checks agree. Then every library item holding one of the fact's
  * phrases gets the new value written in (the old json is kept in content_versions), and the owner gets an email
- * listing what changed. Anything the job can't settle (a source down, a helpline number gone, an answer that doesn't
+ * listing what changed. Anything the job can't settle (a source down, a number gone, an answer that doesn't
  * hold up) is emailed as "needs a person" and nothing is changed. Admin: GET /admin/api/factwatch, POST .../run.
  */
 
@@ -77,14 +77,6 @@ export const FACTS: Fact[] = [
     question: "How many languages are listed in the Eighth Schedule of the Constitution of India now? Answer with the number only.",
     near: ["languages"],
     phrases: ["{v} scheduled languages", "{v} languages in the Eighth Schedule", "Eighth Schedule lists {v} languages"],
-  },
-  {
-    id: "vandrevala", label: "Vandrevala Foundation helpline", value: "9999 666 555", how: "contains",
-    source: "https://www.vandrevalafoundation.com/", phrases: [],
-  },
-  {
-    id: "icall", label: "iCall helpline", value: "9152987821", how: "contains",
-    source: "https://icallhelpline.org/", phrases: [],
   },
 ];
 

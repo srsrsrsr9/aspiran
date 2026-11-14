@@ -27,7 +27,7 @@ let r = await post({ messages: [{ role: "user", content: "I want to die" }] });
 assert.equal(r.status, 200);
 const care = await r.json();
 assert.equal(care.care, true);
-assert.ok(care.helplines.some((h) => h.number === "+91 9999 666 555"));
+assert.ok(care.helplines.some((h) => h.number === "112"));
 assert.equal(care.reply, undefined);
 step("distress gets helplines, never a model reply");
 

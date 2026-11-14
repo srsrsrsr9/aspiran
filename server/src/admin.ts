@@ -241,7 +241,7 @@ route("POST", /^reports\/(\d+)$/, "moderate", async ({ env, s, body, m }) => {
   // Report statuses: open → hidden | closed. Safety: open → reached_out → escalated → resolved.
   const next: Record<string, string> = { hide: "hidden", close: "closed", reopen: "open", reached_out: "reached_out", escalated: "escalated", resolved: "resolved", note: row.status };
   if (!(action in next)) return bad("action must be one of " + Object.keys(next).join(", "));
-  if (action === "escalated" && !note) return bad("Say who it was escalated to (for example, the Vandrevala helpline or a named counsellor).");
+  if (action === "escalated" && !note) return bad("Say who it was escalated to (for example, a named counsellor or emergency services).");
   if (action === "hide") await podCall(env, row.pod_id, "hide", undefined, { id: row.message_id });
   if (note || action !== "note") notes.push({ at: new Date().toISOString(), by: label(s), action, note });
   await env.DB.prepare("UPDATE reports SET status = ?, notes = ?, handled_by = ?, updated_at = ? WHERE id = ?")
@@ -251,7 +251,7 @@ route("POST", /^reports\/(\d+)$/, "moderate", async ({ env, s, body, m }) => {
 route("POST", /^reports\/(\d+)\/care$/, "safety", async ({ env, s, body, m }) => {
   const row = await env.DB.prepare("SELECT * FROM reports WHERE id = ?").bind(Number(m[1])).first<any>();
   if (!row?.member_id) return bad("This alert has no member to write to (older alerts, or the member was erased).", 404);
-  const text = String(body.text ?? "").trim() || `Hi, this is the Aspiran care team. We saw your message and we're here. If things feel heavy, the Vandrevala Foundation helpline is free and open all day: call or WhatsApp 9999 666 555. In an emergency, call 112.`;
+  const text = String(body.text ?? "").trim() || `Hi, this is the Aspiran care team. We saw your message and we're here. If things feel heavy, please talk to someone you trust today. In an emergency, call 112.`;
   const r = await podCall(env, row.pod_id, "care", row.member_id, { text, from: "Aspiran care team" }).then((x) => x.json<{ delivered: boolean }>());
   const notes = JSON.parse(row.notes ?? "[]");
   notes.push({ at: new Date().toISOString(), by: label(s), action: "care note", note: r.delivered ? "Sent; they're online" : "Sent; they'll see it next time they open their pod" });

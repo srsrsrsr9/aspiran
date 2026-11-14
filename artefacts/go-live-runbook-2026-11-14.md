@@ -1,6 +1,6 @@
 # Aspiran go-live: what only you can do (14 Nov 2026)
 
-Everything else is live: server version 35066e4a (14 Nov), 1,175 content items switched on, the free topic demo
+Everything else is live: server version f5e87433 (14 Nov), 1,175 content items switched on, the free topic demo
 working again, the daily fact watch running at 05:30 IST. These steps need your accounts, keys or phone.
 Do them in order. Terminal steps are for macOS Terminal (zsh), one command at a time.
 
@@ -50,33 +50,25 @@ npx wrangler secret put CASHFREE_SECRET_KEY --env production
 You decided on 1 Nov to offer Google sign-in only. It is still on live. Go to Admin → Flags and switch
 **password_login** off. Success: the app's sign-in screen shows only "Continue with Google".
 
-## 4. A support contact for blocked accounts (2 min)
+## 4. Support contact: done
 
-When an account is switched off, the app says who to write to. That address is empty now. Reply to Claude with the
-email to show (for example support@aspiran.in). Claude sets it and deploys.
+Set to hello@aspiran.in on 14 Nov and deployed. Make sure that inbox is read daily.
 
-## 5. Android 0.5.2 (version code 10)
+## 5. Android 0.5.3 (version code 11)
 
-This version wraps the action buttons on small screens and shows Vandrevala and iCall instead of Tele MANAS.
+This version wraps the action buttons on small screens and has no helpline numbers: Need to talk and Close the day offer
+only "Call Emergency 112" (your decision, 14 Nov).
 
 1. Android Studio → Build → Generate Signed App Bundle → `release`, with your `upload.jks`.
 2. Play Console → App content → **Data safety**: declare "App interactions" and "Crash logs" as collected for
    Analytics, processed by a service provider (PostHog), and that users can opt out (Me → Privacy). PostHog has been
    in the app since version 8, so the form must say this before you upload.
 3. Play Console → Testing → Internal testing → Create release → upload the `.aab` → Roll out.
-4. Install it from the testing link on your phone. Check that the helpline list shows Vandrevala and iCall, and that the
+4. Install it from the testing link on your phone. Check that Need to talk shows only "Call Emergency 112", and that the
    buttons on a long note wrap instead of breaking into single letters.
 5. When you're happy: Production → Create release → choose the same bundle.
 
-## 6. Ring the two helplines once (5 min)
-
-The app now gives these numbers to anyone in distress. Check that both answer:
-- Vandrevala Foundation: 9999 666 555 (24 hours, calls and WhatsApp)
-- iCall (TISS): 9152987821 (Mon–Sat, 10:00–20:00)
-
-If either doesn't answer or has changed, tell Claude. The fact watch also checks both websites every morning.
-
-## 7. Tomorrow after 05:30 IST: look at the fact watch (1 min)
+## 6. Tomorrow after 05:30 IST: look at the fact watch (1 min)
 
 Admin → Content → **Fact watch**. Each fact shows "same", "candidate" (a new value seen once; it changes the
 notes only if it shows again the next day) or "needs a person". "Needs a person" usually means a source website

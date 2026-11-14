@@ -1,7 +1,7 @@
 // The daily fact watch (src/factwatch.ts) against a running local server in dev mode: the source pages and the AI's
 // replies are handed in, so no network or AI key is needed. One new value is only a candidate; the same value on a
 // second day rewrites the content (the old text kept as a version); a quote that isn't on the page is ignored; a
-// helpline number missing from its site needs a person.   EDITOR_TOKEN=... node test/factwatch.mjs
+// source that can't be opened needs a person.   EDITOR_TOKEN=... node test/factwatch.mjs
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
@@ -40,7 +40,7 @@ step("a note with the Supreme Court's strength is in the library");
 
 const W = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&titles=Supreme_Court_of_India";
 const page = "The Supreme Court of India has a sanctioned strength of 40 judges including the Chief Justice of India.";
-const pages = { [W]: page, "https://www.vandrevalafoundation.com/": "Call us on 9999 666 555, any time.", "https://icallhelpline.org/": "We have moved." };
+const pages = { [W]: page };
 const answers = { "sc-strength": JSON.stringify({ value: "40", quote: page }) };
 const run = (body) => call("/admin/api/factwatch/run", { method: "POST", body: { pages, ...body } });
 const by = (r) => Object.fromEntries(r.data.results.map((o) => [o.id, o]));
@@ -48,8 +48,6 @@ const by = (r) => Object.fromEntries(r.data.results.map((o) => [o.id, o]));
 let r = by(await run({ answers, today: "2026-11-14" }));
 assert.equal(r["sc-strength"].status, "candidate");
 assert.equal(r["sc-strength"].value, "38", "one day's reading changes nothing");
-assert.equal(r.vandrevala.status, "same");
-assert.equal(r.icall.status, "needs-person", "a helpline number gone from its site needs a person");
 assert.equal(r.crr.status, "needs-person", "a source that can't be opened needs a person");
 step("a new value is only a candidate on the first day");
 

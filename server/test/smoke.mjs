@@ -89,7 +89,7 @@ step("study room start and join");
 
 arjun.send({ type: "say", text: "honestly I want to die, nothing is working" });
 const care = await arjun.next((e) => e.type === "care");
-assert.ok(care.helplines.some((h) => h.number === "+91 9999 666 555"));
+assert.ok(care.helplines.some((h) => h.number === "112"));
 step("Guardian sends the writer a private care message");
 
 meera.send({ type: "report", id: got.message.id, reason: "test" });

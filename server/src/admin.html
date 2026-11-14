@@ -389,7 +389,7 @@ views.safety = async () => {
   } }, label);
   return [h("h2", {}, "Safety queue"),
     h("p.lead", {}, "Messages the Guardian flagged as possible distress, oldest first. The member already saw the helplines privately. Nothing was said in the pod. Reach out, escalate if there's risk, and write down what you did."),
-    h("div.helplines", {}, h("b", {}, "Helplines: "), d.helplines.map((x) => `${x.name} ${x.number}`).join(" · "), h("div.muted", {}, "If someone is in immediate danger, call 112.")),
+    h("div.helplines", {}, h("b", {}, "Emergency: "), d.helplines.map((x) => `${x.name} ${x.number}`).join(" · "), h("div.muted", {}, "If someone is in immediate danger, call 112.")),
     h("label.row", {}, h("input", { type: "checkbox", checked: all, onchange: (e) => { views.safety.all = e.target.checked; show("safety"); } }), "Show resolved alerts too"),
     d.reports.length ? d.reports.map((r) => {
       const care = h("textarea", { rows: 3, placeholder: "Leave empty to send the standard care note with the helplines" });
@@ -401,7 +401,7 @@ views.safety = async () => {
             h("button.primary", { onclick: () => act(() => api(`reports/${r.id}/care`, { body: { text: care.value } }), (x) => (x.delivered ? "Sent; they're online now" : "Sent; they'll see it when they next open their pod")) }, "Send privately")) : null,
           h("div.row", { style: "margin-top:8px" },
             step(r, "reached_out", "Mark reached out"),
-            step(r, "escalated", "Escalate…", "Who did you escalate to, and how? (for example: called the Vandrevala helpline 9999 666 555 with the member's consent)"),
+            step(r, "escalated", "Escalate…", "Who did you escalate to, and how? (for example: a named counsellor, with the member's consent)"),
             step(r, "note", "Add a note…", "Note"),
             step(r, "resolved", "Resolve…", "What was the outcome?"))] : null);
     }) : h("div.card.muted", {}, "No open alerts."),

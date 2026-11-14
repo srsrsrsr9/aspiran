@@ -24,7 +24,7 @@ fun NeedToTalkSheet(onDial: (String) -> Unit, onDismiss: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text("Need to talk? · किसी से बात करनी है?", style = MaterialTheme.typography.titleLarge)
-            Text("Free, confidential, any time.", style = MaterialTheme.typography.bodyMedium)
+            Text("Talk to someone you trust today. In an emergency, call 112.", style = MaterialTheme.typography.bodyMedium)
             Helplines.all.forEach { h ->
                 OutlinedButton(onClick = { onDial(h.dial) }, modifier = Modifier.fillMaxWidth()) { Text("Call ${h.label}") }
             }
