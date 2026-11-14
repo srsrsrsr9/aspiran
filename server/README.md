@@ -228,14 +228,38 @@ Nothing reaches members until an editor approves it on the desk. Editors have 05
 to review, or can press Publish on the desk themselves.
 English and Hindi are approved separately, by their own editors.
 
+## Chai: three cards a day
+
+The brief holds **three cards** (`CHAI_CARDS` in `src/desk.ts`; "Three cards a day. Not three hundred pages."). The
+Desk can approve more; Publish sends three. Cards an editor gave a Position go first, in that order; the other
+places go to the best approved cards, taking a GS paper the brief doesn't have yet whenever there is one, so a usual
+day is one GS1, one GS2, one GS3. The automatic Chai (`chai_auto`, off unless the owner switches it on) fills up to
+three the same way, with the same checks as before. Briefs published before 14 Nov 2026 keep their 4 to 7 cards.
+After the last card both apps say "That's today's Chai. It ends." Tests: `npm run test:chai`.
+
 ## Feeds
 
-- RBI press releases: working.
-- PIB: off. It refuses requests from a bot that names itself honestly; we don't disguise ours.
-  Needs PIB's permission, or reading individual ministry pages instead.
-- PRS: off. The feed address was a 404; find the current one before turning it on.
+Checked 14 Nov 2026 (`src/sources.ts`). Each morning up to 12 drafts are queued, spread across the papers.
 
-Watch the server log for "fetched 0 items": feed addresses change without notice.
+| Source | Paper | How | Status |
+|---|---|---|---|
+| RBI press releases | GS3 Economy | RSS | on |
+| PRS Legislative Research, bill tracker | GS2 Polity | press page (no feed) | on |
+| UN News, Asia and the Pacific | GS2 International relations | RSS | on |
+| ISRO press releases | GS3 Science and technology | press page (no feed) | on |
+| UN News, climate | GS3 Environment | RSS | on |
+| NASA Earth Observatory | GS1 Geography | RSS | on |
+| UNESCO World Heritage news | GS1 Art and culture | RSS (headline and feed summary only: story pages refuse bots) | on |
+| PIB, Supreme Court, MHA, MoHFW, MoES | | refuse any automated reader (403) | off: needs their permission |
+| MoEFCC, MEA | | press pages are built in the browser, nothing to read | off |
+| SEBI | | feed works, but it is recovery orders against named people | off |
+| IMD | | only a weather-warnings feed | off |
+
+We never disguise our reader. Watch the pipeline log for "fetched 0 items" or "failed": addresses change without notice.
+
+Drafting: a reply that isn't whole JSON is repaired (code fences, stray commas, line breaks) and, failing that, asked
+for once more with more room; the "Name not in source" check finds a short name inside a longer one ("The Reserve
+Bank" in "Reserve Bank of India").
 
 ## Chotu: the on-phone model and the cloud fallback
 

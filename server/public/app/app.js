@@ -686,12 +686,14 @@ function mcqBlock(mcq, onAnswer) {
 
 function viewChai(arg) {
   const items = data.brief?.items ?? [];
-  if (!items.length) return h("div.col", h("h1", "Today's Chai"), h("p", "Today's cards aren't out yet. They come out at 7:00 after an editor checks them."));
+  if (!items.length) return h("div.col", h("h1", "Today's Chai"), h("p", "Today's three cards aren't out yet. They come out at 7:00."));
   const i = Math.min(Math.max(Number(arg) || 0, 0), items.length);
   if (i === items.length) {
     if (!dayState().done.includes("CHAI")) { M.track("chai_read", { cards: items.length }); rateAfter("chai"); }
     markDone("CHAI");
-    return h("div.col.center", h("h1", "That's today's Chai."), pauseLine("news-enough"), h("p.muted", `${items.length} cards. See you tomorrow morning.`),
+    // The trailer's promise, word for word: three cards, then it ends. Nothing more to scroll.
+    return h("div.col.center", h("h1", hindi() ? "आज की चाय बस इतनी। यहीं ख़त्म।" : "That's today's Chai. It ends."), pauseLine("news-enough"),
+      h("p.muted", hindi() ? `${items.length} कार्ड। कल सुबह फिर मिलेंगे।` : `${items.length} cards. See you tomorrow morning.`),
       h("div.row", { style: { justifyContent: "center" } }, h("a.btn.primary", { href: "#prelims" }, "Prelims practice"), h("a.btn", { href: "#today" }, "Today")));
   }
   const it = items[i], t = cardText(it);
@@ -729,7 +731,7 @@ function viewChai(arg) {
         it.tone !== "tragic" && keepButton(it, t),
         t.lang !== lang() && h("span.small.muted", tr("lang.cardMissing"))),
       it.highValue && it.tone !== "tragic" && !caseFile().some((x) => x.cardId === it.id) && h("p.small", `This one is worth keeping for ${/^GS[1-4]$/.test(it.gsPaper) ? it.gsPaper : "Mains"}.`)),
-    h("div.row.between", h("button", { disabled: i === 0, onclick: () => nav(i - 1) }, "← Back"), h("span.small.muted", "Arrow keys work too"), h("button.primary", { onclick: () => nav(i + 1) }, "Next →")));
+    h("div.row.between", h("button", { disabled: i === 0, onclick: () => nav(i - 1) }, "← Back"), h("span.small.muted", "Arrow keys work too"), h("button.primary", { onclick: () => nav(i + 1) }, i + 1 === items.length ? "Finish" : "Next →")));
 }
 
 // --- Practice: Prelims, Mains, mock papers -----------------------------------------------------

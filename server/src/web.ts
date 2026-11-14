@@ -50,7 +50,7 @@ Facts about Aspiran (use only these):
 - The whole syllabus is a garden: every line of UPSC's syllabus is a leaf. Each topic goes from Met (read once) to Can recall (passed a check a week or more later) to Can use (wrote an answer on it).
 - A short daily review that brings back old topics just before you would forget them. It ends every day; nothing piles up into guilt.
 - Mains answer writing from week two: a 2-minute skeleton drill, write by hand, mark it yourself first, then see the AI's marks next to yours, then rewrite the weakest part.
-- Chai: a few current-affairs cards a day, each tied to a syllabus topic, with "Keep for Mains" to save a usable example.
+- Chai: three current-affairs cards a day, then it ends, each tied to a syllabus topic, with "Keep for Mains" to save a usable example.
 - CSAT: a check in week one; extra practice only if you need it.
 - Your own space: notes (typed or spoken), a journal, your to-dos, and sleep. Aspiran doesn't touch it; it's yours.
 - No streaks, no leaderboards, no public scores, no rank predictions, no notifications that chase you. You are compared only with your own past self.

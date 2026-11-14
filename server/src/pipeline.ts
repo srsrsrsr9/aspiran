@@ -48,6 +48,35 @@ export function parseRss(xml: string, source: Source): FeedItem[] {
   return items;
 }
 
+/**
+ * A press page with no feed (PRS, ISRO): every link the source's pattern accepts, in page order (newest first on
+ * these pages), with its link text as the title. Links are made absolute against the page's own address.
+ */
+export function parseHtmlList(html: string, source: Source): FeedItem[] {
+  const items: FeedItem[] = [];
+  const seen = new Set<string>();
+  for (const m of html.matchAll(/<a\b[^>]*?href\s*=\s*"([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)) {
+    const href = decode(m[1]);
+    if (source.links && !source.links.test(href)) continue;
+    const title = stripHtml(m[2]);
+    if (title.length < 20) continue; // menus and "Read more"
+    let link: string;
+    try { link = new URL(href, source.url).toString(); } catch { continue; }
+    if (!/^https?:\/\//.test(link) || seen.has(link)) continue;
+    seen.add(link);
+    items.push({ source, title, link, description: "" });
+  }
+  return items;
+}
+
+/** The readable part of a story page: menus, headers, footers and side panels removed before the tags go. */
+export const articleText = (html: string) => {
+  const main = html.match(/<(main|article)\b[\s\S]*?<\/\1>/i)?.[0] ?? html;
+  const text = stripHtml(main.replace(/<(nav|header|footer|aside)\b[\s\S]*?<\/\1>/gi, " "));
+  // Some pages (RBI's) put the story inside an odd wrapper; if the trimming left almost nothing, keep the whole page.
+  return text.length >= 300 ? text : stripHtml(html);
+};
+
 async function fetchText(url: string, limit = 8000): Promise<string> {
   const res = await fetch(url, { headers: { "user-agent": "UPSC-Pods-NewsBot/0.1 (editorial pipeline)" }, cf: { cacheTtl: 300 } });
   if (!res.ok) throw new Error(`${res.status} ${url}`);
@@ -58,13 +87,19 @@ async function fetchText(url: string, limit = 8000): Promise<string> {
 
 export function score(item: { title: string; description: string; source: Source }) {
   const text = `${item.title} ${item.description}`.toLowerCase();
-  let best = { s: 0, gs: "GS2", topic: "Current affairs" };
+  // The source's own paper and topic get a head start (RBI is economy, ISRO is science, the Earth Observatory is
+  // geography): one stray word ("bill" in "Treasury Bills", "satellite" in a river story) doesn't move a card to
+  // another paper; two or more syllabus words for another topic do.
+  const HEAD_START = 3;
+  const src = item.source;
+  let best: { s: number; gs: string; topic: string } = { s: src.gs ? HEAD_START : 0, gs: src.gs ?? "GS2", topic: src.topic ?? "Current affairs" };
   let total = 0;
   for (const row of SYLLABUS) {
     const hits = row.words.filter((w) => text.includes(w)).length;
     const s = hits * row.weight;
     total += s;
-    if (s > best.s) best = { s, gs: row.gs, topic: row.topic };
+    const lean = s + (src.gs && row.topic === src.topic ? HEAD_START : 0);
+    if (lean > best.s) best = { s: lean, gs: row.gs, topic: row.topic };
   }
   return { score: total + (item.source.official ? 2 : 0), gs: best.gs, topic: best.topic };
 }
@@ -84,6 +119,35 @@ export function dedupe<T extends { title: string }>(items: T[]): T[] {
     if (!dup) kept.push({ item, w });
   }
   return kept.map((k) => k.item);
+}
+
+/** "GS2", "GS 2", "gs-2" and "GS-II" all read as "GS2"; anything else is "". */
+export function gsOf(v: unknown): string {
+  const m = String(v ?? "").toUpperCase().match(/GS\s*[-·]?\s*(IV|III|II|I|[1-4])\b/);
+  if (!m) return "";
+  return "GS" + (({ I: "1", II: "2", III: "3", IV: "4" } as Record<string, string>)[m[1]] ?? m[1]);
+}
+
+/**
+ * Takes up to n items, best first, spread across GS papers: the best of each paper in turn, then the next best of
+ * each, and so on. Items arrive sorted best first; their order within a paper is kept.
+ */
+export function spreadPick<T>(items: T[], n: number, paper: (t: T) => string): T[] {
+  const groups = new Map<string, T[]>();
+  for (const it of items) {
+    const k = paper(it) || "?";
+    if (!groups.has(k)) groups.set(k, []);
+    groups.get(k)!.push(it);
+  }
+  const out: T[] = [];
+  while (out.length < n && [...groups.values()].some((g) => g.length)) {
+    for (const g of groups.values()) {
+      if (out.length >= n) break;
+      const next = g.shift();
+      if (next !== undefined) out.push(next);
+    }
+  }
+  return out;
 }
 
 export function guessTone(text: string): Tone {
@@ -131,13 +195,57 @@ Return: {"tone","gsPaper","topic","examType":"prelims|mains|both","staticLink","
   ];
 }
 
-function firstJson(text: string): any {
-  try {
-    return JSON.parse(text);
-  } catch {
-    const m = text.match(/\{[\s\S]*\}/);
-    return m ? JSON.parse(m[0]) : null;
+/**
+ * The model's reply as an object. Models wrap JSON in code fences, add a line before or after it, leave a trailing
+ * comma, or put a raw line break inside a string; all of those are repaired here. Returns null (never throws) when
+ * there is no whole object, e.g. a reply cut off by the token limit, so the caller can ask again.
+ */
+export function firstJson(text: string): any {
+  if (!text) return null;
+  const t = text.replace(/^\uFEFF/, "").replace(/```(?:json)?/gi, "");
+  const tries: string[] = [t.trim()];
+  const start = t.indexOf("{");
+  if (start >= 0) {
+    // The first balanced {...}, walking the text so braces inside strings don't count.
+    let depth = 0, inStr = false, esc = false, end = -1;
+    for (let i = start; i < t.length; i++) {
+      const ch = t[i];
+      if (inStr) {
+        if (esc) esc = false;
+        else if (ch === "\\") esc = true;
+        else if (ch === '"') inStr = false;
+      } else if (ch === '"') inStr = true;
+      else if (ch === "{") depth++;
+      else if (ch === "}" && --depth === 0) { end = i; break; }
+    }
+    if (end > 0) tries.push(t.slice(start, end + 1));
   }
+  for (const c of tries) {
+    for (const v of [c, repairJson(c)]) {
+      try {
+        const out = JSON.parse(v);
+        if (out && typeof out === "object" && !Array.isArray(out)) return out;
+      } catch { /* next */ }
+    }
+  }
+  return null;
+}
+
+/** Trailing commas out; raw line breaks and tabs inside strings escaped. */
+function repairJson(s: string): string {
+  let out = "", inStr = false, esc = false;
+  for (const ch of s) {
+    if (inStr) {
+      if (esc) { esc = false; out += ch; continue; }
+      if (ch === "\\") { esc = true; out += ch; continue; }
+      if (ch === '"') inStr = false;
+      out += ch === "\n" ? "\\n" : ch === "\r" ? "" : ch === "\t" ? "\\t" : ch;
+    } else {
+      if (ch === '"') inStr = true;
+      out += ch;
+    }
+  }
+  return out.replace(/,\s*([}\]])/g, "$1");
 }
 
 const strList = (v: unknown, max = 6) =>
@@ -165,7 +273,7 @@ export function normalizeCard(raw: any, c: { id: string; title: string; sourceNa
   const card: any = {
     id: c.id,
     tone,
-    gsPaper: typeof raw?.gsPaper === "string" ? raw.gsPaper : c.gs,
+    gsPaper: gsOf(raw?.gsPaper) || c.gs, // "GS 3", "GS-III" and "GS3" all become "GS3"
     topic: typeof raw?.topic === "string" ? raw.topic : c.topic,
     examType: ["prelims", "mains", "both"].includes(raw?.examType) ? raw.examType : "both",
     staticLink: typeof raw?.staticLink === "string" ? raw.staticLink : "",
@@ -203,6 +311,22 @@ export function normalizeCard(raw: any, c: { id: string; title: string; sourceNa
   return { card, flags: [...flags, ...autoChecks(card, c.text)] };
 }
 
+// Words that start a sentence or a phrase but are not part of a name: "The Reserve Bank", "On Monday".
+const NAME_LEADS = new Set(["the", "a", "an", "this", "that", "these", "those", "its", "their", "on", "in", "at", "for", "from", "by", "with", "under", "after", "before", "during", "since", "while", "when", "and", "but", "both", "all", "each", "every", "india's", "indian"]);
+
+/**
+ * Is a capitalised name from the card in the source? "The Reserve Bank" is found in "Reserve Bank of India": words like
+ * "The" and "On" that only start a sentence are dropped, and the rest must appear as whole words, so a short name
+ * inside a longer one counts. A name made only of such words is not checked.
+ */
+export function nameInSource(name: string, srcLower: string): boolean {
+  const words = name.toLowerCase().split(/\s+/);
+  while (words.length && NAME_LEADS.has(words[0])) words.shift();
+  if (!words.length) return true;
+  const esc = words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s+");
+  return new RegExp(`(^|[^a-z])${esc}([^a-z]|$)`).test(srcLower);
+}
+
 /** Facts must come from the source; political summaries stay neutral. */
 export function autoChecks(card: any, sourceText: string): string[] {
   const flags: string[] = [];
@@ -212,7 +336,7 @@ export function autoChecks(card: any, sourceText: string): string[] {
     if (!src.includes(plain.toLowerCase())) flags.push(`Number not in source: ${n}`);
   }
   for (const name of new Set<string>(card.summary.match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) ?? [])) {
-    if (!src.includes(name.toLowerCase())) flags.push(`Name not in source: ${name}`);
+    if (!nameInSource(name, src)) flags.push(`Name not in source: ${name}`);
   }
   const lower = `${card.headline} ${card.summary}`.toLowerCase();
   for (const w of LOADED_WORDS) if (lower.includes(w)) flags.push(`Loaded word: "${w}"`);
@@ -220,17 +344,28 @@ export function autoChecks(card: any, sourceText: string): string[] {
   return flags;
 }
 
+/**
+ * One card from the model. About 1 in 10 replies used to fail to parse (cut off at the token limit by the Hindi half,
+ * or with a stray comma or line break). Now the reply is repaired where it can be, and if it still isn't a whole
+ * object the model is asked once more, with more room and no randomness. Throws only if both tries fail.
+ */
 async function draft(env: Env, item: FeedItem, text: string, gs: string, topic: string) {
   const c = await llmControls(env);
   const notes = await relevantNotes(env, `${item.title}\n${text.slice(0, 1000)}`);
-  const out = (await runAI(env, "draft", c.draftModel || DRAFT_MODEL, {
-    messages: prompt(item, text, notes, gs, topic),
-    response_format: { type: "json_object" },
-    max_tokens: c.maxTokens,
-    temperature: c.temperature,
-  })) as { response?: unknown };
-  const r = out.response;
-  return typeof r === "string" ? firstJson(r) : r;
+  const messages = prompt(item, text, notes, gs, topic);
+  const tries = [
+    { max_tokens: c.maxTokens, temperature: c.temperature },
+    { max_tokens: Math.min(Math.max(c.maxTokens * 2, 4000), 8000), temperature: 0 },
+  ];
+  let last = "";
+  for (const t of tries) {
+    const out = (await runAI(env, "draft", c.draftModel || DRAFT_MODEL, { messages, response_format: { type: "json_object" }, ...t })) as { response?: unknown };
+    const r = out.response;
+    const parsed = typeof r === "string" ? firstJson(r) : r && typeof r === "object" ? r : null;
+    if (parsed) return parsed;
+    last = typeof r === "string" ? r.slice(-60) : typeof r;
+  }
+  throw new Error(`reply was not valid JSON twice (ends: ${last})`);
 }
 
 async function guard(env: Env, summary: string): Promise<boolean> {
@@ -261,8 +396,11 @@ export interface CandidateInput {
 /** Draft one story into the editor queue. Used by the cron and by the desk's "add a story". */
 export async function addCandidate(env: Env, input: CandidateInput, day = istDay()) {
   const id = newId("c");
-  const s = score({ title: input.title, description: input.text, source: { name: input.sourceName, url: input.sourceUrl, official: true } });
-  const feedItem: FeedItem = { source: { name: input.sourceName, url: input.sourceUrl, official: true }, title: input.title, link: input.sourceUrl, description: "" };
+  // A known source lends its paper and topic (PRS is polity); an editor's own story is scored on its words alone.
+  const known = SOURCES.find((x) => x.name === input.sourceName);
+  const source: Source = { name: input.sourceName, url: input.sourceUrl, official: known?.official ?? true, gs: known?.gs, topic: known?.topic };
+  const s = score({ title: input.title, description: input.text, source });
+  const feedItem: FeedItem = { source, title: input.title, link: input.sourceUrl, description: "" };
   let card: any;
   let flags: string[];
   try {
@@ -286,7 +424,8 @@ export async function runPipeline(env: Env, day = istDay()) {
   const all: FeedItem[] = [];
   for (const source of SOURCES.filter((s) => s.enabled !== false)) {
     try {
-      const items = parseRss(await fetchText(source.url, 50_000), source);
+      const body = await fetchText(source.url, 50_000);
+      const items = (source.kind === "html" ? parseHtmlList(body, source) : parseRss(body, source)).slice(0, source.max ?? 10);
       log.push(`${source.name}: fetched ${items.length} items`);
       all.push(...items);
     } catch (e) {
@@ -298,13 +437,14 @@ export async function runPipeline(env: Env, day = istDay()) {
     const seen = await env.DB.prepare("SELECT 1 FROM seen WHERE url = ?").bind(item.link).first();
     if (!seen) unseen.push(item);
   }
-  const ranked = dedupe(unseen.map((i) => ({ ...i, ...score(i) })).sort((a, b) => b.score - a.score)).slice(0, KEEP);
+  // The day's drafts are spread across the papers, so the Desk (and the automatic Chai) can pick GS1, GS2 and GS3.
+  const ranked = spreadPick(dedupe(unseen.map((i) => ({ ...i, ...score(i) })).sort((a, b) => b.score - a.score)), KEEP, (i) => i.gs);
   await backfillEmbeddings(env);
 
   for (const item of ranked) {
     let text = item.description;
     try {
-      text = stripHtml(await fetchText(item.link)).slice(0, 6000) || text;
+      text = articleText(await fetchText(item.link)).slice(0, 6000) || text;
     } catch {
       // keep the feed description
     }
