@@ -1,6 +1,7 @@
 import { type Env, json, bad } from "./shared";
 import { bump, ensureSchema, sha256Hex } from "./staff";
 import { forgetAccount } from "./auth";
+import { forgetInstituteMember } from "./institutes";
 import { anonymiseStatements } from "./metrics";
 import { sweepPhotos } from "./rooms";
 
@@ -79,6 +80,7 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
   await env.DB.prepare("DELETE FROM interview_uses WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await env.DB.prepare("DELETE FROM pod_merge_optouts WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await sweepPhotos(env, { member: memberId }).catch(() => null);
+  await forgetInstituteMember(env, memberId).catch(() => {}); // coaching centres: their answers, doubts and messages
   await forgetAccount(env, memberId);
   await logRequest(env, "delete", memberId, via, by);
   await bump(env, "data_deletions");

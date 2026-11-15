@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Aspiran for coaching centres</title>
+<style>
+  /* Same look as /admin and /desk. --brand follows the institute's colour once it's set. */
+  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --brand-ink:#fff; --bar:#B5651D; --amber:#FCE8C3; --ok:#E3F1E1; --okInk:#2E7D32; --bad:#F8E1DE; --badInk:#B3261E; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --brand-ink:#1A1410; --bar:#E8A060; --amber:#4A3712; --ok:#22361F; --okInk:#8BD18F; --bad:#43201B; --badInk:#F2A49B; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
+  header { position:sticky; top:0; z-index:3; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0; color:var(--brand); display:flex; gap:10px; align-items:center; }
+  header h1 img { height:32px; width:32px; object-fit:contain; border-radius:6px; }
+  header .with { font-size:12px; color:var(--muted); font-weight:400; }
+  #who { margin-left:auto; font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center; }
+  .layout { display:grid; grid-template-columns:200px 1fr; max-width:1280px; margin:0 auto; }
+  nav { padding:12px 8px; position:sticky; top:56px; align-self:start; }
+  nav button { display:block; width:100%; text-align:left; border:0; background:none; padding:7px 10px; border-radius:8px; color:var(--ink); }
+  nav button.on { background:var(--amber); font-weight:600; }
+  nav .count { float:right; background:var(--badInk); color:#fff; border-radius:999px; font-size:11px; padding:0 7px; }
+  @media (max-width:800px) { .layout { grid-template-columns:1fr; } nav { position:static; display:flex; flex-wrap:wrap; gap:4px; } nav button { width:auto; } }
+  main { padding:16px; min-width:0; }
+  h2 { margin:0 0 4px; font-size:20px; } h3 { margin:16px 0 6px; font-size:16px; }
+  p.lead { margin:0 0 16px; color:var(--muted); }
+  input, textarea, select, button { font:inherit; color:inherit; }
+  input, textarea, select { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; max-width:100%; }
+  textarea { width:100%; min-height:90px; }
+  button { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:5px 12px; cursor:pointer; }
+  button.primary { background:var(--brand); border-color:var(--brand); color:var(--brand-ink); }
+  button.danger { border-color:var(--badInk); color:var(--badInk); }
+  button:disabled { opacity:.5; cursor:default; }
+  button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid var(--brand); outline-offset:2px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .between { justify-content:space-between; }
+  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-bottom:16px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
+  .tile .n { font-size:26px; font-weight:600; } .tile .l { font-size:13px; color:var(--muted); }
+  .tile.warn { border-color:var(--badInk); }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:6px 8px; border-top:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:500; font-size:12px; border-top:0; }
+  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .scroll { overflow-x:auto; }
+  .chip { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:0 8px; font-size:12px; color:var(--muted); margin-right:4px; }
+  .chip.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
+  .chip.bad { background:var(--bad); color:var(--badInk); border-color:transparent; }
+  .chip.warn { background:var(--amber); color:var(--ink); border-color:transparent; }
+  .chip.ai { background:var(--amber); color:var(--ink); border-color:transparent; font-weight:600; }
+  .muted { color:var(--muted); font-size:13px; }
+  .mono { font-family:ui-monospace, Consolas, monospace; }
+  .code { font:600 22px ui-monospace, Consolas, monospace; letter-spacing:2px; background:var(--amber); padding:6px 12px; border-radius:8px; display:inline-block; }
+  .quote { background:var(--bg); border-radius:8px; padding:8px 10px; margin:6px 0; white-space:pre-wrap; word-break:break-word; }
+  .msg { padding:6px 0; border-top:1px solid var(--line); }
+  .msg.hidden { opacity:.5; }
+  .bar { height:8px; background:var(--line); border-radius:4px; overflow:hidden; min-width:80px; }
+  .bar > span { display:block; height:100%; background:var(--bar); }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:12px; }
+  label.f { display:block; margin:8px 0 2px; font-size:13px; color:var(--muted); }
+  .banner { border-radius:8px; padding:8px 12px; margin:10px 0; font-size:14px; }
+  .banner.err { background:var(--bad); color:var(--badInk); }
+  .banner.ok { background:var(--ok); color:var(--okInk); }
+  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); display:none; z-index:9; width:min(560px, calc(100vw - 32px));
+    background:var(--card); border:1px solid var(--line); padding:10px 14px; border-radius:10px; font-size:14px; box-shadow:0 4px 18px rgba(0,0,0,.18); }
+  #toast.ok { background:var(--ok); color:var(--okInk); } #toast.err { background:var(--bad); color:var(--badInk); }
+  .signin { max-width:520px; margin:48px auto; }
+  .item { border-top:1px solid var(--line); padding:8px 0; display:grid; grid-template-columns:130px 110px 1fr auto; gap:8px; align-items:start; }
+  @media (max-width:700px) { .item { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Aspiran for coaching centres</h1>
+  <div id="who"></div>
+</header>
+<div class="layout" id="layout" hidden>
+  <nav id="nav" aria-label="Sections"></nav>
+  <main id="main"></main>
+</div>
+<div id="gate"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script type="module">
+import * as Auth from "/app/auth.js";
+import { NODES, PAPERS } from "/app/syllabus.js";
+
+// --- Small helpers (text is always set as text, never parsed as HTML) ---------------------------------------
+const $ = (s) => document.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const [name, ...cls] = tag.split(".");
+  const el = document.createElement(name || "div");
+  if (cls.length) el.className = cls.join(" ");
+  if (attrs && (typeof attrs !== "object" || attrs instanceof Node || Array.isArray(attrs))) { kids.unshift(attrs); attrs = null; }
+  for (const [k, v] of Object.entries(attrs ?? {})) {
+    if (v == null || v === false) continue;
+    if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else if (k === "value") el.value = v;
+    else if (k === "style" && typeof v === "object") Object.assign(el.style, v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat(Infinity)) if (kid != null && kid !== false) el.append(kid instanceof Node ? kid : String(kid));
+  return el;
+}
+const put = (el, ...kids) => el.replaceChildren(...kids.flat(Infinity).filter((k) => k != null && k !== false));
+let toastTimer;
+function toast(text, kind = "ok") { const t = $("#toast"); t.textContent = (kind === "ok" ? "✓ " : "⚠ ") + text; t.className = kind; t.style.display = "block"; clearTimeout(toastTimer); toastTimer = setTimeout(() => (t.style.display = "none"), 4500); }
+const day = (iso) => (iso ? new Date(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "never");
+const when = (iso) => (iso ? new Date(iso).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "");
+const todayIso = () => { const d = new Date(Date.now() + 5.5 * 3600_000); return d.toISOString().slice(0, 10); };
+const ROLE = { owner: "Owner", admin: "Admin", teacher: "Teacher", student: "Student" };
+const rank = (r) => ({ student: 1, teacher: 2, admin: 3, owner: 4 })[r] ?? 0;
+
+async function api(path, body, method) {
+  const t = await Auth.getToken();
+  const r = await fetch(path, { method: method ?? (body ? "POST" : "GET"), headers: { "content-type": "application/json", ...(t ? { authorization: "Bearer " + t } : {}) }, body: body ? JSON.stringify(body) : undefined });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(d.error ?? "Something went wrong. Try again."), { status: r.status });
+  return d;
+}
+const act = (fn) => async (e) => { const b = e?.currentTarget; if (b) b.disabled = true; try { await fn(e); } catch (err) { toast(err.message, "err"); } finally { if (b) b.disabled = false; } };
+
+/** A topic picker built from the same syllabus list as the app's garden. */
+function topicSelect(value = "", { blank = "No topic" } = {}) {
+  return h("select", { "aria-label": "Topic" }, h("option", { value: "" }, blank),
+    PAPERS.map((p) => h("optgroup", { label: p.short }, NODES.filter((n) => n.paper.id === p.id).map((n) => h("option", { value: n.id, selected: n.id === value }, n.name)))));
+}
+const topicName = (id) => NODES.find((n) => n.id === id)?.name ?? "";
+
+// --- Sign-in ------------------------------------------------------------------------------------------------
+let cfg = null, S = { tab: "overview" };
+async function boot() {
+  cfg = await fetch("/config").then((r) => r.json()).catch(() => null);
+  if (!cfg) { put($("#gate"), h("div.card.signin", "Couldn't reach Aspiran. Check your connection and reload.")); return; }
+  await Auth.init(cfg.auth);
+  if (!cfg.flags?.institutes) { showGate(h("div.card.signin", h("h2", "Not switched on yet"), h("p", "Aspiran for coaching centres isn't open on this server yet."), staffBox())); return; }
+  if (!Auth.signedIn()) return signInScreen();
+  await load();
+}
+function signInScreen() {
+  const email = h("input", { type: "email", placeholder: "you@example.com", "aria-label": "Email for a dev sign-in" });
+  showGate(h("div.card.signin", h("h2", "Sign in"), h("p.muted", "Use the same Aspiran account you use in the app. Your institute's admin gives you a code to join as a teacher."),
+    Auth.mode() === "dev"
+      ? h("div", h("p.muted", "Local server: a dev sign-in with any email."), h("div.row", email, h("button.primary", { onclick: act(async () => { Auth.devSignIn(email.value); await Auth.establish(); await load(); }) }, "Sign in")))
+      : Auth.mode() === "firebase" ? h("button.primary", { onclick: act(async () => { await Auth.signInGoogle(); await Auth.establish(); await load(); }) }, "Continue with Google")
+      : h("p", "Sign-in isn't set up on this server."),
+    staffBox()));
+}
+function showGate(node) { $("#layout").hidden = true; put($("#gate"), node); }
+
+/** Aspiran staff only: set up an institute and get the owner's one-time code (needs the admin key). */
+function staffBox() {
+  const key = h("input", { type: "password", placeholder: "Aspiran admin key", "aria-label": "Aspiran admin key", autocomplete: "off" });
+  const name = h("input", { type: "text", placeholder: "Institute name" }), city = h("input", { type: "text", placeholder: "City" });
+  const out = h("div");
+  const call = async (path, body) => {
+    const r = await fetch(path, { method: body ? "POST" : "GET", headers: { "content-type": "application/json", authorization: "Bearer " + key.value }, body: body ? JSON.stringify(body) : undefined });
+    const d = await r.json().catch(() => ({})); if (!r.ok) throw new Error(d.error ?? "Couldn't do that."); return d;
+  };
+  const list = act(async () => {
+    const d = await call("/admin/api/institutes");
+    put(out, !d.flagOn && h("p.banner.err", "The institutes flag is off on this server (Admin → Flags)."), h("table", h("tr", h("th", "Institute"), h("th", "City"), h("th.n", "Students"), h("th.n", "Staff"), h("th", "Status"), h("th")),
+      d.institutes.map((i) => h("tr", h("td", i.name), h("td", i.city ?? ""), h("td.n", i.students), h("td.n", i.staff), h("td", h("span.chip" + (i.status === "active" ? ".ok" : ".bad"), i.status)),
+        h("td", h("div.row", !i.owners && h("button", { onclick: act(async () => { const r = await call(`/admin/api/institutes/${i.id}/owner-code`, {}); toast("Owner code: " + r.ownerCode); }) }, "New owner code"),
+          h("button", { onclick: act(async () => { await call(`/admin/api/institutes/${i.id}/status`, { status: i.status === "active" ? "paused" : "active" }); list(); }) }, i.status === "active" ? "Pause" : "Resume")))))));
+  });
+  return h("details", { style: { marginTop: "24px" } }, h("summary", "Aspiran staff: set up an institute"),
+    h("p.muted", "Makes the institute and a one-time owner code (30 days). Give the code to the centre's head."),
+    key, h("div.row", { style: { marginTop: "8px" } }, name, city, h("button.primary", { onclick: act(async () => {
+      const d = await call("/admin/api/institutes", { name: name.value, city: city.value });
+      put(out, h("div.banner.ok", "Made. Owner code: ", h("span.code", d.ownerCode)));
+    }) }, "Create"), h("button", { onclick: list }, "List institutes")), out);
+}
+
+// --- Loading the institute -------------------------------------------------------------------------------------
+async function load() {
+  put($("#who"), h("span", Auth.session()?.label ?? ""), h("button", { onclick: act(async () => { await Auth.signOut(); location.reload(); }) }, "Sign out"));
+  let ov;
+  try { ov = await api("/inst/admin/overview"); }
+  catch (e) {
+    if (e.status === 404 || e.status === 403) return joinScreen(e.message);
+    throw e;
+  }
+  S.ov = ov;
+  applyBrand(ov.institute);
+  $("#gate").replaceChildren();
+  $("#layout").hidden = false;
+  drawNav(); draw();
+}
+function applyBrand(inst) {
+  if (inst.color) { document.documentElement.style.setProperty("--brand", inst.color); document.documentElement.style.setProperty("--brand-ink", inkFor(inst.color)); }
+  put($("#title"), inst.logo && h("img", { src: inst.logo + "?v=" + Date.now(), alt: "" }), h("span", inst.name), h("span.with", "with Aspiran"));
+  document.title = inst.name + " · Aspiran";
+}
+/** White or near-black text on the institute's colour, whichever reads better. */
+function inkFor(hex) {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255).map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4 ? "#1A1410" : "#FFFFFF";
+}
+function joinScreen(why) {
+  const code = h("input", { type: "text", placeholder: "KXR7-M2PD", maxlength: 9, "aria-label": "Code", style: { textTransform: "uppercase" } });
+  const name = h("input", { type: "text", placeholder: "Your name as the institute should see it", maxlength: 40 });
+  const ok = h("input", { type: "checkbox", id: "c1" }), adult = h("input", { type: "checkbox", id: "c2" });
+  showGate(h("div.card.signin", h("h2", "Join your institute"),
+    h("p.muted", why && why !== "You're not in a coaching centre on Aspiran." ? why : "You're signed in, but not part of an institute yet. Type the code your institute gave you (the owner gets one from Aspiran)."),
+    h("label.f", "Code"), code, h("label.f", "Your name"), name,
+    h("p", h("label", ok, " I understand the institute will see my name, batch, activity since joining, my answers to its question sets, my doubts and messages in its chat. Never my pod or Chotu chats, journal or my own practice.")),
+    h("p", h("label", adult, " I'm 18 or older.")),
+    h("button.primary", { onclick: act(async () => { await api("/inst/join", { code: code.value, displayName: name.value, consent: ok.checked, adult: adult.checked }); toast("Joined."); await load(); }) }, "Join"),
+    staffBox()));
+}
+
+// --- Navigation -------------------------------------------------------------------------------------------------
+const TABS = [
+  ["overview", "Overview", "teacher"], ["batches", "Batches and codes", "teacher"], ["roster", "People", "teacher"], ["chat", "Chat", "teacher"],
+  ["doubts", "Doubts", "teacher"], ["plans", "Study plans", "teacher"], ["content", "Content", "teacher"], ["analytics", "Analytics", "teacher"], ["branding", "Branding", "admin"],
+];
+function drawNav() {
+  const role = S.ov.role;
+  put($("#nav"), TABS.filter(([, , need]) => rank(role) >= rank(need)).map(([id, label]) =>
+    h("button" + (S.tab === id ? ".on" : ""), { onclick: () => { S.tab = id; drawNav(); draw(); } }, label,
+      id === "doubts" && S.ov.counts.openDoubts ? h("span.count", S.ov.counts.openDoubts) : null,
+      id === "chat" && S.ov.counts.reported ? h("span.count", S.ov.counts.reported) : null)));
+}
+const VIEWS = {};
+async function draw() {
+  const main = $("#main");
+  put(main, h("p.muted", "Loading…"));
+  try { put(main, await VIEWS[S.tab]()); } catch (e) { put(main, h("div.banner.err", e.message)); }
+}
+const refresh = async () => { S.ov = await api("/inst/admin/overview"); drawNav(); draw(); };
+const batches = () => S.ov.batches.filter((b) => !b.archived_at);
+const batchSelect = (value, { all = false, label = "Batch" } = {}) => h("select", { "aria-label": label }, all && h("option", { value: "" }, "All batches"), batches().map((b) => h("option", { value: b.id, selected: b.id === value }, b.name)));
+const batchName = (id) => S.ov.batches.find((b) => b.id === id)?.name ?? "";
+const isAdmin = () => rank(S.ov.role) >= rank("admin");
+
+// --- Overview ----------------------------------------------------------------------------------------------------
+VIEWS.overview = async () => {
+  const c = S.ov.counts;
+  const a = await api("/inst/admin/analytics");
+  return h("div", h("h2", "Overview"), h("p.lead", `You're ${ROLE[S.ov.role].toLowerCase()} here, as ${S.ov.you}.`),
+    h("div.tiles", tile(c.students, "students"), tile(a.active, "active in the last 14 days"), tile(c.staff, "teachers and admins"), tile(batches().length, "open batches"),
+      tile(c.openDoubts, "doubts waiting", c.openDoubts > 0), tile(a.quiet.length, "students gone quiet (7 days)", a.quiet.length > 0)),
+    !batches().length && h("div.card", h("strong", "Start here: "), isAdmin() ? "make a batch, then a student code for it." : "ask an admin to make a batch."),
+    a.quiet.length > 0 && h("div.card", h("h3", "Gone quiet"), h("p.muted", "Nothing at all for 7 days or more. A short personal message usually works better than a reminder."),
+      h("table", h("tr", h("th", "Student"), h("th", "Last active")), a.quiet.map((q) => h("tr", h("td", q.name), h("td", day(q.lastActive)))))));
+};
+const tile = (n, l, warn) => h("div.tile" + (warn ? ".warn" : ""), h("div.n", n), h("div.l", l));
+
+// --- Batches and invite codes -----------------------------------------------------------------------------------
+VIEWS.batches = async () => {
+  const { codes } = await api("/inst/admin/codes");
+  const name = h("input", { type: "text", placeholder: "e.g. Prelims 2027 morning" }), year = h("input", { type: "number", placeholder: "2027", min: 2025, max: 2040, style: { width: "90px" } });
+  const role = h("select", h("option", { value: "student" }, "Students"), isAdmin() && h("option", { value: "teacher" }, "Teachers"), S.ov.role === "owner" && h("option", { value: "admin" }, "Admins"));
+  const forBatch = batchSelect(batches()[0]?.id), uses = h("input", { type: "number", value: 100, min: 1, max: 1000, style: { width: "90px" } }), days = h("input", { type: "number", value: 30, min: 1, max: 365, style: { width: "80px" } });
+  const made = h("div");
+  role.onchange = () => { forBatch.disabled = role.value !== "student"; uses.value = role.value === "student" ? 100 : 1; };
+  return h("div", h("h2", "Batches and codes"), h("p.lead", "Each batch has its own chat and plan. Students join a batch with its code."),
+    h("div.card", h("h3", "Batches"),
+      h("table", h("tr", h("th", "Batch"), h("th", "Exam year"), h("th.n", "Students"), h("th")),
+        S.ov.batches.map((b) => h("tr", h("td", b.name, b.archived_at && h("span.chip", "closed")), h("td", b.exam_year ?? ""), h("td.n", b.students),
+          h("td", isAdmin() && h("button", { onclick: act(async () => { await api(`/inst/admin/batches/${b.id}`, { archived: !b.archived_at }); await refresh(); }) }, b.archived_at ? "Reopen" : "Close"))))),
+      isAdmin() && h("div.row", { style: { marginTop: "10px" } }, name, year, h("button.primary", { onclick: act(async () => { await api("/inst/admin/batches", { name: name.value, examYear: year.value || null }); toast("Batch made."); await refresh(); }) }, "Add batch"))),
+    h("div.card", h("h3", "Make a code"),
+      h("div.row", h("label", "For ", role), h("label", "Batch ", forBatch), h("label", "Uses ", uses), h("label", "Days ", days),
+        h("button.primary", { onclick: act(async () => {
+          const d = await api("/inst/admin/codes", { role: role.value, batchId: role.value === "student" ? forBatch.value : null, maxUses: Number(uses.value), days: Number(days.value) });
+          const link = `${location.origin}/app/#inst/${d.code.replace("-", "")}`;
+          put(made, h("div.banner.ok", "Code: ", h("span.code", d.code), h("div.muted", "Students can also open ", h("span.mono", link))));
+          VIEWS.batches().then((v) => { put($("#main"), v); $("#main").prepend(made); });
+        }) }, "Make code")), made),
+    h("div.card", h("h3", "Codes"), codes.length ? h("div.scroll", h("table", h("tr", h("th", "Code"), h("th", "For"), h("th", "Batch"), h("th.n", "Used"), h("th", "Ends"), h("th")),
+      codes.map((c) => h("tr", h("td.mono", c.code), h("td", ROLE[c.role]), h("td", batchName(c.batch_id)), h("td.n", `${c.uses} of ${c.max_uses}`), h("td", day(c.expires_at)),
+        h("td", c.live ? h("button.danger", { onclick: act(async () => { await api(`/inst/admin/codes/${c.code}/revoke`, {}); toast("Cancelled."); draw(); }) }, "Cancel") : h("span.chip", c.revoked_at ? "cancelled" : "ended"))))))
+      : h("p.muted", "No codes yet.")));
+};
+
+// --- People -----------------------------------------------------------------------------------------------------
+VIEWS.roster = async () => {
+  const { people } = await api("/inst/admin/roster");
+  const active = people.filter((p) => p.status === "active");
+  return h("div", h("h2", "People"), h("p.lead", "Names are what each person chose for the institute. Aspiran never shows you their email or phone."),
+    h("div.card.scroll", h("table", h("tr", h("th", "Name"), h("th", "Role"), h("th", "Batch"), h("th", "Joined"), h("th", "Last active"), h("th")),
+      active.map((p) => {
+        const canEdit = isAdmin() && p.role !== "owner" && (p.role !== "admin" || S.ov.role === "owner") && p.memberId !== Auth.session()?.memberId;
+        const move = p.role === "student" && canEdit ? batchSelect(p.batchId) : null;
+        if (move) move.onchange = act(async () => { await api(`/inst/admin/members/${p.memberId}`, { batchId: move.value }); toast("Moved."); });
+        const roleSel = canEdit ? h("select", { "aria-label": "Role" }, ["student", "teacher", ...(S.ov.role === "owner" ? ["admin"] : [])].map((r) => h("option", { value: r, selected: r === p.role }, ROLE[r]))) : null;
+        if (roleSel) roleSel.onchange = act(async () => { await api(`/inst/admin/members/${p.memberId}`, { role: roleSel.value, ...(roleSel.value === "student" ? { batchId: batches()[0]?.id } : {}) }); toast("Changed."); await refresh(); });
+        return h("tr", h("td", p.name), h("td", roleSel ?? ROLE[p.role]), h("td", move ?? batchName(p.batchId)), h("td", day(p.joinedAt)), h("td", day(p.lastActive)),
+          h("td", canEdit && h("button.danger", { onclick: act(async () => { if (!confirm(`Remove ${p.name}? Their answers to your question sets go; their doubts and messages stay without their name.`)) return; await api(`/inst/admin/members/${p.memberId}`, { remove: true }); toast("Removed."); await refresh(); }) }, "Remove")));
+      }))),
+    people.length > active.length && h("details", h("summary", `${people.length - active.length} who left or were removed`),
+      h("table", people.filter((p) => p.status !== "active").map((p) => h("tr", h("td", p.name), h("td", p.status), h("td", day(p.leftAt)))))));
+};
+
+// --- Chat and announcements ---------------------------------------------------------------------------------------
+VIEWS.chat = async () => {
+  S.chatBatch ??= batches()[0]?.id;
+  if (!S.chatBatch) return h("p", "Make a batch first.");
+  const feed = await api(`/inst/feed?batch=${encodeURIComponent(S.chatBatch)}`);
+  const { messages: reported } = await api("/inst/admin/reported");
+  const pick = batchSelect(S.chatBatch); pick.onchange = () => { S.chatBatch = pick.value; draw(); };
+  const text = h("textarea", { placeholder: "Write to the batch", maxlength: 1000 });
+  const everyone = h("input", { type: "checkbox" });
+  const send = (announce) => act(async () => {
+    const d = await api("/inst/chat", { text: text.value, batchId: announce && everyone.checked ? null : S.chatBatch, announce });
+    if (d.held) { toast("Not posted: it looked like someone may be in distress. Aspiran's care team has been told.", "err"); return; }
+    text.value = ""; draw();
+  });
+  const hide = (m) => act(async () => { await api(`/inst/admin/messages/${m.id}/hide`, { hidden: !m.hidden && !m.hidden_at }); draw(); });
+  return h("div", h("h2", "Chat"), h("p.lead", "One chat per batch. Announcements stay at the top for students. Messages that look like distress are never posted: Aspiran's care team gets them, not you."),
+    h("div.row", h("label", "Batch ", pick)),
+    reported.filter((m) => !m.hidden_at).length > 0 && h("div.card", h("h3", "Reported by students"), reported.filter((m) => !m.hidden_at).map((m) =>
+      h("div.msg", h("div.row.between", h("strong", m.name), h("span.muted", `${batchName(m.batch_id)} · ${when(m.at)} · “${m.report_reason}”`)), h("div.quote", m.text), h("button", { onclick: hide({ ...m, hidden: false }) }, "Hide")))),
+    h("div.card", h("h3", "Announcements"), feed.announcements.length ? feed.announcements.map((a) => h("div.msg", h("div.row.between", h("strong", a.name), h("span.muted", (a.batch_id ? "This batch" : "Everyone") + " · " + when(a.at))), h("div.quote", a.text))) : h("p.muted", "None yet.")),
+    h("div.card", h("h3", feed.batch.name), feed.messages.length ? feed.messages.map((m) => h("div.msg" + (m.hidden ? ".hidden" : ""),
+      h("div.row.between", h("span", h("strong", m.name), m.role === "teacher" && h("span.chip", "teacher"), m.reported && h("span.chip.bad", "reported"), m.hidden && h("span.chip", "hidden")), h("span.muted", when(m.at))),
+      h("div", m.text), h("button", { onclick: hide(m) }, m.hidden ? "Show again" : "Hide"))) : h("p.muted", "No messages yet."),
+      h("div", { style: { marginTop: "10px" } }, text, h("div.row", h("button", { onclick: send(false) }, "Send to chat"), h("button.primary", { onclick: send(true) }, "Post as announcement"), h("label", everyone, " to every batch")))));
+};
+
+// --- Doubts -------------------------------------------------------------------------------------------------------
+VIEWS.doubts = async () => {
+  S.doubtStatus ??= "open";
+  const { doubts } = await api(`/inst/doubts?status=${S.doubtStatus}`);
+  const tabs = h("div.row", ["open", "answered", "resolved"].map((s) => h("button" + (S.doubtStatus === s ? ".primary" : ""), { onclick: () => { S.doubtStatus = s; draw(); } }, s[0].toUpperCase() + s.slice(1))));
+  return h("div", h("h2", "Doubts"), h("p.lead", S.ov.institute.aiFirstAnswer ? "Each new doubt gets a first answer from Aspiran AI, labelled AI. Check it and add yours." : "Answer a doubt and it moves to Answered. The student or you mark it resolved."),
+    tabs, doubts.length ? doubts.map(doubtCard) : h("p.muted", { style: { marginTop: "12px" } }, "Nothing here."));
+};
+function doubtCard(d) {
+  const box = h("div");
+  const open = act(async () => {
+    const { replies } = await api(`/inst/doubts/${d.id}`);
+    const reply = h("textarea", { placeholder: "Your answer" });
+    let photo = null;
+    if (d.photo) { const r = await fetch(`/inst/doubts/${d.id}/photo`, { headers: { authorization: "Bearer " + (await Auth.getToken()) } }); if (r.ok) photo = h("img", { src: URL.createObjectURL(await r.blob()), alt: "The student's photo", style: { maxWidth: "100%", maxHeight: "360px", borderRadius: "8px" } }); }
+    put(box, photo, replies.map((r) => h("div.msg", h("div.row", h("strong", r.name), r.role === "ai" && h("span.chip.ai", "AI"), r.role === "teacher" && h("span.chip", "teacher"), h("span.muted", when(r.at))), h("div.quote", r.text))),
+      h("div", { style: { marginTop: "8px" } }, reply, h("div.row", h("button.primary", { onclick: act(async () => { await api(`/inst/doubts/${d.id}/reply`, { text: reply.value }); toast("Answered."); await refresh(); }) }, "Send answer"),
+        d.status !== "resolved" ? h("button", { onclick: act(async () => { await api(`/inst/doubts/${d.id}/status`, { status: "resolved" }); toast("Marked resolved."); await refresh(); }) }, "Mark resolved")
+          : h("button", { onclick: act(async () => { await api(`/inst/doubts/${d.id}/status`, { status: "open" }); await refresh(); }) }, "Reopen"))));
+  });
+  return h("div.card", h("div.row.between", h("span", h("strong", d.name), " · ", batchName(d.batchId), d.topic && h("span.chip", d.topic), d.photo && h("span.chip", "photo")), h("span.muted", when(d.updatedAt))),
+    h("div.quote", d.text), box, h("button", { onclick: open }, "Open"));
+}
+
+// --- Study plans --------------------------------------------------------------------------------------------------
+VIEWS.plans = async () => {
+  const [{ plans }, { items: content }, { people }] = await Promise.all([api("/inst/admin/plans"), api("/inst/admin/content"), api("/inst/admin/roster")]);
+  const students = people.filter((p) => p.status === "active" && p.role === "student");
+  const title = h("input", { type: "text", placeholder: "e.g. November: Polity first pass" }), start = h("input", { type: "date", value: todayIso() });
+  const target = h("select", { "aria-label": "For" }, h("optgroup", { label: "A batch" }, batches().map((b) => h("option", { value: "b:" + b.id }, b.name))), h("optgroup", { label: "One student" }, students.map((s) => h("option", { value: "m:" + s.memberId }, s.name))));
+  return h("div", h("h2", "Study plans"), h("p.lead", "A plan is a list of days: a syllabus topic, a practice set or test, a note, or a task. Students tick items off; no timers and no streaks."),
+    h("div.card", h("h3", "New plan"), h("div.row", title, h("label", "For ", target), h("label", "Starts ", start),
+      h("button.primary", { onclick: act(async () => { const [k, id] = target.value.split(":"); const d = await api("/inst/admin/plans", { title: title.value, startsOn: start.value, ...(k === "b" ? { batchId: id } : { memberId: id }) }); S.openPlan = d.id; draw(); }) }, "Make plan"))),
+    plans.map((p) => planCard(p, content, students)));
+};
+function planCard(p, content, students) {
+  const forWho = p.batchId ? batchName(p.batchId) : students.find((s) => s.memberId === p.memberId)?.name ?? "a student";
+  const rows = p.items.map((i) => ({ ...i }));
+  const list = h("div");
+  const drawRows = () => put(list, rows.map((r, n) => {
+    const d = h("input", { type: "date", value: r.day }); d.onchange = () => (r.day = d.value);
+    const kind = h("select", ["topic", "practice", "test", "note", "task"].map((k) => h("option", { value: k, selected: k === r.kind }, k)));
+    const topic = topicSelect(r.nodeId ?? ""); topic.onchange = () => { r.nodeId = topic.value || null; if (!r.title || r.kind === "topic") r.title = topicName(topic.value); };
+    const piece = h("select", h("option", { value: "" }, "Pick a piece"), content.filter((c) => (r.kind === "test" ? c.kind === "test" : r.kind === "practice" ? c.kind === "practice" : c.kind === "note")).map((c) => h("option", { value: c.id, selected: c.id === r.contentId }, c.title)));
+    piece.onchange = () => { r.contentId = piece.value || null; r.title = content.find((c) => c.id === piece.value)?.title ?? r.title; };
+    const t = h("input", { type: "text", value: r.title ?? "", placeholder: "Title" }); t.oninput = () => (r.title = t.value);
+    kind.onchange = () => { r.kind = kind.value; r.contentId = null; drawRows(); };
+    return h("div.item", d, kind, h("div", r.kind === "topic" ? topic : ["practice", "test", "note"].includes(r.kind) ? piece : null, t, h("span.muted", r.done ? ` ${r.done} done` : "")),
+      h("button", { "aria-label": "Remove item", onclick: () => { rows.splice(n, 1); drawRows(); } }, "✕"));
+  }));
+  drawRows();
+  const body = h("div", { hidden: S.openPlan !== p.id }, list,
+    h("div.row", { style: { marginTop: "8px" } }, h("button", { onclick: () => { rows.push({ day: rows.at(-1)?.day ?? p.startsOn, kind: "topic", title: "" }); drawRows(); } }, "Add item"),
+      h("button.primary", { onclick: act(async () => { await api(`/inst/admin/plans/${p.id}`, { items: rows.map((r) => ({ id: r.id, day: r.day, kind: r.kind, nodeId: r.nodeId, contentId: r.contentId, title: r.title, note: r.note })) }); toast("Plan saved."); S.openPlan = p.id; draw(); }) }, "Save plan"),
+      h("button.danger", { onclick: act(async () => { if (!confirm("Delete this plan?")) return; await api(`/inst/admin/plans/${p.id}`, { delete: true }); draw(); }) }, "Delete")));
+  return h("div.card", h("div.row.between", h("span", h("strong", p.title), " · for ", forWho, " · from ", p.startsOn), h("button", { onclick: () => { body.hidden = !body.hidden; S.openPlan = body.hidden ? null : p.id; } }, `${p.items.length} items`)), body);
+}
+
+// --- Content: notes and question sets ------------------------------------------------------------------------------
+VIEWS.content = async () => {
+  const { items } = await api("/inst/admin/content");
+  return h("div", h("h2", "Content"), h("p.lead", "Your notes and question sets, only for your students. Drafts stay hidden until you publish."),
+    h("div.row", h("button.primary", { onclick: () => edit(null, "note") }, "New note"), h("button.primary", { onclick: () => edit(null, "practice") }, "New practice set"), h("button.primary", { onclick: () => edit(null, "test") }, "New test"),
+      h("button", { onclick: () => importPack() }, "Import a content-pack quiz")),
+    h("div", { id: "editor" }),
+    h("div.card.scroll", items.length ? h("table", h("tr", h("th", "Title"), h("th", "Kind"), h("th", "Topic"), h("th", "For"), h("th", "Status"), h("th")),
+      items.map((c) => h("tr", h("td", c.title), h("td", c.kind), h("td", c.topic ?? ""), h("td", c.batchId ? batchName(c.batchId) : "All batches"),
+        h("td", h("span.chip" + (c.status === "published" ? ".ok" : ".warn"), c.status)),
+        h("td", h("div.row", h("button", { onclick: () => edit(c, c.kind) }, "Edit"),
+          h("button", { onclick: act(async () => { await api(`/inst/admin/content/${c.id}`, { status: c.status === "published" ? "draft" : "published" }); draw(); }) }, c.status === "published" ? "Unpublish" : "Publish"))))))
+      : h("p.muted", "Nothing yet.")));
+};
+function edit(c, kind) {
+  const title = h("input", { type: "text", value: c?.title ?? "", placeholder: "Title", style: { width: "100%" } });
+  const topic = topicSelect(c?.nodeId ?? ""), forB = batchSelect(c?.batchId ?? "", { all: true });
+  let body;
+  if (kind === "note") {
+    const en = h("textarea", { placeholder: "The note, in English", style: { minHeight: "200px" } }, c?.data?.en?.body ?? ""), hi = h("textarea", { placeholder: "Hindi (optional)" }, c?.data?.hi?.body ?? "");
+    body = { node: h("div", h("label.f", "English"), en, h("label.f", "Hindi (optional)"), hi), get: () => ({ en: { body: en.value }, ...(hi.value.trim() ? { hi: { body: hi.value } } : {}) }) };
+  } else {
+    const qs = (c?.data?.questions ?? [{ en: { question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "" } }]).map((q) => structuredClone(q));
+    const wrap = h("div");
+    const drawQs = () => put(wrap, qs.map((q, i) => h("div.card", h("div.row.between", h("strong", `Question ${i + 1}`), h("button", { onclick: () => { qs.splice(i, 1); drawQs(); } }, "Remove")),
+      field(q.en, "question", "textarea"), q.en.options.map((_, j) => h("div.row", h("label", h("input", { type: "radio", name: "a" + i, checked: q.en.answerIndex === j, onchange: () => { q.en.answerIndex = j; if (q.hi) q.hi.answerIndex = j; } }), " right"), optField(q.en.options, j))),
+      h("label.f", "Why (shown after answering)"), field(q.en, "explanation", "textarea"))),
+      h("button", { onclick: () => { qs.push({ en: { question: "", options: ["", "", "", ""], answerIndex: 0, explanation: "" } }); drawQs(); } }, "Add question"));
+    drawQs();
+    body = { node: wrap, get: () => ({ questions: qs }) };
+  }
+  const status = h("select", h("option", { value: "draft" }, "Draft"), h("option", { value: "published", selected: c?.status === "published" }, "Published"));
+  put($("#editor"), h("div.card", h("h3", (c ? "Edit " : "New ") + kind), title, h("div.row", { style: { margin: "8px 0" } }, h("label", "Topic ", topic), h("label", "For ", forB), h("label", "Status ", status)), body.node,
+    h("div.row", { style: { marginTop: "10px" } }, h("button.primary", { onclick: act(async () => {
+      await api(c ? `/inst/admin/content/${c.id}` : "/inst/admin/content", { kind, title: title.value, nodeId: topic.value || null, batchId: forB.value || null, status: status.value, data: body.get() });
+      toast("Saved."); draw();
+    }) }, "Save"), c && h("button.danger", { onclick: act(async () => { if (!confirm("Delete this? Students' answers to it go too.")) return; await api(`/inst/admin/content/${c.id}`, { delete: true }); draw(); }) }, "Delete"),
+      h("button", { onclick: () => $("#editor").replaceChildren() }, "Close"))));
+  $("#editor").scrollIntoView({ behavior: "smooth" });
+}
+const field = (obj, key, tag) => { const el = h(tag, { value: obj[key] ?? "", placeholder: key === "question" ? "The question" : "Explanation", style: { width: "100%" } }); el.oninput = () => (obj[key] = el.value); return el; };
+const optField = (opts, j) => { const el = h("input", { type: "text", value: opts[j], placeholder: `Option ${"ABCDEF"[j]}`, style: { flex: 1 } }); el.oninput = () => (opts[j] = el.value); return el; };
+function importPack() {
+  const file = h("input", { type: "file", accept: ".json,application/json" }), kind = h("select", h("option", { value: "practice" }, "Practice set"), h("option", { value: "test" }, "Test"));
+  const topic = topicSelect(""), forB = batchSelect("", { all: true });
+  put($("#editor"), h("div.card", h("h3", "Import a content-pack quiz"), h("p.muted", "A JSON file with schema upsc-pods/quiz-pack@1, the same format as Aspiran's own packs. It comes in as a draft."),
+    file, h("div.row", { style: { margin: "8px 0" } }, h("label", "As ", kind), h("label", "Topic ", topic), h("label", "For ", forB)),
+    h("button.primary", { onclick: act(async () => {
+      const f = file.files[0]; if (!f) throw new Error("Pick a file first.");
+      let pack; try { pack = JSON.parse(await f.text()); } catch { throw new Error("That file isn't valid JSON."); }
+      await api("/inst/admin/content", { kind: kind.value, pack, nodeId: topic.value || null, batchId: forB.value || null });
+      toast("Imported as a draft."); draw();
+    }) }, "Import")));
+}
+
+// --- Analytics ------------------------------------------------------------------------------------------------------
+VIEWS.analytics = async () => {
+  S.anBatch ??= "";
+  const a = await api(`/inst/admin/analytics${S.anBatch ? "?batch=" + encodeURIComponent(S.anBatch) : ""}`);
+  const pick = batchSelect(S.anBatch, { all: true }); pick.onchange = () => { S.anBatch = pick.value; draw(); };
+  const csv = act(async () => {
+    const r = await fetch(`/inst/admin/analytics.csv${S.anBatch ? "?batch=" + encodeURIComponent(S.anBatch) : ""}`, { headers: { authorization: "Bearer " + (await Auth.getToken()) } });
+    if (!r.ok) throw new Error("Couldn't make the CSV.");
+    const url = URL.createObjectURL(await r.blob()); const link = h("a", { href: url, download: `${S.ov.institute.name}-${S.anBatch ? batchName(S.anBatch) : "all"}.csv` }); document.body.append(link); link.click(); link.remove();
+  });
+  const bar = (pct) => pct == null ? "" : h("div.row", h("div.bar", h("span", { style: { width: pct + "%" } })), h("span.muted", pct + "%"));
+  return h("div", h("h2", "Analytics"), h("p.lead", "From what your students actually did since joining: your question sets and tests, doubts, your plan, and days they used Aspiran. Students never see each other's numbers."),
+    h("div.row", h("label", "Batch ", pick), h("button", { onclick: csv }, "Download CSV")),
+    h("div.tiles", { style: { marginTop: "12px" } }, tile(a.students.length, "students"), tile(a.active, "active (14 days)"), tile(a.doubts.raised, "doubts raised"), tile(a.doubts.resolved, "resolved"), tile(a.quiet.length, "gone quiet", a.quiet.length > 0)),
+    h("div.grid2",
+      h("div.card", h("h3", "By paper"), a.papers.length ? h("table", h("tr", h("th", "Paper"), h("th.n", "Topics"), h("th.n", "Answered"), h("th", "Right")), a.papers.map((p) => h("tr", h("td", p.paper), h("td.n", p.topics), h("td.n", p.answered), h("td", bar(p.pct))))) : h("p.muted", "No answers yet. Publish a question set with a topic.")),
+      h("div.card", h("h3", "Weak topics (batch)"), h("p.muted", "At least 5 answers and under 60% right."), a.weakTopics.length ? h("table", a.weakTopics.map((t) => h("tr", h("td", t.topic, h("div.muted", t.paper)), h("td.n", t.answered), h("td", bar(t.pct))))) : h("p.muted", "None yet."))),
+    h("div.card.scroll", h("h3", "Coverage by topic"), a.coverage.length ? h("table", h("tr", h("th", "Paper"), h("th", "Topic"), h("th.n", "Students"), h("th.n", "Answered"), h("th", "Right")),
+      a.coverage.map((t) => h("tr", h("td", t.paper), h("td", t.topic), h("td.n", t.students), h("td.n", t.answered), h("td", bar(t.pct))))) : h("p.muted", "Nothing yet.")),
+    a.tests.length > 0 && h("div.card", h("h3", "Tests (first try)"), h("table", h("tr", h("th", "Test"), h("th.n", "Took"), h("th.n", "Lowest"), h("th.n", "Middle"), h("th.n", "Highest")),
+      a.tests.map((t) => h("tr", h("td", t.title), h("td.n", t.took), h("td.n", t.low + "%"), h("td.n", t.median + "%"), h("td.n", t.high + "%"))))),
+    h("div.card.scroll", h("h3", "Students"), h("table", h("tr", h("th", "Student"), h("th", "Last active"), h("th.n", "Days (14)"), h("th.n", "Focus min"), h("th.n", "Answered"), h("th", "Right"), h("th", "Weak topics"), h("th.n", "Tests"), h("th.n", "Doubts"), h("th.n", "Plan")),
+      a.students.map((s) => h("tr", h("td", s.name, s.quiet && h("span.chip.bad", "quiet")), h("td", day(s.lastActive)), h("td.n", s.daysActive14), h("td.n", s.focusMinutes), h("td.n", s.answered), h("td", bar(s.accuracy)),
+        h("td", s.weakTopics.map((w) => h("span.chip", `${w.topic} ${w.pct}%`))), h("td.n", s.tests.map((t) => t.pct + "%").join(", ")), h("td.n", `${s.doubtsResolved}/${s.doubtsRaised}`), h("td.n", `${s.planDone}/${s.planDue}`))))));
+};
+
+// --- Branding ----------------------------------------------------------------------------------------------------------
+VIEWS.branding = async () => {
+  const i = S.ov.institute;
+  const name = h("input", { type: "text", value: i.name, maxlength: 60 }), city = h("input", { type: "text", value: i.city ?? "", maxlength: 60 });
+  const color = h("input", { type: "color", value: i.color ?? "#8D4F01" }), ai = h("input", { type: "checkbox", checked: i.aiFirstAnswer });
+  const logo = h("input", { type: "file", accept: "image/png,image/jpeg" });
+  return h("div", h("h2", "Branding"), h("p.lead", "Your name, colour and logo show to your students in Aspiran once they join. The app in the Play Store stays \"Aspiran\"."),
+    h("div.card", h("label.f", "Name"), name, h("label.f", "City"), city, h("label.f", "Colour"), color,
+      h("p", h("label", ai, " Aspiran AI gives a first answer to new doubts (labelled AI; never about feelings, ranks or results; quiet from 23:30 to 07:00). Your teachers still answer.")),
+      h("button.primary", { onclick: act(async () => { const d = await api("/inst/admin/branding", { name: name.value, city: city.value, color: color.value, aiFirstAnswer: ai.checked }); S.ov.institute = d.institute; applyBrand(d.institute); toast("Saved."); }) }, "Save")),
+    h("div.card", h("h3", "Logo"), h("p.muted", "PNG or JPEG, under 200 KB. Square works best."), i.logo && h("img", { src: i.logo + "?v=" + Date.now(), alt: "Current logo", style: { height: "64px" } }), logo,
+      h("button.primary", { onclick: act(async () => {
+        const f = logo.files[0]; if (!f) throw new Error("Pick a file first.");
+        const data = btoa(String.fromCharCode(...new Uint8Array(await f.arrayBuffer())));
+        await api("/inst/admin/logo", { mime: f.type, data }); toast("Logo saved."); await refresh(); applyBrand(S.ov.institute);
+      }) }, "Upload")));
+};
+
+boot().catch((e) => showGate(h("div.card.signin", h("div.banner.err", e.message))));
+</script>
+</body>
+</html>

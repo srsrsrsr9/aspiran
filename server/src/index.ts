@@ -33,6 +33,8 @@ import { roadmapRoute } from "./roadmap";
 import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
 import { learnRoute } from "./learn";
+import { instituteRoute } from "./institutes";
+import INSTITUTE_HTML from "./institute.html";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -258,6 +260,10 @@ export default {
     if (path.startsWith("/desk/api/")) return deskApi(req, env, safeDecode(path.slice("/desk/api/".length)));
     if (path.startsWith("/mod/api/")) return modApi(req, env, path.slice("/mod/api/".length));
 
+    // --- Coaching centres (institutes.ts): the console page, /inst/... and Aspiran staff's /admin/api/institutes
+    if (path === "/institute") return new Response(INSTITUTE_HTML, { headers: { "content-type": "text/html; charset=utf-8", ...INSTITUTE_PAGE } });
+    if (path.startsWith("/inst/") || path.startsWith("/admin/api/institutes")) { const r = await instituteRoute(req, env, path, url); if (r) return r; }
+
     // --- Admin console
     if (path === "/admin") return new Response(ADMIN_HTML, { headers: { "content-type": "text/html; charset=utf-8", ...STAFF_PAGE } });
     if (path.startsWith("/admin/api/")) return adminApi(req, env, path.slice("/admin/api/".length));
@@ -344,6 +350,12 @@ const STAFF_PAGE = {
 };
 
 /** What the Free Shelf shows visitors with no account. */
+/** The coaching-centre console signs in with the person's own Aspiran account (app/auth.js, Firebase from gstatic). */
+const INSTITUTE_PAGE = {
+  "x-frame-options": "DENY", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "cache-control": "no-store",
+  "content-security-policy": "default-src 'none'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://www.gstatic.com; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'none'; base-uri 'none'; frame-ancestors 'none'",
+};
+
 const SHELF_KINDS = new Set(["calm", "routine", "pause-lines"]);
 
 /** Daily pulls a member may make of each content route; far above what the apps need, far below a scrape. */
