@@ -281,6 +281,7 @@ function langSwitch() {
 function cover() {
   const d = cur.data, p = prog();
   const last = p.last ?? {};
+  const c = d.cover ?? {};
   const routeBtn = (id, primary) => {
     const r = d.routes[id], at = last[id];
     return h("button" + (primary ? ".primary" : "") + ".try-route", { onclick: () => { send("route", id, null, true); go(at ?? 0, id); } },
@@ -288,13 +289,14 @@ function cover() {
   };
   return [
     h("div.try-bar", h("span.small.muted", "Aspiran"), langSwitch()),
-    h("h1.try-headline", { tabindex: "-1" }, L(d.cover.headline)),
-    h("p", L(d.cover.pitch)),
-    h("div.try-routes", routeBtn("express", true), routeBtn("full", false)),
-    h("p.small.muted", L(d.cover.honesty)),
-    h("p.small.try-joke", L(d.cover.joke)),
+    // A topic written without its own cover opens on its title and promise, never on a blank screen.
+    h("h1.try-headline", { tabindex: "-1" }, L(c.headline ?? d.title)),
+    h("p", L(c.pitch ?? d.promise)),
+    h("div.try-routes", d.routes?.express && routeBtn("express", true), d.routes?.full && routeBtn("full", !d.routes?.express)),
+    c.honesty && h("p.small.muted", L(c.honesty)),
+    c.joke && h("p.small.try-joke", L(c.joke)),
     h("details.try-inside", h("summary", u("inside")),
-      h("h3", L(d.cover.canDoTitle)), h("ul", d.canDo.map((x) => h("li", L(x)))),
+      h("h3", c.canDoTitle ? L(c.canDoTitle) : u("canDo")), h("ul", (d.canDo ?? []).map((x) => h("li", L(x)))),
       h("p", L(d.why)), h("p.small.muted", L(d.sittings))),
     (last.express != null || last.full != null) && h("button.ghost.small", { onclick: () => { if (confirm(u("startOver"))) { save({ route: null, pos: -1, a: {} }); draw(); } } }, u("restart")),
   ];
