@@ -64,13 +64,13 @@ const UI = {
     tryOne: "Try one topic", joinKeep: (n) => n ? `Join free, keep your ${n} cards` : "Join free, keep your progress",
     keepLine: (n, t) => n ? `Your ${n} ${t} cards are saved in this browser. Join free and they go straight into your Review, timed to come back just before you'd forget them.`
       : `Your answers on ${t} are saved in this browser. Join free and carry on from here.`,
-    libLine: "Inside the app: 2,033 practice questions, 254 short videos, nearly 20 hours of recorded notes, 60 interactives and 11 past papers, in English and Hindi.",
+    libLine: "Inside the app: 2,000+ practice questions, 250+ short videos, 19+ hours of recorded notes, 60 interactives and 11 past papers. Most of it in Hindi too.",
     freeLine: "Free stays free: your pod, the daily review, Chai cards, practice and Chotu · AI. Plus adds unlimited answer marking and all mocks.",
     noCard: "Google sign-in. No card, no phone number.", tellHonest: (n) => `Tell us honestly (${n} questions, optional)`, nextTopic: "Try the next topic",
     home: "Home", allTopics: "All topics", startHere: "Start here", fullest: "The fullest one: real past questions, two short videos and two games.",
     pickOne: "Eight Polity topics, free, no account. Each has a 15-minute route and a whole-topic route.",
-    preview: "Free preview", joinLine: "Join free for the whole library: 2,000+ questions, 250+ short videos, 19 hours of audio, and a pod of your own.", joinShort: "Join free →",
-    flexTitle: "See it and hear it", flexLine: "One of 254 short videos in the app, and one of its recorded notes (nearly 20 hours in all). Nothing plays until you tap.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
+    preview: "Free preview", joinLine: "Join free for the whole library: 2,000+ practice questions, 250+ short videos, 19+ hours of recorded notes, and a pod of your own.", joinShort: "Join free →",
+    flexTitle: "See it and hear it", flexLine: "One of 250+ short videos in the app, and one of its recorded notes (19+ hours in all). Nothing plays until you tap.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
     whyAsk: "Why we ask:", tourLead: "All of this is in the app today. Join free to use it; no card needed.",
     loading: "Loading the topic…", notOpen: "This topic isn't open yet.", notOpenMore: "In the meantime, the Free Shelf works without an account.",
     shelf: "Open the Free Shelf", back: "Back", next: "Next", resume: "Carry on where you left off", of: (i, n) => `${i}/${n}`,
@@ -92,7 +92,7 @@ const UI = {
     mapMet: "Federalism is ticked on your syllabus map: learnt once, review due.", openReview: "Open Review", openMap: "Your syllabus map",
     canDo: "You can now:", join: "Join free, no card needed", another: "Look around the Free Shelf", draft: "Draft · not yet checked by an editor · desk-key preview only",
     whyNote: "Why we do it this way", evidence: "Evidence", band: (b) => `band ${b}`, sideDoor: "Side door", backToPath: "Back to the topic",
-    express: "Express", full: "Whole topic", min: (m) => `${m} min`, inside: "What's inside", switchFull: "Carry on into the whole topic",
+    express: "Express", full: "Whole topic", min: (m) => `${m} min`, startGo: (m) => `Start · ${m} minutes →`, resumeGo: "Carry on where you left off →", fullLink: (m) => `or do the whole topic, ${m} min, in three sittings`, inside: "What's inside", switchFull: "Carry on into the whole topic",
     stage: { learn: "Learn", practise: "Practise", write: "Write", keep: "Keep" },
     quickOne: "Quick one (optional)", thanks: "Thanks", privacyOnce: "Your taps are sent anonymously to help us improve. Nothing else is.",
     videoData: "Tap to load. Nothing downloads until you do.", transcript: "Read it instead", yourTurn: "Your turn",
@@ -113,13 +113,13 @@ const UI = {
     tryOne: "एक topic आज़माइए", joinKeep: (n) => n ? `मुफ़्त जुड़िए, अपने ${n} cards रखिए` : "मुफ़्त जुड़िए, अपनी प्रगति रखिए",
     keepLine: (n, t) => n ? `${t} के आपके ${n} cards इस browser में सहेजे गए हैं। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे, ठीक भूलने से पहले लौटने के लिए।`
       : `${t} पर आपके जवाब इस browser में सहेजे गए हैं। मुफ़्त जुड़िए और यहीं से आगे बढ़िए।`,
-    libLine: "App के अंदर: 2,033 अभ्यास सवाल, 254 छोटे video, लगभग 20 घंटे के रिकॉर्ड किए notes, 60 interactives और 11 पिछले papers, हिंदी और अंग्रेज़ी में।",
+    libLine: "App के अंदर: 2,000+ अभ्यास सवाल, 250+ छोटे video, 19+ घंटे के रिकॉर्ड किए notes, 60 interactives और 11 पिछले papers। ज़्यादातर हिंदी में भी।",
     freeLine: "मुफ़्त हमेशा मुफ़्त: आपका pod, रोज़ का review, Chai cards, अभ्यास और Chotu · AI। Plus में असीमित उत्तर-जाँच और सारे mock जुड़ते हैं।",
     noCard: "Google से sign-in। न card, न फ़ोन नंबर।", tellHonest: (n) => `हमें सच बताइए (${n} सवाल, वैकल्पिक)`, nextTopic: "अगला topic आज़माइए",
     home: "होम", allTopics: "सभी topics", startHere: "यहाँ से शुरू कीजिए", fullest: "सबसे भरा-पूरा: असली PYQ, दो छोटे video और दो खेल।",
     pickOne: "Polity के आठ topics, मुफ़्त, बिना account। हर एक में 15 मिनट का रास्ता और पूरा topic।",
-    preview: "मुफ़्त झलक", joinLine: "पूरी library के लिए मुफ़्त जुड़िए: 2,000+ सवाल, 250+ छोटे video, 19 घंटे audio, और आपका अपना pod।", joinShort: "मुफ़्त जुड़िए →",
-    flexTitle: "देखिए और सुनिए", flexLine: "App के 254 छोटे video में से एक, और उसके रिकॉर्ड किए notes में से एक (कुल लगभग 20 घंटे)। टैप करने तक कुछ नहीं चलता।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
+    preview: "मुफ़्त झलक", joinLine: "पूरी library के लिए मुफ़्त जुड़िए: 2,000+ अभ्यास सवाल, 250+ छोटे video, 19+ घंटे के रिकॉर्ड किए notes, और आपका अपना pod।", joinShort: "मुफ़्त जुड़िए →",
+    flexTitle: "देखिए और सुनिए", flexLine: "App के 250+ छोटे video में से एक, और उसके रिकॉर्ड किए notes में से एक (कुल 19+ घंटे)। टैप करने तक कुछ नहीं चलता।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
     whyAsk: "हम क्यों पूछते हैं:", tourLead: "यह सब आज app में है। इस्तेमाल के लिए मुफ़्त जुड़िए; कोई card नहीं चाहिए।",
     loading: "Topic खुल रहा है…", notOpen: "यह topic अभी खुला नहीं है।", notOpenMore: "तब तक Free Shelf बिना account के चलता है।",
     shelf: "Free Shelf खोलिए", back: "पीछे", next: "आगे", resume: "जहाँ छोड़ा था, वहीं से", of: (i, n) => `${i}/${n}`,
@@ -141,7 +141,7 @@ const UI = {
     mapMet: "आपके syllabus map पर संघवाद पर टिक लग गया: एक बार पढ़ा, review बाक़ी।", openReview: "Review खोलिए", openMap: "आपका syllabus map",
     canDo: "अब आप:", join: "मुफ़्त जुड़िए, कोई card नहीं चाहिए", another: "Free Shelf देखिए", draft: "Draft · अभी संपादक ने नहीं जाँचा · केवल desk key से",
     whyNote: "हम ऐसा क्यों करते हैं", evidence: "प्रमाण", band: (b) => `स्तर ${b}`, sideDoor: "साइड डोर", backToPath: "Topic पर लौटिए",
-    express: "Express", full: "पूरा topic", min: (m) => `${m} मिनट`, inside: "अंदर क्या है", switchFull: "पूरे topic में आगे बढ़िए",
+    express: "Express", full: "पूरा topic", min: (m) => `${m} मिनट`, startGo: (m) => `शुरू कीजिए · ${m} मिनट →`, resumeGo: "जहाँ छोड़ा था, वहीं से →", fullLink: (m) => `या पूरा topic कीजिए, ${m} मिनट, तीन बैठकों में`, inside: "अंदर क्या है", switchFull: "पूरे topic में आगे बढ़िए",
     stage: { learn: "सीखिए", practise: "अभ्यास", write: "लिखिए", keep: "याद रखिए" },
     quickOne: "एक छोटा सवाल (ज़रूरी नहीं)", thanks: "शुक्रिया", privacyOnce: "आपके टैप बिना नाम के भेजे जाते हैं, ताकि हम बेहतर बनें। और कुछ नहीं।",
     videoData: "लोड करने के लिए टैप कीजिए। तब तक कुछ डाउनलोड नहीं होता।", transcript: "पढ़कर देखिए", yourTurn: "आपकी बारी",
@@ -387,17 +387,18 @@ function cover() {
   const d = cur.data, p = prog();
   const last = p.last ?? {};
   const c = d.cover ?? {};
-  const routeBtn = (id, primary) => {
-    const r = d.routes[id], at = last[id];
-    return h("button" + (primary ? ".primary" : "") + ".try-route", { onclick: () => { send("route", id, null, true); track("try_route", { route: id }); go(at ?? 0, id); } },
-      h("strong", `${L(r.label)} · ${u("min", r.minutes)}`), h("span.small", at != null ? u("resume") : L(r.note)));
-  };
+  // One clear Start (Express, the default door); the whole topic is a small link under it, so the first question is one tap away.
+  const pick = (id) => () => { send("route", id, null, true); track("try_route", { route: id }); go(last[id] ?? 0, id); };
+  const first = d.routes?.express ? "express" : d.routes?.full ? "full" : null;
+  const startBtn = first && h("button.primary.try-start-go", { onclick: pick(first) },
+    last[first] != null ? u("resumeGo") : u("startGo", d.routes[first].minutes));
+  const fullLink = first === "express" && d.routes.full && h("button.try-alt", { onclick: pick("full") }, u("fullLink", d.routes.full.minutes));
   return [
     h("div.try-bar", h("a", { href: homeHref() }, "⌂ " + u("home")), h("a.small", { href: "#try" }, u("allTopics")), langSwitch()),
     // A topic written without its own cover opens on its title and promise, never on a blank screen.
     h("h1.try-headline", { tabindex: "-1" }, L(c.headline ?? d.title)),
     h("p", L(c.pitch ?? d.promise)),
-    h("div.try-routes", d.routes?.express && routeBtn("express", true), d.routes?.full && routeBtn("full", !d.routes?.express)),
+    first && h("div.try-routes", startBtn, fullLink),
     flex(),
     c.honesty && h("p.small.muted", L(c.honesty)),
     c.joke && h("p.small.try-joke", L(c.joke)),
@@ -811,6 +812,8 @@ function injectStyles() {
 .try-lang .chip { min-width: 40px; min-height: 36px; }
 .try-routes { display: grid; gap: 10px; margin: 16px 0 6px; }
 .try-route { display: grid; gap: 2px; text-align: left; padding: 12px 16px; width: 100%; }
+.try-start-go { width: 100%; min-height: 52px; font-size: 18px; font-weight: 700; }
+.try-alt { justify-self: center; background: none; border: 0; padding: 6px 4px; min-height: 0; color: var(--brand, #C4772A); text-decoration: underline; font-size: 14px; font-weight: 400; cursor: pointer; }
 .try-inside { margin-top: 14px; }
 .try-meta { margin: -4px 0 10px; }
 .try-reader p { line-height: 1.7; margin: 0 0 1em; }
