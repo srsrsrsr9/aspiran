@@ -230,11 +230,13 @@ export function news(st) {
 // Honest about what is built and what is coming: each card says which.
 
 export function tour(st) {
-  return [K.head(st), K.joke(st), h("p.muted", L(st.lead)),
+  // No build-status labels here: a visitor wants to know what is in the app and how to get in, so the page says both.
+  return [K.head(st), K.joke(st), h("p.muted", K.u("tourLead")),
     h("div.try-tour", st.cards.map((c) => h("div.card",
-      h("div.row.between", h("strong", c.icon + " " + L(c.title)), h("span.tag", L(c.status))),
+      h("strong", c.icon + " " + L(c.title)),
       h("p", L(c.line)),
-      c.sample && h("div.try-sample", L(c.sample)))))];
+      c.sample && h("div.try-sample", L(c.sample))))),
+    K.joinStrip()];
 }
 
 // --- Feedback ------------------------------------------------------------------------------------------------------
@@ -252,7 +254,7 @@ export function ask(st) {
       h("div.row.between", h("span.small.muted", K.u("quickOne")), mine != null && h("span.small", "✓ " + K.u("thanks"))),
       h("p", h("strong", L(a.q))),
       h("div.chips", a.chips.map((c) => h("button.chip", { "aria-pressed": String(mine === c.id), onclick: () => { K.setA(k, c.id); K.send(a.id, c.id); drawA(); } }, L(c.label)))),
-      mine != null && a.why && h("p.small.muted", L(a.why)));
+      mine != null && a.why && h("p.small.muted", h("strong", K.u("whyAsk")), " ", L(a.why)));
   };
   drawA();
   return box;

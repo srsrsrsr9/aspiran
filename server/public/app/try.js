@@ -49,6 +49,11 @@ const rich = (t) => String(t).split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((s) =
 
 const UI = {
   en: {
+    home: "Home", allTopics: "All topics", startHere: "Start here", fullest: "The fullest one: real past questions, two short videos and two games.",
+    pickOne: "Eight Polity topics, free, no account. Each has a 15-minute route and a whole-topic route.",
+    preview: "Free preview", joinLine: "Join free for the whole library: 2,000+ questions, 250+ short videos, 19 hours of audio, and a pod of your own.", joinShort: "Join free →",
+    flexTitle: "See it and hear it", flexLine: "One of 250+ one-minute videos and 180+ recorded notes in the app.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
+    whyAsk: "Why we ask:", tourLead: "All of this is in the app today. Join free to use it; no card needed.",
     loading: "Loading the topic…", notOpen: "This topic opens once an editor has checked it.", notOpenMore: "In the meantime, the Free Shelf works without an account.",
     shelf: "Open the Free Shelf", back: "Back", next: "Next", resume: "Carry on where you left off", of: (i, n) => `${i}/${n}`,
     restart: "Start again", startOver: "Start this topic again? Your answers on this page are cleared; cards already in your review stay.",
@@ -87,6 +92,11 @@ const UI = {
     cardOf: (i, n) => `Card ${i} of ${n}`, keepDone: "Done", stop: "Stop here for now", carryOn: "Carry on",
   },
   hi: {
+    home: "होम", allTopics: "सभी topics", startHere: "यहाँ से शुरू कीजिए", fullest: "सबसे भरा-पूरा: असली PYQ, दो छोटे video और दो खेल।",
+    pickOne: "Polity के आठ topics, मुफ़्त, बिना account। हर एक में 15 मिनट का रास्ता और पूरा topic।",
+    preview: "मुफ़्त झलक", joinLine: "पूरी library के लिए मुफ़्त जुड़िए: 2,000+ सवाल, 250+ छोटे video, 19 घंटे audio, और आपका अपना pod।", joinShort: "मुफ़्त जुड़िए →",
+    flexTitle: "देखिए और सुनिए", flexLine: "App के 250+ एक-मिनट video और 180+ रिकॉर्ड किए notes में से एक।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
+    whyAsk: "हम क्यों पूछते हैं:", tourLead: "यह सब आज app में है। इस्तेमाल के लिए मुफ़्त जुड़िए; कोई card नहीं चाहिए।",
     loading: "Topic खुल रहा है…", notOpen: "यह topic संपादक की जाँच के बाद खुलेगा।", notOpenMore: "तब तक Free Shelf बिना account के चलता है।",
     shelf: "Free Shelf खोलिए", back: "पीछे", next: "आगे", resume: "जहाँ छोड़ा था, वहीं से", of: (i, n) => `${i}/${n}`,
     restart: "फिर से शुरू", startOver: "यह topic फिर से शुरू करें? इस पेज के आपके जवाब मिट जाएँगे; review में जा चुके cards बने रहेंगे।",
@@ -223,7 +233,7 @@ export function viewTry(arg = "") {
     if (d.list) return put(root, listView(d.list));
     if (d.closed) return put(root, closedView());
     cur = { id: d.id, data: d.data, draft: !!d.draft, languages: d.languages ?? ["en"] };
-    P.init({ h, put, L, u, getA, setA, mcq, lang, send, forget, pathId: () => cur.id, head, joke, rich,
+    P.init({ h, put, L, u, getA, setA, mcq, lang, send, forget, pathId: () => cur.id, head, joke, rich, joinStrip,
       contact: (contact, consentText, company) => post("/try/contact", { contact, consent: true, consentText, company }) });
     draw();
   });
@@ -235,7 +245,44 @@ function closedView() {
 }
 function listView(list) {
   if (!list.length) return closedView();
-  return [h("h1", "Try one topic"), list.map((p) => h("a.card.link", { href: "#try/" + encodeURIComponent(p.id) }, h("strong", L(p.title))))];
+  // The suggested topic first, marked: the one with the most in it (a path says so with `featured`).
+  const sorted = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  return [homeBar(), h("h1", "Try one topic"), h("p.muted", u("pickOne")),
+    sorted.map((p) => h("a.card.link" + (p.featured ? ".try-featured" : ""), { href: "#try/" + encodeURIComponent(p.id) },
+      p.featured && h("span.tag.try-start", u("startHere")),
+      h("div.row.between", h("strong", L(p.title)), h("span", { "aria-hidden": "true" }, "→")),
+      p.featured && h("div.small.muted", u("fullest")))),
+    joinStrip()];
+}
+/** Where "Home" goes: the website for a visitor, the app's first screen for a member. */
+const homeHref = () => (C.profile() ? "#" : "https://aspiran.in/");
+function homeBar() {
+  return h("div.try-bar", h("a", { href: homeHref() }, "⌂ " + u("home")), langSwitch());
+}
+/** For a visitor only: what joining opens, with one button. Members never see it. */
+function joinStrip() {
+  if (C.profile()) return null;
+  return h("div.try-join", h("div", h("span.tag", u("preview")), " ", h("span.small", u("joinLine"))),
+    h("a.btn.primary", { href: "#", onclick: () => send("join", "strip", null, true) }, u("joinShort")));
+}
+/** One video and one recorded note from the library, on the cover: tap to load, nothing plays by itself. */
+function flex() {
+  const f = cur.data.flex;
+  if (!f?.video && !f?.audio) return null;
+  const v = f.video, a = f.audio?.[lang()] ?? f.audio?.en;
+  const vbox = h("div");
+  const showVideo = () => put(vbox, h("video", { controls: true, playsinline: true, preload: "metadata", poster: v.poster, "aria-label": L(v.title), style: { width: "100%", maxWidth: "320px", borderRadius: "12px", background: "#000" } },
+    h("source", { src: v.mp4, type: "video/mp4" }), v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true })));
+  if (v) put(vbox, h("button.try-video-tap", { onclick: () => { send("flex", "video", null, true); showVideo(); } },
+    h("img", { src: v.poster, alt: "", loading: "lazy", style: { width: "100%", maxWidth: "320px", borderRadius: "12px", display: "block" } }),
+    h("span", "▶ " + u("watch") + " · " + L(v.title)), h("span.small.muted", u("videoData"))));
+  return h("section.card.try-flex", h("h2", { style: { marginTop: 0 } }, u("flexTitle")), h("p.small.muted", u("flexLine")),
+    h("div.try-flex-grid",
+      v && vbox,
+      a && h("div", h("strong", u("listen") + " · " + L(f.audio.title)),
+        h("div.small.muted", [u("aiVoice"), a.voice, u("minShort", Math.max(1, Math.round((a.seconds ?? 0) / 60)))].filter(Boolean).join(" · ")),
+        h("audio", { controls: true, preload: "none", src: a.url, style: { width: "100%", marginTop: "8px" }, onplay: () => send("flex", "audio", null, true) }),
+        h("p.small.muted", u("aiVoiceNote")))));
 }
 
 // --- The frame around every screen ------------------------------------------------------------------------------------
@@ -266,6 +313,7 @@ function bar(r, pos) {
   const st = pos == null ? null : stepById(r.steps[pos]);
   const stage = st?.stage;
   return h("div.try-bar",
+    h("a", { href: homeHref(), "aria-label": u("home"), title: u("home") }, "⌂"),
     h("a", { href: "#try/" + encodeURIComponent(cur.id), "aria-label": L(cur.data.title), onclick: (e) => { e.preventDefault(); go(-1); } }, "← " + L(cur.data.short ?? cur.data.title)),
     h("ol.try-stages", { "aria-label": "Stages" }, STAGES.map((s) => h("li" + (s === stage ? ".on" : STAGES.indexOf(s) < STAGES.indexOf(stage) ? ".past" : ""), { "aria-current": s === stage ? "step" : null }, u("stage")[s]))),
     pos != null && h("span.small.muted", u("of", pos + 1, r.steps.length)),
@@ -288,16 +336,18 @@ function cover() {
       h("strong", `${L(r.label)} · ${u("min", r.minutes)}`), h("span.small", at != null ? u("resume") : L(r.note)));
   };
   return [
-    h("div.try-bar", h("span.small.muted", "Aspiran"), langSwitch()),
+    h("div.try-bar", h("a", { href: homeHref() }, "⌂ " + u("home")), h("a.small", { href: "#try" }, u("allTopics")), langSwitch()),
     // A topic written without its own cover opens on its title and promise, never on a blank screen.
     h("h1.try-headline", { tabindex: "-1" }, L(c.headline ?? d.title)),
     h("p", L(c.pitch ?? d.promise)),
     h("div.try-routes", d.routes?.express && routeBtn("express", true), d.routes?.full && routeBtn("full", !d.routes?.express)),
+    flex(),
     c.honesty && h("p.small.muted", L(c.honesty)),
     c.joke && h("p.small.try-joke", L(c.joke)),
     h("details.try-inside", h("summary", u("inside")),
       h("h3", c.canDoTitle ? L(c.canDoTitle) : u("canDo")), h("ul", (d.canDo ?? []).map((x) => h("li", L(x)))),
       h("p", L(d.why)), h("p.small.muted", L(d.sittings))),
+    joinStrip(),
     (last.express != null || last.full != null) && h("button.ghost.small", { onclick: () => { if (confirm(u("startOver"))) { save({ route: null, pos: -1, a: {} }); draw(); } } }, u("restart")),
   ];
 }
@@ -342,7 +392,7 @@ function renderStep(st) {
   // The "why" note sits just under the title; side doors and the quick question after the step's own content.
   // The finish screen places its own side doors (above the survey); a game's quick question waits until it's played.
   const played = st.type !== "sim-governor" || getA(st.id + ":at", 0) >= (st.rounds?.length ?? 0);
-  return [arr[0], whyNote(st), arr.slice(1), st.type !== "finish" && doors(st), played && quickAsk(st), h("div.try-care")];
+  return [arr[0], whyNote(st), arr.slice(1), st.type !== "finish" && doors(st), played && quickAsk(st), st.type !== "finish" && joinStrip(), h("div.try-care")];
 }
 
 // --- One multiple-choice question --------------------------------------------------------------------------------
@@ -736,6 +786,12 @@ function injectStyles() {
 .try-door { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 2px 10px; width: 100%; text-align: left; margin: 12px 0 0; }
 .try-door > span:last-child { grid-row: 1 / 3; grid-column: 2; align-self: center; font-size: 20px; }
 .try-mine-plan { white-space: pre-wrap; font: inherit; font-size: 14px; }
+.try-join { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; margin-top: 18px; padding: 12px 14px; border: 1px solid var(--brand, #C4772A); border-radius: 12px; background: var(--soft, #f4f1ea); }
+.try-join > div { flex: 1 1 240px; }
+.try-featured { border-color: var(--brand, #C4772A); border-width: 2px; }
+.try-start { display: inline-block; margin-bottom: 6px; background: var(--brand, #C4772A); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; }
+.try-flex-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
+.try-flex .try-video-tap { display: grid; gap: 6px; text-align: left; width: 100%; }
 .try-nav { position: sticky; bottom: 0; display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; margin-top: 18px; background: var(--bg, #f5f3ee); border-top: 1px solid var(--line, #0001); z-index: 2; }
 .try-nav button { min-height: 48px; min-width: 110px; }
 .try textarea { width: 100%; }

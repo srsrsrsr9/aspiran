@@ -142,7 +142,7 @@ export async function tryRoute(req: Request, env: Env, path: string, url: URL): 
   const id = decodeURIComponent(path.slice("/try/".length));
 
   if (path === "/try") {
-    const items = (await approvedPaths(env)).map((i) => ({ id: i.data.id, title: i.data.title, node: i.data.node, languages: i.languages }));
+    const items = (await approvedPaths(env)).map((i) => ({ id: i.data.id, title: i.data.title, node: i.data.node, languages: i.languages, featured: i.data.featured === true }));
     return json({ items });
   }
 
