@@ -11,7 +11,7 @@ import { REQUESTABLE, requestLanguage } from "./requests";
 import ADMIN_HTML from "./admin.html";
 import { createBackup } from "./backups";
 import { CONSENT_VERSION, privacyRoute, recordConsent } from "./privacy";
-import { bump, ensureSchema, flags } from "./staff";
+import { bump, ensureSchema, flags, setSetting } from "./staff";
 import { statusData, statusHtml } from "./status";
 // The same starter bank the phone bundles, so the web app's practice matches.
 import BANK from "../../android/app/src/main/assets/prelims_bank.json";
@@ -277,7 +277,7 @@ export default {
     const log = (name: string) => (r: unknown) => console.log(name, JSON.stringify(r));
     const fail = (name: string) => (e: unknown) => console.log(name, "failed", String(e));
     if (hm === "05:30") {
-      ctx.waitUntil(runPipeline(env).then((l) => console.log(l.join("\n"))));
+      ctx.waitUntil(chaiDrafts(env, hm));
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
       // Photos sent to rooms and pods go after 7 days.
@@ -291,7 +291,16 @@ export default {
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));
-    if (hm === "07:00") {
+    // A drafting run that left nothing (a feed down, the run cut short) is tried again each half hour until 11:00,
+    // and a day with no Chai yet gets the 07:00 step again on the hour until noon, so one bad run doesn't cost the day.
+    const CATCH_UP = ["06:00", "06:30", "07:30", "08:30", "09:30", "10:30"], LATE = ["08:00", "09:00", "10:00", "11:00", "12:00"];
+    if (CATCH_UP.includes(hm) || LATE.includes(hm)) {
+      const day = istDay();
+      const n = await env.DB.prepare("SELECT COUNT(*) n FROM candidates WHERE day = ?").bind(day).first<{ n: number }>().catch(() => null);
+      if (CATCH_UP.includes(hm) && n && n.n === 0) ctx.waitUntil(chaiDrafts(env, hm));
+    }
+    const noBriefYet = async () => !(await env.DB.prepare("SELECT 1 FROM briefs WHERE day = ?").bind(istDay()).first().catch(() => 1));
+    if (hm === "07:00" || (LATE.includes(hm) && (await flags(env)).chai_auto && (await noBriefYet()))) {
       // Publish what the editor approved, then tell the pods (through the host gate).
       ctx.waitUntil((async () => {
         // The automatic Chai (flag chai_auto): fills the day from checked drafts when no editor has been in.
@@ -299,7 +308,8 @@ export default {
         const r = await publish(env);
         console.log(JSON.stringify({ ...r, auto }));
         if (r.published) await postRitual(env, "chai");
-        await chaiDigest(env, istDay(), auto, r).catch(() => {});
+        // The owner's email goes once: at 07:00, or later when a late run is the one that publishes.
+        if (hm === "07:00" ? true : r.published) await chaiDigest(env, istDay(), auto, r).catch(() => {});
       })()
         // Then each open room's pinned question, from what was just published.
         .then(() => runJob(env, "pins", at)).then(log("pins"), fail("pins")));
@@ -308,6 +318,14 @@ export default {
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },
 } satisfies ExportedHandler<Env>;
+
+/** The day's drafting run, with its log kept (settings key `pipeline_last`) so a run that fetched nothing can be read afterwards. */
+async function chaiDrafts(env: Env, at: string) {
+  let lines: string[];
+  try { lines = await runPipeline(env); } catch (e) { lines = ["failed: " + String(e).slice(0, 300)]; }
+  console.log(lines.join("\n"));
+  await setSetting(env, "pipeline_last", { at: new Date().toISOString(), slot: at, log: lines }, "cron").catch(() => {});
+}
 
 /**
  * The Desk and Admin pages: never framed, never cached, and only allowed to load their own inline code and talk to
