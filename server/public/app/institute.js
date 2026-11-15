@@ -267,9 +267,9 @@ function youView(box, m) {
   loading(box);
   api("/inst/progress").then(({ you: s }) => put(box,
     h("p.small.muted", `Only you and your teachers at ${m.institute.name} see this. Since you joined.`),
-    h("div.card", h("div.row.between", h("span", "Days you used Aspiran (last 14)"), h("strong", s.daysActive14)),
-      h("div.row.between", h("span", "Focus minutes"), h("strong", s.focusMinutes)),
-      h("div.row.between", h("span", "Questions answered in your institute's sets"), h("strong", s.answered)),
+    h("div.card", h("div.row.between", h("span", "Days you used Aspiran (last 14)"), h("strong", String(s.daysActive14))),
+      h("div.row.between", h("span", "Focus minutes"), h("strong", String(s.focusMinutes))),
+      h("div.row.between", h("span", "Questions answered in your institute's sets"), h("strong", String(s.answered))),
       s.accuracy != null && h("div.row.between", h("span", "Right first time"), h("strong", s.accuracy + "%")),
       h("div.row.between", h("span", "Plan items done"), h("strong", `${s.planDone} of ${s.planDue} so far`)),
       h("div.row.between", h("span", "Doubts cleared"), h("strong", `${s.doubtsResolved} of ${s.doubtsRaised}`))),
