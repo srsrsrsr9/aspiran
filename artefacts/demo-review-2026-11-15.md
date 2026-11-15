@@ -239,3 +239,26 @@ All recommendations stay within the standing rules: no timers, streaks or public
 
 ## Screenshots (`artefacts/demo-review-2026-11-15/`)
 01 site hero (laptop) · 02 topic list · 03 Federalism cover · 04 cover video playing, captions on · 05 Express step 1 · 06 Governor's desk game · 07 finish screen, top · 08 finish screen, bottom: Join under the survey · 09 Join lands on the sign-up screen · 10 Constitutional bodies cover, same audio · 11 Bodies finish, no survey · 12 Hindi site (phone) · 13 Hindi site opens the English list (phone) · 14 Federalism cover in Hindi (phone) · 15 Governor's desk in Hindi (phone) · 16 finish screen in Hindi (phone)
+
+## Done (15 Nov 2026, same day)
+
+What changed, in the order the owner ranked it:
+
+1. **Finish screen.** Join comes first: "Join free, keep your N cards" (or "keep your progress" when no cards were kept), with "Google sign-in. No card, no phone number", one numbers line (2,033 practice questions, 254 short videos, nearly 20 hours of recorded notes, 60 interactives, 11 past papers) and one Free vs Plus line in the site's words. The survey is folded ("Tell us honestly (4 questions, optional)") and cut from seven questions to four; its price question now lists what the site lists for Plus. "When the full app opens" is gone everywhere. Members get Open Review, Your syllabus map and Try the next topic.
+2. **Warm sign-up.** Join from the demo opens a sign-up that names the topic and the cards ("One sign-in, and your cards are yours."), skips the quiz question, offers "← Back to the topic", and after sign-in returns to the topic, not the pod. The cards really carry over: the demo already writes them into the app's own Review store in that browser, and sign-in doesn't clear it. Same browser only; the wording says "in this browser".
+3. **Website.** Every Try button (home, Hindi home, /how-it-works, the seat form) opens Federalism's cover directly. The hero line says "about 15 minutes. No sign-up to try." "All topics" stays on the cover.
+4. **Hindi.** Hindi pages add `lang=hi`; the demo, the topic list and the sign-up open in Hindi; the topic list has the EN/हि switch; Home goes to aspiran.in/hi/ in Hindi.
+5. **Audio label.** Federalism's recorded note is now titled "From the Polity notes: the Finance Commission, CAG and UPSC".
+6. **Media.** Video plays on the first tap (still never on its own). On phones the recorded note comes first and the video poster is capped in height.
+7. **Cover lines.** The honesty line now says the videos and notes use AI voices and answers stay on this device; the clock line is "No clock runs. Stop anywhere; your place is kept."; the Chai joke is gone.
+8. **Fewer asks.** In Express only one quick question shows (on the last step that has one).
+9. **Funnel.** New events: `try_open`, `try_route`, `try_step` (each step once), `try_finish`, `try_join` (with where), `onboarding_done` (with `from: try`). The demo's feedback uses the app's install id, so feedback, demo events and sign-up join up. `utm_medium` is kept with the source (for example `site:hero`). Site links carry the PostHog id (`ph=`), so a site visit and the app are one person in PostHog. The privacy off-switch still turns PostHog off.
+   - **Where to see it:** admin → Growth → "Open demo to sign-up" (last 30 days: opened, started a topic, reached step 3, finished, tapped Join, signed in, and where Join was tapped). In PostHog, build a funnel: `$pageview` (aspiran.in) → `cta` → `try_open` → `try_step` → `try_finish` → `try_join` → `onboarding_done`.
+
+Left, and why:
+
+- **The other seven topics** still have the older cover lines and no survey; Federalism is the one the site sends people to. Worth a pass once the funnel shows people reach them.
+- **A Federalism-specific recorded note** needs new voice work, which is paused; the label is honest meanwhile.
+- **Hindi captions for the cover videos**: the owner makes these.
+- **Cards across devices**: the demo's cards live in the browser they were made in. Moving them to another phone would need a server copy; not built.
+- **The Mains step and reading load** (UX 9, 13): content changes for the owner, not done here.

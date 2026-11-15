@@ -23,15 +23,16 @@ const metered = () => !!(navigator.connection && (navigator.connection.saveData 
 export function video(st) {
   const v = st.video;
   const box = h("div.try-video");
-  const showPlayer = () => {
+  const showPlayer = (tapped = false) => {
     const el = h("video", { controls: true, playsinline: true, preload: "metadata", poster: v.poster, width: 360, height: 640, "aria-label": L(v.title) },
       h("source", { src: v.mp4, type: "video/mp4" }),
       v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true }));
     el.addEventListener("play", () => K.setA(st.id + ":played", true), { once: true });
     put(box, el);
+    if (tapped) el.play?.()?.catch?.(() => {}); // the tap that loaded it is the tap that plays it; never on its own
   };
   if (metered() && !K.getA(st.id + ":played")) {
-    put(box, h("button.try-video-tap", { onclick: showPlayer },
+    put(box, h("button.try-video-tap", { onclick: () => showPlayer(true) },
       h("span", "▶"), h("span", `${L(v.title)} · ${v.seconds} s · about ${v.mb} MB`), h("span.small.muted", K.u("videoData"))));
   } else showPlayer();
   return [

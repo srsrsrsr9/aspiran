@@ -440,8 +440,17 @@ loadConfig();
 // Welcome and language; sign in (Google); 18+ and consent; nickname; then "Meet Chotu", then Adda. Nothing about
 // stage, attempts, age or mood is asked here: those come later, one at a time, when they help.
 
+/** A visitor who tapped Join in the open demo (try.js) in the last three days: { path, title, n, lang }. */
+function fromTry() {
+  const j = store.get("try:joining");
+  return j && Date.now() - (j.at ?? 0) < 3 * 86400e3 ? j : null;
+}
 function onboarding() {
-  const o = (onboarding.state ??= { step: 0, lang: langOptions().some((x) => x.code === navigator.language?.slice(0, 2)) ? navigator.language.slice(0, 2) : "en", adult: false, consent: false, name: "", pick: null });
+  // The language: the one picked in the demo (or carried from the Hindi website), else the browser's.
+  const tj = fromTry(), picked = tj?.lang ?? store.get("try:lang", null);
+  const first = picked && langOptions().some((x) => x.code === picked) ? picked
+    : langOptions().some((x) => x.code === navigator.language?.slice(0, 2)) ? navigator.language.slice(0, 2) : "en";
+  const o = (onboarding.state ??= { step: 0, lang: first, adult: false, consent: false, name: "", pick: null });
   const tl = (k) => t(k, o.lang);
   const hi = o.lang === "hi";
   const redraw = () => put($("#root"), onboarding());
@@ -475,11 +484,23 @@ function onboarding() {
     const enter = Auth.optional() || (o.memberId && Auth.signedIn())
       ? h("div.center", h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(1) }, hi ? "अंदर आइए" : "Come in"))
       : signInPanel(null, (memberId) => { o.memberId = memberId; step(1); });
+    // From the demo: no quiz question (they've just answered plenty); say plainly what comes with them.
+    const tTitle = tj && (typeof tj.title === "object" ? (tj.title?.[o.lang] ?? tj.title?.en) : tj.title);
+    const welcome = tj && h("div.card.soft", { role: "status" },
+      h("p", { style: { marginTop: 0 } }, h("strong", hi
+        ? (tj.n ? `${tTitle ?? "आपके topic"} के आपके ${tj.n} cards इसी browser में हैं।` : `${tTitle ?? "आपके topic"} पर आपकी प्रगति इसी browser में है।`)
+        : (tj.n ? `Your ${tj.n} ${tTitle ?? ""} cards are in this browser.` : `Your progress on ${tTitle ?? "the topic"} is in this browser.`))),
+      h("p.small", { style: { marginBottom: 0 } }, !tj.n
+        ? (hi ? "Sign in कीजिए और topic वहीं से आगे बढ़ाइए जहाँ छोड़ा था; जो cards आप रखेंगे वे Review में लौटेंगे।" : "Sign in and carry on where you left off; any cards you keep come back in your Review.")
+        : hi
+        ? "Sign in कीजिए: वे आपके Review में रहेंगे, ठीक भूलने से पहले लौटने के लिए, और आप वहीं से आगे बढ़ेंगे जहाँ छोड़ा था।"
+        : "Sign in and they stay in your Review, timed to come back just before you'd forget, and you carry on where you left off."));
     body = [
       h("div.row.between", h("strong", "Aspiran"), langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); })),
-      h("h1", hi ? "जो पढ़ा, वह याद रहे।" : "Remember what you read."),
-      h("p", hi ? "UPSC की तैयारी, अकेले नहीं। पहले एक सवाल:" : "UPSC prep that sticks, and never alone. One question first:"),
-      h("div.card", h("p", h("strong", Q.q)),
+      tj ? h("h1", tj.n ? (hi ? "बस sign in, और आपके cards आपके।" : "One sign-in, and your cards are yours.") : (hi ? "बस sign in, और जहाँ छोड़ा वहीं से आगे।" : "One sign-in, and you carry on from here.")) : h("h1", hi ? "जो पढ़ा, वह याद रहे।" : "Remember what you read."),
+      tj ? welcome : null,
+      !tj && h("p", hi ? "UPSC की तैयारी, अकेले नहीं। पहले एक सवाल:" : "UPSC prep that sticks, and never alone. One question first:"),
+      !tj && h("div.card", h("p", h("strong", Q.q)),
         h("div.col", Q.opts.map((label, i) => h("button" + (answered && i === Q.right ? ".primary" : ""), { disabled: answered, "aria-pressed": String(o.pick === i), onclick: () => pick(i) }, label))),
         answered && h("p", { role: "status" }, o.pick === Q.right ? Q.yes : Q.no),
         answered && h("p.small.muted", Q.after), answered && J.say("intro", { l: o.lang })),
@@ -487,7 +508,8 @@ function onboarding() {
         h("p.small", hi ? "आपका पॉड, रोज़ की चाय, अभ्यास और Chotu। कार्ड नहीं चाहिए। आपका ईमेल सिर्फ़ साइन-इन के लिए है: पॉड उसे नहीं देखता, और वह Chotu तक नहीं जाता।"
           : "Your pod, the daily Chai, practice and Chotu. No card needed. Your email is only for signing in: your pod never sees it, and it never goes to Chotu."),
         enter),
-      h("p.center", h("a", { href: "#try" }, hi ? "पहले एक पूरा टॉपिक आज़माएँ, बिना अकाउंट के" : "Or try one whole topic first, no account needed")),
+      tj ? h("p.center", h("a", { href: tj.path ? "#try/" + encodeURIComponent(tj.path) : "#try" }, hi ? "← Topic पर लौटिए" : "← Back to the topic"))
+        : h("p.center", h("a", { href: "#try" }, hi ? "पहले एक पूरा टॉपिक आज़माएँ, बिना अकाउंट के" : "Or try one whole topic first, no account needed")),
       h("details", h("summary", hi ? "Aspiran कैसे पढ़ाता है" : "How Aspiran teaches, and the whole syllabus"),
         gardenSection({ hero: false, note: false, height: 300 }), pitchCard(), requestPanel(),
         h("p.small.center", h("a", { href: "#shelf" }, "Look around the Free Shelf")))];
@@ -525,8 +547,11 @@ function finishOnboarding() {
   // A record that they agreed, and to which version (DPDP). Only the random member id, nothing else.
   fetch("/consent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId, version: config.consentVersion, purposes: ["pods", "safety"] }) }).catch(() => {});
   onboarding.state = null;
-  M.track("onboarding_done");
-  location.hash = "#adda"; render();
+  const tj = fromTry();
+  M.track("onboarding_done", tj ? { from: "try" } : {});
+  store.del("try:joining");
+  // From the demo: back to the topic they finished, now as a member (Review, the syllabus map, the next topic).
+  location.hash = tj?.path ? "#try/" + encodeURIComponent(tj.path) : "#adda"; render();
 }
 
 // --- Today -------------------------------------------------------------------------------------
@@ -4168,7 +4193,7 @@ function viewRoutine() {
 }
 
 X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn, profile, paused, resultMode, careRecently, mcqBlock, mcqOf, addMiss, gotRight, shuffle, today, addDays, render: () => render() });
-TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false), jeetu: (k) => J.say(k) });
+TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false), jeetu: (k) => J.say(k), track: (n, p) => M.track(n, p), installId: () => M.installId() });
 BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud, voiceAudio, jeetu: (k) => J.say(k) });
 // Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
 J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang });

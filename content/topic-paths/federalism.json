@@ -3457,8 +3457,8 @@
         "hi": "हमें सच बताइए"
       },
       "lead": {
-        "en": "Six questions, about two minutes, all optional. An honest \"no\" helps us more than a polite \"yes\". Answers are anonymous unless you leave a contact below.",
-        "hi": "छह सवाल, लगभग दो मिनट, सब वैकल्पिक। ईमानदार \"नहीं\" हमारे लिए विनम्र \"हाँ\" से ज़्यादा काम का है। जवाब बिना नाम के हैं, जब तक आप नीचे संपर्क न दें।"
+        "en": "Four questions, about a minute, all optional. An honest \"no\" helps us more than a polite \"yes\". Answers are anonymous unless you leave a contact below.",
+        "hi": "चार सवाल, लगभग एक मिनट, सब वैकल्पिक। ईमानदार \"नहीं\" हमारे लिए विनम्र \"हाँ\" से ज़्यादा काम का है। जवाब बिना नाम के हैं, जब तक आप नीचे संपर्क न दें।"
       },
       "questions": [
         {
@@ -3509,44 +3509,6 @@
               "label": {
                 "en": "Teacher or mentor",
                 "hi": "शिक्षक या मेंटर"
-              }
-            },
-            {
-              "id": "na",
-              "label": {
-                "en": "Prefer not to say",
-                "hi": "बताना नहीं चाहते"
-              }
-            }
-          ]
-        },
-        {
-          "id": "medium",
-          "kind": "chips",
-          "q": {
-            "en": "You write the exam in…",
-            "hi": "आप exam किस भाषा में लिखते हैं?"
-          },
-          "options": [
-            {
-              "id": "en",
-              "label": {
-                "en": "English",
-                "hi": "English"
-              }
-            },
-            {
-              "id": "hi",
-              "label": {
-                "en": "हिंदी",
-                "hi": "हिंदी"
-              }
-            },
-            {
-              "id": "other",
-              "label": {
-                "en": "Another language",
-                "hi": "कोई और भाषा"
               }
             },
             {
@@ -3662,77 +3624,11 @@
           }
         },
         {
-          "id": "replace",
-          "kind": "multi",
-          "q": {
-            "en": "If the whole app covered your syllabus like this, would it replace anything you use now?",
-            "hi": "अगर पूरा app आपका syllabus ऐसे ही कराए, तो क्या यह किसी चीज़ की जगह लेगा जो आप अभी इस्तेमाल करते हैं?"
-          },
-          "options": [
-            {
-              "id": "coaching",
-              "label": {
-                "en": "Coaching notes or modules",
-                "hi": "कोचिंग नोट्स"
-              }
-            },
-            {
-              "id": "tests",
-              "label": {
-                "en": "A test series",
-                "hi": "टेस्ट सीरीज़"
-              }
-            },
-            {
-              "id": "youtube",
-              "label": {
-                "en": "YouTube lectures",
-                "hi": "YouTube"
-              }
-            },
-            {
-              "id": "groups",
-              "label": {
-                "en": "Telegram or WhatsApp groups",
-                "hi": "Telegram या WhatsApp ग्रुप"
-              }
-            },
-            {
-              "id": "cards",
-              "label": {
-                "en": "A flashcard app",
-                "hi": "flashcard app"
-              }
-            },
-            {
-              "id": "book",
-              "label": {
-                "en": "A standard book",
-                "hi": "कोई मानक किताब"
-              }
-            },
-            {
-              "id": "alongside",
-              "label": {
-                "en": "No, I'd use it alongside",
-                "hi": "नहीं, साथ में चलाऊँगा"
-              }
-            },
-            {
-              "id": "unsure",
-              "label": {
-                "en": "Not sure",
-                "hi": "पक्का नहीं"
-              }
-            }
-          ]
-        },
-        {
           "id": "price",
           "kind": "chips",
           "q": {
-            "en": "The free parts of Aspiran stay free. Aspiran Plus (every mock paper, mock insights with an error log, the weekly Chai test and the monthly compilation) costs ₹9,999 a year. The first 300 people who buy on our website pay ₹999 instead. Which is closest to true for you today?",
-            "hi": "Aspiran के मुफ़्त हिस्से मुफ़्त ही रहेंगे। Aspiran Plus (हर mock paper, error log के साथ mock insights, साप्ताहिक Chai test और मासिक संकलन) ₹9,999 प्रति वर्ष है। हमारी website पर पहले 300 ख़रीदार इसकी जगह ₹999 देंगे। आज के हिसाब से आपके लिए सबसे सही क्या है?"
+            "en": "The free parts of Aspiran stay free. Aspiran Plus (unlimited answer marking and rewrites, all mocks with your mistake types, essays in three snaps, more of Chotu) costs ₹9,999 a year; the first 300 pay ₹999 for the first year. Which is closest to true for you today?",
+            "hi": "Aspiran के मुफ़्त हिस्से मुफ़्त ही रहेंगे। Aspiran Plus (असीमित उत्तर-जाँच और दोबारा लिखना, आपकी ग़लतियों के प्रकार के साथ सारे मॉक, तीन तस्वीरों में निबंध, Chotu और ज़्यादा) ₹9,999 प्रति वर्ष है; पहले 300 लोग पहले साल ₹999 देंगे। आज के हिसाब से आपके लिए सबसे सही क्या है?"
           },
           "options": [
             {
@@ -3768,93 +3664,6 @@
               "label": {
                 "en": "Can't say yet",
                 "hi": "अभी नहीं कह सकते"
-              }
-            }
-          ]
-        },
-        {
-          "id": "recommend",
-          "kind": "chips",
-          "q": {
-            "en": "How likely are you to tell a fellow aspirant about this? (0 = not at all, 10 = certainly)",
-            "hi": "किसी साथी aspirant को इसके बारे में बताने की कितनी संभावना है? (0 = बिलकुल नहीं, 10 = ज़रूर)"
-          },
-          "options": [
-            {
-              "id": "0",
-              "label": {
-                "en": "0",
-                "hi": "0"
-              }
-            },
-            {
-              "id": "1",
-              "label": {
-                "en": "1",
-                "hi": "1"
-              }
-            },
-            {
-              "id": "2",
-              "label": {
-                "en": "2",
-                "hi": "2"
-              }
-            },
-            {
-              "id": "3",
-              "label": {
-                "en": "3",
-                "hi": "3"
-              }
-            },
-            {
-              "id": "4",
-              "label": {
-                "en": "4",
-                "hi": "4"
-              }
-            },
-            {
-              "id": "5",
-              "label": {
-                "en": "5",
-                "hi": "5"
-              }
-            },
-            {
-              "id": "6",
-              "label": {
-                "en": "6",
-                "hi": "6"
-              }
-            },
-            {
-              "id": "7",
-              "label": {
-                "en": "7",
-                "hi": "7"
-              }
-            },
-            {
-              "id": "8",
-              "label": {
-                "en": "8",
-                "hi": "8"
-              }
-            },
-            {
-              "id": "9",
-              "label": {
-                "en": "9",
-                "hi": "9"
-              }
-            },
-            {
-              "id": "10",
-              "label": {
-                "en": "10",
-                "hi": "10"
               }
             }
           ]
@@ -3894,16 +3703,16 @@
           "hi": "जवाब चाहिए? (वैकल्पिक)"
         },
         "lead": {
-          "en": "Leave an email or Indian mobile number only if you want us to write once when the full app opens, or when something you asked for is built. We use it for that and nothing else: no ads, no sharing, no selling. Tap \"Delete what I sent\" below at any time to remove it, along with your answers.",
-          "hi": "Email या भारतीय मोबाइल नंबर तभी दीजिए जब आप चाहें कि पूरा app खुलने पर, या आपकी माँगी चीज़ बनने पर, हम एक बार लिखें। हम इसे सिर्फ़ इसी के लिए इस्तेमाल करेंगे: कोई विज्ञापन नहीं, किसी से साझा नहीं, बिक्री नहीं। नीचे \"मैंने जो भेजा, मिटा दीजिए\" दबाकर इसे, आपके जवाबों के साथ, कभी भी हटा सकते हैं।"
+          "en": "Leave an email or Indian mobile number only if you want us to write once when something you asked for is built. We use it for that and nothing else: no ads, no sharing, no selling. Tap \"Delete what I sent\" below at any time to remove it, along with your answers.",
+          "hi": "Email या भारतीय मोबाइल नंबर तभी दीजिए जब आप चाहें कि आपकी माँगी चीज़ बनने पर हम एक बार लिखें। हम इसे सिर्फ़ इसी के लिए इस्तेमाल करेंगे: कोई विज्ञापन नहीं, किसी से साझा नहीं, बिक्री नहीं। नीचे \"मैंने जो भेजा, मिटा दीजिए\" दबाकर इसे, आपके जवाबों के साथ, कभी भी हटा सकते हैं।"
         },
         "placeholder": {
           "en": "Email or mobile number",
           "hi": "Email या मोबाइल नंबर"
         },
         "consent": {
-          "en": "I'm 18 or older, and you may contact me once about the full app opening or what I asked for.",
-          "hi": "मेरी उम्र 18 वर्ष या उससे अधिक है, और आप मुझसे पूरा app खुलने या मेरी माँगी चीज़ के बारे में एक बार संपर्क कर सकते हैं।"
+          "en": "I'm 18 or older, and you may contact me once about what I asked for.",
+          "hi": "मेरी उम्र 18 वर्ष या उससे अधिक है, और आप मुझसे मेरी माँगी चीज़ के बारे में एक बार संपर्क कर सकते हैं।"
         },
         "tick": {
           "en": "Tick the box first, or leave the field empty.",
@@ -3973,12 +3782,12 @@
       "hi": "संघवाद: पाँच Prelims papers में UPSC ने इस पर कम से कम 11 सवाल पूछे। आप पहले अंदाज़ा लगाएँगे, छोटे हिस्से पढ़ेंगे, राज्यपाल की मेज़ पर बैठेंगे, असली PYQ हल करेंगे और एक Mains answer का ढाँचा बनाएँगे। न account, न घड़ी, न कोई पैसा।"
     },
     "honesty": {
-      "en": "Written by our team. PYQ answers match UPSC's official keys. No AI writes or marks anything here; the two optional videos use a synthetic voice. Your study answers stay on this phone.",
-      "hi": "हमारी टीम ने लिखा है। PYQ के उत्तर UPSC की आधिकारिक कुंजियों से मिलते हैं। यहाँ कुछ भी AI नहीं लिखता या जाँचता; दो वैकल्पिक videos में कृत्रिम आवाज़ है। पढ़ाई वाले आपके जवाब इसी phone पर रहते हैं।"
+      "en": "Written by our team. PYQ answers match UPSC's official keys. No AI writes or marks anything in this topic; the videos and recorded notes use AI voices. Your answers stay on this device.",
+      "hi": "हमारी टीम ने लिखा है। PYQ के उत्तर UPSC की आधिकारिक कुंजियों से मिलते हैं। इस topic में कुछ भी AI नहीं लिखता या जाँचता; videos और रिकॉर्ड किए notes में AI आवाज़ है। आपके जवाब इसी device पर रहते हैं।"
     },
     "joke": {
-      "en": "No clock runs. Chai is optional but recommended.",
-      "hi": "कोई घड़ी नहीं चलती। चाय ज़रूरी नहीं, पर सलाह दी जाती है।"
+      "en": "No clock runs. Stop anywhere; your place is kept.",
+      "hi": "कोई घड़ी नहीं चलती। कहीं भी रुकिए; आपकी जगह बनी रहती है।"
     },
     "canDoTitle": {
       "en": "What you'll be able to do",
@@ -4053,8 +3862,8 @@
     },
     "audio": {
       "title": {
-        "en": "Constitutional bodies: CAG, UPSC, Finance Commission",
-        "hi": "संवैधानिक निकाय: CAG, UPSC, वित्त आयोग"
+        "en": "From the Polity notes: the Finance Commission, CAG and UPSC",
+        "hi": "Polity notes से: वित्त आयोग, CAG और UPSC"
       },
       "en": {
         "url": "/media/audio-ai/2026-11/read/pol-syl-constitutional-bodies.en.mp3",

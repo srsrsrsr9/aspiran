@@ -35,7 +35,13 @@ export const CHECKIN = {
 const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> = {
   first_open: (p) => ({ source: code(p.source), invite: code(p.invite, 24), referrer: referrer(p.referrer) }),
   app_open: () => ({}),
-  onboarding_done: () => ({}),
+  onboarding_done: (p) => ({ from: code(p.from, 12) }),
+  // The open demo (#try), for the sign-up funnel: which topic, which route, how far. Never an answer.
+  try_open: (p) => ({ path: code(p.path, 64) }),
+  try_route: (p) => ({ path: code(p.path, 64), route: code(p.route, 12) }),
+  try_step: (p) => { const n = count(p.n, 60); return n ? { path: code(p.path, 64), route: code(p.route, 12), n, of: count(p.of, 60) } : null; },
+  try_finish: (p) => ({ path: code(p.path, 64), route: code(p.route, 12) }),
+  try_join: (p) => ({ path: code(p.path, 64), where: code(p.where, 12) }),
   ritual: (p) => ((RITUALS as readonly string[]).includes(p.kind) ? { kind: p.kind } : null),
   chai_read: (p) => ({ cards: count(p.cards, 20) ?? 1 }),
   prep_minutes: (p) => { const m = count(p.minutes, 600); return m ? { minutes: m } : null; },
@@ -206,6 +212,26 @@ export async function growthReport(env: Env, now = Date.now()) {
     answers: CHECKIN[q].choices.map((choice, i) => ({ choice, n: checkinRows.find((r) => r.moment === `day7_${q}` && r.rating === i)?.n ?? 0 })),
   }));
 
+  // The open demo, as a sign-up funnel (last 30 days): distinct browsers (install ids) reaching each step.
+  const demo = await env.DB.prepare(
+    `SELECT COUNT(DISTINCT CASE WHEN name = 'try_open' THEN install_id END) AS opened,
+       COUNT(DISTINCT CASE WHEN name = 'try_route' THEN install_id END) AS started,
+       COUNT(DISTINCT CASE WHEN name = 'try_step' AND CAST(json_extract(props, '$.n') AS INTEGER) >= 3 THEN install_id END) AS step3,
+       COUNT(DISTINCT CASE WHEN name = 'try_finish' THEN install_id END) AS finished,
+       COUNT(DISTINCT CASE WHEN name = 'try_join' THEN install_id END) AS joinClicked
+     FROM events WHERE day >= ? AND install_id IS NOT NULL AND name IN ('try_open', 'try_route', 'try_step', 'try_finish', 'try_join')`).bind(since30).first<Record<string, number>>();
+  const demoSigned = await env.DB.prepare(
+    `SELECT COUNT(DISTINCT e.install_id) AS n FROM events e JOIN installs i ON i.install_id = e.install_id
+     WHERE e.name = 'try_open' AND e.day >= ? AND i.member_id IS NOT NULL`).bind(since30).first<{ n: number }>();
+  const demoJoinWhere = await all<{ where_: string; n: number }>(
+    `SELECT json_extract(props, '$.where') AS where_, COUNT(DISTINCT install_id) AS n FROM events WHERE name = 'try_join' AND day >= ? GROUP BY 1 ORDER BY 2 DESC`, since30);
+  const demoFunnel = {
+    window: `since ${since30}`,
+    steps: [["Opened the demo", demo?.opened ?? 0], ["Started a topic", demo?.started ?? 0], ["Reached step 3", demo?.step3 ?? 0],
+      ["Finished a route", demo?.finished ?? 0], ["Tapped Join", demo?.joinClicked ?? 0], ["Signed in", demoSigned?.n ?? 0]].map(([step, n]) => ({ step, n })),
+    joinWhere: demoJoinWhere.map((r) => ({ where: r.where_, n: r.n })),
+  };
+
   // Paid funnel (last 30 days): offers shown, checkouts started, paid, refunded.
   const funnelRows = await all<{ name: string; n: number; people: number }>(
     "SELECT name, COUNT(*) AS n, COUNT(DISTINCT member_id) AS people FROM events WHERE name IN ('offer_shown', 'checkout_started', 'paid', 'refunded') AND day >= ? GROUP BY name", since30);
@@ -224,7 +250,7 @@ export async function growthReport(env: Env, now = Date.now()) {
   const verdict = joins.length < POD_TEST.minSample ? "too_few" : week4Pct! < POD_TEST.stopBelow ? "stop" : week4Pct! > POD_TEST.strongAbove ? "strong" : "keep_testing";
 
   return {
-    today, installsBySource: bySource, invites, activation, retention, feedback: { ratings, checkin }, paidFunnel,
+    today, installsBySource: bySource, invites, activation, retention, feedback: { ratings, checkin }, paidFunnel, demoFunnel,
     podTest: { joined: joins.length, activeWeek4: week4, pct: week4Pct, verdict, thresholds: POD_TEST },
     note: "Counted on our own server only. No third-party trackers. No mood, journal or chat text is ever logged.",
   };

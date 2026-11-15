@@ -37,7 +37,19 @@ const put = (...a) => C.put(...a);
 // --- Language: the member's own, or a visitor's pick on this page --------------------------------------------------
 
 let cur = null; // { id, data, draft, languages }
-const langs = () => cur?.languages ?? ["en"];
+// The topic list (no topic loaded yet) offers both; a topic offers the languages an editor approved.
+const langs = () => cur?.languages ?? ["en", "hi"];
+// A link can carry the language: the Hindi website sends ?lang=hi. It becomes the visitor's pick once per page load,
+// so a later tap on EN still wins while they stay.
+let linkLangRead = false;
+function langFromLink() {
+  if (linkLangRead || C.profile()) return;
+  linkLangRead = true;
+  const q = new URLSearchParams(location.search).get("lang");
+  if (q === "hi" || q === "en") C.store.set("try:lang", q);
+}
+/** Funnel counts (our /events and PostHog, which respects the Me → Privacy switch): never answers or text. */
+const track = (name, props = {}) => { try { C.track?.(name, { path: cur?.id ?? "list", ...props }); } catch {} };
 function lang() {
   const mine = C.profile() ? C.lang() : C.store.get("try:lang", (navigator.language || "").startsWith("hi") ? "hi" : "en");
   return langs().includes(mine) ? mine : "en";
@@ -49,12 +61,18 @@ const rich = (t) => String(t).split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((s) =
 
 const UI = {
   en: {
+    tryOne: "Try one topic", joinKeep: (n) => n ? `Join free, keep your ${n} cards` : "Join free, keep your progress",
+    keepLine: (n, t) => n ? `Your ${n} ${t} cards are saved in this browser. Join free and they go straight into your Review, timed to come back just before you'd forget them.`
+      : `Your answers on ${t} are saved in this browser. Join free and carry on from here.`,
+    libLine: "Inside the app: 2,033 practice questions, 254 short videos, nearly 20 hours of recorded notes, 60 interactives and 11 past papers, in English and Hindi.",
+    freeLine: "Free stays free: your pod, the daily review, Chai cards, practice and Chotu · AI. Plus adds unlimited answer marking and all mocks.",
+    noCard: "Google sign-in. No card, no phone number.", tellHonest: (n) => `Tell us honestly (${n} questions, optional)`, nextTopic: "Try the next topic",
     home: "Home", allTopics: "All topics", startHere: "Start here", fullest: "The fullest one: real past questions, two short videos and two games.",
     pickOne: "Eight Polity topics, free, no account. Each has a 15-minute route and a whole-topic route.",
     preview: "Free preview", joinLine: "Join free for the whole library: 2,000+ questions, 250+ short videos, 19 hours of audio, and a pod of your own.", joinShort: "Join free →",
-    flexTitle: "See it and hear it", flexLine: "One of 250+ one-minute videos and 180+ recorded notes in the app.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
+    flexTitle: "See it and hear it", flexLine: "One of 254 short videos in the app, and one of its recorded notes (nearly 20 hours in all). Nothing plays until you tap.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
     whyAsk: "Why we ask:", tourLead: "All of this is in the app today. Join free to use it; no card needed.",
-    loading: "Loading the topic…", notOpen: "This topic opens once an editor has checked it.", notOpenMore: "In the meantime, the Free Shelf works without an account.",
+    loading: "Loading the topic…", notOpen: "This topic isn't open yet.", notOpenMore: "In the meantime, the Free Shelf works without an account.",
     shelf: "Open the Free Shelf", back: "Back", next: "Next", resume: "Carry on where you left off", of: (i, n) => `${i}/${n}`,
     restart: "Start again", startOver: "Start this topic again? Your answers on this page are cleared; cards already in your review stay.",
     sure: "Sure", notSure: "Not sure", pickSure: "First: how sure are you?", right: "Right.", notQuite: "Not quite.", answer: "Right answer", yourPick: "your pick",
@@ -70,7 +88,7 @@ const UI = {
     onPaper: "I planned on paper", showOurs: "Show our skeleton", ours: "Our skeleton", intro: "Open", wayForward: "Way forward", mistake: "Common mistake",
     checkYours: "Check your plan against these:", whichBetter: "Which conclusion is better?", directive: "What the question asks", toConclusions: "Next: the conclusion",
     keepBtn: "Add these to my review", kept: "Added to your review.", firstBack: (n, d) => `${n} cards. The first come back on ${d}, just before you'd start forgetting.`,
-    keepVisitor: "Saved in this browser. Join free to keep them on your phone and in your pod.", keepMember: "They're in Review, with the rest of your queue.",
+    keepVisitor: "Saved in this browser. Join free and they go straight into your Review.", keepMember: "They're in Review, with the rest of your queue.",
     mapMet: "Federalism is ticked on your syllabus map: learnt once, review due.", openReview: "Open Review", openMap: "Your syllabus map",
     canDo: "You can now:", join: "Join free, no card needed", another: "Look around the Free Shelf", draft: "Draft · not yet checked by an editor · desk-key preview only",
     whyNote: "Why we do it this way", evidence: "Evidence", band: (b) => `band ${b}`, sideDoor: "Side door", backToPath: "Back to the topic",
@@ -92,12 +110,18 @@ const UI = {
     cardOf: (i, n) => `Card ${i} of ${n}`, keepDone: "Done", stop: "Stop here for now", carryOn: "Carry on",
   },
   hi: {
+    tryOne: "एक topic आज़माइए", joinKeep: (n) => n ? `मुफ़्त जुड़िए, अपने ${n} cards रखिए` : "मुफ़्त जुड़िए, अपनी प्रगति रखिए",
+    keepLine: (n, t) => n ? `${t} के आपके ${n} cards इस browser में सहेजे गए हैं। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे, ठीक भूलने से पहले लौटने के लिए।`
+      : `${t} पर आपके जवाब इस browser में सहेजे गए हैं। मुफ़्त जुड़िए और यहीं से आगे बढ़िए।`,
+    libLine: "App के अंदर: 2,033 अभ्यास सवाल, 254 छोटे video, लगभग 20 घंटे के रिकॉर्ड किए notes, 60 interactives और 11 पिछले papers, हिंदी और अंग्रेज़ी में।",
+    freeLine: "मुफ़्त हमेशा मुफ़्त: आपका pod, रोज़ का review, Chai cards, अभ्यास और Chotu · AI। Plus में असीमित उत्तर-जाँच और सारे mock जुड़ते हैं।",
+    noCard: "Google से sign-in। न card, न फ़ोन नंबर।", tellHonest: (n) => `हमें सच बताइए (${n} सवाल, वैकल्पिक)`, nextTopic: "अगला topic आज़माइए",
     home: "होम", allTopics: "सभी topics", startHere: "यहाँ से शुरू कीजिए", fullest: "सबसे भरा-पूरा: असली PYQ, दो छोटे video और दो खेल।",
     pickOne: "Polity के आठ topics, मुफ़्त, बिना account। हर एक में 15 मिनट का रास्ता और पूरा topic।",
     preview: "मुफ़्त झलक", joinLine: "पूरी library के लिए मुफ़्त जुड़िए: 2,000+ सवाल, 250+ छोटे video, 19 घंटे audio, और आपका अपना pod।", joinShort: "मुफ़्त जुड़िए →",
-    flexTitle: "देखिए और सुनिए", flexLine: "App के 250+ एक-मिनट video और 180+ रिकॉर्ड किए notes में से एक।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
+    flexTitle: "देखिए और सुनिए", flexLine: "App के 254 छोटे video में से एक, और उसके रिकॉर्ड किए notes में से एक (कुल लगभग 20 घंटे)। टैप करने तक कुछ नहीं चलता।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
     whyAsk: "हम क्यों पूछते हैं:", tourLead: "यह सब आज app में है। इस्तेमाल के लिए मुफ़्त जुड़िए; कोई card नहीं चाहिए।",
-    loading: "Topic खुल रहा है…", notOpen: "यह topic संपादक की जाँच के बाद खुलेगा।", notOpenMore: "तब तक Free Shelf बिना account के चलता है।",
+    loading: "Topic खुल रहा है…", notOpen: "यह topic अभी खुला नहीं है।", notOpenMore: "तब तक Free Shelf बिना account के चलता है।",
     shelf: "Free Shelf खोलिए", back: "पीछे", next: "आगे", resume: "जहाँ छोड़ा था, वहीं से", of: (i, n) => `${i}/${n}`,
     restart: "फिर से शुरू", startOver: "यह topic फिर से शुरू करें? इस पेज के आपके जवाब मिट जाएँगे; review में जा चुके cards बने रहेंगे।",
     sure: "पक्का", notSure: "पक्का नहीं", pickSure: "पहले: आप कितने पक्के हैं?", right: "सही।", notQuite: "पूरी तरह नहीं।", answer: "सही उत्तर", yourPick: "आपका चुनाव",
@@ -113,7 +137,7 @@ const UI = {
     onPaper: "मैंने काग़ज़ पर बनाया", showOurs: "हमारा ढाँचा दिखाइए", ours: "हमारा ढाँचा", intro: "शुरुआत", wayForward: "आगे का रास्ता", mistake: "आम ग़लती",
     checkYours: "अपने ढाँचे को इनसे मिलाइए:", whichBetter: "कौन-सा निष्कर्ष बेहतर है?", directive: "सवाल क्या माँगता है", toConclusions: "आगे: निष्कर्ष",
     keepBtn: "इन्हें मेरे review में जोड़िए", kept: "आपके review में जुड़ गए।", firstBack: (n, d) => `${n} cards। पहले ${d} को लौटेंगे, भूलना शुरू होने से ठीक पहले।`,
-    keepVisitor: "इस browser में सहेजा गया। Phone और pod में रखने के लिए मुफ़्त जुड़िए।", keepMember: "ये Review में आपकी बाक़ी सूची के साथ हैं।",
+    keepVisitor: "इस browser में सहेजा गया। मुफ़्त जुड़िए, और ये सीधे आपके Review में जाएँगे।", keepMember: "ये Review में आपकी बाक़ी सूची के साथ हैं।",
     mapMet: "आपके syllabus map पर संघवाद पर टिक लग गया: एक बार पढ़ा, review बाक़ी।", openReview: "Review खोलिए", openMap: "आपका syllabus map",
     canDo: "अब आप:", join: "मुफ़्त जुड़िए, कोई card नहीं चाहिए", another: "Free Shelf देखिए", draft: "Draft · अभी संपादक ने नहीं जाँचा · केवल desk key से",
     whyNote: "हम ऐसा क्यों करते हैं", evidence: "प्रमाण", band: (b) => `स्तर ${b}`, sideDoor: "साइड डोर", backToPath: "Topic पर लौटिए",
@@ -154,8 +178,20 @@ function go(pos, routeId) {
   const p = prog();
   if (routeId) p.route = routeId;
   p.pos = pos; p.door = null;
-  if (pos >= 0) { p.last = { ...(p.last ?? {}), [p.route]: pos }; p.seen = { ...(p.seen ?? {}), [route().steps?.[pos] ?? pos]: true }; }
+  let first = false;
+  if (pos >= 0) {
+    const sid = route().steps?.[pos] ?? pos;
+    first = !p.seen?.[sid] || !p.counted?.[p.route + ":" + pos];
+    p.last = { ...(p.last ?? {}), [p.route]: pos }; p.seen = { ...(p.seen ?? {}), [sid]: true };
+    p.counted = { ...(p.counted ?? {}), [p.route + ":" + pos]: true };
+  }
   save(p); draw(); focusTop();
+  // Funnel: each step once per route (n counts from 1), and the finish screen.
+  if (first) {
+    const r = route(), n = pos + 1, of = r.steps.length;
+    track("try_step", { route: r.id, n, of });
+    if (stepById(r.steps[pos])?.type === "finish") track("try_finish", { route: r.id });
+  }
 }
 function openDoor(id) { const p = prog(); p.door = id; save(p); draw(); focusTop(); send("door:" + id, "opened", null, true); }
 
@@ -164,6 +200,7 @@ function openDoor(id) { const p = prog(); p.door = id; save(p); draw(); focusTop
 
 function sessionId() {
   let s = C.store.get("try:session");
+  if (!s) { const iid = C.installId?.(); if (iid && /^[a-z0-9]{16,40}$/.test(iid)) { C.store.set("try:session", iid); return iid; } }
   if (!s) { s = Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(16).padStart(2, "0")).join(""); C.store.set("try:session", s); }
   return s;
 }
@@ -223,16 +260,20 @@ async function load(id, preview) {
   return C.store.get("try:data:" + id + (preview ? ":preview" : "")) ?? { closed: true }; // offline: the last copy
 }
 
+let opened = null;
 export function viewTry(arg = "") {
   const [path, query] = String(arg).split("?");
   const id = decodeURIComponent(path || "");
   const preview = /(^|&)preview/.test(query ?? "") || /[?&]preview/.test(location.hash);
+  langFromLink();
+  if (!id) cur = null;
   root = h("div.try.col", h("p.muted", u("loading")));
   load(id, preview).then((d) => {
     if (!d || !root.isConnected) return;
-    if (d.list) return put(root, listView(d.list));
+    if (d.list) { if (!C.profile() && opened !== "list") { opened = "list"; track("try_open", {}); } return put(root, listView(d.list)); }
     if (d.closed) return put(root, closedView());
     cur = { id: d.id, data: d.data, draft: !!d.draft, languages: d.languages ?? ["en"] };
+    if (!C.profile() && opened !== d.id) { opened = d.id; track("try_open", {}); }
     P.init({ h, put, L, u, getA, setA, mcq, lang, send, forget, pathId: () => cur.id, head, joke, rich, joinStrip,
       contact: (contact, consentText, company) => post("/try/contact", { contact, consent: true, consentText, company }) });
     draw();
@@ -241,13 +282,13 @@ export function viewTry(arg = "") {
 }
 
 function closedView() {
-  return [h("h1", "Try one topic"), h("p", u("notOpen")), h("p.muted", u("notOpenMore")), h("a.btn.primary", { href: "#shelf" }, u("shelf"))];
+  return [h("h1", u("tryOne")), h("p", u("notOpen")), h("p.muted", u("notOpenMore")), h("a.btn.primary", { href: "#shelf" }, u("shelf"))];
 }
 function listView(list) {
   if (!list.length) return closedView();
   // The suggested topic first, marked: the one with the most in it (a path says so with `featured`).
   const sorted = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
-  return [homeBar(), h("h1", "Try one topic"), h("p.muted", u("pickOne")),
+  return [homeBar(), h("h1", u("tryOne")), h("p.muted", u("pickOne")),
     sorted.map((p) => h("a.card.link" + (p.featured ? ".try-featured" : ""), { href: "#try/" + encodeURIComponent(p.id) },
       p.featured && h("span.tag.try-start", u("startHere")),
       h("div.row.between", h("strong", L(p.title)), h("span", { "aria-hidden": "true" }, "→")),
@@ -255,7 +296,7 @@ function listView(list) {
     joinStrip()];
 }
 /** Where "Home" goes: the website for a visitor, the app's first screen for a member. */
-const homeHref = () => (C.profile() ? "#" : "https://aspiran.in/");
+const homeHref = () => (C.profile() ? "#" : lang() === "hi" ? "https://aspiran.in/hi/" : "https://aspiran.in/");
 function homeBar() {
   return h("div.try-bar", h("a", { href: homeHref() }, "⌂ " + u("home")), langSwitch());
 }
@@ -263,7 +304,19 @@ function homeBar() {
 function joinStrip() {
   if (C.profile()) return null;
   return h("div.try-join", h("div", h("span.tag", u("preview")), " ", h("span.small", u("joinLine"))),
-    h("a.btn.primary", { href: "#", onclick: () => send("join", "strip", null, true) }, u("joinShort")));
+    h("a.btn.primary", { href: "#", onclick: () => joining("strip") }, u("joinShort")));
+}
+/** Cards this visitor has in their review from this topic (they live in the app's own store, so joining keeps them). */
+function cardsHere() {
+  if (!cur) return 0;
+  return Object.keys(C.store.get("reviews", {}) ?? {}).filter((k) => k.startsWith(cur.id + ":")).length;
+}
+/** A visitor taps Join: note the topic so the sign-up screen can say what comes with them, and count it. */
+function joining(where) {
+  if (cur) C.store.set("try:joining", { path: cur.id, title: cur.data.short ?? cur.data.title, n: cardsHere(), lang: lang(), at: Date.now() });
+  else C.store.set("try:joining", { path: null, n: 0, lang: lang(), at: Date.now() });
+  track("try_join", { where });
+  if (cur) send("join", where, null, true);
 }
 /** One video and one recorded note from the library, on the cover: tap to load, nothing plays by itself. */
 function flex() {
@@ -271,10 +324,14 @@ function flex() {
   if (!f?.video && !f?.audio) return null;
   const v = f.video, a = f.audio?.[lang()] ?? f.audio?.en;
   const vbox = h("div");
-  const showVideo = () => put(vbox, h("video", { controls: true, playsinline: true, preload: "metadata", poster: v.poster, "aria-label": L(v.title), style: { width: "100%", maxWidth: "320px", borderRadius: "12px", background: "#000" } },
-    h("source", { src: v.mp4, type: "video/mp4" }), v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true })));
+  const showVideo = () => {
+    const el = h("video", { controls: true, playsinline: true, preload: "metadata", poster: v.poster, "aria-label": L(v.title) },
+      h("source", { src: v.mp4, type: "video/mp4" }), v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true }));
+    put(vbox, el);
+    el.play?.()?.catch?.(() => {});
+  };
   if (v) put(vbox, h("button.try-video-tap", { onclick: () => { send("flex", "video", null, true); showVideo(); } },
-    h("img", { src: v.poster, alt: "", loading: "lazy", style: { width: "100%", maxWidth: "320px", borderRadius: "12px", display: "block" } }),
+    h("img", { src: v.poster, alt: "", loading: "lazy" }),
     h("span", "▶ " + u("watch") + " · " + L(v.title)), h("span.small.muted", u("videoData"))));
   return h("section.card.try-flex", h("h2", { style: { marginTop: 0 } }, u("flexTitle")), h("p.small.muted", u("flexLine")),
     h("div.try-flex-grid",
@@ -332,7 +389,7 @@ function cover() {
   const c = d.cover ?? {};
   const routeBtn = (id, primary) => {
     const r = d.routes[id], at = last[id];
-    return h("button" + (primary ? ".primary" : "") + ".try-route", { onclick: () => { send("route", id, null, true); go(at ?? 0, id); } },
+    return h("button" + (primary ? ".primary" : "") + ".try-route", { onclick: () => { send("route", id, null, true); track("try_route", { route: id }); go(at ?? 0, id); } },
       h("strong", `${L(r.label)} · ${u("min", r.minutes)}`), h("span.small", at != null ? u("resume") : L(r.note)));
   };
   return [
@@ -378,6 +435,10 @@ function doors(st) {
 let privacyShown = false;
 function quickAsk(st) {
   if (C.store.get("try:noAsk")) return null;
+  if (route().id === "express" && st.ask) {
+    const withAsk = route().steps.map((id) => view(stepById(id))).filter((x) => x?.ask && x.type !== "finish");
+    if (withAsk.length && withAsk[withAsk.length - 1].id !== st.id) return null;
+  }
   const box = P.ask(st);
   if (!box) return null;
   const first = !privacyShown && !getA("privacy:seen");
@@ -626,25 +687,35 @@ const STEP = {
           h("p", h("strong", u("kept") + " "), u("firstBack", kept.n, kept.due)),
           h("p", u("mapMet")),
           h("p.small.muted", C.profile() ? u("keepMember") : u("keepVisitor")),
+          !C.profile() && h("a.btn.primary", { href: "#", onclick: () => joining("keep") }, u("joinKeep", cardsHere())),
           C.profile() && h("div.row", h("a.btn", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")))));
     };
     drawK();
     return [head(st), joke(st), h("p.muted", L(st.lead)), box];
   },
 
+  // The finish screen asks for one thing first. A visitor has just made review cards; the honest hook is not losing
+  // them. Then the library in real numbers, once; the whole topic and side doors; the survey last, folded.
   finish(st) {
-    const d = cur.data, r = route().id;
+    const d = cur.data, r = route().id, member = !!C.profile(), n = cardsHere();
+    const sv = st.survey && stepById(st.survey);
     return [
       h("h1", { tabindex: "-1" }, L(st.title)),
       pause(st),
       h("div.card", h("h3", { style: { marginTop: 0 } }, u("canDo")), h("ul", d.canDo.filter((x) => r === "full" || !x.fullOnly).map((x) => h("li", L(x))))),
+      member
+        ? h("div.row", h("a.btn.primary", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")), h("a.btn", { href: "#try" }, u("nextTopic")))
+        : h("section.card.try-join-end",
+          h("p", { style: { marginTop: 0 } }, h("strong", u("keepLine", n, L(d.short ?? d.title)))),
+          h("a.btn.primary.try-join-big", { href: "#", onclick: () => joining("finish") }, u("joinKeep", n)),
+          h("p.small.muted", u("noCard")),
+          h("p.small", u("libLine")),
+          h("p.small.muted", { style: { marginBottom: 0 } }, u("freeLine"))),
       r === "express" && h("button.try-route", { onclick: () => { const p = prog(); go(p.last?.full ?? 0, "full"); } }, h("strong", u("switchFull")), h("span.small", L(d.routes.full.note))),
       h("p", L(st.next)),
       doors(st),
-      st.survey && P.survey(stepById(st.survey), { embedded: true }),
-      C.profile()
-        ? h("div.row", h("a.btn.primary", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")))
-        : h("div.row", h("a.btn.primary", { href: "#" }, u("join")), h("a.btn", { href: "#shelf" }, u("another"))),
+      sv && h("details.try-survey-fold", h("summary", u("tellHonest", sv.questions?.length ?? 0)), P.survey(sv, { embedded: true })),
+      !member && h("p.small", h("a", { href: "#shelf" }, u("another"))),
       h("div.row", { style: { marginTop: "12px" } }, h("button.ghost", { onclick: () => go(route().steps.length - 2) }, "← " + u("back"))),
     ];
   },
@@ -792,6 +863,15 @@ function injectStyles() {
 .try-start { display: inline-block; margin-bottom: 6px; background: var(--brand, #C4772A); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; }
 .try-flex-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
 .try-flex .try-video-tap { display: grid; gap: 6px; text-align: left; width: 100%; }
+.try-flex .try-video-tap img, .try-flex video { display: block; width: 100%; max-width: 320px; border-radius: 12px; background: #000; }
+@media (max-width: 600px) {
+  .try-flex-grid > :last-child { order: -1; }
+  .try-flex .try-video-tap img, .try-flex video { max-height: 44vh; width: auto; max-width: 100%; object-fit: cover; }
+}
+.try-join-end { border: 2px solid var(--brand, #C4772A); }
+.try-join-big { display: inline-block; font-size: 17px; padding: 12px 22px; }
+.try-survey-fold { margin-top: 18px; }
+.try-survey-fold > summary { font-weight: 600; cursor: pointer; padding: 8px 0; }
 .try-nav { position: sticky; bottom: 0; display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; margin-top: 18px; background: var(--bg, #f5f3ee); border-top: 1px solid var(--line, #0001); z-index: 2; }
 .try-nav button { min-height: 48px; min-width: 110px; }
 .try textarea { width: 100%; }

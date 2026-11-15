@@ -55,8 +55,12 @@ export function startAnalytics(cfg) {
   if (started || !cfg?.key || !analyticsOn()) return;
   // PostHog's own loader: it queues calls until the library arrives.
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture identify reset register opt_out_capturing opt_in_capturing startSessionRecording stopSessionRecording captureException".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  // The website (aspiran.in) passes its own random PostHog id in the Try link (?ph=), so a visit to the site and the
+  // demo that follows read as one visitor. Used only for a browser that has no PostHog id of its own yet.
+  const fromSite = new URLSearchParams(location.search).get("ph");
   window.posthog.init(cfg.key, {
     api_host: cfg.host || "https://us.i.posthog.com", persistence: "localStorage", person_profiles: "identified_only",
+    ...(fromSite && /^[\w-]{8,80}$/.test(fromSite) ? { bootstrap: { distinctID: fromSite } } : {}),
     capture_pageview: false, capture_pageleave: false, capture_exceptions: true,
     // Taps are counted by element, never by the words on it.
     autocapture: true, mask_all_text: true, mask_all_element_attributes: true,
@@ -87,7 +91,9 @@ export async function boot() {
   const s = read();
   if (!s.firstOpenSent) {
     const q = new URLSearchParams(location.search);
-    const ok = await post("/events", { events: [{ name: "first_open", props: { source: q.get("src") ?? q.get("utm_source"), invite: q.get("invite") } }] });
+    // The website's links say which button was pressed (utm_medium): kept as "site:hero", "site:price" and so on.
+    const utm = q.get("utm_source") && (q.get("utm_source") + (q.get("utm_medium") ? ":" + q.get("utm_medium") : ""));
+    const ok = await post("/events", { events: [{ name: "first_open", props: { source: q.get("src") ?? utm, invite: q.get("invite") } }] });
     if (ok) { s.firstOpenSent = true; s.firstOpenDay = day(); }
   }
   if (s.lastOpen !== day()) { s.lastOpen = day(); track("app_open"); }
