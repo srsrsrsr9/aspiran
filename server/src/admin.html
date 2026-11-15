@@ -535,6 +535,11 @@ views.llm = async () => {
     h("h3", {}, "By purpose and model"),
     h("div.card.scroll", {}, d.byPurpose.length ? h("table", {}, h("tr", {}, ["Purpose", "Model", "Calls", "OK", "Errors", "Blocked", "Tokens in", "Tokens out", "Avg time"].map((x) => h("th", {}, x))),
       d.byPurpose.map((r) => h("tr", {}, h("td", {}, r.purpose), h("td.mono", {}, r.model), h("td", {}, num(r.calls)), h("td", {}, num(r.ok)), h("td", {}, num(r.errors)), h("td", {}, num(r.blocked)), h("td", {}, num(r.tokens_in)), h("td", {}, num(r.tokens_out)), h("td", {}, r.avg_ms ? r.avg_ms + " ms" : "")))) : h("p.muted", {}, "No calls yet.")),
+    d.voice ? [h("h3", {}, "AI voices (Fish Audio)"),
+      h("div.card", {}, h("span.chip" + (d.voice.on ? "" : ".warn"), {}, d.voice.on ? "On" : d.voice.key ? "Switched off (voice flag)" : "Off: no FISH_AUDIO_API_KEY secret"),
+        " " + num(d.voice.bytes) + " bytes of text spoken in " + d.days + " days, about US$" + d.voice.usd + " at US$" + d.voice.usdPerMillionBytes + " per million bytes. " + num(d.voice.cacheHits) + " plays came from the saved copy and cost nothing. Limits: " + d.voice.caps.memberDaily + " new lines per member a day, " + num(d.voice.caps.globalDaily) + " for everyone, " + num(d.voice.caps.maxChars) + " characters a line."),
+      d.voice.daily.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["Day", "Voice", "Lines made", "Failed", "Bytes"].map((x) => h("th", {}, x))),
+        d.voice.daily.map((r) => h("tr", {}, h("td", {}, r.day), h("td", {}, r.who), h("td", {}, num(r.made)), h("td", {}, num(r.failed)), h("td", {}, num(r.bytes)))))) : null] : null,
     d.recent.length ? [h("h3", {}, "Recent failures and blocks"), h("div.card.scroll", {}, h("table", {}, d.recent.map((r) => h("tr", {}, h("td.muted", {}, when(r.at)), h("td", {}, r.purpose), h("td", {}, h("span.chip" + (r.status === "error" ? ".bad" : ".warn"), {}, r.status)), h("td", {}, r.error)))))] : null];
   if (can("llm:control")) {
     const f = {

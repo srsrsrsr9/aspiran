@@ -7,6 +7,7 @@ import { runPipeline, waitingDrafts } from "./pipeline";
 import { adminApi } from "./admin";
 import { chotuChat, modelsRoute } from "./chotu";
 import { jeetuRoute } from "./jeetu";
+import { voiceReady, voiceRoute, withVoice } from "./voice";
 import { extraDistress, publicLangs } from "./langs";
 import { REQUESTABLE, requestLanguage } from "./requests";
 import ADMIN_HTML from "./admin.html";
@@ -63,9 +64,12 @@ export default {
     // Past the gate, memberId (body) and member (query) are the signed-in account's own.
     const auth = await authRoute(req, env, path, url) ?? await passwordRoute(req, env, path, ctx);
     if (auth) return auth;
+    // The signed-in member, when the gate ran (never trusted from the caller's own headers).
+    let gatedMember: string | null = null;
     if (isMemberRoute(path)) {
       const gated = await memberGate(req, env, path, url);
       if (gated instanceof Response) return gated;
+      if (gated !== req) gatedMember = gated.headers.get("x-member-id");
       req = gated;
       url = new URL(req.url);
     }
@@ -93,7 +97,7 @@ export default {
         : [];
       // Languages members can pick, and the extra distress phrases the app checks on the device too.
       const results = await resultDays(env);
-      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), pods: await podMode(env), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login),
+      return new Response(JSON.stringify({ flags: f, announcements, consentVersion: CONSENT_VERSION, languages: await publicLangs(env), requestable: REQUESTABLE, distress: await extraDistress(env), results, resultNow: activeResult(results), pods: await podMode(env), voice: await voiceReady(env), auth: publicAuthConfig(env, url, f.sign_in_required, f.password_login),
         // Analytics for the web app (metrics.js): the public project token, or null when none is set.
         posthog: /^phc_\w{20,80}$/.test(env.POSTHOG_KEY ?? "") ? { key: env.POSTHOG_KEY, host: env.POSTHOG_HOST || "https://us.i.posthog.com" } : null }), { headers: { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "no-cache" } });
     }
@@ -204,7 +208,9 @@ export default {
       return json({ ok: true });
     }
     // --- Jeetu · AI, the method coach (jeetu.ts)
-    if (path === "/jeetu" || path === "/jeetu/report") { const r = await jeetuRoute(req, env, path); if (r) return r; }
+    if (path === "/jeetu" || path === "/jeetu/report") { const r = await jeetuRoute(req, env, path); if (r) return path === "/jeetu" ? withVoice(env, "jeetu", gatedMember, r) : r; }
+    // --- AI voices for Chotu and Jeetu (voice.ts): one signed reply or scripted line to an MP3, made once and kept
+    if (path === "/voice") { const r = await voiceRoute(req, env, path); if (r) return r; }
     // --- The website (aspiran.in): Chotu as the guide, and what visitors tell it (web.ts)
     if (path.startsWith("/web/")) { const r = await webRoute(req, env, path); if (r) return r; }
     if (path === "/chotu" && req.method === "POST") {
@@ -215,7 +221,7 @@ export default {
         if (!allow.ok) return json({ error: "Chotu's out of cloud turns for today. It still works offline on your phone.", limit: true, offline: true }, 429);
         ctx.waitUntil(logFirst(env, "first_chotu_chat", peek.memberId));
       }
-      return chotuChat(req, env);
+      return withVoice(env, "chotu", gatedMember, await chotuChat(req, env));
     }
 
     // --- Pods (joining, states, moving), the Commons, the season and the matching fields: community.ts

@@ -78,3 +78,12 @@ try {
 }
 assert.equal((await (await fetch(BASE + "/config")).json()).flags.jeetu, true);
 step("switched back on");
+
+// AI voices (voice.ts) are off on a server with no FISH_AUDIO_API_KEY: nothing shows, nothing is signed, /voice says so.
+assert.equal((await (await fetch(BASE + "/config")).json()).voice, false);
+r = await post({ who: "jeetu", line: "intro", lang: "en" }, "/voice");
+assert.equal(r.status, 503);
+assert.equal((await r.json()).off, true);
+out = await (await ask("What rank will I get?")).json();
+assert.equal(out.voice, undefined);
+step("no voice key: voices are off, /config says so, replies carry no voice");

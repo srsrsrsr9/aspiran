@@ -1,3 +1,4 @@
+import { voiceUsage } from "./voice";
 import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backups";
 import { factWatchApi } from "./factwatch";
 import { checkItem, prepareEdit, titleOf } from "./content";
@@ -353,7 +354,7 @@ route("GET", /^llm$/, "llm:view", async ({ env, url }) => {
   const recent = (await env.DB.prepare("SELECT at, purpose, model, status, error FROM llm_calls WHERE status != 'ok' ORDER BY id DESC LIMIT 20").all()).results;
   const today = await env.DB.prepare("SELECT COUNT(*) AS calls, COALESCE(SUM(tokens_in + tokens_out), 0) AS tokens FROM llm_calls WHERE day = ? AND status = 'ok'").bind(istDay()).first();
   return json({ days, daily, byPurpose, recent, today, controls: await llmControls(env), models: DRAFT_MODELS, authorModels: AUTHOR_MODELS,
-    connected: !!env.AI, claudeKey: !!env.ANTHROPIC_API_KEY, groqKey: !!env.GROQ_API_KEY });
+    connected: !!env.AI, claudeKey: !!env.ANTHROPIC_API_KEY, groqKey: !!env.GROQ_API_KEY, voice: await voiceUsage(env, since) });
 });
 route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
   const c = await llmControls(env);
