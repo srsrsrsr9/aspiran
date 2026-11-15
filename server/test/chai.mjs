@@ -77,6 +77,12 @@ assert.equal(P.firstJson('{"tone":"neutral","hi":{"headline":"आज'), null, "a
 assert.equal(P.firstJson(""), null);
 assert.equal(P.firstJson("[1,2]"), null, "only an object is a card");
 step("draft replies are repaired where they can be; a cut-off reply is asked for again, not crashed on");
+// 15 Nov 2026: whole cards ran past the token limit in the Hindi half; the English card before it is kept.
+const cut = '{"tone":"neutral","headline":"NCDC Bill","summary":"The Bill amends the 1962 Act.","examCorner":{"mcq":null,"keyFacts":["a"]},"chotu":null,"hi":{"headline":"राष्ट्रीय","summary":"विधेयक';
+assert.deepEqual(P.englishOnly(cut), { tone: "neutral", headline: "NCDC Bill", summary: "The Bill amends the 1962 Act.", examCorner: { mcq: null, keyFacts: ["a"] }, chotu: null });
+assert.equal(P.englishOnly('{"tone":"neutral","headline":"x","summary":"Cut off in the Eng'), null, "no whole English card, nothing kept");
+assert.equal(P.englishOnly('{"tone":"neutral","summary":"","hi":{"headline":"x'), null, "an empty summary is not a card");
+step("a reply cut off in the Hindi half keeps its English card");
 
 // 15 Nov 2026: the automatic Chai sent nothing. The second check: a different family from the Llama drafter, with room
 // to answer (gpt-oss spent its 300 tokens reasoning and sent an empty reply), and a strict reading of its verdict.

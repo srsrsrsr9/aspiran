@@ -362,26 +362,48 @@ export function autoChecks(card: any, sourceText: string): string[] {
 }
 
 /**
- * One card from the model. About 1 in 10 replies used to fail to parse (cut off at the token limit by the Hindi half,
- * or with a stray comma or line break). Now the reply is repaired where it can be, and if it still isn't a whole
- * object the model is asked once more, with more room and no randomness. Throws only if both tries fail.
+ * A reply cut off by the token limit while writing the Hindi half ("hi" comes last): the English card before it, closed
+ * off, so the day keeps an English card instead of none. Null when the cut came before the English card was whole.
+ */
+export function englishOnly(text: string): any {
+  if (typeof text !== "string") return null;
+  const at = text.search(/,\s*"hi"\s*:\s*\{(?![\s\S]*"hi"\s*:)/);
+  if (at < 0) return null;
+  const card = firstJson(text.slice(0, at) + "}");
+  return card && typeof card.summary === "string" && card.summary.trim() ? card : null;
+}
+
+/** Said to the model when its first reply was cut off: the second reply must be shorter, not given more room. */
+const SHORTER = `Your last reply was too long and was cut off. Reply again with the same JSON, kept short: summary 3 or 4 sentences, 2 whyForUpsc bullets, 2 keyFacts, an empty glossary, and the Hindi half no longer than the English.`;
+
+/**
+ * One card from the model. A whole English and Hindi card is often longer than the 2,500-token limit, and this model
+ * writes about 27 tokens a second, so asking again with more room ran past Workers AI's 120-second limit ("3046: Request
+ * timeout", 15 Nov 2026). Now a reply cut off in the Hindi half keeps its English card; otherwise (or if that is all
+ * there is) the model is asked once more for a shorter card, with no randomness. Throws only if nothing usable came back.
  */
 async function draft(env: Env, item: FeedItem, text: string, gs: string, topic: string) {
   const c = await llmControls(env);
   const notes = await relevantNotes(env, `${item.title}\n${text.slice(0, 1000)}`);
   const messages = prompt(item, text, notes, gs, topic);
-  const tries = [
-    { max_tokens: c.maxTokens, temperature: c.temperature },
-    { max_tokens: Math.min(Math.max(c.maxTokens * 2, 4000), 8000), temperature: 0 },
-  ];
-  let last = "";
-  for (const t of tries) {
-    const out = (await runAI(env, "draft", c.draftModel || DRAFT_MODEL, { messages, response_format: { type: "json_object" }, ...t })) as { response?: unknown };
-    const r = out.response;
-    const parsed = typeof r === "string" ? firstJson(r) : r && typeof r === "object" ? r : null;
-    if (parsed) return parsed;
+  const model = c.draftModel || DRAFT_MODEL;
+  const first = (await runAI(env, "draft", model, { messages, response_format: { type: "json_object" }, max_tokens: c.maxTokens, temperature: c.temperature })) as { response?: unknown };
+  let r = first.response;
+  const parsed = typeof r === "string" ? firstJson(r) : r && typeof r === "object" ? r : null;
+  if (parsed) return parsed;
+  const english = typeof r === "string" ? englishOnly(r) : null;
+  let last = typeof r === "string" ? r.slice(-60) : typeof r;
+  try {
+    const again = (await runAI(env, "draft", model, { messages: [...messages, { role: "user", content: SHORTER }], response_format: { type: "json_object" }, max_tokens: c.maxTokens, temperature: 0 })) as { response?: unknown };
+    r = again.response;
+    const p2 = typeof r === "string" ? firstJson(r) ?? englishOnly(r) : r && typeof r === "object" ? r : null;
+    if (p2) return p2;
     last = typeof r === "string" ? r.slice(-60) : typeof r;
+  } catch (e) {
+    if (english) return english;
+    throw e;
   }
+  if (english) return english;
   throw new Error(`reply was not valid JSON twice (ends: ${last})`);
 }
 
