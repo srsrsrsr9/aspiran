@@ -276,8 +276,10 @@ export default {
     const hm = OLD[event.cron] ?? ist.toISOString().slice(11, 16);
     const log = (name: string) => (r: unknown) => console.log(name, JSON.stringify(r));
     const fail = (name: string) => (e: unknown) => console.log(name, "failed", String(e));
+    // The day's Chai drafts get a run to themselves at 05:00: sharing 05:30 with the backup, the fact watch and the
+    // rest, the run was cut short and left nothing (14 and 15 Nov 2026). The catch-up below covers a bad morning.
+    if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm));
     if (hm === "05:30") {
-      ctx.waitUntil(chaiDrafts(env, hm));
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
       // Photos sent to rooms and pods go after 7 days.
@@ -293,7 +295,7 @@ export default {
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));
     // A drafting run that left nothing (a feed down, the run cut short) is tried again each half hour until 11:00,
     // and a day with no Chai yet gets the 07:00 step again on the hour until noon, so one bad run doesn't cost the day.
-    const CATCH_UP = ["06:00", "06:30", "07:30", "08:30", "09:30", "10:30"], LATE = ["08:00", "09:00", "10:00", "11:00", "12:00"];
+    const CATCH_UP = ["05:30", "06:00", "06:30", "07:30", "08:30", "09:30", "10:30"], LATE = ["08:00", "09:00", "10:00", "11:00", "12:00"];
     if (CATCH_UP.includes(hm) || LATE.includes(hm)) {
       const day = istDay();
       const n = await env.DB.prepare("SELECT COUNT(*) n FROM candidates WHERE day = ?").bind(day).first<{ n: number }>().catch(() => null);
