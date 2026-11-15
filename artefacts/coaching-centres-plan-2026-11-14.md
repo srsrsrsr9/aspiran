@@ -20,9 +20,9 @@ Every server route looks up the caller's own membership first and refuses anythi
 
 | Role | Who | Can do |
 | --- | --- | --- |
-| Owner | The centre's head. One per institute, set by Aspiran when the institute is created. | Everything an admin can, plus make or remove admins. Can't be removed by anyone in the institute. |
-| Admin | Office staff, centre manager | Batches, invite codes (students and teachers), roster, branding, the AI switch, chat moderation, everything a teacher does |
-| Teacher / mentor | Faculty | Answer doubts, post announcements, hide chat messages, write content, build study plans, see analytics, invite students |
+| Owner | The centre's head. One per institute: Aspiran makes the institute and gives the head a one-time owner code. | Everything an admin can, plus invite, change or remove admins. Can't leave, and can't be changed or removed by anyone in the institute. |
+| Admin | Office staff, centre manager | Batches, invite codes (students and teachers), roster changes (move, remove, change role), branding, the AI switch, everything a teacher does |
+| Teacher / mentor | Faculty | Answer doubts, post announcements, hide chat messages and see reported ones, write content, build study plans, see analytics, invite students |
 | Student | Aspirants | Join with a code, chat in their batch, ask doubts, see their plan and the institute's content, do the institute's question sets |
 
 **Joining.** The institute makes a code in the console, for example `KXR7-M2PD`. A code has a role (student, teacher
@@ -32,12 +32,13 @@ institute will and won't see, ticks it, picks the name the institute will see, a
 
 **An existing account keeps everything.** Joining adds a membership. Their pod, rooms, Chotu chats, saved reviews,
 journal, Plus and streak-free progress stay exactly as they were, and the institute can't see any of it. One institute
-at a time in phase 1. Leaving is one button, any time. On leaving, their institute practice answers are deleted, their
-doubts stay for the batch with the name replaced by "A former student", and their chat messages stay with the same
-change.
+at a time in phase 1. Leaving is one button, any time. On leaving (or being removed), their answers to institute question sets, their plan ticks and any plan made just for
+them are deleted; their doubts stay for the batch with the name replaced by "A former student", and their chat
+messages stay with the same change. The owner can't leave; Aspiran hands the institute to someone else first.
 
 **Who creates an institute?** Aspiran staff, from the Aspiran-staff box on the console page (the owner's admin key).
-That gives back the owner's one-time code. Self-serve sign-up for institutes comes later, with billing.
+That gives back the owner's one-time code (valid 30 days; staff can make a new one while there is no owner). Staff can
+also pause and resume an institute; while paused, its people can't use it and its codes stop working. Self-serve sign-up for institutes comes later, with billing.
 
 ## 2. White label
 
@@ -65,8 +66,8 @@ account (Google, or the dev sign-in on a local server). The left rail shows only
 - **Batches**: create, rename, archive. Each has its own chat and its own codes.
 - **Invite codes**: make a code for a batch (students) or for staff (teachers; admins for the owner only), set uses
   and days, cancel.
-- **Roster**: everyone in the institute with role, batch, when they joined and when they were last active. Move a
-  student between batches, remove a person, make a teacher an admin (owner only).
+- **Roster**: everyone in the institute with role, batch, when they joined and when they were last active. Admins
+  move a student between batches, remove a person or change a role; only the owner makes or changes an admin.
 - **Branding**: display name, colour, logo (PNG or JPEG under 200 KB), and the AI first-answer switch.
 - **Chat**: each batch's messages; post an announcement (to one batch or all); hide a message; see what students reported.
 - **Doubts**: open, answered and resolved, newest first, with the question or topic it is about. Answer, mark resolved.
@@ -88,8 +89,9 @@ handling without its pod features) once a centre has busy batches.
 
 **Safety in chat.** Every message goes through the same distress check as pods. A message that trips it is not posted:
 the writer sees the care box with the helpline at once, and a "distress" report goes to Aspiran's own moderators, as in
-`community/crisis-protocol.md`. The institute sees only that a message was held, never its text. Students can report
-a message; teachers and admins see reports and can hide messages. Ten messages a minute per person at most. Names are
+`community/crisis-protocol.md`. The institute isn't told at all: not the text, and not that anything was held.
+Students can report a message; teachers and admins see reports and can hide messages. Ten messages a minute per person
+at most, across chat, doubts and replies. Names are
 the name the student chose for the institute.
 
 ## 5. Doubt clarification
@@ -131,8 +133,10 @@ batch average shown to students, nothing public. Teachers see per-student number
 
 ## 7. Own content
 
-- Kinds in phase 1: **notes** (title and text, English with optional Hindi) and **question sets** (four-option MCQs
-  with the answer and an explanation; a set can be marked as a **test**). Each is tagged with a paper and topic.
+- Kinds in phase 1: **notes** (title and text, English with optional Hindi) and **question sets** (1 to 100 MCQs of
+  2 to 6 options, with the answer and an explanation; a set is either **practice**, done any number of times, or a
+  **test**, done once). Each can be tagged with a syllabus topic, and the paper follows from the topic. Students never
+  get the answers before they answer.
 - For one batch or the whole institute; draft until published; visible only to that institute's students, under
   "From your institute" next to Aspiran's own library.
 - **Reuse of the pack format.** A question set is stored in the same shape as `upsc-pods/quiz-pack@1`
@@ -164,11 +168,12 @@ batch average shown to students, nothing public. Teachers see per-student number
 - **What Aspiran staff can see:** the list of institutes with counts, and anything reported to Aspiran (distress
   reports, abuse reports). Staff don't read institute chats or doubts unless one is reported, or the institute asks for
   help in writing. This needs a line in the privacy policy and in the institute agreement.
-- **Minors.** Aspiran is 18+ today. Phase 1 keeps that: joining an institute needs an account that has said it is 18+.
+- **Minors.** Aspiran is 18+ today. Phase 1 keeps that: joining an institute needs a tick saying the person is 18 or over.
   Foundation-course students under 18 need verifiable parental consent under the DPDP Act 2023 (section 9) and no
   behavioural tracking; that is a later phase with its own consent flow, not something to switch on quietly.
 - **Consent.** One plain notice at joining, listing the "can see" and "never" lists above; ticked and stored with a time.
-  Leaving withdraws it. Aspiran's "Delete my data" also removes all their institute data.
+  Leaving withdraws it. Aspiran's "Delete my data" also removes all their institute data: membership, answers, ticks,
+  personal plans, doubts (with photos) and messages. Replies they wrote on someone else's doubt stay, as "A former member".
 - **Crisis protocol** in institute chats and doubts: the same distress check and care box as pods, with reports to
   Aspiran's trained moderators, never to the institute. Whether an institute should name a safety contact who is told
   in a tier 1 case is an open decision (below).
@@ -194,7 +199,8 @@ brings the students. A free 30-day pilot for one batch is the easiest way in.
 **Phase 1 (built on this branch, web and server, flag off):**
 - Database: institutes, members and roles, batches, invite codes, batch chat, doubts and replies, study plans and items
   with ticks, institute content and answers (migration `0014_institutes.sql`).
-- Server routes under `/inst/...`, each with a tenant and role check; Aspiran-staff route to create institutes.
+- Server routes under `/inst/...`, each with a tenant and role check; Aspiran-staff routes to create, pause and resume
+  institutes and to make a new owner code.
 - The console at `/institute`.
 - The student side in the web app (`#inst`): join by code, branding, chat and announcements, doubts with a photo,
   the plan, the institute's content and question sets.
@@ -218,7 +224,7 @@ assignment; several institutes per person.
 5. **AI first answer off by default**, the centre's switch; labelled "Aspiran AI".
 6. **Distress goes to Aspiran's moderators only**, never to the centre. Should a centre name a safety contact for tier 1?
 7. **Teachers see per-student numbers** inside their institute (students never see anyone else's).
-8. **On leaving**, practice answers are deleted, doubts and messages stay with the name removed.
+8. **On leaving**, answers, ticks and personal plans are deleted; doubts and messages stay with the name removed.
 9. **Pricing**: pick A, B or C (or none yet), and whether to offer a free 30-day pilot.
 10. **Who may create institutes**: Aspiran staff only for now.
 11. **Console address**: `app.aspiran.in/institute` (that host must be in Firebase's authorised domains for Google sign-in).
