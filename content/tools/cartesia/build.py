@@ -17,13 +17,14 @@ OUT = os.path.join(DATA, "out")
 
 # One voice per series where credits allow: (provider, voice id, name shown in the app). Order = order tried.
 CHAIN = {
-    ("read", "en"): [("cartesia", "c63361f8-d142-4c62-8da7-8f8149d973d6", "Krishna"), ("inworld", "Saanvi", "Saanvi"), ("smallest", "aditi", "Aditi")],
-    ("read", "hi"): [("cartesia", "5283efe8-07d1-4e3a-b615-2ae4a81c1b73", "Kriti"), ("inworld", "Manoj", "Manoj"), ("smallest", "kunal", "Kunal")],
+    ("read", "en"): [("cartesia", "c63361f8-d142-4c62-8da7-8f8149d973d6", "Krishna"), ("inworld", "Saanvi", "Saanvi"), ("smallest", "aditi", "Aditi"), ("chariot", "09ecd7b6-3e92-4435-b673-50e8659fc015", "Neha")],
+    ("read", "hi"): [("cartesia", "5283efe8-07d1-4e3a-b615-2ae4a81c1b73", "Kriti"), ("inworld", "Manoj", "Manoj"), ("smallest", "kunal", "Kunal"), ("chariot", "9fbf5ed7-5e81-40e0-b0f9-9ab0345661a3", "Darshan")],
     ("walk-script", "en"): [("cartesia", "4459a9a5-69d6-4680-b970-e13dc51845b6", "Siya"), ("smallest", "siddharth", "Siddharth"), ("inworld", "Nikhil", "Nikhil")],
     ("walk-script", "hi"): [("cartesia", "205fc552-2cce-4307-baa1-598b9dc3dd01", "Rehan"), ("smallest", "meera", "Meera"), ("inworld", "Seema", "Seema")],
 }
-MODEL = {"cartesia": "Cartesia sonic-3", "inworld": "Inworld inworld-tts-1.5-max", "smallest": "Smallest lightning-v3.1"}
-EXT = {"cartesia": "mp3", "inworld": "mp3", "smallest": "wav"}
+MODEL = {"cartesia": "Cartesia sonic-3", "inworld": "Inworld inworld-tts-1.5-max", "smallest": "Smallest lightning-v3.1", "chariot": "Chariot chariot-multilingual-v1"}
+EXT = {"cartesia": "mp3", "inworld": "mp3", "smallest": "wav", "chariot": "wav"}
+TAKES = {"chariot": 1}   # small balance: one take, then a second checker decides
 dead = set()          # providers that reported no credits in this run
 SPEED = 0.95
 PASS = {"en": 0.88, "hi": 0.80}   # acronym-heavy lines lose a few points to the checker itself
@@ -38,6 +39,7 @@ def say(provider, voice, lang, text, out, emotion):
             raise
     elif provider == "inworld": prov.inworld_tts(text, lang, voice, out, speed=SPEED)
     elif provider == "smallest": prov.smallest_tts(text, lang, voice, out, speed=SPEED)
+    elif provider == "chariot": prov.chariot_tts(text, lang, voice, out, speed=1.0)   # its rates are 0.9 or 1.0
 
 def split_long(text, n=900):
     """Paragraphs grouped up to n characters; a longer paragraph is cut at sentence ends."""
@@ -141,10 +143,10 @@ def do_chunk(u, i, text, emotion, provider, voice):
     if os.path.exists(meta_p):
         m = json.load(open(meta_p))
         m["file"] = os.path.join(d, os.path.basename(m["file"]))
-        if os.path.exists(m["file"]) and m["spoken"] == spoken and m["score"] >= need:
+        if os.path.exists(m["file"]) and m["spoken"] == spoken and (m["score"] >= need or m.get("check2")):
             m["ok"] = True; return m
     best = None
-    for take in range(3):
+    for take in range(TAKES.get(provider, 3)):
         f = os.path.join(d, f"{provider}.{i:02d}.t{take}.{EXT[provider]}")
         say(provider, voice, u["lang"], spoken, f, emotion)
         secs = dur(f)
@@ -202,7 +204,8 @@ def rescore():
     for f in glob.glob(os.path.join(WORK, "*", "*", "*.json")):
         m = json.load(open(f)); lang = os.path.basename(os.path.dirname(f)).rsplit(".", 1)[1]
         sc = round(score(m["spoken"], m["heard"], lang), 3); need = PASS[lang] - (0.12 if len(m["spoken"]) < 120 else 0)
-        if sc != m["score"] or m["ok"] != (sc >= need): m["score"] = sc; m["ok"] = sc >= need; json.dump(m, open(f, "w"), ensure_ascii=False, indent=1); n += 1
+        ok = sc >= need or bool(m.get("check2"))   # passed a second speech-to-text engine
+        if sc != m["score"] or m["ok"] != ok: m["score"] = sc; m["ok"] = ok; json.dump(m, open(f, "w"), ensure_ascii=False, indent=1); n += 1
     print("re-marked", n)
 
 if __name__ == "__main__":

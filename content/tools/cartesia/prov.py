@@ -40,3 +40,23 @@ def inworld_tts(text, lang, voice, out_mp3, model="inworld-tts-1.5-max", speed=1
     j = post("https://api.inworld.ai/tts/v1/voice", {"Authorization": "Basic " + key("inworld"), "Content-Type": "application/json"},
              {"text": text, "voiceId": voice, "modelId": model, "audioConfig": {"audioEncoding": "MP3", "sampleRateHertz": 44100, "speakingRate": speed}})
     open(out_mp3, "wb").write(base64.b64decode(j["audioContent"]))
+def chariot_tts(text, lang, voice, out_wav, model="chariot-multilingual-v1", speed=1.0):
+    """Chariot sync TTS (1 credit per character, WAV 44.1 kHz mono). A request takes at most 1,000 characters, so longer text goes in parts."""
+    import re, wave, io
+    parts, cur = [], ""
+    for s in re.split(r"(?<=[.!?।\n])\s*", text):
+        if cur and len(cur) + len(s) + 1 > 950: parts.append(cur); cur = s
+        else: cur = (cur + " " + s).strip()
+    if cur: parts.append(cur)
+    frames, params = [], None
+    for p in parts:
+        b = post("https://api.chariot.in/v1/tts", {"chariotai-api-key": key("chariot"), "Content-Type": "application/json"},
+                 {"voice_id": voice, "text": p, "model_type": model, "speed": speed}, raw=True)
+        with wave.open(io.BytesIO(b)) as w: params = params or w.getparams(); frames.append(w.readframes(w.getnframes()))
+    with wave.open(out_wav, "wb") as w: w.setparams(params); [w.writeframes(f) for f in frames]
+def chariot_stt(path, lang):
+    """Chariot file speech-to-text (1.5 credits per second); used as a second opinion on a chunk the first checker failed."""
+    r = subprocess.run(["curl", "-s", "--fail-with-body", "https://api.chariot.in/v1/asr/transcribe", "-H", "chariotai-api-key: " + key("chariot"),
+                        "-F", "language=" + lang, "-F", "style=native", "-F", "input_audio_file=@" + path], capture_output=True, text=True)
+    if r.returncode: raise RuntimeError(r.stdout[-300:])
+    return json.loads(r.stdout).get("text", "")
