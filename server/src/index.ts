@@ -1,3 +1,4 @@
+import { checkProviders } from "./ai";
 import { runFactWatch } from "./factwatch";
 import { publicLibrary, serveMedia } from "./content";
 import { autoPick, chaiDigest, deskApi, modApi, postRitual, publish } from "./desk";
@@ -279,6 +280,9 @@ export default {
     // The day's Chai drafts get a run to themselves at 05:00: sharing 05:30 with the backup, the fact watch and the
     // rest, the run was cut short and left nothing (14 and 15 Nov 2026). The catch-up below covers a bad morning.
     if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm, true));
+    // A provider set aside after a billing or key error gets one tiny test call a day, in a run of its own, before the
+    // morning's drafting and chats; if it answers it's back in every route (ai.ts checkProviders).
+    if (hm === "04:30") ctx.waitUntil(checkProviders(env).then(log("providers"), fail("providers")));
     if (hm === "05:30") {
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));

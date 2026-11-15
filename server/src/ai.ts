@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { type Env, istDay } from "./shared";
-import { ensureSchema, llmControls } from "./staff";
+import { ensureSchema, getSetting, llmControls, setSetting } from "./staff";
 
 /**
  * Every model call goes through here, so admins can see usage and switch things off.
@@ -133,9 +133,12 @@ const GEMINI_EXTRA = { reasoning_effort: "low", max_tokens: 1200 };
 
 /**
  * Which models answer in each language Chotu speaks, best first. On an error, rate limit or timeout the next
- * one is tried, and a provider with no key is skipped. Picks from the model watch (research/model-watch.md):
- * English goes to Groq first (fast; owner's call, 2 Nov 2026), with Nemotron 3 Ultra as the fallback. Nemotron mangles
- * Telugu, so Telugu stays on Google.
+ * one is tried, and a provider with no key, or one set aside after a billing or key error, is skipped.
+ * English goes to Groq first (fast; owner's call, 2 Nov 2026), with Nemotron 3 Ultra as the fallback.
+ * Google goes last in Hindi and Telugu while its account answers 402 (owner, 15 Nov 2026: "keep working directly
+ * with back ups").
+ * Live tries on 15 Nov 2026: Qwen answered Hindi and Telugu well in about 1 s; gpt-oss-120b well in 1-1.5 s; Nemotron
+ * good Hindi but 10 s, and wrong Telugu; Gemma on NVIDIA timed out every time, so it's out of both lists.
  */
 export const CHAT_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
   en: [
@@ -145,18 +148,19 @@ export const CHAT_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
     { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
   ],
   hi: [
-    { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },
-    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
-    { provider: "nvidia", model: "google/gemma-4-31b-it", extra: { max_tokens: 1200 }, timeoutMs: 30_000 },
-    { provider: "google", model: "gemma-4-31b-it", extra: { max_tokens: 1200 } },
     { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
     { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
+    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1200 }, timeoutMs: 25_000 },
+    { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },
+    { provider: "google", model: "gemma-4-31b-it", extra: { max_tokens: 1200 } },
   ],
   te: [
+    { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
+    { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
+    { provider: "groq", model: "openai/gpt-oss-20b", extra: GROQ_EXTRA },
     { provider: "google", model: "gemini-3.8-flash", extra: GEMINI_EXTRA },
     { provider: "google", model: "gemini-3.5-flash-lite", extra: GEMINI_EXTRA },
     { provider: "google", model: "gemma-4-31b-it", extra: { max_tokens: 1200 } },
-    { provider: "nvidia", model: "google/gemma-4-31b-it", extra: { max_tokens: 1200 }, timeoutMs: 20_000 },
   ],
 };
 
@@ -170,13 +174,18 @@ export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
 
 /**
  * One chat reply, trying each hop in turn with the same switches, caps and logging as the others.
- * Error bodies can echo the request, so only the status is kept.
+ * Error bodies can echo the request, so only the status is kept. A provider set aside after a billing or key error
+ * is skipped, so no one waits on it; only if every other model fails is it asked as a last resort.
  */
 export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[]): Promise<{ text: string; model: string }> {
   let last = "No AI provider answered";
   let keyed = 0;
-  const down = await downModels(env);
-  for (const hop of hops) {
+  const down = await downProviders(env);
+  const aside = new Set(Object.keys(down));
+  const failed = new Set<string>(); // providers that gave a billing or key error during this call
+  const order = [...hops.filter((h) => !aside.has(h.provider)), ...hops.filter((h) => aside.has(h.provider))];
+  for (const hop of order) {
+    if (failed.has(hop.provider)) continue;
     const p = PROVIDERS[hop.provider];
     const key = p.key(env);
     const log = logger(env, purpose, hop.model);
@@ -186,8 +195,6 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
       continue;
     }
     keyed++;
-    // Billing or a rejected key doesn't fix itself in a minute: skip that model for a while instead of asking it again.
-    if (down.has(hop.model)) { last = `${p.name} is skipped for now (its last answer was a billing or key error)`; continue; }
     const t0 = Date.now();
     try {
       const res = await fetch(p.url, {
@@ -201,6 +208,8 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
           : res.status === 402 ? `${p.name} error 402: billing or credit needed on the account behind ${p.keyName}`
           : res.status === 429 ? `${p.name} is rate-limiting this key` : `${p.name} error ${res.status}`;
         await log("error", Date.now() - t0, null, null, last);
+        // Billing or a rejected key doesn't fix itself in a minute: set the provider aside (the whole account, not one model).
+        if ([401, 402, 403].includes(res.status)) { failed.add(hop.provider); await markDown(env, hop.provider, last); }
         continue;
       }
       const out = (await res.json()) as any;
@@ -214,6 +223,7 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
         continue;
       }
       await log("ok", Date.now() - t0, u.prompt_tokens ?? null, u.completion_tokens ?? null, null);
+      if (down[hop.provider]) await markUp(env, hop.provider);
       return { text, model: hop.model };
     } catch (e) {
       last = e instanceof Error && e.name === "TimeoutError" ? `${p.name} took too long` : `${p.name} unreachable: ${e instanceof Error ? e.name : "error"}`;
@@ -224,15 +234,65 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
   throw new Error(last);
 }
 
-/** How long a model that answered with a billing or key error is left alone before it's tried again. */
-export const DOWN_FOR_MS = 3 * 60 * 60 * 1000;
-/** Models whose latest answer (within DOWN_FOR_MS) was a billing (402) or key (401/403) error. */
-async function downModels(env: Env): Promise<Set<string>> {
-  const since = new Date(Date.now() - DOWN_FOR_MS).toISOString();
-  const { results } = await env.DB.prepare(
-    `SELECT model, MAX(at) AS at, status, error FROM llm_calls WHERE at > ? AND status IN ('ok', 'error') GROUP BY model`,
-  ).bind(since).all<{ model: string; status: string; error: string | null }>().catch(() => ({ results: [] as { model: string; status: string; error: string | null }[] }));
-  return new Set(results.filter((r) => r.status === "error" && /error 402|rejected the key/.test(r.error ?? "")).map((r) => r.model));
+/**
+ * How long a provider that answered with a billing or key error stays set aside. The 05:00 health check
+ * (checkProviders) brings it back sooner once it answers properly; this is the backstop.
+ */
+export const DOWN_FOR_MS = 24 * 60 * 60 * 1000;
+const DOWN_KEY = "ai_down";
+type Down = Partial<Record<Provider, { since: string; why: string }>>;
+
+/** Providers set aside within DOWN_FOR_MS. */
+export async function downProviders(env: Env): Promise<Down> {
+  const all = await getSetting<Down>(env, DOWN_KEY, {}).catch(() => ({}) as Down);
+  const cut = Date.now() - DOWN_FOR_MS;
+  return Object.fromEntries(Object.entries(all).filter(([, v]) => v && Date.parse(v.since) > cut)) as Down;
+}
+async function markDown(env: Env, provider: Provider, why: string) {
+  const all = await getSetting<Down>(env, DOWN_KEY, {}).catch(() => ({}) as Down);
+  all[provider] = { since: new Date().toISOString(), why: why.slice(0, 160) };
+  await setSetting(env, DOWN_KEY, all, "ai").catch(() => {});
+}
+async function markUp(env: Env, provider: Provider) {
+  const all = await getSetting<Down>(env, DOWN_KEY, {}).catch(() => ({}) as Down);
+  if (!all[provider]) return;
+  delete all[provider];
+  await setSetting(env, DOWN_KEY, all, "ai").catch(() => {});
+}
+
+/** One tiny call per set-aside provider: the cheapest way to see if its billing or key is fixed. */
+const PROBE: Record<Provider, string> = { google: "gemini-3.5-flash-lite", groq: "openai/gpt-oss-20b", nvidia: "google/gemma-4-31b-it" };
+
+/**
+ * The 05:00 health check: asks each set-aside provider for a one-word reply. If it answers, it is back in every
+ * route at once; if not, it stays aside (and the 24 hours start again). No user chat ever pays for this wait.
+ */
+export async function checkProviders(env: ChatEnv): Promise<Record<string, "back" | "still down">> {
+  const out: Record<string, "back" | "still down"> = {};
+  for (const provider of Object.keys(await downProviders(env)) as Provider[]) {
+    const p = PROVIDERS[provider];
+    const key = p.key(env);
+    if (!key) continue;
+    const log = logger(env, "watch", PROBE[provider]);
+    try { await gate(env, "watch", log); } catch { continue; }
+    const t0 = Date.now();
+    let ok = false, why = `${p.name} unreachable`;
+    try {
+      const res = await fetch(p.url, {
+        method: "POST",
+        headers: { authorization: `Bearer ${key}`, "content-type": "application/json" },
+        body: JSON.stringify({ model: PROBE[provider], messages: [{ role: "user", content: "Reply with the word OK." }], max_tokens: 5, temperature: 0 }),
+        signal: AbortSignal.timeout(15_000),
+      });
+      ok = res.ok;
+      why = res.status === 402 ? `${p.name} error 402: billing or credit needed on the account behind ${p.keyName}`
+        : res.status === 401 || res.status === 403 ? `${p.name} rejected the key (check ${p.keyName})` : `${p.name} error ${res.status}`;
+    } catch { /* stays down */ }
+    await log(ok ? "ok" : "error", Date.now() - t0, null, null, ok ? null : `health check: ${why}`);
+    if (ok) await markUp(env, provider); else await markDown(env, provider, why);
+    out[provider] = ok ? "back" : "still down";
+  }
+  return out;
 }
 
 /** The English route, kept for any caller that still asks for Groq by name. */

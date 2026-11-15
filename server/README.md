@@ -209,6 +209,7 @@ Cloudflare's free plan allows few cron strings, so one cron (`0,30 * * * *`) run
 
 | IST            | Job |
 |----------------|-----|
+| 04:30 daily    | AI health check: one tiny call to each provider set aside after a billing or key error (settings key `ai_down`); if it answers, it's back in every route. Otherwise it stays aside up to 24 hours. |
 | 05:00 daily    | Chai: fetch feeds, queue the day's 12 stories, draft 5 (06:00, 06:30 and later catch-up slots draft the rest, 5 a slot, and retry a failed draft once) |
 | 05:30 daily    | Daily backup; merge forming pods 7+ days old; refresh pod states (quiet for 14 days → each member is asked privately to stay or move) |
 | 06:00 Monday   | The weekly batch match: forming pods merge, into small pods with room where possible |

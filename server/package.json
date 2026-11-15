@@ -33,6 +33,7 @@
     "test:try": "node test/try.mjs",
     "test:interactives": "node --import ./test/dev-auth.mjs test/interactives.mjs",
     "test:chai": "node --import ./test/dev-auth.mjs test/chai.mjs",
+    "test:providers": "node test/providers.mjs",
     "test:all": "zsh scripts/test-all.sh",
     "check:schema": "zsh scripts/check-schema.sh"
   },
