@@ -6,10 +6,12 @@ with tools you already have, and suggests seven more formats.
 
 ## Decisions up front
 
-- **Recommended route: the cheap route first** (section B1). Pictures from the free Gemini app, voices from the
-  free Kokoro voices already on the Mac (English) and Sarvam Bulbul for Hindi (about ₹3 a minute), slow camera moves
-  and captions done by a script. **Cost: ₹0 to ₹10 a video. Time: about 3 hours for the first, about 1.5 to 2 hours
-  once you have the style and characters saved.**
+- **Recommended route: the cheap route first** (section B1). Pictures from the free Gemini app, narration in English
+  and Hindi from **Fish Audio** (paid with your startup credits; about ₹5 to ₹15 a video for both languages, retakes
+  and the speech-to-text check included), slow camera moves and captions done by a script. **Cost: about ₹5 to ₹15 a
+  video. Time: about 3 hours for the first, about 1.5 to 2 hours once you have the style and characters saved.**
+- **Voices (updated 15 Nov, evening):** English "Shubh", Hindi "शांत और भावुक स्वर", both Fish Audio licensed voices.
+  Samples of the worked example are in `artefacts/video-styles-2026-11-15/` (section V says how they tested).
 - Move to the **better route** (B2) only once the first three videos have been watched in the app and you like them.
   It costs about ₹250 to ₹600 a video and saves about an hour.
 - **First three videos to make:** (1) *The Monkey King's Bridge* (a Jataka story, GS4 and GS1), fully written in
@@ -92,12 +94,12 @@ Both routes share steps 1, 2 and 6. They differ in where the pictures, voices an
 ### B1. Cheap route (recommended to start)
 
 **What it uses:** Claude (or the Claude Project you already write content in) for the script; the free Gemini app
-(Nano Banana image model) for pictures; Kokoro voices (free, already set up in `content/tools/kokoro-vo.py`) for
-English; Sarvam Bulbul v3 for Hindi (₹30 per 10,000 characters, so about ₹3 per Hindi minute, once its credits are
-topped up) or Cartesia's Hindi voice (key in the Keychain) if Sarvam is empty; ffmpeg (already installed) for
-movement, sound and captions.
+(Nano Banana image model) for pictures; Fish Audio for the English and Hindi narration (section V); ffmpeg (already
+installed) for movement, sound and captions. If Fish Audio's credits run out, the free Kokoro voices already in
+`content/tools/kokoro-vo.py` are the English fallback.
 
-**Cost per video:** ₹0 to ₹10. **Time:** about 3 hours for the first one; 1.5 to 2 hours after that.
+**Cost per video:** about ₹5 to ₹15 (all of it voice). **Time:** about 3 hours for the first one; 1.5 to 2 hours
+after that.
 
 **Step 1. Write the script (20 min).** Paste this into Claude, with the story's source text pasted inside
 `<source>` tags. Use the public-domain translation, not a modern retelling.
@@ -175,9 +177,9 @@ No text, no letters, no logos, no borders on any map.
 Save the shots as `01.png`, `02.png` and so on. The Gemini app adds a small visible mark in a corner. Leave it:
 Google's terms don't allow removing it, and we label the video AI anyway.
 
-**Step 5. Voice (15 min).** Hand Claude the script; it voices English with Kokoro (narrator `hm_psi` or `hf_beta`)
-and Hindi with Sarvam Bulbul v3 (or Cartesia). Each line is checked by speech-to-text, as the notes readings are.
-If you'd rather do it yourself, any voice you record or generate works: one WAV or MP3 per language.
+**Step 5. Voice (15 min).** Hand Claude the script; it voices both languages with Fish Audio (section V) and checks
+every take by speech-to-text, as the notes readings are. If you'd rather do it yourself, use Fish Audio's website
+with the same two voices, or record your own: one MP3 per language.
 
 *Narration file template (`script.en.txt` and `script.hi.txt`, one shot per block):*
 
@@ -231,8 +233,10 @@ publishes it.
   second, depending on where you buy it), or Hailuo (cheapest). 3 clips × 5 s ≈ ₹50 to ₹150. Prompt: "Keep the
   picture exactly as it is. Only [the bamboo sways / the monkey's tail moves / leaves drift]. Camera still. No new
   objects, no text." Everything else stays as slow push-ins: full motion on every shot looks busy and drifts off-model.
-- **Voice:** Cartesia (Indian English and Hindi voices, keys in the Keychain) or ElevenLabs, for a warmer storyteller.
-  About ₹20 to ₹60 a video in both languages.
+- **Voice:** still Fish Audio, same model and price. The step up is a voice of our own: Fish Audio's Voice Design
+  ($0.01 a try) makes a new voice from a written description, so the series gets a narrator nobody else uses and no
+  third party owns. Make one English and one Hindi narrator once, keep their IDs, and use them for every story.
+  (Never clone a real person's voice, and never use the community voices that copy famous people.)
 - **Light character motion without video models:** split one character onto its own layer (ask Gemini for "the same
   picture with the background only" and "the character alone on plain green") so the script can move the background
   and the character at different speeds (parallax). A blink is two pictures (eyes open, eyes closed) swapped for 0.15 s.
@@ -243,6 +247,82 @@ publishes it.
 **Not recommended for us:** FLUX.1 Kontext [dev] (its free weights are non-commercial only); running big image models
 on the Mac (slow, and Qwen-Image-Edit, the commercially open one, needs a lot of memory); Midjourney (no free tier,
 and it has changed its character-reference feature).
+
+---
+
+## V. Voices: Fish Audio (both routes)
+
+**Which voices.** Fish Audio has thousands of community voices. Use only these two kinds:
+
+1. **Fish-licensed voices** (the library's "licensed" filter). Their owners have licensed them through Fish Audio.
+2. **Voices we design ourselves** with Voice Design (B2).
+
+Never use a community voice that isn't licensed: many are copies of film stars and politicians, which breaks our
+"no living people" rule and their terms.
+
+Picked on 15 Nov 2026 (all licensed, all tagged calm, narration and storytelling):
+
+| Use | Voice | Fish ID | Notes |
+|---|---|---|---|
+| English narrator (first choice) | Shubh (male, middle-aged, warm, measured) | `e0ea460db14b4430afb6311708937b6d` | Clean in the test |
+| English narrator (woman) | SHILPA (female, warm, clear) | `d96e903b57be4742b105dfb0d3e26d51` | Clean; said "Bharhut" a little soft |
+| Hindi narrator | शांत और भावुक स्वर (male, young, soft, calm) | `24e7cbf4121745e7bb3b54d1a0d2be80` | Best Hindi of the two licensed Hindi voices |
+| Hindi narrator (spare) | Hashtag agriculture hindi voice (male, deep, calm) | `18e8999c98b746bda58521980d817e8c` | More slips in the test |
+| Same voice in both languages | शांत और भावुक स्वर reading English | `24e7cbf4121745e7bb3b54d1a0d2be80` | Clean in English too; use it if you want one narrator across both languages |
+
+There are only two licensed Hindi voices today, both male. For a woman's Hindi narration, design one (B2).
+
+**How to pick another voice.** In the Fish Audio library, filter language English (or Hindi), switch on "licensed",
+sort by most used, and play the sample of anything tagged narration, calm and storytelling. A good narrator for us is
+calm, unhurried, Indian in accent, and clear on names (test it with "Bharhut, Sanchi, Uttaramerur, Parantaka").
+Claude can list the candidates through the API: `GET https://api.fish.audio/model?language=hi&licensed=true&sort_by=task_count&page_size=40`.
+
+**The request** (Claude runs it with the key read from the Keychain, service `fish-audio-api-key`, account
+`aspiran`; the key is never printed or saved):
+
+```text
+POST https://api.fish.audio/v1/tts
+Authorization: Bearer <key from the Keychain>
+Content-Type: application/json
+model: s2.1-pro
+
+{"text": "<the whole narration; one blank line between shots>",
+ "reference_id": "e0ea460db14b4430afb6311708937b6d",
+ "language": "en",                      ("hi" for Hindi)
+ "format": "mp3", "mp3_bitrate": 128,
+ "prosody": {"speed": 0.95},
+ "normalize": true, "latency": "normal"}
+```
+
+The answer is the MP3 itself. Use the paid model `s2.1-pro`, not `s2.1-pro-free`: Fish Audio's terms limit free use to
+personal, non-commercial use. The check afterwards uses Fish Audio's own speech-to-text (`POST /v1/asr` with the MP3
+and `language`), $0.36 an hour of audio.
+
+**Writing for the voice.** Write numbers as words in Hindi ("अस्सी हज़ार"). For paper names write "G-S-four" in
+English and "जीएस फ़ोर", "जीएस वन" in Hindi; "जी-एस चार" came out garbled. One blank line between shots gives a natural
+pause.
+
+**Cost.** Fish Audio bills $15 per million bytes of text. One English minute is about 1,000 bytes; Hindi takes three
+bytes a letter, so the same minute is about 2,400 bytes. Both languages together come to about $0.05 (≈ ₹4) a take;
+with a retake or two and the check, ₹5 to ₹15 a video. Your startup credits cover thousands of videos.
+
+**Terms for commercial use** (Fish Audio Terms of Use, effective 18 Aug 2024, read 15 Nov 2026): paid users "are
+licensed to use the Services for commercial uses"; free users only for personal, non-commercial use. API credits are
+paid use. The terms don't say outright who owns generated audio, and they forbid presenting AI content as made by a
+person; we label every video "AI voice", which covers that. Re-read the terms if Fish Audio changes the startup
+programme, and keep the plan or credit receipt with the artefacts.
+
+**The test (15 Nov 2026).** The worked example's narration (section C) was voiced and checked by Fish Audio's
+speech-to-text against the script:
+
+| File in `artefacts/video-styles-2026-11-15/` | Length | Words heard as written | What to listen for |
+|---|---|---|---|
+| `monkey-king-bridge.en.fish-shubh.mp3` | 63 s | 100% | Nothing found |
+| `monkey-king-bridge.en.fish-shant.mp3` (the Hindi voice in English) | 65 s | 100% | Nothing found |
+| `monkey-king-bridge.hi.fish-shant.mp3` | 75 s | 95% | Most differences are spelling (वानर राज for वानरराज). Listen to: "बहकर" (heard as भयकर), "नहीं रहा", "सीख" (heard as सीट), and the "पर" before चींटियों |
+
+The scripts are next to them (`monkey-king-bridge.narration.en.txt`, `.hi.txt`). Speech-to-text can't judge warmth
+or accent: please listen to all three and say which narrator you want for the series. The test cost less than ₹1.
 
 ---
 
@@ -388,8 +468,9 @@ Remember the bridge.
   - Gemini app pictures: Google lets you use them, including commercially; the visible mark and the hidden SynthID
     mark stay. Re-read Google's Gemini Apps terms before the first publish.
   - Gemini API / Nano Banana Pro: paid use, commercial use allowed under Google's API terms.
-  - Kokoro voices: Apache 2.0 licence, commercial use allowed.
-  - Sarvam, Cartesia, ElevenLabs: paid plans allow commercial use; check each plan's terms.
+  - Fish Audio: see section V. Paid use is licensed for commercial use; free use is not. Use only paid models and
+    Fish-licensed voices or our own designed voices.
+  - Kokoro voices (fallback): Apache 2.0 licence, commercial use allowed.
   - Image-to-video (Veo, Kling, Hailuo, Runway): paid outputs are generally usable commercially; read the plan's terms.
   - CapCut: free to edit; don't use its music, stickers, effects or templates in anything we publish.
   - FLUX.1 Kontext [dev]: non-commercial only. Don't use.
@@ -499,7 +580,8 @@ Google sign-in, so the first real pictures will come from you at step 3.
 - Ideogram Character prices: higgsfield.ai/blog/best-ai-image-generators-2026; pricepertoken.com
 - Midjourney changes: tooldirectory.ai/compare/midjourney-vs-nano-banana
 - Image-to-video prices: invideo.io/blog/ai-video-model-pricing; developersdigest.tech/blog/image-video-generation-api-pricing-2026; aireiter.com/blog/cheapest-image-to-video-api; costbench.com/compare/kling-api-vs-runway-api/
-- Sarvam Bulbul v3 price: sarvam.ai/api-pricing; docs.sarvam.ai/api/getting-started/pricing
+- Fish Audio: API reference docs.fish.audio (text to speech `/v1/tts`, list models `/model`); prices
+  docs.fish.audio/developer-guide/models-pricing/pricing-and-rate-limits; Terms of Use fish.audio/terms/ (effective 18 Aug 2024)
 - Licences: bfl.ai/blog/flux-1-kontext-dev (non-commercial); localaimaster.com/blog/local-image-model-licenses-commercial-use (Qwen-Image-Edit, Apache 2.0)
 
 Prices move often and several of these are secondary sources; check the tool's own pricing page before paying.
