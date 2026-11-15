@@ -3,17 +3,12 @@ import { contentApi } from "./content";
 import { coverage } from "./coverage";
 import { caDeskApi } from "./ca";
 import { addNote, listNotes } from "./library";
-import { addCandidate, autoChecks, gsOf } from "./pipeline";
+import { AUTO_HOPS, addCandidate, autoChecks, gsOf, readVerdict } from "./pipeline";
 import { type Env, bad, istDay, json } from "./shared";
-import { type Hop, callChat } from "./ai";
+import { callChat } from "./ai";
 import { business } from "./payments";
 import { mailOn, sendMail } from "./mail";
 
-// The drafts come from Llama on Workers AI; the second read is another family, steady and strict.
-const AUTO_HOPS: Hop[] = [
-  { provider: "groq", model: "openai/gpt-oss-120b", extra: { temperature: 0, reasoning_effort: "medium", include_reasoning: false, max_completion_tokens: 300 }, timeoutMs: 30_000 },
-  { provider: "google", model: "gemini-3.8-flash", extra: { temperature: 0, reasoning_effort: "low", max_tokens: 300 }, timeoutMs: 30_000 },
-];
 import { type Staff, approverName, audit, auditDetail, can, label, recordVersion, requireStaff } from "./staff";
 import seedNotes from "../seed/notes.json";
 
@@ -141,29 +136,41 @@ export async function autoPick(env: Env, day = istDay()) {
   const papers = new Set(ready.map(paperOf));
   const queue = results.filter((r) => r.status === "draft" && r.card_json);
   const picked: string[] = [], held: string[] = [];
+  let unchecked = "";
   while (have < AUTO_CARDS && queue.length) {
     let i = queue.findIndex((q) => !papers.has(paperOf(q)));
     if (i < 0) i = 0;
     const [r] = queue.splice(i, 1);
     let card: any; let flagged: unknown[] = [];
     try { card = JSON.parse(r.card_json); flagged = JSON.parse(r.flags || "[]"); } catch { continue; }
+    // A draft the second check already turned down stays down (it isn't asked about again each hour).
     if (flagged.length || !card.summary || !card.headline || !["light", "neutral"].includes(card.tone)) { held.push(r.title); continue; }
-    let pass = false;
+    let verdict: { pass: boolean; reason: string };
     try {
       const out = await callChat(env, "guard", [{ role: "user", content: AUTO_CHECK(card, r.source_text) }], AUTO_HOPS);
-      const m = out.text.match(/\{[\s\S]*\}/);
-      pass = !!m && JSON.parse(m[0]).verdict === "pass";
-    } catch { pass = false; } // no second check, no auto card
-    if (!pass) { held.push(r.title); continue; }
+      verdict = readVerdict(out.text);
+    } catch (e) {
+      // No checker answered: no auto card, and no point asking again for the rest of the queue in this run.
+      held.push(r.title, ...queue.map((q) => q.title));
+      unchecked = String(e instanceof Error ? e.message : e).slice(0, 120);
+      break;
+    }
+    if (!verdict.pass) {
+      held.push(r.title);
+      await env.DB.prepare("UPDATE candidates SET flags = ? WHERE id = ? AND status = 'draft'")
+        .bind(JSON.stringify([`Second check: ${verdict.reason || "did not pass"}`.slice(0, 200)]), r.id).run();
+      continue;
+    }
     await env.DB.prepare("UPDATE candidates SET status = 'auto' WHERE id = ? AND status = 'draft'").bind(r.id).run();
     picked.push(card.headline); have++;
     papers.add(paperOf(r));
   }
-  return { picked, held: held.length };
+  return { picked, held: held.length, ...(unchecked ? { unchecked } : {}) };
 }
 
+
 /** Tells the owner by email what went out, so nobody has to open the Desk to know. Quietly skipped if mail is off. */
-export async function chaiDigest(env: Env, day: string, auto: { picked: string[]; held: number } | null, result: { published: boolean; cards?: number; reason?: string }) {
+export async function chaiDigest(env: Env, day: string, auto: { picked: string[]; held: number; unchecked?: string } | null, result: { published: boolean; cards?: number; reason?: string }) {
   const to = (await business(env)).email;
   if (!mailOn(env) || !/^\S+@\S+\.\S+$/.test(to)) return;
   const base = (env.PUBLIC_BASE_URL || "").replace(/\/$/, "");
@@ -172,6 +179,7 @@ export async function chaiDigest(env: Env, day: string, auto: { picked: string[]
        ...(auto?.picked.length ? ["", "Sent by the automatic check (shown in the app as not yet checked by an editor):", ...auto.picked.map((t) => "- " + t)] : []),
        ...(auto?.held ? ["", `${auto.held} more draft${auto.held === 1 ? " is" : "s are"} waiting for a person in the Desk.`] : [])]
     : [`No Chai went out today (${day}). ${result.reason ?? ""}`, auto ? "The automatic check found no draft it could pass on its own." : "The automatic Chai is switched off (Admin, Flags, chai_auto)."];
+  if (auto?.unchecked) lines.push("", `The second check could not run: ${auto.unchecked}`);
   await sendMail(env, { to, subject: result.published ? `Chai out: ${result.cards} cards, ${day}` : `No Chai today, ${day}`, text: [...lines, "", `Desk: ${base.replace("//app.", "//admin.")}/desk`].join("\n") });
 }
 
@@ -327,7 +335,8 @@ async function deskInner(req: Request, env: Env, path: string, s: Staff): Promis
   }
   if (path === "pipeline" && req.method === "POST") {
     const { runPipeline } = await import("./pipeline");
-    return json({ log: await runPipeline(env, now) });
+    // {fetch: false}: only draft the stories still waiting (queued, or failed once), without reading the feeds again.
+    return json({ log: await runPipeline(env, now, { fetch: body.fetch !== false }) });
   }
   if (path === "ritual" && req.method === "POST") {
     const kind = body.kind as Ritual;

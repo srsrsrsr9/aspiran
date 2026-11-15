@@ -175,6 +175,7 @@ export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
 export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[]): Promise<{ text: string; model: string }> {
   let last = "No AI provider answered";
   let keyed = 0;
+  const down = await downModels(env);
   for (const hop of hops) {
     const p = PROVIDERS[hop.provider];
     const key = p.key(env);
@@ -185,6 +186,8 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
       continue;
     }
     keyed++;
+    // Billing or a rejected key doesn't fix itself in a minute: skip that model for a while instead of asking it again.
+    if (down.has(hop.model)) { last = `${p.name} is skipped for now (its last answer was a billing or key error)`; continue; }
     const t0 = Date.now();
     try {
       const res = await fetch(p.url, {
@@ -195,6 +198,7 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
       });
       if (!res.ok) {
         last = res.status === 401 || res.status === 403 ? `${p.name} rejected the key (check ${p.keyName})`
+          : res.status === 402 ? `${p.name} error 402: billing or credit needed on the account behind ${p.keyName}`
           : res.status === 429 ? `${p.name} is rate-limiting this key` : `${p.name} error ${res.status}`;
         await log("error", Date.now() - t0, null, null, last);
         continue;
@@ -203,7 +207,9 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
       const text = String(out?.choices?.[0]?.message?.content ?? "").trim();
       const u = out?.usage ?? {};
       if (!text) {
-        last = `${p.name} sent an empty reply`;
+        // A reasoning model that spends its whole token allowance thinking sends no answer at all (finish_reason
+        // "length"): that is a setting to fix (more tokens, less reasoning), not the provider being down.
+        last = out?.choices?.[0]?.finish_reason === "length" ? `${p.name} ran out of tokens before answering` : `${p.name} sent an empty reply`;
         await log("error", Date.now() - t0, u.prompt_tokens ?? null, u.completion_tokens ?? null, last);
         continue;
       }
@@ -216,6 +222,17 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
   }
   if (!keyed) throw new AiBlocked("No AI keys on this server. Add GROQ_API_KEY, GOOGLE_AI_API_KEY or NVIDIA_API_KEY to .dev.vars and restart.");
   throw new Error(last);
+}
+
+/** How long a model that answered with a billing or key error is left alone before it's tried again. */
+export const DOWN_FOR_MS = 3 * 60 * 60 * 1000;
+/** Models whose latest answer (within DOWN_FOR_MS) was a billing (402) or key (401/403) error. */
+async function downModels(env: Env): Promise<Set<string>> {
+  const since = new Date(Date.now() - DOWN_FOR_MS).toISOString();
+  const { results } = await env.DB.prepare(
+    `SELECT model, MAX(at) AS at, status, error FROM llm_calls WHERE at > ? AND status IN ('ok', 'error') GROUP BY model`,
+  ).bind(since).all<{ model: string; status: string; error: string | null }>().catch(() => ({ results: [] as { model: string; status: string; error: string | null }[] }));
+  return new Set(results.filter((r) => r.status === "error" && /error 402|rejected the key/.test(r.error ?? "")).map((r) => r.model));
 }
 
 /** The English route, kept for any caller that still asks for Groq by name. */

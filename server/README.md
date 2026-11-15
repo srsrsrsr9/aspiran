@@ -209,7 +209,8 @@ Cloudflare's free plan allows few cron strings, so one cron (`0,30 * * * *`) run
 
 | IST            | Job |
 |----------------|-----|
-| 05:30 daily    | Fetch feeds, draft cards into the editor queue; daily backup; merge forming pods 7+ days old; refresh pod states (quiet for 14 days → each member is asked privately to stay or move) |
+| 05:00 daily    | Chai: fetch feeds, queue the day's 12 stories, draft 5 (06:00, 06:30 and later catch-up slots draft the rest, 5 a slot, and retry a failed draft once) |
+| 05:30 daily    | Daily backup; merge forming pods 7+ days old; refresh pod states (quiet for 14 days → each member is asked privately to stay or move) |
 | 06:00 Monday   | The weekly batch match: forming pods merge, into small pods with room where possible |
 | 07:00 daily    | Publish what the editors approved, then the Chai post in every pod |
 | Mon 08:00      | Chotu suggests the pod's week goal (skipped if the lead set one) |

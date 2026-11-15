@@ -78,6 +78,51 @@ assert.equal(P.firstJson(""), null);
 assert.equal(P.firstJson("[1,2]"), null, "only an object is a card");
 step("draft replies are repaired where they can be; a cut-off reply is asked for again, not crashed on");
 
+// 15 Nov 2026: the automatic Chai sent nothing. The second check: a different family from the Llama drafter, with room
+// to answer (gpt-oss spent its 300 tokens reasoning and sent an empty reply), and a strict reading of its verdict.
+assert.ok(P.AUTO_HOPS.length >= 3, "more than one provider can do the second check");
+for (const h of P.AUTO_HOPS) {
+  assert.ok(!/llama/i.test(h.model), `${h.model} is not the drafter's family`);
+  const room = h.extra?.max_completion_tokens ?? h.extra?.max_tokens ?? 0;
+  assert.ok(room >= 1500, `${h.model} has room to reason and still answer (${room})`);
+}
+assert.ok(new Set(P.AUTO_HOPS.map((h) => h.provider)).size >= 2, "a provider down for billing doesn't stop the check");
+assert.deepEqual(P.readVerdict('{"verdict": "pass", "reason": "All facts are in the source."}'), { pass: true, reason: "All facts are in the source." });
+assert.equal(P.readVerdict('Sure.\n{"verdict":"PASS"}').pass, true);
+assert.equal(P.readVerdict('{"verdict": "fail", "reason": "The 7.1% is not yearly growth."}').pass, false);
+assert.equal(P.readVerdict("pass").pass, false, "no JSON, no pass");
+assert.equal(P.readVerdict("").pass, false);
+step("second check: another model family, room to answer, only a clear pass passes");
+
+// Tone: whole words. "warm air" is not war, a deadline is not dead, rapeseed is not rape; a real flood still waits.
+assert.equal(P.guessTone("Autumn Mornings Bring Valley Fog. Because cold air is denser than warm air, it flows downslope."), "neutral");
+assert.equal(P.guessTone("The deadline for rapeseed procurement was extended towards March."), "neutral");
+assert.equal(P.guessTone("Heavy rain flooded rivers; officials issued evacuation orders."), "serious");
+assert.equal(P.guessTone("Two people died in the landslide."), "serious");
+assert.equal(P.guessTone("The war in the region displaced families."), "serious");
+assert.equal(P.guessTone("Terrorist attack condemned."), "serious");
+step("tone check: harmless words no longer raise a story to serious; deaths, floods and war still do");
+
+// Relevance: an Indian angle scores up; routine data tables and penalty notices score down.
+const nasa = SOURCES.find((s) => s.name === "NASA Earth Observatory"), rbi = SOURCES.find((s) => s.name === "Reserve Bank of India");
+const fog = P.score({ title: "Autumn Mornings Bring Valley Fog", description: "", source: nasa }).score;
+const ganga = P.score({ title: "Fog Over the Ganga Plains", description: "Winter fog across northern India.", source: nasa }).score;
+assert.ok(ganga > fog, "the same picture over India ranks higher");
+const bop = P.score({ title: "Developments in India's Balance of Payments for the Month of September 2026", description: "", source: rbi }).score;
+const weekly = P.score({ title: "Reserve Bank of India – Bulletin Weekly Statistical Supplement – Extract", description: "", source: rbi }).score;
+const penalty = P.score({ title: "Reserve Bank of India imposes monetary penalty on One Mobikwik Systems Limited", description: "", source: rbi }).score;
+assert.ok(bop > weekly && bop > penalty, "a real economy story beats a weekly table and a penalty notice");
+assert.ok(rbi.indian && !nasa.indian, "Indian sources are marked");
+step("relevance: Indian angle up, routine releases down");
+
+// Drafting in small batches: a queued story and a failed one still need a draft; a second failure is left to the editor.
+assert.ok(P.DRAFTS_PER_RUN * 5 + 8 <= 45, "a run stays well under Cloudflare's 50 outside calls");
+assert.equal(P.needsDraft([P.WAITING]), true);
+assert.equal(P.needsDraft(["AI draft unavailable (AiError: 3046: Request timeout)", "No summary yet: write one"]), true);
+assert.equal(P.needsDraft(["AI draft unavailable twice (AiError: 3046: Request timeout)"]), false);
+assert.equal(P.needsDraft(["Number not in source: 12"]), false);
+step(`drafting goes ${P.DRAFTS_PER_RUN} stories a slot; a failed draft is tried once more, then left to the editor`);
+
 // --- Part 2: the Desk publishes three -----------------------------------------------------------------------------
 const BASE = process.env.BASE ?? "http://127.0.0.1:8787";
 const TOKEN = process.env.EDITOR_TOKEN;
@@ -130,3 +175,14 @@ assert.equal(brief.items.length, 3);
 assert.deepEqual(brief.items.slice(0, 2).map((i) => i.id), [ids[1], ids[0]]);
 assert.notEqual(brief.items[2].gsPaper, "GS3", "the open slot goes to a paper the brief doesn't have");
 step("an editor's chosen order still wins; the open slot goes to another paper");
+
+// A draft that fails (no AI on a local server) is tried once more by the next drafting run, then left for the editor.
+const lone = (await call("/desk/api/stories", { method: "POST", body: { title: "The Waiting Story Bill, 2026", sourceName: "PRS Legislative Research", sourceUrl: `https://example.gov.in/${run}/wait`, text: "The Waiting Story Bill, 2026 was introduced in Lok Sabha." } })).data.id;
+const flagsOf = async (id) => (await call("/desk/api/queue")).data.candidates.find((c) => c.id === id).flags;
+assert.ok((await flagsOf(lone)).some((f) => f.startsWith("AI draft unavailable (")), "first try failed");
+let log = (await call("/desk/api/pipeline", { method: "POST", body: { fetch: false } })).data.log;
+assert.ok(log.some((l) => /^drafted \d+ of [1-9]/.test(l)), "the next run picks it up: " + log.join(" | "));
+assert.ok((await flagsOf(lone)).some((f) => f.startsWith("AI draft unavailable twice")), "second try recorded");
+log = (await call("/desk/api/pipeline", { method: "POST", body: { fetch: false } })).data.log;
+assert.ok(!(await flagsOf(lone)).some((f) => f.startsWith("AI draft unavailable (")), "not tried a third time");
+step("a failed draft is tried once more on the next run, then left for the editor");

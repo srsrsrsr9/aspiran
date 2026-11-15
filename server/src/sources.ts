@@ -20,6 +20,8 @@ export interface Source {
   /** The paper and topic most of this source's stories belong to, used when the syllabus words don't decide. */
   gs?: "GS1" | "GS2" | "GS3";
   topic?: string;
+  /** An Indian source: every story has an Indian angle (scored up, see pipeline.ts score). */
+  indian?: boolean;
 }
 
 /**
@@ -32,15 +34,15 @@ export interface Source {
  */
 export const SOURCES: Source[] = [
   // GS3 Economy
-  { name: "Reserve Bank of India", url: "https://www.rbi.org.in/pressreleases_rss.xml", official: true, max: 6, gs: "GS3", topic: "Economy" },
+  { name: "Reserve Bank of India", url: "https://www.rbi.org.in/pressreleases_rss.xml", official: true, max: 6, gs: "GS3", topic: "Economy", indian: true },
   // Off: SEBI's feed (works) is almost all recovery orders and appeals naming private people. Not study material.
-  { name: "SEBI", url: "https://www.sebi.gov.in/sebirss.xml", official: true, enabled: false, gs: "GS3", topic: "Economy" },
+  { name: "SEBI", url: "https://www.sebi.gov.in/sebirss.xml", official: true, enabled: false, gs: "GS3", topic: "Economy", indian: true },
   // GS2 Polity: PRS's bill tracker, newest bills and rules first. PRS is independent, not government; very reliable.
-  { name: "PRS Legislative Research", url: "https://prsindia.org/billtrack", kind: "html", links: /^\/billtrack\/(?!category\/)[a-z0-9-]+$/, official: false, max: 4, gs: "GS2", topic: "Polity" },
+  { name: "PRS Legislative Research", url: "https://prsindia.org/billtrack", kind: "html", links: /^\/billtrack\/(?!category\/)[a-z0-9-]+$/, official: false, max: 4, gs: "GS2", topic: "Polity", indian: true },
   // GS2 International relations (UN News, Asia and the Pacific)
   { name: "UN News", url: "https://news.un.org/feed/subscribe/en/news/region/asia-pacific/feed/rss.xml", official: true, max: 4, gs: "GS2", topic: "International relations" },
   // GS3 Science and technology: ISRO's press page (no feed), newest first.
-  { name: "ISRO", url: "https://www.isro.gov.in/Press.html", kind: "html", links: /^[A-Za-z0-9_%-]+\.html$/, official: true, max: 4, gs: "GS3", topic: "Science and technology" },
+  { name: "ISRO", url: "https://www.isro.gov.in/Press.html", kind: "html", links: /^[A-Za-z0-9_%-]+\.html$/, official: true, max: 4, gs: "GS3", topic: "Science and technology", indian: true },
   // GS3 Environment (UN News, climate and environment)
   { name: "UN News (climate)", url: "https://news.un.org/feed/subscribe/en/news/topic/climate-change/feed/rss.xml", official: true, max: 3, gs: "GS3", topic: "Environment" },
   // GS1 Geography: NASA's Earth Observatory explains rivers, monsoons, glaciers, fires and storms from satellite images.
@@ -48,8 +50,8 @@ export const SOURCES: Source[] = [
   // GS1 Art and culture: World Heritage sites and their state of conservation.
   { name: "UNESCO World Heritage", url: "https://whc.unesco.org/en/news/rss/", official: true, max: 3, gs: "GS1", topic: "Art and culture" },
   // Off: 403 to an honest bot (see above).
-  { name: "PIB", url: "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3", official: true, enabled: false, gs: "GS2", topic: "Governance" },
-  { name: "Supreme Court of India", url: "https://www.sci.gov.in/", kind: "html", official: true, enabled: false, gs: "GS2", topic: "Polity" },
+  { name: "PIB", url: "https://www.pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=3", official: true, enabled: false, gs: "GS2", topic: "Governance", indian: true },
+  { name: "Supreme Court of India", url: "https://www.sci.gov.in/", kind: "html", official: true, enabled: false, gs: "GS2", topic: "Polity", indian: true },
 ];
 
 /**
@@ -70,11 +72,25 @@ export const SYLLABUS: { words: string[]; weight: number; gs: string; topic: str
   { words: ["women", "children", "tribal", "education", "health", "nutrition", "poverty"], weight: 2, gs: "GS2", topic: "Social justice" },
 ];
 
-/** Words that suggest a story is SERIOUS: no humour, and the editor sees it flagged. */
+/**
+ * Words that suggest a story is SERIOUS: no humour, never sent automatically, and the editor sees it flagged.
+ * Matched as whole words (pipeline.ts guessTone), so each form is listed: "war" used to match "warm", which sent a
+ * NASA fog picture ("cold air is denser than warm air") to wait for a person on 15 Nov 2026.
+ */
 export const SERIOUS_WORDS = [
-  "death", "died", "killed", "dead", "disaster", "cyclone", "flood", "earthquake", "attack", "violence",
-  "riot", "terror", "murder", "rape", "suicide", "accident", "war", "epidemic", "outbreak", "communal", "caste",
+  "death", "deaths", "died", "dies", "dying", "killed", "killing", "killings", "kills", "dead",
+  "disaster", "disasters", "cyclone", "cyclones", "flood", "floods", "flooded", "flooding",
+  "earthquake", "earthquakes", "attack", "attacks", "attacked", "violence", "violent",
+  "riot", "riots", "rioting", "terror", "terrorism", "terrorist", "terrorists", "murder", "murders", "murdered",
+  "rape", "raped", "suicide", "suicides", "accident", "accidents", "war", "wars", "warfare",
+  "epidemic", "epidemics", "outbreak", "outbreaks", "communal", "caste", "castes", "casualties",
 ];
+
+/** An Indian angle in a story from a world source (UN, NASA, UNESCO). */
+export const INDIA_WORDS = /\b(india|indian|indians|bharat|himalaya|himalayan|ganga|ganges|brahmaputra|indus|deccan|kerala|assam|ladakh|kashmir|delhi|mumbai|bay of bengal|arabian sea)\b/i;
+
+/** Routine releases worth little to an aspirant: weekly data tables, auction results, penalty notices. */
+export const ROUTINE_TITLES = /statement of position|weekly statistical supplement|money market operations|auction results?|results? of .{0,60}auction|treasury bills|government securities|reserve money|lending facility|monetary penalty|imposes penalty|cancels? (the )?certificate|directions under section/i;
 
 /** Loaded words a neutral political summary should not contain. */
 export const LOADED_WORDS = [

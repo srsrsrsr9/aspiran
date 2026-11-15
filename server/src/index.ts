@@ -2,7 +2,7 @@ import { runFactWatch } from "./factwatch";
 import { publicLibrary, serveMedia } from "./content";
 import { autoPick, chaiDigest, deskApi, modApi, postRitual, publish } from "./desk";
 import DESK_HTML from "./desk.html";
-import { runPipeline } from "./pipeline";
+import { runPipeline, waitingDrafts } from "./pipeline";
 import { adminApi } from "./admin";
 import { chotuChat, modelsRoute } from "./chotu";
 import { jeetuRoute } from "./jeetu";
@@ -278,7 +278,7 @@ export default {
     const fail = (name: string) => (e: unknown) => console.log(name, "failed", String(e));
     // The day's Chai drafts get a run to themselves at 05:00: sharing 05:30 with the backup, the fact watch and the
     // rest, the run was cut short and left nothing (14 and 15 Nov 2026). The catch-up below covers a bad morning.
-    if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm));
+    if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm, true));
     if (hm === "05:30") {
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
@@ -293,13 +293,17 @@ export default {
     }
     // Monday 06:00 IST: the weekly batch match, so pods start together.
     if (hm === "06:00" && ist.getUTCDay() === 1) ctx.waitUntil(runJob(env, "match", at).then(log("match"), fail("match")));
-    // A drafting run that left nothing (a feed down, the run cut short) is tried again each half hour until 11:00,
-    // and a day with no Chai yet gets the 07:00 step again on the hour until noon, so one bad run doesn't cost the day.
-    const CATCH_UP = ["05:30", "06:00", "06:30", "07:30", "08:30", "09:30", "10:30"], LATE = ["08:00", "09:00", "10:00", "11:00", "12:00"];
-    if (CATCH_UP.includes(hm) || LATE.includes(hm)) {
+    // Drafting goes a few stories per slot (pipeline.ts DRAFTS_PER_RUN, to stay under Cloudflare's 50 outside calls per
+    // run): 05:00 reads the feeds, queues the day's 12 and drafts the first few; each catch-up slot drafts the next few
+    // and tries a failed draft once more. A day with nothing at all (a feed down, the run cut short) reads the feeds
+    // again. 05:30 is left out: it already carries the backup and the fact watch, which make outside calls too.
+    // A day with no Chai yet gets the 07:00 step again on the hour until noon, so one bad run doesn't cost the day.
+    const CATCH_UP = ["06:00", "06:30", "07:30", "08:30", "09:30", "10:30"], LATE = ["08:00", "09:00", "10:00", "11:00", "12:00"];
+    if (CATCH_UP.includes(hm)) {
       const day = istDay();
       const n = await env.DB.prepare("SELECT COUNT(*) n FROM candidates WHERE day = ?").bind(day).first<{ n: number }>().catch(() => null);
-      if (CATCH_UP.includes(hm) && n && n.n === 0) ctx.waitUntil(chaiDrafts(env, hm));
+      if (n && n.n === 0) ctx.waitUntil(chaiDrafts(env, hm, true));
+      else if (n && (await waitingDrafts(env, day).catch(() => [])).length) ctx.waitUntil(chaiDrafts(env, hm, false));
     }
     const noBriefYet = async () => !(await env.DB.prepare("SELECT 1 FROM briefs WHERE day = ?").bind(istDay()).first().catch(() => 1));
     if (hm === "07:00" || (LATE.includes(hm) && (await flags(env)).chai_auto && (await noBriefYet()))) {
@@ -322,9 +326,9 @@ export default {
 } satisfies ExportedHandler<Env>;
 
 /** The day's drafting run, with its log kept (settings key `pipeline_last`) so a run that fetched nothing can be read afterwards. */
-async function chaiDrafts(env: Env, at: string) {
+async function chaiDrafts(env: Env, at: string, fetch: boolean) {
   let lines: string[];
-  try { lines = await runPipeline(env); } catch (e) { lines = ["failed: " + String(e).slice(0, 300)]; }
+  try { lines = await runPipeline(env, undefined, { fetch }); } catch (e) { lines = ["failed: " + String(e).slice(0, 300)]; }
   console.log(lines.join("\n"));
   await setSetting(env, "pipeline_last", { at: new Date().toISOString(), slot: at, log: lines }, "cron").catch(() => {});
 }

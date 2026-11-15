@@ -1,18 +1,30 @@
-import { runAI } from "./ai";
+import { type Hop, runAI } from "./ai";
 import { llmControls } from "./staff";
 import { backfillEmbeddings, relevantNotes } from "./library";
 import { type Env, istDay, newId } from "./shared";
-import { LOADED_WORDS, SERIOUS_WORDS, SOURCES, SYLLABUS, type Source } from "./sources";
+import { INDIA_WORDS, LOADED_WORDS, ROUTINE_TITLES, SERIOUS_WORDS, SOURCES, SYLLABUS, type Source } from "./sources";
 
 /**
- * Daily news pipeline (cron at 05:30 IST): fetch allow-listed feeds, dedupe, score for UPSC
- * relevance, draft Chai Cards with Workers AI, run automatic checks, and queue them for the editor.
- * Nothing reaches pods until an editor approves it (see desk.ts).
+ * Daily news pipeline (cron at 05:00 IST, catch-up slots after): fetch allow-listed feeds, dedupe, score for UPSC
+ * relevance, queue the day's best, draft Chai Cards with Workers AI a few at a time, run automatic checks.
+ * Nothing reaches pods until an editor approves it, or the automatic Chai's second check passes it (see desk.ts).
  */
 
 const DRAFT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const GUARD_MODEL = "@cf/meta/llama-guard-3-8b";
 const KEEP = 12;
+/**
+ * Drafts per run. Cloudflare's free plan allows 50 outside calls per invocation, and Workers AI calls count: on 15 Nov
+ * 2026 the 12th draft hit "Too many subrequests". One draft costs up to 5 (story page, note embedding, the draft and its
+ * one retry, the safety check); the 7 feeds and the note backfill 8 more. Five drafts is about 33, leaving room for the
+ * slot's other jobs. The catch-up slots draft the rest.
+ */
+export const DRAFTS_PER_RUN = 5;
+/** Flags on a queued story with no card yet, and on one whose draft failed (tried again once on a later slot). */
+export const WAITING = "Waiting for its AI draft";
+const UNAVAILABLE = "AI draft unavailable";
+/** Does this row still need its AI draft? Queued, or failed once. A second failure is left for the editor. */
+export const needsDraft = (flags: string[]) => flags.some((f) => f === WAITING || f.startsWith(UNAVAILABLE + " ("));
 
 interface FeedItem {
   source: Source;
@@ -101,7 +113,11 @@ export function score(item: { title: string; description: string; source: Source
     const lean = s + (src.gs && row.topic === src.topic ? HEAD_START : 0);
     if (lean > best.s) best = { s: lean, gs: row.gs, topic: row.topic };
   }
-  return { score: total + (item.source.official ? 2 : 0), gs: best.gs, topic: best.topic };
+  // A clear Indian angle (an Indian source, or India in the story) is worth more to an aspirant than a scene abroad;
+  // routine data releases and penalty notices (RBI's weekly tables, auction results) are worth little.
+  const india = src.indian || INDIA_WORDS.test(text) ? 3 : 0;
+  const routine = ROUTINE_TITLES.test(item.title) ? -8 : 0;
+  return { score: total + (item.source.official ? 2 : 0) + india + routine, gs: best.gs, topic: best.topic };
 }
 
 const titleWords = (t: string) => new Set(t.toLowerCase().match(/[a-z0-9]{4,}/g) ?? []);
@@ -152,7 +168,8 @@ export function spreadPick<T>(items: T[], n: number, paper: (t: T) => string): T
 
 export function guessTone(text: string): Tone {
   const t = text.toLowerCase();
-  return SERIOUS_WORDS.some((w) => new RegExp(`\\b${w}`).test(t)) ? "serious" : "neutral";
+  // Whole words only: "war" no longer matches "warm air" (it raised a fog picture to serious), nor "dead" "deadline".
+  return SERIOUS_WORDS.some((w) => new RegExp(`\\b${w}\\b`).test(t)) ? "serious" : "neutral";
 }
 
 // --- Draft --------------------------------------------------------------------
@@ -383,6 +400,27 @@ async function guard(env: Env, summary: string): Promise<boolean> {
   }
 }
 
+// --- The automatic Chai's second check (desk.ts autoPick) ---------------------------------------------------
+
+// The drafts come from Llama on Workers AI; the second read is another family (OpenAI's open model, then Qwen, NVIDIA's
+// Nemotron and Gemini), steady and strict. gpt-oss reasons before it answers and its reasoning counts against the token
+// limit: at 300 tokens it used them all thinking and sent nothing back (every check on 15 Nov 2026), so it gets room.
+export const AUTO_HOPS: Hop[] = [
+  { provider: "groq", model: "openai/gpt-oss-120b", extra: { temperature: 0, reasoning_effort: "low", include_reasoning: false, max_completion_tokens: 2000 }, timeoutMs: 30_000 },
+  { provider: "groq", model: "qwen/qwen3.8-27b", extra: { temperature: 0, reasoning_format: "hidden", max_completion_tokens: 2000 }, timeoutMs: 30_000 },
+  { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { temperature: 0, max_tokens: 2000 }, timeoutMs: 30_000 },
+  { provider: "google", model: "gemini-3.8-flash", extra: { temperature: 0, reasoning_effort: "low", max_tokens: 2000 }, timeoutMs: 30_000 },
+];
+
+/** The second check's answer: {"verdict": "pass"} passes; anything else, or no JSON, does not. */
+export function readVerdict(text: string): { pass: boolean; reason: string } {
+  const m = String(text ?? "").match(/\{[\s\S]*\}/);
+  try {
+    const v = m ? JSON.parse(m[0]) : null;
+    return { pass: String(v?.verdict ?? "").toLowerCase() === "pass", reason: typeof v?.reason === "string" ? v.reason : "" };
+  } catch { return { pass: false, reason: "unreadable answer" }; }
+}
+
 // --- Run ------------------------------------------------------------------------
 
 export interface CandidateInput {
@@ -393,64 +431,108 @@ export interface CandidateInput {
   score?: number;
 }
 
-/** Draft one story into the editor queue. Used by the cron and by the desk's "add a story". */
-export async function addCandidate(env: Env, input: CandidateInput, day = istDay()) {
-  const id = newId("c");
+/** The card for one story: drafted by the model, or, when the AI isn't available, a headline-only card with the reason. */
+async function cardFor(env: Env, id: string, input: CandidateInput, failFlag = UNAVAILABLE) {
   // A known source lends its paper and topic (PRS is polity); an editor's own story is scored on its words alone.
   const known = SOURCES.find((x) => x.name === input.sourceName);
-  const source: Source = { name: input.sourceName, url: input.sourceUrl, official: known?.official ?? true, gs: known?.gs, topic: known?.topic };
+  const source: Source = { name: input.sourceName, url: input.sourceUrl, official: known?.official ?? true, gs: known?.gs, topic: known?.topic, indian: known?.indian };
   const s = score({ title: input.title, description: input.text, source });
   const feedItem: FeedItem = { source, title: input.title, link: input.sourceUrl, description: "" };
+  const base = { id, title: input.title, sourceName: input.sourceName, sourceUrl: input.sourceUrl, text: input.text, gs: s.gs, topic: s.topic };
   let card: any;
   let flags: string[];
   try {
     const raw = await draft(env, feedItem, input.text, s.gs, s.topic);
-    ({ card, flags } = normalizeCard(raw, { id, title: input.title, sourceName: input.sourceName, sourceUrl: input.sourceUrl, text: input.text, gs: s.gs, topic: s.topic }));
+    ({ card, flags } = normalizeCard(raw, base));
     if (card.summary && !(await guard(env, card.summary))) flags.push("Safety check: unsafe");
   } catch (e) {
-    // No AI (not logged in, or allowance used up): headline and link only, the editor writes the rest.
-    ({ card, flags } = normalizeCard({ tone: guessTone(input.title + " " + input.text) }, { id, title: input.title, sourceName: input.sourceName, sourceUrl: input.sourceUrl, text: input.text, gs: s.gs, topic: s.topic }));
-    flags.unshift(`AI draft unavailable (${String(e).slice(0, 80)})`);
+    // No AI (not logged in, allowance used up, a timeout): headline and link only; tried again on a later slot.
+    ({ card, flags } = normalizeCard({ tone: guessTone(input.title + " " + input.text) }, base));
+    flags.unshift(`${failFlag} (${String(e).slice(0, 80)})`);
   }
-  await env.DB.prepare(
-    `INSERT INTO candidates (id, day, source_name, source_url, title, source_text, score, card_json, flags, created_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-  ).bind(id, day, input.sourceName, input.sourceUrl, input.title, input.text, input.score ?? s.score, JSON.stringify(card), JSON.stringify(flags), new Date().toISOString()).run();
+  return { card, flags, score: s.score };
+}
+
+/** Draft one story into the editor queue. Used by the desk's "add a story" and the content imports. */
+export async function addCandidate(env: Env, input: CandidateInput, day = istDay()) {
+  const id = newId("c");
+  const { card, flags, score: sc } = await cardFor(env, id, input);
+  await insertCandidate(env, id, day, input, input.score ?? sc, card, flags);
   return id;
 }
 
-export async function runPipeline(env: Env, day = istDay()) {
-  const log: string[] = [];
-  const all: FeedItem[] = [];
-  for (const source of SOURCES.filter((s) => s.enabled !== false)) {
-    try {
-      const body = await fetchText(source.url, 50_000);
-      const items = (source.kind === "html" ? parseHtmlList(body, source) : parseRss(body, source)).slice(0, source.max ?? 10);
-      log.push(`${source.name}: fetched ${items.length} items`);
-      all.push(...items);
-    } catch (e) {
-      log.push(`${source.name}: failed (${String(e).slice(0, 100)})`);
-    }
-  }
-  const unseen: FeedItem[] = [];
-  for (const item of all) {
-    const seen = await env.DB.prepare("SELECT 1 FROM seen WHERE url = ?").bind(item.link).first();
-    if (!seen) unseen.push(item);
-  }
-  // The day's drafts are spread across the papers, so the Desk (and the automatic Chai) can pick GS1, GS2 and GS3.
-  const ranked = spreadPick(dedupe(unseen.map((i) => ({ ...i, ...score(i) })).sort((a, b) => b.score - a.score)), KEEP, (i) => i.gs);
-  await backfillEmbeddings(env);
+async function insertCandidate(env: Env, id: string, day: string, input: CandidateInput, sc: number, card: unknown, flags: string[]) {
+  await env.DB.prepare(
+    `INSERT INTO candidates (id, day, source_name, source_url, title, source_text, score, card_json, flags, created_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  ).bind(id, day, input.sourceName, input.sourceUrl, input.title, input.text, sc, JSON.stringify(card), JSON.stringify(flags), new Date().toISOString()).run();
+}
 
-  for (const item of ranked) {
-    let text = item.description;
-    try {
-      text = articleText(await fetchText(item.link)).slice(0, 6000) || text;
-    } catch {
-      // keep the feed description
-    }
-    await addCandidate(env, { title: item.title, sourceName: item.source.name, sourceUrl: item.link, text, score: item.score }, day);
-    await env.DB.prepare("INSERT OR IGNORE INTO seen (url, seen_on) VALUES (?, ?)").bind(item.link, day).run();
+interface WaitingRow { id: string; title: string; source_name: string; source_url: string; source_text: string; flags: string }
+
+/** The day's stories still waiting for an AI draft (queued, or failed once), best first. */
+export async function waitingDrafts(env: Env, day = istDay()): Promise<WaitingRow[]> {
+  const { results } = await env.DB.prepare(
+    `SELECT id, title, source_name, source_url, source_text, flags FROM candidates
+     WHERE day = ? AND status = 'draft' AND (flags LIKE ? OR flags LIKE ?) ORDER BY score DESC, created_at`,
+  ).bind(day, `%${WAITING}%`, `%${UNAVAILABLE} (%`).all<WaitingRow>();
+  return results.filter((r) => { try { return needsDraft(JSON.parse(r.flags || "[]")); } catch { return false; } });
+}
+
+/** Drafts a queued story (fetching its page first if only the feed's line is stored), or tries a failed one again. */
+async function draftWaiting(env: Env, row: WaitingRow) {
+  let text = row.source_text;
+  if (text.length < 400 && /^https?:\/\//.test(row.source_url)) {
+    try { text = articleText(await fetchText(row.source_url)).slice(0, 6000) || text; } catch { /* keep the feed's line */ }
   }
-  log.push(`queued ${ranked.length} candidates for ${day}`);
+  const second = !JSON.parse(row.flags || "[]").includes(WAITING);
+  const { card, flags } = await cardFor(env, row.id, { title: row.title, sourceName: row.source_name, sourceUrl: row.source_url, text }, second ? `${UNAVAILABLE} twice` : UNAVAILABLE);
+  await env.DB.prepare("UPDATE candidates SET source_text = ?, card_json = ?, flags = ? WHERE id = ? AND status = 'draft'")
+    .bind(text, JSON.stringify(card), JSON.stringify(flags), row.id).run();
+  return !flags.some((f) => f.startsWith(UNAVAILABLE));
+}
+
+/**
+ * One drafting run. With `fetch` (05:00, the Desk's "Run pipeline", or a catch-up slot on a day with nothing yet), the
+ * feeds are read and the day's best KEEP stories are queued at once, each marked WAITING. Then up to DRAFTS_PER_RUN
+ * waiting stories are drafted, best first; the catch-up slots draft the rest, and try a failed draft once more.
+ */
+export async function runPipeline(env: Env, day = istDay(), opts: { fetch?: boolean } = {}) {
+  const log: string[] = [];
+  if (opts.fetch ?? true) {
+    const all: FeedItem[] = [];
+    for (const source of SOURCES.filter((s) => s.enabled !== false)) {
+      try {
+        const body = await fetchText(source.url, 50_000);
+        const items = (source.kind === "html" ? parseHtmlList(body, source) : parseRss(body, source)).slice(0, source.max ?? 10);
+        log.push(`${source.name}: fetched ${items.length} items`);
+        all.push(...items);
+      } catch (e) {
+        log.push(`${source.name}: failed (${String(e).slice(0, 100)})`);
+      }
+    }
+    const unseen: FeedItem[] = [];
+    for (const item of all) {
+      const seen = await env.DB.prepare("SELECT 1 FROM seen WHERE url = ?").bind(item.link).first();
+      if (!seen) unseen.push(item);
+    }
+    // The day's drafts are spread across the papers, so the Desk (and the automatic Chai) can pick GS1, GS2 and GS3.
+    const ranked = spreadPick(dedupe(unseen.map((i) => ({ ...i, ...score(i) })).sort((a, b) => b.score - a.score)), KEEP, (i) => i.gs);
+    for (const item of ranked) {
+      const id = newId("c");
+      const input = { title: item.title, sourceName: item.source.name, sourceUrl: item.link, text: item.description };
+      const { card, flags } = normalizeCard({ tone: guessTone(`${item.title} ${item.description}`) }, { id, ...input, gs: item.gs, topic: item.topic });
+      await insertCandidate(env, id, day, input, item.score, card, [WAITING, ...flags.filter((f) => !f.startsWith("No summary"))]);
+      await env.DB.prepare("INSERT OR IGNORE INTO seen (url, seen_on) VALUES (?, ?)").bind(item.link, day).run();
+    }
+    log.push(`queued ${ranked.length} stories for ${day}`);
+  }
+
+  const waiting = await waitingDrafts(env, day);
+  if (waiting.length) await backfillEmbeddings(env);
+  let ok = 0;
+  const batch = waiting.slice(0, DRAFTS_PER_RUN);
+  for (const row of batch) if (await draftWaiting(env, row)) ok++;
+  log.push(`drafted ${ok} of ${batch.length}; ${waiting.length - batch.length} left for the next slot`);
   return log;
 }
