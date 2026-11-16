@@ -136,6 +136,9 @@ data class ChotuTurn(
     val cloud: Boolean = false,
     /** Lets a reply be reported on its own (Play's AI-content rule). Never tied to the chat. */
     val id: String = java.util.UUID.randomUUID().toString(),
+    /** A cloud reply the server signed for hearing (data/Voice.kt): its words exactly as sent, and the sig. */
+    val voiceText: String? = null,
+    val voiceSig: String? = null,
 ) {
     /** The app's own fallback line (offline, stuck, server trouble), not a model's answer: it carries no source label. */
     val fromApp get() = !fromUser && text in setOf(Chotu.OFFLINE_REPLY, Chotu.STUCK, Chotu.CLOUD_TROUBLE)
@@ -358,7 +361,7 @@ class Chotu private constructor(private val app: Context) {
 
     // --- cloud Chotu --------------------------------------------------------------
 
-    private data class CloudReply(val text: String, val care: Boolean)
+    private data class CloudReply(val text: String, val care: Boolean, val raw: String? = null, val sig: String? = null)
     /** An error sentence written by our server for people to read (rate limit, paused, and so on). */
     private class ServerSaid(message: String) : Exception(message)
 
@@ -371,7 +374,7 @@ class Chotu private constructor(private val app: Context) {
             val reply = runCatching { withContext(Dispatchers.IO) { postChotu(mode, history, notes = memoryNotes()) } }
             thinking = false
             turns = turns.dropLast(1) + reply.fold(
-                { if (it.care) ChotuTurn(false, CARE_REPLY, care = true) else ChotuTurn(false, it.text, cloud = true) },
+                { if (it.care) ChotuTurn(false, CARE_REPLY, care = true) else ChotuTurn(false, it.text, cloud = true, voiceText = it.raw, voiceSig = it.sig) },
                 // The server's own sentence when it sent one; a plain line for network trouble.
                 { ChotuTurn(false, (it as? ServerSaid)?.message ?: CLOUD_TROUBLE, cloud = true) },
             )
@@ -402,7 +405,7 @@ class Chotu private constructor(private val app: Context) {
             if (o?.get("care")?.jsonPrimitive?.boolean == true) return CloudReply(CARE_REPLY, care = true)
             val text = o?.get("reply")?.jsonPrimitive?.content
             val shown = text?.let { clean(it) }
-            if (r.isSuccessful && !shown.isNullOrBlank()) return CloudReply(shown, care = false)
+            if (r.isSuccessful && !shown.isNullOrBlank()) return CloudReply(shown, care = false, raw = text, sig = o["voice"]?.jsonPrimitive?.content)
             throw o?.get("error")?.jsonPrimitive?.content?.let { ServerSaid(it) } ?: java.io.IOException(OFFLINE_REPLY)
         }
     }

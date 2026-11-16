@@ -198,7 +198,7 @@ export function isMemberRoute(path: string): boolean {
   return /^\/pods\/(join|leave|me|choose|merge-stay)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
     || path === "/members/profile" || /^\/commons\/[\w-]+\/ws$/.test(path) || path === "/season/add" || path === "/mocks/band"
     || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
-    || path === "/jeetu" || path === "/jeetu/report"
+    || path === "/jeetu" || path === "/jeetu/report" || path === "/voice"
     || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)
     || /^\/rooms\/(list|join|leave|photo)$/.test(path) || /^\/rooms\/[\w-]+\/ws$/.test(path) || /^\/rooms\/photo\/\w+$/.test(path)
     || path === "/answers/evaluate" || path === "/interview/follow" || isContentRoute(path);
@@ -237,6 +237,8 @@ export async function memberGate(req: Request, env: Env, path: string, url: URL)
   if (out.searchParams.has("member") || isWs || isContentRoute(path)) out.searchParams.set("member", a.member_id!);
   const headers = new Headers(req.headers);
   headers.delete("authorization");
+  // Who is asking, for routes whose body stays anonymous (voice.ts signs a reply for the member it was given to).
+  headers.set("x-member-id", a.member_id!);
   if (body) {
     if ("memberId" in body || !ANON_BODY.has(path)) body.memberId = a.member_id;
     headers.delete("content-length");
@@ -244,6 +246,7 @@ export async function memberGate(req: Request, env: Env, path: string, url: URL)
   }
   const next = new Request(out.toString(), req);
   next.headers.delete("authorization");
+  next.headers.set("x-member-id", a.member_id!);
   return next;
 }
 

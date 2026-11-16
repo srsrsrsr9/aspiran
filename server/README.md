@@ -302,6 +302,15 @@ IST: one fixed line) and ranks, results or feelings (one fixed line each). `POST
 Chotu reports queue as "Jeetu · AI". His scripted lines live in the apps (`public/app/jeetu.js`, Android
 `data/Jeetu.kt`). Design note: `artefacts/jeetu-2026-11-14.md`. Test with `npm run test:all -- jeetu`.
 
+**AI voices (Fish Audio).** `POST /voice` (`src/voice.ts`, members only) answers with an MP3 of one Chotu or Jeetu line:
+a scripted line by key (`public/app/jeetu-lines.js`), or a reply the server signed for that member (`/chotu` and `/jeetu`
+add `voice`, an HMAC, to replies that may be spoken). Never free text, care replies, Jeetu's quiet hours or result week.
+Each line is made once and kept in R2 under `_cache/voice/`. Caps: 40 new lines a member a day (`VOICE_MEMBER_DAILY`
+overrides), 3,000 a day overall, 1,200 characters. Calls are logged in `voice_calls` (sizes and timings only) and shown in
+Admin → AI usage, which can also pre-make the scripted lines (`POST /admin/api/voice/warm`). Off, and hidden in the apps
+(`/config` `voice: false`), without the `FISH_AUDIO_API_KEY` secret or with the `voice` flag off. Voices, cost and terms:
+`artefacts/voices-2026-11-15/README.md`. Test with `npm run test:all -- voice` (runs its own stand-in for Fish Audio).
+
 ## AI on the server (public news only)
 
 Locally there is no AI: stories go into the queue as headline-and-link cards marked

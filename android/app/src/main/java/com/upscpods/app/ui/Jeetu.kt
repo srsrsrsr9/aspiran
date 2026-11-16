@@ -50,6 +50,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.Jeetu
 import com.upscpods.app.data.JeetuClient
+import com.upscpods.app.data.Voice
+import com.upscpods.app.data.VoiceAsk
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.launch
 
 // --- The portrait: adapted from the trailer's bust (artefacts/trailer-2026-11-13/scenes/chars.js), drawn in code -----
@@ -159,9 +163,33 @@ fun JeetuNote(key: String, hindi: Boolean = Jeetu.hindi, text: String? = null) {
             Column(Modifier.padding(start = 12.dp)) {
                 Text("Jeetu · AI", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(words, style = MaterialTheme.typography.bodyLarge)
+                // His scripted lines can be heard: by key, so the server speaks only its own copy of the words.
+                if (text == null) ListenButton(VoiceAsk("jeetu", line = key, lang = if (hindi) "hi" else "en"), hindi)
             }
         }
     }
+}
+
+/**
+ * "Listen · AI voice" (data/Voice.kt): plays on a tap only, a second tap stops it. Shows nothing while voices are off,
+ * or when there is nothing the server would speak (no sig on a reply). Still: no animation at all.
+ */
+@Composable
+fun ListenButton(ask: VoiceAsk, hindi: Boolean = Jeetu.hindi) {
+    if (!Voice.enabled || !ask.ok) return
+    val context = LocalContext.current
+    val key = remember(ask) { ask.key }
+    val label = when (key) {
+        Voice.playing -> if (hindi) "■ रोकें · AI आवाज़" else "■ Stop · AI voice"
+        Voice.loading -> if (hindi) "आवाज़ बन रही है…" else "Getting the voice…"
+        else -> if (hindi) "🔊 सुनें · AI आवाज़" else "🔊 Listen · AI voice"
+    }
+    Column {
+        TextButton(onClick = { Voice.toggle(context, ask) }, enabled = Voice.loading != key) { Text(label) }
+        Voice.trouble?.takeIf { it.first == key }?.let { Text(it.second, style = MaterialTheme.typography.bodySmall) }
+    }
+    // Leaving the screen stops the voice.
+    DisposableEffect(key) { onDispose { if (Voice.playing == key) Voice.stop() } }
 }
 
 /** The weekly note on Progress: how much came back, against your own past only. */
@@ -193,12 +221,16 @@ fun JeetuDoubleAct() {
             @Composable fun chotu(tone: KulhadTone, line: String) = Row(verticalAlignment = Alignment.CenterVertically) {
                 Kulhad(tone, 24.dp); Text("  Chotu · AI", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge); Text(line, style = MaterialTheme.typography.bodyMedium)
             }
+            val l = if (hi) "hi" else "en"
             chotu(KulhadTone.WARM, if (hi) "Jeetu भैया… एक स्ट्रीक मिल सकती है? बस छोटी सी?" else "Jeetu bhaiya… can I have a streak? Just a tiny one?")
+            ListenButton(VoiceAsk("chotu", line = "streakAsk", lang = l), hi)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 JeetuPortrait(24.dp); Text("  Jeetu · AI", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge)
                 Text(if (hi) "नहीं। चाय पियो।" else "No. Drink your chai.", style = MaterialTheme.typography.bodyMedium)
             }
+            ListenButton(VoiceAsk("jeetu", line = "streakNo", lang = l), hi)
             chotu(KulhadTone.CALM, if (hi) "मैं ही तो चाय हूँ।" else "I AM the chai.")
+            ListenButton(VoiceAsk("chotu", line = "streakChai", lang = l), hi)
         }
     }
 }
@@ -239,6 +271,7 @@ fun AskJeetuScreen(client: JeetuClient, onOpenChotu: (() -> Unit)?, onClose: () 
                             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 JeetuLabel(20.dp)
                                 Text(t.text, style = MaterialTheme.typography.bodyLarge)
+                                if (!t.care) ListenButton(VoiceAsk("jeetu", text = t.text, sig = t.voiceSig), hi)
                                 if (!t.care) TextButton(onClick = {
                                     if (t.id !in reported) scope.launch { if (client.report(t, "Reported from the Android app")) reported = reported + t.id }
                                 }) { Text(if (t.id in reported) "Reported" else "Report") }

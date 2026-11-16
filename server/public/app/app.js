@@ -26,6 +26,7 @@ import * as VINE from "./vine.js";
 import * as TRY from "./try.js";
 import * as IT from "./interactives.js";
 import * as J from "./jeetu.js";
+import * as V from "./voice.js";
 import * as INST from "./institute.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
@@ -2977,6 +2978,7 @@ function viewChotu() {
           t.role === "assistant" ? chotuLabel(null, 18) : h("span.who", "You"),
           h("div", t.care ? "(kept on this device)" : t.content),
           t.role === "user" && !t.care && h("button.ghost.small", { onclick: () => rememberNote(t.content) }, "Let Chotu remember this"),
+          t.role === "assistant" && V.listen({ who: "chotu", text: t.content, sig: t.voice }, { hi: hindi() }),
           t.role === "assistant" && h("button.ghost.small", { onclick: () => reportChotu(t) }, t.reported ? "Reported" : "Report"))),
         chotu.busy && h("p.small.muted", "Chotu is thinking…")),
       chotu.offline && h("div.card.soft", chotu.offline),
@@ -2999,7 +3001,7 @@ function viewChotu() {
     chotu.busy = false;
     if (r.care) { chotu.care = true; noteCare(); }
     else if (r.reply) {
-      chotu.turns.push({ role: "assistant", content: r.reply, id: randomId() });
+      chotu.turns.push({ role: "assistant", content: r.reply, id: randomId(), voice: r.voice });
       // Only that a chat happened, never what was said.
       if (chotu.turns.filter((t) => t.role === "assistant").length === 1) M.track("chotu_chat");
       if (chotu.turns.filter((t) => t.role === "assistant").length === 3) rateAfter("chotu_chat", 4000);
@@ -4198,7 +4200,9 @@ X.init({ h, put, store, bi, lang, data, libraryOf, post, getJson, toast, plusOn,
 TRY.init({ h, put, store, lang, profile, today, toast, careBox: () => careBox(false), jeetu: (k) => J.say(k), track: (n, p) => M.track(n, p), installId: () => M.installId() });
 BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAloud, voiceAudio, jeetu: (k) => J.say(k) });
 // Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
-J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang });
+// AI voices (voice.js): a Listen button on Chotu's and Jeetu's messages. Shows only when the server says voices are on.
+V.init({ h, toast, voiceOn: () => config.voice === true && on("voice"), canListen: () => !!profile() && !resultMode() });
+J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang, listen: V.listen });
 IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Auth.signedIn() });
 // Coaching centres (institute.js): behind the `institutes` flag, off by default.
 INST.init({ h, put, store, lang, profile, toast, render: () => render(), config: () => config, careBox: () => careBox(false), onLeave: (f) => cleanup.push(f) });

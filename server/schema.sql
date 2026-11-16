@@ -82,6 +82,9 @@ CREATE INDEX IF NOT EXISTS content_versions_item ON content_versions(item_type, 
 CREATE TABLE IF NOT EXISTS llm_calls (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, day TEXT NOT NULL, purpose TEXT NOT NULL,
   model TEXT NOT NULL, status TEXT NOT NULL, ms INTEGER, tokens_in INTEGER, tokens_out INTEGER, error TEXT);   -- never prompts or outputs
 CREATE INDEX IF NOT EXISTS llm_calls_day ON llm_calls(day);
+CREATE TABLE IF NOT EXISTS voice_calls (id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, day TEXT NOT NULL, who TEXT NOT NULL,
+  kind TEXT NOT NULL, bytes INTEGER NOT NULL DEFAULT 0, ms INTEGER, status TEXT NOT NULL, error TEXT);   -- Fish Audio calls: sizes and timings, never the text
+CREATE INDEX IF NOT EXISTS voice_calls_day ON voice_calls(day);
 CREATE TABLE IF NOT EXISTS daily_counts (day TEXT NOT NULL, metric TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, metric));  -- totals, never who
 CREATE TABLE IF NOT EXISTS consents (member_id TEXT NOT NULL, version TEXT NOT NULL, purposes TEXT NOT NULL, at TEXT NOT NULL,
   withdrawn_at TEXT, PRIMARY KEY (member_id, version));

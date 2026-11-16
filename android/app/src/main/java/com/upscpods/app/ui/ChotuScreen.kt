@@ -308,6 +308,7 @@ private fun ColumnScope.Chat(
             // Report and Remember sit under each finished reply (not care replies, not while streaming).
             if (!t.fromUser && !t.care && t.text.isNotBlank() && !(chotu.thinking && i == turns.lastIndex)) {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
+                    ListenButton(com.upscpods.app.data.VoiceAsk("chotu", text = t.voiceText, sig = t.voiceSig))
                     if (t.id in reported) Text("Reported. Thank you.", style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(12.dp))
                     else TextButton(onClick = { reporting = t }) { Text("Report") }
                     if (onRemember != null) {

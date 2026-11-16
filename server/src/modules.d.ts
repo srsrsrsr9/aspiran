@@ -13,3 +13,7 @@ declare module "*/public/app/syllabus.js" {
 declare module "*/public/app/syllabus-lines.js" {
   export const LINES: Record<string, string[]>;
 }
+declare module "*/public/app/jeetu-lines.js" {
+  export const LINES: Record<string, { en: string; hi: string }>;
+  export const ACT: Record<string, { who: "chotu" | "jeetu"; en: string; hi: string }>;
+}

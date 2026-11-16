@@ -23,6 +23,12 @@ export interface Env {
   ADMIN_TOKEN?: string;
   /** Claude key for the desk's Author tab. Typed by the owner into .dev.vars or `wrangler secret put`. Never in files or chat. */
   ANTHROPIC_API_KEY?: string;
+  /** Fish Audio key for Chotu's and Jeetu's spoken voices (voice.ts). A secret (`wrangler secret put`), never in files or chat. Unset: no voices. */
+  FISH_AUDIO_API_KEY?: string;
+  /** Local tests only (AUTH_MODE dev): a stand-in for Fish Audio's address. */
+  FISH_AUDIO_BASE?: string;
+  /** Optional: new spoken lines one member may have made in a day (default 40, voice.ts). A plain var, not a secret. */
+  VOICE_MEMBER_DAILY?: string;
   /** Groq key for cloud Chotu (until launch). Typed by the owner into .dev.vars or `wrangler secret put`. Never in files or chat. */
   GROQ_API_KEY?: string;
   /** Dev only: where `npm run models` serves Chotu's model files (e.g. http://127.0.0.1:8788). Unset = R2 (MEDIA, models/...). */

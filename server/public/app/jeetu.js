@@ -7,6 +7,7 @@
 // switches him off everywhere.
 
 import { kulhad } from "./kulhad.js";
+import { ACT, LINES } from "./jeetu-lines.js";
 
 let C = null;
 /** app.js hands over its helpers once at start. */
@@ -15,17 +16,7 @@ export function init(ctx) { C = ctx; injectStyles(); }
 const h = (...a) => C.h(...a);
 const put = (...a) => C.put(...a);
 
-/** His lines, by moment. English and Hindi side by side, as the content packs are. */
-export const LINES = {
-  intro: { en: "Answer first. Then look. That's the whole method, beta.", hi: "पहले जवाब। फिर देखना। बस यही तरीक़ा है, बेटा।" },
-  reviewStart: { en: "You don't have a reading problem, beta. You have a forgetting problem. Ten minutes: pull each one out of your head before you check.", hi: "पढ़ने में दिक़्क़त नहीं है, बेटा। भूलने में है। दस मिनट: हर एक को पहले अपने दिमाग़ से निकालो, फिर मिलाओ।" },
-  reviewEnd: { en: "Bas. That's today. Each one comes back just when it's about to slip.", hi: "बस। आज का हो गया। हर एक ठीक तब लौटेगा जब फिसलने वाला होगा।" },
-  selfMark: { en: "Be your own examiner first, beta. Did you answer what the directive word asked?", hi: "पहले ख़ुद परीक्षक बनो, बेटा। जो निर्देश-शब्द ने माँगा, क्या वही लिखा?" },
-  second: { en: "Now the second opinion. Where you two differ, look again: neither is always right.", hi: "अब दूसरी राय। जहाँ तुम दोनों अलग हो, वहाँ फिर देखो: हमेशा कोई एक सही नहीं होता।" },
-  rewrite: { en: "Rewrite only the weakest part. One fix, done well. बस, लिखो।", hi: "सिर्फ़ सबसे कमज़ोर हिस्सा दोबारा लिखो। एक सुधार, ठीक से। बस, लिखो।" },
-  reread: { en: "Answer first, beta. Then look. Re-reading feels like learning; it isn't.", hi: "पहले जवाब, बेटा। फिर देखना। दोबारा पढ़ना सीखने जैसा लगता है; होता नहीं।" },
-  sure: { en: "Prelims charges you for \"ish\". Say how sure you are before you look.", hi: "प्रीलिम्स \"शायद\" के भी नंबर काटता है। देखने से पहले बताओ कितने पक्के हो।" },
-};
+export { LINES };
 
 const lang = (l) => ((l ?? C.lang?.()) === "hi" ? "hi" : "en");
 const line = (key, l) => LINES[key]?.[lang(l)] ?? LINES[key]?.en ?? "";
@@ -95,7 +86,9 @@ export function say(key, { l = null, text = null } = {}) {
   if (!awake()) return null;
   const words = text ?? line(key, l);
   if (!words) return null;
-  return h("div.jeetu-say", { role: "note" }, portrait(44), h("div", h("div.jeetu-name", "Jeetu · AI"), h("p", words)));
+  // His scripted lines can be heard (voice.js): by key, so the server speaks only its own copy of the words.
+  const hear = text ? null : C.listen?.({ who: "jeetu", line: key, lang: lang(l) }, { hi: lang(l) === "hi" });
+  return h("div.jeetu-say", { role: "note" }, portrait(44), h("div", h("div.jeetu-name", "Jeetu · AI"), h("p", words), hear));
 }
 
 // --- The weekly note: how much came back, against your own past only -----------------------------------------------
@@ -129,11 +122,12 @@ export function weekly(rightDays, todayStr) {
 export function doubleAct() {
   if (!awake() || !C.on("chotu")) return null;
   const hi = lang() === "hi";
-  const row = (who, text) => h("div.jeetu-act-row", who, h("p", text));
+  const l = hi ? "hi" : "en";
+  const row = (who, key) => h("div.jeetu-act-row", who, h("p", ACT[key][l]), C.listen?.({ who: ACT[key].who, line: key, lang: l }, { hi }));
   return h("div.card.soft.jeetu-act", { "aria-label": "Chotu and Jeetu" },
-    row(h("span.chotu-label", kulhad("warm", 24), h("span", "Chotu · AI")), hi ? "Jeetu भैया… एक स्ट्रीक मिल सकती है? बस छोटी सी?" : "Jeetu bhaiya… can I have a streak? Just a tiny one?"),
-    row(label(24), hi ? "नहीं। चाय पियो।" : "No. Drink your chai."),
-    row(h("span.chotu-label", kulhad("calm", 24), h("span", "Chotu · AI")), hi ? "मैं ही तो चाय हूँ।" : "I AM the chai."));
+    row(h("span.chotu-label", kulhad("warm", 24), h("span", "Chotu · AI")), "streakAsk"),
+    row(label(24), "streakNo"),
+    row(h("span.chotu-label", kulhad("calm", 24), h("span", "Chotu · AI")), "streakChai"));
 }
 
 // --- Ask Jeetu ----------------------------------------------------------------------------------------------------
@@ -162,6 +156,7 @@ export function viewJeetu() {
       chat.turns.map((t) => h("div.msg" + (t.role === "assistant" ? ".jeetu" : ""),
         t.role === "assistant" ? label(18) : h("span.who", "You"),
         h("div", t.care ? "(kept on this device)" : t.content),
+        t.role === "assistant" && C.listen?.({ who: "jeetu", text: t.content, sig: t.voice }, { hi }),
         t.role === "assistant" && t.id && h("button.ghost.small", { onclick: () => report(t) }, t.reported ? "Reported" : "Report"))),
       chat.busy && h("p.small.muted", hi ? "Jeetu सोच रहे हैं…" : "Jeetu is thinking…")),
     chat.offline && h("div.card.soft", chat.offline),
@@ -180,7 +175,7 @@ export function viewJeetu() {
     const r = await C.post("/jeetu", body);
     chat.busy = false;
     if (r?.care) chat.care = true;
-    else if (r?.reply) chat.turns.push({ role: "assistant", content: r.reply, id: C.randomId() });
+    else if (r?.reply) chat.turns.push({ role: "assistant", content: r.reply, id: C.randomId(), voice: r.voice });
     else chat.offline = r?.error ?? (hi ? "Jeetu अभी जवाब नहीं दे पाए। एक मिनट बाद फिर कोशिश करें।" : "Jeetu couldn't answer just now. Try again in a minute.");
     draw();
   }
@@ -212,7 +207,9 @@ function injectStyles() {
 .jeetu-week .row { align-items: center; gap: 10px; }
 .jeetu-act-row { display: flex; gap: 10px; align-items: center; margin: 6px 0; }
 .jeetu-act-row > :first-child { min-width: 118px; }
-.jeetu-act-row p { margin: 0; }
+.jeetu-act-row p { margin: 0; flex: 1; }
+.voice-btn { white-space: nowrap; }
+.jeetu-say .voice-btn { margin-top: 6px; }
 .msg.jeetu { border-left: 3px solid #7A2E24; padding-left: 8px; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .jeetu-say, :root:not([data-theme="light"]) .msg.jeetu { border-left-color: #C98A6B; } }
 :root[data-theme="dark"] .jeetu-say, :root[data-theme="dark"] .msg.jeetu { border-left-color: #C98A6B; }
