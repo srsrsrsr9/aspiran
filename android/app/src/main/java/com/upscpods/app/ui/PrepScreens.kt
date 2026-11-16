@@ -35,6 +35,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import kotlinx.serialization.json.doubleOrNull
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.JsonObject
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -170,10 +174,12 @@ private fun PlusNote(what: String, quiet: Boolean, onSeePlus: () -> Unit, onNotN
 /** Learn and play, Long reads and the four tools, as rows on the Practice tab. */
 @Composable
 fun PrepEntries(pieces: Int, questions: Int, reads: Int, plusOn: Boolean, showPlusInfo: Boolean,
-                onLearn: () -> Unit, onReads: () -> Unit, onTool: (PrepTool) -> Unit, onPlusInfo: () -> Unit) {
+                onLearn: () -> Unit, onReads: () -> Unit, onTool: (PrepTool) -> Unit, onPlusInfo: () -> Unit,
+                listen: String? = null, onListen: () -> Unit = {}) {
     Text("Learn and play", style = MaterialTheme.typography.titleLarge)
     EntryCard("Learn and play", if (pieces > 0) "${plural(pieces, "piece")}, $questions questions and cards, by format and subject. Free." else "Pieces appear here once an editor approves them.", onLearn)
     EntryCard("Long reads", if (reads > 0) "${plural(reads, "read")} for a proper sit-down session. Free." else "Long reads appear here after an editor approves them.", onReads)
+    if (listen != null) EntryCard("Listen", listen, onListen)
     Text("Revision tools", style = MaterialTheme.typography.titleMedium)
     PrepTool.entries.forEach { t -> EntryCard(t.title, t.lead, { onTool(t) }, tag = plusOn) }
     if (showPlusInfo) TextButton(onClick = onPlusInfo) { Text("What Plus adds →") }
@@ -283,6 +289,91 @@ fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi:
                     Column(Modifier.padding(16.dp)) {
                         Text(r.title.pick(hindi && item.hindi), style = MaterialTheme.typography.titleMedium)
                         Muted("${r.minutes} min" + (if (item.data["audio"] != null) " · Listen (AI voice)" else "") + if (done[item.id] != null) " · Read" else "")
+                    }
+                }
+            }
+        }
+    }
+}
+
+/** One recorded reading on the Listen page: a note or a guided walk that has an AI-voice recording in this language. */
+data class ListenPiece(val id: String, val subject: String, val title: String, val walk: Boolean, val seconds: Double, val data: JsonObject)
+
+private fun audioSeconds(data: JsonObject, lang: String): Double? {
+    val a = (data["audio"] as? JsonObject)?.get(lang) as? JsonObject ?: return null
+    if ((a["url"] as? JsonPrimitive)?.contentOrNull.isNullOrBlank()) return null
+    return (a["seconds"] as? JsonPrimitive)?.doubleOrNull ?: 0.0
+}
+
+/** Every note and guided walk with a recording in `lang`. The subject spelling follows the Long reads list. */
+fun listenPieces(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryItem>, lang: String): List<ListenPiece> {
+    val hi = lang == "hi"
+    val notes = reads.mapNotNull { (item, r) ->
+        val secs = audioSeconds(item.data, lang) ?: return@mapNotNull null
+        val subject = readSubject(item.id, r).let { t -> READ_SUBJECTS.firstOrNull { it.equals(t, ignoreCase = true) } ?: t }
+        ListenPiece(item.id, subject, r.title.pick(hi && item.hindi), false, secs, item.data)
+    }
+    val guided = walks.mapNotNull { item ->
+        val secs = audioSeconds(item.data, lang) ?: return@mapNotNull null
+        ListenPiece(item.id, "Guided walks", item.data["topic"].biText(hi) ?: "", true, secs, item.data)
+    }
+    return notes + guided
+}
+
+private fun hoursText(seconds: Double): String {
+    val m = Math.round(seconds / 60).toInt()
+    return if (m < 90) "$m min" else String.format(java.util.Locale.US, "%.1f hours", m / 60.0)
+}
+
+/** "20.4 hours of notes and guided walks read aloud…", or null when nothing is recorded. For the Practice tab's row. */
+fun listenLine(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryItem>): String? {
+    val en = listenPieces(reads, walks, "en"); val hi = listenPieces(reads, walks, "hi")
+    if (en.isEmpty() && hi.isEmpty()) return null
+    return "${hoursText(en.sumOf { it.seconds } + hi.sumOf { it.seconds })} of notes and guided walks read aloud: ${en.size} in English, ${hi.size} in Hindi. AI voices."
+}
+
+/**
+ * Listen: every recorded AI-voice reading in one place, the total up front, by subject. One player; nothing starts
+ * until a piece is tapped and then Play is pressed. The text of a note is one tap away.
+ */
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryItem>, hindiPreferred: Boolean, mediaUrl: (String) -> String,
+                 onOpenRead: (String) -> Unit, onClose: () -> Unit) {
+    val count = remember(reads, walks) { mapOf("en" to listenPieces(reads, walks, "en").size, "hi" to listenPieces(reads, walks, "hi").size) }
+    var lang by rememberSaveable { mutableStateOf(if (hindiPreferred && (count["hi"] ?: 0) > 0) "hi" else if ((count["en"] ?: 0) > 0) "en" else "hi") }
+    val all = remember(reads, walks, lang) { listenPieces(reads, walks, lang) }
+    val bySubject = remember(all) {
+        all.groupBy { it.subject }.toSortedMap(compareBy { s -> if (s == "Guided walks") 98 else READ_SUBJECTS.indexOf(s).let { i -> if (i < 0) 90 else i } })
+    }
+    var pick by rememberSaveable { mutableStateOf("") }
+    var playing by rememberSaveable { mutableStateOf("") }
+    val now = all.firstOrNull { it.id == playing }
+    PrepPage("Listen", onClose) {
+        if (all.isEmpty()) { Text("Recorded readings appear here as they are made."); return@PrepPage }
+        Text("${hoursText(all.sumOf { it.seconds })} in ${if (lang == "hi") "Hindi" else "English"}: ${all.size} pieces across ${bySubject.size} subjects. Read by AI voices, not people. Each piece ends, and nothing plays next by itself.",
+            style = MaterialTheme.typography.bodyMedium)
+        if ((count["en"] ?: 0) > 0 && (count["hi"] ?: 0) > 0) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = lang == "en", onClick = { lang = "en"; playing = "" }, label = { Text("English · ${count["en"]}") })
+            FilterChip(selected = lang == "hi", onClick = { lang = "hi"; playing = "" }, label = { Text("हिन्दी · ${count["hi"]}") })
+        }
+        if (now != null) {
+            Text(now.title, style = MaterialTheme.typography.titleMedium)
+            androidx.compose.runtime.key(now.id, lang) { AiVoiceAudio(now.data, lang, mediaUrl) }
+            if (!now.walk) TextButton(onClick = { onOpenRead(now.id) }) { Text(if (lang == "hi") "पाठ पढ़ें" else "Read the text") }
+        } else Muted("Tap a piece to choose it, then press Play. Nothing starts by itself.")
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = pick.isEmpty(), onClick = { pick = "" }, label = { Text("All · ${all.size}") })
+            bySubject.forEach { (s, list) -> FilterChip(selected = pick == s, onClick = { pick = s }, label = { Text("$s · ${list.size}") }) }
+        }
+        bySubject.filterKeys { pick.isEmpty() || it == pick }.forEach { (s, list) ->
+            Text(s, style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 8.dp))
+            Muted("${list.size} pieces · ${hoursText(list.sumOf { it.seconds })}")
+            list.forEach { p ->
+                FlatCard(Modifier.clickable { playing = p.id }) {
+                    Column(Modifier.padding(16.dp)) {
+                        Text(p.title, style = MaterialTheme.typography.titleMedium)
+                        Muted((if (p.walk) "Guided walk" else "Note") + " · ${maxOf(1, Math.round(p.seconds / 60))} min · AI voice" + if (p.id == playing) " · chosen" else "")
                     }
                 }
             }

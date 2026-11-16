@@ -255,7 +255,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, LISTEN, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -728,6 +728,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             LibraryScreen(item, library, hindi, onClose = { if (item.data["play"] != null) prep.markLearnt(item.id); overlay = libraryBack })
         } ?: run { overlay = Overlay.NONE }
         Overlay.LEARN -> LearnHubScreen(library, prep, hindi, plusMember != true, onOpen = openItem, onTool = openTool, onClose = { overlay = Overlay.NONE })
+        Overlay.LISTEN -> com.upscpods.app.ui.ListenScreen(prep.reads(library), library.items.filter { it.kind == "walk-script" }, hindi, library::url,
+            onOpenRead = { readId = it; overlay = Overlay.READER }, onClose = { overlay = Overlay.NONE })
         Overlay.READS -> LongReadsScreen(prep.reads(library), prep, hindi, onOpen = { readId = it; overlay = Overlay.READER }, onClose = { overlay = Overlay.NONE })
         Overlay.READER -> prep.reads(library).firstOrNull { it.first.id == readId }?.let { (item, r) ->
             ReaderScreen(item, r, prep, hindi, onFocus = { mins -> Focus.start(context, mins, "Reading") }, onClose = { overlay = Overlay.READS }, mediaUrl = library::url)
@@ -982,6 +984,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                         plusOn = plusMember != true, showPlusInfo = plusMember != true && !plusQuiet,
                                         onLearn = { overlay = Overlay.LEARN }, onReads = { overlay = Overlay.READS },
                                         onTool = openTool, onPlusInfo = openPlusInfo,
+                                        listen = com.upscpods.app.ui.listenLine(prep.reads(library), library.items.filter { it.kind == "walk-script" }),
+                                        onListen = { overlay = Overlay.LISTEN },
                                     )
                                 },
                             )
