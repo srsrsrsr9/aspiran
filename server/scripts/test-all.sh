@@ -11,8 +11,8 @@ EXTRA[payments]="--var CASHFREE_APP_ID:local-test-app --var CASHFREE_SECRET_KEY:
 # The voice suite runs its own stand-in for Fish Audio on the port after the server's, and a small daily cap to test it.
 EXTRA[voice]="--var CASHFREE_APP_ID: --var CASHFREE_SECRET_KEY: --var FISH_AUDIO_API_KEY:local-test-key --var FISH_AUDIO_BASE:http://127.0.0.1:$((PORT + 1)) --var VOICE_MEMBER_DAILY:2"
 EXTRA[models-hf]="--var MODEL_FILES_URL:"
-NOAUTH=(auth metrics password roadmap try models-hf)   # suites that sign in by themselves
-SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu voice languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers)
+NOAUTH=(auth metrics password roadmap try models-hf institutes)   # suites that sign in by themselves
+SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu voice languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers institutes)
 # Whatever is still listening on the test port goes: the server's own worker process can outlive it.
 free_port() {
   pkill -9 -f "dev --port $PORT" 2>/dev/null

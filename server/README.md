@@ -361,6 +361,64 @@ backups; in production also rely on D1 Time Travel.
 
 In production, put Cloudflare Access in front of `/admin*` as well as the keys.
 
+## Coaching centres (institutes)
+
+A coaching centre ("institute") runs its own students inside Aspiran: batches, a batch chat with announcements,
+doubts, study plans, its own notes and question sets, and analytics. The plan is
+`artefacts/coaching-centres-plan-2026-11-14.md`; the code is `src/institutes.ts`.
+
+**The `institutes` flag** (/admin → Flags) is off by default. Off, every `/inst/...` route says "not found" and nothing
+shows in the app. The Aspiran-staff routes still work, so institutes can be set up before it goes on.
+
+**Tables:** `migrations/0014_institutes.sql`: `institutes`, `inst_members` (role, batch, consent time), `inst_batches`,
+`inst_codes` (invite codes), `inst_messages` (chat and announcements), `inst_doubts` and `inst_doubt_replies`,
+`inst_plans`, `inst_plan_items` and `inst_plan_done` (ticks), `inst_content` (notes and question sets) and
+`inst_attempts` (answers, marked on the server). The server also creates them on first use, with the same SQL.
+Every table carries `institute_id`. Logos and doubt photos go in the media bucket (`inst-logos/`, `inst-doubts/`).
+
+**Routes** (all need a sign-in, whatever `sign_in_required` says; another institute's ids always answer "not found"):
+- `/inst/*` for members: `me`, `join` (code, chosen name, consent tick, 18+ tick), `leave`, `feed` and `chat`
+  (polled every 10 seconds), `chat/report`, `doubts` (with one JPEG photo under 1.5 MB), `plan` and `plan/done`,
+  `content`, `attempts`, `progress` (your own numbers only). `/inst/logo/<id>` is public.
+- `/inst/admin/*` for teachers and up: overview, batches, codes, roster, members, branding, logo, reported, messages
+  (hide), content, plans, analytics and `analytics.csv`. Each checks the role it needs.
+- `/admin/api/institutes` for Aspiran staff (the admin key, Admin role): list, create (gives back a one-time owner
+  code, 30 days), `/<id>/owner-code` for a new one, `/<id>/status` to pause or resume. Paused, its members get
+  "paused for now" and its codes stop working. Each is in the audit log.
+
+**The console** is `/institute` (`src/institute.html`), signed in with the person's own Aspiran account. Its left rail
+shows only what their role can use. At the bottom, "Aspiran staff: set up an institute" takes the admin key.
+
+**The student side** is `public/app/institute.js`: `#inst` (or `#inst/<code>` from an invite link) to join, then the
+institute's name, colour and logo, announcements and batch chat, doubts, the plan, its content and their own progress.
+
+**Roles:** owner > admin > teacher > student, one per person, one institute per person.
+
+| Role | Can |
+|---|---|
+| Owner | everything an admin can, plus invite admins and change or remove them. Can't leave and can't be changed by anyone in the institute |
+| Admin | batches, invite teachers, roster changes (move, remove, change role), branding, logo and the AI first-answer switch |
+| Teacher | invite students, answer doubts, announcements, hide messages, see reports, content, plans, analytics and CSV |
+| Student | chat in their own batch, ask doubts, see their plan and the institute's published content, do its question sets |
+
+Nobody can change their own place. A test can be taken once; practice sets any number of times. Students never get
+the answers before they answer.
+
+**Distress guard.** Every chat message, doubt and doubt reply goes through the same distress check as pods. One that
+trips it is held, never posted: the writer gets the care box with helplines, and a `distress` report goes to Aspiran's
+own care queue (the `reports` table, `pod_id` = `inst:<institute id>`), as in `community/crisis-protocol.md`.
+The institute isn't told at all. The optional AI first answer (labelled "Aspiran AI") never runs at night
+(23:30 to 07:00 IST) or on feelings, ranks or results. Ten messages a minute per person across chat, doubts and replies.
+
+**Leaving and erasure.** Leaving (or being removed) deletes their answers, ticks and personal plans; their doubts and
+student messages stay with the name changed to "A former student". "Delete my data" (`privacy.ts`) calls
+`forgetInstituteMember`, which removes everything of theirs in every institute: memberships, answers, ticks, personal
+plans, doubts (with photos and replies) and messages. Their replies on other people's doubts stay as "A former member".
+
+**Tests:** `test/institutes.mjs`, run with `npm run test:all -- institutes`. It switches the flag on for the run and
+covers joining by code, every role limit, one institute never reaching another's data, chat and the distress guard,
+doubts with a photo, plans, content, analytics and the CSV, leaving and erasure.
+
 ## Deploy
 
 ```

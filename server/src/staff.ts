@@ -141,11 +141,14 @@ export const FLAG_INFO = {
   play_billing: "Google Play Billing for Plus in the Android app (plus_yearly, a year at ₹9,999). Needs the plus flag, PLAY_SERVICE_ACCOUNT_JSON and an app built with PLAY_BILLING on. Off until Play Console is set up",
   password_login: "Username and password sign-in, next to Continue with Google (staff can reset forgotten passwords from Accounts; members with a recovery email can reset their own). Off stops new sign-ups and sign-ins; people already signed in stay signed in",
   chai_auto: "The automatic Chai. At 7 in the morning, if no editor has approved enough cards, the best drafts that pass two automatic checks go out on their own, marked in the app as not yet checked by an editor. Serious and tragic stories always wait for a person. Off: nothing goes out without an editor.",
+  institutes: "Aspiran for coaching centres: institutes, batches, invite codes, batch chat, doubts, study plans, their own content and analytics (/institute and Me → Coaching centre). Off: every /inst route says not found and nothing shows in the app",
   sign_in_required: "Member features need a signed-in, active account. Switch off only while older app versions (without sign-in) are being replaced: then calls without a sign-in work as before, and suspended accounts are still refused",
 } as const;
 export type Flag = keyof typeof FLAG_INFO;
 /** Everything starts on, except Plus and Play Billing, which stay off until the founder switches them on. */
 export const DEFAULT_FLAGS: Record<Flag, boolean> = { ...Object.fromEntries(Object.keys(FLAG_INFO).map((k) => [k, true])), plus: false, play_billing: false, chai_auto: false,
+  // Coaching centres (institutes.ts): built, off until the owner switches it on.
+  institutes: false,
   // Google only for now (owner, 1 Nov 2026): username sign-in stays built but hidden until switched on in Admin → Flags.
   password_login: false } as any;
 

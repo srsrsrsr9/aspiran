@@ -17,8 +17,14 @@ reader and walk screens show a **Listen · AI voice** player when it's there, an
 - The server keeps `audio` when an item is re-imported, language by language, only while the text it was made from is
   unchanged (`src` = first 16 hex of SHA-256 of the JSON of `sections.<lang>` or `script.<lang>`; `keepAudio` in content.ts).
 
-Cast: notes: Krishna (Indian English) and Kriti (Hindi). Walks: Siya (English with an Indian accent) and Rehan (Hindi).
-Speed 0.95, emotion "content" ("calm" for SERIOUS or TRAGIC tone, never music or effects).
+Providers are tried in order per series (`CHAIN` in `build.py`) and the next one takes over when one is out of credits:
+Cartesia, Inworld, Smallest, then Chariot (`prov.py`; keys from the Keychain, account `aspiran`, never printed). Notes in
+English: Krishna, Saanvi, Aditi, Neha. Notes in Hindi: Kriti, Manoj, Kunal, Darshan. Walks: Siya / Siddharth / Nikhil in
+English, Rehan / Meera / Seema in Hindi. Each reading records its `provider` and model (`by`). Fish Audio is not used here:
+it is kept for Chotu, Jeetu and videos.
+Checker: Deepgram nova-3 (en-IN, hi), bar en 0.88, hi 0.80, 0.12 lower for lines under 120 characters. When a chunk fails,
+Chariot's speech-to-text gives a second opinion (`prov.chariot_stt`); a pass is stored as `check2` on the chunk and kept by
+`--rescore`. `report.py` prints the table by paper and subject, the voices, and what is still to voice.
 
 ## Run (from the repo root)
     mkdir -p content/audio/cartesia
