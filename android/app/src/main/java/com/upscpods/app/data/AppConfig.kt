@@ -43,6 +43,8 @@ private data class ConfigResponse(
     val results: List<ResultDay> = emptyList(),
     val auth: AuthConfig? = null,
     val pods: PodsMode? = null,
+    /** AI voices (data/Voice.kt): true only when the server has its voice key and the flag is on. */
+    val voice: Boolean = false,
 )
 
 /**
@@ -67,6 +69,8 @@ class AppConfig(context: Context, private val server: () -> String) {
     val plus get() = config.flags["plus"] == true
     /** Google Play Billing for Plus (data/PlayBilling.kt): off until the server says otherwise, like Plus. */
     val playBilling get() = config.flags["play_billing"] == true
+    /** The Listen button on Chotu's and Jeetu's messages: off until the server says voices are on. */
+    val voice get() = config.voice && on("voice")
 
     /**
      * Result-day mode: the result the admin set, while its 72 hours run (worked out on the phone from the

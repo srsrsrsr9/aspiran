@@ -55,7 +55,7 @@ object Jeetu {
         "selfMark" to ("Be your own examiner first, beta. Did you answer what the directive word asked?" to "पहले ख़ुद परीक्षक बनो, बेटा। जो निर्देश-शब्द ने माँगा, क्या वही लिखा?"),
         "second" to ("Now the second opinion. Where you two differ, look again: neither is always right." to "अब दूसरी राय। जहाँ तुम दोनों अलग हो, वहाँ फिर देखो: हमेशा कोई एक सही नहीं होता।"),
         "rewrite" to ("Rewrite only the weakest part. One fix, done well. बस, लिखो।" to "सिर्फ़ सबसे कमज़ोर हिस्सा दोबारा लिखो। एक सुधार, ठीक से। बस, लिखो।"),
-        "reread" to ("Answer first, beta. Then look. Say the points out loud before you open your note." to "पहले जवाब, बेटा। फिर देखना। नोट खोलने से पहले मुख्य बातें बोलकर कहो।"),
+        "rereadNote" to ("Answer first, beta. Then look. Say the points out loud before you open your note." to "पहले जवाब, बेटा। फिर देखना। नोट खोलने से पहले मुख्य बातें बोलकर कहो।"),
         "sure" to ("Prelims charges you for \"ish\". Say how sure you are before you look." to "प्रीलिम्स \"शायद\" के भी नंबर काटता है। देखने से पहले बताओ कितने पक्के हो।"),
     )
     fun line(key: String, hindi: Boolean = this.hindi): String = LINES[key]?.let { if (hindi) it.second else it.first } ?: ""
@@ -85,7 +85,9 @@ object Jeetu {
 }
 
 /** One turn of Ask Jeetu. Kept in memory only; never saved. */
-data class JeetuTurn(val fromUser: Boolean, val text: String, val id: String = java.util.UUID.randomUUID().toString(), val care: Boolean = false)
+data class JeetuTurn(val fromUser: Boolean, val text: String, val id: String = java.util.UUID.randomUUID().toString(), val care: Boolean = false,
+    /** The server's sig for hearing this reply (data/Voice.kt), when it may be spoken. */
+    val voiceSig: String? = null)
 
 /** Ask Jeetu: method questions to the server's POST /jeetu. The chat is never stored, here or there. */
 class JeetuClient(private val server: () -> String) {
@@ -113,7 +115,7 @@ class JeetuClient(private val server: () -> String) {
                     val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
                     when {
                         o?.get("care")?.jsonPrimitive?.boolean == true -> JeetuTurn(false, Jeetu.CARE_REPLY, care = true)
-                        r.isSuccessful && !o?.get("reply")?.jsonPrimitive?.content.isNullOrBlank() -> JeetuTurn(false, o!!["reply"]!!.jsonPrimitive.content.trim())
+                        r.isSuccessful && !o?.get("reply")?.jsonPrimitive?.content.isNullOrBlank() -> JeetuTurn(false, o!!["reply"]!!.jsonPrimitive.content, voiceSig = o["voice"]?.jsonPrimitive?.content)
                         else -> { trouble = o?.get("error")?.jsonPrimitive?.content ?: "Jeetu couldn't answer just now. Try again in a minute."; null }
                     }
                 }

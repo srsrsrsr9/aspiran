@@ -1,4 +1,4 @@
-import { voiceUsage } from "./voice";
+import { voiceReady, voiceUsage, warmVoices } from "./voice";
 import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backups";
 import { factWatchApi } from "./factwatch";
 import { checkItem, prepareEdit, titleOf } from "./content";
@@ -356,6 +356,8 @@ route("GET", /^llm$/, "llm:view", async ({ env, url }) => {
   return json({ days, daily, byPurpose, recent, today, controls: await llmControls(env), models: DRAFT_MODELS, authorModels: AUTHOR_MODELS,
     connected: !!env.AI, claudeKey: !!env.ANTHROPIC_API_KEY, groqKey: !!env.GROQ_API_KEY, voice: await voiceUsage(env, since) });
 });
+// Makes Chotu's and Jeetu's scripted lines once, so nobody waits for them (voice.ts). Costs a few cents the first time.
+route("POST", /^voice\/warm$/, "llm:control", async ({ env }) => (await voiceReady(env)) ? json(await warmVoices(env)) : bad("Voices are off: the FISH_AUDIO_API_KEY secret isn't set, or the voice flag is off", 503));
 route("POST", /^llm\/controls$/, "llm:control", async ({ env, s, body }) => {
   const c = await llmControls(env);
   const num = (v: unknown, lo: number, hi: number, d: number) => (Number.isFinite(Number(v)) ? Math.min(Math.max(Number(v), lo), hi) : d);

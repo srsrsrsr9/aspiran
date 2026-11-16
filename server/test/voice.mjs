@@ -144,6 +144,16 @@ try {
   assert.ok(!JSON.stringify(usage).includes("chai"));
   step("Admin → AI usage shows lines made, bytes and cost");
 
+  // Pre-making the scripted lines: everything not yet kept is made once; a second run makes nothing.
+  let warm = await (await fetch(BASE + "/admin/api/voice/warm", { method: "POST", headers: editor, body: "{}" })).json();
+  assert.equal(warm.failed, 0);
+  assert.ok(warm.made >= 1 || warm.quiet >= 1);
+  const afterWarm = calls.length;
+  warm = await (await fetch(BASE + "/admin/api/voice/warm", { method: "POST", headers: editor, body: "{}" })).json();
+  assert.equal(warm.made, 0);
+  assert.equal(calls.length, afterWarm);
+  step("Admin can pre-make the scripted lines; a second run costs nothing");
+
   // The flag switches it all off, and back on.
   await fetch(BASE + "/admin/api/flags", { method: "POST", headers: editor, body: JSON.stringify({ flags: { voice: false } }) });
   try {

@@ -94,7 +94,7 @@ fun ReviewScreen(
             Text("Close your notes. Say or write the main points from memory, then check them.", style = MaterialTheme.typography.bodyLarge)
             if (t.note.isNotBlank()) {
                 if (showNote) Text(t.note, style = MaterialTheme.typography.bodyMedium)
-                else { if (index > 0) JeetuNote("reread"); TextButton(onClick = { showNote = true }) { Text("Check against what you wrote when you met it") } }
+                else { if (index > 0) JeetuNote("rereadNote"); TextButton(onClick = { showNote = true }) { Text("Check against what you wrote when you met it") } }
             }
             notesFor(t.id).takeIf { it.isNotEmpty() }?.let { mine ->
                 Text("Your notes on this", style = MaterialTheme.typography.labelLarge)

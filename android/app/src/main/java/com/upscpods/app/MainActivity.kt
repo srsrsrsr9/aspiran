@@ -401,6 +401,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     com.upscpods.app.ui.PauseSource.library = library; com.upscpods.app.ui.PauseSource.hindi = hindi
     // Jeetu · AI, the method coach: on with the server's flag, off in result week (quiet hours are his own check).
     com.upscpods.app.data.Jeetu.enabled = config.on("jeetu") && result == null; com.upscpods.app.data.Jeetu.hindi = hindi
+    // AI voices: a Listen button, only when the server says so, never in result week.
+    com.upscpods.app.data.Voice.enabled = config.voice && result == null; com.upscpods.app.data.Voice.server = { pod.serverUrl }
     val jeetu = remember { com.upscpods.app.data.JeetuClient { pod.serverUrl } }
     val bank = remember { Practice.loadBank(context) }
     val mains = remember(brief, hindi) { Practice.mainsTask(brief, hindi) }

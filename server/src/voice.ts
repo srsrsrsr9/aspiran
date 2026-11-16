@@ -153,6 +153,22 @@ export async function voiceRoute(req: Request, env: Env, path: string): Promise<
   }
 }
 
+/**
+ * Makes every scripted line once (both languages), so the first member to tap Listen doesn't wait. Lines already kept
+ * are skipped and cost nothing. Run from Admin → AI usage after the key is set, or after a line's words change.
+ */
+export async function warmVoices(env: Env) {
+  const out = { made: 0, kept: 0, failed: 0, quiet: 0 };
+  const jobs: { who: Who; line: string }[] = [...Object.keys(LINES).map((line) => ({ who: "jeetu" as Who, line })), ...Object.entries(ACT).map(([line, a]) => ({ who: a.who, line }))];
+  for (const j of jobs) for (const lang of ["en", "hi"]) {
+    const res = await voiceRoute(new Request("http://voice/voice", { method: "POST", body: JSON.stringify({ ...j, lang, memberId: "staff-warm-voices" }) }), env, "/voice");
+    if (res?.status === 200) { if (res.headers.get("x-voice-cache") === "hit") out.kept++; else out.made++; await res.arrayBuffer(); }
+    else if (res?.status === 409) out.quiet++;
+    else out.failed++;
+  }
+  return out;
+}
+
 /** For Admin → AI usage: what the voices cost, by day and by character. Counts and bytes only, never text. */
 export async function voiceUsage(env: Env, since: string) {
   await ensureSchema(env);
