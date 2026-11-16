@@ -138,11 +138,11 @@ Read it after a week of traffic. The biggest drop between two steps is the next 
 
 ## Done (15 Nov 2026)
 
-Built on aspiran-web branch `claude/conversion-review` (not published yet):
+Built on aspiran-web branch `claude/conversion-review`; published to main (92be4e1) on 16 Nov and checked live:
 - **Home, English and Hindi** (`ShortHome.astro`, `short.css`, `pages/hi/index.astro`):
   - Hero: says who it's for, adds "You don't have a reading problem. You have a forgetting problem.", button "Try one topic free", three ticks (No sign-up · No card · 15 minutes).
   - New "What the 15 minutes look like": three real demo screens (Guess first · Real PYQs, "how sure?" · It comes back), English and Hindi versions, WebP about 30 to 40 KB each, lazy-loaded; a swipe row on phones.
-  - "What's behind it" replaces the apology: 2,000+ questions, 250+ videos, 19+ hours of notes, 11 past papers (counted on production today, rounded down); who wrote it and how it's checked; the research with sources; the honest "no toppers" line.
+  - "What's behind it" replaces the apology: 2,000+ questions, 250+ videos, 20+ hours of notes (20.4 h on production, 16 Nov), 11 past papers (counted on production, rounded down); who wrote it and how it's checked; the research with sources; the honest "no toppers" line.
   - The recall question moved further down (before the price).
   - Price: Free first ("not a trial"); Plus leads with "₹999 for your first year · first 300 people · then ₹9,999". Paying stays "WhatsApp us to pay by UPI" (the owner collects UPI directly). No counter.
   - FAQ: coaching / YouTube, Prelims or Mains, who it's for.
