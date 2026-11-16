@@ -10,6 +10,7 @@ export const LINES = {
   second: { en: "Now the second opinion. Where you two differ, look again: neither is always right.", hi: "अब दूसरी राय। जहाँ तुम दोनों अलग हो, वहाँ फिर देखो: हमेशा कोई एक सही नहीं होता।" },
   rewrite: { en: "Rewrite only the weakest part. One fix, done well. बस, लिखो।", hi: "सिर्फ़ सबसे कमज़ोर हिस्सा दोबारा लिखो। एक सुधार, ठीक से। बस, लिखो।" },
   reread: { en: "Answer first, beta. Then look. Re-reading feels like learning; it isn't.", hi: "पहले जवाब, बेटा। फिर देखना। दोबारा पढ़ना सीखने जैसा लगता है; होता नहीं।" },
+  rereadNote: { en: "Answer first, beta. Then look. Say the points out loud before you open your note.", hi: "पहले जवाब, बेटा। फिर देखना। नोट खोलने से पहले मुख्य बातें बोलकर कहो।" },
   sure: { en: "Prelims charges you for \"ish\". Say how sure you are before you look.", hi: "प्रीलिम्स \"शायद\" के भी नंबर काटता है। देखने से पहले बताओ कितने पक्के हो।" },
 };
 

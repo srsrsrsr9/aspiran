@@ -22,12 +22,15 @@ import { bump, ensureSchema, flags } from "./staff";
 
 export type Who = "chotu" | "jeetu";
 
-/** The two voices: Fish Audio's own licensed Hindi voices (no community clones). Ids are public, not secrets. */
+/**
+ * The two voices. Both were made for Aspiran with Fish Audio's Voice Design (a voice from a written description, not a
+ * copy of any person) and saved as private voices on the owner's Fish Audio account. Ids are not secrets.
+ */
 export const VOICES: Record<Who, { id: string; speed: number; name: string }> = {
-  // Brighter, younger, a touch quicker.
-  chotu: { id: "24e7cbf4121745e7bb3b54d1a0d2be80", speed: 1.08, name: "शांत और भावुक स्वर (licensed)" },
-  // Darker, calmer, a touch slower.
-  jeetu: { id: "18e8999c98b746bda58521980d817e8c", speed: 0.92, name: "Hashtag agriculture hindi voice (licensed)" },
+  // A cheerful young man from Delhi: bright, light, a little cheeky (about 180 Hz).
+  chotu: { id: "cae60a8fbea3456c9c941161ce4e9d80", speed: 1, name: "Aspiran Chotu (designed)" },
+  // A retired teacher in his late sixties: deep, warm, unhurried (about 120 Hz).
+  jeetu: { id: "edcdf002d20a4fc085bfc65842efdf9f", speed: 0.95, name: "Aspiran Jeetu (designed)" },
 };
 const MODEL = "s2.1-pro";
 /** $15 per million UTF-8 bytes of text (Fish Audio price list, 15 Nov 2026). */
