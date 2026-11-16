@@ -25,19 +25,19 @@ export function quietHours(d = new Date()): boolean {
 }
 
 /** Ranks, results, cut-offs and selection chances: nobody can know, so no model is asked. */
-const RANKS = [
+export const RANKS = [
   "rank", "selection", "selected", "my chance", "chances", "cut-off", "cutoff", "cut off", "will i clear", "will i pass",
   "can i clear", "will i crack", "can i crack", "result", "results", "percentile", "topper", "merit list",
   "रैंक", "चयन", "सिलेक्शन", "रिज़ल्ट", "रिजल्ट", "नतीजा", "नतीजे", "कट-ऑफ", "कटऑफ", "क्लियर होगा", "पास होगा",
 ];
 /** Feelings: they deserve a person, not Jeetu. Distress words are caught before this, by the shared list. */
-const FEELINGS = [
+export const FEELINGS = [
   "i feel", "i'm feeling", "im feeling", "feeling low", "feeling down", "sad", "depressed", "anxious", "anxiety", "lonely",
   "stressed", "scared", "afraid", "crying", "demotivated", "frustrated", "overwhelmed", "burnt out",
   "burnout", "burned out", "panic", "nervous", "tension", "give up", "quit", "hopeless", "udaas", "dar lag", "ghabra",
   "उदास", "अकेला", "अकेली", "तनाव", "डर", "घबराहट", "घबरा", "रोना", "रो रहा", "रो रही", "हिम्मत", "परेशान",
 ];
-const has = (text: string, words: string[]) => {
+export const has = (text: string, words: string[]) => {
   const t = ` ${text.toLowerCase()} `;
   // Latin words match on word edges ("rank" not "frankly"); Devanagari as a plain substring.
   return words.some((w) => /^[\x00-\x7f]+$/.test(w) ? new RegExp(`(^|[^a-z])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z]|$)`).test(t) : t.includes(w));

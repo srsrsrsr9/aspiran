@@ -26,6 +26,7 @@ import * as VINE from "./vine.js";
 import * as TRY from "./try.js";
 import * as IT from "./interactives.js";
 import * as J from "./jeetu.js";
+import * as INST from "./institute.js";
 
 // --- Small helpers -----------------------------------------------------------------------------
 
@@ -313,7 +314,7 @@ const PREP_TABS = [
 ];
 // Which tab a route belongs to; anything not listed is Adda.
 const TAB_OF = {
-  pod: "pod", rooms: "pod", chotu: "chotu", me: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
+  pod: "pod", rooms: "pod", chotu: "chotu", me: "me", inst: "me", room: "me", path: "me", profile: "me", rhythm: "me", stamps: "me", plus: "me", privacy: "me", gift: "me", paid: "me", receipts: "me",
   prep: "prep", today: "prep", review: "prep", walk: "prep", print: "prep", optional: "prep", terms: "prep", map: "prep", vine: "prep", chai: "prep", practice: "prep", prelims: "prep", mains: "prep", essay: "prep", interview: "prep", casefile: "prep", progress: "prep", mock: "prep", read: "prep", focus: "prep", plan: "prep", routine: "prep", roadmap: "prep",
   learn: "prep", try: "prep", upgrade: "prep", skeletons: "prep", cases: "prep", csat: "prep", ptest: "prep", pcompile: "prep", insights: "prep", revise: "prep",
 };
@@ -424,7 +425,7 @@ function render() {
   const prepRail = space === "prep" && !immersive && h("nav.subrail", { "aria-label": "Prep" },
     PREP_TABS.map(([id, label]) => h("a.subtab", { href: "#" + id, "aria-current": sub === id ? "page" : null }, tr(label))));
   put(root, h("div.shell",
-    h("nav.side", { "aria-label": "Main" }, h("div.brand", "Aspiran"), navLinks(), h("div.spacer"), themeButton(),
+    h("nav.side", { "aria-label": "Main" }, INST.brandLine() ?? h("div.brand", "Aspiran"), navLinks(), h("div.spacer"), themeButton(),
       h("a.tab", { href: "#calm", "aria-current": r.name === "calm" ? "page" : null }, h("span", { "aria-hidden": "true" }, "◌"), tr("nav.calm")),
       h("a.tab", { href: "#talk", "aria-current": r.name === "talk" ? "page" : null }, h("span", { "aria-hidden": "true" }, "♡"), tr("nav.talk"))),
     h("main", { id: "main" }, h("div.mobilebar", themeButton(true), h("a", { href: "#calm" }, "◌ " + tr("nav.calm")), h("a", { href: "#talk" }, "♡ " + tr("nav.talk"))), prepRail, offlineBanner(), on("announcements") && space === "adda" ? banner() : null, view),
@@ -3044,6 +3045,7 @@ function viewMe() {
     link("#rhythm", "Rhythm", "The days you closed. No streaks."),
     link("#stamps", "Stamp book", `${Object.keys(s).length ? Object.keys(s).length + (Object.keys(s).length === 1 ? " stamp" : " stamps") + " so far" : "Stamps for showing up, helping and more"}. None can be lost.`),
     link("#privacy", "Privacy", "Pause, Smarter Chotu, result-day mode, download or delete"),
+    INST.meCard(),
     plusOn() && link("#plus", "Plus (test mode)", "Everything in the Adda, Pod and Chotu stays free"),
     link("#upgrade", "Plus", "Every mock, mock insights, the weekly test and revise my misses. Try them before deciding"),
     link("#routine", tr("routine.title"), tr("routine.lead")),
@@ -4198,6 +4200,8 @@ BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAl
 // Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
 J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang });
 IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Auth.signedIn() });
+// Coaching centres (institute.js): behind the `institutes` flag, off by default.
+INST.init({ h, put, store, lang, profile, toast, render: () => render(), config: () => config, careBox: () => careBox(false), onLeave: (f) => cleanup.push(f) });
 
 const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu, jeetu: () => J.viewJeetu(),
@@ -4205,7 +4209,7 @@ const VIEWS = {
   skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch, tryit: IT.viewTryIt, listen: viewListen,
   learn: X.viewLearn, try: TRY.viewTry, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
-  me: viewMe, path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
+  me: viewMe, inst: (arg) => INST.viewInst(arg), path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
   shelf: viewShelf, compass: viewCompass, cost: viewCost, maps: viewMaps, thinker: viewThinker,
   talk: viewTalk, calm: viewCalm,
 };
@@ -4238,4 +4242,5 @@ window.addEventListener("offline", drawOffline);
 if (profile()) checkStamps();
 M.setMember(() => profile()?.memberId ?? Auth.session()?.memberId ?? null, () => (Auth.signedIn() ? Auth.getToken() : Promise.resolve(null)));
 render();
+INST.refresh();
 M.boot();

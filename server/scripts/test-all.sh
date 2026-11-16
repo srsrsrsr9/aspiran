@@ -9,8 +9,8 @@ LOG=$(mktemp -d)
 typeset -A EXTRA
 EXTRA[payments]="--var CASHFREE_APP_ID:local-test-app --var CASHFREE_SECRET_KEY:local-test-secret --var CASHFREE_API_BASE:http://127.0.0.1:8799/pg"
 EXTRA[models-hf]="--var MODEL_FILES_URL:"
-NOAUTH=(auth metrics password roadmap try models-hf)   # suites that sign in by themselves
-SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers)
+NOAUTH=(auth metrics password roadmap try models-hf institutes)   # suites that sign in by themselves
+SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers institutes)
 # Whatever is still listening on the test port goes: the server's own worker process can outlive it.
 free_port() {
   pkill -9 -f "dev --port $PORT" 2>/dev/null
