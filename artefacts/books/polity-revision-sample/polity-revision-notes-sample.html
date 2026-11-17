@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polity Revision Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{
+  --paper:#FFFDF9; --ink:#2A1B12; --muted:#6E5A4C; --line:#E4D8C8; --brand:#9A4E0E; --soft:#F6E2C9;
+  --ok:#E3EAD9; --okink:#3E5631; --bad:#F8E1DE; --badink:#8A2A1E; --blue:#DCE6EE; --blueink:#2D4A63;
+  --g-eq:#C9772B; --g-fr:#4F6B3E; --g-ex:#8A2A1E; --g-re:#6B4F8A; --g-cu:#2D6B6B; --g-rm:#9A4E0E; --g-na:#B9AC9C;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#E9E2D7;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:9.4pt;line-height:1.45;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:148mm 210mm;margin:0}
+.page{width:148mm;height:210mm;margin:10mm auto;padding:13mm 12.5mm 15mm;background:var(--paper);position:relative;overflow:hidden;
+  box-shadow:0 2px 14px rgba(42,27,18,.18);page-break-after:always;break-after:page}
+@media print{body{background:none}.page{margin:0;box-shadow:none}}
+@media screen and (max-width:600px){.page{transform-origin:top left}}
+.folio{position:absolute;bottom:7mm;left:12.5mm;right:12.5mm;display:flex;justify-content:space-between;font:500 6.6pt Inter,sans-serif;color:var(--muted);letter-spacing:.03em;border-top:.6pt solid var(--line);padding-top:2mm}
+h1,h2,h3{font-family:Martel,Georgia,serif;font-weight:800;line-height:1.15;margin:0}
+h2{font-size:15pt;color:var(--brand);margin-bottom:2.5mm}
+h3{font-size:10.5pt;margin:4mm 0 1.5mm}
+p{margin:0 0 2mm}
+ul{margin:0 0 2mm;padding-left:4.5mm} li{margin-bottom:1mm}
+.kicker{font:700 6.8pt Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:1.5mm}
+.lede{font-size:10.4pt;line-height:1.45;color:var(--ink)}
+.small{font-size:8pt;color:var(--muted)}
+b,strong{font-weight:700}
+.art{font:600 7.6pt Inter,sans-serif;background:var(--soft);color:var(--brand);padding:.2mm 1.3mm;border-radius:1mm;white-space:nowrap}
+.box{border-radius:2.2mm;padding:2.6mm 3.2mm;margin:2.5mm 0;font-size:8.8pt}
+.box .tag{font:700 6.4pt Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:1mm}
+.trap{background:var(--bad)} .trap .tag{color:var(--badink)}
+.hook{background:var(--ok)} .hook .tag{color:var(--okink)}
+.asks{background:var(--blue)} .asks .tag{color:var(--blueink)}
+.note{background:var(--soft)} .note .tag{color:var(--brand)}
+.fig{margin:2mm 0 1mm} .fig svg{width:100%;height:auto;display:block}
+.cap{font:500 6.8pt Inter,sans-serif;color:var(--muted);margin-top:1mm}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+table{border-collapse:collapse;width:100%;font-size:7.9pt}
+th{font:700 6.6pt Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--muted);border-bottom:1pt solid var(--ink);padding:1.2mm 1.2mm}
+td{border-bottom:.5pt solid var(--line);padding:1.5mm 1.2mm;vertical-align:top}
+.revisit{display:flex;gap:4mm;align-items:center;font:600 7.2pt Inter,sans-serif;color:var(--muted)}
+.revisit span::before{content:"";display:inline-block;width:3mm;height:3mm;border:.8pt solid var(--muted);border-radius:.6mm;margin-right:1.2mm;vertical-align:-.5mm}
+.qrcard{display:flex;gap:3.5mm;align-items:center;border:1pt dashed var(--brand);border-radius:2.5mm;padding:2.5mm 3mm;margin-top:3mm}
+.qrcard .qr{width:20mm;height:20mm;flex:none}
+.qrcard .qr svg{width:100%;height:100%}
+.qrcard b{font-family:Martel,serif;font-size:9.5pt;display:block}
+.qrcard .small{font-size:7.4pt}
+ol.recall{padding-left:5mm;margin:0} ol.recall li{margin-bottom:2.2mm}
+.dev{font-family:"Noto Serif Devanagari","Martel",serif}
+/* chapter opener */
+.opener{background:var(--brand);color:#FFF6EA}
+.opener .num{font:800 64pt Martel,serif;line-height:1;opacity:.25;position:absolute;top:10mm;right:11mm}
+.opener h1{font-size:25pt;color:#FFF6EA;margin-top:54mm}
+.opener .kicker{color:#F6E2C9}
+.opener .lede{color:#FFF6EA;margin-top:3mm}
+.opener .cando{margin-top:7mm;background:rgba(255,246,234,.1);border-radius:2.5mm;padding:3mm 3.5mm;font-size:8.8pt}
+.opener .cando li{margin-bottom:1.3mm}
+.opener .folio{color:#F6E2C9;border-color:rgba(255,246,234,.3)}
+/* cover */
+.cover{background:#2A1B12;color:#FFF6EA;padding:0}
+.cover .inner{position:absolute;inset:0;padding:13mm 12.5mm}
+.cover .brandline{font:700 7.5pt Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#F0A04B}
+.cover h1{font-size:40pt;color:#FFF6EA;margin-top:6mm;letter-spacing:-.01em}
+.cover .sub{font:600 11pt Inter,sans-serif;color:#F6E2C9;margin-top:2mm}
+.cover .langs{display:inline-block;margin-top:5mm;font:600 8pt Inter,sans-serif;border:1pt solid #F0A04B;color:#F0A04B;border-radius:5mm;padding:1mm 3.5mm}
+.cover .dev{font-family:"Noto Serif Devanagari",serif}
+.cover .promise{position:absolute;left:12.5mm;right:12.5mm;bottom:14mm;font:600 9pt Inter,sans-serif;color:#F6E2C9;display:flex;justify-content:space-between;align-items:flex-end}
+.cover .promise .wm{font:800 16pt Martel,serif;color:#FFF6EA;letter-spacing:.01em}
+.toc td{font-size:9.4pt;padding:2mm 1mm}
+.toc td:last-child{text-align:right;font:600 8pt Inter,sans-serif;color:var(--muted)}
+.toc .ch{font:800 9pt Martel,serif;color:var(--brand);width:9mm}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:2.5mm}
+.legend .box{margin:0}
+.free19{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:2mm}
+.free19 div{border:.8pt solid var(--line);border-left:2.2mm solid var(--g-fr);border-radius:1.6mm;padding:1.8mm 2.4mm;font-size:8pt}
+.free19 b{font-family:Martel,serif;font-size:8.6pt;display:block;margin-bottom:.4mm}
+.free19 i{color:var(--muted);font-size:7.4pt;font-style:normal;display:block;margin-top:.6mm}
+.tl{position:relative;margin:2mm 0 0 2mm;padding-left:6mm;border-left:1.4pt solid var(--brand)}
+.tl div{position:relative;margin-bottom:2.6mm;font-size:8.6pt}
+.tl div::before{content:"";position:absolute;left:-7.9mm;top:1mm;width:3mm;height:3mm;border-radius:50%;background:var(--paper);border:1.4pt solid var(--brand)}
+.tl .yr{font:700 7.4pt Inter,sans-serif;color:var(--brand);display:block}
+.sheet{font-size:7.8pt;line-height:1.38}
+.sheet h3{font-size:8.8pt;margin:2.2mm 0 .8mm;color:var(--brand)}
+.sheet ul{padding-left:3.5mm;margin-bottom:1mm} .sheet li{margin-bottom:.5mm}
+.tight td{padding:.9mm 1.1mm;font-size:7.5pt;line-height:1.32}
+.answers{font-size:8.4pt} .answers li{margin-bottom:1.3mm}
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="page cover">
+  <svg viewBox="0 0 560 794" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+    <defs>
+      <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#F0A04B" opacity=".18"/></pattern>
+    </defs>
+    <rect width="560" height="794" fill="url(#dots)"/>
+    <!-- stacked pages motif: four pillars of the Preamble -->
+    <g transform="translate(60 380)">
+      <rect x="0" y="120" width="440" height="16" rx="3" fill="#F0A04B"/>
+      <rect x="18" y="104" width="404" height="12" rx="3" fill="#C9772B"/>
+      <g fill="#FFF6EA" opacity=".92">
+        <rect x="40" y="0" width="64" height="100" rx="4"/>
+        <rect x="140" y="-30" width="64" height="130" rx="4"/>
+        <rect x="240" y="-55" width="64" height="155" rx="4"/>
+        <rect x="340" y="-15" width="64" height="115" rx="4"/>
+      </g>
+      <g font-family="Martel, serif" font-weight="800" font-size="13" fill="#2A1B12" text-anchor="middle">
+        <text x="72" y="58" transform="rotate(-90 72 58)">JUSTICE</text>
+        <text x="172" y="40" transform="rotate(-90 172 40)">LIBERTY</text>
+        <text x="272" y="26" transform="rotate(-90 272 26)">EQUALITY</text>
+        <text x="372" y="48" transform="rotate(-90 372 48)">FRATERNITY</text>
+      </g>
+      <g font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#F0A04B" text-anchor="middle" letter-spacing="2">
+        <text x="220" y="160">WE, THE PEOPLE OF INDIA</text>
+      </g>
+    </g>
+  </svg>
+  <div class="inner">
+    <div class="brandline">Aspiran · Revision Notes</div>
+    <h1>Polity</h1>
+    <div class="sub">The Constitution, in pages you can keep in your head</div>
+    <div class="langs">English · <span class="dev">हिन्दी</span></div>
+  </div>
+  <div class="promise">
+    <span>Read it. Recall it. Keep it.<br><span style="font-weight:400;opacity:.8">Sample edition · 2 chapters</span></span>
+    <span class="wm">Aspiran</span>
+  </div>
+</section>
+
+<!-- ===================== TITLE / IMPRINT ===================== -->
+<section class="page">
+  <div class="kicker">Aspiran Revision Notes</div>
+  <h1 style="font-size:22pt">Polity</h1>
+  <p class="lede" style="margin-top:2mm">A companion for revision. Read your main book once; come back to these pages again and again.</p>
+
+  <div class="box note" style="margin-top:8mm">
+    <span class="tag">About this sample</span>
+    This is a sample of the planned book: two full chapters, one Hindi page, a one-page revision sheet and answers. The full book will cover the whole GS2 Polity syllabus in about 140 pages.
+  </div>
+
+  <h3>Where the facts come from</h3>
+  <p class="small" style="font-size:8.4pt">The text of the Constitution of India, the Constitution (Amendment) Acts, and the judgments of the Supreme Court named in each chapter. No other book's wording is used. Article numbers are as they stand in 2026.</p>
+
+  <h3>Found a mistake?</h3>
+  <p class="small" style="font-size:8.4pt">Tell us at aspiran.in. Every edition is reprinted on demand, so corrections reach the next copy printed, often within a week.</p>
+
+  <div style="position:absolute;bottom:20mm;left:12.5mm;right:12.5mm" class="small">
+    © 2026 Aspiran. Sample edition, November 2026. Printed on demand.<br>
+    ISBN: to be assigned. Maps in Aspiran books are schematic and show no national borders.
+  </div>
+</section>
+
+<!-- ===================== HOW TO USE ===================== -->
+<section class="page">
+  <div class="kicker">Before you start</div>
+  <h2>How to use this book</h2>
+  <p>Most notes are written to be read. These are written to be <b>remembered</b>. Every chapter works in three moves.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 460 150" role="img" aria-label="Three steps: read, recall, revisit">
+      <g font-family="Inter, sans-serif">
+        <g>
+          <circle cx="70" cy="58" r="44" fill="#F6E2C9"/>
+          <text x="70" y="52" text-anchor="middle" font-family="Martel, serif" font-weight="800" font-size="26" fill="#9A4E0E">1</text>
+          <text x="70" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#2A1B12">READ</text>
+          <text x="70" y="124" text-anchor="middle" font-size="10" fill="#6E5A4C">one idea per block</text>
+          <text x="70" y="138" text-anchor="middle" font-size="10" fill="#6E5A4C">15–20 minutes</text>
+        </g>
+        <path d="M125 58 H170" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar)"/>
+        <g>
+          <circle cx="230" cy="58" r="44" fill="#E3EAD9"/>
+          <text x="230" y="52" text-anchor="middle" font-family="Martel, serif" font-weight="800" font-size="26" fill="#3E5631">2</text>
+          <text x="230" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#2A1B12">RECALL</text>
+          <text x="230" y="124" text-anchor="middle" font-size="10" fill="#6E5A4C">close the book, answer</text>
+          <text x="230" y="138" text-anchor="middle" font-size="10" fill="#6E5A4C">the questions from memory</text>
+        </g>
+        <path d="M285 58 H330" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar)"/>
+        <g>
+          <circle cx="390" cy="58" r="44" fill="#DCE6EE"/>
+          <text x="390" y="52" text-anchor="middle" font-family="Martel, serif" font-weight="800" font-size="26" fill="#2D4A63">3</text>
+          <text x="390" y="74" text-anchor="middle" font-size="12" font-weight="700" fill="#2A1B12">REVISIT</text>
+          <text x="390" y="124" text-anchor="middle" font-size="10" fill="#6E5A4C">after 3, 7 and 21 days</text>
+          <text x="390" y="138" text-anchor="middle" font-size="10" fill="#6E5A4C">tick the boxes as you go</text>
+        </g>
+      </g>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9A4E0E"/></marker></defs>
+    </svg>
+  </div>
+
+  <p>Recalling something from memory, and doing it again a few days later, is what makes it stay. Rereading feels like learning; recalling is what actually does it.</p>
+
+  <h3>The boxes you will see</h3>
+  <div class="legend">
+    <div class="box hook"><span class="tag">Memory hook</span>A short way to hold a list or a sequence.</div>
+    <div class="box trap"><span class="tag">Trap</span>Where options in Prelims usually try to catch you.</div>
+    <div class="box asks"><span class="tag">How UPSC asks</span>The shape of the question, so it doesn't surprise you.</div>
+    <div class="box note"><span class="tag">Keep in mind</span>A detail that changes the answer.</div>
+  </div>
+
+  <div class="qrcard">
+    <div class="qr" data-qr="https://aspiran.in/?src=book-polity-howto"></div>
+    <div><b>Every chapter has a code like this</b><span class="small">Scan it to take that chapter's questions in the Aspiran app, hear the chapter read aloud, or find a small group revising the same topic. Free, and the book works fine without it.</span></div>
+  </div>
+  <div class="folio"><span>Aspiran · Polity</span><span>iii</span></div>
+</section>
+
+<!-- ===================== CONTENTS ===================== -->
+<section class="page">
+  <div class="kicker">Contents</div>
+  <h2>What's inside the full book</h2>
+  <p class="small" style="margin-bottom:3mm">Chapters in <b style="color:var(--brand)">brown</b> are in this sample.</p>
+  <table class="toc">
+    <tr><td class="ch">1</td><td><b style="color:var(--brand)">The Preamble</b></td><td>1</td></tr>
+    <tr><td class="ch">2</td><td><b style="color:var(--brand)">Fundamental Rights</b></td><td>7</td></tr>
+    <tr><td class="ch">3</td><td>Directive Principles and Fundamental Duties</td><td>—</td></tr>
+    <tr><td class="ch">4</td><td>Amending the Constitution and the basic structure</td><td>—</td></tr>
+    <tr><td class="ch">5</td><td>Parliament</td><td>—</td></tr>
+    <tr><td class="ch">6</td><td>President, Vice-President, Prime Minister</td><td>—</td></tr>
+    <tr><td class="ch">7</td><td>The judiciary</td><td>—</td></tr>
+    <tr><td class="ch">8</td><td>Centre and states</td><td>—</td></tr>
+    <tr><td class="ch">9</td><td>Local government: panchayats and municipalities</td><td>—</td></tr>
+    <tr><td class="ch">10</td><td>Emergency provisions</td><td>—</td></tr>
+    <tr><td class="ch">11</td><td>Constitutional and statutory bodies</td><td>—</td></tr>
+    <tr><td class="ch">12</td><td>Elections and parties</td><td>—</td></tr>
+    <tr><td class="ch"></td><td><b style="color:var(--brand)">One-page revision sheets</b></td><td>14</td></tr>
+    <tr><td class="ch"></td><td><b style="color:var(--brand)">Answers</b></td><td>15</td></tr>
+  </table>
+  <div class="folio"><span>Aspiran · Polity</span><span>iv</span></div>
+</section>
+
+<!-- ===================== CH 1 OPENER ===================== -->
+<section class="page opener">
+  <div class="num">01</div>
+  <div class="kicker">Chapter 1</div>
+  <h1>The Preamble</h1>
+  <p class="lede">One sentence of 85 words that tells you where the Constitution's power comes from, what kind of country it makes, and what that country is for.</p>
+  <div class="cando">
+    <b style="font-family:Inter,sans-serif;font-size:7pt;letter-spacing:.12em;text-transform:uppercase">After this chapter you can</b>
+    <ul style="margin-top:1.5mm">
+      <li>Break the Preamble into its four parts from memory.</li>
+      <li>Explain each of the five words that describe India.</li>
+      <li>Name the one amendment to the Preamble and the three words it added.</li>
+      <li>Say whether the Preamble is part of the Constitution, and which case decided it.</li>
+    </ul>
+  </div>
+  <p style="margin-top:6mm;font:500 8pt Inter,sans-serif;color:#F6E2C9">About 20 minutes · GS2 · Prelims and Mains</p>
+  <div class="folio"><span>Chapter 1</span><span>1</span></div>
+</section>
+
+<!-- ===================== CH 1 p2: anatomy ===================== -->
+<section class="page">
+  <div class="kicker">1.1 · The whole sentence, taken apart</div>
+  <h2>Four parts, one sentence</h2>
+  <p>Read the Preamble as answers to four questions: <b>who</b> gives the Constitution, <b>what</b> India is, <b>why</b> it exists, and <b>when</b> it was adopted.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 460 330" role="img" aria-label="Anatomy of the Preamble in four bands">
+      <g font-family="Inter, sans-serif">
+        <!-- band 1 -->
+        <rect x="0" y="0" width="460" height="56" rx="8" fill="#F6E2C9"/>
+        <text x="14" y="20" font-size="9" font-weight="700" fill="#9A4E0E" letter-spacing="1.5">WHO · SOURCE OF AUTHORITY</text>
+        <text x="14" y="42" font-family="Martel, serif" font-size="16" font-weight="800" fill="#2A1B12">“We, the people of India”</text>
+        <path d="M230 58 v12" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar2)"/>
+        <!-- band 2 -->
+        <rect x="0" y="74" width="460" height="74" rx="8" fill="#FFFDF9" stroke="#9A4E0E" stroke-width="1.5"/>
+        <text x="14" y="94" font-size="9" font-weight="700" fill="#9A4E0E" letter-spacing="1.5">WHAT · NATURE OF THE STATE</text>
+        <g font-size="10.5" font-weight="700" text-anchor="middle">
+          <rect x="12" y="104" width="80" height="32" rx="5" fill="#2A1B12"/><text x="52" y="124" fill="#FFF6EA">Sovereign</text>
+          <rect x="99" y="104" width="80" height="32" rx="5" fill="#C9772B"/><text x="139" y="124" fill="#FFF6EA">Socialist*</text>
+          <rect x="186" y="104" width="80" height="32" rx="5" fill="#C9772B"/><text x="226" y="124" fill="#FFF6EA">Secular*</text>
+          <rect x="273" y="104" width="86" height="32" rx="5" fill="#2A1B12"/><text x="316" y="124" fill="#FFF6EA">Democratic</text>
+          <rect x="366" y="104" width="82" height="32" rx="5" fill="#2A1B12"/><text x="407" y="124" fill="#FFF6EA">Republic</text>
+        </g>
+        <path d="M230 150 v12" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar2)"/>
+        <!-- band 3 -->
+        <rect x="0" y="166" width="460" height="104" rx="8" fill="#E3EAD9"/>
+        <text x="14" y="186" font-size="9" font-weight="700" fill="#3E5631" letter-spacing="1.5">WHY · OBJECTIVES, SECURED TO ALL CITIZENS</text>
+        <g>
+          <rect x="12" y="196" width="104" height="64" rx="6" fill="#FFFDF9"/>
+          <text x="64" y="215" text-anchor="middle" font-family="Martel, serif" font-size="12" font-weight="800" fill="#2A1B12">Justice</text>
+          <text x="64" y="233" text-anchor="middle" font-size="9" fill="#6E5A4C">social · economic</text>
+          <text x="64" y="246" text-anchor="middle" font-size="9" fill="#6E5A4C">political</text>
+          <rect x="124" y="196" width="104" height="64" rx="6" fill="#FFFDF9"/>
+          <text x="176" y="215" text-anchor="middle" font-family="Martel, serif" font-size="12" font-weight="800" fill="#2A1B12">Liberty</text>
+          <text x="176" y="231" text-anchor="middle" font-size="8.6" fill="#6E5A4C">thought · expression</text>
+          <text x="176" y="243" text-anchor="middle" font-size="8.6" fill="#6E5A4C">belief · faith</text>
+          <text x="176" y="255" text-anchor="middle" font-size="8.6" fill="#6E5A4C">worship</text>
+          <rect x="236" y="196" width="104" height="64" rx="6" fill="#FFFDF9"/>
+          <text x="288" y="215" text-anchor="middle" font-family="Martel, serif" font-size="12" font-weight="800" fill="#2A1B12">Equality</text>
+          <text x="288" y="233" text-anchor="middle" font-size="9" fill="#6E5A4C">of status</text>
+          <text x="288" y="246" text-anchor="middle" font-size="9" fill="#6E5A4C">of opportunity</text>
+          <rect x="348" y="196" width="100" height="64" rx="6" fill="#FFFDF9"/>
+          <text x="398" y="215" text-anchor="middle" font-family="Martel, serif" font-size="12" font-weight="800" fill="#2A1B12">Fraternity</text>
+          <text x="398" y="231" text-anchor="middle" font-size="8.6" fill="#6E5A4C">dignity of the</text>
+          <text x="398" y="243" text-anchor="middle" font-size="8.6" fill="#6E5A4C">individual · unity &amp;</text>
+          <text x="398" y="255" text-anchor="middle" font-size="8.6" fill="#6E5A4C">integrity* of Nation</text>
+        </g>
+        <path d="M230 272 v12" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar2)"/>
+        <!-- band 4 -->
+        <rect x="0" y="288" width="460" height="40" rx="8" fill="#DCE6EE"/>
+        <text x="14" y="312" font-size="9" font-weight="700" fill="#2D4A63" letter-spacing="1.5">WHEN</text>
+        <text x="62" y="313" font-family="Martel, serif" font-size="12" font-weight="800" fill="#2A1B12">Adopted 26 November 1949</text>
+        <text x="446" y="313" text-anchor="end" font-size="9" fill="#2D4A63">in force 26 January 1950</text>
+      </g>
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 0 L5 10 z" fill="#9A4E0E" transform="rotate(-90 5 5)"/></marker></defs>
+    </svg>
+    <div class="cap">* added by the 42nd Amendment, 1976. The Preamble itself says the Constitution was adopted on 26 November 1949.</div>
+  </div>
+
+  <div class="box hook"><span class="tag">Memory hook</span><b>Who · What · Why · When.</b> And the five words in order: <b>S-S-S-D-R</b>, “three S's, then a Democratic Republic”.</div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>2</span></div>
+</section>
+
+<!-- ===================== CH 1 p3: five words ===================== -->
+<section class="page">
+  <div class="kicker">1.2 · What each word means</div>
+  <h2>The five words that describe India</h2>
+  <table>
+    <tr><th style="width:22%">Word</th><th>What it means in the Indian Constitution</th></tr>
+    <tr><td><b>Sovereign</b></td><td>India decides its own internal and external affairs. No outside power is above it. Joining the Commonwealth or the UN does not change this.</td></tr>
+    <tr><td><b>Socialist</b></td><td><i>Democratic</i> socialism: a mixed economy where public and private sectors exist side by side, aiming to reduce inequality. Not state ownership of everything.</td></tr>
+    <tr><td><b>Secular</b></td><td>The State has no religion of its own and treats all religions as equal. Indian secularism is “positive”: the State can support and reform, not just stay away.</td></tr>
+    <tr><td><b>Democratic</b></td><td>Power rests with the people, who rule through elected representatives (parliamentary form). The Preamble aims at social and economic democracy too, not only voting.</td></tr>
+    <tr><td><b>Republic</b></td><td>The head of State is elected (the President, indirectly), not hereditary. Every public office is open to every citizen.</td></tr>
+  </table>
+
+  <h3>Where the ideals were borrowed from</h3>
+  <div class="fig">
+    <svg viewBox="0 0 460 92" role="img" aria-label="Sources of the Preamble's ideals">
+      <g font-family="Inter, sans-serif" font-size="10">
+        <rect x="0" y="6" width="146" height="80" rx="7" fill="#F8E1DE"/>
+        <text x="73" y="30" text-anchor="middle" font-weight="700" fill="#8A2A1E">Russian Revolution</text>
+        <text x="73" y="52" text-anchor="middle" fill="#2A1B12">Justice: social,</text>
+        <text x="73" y="66" text-anchor="middle" fill="#2A1B12">economic, political</text>
+        <rect x="157" y="6" width="146" height="80" rx="7" fill="#DCE6EE"/>
+        <text x="230" y="30" text-anchor="middle" font-weight="700" fill="#2D4A63">French Revolution</text>
+        <text x="230" y="52" text-anchor="middle" fill="#2A1B12">Liberty, Equality,</text>
+        <text x="230" y="66" text-anchor="middle" fill="#2A1B12">Fraternity · Republic</text>
+        <rect x="314" y="6" width="146" height="80" rx="7" fill="#E3EAD9"/>
+        <text x="387" y="30" text-anchor="middle" font-weight="700" fill="#3E5631">US Constitution</text>
+        <text x="387" y="52" text-anchor="middle" fill="#2A1B12">The idea of opening</text>
+        <text x="387" y="66" text-anchor="middle" fill="#2A1B12">with a Preamble</text>
+      </g>
+    </svg>
+  </div>
+  <p>The Preamble is built on the <b>Objectives Resolution</b>, moved by Jawaharlal Nehru in the Constituent Assembly on 13 December 1946 and adopted on 22 January 1947. The Assembly passed the Preamble last, so that it would match the Constitution as finally written.</p>
+
+  <div class="box trap"><span class="tag">Trap</span>“Socialist” and “Secular” were <b>not</b> in the original Preamble. Secularism was still part of the original Constitution through the rights to freedom of religion (Articles 25 to 28).</div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>3</span></div>
+</section>
+
+<!-- ===================== CH 1 p4: case timeline ===================== -->
+<section class="page">
+  <div class="kicker">1.3 · The Preamble in court</div>
+  <h2>Is the Preamble part of the Constitution?</h2>
+  <p>The Supreme Court changed its answer once. Learn it as a short story with a twist.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 460 210" role="img" aria-label="Timeline of key events for the Preamble">
+      <g font-family="Inter, sans-serif">
+        <line x1="20" y1="105" x2="445" y2="105" stroke="#2A1B12" stroke-width="2"/>
+        <!-- points: 1946, 1949, 1960, 1973, 1976, 1995, 2024 -->
+        <g fill="#FFFDF9" stroke="#9A4E0E" stroke-width="2.5">
+          <circle cx="30" cy="105" r="6"/><circle cx="96" cy="105" r="6"/><circle cx="162" cy="105" r="6"/>
+          <circle cx="228" cy="105" r="8" fill="#9A4E0E"/><circle cx="294" cy="105" r="6"/><circle cx="360" cy="105" r="6"/><circle cx="430" cy="105" r="6"/>
+        </g>
+        <g font-size="10.5" font-weight="700" fill="#9A4E0E" text-anchor="middle">
+          <text x="30" y="88">1946</text><text x="96" y="130">1949</text><text x="162" y="88">1960</text>
+          <text x="228" y="130">1973</text><text x="294" y="88">1976</text><text x="360" y="130">1995</text><text x="430" y="88">2024</text>
+        </g>
+        <g font-size="8.8" fill="#2A1B12" text-anchor="middle">
+          <text x="30" y="40">Objectives</text><text x="30" y="52">Resolution</text><text x="30" y="64">moved</text>
+          <text x="96" y="148">Preamble</text><text x="96" y="160">adopted</text><text x="96" y="172">26 Nov</text>
+          <text x="162" y="28" font-weight="700">Berubari</text><text x="162" y="40">“Not part of</text><text x="162" y="52">the Constitution”</text>
+          <text x="228" y="148" font-weight="700">Kesavananda</text><text x="228" y="160" font-weight="700">Bharati</text><text x="228" y="172">“It IS part;</text><text x="228" y="184">can be amended,</text><text x="228" y="196">not its basic features”</text>
+          <text x="294" y="28" font-weight="700">42nd</text><text x="294" y="40" font-weight="700">Amendment</text><text x="294" y="52">adds 3 words</text><text x="294" y="64">(only change ever)</text>
+          <text x="360" y="148" font-weight="700">LIC of India</text><text x="360" y="160">confirms: part</text><text x="360" y="172">of Constitution</text>
+          <text x="430" y="28" font-weight="700">Balram Singh</text><text x="430" y="40">upholds the</text><text x="430" y="52">1976 additions</text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <h3>What the Preamble can and can't do</h3>
+  <div class="two">
+    <div class="box hook" style="margin:0"><span class="tag">It can</span>
+      <ul style="margin:0;padding-left:3.5mm"><li>Help judges read an unclear Article.</li><li>Show the basic features of the Constitution.</li><li>Be amended under Article 368, like any other part.</li></ul></div>
+    <div class="box trap" style="margin:0"><span class="tag">It can't</span>
+      <ul style="margin:0;padding-left:3.5mm"><li>Be enforced in a court on its own.</li><li>Give Parliament any power.</li><li>Take any power away from Parliament.</li></ul></div>
+  </div>
+
+  <div class="box asks"><span class="tag">How UPSC asks</span>Statement questions mixing “part of the Constitution” (true, since 1973) with “enforceable in a court” (false). Read each half of a statement separately.</div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>4</span></div>
+</section>
+
+<!-- ===================== CH 1 p5: recall ===================== -->
+<section class="page">
+  <div class="kicker">Chapter 1 · Recall</div>
+  <h2>Close the book. Answer from memory.</h2>
+  <p class="small" style="margin-bottom:3mm">Write your answers on paper first. Answers are on page 15. Getting one wrong now is useful: it shows you what to revisit.</p>
+  <ol class="recall">
+    <li>Name the four parts of the Preamble, in order.</li>
+    <li>Which three words did the 42nd Amendment (1976) add?</li>
+    <li>Justice of which three kinds? From which revolution was the idea taken?</li>
+    <li>Liberty of which five things?</li>
+    <li>Berubari (1960) and Kesavananda Bharati (1973) gave different answers to one question. What was the question, and what did each say?</li>
+    <li>True or false: a citizen can go to court only on the ground that a law goes against the Preamble.</li>
+  </ol>
+
+  <h3>Try one in the UPSC style</h3>
+  <div class="box asks" style="font-size:8.6pt">
+    Consider the following statements about the Preamble:<br>
+    1. It has been amended only once.<br>
+    2. It is a source of power for the legislature.<br>
+    3. The Supreme Court has held that it is a part of the Constitution.<br>
+    Which of the statements given above are correct?<br>
+    (a) 1 and 2 only &nbsp; (b) 1 and 3 only &nbsp; (c) 2 and 3 only &nbsp; (d) 1, 2 and 3
+  </div>
+
+  <div class="revisit" style="margin-top:4mm">Revisit: <span>Day 3</span><span>Day 7</span><span>Day 21</span></div>
+
+  <div class="qrcard">
+    <div class="qr" data-qr="https://aspiran.in/?src=book-polity-ch1"></div>
+    <div><b>Chapter 1 in the app</b><span class="small">10 more questions that adjust to what you got wrong, the chapter read aloud in English or Hindi, and a pod revising Polity this week.</span></div>
+  </div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>5</span></div>
+</section>
+
+<!-- ===================== CH 1 Hindi page ===================== -->
+<section class="page" lang="hi">
+  <div class="kicker">हिन्दी संस्करण की झलक</div>
+  <h2 class="dev">प्रस्तावना: एक नज़र में</h2>
+  <p class="dev small" style="margin-bottom:3mm">पूरी किताब में हर अध्याय अंग्रेज़ी और हिन्दी में आमने-सामने के पन्नों पर होगा। यह पन्ना उसी का नमूना है।</p>
+  <div class="dev" style="font-size:9.4pt;line-height:1.65">
+    <table>
+      <tr><th style="width:24%">भाग</th><th>क्या याद रखें</th></tr>
+      <tr><td><b>स्रोत</b></td><td>“हम, भारत के लोग”: संविधान की शक्ति जनता से आती है।</td></tr>
+      <tr><td><b>स्वरूप</b></td><td>संपूर्ण प्रभुत्व-संपन्न, समाजवादी*, पंथनिरपेक्ष*, लोकतंत्रात्मक गणराज्य।</td></tr>
+      <tr><td><b>उद्देश्य</b></td><td>न्याय (सामाजिक, आर्थिक, राजनीतिक); विचार, अभिव्यक्ति, विश्वास, धर्म और उपासना की स्वतंत्रता; प्रतिष्ठा और अवसर की समता; व्यक्ति की गरिमा और राष्ट्र की एकता और अखंडता* सुनिश्चित करने वाली बंधुता।</td></tr>
+      <tr><td><b>तिथि</b></td><td>26 नवंबर 1949 को अंगीकृत।</td></tr>
+    </table>
+    <p class="small" style="margin-top:1.5mm">* 42वें संशोधन (1976) द्वारा जोड़े गए। प्रस्तावना में यही एकमात्र संशोधन हुआ है।</p>
+
+    <div class="box trap"><span class="tag" style="font-family:'Noto Serif Devanagari',serif;letter-spacing:0">जाल</span>
+      प्रस्तावना संविधान का अंग है (केशवानंद भारती, 1973), पर इसे अदालत में सीधे लागू नहीं कराया जा सकता। यह न विधायिका को शक्ति देती है, न उसकी शक्ति घटाती है।</div>
+
+    <div class="box hook"><span class="tag" style="font-family:'Noto Serif Devanagari',serif;letter-spacing:0">याद रखने का तरीक़ा</span>
+      <b>कौन · क्या · क्यों · कब</b>: जनता · गणराज्य का स्वरूप · चार आदर्श · 26 नवंबर 1949</div>
+
+    <h3 class="dev">याद से लिखिए</h3>
+    <ol class="recall">
+      <li>42वें संशोधन ने कौन-से तीन शब्द जोड़े?</li>
+      <li>बेरुबारी (1960) और केशवानंद भारती (1973) में प्रस्तावना के बारे में क्या कहा गया?</li>
+    </ol>
+  </div>
+  <div class="folio"><span class="dev">अध्याय 1 · प्रस्तावना</span><span>6</span></div>
+</section>
+
+<!-- ===================== CH 2 OPENER ===================== -->
+<section class="page opener">
+  <div class="num">02</div>
+  <div class="kicker">Chapter 2</div>
+  <h1>Fundamental Rights</h1>
+  <p class="lede">Part III, Articles 12 to 35. Six rights that the State cannot take away by an ordinary law, and a direct road to the Supreme Court if it tries.</p>
+  <div class="cando">
+    <b style="font-family:Inter,sans-serif;font-size:7pt;letter-spacing:.12em;text-transform:uppercase">After this chapter you can</b>
+    <ul style="margin-top:1.5mm">
+      <li>Place any Article from 12 to 35 in its group, without looking.</li>
+      <li>Say which rights belong only to citizens.</li>
+      <li>Say what happens to rights during an Emergency.</li>
+      <li>Tell the five writs apart, and against whom each works.</li>
+      <li>Trace six cases that shaped Part III.</li>
+    </ul>
+  </div>
+  <p style="margin-top:6mm;font:500 8pt Inter,sans-serif;color:#F6E2C9">About 40 minutes, best in two sittings · GS2 · Prelims and Mains</p>
+  <div class="folio"><span>Chapter 2</span><span>7</span></div>
+</section>
+
+<!-- ===================== CH 2 p2: article map ===================== -->
+<section class="page">
+  <div class="kicker">2.1 · The map of Part III</div>
+  <h2>Twenty-four Articles, six rights</h2>
+  <p>Learn the map first. Once you know which block an Article sits in, most questions become easy to place.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 460 200" role="img" aria-label="Articles 12 to 35 coloured by the right they belong to">
+      <g font-family="Inter, sans-serif" font-size="9.5" font-weight="700" text-anchor="middle">
+        <!-- cell width 18.5, start x=8 -->
+        <g fill="#B9AC9C"><rect x="8" y="60" width="17" height="40" rx="3"/><rect x="26.5" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#C9772B"><rect x="45" y="60" width="17" height="40" rx="3"/><rect x="63.5" y="60" width="17" height="40" rx="3"/><rect x="82" y="60" width="17" height="40" rx="3"/><rect x="100.5" y="60" width="17" height="40" rx="3"/><rect x="119" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#4F6B3E"><rect x="137.5" y="60" width="17" height="40" rx="3"/><rect x="156" y="60" width="17" height="40" rx="3"/><rect x="174.5" y="60" width="17" height="40" rx="3"/><rect x="193" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#8A2A1E"><rect x="211.5" y="60" width="17" height="40" rx="3"/><rect x="230" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#6B4F8A"><rect x="248.5" y="60" width="17" height="40" rx="3"/><rect x="267" y="60" width="17" height="40" rx="3"/><rect x="285.5" y="60" width="17" height="40" rx="3"/><rect x="304" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#2D6B6B"><rect x="322.5" y="60" width="17" height="40" rx="3"/><rect x="341" y="60" width="17" height="40" rx="3"/></g>
+        <rect x="359.5" y="60" width="17" height="40" rx="3" fill="none" stroke="#B9AC9C" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <rect x="378" y="60" width="17" height="40" rx="3" fill="#9A4E0E"/>
+        <g fill="#B9AC9C"><rect x="396.5" y="60" width="17" height="40" rx="3"/><rect x="415" y="60" width="17" height="40" rx="3"/><rect x="433.5" y="60" width="17" height="40" rx="3"/></g>
+        <g fill="#FFFDF9" font-size="8.5">
+          <text x="16.5" y="84">12</text><text x="35" y="84">13</text><text x="53.5" y="84">14</text><text x="72" y="84">15</text><text x="90.5" y="84">16</text><text x="109" y="84">17</text><text x="127.5" y="84">18</text>
+          <text x="146" y="84">19</text><text x="164.5" y="84">20</text><text x="183" y="84">21</text><text x="201.5" y="84">22</text><text x="220" y="84">23</text><text x="238.5" y="84">24</text>
+          <text x="257" y="84">25</text><text x="275.5" y="84">26</text><text x="294" y="84">27</text><text x="312.5" y="84">28</text><text x="331" y="84">29</text><text x="349.5" y="84">30</text>
+          <text x="368" y="84" fill="#B9AC9C">31</text><text x="386.5" y="84">32</text><text x="405" y="84">33</text><text x="423.5" y="84">34</text><text x="442" y="84">35</text>
+        </g>
+        <!-- labels above / below -->
+        <g font-size="8.6">
+          <text x="81" y="48" fill="#C9772B">EQUALITY</text><text x="81" y="36" fill="#6E5A4C" font-weight="500">14–18</text>
+          <text x="174" y="122" fill="#4F6B3E">FREEDOM</text><text x="174" y="134" fill="#6E5A4C" font-weight="500">19–22</text>
+          <text x="229" y="36" fill="#8A2A1E">AGAINST</text><text x="229" y="48" fill="#8A2A1E">EXPLOITATION</text>
+          <text x="285" y="122" fill="#6B4F8A">RELIGION</text><text x="285" y="134" fill="#6E5A4C" font-weight="500">25–28</text>
+          <text x="340" y="36" fill="#2D6B6B">CULTURE &amp;</text><text x="340" y="48" fill="#2D6B6B">EDUCATION</text>
+          <text x="386.5" y="122" fill="#9A4E0E">REMEDIES</text><text x="386.5" y="134" fill="#6E5A4C" font-weight="500">32</text>
+        </g>
+        <g font-size="7.8" font-weight="500" fill="#6E5A4C">
+          <text x="26" y="122">definitions</text><text x="26" y="133">and judicial</text><text x="26" y="144">review</text>
+          <text x="370" y="194">31: property, removed 1978</text>
+          <text x="430" y="150">armed forces,</text><text x="430" y="161">martial law,</text><text x="430" y="172">laws to apply</text>
+        </g>
+        <path d="M183 140 v26 h-18" stroke="#4F6B3E" stroke-width="1.2" fill="none"/>
+        <text x="122" y="180" font-size="8.4" font-weight="600" fill="#4F6B3E" text-anchor="middle">21A: education, 6–14 years (86th Amendment, 2002)</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="box hook"><span class="tag">Memory hook</span>The six rights in order: <b>E</b>very <b>F</b>riend <b>E</b>ats <b>R</b>ice, <b>C</b>ooks <b>C</b>urry. Equality, Freedom, against Exploitation, Religion, Culture and education, Constitutional remedies.</div>
+
+  <div class="box note"><span class="tag">Keep in mind</span>The Constitution began with <b>seven</b> rights. The right to property was removed by the <b>44th Amendment (1978)</b>. It is now a legal right under <span class="art">Art 300A</span>, outside Part III.</div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>8</span></div>
+</section>
+
+<!-- ===================== CH 2 p3: equality + exploitation + religion + culture compact ===================== -->
+<section class="page">
+  <div class="kicker">2.2 · One line per Article</div>
+  <h2>What each Article protects</h2>
+  <table>
+    <tr><th style="width:13%">Art</th><th>In one line</th></tr>
+    <tr><td><span class="art">12</span></td><td>Defines “the State”: governments, legislatures, local and other authorities.</td></tr>
+    <tr><td><span class="art">13</span></td><td>Any law that takes away a Fundamental Right is void. The base of judicial review.</td></tr>
+    <tr><td><span class="art">14</span></td><td>Equality before law and equal protection of laws.</td></tr>
+    <tr><td><span class="art">15</span></td><td>No discrimination on religion, race, caste, sex or place of birth.</td></tr>
+    <tr><td><span class="art">16</span></td><td>Equal opportunity in public employment.</td></tr>
+    <tr><td><span class="art">17</span></td><td>Untouchability abolished, and its practice is an offence.</td></tr>
+    <tr><td><span class="art">18</span></td><td>Titles abolished. Military and academic distinctions allowed.</td></tr>
+    <tr><td><span class="art">19</span></td><td>Six freedoms (next page).</td></tr>
+    <tr><td><span class="art">20</span></td><td>Protection on conviction: no retrospective criminal law, no double punishment, no forced self-incrimination.</td></tr>
+    <tr><td><span class="art">21</span></td><td>Life and personal liberty, taken away only by a procedure established by law.</td></tr>
+    <tr><td><span class="art">22</span></td><td>Safeguards on arrest and preventive detention.</td></tr>
+    <tr><td><span class="art">23</span></td><td>No trafficking in human beings or forced labour (begar).</td></tr>
+    <tr><td><span class="art">24</span></td><td>No child under 14 in factories, mines or hazardous work.</td></tr>
+    <tr><td><span class="art">25–28</span></td><td>Conscience and religion; managing religious affairs; no tax to promote a religion; limits on religious instruction in State-funded schools.</td></tr>
+    <tr><td><span class="art">29–30</span></td><td>Any group can protect its language, script or culture; minorities can set up and run their own educational institutions.</td></tr>
+    <tr><td><span class="art">32</span></td><td>Right to go straight to the Supreme Court to enforce these rights.</td></tr>
+  </table>
+  <div class="box trap"><span class="tag">Trap</span>Article 21A is a Fundamental Right; the law that carries it out is the Right to Education Act, 2009. Options often swap the two.</div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>9</span></div>
+</section>
+
+<!-- ===================== CH 2 p4: Art 19 + citizens ===================== -->
+<section class="page">
+  <div class="kicker">2.3 · Article 19</div>
+  <h2>Six freedoms, each with its own limits</h2>
+  <p>Every freedom in Article 19 can be limited by a “reasonable restriction”, but only on the grounds the Constitution names for it.</p>
+  <div class="free19">
+    <div><b>Speech and expression</b> 19(1)(a)<i>Limits: sovereignty and integrity, security of the State, friendly relations with other countries, public order, decency or morality, contempt of court, defamation, incitement to an offence.</i></div>
+    <div><b>Assemble peacefully, without arms</b> 19(1)(b)<i>Limits: sovereignty and integrity, public order.</i></div>
+    <div><b>Form associations, unions, co-operatives</b> 19(1)(c)<i>Limits: sovereignty and integrity, public order, morality. “Co-operatives” added by the 97th Amendment, 2011.</i></div>
+    <div><b>Move freely in India</b> 19(1)(d)<i>Limits: general public interest, protecting Scheduled Tribes.</i></div>
+    <div><b>Live and settle anywhere in India</b> 19(1)(e)<i>Limits: general public interest, protecting Scheduled Tribes.</i></div>
+    <div><b>Any profession, trade or business</b> 19(1)(g)<i>Limits: public interest, required qualifications, State monopolies.</i></div>
+  </div>
+  <p class="small" style="margin-top:1.5mm">There is no 19(1)(f) any more: it was the freedom to acquire property, removed in 1978.</p>
+
+  <h3>Who gets which rights?</h3>
+  <div class="fig">
+    <svg viewBox="0 0 460 120" role="img" aria-label="Rights for citizens only versus rights for every person">
+      <g font-family="Inter, sans-serif">
+        <rect x="0" y="0" width="170" height="116" rx="8" fill="#F6E2C9"/>
+        <text x="85" y="20" text-anchor="middle" font-size="9" font-weight="700" fill="#9A4E0E" letter-spacing="1.2">CITIZENS ONLY</text>
+        <g font-family="Martel, serif" font-weight="800" font-size="17" fill="#2A1B12" text-anchor="middle">
+          <text x="34" y="56">15</text><text x="85" y="56">16</text><text x="136" y="56">19</text>
+          <text x="60" y="88">29</text><text x="111" y="88">30</text>
+        </g>
+        <text x="85" y="108" text-anchor="middle" font-size="8" fill="#6E5A4C">“15, 16, 19, 29, 30”</text>
+        <rect x="180" y="0" width="280" height="116" rx="8" fill="#E3EAD9"/>
+        <text x="320" y="20" text-anchor="middle" font-size="9" font-weight="700" fill="#3E5631" letter-spacing="1.2">EVERY PERSON, INCLUDING FOREIGNERS</text>
+        <g font-family="Martel, serif" font-weight="800" font-size="15" fill="#2A1B12" text-anchor="middle">
+          <text x="210" y="56">14</text><text x="250" y="56">20</text><text x="290" y="56">21</text><text x="333" y="56">21A</text><text x="376" y="56">22*</text><text x="420" y="56">23</text>
+          <text x="230" y="88">24</text><text x="275" y="88">25</text><text x="320" y="88">26</text><text x="365" y="88">27</text><text x="410" y="88">28</text>
+        </g>
+        <text x="320" y="108" text-anchor="middle" font-size="8" fill="#6E5A4C">* parts of Art 22 do not cover enemy aliens</text>
+      </g>
+    </svg>
+  </div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>10</span></div>
+</section>
+
+<!-- ===================== CH 2 p5: emergency + writs ===================== -->
+<section class="page">
+  <div class="kicker">2.4 · Rights in an Emergency</div>
+  <h2>What can be switched off, and what never can</h2>
+  <div class="fig">
+    <svg viewBox="0 0 460 180" style="max-height:44mm" role="img" aria-label="Effect of a national emergency on Fundamental Rights">
+      <g font-family="Inter, sans-serif">
+        <rect x="150" y="0" width="160" height="34" rx="6" fill="#2A1B12"/>
+        <text x="230" y="21" text-anchor="middle" font-size="10" font-weight="700" fill="#FFF6EA">National Emergency (Art 352)</text>
+        <path d="M200 34 L110 62" stroke="#9A4E0E" stroke-width="1.8" marker-end="url(#ar3)"/>
+        <path d="M260 34 L350 62" stroke="#9A4E0E" stroke-width="1.8" marker-end="url(#ar3)"/>
+        <rect x="0" y="66" width="220" height="74" rx="7" fill="#F8E1DE"/>
+        <text x="110" y="84" text-anchor="middle" font-size="9" font-weight="700" fill="#8A2A1E" letter-spacing="1">ARTICLE 358</text>
+        <text x="110" y="101" text-anchor="middle" font-size="9.2" fill="#2A1B12">Article 19 is suspended</text>
+        <text x="110" y="114" text-anchor="middle" font-size="9.2" fill="#2A1B12">automatically, but only if the</text>
+        <text x="110" y="127" text-anchor="middle" font-size="9.2" fill="#2A1B12">ground is war or external aggression</text>
+        <rect x="240" y="66" width="220" height="74" rx="7" fill="#F8E1DE"/>
+        <text x="350" y="84" text-anchor="middle" font-size="9" font-weight="700" fill="#8A2A1E" letter-spacing="1">ARTICLE 359</text>
+        <text x="350" y="101" text-anchor="middle" font-size="9.2" fill="#2A1B12">The President, by order, can</text>
+        <text x="350" y="114" text-anchor="middle" font-size="9.2" fill="#2A1B12">suspend going to court for</text>
+        <text x="350" y="127" text-anchor="middle" font-size="9.2" fill="#2A1B12">named rights</text>
+        <rect x="110" y="150" width="240" height="28" rx="14" fill="#4F6B3E"/>
+        <text x="230" y="168" text-anchor="middle" font-size="9.6" font-weight="700" fill="#FFF6EA">Never: Articles 20 and 21 (44th Amdt, 1978)</text>
+      </g>
+      <defs><marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9A4E0E"/></marker></defs>
+    </svg>
+  </div>
+
+  <div class="kicker" style="margin-top:0">2.5 · The five writs</div>
+  <h2 style="font-size:13pt">Five orders a court can issue</h2>
+  <table class="tight">
+    <tr><th style="width:21%">Writ</th><th style="width:21%">Literally</th><th>What it does</th><th style="width:25%">Against</th></tr>
+    <tr><td><b>Habeas corpus</b></td><td>“have the body”</td><td>Produce a detained person; free them if the detention is illegal.</td><td>Public authorities <b>and private persons</b></td></tr>
+    <tr><td><b>Mandamus</b></td><td>“we command”</td><td>Orders a public official or body to do its legal duty.</td><td>Public bodies; not private persons, President or Governors</td></tr>
+    <tr><td><b>Prohibition</b></td><td>“to forbid”</td><td>Stops a lower court or tribunal <i>before</i> it exceeds its powers.</td><td>Judicial and quasi-judicial bodies only</td></tr>
+    <tr><td><b>Certiorari</b></td><td>“to be informed”</td><td>Quashes an order <i>already</i> passed without jurisdiction.</td><td>Judicial, quasi-judicial, and administrative bodies</td></tr>
+    <tr><td><b>Quo warranto</b></td><td>“by what authority?”</td><td>Asks a person holding a public office what right they have to it.</td><td>Holders of substantive public offices</td></tr>
+  </table>
+  <div class="box hook" style="margin-top:2mm"><span class="tag">Memory hook</span>Prohibition <b>prevents</b>, certiorari <b>cures</b>. Only habeas corpus reaches private persons.</div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>11</span></div>
+</section>
+
+<!-- ===================== CH 2 p6: cases + 32 vs 226 ===================== -->
+<section class="page">
+  <div class="kicker">2.6 · Six cases that shaped Part III</div>
+  <h2>How the courts grew these rights</h2>
+  <div class="tl">
+    <div><span class="yr">1950 · A.K. Gopalan</span>Article 21 read narrowly: any procedure set by law was enough, fair or not.</div>
+    <div><span class="yr">1967 · Golaknath</span>Parliament cannot amend Fundamental Rights. (Undone by the 24th Amendment, 1971.)</div>
+    <div><span class="yr">1973 · Kesavananda Bharati</span>Parliament can amend any part, including rights, but not the <b>basic structure</b>.</div>
+    <div><span class="yr">1978 · Maneka Gandhi</span>The procedure under Article 21 must be <b>fair, just and reasonable</b>. Gopalan's narrow reading ends.</div>
+    <div><span class="yr">1992 · Indra Sawhney</span>Reservations for backward classes upheld; usually capped at 50%; the “creamy layer” is kept out.</div>
+    <div><span class="yr">2017 · K.S. Puttaswamy</span>Privacy is a Fundamental Right, part of Article 21.</div>
+  </div>
+
+  <h3>Supreme Court or High Court?</h3>
+  <div class="fig">
+    <svg viewBox="0 0 460 104" role="img" aria-label="Article 32 compared with Article 226">
+      <g font-family="Inter, sans-serif">
+        <rect x="0" y="0" width="224" height="102" rx="8" fill="#F6E2C9"/>
+        <text x="14" y="22" font-family="Martel, serif" font-weight="800" font-size="13" fill="#9A4E0E">Article 32 · SC</text>
+        <text x="14" y="44" font-size="9.4" fill="#2A1B12">• Itself a Fundamental Right</text>
+        <text x="14" y="60" font-size="9.4" fill="#2A1B12">• Only to enforce Fundamental</text>
+        <text x="24" y="73" font-size="9.4" fill="#2A1B12">Rights</text>
+        <text x="14" y="89" font-size="9.4" fill="#2A1B12">• Whole of India</text>
+        <rect x="236" y="0" width="224" height="102" rx="8" fill="#DCE6EE"/>
+        <text x="250" y="22" font-family="Martel, serif" font-weight="800" font-size="13" fill="#2D4A63">Article 226 · HC</text>
+        <text x="250" y="44" font-size="9.4" fill="#2A1B12">• A constitutional, not</text>
+        <text x="260" y="57" font-size="9.4" fill="#2A1B12">fundamental, right</text>
+        <text x="250" y="73" font-size="9.4" fill="#2A1B12">• Rights <tspan font-weight="700">and</tspan> “any other purpose”</text>
+        <text x="250" y="89" font-size="9.4" fill="#2A1B12">• Within its territory: wider scope</text>
+      </g>
+    </svg>
+  </div>
+  <div class="box note"><span class="tag">Keep in mind</span>Dr B.R. Ambedkar called Article 32 the “heart and soul” of the Constitution: a right is only as strong as the road to enforce it.</div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>12</span></div>
+</section>
+
+<!-- ===================== CH 2 p7: recall ===================== -->
+<section class="page">
+  <div class="kicker">Chapter 2 · Recall</div>
+  <h2>Close the book. Answer from memory.</h2>
+  <p class="small" style="margin-bottom:3mm">Answers on page 15.</p>
+  <ol class="recall" start="7">
+    <li>Draw the Part III map: six coloured blocks with their Article numbers.</li>
+    <li>Which five Articles are only for citizens?</li>
+    <li>Which two Articles can never be suspended in an Emergency, and which amendment made it so?</li>
+    <li>Which writ can be issued against a private person?</li>
+    <li>Prohibition or certiorari: a tribunal has <i>already</i> passed an order without jurisdiction. Which writ?</li>
+    <li>What did Maneka Gandhi (1978) change about Article 21?</li>
+    <li>Where is the right to property today, and what kind of right is it?</li>
+  </ol>
+
+  <h3>Try one in the UPSC style</h3>
+  <div class="box asks" style="font-size:8.6pt">
+    With reference to the Constitution of India, consider the following:<br>
+    1. Right against discrimination on grounds of place of birth<br>
+    2. Right to life and personal liberty<br>
+    3. Right of minorities to run educational institutions<br>
+    Which of the above are available to a foreign national living in India?<br>
+    (a) 1 only &nbsp; (b) 2 only &nbsp; (c) 1 and 3 only &nbsp; (d) 1, 2 and 3
+  </div>
+  <div class="revisit" style="margin-top:4mm">Revisit: <span>Day 3</span><span>Day 7</span><span>Day 21</span></div>
+  <div class="qrcard">
+    <div class="qr" data-qr="https://aspiran.in/?src=book-polity-ch2"></div>
+    <div><b>Chapter 2 in the app</b><span class="small">An interactive version of the Part III map, writ drills, and questions picked from what you missed here.</span></div>
+  </div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>13</span></div>
+</section>
+
+<!-- ===================== REVISION SHEET ===================== -->
+<section class="page">
+  <div class="kicker">One-page revision sheet</div>
+  <h2 style="font-size:13pt">The night before: Chapters 1 and 2</h2>
+  <div class="two sheet">
+    <div>
+      <h3>Preamble</h3>
+      <ul>
+        <li>Who · What · Why · When.</li>
+        <li>Sovereign, Socialist*, Secular*, Democratic, Republic.</li>
+        <li>Justice (S, E, P) · Liberty (5) · Equality (2) · Fraternity.</li>
+        <li>Adopted 26 Nov 1949.</li>
+        <li>*42nd Amdt, 1976: socialist, secular, integrity. Only amendment.</li>
+        <li>Built on the Objectives Resolution (Nehru, 13 Dec 1946).</li>
+        <li>Berubari 1960: not part → Kesavananda 1973: part → LIC 1995: part.</li>
+        <li>Amendable under Art 368, not its basic features.</li>
+        <li>Not enforceable; gives or removes no power.</li>
+        <li>Justice from Russia; L-E-F from France.</li>
+      </ul>
+      <h3>Emergency</h3>
+      <ul>
+        <li>Art 358: Art 19 off automatically, war or external aggression only.</li>
+        <li>Art 359: President suspends court access for named rights.</li>
+        <li>Never 20 and 21 (44th Amdt, 1978).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Fundamental Rights</h3>
+      <ul>
+        <li>Part III, Arts 12–35. Six rights: E F E R C C.</li>
+        <li>Equality 14–18 · Freedom 19–22 · Exploitation 23–24 · Religion 25–28 · Culture 29–30 · Remedies 32.</li>
+        <li>Property (31, 19(1)(f)) gone in 1978 → Art 300A.</li>
+        <li>21A: education 6–14, 86th Amdt 2002.</li>
+        <li>Citizens only: 15, 16, 19, 29, 30.</li>
+        <li>Co-operatives in 19(1)(c): 97th Amdt 2011.</li>
+      </ul>
+      <h3>Writs</h3>
+      <ul>
+        <li>HC: body; also private persons.</li>
+        <li>M: “we command”; not President, Governors, private persons.</li>
+        <li>P prevents; C cures.</li>
+        <li>QW: “by what authority”; public offices.</li>
+        <li>Art 32 is a FR, rights only; Art 226 wider.</li>
+      </ul>
+      <h3>Cases</h3>
+      <ul>
+        <li>Gopalan 50 · Golaknath 67 · Kesavananda 73 · Maneka 78 · Indra Sawhney 92 · Puttaswamy 17.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="folio"><span>Revision sheet</span><span>14</span></div>
+</section>
+
+<!-- ===================== ANSWERS ===================== -->
+<section class="page">
+  <div class="kicker">Answers</div>
+  <h2>Check yourself</h2>
+  <ol class="answers">
+    <li>Source (We, the people of India); nature of the State; objectives; date of adoption.</li>
+    <li>Socialist, Secular, Integrity.</li>
+    <li>Social, economic, political. From the Russian Revolution.</li>
+    <li>Thought, expression, belief, faith, worship.</li>
+    <li>Is the Preamble part of the Constitution? Berubari: no. Kesavananda Bharati: yes.</li>
+    <li>False. The Preamble cannot be enforced in a court on its own.</li>
+  </ol>
+  <p class="small"><b>UPSC-style, Chapter 1:</b> (b). Statement 2 is wrong: the Preamble neither gives nor takes away the legislature's power.</p>
+  <ol class="answers" start="7">
+    <li>Equality 14–18, Freedom 19–22, against Exploitation 23–24, Religion 25–28, Culture and education 29–30, Remedies 32.</li>
+    <li>15, 16, 19, 29, 30.</li>
+    <li>Articles 20 and 21; the 44th Amendment, 1978.</li>
+    <li>Habeas corpus.</li>
+    <li>Certiorari (prohibition is used before the order is passed).</li>
+    <li>The procedure must be fair, just and reasonable, not just any procedure set by law.</li>
+    <li>Article 300A; a constitutional (legal) right, not a Fundamental Right.</li>
+  </ol>
+  <p class="small"><b>UPSC-style, Chapter 2:</b> (b). Articles 15 and 30 are for citizens only; Article 21 covers every person.</p>
+  <div class="box note" style="margin-top:4mm"><span class="tag">Got three or more wrong?</span>That's normal on a first pass. Reread only the pages those questions came from, then try again on Day 3.</div>
+  <div class="folio"><span>Answers</span><span>15</span></div>
+</section>
+
+<!-- ===================== BACK COVER ===================== -->
+<section class="page cover">
+  <div class="inner">
+    <div class="brandline">Aspiran · Revision Notes</div>
+    <p style="font:800 16pt/1.25 Martel,serif;color:#FFF6EA;margin-top:10mm">Read your main book once.<br>Revise from this one, again and again.</p>
+    <ul style="color:#F6E2C9;font:500 9pt/1.6 Inter,sans-serif;margin-top:8mm;padding-left:4mm">
+      <li>The whole GS2 Polity syllabus in about 140 pages</li>
+      <li>Diagrams that show how each part fits together</li>
+      <li>Recall questions and UPSC-style practice in every chapter</li>
+      <li>English and Hindi on facing pages</li>
+      <li>A QR code in every chapter for free practice and audio in the Aspiran app</li>
+    </ul>
+    <p style="color:#F6E2C9;font:400 8.4pt/1.5 Inter,sans-serif;margin-top:8mm;max-width:95mm">Aspiran is a study app for UPSC aspirants: small groups that revise together, daily current-affairs cards, practice that remembers what you got wrong, and Chotu, an AI study buddy.</p>
+  </div>
+  <div style="position:absolute;left:12.5mm;bottom:14mm;display:flex;gap:4mm;align-items:center">
+    <div class="qr" data-qr="https://aspiran.in/?src=book-polity-back" style="width:22mm;height:22mm;background:#FFF6EA;border-radius:2mm;padding:1.5mm"></div>
+    <div style="font:600 8.5pt Inter,sans-serif;color:#F6E2C9">aspiran.in<br><span style="font-weight:400;opacity:.8">Scan for the app</span></div>
+  </div>
+  <div style="position:absolute;right:12.5mm;bottom:14mm;font:800 16pt Martel,serif;color:#FFF6EA">Aspiran</div>
+</section>
+
+<script>
+document.querySelectorAll('[data-qr]').forEach(function(el){
+  try{
+    var q = qrcode(0,'M'); q.addData(el.getAttribute('data-qr')); q.make();
+    el.innerHTML = q.createSvgTag({cellSize:4, margin:0, scalable:true});
+    var s = el.querySelector('svg'); if(s){s.style.width='100%';s.style.height='100%';}
+  }catch(e){ el.textContent=''; }
+});
+</script>
+</body>
+</html>
