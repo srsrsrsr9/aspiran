@@ -19,10 +19,10 @@
 export interface Friend { id: string; name: string; color: string; bio: string }
 
 export const FRIENDS: Friend[] = [
-  { id: "friend:meera", name: "Meera · AI", color: "#b5543c", bio: "AI study friend. Hosts the answer-writing hours and shares Mains writing tips." },
-  { id: "friend:arjun", name: "Arjun · AI", color: "#3f51b5", bio: "AI study friend. Suggests a small morning block and a short close to the day." },
-  { id: "friend:ira", name: "Ira · AI", color: "#2e7d32", bio: "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society." },
-  { id: "friend:kabir", name: "Kabir · AI", color: "#c98a12", bio: "AI study friend. Drops a quick question most days and the answer later." },
+  { id: "friend:meera", name: "Meera · study helper", color: "#b5543c", bio: "Study helper. Hosts the answer-writing hours and shares Mains writing tips." },
+  { id: "friend:arjun", name: "Arjun · study helper", color: "#3f51b5", bio: "Study helper. Suggests a small morning block and a short close to the day." },
+  { id: "friend:ira", name: "Ira · study helper", color: "#2e7d32", bio: "Study helper. Posts one GS1 note a day: history, art and culture, geography, society." },
+  { id: "friend:kabir", name: "Kabir · study helper", color: "#c98a12", bio: "Study helper. Drops a quick question most days and the answer later." },
 ];
 const F = Object.fromEntries(FRIENDS.map((f) => [f.id.slice(7), f])) as Record<"meera" | "arjun" | "ira" | "kabir", Friend>;
 

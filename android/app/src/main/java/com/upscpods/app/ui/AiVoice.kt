@@ -65,7 +65,7 @@ fun AiVoiceAudio(data: JsonObject, lang: String, url: (String) -> String): Boole
     FlatCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(if (hi) "सुनें" else "Listen", style = MaterialTheme.typography.titleSmall)
-            Text(listOfNotNull(if (hi) "AI आवाज़" else "AI voice", s(a["voice"]), "${maxOf(1, Math.round(secs / 60))} min").joinToString(" · "),
+            Text(listOfNotNull("${maxOf(1, Math.round(secs / 60))} min").joinToString(" · "),
                 style = MaterialTheme.typography.bodySmall)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
                 Button(onClick = { if (playing) player.pause() else { if (ended) { player.seekTo(0); ended = false }; player.play() } }) {
@@ -80,7 +80,7 @@ fun AiVoiceAudio(data: JsonObject, lang: String, url: (String) -> String): Boole
                 }
             }
             if (ended) Text(if (hi) "पूरा हुआ।" else "The end.", style = MaterialTheme.typography.bodySmall)
-            Text(if (hi) "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं। पूरा पाठ इसी स्क्रीन पर है।" else "Read by an AI voice, not a person. The full text is on this screen.",
+            Text(if (hi) "पूरा पाठ इसी स्क्रीन पर है।" else "The full text is on this screen.",
                 style = MaterialTheme.typography.bodySmall)
         }
     }

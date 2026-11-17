@@ -205,7 +205,7 @@ export default {
       const id = String(b.messageId ?? "");
       if (!/^[\w-]{8,64}$/.test(id)) return bad("messageId is required");
       await ensureSchema(env);
-      await env.DB.prepare("INSERT INTO reports (kind, pod_id, message_id, author, text, reason, created_at) VALUES ('chotu', 'chotu', ?, 'Chotu · AI', ?, ?, ?)")
+      await env.DB.prepare("INSERT INTO reports (kind, pod_id, message_id, author, text, reason, created_at) VALUES ('chotu', 'chotu', ?, 'Chotu', ?, ?, ?)")
         .bind(id, String(b.text ?? "").slice(0, 2000), String(b.reason ?? "Reported").slice(0, 300), new Date().toISOString()).run();
       return json({ ok: true });
     }

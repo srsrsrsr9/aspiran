@@ -24,7 +24,7 @@ addEventListener("hashchange", stop);
  */
 export function listen(req, { hi = false } = {}) {
   if (!C || !C.voiceOn() || !C.canListen() || !req?.who || !(req.line || (req.text && req.sig))) return null;
-  const idle = hi ? "🔊 सुनें · AI आवाज़" : "🔊 Listen · AI voice", busy = hi ? "आवाज़ बन रही है…" : "Getting the voice…", stopL = hi ? "■ रोकें · AI आवाज़" : "■ Stop · AI voice";
+  const idle = hi ? "🔊 सुनें" : "🔊 Listen", busy = hi ? "आवाज़ बन रही है…" : "Getting the voice…", stopL = hi ? "■ रोकें" : "■ Stop";
   const b = C.h("button.ghost.small.voice-btn", { type: "button", "aria-pressed": "false" }, idle);
   b.setIdle = () => { b.textContent = idle; b.setAttribute("aria-pressed", "false"); b.disabled = false; };
   b.addEventListener("click", async () => {

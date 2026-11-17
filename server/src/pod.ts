@@ -48,7 +48,7 @@ type Kind = "chat" | "ping" | "ritual" | "system" | "favour" | "offer" | "chotu"
 const HUMAN_KINDS = ["chat", "favour", "offer", "answer"];
 /** An Answer hour answer can be a full 250 words. */
 const ANSWER_LEN = 2500;
-const CHOTU = "Chotu · AI";
+const CHOTU = "Chotu";
 const HOST_SLOTS = ["goal", "answer_hour", "quiz", "wins"];
 const CHOTU_REPLIES_PER_DAY = 20;
 

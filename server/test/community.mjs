@@ -247,7 +247,7 @@ step("mock score band: anonymous, hidden under 30 people, a band and never a ran
 assert.equal((await post("/chotu/report", { reason: "wrong" })).status, 400);
 assert.equal((await post("/chotu/report", { messageId: rid(), reason: "Wrong facts", text: "Article 21 is about trade." })).data.ok, true);
 const chotuReports = (await admin("reports?kind=chotu")).data.reports;
-assert.ok(chotuReports.some((r) => r.reason === "Wrong facts" && r.author === "Chotu · AI" && !r.member_id), "in the moderation queue, with no member id");
+assert.ok(chotuReports.some((r) => r.reason === "Wrong facts" && r.author === "Chotu" && !r.member_id), "in the moderation queue, with no member id");
 step("Chotu replies can be reported to the safety queue");
 
 // --- Plus: off by default, test mode only -----------------------------------------------------------

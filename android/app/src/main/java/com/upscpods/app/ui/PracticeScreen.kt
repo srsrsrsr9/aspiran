@@ -123,7 +123,7 @@ fun PracticeTab(
         onOpenStudio?.let {
             PracticeCard(
                 title = "Answer Studio",
-                detail = "A timed answer, 7 or 11 minutes, on paper. Mark it yourself, get a second opinion from AI, then rewrite it with one fix.",
+                detail = "A timed answer, 7 or 11 minutes, on paper. Mark it yourself, get a second opinion, then rewrite it with one fix.",
                 done = false,
                 filled = false,
                 onStart = it,
@@ -178,7 +178,7 @@ fun PracticeTab(
 
         PracticeCard(
             title = "Mock interview",
-            detail = if (interviewReady) "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." else "Opens once the interview questions are approved.",
+            detail = if (interviewReady) "A board of five, questions from your own DAF. Answer aloud or type; a board member can ask a follow-up." else "Opens once the interview questions are approved.",
             done = false,
             filled = false,
             onStart = onOpenInterview,

@@ -285,7 +285,7 @@ fun WalkScripts(library: ContentLibrary?, hindi: Boolean, onOpen: (String) -> Un
     val all = remember(library?.items, hindi) { library?.data("walk-script").orEmpty().sortedBy { it["topic"].biText(hindi) } }
     if (all.isEmpty()) return
     Text("Guided walks", style = MaterialTheme.typography.titleMedium)
-    Text(if (all.any { it["audio"] != null }) "One topic, one question, about six minutes. An AI voice reads it; you answer aloud."
+    Text(if (all.any { it["audio"] != null }) "One topic, one question, about six minutes. You listen, then answer aloud."
         else "One topic, one question, about six minutes. The phone reads it; you answer aloud.", style = MaterialTheme.typography.bodySmall)
     all.forEach { d -> Row2(d["topic"].biText(hindi) ?: "", "${d.str("minutes") ?: "6"} min") { onOpen(d.str("id") ?: "") } }
 }

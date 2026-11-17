@@ -40,7 +40,7 @@ for (const [text, key, lang] of [
 ]) {
   out = await (await ask(text, { language: lang })).json();
   assert.equal(out.ai, true);
-  assert.equal(out.who, "Jeetu · AI");
+  assert.equal(out.who, "Jeetu");
   assert.equal(out.model, undefined, "no model is asked");
   assert.equal(out.fixed, quiet ? "quiet" : key, text);
   if (lang === "Hindi") assert.match(out.reply, /[ऀ-ॿ]/);
@@ -53,7 +53,7 @@ out = await r.json();
 if (quiet) assert.equal(out.fixed, "quiet");
 else {
   assert.equal(out.fixed, undefined);
-  if (r.status === 200) { assert.ok(out.reply && out.ai === true && out.who === "Jeetu · AI"); step("Jeetu answered a method question (" + out.model + ")"); }
+  if (r.status === 200) { assert.ok(out.reply && out.ai === true && out.who === "Jeetu"); step("Jeetu answered a method question (" + out.model + ")"); }
   else { assert.ok([502, 503].includes(r.status) && out.error); step("without a working AI key Jeetu says so (" + r.status + ")"); }
 }
 
@@ -62,7 +62,7 @@ assert.equal(r.status, 200);
 r = await post({ messageId: "x" }, "/jeetu/report");
 assert.equal(r.status, 400);
 const { reports } = await (await fetch(BASE + "/admin/api/reports?kind=chotu", { headers: editor })).json();
-assert.ok(reports.some((x) => x.author === "Jeetu · AI" && x.message_id === "jeetu-test-reply-1"));
+assert.ok(reports.some((x) => x.author === "Jeetu" && x.message_id === "jeetu-test-reply-1"));
 step("a Jeetu reply can be reported, and lands in the Chotu reports queue");
 
 // Off: /jeetu says so, /config tells the apps, and switching back on restores him.

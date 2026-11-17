@@ -190,7 +190,7 @@ fun OnboardingScreen(
                                 modifier = Modifier.fillMaxWidth(),
                             )
                             ChotuSays(
-                                "I'm ${Brand.MASCOT_SHORT}, the app's AI. I keep your pod company, explain the news simply, and stay quiet unless you ask. " +
+                                "I'm ${Brand.MASCOT_SHORT}, the app's study buddy. I keep your pod company, explain the news simply, and stay quiet unless you ask. " +
                                     "I can be wrong, I'm not a counsellor, and I never predict ranks.",
                                 ChotuMood.PROUD,
                             )

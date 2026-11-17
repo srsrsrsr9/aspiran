@@ -65,12 +65,12 @@ const UI = {
     keepLine: (n, t) => n ? `Your ${n} ${t} cards are saved in this browser. Join free and they go straight into your Review, timed to come back just before you'd forget them.`
       : `Your answers on ${t} are saved in this browser. Join free and carry on from here.`,
     libLine: "Inside the app: 2,000+ practice questions, 250+ short videos, 20+ hours of recorded notes, 60 interactives and 11 past papers. Most of it in Hindi too.",
-    freeLine: "Free stays free: your pod, the daily review, Chai cards, practice and Chotu · AI. Plus adds unlimited answer marking and all mocks.",
+    freeLine: "Free stays free: your pod, the daily review, Chai cards, practice and Chotu. Plus adds unlimited answer marking and all mocks.",
     noCard: "Google sign-in. No card, no phone number.", tellHonest: (n) => `Tell us honestly (${n} questions, optional)`, nextTopic: "Try the next topic",
     home: "Home", allTopics: "All topics", startHere: "Start here", fullest: "The fullest one: real past questions, two short videos and two games.",
     pickOne: "Eight Polity topics, free, no account. Each has a 15-minute route and a whole-topic route.",
     preview: "Free preview", joinLine: "Join free for the whole library: 2,000+ practice questions, 250+ short videos, 20+ hours of recorded notes, and a pod of your own.", joinShort: "Join free →",
-    flexTitle: "See it and hear it", flexLine: "One of 250+ short videos in the app, and one of its recorded notes (20+ hours in all). Nothing plays until you tap.", watch: "Watch", listen: "Listen", aiVoice: "AI voice", aiVoiceNote: "Read by an AI voice, not a person.", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
+    flexTitle: "See it and hear it", flexLine: "One of 250+ short videos in the app, and one of its recorded notes (20+ hours in all). Nothing plays until you tap.", watch: "Watch", listen: "Listen", minShort: (m) => `${m} min`, secShort: (x) => `${x} s`,
     whyAsk: "Why we ask:", tourLead: "All of this is in the app today. Join free to use it; no card needed.",
     loading: "Loading the topic…", notOpen: "This topic isn't open yet.", notOpenMore: "In the meantime, the Free Shelf works without an account.",
     shelf: "Open the Free Shelf", back: "Back", next: "Next", resume: "Carry on where you left off", of: (i, n) => `${i}/${n}`,
@@ -114,12 +114,12 @@ const UI = {
     keepLine: (n, t) => n ? `${t} के आपके ${n} cards इस browser में सहेजे गए हैं। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे, ठीक भूलने से पहले लौटने के लिए।`
       : `${t} पर आपके जवाब इस browser में सहेजे गए हैं। मुफ़्त जुड़िए और यहीं से आगे बढ़िए।`,
     libLine: "App के अंदर: 2,000+ अभ्यास सवाल, 250+ छोटे video, 20+ घंटे के रिकॉर्ड किए notes, 60 interactives और 11 पिछले papers। ज़्यादातर हिंदी में भी।",
-    freeLine: "मुफ़्त हमेशा मुफ़्त: आपका pod, रोज़ का review, Chai cards, अभ्यास और Chotu · AI। Plus में असीमित उत्तर-जाँच और सारे mock जुड़ते हैं।",
+    freeLine: "मुफ़्त हमेशा मुफ़्त: आपका pod, रोज़ का review, Chai cards, अभ्यास और Chotu। Plus में असीमित उत्तर-जाँच और सारे mock जुड़ते हैं।",
     noCard: "Google से sign-in। न card, न फ़ोन नंबर।", tellHonest: (n) => `हमें सच बताइए (${n} सवाल, वैकल्पिक)`, nextTopic: "अगला topic आज़माइए",
     home: "होम", allTopics: "सभी topics", startHere: "यहाँ से शुरू कीजिए", fullest: "सबसे भरा-पूरा: असली PYQ, दो छोटे video और दो खेल।",
     pickOne: "Polity के आठ topics, मुफ़्त, बिना account। हर एक में 15 मिनट का रास्ता और पूरा topic।",
     preview: "मुफ़्त झलक", joinLine: "पूरी library के लिए मुफ़्त जुड़िए: 2,000+ अभ्यास सवाल, 250+ छोटे video, 20+ घंटे के रिकॉर्ड किए notes, और आपका अपना pod।", joinShort: "मुफ़्त जुड़िए →",
-    flexTitle: "देखिए और सुनिए", flexLine: "App के 250+ छोटे video में से एक, और उसके रिकॉर्ड किए notes में से एक (कुल 20+ घंटे)। टैप करने तक कुछ नहीं चलता।", watch: "देखिए", listen: "सुनिए", aiVoice: "AI आवाज़", aiVoiceNote: "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं।", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
+    flexTitle: "देखिए और सुनिए", flexLine: "App के 250+ छोटे video में से एक, और उसके रिकॉर्ड किए notes में से एक (कुल 20+ घंटे)। टैप करने तक कुछ नहीं चलता।", watch: "देखिए", listen: "सुनिए", minShort: (m) => `${m} मिनट`, secShort: (x) => `${x} से.`,
     whyAsk: "हम क्यों पूछते हैं:", tourLead: "यह सब आज app में है। इस्तेमाल के लिए मुफ़्त जुड़िए; कोई card नहीं चाहिए।",
     loading: "Topic खुल रहा है…", notOpen: "यह topic अभी खुला नहीं है।", notOpenMore: "तब तक Free Shelf बिना account के चलता है।",
     shelf: "Free Shelf खोलिए", back: "पीछे", next: "आगे", resume: "जहाँ छोड़ा था, वहीं से", of: (i, n) => `${i}/${n}`,
@@ -337,9 +337,9 @@ function flex() {
     h("div.try-flex-grid",
       v && vbox,
       a && h("div", h("strong", u("listen") + " · " + L(f.audio.title)),
-        h("div.small.muted", [u("aiVoice"), a.voice, u("minShort", Math.max(1, Math.round((a.seconds ?? 0) / 60)))].filter(Boolean).join(" · ")),
+        h("div.small.muted", [u("minShort", Math.max(1, Math.round((a.seconds ?? 0) / 60)))].filter(Boolean).join(" · ")),
         h("audio", { controls: true, preload: "none", src: a.url, style: { width: "100%", marginTop: "8px" }, onplay: () => send("flex", "audio", null, true) }),
-        h("p.small.muted", u("aiVoiceNote")))));
+        null)));
 }
 
 // --- The frame around every screen ------------------------------------------------------------------------------------

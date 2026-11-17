@@ -540,7 +540,7 @@ async function aiFirstAnswer(env: Env, inst: Institute, doubtId: string, text: s
     ]);
     const answer = r.text.trim().slice(0, 3000);
     if (!answer) return null;
-    await env.DB.prepare("INSERT INTO inst_doubt_replies (id, doubt_id, institute_id, member_id, name, role, text, at) VALUES (?, ?, ?, NULL, 'Aspiran AI', 'ai', ?, ?)")
+    await env.DB.prepare("INSERT INTO inst_doubt_replies (id, doubt_id, institute_id, member_id, name, role, text, at) VALUES (?, ?, ?, NULL, 'Aspiran', 'ai', ?, ?)")
       .bind(newId("ir"), doubtId, inst.id, answer, now()).run();
     return answer;
   } catch { return null; } // no key, switched off or down: the teacher answers

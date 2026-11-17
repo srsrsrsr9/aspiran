@@ -39,7 +39,7 @@ function connect(podId, member, name) {
 const friendMsg = (e) => e.type === "msg" && e.message.memberId.startsWith("friend:");
 
 // --- The rules, without a server ---------------------------------------------------------------------------
-for (const f of FRIENDS) { assert.ok(f.name.endsWith(" · AI"), f.name); assert.ok(f.id.startsWith("friend:")); assert.match(f.color, /^#[0-9a-f]{6}$/i); }
+for (const f of FRIENDS) { assert.ok(f.name.endsWith(" · study helper"), f.name); assert.ok(f.id.startsWith("friend:")); assert.match(f.color, /^#[0-9a-f]{6}$/i); }
 assert.equal(friendLevel(0), "full"); assert.equal(friendLevel(2), "full"); assert.equal(friendLevel(3), "light"); assert.equal(friendLevel(5), "light"); assert.equal(friendLevel(6), "rituals");
 const q = { topic: "Polity", question: "Which article?", options: ["14", "19", "21", "32"], answerIndex: 2, explanation: "Article 21." };
 const allDay = (level, weekday) => { const out = []; for (let m = 0; m < 48 * 30; m += 30) { const hm = `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`; out.push(...friendPosts(hm, weekday, level, 20000, q).map((p) => ({ hm, ...p }))); } return out; };
@@ -47,7 +47,7 @@ for (const level of ["full", "light", "rituals"]) for (let wd = 0; wd < 7; wd++)
   const posts = allDay(level, wd);
   assert.ok(posts.every((p) => p.hm >= "07:00" && p.hm < "23:30"), "quiet hours 23:30-07:00");
   assert.ok(posts.every((p) => !/\b(rank|AIR|cut-?off|marks|cleared (prelims|mains|the exam)|selected|result)\b/i.test(p.text)), "never ranks or results");
-  assert.ok(posts.every((p) => p.friend.name.endsWith("· AI")));
+  assert.ok(posts.every((p) => p.friend.name.endsWith("· study helper")));
 }
 assert.ok(allDay("full", 4).length > allDay("light", 4).length && allDay("light", 4).length > allDay("rituals", 4).length, "fewer posts as more people join");
 assert.equal(allDay("rituals", 4).length, 0, "rituals only: nothing on a plain Thursday");
@@ -74,7 +74,7 @@ const night = (await admin("jobs/run", { job: "host", at: ist(2, "23:45") })).da
 assert.equal(night.friendPosts, 0, "nothing in quiet hours");
 await admin("jobs/run", { job: "host", at: ist(2, "07:00") });
 const morning = await asha.next(friendMsg);
-assert.equal(morning.message.memberId, "friend:arjun"); assert.equal(morning.message.name, "Arjun · AI"); assert.equal(morning.message.kind, "friend");
+assert.equal(morning.message.memberId, "friend:arjun"); assert.equal(morning.message.name, "Arjun · study helper"); assert.equal(morning.message.kind, "friend");
 await admin("jobs/run", { job: "host", at: ist(2, "07:00") });
 await assert.rejects(asha.next(friendMsg, 1200), "each slot posts once");
 await admin("jobs/run", { job: "host", at: ist(2, "16:30") });
@@ -88,7 +88,7 @@ assert.equal(me.humans, 1, "friends are never counted");
 asha.send({ type: "thanks", id: morning.message.id });
 await assert.rejects(asha.next((e) => e.type === "thanked", 1000), "AI posts can't be thanked");
 const hist = (await connect(pod1.podId, m1, "Asha")); const h = await hist.next((e) => e.type === "history");
-assert.ok(!h.online.some((n) => / · AI$/.test(n)), "never in presence");
+assert.ok(!h.online.some((n) => / · study helper$/.test(n)), "never in presence");
 hist.ws.close();
 step("never counted, thanked or shown as online");
 

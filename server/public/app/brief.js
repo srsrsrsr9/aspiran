@@ -161,7 +161,7 @@ export function viewCsat(arg) {
 export function walkScripts() {
   const all = lib("walk-script").sort((a, b) => T(a.topic).localeCompare(T(b.topic)));
   if (!all.length) return null;
-  return h("div", h("h2", "Guided walks"), h("p.small.muted", all.some((d) => d.audio) ? "One topic, one question, about six minutes. An AI voice reads it; you answer aloud." : "One topic, one question, about six minutes. The device voice reads it; you answer aloud."),
+  return h("div", h("h2", "Guided walks"), h("p.small.muted", all.some((d) => d.audio) ? "One topic, one question, about six minutes. You listen, then answer aloud." : "One topic, one question, about six minutes. The device voice reads it; you answer aloud."),
     all.map((d) => h("a.card.link", { href: "#walk/" + d.id }, h("div.row.between", h("div", h("strong", T(d.topic)), h("div.small.muted", `${d.minutes ?? 6} min`)), h("span", "→")))));
 }
 export function viewWalkScript(id) {
@@ -329,7 +329,7 @@ export function viewWatch(arg) {
       const title = w.series ? (hi && w.titleHi) || w.title : `Current affairs, ${weekDates(w.week)}`;
       const seen = C.store.get("videosSeen", {});
       put(box, back("#watch", "Videos"), h("h1", title),
-        h("p.small.muted", `${w.episodes.length} short videos, under a minute each. Two AI voices. Sound starts off; captions are on.`),
+        h("p.small.muted", `${w.episodes.length} short videos, under a minute each. Sound starts off; captions are on.`),
         w.episodes.map((e) => {
           const src = w.base + e.mp4;
           const media = e.free

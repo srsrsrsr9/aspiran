@@ -80,7 +80,7 @@ object Jeetu {
         }
     }
 
-    const val CARE_REPLY = "That sounds really heavy, and I'm only an AI. Please talk to someone you trust today. In an emergency, call 112."
+    const val CARE_REPLY = "That sounds really heavy, and I'm only a program, not a person. Please talk to someone you trust today. In an emergency, call 112."
     const val QUIET_REPLY = "It's late, beta. Close the day and sleep. I'm back at seven."
 }
 

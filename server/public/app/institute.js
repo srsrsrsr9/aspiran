@@ -195,7 +195,7 @@ function doubtsView(box) {
     }
     const d = await api("/inst/doubts", { text: text.value, nodeId: topic.value || null, photo: pic });
     if (d.held) { put(box, C.careBox(), h("button", { onclick: () => doubtsView(box) }, "Back to doubts")); return; }
-    C.toast(d.aiAnswered ? "Sent. Aspiran AI left a first answer; your teacher will follow." : "Sent to your teachers."); doubtsView(box);
+    C.toast(d.aiAnswered ? "Sent. Aspiran left a first answer; your teacher will follow." : "Sent to your teachers."); doubtsView(box);
   });
   api("/inst/doubts").then(({ doubts }) => put(box,
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Ask a doubt"), text, h("div.row", { style: { marginTop: "8px" } }, topic, photo), h("button.primary", { style: { marginTop: "8px" }, onclick: ask }, "Send to my teachers")),
@@ -210,8 +210,8 @@ function doubtCard(d) {
     let img = null;
     if (d.photo) { const r = await fetch(`/inst/doubts/${d.id}/photo`, { headers: { authorization: "Bearer " + (await Auth.getToken()) } }); if (r.ok) img = h("img", { src: URL.createObjectURL(await r.blob()), alt: "Your photo", style: { maxWidth: "100%", borderRadius: "8px" } }); }
     const reply = h("textarea", { rows: 2, maxLength: 3000, placeholder: "Still unclear? Ask again here." });
-    put(more, img, replies.map((r) => h("div.msg", h("div.row", h("strong", r.role === "student" ? "You" : r.name), r.role === "ai" && h("span.ai-tag", "AI"), r.role === "teacher" && h("span.tag", "teacher"), h("span.small.muted", when(r.at))),
-      h("div", r.text), r.role === "ai" && h("p.small.muted", "A first answer from Aspiran AI. Your teacher checks doubts too."))),
+    put(more, img, replies.map((r) => h("div.msg", h("div.row", h("strong", r.role === "student" ? "You" : r.name), r.role === "ai" && h("span.ai-tag", "first answer"), r.role === "teacher" && h("span.tag", "teacher"), h("span.small.muted", when(r.at))),
+      h("div", r.text), r.role === "ai" && h("p.small.muted", "A quick first answer from Aspiran. Your teacher checks doubts too."))),
       h("div.row", h("div.grow", reply), h("button", { onclick: act(async () => { const x = await api(`/inst/doubts/${d.id}/reply`, { text: reply.value }); if (x.held) { put(more, C.careBox()); return; } d.status = "open"; open(); }) }, "Send")),
       d.status !== "resolved" ? h("button.ghost.small", { onclick: act(async () => { await api(`/inst/doubts/${d.id}/status`, { status: "resolved" }); d.status = "resolved"; C.toast("Marked as cleared."); }) }, "This is cleared up") : null);
   });

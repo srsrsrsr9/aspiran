@@ -147,7 +147,7 @@ fun JeetuPortrait(size: Dp = 44.dp, full: Boolean = false) {
 @Composable
 fun JeetuLabel(size: Dp = 24.dp) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        JeetuPortrait(size); Text("  Jeetu · AI", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
+        JeetuPortrait(size); Text("  Jeetu", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
     }
 }
 
@@ -161,7 +161,7 @@ fun JeetuNote(key: String, hindi: Boolean = Jeetu.hindi, text: String? = null) {
         Row(Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
             JeetuPortrait(40.dp)
             Column(Modifier.padding(start = 12.dp)) {
-                Text("Jeetu · AI", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Jeetu", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(words, style = MaterialTheme.typography.bodyLarge)
                 // His scripted lines can be heard: by key, so the server speaks only its own copy of the words.
                 if (text == null) ListenButton(VoiceAsk("jeetu", line = key, lang = if (hindi) "hi" else "en"), hindi)
@@ -180,9 +180,9 @@ fun ListenButton(ask: VoiceAsk, hindi: Boolean = Jeetu.hindi) {
     val context = LocalContext.current
     val key = remember(ask) { ask.key }
     val label = when (key) {
-        Voice.playing -> if (hindi) "■ रोकें · AI आवाज़" else "■ Stop · AI voice"
+        Voice.playing -> if (hindi) "■ रोकें" else "■ Stop"
         Voice.loading -> if (hindi) "आवाज़ बन रही है…" else "Getting the voice…"
-        else -> if (hindi) "🔊 सुनें · AI आवाज़" else "🔊 Listen · AI voice"
+        else -> if (hindi) "🔊 सुनें" else "🔊 Listen"
     }
     Column {
         TextButton(onClick = { Voice.toggle(context, ask) }, enabled = Voice.loading != key) { Text(label) }
@@ -202,7 +202,7 @@ fun JeetuWeekly(rightDays: Map<String, List<Int>>, onAsk: (() -> Unit)?) {
                 JeetuPortrait(40.dp)
                 Column(Modifier.padding(start = 12.dp)) {
                     Text(if (Jeetu.hindi) "इस हफ़्ते की याद" else "Your week of recall", style = MaterialTheme.typography.titleSmall)
-                    Text("Jeetu · AI", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Jeetu", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
             Text(Jeetu.weeklyText(rightDays), style = MaterialTheme.typography.bodyLarge)
@@ -219,13 +219,13 @@ fun JeetuDoubleAct() {
     FlatCard(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             @Composable fun chotu(tone: KulhadTone, line: String) = Row(verticalAlignment = Alignment.CenterVertically) {
-                Kulhad(tone, 24.dp); Text("  Chotu · AI", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge); Text(line, style = MaterialTheme.typography.bodyMedium)
+                Kulhad(tone, 24.dp); Text("  Chotu", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge); Text(line, style = MaterialTheme.typography.bodyMedium)
             }
             val l = if (hi) "hi" else "en"
             chotu(KulhadTone.WARM, if (hi) "Jeetu भैया… एक स्ट्रीक मिल सकती है? बस छोटी सी?" else "Jeetu bhaiya… can I have a streak? Just a tiny one?")
             ListenButton(VoiceAsk("chotu", line = "streakAsk", lang = l), hi)
             Row(verticalAlignment = Alignment.CenterVertically) {
-                JeetuPortrait(24.dp); Text("  Jeetu · AI", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge)
+                JeetuPortrait(24.dp); Text("  Jeetu", Modifier.width(110.dp), style = MaterialTheme.typography.labelLarge)
                 Text(if (hi) "नहीं। चाय पियो।" else "No. Drink your chai.", style = MaterialTheme.typography.bodyMedium)
             }
             ListenButton(VoiceAsk("jeetu", line = "streakNo", lang = l), hi)
@@ -250,7 +250,7 @@ fun AskJeetuScreen(client: JeetuClient, onOpenChotu: (() -> Unit)?, onClose: () 
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
                 JeetuPortrait(120.dp, full = true)
-                Text("Jeetu · AI", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
+                Text("Jeetu", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold)
             }
             when {
                 !Jeetu.enabled -> Text(if (hi) "Jeetu अभी चुप है।" else "Jeetu is staying quiet for now.", style = MaterialTheme.typography.bodyLarge)
@@ -285,8 +285,8 @@ fun AskJeetuScreen(client: JeetuClient, onOpenChotu: (() -> Unit)?, onClose: () 
                     Button(onClick = { send(input) }, enabled = input.isNotBlank() && !client.busy, modifier = Modifier.fillMaxWidth()) { Text(if (hi) "भेजें" else "Send") }
                 }
             }
-            Text(if (hi) "Jeetu एक AI है, कोई इंसानी मेंटर नहीं। वह ग़लत हो सकता है, और रैंक, नतीजे या भावनाओं पर बात नहीं करता।"
-                else "Jeetu is an AI, not a human mentor. He can be wrong, and he doesn't talk about ranks, results or feelings: those deserve a real person.",
+            Text(if (hi) "Jeetu ऐप का मेथड कोच है, कोई इंसानी मेंटर नहीं। वह ग़लत हो सकता है, और रैंक, नतीजे या भावनाओं पर बात नहीं करता।"
+                else "Jeetu is the app's method coach, not a human mentor. He can be wrong, and he doesn't talk about ranks, results or feelings: those deserve a real person.",
                 style = MaterialTheme.typography.bodySmall)
             if (onOpenChotu != null) TextButton(onClick = onOpenChotu) { Text(if (hi) "तथ्य या व्याख्या चाहिए? Chotu से पूछें →" else "Need a fact or an explanation? Ask Chotu →") }
         }

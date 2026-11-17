@@ -36,7 +36,9 @@ export const TYPED_EVAL_HOPS: Hop[] = [
 ];
 
 /** Hindi-medium answers: the model that reads and writes Hindi best goes first, typed or photographed. */
-export const HINDI_EVAL_HOPS: Hop[] = [EVAL_HOPS[0], TYPED_EVAL_HOPS[0], ...EVAL_HOPS.slice(1)];
+// Hindi feedback takes about twice the tokens of English: with 1,800 the reply was cut off and couldn't be read (17 Nov 2026).
+const HINDI_TYPED_HOP: Hop = { ...TYPED_EVAL_HOPS[0], extra: { ...TYPED_EVAL_HOPS[0].extra, max_completion_tokens: 4000 }, timeoutMs: 45_000 };
+export const HINDI_EVAL_HOPS: Hop[] = [EVAL_HOPS[0], HINDI_TYPED_HOP, ...EVAL_HOPS.slice(1)];
 
 const DEVANAGARI = /[\u0900-\u097F]/g;
 /** Mostly Devanagari? Then it is a Hindi-medium answer, whatever the app said. */

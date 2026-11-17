@@ -118,7 +118,7 @@ fun RoomsScreen(
                 onBackToPod?.let { TextButton(onClick = it) { Text("← My pod") } }
                 Text("Open rooms", style = MaterialTheme.typography.titleLarge)
                 Text("Join as many as help: your language, where you are, your goal, your optional, your region. " +
-                    "Chotu and the study friends here are AI and always labelled AI.", style = MaterialTheme.typography.bodyMedium)
+                    "Chotu and the study helpers here are not members, and each is tagged.", style = MaterialTheme.typography.bodyMedium)
                 if (rooms.started.isNotEmpty()) Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(12.dp)) {
                         val names = rooms.started.let { if (it.size < 2) it.joinToString() else it.dropLast(1).joinToString(", ") + " and " + it.last() }

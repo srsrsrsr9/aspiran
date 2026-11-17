@@ -372,20 +372,20 @@ function banner() {
     a.link && /^(https:\/\/|\/|#)/.test(a.link) ? h("a", { href: a.link, target: a.link.startsWith("https://") ? "_blank" : null, rel: "noopener" }, "Open") : null);
 }
 
-/** The "Chotu · AI" label: always next to the kulhad, everywhere Chotu appears. */
-const chotuLabel = (tone, size = 28) => h("span.chotu-label", kulhad(tone ?? toneNow({ result: !!resultMode() }), size), h("span", "Chotu · AI"));
-/** Chotu's AI study friends in pods (server/src/friends.ts): always labelled AI, never members, never counted. */
+/** The "Chotu" label: always next to the kulhad, everywhere Chotu appears. No "AI" labels (owner, 17 Nov 2026). */
+const chotuLabel = (tone, size = 28) => h("span.chotu-label", kulhad(tone ?? toneNow({ result: !!resultMode() }), size), h("span", "Chotu"));
+/** Chotu's study friends in pods (server/src/friends.ts): tagged "study helper" and drawn as cups, never members, never counted. */
 const FRIENDS = {
-  "friend:meera": { color: "#b5543c", bio: "AI study friend. Hosts the answer-writing hours and shares Mains writing tips." },
-  "friend:arjun": { color: "#3f51b5", bio: "AI study friend. Suggests a small morning block and a short close to the day." },
-  "friend:ira": { color: "#2e7d32", bio: "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society." },
-  "friend:kabir": { color: "#c98a12", bio: "AI study friend. Drops a quick question most days and the answer later." },
+  "friend:meera": { color: "#b5543c", bio: "Study helper. Hosts the answer-writing hours and shares Mains writing tips." },
+  "friend:arjun": { color: "#3f51b5", bio: "Study helper. Suggests a small morning block and a short close to the day." },
+  "friend:ira": { color: "#2e7d32", bio: "Study helper. Posts one GS1 note a day: history, art and culture, geography, society." },
+  "friend:kabir": { color: "#c98a12", bio: "Study helper. Drops a quick question most days and the answer later." },
 };
 // Older pod messages from before the rename (2 Nov 2026).
-const OLD_FRIENDS = { "friend:pooja": { color: "#2e7d32", bio: "AI study friend." } };
+const OLD_FRIENDS = { "friend:pooja": { color: "#2e7d32", bio: "Study helper." } };
 const isFriend = (m) => String(m.memberId).startsWith("friend:");
 const friendInfo = (id) => FRIENDS[id] ?? OLD_FRIENDS[id];
-const friendLabel = (m, size = 20) => h("span.chotu-label", { title: friendInfo(m.memberId)?.bio ?? "AI study friend" }, kulhad("warm", size, friendInfo(m.memberId)?.color ?? "#888"), h("span", m.name), h("span.tag", "AI"));
+const friendLabel = (m, size = 20) => h("span.chotu-label", { title: friendInfo(m.memberId)?.bio ?? "Study helper" }, kulhad("warm", size, friendInfo(m.memberId)?.color ?? "#888"), h("span", String(m.name ?? "").replace(/ · (AI|study helper)$/, "")), h("span.tag", "study helper"));
 
 let cleanup = [];
 function render() {
@@ -531,9 +531,9 @@ function onboarding() {
         h("details", h("summary.small", hi ? "हम क्या रखते हैं" : "What we keep"),
           h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). Which screens you open and what you tap go to PostHog, an analytics service, with every word on the screen hidden; you can switch that off in Me → Privacy. ",
             h("a", { href: "/legal/privacy.html", target: "_blank" }, "Privacy policy"), "."))),
-      h("div.card", h("div.row", kulhad("warm", 48), h("div", h("strong", "Chotu"), " ", h("span.ai-tag", "Chotu · AI"),
-        h("p.small", { style: { margin: "4px 0 0" } }, hi ? "आपका स्टडी साथी एक AI है। वह रैंक या नतीजे नहीं बताता, और मुश्किल घड़ी में असली लोगों तक पहुँचाता है।"
-          : "Your study buddy is an AI. It explains, quizzes and plans a day of at most three things. It doesn't predict ranks or results, and if things feel heavy it points you to real people.")))),
+      h("div.card", h("div.row", kulhad("warm", 48), h("div", h("strong", "Chotu"), " ", h("span.ai-tag", "study buddy"),
+        h("p.small", { style: { margin: "4px 0 0" } }, hi ? "छोटू आपका स्टडी साथी है, कोई इंसान नहीं। वह रैंक या नतीजे नहीं बताता, और मुश्किल घड़ी में असली लोगों तक पहुँचाता है।"
+          : "Chotu is your study buddy, not a person. It explains, quizzes and plans a day of at most three things. It doesn't predict ranks or results, and if things feel heavy it points you to real people.")))),
       h("div.center", go)];
     setTimeout(() => name.focus(), 0);
   }
@@ -752,7 +752,7 @@ function viewChai(arg) {
       examOpen,
       h("hr", { style: { border: 0, borderTop: "1px solid var(--line)", margin: "16px 0" } }),
       h("div.small.muted", (it.sources ?? []).map((s, k) => [k ? " · " : "Source: ", h("a", { href: s.url, target: "_blank", rel: "noopener noreferrer" }, s.name)])),
-      h("div.small.muted", it.writtenBy ? "Written by our editors" : "Summary drafted by AI from these sources"),
+      h("div.small.muted", it.writtenBy ? "Written by our editors" : "Summary drawn from these sources"),
       h("div.small", t.checkedBy ? `Checked by ${t.checkedBy}, ${t.checkedOn} ✓` : "Not yet checked by an editor"),
       h("div.row", { style: { marginTop: "8px" } },
         h("button.ghost", { onclick: () => { const list = store.get("saved", []).filter((x) => x.id !== it.id); if (!isSaved) list.push({ ...it, savedOn: today() }); store.set("saved", list); render(); } }, isSaved ? "✓ Saved for revision" : "Save for revision"),
@@ -855,7 +855,7 @@ function viewPractice() {
     h("div.card", h("div.row.between", h("div", h("strong", "Essays in three snaps"), h("div.small.muted", `Skeleton, outline, essay, each compared with a guide. ${libraryOf("essay").length} topic${libraryOf("essay").length === 1 ? "" : "s"}.`)), h("a.btn", { href: "#essay" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Your case file"), h("div.small.muted", `${caseFile().length} example${caseFile().length === 1 ? "" : "s"} kept from Chai for Mains.`)), h("a.btn", { href: "#casefile" }, "Open"))),
     h("a.card.link", { href: "#progress" }, h("div.row.between", h("div", h("strong", "You vs. you"), h("div.small.muted", "Your writing, your sense of sure, your markers. Only against your own past.")), h("span", "→"))),
-    h("div.card", h("div.row.between", h("div", h("strong", "Mock interview"), h("div.small.muted", libraryOf("interview-bank").length ? "A board of five, questions from your own DAF. Answer aloud or type; an AI member can ask a follow-up." : "Opens once the interview questions are approved.")), h("a.btn", { href: "#interview" }, "Open"))),
+    h("div.card", h("div.row.between", h("div", h("strong", "Mock interview"), h("div.small.muted", libraryOf("interview-bank").length ? "A board of five, questions from your own DAF. Answer aloud or type; a board member can ask a follow-up." : "Opens once the interview questions are approved.")), h("a.btn", { href: "#interview" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Mock papers"), h("div.small.muted", `${mocks.length} checked paper${mocks.length === 1 ? "" : "s"}, plus a quick mock from Chai questions.${hist.length ? ` ${hist.length} taken.` : ""}`)), h("a.btn", { href: "#mock" }, "Open"))),
     h("div.card", h("div.row.between", h("div", h("strong", "Saved cards"), h("div.small.muted", `${store.get("saved", []).length} saved for revision.`)), h("a.btn", { href: "#read/saved" }, "Read"))),
     h("a.card.link", { href: "#try" }, h("div.row.between", h("div", h("strong", "One topic, start to finish"), h("div.small.muted", "Federalism: guess, read, recall, real PYQs, a Mains plan, then into your review. About 75 minutes.")), h("span", "→"))),
@@ -1090,7 +1090,7 @@ function viewNode(id) {
     return h("div.col", ...head,
       h("div.card", h("h3", { style: { marginTop: 0 } }, "1. Learn it"),
         h("p", "See what UPSC has asked on it, then read your source: NCERT, a standard book, or a piece in Learn."),
-        h("div.row", h("a.btn", { href: "#learn" }, "Learn and play"), h("a.btn", { href: "#chotu" }, "Ask Chotu · AI"))),
+        h("div.row", h("a.btn", { href: "#learn" }, "Learn and play"), h("a.btn", { href: "#chotu" }, "Ask Chotu"))),
       h("div.card", h("h3", { style: { marginTop: 0 } }, "2. Close the book and write what you remember"),
         h("p.small.muted", "Then open the book, check, and fix it. This note stays in this browser."), memory,
         h("div", { style: { marginTop: "12px" } }, h("button.primary", { onclick: () => { putNode(id, MP.meet(null, day, memory.value.trim())); render(); } }, "Mark as met"))),
@@ -1174,7 +1174,7 @@ function viewMains() {
         h("div.row", BANDS.map(([b, label]) => h("button.small" + (w.self[k] === b ? ".primary" : ".ghost"), { "aria-pressed": String(w.self[k] === b), onclick: () => { w.self[k] = b; save(); draw(); } }, label)))))),
       h("label", h("strong", "One fix"), fix),
       h("div.row",
-        h("button.primary", { disabled: !all, onclick: () => go("ai") }, "Get a second opinion (AI) →"),
+        h("button.primary", { disabled: !all, onclick: () => go("ai") }, "Get a second opinion →"),
         h("button.ghost", { disabled: !all, onclick: () => go("rewrite") }, "Skip it and rewrite")),
       !all && h("p.small.muted", "Mark all five parts to go on."),
     ];
@@ -1209,7 +1209,7 @@ function viewMains() {
       h("p", agree === 5 ? "You and the second opinion agree on all five parts." : `You and the second opinion agree on ${agree} of 5. Where you differ, look again: neither is always right.`),
       w.ai.skeleton?.body?.length > 0 && h("details.card", h("summary", "A model answer's skeleton"),
         w.ai.skeleton.intro && h("p", h("strong", "Intro: "), w.ai.skeleton.intro), h("ul", w.ai.skeleton.body.map((b) => h("li", b))), w.ai.skeleton.conclusion && h("p", h("strong", "Conclusion: "), w.ai.skeleton.conclusion)),
-      h("p.small.muted", "A second opinion by AI, next to your own marks. It can be wrong; your pod and your own judgement come first."),
+      h("p.small.muted", "A second opinion, next to your own marks. It can be wrong; your pod and your own judgement come first."),
       weakestPart(w) && h("p", h("strong", "Weakest part: "), weakestPart(w)),
       h("div.row", h("button.primary", { onclick: () => go("rewrite") }, "Rewrite the weakest part →")),
     ];
@@ -1615,7 +1615,7 @@ function viewInterview(arg) {
     const fuBox = h("div.col");
     const drawFu = () => {
       if (a.idk) return put(fuBox, h("div.card.soft", h("p", bi(p.onIDontKnow)), h("p.small.muted", q.idkOk ? "On a fact you don't know, saying so plainly is the right answer." : "Here the board wanted your view. Next time, try a line or two, even a tentative one.")));
-      if (a.fu) return put(fuBox, h("div.card.soft", h("div.small.muted", bi(p.name) + " · AI"), h("p", a.fu)),
+      if (a.fu) return put(fuBox, h("div.card.soft", h("div.small.muted", bi(p.name)), h("p", a.fu)),
         h("textarea", { rows: 3, placeholder: "Your answer to the follow-up", value: a.fa ?? "", oninput: (e) => { a.fa = e.target.value; save(); } }));
       if (a.fuNote) return put(fuBox, h("p.small.muted", a.fuNote));
       put(fuBox);
@@ -1625,7 +1625,7 @@ function viewInterview(arg) {
       put(fuBox, h("p.muted", bi(p.name) + " is thinking…"));
       post("/interview/follow", { memberId: profile().memberId, persona: { name: bi(p.name), style: bi(p.style) }, question: text, answer: a.text, hindi: lang() === "hi" }).then((r) => {
         if (r?.care) { pod.care = true; put(fuBox, careBox()); return; }
-        if (r?.quiet) a.fuNote = "The AI board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.";
+        if (r?.quiet) a.fuNote = "The board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.";
         else if (r?.limit) a.fuNote = "That's enough follow-ups for today. Carry on with the bank's questions.";
         else if (!r || r.error) a.fuNote = r?.error ?? "Couldn't reach the board member. Check your connection.";
         else a.fu = r.followUp;
@@ -1636,7 +1636,7 @@ function viewInterview(arg) {
       h("div.card", h("strong", bi(p.name)), h("div.small.muted", bi(p.style)), h("p", { style: { fontSize: "19px" } }, text)),
       ta, fuBox,
       h("div.row.wrap",
-        !a.fu && !a.idk && h("button", { onclick: ask }, "Ask me a follow-up (AI)"),
+        !a.fu && !a.idk && h("button", { onclick: ask }, "Ask me a follow-up"),
         !a.idk && h("button", { onclick: () => { a.idk = true; save(); draw(); } }, "I don't know"),
         next),
       h("button.link.small", { onclick: () => { st.i = st.ids.length; save(); draw(); } }, "End the board here"));
@@ -1880,7 +1880,7 @@ function viewRead(arg) {
   const pick = subjects.includes(store.get("readSubject", "")) ? store.get("readSubject", "") : "";
   const shown = subjects.filter((s) => !pick || s === pick);
   const row = (it) => h("div.card", h("div.row.between",
-    h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min${it.data.audio?.[lang_()] || it.data.audio?.en ? " · Listen (AI voice)" : ""}${done[it.id] ? " · Read" : ""}`)),
+    h("div.grow", h("strong", bi(it.data.title)), h("div.small.muted", `${it.data.minutes} min${it.data.audio?.[lang_()] || it.data.audio?.en ? " · Listen" : ""}${done[it.id] ? " · Read" : ""}`)),
     h("a.btn", { href: "#read/" + encodeURIComponent(it.id) }, "Read")));
   const choose = (s) => { store.set("readSubject", s); render(); };
   return h("div.col", h("h1", "Long reads"),
@@ -1903,12 +1903,12 @@ function voiceAudio(a, lang) {
   const jump = (t) => { audio.currentTime = t; audio.play().catch(() => {}); };
   const mins = Math.max(1, Math.round((a.seconds ?? 0) / 60));
   return h("div.card", { lang },
-    h("div.row.between", h("strong", hi ? "सुनें" : "Listen"), h("span.small.muted", [hi ? "AI आवाज़" : "AI voice", a.voice, `${mins} min`].filter(Boolean).join(" · "))),
+    h("div.row.between", h("strong", hi ? "सुनें" : "Listen"), h("span.small.muted", [`${mins} min`].filter(Boolean).join(" · "))),
     audio,
     a.chapters?.length > 1 && h("details", h("summary.small", hi ? "हिस्से" : "Parts"),
       h("div.col", { style: { gap: "4px", marginTop: "6px" } }, a.chapters.map((c) => h("button.ghost", { style: { textAlign: "left" }, onclick: () => jump(c.t) },
         `${Math.floor(c.t / 60)}:${String(Math.floor(c.t % 60)).padStart(2, "0")} · ${c.title}`)))),
-    h("p.small.muted", hi ? "AI आवाज़ में पढ़ा गया, किसी इंसान ने नहीं। पूरा पाठ इसी पेज पर है।" : "Read by an AI voice, not a person. The full text is on this page."));
+    h("p.small.muted", hi ? "पूरा पाठ इसी पेज पर है।" : "The full text is on this page."));
 }
 
 // --- Listen: every recorded AI-voice reading in one place ---------------------------------------------
@@ -1926,7 +1926,7 @@ const hoursText = (sec) => { const m = Math.round(sec / 60); return m < 90 ? `${
 function audioLine() {
   const en = audioPieces("en"), hi = audioPieces("hi");
   if (!en.length && !hi.length) return null;
-  return `${hoursText(audioSeconds(en) + audioSeconds(hi))} of notes and guided walks read aloud: ${en.length} in English, ${hi.length} in Hindi. AI voices.`;
+  return `${hoursText(audioSeconds(en) + audioSeconds(hi))} of notes and guided walks read aloud: ${en.length} in English, ${hi.length} in Hindi.`;
 }
 function viewListen() {
   const has = { en: audioPieces("en").length, hi: audioPieces("hi").length };
@@ -1951,14 +1951,14 @@ function viewListen() {
   audio.addEventListener("ended", () => { if (!current) return; const hd = store.get("listenHeard", {}); hd[current.id + "." + lng] = today(); store.set("listenHeard", hd); });
   const row = (p) => {
     const el = h("button.card.link", { style: { textAlign: "left", width: "100%" }, onclick: () => play(p) },
-      h("div.row.between", h("div", h("strong", p.title), h("div.small.muted", [p.kind === "walk" ? "Guided walk" : "Note", `${Math.max(1, Math.round((p.a.seconds ?? 0) / 60))} min`, p.a.voice && `AI voice ${p.a.voice}`, heard[p.id + "." + lng] && "heard"].filter(Boolean).join(" · "))), h("span", { "aria-hidden": "true" }, "▶")));
+      h("div.row.between", h("div", h("strong", p.title), h("div.small.muted", [p.kind === "walk" ? "Guided walk" : "Note", `${Math.max(1, Math.round((p.a.seconds ?? 0) / 60))} min`, heard[p.id + "." + lng] && "heard"].filter(Boolean).join(" · "))), h("span", { "aria-hidden": "true" }, "▶")));
     rows.set(p.id, el);
     return el;
   };
   const shown = pick ? [pick] : subjects;
   const of = (s) => all.filter((p) => p.subject === s);
   return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Listen"),
-    h("p.muted", `${hoursText(audioSeconds(all))} in ${lng === "hi" ? "Hindi" : "English"}: ${all.length} pieces across ${subjects.length} subjects. Read by AI voices, not people; the full text of each piece is one tap away. Each piece ends, and nothing plays next by itself.`),
+    h("p.muted", `${hoursText(audioSeconds(all))} in ${lng === "hi" ? "Hindi" : "English"}: ${all.length} pieces across ${subjects.length} subjects. The full text of each piece is one tap away. Each piece ends, and nothing plays next by itself.`),
     has.en > 0 && has.hi > 0 && h("div.chips", { role: "group", "aria-label": "Language" },
       [["en", "English"], ["hi", "हिन्दी"]].map(([k, label]) => h("button.chip", { "aria-pressed": String(lng === k), onclick: () => { store.set("listenLang", k); render(); } }, `${label} · ${has[k]}`))),
     h("div.card", { style: { position: "sticky", top: "8px", zIndex: 2 } }, now, audio),
@@ -2270,7 +2270,7 @@ function viewRooms(arg) {
       r.joined ? h("div.row", r.unread > 0 && h("span.tag", String(r.unread)), h("a.btn", { href: "#rooms/" + r.id }, "Open"))
         : h("button.primary", { disabled: rooms.busy === r.id, onclick: () => roomJoin(r.id) }, rooms.busy === r.id ? "Joining…" : "Join")));
     put(box,
-      h("p", "Join as many as help: your language, where you are, your goal, your optional, your region. Chotu and the study friends here are AI and always labelled AI."),
+      h("p", "Join as many as help: your language, where you are, your goal, your optional, your region. Chotu and the study helpers here are not members, and each is tagged."),
       store.get("roomsStarted") && h("div.card.soft", h("p", { style: { margin: 0 } }, `So you don't start alone, you're in ${listAnd(store.get("roomsStarted"))}. Leave any that don't fit, and join others below.`),
         h("button.ghost.small", { onclick: () => { store.del("roomsStarted"); roomsRedraw(); } }, "Got it")),
       l?.mode === "open" && h("p.small.muted", `Matched pods of 6 to 8 start once ${l.threshold} aspirants have joined. ${l.signups} so far.`),
@@ -2491,8 +2491,8 @@ function viewPod() {
           pod.room ? h("button", { onclick: () => pod.ws?.send(JSON.stringify({ type: "room_join" })) }, `Join the ${pod.room.minutes}-min study room`)
             : h("button", { onclick: () => pod.ws?.send(JSON.stringify({ type: "room_start", minutes: 25 })) }, "Start a 25-min study room")),
         pod.messages.some(isFriend) && h("details", { style: { marginTop: "12px" } }, h("summary", "Who are Meera, Arjun, Ira and Kabir?"),
-          h("p.small", "They're Chotu's AI study friends, there so a new pod never feels empty. Every one of them is marked AI. They aren't members and are never counted, they never message anyone privately, and they go quiet as more people join."),
-          Object.entries(FRIENDS).map(([id, f]) => h("div.row.small", friendLabel({ memberId: id, name: id.slice(7)[0].toUpperCase() + id.slice(8) + " · AI" }, 18), h("span.muted", f.bio)))),
+          h("p.small", "They're Chotu's study helpers, there so a new pod never feels empty. Each is tagged “study helper”. They aren't members and are never counted, they never message anyone privately, and they go quiet as more people join."),
+          Object.entries(FRIENDS).map(([id, f]) => h("div.row.small", friendLabel({ memberId: id, name: id.slice(7)[0].toUpperCase() + id.slice(8) }, 18), h("span.muted", f.bio)))),
         helperCard(),
         h("details", { style: { marginTop: "12px" } }, h("summary", "Run a ritual this week"),
           h("p.small.muted", "If someone in the pod runs it, Chotu stays out of it."),
@@ -2958,7 +2958,7 @@ const CHOTU_HINT = { talk: "Say anything. I'm a good listener.", prep: "Ask abou
 
 function viewChotu() {
   const rm = resultMode();
-  if (rm) return h("div.col", h("div.center", kulhad("quiet", 96)), h("p.center", h("span.ai-tag", "Chotu · AI")),
+  if (rm) return h("div.col", h("div.center", kulhad("quiet", 96)), h("p.center", h("span.ai-tag", "Chotu")),
     h("div.card.soft", h("p", "I'm staying quiet this week. Whatever happened, you're more than a roll number."),
       h("div.row", h("a.btn", { href: "#calm" }, tr("nav.calm")), h("a.btn", { href: "#talk" }, tr("nav.talk")))));
   const box = h("div");
@@ -2966,10 +2966,10 @@ function viewChotu() {
   const draw = () => {
     const talkTurns = chotu.turns.filter((t) => t.role === "user" && chotu.mode === "talk").length;
     put(box,
-      h("div.center", kulhad(toneNow({ care: chotu.care, thinking: chotu.busy }), 72)), h("p.center", h("span.ai-tag", "Chotu · AI")),
+      h("div.center", kulhad(toneNow({ care: chotu.care, thinking: chotu.busy }), 72)), h("p.center", h("span.ai-tag", "Chotu")),
       h("div.chips.center", { role: "tablist" }, CHOTU_MODES.map(([m, l]) => h("button.chip", { role: "tab", "aria-pressed": String(chotu.mode === m), onclick: () => { chotu.mode = m; input.placeholder = CHOTU_HINT[m]; draw(); } }, l))),
       chotu.care && careBox(),
-      on("jeetu") && h("p.small.center", h("a", { href: "#jeetu" }, "A question about how to study? Ask Jeetu · AI →")),
+      on("jeetu") && h("p.small.center", h("a", { href: "#jeetu" }, "A question about how to study? Ask Jeetu →")),
       chotu.mode === "plan" && h("a.card.link", { href: "#roadmap" }, h("div.row.between", h("div", h("strong", store.get("roadmap") ? "Your roadmap and this week's plan" : "Build your free roadmap"),
         h("div.small.muted", "Exam year, hours and weak papers in, a one-page plan to Prelims out.")), h("span", "→"))),
       h("div.card.chat",
@@ -2986,7 +2986,7 @@ function viewChotu() {
       talkTurns >= 15 && h("div.card.soft", h("p", "We've talked for a while. I'm glad to keep going, and your pod, or someone you trust, would be good company too."),
         h("div.row", h("a.btn", { href: "#pod" }, "Your pod"), h("a.btn", { href: "#talk" }, tr("nav.talk")))),
       h("div.row", h("div.grow", input), h("button.primary", { disabled: chotu.busy, onclick: send }, "Send")),
-      h("p.small.muted", "Chotu is an AI. It can be wrong, it doesn't predict ranks or results, and it never sees your journal, mood, nickname or stage."));
+      h("p.small.muted", "Chotu is not a person. It can be wrong, it doesn't predict ranks or results, and it never sees your journal, mood, nickname or stage."));
   };
   async function send() {
     const text = input.value.trim(); if (!text || chotu.busy) return;
@@ -3157,7 +3157,7 @@ function viewRoom() {
   const journalBox = h("div");
   const notes = roomNotes();
   return h("div.col", h("h1", "Your room"), pauseLine("journal-first-open"),
-    h("p.muted", "Only you see this. Nothing here goes to your pod, to marketing or to any AI, and nothing is scored."),
+    h("p.muted", "Only you see this. Nothing here goes to your pod, to marketing or to any outside service, and nothing is scored."),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Last night's sleep"),
       h("div.chips", SLEEP_H.map(([v, l]) => h("button.chip", { "aria-pressed": String(last.h === v), onclick: () => setSleep("h", v) }, l))),
       h("div.chips", SLEEP_FELT.map(([v, l]) => h("button.chip", { "aria-pressed": String(last.felt === v), onclick: () => setSleep("felt", v) }, l))),
@@ -3176,7 +3176,7 @@ function viewRoom() {
       done.length > 0 && h("details", h("summary.small", `Done (${done.length})`), done.slice(-30).map(todoRow))),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Journal"),
       h("p.small", journalN ? `${journalN} entr${journalN === 1 ? "y" : "ies"}, encrypted on this device. You write them when you close the day.` : "You can write a few lines when you close the day. It's encrypted on this device."),
-      h("p.small.muted", "Nobody reads it, and no AI. If you write something that sounds like you're in danger, the app shows you people who can help; that's all it does."),
+      h("p.small.muted", "Nobody reads it, and nothing reads it for you. If you write something that sounds like you're in danger, the app shows you people who can help; that's all it does."),
       h("div.row", h("a.btn", { href: "#close" }, "Close the day"), journalN > 0 && h("button", { onclick: async () => {
         const all = store.get("journal", {}), rows = [];
         for (const [d, sealed] of Object.entries(all).sort().reverse().slice(0, 30)) { const e = await vault.open(sealed).catch(() => null); if (e) rows.push([d, e]); }
@@ -3235,7 +3235,7 @@ function viewPrivacy() {
         : h("button", { onclick: () => { store.set("resultMode", { until: Date.now() + 72 * 3600_000 }); location.hash = "#adda"; render(); } }, "Switch it on for 72 hours")),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Your data"),
       h("p.small", "Your journal, answers, profile, mock results and focus log stay in this browser. The journal is encrypted. Your pod messages go to the pod server."),
-      h("p.small", "Your sign-in (your Google email) is kept only to sign you in and, if ever needed, to switch an account off. Other members never see it, and it's never sent to Chotu or any AI service."),
+      h("p.small", "Your sign-in (your Google email) is kept only to sign you in and, if ever needed, to switch an account off. Other members never see it, and it's never sent to Chotu or any outside service."),
       h("div.row", h("button", { onclick: exportData }, "Download my data"), h("button", { onclick: deleteData }, "Delete everything")),
       h("p.small.muted", "Download includes what the server holds about you. Delete erases it there too. If you write to us about your data, quote your member id: ", h("code", p.memberId))));
 }

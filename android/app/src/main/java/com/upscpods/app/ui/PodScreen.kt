@@ -196,7 +196,7 @@ private fun PodHeader(pod: PodClient) {
                 style = MaterialTheme.typography.labelLarge)
             if (s.closest) Text("Nobody shares your exact stage, attempts and study time yet, so you're in the closest pod: same stage and language. " +
                 "If a pod for your exact group forms, you'll be asked privately whether to move. Nobody moves unless they choose to.", style = MaterialTheme.typography.bodySmall)
-            if (s.sizeState == "forming") Text("Chotu keeps the pod company until more people join on Monday. It's labelled AI, always.", style = MaterialTheme.typography.bodySmall)
+            if (s.sizeState == "forming") Text("Chotu keeps the pod company until more people join on Monday. It's a chai cup, not a member.", style = MaterialTheme.typography.bodySmall)
         }
         pod.goal?.let { g ->
             val pct = if (g.target > 0) (g.done.toFloat() / g.target).coerceIn(0f, 1f) else 0f
@@ -531,25 +531,25 @@ private fun PhotoInBubble(id: String, load: suspend (String) -> ByteArray?) {
 
 /** Chotu's AI study friends (server/src/friends.ts): their own cup colour and an AI tag. Never members, never counted. */
 private val FRIENDS = mapOf(
-    "friend:meera" to (Color(0xFFB5543C) to "AI study friend. Hosts the answer-writing hours and shares Mains writing tips."),
-    "friend:arjun" to (Color(0xFF3F51B5) to "AI study friend. Suggests a small morning block and a short close to the day."),
-    "friend:ira" to (Color(0xFF2E7D32) to "AI study friend. Posts one GS1 note a day: history, art and culture, geography, society."),
-    "friend:kabir" to (Color(0xFFC98A12) to "AI study friend. Drops a quick question most days and the answer later."),
+    "friend:meera" to (Color(0xFFB5543C) to "Study helper. Hosts the answer-writing hours and shares Mains writing tips."),
+    "friend:arjun" to (Color(0xFF3F51B5) to "Study helper. Suggests a small morning block and a short close to the day."),
+    "friend:ira" to (Color(0xFF2E7D32) to "Study helper. Posts one GS1 note a day: history, art and culture, geography, society."),
+    "friend:kabir" to (Color(0xFFC98A12) to "Study helper. Drops a quick question most days and the answer later."),
     // Older pod messages from before the rename (2 Nov 2026).
-    "friend:pooja" to (Color(0xFF2E7D32) to "AI study friend."),
+    "friend:pooja" to (Color(0xFF2E7D32) to "Study helper."),
 )
 
 @Composable
 private fun FriendBubble(m: PodMessage, time: String) {
     var about by remember { mutableStateOf(false) }
-    val (color, bio) = FRIENDS[m.memberId] ?: (Color.Gray to "An AI study friend of Chotu's.")
+    val (color, bio) = FRIENDS[m.memberId] ?: (Color.Gray to "One of Chotu's study helpers.")
     Column(Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable(onClickLabel = "About ${m.name}") { about = !about }) {
             Kulhad(ChotuMood.HAPPY, 22.dp, cupColor = color)
             Spacer(Modifier.size(6.dp))
-            Text("${m.name} · $time", style = MaterialTheme.typography.labelSmall)
+            Text("${m.name.removeSuffix(" · AI").removeSuffix(" · study helper")} · study helper · $time", style = MaterialTheme.typography.labelSmall)
         }
-        if (about) Text("$bio An AI study friend: not a member, never counted, never messages anyone privately.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (about) Text("$bio Not a member, never counted, never messages anyone privately.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(m.text, style = MaterialTheme.typography.bodyLarge)
     }
 }
@@ -571,7 +571,7 @@ private fun Composer(pod: PodClient, onOpenNeedToTalk: () -> Unit) {
         OutlinedTextField(
             value = text,
             onValueChange = { text = it.take(1000) },
-            placeholder = { Text("Message your pod (@Chotu to ask the AI)") },
+            placeholder = { Text("Message your pod (@Chotu to ask Chotu)") },
             modifier = Modifier.weight(1f),
             maxLines = 4,
         )

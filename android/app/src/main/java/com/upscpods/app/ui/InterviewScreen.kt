@@ -181,7 +181,7 @@ fun InterviewScreen(library: ContentLibrary, community: Community, hindi: Boolea
             followUp?.let { fu ->
                 FlatCard(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text("${p?.name?.pick(hindi) ?: "Board member"} · AI", style = MaterialTheme.typography.labelMedium)
+                        Text("${p?.name?.pick(hindi) ?: "Board member"}", style = MaterialTheme.typography.labelMedium)
                         Text(fu)
                     }
                 }
@@ -198,7 +198,7 @@ fun InterviewScreen(library: ContentLibrary, community: Community, hindi: Boolea
                         if (r.care) { fuNote = null; onOpenNeedToTalk() }
                         r.followUp?.let { followUp = it; saveNow(n.copy(followUps = n.followUps + 1)) }
                     }
-                }) { Text("Ask me a follow-up (AI)") }
+                }) { Text("Ask me a follow-up") }
                 if (!idk) OutlinedButton(onClick = { idk = true }) { Text("I don't know") }
                 Button(onClick = {
                     val cur = now ?: n

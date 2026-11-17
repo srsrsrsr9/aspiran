@@ -288,7 +288,7 @@ fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi:
                 FlatCard(Modifier.clickable { onOpen(item.id) }) {
                     Column(Modifier.padding(16.dp)) {
                         Text(r.title.pick(hindi && item.hindi), style = MaterialTheme.typography.titleMedium)
-                        Muted("${r.minutes} min" + (if (item.data["audio"] != null) " · Listen (AI voice)" else "") + if (done[item.id] != null) " · Read" else "")
+                        Muted("${r.minutes} min" + (if (item.data["audio"] != null) " · Listen" else "") + if (done[item.id] != null) " · Read" else "")
                     }
                 }
             }
@@ -329,7 +329,7 @@ private fun hoursText(seconds: Double): String {
 fun listenLine(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryItem>): String? {
     val en = listenPieces(reads, walks, "en"); val hi = listenPieces(reads, walks, "hi")
     if (en.isEmpty() && hi.isEmpty()) return null
-    return "${hoursText(en.sumOf { it.seconds } + hi.sumOf { it.seconds })} of notes and guided walks read aloud: ${en.size} in English, ${hi.size} in Hindi. AI voices."
+    return "${hoursText(en.sumOf { it.seconds } + hi.sumOf { it.seconds })} of notes and guided walks read aloud: ${en.size} in English, ${hi.size} in Hindi."
 }
 
 /**
@@ -351,7 +351,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
     val now = all.firstOrNull { it.id == playing }
     PrepPage("Listen", onClose) {
         if (all.isEmpty()) { Text("Recorded readings appear here as they are made."); return@PrepPage }
-        Text("${hoursText(all.sumOf { it.seconds })} in ${if (lang == "hi") "Hindi" else "English"}: ${all.size} pieces across ${bySubject.size} subjects. Read by AI voices, not people. Each piece ends, and nothing plays next by itself.",
+        Text("${hoursText(all.sumOf { it.seconds })} in ${if (lang == "hi") "Hindi" else "English"}: ${all.size} pieces across ${bySubject.size} subjects. Each piece ends, and nothing plays next by itself.",
             style = MaterialTheme.typography.bodyMedium)
         if ((count["en"] ?: 0) > 0 && (count["hi"] ?: 0) > 0) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterChip(selected = lang == "en", onClick = { lang = "en"; playing = "" }, label = { Text("English · ${count["en"]}") })
@@ -373,7 +373,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
                 FlatCard(Modifier.clickable { playing = p.id }) {
                     Column(Modifier.padding(16.dp)) {
                         Text(p.title, style = MaterialTheme.typography.titleMedium)
-                        Muted((if (p.walk) "Guided walk" else "Note") + " · ${maxOf(1, Math.round(p.seconds / 60))} min · AI voice" + if (p.id == playing) " · chosen" else "")
+                        Muted((if (p.walk) "Guided walk" else "Note") + " · ${maxOf(1, Math.round(p.seconds / 60))} min" + if (p.id == playing) " · chosen" else "")
                     }
                 }
             }

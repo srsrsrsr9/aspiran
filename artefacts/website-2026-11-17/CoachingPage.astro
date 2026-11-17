@@ -1,0 +1,163 @@
+---
+// For coaching centres and study libraries (17 Nov 2026), from artefacts/marketing-review-2026-11-17.md §6 and
+// artefacts/coaching-centres-plan-2026-11-14.md in the app repo. Only what phase 1 has built is promised; the teacher
+// view for confirming answer marks is said to be "being built with our first centres". No prices: the owner hasn't
+// chosen a plan yet (decision 9), so the page offers a free 30-day pilot and a quote after it.
+// The form posts to /web/lead with details.centre, which sends the owner an email and the centre a short reply.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '@fontsource/martel/latin-800.css';
+import '../styles/short.css';
+
+interface Props { lang?: 'en' | 'hi' }
+const { lang = 'en' } = Astro.props;
+const hi = lang === 'hi';
+const T = (en: string, h: string) => (hi ? h : en);
+const home = hi ? '/hi/' : '/';
+const demo = `https://app.aspiran.in/app/?utm_source=site&utm_medium=coaching${hi ? '&lang=hi' : ''}#try/path-pol-federalism`;
+
+const title = T('Aspiran for coaching centres and study libraries', 'कोचिंग संस्थानों और स्टडी लाइब्रेरी के लिए Aspiran');
+const description = T(
+  'Give every UPSC student Aspiran with your centre\'s name on it: daily recall, answers marked in minutes, batch chat, doubts, study plans and a list of who has gone quiet. Free 30-day pilot.',
+  'हर UPSC छात्र को आपके संस्थान के नाम के साथ Aspiran: रोज़ का रिव्यू, मिनटों में उत्तर-जाँच, बैच चैट, डाउट, स्टडी प्लान और कौन चुप हो गया उसकी सूची। 30 दिन का मुफ़्त पायलट।',
+);
+
+const gets = hi ? [
+  ['आपका नाम, आपका रंग', 'छात्र आपके कोड से जुड़ते हैं; उसके बाद ऐप में आपका लोगो और रंग दिखता है, "with Aspiran" के साथ।'],
+  ['हर उत्तर, मिनटों में जँचा', 'छात्र रोज़ उत्तर लिखते हैं और मिनटों में पाँच हिस्सों पर अंक और सुधार पाते हैं। शिक्षकों के लिए अंक पक्के करने का व्यू हम अपने पहले संस्थानों के साथ बना रहे हैं।'],
+  ['कौन चुप हो गया', 'हर बैच के कमज़ोर टॉपिक और वे छात्र जो कुछ दिनों से नहीं आए, ताकि छोड़ने से पहले आप बात कर सकें।'],
+  ['बैच चैट और घोषणाएँ', 'हर बैच का अपना चैट, ऊपर पिन की हुई घोषणाएँ। शिक्षक संदेश छिपा सकते हैं और रिपोर्ट देख सकते हैं।'],
+  ['डाउट और स्टडी प्लान', 'छात्र डाउट पूछते हैं, शिक्षक जवाब देते हैं। बैच या एक छात्र के लिए दिन-दर-दिन प्लान।'],
+  ['आपकी अपनी सामग्री', 'अपने नोट्स और सवालों के सेट डालिए, एक बैच के लिए या सबके लिए, Aspiran की लाइब्रेरी के साथ।'],
+] : [
+  ['Your name, your colour', 'Students join with your code; from then on the app shows your logo and colour, "with Aspiran" under it.'],
+  ['Every answer, marked in minutes', 'Students write answers daily and get marks on five parts, with a fix for each, in minutes. A teacher view to confirm marks is being built with our first centres.'],
+  ['Who has gone quiet', 'Weak topics per batch, and the students who haven\'t turned up for a few days, so you can talk to them before they drop out.'],
+  ['Batch chat and announcements', 'Each batch has its own chat, with announcements pinned at the top. Teachers can hide messages and see what was reported.'],
+  ['Doubts and study plans', 'Students ask doubts, teachers answer. Day-by-day plans for a batch or for one student.'],
+  ['Your own material', 'Add your notes and question sets, for one batch or all, next to Aspiran\'s library.'],
+];
+
+const promises = hi
+  ? ['हम आपके छात्रों को कभी कुछ नहीं बेचते, न उन्हें कोई विज्ञापन दिखाते हैं', 'आपके छात्रों को कभी कोई दूसरा संस्थान नहीं दिखेगा', 'आपके संस्थान का डेटा आपका है; आप CSV में ले जा सकते हैं', 'छात्र की निजी चीज़ें (पॉड, जर्नल, नोट्स) निजी रहती हैं, आपसे भी', 'कोई लॉक-इन नहीं: जब चाहें छोड़ दीजिए']
+  : ['We never sell to your students or show them ads', 'Your students never see another centre', 'Your centre\'s data is yours; download it as CSV', 'A student\'s private space (pod, journal, notes) stays private, from you too', 'No lock-in: leave whenever you like'];
+
+const steps = hi ? [
+  ['15 मिनट की बात', 'आपके बैच, छात्र और आप क्या चाहते हैं।'],
+  ['हम संस्थान सेट करते हैं', 'आपका नाम, लोगो, बैच और जुड़ने के कोड, एक दिन में।'],
+  ['30 दिन का मुफ़्त पायलट', 'एक या दो बैच के साथ। हम हर हफ़्ते देखते हैं कि क्या काम कर रहा है।'],
+  ['फिर आप तय कीजिए', 'पायलट के बाद आपके आकार के हिसाब से क़ीमत। न जमे तो कुछ नहीं देना।'],
+] : [
+  ['A 15-minute call', 'Your batches, your students and what you need.'],
+  ['We set up your centre', 'Your name, logo, batches and joining codes, in a day.'],
+  ['A free 30-day pilot', 'With one or two batches. We look at what\'s working with you each week.'],
+  ['Then you decide', 'A price for your size after the pilot. If it doesn\'t fit, you owe nothing.'],
+];
+---
+
+<BaseLayout title={title} description={description} themeColor="#06070F" lang={lang}>
+  <div class="sh" id="top">
+    <a class="skip" href="#main">{T('Skip to the page', 'पेज पर जाएँ')}</a>
+    <nav class="sh-nav" aria-label="Site">
+      <a class="sh-brand" href={home}>
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 40 40">
+          <path d="M14 3c-2 3 2 4 0 7M20 2c-2 3 2 4 0 8M26 3c-2 3 2 4 0 7" fill="none" stroke="#F0A04B" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M5 15h30l-4.5 20.5a3 3 0 0 1-3 2.5H12.5a3 3 0 0 1-3-2.5z" fill="#C8693A"></path>
+          <rect x="4" y="13" width="32" height="4.5" rx="2.2" fill="#E08A55"></rect>
+        </svg>
+        <b>Aspiran</b>
+      </a>
+      <div class="sh-nav-r">
+        <a href={home}>{T('For aspirants', 'अभ्यर्थियों के लिए')}</a>
+        {hi ? <a href="/for-coaching/" hreflang="en" lang="en">English</a> : <a class="sh-lang" href="/hi/for-coaching/" hreflang="hi" lang="hi">हिंदी</a>}
+        <a class="sh-btn ghost sm" href="#talk" data-cta="coaching-talk" data-where="nav">{T('Talk to us', 'बात कीजिए')}</a>
+      </div>
+    </nav>
+
+    <main id="main">
+      <header class="sh-hero">
+        <p class="sh-kick">{T('FOR UPSC COACHING CENTRES AND STUDY LIBRARIES', 'UPSC कोचिंग संस्थानों और स्टडी लाइब्रेरी के लिए')}</p>
+        <h1>{hi ? <>आपके शिक्षक पढ़ाते हैं।<br /><span class="glow">Aspiran याद रखवाता है।</span></> : <>Your teachers teach.<br /><span class="glow">Aspiran makes it stay.</span></>}</h1>
+        <p class="sh-lede">{T(
+          'Give every student Aspiran with your centre\'s name on it. What you taught comes back to them before they forget it, their answers are marked in minutes, and you see who has gone quiet before they drop out.',
+          'हर छात्र को आपके संस्थान के नाम के साथ Aspiran दीजिए। आपने जो पढ़ाया, वह भूलने से पहले उनके पास लौटता है, उनके उत्तर मिनटों में जँचते हैं, और छोड़ने से पहले आपको पता चलता है कि कौन चुप हो गया।')}</p>
+        <p class="sh-ctas">
+          <a class="sh-btn primary" href="#talk" data-cta="coaching-talk" data-where="hero">{T('Start a free 30-day pilot', '30 दिन का मुफ़्त पायलट शुरू कीजिए')}</a>
+          <a class="sh-btn ghost" href={demo} data-cta="try" data-where="coaching-hero">{T('See what students see', 'देखिए छात्र क्या देखते हैं')}</a>
+        </p>
+        <ul class="sh-ticks">{(hi ? ['शुरू करना मुफ़्त', 'हिंदी और अंग्रेज़ी', 'वेब और Android'] : ['Free to start', 'Hindi and English', 'Web and Android']).map((t) => <li>{t}</li>)}</ul>
+      </header>
+
+      <section class="sh-sec" aria-labelledby="gets-h">
+        <h2 id="gets-h">{T('What your centre gets', 'आपके संस्थान को क्या मिलता है')}</h2>
+        <div class="sh-grid">{gets.map(([h, p]) => <div class="sh-card"><h3>{h}</h3><p>{p}</p></div>)}</div>
+        <p class="sh-note">{T(
+          'Plus everything Aspiran gives every student: the daily review, 2,000+ practice questions, 11 past papers on UPSC\'s keys, 250+ short videos and 20+ hours of recorded notes, most of it in Hindi too.',
+          'साथ में वह सब जो Aspiran हर छात्र को देता है: रोज़ का रिव्यू, 2,000+ अभ्यास सवाल, UPSC की कुंजियों पर 11 पिछले पेपर, 250+ छोटे वीडियो और 20+ घंटे के रिकॉर्ड किए नोट्स, ज़्यादातर हिंदी में भी।')}</p>
+      </section>
+
+      <section class="sh-sec" aria-labelledby="prom-h">
+        <div class="sh-grid two">
+          <div class="sh-card main">
+            <h2 id="prom-h">{T('Our promises to you', 'आपसे हमारे वादे')}</h2>
+            <ul class="sh-never ok">{promises.map((n) => <li>{n}</li>)}</ul>
+          </div>
+          <div class="sh-card">
+            <h2>{T('How it starts', 'शुरुआत कैसे होती है')}</h2>
+            <ol class="sh-steps">{steps.map(([h, p]) => <li><b>{h}</b><span>{p}</span></li>)}</ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="sh-sec" id="talk" aria-labelledby="talk-h">
+        <h2 id="talk-h">{T('Talk to us', 'हमसे बात कीजिए')}</h2>
+        <p class="sh-note" style="margin-top:0">{T('We reply within two working days. Or write to ', 'हम दो कामकाजी दिनों में जवाब देते हैं। या लिखिए ')}<a href="mailto:hello@aspiran.in">hello@aspiran.in</a>.</p>
+        <form class="sh-card sh-form" id="centre" novalidate>
+          <label>{T('Your name', 'आपका नाम')}<input name="name" maxlength="80" autocomplete="name" /></label>
+          <label>{T('Your role', 'आपकी भूमिका')}<select name="role">
+            {(hi ? ['मालिक / निदेशक', 'सेंटर मैनेजर', 'शिक्षक', 'लाइब्रेरी चलाते हैं'] : ['Owner / director', 'Centre manager', 'Teacher', 'I run a study library']).map((o) => <option>{o}</option>)}</select></label>
+          <label>{T('Centre or library name', 'संस्थान या लाइब्रेरी का नाम')} *<input name="centre" maxlength="80" required /></label>
+          <label>{T('City', 'शहर')}<input name="city" maxlength="80" autocomplete="address-level2" /></label>
+          <label>{T('UPSC students', 'UPSC छात्र')}<select name="students">{['< 50', '50–200', '200–500', '500+'].map((o) => <option>{o}</option>)}</select></label>
+          <label>{T('Phone or email', 'फ़ोन या ईमेल')} *<input name="contact" maxlength="80" required autocomplete="email" /></label>
+          <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+          <button class="sh-btn primary" type="submit">{T('Send', 'भेजिए')}</button>
+          <p class="sh-small">{T('By sending, you agree we can contact you about Aspiran for your centre. ', 'भेजकर आप मानते हैं कि हम आपके संस्थान के लिए Aspiran के बारे में आपसे संपर्क कर सकते हैं। ')}<a href="/privacy">{T('Privacy', 'प्राइवेसी')}</a>.</p>
+          <p class="sh-out" id="centre-out" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="sh-foot">
+      <b>Aspiran</b>
+      <nav aria-label="Footer"><a href={home}>{T('For aspirants', 'अभ्यर्थियों के लिए')}</a><a href="/privacy">{T('Privacy', 'प्राइवेसी')}</a><a href="/terms">{T('Terms', 'शर्तें')}</a></nav>
+      <p>{T('Aspiran is made by SnapSkill LLP, Mohali, Punjab. Not affiliated with UPSC.', 'Aspiran को SnapSkill LLP, मोहाली, पंजाब ने बनाया है। UPSC से संबद्ध नहीं।')}</p>
+    </footer>
+  </div>
+
+  <script>
+    const HI = document.documentElement.lang === 'hi';
+    const store = { get: (k: string) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* private window */ } } };
+    const visitorId = store.get('aspiran-vid') ?? `v-${crypto.getRandomValues(new Uint32Array(3)).join('-')}`;
+    store.set('aspiran-vid', visitorId);
+    const API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8788' : 'https://app.aspiran.in';
+    document.getElementById('centre')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.currentTarget as HTMLFormElement;
+      const v = (n: string) => ((f.elements.namedItem(n) as HTMLInputElement | null)?.value ?? '').trim();
+      const out = document.getElementById('centre-out')!;
+      const contact = v('contact');
+      const okContact = /^\S+@\S+\.\S+$/.test(contact) || /^(\+?91)?[6-9]\d{9}$/.test(contact.replace(/[^\d+]/g, ''));
+      if (!v('centre') || !okContact) { out.textContent = HI ? 'संस्थान का नाम और एक सही फ़ोन नंबर या ईमेल डालिए।' : 'Add your centre\'s name and a valid phone number or email.'; return; }
+      out.textContent = HI ? 'भेज रहे हैं…' : 'Sending…';
+      try {
+        const r = await fetch(`${API}/web/lead`, { method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ visitorId, contact, consent: true, lang: HI ? 'hi' : 'en', source: 'coaching',
+            details: { name: v('name'), role: v('role'), centre: v('centre'), city: v('city'), students: v('students') }, company: v('company') }) });
+        if (!r.ok) throw new Error();
+        out.textContent = HI ? 'मिल गया। हम दो कामकाजी दिनों में संपर्क करेंगे।' : 'Got it. We\'ll be in touch within two working days.';
+        (window as any).posthog?.capture?.('lead_saved', { kind: 'coaching' });
+        f.querySelector('button')!.setAttribute('disabled', '');
+      } catch { out.textContent = HI ? 'अभी नहीं भेज पाए। hello@aspiran.in पर लिखिए।' : "Couldn't send just now. Please write to hello@aspiran.in."; }
+    });
+  </script>
+</BaseLayout>

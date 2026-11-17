@@ -6,7 +6,7 @@ code and older docs still say "UPSC Pods" until the rename lands. The project li
 
 ## What this is
 UPSC Pods: a community-first study app for UPSC aspirants in India. Small "pods" of aspirants, daily
-"Chai" current-affairs cards, practice and mocks, and Chotu, an AI study buddy (labelled "· AI").
+"Chai" current-affairs cards, practice and mocks, and Chotu, a study buddy.
 English and Hindi first; Telugu is the pilot language.
 
 ## Layout
@@ -43,10 +43,12 @@ English and Hindi first; Telugu is the pilot language.
 - Content rules: sound off by default and never autoplays; reduced motion respected; every piece ends;
   no timers, streaks or public scores; TRAGIC tone gets no sound, motion, emoji or joke and isn't shareable;
   maps are schematic with no national borders.
-- Chotu and AI pod friends are always labelled AI, quiet from 23:30 to 07:00 IST, never respond to
+- No "AI" labels anywhere, in the apps or on the website (owner, 17 Nov 2026), and never a claim that a person did
+  something a model did. Pod friends (Meera, Arjun, Ira, Kabir) carry a "study helper" tag and a non-human look so
+  nobody takes them for members. Voice players say nothing about the voice. Chotu and the pod friends are quiet from 23:30 to 07:00 IST, never respond to
   feelings, ranks or results. Distress handling follows `community/crisis-protocol.md`.
 - Plus is sold both in the Android app via Google Play Billing (owner decided 31 Oct; built, still off until the Play
-  account and product are ready) and on the web via Cashfree (still sandbox). ₹9,999/yr; ₹999 for the first 300.
+  account and product are ready) and on the web via Cashfree (still sandbox). ₹3,999/yr, no founding offer (owner, 17 Nov 2026).
 - Keep a local copy of every artefact you publish or revise in `artefacts/`.
 - Status page: https://claude.ai/artifact/1jENbW7xHRqPTYw1B4zjVF (source `artefacts/status/aspiran-status.html`). When work
   changes what's done, pending, content coverage, the website or the teaching-plan build, edit the file, update its date,

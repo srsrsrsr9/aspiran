@@ -79,7 +79,7 @@ export function portrait(size = 48, { full = false } = {}) {
 }
 
 /** "Jeetu · AI": the portrait and the label together, everywhere he appears. */
-export const label = (size = 28) => h("span.jeetu-label", portrait(size), h("span", "Jeetu · AI"));
+export const label = (size = 28) => h("span.jeetu-label", portrait(size), h("span", "Jeetu"));
 
 /** One of his lines as a small card, or nothing when he's off, quiet or it's result week. `l` overrides the language. */
 export function say(key, { l = null, text = null } = {}) {
@@ -88,7 +88,7 @@ export function say(key, { l = null, text = null } = {}) {
   if (!words) return null;
   // His scripted lines can be heard (voice.js): by key, so the server speaks only its own copy of the words.
   const hear = text ? null : C.listen?.({ who: "jeetu", line: key, lang: lang(l) }, { hi: lang(l) === "hi" });
-  return h("div.jeetu-say", { role: "note" }, portrait(44), h("div", h("div.jeetu-name", "Jeetu · AI"), h("p", words), hear));
+  return h("div.jeetu-say", { role: "note" }, portrait(44), h("div", h("div.jeetu-name", "Jeetu"), h("p", words), hear));
 }
 
 // --- The weekly note: how much came back, against your own past only -----------------------------------------------
@@ -113,7 +113,7 @@ export function weeklyText(rightDays, todayStr, l) {
 }
 export function weekly(rightDays, todayStr) {
   if (!awake()) return null;
-  return h("div.card.jeetu-week", h("div.row", portrait(44), h("div", h("strong", C.lang?.() === "hi" ? "इस हफ़्ते की याद" : "Your week of recall"), " ", h("span.ai-tag", "Jeetu · AI"))),
+  return h("div.card.jeetu-week", h("div.row", portrait(44), h("div", h("strong", C.lang?.() === "hi" ? "इस हफ़्ते की याद" : "Your week of recall"), " ", h("span.ai-tag", "Jeetu"))),
     h("p", weeklyText(rightDays, todayStr)),
     h("a.small", { href: "#jeetu" }, C.lang?.() === "hi" ? "Jeetu से तरीक़े के बारे में पूछें →" : "Ask Jeetu about the method →"));
 }
@@ -125,9 +125,9 @@ export function doubleAct() {
   const l = hi ? "hi" : "en";
   const row = (who, key) => h("div.jeetu-act-row", who, h("p", ACT[key][l]), C.listen?.({ who: ACT[key].who, line: key, lang: l }, { hi }));
   return h("div.card.soft.jeetu-act", { "aria-label": "Chotu and Jeetu" },
-    row(h("span.chotu-label", kulhad("warm", 24), h("span", "Chotu · AI")), "streakAsk"),
+    row(h("span.chotu-label", kulhad("warm", 24), h("span", "Chotu")), "streakAsk"),
     row(label(24), "streakNo"),
-    row(h("span.chotu-label", kulhad("calm", 24), h("span", "Chotu · AI")), "streakChai"));
+    row(h("span.chotu-label", kulhad("calm", 24), h("span", "Chotu")), "streakChai"));
 }
 
 // --- Ask Jeetu ----------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ const chat = { turns: [], busy: false, offline: null, care: false };
 
 export function viewJeetu() {
   const hi = lang() === "hi";
-  const head = [h("div.center", portrait(120, { full: true })), h("p.center", h("span.ai-tag", "Jeetu · AI")),
+  const head = [h("div.center", portrait(120, { full: true })), h("p.center", h("span.ai-tag", "Jeetu · method coach")),
     h("h1.center", hi ? "Jeetu से पूछें" : "Ask Jeetu")];
   if (!C.on("jeetu")) return h("div.col", ...head, h("div.card.soft", h("p", hi ? "Jeetu अभी बंद है।" : "Jeetu is switched off for now.")), h("a.btn", { href: "#today" }, "Back to Today"));
   if (C.resultMode?.()) return h("div.col", ...head, h("div.card.soft", h("p", hi ? "इस हफ़्ते Jeetu चुप है।" : "Jeetu is staying quiet this week.")),
@@ -161,8 +161,8 @@ export function viewJeetu() {
       chat.busy && h("p.small.muted", hi ? "Jeetu सोच रहे हैं…" : "Jeetu is thinking…")),
     chat.offline && h("div.card.soft", chat.offline),
     h("div.row", h("div.grow", input), h("button.primary", { disabled: chat.busy, onclick: send }, hi ? "भेजें" : "Send")),
-    h("p.small.muted", hi ? "Jeetu एक AI है, कोई इंसानी मेंटर नहीं। वह ग़लत हो सकता है, और रैंक, नतीजे या भावनाओं पर बात नहीं करता।"
-      : "Jeetu is an AI, not a human mentor. He can be wrong, and he doesn't talk about ranks, results or feelings: those deserve a real person."),
+    h("p.small.muted", hi ? "Jeetu ऐप का मेथड कोच है, कोई इंसानी मेंटर नहीं। वह ग़लत हो सकता है, और रैंक, नतीजे या भावनाओं पर बात नहीं करता।"
+      : "Jeetu is the app's method coach, not a human mentor. He can be wrong, and he doesn't talk about ranks, results or feelings: those deserve a real person."),
     h("p.small", h("a", { href: "#chotu" }, hi ? "तथ्य या व्याख्या चाहिए? Chotu से पूछें →" : "Need a fact or an explanation? Ask Chotu →")));
   async function send() {
     const text = input.value.trim(); if (!text || chat.busy) return;

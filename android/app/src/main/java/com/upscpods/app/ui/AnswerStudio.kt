@@ -308,7 +308,7 @@ fun AnswerStudioScreen(
                         },
                         enabled = allMarked && !busy && (photoPath != null || Practice.wordCount(text) > 0),
                         modifier = Modifier.fillMaxWidth().height(MainActionHeight),
-                    ) { Text(if (busy) "Reading your answer…" else "Get a second opinion (AI) →") }
+                    ) { Text(if (busy) "Reading your answer…" else "Get a second opinion →") }
                     OutlinedButton(onClick = { attemptId?.let { log.marked(it, selfMarks.toMap()) }; step = StudioStep.REWRITE }, enabled = allMarked, modifier = Modifier.fillMaxWidth()) { Text("Skip it and rewrite") }
                     if (!allMarked) Text("Mark all five parts to go on.", style = MaterialTheme.typography.bodySmall)
                     Text("3 free second opinions a week; unlimited with Plus. The photo is read once and not kept.", style = MaterialTheme.typography.bodySmall)
@@ -396,7 +396,7 @@ private fun WeekLine(log: AnswerLog) {
 
 @Composable
 private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = null, self: Map<String, String> = emptyMap()) {
-    Text("A second opinion (AI)", style = MaterialTheme.typography.titleLarge)
+    Text("A second opinion", style = MaterialTheme.typography.titleLarge)
     if (self.isNotEmpty()) {
         val agree = AREA_NAMES.count { (k, _) -> fb.areas[k]?.band == self[k] }
         Text(if (agree == 5) "You and the second opinion agree on all five parts." else "You and the second opinion agree on $agree of 5. Where you differ, look again: neither is always right.",
@@ -438,7 +438,7 @@ private fun FeedbackView(fb: AnswerFeedback, words: Int, focusArea: String? = nu
         sk.body.forEach { Text("• $it", style = MaterialTheme.typography.bodyMedium) }
         if (sk.conclusion.isNotBlank()) Text("Conclusion: ${sk.conclusion}", style = MaterialTheme.typography.bodyMedium)
     }
-    Text("A second opinion by AI, next to your own marks. It can be wrong; your pod and your own judgement come first.", style = MaterialTheme.typography.bodySmall)
+    Text("A second opinion, next to your own marks. It can be wrong; your pod and your own judgement come first.", style = MaterialTheme.typography.bodySmall)
 }
 
 /** Where "Send to pod" posts: one of your open rooms (Mains answer writing first), or your matched pod. */

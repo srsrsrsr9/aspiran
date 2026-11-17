@@ -1,0 +1,401 @@
+---
+// Home page v4 (17 Nov 2026), from artefacts/marketing-review-2026-11-17.md in the app repo:
+// - position: works on top of any coaching, YouTube teacher or books ("Your coaching teaches it. Aspiran makes it stay.");
+// - lead with the pains people feel now (answers nobody checks, forgetting, prepping alone), not the method;
+// - show the product (real demo screens in a phone) and a real marked answer (a sample answer we wrote, marked by
+//   Aspiran's own marker on 17 Nov 2026, labelled "sample");
+// - where it fits next to coaching and YouTube; price ₹3,999 a year, no founding offer (owner, 17 Nov 2026);
+// - no "AI" labels anywhere (owner, 17 Nov 2026), and never a claim that a person marked anything.
+// One action everywhere: "Try one topic free", the app's open demo (no account). English and Hindi side by side.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { waUrl } from '../i18n';
+import '@fontsource/martel/latin-800.css';
+// The Devanagari fonts load from src/pages/hi/index.astro only: on the English page even the ₹ sign would pull them.
+import '../styles/short.css';
+
+interface Props { lang?: 'en' | 'hi' }
+const { lang = 'en' } = Astro.props;
+const hi = lang === 'hi';
+const T = (en: string, h: string) => (hi ? h : en);
+
+const title = T('Aspiran: your coaching teaches it, Aspiran makes it stay', 'Aspiran: कोचिंग पढ़ाती है, Aspiran याद रखवाता है');
+const description = T(
+  'For UPSC aspirants, on top of any coaching or YouTube prep: what you studied comes back before you forget it, your Mains answers are marked in minutes, and a small pod keeps you company. English and Hindi. ₹3,999 a year, or free. Try one topic free.',
+  'UPSC अभ्यर्थियों के लिए, किसी भी कोचिंग या YouTube की तैयारी के साथ: जो पढ़ा वह भूलने से पहले लौटता है, मेन्स के उत्तर मिनटों में जँचते हैं, और एक छोटा पॉड साथ रहता है। हिंदी और अंग्रेज़ी। ₹3,999 साल, या मुफ़्त। एक टॉपिक मुफ़्त आज़माइए।',
+);
+// Try buttons open Federalism's cover; Hindi pages ask for the Hindi demo.
+const app = (where: string, hash = '#try/path-pol-federalism') => `https://app.aspiran.in/app/?utm_source=site&utm_medium=${where}${hi ? '&lang=hi' : ''}${hash}`;
+const how = hi ? '/hi/how-it-works/' : '/how-it-works/';
+const coaching = hi ? '/hi/for-coaching/' : '/for-coaching/';
+const WA_PAY = waUrl(T("Hi Aspiran! I'd like to pay for Plus by UPI.", 'Hi Aspiran! मुझे UPI से Plus लेना है।'));
+const tryLabel = T('Try one topic free', 'एक टॉपिक मुफ़्त आज़माइए');
+const ticks = hi ? ['साइन-अप नहीं', 'कार्ड नहीं', '15 मिनट: संघवाद, असली PYQ के साथ'] : ['No sign-up', 'No card', '15 minutes: Federalism, with real past-paper questions'];
+
+// What's in the app today, counted on production 15 Nov 2026 (2,063 questions, 257 videos, 11 papers; audio 20.4 h on 16 Nov), rounded down.
+// Keep these the same as the demo's own lines (server/public/app/try.js libLine/joinLine).
+const NUMS = hi
+  ? ['2,000+ अभ्यास सवाल', '250+ छोटे वीडियो', '20+ घंटे के रिकॉर्ड किए नोट्स', '11 पिछले पेपर']
+  : ['2,000+ practice questions', '250+ short videos', '20+ hours of recorded notes', '11 past papers'];
+
+// Real screens from the open demo (captured 15 Nov 2026 at 375 px, app.aspiran.in), shown in the hero phone.
+const shots = hi ? [
+  ['/media/screens/1-guess-hi.webp', 'पढ़ने से पहले अंदाज़ा'],
+  ['/media/screens/2-pyq-hi.webp', 'असली PYQ, "कितने पक्के हैं?"'],
+  ['/media/screens/3-keep-hi.webp', 'जो सीखा, वह लौटकर आएगा'],
+] : [
+  ['/media/screens/1-guess.webp', 'Guess before you read'],
+  ['/media/screens/2-pyq.webp', 'Real PYQs, "how sure?"'],
+  ['/media/screens/3-keep.webp', 'What you learn comes back'],
+];
+
+// The pains, in the aspirant's words, each with what Aspiran does about it.
+const pains = hi ? [
+  ['"मेरे उत्तर कोई नहीं जाँचता।"', 'काग़ज़ पर लिखिए, फ़ोटो लीजिए। मिनटों में पाँच चीज़ों पर अंक: सवाल का निर्देश, ढाँचा, सामग्री, उदाहरण, निष्कर्ष, और हर एक के लिए एक ठोस सुधार। फिर सबसे कमज़ोर हिस्सा दोबारा लिखिए। हिंदी या अंग्रेज़ी में।', '#answer'],
+  ['"अक्टूबर में पढ़ा, मार्च तक भूल गया।"', 'रोज़ 10 से 20 मिनट का रिव्यू। जो आपने पढ़ा, वह ठीक भूलने से पहले लौटता है: एक दिन, एक हफ़्ता, फिर महीने। आपकी किताबें, आपकी कोचिंग, आपका सिलेबस।', how + '#leak'],
+  ['"मैं अकेले पढ़ रहा हूँ।"', 'पहले दिन से एक स्टडी रूम, और आपके स्टेज के अभ्यर्थियों का छोटा पॉड (8 तक), जैसे-जैसे लोग जुड़ते हैं। न रैंक, न दिखावा।', how + '#pod'],
+] : [
+  ['"Nobody checks my answers."', 'Write on paper, take a photo. In minutes you get marks on five things: what the question asked, structure, content, examples and the conclusion, each with one fix to make. Then rewrite the weakest part. In Hindi or English.', '#answer'],
+  ['"I read it in October. It\'s gone by March."', 'A 10 to 20 minute review a day. What you studied comes back just before you\'d forget it: a day, a week, then months. Your books, your coaching, your syllabus.', how + '#leak'],
+  ['"I\'m preparing alone."', 'A study room from day one, and a small pod (up to 8) of aspirants at your stage as people join. No ranks, no performing.', how + '#pod'],
+];
+
+// The sample answer: written by us as a typical first attempt, marked by Aspiran's marker on 17 Nov 2026 (150-word
+// mode, typed). The marker's notes, trimmed for length; one example it gave (a report name) corrected to a real one (NeSDA). Question: UPSC CSE Mains 2025, GS2, Q7.
+const sample = {
+  q: T('e-governance projects have a built-in bias towards technology and back-end integration than user-centric designs. Examine.',
+    'ई-गवर्नेंस परियोजनाओं में उपयोगकर्ता-केंद्रित डिज़ाइन के बजाय प्रौद्योगिकी और बैक-एंड एकीकरण की ओर एक अंतर्निहित झुकाव होता है। परीक्षण कीजिए।'),
+  src: T('UPSC CSE Mains 2025 · GS2 · 10 marks, 150 words', 'UPSC CSE मेन्स 2025 · GS2 · 10 अंक, 150 शब्द'),
+  answer: T(
+    'E-governance means using ICT to deliver government services. India has launched many projects like Digital India, DigiLocker, UMANG and CoWIN. These projects have improved efficiency. Aadhaar-based DBT has reduced leakages… However, the focus is often on technology. Many portals are only in English and are hard to use on cheap phones. Biometric failures in ration shops have denied people their rations… In conclusion, e-governance should be citizen-centric for good governance.',
+    'ई-गवर्नेंस का अर्थ है सरकारी सेवाएँ ICT से देना। भारत ने डिजिटल इंडिया, डिजीलॉकर, UMANG और CoWIN जैसी कई परियोजनाएँ शुरू की हैं। इनसे दक्षता बढ़ी है। आधार-आधारित DBT ने लीकेज घटाया है… लेकिन ज़ोर अक्सर तकनीक पर रहता है। कई पोर्टल सिर्फ़ अंग्रेज़ी में हैं और सस्ते फ़ोन पर चलाना कठिन है। राशन दुकानों पर बायोमेट्रिक विफलता से लोगों को राशन नहीं मिला… निष्कर्ष में, सुशासन के लिए ई-गवर्नेंस नागरिक-केंद्रित होना चाहिए।'),
+  areas: hi ? [
+    ['सवाल का निर्देश', 'झुकाव का ज़िक्र है, पर "परीक्षण" पूरा नहीं: तकनीक पर ज़ोर के कारण और उसके फ़ायदे-नुक़सान नहीं तौले गए।', 'तकनीक पर ज़ोर क्यों है (लागत, पैमाना), यह बताइए और निष्कर्ष से पहले दोनों पक्ष तौलिए।'],
+    ['ढाँचा', 'परिचय, मुख्य भाग और निष्कर्ष हैं, पर उप-शीर्षक या बिंदु नहीं।', 'उप-शीर्षक जोड़िए: "तकनीक पहले", "उपयोगकर्ता की दिक़्क़तें", "सुझाव"।'],
+    ['सामग्री', 'भाषा, फ़ोन और साक्षरता की बात है, पर बैक-एंड एकीकरण, डेटा सुरक्षा और संस्थागत सीमाएँ छूट गईं।', 'बैक-एंड इंटरऑपरेबिलिटी, डेटा प्राइवेसी और विभागों की क्षमता पर एक-एक बिंदु जोड़िए।'],
+    ['उदाहरण', 'बड़ी योजनाओं और विफलताओं के नाम हैं, पर कोई आँकड़ा या आधिकारिक रिपोर्ट नहीं।', 'कोई ठोस आँकड़ा या आधिकारिक रिपोर्ट का हवाला दीजिए, जैसे e-गवर्नेंस सर्विस डिलीवरी असेसमेंट।'],
+    ['निष्कर्ष', 'एक सामान्य "नागरिक-केंद्रित" पंक्ति; न सार, न आगे के क़दम।', 'मुख्य बातें समेटिए और ठोस क़दम सुझाइए: यूज़र-टेस्टिंग, कई भाषाओं में इंटरफ़ेस।'],
+  ] : [
+    ['What the question asked', 'Mentions the bias but doesn\'t fully examine why the tech-first approach exists or weigh its pros and cons.', 'Say why technology gets the focus (cost, scale) and weigh both sides before you conclude.'],
+    ['Structure', 'A basic intro, body and conclusion, but no sub-headings or points.', 'Add sub-headings: "Technology first", "Gaps for users", "What to change".'],
+    ['Content', 'Covers language, phones and literacy, but leaves out back-end integration, data security and institutional limits.', 'Add a point each on back-end interoperability, data privacy and the capacity of departments.'],
+    ['Examples', 'Names big schemes and failures, but no data or official report.', 'Quote one figure or an official assessment, such as the e-Governance Service Delivery Assessment.'],
+    ['Conclusion', 'A generic "citizen-centric" line, with no summing-up or next steps.', 'Sum up what you found and propose concrete steps: user testing, interfaces in many languages.'],
+  ],
+  verdict: T('At the level of a typical well-scoring answer on all five. To go above it: sharper analysis, sub-headings, one piece of data.',
+    'पाँचों पर एक आम अच्छे अंक वाले उत्तर के बराबर। उससे ऊपर जाने के लिए: पैना विश्लेषण, उप-शीर्षक, एक आँकड़ा।'),
+};
+
+// Where Aspiran fits. Categories, not named brands. Fees: Delhi classroom GS courses list about ₹1.75 to 2.1 lakh a year (Nov 2026).
+const fit = hi ? {
+  cols: ['कोचिंग / ऑनलाइन कोर्स', 'YouTube और PDF', 'Aspiran'],
+  rows: [
+    ['नया टॉपिक पढ़ाना', 'हाँ', 'हाँ', 'नहीं, यह उनका काम है'],
+    ['भूलने से पहले वापस लाना', 'कम ही', 'नहीं', 'हाँ, रोज़'],
+    ['आपके उत्तर जाँचना', 'टेस्ट सीरीज़ में, अक्सर दिनों बाद', 'नहीं', 'मिनटों में, जितने आप लिखें*'],
+    ['साथ पढ़ने वाले', 'बड़ा बैच', 'कमेंट सेक्शन', 'आपके स्टेज का छोटा पॉड'],
+    ['हिंदी में', 'कहीं-कहीं', 'कहीं-कहीं', 'ज़्यादातर सब कुछ'],
+    ['एक साल का ख़र्च', 'दिल्ली क्लासरूम: लगभग ₹1.75–2.1 लाख', '₹0', '₹0, या Plus ₹3,999'],
+  ],
+  foot: '* मुफ़्त में हफ़्ते में 3 उत्तर; Plus में असीमित।',
+} : {
+  cols: ['Coaching / online course', 'YouTube and PDFs', 'Aspiran'],
+  rows: [
+    ['Teaches a new topic', 'Yes', 'Yes', 'No, that\'s their job'],
+    ['Brings it back before you forget', 'Rarely', 'No', 'Yes, daily'],
+    ['Checks your answers', 'In test series, often days later', 'No', 'In minutes, as many as you write*'],
+    ['People to prep with', 'A big batch', 'The comments', 'A small pod at your stage'],
+    ['In Hindi', 'Some', 'Some', 'Most of it'],
+    ['Cost for a year', 'Delhi classroom: about ₹1.75–2.1 lakh', '₹0', '₹0, or Plus at ₹3,999'],
+  ],
+  foot: '* 3 answers a week free; unlimited with Plus.',
+};
+
+const never = hi
+  ? ['टूटने से डराने वाली स्ट्रीक', 'लीडरबोर्ड और पब्लिक रैंक', '"आपके चयन की संभावना: 73%"', '"सिर्फ़ 4 सीटें बचीं" वाली उलटी गिनती', 'पीछा करने वाली नोटिफ़िकेशन', 'कॉल सेंटर को बेचा गया आपका नंबर']
+  : ['Streaks you are scared to break', 'Leaderboards and public ranks', '"Your selection chance: 73%"', '"Only 4 seats left" countdowns', 'Notifications that chase you', 'Your number sold to a call centre'];
+
+const faq = hi ? [
+  ['मैं पहले से कोचिंग जाता/जाती हूँ, या YouTube देखता/देखती हूँ। फिर यह क्यों?', 'कोचिंग एक बार पढ़ाती है। Aspiran उसे टिकाता है: जो आप पढ़ चुके हैं, उस पर रोज़ 10 से 20 मिनट का रिव्यू, और उत्तर लिखने का अभ्यास जिसकी जाँच मिनटों में हो। यह कोचिंग के साथ चलता है, उसकी जगह नहीं लेता।'],
+  ['मेरे उत्तर कैसे जाँचे जाते हैं?', 'पहले आप ख़ुद, हर हिस्से पर। फिर Aspiran का मार्कर उसे UPSC के एक आम अच्छे अंक वाले उत्तर से मिलाता है और पाँच हिस्सों पर बताता है कि आप नीचे हैं, बराबर हैं या ऊपर, साथ में हर हिस्से का एक सुधार। यह ग़लत हो सकता है; इसीलिए पहले आप ख़ुद अंक देते हैं।'],
+  ['क्या यह पूरा कोर्स है?', 'नहीं। आप अपनी किताबें या कोचिंग से पढ़ते हैं (लक्ष्मीकांत, NCERT, स्पेक्ट्रम)। Aspiran पक्का करता है कि पढ़ा हुआ याद रहे, उत्तर में काम आए, और आप अकेले न हों।'],
+  ['यह Prelims के लिए है या Mains के लिए?', 'दोनों। Prelims: रोज़ का रिव्यू, असली PYQ, "कितने पक्के हैं?" से नेगेटिव मार्किंग की समझ, और मॉक। Mains: काग़ज़ पर उत्तर, ख़ुद जाँच, फिर Aspiran की जाँच, फिर दोबारा लिखना।'],
+  ['क्या हिंदी में पूरा है?', 'ऐप, नोट्स, अभ्यास और उत्तर की जाँच हिंदी में हैं। वीडियो अभी अंग्रेज़ी में हैं।'],
+  ['भुगतान कैसे करूँ?', 'ऐप में Plus खोलिए: UPI, कार्ड या नेट बैंकिंग। एक बार का भुगतान, अपने-आप रिन्यू नहीं, 7 दिन में रिफ़ंड।'],
+  ['फ़ोन पर चलेगा?', 'हाँ। वेब ऐप किसी भी फ़ोन या लैपटॉप के ब्राउज़र में चलता है। Android ऐप Google Play पर टेस्टिंग में है।'],
+] : [
+  ['I already go to coaching, or watch YouTube. Why this too?', 'Coaching teaches it once. Aspiran makes it stay: a 10 to 20 minute review a day of what you have already studied, and answer writing that gets checked in minutes. It works alongside coaching, not instead of it.'],
+  ['How are my answers marked?', 'By you first, part by part. Then Aspiran\'s marker compares it with a typical well-scoring UPSC answer and tells you, on five parts, whether you are below, at or above it, with one fix for each. It can be wrong, which is why you mark your own first.'],
+  ['Is this a full course?', 'No. You learn from your own books or coaching (Laxmikanth, the NCERTs, Spectrum). Aspiran makes sure what you learn stays, works in an answer, and that you are not doing it alone.'],
+  ['Is it for Prelims or Mains?', 'Both. Prelims: the daily review, real past questions, "how sure are you?" so negative marking stops surprising you, and mocks. Mains: answers on paper, marked by you first, then by Aspiran, then a rewrite.'],
+  ['Is it really in Hindi?', 'The app, notes, practice and answer marking are in Hindi. The videos are in English for now.'],
+  ['How do I pay?', 'Open Plus in the app: UPI, card or net banking. One payment, no auto-renewal, refund within 7 days.'],
+  ['Does it work on my phone?', 'Yes. The web app runs in the browser on any phone or laptop. The Android app is in testing on Google Play.'],
+];
+---
+
+<BaseLayout title={title} description={description} themeColor="#06070F" lang={lang}>
+  <div class="sh" id="top">
+    <a class="skip" href="#main">{T('Skip to the page', 'पेज पर जाएँ')}</a>
+    <nav class="sh-nav" aria-label="Site">
+      <a class="sh-brand" href={hi ? '/hi/' : '/'}>
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 40 40">
+          <path d="M14 3c-2 3 2 4 0 7M20 2c-2 3 2 4 0 8M26 3c-2 3 2 4 0 7" fill="none" stroke="#F0A04B" stroke-width="2" stroke-linecap="round"></path>
+          <path d="M5 15h30l-4.5 20.5a3 3 0 0 1-3 2.5H12.5a3 3 0 0 1-3-2.5z" fill="#C8693A"></path>
+          <rect x="4" y="13" width="32" height="4.5" rx="2.2" fill="#E08A55"></rect>
+        </svg>
+        <b>Aspiran</b>
+      </a>
+      <div class="sh-nav-r">
+        <a href={how}>{T('How it teaches', 'कैसे पढ़ाता है')}</a>
+        <a href={coaching}>{T('For coaching centres', 'कोचिंग संस्थानों के लिए')}</a>
+        {hi ? <a href="/" hreflang="en" lang="en">English</a> : <a class="sh-lang" href="/hi/" hreflang="hi" lang="hi">हिंदी</a>}
+        <a class="sh-btn ghost sm" href={app('nav', '')} data-cta="app" data-where="nav">{T('Sign in', 'साइन इन')}</a>
+      </div>
+    </nav>
+
+    <main id="main">
+      <!-- 1. The position, the three pains, the one action, and the product itself. -->
+      <header class="sh-hero v4">
+        <div class="sh-hero-t">
+          <p class="sh-kick">{T('FOR UPSC CSE · ENGLISH AND HINDI · WITH ANY COACHING', 'UPSC CSE के लिए · हिंदी और ENGLISH · किसी भी कोचिंग के साथ')}</p>
+          <h1>{hi ? <>कोचिंग पढ़ाती है।<br /><span class="glow">Aspiran याद रखवाता है।</span></> : <>Your coaching teaches it.<br /><span class="glow">Aspiran makes it stay.</span></>}</h1>
+          <p class="sh-lede">{T(
+            'What you studied comes back before you forget it. Your Mains answers are marked in minutes, not weeks. And a small pod means you don\'t prep alone. 10 to 20 minutes a day, on top of whatever you already use.',
+            'जो पढ़ा, वह भूलने से पहले लौटता है। मेन्स के उत्तर हफ़्तों में नहीं, मिनटों में जँचते हैं। और एक छोटा पॉड, ताकि तैयारी अकेले न हो। रोज़ 10 से 20 मिनट, जो आप पहले से पढ़ रहे हैं उसके ऊपर।')}</p>
+          <p class="sh-ctas">
+            <a class="sh-btn primary" href={app('hero')} data-cta="try" data-where="hero">{tryLabel}</a>
+            <a class="sh-btn ghost" href="#answer" data-cta="answer" data-where="hero">{T('See a marked answer', 'जँचा हुआ उत्तर देखिए')}</a>
+          </p>
+          <ul class="sh-ticks">{ticks.map((t) => <li>{t}</li>)}</ul>
+        </div>
+        <figure class="sh-phone" aria-label={T('Screens from the free topic', 'मुफ़्त टॉपिक के स्क्रीन')}>
+          <div class="sh-phone-frame">
+            {shots.map(([src, cap], i) => <img src={src} alt={cap} width="480" height="953" decoding="async" loading={i === 0 ? 'eager' : 'lazy'} class={i === 0 ? 'on' : ''} />)}
+          </div>
+          <figcaption id="phone-cap" aria-live="off">{shots[0][1]}</figcaption>
+          <ol class="sh-dots" aria-hidden="true">{shots.map((_, i) => <li class={i === 0 ? 'on' : ''}></li>)}</ol>
+        </figure>
+      </header>
+
+      <!-- 2. Remember this (the question comes back further down). -->
+      <section class="sh-sec sh-plant" aria-labelledby="plant-h">
+        <p class="sh-kick">{T('A SMALL EXPERIMENT', 'एक छोटा प्रयोग')}</p>
+        <h2 id="plant-h">{T('Remember this. I\'ll ask you further down.', 'इसे याद रखिए। आगे पूछूँगा।')}</h2>
+        <div class="sh-card fact">
+          <p class="sh-kick">{T('FACT · GS2 · PREAMBLE', 'तथ्य · GS2 · प्रस्तावना')}</p>
+          <p>{hi ? <>प्रस्तावना में ठीक <b>एक बार</b> संशोधन हुआ है: 1976 में, 42वें संशोधन से, जिसने <b>समाजवादी, पंथनिरपेक्ष</b> और <b>अखंडता</b> जोड़े।</>
+            : <>The Preamble has been amended exactly <b>once</b>: in 1976, by the 42nd Amendment, which added <b>socialist, secular</b> and <b>integrity</b>.</>}</p>
+        </div>
+      </section>
+
+      <!-- 3. The pains, and what Aspiran does about each. -->
+      <section class="sh-sec" aria-labelledby="does-h">
+        <h2 id="does-h">{T('Three things every aspirant says', 'तीन बातें जो हर अभ्यर्थी कहता है')}</h2>
+        <div class="sh-grid">
+          {pains.map(([h, p, href]) => (
+            <a class="sh-card link pain" href={href}><h3>{h}</h3><p>{p}</p><span class="more">{T('See it', 'देखें')} →</span></a>
+          ))}
+        </div>
+        <p class="sh-note">{T(
+          'Plus three current-affairs cards a day, each pinned to its syllabus line, and Chotu, a study buddy for everyday doubts.',
+          'साथ में रोज़ तीन करेंट अफ़ेयर्स कार्ड, हर एक अपनी सिलेबस पंक्ति से जुड़ा, और रोज़ की शंकाओं के लिए Chotu, आपका स्टडी साथी।')}</p>
+      </section>
+
+      <!-- 4. A real marked answer. -->
+      <section class="sh-sec sh-answer" id="answer" aria-labelledby="answer-h">
+        <p class="sh-kick">{T('SAMPLE · AN ANSWER WE WROTE, MARKED THE WAY YOURS WILL BE', 'नमूना · हमारा लिखा एक उत्तर, वैसे ही जँचा जैसे आपका जँचेगा')}</p>
+        <h2 id="answer-h">{T('This is what you get back, in minutes', 'यह मिलता है, मिनटों में')}</h2>
+        <div class="sh-grid two sh-ans">
+          <div class="sh-card">
+            <p class="sh-small">{sample.src}</p>
+            <p class="sh-q"><b>{sample.q}</b></p>
+            <details class="sh-faq bare"><summary>{T('Read the answer (126 words)', 'उत्तर पढ़िए (126 शब्द)')}</summary><p>{sample.answer}</p></details>
+            <p class="sh-verdict">{sample.verdict}</p>
+          </div>
+          <ol class="sh-areas">
+            {sample.areas.map(([a, note, fix]) => (
+              <li class="sh-card"><p class="sh-area"><b>{a}</b><span class="band">{T('At the level', 'बराबर')}</span></p>
+                <p>{note}</p><p class="fix"><b>{T('Fix:', 'सुधार:')}</b> {fix}</p></li>
+            ))}
+          </ol>
+        </div>
+        <p class="sh-note">{T(
+          'Then you rewrite the weakest part, and the rewrite is marked too. Free: 3 answers a week. Plus: as many as you write.',
+          'फिर आप सबसे कमज़ोर हिस्सा दोबारा लिखते हैं, और वह भी जँचता है। मुफ़्त: हफ़्ते में 3 उत्तर। Plus: जितने आप लिखें।')}</p>
+      </section>
+
+      <!-- 5. Where it fits. -->
+      <section class="sh-sec" aria-labelledby="fit-h">
+        <h2 id="fit-h">{T('It doesn\'t replace your coaching. It makes it count.', 'यह आपकी कोचिंग की जगह नहीं लेता। उसे काम का बनाता है।')}</h2>
+        <div class="sh-table" role="table" aria-labelledby="fit-h">
+          <div class="sh-tr head" role="row"><span role="columnheader"></span>{fit.cols.map((c, i) => <span role="columnheader" class={i === 2 ? 'us' : ''}>{c}</span>)}</div>
+          {fit.rows.map(([k, a, b, c]) => (
+            <div class="sh-tr" role="row"><span role="rowheader">{k}</span><span role="cell" data-h={fit.cols[0]}>{a}</span><span role="cell" data-h={fit.cols[1]}>{b}</span><span role="cell" class="us" data-h={fit.cols[2]}>{c}</span></div>
+          ))}
+        </div>
+        <p class="sh-small">{fit.foot}</p>
+      </section>
+
+      <!-- 6. The question comes back. -->
+      <section class="sh-sec sh-recall" aria-labelledby="recall-h">
+        <p class="sh-kick">{T('REMEMBER THE FACT?', 'वह तथ्य याद है?')}</p>
+        <h2 id="recall-h">{T('Quick. Don\'t scroll up.', 'जल्दी। ऊपर मत जाइए।')}</h2>
+        <div class="sh-card">
+          <p><b>{T('In which year was the Preamble amended?', 'प्रस्तावना में संशोधन किस वर्ष हुआ?')}</b></p>
+          <div class="sh-opts" id="recall-opts" data-right="1976"
+            data-yes={T('Right. 1976, the 42nd Amendment.', 'सही। 1976, 42वाँ संशोधन।')}
+            data-no={T('It was 1976, the 42nd Amendment.', 'यह 1976 था, 42वाँ संशोधन।')}>
+            {['1971', '1976', '1978', T('No idea', 'पता नहीं')].map((o) => <button type="button" data-v={o}>{o}</button>)}
+          </div>
+          <p class="sh-out" id="recall-out" aria-live="polite"></p>
+          <p class="sh-after" id="recall-after" hidden>{T(
+            'That small effort of pulling it out is the whole trick. Reading it again would have felt easier and done less. Aspiran does this with everything you study, and brings it back before you forget.',
+            'याद से निकालने की वही छोटी मेहनत असली तरकीब है। दोबारा पढ़ना आसान लगता, पर कम काम करता। Aspiran आपकी हर पढ़ाई के साथ यही करता है, और भूलने से पहले वापस लाता है।')}
+            <br /><a class="sh-btn primary" href={app('recall')} data-cta="try" data-where="recall">{T('Do a whole topic this way, free', 'पूरा टॉपिक इसी तरह कीजिए, मुफ़्त')}</a></p>
+        </div>
+      </section>
+
+      <!-- 7. What's behind it: honest proof. No toppers, no testimonials, no promised results. -->
+      <section class="sh-sec" aria-labelledby="trust-h">
+        <h2 id="trust-h">{T('What\'s behind it', 'इसके पीछे क्या है')}</h2>
+        <ul class="sh-nums" aria-label={T('What is in the app today', 'आज ऐप में क्या है')}>{NUMS.map((n) => <li>{n}</li>)}</ul>
+        <p class="sh-small">{T('Most of it in Hindi too. The videos are in English for now.', 'ज़्यादातर हिंदी में भी। वीडियो अभी अंग्रेज़ी में हैं।')}</p>
+        <div class="sh-grid two">
+          <div class="sh-card">
+            <h3>{T('Why it works', 'यह क्यों काम करता है')}</h3>
+            <p>{T(
+              'The method is not ours. Pulling an answer out of memory beats reading it again (Roediger and Karpicke, 2006). Reviews spaced out over time beat cramming (Cepeda and others, 2006).',
+              'तरीक़ा हमारा नहीं है। याद से उत्तर निकालना दोबारा पढ़ने से बेहतर है (Roediger और Karpicke, 2006)। समय के अंतराल पर रिव्यू रटने से बेहतर है (Cepeda और साथी, 2006)।')}
+              {' '}<a href={how}>{T('See the six ideas', 'छह विचार देखें')}</a>.</p>
+            <h3>{T('Who\'s behind it', 'इसके पीछे कौन है')}</h3>
+            <p>{T(
+              'Aspiran is made by SnapSkill LLP in Mohali, Punjab. Past-paper answers match UPSC\'s official keys. We opened in 2026, so we won\'t show you toppers, ours or anyone else\'s. Try one topic and judge us by it.',
+              'Aspiran को SnapSkill LLP, मोहाली, पंजाब ने बनाया है। पिछले पेपरों के उत्तर UPSC की आधिकारिक कुंजियों से मिलाए गए हैं। हम 2026 में खुले हैं, इसलिए टॉपर नहीं दिखाएँगे, न अपने न किसी और के। एक टॉपिक आज़माइए और उसी से परखिए।')}</p>
+            <p class="sh-small">{T('Questions? ', 'सवाल? ')}<a href="mailto:hello@aspiran.in">hello@aspiran.in</a></p>
+          </div>
+          <div class="sh-card">
+            <h3>{T('Things you will never see here', 'जो यहाँ कभी नहीं दिखेगा')}</h3>
+            <ul class="sh-never">{never.map((n) => <li>{n}</li>)}</ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Price: ₹3,999 a year, no founding offer (owner, 17 Nov 2026). Paid in the app (Cashfree); UPI over WhatsApp stays as a fallback. -->
+      <section class="sh-sec" id="price" aria-labelledby="price-h">
+        <h2 id="price-h">{T('Free to join. Plus if you want more.', 'जुड़ना मुफ़्त। और चाहिए तो Plus।')}</h2>
+        <div class="sh-grid two">
+          <div class="sh-card"><p class="sh-kick">{T('FREE · NOT A TRIAL', 'मुफ़्त · ट्रायल नहीं')}</p><p class="sh-price">₹0</p>
+            <ul>{(hi ? ['रोज़ का रिव्यू और चाय कार्ड', 'हफ़्ते में 3 उत्तरों की जाँच, महीने में 1 मॉक', 'आपका स्टडी रूम और पॉड', 'रोज़ की शंकाओं के लिए Chotu']
+              : ['The daily review and Chai cards', '3 answers marked a week, 1 mock a month', 'Your study room and pod', 'Chotu for everyday doubts']).map((x) => <li>{x}</li>)}</ul>
+            <a class="sh-btn ghost" href={app('price')} data-cta="try" data-where="price">{tryLabel}</a></div>
+          <div class="sh-card main"><p class="sh-kick">PLUS</p>
+            <p class="sh-price">₹3,999<span>{T(' a year', ' साल')}</span></p>
+            <p class="sh-small sh-then">{T('About ₹11 a day, roughly one week of a Delhi classroom course.', 'लगभग ₹11 रोज़, दिल्ली के क्लासरूम कोर्स के लगभग एक हफ़्ते जितना।')}</p>
+            <ul>{(hi ? ['असीमित उत्तर-जाँच और दोबारा लिखना', 'सारे मॉक, आपकी ग़लतियों के प्रकार के साथ', 'तीन तस्वीरों में निबंध', 'Chotu और ज़्यादा']
+              : ['Unlimited answer marking and rewrites', 'All mocks, with your mistake types', 'Essays in three snaps', 'More of Chotu']).map((x) => <li>{x}</li>)}</ul>
+            <a class="sh-btn primary" href={app('plus', '#plus')} data-cta="plus" data-where="price">{T('Get Plus', 'Plus लीजिए')}</a>
+            <p class="sh-small">{T('UPI, card or net banking. One payment, no auto-renewal, refund within 7 days. ', 'UPI, कार्ड या नेट बैंकिंग। एक भुगतान, अपने-आप रिन्यू नहीं, 7 दिन में रिफ़ंड। ')}
+              <a href={WA_PAY} target="_blank" rel="noopener" data-cta="whatsapp" data-where="price">{T('Or pay by UPI on WhatsApp', 'या WhatsApp पर UPI से')}</a>.</p></div>
+        </div>
+      </section>
+
+      <!-- 9. Coaching centres. -->
+      <section class="sh-sec" aria-labelledby="inst-h">
+        <a class="sh-card link sh-inst" href={coaching} data-cta="coaching" data-where="home">
+          <p class="sh-kick">{T('RUN A COACHING CENTRE OR A STUDY LIBRARY?', 'कोचिंग संस्थान या स्टडी लाइब्रेरी चलाते हैं?')}</p>
+          <h2 id="inst-h">{T('Give your students Aspiran, with your name on it.', 'अपने छात्रों को Aspiran दीजिए, आपके नाम के साथ।')}</h2>
+          <p>{T('Answer copies checked first by Aspiran, your teachers confirm. Batch chat, doubts, study plans, and a list of who has gone quiet. We never sell to your students.',
+            'उत्तर-पुस्तिकाओं की पहली जाँच Aspiran करता है, आपके शिक्षक पक्की करते हैं। बैच चैट, डाउट, स्टडी प्लान, और कौन चुप हो गया उसकी सूची। हम आपके छात्रों को कभी कुछ नहीं बेचते।')}</p>
+          <span class="more">{T('See how it works for centres', 'देखिए संस्थानों के लिए कैसे काम करता है')} →</span>
+        </a>
+      </section>
+
+      <!-- 10. Questions. -->
+      <section class="sh-sec" aria-labelledby="faq-h">
+        <h2 id="faq-h">{T('Questions people ask', 'लोग जो पूछते हैं')}</h2>
+        {faq.map(([q, a]) => <details class="sh-faq"><summary>{q}</summary><p>{a}</p></details>)}
+      </section>
+
+      <!-- 11. The same door, and a way to be reminded. -->
+      <section class="sh-sec sh-end" aria-labelledby="end-h">
+        <h2 id="end-h">{T('Fifteen minutes. One topic. See if it stays.', 'पंद्रह मिनट। एक टॉपिक। देखिए, याद रहता है या नहीं।')}</h2>
+        <p class="sh-ctas"><a class="sh-btn primary" href={app('end')} data-cta="try" data-where="end">{tryLabel}</a></p>
+        <form class="sh-later" id="later" novalidate>
+          <label for="later-in">{T('Not now? Leave your email and we\'ll send you the link.', 'अभी नहीं? ईमेल छोड़ दीजिए, हम लिंक भेज देंगे।')}</label>
+          <div class="row"><input id="later-in" type="email" autocomplete="email" maxlength="80" placeholder="you@example.com" />
+            <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+            <button class="sh-btn ghost" type="submit">{T('Send it', 'भेजिए')}</button></div>
+          <p class="sh-small">{T('One email with the link. By sending, you agree we can email you about Aspiran. ', 'लिंक वाला एक ईमेल। भेजकर आप मानते हैं कि हम Aspiran के बारे में आपको ईमेल कर सकते हैं। ')}<a href="/privacy">{T('Privacy', 'प्राइवेसी')}</a>.</p>
+          <p class="sh-out" id="later-out" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="sh-foot">
+      <b>Aspiran</b>
+      <nav aria-label="Footer"><a href={how}>{T('How it teaches', 'कैसे पढ़ाता है')}</a><a href={coaching}>{T('For coaching centres', 'कोचिंग संस्थानों के लिए')}</a><a href="https://app.aspiran.in/learn">{T('UPSC syllabus, topic by topic', 'UPSC सिलेबस, टॉपिक दर टॉपिक')}</a><a href="/privacy">{T('Privacy', 'प्राइवेसी')}</a><a href="/terms">{T('Terms', 'शर्तें')}</a>{hi ? <a href="/" hreflang="en" lang="en">English</a> : <a class="sh-lang" href="/hi/" hreflang="hi" lang="hi">हिंदी</a>}</nav>
+      <p>{T('Not affiliated with UPSC. Answer marks and Chotu\'s replies can be wrong: check what matters.', 'UPSC से संबद्ध नहीं। उत्तर के अंक और Chotu के जवाब ग़लत हो सकते हैं: ज़रूरी बातें जाँच लें।')}</p>
+    </footer>
+  </div>
+
+  <script>
+    const HI = document.documentElement.lang === 'hi';
+    const ph = (name: string, props: Record<string, unknown> = {}) => (window as any).posthog?.capture?.(name, props);
+    // Buttons with data-cta are counted in BaseLayout, for every page.
+
+    // The hero phone: the three demo screens, one every 4 seconds, once through, then it stops on the last.
+    // No motion at all when the visitor asks for reduced motion; a tap moves to the next screen.
+    const frame = document.querySelector('.sh-phone-frame');
+    if (frame) {
+      const imgs = [...frame.querySelectorAll('img')];
+      const dots = [...document.querySelectorAll('.sh-dots li')];
+      const cap = document.getElementById('phone-cap')!;
+      let i = 0;
+      const show = (n: number) => {
+        i = n; imgs.forEach((im, k) => im.classList.toggle('on', k === n)); dots.forEach((d, k) => d.classList.toggle('on', k === n));
+        cap.textContent = imgs[n].alt;
+      };
+      frame.addEventListener('click', () => show((i + 1) % imgs.length));
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const t = setInterval(() => { if (i >= imgs.length - 1) return clearInterval(t); show(i + 1); }, 4000);
+      }
+    }
+
+    // The recall question.
+    const opts = document.getElementById('recall-opts')!;
+    opts.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (!b || opts.dataset.done) return;
+      opts.dataset.done = '1';
+      const right = b.dataset.v === opts.dataset.right;
+      opts.querySelectorAll('button').forEach((x) => { x.disabled = true; if (x.dataset.v === opts.dataset.right) x.classList.add('right'); });
+      if (!right) b.classList.add('wrong');
+      document.getElementById('recall-out')!.textContent = right ? opts.dataset.yes! : opts.dataset.no!;
+      document.getElementById('recall-after')!.hidden = false;
+      ph('recall_answered', { right });
+    });
+
+    // "Send me the link": the same /web/lead the long page uses; the server emails the link at once.
+    const store = { get: (k: string) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* private window */ } } };
+    const visitorId = store.get('aspiran-vid') ?? `v-${crypto.getRandomValues(new Uint32Array(3)).join('-')}`;
+    store.set('aspiran-vid', visitorId);
+    const API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://localhost:8788' : 'https://app.aspiran.in';
+    const u = new URL(location.href);
+    const source = ['utm_source', 'utm_medium', 'utm_campaign'].map((k) => u.searchParams.get(k)).filter(Boolean).join('/') || (document.referrer ? new URL(document.referrer).hostname : 'direct');
+    document.getElementById('later')!.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const f = e.currentTarget as HTMLFormElement;
+      const out = document.getElementById('later-out')!;
+      const contact = (document.getElementById('later-in') as HTMLInputElement).value.trim();
+      if (!/^\S+@\S+\.\S+$/.test(contact)) { out.textContent = HI ? 'ईमेल पता डालिए।' : 'Add an email address.'; return; }
+      out.textContent = HI ? 'भेज रहे हैं…' : 'Sending…';
+      try {
+        const r = await fetch(`${API}/web/lead`, { method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ visitorId, details: {}, contact, consent: true, lang: HI ? 'hi' : 'en', source, company: (f.elements.namedItem('company') as HTMLInputElement).value }) });
+        if (!r.ok) throw new Error();
+        out.textContent = HI ? 'भेज दिया। अपना इनबॉक्स देखिए।' : 'Sent. Check your inbox.';
+        ph('lead_saved', { kind: 'email' });
+      } catch { out.textContent = HI ? 'अभी नहीं भेज पाए। ऊपर का बटन सीधे ऐप खोलता है।' : "Couldn't send just now. The button above opens the app directly."; }
+    });
+  </script>
+</BaseLayout>

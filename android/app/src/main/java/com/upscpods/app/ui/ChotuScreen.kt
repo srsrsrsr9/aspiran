@@ -65,7 +65,7 @@ import androidx.compose.foundation.clickable
 
 /** Chotu v2: what each chip is for. Sent as the cloud mode; on the phone it frames the starters. */
 private val MODES = listOf(
-    Triple("talk", "Talk", "Tell me how it's going. I'm an AI friend, not a therapist, and I'll say so."),
+    Triple("talk", "Talk", "Tell me how it's going. I'm a chai cup, not a therapist, and I'll say so."),
     Triple("prep", "Prep", "Ask me anything from the syllabus. I'll keep it simple."),
     Triple("plan", "Plan", "Tell me your hours and what's behind. We'll make the week smaller."),
 )
@@ -123,7 +123,7 @@ fun MascotTab(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     // The last reply's real source when there is one (the phone can hand a message to online Chotu).
-                    "AI · can be wrong · " + when {
+                    "Can be wrong · " + when {
                         lastReply != null -> if (lastReply.cloud) "last reply came online" else "last reply ran on this phone"
                         ready -> "runs on this phone"
                         cloud -> "answers online"
@@ -149,8 +149,8 @@ fun MascotTab(
         title = { Text("About ${Brand.MASCOT_SHORT}") },
         text = {
             Text(
-                (if (ready) "${Brand.MASCOT_SHORT} is an AI that runs on your phone. Chats never leave it and aren't saved."
-                else "${Brand.MASCOT_SHORT} is an AI. Your questions here go to our server to be answered, and aren't saved. " +
+                (if (ready) "${Brand.MASCOT_SHORT} runs on your phone. Chats never leave it and aren't saved."
+                else "Your questions here go to our server to be answered, and aren't saved. " +
                     "Close the Day, mood and journal never go.") +
                     " It can be wrong, it's not a counsellor, and it never predicts ranks. If something feels heavy, Need to talk is one tap away.",
             )

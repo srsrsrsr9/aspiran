@@ -4,9 +4,9 @@ import java.time.LocalDate
 
 /** Names and numbers that must be easy to change in one place. */
 object Brand {
-    /** Mascot name, pending the ~10-user name test (ux-guide.md, change 4). Always shown with "· AI". */
+    /** Mascot name, pending the ~10-user name test (ux-guide.md, change 4). No "AI" labels (owner, 17 Nov 2026). */
     const val MASCOT_SHORT = "Chotu"
-    const val MASCOT = "$MASCOT_SHORT · AI"
+    const val MASCOT = MASCOT_SHORT
 
     /** Opt-in in My Path only, shown as a date and never red. Placeholder until UPSC's 2027 calendar. */
     val PRELIMS_DATE: LocalDate = LocalDate.of(2027, 5, 23)

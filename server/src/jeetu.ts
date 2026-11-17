@@ -56,7 +56,7 @@ export async function jeetuRoute(req: Request, env: Env, path: string): Promise<
     const id = String(b.messageId ?? "");
     if (!/^[\w-]{8,64}$/.test(id)) return bad("messageId is required");
     await ensureSchema(env);
-    await env.DB.prepare("INSERT INTO reports (kind, pod_id, message_id, author, text, reason, created_at) VALUES ('chotu', 'jeetu', ?, 'Jeetu · AI', ?, ?, ?)")
+    await env.DB.prepare("INSERT INTO reports (kind, pod_id, message_id, author, text, reason, created_at) VALUES ('chotu', 'jeetu', ?, 'Jeetu', ?, ?, ?)")
       .bind(id, String(b.text ?? "").slice(0, 2000), String(b.reason ?? "Reported").slice(0, 300), new Date().toISOString()).run();
     return json({ ok: true });
   }
@@ -73,12 +73,12 @@ export async function jeetuRoute(req: Request, env: Env, path: string): Promise<
   const ctx = body.context ?? {};
   const lang = chatLang(ctx.language);
   const hi = lang === "hi" ? "hi" : "en";
-  const fixed = (key: keyof typeof LINES) => json({ reply: LINES[key][hi], fixed: key, ai: true, who: "Jeetu · AI" });
+  const fixed = (key: keyof typeof LINES) => json({ reply: LINES[key][hi], fixed: key, ai: true, who: "Jeetu" });
 
   // Distress first, on every user turn: the care reply, never a model.
   const extra = await extraDistress(env).catch(() => [] as string[]);
   if (turns.some((t) => t.role === "user" && distress(t.content, extra))) return json({ care: true, helplines: HELPLINES });
-  if (quietHours()) return json({ reply: LINES.quiet[hi], quiet: true, fixed: "quiet", ai: true, who: "Jeetu · AI" });
+  if (quietHours()) return json({ reply: LINES.quiet[hi], quiet: true, fixed: "quiet", ai: true, who: "Jeetu" });
   const last = turns[turns.length - 1].content;
   if (has(last, RANKS)) return fixed("ranks");
   if (has(last, FEELINGS)) return fixed("feelings");
@@ -93,13 +93,13 @@ export async function jeetuRoute(req: Request, env: Env, path: string): Promise<
   try {
     // Same switch ("chotu" in Admin → AI controls), models and logging as cloud Chotu.
     const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], CHAT_ROUTES[lang]);
-    return json({ reply: text, model, lang, ai: true, who: "Jeetu · AI" });
+    return json({ reply: text, model, lang, ai: true, who: "Jeetu" });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Jeetu is offline right now.", offline: true }, 503);
     if (lang !== "en") {
       try {
         const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system + "\n\nAnswer in English." }, ...turns], CHAT_ROUTES.en);
-        return json({ reply: text, model, lang: "en", ai: true, who: "Jeetu · AI", fallback: true });
+        return json({ reply: text, model, lang: "en", ai: true, who: "Jeetu", fallback: true });
       } catch { /* fall through */ }
     }
     return json({ error: "Jeetu couldn't answer just now. Try again in a minute.", offline: false }, 502);

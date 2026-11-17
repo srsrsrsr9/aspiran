@@ -269,7 +269,7 @@ class Community(private val server: () -> String, private val memberId: () -> St
                 when {
                     o == null -> BoardReply(note = "The board member didn't come through. Carry on with the next question.")
                     str("care") == "true" -> BoardReply(care = true)
-                    str("quiet") == "true" -> BoardReply(note = "The AI board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.")
+                    str("quiet") == "true" -> BoardReply(note = "The board members rest from 11:30 pm to 7 am and in result weeks. Carry on with the next question.")
                     str("limit") == "true" -> BoardReply(note = "That's enough follow-ups for today. Carry on with the bank's questions.")
                     r.isSuccessful && !str("followUp").isNullOrBlank() -> BoardReply(followUp = str("followUp"))
                     else -> BoardReply(note = str("error") ?: "The board member didn't come through. Carry on with the next question.")

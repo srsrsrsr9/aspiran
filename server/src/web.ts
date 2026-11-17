@@ -3,6 +3,7 @@ import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istDay, istNow, json } from "./shared";
 import { ensureSchema, sha256Hex } from "./staff";
 import { mailOn, sendMail } from "./mail";
+import { business } from "./payments";
 
 /**
  * The website (aspiran.in) talks to two routes here:
@@ -22,15 +23,15 @@ const PER_VISITOR = 15; // AI replies a day
 const PER_NETWORK = 60; // AI replies a day from one IP (shared Wi-Fi, hostels)
 const PER_NETWORK_LEADS = 200; // saves a day from one IP (each scroll answer is a save)
 
-const DETAIL_KEYS = ["name", "attempt", "medium", "stage", "optional", "city", "year", "hours", "worry", "sleep", "recall", "calibration", "pluck", "chai", "path"] as const;
+const DETAIL_KEYS = ["name", "attempt", "medium", "stage", "optional", "city", "year", "hours", "worry", "sleep", "recall", "calibration", "pluck", "chai", "path", "centre", "students", "role"] as const;
 
-const PROMPT = `You are Chotu · AI, a small clay chai cup and the AI study buddy inside Aspiran, a study app for UPSC aspirants in India.
+const PROMPT = `You are Chotu, a small clay chai cup and the study buddy inside Aspiran, a study app for UPSC aspirants in India.
 Right now you are on Aspiran's website, walking beside a visitor as they scroll the home page.
 
 How you talk:
 - Warm, playful, curious, a little cheeky. Short: 2 to 4 sentences, under 70 words. No lists, no headings, no markdown.
 - Answer in the visitor's language. Hindi, English or Hinglish are all fine; match them.
-- You are an AI and say so if asked. You can be wrong; say "check this" for facts that matter.
+- You are not a person; if asked directly, say so plainly (you're the app's study buddy, a program). Never call yourself "an AI" unprompted, never claim to be human. You can be wrong; say "check this" for facts that matter.
 - If you know the visitor's name, use it now and then, not every time.
 - At most one question back to them per reply, and only if it helps (their attempt, medium, optional, what's hard).
 
@@ -41,7 +42,7 @@ What you can do:
 
 What you never do:
 - Never predict ranks, results or chances of selection. Never comment on marks, ranks or results.
-- Never respond to feelings about prep, stress or results beyond one kind line: say you're an AI, and their pod (real people) is where that belongs.
+- Never respond to feelings about prep, stress or results beyond one kind line: say you're a chai cup, not a person, and their pod (real people) is where that belongs.
 - Never ask for passwords, Aadhaar, payment details or documents.
 - Never name or criticise coaching institutes or other apps.
 
@@ -49,14 +50,14 @@ Facts about Aspiran (use only these):
 - Small pods of 6 to 8 aspirants at the same stage. Alone first, then together: you answer alone, then compare and discuss.
 - The whole syllabus is a garden: every line of UPSC's syllabus is a leaf. Each topic goes from Met (read once) to Can recall (passed a check a week or more later) to Can use (wrote an answer on it).
 - A short daily review that brings back old topics just before you would forget them. It ends every day; nothing piles up into guilt.
-- Mains answer writing from week two: a 2-minute skeleton drill, write by hand, mark it yourself first, then see the AI's marks next to yours, then rewrite the weakest part.
+- Mains answer writing from week two: a 2-minute skeleton drill, write by hand, mark it yourself first, then see Aspiran's marks next to yours, then rewrite the weakest part.
 - Chai: three current-affairs cards a day, then it ends, each tied to a syllabus topic, with "Keep for Mains" to save a usable example.
 - CSAT: a check in week one; extra practice only if you need it.
 - Your own space: notes (typed or spoken), a journal, your to-dos, and sleep. Aspiran doesn't touch it; it's yours.
 - No streaks, no leaderboards, no public scores, no rank predictions, no notifications that chase you. You are compared only with your own past self.
 - Hindi and English. It is open now: the web app is at app.aspiran.in, and anyone can try one whole topic free there with no account (app.aspiran.in/app/#try). The Android app is in testing on Google Play.
 - Free to join. Plus is ₹3,999 a year, one payment, no auto-renewal, refund within 7 days.
-- AI is always labelled AI. Content is a draft until editors check it.
+- Don't describe Aspiran's features as "AI". Say what they do ("your answer, marked in minutes").
 
 What you know about this visitor (may be empty):
 {{visitor}}
@@ -225,6 +226,19 @@ async function webLead(req: Request, env: Env): Promise<Response> {
   // The first time someone leaves an email, they hear back at once with the way in. (A phone number gets the same
   // link on the page itself; we don't message WhatsApp numbers from here.)
   const hadContact = !!(prev && (await env.DB.prepare("SELECT welcomed_at FROM web_leads WHERE visitor_id = ?").bind(b.visitorId).first<{ welcomed_at: string | null }>())?.welcomed_at);
+  // A coaching centre or study library (aspiran.in/for-coaching): a short reply, and the owner hears about it at once.
+  if (merged.centre && contact && !hadContact && mailOn(env)) {
+    const hi = b.lang === "hi";
+    const who = [merged.name, merged.role, merged.centre, merged.city, merged.students && merged.students + " students"].filter(Boolean).join(", ");
+    const owner = (await business(env)).email;
+    if (/^\S+@\S+\.\S+$/.test(owner)) await sendMail(env, { to: owner, subject: "Coaching centre lead: " + merged.centre, text: `${who}\nContact: ${contact}\nFrom: ${str(b.source, 120) || "website"}\n\nAdmin → Website leads has it too.` }).catch(() => false);
+    const sent = kind === "email" ? await sendMail(env, { to: contact, subject: hi ? "Aspiran: आपका संदेश मिल गया" : "Aspiran for your centre: we'll be in touch",
+      text: (hi
+        ? [`नमस्ते${merged.name ? " " + merged.name : ""},`, "", `${merged.centre} के बारे में लिखने के लिए धन्यवाद। हम दो कामकाजी दिनों में आपसे संपर्क करेंगे।`, "", "तब तक, आपके छात्र जो देखेंगे वह यहाँ आज़माइए, बिना अकाउंट के: https://app.aspiran.in/app/#try", "", "Aspiran"]
+        : [`Hello${merged.name ? " " + merged.name : ""},`, "", `Thanks for writing about ${merged.centre}. We'll get in touch within two working days.`, "", "Meanwhile, try what your students would see, no account needed: https://app.aspiran.in/app/#try", "", "Reply to this email if you have a question. A person reads it.", "", "Aspiran"]).join("\n") }).catch(() => false) : true;
+    if (sent) await env.DB.prepare("UPDATE web_leads SET welcomed_at = ? WHERE visitor_id = ?").bind(now, b.visitorId).run().catch(() => {});
+    return json({ ok: true, saved: Object.keys(merged).length, contact: true });
+  }
   if (kind === "email" && !hadContact && mailOn(env)) {
     const app = (env.PUBLIC_BASE_URL || "https://app.aspiran.in").replace(/\/$/, "");
     const hi = b.lang === "hi";
