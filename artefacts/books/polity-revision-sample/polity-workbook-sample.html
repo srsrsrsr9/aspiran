@@ -1,0 +1,971 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polity Workbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{
+  --paper:#FFFDF9; --ink:#2A1B12; --muted:#6E5A4C; --line:#E4D8C8; --rule:#D9CDBD; --brand:#9A4E0E; --soft:#F6E2C9;
+  --ok:#E3EAD9; --okink:#3E5631; --bad:#F8E1DE; --badink:#8A2A1E; --blue:#DCE6EE; --blueink:#2D4A63;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#E9E2D7;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:10.2pt;line-height:1.45;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+@page{size:210mm 297mm;margin:0}
+.page{width:210mm;height:297mm;margin:10mm auto;padding:14mm 15mm 18mm;background:var(--paper);position:relative;overflow:hidden;
+  box-shadow:0 2px 14px rgba(42,27,18,.18);page-break-after:always;break-after:page}
+.page.m{padding-right:66mm}
+@media print{body{background:none}.page{margin:0;box-shadow:none}}
+.folio{position:absolute;bottom:8mm;left:15mm;right:15mm;display:flex;justify-content:space-between;font:500 7pt Inter,sans-serif;color:var(--muted);letter-spacing:.03em;border-top:.6pt solid var(--line);padding-top:2mm}
+.tab{position:absolute;right:0;width:8mm;height:30mm;background:var(--brand);color:#FFF6EA;display:flex;align-items:center;justify-content:center;
+  font:800 11pt Martel,serif;border-radius:2mm 0 0 2mm}
+.tab.c1{top:30mm}.tab.c2{top:64mm;background:#4F6B3E}.tab.c9{top:98mm;background:#2D4A63}
+h1,h2,h3{font-family:Martel,Georgia,serif;font-weight:800;line-height:1.15;margin:0}
+h2{font-size:17pt;color:var(--brand);margin-bottom:2.5mm}
+h3{font-size:11pt;margin:5mm 0 1.8mm}
+p{margin:0 0 2.2mm}
+ul,ol{margin:0 0 2mm;padding-left:5mm} li{margin-bottom:1.2mm}
+.kicker{font:700 7.4pt Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);margin-bottom:1.5mm}
+.do{font:600 8.6pt Inter,sans-serif;color:var(--ink);background:var(--soft);border-left:2.4mm solid var(--brand);padding:2mm 3mm;margin:2mm 0 3mm;border-radius:0 1.5mm 1.5mm 0}
+.do::before{content:"✎  ";color:var(--brand)}
+.small{font-size:8.4pt;color:var(--muted)}
+.box{border-radius:2.2mm;padding:2.8mm 3.4mm;margin:2.5mm 0;font-size:9.4pt}
+.box .tag{font:700 6.8pt Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:1mm}
+.trap{background:var(--bad)} .trap .tag{color:var(--badink)}
+.hook{background:var(--ok)} .hook .tag{color:var(--okink)}
+.asks{background:var(--blue)} .asks .tag{color:var(--blueink)}
+.note{background:var(--soft)} .note .tag{color:var(--brand)}
+/* fill-in blanks */
+.fill{line-height:2.35;font-size:10.6pt}
+.b{display:inline-block;border-bottom:.9pt solid var(--ink);min-width:30mm;height:1.05em;position:relative;margin:0 .6mm}
+.b.s{min-width:18mm}.b.l{min-width:46mm}
+.b::before{content:attr(data-n);position:absolute;left:0;top:-3.2mm;font:600 5.8pt Inter,sans-serif;color:var(--brand)}
+/* writing surfaces */
+.lines{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(8mm - .5pt),var(--rule) calc(8mm - .5pt),var(--rule) 8mm)}
+.lines.tight{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(6.5mm - .5pt),var(--rule) calc(6.5mm - .5pt),var(--rule) 6.5mm)}
+.dots{background-image:radial-gradient(circle,#C9BCA9 .55pt,transparent .7pt);background-size:5mm 5mm;border:.6pt solid var(--line);border-radius:2mm}
+.mcol{position:absolute;top:14mm;bottom:20mm;right:15mm;width:44mm;border-left:.8pt dashed var(--rule);padding-left:3.5mm}
+.mcol .h{font:700 7pt Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.mcol .sym{font:500 7pt Inter,sans-serif;color:var(--muted);margin:1mm 0 2mm}
+.mcol .lines{position:absolute;top:14mm;bottom:0;left:3.5mm;right:0}
+.fig{margin:2mm 0 1mm} .fig svg{width:100%;height:auto;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+table{border-collapse:collapse;width:100%;font-size:9pt}
+th{font:700 6.9pt Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-align:left;color:var(--muted);border-bottom:1pt solid var(--ink);padding:1.4mm 1.4mm}
+td{border-bottom:.6pt solid var(--rule);padding:1.4mm 1.4mm;vertical-align:top}
+table.write td{height:11mm}
+table.write td.g{color:var(--ink)}
+.oneline td{height:12.5mm}
+.art{font:600 8pt Inter,sans-serif;background:var(--soft);color:var(--brand);padding:.3mm 1.4mm;border-radius:1mm;white-space:nowrap}
+.chip{display:inline-block;font:700 9pt Inter,sans-serif;border:.9pt solid var(--ink);border-radius:5mm;padding:.6mm 2.6mm;margin:0 1.2mm 1.6mm 0}
+.tf{font:700 8pt Inter,sans-serif;color:var(--muted);white-space:nowrap}
+.tf span{display:inline-block;width:5.5mm;height:5.5mm;border:.9pt solid var(--muted);border-radius:50%;text-align:center;line-height:5.1mm;margin-right:1mm}
+.check{display:flex;flex-wrap:wrap;gap:2mm 6mm;font:500 8.4pt Inter,sans-serif;color:var(--muted)}
+.check span::before{content:"";display:inline-block;width:3.4mm;height:3.4mm;border:.9pt solid var(--muted);border-radius:.6mm;margin-right:1.4mm;vertical-align:-.6mm}
+.dates{display:flex;gap:5mm;font:600 8pt Inter,sans-serif;color:var(--muted);align-items:center}
+.dates i{font-style:normal;display:inline-block;border-bottom:.8pt solid var(--muted);width:20mm;margin-left:1.5mm}
+.qrcard{display:flex;gap:4mm;align-items:center;border:1pt dashed var(--brand);border-radius:2.5mm;padding:2.5mm 3.5mm}
+.qrcard .qr{width:20mm;height:20mm;flex:none} .qrcard .qr svg{width:100%;height:100%}
+.qrcard b{font-family:Martel,serif;font-size:10pt;display:block}
+.dev{font-family:"Noto Serif Devanagari","Martel",serif}
+.hand{font-family:Caveat,cursive;color:#2D4A63;font-size:13pt;font-weight:700}
+.wbank{background:#FFF;border:.8pt solid var(--line);border-radius:2mm;padding:2.2mm 3mm 0.6mm;margin:2mm 0}
+.wbank .lbl{font:700 6.8pt Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4mm}
+/* opener band */
+.band{margin:-14mm -15mm 6mm;padding:14mm 15mm 8mm;background:var(--brand);color:#FFF6EA;position:relative}
+.band.g{background:#4F6B3E}
+.band .kicker{color:#F6E2C9}
+.band h1{font-size:30pt;color:#FFF6EA;margin-top:2mm}
+.band p{color:#FFF6EA;font-size:10.8pt;max-width:140mm;margin-top:2mm}
+.band .num{position:absolute;right:15mm;top:8mm;font:800 70pt Martel,serif;opacity:.22;line-height:1}
+.cando{font-size:9.6pt}
+.cando li{margin-bottom:1mm}
+/* cover */
+.cover{background:#2A1B12;color:#FFF6EA;padding:0}
+.cover .inner{position:absolute;inset:0;padding:18mm 17mm}
+.brandline{font:700 8.5pt Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#F0A04B}
+.cover h1{font-size:58pt;color:#FFF6EA;margin-top:6mm;letter-spacing:-.01em;line-height:1}
+.cover .sub{font:600 14pt Inter,sans-serif;color:#F6E2C9;margin-top:3mm}
+.flash{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.card{height:52mm;border:1pt dashed #B9AC9C;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.card>div{padding:3mm 3.5mm;font-size:9.6pt}
+.card>div:first-child{border-right:.8pt dotted var(--brand)}
+.card .lbl{font:700 6.4pt Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1.5mm}
+.card .q{font-family:Martel,serif;font-weight:700;font-size:10pt}
+.scissors{font:500 7.4pt Inter,sans-serif;color:var(--muted);margin-bottom:2mm}
+.key{columns:2;column-gap:7mm;font-size:8.4pt;line-height:1.38}
+.key h4{font:700 7.6pt Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin:2.6mm 0 1mm;break-after:avoid}
+.key p{margin:0 0 1.2mm;break-inside:avoid}
+.key b{font-family:Inter,sans-serif;font-size:7.6pt;color:var(--brand)}
+.conf td{height:10mm;vertical-align:middle}
+.dot3{display:inline-flex;gap:2mm}.dot3 i{width:5mm;height:5mm;border:.9pt solid var(--muted);border-radius:50%;display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- =============== COVER =============== -->
+<section class="page cover">
+  <svg viewBox="0 0 794 1123" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+    <defs><pattern id="d" width="19" height="19" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.3" fill="#F0A04B" opacity=".2"/></pattern></defs>
+    <rect width="794" height="1123" fill="url(#d)"/>
+    <!-- an open notebook page with handwriting marks -->
+    <g transform="translate(150 470) rotate(-4)">
+      <rect x="0" y="0" width="500" height="380" rx="8" fill="#FFFDF9"/>
+      <g stroke="#D9CDBD" stroke-width="1.4">
+        <line x1="24" y1="70" x2="476" y2="70"/><line x1="24" y1="110" x2="476" y2="110"/><line x1="24" y1="150" x2="476" y2="150"/>
+        <line x1="24" y1="190" x2="476" y2="190"/><line x1="24" y1="230" x2="476" y2="230"/><line x1="24" y1="270" x2="476" y2="270"/>
+        <line x1="24" y1="310" x2="476" y2="310"/><line x1="24" y1="350" x2="476" y2="350"/>
+      </g>
+      <line x1="370" y1="20" x2="370" y2="360" stroke="#E7B9B1" stroke-width="1.6"/>
+      <rect x="30" y="76" width="210" height="26" fill="#F7E36B" opacity=".75"/>
+      <text x="36" y="98" font-family="Caveat, cursive" font-size="30" font-weight="700" fill="#2D4A63">Art 21 = life &amp; liberty</text>
+      <text x="36" y="140" font-family="Caveat, cursive" font-size="27" fill="#2D4A63">Maneka '78 → fair, just, reasonable</text>
+      <rect x="30" y="196" width="150" height="26" fill="#9FD7A8" opacity=".65"/>
+      <text x="36" y="218" font-family="Caveat, cursive" font-size="27" fill="#2D4A63">44th Amdt 1978</text>
+      <text x="36" y="260" font-family="Caveat, cursive" font-size="27" fill="#2D4A63">never suspend 20 + 21 !!</text>
+      <text x="380" y="98" font-family="Caveat, cursive" font-size="24" fill="#8A2A1E">★ PYQ</text>
+      <text x="380" y="180" font-family="Caveat, cursive" font-size="24" fill="#8A2A1E">? ask pod</text>
+      <ellipse cx="128" cy="302" rx="92" ry="22" fill="none" stroke="#C9772B" stroke-width="2.4"/>
+      <text x="48" y="310" font-family="Caveat, cursive" font-size="27" fill="#2D4A63">Puttaswamy 2017</text>
+      <path d="M244 320 q30 18 70 0" stroke="#8A2A1E" stroke-width="2.4" fill="none"/>
+    </g>
+  </svg>
+  <div class="inner">
+    <div class="brandline">Aspiran · Workbook</div>
+    <h1>Polity</h1>
+    <div class="sub">The book you fill in. The more you use it, the more it's worth.</div>
+    <div style="margin-top:6mm;display:inline-block;font:600 9pt Inter,sans-serif;border:1pt solid #F0A04B;color:#F0A04B;border-radius:6mm;padding:1.2mm 4mm">English · <span class="dev">हिन्दी</span></div>
+  </div>
+  <div style="position:absolute;left:17mm;right:17mm;bottom:18mm;display:flex;justify-content:space-between;align-items:flex-end">
+    <div style="font:600 10pt Inter,sans-serif;color:#F6E2C9">Write in it. Highlight it. Argue with it.<br><span style="font-weight:400;opacity:.8">Sample edition · 2 chapters</span></div>
+    <div style="font:800 22pt Martel,serif">Aspiran</div>
+  </div>
+</section>
+
+<!-- =============== i. BELONGS TO + HOW TO USE =============== -->
+<section class="page">
+  <div class="kicker">Make it yours</div>
+  <h2>This workbook belongs to</h2>
+  <div class="lines" style="height:16mm;margin-bottom:2mm"></div>
+  <div class="two" style="font:600 8.4pt Inter,sans-serif;color:var(--muted)">
+    <div>Attempt I'm preparing for <div class="lines" style="height:9mm"></div></div>
+    <div>I started this book on <div class="lines" style="height:9mm"></div></div>
+  </div>
+  <p class="small" style="margin-top:1mm">If found, please return. It holds months of someone's work.</p>
+
+  <h3>This is not a book to read. It's a book to finish.</h3>
+  <p>The notes in most books are already complete, so your eyes slide over them. Here, <b>you</b> complete them: fill the gaps, draw the diagrams, sort, solve, and write answers. Saying it from memory and writing it down is what makes it stay. By exam day this book will be full of your handwriting, and it will be the one book you trust most.</p>
+
+  <h3>Your own colour code</h3>
+  <div class="do">Pick four highlighters and write what each colour means. Use the same code everywhere in this book.</div>
+  <table class="write" style="margin-bottom:2mm">
+    <tr><th style="width:24%">Colour</th><th>I use it for</th><th style="width:44%">Suggested</th></tr>
+    <tr><td><span style="display:inline-block;width:14mm;height:5mm;border:.8pt dashed var(--muted);border-radius:1mm"></span></td><td></td><td class="small">Article numbers</td></tr>
+    <tr><td><span style="display:inline-block;width:14mm;height:5mm;border:.8pt dashed var(--muted);border-radius:1mm"></span></td><td></td><td class="small">Amendments and years</td></tr>
+    <tr><td><span style="display:inline-block;width:14mm;height:5mm;border:.8pt dashed var(--muted);border-radius:1mm"></span></td><td></td><td class="small">Court cases</td></tr>
+    <tr><td><span style="display:inline-block;width:14mm;height:5mm;border:.8pt dashed var(--muted);border-radius:1mm"></span></td><td></td><td class="small">Things I keep getting wrong</td></tr>
+  </table>
+
+  <h3>Margin marks</h3>
+  <div class="two" style="font-size:9.4pt">
+    <div><b style="font-family:Inter">★</b> asked in a past UPSC paper<br><b style="font-family:Inter">?</b> doubt: ask your pod or Chotu<br><b style="font-family:Inter">!</b> I keep forgetting this</div>
+    <div><b style="font-family:Inter">↔</b> links to another chapter (write the page)<br><b style="font-family:Inter">N</b> seen in the news (log it on the news page)<br><b style="font-family:Inter">✓</b> sorted, I know this now</div>
+  </div>
+
+  <h3>How each chapter works</h3>
+  <table style="font-size:9.2pt">
+    <tr><td style="width:26%"><b>Before you read</b></td><td>Write what you already know. It's fine if it's very little.</td></tr>
+    <tr><td><b>Fill-in notes</b></td><td>Read your main book on the topic, then complete the gaps. Pencil first; ink once you've checked the key.</td></tr>
+    <tr><td><b>Build it</b></td><td>Blank diagrams, timelines and tables. Fill them without looking, then check.</td></tr>
+    <tr><td><b>Practise</b></td><td>Recall questions, UPSC-style questions where you write <i>why</i>, and one Mains answer.</td></tr>
+    <tr><td><b>Keep adding</b></td><td>The news log, mistake log and PYQ tracker keep filling up until your exam.</td></tr>
+  </table>
+  <div class="folio"><span>Aspiran · Polity Workbook</span><span>i</span></div>
+</section>
+
+<!-- =============== ii. CONTENTS + CONFIDENCE =============== -->
+<section class="page">
+  <div class="kicker">Contents and my confidence</div>
+  <h2>Where I stand, chapter by chapter</h2>
+  <div class="do">Each time you come back to a chapter, shade one circle for how sure you feel: empty = shaky, half = getting there, full = I could teach it. Write the date under it.</div>
+  <table class="conf">
+    <tr><th style="width:6%">Ch</th><th>Chapter</th><th style="width:9%">Page</th><th style="width:15%">1st pass</th><th style="width:15%">2nd pass</th><th style="width:15%">Final month</th></tr>
+    <tr><td><b>1</b></td><td><b style="color:var(--brand)">The Preamble</b></td><td>1</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td><b>2</b></td><td><b style="color:var(--brand)">Fundamental Rights</b></td><td>10</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>3</td><td>Directive Principles and Fundamental Duties</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>4</td><td>Amending the Constitution; basic structure</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>5</td><td>Parliament</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>6</td><td>President, Vice-President, Prime Minister</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>7</td><td>The judiciary</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>8</td><td>Centre and states</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>9</td><td>Panchayats and municipalities</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>10</td><td>Emergency provisions</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>11</td><td>Constitutional and statutory bodies</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+    <tr><td>12</td><td>Elections and parties</td><td>—</td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td><td><span class="dot3"><i></i></span></td></tr>
+  </table>
+
+  <h3>At the back, filling up all year</h3>
+  <table style="font-size:9.4pt">
+    <tr><td style="width:9%">20</td><td>Cut-out flashcards</td><td style="width:9%">23</td><td>PYQ tracker</td></tr>
+    <tr><td>21</td><td>My own night-before sheet</td><td>24</td><td>Things I keep forgetting · My index</td></tr>
+    <tr><td>22</td><td>Mistake log</td><td>25</td><td>Answer key</td></tr>
+  </table>
+  <p class="small" style="margin-top:4mm">Sample edition, November 2026. Facts are taken from the text of the Constitution of India, its amendments, and the Supreme Court judgments named in each chapter. Found a mistake? Tell us at aspiran.in; the next copy printed will carry the fix. Maps in Aspiran books are schematic and show no national borders. © 2026 Aspiran.</p>
+  <div class="folio"><span>Aspiran · Polity Workbook</span><span>ii</span></div>
+</section>
+
+<!-- =============== CH1 p1: opener + before you read =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="band">
+    <div class="num">01</div>
+    <div class="kicker">Chapter 1</div>
+    <h1>The Preamble</h1>
+    <p>One sentence that says where the Constitution's power comes from, what kind of country it creates, and what that country is for.</p>
+  </div>
+  <div class="two">
+    <div>
+      <div class="kicker">By the end you can</div>
+      <ul class="cando">
+        <li>Rebuild the Preamble's four parts from memory.</li>
+        <li>Explain the five words that describe India, in your own words.</li>
+        <li>Name its only amendment and the three words it added.</li>
+        <li>Say whether it is part of the Constitution, with the cases.</li>
+        <li>Write a 150-word Mains answer on it.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker">You'll need</div>
+      <ul class="cando">
+        <li>Your main Polity book, or the Constitution's text</li>
+        <li>A pencil, a pen, your highlighters</li>
+        <li>About 60 to 90 minutes over two sittings, at your pace</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Before you read</h3>
+  <div class="do">Without opening any book, write everything you already know about the Preamble. Words, dates, half-memories, guesses: all of it counts.</div>
+  <div class="lines" style="height:64mm"></div>
+  <div class="do" style="margin-top:4mm">Two questions you hope this chapter answers:</div>
+  <div class="lines" style="height:24mm"></div>
+  <p class="small" style="margin-top:3mm">You'll come back to this page at the end of the chapter and see how far you've moved.</p>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>1</span></div>
+</section>
+
+<!-- =============== CH1 p2: fill-in notes =============== -->
+<section class="page m">
+  <div class="tab c1">1</div>
+  <div class="mcol"><div class="h">My notes</div><div class="sym">★ PYQ · ? doubt · ! forget · ↔ link</div><div class="lines"></div></div>
+  <div class="kicker">1.1 · Fill-in notes</div>
+  <h2>Complete the notes</h2>
+  <div class="do">Read the Preamble in your main book once. Then close it and fill every gap. Use pencil. Check against the key on page 25, then go over in ink.</div>
+  <div class="fill">
+    <p>The Preamble says the Constitution draws its authority from <span class="b l" data-n="1"></span>.</p>
+    <p>It describes India as a Sovereign, <span class="b" data-n="2"></span>, <span class="b" data-n="3"></span>, Democratic <span class="b" data-n="4"></span>.</p>
+    <p>It promises <b>Justice</b>: social, economic and <span class="b" data-n="5"></span>;
+    <b>Liberty</b> of thought, expression, belief, faith and <span class="b" data-n="6"></span>;
+    <b>Equality</b> of <span class="b s" data-n="7"></span> and of opportunity;
+    and <b>Fraternity</b>, assuring the <span class="b" data-n="8"></span> of the individual and the unity and <span class="b" data-n="9"></span> of the Nation.</p>
+    <p>It was adopted in the Constituent Assembly on <span class="b l" data-n="10"></span>.</p>
+    <p>It is based on the <span class="b l" data-n="11"></span>, moved by <span class="b l" data-n="12"></span> on 13 December 1946.</p>
+    <p>It has been amended only once, by the <span class="b s" data-n="13"></span> Amendment in <span class="b s" data-n="14"></span>.</p>
+    <p>In <span class="b l" data-n="15"></span> (1960) the Supreme Court said it is <i>not</i> part of the Constitution. In <span class="b l" data-n="16"></span> (1973) it said it <i>is</i>, and can be amended, but not its basic features. <span class="b" data-n="17"></span> (1995) agreed.</p>
+    <p>It cannot be enforced in a <span class="b s" data-n="18"></span>, and it neither gives nor takes away the legislature's power.</p>
+  </div>
+  <div class="box hook" style="margin-top:4mm"><span class="tag">Make your own memory hook</span>Ours: <b>Who · What · Why · When</b>. Write one that works better for you:
+    <div class="lines tight" style="height:13mm;margin-top:1mm"></div></div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>2</span></div>
+</section>
+
+<!-- =============== CH1 p3: build the diagram =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="kicker">1.2 · Build it</div>
+  <h2>Rebuild the Preamble from memory</h2>
+  <div class="do">Fill every box without looking. Then mark the three words added in 1976 with a ★ and highlight them in your “amendments” colour.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 470" role="img" aria-label="Blank diagram of the Preamble's four parts to fill in">
+      <defs><marker id="dn" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 0 L5 10 z" fill="#9A4E0E"/></marker></defs>
+      <g font-family="Inter, sans-serif">
+        <rect x="0" y="0" width="600" height="70" rx="10" fill="#F6E2C9"/>
+        <text x="16" y="22" font-size="11" font-weight="700" fill="#9A4E0E" letter-spacing="1.6">WHO · SOURCE OF AUTHORITY</text>
+        <line x1="16" y1="54" x2="584" y2="54" stroke="#9A4E0E" stroke-width="1" stroke-dasharray="4 4"/>
+        <path d="M300 72 v16" stroke="#9A4E0E" stroke-width="2.2" marker-end="url(#dn)"/>
+
+        <rect x="0" y="94" width="600" height="96" rx="10" fill="#FFFDF9" stroke="#9A4E0E" stroke-width="1.6"/>
+        <text x="16" y="116" font-size="11" font-weight="700" fill="#9A4E0E" letter-spacing="1.6">WHAT · FIVE WORDS THAT DESCRIBE INDIA</text>
+        <g fill="none" stroke="#2A1B12" stroke-width="1.2" stroke-dasharray="5 4">
+          <rect x="14" y="128" width="106" height="48" rx="6"/><rect x="129" y="128" width="106" height="48" rx="6"/><rect x="244" y="128" width="106" height="48" rx="6"/><rect x="359" y="128" width="112" height="48" rx="6"/><rect x="480" y="128" width="106" height="48" rx="6"/>
+        </g>
+        <g font-size="9" font-weight="700" fill="#B9AC9C"><text x="20" y="141">1</text><text x="135" y="141">2</text><text x="250" y="141">3</text><text x="365" y="141">4</text><text x="486" y="141">5</text></g>
+        <path d="M300 192 v16" stroke="#9A4E0E" stroke-width="2.2" marker-end="url(#dn)"/>
+
+        <rect x="0" y="214" width="600" height="168" rx="10" fill="#E3EAD9"/>
+        <text x="16" y="236" font-size="11" font-weight="700" fill="#3E5631" letter-spacing="1.6">WHY · FOUR OBJECTIVES, AND WHAT EACH COVERS</text>
+        <g>
+          <rect x="14" y="248" width="138" height="122" rx="7" fill="#FFFDF9"/><rect x="160" y="248" width="138" height="122" rx="7" fill="#FFFDF9"/>
+          <rect x="306" y="248" width="138" height="122" rx="7" fill="#FFFDF9"/><rect x="452" y="248" width="134" height="122" rx="7" fill="#FFFDF9"/>
+        </g>
+        <g stroke="#D9CDBD" stroke-width="1">
+          <line x1="24" y1="280" x2="142" y2="280"/><line x1="24" y1="306" x2="142" y2="306"/><line x1="24" y1="330" x2="142" y2="330"/><line x1="24" y1="354" x2="142" y2="354"/>
+          <line x1="170" y1="280" x2="288" y2="280"/><line x1="170" y1="306" x2="288" y2="306"/><line x1="170" y1="330" x2="288" y2="330"/><line x1="170" y1="354" x2="288" y2="354"/>
+          <line x1="316" y1="280" x2="434" y2="280"/><line x1="316" y1="306" x2="434" y2="306"/><line x1="316" y1="330" x2="434" y2="330"/><line x1="316" y1="354" x2="434" y2="354"/>
+          <line x1="462" y1="280" x2="576" y2="280"/><line x1="462" y1="306" x2="576" y2="306"/><line x1="462" y1="330" x2="576" y2="330"/><line x1="462" y1="354" x2="576" y2="354"/>
+        </g>
+        <g font-size="8.5" fill="#6E5A4C"><text x="24" y="264">objective</text><text x="170" y="264">objective</text><text x="316" y="264">objective</text><text x="462" y="264">objective</text></g>
+        <path d="M300 384 v16" stroke="#9A4E0E" stroke-width="2.2" marker-end="url(#dn)"/>
+
+        <rect x="0" y="406" width="600" height="60" rx="10" fill="#DCE6EE"/>
+        <text x="16" y="428" font-size="11" font-weight="700" fill="#2D4A63" letter-spacing="1.6">WHEN · DATE OF ADOPTION</text>
+        <line x1="16" y1="452" x2="300" y2="452" stroke="#2D4A63" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="330" y="452" font-size="10" fill="#2D4A63">came into force on: ____________________</text>
+      </g>
+    </svg>
+  </div>
+  <h3>Draw the borrowing</h3>
+  <div class="do">Draw a line from each ideal to the place it was borrowed from.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 150" role="img" aria-label="Match ideals to their sources">
+      <g font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#2A1B12">
+        <g fill="#F6E2C9"><rect x="0" y="4" width="236" height="30" rx="6"/><rect x="0" y="42" width="236" height="30" rx="6"/><rect x="0" y="80" width="236" height="30" rx="6"/><rect x="0" y="118" width="236" height="30" rx="6"/></g>
+        <text x="12" y="24">Justice: social, economic, political</text><text x="12" y="62">Liberty, Equality, Fraternity</text><text x="12" y="100">Having a Preamble at all</text><text x="12" y="138">Republic</text>
+        <g fill="#2A1B12"><circle cx="246" cy="19" r="4"/><circle cx="246" cy="57" r="4"/><circle cx="246" cy="95" r="4"/><circle cx="246" cy="133" r="4"/>
+        <circle cx="390" cy="34" r="4"/><circle cx="390" cy="76" r="4"/><circle cx="390" cy="118" r="4"/></g>
+        <g fill="#DCE6EE"><rect x="400" y="19" width="200" height="30" rx="6"/><rect x="400" y="61" width="200" height="30" rx="6"/><rect x="400" y="103" width="200" height="30" rx="6"/></g>
+        <text x="412" y="39">French Revolution</text><text x="412" y="81">Constitution of the USA</text><text x="412" y="123">Russian Revolution</text>
+      </g>
+    </svg>
+  </div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>3</span></div>
+</section>
+
+<!-- =============== CH1 p4: five words in your words =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="kicker">1.3 · In your own words</div>
+  <h2>What each word means, explained by you</h2>
+  <div class="do">The first row is done for you. For the rest, write the meaning in plain words a friend would understand, then one real example. Examples you find in the news are the best kind.</div>
+  <table class="write">
+    <tr><th style="width:17%">Word</th><th style="width:44%">What it means, in my words</th><th>One example</th></tr>
+    <tr><td><b>Sovereign</b></td><td class="hand" style="font-size:12pt">No outside power can tell India what to do, inside or outside its borders.</td><td class="hand" style="font-size:12pt">India signs or refuses treaties by its own choice.</td></tr>
+    <tr><td style="height:24mm"><b>Socialist</b><br><span class="small">Added 1976</span></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Secular</b><br><span class="small">Added 1976</span></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Democratic</b></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Republic</b></td><td></td><td></td></tr>
+  </table>
+  <div class="box trap" style="margin-top:4mm"><span class="tag">Trap to watch</span>“Socialist” and “Secular” were not in the original Preamble. But the original Constitution was already secular in practice. <b>Which Articles show that?</b> Write them here: <span class="b" style="min-width:40mm"></span></div>
+  <h3>Socialist, Indian style</h3>
+  <div class="do">Indian socialism is “democratic socialism”. Write one sentence on how it differs from the Soviet kind.</div>
+  <div class="lines" style="height:24mm"></div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>4</span></div>
+</section>
+
+<!-- =============== CH1 p5: timeline + sort =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="kicker">1.4 · Build the timeline</div>
+  <h2>Is the Preamble part of the Constitution?</h2>
+  <div class="do">The Supreme Court changed its answer once. In each box write what happened that year, and what the court said if it was a case.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 300" role="img" aria-label="Blank timeline with seven years to fill in">
+      <g font-family="Inter, sans-serif">
+        <line x1="20" y1="150" x2="585" y2="150" stroke="#2A1B12" stroke-width="2.4"/>
+        <g fill="#FFFDF9" stroke="#9A4E0E" stroke-width="2.6">
+          <circle cx="44" cy="150" r="7"/><circle cx="128" cy="150" r="7"/><circle cx="212" cy="150" r="7"/><circle cx="300" cy="150" r="7"/><circle cx="388" cy="150" r="7"/><circle cx="472" cy="150" r="7"/><circle cx="556" cy="150" r="7"/>
+        </g>
+        <g font-size="12.5" font-weight="700" fill="#9A4E0E" text-anchor="middle">
+          <text x="44" y="176">1946</text><text x="128" y="134">1949</text><text x="212" y="176">1960</text><text x="300" y="134">1973</text><text x="388" y="176">1976</text><text x="472" y="134">1995</text><text x="556" y="176">2024</text>
+        </g>
+        <g fill="none" stroke="#B9AC9C" stroke-width="1.2" stroke-dasharray="5 4">
+          <rect x="4" y="22" width="80" height="96" rx="6"/><rect x="172" y="22" width="80" height="96" rx="6"/><rect x="348" y="22" width="80" height="96" rx="6"/><rect x="516" y="22" width="80" height="96" rx="6"/>
+          <rect x="88" y="186" width="80" height="96" rx="6"/><rect x="260" y="186" width="80" height="96" rx="6"/><rect x="432" y="186" width="80" height="96" rx="6"/>
+        </g>
+        <g stroke="#D9CDBD"><line x1="44" y1="118" x2="44" y2="143"/><line x1="212" y1="118" x2="212" y2="143"/><line x1="388" y1="118" x2="388" y2="143"/><line x1="556" y1="118" x2="556" y2="143"/>
+          <line x1="128" y1="157" x2="128" y2="186"/><line x1="300" y1="157" x2="300" y2="186"/><line x1="472" y1="157" x2="472" y2="186"/></g>
+      </g>
+    </svg>
+  </div>
+  <div class="wbank"><div class="lbl">Word bank (cross out as you use)</div>
+    <span class="chip">LIC of India</span><span class="chip">Objectives Resolution</span><span class="chip">Berubari Union</span><span class="chip">42nd Amendment</span><span class="chip">Kesavananda Bharati</span><span class="chip">Balram Singh</span><span class="chip">Preamble adopted</span></div>
+
+  <h3>Sort it: can or can't?</h3>
+  <div class="do">Tick one column for each. If you hesitate, mark it with ! in the margin.</div>
+  <table>
+    <tr><th>The Preamble…</th><th style="width:14%;text-align:center">Can</th><th style="width:14%;text-align:center">Can't</th></tr>
+    <tr><td>a. be used to understand an unclear Article</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    <tr><td>b. be enforced in a court on its own</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    <tr><td>c. be amended under Article 368</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    <tr><td>d. give Parliament a new power</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    <tr><td>e. help identify the basic features of the Constitution</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+    <tr><td>f. directly limit what Parliament can do</td><td style="text-align:center">☐</td><td style="text-align:center">☐</td></tr>
+  </table>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>5</span></div>
+</section>
+
+<!-- =============== CH1 p6: practice =============== -->
+<section class="page m">
+  <div class="tab c1">1</div>
+  <div class="mcol"><div class="h">Where I slipped</div><div class="sym">Copy any miss to the mistake log, p. 22</div><div class="lines"></div></div>
+  <div class="kicker">1.5 · Practise</div>
+  <h2>Recall, then reason</h2>
+  <div class="do">Close every book. Write answers from memory, then check the key.</div>
+  <ol style="font-size:10pt">
+    <li>Liberty of which five things?<div class="lines tight" style="height:13mm"></div></li>
+    <li>Which three words did the 42nd Amendment add?<div class="lines tight" style="height:6.5mm"></div></li>
+    <li>What did Berubari (1960) and Kesavananda Bharati (1973) each say about the Preamble?<div class="lines tight" style="height:19.5mm"></div></li>
+  </ol>
+  <h3>UPSC style: don't just pick, explain</h3>
+  <div class="box asks" style="font-size:9.6pt">Consider the following statements about the Preamble:</div>
+  <table style="font-size:9.6pt">
+    <tr><th>Statement</th><th style="width:20%">True or false</th></tr>
+    <tr><td>1. It has been amended only once.<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>T</span><span>F</span></td></tr>
+    <tr><td>2. It is a source of power for the legislature.<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>T</span><span>F</span></td></tr>
+    <tr><td>3. The Supreme Court has held that it is part of the Constitution.<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>T</span><span>F</span></td></tr>
+  </table>
+  <p style="margin-top:2mm;font-size:9.6pt">Which are correct? (a) 1 and 2 only (b) 1 and 3 only (c) 2 and 3 only (d) 1, 2 and 3 &nbsp; My answer: <span class="b s"></span></p>
+  <div class="qrcard" style="margin-top:4mm">
+    <div class="qr" data-qr="https://aspiran.in/?src=wb-polity-ch1"></div>
+    <div><b>Check and go further</b><span class="small">Scan to check your fill-ins, get 10 more questions picked from what you missed, or hear this chapter read aloud.</span></div>
+  </div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>6</span></div>
+</section>
+
+<!-- =============== CH1 p7: Mains =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="kicker">1.6 · Write a Mains answer</div>
+  <h2>Your first answer on this topic</h2>
+  <div class="box asks" style="font-size:10.4pt"><b>Question.</b> “The Preamble is part of the Constitution, yet it cannot be enforced in a court.” Explain with the help of judgments. <span class="small">(150 words, 10 marks)</span></div>
+  <div class="do">Plan in the box first (one minute of bullet points), then write. Aim for about 12 lines.</div>
+  <div class="two" style="grid-template-columns:1fr 2.2fr;gap:3mm">
+    <div class="dots" style="height:46mm;padding:2mm"><span class="small" style="font:700 6.8pt Inter;letter-spacing:.1em">PLAN</span></div>
+    <div style="font:600 8pt Inter,sans-serif;color:var(--muted);line-height:1.9">Intro: what the Preamble is (1–2 lines)<br>Body: the cases, in order · why it can't be enforced · how courts still use it<br>Conclusion: what it means for us today<br><span style="color:var(--brand)">Use at least two judgments and one Article.</span></div>
+  </div>
+  <div class="lines" style="height:120mm;margin-top:3mm"></div>
+  <div class="check" style="margin-top:2mm"><span>Under 170 words</span><span>Named two judgments</span><span>Named an Article</span><span>Conclusion looks forward</span></div>
+  <div class="dates" style="margin-top:3mm">Rewrote it on <i></i> and again on <i></i></div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>7</span></div>
+</section>
+
+<!-- =============== CH1 p8: news log =============== -->
+<section class="page">
+  <div class="tab c1">1</div>
+  <div class="kicker">1.7 · Keep adding until exam day</div>
+  <h2>The Preamble in the news</h2>
+  <div class="do">Whenever a news item touches this chapter (a court case citing the Preamble, a debate on “secular” or “socialist”, a new judgment), log it here. Mark N in the margin of the page it connects to. By the exam, these are your fresh examples for Mains.</div>
+  <table class="write">
+    <tr><th style="width:15%">Date</th><th>What happened, in one line</th><th style="width:20%">Links to (page)</th><th style="width:13%">Used in an answer?</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div style="margin-top:5mm;height:78mm;border:1.4pt dashed #B9AC9C;border-radius:3mm;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font:600 9pt Inter,sans-serif">
+    Paste a newspaper clipping here<br><span style="font-weight:400">(or draw a quick sketch of the story)</span></div>
+  <h3>Back to page 1</h3>
+  <div class="do">Look at what you wrote under “Before you read”. What do you know now that you didn't then?</div>
+  <div class="lines" style="height:16mm"></div>
+  <div class="folio"><span>Chapter 1 · The Preamble</span><span>8</span></div>
+</section>
+
+<!-- =============== CH1 p9: Hindi =============== -->
+<section class="page" lang="hi">
+  <div class="tab c1">1</div>
+  <div class="kicker">हिन्दी संस्करण की झलक</div>
+  <h2 class="dev">प्रस्तावना: खाली जगह भरिए</h2>
+  <div class="do dev" style="font-family:'Noto Serif Devanagari',serif">पूरी workbook में हर अध्याय अंग्रेज़ी और हिन्दी, दोनों में होगा। यह पन्ना उसी का नमूना है। पहले पेंसिल से भरिए, फिर पेज 25 से मिलाइए।</div>
+  <div class="fill dev" style="font-size:11pt;line-height:2.5">
+    <p>1. प्रस्तावना के अनुसार संविधान की शक्ति का स्रोत <span class="b l" data-n="क"></span> है।</p>
+    <p>2. भारत एक संपूर्ण प्रभुत्व-संपन्न, <span class="b" data-n="ख"></span>, <span class="b" data-n="ग"></span>, लोकतंत्रात्मक <span class="b" data-n="घ"></span> है।</p>
+    <p>3. न्याय: सामाजिक, आर्थिक और <span class="b" data-n="ङ"></span>।</p>
+    <p>4. प्रतिष्ठा और <span class="b" data-n="च"></span> की समता।</p>
+    <p>5. व्यक्ति की <span class="b" data-n="छ"></span> और राष्ट्र की एकता और <span class="b" data-n="ज"></span> सुनिश्चित करने वाली बंधुता।</p>
+    <p>6. प्रस्तावना में अब तक केवल एक संशोधन हुआ: <span class="b s" data-n="झ"></span> संशोधन, सन् <span class="b s" data-n="ञ"></span>।</p>
+  </div>
+  <h3 class="dev">अपने शब्दों में</h3>
+  <div class="do dev" style="font-family:'Noto Serif Devanagari',serif">“प्रस्तावना संविधान का अंग है, पर अदालत में लागू नहीं कराई जा सकती।” इसे तीन-चार पंक्तियों में समझाइए।</div>
+  <div class="lines" style="height:48mm"></div>
+  <div class="folio"><span class="dev">अध्याय 1 · प्रस्तावना</span><span>9</span></div>
+</section>
+
+<!-- =============== CH2 p1: opener =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="band g">
+    <div class="num">02</div>
+    <div class="kicker">Chapter 2</div>
+    <h1>Fundamental Rights</h1>
+    <p>Part III of the Constitution: the rights an ordinary law cannot take away, and the road straight to the Supreme Court if the State tries.</p>
+  </div>
+  <div class="two">
+    <div>
+      <div class="kicker">By the end you can</div>
+      <ul class="cando">
+        <li>Draw the map of Articles 12 to 35 from memory.</li>
+        <li>Sort rights into citizens-only and every person.</li>
+        <li>Explain what an Emergency can and can't switch off.</li>
+        <li>Tell the five writs apart.</li>
+        <li>Place six landmark cases on a timeline.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="kicker">You'll need</div>
+      <ul class="cando">
+        <li>Your main book's chapter on Fundamental Rights</li>
+        <li>Six highlighters for the map on page 12 (or six pencil colours)</li>
+        <li>Two or three sittings, at your pace</li>
+      </ul>
+    </div>
+  </div>
+  <h3>Before you read</h3>
+  <div class="do">List every Fundamental Right you can remember, with Article numbers if you know them. Guesses welcome.</div>
+  <div class="lines" style="height:64mm"></div>
+  <div class="do" style="margin-top:4mm">One right you think matters most to you, and why:</div>
+  <div class="lines" style="height:24mm"></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>10</span></div>
+</section>
+
+<!-- =============== CH2 p2: fill-in notes =============== -->
+<section class="page m">
+  <div class="tab c2">2</div>
+  <div class="mcol"><div class="h">My notes</div><div class="sym">★ PYQ · ? doubt · ! forget · ↔ link</div><div class="lines"></div></div>
+  <div class="kicker">2.1 · Fill-in notes</div>
+  <h2>Complete the notes</h2>
+  <div class="do">Read your main book's chapter once, close it, then fill the gaps in pencil.</div>
+  <div class="fill">
+    <p>Fundamental Rights are in Part <span class="b s" data-n="1"></span> of the Constitution, Articles <span class="b s" data-n="2"></span> to <span class="b s" data-n="3"></span>.</p>
+    <p>The Constitution began with <span class="b s" data-n="4"></span> rights. The right to property was removed by the <span class="b s" data-n="5"></span> Amendment in <span class="b s" data-n="6"></span>. It is now a legal right under Article <span class="b s" data-n="7"></span>.</p>
+    <p>Today there are six: Equality, Freedom, against Exploitation, Freedom of Religion, Cultural and Educational rights, and the right to <span class="b l" data-n="8"></span>.</p>
+    <p>Article 21A gives free education to children aged <span class="b s" data-n="9"></span> to <span class="b s" data-n="10"></span>. It was added by the <span class="b s" data-n="11"></span> Amendment in 2002.</p>
+    <p>Article 13 makes any law that takes away a Fundamental Right <span class="b" data-n="12"></span>. It is the base of <span class="b l" data-n="13"></span>.</p>
+    <p>Dr B.R. Ambedkar called Article 32 the “<span class="b l" data-n="14"></span>” of the Constitution.</p>
+  </div>
+  <div class="box hook" style="margin-top:4mm"><span class="tag">Make your own memory hook</span>Ours for the six rights: <b>E</b>very <b>F</b>riend <b>E</b>ats <b>R</b>ice, <b>C</b>ooks <b>C</b>urry. Make yours, in any language:
+    <div class="lines tight" style="height:13mm;margin-top:1mm"></div></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>11</span></div>
+</section>
+
+<!-- =============== CH2 p3: colour the map =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.2 · Colour the map</div>
+  <h2>Twenty-four Articles, six rights</h2>
+  <div class="do">Give each of the six rights a colour and write it in the key. Colour every Article cell by its right. Then write the right's name under each bracket. Grey cells are not rights: write what they are on the lines below them.</div>
+  <div class="fig">
+    <svg viewBox="0 0 600 250" role="img" aria-label="Blank map of Articles 12 to 35 to colour in">
+      <g font-family="Inter, sans-serif" text-anchor="middle">
+        <g fill="#FFFDF9" stroke="#2A1B12" stroke-width="1.2">
+          <rect x="8" y="30" width="22" height="54" rx="3" fill="#E9E2D7"/><rect x="32" y="30" width="22" height="54" rx="3" fill="#E9E2D7"/>
+          <rect x="56" y="30" width="22" height="54" rx="3"/><rect x="80" y="30" width="22" height="54" rx="3"/><rect x="104" y="30" width="22" height="54" rx="3"/><rect x="128" y="30" width="22" height="54" rx="3"/><rect x="152" y="30" width="22" height="54" rx="3"/>
+          <rect x="176" y="30" width="22" height="54" rx="3"/><rect x="200" y="30" width="22" height="54" rx="3"/><rect x="224" y="30" width="22" height="54" rx="3"/><rect x="248" y="30" width="22" height="54" rx="3"/>
+          <rect x="272" y="30" width="22" height="54" rx="3"/><rect x="296" y="30" width="22" height="54" rx="3"/>
+          <rect x="320" y="30" width="22" height="54" rx="3"/><rect x="344" y="30" width="22" height="54" rx="3"/><rect x="368" y="30" width="22" height="54" rx="3"/><rect x="392" y="30" width="22" height="54" rx="3"/>
+          <rect x="416" y="30" width="22" height="54" rx="3"/><rect x="440" y="30" width="22" height="54" rx="3"/>
+          <rect x="464" y="30" width="22" height="54" rx="3" fill="#E9E2D7" stroke-dasharray="3 2"/>
+          <rect x="488" y="30" width="22" height="54" rx="3"/>
+          <rect x="512" y="30" width="22" height="54" rx="3" fill="#E9E2D7"/><rect x="536" y="30" width="22" height="54" rx="3" fill="#E9E2D7"/><rect x="560" y="30" width="22" height="54" rx="3" fill="#E9E2D7"/>
+        </g>
+        <g font-size="10" font-weight="700" fill="#2A1B12">
+          <text x="19" y="22">12</text><text x="43" y="22">13</text><text x="67" y="22">14</text><text x="91" y="22">15</text><text x="115" y="22">16</text><text x="139" y="22">17</text><text x="163" y="22">18</text>
+          <text x="187" y="22">19</text><text x="211" y="22">20</text><text x="235" y="22">21</text><text x="259" y="22">22</text><text x="283" y="22">23</text><text x="307" y="22">24</text>
+          <text x="331" y="22">25</text><text x="355" y="22">26</text><text x="379" y="22">27</text><text x="403" y="22">28</text><text x="427" y="22">29</text><text x="451" y="22">30</text>
+          <text x="475" y="22" fill="#B9AC9C">31</text><text x="499" y="22">32</text><text x="523" y="22">33</text><text x="547" y="22">34</text><text x="571" y="22">35</text>
+        </g>
+        <!-- brackets -->
+        <g stroke="#2A1B12" stroke-width="1.2" fill="none">
+          <path d="M57 92 v6 h116 v-6"/><path d="M177 92 v6 h92 v-6"/><path d="M273 92 v6 h44 v-6"/><path d="M321 92 v6 h92 v-6"/><path d="M417 92 v6 h44 v-6"/><path d="M489 92 v6 h20 v-6"/>
+          <path d="M9 92 v6 h44 v-6" stroke="#B9AC9C"/><path d="M513 92 v6 h68 v-6" stroke="#B9AC9C"/>
+        </g>
+        <g stroke="#2A1B12" stroke-width=".9" stroke-dasharray="3 3">
+          <line x1="70" y1="124" x2="160" y2="124"/><line x1="186" y1="150" x2="262" y2="150"/><line x1="258" y1="124" x2="332" y2="124"/>
+          <line x1="330" y1="150" x2="404" y2="150"/><line x1="398" y1="124" x2="480" y2="124"/><line x1="462" y1="150" x2="536" y2="150"/>
+        </g>
+        <g stroke="#B9AC9C" stroke-width=".9" stroke-dasharray="3 3">
+          <line x1="4" y1="190" x2="110" y2="190"/><line x1="4" y1="210" x2="110" y2="210"/>
+          <line x1="430" y1="190" x2="520" y2="190"/>
+          <line x1="490" y1="226" x2="596" y2="226"/><line x1="490" y1="244" x2="596" y2="244"/>
+        </g>
+        <g font-size="8.5" fill="#6E5A4C"><text x="55" y="178">12 and 13 are</text><text x="475" y="178">31 was</text><text x="543" y="214">33 to 35 are</text></g>
+        <path d="M235 86 v80 h-40" stroke="#4F6B3E" stroke-width="1" fill="none"/>
+        <text x="150" y="170" font-size="8.5" fill="#4F6B3E">21A: _______________</text>
+      </g>
+    </svg>
+  </div>
+  <h3>My colour key</h3>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3mm 5mm">
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+    <div style="display:flex;gap:2mm;align-items:center"><span style="width:12mm;height:6mm;border:.9pt dashed var(--muted);border-radius:1mm;flex:none"></span><span class="b" style="min-width:0;flex:1"></span></div>
+  </div>
+  <h3>Draw it again, from memory</h3>
+  <div class="do">A week from now, cover the map above and redraw it here. Compare. Date it.</div>
+  <div class="dots" style="height:112mm"></div>
+  <div class="dates" style="margin-top:2mm">Redrawn on <i></i> · again on <i></i></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>12</span></div>
+</section>
+
+<!-- =============== CH2 p4: one line per article (faded) =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.3 · One line per Article</div>
+  <h2>The first four are done. The rest are yours.</h2>
+  <div class="do">Write each Article in one line. Put a ★ in the last column when you meet it in a past paper, and a tally mark each time after.</div>
+  <table class="write oneline">
+    <tr><th style="width:9%">Art</th><th>In one line</th><th style="width:12%">★ PYQ</th></tr>
+    <tr><td><span class="art">12</span></td><td class="hand" style="font-size:11.5pt">Defines “the State”: governments, legislatures, local and other authorities.</td><td></td></tr>
+    <tr><td><span class="art">13</span></td><td class="hand" style="font-size:11.5pt">A law that takes away a Fundamental Right is void.</td><td></td></tr>
+    <tr><td><span class="art">14</span></td><td class="hand" style="font-size:11.5pt">Equality before law; equal protection of laws.</td><td></td></tr>
+    <tr><td><span class="art">15</span></td><td class="hand" style="font-size:11.5pt">No discrimination on religion, race, caste, sex, place of birth.</td><td></td></tr>
+    <tr><td><span class="art">16</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">17</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">18</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">20</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">21</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">22</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">23</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">24</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">25–28</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">29–30</span></td><td></td><td></td></tr>
+    <tr><td><span class="art">32</span></td><td></td><td></td></tr>
+  </table>
+  <div class="box trap" style="margin-top:3mm"><span class="tag">Trap to watch</span>Article 21A is the Fundamental Right. What is the name of the law that carries it out? <span class="b l"></span></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>13</span></div>
+</section>
+
+<!-- =============== CH2 p5: Art 19 + sort =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.4 · Article 19</div>
+  <h2>Six freedoms. Write the limits.</h2>
+  <div class="do">Each freedom can be limited only on the grounds the Constitution names. Write those grounds under each one.</div>
+  <div class="two" style="gap:3mm">
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Speech and expression</b> <span class="small">19(1)(a)</span><div class="lines tight" style="height:26mm"></div></div>
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Assemble peacefully, without arms</b> <span class="small">19(1)(b)</span><div class="lines tight" style="height:26mm"></div></div>
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Associations, unions, co-operatives</b> <span class="small">19(1)(c)</span><div class="lines tight" style="height:19.5mm"></div></div>
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Move freely in India</b> <span class="small">19(1)(d)</span><div class="lines tight" style="height:19.5mm"></div></div>
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Live and settle anywhere in India</b> <span class="small">19(1)(e)</span><div class="lines tight" style="height:19.5mm"></div></div>
+    <div class="box" style="border:.9pt solid var(--line);border-left:2.4mm solid #4F6B3E;margin:0"><b>Any profession, trade or business</b> <span class="small">19(1)(g)</span><div class="lines tight" style="height:19.5mm"></div></div>
+  </div>
+  <p class="small" style="margin-top:2mm">Why is there no 19(1)(f)? <span class="b l"></span></p>
+
+  <h3>Sort it: who gets which right?</h3>
+  <div class="do">Write each Article number in the right box. Cross it off the bank as you go.</div>
+  <div class="wbank"><div class="lbl">Bank</div>
+    <span class="chip">14</span><span class="chip">15</span><span class="chip">16</span><span class="chip">19</span><span class="chip">20</span><span class="chip">21</span><span class="chip">21A</span><span class="chip">22</span><span class="chip">23</span><span class="chip">24</span><span class="chip">25</span><span class="chip">26</span><span class="chip">27</span><span class="chip">28</span><span class="chip">29</span><span class="chip">30</span></div>
+  <div class="two" style="grid-template-columns:1fr 1.6fr">
+    <div style="height:58mm;border-radius:3mm;background:var(--soft);padding:2.5mm 3mm"><span class="kicker">Citizens only</span></div>
+    <div style="height:58mm;border-radius:3mm;background:var(--ok);padding:2.5mm 3mm"><span class="kicker" style="color:var(--okink)">Every person, foreigners too</span></div>
+  </div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>14</span></div>
+</section>
+
+<!-- =============== CH2 p6: emergency + writs =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.5 · Rights in an Emergency</div>
+  <h2>Fill the flow</h2>
+  <div class="fig">
+    <svg viewBox="0 0 600 220" role="img" aria-label="Blank flow chart of rights during an emergency">
+      <defs><marker id="ar5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#9A4E0E"/></marker></defs>
+      <g font-family="Inter, sans-serif">
+        <rect x="200" y="0" width="200" height="38" rx="7" fill="#2A1B12"/>
+        <text x="300" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#FFF6EA">National Emergency (Art 352)</text>
+        <path d="M260 38 L150 70" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar5)"/><path d="M340 38 L450 70" stroke="#9A4E0E" stroke-width="2" marker-end="url(#ar5)"/>
+        <rect x="0" y="74" width="285" height="100" rx="8" fill="#F8E1DE"/><rect x="315" y="74" width="285" height="100" rx="8" fill="#F8E1DE"/>
+        <text x="16" y="96" font-size="11" font-weight="700" fill="#8A2A1E" letter-spacing="1">ARTICLE 358 · what happens?</text>
+        <text x="331" y="96" font-size="11" font-weight="700" fill="#8A2A1E" letter-spacing="1">ARTICLE 359 · what happens?</text>
+        <g stroke="#D9A9A2"><line x1="16" y1="122" x2="270" y2="122"/><line x1="16" y1="144" x2="270" y2="144"/><line x1="16" y1="166" x2="270" y2="166"/>
+          <line x1="331" y1="122" x2="585" y2="122"/><line x1="331" y1="144" x2="585" y2="144"/><line x1="331" y1="166" x2="585" y2="166"/></g>
+        <rect x="110" y="184" width="380" height="34" rx="17" fill="#4F6B3E"/>
+        <text x="300" y="206" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFF6EA">Never suspended: Art ____ and Art ____ (____ Amendment)</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="kicker" style="margin-top:3mm">2.6 · The five writs</div>
+  <h2>Fill the table</h2>
+  <table class="write">
+    <tr><th style="width:17%">Writ</th><th style="width:17%">Literally</th><th>What it does</th><th style="width:25%">Against whom (and not)</th></tr>
+    <tr><td style="height:24mm"><b>Habeas corpus</b></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Mandamus</b></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Prohibition</b></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Certiorari</b></td><td></td><td></td><td></td></tr>
+    <tr><td style="height:24mm"><b>Quo warranto</b></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="box hook" style="margin-top:3mm"><span class="tag">Finish the hook</span>Prohibition <span class="b s"></span>, certiorari <span class="b s"></span>. Only <span class="b"></span> reaches private persons.</div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>15</span></div>
+</section>
+
+<!-- =============== CH2 p7: cases + 32 vs 226 =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.7 · Build the timeline</div>
+  <h2>Six cases that shaped Part III</h2>
+  <div class="do">Place each case on its year and write, in a few words, what it decided.</div>
+  <div class="wbank"><div class="lbl">Bank (shuffled)</div>
+    <span class="chip">K.S. Puttaswamy</span><span class="chip">A.K. Gopalan</span><span class="chip">Indra Sawhney</span><span class="chip">Golaknath</span><span class="chip">Maneka Gandhi</span><span class="chip">Kesavananda Bharati</span></div>
+  <table class="write">
+    <tr><th style="width:11%">Year</th><th style="width:27%">Case</th><th>What it decided</th></tr>
+    <tr><td style="height:21mm"><b>1950</b></td><td></td><td></td></tr>
+    <tr><td style="height:21mm"><b>1967</b></td><td></td><td></td></tr>
+    <tr><td style="height:21mm"><b>1973</b></td><td></td><td></td></tr>
+    <tr><td style="height:21mm"><b>1978</b></td><td></td><td></td></tr>
+    <tr><td style="height:21mm"><b>1992</b></td><td></td><td></td></tr>
+    <tr><td style="height:21mm"><b>2017</b></td><td></td><td></td></tr>
+  </table>
+  <div class="do" style="margin-top:3mm">Draw an arrow between the two cases where one overturned the other's reading of Article 21.</div>
+
+  <h3>Supreme Court or High Court?</h3>
+  <table class="write">
+    <tr><th style="width:24%"></th><th>Article 32 (Supreme Court)</th><th>Article 226 (High Court)</th></tr>
+    <tr><td style="height:18mm"><b>Kind of right</b></td><td></td><td></td></tr>
+    <tr><td style="height:18mm"><b>Used for</b></td><td></td><td></td></tr>
+    <tr><td style="height:18mm"><b>Area</b></td><td></td><td></td></tr>
+  </table>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>16</span></div>
+</section>
+
+<!-- =============== CH2 p8: practice =============== -->
+<section class="page m">
+  <div class="tab c2">2</div>
+  <div class="mcol"><div class="h">Where I slipped</div><div class="sym">Copy any miss to the mistake log, p. 22</div><div class="lines"></div></div>
+  <div class="kicker">2.8 · Practise</div>
+  <h2>Recall, then reason</h2>
+  <ol style="font-size:10pt">
+    <li>Which five Articles are only for citizens?<div class="lines tight" style="height:6.5mm"></div></li>
+    <li>Which writ fits: a tribunal has <i>already</i> passed an order without jurisdiction?<div class="lines tight" style="height:6.5mm"></div></li>
+    <li>What did Maneka Gandhi (1978) change about Article 21?<div class="lines tight" style="height:13mm"></div></li>
+    <li>Where is the right to property today, and what kind of right is it?<div class="lines tight" style="height:6.5mm"></div></li>
+  </ol>
+  <h3>UPSC style: don't just pick, explain</h3>
+  <div class="box asks" style="font-size:9.6pt">Which of these are available to a foreign national living in India?</div>
+  <table style="font-size:9.6pt">
+    <tr><th>Right</th><th style="width:22%">Available?</th></tr>
+    <tr><td>1. Against discrimination on grounds of place of birth<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>Y</span><span>N</span></td></tr>
+    <tr><td>2. Life and personal liberty<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>Y</span><span>N</span></td></tr>
+    <tr><td>3. Minorities' right to run educational institutions<div class="small" style="margin-top:1mm">Because…</div><div class="lines tight" style="height:6.5mm"></div></td><td class="tf"><span>Y</span><span>N</span></td></tr>
+  </table>
+  <p style="margin-top:2mm;font-size:9.6pt">(a) 1 only (b) 2 only (c) 1 and 3 only (d) 1, 2 and 3 &nbsp; My answer: <span class="b s"></span></p>
+  <div class="qrcard" style="margin-top:4mm">
+    <div class="qr" data-qr="https://aspiran.in/?src=wb-polity-ch2"></div>
+    <div><b>Check and go further</b><span class="small">Scan to check this chapter, drill the writs, or find a pod revising Fundamental Rights this week.</span></div>
+  </div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>17</span></div>
+</section>
+
+<!-- =============== CH2 p9: Mains =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.9 · Write a Mains answer</div>
+  <h2>How Article 21 grew</h2>
+  <div class="box asks" style="font-size:10.4pt"><b>Question.</b> How has the Supreme Court widened the meaning of Article 21 since 1978? Give examples. <span class="small">(150 words, 10 marks)</span></div>
+  <div class="two" style="grid-template-columns:1fr 2.2fr;gap:3mm">
+    <div class="dots" style="height:46mm;padding:2mm"><span class="small" style="font:700 6.8pt Inter;letter-spacing:.1em">PLAN</span></div>
+    <div style="font:600 8pt Inter,sans-serif;color:var(--muted);line-height:1.9">Intro: Article 21's words, and how it was first read<br>Body: the turning point · four or five rights the court found inside it, each with its case<br>Conclusion: what this says about the Constitution as a living document<br><span style="color:var(--brand)">Your news log may give you a fresh example.</span></div>
+  </div>
+  <div class="lines" style="height:120mm;margin-top:3mm"></div>
+  <div class="check" style="margin-top:2mm"><span>Under 170 words</span><span>Gopalan → Maneka shown</span><span>Three or more rights with cases</span><span>Conclusion looks forward</span></div>
+  <div class="dates" style="margin-top:3mm">Rewrote it on <i></i> and again on <i></i></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>18</span></div>
+</section>
+
+<!-- =============== CH2 p10: news log =============== -->
+<section class="page">
+  <div class="tab c2">2</div>
+  <div class="kicker">2.10 · Keep adding until exam day</div>
+  <h2>Fundamental Rights in the news</h2>
+  <div class="do">This page should fill up fast: rights cases are in the news almost every week. One line per item. Mark N in the margin of the page it connects to.</div>
+  <table class="write">
+    <tr><th style="width:14%">Date</th><th>What happened, in one line</th><th style="width:13%">Article</th><th style="width:13%">Used in an answer?</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div style="margin-top:5mm;height:50mm;border:1.4pt dashed #B9AC9C;border-radius:3mm;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font:600 9pt Inter,sans-serif">Paste a clipping here</div>
+  <h3>Back to page 10</h3>
+  <div class="do">How many rights did you list before reading? How many can you list now, with Articles?</div>
+  <div class="lines" style="height:16mm"></div>
+  <div class="folio"><span>Chapter 2 · Fundamental Rights</span><span>19</span></div>
+</section>
+
+<!-- =============== FLASHCARDS =============== -->
+<section class="page">
+  <div class="tab c9">✂</div>
+  <div class="kicker">Cut out and carry</div>
+  <h2>Flashcards</h2>
+  <div class="scissors">✂ Cut along the dashed lines. Fold each card on the dotted line, question outside. The last four are blank: make them from the things you get wrong most.</div>
+  <div class="flash">
+    <div class="card"><div><span class="lbl">Question</span><span class="q">Which three words did the 42nd Amendment add to the Preamble?</span></div><div><span class="lbl">Answer</span>Socialist, Secular, Integrity (1976)</div></div>
+    <div class="card"><div><span class="lbl">Question</span><span class="q">Which Fundamental Rights are only for citizens?</span></div><div><span class="lbl">Answer</span>Articles 15, 16, 19, 29, 30</div></div>
+    <div class="card"><div><span class="lbl">Question</span><span class="q">Which Articles can never be suspended in an Emergency?</span></div><div><span class="lbl">Answer</span>20 and 21, since the 44th Amendment (1978)</div></div>
+    <div class="card"><div><span class="lbl">Question</span><span class="q">Which writ can be issued against a private person?</span></div><div><span class="lbl">Answer</span>Habeas corpus</div></div>
+    <div class="card"><div><span class="lbl">Question</span></div><div><span class="lbl">Answer</span></div></div>
+    <div class="card"><div><span class="lbl">Question</span></div><div><span class="lbl">Answer</span></div></div>
+    <div class="card"><div><span class="lbl">Question</span></div><div><span class="lbl">Answer</span></div></div>
+    <div class="card"><div><span class="lbl">Question</span></div><div><span class="lbl">Answer</span></div></div>
+  </div>
+  <p class="small" style="margin-top:3mm">The full book has a sheet like this after every two chapters. The Aspiran app can bring these cards back to you on the day you're about to forget them.</p>
+  <div class="folio"><span>Flashcards</span><span>20</span></div>
+</section>
+
+<!-- =============== MY NIGHT-BEFORE SHEET =============== -->
+<section class="page">
+  <div class="tab c9">★</div>
+  <div class="kicker">Make it once, use it many times</div>
+  <h2>My night-before sheet: Chapters 1 and 2</h2>
+  <div class="do">Make this only after you've done both chapters and the key. Squeeze everything you'd want to read the night before the exam onto this one page. Small handwriting, your colours, your hooks.</div>
+  <div class="two" style="gap:3mm">
+    <div class="box note" style="margin:0;height:56mm"><span class="tag">The Preamble in five lines</span></div>
+    <div class="box note" style="margin:0;height:56mm"><span class="tag">The Part III map (draw it)</span></div>
+    <div class="box hook" style="margin:0;height:50mm"><span class="tag">Writs, my words</span></div>
+    <div class="box hook" style="margin:0;height:50mm"><span class="tag">Cases and years</span></div>
+    <div class="box asks" style="margin:0;height:44mm"><span class="tag">Amendments to remember</span></div>
+    <div class="box asks" style="margin:0;height:44mm"><span class="tag">My memory hooks</span></div>
+  </div>
+  <div class="box trap" style="height:36mm"><span class="tag">Things I always mix up</span></div>
+  <div class="folio"><span>My night-before sheet</span><span>21</span></div>
+</section>
+
+<!-- =============== MISTAKE LOG =============== -->
+<section class="page">
+  <div class="tab c9">!</div>
+  <div class="kicker">The most valuable page in this book</div>
+  <h2>Mistake log</h2>
+  <div class="do">Every question you get wrong, here or in a mock or in the app, goes here. Not to feel bad: a mistake you've written down is one you rarely make twice. Before every mock, read this page first.</div>
+  <table class="write">
+    <tr><th style="width:11%">Date</th><th style="width:30%">The question (in short)</th><th style="width:30%">Why I got it wrong</th><th>The fix, in one line</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <p class="small" style="margin-top:2mm">Common reasons: didn't know it · knew it but misread · two things mixed up · a word like “only” or “all” missed. Naming the reason is half the fix.</p>
+  <div class="folio"><span>Mistake log</span><span>22</span></div>
+</section>
+
+<!-- =============== PYQ TRACKER =============== -->
+<section class="page">
+  <div class="tab c9">★</div>
+  <div class="kicker">See the pattern for yourself</div>
+  <h2>PYQ tracker</h2>
+  <div class="do">Each time you meet a past UPSC question on these two chapters, log it. After twenty or so, you'll see what UPSC keeps coming back to, and put a ★ in those margins.</div>
+  <table class="write">
+    <tr><th style="width:11%">Year</th><th style="width:13%">Prelims / Mains</th><th>What it asked (in short)</th><th style="width:12%">Page here</th><th style="width:11%">Got it?</th></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+  </table>
+  <div class="box asks"><span class="tag">What I notice</span><div class="lines tight" style="height:13mm"></div></div>
+  <div class="folio"><span>PYQ tracker</span><span>23</span></div>
+</section>
+
+<!-- =============== FORGET + INDEX =============== -->
+<section class="page">
+  <div class="tab c9">!</div>
+  <div class="kicker">Yours alone</div>
+  <h2>Things I keep forgetting</h2>
+  <div class="do">The facts that slip away no matter what. One line each. Read this list on the morning of the exam.</div>
+  <div class="lines" style="height:88mm"></div>
+  <h2 style="margin-top:6mm">My index</h2>
+  <div class="do">Build your own index as you go: any term, case or Article, and the page where <i>your</i> best note on it lives, in this book or any other.</div>
+  <div class="two" style="gap:5mm">
+    <table class="write"><tr><th>Term</th><th style="width:22%">Page</th></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr></table>
+    <table class="write"><tr><th>Term</th><th style="width:22%">Page</th></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr></table>
+  </div>
+  <div class="folio"><span>Things I forget · My index</span><span>24</span></div>
+</section>
+
+<!-- =============== ANSWER KEY =============== -->
+<section class="page">
+  <div class="tab c9">✓</div>
+  <div class="kicker">Check in pencil, then ink</div>
+  <h2>Answer key</h2>
+  <div class="key">
+    <h4>1.1 Fill-in notes (p. 2)</h4>
+    <p><b>1</b> the people of India <b>2</b> Socialist <b>3</b> Secular <b>4</b> Republic <b>5</b> political <b>6</b> worship <b>7</b> status <b>8</b> dignity <b>9</b> integrity <b>10</b> 26 November 1949 <b>11</b> Objectives Resolution <b>12</b> Jawaharlal Nehru <b>13</b> 42nd <b>14</b> 1976 <b>15</b> Berubari Union <b>16</b> Kesavananda Bharati <b>17</b> LIC of India <b>18</b> court</p>
+    <h4>1.2 Build it (p. 3)</h4>
+    <p>Who: We, the people of India. What: Sovereign, Socialist★, Secular★, Democratic, Republic. Why: Justice (social, economic, political); Liberty (thought, expression, belief, faith, worship); Equality (of status, of opportunity); Fraternity (dignity of the individual; unity and integrity★ of the Nation). When: 26 Nov 1949; in force 26 Jan 1950.</p>
+    <p>Borrowing: Justice → Russian Revolution. Liberty, Equality, Fraternity → French Revolution. Having a Preamble → USA. Republic → French Revolution.</p>
+    <h4>1.3 Own words (p. 4)</h4>
+    <p>Your words will differ; check the idea. Socialist: a mixed economy aiming to reduce inequality, not state ownership of everything. Secular: the State has no religion and treats all equally, and may support or reform. Democratic: people rule through elected representatives. Republic: an elected head of State, not hereditary. Trap: Articles 25 to 28.</p>
+    <h4>1.4 Timeline and sort (p. 5)</h4>
+    <p>1946 Objectives Resolution · 1949 Preamble adopted · 1960 Berubari: not part · 1973 Kesavananda: part; amendable, not basic features · 1976 42nd Amdt · 1995 LIC: part · 2024 Balram Singh: upholds 1976 additions.</p>
+    <p>Can: a, c, e. Can't: b, d, f.</p>
+    <h4>1.5 Practise (p. 6)</h4>
+    <p>1. Thought, expression, belief, faith, worship. 2. Socialist, Secular, Integrity. 3. Berubari: not part; Kesavananda: part. UPSC style: <b>(b)</b>. Statement 2 is false: the Preamble neither gives nor takes away the legislature's power.</p>
+    <h4>1.6 Mains (p. 7): a good answer touches</h4>
+    <p>Berubari (1960) → Kesavananda (1973) → LIC (1995); non-justiciable, so not a source or limit of power; courts use it to read unclear Articles and to find basic features; the 42nd Amendment and its 2024 upholding; conclusion: the Constitution's guiding statement of purpose.</p>
+    <h4>Hindi page (p. 9)</h4>
+    <p><b>क</b> भारत के लोग <b>ख</b> समाजवादी <b>ग</b> पंथनिरपेक्ष <b>घ</b> गणराज्य <b>ङ</b> राजनीतिक <b>च</b> अवसर <b>छ</b> गरिमा <b>ज</b> अखंडता <b>झ</b> 42वाँ <b>ञ</b> 1976</p>
+    <h4>2.1 Fill-in notes (p. 11)</h4>
+    <p><b>1</b> III <b>2</b> 12 <b>3</b> 35 <b>4</b> seven <b>5</b> 44th <b>6</b> 1978 <b>7</b> 300A <b>8</b> constitutional remedies <b>9</b> 6 <b>10</b> 14 <b>11</b> 86th <b>12</b> void <b>13</b> judicial review <b>14</b> heart and soul</p>
+    <h4>2.2 Map (p. 12)</h4>
+    <p>Equality 14–18 · Freedom 19–22 · against Exploitation 23–24 · Religion 25–28 · Culture and education 29–30 · Constitutional remedies 32. 12–13: definition of State, and laws against rights are void. 31: right to property, removed 1978. 33–35: armed forces, martial law, laws to give effect. 21A: education, ages 6 to 14.</p>
+    <h4>2.3 One line (p. 13)</h4>
+    <p>16 equal opportunity in public jobs · 17 untouchability abolished · 18 titles abolished (military, academic allowed) · 20 no retrospective criminal law, double punishment or forced self-incrimination · 21 life and personal liberty · 22 safeguards on arrest and detention · 23 no trafficking or forced labour · 24 no child under 14 in factories, mines, hazardous work · 25–28 conscience and religion · 29–30 culture, language; minorities' institutions · 32 go straight to the SC. Trap: Right of Children to Free and Compulsory Education Act, 2009.</p>
+    <h4>2.4 Article 19 and sort (p. 14)</h4>
+    <p>(a) sovereignty and integrity, security of State, friendly relations with foreign States, public order, decency or morality, contempt of court, defamation, incitement to an offence. (b) sovereignty and integrity, public order. (c) sovereignty and integrity, public order, morality. (d), (e) general public interest, protection of Scheduled Tribes. (g) public interest, professional qualifications, State monopolies. No 19(1)(f): property, removed 1978.</p>
+    <p>Citizens only: 15, 16, 19, 29, 30. Every person: 14, 20, 21, 21A, 22 (not all of it for enemy aliens), 23, 24, 25, 26, 27, 28.</p>
+    <h4>2.5–2.6 Emergency and writs (p. 15)</h4>
+    <p>358: Article 19 suspended automatically, only if the ground is war or external aggression. 359: President's order suspends going to court for named rights. Never: 20 and 21, 44th Amendment.</p>
+    <p>Habeas corpus, “have the body”: produce a detained person; public and private persons. Mandamus, “we command”: public duty; not private persons, President, Governors. Prohibition, “to forbid”: stops a lower court before it exceeds powers; judicial and quasi-judicial only. Certiorari, “to be informed”: quashes an order already passed; judicial, quasi-judicial, administrative. Quo warranto, “by what authority”: challenges a claim to a substantive public office. Hook: prevents, cures, habeas corpus.</p>
+    <h4>2.7 Cases (p. 16)</h4>
+    <p>1950 Gopalan: narrow Art 21 · 1967 Golaknath: Parliament can't amend rights · 1973 Kesavananda: basic structure · 1978 Maneka Gandhi: fair, just, reasonable (arrow: Gopalan → Maneka) · 1992 Indra Sawhney: 50% cap, creamy layer · 2017 Puttaswamy: privacy is a right.</p>
+    <p>Art 32: itself a Fundamental Right; rights only; all India. Art 226: constitutional right; rights and any other purpose; within the state.</p>
+    <h4>2.8 Practise (p. 17)</h4>
+    <p>1. 15, 16, 19, 29, 30. 2. Certiorari. 3. Procedure must be fair, just and reasonable. 4. Art 300A; a constitutional (legal) right. UPSC style: <b>(b)</b>. Art 15 and Art 30 are for citizens only.</p>
+    <h4>2.9 Mains (p. 18): a good answer touches</h4>
+    <p>Gopalan (1950) → Maneka (1978); rights read into Art 21: speedy trial (Hussainara Khatoon, 1979), livelihood (Olga Tellis, 1985), clean environment (Subhash Kumar, 1991), education (Unni Krishnan, 1993, later Art 21A), privacy (Puttaswamy, 2017); conclusion: a living Constitution, with the caution that courts should not overreach.</p>
+  </div>
+  <div class="folio"><span>Answer key</span><span>25</span></div>
+</section>
+
+<!-- =============== BACK COVER =============== -->
+<section class="page cover">
+  <div class="inner">
+    <div class="brandline">Aspiran · Workbook</div>
+    <p style="font:800 24pt/1.2 Martel,serif;color:#FFF6EA;margin-top:14mm">A textbook is the same on exam day as the day you bought it.<br><span style="color:#F0A04B">This one is worth more every week.</span></p>
+    <ul style="color:#F6E2C9;font:500 11pt/1.75 Inter,sans-serif;margin-top:12mm;padding-left:5mm">
+      <li>Fill-in notes you complete from your own reading</li>
+      <li>Blank diagrams, maps and timelines to build from memory</li>
+      <li>Questions where you explain why, not just tick</li>
+      <li>A Mains answer to write in every chapter</li>
+      <li>News, mistake and PYQ logs that keep filling up until your exam</li>
+      <li>Cut-out flashcards and your own night-before sheet</li>
+      <li>English and Hindi</li>
+    </ul>
+    <p style="color:#F6E2C9;font:400 10pt/1.55 Inter,sans-serif;margin-top:12mm;max-width:130mm">Use it next to any Polity book you already have. Aspiran is a study app for UPSC aspirants: small groups that revise together, daily current-affairs cards, practice that remembers what you got wrong, and Chotu, an AI study buddy.</p>
+  </div>
+  <div style="position:absolute;left:17mm;bottom:18mm;display:flex;gap:5mm;align-items:center">
+    <div class="qr" data-qr="https://aspiran.in/?src=wb-polity-back" style="width:26mm;height:26mm;background:#FFF6EA;border-radius:2mm;padding:2mm"></div>
+    <div style="font:600 10pt Inter,sans-serif;color:#F6E2C9">aspiran.in<br><span style="font-weight:400;opacity:.8">Scan for the app</span></div>
+  </div>
+  <div style="position:absolute;right:17mm;bottom:18mm;font:800 22pt Martel,serif;color:#FFF6EA">Aspiran</div>
+</section>
+
+<script>
+document.querySelectorAll('[data-qr]').forEach(function(el){
+  try{
+    var q = qrcode(0,'M'); q.addData(el.getAttribute('data-qr')); q.make();
+    el.innerHTML = q.createSvgTag({cellSize:4, margin:0, scalable:true});
+    var s = el.querySelector('svg'); if(s){s.style.width='100%';s.style.height='100%';}
+  }catch(e){ el.textContent=''; }
+});
+</script>
+</body>
+</html>
