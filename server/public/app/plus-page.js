@@ -31,7 +31,7 @@ export function plusSalesPage(C, d) {
   const priceEls = [];   // filled once /plus/status answers
   const ctaEls = [];
   const priceText = (p) => `₹${Number(p).toLocaleString("en-IN")}`;
-  const price = h("span", "₹9,999");
+  const price = h("span", "₹3,999");
   priceEls.push(price);
 
   const buy = (label, cls = "") => {
@@ -46,7 +46,7 @@ export function plusSalesPage(C, d) {
   d.plusStatus().then((st) => {
     const pay = st?.payments ?? {};
     const live = pay.provider === "cashfree" && C.plusOn();
-    const p = live ? pay.amountInr : st?.prices?.yearly?.inr ?? 9999;
+    const p = live ? pay.amountInr : st?.prices?.yearly?.inr ?? 3999;
     priceEls.forEach((el) => (el.textContent = priceText(p)));
     for (const a of ctaEls) {
       if (live) a.href = "#plus";
@@ -172,7 +172,7 @@ export function plusSalesPage(C, d) {
     rows.map(([a, f, p]) => h("div.pp-trow", h("div", a), h("div.f", f), h("div.plus", p))));
 
   // ---- 8. Price ------------------------------------------------------------------------------------
-  const priceBig = h("span", "₹9,999"); priceEls.push(priceBig);
+  const priceBig = h("span", "₹3,999"); priceEls.push(priceBig);
   const perDay = h("span", "about ₹28");
   const priceCard = h("section.pp-price",
     h("div.pp-pricecard.rv",
@@ -185,7 +185,7 @@ export function plusSalesPage(C, d) {
       !quiet && h("p.pp-wa", "Prefer UPI or another way? ", h("a", { href: `https://wa.me/${WA}?text=${encodeURIComponent("Hi, I'd like to pay for Aspiran Plus another way.")}`, target: "_blank", rel: "noopener" }, "WhatsApp us on 98766 56573"), " and we'll upgrade your account as soon as payment arrives.")));
   d.plusStatus().then((st) => {
     const pay = st?.payments ?? {};
-    const p = pay.provider === "cashfree" && C.plusOn() ? pay.amountInr : st?.prices?.yearly?.inr ?? 9999;
+    const p = pay.provider === "cashfree" && C.plusOn() ? pay.amountInr : st?.prices?.yearly?.inr ?? 3999;
     perDay.textContent = `about ₹${Math.round(p / 365)}`;
   });
 

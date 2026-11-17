@@ -669,8 +669,8 @@ private val PLAN_ROWS = listOf(
     Triple("Cloud Chotu turns", "15 a day", "100 a day"),
 )
 
-/** The one price on show (owner, 23 Oct): a year of Plus. The server's figure wins when it has one. */
-const val PLUS_YEARLY_INR = 9999
+/** The one price on show (owner, 17 Nov 2026): a year of Plus at ₹3,999. The server's figure wins when it has one. */
+const val PLUS_YEARLY_INR = 3999
 private const val WA_NUMBER = "919876656573"
 private const val WA_SHOWN = "98766 56573"
 private fun waLink(hindi: Boolean) = "https://wa.me/$WA_NUMBER?text=" +
@@ -682,7 +682,7 @@ private fun openPilot(context: Context, hindi: Boolean) {
 }
 
 /**
- * The price and the special offer, together wherever a price shows: "₹9,999 a year", then the free trial for
+ * The price and the special offer, together wherever a price shows: "₹3,999 a year", then the free trial for
  * eligible candidates with the WhatsApp number as selectable text that also opens the chat. For dark stages.
  */
 @Composable

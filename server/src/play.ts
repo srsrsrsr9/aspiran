@@ -8,7 +8,7 @@ import { PRICES, grant } from "./plus";
  * flag, which is off by default, and a build switch in the app (BuildConfig.PLAY_BILLING). The Cashfree web flow
  * (payments.ts) is untouched.
  *
- * The product is "plus_yearly", a one-time product at ₹9,999 that gives a year of Plus (PRICES.yearly), like the
+ * The product is "plus_yearly", a one-time product at ₹3,999 that gives a year of Plus (PRICES.yearly), like the
  * Cashfree year: no auto-renewal. The app consumes it once we've granted the year, so the same Google account can
  * buy the next year too. Consuming also acknowledges it.
  *

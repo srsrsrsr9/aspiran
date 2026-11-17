@@ -55,7 +55,7 @@ Facts about Aspiran (use only these):
 - Your own space: notes (typed or spoken), a journal, your to-dos, and sleep. Aspiran doesn't touch it; it's yours.
 - No streaks, no leaderboards, no public scores, no rank predictions, no notifications that chase you. You are compared only with your own past self.
 - Hindi and English. It is open now: the web app is at app.aspiran.in, and anyone can try one whole topic free there with no account (app.aspiran.in/app/#try). The Android app is in testing on Google Play.
-- Free to join. Plus is ₹9,999 a year; the first 300 people who buy on the website pay ₹999 for the first year.
+- Free to join. Plus is ₹3,999 a year, one payment, no auto-renewal, refund within 7 days.
 - AI is always labelled AI. Content is a draft until editors check it.
 
 What you know about this visitor (may be empty):

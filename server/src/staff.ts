@@ -138,7 +138,7 @@ export const FLAG_INFO = {
   announcements: "Announcement banners in the apps",
   pod_friends: "Pod friends: four AI study friends of Chotu (labelled · AI) who post in small pods. Never counted as members, never private, quiet 23:30-07:00, fewer posts as real people join",
   plus: "Plus: free limits, value-moment offers in Prep, trial, and yearly Plus on the web (Cashfree once its keys are set, test mode until then). Off until launch",
-  play_billing: "Google Play Billing for Plus in the Android app (plus_yearly, a year at ₹9,999). Needs the plus flag, PLAY_SERVICE_ACCOUNT_JSON and an app built with PLAY_BILLING on. Off until Play Console is set up",
+  play_billing: "Google Play Billing for Plus in the Android app (plus_yearly, a year at ₹3,999). Needs the plus flag, PLAY_SERVICE_ACCOUNT_JSON and an app built with PLAY_BILLING on. Off until Play Console is set up",
   password_login: "Username and password sign-in, next to Continue with Google (staff can reset forgotten passwords from Accounts; members with a recovery email can reset their own). Off stops new sign-ups and sign-ins; people already signed in stay signed in",
   chai_auto: "The automatic Chai. At 7 in the morning, if no editor has approved enough cards, the best drafts that pass two automatic checks go out on their own, marked in the app as not yet checked by an editor. Serious and tragic stories always wait for a person. Off: nothing goes out without an editor.",
   institutes: "Aspiran for coaching centres: institutes, batches, invite codes, batch chat, doubts, study plans, their own content and analytics (/institute and Me → Coaching centre). Off: every /inst route says not found and nothing shows in the app",

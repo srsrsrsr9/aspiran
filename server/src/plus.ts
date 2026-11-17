@@ -17,8 +17,8 @@ import { PLAY_PRODUCT, playConfigured } from "./play";
  */
 
 export const LIMITS = { free: { feedbackPerWeek: 3, mocksPerMonth: 1, cloudChotuPerDay: 15 }, plus: { feedbackPerWeek: Infinity, mocksPerMonth: Infinity, cloudChotuPerDay: 100 } };
-// One price on show: a year of Plus at ₹9,999 (owner, 23 Oct). Monthly stays only for test-mode purchases and gifts; it is never shown.
-export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 9999, days: 365 } } as const;
+// One price on show: a year of Plus at ₹3,999 (owner, 17 Nov 2026; was ₹9,999). Monthly stays only for test-mode purchases and gifts; it is never shown.
+export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 3999, days: 365 } } as const;
 const TRIAL_DAYS = 7;
 const DAY = 86400_000;
 

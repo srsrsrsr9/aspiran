@@ -20,7 +20,7 @@ import { growthReport } from "./metrics";
 import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
-import { DEFAULT_BUSINESS, DEFAULT_PRICING, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
+import { DEFAULT_BUSINESS, DEFAULT_PRICING, PRICING_KEY, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
 
 /**
@@ -496,7 +496,7 @@ route("POST", /^payments\/(upsc_[0-9a-f]{24})\/refund$/, "flags", async ({ env, 
 route("POST", /^pricing$/, "flags", async ({ env, s, body }) => {
   const p = cleanPricing(body.pricing);
   if (!p) return bad("Prices must be whole rupees and seats a whole number.");
-  await setSetting(env, "pricing", p, label(s));
+  await setSetting(env, PRICING_KEY, p, label(s));
   if (body.business) await setSetting(env, "business", cleanBusiness(body.business), label(s));
   return json({ pricing: p, business: await business(env) });
 });

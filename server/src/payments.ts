@@ -22,8 +22,10 @@ import { grant } from "./plus";
  */
 
 export interface Pricing { yearlyInr: number; foundingInr: number; foundingSeats: number; foundingOn: boolean }
-// One price: ₹9,999 a year. Founding seats are off; an admin can still switch them on, but nothing shows them by default.
-export const DEFAULT_PRICING: Pricing = { yearlyInr: 9999, foundingInr: 999, foundingSeats: 300, foundingOn: false };
+// ₹3,999 a year (owner, 17 Nov 2026). The ₹999 founding offer is dropped (founding seats off); an admin can still switch them on.
+// The saved setting moved to "pricing_v2" so the old saved ₹9,999 price no longer applies.
+export const PRICING_KEY = "pricing_v2";
+export const DEFAULT_PRICING: Pricing = { yearlyInr: 3999, foundingInr: 999, foundingSeats: 300, foundingOn: false };
 /** Shown on receipts and the legal pages. Placeholders until the founder fills them in admin. */
 export interface Business { entityName: string; address: string; email: string; gstin: string }
 export const DEFAULT_BUSINESS: Business = { entityName: "SnapSkill LLP", address: "[Registered address]", email: "[Support email]", gstin: "" };
@@ -31,7 +33,7 @@ export const DEFAULT_BUSINESS: Business = { entityName: "SnapSkill LLP", address
 const API_VERSION = "2023-08-01";
 const YEAR_DAYS = 365;
 
-export const pricing = (env: Env) => getSetting<Pricing>(env, "pricing", DEFAULT_PRICING);
+export const pricing = (env: Env) => getSetting<Pricing>(env, PRICING_KEY, DEFAULT_PRICING);
 export const business = (env: Env) => getSetting<Business>(env, "business", DEFAULT_BUSINESS);
 
 export const cashfreeConfigured = (env: Env) => !!(env.CASHFREE_APP_ID && env.CASHFREE_SECRET_KEY);

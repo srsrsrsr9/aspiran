@@ -29,7 +29,7 @@ import kotlin.coroutines.resume
 
 /**
  * Google Play Billing for Plus (server play.ts): built, and off. A year of Plus is the one-time product "plus_yearly"
- * (₹9,999, set in Play Console), like the year on the web: no auto-renewal.
+ * (₹3,999, set in Play Console), like the year on the web: no auto-renewal.
  *
  * Three switches, all needed: this build ([built], from -Pupsc.playBilling=true), the server's "play_billing" flag
  * (with "plus"), and the server's Play check being set up (/plus/status play.ready). With any of them off nothing here
