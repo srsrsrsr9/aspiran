@@ -1,10 +1,14 @@
 // Public topic pages, for search engines and for people who haven't signed in: one page per syllabus topic at
 // /learn/<node id>-<slug>, an index at /learn, and /learn/sitemap.xml.
 //
-// What a page shows is a taste, never the library: UPSC's own syllabus lines for the topic, a few real past questions
-// (UPSC's public papers), and for each approved long read its title, its one-line promise, its opening lines and its
-// outline. The rest of every read, the answers, the practice and the review stay in the app, behind sign-in
-// (isContentRoute in auth.ts). Approved content only, the same rule as /library. Cached for an hour.
+// What a topic page shows is a taste, never the library: UPSC's own syllabus lines for the topic, how often UPSC has
+// asked it and in which papers, its past questions, and for each approved long read its title, its one-line promise,
+// its opening lines and its outline. The rest of every read, the practice and the review stay in the app, behind
+// sign-in (isContentRoute in auth.ts).
+// UPSC's own papers are public in full (sales build order, step 2): /learn/papers lists them by year, each paper has a
+// page (/learn/papers/<paper id>) and each question its own (/learn/papers/<paper id>/<n>), with UPSC's official answer
+// where UPSC published a key, and never an answer of ours. Approved content only, the same rule as /library.
+// Cached for an hour.
 
 import { publicLibrary } from "./content";
 import { type Env } from "./shared";
@@ -27,6 +31,7 @@ function opening(text: string, n = 90): string {
   const stop = cut.lastIndexOf(". ");
   return (stop > cut.length * 0.5 ? cut.slice(0, stop + 1) : cut + " …");
 }
+const clip = (s: string, n: number) => { const x = s.replace(/\s+/g, " ").trim(); return x.length <= n ? x : x.slice(0, x.lastIndexOf(" ", n - 1) > n * 0.6 ? x.lastIndexOf(" ", n - 1) : n - 1) + " …"; };
 const nodesOf = (d: any): string[] => [...new Set([d?.node, ...(Array.isArray(d?.nodes) ? d.nodes : [])].filter((x) => typeof x === "string"))];
 
 const KIND_WORDS: Record<string, [string, string]> = {
@@ -36,24 +41,48 @@ const KIND_WORDS: Record<string, [string, string]> = {
   "audio-lecture": ["audio talk", "audio talks"], terms: ["term list", "term lists"],
 };
 
-interface Topic { node: Node; reads: Item[]; pyqs: { text: string; year: number; exam: string; n: string }[]; pyqTotal: number; byYear: Record<string, number>; counts: Record<string, number>; hasPath: boolean }
+interface Asked { paper: Paper; q: Q }
+interface Topic { node: Node; reads: Item[]; pyqs: { text: string; year: number; exam: string; n: string }[]; pyqTotal: number; byYear: Record<string, number>; asked: Asked[]; counts: Record<string, number>; hasPath: boolean }
+interface Q { n: string; nodes: string[]; marks?: number; words?: number; en: { q: string; options?: string[] }; answer?: number | null }
+interface Paper { id: string; exam: "prelims" | "mains"; year: number; paper: string; title: string; sourceUrl: string; key: { status: string; url?: string; dropped?: string[]; provisional?: boolean }; questions: Q[] }
 
-async function gather(env: Env): Promise<Map<string, Topic>> {
+const PAPER_NAME: Record<string, string> = { prelims: "GS Paper I", csat: "CSAT (GS Paper II)", gs1: "GS Paper I", gs2: "GS Paper II", gs3: "GS Paper III", gs4: "GS Paper IV", essay: "Essay" };
+const paperName = (p: Paper) => `UPSC ${p.exam === "mains" ? "Mains" : "Prelims"} ${p.year} · ${PAPER_NAME[p.paper] ?? p.paper}`;
+const paperPath = (p: { id: string }) => `/learn/papers/${p.id}`;
+const qPath = (p: { id: string }, q: { n: string }) => `/learn/papers/${p.id}/${encodeURIComponent(q.n)}`;
+const LETTER = "abcd";
+/** Papers in reading order: newest year first, Prelims before Mains, then GS1, CSAT, GS2 … Essay. */
+const ORDER = ["prelims", "csat", "gs1", "gs2", "gs3", "gs4", "essay"];
+const byPaper = (a: Paper, b: Paper) => b.year - a.year || (a.exam === b.exam ? 0 : a.exam === "prelims" ? -1 : 1) || ORDER.indexOf(a.paper) - ORDER.indexOf(b.paper);
+const nodeById = new Map((NODES as Node[]).map((n) => [n.id, n]));
+
+function toPaper(d: any): Paper | null {
+  if (!d || typeof d.id !== "string" || !/^cs[pm]-\d{4}-[a-z0-9]+$/.test(d.id) || d.sample || !Array.isArray(d.questions)) return null;
+  const questions: Q[] = d.questions.filter((q: any) => q && typeof q.n === "string" && en(q.en?.q ?? q.q))
+    .map((q: any) => ({ n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, en: { q: en(q.en?.q ?? q.q), options: Array.isArray(q.en?.options) ? q.en.options : undefined }, answer: q.answer }));
+  return { id: d.id, exam: d.exam === "mains" ? "mains" : "prelims", year: Number(d.year), paper: d.paper, title: en(d.title), sourceUrl: d.source?.url ?? "", key: d.answerKey ?? { status: "none" }, questions };
+}
+
+async function gather(env: Env): Promise<{ topics: Map<string, Topic>; papers: Paper[] }> {
   const out = new Map<string, Topic>();
-  for (const n of NODES as Node[]) out.set(n.id, { node: n, reads: [], pyqs: [], pyqTotal: 0, byYear: {}, counts: {}, hasPath: false });
-  if (!(await flags(env)).library) return out;
+  const papers: Paper[] = [];
+  for (const n of NODES as Node[]) out.set(n.id, { node: n, reads: [], pyqs: [], pyqTotal: 0, byYear: {}, asked: [], counts: {}, hasPath: false });
+  if (!(await flags(env)).library) return { topics: out, papers };
   // If the library can't be read, the pages still stand on the syllabus alone.
   const { items } = await publicLibrary(env).then((r) => r.json<{ items: Item[] }>()).catch(() => ({ items: [] as Item[] }));
   for (const it of items) {
     if (it.kind === "pyq") {
-      for (const q of it.data?.questions ?? []) {
-        for (const id of q.nodes ?? []) {
+      const p = toPaper(it.data);
+      if (!p || papers.some((x) => x.id === p.id)) continue;
+      papers.push(p);
+      for (const q of p.questions) {
+        for (const id of new Set(q.nodes)) {
           const t = out.get(id); if (!t) continue;
           t.pyqTotal++;
-          t.byYear[it.data.year] = (t.byYear[it.data.year] ?? 0) + 1;
-          const text = en(q.en?.q ?? q.q);
-          // Mains questions read well on their own; Prelims ones need their options, which stay in the app.
-          if (text && it.data.exam === "mains" && t.pyqs.length < 4) t.pyqs.push({ text, year: it.data.year, exam: "Mains", n: String(q.n ?? "") });
+          t.byYear[p.year] = (t.byYear[p.year] ?? 0) + 1;
+          t.asked.push({ paper: p, q });
+          // Mains questions read well on their own as a sample; Prelims ones are listed with their options below.
+          if (p.exam === "mains" && t.pyqs.length < 4) t.pyqs.push({ text: q.en.q, year: p.year, exam: "Mains", n: q.n });
         }
       }
       continue;
@@ -65,7 +94,9 @@ async function gather(env: Env): Promise<Map<string, Topic>> {
       t.counts[it.kind] = (t.counts[it.kind] ?? 0) + 1;
     }
   }
-  return out;
+  papers.sort(byPaper);
+  for (const t of out.values()) t.asked.sort((a, b) => byPaper(a.paper, b.paper) || a.paper.questions.indexOf(a.q) - b.paper.questions.indexOf(b.q));
+  return { topics: out, papers };
 }
 
 const indexable = (t: Topic) => t.reads.length > 0 || t.pyqTotal > 0;
@@ -121,8 +152,13 @@ ${secs.length > 1 ? `<p class="small">The rest of this read, in the app:</p><ul 
 <p>${esc(n.paper.short)} · ${esc(n.paper.lead)}</p>
 ${CTA()}
 ${lines.length ? `<h2>What UPSC's syllabus says</h2><ul>${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>` : ""}
-${years.length ? `<h2>How often UPSC asks it</h2><table><tr><th>Year</th><th>Questions</th></tr>${years.map((y) => `<tr><td>${esc(y)}</td><td>${t.byYear[y]}</td></tr>`).join("")}</table><p class="small">Counted from the UPSC papers Aspiran holds so far, not every year.</p>` : ""}
-${t.pyqs.length ? `<h2>Real questions from UPSC</h2>${t.pyqs.map((q) => `<div class="q"><p>${esc(q.text)}</p><p class="small">UPSC ${esc(q.exam)} ${esc(q.year)}${q.n ? `, question ${esc(q.n)}` : ""}</p></div>`).join("")}<p class="small">In the app: a frame for answering each one, then write, mark your own answer, and see a second opinion.</p>` : ""}
+${t.pyqTotal ? `<h2>Asked ${t.pyqTotal} time${t.pyqTotal === 1 ? "" : "s"} by UPSC</h2>
+<table><tr><th>Year</th><th>Questions</th><th>Papers</th></tr>${years.slice().reverse().map((y) => {
+    const ps = [...new Map(t.asked.filter((a) => String(a.paper.year) === y).map((a) => [a.paper.id, a.paper])).values()];
+    return `<tr><td>${esc(y)}</td><td>${t.byYear[y]}</td><td>${ps.map((p) => `<a href="${paperPath(p)}">${esc(p.exam === "mains" ? "Mains" : "Prelims")} ${esc(PAPER_NAME[p.paper] ?? p.paper)}</a>`).join(", ")}</td></tr>`;
+  }).join("")}</table>
+<p class="small">Counted from the UPSC papers on Aspiran so far (<a href="/learn/papers">see which</a>), not every year UPSC has held.</p>
+<h2>Every past question on this topic</h2><ul>${t.asked.slice(0, 80).map((a) => `<li><a href="${qPath(a.paper, a.q)}">${esc(a.paper.exam === "mains" ? "Mains" : "Prelims")} ${esc(a.paper.year)}${a.paper.paper === "csat" ? " CSAT" : a.paper.exam === "mains" ? ` ${esc(PAPER_NAME[a.paper.paper] ?? "")}` : ""}, Q${esc(a.q.n)}</a>: ${esc(clip(a.q.en.q, 150))}</li>`).join("")}</ul>${t.asked.length > 80 ? `<p class="small">And ${t.asked.length - 80} more in the papers.</p>` : ""}` : ""}
 ${reads ? `<h2>Start reading</h2>${reads}` : ""}
 ${inApp.length ? `<h2>In the app for this topic</h2><ul>${inApp.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
 <h2>Remember it, don't just read it</h2>
@@ -135,12 +171,61 @@ ${CTA(t.hasPath ? "Do this topic start to finish, free" : undefined)}`;
   });
 }
 
-function indexPage(env: Env, all: Map<string, Topic>): Response {
+function keyNote(p: Paper): string {
+  if (p.exam === "mains") return "Mains papers have no answer key: UPSC marks written answers.";
+  if (p.key.status === "official") return `Answers are from <a href="${esc(p.key.url ?? "")}" rel="nofollow">UPSC's ${p.key.provisional ? "provisional" : "official"} answer key</a>${p.key.dropped?.length ? `. UPSC dropped question${p.key.dropped.length === 1 ? "" : "s"} ${esc(p.key.dropped.join(", "))}` : ""}.`;
+  return "UPSC hasn't published an answer key for this paper that we hold, so no answers are shown. We never guess one.";
+}
+const answerLine = (p: Paper, q: Q) => p.exam !== "prelims" ? "" : (p.key.dropped ?? []).includes(q.n) ? `<p class="small">UPSC dropped this question in its key.</p>`
+  : p.key.status === "official" && typeof q.answer === "number" ? `<p><strong>UPSC's answer: (${LETTER[q.answer]})</strong>${p.key.provisional ? ` <span class="small">(provisional key)</span>` : ""}</p>` : "";
+const qText = (s: string) => s.split("\n").map((l) => esc(l)).join("<br>");
+const options = (q: Q) => q.en.options?.length ? `<ol type="a">${q.en.options.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>` : "";
+const topicLinks = (q: Q) => q.nodes.map((id) => nodeById.get(id)).filter(Boolean).map((n) => `<a href="${learnPath(n!)}">${esc(n!.name)}</a>`).join(", ");
+const marksLine = (q: Q) => q.marks ? `<span class="small">${q.marks} marks${q.words ? ` · ${q.words} words` : ""}</span>` : "";
+
+function papersIndex(env: Env, papers: Paper[]): Response {
+  const years = [...new Set(papers.map((p) => p.year))].sort((a, b) => b - a);
+  const total = papers.reduce((s, p) => s + p.questions.length, 0);
+  const body = `<p class="crumb"><a href="/learn">UPSC syllabus</a> › Past papers</p>
+<h1>UPSC Civil Services past papers, by year</h1>
+<p>${papers.length} papers and ${total} questions, word for word from UPSC's own question papers. Prelims answers come only from UPSC's official answer keys. Every question links to the syllabus topic it tests.</p>${CTA("Practise these with spaced review, free")}
+${years.map((y) => `<h2>${y}</h2><ul>${papers.filter((p) => p.year === y).map((p) => `<li><a href="${paperPath(p)}">${esc(paperName(p))}</a> <span class="small">· ${p.questions.length} questions${p.exam === "prelims" ? (p.key.status === "official" ? " · UPSC key" : " · no key yet") : ""}</span></li>`).join("")}</ul>`).join("")}`;
+  return shell(env, { title: "UPSC Civil Services past papers by year: Prelims, CSAT and Mains | Aspiran", desc: `${papers.length} UPSC Civil Services papers (Prelims GS, CSAT, Mains GS and Essay), word for word from UPSC, with UPSC's official answer keys and the syllabus topic of every question.`, path: "/learn/papers", body, noindex: !papers.length });
+}
+
+function paperPage(env: Env, p: Paper): Response {
+  const body = `<p class="crumb"><a href="/learn">UPSC syllabus</a> › <a href="/learn/papers">Past papers</a> › ${p.year}</p>
+<h1>${esc(paperName(p))}</h1>
+<p>${p.questions.length} questions, word for word from <a href="${esc(p.sourceUrl)}" rel="nofollow">UPSC's question paper</a>. ${keyNote(p)}</p>${CTA()}
+${p.questions.map((q) => `<div class="card" id="q${esc(q.n)}"><h3><a href="${qPath(p, q)}">Question ${esc(q.n)}</a> ${marksLine(q)}</h3><p>${qText(q.en.q)}</p>${options(q)}${answerLine(p, q)}${q.nodes.length ? `<p class="small">Syllabus: ${topicLinks(q)}</p>` : ""}</div>`).join("")}
+${CTA("Answer these in the app, with review that brings them back")}`;
+  return shell(env, { title: `${paperName(p)}: all ${p.questions.length} questions${p.key.status === "official" ? " with UPSC's answer key" : ""} | Aspiran`, desc: `${paperName(p)}, word for word from UPSC: ${p.questions.length} questions${p.exam === "prelims" && p.key.status === "official" ? ", with UPSC's official answers" : ""}, each linked to its syllabus topic.`, path: paperPath(p), body,
+    ld: { "@context": "https://schema.org", "@type": "LearningResource", name: paperName(p), learningResourceType: "Past exam paper", educationalLevel: "UPSC Civil Services Examination", inLanguage: "en", isAccessibleForFree: true, provider: { "@type": "Organization", name: "Aspiran", url: "https://aspiran.in" } } });
+}
+
+function questionPage(env: Env, p: Paper, q: Q, topics: Map<string, Topic>): Response {
+  const i = p.questions.indexOf(q), prev = p.questions[i - 1], next = p.questions[i + 1];
+  const asked = q.nodes.map((id) => topics.get(id)).filter((t): t is Topic => !!t && t.pyqTotal > 0)
+    .map((t) => `<li><a href="${learnPath(t.node)}">${esc(t.node.name)}</a>: asked ${t.pyqTotal} time${t.pyqTotal === 1 ? "" : "s"} in the papers on Aspiran</li>`).join("");
+  const body = `<p class="crumb"><a href="/learn/papers">Past papers</a> › <a href="${paperPath(p)}">${esc(paperName(p))}</a></p>
+<h1>${esc(paperName(p))}, question ${esc(q.n)}</h1>
+<div class="q"><p>${qText(q.en.q)}</p>${options(q)}<p>${marksLine(q)}</p></div>
+${answerLine(p, q)}<p class="small">${p.exam === "prelims" ? keyNote(p) : "Word for word from UPSC's question paper."} <a href="${esc(p.sourceUrl)}" rel="nofollow">The paper on upsc.gov.in</a>.</p>
+${asked ? `<h2>The syllabus topic it tests</h2><ul>${asked}</ul>` : ""}
+${CTA(p.exam === "mains" ? "Write this answer in the app and mark it, free" : "Try questions like this with spaced review, free")}
+<p>${prev ? `<a href="${qPath(p, prev)}">← Question ${esc(prev.n)}</a>` : ""}${prev && next ? " · " : ""}${next ? `<a href="${qPath(p, next)}">Question ${esc(next.n)} →</a>` : ""}</p>`;
+  const lead = clip(q.en.q, 110);
+  return shell(env, { title: `${lead} | ${paperName(p)} Q${q.n} | Aspiran`.slice(0, 180), desc: `${paperName(p)}, question ${q.n}: ${clip(q.en.q, 200)}${p.exam === "prelims" && typeof q.answer === "number" && p.key.status === "official" ? " With UPSC's official answer." : ""}`, path: qPath(p, q), body,
+    ld: { "@context": "https://schema.org", "@type": "Quiz", name: `${paperName(p)}, question ${q.n}`, educationalLevel: "UPSC Civil Services Examination", inLanguage: "en", isAccessibleForFree: true, provider: { "@type": "Organization", name: "Aspiran", url: "https://aspiran.in" } } });
+}
+
+function indexPage(env: Env, all: Map<string, Topic>, papers: Paper[]): Response {
   const body = `<h1>The UPSC syllabus, topic by topic</h1>
 <p>Every topic of the Civil Services exam: what the syllabus says, what UPSC has asked, and where to start. Pick one.</p>${CTA()}
+${papers.length ? `<p><a href="/learn/papers">All ${papers.length} UPSC past papers, by year</a>: ${papers.reduce((s, p) => s + p.questions.length, 0)} questions with UPSC's own answer keys.</p>` : ""}
 ${(PAPERS as any[]).map((p) => `<h2>${esc(p.name)}</h2><p class="small">${esc(p.lead)}</p><ul>${p.topics.map((name: string, i: number) => {
     const id = `${p.id === "prelims" ? "pre" : p.id}-${i + 1}`, t = all.get(id);
-    return `<li><a href="${learnPath({ id, name })}">${esc(name)}</a>${t?.pyqTotal ? ` <span class="small">· ${t.pyqTotal} past questions</span>` : ""}</li>`;
+    return `<li><a href="${learnPath({ id, name })}">${esc(name)}</a>${t?.pyqTotal ? ` <span class="small">· asked ${t.pyqTotal} time${t.pyqTotal === 1 ? "" : "s"}</span>` : ""}</li>`;
   }).join("")}</ul>`).join("")}`;
   return shell(env, { title: "UPSC syllabus, topic by topic: past questions and notes | Aspiran", desc: "Every topic of the UPSC Civil Services syllabus, with UPSC's own wording, real past questions and short reads to start with. Free to try, in English and Hindi.", path: "/learn", body });
 }
@@ -157,13 +242,25 @@ export async function learnRoute(req: Request, env: Env, path: string, ctx: Exec
   const hit = await cache?.match(key);
   if (hit) return hit;
 
-  const all = await gather(env);
+  const { topics: all, papers } = await gather(env);
   let res: Response;
-  if (path === "/learn") res = indexPage(env, all);
+  if (path === "/learn") res = indexPage(env, all, papers);
   else if (path === "/learn/sitemap.xml") {
     const base = (env.PUBLIC_BASE_URL || new URL(req.url).origin).replace(/\/$/, "");
     const urls = ["/learn", ...[...all.values()].filter(indexable).map((t) => learnPath(t.node))];
+    if (papers.length) urls.push("/learn/papers", ...papers.flatMap((p) => [paperPath(p), ...p.questions.map((q) => qPath(p, q))]));
     res = new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join("\n")}\n</urlset>\n`, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
+  } else if (path === "/learn/papers" || path === "/learn/papers/") {
+    res = papersIndex(env, papers);
+  } else if (path.startsWith("/learn/papers/")) {
+    const m = path.match(/^\/learn\/papers\/(cs[pm]-\d{4}-[a-z0-9]+)(?:\/([0-9a-z]+))?\/?$/);
+    const p = m ? papers.find((x) => x.id === m[1]) : undefined;
+    if (!p) return new Response("Not found", { status: 404 });
+    if (m![2]) {
+      const q = p.questions.find((x) => x.n === m![2]);
+      if (!q) return new Response("Not found", { status: 404 });
+      res = questionPage(env, p, q, all);
+    } else res = paperPage(env, p);
   } else {
     const id = path.match(/^\/learn\/([a-z0-9]+-\d+)(?:-[a-z0-9-]*)?$/)?.[1];
     const t = id ? all.get(id) : undefined;
