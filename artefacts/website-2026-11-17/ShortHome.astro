@@ -31,11 +31,11 @@ const WA_PAY = waUrl(T("Hi Aspiran! I'd like to pay for Plus by UPI.", 'Hi Aspir
 const tryLabel = T('Try one topic free', 'एक टॉपिक मुफ़्त आज़माइए');
 const ticks = hi ? ['साइन-अप नहीं', 'कार्ड नहीं', '15 मिनट: संघवाद, असली PYQ के साथ'] : ['No sign-up', 'No card', '15 minutes: Federalism, with real past-paper questions'];
 
-// What's in the app today, counted on production 15 Nov 2026 (2,063 questions, 257 videos, 11 papers; audio 20.4 h on 16 Nov), rounded down.
+// What's in the app today, counted on production 15 Nov 2026 (2,063 questions, 257 videos, 11 papers; audio 20.4 h on 16 Nov, about 27 h on 20 Nov), rounded down.
 // Keep these the same as the demo's own lines (server/public/app/try.js libLine/joinLine).
 const NUMS = hi
   ? ['2,000+ अभ्यास सवाल', '250+ छोटे वीडियो', '20+ घंटे के रिकॉर्ड किए नोट्स', '11 पिछले पेपर']
-  : ['2,000+ practice questions', '250+ short videos', '20+ hours of recorded notes', '11 past papers'];
+  : ['2,000+ practice questions', '250+ short videos', '25+ hours of recorded notes', '11 past papers'];
 
 // Real screens from the open demo (captured 15 Nov 2026 at 375 px, app.aspiran.in), shown in the hero phone.
 const shots = hi ? [

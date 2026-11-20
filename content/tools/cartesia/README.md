@@ -1,4 +1,4 @@
-# AI-voice readings with Cartesia
+# Recorded readings (Cartesia, then Fish Audio)
 
 Voices the syllabus notes (library kind `read`) and the guided walks (`walk-script`) in Indian voices, checks every
 chunk by speech-to-text, and attaches the finished file to the live library item as `data.audio.<lang>`
@@ -20,8 +20,10 @@ reader and walk screens show a **Listen · AI voice** player when it's there, an
 Providers are tried in order per series (`CHAIN` in `build.py`) and the next one takes over when one is out of credits:
 Cartesia, Inworld, Smallest, then Chariot (`prov.py`; keys from the Keychain, account `aspiran`, never printed). Notes in
 English: Krishna, Saanvi, Aditi, Neha. Notes in Hindi: Kriti, Manoj, Kunal, Darshan. Walks: Siya / Siddharth / Nikhil in
-English, Rehan / Meera / Seema in Hindi. Each reading records its `provider` and model (`by`). Fish Audio is not used here:
-it is kept for Chotu, Jeetu and videos.
+English, Rehan / Meera / Seema in Hindi. Each reading records its `provider` and model (`by`). Since 20 Nov 2026 Fish Audio comes first
+(owner: "use Fish audio"): Shubh (English) and शांत और भावुक स्वर (Hindi, stored as "Shant"), both Fish-licensed, model
+`s2.1-pro`; IPv4 only, at most `FISH_SLOTS` (default 5) requests at once, a stalled stream is cut and retried, and Fish's
+own speech-to-text is the automatic second opinion. Nothing spoken or shown says "AI" or names the voice (owner, 17 Nov).
 Checker: Deepgram nova-3 (en-IN, hi), bar en 0.88, hi 0.80, 0.12 lower for lines under 120 characters. When a chunk fails,
 Chariot's speech-to-text gives a second opinion (`prov.chariot_stt`); a pass is stored as `check2` on the chunk and kept by
 `--rescore`. `report.py` prints the table by paper and subject, the voices, and what is still to voice.
@@ -31,4 +33,6 @@ Chariot's speech-to-text gives a second opinion (`prov.chariot_stt`); a pass is 
     (cd server && npx wrangler d1 execute upsc-pods --remote --env production --json --command "select id, kind, pack, title, json, en_editor, hi_editor, updated_at from library where kind in ('read','walk-script') and status='approved'") > content/audio/cartesia/lib.json
     python3 content/tools/cartesia/build.py --only walk-script      # or --ids a,b  or nothing for all
     python3 content/tools/cartesia/publish.py --dry                 # then without --dry
+To voice only what has no live audio: `python3 content/tools/cartesia/missing.py`, then
+`FISH_SLOTS=8 python3 content/tools/cartesia/build.py --missing --workers 16 --parallel 4 --skip cartesia,inworld,smallest,chariot`.
 Generated files live in `content/audio/cartesia/` (git-ignored). `build.py` resumes where it stopped.

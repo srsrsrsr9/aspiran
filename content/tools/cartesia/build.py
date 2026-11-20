@@ -16,14 +16,15 @@ WORK = os.path.join(DATA, "work")
 OUT = os.path.join(DATA, "out")
 
 # One voice per series where credits allow: (provider, voice id, name shown in the app). Order = order tried.
+FISH_EN, FISH_HI = "e0ea460db14b4430afb6311708937b6d", "24e7cbf4121745e7bb3b54d1a0d2be80"   # Shubh; शांत और भावुक स्वर (both Fish-licensed)
 CHAIN = {
-    ("read", "en"): [("cartesia", "c63361f8-d142-4c62-8da7-8f8149d973d6", "Krishna"), ("inworld", "Saanvi", "Saanvi"), ("smallest", "aditi", "Aditi"), ("chariot", "09ecd7b6-3e92-4435-b673-50e8659fc015", "Neha")],
-    ("read", "hi"): [("cartesia", "5283efe8-07d1-4e3a-b615-2ae4a81c1b73", "Kriti"), ("inworld", "Manoj", "Manoj"), ("smallest", "kunal", "Kunal"), ("chariot", "9fbf5ed7-5e81-40e0-b0f9-9ab0345661a3", "Darshan")],
-    ("walk-script", "en"): [("cartesia", "4459a9a5-69d6-4680-b970-e13dc51845b6", "Siya"), ("smallest", "siddharth", "Siddharth"), ("inworld", "Nikhil", "Nikhil")],
-    ("walk-script", "hi"): [("cartesia", "205fc552-2cce-4307-baa1-598b9dc3dd01", "Rehan"), ("smallest", "meera", "Meera"), ("inworld", "Seema", "Seema")],
+    ("read", "en"): [("fish", FISH_EN, "Shubh"), ("cartesia", "c63361f8-d142-4c62-8da7-8f8149d973d6", "Krishna"), ("inworld", "Saanvi", "Saanvi"), ("smallest", "aditi", "Aditi"), ("chariot", "09ecd7b6-3e92-4435-b673-50e8659fc015", "Neha")],
+    ("read", "hi"): [("fish", FISH_HI, "Shant"), ("cartesia", "5283efe8-07d1-4e3a-b615-2ae4a81c1b73", "Kriti"), ("inworld", "Manoj", "Manoj"), ("smallest", "kunal", "Kunal"), ("chariot", "9fbf5ed7-5e81-40e0-b0f9-9ab0345661a3", "Darshan")],
+    ("walk-script", "en"): [("fish", FISH_EN, "Shubh"), ("cartesia", "4459a9a5-69d6-4680-b970-e13dc51845b6", "Siya"), ("smallest", "siddharth", "Siddharth"), ("inworld", "Nikhil", "Nikhil")],
+    ("walk-script", "hi"): [("fish", FISH_HI, "Shant"), ("cartesia", "205fc552-2cce-4307-baa1-598b9dc3dd01", "Rehan"), ("smallest", "meera", "Meera"), ("inworld", "Seema", "Seema")],
 }
-MODEL = {"cartesia": "Cartesia sonic-3", "inworld": "Inworld inworld-tts-1.5-max", "smallest": "Smallest lightning-v3.1", "chariot": "Chariot chariot-multilingual-v1"}
-EXT = {"cartesia": "mp3", "inworld": "mp3", "smallest": "wav", "chariot": "wav"}
+MODEL = {"fish": "Fish Audio s2.1-pro", "cartesia": "Cartesia sonic-3", "inworld": "Inworld inworld-tts-1.5-max", "smallest": "Smallest lightning-v3.1", "chariot": "Chariot chariot-multilingual-v1"}
+EXT = {"fish": "mp3", "cartesia": "mp3", "inworld": "mp3", "smallest": "wav", "chariot": "wav"}
 TAKES = {"chariot": 1}   # small balance: one take, then a second checker decides
 dead = set()          # providers that reported no credits in this run
 SPEED = 0.95
@@ -32,7 +33,8 @@ lock = threading.Lock()
 usage = {}
 
 def say(provider, voice, lang, text, out, emotion):
-    if provider == "cartesia":
+    if provider == "fish": prov.fish_tts(text, lang, voice, out, speed=0.95 if lang == "en" else 0.93)
+    elif provider == "cartesia":
         try: cart.tts(voice, lang, text, out, speed=SPEED, emotion=emotion)
         except RuntimeError as e:
             if "402" in str(e) or "credit" in str(e).lower(): raise prov.Broke(str(e))
@@ -77,8 +79,8 @@ def units(rows, ids, langs):
                 secs = j["sections"].get(lang)
                 if not secs: continue
                 title, dek = j["title"].get(lang) or j["title"]["en"], (j.get("dek") or {}).get(lang, "")
-                if lang == "en": ch.append(("Start", f"{title}.\nAn Aspiran note, read by an AI voice.\n{dek}", calm, GAP))
-                else: ch.append(("शुरुआत", f"{title}।\nAspiran का नोट, एक AI आवाज़ में।\n{dek}", calm, GAP))
+                if lang == "en": ch.append(("Start", f"{title}.\nAn Aspiran note.\n{dek}", calm, GAP))
+                else: ch.append(("शुरुआत", f"{title}।\nAspiran का नोट।\n{dek}", calm, GAP))
                 for s in secs:
                     head = s.get("heading") or s.get("head") or ""
                     for k, p in enumerate(split_long(s["body"])):
@@ -97,8 +99,8 @@ def units(rows, ids, langs):
                 text = (j.get("script") or {}).get(lang)
                 if not text: continue
                 topic = j["topic"].get(lang) or j["topic"]["en"]
-                if lang == "en": ch.append(("", f"{topic}.\nAn Aspiran guided walk, read by an AI voice.", calm, GAP))
-                else: ch.append(("", f"{topic}।\nAspiran की ओर से, चलते-चलते सुनने के लिए। यह एक AI आवाज़ है।", calm, GAP))
+                if lang == "en": ch.append(("", f"{topic}.\nAn Aspiran guided walk.", calm, GAP))
+                else: ch.append(("", f"{topic}।\nAspiran की ओर से, चलते-चलते सुनने के लिए।", calm, GAP))
                 for p in split_long(text): ch.append(("", p, calm, GAP))
                 ch.append(("", "Now say your answer aloud, once. Then walk on." if lang == "en" else "अब अपना जवाब एक बार बोलकर कहिए। फिर आगे चलिए।", calm, GAP))
             us.append({"kind": r["kind"], "id": iid, "lang": lang, "chunks": ch})
@@ -158,6 +160,12 @@ def do_chunk(u, i, text, emotion, provider, voice):
         if not best or sc > best["score"]: best = cand
         if sc >= need: break
     m = {"i": i, "provider": provider, "spoken": spoken, **best, "ok": best["score"] >= need}
+    if not m["ok"] and provider == "fish":
+        try:
+            h2 = prov.fish_asr(m["file"], u["lang"]); s2 = round(score(spoken, h2, u["lang"]), 3)
+            if s2 >= need: m["check2"] = {"by": "Fish Audio asr", "score": s2, "heard": h2}; m["ok"] = True
+            else: m["check2_failed"] = {"score": s2, "heard": h2}
+        except Exception as e: m["check2_error"] = str(e)[:200]
     json.dump(m, open(meta_p, "w"), ensure_ascii=False, indent=1)
     return m
 
@@ -212,25 +220,30 @@ if __name__ == "__main__":
     if "--rescore" in sys.argv: rescore(); sys.exit()
     ap = argparse.ArgumentParser()
     ap.add_argument("--plan", default="first"); ap.add_argument("--ids"); ap.add_argument("--limit", type=int); ap.add_argument("--workers", type=int, default=4)
-    ap.add_argument("--langs", default="en,hi"); ap.add_argument("--skip", default="cartesia")
+    ap.add_argument("--langs", default="en,hi"); ap.add_argument("--skip", default="cartesia"); ap.add_argument("--missing", action="store_true"); ap.add_argument("--parallel", type=int, default=1)
     a = ap.parse_args()
     dead.update(x for x in a.skip.split(",") if x)
     rows = {json.loads(r["json"])["id"]: r for r in json.load(open(LIB))[0]["results"] if r["kind"] in ("read", "walk-script")}
-    order = a.ids.split(",") if a.ids else [c["id"] for c in json.load(open(os.path.join(DATA, "plan.json")))[a.plan]]
+    order = a.ids.split(",") if a.ids else [m["id"] for m in json.load(open(os.path.join(DATA, "missing.json")))] if a.missing else [c["id"] for c in json.load(open(os.path.join(DATA, "plan.json")))[a.plan]]
     us = [u for i in order if i in rows for u in units([rows[i]], None, a.langs.split(","))]
+    if a.missing:   # only the (item, language) pairs with no live audio
+        want = {(m["id"], l) for m in json.load(open(os.path.join(DATA, "missing.json"))) for l in m["langs"]}
+        us = [u for u in us if (u["id"], u["lang"]) in want]
     if a.limit: us = us[: a.limit]
     print(f"{len(us)} readings, {sum(len(u['chunks']) for u in us)} chunks", flush=True)
     ex = ThreadPoolExecutor(a.workers)
-    t0 = time.time(); total = 0.0
-    for n, u in enumerate(us, 1):
+    t0 = time.time(); total = [0.0]; stop = threading.Event()
+    def one(n, u):
+        if stop.is_set(): return
         done = os.path.join(OUT, u["kind"], f'{u["id"]}.{u["lang"]}.json')
-        if os.path.exists(done) and not json.load(open(done))["failed"]:
-            total += json.load(open(done))["seconds"]; continue
+        if os.path.exists(done) and not json.load(open(done))["failed"]: return
         try: r = run_unit(u, ex)
         except Exception as e:
-            print(f'[{n}/{len(us)}] ERROR {u["id"]}.{u["lang"]}: {str(e)[:200]}', flush=True); continue
-        if r is None: print("Every provider for this series is out of credits. Stopping.", flush=True); break
-        total += r["seconds"]
-        print(f'[{n}/{len(us)}] {r["id"]}.{r["lang"]} {r["provider"]}/{r["voice"]} {r["seconds"]/60:.1f} min, lowest check {r["minScore"]}, failed {r["failed"]} | total {total/3600:.2f} h | {int(time.time()-t0)}s', flush=True)
-    log = os.path.join(DATA, "usage.jsonl"); open(log, "a").write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), **usage}) + "\n")
+            print(f'[{n}/{len(us)}] ERROR {u["id"]}.{u["lang"]}: {str(e)[:200]}', flush=True); return
+        if r is None: print("Every provider for this series is out of credits. Stopping.", flush=True); stop.set(); return
+        with lock: total[0] += r["seconds"]
+        print(f'[{n}/{len(us)}] {r["id"]}.{r["lang"]} {r["provider"]}/{r["voice"]} {r["seconds"]/60:.1f} min, lowest check {r["minScore"]}, failed {r["failed"]} | new {total[0]/3600:.2f} h | {int(time.time()-t0)}s', flush=True)
+    outer = ThreadPoolExecutor(a.parallel)
+    list(outer.map(lambda nu: one(*nu), enumerate(us, 1)))
+    log = os.path.join(DATA, "usage.jsonl"); open(log, "a").write(json.dumps({"at": time.strftime("%Y-%m-%d %H:%M"), **usage, "fish_bytes": sum(prov.FISH_LEDGER), "fish_requests": len(prov.FISH_LEDGER)}) + "\n")
     print("usage", usage, "dead", sorted(dead), flush=True)
