@@ -54,6 +54,10 @@ export interface Env {
   CASHFREE_API_BASE?: string;
   /** Where Cashfree sends people back after paying, e.g. https://upsc-pods.example.workers.dev */
   PUBLIC_BASE_URL?: string;
+  /** Telegram bot token for the daily channel post (posts.ts). A secret (`wrangler secret put`), typed by the owner. Unset: nothing is sent. */
+  TELEGRAM_BOT_TOKEN?: string;
+  /** Local tests only: a stand-in for api.telegram.org. */
+  TELEGRAM_API_BASE?: string;
   /** Google Play Billing (play.ts): the Play service account's JSON key, a secret (`wrangler secret put`), never in files or chat. */
   PLAY_SERVICE_ACCOUNT_JSON?: string;
   /** The app's package name on Play. Unset = in.aspiran.app. */
