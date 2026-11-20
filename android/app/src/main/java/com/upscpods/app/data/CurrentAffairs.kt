@@ -54,6 +54,9 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
     /** "Syllabus in a minute": one short video per syllabus topic, a set per paper (GET /ca?series=..., in order). */
     var syllabus by mutableStateOf<List<CaWeekSummary>>(emptyList())
         private set
+    /** "Illustrated shorts": stories, maps, case files and past questions, one to two minutes each (English 2001-NN, Hindi 2002-NN). */
+    var shorts by mutableStateOf<List<CaWeekSummary>>(emptyList())
+        private set
 
     private val http = OkHttpClient()
     private val authed = OkHttpClient.Builder().addInterceptor(AuthInterceptor).build()
@@ -91,6 +94,16 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
                 val text = r.body.string()
                 syllabus = parseSeries(text)
                 File(dir, SERIES_FILE).writeText(text)
+            }
+        }
+        if (shorts.isEmpty()) runCatching { shorts = parseSeries(File(dir, SHORTS_FILE).readText()) }
+        runCatching {
+            val more = if (BuildConfig.DEBUG) "&drafts=1" else ""
+            http.newCall(Request.Builder().url("$base/ca?series=$SHORTS$more").build()).execute().use { r ->
+                if (!r.isSuccessful) return@use
+                val text = r.body.string()
+                shorts = parseSeries(text)
+                File(dir, SHORTS_FILE).writeText(text)
             }
         }
     }
@@ -194,6 +207,8 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
         private const val WEEKS = "weeks.json"
         private const val SERIES = "syllabus-in-a-minute"
         private const val SERIES_FILE = "syllabus.json"
+        private const val SHORTS = "illustrated-shorts"
+        private const val SHORTS_FILE = "shorts.json"
 
         /** The weeks as last fetched, for the Sunday ritual nudge (no network from a worker that only needs a count). */
         fun cachedWeeks(context: Context): List<CaWeekSummary> = runCatching {

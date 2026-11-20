@@ -79,6 +79,16 @@ assert.deepEqual(sl.map((x) => [x.week, x.title, x.scenes]), [[SW, "GS2", 3]]);
 assert.equal((await get(`/ca/${SW}`)).data.title, "GS2");
 step("a series has its own shelf, off the weekly one");
 
+// A second series keeps to its own shelf too.
+const SH = "1999-10";
+const shm = { ...manifest(["approved", "approved", "approved"]), week: SH, lang: "hi", series: "illustrated-shorts", title: "Illustrated shorts", titleHi: "चित्र-कथाएँ" };
+assert.equal((await fetch(`${BASE}/desk/api/ca/${SH}/files/manifest.json`, { method: "PUT", headers: { authorization: "Bearer " + TOKEN }, body: JSON.stringify(shm) })).status, 200);
+const shl = (await get("/ca?series=illustrated-shorts")).data.weeks;
+assert.deepEqual(shl.map((x) => [x.week, x.lang, x.titleHi, x.scenes]), [[SH, "hi", "चित्र-कथाएँ", 3]]);
+assert.ok(!(await get("/ca?series=syllabus-in-a-minute")).data.weeks.some((x) => x.week === SH));
+assert.ok(!(await get("/ca")).data.weeks.some((x) => x.week === SH));
+step("a second series has its own shelf");
+
 // The player reads videos in ranges.
 const full = await fetch(`${BASE}${week.base}1-gi-tag.mp4`);
 assert.equal(full.status, 200);

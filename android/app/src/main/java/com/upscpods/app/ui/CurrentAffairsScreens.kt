@@ -209,6 +209,24 @@ fun CaWeekCard(ca: CurrentAffairs, gate: PlusGate, quiet: Boolean, hindi: Boolea
                 }
             }
         }
+        val shorts = ca.shorts.filter { it.lang == (if (hindi) "hi" else "en") }.ifEmpty { ca.shorts }
+        if (shorts.isNotEmpty()) {
+            Text(if (hindi) "चित्र-कथाएँ" else "ILLUSTRATED SHORTS", color = CA_GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.6.sp)
+            Text(if (hindi) "कहानियाँ, नक्शे, केस फ़ाइलें और पिछले सवाल, हर एक एक-दो मिनट का।" else "Stories, maps, case files and past questions, one to two minutes each.",
+                color = CA_CREAM.copy(alpha = .8f), fontSize = 13.sp)
+            Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                shorts.forEach { set ->
+                    Row(Modifier.clip(RoundedCornerShape(12.dp)).background(Color.White.copy(alpha = .08f)).clickable { onOpen(set.week, 0) }.padding(6.dp),
+                        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        CaPoster(ca, set.poster, Modifier.width(36.dp).height(64.dp).clip(RoundedCornerShape(8.dp)))
+                        Column(Modifier.padding(end = 6.dp)) {
+                            Text((if (hindi) set.titleHi else null) ?: set.title ?: set.week, color = CA_CREAM, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                            Text(if (hindi) "${set.scenes} वीडियो" else "${set.scenes} videos", color = CA_CREAM.copy(alpha = .7f), fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
         if (ca.syllabus.isNotEmpty()) {
             Text(if (hindi) "एक मिनट में सिलेबस" else "SYLLABUS IN A MINUTE", color = CA_GOLD, fontWeight = FontWeight.ExtraBold, fontSize = 11.sp, letterSpacing = 1.6.sp)
             Text(if (hindi) "सिलेबस के हर विषय पर एक छोटा वीडियो, पेपर के हिसाब से।" else "One short video for every syllabus topic, paper by paper.",
