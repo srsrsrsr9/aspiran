@@ -17,6 +17,13 @@ export interface Env {
   /** PostHog project key (public, starts phc_) for the public topic pages (learn.ts). Empty: no analytics script. */
   POSTHOG_KEY?: string;
   POSTHOG_HOST?: string;
+  /** Optional: a PostHog personal API key (read-only, "query" scope) for Admin → Insights (insights.ts). A secret
+   * (`wrangler secret put POSTHOG_PERSONAL_KEY`), typed by the owner. Unset: the PostHog cards say "not connected". */
+  POSTHOG_PERSONAL_KEY?: string;
+  /** Optional: the PostHog project id for the query API (default 729724). A plain var. */
+  POSTHOG_PROJECT_ID?: string;
+  /** Local tests only (AUTH_MODE dev): a stand-in for PostHog's query address. */
+  POSTHOG_API_BASE?: string;
   /** The sender for recovery email, e.g. "Aspiran <no-reply@example.com>", on a domain verified with Resend. */
   MAIL_FROM?: string;
   /** Optional owner key. Without it, EDITOR_TOKEN is the owner key. */

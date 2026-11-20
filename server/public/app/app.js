@@ -264,7 +264,7 @@ function finishFocus(f) {
   if (f.kind === "mock") { const a = store.get("mock:active"); if (a && !a.paper.countUp) mockSubmit(); return; }
   if (f.task) markStarted(f.task);
   if (document.hidden && "Notification" in window && Notification.permission === "granted") {
-    try { new Notification(f.kind === "five" ? "Five minutes done." : "Focus block done.", { body: "Stand up, drink water, look out of a window.", icon: "icon-192.png" }); } catch {}
+    try { const n = new Notification(f.kind === "five" ? "Five minutes done." : "Focus block done.", { body: "Stand up, drink water, look out of a window.", icon: "icon-192.png" }); n.onclick = () => { M.track("notification_open", { kind: "focus_done" }); window.focus(); }; } catch {}
   }
   if (focusCfg().sound) chime();
   const d = h("dialog");
@@ -387,12 +387,24 @@ const isFriend = (m) => String(m.memberId).startsWith("friend:");
 const friendInfo = (id) => FRIENDS[id] ?? OLD_FRIENDS[id];
 const friendLabel = (m, size = 20) => h("span.chotu-label", { title: friendInfo(m.memberId)?.bio ?? "Study helper" }, kulhad("warm", size, friendInfo(m.memberId)?.color ?? "#888"), h("span", String(m.name ?? "").replace(/ · (AI|study helper)$/, "")), h("span.tag", "study helper"));
 
+// A visit to the pod, counted when it ends: minutes there and how many messages were sent (never what they said).
+let podVisit = null;
+function podVisitTrack(name) {
+  if (name === "pod" && profile()) { podVisit ??= { at: Date.now(), n: 0 }; return; }
+  if (!podVisit) return;
+  const v = podVisit; podVisit = null;
+  M.track("pod_session", { minutes: Math.min(300, Math.round((Date.now() - v.at) / 60000)) });
+  if (v.n) M.track("pod_message", { n: v.n });
+}
+addEventListener("pagehide", () => podVisitTrack(null));
+
 let cleanup = [];
 function render() {
   cleanup.forEach((f) => f()); cleanup = [];
   const root = $("#root");
   applyLang();
   const r = route();
+  podVisitTrack(r.name);
   const space = spaceOf(r.name);
   document.documentElement.dataset.space = space;
   M.startAnalytics(config?.posthog); M.screen(profile() ? r.name.split("=")[0] : r.name === "try" || r.name === "tryback" || r.name === "shelf" ? r.name : "first-run", !profile());
@@ -697,7 +709,8 @@ const chipsOf = (it, t) => (t.chips ?? (it.chips?.length ? it.chips : [it.gsPape
 // open. Sure and not-sure answers are tallied per day on this device only (sureLog, 120 days) for You vs. you.
 const logSure = (sure, ok) => { const d = store.get("sureLog", {}), t = today(), x = d[t] ?? [0, 0, 0, 0]; x[sure ? 0 : 2] += ok ? 1 : 0; x[sure ? 1 : 3]++; d[t] = x;
   store.set("sureLog", Object.fromEntries(Object.entries(d).sort().slice(-120))); };
-function mcqBlock(mcq, onAnswer) {
+/** meta: { where, topic } for the practice_answer count (codes only; never the question or the option). */
+function mcqBlock(mcq, onAnswer, meta = null) {
   let picked = null, sure = null;
   const box = h("div");
   const draw = () => put(box, h("p", h("strong", mcq.question)),
@@ -705,7 +718,9 @@ function mcqBlock(mcq, onAnswer) {
       ? h("div.card.soft", h("div.small.muted", hindi() ? "देखने से पहले" : "Before you look"), h("p", { style: { margin: "4px 0 8px" } }, h("strong", hindi() ? "कितने पक्के हैं?" : "How sure are you?")),
         h("div.row", h("button", { onclick: () => { sure = true; draw(); } }, hindi() ? "पक्का" : "Sure"), h("button", { onclick: () => { sure = false; draw(); } }, hindi() ? "पक्का नहीं" : "Not sure")))
       : mcq.options.map((o, i) => h("button.opt" + (picked == null ? "" : i === mcq.answerIndex ? ".right" : i === picked ? ".wrong" : ""),
-        { disabled: picked != null, onclick: () => { picked = i; logSure(sure, i === mcq.answerIndex); onAnswer?.(i === mcq.answerIndex); draw(); } }, o)),
+        { disabled: picked != null, onclick: () => { picked = i; logSure(sure, i === mcq.answerIndex);
+          M.track("practice_answer", { where: meta?.where ?? "other", node: M.codeOf(meta?.topic ?? mcq.topic), right: i === mcq.answerIndex ? 1 : 0, sure: sure ? 1 : 0 });
+          onAnswer?.(i === mcq.answerIndex); draw(); } }, o)),
     picked != null && h("p", (picked === mcq.answerIndex ? "✓ Right. " : "○ Not quite. ") + (mcq.explanation ?? "")),
     picked != null && sure && picked !== mcq.answerIndex && h("p.small.muted", hindi() ? "आप पक्के थे, फिर भी ग़लत: Prelims में यही सबसे महँगा पड़ता है (−⅓)। यह अब याद रहेगा।" : "You were sure, and it was wrong: in Prelims that's the costly kind (−⅓). It'll stick now."));
   draw();
@@ -735,7 +750,7 @@ function viewChai(arg) {
       const rec = store.get("recall", {}); rec[it.id] = { day: today(), right, topic: it.topic }; store.set("recall", rec);
       const q = { id: "card-" + it.id, cardId: it.id, topic: it.topic, en: it.examCorner?.mcq, hi: it.hi?.mcq ?? null };
       if (right) gotRight(q); else addMiss(q);
-    }),
+    }, { where: "chai", topic: it.topic }),
     t.mains && h("p", h("strong", "Mains: "), t.mains),
     t.facts.length > 0 && h("div", h("strong", "Key facts"), h("ul", t.facts.map((f) => h("li", f)))),
     h("p.small.muted", it.examCorner?.pyq ?? "No direct PYQ"));
@@ -896,7 +911,7 @@ function viewPrelims() {
         results.push({ topic: q.topic, ok });
         if (ok) { right++; firstRight ??= q.topic; gotRight(q); } else addMiss(q);
         next.disabled = false;
-      })), next);
+      }, { where: "prelims", topic: q.topic })), next);
     next.disabled = true;
   };
   const next = h("button.primary", { onclick: () => { i++; draw(); } }, "Next");
@@ -941,12 +956,15 @@ function viewReview() {
     h("p", dayState().reviewed ? "That's today's review done." : "Nothing due today."),
     h("p.muted", "Questions you answer in Chai and Prelims, and topics you mark as met on your syllabus map, come back here just before you'd forget them."),
     h("div.row", h("a.btn.primary", { href: "#today" }, "Back to Today"), h("a.btn", { href: "#map" }, "Your syllabus map")));
-  let i = 0, right = 0, asked = 0;
+  let i = 0, right = 0, asked = 0, keptTopics = 0;
   const box = h("div");
   const next = h("button.primary", { onclick: () => { i++; draw(); } }, "Next");
   const draw = () => {
     if (i >= set.length) {
-      const d = dayState(); d.reviewed = true; saveDay(d);
+      const d = dayState();
+      // cards: how many came back today; kept: how many of them came back right (questions) or mostly (topics).
+      if (!d.reviewed) M.track("review_done", { cards: set.length, kept: right + keptTopics });
+      d.reviewed = true; saveDay(d);
       put(box, h("h2", "That's today's review."),
         asked > 0 && h("p", `${right} of ${asked} question${asked === 1 ? "" : "s"} came back right.`),
         h("p.muted", "Each one returns just before you'd forget it. The ones you knew well wait longer."), J.say("reviewEnd"),
@@ -956,7 +974,7 @@ function viewReview() {
     const it = set[i];
     if (it.node) {
       const nd = SY.nodeById(it.node), n = nodes()[it.node];
-      const grade = (g) => { logRight(g >= F.GOOD); putNode(it.node, MP.check(n, g, day)); i++; draw(); };
+      const grade = (g) => { logRight(g >= F.GOOD); if (g >= F.GOOD) keptTopics++; putNode(it.node, MP.check(n, g, day)); i++; draw(); };
       put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${nd.paper.short} · Topic check`),
         h("div.card", h("h2", { style: { marginTop: 0 } }, nd.name),
           h("p", "Close your notes. Say or write the main points from memory, then check them."),
@@ -969,7 +987,7 @@ function viewReview() {
     }
     const q = it.q;
     put(box, h("div.small.muted", `${i + 1} of ${set.length} · ${q.topic ?? "Question"}`),
-      h("div.card", mcqBlock(mcqOf(q), (ok) => { asked++; if (ok) { right++; gotRight(q); } else addMiss(q); next.disabled = false; })), next);
+      h("div.card", mcqBlock(mcqOf(q), (ok) => { asked++; if (ok) { right++; gotRight(q); } else addMiss(q); next.disabled = false; }, { where: "review", topic: q.topic })), next);
     next.disabled = true;
   };
   draw();
@@ -1160,7 +1178,7 @@ function viewMains() {
       h("div.row.between", count, h("button.ghost", { onclick: () => focus.start(w.target === 250 ? 30 : 20, "Mains answer", "focus", "MAINS") }, `Start a ${w.target === 250 ? 30 : 20}-minute focus block`)),
       ta,
       h("p.small.muted", "Paper is best: write by hand, then type it here or mark it straight from the sheet. Saved in this browser as you type."),
-      h("div.row", h("button.primary", { onclick: () => go("self") }, "Done writing: mark it yourself →")),
+      h("div.row", h("button.primary", { onclick: () => { if (!w.submitted) { w.submitted = true; M.track("answer_submit", { paper: "mains", words: words(ta.value), target: w.target }); } go("self"); } }, "Done writing: mark it yourself →")),
     ];
   }
 
@@ -1233,6 +1251,7 @@ function viewMains() {
           const log = store.get("writingLog", []);
           log.push({ day, prompt: question, words: w.target, self: w.self, ai: w.ai ? Object.fromEntries(AREAS.map(([k]) => [k, w.ai.areas[k]?.band ?? null])) : null, rewritten: true });
           store.set("writingLog", log.slice(-200));
+          M.track("answer_rewrite", { paper: "mains", second: w.ai ? 1 : 0 });
           markDone("MAINS"); go("done");
         } }, "Save the rewrite"),
         h("button.ghost", { onclick: () => go(w.ai ? "ai" : "self") }, "← Back")),
@@ -1284,7 +1303,9 @@ function viewEssay(arg) {
       !st["s" + x.n + "done"]
         ? h("div.row", h("button.primary", { disabled: false, onclick: () => {
             if (words(st["s" + x.n]) < x.min && !confirm(x.n === 3 ? "Mark the essay as written on paper?" : "That's short. Compare with the guide anyway?")) return;
-            st["s" + x.n + "done"] = today(); save(); draw();
+            st["s" + x.n + "done"] = today(); save();
+            M.track("answer_submit", { paper: "essay", snap: x.n, words: words(st["s" + x.n]) });
+            draw();
           } }, x.n === 3 ? "I've written it: show the watch-outs" : "Done: compare with the guide"))
         : [h("div.card.soft", h("strong", x.n === 3 ? "Watch-outs: check your essay against these" : "The guide's " + x.name.toLowerCase()), h("p", { style: { whiteSpace: "pre-wrap" } }, guide)),
           x.n === 1 && d.angles?.length > 0 && h("details", h("summary", "More angles"), h("ul", d.angles.map((a) => h("li", bi(a))))),
@@ -1561,6 +1582,8 @@ function viewTerms(arg) {
       : h("p.muted", lists.length ? "No term matches." : "Term lists appear here once an editor approves them."));
   };
   q.addEventListener("input", draw); draw();
+  // A search is counted once it settles: where, and how many terms it found. Never the words typed.
+  q.addEventListener("change", () => { if (q.value.trim()) M.track("search", { where: "terms", results: box.querySelectorAll(".card").length }); });
   return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "English–Hindi terms"), pauseLine("hindi-medium"),
     h("p.muted", "The words examiners expect, in both languages, with a one-line meaning. Useful whichever medium you write in."),
     lists.length > 1 && h("div.row", h("a.btn" + (subject ? "" : ".primary"), { href: "#terms" }, "All"), lists.map((d) => h("a.btn" + (subject === d.subject ? ".primary" : ""), { href: "#terms/" + d.subject }, d.subject.replace(/-/g, " ")))),
@@ -1711,11 +1734,12 @@ function mockStart(p) {
       // With Plus switched on, full papers count against the free monthly allowance. The quick mock never does.
       if (plusOn() && p.id !== "quick") {
         const u = await post("/plus/use", { memberId: profile().memberId, kind: "mock" });
-        if (u.ok === false) { put(d, h("h2", "Your free full paper this month is used"), h("p", "The quick mock is always free, and your allowance comes back next month."), h("div.row", h("button", { onclick: () => d.close() }, "OK"), h("a.btn", { href: "#upgrade", onclick: () => d.close() }, "What Plus adds"))); return; }
+        if (u.ok === false) { M.track("paywall_shown", { moment: "mock_allowance" }); put(d, h("h2", "Your free full paper this month is used"), h("p", "The quick mock is always free, and your allowance comes back next month."), h("div.row", h("button", { onclick: () => d.close() }, "OK"), h("a.btn", { href: "#upgrade", onclick: () => d.close() }, "What Plus adds"))); return; }
       }
       d.close();
       const now = Date.now();
       store.set("mock:active", { paper: p, answers: {}, unsure: {}, review: {}, cur: 0, startedAt: now, endsAt: p.countUp ? null : now + p.minutes * 60_000, hideTimer: !!(p.countUp && p.timerOff) });
+      M.track("mock_start", { paper: M.codeOf(p.id, 64), questions: p.questions.length });
       // A count-up paper keeps the blocklist closed for a generous three times the suggested time; it never submits itself.
       focus.start(p.countUp ? Math.max(60, p.minutes * 3) : p.minutes, p.title, "mock");
       document.documentElement.requestFullscreen?.().catch(() => {});
@@ -1795,6 +1819,8 @@ function mockSubmit() {
   const score = +(right * p.marking.right + wrong * p.marking.wrong).toFixed(2);
   const rec = { id: p.id, title: p.title, day: today(), marking: p.marking, score, max, pct: Math.max(0, Math.round((score / max) * 100)), attempted: right + wrong, right, wrong, unsureRight, unsureTotal, topics, minutes: Math.round((Date.now() - m.startedAt) / 60000) };
   const hist = store.get("mockHistory", []); hist.push(rec); store.set("mockHistory", hist.slice(-100));
+  // The score stays on this device: only which paper, how many were tried, and the minutes.
+  M.track("mock_done", { paper: M.codeOf(p.id, 64), attempted: right + wrong, of: p.questions.length, minutes: rec.minutes });
   store.set("mock:last", { paper: p, answers: m.answers, unsure: m.unsure, review });
   store.del("mock:active");
   focus.stop(true);
@@ -1895,11 +1921,12 @@ function viewRead(arg) {
 
 // A recorded reading in an AI voice (Cartesia), where one exists: { url, seconds, voice, chapters: [{ t, title }] }.
 // Never starts by itself; the page it sits on is the full transcript. Labelled AI every time.
-function voiceAudio(a, lang) {
+function voiceAudio(a, lang, id = null) {
   if (!a?.url) return null;
   const hi = lang === "hi";
   const audio = h("audio", { controls: true, preload: "none", src: a.url, style: { width: "100%" } });
   cleanup.push(() => audio.pause());
+  M.watchMedia(audio, "audio", () => ({ node: M.codeOf(id, 64), lang, kind: "note" }));
   const jump = (t) => { audio.currentTime = t; audio.play().catch(() => {}); };
   const mins = Math.max(1, Math.round((a.seconds ?? 0) / 60));
   return h("div.card", { lang },
@@ -1942,6 +1969,7 @@ function viewListen() {
   cleanup.push(() => audio.pause());
   const now = h("div.small.muted", "Tap a piece to play it. Nothing starts by itself.");
   let current = null;
+  M.watchMedia(audio, "audio", () => ({ node: M.codeOf(current?.id, 64), lang: lng, kind: current?.kind ?? "note" }));
   const rows = new Map();
   const play = (p) => {
     current = p; audio.src = p.a.url; audio.play().catch(() => {});
@@ -2036,6 +2064,8 @@ function reader(id) {
   const check = h("div");
   const prompts = d.recall?.[lang] ?? d.recall?.en ?? [];
   const checked = it.data.review?.[lang] ?? it.data.review?.en;
+  if (M.oncePerDay("note:" + id)) M.track("note_open", { node: M.codeOf(id, 64), lang });
+  M.startClock("note:" + id);
   return h("div",
     h("div", { style: { position: "sticky", top: 0, background: "var(--bg)", padding: "8px 0", zIndex: 5 } },
       h("div.row.between", h("a", { href: "#read" }, "← Long reads"), readerTools(),
@@ -2043,7 +2073,7 @@ function reader(id) {
       h("div.bar", progress)),
     h("article.reader", { lang },
       h("h1", { style: { fontFamily: "var(--ui-font)" } }, bi(d.title)),
-      h("div", { style: { fontFamily: "var(--ui-font)" } }, voiceAudio(d.audio?.[lang], lang) ?? readAloud([bi(d.title), ...sections.flatMap((s) => [s.heading, s.body])].filter(Boolean).join("\n"), lang)),
+      h("div", { style: { fontFamily: "var(--ui-font)" } }, voiceAudio(d.audio?.[lang], lang, id) ?? readAloud([bi(d.title), ...sections.flatMap((s) => [s.heading, s.body])].filter(Boolean).join("\n"), lang)),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, `${d.minutes} min · ${checked?.checkedBy ? `Checked by ${checked.checkedBy}, ${checked.checkedOn} ✓` : "Not yet checked by an editor"}`),
       sections.map((s) => [s.heading && h("h2", s.heading), String(s.body ?? "").split(/\n{2,}/).map((para) => h("p", para))]),
       h("p.small.muted", { style: { fontFamily: "var(--ui-font)" } }, "Sources: " + bi(d.sources))),
@@ -2053,7 +2083,9 @@ function reader(id) {
       recallBox,
       h("div", { style: { marginTop: "8px" } }, h("button.primary", { onclick: () => {
         const notes = store.get("readNotes", {}); notes[id] = { day: today(), text: recallBox.value.trim() }; store.set("readNotes", notes);
-        const done = store.get("readDone", {}); done[id] = today(); store.set("readDone", done);
+        const done = store.get("readDone", {});
+        if (done[id] !== today()) M.track("note_done", { node: M.codeOf(id, 64), lang, minutes: M.minutesOn("note:" + id) ?? d.minutes ?? null });
+        done[id] = today(); store.set("readDone", done);
         put(check, h("h3", "Did you get these?"), prompts.length ? h("ul", prompts.map((p) => h("li", p))) : h("p", "Scroll back and compare."));
       } }, "Check")), check)));
 }
@@ -2448,6 +2480,7 @@ function viewPod() {
     if (distress(t)) pod.care = true;
     if (kind === "offer") award("explained");
     pod.ws.send(JSON.stringify({ type: "say", text: t, kind, clientId: randomId() })); input.value = "";
+    if (podVisit) podVisit.n++;
   };
   input.addEventListener("keydown", (e) => { if (e.key === "Enter") send("chat"); });
   const since = store.get("podSeen", 0);
@@ -2534,7 +2567,7 @@ function answerHourCard() {
     ta,
     h("div.row", { style: { marginTop: "6px" } },
       h("span.small.muted.grow", "Posted answers are seen by your pod."),
-      h("button", { onclick: () => { const t = ta.value.trim(); if (t.split(/\s+/).length < 20) return alert("Write a little more first (at least a few lines)."); if (distress(t)) pod.care = true; podSend({ type: "say", kind: "answer", text: t, clientId: randomId() }); ta.value = ""; award("explained"); } }, "Post my answer")),
+      h("button", { onclick: () => { const t = ta.value.trim(); if (t.split(/\s+/).length < 20) return alert("Write a little more first (at least a few lines)."); if (distress(t)) pod.care = true; podSend({ type: "say", kind: "answer", text: t, clientId: randomId() }); ta.value = ""; if (podVisit) podVisit.n++; award("explained"); } }, "Post my answer")),
     h("hr"),
     !p && h("div.row", h("span.small.grow", pod.compared ? "Thanks. Your reason went to both writers." : "Ready to compare two answers?"),
       h("button", { onclick: () => { pod.compared = false; podSend({ type: "compare_get" }); } }, "Compare two answers")),
@@ -3512,6 +3545,7 @@ function drawOffline() {
 // --- Me → Plus (test mode only) ----------------------------------------------------------------------
 
 function viewPlus() {
+  if (M.oncePerDay("plus_view:me")) M.track("plus_view", { from: M.codeOf(M.cameFrom()) ?? "direct", page: "me" });
   if (!plusOn()) return h("div.col", h("h1", "Plus"), h("div.card", h("p", "Plus isn't available. Everything in the app is free, no card needed.")));
   const box = h("div", h("p.muted", "Loading…"));
   const me = profile().memberId;
@@ -3779,6 +3813,7 @@ async function shareRoadmap(rm) {
   const blob = await new Promise((res) => c.toBlob(res, "image/png"));
   if (!blob) return toast("Couldn't make the image.");
   const file = new File([blob], "upsc-roadmap.png", { type: "image/png" });
+  M.track("share", { kind: "roadmap" });
   if (navigator.canShare?.({ files: [file] })) { navigator.share({ files: [file], title: "My UPSC roadmap" }).catch(() => {}); return; }
   const a = h("a", { href: URL.createObjectURL(blob), download: "upsc-roadmap.png" }); document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
@@ -4102,6 +4137,7 @@ function weeklyReview(r) {
 
 /** A picture of the day's shape: coloured blocks in order, no clock times and no hours. */
 function shareShape(r) {
+  M.track("share", { kind: "routine" });
   const W = 1200, H = 630, c = h("canvas", { width: W, height: H }), g = c.getContext("2d");
   const css = getComputedStyle(document.documentElement), v = (n) => css.getPropertyValue(n).trim();
   const COLORS = { focus: "#9A4E0E", body: "#2F7D4A", food: "#C99A2E", people: "#A8436A", work: "#6B5D52", rest: "#3E5C76" };

@@ -7,6 +7,7 @@
 // here speaks about feelings, ranks or results beyond the one line a welcome-back day carries.
 
 import * as IT from "./interactives.js";
+import { track, codeOf, oncePerDay } from "./metrics.js";
 
 let C = null;
 /** app.js hands over its helpers once at start. */
@@ -40,6 +41,7 @@ export function viewSkeletons(arg) {
     if (!it) return h("div.col", back("#skeletons", "Answer skeletons"), h("p", "That one isn't here."));
     const { d, p } = it;
     const k = items.indexOf(it), next = items[k + 1];
+    if (oncePerDay("pyq:" + d.id)) track("pyq_open", { paper: codeOf(p?.code ?? d.pyqId, 40), kind: "skeleton" });
     const reveal = h("div.col");
     const show = () => put(reveal,
       h("div.card.soft", h("strong", "What the word asks"), h("p", T(d.directive))),
@@ -136,7 +138,7 @@ export function viewCsat(arg) {
     rows.map((r, i) => h("tr", r.map((c) => h(i ? "td" : "th", { style: { border: "1px solid var(--line, #ccc)", padding: "4px 8px", textAlign: "left" } }, String(c).split(" / ")[lang === "hi" ? 1 : 0] ?? c)))));
   const q = (x) => {
     const k = key[String(x.n)];
-    const mcq = { question: `${x.n}. ${T(x.q)}`, options: (x.options?.[lang] ?? x.options?.en ?? []), answerIndex: k?.answer, explanation: T(k?.why) };
+    const mcq = { question: `${x.n}. ${T(x.q)}`, options: (x.options?.[lang] ?? x.options?.en ?? []), answerIndex: k?.answer, explanation: T(k?.why), topic: "csat" };
     return h("div.card", table(x.table), C.mcqBlock(mcq, (ok) => {
       results[x.n] = ok;
       const n = (w.page1?.length ?? 0) + (w.page2?.questions?.length ?? 0), got = Object.keys(results).length;
@@ -256,12 +258,13 @@ export function viewSheets(arg) {
 }
 
 /** Plays the recorded parts one after another from a single player. Nothing starts until the person presses play. */
-function partsPlayer(urls) {
-  let k = 0;
+function partsPlayer(urls, { onPlay, onEnd } = {}) {
+  let k = 0, played = false;
   const label = h("span.small.muted");
   const audio = h("audio", { controls: true, preload: "none", style: { width: "100%" } });
   const load = (i) => { k = i; audio.src = urls[k]; label.textContent = urls.length > 1 ? `Part ${k + 1} of ${urls.length}` : ""; };
-  audio.addEventListener("ended", () => { if (k + 1 < urls.length) { load(k + 1); audio.play().catch(() => {}); } else label.textContent = "The end."; });
+  audio.addEventListener("play", () => { if (!played) { played = true; onPlay?.(); } });
+  audio.addEventListener("ended", () => { if (k + 1 < urls.length) { load(k + 1); audio.play().catch(() => {}); } else { label.textContent = "The end."; onEnd?.(); } });
   addEventListener("hashchange", () => audio.pause(), { once: true });
   load(0);
   return h("div", audio, label);
@@ -277,12 +280,13 @@ export function viewTalks(arg) {
     const s = d[lang] ?? d.en, chapters = s.chapters ?? [];
     const rec = d.recording?.[lang];
     const listen = rec?.length
-      ? h("div.card", h("strong", "Listen"), h("p.small.muted", "Recorded voice. Earphones in, or play it on a walk."), partsPlayer(rec))
+      ? h("div.card", h("strong", "Listen"), h("p.small.muted", "Recorded voice. Earphones in, or play it on a walk."), partsPlayer(rec, { onPlay: () => track("audio_play", { node: codeOf(d.id, 64), lang, kind: "talk" }),
+        onEnd: () => track("audio_done", { node: codeOf(d.id, 64), lang, kind: "talk", minutes: d.minutes ?? null }) }))
       : h("div.card", h("div.row.between", h("strong", "Listen"), C.readAloud(chapters.map((c) => c.title + ".\n" + c.script).join("\n"), lang)),
         h("p.small.muted", "Not recorded yet, so the device voice reads it."));
     const results = [];
     const done = h("div");
-    const check = (s.check ?? []).map((q, i) => h("div.card", C.mcqBlock({ question: `${i + 1}. ${q.q}`, options: q.options ?? [], answerIndex: Number(q.answerIndex), explanation: q.why }, (ok) => {
+    const check = (s.check ?? []).map((q, i) => h("div.card", C.mcqBlock({ question: `${i + 1}. ${q.q}`, options: q.options ?? [], answerIndex: Number(q.answerIndex), explanation: q.why, topic: d.subject }, (ok) => {
       results[i] = ok;
       if (results.filter((x) => x !== undefined).length === s.check.length) {
         const all2 = C.store.get("talksHeard", {}); all2[d.id] = C.today(); C.store.set("talksHeard", all2);
@@ -336,11 +340,13 @@ export function viewWatch(arg) {
           const media = e.free
             ? h("video", { controls: true, muted: true, playsinline: true, preload: metered() ? "none" : "metadata", poster: w.base + e.poster,
                 style: { width: "100%", maxHeight: "70vh", borderRadius: "12px", background: "#000" },
-                onended: () => { const s = C.store.get("videosSeen", {}); s[w.week + "/" + e.id] = C.today(); C.store.set("videosSeen", s); } },
+                onplay: (ev) => { if (ev.target.dataset.played) return; ev.target.dataset.played = "1"; track("video_play", { series: codeOf(w.series ?? "ca"), id: codeOf(w.week + "-" + e.id, 64) }); },
+                onended: (ev) => { const s = C.store.get("videosSeen", {}); s[w.week + "/" + e.id] = C.today(); C.store.set("videosSeen", s);
+                  track("video_done", { series: codeOf(w.series ?? "ca"), id: codeOf(w.week + "-" + e.id, 64), seconds: Math.round(ev.target.duration || 0) }); } },
                 h("source", { src, type: "video/mp4" }), h("track", { kind: "captions", src: w.base + e.vtt, srclang: w.lang === "hi" ? "hi" : "en", label: w.lang === "hi" ? "हिन्दी" : "English", default: true }))
             : h("div", h("img", { src: w.base + e.poster, alt: "", style: { width: "100%", maxHeight: "50vh", objectFit: "cover", borderRadius: "12px", filter: "blur(6px)" } }),
                 h("p.small", "This one is in Plus, in the Android app. ", h("a", { href: "#upgrade" }, "See Plus →")));
-          const quiz = (e.quiz ?? []).map((q) => C.mcqBlock({ question: q.q, options: q.options, answerIndex: q.answerIndex, explanation: q.why }, () => {}));
+          const quiz = (e.quiz ?? []).map((q) => C.mcqBlock({ question: q.q, options: q.options, answerIndex: q.answerIndex, explanation: q.why }, () => {}, { where: "video", topic: w.series ?? "ca" }));
           const it = IT.forEpisode(w.week, e.id);
           return h("div.card", h("strong", `${e.n}. ${e.title}`), seen[w.week + "/" + e.id] && h("span.small.muted", " · watched"), media,
             quiz.length && e.free && h("details", h("summary", "One question"), quiz),

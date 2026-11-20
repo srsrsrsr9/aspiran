@@ -18,6 +18,7 @@ const count = (v: unknown, max: number) => { const n = Math.round(Number(v)); re
 
 /** A whole number from min to max, or null (ratings and check-in choices are refused, not clamped). */
 const choice = (v: unknown, min: number, max: number) => { const n = Number(v); return Number.isInteger(n) && n >= min && n <= max ? n : null; };
+const lang = (v: unknown) => (typeof v === "string" && /^[a-z]{2}$/.test(v) ? v : null);
 
 /** Ritual kinds a client may report. */
 export const RITUALS = ["close_day", "answer_hour", "quiz", "wins", "goal", "commons", "focus"] as const;
@@ -56,8 +57,40 @@ const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> 
   roadmap_built: () => ({}),
   // The app says a Chotu chat happened (no text); only the first one per member is kept, as first_chotu_chat.
   chotu_chat: () => ({}),
+
+  // Studying (analytics scope, 20 Nov 2026). The same names on web and Android. Codes and numbers only.
+  note_open: (p) => (code(p.node, 64) ? { node: code(p.node, 64), lang: lang(p.lang) } : null),
+  note_done: (p) => (code(p.node, 64) ? { node: code(p.node, 64), lang: lang(p.lang), minutes: count(p.minutes, 300) } : null),
+  audio_play: (p) => ({ node: code(p.node, 64), lang: lang(p.lang), kind: code(p.kind, 12) }),
+  audio_done: (p) => ({ node: code(p.node, 64), lang: lang(p.lang), kind: code(p.kind, 12), minutes: count(p.minutes, 300) }),
+  video_play: (p) => ({ series: code(p.series), id: code(p.id, 64) }),
+  video_done: (p) => ({ series: code(p.series), id: code(p.id, 64), seconds: count(p.seconds, 7200) }),
+  practice_answer: (p) => { const right = choice(p.right, 0, 1); return right === null ? null : { where: code(p.where, 12), node: code(p.node, 64), right, sure: choice(p.sure, 0, 1) }; },
+  practice_piece: (p) => ({ node: code(p.node, 64), engine: code(p.engine, 12), cards: count(p.cards, 500) }),
+  // A mock's score never leaves the device: which paper, how many were tried, and the minutes.
+  mock_start: (p) => ({ paper: code(p.paper, 64), questions: count(p.questions, 300) }),
+  mock_done: (p) => ({ paper: code(p.paper, 64), attempted: count(p.attempted, 300), of: count(p.of, 300), minutes: count(p.minutes, 600) }),
+  pyq_open: (p) => ({ paper: code(p.paper, 40), kind: code(p.kind, 12) }),
+  answer_submit: (p) => ({ paper: code(p.paper, 12), words: count(p.words, 5000), target: count(p.target, 2000), snap: choice(p.snap, 1, 3), via: code(p.via, 8) }),
+  answer_rewrite: (p) => ({ paper: code(p.paper, 12), second: choice(p.second, 0, 1) }),
+  review_done: (p) => { const cards = count(p.cards, 200); return cards ? { cards, kept: Math.min(count(p.kept, 200) ?? 0, cards) } : null; },
+  flashcard_session: (p) => ({ node: code(p.node, 64), engine: code(p.engine, 12), cards: count(p.cards, 500) }),
+  // The pod: how long, and how many messages were sent. Never a word of them.
+  pod_message: (p) => { const n = count(p.n, 500); return n ? { n } : null; },
+  pod_session: (p) => ({ minutes: count(p.minutes, 300) }),
+  plus_view: (p) => ({ from: code(p.from, 30), page: code(p.page, 12) }),
+  paywall_shown: (p) => ({ moment: code(p.moment, 30) }),
+  share: (p) => ({ kind: code(p.kind, 20) }),
+  notification_open: (p) => ({ kind: code(p.kind, 30) }),
+  // Where a search was made and how many results it found. Never the query.
+  search: (p) => ({ where: code(p.where, 20), results: count(p.results, 1000) }),
+  install_referrer: (p) => ({ referrer: referrer(p.referrer) }),
 };
-const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded", "room_joined", "answer_evaluated", "try_day3_sent"]);
+/** Written only by the server. A client sending one of these is ignored (PostHog may still get the client's copy). */
+export const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded", "room_joined", "answer_evaluated", "try_day3_sent",
+  "inst_joined", "inst_left", "inst_attempt", "inst_doubt"]);
+/** Every name a client may send: for the tests and for the Android list to match. */
+export const CLIENT_EVENT_NAMES = () => Object.keys(CLIENT_EVENTS);
 
 /**
  * The Play install referrer arrives as a URL-encoded query string (utm_source=...&utm_campaign=...). Only the utm

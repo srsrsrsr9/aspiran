@@ -35,6 +35,38 @@ async function post(path, body) {
 /** One event. Fire and forget. */
 export function track(name, props = {}) { post("/events", { events: [{ name, props }] }); ph()?.capture(name, props); }
 
+// --- Studying (analytics scope, 20 Nov 2026) ----------------------------------------------------------------
+// The same names on Android (Metrics.kt). Props are codes and numbers only: a content id, a topic code, a count of
+// minutes. Never what someone typed, never a score from a mock (that stays on the device), never a search query.
+
+/** A short code from content text ("Science and tech" → "science-and-tech"), for content ids and topics only. */
+export const codeOf = (v, max = 40) => { const s = String(v ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, max); return s || null; };
+const clocks = new Map();
+/** Start a clock for a piece (a note, a pod visit) so its "done" event can say how many minutes it took. */
+export function startClock(key) { clocks.set(key, Date.now()); }
+/** Whole minutes since startClock(key), at most 300; null if the clock wasn't started. */
+export function minutesOn(key) { const t = clocks.get(key); if (!t) return null; clocks.delete(key); return Math.min(300, Math.round((Date.now() - t) / 60000)); }
+/** Once per piece per day: opening a note twice in a day counts once. */
+export function oncePerDay(key) { const s = read(), k = `o:${key}`; if (s[k] === day()) return false; s[k] = day(); write(s); return true; }
+
+/** Wires play / ended on an <audio> or <video> so each counts once per element: kind is audio or video. */
+export function watchMedia(el, kind, props) {
+  let played = false, done = false;
+  el.addEventListener("play", () => { if (played) return; played = true; track(kind + "_play", props()); });
+  el.addEventListener("ended", () => {
+    if (done) return; done = true;
+    const secs = Math.round(el.duration || 0);
+    track(kind + "_done", kind === "video" ? { ...props(), seconds: secs } : { ...props(), minutes: Math.max(1, Math.round(secs / 60)) });
+  });
+  // A new source (one player for many pieces) counts again.
+  el.addEventListener("emptied", () => { played = false; done = false; });
+}
+
+/** Where someone came from inside the app, for plus_view: the screen before this one. */
+let prevScreen = null, curScreen = null;
+export const cameFrom = () => prevScreen;
+function noteScreen(name) { if (name !== curScreen) { prevScreen = curScreen; curScreen = name; } }
+
 // --- PostHog ------------------------------------------------------------------------------------
 
 const OFF = "upsc:analytics-off";
@@ -75,6 +107,7 @@ export function startAnalytics(cfg) {
 
 /** Called on every screen change with the route's name only (never its argument: ids, codes). */
 export function screen(name, signedOut = false) {
+  noteScreen(name);
   if (!started || !analyticsOn()) return;
   const id = memberOf();
   if (id) window.posthog.identify(id);

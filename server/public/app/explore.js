@@ -9,6 +9,7 @@
 // stays open. Previews stay generous, and only the offer copy goes quiet in quiet times, never the gate.
 
 import { plusSalesPage } from "./plus-page.js";
+import { track, codeOf, cameFrom, oncePerDay } from "./metrics.js";
 
 let C = null;
 /** app.js hands over its helpers once at start, so this file shares one store, one language and one renderer. */
@@ -82,7 +83,7 @@ async function plusStatus() {
 }
 export function forgetPlus() { plusCache = null; }
 /** The quiet card that says a tool is part of Plus, with the taste above it. Never a padlock on anything free. */
-const plusNote = (what) => offerQuiet()
+const plusNote = (what) => (track("paywall_shown", { moment: codeOf(what, 30) }), offerQuiet())
   ? h("div.card.soft.plus-note", h("div.row.between", h("strong", what), h("span.tag", "Plus")),
     h("p.small", { style: { margin: "6px 0" } }, "That was the preview. This is a Plus tool."), h("div.row", h("a.btn", { href: "#learn" }, "Back")))
   : h("div.card.soft.plus-note", h("div.row.between", h("strong", what), h("span.tag", "Plus")),
@@ -152,6 +153,8 @@ function player(id) {
   const body = h("div");
   const finish = (score) => {
     markLearnt(id, score);
+    // Flip cards count as a flashcard session; every other engine as a finished practice piece.
+    track(p.engine === "reveal" ? "flashcard_session" : "practice_piece", { node: codeOf(id, 64), engine: codeOf(p.engine, 12), cards: sizeOf(p) });
     put(body, h("div.card", h("h2", { style: { marginTop: 0 } }, "Done."), score && h("p", score),
       h("div.row", h("button", { onclick: () => { put(body, PLAYERS[p.engine]?.(p, finish) ?? h("p", "This kind can't play on the web yet.")); } }, "Play again"),
         h("a.btn.primary", { href: "#learn" }, "Back to Learn and play"), nextPiece(it))));
@@ -384,7 +387,7 @@ function mcqRun(qs, { limit = Infinity, onDone, title } = {}) {
     const q = qs[i];
     const next = h("button.primary", { disabled: true, onclick: () => { i++; draw(); } }, i + 1 < n ? "Next" : "Finish");
     put(box, h("div.small.muted", `${title ? title + " · " : ""}${i + 1} of ${n}${q.topic ? " · " + q.topic : ""}`),
-      h("div.card", C.mcqBlock(C.mcqOf(q), (ok) => { if (ok) { right++; C.gotRight(q); } else C.addMiss(q); next.disabled = false; })), next);
+      h("div.card", C.mcqBlock(C.mcqOf(q), (ok) => { if (ok) { right++; C.gotRight(q); } else C.addMiss(q); next.disabled = false; }, { where: "plus", topic: q.topic })), next);
   };
   draw();
   return box;
@@ -502,6 +505,7 @@ export function viewInsights() {
 // --- The Plus tab: a sales page for members without Plus, their tools for members with it ----------------
 
 export function viewUpgrade() {
+  if (oncePerDay("plus_view:upgrade")) track("plus_view", { from: codeOf(cameFrom()) ?? "direct", page: "upgrade" });
   const deps = { h, T, plusStatus, offerQuiet, mcqRun, insightsBody, SAMPLE_HIST, SAMPLE_MISSES, weekQs, playable };
   const box = h("div.sales", plusSalesPage(C, deps));
   plusStatus().then((st) => { if (st.open) put(box, plusHub(st)); });
