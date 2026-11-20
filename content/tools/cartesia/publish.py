@@ -6,10 +6,13 @@ SERVER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".
 PREFIX = "audio-ai/2026-11"
 ACTOR = "Aspiran (owner publish)"
 
-def sh(args):
-    r = subprocess.run(args, cwd=SERVER, capture_output=True, text=True)
-    if r.returncode: raise RuntimeError(r.stderr[-800:] or r.stdout[-800:])
-    return r.stdout
+def sh(args, tries=5):
+    import time
+    for a in range(tries):   # the network here drops now and then
+        r = subprocess.run(args, cwd=SERVER, capture_output=True, text=True)
+        if not r.returncode: return r.stdout
+        time.sleep(10 * (a + 1))
+    raise RuntimeError(r.stderr[-800:] or r.stdout[-800:])
 
 def d1(sql_file=None, command=None):
     a = ["npx", "wrangler", "d1", "execute", "upsc-pods", "--remote", "--env", "production", "--json"]
@@ -46,13 +49,13 @@ if __name__ == "__main__":
             key = f"{PREFIX}/{kind}/{iid}.{r['lang']}.mp3"
             if not a.dry:
                 sh(["npx", "wrangler", "r2", "object", "put", f"upsc-pods-media/{key}", "--remote", "--env", "production", "--file", r["file"], "--content-type", "audio/mpeg", "--cache-control", "public, max-age=86400"])
-            audio[r["lang"]] = {"url": f"/media/{key}", "seconds": r["seconds"], "voice": r["voice"], "ai": True, "provider": r["provider"], "by": r["model"],
+            audio[r["lang"]] = {"url": f"/media/{key}", "seconds": r["seconds"], "voice": r["voice"], "provider": r["provider"], "by": r["model"],
                                 "chapters": r["chapters"], "src": spoken_hash(kind, j, r["lang"]), "made": now[:10]}
         j["audio"] = audio
         body = json.dumps(j, ensure_ascii=False, separators=(",", ":"))
         sql = (f"UPDATE library SET json = {q(body)}, updated_at = {q(now)} WHERE id = {q(lid)};\n"
-               f"INSERT INTO content_versions (item_type, item_id, json, action, actor, at) VALUES ('library', {q(lid)}, {q(body)}, 'AI voice reading added: {','.join(sorted(audio))}', {q(ACTOR)}, {q(now)});\n"
-               f"INSERT INTO audit (at, actor_id, actor, action, target, detail) VALUES ({q(now)}, NULL, {q(ACTOR)}, 'library.audio', {q(lid)}, {q('AI voice: ' + ', '.join(f"{l} {a['by']} / {a['voice']}" for l, a in sorted(audio.items())))});\n")
+               f"INSERT INTO content_versions (item_type, item_id, json, action, actor, at) VALUES ('library', {q(lid)}, {q(body)}, 'Recorded reading added: {','.join(sorted(audio))}', {q(ACTOR)}, {q(now)});\n"
+               f"INSERT INTO audit (at, actor_id, actor, action, target, detail) VALUES ({q(now)}, NULL, {q(ACTOR)}, 'library.audio', {q(lid)}, {q('Recorded reading: ' + ', '.join(f"{l} {a['by']} / {a['voice']}" for l, a in sorted(audio.items())))});\n")
         f = os.path.join(HERE, "sql", f"{kind}.{iid}.sql"); os.makedirs(os.path.dirname(f), exist_ok=True); open(f, "w").write(sql)
         if not a.dry:
             d1(sql_file=f)
