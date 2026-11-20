@@ -3,6 +3,7 @@ import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backu
 import { factWatchApi } from "./factwatch";
 import { checkItem, prepareEdit, titleOf } from "./content";
 import { coverage } from "./coverage";
+import { POST_SLOTS, dailyPost, postImageSvg, postLog, postSettings, recordSend, sendTelegram, validChat } from "./posts";
 import { autoChecks } from "./pipeline";
 import { exportMember, forgetMember } from "./privacy";
 import { type Env, HELPLINES, bad, istDay, json, newId } from "./shared";
@@ -513,6 +514,26 @@ route("POST", /^jobs\/run$/, "flags", async ({ env, body }) => {
 });
 
 /** Result days: 72 hours of result-day mode in every app from the start of each day (IST). */
+// --- Daily posts (posts.ts): the day's Telegram post, the WhatsApp text to forward, the channel, a send by hand.
+route("GET", /^posts$/, "flags", async ({ env, url }) => {
+  const day = /^\d{4}-\d{2}-\d{2}$/.test(url.searchParams.get("day") ?? "") ? url.searchParams.get("day")! : istDay();
+  const post = await dailyPost(env, day);
+  return json({ day, post, svg: post ? postImageSvg(post) : null, settings: await postSettings(env), log: await postLog(env), on: !!(await flags(env)).daily_posts, token: !!env.TELEGRAM_BOT_TOKEN, slots: POST_SLOTS });
+});
+route("POST", /^posts\/settings$/, "flags", async ({ env, s, body }) => {
+  const chat = String(body.telegramChat ?? "").trim();
+  if (chat && !validChat(chat)) return bad("A channel's @name (letters, numbers and _, 5 to 32 long), or its numeric id");
+  await setSetting(env, "daily_posts", { telegramChat: chat }, label(s));
+  return json({ ok: true });
+});
+route("POST", /^posts\/send$/, "flags", async ({ env, s }) => {
+  const day = istDay(), post = await dailyPost(env, day);
+  if (!post) return bad("Today's Chai isn't out yet", 409);
+  const r = await sendTelegram(env, post, (await postSettings(env)).telegramChat);
+  await recordSend(env, day, r, label(s));
+  return r.ok ? json(r) : bad(r.error ?? "Telegram didn't take it", 502);
+});
+
 route("GET", /^results$/, "flags", async ({ env }) => { const results = await resultDays(env); return json({ results, now: activeResult(results) }); });
 route("POST", /^results$/, "flags", async ({ env, s, body }) => {
   const results = cleanResults(body.results);

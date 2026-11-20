@@ -226,6 +226,7 @@ Cloudflare's free plan allows few cron strings, so one cron (`0,30 * * * *`) run
 | 05:30 daily    | Daily backup; merge forming pods 7+ days old; refresh pod states (quiet for 14 days → each member is asked privately to stay or move) |
 | 06:00 Monday   | The weekly batch match: forming pods merge, into small pods with room where possible |
 | 07:00 daily    | Publish what the editors approved, then the Chai post in every pod |
+| 07:30 daily    | Daily posts (`daily_posts` flag, off): the Chai and a past question to the Telegram channel; again hourly to 12:30 if late or failed |
 | Mon 08:00      | Chotu suggests the pod's week goal (skipped if the lead set one) |
 | Tue, Thu 19:00 | Answer hour |
 | Fri 20:00      | Pod Quiz Night (5 MCQs from the week's Chai, one shared pod score) |
@@ -250,6 +251,17 @@ places go to the best approved cards, taking a GS paper the brief doesn't have y
 day is one GS1, one GS2, one GS3. The automatic Chai (`chai_auto`, off unless the owner switches it on) fills up to
 three the same way, with the same checks as before. Briefs published before 14 Nov 2026 keep their 4 to 7 cards.
 After the last card both apps say "That's today's Chai. It ends." Tests: `npm run test:chai`.
+
+## Daily posts (Telegram, WhatsApp)
+
+`src/posts.ts` builds one post a day from the published brief and the approved past papers: the three Chai cards
+(never a tragic or not-shareable one) and a past question of the day (the same all day, new each day), every link to
+app.aspiran.in with `utm_source` / `utm_medium` / `utm_campaign`. With the `daily_posts` flag on, the cron sends it to
+the Telegram channel saved in Admin → Daily posts (settings key `daily_posts`), using the `TELEGRAM_BOT_TOKEN` secret;
+a Prelims question with UPSC's official key follows as a Telegram quiz poll. Sends are kept in `daily_posts_log`, so a
+day goes out once. WhatsApp has no posting API for channels, so Admin → Daily posts shows the WhatsApp text to copy
+and the image (1080 × 1350) to download. Owner's runbook: `artefacts/daily-posts-2026-11-20/README.md`.
+Samples: `node scripts/sample-posts.mjs <brief.json> <out> [day]`. Tests: `npm run test:posts` (or `test:all -- posts`).
 
 ## Feeds
 

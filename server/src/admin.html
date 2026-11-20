@@ -245,7 +245,7 @@ function signInView(msg, kind = "err") {
 const SECTIONS = [
   ["overview", "Overview", "analytics"], ["content", "Content", "content"], ["moderation", "Moderation", "moderate"],
   ["safety", "Safety queue", "safety"], ["members", "Members", "members"], ["privacy", "Data requests", "privacy"],
-  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["leads", "Website leads", "analytics"], ["trytopic", "Try one topic", "analytics"], ["payments", "Payments", "flags"], ["flags", "Feature flags", "flags"],
+  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["leads", "Website leads", "analytics"], ["trytopic", "Try one topic", "analytics"], ["payments", "Payments", "flags"], ["posts", "Daily posts", "flags"], ["flags", "Feature flags", "flags"],
   ["announcements", "Announcements", "announce"], ["incidents", "Status and incidents", "incidents"],
   ["staff", "Staff and roles", "staff"], ["languages", "Languages", "staff"], ["backups", "Backups", "backups"], ["audit", "Audit log", "audit"],
 ];
@@ -792,6 +792,45 @@ views.payments = async () => {
       d.rows.map((r) => h("tr", {}, h("td.mono", {}, r.order_id), h("td.mono", {}, r.member_id.slice(0, 10) + "…"), h("td", {}, num(r.amount_inr) + (r.founding ? " (founding)" : "")),
         h("td", {}, statusChip(r.status), r.refund_inr ? ` ₹${num(r.refund_inr)}` : ""), h("td", {}, r.mode), h("td", {}, when(r.created_at)), h("td", {}, when(r.paid_at)),
         h("td", {}, r.status === "paid" ? h("button", { onclick: () => refund(r) }, "Refund") : "")))) : h("p.muted", {}, "No orders yet.")),
+  ];
+};
+
+// Daily posts (posts.ts): today's Telegram post, the WhatsApp text and image to forward by hand, the channel, a send by hand.
+views.posts = async () => {
+  const d = await api("posts");
+  const last = d.log[d.day]?.telegram;
+  const chat = h("input", { value: d.settings.telegramChat || "", placeholder: "@aspiran_daily", maxlength: 33, spellcheck: "false" });
+  const copy = (text, what) => navigator.clipboard.writeText(text).then(() => toast(what + " copied", "ok"), () => toast("Couldn't copy; select the text and copy it", "err"));
+  const png = () => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement("canvas"); c.width = 1080; c.height = 1350;
+      c.getContext("2d").drawImage(img, 0, 0);
+      c.toBlob((b) => { const a = h("a", { href: URL.createObjectURL(b), download: `aspiran-chai-${d.day}.png` }); document.body.append(a); a.click(); a.remove(); }, "image/png");
+    };
+    img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(d.svg);
+  };
+  const state = [
+    h("p", {}, h("b", {}, "Telegram: "), d.on ? "on" : "off (flag daily_posts in Feature flags)", " · bot token ", d.token ? "set" : "not set yet", " · channel ", d.settings.telegramChat || "not saved yet"),
+    h("p.muted", {}, `When on, the post goes at ${d.slots[0]} IST once the day's Chai is out, and is tried again each hour until ${d.slots[d.slots.length - 1]}.`),
+    last ? h("div.banner." + (last.ok ? "ok" : "err"), {}, last.ok ? `Posted today at ${new Date(last.at).toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit" })} (${last.by}).` : `Today's send failed: ${last.error}`) : null,
+  ];
+  return [h("h2", {}, "Daily posts"),
+    h("p.lead", {}, "Today's three Chai cards and a past UPSC question, for the Telegram channel (sent automatically when switched on) and for WhatsApp (copy and forward by hand). Tragic cards are never included."),
+    h("div.card", {}, state,
+      h("label", {}, "Telegram channel (its @name; the bot must be an admin of it)"),
+      h("div.row", {}, chat, h("button", { onclick: () => act(() => api("posts/settings", { body: { telegramChat: chat.value.trim() } }), "Channel saved") }, "Save")),
+      h("div.row", { style: "margin-top:12px" }, h("button.primary", { disabled: !d.post || !d.token || !d.settings.telegramChat, onclick: () => {
+        if (!confirm(`Post today's Chai to ${d.settings.telegramChat} now? Everyone in the channel sees it.`)) return;
+        act(() => api("posts/send", { body: {} }), "Posted to Telegram");
+      } }, "Post to Telegram now"))),
+    !d.post ? h("div.card", {}, h("p.muted", {}, `Today's Chai (${d.day}) isn't out yet. The post appears here once it is.`)) : [
+      h("div.card", {}, h("b", {}, "WhatsApp: text to paste"),
+        h("p.muted", {}, "Paste into the WhatsApp channel or a broadcast list, with the image below. The links carry utm_source=whatsapp."),
+        h("pre", {}, d.post.whatsapp.text), h("div.row", {}, h("button.primary", { onclick: () => copy(d.post.whatsapp.text, "WhatsApp text") }, "Copy text"), h("button", { onclick: png }, "Download image (PNG)"))),
+      h("div.card", {}, h("b", {}, "The image"), h("img", { src: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(d.svg), alt: "Today's Chai as an image", style: "display:block;max-width:360px;width:100%;margin-top:8px;border:1px solid var(--line);border-radius:8px" })),
+      h("div.card", {}, h("b", {}, "Telegram: what the channel gets"), h("pre", {}, d.post.telegram.text),
+        d.post.telegram.poll ? h("p.muted", {}, `Then a quiz poll with the question, answer ${"ABCD"[d.post.telegram.poll.correct]} (from UPSC's official key).`) : null)],
   ];
 };
 

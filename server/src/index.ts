@@ -14,6 +14,7 @@ import ADMIN_HTML from "./admin.html";
 import { createBackup } from "./backups";
 import { CONSENT_VERSION, privacyRoute, recordConsent } from "./privacy";
 import { bump, ensureSchema, flags, setSetting } from "./staff";
+import { POST_SLOTS, runDailyPosts } from "./posts";
 import { statusData, statusHtml } from "./status";
 // The same starter bank the phone bundles, so the web app's practice matches.
 import BANK from "../../android/app/src/main/assets/prelims_bank.json";
@@ -340,6 +341,9 @@ export default {
     // The open demo's day-3 emails (try-recall.ts): late morning, outside the quiet hours, a few slots so a busy day
     // (or a Resend hiccup) catches up. Each run sends at most 40.
     if (["09:00", "09:30", "10:00", "11:00", "12:00", "17:00"].includes(hm)) ctx.waitUntil(sendRecalls(env).then(log("day-3 emails"), fail("day-3 emails")));
+    // Daily posts (posts.ts, flag daily_posts, off by default): the day's Chai and a past question to the Telegram
+    // channel at 07:30 IST, tried again each hour until 12:30 if the Chai came late or a send failed.
+    if (POST_SLOTS.includes(hm)) ctx.waitUntil(runDailyPosts(env, istDay(), hm).then(log("daily posts"), fail("daily posts")));
     // Chotu's host schedule (Mon goal, Wed/Sat answer hour, Fri quiz, Sun wins) and the welcome/quiet checks.
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },
