@@ -66,7 +66,7 @@ assert.ok(post.pyq.link.whatsapp.endsWith("utm_medium=pyq&utm_campaign=daily-202
 post = P.buildDailyPost(brief, { paper: { ...prelims, answerKey: { status: "awaiting" } }, q: shortQ }, day);
 assert.equal(post.telegram.poll, null); assert.equal(post.pyq.answer, null);
 // A Mains question: no options, no model answer, the word limit and a link to write it.
-const mains = papers.find((p) => p.exam === "mains");
+const mains = papers.find((p) => p.id === "csm-2025-gs1");
 post = P.buildDailyPost(brief, { paper: mains, q: mains.questions[0] }, day);
 assert.equal(post.telegram.poll, null); assert.equal(post.pyq.options, null);
 assert.ok(post.whatsapp.text.includes("Write it in 150 words (10 marks)"));
