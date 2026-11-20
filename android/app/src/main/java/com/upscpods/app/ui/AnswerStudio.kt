@@ -58,6 +58,7 @@ import com.upscpods.app.data.AnswerLog
 import com.upscpods.app.data.Community
 import com.upscpods.app.data.Focus
 import com.upscpods.app.data.MainsTask
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Persona
 import com.upscpods.app.data.PodClient
 import com.upscpods.app.data.Practice
@@ -156,6 +157,8 @@ fun AnswerStudioScreen(
     fun stopFocus() { if (focus && Focus.active(context)) Focus.stop(context) }
     fun finish() {
         attemptId?.let { log.finish(it, over) }
+        Metrics.answerSubmit("mains", if (typing) Practice.wordCount(text) else 0,
+            if (typing) "typed" else "paper", words)
         stopFocus()
         step = StudioStep.SUBMIT
         onAnswered()
@@ -340,6 +343,7 @@ fun AnswerStudioScreen(
                     Button(
                         onClick = {
                             attemptId?.let { log.rewrote(it) }
+                            Metrics.answerRewrite("mains", feedback != null)
                             text = ""; typing = false; feedback = null; reviewedJpeg = null
                             doneNote = "Written, marked and rewritten. Well done."
                             step = StudioStep.PICK

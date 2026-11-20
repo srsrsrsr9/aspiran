@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.upscpods.app.data.FAST_SECS
 import com.upscpods.app.data.Honest
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Marking
 import com.upscpods.app.data.MockIntel
 import com.upscpods.app.data.MockIntelligence
@@ -234,6 +235,7 @@ private fun BandCard(intel: MockIntel) = IntelCard(5, "Your progress band", SKY)
 /** A locked reading: its title and what it tells you, over a blurred shape (never real numbers), and the Plus pill. */
 @Composable
 private fun Locked(title: String, what: String, accent: Color, quiet: Boolean, onSeePlus: () -> Unit) {
+    androidx.compose.runtime.LaunchedEffect(title) { Metrics.paywallShown("mock_intel") }
     FlatCard(Modifier.clickable(enabled = !quiet, onClick = onSeePlus)) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)

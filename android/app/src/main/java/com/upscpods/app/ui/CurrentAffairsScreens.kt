@@ -85,6 +85,7 @@ import com.upscpods.app.data.CaEpisode
 import com.upscpods.app.data.CaWeek
 import com.upscpods.app.data.CurrentAffairs
 import com.upscpods.app.data.Honest
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.PlusGate
 import com.upscpods.app.data.caNodes
 import kotlinx.coroutines.Dispatchers
@@ -305,15 +306,21 @@ fun CaPlayerScreen(
             if (w.series == null && openScenes.isNotEmpty() && openScenes.all { e -> ca.watched(w.week, e.id) && e.quiz.all { ca.answer(it.id) != null } }) onWeekDone()
         }
         DisposableEffect(player) {
+            // video_play once per scene opened, video_done at its end (series and scene codes, seconds only).
+            var counted = -1
             val l = object : Player.Listener {
                 override fun onRenderedFirstFrame() { firstFrame = true }
-                override fun onIsPlayingChanged(isPlaying: Boolean) { playing = isPlaying }
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    playing = isPlaying
+                    if (isPlaying && counted != current) { counted = current; Metrics.videoPlay(w.series, scenes[current].id) }
+                }
                 override fun onCues(cueGroup: CueGroup) { cue = cueGroup.cues.mapNotNull { it.text?.toString() }.joinToString(" ").trim() }
                 override fun onPlaybackStateChanged(state: Int) {
                     if (state == Player.STATE_ENDED) {
                         val e = scenes[current]
                         ended = ended + current
                         ca.markWatched(w.week, e.id)
+                        Metrics.videoDone(w.series, e.id, (player.duration / 1000).takeIf { it > 0 }?.toInt())
                         checkWeekDone()
                     }
                 }
@@ -532,6 +539,7 @@ private fun QuizPanel(ca: CurrentAffairs, e: CaEpisode, hindi: Boolean, last: Bo
 /** A Plus scene for a member without Plus: the title over a blurred poster, the Plus pill and the free-trial line. */
 @Composable
 private fun LockedScene(ca: CurrentAffairs, w: CaWeek, e: CaEpisode, quiet: Boolean, hindi: Boolean, onSeePlus: () -> Unit) {
+    androidx.compose.runtime.LaunchedEffect(e.id) { Metrics.paywallShown("ca_scene") }
     Box(Modifier.fillMaxSize()) {
         CaPoster(ca, w.base + (e.poster ?: ""), Modifier.fillMaxSize(), blurred = true)
         Column(Modifier.align(Alignment.Center).fillMaxWidth().padding(24.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {

@@ -39,6 +39,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.upscpods.app.data.ContentLibrary
+import com.upscpods.app.data.Metrics
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
@@ -142,17 +143,25 @@ fun SheetsScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
 
 /** The recorded parts as one playlist. Nothing plays until Play; leaving the screen stops it. */
 @Composable
-private fun PartsPlayer(urls: List<String>) {
+private fun PartsPlayer(urls: List<String>, talkId: String? = null, lang: String = "en", minutes: Int? = null) {
     val context = LocalContext.current
     val player = remember(urls) { ExoPlayer.Builder(context).build().apply { setMediaItems(urls.map { MediaItem.fromUri(it) }); prepare() } }
     var playing by remember { mutableStateOf(false) }
     var part by remember { mutableIntStateOf(0) }
     var ended by remember { mutableStateOf(false) }
     DisposableEffect(player) {
+        // audio_play once, audio_done at the end of the last part (kind "talk"; codes and minutes only).
+        var counted = false
         val l = object : Player.Listener {
-            override fun onIsPlayingChanged(isPlaying: Boolean) { playing = isPlaying }
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                playing = isPlaying
+                if (isPlaying && !counted) { counted = true; Metrics.audioPlay(talkId, lang, "talk") }
+            }
             override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) { part = player.currentMediaItemIndex }
-            override fun onPlaybackStateChanged(state: Int) { ended = state == Player.STATE_ENDED }
+            override fun onPlaybackStateChanged(state: Int) {
+                ended = state == Player.STATE_ENDED
+                if (ended) Metrics.audioDone(talkId, lang, "talk", minutes)
+            }
         }
         player.addListener(l)
         onDispose { player.removeListener(l); player.release() }
@@ -200,7 +209,7 @@ fun TalksScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
                 Text("Listen", style = MaterialTheme.typography.titleSmall)
                 if (rec.isNotEmpty()) {
                     Text("Recorded voice. Earphones in, or play it on a walk.", style = MaterialTheme.typography.bodySmall)
-                    PartsPlayer(rec)
+                    PartsPlayer(rec, d.str("id"), lang, d.str("minutes")?.toIntOrNull())
                 } else {
                     Text("Not recorded yet, so the phone's voice reads it.", style = MaterialTheme.typography.bodySmall)
                     ReadAloudButton(chapters.joinToString("\n") { (it.str("title") ?: "") + ".\n" + (it.str("script") ?: "") })

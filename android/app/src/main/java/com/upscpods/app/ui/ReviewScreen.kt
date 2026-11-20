@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.Fsrs
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.PracticeQuestion
 
 /** Mix subjects (interleaving): round-robin across [key]s, so two of a kind rarely sit side by side. As the web review. */
@@ -58,12 +59,16 @@ fun ReviewScreen(
 ) {
     var index by rememberSaveable { mutableIntStateOf(0) }
     var showNote by rememberSaveable(index) { mutableStateOf(false) }
+    // review_done: how many came back today, and how many of them came back right (or mostly, for topics).
+    var kept by rememberSaveable { mutableIntStateOf(0) }
+    val answered: (PracticeQuestion, Boolean) -> Unit = { q, right -> if (right) kept++; onAnswer(q, right) }
+    val done: () -> Unit = { Metrics.reviewDone(topics.size + questions.size, kept); onFinished() }
     if (index >= topics.size && questions.isNotEmpty()) {
-        PrelimsScreen(questions, onAnswer, onFinished, onClose, title = "Review")
+        PrelimsScreen(questions, answered, done, onClose, title = "Review")
         return
     }
     val finished = index >= topics.size
-    if (finished) LaunchedEffect(Unit) { onFinished() }
+    if (finished) LaunchedEffect(Unit) { done() }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -103,7 +108,7 @@ fun ReviewScreen(
             Text("How much came back?", style = MaterialTheme.typography.labelLarge)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(Fsrs.AGAIN to "Little", Fsrs.HARD to "Some, with effort", Fsrs.GOOD to "Most of it", Fsrs.EASY to "All of it, easily").forEach { (g, label) ->
-                    val pick: () -> Unit = { onCheck(t, g); index++ }
+                    val pick: () -> Unit = { if (g >= Fsrs.GOOD) kept++; onCheck(t, g); index++ }
                     if (g == Fsrs.GOOD) Button(onClick = pick) { Text(label) } else OutlinedButton(onClick = pick) { Text(label) }
                 }
             }

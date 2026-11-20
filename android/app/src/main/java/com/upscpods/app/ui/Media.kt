@@ -33,6 +33,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.caverock.androidsvg.SVG
 import com.upscpods.app.R
 import com.upscpods.app.data.ContentLibrary
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.NewsItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -153,5 +154,6 @@ suspend fun shareCard(context: Context, library: ContentLibrary?, item: NewsItem
     val send = Intent(Intent.ACTION_SEND).setType("image/png").putExtra(Intent.EXTRA_STREAM, uri)
         .putExtra(Intent.EXTRA_TEXT, v.takeaway ?: v.headline)
         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    Metrics.share("card")
     context.startActivity(Intent.createChooser(send, if (hindi) "कार्ड शेयर करें" else "Share this card"))
 }

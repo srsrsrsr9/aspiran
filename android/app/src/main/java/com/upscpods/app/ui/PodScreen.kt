@@ -61,6 +61,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.Brand
 import com.upscpods.app.data.DistressMatcher
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.PodClient
 import com.upscpods.app.data.PodMessage
 import com.upscpods.app.data.PodStatus
@@ -98,6 +99,8 @@ fun PodTab(
         }
         return
     }
+    // pod_session (minutes) and pod_message (how many were sent) to our own server only. Pods, not open rooms.
+    if (v2) androidx.compose.runtime.DisposableEffect(Unit) { Metrics.podOpened(); onDispose { Metrics.podClosed() } }
     LaunchedEffect(Unit) { pod.unread = 0 }
     LaunchedEffect(pod.messages.size) { pod.unread = 0 }
     LaunchedEffect(pod.careRequested) {

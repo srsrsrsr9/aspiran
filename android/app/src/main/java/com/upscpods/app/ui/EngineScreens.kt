@@ -65,6 +65,7 @@ import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.Bi
 import com.upscpods.app.data.ContentLibrary
 import com.upscpods.app.data.EngineItem
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Play
 import com.upscpods.app.data.at
 import kotlinx.coroutines.launch
@@ -111,6 +112,9 @@ fun engineTypeName(kind: String, hindi: Boolean): String? = ENGINE_TYPE_NAMES[ki
 private val Right = Color(0xFF2E7D32)
 private val Soft = Color(0xFFB26A00)
 
+/** Told when an engine reaches its "That's the set" end: flashcard_session or practice_piece (codes and counts only). */
+private val LocalPieceDone = androidx.compose.runtime.staticCompositionLocalOf<() -> Unit> { {} }
+
 @Composable
 fun EnginePlayer(item: EngineItem, hindi: Boolean, library: ContentLibrary) {
     val sfx = rememberSfx(library, item.sounds, item.tone)
@@ -118,7 +122,11 @@ fun EnginePlayer(item: EngineItem, hindi: Boolean, library: ContentLibrary) {
     Text(item.title.pick(hindi), style = MaterialTheme.typography.headlineSmall)
     SoundToggle(sfx, hindi)
     val p = item.play
-    when (p.engine) {
+    val pieceDone: () -> Unit = remember(item.id) { {
+        val n = maxOf(p.rounds.size, p.items.size, p.pairs.size, p.cards.size, p.beats.size)
+        Metrics.flashcardSession(item.id, p.engine, n)
+    } }
+    androidx.compose.runtime.CompositionLocalProvider(LocalPieceDone provides pieceDone) { when (p.engine) {
         "choose" -> ChooseEngine(p, hindi, sfx)
         "sort" -> SortEngine(p, hindi, sfx)
         "order" -> OrderEngine(p, hindi, sfx, still)
@@ -130,12 +138,14 @@ fun EnginePlayer(item: EngineItem, hindi: Boolean, library: ContentLibrary) {
         "cloze" -> ClozeEngine(p, hindi, sfx, still)
         "picture" -> HiddenWhyEngine(p, hindi, sfx, still, library)
         else -> Text(if (hindi) "यह आइटम खुल नहीं सका। ऐप अपडेट करके देखें।" else "This item couldn't be opened. A newer app may be needed.")
-    }
+    } }
     item.sourceLine(hindi)?.takeIf { it.isNotBlank() }?.let { Text(it, style = MaterialTheme.typography.labelSmall) }
 }
 
 @Composable
 private fun Done(hindi: Boolean, onAgain: () -> Unit) {
+    val told = LocalPieceDone.current
+    LaunchedEffect(Unit) { told() }
     Text(if (hindi) "पूरा हुआ ✓" else "That's the set ✓", style = MaterialTheme.typography.titleMedium)
     TextButton(onClick = onAgain) { Text(if (hindi) "फिर से" else "Again") }
 }

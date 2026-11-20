@@ -207,6 +207,7 @@ class MainActivity : AppCompatActivity() {
         setIntent(intent)
         val r = Ritual.of(intent.getStringExtra(Rituals.EXTRA))
         nudged.value = r ?: Ritual.CHAI.takeIf { intent.getBooleanExtra(Nudge.EXTRA_FROM_NUDGE, false) }
+        nudged.value?.let { Metrics.notificationOpen(it.key) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -218,6 +219,7 @@ class MainActivity : AppCompatActivity() {
         // Opened from a ritual nudge (data/Rituals.kt): straight into its action. Morning Chai goes to Today's Chai.
         val ritual = Ritual.of(intent?.getStringExtra(Rituals.EXTRA))
         val fromNudge = intent?.getBooleanExtra(Nudge.EXTRA_FROM_NUDGE, false) == true || ritual == Ritual.CHAI
+        if (savedInstanceState == null && (ritual != null || fromNudge)) Metrics.notificationOpen(ritual?.key ?: "chai")
         // After the system splash (the steaming kulhad icon), today's greeting rises from the kulhad for a moment.
         // Members only: someone new gets the full eleven-language welcome as the first onboarding screen.
         val greet = savedInstanceState == null && !fromNudge && ritual == null && ProfileStore.load(this).onboarded
@@ -458,15 +460,17 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val startMock = { p: MockPaper ->
         scope.launch {
             // With Plus switched on, full papers count against the monthly allowance. The quick mock never does.
-            if (config.plus && !p.quick && !community.useMockAllowance()) { mockUsedUp = true; return@launch }
+            if (config.plus && !p.quick && !community.useMockAllowance()) { mockUsedUp = true; Metrics.paywallShown("mock_allowance"); return@launch }
             activeMock = mocks.start(p)
+            Metrics.mockStart(p.id, p.questions.size)
             Focus.start(context, mocks.focusMinutes(p), p.title)
             overlay = Overlay.MOCK
         }
         Unit
     }
     val submitMock = { m: ActiveMock ->
-        mocks.submit(m)
+        val rec = mocks.submit(m)
+        Metrics.mockDone(m.paper.id, rec.attempted, m.paper.questions.size, rec.minutes)
         Focus.stop(context)
         // A wrong Chai-card question enters the review queue and comes back in Prelims practice (FSRS sets when).
         m.paper.questions.forEachIndexed { i, q ->
@@ -590,6 +594,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         session = session + (q.topic to ((r + if (right) 1 else 0) to (t + 1)))
         q.cardId?.let { recall.record(it, right, q.topic) }
         scope.launch { repo.recordAnswer(q, right) }
+        Metrics.practiceAnswer(if (q.isReview) "review" else "prelims", q.topic, right)
         if (right) prep.clearMiss(q.id) else prep.addMiss(PrepQ(q.id, q.topic, MockMcq(q.mcq.question, q.mcq.options, q.mcq.answerIndex, q.mcq.explanation)))
         misses = prep.misses()
         Unit
@@ -637,6 +642,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             yesterday = yesterdayQ,
             onYesterday = { q, right ->
                 q.cardId?.let { recall.answeredYesterday(it, right, q.topic) }
+                Metrics.practiceAnswer("chai", q.topic, right)
                 // Right or wrong, yesterday's card goes into the review queue (FSRS sets when it comes back).
                 scope.launch { repo.recordAnswer(q, right) }
                 yesterdayQ = null
@@ -644,6 +650,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             onExamAnswer = { id, right ->
                 val item = brief.items.firstOrNull { it.id == id }
                 recall.record(id, right, item?.topic ?: "")
+                Metrics.practiceAnswer("chai", item?.topic, right)
                 // Every Chai question answered joins the review queue: it comes back just before you'd forget it.
                 item?.text(hindi)?.mcq?.let { scope.launch { repo.recordAnswer(PracticeQuestion("card-$id", item.topic, it, id, false), right) } }
             },

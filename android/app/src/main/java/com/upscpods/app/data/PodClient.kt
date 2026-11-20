@@ -241,6 +241,7 @@ class PodClient(context: Context, val roomId: String? = null) {
         val pending = PodMessage("local-${UUID.randomUUID()}", memberId, "You", clean, System.currentTimeMillis(), kind, UUID.randomUUID().toString())
         // Shown as "sending" until the server echoes it back; resent on reconnect if offline.
         outbox = outbox + pending
+        Metrics.podMessageSent()
         send(sayEvent(pending))
     }
 

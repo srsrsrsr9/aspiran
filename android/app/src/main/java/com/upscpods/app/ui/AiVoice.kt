@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import com.upscpods.app.data.Metrics
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -38,7 +39,7 @@ import kotlinx.serialization.json.doubleOrNull
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AiVoiceAudio(data: JsonObject, lang: String, url: (String) -> String): Boolean {
+fun AiVoiceAudio(data: JsonObject, lang: String, url: (String) -> String, kind: String = "note"): Boolean {
     val a = ((data["audio"] as? JsonObject)?.get(lang) as? JsonObject) ?: return false
     fun s(e: JsonElement?) = (e as? JsonPrimitive)?.contentOrNull
     val path = s(a["url"]) ?: return false
@@ -48,10 +49,20 @@ fun AiVoiceAudio(data: JsonObject, lang: String, url: (String) -> String): Boole
     var playing by remember { mutableStateOf(false) }
     var ended by remember { mutableStateOf(false) }
     var showParts by remember { mutableStateOf(false) }
+    val pieceId = s(data["id"])
+    val secsForCount = (a["seconds"] as? JsonPrimitive)?.doubleOrNull
     DisposableEffect(player) {
+        // audio_play once per player, audio_done when it reaches the end (codes and minutes only).
+        var counted = false
         val l = object : Player.Listener {
-            override fun onIsPlayingChanged(isPlaying: Boolean) { playing = isPlaying }
-            override fun onPlaybackStateChanged(state: Int) { ended = state == Player.STATE_ENDED }
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                playing = isPlaying
+                if (isPlaying && !counted) { counted = true; Metrics.audioPlay(pieceId, lang, kind) }
+            }
+            override fun onPlaybackStateChanged(state: Int) {
+                ended = state == Player.STATE_ENDED
+                if (ended) Metrics.audioDone(pieceId, lang, kind, secsForCount?.let { maxOf(1, Math.round(it / 60).toInt()) })
+            }
         }
         player.addListener(l)
         onDispose { player.removeListener(l); player.release() }

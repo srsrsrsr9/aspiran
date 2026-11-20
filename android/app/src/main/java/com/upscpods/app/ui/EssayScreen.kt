@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.Bi
 import com.upscpods.app.data.ContentLibrary
 import com.upscpods.app.data.LibraryItem
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Practice
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.decodeFromJsonElement
@@ -102,7 +103,8 @@ fun EssayScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
                     Text("${Practice.wordCount(text)} words", style = MaterialTheme.typography.labelMedium)
                     val done = prefs.getString("$id:s${s.n}done", null) != null
                     if (!done) {
-                        Button(onClick = { prefs.edit().putString("$id:s${s.n}done", LocalDate.now().toString()).apply(); tick++ },
+                        Button(onClick = { prefs.edit().putString("$id:s${s.n}done", LocalDate.now().toString()).apply(); tick++
+                            Metrics.answerSubmit("essay", Practice.wordCount(text), "typed", snap = s.n) },
                             enabled = s.n == 3 || Practice.wordCount(text) >= s.min / 3) {
                             Text(if (s.n == 3) "I've written it: show the watch-outs" else "Done: compare with the guide")
                         }

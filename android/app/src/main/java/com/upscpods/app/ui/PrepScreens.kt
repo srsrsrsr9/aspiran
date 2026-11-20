@@ -105,6 +105,7 @@ import com.upscpods.app.data.ContentLibrary
 import com.upscpods.app.data.FAMILIES
 import com.upscpods.app.data.LibraryItem
 import com.upscpods.app.data.LongRead
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.MockMcq
 import com.upscpods.app.data.MockPaper
 import com.upscpods.app.data.MockRecord
@@ -155,6 +156,7 @@ private fun Muted(text: String) = Text(text, style = MaterialTheme.typography.bo
 /** The quiet card after a taste. In quiet times it says nothing about Plus beyond the tag. No purchase path, ever. */
 @Composable
 private fun PlusNote(what: String, quiet: Boolean, onSeePlus: () -> Unit, onNotNow: () -> Unit) {
+    LaunchedEffect(what) { Metrics.paywallShown(what) }
     FlatCard {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) { Text(what, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f)); PlusTag() }
@@ -359,7 +361,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
         }
         if (now != null) {
             Text(now.title, style = MaterialTheme.typography.titleMedium)
-            androidx.compose.runtime.key(now.id, lang) { AiVoiceAudio(now.data, lang, mediaUrl) }
+            androidx.compose.runtime.key(now.id, lang) { AiVoiceAudio(now.data, lang, mediaUrl, kind = if (now.walk) "walk" else "note") }
             if (!now.walk) TextButton(onClick = { onOpenRead(now.id) }) { Text(if (lang == "hi") "पाठ पढ़ें" else "Read the text") }
         } else Muted("Tap a piece to choose it, then press Play. Nothing starts by itself.")
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -387,6 +389,7 @@ fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: 
     var size by remember { mutableIntStateOf(prep.readSize) }
     var recall by rememberSaveable(item.id) { mutableStateOf(prep.readNote(item.id)) }
     var checked by rememberSaveable(item.id) { mutableStateOf(false) }
+    LaunchedEffect(item.id) { Metrics.noteOpen(item.id, if (hindi) "hi" else "en") }
     val body = MaterialTheme.typography.bodyLarge.copy(fontSize = size.sp, lineHeight = (size * 1.55f).sp)
     PrepPage("Long read", onClose) {
         FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
@@ -415,7 +418,7 @@ fun ReaderScreen(item: LibraryItem, read: LongRead, prep: Prep, hindiPreferred: 
                 Text("Pulling it back out of memory makes it stick far better than reading it again.", style = MaterialTheme.typography.bodySmall)
                 OutlinedTextField(recall, { recall = it }, Modifier.fillMaxWidth().heightIn(min = 120.dp),
                     placeholder = { Text("Without scrolling back: what were the main points?") })
-                Button(onClick = { prep.markRead(item.id, recall.trim()); checked = true }) { Text("Check") }
+                Button(onClick = { prep.markRead(item.id, recall.trim()); checked = true; Metrics.noteDone(item.id, if (hindi) "hi" else "en") }) { Text("Check") }
                 if (checked) {
                     Text("Did you get these?", style = MaterialTheme.typography.titleSmall)
                     val prompts = read.recallFor(hindi)
@@ -534,6 +537,7 @@ private fun compileText(topics: List<Pair<String, List<PrepQ>>>): String = build
 }
 
 private fun shareText(context: Context, title: String, text: String) {
+    Metrics.share("compilation")
     val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_SUBJECT, title).putExtra(Intent.EXTRA_TEXT, text)
     context.startActivity(Intent.createChooser(send, title))
 }
@@ -1380,6 +1384,7 @@ fun PlusInfoScreen(mocks: List<MockPaper>, week: List<PrepQ>, bank: List<PrepQ>,
                    gate: PlusGate, quiet: Boolean, hindi: Boolean, onAnswer: (PrepQ, Boolean) -> Unit, onTool: (PrepTool) -> Unit, onMocks: () -> Unit, onClose: () -> Unit,
                    play: PlayBuy? = null) =
     PrepPage("Plus", onClose) {
+        LaunchedEffect(Unit) { Metrics.plusView(null, "upgrade") }
         when {
             gate.loading -> Muted("Loading…")
             gate.member -> PlusHub(hindi, onTool, onMocks)

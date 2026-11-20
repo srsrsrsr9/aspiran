@@ -297,7 +297,7 @@ fun WalkScriptPage(library: ContentLibrary?, hindi: Boolean, id: String) {
     Text(d["topic"].biText(hindi) ?: "", style = MaterialTheme.typography.titleLarge)
     Text("About ${d.str("minutes") ?: "6"} minutes · earphones in", style = MaterialTheme.typography.labelMedium)
     val lang = if (hindi && (d["script"] as? JsonObject)?.get("hi") != null) "hi" else "en"
-    if (library == null || !AiVoiceAudio(d, lang, library::url)) ReadAloudButton(text)
+    if (library == null || !AiVoiceAudio(d, lang, library::url, kind = "walk")) ReadAloudButton(text)
     FlatCard(Modifier.fillMaxWidth()) { Text(text, style = if (hindi) ReadingHindi else ReadingText, modifier = Modifier.padding(12.dp)) }
     d["pronounce"].arr().takeIf { it.isNotEmpty() }?.let { ps -> Block("Say it right", soft = true) { ps.forEach { Text("${it.str("term")} · ${it.str("say")}") } } }
     Text("When it ends, say your answer aloud once, then walk on. Nothing is recorded.", style = MaterialTheme.typography.bodySmall)

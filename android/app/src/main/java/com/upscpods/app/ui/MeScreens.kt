@@ -39,6 +39,7 @@ import com.upscpods.app.data.LanguageRequests
 import com.upscpods.app.data.Auth
 import androidx.compose.material3.AlertDialog
 import com.upscpods.app.data.Community
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Persona
 import com.upscpods.app.data.PlusStatus
 import com.upscpods.app.data.StagedProfile
@@ -293,7 +294,7 @@ private fun PrivacyPage(staged: StagedProfile, adminResult: Boolean) {
 @Composable
 private fun PlusPage(community: Community) {
     var status by remember { mutableStateOf<PlusStatus?>(null) }
-    LaunchedEffect(Unit) { status = community.plusStatus() }
+    LaunchedEffect(Unit) { Metrics.plusView(null, "me"); status = community.plusStatus() }
     // Google Play's payments policy: no price, no payment wording and no pointer to the website here.
     Text("Plus adds the weekly Chai test, the monthly compilation, revise my misses, mock insights and every mock paper. Everything in the Adda, your pod and the Free Shelf stays free.", style = MaterialTheme.typography.bodyMedium)
     status?.let { Text(if (it.plan != null) "You have Plus on this account." else "This account doesn't have Plus. Prep → What Plus adds shows what's inside.", style = MaterialTheme.typography.bodySmall) }

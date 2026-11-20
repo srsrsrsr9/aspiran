@@ -46,6 +46,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.ContentLibrary
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.MockPaper
 import com.upscpods.app.data.NewsItem
 import com.upscpods.app.data.SyllabusMap
@@ -384,6 +385,9 @@ fun TermsScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
         val rows = lists.filter { subject.isEmpty() || it.str("subject") == subject }.flatMap { it["terms"].arr() }.filter { t ->
             needle.isEmpty() || listOf(t.str("en"), t.str("hi"), t.str("hiAlt"), t["meaning"].biText(false), t["meaning"].biText(true)).any { it?.lowercase()?.contains(needle) == true }
         }
+        // search: where and how many matched, after a pause in typing. Never the words.
+        val found = rows.size
+        androidx.compose.runtime.LaunchedEffect(needle) { if (needle.length >= 2) { kotlinx.coroutines.delay(1500); Metrics.search("terms", found) } }
         if (rows.isEmpty()) Text(if (lists.isEmpty()) "Term lists appear here once an editor approves them." else "No term matches.")
         rows.take(300).forEach { t ->
             FlatCard(Modifier.fillMaxWidth()) {

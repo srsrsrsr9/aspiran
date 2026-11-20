@@ -258,5 +258,6 @@ private fun shareRoadmap(context: Context, p: RoadmapPlan) {
     val send = Intent(Intent.ACTION_SEND).setType("image/png").putExtra(Intent.EXTRA_STREAM, uri)
         .putExtra(Intent.EXTRA_TEXT, "My UPSC roadmap for Prelims ${p.goal.examYear}")
         .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    Metrics.share("roadmap")
     context.startActivity(Intent.createChooser(send, "Share my roadmap"))
 }

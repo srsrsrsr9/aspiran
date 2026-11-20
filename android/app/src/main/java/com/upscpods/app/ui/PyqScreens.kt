@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.upscpods.app.data.MainsTask
+import com.upscpods.app.data.Metrics
 import com.upscpods.app.data.Pyq
 import com.upscpods.app.data.PyqPaper
 import com.upscpods.app.data.Pyqs
@@ -50,6 +51,7 @@ fun PyqScreen(papers: List<PyqPaper>, focus: PyqFocus?, onWrite: (MainsTask) -> 
     val shelves = remember(papers) { SYLLABUS.filter { s -> papers.any { it.paper == s.id } } }
     var paper by rememberSaveable(focus) { mutableStateOf(focus?.paper ?: shelves.firstOrNull()?.id ?: "gs1") }
     val topic = focus?.takeIf { it.paper == paper }?.topic
+    androidx.compose.runtime.LaunchedEffect(paper) { Metrics.pyqOpen(paper, if (topic != null) "topic" else "paper") }
     val shown = remember(all, paper, topic) {
         val sp = SYLLABUS.firstOrNull { it.id == paper }
         val t = sp?.topics?.firstOrNull { it.name == topic }
