@@ -113,7 +113,7 @@ try {
   step("a cancelled code stops working; another institute can't cancel it");
 
   // --- Role limits: nobody climbs ---------------------------------------------------------------------------------------
-  for (const [path, body] of [["/inst/admin/overview"], ["/inst/admin/roster"], ["/inst/admin/analytics"], ["/inst/admin/analytics.csv"], ["/inst/admin/codes", { role: "student", batchId: batch1 }],
+  for (const [path, body] of [["/inst/admin/overview"], ["/inst/admin/dashboard"], ["/inst/admin/roster"], ["/inst/admin/analytics"], ["/inst/admin/analytics.csv"], ["/inst/admin/codes", { role: "student", batchId: batch1 }],
     ["/inst/admin/batches", { name: "Mine" }], ["/inst/admin/branding", { name: "Hacked" }], ["/inst/admin/content", { kind: "note", title: "x", data: { en: { body: "x" } } }], ["/inst/admin/plans", { title: "x", batchId: batch1 }]]) {
     assert.equal((await s1.call(path, body)).status, 403, `a student is refused ${path}`);
   }
@@ -325,6 +325,32 @@ try {
   assert.equal(p1.memberId, s1.memberId);
   assert.equal(JSON.stringify(await s1.call("/inst/progress")).includes(s2.memberId), false);
   step("analytics from real data (answers, tests, plan, doubts), by batch, CSV without emails; a student sees only their own");
+
+  // --- The console's dashboard ----------------------------------------------------------------------------------------------
+  const dash = (await teacher.call("/inst/admin/dashboard")).data;
+  assert.equal(dash.daily.length, 14, "14 days of activity");
+  assert.equal(dash.totals.students, a.students.length, "same students as analytics");
+  assert.ok(dash.batches.some((b) => b.id === batch1) && dash.batches.some((b) => b.id === batch2));
+  assert.ok(dash.batches.reduce((n, b) => n + b.students, 0) <= dash.totals.students, "open batches add up to at most everyone");
+  assert.ok(dash.totals.openDoubts >= dash.batches.reduce((n, b) => n + b.openDoubts, 0));
+  assert.ok(dash.recent.some((x) => x.kind === "joined" && x.name === "Student One"), "recent joins, by the name the institute sees");
+  for (const k of ["batch", "students", "teacher", "branding", "announcement", "content", "plan"]) assert.equal(typeof dash.checklist[k], "boolean", "checklist " + k);
+  assert.equal(dash.checklist.batch && dash.checklist.students && dash.checklist.teacher, true);
+  assert.ok(!JSON.stringify(dash).includes("@example.com"), "no emails");
+  const dashB = (await ownerB.call("/inst/admin/dashboard")).data;
+  assert.ok(!dashB.batches.some((b) => b.id === batch1) && !JSON.stringify(dashB).includes("Student One"), "B's dashboard has only B");
+  step("dashboard: batches, activity, doubts waiting and a getting-started checklist; staff only, own institute only, no emails");
+
+  // --- Aspiran Admin's home dashboard ---------------------------------------------------------------------------------------
+  assert.equal((await fetch(BASE + "/admin/api/dashboard")).status, 401, "staff key needed");
+  assert.equal((await s1.call("/admin/api/dashboard")).status, 401, "a member's token is not a staff key");
+  const home = (await staff("/admin/api/dashboard")).data;
+  assert.ok(home.institutes.total >= 2 && home.institutes.flagOn === true && home.institutes.students >= 1);
+  assert.equal(home.people.signups.length, 14);
+  for (const k of ["plus", "library", "chai", "helpers", "leads", "attention"]) assert.ok(home[k], "has " + k);
+  assert.ok(home.money && typeof home.money.revenue === "number", "the owner key sees money");
+  assert.ok(!JSON.stringify(home).includes("@example.com"), "counts only, no emails");
+  step("Admin home dashboard: counts for people, Plus, money, content, Chai, helpers, leads and centres; staff key only");
 
   // A formula in a name is defused in the CSV.
   const evil = await person("evil");

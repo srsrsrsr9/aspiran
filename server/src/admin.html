@@ -5,95 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Aspiran Admin</title>
+<!--KIT-->
 <style>
-  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --bar:#B5651D; --amber:#FCE8C3; --ok:#E3F1E1; --okInk:#2E7D32; --bad:#F8E1DE; --badInk:#B3261E; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --bar:#E8A060; --amber:#4A3712; --ok:#22361F; --okInk:#8BD18F; --bad:#43201B; --badInk:#F2A49B; } }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
-  header { position:sticky; top:0; z-index:3; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  header h1 { font-size:18px; margin:0; color:var(--brand); }
-  #who { margin-left:auto; font-size:13px; color:var(--muted); }
-  .layout { display:grid; grid-template-columns:200px 1fr; max-width:1280px; margin:0 auto; }
-  nav { padding:12px 8px; position:sticky; top:52px; align-self:start; }
-  nav button { display:block; width:100%; text-align:left; border:0; background:none; padding:7px 10px; border-radius:8px; color:var(--ink); }
-  nav button.on { background:var(--amber); font-weight:600; }
-  nav .count { float:right; background:var(--badInk); color:#fff; border-radius:999px; font-size:11px; padding:0 7px; }
-  @media (max-width:800px) { .layout { grid-template-columns:1fr; } nav { position:static; display:flex; flex-wrap:wrap; gap:4px; } nav button { width:auto; } }
-  main { padding:16px; min-width:0; }
-  h2 { margin:0 0 4px; font-size:20px; } h3 { margin:16px 0 6px; font-size:16px; }
-  p.lead { margin:0 0 16px; color:var(--muted); }
-  input, textarea, select, button { font:inherit; color:inherit; }
-  input, textarea, select { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:6px 8px; max-width:100%; }
+  /* Admin-only bits on top of the shared console kit. */
   textarea { width:100%; }
-  button { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:5px 12px; cursor:pointer; }
-  button.primary { background:var(--brand); border-color:var(--brand); color:#fff; }
-  @media (prefers-color-scheme: dark) { button.primary { color:#1A1410; } }
-  button.danger { border-color:var(--badInk); color:var(--badInk); }
-  button:disabled { opacity:.5; cursor:default; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:12px; }
-  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
-  .tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; margin-bottom:16px; }
-  .tile { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; }
-  .tile .n { font-size:26px; font-weight:600; }
-  .tile .l { font-size:13px; color:var(--muted); }
-  .tile.warn { border-color:var(--badInk); }
-  table { width:100%; border-collapse:collapse; font-size:14px; }
-  th, td { text-align:left; padding:6px 8px; border-top:1px solid var(--line); vertical-align:top; }
-  th { color:var(--muted); font-weight:500; font-size:12px; border-top:0; }
-  .scroll { overflow-x:auto; }
-  .chip { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:0 8px; font-size:12px; color:var(--muted); margin-right:4px; }
-  .chip.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
-  .chip.bad { background:var(--bad); color:var(--badInk); border-color:transparent; }
-  .chip.warn { background:var(--amber); color:var(--ink); border-color:transparent; }
-  .muted { color:var(--muted); font-size:13px; }
-  .mono { font-family:ui-monospace, Consolas, monospace; font-size:12px; word-break:break-all; }
-  .keybox { background:var(--amber); border-radius:8px; padding:12px; margin:8px 0; }
-  .notes { border-left:3px solid var(--line); padding-left:10px; margin:8px 0; font-size:13px; }
-  .quote { background:var(--bg); border-radius:8px; padding:8px 10px; margin:6px 0; white-space:pre-wrap; }
-  .helplines { background:var(--ok); border-radius:8px; padding:8px 12px; margin-bottom:12px; }
-  #toast { position:fixed; bottom:16px; left:50%; transform:translateX(-50%); display:none; gap:10px; align-items:flex-start; z-index:9; width:min(560px, calc(100vw - 32px));
-    background:var(--card); color:var(--ink); border:1px solid var(--line); padding:10px 12px 10px 14px; border-radius:10px; font-size:14px; box-shadow:0 4px 18px rgba(0,0,0,.18); }
-  #toast.ok { background:var(--ok); color:var(--okInk); border-color:transparent; }
-  #toast.err { background:var(--bad); color:var(--badInk); border-color:var(--badInk); }
-  #toast .t { flex:1; color:var(--ink); white-space:pre-wrap; word-break:break-word; }
-  #toast .ic { font-weight:700; }
-  #toast button { border:0; background:none; padding:0 4px; color:inherit; font-size:16px; line-height:1; }
-  .banner { border-radius:8px; padding:8px 12px; margin:10px 0; font-size:14px; }
-  .banner:empty { display:none; }
-  .banner.err { background:var(--bad); color:var(--badInk); }
-  .banner.ok { background:var(--ok); color:var(--okInk); }
-  .pill { display:inline-block; border-radius:999px; padding:1px 10px; font-size:12px; font-weight:600; white-space:nowrap; }
-  .pill.gap { background:var(--bad); color:var(--badInk); }
-  .pill.drafts, .pill.hindi { background:var(--amber); color:var(--ink); }
-  .pill.ok { background:var(--ok); color:var(--okInk); }
-  td.n, th.n { text-align:right; font-variant-numeric:tabular-nums; }
-  tr.gap td:first-child { border-left:3px solid var(--badInk); }
-  .chart { width:100%; height:120px; display:block; }
-  .chart .b { fill:var(--bar); }
-  .chart .b:hover { opacity:.75; }
-  .chart line { stroke:var(--line); }
-  .chart text { fill:var(--muted); font-size:11px; }
-  .grid2 { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:12px; }
-  label.flag { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid var(--line); }
+  .keybox { background:var(--warn); color:var(--warnInk); border-radius:10px; padding:12px 14px; margin:8px 0; }
+  .notes { border-left:3px solid var(--line2); padding-left:10px; margin:8px 0; font-size:13px; }
+  .helplines { background:var(--ok); color:var(--okInk); border-radius:10px; padding:8px 12px; margin-bottom:12px; }
+  tr.gap td:first-child { box-shadow:inset 3px 0 0 var(--badInk); }
+  label.flag { display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-top:1px solid var(--line); }
   label.flag:first-child { border-top:0; }
   pre { white-space:pre-wrap; word-break:break-word; font-size:12px; max-height:420px; overflow:auto; background:var(--bg); padding:10px; border-radius:8px; }
-  dialog { border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--ink); max-width:760px; width:calc(100vw - 32px); padding:16px; }
-  dialog::backdrop { background:rgba(0,0,0,.4); }
-  #signin { max-width:460px; margin:10vh auto; }
   #signin label { display:block; font-weight:600; margin:14px 0 4px; }
-  #signin .row input { flex:1; min-width:0; }
-  @media (max-width:640px) { .layout nav { flex-wrap:nowrap; overflow-x:auto; } .layout nav button { flex:none; } }
+  #signin .row input { flex:1; min-width:0; width:auto; }
+  .flagrow { display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--line); }
+  .flagrow:first-child { border-top:0; }
+  .flagrow .switch { margin-top:2px; }
+  /* Older sections open with a plain h2 and lead: give them the page-heading size. */
+  .k-main > h2:first-child { font-size:26px; margin-bottom:6px; }
+  .k-mini { display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:10px; }
+  .k-mini > div { background:var(--bg); border-radius:10px; padding:8px 10px; }
+  .k-mini b { display:block; font-size:20px; }
+  .k-mini span { font-size:12.5px; color:var(--muted); }
 </style>
 </head>
 <body>
-<header>
-  <h1>Aspiran Admin</h1>
-  <a href="/desk" class="muted">News desk</a>
-  <a href="/status" class="muted">Status page</a>
-  <span id="who"></span>
+<header class="k-top">
+  <a class="k-brand" href="#overview"><span class="k-mark">A</span><span><div class="k-title">Aspiran Admin</div><div class="k-sub">Staff only</div></span></a>
+  <nav class="k-links" aria-label="Other staff pages"><a href="/desk">News desk</a><a href="/institute">Coaching centre console</a><a href="/status">Status page</a></nav>
+  <div class="k-who" id="who"></div>
 </header>
 <div id="app"></div>
-<div id="toast" role="status" aria-live="polite"><span class="ic" aria-hidden="true"></span><span class="t"></span><button type="button" aria-label="Close">×</button></div>
 <dialog id="dlg"></dialog>
 <script>
 "use strict";
@@ -121,18 +63,8 @@ function put(el, ...kids) {
   for (const k of kids.flat(9)) if (k != null && k !== false) el.append(k instanceof Node ? k : String(k));
   return el;
 }
-/** kind: "ok" (green, goes after 4 s), "err" (red, stays until closed) or "info". */
-const toast = (t, kind = "info") => {
-  const e = $("#toast");
-  e.className = kind;
-  e.setAttribute("role", kind === "err" ? "alert" : "status");
-  e.querySelector(".ic").textContent = kind === "ok" ? "✓" : kind === "err" ? "!" : "i";
-  e.querySelector(".t").textContent = t;
-  e.style.display = "flex";
-  clearTimeout(toast.t);
-  if (kind !== "err") toast.t = setTimeout(() => (e.style.display = "none"), kind === "ok" ? 4000 : 7000);
-};
-document.querySelector("#toast button").onclick = () => ($("#toast").style.display = "none");
+/** kind: "ok" (goes after 4 s), "err" (stays until closed) or "info". The shared kit draws it. */
+const toast = (t, kind = "info") => Kit.toast(t, kind);
 /** Server messages are mostly plain already; these are the ones that aren't, plus anything that looks like code. */
 function friendly(msg, status) {
   const m = String(msg || "").trim();
@@ -178,34 +110,8 @@ function download(name, text) {
 function dialog(...kids) { const d = $("#dlg"); put(d, ...kids, h("div.row", { style: "margin-top:12px;justify-content:flex-end" }, h("button", { onclick: () => d.close() }, "Close"))); d.showModal(); return d; }
 const can = (p) => me && me.perms.includes(p);
 
-/** Single-series bar chart with a hover label per bar and a table view underneath. */
-function bars(title, points, fmt = num) {
-  const W = 600, H = 120, pad = 18, max = Math.max(1, ...points.map((p) => p.v));
-  const bw = (W - 30) / Math.max(points.length, 1);
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("class", "chart"); svg.setAttribute("role", "img"); svg.setAttribute("aria-label", title);
-  const ns = (t, a) => { const e = document.createElementNS("http://www.w3.org/2000/svg", t); for (const [k, v] of Object.entries(a)) e.setAttribute(k, v); return e; };
-  svg.append(ns("line", { x1: 30, x2: W, y1: H - pad, y2: H - pad }));
-  const top = ns("text", { x: 0, y: 10 }); top.textContent = fmt(max); svg.append(top);
-  points.forEach((p, i) => {
-    const bh = Math.max(p.v ? 2 : 0, ((H - pad - 14) * p.v) / max);
-    const x = 30 + i * bw + 1, w = Math.max(bw - 2, 1), y = H - pad - bh;
-    // Rounded top, square base on the axis.
-    const r = Math.min(4, w / 2, bh);
-    const path = ns("path", { d: `M${x},${H - pad} V${y + r} Q${x},${y} ${x + r},${y} H${x + w - r} Q${x + w},${y} ${x + w},${y + r} V${H - pad} Z`, class: "b", fill: "var(--bar)" });
-    const t = ns("title", {}); t.textContent = `${p.label}: ${fmt(p.v)}`; path.append(t);
-    svg.append(path);
-    // A bigger invisible hit target than the bar itself.
-    const hit = ns("rect", { x: 30 + i * bw, y: 0, width: bw, height: H - pad, fill: "transparent" });
-    const t2 = ns("title", {}); t2.textContent = `${p.label}: ${fmt(p.v)}`; hit.append(t2); svg.append(hit);
-  });
-  if (points.length) {
-    const a = ns("text", { x: 30, y: H - 3 }); a.textContent = points[0].label; svg.append(a);
-    const b = ns("text", { x: W, y: H - 3, "text-anchor": "end" }); b.textContent = points[points.length - 1].label; svg.append(b);
-  }
-  return h("div.card", {}, h("div", { style: "font-weight:600" }, title), svg,
-    h("details", {}, h("summary.muted", {}, "Table"), h("table", {}, h("tr", {}, h("th", {}, "Day"), h("th", {}, "Value")), points.map((p) => h("tr", {}, h("td", {}, p.label), h("td", {}, fmt(p.v)))))));
-}
+/** Single-series bar chart with a hover label per bar and a table view underneath (the shared kit draws it). */
+const bars = (title, points, fmt = num, o) => Kit.bars(title, points, fmt, o);
 function lastDays(n) { const out = []; for (let i = n - 1; i >= 0; i--) out.push(new Date(Date.now() + 5.5 * 3600e3 - i * 864e5).toISOString().slice(0, 10)); return out; }
 
 // --- Sign in --------------------------------------------------------------------------------
@@ -234,21 +140,25 @@ function signInView(msg, kind = "err") {
     input.type = show ? "text" : "password"; put(eye, show ? "Hide" : "Show"); eye.setAttribute("aria-pressed", String(show));
   } }, "Show");
   setTimeout(() => input.focus(), 0);
-  return h("div.card#signin", {}, h("h2", {}, "Sign in to Admin"),
+  return h("div.k-signin", {}, h("div.card#signin", {}, h("span.k-mark", {}, "A"), h("h2", {}, "Sign in to Admin"),
     h("p.muted", {}, "Use the personal key an admin made for you under Staff. It starts with upk_. The first time, use the owner key set with wrangler (ADMIN_TOKEN, or EDITOR_TOKEN if there's no ADMIN_TOKEN), then make personal keys under Staff."),
     h("label", { for: "key" }, "Your key"), h("div.row", {}, input, eye), banner,
     h("div.row", { style: "margin-top:12px" }, btn),
-    h("p.muted", {}, "The key stays in this browser tab and is forgotten when you close it. Editors can go straight to the ", h("a", { href: "/desk" }, "News desk"), "."));
+    h("p.muted", {}, "The key stays in this browser tab and is forgotten when you close it. Editors can go straight to the ", h("a", { href: "/desk" }, "News desk"), ".")));
 }
 
 // --- Sections -------------------------------------------------------------------------------
-const SECTIONS = [
-  ["overview", "Overview", "analytics"], ["content", "Content", "content"], ["moderation", "Moderation", "moderate"],
-  ["safety", "Safety queue", "safety"], ["members", "Members", "members"], ["privacy", "Data requests", "privacy"],
-  ["llm", "AI usage", "llm:view"], ["analytics", "Analytics", "analytics"], ["growth", "Growth", "analytics"], ["leads", "Website leads", "analytics"], ["trytopic", "Try one topic", "analytics"], ["payments", "Payments", "flags"], ["posts", "Daily posts", "flags"], ["flags", "Feature flags", "flags"],
-  ["announcements", "Announcements", "announce"], ["incidents", "Status and incidents", "incidents"],
-  ["staff", "Staff and roles", "staff"], ["languages", "Languages", "staff"], ["backups", "Backups", "backups"], ["audit", "Audit log", "audit"],
+const GROUPS = [
+  ["", [["overview", "Home", "home", "analytics"]]],
+  ["Look after people", [["safety", "Safety queue", "shield", "safety"], ["moderation", "Moderation", "flag", "moderate"], ["members", "Members", "users", "members"], ["privacy", "Data requests", "lock", "privacy"]]],
+  ["Content", [["content", "Content", "book", "content"], ["announcements", "Announcements", "megaphone", "announce"], ["languages", "Languages", "globe", "staff"]]],
+  ["Growth", [["analytics", "Analytics", "chart", "analytics"], ["growth", "Growth", "growth", "analytics"], ["leads", "Website leads", "inbox", "analytics"], ["trytopic", "Try one topic", "target", "analytics"], ["posts", "Daily posts", "calendar", "flags"], ["institutes", "Coaching centres", "building", "staff"]]],
+  ["Money", [["payments", "Payments", "coin", "flags"]]],
+  ["Running Aspiran", [["flags", "Feature flags", "layers", "flags"], ["llm", "Helpers and usage", "activity", "llm:view"], ["incidents", "Status and incidents", "alert", "incidents"], ["backups", "Backups", "database", "backups"]]],
+  ["Team", [["staff", "Staff and roles", "key", "staff"], ["audit", "Audit log", "list", "audit"]]],
 ];
+const SECTIONS = GROUPS.flatMap(([, items]) => items.map(([id, name, , perm]) => [id, name, perm]));
+let navCounts = {};
 let current = location.hash.slice(1) || "overview";
 const views = {};
 
@@ -257,38 +167,114 @@ async function render() {
   if (!key) { put($("#who")); put(app, signInView(...(signInNote || []))); signInNote = null; return; }
   if (!me) { try { me = await api("me"); } catch (e) { key = ""; try { sessionStorage.removeItem("adminKey"); } catch {} put(app, signInView(e.status === 401 ? "" : e.message)); return; } }
   const ROLE = { admin: "Admin", editor: "Editor", hindi_editor: "Hindi editor", language_editor: "Language editor", moderator: "Moderator" };
-  put($("#who"), "Signed in as ", h("b", {}, me.name), ` · ${me.roles.map((r) => ROLE[r] || r).join(", ")} `, h("button", { onclick: () => signOut("You're signed out.", "ok") }, "Sign out"));
+  put($("#who"), h("span.k-avatar", {}, Kit.initials(me.name)), h("span.k-name", {}, h("b", {}, me.name), " · " + me.roles.map((r) => ROLE[r] || r).join(", ")),
+    h("button.sm.ghost", { onclick: () => signOut("You're signed out.", "ok") }, Kit.icon("out"), "Sign out"));
   const allowed = SECTIONS.filter(([, , p]) => can(p));
   if (!allowed.find(([id]) => id === current)) current = allowed[0]?.[0] || "overview";
-  const nav = h("nav", {}, allowed.map(([id, name]) => h("button", { class: id === current ? "on" : "", "data-id": id, onclick: () => { location.hash = id; } }, name)));
-  put(app, h("div.layout", {}, nav, h("main#main", {})));
+  put(app, h("div.k-shell", {}, h("div#nav", {}), h("main.k-main#main", {})));
+  drawNav();
+  // Badges for what's waiting: safety alerts and reports.
+  if (can("analytics")) api("overview").then((o) => { navCounts = { safety: o.openSafety, moderation: o.openReports, incidents: o.activeIncidents }; drawNav(); }).catch(() => {});
   await show(current);
+}
+function drawNav() {
+  const el = $("#nav");
+  if (!el) return;
+  put(el, Kit.sideNav(GROUPS.map(([label, items]) => ({ label, items: items.filter(([, , , p]) => can(p)).map(([id, name, icon]) => ({ id, label: name, icon, count: navCounts[id] || 0 })) })),
+    current, (id) => { if (location.hash.slice(1) === id) show(id); else location.hash = id; }));
 }
 async function show(id) {
   current = id;
-  document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.id === id));
+  document.querySelectorAll(".k-nav").forEach((b) => { b.classList.toggle("on", b.dataset.id === id); if (b.dataset.id === id) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
   const main = $("#main");
   if (!main) return;
   if (!views[id]) { put(main, h("div.card", {}, "There's no section called \"" + id + "\". Pick one from the list.")); return; }
-  try { put(main, await views[id]()); }
+  put(main, Kit.loading());
+  try { const v = await views[id](); if (current === id) put(main, v); }
   catch (e) { put(main, h("div.card", {}, h("div.banner.err", {}, "This section didn't load. " + e.message), h("button", { onclick: () => show(id) }, "Try again"))); }
 }
 window.addEventListener("hashchange", () => show(location.hash.slice(1) || "overview"));
 
+// Home: what needs someone first, then how Aspiran is doing. Counts only, never who.
 views.overview = async () => {
-  const o = await api("overview");
-  const tile = (n, l, warn, go) => h("div.tile" + (warn ? ".warn" : ""), { style: go ? "cursor:pointer" : "", onclick: go ? () => (location.hash = go) : null }, h("div.n", {}, n), h("div.l", {}, l));
-  return [h("h2", {}, "Overview"), h("p.lead", {}, `Today (${o.today}).`),
-    h("div.tiles", {},
-      tile(num(o.openSafety), o.oldestSafety ? `safety alerts open, oldest ${ago(o.oldestSafety)}` : "safety alerts open", o.openSafety > 0, can("safety") && "safety"),
-      tile(num(o.openReports), "reports to review", o.openReports > 0, can("moderate") && "moderation"),
-      tile(o.briefOut ? "Out" : "Not yet", `today's brief · ${o.cardsApproved} approved, ${o.cardsWaiting} waiting`, false),
-      tile(num(o.libraryLive), `library items live · ${o.libraryDrafts} drafts`, false, "content"),
-      tile(num(o.members), `members in ${o.pods} pods`, false, can("members") && "members"),
-      tile(num(o.aiCallsToday), "AI calls today", false, can("llm:view") && "llm"),
-      tile(num(o.activeIncidents), "open incidents", o.activeIncidents > 0, can("incidents") && "incidents"),
-      tile(o.lastBackup ? ago(o.lastBackup) : "None", "last backup", !o.lastBackup, can("backups") && "backups")),
-    h("div.card", {}, h("b", {}, "Writing and approving content"), h("p.muted", {}, "Cards, the library, mock papers and long reads are written and approved on the "), h("a", { href: "/desk" }, "News desk"), h("span.muted", {}, ". Your key works there too, and approvals carry your name.")),
+  const d = await api("dashboard");
+  const K = Kit, A = d.attention, P = d.people, go = (id) => can(SECTIONS.find((x) => x[0] === id)?.[2]) ? () => (location.hash = id) : null;
+  const short = (x) => K.day(x.day);
+  const needs = [
+    A.safety ? { icon: "shield", title: h("b", {}, `${A.safety} safety alert${A.safety === 1 ? "" : "s"} open`), sub: "Follow the crisis protocol. Oldest first.", right: go("safety") && h("button.sm.primary", { onclick: go("safety") }, "Open") } : null,
+    A.reports ? { icon: "flag", title: h("b", {}, `${A.reports} report${A.reports === 1 ? "" : "s"} to review`), sub: "Messages members reported in pods or the Commons.", right: go("moderation") && h("button.sm", { onclick: go("moderation") }, "Review") } : null,
+    A.incidents ? { icon: "alert", title: h("b", {}, `${A.incidents} open incident${A.incidents === 1 ? "" : "s"}`), sub: "Shown on the status page until resolved.", right: go("incidents") && h("button.sm", { onclick: go("incidents") }, "Open") } : null,
+    !A.lastBackup || Date.now() - new Date(A.lastBackup) > 2 * 86400_000 ? { icon: "database", title: h("b", {}, A.lastBackup ? `Last backup ${K.ago(A.lastBackup)}` : "No backup yet"), sub: "The nightly backup should run every day.", right: go("backups") && h("button.sm", { onclick: go("backups") }, "Backups") } : null,
+    d.chai.today.waiting ? { icon: "tea", title: h("b", {}, `${d.chai.today.waiting} Chai card${d.chai.today.waiting === 1 ? "" : "s"} waiting on the desk`), sub: d.chai.briefOut ? "Today's brief is out." : "Today's brief isn't out yet.", right: h("a.k-btn", { href: "/desk" }, "News desk") } : null,
+  ].filter(Boolean);
+  const plusSub = [P && d.plus.web ? `${num(d.plus.web)} web` : null, d.plus.play ? `${num(d.plus.play)} Play` : null, d.plus.trial ? `${num(d.plus.trial)} trial` : null].filter(Boolean).join(" · ") || "none paying yet";
+  const I = d.institutes, L = d.leads, H = d.helpers, M = d.money;
+  return [
+    K.pageHead("Home", `Today, ${K.day(d.today)}. What needs someone first, then how Aspiran is doing.`, h("a.k-btn", { href: "/desk" }, K.icon("news"), "News desk")),
+    K.card({ title: "Needs you", sub: needs.length ? `${needs.length} thing${needs.length === 1 ? "" : "s"}` : null },
+      needs.length ? K.list(needs) : K.empty({ icon: "check", title: "Nothing waiting", text: "No safety alerts, reports or incidents open, and backups are running." })),
+    h("div.section", {}, h("h3", {}, "People"), h("div.tiles", {},
+      K.kpi({ label: "Accounts", value: num(P.total), sub: `${num(P.new7)} new this week${P.suspended ? ` · ${num(P.suspended)} suspended` : ""}`, trend: P.signups.map((x) => x.n), go: go("members") }),
+      K.kpi({ label: "Active today", value: num(P.active1), sub: `${num(P.active7)} this week · ${num(P.active30)} this month` }),
+      K.kpi({ label: "In pods", value: num(P.podMembers), sub: `${num(P.pods)} pods with people`, go: go("growth") }),
+      K.kpi({ label: "Plus members", value: num(d.plus.active), sub: plusSub + (d.plus.test ? ` · ${num(d.plus.test)} test` : ""), go: go("payments") }),
+      M ? K.kpi({ label: "Money, last 30 days", value: K.inr(M.revenue30), sub: `${num(M.paid30)} paid · ${K.inr(M.revenue)} kept in all${M.refunded ? ` · ${num(M.refunded)} refunded` : ""}`, trend: M.daily.map((x) => x.n), go: go("payments") }) : null)),
+    h("div.grid2", { style: "margin-bottom:14px" },
+      K.bars("New accounts each day", P.signups.map((x) => ({ label: short(x), v: x.n })), num, { sub: "Last 14 days" }),
+      K.card({ title: "Today's Chai", sub: d.chai.briefOut ? "The brief is out." : "The brief isn't out yet.", actions: [h("a.k-btn.sm", { href: "/desk" }, "Open the desk")] },
+        h("div.k-mini", {}, [["found", "found"], ["waiting", "waiting"], ["approved", "approved"], ["hindi", "in Hindi"], ["rejected", "dropped"]].map(([k, l]) => h("div", {}, h("b", {}, num(d.chai.today[k])), h("span", {}, l)))),
+        h("p.muted", { style: "margin:12px 0 0" }, `Brief out on ${d.chai.published.filter((x) => x.n).length} of the last 14 days.`))),
+    h("div.grid2", { style: "margin-bottom:14px" },
+      K.card({ title: "Library", sub: "Live and waiting, by kind", actions: [go("content") && h("button.sm", { onclick: go("content") }, "Content")] },
+        d.library.length ? h("table", {}, h("tr", {}, h("th", {}, "Kind"), h("th.n", {}, "Live"), h("th.n", {}, "Drafts")), d.library.map((r) => h("tr", {}, h("td", {}, r.kind), h("td.n", {}, num(r.live)), h("td.n", {}, r.drafts ? h("span.chip.warn", {}, num(r.drafts)) : "0"))))
+          : K.empty({ icon: "book", title: "Nothing in the library yet" })),
+      K.card({ title: "Helpers today", sub: "Chotu, Jeetu, pod friends, drafting and checks", actions: [go("llm") && h("button.sm", { onclick: go("llm") }, "Details")] },
+        h("div.k-mini", {}, h("div", {}, h("b", {}, num(H.today.ok)), h("span", {}, "calls")), h("div", {}, h("b", {}, num(H.today.failed)), h("span", {}, "failed or blocked")), h("div", {}, h("b", {}, num(H.today.tokens)), h("span", {}, "tokens")), h("div", {}, h("b", {}, num(H.voiceToday)), h("span", {}, "voice lines"))),
+        H.byPurpose.length ? h("table", { style: "margin-top:10px" }, h("tr", {}, h("th", {}, "Last 7 days, by job"), h("th.n", {}, "Calls")), H.byPurpose.map((r) => h("tr", {}, h("td", {}, r.purpose), h("td.n", {}, num(r.n))))) : null)),
+    h("div.grid2", { style: "margin-bottom:14px" },
+      K.card({ title: "Website leads", actions: [go("leads") && h("button.sm", { onclick: go("leads") }, "All leads")] },
+        h("div.k-mini", {}, h("div", {}, h("b", {}, num(L.total)), h("span", {}, "shared something")), h("div", {}, h("b", {}, num(L.withContact)), h("span", {}, "left a number or email")), h("div", {}, h("b", {}, num(L.new7)), h("span", {}, "new this week")), h("div", {}, h("b", {}, num(L.centres)), h("span", {}, `coaching centres${L.centresNew7 ? ` (${L.centresNew7} new)` : ""}`))),
+        L.latestCentres.length ? [h("h4", { style: "margin:14px 0 4px" }, "Latest coaching centres"), K.list(L.latestCentres.map((c) => ({ icon: "building", title: c.centre, sub: [c.city, c.students && `${c.students} students`, K.ago(c.at), c.contact ? "left contact" : "no contact"].filter(Boolean).join(" · ") })))] : null),
+      K.card({ title: "Coaching centres on Aspiran", sub: I.flagOn ? "The console is on." : "The console is switched off for everyone (flag: institutes).", actions: [go("institutes") && h("button.sm", { onclick: go("institutes") }, "Manage")] },
+        h("div.k-mini", {}, h("div", {}, h("b", {}, num(I.total)), h("span", {}, "centres")), h("div", {}, h("b", {}, num(I.active)), h("span", {}, "active")), h("div", {}, h("b", {}, num(I.paused)), h("span", {}, "paused")), h("div", {}, h("b", {}, num(I.students)), h("span", {}, "students")), h("div", {}, h("b", {}, num(I.openDoubts)), h("span", {}, "doubts waiting"))))),
+  ];
+};
+
+// Coaching centres: set them up, give the owner a code, pause. The console itself is behind the "institutes" flag.
+views.institutes = async () => {
+  const d = await api("institutes");
+  const K = Kit;
+  const showCode = (name, code) => dialog(h("h3", {}, "Owner code for " + name), h("p", {}, "Send this to the centre's owner. They sign in at ", h("span.mono", {}, location.origin + "/institute"), " and type it. It works once, for 30 days."),
+    h("div.row", {}, h("span.code", {}, code), h("button.sm", { onclick: () => K.copy(code, "Code copied") }, K.icon("copy"), "Copy")));
+  const create = () => {
+    const name = h("input", { type: "text", maxlength: 60, placeholder: "e.g. Vidya IAS Academy" }), city = h("input", { type: "text", maxlength: 60, placeholder: "e.g. Hyderabad" });
+    K.modal("New coaching centre", h("div.fields", {}, h("label.field", {}, h("span", {}, "Name"), name), h("label.field", {}, h("span", {}, "City (optional)"), city)),
+      [(close) => h("button.primary", { onclick: K.busy(async () => { const r = await api("institutes", { body: { name: name.value, city: city.value } }); close(); toast("Centre made.", "ok"); await show("institutes"); showCode(name.value, r.ownerCode); }) }, "Make centre")]);
+    setTimeout(() => name.focus(), 0);
+  };
+  views.institutes.st ??= {};
+  return [
+    K.pageHead("Coaching centres", "Centres that run their batches on Aspiran: their own chat, doubts, plans, notes and tests, and analytics. Each one starts with an owner code from here.",
+      h("button.primary", { onclick: create }, K.icon("plus"), "New centre")),
+    d.flagOn ? null : h("div.banner.warn", {}, "The coaching-centre console is switched off for everyone (feature flag “institutes”). You can set centres up now; they can't sign in until the owner switches it on under Feature flags."),
+    K.table([
+      { key: "name", label: "Centre", render: (i) => h("b", {}, i.name) },
+      { key: "city", label: "City", value: (i) => i.city || "" },
+      { key: "status", label: "Status", render: (i) => h("span.chip" + (i.status === "active" ? ".ok" : ".warn"), {}, i.status) },
+      { key: "students", label: "Students", num: true },
+      { key: "staff", label: "Teachers and admins", num: true },
+      { key: "owners", label: "Owner", value: (i) => (i.owners ? "joined" : "not yet"), render: (i) => (i.owners ? "joined" : h("span.chip.warn", {}, "not yet")) },
+      { key: "created_at", label: "Started", render: (i) => K.day(i.created_at) },
+      { key: "act", label: "", sort: false, csv: false, render: (i) => h("div.row", {},
+        h("button.sm", { onclick: K.busy(async () => { const r = await api(`institutes/${i.id}/owner-code`, { body: {} }); showCode(i.name, r.ownerCode); }) }, "Owner code"),
+        h("button.sm" + (i.status === "active" ? ".danger" : ""), { onclick: K.busy(async () => {
+          const pause = i.status === "active";
+          if (pause && !(await K.confirm({ title: `Pause ${i.name}?`, text: "Its teachers and students can't use the centre's chat, doubts or plans until you resume it. Nothing is deleted.", ok: "Pause", danger: true }))) return;
+          await api(`institutes/${i.id}/status`, { body: { status: pause ? "paused" : "active" } }); toast(pause ? "Paused." : "Resumed.", "ok"); await show("institutes");
+        }) }, i.status === "active" ? "Pause" : "Resume")) },
+    ], { rows: d.institutes, state: views.institutes.st, search: (i) => i.name + " " + (i.city || ""), searchLabel: "Search centres", noun: "centres", csv: "coaching-centres.csv",
+      filters: [{ label: "Status", options: [["active", "Active"], ["paused", "Paused"]], test: (i, v) => i.status === v }],
+      empty: { icon: "building", title: "No centres yet", text: "Make one when a centre signs up. Leads from aspiran.in/for-coaching show under Website leads.", action: h("button.primary", { onclick: create }, "New centre") } }),
   ];
 };
 
@@ -415,7 +401,7 @@ views.members = async () => {
   const statusChip = (a) => a.status === "active" ? h("span.chip.ok", {}, "active") : h("span.chip.bad", { title: a.status_reason || "" }, "suspended");
   return [h("h2", {}, "Members"),
     h("h3", {}, "Sign-in accounts"),
-    h("p.lead", {}, "Who may use the app. Suspending switches access off on every device at its next check (the app checks on open and every few hours, and any server call refuses at once) and closes their live pod and Commons connections. Phone numbers and emails are only for finding someone here: members never see them and they are never sent to Chotu or any AI."),
+    h("p.lead", {}, "Who may use the app. Suspending switches access off on every device at its next check (the app checks on open and every few hours, and any server call refuses at once) and closes their live pod and Commons connections. Phone numbers and emails are only for finding someone here: members never see them and they are never sent to Chotu or any model."),
     h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Phone, email, username, account id or member id", value: aq, style: "min-width:300px", onchange: (e) => { views.members.aq = e.target.value; show("members"); } })),
     h("div.card.scroll", {}, accounts.length ? h("table", {}, h("tr", {}, h("th", {}, "Account"), h("th", {}, "Signed in with"), h("th", {}, "Member"), h("th", {}, "Last seen"), h("th", {}, "Access"), h("th", {}, "")),
       accounts.map((a) => h("tr", {},
@@ -522,8 +508,8 @@ views.llm = async () => {
   const c = d.controls;
   const byDay = Object.fromEntries(d.daily.map((r) => [r.day, r]));
   const days = lastDays(d.days);
-  const out = [h("h2", {}, "AI usage"), h("p.lead", {}, "Workers AI drafts news cards, checks them for safety and indexes the notes library. Only call counts, timings and token counts are logged, never prompts or outputs. Members' data is never sent to a model."),
-    !d.connected ? h("div.card", {}, h("span.chip.warn", {}, "Not connected"), " Workers AI isn't bound here (plain local dev). Calls are logged as unavailable and editors write cards by hand. Run ", h("span.mono", {}, "npm run dev:ai"), " after ", h("span.mono", {}, "wrangler login"), " to use it.") : null,
+  const out = [h("h2", {}, "Helpers and usage"), h("p.lead", {}, "Cloudflare's model service (Workers AI) drafts news cards, checks them for safety and indexes the notes library. Only call counts, timings and token counts are logged, never prompts or outputs. Members' data is never sent to a model."),
+    !d.connected ? h("div.card", {}, h("span.chip.warn", {}, "Not connected"), " The model service isn't bound here (plain local dev). Calls are logged as unavailable and editors write cards by hand. Run ", h("span.mono", {}, "npm run dev:ai"), " after ", h("span.mono", {}, "wrangler login"), " to use it.") : null,
     h("div.tiles", {},
       h("div.tile", {}, h("div.n", {}, `${num(d.today?.calls)} / ${num(c.dailyCallCap)}`), h("div.l", {}, "calls today / daily limit")),
       h("div.tile", {}, h("div.n", {}, `${num(d.today?.tokens)}`), h("div.l", {}, `tokens today / ${num(c.dailyTokenCap)} limit`)),
@@ -535,7 +521,7 @@ views.llm = async () => {
     h("h3", {}, "By purpose and model"),
     h("div.card.scroll", {}, d.byPurpose.length ? h("table", {}, h("tr", {}, ["Purpose", "Model", "Calls", "OK", "Errors", "Blocked", "Tokens in", "Tokens out", "Avg time"].map((x) => h("th", {}, x))),
       d.byPurpose.map((r) => h("tr", {}, h("td", {}, r.purpose), h("td.mono", {}, r.model), h("td", {}, num(r.calls)), h("td", {}, num(r.ok)), h("td", {}, num(r.errors)), h("td", {}, num(r.blocked)), h("td", {}, num(r.tokens_in)), h("td", {}, num(r.tokens_out)), h("td", {}, r.avg_ms ? r.avg_ms + " ms" : "")))) : h("p.muted", {}, "No calls yet.")),
-    d.voice ? [h("h3", {}, "AI voices (Fish Audio)"),
+    d.voice ? [h("h3", {}, "Voices (Fish Audio)"),
       h("div.card", {}, h("span.chip" + (d.voice.on ? "" : ".warn"), {}, d.voice.on ? "On" : d.voice.key ? "Switched off (voice flag)" : "Off: no FISH_AUDIO_API_KEY secret"),
         " " + num(d.voice.bytes) + " bytes of text spoken in " + d.days + " days, about US$" + d.voice.usd + " at US$" + d.voice.usdPerMillionBytes + " per million bytes. " + num(d.voice.cacheHits) + " plays came from the saved copy and cost nothing. Limits: " + d.voice.caps.memberDaily + " new lines per member a day, " + num(d.voice.caps.globalDaily) + " for everyone, " + num(d.voice.caps.maxChars) + " characters a line."),
       d.voice.on && can("llm:control") ? h("div.row", {}, h("button", { onclick: () => act(async () => { const r = await api("voice/warm", { body: {} }); toast("Scripted lines: " + r.made + " made, " + r.kept + " already kept" + (r.quiet ? ", " + r.quiet + " waiting for Jeetu's quiet hours to end" : "") + (r.failed ? ", " + r.failed + " failed" : "")); }) }, "Make the scripted lines now"), h("span.muted", {}, " About 30 short lines, made once and kept. A few cents.")) : null,
@@ -553,7 +539,7 @@ views.llm = async () => {
       maxTokens: h("input", { type: "number", value: c.maxTokens, min: 200, max: 8000, style: "width:100px" }), temp: h("input", { type: "number", value: c.temperature, min: 0, max: 1, step: 0.1, style: "width:80px" }),
     };
     out.push(h("h3", {}, "Controls"), h("div.card", {},
-      h("label.flag", {}, f.enabled, h("div", {}, h("b", {}, "AI on"), h("div.muted", {}, "The kill switch. Off means no model is called at all; news arrives as headline and link and editors write the card."))),
+      h("label.flag", {}, f.enabled, h("div", {}, h("b", {}, "Models on"), h("div.muted", {}, "The kill switch. Off means no model is called at all; news arrives as headline and link and editors write the card."))),
       h("label.flag", {}, f.draft, h("div", {}, h("b", {}, "Draft news cards"))),
       h("label.flag", {}, f.guard, h("div", {}, h("b", {}, "Safety check on drafts"), h("div.muted", {}, "Editors still read every card before it ships."))),
       h("label.flag", {}, f.embed, h("div", {}, h("b", {}, "Index the notes library"))),
@@ -569,7 +555,7 @@ views.llm = async () => {
       h("div.row", { style: "margin-top:8px" }, "Longest draft", f.maxTokens, "tokens · temperature", f.temp),
       h("div.row", { style: "margin-top:12px" }, h("button.primary", { onclick: () => act(() => api("llm/controls", { body: {
         enabled: f.enabled.checked, purposes: { draft: f.draft.checked, guard: f.guard.checked, embed: f.embed.checked, author: f.author.checked, chotu: f.chotu.checked }, draftModel: f.model.value, authorModel: f.authorModel.value,
-        dailyCallCap: f.calls.value, dailyTokenCap: f.tokens.value, maxTokens: f.maxTokens.value, temperature: f.temp.value } }), "AI controls saved") }, "Save controls"))));
+        dailyCallCap: f.calls.value, dailyTokenCap: f.tokens.value, maxTokens: f.maxTokens.value, temperature: f.temp.value } }), "Controls saved") }, "Save controls"))));
   }
   return out;
 };
@@ -613,7 +599,7 @@ views.growth = async () => {
     h("div.tiles", {},
       h("div.tile" + (t.verdict === "stop" ? ".warn" : ""), {}, h("div.n", {}, p(t.pct)), h("div.l", {}, `of ${num(t.joined)} pod members were active in their 4th week`)),
       h("div.tile", {}, h("div.n", {}, h("span.chip" + (verdict[0] ? "." + verdict[0] : ""), {}, t.verdict.replace("_", " "))), h("div.l", {}, verdict[1]))),
-    h("p.muted", {}, "Members who joined a pod 4 to 13 weeks ago, counted as active if they opened the app or did anything in days 21 to 27 after joining. AI pod friends are never counted."),
+    h("p.muted", {}, "Members who joined a pod 4 to 13 weeks ago, counted as active if they opened the app or did anything in days 21 to 27 after joining. Pod friends (study helpers) are never counted."),
     h("h3", {}, "Installs by source (90 days)"),
     table(["Source", "Platform", "Installs", "Signed up", "Sign-up rate"], d.installsBySource.map((r) => [r.source, r.platform, num(r.installs), num(r.signups), p(r.installs ? Math.round((r.signups / r.installs) * 100) : null)])),
     d.demoFunnel ? [h("h3", {}, `Open demo to sign-up (${d.demoFunnel.window})`),
@@ -641,49 +627,47 @@ views.growth = async () => {
 // Website leads (web.ts): what visitors told Chotu on aspiran.in as they scrolled, and their chats (kept 180 days).
 // A phone number or email is here only when the visitor said yes to the notice next to the box.
 views.leads = async () => {
-  const only = !!views.leads.only;
-  const [d, c] = await Promise.all([api("web/leads" + (only ? "?contact=1" : "")), api("web/chats")]);
+  const [d, c] = await Promise.all([api("web/leads"), api("web/chats")]);
+  const K = Kit;
   const chatN = Object.fromEntries(c.chats.map((x) => [x.visitor_id, x.n]));
-  const readBtn = (id) => chatN[id] ? h("button", { onclick: () => openChat(id) }, "Read chat (" + num(chatN[id]) + ")") : "";
-  const LABEL = { name: "Name", attempt: "Attempt", medium: "Medium", stage: "Stage", optional: "Optional", city: "City", year: "Exam year", hours: "Hours a day", worry: "Worry", sleep: "Sleep", recall: "Recall", calibration: "Calibration", pluck: "Picked", chai: "Chai", path: "Path" };
+  const LABEL = { name: "Name", attempt: "Attempt", medium: "Medium", stage: "Stage", optional: "Optional", city: "City", year: "Exam year", hours: "Hours a day", worry: "Worry", sleep: "Sleep", recall: "Recall", calibration: "Calibration", pluck: "Picked", chai: "Chai", path: "Path", centre: "Centre", students: "Students", role: "Role" };
   const csv = async () => {
     try {
-      const res = await api("web/leads?format=csv" + (only ? "&contact=1" : ""), { raw: true });
+      const res = await api("web/leads?format=csv", { raw: true });
       const a = h("a", { href: URL.createObjectURL(await res.blob()), download: "aspiran-web-leads.csv" });
       document.body.append(a); a.click(); a.remove();
     } catch (e) { toast(e.message, "err"); }
   };
-  const withContact = d.leads.filter((r) => r.contact).length;
-  return [h("h2", {}, "Website leads"),
-    h("p.lead", {}, "Visitors to aspiran.in who talked to Chotu · AI, newest first. What they shared is saved as they scroll; their chats are kept for 180 days. Messages that looked like distress are never saved (the visitor was shown helplines instead). Opening a chat is noted in the audit log."),
+  const shared = (r) => Object.entries(r.details).filter(([k]) => k !== "name").map(([k, v]) => `${LABEL[k] || k}: ${v}`).join(" · ");
+  const centres = d.leads.filter((r) => r.details.centre);
+  views.leads.st ??= {};
+  return [K.pageHead("Website leads", "Visitors to aspiran.in who talked to Chotu, newest first, and coaching centres that asked about Aspiran. What they shared is saved as they scroll; chats are kept for 180 days. Messages that looked like distress are never saved (the visitor was shown helplines instead). Opening a chat is noted in the audit log.",
+      h("button", { onclick: csv }, K.icon("download"), "Full spreadsheet (CSV)")),
     h("div#chatbox"),
     h("div.tiles", {},
-      h("div.tile", {}, h("div.n", {}, num(d.leads.length)), h("div.l", {}, only ? "visitors who left a number or email" : "visitors who shared something")),
-      h("div.tile", {}, h("div.n", {}, num(withContact)), h("div.l", {}, "left a number or email (with their yes)")),
-      h("div.tile", {}, h("div.n", {}, num(c.chats.length)), h("div.l", {}, "chats in the last 180 days"))),
-    h("div.card", {},
-      h("label", {}, h("input", { type: "checkbox", checked: only, onchange: (e) => { views.leads.only = e.target.checked; show("leads"); } }), " Only those who left a number or email"), " ",
-      h("button", { onclick: csv }, "Download as a spreadsheet (CSV)")),
-    h("div.card.scroll", {}, d.leads.length ? h("table", {},
-      h("tr", {}, ["Last seen", "Name", "Contact", "What they shared", "Language", "Came from"].map((x) => h("th", {}, x))),
-      d.leads.map((r) => h("tr", {},
-        h("td", {}, when(r.last_seen), h("div.muted", {}, "first " + when(r.first_seen))),
-        h("td", {}, r.name || h("span.muted", {}, "–")),
-        h("td", {}, r.contact ? [h("span.mono", {}, r.contact), h("div.muted", {}, "yes given " + when(r.consent_at))] : h("span.muted", {}, "–")),
-        h("td", {}, Object.entries(r.details).filter(([k]) => k !== "name").map(([k, v]) => h("div", {}, h("b", {}, (LABEL[k] || k) + ": "), String(v)))),
-        h("td", {}, r.lang === "hi" ? "Hindi" : "English"),
-        h("td", {}, r.source || h("span.muted", {}, "–"), h("div", {}, readBtn(r.visitor_id))))))
-      : h("p.muted", {}, "Nobody yet. Leads appear here as visitors talk to Chotu on aspiran.in.")),
+      K.kpi({ label: "Shared something", value: num(d.leads.length) }),
+      K.kpi({ label: "Left a number or email", value: num(d.leads.filter((r) => r.contact).length), sub: "with their yes" }),
+      K.kpi({ label: "Coaching centres", value: num(centres.length), sub: centres.length ? "from aspiran.in/for-coaching" : "none yet" }),
+      K.kpi({ label: "Chats, last 180 days", value: num(c.chats.length) })),
+    K.table([
+      { key: "last_seen", label: "Last seen", render: (r) => h("div", {}, K.when(r.last_seen), h("div.muted", {}, "first " + K.when(r.first_seen))) },
+      { key: "name", label: "Name", value: (r) => r.name || r.details.centre || "", render: (r) => r.details.centre ? h("div", {}, h("b", {}, r.details.centre), h("div", {}, h("span.chip.brand", {}, "coaching centre"))) : (r.name || h("span.muted", {}, "–")) },
+      { key: "contact", label: "Contact", value: (r) => r.contact || "", render: (r) => r.contact ? h("div", {}, h("span.mono", {}, r.contact), h("div.muted", {}, "yes given " + K.when(r.consent_at))) : h("span.muted", {}, "–") },
+      { key: "shared", label: "What they shared", sort: false, value: shared, render: (r) => Object.entries(r.details).filter(([k]) => k !== "name" && k !== "centre").map(([k, v]) => h("div", {}, h("b", {}, (LABEL[k] || k) + ": "), String(v))) },
+      { key: "lang", label: "Language", value: (r) => (r.lang === "hi" ? "Hindi" : "English") },
+      { key: "source", label: "Came from", value: (r) => r.source || "", render: (r) => h("div", {}, r.source || h("span.muted", {}, "–"), chatN[r.visitor_id] ? h("div", {}, h("button.sm", { onclick: () => openChat(r.visitor_id) }, `Read chat (${num(chatN[r.visitor_id])})`)) : null) },
+    ], { rows: d.leads, state: views.leads.st, search: (r) => [r.name, r.contact, shared(r), r.source].filter(Boolean).join(" "), searchLabel: "Search leads", noun: "leads", csv: "leads-shown.csv",
+      filters: [{ label: "Kind", all: "Students and centres", options: [["centre", "Coaching centres"], ["student", "Students"]], test: (r, v) => (v === "centre") === !!r.details.centre },
+        { label: "Contact", all: "With or without contact", options: [["yes", "Left a number or email"], ["no", "No contact"]], test: (r, v) => (v === "yes") === !!r.contact }],
+      empty: { icon: "inbox", title: "Nobody yet", text: "Leads appear here as visitors talk to Chotu on aspiran.in." } }),
     h("h3", {}, "All chats"),
-    h("div.card.scroll", {}, c.chats.length ? h("table", {},
-      h("tr", {}, ["Last message", "Visitor", "Messages", "Last thing they said", ""].map((x) => h("th", {}, x))),
-      c.chats.map((x) => h("tr", {},
-        h("td", {}, when(x.last_at)),
-        h("td", {}, x.name || h("span.muted", {}, "didn't say"), x.contact ? h("div.mono", {}, x.contact) : ""),
-        h("td", {}, num(x.n)),
-        h("td", {}, (x.last_said || "").slice(0, 140)),
-        h("td", {}, h("button", { onclick: () => openChat(x.visitor_id) }, "Read")))))
-      : h("p.muted", {}, "No chats yet.")),
+    K.table([
+      { key: "last_at", label: "Last message", render: (x) => K.when(x.last_at) },
+      { key: "name", label: "Visitor", value: (x) => x.name || "", render: (x) => h("div", {}, x.name || h("span.muted", {}, "didn't say"), x.contact ? h("div.mono", {}, x.contact) : null) },
+      { key: "n", label: "Messages", num: true },
+      { key: "last_said", label: "Last thing they said", sort: false, value: (x) => (x.last_said || "").slice(0, 140) },
+      { key: "act", label: "", sort: false, csv: false, render: (x) => h("button.sm", { onclick: () => openChat(x.visitor_id) }, "Read") },
+    ], { rows: c.chats, search: (x) => [x.name, x.contact, x.last_said].filter(Boolean).join(" "), searchLabel: "Search chats", noun: "chats", sort: ["last_at", "desc"], empty: { icon: "chat", title: "No chats yet" } }),
   ];
 };
 
@@ -694,7 +678,7 @@ async function openChat(id) {
     put(box, h("div.card", {},
       h("div", { style: "display:flex;justify-content:space-between;align-items:center" }, h("b", {}, "Chat with visitor " + id.slice(0, 8)), h("button", { onclick: () => put(box) }, "Close")),
       d.messages.map((m) => h("div", { style: "margin:8px 0" },
-        h("div.muted", {}, (m.role === "chotu" ? "Chotu · AI" : "Visitor") + " · " + when(m.at)),
+        h("div.muted", {}, (m.role === "chotu" ? "Chotu" : "Visitor") + " · " + when(m.at)),
         h("div", { style: m.role === "chotu" ? "padding-left:16px" : "font-weight:600" }, m.content)))));
     box.scrollIntoView({ behavior: "smooth" });
   } catch (e) { toast(e.message, "err"); }
@@ -836,16 +820,24 @@ views.posts = async () => {
 
 views.flags = async () => {
   const d = await api("flags");
-  const boxes = Object.fromEntries(Object.keys(d.info).map((k) => [k, h("input", { type: "checkbox", checked: d.flags[k] })]));
-  return [h("h2", {}, "Feature flags"),
-    h("p.lead", {}, "Switch a feature off for everyone, at once. The server enforces these, so they work on every app version, Android and web. Turning pod chat off disconnects everyone straight away and shows on the status page."),
-    h("div.card", {}, Object.entries(d.info).map(([k, name]) => h("label.flag", {}, boxes[k], h("div", {}, h("b", {}, name), h("div.muted.mono", {}, k)))),
-      h("div.row", { style: "margin-top:12px" }, h("button.primary", { onclick: () => {
-        const flags = Object.fromEntries(Object.entries(boxes).map(([k, b]) => [k, b.checked]));
-        const off = Object.entries(flags).filter(([k, v]) => !v && d.flags[k]).map(([k]) => d.info[k]);
-        if (off.length && !confirm("Switch off for everyone now?\n\n" + off.join("\n"))) return;
-        act(() => api("flags", { body: { flags } }), "Flags saved");
-      } }, "Save"))), await resultDaysCard()];
+  const K = Kit;
+  const row = ([k, name]) => {
+    const [title, ...rest] = String(name).split(": ");
+    const sw = K.sw(d.flags[k], async (e) => {
+      const on = e.target.checked;
+      const ok = await K.confirm({ title: `${on ? "Switch on" : "Switch off"} “${title}” for everyone?`, text: on ? "It goes live in every app at its next check." : "It stops in every app straight away.", ok: on ? "Switch on" : "Switch off", danger: !on });
+      if (!ok) { e.target.checked = !on; return; }
+      e.target.disabled = true;
+      try { await api("flags", { body: { flags: { [k]: on } } }); d.flags[k] = on; toast(`${title}: ${on ? "on" : "off"}.`, "ok"); }
+      catch (err) { e.target.checked = !on; toast(err.message, "err"); }
+      finally { e.target.disabled = false; }
+    }, title);
+    return h("div.flagrow", {}, sw, h("div", {}, h("b", {}, title), rest.length ? h("div.muted", {}, rest.join(": ")) : null, h("div.muted.mono", {}, k)));
+  };
+  const entries = Object.entries(d.info);
+  return [K.pageHead("Feature flags", "Switch a feature on or off for everyone, at once. The server enforces these, so they work on every app version, Android and web. Each switch asks first, and every change goes in the audit log."),
+    h("div.tiles", {}, K.kpi({ label: "On", value: num(entries.filter(([k]) => d.flags[k]).length) }), K.kpi({ label: "Off", value: num(entries.filter(([k]) => !d.flags[k]).length) })),
+    K.card({}, entries.map(row)), await resultDaysCard()];
 };
 
 // Result days: 72 hours of result-day mode in every app from the start of each day (IST).

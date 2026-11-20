@@ -27,7 +27,7 @@ npm run dev
 ```
 
 Optional: to let the desk's Author tab write drafts with Claude, add a third line with your own
-Anthropic key, `ANTHROPIC_API_KEY=...`, to the same `.dev.vars`, then switch it on in /admin → AI → "Write
+Anthropic key, `ANTHROPIC_API_KEY=...`, to the same `.dev.vars`, then switch it on in /admin → Helpers and usage → "Write
 library drafts". Without a key the Author tab works by copy and paste, so nothing else needs it.
 On Cloudflare the key goes in with `npx wrangler secret put ANTHROPIC_API_KEY`, never in a file.
 
@@ -315,7 +315,7 @@ live in `src/chotu.ts`. Test the pass-through with `npm run test:models` against
 **Cloud Chotu (until launch).** Phones without the on-phone model ask `POST /chotu`, which answers on Groq
 (`openai/gpt-oss-120b`, falling back to `openai/gpt-oss-20b`). Put your own key in `.dev.vars` as
 `GROQ_API_KEY=` (or `npx wrangler secret put GROQ_API_KEY --env production`). It goes through the same
-admin switches and daily caps as the other AI ("Chotu (cloud)" in /admin, AI usage). Only metadata is
+admin switches and daily caps as the other AI ("Chotu (cloud)" in /admin, Helpers and usage). Only metadata is
 logged, never the chat. Distress is checked on the phone and again here; a match never reaches the model.
 The system prompt is `src/chotu-prompt.txt`. Test with `node test/chotu.mjs`.
 
@@ -331,7 +331,7 @@ a scripted line by key (`public/app/jeetu-lines.js`), or a reply the server sign
 add `voice`, an HMAC, to replies that may be spoken). Never free text, care replies, Jeetu's quiet hours or result week.
 Each line is made once and kept in R2 under `_cache/voice/`. Caps: 40 new lines a member a day (`VOICE_MEMBER_DAILY`
 overrides), 3,000 a day overall, 1,200 characters. Calls are logged in `voice_calls` (sizes and timings only) and shown in
-Admin → AI usage, which can also pre-make the scripted lines (`POST /admin/api/voice/warm`). Off, and hidden in the apps
+Admin → Helpers and usage, which can also pre-make the scripted lines (`POST /admin/api/voice/warm`). Off, and hidden in the apps
 (`/config` `voice: false`), without the `FISH_AUDIO_API_KEY` secret or with the `voice` flag off. Voices, cost and terms:
 `artefacts/voices-2026-11-15/README.md`. Test with `npm run test:all -- voice` (runs its own stand-in for Fish Audio).
 
@@ -362,15 +362,23 @@ Approvals made with a personal key carry that person's name. Shared keys (`EDITO
 | Moderator | reports, safety queue, members (pause chat, move, remove) |
 | Pod lead | view analytics |
 
-Sections: overview, content and version history (any version can be restored as a draft),
+Sections, grouped in the left rail: **Home** (`GET /admin/api/dashboard`: what needs someone first, then accounts,
+activity, pods, Plus, money for roles that see Payments, today's Chai, the library, helper usage, website leads and
+coaching centres; counts only), content and version history (any version can be restored as a draft),
 moderation, safety queue (escalating needs a note saying who it went to; "Send care" posts
-helplines privately), members, data requests (DPDP export and erasure), AI usage and controls
+helplines privately), members, data requests (DPDP export and erasure), helpers and usage with their controls
 (master switch, per-purpose switches, daily caps, model and temperature), analytics (daily
-counts only, no identities), feature flags, announcements, status and incidents, staff, backups
+counts only, no identities), growth, website leads (searchable, with a coaching-centre filter), coaching centres,
+payments, feature flags, announcements, status and incidents, staff, languages, backups
 and the audit log. Every change is in the audit log; keys and message text never are.
 
-**Feature flags** are enforced by the server, so they work on old app versions too. Turning
-pod chat off closes every open chat.
+**Feature flags** are enforced by the server, so they work on old app versions too. Each one is a switch that asks
+before it changes and saves only that flag. Turning pod chat off closes every open chat.
+
+**One look for every staff page.** `src/console-kit.html` holds the shared styles (the app's palette, light and dark,
+Martel headings) and small helpers (`window.Kit`: tiles, cards, tables with search, sort, filters and CSV, empty states,
+dialogs, the side rail). The server pastes it into Admin and the coaching-centre console where the page says
+`<!--KIT-->`; the News desk uses the same palette. `npm run check` also parses every staff page's script.
 
 **Announcements** show as a banner in the web app and can also be posted in every pod, which
 reaches the Android app. Real push notifications need your own FCM or Web Push keys; not set up.
@@ -404,14 +412,17 @@ Every table carries `institute_id`. Logos and doubt photos go in the media bucke
 - `/inst/*` for members: `me`, `join` (code, chosen name, consent tick, 18+ tick), `leave`, `feed` and `chat`
   (polled every 10 seconds), `chat/report`, `doubts` (with one JPEG photo under 1.5 MB), `plan` and `plan/done`,
   `content`, `attempts`, `progress` (your own numbers only). `/inst/logo/<id>` is public.
-- `/inst/admin/*` for teachers and up: overview, batches, codes, roster, members, branding, logo, reported, messages
+- `/inst/admin/*` for teachers and up: overview, dashboard (activity by day, batches at a glance, doubts waiting
+  longest, lately, a getting-started checklist), batches, codes, roster, members, branding, logo, reported, messages
   (hide), content, plans, analytics and `analytics.csv`. Each checks the role it needs.
 - `/admin/api/institutes` for Aspiran staff (the admin key, Admin role): list, create (gives back a one-time owner
   code, 30 days), `/<id>/owner-code` for a new one, `/<id>/status` to pause or resume. Paused, its members get
   "paused for now" and its codes stop working. Each is in the audit log.
 
 **The console** is `/institute` (`src/institute.html`), signed in with the person's own Aspiran account. Its left rail
-shows only what their role can use. At the bottom, "Aspiran staff: set up an institute" takes the admin key.
+shows only what their role can use: Dashboard, Doubts, Chat and announcements, Batches and invites (codes, links and a
+ready WhatsApp message), People, Study plans, Notes and tests, Analytics, Branding (with a live preview). Tables search,
+sort, filter and download as CSV in the browser. Aspiran staff set centres up in Admin → Coaching centres.
 
 **The student side** is `public/app/institute.js`: `#inst` (or `#inst/<code>` from an invite link) to join, then the
 institute's name, colour and logo, announcements and batch chat, doubts, the plan, its content and their own progress.

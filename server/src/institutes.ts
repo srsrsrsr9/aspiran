@@ -554,6 +554,8 @@ export interface StudentStats {
   sets: number; answered: number; right: number; accuracy: number | null; weakTopics: { nodeId: string; topic: string; answered: number; pct: number }[];
   topics: Record<string, { answered: number; right: number }>; tests: { contentId: string; right: number; total: number; pct: number }[];
   doubtsRaised: number; doubtsResolved: number; planDone: number; planDue: number; quiet: boolean;
+  /** IST days (last 14) with anything at all from them. Used by the dashboard's chart; not sent with analytics. */
+  activeDays: string[];
 }
 
 async function studentStats(env: Env, inst: string, students: StudentRow[]): Promise<StudentStats[]> {
@@ -593,7 +595,7 @@ async function studentStats(env: Env, inst: string, students: StudentRow[]): Pro
         .map(([id, t]) => ({ nodeId: id, topic: nodeName(id)!, answered: t.answered, pct: Math.round((t.right / t.answered) * 100) })).sort((a, b) => a.pct - b.pct),
       topics, tests: [...firstTest.values()].map((a) => ({ contentId: a.content_id, right: a.right_n, total: a.total, pct: Math.round((a.right_n / a.total) * 100) })),
       doubtsRaised: mine(doubts).length, doubtsResolved: mine(doubts).filter((d) => d.status === "resolved").length,
-      planDone: mine(done)[0]?.n ?? 0, planDue: dueN, quiet: !lastSeen || lastSeen < quietBefore,
+      planDone: mine(done)[0]?.n ?? 0, planDue: dueN, quiet: !lastSeen || lastSeen < quietBefore, activeDays: [...days].sort(),
     };
   });
 }
@@ -617,7 +619,7 @@ async function analytics(env: Env, inst: string, batch: string | null) {
   const doubts = await env.DB.prepare(`SELECT COUNT(*) AS raised, SUM(status = 'resolved') AS resolved, SUM(status = 'open') AS open FROM inst_doubts WHERE institute_id = ? ${batch ? "AND batch_id = ?" : ""}`)
     .bind(...(batch ? [inst, batch] : [inst])).first<any>();
   return {
-    students: stats.map(({ topics: _t, ...s }) => s), coverage,
+    students: stats.map(({ topics: _t, activeDays: _d, ...s }) => s), coverage,
     papers: Object.entries(byPaper).map(([paper, p]) => ({ paper, topics: p.topics, answered: p.answered, pct: Math.round((p.right / p.answered) * 100) })),
     weakTopics: coverage.filter((t) => t.answered >= 5 && t.pct < 60), tests,
     doubts: { raised: doubts?.raised ?? 0, resolved: doubts?.resolved ?? 0, open: doubts?.open ?? 0 },
@@ -647,6 +649,47 @@ async function adminRoute(req: Request, env: Env, sub: string, url: URL, body: a
         staff: await count("SELECT COUNT(*) n FROM inst_members WHERE institute_id = ? AND role != 'student' AND status = 'active'", inst.id),
         openDoubts: await count("SELECT COUNT(*) n FROM inst_doubts WHERE institute_id = ? AND status = 'open'", inst.id),
         reported: await count("SELECT COUNT(*) n FROM inst_messages WHERE institute_id = ? AND reported_at IS NOT NULL AND hidden_at IS NULL", inst.id),
+      },
+    });
+  }
+
+  // The console's home: activity by day, each batch at a glance, doubts waiting longest, and what happened lately.
+  if (sub === "dashboard" && GET) {
+    const all = async <T = any>(sql: string, ...a: unknown[]) => (await env.DB.prepare(sql).bind(...a).all<T>()).results;
+    const students = await all<StudentRow>("SELECT member_id, display_name, batch_id, joined_at, last_active_at FROM inst_members WHERE institute_id = ? AND role = 'student' AND status = 'active'", inst.id);
+    const stats = await studentStats(env, inst.id, students);
+    const days = Array.from({ length: 14 }, (_, i) => istDay(new Date(Date.now() - (13 - i) * 86400_000)));
+    const daily = days.map((d) => ({ day: d, active: stats.filter((s) => s.activeDays.includes(d)).length }));
+    const open = await all<{ batch_id: string | null; n: number }>("SELECT batch_id, COUNT(*) AS n FROM inst_doubts WHERE institute_id = ? AND status = 'open' GROUP BY batch_id", inst.id);
+    const batches = (await all<any>("SELECT id, name, exam_year, archived_at FROM inst_batches WHERE institute_id = ? AND archived_at IS NULL ORDER BY created_at", inst.id)).map((b) => {
+      const mine = stats.filter((s) => s.batchId === b.id);
+      return { id: b.id, name: b.name, examYear: b.exam_year, students: mine.length, active14: mine.filter((s) => s.daysActive14 > 0).length,
+        quiet: mine.filter((s) => s.quiet).length, openDoubts: open.find((o) => o.batch_id === b.id)?.n ?? 0 };
+    });
+    const waiting = (await all<any>(`SELECT d.id, d.batch_id, d.name, d.text, d.node_id, d.created_at, d.photo_key IS NOT NULL AS photo,
+      (SELECT COUNT(*) FROM inst_doubt_replies r WHERE r.doubt_id = d.id AND r.role = 'ai') AS helper
+      FROM inst_doubts d WHERE d.institute_id = ? AND d.status = 'open' ORDER BY d.created_at LIMIT 6`, inst.id))
+      .map((d) => ({ id: d.id, batchId: d.batch_id, name: d.name, text: String(d.text).slice(0, 200), topic: nodeName(d.node_id), at: d.created_at, photo: !!d.photo, helperAnswered: d.helper > 0 }));
+    // Lately: who joined, doubts asked, announcements and answers, newest first. Names only, as the institute already sees them.
+    const recent = [
+      ...(await all<any>("SELECT display_name AS name, role, batch_id, joined_at AS at FROM inst_members WHERE institute_id = ? AND status = 'active' ORDER BY joined_at DESC LIMIT 8", inst.id)).map((r) => ({ kind: "joined", name: r.name, role: r.role, batchId: r.batch_id, at: r.at })),
+      ...(await all<any>("SELECT name, batch_id, text, created_at AS at FROM inst_doubts WHERE institute_id = ? ORDER BY created_at DESC LIMIT 8", inst.id)).map((r) => ({ kind: "doubt", name: r.name, batchId: r.batch_id, text: String(r.text).slice(0, 120), at: r.at })),
+      ...(await all<any>("SELECT name, batch_id, text, at FROM inst_messages WHERE institute_id = ? AND kind = 'announcement' AND hidden_at IS NULL ORDER BY at DESC LIMIT 5", inst.id)).map((r) => ({ kind: "announcement", name: r.name, batchId: r.batch_id, text: String(r.text).slice(0, 120), at: r.at })),
+      ...(await all<any>("SELECT name, at FROM inst_doubt_replies WHERE institute_id = ? AND role = 'teacher' ORDER BY at DESC LIMIT 8", inst.id)).map((r) => ({ kind: "answered", name: r.name, at: r.at })),
+    ].sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 12);
+    const has = async (sql: string) => !!(await env.DB.prepare(sql).bind(inst.id).first());
+    return json({
+      daily, batches, waiting, recent,
+      totals: { students: stats.length, active14: stats.filter((s) => s.daysActive14 > 0).length, quiet: stats.filter((s) => s.quiet).length,
+        openDoubts: open.reduce((n, o) => n + o.n, 0), oldestOpen: waiting[0]?.at ?? null },
+      // Getting started: what a new institute still has to do.
+      checklist: {
+        batch: batches.length > 0, students: stats.length > 0,
+        teacher: await has("SELECT 1 FROM inst_members WHERE institute_id = ? AND role IN ('teacher', 'admin') AND status = 'active'"),
+        branding: !!(inst.brand_color || inst.logo_key),
+        announcement: await has("SELECT 1 FROM inst_messages WHERE institute_id = ? AND kind = 'announcement'"),
+        content: await has("SELECT 1 FROM inst_content WHERE institute_id = ? AND status = 'published'"),
+        plan: await has("SELECT 1 FROM inst_plans WHERE institute_id = ?"),
       },
     });
   }
