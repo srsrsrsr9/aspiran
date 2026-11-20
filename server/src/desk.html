@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>News Desk</title>
 <style>
-  :root { --bg:#FFF8F3; --card:#fff; --ink:#221A14; --muted:#6B5D52; --line:#E8DDD3; --brand:#8D4F01; --onBrand:#fff; --amber:#FCE8C3; --ok:#E3F1E1; --okInk:#2E7D32; --bad:#F8E1DE; --badInk:#B3261E; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#1A1410; --card:#251D17; --ink:#F0E6DD; --muted:#B8A99C; --line:#3A2F27; --brand:#FFB870; --onBrand:#1A1410; --amber:#4A3712; --ok:#22361F; --okInk:#8BD18F; --bad:#43201B; --badInk:#F2A49B; } }
+  /* Same palette and heading font as Admin and the coaching-centre console (src/console-kit.html). */
+  @font-face { font-family:"Martel"; font-weight:800; font-display:swap; src:url(/app/fonts/martel-latin-800-normal.woff2) format("woff2"); unicode-range:U+0000-00FF, U+2000-206F, U+20B9; }
+  :root { --bg:#F7F2EA; --card:#FFFDF9; --ink:#2A1B12; --muted:#6E5A4C; --line:#E4D8C8; --brand:#9A4E0E; --onBrand:#fff; --amber:#F6E2C9; --ok:#E3EAD9; --okInk:#3E5631; --bad:#F8E1DE; --badInk:#A12E1F; color-scheme:light; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --onBrand:#1B1205; --amber:#3B2716; --ok:#26301C; --okInk:#C4DCB0; --bad:#3D211D; --badInk:#F2B8AE; color-scheme:dark; } }
+  :root[data-theme="dark"] { --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --onBrand:#1B1205; --amber:#3B2716; --ok:#26301C; --okInk:#C4DCB0; --bad:#3D211D; --badInk:#F2B8AE; color-scheme:dark; }
+  header h1, h2 { font-family:"Martel", Georgia, "Noto Serif Devanagari", serif; font-weight:800; }
   * { box-sizing: border-box; }
   [hidden] { display:none !important; }
   body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, "Noto Sans Devanagari", sans-serif; }
@@ -155,7 +159,7 @@
   <section id="tab-add" hidden>
     <div class="card">
       <h3>Add a story by hand</h3>
-      <p class="muted">For newspapers: their headline and link, our own words. Paste the facts you checked as source text; the AI drafts from that only.</p>
+      <p class="muted">For newspapers: their headline and link, our own words. Paste the facts you checked as source text; the draft is written from that only.</p>
       <p><input id="a-title" placeholder="Headline" style="width:100%"></p>
       <div class="row"><input id="a-source" placeholder="Source name, e.g. The Hindu"><input id="a-url" placeholder="https://link" style="flex:1"></div>
       <p><textarea id="a-text" rows="8" placeholder="Source text: the facts, in your words or from an official release"></textarea></p>
