@@ -12,7 +12,8 @@ import { type Env } from "./shared";
  * Only plain text. The address is used to send this one message and isn't logged.
  */
 
-export type Mail = { to: string; subject: string; text: string };
+/** headers: extra mail headers (List-Unsubscribe on the day-3 email); Resend passes them on. */
+export type Mail = { to: string; subject: string; text: string; headers?: Record<string, string> };
 
 /** The last few messages, in dev only. */
 const outbox: (Mail & { at: string })[] = [];
@@ -33,7 +34,7 @@ export async function sendMail(env: Env, m: Mail): Promise<boolean> {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "content-type": "application/json", authorization: "Bearer " + env.RESEND_API_KEY },
-      body: JSON.stringify({ from: env.MAIL_FROM, to: [m.to], subject: m.subject, text: m.text }),
+      body: JSON.stringify({ from: env.MAIL_FROM, to: [m.to], subject: m.subject, text: m.text, ...(m.headers ? { headers: m.headers } : {}) }),
     }).catch(() => null);
     if (!res?.ok) console.warn("mail: Resend refused a message", res?.status ?? "offline");
     return !!res?.ok;

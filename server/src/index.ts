@@ -34,6 +34,7 @@ import { roadmapRoute } from "./roadmap";
 
 import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
+import { sendRecalls } from "./try-recall";
 import { learnRoute } from "./learn";
 import { instituteRoute } from "./institutes";
 import INSTITUTE_HTML from "./institute.html";
@@ -336,6 +337,9 @@ export default {
         // Then each open room's pinned question, from what was just published.
         .then(() => runJob(env, "pins", at)).then(log("pins"), fail("pins")));
     }
+    // The open demo's day-3 emails (try-recall.ts): late morning, outside the quiet hours, a few slots so a busy day
+    // (or a Resend hiccup) catches up. Each run sends at most 40.
+    if (["09:00", "09:30", "10:00", "11:00", "12:00", "17:00"].includes(hm)) ctx.waitUntil(sendRecalls(env).then(log("day-3 emails"), fail("day-3 emails")));
     // Chotu's host schedule (Mon goal, Wed/Sat answer hour, Fri quiz, Sun wins) and the welcome/quiet checks.
     if (!OLD[event.cron] || hm !== "05:30") ctx.waitUntil(runJob(env, "host", at).then(log("host"), fail("host")));
   },

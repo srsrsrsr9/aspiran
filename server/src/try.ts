@@ -9,7 +9,8 @@
 // Feedback, because the sample is also how we listen. No account, no member id; a random session id from the browser.
 //   POST /try/feedback        { sessionId, pathId, question, answer?, text?, lang }: one answer, replaced if asked again
 //   POST /try/contact         { sessionId, pathId, contact, consent: true, consentText }: only if they chose to leave one
-//   POST /try/forget          { sessionId }: deletes everything that session sent (the end screen's button)
+//   POST /try/forget          { sessionId }: deletes everything that session sent (the end screen's button), the day-3 email too
+//   /try/recall...            the day-3 email: try-recall.ts
 //   GET  /try/summary?path=   chip answers only, as counts, once at least MIN_SHOWN people answered (never free text)
 //
 // Like the Free Shelf, this needs no account and follows the library flag: if Ops pause the library, /try pauses too.
@@ -18,6 +19,7 @@ import { type LibraryRow, publicLibrary } from "./content";
 import { staffFrom, flags, ensureSchema, sha256Hex } from "./staff";
 import { type Env, HELPLINES, bad, distress, istDay, json } from "./shared";
 import { extraDistress } from "./langs";
+import { recallRoute } from "./try-recall";
 
 type Item = { id: string; kind: string; languages: string[]; data: any };
 
@@ -52,7 +54,8 @@ async function feedback(req: Request, env: Env, path: string): Promise<Response>
   if (path === "/try/forget") {
     const a = await env.DB.prepare("DELETE FROM try_feedback WHERE session_id = ?").bind(b.sessionId).run();
     const c = await env.DB.prepare("DELETE FROM try_contacts WHERE session_id = ?").bind(b.sessionId).run();
-    return json({ ok: true, deleted: (a.meta.changes ?? 0) + (c.meta.changes ?? 0) });
+    const r = await env.DB.prepare("DELETE FROM try_recall WHERE session_id = ?").bind(b.sessionId).run();
+    return json({ ok: true, deleted: (a.meta.changes ?? 0) + (c.meta.changes ?? 0) + (r.meta.changes ?? 0) });
   }
   const pathId = str(b.pathId, 64);
   if (!/^[\w-]{3,64}$/.test(pathId)) return bad("pathId is required");
@@ -130,6 +133,7 @@ export async function tryFeedbackRows(env: Env, limit: number) {
 
 export async function tryRoute(req: Request, env: Env, path: string, url: URL): Promise<Response | null> {
   if (path !== "/try" && !path.startsWith("/try/")) return null;
+  { const r = await recallRoute(req, env, path); if (r) return r; }
   if (req.method === "POST" && ["/try/feedback", "/try/contact", "/try/forget"].includes(path)) return feedback(req, env, path);
   if (req.method !== "GET") return json({ error: "Use GET." }, 405);
   if (path === "/try/summary") return summary(env, str(url.searchParams.get("path"), 64));

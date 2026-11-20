@@ -239,6 +239,13 @@ function showCare() {
 // --- Loading -------------------------------------------------------------------------------------------------------
 
 let root = null;
+/** The download index.html started for this url, if any (once: a later visit to the same page fetches afresh). */
+function takePrefetch(url) {
+  const pre = window.__tryPrefetch;
+  if (!pre || pre.url !== url) return null;
+  window.__tryPrefetch = null;
+  return pre.p;
+}
 async function load(id, preview) {
   const headers = {};
   if (preview) {
@@ -253,6 +260,11 @@ async function load(id, preview) {
       if (list.length === 1) { location.replace("#try/" + encodeURIComponent(list[0].id)); return null; }
       return { list };
     }
+    // index.html started this download with the page; use it once.
+    const pre = !preview ? takePrefetch(`/try/${encodeURIComponent(id)}`) : null;
+    const got = pre ? await pre : null;
+    if (got?.status === 200) { C.store.set("try:data:" + id, got.d); return got.d; }
+    if (got?.status === 404) return { closed: true };
     const r = await fetch(`/try/${encodeURIComponent(id)}${preview ? "?preview=1" : ""}`, { headers });
     if (r.ok) { const d = await r.json(); C.store.set("try:data:" + id + (preview ? ":preview" : ""), d); return d; }
     if (r.status === 404 || r.status === 401) return { closed: true };
@@ -268,6 +280,8 @@ export function viewTry(arg = "") {
   langFromLink();
   if (!id) cur = null;
   root = h("div.try.col", h("p.muted", u("loading")));
+  // Drawn again for the same topic (the app redraws when its settings arrive): no second download, no "Loading".
+  if (id && !preview && cur?.id === id && !cur.draft) { draw(); return root; }
   load(id, preview).then((d) => {
     if (!d || !root.isConnected) return;
     if (d.list) { if (!C.profile() && opened !== "list") { opened = "list"; track("try_open", {}); } return put(root, listView(d.list)); }
@@ -689,7 +703,8 @@ const STEP = {
           h("p", u("mapMet")),
           h("p.small.muted", C.profile() ? u("keepMember") : u("keepVisitor")),
           !C.profile() && h("a.btn.primary", { href: "#", onclick: () => joining("keep") }, u("joinKeep", cardsHere())),
-          C.profile() && h("div.row", h("a.btn", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")))));
+          C.profile() && h("div.row", h("a.btn", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")))),
+        kept && day3Box("keep"));
     };
     drawK();
     return [head(st), joke(st), h("p.muted", L(st.lead)), box];
@@ -704,6 +719,7 @@ const STEP = {
       h("h1", { tabindex: "-1" }, L(st.title)),
       pause(st),
       h("div.card", h("h3", { style: { marginTop: 0 } }, u("canDo")), h("ul", d.canDo.filter((x) => r === "full" || !x.fullOnly).map((x) => h("li", L(x))))),
+      day3Box("finish"),
       member
         ? h("div.row", h("a.btn.primary", { href: "#review" }, u("openReview")), h("a.btn", { href: "#map" }, u("openMap")), h("a.btn", { href: "#try" }, u("nextTopic")))
         : h("section.card.try-join-end",
@@ -794,6 +810,182 @@ function keepCards(st, cards = st.cards) {
   return { on: day, n: cards.length, due: new Date((due ?? day) + "T12:00:00").toLocaleDateString(lang() === "hi" ? "hi-IN" : "en-IN", { day: "numeric", month: "long" }) };
 }
 
+// --- The day-3 email (server/src/try-recall.ts) -----------------------------------------------------------------------
+// A visitor who kept cards can ask for one email, three days later, with 5 questions from the topic (their own cards
+// first). The email opens #tryback/<code>: the questions, then privately "You kept 4 of 5", then join and keep them.
+// The address is used for that one email and deleted when it's sent; cancelling here (or "Delete what I sent") deletes it.
+
+const D3 = {
+  en: {
+    title: (n, wd) => `We'll ask you ${n} of these again on ${wd}.`,
+    lead: "Three days is about when new facts start to slip. One email with the questions; answer them in your browser and see how many you kept.",
+    label: "Your email", consent: (wd) => `Email me these questions once, on ${wd}.`, button: "Send them to me",
+    privacy: "We use your address for this one email and delete it as soon as it's sent. No newsletter, never shared. You can cancel here until then.",
+    tick: "Tick the box first, so we know you want the email.", signed: (d) => `Look for an email from Aspiran on ${d}.`,
+    signedNote: "One email, then your address is deleted.", cancel: "Cancel it", cancelled: "Cancelled. Your address is deleted.",
+    backTitle: "Three days on: what stayed?", backLead: (t, n, d) => `On ${d} you tried ${t}. Here are ${n} of its questions again. No clock, and only you see how it went.`,
+    start: "Start", qOf: (i, n) => `Question ${i} of ${n}`, next: "Next", seeKept: "See what you kept",
+    kept: (k, n) => `You kept ${k} of ${n} after 3 days.`,
+    keptAll: "All of them. Pulling them back today makes them last longer still.",
+    keptSome: "That's what a little spacing does. The ones you missed are the ones worth seeing again soon.",
+    keptFew: "Three days is when things slip. Missing one now and then seeing the answer is what makes it stick next time.",
+    onlyYou: "Only you see this.", keepTitle: "Keep these cards",
+    keepLead: (n) => `Join free and these ${n} cards go into your Review, each timed to come back just before you'd forget it. Anything you kept from the topic in this browser comes too.`,
+    keepBtn: "Join free, keep your cards", inReview: "They're in your Review now, with the rest of your queue.", openReview: "Open Review",
+    carryOn: "Carry on with the topic", expired: "This link has expired, or the questions were deleted.", tryTopic: "Try one topic",
+    right: "Right.", notQuite: "Not quite.",
+  },
+  hi: {
+    title: (n, wd) => `${wd} को हम इनमें से ${n} सवाल फिर पूछेंगे।`,
+    lead: "तीन दिन में नई बातें अक्सर फिसलने लगती हैं। एक ईमेल, उसमें सवाल; browser में जवाब दीजिए और देखिए कितना याद रहा।",
+    label: "आपका ईमेल", consent: (wd) => `${wd} को ये सवाल मुझे एक बार ईमेल कीजिए।`, button: "मुझे भेजिए",
+    privacy: "आपका पता सिर्फ़ इसी एक ईमेल के लिए है, भेजते ही मिटा दिया जाएगा। कोई newsletter नहीं, किसी को नहीं दिया जाएगा। तब तक आप यहीं रद्द कर सकते हैं।",
+    tick: "पहले box पर tick कीजिए, ताकि हमें पता हो कि आपको ईमेल चाहिए।", signed: (d) => `${d} को Aspiran का ईमेल देखिए।`,
+    signedNote: "एक ईमेल, फिर आपका पता मिटा दिया जाएगा।", cancel: "रद्द कीजिए", cancelled: "रद्द हो गया। आपका पता मिटा दिया गया।",
+    backTitle: "तीन दिन बाद: क्या याद रहा?", backLead: (t, n, d) => `${d} को आपने ${t} आज़माया था। उसके ${n} सवाल फिर से। कोई घड़ी नहीं, और नतीजा सिर्फ़ आप देखेंगे।`,
+    start: "शुरू कीजिए", qOf: (i, n) => `सवाल ${i} / ${n}`, next: "आगे", seeKept: "देखिए क्या याद रहा",
+    kept: (k, n) => `तीन दिन बाद ${n} में से ${k} याद रहे।`,
+    keptAll: "सब के सब। आज इन्हें फिर याद करने से ये और लंबे टिकेंगे।",
+    keptSome: "थोड़े अंतराल का यही असर है। जो छूटे, वही जल्दी फिर देखने लायक हैं।",
+    keptFew: "तीन दिन में बातें फिसलती ही हैं। अभी चूकना और फिर जवाब देखना ही अगली बार याद रखवाता है।",
+    onlyYou: "यह सिर्फ़ आप देख रहे हैं।", keepTitle: "ये cards रखिए",
+    keepLead: (n) => `मुफ़्त जुड़िए, और ये ${n} cards आपके Review में जाएँगे, हर एक ठीक भूलने से पहले लौटने के लिए। इस browser में topic से रखे cards भी साथ आएँगे।`,
+    keepBtn: "मुफ़्त जुड़िए, अपने cards रखिए", inReview: "ये अब आपके Review में हैं।", openReview: "Review खोलिए",
+    carryOn: "Topic में आगे बढ़िए", expired: "यह link पुराना हो गया है, या सवाल मिटा दिए गए।", tryTopic: "एक topic आज़माइए",
+    right: "सही।", notQuite: "पूरा सही नहीं।",
+  },
+};
+let d3Lang = null; // the return page reads in the email's language
+const d3 = (k, ...a) => { const v = (D3[d3Lang ?? lang()] ?? D3.en)[k] ?? D3.en[k]; return typeof v === "function" ? v(...a) : v; };
+const plusDays = (day, n) => new Date(Date.parse(day + "T12:00:00Z") + n * 86400e3).toISOString().slice(0, 10);
+const dayName = (day, long = false, l = d3Lang ?? lang()) => new Date(day + "T12:00:00+05:30").toLocaleDateString(l === "hi" ? "hi-IN" : "en-IN",
+  long ? { weekday: "long", day: "numeric", month: "long" } : { weekday: "long" });
+/** The cards this route's Keep step made, by id (the server adds the topic's others up to five). */
+const myCardIds = () => route().steps.map(stepById).filter((s) => s?.type === "keep")
+  .flatMap((st) => { const v = view(st); return v.onlyCards ? v.cards.filter((c) => v.onlyCards.includes(c.id)) : v.cards; }).map((c) => c.id);
+const allCards = () => cur.data.steps.filter((s) => s.type === "keep").flatMap((s) => s.cards ?? []);
+
+/** The offer: shown to visitors only, under the kept cards and on the finish screen. */
+function day3Box(where) {
+  if (C.profile() || !cur || cur.draft || !allCards().length) return null;
+  const box = h("div.card.try-day3");
+  if (!getA("day3:offer:" + where)) { setA("day3:offer:" + where, true); track("try_day3_offer", { where }); }
+  const n = Math.min(5, allCards().length), due = plusDays(C.today(), 3);
+  const drawD = (note = "") => {
+    const s = getA("day3:signed");
+    if (s) {
+      put(box, h("p", { style: { marginTop: 0 } }, h("strong", "✓ " + d3("signed", dayName(s.due, true)))),
+        h("p.small.muted", d3("signedNote"), " ", h("button.ghost.small", { onclick: async () => {
+          const r = await post(`/try/recall/${s.code}/stop`, {});
+          if (!r?.ok) return C.toast?.(u("offline"));
+          setA("day3:signed", null); track("try_day3_cancel"); drawD(d3("cancelled"));
+        } }, d3("cancel"))));
+      return;
+    }
+    const input = h("input", { type: "email", inputmode: "email", autocomplete: "email", placeholder: d3("label"), "aria-label": d3("label") });
+    const consent = h("input", { type: "checkbox", id: "try-day3-" + where });
+    const hp = h("input", { type: "text", name: "company", tabindex: "-1", autocomplete: "off", style: { position: "absolute", left: "-9999px" }, "aria-hidden": "true" });
+    const msg = h("p.small", { role: "status" }, note);
+    const send3 = async () => {
+      if (!input.value.trim()) return input.focus();
+      if (!consent.checked) { msg.textContent = d3("tick"); return; }
+      const r = await post("/try/recall", { email: input.value.trim(), consent: true, consentText: d3("consent", dayName(due)) + " " + d3("privacy"), cards: myCardIds(), company: hp.value });
+      if (r?.ok && r.code) { setA("day3:signed", { code: r.code, due: r.due ?? due }); track("try_day3_signup", { where }); drawD(); }
+      else msg.textContent = r?.error ?? u("offline");
+    };
+    put(box, h("h3", { style: { marginTop: 0 } }, d3("title", n, dayName(due))), h("p.small", d3("lead")),
+      h("form", { onsubmit: (e) => { e.preventDefault(); send3(); } }, input, hp,
+        h("label.small", { for: "try-day3-" + where, style: { display: "block", margin: "8px 0" } }, consent, " ", d3("consent", dayName(due))),
+        h("button.primary", { type: "submit" }, d3("button"))),
+      msg, h("p.small.muted", { style: { marginBottom: 0 } }, d3("privacy")));
+  };
+  drawD();
+  return box;
+}
+
+/** #tryback/<code>: the day-3 page the email links to. Works with no account, on any device. */
+export function viewTryBack(arg = "") {
+  const code = String(arg).split("?")[0];
+  const box = h("div.try.col", h("p.muted", u("loading")));
+  const url = "/try/recall/" + encodeURIComponent(code);
+  (takePrefetch(url) ?? fetch(url).then((r) => r.json().then((d) => ({ status: r.status, d }))).catch(() => null)).then((got) => {
+    if (!got || got.status !== 200) {
+      d3Lang = null;
+      return put(box, h("h1", d3("backTitle")), h("p", got ? d3("expired") : u("offline")), h("a.btn.primary", { href: "#try" }, d3("tryTopic")));
+    }
+    backPage(box, code, got.d);
+  });
+  return box;
+}
+
+function backPage(box, code, d) {
+  const l = C.profile() ? C.lang() : d.lang;
+  d3Lang = d.languages.includes(l) ? l : "en";
+  const T = (v) => (v && typeof v === "object" ? v[d3Lang] || v.en || "" : v ?? "");
+  const key = "tryback:" + code;
+  const st = () => C.store.get(key, { at: -1, picks: {}, result: d.result });
+  const save3 = (s) => C.store.set(key, s);
+  if (!C.store.get(key + ":open")) { C.store.set(key + ":open", true); try { C.track?.("try_day3_open", { path: d.pathId }); } catch {} }
+  const n = d.cards.length, title = T(d.short) || T(d.title);
+  const finishUp = async () => {
+    const s = st();
+    for (const c of d.cards) gradeBack(d, c, s.picks[c.id] === c.answer);
+    const r = await fetch(`/try/recall/${encodeURIComponent(code)}/answers`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ picks: s.picks }) })
+      .then((x) => x.json()).catch(() => null);
+    const kept = d.cards.filter((c) => s.picks[c.id] === c.answer).length;
+    s.result = { kept: r?.kept ?? kept, of: r?.of ?? n }; save3(s);
+    if (!r?.again) try { C.track?.("try_day3_done", { path: d.pathId, kept: s.result.kept, of: s.result.of }); } catch {}
+    drawB();
+  };
+  const drawB = () => {
+    const s = st();
+    document.documentElement.lang = d3Lang;
+    if (s.result) return put(box, resultView(d, s.result, title));
+    if (s.at < 0) return put(box, h("h1", { tabindex: "-1" }, d3("backTitle")),
+      h("p", d3("backLead", title, n, dayName(d.madeOn, true))),
+      h("button.primary", { onclick: () => { s.at = 0; save3(s); drawB(); } }, d3("start") + " →"));
+    const c = d.cards[s.at], pick = s.picks[c.id];
+    put(box, h("div.small.muted", d3("qOf", s.at + 1, n)),
+      h("div.card", h("p", h("strong", T(c.q))),
+        c.options.map((o, i) => h("button.opt" + (pick == null ? "" : i === c.answer ? ".right" : i === pick ? ".wrong" : ""),
+          { disabled: pick != null, onclick: () => { s.picks[c.id] = i; save3(s); drawB(); } }, T(o))),
+        pick != null && h("p.try-why", { role: "status" }, h("strong", (pick === c.answer ? d3("right") : d3("notQuite")) + " "), T(c.why))),
+      pick != null && h("button.primary", { onclick: () => { if (s.at + 1 < n) { s.at++; save3(s); drawB(); } else finishUp(); } },
+        s.at + 1 < n ? d3("next") + " →" : d3("seeKept")));
+  };
+  drawB();
+}
+
+function resultView(d, r, title) {
+  const member = !!C.profile();
+  const line = r.kept >= r.of ? d3("keptAll") : r.kept * 2 >= r.of ? d3("keptSome") : d3("keptFew");
+  return [
+    h("h1", { tabindex: "-1" }, d3("kept", r.kept, r.of)),
+    h("p", line), h("p.small.muted", d3("onlyYou")),
+    member
+      ? h("div.card", h("p", { style: { marginTop: 0 } }, d3("inReview")), h("a.btn.primary", { href: "#review" }, d3("openReview")))
+      : h("section.card.try-join-end",
+        h("h2", { style: { marginTop: 0 } }, d3("keepTitle")),
+        h("p", d3("keepLead", r.of)),
+        h("a.btn.primary.try-join-big", { href: "#", onclick: () => {
+          const n = Object.keys(C.store.get("reviews", {}) ?? {}).filter((k) => k.startsWith(d.pathId + ":")).length;
+          C.store.set("try:joining", { path: d.pathId, title, n, lang: d3Lang, at: Date.now() });
+          try { C.track?.("try_day3_join", { path: d.pathId }); } catch {}
+        } }, d3("keepBtn")),
+        h("p.small.muted", { style: { marginBottom: 0 } }, u("noCard"))),
+    h("p", h("a", { href: "#try/" + encodeURIComponent(d.pathId) }, d3("carryOn") + " →")),
+  ];
+}
+
+/** Into the app's review queue, as the demo's own Keep step does (same ids), so joining on this device keeps them. */
+function gradeBack(d, c, ok) {
+  const day = C.today(), all = C.store.get("reviews", {}) ?? {}, id = `${d.pathId}:${c.id}`;
+  if (all[id]?.f?.last === day) return;
+  const q = (l) => (c.q[l] ? { question: c.q[l], options: c.options.map((o) => o[l] ?? o.en), answerIndex: c.answer, explanation: c.why?.[l] ?? c.why?.en ?? "" } : null);
+  all[id] = { q: { id, topic: d.title.en, en: q("en"), hi: d.languages.includes("hi") ? q("hi") : null }, f: F.review(all[id]?.f ?? null, ok ? F.GOOD : F.AGAIN, day) };
+  C.store.set("reviews", all);
+}
+
 function injectStyles() {
   if (document.getElementById("try-css")) return;
   document.head.append(h("style", { id: "try-css" }, `
@@ -872,6 +1064,8 @@ function injectStyles() {
   .try-flex .try-video-tap img, .try-flex video { max-height: 44vh; width: auto; max-width: 100%; object-fit: cover; }
 }
 .try-join-end { border: 2px solid var(--brand, #C4772A); }
+.try-day3 { border: 1px dashed var(--brand, #C4772A); }
+.try-day3 form { margin: 0; }
 .try-join-big { display: inline-block; font-size: 17px; padding: 12px 22px; }
 .try-survey-fold { margin-top: 18px; }
 .try-survey-fold > summary { font-weight: 600; cursor: pointer; padding: 8px 0; }

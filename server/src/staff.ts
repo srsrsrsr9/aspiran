@@ -325,6 +325,13 @@ export const ADMIN_SCHEMA = [
   `CREATE INDEX IF NOT EXISTS try_feedback_q ON try_feedback(path_id, question)`,
   `CREATE TABLE IF NOT EXISTS try_contacts (session_id TEXT PRIMARY KEY, path_id TEXT NOT NULL, contact TEXT NOT NULL, contact_kind TEXT NOT NULL,
     consent_text TEXT NOT NULL, lang TEXT, at TEXT NOT NULL)`,
+  // The day-3 email (try.ts): a visitor's consent, the cards to ask again, and how it went. The address is deleted once
+  // the one email is sent (or the visitor cancels); what's left is anonymous.
+  `CREATE TABLE IF NOT EXISTS try_recall (code TEXT PRIMARY KEY, session_id TEXT NOT NULL, path_id TEXT NOT NULL, email TEXT, lang TEXT NOT NULL,
+    cards TEXT NOT NULL, consent_text TEXT NOT NULL, created_at TEXT NOT NULL, due_day TEXT NOT NULL, sent_at TEXT, tries INTEGER NOT NULL DEFAULT 0,
+    opened_at TEXT, answered_at TEXT, kept INTEGER, of_n INTEGER, stopped_at TEXT)`,
+  `CREATE INDEX IF NOT EXISTS try_recall_due ON try_recall(due_day, sent_at)`,
+  `CREATE INDEX IF NOT EXISTS try_recall_session ON try_recall(session_id)`,
   `CREATE TABLE IF NOT EXISTS try_updates (id INTEGER PRIMARY KEY AUTOINCREMENT, path_id TEXT NOT NULL, text_en TEXT NOT NULL, text_hi TEXT,
     done_on TEXT NOT NULL, hidden INTEGER NOT NULL DEFAULT 0, created_by TEXT, created_at TEXT NOT NULL)`,
 ];

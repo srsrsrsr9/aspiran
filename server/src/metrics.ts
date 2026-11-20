@@ -42,6 +42,13 @@ const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> 
   try_step: (p) => { const n = count(p.n, 60); return n ? { path: code(p.path, 64), route: code(p.route, 12), n, of: count(p.of, 60) } : null; },
   try_finish: (p) => ({ path: code(p.path, 64), route: code(p.route, 12) }),
   try_join: (p) => ({ path: code(p.path, 64), where: code(p.where, 12) }),
+  // The day-3 email (try-recall.ts): offer seen, address left, cancelled; the email opened, answered (how many kept), join.
+  try_day3_offer: (p) => ({ path: code(p.path, 64), where: code(p.where, 12) }),
+  try_day3_signup: (p) => ({ path: code(p.path, 64), where: code(p.where, 12) }),
+  try_day3_cancel: (p) => ({ path: code(p.path, 64) }),
+  try_day3_open: (p) => ({ path: code(p.path, 64) }),
+  try_day3_done: (p) => ({ path: code(p.path, 64), kept: count(p.kept, 10) ?? 0, of: count(p.of, 10) }),
+  try_day3_join: (p) => ({ path: code(p.path, 64) }),
   ritual: (p) => ((RITUALS as readonly string[]).includes(p.kind) ? { kind: p.kind } : null),
   chai_read: (p) => ({ cards: count(p.cards, 20) ?? 1 }),
   prep_minutes: (p) => { const m = count(p.minutes, 600); return m ? { minutes: m } : null; },
@@ -50,7 +57,7 @@ const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> 
   // The app says a Chotu chat happened (no text); only the first one per member is kept, as first_chotu_chat.
   chotu_chat: () => ({}),
 };
-const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded", "room_joined", "answer_evaluated"]);
+const SERVER_EVENTS = new Set(["signup", "pod_joined", "first_chotu_chat", "checkout_started", "paid", "refunded", "room_joined", "answer_evaluated", "try_day3_sent"]);
 
 /**
  * The Play install referrer arrives as a URL-encoded query string (utm_source=...&utm_campaign=...). Only the utm
