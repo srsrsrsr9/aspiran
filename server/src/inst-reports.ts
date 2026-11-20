@@ -22,7 +22,7 @@ const nodeName = (id: string | null) => (id ? NODES.find((n: any) => n.id === id
 const paperOf = (id: string | null) => (id ? NODES.find((n: any) => n.id === id)?.paper.short ?? null : null);
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : null);
 
-interface Student { member_id: string; display_name: string; batch_id: string | null; joined_at: string }
+interface Student { member_id: string; display_name: string; batch_id: string | null; joined_at: string; last_active_at: string | null }
 
 /** What a student last did, as a code the console turns into words. Only from what the centre may see. */
 type LastDid = "question_set" | "doubt" | "chat" | "plan" | "focus" | "app";
@@ -35,7 +35,7 @@ export async function instReports(env: Env, instId: string, batchFilter: string 
   const batches = await all<{ id: string; name: string; archived_at: string | null }>(
     "SELECT id, name, archived_at FROM inst_batches WHERE institute_id = ? ORDER BY archived_at IS NOT NULL, created_at", instId);
   const students = await all<Student>(
-    `SELECT member_id, display_name, batch_id, joined_at FROM inst_members WHERE institute_id = ? AND role = 'student' AND status = 'active'
+    `SELECT member_id, display_name, batch_id, joined_at, last_active_at FROM inst_members WHERE institute_id = ? AND role = 'student' AND status = 'active'
      ${batchFilter ? "AND batch_id = ?" : ""} ORDER BY display_name COLLATE NOCASE`, ...(batchFilter ? [instId, batchFilter] : [instId]));
   const ids = students.map((s) => s.member_id);
   const q = ids.map(() => "?").join(",") || "NULL";
@@ -75,8 +75,7 @@ export async function instReports(env: Env, instId: string, batchFilter: string 
       ...ev.filter((e) => e.name === "prep_minutes").map((e) => [e.at, "focus"] as [string, LastDid]),
       ...ev.map((e) => [e.at, "app"] as [string, LastDid]),
     ];
-    const seenAt = mine(seen)[0]?.last_seen_at;
-    if (seenAt && seenAt >= s.joined_at) last.push([seenAt, "app"]);
+    for (const at of [mine(seen)[0]?.last_seen_at, s.last_active_at]) if (at && at >= s.joined_at) last.push([at, "app"]);
     last.sort((a, b) => (a[0] < b[0] ? 1 : a[0] > b[0] ? -1 : a[1] === "app" ? 1 : -1));
     const lastActive = last[0]?.[0] ?? null;
     return {

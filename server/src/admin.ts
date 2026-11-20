@@ -18,6 +18,7 @@ import { activeResult, cleanResults, resultDays } from "./results";
 import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
+import { insightsReport } from "./insights";
 import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
 import { recallFunnel, sendRecalls } from "./try-recall";
@@ -85,6 +86,9 @@ route("GET", /^overview$/, "analytics", async ({ env }) => {
     lastBackup: (await listBackups(env))[0]?.uploaded ?? null,
   });
 });
+
+// Insights (analytics scope part 2): plain-sentence cards from D1 and, once POSTHOG_PERSONAL_KEY is set, PostHog.
+route("GET", /^insights$/, "analytics", async ({ env }) => json(await insightsReport(env)));
 
 // The home dashboard: one look at people, Plus, money, content, today's Chai, helper usage, leads and coaching centres.
 // Counts only, never who. Payments show only to roles that can see the Payments section.

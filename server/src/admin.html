@@ -240,6 +240,71 @@ views.overview = async () => {
   ];
 };
 
+// Insights (insights.ts): eight cards, each with one plain sentence on what it counts. Our database always; PostHog
+// (website, screens, errors) only once its read key is set, and then fetched at most once an hour.
+const FEATURE = { note_open: "Opened a note", note_done: "Finished a note", audio_play: "Played audio", audio_done: "Finished audio",
+  video_play: "Played a video", video_done: "Finished a video", practice_answer: "Answered a question", practice_piece: "Finished a practice piece",
+  flashcard_session: "Finished flashcards", review_done: "Did the daily review", mock_start: "Started a mock", mock_done: "Finished a mock",
+  pyq_open: "Opened past papers", answer_submit: "Wrote a Mains answer", answer_rewrite: "Rewrote an answer", prep_minutes: "Focus time",
+  pod_session: "Spent time in the pod", pod_message: "Wrote in the pod", search: "Searched", share: "Shared something" };
+views.insights = async () => {
+  const d = await api("insights");
+  const K = Kit, C = d.cards, n = (v) => (v == null ? "–" : num(v)), p = (v) => K.pct(v);
+  const notConnected = h("div.banner.warn", {}, "PostHog isn't connected, so the website, screens and errors aren't shown. To connect it, the owner adds a read-only PostHog key with ",
+    h("span.mono", {}, "npx wrangler secret put POSTHOG_PERSONAL_KEY --env production"), " (the runbook is in artefacts).");
+  const ph = (meta) => (meta?.connected ? (meta.error ? h("p.muted", {}, `PostHog didn't answer just now; showing what it said ${K.ago(meta.at)}.`) : h("p.muted", {}, `From PostHog, ${K.ago(meta.at)}.`)) : h("p.muted", {}, "PostHog not connected."));
+  const card = (c, ...kids) => K.card({ title: c.title, sub: c.says }, kids);
+  const trend = (t) => (t && t.values ? h("div.row", { style: "align-items:center;gap:10px;margin-top:10px" }, K.spark(t.values, { w: 160, h: 32 }), h("span.muted", {}, t.what + ", last 30 days")) : null);
+  const tbl = (cols, rows, o = {}) => K.table(cols, { rows, noun: o.noun || "rows", empty: o.empty || { icon: "chart", title: "Nothing yet", text: "Numbers appear as people use Aspiran." }, csv: o.csv });
+  const pieceCols = [{ key: "piece", label: "Piece" }, { key: "opened", label: "Opened by", num: true }, { key: "finished", label: "Finished by", num: true }, { key: "finishedPct", label: "Finished", num: true, render: (r) => p(r.finishedPct) }];
+  const pieces = (label, x) => h("div", {}, h("h4", {}, label), tbl(pieceCols, x.most, { noun: "pieces" }),
+    x.lose.length ? [h("p.muted", { style: "margin:8px 0 4px" }, "Losing people (opened by 5 or more, fewest finish):"), tbl(pieceCols, x.lose, { noun: "pieces" })] : null);
+  const B = C.breaks, O = C.organisations;
+  return [
+    K.pageHead("Insights", `Today, ${K.day(d.today)}. What's happening, in plain sentences. ${d.note}`),
+    d.posthogConnected ? null : notConnected,
+    card(C.today,
+      h("div.tiles", {}, C.today.rows.map((r) => K.kpi({ label: r.what, value: r.today == null ? "–" : num(r.today),
+        sub: r.today == null ? "PostHog not connected" : `${num(r.lastWeek)} same time last week`,
+        tone: r.today != null && r.lastWeek && r.today < r.lastWeek * 0.7 ? "warn" : null }))),
+      trend(C.today.trend), C.today.posthog.trend ? trend({ what: "Website visitors a day", values: C.today.posthog.trend }) : null),
+    card(C.funnel,
+      tbl([{ key: "step", label: "Step" }, { key: "n", label: "People", num: true, render: (r) => (r.n == null ? "not connected" : num(r.n)) },
+        { key: "keptPct", label: "Of the step before", num: true, render: (r) => p(r.keptPct) }], C.funnel.steps, { noun: "steps" }), ph(C.funnel.posthog)),
+    card(C.sources,
+      tbl([{ key: "source", label: "Source" }, { key: "installs", label: "Installs", num: true }, { key: "signups", label: "Signed up", num: true },
+        { key: "signupPct", label: "Sign-up rate", num: true, render: (r) => p(r.signupPct) }, { key: "paid", label: "Paid", num: true }], C.sources.installs, { noun: "sources", csv: "sources.csv" }),
+      C.sources.centreInvites.length ? [h("h4", {}, "Joined through a coaching centre (90 days)"), tbl([{ key: "name", label: "Centre" }, { key: "n", label: "Students", num: true }], C.sources.centreInvites, { noun: "centres" })] : null,
+      C.sources.campaigns ? [h("h4", {}, "Website campaigns (30 days)"), tbl([{ key: "source", label: "Source" }, { key: "campaign", label: "Campaign", render: (r) => r.campaign || "–" }, { key: "visitors", label: "Visitors", num: true }], C.sources.campaigns, { noun: "campaigns" })] : null,
+      ph(C.sources.posthog)),
+    card(C.return,
+      tbl([{ key: "week", label: "Week of" }, { key: "people", label: "People", num: true }, { key: "d1", label: "Next day", num: true, render: (r) => p(r.d1) },
+        { key: "d7", label: "Second week", num: true, render: (r) => p(r.d7) }, { key: "d30", label: "A month on", num: true, render: (r) => p(r.d30) }], C.return.weeks, { noun: "weeks" })),
+    card(C.used,
+      tbl([{ key: "name", label: "Feature", value: (r) => FEATURE[r.name] || r.name }, { key: "people", label: "People", num: true }, { key: "n", label: "Times", num: true }], C.used.features, { noun: "features" }),
+      trend(C.used.trend),
+      h("div.grid2", { style: "margin-top:12px" }, pieces("Notes", C.used.notes), pieces("Audio", C.used.audio)), pieces("Videos", C.used.videos)),
+    card(C.health,
+      h("div.tiles", {},
+        K.kpi({ label: "Questions per active member", value: C.health.answersPerActive ?? "–", sub: `${num(C.health.answers)} answered · ${p(C.health.rightPct)} right` }),
+        K.kpi({ label: "Review that comes back right", value: p(C.health.review.keptPct), sub: `${num(C.health.review.cards)} items in ${num(C.health.review.sessions)} reviews` }),
+        K.kpi({ label: "Mains answers", value: num(C.health.writing.written), sub: `${num(C.health.writing.rewritten)} rewritten · ${num(C.health.writing.secondOpinions)} second opinions` })),
+      trend(C.health.trend),
+      C.health.mostWrong.length ? [h("h4", {}, "Topics most often wrong (10 answers or more)"), tbl([{ key: "node", label: "Topic" }, { key: "n", label: "Answers", num: true }, { key: "people", label: "People", num: true },
+        { key: "wrongPct", label: "Wrong", num: true, render: (r) => p(r.wrongPct) }], C.health.mostWrong, { noun: "topics" })] : null),
+    card(B,
+      B.errors ? tbl([{ key: "screen", label: "Screen" }, { key: "platform", label: "Where" }, { key: "n", label: "Errors", num: true }, { key: "people", label: "People", num: true },
+        { key: "replay", label: "Replay", sort: false, render: (r) => (r.replay ? h("a", { href: r.replay, target: "_blank", rel: "noopener" }, "Watch") : "–") }], B.errors,
+        { noun: "screens", empty: { icon: "check", title: "No errors in 7 days" } }) : null,
+      B.posthog.trend ? trend({ what: "Errors a day", values: B.posthog.trend }) : null, ph(B.posthog)),
+    card(O,
+      tbl([{ key: "name", label: "Centre" }, { key: "status", label: "Status" }, { key: "students", label: "Students", num: true },
+        { key: "thisWeek", label: "Active, last 4 weeks", value: (r) => r.activeByWeek[0], num: true, render: (r) => r.activeByWeek.join(" · "), csv: (r) => r.activeByWeek.join(" / ") },
+        { key: "doubtsAnswered30", label: "Doubts answered (30 d)", num: true }, { key: "setAnswers30", label: "Question-set answers (30 d)", num: true },
+        { key: "plus", label: "On Plus", num: true, render: (r) => `${num(r.plus)} (${p(r.plusPct)})` }], O.centres, { noun: "centres", csv: "centres.csv", empty: { icon: "building", title: "No coaching centres yet" } })),
+  ];
+};
+
 // Coaching centres: set them up, give the owner a code, pause. The console itself is behind the "institutes" flag.
 views.institutes = async () => {
   const d = await api("institutes");

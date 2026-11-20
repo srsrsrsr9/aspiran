@@ -152,7 +152,7 @@ function joinScreen(why) {
 const GROUPS = [
   ["Today", [["dashboard", "Dashboard", "home"], ["doubts", "Doubts", "help"], ["chat", "Chat and announcements", "chat"]]],
   ["Students", [["batches", "Batches and invites", "layers"], ["people", "People", "users"], ["plans", "Study plans", "calendar"], ["content", "Notes and tests", "book"]]],
-  ["Insight", [["analytics", "Analytics", "chart"]]],
+  ["Insight", [["reports", "Weekly report", "doc"], ["analytics", "Analytics", "chart"]]],
   ["Settings", [["branding", "Branding", "palette", "admin"]]],
 ];
 const allowedTabs = () => GROUPS.flatMap(([, items]) => items).filter(([, , , need]) => rank(S.ov.role) >= rank(need ?? "teacher")).map(([id]) => id);
@@ -579,6 +579,57 @@ VIEWS.analytics = async () => {
       empty: { icon: "users", title: "No students yet", text: "Invite students and their progress shows here." } }),
     a.coverage.length > 0 && h("details", h("summary.muted", "Coverage by topic"), table([{ key: "paper", label: "Paper" }, { key: "topic", label: "Topic" }, { key: "students", label: "Students", num: true }, { key: "answered", label: "Answered", num: true },
       { key: "pct", label: "Right", render: (t) => meter(t.pct) }], { rows: a.coverage, search: (t) => t.topic + " " + t.paper, noun: "topics", csv: "coverage.csv" })));
+};
+
+// --- Weekly report (inst-reports.ts): each batch's week, who has gone quiet, weak topics. Never a ranking. -------------
+const LAST_DID = { question_set: "answered a question set", doubt: "asked a doubt", chat: "wrote in the chat", plan: "ticked the plan", focus: "did a focus block", app: "opened Aspiran" };
+VIEWS.reports = async () => {
+  S.rpBatch ??= "";
+  const q = S.rpBatch ? "?batch=" + encodeURIComponent(S.rpBatch) : "";
+  const r = await api(`/inst/admin/reports${q}`);
+  const pick = batchSelect(S.rpBatch, { all: true }); pick.onchange = () => { S.rpBatch = pick.value; draw(); };
+  const csv = busy(async () => {
+    const url = URL.createObjectURL(await fetchBlob(`/inst/admin/reports.csv${q}`));
+    const link = h("a", { href: url, download: `${S.ov.institute.name}-report-${S.rpBatch ? batchName(S.rpBatch) : "all"}.csv` }); document.body.append(link); link.click(); link.remove();
+  });
+  S.st.rp ??= {};
+  const batchCard = (b) => b.hidden
+    ? card({ title: b.name, sub: `${b.students} student${b.students === 1 ? "" : "s"}` },
+      h("p.muted", { style: { margin: 0 } }, `Batch figures show once a batch has ${r.minBatch} students, so no one's numbers can be picked out. Each student's own line is below.`))
+    : card({ title: b.name, sub: `${b.students} students · the last 7 days` },
+      h("div.tiles", { style: { marginBottom: "10px" } },
+        kpi({ label: "Active this week", value: num(b.week.activeStudents), sub: Math.round((b.week.activeStudents / b.students) * 100) + "% of the batch" }),
+        kpi({ label: "Study minutes", value: num(b.week.studyMinutes), sub: "focus blocks" }),
+        kpi({ label: "Questions answered", value: num(b.week.questionsAnswered), sub: "your question sets and tests" }),
+        kpi({ label: "Doubts", value: num(b.week.doubtsAsked), sub: `asked · ${num(b.week.doubtsAnswered)} answered` + (b.doubts.avgHoursToAnswer != null ? ` · about ${b.doubts.avgHoursToAnswer} h to answer` : "") })),
+      b.weakTopics.length ? h("div", h("h4", { style: { margin: "6px 0" } }, "Topics to go over again"), h("p.muted", { style: { margin: "0 0 6px" } }, "At least 5 answers in this batch and under 60% right."),
+        h("table", b.weakTopics.map((t) => h("tr", h("td", t.topic, h("div.muted", t.paper)), h("td.n", `${num(t.answered)} answers`), h("td", meter(t.rightPct))))))
+        : h("p.muted", { style: { margin: 0 } }, "No weak topics: no topic has 5 answers under 60% right."));
+  return h("div",
+    pageHead("Weekly report", "How each batch did this week, who has gone quiet, and which topics to go over again. Only from what your students agreed to share when they joined, and only since they joined. No rankings.",
+      pick, h("button", { onclick: csv }, icon("download"), "Download CSV")),
+    r.batches.length ? h("div.grid2", { style: { marginBottom: "14px" } }, r.batches.map(batchCard))
+      : empty({ icon: "layers", title: "No batches yet", text: "Make a batch and invite students; the report fills in as they use Aspiran." }),
+    card({ title: "Gone quiet", sub: `Nothing for ${r.quietDays} days or more. A short message often helps.` },
+      r.quiet.length ? list(r.quiet.map((s) => ({ icon: "user", title: h("b", s.name), sub: [batchName(s.batchId), s.lastActive ? `last ${LAST_DID[s.lastDid] ?? "active"} ${ago(s.lastActive)}` : "nothing since joining"].filter(Boolean).join(" · ") })))
+        : empty({ icon: "check", title: "No one has gone quiet" })),
+    card({ title: "Answer copies to check", sub: "Mains answers students send you for checking" },
+      h("p.muted", { style: { margin: 0 } }, r.checking.available ? "" : "Students can't send answer copies to a centre in Aspiran yet. This fills in once they can.")),
+    h("h3", "Each student"),
+    table([
+      { key: "name", label: "Student", render: (s) => h("span", h("b", s.name), s.quiet && h("span.chip.warn", { style: { marginLeft: "6px" } }, "quiet")) },
+      { key: "batch", label: "Batch", value: (s) => batchName(s.batchId), hide: !!S.rpBatch },
+      { key: "lastActive", label: "Last active", value: (s) => s.lastActive ?? "", render: (s) => ago(s.lastActive) },
+      { key: "lastDid", label: "Last did", value: (s) => LAST_DID[s.lastDid] ?? "–" },
+      { key: "focusMinutes", label: "Focus min", num: true, sort: false },
+      { key: "topicsCovered", label: "Topics", num: true, sort: false },
+      { key: "answered", label: "Answered", num: true, sort: false },
+      { key: "accuracy", label: "Right", sort: false, value: (s) => s.accuracy, render: (s) => meter(s.accuracy), csv: (s) => s.accuracy ?? "" },
+      { key: "doubtsAsked", label: "Doubts", num: true, sort: false },
+    ], { rows: r.students, state: S.st.rp, search: (s) => s.name, searchLabel: "Search students", noun: "students", sort: ["name", "asc"], csv: "report-students-shown.csv",
+      filters: [{ label: "Activity", all: "Everyone", options: [["quiet", "Gone quiet"], ["active", "Active"]], test: (s, v) => (v === "quiet") === !!s.quiet }],
+      empty: { icon: "users", title: "No students yet", text: "Invite students and their week shows here." } }),
+    h("p.muted", r.rules + " The number columns don't sort, so the list never becomes a leaderboard."));
 };
 
 // --- Branding ----------------------------------------------------------------------------------------------------------

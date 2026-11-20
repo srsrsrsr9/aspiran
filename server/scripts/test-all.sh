@@ -13,8 +13,8 @@ EXTRA[voice]="--var CASHFREE_APP_ID: --var CASHFREE_SECRET_KEY: --var FISH_AUDIO
 EXTRA[models-hf]="--var MODEL_FILES_URL:"
 # The daily-posts suite runs its own stand-in for api.telegram.org on the port after the server's.
 EXTRA[posts]="--var CASHFREE_APP_ID: --var CASHFREE_SECRET_KEY: --var TELEGRAM_BOT_TOKEN:local-test-bot --var TELEGRAM_API_BASE:http://127.0.0.1:$((PORT + 1))"
-NOAUTH=(auth metrics password roadmap try models-hf institutes)   # suites that sign in by themselves
-SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu voice languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers institutes posts)
+NOAUTH=(auth metrics password roadmap try models-hf institutes insights)   # suites that sign in by themselves
+SUITES=($@); (( $#SUITES )) || SUITES=(smoke auth community rooms friends chotu jeetu voice languages mocks metrics roadmap payments password ca pyq try models-hf factwatch interactives chai providers institutes insights posts)
 # Whatever is still listening on the test port goes: the server's own worker process can outlive it.
 free_port() {
   pkill -9 -f "dev --port $PORT" 2>/dev/null

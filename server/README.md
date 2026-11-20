@@ -393,6 +393,32 @@ backups; in production also rely on D1 Time Travel.
 
 In production, put Cloudflare Access in front of `/admin*` as well as the keys.
 
+### Insights, and what we count
+
+The scope is `artefacts/analytics-scope-2026-11-20.md` (owner approved, 20 Nov 2026).
+
+**Studying events.** The web app (`public/app/metrics.js`, `track()`) and Android (`data/Metrics.kt`) send the same
+names to `POST /events`; `src/metrics.ts` keeps only whitelisted props, all codes and numbers (`CLIENT_EVENTS`):
+`note_open`, `note_done`, `audio_play`, `audio_done`, `video_play`, `video_done`, `practice_answer` (where, topic,
+right, sure), `practice_piece`, `flashcard_session`, `review_done` (cards, kept), `mock_start`, `mock_done` (paper,
+attempted, of, minutes: never the score), `pyq_open`, `answer_submit` (words, never the text), `answer_rewrite`,
+`pod_session` and `pod_message` (minutes and a count; our server only, never PostHog), `plus_view`, `paywall_shown`,
+`share`, `search` (results, never the words), `notification_open`, `install_referrer` (utm only). The server writes
+`signup`, `paid` and the rest itself (`SERVER_EVENTS`), plus `inst_joined`, `inst_left`, `inst_attempt`, `inst_doubt`.
+PRIVATE screens (pod, Chotu, Calm, journal) never reach PostHog on the web; Android skips pod events for PostHog.
+
+**Admin → Insights** (`GET /admin/api/insights`, analytics role; `src/insights.ts`): eight cards, each with a title
+and one sentence on what it counts: Today (against the same time last week), Funnel (website → demo → day-3 recall →
+sign-up → active in week 1 → Plus page → paid), Where people come from, Return by signup week (the same numbers as
+Growth), What gets used (features, and notes, audio and videos opened against finished), Learning health, Where it
+breaks (errors by screen with a masked replay link) and Organisations (each coaching centre: students, active by week,
+doubts answered, question-set answers, Plus share). Our own numbers come from D1. The website, screens and errors come
+from PostHog's query API (HogQL), only when the secret `POSTHOG_PERSONAL_KEY` (a read-only personal key with the
+"query" scope) is set: `npx wrangler secret put POSTHOG_PERSONAL_KEY --env production`, typed by the owner. Without it
+those parts say "not connected" and everything else still shows. Answers are cached for an hour (in memory and in the
+backups bucket under `_cache/insights/`); if PostHog fails, the last answer shows with a note. `POSTHOG_PROJECT_ID`
+(default 729724) is a plain var.
+
 ## Coaching centres (institutes)
 
 A coaching centre ("institute") runs its own students inside Aspiran: batches, a batch chat with announcements,
@@ -414,14 +440,21 @@ Every table carries `institute_id`. Logos and doubt photos go in the media bucke
   `content`, `attempts`, `progress` (your own numbers only). `/inst/logo/<id>` is public.
 - `/inst/admin/*` for teachers and up: overview, dashboard (activity by day, batches at a glance, doubts waiting
   longest, lately, a getting-started checklist), batches, codes, roster, members, branding, logo, reported, messages
-  (hide), content, plans, analytics and `analytics.csv`. Each checks the role it needs.
+  (hide), content, plans, analytics and `analytics.csv`, reports and `reports.csv`. Each checks the role it needs.
+- **Reports** (`src/inst-reports.ts`, `?batch=` to narrow): each batch's last 7 days (active students, study minutes,
+  questions answered, doubts asked and answered, average hours to answer) and its weak topics (5+ answers, under 60%
+  right), but only for batches of **5 or more** students; smaller ones say "hidden". Students who've gone quiet for 5
+  days with what they last did, and one line per student by name. Only active students, only from when they joined,
+  and only what the join screen says the centre sees: never their own practice, mocks, pod, Chotu, Calm or journal.
+  No rankings (the console's number columns don't sort). Answer copies for checking aren't in Aspiran yet, so that
+  card says so (`checking.available: false`).
 - `/admin/api/institutes` for Aspiran staff (the admin key, Admin role): list, create (gives back a one-time owner
   code, 30 days), `/<id>/owner-code` for a new one, `/<id>/status` to pause or resume. Paused, its members get
   "paused for now" and its codes stop working. Each is in the audit log.
 
 **The console** is `/institute` (`src/institute.html`), signed in with the person's own Aspiran account. Its left rail
 shows only what their role can use: Dashboard, Doubts, Chat and announcements, Batches and invites (codes, links and a
-ready WhatsApp message), People, Study plans, Notes and tests, Analytics, Branding (with a live preview). Tables search,
+ready WhatsApp message), People, Study plans, Notes and tests, Weekly report, Analytics, Branding (with a live preview). Tables search,
 sort, filter and download as CSV in the browser. Aspiran staff set centres up in Admin → Coaching centres.
 
 **The student side** is `public/app/institute.js`: `#inst` (or `#inst/<code>` from an invite link) to join, then the
@@ -452,7 +485,9 @@ plans, doubts (with photos and replies) and messages. Their replies on other peo
 
 **Tests:** `test/institutes.mjs`, run with `npm run test:all -- institutes`. It switches the flag on for the run and
 covers joining by code, every role limit, one institute never reaching another's data, chat and the distress guard,
-doubts with a photo, plans, content, analytics and the CSV, leaving and erasure.
+doubts with a photo, plans, content, analytics and the CSV, leaving and erasure. `test/insights.mjs` (`-- insights`)
+covers Admin → Insights without a PostHog key (every PostHog part "not connected", our numbers still there, codes only)
+and the centre reports: scoping, the batch-of-5 rule, own practice never shared, leaving, and the CSV.
 
 ## Deploy
 

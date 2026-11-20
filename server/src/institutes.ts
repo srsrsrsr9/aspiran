@@ -5,6 +5,8 @@ import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istDay, json, newId } from "./shared";
 import { audit, bump, flags, requireStaff } from "./staff";
 import { NODES } from "../public/app/syllabus.js";
+import { logEvent } from "./metrics";
+import { instReports, reportsCsv } from "./inst-reports";
 
 /**
  * Aspiran for coaching centres (artefacts/coaching-centres-plan-2026-11-14.md). Behind the `institutes` flag, off by
@@ -33,7 +35,7 @@ import { NODES } from "../public/app/syllabus.js";
  *              GET /inst/plan · POST /inst/plan/done {itemId, done} · GET /inst/content · GET /inst/content/<id>
  *              POST /inst/attempts {contentId, answers} · GET /inst/progress (your own numbers only)
  *   Teachers and up: /inst/admin/... (overview, batches, codes, roster, members, branding, logo, messages, content,
- *              plans, analytics, analytics.csv). Each checks the role it needs.
+ *              plans, analytics, analytics.csv, reports, reports.csv). Each checks the role it needs.
  *   Aspiran staff (admin key): GET/POST /admin/api/institutes, POST /admin/api/institutes/<id>/status.
  */
 
@@ -222,6 +224,7 @@ const forStudent = (kind: string, data: any) => kind === "note" ? data : {
 
 /** Leaving or removal: their answers and ticks go; doubts and messages stay for the batch with the name taken off. */
 async function detach(env: Env, inst: string, member: string, status: "left" | "removed") {
+  await logEvent(env, "inst_left", { memberId: member }, { how: status });
   await env.DB.batch([
     env.DB.prepare("UPDATE inst_members SET status = ?, left_at = ? WHERE institute_id = ? AND member_id = ?").bind(status, now(), inst, member),
     env.DB.prepare("DELETE FROM inst_attempts WHERE institute_id = ? AND member_id = ?").bind(inst, member),
@@ -331,6 +334,7 @@ async function join(env: Env, me: string, body: any): Promise<Response> {
     batch_id = excluded.batch_id, status = 'active', joined_at = excluded.joined_at, consent_at = excluded.consent_at, left_at = NULL, last_active_at = excluded.last_active_at`)
     .bind(inst.id, me, row.role, name, row.role === "student" ? row.batch_id : null, t, t, t).run();
   await bump(env, "inst_joins");
+  await logEvent(env, "inst_joined", { memberId: me }, { role: row.role });
   return json({ ok: true, institute: branding(inst), role: row.role });
 }
 
@@ -419,6 +423,7 @@ async function memberRoute(req: Request, env: Env, path: string, url: URL, body:
     const t = now();
     await env.DB.prepare("INSERT INTO inst_doubts (id, institute_id, batch_id, member_id, name, node_id, ref_id, text, photo_key, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?)")
       .bind(id, inst.id, m.batch_id, me, m.display_name, node, ref, text, photoKey, t, t).run();
+    await logEvent(env, "inst_doubt", { memberId: me }, { photo: photoKey ? 1 : 0 });
     let ai: string | null = null;
     if (inst.ai_first_answer) ai = await aiFirstAnswer(env, inst, id, text, node);
     return json({ ok: true, id, aiAnswered: !!ai });
@@ -513,6 +518,7 @@ async function memberRoute(req: Request, env: Env, path: string, url: URL, body:
     const right = answered.filter((a: any) => a.right).length;
     await env.DB.prepare("INSERT INTO inst_attempts (id, institute_id, content_id, member_id, node_id, kind, right_n, total, answers, at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
       .bind(newId("ia"), inst.id, r.id, me, r.node_id, r.kind, right, answered.length, JSON.stringify(answers), now()).run();
+    await logEvent(env, "inst_attempt", { memberId: me }, { kind: r.kind, total: answered.length });
     return json({ right, total: answered.length, review: review(data, answers) });
   }
   if (path === "/inst/progress" && req.method === "GET") {
@@ -921,6 +927,18 @@ async function adminRoute(req: Request, env: Env, sub: string, url: URL, body: a
     }
     await env.DB.batch(stmts);
     return json({ ok: true, id });
+  }
+
+  // Reports (analytics scope part 3): batch figures only for 5+ students, gone-quiet list, no rankings, CSV.
+  // Only what students agreed to when joining (inst-reports.ts). Teachers and up, this institute only.
+  if ((sub === "reports" || sub === "reports.csv") && GET) {
+    const batch = url.searchParams.get("batch") || null;
+    if (batch && !(await batchOf(env, inst.id, batch))) return notFound("That batch");
+    const r = await instReports(env, inst.id, batch);
+    if (sub === "reports") return json(r);
+    const names = new Map((await env.DB.prepare("SELECT id, name FROM inst_batches WHERE institute_id = ?").bind(inst.id).all<{ id: string; name: string }>()).results.map((b) => [b.id, b.name]));
+    return new Response(reportsCsv(r, (id) => (id ? names.get(id) ?? "" : "No batch")), { headers: { "content-type": "text/csv; charset=utf-8",
+      "content-disposition": `attachment; filename="${inst.id}-report-${batch ?? "all"}-${istDay()}.csv"`, "cache-control": "no-store" } });
   }
 
   // Analytics, and the same as CSV.
