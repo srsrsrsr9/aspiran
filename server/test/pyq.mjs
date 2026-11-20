@@ -62,6 +62,27 @@ assert.equal(live.data.questions[0].en.q, "Discuss the salient features of the H
 assert.deepEqual(live.data.questions[0].nodes, ["gs1-1"]);
 step("ships after approval");
 
+// Public past-paper pages (learn.ts): only approved papers, every question its own page, all in the sitemap.
+const page = async (path) => { const r = await fetch(BASE + path); return { status: r.status, text: await r.text() }; };
+const index = await page("/learn/papers");
+assert.equal(index.status, 200);
+assert.ok(index.text.includes("/learn/papers/csm-2025-gs1"), "the approved paper is listed");
+assert.ok(!index.text.includes("/learn/papers/csm-2024-gs1"), "a draft paper is not listed");
+const paper = await page("/learn/papers/csm-2025-gs1");
+assert.equal(paper.status, 200);
+assert.ok(paper.text.includes("Harappan architecture"), "the paper page carries UPSC's wording");
+const one = await page("/learn/papers/csm-2025-gs1/1");
+assert.equal(one.status, 200);
+assert.ok(one.text.includes("Harappan architecture") && one.text.includes("/learn/papers/csm-2025-gs1/2"), "a question page links on");
+assert.equal((await page("/learn/papers/csm-2024-gs1")).status, 404, "a draft paper has no page");
+assert.equal((await page("/learn/papers/csm-2025-gs1/99")).status, 404);
+const map = await page("/learn/sitemap.xml");
+assert.ok(map.text.includes("/learn/papers/csm-2025-gs1/20"), "every question is in the sitemap");
+const topic = await page("/learn/gs1-1");
+assert.equal(topic.status, 200);
+assert.ok(/Asked \d+ times? by UPSC/.test(topic.text) && topic.text.includes("/learn/papers/csm-2025-gs1/1"), "the topic page counts and links its past questions");
+step("public paper pages, question pages and sitemap");
+
 for (const r of rows) {
   await call(`/desk/api/library/${r.id}/unapprove`, { method: "POST" });
   assert.equal((await call(`/desk/api/library/${r.id}/delete`, { method: "POST" })).status, 200);
