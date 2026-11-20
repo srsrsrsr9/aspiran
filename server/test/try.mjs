@@ -88,6 +88,76 @@ await call(`/admin/api/try/updates/${upd.id}/hide`, { method: "POST", body: {} }
 assert.ok(!(await call(`/try/updates?path=${source.id}&x=1`, { auth: false })).data.updates.some((x) => x.en.startsWith("Test line")), "hidden lines don't show");
 step("feedback: stored anonymously, consent for contact, crisis text flagged, summary gated, delete works");
 
+// The day-3 email (src/try-recall.ts): consent needed; 5 questions, the visitor's own cards first; sent once, on the
+// due day, through the dev outbox; the address deleted after; the page asks them and says "kept 4 of 5", once;
+// cancelling, the unsubscribe link and "Delete what I sent" all stop it.
+{
+  const s3 = "recallsession" + Date.now().toString(36);
+  const email = `day3-${Date.now()}@example.com`;
+  const rc = (body, s = s3) => call("/try/recall", { method: "POST", body: { sessionId: s, pathId: source.id, lang: "en", ...body }, auth: false });
+  const run = (day) => call("/admin/api/try/recall/run", { method: "POST", body: { day } });
+  const outbox = async () => (await call(`/auth/password/dev/outbox?to=${encodeURIComponent(email)}`, { auth: false })).data;
+  assert.equal((await rc({ email, cards: ["fed-k1"] })).status, 400, "no email without consent");
+  assert.equal((await rc({ email: "not-an-email", consent: true })).status, 400);
+  const made = await rc({ email, consent: true, consentText: "Email me these questions once.", cards: ["fed-k7", "fed-k1", "not-a-card"] });
+  assert.equal(made.status, 200, JSON.stringify(made.data));
+  const { code, due } = made.data;
+  assert.match(code, /^[a-f0-9]{32}$/);
+  assert.equal(made.data.n, 5);
+  const today = new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
+  assert.equal(due, new Date(Date.parse(today + "T12:00:00Z") + 3 * 86400e3).toISOString().slice(0, 10), "due three days on");
+  const page = await call(`/try/recall/${code}`, { auth: false });
+  assert.equal(page.status, 200);
+  const ids = page.data.cards.map((c) => c.id);
+  assert.equal(ids.length, 5);
+  assert.ok(ids.includes("fed-k1") && ids.includes("fed-k7"), "the visitor's own cards are among the five");
+  assert.equal(page.data.result, null);
+  step("day 3: sign-up needs consent; five questions, the visitor's own cards first");
+
+  assert.equal((await run(today)).data.sent, 0, "nothing goes before the due day");
+  assert.equal((await outbox())?.to, undefined);
+  const r1 = await run(due);
+  assert.equal(r1.status, 200);
+  assert.ok(r1.data.sent >= 1, JSON.stringify(r1.data));
+  const mail = await outbox();
+  assert.equal(mail.to, email);
+  assert.match(mail.subject, /5 questions, three days on/);
+  assert.ok(mail.text.includes(`/app/#tryback/${code}`), "the email links to the day-3 page");
+  assert.ok(mail.text.includes(`/try/recall/${code}/stop`), "and has one unsubscribe link");
+  assert.equal(mail.headers["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click");
+  assert.ok(!/\bAI\b/.test(mail.text));
+  assert.equal((await run(due)).data.sent, 0, "never a second email");
+  assert.equal((await rc({ email, consent: true, cards: [] })).data.already, "sent", "asking again after it went doesn't send again");
+  step("day 3: sent once on the due day, with the page link and one unsubscribe link");
+
+  const cards = page.data.cards;
+  const picks = Object.fromEntries(cards.map((c, i) => [c.id, i === 0 ? (c.answer + 1) % c.options.length : c.answer]));
+  const ans = await call(`/try/recall/${code}/answers`, { method: "POST", body: { picks }, auth: false });
+  assert.deepEqual(ans.data, { kept: 4, of: 5 });
+  const again = await call(`/try/recall/${code}/answers`, { method: "POST", body: { picks: {} }, auth: false });
+  assert.equal(again.data.kept, 4, "the first answers stand");
+  assert.deepEqual((await call(`/try/recall/${code}`, { auth: false })).data.result, { kept: 4, of: 5 });
+  const funnel = (await call("/admin/api/try/recall")).data;
+  assert.ok(funnel.sent >= 1 && funnel.answered >= 1 && funnel.opened >= 1);
+  assert.ok(!JSON.stringify(funnel).includes("@"), "the funnel has no addresses");
+  step("day 3: the page asks them and keeps \"4 of 5\"; Admin sees counts only");
+
+  // Cancelled before it goes: nothing sent. The unsubscribe link answers with a page. "Delete what I sent" removes it.
+  const s4 = s3 + "b", email4 = "cancel-" + email;
+  const c4 = (await rc({ email: email4, consent: true, cards: [] }, s4)).data.code;
+  assert.equal((await call(`/try/recall/${c4}/stop`, { method: "POST", auth: false })).data.ok, true);
+  assert.equal((await run(due)).data.sent, 0, "a cancelled email never goes");
+  const stopPage = await fetch(`${BASE}/try/recall/${c4}/stop`);
+  assert.equal(stopPage.status, 200);
+  assert.match(await stopPage.text(), /your address is deleted/);
+  const s5 = s3 + "c";
+  const c5 = (await rc({ email: "forget-" + email, consent: true, cards: [] }, s5)).data.code;
+  assert.equal((await call("/try/forget", { method: "POST", body: { sessionId: s5 }, auth: false })).data.deleted, 1);
+  assert.equal((await call(`/try/recall/${c5}`, { auth: false })).status, 404);
+  assert.equal((await call("/try/recall/nope", { auth: false })).status, 404);
+  step("day 3: cancel, unsubscribe and \"Delete what I sent\" all stop it");
+}
+
 await call(`/desk/api/library/${row.id}/unapprove`, { method: "POST" });
 assert.equal((await pub(source.id)).status, 404);
 assert.equal((await call(`/desk/api/library/${row.id}/delete`, { method: "POST" })).status, 200);

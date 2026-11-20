@@ -185,7 +185,19 @@ The first is Federalism and Centre–state relations. Screens: `server/public/ap
   consent box), `POST /try/forget` (the visitor's "Delete what I sent"), `GET /try/summary` (chip counts only, from 20
   answers). Admin → **Try one topic** shows it all, with a CSV download. Tables `try_feedback`, `try_contacts`
   (migration 0009; also created on first use).
-- `npm run test:try` checks the gate and the feedback rules.
+- **The day-3 email** (`src/try-recall.ts`, sales build order step 1): after Keep it and on the finish screen a visitor
+  can leave an email, with a consent box, for "5 of these again on <day>". Three days later one plain-text email
+  (Resend) links to `/app/#tryback/<code>`: the 5 questions (their own cards first, filled from the topic's others),
+  then privately "You kept 4 of 5 after 3 days" and a join step; answering puts the 5 cards in that browser's review,
+  so joining keeps them on any device. The address is deleted once the email is sent; one email only, a
+  List-Unsubscribe header and one stop link (`/try/recall/<code>/stop`); "Delete what I sent" removes the row. Sent
+  by the cron at 09:00, 09:30, 10:00, 11:00, 12:00 and 17:00 IST, at most 40 a run. Admin: `GET /admin/api/try/recall`
+  (counts only) and `POST /admin/api/try/recall/run` (send what's due now; `{ day }` to act as another day). Table
+  `try_recall` (migration 0015). Funnel events: `try_day3_offer`, `_signup`, `_cancel`, `_sent` (server), `_open`,
+  `_done` (kept, of), `_join`.
+- **First open**: `index.html` starts the topic's download and preloads the app's modules with the page, and the app
+  draws a visitor's open page before sign-in setup; the offline copy installs 8 s later.
+- `npm run test:try` checks the gate, the feedback rules and the day-3 email.
 
 Locally, open http://localhost:8787/app/. To use it as a **desktop app**, open it in Chrome or Edge and
 choose Install (the address-bar icon, or My Path → Install). It then opens in its own window, with shortcuts

@@ -19,6 +19,7 @@ import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
 import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
+import { recallFunnel, sendRecalls } from "./try-recall";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, PRICING_KEY, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
@@ -457,6 +458,9 @@ route("GET", /^try\/feedback$/, "analytics", async ({ env, url }) => {
     .concat(rows.map((r: any) => [r.at, r.session_id, r.path_id, r.question, r.answer, r.text, r.lang, r.contact].map(cell).join(",")));
   return new Response(lines.join("\n"), { headers: { "content-type": "text/csv; charset=utf-8", "content-disposition": `attachment; filename="aspiran-try-feedback-${istDay()}.csv"` } });
 });
+// The demo's day-3 email (try-recall.ts): the funnel in counts, and sending what's due now (day: send as if it were that day).
+route("GET", /^try\/recall$/, "analytics", async ({ env }) => json(await recallFunnel(env)));
+route("POST", /^try\/recall\/run$/, "flags", async ({ env, body }) => json(await sendRecalls(env, /^\d{4}-\d{2}-\d{2}$/.test(String(body?.day ?? "")) ? body.day : istDay())));
 // "You asked, we did" (try.ts): short public lines, each about something visitors asked for and we did. Announcers write them.
 route("GET", /^try\/updates$/, "analytics", async ({ env, url }) => json({ updates: await tryUpdates(env, url.searchParams.get("path") || "path-pol-federalism", true) }));
 route("POST", /^try\/updates$/, "announce", async ({ env, s, body }) => {
