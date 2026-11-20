@@ -21,6 +21,7 @@ import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, PRICING_KEY, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
+import { ensureInstSchema } from "./institutes";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
 
 /**
@@ -81,6 +82,71 @@ route("GET", /^overview$/, "analytics", async ({ env }) => {
     activeIncidents: await one("SELECT COUNT(*) FROM incidents WHERE resolved_at IS NULL"),
     lastBackup: (await listBackups(env))[0]?.uploaded ?? null,
   });
+});
+
+// The home dashboard: one look at people, Plus, money, content, today's Chai, helper usage, leads and coaching centres.
+// Counts only, never who. Payments show only to roles that can see the Payments section.
+route("GET", /^dashboard$/, "analytics", async ({ env, s }) => {
+  const today = istDay();
+  const dayAgo = (n: number) => istDay(new Date(Date.now() - n * 86400_000));
+  const since7 = dayAgo(6), since14 = dayAgo(13), since30 = dayAgo(29);
+  const days14 = Array.from({ length: 14 }, (_, i) => dayAgo(13 - i));
+  const first = async (sql: string, ...b: unknown[]) => (await env.DB.prepare(sql).bind(...b).first<any>().catch(() => null)) ?? {};
+  const all = async (sql: string, ...b: unknown[]) => (await env.DB.prepare(sql).bind(...b).all<any>().catch(() => ({ results: [] }))).results ?? [];
+  const series = (rows: { day: string; n: number }[]) => days14.map((d) => ({ day: d, n: rows.find((r) => r.day === d)?.n ?? 0 }));
+  const isoDaysAgo = (n: number) => new Date(Date.now() - n * 86400_000).toISOString();
+
+  const people = await first(`SELECT COUNT(*) AS total, SUM(status = 'suspended') AS suspended,
+    SUM(created_at >= ?) AS new7, SUM(last_seen_at >= ?) AS active1, SUM(last_seen_at >= ?) AS active7, SUM(last_seen_at >= ?) AS active30 FROM accounts`,
+    isoDaysAgo(7), isoDaysAgo(1), isoDaysAgo(7), isoDaysAgo(30));
+  const signups = series(await all("SELECT substr(created_at, 1, 10) AS day, COUNT(*) AS n FROM accounts WHERE created_at >= ? GROUP BY 1", since14));
+  const pods = await first("SELECT COUNT(*) AS pods, COALESCE(SUM(size), 0) AS members FROM pods WHERE size > 0");
+
+  const nowIso = new Date().toISOString();
+  const plus = await first(`SELECT SUM(ends_at > ? AND test = 0) AS active, SUM(ends_at > ? AND test = 1) AS test, SUM(ends_at > ? AND test = 0 AND source = 'cashfree') AS web,
+    SUM(ends_at > ? AND test = 0 AND source = 'play') AS play, SUM(ends_at > ? AND test = 0 AND source = 'trial') AS trial FROM entitlements`, nowIso, nowIso, nowIso, nowIso, nowIso);
+  const money = can(s, "flags") ? {
+    ...(await first(`SELECT SUM(status = 'paid') AS paid, SUM(status = 'refunded') AS refunded, COALESCE(SUM(CASE WHEN status = 'paid' THEN amount_inr END), 0) AS revenue,
+      COALESCE(SUM(CASE WHEN status = 'paid' AND paid_at >= ? THEN amount_inr END), 0) AS revenue30, SUM(status = 'paid' AND paid_at >= ?) AS paid30 FROM payments WHERE mode = 'production'`, since30, since30)),
+    sandbox: (await first("SELECT COUNT(*) AS n FROM payments WHERE mode != 'production'")).n ?? 0,
+    daily: series(await all("SELECT substr(paid_at, 1, 10) AS day, COUNT(*) AS n FROM payments WHERE status = 'paid' AND mode = 'production' AND paid_at >= ? GROUP BY 1", since14)),
+  } : null;
+
+  const library = await all("SELECT kind, SUM(status = 'approved') AS live, SUM(status = 'draft') AS drafts FROM library GROUP BY kind ORDER BY live DESC");
+  const chai = {
+    today: await first(`SELECT COUNT(*) AS found, SUM(status = 'draft') AS waiting, SUM(en_editor IS NOT NULL) AS approved, SUM(hi_editor IS NOT NULL) AS hindi,
+      SUM(status = 'rejected') AS rejected FROM candidates WHERE day = ?`, today),
+    briefOut: !!(await env.DB.prepare("SELECT 1 FROM briefs WHERE day = ?").bind(today).first()),
+    published: series(await all("SELECT day, 1 AS n FROM briefs WHERE day >= ?", since14)),
+  };
+  const helpers = {
+    today: await first("SELECT SUM(status = 'ok') AS ok, SUM(status != 'ok') AS failed, COALESCE(SUM(tokens_in + tokens_out), 0) AS tokens FROM llm_calls WHERE day = ?", today),
+    daily: series(await all("SELECT day, COUNT(*) AS n FROM llm_calls WHERE day >= ? AND status = 'ok' GROUP BY day", since14)),
+    byPurpose: await all("SELECT purpose, COUNT(*) AS n FROM llm_calls WHERE day >= ? AND status = 'ok' GROUP BY purpose ORDER BY n DESC LIMIT 8", since7),
+    voiceToday: (await first("SELECT COUNT(*) AS n FROM voice_calls WHERE day = ? AND status = 'ok'", today)).n ?? 0,
+  };
+  // Website leads, and the coaching centres among them (they filled in a centre name on aspiran.in/for-coaching).
+  const leadRows = await all("SELECT details, contact IS NOT NULL AS contact, first_seen FROM web_leads ORDER BY first_seen DESC LIMIT 2000");
+  const centres = leadRows.map((r) => ({ ...r, d: (() => { try { return JSON.parse(r.details || "{}"); } catch { return {}; } })() })).filter((r) => r.d.centre);
+  const leads = {
+    total: leadRows.length, withContact: leadRows.filter((r) => r.contact).length, new7: leadRows.filter((r) => r.first_seen >= isoDaysAgo(7)).length,
+    centres: centres.length, centresNew7: centres.filter((r) => r.first_seen >= isoDaysAgo(7)).length,
+    latestCentres: centres.slice(0, 5).map((r) => ({ centre: String(r.d.centre).slice(0, 80), city: r.d.city ? String(r.d.city).slice(0, 40) : null, students: r.d.students ? String(r.d.students).slice(0, 12) : null, at: r.first_seen, contact: !!r.contact })),
+  };
+  await ensureInstSchema(env);
+  const institutes = {
+    ...(await first(`SELECT COUNT(*) AS total, SUM(status = 'active') AS active, SUM(status = 'paused') AS paused FROM institutes`)),
+    students: (await first("SELECT COUNT(*) AS n FROM inst_members WHERE role = 'student' AND status = 'active'")).n ?? 0,
+    openDoubts: (await first("SELECT COUNT(*) AS n FROM inst_doubts WHERE status = 'open'")).n ?? 0,
+    flagOn: !!(await flags(env)).institutes,
+  };
+  const attention = {
+    safety: (await first("SELECT COUNT(*) AS n FROM reports WHERE kind = 'distress' AND status NOT IN ('resolved', 'closed', 'hidden')")).n ?? 0,
+    reports: (await first("SELECT COUNT(*) AS n FROM reports WHERE kind = 'report' AND status = 'open'")).n ?? 0,
+    incidents: (await first("SELECT COUNT(*) AS n FROM incidents WHERE resolved_at IS NULL")).n ?? 0,
+    lastBackup: (await listBackups(env).catch(() => []))[0]?.uploaded ?? null,
+  };
+  return json({ today, people: { ...people, pods: pods.pods ?? 0, podMembers: pods.members ?? 0, signups }, plus, money, library, chai, helpers, leads, institutes, attention });
 });
 
 // --- Staff ----------------------------------------------------------------------------------

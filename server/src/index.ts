@@ -2,7 +2,7 @@ import { checkProviders } from "./ai";
 import { runFactWatch } from "./factwatch";
 import { publicLibrary, serveMedia } from "./content";
 import { autoPick, chaiDigest, deskApi, modApi, postRitual, publish } from "./desk";
-import DESK_HTML from "./desk.html";
+import DESK_PAGE from "./desk.html";
 import { runPipeline, waitingDrafts } from "./pipeline";
 import { adminApi } from "./admin";
 import { chotuChat, modelsRoute } from "./chotu";
@@ -10,7 +10,8 @@ import { jeetuRoute } from "./jeetu";
 import { voiceReady, voiceRoute, withVoice } from "./voice";
 import { extraDistress, publicLangs } from "./langs";
 import { REQUESTABLE, requestLanguage } from "./requests";
-import ADMIN_HTML from "./admin.html";
+import ADMIN_PAGE from "./admin.html";
+import KIT_HTML from "./console-kit.html";
 import { createBackup } from "./backups";
 import { CONSENT_VERSION, privacyRoute, recordConsent } from "./privacy";
 import { bump, ensureSchema, flags, setSetting } from "./staff";
@@ -36,7 +37,7 @@ import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
 import { learnRoute } from "./learn";
 import { instituteRoute } from "./institutes";
-import INSTITUTE_HTML from "./institute.html";
+import INSTITUTE_SRC from "./institute.html";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
 const safeDecode = (s: string) => { try { return decodeURIComponent(s); } catch { return s; } };
@@ -354,6 +355,10 @@ async function chaiDrafts(env: Env, at: string, fetch: boolean) {
  * this server. Both pages are single files with inline scripts and styles, hence 'unsafe-inline'; what the policy
  * stops is a script or a form pointing anywhere else.
  */
+// The staff pages share one look and set of helpers (console-kit.html), put inline where each page has <!--KIT-->.
+const withKit = (page: string) => page.replace("<!--KIT-->", () => KIT_HTML);
+const ADMIN_HTML = withKit(ADMIN_PAGE), DESK_HTML = withKit(DESK_PAGE), INSTITUTE_HTML = withKit(INSTITUTE_SRC);
+
 const STAFF_PAGE = {
   "x-frame-options": "DENY", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "cache-control": "no-store",
   "content-security-policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; font-src 'self' data:; form-action 'none'; base-uri 'none'; frame-ancestors 'none'",
@@ -363,7 +368,7 @@ const STAFF_PAGE = {
 /** The coaching-centre console signs in with the person's own Aspiran account (app/auth.js, Firebase from gstatic). */
 const INSTITUTE_PAGE = {
   "x-frame-options": "DENY", "referrer-policy": "no-referrer", "x-content-type-options": "nosniff", "cache-control": "no-store",
-  "content-security-policy": "default-src 'none'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://www.gstatic.com; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'none'; base-uri 'none'; frame-ancestors 'none'",
+  "content-security-policy": "default-src 'none'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'unsafe-inline'; img-src 'self' data: blob: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://www.gstatic.com; font-src 'self'; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'none'; base-uri 'none'; frame-ancestors 'none'",
 };
 
 const SHELF_KINDS = new Set(["calm", "routine", "pause-lines"]);
