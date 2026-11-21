@@ -49,6 +49,8 @@ export function viewSkeletons(arg) {
       h("div.card", h("strong", "Headings for the body"), h("ol", (d.headings ?? []).map((x) => h("li", T(x))))),
       h("div.card", h("strong", "Close with"), h("p", T(d.wayForward))),
       d.commonMistake && h("div.card.soft", h("strong", "The common slip"), h("p", T(d.commonMistake))),
+      d.missed && h("div.card.soft", h("strong", "What most answers miss"), h("p", T(d.missed))),
+      d.example && h("div.card", h("strong", "A recent Indian example"), h("p", T(d.example))),
       h("p.small.muted", "A skeleton, not a model answer: your examples and your words make it yours."),
       h("div.row", next ? h("a.btn.primary", { href: "#skeletons/" + next.d.id }, "Next question") : h("a.btn", { href: "#skeletons" }, "All questions"),
         h("a.btn", { href: "#mains" }, "Write one in Mains answer")));
@@ -343,7 +345,8 @@ export function viewWatch(arg) {
                 onplay: (ev) => { if (ev.target.dataset.played) return; ev.target.dataset.played = "1"; track("video_play", { series: codeOf(w.series ?? "ca"), id: codeOf(w.week + "-" + e.id, 64) }); },
                 onended: (ev) => { const s = C.store.get("videosSeen", {}); s[w.week + "/" + e.id] = C.today(); C.store.set("videosSeen", s);
                   track("video_done", { series: codeOf(w.series ?? "ca"), id: codeOf(w.week + "-" + e.id, 64), seconds: Math.round(ev.target.duration || 0) }); } },
-                h("source", { src, type: "video/mp4" }), h("track", { kind: "captions", src: w.base + e.vtt, srclang: w.lang === "hi" ? "hi" : "en", label: w.lang === "hi" ? "हिन्दी" : "English", default: true }))
+                h("source", { src, type: "video/mp4" }), h("track", { kind: "captions", src: w.base + e.vtt, srclang: w.lang === "hi" ? "hi" : "en", label: w.lang === "hi" ? "हिन्दी" : "English", default: !(hi && e.vttHi) }),
+                e.vttHi && h("track", { kind: "captions", src: w.base + e.vttHi, srclang: "hi", label: "हिन्दी", default: hi }))
             : h("div", h("img", { src: w.base + e.poster, alt: "", style: { width: "100%", maxHeight: "50vh", objectFit: "cover", borderRadius: "12px", filter: "blur(6px)" } }),
                 h("p.small", "This one is in Plus, in the Android app. ", h("a", { href: "#upgrade" }, "See Plus →")));
           const quiz = (e.quiz ?? []).map((q) => C.mcqBlock({ question: q.q, options: q.options, answerIndex: q.answerIndex, explanation: q.why }, () => {}, { where: "video", topic: w.series ?? "ca" }));

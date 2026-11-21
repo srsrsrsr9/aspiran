@@ -41,7 +41,7 @@ export const FACTS: Fact[] = [
     source: "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&format=json&titles=Supreme_Court_of_India",
     question: "What is the sanctioned strength of the Supreme Court of India, counting the Chief Justice? Answer with the number only.",
     near: ["sanctioned strength", "Number of Judges", "judges including"],
-    phrases: ["strength of the Supreme Court is {v} including", "raised the sanctioned strength from 34 to {v}", "sanctioned strength of {v} under"],
+    phrases: ["strength of the Supreme Court is {v} including", "raised the sanctioned strength from 34 to {v}", "sanctioned strength of {v} under", "the sanctioned strength is {v}, including"],
   },
   {
     id: "crr", label: "RBI cash reserve ratio (CRR)", value: "3", how: "ask",

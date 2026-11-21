@@ -179,6 +179,10 @@ function check() {
 
 // --- Pack ---------------------------------------------------------------------------------------------
 
+/** A source is a plain string (older batches) or { name, url, opened, what } (since the 21 Nov 2026 batch). */
+const srcText = (s) => typeof s === "string" ? s : [s.name, s.url, s.opened ? `opened ${s.opened}` : null].filter(Boolean).join(", ");
+const srcList = (list) => (list ?? []).map(srcText).join("; ");
+
 const REVIEW = (note) => ({ status: "draft", checkedBy: null, checkedOn: null, note });
 const PROVENANCE = { generator: "Claude (syllabus content drafts)", createdOn: today(), note: "Written from general knowledge and the named sources, not copied from them. A subject editor checks every fact." };
 const MOCK_LOOK = {
@@ -193,7 +197,8 @@ function toRead(d, n) {
     node: n.nodes[0], nodes: n.nodes, topic: d.topic, gsPaper: n.gsPaper, minutes: n.minutes,
     en: { dek: n.dek, sections: n.sections, keyFacts: n.keyFacts, examAngle: n.examAngle, selfCheck: n.selfCheck },
     ...(n.hi?.sections?.length ? { hi: { dek: n.hi.dek, sections: n.hi.sections, keyFacts: n.hi.keyFacts ?? [], examAngle: n.hi.examAngle ?? "", selfCheck: n.hi.selfCheck ?? [] } } : {}),
-    sources: { en: n.sources.join("; ") },
+    sources: { en: srcList(n.sources) },
+    ...(n.sources.some((x) => typeof x === "object") ? { sourceList: n.sources.filter((x) => typeof x === "object") } : {}),
     ...(n.factsToCheck?.length ? { factsToCheck: n.factsToCheck } : {}),
     review: REVIEW(`Draft, ${n.hi?.sections?.length ? "English and Hindi" : "English only"}. Verify: ${n.verify}`),
     provenance: PROVENANCE,
@@ -231,7 +236,7 @@ function toMock(d) {
     tags: { stage: ["prelims"], papers: [d.paper] },
     id: d.id, tone: "NEUTRAL", title: d.hi?.title ? { en: d.title, hi: d.hi.title } : { en: d.title }, paper: d.paper, section: d.section, minutes: d.minutes,
     questions: d.questions.map((q) => toMockQ(q, null, passages)),
-    sources: { en: d.sources.join("; ") }, schema: "upsc-pods/mock-paper@1",
+    sources: { en: srcList(d.sources) }, schema: "upsc-pods/mock-paper@1",
     ...(d.factsToCheck?.length ? { factsToCheck: d.factsToCheck } : {}),
     review: REVIEW(`Draft, ${hindi ? "English and Hindi" : "English only"}. Check every answer. ${d.verify ?? ""}${flags.length ? " Date-sensitive or worth a second look: " + flags.join("; ") : ""}${hiCheck.length ? ` Hindi editor, check these terms: ${hiCheck.join("; ")}` : ""}`.trim()),
     provenance: PROVENANCE,
@@ -258,7 +263,7 @@ function toWorked(d, n) {
     paper: "prelims-csat", section: `Practice (written by us, not from a UPSC paper): ${n.title}`, minutes: Math.max(10, n.worked.length * 2),
     questions: n.worked.map((w) => ({ format: "direct", node: n.nodes[0], nodes: n.nodes, topic: d.topic, answer: w.answer, difficulty: "medium",
       en: lang(w, "en"), ...(hiOk ? { hi: lang(w, "hi") } : {}) })),
-    sources: { en: n.sources.join("; ") }, schema: "upsc-pods/mock-paper@1",
+    sources: { en: srcList(n.sources) }, schema: "upsc-pods/mock-paper@1",
     ...(n.factsToCheck?.length ? { factsToCheck: n.factsToCheck } : {}),
     review: REVIEW(`Draft, ${hiOk ? "English and Hindi" : "English only, Hindi still to come"}. Practice questions written for the note "${n.title}". All ${n.worked.length} answers were solved blind and matched the key (14 Nov 2026). ${n.verify}`),
     provenance: PROVENANCE,

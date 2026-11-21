@@ -189,7 +189,7 @@ class CurrentAffairs(private val context: Context, private val member: () -> Str
     suspend fun saveOffline(w: CaWeek, open: (CaEpisode) -> Boolean, onProgress: (Float) -> Unit): Boolean = withContext(Dispatchers.IO) {
         val scenes = w.episodes.filter(open)
         if (scenes.any { !it.free }) unlock(w.week)
-        val files = scenes.flatMap { listOfNotNull(it.mp4, it.vtt) }
+        val files = scenes.flatMap { listOfNotNull(it.mp4, it.vtt, it.vttHi) }
         var ok = true
         files.forEachIndexed { i, path ->
             ok = ok && runCatching {
@@ -287,6 +287,8 @@ data class CaEpisode(
     val durationSec: Double = 0.0,
     val mp4: String,
     val vtt: String? = null,
+    /** Hindi captions over the same video, when there are any (syllabus videos from 21 Nov 2026). */
+    val vttHi: String? = null,
     val poster: String? = null,
     val syllabusNodes: List<String> = emptyList(),
     /** One paper id or a list of them ("prelims-gs", "mains-gs3"). */

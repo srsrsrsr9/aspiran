@@ -342,10 +342,12 @@ fun CaPlayerScreen(
             if (!caOpen(e, gate)) { player.stop(); player.clearMediaItems(); return@LaunchedEffect }
             if (!e.free) ca.unlock(w.week)
             val item = MediaItem.Builder().setUri(ca.url(w, e.mp4)).setMediaId(e.id).apply {
-                e.vtt?.let { vtt ->
+                // A Hindi reader gets the Hindi captions when the scene has them.
+                val (capFile, capLang) = if (hindi && e.vttHi != null) e.vttHi to "hi" else e.vtt to w.lang
+                capFile?.let { vtt ->
                     setSubtitleConfigurations(listOf(
                         MediaItem.SubtitleConfiguration.Builder(Uri.parse(ca.url(w, vtt))).setMimeType(MimeTypes.TEXT_VTT)
-                            .setLanguage(w.lang).setSelectionFlags(C.SELECTION_FLAG_DEFAULT).build(),
+                            .setLanguage(capLang).setSelectionFlags(C.SELECTION_FLAG_DEFAULT).build(),
                     ))
                 }
             }.build()

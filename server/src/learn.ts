@@ -43,7 +43,9 @@ const KIND_WORDS: Record<string, [string, string]> = {
 
 interface Asked { paper: Paper; q: Q }
 interface Topic { node: Node; reads: Item[]; pyqs: { text: string; year: number; exam: string; n: string }[]; pyqTotal: number; byYear: Record<string, number>; asked: Asked[]; counts: Record<string, number>; hasPath: boolean }
-interface Q { n: string; nodes: string[]; marks?: number; words?: number; en: { q: string; options?: string[] }; answer?: number | null }
+interface Q { n: string; nodes: string[]; marks?: number; words?: number; en: { q: string; options?: string[] }; answer?: number | null; explain?: Explain }
+/** Why UPSC's keyed answer is right, written for Aspiran. Shown only beside an official key, never instead of one. */
+interface Explain { why: string; wrong: { option: number; text: string }[]; trap: string }
 interface Paper { id: string; exam: "prelims" | "mains"; year: number; paper: string; title: string; sourceUrl: string; key: { status: string; url?: string; dropped?: string[]; provisional?: boolean }; questions: Q[] }
 
 const PAPER_NAME: Record<string, string> = { prelims: "GS Paper I", csat: "CSAT (GS Paper II)", gs1: "GS Paper I", gs2: "GS Paper II", gs3: "GS Paper III", gs4: "GS Paper IV", essay: "Essay" };
@@ -56,10 +58,17 @@ const ORDER = ["prelims", "csat", "gs1", "gs2", "gs3", "gs4", "essay"];
 const byPaper = (a: Paper, b: Paper) => b.year - a.year || (a.exam === b.exam ? 0 : a.exam === "prelims" ? -1 : 1) || ORDER.indexOf(a.paper) - ORDER.indexOf(b.paper);
 const nodeById = new Map((NODES as Node[]).map((n) => [n.id, n]));
 
+function toExplain(x: any): Explain | undefined {
+  const why = en(x?.why);
+  if (!why) return undefined;
+  const wrong = (Array.isArray(x.wrong) ? x.wrong : []).filter((w: any) => Number.isInteger(w?.option) && en(w)).map((w: any) => ({ option: w.option, text: en(w) }));
+  return { why, wrong, trap: en(x.trap) };
+}
+
 function toPaper(d: any): Paper | null {
   if (!d || typeof d.id !== "string" || !/^cs[pm]-\d{4}-[a-z0-9]+$/.test(d.id) || d.sample || !Array.isArray(d.questions)) return null;
   const questions: Q[] = d.questions.filter((q: any) => q && typeof q.n === "string" && en(q.en?.q ?? q.q))
-    .map((q: any) => ({ n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, en: { q: en(q.en?.q ?? q.q), options: Array.isArray(q.en?.options) ? q.en.options : undefined }, answer: q.answer }));
+    .map((q: any) => ({ n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, en: { q: en(q.en?.q ?? q.q), options: Array.isArray(q.en?.options) ? q.en.options : undefined }, answer: q.answer, explain: toExplain(q.explain) }));
   return { id: d.id, exam: d.exam === "mains" ? "mains" : "prelims", year: Number(d.year), paper: d.paper, title: en(d.title), sourceUrl: d.source?.url ?? "", key: d.answerKey ?? { status: "none" }, questions };
 }
 
@@ -178,6 +187,8 @@ function keyNote(p: Paper): string {
 }
 const answerLine = (p: Paper, q: Q) => p.exam !== "prelims" ? "" : (p.key.dropped ?? []).includes(q.n) ? `<p class="small">UPSC dropped this question in its key.</p>`
   : p.key.status === "official" && typeof q.answer === "number" ? `<p><strong>UPSC's answer: (${LETTER[q.answer]})</strong>${p.key.provisional ? ` <span class="small">(provisional key)</span>` : ""}</p>` : "";
+/** The explanation, only when UPSC's key gives this question an answer (never for a dropped question or a paper with no key). */
+const explainBlock = (p: Paper, q: Q) => !q.explain || p.key.status !== "official" || typeof q.answer !== "number" ? "" : `<h2>Why (${LETTER[q.answer]})</h2><p>${esc(q.explain.why)}</p>${q.explain.wrong.length ? `<ul>${q.explain.wrong.map((w) => `<li><strong>(${LETTER[w.option] ?? "?"})</strong> ${esc(w.text)}</li>`).join("")}</ul>` : ""}${q.explain.trap ? `<p><strong>The trap:</strong> ${esc(q.explain.trap)}</p>` : ""}`;
 const qText = (s: string) => s.split("\n").map((l) => esc(l)).join("<br>");
 const options = (q: Q) => q.en.options?.length ? `<ol type="a">${q.en.options.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>` : "";
 const topicLinks = (q: Q) => q.nodes.map((id) => nodeById.get(id)).filter(Boolean).map((n) => `<a href="${learnPath(n!)}">${esc(n!.name)}</a>`).join(", ");
@@ -210,7 +221,7 @@ function questionPage(env: Env, p: Paper, q: Q, topics: Map<string, Topic>): Res
   const body = `<p class="crumb"><a href="/learn/papers">Past papers</a> › <a href="${paperPath(p)}">${esc(paperName(p))}</a></p>
 <h1>${esc(paperName(p))}, question ${esc(q.n)}</h1>
 <div class="q"><p>${qText(q.en.q)}</p>${options(q)}<p>${marksLine(q)}</p></div>
-${answerLine(p, q)}<p class="small">${p.exam === "prelims" ? keyNote(p) : "Word for word from UPSC's question paper."} <a href="${esc(p.sourceUrl)}" rel="nofollow">The paper on upsc.gov.in</a>.</p>
+${answerLine(p, q)}${explainBlock(p, q)}<p class="small">${p.exam === "prelims" ? keyNote(p) : "Word for word from UPSC's question paper."} <a href="${esc(p.sourceUrl)}" rel="nofollow">The paper on upsc.gov.in</a>.</p>
 ${asked ? `<h2>The syllabus topic it tests</h2><ul>${asked}</ul>` : ""}
 ${CTA(p.exam === "mains" ? "Write this answer in the app and mark it, free" : "Try questions like this with spaced review, free")}
 <p>${prev ? `<a href="${qPath(p, prev)}">← Question ${esc(prev.n)}</a>` : ""}${prev && next ? " · " : ""}${next ? `<a href="${qPath(p, next)}">Question ${esc(next.n)} →</a>` : ""}</p>`;

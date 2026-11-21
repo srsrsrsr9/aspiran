@@ -53,7 +53,7 @@ assert.equal(P.pickPyq([], day), null);
 step(`past question of the day: steady within a day, new each day, ${seen.size} papers in two months, never a sample`);
 
 // A Prelims question with UPSC's official key: options in the text, the answer only in Telegram's quiz poll.
-const prelims = papers.find((p) => p.exam === "prelims" && p.answerKey?.status === "official");
+const prelims = papers.find((p) => p.exam === "prelims" && p.answerKey?.status === "official" && !p.answerKey?.provisional);
 const shortQ = prelims.questions.find((q) => q.en.q.length < 280 && q.en.options.every((o) => o.length < 100));
 post = P.buildDailyPost(brief, { paper: prelims, q: shortQ }, day);
 assert.equal(post.pyq.exam, "prelims");

@@ -28,7 +28,7 @@ const dir = mkdtempSync(join(tmpdir(), "fw-"));
 execFileSync(process.execPath, [fileURLToPath(new URL("../scripts/syllabus.mjs", import.meta.url)), "pack", dir], { stdio: "pipe" });
 const path = "long-read/pol-syl-supreme-court.json";
 const bytes = readFileSync(join(dir, path));
-assert.ok(bytes.toString().includes("from 34 to 38"), "the note carries the phrase the watch rewrites");
+assert.ok(bytes.toString().includes("the sanctioned strength is 38, including"), "the note carries the phrase the watch rewrites");
 const pack = "factwatch-test";
 const manifest = Buffer.from(JSON.stringify({ schema: "upsc-pods/pack-manifest@1", packId: pack, createdOn: "2026-11-14", status: "draft",
   entry: { reads: [path] }, totalBytes: bytes.length, files: [{ path, bytes: bytes.length, sha256: createHash("sha256").update(bytes).digest("hex") }] }));

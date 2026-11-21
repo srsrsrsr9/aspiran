@@ -110,6 +110,8 @@ fun SkeletonsScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit
             Block("Headings for the body") { s.d["headings"].jsonList().forEachIndexed { i, h -> Text("${i + 1}. ${h.biText(hindi) ?: ""}") } }
             s.d["wayForward"].biText(hindi)?.let { Block("Close with") { Text(it) } }
             s.d["commonMistake"].biText(hindi)?.let { Block("The common slip", soft = true) { Text(it) } }
+            s.d["missed"].biText(hindi)?.let { Block("What most answers miss", soft = true) { Text(it) } }
+            s.d["example"].biText(hindi)?.let { Block("A recent Indian example") { Text(it) } }
             Text("A skeleton, not a model answer: your examples and your words make it yours.", style = MaterialTheme.typography.bodySmall)
             all.getOrNull(k + 1)?.let { next -> Button(onClick = { open = next.d.str("id") }) { Text("Next question") } }
         }

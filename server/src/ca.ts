@@ -50,7 +50,7 @@ const lockedCache = new Map<string, { at: number; files: Set<string> }>();
 export function lockedFiles(m: any): Set<string> {
   const out = new Set<string>();
   const eps = m?.episodes ?? [];
-  for (const e of eps) if (!e.free) for (const k of ["mp4", "vtt"]) if (e[k]) out.add(e[k]);
+  for (const e of eps) if (!e.free) for (const k of ["mp4", "vtt", "vttHi"]) if (e[k]) out.add(e[k]);
   if (m?.weekMp4 && eps.some((e: any) => !e.free)) out.add(m.weekMp4);
   return out;
 }
@@ -98,6 +98,7 @@ export function checkWeek(m: any, week?: string): string[] {
     if (typeof e?.title !== "string" || !e.title.trim()) errs.push(`${at}: title is missing`);
     if (typeof e?.durationSec !== "number" || e.durationSec <= 0) errs.push(`${at}: durationSec should be a positive number`);
     for (const k of ["mp4", "vtt", "poster"]) if (!SAFE_REL.test(String(e?.[k] ?? ""))) errs.push(`${at}: ${k} is missing or isn't a plain relative path`);
+    if (e?.vttHi != null && !SAFE_REL.test(String(e.vttHi))) errs.push(`${at}: vttHi isn't a plain relative path`);
     if (!Array.isArray(e?.syllabusNodes)) errs.push(`${at}: syllabusNodes should be a list`);
     if (!Array.isArray(e?.sources)) errs.push(`${at}: sources should be a list`);
     if (typeof e?.free !== "boolean") errs.push(`${at}: free should be true or false`);
@@ -117,7 +118,7 @@ export function checkWeek(m: any, week?: string): string[] {
 export function weekFiles(m: any): string[] {
   const out = new Set<string>();
   if (m.weekMp4) out.add(m.weekMp4);
-  for (const e of m.episodes ?? []) for (const k of ["mp4", "vtt", "poster"]) if (e[k]) out.add(e[k]);
+  for (const e of m.episodes ?? []) for (const k of ["mp4", "vtt", "vttHi", "poster"]) if (e[k]) out.add(e[k]);
   return [...out];
 }
 
