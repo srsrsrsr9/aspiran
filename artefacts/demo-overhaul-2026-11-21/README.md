@@ -31,3 +31,6 @@ What changed, from the owner's review of app.aspiran.in/app/#try/path-pol-federa
 The wording fix is now in the live Federalism topic (run by Claude on the owner's go-ahead). The first single-statement
 version was too big for the database (over its 100 KB limit), so `federalism-wording-fix.sql` is now 14 small
 field-by-field updates. Checked afterwards: the live row matches the intended topic exactly, with no "AI" and no voice note.
+
+## Follow-up: Chotu's flashlight (prototype, GST vote only)
+See `artefacts/flashlight-2026-11-21/README.md`. Not deployed.

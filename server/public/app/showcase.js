@@ -5,14 +5,20 @@
 // - A tour guide talks beside the work (on phones, in a dock above the button bar): what the feature does and why it
 //   works, said with too much enthusiasm, plus one line on what the app has more of. That replaces the old "why we do
 //   it this way" folds and the "Free preview" strip. The guide is the tour's voice, not a person and not a member.
-// - Things move and (only if the visitor turns it on) make small sounds. Sound is off by default; reduced motion is
+// - Things move and (only if the visitor turns it on) make small sounds. Sound effects are off by default (Chotu's
+//   flashlight voice is the owner's one exception, 21 Nov 2026: on after the first click; flashlight.js); reduced motion is
 //   respected (everything still works, it just appears without animation). No timers, no streaks; tallies are private.
 // - No feedback questions and no survey: we learn from anonymous funnel events (track), never from nagging.
 // Members never see this; they get the in-app route (try.js), where the side doors and the "why" notes still live.
 
+import * as FL from "./flashlight.js";
+
 let X = null;
 /** try.js hands over its helpers: see the call in try.js (S.init). */
-export function init(ctx) { X = ctx; css(); }
+export function init(ctx) { X = ctx; css(); FL.init(ctx); }
+// Chapters with Chotu's flashlight (flashlight.js) keep the side guide quiet: nothing talks while the visitor works,
+// and once the chapter is done the flashlight takes over. A prototype on the GST vote only (21 Nov 2026).
+const flash = (st) => !!FL.LINES[st?.id];
 const h = (...a) => X.h(...a);
 const put = (...a) => X.put(...a);
 const L = (v) => X.L(v);
@@ -226,6 +232,9 @@ function logoMark() { const s = h("span.sc-logo-mark"); s.innerHTML = LOGO; retu
 
 let ac = null;
 const sfxOn = () => !!X.store.get("try:sfx", false);
+// The speaker button: on while either sound is on. Turning it off silences both (remembered); on turns both on.
+const soundOn = () => sfxOn() || FL.voiceOn();
+const setSound = (on) => { X.store.set("try:sfx", on); X.store.set("try:voice", on); if (!on) FL.stopVoice(); };
 function tone(f, d, type = "sine", g = 0.06, when = 0, slide = 0) {
   if (!sfxOn()) return;
   try {
@@ -304,15 +313,17 @@ export function draw(into, strip) {
   const p = X.prog();
   const list = seq();
   const at = p.show == null || p.show < 0 || p.route !== "express" ? -1 : Math.min(p.show, list.length - 1);
-  if (at !== chapterAt) { clearTimers(); resetGuide(); chapterAt = at; }
+  FL.listen();
+  if (at !== chapterAt) { clearTimers(); resetGuide(); FL.close(); chapterAt = at; }
   else rebuildGuide();
   if (at < 0) { put(root, strip, topBar(list, -1), cover(list)); return pump(); }
   const st = X.view(X.stepById(list[at]));
   action = { label: "", run: null, ready: false };
   const body = (CH[st.type] ?? CH.fallback)(st, at, list);
   put(root, strip, topBar(list, at),
-    h("div.sc-stage", h("article.sc-main", { lang: X.lang() }, head(st, at, list), body), guide()),
+    h("div.sc-stage" + (flash(st) ? ".fl-quiet" : ""), h("article.sc-main", { lang: X.lang() }, head(st, at, list), body), guide()),
     bottomBar(list, at));
+  if (flash(st)) { if (isDone(st) && !FL.seen(st.id)) later(() => flashTour(st), 900); return; }
   if (!said.has(st.id + ":enter")) say(st, "enter");
   if (isDone(st) && !said.has(st.id + ":done")) say(st, "done");
   pump();
@@ -337,9 +348,9 @@ function goShow(i) {
 }
 
 function topBar(list, at) {
-  const snd = sfxOn();
+  const snd = soundOn();
   const sound = h("button.sc-iconbtn", { type: "button", "aria-pressed": String(snd), title: t("sound"), "aria-label": t("sound"),
-    onclick: () => { X.store.set("try:sfx", !snd); if (!snd) { SFX.tap(); track("demo_act", { act: "sound_on" }); } X.redraw(); } }, icon(snd ? "on" : "off", 20));
+    onclick: () => { setSound(!snd); if (!snd) { SFX.tap(); track("demo_act", { act: "sound_on" }); } else track("demo_act", { act: "sound_off" }); X.redraw(); } }, icon(snd ? "on" : "off", 20));
   const rail = at >= 0 && h("div.sc-rail", { "aria-label": t("chapterOf", at + 1, list.length) },
     h("div.sc-segs", list.map((id, i) => h("button.sc-seg" + (i === at ? ".on" : isDone(X.stepById(id)) ? ".done" : ""), {
       type: "button", title: nameOf(X.stepById(id)), "aria-label": nameOf(X.stepById(id)), onclick: () => goShow(i) }))),
@@ -527,10 +538,15 @@ function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally } = {})
   return box;
 }
 
+function flashTour(st) {
+  if (X.prog().show !== barAt) return;
+  FL.start(X, st.id, { onGo: () => { SFX.whoosh(); goShow(barAt + 1); }, onSound: (on) => setSound(on) });
+}
 function markDone(st) {
   X.setA(doneKey(st), true);
   track("demo_act", { step: st.id, act: "done" });
-  say(st, "done");
+  if (flash(st)) later(() => flashTour(st), 2400); // a moment to read the last answer, then the light comes on
+  else say(st, "done");
   if (barEl) { action = { label: "", run: null, ready: true }; paintBar(); barEl.querySelector(".sc-go")?.classList.add("pulse"); }
 }
 
@@ -756,6 +772,7 @@ function gstChamber(st) {
     if (fresh) burst(box.querySelector(".sc-find.new"));
     const allFound = Object.keys(found).length >= st.challenges.length;
     if (allFound && !(st.questions ?? []).length && !isDone(st)) markDone(st);
+    if (isDone(st) && flash(st) && FL.seen(st.id)) box.append(FL.againButton(() => flashTour(st)));
     if (!isDone(st)) act(t("skip"), () => goShow(barAt + 1), false); else act("", null);
   };
   drawC();
