@@ -27,6 +27,7 @@ import * as F from "./fsrs.js";
 import * as MP from "./map.js";
 import * as P from "./try-parts.js";
 import * as S from "./showcase.js";
+import * as SR from "./showreel.js";
 
 let C = null;
 /** app.js hands over its helpers once at start. */
@@ -271,6 +272,12 @@ async function load(id, preview) {
     if (r.status === 404 || r.status === 401) return { closed: true };
   } catch {}
   return C.store.get("try:data:" + id + (preview ? ":preview" : "")) ?? { closed: true }; // offline: the last copy
+}
+
+/** #tour/<topic>: the fast sales showreel (showreel.js). */
+export function viewTour(arg = "") {
+  SR.init({ store: C.store, track: C.track, profile: C.profile });
+  return SR.view(arg);
 }
 
 let opened = null;

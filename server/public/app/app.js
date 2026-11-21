@@ -326,7 +326,7 @@ const PREP_OF = { try: "learn", skeletons: "practice", cases: "practice", csat: 
 const spaceOf = (name) => (TAB_OF[name] === "prep" ? "prep" : "adda");
 // Honest tools and the shelf work without an account (spec §2.1, "free, no card needed").
 // "Try one topic" (try.js) too: one whole syllabus topic, open to anyone.
-const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk", "try", "tryback", "tryit"]);
+const PUBLIC = new Set(["shelf", "compass", "cost", "maps", "thinker", "routine", "roadmap", "calm", "talk", "try", "tryback", "tryit", "tour"]);
 
 function route() {
   const [name, ...rest] = (location.hash.slice(1) || "adda").split("/");
@@ -412,7 +412,7 @@ function render() {
   podVisitTrack(r.name);
   const space = spaceOf(r.name);
   document.documentElement.dataset.space = space;
-  M.startAnalytics(config?.posthog); M.screen(profile() ? r.name.split("=")[0] : r.name === "try" || r.name === "tryback" || r.name === "shelf" ? r.name : "first-run", !profile());
+  M.startAnalytics(config?.posthog); M.screen(profile() ? r.name.split("=")[0] : r.name === "try" || r.name === "tryback" || r.name === "tour" || r.name === "shelf" ? r.name : "first-run", !profile());
   // A link from a "Reset your password" email: #reset=<code>.
   if (r.name.startsWith("reset=")) { put(root, resetScreen(r.name.slice(6))); return; }
   // Sign-in (auth.js): a switched-off account, or an install that hasn't signed in yet. Offline (even past the 72-hour
@@ -423,7 +423,7 @@ function render() {
     // The shelf's honest tools work before (and without) signing up or signing in.
     if (PUBLIC.has(r.name)) {
       put(root, h("div.shell.public", h("main", { id: "main" },
-        r.name !== "try" && r.name !== "tryback" && h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
+        r.name !== "try" && r.name !== "tryback" && r.name !== "tour" && h("div.row.between", { style: { marginBottom: "12px" } }, h("a.brand", { href: "#shelf" }, "Aspiran · Free Shelf"), h("a.btn", { href: "#" }, "Join, free, no card needed")),
         VIEWS[r.name](r.arg))));
       return;
     }
@@ -4269,7 +4269,7 @@ const VIEWS = {
   adda: viewAdda, commons: viewCommons, pod: viewPod, rooms: viewRooms, chotu: viewChotu, jeetu: () => J.viewJeetu(),
   prep: viewToday, today: viewToday, review: viewReview, map: viewMap, vine: viewVine, close: viewClose, chai: viewChai, practice: viewPractice, prelims: viewPrelims, mains: viewMains, essay: viewEssay, interview: viewInterview, walk: viewWalk, print: viewPrint, optional: viewOptional, terms: viewTerms, room: viewRoom, casefile: viewCaseFile, progress: viewProgress,
   skeletons: BR.viewSkeletons, cases: BR.viewCases, csat: BR.viewCsat, sheets: BR.viewSheets, talks: BR.viewTalks, watch: BR.viewWatch, tryit: IT.viewTryIt, listen: viewListen,
-  learn: X.viewLearn, try: TRY.viewTry, tryback: TRY.viewTryBack, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
+  learn: X.viewLearn, try: TRY.viewTry, tour: TRY.viewTour, tryback: TRY.viewTryBack, upgrade: X.viewUpgrade, ptest: X.viewWeeklyTest, pcompile: X.viewCompilation, insights: X.viewInsights, revise: X.viewRevise,
   mock: viewMock, read: viewRead, focus: viewFocus, plan: viewPlan, routine: viewRoutine, roadmap: viewRoadmap,
   me: viewMe, inst: (arg) => INST.viewInst(arg), path: viewMe, profile: viewProfile, rhythm: viewRhythm, stamps: viewStamps, privacy: viewPrivacy, plus: viewPlus, gift: viewGift, paid: viewPaid, receipts: viewReceipts,
   shelf: viewShelf, compass: viewCompass, cost: viewCost, maps: viewMaps, thinker: viewThinker,
