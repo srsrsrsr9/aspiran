@@ -39,7 +39,6 @@ export function video(st) {
     K.head(st), K.joke(st), h("p.muted", L(st.lead)),
     box,
     h("details.try-transcript", h("summary", K.u("transcript")), h("p", L(v.transcript))),
-    h("p.small.muted", L(v.voiceNote)),
     st.questions?.length && h("h2", K.u("yourTurn")),
     (st.questions ?? []).map((q, n) => h("div.card", K.mcq(q, `${st.id}:${n}`))),
   ];

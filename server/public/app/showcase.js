@@ -1,0 +1,1291 @@
+// The demo stage: how a visitor (no account) walks the Express route of "Try one topic" (try.js hands over here).
+// Rebuilt on 21 Nov 2026 from the owner's review: a demo is a sales floor, not a classroom. So:
+// - One linear tour, chapter by chapter. The games, the video and the essay pages are chapters, never side doors, and
+//   there is no "Back to the topic" anywhere. Every chapter ends with one big button that names what comes next.
+// - A tour guide talks beside the work (on phones, in a dock above the button bar): what the feature does and why it
+//   works, said with too much enthusiasm, plus one line on what the app has more of. That replaces the old "why we do
+//   it this way" folds and the "Free preview" strip. The guide is the tour's voice, not a person and not a member.
+// - Things move and (only if the visitor turns it on) make small sounds. Sound is off by default; reduced motion is
+//   respected (everything still works, it just appears without animation). No timers, no streaks; tallies are private.
+// - No feedback questions and no survey: we learn from anonymous funnel events (track), never from nagging.
+// Members never see this; they get the in-app route (try.js), where the side doors and the "why" notes still live.
+
+let X = null;
+/** try.js hands over its helpers: see the call in try.js (S.init). */
+export function init(ctx) { X = ctx; css(); }
+const h = (...a) => X.h(...a);
+const put = (...a) => X.put(...a);
+const L = (v) => X.L(v);
+const hi = () => X.lang() === "hi";
+const RM = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; } };
+const later = (fn, ms) => { const id = setTimeout(fn, RM() ? 0 : ms); timers.push(id); return id; };
+let timers = [];
+const clearTimers = () => { timers.forEach(clearTimeout); timers = []; };
+const track = (name, props = {}) => X.track(name, props);
+
+// --- Words ------------------------------------------------------------------------------------------------------------
+
+const W = {
+  en: {
+    chapterOf: (i, n) => `Chapter ${i} of ${n}`, start: (m) => `Start the ${m}-minute tour`, resume: "Carry on where you left off",
+    whole: (m) => `or learn the whole topic (${m} min, three sittings)`, allTopics: "Other topics", join: "Join free", sound: "Sound effects",
+    skip: "Skip", nextUp: (t) => `Next: ${t}`, nextQ: "Next question", seeHow: "See how I did", back: "Back",
+    right: "Right!", notQuite: "Not quite.", yourPick: "your pick", howSure: "Lock it in. How sure are you?", sure3: ["Sure", "Ruled some out", "Pure guess"],
+    qOf: (i, n) => `${i} of ${n}`, guide: "Tour guide", guideSub: "points out the clever bits", joinFree: "Join free →",
+    tapPlay: "Play", captions: "captions on", soundTap: "sound on tap", readIt: "Read it instead", close: "Close", yourTurn: "Your turn",
+    fromVideo: "The question the video ends on", oneMore: "One more, from the same story",
+    bill: (i, n) => `Bill ${i} of ${n}`, whatDo: "What will you do?", nextBill: "Next bill", playAgain: "Play again", allowed: "Allowed", notAllowed: "Not allowed",
+    tray: "Subjects", trayHint: "Drag each one into its list. Or tap it, then tap the list.", dropHere: "Drop here", check: "Check my lists",
+    sortedAll: "All in the right list. Sharp.", sortedSome: (n) => `${n} to look at again. These are exactly the lookalikes Prelims uses.`, tryWrong: "Try those again", itsIn: "It's",
+    tallyRight: (r, n) => `${r} of ${n} right`, sureWrong: (n) => n ? `${n} you were sure of went wrong. Those cost marks in Prelims, and they're the ones you'll now remember best.` : "Nothing you were sure of went wrong. That's calibration.",
+    guessedRight: (n) => n ? `${n} pure guess${n > 1 ? "es" : ""} came good. You know more than you think.` : "", onlyYou: "Only you see this.",
+    centre: "Centre", centreVotes: "Centre votes", yes: "Yes", no: "No", allYes: "All states yes", allNo: "All states no", statesYes: "States voting yes",
+    weighted: "Weighted votes", need: "needs 75%", passed: "Passed", blocked: "Blocked", tapSeats: "Tap a seat to flip its vote.", find: "Find these three",
+    found: "Found!", lastQ: "Last one", build: "Build the plan", building: "Building…", whichEnd: "Which ending would you write?", tryOwn: "I'd rather plan my own first",
+    ownHolder: "Opening line…\n1.\n2.\n3.\nWay forward…", open: "Open", way: "Way forward", trap: "The usual trap", whatAsks: "What it asks",
+    otherQ: "Try the other question", marks: (m, w) => `${m} marks · ${w} words`, page: (n) => `Page ${n}`, nextPage: (t) => `Next page: ${t}`, howMarked: "How marking works",
+    evaluator: "What an evaluator looks for", snapTitle: "Your page, marked", snap1: "Snap your page", snap2: "We read it", snap3: "It comes back marked",
+    snapJoke: "Writing a whole essay in the middle of a demo? Legend. But nobody does, so here's what happens when you do it in the app.",
+    snapHow: "Write by hand, the way the exam wants. Photograph the page in the app. Chotu, your study buddy, reads your handwriting and marks it against the same checklist: structure, content and expression, with notes in the margin like these. Plus marks every answer you send.",
+    remember: "Remember these? You guessed them at the start.", card: (i, n) => `Card ${i} of ${n}`, nextCard: "Next card", saveCards: "Save my cards",
+    schedule: "When each card comes back", tomorrow: "Tomorrow", inDays: (n) => `In ${n} days`, saved: (n) => `${n} cards saved in this browser. Join free and they go straight into your Review.`,
+    trophies: "Your trophies", privateNote: "Private. Only you see this.", skipped: "Skipped", goBack: "Go back",
+    oneTopic: "That was one topic.", inApp: "Here's what's waiting inside", alsoIn: "Also in the app", plans: "Two plans. Start free.",
+    free: "Free", plus: "Plus", perYear: "/year", perDay: "about ₹11 a day", freeList: ["Your pod of 6 to 8 aspirants", "Daily review of everything you keep", "Chai: news cards tied to the syllabus", "Practice questions and past papers", "Chotu, your study buddy"],
+    plusList: ["Everything in Free", "Unlimited answer marking", "Every mock"], plusNote: "Start free. Upgrade inside the app whenever you're ready.",
+    joinKeep: (n) => n ? `Join free, keep your ${n} cards` : "Join free, keep your progress", noCard: "Free to join. No card needed.",
+    nums: [["2,000+", "practice questions"], ["250+", "short videos"], ["20+", "hours of recorded notes"], ["60", "interactives like the ones you played"], ["11", "full past papers"]],
+    stat: { warmup: "3 guesses", video: "1 video", "sim-governor": "4 bills decided", sort: (r, n) => `${r} of ${n} sorted`, pyq: (r, n) => `${r} of ${n} PYQs right`, "sim-gst": (f) => `${f} of 3 found`, mains: "1 plan built", essay: "3 pages marked", keep: (n) => `${n} cards kept`, read: "1 read" },
+    finTitle: "Look at you.", finLead: "Fifteen minutes ago you hadn't sat at a Governor's desk. Here's what you did.",
+    moreTopics: "Try another topic", wholeTopic: "Do the whole topic", app: [
+      ["Pods", "6 to 8 aspirants at your stage. Not a 50,000-member Telegram group. Everyone plans their skeleton alone, then the pod compares."],
+      ["Today's Chai", "A few news cards each morning, each tied to a syllabus line, each with one question. Then it ends."],
+      ["Review", "Every card you keep comes back just before you'd forget it. No streaks, no guilt."],
+      ["Chotu", "Your study buddy. Hints first and a skeleton after you try, never the full answer first. Quiet from 11:30 pm to 7 am."],
+      ["Walk mode", "Earphones in. The app reads you a Chai card or names a topic due for review, and you answer aloud on a walk."],
+      ["Calm", "For the bad evenings: slow breathing and grounding, with the helpline first. Nothing logged."]],
+    name: { warmup: "Guess first", read: "Read smart", video: "Watch", "sim-governor": "The Governor's desk", sort: "Sort the lists", pyq: "Real PYQs", "sim-gst": "The GST vote", mains: "Plan a Mains answer", essay: "The marking desk", keep: "Make it stick", finish: "Your trophies" },
+    sub: { warmup: "Three questions before any teaching. Guess freely; nothing is scored.", read: "One short read. Then the text folds away and you're tested from memory.",
+      video: "Under a minute. Then your turn.", "sim-governor": "You're the Governor. Four bills land on your desk. Your call.", sort: "Six lookalike subjects. Drag each one into its list.",
+      pyq: "Real Prelims questions, official answer keys. Pick, then say how sure you are.", "sim-gst": "31 states, one Centre. Flip the votes and find out who can block what.",
+      mains: "A real Mains question, planned point by point in front of you.", essay: "Three handwritten pages of one essay, marked in the margin.", keep: "Your first guesses come back. Then a few memory cards." },
+    coverKick: "Free demo · no account", coverSub: (n, m) => `${m} minutes. ${n} kinds of learning. One whole topic.`,
+  },
+  hi: {
+    chapterOf: (i, n) => `अध्याय ${i} / ${n}`, start: (m) => `${m} मिनट का टूर शुरू कीजिए`, resume: "जहाँ छोड़ा था, वहीं से",
+    whole: (m) => `या पूरा topic सीखिए (${m} मिनट, तीन बैठकें)`, allTopics: "दूसरे topics", join: "मुफ़्त जुड़िए", sound: "आवाज़ें",
+    skip: "छोड़िए", nextUp: (t) => `आगे: ${t}`, nextQ: "अगला सवाल", seeHow: "मेरा कैसा रहा?", back: "पीछे",
+    right: "सही!", notQuite: "पूरा सही नहीं।", yourPick: "आपका चुनाव", howSure: "पक्का कीजिए। आप कितने पक्के हैं?", sure3: ["पक्का", "कुछ हटा सका", "पूरा अंदाज़ा"],
+    qOf: (i, n) => `${i} / ${n}`, guide: "टूर गाइड", guideSub: "ख़ास बातें दिखाता है", joinFree: "मुफ़्त जुड़िए →",
+    tapPlay: "चलाइए", captions: "captions चालू", soundTap: "आवाज़ टैप पर", readIt: "पढ़कर देखिए", close: "बंद कीजिए", yourTurn: "आपकी बारी",
+    fromVideo: "जिस सवाल पर video ख़त्म होता है", oneMore: "उसी कहानी से एक और",
+    bill: (i, n) => `विधेयक ${i} / ${n}`, whatDo: "आप क्या करेंगे?", nextBill: "अगला विधेयक", playAgain: "फिर से खेलिए", allowed: "अनुमति है", notAllowed: "अनुमति नहीं",
+    tray: "विषय", trayHint: "हर एक को उसकी सूची में खींचिए। या उस पर टैप कीजिए, फिर सूची पर।", dropHere: "यहाँ छोड़िए", check: "मेरी सूचियाँ जाँचिए",
+    sortedAll: "सब सही सूची में। बढ़िया।", sortedSome: (n) => `${n} दोबारा देखने लायक। Prelims यही मिलते-जुलते विषय पूछता है।`, tryWrong: "इन्हें फिर से कीजिए", itsIn: "सही:",
+    tallyRight: (r, n) => `${n} में से ${r} सही`, sureWrong: (n) => n ? `${n} पर आप पक्के थे पर ग़लत हुए। Prelims में ये महँगे पड़ते हैं, और अब यही सबसे अच्छे से याद रहेंगे।` : "जिन पर आप पक्के थे, उनमें कोई ग़लत नहीं हुआ। यही सही अंदाज़ा है।",
+    guessedRight: (n) => n ? `${n} अंदाज़े सही निकले। आपको जितना लगता है, उससे ज़्यादा पता है।` : "", onlyYou: "यह सिर्फ़ आप देखते हैं।",
+    centre: "केंद्र", centreVotes: "केंद्र का वोट", yes: "हाँ", no: "ना", allYes: "सब राज्य हाँ", allNo: "सब राज्य ना", statesYes: "हाँ कहने वाले राज्य",
+    weighted: "भारित वोट", need: "75% चाहिए", passed: "पारित", blocked: "रुका", tapSeats: "किसी सीट पर टैप करके उसका वोट बदलिए।", find: "ये तीन खोजिए",
+    found: "मिल गया!", lastQ: "आख़िरी सवाल", build: "ढाँचा बनाइए", building: "बन रहा है…", whichEnd: "आप कौन-सा निष्कर्ष लिखेंगे?", tryOwn: "पहले मैं अपना ढाँचा बनाऊँगा",
+    ownHolder: "शुरुआत…\n1.\n2.\n3.\nआगे का रास्ता…", open: "शुरुआत", way: "आगे का रास्ता", trap: "आम ग़लती", whatAsks: "सवाल क्या माँगता है",
+    otherQ: "दूसरा सवाल आज़माइए", marks: (m, w) => `${m} अंक · ${w} शब्द`, page: (n) => `पेज ${n}`, nextPage: (t) => `अगला पेज: ${t}`, howMarked: "जाँच कैसे होती है",
+    evaluator: "परीक्षक क्या देखता है", snapTitle: "आपका पेज, जाँचा हुआ", snap1: "पेज की फ़ोटो लीजिए", snap2: "हम उसे पढ़ते हैं", snap3: "जाँच के साथ लौटता है",
+    snapJoke: "Demo के बीच पूरा निबंध लिखना? कमाल। पर कोई लिखता नहीं, इसलिए देखिए app में लिखने पर क्या होता है।",
+    snapHow: "हाथ से लिखिए, जैसे परीक्षा चाहती है। App में पेज की फ़ोटो लीजिए। आपका study साथी Chotu आपकी लिखावट पढ़ता है और उसी checklist पर जाँचता है: ढाँचा, सामग्री और अभिव्यक्ति, हाशिये में ऐसी ही टिप्पणियों के साथ। Plus में हर उत्तर जाँचा जाता है।",
+    remember: "ये याद हैं? शुरू में आपने इन पर अंदाज़ा लगाया था।", card: (i, n) => `Card ${i} / ${n}`, nextCard: "अगला card", saveCards: "मेरे cards सहेजिए",
+    schedule: "हर card कब लौटेगा", tomorrow: "कल", inDays: (n) => `${n} दिन बाद`, saved: (n) => `${n} cards इस browser में सहेजे गए। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे।`,
+    trophies: "आपकी ट्रॉफ़ियाँ", privateNote: "निजी। सिर्फ़ आप देखते हैं।", skipped: "छोड़ा", goBack: "वापस जाइए",
+    oneTopic: "यह एक topic था।", inApp: "अंदर यह सब इंतज़ार कर रहा है", alsoIn: "App में और भी", plans: "दो plan। मुफ़्त से शुरू कीजिए।",
+    free: "Free", plus: "Plus", perYear: "/साल", perDay: "लगभग ₹11 रोज़", freeList: ["6 से 8 उम्मीदवारों का आपका pod", "जो रखा, उसका रोज़ का review", "Chai: syllabus से जुड़े news cards", "अभ्यास सवाल और पिछले papers", "Chotu, आपका study साथी"],
+    plusList: ["Free में जो है, सब", "असीमित उत्तर-जाँच", "सारे mock"], plusNote: "मुफ़्त से शुरू कीजिए। जब चाहें, app के अंदर से upgrade कीजिए।",
+    joinKeep: (n) => n ? `मुफ़्त जुड़िए, अपने ${n} cards रखिए` : "मुफ़्त जुड़िए, अपनी प्रगति रखिए", noCard: "जुड़ना मुफ़्त। कोई card नहीं चाहिए।",
+    nums: [["2,000+", "अभ्यास सवाल"], ["250+", "छोटे video"], ["20+", "घंटे के रिकॉर्ड किए notes"], ["60", "आपके खेले जैसे interactives"], ["11", "पूरे पिछले papers"]],
+    stat: { warmup: "3 अंदाज़े", video: "1 video", "sim-governor": "4 विधेयकों पर फ़ैसला", sort: (r, n) => `${n} में से ${r} सही सूची में`, pyq: (r, n) => `${n} में से ${r} PYQ सही`, "sim-gst": (f) => `3 में से ${f} खोजे`, mains: "1 ढाँचा बना", essay: "3 पेज जाँचे", keep: (n) => `${n} cards रखे`, read: "1 पाठ" },
+    finTitle: "वाह, देखिए आपको।", finLead: "पंद्रह मिनट पहले आप राज्यपाल की मेज़ पर नहीं बैठे थे। देखिए आपने क्या-क्या किया।",
+    moreTopics: "दूसरा topic आज़माइए", wholeTopic: "पूरा topic कीजिए", app: [
+      ["Pods", "आपके स्तर के 6 से 8 उम्मीदवार। 50,000 लोगों का Telegram group नहीं। हर कोई पहले अकेले ढाँचा बनाता है, फिर pod मिलान करता है।"],
+      ["आज की Chai", "हर सुबह कुछ news cards, हर एक syllabus की किसी पंक्ति से जुड़ा, हर एक के साथ एक सवाल। फिर बस।"],
+      ["Review", "जो card आप रखते हैं, वह ठीक भूलने से पहले लौटता है। न streak, न अपराध-बोध।"],
+      ["Chotu", "आपका study साथी। पहले संकेत, कोशिश के बाद ढाँचा, पूरा उत्तर पहले कभी नहीं। रात 11:30 से सुबह 7 बजे तक शांत।"],
+      ["Walk mode", "Earphones लगाइए। App एक Chai card पढ़ता है या review वाला topic बताता है, और आप टहलते हुए ज़ोर से जवाब देते हैं।"],
+      ["Calm", "मुश्किल शामों के लिए: धीमी साँस और ठहराव, सबसे पहले helpline। कुछ दर्ज नहीं होता।"]],
+    name: { warmup: "पहले अंदाज़ा", read: "समझकर पढ़िए", video: "देखिए", "sim-governor": "राज्यपाल की मेज़", sort: "सूचियाँ छाँटिए", pyq: "असली PYQ", "sim-gst": "GST का वोट", mains: "Mains उत्तर का ढाँचा", essay: "जाँच की मेज़", keep: "याद पक्की कीजिए", finish: "आपकी ट्रॉफ़ियाँ" },
+    sub: { warmup: "पढ़ाने से पहले तीन सवाल। खुलकर अंदाज़ा लगाइए; कोई अंक नहीं।", read: "एक छोटा पाठ। फिर पाठ छिप जाता है और याद से जाँच होती है।",
+      video: "एक मिनट से कम। फिर आपकी बारी।", "sim-governor": "आप राज्यपाल हैं। आपकी मेज़ पर चार विधेयक। फ़ैसला आपका।", sort: "छह मिलते-जुलते विषय। हर एक को उसकी सूची में खींचिए।",
+      pyq: "असली Prelims सवाल, आधिकारिक उत्तर-कुंजी। चुनिए, फिर बताइए कितने पक्के हैं।", "sim-gst": "31 राज्य, एक केंद्र। वोट बदलिए और देखिए कौन क्या रोक सकता है।",
+      mains: "एक असली Mains सवाल, आपके सामने बिंदु-दर-बिंदु ढाँचा।", essay: "एक निबंध के तीन हाथ से लिखे पेज, हाशिये में जाँच के साथ।", keep: "आपके पहले अंदाज़े लौटते हैं। फिर कुछ memory cards।" },
+    coverKick: "मुफ़्त demo · बिना account", coverSub: (n, m) => `${m} मिनट। सीखने के ${n} तरीक़े। एक पूरा topic।`,
+  },
+};
+const t = (k, ...a) => { const v = (W[X.lang()] ?? W.en)[k] ?? W.en[k]; return typeof v === "function" ? v(...a) : v; };
+
+// The tour guide's lines, by step type (or a step id for one topic's own lines). `enter` plays on arrival, `done`
+// when the chapter's activity is finished, `pitch` once after that, with a Join link. Honest numbers only: the same
+// library counts the finish screen uses. Say what a feature does and why it works; never promise results.
+const G = {
+  en: {
+    cover: { enter: ["Hi! I'm your tour guide. I'll point out the clever bits as we go.", "Fair warning: I get excited. This stuff is genuinely good."] },
+    warmup: { enter: ["Watch this. We ask you questions BEFORE teaching you anything.", "Sounds backwards? It's called pretesting. A wrong guess followed by the answer sticks better than reading alone."],
+      done: ["Feel that itch to know the answers? That's the whole trick.", "And these three come back at the end to test you. Nothing here is wasted."], pitch: "Every topic in the app opens like this. 2,000+ questions are waiting." },
+    read: { enter: ["Short reads. One idea at a time, with exactly the facts UPSC asks.", "And when you finish, the text folds away and you're tested from memory. No peeking. Recall beats rereading, every time."],
+      done: ["Read, then recall. That's how notes turn into marks."], pitch: "Short reads across the syllabus in the app, and 20+ hours of recorded notes if you'd rather listen." },
+    video: { enter: ["Now, the movies. Under a minute. One idea. Made to stick.", "Captions on, sound only when you tap. Studying in a shared room? We thought of you."],
+      done: ["And it ends with a question. Watching feels like learning; answering IS learning."], pitch: "That's 1 of 250+ short videos in the app." },
+    "sim-governor": { enter: ["Okay, this one is my favourite. You're not reading about the Governor. You ARE the Governor.", "Four bills land on your desk. Sign, return, reserve, or sit on it. Every choice gets the constitutional answer."],
+      done: ["You just learnt Article 200 by doing it. Try forgetting THAT in the exam hall.", "Mains keeps asking about Governors. You've now sat in the chair."], pitch: "One of 60 interactives in the app. Games with a point, not games for points." },
+    sort: { enter: ["Union, State, Concurrent: the lookalikes UPSC loves to mix up.", "So we mix them up first, on purpose. Telling them apart is exactly what a Prelims option tests."],
+      done: ["Mistakes here are the good kind. They show you which lookalikes trip you, before Prelims does."], pitch: "In the app, everything you get wrong comes back in your review, on the right day." },
+    pyq: { enter: ["Real questions from real UPSC papers. Answers straight from UPSC's official keys.", "One twist: after you pick, say how sure you are. Under negative marking, knowing when you're guessing is worth marks."],
+      done: ["That's calibration. Toppers don't just know more; they know what they know.", "Sure, and still wrong? You'll remember that one for life. That's the point."], pitch: "11 full past papers are in the app, ready when you are." },
+    "sim-gst": { enter: ["Who really runs the GST Council? Don't take my word for it. Vote.", "31 states, one Centre. Tap the seats, flip the votes, watch the meter."],
+      done: ["Neither side can pass anything alone. You didn't memorise that; you discovered it.", "That's the kind of fact you can rebuild from scratch in the exam hall."], pitch: "60 interactives like this in the app." },
+    mains: { enter: ["Mains. Where most people freeze. Here's a real question from the 2025 paper.", "Watch a 250-word answer get planned, point by point."],
+      done: ["That's the skeleton every good Mains answer has. In the app you plan your own first, then compare."], pitch: "In the app your pod plans the same question and compares skeletons on Fridays." },
+    essay: { enter: ["Now the pot of gold. Three real pages of one essay, marked the way a kind senior would.", "Skeleton, outline, page. Watch the margin fill up."],
+      done: ["Structure, content, expression: three lenses on every page you'll ever write."], pitch: "In the app, photograph your own handwritten page and get it marked. Plus marks every one." },
+    keep: { enter: ["Remember your three guesses from the start? They're back.", "Then a few memory cards. Each one comes back just before you'd forget it."],
+      done: ["Look at that schedule. Right answers come back in days; misses come back tomorrow. Your memory sets the timetable.", "No streaks, no guilt. Just the right card on the right day."], pitch: "Join free and these cards go straight into your Review." },
+    finish: { enter: ["Fifteen minutes. One whole topic. Guessed, watched, played, sorted, answered, planned, marked and kept.", "And that was ONE topic. Wait till you see the rest."] },
+    mainsBuild: { intro: "First line answers the question in one breath. No \"since time immemorial\".", p0: "Every point carries a hook: an Article, a formula, a year. Examiners reward specifics.",
+      p1: "Exact numbers, current to the latest Finance Commission. Old figures quietly cost marks.", p2: "Both sides inside one point. \"Examine\" means weigh, not list.",
+      p3: "A counter-trend. This is the point that lifts an answer from average to good.", way: "A way forward that says who should do what. Not \"Centre and states should work together\".",
+      trap: "And the trap most people fall into, flagged before you fall in." },
+  },
+  hi: {
+    cover: { enter: ["नमस्ते! मैं आपका टूर गाइड हूँ। रास्ते में ख़ास बातें दिखाता चलूँगा।", "पहले ही बता दूँ: मैं थोड़ा उत्साहित हो जाता हूँ। चीज़ें सच में अच्छी हैं।"] },
+    warmup: { enter: ["देखिए। हम कुछ भी पढ़ाने से पहले सवाल पूछते हैं।", "उल्टा लगता है? इसे pretesting कहते हैं। ग़लत अंदाज़े के बाद सही उत्तर, सिर्फ़ पढ़ने से ज़्यादा याद रहता है।"],
+      done: ["उत्तर जानने की बेचैनी महसूस हुई? यही तो तरकीब है।", "और ये तीनों अंत में फिर आपकी जाँच के लिए लौटेंगे। यहाँ कुछ बेकार नहीं जाता।"], pitch: "App का हर topic ऐसे ही शुरू होता है। 2,000+ सवाल इंतज़ार कर रहे हैं।" },
+    read: { enter: ["छोटे पाठ। एक बार में एक बात, ठीक वही तथ्य जो UPSC पूछता है।", "पढ़ लेने पर पाठ छिप जाता है और याद से जाँच होती है। झाँकना मना। दोबारा पढ़ने से याद करना हमेशा बेहतर।"],
+      done: ["पढ़िए, फिर याद कीजिए। ऐसे notes अंकों में बदलते हैं।"], pitch: "App में syllabus भर के छोटे पाठ, और सुनना पसंद हो तो 20+ घंटे के रिकॉर्ड किए notes।" },
+    video: { enter: ["अब फ़िल्में। एक मिनट से कम। एक बात। याद रहने के लिए बनी।", "Captions चालू, आवाज़ सिर्फ़ टैप पर। साझा कमरे में पढ़ते हैं? आपका ख़्याल रखा है।"],
+      done: ["और अंत में एक सवाल। देखना सीखने जैसा लगता है; जवाब देना ही असली सीखना है।"], pitch: "यह app के 250+ छोटे video में से एक है।" },
+    "sim-governor": { enter: ["यह मेरा सबसे पसंदीदा है। आप राज्यपाल के बारे में पढ़ नहीं रहे। आप राज्यपाल हैं।", "मेज़ पर चार विधेयक। हस्ताक्षर, वापसी, आरक्षण, या रोककर बैठना। हर फ़ैसले पर संविधान का जवाब मिलता है।"],
+      done: ["आपने अनुच्छेद 200 करके सीखा। अब परीक्षा-हॉल में इसे भूलकर दिखाइए।", "Mains राज्यपाल पर बार-बार पूछता है। अब आप उस कुर्सी पर बैठ चुके हैं।"], pitch: "App के 60 interactives में से एक। मक़सद वाले खेल, अंकों वाले नहीं।" },
+    sort: { enter: ["संघ, राज्य, समवर्ती: मिलते-जुलते विषय, जिन्हें UPSC मिलाना पसंद करता है।", "इसलिए हम पहले ही जानबूझकर मिला देते हैं। इन्हें अलग पहचानना ही Prelims का विकल्प जाँचता है।"],
+      done: ["यहाँ की ग़लतियाँ अच्छी वाली हैं। Prelims से पहले ही दिखा देती हैं कि कौन-से विषय आपको उलझाते हैं।"], pitch: "App में जो भी ग़लत होता है, वह सही दिन आपके review में लौटता है।" },
+    pyq: { enter: ["असली UPSC papers के असली सवाल। उत्तर सीधे UPSC की आधिकारिक कुंजी से।", "एक मोड़: चुनने के बाद बताइए कितने पक्के हैं। Negative marking में यह जानना कि कब अंदाज़ा लगा रहे हैं, अंक दिलाता है।"],
+      done: ["इसे calibration कहते हैं। Toppers सिर्फ़ ज़्यादा नहीं जानते; उन्हें पता होता है कि वे क्या जानते हैं।", "पक्के थे और फिर भी ग़लत? वह सवाल अब ज़िंदगी भर याद रहेगा। यही मक़सद है।"], pitch: "App में 11 पूरे पिछले papers तैयार हैं।" },
+    "sim-gst": { enter: ["GST Council में असली ताक़त किसकी? मेरी बात मत मानिए। वोट कीजिए।", "31 राज्य, एक केंद्र। सीटों पर टैप कीजिए, वोट बदलिए, मीटर देखिए।"],
+      done: ["कोई भी पक्ष अकेले कुछ पारित नहीं कर सकता। आपने यह रटा नहीं; खोजा।", "ऐसा तथ्य आप परीक्षा-हॉल में शून्य से फिर बना सकते हैं।"], pitch: "App में ऐसे 60 interactives हैं।" },
+    mains: { enter: ["Mains. जहाँ ज़्यादातर लोग अटक जाते हैं। 2025 के paper का एक असली सवाल।", "देखिए 250 शब्दों का उत्तर बिंदु-दर-बिंदु कैसे बनता है।"],
+      done: ["हर अच्छे Mains उत्तर का यही ढाँचा होता है। App में पहले आप अपना बनाते हैं, फिर मिलाते हैं।"], pitch: "App में आपका pod यही सवाल बनाता है और शुक्रवार को ढाँचे मिलाता है।" },
+    essay: { enter: ["अब असली ख़ज़ाना। एक निबंध के तीन असली पेज, जैसे कोई भला senior जाँचता।", "ढाँचा, रूपरेखा, पेज। हाशिया भरते देखिए।"],
+      done: ["ढाँचा, सामग्री, अभिव्यक्ति: आपके लिखे हर पेज को देखने के तीन नज़रिये।"], pitch: "App में अपने हाथ से लिखे पेज की फ़ोटो लीजिए और जाँच पाइए। Plus में हर पेज।" },
+    keep: { enter: ["शुरू के तीन अंदाज़े याद हैं? वे लौट आए।", "फिर कुछ memory cards। हर एक ठीक भूलने से पहले लौटता है।"],
+      done: ["यह समय-सारणी देखिए। सही उत्तर कुछ दिन बाद लौटते हैं; चूके हुए कल। समय आपकी याददाश्त तय करती है।", "न streak, न अपराध-बोध। बस सही दिन सही card।"], pitch: "मुफ़्त जुड़िए और ये cards सीधे आपके Review में जाएँगे।" },
+    finish: { enter: ["पंद्रह मिनट। एक पूरा topic। अंदाज़ा, video, खेल, छँटाई, जवाब, ढाँचा, जाँच और याद।", "और यह सिर्फ़ एक topic था। बाक़ी देखिए।"] },
+    mainsBuild: { intro: "पहली पंक्ति एक साँस में सवाल का जवाब देती है। \"अनादि काल से\" नहीं।", p0: "हर बिंदु के साथ एक पकड़: अनुच्छेद, सूत्र, वर्ष। परीक्षक ठोस बातों को अंक देते हैं।",
+      p1: "सटीक आँकड़े, नवीनतम वित्त आयोग तक। पुराने आँकड़े चुपचाप अंक काटते हैं।", p2: "एक ही बिंदु में दोनों पक्ष। \"परीक्षण\" का मतलब तौलना है, गिनाना नहीं।",
+      p3: "उलटा रुझान। यही बिंदु उत्तर को औसत से अच्छा बनाता है।", way: "आगे का रास्ता जो बताए कि कौन क्या करे। \"केंद्र और राज्य मिलकर काम करें\" नहीं।",
+      trap: "और वह ग़लती जिसमें ज़्यादातर लोग गिरते हैं, गिरने से पहले ही बताई गई।" },
+  },
+};
+const gl = (key, part) => { const g = G[X.lang()] ?? G.en; return g[key]?.[part] ?? G.en[key]?.[part]; };
+
+// The question the Governor video ends on, so the first question under the player is the one the viewer just heard.
+// (The path file carries it too, marked fromVideo; this covers a copy imported before that.)
+const VIDEO_Q = {
+  "video-governor": {
+    fromVideo: true,
+    q: { en: "Which Article covers the Governor's assent to bills?", hi: "राज्यपाल की विधेयकों पर स्वीकृति किस अनुच्छेद में है?" },
+    options: [{ en: "Article 200", hi: "अनुच्छेद 200" }, { en: "Article 201", hi: "अनुच्छेद 201" }, { en: "Article 143", hi: "अनुच्छेद 143" }, { en: "Article 356", hi: "अनुच्छेद 356" }],
+    answer: 0,
+    why: { en: "Article 200: the Governor can assent, withhold assent, or reserve the bill for the President. Article 201 takes over once a bill is reserved; Article 143 is the President asking the Supreme Court for an opinion (that's how the November 2025 opinion came about); Article 356 is President's Rule.",
+      hi: "अनुच्छेद 200: राज्यपाल स्वीकृति दे सकते हैं, रोक सकते हैं, या विधेयक राष्ट्रपति के लिए आरक्षित कर सकते हैं। आरक्षण के बाद अनुच्छेद 201 लागू होता है; अनुच्छेद 143 में राष्ट्रपति सुप्रीम कोर्ट से राय माँगते हैं (नवंबर 2025 की राय ऐसे ही आई); अनुच्छेद 356 राष्ट्रपति शासन है।" },
+  },
+};
+
+// --- Icons (stroke, 24 grid) and sounds --------------------------------------------------------------------------------
+
+const ICON = {
+  warmup: "M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z",
+  read: "M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5",
+  video: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM10 8.5v7l6-3.5z",
+  "sim-governor": "M7 21h10M5 17h14v-3H5zM9.5 14l.8-4.5a1.8 1.8 0 1 1 3.4 0l.8 4.5",
+  sort: "M4 4h4.5v16H4zM9.75 4h4.5v16h-4.5zM15.5 4H20v16h-4.5z",
+  pyq: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2z",
+  "sim-gst": "M4 12h16v8H4zM8 12V4h8v8M10 8l1.5 1.5L14 6.5",
+  mains: "M4 20l4-1 11-11-3-3L5 16zM14 7l3 3",
+  essay: "M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h5",
+  keep: "M8 3h12v14H8zM4 7v14h12",
+  finish: "M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M9.5 17h5",
+  on: "M4 9h4l5-4v14l-5-4H4zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11", off: "M4 9h4l5-4v14l-5-4H4zM16 9.5l5 5M21 9.5l-5 5",
+  back: "M15 5l-7 7 7 7", arrow: "M5 12h14M13 6l6 6-6 6", check: "M5 12.5l4.5 4.5L19 7.5", x: "M6 6l12 12M18 6L6 18", play: "M8 5v14l11-7z",
+  camera: "M4 8h3l2-3h6l2 3h3v11H4zM12 10.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z", scan: "M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4M4 12h16",
+};
+const NS = "http://www.w3.org/2000/svg";
+function svg(tag, attrs = {}, ...kids) {
+  const el = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v != null) { if (k.startsWith("on")) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v); }
+  for (const k of kids.flat()) if (k) el.append(k);
+  return el;
+}
+const icon = (name, s = 20) => svg("svg", { viewBox: "0 0 24 24", width: s, height: s, "aria-hidden": "true", class: "sc-ic" }, svg("path", { d: ICON[name] ?? ICON.arrow }));
+const LOGO = `<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M14 3c-2 3 2 4 0 7M20 2c-2 3 2 4 0 8M26 3c-2 3 2 4 0 7" fill="none" stroke="#F0A04B" stroke-width="2" stroke-linecap="round"/><path d="M5 15h30l-4.5 20.5a3 3 0 0 1-3 2.5H12.5a3 3 0 0 1-3-2.5z" fill="#C8693A"/><rect x="4" y="13" width="32" height="4.5" rx="2.2" fill="#E08A55"/><rect x="14" y="22" width="3.2" height="5" rx="1.6" fill="#2A1B12"/><rect x="22.8" y="22" width="3.2" height="5" rx="1.6" fill="#2A1B12"/></svg>`;
+function logoMark() { const s = h("span.sc-logo-mark"); s.innerHTML = LOGO; return s; }
+
+let ac = null;
+const sfxOn = () => !!X.store.get("try:sfx", false);
+function tone(f, d, type = "sine", g = 0.06, when = 0, slide = 0) {
+  if (!sfxOn()) return;
+  try {
+    ac ??= new (window.AudioContext || window.webkitAudioContext)();
+    const t0 = ac.currentTime + when, o = ac.createOscillator(), v = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t0); if (slide) o.frequency.exponentialRampToValueAtTime(slide, t0 + d);
+    v.gain.setValueAtTime(g, t0); v.gain.exponentialRampToValueAtTime(0.0001, t0 + d);
+    o.connect(v).connect(ac.destination); o.start(t0); o.stop(t0 + d + 0.03);
+  } catch {}
+}
+const SFX = {
+  tap: () => tone(700, 0.05, "triangle", 0.035), drop: () => tone(520, 0.09, "sine", 0.06, 0, 380),
+  right: () => { tone(660, 0.12, "sine", 0.06); tone(990, 0.2, "sine", 0.05, 0.09); }, wrong: () => tone(220, 0.25, "triangle", 0.07, 0, 150),
+  stamp: () => { tone(120, 0.16, "square", 0.05, 0, 60); tone(70, 0.3, "sine", 0.12); }, flip: () => tone(500, 0.05, "triangle", 0.03, 0, 800),
+  win: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.24, "triangle", 0.05, i * 0.09)), whoosh: () => tone(300, 0.25, "sine", 0.03, 0, 900),
+};
+
+/** A small burst of sparks from an element (skipped when motion is reduced). */
+function burst(el) {
+  if (RM() || !el) return;
+  const box = h("span.sc-burst", { "aria-hidden": "true" });
+  for (let i = 0; i < 14; i++) {
+    const a = (i / 14) * Math.PI * 2, d = 40 + Math.random() * 40;
+    box.append(h("i", { style: { "--dx": `${Math.cos(a) * d}px`, "--dy": `${Math.sin(a) * d}px`, "--c": ["#FFC66B", "#F0A04B", "#5DD39E", "#9FB4FF"][i % 4] } }));
+  }
+  el.append(box); setTimeout(() => box.remove(), 1100);
+}
+/** Counts a number up when it scrolls into view. */
+function countUp(el, to, suffix = "") {
+  const fin = () => (el.textContent = to.toLocaleString("en-IN") + suffix);
+  if (RM() || !("IntersectionObserver" in window)) return fin();
+  el.textContent = "0" + suffix;
+  const io = new IntersectionObserver((es) => {
+    if (!es.some((e) => e.isIntersecting)) return;
+    io.disconnect();
+    const t0 = performance.now(), dur = 1300;
+    const step = (now) => { const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(to * e).toLocaleString("en-IN") + suffix; if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+  io.observe(el);
+}
+
+// --- The sequence --------------------------------------------------------------------------------------------------
+// The Express route, with each step's playable side doors (the games, a video, the essay pages) pulled into the line
+// right after the step that offered them. On a topic that rich, the long read is left for the whole-topic route: the
+// demo shows reading through its checks and the guide, and keeps the 15 minutes for the things nobody else has.
+
+const PLAYABLE = new Set(["sim-gst", "sim-governor", "essay", "video"]);
+function seq() {
+  const d = X.data(), out = [], seen = new Set();
+  for (const id of d.routes.express.steps) {
+    const st = X.stepById(id) && X.view(X.stepById(id));
+    if (!st || seen.has(id)) continue;
+    out.push(id); seen.add(id);
+    for (const door of st.doors ?? []) {
+      const did = typeof door === "string" ? door : door.id, ds = X.stepById(did);
+      if (ds && PLAYABLE.has(ds.type) && !seen.has(did)) { out.push(did); seen.add(did); }
+    }
+  }
+  const rich = out.filter((id) => PLAYABLE.has(X.stepById(id)?.type)).length >= 3;
+  return rich ? out.filter((id) => X.stepById(id)?.type !== "read") : out;
+}
+const nameOf = (st) => (st.type === "video" ? `${t("name").video}: ${L(st.title)}` : t("name")[st.type] ?? L(st.title));
+const doneKey = (st) => "sc:done:" + st.id;
+const isDone = (st) => !!X.getA(doneKey(st));
+
+// --- Frame: top bar, stage, guide, bottom bar ------------------------------------------------------------------------
+
+let root = null, guideEl = null, guideList = null, barEl = null, chapterAt = null, said = new Set();
+let action = { label: "", run: null, ready: false };
+
+export function draw(into, strip) {
+  root = into;
+  document.documentElement.classList.add("sc-on");
+  root.classList.add("sc-root");
+  const p = X.prog();
+  const list = seq();
+  const at = p.show == null || p.show < 0 || p.route !== "express" ? -1 : Math.min(p.show, list.length - 1);
+  if (at !== chapterAt) { clearTimers(); resetGuide(); chapterAt = at; }
+  else rebuildGuide();
+  if (at < 0) { put(root, strip, topBar(list, -1), cover(list)); return pump(); }
+  const st = X.view(X.stepById(list[at]));
+  action = { label: "", run: null, ready: false };
+  const body = (CH[st.type] ?? CH.fallback)(st, at, list);
+  put(root, strip, topBar(list, at),
+    h("div.sc-stage", h("article.sc-main", { lang: X.lang() }, head(st, at, list), body), guide()),
+    bottomBar(list, at));
+  if (!said.has(st.id + ":enter")) say(st, "enter");
+  if (isDone(st) && !said.has(st.id + ":done")) say(st, "done");
+  pump();
+}
+// Leaving #try puts the page width back.
+addEventListener("hashchange", () => { if (!/^#try\//.test(location.hash)) document.documentElement.classList.remove("sc-on"); });
+
+function goShow(i) {
+  const p = X.prog(), list = seq();
+  p.route = "express"; p.door = null;
+  if (i < 0) { p.show = -1; p.pos = -1; X.save(p); X.redraw(); return X.top(); }
+  p.show = Math.min(i, list.length - 1); p.showLast = p.show;
+  const id = list[p.show], ex = X.data().routes.express.steps.indexOf(id);
+  if (ex >= 0) p.pos = ex;
+  const first = !(p.counted ?? {})["show:" + p.show];
+  p.counted = { ...(p.counted ?? {}), ["show:" + p.show]: true };
+  X.save(p); X.redraw(); X.top();
+  if (first) {
+    track("try_step", { route: "express", n: p.show + 1, of: list.length, step: id, demo: 2 });
+    if (X.stepById(id)?.type === "finish") track("try_finish", { route: "express", demo: 2 });
+  }
+}
+
+function topBar(list, at) {
+  const snd = sfxOn();
+  const sound = h("button.sc-iconbtn", { type: "button", "aria-pressed": String(snd), title: t("sound"), "aria-label": t("sound"),
+    onclick: () => { X.store.set("try:sfx", !snd); if (!snd) { SFX.tap(); track("demo_act", { act: "sound_on" }); } X.redraw(); } }, icon(snd ? "on" : "off", 20));
+  const rail = at >= 0 && h("div.sc-rail", { "aria-label": t("chapterOf", at + 1, list.length) },
+    h("div.sc-segs", list.map((id, i) => h("button.sc-seg" + (i === at ? ".on" : isDone(X.stepById(id)) ? ".done" : ""), {
+      type: "button", title: nameOf(X.stepById(id)), "aria-label": nameOf(X.stepById(id)), onclick: () => goShow(i) }))),
+    h("div.sc-rail-label", h("b", t("qOf", at + 1, list.length)), " · ", nameOf(X.view(X.stepById(list[at])))));
+  return h("header.sc-top",
+    h("a.sc-logo", { href: X.homeHref(), "aria-label": "Aspiran" }, logoMark(), h("span", "Aspiran")),
+    rail || h("div.sc-rail"),
+    sound, X.langSwitch() && h("button.sc-iconbtn.sc-lang", { type: "button", lang: hi() ? "en" : "hi", "aria-label": hi() ? "Switch to English" : "हिन्दी में देखिए",
+      onclick: () => { X.store.set("try:lang", hi() ? "en" : "hi"); track("demo_act", { act: "lang_" + (hi() ? "en" : "hi") }); X.redraw(); } }, hi() ? "EN" : "हि"),
+    h("a.sc-join-pill", { href: "#", onclick: () => X.joining("top") }, t("join")));
+}
+
+function head(st, at, list) {
+  return h("div.sc-head",
+    h("div.sc-kick", h("span.sc-kick-ic", icon(st.type, 18)), t("chapterOf", at + 1, list.length)),
+    h("h1", { tabindex: "-1" }, st.type === "finish" ? t("finTitle") : nameOf(st)),
+    st.type !== "finish" && h("p.sc-sub", t("sub")[st.type] ?? L(st.lead)));
+}
+
+/** The chapter sets what the big button says and does. Not ready = it still works, but quietly ("Skip"). */
+function act(label, run, ready = true) {
+  action = { label, run, ready };
+  if (barEl) paintBar();
+}
+let barList = null, barAt = null;
+function bottomBar(list, at) {
+  barList = list; barAt = at;
+  barEl = h("nav.sc-bar", { "aria-label": "Tour" });
+  paintBar();
+  return barEl;
+}
+function paintBar() {
+  const list = barList, at = barAt;
+  const next = at + 1 < list.length ? X.stepById(list[at + 1]) : null;
+  const st = X.stepById(list[at]);
+  let { label, run, ready } = action;
+  if (!run) { run = () => goShow(at + 1); ready = isDone(st); label = next ? t("nextUp", nameOf(X.view(next))) : ""; if (!ready && next) label = t("skip") + " · " + t("nextUp", nameOf(X.view(next))); }
+  const fin = st.type === "finish";
+  put(barEl, h("div.sc-bar-in",
+    h("button.sc-back", { type: "button", onclick: () => goShow(at - 1) }, icon("back", 20), h("span", t("back"))),
+    fin ? h("a.sc-go.ready", { href: "#", onclick: () => X.joining("bar") }, t("joinKeep", X.cardsHere()), icon("arrow", 20))
+      : label && h("button.sc-go" + (ready ? ".ready" : ""), { type: "button", onclick: () => { SFX.whoosh(); run(); } }, h("span", label), icon("arrow", 20))));
+}
+
+// The guide keeps its bubbles while a chapter redraws its insides; a new chapter starts it afresh.
+let gqueue = [], gbusy = false, ggen = 0;
+function guide() {
+  if (!guideEl) {
+    guideList = h("div.sc-bubbles", { "aria-live": "polite" });
+    guideEl = h("aside.sc-guide", { "aria-label": t("guide") },
+      h("button.sc-guide-head", { type: "button", onclick: () => guideEl.classList.toggle("open") },
+        h("span.sc-guide-av", logoMark()), h("span", h("b", t("guide")), h("small", t("guideSub")))),
+      guideList);
+  }
+  guideEl.querySelector(".sc-guide-head b").textContent = t("guide");
+  guideEl.querySelector(".sc-guide-head small").textContent = t("guideSub");
+  return guideEl;
+}
+let glog = [];
+function resetGuide() { ggen++; gqueue = []; gbusy = false; glog = []; said = new Set(); if (guideList) put(guideList); guideEl?.classList.remove("open"); }
+function rebuildGuide() { if (guideList && !gbusy && !gqueue.length) put(guideList, glog.map((g) => bubble(g, false))); }
+function bubble(g, anim = true) {
+  return h("div.sc-bub" + (g.pitch ? ".pitch" : "") + (anim ? ".in" : ""), g.text,
+    g.pitch && h("a.sc-bub-join", { href: "#", onclick: () => X.joining("guide") }, t("joinFree")));
+}
+/** Queue the guide's lines for a step (or a named part). Each shows once per visit to the chapter. */
+function say(st, part, extra) {
+  const key = (typeof st === "string" ? st : st.id) + ":" + part;
+  if (said.has(key)) return;
+  said.add(key);
+  const type = typeof st === "string" ? st : st.type;
+  let lines = typeof st === "object" && gl(st.id, part) ? gl(st.id, part) : gl(type, part);
+  if (extra) lines = [extra];
+  if (!lines) return;
+  for (const text of [].concat(lines)) gqueue.push({ text });
+  if (part === "done" && typeof st === "object") { const pitch = gl(type, "pitch"); if (pitch && !X.profile?.()) gqueue.push({ text: pitch, pitch: true }); }
+  pump();
+}
+function pump() {
+  if (gbusy || !gqueue.length || !guideList) return;
+  gbusy = true;
+  const g = gqueue.shift(), gen = ggen;
+  const dots = h("div.sc-bub.typing", h("i"), h("i"), h("i"));
+  if (!RM()) guideList.append(dots);
+  const show = () => {
+    dots.remove();
+    if (gen !== ggen) return; // the visitor moved on: this line belonged to the last chapter
+    glog.push(g);
+    guideList.append(bubble(g));
+    while (guideList.children.length > 4) guideList.firstChild.remove();
+    // On phones the dock shows the newest line; keep the list scrolled to it.
+    guideList.scrollTop = guideList.scrollHeight;
+    gbusy = false;
+    later(pump, 900);
+  };
+  if (RM()) show(); else setTimeout(show, 650);
+}
+
+// --- Cover -----------------------------------------------------------------------------------------------------------
+
+function cover(list) {
+  const d = X.data(), c = d.cover ?? {}, p = X.prog();
+  const kinds = list.filter((id) => X.stepById(id)?.type !== "finish");
+  const minutes = d.routes.express.minutes ?? 15;
+  const resume = p.showLast != null && p.showLast > 0;
+  if (!said.has("cover:enter")) say("cover", "enter");
+  return h("div.sc-stage",
+    h("section.sc-cover",
+      h("div.sc-kick", h("span.sc-kick-ic", icon("finish", 18)), t("coverKick"), " · ", L(d.short ?? d.title)),
+      h("h1.sc-hero", { tabindex: "-1" }, L(c.headline ?? d.title)),
+      h("p.sc-hero-sub", t("coverSub", kinds.length, minutes)),
+      h("button.sc-go.ready.sc-start", { type: "button", onclick: () => { SFX.whoosh(); track("try_route", { route: "express", demo: 2 }); goShow(resume ? p.showLast : 0); } },
+        h("span", resume ? t("resume") : t("start", minutes)), icon("arrow", 22)),
+      h("div.sc-path", kinds.map((id, i) => { const st = X.view(X.stepById(id)); return h("button.sc-path-step", { type: "button", style: { "--i": i }, onclick: () => goShow(i) },
+        h("span.sc-path-ic", icon(st.type, 22)), h("span.sc-path-n", String(i + 1)), h("span", nameOf(st))); })),
+      h("p.sc-cover-pitch", L(c.pitch ?? d.promise)),
+      h("div.sc-cover-links",
+        d.routes.full && h("button.sc-link", { type: "button", onclick: () => X.goFull() }, t("whole", d.routes.full.minutes)),
+        h("a.sc-link", { href: "#try" }, t("allTopics")))),
+    guide());
+}
+
+// --- One question ----------------------------------------------------------------------------------------------------
+// Pick, and the answer shows straight away with its reason. With `sure`, the pick waits for "how sure?", which then
+// reveals: answering first and rating it second is the natural order, and still comes before seeing the key.
+
+function question(q, k, { sure = false, onDone, label } = {}) {
+  const box = h("div.sc-q");
+  let pending = null;
+  const drawQ = (fresh = false) => {
+    const picked = X.getA(k + ":pick"), done = picked != null;
+    put(box,
+      label && h("div.sc-q-label", label),
+      q.source?.label && h("div.sc-q-src", L(q.source.label)),
+      h("p.sc-stem", L(q.q)),
+      h("div.sc-opts", { role: "group" }, q.options.map((o, i) => {
+        const cls = done ? (i === q.answer ? ".right" : i === picked ? ".wrong" : ".dim") : pending === i ? ".picked" : "";
+        return h("button.sc-opt" + cls + (fresh && done && (i === picked || i === q.answer) ? ".pop" : ""), { type: "button", disabled: done,
+          onclick: () => {
+            SFX.tap();
+            if (sure) { pending = i; drawQ(); box.querySelector(".sc-sure")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" }); return; }
+            X.setA(k + ":pick", i); (i === q.answer ? SFX.right : SFX.wrong)(); drawQ(true); showWhy(box); onDone?.(i === q.answer);
+          } },
+          h("span.sc-letter", "ABCD"[i]), h("span.sc-opt-t", L(o)),
+          done && i === q.answer && h("span.sc-flag.ok", icon("check", 18)), done && i === picked && i !== q.answer && h("span.sc-flag.no", icon("x", 18)));
+      })),
+      sure && !done && pending != null && h("div.sc-sure", h("span", t("howSure")),
+        h("div.sc-sure-row", t("sure3").map((lbl, lvl) => h("button.sc-chip", { type: "button", onclick: () => {
+          X.setA(k + ":sure", 2 - lvl); X.setA(k + ":pick", pending); const ok = pending === q.answer; pending = null; (ok ? SFX.right : SFX.wrong)(); drawQ(true); showWhy(box); onDone?.(ok);
+        } }, lbl)))),
+      done && h("div.sc-why" + (picked === q.answer ? ".ok" : ".no"), { role: "status" }, h("b", (picked === q.answer ? t("right") : t("notQuite")) + " "), L(q.why)));
+  };
+  drawQ();
+  return box;
+}
+/** After an answer, bring its explanation into view (it sits under the options, and on a laptop under the fold). */
+function showWhy(box) { requestAnimationFrame(() => box.querySelector(".sc-why")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" })); }
+
+/** Questions one at a time inside a chapter; the big button walks them, then names the next chapter. */
+function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally } = {}) {
+  const box = h("div");
+  const atKey = st.id + ":sc-at";
+  const drawR = () => {
+    const at = Math.min(X.getA(atKey, 0), qs.length);
+    if (at >= qs.length) {
+      if (!isDone(st)) markDone(st);
+      put(box, tally ? tally() : question(qs[qs.length - 1], keyOf(qs.length - 1), { sure, label: labels?.(qs.length - 1) }));
+      act("", null);
+      return;
+    }
+    const k = keyOf(at), q = qs[at];
+    const answered = () => X.getA(k + ":pick") != null;
+    const next = () => { X.setA(atKey, at + 1); drawR(); if (at + 1 < qs.length) X.top(); };
+    put(box, h("div.sc-dots", qs.map((_, i) => h("i" + (i < at ? ".done" : i === at ? ".on" : "")))),
+      question(q, k, { sure, label: labels?.(at), onDone: () => { updateAct(); if (at + 1 >= qs.length) onAll?.(); } }));
+    const updateAct = () => {
+      const last = at + 1 >= qs.length;
+      if (!answered()) return act(t("skip"), next, false);
+      if (last && !tally) { X.setA(atKey, qs.length); if (!isDone(st)) markDone(st); return act("", null); }
+      act(last ? t("seeHow") : t("nextQ"), next, true);
+    };
+    updateAct();
+  };
+  drawR();
+  return box;
+}
+
+function markDone(st) {
+  X.setA(doneKey(st), true);
+  track("demo_act", { step: st.id, act: "done" });
+  say(st, "done");
+  if (barEl) { action = { label: "", run: null, ready: true }; paintBar(); barEl.querySelector(".sc-go")?.classList.add("pulse"); }
+}
+
+// --- Chapters --------------------------------------------------------------------------------------------------------
+
+const CH = {
+  fallback: (st) => [h("p", L(st.lead))],
+
+  warmup: (st) => questionRun(st, st.questions, (n) => `${st.id}:${n}`),
+
+  read(st) {
+    const box = h("div");
+    const drawR = () => {
+      const tested = X.getA(st.id + ":tested", false);
+      if (!tested || !(st.check ?? []).length) {
+        put(box, h("div.sc-reader", L(st.body).split(/\n\n+/).map((p) => h("p", X.rich(p)))), st.chart && X.chart(st.chart), st.remember && h("div.sc-remember", X.rich(L(st.remember))));
+        if ((st.check ?? []).length) act(t("readIt") === "" ? "" : (hi() ? "पढ़ लिया: अब जाँचिए" : "Done reading: test me"), () => { X.setA(st.id + ":tested", true); drawR(); X.top(); }, true);
+        else if (!isDone(st)) markDone(st);
+        return;
+      }
+      put(box, questionRun(st, st.check, (n) => `${st.id}:${n}`));
+    };
+    drawR();
+    return box;
+  },
+
+  video(st) {
+    const v = st.video;
+    const qs = st.questions?.some((q) => q.fromVideo) ? st.questions : [VIDEO_Q[st.id], ...(st.questions ?? [])].filter(Boolean);
+    const stage = h("div.sc-player");
+    const showPoster = () => put(stage,
+      h("img.sc-player-glow", { src: v.poster, alt: "", "aria-hidden": "true" }),
+      h("div.sc-phone",
+        h("img.sc-poster", { src: v.poster, alt: "" }),
+        h("div.sc-player-shade"),
+        h("button.sc-playbtn", { type: "button", "aria-label": `${t("tapPlay")}: ${L(v.title)}`, onclick: play }, h("span.sc-ring"), icon("play", 34)),
+        h("div.sc-player-cap", h("div.sc-chips", h("span", `${v.seconds ?? 50} s`), h("span", t("captions")), h("span", t("soundTap"))))));
+    const play = () => {
+      track("demo_act", { step: st.id, act: "video_play" });
+      const el = h("video", { controls: true, playsinline: true, preload: "auto", poster: v.poster, "aria-label": L(v.title) },
+        h("source", { src: v.mp4, type: "video/mp4" }), v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true }));
+      el.addEventListener("ended", () => { track("demo_act", { step: st.id, act: "video_end" }); document.querySelector(".sc-vq")?.classList.add("glow"); }, { once: true });
+      put(stage, h("img.sc-player-glow", { src: v.poster, alt: "", "aria-hidden": "true" }), h("div.sc-phone.playing", el));
+      el.play?.()?.catch?.(() => {});
+    };
+    showPoster();
+    const transcript = v.transcript && (() => {
+      const dlg = h("dialog.sc-dialog", h("p", L(v.transcript)), h("form", { method: "dialog" }, h("button.sc-chip", t("close"))));
+      return [h("button.sc-link", { type: "button", onclick: () => { document.body.append(dlg); dlg.showModal?.(); } }, t("readIt"))];
+    })();
+    return h("div.sc-video",
+      h("div.sc-video-left", stage, transcript),
+      h("div.sc-vq", h("h2.sc-h2", t("yourTurn")),
+        questionRun(st, qs, (n) => `${st.id}:${qs[n].fromVideo ? "vq" : n - (qs[0]?.fromVideo ? 1 : 0)}`, { labels: (n) => (qs[n].fromVideo ? t("fromVideo") : t("oneMore")) })));
+  },
+
+  "sim-governor"(st) {
+    const box = h("div.sc-desk");
+    const drawG = (stampNow = false) => {
+      const at = Math.min(X.getA(st.id + ":at", 0), st.rounds.length);
+      if (at >= st.rounds.length) {
+        if (!isDone(st)) markDone(st);
+        put(box, h("div.sc-wrap", h("p", L(st.wrap))),
+          h("button.sc-link", { type: "button", onclick: () => { X.setA(st.id + ":at", 0); st.rounds.forEach((_, i) => X.setA(`${st.id}:${i}`, null)); drawG(); } }, t("playAgain")));
+        act("", null);
+        return;
+      }
+      const r = st.rounds[at], pick = X.getA(`${st.id}:${at}`), o = pick != null ? r.options[pick] : null;
+      put(box,
+        h("div.sc-dots", st.rounds.map((_, i) => h("i" + (i < at ? ".done" : i === at ? ".on" : "")))),
+        h("div.sc-bill" + (stampNow ? ".slide" : ""),
+          h("div.sc-bill-top", h("span.sc-bill-n", t("bill", at + 1, st.rounds.length)), h("span.sc-bill-stamp", L(r.stamp))),
+          h("p.sc-bill-text", L(r.bill)),
+          r.note && h("p.sc-bill-note", L(r.note)),
+          o && h("div.sc-seal" + (o.ok ? ".ok" : ".no") + (stampNow ? ".hit" : ""), h("span", L(o.label)), h("small", o.ok ? t("allowed") : t("notAllowed")))),
+        h("p.sc-ask", t("whatDo")),
+        h("div.sc-stamps", r.options.map((op, i) => h("button.sc-stampbtn" + (pick == null ? "" : i === pick ? (op.ok ? ".ok" : ".no") : ".dim"), { type: "button", disabled: pick != null,
+          onclick: () => { X.setA(`${st.id}:${at}`, i); SFX.stamp(); later(() => (op.ok ? SFX.right : SFX.wrong)(), 260); drawG(true); } }, L(op.label)))),
+        o && h("div.sc-why" + (o.ok ? ".ok" : ".no"), { role: "status" }, h("b", (o.ok ? t("right") : t("notQuite")) + " "), L(o.result), r.law && h("div.sc-law", L(r.law))));
+      if (pick == null) act(t("skip"), () => { X.setA(st.id + ":at", at + 1); drawG(); }, false);
+      else if (at + 1 < st.rounds.length) act(t("nextBill"), () => { X.setA(st.id + ":at", at + 1); drawG(); X.top(); }, true);
+      else act(hi() ? "डेस्क समेटिए" : "Close the file", () => { X.setA(st.id + ":at", at + 1); drawG(); X.top(); }, true);
+    };
+    drawG();
+    return box;
+  },
+
+  sort(st) {
+    const items = (st.only ?? st.items.map((_, i) => i)).map((i) => [i, st.items[i]]);
+    const box = h("div.sc-sort");
+    let sel = null, justDragged = false;
+    const K = st.id;
+    const tones = ["union", "state", "conc"];
+    const place = (i, b) => { const pl = X.getA(K + ":place", {}); pl[i] = b; X.setA(K + ":place", pl); SFX.drop(); sel = null; drawS(); };
+    const startDrag = (e, i, el) => {
+      if (X.getA(K + ":checked") || e.button > 0) return;
+      const r = el.getBoundingClientRect(), ox = e.clientX - r.left, oy = e.clientY - r.top, x0 = e.clientX, y0 = e.clientY;
+      let ghost = null, over = null;
+      const move = (ev) => {
+        if (!ghost && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 6) return;
+        if (!ghost) { ghost = el.cloneNode(true); ghost.classList.add("sc-ghost"); ghost.style.width = r.width + "px"; document.body.append(ghost); el.classList.add("lifted"); box.classList.add("dragging"); }
+        ghost.style.transform = `translate(${ev.clientX - ox}px, ${ev.clientY - oy}px) rotate(-3deg)`;
+        const bin = document.elementFromPoint(ev.clientX, ev.clientY)?.closest?.(".sc-bin");
+        if (bin !== over) { over?.classList.remove("over"); over = bin; over?.classList.add("over"); }
+        ev.preventDefault();
+      };
+      const up = () => {
+        removeEventListener("pointermove", move); removeEventListener("pointerup", up); removeEventListener("pointercancel", up);
+        if (!ghost) return;
+        ghost.remove(); el.classList.remove("lifted"); box.classList.remove("dragging"); over?.classList.remove("over");
+        justDragged = true; setTimeout(() => (justDragged = false), 50);
+        if (over) place(i, Number(over.dataset.b));
+      };
+      addEventListener("pointermove", move, { passive: false }); addEventListener("pointerup", up); addEventListener("pointercancel", up);
+    };
+    const tile = (i, it, inBin) => {
+      const b = h("button.sc-tile" + (sel === i ? ".sel" : ""), { type: "button", "aria-pressed": inBin ? null : String(sel === i),
+        onclick: () => { if (justDragged) return; if (inBin) { const pl = X.getA(K + ":place", {}); delete pl[i]; X.setA(K + ":place", pl); SFX.tap(); drawS(); return; } sel = sel === i ? null : i; SFX.tap(); drawS(); } }, L(it.text));
+      b.addEventListener("pointerdown", (e) => startDrag(e, i, b));
+      return b;
+    };
+    const drawS = () => {
+      const pl = X.getA(K + ":place", {}), checked = X.getA(K + ":checked", false);
+      const left = items.filter(([i]) => pl[i] == null);
+      box.classList.toggle("checked", !!checked);
+      const wrong = checked ? items.filter(([i, it]) => pl[i] !== it.bucket) : [];
+      put(box,
+        !checked && h("div.sc-tray" + (left.length ? "" : ".empty"),
+          h("div.sc-tray-head", h("b", t("tray")), h("span", left.length ? t("trayHint") : "")),
+          h("div.sc-tray-tiles", left.map(([i, it]) => tile(i, it, false)))),
+        h("div.sc-bins", st.buckets.map((b, bi) => {
+          const here = items.filter(([i]) => pl[i] === bi);
+          return h("div.sc-bin." + tones[bi % 3] + (sel != null ? ".armed" : ""), { "data-b": bi, role: "button", tabindex: "0", "aria-label": L(b),
+            onclick: () => { if (sel != null && !checked) place(sel, bi); }, onkeydown: (e) => { if ((e.key === "Enter" || e.key === " ") && sel != null && !checked) { e.preventDefault(); place(sel, bi); } } },
+            h("div.sc-bin-head", h("b", L(b)), h("span", String(here.length))),
+            h("div.sc-bin-body",
+              here.map(([i, it]) => checked
+                ? h("div.sc-tile.done" + (it.bucket === bi ? ".ok" : ".no"), h("span", L(it.text)), it.bucket !== bi && h("small", `${t("itsIn")} ${L(st.buckets[it.bucket])}`), h("small.sc-tile-why", L(it.why)))
+                : tile(i, it, true)),
+              !checked && !here.length && h("span.sc-drop", t("dropHere"))));
+        })),
+        checked && h("div.sc-why" + (wrong.length ? ".no" : ".ok"), { role: "status" }, wrong.length ? t("sortedSome", wrong.length) : t("sortedAll"),
+          wrong.length > 0 && h("button.sc-chip", { type: "button", style: { marginLeft: "10px" }, onclick: () => { wrong.forEach(([i]) => delete pl[i]); X.setA(K + ":place", pl); X.setA(K + ":checked", false); drawS(); } }, t("tryWrong"))));
+      if (checked) { if (!isDone(st)) markDone(st); act("", null); }
+      else if (!left.length) act(t("check"), () => { X.setA(K + ":checked", true); const bad = items.filter(([i, it]) => X.getA(K + ":place", {})[i] !== it.bucket).length; (bad ? SFX.wrong : SFX.win)(); if (!bad) burst(box); track("demo_act", { step: st.id, act: "sort_check", wrong: bad }); drawS(); }, true);
+      else act(t("skip"), () => goShow(barAt + 1), false);
+    };
+    drawS();
+    return box;
+  },
+
+  pyq(st) {
+    const qs = (st.only ?? st.questions.map((_, i) => i)).map((i) => [i, st.questions[i]]);
+    return questionRun(st, qs.map(([, q]) => q), (n) => `${st.id}:${qs[n][0]}`, { sure: true, tally: () => {
+      const res = qs.map(([i, q]) => ({ pick: X.getA(`${st.id}:${i}:pick`), sure: X.getA(`${st.id}:${i}:sure`), ans: q.answer })).filter((r) => r.pick != null);
+      const right = res.filter((r) => r.pick === r.ans).length;
+      const sw = res.filter((r) => r.sure === 2 && r.pick !== r.ans).length, gr = res.filter((r) => r.sure === 0 && r.pick === r.ans).length;
+      const n = h("span.sc-big");
+      const el = h("div.sc-tally", h("div.sc-tally-n", n, h("span", "/" + res.length)), h("div", h("b", t("tallyRight", right, res.length)), h("p", t("sureWrong", sw)), gr > 0 && h("p", t("guessedRight", gr)), h("small", t("onlyYou"))));
+      countUp(n, right);
+      return el;
+    } });
+  },
+
+  "sim-gst": (st) => gstChamber(st),
+  mains: (st) => mainsBuild(st),
+  essay: (st) => essayDesk(st),
+  keep: (st) => keepIt(st),
+  finish: (st) => finale(st),
+};
+
+// --- The GST Council chamber ----------------------------------------------------------------------------------------
+// 31 seats in a half-circle and the Centre's seat at the front. Tap seats to flip their vote; the weighted meter and a
+// stamp answer at once. Three findings light up as they're found. Article 279A(9): three-fourths of the weighted votes
+// of those present and voting; the Centre one-third, the states together two-thirds (all present here).
+
+function gstChamber(st) {
+  const total = st.states ?? 31, K = st.id + ":sc";
+  const ROWS = [[72, 7], [104, 11], [136, 13]];
+  const seats = [];
+  for (const [r, n] of ROWS) for (let k = 0; k < n; k++) { const a = Math.PI - ((k + 0.5) * Math.PI) / n; seats.push([170 + r * Math.cos(a), 160 - r * Math.sin(a)]); }
+  seats.sort((a, b) => Math.atan2(160 - a[1], a[0] - 170) - Math.atan2(160 - b[1], b[0] - 170)).reverse();
+  const box = h("div.sc-gst");
+  let lastPass = null;
+  const state = () => X.getA(K, { centre: true, yes: Array.from({ length: total }, (_, i) => i < 18) });
+  const set = (s) => { X.setA(K, s); drawC(); };
+  const drawC = () => {
+    const s = state(), yes = s.yes.filter(Boolean).length;
+    const share = (s.centre ? 1 / 3 : 0) + (2 / 3) * (yes / total), pass = share >= 0.75 - 1e-9;
+    const found = X.getA(st.id + ":found", {});
+    const hits = { veto: !s.centre && yes === total, fewest: s.centre && pass && yes === Math.ceil(0.625 * total - 1e-9), block: s.centre && !pass && yes === Math.ceil(0.625 * total - 1e-9) - 1 };
+    let fresh = null;
+    for (const [k, v] of Object.entries(hits)) if (v && !found[k]) { found[k] = true; fresh = k; }
+    if (fresh) { X.setA(st.id + ":found", found); SFX.win(); track("demo_act", { step: st.id, act: "gst_" + fresh }); }
+    const flipped = lastPass != null && lastPass !== pass; lastPass = pass;
+    if (flipped) SFX.stamp();
+    const map = svg("svg", { viewBox: "0 0 340 200", class: "sc-chamber", role: "img", "aria-label": `${yes} of ${total} states yes, Centre ${s.centre ? "yes" : "no"}` },
+      svg("path", { d: "M66 160a104 104 0 0 1 208 0", class: "sc-arc" }),
+      seats.map(([x, y], i) => svg("g", { class: "sc-seat" + (s.yes[i] ? " yes" : " no"), tabindex: "0", role: "button", "aria-label": `State ${i + 1}: ${s.yes[i] ? t("yes") : t("no")}`,
+        onclick: () => { const y2 = s.yes.slice(); y2[i] = !y2[i]; SFX.tap(); set({ ...s, yes: y2 }); },
+        onkeydown: (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); const y2 = s.yes.slice(); y2[i] = !y2[i]; set({ ...s, yes: y2 }); } } },
+        svg("circle", { cx: x, cy: y, r: 14, class: "hit" }), svg("circle", { cx: x, cy: y, r: 9 }))),
+      svg("g", { class: "sc-centre" + (s.centre ? " yes" : " no"), role: "button", tabindex: "0", "aria-label": `${t("centre")}: ${s.centre ? t("yes") : t("no")}`, onclick: () => { SFX.tap(); set({ ...s, centre: !s.centre }); } },
+        svg("rect", { x: 130, y: 166, width: 80, height: 30, rx: 10 }),
+        Object.assign(svg("text", { x: 170, y: 186, "text-anchor": "middle" }), { textContent: t("centre") + " ⅓" })));
+    put(box,
+      h("div.sc-gst-grid",
+        h("div.sc-gst-map", map, h("div.sc-stampmark" + (pass ? ".ok" : ".no") + (flipped ? ".hit" : ""), pass ? t("passed") : t("blocked")), h("p.sc-hint", t("tapSeats"))),
+        h("div.sc-gst-side",
+          h("div.sc-gst-row", h("span", t("centreVotes")), h("div.sc-seg2", [true, false].map((v) => h("button" + (s.centre === v ? ".on" : ""), { type: "button", onclick: () => { SFX.tap(); set({ ...s, centre: v }); } }, v ? t("yes") : t("no"))))),
+          h("div.sc-gst-row", h("span", t("statesYes")), h("div.sc-step",
+            h("button", { type: "button", "aria-label": "−", disabled: yes <= 0, onclick: () => { const y2 = s.yes.slice(); const j = y2.lastIndexOf(true); if (j >= 0) y2[j] = false; SFX.tap(); set({ ...s, yes: y2 }); } }, "−"),
+            h("b", { "aria-live": "polite" }, String(yes)),
+            h("button", { type: "button", "aria-label": "+", disabled: yes >= total, onclick: () => { const y2 = s.yes.slice(); const j = y2.indexOf(false); if (j >= 0) y2[j] = true; SFX.tap(); set({ ...s, yes: y2 }); } }, "+"))),
+          h("div.sc-gst-row", h("button.sc-chip", { type: "button", onclick: () => set({ ...s, yes: s.yes.map(() => true) }) }, t("allYes")), h("button.sc-chip", { type: "button", onclick: () => set({ ...s, yes: s.yes.map(() => false) }) }, t("allNo"))),
+          h("div.sc-meter", h("i.c", { style: { width: (s.centre ? 100 / 3 : 0) + "%" } }), h("i.s", { style: { width: (200 / 3) * (yes / total) + "%" } }), h("b")),
+          h("div.sc-meter-l", h("span", `${t("weighted")}: `, h("strong", (Math.round(share * 1000) / 10).toLocaleString("en-IN") + "%")), h("span", t("need"))))),
+      h("h3.sc-h3", t("find")),
+      h("div.sc-finds", st.challenges.map((c) => h("div.sc-find" + (found[c.id] ? ".got" : "") + (fresh === c.id ? ".new" : ""),
+        h("span.sc-find-ic", icon(found[c.id] ? "finish" : "pyq", 20)), h("div", h("b", L(c.ask)), found[c.id] && h("p", L(c.aha)))))),
+      Object.keys(found).length >= st.challenges.length && [h("div.sc-why.ok", h("b", L(st.ahaTitle) + " "), L(st.aha)),
+        (st.questions ?? []).map((q, n) => question(q, `${st.id}:q${n}`, { label: t("lastQ"), onDone: () => { if (!isDone(st)) markDone(st); } }))]);
+    if (fresh) burst(box.querySelector(".sc-find.new"));
+    const allFound = Object.keys(found).length >= st.challenges.length;
+    if (allFound && !(st.questions ?? []).length && !isDone(st)) markDone(st);
+    if (!isDone(st)) act(t("skip"), () => goShow(barAt + 1), false); else act("", null);
+  };
+  drawC();
+  return box;
+}
+
+// --- Mains: the plan builds itself, point by point, with the guide explaining each move -----------------------------
+
+function mainsBuild(st) {
+  const box = h("div.sc-mains");
+  const drawM = () => {
+    const qid = X.getA("mains:pick") ?? st.questions[0].id;
+    const q = st.questions.find((x) => x.id === qid) ?? st.questions[0];
+    const sk = q.skeleton;
+    const lines = [["intro", t("open"), L(sk.intro)], ...sk.points.map((p, i) => ["p" + i, String(i + 1), L(p)]), ["way", t("way"), L(sk.wayForward)], ["trap", t("trap"), L(q.commonMistake)]];
+    const built = X.getA("mains:built:" + q.id, 0);
+    const other = st.questions.find((x) => x.id !== q.id);
+    const own = X.getA("mains:own", false);
+    // Each line arrives with its reason beside it: the side comment the guide would otherwise say out of sync.
+    const why = (k) => gl("mainsBuild", k);
+    const board = h("ol.sc-plan", lines.slice(0, built).map(([k, tag, text], i) => h("li.sc-plan-li." + (k === "trap" ? "trap" : k === "way" ? "way" : "pt") + (i === built - 1 ? ".new" : ""),
+      h("span.sc-plan-tag", tag), h("div.sc-plan-body", h("span", text), why(k) && h("small.sc-plan-why", icon("warmup", 14), why(k))))));
+    const pair = st.conclusions?.pairs?.[0];
+    put(box,
+      h("div.sc-qcard",
+        h("div.sc-chips", h("span.hot", L(q.source.label)), h("span", t("marks", q.marks, q.words))),
+        h("p.sc-stem.big", L(q.q)),
+        h("p.sc-asks", h("b", t("whatAsks") + ": "), L(q.directive)),
+        h("div.sc-row",
+          other && built === 0 && h("button.sc-link", { type: "button", onclick: () => { X.setA("mains:pick", other.id); drawM(); } }, t("otherQ")),
+          built === 0 && !own && h("button.sc-link", { type: "button", onclick: () => { X.setA("mains:own", true); drawM(); } }, t("tryOwn")))),
+      own && built === 0 && (() => { const ta = h("textarea.sc-own", { rows: 6, placeholder: t("ownHolder"), oninput: (e) => X.setA("mains:plan:" + q.id, e.target.value) }); ta.value = X.getA("mains:plan:" + q.id, ""); return ta; })(),
+      board,
+      built >= lines.length && pair && h("div.sc-concl", h("h3.sc-h3", t("whichEnd")),
+        (() => {
+          const pk = X.getA("mains:concl:0");
+          return [["a", 0], ["b", 1]].map(([side, i]) => h("button.sc-opt" + (pk == null ? "" : i === pair.better ? ".right" : i === pk ? ".wrong" : ".dim"), { type: "button", disabled: pk != null,
+            onclick: () => { X.setA("mains:concl:0", i); (i === pair.better ? SFX.right : SFX.wrong)(); if (!isDone(st)) markDone(st); drawM(); } },
+            h("span.sc-letter", side.toUpperCase()), h("span.sc-opt-t", L(pair[side]))));
+        })(),
+        X.getA("mains:concl:0") != null && h("div.sc-why" + (X.getA("mains:concl:0") === pair.better ? ".ok" : ".no"), h("b", (X.getA("mains:concl:0") === pair.better ? t("right") : t("notQuite")) + " "), L(pair.why))));
+    const step = () => {
+      const n = X.getA("mains:built:" + q.id, 0);
+      if (n >= lines.length) { if (!pair && !isDone(st)) markDone(st); return drawM(); }
+      X.setA("mains:built:" + q.id, n + 1); SFX.flip();
+      drawM();
+      box.querySelector(n + 1 >= lines.length && pair ? ".sc-concl" : ".sc-plan-li.new")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" });
+      if (n + 1 < lines.length) later(step, 2600); else if (!pair && !isDone(st)) markDone(st);
+    };
+    if (built === 0) act(t("build"), () => { track("demo_act", { step: st.id, act: "mains_build" }); act(t("building"), () => {}, false); step(); }, true);
+    else if (built < lines.length) act(t("building"), () => { clearTimers(); while (X.getA("mains:built:" + q.id, 0) < lines.length) { const n = X.getA("mains:built:" + q.id, 0); X.setA("mains:built:" + q.id, n + 1); } drawM(); }, false);
+    else if (pair && X.getA("mains:concl:0") == null) act(t("skip"), () => goShow(barAt + 1), false);
+    else act("", null);
+  };
+  drawM();
+  return box;
+}
+
+// --- The marking desk: three pages as trophies; notes appear in the margin one by one -----------------------------------
+
+let fontsAsked = false;
+function handFont() { if (fontsAsked) return; fontsAsked = true; document.head.append(h("link", { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" })); }
+
+function paper(snap, shown, { mini = false } = {}) {
+  return h("div.sc-paper" + (mini ? ".mini" : ""), { "aria-label": L(snap.alt) },
+    snap.lines.map((ln, i) => {
+      const o = typeof ln === "object" ? ln : {};
+      const notes = (snap.notes ?? []).filter((n) => n.line === i);
+      return h("div.sc-line" + (o.strike ? ".strike" : "") + (o.indent ? ".indent" : ""), h("span.sc-hand", L(o.t ?? ln)),
+        !mini && notes.map((n) => { const idx = snap.notes.indexOf(n); return idx < shown && h("span.sc-margin" + (n.kind === "good" ? ".good" : "") + (idx === shown - 1 ? ".new" : ""), h("b", n.level ?? "S"), L(n.text).replace(/^[SCE] · /, "")); }));
+    }));
+}
+
+function essayDesk(st) {
+  handFont();
+  const box = h("div.sc-essay");
+  const n = st.snaps.length;
+  const drawE = () => {
+    const lvl = Math.min(X.getA(st.id + ":lvl", 0), n);
+    const shownKey = st.id + ":shown:" + lvl;
+    const trophies = h("div.sc-snaps", st.snaps.map((s, i) => h("button.sc-snap" + (i === lvl ? ".on" : "") + (X.getA(st.id + ":shown:" + i, 0) >= (s.notes?.length ?? 0) ? ".seen" : ""), { type: "button", style: { "--r": `${(i - 1) * 3}deg` },
+      onclick: () => { X.setA(st.id + ":lvl", i); SFX.flip(); drawE(); } }, paper(s, 0, { mini: true }), h("span.sc-snap-l", h("b", String(i + 1)), L(s.name)))),
+      h("button.sc-snap.how" + (lvl === n ? ".on" : ""), { type: "button", style: { "--r": "4deg" }, onclick: () => { X.setA(st.id + ":lvl", n); drawE(); } }, h("span.sc-snap-cam", icon("camera", 34)), h("span.sc-snap-l", h("b", "?"), t("howMarked"))));
+    const topic = h("div.sc-essay-topic", h("small", L(st.topicLabel)), h("b", L(st.topic)));
+    if (lvl === n) {
+      put(box, topic, trophies, howMarking(st));
+      if (!isDone(st)) markDone(st);
+      act("", null);
+      return;
+    }
+    const s = st.snaps[lvl], total = s.notes?.length ?? 0, shown = X.getA(shownKey, 0);
+    put(box, topic, trophies,
+      h("div.sc-essay-stage",
+        h("div.sc-essay-page", h("p.sc-snap-what", h("b", L(s.name) + ": "), L(s.what)), paper(s, shown), s.caption && h("p.sc-cap", L(s.caption))),
+        h("div.sc-essay-side", h("h3.sc-h3", t("evaluator")), h("ul.sc-ticks", s.watch.map((w) => h("li", icon("check", 16), L(w)))), s.flaws && h("p.sc-slip", L(s.flaws)))));
+    if (shown < total) later(() => { X.setA(shownKey, X.getA(shownKey, 0) + 1); SFX.flip(); drawE(); box.querySelector(".sc-margin.new")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" }); }, shown === 0 ? 900 : 1800);
+    act(lvl + 1 < n ? t("nextPage", L(st.snaps[lvl + 1].name)) : t("howMarked"), () => { clearTimers(); X.setA(shownKey, total); X.setA(st.id + ":lvl", lvl + 1); track("demo_act", { step: st.id, act: "snap_" + (lvl + 1) }); drawE(); X.top(); }, shown >= total);
+  };
+  drawE();
+  return box;
+}
+
+function howMarking(st) {
+  const s = st.snaps[st.snaps.length - 1];
+  const sample = { ...s, lines: s.lines.slice(0, 5), notes: (s.notes ?? []).filter((x) => x.line < 5).slice(0, 2) };
+  return h("div.sc-how",
+    h("p.sc-joke", t("snapJoke")),
+    h("div.sc-how-steps",
+      h("div.sc-how-step.s1", h("div.sc-how-art", paper(sample, 0, { mini: true }), h("span.sc-flash")), h("b", h("span.sc-how-n", "1"), t("snap1"))),
+      h("div.sc-how-step.s2", h("div.sc-how-art", paper(sample, 0, { mini: true }), h("span.sc-scan")), h("b", h("span.sc-how-n", "2"), t("snap2"))),
+      h("div.sc-how-step.s3", h("div.sc-how-art", paper(sample, sample.notes.length)), h("b", h("span.sc-how-n", "3"), t("snap3")))),
+    h("p", t("snapHow")));
+}
+
+// --- Keep it: the start's guesses come back, then the cards; then where each card goes in time ------------------------
+
+function keepIt(st) {
+  const box = h("div.sc-keep");
+  const warm = X.stepById("warmup")?.questions ?? [];
+  const cards = st.onlyCards ? st.cards.filter((c) => st.onlyCards.includes(c.id)) : st.cards;
+  const items = [...warm.map((q, i) => ({ q, k: `keep:warm:${i}`, warm: true })), ...cards.map((c) => ({ q: c, k: `keep:${c.id}`, card: c }))];
+  const drawK = () => {
+    const kept = X.getA("keep:done");
+    const at = Math.min(X.getA("keep:at", 0), items.length);
+    if (!kept && at < items.length) {
+      const it = items[at], answered = () => X.getA(it.k + ":pick") != null;
+      const next = () => { X.setA("keep:at", at + 1); drawK(); X.top(); };
+      const label = it.warm ? t("remember") : t("card", at - warm.length + 1, cards.length);
+      put(box, h("div.sc-dots", items.map((_, i) => h("i" + (i < at ? ".done" : i === at ? ".on" : "")))),
+        h("div.sc-flipcard" + (RM() ? "" : ".flip-in"), { key: at }, question(it.q, it.k, { label, onDone: (ok) => { if (it.card) X.grade(it.card, ok); upd(); } })));
+      const upd = () => answered() ? act(at + 1 < items.length ? t("nextCard") : t("saveCards"), at + 1 < items.length ? next : () => { X.setA("keep:at", items.length); drawK(); X.top(); }, true) : act(t("skip"), next, false);
+      upd();
+      return;
+    }
+    if (!kept) { X.setA("keep:done", X.keepCards(st, cards)); SFX.win(); track("demo_act", { step: st.id, act: "kept", n: cards.length }); return drawK(); }
+    // Where each card lands: grouped by the day it comes back.
+    const all = X.store.get("reviews", {}) ?? {}, today = X.today();
+    const by = {};
+    for (const c of cards) { const f = all[`${X.id()}:${c.id}`]?.f; const due = f?.due ?? today; (by[due] ??= []).push({ c, ok: X.getA(`keep:${c.id}:pick`) === c.answer }); }
+    const days = Object.keys(by).sort();
+    const label = (d) => { const n = Math.round((Date.parse(d + "T12:00:00") - Date.parse(today + "T12:00:00")) / 864e5); return n <= 1 ? t("tomorrow") : t("inDays", n); };
+    put(box,
+      h("h2.sc-h2", t("schedule")),
+      h("div.sc-sched", days.map((d, di) => h("div.sc-sched-col", { style: { "--d": di } },
+        h("div.sc-sched-day", h("b", label(d)), h("small", new Date(d + "T12:00:00").toLocaleDateString(hi() ? "hi-IN" : "en-IN", { day: "numeric", month: "short" }))),
+        by[d].map(({ c, ok }, j) => h("div.sc-mini-card" + (ok ? ".ok" : ".no"), { style: { "--j": di * 3 + j } }, h("span", icon(ok ? "check" : "x", 14)), L(c.q)))))),
+      h("p.sc-saved", t("saved", cards.length)));
+    if (!isDone(st)) markDone(st);
+    act("", null);
+  };
+  drawK();
+  return box;
+}
+
+// --- The finale: trophies, then what's inside, then the plans and one button -----------------------------------------
+
+function finale(st) {
+  const list = seq().filter((id) => id !== st.id);
+  const statOf = (s) => {
+    const v = X.view(s), S = W[X.lang()]?.stat ?? W.en.stat, f = S[s.type];
+    if (s.type === "sort") { const pl = X.getA(s.id + ":place", {}); const its = (v.only ?? v.items.map((_, i) => i)); return f(its.filter((i) => pl[i] === v.items[i].bucket).length, its.length); }
+    if (s.type === "pyq") { const its = (v.only ?? v.questions.map((_, i) => i)); return f(its.filter((i) => X.getA(`${s.id}:${i}:pick`) === v.questions[i].answer).length, its.length); }
+    if (s.type === "sim-gst") return f(Object.keys(X.getA(s.id + ":found", {})).length);
+    if (s.type === "keep") return f(X.getA("keep:done")?.n ?? 0);
+    return typeof f === "function" ? f() : f ?? "";
+  };
+  const shelf = h("div.sc-shelf", list.map((id, i) => {
+    const s = X.view(X.stepById(id)), got = isDone(s);
+    return h("button.sc-trophy" + (got ? ".got" : ""), { type: "button", style: { "--i": i }, onclick: () => !got && goShow(i) },
+      h("span.sc-medal", icon(s.type, 24)), h("b", nameOf(s)), h("small", got ? statOf(s) : t("skipped") + " · " + t("goBack")));
+  }));
+  later(() => { SFX.win(); burst(shelf); }, 500);
+  const nums = h("div.sc-nums", t("nums").map(([n, l]) => { const el = h("b"); const m = /^([\d,]+)(\+?)$/.exec(n); if (m) countUp(el, Number(m[1].replace(/,/g, "")), m[2]); else el.textContent = n; return h("div.sc-num", el, h("span", l)); }));
+  const n = X.cardsHere();
+  return [
+    h("p.sc-sub", t("finLead")),
+    shelf, h("p.sc-private", t("privateNote")),
+    h("h2.sc-h2.center", t("oneTopic"), " ", h("span.sc-gold", t("inApp"))),
+    nums,
+    h("h3.sc-h3", t("alsoIn")),
+    h("div.sc-apps", t("app").map(([name, line], i) => h("div.sc-app", { style: { "--i": i } }, h("b", name), h("p", line)))),
+    h("h2.sc-h2.center", t("plans")),
+    h("div.sc-plans",
+      h("div.sc-planc", h("div.sc-plan-name", t("free")), h("div.sc-price", "₹0"), h("ul.sc-ticks", t("freeList").map((x) => h("li", icon("check", 16), x))),
+        h("a.sc-go.ready.wide", { href: "#", onclick: () => X.joining("plans") }, t("joinKeep", n), icon("arrow", 20)), h("small", t("noCard"))),
+      h("div.sc-planc.plus", h("div.sc-plan-name", t("plus")), h("div.sc-price", "₹3,999", h("small", t("perYear"))), h("div.sc-perday", t("perDay")),
+        h("ul.sc-ticks", t("plusList").map((x) => h("li", icon("check", 16), x))), h("small", t("plusNote")))),
+    X.day3Box("finish"),
+    h("div.sc-cover-links", X.data().routes.full && h("button.sc-link", { type: "button", onclick: () => X.goFull() }, t("wholeTopic")), h("a.sc-link", { href: "#try" }, t("moreTopics"))),
+  ];
+}
+
+// --- Look ------------------------------------------------------------------------------------------------------------
+
+function css() {
+  if (document.getElementById("sc-css")) return;
+  document.head.append(h("style", { id: "sc-css" }, `
+.sc-on main { max-width: 1240px; padding-top: 0; }
+html.sc-on { scroll-padding: 80px 0 120px; }
+@media (max-width: 999px) { html.sc-on { scroll-padding-bottom: 210px; } }
+.sc-root { --sc-bg: #070A18; --sc-card: #121836; --sc-card2: #19204A; --sc-line: #2A3366; --sc-ink: #F2EFF9; --sc-muted: #A8AED0;
+  --sc-sun: #F0A04B; --sc-gold: #FFC66B; --sc-ok: #5DD39E; --sc-bad: #FF7A6B; --sc-on-sun: #1B1205;
+  max-width: 1200px !important; color: var(--sc-ink); padding-bottom: 130px; position: relative; color-scheme: dark; }
+.sc-root::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(900px 500px at 85% -10%, #3A2A6A55, transparent 60%), radial-gradient(700px 420px at -10% 110%, #F0A04B22, transparent 60%), linear-gradient(180deg, #0B0F24, #070A18); }
+.sc-root h1, .sc-root h2, .sc-root h3 { color: var(--sc-ink); }
+.sc-root button { color: inherit; }
+.sc-ic { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+/* top bar */
+.sc-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 14px; padding: 10px 2px; margin: 0 0 18px;
+  background: linear-gradient(#070A18f2, #070A18cc); backdrop-filter: blur(10px); border-bottom: 1px solid #ffffff12; }
+.sc-logo { flex: none; display: flex; align-items: center; gap: 8px; color: var(--sc-ink); text-decoration: none; font-family: var(--head-font); font-weight: 800; font-size: 18px; }
+.sc-logo-mark svg { width: 28px; height: 28px; display: block; }
+.sc-rail { flex: 1; min-width: 0; display: grid; gap: 4px; }
+.sc-segs { display: flex; gap: 4px; }
+.sc-seg { flex: 1; height: 6px; min-height: 0; padding: 0; border: 0; border-radius: 99px; background: #ffffff1c; cursor: pointer; transition: background .3s; }
+.sc-seg.done { background: var(--sc-sun); opacity: .75; }
+.sc-seg.on { background: var(--sc-gold); box-shadow: 0 0 10px #FFC66Bb0; }
+.sc-rail-label { font-size: 12.5px; color: var(--sc-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sc-rail-label b { color: var(--sc-ink); }
+.sc-iconbtn { width: 40px; height: 40px; min-height: 0; padding: 0; display: grid; place-items: center; border-radius: 50%; background: #ffffff0d; border: 1px solid #ffffff1f; }
+.sc-lang { font-weight: 800; font-size: 14px; }
+.sc-iconbtn[aria-pressed="true"] { color: var(--sc-gold); border-color: var(--sc-gold); }
+.sc-root .try-lang .chip { color: var(--sc-ink); border-color: #ffffff2a; min-height: 40px; }
+.sc-root .try-lang .chip[aria-pressed="true"] { background: #ffffff18; border-color: var(--sc-gold); }
+.sc-join-pill { background: var(--sc-sun); color: var(--sc-on-sun); font-weight: 700; text-decoration: none; padding: 9px 16px; border-radius: 99px; white-space: nowrap; font-size: 14px; }
+/* stage */
+.sc-stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+.sc-main { min-width: 0; }
+.sc-head { margin-bottom: 18px; }
+.sc-kick { display: flex; align-items: center; gap: 8px; color: var(--sc-gold); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.sc-kick-ic { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #F0A04B26; color: var(--sc-gold); }
+.sc-head h1 { font-size: clamp(28px, 4.2vw, 40px); line-height: 1.12; margin: 10px 0 6px; animation: sc-rise .5s both; }
+.sc-sub { color: var(--sc-muted); font-size: 17px; margin: 0; animation: sc-rise .5s .08s both; }
+.sc-h2 { font-size: 24px; margin: 28px 0 12px; } .sc-h2.center { text-align: center; } .sc-h3 { font-size: 18px; margin: 22px 0 10px; }
+.sc-gold { color: var(--sc-gold); }
+.sc-root .sc-link { background: none; border: 0; color: var(--sc-gold); text-decoration: underline; text-underline-offset: 3px; padding: 6px 2px; min-height: 0; font-size: 15px; cursor: pointer; }
+.sc-chip { border: 1px solid #ffffff2e; background: #ffffff0f; border-radius: 99px; padding: 8px 14px; font-size: 14px; color: var(--sc-ink); }
+.sc-chip:hover { border-color: var(--sc-gold); }
+.sc-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.sc-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.sc-chips span { font-size: 12.5px; padding: 3px 10px; border-radius: 99px; background: #ffffff14; color: var(--sc-ink); }
+.sc-chips span.hot { background: #F0A04B2e; color: var(--sc-gold); font-weight: 700; }
+/* bottom bar */
+.sc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #070A18e8; backdrop-filter: blur(12px); border-top: 1px solid #ffffff16; }
+.sc-bar-in { max-width: 1200px; margin: 0 auto; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sc-back { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid #ffffff26; min-height: 48px; padding: 0 16px; border-radius: 99px; }
+.sc-go { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 99px; font-weight: 800; font-size: 16.5px;
+  border: 1px solid #ffffff30; background: #ffffff10; color: var(--sc-ink); text-decoration: none; max-width: 70vw; transition: transform .15s, box-shadow .3s; }
+.sc-go span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc-go.ready { background: linear-gradient(135deg, #FFC66B, #F0A04B 55%, #E07B2A); color: var(--sc-on-sun); border-color: transparent; box-shadow: 0 8px 30px -8px #F0A04Bb0; }
+.sc-go.ready:hover { transform: translateY(-1px); }
+.sc-go.pulse { animation: sc-pulse 1.6s ease-out 2; }
+.sc-go.wide { width: 100%; max-width: none; }
+/* guide */
+.sc-guide { position: sticky; top: 84px; background: linear-gradient(180deg, #19204Af0, #121836f0); border: 1px solid var(--sc-line); border-radius: 20px; padding: 14px; box-shadow: 0 20px 50px -30px #000; }
+.sc-guide-head { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0 0 10px; min-height: 0; width: 100%; text-align: left; cursor: default; }
+.sc-guide-head b { display: block; font-size: 15px; } .sc-guide-head small { color: var(--sc-muted); font-size: 12.5px; }
+.sc-guide-av { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #FFC66B33, #F0A04B14); border: 1px solid #F0A04B66; display: grid; place-items: center; animation: sc-bob 3s ease-in-out infinite; }
+.sc-guide-av svg { width: 26px; height: 26px; }
+.sc-bubbles { display: grid; gap: 8px; max-height: calc(100vh - 230px); overflow-y: auto; }
+.sc-bub { background: #ffffff0d; border: 1px solid #ffffff17; border-radius: 16px 16px 16px 4px; padding: 10px 12px; font-size: 14.5px; line-height: 1.45; }
+.sc-bub.in { animation: sc-pop .38s cubic-bezier(.2,1.4,.4,1) both; }
+.sc-bub.pitch { border-color: #FFC66B88; background: linear-gradient(135deg, #F0A04B24, #ffffff08); }
+.sc-bub-join { display: block; margin-top: 6px; color: var(--sc-gold); font-weight: 700; text-decoration: none; }
+.sc-bub.typing { display: flex; gap: 4px; width: 56px; padding: 12px; } .sc-bub.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--sc-muted); animation: sc-dot 1s infinite; }
+.sc-bub.typing i:nth-child(2) { animation-delay: .15s; } .sc-bub.typing i:nth-child(3) { animation-delay: .3s; }
+/* questions */
+.sc-dots { display: flex; gap: 6px; margin: 0 0 12px; } .sc-dots i { width: 26px; height: 5px; border-radius: 99px; background: #ffffff1f; }
+.sc-dots i.done { background: var(--sc-sun); } .sc-dots i.on { background: var(--sc-gold); }
+.sc-q { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 20px; padding: 18px; animation: sc-rise .4s both; }
+.sc-q-label { color: var(--sc-gold); font-size: 13px; font-weight: 700; margin-bottom: 4px; } .sc-q-src { color: var(--sc-muted); font-size: 13px; }
+.sc-stem { font-size: 18px; font-weight: 700; line-height: 1.45; margin: 6px 0 14px; white-space: pre-line; } .sc-stem.big { font-size: 20px; }
+.sc-opts { display: grid; gap: 8px; }
+.sc-opt { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--sc-card2); border: 1.5px solid #ffffff14; border-radius: 14px; padding: 11px 14px; min-height: 52px; font-size: 16px; transition: border-color .2s, transform .15s, background .2s; }
+.sc-opt:not(:disabled):hover { border-color: #F0A04B99; transform: translateX(2px); }
+.sc-opt:disabled { opacity: 1; cursor: default; }
+.sc-letter { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 14px; background: #F0A04B22; color: var(--sc-gold); border: 1px solid #F0A04B66; }
+.sc-opt-t { flex: 1; }
+.sc-opt.picked { border-color: var(--sc-gold); background: #F0A04B18; }
+.sc-opt.right { border-color: var(--sc-ok); background: #5DD39E1c; } .sc-opt.right .sc-letter { background: var(--sc-ok); color: #06210f; border-color: var(--sc-ok); }
+.sc-opt.wrong { border-color: var(--sc-bad); background: #FF7A6B18; } .sc-opt.wrong .sc-letter { background: var(--sc-bad); color: #2a0703; border-color: var(--sc-bad); }
+.sc-opt.dim { opacity: .5; } .sc-opt.wrong.pop { animation: sc-shake .4s; } .sc-opt.right.pop { animation: sc-pop .4s; }
+.sc-flag.ok { color: var(--sc-ok); } .sc-flag.no { color: var(--sc-bad); }
+.sc-sure { margin-top: 12px; padding: 12px; border-radius: 14px; background: #FFC66B14; border: 1px dashed #FFC66B88; animation: sc-rise .3s both; }
+.sc-sure > span { font-weight: 700; color: var(--sc-gold); } .sc-sure-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.sc-sure-row .sc-chip { font-size: 15px; padding: 10px 16px; }
+.sc-why { margin-top: 12px; padding: 12px 14px; border-radius: 14px; border-left: 4px solid var(--sc-sun); background: #ffffff0a; line-height: 1.5; animation: sc-rise .35s both; }
+.sc-why.ok { border-color: var(--sc-ok); } .sc-why.no { border-color: var(--sc-bad); }
+.sc-why b { color: var(--sc-ink); } .sc-law { color: var(--sc-muted); font-size: 14px; margin-top: 6px; }
+.sc-tally { display: flex; gap: 20px; align-items: center; background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 20px; padding: 20px; animation: sc-rise .4s both; }
+.sc-tally-n { font-family: var(--head-font); font-weight: 800; color: var(--sc-gold); white-space: nowrap; } .sc-big { font-size: 64px; } .sc-tally-n span:last-child { font-size: 28px; color: var(--sc-muted); }
+.sc-tally p { margin: 6px 0; } .sc-tally small { color: var(--sc-muted); }
+/* video */
+.sc-video { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 28px; align-items: start; }
+.sc-video-left { display: grid; justify-items: center; gap: 6px; }
+.sc-player { position: relative; width: 100%; max-width: 260px; }
+.sc-player-glow { position: absolute; inset: 8% -6%; width: 112%; height: 84%; object-fit: cover; filter: blur(38px) saturate(1.6); opacity: .55; z-index: 0; }
+.sc-phone { position: relative; z-index: 1; aspect-ratio: 9 / 16; border-radius: 28px; overflow: hidden; background: #000; border: 6px solid #1d2142; box-shadow: 0 30px 60px -20px #000, inset 0 0 0 1px #ffffff22; }
+.sc-phone video, .sc-poster { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sc-player-shade { position: absolute; inset: 0; background: linear-gradient(180deg, #0000 45%, #000c); }
+.sc-playbtn { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: 84px; height: 84px; padding: 0; min-height: 0; border-radius: 50%; border: 0; display: grid; place-items: center;
+  background: linear-gradient(135deg, #FFC66B, #F0A04B); color: var(--sc-on-sun); box-shadow: 0 10px 40px #F0A04B99; }
+.sc-playbtn .sc-ic { fill: currentColor; stroke: none; margin-left: 5px; }
+.sc-ring { position: absolute; inset: -8px; border-radius: 50%; border: 2px solid #FFC66B; animation: sc-ring 1.8s ease-out infinite; }
+.sc-player-cap { position: absolute; left: 14px; right: 14px; bottom: 14px; display: grid; gap: 8px; } .sc-player-cap b { font-family: var(--head-font); font-size: 19px; line-height: 1.2; }
+.sc-vq.glow .sc-q { box-shadow: 0 0 0 2px var(--sc-gold), 0 0 40px -10px var(--sc-gold); }
+.sc-vq .sc-h2 { margin-top: 0; }
+.sc-dialog { max-width: 560px; background: var(--sc-card); color: var(--sc-ink); border: 1px solid var(--sc-line); border-radius: 18px; padding: 20px; line-height: 1.6; }
+.sc-dialog::backdrop { background: #000a; }
+/* governor */
+.sc-bill { position: relative; background: #FFF8E8; color: #2a2118; border-radius: 6px; padding: 18px 20px 70px; min-height: 180px; box-shadow: 0 24px 50px -24px #000, 0 0 0 1px #e8dcc0; overflow: hidden;
+  background-image: repeating-linear-gradient(#0000 0 27px, #e9dfc8 27px 28px); }
+.sc-bill.slide { animation: sc-slide .45s both; }
+.sc-bill-top { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 8px; }
+.sc-bill-n { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #7a6a52; }
+.sc-bill-stamp { white-space: nowrap; flex: none; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; border: 2px solid #2d5aa0; color: #2d5aa0; padding: 2px 8px; border-radius: 4px; transform: rotate(-2deg); }
+.sc-bill-text { font-family: Georgia, serif; font-size: 19px; line-height: 1.45; margin: 4px 0; } .sc-bill-note { font-style: italic; color: #7a4b12; margin: 8px 0 0; }
+.sc-seal { position: absolute; right: 16px; bottom: 14px; transform: rotate(-12deg); border: 3px solid; border-radius: 10px; padding: 6px 12px; text-align: center; font-weight: 900; text-transform: uppercase; letter-spacing: .04em; background: #fff8e8cc; max-width: 55%; }
+.sc-seal small { display: block; font-size: 10.5px; font-weight: 700; } .sc-seal.ok { color: #1b7a43; } .sc-seal.no { color: #b42318; }
+.sc-seal.hit { animation: sc-stamp .45s cubic-bezier(.2,1.6,.4,1) both; }
+.sc-ask { font-weight: 800; font-size: 17px; margin: 18px 0 10px; }
+.sc-stamps { display: flex; flex-wrap: wrap; gap: 10px; }
+.sc-stampbtn { min-height: 50px; padding: 0 18px; border-radius: 12px; border: 2px dashed #ffffff40; background: #ffffff0a; font-weight: 700; font-size: 15.5px; }
+.sc-stampbtn:not(:disabled):hover { border-style: solid; border-color: var(--sc-gold); transform: translateY(-2px); }
+.sc-stampbtn.ok { border: 2px solid var(--sc-ok); background: #5DD39E22; opacity: 1; } .sc-stampbtn.no { border: 2px solid var(--sc-bad); background: #FF7A6B22; opacity: 1; } .sc-stampbtn.dim { opacity: .4; }
+.sc-wrap { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 20px; padding: 18px; font-size: 17px; line-height: 1.55; }
+/* sort */
+.sc-tray { border: 2px dashed #ffffff30; border-radius: 20px; padding: 14px; background: #ffffff06; margin-bottom: 14px; transition: opacity .3s; }
+.sc-tray.empty { display: none; }
+.sc-tray-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 10px; } .sc-tray-head span { color: var(--sc-muted); font-size: 14px; }
+.sc-tray-tiles { display: flex; flex-wrap: wrap; gap: 8px; }
+.sc-tile { touch-action: none; user-select: none; cursor: grab; display: inline-flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left; padding: 10px 14px; min-height: 44px;
+  border-radius: 12px; background: linear-gradient(180deg, #232B5C, #1A2150); border: 1px solid #ffffff2a; box-shadow: 0 4px 0 #0c1030, 0 8px 18px -10px #000; font-weight: 600; font-size: 15px; }
+.sc-tile:hover { border-color: var(--sc-gold); } .sc-tile.sel { border-color: var(--sc-gold); box-shadow: 0 0 0 3px #FFC66B55, 0 4px 0 #0c1030; transform: translateY(-2px); }
+.sc-tile.lifted { opacity: .3; }
+.sc-ghost { position: fixed; left: 0; top: 0; z-index: 100; pointer-events: none; box-shadow: 0 20px 40px -10px #000; border-color: var(--sc-gold); }
+.sc-bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.sc-bin { --c: #7C9CFF; border-radius: 20px; padding: 12px; background: color-mix(in srgb, var(--c) 9%, #0d1230); border: 2px solid color-mix(in srgb, var(--c) 45%, transparent); min-height: 170px; transition: transform .2s, box-shadow .2s, border-color .2s; cursor: default; }
+.sc-bin.union { --c: #7C9CFF; } .sc-bin.state { --c: #5DD39E; } .sc-bin.conc { --c: #FFC66B; }
+.sc-bin.armed, .sc-sort.dragging .sc-bin { cursor: pointer; border-style: dashed; animation: sc-breathe 1.4s ease-in-out infinite; }
+.sc-bin.over { transform: scale(1.03); box-shadow: 0 0 0 3px var(--c), 0 0 40px -6px var(--c); border-style: solid; animation: none; }
+.sc-bin-head { display: flex; justify-content: space-between; align-items: center; color: var(--c); font-size: 17px; margin-bottom: 8px; }
+.sc-bin-head span { font-size: 13px; background: color-mix(in srgb, var(--c) 22%, transparent); color: var(--sc-ink); border-radius: 99px; padding: 1px 9px; }
+.sc-bin-body { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+.sc-bin-body .sc-tile { width: 100%; }
+.sc-drop { display: grid; place-items: center; min-height: 100px; border: 1.5px dashed color-mix(in srgb, var(--c) 50%, transparent); border-radius: 14px; color: color-mix(in srgb, var(--c) 80%, #fff); font-size: 14px; opacity: .8; }
+.sc-tile.done { cursor: default; box-shadow: none; } .sc-tile.ok { border-color: var(--sc-ok); background: #5DD39E1a; } .sc-tile.no { border-color: var(--sc-bad); background: #FF7A6B1a; animation: sc-shake .4s; }
+.sc-tile small { font-weight: 400; font-size: 13px; color: var(--sc-bad); } .sc-tile small.sc-tile-why { color: var(--sc-muted); }
+/* gst */
+.sc-gst-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: center; background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 22px; padding: 16px; }
+.sc-gst-map { position: relative; }
+.sc-chamber { width: 100%; height: auto; display: block; }
+.sc-arc { fill: none; stroke: #ffffff0c; stroke-width: 86; }
+.sc-seat { cursor: pointer; } .sc-seat .hit { fill: transparent; }
+.sc-seat circle:not(.hit) { transition: fill .25s, r .2s; stroke: #0007; stroke-width: 1; }
+.sc-seat.yes circle:not(.hit) { fill: #5DD39E; } .sc-seat.no circle:not(.hit) { fill: #FF7A6B; }
+.sc-seat:hover circle:not(.hit), .sc-seat:focus circle:not(.hit) { r: 11; }
+.sc-centre { cursor: pointer; } .sc-centre rect { stroke-width: 2; transition: fill .25s; } .sc-centre text { font-weight: 800; font-size: 14px; fill: #0b0e1c; }
+.sc-centre.yes rect { fill: #5DD39E; stroke: #b8f5d8; } .sc-centre.no rect { fill: #FF7A6B; stroke: #ffc2b8; }
+.sc-stampmark { position: absolute; right: 2%; top: 4%; transform: rotate(10deg); border: 3px solid; border-radius: 10px; padding: 4px 12px; font-weight: 900; font-size: 22px; letter-spacing: .08em; text-transform: uppercase; }
+.sc-stampmark.ok { color: var(--sc-ok); } .sc-stampmark.no { color: var(--sc-bad); } .sc-stampmark.hit { animation: sc-stamp .45s cubic-bezier(.2,1.6,.4,1) both; }
+.sc-hint { color: var(--sc-muted); font-size: 13.5px; text-align: center; margin: 4px 0 0; }
+.sc-gst-side { display: grid; gap: 12px; }
+.sc-gst-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sc-seg2 { display: flex; border: 1px solid #ffffff2a; border-radius: 99px; overflow: hidden; } .sc-seg2 button { border: 0; border-radius: 0; min-height: 40px; padding: 0 16px; background: transparent; }
+.sc-seg2 button.on { background: var(--sc-sun); color: var(--sc-on-sun); font-weight: 800; }
+.sc-step { display: flex; align-items: center; gap: 10px; } .sc-step button { width: 40px; height: 40px; padding: 0; min-height: 0; border-radius: 50%; font-size: 20px; background: #ffffff12; border: 1px solid #ffffff2a; }
+.sc-step b { font-size: 24px; min-width: 2ch; text-align: center; font-variant-numeric: tabular-nums; }
+.sc-meter { position: relative; height: 18px; border-radius: 99px; background: #ffffff14; display: flex; overflow: visible; }
+.sc-meter i { display: block; height: 100%; transition: width .45s cubic-bezier(.2,.9,.3,1); } .sc-meter i.c { background: #9F7BFF; border-radius: 99px 0 0 99px; } .sc-meter i.s { background: var(--sc-sun); }
+.sc-meter b { position: absolute; left: 75%; top: -5px; bottom: -5px; width: 3px; background: #fff; border-radius: 2px; box-shadow: 0 0 8px #fff; }
+.sc-meter-l { display: flex; justify-content: space-between; font-size: 14px; color: var(--sc-muted); } .sc-meter-l strong { color: var(--sc-ink); font-size: 18px; }
+.sc-finds { display: grid; gap: 10px; }
+.sc-find { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 16px; background: #ffffff08; border: 1px solid #ffffff16; position: relative; transition: background .4s, border-color .4s; }
+.sc-find-ic { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: #ffffff10; color: var(--sc-muted); flex: none; }
+.sc-find.got { background: linear-gradient(135deg, #FFC66B22, #F0A04B0d); border-color: #FFC66B88; } .sc-find.got .sc-find-ic { background: var(--sc-gold); color: var(--sc-on-sun); }
+.sc-find.new { animation: sc-pop .5s; } .sc-find p { margin: 4px 0 0; color: var(--sc-ink); }
+/* mains */
+.sc-qcard { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 20px; padding: 18px; }
+.sc-asks { color: var(--sc-muted); margin: 0 0 6px; } .sc-asks b { color: var(--sc-ink); }
+.sc-own { width: 100%; margin-top: 10px; background: #ffffff0a; color: var(--sc-ink); border: 1px solid var(--sc-line); border-radius: 14px; padding: 12px; }
+.sc-plan { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 10px; }
+.sc-plan-li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border-radius: 16px; background: #ffffff0a; border: 1px solid #ffffff16; line-height: 1.5; }
+.sc-plan-body { display: grid; gap: 6px; }
+.sc-plan-why { display: flex; gap: 6px; align-items: flex-start; color: var(--sc-gold); font-size: 13.5px; line-height: 1.4; font-style: italic; }
+.sc-plan-why .sc-ic { margin-top: 2px; }
+.sc-plan-li.new .sc-plan-why { animation: sc-rise .5s .7s both; }
+.sc-plan-li.new { animation: sc-write .6s both; border-color: var(--sc-gold); }
+.sc-plan-tag { flex: none; min-width: 30px; height: 30px; padding: 0 8px; border-radius: 99px; display: grid; place-items: center; background: #F0A04B26; color: var(--sc-gold); font-weight: 800; font-size: 13px; }
+.sc-plan-li.way { border-color: #5DD39E55; } .sc-plan-li.way .sc-plan-tag { background: #5DD39E26; color: var(--sc-ok); }
+.sc-plan-li.trap { border-color: #FF7A6B66; background: #FF7A6B10; } .sc-plan-li.trap .sc-plan-tag { background: #FF7A6B26; color: var(--sc-bad); }
+.sc-concl .sc-opt { align-items: flex-start; }
+/* essay */
+.sc-essay-topic { display: grid; gap: 4px; padding: 14px 18px; border-radius: 18px; background: var(--sc-card); border: 1px solid var(--sc-line); margin-bottom: 18px; }
+.sc-essay-topic small { color: var(--sc-muted); } .sc-essay-topic b { font-family: var(--head-font); font-size: 20px; }
+.sc-snaps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+.sc-snap { position: relative; padding: 8px 8px 0; min-height: 0; border-radius: 10px; background: #fffdf6; border: 0; transform: rotate(var(--r)); box-shadow: 0 14px 30px -14px #000; transition: transform .25s, box-shadow .25s; overflow: hidden; color: #1f2a44; text-align: left; }
+.sc-root .sc-snap { color: #1f2a44; } .sc-root .sc-snap.how { color: var(--sc-ink); }
+.sc-snap:hover { transform: rotate(0) translateY(-4px); }
+.sc-snap.on { transform: rotate(0) translateY(-6px) scale(1.04); box-shadow: 0 0 0 3px var(--sc-gold), 0 20px 40px -14px #000; }
+.sc-snap.seen::after { content: "✓"; position: absolute; top: 6px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: var(--sc-ok); color: #06210f; font-size: 13px; font-weight: 900; display: grid; place-items: center; }
+.sc-snap-l { display: flex; gap: 6px; align-items: center; padding: 8px 4px; font-weight: 700; font-size: 14px; background: #fffdf6; position: relative; }
+.sc-snap-l b { width: 22px; height: 22px; border-radius: 50%; background: #F0A04B; color: #1B1205; display: grid; place-items: center; font-size: 12px; }
+.sc-snap.how { background: linear-gradient(160deg, #2B3470, #1A2150); color: var(--sc-ink); display: grid; } .sc-snap.how .sc-snap-l { background: transparent; }
+.sc-snap-cam { display: grid; place-items: center; height: 92px; color: var(--sc-gold); }
+.sc-paper { background: #fffdf6; color: #1f2a44; border-radius: 6px; padding: 12px 14px 14px 42px; position: relative;
+  background-image: linear-gradient(to right, transparent 30px, #f2b8b8 30px, #f2b8b8 31px, transparent 31px), repeating-linear-gradient(#fffdf6 0 29px, #cfdcec 29px 30px); }
+.sc-paper.mini { padding: 4px 4px 4px 14px; height: 92px; overflow: hidden; background-image: linear-gradient(to right, transparent 10px, #f2b8b8 10px, #f2b8b8 11px, transparent 11px), repeating-linear-gradient(#fffdf6 0 11px, #cfdcec 11px 12px); }
+.sc-paper.mini .sc-line { min-height: 12px; line-height: 12px; } .sc-paper.mini .sc-hand { font-size: 8px; }
+.sc-line { min-height: 30px; line-height: 30px; } .sc-line.indent { padding-left: 1.4em; } .sc-line.strike .sc-hand { text-decoration: line-through; text-decoration-color: #b33; }
+.sc-hand { font-family: "Kalam", "Segoe Print", "Bradley Hand", cursive; font-size: 18px; }
+.sc-margin { display: block; font-family: "Kalam", cursive; font-size: 15px; line-height: 1.35; color: #b42318; margin: 2px 0 8px; padding: 2px 0 2px 10px; border-left: 3px solid currentColor; }
+.sc-margin b { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid currentColor; font-size: 11px; margin-right: 6px; font-family: system-ui; }
+.sc-margin.good { color: #1b7a43; } .sc-margin.new { animation: sc-ink .7s both; }
+.sc-essay-stage { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.sc-snap-what { color: var(--sc-muted); margin: 0 0 8px; } .sc-snap-what b { color: var(--sc-ink); }
+.sc-essay-side { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 18px; padding: 4px 16px 12px; }
+.sc-ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; } .sc-ticks li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.45; } .sc-ticks .sc-ic { color: var(--sc-ok); margin-top: 3px; }
+.sc-cap { color: var(--sc-muted); font-size: 13px; margin: 6px 0 0; }
+.sc-slip { color: var(--sc-bad); font-size: 14.5px; }
+.sc-how { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 20px; padding: 18px; line-height: 1.55; }
+.sc-joke { font-size: 18px; font-weight: 700; margin-top: 0; }
+.sc-how-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 14px 0; }
+.sc-how-step { display: grid; gap: 8px; } .sc-how-step > b { display: flex; gap: 8px; align-items: center; font-size: 14.5px; }
+.sc-how-n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--sc-sun); color: var(--sc-on-sun); font-size: 12px; flex: none; }
+.sc-how-art { position: relative; border-radius: 10px; overflow: hidden; height: 150px; background: #fffdf6; }
+.sc-how-art .sc-paper { height: 150px; overflow: hidden; } .sc-how-art .sc-paper:not(.mini) { padding-left: 30px; font-size: 12px; }
+.sc-how-step.s3 .sc-hand { font-size: 12px; } .sc-how-step.s3 .sc-line { min-height: 20px; line-height: 20px; } .sc-how-step.s3 .sc-margin { font-size: 11px; margin: 0 0 3px; }
+.sc-how-step.s3 .sc-paper { background-image: repeating-linear-gradient(#fffdf6 0 19px, #cfdcec 19px 20px); padding-left: 10px; }
+.sc-how-art .sc-paper.mini { height: 150px; } .sc-how-art .sc-paper.mini .sc-line { min-height: 20px; line-height: 20px; } .sc-how-art .sc-paper.mini .sc-hand { font-size: 12px; }
+.sc-flash { position: absolute; inset: 0; background: #fff; opacity: 0; animation: sc-flash 3s 1s infinite; }
+.sc-how-art::before { content: ""; position: absolute; inset: 10px; border: 2px solid #F0A04B; border-radius: 8px; z-index: 2; }
+.sc-how-step.s3 .sc-how-art::before { display: none; }
+.sc-scan { position: absolute; left: 0; right: 0; height: 26px; top: 0; background: linear-gradient(#5DD39E00, #5DD39E66, #5DD39E00); animation: sc-scan 2.2s ease-in-out infinite; }
+/* keep */
+.sc-flipcard.flip-in { animation: sc-flip .5s both; transform-origin: 50% 50%; }
+.sc-sched { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.sc-sched-col { background: var(--sc-card); border: 1px solid var(--sc-line); border-radius: 18px; padding: 12px; display: grid; gap: 8px; align-content: start; animation: sc-rise .45s calc(var(--d) * .15s) both; }
+.sc-sched-day b { display: block; color: var(--sc-gold); font-size: 17px; } .sc-sched-day small { color: var(--sc-muted); }
+.sc-mini-card { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; line-height: 1.35; padding: 8px 10px; border-radius: 12px; background: var(--sc-card2); border: 1px solid #ffffff18; animation: sc-fly .55s calc(.3s + var(--j) * .12s) both; }
+.sc-mini-card.ok .sc-ic { color: var(--sc-ok); } .sc-mini-card.no .sc-ic { color: var(--sc-bad); }
+.sc-saved { margin-top: 14px; font-size: 16px; }
+/* finale */
+.sc-shelf { position: relative; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0 6px; }
+.sc-trophy { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 16px 10px; border-radius: 18px; background: #ffffff08; border: 1px solid #ffffff16; min-height: 0; animation: sc-pop .5s calc(var(--i) * .08s) both; }
+.sc-trophy b { font-size: 14px; line-height: 1.25; } .sc-trophy small { color: var(--sc-muted); font-size: 12.5px; }
+.sc-medal { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #ffffff12; color: var(--sc-muted); }
+.sc-trophy.got { background: linear-gradient(160deg, #FFC66B1f, #ffffff06); border-color: #FFC66B66; cursor: default; }
+.sc-trophy.got .sc-medal { background: radial-gradient(circle at 35% 30%, #FFE3A3, #F0A04B 60%, #B8661F); color: #3a1d05; box-shadow: 0 0 24px -4px #F0A04B; }
+.sc-trophy.got small { color: var(--sc-gold); }
+.sc-private { color: var(--sc-muted); font-size: 13px; margin: 0; }
+.sc-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.sc-num { text-align: center; padding: 18px 10px; border-radius: 18px; background: var(--sc-card); border: 1px solid var(--sc-line); }
+.sc-num b { display: block; font-family: var(--head-font); font-size: 36px; color: var(--sc-gold); font-variant-numeric: tabular-nums; } .sc-num span { color: var(--sc-muted); font-size: 14px; }
+.sc-apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.sc-app { padding: 14px 16px; border-radius: 18px; background: var(--sc-card); border: 1px solid var(--sc-line); animation: sc-rise .45s calc(var(--i) * .07s) both; }
+.sc-app b { color: var(--sc-gold); font-size: 16px; } .sc-app p { margin: 6px 0 0; color: var(--sc-ink); line-height: 1.45; font-size: 14.5px; }
+.sc-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 18px; }
+.sc-planc { display: grid; gap: 10px; align-content: start; padding: 20px; border-radius: 22px; background: var(--sc-card); border: 2px solid var(--sc-sun); }
+.sc-planc.plus { border-color: #9F7BFF; background: linear-gradient(160deg, #9F7BFF1c, var(--sc-card)); }
+.sc-plan-name { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--sc-gold); } .sc-planc.plus .sc-plan-name { color: #C7B5FF; }
+.sc-price { font-family: var(--head-font); font-size: 40px; font-weight: 800; } .sc-price small { font-size: 16px; color: var(--sc-muted); } .sc-perday { color: var(--sc-muted); margin-top: -8px; }
+.sc-planc > small { color: var(--sc-muted); }
+.sc-root .try-day3 { background: var(--sc-card); border-color: var(--sc-line); color: var(--sc-ink); border-radius: 20px; }
+.sc-root .try-day3 input[type=email] { width: 100%; background: #ffffff0d; color: var(--sc-ink); border: 1px solid var(--sc-line); border-radius: 12px; padding: 10px; }
+.sc-root .try-day3 button.primary { background: var(--sc-sun); color: var(--sc-on-sun); border-color: var(--sc-sun); }
+.sc-root .try-day3 .muted, .sc-root .try-day3 .small.muted { color: var(--sc-muted); }
+/* cover */
+.sc-cover { padding: 10px 0 20px; }
+.sc-hero { font-size: clamp(34px, 6vw, 60px); line-height: 1.06; margin: 14px 0 12px; letter-spacing: -.02em; background: linear-gradient(120deg, #fff 30%, #FFC66B 70%, #F0A04B); -webkit-background-clip: text; background-clip: text; color: transparent !important; animation: sc-rise .6s both; }
+.sc-hero-sub { font-size: 20px; color: var(--sc-muted); margin: 0 0 22px; animation: sc-rise .6s .1s both; }
+.sc-start { font-size: 18px; min-height: 60px; padding: 0 30px; animation: sc-rise .6s .2s both, sc-pulse 2s 1.2s ease-out 2; }
+.sc-path { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 28px 0 18px; }
+.sc-path-step { position: relative; display: grid; gap: 6px; justify-items: start; text-align: left; padding: 14px; border-radius: 16px; background: #ffffff08; border: 1px solid #ffffff18; min-height: 0; font-weight: 700; font-size: 14.5px; animation: sc-rise .5s calc(.3s + var(--i) * .06s) both; }
+.sc-path-step:hover { border-color: var(--sc-gold); background: #F0A04B12; }
+.sc-path-ic { color: var(--sc-gold); } .sc-path-n { position: absolute; top: 10px; right: 12px; color: var(--sc-muted); font-size: 12px; font-weight: 600; }
+.sc-cover-pitch { color: var(--sc-muted); max-width: 62ch; line-height: 1.55; }
+.sc-cover-links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; }
+.sc-reader p { font-size: 17.5px; line-height: 1.75; } .sc-remember { padding: 14px; border-radius: 16px; background: #F0A04B14; border: 1px solid #F0A04B55; }
+/* sparks */
+.sc-burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
+.sc-burst i { position: absolute; width: 8px; height: 8px; border-radius: 2px; background: var(--c); animation: sc-spark .9s ease-out forwards; }
+.sc-find, .sc-sort, .sc-shelf { position: relative; }
+/* motion */
+@keyframes sc-rise { from { opacity: 0; transform: translateY(12px); } }
+@keyframes sc-pop { 0% { opacity: 0; transform: scale(.85); } 70% { transform: scale(1.03); } }
+@keyframes sc-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+@keyframes sc-pulse { 0% { box-shadow: 0 0 0 0 #F0A04Bcc; } 100% { box-shadow: 0 0 0 18px #F0A04B00; } }
+@keyframes sc-ring { from { transform: scale(.9); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
+@keyframes sc-bob { 50% { transform: translateY(-3px) rotate(-3deg); } }
+@keyframes sc-dot { 50% { opacity: .3; transform: translateY(-3px); } }
+@keyframes sc-stamp { 0% { opacity: 0; transform: rotate(-12deg) scale(2.4); } 60% { opacity: 1; transform: rotate(-12deg) scale(.92); } 100% { transform: rotate(-12deg) scale(1); } }
+.sc-stampmark.hit { animation-name: sc-stamp2; } @keyframes sc-stamp2 { 0% { opacity: 0; transform: rotate(10deg) scale(2.4); } 60% { opacity: 1; transform: rotate(10deg) scale(.92); } 100% { transform: rotate(10deg) scale(1); } }
+@keyframes sc-slide { from { opacity: 0; transform: translateX(40px) rotate(2deg); } }
+@keyframes sc-breathe { 50% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 30%, transparent); } }
+@keyframes sc-write { from { opacity: 0; transform: translateX(-14px); clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sc-ink { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
+@keyframes sc-flash { 0%, 8%, 100% { opacity: 0; } 4% { opacity: .9; } }
+@keyframes sc-scan { 0% { top: -26px; } 100% { top: 150px; } }
+@keyframes sc-flip { from { opacity: 0; transform: perspective(900px) rotateY(-70deg); } }
+@keyframes sc-fly { from { opacity: 0; transform: translateY(-30px) scale(.9); } }
+@keyframes sc-spark { to { transform: translate(var(--dx), var(--dy)) rotate(200deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .sc-root *, .sc-root *::before, .sc-root *::after { animation: none !important; transition: none !important; } }
+/* phones and small laptops */
+@media (max-width: 999px) {
+  .sc-stage { grid-template-columns: minmax(0, 1fr); }
+  .sc-root { padding-bottom: 210px; }
+  .sc-guide { position: fixed; left: 10px; right: 10px; top: auto; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 25; padding: 8px 10px; border-radius: 16px; box-shadow: 0 -10px 40px -10px #000; background: #1A2150; }
+  .sc-bubbles { scrollbar-width: none; } .sc-guide .sc-bub { background: transparent; border: 0; padding: 2px 4px; }
+  .sc-guide-head { padding: 0 0 6px; cursor: pointer; } .sc-guide-av { width: 30px; height: 30px; } .sc-guide-av svg { width: 20px; height: 20px; } .sc-guide-head small { display: none; }
+  .sc-bubbles { max-height: 4.6em; } .sc-guide:not(.open) .sc-bub:not(:last-child) { display: none; } .sc-guide.open .sc-bubbles { max-height: 46vh; }
+  .sc-bub { font-size: 14px; padding: 8px 10px; }
+  .sc-video { grid-template-columns: minmax(0, 1fr); } .sc-player { max-width: 260px; margin: 0 auto; }
+  .sc-gst-grid, .sc-essay-stage { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .sc-top { gap: 8px; } .sc-logo > span:not(.sc-logo-mark) { display: none; }
+  .sc-sort:not(.checked) .sc-bins { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .sc-sort:not(.checked) .sc-bin { padding: 8px 6px; min-height: 150px; border-radius: 14px; }
+  .sc-sort:not(.checked) .sc-bin-head { font-size: 14px; } .sc-sort:not(.checked) .sc-bin .sc-tile { font-size: 12.5px; padding: 8px; }
+  .sc-tray .sc-tile { font-size: 14px; padding: 7px 11px; min-height: 38px; } .sc-tray-head span { font-size: 13px; }
+  .sc-sort:not(.checked) .sc-drop { min-height: 90px; font-size: 12px; text-align: center; } .sc-rail-label { font-size: 12px; }
+  .sc-join-pill { padding: 8px 12px; font-size: 13px; }
+  .sc-back span { display: none; } .sc-back { padding: 0 14px; }
+  .sc-go { font-size: 15px; padding: 0 16px; max-width: 76vw; }
+  .sc-snaps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sc-how-steps { grid-template-columns: minmax(0, 1fr); }
+  .sc-stem { font-size: 17px; } .sc-opt { font-size: 15px; }
+  .sc-tally { flex-direction: column; align-items: flex-start; } .sc-big { font-size: 52px; }
+}
+`));
+}

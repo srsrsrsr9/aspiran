@@ -26,6 +26,7 @@
 import * as F from "./fsrs.js";
 import * as MP from "./map.js";
 import * as P from "./try-parts.js";
+import * as S from "./showcase.js";
 
 let C = null;
 /** app.js hands over its helpers once at start. */
@@ -290,6 +291,9 @@ export function viewTry(arg = "") {
     if (!C.profile() && opened !== d.id) { opened = d.id; track("try_open", {}); }
     P.init({ h, put, L, u, getA, setA, mcq, lang, send, forget, pathId: () => cur.id, head, joke, rich, joinStrip,
       contact: (contact, consentText, company) => post("/try/contact", { contact, consent: true, consentText, company }) });
+    S.init({ h, put, L, lang, getA, setA, prog, save, stepById, view: (st) => view(st, "express"), data: () => cur.data, id: () => cur.id,
+      grade, keepCards, cardsHere, joining, day3Box, chart, rich, track, homeHref, langSwitch, store: C.store, today: C.today, profile: C.profile,
+      redraw: () => draw(), top: () => focusTop(), goFull: () => { const q = prog(); go(q.last?.full ?? 0, "full"); } });
     draw();
   });
   return root;
@@ -364,6 +368,10 @@ function draw() {
   const p = prog();
   document.documentElement.lang = lang();
   const strip = cur.draft && h("div.try-draft", { role: "status" }, u("draft"));
+  // Visitors get the demo stage (showcase.js): the Express route as one cinematic tour. Members, and a visitor who
+  // chose the whole topic, keep the classic pages below.
+  if (!C.profile() && cur.data.routes?.express && p.route !== "full") return S.draw(root, strip);
+  else document.documentElement.classList.remove("sc-on"), root.classList.remove("sc-root");
   if (p.pos < 0 || !p.route) return put(root, strip, cover());
   const r = route();
   if (p.door) {
@@ -476,21 +484,23 @@ function renderStep(st) {
 // With `sure`, the reader says how sure they are before the options open (calibration under negative marking).
 
 function mcq(q, k, { sure = false, onDone } = {}) {
+  // With `sure`: pick first, then say how sure, then see the key (answering first and rating second is the natural order).
   const box = h("div.try-q");
+  let pending = null;
   const drawQ = () => {
-    const picked = getA(k + ":pick"), conf = getA(k + ":sure");
+    const picked = getA(k + ":pick");
     const done = picked != null;
-    const needSure = sure && conf == null && !done;
+    const askSure = sure && !done && pending != null;
     put(box,
       q.source?.label && h("div.small.muted", L(q.source.label)),
       h("p.try-stem", L(q.q)),
-      needSure && h("div.try-sure", h("span.small", u("sureHow")),
-        h("div.row", u("sure3").map((label, lvl) => h("button", { onclick: () => { setA(k + ":sure", 2 - lvl); drawQ(); } }, label)))),
       h("div.try-opts", { role: "group" }, q.options.map((o, i) => h("button.opt" + (done ? (i === q.answer ? ".right" : i === picked ? ".wrong" : ".dim") : ""),
-        { disabled: done || needSure, "aria-pressed": done && i === picked ? "true" : null,
-          onclick: () => { setA(k + ":pick", i); drawQ(); onDone?.(i === q.answer); } },
+        { disabled: done, "aria-pressed": (done && i === picked) || (!done && pending === i) ? "true" : null,
+          onclick: () => { if (sure) { pending = i; drawQ(); return; } setA(k + ":pick", i); drawQ(); onDone?.(i === q.answer); } },
         h("span.try-letter", "abcd"[i] + ") "), L(o),
         done && i === q.answer && h("span.try-flag", ` ✓ ${u("answer")}`), done && i === picked && i !== q.answer && h("span.try-flag", ` · ${u("yourPick")}`)))),
+      askSure && h("div.try-sure", h("span.small", u("sureHow")),
+        h("div.row", u("sure3").map((label, lvl) => h("button", { onclick: () => { setA(k + ":sure", 2 - lvl); setA(k + ":pick", pending); const ok = pending === q.answer; pending = null; drawQ(); onDone?.(ok); } }, label)))),
       done && h("p.try-why", { role: "status" }, h("strong", (picked === q.answer ? u("right") : u("notQuite")) + " "), L(q.why)),
       done && picked !== q.answer && q.missJoke && h("p.small.try-joke", L(q.missJoke)));
   };
