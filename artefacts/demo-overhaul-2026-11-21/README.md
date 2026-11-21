@@ -27,24 +27,7 @@ What changed, from the owner's review of app.aspiran.in/app/#try/path-pol-federa
 - `server/public/app/showcase.js` (new), hooked in from `try.js` `draw()`.
 - `content/topic-paths/federalism.json`: no AI/voice wording; the video's closing question added.
 
-## Still to do (owner)
-The same wording fix in the live copy of the Federalism topic (the live database). Claude's attempt was blocked
-by a permission check. Until it's done, members on the whole-topic route still see the old cover line about voices,
-"Chotu · AI" on the tour card and the essay line. Visitors on the demo don't see any of it.
-
-Open Terminal (zsh). One command at a time.
-
-### Step 1. Go to the server folder
-```bash
-cd ~/Documents/app/server
-```
-- Success: no output.
-
-### Step 2. Update the live Federalism topic
-```bash
-npx wrangler d1 execute upsc-pods --remote --env production --file ../artefacts/demo-overhaul-2026-11-21/federalism-wording-fix.sql
-```
-- It asks to confirm: type `y`.
-- Success: a table ending with `"changes": 1`.
-- Failure "not authenticated": run `npx wrangler login`, then Step 2 again.
-- Safe to repeat. Or just tell Claude "go ahead with the federalism fix" and it will run it.
+## Live database fix: done (21 Nov)
+The wording fix is now in the live Federalism topic (run by Claude on the owner's go-ahead). The first single-statement
+version was too big for the database (over its 100 KB limit), so `federalism-wording-fix.sql` is now 14 small
+field-by-field updates. Checked afterwards: the live row matches the intended topic exactly, with no "AI" and no voice note.
