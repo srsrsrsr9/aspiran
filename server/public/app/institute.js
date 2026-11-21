@@ -45,6 +45,63 @@ export async function refresh() {
 }
 export const current = () => (enabled() ? me : null);
 
+// --- Invite links: #inst/<code> --------------------------------------------------------------------------------------
+// The link a centre sends opens the app in the centre's own name, before any sign-in. The code is kept on this device
+// for a week, so it survives signing up, signing in and the first-run screen, and the student lands in their batch.
+const cleanCode = (v) => String(v ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+const showCode = (c) => c.replace(/^(.{4})(.+)$/, "$1-$2");
+export function rememberInvite(code) {
+  const c = cleanCode(code);
+  if (c.length === 8 && pendingInvite() !== c) C.store.set("inst:pending", { code: c, at: Date.now() });
+}
+export function pendingInvite() {
+  const p = C?.store.get("inst:pending");
+  return p?.code && Date.now() - (p.at ?? 0) < 7 * 86400e3 ? p.code : null;
+}
+export const clearInvite = () => C.store.del("inst:pending");
+/** Which centre and batch a code is for, from the server (no sign-in): { institute, batch, role } or { dead: true }. */
+const previews = new Map();
+export function previewInvite(code) {
+  const c = cleanCode(code);
+  if (!previews.has(c)) previews.set(c, fetch("/inst/invite/" + c).then(async (r) => (r.ok ? r.json() : r.status === 404 ? { dead: true } : null)).catch(() => null));
+  return previews.get(c);
+}
+/** The centre's own card for an invite: its logo, name and colour, and the batch. Fills in when the preview arrives. */
+export function inviteHero(code, { onDead } = {}) {
+  const box = h("div.inst-invite", { "aria-live": "polite" }, h("p.small.muted", "Opening your invite…"));
+  previewInvite(code).then((p) => {
+    if (!p) return put(box);
+    if (p.dead) { onDead?.(); return put(box, h("div.card.soft", h("p", { style: { margin: 0 } }, "This invite link isn't working any more. It may have been used up or expired. Ask your centre for a new one; you can still use Aspiran on your own."))); }
+    const i = p.institute;
+    if (i.color) { box.style.setProperty("--brand", i.color); box.style.setProperty("--brand-ink", inkFor(i.color)); }
+    put(box, h("div.inst-invite-card",
+      h("div.inst-invite-top", i.logo ? h("img", { src: i.logo, alt: "", width: 52, height: 52 }) : h("span.inst-invite-mark", i.name.slice(0, 1)),
+        h("div", h("div.inst-invite-name", i.name), i.city && h("div.inst-invite-city", i.city))),
+      h("div.inst-invite-body",
+        h("h1", { style: { margin: "0 0 6px" } }, p.role === "student" ? `Join ${p.batch?.name ?? "your batch"}` : `${i.name} invites you`),
+        h("p", { style: { margin: 0 } }, p.role === "student"
+          ? `${i.name} runs this batch on Aspiran. Your plan, notes and tests, your doubts and the batch chat are all here, free for you.`
+          : "This is a staff invite: it opens in the centre's console."),
+        p.role !== "student" && h("a.btn.primary", { href: "/institute#join=" + cleanCode(code), style: { marginTop: "10px" } }, "Open the console"))));
+  });
+  return box;
+}
+
+/** Adda's first card for a member of a centre: where their batch lives. Or, with an invite still waiting, a nudge. */
+export function addaCard() {
+  if (!enabled()) return null;
+  const m = current();
+  if (m?.institute && !m.paused && m.role === "student") {
+    const card = h("a.card.link.inst-adda", { href: "#inst" },
+      h("div.row", m.institute.logo ? h("img", { src: m.institute.logo, alt: "", width: 40, height: 40, style: { borderRadius: "10px", background: "#fff", objectFit: "contain" } }) : null,
+        h("div.grow", h("strong", m.institute.name), h("div.small.muted", [m.batch?.name, "Today's plan, chat, doubts and notes"].filter(Boolean).join(" · "))), h("span", "→")));
+    if (m.institute.color) { card.style.setProperty("--brand", m.institute.color); }
+    return card;
+  }
+  const code = !m && pendingInvite();
+  return code ? h("a.card.link", { href: "#inst/" + code }, h("div.row.between", h("div", h("strong", "Finish joining your coaching centre"), h("div.small.muted", "Your invite is waiting. One tap and your batch is here.")), h("span", "→"))) : null;
+}
+
 /** The side rail's brand: the institute's logo and name, "with Aspiran". Null when not in an institute. */
 export function brandLine() {
   const m = current();
@@ -98,19 +155,29 @@ const loading = (box) => put(box, h("p.small.muted", "Loading…"));
 const failed = (box, e) => put(box, h("div.card.soft", h("p", e.message)));
 
 function joinView(arg) {
-  const code = h("input", { type: "text", value: arg.toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/^(.{4})(.+)$/, "$1-$2"), placeholder: "KXR7-M2PD", maxLength: 9, autocapitalize: "characters", "aria-label": "Code" });
-  const name = h("input", { type: "text", value: C.profile()?.name ?? "", maxLength: 40, "aria-label": "Your name for the institute" });
-  const ok = h("input", { type: "checkbox" }), adult = h("input", { type: "checkbox" });
-  return h("div.col", h("h1", "Join your coaching centre"),
-    h("div.card", h("p", "If your coaching centre uses Aspiran, it gives you a code. Joining adds its plan, chat and notes to your Aspiran. Your pod, Chotu and everything else stay as they are."),
-      h("label.small.muted", "Code"), code, h("label.small.muted", { style: { marginTop: "8px", display: "block" } }, "Your name, as the institute should see it"), name,
-      h("div.card.soft", { style: { marginTop: "12px" } }, h("strong", "What your institute will see"),
-        h("p.small", "Your name, your batch, the days you used Aspiran and your focus minutes since joining, your answers to its question sets and tests, your doubts, and your messages in its chat."),
-        h("strong", "What it never sees"),
-        h("p.small", "Your email or phone, your pod and Chotu chats, your journal, your own practice and mocks, or anything from before you joined. You can leave at any time; your answers to its sets go with you.")),
-      h("p", h("label", ok, " I've read this and I'm happy to join.")), h("p", h("label", adult, " I'm 18 or older.")),
+  const start = cleanCode(arg) || pendingInvite() || "";
+  if (cleanCode(arg)) rememberInvite(arg);
+  const code = h("input", { type: "text", value: start ? showCode(start) : "", placeholder: "KXR7-M2PD", maxLength: 9, autocapitalize: "characters", "aria-label": "Code" });
+  const nick = C.profile()?.name;
+  const name = h("input", { type: "text", value: nick && nick !== "Aspirant" ? nick : "", maxLength: 40, placeholder: "e.g. Priya Rao", "aria-label": "Your name for the centre" });
+  const ok = h("input", { type: "checkbox" });
+  const hero = h("div");
+  const drawHero = () => { const c = cleanCode(code.value); put(hero, c.length === 8 ? inviteHero(c) : null); };
+  code.addEventListener("change", drawHero);
+  drawHero();
+  return h("div.col", hero,
+    h("div.card",
+      !start && h("p", "If your coaching centre uses Aspiran, it sends you a link or a code. Joining adds its plan, chat and notes to your Aspiran."),
+      h("p.small.muted", { style: { marginTop: 0 } }, "Already use Aspiran? Nothing changes: your pod, Chotu, notes and progress stay as they are. Your centre is added alongside."),
+      h("label.small.muted", "Code"), code, h("label.small.muted", { style: { marginTop: "8px", display: "block" } }, "Your name, as the centre will see it"), name,
+      h("details.card.soft", { style: { marginTop: "12px" } }, h("summary", h("strong", "What your centre will and won't see")),
+        h("p.small", "It sees your name, your batch, the days you used Aspiran and your focus minutes since joining, your answers to its question sets and tests, your doubts, and your messages in its chat."),
+        h("p.small", "It never sees your email or phone, your pod and Chotu chats, your journal, your own practice and mocks, or anything from before you joined. You can leave at any time.")),
+      h("p", h("label", ok, " I've read what my centre will see, and I'm happy to join.")),
       h("button.primary", { onclick: act(async () => {
-        const d = await api("/inst/join", { code: code.value, displayName: name.value, consent: ok.checked, adult: adult.checked });
+        // Everyone with an Aspiran profile said they're 18 or older when they made it (the first-run screen asks).
+        const d = await api("/inst/join", { code: code.value, displayName: name.value, consent: ok.checked, adult: !!C.profile() });
+        clearInvite();
         C.toast(`Welcome to ${d.institute.name}.`); history.replaceState(null, "", "#inst"); await refresh(); C.render();
       }) }, "Join")));
 }
@@ -288,5 +355,12 @@ const css = `.inst-head{display:flex;gap:12px;align-items:center}.inst-head img{
 .inst .chip.on{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
 .inst-brand{display:flex;gap:8px;align-items:center;text-decoration:none}.inst-brand img{border-radius:6px;object-fit:contain}
 .inst-brand .inst-name{display:block;line-height:1.1}.inst-brand .inst-with{display:block;font-size:11px;font-weight:400;opacity:.75}
-.inst fieldset.card{border:1px solid var(--line)}`;
+.inst fieldset.card{border:1px solid var(--line)}
+.inst-invite-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+.inst-invite-top{display:flex;gap:14px;align-items:center;padding:16px 18px;background:var(--brand);color:var(--brand-ink)}
+.inst-invite-top img{border-radius:12px;background:#fff;object-fit:contain;flex:none}
+.inst-invite-mark{width:52px;height:52px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:24px;font-weight:700;background:rgba(255,255,255,.22)}
+.inst-invite-name{font-size:20px;font-weight:700;line-height:1.2}.inst-invite-city{font-size:13px;opacity:.85}
+.inst-invite-body{padding:16px 18px}
+.inst-adda{border-left:4px solid var(--brand)}`;
 if (typeof document !== "undefined" && !document.getElementById("inst-css")) document.head.append(Object.assign(document.createElement("style"), { id: "inst-css", textContent: css }));

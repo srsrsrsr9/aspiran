@@ -89,6 +89,12 @@ try {
   const admin = await person("admin"), teacher = await person("teacher");
   const s1 = await person("stuone"), s2 = await person("stutwo"), s3 = await person("stuthree"), s4 = await person("stufour");
   const join = (p, code, name) => p.call("/inst/join", { code, displayName: name, consent: true, adult: true });
+  // The invite link's landing: no sign-in needed; says which centre and batch, never more.
+  const pv = await fetch(`${BASE}/inst/invite/${studentCode.replace("-", "")}`).then(async (x) => ({ status: x.status, data: await x.json() }));
+  assert.equal(pv.status, 200, "invite preview works signed out");
+  assert.equal(pv.data.role, "student"); assert.ok(pv.data.institute.name && pv.data.batch.name);
+  assert.equal(pv.data.institute.id, undefined, "no internal id"); assert.equal(pv.data.uses, undefined);
+  assert.equal((await fetch(`${BASE}/inst/invite/ZZZZZZZZ`)).status, 404, "unknown code: nothing about anyone");
   assert.equal((await join(admin, adminCode, "Admin Anu")).data.role, "admin");
   assert.equal((await join(teacher, teacherCode, "Teacher Tara")).data.role, "teacher");
   for (const [p, n] of [[s1, "Student One"], [s2, "Student Two"], [s3, "Student Three"]]) assert.equal((await join(p, studentCode, n)).status, 200);
@@ -107,6 +113,7 @@ try {
   const spare = (await teacher.call("/inst/admin/codes", { role: "student", batchId: batch2 })).data.code;
   assert.equal((await teacher.call(`/inst/admin/codes/${spare}/revoke`, {})).status, 200);
   assert.equal((await join(s4, spare, "Four")).status, 404, "a cancelled code doesn't work");
+  assert.equal((await fetch(`${BASE}/inst/invite/${spare}`)).status, 404, "a cancelled code's link shows nothing");
   assert.equal((await ownerB.call(`/inst/admin/codes/${studentCode}/revoke`, {})).status, 404, "another institute can't cancel our code");
   const s4code = (await teacher.call("/inst/admin/codes", { role: "student", batchId: batch2 })).data.code;
   assert.equal((await join(s4, s4code, "Student Four")).status, 200);

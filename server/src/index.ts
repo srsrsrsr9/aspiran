@@ -60,6 +60,11 @@ export default {
     if (host === "app.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/app/`, 302);
     if (host === "admin.aspiran.in" && path === "/") return Response.redirect(`${url.origin}/admin`, 302);
     if (host === "app.aspiran.in" && (path === "/admin" || path === "/desk")) return Response.redirect(`https://admin.aspiran.in${path}`, 302);
+    // Coaching centres and their students never land on the staff address: the console and the app's page live on
+    // app.aspiran.in (the browser carries the #join=… or #inst/… part across). Scripts under /app/ still load here.
+    if (host === "admin.aspiran.in" && (path === "/institute" || path === "/app" || path === "/app/" || path === "/app/index.html")) {
+      return Response.redirect(`https://app.aspiran.in${path}${url.search}`, 302);
+    }
     // Public topic pages for search (learn.ts): a taste of each syllabus topic, never the library.
     { const r = await learnRoute(req, env, path, ctx); if (r) return r; }
     if (path === "/" || path === "/health") return json({ ok: true, service: "upsc-pods", day: istDay() });

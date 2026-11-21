@@ -404,6 +404,8 @@ function render() {
   const root = $("#root");
   applyLang();
   const r = route();
+  // A centre's invite link (#inst/<code>): keep the code through sign-up and the first-run screen (institute.js).
+  if (r.name === "inst" && r.arg) INST.rememberInvite(r.arg);
   podVisitTrack(r.name);
   const space = spaceOf(r.name);
   document.documentElement.dataset.space = space;
@@ -495,6 +497,8 @@ function onboarding() {
       o.due = f.due; redraw();
     };
     const answered = o.pick != null;
+    // From a coaching centre's invite link: the page is the centre's, not Aspiran's pitch. No quiz, no demo link.
+    const invite = !tj && !o.inviteDead && INST.pendingInvite();
     const enter = Auth.optional() || (o.memberId && Auth.signedIn())
       ? h("div.center", h("button.primary", { style: { padding: "12px 28px", fontSize: "17px" }, onclick: () => step(1) }, hi ? "अंदर आइए" : "Come in"))
       : signInPanel(null, (memberId) => { o.memberId = memberId; step(1); });
@@ -509,7 +513,16 @@ function onboarding() {
         : hi
         ? "Sign in कीजिए: वे आपके Review में रहेंगे, ठीक भूलने से पहले लौटने के लिए, और आप वहीं से आगे बढ़ेंगे जहाँ छोड़ा था।"
         : "Sign in and they stay in your Review, timed to come back just before you'd forget, and you carry on where you left off."));
-    body = [
+    if (invite) {
+      body = [
+        h("div.row.between", h("span.small.muted", "Aspiran"), langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); })),
+        INST.inviteHero(invite, { onDead: () => { o.inviteDead = true; INST.clearInvite(); redraw(); } }),
+        h("div.card", h("h2", { style: { marginTop: 0 } }, hi ? "अकाउंट बनाइए, या साइन इन कीजिए" : "Create your account, or sign in"),
+          h("p.small", hi ? "Aspiran पर नए हैं? Google से आगे बढ़िए, बस। पहले से Aspiran इस्तेमाल करते हैं? हमेशा की तरह साइन इन कीजिए: आपका पॉड, नोट्स और प्रगति वैसे ही रहेंगे, और आपका कोचिंग सेंटर साथ जुड़ जाएगा।"
+            : "New to Aspiran? Continue with Google and you're in. Already use Aspiran? Sign in the way you always do: your pod, notes and progress stay as they are, and your centre is added alongside."),
+          enter),
+        h("p.small.muted.center", hi ? "आपका ईमेल सिर्फ़ साइन-इन के लिए है। सेंटर उसे कभी नहीं देखता।" : "Your email is only for signing in. Your centre never sees it.")];
+    } else body = [
       h("div.row.between", h("strong", "Aspiran"), langPicker(() => o.lang, (v) => { o.lang = v; document.documentElement.lang = v; redraw(); })),
       tj ? h("h1", tj.n ? (hi ? "बस sign in, और आपके cards आपके।" : "One sign-in, and your cards are yours.") : (hi ? "बस sign in, और जहाँ छोड़ा वहीं से आगे।" : "One sign-in, and you carry on from here.")) : h("h1", hi ? "जो पढ़ा, वह याद रहे।" : "Remember what you read."),
       tj ? welcome : null,
@@ -530,7 +543,7 @@ function onboarding() {
   } else {
     // Everything else on one screen: a name, the two things the law and the pod need, and who Chotu is.
     const ready = () => o.adult && o.consent;
-    const go = h("button.primary", { disabled: !ready(), style: { padding: "12px 28px", fontSize: "17px" }, onclick: finishOnboarding }, hi ? "अड्डे पर चलें" : "Take me in");
+    const go = h("button.primary", { disabled: !ready(), style: { padding: "12px 28px", fontSize: "17px" }, onclick: finishOnboarding }, INST.pendingInvite() ? (hi ? "आगे: सेंटर से जुड़ें" : "Next: join your centre") : hi ? "अड्डे पर चलें" : "Take me in");
     const sync = () => { go.disabled = !ready(); };
     const name = h("input", { type: "text", maxLength: 40, placeholder: tl("onboard.namePh"), autocomplete: "nickname", value: o.name, oninput: (e) => (o.name = e.target.value) });
     const adult = h("input", { type: "checkbox", id: "adult", checked: o.adult, onchange: (e) => { o.adult = e.target.checked; sync(); } });
@@ -565,7 +578,9 @@ function finishOnboarding() {
   M.track("onboarding_done", tj ? { from: "try" } : {});
   store.del("try:joining");
   // From the demo: back to the topic they finished, now as a member (Review, the syllabus map, the next topic).
-  location.hash = tj?.path ? "#try/" + encodeURIComponent(tj.path) : "#adda"; render();
+  // From a centre's invite: straight to joining it.
+  const inv = INST.pendingInvite();
+  location.hash = tj?.path ? "#try/" + encodeURIComponent(tj.path) : inv ? "#inst/" + inv : "#adda"; render();
 }
 
 // --- Today -------------------------------------------------------------------------------------
@@ -2900,9 +2915,11 @@ function viewAdda() {
   const g = greetingOfTheDay();
   return h("div.col",
     // A different one of the eleven greetings each day (needs native-speaker check, see welcome.js).
-    h("p.small.muted.daily-hello", h("span.word", { lang: g.tag, style: { fontFamily: fontFor(g.code) } }, g.word), ` · ${g.name}. `,
+    // Worded as a greeting, not a setting: "Odia" alone read as if the app had picked Odia for you (owner, 21 Nov 2026).
+    h("p.small.muted.daily-hello", g.code === "en" ? "Today's hello: " : `Today's hello, in ${g.name}: `, h("span.word", { lang: g.tag, style: { fontFamily: fontFor(g.code) } }, g.word), ". ",
       h("a", { href: "#me", onclick: () => setTimeout(() => document.getElementById("lang-request")?.scrollIntoView(), 50) }, "Want the app in your language?")),
     h("h1", greeting()),
+    INST.addaCard(),
     h("div.card.host", h("div.row", chotuLabel(null, 36), h("p.grow", { style: { margin: 0 } }, hostLine()))),
     M.checkinCard(h, profile()?.createdOn),
     rapCard(),
@@ -3310,7 +3327,8 @@ async function runAccessCheck(force = false) {
 
 /** Google (or the local dev sign-in). Calls done(memberId) once the server knows this account. */
 function signInPanel(hint, done) {
-  const box = h("div.card");
+  // No card of its own: it sits inside the card that asks (a card in a card looked broken, owner 21 Nov 2026).
+  const box = h("div.signin-panel");
   const msg = h("p.small", { role: "status", "aria-live": "polite" });
   const buttons = [];
   const busy = (on) => buttons.forEach((b) => (b.disabled = on));
@@ -3348,7 +3366,8 @@ function signInPanel(hint, done) {
     if (d.mustChange) put(box, newPasswordForm(true, () => done(d.memberId)));
     else done(d.memberId);
   }, !main) : null;
-  const pwToggle = main && pwForm ? h("button.ghost", { style: { marginTop: "8px" }, onclick: () => { pwForm.hidden = !pwForm.hidden; } }, "Use username and password") : null;
+  // Opening the username form hides the link that opened it, so the two never show at once.
+  const pwToggle = main && pwForm ? h("button.ghost", { style: { marginTop: "8px" }, onclick: () => { pwForm.hidden = false; pwToggle.hidden = true; pwForm.querySelector("input")?.focus(); } }, "Use username and password instead") : null;
   if (pwForm && main) pwForm.hidden = true;
   put(box, main, msg, pwToggle, pwForm);
   return box;
@@ -3497,11 +3516,11 @@ function signInScreen() {
   const p = profile();
   return h("main", h("div.col", h("div.center", kulhad("warm", 72)), h("h1.center", `Welcome back, ${p.name}`),
     h("p", "Aspiran now asks everyone to sign in once, to keep the Adda safe. Your journal, stamps, profile and saved work stay in this browser as they are, and your pod stays yours."),
-    signInPanel(p.memberId, (memberId) => {
+    h("div.card", signInPanel(p.memberId, (memberId) => {
       // Signing in to an account that already has a member id (used on another device) brings that pod here.
       if (memberId && memberId !== p.memberId) { store.set("profile", { ...profile(), memberId }); store.del("podSummary"); pod.summary = null; }
       render();
-    }),
+    })),
     h("p.small.center", h("a", { href: "#shelf" }, "Open the Free Shelf without signing in"))));
 }
 

@@ -272,6 +272,20 @@ export async function instituteRoute(req: Request, env: Env, path: string, url: 
     return new Response(obj.body, { headers: { "content-type": obj.httpMetadata?.contentType ?? "image/png", "cache-control": "public, max-age=300", "x-content-type-options": "nosniff" } });
   }
 
+  // An invite link's landing (before sign-in): which centre and batch a live code is for, so the page can say so in
+  // the centre's own name, colour and logo. Only live codes answer; codes are 8 of 32 characters, so guessing is hopeless.
+  const invite = path.match(/^\/inst\/invite\/([\w-]{4,12})$/);
+  if (invite && req.method === "GET") {
+    const code = cleanCode(invite[1]);
+    const row = code.length === 8 ? await env.DB.prepare("SELECT * FROM inst_codes WHERE code = ?").bind(code).first<{ institute_id: string; role: Role; batch_id: string | null; expires_at: string | null; max_uses: number; uses: number; revoked_at: string | null }>() : null;
+    const inst = row ? await getInstitute(env, row.institute_id) : null;
+    const batch = row?.role === "student" && inst ? await batchOf(env, inst.id, row.batch_id) : null;
+    const dead = !row || !inst || inst.status !== "active" || row.revoked_at || (row.expires_at && row.expires_at < now()) || row.uses >= row.max_uses || (row.role === "student" && (!batch || batch.archived_at));
+    if (dead) return bad("That code isn't working. It may have been used up, cancelled or expired. Ask your centre for a new one.", 404);
+    const b = branding(inst!);
+    return json({ code: showCode(code), role: row!.role, institute: { name: b.name, city: b.city, color: b.color, logo: b.logo }, batch: batch ? { name: batch.name } : null });
+  }
+
   const me = await signedIn(req, env, url);
   if (me instanceof Response) return me;
   const body: any = req.method === "POST" ? await req.json().catch(() => null) : null;

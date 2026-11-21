@@ -309,8 +309,12 @@ views.insights = async () => {
 views.institutes = async () => {
   const d = await api("institutes");
   const K = Kit;
-  const showCode = (name, code) => dialog(h("h3", {}, "Owner code for " + name), h("p", {}, "Send this to the centre's owner. They sign in at ", h("span.mono", {}, location.origin + "/institute"), " and type it. It works once, for 30 days."),
-    h("div.row", {}, h("span.code", {}, code), h("button.sm", { onclick: () => K.copy(code, "Code copied") }, K.icon("copy"), "Copy")));
+  // One link does it all: it opens the centre's console on app.aspiran.in with the code already filled in.
+  const ownerLink = (code) => `${location.origin.replace("//admin.", "//app.")}/institute#join=${code.replace("-", "")}`;
+  const showCode = (name, code) => dialog(h("h3", {}, "Owner invite for " + name),
+    h("p", {}, "Send this link to the centre's owner. They open it, continue with Google, and the code is already filled in. It works once, for 30 days."),
+    h("div.row", {}, h("span.mono", { style: { wordBreak: "break-all" } }, ownerLink(code)), h("button.sm", { onclick: () => K.copy(ownerLink(code), "Link copied") }, K.icon("copy"), "Copy link")),
+    h("p.small.muted", {}, "If they'd rather type it: the code is ", h("b", {}, code), " at ", location.origin.replace("//admin.", "//app.") + "/institute", "."));
   const create = () => {
     const name = h("input", { type: "text", maxlength: 60, placeholder: "e.g. Vidya IAS Academy" }), city = h("input", { type: "text", maxlength: 60, placeholder: "e.g. Hyderabad" });
     K.modal("New coaching centre", h("div.fields", {}, h("label.field", {}, h("span", {}, "Name"), name), h("label.field", {}, h("span", {}, "City (optional)"), city)),

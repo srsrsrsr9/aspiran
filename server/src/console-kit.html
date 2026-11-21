@@ -40,7 +40,8 @@
     display:inline-flex; align-items:center; gap:6px; justify-content:center; white-space:nowrap; transition:background .12s, border-color .12s; }
   button:hover:not(:disabled), a.k-btn:hover { border-color:var(--brand); }
   a.k-btn { font-size:14.5px; } a.k-btn svg { width:16px; height:16px; }
-  button.primary { background:var(--brand); border-color:var(--brand); color:var(--brand-ink); font-weight:600; }
+  button.primary, a.k-btn.primary { background:var(--brand); border-color:var(--brand); color:var(--brand-ink); font-weight:600; }
+  a.k-btn { display:inline-flex; align-items:center; gap:6px; }
   button.primary:hover:not(:disabled) { filter:brightness(1.07); }
   button.danger { border-color:color-mix(in srgb, var(--badInk) 55%, transparent); color:var(--badInk); }
   button.danger:hover:not(:disabled) { background:var(--bad); border-color:var(--badInk); }
@@ -221,7 +222,11 @@
   .k-signin .card { width:min(460px, 100%); padding:28px 28px 22px; }
   .k-signin h2 { font-size:24px; margin-bottom:6px; }
   .k-signin .k-mark { width:44px; height:44px; font-size:22px; border-radius:12px; margin-bottom:14px; }
-  .k-signin input { width:100%; }
+  .k-signin input:not([type=checkbox]):not([type=radio]) { width:100%; }
+  .k-signin .check { margin-top:10px; font-size:14px; }
+  .k-steps { margin:14px 0 4px; padding:12px 14px; border-radius:10px; background:color-mix(in srgb, var(--brand) 7%, var(--card)); font-size:14px; }
+  .k-steps ol { margin:6px 0 0; padding-left:20px; }
+  .k-steps li { margin:3px 0; }
   .k-signin .primary { width:100%; min-height:42px; margin-top:6px; }
   .k-foot { margin-top:16px; padding-top:14px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
 

@@ -77,29 +77,48 @@ const topicName = (id) => NODES.find((n) => n.id === id)?.name ?? "";
 
 // --- Sign-in ------------------------------------------------------------------------------------------------
 let cfg = null;
+// An invite link (#join=<code>, from Aspiran for owners or from the centre for staff) fills the code in. It's kept for this
+// tab only, so it survives the Google sign-in step.
+const APP = location.origin.replace("//admin.", "//app.");
+const pendingCode = (() => {
+  const m = location.hash.match(/^#join=([A-Za-z0-9-]{8,9})$/);
+  try { if (m) { sessionStorage.setItem("k:join", m[1].toUpperCase()); history.replaceState(null, "", location.pathname); } return sessionStorage.getItem("k:join"); } catch { return m?.[1]?.toUpperCase() ?? null; }
+})();
+const inviteLink = (code, role) => role === "student" ? `${APP}/app/#inst/${code.replace("-", "")}` : `${APP}/institute#join=${code.replace("-", "")}`;
+const fmtCode = (c) => String(c ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").replace(/^(.{4})(.+)$/, "$1-$2");
+/** Who a code is for (no sign-in needed): { role, institute, batch } or null. */
+const peek = async (code) => { const c = fmtCode(code).replace("-", ""); if (c.length !== 8) return null; try { const r = await fetch("/inst/invite/" + c); return r.ok ? r.json() : null; } catch { return null; } };
 const S = { tab: location.hash.slice(1) || "dashboard", st: {} };
 async function boot() {
   cfg = await fetch("/config").then((r) => r.json()).catch(() => null);
   if (!cfg) return showGate(gateCard("Can't reach Aspiran", "Check your connection and reload the page."));
   await Auth.init(cfg.auth);
-  if (!cfg.flags?.institutes) return showGate(gateCard("Not open yet", "Aspiran for coaching centres isn't switched on yet. We'll tell you the day it opens.", staffNote()));
+  if (!cfg.flags?.institutes) return showGate(gateCard("Not open yet", "Aspiran for coaching centres isn't switched on yet. We'll tell you the day it opens."));
   if (!Auth.signedIn()) return signInScreen();
   await load();
 }
 const gateCard = (title, text, ...more) => h("div.k-signin", h("div.card", h("span.k-mark", "A"), h("h2", title), h("p.muted", text), more));
-const staffNote = () => h("div.k-foot", "Aspiran staff: set up and pause institutes in ", h("a", { href: "/admin#institutes" }, "Admin → Coaching centres"), ".");
+/** The one line for students who land here by mistake: their place is the app, not the console. */
+const studentNote = () => h("div.k-foot", "Student? You don't need this page. Open the invite link your centre sent you; it opens Aspiran with your batch.");
 function signInScreen(note) {
   const email = h("input", { type: "email", placeholder: "you@example.com", "aria-label": "Email for a dev sign-in", autocomplete: "email" });
   const banner = h("div.banner.err", { role: "alert" }, note || "");
   const go = busy(async () => { banner.textContent = ""; try { Auth.devSignIn(email.value); await Auth.establish(); await load(); } catch (e) { banner.textContent = e.message; } });
   email.addEventListener("keydown", (e) => e.key === "Enter" && go());
-  showGate(h("div.k-signin", h("div.card", h("span.k-mark", "A"), h("h2", "Sign in to your centre"),
-    h("p.muted", "Use the Aspiran account you use in the app. New teacher? Your institute's admin gives you a code to join."),
+  const invited = h("div");
+  if (pendingCode) peek(pendingCode).then((p) => p && put(invited, p.role === "student"
+    ? h("div.k-steps", h("strong", `This is a student link for ${p.institute.name}.`), h("p", { style: { margin: "6px 0 10px" } }, "Students join in the Aspiran app, not here."),
+      h("a.k-btn.primary", { href: `${APP}/app/#inst/${pendingCode.replace("-", "")}` }, "Open it in the app"))
+    : h("div.k-steps", h("strong", `You're invited to ${p.institute.name} as ${({ owner: "the owner", admin: "an admin", teacher: "a teacher" })[p.role] ?? "staff"}.`),
+    h("ol", h("li", "Continue with Google below."), h("li", "Your code is already filled in. Add your name and join.")))));
+  showGate(h("div.k-signin", h("div.card", h("span.k-mark", "A"), h("h2", "Your centre's console"),
+    h("p.muted", "For owners, admins and teachers. Sign in with Google, then type the code you were sent. Already joined? Just sign in."),
+    invited,
     Auth.mode() === "dev"
       ? h("div", h("label.f", { for: "em" }, "Email (local server: any email signs in)"), Object.assign(email, { id: "em" }), banner, h("button.primary", { onclick: go }, "Sign in"))
       : Auth.mode() === "firebase" ? h("div", banner, h("button.primary", { onclick: busy(async () => { await Auth.signInGoogle(); await Auth.establish(); await load(); }) }, "Continue with Google"))
       : h("p.banner.warn", "Sign-in isn't set up on this server."),
-    staffNote())));
+    studentNote())));
   setTimeout(() => email.focus(), 0);
 }
 function showGate(node) { $("#layout").hidden = true; put($("#gate"), node); }
@@ -112,6 +131,13 @@ async function load() {
   let ov;
   try { ov = await api("/inst/admin/overview"); }
   catch (e) {
+    if (e.status === 403) {
+      // A student who opened the console: their place is the app. Say so in their centre's name.
+      const mine = await api("/inst/me").catch(() => null);
+      if (mine?.institute && mine.role === "student") return showGate(gateCard(`You're a student at ${mine.institute.name}`,
+        `Your batch${mine.batch ? ", " + mine.batch.name + "," : ""} its plan, notes, doubts and chat are in the Aspiran app. This console is for the centre's teachers and admins.`,
+        h("a.k-btn.primary", { href: `${APP}/app/#inst`, style: { width: "100%", justifyContent: "center", minHeight: "42px", marginTop: "6px" } }, "Open Aspiran")));
+    }
     if (e.status === 404 || e.status === 403) return joinScreen(e.message);
     throw e;
   }
@@ -135,17 +161,38 @@ function inkFor(hex) {
   return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4 ? "#1A1410" : "#FFFFFF";
 }
 function joinScreen(why) {
-  const code = h("input", { type: "text", placeholder: "KXR7-M2PD", maxlength: 9, id: "jc", autocomplete: "off", style: { textTransform: "uppercase", letterSpacing: "2px" } });
+  const code = h("input", { type: "text", placeholder: "KXR7-M2PD", maxlength: 9, id: "jc", autocomplete: "off", value: pendingCode ? fmtCode(pendingCode) : "", style: { textTransform: "uppercase", letterSpacing: "2px" } });
   const name = h("input", { type: "text", placeholder: "e.g. Priya Rao", maxlength: 40, id: "jn" });
   const ok = h("input", { type: "checkbox" }), adult = h("input", { type: "checkbox" });
   const banner = h("div.banner.err", { role: "alert" });
-  showGate(h("div.k-signin", h("div.card", h("span.k-mark", "A"), h("h2", "Join your institute"),
-    h("p.muted", why && why !== "You're not in a coaching centre on Aspiran." ? why : "You're signed in, but not part of an institute yet. Type the code your institute gave you. Owners get theirs from Aspiran."),
-    h("label.f", { for: "jc" }, "Code"), code, h("label.f", { for: "jn" }, "Your name, as the institute will see it"), name,
-    h("label.check", { style: { marginTop: "12px" } }, ok, h("span.muted", "I understand the institute will see my name, batch, activity since joining, my answers to its question sets, my doubts and my messages in its chat. Never my pod or Chotu chats, journal or my own practice.")),
-    h("label.check", adult, h("span.muted", "I'm 18 or older.")), banner,
-    h("button.primary", { onclick: busy(async () => { banner.textContent = ""; try { await api("/inst/join", { code: code.value, displayName: name.value, consent: ok.checked, adult: adult.checked }); toast("You've joined."); await load(); } catch (e) { banner.textContent = e.message; } }) }, "Join"),
-    staffNote())));
+  const who = h("div", { "aria-live": "polite" });
+  const join = h("button.primary", { onclick: busy(async () => { banner.textContent = ""; try { await api("/inst/join", { code: code.value, displayName: name.value, consent: ok.checked, adult: adult.checked }); try { sessionStorage.removeItem("k:join"); } catch {} toast("You've joined."); await load(); } catch (e) { banner.textContent = e.message; } }) }, "Join");
+  const form = h("div", h("label.f", { for: "jn" }, "Your name, as the centre will see it"), name,
+    h("label.check", ok, h("span.muted", "I understand the centre will see my name, my role, my activity in its space, and my messages in its chat. Never my own pod or Chotu chats, journal or practice.")),
+    h("label.check", adult, h("span.muted", "I'm 18 or older.")), banner, join);
+  // Say whose code it is as soon as it's typed. A student code belongs in the app, so send them there instead.
+  let last = "";
+  const check = async () => {
+    const c = fmtCode(code.value); if (c === last) return; last = c;
+    if (c.length !== 9) { put(who); form.hidden = false; return; }
+    const p = await peek(c);
+    if (fmtCode(code.value) !== c) return;
+    if (!p) { put(who, h("p.banner.err", "That code isn't working. It may have been used up, cancelled or expired. Ask whoever sent it for a new one.")); form.hidden = false; return; }
+    if (p.role === "student") {
+      form.hidden = true;
+      put(who, h("div.k-steps", h("strong", `This is a student code for ${p.institute.name}${p.batch ? ", " + p.batch.name : ""}.`),
+        h("p", { style: { margin: "6px 0 10px" } }, "Students join in the Aspiran app, not here."), h("a.k-btn.primary", { href: `${APP}/app/#inst/${c.replace("-", "")}` }, "Open it in the app")));
+      return;
+    }
+    form.hidden = false;
+    put(who, h("div.k-steps", h("strong", `${p.institute.name}${p.institute.city ? ", " + p.institute.city : ""}`), h("div.muted", `You'll join as ${({ owner: "the owner", admin: "an admin", teacher: "a teacher" })[p.role] ?? "staff"}.`)));
+  };
+  code.addEventListener("input", check);
+  showGate(h("div.k-signin", h("div.card", h("span.k-mark", "A"), h("h2", "Join your centre"),
+    h("p.muted", why && why !== "You're not in a coaching centre on Aspiran." ? why : "You're signed in. Type the code you were sent to open your centre's console."),
+    h("label.f", { for: "jc" }, "Code"), code, who, form, studentNote())));
+  check();
+  setTimeout(() => (code.value ? name : code).focus(), 0);
 }
 
 // --- Navigation -------------------------------------------------------------------------------------------------
@@ -193,8 +240,11 @@ function inviteDialog(batchId) {
   const form = h("div", h("div.fields", h("label.field", h("span", "Invite"), role), bField, h("label.field", h("span", "How many people"), uses, h("span.hint", "The code stops after this many")), h("label.field", h("span", "Works for (days)"), days)), out);
   modal("Invite people", form, [(close) => h("button.primary", { onclick: busy(async (e) => {
     const d = await api("/inst/admin/codes", { role: role.value, batchId: role.value === "student" ? forBatch.value : null, maxUses: Number(uses.value), days: Number(days.value) });
-    const link = `${location.origin}/app/#inst/${d.code.replace("-", "")}`;
-    const msg = `Join ${S.ov.institute.name} on Aspiran: open ${link} or type the code ${d.code} in the app (Me → Coaching centre).`;
+    // Students join in the app; teachers and admins in this console. Either way the link fills the code in.
+    const link = inviteLink(d.code, role.value);
+    const msg = role.value === "student"
+      ? `Join ${S.ov.institute.name} on Aspiran: open ${link} . Your batch, notes, plan and doubts are there. Already use Aspiran? Same link, just sign in.`
+      : `You're invited to ${S.ov.institute.name}'s console on Aspiran: open ${link} and continue with Google. The code ${d.code} is filled in for you.`;
     put(out, h("div.banner.ok", h("div", "Here's the code. It works for ", d.days, " days, for up to ", d.maxUses, d.maxUses === 1 ? " person." : " people."),
       h("div.row", { style: { marginTop: "10px" } }, h("span.code", d.code)),
       h("div.row", { style: { marginTop: "10px" } }, h("button.sm", { onclick: () => copy(d.code, "Code copied") }, icon("copy"), "Copy code"), h("button.sm", { onclick: () => copy(link, "Link copied") }, icon("link"), "Copy link"),
@@ -294,7 +344,7 @@ VIEWS.batches = async () => {
       h("div.k-bn", num(b.students)), h("div.muted", "students"),
       h("div.muted", { style: { marginTop: "8px" } }, live(b.id).length ? `Live code: ${live(b.id).map((c) => c.code).join(", ")}` : "No live code"),
       h("div.row", { style: { marginTop: "12px" } }, !b.archived_at && h("button.sm.primary", { onclick: () => inviteDialog(b.id) }, "Invite"),
-        live(b.id)[0] && h("button.sm", { onclick: () => copy(`${location.origin}/app/#inst/${live(b.id)[0].code.replace("-", "")}`, "Link copied") }, icon("copy"), "Link"),
+        live(b.id)[0] && h("button.sm", { onclick: () => copy(inviteLink(live(b.id)[0].code, "student"), "Link copied") }, icon("copy"), "Link"),
         isAdmin() && h("button.sm.ghost", { onclick: () => rename(b) }, "Rename"), isAdmin() && h("button.sm.ghost", { onclick: toggle(b) }, b.archived_at ? "Reopen" : "Close")))))
       : card({}, empty({ icon: "layers", title: "No batches yet", text: isAdmin() ? "Make one for each group you teach, like “Prelims 2027 morning”." : "Ask an admin to make a batch.", action: isAdmin() && h("button.primary", { onclick: newBatch }, "Make a batch") })),
     h("h3", "Invite codes"),
@@ -305,7 +355,7 @@ VIEWS.batches = async () => {
       { key: "uses", label: "Used", num: true, render: (c) => `${c.uses} of ${c.max_uses}` },
       { key: "expires_at", label: "Ends", render: (c) => day(c.expires_at) },
       { key: "state", label: "Status", value: (c) => (c.live ? "live" : c.revoked_at ? "cancelled" : "ended"), render: (c) => h("span.chip" + (c.live ? ".ok" : ""), c.live ? "live" : c.revoked_at ? "cancelled" : "ended") },
-      { key: "act", label: "", sort: false, csv: false, render: (c) => c.live ? h("div.row", h("button.sm", { onclick: () => copy(`${location.origin}/app/#inst/${c.code.replace("-", "")}`, "Link copied") }, "Copy link"),
+      { key: "act", label: "", sort: false, csv: false, render: (c) => c.live ? h("div.row", h("button.sm", { onclick: () => copy(inviteLink(c.code, c.role), "Link copied") }, "Copy link"),
         h("button.sm.danger", { onclick: busy(async () => { if (!(await confirm({ title: `Cancel ${c.code}?`, text: "Nobody new can join with it. People who already joined stay.", ok: "Cancel code", danger: true }))) return; await api(`/inst/admin/codes/${c.code}/revoke`, {}); toast("Code cancelled."); draw(); }) }, "Cancel")) : null },
     ], { rows: codes, state: S.st.codes, search: (c) => c.code + " " + batchName(c.batch_id), searchLabel: "Search codes", noun: "codes", csv: "invite-codes.csv",
       filters: [{ label: "Status", options: [["live", "Live"], ["ended", "Ended or cancelled"]], test: (c, v) => (v === "live") === !!c.live },
