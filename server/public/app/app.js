@@ -28,6 +28,9 @@ import * as IT from "./interactives.js";
 import * as J from "./jeetu.js";
 import * as V from "./voice.js";
 import * as INST from "./institute.js";
+// The app lives on app.aspiran.in. Old invite links copied on the staff address (admin.aspiran.in/app/#inst/…) move
+// there, keeping the #part. Static files are served before the server's own redirect can run, so it's done here.
+if (location.hostname === "admin.aspiran.in") location.replace("https://app.aspiran.in" + location.pathname + location.search + location.hash);
 
 // --- Small helpers -----------------------------------------------------------------------------
 
