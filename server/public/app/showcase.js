@@ -2,23 +2,24 @@
 // Rebuilt on 21 Nov 2026 from the owner's review: a demo is a sales floor, not a classroom. So:
 // - One linear tour, chapter by chapter. The games, the video and the essay pages are chapters, never side doors, and
 //   there is no "Back to the topic" anywhere. Every chapter ends with one big button that names what comes next.
-// - A tour guide talks beside the work (on phones, in a dock above the button bar): what the feature does and why it
-//   works, said with too much enthusiasm, plus one line on what the app has more of. That replaces the old "why we do
-//   it this way" folds and the "Free preview" strip. The guide is the tour's voice, not a person and not a member.
-// - Things move and (only if the visitor turns it on) make small sounds. Sound effects are off by default (Chotu's
-//   flashlight voice is the owner's one exception, 21 Nov 2026: on after the first click; flashlight.js); reduced motion is
-//   respected (everything still works, it just appears without animation). No timers, no streaks; tallies are private.
+// - "Study with Chotu" (owner's pick, 21 Nov 2026; replaced the chatty side guide and the flashlight tour): nobody
+//   talks while the visitor works. Chotu sits small at the bottom (buddy.js) and speaks only to help someone stuck: a
+//   nudge after a stall or a miss, never the answer, never praise. A tap on him asks for a nudge. A stuck visitor always
+//   has a way on: the nudge, a "Show me" on the GST vote, and the big button (it says Skip until the chapter is done).
+// - What the visitor works out is written into "My notes" as it happens (a paper beside the work on a laptop, a chip
+//   and a sheet on a phone). The finish page is that page, then one join button and the two plans.
+// - One quiet line closes each finished chapter (CODA). On Federalism, a shorter route skips to the games.
+// - Sound effects are off by default. Chotu's voice is on from the first click (the owner's one exception); the
+//   speaker button turns both off. Reduced motion is respected. No timers, no streaks; tallies are private.
 // - No feedback questions and no survey: we learn from anonymous funnel events (track), never from nagging.
 // Members never see this; they get the in-app route (try.js), where the side doors and the "why" notes still live.
 
-import * as FL from "./flashlight.js";
+import * as B from "./buddy.js";
+import { kulhad } from "./kulhad.js";
 
 let X = null;
 /** try.js hands over its helpers: see the call in try.js (S.init). */
-export function init(ctx) { X = ctx; css(); FL.init(ctx); }
-// Chapters with Chotu's flashlight (flashlight.js) keep the side guide quiet: nothing talks while the visitor works,
-// and once the chapter is done the flashlight takes over. A prototype on the GST vote only (21 Nov 2026).
-const flash = (st) => !!FL.LINES[st?.id];
+export function init(ctx) { X = ctx; css(); B.init(ctx); }
 const h = (...a) => X.h(...a);
 const put = (...a) => X.put(...a);
 const L = (v) => X.L(v);
@@ -37,7 +38,7 @@ const W = {
     whole: (m) => `or learn the whole topic (${m} min, three sittings)`, allTopics: "Other topics", join: "Join free", sound: "Sound effects",
     skip: "Skip", nextUp: (t) => `Next: ${t}`, nextQ: "Next question", seeHow: "See how I did", back: "Back",
     right: "Right!", notQuite: "Not quite.", yourPick: "your pick", howSure: "Lock it in. How sure are you?", sure3: ["Sure", "Ruled some out", "Pure guess"],
-    qOf: (i, n) => `${i} of ${n}`, guide: "Tour guide", guideSub: "points out the clever bits", joinFree: "Join free →",
+    qOf: (i, n) => `${i} of ${n}`,
     tapPlay: "Play", captions: "captions on", soundTap: "sound on tap", readIt: "Read it instead", close: "Close", yourTurn: "Your turn",
     fromVideo: "The question the video ends on", oneMore: "One more, from the same story",
     bill: (i, n) => `Bill ${i} of ${n}`, whatDo: "What will you do?", nextBill: "Next bill", playAgain: "Play again", allowed: "Allowed", notAllowed: "Not allowed",
@@ -52,29 +53,27 @@ const W = {
     otherQ: "Try the other question", marks: (m, w) => `${m} marks · ${w} words`, page: (n) => `Page ${n}`, nextPage: (t) => `Next page: ${t}`, howMarked: "How marking works",
     evaluator: "What an evaluator looks for", snapTitle: "Your page, marked", snap1: "Snap your page", snap2: "We read it", snap3: "It comes back marked",
     snapJoke: "Writing a whole essay in the middle of a demo? Legend. But nobody does, so here's what happens when you do it in the app.",
-    snapHow: "Write by hand, the way the exam wants. Photograph the page in the app. Chotu, your study buddy, reads your handwriting and marks it against the same checklist: structure, content and expression, with notes in the margin like these. Plus marks every answer you send.",
+    snapHow: "Write by hand, the way the exam wants. Photograph the page in the app. Chotu, your study buddy, reads your handwriting and marks it against the same checklist: structure, content and expression, with notes in the margin like these.",
     remember: "Remember these? You guessed them at the start.", card: (i, n) => `Card ${i} of ${n}`, nextCard: "Next card", saveCards: "Save my cards",
-    schedule: "When each card comes back", tomorrow: "Tomorrow", inDays: (n) => `In ${n} days`, saved: (n) => `${n} cards saved in this browser. Join free and they go straight into your Review.`,
-    trophies: "Your trophies", privateNote: "Private. Only you see this.", skipped: "Skipped", goBack: "Go back",
-    oneTopic: "That was one topic.", inApp: "Here's what's waiting inside", alsoIn: "Also in the app", plans: "Two plans. Start free.",
+    schedule: "When each card comes back", tomorrow: "Tomorrow", inDays: (n) => `In ${n} days`, saved: (n) => `${n} cards saved in this browser. Join free and they go straight into your Review.`, skipped: "Skipped", goBack: "Go back", plans: "Two plans. Start free.",
     free: "Free", plus: "Plus", perYear: "/year", perDay: "about ₹11 a day", freeList: ["Your pod of 6 to 8 aspirants", "Daily review of everything you keep", "Chai: news cards tied to the syllabus", "Practice questions and past papers", "Chotu, your study buddy"],
     plusList: ["Everything in Free", "Unlimited answer marking", "Every mock"], plusNote: "Start free. Upgrade inside the app whenever you're ready.",
     joinKeep: (n) => n ? `Join free, keep your ${n} cards` : "Join free, keep your progress", noCard: "Free to join. No card needed.",
-    nums: [["2,000+", "practice questions"], ["250+", "short videos"], ["20+", "hours of recorded notes"], ["60", "interactives like the ones you played"], ["11", "full past papers"]],
-    stat: { warmup: "3 guesses", video: "1 video", "sim-governor": "4 bills decided", sort: (r, n) => `${r} of ${n} sorted`, pyq: (r, n) => `${r} of ${n} PYQs right`, "sim-gst": (f) => `${f} of 3 found`, mains: "1 plan built", essay: "3 pages marked", keep: (n) => `${n} cards kept`, read: "1 read" },
-    finTitle: "Look at you.", finLead: "Fifteen minutes ago you hadn't sat at a Governor's desk. Here's what you did.",
-    moreTopics: "Try another topic", wholeTopic: "Do the whole topic", app: [
-      ["Pods", "6 to 8 aspirants at your stage. Not a 50,000-member Telegram group. Everyone plans their skeleton alone, then the pod compares."],
-      ["Today's Chai", "A few news cards each morning, each tied to a syllabus line, each with one question. Then it ends."],
-      ["Review", "Every card you keep comes back just before you'd forget it. No streaks, no guilt."],
-      ["Chotu", "Your study buddy. Hints first and a skeleton after you try, never the full answer first. Quiet from 11:30 pm to 7 am."],
-      ["Walk mode", "Earphones in. The app reads you a Chai card or names a topic due for review, and you answer aloud on a walk."],
-      ["Calm", "For the bad evenings: slow breathing and grounding, with the helpline first. Nothing logged."]],
-    name: { warmup: "Guess first", read: "Read smart", video: "Watch", "sim-governor": "The Governor's desk", sort: "Sort the lists", pyq: "Real PYQs", "sim-gst": "The GST vote", mains: "Plan a Mains answer", essay: "The marking desk", keep: "Make it stick", finish: "Your trophies" },
+    finTitle: "Here's what you worked out.",
+    moreTopics: "Try another topic", wholeTopic: "Do the whole topic",
+    name: { warmup: "Guess first", read: "Read smart", video: "Watch", "sim-governor": "The Governor's desk", sort: "Sort the lists", pyq: "Real PYQs", "sim-gst": "The GST vote", mains: "Plan a Mains answer", essay: "The marking desk", keep: "Make it stick", finish: "My notes" },
     sub: { warmup: "Three questions before any teaching. Guess freely; nothing is scored.", read: "One short read. Then the text folds away and you're tested from memory.",
       video: "Under a minute. Then your turn.", "sim-governor": "You're the Governor. Four bills land on your desk. Your call.", sort: "Six lookalike subjects. Drag each one into its list.",
-      pyq: "Real Prelims questions, official answer keys. Pick, then say how sure you are.", "sim-gst": "31 states, one Centre. Flip the votes and find out who can block what.",
+      pyq: "Real Prelims questions, official answer keys. Pick, say how sure you are, and if you miss, have one more go.", "sim-gst": "31 states, one Centre. Flip the votes and find out who can block what.",
       mains: "A real Mains question, planned point by point in front of you.", essay: "Three handwritten pages of one essay, marked in the margin.", keep: "Your first guesses come back. Then a few memory cards." },
+    notes: "My notes", notesN: (n) => `My notes · ${n}`, notesEmpty: "What you work out gets written down here as you go.", added: "Added to My notes",
+    short: (m) => `Short on time? The ${m}-minute version: the two games, the marking desk and your cards`, long: (m) => `Back to the full ${m} minutes`,
+    chotuHi: "Hi, I'm Chotu. I'll sit with you while you try this. If you get stuck, I'll give you a nudge, not the answer.",
+    chotuNight: "I'm Chotu. It's late, so I'll stay quiet. Tap me at the bottom if you want a nudge.",
+    notThat: "Not that one. One more try.", second: "On the second try.",
+    plusLine: "Want your own page marked like this? Write by hand and snap it in the app. Plus marks every answer you send: ₹3,999 a year, about ₹11 a day.",
+    finLead2: "Every line here is something you worked out in the last few minutes.", skippedSome: "You skipped:", keepGoing: "Carry on in the app",
+    podLine: "In the app you study in a pod of 6 to 8 aspirants at your stage, not a group of 50,000.",
     coverKick: "Free demo · no account", coverSub: (n, m) => `${m} minutes. ${n} kinds of learning. One whole topic.`,
   },
   hi: {
@@ -82,7 +81,7 @@ const W = {
     whole: (m) => `या पूरा topic सीखिए (${m} मिनट, तीन बैठकें)`, allTopics: "दूसरे topics", join: "मुफ़्त जुड़िए", sound: "आवाज़ें",
     skip: "छोड़िए", nextUp: (t) => `आगे: ${t}`, nextQ: "अगला सवाल", seeHow: "मेरा कैसा रहा?", back: "पीछे",
     right: "सही!", notQuite: "पूरा सही नहीं।", yourPick: "आपका चुनाव", howSure: "पक्का कीजिए। आप कितने पक्के हैं?", sure3: ["पक्का", "कुछ हटा सका", "पूरा अंदाज़ा"],
-    qOf: (i, n) => `${i} / ${n}`, guide: "टूर गाइड", guideSub: "ख़ास बातें दिखाता है", joinFree: "मुफ़्त जुड़िए →",
+    qOf: (i, n) => `${i} / ${n}`,
     tapPlay: "चलाइए", captions: "captions चालू", soundTap: "आवाज़ टैप पर", readIt: "पढ़कर देखिए", close: "बंद कीजिए", yourTurn: "आपकी बारी",
     fromVideo: "जिस सवाल पर video ख़त्म होता है", oneMore: "उसी कहानी से एक और",
     bill: (i, n) => `विधेयक ${i} / ${n}`, whatDo: "आप क्या करेंगे?", nextBill: "अगला विधेयक", playAgain: "फिर से खेलिए", allowed: "अनुमति है", notAllowed: "अनुमति नहीं",
@@ -97,96 +96,86 @@ const W = {
     otherQ: "दूसरा सवाल आज़माइए", marks: (m, w) => `${m} अंक · ${w} शब्द`, page: (n) => `पेज ${n}`, nextPage: (t) => `अगला पेज: ${t}`, howMarked: "जाँच कैसे होती है",
     evaluator: "परीक्षक क्या देखता है", snapTitle: "आपका पेज, जाँचा हुआ", snap1: "पेज की फ़ोटो लीजिए", snap2: "हम उसे पढ़ते हैं", snap3: "जाँच के साथ लौटता है",
     snapJoke: "Demo के बीच पूरा निबंध लिखना? कमाल। पर कोई लिखता नहीं, इसलिए देखिए app में लिखने पर क्या होता है।",
-    snapHow: "हाथ से लिखिए, जैसे परीक्षा चाहती है। App में पेज की फ़ोटो लीजिए। आपका study साथी Chotu आपकी लिखावट पढ़ता है और उसी checklist पर जाँचता है: ढाँचा, सामग्री और अभिव्यक्ति, हाशिये में ऐसी ही टिप्पणियों के साथ। Plus में हर उत्तर जाँचा जाता है।",
+    snapHow: "हाथ से लिखिए, जैसे परीक्षा चाहती है। App में पेज की फ़ोटो लीजिए। आपका study साथी Chotu आपकी लिखावट पढ़ता है और उसी checklist पर जाँचता है: ढाँचा, सामग्री और अभिव्यक्ति, हाशिये में ऐसी ही टिप्पणियों के साथ।",
     remember: "ये याद हैं? शुरू में आपने इन पर अंदाज़ा लगाया था।", card: (i, n) => `Card ${i} / ${n}`, nextCard: "अगला card", saveCards: "मेरे cards सहेजिए",
-    schedule: "हर card कब लौटेगा", tomorrow: "कल", inDays: (n) => `${n} दिन बाद`, saved: (n) => `${n} cards इस browser में सहेजे गए। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे।`,
-    trophies: "आपकी ट्रॉफ़ियाँ", privateNote: "निजी। सिर्फ़ आप देखते हैं।", skipped: "छोड़ा", goBack: "वापस जाइए",
-    oneTopic: "यह एक topic था।", inApp: "अंदर यह सब इंतज़ार कर रहा है", alsoIn: "App में और भी", plans: "दो plan। मुफ़्त से शुरू कीजिए।",
+    schedule: "हर card कब लौटेगा", tomorrow: "कल", inDays: (n) => `${n} दिन बाद`, saved: (n) => `${n} cards इस browser में सहेजे गए। मुफ़्त जुड़िए, और वे सीधे आपके Review में जाएँगे।`, skipped: "छोड़ा", goBack: "वापस जाइए", plans: "दो plan। मुफ़्त से शुरू कीजिए।",
     free: "Free", plus: "Plus", perYear: "/साल", perDay: "लगभग ₹11 रोज़", freeList: ["6 से 8 उम्मीदवारों का आपका pod", "जो रखा, उसका रोज़ का review", "Chai: syllabus से जुड़े news cards", "अभ्यास सवाल और पिछले papers", "Chotu, आपका study साथी"],
     plusList: ["Free में जो है, सब", "असीमित उत्तर-जाँच", "सारे mock"], plusNote: "मुफ़्त से शुरू कीजिए। जब चाहें, app के अंदर से upgrade कीजिए।",
     joinKeep: (n) => n ? `मुफ़्त जुड़िए, अपने ${n} cards रखिए` : "मुफ़्त जुड़िए, अपनी प्रगति रखिए", noCard: "जुड़ना मुफ़्त। कोई card नहीं चाहिए।",
-    nums: [["2,000+", "अभ्यास सवाल"], ["250+", "छोटे video"], ["20+", "घंटे के रिकॉर्ड किए notes"], ["60", "आपके खेले जैसे interactives"], ["11", "पूरे पिछले papers"]],
-    stat: { warmup: "3 अंदाज़े", video: "1 video", "sim-governor": "4 विधेयकों पर फ़ैसला", sort: (r, n) => `${n} में से ${r} सही सूची में`, pyq: (r, n) => `${n} में से ${r} PYQ सही`, "sim-gst": (f) => `3 में से ${f} खोजे`, mains: "1 ढाँचा बना", essay: "3 पेज जाँचे", keep: (n) => `${n} cards रखे`, read: "1 पाठ" },
-    finTitle: "वाह, देखिए आपको।", finLead: "पंद्रह मिनट पहले आप राज्यपाल की मेज़ पर नहीं बैठे थे। देखिए आपने क्या-क्या किया।",
-    moreTopics: "दूसरा topic आज़माइए", wholeTopic: "पूरा topic कीजिए", app: [
-      ["Pods", "आपके स्तर के 6 से 8 उम्मीदवार। 50,000 लोगों का Telegram group नहीं। हर कोई पहले अकेले ढाँचा बनाता है, फिर pod मिलान करता है।"],
-      ["आज की Chai", "हर सुबह कुछ news cards, हर एक syllabus की किसी पंक्ति से जुड़ा, हर एक के साथ एक सवाल। फिर बस।"],
-      ["Review", "जो card आप रखते हैं, वह ठीक भूलने से पहले लौटता है। न streak, न अपराध-बोध।"],
-      ["Chotu", "आपका study साथी। पहले संकेत, कोशिश के बाद ढाँचा, पूरा उत्तर पहले कभी नहीं। रात 11:30 से सुबह 7 बजे तक शांत।"],
-      ["Walk mode", "Earphones लगाइए। App एक Chai card पढ़ता है या review वाला topic बताता है, और आप टहलते हुए ज़ोर से जवाब देते हैं।"],
-      ["Calm", "मुश्किल शामों के लिए: धीमी साँस और ठहराव, सबसे पहले helpline। कुछ दर्ज नहीं होता।"]],
-    name: { warmup: "पहले अंदाज़ा", read: "समझकर पढ़िए", video: "देखिए", "sim-governor": "राज्यपाल की मेज़", sort: "सूचियाँ छाँटिए", pyq: "असली PYQ", "sim-gst": "GST का वोट", mains: "Mains उत्तर का ढाँचा", essay: "जाँच की मेज़", keep: "याद पक्की कीजिए", finish: "आपकी ट्रॉफ़ियाँ" },
+    finTitle: "आपने यह सब समझा।",
+    moreTopics: "दूसरा topic आज़माइए", wholeTopic: "पूरा topic कीजिए",
+    name: { warmup: "पहले अंदाज़ा", read: "समझकर पढ़िए", video: "देखिए", "sim-governor": "राज्यपाल की मेज़", sort: "सूचियाँ छाँटिए", pyq: "असली PYQ", "sim-gst": "GST का वोट", mains: "Mains उत्तर का ढाँचा", essay: "जाँच की मेज़", keep: "याद पक्की कीजिए", finish: "मेरे नोट्स" },
     sub: { warmup: "पढ़ाने से पहले तीन सवाल। खुलकर अंदाज़ा लगाइए; कोई अंक नहीं।", read: "एक छोटा पाठ। फिर पाठ छिप जाता है और याद से जाँच होती है।",
       video: "एक मिनट से कम। फिर आपकी बारी।", "sim-governor": "आप राज्यपाल हैं। आपकी मेज़ पर चार विधेयक। फ़ैसला आपका।", sort: "छह मिलते-जुलते विषय। हर एक को उसकी सूची में खींचिए।",
-      pyq: "असली Prelims सवाल, आधिकारिक उत्तर-कुंजी। चुनिए, फिर बताइए कितने पक्के हैं।", "sim-gst": "31 राज्य, एक केंद्र। वोट बदलिए और देखिए कौन क्या रोक सकता है।",
+      pyq: "असली Prelims सवाल, आधिकारिक उत्तर-कुंजी। चुनिए, बताइए कितने पक्के हैं, और चूकें तो एक बार और।", "sim-gst": "31 राज्य, एक केंद्र। वोट बदलिए और देखिए कौन क्या रोक सकता है।",
       mains: "एक असली Mains सवाल, आपके सामने बिंदु-दर-बिंदु ढाँचा।", essay: "एक निबंध के तीन हाथ से लिखे पेज, हाशिये में जाँच के साथ।", keep: "आपके पहले अंदाज़े लौटते हैं। फिर कुछ memory cards।" },
+    notes: "मेरे नोट्स", notesN: (n) => `मेरे नोट्स · ${n}`, notesEmpty: "आप जो समझते जाएँगे, वह यहाँ लिखा जाता रहेगा।", added: "मेरे नोट्स में जुड़ा",
+    short: (m) => `समय कम है? ${m} मिनट वाला रूप: दोनों खेल, जाँच की मेज़ और आपके cards`, long: (m) => `पूरे ${m} मिनट पर लौटिए`,
+    chotuHi: "नमस्ते, मैं छोटू हूँ। आप यह करके देखिए, मैं साथ बैठा हूँ। कहीं अटकें तो एक इशारा दूँगा, जवाब नहीं।",
+    chotuNight: "मैं छोटू हूँ। रात हो गई है, इसलिए चुप रहूँगा। इशारा चाहिए तो नीचे मुझ पर टैप कीजिए।",
+    notThat: "यह नहीं। एक बार और।", second: "दूसरी कोशिश में।",
+    plusLine: "अपना पेज भी ऐसे जँचवाना है? हाथ से लिखिए और app में फ़ोटो लीजिए। Plus में हर उत्तर जाँचा जाता है: ₹3,999 साल का, लगभग ₹11 रोज़।",
+    finLead2: "यहाँ की हर पंक्ति आपने पिछले कुछ मिनटों में ख़ुद समझी है।", skippedSome: "आपने छोड़ा:", keepGoing: "App में आगे बढ़िए",
+    podLine: "App में आप अपने स्तर के 6 से 8 उम्मीदवारों के pod में पढ़ते हैं, 50,000 लोगों के group में नहीं।",
     coverKick: "मुफ़्त demo · बिना account", coverSub: (n, m) => `${m} मिनट। सीखने के ${n} तरीक़े। एक पूरा topic।`,
   },
 };
 const t = (k, ...a) => { const v = (W[X.lang()] ?? W.en)[k] ?? W.en[k]; return typeof v === "function" ? v(...a) : v; };
 
-// The tour guide's lines, by step type (or a step id for one topic's own lines). `enter` plays on arrival, `done`
-// when the chapter's activity is finished, `pitch` once after that, with a Join link. Honest numbers only: the same
-// library counts the finish screen uses. Say what a feature does and why it works; never promise results.
-const G = {
-  en: {
-    cover: { enter: ["Hi! I'm your tour guide. I'll point out the clever bits as we go.", "Fair warning: I get excited. This stuff is genuinely good."] },
-    warmup: { enter: ["Watch this. We ask you questions BEFORE teaching you anything.", "Sounds backwards? It's called pretesting. A wrong guess followed by the answer sticks better than reading alone."],
-      done: ["Feel that itch to know the answers? That's the whole trick.", "And these three come back at the end to test you. Nothing here is wasted."], pitch: "Every topic in the app opens like this. 2,000+ questions are waiting." },
-    read: { enter: ["Short reads. One idea at a time, with exactly the facts UPSC asks.", "And when you finish, the text folds away and you're tested from memory. No peeking. Recall beats rereading, every time."],
-      done: ["Read, then recall. That's how notes turn into marks."], pitch: "Short reads across the syllabus in the app, and 20+ hours of recorded notes if you'd rather listen." },
-    video: { enter: ["Now, the movies. Under a minute. One idea. Made to stick.", "Captions on, sound only when you tap. Studying in a shared room? We thought of you."],
-      done: ["And it ends with a question. Watching feels like learning; answering IS learning."], pitch: "That's 1 of 250+ short videos in the app." },
-    "sim-governor": { enter: ["Okay, this one is my favourite. You're not reading about the Governor. You ARE the Governor.", "Four bills land on your desk. Sign, return, reserve, or sit on it. Every choice gets the constitutional answer."],
-      done: ["You just learnt Article 200 by doing it. Try forgetting THAT in the exam hall.", "Mains keeps asking about Governors. You've now sat in the chair."], pitch: "One of 60 interactives in the app. Games with a point, not games for points." },
-    sort: { enter: ["Union, State, Concurrent: the lookalikes UPSC loves to mix up.", "So we mix them up first, on purpose. Telling them apart is exactly what a Prelims option tests."],
-      done: ["Mistakes here are the good kind. They show you which lookalikes trip you, before Prelims does."], pitch: "In the app, everything you get wrong comes back in your review, on the right day." },
-    pyq: { enter: ["Real questions from real UPSC papers. Answers straight from UPSC's official keys.", "One twist: after you pick, say how sure you are. Under negative marking, knowing when you're guessing is worth marks."],
-      done: ["That's calibration. Toppers don't just know more; they know what they know.", "Sure, and still wrong? You'll remember that one for life. That's the point."], pitch: "11 full past papers are in the app, ready when you are." },
-    "sim-gst": { enter: ["Who really runs the GST Council? Don't take my word for it. Vote.", "31 states, one Centre. Tap the seats, flip the votes, watch the meter."],
-      done: ["Neither side can pass anything alone. You didn't memorise that; you discovered it.", "That's the kind of fact you can rebuild from scratch in the exam hall."], pitch: "60 interactives like this in the app." },
-    mains: { enter: ["Mains. Where most people freeze. Here's a real question from the 2025 paper.", "Watch a 250-word answer get planned, point by point."],
-      done: ["That's the skeleton every good Mains answer has. In the app you plan your own first, then compare."], pitch: "In the app your pod plans the same question and compares skeletons on Fridays." },
-    essay: { enter: ["Now the pot of gold. Three real pages of one essay, marked the way a kind senior would.", "Skeleton, outline, page. Watch the margin fill up."],
-      done: ["Structure, content, expression: three lenses on every page you'll ever write."], pitch: "In the app, photograph your own handwritten page and get it marked. Plus marks every one." },
-    keep: { enter: ["Remember your three guesses from the start? They're back.", "Then a few memory cards. Each one comes back just before you'd forget it."],
-      done: ["Look at that schedule. Right answers come back in days; misses come back tomorrow. Your memory sets the timetable.", "No streaks, no guilt. Just the right card on the right day."], pitch: "Join free and these cards go straight into your Review." },
-    finish: { enter: ["Fifteen minutes. One whole topic. Guessed, watched, played, sorted, answered, planned, marked and kept.", "And that was ONE topic. Wait till you see the rest."] },
-    mainsBuild: { intro: "First line answers the question in one breath. No \"since time immemorial\".", p0: "Every point carries a hook: an Article, a formula, a year. Examiners reward specifics.",
-      p1: "Exact numbers, current to the latest Finance Commission. Old figures quietly cost marks.", p2: "Both sides inside one point. \"Examine\" means weigh, not list.",
-      p3: "A counter-trend. This is the point that lifts an answer from average to good.", way: "A way forward that says who should do what. Not \"Centre and states should work together\".",
-      trap: "And the trap most people fall into, flagged before you fall in." },
-  },
-  hi: {
-    cover: { enter: ["नमस्ते! मैं आपका टूर गाइड हूँ। रास्ते में ख़ास बातें दिखाता चलूँगा।", "पहले ही बता दूँ: मैं थोड़ा उत्साहित हो जाता हूँ। चीज़ें सच में अच्छी हैं।"] },
-    warmup: { enter: ["देखिए। हम कुछ भी पढ़ाने से पहले सवाल पूछते हैं।", "उल्टा लगता है? इसे pretesting कहते हैं। ग़लत अंदाज़े के बाद सही उत्तर, सिर्फ़ पढ़ने से ज़्यादा याद रहता है।"],
-      done: ["उत्तर जानने की बेचैनी महसूस हुई? यही तो तरकीब है।", "और ये तीनों अंत में फिर आपकी जाँच के लिए लौटेंगे। यहाँ कुछ बेकार नहीं जाता।"], pitch: "App का हर topic ऐसे ही शुरू होता है। 2,000+ सवाल इंतज़ार कर रहे हैं।" },
-    read: { enter: ["छोटे पाठ। एक बार में एक बात, ठीक वही तथ्य जो UPSC पूछता है।", "पढ़ लेने पर पाठ छिप जाता है और याद से जाँच होती है। झाँकना मना। दोबारा पढ़ने से याद करना हमेशा बेहतर।"],
-      done: ["पढ़िए, फिर याद कीजिए। ऐसे notes अंकों में बदलते हैं।"], pitch: "App में syllabus भर के छोटे पाठ, और सुनना पसंद हो तो 20+ घंटे के रिकॉर्ड किए notes।" },
-    video: { enter: ["अब फ़िल्में। एक मिनट से कम। एक बात। याद रहने के लिए बनी।", "Captions चालू, आवाज़ सिर्फ़ टैप पर। साझा कमरे में पढ़ते हैं? आपका ख़्याल रखा है।"],
-      done: ["और अंत में एक सवाल। देखना सीखने जैसा लगता है; जवाब देना ही असली सीखना है।"], pitch: "यह app के 250+ छोटे video में से एक है।" },
-    "sim-governor": { enter: ["यह मेरा सबसे पसंदीदा है। आप राज्यपाल के बारे में पढ़ नहीं रहे। आप राज्यपाल हैं।", "मेज़ पर चार विधेयक। हस्ताक्षर, वापसी, आरक्षण, या रोककर बैठना। हर फ़ैसले पर संविधान का जवाब मिलता है।"],
-      done: ["आपने अनुच्छेद 200 करके सीखा। अब परीक्षा-हॉल में इसे भूलकर दिखाइए।", "Mains राज्यपाल पर बार-बार पूछता है। अब आप उस कुर्सी पर बैठ चुके हैं।"], pitch: "App के 60 interactives में से एक। मक़सद वाले खेल, अंकों वाले नहीं।" },
-    sort: { enter: ["संघ, राज्य, समवर्ती: मिलते-जुलते विषय, जिन्हें UPSC मिलाना पसंद करता है।", "इसलिए हम पहले ही जानबूझकर मिला देते हैं। इन्हें अलग पहचानना ही Prelims का विकल्प जाँचता है।"],
-      done: ["यहाँ की ग़लतियाँ अच्छी वाली हैं। Prelims से पहले ही दिखा देती हैं कि कौन-से विषय आपको उलझाते हैं।"], pitch: "App में जो भी ग़लत होता है, वह सही दिन आपके review में लौटता है।" },
-    pyq: { enter: ["असली UPSC papers के असली सवाल। उत्तर सीधे UPSC की आधिकारिक कुंजी से।", "एक मोड़: चुनने के बाद बताइए कितने पक्के हैं। Negative marking में यह जानना कि कब अंदाज़ा लगा रहे हैं, अंक दिलाता है।"],
-      done: ["इसे calibration कहते हैं। Toppers सिर्फ़ ज़्यादा नहीं जानते; उन्हें पता होता है कि वे क्या जानते हैं।", "पक्के थे और फिर भी ग़लत? वह सवाल अब ज़िंदगी भर याद रहेगा। यही मक़सद है।"], pitch: "App में 11 पूरे पिछले papers तैयार हैं।" },
-    "sim-gst": { enter: ["GST Council में असली ताक़त किसकी? मेरी बात मत मानिए। वोट कीजिए।", "31 राज्य, एक केंद्र। सीटों पर टैप कीजिए, वोट बदलिए, मीटर देखिए।"],
-      done: ["कोई भी पक्ष अकेले कुछ पारित नहीं कर सकता। आपने यह रटा नहीं; खोजा।", "ऐसा तथ्य आप परीक्षा-हॉल में शून्य से फिर बना सकते हैं।"], pitch: "App में ऐसे 60 interactives हैं।" },
-    mains: { enter: ["Mains. जहाँ ज़्यादातर लोग अटक जाते हैं। 2025 के paper का एक असली सवाल।", "देखिए 250 शब्दों का उत्तर बिंदु-दर-बिंदु कैसे बनता है।"],
-      done: ["हर अच्छे Mains उत्तर का यही ढाँचा होता है। App में पहले आप अपना बनाते हैं, फिर मिलाते हैं।"], pitch: "App में आपका pod यही सवाल बनाता है और शुक्रवार को ढाँचे मिलाता है।" },
-    essay: { enter: ["अब असली ख़ज़ाना। एक निबंध के तीन असली पेज, जैसे कोई भला senior जाँचता।", "ढाँचा, रूपरेखा, पेज। हाशिया भरते देखिए।"],
-      done: ["ढाँचा, सामग्री, अभिव्यक्ति: आपके लिखे हर पेज को देखने के तीन नज़रिये।"], pitch: "App में अपने हाथ से लिखे पेज की फ़ोटो लीजिए और जाँच पाइए। Plus में हर पेज।" },
-    keep: { enter: ["शुरू के तीन अंदाज़े याद हैं? वे लौट आए।", "फिर कुछ memory cards। हर एक ठीक भूलने से पहले लौटता है।"],
-      done: ["यह समय-सारणी देखिए। सही उत्तर कुछ दिन बाद लौटते हैं; चूके हुए कल। समय आपकी याददाश्त तय करती है।", "न streak, न अपराध-बोध। बस सही दिन सही card।"], pitch: "मुफ़्त जुड़िए और ये cards सीधे आपके Review में जाएँगे।" },
-    finish: { enter: ["पंद्रह मिनट। एक पूरा topic। अंदाज़ा, video, खेल, छँटाई, जवाब, ढाँचा, जाँच और याद।", "और यह सिर्फ़ एक topic था। बाक़ी देखिए।"] },
-    mainsBuild: { intro: "पहली पंक्ति एक साँस में सवाल का जवाब देती है। \"अनादि काल से\" नहीं।", p0: "हर बिंदु के साथ एक पकड़: अनुच्छेद, सूत्र, वर्ष। परीक्षक ठोस बातों को अंक देते हैं।",
-      p1: "सटीक आँकड़े, नवीनतम वित्त आयोग तक। पुराने आँकड़े चुपचाप अंक काटते हैं।", p2: "एक ही बिंदु में दोनों पक्ष। \"परीक्षण\" का मतलब तौलना है, गिनाना नहीं।",
-      p3: "उलटा रुझान। यही बिंदु उत्तर को औसत से अच्छा बनाता है।", way: "आगे का रास्ता जो बताए कि कौन क्या करे। \"केंद्र और राज्य मिलकर काम करें\" नहीं।",
-      trap: "और वह ग़लती जिसमें ज़्यादातर लोग गिरते हैं, गिरने से पहले ही बताई गई।" },
+// Why each line of the Mains plan is there: shown beside the line as it arrives.
+const MB = {
+  en: { intro: "First line answers the question in one breath. No \"since time immemorial\".", p0: "Every point carries a hook: an Article, a formula, a year. Examiners reward specifics.",
+    p1: "Exact numbers, current to the latest Finance Commission. Old figures quietly cost marks.", p2: "Both sides inside one point. \"Examine\" means weigh, not list.",
+    p3: "A counter-trend. This is the point that lifts an answer from average to good.", way: "A way forward that says who should do what. Not \"Centre and states should work together\".",
+    trap: "And the trap most people fall into, flagged before you fall in." },
+  hi: { intro: "पहली पंक्ति एक साँस में सवाल का जवाब देती है। \"अनादि काल से\" नहीं।", p0: "हर बिंदु के साथ एक पकड़: अनुच्छेद, सूत्र, वर्ष। परीक्षक ठोस बातों को अंक देते हैं।",
+    p1: "सटीक आँकड़े, नवीनतम वित्त आयोग तक। पुराने आँकड़े चुपचाप अंक काटते हैं।", p2: "एक ही बिंदु में दोनों पक्ष। \"परीक्षण\" का मतलब तौलना है, गिनाना नहीं।",
+    p3: "उलटा रुझान। यही बिंदु उत्तर को औसत से अच्छा बनाता है।", way: "आगे का रास्ता जो बताए कि कौन क्या करे। \"केंद्र और राज्य मिलकर काम करें\" नहीं।",
+    trap: "और वह ग़लती जिसमें ज़्यादातर लोग गिरते हैं, गिरने से पहले ही बताई गई।" },
+};
+const mb = (k) => (MB[X.lang()] ?? MB.en)[k] ?? MB.en[k];
+
+// One quiet line under a finished chapter (borrowed from the keynote idea: the work, then one sentence, then on).
+// It says what the visitor did, never how well, and never sells.
+const CODA = {
+  en: { warmup: "Three guesses, made before any teaching. They come back at the end.", read: "Read once, then recalled. Recalling is the part that sticks.",
+    video: "Under a minute, then a question. Answering is where it lands.", "sim-governor": "Article 200, decided four times, from the Governor's chair.",
+    sort: "Lookalikes are where Prelims sets its traps. Now you've handled them.", pyq: "Real papers, official keys, and you know which ones you were guessing.",
+    "sim-gst": "Neither side can pass anything alone. You worked that out yourself.", mains: "Answer first, a hook on every point, and an ending that says who does what.",
+    essay: "Structure, content, expression. Every page you write gets read this way.", keep: "These come back by themselves, just before you'd forget them." },
+  hi: { warmup: "तीन अंदाज़े, पढ़ाई से पहले। अंत में ये लौटेंगे।", read: "एक बार पढ़ा, फिर याद से बताया। याद करना ही टिकता है।",
+    video: "एक मिनट से कम, फिर एक सवाल। जवाब देने पर ही बात बैठती है।", "sim-governor": "अनुच्छेद 200, चार बार, राज्यपाल की कुर्सी से तय किया।",
+    sort: "मिलते-जुलते विषयों में ही Prelims जाल बिछाता है। अब आप उनसे निपट चुके हैं।", pyq: "असली papers, आधिकारिक कुंजी, और आपको पता है कि कहाँ अंदाज़ा था।",
+    "sim-gst": "कोई भी पक्ष अकेले कुछ पारित नहीं कर सकता। यह आपने ख़ुद खोजा।", mains: "पहले जवाब, हर बिंदु पर एक पकड़, और अंत में कौन क्या करे।",
+    essay: "ढाँचा, सामग्री, अभिव्यक्ति। आपका हर पेज ऐसे ही पढ़ा जाता है।", keep: "ये अपने आप लौटेंगे, ठीक भूलने से पहले।" },
+};
+
+// "My notes": what the visitor works out lands here as it happens, in handwriting, and the finish page is the whole
+// page. Stored as keys (so a language switch rewrites them). The Federalism topic has its own lines; every other topic
+// gets lines made from its own content (the read's "remember", the sort's lists, the right answer).
+const NOTES = {
+  "path-pol-federalism": {
+    w: [{ en: "Subjects in no list (residuary powers) go to Parliament. Article 248.", hi: "किसी सूची में न आने वाले विषय (अवशिष्ट शक्तियाँ) संसद के पास। अनुच्छेद 248।" },
+      { en: "GST Council: ¾ of the weighted votes. Centre ⅓, states ⅔.", hi: "GST परिषद: भारित वोटों का ¾। केंद्र ⅓, राज्य ⅔।" },
+      { en: "Bommai (1994): a majority is tested on the floor of the Assembly.", hi: "बोम्मई (1994): बहुमत की जाँच विधानसभा के पटल पर।" }],
+    "video-governor": [{ en: "Governor's assent: Article 200. Sign, withhold, or reserve for the President.", hi: "राज्यपाल की स्वीकृति: अनुच्छेद 200। स्वीकृति, रोकना, या राष्ट्रपति के लिए आरक्षित।" },
+      { en: "Nov 2025 opinion: a court can only ask for a decision in reasonable time. No deadline, no deemed assent.", hi: "नवंबर 2025 की राय: अदालत सिर्फ़ उचित समय में फ़ैसले का निर्देश दे सकती है। न समय-सीमा, न मानित स्वीकृति।" }],
+    gov: [null, { en: "Passed again after a return? The Governor can't refuse it.", hi: "लौटाने के बाद दोबारा पारित? राज्यपाल मना नहीं कर सकते।" },
+      { en: "A bill that weakens the High Court must go to the President.", hi: "हाई कोर्ट को कमज़ोर करने वाला विधेयक राष्ट्रपति के पास जाना ही चाहिए।" },
+      { en: "A money bill can't be sent back for reconsideration.", hi: "धन विधेयक पुनर्विचार के लिए लौटाया नहीं जा सकता।" }],
+    pyq: { 0: { en: "Of the three councils, only the Inter-State Council is in the Constitution (Article 263).", hi: "तीनों में से सिर्फ़ अंतर-राज्य परिषद संविधान में है (अनुच्छेद 263)।" },
+      1: { en: "Article 356: the state's law-making goes to Parliament's authority. The Assembly isn't dissolved by itself.", hi: "अनुच्छेद 356: राज्य का क़ानून बनाना संसद के अधिकार में जाता है। विधानसभा अपने आप भंग नहीं होती।" },
+      2: { en: "Only the Governor can reserve a state bill. The Constitution does name the Governor's discretion.", hi: "राज्य का विधेयक सिर्फ़ राज्यपाल आरक्षित कर सकते हैं। संविधान राज्यपाल के विवेक का ज़िक्र करता है।" } },
+    x: { veto: { en: "All 31 states together make 66.7%, short of 75%. The Centre can block alone.", hi: "सभी 31 राज्य मिलकर 66.7%, 75% से कम। केंद्र अकेले रोक सकता है।" },
+      fewest: { en: "With the Centre for it, 20 states pass a decision. 19 fall just short.", hi: "केंद्र साथ हो तो 20 राज्य फ़ैसला पारित करते हैं। 19 पर थोड़ा कम पड़ता है।" },
+      block: { en: "The states need 12 of them together to block.", hi: "रोकने के लिए 12 राज्यों का साथ चाहिए।" } },
+    xq: { en: "Council recommendations persuade; they don't bind (Mohit Minerals, 2022).", hi: "परिषद की सिफ़ारिशें प्रेरक हैं, बाध्यकारी नहीं (मोहित मिनरल्स, 2022)।" },
   },
 };
-const gl = (key, part) => { const g = G[X.lang()] ?? G.en; return g[key]?.[part] ?? G.en[key]?.[part]; };
+const NOTE_ANY = {
+  m: { en: "Mains: answer in the first line. A hook on every point: an Article, a year, a number. End with who should do what.", hi: "Mains: पहली पंक्ति में जवाब। हर बिंदु पर एक पकड़: अनुच्छेद, वर्ष, आँकड़ा। अंत में कौन क्या करे।" },
+  e: { en: "Essay: take a side you can argue, then go beyond politics: economy, society, ethics.", hi: "निबंध: ऐसा पक्ष लीजिए जिस पर तर्क दे सकें, फिर राजनीति से आगे: अर्थव्यवस्था, समाज, नैतिकता।" },
+};
 
 // The question the Governor video ends on, so the first question under the player is the one the viewer just heard.
 // (The path file carries it too, marked fromVideo; this covers a copy imported before that.)
@@ -233,8 +222,8 @@ function logoMark() { const s = h("span.sc-logo-mark"); s.innerHTML = LOGO; retu
 let ac = null;
 const sfxOn = () => !!X.store.get("try:sfx", false);
 // The speaker button: on while either sound is on. Turning it off silences both (remembered); on turns both on.
-const soundOn = () => sfxOn() || FL.voiceOn();
-const setSound = (on) => { X.store.set("try:sfx", on); X.store.set("try:voice", on); if (!on) FL.stopVoice(); };
+const soundOn = () => sfxOn() || B.voiceOn();
+const setSound = (on) => { X.store.set("try:sfx", on); X.store.set("try:voice", on); if (!on) B.stopVoice(); else B.relock(); };
 function tone(f, d, type = "sine", g = 0.06, when = 0, slide = 0) {
   if (!sfxOn()) return;
   try {
@@ -283,7 +272,7 @@ function countUp(el, to, suffix = "") {
 // demo shows reading through its checks and the guide, and keeps the 15 minutes for the things nobody else has.
 
 const PLAYABLE = new Set(["sim-gst", "sim-governor", "essay", "video"]);
-function seq() {
+function seq(whole = false) {
   const d = X.data(), out = [], seen = new Set();
   for (const id of d.routes.express.steps) {
     const st = X.stepById(id) && X.view(X.stepById(id));
@@ -295,16 +284,25 @@ function seq() {
     }
   }
   const rich = out.filter((id) => PLAYABLE.has(X.stepById(id)?.type)).length >= 3;
-  return rich ? out.filter((id) => X.stepById(id)?.type !== "read") : out;
+  const all = rich ? out.filter((id) => X.stepById(id)?.type !== "read") : out;
+  return !whole && hasShort(all) && X.getA("route:short") ? all.filter((id) => SHORT.has(X.stepById(id)?.type)) : all;
 }
+// The shorter route (from the "opening taps" idea): only where the topic has the games, so it really is different.
+const SHORT = new Set(["warmup", "sim-governor", "sim-gst", "essay", "keep", "finish"]);
+const SHORT_MIN = 8;
+const hasShort = (all) => all.length > 7 && all.filter((id) => SHORT.has(X.stepById(id)?.type)).length >= 5;
 const nameOf = (st) => (st.type === "video" ? `${t("name").video}: ${L(st.title)}` : t("name")[st.type] ?? L(st.title));
 const doneKey = (st) => "sc:done:" + st.id;
 const isDone = (st) => !!X.getA(doneKey(st));
 
-// --- Frame: top bar, stage, guide, bottom bar ------------------------------------------------------------------------
+// --- Frame: top bar, stage (the work, and My notes beside it), bottom bar with Chotu ----------------------------------
 
-let root = null, guideEl = null, guideList = null, barEl = null, chapterAt = null, said = new Set();
+let root = null, barEl = null, chapterAt = null, codaEl = null, notesEl = null, chipEl = null, toastEl = null, curSt = null;
 let action = { label: "", run: null, ready: false };
+// How Chotu helps in the chapter on screen: each chapter sets `nudge()` as it draws, returning { key, action? } for
+// where the visitor is now (or null). A still screen for WAIT seconds counts as stuck. No clock is ever shown.
+let nudge = null;
+const WAIT = { warmup: 20, read: 20, video: 20, "sim-governor": 25, sort: 15, pyq: 25, "sim-gst": 12, mains: 15, keep: 20 };
 
 export function draw(into, strip) {
   root = into;
@@ -313,23 +311,35 @@ export function draw(into, strip) {
   const p = X.prog();
   const list = seq();
   const at = p.show == null || p.show < 0 || p.route !== "express" ? -1 : Math.min(p.show, list.length - 1);
-  FL.listen();
-  if (at !== chapterAt) { clearTimers(); resetGuide(); FL.close(); chapterAt = at; }
-  else rebuildGuide();
-  if (at < 0) { put(root, strip, topBar(list, -1), cover(list)); return pump(); }
-  const st = X.view(X.stepById(list[at]));
+  B.listen();
+  const fresh = at !== chapterAt;
+  if (fresh) { clearTimers(); B.newChapter(); chapterAt = at; }
+  if (at < 0) { curSt = null; B.unwatch(); put(root, strip, topBar(list, -1), cover(list)); return; }
+  const st = curSt = X.view(X.stepById(list[at]));
   action = { label: "", run: null, ready: false };
+  nudge = null;
+  const fin = st.type === "finish";
   const body = (CH[st.type] ?? CH.fallback)(st, at, list);
+  codaEl = h("p.sc-coda", { "aria-live": "polite" });
+  notesEl = null;
   put(root, strip, topBar(list, at),
-    h("div.sc-stage" + (flash(st) ? ".fl-quiet" : ""), h("article.sc-main", { lang: X.lang() }, head(st, at, list), body), guide()),
+    h("div.sc-stage" + (fin ? ".solo" : ""), h("article.sc-main", { lang: X.lang() }, head(st, at, list), body, codaEl), !fin && notesPanel()),
     bottomBar(list, at));
-  if (flash(st)) { if (isDone(st) && !FL.seen(st.id)) later(() => flashTour(st), 900); return; }
-  if (!said.has(st.id + ":enter")) say(st, "enter");
-  if (isDone(st) && !said.has(st.id + ":done")) say(st, "done");
-  pump();
+  if (isDone(st)) paintCoda(st, false);
+  if (WAIT[st.type]) B.watch(() => (isDone(st) ? null : nudge?.()), WAIT[st.type] * 1000); else B.unwatch();
+  if (fresh) later(() => B.say(fin ? "bye" : "hello"), fin ? 1400 : 600);
 }
-// Leaving #try puts the page width back.
-addEventListener("hashchange", () => { if (!/^#try\//.test(location.hash)) document.documentElement.classList.remove("sc-on"); });
+// Leaving #try puts the page width back, and Chotu stops watching.
+addEventListener("hashchange", () => { if (!/^#try\//.test(location.hash)) { document.documentElement.classList.remove("sc-on"); B.unwatch(); B.hush(); } });
+
+/** What a tap on Chotu says: the nudge for right now, or where to go next. */
+function askChotu() {
+  const st = curSt;
+  if (!st) return null;
+  if (st.type === "finish") return { key: "bye" };
+  if (!isDone(st)) { const n = nudge?.(); if (n) return n; if (st.type === "essay") return { key: "essay" }; }
+  return { key: "next" };
+}
 
 function goShow(i) {
   const p = X.prog(), list = seq();
@@ -338,12 +348,12 @@ function goShow(i) {
   p.show = Math.min(i, list.length - 1); p.showLast = p.show;
   const id = list[p.show], ex = X.data().routes.express.steps.indexOf(id);
   if (ex >= 0) p.pos = ex;
-  const first = !(p.counted ?? {})["show:" + p.show];
-  p.counted = { ...(p.counted ?? {}), ["show:" + p.show]: true };
+  const first = !(p.counted ?? {})["show:" + id];
+  p.counted = { ...(p.counted ?? {}), ["show:" + id]: true };
   X.save(p); X.redraw(); X.top();
   if (first) {
-    track("try_step", { route: "express", n: p.show + 1, of: list.length, step: id, demo: 2 });
-    if (X.stepById(id)?.type === "finish") track("try_finish", { route: "express", demo: 2 });
+    track("try_step", { route: X.getA("route:short") ? "short" : "express", n: p.show + 1, of: list.length, step: id, demo: 3 });
+    if (X.stepById(id)?.type === "finish") track("try_finish", { route: "express", demo: 3 });
   }
 }
 
@@ -359,13 +369,14 @@ function topBar(list, at) {
     h("a.sc-logo", { href: X.homeHref(), "aria-label": "Aspiran" }, logoMark(), h("span", "Aspiran")),
     rail || h("div.sc-rail"),
     sound, X.langSwitch() && h("button.sc-iconbtn.sc-lang", { type: "button", lang: hi() ? "en" : "hi", "aria-label": hi() ? "Switch to English" : "हिन्दी में देखिए",
-      onclick: () => { X.store.set("try:lang", hi() ? "en" : "hi"); track("demo_act", { act: "lang_" + (hi() ? "en" : "hi") }); X.redraw(); } }, hi() ? "EN" : "हि"),
+      onclick: () => { B.hush(); X.store.set("try:lang", hi() ? "en" : "hi"); track("demo_act", { act: "lang_" + (hi() ? "en" : "hi") }); X.redraw(); } }, hi() ? "EN" : "हि"),
     h("a.sc-join-pill", { href: "#", onclick: () => X.joining("top") }, t("join")));
 }
 
 function head(st, at, list) {
+  chipEl = st.type !== "finish" ? h("button.sc-notes-chip", { type: "button", onclick: openNotes }, icon("read", 16), h("span", t("notesN", myNotes().length))) : null;
   return h("div.sc-head",
-    h("div.sc-kick", h("span.sc-kick-ic", icon(st.type, 18)), t("chapterOf", at + 1, list.length)),
+    h("div.sc-kick", h("span.sc-kick-ic", icon(st.type, 18)), h("span", t("chapterOf", at + 1, list.length)), chipEl),
     h("h1", { tabindex: "-1" }, st.type === "finish" ? t("finTitle") : nameOf(st)),
     st.type !== "finish" && h("p.sc-sub", t("sub")[st.type] ?? L(st.lead)));
 }
@@ -389,64 +400,88 @@ function paintBar() {
   let { label, run, ready } = action;
   if (!run) { run = () => goShow(at + 1); ready = isDone(st); label = next ? t("nextUp", nameOf(X.view(next))) : ""; if (!ready && next) label = t("skip") + " · " + t("nextUp", nameOf(X.view(next))); }
   const fin = st.type === "finish";
+  toastEl ??= h("div.sc-toast", { role: "status", "aria-live": "polite" });
   put(barEl, h("div.sc-bar-in",
-    h("button.sc-back", { type: "button", onclick: () => goShow(at - 1) }, icon("back", 20), h("span", t("back"))),
-    fin ? h("a.sc-go.ready", { href: "#", onclick: () => X.joining("bar") }, t("joinKeep", X.cardsHere()), icon("arrow", 20))
-      : label && h("button.sc-go" + (ready ? ".ready" : ""), { type: "button", onclick: () => { SFX.whoosh(); run(); } }, h("span", label), icon("arrow", 20))));
+    B.mount(askChotu),
+    h("div.sc-bar-r",
+      h("button.sc-back", { type: "button", "aria-label": t("back"), onclick: () => goShow(at - 1) }, icon("back", 20), h("span", t("back"))),
+      fin ? h("a.sc-go.ready", { href: "#", onclick: () => X.joining("bar") }, h("span", t("joinKeep", X.cardsHere())), icon("arrow", 20))
+        : label && h("button.sc-go" + (ready ? ".ready" : ""), { type: "button", onclick: () => { SFX.whoosh(); run(); } }, h("span", label), icon("arrow", 20))),
+    toastEl));
 }
 
-// The guide keeps its bubbles while a chapter redraws its insides; a new chapter starts it afresh.
-let gqueue = [], gbusy = false, ggen = 0;
-function guide() {
-  if (!guideEl) {
-    guideList = h("div.sc-bubbles", { "aria-live": "polite" });
-    guideEl = h("aside.sc-guide", { "aria-label": t("guide") },
-      h("button.sc-guide-head", { type: "button", onclick: () => guideEl.classList.toggle("open") },
-        h("span.sc-guide-av", logoMark()), h("span", h("b", t("guide")), h("small", t("guideSub")))),
-      guideList);
+/** The closing line under a finished chapter. */
+function paintCoda(st, anim = true) {
+  const line = (CODA[X.lang()] ?? CODA.en)[st.type];
+  if (!codaEl || !line) return;
+  codaEl.textContent = line;
+  codaEl.classList.toggle("in", anim);
+  codaEl.classList.add("on");
+}
+
+// --- My notes --------------------------------------------------------------------------------------------------------
+
+const myNotes = () => (X.getA("notes", []) ?? []).filter((k) => noteText(k));
+const clip = (s, n = 64) => (s.length <= n ? s : s.slice(0, s.lastIndexOf(" ", n)) + "…").replace(/[:\s]+$/, "");
+const stepV = (id) => { const s = X.stepById(id); return s && X.view(s); };
+const ansOf = (q) => q && L(q.options[q.answer]);
+/** A note's words, in the language on screen. Keys: w:i, r:step, v:step:n, g:i, s:step, p:step:i, x:step:id, xq:step:n, m, e. */
+function noteText(k) {
+  const mine = NOTES[X.id()] ?? {}, [kind, a, b] = String(k).split(":");
+  const pick = (o) => (o ? L(o) : null);
+  switch (kind) {
+    case "w": { const q = stepV("warmup")?.questions?.[a]; return pick(mine.w?.[a]) ?? (q && `${clip(L(q.q))} → ${ansOf(q)}`); }
+    case "r": { const r = stepV(a)?.remember; return r ? L(r).replace(/^\*\*[^*]+\*\*\s*/, "").replace(/\*\*/g, "") : null; }
+    case "v": return pick(mine[a]?.[b]) ?? ansOf(stepV(a)?.questions?.[b]);
+    case "g": return pick(mine.gov?.[a]);
+    case "s": {
+      const st = stepV(a); if (!st) return null;
+      const idx = st.only ?? st.items.map((_, i) => i);
+      return st.buckets.map((bk, bi) => { const its = idx.filter((i) => st.items[i].bucket === bi).map((i) => L(st.items[i].text)); return its.length ? `${L(bk)}: ${its.join(", ")}` : null; }).filter(Boolean).join(" · ");
+    }
+    case "p": return pick(mine.pyq?.[b]) ?? ansOf(stepV(a)?.questions?.[b]);
+    case "x": return pick(mine.x?.[b]) ?? pick(stepV(a)?.challenges?.find((c) => c.id === b)?.aha);
+    case "xq": return pick(mine.xq) ?? ansOf(stepV(a)?.questions?.[b]);
+    case "m": case "e": return L(NOTE_ANY[kind]);
   }
-  guideEl.querySelector(".sc-guide-head b").textContent = t("guide");
-  guideEl.querySelector(".sc-guide-head small").textContent = t("guideSub");
-  return guideEl;
+  return null;
 }
-let glog = [];
-function resetGuide() { ggen++; gqueue = []; gbusy = false; glog = []; said = new Set(); if (guideList) put(guideList); guideEl?.classList.remove("open"); }
-function rebuildGuide() { if (guideList && !gbusy && !gqueue.length) put(guideList, glog.map((g) => bubble(g, false))); }
-function bubble(g, anim = true) {
-  return h("div.sc-bub" + (g.pitch ? ".pitch" : "") + (anim ? ".in" : ""), g.text,
-    g.pitch && h("a.sc-bub-join", { href: "#", onclick: () => X.joining("guide") }, t("joinFree")));
+/** Write a line into My notes (once). On a phone, where the paper isn't on screen, a small toast says so. */
+function addNote(k) {
+  const all = X.getA("notes", []) ?? [];
+  if (all.includes(k) || !noteText(k)) return;
+  X.setA("notes", [...all, k]);
+  fillNotes(k);
+  if (chipEl) { chipEl.querySelector("span").textContent = t("notesN", myNotes().length); chipEl.classList.remove("bump"); void chipEl.offsetWidth; chipEl.classList.add("bump"); }
+  if (toastEl && matchMedia("(max-width: 999px)").matches) {
+    toastEl.textContent = t("added"); toastEl.classList.remove("in"); void toastEl.offsetWidth; toastEl.classList.add("in");
+    clearTimeout(toastEl._t); toastEl._t = setTimeout(() => toastEl.classList.remove("in"), 2200);
+  }
 }
-/** Queue the guide's lines for a step (or a named part). Each shows once per visit to the chapter. */
-function say(st, part, extra) {
-  const key = (typeof st === "string" ? st : st.id) + ":" + part;
-  if (said.has(key)) return;
-  said.add(key);
-  const type = typeof st === "string" ? st : st.type;
-  let lines = typeof st === "object" && gl(st.id, part) ? gl(st.id, part) : gl(type, part);
-  if (extra) lines = [extra];
-  if (!lines) return;
-  for (const text of [].concat(lines)) gqueue.push({ text });
-  if (part === "done" && typeof st === "object") { const pitch = gl(type, "pitch"); if (pitch && !X.profile?.()) gqueue.push({ text: pitch, pitch: true }); }
-  pump();
+function notesList(fresh) {
+  const ns = myNotes();
+  return ns.length ? h("ol.sc-notes-list", ns.map((k) => h("li" + (k === fresh ? ".new" : ""), { lang: X.lang() }, noteText(k)))) : h("p.sc-notes-empty", t("notesEmpty"));
 }
-function pump() {
-  if (gbusy || !gqueue.length || !guideList) return;
-  gbusy = true;
-  const g = gqueue.shift(), gen = ggen;
-  const dots = h("div.sc-bub.typing", h("i"), h("i"), h("i"));
-  if (!RM()) guideList.append(dots);
-  const show = () => {
-    dots.remove();
-    if (gen !== ggen) return; // the visitor moved on: this line belonged to the last chapter
-    glog.push(g);
-    guideList.append(bubble(g));
-    while (guideList.children.length > 4) guideList.firstChild.remove();
-    // On phones the dock shows the newest line; keep the list scrolled to it.
-    guideList.scrollTop = guideList.scrollHeight;
-    gbusy = false;
-    later(pump, 900);
-  };
-  if (RM()) show(); else setTimeout(show, 650);
+function notesPanel() {
+  handFont();
+  notesEl = h("aside.sc-notes", { "aria-label": t("notes") });
+  fillNotes();
+  return notesEl;
+}
+function fillNotes(fresh) {
+  if (!notesEl) return;
+  put(notesEl, h("h2.sc-notes-h", t("notes")), notesList(fresh));
+  // The newest line is the one that matters: keep the bottom of the paper in view.
+  const el = notesEl; requestAnimationFrame(() => el.scrollTo?.({ top: el.scrollHeight, behavior: fresh && !RM() ? "smooth" : "auto" }));
+}
+function openNotes() {
+  handFont();
+  track("demo_act", { act: "notes_open" });
+  const dlg = h("dialog.sc-dialog.sc-notes-sheet", { "aria-label": t("notes") },
+    h("div.sc-notes", h("h2.sc-notes-h", t("notes")), notesList()),
+    h("form", { method: "dialog" }, h("button.sc-chip", t("close"))));
+  dlg.addEventListener("close", () => dlg.remove());
+  root.append(dlg); dlg.showModal?.();
 }
 
 // --- Cover -----------------------------------------------------------------------------------------------------------
@@ -454,54 +489,72 @@ function pump() {
 function cover(list) {
   const d = X.data(), c = d.cover ?? {}, p = X.prog();
   const kinds = list.filter((id) => X.stepById(id)?.type !== "finish");
-  const minutes = d.routes.express.minutes ?? 15;
-  const resume = p.showLast != null && p.showLast > 0;
-  if (!said.has("cover:enter")) say("cover", "enter");
-  return h("div.sc-stage",
+  const canShort = hasShort(seq(true)), short = canShort && !!X.getA("route:short");
+  const full = d.routes.express.minutes ?? 15, minutes = short ? SHORT_MIN : full;
+  const resume = p.showLast != null && p.showLast > 0 && p.showLast < list.length;
+  const setShort = (on) => { X.setA("route:short", on || null); const q = X.prog(); q.showLast = null; X.save(q); track("demo_act", { act: on ? "route_short" : "route_full" }); X.redraw(); };
+  const night = B.quiet();
+  return h("div.sc-stage.solo",
     h("section.sc-cover",
-      h("div.sc-kick", h("span.sc-kick-ic", icon("finish", 18)), t("coverKick"), " · ", L(d.short ?? d.title)),
+      h("div.sc-kick", h("span.sc-kick-ic", icon("finish", 18)), h("span", t("coverKick"), " · ", L(d.short ?? d.title))),
       h("h1.sc-hero", { tabindex: "-1" }, L(c.headline ?? d.title)),
       h("p.sc-hero-sub", t("coverSub", kinds.length, minutes)),
-      h("button.sc-go.ready.sc-start", { type: "button", onclick: () => { SFX.whoosh(); track("try_route", { route: "express", demo: 2 }); goShow(resume ? p.showLast : 0); } },
-        h("span", resume ? t("resume") : t("start", minutes)), icon("arrow", 22)),
+      h("div.sc-chotu-hi", kulhad(night ? "night" : "warm", 56), h("p", { lang: X.lang() }, night ? t("chotuNight") : t("chotuHi"))),
+      h("div.sc-row",
+        h("button.sc-go.ready.sc-start", { type: "button", onclick: () => { SFX.whoosh(); track("try_route", { route: short ? "short" : "express", demo: 3 }); goShow(resume ? p.showLast : 0); } },
+          h("span", resume ? t("resume") : t("start", minutes)), icon("arrow", 22))),
+      canShort && h("button.sc-link.sc-short", { type: "button", onclick: () => setShort(!short) }, short ? t("long", full) : t("short", SHORT_MIN)),
       h("div.sc-path", kinds.map((id, i) => { const st = X.view(X.stepById(id)); return h("button.sc-path-step", { type: "button", style: { "--i": i }, onclick: () => goShow(i) },
         h("span.sc-path-ic", icon(st.type, 22)), h("span.sc-path-n", String(i + 1)), h("span", nameOf(st))); })),
       h("p.sc-cover-pitch", L(c.pitch ?? d.promise)),
       h("div.sc-cover-links",
         d.routes.full && h("button.sc-link", { type: "button", onclick: () => X.goFull() }, t("whole", d.routes.full.minutes)),
-        h("a.sc-link", { href: "#try" }, t("allTopics")))),
-    guide());
+        h("a.sc-link", { href: "#try" }, t("allTopics")))));
 }
 
 // --- One question ----------------------------------------------------------------------------------------------------
 // Pick, and the answer shows straight away with its reason. With `sure`, the pick waits for "how sure?", which then
 // reveals: answering first and rating it second is the natural order, and still comes before seeing the key.
 
-function question(q, k, { sure = false, onDone, label } = {}) {
+function question(q, k, { sure = false, onDone, label, retry = null } = {}) {
   const box = h("div.sc-q");
   let pending = null;
+  // With `retry` (the PYQs): a first wrong answer is crossed out and Chotu gives a nudge; the second answer reveals.
+  // The first answer is kept (k:first) and is the one the tally counts.
+  const settle = (i) => {
+    const ok = i === q.answer, first = X.getA(k + ":first");
+    if (!ok && retry && first == null) {
+      X.setA(k + ":first", i); SFX.wrong(); drawQ(true);
+      track("demo_act", { act: "pyq_retry" });
+      B.say(retry(i), { again: true });
+      return;
+    }
+    if (first == null) X.setA(k + ":first", i);
+    X.setA(k + ":pick", i); (ok ? SFX.right : SFX.wrong)(); drawQ(true); showWhy(box); onDone?.(ok);
+  };
   const drawQ = (fresh = false) => {
-    const picked = X.getA(k + ":pick"), done = picked != null;
+    const picked = X.getA(k + ":pick"), done = picked != null, first = X.getA(k + ":first");
+    const crossed = retry && !done && first != null ? first : null, again = crossed != null;
     put(box,
       label && h("div.sc-q-label", label),
       q.source?.label && h("div.sc-q-src", L(q.source.label)),
       h("p.sc-stem", L(q.q)),
       h("div.sc-opts", { role: "group" }, q.options.map((o, i) => {
-        const cls = done ? (i === q.answer ? ".right" : i === picked ? ".wrong" : ".dim") : pending === i ? ".picked" : "";
-        return h("button.sc-opt" + cls + (fresh && done && (i === picked || i === q.answer) ? ".pop" : ""), { type: "button", disabled: done,
+        const cls = done ? (i === q.answer ? ".right" : i === picked || i === first ? ".wrong" : ".dim") : i === crossed ? ".crossed" : pending === i ? ".picked" : "";
+        return h("button.sc-opt" + cls + (fresh && (done ? i === picked || i === q.answer : i === crossed) ? ".pop" : ""), { type: "button", disabled: done || i === crossed,
           onclick: () => {
             SFX.tap();
-            if (sure) { pending = i; drawQ(); box.querySelector(".sc-sure")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" }); return; }
-            X.setA(k + ":pick", i); (i === q.answer ? SFX.right : SFX.wrong)(); drawQ(true); showWhy(box); onDone?.(i === q.answer);
+            if (sure && !again) { pending = i; drawQ(); box.querySelector(".sc-sure")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" }); return; }
+            settle(i);
           } },
           h("span.sc-letter", "ABCD"[i]), h("span.sc-opt-t", L(o)),
-          done && i === q.answer && h("span.sc-flag.ok", icon("check", 18)), done && i === picked && i !== q.answer && h("span.sc-flag.no", icon("x", 18)));
+          done && i === q.answer && h("span.sc-flag.ok", icon("check", 18)), (done ? i === picked && i !== q.answer : i === crossed) && h("span.sc-flag.no", icon("x", 18)));
       })),
-      sure && !done && pending != null && h("div.sc-sure", h("span", t("howSure")),
-        h("div.sc-sure-row", t("sure3").map((lbl, lvl) => h("button.sc-chip", { type: "button", onclick: () => {
-          X.setA(k + ":sure", 2 - lvl); X.setA(k + ":pick", pending); const ok = pending === q.answer; pending = null; (ok ? SFX.right : SFX.wrong)(); drawQ(true); showWhy(box); onDone?.(ok);
-        } }, lbl)))),
-      done && h("div.sc-why" + (picked === q.answer ? ".ok" : ".no"), { role: "status" }, h("b", (picked === q.answer ? t("right") : t("notQuite")) + " "), L(q.why)));
+      again && h("p.sc-again", { role: "status" }, t("notThat")),
+      sure && !done && !again && pending != null && h("div.sc-sure", h("span", t("howSure")),
+        h("div.sc-sure-row", t("sure3").map((lbl, lvl) => h("button.sc-chip", { type: "button", onclick: () => { X.setA(k + ":sure", 2 - lvl); const i = pending; pending = null; settle(i); } }, lbl)))),
+      done && h("div.sc-why" + (picked === q.answer ? ".ok" : ".no"), { role: "status" },
+        h("b", (picked === q.answer ? (first != null && first !== picked ? t("second") : t("right")) : t("notQuite")) + " "), L(q.why)));
   };
   drawQ();
   return box;
@@ -510,7 +563,9 @@ function question(q, k, { sure = false, onDone, label } = {}) {
 function showWhy(box) { requestAnimationFrame(() => box.querySelector(".sc-why")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" })); }
 
 /** Questions one at a time inside a chapter; the big button walks them, then names the next chapter. */
-function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally } = {}) {
+/** Questions one at a time inside a chapter. `onEach(n, ok)` after each answer (notes); `stall` is Chotu's line for an
+ *  unanswered question (a key, or a function giving one or null); `retry` gives the PYQs their second try. */
+function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally, onEach, stall, retry } = {}) {
   const box = h("div");
   const atKey = st.id + ":sc-at";
   const drawR = () => {
@@ -524,8 +579,9 @@ function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally } = {})
     const k = keyOf(at), q = qs[at];
     const answered = () => X.getA(k + ":pick") != null;
     const next = () => { X.setA(atKey, at + 1); drawR(); if (at + 1 < qs.length) X.top(); };
+    nudge = () => { if (answered()) return null; const key = typeof stall === "function" ? stall(at) : stall; return key ? { key } : null; };
     put(box, h("div.sc-dots", qs.map((_, i) => h("i" + (i < at ? ".done" : i === at ? ".on" : "")))),
-      question(q, k, { sure, label: labels?.(at), onDone: () => { updateAct(); if (at + 1 >= qs.length) onAll?.(); } }));
+      question(q, k, { sure, label: labels?.(at), retry: retry && ((i) => retry(at, i)), onDone: (ok) => { onEach?.(at, ok); updateAct(); if (at + 1 >= qs.length) onAll?.(); } }));
     const updateAct = () => {
       const last = at + 1 >= qs.length;
       if (!answered()) return act(t("skip"), next, false);
@@ -538,15 +594,11 @@ function questionRun(st, qs, keyOf, { sure = false, labels, onAll, tally } = {})
   return box;
 }
 
-function flashTour(st) {
-  if (X.prog().show !== barAt) return;
-  FL.start(X, st.id, { onGo: () => { SFX.whoosh(); goShow(barAt + 1); }, onSound: (on) => setSound(on) });
-}
 function markDone(st) {
   X.setA(doneKey(st), true);
   track("demo_act", { step: st.id, act: "done" });
-  if (flash(st)) later(() => flashTour(st), 2400); // a moment to read the last answer, then the light comes on
-  else say(st, "done");
+  B.hush();
+  if (st.id === curSt?.id) paintCoda(st);
   if (barEl) { action = { label: "", run: null, ready: true }; paintBar(); barEl.querySelector(".sc-go")?.classList.add("pulse"); }
 }
 
@@ -555,7 +607,7 @@ function markDone(st) {
 const CH = {
   fallback: (st) => [h("p", L(st.lead))],
 
-  warmup: (st) => questionRun(st, st.questions, (n) => `${st.id}:${n}`),
+  warmup: (st) => questionRun(st, st.questions, (n) => `${st.id}:${n}`, { stall: "warmup", onEach: (n) => addNote("w:" + n) }),
 
   read(st) {
     const box = h("div");
@@ -563,11 +615,12 @@ const CH = {
       const tested = X.getA(st.id + ":tested", false);
       if (!tested || !(st.check ?? []).length) {
         put(box, h("div.sc-reader", L(st.body).split(/\n\n+/).map((p) => h("p", X.rich(p)))), st.chart && X.chart(st.chart), st.remember && h("div.sc-remember", X.rich(L(st.remember))));
-        if ((st.check ?? []).length) act(t("readIt") === "" ? "" : (hi() ? "पढ़ लिया: अब जाँचिए" : "Done reading: test me"), () => { X.setA(st.id + ":tested", true); drawR(); X.top(); }, true);
-        else if (!isDone(st)) markDone(st);
+        nudge = () => ({ key: "read" });
+        if ((st.check ?? []).length) act(hi() ? "पढ़ लिया: अब जाँचिए" : "Done reading: test me", () => { X.setA(st.id + ":tested", true); addNote("r:" + st.id); drawR(); X.top(); }, true);
+        else { addNote("r:" + st.id); if (!isDone(st)) markDone(st); }
         return;
       }
-      put(box, questionRun(st, st.check, (n) => `${st.id}:${n}`));
+      put(box, questionRun(st, st.check, (n) => `${st.id}:${n}`, { stall: "retry" }));
     };
     drawR();
     return box;
@@ -577,6 +630,7 @@ const CH = {
     const v = st.video;
     const qs = st.questions?.some((q) => q.fromVideo) ? st.questions : [VIDEO_Q[st.id], ...(st.questions ?? [])].filter(Boolean);
     const stage = h("div.sc-player");
+    let played = false;
     const showPoster = () => put(stage,
       h("img.sc-player-glow", { src: v.poster, alt: "", "aria-hidden": "true" }),
       h("div.sc-phone",
@@ -586,6 +640,7 @@ const CH = {
         h("div.sc-player-cap", h("div.sc-chips", h("span", `${v.seconds ?? 50} s`), h("span", t("captions")), h("span", t("soundTap"))))));
     const play = () => {
       track("demo_act", { step: st.id, act: "video_play" });
+      played = true; B.hush();
       const el = h("video", { controls: true, playsinline: true, preload: "auto", poster: v.poster, "aria-label": L(v.title) },
         h("source", { src: v.mp4, type: "video/mp4" }), v.vtt && h("track", { kind: "captions", src: v.vtt, srclang: "en", label: "English", default: true }));
       el.addEventListener("ended", () => { track("demo_act", { step: st.id, act: "video_end" }); document.querySelector(".sc-vq")?.classList.add("glow"); }, { once: true });
@@ -600,7 +655,8 @@ const CH = {
     return h("div.sc-video",
       h("div.sc-video-left", stage, transcript),
       h("div.sc-vq", h("h2.sc-h2", t("yourTurn")),
-        questionRun(st, qs, (n) => `${st.id}:${qs[n].fromVideo ? "vq" : n - (qs[0]?.fromVideo ? 1 : 0)}`, { labels: (n) => (qs[n].fromVideo ? t("fromVideo") : t("oneMore")) })));
+        questionRun(st, qs, (n) => `${st.id}:${qs[n].fromVideo ? "vq" : n - (qs[0]?.fromVideo ? 1 : 0)}`, { labels: (n) => (qs[n].fromVideo ? t("fromVideo") : t("oneMore")),
+          stall: () => (played ? null : "video"), onEach: (n) => addNote(`v:${st.id}:${n}`) })));
   },
 
   "sim-governor"(st) {
@@ -624,8 +680,9 @@ const CH = {
           o && h("div.sc-seal" + (o.ok ? ".ok" : ".no") + (stampNow ? ".hit" : ""), h("span", L(o.label)), h("small", o.ok ? t("allowed") : t("notAllowed")))),
         h("p.sc-ask", t("whatDo")),
         h("div.sc-stamps", r.options.map((op, i) => h("button.sc-stampbtn" + (pick == null ? "" : i === pick ? (op.ok ? ".ok" : ".no") : ".dim"), { type: "button", disabled: pick != null,
-          onclick: () => { X.setA(`${st.id}:${at}`, i); SFX.stamp(); later(() => (op.ok ? SFX.right : SFX.wrong)(), 260); drawG(true); } }, L(op.label)))),
+          onclick: () => { X.setA(`${st.id}:${at}`, i); SFX.stamp(); later(() => (op.ok ? SFX.right : SFX.wrong)(), 260); addNote("g:" + at); drawG(true); } }, L(op.label)))),
         o && h("div.sc-why" + (o.ok ? ".ok" : ".no"), { role: "status" }, h("b", (o.ok ? t("right") : t("notQuite")) + " "), L(o.result), r.law && h("div.sc-law", L(r.law))));
+      nudge = () => (X.getA(`${st.id}:${at}`) == null ? { key: "governor" } : null);
       if (pick == null) act(t("skip"), () => { X.setA(st.id + ":at", at + 1); drawG(); }, false);
       else if (at + 1 < st.rounds.length) act(t("nextBill"), () => { X.setA(st.id + ":at", at + 1); drawG(); X.top(); }, true);
       else act(hi() ? "डेस्क समेटिए" : "Close the file", () => { X.setA(st.id + ":at", at + 1); drawG(); X.top(); }, true);
@@ -690,7 +747,8 @@ const CH = {
         })),
         checked && h("div.sc-why" + (wrong.length ? ".no" : ".ok"), { role: "status" }, wrong.length ? t("sortedSome", wrong.length) : t("sortedAll"),
           wrong.length > 0 && h("button.sc-chip", { type: "button", style: { marginLeft: "10px" }, onclick: () => { wrong.forEach(([i]) => delete pl[i]); X.setA(K + ":place", pl); X.setA(K + ":checked", false); drawS(); } }, t("tryWrong"))));
-      if (checked) { if (!isDone(st)) markDone(st); act("", null); }
+      nudge = () => (X.getA(K + ":checked") ? null : { key: "sort" });
+      if (checked) { addNote("s:" + st.id); if (!isDone(st)) markDone(st); act("", null); }
       else if (!left.length) act(t("check"), () => { X.setA(K + ":checked", true); const bad = items.filter(([i, it]) => X.getA(K + ":place", {})[i] !== it.bucket).length; (bad ? SFX.wrong : SFX.win)(); if (!bad) burst(box); track("demo_act", { step: st.id, act: "sort_check", wrong: bad }); drawS(); }, true);
       else act(t("skip"), () => goShow(barAt + 1), false);
     };
@@ -700,8 +758,11 @@ const CH = {
 
   pyq(st) {
     const qs = (st.only ?? st.questions.map((_, i) => i)).map((i) => [i, st.questions[i]]);
-    return questionRun(st, qs.map(([, q]) => q), (n) => `${st.id}:${qs[n][0]}`, { sure: true, tally: () => {
-      const res = qs.map(([i, q]) => ({ pick: X.getA(`${st.id}:${i}:pick`), sure: X.getA(`${st.id}:${i}:sure`), ans: q.answer })).filter((r) => r.pick != null);
+    // A nudge of its own for each Federalism PYQ after a first miss (buddy.js "pyq-<n>"); elsewhere the general one.
+    const own = X.id() === "path-pol-federalism";
+    return questionRun(st, qs.map(([, q]) => q), (n) => `${st.id}:${qs[n][0]}`, { sure: true, stall: "pyq",
+      retry: (n) => (own && qs[n][0] <= 2 ? `pyq-${qs[n][0]}` : "retry"), onEach: (n) => addNote(`p:${st.id}:${qs[n][0]}`), tally: () => {
+      const res = qs.map(([i, q]) => ({ pick: X.getA(`${st.id}:${i}:first`) ?? X.getA(`${st.id}:${i}:pick`), sure: X.getA(`${st.id}:${i}:sure`), ans: q.answer })).filter((r) => r.pick != null);
       const right = res.filter((r) => r.pick === r.ans).length;
       const sw = res.filter((r) => r.sure === 2 && r.pick !== r.ans).length, gr = res.filter((r) => r.sure === 0 && r.pick === r.ans).length;
       const n = h("span.sc-big");
@@ -731,6 +792,7 @@ function gstChamber(st) {
   seats.sort((a, b) => Math.atan2(160 - a[1], a[0] - 170) - Math.atan2(160 - b[1], b[0] - 170)).reverse();
   const box = h("div.sc-gst");
   let lastPass = null;
+  const stalls = {};
   const state = () => X.getA(K, { centre: true, yes: Array.from({ length: total }, (_, i) => i < 18) });
   const set = (s) => { X.setA(K, s); drawC(); };
   const drawC = () => {
@@ -740,7 +802,7 @@ function gstChamber(st) {
     const hits = { veto: !s.centre && yes === total, fewest: s.centre && pass && yes === Math.ceil(0.625 * total - 1e-9), block: s.centre && !pass && yes === Math.ceil(0.625 * total - 1e-9) - 1 };
     let fresh = null;
     for (const [k, v] of Object.entries(hits)) if (v && !found[k]) { found[k] = true; fresh = k; }
-    if (fresh) { X.setA(st.id + ":found", found); SFX.win(); track("demo_act", { step: st.id, act: "gst_" + fresh }); }
+    if (fresh) { X.setA(st.id + ":found", found); SFX.win(); track("demo_act", { step: st.id, act: "gst_" + fresh }); B.hush(); addNote(`x:${st.id}:${fresh}`); }
     const flipped = lastPass != null && lastPass !== pass; lastPass = pass;
     if (flipped) SFX.stamp();
     const map = svg("svg", { viewBox: "0 0 340 200", class: "sc-chamber", role: "img", "aria-label": `${yes} of ${total} states yes, Centre ${s.centre ? "yes" : "no"}` },
@@ -768,11 +830,22 @@ function gstChamber(st) {
       h("div.sc-finds", st.challenges.map((c) => h("div.sc-find" + (found[c.id] ? ".got" : "") + (fresh === c.id ? ".new" : ""),
         h("span.sc-find-ic", icon(found[c.id] ? "finish" : "pyq", 20)), h("div", h("b", L(c.ask)), found[c.id] && h("p", L(c.aha)))))),
       Object.keys(found).length >= st.challenges.length && [h("div.sc-why.ok", h("b", L(st.ahaTitle) + " "), L(st.aha)),
-        (st.questions ?? []).map((q, n) => question(q, `${st.id}:q${n}`, { label: t("lastQ"), onDone: () => { if (!isDone(st)) markDone(st); } }))]);
+        (st.questions ?? []).map((q, n) => question(q, `${st.id}:q${n}`, { label: t("lastQ"), onDone: () => { addNote(`xq:${st.id}:${n}`); if (!isDone(st)) markDone(st); } }))]);
     if (fresh) burst(box.querySelector(".sc-find.new"));
     const allFound = Object.keys(found).length >= st.challenges.length;
     if (allFound && !(st.questions ?? []).length && !isDone(st)) markDone(st);
-    if (isDone(st) && flash(st) && FL.seen(st.id)) box.append(FL.againButton(() => flashTour(st)));
+    // Chotu's nudges walk the three findings in order. If the same nudge comes round again, it carries a "Show me"
+    // that sets the seats for that finding (the visitor still reads the meter and the finding themselves).
+    const SHOW = { veto: () => ({ centre: false, yes: s.yes.map(() => true) }), fewest: () => ({ centre: true, yes: s.yes.map((_, i) => i < 20) }),
+      block: () => ({ centre: true, yes: s.yes.map((_, i) => i < 19) }) };
+    nudge = () => {
+      const f = X.getA(st.id + ":found", {}), now = state();
+      const next = ["veto", "fewest", "block"].find((k) => !f[k]);
+      if (!next) return X.getA(`${st.id}:q0:pick`) == null && (st.questions ?? []).length ? { key: "gst-last" } : null;
+      const key = next === "veto" ? (now.centre ? "gst-start" : "gst-all") : next === "fewest" ? "gst-close" : "gst-flip";
+      const n = (stalls[key] = (stalls[key] ?? 0) + 1);
+      return n < 2 ? { key } : { key, again: true, action: { label: B.showMe(), run: () => { track("demo_act", { step: st.id, act: "gst_show_" + next }); X.setA(K, SHOW[next]()); drawC(); } } };
+    };
     if (!isDone(st)) act(t("skip"), () => goShow(barAt + 1), false); else act("", null);
   };
   drawC();
@@ -792,7 +865,7 @@ function mainsBuild(st) {
     const other = st.questions.find((x) => x.id !== q.id);
     const own = X.getA("mains:own", false);
     // Each line arrives with its reason beside it: the side comment the guide would otherwise say out of sync.
-    const why = (k) => gl("mainsBuild", k);
+    const why = (k) => mb(k);
     const board = h("ol.sc-plan", lines.slice(0, built).map(([k, tag, text], i) => h("li.sc-plan-li." + (k === "trap" ? "trap" : k === "way" ? "way" : "pt") + (i === built - 1 ? ".new" : ""),
       h("span.sc-plan-tag", tag), h("div.sc-plan-body", h("span", text), why(k) && h("small.sc-plan-why", icon("warmup", 14), why(k))))));
     const pair = st.conclusions?.pairs?.[0];
@@ -820,8 +893,10 @@ function mainsBuild(st) {
       X.setA("mains:built:" + q.id, n + 1); SFX.flip();
       drawM();
       box.querySelector(n + 1 >= lines.length && pair ? ".sc-concl" : ".sc-plan-li.new")?.scrollIntoView?.({ block: "nearest", behavior: RM() ? "auto" : "smooth" });
-      if (n + 1 < lines.length) later(step, 2600); else if (!pair && !isDone(st)) markDone(st);
+      if (n + 1 < lines.length) later(step, 2600); else { addNote("m"); if (!pair && !isDone(st)) markDone(st); }
     };
+    nudge = () => { const b = X.getA("mains:built:" + q.id, 0); return b === 0 ? { key: "mains" } : b >= lines.length && pair && X.getA("mains:concl:0") == null ? { key: "ending" } : null; };
+    if (built >= lines.length) addNote("m");
     if (built === 0) act(t("build"), () => { track("demo_act", { step: st.id, act: "mains_build" }); act(t("building"), () => {}, false); step(); }, true);
     else if (built < lines.length) act(t("building"), () => { clearTimers(); while (X.getA("mains:built:" + q.id, 0) < lines.length) { const n = X.getA("mains:built:" + q.id, 0); X.setA("mains:built:" + q.id, n + 1); } drawM(); }, false);
     else if (pair && X.getA("mains:concl:0") == null) act(t("skip"), () => goShow(barAt + 1), false);
@@ -858,6 +933,7 @@ function essayDesk(st) {
       h("button.sc-snap.how" + (lvl === n ? ".on" : ""), { type: "button", style: { "--r": "4deg" }, onclick: () => { X.setA(st.id + ":lvl", n); drawE(); } }, h("span.sc-snap-cam", icon("camera", 34)), h("span.sc-snap-l", h("b", "?"), t("howMarked"))));
     const topic = h("div.sc-essay-topic", h("small", L(st.topicLabel)), h("b", L(st.topic)));
     if (lvl === n) {
+      addNote("e");
       put(box, topic, trophies, howMarking(st));
       if (!isDone(st)) markDone(st);
       act("", null);
@@ -884,7 +960,8 @@ function howMarking(st) {
       h("div.sc-how-step.s1", h("div.sc-how-art", paper(sample, 0, { mini: true }), h("span.sc-flash")), h("b", h("span.sc-how-n", "1"), t("snap1"))),
       h("div.sc-how-step.s2", h("div.sc-how-art", paper(sample, 0, { mini: true }), h("span.sc-scan")), h("b", h("span.sc-how-n", "2"), t("snap2"))),
       h("div.sc-how-step.s3", h("div.sc-how-art", paper(sample, sample.notes.length)), h("b", h("span.sc-how-n", "3"), t("snap3")))),
-    h("p", t("snapHow")));
+    h("p", t("snapHow")),
+    h("div.sc-plusline", h("span.sc-plus-tag", t("plus")), h("p", t("plusLine"))));
 }
 
 // --- Keep it: the start's guesses come back, then the cards; then where each card goes in time ------------------------
@@ -903,6 +980,7 @@ function keepIt(st) {
       const label = it.warm ? t("remember") : t("card", at - warm.length + 1, cards.length);
       put(box, h("div.sc-dots", items.map((_, i) => h("i" + (i < at ? ".done" : i === at ? ".on" : "")))),
         h("div.sc-flipcard" + (RM() ? "" : ".flip-in"), { key: at }, question(it.q, it.k, { label, onDone: (ok) => { if (it.card) X.grade(it.card, ok); upd(); } })));
+      nudge = () => (answered() ? null : { key: "keep" });
       const upd = () => answered() ? act(at + 1 < items.length ? t("nextCard") : t("saveCards"), at + 1 < items.length ? next : () => { X.setA("keep:at", items.length); drawK(); X.top(); }, true) : act(t("skip"), next, false);
       upd();
       return;
@@ -927,37 +1005,24 @@ function keepIt(st) {
   return box;
 }
 
-// --- The finale: trophies, then what's inside, then the plans and one button -----------------------------------------
+// --- The finale: the visitor's own notes page, then one join button and the two plans ------------------------------
 
 function finale(st) {
-  const list = seq().filter((id) => id !== st.id);
-  const statOf = (s) => {
-    const v = X.view(s), S = W[X.lang()]?.stat ?? W.en.stat, f = S[s.type];
-    if (s.type === "sort") { const pl = X.getA(s.id + ":place", {}); const its = (v.only ?? v.items.map((_, i) => i)); return f(its.filter((i) => pl[i] === v.items[i].bucket).length, its.length); }
-    if (s.type === "pyq") { const its = (v.only ?? v.questions.map((_, i) => i)); return f(its.filter((i) => X.getA(`${s.id}:${i}:pick`) === v.questions[i].answer).length, its.length); }
-    if (s.type === "sim-gst") return f(Object.keys(X.getA(s.id + ":found", {})).length);
-    if (s.type === "keep") return f(X.getA("keep:done")?.n ?? 0);
-    return typeof f === "function" ? f() : f ?? "";
-  };
-  const shelf = h("div.sc-shelf", list.map((id, i) => {
-    const s = X.view(X.stepById(id)), got = isDone(s);
-    return h("button.sc-trophy" + (got ? ".got" : ""), { type: "button", style: { "--i": i }, onclick: () => !got && goShow(i) },
-      h("span.sc-medal", icon(s.type, 24)), h("b", nameOf(s)), h("small", got ? statOf(s) : t("skipped") + " · " + t("goBack")));
-  }));
-  later(() => { SFX.win(); burst(shelf); }, 500);
-  const nums = h("div.sc-nums", t("nums").map(([n, l]) => { const el = h("b"); const m = /^([\d,]+)(\+?)$/.exec(n); if (m) countUp(el, Number(m[1].replace(/,/g, "")), m[2]); else el.textContent = n; return h("div.sc-num", el, h("span", l)); }));
+  const list = seq();
+  const skipped = list.map((id, i) => [i, X.view(X.stepById(id))]).filter(([, s]) => s.type !== "finish" && !isDone(s));
   const n = X.cardsHere();
+  handFont();
   return [
-    h("p.sc-sub", t("finLead")),
-    shelf, h("p.sc-private", t("privateNote")),
-    h("h2.sc-h2.center", t("oneTopic"), " ", h("span.sc-gold", t("inApp"))),
-    nums,
-    h("h3.sc-h3", t("alsoIn")),
-    h("div.sc-apps", t("app").map(([name, line], i) => h("div.sc-app", { style: { "--i": i } }, h("b", name), h("p", line)))),
-    h("h2.sc-h2.center", t("plans")),
-    h("div.sc-plans",
-      h("div.sc-planc", h("div.sc-plan-name", t("free")), h("div.sc-price", "₹0"), h("ul.sc-ticks", t("freeList").map((x) => h("li", icon("check", 16), x))),
-        h("a.sc-go.ready.wide", { href: "#", onclick: () => X.joining("plans") }, t("joinKeep", n), icon("arrow", 20)), h("small", t("noCard"))),
+    h("p.sc-sub", t("finLead2")),
+    h("div.sc-notes.page", notesList()),
+    skipped.length > 0 && h("p.sc-skipped", h("span", t("skippedSome")), skipped.map(([i, s]) => h("button.sc-link", { type: "button", onclick: () => goShow(i) }, nameOf(s)))),
+    n > 0 && h("p.sc-saved", t("saved", n)),
+    h("h2.sc-h2", t("keepGoing")),
+    h("a.sc-go.ready.sc-join-big", { href: "#", onclick: () => X.joining("finish") }, h("span", t("joinKeep", n)), icon("arrow", 20)),
+    h("p.sc-nocard", t("noCard")),
+    h("p.sc-pod", t("podLine")),
+    h("div.sc-plans.compact",
+      h("div.sc-planc", h("div.sc-plan-name", t("free")), h("div.sc-price", "₹0"), h("ul.sc-ticks", t("freeList").map((x) => h("li", icon("check", 16), x)))),
       h("div.sc-planc.plus", h("div.sc-plan-name", t("plus")), h("div.sc-price", "₹3,999", h("small", t("perYear"))), h("div.sc-perday", t("perDay")),
         h("ul.sc-ticks", t("plusList").map((x) => h("li", icon("check", 16), x))), h("small", t("plusNote")))),
     X.day3Box("finish"),
@@ -972,7 +1037,7 @@ function css() {
   document.head.append(h("style", { id: "sc-css" }, `
 .sc-on main { max-width: 1240px; padding-top: 0; }
 html.sc-on { scroll-padding: 80px 0 120px; }
-@media (max-width: 999px) { html.sc-on { scroll-padding-bottom: 210px; } }
+@media (max-width: 999px) { html.sc-on { scroll-padding-bottom: 130px; } }
 .sc-root { --sc-bg: #070A18; --sc-card: #121836; --sc-card2: #19204A; --sc-line: #2A3366; --sc-ink: #F2EFF9; --sc-muted: #A8AED0;
   --sc-sun: #F0A04B; --sc-gold: #FFC66B; --sc-ok: #5DD39E; --sc-bad: #FF7A6B; --sc-on-sun: #1B1205;
   max-width: 1200px !important; color: var(--sc-ink); padding-bottom: 130px; position: relative; color-scheme: dark; }
@@ -1000,7 +1065,7 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 .sc-root .try-lang .chip[aria-pressed="true"] { background: #ffffff18; border-color: var(--sc-gold); }
 .sc-join-pill { background: var(--sc-sun); color: var(--sc-on-sun); font-weight: 700; text-decoration: none; padding: 9px 16px; border-radius: 99px; white-space: nowrap; font-size: 14px; }
 /* stage */
-.sc-stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 32px; align-items: start; }
+.sc-stage { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 32px; align-items: start; } .sc-stage.solo { grid-template-columns: minmax(0, 1fr); }
 .sc-main { min-width: 0; }
 .sc-head { margin-bottom: 18px; }
 .sc-kick { display: flex; align-items: center; gap: 8px; color: var(--sc-gold); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
@@ -1018,28 +1083,59 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 .sc-chips span.hot { background: #F0A04B2e; color: var(--sc-gold); font-weight: 700; }
 /* bottom bar */
 .sc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #070A18e8; backdrop-filter: blur(12px); border-top: 1px solid #ffffff16; }
-.sc-bar-in { max-width: 1200px; margin: 0 auto; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sc-bar-in { position: relative; max-width: 1200px; margin: 0 auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sc-bar-r { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .sc-back { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid #ffffff26; min-height: 48px; padding: 0 16px; border-radius: 99px; }
 .sc-go { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 99px; font-weight: 800; font-size: 16.5px;
-  border: 1px solid #ffffff30; background: #ffffff10; color: var(--sc-ink); text-decoration: none; max-width: 70vw; transition: transform .15s, box-shadow .3s; }
+  border: 1px solid #ffffff30; background: #ffffff10; color: var(--sc-ink); text-decoration: none; max-width: 70vw; min-width: 0; transition: transform .15s, box-shadow .3s; }
 .sc-go span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sc-go.ready { background: linear-gradient(135deg, #FFC66B, #F0A04B 55%, #E07B2A); color: var(--sc-on-sun); border-color: transparent; box-shadow: 0 8px 30px -8px #F0A04Bb0; }
 .sc-go.ready:hover { transform: translateY(-1px); }
 .sc-go.pulse { animation: sc-pulse 1.6s ease-out 2; }
 .sc-go.wide { width: 100%; max-width: none; }
-/* guide */
-.sc-guide { position: sticky; top: 84px; background: linear-gradient(180deg, #19204Af0, #121836f0); border: 1px solid var(--sc-line); border-radius: 20px; padding: 14px; box-shadow: 0 20px 50px -30px #000; }
-.sc-guide-head { display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 0 0 10px; min-height: 0; width: 100%; text-align: left; cursor: default; }
-.sc-guide-head b { display: block; font-size: 15px; } .sc-guide-head small { color: var(--sc-muted); font-size: 12.5px; }
-.sc-guide-av { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #FFC66B33, #F0A04B14); border: 1px solid #F0A04B66; display: grid; place-items: center; animation: sc-bob 3s ease-in-out infinite; }
-.sc-guide-av svg { width: 26px; height: 26px; }
-.sc-bubbles { display: grid; gap: 8px; max-height: calc(100vh - 230px); overflow-y: auto; }
-.sc-bub { background: #ffffff0d; border: 1px solid #ffffff17; border-radius: 16px 16px 16px 4px; padding: 10px 12px; font-size: 14.5px; line-height: 1.45; }
-.sc-bub.in { animation: sc-pop .38s cubic-bezier(.2,1.4,.4,1) both; }
-.sc-bub.pitch { border-color: #FFC66B88; background: linear-gradient(135deg, #F0A04B24, #ffffff08); }
-.sc-bub-join { display: block; margin-top: 6px; color: var(--sc-gold); font-weight: 700; text-decoration: none; }
-.sc-bub.typing { display: flex; gap: 4px; width: 56px; padding: 12px; } .sc-bub.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--sc-muted); animation: sc-dot 1s infinite; }
-.sc-bub.typing i:nth-child(2) { animation-delay: .15s; } .sc-bub.typing i:nth-child(3) { animation-delay: .3s; }
+/* Chotu's corner sits in the bar (buddy.js styles the cup and bubble); here, where the bubble goes */
+.sc-bar .bd-corner { position: static; }
+.sc-bar .bd-bub { left: 16px; bottom: calc(100% + 8px); }
+.sc-toast { position: absolute; right: 16px; bottom: calc(100% + 8px); background: #FBF5E8; color: #2A1B12; font-family: "Kalam", cursive; font-size: 16px; padding: 6px 14px; border-radius: 99px;
+  box-shadow: 0 10px 30px -10px #000; opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s; pointer-events: none; }
+.sc-toast.in { opacity: 1; transform: none; }
+/* My notes: a sheet of paper beside the work, in handwriting */
+.sc-notes { position: sticky; top: 84px; background: #FBF5E8; color: #2A1B12; border-radius: 6px; padding: 16px 18px 18px 40px; box-shadow: 0 24px 50px -28px #000, 0 0 0 1px #e8dcc0;
+  background-image: linear-gradient(to right, transparent 26px, #f2b8b8 26px, #f2b8b8 27px, transparent 27px); max-height: calc(100vh - 210px); overflow-y: auto; transform: rotate(.6deg); }
+.sc-notes-h { font-family: "Kalam", cursive; font-weight: 700; font-size: 24px; margin: 0 0 6px; color: #2A1B12 !important; }
+.sc-notes-list { margin: 0; padding: 0 0 0 18px; display: grid; gap: 8px; }
+.sc-notes-list li { font-family: "Kalam", "Segoe Print", cursive; font-size: 17px; line-height: 1.4; color: #1f2a44; padding-left: 2px; }
+.sc-notes-list li[lang=hi] { font-family: "Kalam", "Noto Sans Devanagari", sans-serif; }
+.sc-notes-list li::marker { color: #B5562B; font-weight: 700; }
+.sc-notes-list li.new { animation: sc-ink .9s both; background: linear-gradient(transparent 62%, #FFD98A99 62%); }
+.sc-notes-empty { font-family: "Kalam", cursive; font-size: 17px; color: #7a6a52; margin: 4px 0 0; }
+.sc-notes.page { position: static; transform: none; max-height: none; margin: 18px 0 14px; padding: 22px 24px 24px 52px; background-image: linear-gradient(to right, transparent 36px, #f2b8b8 36px, #f2b8b8 37px, transparent 37px), repeating-linear-gradient(#FBF5E8 0 33px, #e3d9c4 33px 34px); }
+.sc-notes.page .sc-notes-list li { font-size: 19px; line-height: 34px; }
+.sc-notes-chip { display: none; margin-left: auto; align-items: center; gap: 6px; min-height: 34px; padding: 0 12px; border-radius: 99px; border: 1px solid #FBF5E866; background: #FBF5E814; color: #FBF5E8;
+  font-size: 13px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.sc-notes-chip.bump { animation: sc-pop .5s; }
+.sc-kick > span:first-of-type + span { min-width: 0; }
+.sc-notes-sheet { width: min(560px, calc(100vw - 24px)); max-height: 80vh; background: transparent; border: 0; padding: 0; }
+.sc-notes-sheet .sc-notes { position: static; max-height: 66vh; transform: none; }
+.sc-notes-sheet form { text-align: right; margin-top: 10px; }
+/* the closing line under a finished chapter */
+.sc-coda { display: none; font-family: Georgia, "Noto Serif Devanagari", serif; font-style: italic; font-size: 21px; line-height: 1.45; color: var(--sc-gold); margin: 26px 0 0; padding-top: 16px; border-top: 1px solid #ffffff1a; max-width: 52ch; }
+.sc-coda.on { display: block; } .sc-coda.in { animation: sc-rise .8s .3s both; }
+/* cover: Chotu says hello */
+.sc-chotu-hi { display: flex; gap: 14px; align-items: center; max-width: 620px; margin: 0 0 20px; animation: sc-rise .6s .15s both; }
+.sc-chotu-hi svg { flex: none; } .sc-chotu-hi p { margin: 0; background: #FBF5E8; color: #2A1B12; border-radius: 16px 16px 16px 4px; padding: 12px 14px; font-size: 16px; line-height: 1.5; }
+.sc-short { display: block; margin-top: 10px; text-align: left; }
+/* PYQ second try */
+.sc-opt.crossed { opacity: .55; text-decoration: line-through; text-decoration-color: var(--sc-bad); border-color: #FF7A6B55; }
+.sc-again { color: var(--sc-gold); font-weight: 700; margin: 10px 0 0; }
+/* marking desk: the Plus line */
+.sc-plusline { display: flex; gap: 12px; align-items: flex-start; margin-top: 6px; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, #9F7BFF22, #ffffff06); border: 1px solid #9F7BFF77; }
+.sc-plusline p { margin: 0; } .sc-plus-tag { flex: none; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #C7B5FF; font-size: 13px; padding-top: 2px; }
+/* finish */
+.sc-skipped { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; color: var(--sc-muted); margin: 0 0 8px; }
+.sc-join-big { width: 100%; max-width: 520px; min-height: 60px; font-size: 18px; }
+.sc-nocard { color: var(--sc-muted); font-size: 14px; margin: 8px 0 0; } .sc-pod { font-size: 16.5px; line-height: 1.55; max-width: 62ch; margin: 18px 0; }
+.sc-plans.compact .sc-planc { padding: 16px 18px; gap: 8px; } .sc-plans.compact .sc-price { font-size: 32px; }
 /* questions */
 .sc-dots { display: flex; gap: 6px; margin: 0 0 12px; } .sc-dots i { width: 26px; height: 5px; border-radius: 99px; background: #ffffff1f; }
 .sc-dots i.done { background: var(--sc-sun); } .sc-dots i.on { background: var(--sc-gold); }
@@ -1217,20 +1313,6 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 .sc-mini-card.ok .sc-ic { color: var(--sc-ok); } .sc-mini-card.no .sc-ic { color: var(--sc-bad); }
 .sc-saved { margin-top: 14px; font-size: 16px; }
 /* finale */
-.sc-shelf { position: relative; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 20px 0 6px; }
-.sc-trophy { display: grid; justify-items: center; gap: 6px; text-align: center; padding: 16px 10px; border-radius: 18px; background: #ffffff08; border: 1px solid #ffffff16; min-height: 0; animation: sc-pop .5s calc(var(--i) * .08s) both; }
-.sc-trophy b { font-size: 14px; line-height: 1.25; } .sc-trophy small { color: var(--sc-muted); font-size: 12.5px; }
-.sc-medal { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #ffffff12; color: var(--sc-muted); }
-.sc-trophy.got { background: linear-gradient(160deg, #FFC66B1f, #ffffff06); border-color: #FFC66B66; cursor: default; }
-.sc-trophy.got .sc-medal { background: radial-gradient(circle at 35% 30%, #FFE3A3, #F0A04B 60%, #B8661F); color: #3a1d05; box-shadow: 0 0 24px -4px #F0A04B; }
-.sc-trophy.got small { color: var(--sc-gold); }
-.sc-private { color: var(--sc-muted); font-size: 13px; margin: 0; }
-.sc-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-.sc-num { text-align: center; padding: 18px 10px; border-radius: 18px; background: var(--sc-card); border: 1px solid var(--sc-line); }
-.sc-num b { display: block; font-family: var(--head-font); font-size: 36px; color: var(--sc-gold); font-variant-numeric: tabular-nums; } .sc-num span { color: var(--sc-muted); font-size: 14px; }
-.sc-apps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-.sc-app { padding: 14px 16px; border-radius: 18px; background: var(--sc-card); border: 1px solid var(--sc-line); animation: sc-rise .45s calc(var(--i) * .07s) both; }
-.sc-app b { color: var(--sc-gold); font-size: 16px; } .sc-app p { margin: 6px 0 0; color: var(--sc-ink); line-height: 1.45; font-size: 14.5px; }
 .sc-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 18px; }
 .sc-planc { display: grid; gap: 10px; align-content: start; padding: 20px; border-radius: 22px; background: var(--sc-card); border: 2px solid var(--sc-sun); }
 .sc-planc.plus { border-color: #9F7BFF; background: linear-gradient(160deg, #9F7BFF1c, var(--sc-card)); }
@@ -1256,15 +1338,13 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 /* sparks */
 .sc-burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; z-index: 5; }
 .sc-burst i { position: absolute; width: 8px; height: 8px; border-radius: 2px; background: var(--c); animation: sc-spark .9s ease-out forwards; }
-.sc-find, .sc-sort, .sc-shelf { position: relative; }
+.sc-find, .sc-sort { position: relative; }
 /* motion */
 @keyframes sc-rise { from { opacity: 0; transform: translateY(12px); } }
 @keyframes sc-pop { 0% { opacity: 0; transform: scale(.85); } 70% { transform: scale(1.03); } }
 @keyframes sc-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 @keyframes sc-pulse { 0% { box-shadow: 0 0 0 0 #F0A04Bcc; } 100% { box-shadow: 0 0 0 18px #F0A04B00; } }
 @keyframes sc-ring { from { transform: scale(.9); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
-@keyframes sc-bob { 50% { transform: translateY(-3px) rotate(-3deg); } }
-@keyframes sc-dot { 50% { opacity: .3; transform: translateY(-3px); } }
 @keyframes sc-stamp { 0% { opacity: 0; transform: rotate(-12deg) scale(2.4); } 60% { opacity: 1; transform: rotate(-12deg) scale(.92); } 100% { transform: rotate(-12deg) scale(1); } }
 .sc-stampmark.hit { animation-name: sc-stamp2; } @keyframes sc-stamp2 { 0% { opacity: 0; transform: rotate(10deg) scale(2.4); } 60% { opacity: 1; transform: rotate(10deg) scale(.92); } 100% { transform: rotate(10deg) scale(1); } }
 @keyframes sc-slide { from { opacity: 0; transform: translateX(40px) rotate(2deg); } }
@@ -1280,12 +1360,9 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 /* phones and small laptops */
 @media (max-width: 999px) {
   .sc-stage { grid-template-columns: minmax(0, 1fr); }
-  .sc-root { padding-bottom: 210px; }
-  .sc-guide { position: fixed; left: 10px; right: 10px; top: auto; bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 25; padding: 8px 10px; border-radius: 16px; box-shadow: 0 -10px 40px -10px #000; background: #1A2150; }
-  .sc-bubbles { scrollbar-width: none; } .sc-guide .sc-bub { background: transparent; border: 0; padding: 2px 4px; }
-  .sc-guide-head { padding: 0 0 6px; cursor: pointer; } .sc-guide-av { width: 30px; height: 30px; } .sc-guide-av svg { width: 20px; height: 20px; } .sc-guide-head small { display: none; }
-  .sc-bubbles { max-height: 4.6em; } .sc-guide:not(.open) .sc-bub:not(:last-child) { display: none; } .sc-guide.open .sc-bubbles { max-height: 46vh; }
-  .sc-bub { font-size: 14px; padding: 8px 10px; }
+  .sc-root { padding-bottom: 120px; }
+  .sc-notes:not(.page) { display: none; } .sc-notes-chip { display: inline-flex; }
+  .sc-sheet .sc-notes, .sc-notes-sheet .sc-notes { display: block; }
   .sc-video { grid-template-columns: minmax(0, 1fr); } .sc-player { max-width: 260px; margin: 0 auto; }
   .sc-gst-grid, .sc-essay-stage { grid-template-columns: minmax(0, 1fr); }
 }
@@ -1297,8 +1374,9 @@ html.sc-on { scroll-padding: 80px 0 120px; }
   .sc-tray .sc-tile { font-size: 14px; padding: 7px 11px; min-height: 38px; } .sc-tray-head span { font-size: 13px; }
   .sc-sort:not(.checked) .sc-drop { min-height: 90px; font-size: 12px; text-align: center; } .sc-rail-label { font-size: 12px; }
   .sc-join-pill { padding: 8px 12px; font-size: 13px; }
-  .sc-back span { display: none; } .sc-back { padding: 0 14px; }
-  .sc-go { font-size: 15px; padding: 0 16px; max-width: 76vw; }
+  .sc-back span { display: none; } .sc-back { padding: 0 12px; } .sc-bar-in { gap: 8px; padding-left: 10px; padding-right: 10px; } .sc-bar-r { gap: 8px; }
+  .sc-bar .bd-bub { left: 10px; } .sc-coda { font-size: 19px; } .sc-chotu-hi p { font-size: 15px; }
+  .sc-go { font-size: 15px; padding: 0 14px; max-width: none; }
   .sc-snaps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sc-how-steps { grid-template-columns: minmax(0, 1fr); }
   .sc-stem { font-size: 17px; } .sc-opt { font-size: 15px; }
