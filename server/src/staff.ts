@@ -214,15 +214,18 @@ export async function bump(env: Env, metric: string, n = 1) {
 
 // --- Schema ---------------------------------------------------------------------------------
 
-let schemaReady: Promise<void> | null = null;
+// Only the result is kept across requests, never a promise: a promise made by one request can't settle in another
+// (the runtime drops it), so one cancelled first request used to wedge every later one (21 Nov 2026).
+let schemaDone = false;
 
 /** Creates the admin tables on first use, so an existing local database upgrades itself. Same SQL as schema.sql. */
 export function ensureSchema(env: Env): Promise<void> {
-  schemaReady ??= (async () => {
+  if (schemaDone) return Promise.resolve();
+  return (async () => {
     await env.DB.batch(ADMIN_SCHEMA.map((s) => env.DB.prepare(s)));
     for (const alter of ALTERS) await env.DB.prepare(alter).run().catch(() => {}); // already there
-  })().catch((e) => { schemaReady = null; throw e; });
-  return schemaReady;
+    schemaDone = true;
+  })();
 }
 
 export const ADMIN_SCHEMA = [

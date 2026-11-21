@@ -23,18 +23,18 @@ const SAFE_REL = /^(?!.*\.\.)[\w.-]+(\/[\w.-]+)*$/;
 
 const KEY_HOURS = 6;
 const enc = new TextEncoder();
-let mediaKey: Promise<CryptoKey> | null = null;
+let mediaKey: CryptoKey | null = null; // the key itself, never a promise shared across requests
 /** A random 32-byte key made on first use and kept in D1 (never sent anywhere), like the session key (password.ts). */
 function caKey(env: Env): Promise<CryptoKey> {
-  mediaKey ??= (async () => {
+  if (mediaKey) return Promise.resolve(mediaKey);
+  return (async () => {
     await ensureSchema(env);
     const fresh = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) => b.toString(16).padStart(2, "0")).join("");
     await env.DB.prepare("INSERT INTO server_keys (name, value, created_at) VALUES ('ca_media', ?, ?) ON CONFLICT(name) DO NOTHING")
       .bind(fresh, new Date().toISOString()).run();
     const row = await env.DB.prepare("SELECT value FROM server_keys WHERE name = 'ca_media'").first<{ value: string }>();
-    return crypto.subtle.importKey("raw", enc.encode(row!.value), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  })().catch((e) => { mediaKey = null; throw e; });
-  return mediaKey;
+    return (mediaKey = await crypto.subtle.importKey("raw", enc.encode(row!.value), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]));
+  })();
 }
 const hex = (b: ArrayBuffer) => Array.from(new Uint8Array(b), (x) => x.toString(16).padStart(2, "0")).join("");
 const signFor = async (env: Env, week: string, exp: number) => hex(await crypto.subtle.sign("HMAC", await caKey(env), enc.encode(`ca/${week}|${exp}`)));

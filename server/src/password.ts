@@ -28,16 +28,17 @@ const TOKEN_DAYS = 30;
 const USERNAME = /^[a-z0-9_.]{3,30}$/;
 const enc = new TextEncoder();
 // Hashed once per isolate, so an unknown username costs the same time as a wrong password.
-let dummyHash: Promise<string> | null = null;
+let dummyHash: string | null = null; // the value only, never a promise shared across requests
 
 export type PasswordLogin = { username: string; uid: string; pw_hash: string; epoch: number; must_change: number; created_at: string; updated_at: string };
 
 // --- Session tokens -----------------------------------------------------------------------------------------
 
-let signingKey: Promise<CryptoKey> | null = null;
+let signingKey: CryptoKey | null = null; // the key itself, never a promise shared across requests
 /** A random 32-byte key made on first use and kept in D1 (never sent anywhere), or SESSION_SECRET if set. */
 function sessionKey(env: Env): Promise<CryptoKey> {
-  signingKey ??= (async () => {
+  if (signingKey) return Promise.resolve(signingKey);
+  return (async () => {
     let raw: Uint8Array;
     if (env.SESSION_SECRET && env.SESSION_SECRET.length >= 32) raw = enc.encode(env.SESSION_SECRET);
     else {
@@ -47,9 +48,8 @@ function sessionKey(env: Env): Promise<CryptoKey> {
       const row = await env.DB.prepare("SELECT value FROM server_keys WHERE name = 'session'").first<{ value: string }>();
       raw = unb64u(row!.value)!;
     }
-    return crypto.subtle.importKey("raw", raw, { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]);
-  })().catch((e) => { signingKey = null; throw e; });
-  return signingKey;
+    return (signingKey = await crypto.subtle.importKey("raw", raw, { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]));
+  })();
 }
 
 export async function issueToken(env: Env, login: Pick<PasswordLogin, "uid" | "epoch">): Promise<{ token: string; expiresAt: string }> {
@@ -164,8 +164,7 @@ export async function passwordRoute(req: Request, env: Env, path: string, ctx?: 
     if (typeof password !== "string" || password.length > 200) return wrong();
     if (await throttled(env, "ip:" + ip, LIMITS.ip) || (USERNAME.test(username) && await throttled(env, "u:" + username, LIMITS.user))) return tooMany();
     const login = USERNAME.test(username) ? await env.DB.prepare("SELECT * FROM password_logins WHERE username = ?").bind(username).first<PasswordLogin>() : null;
-    dummyHash ??= hashPassword("not-a-real-password");
-    const ok = await checkPassword(password, login?.pw_hash ?? await dummyHash) && !!login;
+    const ok = await checkPassword(password, login?.pw_hash ?? (dummyHash ??= await hashPassword("not-a-real-password"))) && !!login;
     if (!ok) {
       await addFail(env, "ip:" + ip);
       if (USERNAME.test(username)) await addFail(env, "u:" + username);

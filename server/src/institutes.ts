@@ -97,10 +97,10 @@ export const INST_SCHEMA = [
     node_id TEXT, kind TEXT NOT NULL, right_n INTEGER NOT NULL, total INTEGER NOT NULL, answers TEXT NOT NULL, at TEXT NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS inst_attempts_member ON inst_attempts(institute_id, member_id, at)`,
 ];
-let ready: Promise<void> | null = null;
+let ready = false; // the result only, never a promise shared across requests (see ensureSchema in staff.ts)
 export function ensureInstSchema(env: Env): Promise<void> {
-  ready ??= env.DB.batch(INST_SCHEMA.map((s) => env.DB.prepare(s))).then(() => {}).catch((e) => { ready = null; throw e; });
-  return ready;
+  if (ready) return Promise.resolve();
+  return env.DB.batch(INST_SCHEMA.map((s) => env.DB.prepare(s))).then(() => { ready = true; });
 }
 
 // --- Who is calling ----------------------------------------------------------------------------------------
