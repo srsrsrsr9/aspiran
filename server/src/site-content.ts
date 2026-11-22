@@ -29,7 +29,7 @@ function clean(d: any) {
 export async function siteContent(env: Env): Promise<Response> {
   const headers = { "content-type": "application/json; charset=utf-8", "access-control-allow-origin": "*", "cache-control": "public, max-age=3600" };
   const f = await flags(env);
-  if (!f.library) return new Response(JSON.stringify({ items: [], briefs: [], paused: true }), { headers });
+  if (!f.library) return new Response(JSON.stringify({ items: [], briefs: [], papers: [], paused: true }), { headers });
   const lib = await (await publicLibrary(env, SITE_KINDS)).json<{ items: { id: string; kind: string; updatedAt: string; hindi: boolean; data: any }[] }>();
   const items = lib.items
     .filter((i) => !tragic(i.data) && (i.kind !== "read" || f.long_reads))
@@ -42,6 +42,15 @@ export async function siteContent(env: Env): Promise<Response> {
     if (q.en?.q) asked.set(key, { en: q.en.q, hi: q.hi?.q, marks: q.marks, words: q.words, year: p.year, paper: p.paper });
   }
   for (const i of items) if (i.kind === "mains-skeleton" && asked.has(i.data.pyqId)) i.data.asked = asked.get(i.data.pyqId);
+  // PYQs (owner, 22 Nov 2026: say "PYQs" and keep them on the site in its own look): UPSC's papers in full, with UPSC's
+  // key and, where written, why the keyed answer is right. Only papers with a real UPSC id, never a sample.
+  const papers = pyq.items.map((x) => x.data).filter((p) => /^cs[pm]-\d{4}-[a-z0-9]+$/.test(p?.id ?? "") && !p.sample && Array.isArray(p.questions))
+    .map((p) => ({ id: p.id, exam: p.exam === "mains" ? "mains" : "prelims", year: Number(p.year), paper: p.paper, title: p.title, sourceUrl: p.source?.url ?? "",
+      key: p.answerKey ?? { status: "none" },
+      questions: p.questions.filter((q: any) => q && typeof q.n === "string" && (q.en?.q ?? q.q)).map((q: any) => ({
+        n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, answer: q.answer ?? null,
+        en: { q: q.en?.q ?? q.q, options: q.en?.options }, hi: q.hi?.q ? { q: q.hi.q, options: q.hi.options } : undefined,
+        explain: q.explain?.why ? { why: q.explain.why, wrong: q.explain.wrong ?? [], trap: q.explain.trap } : undefined })) }));
   const nodes = (NODES as any[]).map((n) => ({ id: n.id, name: n.name, paper: n.paper.short, learn: learnPath(n) }));
   const { results } = await env.DB.prepare("SELECT day, json FROM briefs ORDER BY day DESC LIMIT 400").all<{ day: string; json: string }>();
   const briefs = results.flatMap((r) => {
@@ -50,5 +59,5 @@ export async function siteContent(env: Env): Promise<Response> {
     const cards = (b.items ?? []).filter((it: any) => !tragic(it)).map(clean);
     return cards.length ? [{ day: r.day, items: cards }] : [];
   });
-  return new Response(JSON.stringify({ generatedAt: new Date().toISOString(), nodes, items, briefs }), { headers });
+  return new Response(JSON.stringify({ generatedAt: new Date().toISOString(), nodes, items, briefs, papers }), { headers });
 }

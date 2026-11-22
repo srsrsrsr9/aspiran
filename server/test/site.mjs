@@ -35,7 +35,8 @@ const feed = async () => (await call("/web/site-content", { auth: false }));
 let r = await feed();
 assert.equal(r.status, 200);
 assert.equal(r.headers.get("access-control-allow-origin"), "*");
-assert.ok(Array.isArray(r.data.items) && Array.isArray(r.data.briefs));
+assert.ok(Array.isArray(r.data.items) && Array.isArray(r.data.briefs) && Array.isArray(r.data.papers));
+for (const p of r.data.papers) { assert.ok(!("review" in p) && !("shareable" in p)); assert.match(p.id, /^cs[pm]-/); }
 assert.ok(r.data.nodes.length > 100 && r.data.nodes[0].learn.startsWith("/learn/"), "syllabus names come along");
 assert.ok(!r.data.items.some((i) => i.data.id === ok.id), "a draft stays out");
 step("open to anyone, drafts stay out");
