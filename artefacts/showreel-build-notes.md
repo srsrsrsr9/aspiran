@@ -1,6 +1,6 @@
 # Showreel tour: build notes (22 Nov 2026)
 
-Branch `claude/ecstatic-herschel-f72e35`. **Not merged, not deployed.**
+Branch `claude/ecstatic-herschel-f72e35`. Deployed to production on 22 Nov 2026 (owner's go).
 
 ## What it is
 A fast, voiced sales tour for visitors, at **`/app/#tour/path-pol-federalism`** (Federalism first).
@@ -58,7 +58,7 @@ Leave off `--force pods-1-hi` to record only lines that have no clip yet.
 ## Checks
 - Every scene at 1366 px and 375 px in English, and the busiest scenes in Hindi: nothing cut off, no sideways scroll,
   no console errors (also with rapid skipping).
-- `npm run check` passes. `npm run test:all`: 24 of 25 pass. `friends` fails only because it was run at 00:16 IST: the pod friends are quiet from 23:30 to 07:00, so its "cheer a study win" step gets no reply. Nothing in this change touches the server. Rerun after 07:00.
+- `npm run check` passes. `npm run test:all`: all 25 suites pass (22 Nov, 09:38 IST, after rebasing on main). An earlier run at 00:16 IST failed `friends` only because pod friends are quiet from 23:30 to 07:00.
 - Screenshots: `artefacts/showreel/screens/`.
 
 ## Not yet checked
