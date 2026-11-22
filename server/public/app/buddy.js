@@ -132,6 +132,9 @@ export function stopVoice() { try { if (audio && !audio.paused) audio.pause(); }
 export function relock() { unlocked = false; unlock(); }
 
 // --- Chotu at the bottom of the screen -------------------------------------------------------------------------------
+// He keeps out of the way. While the visitor is working he has ducked out of sight (only the top of his steam peeks over
+// the edge, so a tap can still ask him for a nudge). After 30 seconds with nothing touched he wanders back and potters
+// about, saying nothing. At 45 seconds he gives his nudge. Any touch and he quietly goes again.
 
 let corner = null, bub = null, cup = null, onAsk = null, showing = null;
 const said = new Set();
@@ -141,8 +144,8 @@ export function mount(ask) {
   onAsk = ask;
   if (!corner) {
     bub = X.h("div.bd-bub", { role: "status", "aria-live": "polite", hidden: true });
-    cup = X.h("button.bd-cup", { type: "button", "aria-label": w("ask"), title: w("ask"), onclick: () => tapCup() }, kulhad(quiet() ? "night" : "warm", 46));
-    corner = X.h("div.bd-corner", bub, cup);
+    cup = X.h("button.bd-cup", { type: "button", "aria-label": w("ask"), title: w("ask"), onclick: () => tapCup() }, X.h("span.bd-body", kulhad(quiet() ? "night" : "warm", 46)));
+    corner = X.h("div.bd-corner.away", bub, cup);
   }
   cup.setAttribute("aria-label", w("ask")); cup.title = w("ask");
   return corner;
@@ -152,6 +155,22 @@ function tapCup() {
   if (showing) return hush();
   const n = onAsk?.();
   if (n) show(n.key, { ...n, asked: true });
+  else arrive();
+}
+/** He comes back on screen (from his hiding place at the bottom), and potters about until something happens. */
+function arrive() {
+  if (!corner) return;
+  clearTimeout(goTimer);
+  if (corner.classList.contains("away")) { corner.classList.remove("away"); corner.classList.add("here"); X.track("demo_act", { act: "chotu_back" }); }
+}
+let goTimer = 0;
+/** He ducks out of sight. If he's still speaking he finishes the sentence first. */
+function leave() {
+  if (!corner || showing) return;
+  clearTimeout(goTimer);
+  const go = () => { if (!showing) { corner.classList.remove("here", "talking"); corner.classList.add("away"); } };
+  if (audio && !audio.paused && !audio.ended) { audio.onended = () => { audio.onended = null; go(); }; goTimer = setTimeout(go, 9000); }
+  else go();
 }
 /**
  * Says one line (once per visit unless `again`). opts: { action: { label, run } } adds a button (such as "Show me").
@@ -168,6 +187,7 @@ function show(key, opts = {}) {
   const l = line(key);
   if (!l) return false;
   showing = key;
+  arrive();
   X.put(bub,
     X.h("p", { lang: X.lang() }, l.text),
     opts.action && X.h("div.bd-row", X.h("button.bd-act", { type: "button", onclick: () => { hush(); opts.action.run(); } }, opts.action.label ?? w("showMe"))),
@@ -179,25 +199,39 @@ function show(key, opts = {}) {
   X.track("demo_act", { act: "chotu_say", line: key });
   return true;
 }
-/** Puts the bubble away. A touch elsewhere lets the spoken line finish; a close, or a new chapter, stops it. */
-export function hush(keepVoice = false) { showing = null; if (!keepVoice) stopVoice(); if (bub) bub.hidden = true; corner?.classList.remove("talking"); }
+/** Puts the bubble away and sends him off. A touch elsewhere lets the spoken line finish; a close, or a new chapter, stops it. */
+export function hush(keepVoice = false) {
+  showing = null; if (!keepVoice) stopVoice();
+  if (bub) bub.hidden = true; corner?.classList.remove("talking");
+  leave();
+}
 export const isShowing = () => showing;
 export const showMe = () => w("showMe");
-/** A new chapter: forget what was said in the last one (hello and goodbye stay said). */
+/** A new chapter: he goes, and forgets what was said in the last one (hello and goodbye stay said). */
 export function newChapter() { hush(); for (const k of [...said]) if (!/^:(hello|bye)$/.test(k)) said.delete(k); }
 
 // --- Watching for a stall -----------------------------------------------------------------------------------------------
-// No clock on screen, ever. If the visitor hasn't touched anything for a while and the chapter isn't done, the chapter's
-// `nudge()` picks the line for where they are. Any touch resets the wait and puts the bubble away.
+// No clock on screen, ever. If nothing has been touched for 30 seconds and there's still something to do here, he
+// comes back. At 45 seconds the chapter's `nudge()` picks the line for where they are, and every 45 seconds after that
+// it's asked again (so on the GST vote a visitor who stays stuck reaches "Show me"). Any touch resets it all.
 
-let idle = 0, watchFn = null, watchMs = 0;
-export function watch(fn, ms = 15000) { watchFn = fn; watchMs = ms; poke(true); }
-export function unwatch() { clearTimeout(idle); watchFn = null; }
+export const BACK_MS = 30000, NUDGE_MS = 45000;
+let backT = 0, nudgeT = 0, watchFn = null, activeFn = null;
+/** fn() returns the nudge for right now or null; active() says whether there's still something to do on this screen. */
+export function watch(fn, active = () => true) { watchFn = fn; activeFn = active; poke(true); }
+export function unwatch() { clearTimeout(backT); clearTimeout(nudgeT); watchFn = activeFn = null; }
 function poke(keep = false) {
-  clearTimeout(idle);
+  clearTimeout(backT); clearTimeout(nudgeT);
   if (!keep && showing && !bub?.matches(":hover")) hush(true);
+  else if (!keep && !showing) leave();
   if (!watchFn) return;
-  idle = setTimeout(() => { const n = watchFn?.(); if (n && say(n.key, n)) X.track("demo_act", { act: "chotu_stall", line: n.key }); else poke(true); }, watchMs);
+  backT = setTimeout(() => { if (activeFn?.()) arrive(); }, BACK_MS);
+  const ask = () => {
+    const n = watchFn?.();
+    if (n && say(n.key, n)) X.track("demo_act", { act: "chotu_stall", line: n.key });
+    nudgeT = setTimeout(ask, NUDGE_MS);
+  };
+  nudgeT = setTimeout(ask, NUDGE_MS);
 }
 let poked = false;
 function listenPokes() {
@@ -205,7 +239,7 @@ function listenPokes() {
   const on = (e) => { if (corner?.contains(e.target)) return; if (document.documentElement.classList.contains("sc-on")) poke(); };
   document.addEventListener("pointerdown", on, { capture: true, passive: true });
   document.addEventListener("keydown", on, { capture: true });
-  document.addEventListener("scroll", () => { if (watchFn) poke(true); }, { passive: true });
+  document.addEventListener("scroll", () => { if (watchFn && !showing) poke(true); }, { passive: true });
 }
 
 export function init(ctx) { X = ctx; css(); listenPokes(); }
@@ -216,12 +250,34 @@ function css() {
   s.id = "bd-css";
   s.textContent = `
 .bd-corner{position:relative;display:flex;align-items:center;flex:none}
-.bd-cup{width:52px;height:52px;min-height:0;padding:0;border:0;background:transparent;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.bd-cup{width:52px;height:52px;min-height:0;padding:0;border:0;background:transparent;border-radius:50%;cursor:pointer;display:grid;place-items:center;
+  transition:transform .55s cubic-bezier(.3,1.4,.5,1),opacity .45s ease}
 .bd-cup:focus-visible{outline:2px solid #F0A04B;outline-offset:2px}
+.bd-body{display:block;line-height:0}
 .bd-cup svg .steam{animation:bd-steam 3s ease-in-out infinite}
-.bd-corner.talking .bd-cup svg{animation:bd-nod 1.4s ease-in-out infinite}
+.bd-cup svg circle{transform-box:fill-box;transform-origin:center;animation:bd-blink 5.5s infinite}
+/* Out of sight: sunk below the bar, only the steam peeking. A hover or a keyboard focus lifts him a little. */
+.bd-corner.away .bd-cup{transform:translateY(50px);opacity:.9;transition:transform .5s ease-in,opacity .5s ease}
+.bd-corner.away .bd-cup:hover,.bd-corner.away .bd-cup:focus-visible{transform:translateY(36px)}
+/* Back, pottering about: a wander along the bar, a look round, a hop with a spin, a puff of steam. Silent. */
+.bd-corner.here:not(.talking) .bd-body{animation:bd-potter 16s ease-in-out .6s infinite}
+.bd-corner.here:not(.talking) svg .steam{animation-duration:1.6s}
+.bd-corner.talking .bd-body{animation:bd-nod 1.4s ease-in-out infinite}
 @keyframes bd-steam{50%{transform:translateY(-2px);opacity:.45}}
 @keyframes bd-nod{50%{transform:translateY(-2px) rotate(-3deg)}}
+@keyframes bd-blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+@keyframes bd-potter{
+  0%{transform:none}
+  5%{transform:translate(10px,-6px) rotate(5deg)} 8%{transform:translate(18px,0)}
+  12%{transform:translate(28px,-6px) rotate(5deg)} 15%{transform:translate(36px,0)}
+  22%{transform:translate(36px,0) rotate(-10deg)} 28%{transform:translate(36px,0) rotate(10deg)} 32%{transform:translate(36px,0)}
+  40%{transform:translate(36px,0) scale(1.06,.9)} 44%{transform:translate(36px,-18px) rotate(180deg)} 48%{transform:translate(36px,0) rotate(360deg) scale(1.08,.9)}
+  51%{transform:translate(36px,0) rotate(360deg)}
+  60%{transform:translate(24px,-5px) rotate(355deg)} 63%{transform:translate(16px,0) rotate(360deg)}
+  67%{transform:translate(8px,-5px) rotate(355deg)} 70%{transform:translate(0,0) rotate(360deg)}
+  80%{transform:rotate(360deg) translateY(2px) scale(1.03,.95)} 88%{transform:rotate(360deg)}
+  100%{transform:rotate(360deg)}
+}
 .bd-bub{position:absolute;left:4px;bottom:calc(100% + 10px);width:min(360px,calc(100vw - 32px));background:#FBF5E8;color:#2A1B12;border-radius:16px 16px 16px 4px;
   padding:12px 40px 12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.45);font-size:15px;line-height:1.5;z-index:40}
 .bd-bub[lang=hi],.bd-bub p[lang=hi]{font-size:15.5px;line-height:1.65}
@@ -232,7 +288,10 @@ function css() {
 .bd-act{background:#C8693A;color:#fff!important;border:0;border-radius:999px;padding:6px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;min-height:34px}
 .bd-x{position:absolute;top:6px;right:6px;background:transparent;border:0;color:#6E5A4C!important;font-size:22px;line-height:1;width:32px;height:32px;min-height:0;padding:0;cursor:pointer;border-radius:50%}
 .bd-act:focus-visible,.bd-x:focus-visible{outline:2px solid #C8693A;outline-offset:2px}
-@media (prefers-reduced-motion: reduce){.bd-corner *{animation:none!important;transition:none!important}}
+/* Reduced motion: no wandering, no hops. He fades out and in where he sits. */
+@media (prefers-reduced-motion: reduce){.bd-corner *{animation:none!important}
+  .bd-cup,.bd-corner.away .bd-cup{transform:none!important;transition:opacity .4s linear!important}
+  .bd-corner.away .bd-cup{opacity:.28}}
 `;
   document.head.append(s);
 }

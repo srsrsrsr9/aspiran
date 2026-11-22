@@ -300,9 +300,10 @@ const isDone = (st) => !!X.getA(doneKey(st));
 let root = null, barEl = null, chapterAt = null, codaEl = null, notesEl = null, chipEl = null, toastEl = null, curSt = null;
 let action = { label: "", run: null, ready: false };
 // How Chotu helps in the chapter on screen: each chapter sets `nudge()` as it draws, returning { key, action? } for
-// where the visitor is now (or null). A still screen for WAIT seconds counts as stuck. No clock is ever shown.
+// where the visitor is now (or null). Chotu comes back after 30 still seconds and nudges at 45 (buddy.js). No clock is
+// ever shown. These are the chapters where he watches; the essay and the finish have nothing to get stuck on.
 let nudge = null;
-const WAIT = { warmup: 20, read: 20, video: 20, "sim-governor": 25, sort: 15, pyq: 25, "sim-gst": 12, mains: 15, keep: 20 };
+const WATCH = new Set(["warmup", "read", "video", "sim-governor", "sort", "pyq", "sim-gst", "mains", "keep"]);
 
 export function draw(into, strip) {
   root = into;
@@ -326,7 +327,7 @@ export function draw(into, strip) {
     h("div.sc-stage" + (fin ? ".solo" : ""), h("article.sc-main", { lang: X.lang() }, head(st, at, list), body, codaEl), !fin && notesPanel()),
     bottomBar(list, at));
   if (isDone(st)) paintCoda(st, false);
-  if (WAIT[st.type]) B.watch(() => (isDone(st) ? null : nudge?.()), WAIT[st.type] * 1000); else B.unwatch();
+  if (WATCH.has(st.type)) B.watch(() => (isDone(st) ? null : nudge?.() ?? { key: "next" }), () => !isDone(st)); else B.unwatch();
   if (fresh) later(() => B.say(fin ? "bye" : "hello"), fin ? 1400 : 600);
 }
 // Leaving #try puts the page width back, and Chotu stops watching.
