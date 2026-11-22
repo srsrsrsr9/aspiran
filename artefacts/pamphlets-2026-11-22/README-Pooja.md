@@ -18,7 +18,7 @@ with your phone before printing the rest. 100 to 130 gsm paper is fine for stude
 **Where the QR codes go**
 - Students: straight into the app's free sign-up (Hindi side opens it in Hindi).
 - Centres: aspiran.in/for-coaching, where they can see what students see and book a 15-minute call.
-Both carry a "pamphlet" tag, so we can count sign-ups and centre enquiries that came from paper.
+Each QR is tagged with the pamphlet, the print run, the language and colour or black-and-white, so we can see which version brings people in.
 
 **For centres:** the white box "Your Aspiran contact" is for you. Write your name and phone number (or stamp it) before
 you hand it over. If a centre asks about price: the first 30 days are free with one or two batches, and the price after

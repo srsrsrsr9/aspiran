@@ -11,7 +11,11 @@ HERE = pathlib.Path(__file__).parent
 OUT = HERE / "html"
 OUT.mkdir(exist_ok=True)
 
-# QR targets. utm_source=pamphlet so sign-ups and centre leads from paper show up on their own.
+# QR targets. utm_source=pamphlet and utm_medium=student|centre (the app records "pamphlet:student" as the install source;
+# Admin -> Insights -> Where people come from). qr() adds utm_campaign (the print run) and utm_content (language and
+# colour or mono), so PostHog can tell each printed version apart.
+CAMPAIGN = "print-2026-11"
+VARIANT = "colour"  # set by the loop at the bottom
 LINKS = {
     "student-en": "https://app.aspiran.in/app/?utm_source=pamphlet&utm_medium=student",
     "student-hi": "https://app.aspiran.in/app/?utm_source=pamphlet&utm_medium=student&lang=hi",
@@ -21,7 +25,9 @@ LINKS = {
 
 
 def qr(key):
-    q = segno.make(LINKS[key], error="m")
+    lang = key.split("-")[1]
+    url = f"{LINKS[key]}&utm_campaign={CAMPAIGN}&utm_content={lang}-{VARIANT}"
+    q = segno.make(url, error="m")
     buf = io.BytesIO()
     q.save(buf, kind="svg", scale=1, border=0, dark="#000", xmldecl=False, svgns=True, nl=False)
     svg = buf.getvalue().decode()
@@ -135,7 +141,7 @@ STUDENT = {
              "A study room from day one, and a small pod of up to 8 aspirants at your stage. No ranks, no showing off."),
         ],
         nums=[("1,797", "PYQs 2016–2026, with UPSC’s own keys"), ("2,000+", "practice questions"), ("400+", "short videos"), ("25+ hrs", "audio notes")],
-        free_h="Free forever", free_note="not a trial · no card",
+        free_h="Free trial", free_note="no card needed",
         free=["Daily revision and current affairs", "All notes, PYQs and videos", "3 answers checked a week, 1 mock a month", "Your pod and study room"],
         plus_h="Plus", plus_price="₹3,999", plus_per="a year · about ₹11 a day",
         plus=["Unlimited answer checking", "All 35 full mocks", "Essays marked from 3 photos"],
@@ -155,7 +161,7 @@ STUDENT = {
              "पहले दिन से एक स्टडी रूम, और आपके स्टेज के 8 तक अभ्यर्थियों का छोटा पॉड। न रैंक, न दिखावा।"),
         ],
         nums=[("1,797", "PYQ 2016–2026, UPSC की अपनी आंसर-की के साथ"), ("2,000+", "प्रैक्टिस सवाल"), ("400+", "छोटे वीडियो"), ("25+ घंटे", "ऑडियो नोट्स")],
-        free_h="हमेशा फ़्री", free_note="ट्रायल नहीं · कोई कार्ड नहीं",
+        free_h="फ़्री ट्रायल", free_note="कोई कार्ड नहीं",
         free=["रोज़ का रिवीज़न और करंट अफ़ेयर्स", "सारे नोट्स, PYQ और वीडियो", "हफ़्ते में 3 आंसर की जाँच, महीने में 1 मॉक", "आपका पॉड और स्टडी रूम"],
         plus_h="Plus", plus_price="₹3,999", plus_per="साल · लगभग ₹11 रोज़",
         plus=["अनलिमिटेड आंसर की जाँच", "सारे 35 फ़ुल मॉक", "3 फ़ोटो से एसे की जाँच"],
@@ -394,6 +400,7 @@ def page(title, css, body, mono):
 
 for mono in (False, True):
     tag = "mono" if mono else "colour"
+    VARIANT = tag
     (OUT / f"students-A5-{tag}.html").write_text(page("Aspiran for students", STUDENT_CSS, student_side(STUDENT["en"]) + student_side(STUDENT["hi"]), mono))
     (OUT / f"centres-A4-{tag}.html").write_text(page("Aspiran for coaching centres", CENTRE_CSS, centre_side(CENTRE["en"]) + centre_side(CENTRE["hi"]), mono))
     # Students, two A5 on one A4 sheet (landscape): print double-sided, cut down the middle.
