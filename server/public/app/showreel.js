@@ -73,8 +73,8 @@ export const LINES = {
       hi: "रुक गया! सारे राज्य मिलकर भी वोट का सिर्फ़ दो-तिहाई, और चाहिए पचहत्तर प्रतिशत। केंद्र के पास वीटो है, और आपने अभी देखा क्यों।" }],
     help: { en: "A number you play with is a number you remember in the exam.", hi: "जिस आँकड़े से आप खेलते हैं, वो परीक्षा में याद रहता है।" } },
   pyq: { lines: [
-    { en: "Real Prelims, 2025, with the official answer key. But first, tell us how sure you are.", hi: "असली Prelims, 2025, आधिकारिक उत्तर-कुंजी के साथ। पर पहले बताइए, आप कितने पक्के हैं।",
-      say: { en: "Real Prelims, twenty twenty-five, with the official answer key. But first, tell us how sure you are.", hi: "असली Prelims, दो हज़ार पच्चीस, आधिकारिक उत्तर-कुंजी के साथ। पर पहले बताइए, आप कितने पक्के हैं।" } },
+    { en: "Real Prelims, 2025, with the official answer key. Pick an answer, then say how sure you are.", hi: "असली Prelims, 2025, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।",
+      say: { en: "Real Prelims, twenty twenty-five, with the official answer key. Pick an answer, then say how sure you are.", hi: "असली Prelims, दो हज़ार पच्चीस, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।" } },
     { en: "Sure, and wrong? Ouch! In the real exam, that wipes out a third of the question's marks. Here, you get one more try.",
       hi: "पक्का, और ग़लत? उफ़! असली परीक्षा में इससे उस सवाल के एक-तिहाई अंक कटते हैं। यहाँ, एक और मौक़ा।" },
     { en: "Got it on the second go! And now you know exactly where you were guessing.", hi: "दूसरी बार में सही! और अब आपको पता है कि अंदाज़ा कहाँ लगा रहे थे।" }],

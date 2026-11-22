@@ -51,9 +51,9 @@ but worth one listen. The brand is spelled "Aspi-raan" / "आस्पिरा�
 
 To re-record a line after changing its words in `showreel.js` (owner runs this in Terminal, in `server/`):
 ```
-ELEVENLABS_API_KEY=$(security find-generic-password -a aspiran -s elevenlabs-api-key -w) node scripts/showreel-voice.mjs --force pods-1-hi
+ELEVENLABS_API_KEY=$(security find-generic-password -a aspiran -s elevenlabs-api-key -w) node scripts/showreel-voice.mjs --force pods-1
 ```
-Leave off `--force pods-1-hi` to record only lines that have no clip yet.
+Leave off `--force pods-1` to record only lines that have no clip yet.
 
 ## Checks
 - Every scene at 1366 px and 375 px in English, and the busiest scenes in Hindi: nothing cut off, no sideways scroll,
