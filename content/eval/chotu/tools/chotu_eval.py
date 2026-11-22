@@ -39,7 +39,7 @@ BANNED = [
     (r"लगातार\s*\d+\s*दिन|\d+\s*दिन से लगातार|lagataar\s*\d+\s*din|\d+\s*din se lagataar|వరుసగా\s*\d+\s*రోజ|\d+\s*రోజులుగా వరుసగా", "streak talk (hi/te)", "fail"),
     (r"(?-i:\bPlus\b)|₹|\brs\.?\s*\d|rupees|\bupgrade|subscription|discount|3,?999", "Plus / price talk", "fail"),
     (r"\bi'?m (a )?(real )?(human|person)\b|\bi am (a )?(real )?(human|person)\b|मैं (एक )?(असली )?इंसान हूँ|main (ek )?insaan hoon|నేను మనిషిని(?!\s*కాదు)", "claims to be human", "fail"),
-    (r"(?-i:\bAI\b)", "says 'AI' (owner: no AI labels; check wording)", "warn"),
+    (r"(?-i:\bAI\b)|artificial intelligence|\bchat ?bot\b|language model|एआई|कृत्रिम बुद्धि|ఏఐ|కృత్రిమ మేధ", "calls itself AI or a bot (owner: never)", "fail"),
 ]
 EMOJI = re.compile("[\U0001F300-\U0001FAFF\u2600-\u27BF]")
 
