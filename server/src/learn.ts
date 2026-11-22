@@ -132,7 +132,7 @@ function shell(env: Env, o: { title: string; desc: string; path: string; body: s
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)}</title><meta name="description" content="${esc(o.desc)}">
 <link rel="canonical" href="${o.canonical ?? base + o.path}">${o.noindex ? '<meta name="robots" content="noindex">' : ""}
-<meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:type" content="article"><meta property="og:url" content="${o.canonical ?? base + o.path}"><meta property="og:image" content="https://aspiran.in/og.png">
+<meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:type" content="article"><meta property="og:url" content="${o.canonical ?? base + o.path}"><meta property="og:image" content="https://aspiran.in/og-2026-11.png">
 <link rel="icon" href="/app/icon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d1a"><style>${CSS}</style>
 ${o.ld ? `<script type="application/ld+json">${JSON.stringify(o.ld).replace(/</g, "\\u003c")}</script>` : ""}${ph}</head>
 <body><main><div class="top"><a class="brand" href="https://aspiran.in/">Aspiran</a><a class="small" href="/learn">All UPSC topics</a></div>
