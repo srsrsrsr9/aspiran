@@ -1,7 +1,7 @@
 import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
 import PROMPT from "./jeetu-prompt.txt";
 import { extraDistress } from "./langs";
-import { useAllowance } from "./plus";
+import { useAllowance, whoIs } from "./plus";
 import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
 import { ensureSchema, flags } from "./staff";
 
@@ -89,16 +89,17 @@ export async function jeetuRoute(req: Request, env: Env, path: string): Promise<
   }
   const now = istNow();
   const name = { en: "English", hi: "Hindi", te: "Telugu" }[lang];
+  const who = await whoIs(env, body.memberId);
   const system = PROMPT.replace("{{app_language}}", name).replace("{{local_time_ist}}", now.toISOString().slice(11, 16) + " IST");
   try {
     // Same switch ("chotu" in Admin → AI controls), models and logging as cloud Chotu.
-    const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], CHAT_ROUTES[lang]);
+    const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], CHAT_ROUTES[lang], who);
     return json({ reply: text, model, lang, ai: true, who: "Jeetu" });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Jeetu is offline right now.", offline: true }, 503);
     if (lang !== "en") {
       try {
-        const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system + "\n\nAnswer in English." }, ...turns], CHAT_ROUTES.en);
+        const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system + "\n\nAnswer in English." }, ...turns], CHAT_ROUTES.en, who);
         return json({ reply: text, model, lang: "en", ai: true, who: "Jeetu", fallback: true });
       } catch { /* fall through */ }
     }

@@ -1,4 +1,5 @@
 import { AiBlocked, callChat } from "./ai";
+import { whoIs } from "./plus";
 import { type Env, HELPLINES, bad, distress, istDay, istNow, json } from "./shared";
 import { extraDistress } from "./langs";
 import { inQuietHours } from "./friends";
@@ -52,7 +53,7 @@ export async function interviewRoute(req: Request, env: Env, path: string): Prom
   if ((row?.n ?? 0) >= DAILY) return json({ limit: true });
 
   try {
-    const out = await callChat(env, "chotu", [{ role: "user", content: PROMPT(name, style, question, answer, hindi) }], TYPED_EVAL_HOPS);
+    const out = await callChat(env, "chotu", [{ role: "user", content: PROMPT(name, style, question, answer, hindi) }], TYPED_EVAL_HOPS, await whoIs(env, memberId));
     const followUp = out.text.trim().replace(/^["'“]+|["'”]+$/g, "").split("\n").find((l) => l.trim())?.trim().slice(0, 300) ?? "";
     if (!followUp) return json({ error: "The board member didn't come through. Carry on with the next question." }, 502);
     await env.DB.prepare("INSERT INTO interview_uses (member_id, day, n) VALUES (?, ?, 1) ON CONFLICT(member_id, day) DO UPDATE SET n = n + 1").bind(memberId, day).run();

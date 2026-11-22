@@ -743,7 +743,7 @@ export class PodRoom extends DurableObject<Env> {
       day_of_week: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getUTCDay()], quiet_hours_start: "23:30",
     }) + "\n\nYou are answering one question in a pod chat. Keep it under 80 words. Never mention or guess who asked.";
     try {
-      const { text: reply } = await callGroq(this.env, "chotu", [{ role: "system", content: system }, { role: "user", content: question }]);
+      const { text: reply } = await callGroq(this.env, "chotu", [{ role: "system", content: system }, { role: "user", content: question }], "pod");
       this.post({ id: newId("m"), memberId: "chotu", name: CHOTU, text: reply.slice(0, MAX_LEN), ts: Date.now(), kind: "chotu" });
     } catch (e) {
       ws.send(JSON.stringify({ type: "error", message: e instanceof AiBlocked ? "Chotu is offline right now." : "Chotu couldn't answer just now." }));

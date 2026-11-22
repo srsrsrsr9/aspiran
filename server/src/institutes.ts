@@ -557,7 +557,7 @@ async function aiFirstAnswer(env: Env, inst: Institute, doubtId: string, text: s
     const r = await callGroq(env, "chotu", [
       { role: "system", content: "You give a first answer to a UPSC aspirant's study doubt, for their coaching institute's teachers to check. Answer only the academic question, in under 180 words, plainly, in the language of the question. If you are not sure of a fact, say so. Never talk about feelings, ranks, marks, results or the student's chances. Don't greet or sign off." },
       { role: "user", content: (node ? `Topic: ${nodeName(node)}\n` : "") + text },
-    ]);
+    ], "institute");
     const answer = r.text.trim().slice(0, 3000);
     if (!answer) return null;
     await env.DB.prepare("INSERT INTO inst_doubt_replies (id, doubt_id, institute_id, member_id, name, role, text, at) VALUES (?, ?, ?, NULL, 'Aspiran', 'ai', ?, ?)")

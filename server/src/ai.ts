@@ -12,10 +12,31 @@ export type Purpose = "draft" | "guard" | "embed" | "author" | "chotu" | "evalua
 
 export class AiBlocked extends Error {}
 
-const logger = (env: Env, purpose: Purpose, model: string) =>
+/**
+ * Who a call was for, so spend can be watched by group (owner, 22 Nov 2026): a website visitor, a free member, a Plus
+ * member, a pod's shared chat, an institute, or the team's own jobs (drafting, checks, fact watch).
+ */
+export type Who = "visitor" | "free" | "plus" | "pod" | "institute" | "team";
+
+/**
+ * List prices in USD per million tokens [input, output], from console.groq.com/docs/models on 22 Nov 2026. Only
+ * for our estimate in Admin → Helpers and usage; Groq's console has the real bill. A model not listed costs 0 here.
+ */
+export const PRICES: Record<string, [number, number]> = {
+  "qwen/qwen3.8-27b": [0.8, 4.0],
+  "openai/gpt-oss-120b": [0.15, 0.6],
+  "openai/gpt-oss-20b": [0.075, 0.3],
+};
+const costOf = (model: string, tin: number | null, tout: number | null) => {
+  const p = PRICES[model];
+  return p && (tin || tout) ? ((tin ?? 0) * p[0] + (tout ?? 0) * p[1]) / 1e6 : null;
+};
+
+const logger = (env: Env, purpose: Purpose, model: string, provider: string | null = null, who: Who = "team") =>
   (status: string, ms: number | null, tin: number | null, tout: number | null, error: string | null) =>
-    env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-      .bind(new Date().toISOString(), istDay(), purpose, model, status, ms, tin, tout, error?.slice(0, 200) ?? null).run().catch(() => {});
+    env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error, provider, who, cost_usd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+      .bind(new Date().toISOString(), istDay(), purpose, model, status, ms, tin, tout, error?.slice(0, 200) ?? null, provider, who,
+        provider === "groq" ? costOf(model, tin, tout) : null).run().catch(() => {});
 
 /** Throws AiBlocked (and logs it) if an admin switched this off or today's caps are used up. */
 async function gate(env: Env, purpose: Purpose, log: ReturnType<typeof logger>) {
@@ -38,7 +59,7 @@ async function gate(env: Env, purpose: Purpose, log: ReturnType<typeof logger>) 
 }
 
 export async function runAI(env: Env, purpose: Purpose, model: string, input: Record<string, unknown>): Promise<any> {
-  const log = logger(env, purpose, model);
+  const log = logger(env, purpose, model, "workers-ai");
   await gate(env, purpose, log);
   if (!env.AI) {
     await log("unavailable", null, null, null, "Workers AI not bound");
@@ -77,7 +98,7 @@ export interface ClaudeJob {
 export async function callClaude(env: Env, purpose: Purpose, job: ClaudeJob): Promise<{ message: Anthropic.Message; text: string }> {
   const c = await llmControls(env);
   const model = c.authorModel;
-  const log = logger(env, purpose, model);
+  const log = logger(env, purpose, model, "anthropic");
   await gate(env, purpose, log);
   if (!env.ANTHROPIC_API_KEY) {
     await log("unavailable", null, null, null, "ANTHROPIC_API_KEY not set");
@@ -177,7 +198,17 @@ export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
  * Error bodies can echo the request, so only the status is kept. A provider set aside after a billing or key error
  * is skipped, so no one waits on it; only if every other model fails is it asked as a last resort.
  */
-export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[]): Promise<{ text: string; model: string }> {
+/**
+ * The Groq key for a group (owner, 22 Nov 2026). Each key belongs to its own Groq project, so the console shows free
+ * members' and visitors' spend (the marketing cost) apart from Plus and the team's jobs. Any key not set falls back
+ * to GROQ_API_KEY, so nothing breaks before the owner adds them.
+ */
+export function groqKeyFor(env: Env, who: Who): string | undefined {
+  const own = who === "plus" ? env.GROQ_API_KEY_PLUS : who === "free" || who === "visitor" || who === "pod" ? env.GROQ_API_KEY_FREE : undefined;
+  return own || env.GROQ_API_KEY;
+}
+
+export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[], who: Who = "team"): Promise<{ text: string; model: string }> {
   let last = "No AI provider answered";
   let keyed = 0;
   const down = await downProviders(env);
@@ -187,8 +218,8 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
   for (const hop of order) {
     if (failed.has(hop.provider)) continue;
     const p = PROVIDERS[hop.provider];
-    const key = p.key(env);
-    const log = logger(env, purpose, hop.model);
+    const key = hop.provider === "groq" ? groqKeyFor(env, who) : p.key(env);
+    const log = logger(env, purpose, hop.model, hop.provider, who);
     await gate(env, purpose, log);
     if (!key) {
       await log("unavailable", null, null, null, `${p.keyName} not set`);
@@ -273,7 +304,7 @@ export async function checkProviders(env: ChatEnv): Promise<Record<string, "back
     const p = PROVIDERS[provider];
     const key = p.key(env);
     if (!key) continue;
-    const log = logger(env, "watch", PROBE[provider]);
+    const log = logger(env, "watch", PROBE[provider], provider);
     try { await gate(env, "watch", log); } catch { continue; }
     const t0 = Date.now();
     let ok = false, why = `${p.name} unreachable`;
@@ -296,4 +327,4 @@ export async function checkProviders(env: ChatEnv): Promise<Record<string, "back
 }
 
 /** The English route, kept for any caller that still asks for Groq by name. */
-export const callGroq = (env: Env, purpose: Purpose, messages: ChatTurn[]) => callChat(env, purpose, messages, CHAT_ROUTES.en);
+export const callGroq = (env: Env, purpose: Purpose, messages: ChatTurn[], who: Who = "team") => callChat(env, purpose, messages, CHAT_ROUTES.en, who);

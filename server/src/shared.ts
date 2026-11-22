@@ -38,6 +38,9 @@ export interface Env {
   VOICE_MEMBER_DAILY?: string;
   /** Groq key for cloud Chotu (until launch). Typed by the owner into .dev.vars or `wrangler secret put`. Never in files or chat. */
   GROQ_API_KEY?: string;
+  /** Optional Groq keys, one per Groq project, so the console shows each group's spend apart (ai.ts groqKeyFor). */
+  GROQ_API_KEY_FREE?: string;
+  GROQ_API_KEY_PLUS?: string;
   /** Dev only: where `npm run models` serves Chotu's model files (e.g. http://127.0.0.1:8788). Unset = R2 (MEDIA, models/...). */
   MODEL_FILES_URL?: string;
   /** Database backups. Local dev keeps it under .wrangler/; never served publicly. */

@@ -149,7 +149,7 @@ fun MascotTab(
         title = { Text("About ${Brand.MASCOT_SHORT}") },
         text = {
             Text(
-                (if (ready) "${Brand.MASCOT_SHORT} runs on your phone. Chats never leave it and aren't saved."
+                (if (ready) "${Brand.MASCOT_SHORT} runs on your phone, so it answers even without internet."
                 else "Your questions here go to our server to be answered, and aren't saved. " +
                     "Close the Day, mood and journal never go.") +
                     " It can be wrong, it's not a counsellor, and it never predicts ranks. If something feels heavy, Need to talk is one tap away.",
@@ -232,7 +232,7 @@ private fun Consent(s: ChotuState.NotDownloaded, chotu: Chotu) {
     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Make ${Brand.MASCOT_SHORT} work offline?", style = MaterialTheme.typography.titleMedium)
         Text("• One download of ${s.model.sizeLabel}, on Wi-Fi only. It runs in the background; you'll see it in your notifications.", style = MaterialTheme.typography.bodyMedium)
-        Text("• After that ${Brand.MASCOT_SHORT} answers without internet, and those chats stay on the phone.", style = MaterialTheme.typography.bodyMedium)
+        Text("• After that ${Brand.MASCOT_SHORT} answers without internet.", style = MaterialTheme.typography.bodyMedium)
         Text("• Offline answers are simpler than online ones. Online ${Brand.MASCOT_SHORT} still answers when you're connected.", style = MaterialTheme.typography.bodyMedium)
         Text("• Remove it any time in Me → Privacy.", style = MaterialTheme.typography.bodyMedium)
         Button(onClick = {
@@ -251,7 +251,7 @@ fun OfflineChotuSettings(chotu: Chotu) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text("Offline ${Brand.MASCOT_SHORT}", style = MaterialTheme.typography.titleMedium)
         if (s is ChotuState.Ready) {
-            Text("On this phone (${s.model.sizeLabel}). Chats with it never leave the phone.", style = MaterialTheme.typography.bodySmall)
+            Text("On this phone (${s.model.sizeLabel}).", style = MaterialTheme.typography.bodySmall)
             OutlinedButton(onClick = { confirm = true }) { Text("Remove offline ${Brand.MASCOT_SHORT}") }
         } else Text("Not on this phone. ${Brand.MASCOT_SHORT} answers online. Set it up from the ${Brand.MASCOT_SHORT} tab if you like.", style = MaterialTheme.typography.bodySmall)
     }

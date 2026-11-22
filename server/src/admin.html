@@ -572,6 +572,24 @@ views.privacy = async () => {
     h("p.muted", {}, "After an erasure only a hash of the member id is kept, so restoring an older backup erases them again.")];
 };
 
+// Groq is paid (owner, 22 Nov 2026). This month's spend by group, estimated from list prices; the real bill is in
+// Groq's console, where each key's project shows its own spend. Free members, visitors and pods are the marketing cost.
+const GROUP = { visitor: "Website visitors", free: "Free members", pod: "Pod chats", plus: "Plus members", institute: "Institutes", team: "Our own jobs (drafting, checks)" };
+function groqCard(g) {
+  if (!g) return null;
+  const usd = (v) => "$" + Number(v || 0).toFixed(2);
+  const total = g.spend.reduce((a, r) => a + (r.usd || 0), 0);
+  const mkt = g.spend.filter((r) => ["visitor", "free", "pod"].includes(r.who)).reduce((a, r) => a + (r.usd || 0), 0);
+  const key = (on, name) => h("span.chip" + (on ? "" : ".warn"), {}, (on ? "✓ " : "Not set: ") + name);
+  return h("div", {}, h("h3", {}, "Groq spend this month (estimate)"),
+    h("div.tiles", {}, h("div.tile", {}, h("div.n", {}, usd(total)), h("div.l", {}, "all groups since " + g.month)),
+      h("div.tile", {}, h("div.n", {}, usd(mkt)), h("div.l", {}, "marketing: visitors, free members, pods"))),
+    h("div.card.scroll", {}, g.spend.length ? h("table", {}, h("tr", {}, ["Group", "Calls", "Tokens in", "Tokens out", "Estimate"].map((x) => h("th", {}, x))),
+      g.spend.map((r) => h("tr", {}, h("td", {}, GROUP[r.who] || r.who), h("td", {}, num(r.calls)), h("td", {}, num(r.tokens_in)), h("td", {}, num(r.tokens_out)), h("td", {}, usd(r.usd))))) : h("p.muted", {}, "No Groq calls this month yet."),
+      h("p.muted", { style: "margin-top:8px" }, "Keys: ", key(g.keys.main, "GROQ_API_KEY"), " ", key(g.keys.free, "GROQ_API_KEY_FREE"), " ", key(g.keys.plus, "GROQ_API_KEY_PLUS"),
+        ". A group without its own key uses GROQ_API_KEY. The exact bill, and the monthly limit, are in Groq's console.")));
+}
+
 views.llm = async () => {
   const d = await api("llm");
   const c = d.controls;
@@ -587,6 +605,7 @@ views.llm = async () => {
       bars("Successful calls per day", days.map((x) => ({ label: x, v: byDay[x]?.ok || 0 }))),
       bars("Tokens per day (in + out)", days.map((x) => ({ label: x, v: (byDay[x]?.tokens_in || 0) + (byDay[x]?.tokens_out || 0) }))),
       bars("Failed or blocked calls per day", days.map((x) => ({ label: x, v: (byDay[x]?.errors || 0) + (byDay[x]?.blocked || 0) })))),
+    groqCard(d.groq),
     h("h3", {}, "By purpose and model"),
     h("div.card.scroll", {}, d.byPurpose.length ? h("table", {}, h("tr", {}, ["Purpose", "Model", "Calls", "OK", "Errors", "Blocked", "Tokens in", "Tokens out", "Avg time"].map((x) => h("th", {}, x))),
       d.byPurpose.map((r) => h("tr", {}, h("td", {}, r.purpose), h("td.mono", {}, r.model), h("td", {}, num(r.calls)), h("td", {}, num(r.ok)), h("td", {}, num(r.errors)), h("td", {}, num(r.blocked)), h("td", {}, num(r.tokens_in)), h("td", {}, num(r.tokens_out)), h("td", {}, r.avg_ms ? r.avg_ms + " ms" : "")))) : h("p.muted", {}, "No calls yet.")),

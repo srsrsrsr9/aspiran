@@ -101,6 +101,7 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
   if (text && distress(text, await extraDistress(env).catch(() => [] as string[]))) return json({ care: true, helplines: HELPLINES });
 
   const allowance = await checkFeedback(env, memberId);
+  const who = allowance.plus ? "plus" : "free";
   if (!allowance.ok) {
     return json({ error: "That's your 3 free answer reviews for this week. They come back on Monday, or Plus makes them unlimited.", limit: allowance.limit, left: 0, moment: "feedback_used" }, 402);
   }
@@ -118,8 +119,8 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
     // One retry if the reply isn't usable JSON: free models sometimes wander.
     for (let i = 0; i < 2 && !fb; i++) {
       const out = img
-        ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS)
-        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], lang === "hi" ? HINDI_EVAL_HOPS : TYPED_EVAL_HOPS);
+        ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS, who)
+        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], lang === "hi" ? HINDI_EVAL_HOPS : TYPED_EVAL_HOPS, who);
       fb = readFeedback(out.text, text && !img ? wordsIn(text) : null);
       model = out.model;
     }

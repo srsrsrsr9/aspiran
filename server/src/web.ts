@@ -141,13 +141,13 @@ async function webChotu(req: Request, env: Env): Promise<Response> {
   const now = istNow();
   const system = PROMPT.replace("{{visitor}}", visitor).replace("{{time}}", now.toISOString().slice(11, 16));
   try {
-    const { text } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], WEB_ROUTES[lang]);
+    const { text } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], WEB_ROUTES[lang], "visitor");
     await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), lang);
     return json({ reply: text.trim(), ai: true });
   } catch (e) {
     if (lang === "hi" && !(e instanceof AiBlocked)) {
       try {
-        const { text } = await callChat(env, "chotu", [{ role: "system", content: system + "\nAnswer in simple English." }, ...turns], WEB_ROUTES.en);
+        const { text } = await callChat(env, "chotu", [{ role: "system", content: system + "\nAnswer in simple English." }, ...turns], WEB_ROUTES.en, "visitor");
         await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), "en");
         return json({ reply: text.trim(), ai: true, fallback: true });
       } catch { /* fall through */ }

@@ -344,6 +344,10 @@ export const ADMIN_SCHEMA = [
 
 const ALTERS = [
   "ALTER TABLE members ADD COLUMN suspended_until TEXT",
+  // Who a model call was for, the provider and its estimated cost (migrations/0016_llm_spend.sql).
+  "ALTER TABLE llm_calls ADD COLUMN provider TEXT",
+  "ALTER TABLE llm_calls ADD COLUMN who TEXT",
+  "ALTER TABLE llm_calls ADD COLUMN cost_usd REAL",
   "ALTER TABLE members ADD COLUMN suspend_reason TEXT",
   "ALTER TABLE pods ADD COLUMN lead_member TEXT",
   "ALTER TABLE reports ADD COLUMN member_id TEXT",

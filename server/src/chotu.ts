@@ -1,4 +1,5 @@
 import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
+import { whoIs } from "./plus";
 import PROMPT from "./chotu-prompt.txt";
 import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
@@ -171,8 +172,9 @@ export async function chotuChat(req: Request, env: Env): Promise<Response> {
     retrieved_notes: str(ctx.notes, 4000),
   });
   const name = { en: "English", hi: "Hindi", te: "Telugu" }[lang];
+  const who = await whoIs(env, body.memberId);
   const ask = (app_language: string, l: keyof typeof CHAT_ROUTES, also = "") =>
-    callChat(env, "chotu", [{ role: "system", content: promptIn(app_language) + also }, ...turns], CHAT_ROUTES[l]);
+    callChat(env, "chotu", [{ role: "system", content: promptIn(app_language) + also }, ...turns], CHAT_ROUTES[l], who);
   try {
     const { text, model } = await ask(ctx.chotu_language ? name : str(ctx.language, 40), lang);
     return json({ reply: text, model, lang, ai: true });

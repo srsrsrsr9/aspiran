@@ -62,6 +62,13 @@ async function entitlement(env: Env, memberId: string): Promise<{ plan: string; 
   return null;
 }
 
+/** Which spend group a member's model calls count under (ai.ts Who): Plus, any plan; free otherwise; no id, a visitor. */
+export async function whoIs(env: Env, memberId: unknown): Promise<"plus" | "free" | "visitor"> {
+  if (!/^[\w-]{16,64}$/.test(String(memberId ?? ""))) return "visitor";
+  await ensureSchema(env);
+  return (await entitlement(env, String(memberId)).catch(() => null)) ? "plus" : "free";
+}
+
 async function used(env: Env, memberId: string) {
   const day = istDay();
   const sum = async (kind: string, from: string) => (await env.DB.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM usage WHERE member_id = ? AND kind = ? AND day >= ?").bind(memberId, kind, from).first<{ n: number }>())?.n ?? 0;

@@ -424,9 +424,16 @@ route("GET", /^llm$/, "llm:view", async ({ env, url }) => {
      FROM llm_calls WHERE day >= ? GROUP BY purpose, model ORDER BY calls DESC`,
   ).bind(since).all()).results;
   const recent = (await env.DB.prepare("SELECT at, purpose, model, status, error FROM llm_calls WHERE status != 'ok' ORDER BY id DESC LIMIT 20").all()).results;
+  // Groq spend this month (IST) by group, estimated from list prices (ai.ts PRICES). Groq's console has the real bill.
+  const month = istDay().slice(0, 8) + "01";
+  const groqSpend = (await env.DB.prepare(
+    `SELECT COALESCE(who, 'team') AS who, COUNT(*) AS calls, COALESCE(SUM(tokens_in), 0) AS tokens_in, COALESCE(SUM(tokens_out), 0) AS tokens_out,
+       COALESCE(SUM(cost_usd), 0) AS usd FROM llm_calls WHERE day >= ? AND provider = 'groq' AND status = 'ok' GROUP BY 1 ORDER BY usd DESC`,
+  ).bind(month).all()).results;
   const today = await env.DB.prepare("SELECT COUNT(*) AS calls, COALESCE(SUM(tokens_in + tokens_out), 0) AS tokens FROM llm_calls WHERE day = ? AND status = 'ok'").bind(istDay()).first();
   return json({ days, daily, byPurpose, recent, today, controls: await llmControls(env), models: DRAFT_MODELS, authorModels: AUTHOR_MODELS,
-    connected: !!env.AI, claudeKey: !!env.ANTHROPIC_API_KEY, groqKey: !!env.GROQ_API_KEY, voice: await voiceUsage(env, since) });
+    connected: !!env.AI, claudeKey: !!env.ANTHROPIC_API_KEY, groqKey: !!env.GROQ_API_KEY,
+    groq: { month, spend: groqSpend, keys: { main: !!env.GROQ_API_KEY, free: !!env.GROQ_API_KEY_FREE, plus: !!env.GROQ_API_KEY_PLUS } }, voice: await voiceUsage(env, since) });
 });
 // Makes Chotu's and Jeetu's scripted lines once, so nobody waits for them (voice.ts). Costs a few cents the first time.
 route("POST", /^voice\/warm$/, "llm:control", async ({ env }) => (await voiceReady(env)) ? json(await warmVoices(env)) : bad("Voices are off: the FISH_AUDIO_API_KEY secret isn't set, or the voice flag is off", 503));
