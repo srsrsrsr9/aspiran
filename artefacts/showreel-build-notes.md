@@ -39,21 +39,24 @@ the top bar has 16 dots to jump to any scene, EN / हिं, and mute.
 - Ends by selling what was just shown. No made-up numbers or testimonials.
 
 ## The voice
-ElevenLabs voice **Bhargav** (deep, warm, Indian, male), same voice in English and Hindi.
-Auditions of three voices are in `artefacts/showreel/auditions/` if you'd like a different one.
-92 clips (46 per language), 5.8 MB, in `server/public/app/demo-voice/showreel/`. Each clip was transcribed back
-to check the words came out right.
+**22 Nov (afternoon): re-voiced with Sumeet** (ElevenLabs, a confident Indian narrator), the owner's pick after
+"robotic in places, a bit too young, awkward pauses" on the first voice (Bhargav). Samples and the full list of causes
+and fixes: `artefacts/showreel/voice-samples-2026-11-22/README.md`. In short: the script is now whole, flowing sentences;
+each clip is recorded knowing the lines around it; calmer settings; every clip trimmed, with no pause inside over 0.35 s;
+the player waits 0.12 s between clips (was 0.25 s) and 1.9 s at the two "your turn" moments (was 2.4 to 2.6 s).
+After the re-record no clip has a pause of half a second or more (19 had before).
 
+92 clips (46 per language) in `server/public/app/demo-voice/showreel/`, each transcribed back to check the words.
 Sound starts only when the visitor taps "Play the tour"; "Watch without sound" and the mute button both work.
 
-**Please listen to:** `pods-1-hi.mp3`. The checker heard "Aspirants" instead of "Aspiran"; it is probably the checker,
-but worth one listen. The brand is spelled "Aspi-raan" / "आस्पिरान" for the voice so it says it right.
+**Please listen to:** the brand name in `intro-1-hi.mp3` and `pods-1-hi.mp3`. The checker hears "Aspirant" (and once
+"आज फिरान"); the English pod line now comes back as "Aspiran". Only a human ear can settle it.
 
-To re-record a line after changing its words in `showreel.js` (owner runs this in Terminal, in `server/`):
+To re-record a line after changing its words in `showreel.js` (in Terminal, in `server/`):
 ```
 ELEVENLABS_API_KEY=$(security find-generic-password -a aspiran -s elevenlabs-api-key -w) node scripts/showreel-voice.mjs --force pods-1
 ```
-Leave off `--force pods-1` to record only lines that have no clip yet.
+Leave off `--force pods-1` to record only lines that have no clip yet. Sumeet is the default voice (`--voice=` picks another).
 
 ## Checks
 - Every scene at 1366 px and 375 px in English, and the busiest scenes in Hindi: nothing cut off, no sideways scroll,
