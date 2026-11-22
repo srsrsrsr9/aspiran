@@ -4,6 +4,7 @@ import { type Env, HELPLINES, bad, distress, istDay, istNow, json } from "./shar
 import { ensureSchema, sha256Hex } from "./staff";
 import { mailOn, sendMail } from "./mail";
 import { business } from "./payments";
+import { siteContent } from "./site-content";
 
 /**
  * The website (aspiran.in) talks to two routes here:
@@ -110,6 +111,7 @@ async function takeTurn(env: Env, key: string, cap: number): Promise<boolean> {
 export async function webRoute(req: Request, env: Env, path: string): Promise<Response | null> {
   if (path === "/web/chotu" && req.method === "POST") return webChotu(req, env);
   if (path === "/web/lead" && req.method === "POST") return webLead(req, env);
+  if (path === "/web/site-content" && req.method === "GET") return siteContent(env);
   return null;
 }
 
