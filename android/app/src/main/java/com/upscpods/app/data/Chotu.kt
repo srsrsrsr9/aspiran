@@ -143,6 +143,8 @@ data class ChotuTurn(
     val jeetu: Boolean = false,
     /** The app's own check-in line, from a reviewed template: never a model's words. */
     val checkIn: Boolean = false,
+    /** A plan Jeetu sent with this reply: a card with "Use this plan" and "Change it". */
+    val plan: JeetuPlan? = null,
 ) {
     /** The app's own fallback line (offline, stuck, server trouble), not a model's answer: it carries no source label. */
     val fromApp get() = !fromUser && (checkIn || text in setOf(Chotu.OFFLINE_REPLY, Chotu.STUCK, Chotu.CLOUD_TROUBLE))
@@ -312,6 +314,8 @@ class Chotu private constructor(private val app: Context) {
         patternOffered = false
         checkInLine = null
         checkInMoment = null
+        planStatus = null
+        changingPlan = false
         scope.launch { withContext(engineThread) { chat?.close(); chat = null } }
     }
 
@@ -323,6 +327,16 @@ class Chotu private constructor(private val app: Context) {
     fun ask(text: String) {
         val clean = text.trim()
         if (clean.isEmpty() || thinking) return
+        // The answer to a plan check-in (Done, Half, Not yet): kept as the facts' plan_status, and the Jeetu plan's item
+        // it asked about is not asked again.
+        if (checkInMoment == CheckIns.PLAN && userTurns == 0) {
+            val i = CheckIns.planAnswers(false).indexOf(clean).takeIf { it >= 0 } ?: CheckIns.planAnswers(true).indexOf(clean)
+            if (i >= 0) {
+                planStatus = listOf("done", "half", "not_yet")[i]
+                val f = facts()
+                if (f != null && f.checkOn != null && f.checkOn == f.planItem) { JeetuPlans.markNextAnswered(app); planInUse = JeetuPlans.current(app) }
+            }
+        }
         turns = turns + ChotuTurn(true, clean)
         jeetuOffer = false
         // The phone's distress check runs first, for every member: no model sees the message.
@@ -408,6 +422,17 @@ class Chotu private constructor(private val app: Context) {
     // --- cloud Chotu --------------------------------------------------------------
 
     private data class CloudReply(val text: String, val care: Boolean, val raw: String? = null, val sig: String? = null, val jeetu: Boolean = false)
+
+    /** The moment this chat was opened from, as the server's `facts.checkin` names it. */
+    private val checkinKey: String? get() = when (checkInMoment) {
+        CheckIns.PLAN -> "morning_after"; CheckIns.BACK -> "return"; CheckIns.WEEK -> "sunday"; else -> null
+    }
+    /** The student's answer to the plan check-in ("done", "half", "not_yet"), once given. */
+    private var planStatus: String? = null
+
+    /** The facts object for the server's Chotu and Jeetu; null when there's nothing on record yet. */
+    private fun factsJson(): kotlinx.serialization.json.JsonObject? =
+        facts()?.takeIf { it.hasAnything || it.planItems.isNotEmpty() }?.json(checkinKey, planStatus)
     /** An error sentence written by our server for people to read (rate limit, paused, and so on). */
     private class ServerSaid(message: String) : Exception(message)
 
@@ -445,25 +470,62 @@ class Chotu private constructor(private val app: Context) {
 
     /**
      * Jeetu's take, only on a tap of the chip (or "Your week"). He gets the student's last question and the app's numbers
-     * (no plan text, nothing from Close the Day), and his reply shows under his name in this thread.
+     * (no plan text, nothing from Close the Day), and his reply shows under his name in this thread. With no question
+     * yet, only the numbers go: the server asks him for a plan from them.
      */
     fun askJeetu(client: JeetuClient, hindi: Boolean) {
         if (thinking) return
-        jeetuOffer = false
         val q = turns.lastOrNull { it.fromUser && !it.care }?.text
-            ?: if (hindi) "मेरे आँकड़े देखकर एक छोटा प्लान बताइए।" else "Look at my numbers and suggest a small plan."
-        val facts = facts()?.block(private = false)
+        val facts = factsJson()
+        val history = when {
+            q != null -> listOf(JeetuTurn(true, q))
+            facts != null -> emptyList()
+            else -> listOf(JeetuTurn(true, if (hindi) "पढ़ाई का एक छोटा प्लान बताइए।" else "Suggest a small study plan."))
+        }
+        callJeetu(client, history, facts, hindi)
+    }
+
+    /** "Change it" on a plan card: the next message the student sends goes to Jeetu as the change. */
+    var changingPlan by mutableStateOf(false); private set
+    fun changePlan() { changingPlan = true; jeetuOffer = false }
+    fun cancelChange() { changingPlan = false }
+
+    /** The student's change to Jeetu's last plan: his last reply and their words, with the same facts. */
+    fun sendPlanChange(client: JeetuClient, text: String, hindi: Boolean) {
+        val clean = text.trim()
+        if (clean.isEmpty() || thinking) return
+        changingPlan = false
+        turns = turns + ChotuTurn(true, clean)
+        if (DistressMatcher.matches(clean)) { markCare(); turns = turns + ChotuTurn(false, CARE_REPLY, care = true); return }
+        val q = turns.dropLast(1).lastOrNull { it.fromUser && !it.care }?.text
+        val last = turns.lastOrNull { it.jeetu && it.plan != null }
+        val history = listOfNotNull(q?.let { JeetuTurn(true, it) }, last?.let { JeetuTurn(false, it.text) }, JeetuTurn(true, clean))
+        callJeetu(client, history, factsJson(), hindi)
+    }
+
+    private fun callJeetu(client: JeetuClient, history: List<JeetuTurn>, facts: kotlinx.serialization.json.JsonObject?, hindi: Boolean) {
+        jeetuOffer = false
         thinking = true
         turns = turns + ChotuTurn(false, "", jeetu = true)
         scope.launch {
-            val r = client.once(q, facts, hindi)
+            val r = client.once(history, facts, hindi)
             thinking = false
             turns = turns.dropLast(1) + when {
                 r == null -> ChotuTurn(false, client.trouble ?: CLOUD_TROUBLE, jeetu = true, checkIn = true)
                 r.care -> { markCare(); ChotuTurn(false, CARE_REPLY, care = true) }
-                else -> ChotuTurn(false, r.text, jeetu = true, id = r.id, voiceText = r.text, voiceSig = r.voiceSig)
+                else -> ChotuTurn(false, r.text, jeetu = true, id = r.id, voiceText = r.text, voiceSig = r.voiceSig, plan = r.plan)
             }
         }
+    }
+
+    /** The plan the student is using now (accepted this week), for the card's "In use" state. */
+    var planInUse by mutableStateOf(JeetuPlans.current(app)); private set
+
+    /** "Use this plan": it becomes what Chotu's morning check-in asks about, for a week. */
+    fun usePlan(plan: JeetuPlan) {
+        JeetuPlans.accept(app, plan)
+        planInUse = JeetuPlans.current(app)
+        changingPlan = false
     }
 
     /**
@@ -499,17 +561,17 @@ class Chotu private constructor(private val app: Context) {
                     null -> java.util.Locale.getDefault().getDisplayLanguage(java.util.Locale.ENGLISH)
                 })
                 if (notes != null) put("notes", notes)
-                // The app's own numbers (no plan text), so online Chotu can keep the student to their own record.
-                if (mode != "prep" || history.size > 1) facts()?.takeIf { it.hasAnything }?.let { put("facts", it.block(private = false)) }
-                checkInLine?.let { put("checkin", it) }
             }
+            // The app's own numbers as an object (no text the student wrote), so online Chotu keeps the student to their own record.
+            if (mode != "prep" || history.size > 1) factsJson()?.let { put("facts", it) }
         }
         val req = Request.Builder().url("$server/chotu").post(body.toString().toRequestBody("application/json".toMediaType())).build()
         http.newCall(req).execute().use { r ->
             val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
             if (o?.get("care")?.jsonPrimitive?.boolean == true) return CloudReply(CARE_REPLY, care = true)
             val text = o?.get("reply")?.jsonPrimitive?.content
-            val tagged = text?.contains(JEETU_TAG) == true
+            // The server says offerJeetu itself; a [JEETU] tag left in the text counts too.
+            val tagged = text?.contains(JEETU_TAG) == true || o?.get("offerJeetu")?.jsonPrimitive?.boolean == true
             val shown = text?.let { untag(clean(it)) }
             if (r.isSuccessful && !shown.isNullOrBlank()) return CloudReply(shown, care = false, raw = text, sig = o["voice"]?.jsonPrimitive?.content, jeetu = tagged)
             throw o?.get("error")?.jsonPrimitive?.content?.let { ServerSaid(it) } ?: java.io.IOException(OFFLINE_REPLY)

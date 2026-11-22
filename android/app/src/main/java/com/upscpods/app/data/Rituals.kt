@@ -269,7 +269,7 @@ object Rituals {
         if (!plus || sunday) return null
         // The comeback ritual already says this; one is enough.
         if (!comebackOn && lastOpen != null && !lastOpen.isAfter(now.toLocalDate().minusDays(3))) return CheckIns.BACK
-        if (f.yesterdayStep != null && !f.yesterdayStepDone) return CheckIns.PLAN
+        if (f.checkOn != null) return CheckIns.PLAN
         return null
     }
 
@@ -326,7 +326,7 @@ object Rituals {
     suspend fun preview(context: Context, r: Ritual) {
         if (r == Ritual.CHECK_IN) {
             val f = EffortLog.facts(context)
-            val moment = if (f.yesterdayStep != null) CheckIns.PLAN else if (f.hasAnything) CheckIns.WEEK else CheckIns.BACK
+            val moment = if (f.checkOn != null) CheckIns.PLAN else if (f.hasAnything) CheckIns.WEEK else CheckIns.BACK
             val (title, text) = CheckIns.notification(moment, f, false) ?: (r.title to "Preview")
             prefs(context).edit().putString("checkinMoment", moment).apply()
             send(context, r, title, text, preview = true, moment = moment)

@@ -98,6 +98,8 @@ fun MascotTab(
     showWeek: Boolean = false,
     /** Asks Jeetu from the chip or the card. Null when he isn't on offer here. */
     onJeetu: (() -> Unit)? = null,
+    /** "Change it" on Jeetu's plan card: sends the student's change to Jeetu. Null when he isn't on offer. */
+    onPlanChange: ((String) -> Unit)? = null,
 ) {
     LaunchedEffect(Unit) { chotu.refresh() }
     if (resultQuiet != null) {
@@ -135,7 +137,7 @@ fun MascotTab(
                 } else TextButton(onClick = { showModel = true }) { Text(offlineLine(s)) }
             }
         }
-        Chat(chotu, onOpenNeedToTalk, onRemember = onRemember, onOpenPod = onOpenPod, hindi = hindi, showWeek = showWeek, onJeetu = onJeetu)
+        Chat(chotu, onOpenNeedToTalk, onRemember = onRemember, onOpenPod = onOpenPod, hindi = hindi, showWeek = showWeek, onJeetu = onJeetu, onPlanChange = onPlanChange)
     }
     if (about) AlertDialog(
         onDismissRequest = { about = false },
@@ -266,6 +268,7 @@ private fun ColumnScope.Chat(
     hindi: Boolean = false,
     showWeek: Boolean = false,
     onJeetu: (() -> Unit)? = null,
+    onPlanChange: ((String) -> Unit)? = null,
 ) {
     val scope = rememberCoroutineScope()
     var reporting by remember { mutableStateOf<ChotuTurn?>(null) }
@@ -305,6 +308,8 @@ private fun ColumnScope.Chat(
         }
         itemsIndexed(turns) { i, t ->
             Turn(t, onOpenNeedToTalk)
+            t.plan?.let { plan -> PlanCard(plan, hindi, inUse = chotu.planInUse?.items == plan.items, busy = chotu.thinking,
+                onUse = { chotu.usePlan(plan) }, onChange = if (onPlanChange != null && i == turns.lastIndex) ({ chotu.changePlan() }) else null) }
             // Report and Remember sit under each finished reply (not care replies, not while streaming).
             if (!t.fromUser && !t.care && t.text.isNotBlank() && !(chotu.thinking && i == turns.lastIndex)) {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
@@ -339,11 +344,12 @@ private fun ColumnScope.Chat(
             if (chotu.mode == "talk" && onOpenPod != null) TextButton(onClick = onOpenPod) { Text("Your pod is around too. Say hello there?") }
         }
     }
+    val changing = chotu.changingPlan && onPlanChange != null
     Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
         OutlinedTextField(
             value = text,
             onValueChange = { text = it.take(1000) },
-            placeholder = { Text("Ask ${Brand.MASCOT_SHORT}") },
+            placeholder = { Text(if (changing) { if (hindi) "Jeetu को बताइए क्या बदलना है" else "Tell Jeetu what to change" } else "Ask ${Brand.MASCOT_SHORT}") },
             modifier = Modifier.weight(1f),
             maxLines = 4,
         )
@@ -351,7 +357,8 @@ private fun ColumnScope.Chat(
         if (chotu.thinking) {
             OutlinedButton(onClick = { chotu.cancel() }) { Text("Stop") }
         } else {
-            Button(onClick = { chotu.ask(text); text = "" }, enabled = text.isNotBlank()) { Text("Ask") }
+            if (changing) TextButton(onClick = { chotu.cancelChange() }) { Text(if (hindi) "रहने दें" else "Cancel") }
+            Button(onClick = { if (changing) onPlanChange!!(text) else chotu.ask(text); text = "" }, enabled = text.isNotBlank()) { Text(if (changing) "Send" else "Ask") }
         }
     }
 
@@ -406,6 +413,26 @@ private fun ColumnScope.Chat(
         )
     }
 
+}
+
+/**
+ * Jeetu's plan: up to 3 items, then "Use this plan" and "Change it". A used plan is what Chotu's morning check-in asks
+ * about for a week (data/JeetuPlan.kt). No timers: minutes are a size, not a countdown.
+ */
+@Composable
+private fun PlanCard(plan: com.upscpods.app.data.JeetuPlan, hindi: Boolean, inUse: Boolean, busy: Boolean, onUse: () -> Unit, onChange: (() -> Unit)?) {
+    Column(
+        Modifier.widthIn(max = 320.dp).background(MaterialTheme.colorScheme.secondaryContainer, RoundedCornerShape(12.dp)).padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(if (hindi) "Jeetu का प्लान" else "Jeetu's plan", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+        plan.items.forEachIndexed { n, it -> Text("${n + 1}. ${it.line()}", style = MaterialTheme.typography.bodyMedium) }
+        if (inUse) Text(if (hindi) "चल रहा है। Chotu सुबह इसके बारे में पूछेगा।" else "In use. Chotu will ask how it went.", style = MaterialTheme.typography.labelMedium)
+        else FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = onUse, enabled = !busy) { Text(if (hindi) "यही प्लान लें" else "Use this plan") }
+            if (onChange != null) OutlinedButton(onClick = onChange, enabled = !busy) { Text(if (hindi) "बदलें" else "Change it") }
+        }
+    }
 }
 
 @Composable

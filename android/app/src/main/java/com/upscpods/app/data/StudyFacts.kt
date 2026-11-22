@@ -59,7 +59,25 @@ data class StudyFacts(
     val yesterdayStepDone: Boolean,
     /** Days since the last day with any work, before today. Null with no record at all. */
     val quietDays: Int?,
+    /** Last week (Monday to Sunday) for comparison with the student's own past. */
+    val lastWeekDoneMin: Int = 0,
+    val lastWeekQuestions: Int = 0,
+    val lastWeekAnswers: Int = 0,
+    val lastWeekReviews: Int = 0,
+    val weekMocks: Int = 0,
+    /** Days this week with any work. */
+    val weekDaysActive: Int = 0,
+    /** Last 7 days' accuracy of each [stuck] subject. */
+    val stuckPct: Map<String, Int> = emptyMap(),
+    /** Times in the last 14 days a task the student chose (moved, or their own first step) was left undone. */
+    val missedTimes: Int = 0,
+    /** The accepted Jeetu plan's next item, when one is live (data/JeetuPlan.kt). Jeetu's text, not the student's. */
+    val planItem: String? = null,
+    val planItems: List<String> = emptyList(),
 ) {
+    /** What the morning check-in asks about: the student's own unticked first step, else the accepted plan's next item. */
+    val checkOn: String? get() = yesterdayStep?.takeIf { !yesterdayStepDone } ?: planItem
+
     /** A pattern worth Jeetu's take: something planned and missed 3+ times, or a subject stuck below 50%. */
     val jeetuPattern get() = stuck.isNotEmpty() || missed.isNotEmpty()
     val hasAnything get() = weekDoneMin > 0 || monthQuestions > 0 || monthAnswers > 0 || monthReviews > 0 || monthMocks > 0
@@ -77,6 +95,7 @@ data class StudyFacts(
         win?.let { add("Win: ${it.first}") }
         stuck.forEach { add("$it below 50% two weeks running.") }
         missed.forEach { add("$it planned but not done on 3 or more of the last 14 days.") }
+        if (planItems.isNotEmpty()) add("Plan from Jeetu they chose: ${planItems.joinToString("; ")}.")
         if (private && yesterdayStep != null) add("Yesterday's own plan: \"$yesterdayStep\" (${if (yesterdayStepDone) "ticked done" else "not ticked"}).")
     }.joinToString("\n")
 
@@ -86,6 +105,37 @@ data class StudyFacts(
         val effort = if (hindi) "इस हफ़्ते $weekQuestions प्रश्न, इस महीने $monthQuestions।" else "That's $weekQuestions questions this week and $monthQuestions this month."
         val second = shownTrend?.let { trendLine(it, hindi) } ?: win?.let { if (hindi) it.second else it.first }
         return listOfNotNull(effort, second).joinToString("\n")
+    }
+
+    /**
+     * The same numbers as the JSON object the server's Chotu and Jeetu read (`facts`, server-chotu-jeetu-api.md). No
+     * student-written text: the first step stays on the phone. [checkin] and [planStatus] are the moment and the
+     * student's answer to it, when there is one.
+     */
+    fun json(checkin: String? = null, planStatus: String? = null): kotlinx.serialization.json.JsonObject = kotlinx.serialization.json.buildJsonObject {
+        fun obj(name: String, vararg kv: Pair<String, Int>) = put(name, kotlinx.serialization.json.buildJsonObject { kv.forEach { (k, v) -> put(k, kotlinx.serialization.json.JsonPrimitive(v)) } })
+        checkin?.let { put("checkin", kotlinx.serialization.json.JsonPrimitive(it)) }
+        if (planItems.isNotEmpty()) put("today_plan", kotlinx.serialization.json.JsonArray(planItems.map { kotlinx.serialization.json.JsonPrimitive(it.take(200)) }))
+        planStatus?.let { put("plan_status", kotlinx.serialization.json.JsonPrimitive(it)) }
+        obj("week", "minutes" to weekDoneMin, "planned_minutes" to weekPlannedMin, "questions" to weekQuestions, "answers" to weekAnswers,
+            "reviews" to weekReviews, "mocks" to weekMocks, "days_active" to weekDaysActive)
+        obj("last_week", "minutes" to lastWeekDoneMin, "questions" to lastWeekQuestions, "answers" to lastWeekAnswers, "reviews" to lastWeekReviews)
+        obj("month", "minutes" to monthMinutes, "questions" to monthQuestions, "answers" to monthAnswers, "reviews" to monthReviews, "mocks" to monthMocks)
+        win?.let { put("wins", kotlinx.serialization.json.JsonArray(listOf(kotlinx.serialization.json.JsonPrimitive(it.first)))) }
+        if (trends.isNotEmpty()) put("trends", kotlinx.serialization.json.JsonArray(trends.take(3).map { t ->
+            kotlinx.serialization.json.buildJsonObject {
+                put("subject", kotlinx.serialization.json.JsonPrimitive(t.subject)); put("from", kotlinx.serialization.json.JsonPrimitive(t.fromPct))
+                put("to", kotlinx.serialization.json.JsonPrimitive(t.toPct)); put("weeks", kotlinx.serialization.json.JsonPrimitive(t.weeks)); put("unit", kotlinx.serialization.json.JsonPrimitive("%"))
+            }
+        }))
+        if (missedTimes > 0) put("missed_plans", kotlinx.serialization.json.JsonPrimitive(missedTimes))
+        if (stuck.isNotEmpty()) put("stuck_topics", kotlinx.serialization.json.JsonArray(stuck.take(3).map { s ->
+            kotlinx.serialization.json.buildJsonObject {
+                put("topic", kotlinx.serialization.json.JsonPrimitive(s)); stuckPct[s]?.let { put("accuracy", kotlinx.serialization.json.JsonPrimitive(it)) }
+                put("weeks", kotlinx.serialization.json.JsonPrimitive(2))
+            }
+        }))
+        quietDays?.let { put("quiet_days", kotlinx.serialization.json.JsonPrimitive(it)) }
     }
 
     companion object {
@@ -151,6 +201,7 @@ object Facts {
         // Missed, on 3 or more of the last 14 days (today not counted yet): a task the student moved to tomorrow and didn't
         // do, or their own first step left unticked. Today's 3 simply left alone don't count: the student didn't choose them.
         val recent = days.filterKeys { d -> bucketDays(d, today)?.let { it in 1..14 } == true }.values
+        val missedTimes = recent.sumOf { l -> TaskId.entries.count { t -> t.name in l.moved && t.name !in l.done } + (if (l.firstStep != null && !l.firstStepDone) 1 else 0) }
         val missed = TaskId.entries.filter { t -> recent.count { t.name in it.moved && t.name !in it.done } >= 3 }.map { it.title } +
             listOfNotNull("Their own first step".takeIf { recent.count { it.firstStep != null && !it.firstStepDone } >= 3 })
 
@@ -160,6 +211,11 @@ object Facts {
         val quiet = active.maxOrNull()?.let { ChronoUnit.DAYS.between(LocalDate.parse(it), today).toInt() }
 
         val weekQ = qs(::inWeek)
+        val lastMonday = monday.minusDays(7)
+        fun inLastWeek(d: String) = d >= lastMonday.toString() && d < monday.toString()
+        val lastWeekMins = minutes.filterKeys(::inLastWeek).values.filter { it.size >= 2 }
+        val weekActive = (days.filter { (_, l) -> l.done.isNotEmpty() || l.firstStepDone }.keys + all.keys + answersWritten.map { it.toString() } +
+            minutes.filter { (_, v) -> v.size >= 2 && v[1] > 0 }.keys + reviews.filterValues { it > 0 }.keys).count(::inWeek)
         val monthAns = answersWritten.count { inMonth(it.toString()) }
         return StudyFacts(
             today = today,
@@ -180,6 +236,14 @@ object Facts {
             yesterdayStep = y?.firstStep,
             yesterdayStepDone = y?.firstStepDone == true,
             quietDays = quiet,
+            lastWeekDoneMin = lastWeekMins.sumOf { it[1] },
+            lastWeekQuestions = qs(::inLastWeek),
+            lastWeekAnswers = answersWritten.count { inLastWeek(it.toString()) },
+            lastWeekReviews = reviews.filterKeys(::inLastWeek).values.sum(),
+            weekMocks = mocks.count { inWeek(it.day) },
+            weekDaysActive = weekActive,
+            stuckPct = stuck.associateWith { pct(bySubject.getValue(it)[0]) },
+            missedTimes = missedTimes,
         )
     }
 
@@ -284,7 +348,9 @@ class EffortLog(context: Context) {
             val zone = ZoneId.systemDefault()
             val written = AnswerLog(context).all().filter { it.outcome == "finished" }
                 .map { Instant.ofEpochMilli(it.startedAt).atZone(zone).toLocalDate() }
+            val plan = JeetuPlans.current(context, today)
             return Facts.build(today, Week(context).log(), log.days(), log.answers(), written, Mocks(context).history(), log.reviews())
+                .copy(planItem = plan?.next?.let { plan.items[it].what }, planItems = plan?.items?.map { it.line() }.orEmpty())
         }
     }
 }

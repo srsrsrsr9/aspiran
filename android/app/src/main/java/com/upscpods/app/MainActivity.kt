@@ -556,6 +556,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
+    var jeetuTaste by remember { mutableStateOf(false) }
     var playReady by remember { mutableStateOf(false) }
     LaunchedEffect(overlay, tab, touring) {
         if (plusMember == null || tab == Tab.PREP || tab == Tab.MASCOT || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT, Overlay.CA))
@@ -563,13 +564,16 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                 plusMember = it.plan != null; plusPrice = it.yearlyInr(); playReady = it.playReady
                 // Chotu on the phone is Plus only; the answer is remembered so it works without internet too.
                 if (!debugPlus) chotu.plusAnswered(it.plan != null)
+                // Jeetu: Plus, or a free member's first-14-days taste. An older server sends nothing: Plus only.
+                jeetuTaste = it.jeetu?.available == true
+                if (it.jeetu != null) jeetu.available = it.jeetu.available || it.plan != null
             } ?: run { if (plusMember == null) plusMember = false }
     }
     LaunchedEffect(debugPlus) { if (debugPlus) chotu.plusAnswered(true) }
     // Plus, as far as Chotu knows: the server's last answer (kept 14 days), for check-ins, wins and the debrief.
     val plusChotu = chotu.plus || plusGate.member
-    // Jeetu from Chotu's chip: Plus members, while Jeetu is on and awake.
-    val jeetuFromChotu = plusChotu && com.upscpods.app.data.Jeetu.awake
+    // Jeetu from Chotu's chip: Plus members and the free taste, until the server says no, while Jeetu is on and awake.
+    val jeetuFromChotu = (plusChotu || jeetuTaste) && jeetu.available && com.upscpods.app.data.Jeetu.awake
     // The 2-line debrief after a mock or a practice set (Plus; never in a result week).
     var debrief by remember { mutableStateOf<com.upscpods.app.data.StudyFacts?>(null) }
     LaunchedEffect(debriefDue) {
@@ -641,6 +645,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         syllabusMap.forget(); mapTick++
         week.forget()
         effort.forget()
+        com.upscpods.app.data.JeetuPlans.forget(context)
         staged.forget()
         Focus.forget(context)
         Nudge.set(context, null)
@@ -900,6 +905,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     // "Your week": Plus members any day; everyone on Sundays (owner, 22 Nov 2026).
                     showWeek = plusChotu || LocalDate.now().dayOfWeek == java.time.DayOfWeek.SUNDAY,
                     onJeetu = if (jeetuFromChotu) ({ chotu.askJeetu(jeetu, hindi) }) else null,
+                    onPlanChange = if (jeetuFromChotu) ({ t -> chotu.sendPlanChange(jeetu, t, hindi) }) else null,
                     resultQuiet = result?.let { "It's a result week, so I'm staying quiet. Whatever happened, you're more than a roll number. Your pod and Need to talk are here." },
                     onRemember = { staged.addNote(it) },
                     onOpenPod = { tab = Tab.POD },

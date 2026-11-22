@@ -17,8 +17,9 @@ object CheckIns {
 
     /** The notification: title and line. Null when there's nothing true to say. */
     fun notification(moment: String, f: StudyFacts, hindi: Boolean): Pair<String, String>? = when (moment) {
-        PLAN -> f.yesterdayStep?.takeIf { !f.yesterdayStepDone }?.let { step ->
-            if (hindi) "Chotu चेक-इन" to "कल का प्लान: ${short(step)}। कैसा रहा?" else "Chotu check-in" to "Yesterday's plan: ${short(step)}. How did it go?"
+        PLAN -> f.checkOn?.let { step ->
+            val own = step == f.yesterdayStep
+            if (hindi) "Chotu चेक-इन" to "${if (own) "कल का प्लान" else "आपका प्लान"}: ${short(step)}। कैसा रहा?" else "Chotu check-in" to "${if (own) "Yesterday's plan" else "Your plan"}: ${short(step)}. How did it go?"
         }
         BACK -> if (hindi) "चाय तैयार है" to "आज एक छोटा काम: 5 प्रीलिम्स प्रश्न?" else "Chai's on" to "One small thing today: 5 Prelims questions?"
         WEEK -> if (!f.hasAnything) null
@@ -29,8 +30,9 @@ object CheckIns {
 
     /** Chotu's first line when the check-in is opened. The student's answer is what the model replies to. */
     fun opening(moment: String, f: StudyFacts, hindi: Boolean): String? = when (moment) {
-        PLAN -> f.yesterdayStep?.let { step ->
-            if (hindi) "कल आपने तय किया था: \"${short(step)}\"। हो गया, आधा, या अभी नहीं?" else "Yesterday you planned: \"${short(step)}\". Done, half, or not yet?"
+        PLAN -> f.checkOn?.let { step ->
+            if (step != f.yesterdayStep) { if (hindi) "Jeetu के प्लान से: \"${short(step)}\"। हो गया, आधा, या अभी नहीं?" else "From the plan you chose with Jeetu: \"${short(step)}\". Done, half, or not yet?" }
+            else if (hindi) "कल आपने तय किया था: \"${short(step)}\"। हो गया, आधा, या अभी नहीं?" else "Yesterday you planned: \"${short(step)}\". Done, half, or not yet?"
         }
         BACK -> if (hindi) "आपको देखकर अच्छा लगा। छोटी शुरुआत करें? पाँच प्रीलिम्स प्रश्न, या एक चाय कार्ड।"
             else "Good to see you. Want a small start? Five Prelims questions, or one Chai card."
