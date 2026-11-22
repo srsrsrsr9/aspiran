@@ -155,7 +155,8 @@ export function viewJeetu() {
         h("div.chips", STARTERS.map((s) => h("button.chip", { onclick: () => { input.value = s; send(); } }, s)))],
       chat.turns.map((t) => h("div.msg" + (t.role === "assistant" ? ".jeetu" : ""),
         t.role === "assistant" ? label(18) : h("span.who", "You"),
-        h("div", t.care ? "(kept on this device)" : t.content),
+        h("div", t.care ? "(kept on this device)" : t.plan ? null : t.content),
+        t.plan && (t.planBox ??= C.planCard?.(t.plan, { change: (text) => { input.value = text; send(); } })),
         t.role === "assistant" && C.listen?.({ who: "jeetu", text: t.content, sig: t.voice }, { hi }),
         t.role === "assistant" && t.id && h("button.ghost.small", { onclick: () => report(t) }, t.reported ? "Reported" : "Report"))),
       chat.busy && h("p.small.muted", hi ? "Jeetu सोच रहे हैं…" : "Jeetu is thinking…")),
@@ -172,10 +173,13 @@ export function viewJeetu() {
     chat.turns.push({ role: "user", content: text }); chat.busy = true; chat.offline = null; draw();
     const body = { messages: chat.turns.filter((t) => !t.care).slice(-8).map(({ role, content }) => ({ role, content })), context: { language: C.memberLang?.() ?? (hi ? "Hindi" : "English") } };
     if (C.plusOn?.()) body.memberId = C.profile()?.memberId;
+    // The app's own count of your week (coach.js): Jeetu builds a plan on these numbers, as given.
+    const facts = C.resultMode?.() ? null : C.facts?.();
+    if (facts) body.facts = facts;
     const r = await C.post("/jeetu", body);
     chat.busy = false;
     if (r?.care) chat.care = true;
-    else if (r?.reply) chat.turns.push({ role: "assistant", content: r.reply, id: C.randomId(), voice: r.voice });
+    else if (r?.reply) chat.turns.push({ role: "assistant", content: r.reply, plan: r.plan ?? null, id: C.randomId(), voice: r.voice });
     else chat.offline = r?.error ?? (hi ? "Jeetu अभी जवाब नहीं दे पाए। एक मिनट बाद फिर कोशिश करें।" : "Jeetu couldn't answer just now. Try again in a minute.");
     draw();
   }

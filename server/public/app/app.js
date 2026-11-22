@@ -26,6 +26,7 @@ import * as VINE from "./vine.js";
 import * as TRY from "./try.js";
 import * as IT from "./interactives.js";
 import * as J from "./jeetu.js";
+import * as CO from "./coach.js";
 import * as V from "./voice.js";
 import * as INST from "./institute.js";
 // The app lives on app.aspiran.in. Old invite links copied on the staff address (admin.aspiran.in/app/#inst/…) move
@@ -653,6 +654,7 @@ function viewToday() {
     BR.welcomeBack(gapAtOpen),
     profileAsk("today"),
     routineCard(),
+    new Date().getDay() === 0 && CO.yourWeekCard(),
     nextCard,
     h("details", h("summary", "Today's full list"), tasks),
     h("div.card", h("div.row.between",
@@ -920,7 +922,9 @@ function viewPrelims() {
       if (!viewPrelims.counted) { viewPrelims.counted = true; practiceFinished(set, results); }
       put(box, h("h2", `${right} of ${set.length} right.`),
         firstRight && h("p", `You got the ${firstRight} question right. That one's yours now.`),
-        h("p.muted", "These come back in your review just before you'd forget them."), h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today"));
+        h("p.muted", "These come back in your review just before you'd forget them."),
+        !resultMode() && CO.debrief({ kind: "practice", questions: set.length, correct: right, topic: results[0]?.topic ?? null }),
+        h("p.small.muted", `Added ${set.length} to the community season.`), h("a.btn", { href: "#today" }, "Back to Today"));
       return;
     }
     const q = set[i];
@@ -1418,6 +1422,7 @@ function viewProgress() {
   const weeks = /^\d{4}$/.test(ty ?? "") ? Math.round((Date.parse(`${ty}-05-25`) - Date.now()) / (7 * 86400_000)) : null;
   return h("div.col", h("h1", "You vs. you"), pauseLine("you-vs-you"),
     h("p.muted", "Only against your own past. No ranks, no cut-offs, nobody else's numbers."),
+    !resultMode() && CO.yourWeekCard(),
     J.weekly(store.get("rightDays", {}), day),
     weeks != null && weeks > 0 && h("p", `Prelims ${ty} is about ${weeks} weeks away (UPSC usually holds it in late May; check the official calendar).`),
     h("div.card", h("h2", { style: { marginTop: 0 } }, "Your syllabus map"), h("p", `${counts.met} Met · ${counts.recall} Can recall · ${counts.use} Can use, out of ${SY.NODES.length} topics.`)),
@@ -1891,6 +1896,7 @@ function mockResult(r) {
       rangeBand(store.get("mockHistory", []))),
     r.id !== "quick" && !resultMode() && mockBandCard(r),
     r.id !== "quick" && plusCard("mock_band"),
+    !resultMode() && CO.debrief({ kind: "mock", questions: r.attempted, correct: r.right, minutes: r.minutes }),
     guessLine && h("div.card.soft", guessLine),
     !resultMode() && BR.afterHardMock(r),
     weak.length > 0 && h("p", `Worth a look: ${weak.join(", ")}. Wrong answers come back in Prelims practice.`),
@@ -3032,6 +3038,7 @@ function viewChotu() {
           h("div", t.care ? "(kept on this device)" : t.content),
           t.role === "user" && !t.care && h("button.ghost.small", { onclick: () => rememberNote(t.content) }, "Let Chotu remember this"),
           t.role === "assistant" && V.listen({ who: "chotu", text: t.content, sig: t.voice }, { hi: hindi() }),
+          t.chip,
           t.role === "assistant" && h("button.ghost.small", { onclick: () => reportChotu(t) }, t.reported ? "Reported" : "Report"))),
         chotu.busy && h("p.small.muted", "Chotu is thinking…")),
       chotu.offline && h("div.card.soft", chotu.offline),
@@ -3050,11 +3057,16 @@ function viewChotu() {
     const notes = store.get("smarterChotu") ? P.memory().map((m) => "- " + m.text).join("\n") : "";
     const body = { mode: chotu.mode, messages: chotu.turns.filter((t) => !t.care).slice(-8).map(({ role, content }) => ({ role, content })), context: { language: memberLang(), ...(notes ? { notes } : {}) } };
     if (plusOn() && chotu.mode === "prep") body.memberId = profile().memberId;
+    // What the app counted about your own week: Chotu uses these numbers as given and never makes one up.
+    const facts = resultMode() ? null : CO.weekFacts();
+    if (facts) body.facts = facts;
     const r = await post("/chotu", body);
     chotu.busy = false;
     if (r.care) { chotu.care = true; noteCare(); }
     else if (r.reply) {
-      chotu.turns.push({ role: "assistant", content: r.reply, id: randomId(), voice: r.voice });
+      // "Want Jeetu's take?" only when Chotu offered it; only a tap calls Jeetu, with the same facts and your question.
+      const chip = r.offerJeetu && facts ? CO.jeetuChip({ facts, question: text }) : null;
+      chotu.turns.push({ role: "assistant", content: r.reply, id: randomId(), voice: r.voice, chip });
       // Only that a chat happened, never what was said.
       if (chotu.turns.filter((t) => t.role === "assistant").length === 1) M.track("chotu_chat");
       if (chotu.turns.filter((t) => t.role === "assistant").length === 3) rateAfter("chotu_chat", 4000);
@@ -4260,7 +4272,8 @@ BR.init({ h, put, store, bi, lang, libraryOf, mcqBlock, today, pauseLine, readAl
 // Jeetu · AI, the method coach (jeetu.js): his lines in Review, Mains, the first run and Progress, and Ask Jeetu.
 // AI voices (voice.js): a Listen button on Chotu's and Jeetu's messages. Shows only when the server says voices are on.
 V.init({ h, toast, voiceOn: () => config.voice === true && on("voice"), canListen: () => !!profile() && !resultMode() });
-J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang, listen: V.listen });
+J.init({ h, put, post, lang, on, resultMode, distress, careBox: () => careBox(false), toast, randomId, profile, plusOn, memberLang, listen: V.listen, facts: () => CO.weekFacts(), planCard: (...a) => CO.planCard(...a) });
+CO.init({ h, put, post, getJson, store, today, addDays, hindi, profile, memberLang, toast, careBox: () => careBox(false), chotuLabel: (...a) => chotuLabel(...a) });
 IT.init({ h, put, store, bi, lang, libraryOf, shuffle, today, signedIn: () => Auth.signedIn() });
 // Coaching centres (institute.js): behind the `institutes` flag, off by default.
 INST.init({ h, put, store, lang, profile, toast, render: () => render(), config: () => config, careBox: () => careBox(false), onLeave: (f) => cleanup.push(f) });
