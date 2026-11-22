@@ -62,7 +62,7 @@ assert.equal(live.data.questions[0].en.q, "Discuss the salient features of the H
 assert.deepEqual(live.data.questions[0].nodes, ["gs1-1"]);
 step("ships after approval");
 
-// Public past-paper pages (learn.ts): only approved papers, every question its own page, all in the sitemap.
+// Public past-paper pages (learn.ts): only approved papers, every question its own page; canonical on aspiran.in/pyq (22 Nov 2026), so not in the sitemap.
 const page = async (path) => { const r = await fetch(BASE + path); return { status: r.status, text: await r.text() }; };
 const index = await page("/learn/papers");
 assert.equal(index.status, 200);
@@ -77,7 +77,9 @@ assert.ok(one.text.includes("Harappan architecture") && one.text.includes("/lear
 assert.equal((await page("/learn/papers/csm-2024-gs1")).status, 404, "a draft paper has no page");
 assert.equal((await page("/learn/papers/csm-2025-gs1/99")).status, 404);
 const map = await page("/learn/sitemap.xml");
-assert.ok(map.text.includes("/learn/papers/csm-2025-gs1/20"), "every question is in the sitemap");
+assert.ok(!map.text.includes("/learn/papers"), "paper pages leave the sitemap: aspiran.in/pyq has them now");
+assert.ok(paper.text.includes('rel="canonical" href="https://aspiran.in/pyq/mains-2025-gs1/"'), "the paper page points search engines to aspiran.in");
+assert.ok(one.text.includes('rel="canonical" href="https://aspiran.in/pyq/mains-2025-gs1/q1/"'), "a question page points search engines to aspiran.in");
 const topic = await page("/learn/gs1-1");
 assert.equal(topic.status, 200);
 assert.ok(/Asked \d+ times? by UPSC/.test(topic.text) && topic.text.includes("/learn/papers/csm-2025-gs1/1"), "the topic page counts and links its past questions");

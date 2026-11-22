@@ -52,6 +52,11 @@ const PAPER_NAME: Record<string, string> = { prelims: "GS Paper I", csat: "CSAT 
 const paperName = (p: Paper) => `UPSC ${p.exam === "mains" ? "Mains" : "Prelims"} ${p.year} · ${PAPER_NAME[p.paper] ?? p.paper}`;
 const paperPath = (p: { id: string }) => `/learn/papers/${p.id}`;
 const qPath = (p: { id: string }, q: { n: string }) => `/learn/papers/${p.id}/${encodeURIComponent(q.n)}`;
+// The same papers are on aspiran.in/pyq (the website, since 22 Nov 2026), richer and in Hindi too: search engines are
+// pointed there, and these pages leave the /learn sitemap. Slugs match the website's paperSlug (src/lib/content.ts).
+const SITE_PYQ = "https://aspiran.in/pyq/";
+const sitePaper = (p: { exam: string; year: number; paper: string }) => `${SITE_PYQ}${p.exam}-${p.year}-${p.paper === "prelims" ? "gs1" : p.paper}/`;
+const siteQ = (p: { exam: string; year: number; paper: string }, q: { n: string | number }) => `${sitePaper(p)}q${q.n}/`;
 const LETTER = "abcd";
 /** Papers in reading order: newest year first, Prelims before Mains, then GS1, CSAT, GS2 … Essay. */
 const ORDER = ["prelims", "csat", "gs1", "gs2", "gs3", "gs4", "essay"];
@@ -121,13 +126,13 @@ h2{font:700 22px/1.25 Georgia,serif;margin:36px 0 10px}h3{font-size:18px;margin:
 .brand{font:800 20px Georgia,serif;color:var(--ink);text-decoration:none}.q{border-left:3px solid var(--chai);padding-left:12px;margin:14px 0}
 table{border-collapse:collapse}td,th{padding:4px 12px 4px 0;text-align:left;font-size:15px}footer{margin-top:48px;font-size:13px;color:var(--mute)}`;
 
-function shell(env: Env, o: { title: string; desc: string; path: string; body: string; noindex?: boolean; ld?: unknown }): Response {
+function shell(env: Env, o: { title: string; desc: string; path: string; body: string; noindex?: boolean; ld?: unknown; canonical?: string }): Response {
   const base = (env.PUBLIC_BASE_URL || "https://app.aspiran.in").replace(/\/$/, "");
   const ph = /^phc_\w{20,80}$/.test(env.POSTHOG_KEY ?? "") ? `<script>!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);posthog.init(${JSON.stringify(env.POSTHOG_KEY)},{api_host:${JSON.stringify(env.POSTHOG_HOST || "https://eu.i.posthog.com")},persistence:"memory",person_profiles:"identified_only"})</script>` : "";
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(o.title)}</title><meta name="description" content="${esc(o.desc)}">
-<link rel="canonical" href="${base}${o.path}">${o.noindex ? '<meta name="robots" content="noindex">' : ""}
-<meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:type" content="article"><meta property="og:url" content="${base}${o.path}"><meta property="og:image" content="https://aspiran.in/og.png">
+<link rel="canonical" href="${o.canonical ?? base + o.path}">${o.noindex ? '<meta name="robots" content="noindex">' : ""}
+<meta property="og:title" content="${esc(o.title)}"><meta property="og:description" content="${esc(o.desc)}"><meta property="og:type" content="article"><meta property="og:url" content="${o.canonical ?? base + o.path}"><meta property="og:image" content="https://aspiran.in/og.png">
 <link rel="icon" href="/app/icon.svg" type="image/svg+xml"><meta name="theme-color" content="#0b0d1a"><style>${CSS}</style>
 ${o.ld ? `<script type="application/ld+json">${JSON.stringify(o.ld).replace(/</g, "\\u003c")}</script>` : ""}${ph}</head>
 <body><main><div class="top"><a class="brand" href="https://aspiran.in/">Aspiran</a><a class="small" href="/learn">All UPSC topics</a></div>
@@ -201,7 +206,7 @@ function papersIndex(env: Env, papers: Paper[]): Response {
 <h1>UPSC Civil Services past papers, by year</h1>
 <p>${papers.length} papers and ${total} questions, word for word from UPSC's own question papers. Prelims answers come only from UPSC's official answer keys. Every question links to the syllabus topic it tests.</p>${CTA("Practise these with spaced review, free")}
 ${years.map((y) => `<h2>${y}</h2><ul>${papers.filter((p) => p.year === y).map((p) => `<li><a href="${paperPath(p)}">${esc(paperName(p))}</a> <span class="small">· ${p.questions.length} questions${p.exam === "prelims" ? (p.key.status === "official" ? " · UPSC key" : " · no key yet") : ""}</span></li>`).join("")}</ul>`).join("")}`;
-  return shell(env, { title: "UPSC Civil Services past papers by year: Prelims, CSAT and Mains | Aspiran", desc: `${papers.length} UPSC Civil Services papers (Prelims GS, CSAT, Mains GS and Essay), word for word from UPSC, with UPSC's official answer keys and the syllabus topic of every question.`, path: "/learn/papers", body, noindex: !papers.length });
+  return shell(env, { title: "UPSC Civil Services past papers by year: Prelims, CSAT and Mains | Aspiran", desc: `${papers.length} UPSC Civil Services papers (Prelims GS, CSAT, Mains GS and Essay), word for word from UPSC, with UPSC's official answer keys and the syllabus topic of every question.`, path: "/learn/papers", body, noindex: !papers.length, canonical: SITE_PYQ });
 }
 
 function paperPage(env: Env, p: Paper): Response {
@@ -210,7 +215,7 @@ function paperPage(env: Env, p: Paper): Response {
 <p>${p.questions.length} questions, word for word from <a href="${esc(p.sourceUrl)}" rel="nofollow">UPSC's question paper</a>. ${keyNote(p)}</p>${CTA()}
 ${p.questions.map((q) => `<div class="card" id="q${esc(q.n)}"><h3><a href="${qPath(p, q)}">Question ${esc(q.n)}</a> ${marksLine(q)}</h3><p>${qText(q.en.q)}</p>${options(q)}${answerLine(p, q)}${q.nodes.length ? `<p class="small">Syllabus: ${topicLinks(q)}</p>` : ""}</div>`).join("")}
 ${CTA("Answer these in the app, with review that brings them back")}`;
-  return shell(env, { title: `${paperName(p)}: all ${p.questions.length} questions${p.key.status === "official" ? " with UPSC's answer key" : ""} | Aspiran`, desc: `${paperName(p)}, word for word from UPSC: ${p.questions.length} questions${p.exam === "prelims" && p.key.status === "official" ? ", with UPSC's official answers" : ""}, each linked to its syllabus topic.`, path: paperPath(p), body,
+  return shell(env, { title: `${paperName(p)}: all ${p.questions.length} questions${p.key.status === "official" ? " with UPSC's answer key" : ""} | Aspiran`, desc: `${paperName(p)}, word for word from UPSC: ${p.questions.length} questions${p.exam === "prelims" && p.key.status === "official" ? ", with UPSC's official answers" : ""}, each linked to its syllabus topic.`, path: paperPath(p), canonical: sitePaper(p), body,
     ld: { "@context": "https://schema.org", "@type": "LearningResource", name: paperName(p), learningResourceType: "Past exam paper", educationalLevel: "UPSC Civil Services Examination", inLanguage: "en", isAccessibleForFree: true, provider: { "@type": "Organization", name: "Aspiran", url: "https://aspiran.in" } } });
 }
 
@@ -226,7 +231,7 @@ ${asked ? `<h2>The syllabus topic it tests</h2><ul>${asked}</ul>` : ""}
 ${CTA(p.exam === "mains" ? "Write this answer in the app and mark it, free" : "Try questions like this with spaced review, free")}
 <p>${prev ? `<a href="${qPath(p, prev)}">← Question ${esc(prev.n)}</a>` : ""}${prev && next ? " · " : ""}${next ? `<a href="${qPath(p, next)}">Question ${esc(next.n)} →</a>` : ""}</p>`;
   const lead = clip(q.en.q, 110);
-  return shell(env, { title: `${lead} | ${paperName(p)} Q${q.n} | Aspiran`.slice(0, 180), desc: `${paperName(p)}, question ${q.n}: ${clip(q.en.q, 200)}${p.exam === "prelims" && typeof q.answer === "number" && p.key.status === "official" ? " With UPSC's official answer." : ""}`, path: qPath(p, q), body,
+  return shell(env, { title: `${lead} | ${paperName(p)} Q${q.n} | Aspiran`.slice(0, 180), desc: `${paperName(p)}, question ${q.n}: ${clip(q.en.q, 200)}${p.exam === "prelims" && typeof q.answer === "number" && p.key.status === "official" ? " With UPSC's official answer." : ""}`, path: qPath(p, q), canonical: siteQ(p, q), body,
     ld: { "@context": "https://schema.org", "@type": "Quiz", name: `${paperName(p)}, question ${q.n}`, educationalLevel: "UPSC Civil Services Examination", inLanguage: "en", isAccessibleForFree: true, provider: { "@type": "Organization", name: "Aspiran", url: "https://aspiran.in" } } });
 }
 
@@ -259,7 +264,6 @@ export async function learnRoute(req: Request, env: Env, path: string, ctx: Exec
   else if (path === "/learn/sitemap.xml") {
     const base = (env.PUBLIC_BASE_URL || new URL(req.url).origin).replace(/\/$/, "");
     const urls = ["/learn", ...[...all.values()].filter(indexable).map((t) => learnPath(t.node))];
-    if (papers.length) urls.push("/learn/papers", ...papers.flatMap((p) => [paperPath(p), ...p.questions.map((q) => qPath(p, q))]));
     res = new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${base}${u}</loc></url>`).join("\n")}\n</urlset>\n`, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=3600" } });
   } else if (path === "/learn/papers" || path === "/learn/papers/") {
     res = papersIndex(env, papers);
