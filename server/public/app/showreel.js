@@ -29,106 +29,130 @@ export const TOPICS = ["path-pol-federalism"];
 
 export const LINES = {
   intro: { lines: [
-    { en: "Welcome to Aspiran! Give me a few minutes, and I'll show you how one UPSC topic gets locked in your head. For good.",
-      hi: "Aspiran में आपका स्वागत है! बस कुछ मिनट दीजिए, और मैं दिखाता हूँ कि UPSC का एक topic कैसे दिमाग़ में हमेशा के लिए बैठ जाता है।",
-      say: { en: "Welcome to Aspi-raan! Give me a few minutes, and I'll show you how one UPSC topic gets locked in your head. For good.",
-        hi: "आस्पिरान में आपका स्वागत है! बस कुछ मिनट दीजिए, और मैं दिखाता हूँ कि UPSC का एक topic कैसे दिमाग़ में हमेशा के लिए बैठ जाता है।" } },
-    { en: "One topic. Eleven ways to make it stick. Let's roll!", hi: "एक topic. उसे पक्का करने के ग्यारह तरीक़े। चलिए, शुरू करते हैं!" }] },
+    { en: "Welcome to Aspiran. Give me a few minutes, and I'll show you how one UPSC topic stays with you for good.",
+      hi: "Aspiran में आपका स्वागत है। बस कुछ मिनट दीजिए, और मैं दिखाता हूँ कि UPSC का एक topic कैसे हमेशा के लिए याद रह जाता है।",
+      say: { en: "Welcome to Aspi-raan. Give me a few minutes, and I'll show you how one U P S C topic stays with you for good.",
+        hi: "आस्पिरान में आपका स्वागत है। बस कुछ मिनट दीजिए, और मैं दिखाता हूँ कि UPSC का एक topic कैसे हमेशा के लिए याद रह जाता है।" } },
+    { en: "One topic, eleven ways to make it stick. Let's begin.", hi: "एक topic, उसे पक्का करने के ग्यारह तरीक़े। चलिए, शुरू करते हैं।" }] },
   guess: { lines: [
-    { en: "Look at this. A question before a single page of teaching! Go on, take a guess.", hi: "ज़रा देखिए। पढ़ाई का एक पन्ना भी नहीं, और पहले सवाल! चलिए, अंदाज़ा लगाइए।" },
-    { en: "Right or wrong, doesn't matter. A guess before the lesson makes the answer stick. That's memory science, not magic!",
-      hi: "सही हो या ग़लत, फ़र्क़ नहीं पड़ता। पढ़ने से पहले का अंदाज़ा जवाब को पक्का कर देता है। ये जादू नहीं, याददाश्त का विज्ञान है!" }],
-    help: { en: "In Prelims you need it on the day. Guessing first is how it stays.", hi: "Prelims में जवाब उसी दिन याद चाहिए। पहले अंदाज़ा लगाने से वो टिकता है।" } },
+    { en: "Notice something? You get a question before a single page of teaching. Go on, take a guess.", hi: "ग़ौर कीजिए, पढ़ाई का एक पन्ना भी नहीं और पहले सवाल। चलिए, अंदाज़ा लगाइए।" },
+    { en: "Right or wrong, it doesn't matter. A guess before the lesson makes the answer stick, and that's memory science, not magic.",
+      hi: "सही हो या ग़लत, फ़र्क़ नहीं पड़ता। पढ़ने से पहले का अंदाज़ा जवाब को पक्का कर देता है, और ये जादू नहीं, याददाश्त का विज्ञान है।" }],
+    help: { en: "In Prelims you need it on the day, and guessing first is how it stays.", hi: "Prelims में जवाब उसी दिन याद चाहिए, और पहले अंदाज़ा लगाने से वो टिकता है।" } },
   read: { lines: [
-    { en: "Now the reading. Short. Sharp. Every key idea in bold, every Article named.", hi: "अब पढ़ाई। छोटी और धारदार। हर ज़रूरी बात bold में, हर अनुच्छेद का नाम साथ।" },
-    { en: "And then, whoosh! The text folds away, and you answer from memory. No lazy re-reading here, boss!",
-      hi: "और फिर, छू-मंतर! पाठ छिप जाता है, और जवाब याद से देना है। यहाँ आलसी दोहराई नहीं चलती, बॉस!" }],
-    help: { en: "Recalling beats re-reading. Fewer hours on the same page, more of it left for the exam hall.",
-      hi: "दोबारा पढ़ने से बेहतर है याद करके बताना। एक ही पन्ने पर कम घंटे, और परीक्षा हॉल में ज़्यादा याद।" } },
+    { en: "Now the reading: short and sharp, with every key idea in bold and every Article named.", hi: "अब पढ़ाई: छोटी और धारदार, हर ज़रूरी बात bold में और हर अनुच्छेद का नाम साथ।" },
+    { en: "Then the text folds away, and you answer from memory. No lazy re-reading here.",
+      hi: "फिर पाठ छिप जाता है, और जवाब याद से देना होता है। यहाँ आलसी दोहराई नहीं चलती।" }],
+    help: { en: "Recalling beats re-reading: fewer hours on the same page, and more of it left for the exam hall.",
+      hi: "दोबारा पढ़ने से बेहतर है याद करके बताना: एक ही पन्ने पर कम घंटे, और परीक्षा हॉल में ज़्यादा याद।" } },
   video: { lines: [
-    { en: "Under a minute. The Governor, Article 200, and the Supreme Court's 2025 opinion, in one crisp video.",
-      hi: "एक मिनट से कम। राज्यपाल, अनुच्छेद 200, और सुप्रीम कोर्ट की 2025 की राय, एक कसे हुए video में।",
-      say: { en: "Under a minute. The Governor, Article two hundred, and the Supreme Court's twenty twenty-five opinion, in one crisp video.",
-        hi: "एक मिनट से कम। राज्यपाल, अनुच्छेद दो सौ, और सुप्रीम कोर्ट की दो हज़ार पच्चीस की राय, एक कसे हुए video में।" } },
-    { en: "The moment it ends, you answer the very question it ends on. You don't just watch. You use it!",
-      hi: "Video ख़त्म होते ही, उसी सवाल का जवाब जिस पर वो ख़त्म होता है। सिर्फ़ देखना नहीं, इस्तेमाल करना!" }],
-    help: { en: "Current affairs, tied straight to the static syllabus. That's how GS2 asks it.", hi: "करेंट अफ़ेयर्स, सीधे static syllabus से जुड़े। GS2 ऐसे ही पूछता है।" } },
+    { en: "In under a minute, the Governor, Article 200 and the Supreme Court's 2025 opinion, in one crisp video.",
+      hi: "एक मिनट से कम में राज्यपाल, अनुच्छेद 200 और सुप्रीम कोर्ट की 2025 की राय, एक कसे हुए video में।",
+      say: { en: "In under a minute, the Governor, Article two hundred and the Supreme Court's twenty twenty-five opinion, in one crisp video.",
+        hi: "एक मिनट से कम में राज्यपाल, अनुच्छेद दो सौ और सुप्रीम कोर्ट की दो हज़ार पच्चीस की राय, एक कसे हुए वीडियो में।" } },
+    { en: "The moment it ends, you answer the very question it ends on. You don't just watch it, you use it.",
+      hi: "Video ख़त्म होते ही आप उसी सवाल का जवाब देते हैं जिस पर वो ख़त्म होता है। सिर्फ़ देखते नहीं, इस्तेमाल करते हैं।",
+      say: { en: "The moment it ends, you answer the very question it ends on. You don't just watch it, you use it.",
+        hi: "वीडियो ख़त्म होते ही आप उसी सवाल का जवाब देते हैं जिस पर वो ख़त्म होता है। सिर्फ़ देखते नहीं, इस्तेमाल करते हैं।" } }],
+    help: { en: "Current affairs, tied straight to the static syllabus, which is exactly how GS2 asks it.", hi: "करेंट अफ़ेयर्स, सीधे static syllabus से जुड़े, और GS2 ठीक ऐसे ही पूछता है।",
+      say: { en: "Current affairs, tied straight to the static syllabus, which is exactly how G S two asks it.", hi: "करेंट अफ़ेयर्स, सीधे स्टैटिक सिलेबस से जुड़े, और जी एस दो ठीक ऐसे ही पूछता है।" } } },
   gov: { lines: [
-    { en: "Now, you are the Governor! A bill lands on your desk. Sign it? Send it back? Send it to the President?",
-      hi: "अब आप राज्यपाल हैं! आपकी मेज़ पर एक विधेयक। हस्ताक्षर? वापस? या राष्ट्रपति को?" },
-    { en: "Stamp! Every choice comes back with the rule behind it. Sit in this chair once, and Article 200 is yours for life.",
-      hi: "ठप्पा! हर फ़ैसले के साथ उसका नियम भी। इस कुर्सी पर एक बार बैठिए, अनुच्छेद 200 ज़िंदगी भर याद रहेगा।",
-      say: { en: "Stamp! Every choice comes back with the rule behind it. Sit in this chair once, and Article two hundred is yours for life.",
-        hi: "ठप्पा! हर फ़ैसले के साथ उसका नियम भी। इस कुर्सी पर एक बार बैठिए, अनुच्छेद दो सौ ज़िंदगी भर याद रहेगा।" } }],
-    help: { en: "Mains asks you to judge, not recite. Here, you practise judging.", hi: "Mains रटा हुआ नहीं, आपका फ़ैसला माँगता है। यहाँ आप फ़ैसला करना सीखते हैं।" } },
+    { en: "Now you are the Governor, and a bill lands on your desk. Do you sign it, send it back, or send it to the President?",
+      hi: "अब आप राज्यपाल हैं, और आपकी मेज़ पर एक विधेयक आया है। हस्ताक्षर करेंगे, वापस भेजेंगे, या राष्ट्रपति को?" },
+    { en: "Every choice comes back with the rule behind it. Sit in this chair once, and Article 200 is yours for life.",
+      hi: "हर फ़ैसले के साथ उसका नियम भी आता है। इस कुर्सी पर एक बार बैठिए, और अनुच्छेद 200 ज़िंदगी भर याद रहेगा।",
+      say: { en: "Every choice comes back with the rule behind it. Sit in this chair once, and Article two hundred is yours for life.",
+        hi: "हर फ़ैसले के साथ उसका नियम भी आता है। इस कुर्सी पर एक बार बैठिए, और अनुच्छेद दो सौ ज़िंदगी भर याद रहेगा।" } }],
+    help: { en: "Mains asks you to judge, not recite, and here you practise judging.", hi: "Mains रटा हुआ नहीं, आपका फ़ैसला माँगता है, और यहाँ आप फ़ैसला करना सीखते हैं।" } },
   sort: { lines: [
-    { en: "Union, State or Concurrent? Lookalike subjects, flying into the right list. Look at them go!", hi: "संघ, राज्य या समवर्ती? मिलते-जुलते विषय, उड़कर सही सूची में। देखिए तो!" },
+    { en: "Union, State or Concurrent? Watch these lookalike subjects fly into the right list.", hi: "संघ, राज्य या समवर्ती? देखिए, मिलते-जुलते विषय उड़कर सही सूची में जाते हैं।" },
     { en: "These are exactly the lookalikes UPSC uses to trap you. Sort them once here, and the trap stops working.",
-      hi: "UPSC इन्हीं मिलते-जुलते विषयों से फँसाता है। यहाँ एक बार छाँट लीजिए, जाल काम करना बंद।" }],
+      hi: "UPSC इन्हीं मिलते-जुलते विषयों से फँसाता है। यहाँ एक बार छाँट लीजिए, और वो जाल काम करना बंद कर देता है।" }],
     help: { en: "Telling lookalikes apart is exactly what Prelims tests.", hi: "मिलती-जुलती चीज़ों में फ़र्क़ करना, यही तो Prelims परखता है।" } },
   gst: { lines: [
-    { en: "Now my favourite. The GST Council. Thirty-one states, one Centre. Every state votes yes. The Centre says no.",
-      hi: "अब मेरा पसंदीदा। GST परिषद। इकतीस राज्य, एक केंद्र। सारे राज्य हाँ कहते हैं। केंद्र कहता है ना।" },
-    { en: "Blocked! All the states together are only two-thirds of the vote, and seventy-five percent is needed. The Centre holds a veto, and you just saw why.",
-      hi: "रुक गया! सारे राज्य मिलकर भी वोट का सिर्फ़ दो-तिहाई, और चाहिए पचहत्तर प्रतिशत। केंद्र के पास वीटो है, और आपने अभी देखा क्यों।" }],
+    { en: "Now my favourite, the GST Council: thirty-one states and one Centre. Every state votes yes, and the Centre says no.",
+      hi: "अब मेरा पसंदीदा, GST परिषद: इकतीस राज्य और एक केंद्र। सारे राज्य हाँ कहते हैं, और केंद्र कहता है ना।",
+      say: { en: "Now my favourite, the G S T Council: thirty-one states and one Centre. Every state votes yes, and the Centre says no.",
+        hi: "अब मेरा पसंदीदा, जी एस टी परिषद: इकतीस राज्य और एक केंद्र। सारे राज्य हाँ कहते हैं, और केंद्र कहता है ना।" } },
+    { en: "Blocked. All the states together hold only two-thirds of the vote, and seventy-five percent is needed. So the Centre has a veto, and you just saw why.",
+      hi: "रुक गया। सारे राज्य मिलकर भी वोट का सिर्फ़ दो-तिहाई रखते हैं, और चाहिए पचहत्तर प्रतिशत। यानी केंद्र के पास वीटो है, और आपने अभी देखा क्यों।" }],
     help: { en: "A number you play with is a number you remember in the exam.", hi: "जिस आँकड़े से आप खेलते हैं, वो परीक्षा में याद रहता है।" } },
   pyq: { lines: [
-    { en: "Real Prelims, 2025, with the official answer key. Pick an answer, then say how sure you are.", hi: "असली Prelims, 2025, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।",
-      say: { en: "Real Prelims, twenty twenty-five, with the official answer key. Pick an answer, then say how sure you are.", hi: "असली Prelims, दो हज़ार पच्चीस, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।" } },
-    { en: "Sure, and wrong? Ouch! In the real exam, that wipes out a third of the question's marks. Here, you get one more try.",
-      hi: "पक्का, और ग़लत? उफ़! असली परीक्षा में इससे उस सवाल के एक-तिहाई अंक कटते हैं। यहाँ, एक और मौक़ा।" },
-    { en: "Got it on the second go! And now you know exactly where you were guessing.", hi: "दूसरी बार में सही! और अब आपको पता है कि अंदाज़ा कहाँ लगा रहे थे।" }],
-    help: { en: "With negative marking, knowing when you're guessing saves real marks.", hi: "Negative marking में, ये जानना कि आप कब अंदाज़ा लगा रहे हैं, असली अंक बचाता है।" } },
+    { en: "This is real Prelims 2025, with the official answer key. Pick an answer, then say how sure you are.", hi: "ये असली Prelims 2025 है, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।",
+      say: { en: "This is real Prelims twenty twenty-five, with the official answer key. Pick an answer, then say how sure you are.", hi: "ये असली प्रीलिम्स दो हज़ार पच्चीस है, आधिकारिक उत्तर-कुंजी के साथ। पहले जवाब चुनिए, फिर बताइए कितने पक्के हैं।" } },
+    { en: "Sure, and wrong? In the real exam, that costs a third of the question's marks. Here, you get one more try.",
+      hi: "पक्का, और ग़लत? असली परीक्षा में इससे उस सवाल के एक-तिहाई अंक कट जाते हैं। यहाँ आपको एक और मौक़ा मिलता है।" },
+    { en: "Right on the second go, and now you know exactly where you were guessing.", hi: "दूसरी बार में सही, और अब आपको पता है कि आप अंदाज़ा कहाँ लगा रहे थे।" }],
+    help: { en: "With negative marking, knowing when you're guessing saves real marks.", hi: "Negative marking में ये जानना कि आप कब अंदाज़ा लगा रहे हैं, असली अंक बचाता है।",
+      say: { en: "With negative marking, knowing when you're guessing saves real marks.", hi: "नेगेटिव मार्किंग में ये जानना कि आप कब अंदाज़ा लगा रहे हैं, असली अंक बचाता है।" } } },
   mains: { lines: [
-    { en: "Mains 2025, GS2, fifteen marks. Watch the answer build itself, one point at a time.", hi: "Mains 2025, GS2, पंद्रह अंक। देखिए, उत्तर ख़ुद बनता है, एक-एक बिंदु करके।",
-      say: { en: "Mains twenty twenty-five, GS two, fifteen marks. Watch the answer build itself, one point at a time.", hi: "Mains दो हज़ार पच्चीस, GS दो, पंद्रह अंक। देखिए, उत्तर ख़ुद बनता है, एक-एक बिंदु करके।" } },
-    { en: "Answer in the first line. An Article, a number or a year on every point. A way forward that says who does what. That's what examiners reward!",
-      hi: "पहली पंक्ति में जवाब। हर बिंदु पर एक अनुच्छेद, आँकड़ा या वर्ष। आगे का रास्ता, कौन क्या करे। परीक्षक इसी को अंक देते हैं!" }],
+    { en: "Mains 2025, GS2, fifteen marks. Watch the answer build itself, one point at a time.", hi: "Mains 2025, GS2, पंद्रह अंक। देखिए, उत्तर एक-एक बिंदु करके ख़ुद बनता है।",
+      say: { en: "Mains twenty twenty-five, G S two, fifteen marks. Watch the answer build itself, one point at a time.", hi: "मेन्स दो हज़ार पच्चीस, जी एस दो, पंद्रह अंक। देखिए, उत्तर एक-एक बिंदु करके ख़ुद बनता है।" } },
+    { en: "The answer comes in the first line, every point carries an Article, a number or a year, and the way forward says who does what. That's what examiners reward.",
+      hi: "पहली पंक्ति में जवाब, हर बिंदु पर एक अनुच्छेद, आँकड़ा या वर्ष, और आगे का रास्ता बताता है कि कौन क्या करे। परीक्षक इसी को अंक देते हैं।" }],
     help: { en: "A plan in minutes is how you finish all twenty questions on the day.", hi: "मिनटों में ढाँचा, यही है परीक्षा के दिन बीसों सवाल पूरे करने का तरीक़ा।" } },
   desk: { lines: [
-    { en: "Nobody writes an essay in the middle of a demo. So here's a page we wrote earlier. Snap!", hi: "Demo के बीच कोई निबंध नहीं लिखता। इसलिए ये रहा पहले से लिखा एक पन्ना। क्लिक!" },
-    { en: "In the app, you write by hand and snap a photo. Chotu reads your handwriting and marks it, right in the margin. Like a strict teacher, minus the scolding!",
-      hi: "App में आप हाथ से लिखते हैं और फ़ोटो लेते हैं। Chotu आपकी लिखावट पढ़कर हाशिये में जाँच करता है। सख़्त टीचर जैसा, पर डाँट के बिना!" }],
-    help: { en: "Answer writing only improves with feedback. Three pages a week are marked free; on Plus, every page.",
-      hi: "उत्तर-लेखन फ़ीडबैक से ही सुधरता है। हर हफ़्ते तीन पन्ने मुफ़्त जाँचे जाते हैं; Plus पर हर पन्ना।" } },
+    { en: "Nobody writes an essay in the middle of a demo, so here's a page we wrote earlier.", hi: "Demo के बीच कोई निबंध नहीं लिखता, इसलिए ये रहा पहले से लिखा एक पन्ना।",
+      say: { en: "Nobody writes an essay in the middle of a demo, so here's a page we wrote earlier.", hi: "डेमो के बीच कोई निबंध नहीं लिखता, इसलिए ये रहा पहले से लिखा एक पन्ना।" } },
+    { en: "In the app, you write by hand and snap a photo, and Chotu marks it right in the margin. Like a strict teacher, minus the scolding.",
+      hi: "App में आप हाथ से लिखकर फ़ोटो लेते हैं, और Chotu हाशिये में ही जाँच कर देता है। सख़्त टीचर जैसा, पर डाँट के बिना।",
+      say: { en: "In the app, you write by hand and snap a photo, and Chotu marks it right in the margin. Like a strict teacher, minus the scolding.",
+        hi: "ऐप में आप हाथ से लिखकर फ़ोटो लेते हैं, और छोटू हाशिये में ही जाँच कर देता है। सख़्त टीचर जैसा, पर डाँट के बिना।" } }],
+    help: { en: "Answer writing only improves with feedback. Three pages a week are marked free, and on Plus, every page.",
+      hi: "उत्तर-लेखन फ़ीडबैक से ही सुधरता है। हर हफ़्ते तीन पन्ने मुफ़्त जाँचे जाते हैं, और Plus पर हर पन्ना।",
+      say: { en: "Answer writing only improves with feedback. Three pages a week are marked free, and on Plus, every page.",
+        hi: "उत्तर-लेखन फ़ीडबैक से ही सुधरता है। हर हफ़्ते तीन पन्ने मुफ़्त जाँचे जाते हैं, और प्लस पर हर पन्ना।" } } },
   essay: { lines: [
-    { en: "And the Essay paper? One topic, three pages. The skeleton, the outline, and the first paragraph, written out.",
-      hi: "और Essay paper? एक विषय, तीन पन्ने। ढाँचा, रूपरेखा, और लिखा हुआ पहला पैराग्राफ़।",
-      say: { en: "And the Essay paper? One topic, three pages. The skeleton, the outline, and the first paragraph, written out.", hi: "और निबंध का paper? एक विषय, तीन पन्ने। ढाँचा, रूपरेखा, और लिखा हुआ पहला पैराग्राफ़।" } },
-    { en: "Every page marked, so you see exactly what lifts an essay. Not tips. Proof!", hi: "हर पन्ना जाँचा हुआ, ताकि दिखे कि निबंध ऊपर कैसे उठता है। नुस्ख़े नहीं, सबूत!" }],
-    help: { en: "The Essay paper carries 250 marks. Watching a page get better teaches more than a list of tips.",
-      hi: "Essay paper 250 अंक का है। एक पन्ने को बेहतर होते देखना, नुस्ख़ों की सूची से ज़्यादा सिखाता है।",
-      say: { en: "The Essay paper carries two hundred and fifty marks. Watching a page get better teaches more than a list of tips.",
-        hi: "Essay paper ढाई सौ अंक का है। एक पन्ने को बेहतर होते देखना, नुस्ख़ों की सूची से ज़्यादा सिखाता है।" } } },
+    { en: "And the Essay paper? One topic and three pages: the skeleton, the outline, and the first paragraph, written out.",
+      hi: "और Essay paper? एक विषय और तीन पन्ने: ढाँचा, रूपरेखा, और लिखा हुआ पहला पैराग्राफ़।",
+      say: { en: "And the Essay paper? One topic and three pages: the skeleton, the outline, and the first paragraph, written out.", hi: "और निबंध का पेपर? एक विषय और तीन पन्ने: ढाँचा, रूपरेखा, और लिखा हुआ पहला पैराग्राफ़।" } },
+    { en: "Every page is marked, so you see exactly what lifts an essay. Not tips, but proof.", hi: "हर पन्ना जाँचा हुआ है, ताकि दिखे कि निबंध ऊपर कैसे उठता है। नुस्ख़े नहीं, सबूत।" }],
+    help: { en: "The Essay paper carries 250 marks, and watching a page get better teaches more than a list of tips.",
+      hi: "Essay paper 250 अंक का है, और एक पन्ने को बेहतर होते देखना नुस्ख़ों की सूची से ज़्यादा सिखाता है।",
+      say: { en: "The Essay paper carries two hundred and fifty marks, and watching a page get better teaches more than a list of tips.",
+        hi: "निबंध का पेपर ढाई सौ अंक का है, और एक पन्ने को बेहतर होते देखना नुस्ख़ों की सूची से ज़्यादा सिखाता है।" } } },
   cards: { lines: [
-    { en: "Remember your very first guess? It's back, as a memory card. Flip!", hi: "अपना पहला अंदाज़ा याद है? वो लौट आया है, एक memory card बनकर। पलटिए!" },
-    { en: "Miss it, and it's back tomorrow. Know it, and it waits till just before you'd forget. Your revision plans itself!",
-      hi: "भूले, तो कल फिर आएगा। याद रहा, तो ठीक भूलने से पहले लौटेगा। आपकी revision ख़ुद अपना plan बनाती है!" }],
-    help: { en: "That's how a two-year syllabus is still fresh on exam day.", hi: "ऐसे ही दो साल का syllabus परीक्षा के दिन भी ताज़ा रहता है।" } },
+    { en: "Remember your very first guess? It's back, as a memory card.", hi: "अपना पहला अंदाज़ा याद है? वो एक memory card बनकर लौट आया है।",
+      say: { en: "Remember your very first guess? It's back, as a memory card.", hi: "अपना पहला अंदाज़ा याद है? वो एक मेमोरी कार्ड बनकर लौट आया है।" } },
+    { en: "Miss it, and it comes back tomorrow. Know it, and it waits until just before you'd forget, so your revision plans itself.",
+      hi: "भूले, तो कल फिर आएगा। याद रहा, तो ठीक भूलने से पहले लौटेगा, यानी आपकी revision ख़ुद अपना plan बनाती है।",
+      say: { en: "Miss it, and it comes back tomorrow. Know it, and it waits until just before you'd forget, so your revision plans itself.",
+        hi: "भूले, तो कल फिर आएगा। याद रहा, तो ठीक भूलने से पहले लौटेगा, यानी आपका रिवीज़न ख़ुद अपनी योजना बनाता है।" } }],
+    help: { en: "That's how a two-year syllabus is still fresh on exam day.", hi: "ऐसे ही दो साल का syllabus परीक्षा के दिन भी ताज़ा रहता है।",
+      say: { en: "That's how a two-year syllabus is still fresh on exam day.", hi: "ऐसे ही दो साल का सिलेबस परीक्षा के दिन भी ताज़ा रहता है।" } } },
   pods: { lines: [
-    { en: "Now, the heart of Aspiran. Your pod. Six to eight aspirants at your stage. Not a group of fifty thousand strangers.",
-      hi: "अब Aspiran का दिल। आपका pod। आपके स्तर के छह से आठ उम्मीदवार। पचास हज़ार अजनबियों का group नहीं।",
-      say: { en: "Now, the heart of Aspi-raan. Your pod. Six to eight aspirants at your stage. Not a group of fifty thousand strangers.",
-        hi: "अब, आस्पिरान का दिल। आपका pod। आपके स्तर के छह से आठ उम्मीदवार। पचास हज़ार अजनबियों का group नहीं।" } },
-    { en: "You study together, keep each other going, and nobody ranks anybody. No public scores. Ever.",
-      hi: "साथ पढ़िए, एक-दूसरे को आगे बढ़ाइए, और कोई किसी की rank नहीं लगाता। कोई public score नहीं। कभी नहीं।" }],
-    help: { en: "UPSC is a long road. A small, steady group keeps you on it.", hi: "UPSC लंबा रास्ता है। एक छोटा, भरोसेमंद group आपको उस पर टिकाए रखता है।" } },
+    { en: "Now, the heart of Aspiran: your pod. Six to eight aspirants at your stage, not a group of fifty thousand strangers.",
+      hi: "अब, Aspiran का दिल: आपका pod. आपके स्तर के छह से आठ उम्मीदवार, पचास हज़ार अजनबियों का group नहीं।",
+      say: { en: "Now, the heart of Aspi-raan: your pod. Six to eight aspirants at your stage, not a group of fifty thousand strangers.",
+        hi: "अब, आस्पिरान का दिल: आपका पॉड। आपके स्तर के छह से आठ उम्मीदवार, पचास हज़ार अजनबियों का ग्रुप नहीं।" } },
+    { en: "You study together and keep each other going, and nobody ranks anybody. There are no public scores, ever.",
+      hi: "साथ पढ़िए, एक-दूसरे को आगे बढ़ाइए, और कोई किसी की rank नहीं लगाता। कोई public score नहीं, कभी नहीं।",
+      say: { en: "You study together and keep each other going, and nobody ranks anybody. There are no public scores, ever.",
+        hi: "साथ पढ़िए, एक-दूसरे को आगे बढ़ाइए, और कोई किसी की रैंक नहीं लगाता। कोई पब्लिक स्कोर नहीं, कभी नहीं।" } }],
+    help: { en: "UPSC is a long road, and a small, steady group keeps you on it.", hi: "UPSC लंबा रास्ता है, और एक छोटा, भरोसेमंद group आपको उस पर टिकाए रखता है।",
+      say: { en: "U P S C is a long road, and a small, steady group keeps you on it.", hi: "यू पी एस सी लंबा रास्ता है, और एक छोटा, भरोसेमंद ग्रुप आपको उस पर टिकाए रखता है।" } } },
   chotu: { lines: [
-    { en: "And meet Chotu, your study buddy! Stuck on Article 356 late in the evening? Ask Chotu.", hi: "और मिलिए Chotu से, आपका study साथी! शाम को अनुच्छेद 356 पर अटके? Chotu से पूछिए।",
-      say: { en: "And meet Chotu, your study buddy! Stuck on Article three fifty-six late in the evening? Ask Chotu.", hi: "और मिलिए छोटू से, आपका study साथी! शाम को अनुच्छेद तीन सौ छप्पन पर अटके? छोटू से पूछिए।" } },
-    { en: "He gives you a nudge, not the answer. And after half past eleven he goes quiet, so you can sleep. Now that's a buddy!",
-      hi: "वो इशारा देता है, जवाब नहीं। और साढ़े ग्यारह के बाद चुप हो जाता है, ताकि आप सो सकें। ऐसा होता है साथी!" }],
+    { en: "And meet Chotu, your study buddy. Stuck on Article 356 late in the evening? Just ask Chotu.", hi: "और मिलिए Chotu से, आपका study साथी। शाम को अनुच्छेद 356 पर अटके? बस Chotu से पूछिए।",
+      say: { en: "And meet Chotu, your study buddy. Stuck on Article three fifty-six late in the evening? Just ask Chotu.", hi: "और मिलिए छोटू से, आपका पढ़ाई का साथी। शाम को अनुच्छेद तीन सौ छप्पन पर अटके? बस छोटू से पूछिए।" } },
+    { en: "He gives you a nudge, not the answer, and after half past eleven he goes quiet so you can sleep. Now that's a good friend.",
+      hi: "वो इशारा देता है, जवाब नहीं, और साढ़े ग्यारह के बाद चुप हो जाता है ताकि आप सो सकें। ऐसा होता है सच्चा साथी।" }],
     help: { en: "Help the moment you're stuck, and the thinking stays yours.", hi: "अटकते ही मदद, और सोचने का काम आपका ही रहता है।" } },
   variety: { lines: [
-    { en: "And all of that? Just one topic! There's so much more: Chai news cards, mocks, maps, videos, games and past papers.",
-      hi: "और ये सब? सिर्फ़ एक topic! और भी बहुत कुछ: Chai news cards, mock, नक़्शे, video, खेल और पिछले papers।" }] },
+    { en: "And all of that was just one topic. There's so much more: Chai news cards, mocks, maps, videos, games and past papers.",
+      hi: "और ये सब सिर्फ़ एक topic था। और भी बहुत कुछ है: Chai news cards, mock, नक़्शे, video, खेल और पिछले papers।",
+      say: { en: "And all of that was just one topic. There's so much more: Chai news cards, mocks, maps, videos, games and past papers.",
+        hi: "और ये सब सिर्फ़ एक टॉपिक था। और भी बहुत कुछ है: चाय न्यूज़ कार्ड, मॉक टेस्ट, नक़्शे, वीडियो, खेल और पिछले साल के पेपर।" } }] },
   finale: { lines: [
-    { en: "So here's the deal. Join free, today. Your pod, Chai, practice, games and Chotu. Free!", hi: "तो सौदा ये है। आज ही मुफ़्त जुड़िए। आपका pod, Chai, अभ्यास, खेल और Chotu। मुफ़्त!" },
-    { en: "Want every answer marked and every mock? Plus is ₹3,999 a year. About eleven rupees a day, the price of a cup of chai!",
-      hi: "हर उत्तर की जाँच और हर mock चाहिए? Plus है ₹3,999 साल का। लगभग ग्यारह रुपये रोज़, एक कप चाय जितना!",
-      say: { en: "Want every answer marked and every mock? Plus is three thousand nine hundred and ninety-nine rupees a year. About eleven rupees a day, the price of a cup of chai!",
-        hi: "हर उत्तर की जाँच और हर mock चाहिए? Plus है तीन हज़ार नौ सौ निन्यानवे रुपये साल का। लगभग ग्यारह रुपये रोज़, एक कप चाय जितना!" } },
-    { en: "Go on, tap Join free. No card needed!", hi: "चलिए, ‘मुफ़्त जुड़िए’ दबाइए। कोई card नहीं चाहिए!" }] },
+    { en: "So here's the deal: join free, today. Your pod, Chai, practice, games and Chotu, all free.",
+      hi: "तो सौदा ये है: आज ही मुफ़्त जुड़िए। आपका pod, Chai, अभ्यास, खेल और Chotu, सब मुफ़्त।",
+      say: { en: "So here's the deal: join free, today. Your pod, Chai, practice, games and Chotu, all free.",
+        hi: "तो सौदा ये है: आज ही मुफ़्त जुड़िए। आपका पॉड, चाय, अभ्यास, खेल और छोटू, सब मुफ़्त।" } },
+    { en: "Want every answer marked and every mock? Plus is ₹3,999 a year, about eleven rupees a day, the price of a cup of chai.",
+      hi: "हर उत्तर की जाँच और हर mock चाहिए? Plus है ₹3,999 साल का, यानी लगभग ग्यारह रुपये रोज़, एक कप चाय जितना।",
+      say: { en: "Want every answer marked and every mock? Plus is three thousand, nine hundred and ninety-nine rupees a year, about eleven rupees a day, the price of a cup of chai.",
+        hi: "हर उत्तर की जाँच और हर मॉक टेस्ट चाहिए? प्लस है तीन हज़ार नौ सौ निन्यानवे रुपये साल का, यानी लगभग ग्यारह रुपये रोज़, एक कप चाय जितना।" } },
+    { en: "Go on, tap Join free. No card needed.", hi: "चलिए, ‘मुफ़्त जुड़िए’ दबाइए। कोई card नहीं चाहिए।",
+      say: { en: "Go on, tap Join free. No card needed.", hi: "चलिए, मुफ़्त जुड़िए दबाइए। कोई कार्ड नहीं चाहिए।" } }] },
 };
 
 /** Every recorded clip: [file key, { en, hi } text to speak]. The voice script and the player both use this. */
@@ -369,7 +393,7 @@ async function sayLine(scene, i, tok, { help = false } = {}) {
   alive(tok);
   if (res === "fail") await wait(ms, tok);
   else if (res?.left) await wait(res.left, tok);
-  else await wait(250, tok);
+  else await wait(120, tok);
 }
 function stopVoice() { try { audio?.pause(); } catch {} const p = pending; pending = null; p?.("abort"); }
 /** Waits for a tap on one of `btns` or, after `ms`, picks `auto`. Resolves with the index. */
@@ -591,7 +615,7 @@ async function sGuess(body, tok) {
   const why = h("p.sr-why");
   put(body, card, why);
   await say("guess", 0, tok);
-  const c = await pick(opts, 1, 2600, tok);
+  const c = await pick(opts, 1, 1900, tok);
   tag(opts[c], t("yourPick"), ".pick");
   await wait(350, tok);
   mark(opts, c, q.answer);
@@ -670,7 +694,7 @@ async function sGov(body, tok) {
   put(body, h("div.sr-gov", paper, h("div.sr-choices", h("p.sr-qlabel", t("tapOr")), btns), res));
   setTimeout(() => SFX.stamp(), RM() ? 0 : 500);
   await say("gov", 0, tok);
-  const c = await pick(btns, 1, 2400, tok);
+  const c = await pick(btns, 1, 1900, tok);
   btns.forEach((b, i) => b.classList.toggle(i === c ? "on" : "dim", true));
   const big = h("span.sr-stamp.big" + (r.options[c].ok ? "" : ".no"), r.options[c].ok ? t("allowed") : "✕");
   paper.append(big); SFX.stamp(); shake();
