@@ -65,12 +65,12 @@ import androidx.compose.foundation.clickable
 
 /** Chotu v2: what each chip is for. Sent as the cloud mode; on the phone it frames the starters. */
 private val MODES = listOf(
-    Triple("talk", "Talk", "Tell me how it's going. I'm a chai cup, not a therapist, and I'll say so."),
+    Triple("talk", "Talk", "Tell me what you planned and how it went. I keep the count; you only ever race your own past."),
     Triple("prep", "Prep", "Ask me anything from the syllabus. I'll keep it simple."),
     Triple("plan", "Plan", "Tell me your hours and what's behind. We'll make the week smaller."),
 )
 private val STARTERS = mapOf(
-    "talk" to listOf("Today was a heavy day", "How do I stop comparing myself?", "Thoda motivation chahiye"),
+    "talk" to listOf("How did my week go?", "I planned Polity today. Only half done", "Aaj ke liye chhota sa kaam batao"),
     "prep" to listOf("What does Article 200 say about the Governor?", "Repo rate ko aasaan bhasha mein samjhao", "Difference between CPI and WPI?"),
     "plan" to listOf("I have 2 hours a day. Plan my week", "I'm behind on Polity. What first?", "Help me plan around office hours"),
 )
@@ -93,6 +93,11 @@ fun MascotTab(
     onOpenPod: (() -> Unit)? = null,
     /** The Plan chip: opens the free roadmap builder (Prep → My Plan). */
     onOpenRoadmap: (() -> Unit)? = null,
+    hindi: Boolean = false,
+    /** "Your week" above an empty chat (Plus any day; everyone on Sundays). */
+    showWeek: Boolean = false,
+    /** Asks Jeetu from the chip or the card. Null when he isn't on offer here. */
+    onJeetu: (() -> Unit)? = null,
 ) {
     LaunchedEffect(Unit) { chotu.refresh() }
     if (resultQuiet != null) {
@@ -104,10 +109,8 @@ fun MascotTab(
         return
     }
     val s = chotu.state
-    val ready = s is ChotuState.Ready
-    // Online Chotu is the default. The on-phone model is an optional extra, offered in one line.
-    val cloud = !ready && chotu.cloudAvailable
-    val lastReply = chotu.turns.lastOrNull { !it.fromUser && !it.care && !it.fromApp && it.text.isNotEmpty() }
+    // Without internet is a Plus extra, offered in one line. Nobody is told where a reply comes from.
+    val ready = chotu.onPhone != null
     val typing = WindowInsets.isImeVisible
     var about by rememberSaveable { mutableStateOf(false) }
     var showModel by rememberSaveable { mutableStateOf(false) }
@@ -121,66 +124,55 @@ fun MascotTab(
                 }
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    // The last reply's real source when there is one (the phone can hand a message to online Chotu).
-                    "Can be wrong · " + when {
-                        lastReply != null -> if (lastReply.cloud) "last reply came online" else "last reply ran on this phone"
-                        ready -> "runs on this phone"
-                        cloud -> "answers online"
-                        else -> "offline right now"
-                    },
-                    style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.weight(1f),
-                )
+                Text("Can be wrong", style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
                 TextButton(onClick = { about = true }) { Text("ⓘ About") }
             }
             if (chotu.mode == "plan" && onOpenRoadmap != null) TextButton(onClick = onOpenRoadmap) { Text("Build your free roadmap to Prelims →") }
-            if (!ready) {
+            if (!ready && chotu.plus) {
                 if (showModel) Column(Modifier.heightIn(max = 320.dp).verticalScroll(rememberScrollState())) {
                     ModelCard(s, chotu)
                     TextButton(onClick = { showModel = false }) { Text("Hide") }
                 } else TextButton(onClick = { showModel = true }) { Text(offlineLine(s)) }
             }
         }
-        Chat(chotu, onOpenNeedToTalk, onRemember = onRemember, onOpenPod = onOpenPod)
+        Chat(chotu, onOpenNeedToTalk, onRemember = onRemember, onOpenPod = onOpenPod, hindi = hindi, showWeek = showWeek, onJeetu = onJeetu)
     }
     if (about) AlertDialog(
         onDismissRequest = { about = false },
         title = { Text("About ${Brand.MASCOT_SHORT}") },
         text = {
             Text(
-                (if (ready) "${Brand.MASCOT_SHORT} runs on your phone, so it answers even without internet."
-                else "Your questions here go to our server to be answered, and aren't saved. " +
-                    "Close the Day, mood and journal never go.") +
-                    " It can be wrong, it's not a counsellor, and it never predicts ranks. If something feels heavy, Need to talk is one tap away.",
+                "Chats here aren't saved after you close the app, and Close the Day, mood and journal never go to ${Brand.MASCOT_SHORT}. " +
+                    "The numbers ${Brand.MASCOT_SHORT} mentions are counted by the app from your own practice. " +
+                    "It can be wrong, it's not a counsellor, and it never predicts ranks or compares you with anyone. If something feels heavy, Need to talk is one tap away.",
             )
         },
         confirmButton = { TextButton(onClick = { about = false }) { Text("OK") } },
     )
 }
 
-/** The one line that stands for offline Chotu until it's opened. */
+/** The one line that stands for "works without internet" until it's opened. Never says how or where it runs. */
 private fun offlineLine(s: ChotuState): String = when (s) {
-    is ChotuState.NotDownloaded -> "Make ${Brand.MASCOT_SHORT} work offline · ${s.model.sizeLabel} · Wi-Fi only"
-    is ChotuState.Downloading -> "Making ${Brand.MASCOT_SHORT} work offline: ${s.done * 100 / s.model.bytes}%"
-    is ChotuState.Loading -> "Waking offline ${Brand.MASCOT_SHORT}…"
-    is ChotuState.Failed -> "Offline ${Brand.MASCOT_SHORT} needs attention"
-    is ChotuState.Unsupported -> "Offline ${Brand.MASCOT_SHORT} isn't available on this phone"
-    is ChotuState.NoModel -> "Offline ${Brand.MASCOT_SHORT}: couldn't check"
-    ChotuState.Checking, is ChotuState.Ready -> "Checking for offline ${Brand.MASCOT_SHORT}…"
+    is ChotuState.NotDownloaded -> "Let ${Brand.MASCOT_SHORT} work without internet · ${s.model.sizeLabel} · Wi-Fi only"
+    is ChotuState.Downloading -> "Setting up ${Brand.MASCOT_SHORT} without internet: ${s.done * 100 / s.model.bytes}%"
+    is ChotuState.Loading -> "Waking ${Brand.MASCOT_SHORT}…"
+    is ChotuState.Failed -> "${Brand.MASCOT_SHORT} without internet needs attention"
+    is ChotuState.Unsupported -> "${Brand.MASCOT_SHORT} without internet: this phone is short on space or memory"
+    is ChotuState.NoModel -> "${Brand.MASCOT_SHORT} without internet: couldn't check"
+    ChotuState.Checking, is ChotuState.Ready -> "Checking…"
 }
 
 /** Offline Chotu: the offer, progress, or why it isn't available. Plain sentences only. */
 @Composable
 private fun ModelCard(s: ChotuState, chotu: Chotu) {
     when (s) {
-        ChotuState.Checking -> Info("Checking…", "Seeing whether offline ${Brand.MASCOT_SHORT} fits this phone.")
+        ChotuState.Checking -> Info("Checking…", "Seeing whether this phone has room.")
         is ChotuState.Unsupported -> Info(
-            "Offline ${Brand.MASCOT_SHORT} needs a bit more phone.",
+            "${Brand.MASCOT_SHORT} without internet needs a bit more phone.",
             "It needs about 5 GB of memory (RAM) and 3.6 GB of free space. This phone has %.1f GB and %.1f GB free. ${Brand.MASCOT_SHORT} still answers here whenever you're online.".format(s.probe.ramGb, s.probe.freeGb),
         )
         is ChotuState.NoModel -> Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(s.why.ifBlank { "Checking for offline ${Brand.MASCOT_SHORT}…" }, style = MaterialTheme.typography.bodyMedium)
+            Text(s.why.ifBlank { "Checking…" }, style = MaterialTheme.typography.bodyMedium)
             if (s.why.isNotBlank()) OutlinedButton(onClick = { chotu.refresh() }) { Text("Check again") }
         }
         is ChotuState.NotDownloaded -> Consent(s, chotu)
@@ -189,7 +181,7 @@ private fun ModelCard(s: ChotuState, chotu: Chotu) {
                 when (s.phase) {
                     DownloadPhase.WAITING_WIFI -> "Waiting for Wi-Fi…"
                     DownloadPhase.WAITING_NETWORK -> "Waiting for a connection…"
-                    DownloadPhase.RUNNING -> "Making ${Brand.MASCOT_SHORT} work offline…"
+                    DownloadPhase.RUNNING -> "Setting up ${Brand.MASCOT_SHORT} without internet…"
                     DownloadPhase.VERIFYING -> "Almost done: checking the file…"
                 },
                 style = MaterialTheme.typography.titleMedium,
@@ -230,34 +222,35 @@ private fun Consent(s: ChotuState.NotDownloaded, chotu: Chotu) {
     // Android 13+: ask once so the download's progress notification can show. The download runs either way.
     val askNotify = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { chotu.download(s.model) }
     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("Make ${Brand.MASCOT_SHORT} work offline?", style = MaterialTheme.typography.titleMedium)
+        Text("Let ${Brand.MASCOT_SHORT} work without internet?", style = MaterialTheme.typography.titleMedium)
         Text("• One download of ${s.model.sizeLabel}, on Wi-Fi only. It runs in the background; you'll see it in your notifications.", style = MaterialTheme.typography.bodyMedium)
-        Text("• After that ${Brand.MASCOT_SHORT} answers without internet.", style = MaterialTheme.typography.bodyMedium)
-        Text("• Offline answers are simpler than online ones. Online ${Brand.MASCOT_SHORT} still answers when you're connected.", style = MaterialTheme.typography.bodyMedium)
+        Text("• After that ${Brand.MASCOT_SHORT} answers even without internet.", style = MaterialTheme.typography.bodyMedium)
+        Text("• Answers without internet are shorter and simpler.", style = MaterialTheme.typography.bodyMedium)
         Text("• Remove it any time in Me → Privacy.", style = MaterialTheme.typography.bodyMedium)
         Button(onClick = {
             val needAsk = Build.VERSION.SDK_INT >= 33 &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
             if (needAsk) askNotify.launch(Manifest.permission.POST_NOTIFICATIONS) else chotu.download(s.model)
-        }, modifier = Modifier.fillMaxWidth()) { Text("Make ${Brand.MASCOT_SHORT} work offline") }
+        }, modifier = Modifier.fillMaxWidth()) { Text("Download (${s.model.sizeLabel})") }
     }
 }
 
-/** Me → Privacy: what offline Chotu takes up, and the way to remove it. */
+/** Me → Privacy: the space the without-internet download takes up, and the way to remove it. */
 @Composable
 fun OfflineChotuSettings(chotu: Chotu) {
     var confirm by remember { mutableStateOf(false) }
     val s = chotu.state
+    val kept = remember(s) { chotu.downloadedSize() }
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text("Offline ${Brand.MASCOT_SHORT}", style = MaterialTheme.typography.titleMedium)
-        if (s is ChotuState.Ready) {
-            Text("On this phone (${s.model.sizeLabel}).", style = MaterialTheme.typography.bodySmall)
-            OutlinedButton(onClick = { confirm = true }) { Text("Remove offline ${Brand.MASCOT_SHORT}") }
-        } else Text("Not on this phone. ${Brand.MASCOT_SHORT} answers online. Set it up from the ${Brand.MASCOT_SHORT} tab if you like.", style = MaterialTheme.typography.bodySmall)
+        Text("${Brand.MASCOT_SHORT} without internet", style = MaterialTheme.typography.titleMedium)
+        if (kept != null) {
+            Text("Downloaded ($kept).", style = MaterialTheme.typography.bodySmall)
+            OutlinedButton(onClick = { confirm = true }) { Text("Remove the download") }
+        } else Text("Not downloaded. ${Brand.MASCOT_SHORT} answers when you're online.", style = MaterialTheme.typography.bodySmall)
     }
     if (confirm) AlertDialog(
         onDismissRequest = { confirm = false },
-        title = { Text("Remove offline ${Brand.MASCOT_SHORT}?") },
+        title = { Text("Remove the download?") },
         text = { Text("This frees the space. ${Brand.MASCOT_SHORT} keeps answering online, and you can set it up again later.") },
         confirmButton = { TextButton(onClick = { confirm = false; chotu.deleteModel() }) { Text("Remove") } },
         dismissButton = { TextButton(onClick = { confirm = false }) { Text("Keep it") } },
@@ -270,6 +263,9 @@ private fun ColumnScope.Chat(
     onOpenNeedToTalk: () -> Unit,
     onRemember: ((String) -> Boolean)? = null,
     onOpenPod: (() -> Unit)? = null,
+    hindi: Boolean = false,
+    showWeek: Boolean = false,
+    onJeetu: (() -> Unit)? = null,
 ) {
     val scope = rememberCoroutineScope()
     var reporting by remember { mutableStateOf<ChotuTurn?>(null) }
@@ -295,6 +291,10 @@ private fun ColumnScope.Chat(
         state = list,
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
+        if (turns.isEmpty() && showWeek) item {
+            val facts = remember { chotu.facts() }
+            if (facts != null) YourWeekCard(facts, hindi, onJeetu = if (facts.jeetuPattern) onJeetu else null)
+        }
         if (turns.isEmpty()) item {
             Column(Modifier.padding(vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(MODES.first { it.first == chotu.mode }.third + " For example:", style = MaterialTheme.typography.bodyMedium)
@@ -308,7 +308,7 @@ private fun ColumnScope.Chat(
             // Report and Remember sit under each finished reply (not care replies, not while streaming).
             if (!t.fromUser && !t.care && t.text.isNotBlank() && !(chotu.thinking && i == turns.lastIndex)) {
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), itemVerticalAlignment = Alignment.CenterVertically) {
-                    ListenButton(com.upscpods.app.data.VoiceAsk("chotu", text = t.voiceText, sig = t.voiceSig))
+                    if (!t.fromApp) ListenButton(com.upscpods.app.data.VoiceAsk(if (t.jeetu) "jeetu" else "chotu", text = t.voiceText, sig = t.voiceSig))
                     if (t.id in reported) Text("Reported. Thank you.", style = MaterialTheme.typography.labelSmall, modifier = Modifier.padding(12.dp))
                     else TextButton(onClick = { reporting = t }) { Text("Report") }
                     if (onRemember != null) {
@@ -319,6 +319,16 @@ private fun ColumnScope.Chat(
                     }
                 }
             }
+        }
+        // The plan check-in: three quick answers. Any is fine.
+        if (chotu.checkInMoment == com.upscpods.app.data.CheckIns.PLAN && chotu.userTurns == 0) item {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                com.upscpods.app.data.CheckIns.planAnswers(hindi).forEach { a -> OutlinedButton(onClick = { chotu.ask(a) }) { Text(a) } }
+            }
+        }
+        // Jeetu only on a tap: for a plan or a fix, or when the numbers show a pattern.
+        if (onJeetu != null && chotu.jeetuOffer && !chotu.thinking) item {
+            OutlinedButton(onClick = onJeetu) { JeetuPortrait(20.dp); Text("  " + if (hindi) "Jeetu की राय चाहिए?" else "Want Jeetu's take?") }
         }
         if (chotu.userTurns >= QUIET_TURNS) item {
             Text(
@@ -409,17 +419,11 @@ private fun Turn(t: ChotuTurn, onOpenNeedToTalk: () -> Unit) {
                 )
                 .padding(horizontal = 12.dp, vertical = 8.dp),
         ) {
-            if (!t.fromUser) Text(Brand.MASCOT, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
+            if (t.jeetu) Row(verticalAlignment = Alignment.CenterVertically) { JeetuPortrait(20.dp); Text("  Jeetu", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary) }
+            else if (!t.fromUser) Text(Brand.MASCOT, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.primary)
             // Replies can carry markdown (bold, headings, lists); shown styled, never as raw symbols.
             Text(if (t.fromUser || t.text.isEmpty()) AnnotatedString(t.text.ifEmpty { "…" }) else chatMarkdown(t.text), style = MaterialTheme.typography.bodyLarge)
             if (t.care) TextButton(onClick = onOpenNeedToTalk) { Text("Talk to someone now") }
-            // Where this reply came from. Care replies are the app's own words, so they carry no source.
-            if (!t.fromUser && !t.care && !t.fromApp && t.text.isNotEmpty()) Text(
-                if (t.cloud) "Online" else "On this phone",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(top = 4.dp),
-            )
         }
     }
 }
@@ -431,7 +435,7 @@ private fun Turn(t: ChotuTurn, onOpenNeedToTalk: () -> Unit) {
 @Composable
 fun ExplainSimpler(chotu: Chotu?, card: String, hindi: Boolean) {
     // On-phone model, or cloud Chotu while online. The card itself never depends on it.
-    if (chotu == null || (chotu.state !is ChotuState.Ready && !chotu.cloudAvailable)) return
+    if (chotu == null || (chotu.onPhone == null && !chotu.cloudAvailable)) return
     var open by rememberSaveable(card) { mutableStateOf(false) }
     var answer by remember(card) { mutableStateOf("") }
     TextButton(onClick = { open = !open }) { Text(if (hindi) "आसान भाषा में समझाओ" else "Explain simpler") }
@@ -445,5 +449,24 @@ fun ExplainSimpler(chotu: Chotu?, card: String, hindi: Boolean) {
             Text(Brand.MASCOT, style = MaterialTheme.typography.labelSmall)
             Text(if (answer.isEmpty()) AnnotatedString("…") else chatMarkdown(answer), style = MaterialTheme.typography.bodyLarge)
         }
+    }
+}
+
+/**
+ * "Your week": effort totals first, then one win and one trend, all counted by the app (data/CheckIns.kt). Only ever
+ * against the student's own past. Jeetu is offered when the numbers show a pattern.
+ */
+@Composable
+fun YourWeekCard(facts: com.upscpods.app.data.StudyFacts, hindi: Boolean, onJeetu: (() -> Unit)?) {
+    val lines = com.upscpods.app.data.CheckIns.weekLines(facts, hindi) ?: return
+    Column(
+        Modifier.fillMaxWidth().padding(vertical = 8.dp)
+            .background(MaterialTheme.colorScheme.surfaceContainerHigh, RoundedCornerShape(12.dp))
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(if (hindi) "आपका हफ़्ता" else "Your week", style = MaterialTheme.typography.titleSmall)
+        lines.forEach { Text(it, style = MaterialTheme.typography.bodyMedium) }
+        if (onJeetu != null) OutlinedButton(onClick = onJeetu) { JeetuPortrait(20.dp); Text("  " + if (hindi) "Jeetu की राय चाहिए?" else "Want Jeetu's take?") }
     }
 }

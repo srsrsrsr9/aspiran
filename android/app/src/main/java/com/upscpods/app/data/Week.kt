@@ -46,10 +46,13 @@ class Week(context: Context) {
 
     /** Planned and done minutes for one day, saved with every change to the day. */
     fun logMinutes(planned: Int, done: Int, date: LocalDate = LocalDate.now()) {
-        val cutoff = date.minusDays(28).toString()
+        val cutoff = date.minusDays(62).toString()
         val log = minutes().filterKeys { it >= cutoff } + (date.toString() to listOf(planned, done))
         prefs.edit().putString("minutes", json.encodeToString(log)).apply()
     }
+
+    /** Date → [planned, done] minutes, the last 62 days (for the facts Chotu and Jeetu are given). */
+    fun log(): Map<String, List<Int>> = minutes()
 
     private fun minutes(): Map<String, List<Int>> =
         prefs.getString("minutes", null)?.let { runCatching { json.decodeFromString<Map<String, List<Int>>>(it) }.getOrNull() } ?: emptyMap()
