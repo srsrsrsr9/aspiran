@@ -272,6 +272,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Open rooms (server rooms.ts) and Answer Studio's attempt log.
     val rooms = remember { Rooms(context, community, pod) }
     val answerLog = remember { AnswerLog(context) }
+    // The student's own record by day and subject, behind every number Chotu and Jeetu say (data/StudyFacts.kt).
+    val effort = remember { com.upscpods.app.data.EffortLog(context) }
     val roadmap = remember { RoadmapStore(context) { pod.serverUrl } }
     val langRequests = remember { LanguageRequests(context) }
     // Growth counts (data/Metrics.kt): first open with the Play referrer, then one app_open a day. Never any text.
@@ -456,6 +458,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     var activeMock by remember { mutableStateOf(mocks.active()) }
     var mockHistory by remember { mutableStateOf(mocks.history()) }
     var mockUsedUp by remember { mutableStateOf(false) }
+    // Set when a mock or a practice set ends; Chotu's 2-line debrief follows (see showDebrief).
+    var debriefDue by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { if (activeMock != null) overlay = Overlay.MOCK }
     val startMock = { p: MockPaper ->
         scope.launch {
@@ -486,6 +490,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         misses = prep.misses()
         mockHistory = mocks.history()
         overlay = Overlay.MOCK_RESULT
+        debriefDue = true
     }
     var libraryItem by rememberSaveable { mutableStateOf<String?>(null) }
     // A piece opened from the Learn hub returns there; everything else returns home.
@@ -506,7 +511,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val plusGate = if (debugPlus) PlusGate(member = true) else PlusGate(member = plusMember == true, loading = plusMember == null)
     val plusQuiet = prep.quiet(day.paused, result != null) != null
     val bankQs = remember(bank) { bank.map { PrepQ(it.id, it.topic, MockMcq(it.en.question, it.en.options, it.en.answerIndex, it.en.explanation)) } }
-    val prepAnswer = { q: PrepQ, right: Boolean -> if (right) prep.clearMiss(q.id) else prep.addMiss(q); misses = prep.misses() }
+    val prepAnswer = { q: PrepQ, right: Boolean -> effort.answer(q.topic, right); if (right) prep.clearMiss(q.id) else prep.addMiss(q); misses = prep.misses() }
     val weekQs = remember(archive, brief) { prep.chaiQuestions((listOf(brief) + archive).distinctBy { it.date }, 7) }
     val monthQs = remember(archive, brief) { prep.chaiQuestions((listOf(brief) + archive).distinctBy { it.date }, 30) }
     LaunchedEffect(loaded, brief, day.savedCards) {
@@ -522,10 +527,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         if (loaded) snapshotFlow { day.snapshot() }.drop(1).collect {
             repo.persist(it, brief)
             // The planning mirror's log: planned vs done minutes. Paused days don't count.
-            if (!day.paused) Week.minutesOf(it).let { (planned, done) -> week.logMinutes(planned, done) }
+            if (!day.paused) { Week.minutesOf(it).let { (planned, done) -> week.logMinutes(planned, done) }; effort.logDay(it) }
         }
     }
-    var tab by rememberSaveable { mutableStateOf(when (ritual) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; else -> Tab.ADDA }) }
+    var tab by rememberSaveable { mutableStateOf(when (ritual) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; Ritual.CHECK_IN -> Tab.MASCOT; else -> Tab.ADDA }) }
+    // A tapped Chotu check-in opens the chat with that check-in's own line and facts.
+    LaunchedEffect(Unit) { if (ritual == Ritual.CHECK_IN && result == null) chotu.startCheckIn(Rituals.lastCheckIn(context), hindi) }
     // Usage analytics: the screen's name only (Metrics.screen skips the private ones).
     LaunchedEffect(tab, overlay) { Metrics.screen(if (overlay != Overlay.NONE) overlay.name else tab.name) }
     // With a matched pod, the open rooms are one tap away on the Pod tab.
@@ -549,15 +556,35 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // Plus tools are gated by the member's plan whatever the admin flag says, so this asks whenever Prep or a tool opens.
     // The tour ends on the Plus pitch, with the server's prices.
     var plusPrice by remember { mutableStateOf<Int?>(null) }
+    var jeetuTaste by remember { mutableStateOf(false) }
     var playReady by remember { mutableStateOf(false) }
     LaunchedEffect(overlay, tab, touring) {
-        if (tab == Tab.PREP || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT, Overlay.CA))
-            community.plusStatus()?.let { plusMember = it.plan != null; plusPrice = it.yearlyInr(); playReady = it.playReady } ?: run { if (plusMember == null) plusMember = false }
+        if (plusMember == null || tab == Tab.PREP || tab == Tab.MASCOT || touring || overlay in setOf(Overlay.PREP_TOOL, Overlay.PLUS_INFO, Overlay.MOCK_RESULT, Overlay.CA))
+            community.plusStatus()?.let {
+                plusMember = it.plan != null; plusPrice = it.yearlyInr(); playReady = it.playReady
+                // Chotu on the phone is Plus only; the answer is remembered so it works without internet too.
+                if (!debugPlus) chotu.plusAnswered(it.plan != null)
+                // Jeetu: Plus, or a free member's first-14-days taste. An older server sends nothing: Plus only.
+                jeetuTaste = it.jeetu?.available == true
+                if (it.jeetu != null) jeetu.available = it.jeetu.available || it.plan != null
+            } ?: run { if (plusMember == null) plusMember = false }
+    }
+    LaunchedEffect(debugPlus) { if (debugPlus) chotu.plusAnswered(true) }
+    // Plus, as far as Chotu knows: the server's last answer (kept 14 days), for check-ins, wins and the debrief.
+    val plusChotu = chotu.plus || plusGate.member
+    // Jeetu from Chotu's chip: Plus members and the free taste, until the server says no, while Jeetu is on and awake.
+    val jeetuFromChotu = (plusChotu || jeetuTaste) && jeetu.available && com.upscpods.app.data.Jeetu.awake
+    // The 2-line debrief after a mock or a practice set (Plus; never in a result week).
+    var debrief by remember { mutableStateOf<com.upscpods.app.data.StudyFacts?>(null) }
+    LaunchedEffect(debriefDue) {
+        if (!debriefDue) return@LaunchedEffect
+        debriefDue = false
+        if (plusChotu && result == null) debrief = chotu.facts()?.takeIf { it.debrief(hindi) != null }
     }
     // Google Play Billing for Plus (data/PlayBilling.kt, server play.ts): only in a build made with PLAY_BILLING, and only while
     // the server's plus and play_billing flags are on and its Play check is set up. Otherwise nothing here runs.
     val playBilling = remember { if (PlayBilling.built) PlayBilling(context, community) { Auth.session?.memberId ?: pod.memberId } else null }
-    playBilling?.onGranted = { plusMember = true }
+    playBilling?.onGranted = { plusMember = true; chotu.plusAnswered(true) }
     val playOn = playBilling != null && config.plus && config.playBilling && playReady && plusMember == false
     LaunchedEffect(playOn) { if (playOn) playBilling?.resume() }
     DisposableEffect(playBilling) { onDispose { playBilling?.close() } }
@@ -590,6 +617,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     }
     val answer = { q: PracticeQuestion, right: Boolean ->
         room.logRight(right)
+        effort.answer(q.topic, right)
+        if (q.isReview) effort.reviewed()
         val (r, t) = session[q.topic] ?: (0 to 0)
         session = session + (q.topic to ((r + if (right) 1 else 0) to (t + 1)))
         q.cardId?.let { recall.record(it, right, q.topic) }
@@ -615,6 +644,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         recall.forget()
         syllabusMap.forget(); mapTick++
         week.forget()
+        effort.forget()
+        com.upscpods.app.data.JeetuPlans.forget(context)
         staged.forget()
         Focus.forget(context)
         Nudge.set(context, null)
@@ -642,6 +673,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             yesterday = yesterdayQ,
             onYesterday = { q, right ->
                 q.cardId?.let { recall.answeredYesterday(it, right, q.topic) }
+                effort.answer(q.topic, right)
                 Metrics.practiceAnswer("chai", q.topic, right)
                 // Right or wrong, yesterday's card goes into the review queue (FSRS sets when it comes back).
                 scope.launch { repo.recordAnswer(q, right) }
@@ -650,6 +682,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             onExamAnswer = { id, right ->
                 val item = brief.items.firstOrNull { it.id == id }
                 recall.record(id, right, item?.topic ?: "")
+                effort.answer(item?.topic ?: "", right)
                 Metrics.practiceAnswer("chai", item?.topic, right)
                 // Every Chai question answered joins the review queue: it comes back just before you'd forget it.
                 item?.text(hindi)?.mcq?.let { scope.launch { repo.recordAnswer(PracticeQuestion("card-$id", item.topic, it, id, false), right) } }
@@ -662,12 +695,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         Overlay.PRELIMS -> PrelimsScreen(
             questions,
             onAnswer = answer,
-            onFinished = { day.markDone(TaskId.PRELIMS); finishPractice() },
+            onFinished = { day.markDone(TaskId.PRELIMS); finishPractice(); debriefDue = true },
             onClose = { overlay = Overlay.NONE; session = emptyMap() },
         )
         Overlay.REVIEW -> ReviewScreen(
             reviewTopics, reviewQs,
-            onCheck = { t, g -> room.logRight(g >= com.upscpods.app.data.Fsrs.GOOD); syllabusMap.check(t.id, g); mapTick++ },
+            onCheck = { t, g -> room.logRight(g >= com.upscpods.app.data.Fsrs.GOOD); effort.reviewed(); syllabusMap.check(t.id, g); mapTick++ },
             onAnswer = answer,
             onFinished = { syllabusMap.reviewedOn = LocalDate.now().toString(); finishPractice() },
             onClose = { overlay = Overlay.NONE; scope.launch { loadReview() } },
@@ -868,6 +901,11 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                 )
                 Tab.MASCOT -> MascotTab(
                     chotu, openNeedToTalk, m,
+                    hindi = hindi,
+                    // "Your week": Plus members any day; everyone on Sundays (owner, 22 Nov 2026).
+                    showWeek = plusChotu || LocalDate.now().dayOfWeek == java.time.DayOfWeek.SUNDAY,
+                    onJeetu = if (jeetuFromChotu) ({ chotu.askJeetu(jeetu, hindi) }) else null,
+                    onPlanChange = if (jeetuFromChotu) ({ t -> chotu.sendPlanChange(jeetu, t, hindi) }) else null,
                     resultQuiet = result?.let { "It's a result week, so I'm staying quiet. Whatever happened, you're more than a roll number. Your pod and Need to talk are here." },
                     onRemember = { staged.addNote(it) },
                     onOpenPod = { tab = Tab.POD },
@@ -1105,7 +1143,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             Ritual.SUNDAY_CA -> Overlay.CA
             else -> Overlay.NONE
         }
-        tab = when (r) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; else -> Tab.ADDA }
+        tab = when (r) { Ritual.QUIZ_NIGHT -> Tab.POD; Ritual.MONDAY_GOAL -> Tab.PREP; Ritual.CHECK_IN -> Tab.MASCOT; else -> Tab.ADDA }
+        if (r == Ritual.CHECK_IN && result == null) chotu.startCheckIn(Rituals.lastCheckIn(context), hindi)
         onNudged()
     }
     // The ritual's actions: Today's Chai read, every quiz question answered (the others are hooked where they happen).
@@ -1131,6 +1170,20 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             title = { Text(r.title(hindi)) },
             text = { ChotuSays(Rituals.rewardLine(r, hindi), ChotuMood.PROUD) },
             confirmButton = { Button(onClick = { reward = null }) { Text(if (hindi) "बढ़िया" else "Nice") } },
+        )
+    }
+    debrief?.let { f ->
+        AlertDialog(
+            onDismissRequest = { debrief = null },
+            title = { Text(Brand.MASCOT_SHORT) },
+            text = { ChotuSays(f.debrief(hindi) ?: "", ChotuMood.PROUD) },
+            confirmButton = { Button(onClick = { debrief = null }) { Text(if (hindi) "ठीक है" else "OK") } },
+            // A pattern in the numbers: Jeetu's take, only on a tap, in Chotu's thread.
+            dismissButton = if (f.jeetuPattern && jeetuFromChotu) ({
+                TextButton(onClick = { debrief = null; overlay = Overlay.NONE; tab = Tab.MASCOT; chotu.newChat(); chotu.askJeetu(jeetu, hindi) }) {
+                    Text(if (hindi) "Jeetu की राय चाहिए?" else "Want Jeetu's take?")
+                }
+            }) else null,
         )
     }
     if (mockUsedUp) {

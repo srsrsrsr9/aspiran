@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.addJsonObject
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.buildJsonObject
@@ -25,10 +26,10 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 /**
- * Jeetu · AI, the method coach from the trailer "Page 42" (artefacts/jeetu-2026-11-14.md). Chotu does the content;
+ * Jeetu, the method coach from the trailer "Page 42" (artefacts/jeetu-2026-11-14.md). Chotu does the content;
  * Jeetu only the method. The same lines as the web app's jeetu.js.
  *
- * Rules: always labelled "Jeetu · AI"; quiet from 23:30 to 07:00 IST and in result week; never feelings, ranks or
+ * Rules: always shown under his own name; quiet from 23:30 to 07:00 IST and in result week; never feelings, ranks or
  * results (the server answers those itself); no streaks, timers or scores; still picture, no sound. The server's
  * `jeetu` flag switches him off.
  */
@@ -87,7 +88,12 @@ object Jeetu {
 /** One turn of Ask Jeetu. Kept in memory only; never saved. */
 data class JeetuTurn(val fromUser: Boolean, val text: String, val id: String = java.util.UUID.randomUUID().toString(), val care: Boolean = false,
     /** The server's sig for hearing this reply (data/Voice.kt), when it may be spoken. */
-    val voiceSig: String? = null)
+    val voiceSig: String? = null,
+    /** A plan Jeetu sent with this reply (POST /jeetu `plan`), shown as a card with "Use this plan" and "Change it". */
+    val plan: JeetuPlan? = null)
+
+private const val LIMIT_EN = "That's all the time I have for now, beta. Chotu is still here for your questions."
+private const val LIMIT_HI = "अभी के लिए मेरा इतना ही समय था, बेटा। आपके सवालों के लिए Chotu यहीं है।"
 
 /** Ask Jeetu: method questions to the server's POST /jeetu. The chat is never stored, here or there. */
 class JeetuClient(private val server: () -> String) {
@@ -98,6 +104,12 @@ class JeetuClient(private val server: () -> String) {
     var busy by mutableStateOf(false); private set
     var trouble by mutableStateOf<String?>(null); private set
 
+    /**
+     * False once the server said this member can't use Jeetu now (402, or 403 `plusOnly`: not Plus and the first-14-days
+     * taste is used up or over), until the next /plus/status answer with `jeetu.available` says otherwise.
+     */
+    var available by mutableStateOf(true)
+
     suspend fun ask(text: String, hindi: Boolean) {
         val t = text.trim(); if (t.isEmpty() || busy) return
         trouble = null
@@ -105,24 +117,47 @@ class JeetuClient(private val server: () -> String) {
         if (DistressMatcher.matches(t)) { turns = turns + JeetuTurn(true, t, care = true) + JeetuTurn(false, Jeetu.CARE_REPLY, care = true); return }
         turns = turns + JeetuTurn(true, t)
         busy = true
-        val reply = withContext(Dispatchers.IO) {
-            runCatching {
-                val body = buildJsonObject {
-                    putJsonArray("messages") { turns.filter { !it.care }.takeLast(8).forEach { x -> addJsonObject { put("role", if (x.fromUser) "user" else "assistant"); put("content", x.text) } } }
-                    putJsonObject("context") { put("language", if (hindi) "Hindi" else "English") }
-                }
-                http.newCall(Request.Builder().url("${server()}/jeetu").post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute().use { r ->
-                    val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
-                    when {
-                        o?.get("care")?.jsonPrimitive?.boolean == true -> JeetuTurn(false, Jeetu.CARE_REPLY, care = true)
-                        r.isSuccessful && !o?.get("reply")?.jsonPrimitive?.content.isNullOrBlank() -> JeetuTurn(false, o!!["reply"]!!.jsonPrimitive.content, voiceSig = o["voice"]?.jsonPrimitive?.content)
-                        else -> { trouble = o?.get("error")?.jsonPrimitive?.content ?: "Jeetu couldn't answer just now. Try again in a minute."; null }
-                    }
-                }
-            }.getOrElse { trouble = "Couldn't reach the server. Try again when you're online."; null }
-        }
+        val reply = post(turns.filter { !it.care }.takeLast(8), null, hindi)
         busy = false
         if (reply != null) turns = turns + reply
+    }
+
+    /**
+     * One question asked from Chotu's "Want Jeetu's take?" chip, with the app's numbers as [facts] (no plan text, nothing
+     * from Close the Day). Not added to this screen's turns: the reply shows in Chotu's thread. Null on trouble.
+     */
+    suspend fun once(history: List<JeetuTurn>, facts: JsonObject?, hindi: Boolean): JeetuTurn? {
+        trouble = null
+        history.lastOrNull { it.fromUser }?.let { if (DistressMatcher.matches(it.text)) return JeetuTurn(false, Jeetu.CARE_REPLY, care = true) }
+        return post(history, facts, hindi)
+    }
+
+    private suspend fun post(history: List<JeetuTurn>, facts: JsonObject?, hindi: Boolean): JeetuTurn? = withContext(Dispatchers.IO) {
+        runCatching {
+            val body = buildJsonObject {
+                putJsonArray("messages") { history.forEach { x -> addJsonObject { put("role", if (x.fromUser) "user" else "assistant"); put("content", x.text) } } }
+                putJsonObject("context") {
+                    put("language", if (hindi) "Hindi" else "English")
+                    if (facts != null) put("from", "chotu")
+                }
+                // The app's own numbers as an object (server-chotu-jeetu-api.md). No text the student wrote.
+                if (facts != null) put("facts", facts)
+            }
+            http.newCall(Request.Builder().url("${server()}/jeetu").post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute().use { r ->
+                val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
+                when {
+                    o?.get("care")?.jsonPrimitive?.boolean == true -> JeetuTurn(false, Jeetu.CARE_REPLY, care = true)
+                    // Not available to this member now. Jeetu's own plain line: never a price or a pitch.
+                    r.code == 402 || o?.get("plusOnly")?.jsonPrimitive?.boolean == true -> {
+                        available = false
+                        trouble = if (hindi) LIMIT_HI else LIMIT_EN; null
+                    }
+                    r.isSuccessful && !o?.get("reply")?.jsonPrimitive?.content.isNullOrBlank() -> JeetuTurn(false, o!!["reply"]!!.jsonPrimitive.content,
+                        voiceSig = o["voice"]?.jsonPrimitive?.content, plan = (o["plan"] as? JsonObject)?.let { JeetuPlan.parse(it) })
+                    else -> { trouble = o?.get("error")?.jsonPrimitive?.content ?: "Jeetu couldn't answer just now. Try again in a minute."; null }
+                }
+            }
+        }.getOrElse { trouble = "Couldn't reach the server. Try again when you're online."; null }
     }
 
     /** Report one reply: its id, the reason and that reply's text go to the safety queue. No chat history. */

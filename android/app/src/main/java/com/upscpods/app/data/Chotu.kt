@@ -128,7 +128,7 @@ sealed interface ChotuState {
 
 enum class DownloadPhase { WAITING_WIFI, WAITING_NETWORK, RUNNING, VERIFYING }
 
-/** [cloud]: answered by the server (Groq) because the on-device model isn't ready. Shown with an "online" marker. */
+/** [cloud]: answered by the server. Never shown to the student: nobody is told where a reply came from (owner, 22 Nov 2026). */
 data class ChotuTurn(
     val fromUser: Boolean,
     val text: String,
@@ -139,9 +139,15 @@ data class ChotuTurn(
     /** A cloud reply the server signed for hearing (data/Voice.kt): its words exactly as sent, and the sig. */
     val voiceText: String? = null,
     val voiceSig: String? = null,
+    /** Jeetu's reply, asked from Chotu's "Want Jeetu's take?" chip. Shown under his name in the same thread. */
+    val jeetu: Boolean = false,
+    /** The app's own check-in line, from a reviewed template: never a model's words. */
+    val checkIn: Boolean = false,
+    /** A plan Jeetu sent with this reply: a card with "Use this plan" and "Change it". */
+    val plan: JeetuPlan? = null,
 ) {
     /** The app's own fallback line (offline, stuck, server trouble), not a model's answer: it carries no source label. */
-    val fromApp get() = !fromUser && text in setOf(Chotu.OFFLINE_REPLY, Chotu.STUCK, Chotu.CLOUD_TROUBLE)
+    val fromApp get() = !fromUser && (checkIn || text in setOf(Chotu.OFFLINE_REPLY, Chotu.STUCK, Chotu.CLOUD_TROUBLE))
 }
 
 /**
@@ -173,11 +179,38 @@ class Chotu private constructor(private val app: Context) {
     /** Notes the member approved, sent with cloud questions only when Smarter Chotu is on. Null otherwise. */
     var memoryNotes: () -> String? = { null }
 
+    /**
+     * Chotu on the phone is for Plus members only (owner, 22 Nov 2026): the download and the phone's chat. Everyone else
+     * gets online Chotu, which the server limits. Remembered from the last /plus/status answer (see [plusAnswered]).
+     */
+    var plus by mutableStateOf(plusCached(app)); private set
+
+    /** The server said whether this member has Plus. Kept 14 days, so a Plus member without internet keeps Chotu. */
+    fun plusAnswered(member: Boolean) {
+        prefs.edit().putBoolean("plus", member).putLong("plusAt", System.currentTimeMillis()).apply()
+        val was = plus
+        plus = member
+        if (member != was) refresh()
+    }
+
+    /** The phone's model, when it may answer: downloaded, started, and a Plus member. */
+    val onPhone: ModelSpec? get() = if (plus) (state as? ChotuState.Ready)?.model else null
+
+    /** The student's own numbers, counted by the app ([EffortLog]); null when they can't be read. */
+    fun facts(): StudyFacts? = runCatching { EffortLog.facts(app) }.getOrNull()
+
+    /** Shown as a "Want Jeetu's take?" chip under the last reply, until it's tapped or a new chat starts. */
+    var jeetuOffer by mutableStateOf(false); private set
+
+    /** The check-in this chat was opened from ("plan", "back", "week"), and its opening line. */
+    var checkInMoment by mutableStateOf<String?>(null); private set
+    private var checkInLine: String? = null
+
     /** The same pod server the rest of the app uses (set in My Path). */
     private val server: String get() = ServerPolicy.resolve(app.getSharedPreferences("pod", Context.MODE_PRIVATE).getString("server", ""))
 
     /** Cloud Chotu can answer: no on-device model ready, a pod server is set, and the phone is online. */
-    val cloudAvailable: Boolean get() = state !is ChotuState.Ready && server.isNotBlank() && online()
+    val cloudAvailable: Boolean get() = onPhone == null && server.isNotBlank() && online()
 
     /** The downloaded model, remembered with its spec so it loads offline. */
     private val chosen: ModelSpec?
@@ -186,6 +219,9 @@ class Chotu private constructor(private val app: Context) {
             ?.takeIf { modelFile(it).exists() }
 
     fun modelFile(m: ModelSpec) = File(app.filesDir, "models/${m.fileName}")
+
+    /** The size of the download kept on this phone, or null when there's none (shown in Me → Privacy, Plus or not). */
+    fun downloadedSize(): String? = chosen?.sizeLabel
 
     init {
         refresh()
@@ -197,6 +233,8 @@ class Chotu private constructor(private val app: Context) {
     /** Work out the state from what's on disk, the server's model list and WorkManager. */
     fun refresh() {
         retireOldModel()
+        // Without Plus nothing is loaded or offered; a model already on the phone stays until it's removed in Me → Privacy.
+        if (!plus) { if (state !is ChotuState.Downloading) { scope.launch { withContext(engineThread) { closeEngine() } }; state = ChotuState.Checking }; return }
         val ready = chosen
         if (ready != null) { if (state !is ChotuState.Ready && state !is ChotuState.Loading) load(ready); return }
         if (state is ChotuState.Downloading) return
@@ -227,6 +265,7 @@ class Chotu private constructor(private val app: Context) {
 
     /** Called only after the person taps Download on the consent card. Wi-Fi only unless they choose mobile data. */
     fun download(m: ModelSpec, wifiOnly: Boolean = true) {
+        if (!plus) return
         val base = server
         if (base.isBlank()) { state = ChotuState.NoModel(NO_SERVER); return }
         // "Try again" after a failed start: the old file goes, and a fresh copy comes down.
@@ -271,6 +310,12 @@ class Chotu private constructor(private val app: Context) {
 
     fun newChat() {
         turns = emptyList()
+        jeetuOffer = false
+        patternOffered = false
+        checkInLine = null
+        checkInMoment = null
+        planStatus = null
+        changingPlan = false
         scope.launch { withContext(engineThread) { chat?.close(); chat = null } }
     }
 
@@ -282,21 +327,35 @@ class Chotu private constructor(private val app: Context) {
     fun ask(text: String) {
         val clean = text.trim()
         if (clean.isEmpty() || thinking) return
+        // The answer to a plan check-in (Done, Half, Not yet): kept as the facts' plan_status, and the Jeetu plan's item
+        // it asked about is not asked again.
+        if (checkInMoment == CheckIns.PLAN && userTurns == 0) {
+            val i = CheckIns.planAnswers(false).indexOf(clean).takeIf { it >= 0 } ?: CheckIns.planAnswers(true).indexOf(clean)
+            if (i >= 0) {
+                planStatus = listOf("done", "half", "not_yet")[i]
+                val f = facts()
+                if (f != null && f.checkOn != null && f.checkOn == f.planItem) { JeetuPlans.markNextAnswered(app); planInUse = JeetuPlans.current(app) }
+            }
+        }
         turns = turns + ChotuTurn(true, clean)
+        jeetuOffer = false
+        // The phone's distress check runs first, for every member: no model sees the message.
         if (DistressMatcher.matches(clean)) {
             turns = turns + ChotuTurn(false, CARE_REPLY, care = true)
+            markCare()
             return
         }
-        val m = (state as? ChotuState.Ready)?.model
+        // Asking how to plan, revise or fix something: Jeetu is offered under the reply, whatever the model writes.
+        if (PLAN_ASK.containsMatchIn(clean)) pendingOffer = true
+        val m = onPhone
         if (m == null) {
             if (cloudAvailable) askCloud() else turns = turns + ChotuTurn(false, OFFLINE_REPLY)
             return
         }
         thinking = true
         turns = turns + ChotuTurn(false, "")
-        // The model can't see the clock; late at night it's told, so it can point to rest.
-        val hour = java.time.LocalTime.now().hour
-        val sent = if (hour >= 23 || hour < 4) "(It's late at night where I am.) $clean" else clean
+        // The model can't see the clock; from 23:30 to 07:00 in India it's told, so it keeps it short and points to sleep.
+        val sent = if (Jeetu.quietNow()) "(It's late at night where I am.) $clean" else clean
         stopped = false
         scope.launch {
             var failed = false
@@ -332,6 +391,7 @@ class Chotu private constructor(private val app: Context) {
                 }
             }
             thinking = false
+            if (!failed) offerJeetuIfDue()
             when {
                 !failed || stopped -> Unit
                 // The phone's model couldn't answer: online Chotu takes this one when it can.
@@ -346,7 +406,7 @@ class Chotu private constructor(private val app: Context) {
 
     /** "Explain simpler" on a Chai card. A fresh conversation each time; nothing is kept. */
     fun explain(card: String): Flow<String> {
-        val m = (state as? ChotuState.Ready)?.model
+        val m = onPhone
         if (m != null) return stream(m, card, explain = true)
         if (!cloudAvailable) return flow { }
         // A public news card only; never anything the member wrote.
@@ -361,25 +421,129 @@ class Chotu private constructor(private val app: Context) {
 
     // --- cloud Chotu --------------------------------------------------------------
 
-    private data class CloudReply(val text: String, val care: Boolean, val raw: String? = null, val sig: String? = null)
+    private data class CloudReply(val text: String, val care: Boolean, val raw: String? = null, val sig: String? = null, val jeetu: Boolean = false)
+
+    /** The moment this chat was opened from, as the server's `facts.checkin` names it. */
+    private val checkinKey: String? get() = when (checkInMoment) {
+        CheckIns.PLAN -> "morning_after"; CheckIns.BACK -> "return"; CheckIns.WEEK -> "sunday"; else -> null
+    }
+    /** The student's answer to the plan check-in ("done", "half", "not_yet"), once given. */
+    private var planStatus: String? = null
+
+    /** The facts object for the server's Chotu and Jeetu; null when there's nothing on record yet. */
+    private fun factsJson(): kotlinx.serialization.json.JsonObject? =
+        facts()?.takeIf { it.hasAnything || it.planItems.isNotEmpty() }?.json(checkinKey, planStatus)
     /** An error sentence written by our server for people to read (rate limit, paused, and so on). */
     private class ServerSaid(message: String) : Exception(message)
 
     private fun askCloud() {
         thinking = true
         // Only this chat's own turns: never Close the Day, mood or journal text. Care turns aren't sent.
-        val history = turns.filter { !it.care && it.text.isNotBlank() }.takeLast(8)
+        val history = turns.filter { !it.care && !it.jeetu && it.text.isNotBlank() }.takeLast(8)
         turns = turns + ChotuTurn(false, "", cloud = true)
         scope.launch {
             val reply = runCatching { withContext(Dispatchers.IO) { postChotu(mode, history, notes = memoryNotes()) } }
             thinking = false
             turns = turns.dropLast(1) + reply.fold(
-                { if (it.care) ChotuTurn(false, CARE_REPLY, care = true) else ChotuTurn(false, it.text, cloud = true, voiceText = it.raw, voiceSig = it.sig) },
+                { if (it.care) { markCare(); ChotuTurn(false, CARE_REPLY, care = true) } else ChotuTurn(false, it.text, cloud = true, voiceText = it.raw, voiceSig = it.sig) },
                 // The server's own sentence when it sent one; a plain line for network trouble.
                 { ChotuTurn(false, (it as? ServerSaid)?.message ?: CLOUD_TROUBLE, cloud = true) },
             )
+            if (reply.isSuccess && reply.getOrNull()?.care != true) offerJeetuIfDue(reply.getOrNull()?.jeetu == true)
         }
     }
+
+    /** Set when the student asked how to plan, revise or fix something, or the reply ended with [JEETU_TAG]. */
+    @Volatile private var pendingOffer = false
+
+    /**
+     * After a finished reply: offer Jeetu when the student asked for a plan or a fix, the reply carried [JEETU_TAG], or
+     * the app's numbers show a pattern (planned 3+ times and missed, or a subject below 50% two weeks running): that
+     * one only once per chat.
+     */
+    private fun offerJeetuIfDue(tagged: Boolean = false) {
+        val pattern = !patternOffered && facts()?.jeetuPattern == true && userTurns >= 1
+        if (pendingOffer || tagged || pattern) { jeetuOffer = true; if (pattern) patternOffered = true }
+        pendingOffer = false
+    }
+    private var patternOffered = false
+
+    /**
+     * Jeetu's take, only on a tap of the chip (or "Your week"). He gets the student's last question and the app's numbers
+     * (no plan text, nothing from Close the Day), and his reply shows under his name in this thread. With no question
+     * yet, only the numbers go: the server asks him for a plan from them.
+     */
+    fun askJeetu(client: JeetuClient, hindi: Boolean) {
+        if (thinking) return
+        val q = turns.lastOrNull { it.fromUser && !it.care }?.text
+        val facts = factsJson()
+        val history = when {
+            q != null -> listOf(JeetuTurn(true, q))
+            facts != null -> emptyList()
+            else -> listOf(JeetuTurn(true, if (hindi) "पढ़ाई का एक छोटा प्लान बताइए।" else "Suggest a small study plan."))
+        }
+        callJeetu(client, history, facts, hindi)
+    }
+
+    /** "Change it" on a plan card: the next message the student sends goes to Jeetu as the change. */
+    var changingPlan by mutableStateOf(false); private set
+    fun changePlan() { changingPlan = true; jeetuOffer = false }
+    fun cancelChange() { changingPlan = false }
+
+    /** The student's change to Jeetu's last plan: his last reply and their words, with the same facts. */
+    fun sendPlanChange(client: JeetuClient, text: String, hindi: Boolean) {
+        val clean = text.trim()
+        if (clean.isEmpty() || thinking) return
+        changingPlan = false
+        turns = turns + ChotuTurn(true, clean)
+        if (DistressMatcher.matches(clean)) { markCare(); turns = turns + ChotuTurn(false, CARE_REPLY, care = true); return }
+        val q = turns.dropLast(1).lastOrNull { it.fromUser && !it.care }?.text
+        val last = turns.lastOrNull { it.jeetu && it.plan != null }
+        val history = listOfNotNull(q?.let { JeetuTurn(true, it) }, last?.let { JeetuTurn(false, it.text) }, JeetuTurn(true, clean))
+        callJeetu(client, history, factsJson(), hindi)
+    }
+
+    private fun callJeetu(client: JeetuClient, history: List<JeetuTurn>, facts: kotlinx.serialization.json.JsonObject?, hindi: Boolean) {
+        jeetuOffer = false
+        thinking = true
+        turns = turns + ChotuTurn(false, "", jeetu = true)
+        scope.launch {
+            val r = client.once(history, facts, hindi)
+            thinking = false
+            turns = turns.dropLast(1) + when {
+                r == null -> ChotuTurn(false, client.trouble ?: CLOUD_TROUBLE, jeetu = true, checkIn = true)
+                r.care -> { markCare(); ChotuTurn(false, CARE_REPLY, care = true) }
+                else -> ChotuTurn(false, r.text, jeetu = true, id = r.id, voiceText = r.text, voiceSig = r.voiceSig, plan = r.plan)
+            }
+        }
+    }
+
+    /** The plan the student is using now (accepted this week), for the card's "In use" state. */
+    var planInUse by mutableStateOf(JeetuPlans.current(app)); private set
+
+    /** "Use this plan": it becomes what Chotu's morning check-in asks about, for a week. */
+    fun usePlan(plan: JeetuPlan) {
+        JeetuPlans.accept(app, plan)
+        planInUse = JeetuPlans.current(app)
+        changingPlan = false
+    }
+
+    /**
+     * Opens a chat from a check-in (a tapped notification, or Sunday's "Your week"). The first line is the app's own
+     * template filled with its numbers; the model only joins once the student answers.
+     */
+    fun startCheckIn(moment: String, hindi: Boolean) {
+        val f = facts() ?: return
+        val line = CheckIns.opening(moment, f, hindi) ?: return
+        newChat()
+        mode = "talk"
+        checkInLine = line
+        checkInMoment = moment
+        turns = listOf(ChotuTurn(false, line, checkIn = true))
+    }
+
+    /** A care moment: no check-ins, wins or nudges for 24 hours (the same clock the rest of the app reads). */
+    private fun markCare() = app.getSharedPreferences("prep", Context.MODE_PRIVATE).edit().putLong("careAt", System.currentTimeMillis()).apply()
 
     private fun postChotu(mode: String, history: List<ChotuTurn>, notes: String? = null): CloudReply {
         val body = buildJsonObject {
@@ -398,14 +562,18 @@ class Chotu private constructor(private val app: Context) {
                 })
                 if (notes != null) put("notes", notes)
             }
+            // The app's own numbers as an object (no text the student wrote), so online Chotu keeps the student to their own record.
+            if (mode != "prep" || history.size > 1) factsJson()?.let { put("facts", it) }
         }
         val req = Request.Builder().url("$server/chotu").post(body.toString().toRequestBody("application/json".toMediaType())).build()
         http.newCall(req).execute().use { r ->
             val o = runCatching { json.parseToJsonElement(r.body.string()).jsonObject }.getOrNull()
             if (o?.get("care")?.jsonPrimitive?.boolean == true) return CloudReply(CARE_REPLY, care = true)
             val text = o?.get("reply")?.jsonPrimitive?.content
-            val shown = text?.let { clean(it) }
-            if (r.isSuccessful && !shown.isNullOrBlank()) return CloudReply(shown, care = false, raw = text, sig = o["voice"]?.jsonPrimitive?.content)
+            // The server says offerJeetu itself; a [JEETU] tag left in the text counts too.
+            val tagged = text?.contains(JEETU_TAG) == true || o?.get("offerJeetu")?.jsonPrimitive?.boolean == true
+            val shown = text?.let { untag(clean(it)) }
+            if (r.isSuccessful && !shown.isNullOrBlank()) return CloudReply(shown, care = false, raw = text, sig = o["voice"]?.jsonPrimitive?.content, jeetu = tagged)
             throw o?.get("error")?.jsonPrimitive?.content?.let { ServerSaid(it) } ?: java.io.IOException(OFFLINE_REPLY)
         }
     }
@@ -415,7 +583,7 @@ class Chotu private constructor(private val app: Context) {
         if (server.isBlank() || turn.fromUser) return@withContext false
         val body = buildJsonObject { put("messageId", turn.id); put("reason", reason.take(300)); put("text", turn.text.take(2000)) }
         runCatching {
-            http.newCall(Request.Builder().url("$server/chotu/report").post(body.toString().toRequestBody("application/json".toMediaType())).build())
+            http.newCall(Request.Builder().url("$server/${if (turn.jeetu) "jeetu" else "chotu"}/report").post(body.toString().toRequestBody("application/json".toMediaType())).build())
                 .execute().use { it.isSuccessful }
         }.getOrDefault(false)
     }
@@ -446,7 +614,9 @@ class Chotu private constructor(private val app: Context) {
     private fun replaceLast(text: String) {
         // Small models sometimes drop the brackets and answer just "CARE".
         val care = text.contains(CARE_TAG) || text.trim().trimEnd('.') == "CARE"
-        val shown = if (care) CARE_REPLY else text
+        if (care) markCare()
+        if (text.contains(JEETU_TAG)) pendingOffer = true
+        val shown = if (care) CARE_REPLY else untag(text)
         turns = turns.dropLast(1) + ChotuTurn(false, shown, care)
     }
 
@@ -534,7 +704,7 @@ class Chotu private constructor(private val app: Context) {
     private fun conversation(m: ModelSpec, explain: Boolean): Conversation {
         val e = engine ?: error("model not loaded")
         val config = ConversationConfig(
-            systemInstruction = Contents.of(if (explain) EXPLAIN_RULES else CHAT_RULES),
+            systemInstruction = Contents.of(if (explain) EXPLAIN_RULES else CHAT_RULES + context()),
             samplerConfig = SamplerConfig(topK = 40, topP = 0.95, temperature = 0.7),
             // No hidden thinking (it can run for minutes on a phone before a word shows), and short answers.
             thinkingConfig = ThinkingConfig(enableThinking = false),
@@ -545,6 +715,14 @@ class Chotu private constructor(private val app: Context) {
         // A change of chip starts a fresh conversation, so its reply length applies.
         if (chat != null && chatMode != mode) { runCatching { chat?.close() }; chat = null }
         return chat ?: e.createConversation(config).also { chat = it; chatMode = mode }
+    }
+
+    /** The app's numbers and the check-in line, after the rules. Read when a conversation starts. */
+    private fun context(): String {
+        val f = facts()?.takeIf { it.hasAnything || it.yesterdayStep != null }?.block(private = true)
+        val c = checkInLine
+        if (f == null && c == null) return ""
+        return "\n\nThe app's notes on this student:\n" + listOfNotNull(f, c?.let { "This chat began with the app asking: $it" }).joinToString("\n")
     }
 
     /**
@@ -696,10 +874,26 @@ class Chotu private constructor(private val app: Context) {
         private const val TALK_TOKENS = 150
         const val STUCK = "Sorry, I got stuck. Try again, or start a new chat."
         const val CARE_TAG = "[CARE]"
+        /** Ends a reply when Jeetu should be offered. Never shown. */
+        const val JEETU_TAG = "[JEETU]"
+
+        /** Drops [JEETU_TAG], and a half-written one at the end while a reply streams. */
+        internal fun untag(s: String): String = s.replace(Regex("""\[\s*JEETU\s*\]"""), "").replace(Regex("""\[[A-Z]{0,5}$"""), "").trim()
+
+        /** "How do I plan / revise / fix…", in English, Hindi and Hinglish. */
+        internal val PLAN_ASK = Regex(
+            """(?i)\b(plan|schedule|time ?table|revise|revision|fix|improve|catch up|behind|strategy|routine)\b|कैसे पढ़|प्लान|योजना|रिवीज़न|रिवीजन|सुधार|\b(kaise (padh|karu|karun|sudhar)|plan bana)""",
+        )
+
+        /** The last Plus answer from the server, trusted for 14 days. */
+        fun plusCached(context: Context): Boolean {
+            val p = context.getSharedPreferences("chotu", Context.MODE_PRIVATE)
+            return p.getBoolean("plus", false) && System.currentTimeMillis() - p.getLong("plusAt", 0L) < 14 * 86_400_000L
+        }
         const val CARE_REPLY = "That sounds really heavy, and I'm only a chai cup in an app, not a person. Please talk to someone you trust today. In an emergency, call 112."
-        const val OFFLINE_REPLY = "I'm offline right now, so I can't answer yet. Ask again when you're connected, or make me work offline (the button above)."
+        const val OFFLINE_REPLY = "I can't answer without internet just now. Ask again when you're connected."
         const val CLOUD_TROUBLE = "I couldn't reach the server just now. Try again in a minute."
-        const val CANT_CHECK = "Couldn't check for offline ${Brand.MASCOT_SHORT} just now. Try again when you're online."
+        const val CANT_CHECK = "Couldn't check just now. Try again when you're online."
         const val NO_SERVER = "Set your pod server in My Path first; ${Brand.MASCOT_SHORT}'s model downloads from there."
 
         /**
@@ -707,12 +901,16 @@ class Chotu private constructor(private val app: Context) {
          * reply on its own (small models sometimes repeat a rule back). The fuller rules live on the server.
          */
         private val CHAT_RULES = """
-            You are ${Brand.MASCOT_SHORT}, the study buddy in an app (a program, not a person; never call yourself "an AI" unprompted) for UPSC aspirants in India.
-            The person writing to you is a student preparing for UPSC; you are ${Brand.MASCOT_SHORT}, and you never call them ${Brand.MASCOT_SHORT}.
-            Answer their latest message directly in 1 to 4 short, warm sentences, in the same language and script they wrote in (Hinglish stays in Roman letters).
-            Write plain sentences only, with no headings, lists, steps or markdown symbols.
-            For study questions give the key fact simply; when you are unsure of a fact, tell them to check NCERT.
-            Feeling tired, low or unmotivated is normal during preparation: be kind and give one small next step.
+            You are ${Brand.MASCOT_SHORT}, the study buddy in an app for UPSC aspirants in India (a program, not a person; never call yourself "an AI").
+            The student writes to you; you never call them ${Brand.MASCOT_SHORT}. Reply in 1 to 3 short plain sentences in their language and script (Hinglish stays in Roman letters), with no lists or markdown.
+            Hold them to what they chose to do; if it is not done, offer a smaller piece of it, never a scolding.
+            Name effort as totals such as questions this month, never days in a row, and compare them only with their own past, never with others, toppers, ranks or cut-offs.
+            Use only numbers from the app's notes below, copied exactly; without a number, say nothing about it.
+            For study questions give the key fact simply; if unsure, say so and point to NCERT.
+            If they share a feeling, give one plain kind line, then ask whether they want to tell their pod or keep today light; never counsel or reassure.
+            Never say "you missed", "don't give up", "don't worry", "you've got this" or "stay positive", and never mention prices or plans to buy.
+            If they ask how to plan, revise or fix something, answer in one line and end with $JEETU_TAG.
+            If it is late at night where they are, reply in one short sentence pointing them to sleep.
             Only if their message itself says they want to die, end their life or hurt themselves, your whole reply is $CARE_TAG.
         """.trimIndent()
 

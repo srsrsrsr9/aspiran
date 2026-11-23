@@ -108,12 +108,17 @@ data class AnswerFeedback(
 )
 
 @Serializable
-data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap(), val play: PlayInfo? = null) {
+data class PlusStatus(val enabled: Boolean = false, val testMode: Boolean = true, val plan: JsonObject? = null, val prices: Map<String, PlusPrice> = emptyMap(), val play: PlayInfo? = null,
+    /** Can this member ask Jeetu now: Plus, or a free member in the first-14-days taste. An older server says nothing. */
+    val jeetu: JeetuAccess? = null) {
     /** The one price on show, a year of Plus, from the server; null when it sent none. */
     fun yearlyInr(): Int? = prices["yearly"]?.inr?.takeIf { it > 0 }
     /** The server's play_billing flag is on and its Play check is set up (server play.ts). An older server says nothing: off. */
     val playReady get() = play?.let { it.on && it.ready } == true
 }
+
+@Serializable
+data class JeetuAccess(val plus: Boolean = false, val tasteLeft: Int? = null, val tasteEndsAt: String? = null, val available: Boolean = false)
 
 @Serializable
 data class PlusPrice(val inr: Int = 0, val days: Int = 0)

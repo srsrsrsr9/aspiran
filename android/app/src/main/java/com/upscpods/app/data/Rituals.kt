@@ -35,7 +35,9 @@ enum class Ritual(val key: String, val title: String, val titleHi: String, val s
     ANSWER_HOUR("answer_hour", "Answer hour", "आंसर आवर", "Wed and Sat, 7 pm", "बुध और शनि, शाम 7 बजे", "answer_hour"),
     QUIZ_NIGHT("quiz", "Quiz night", "क्विज़ नाइट", "Fridays, 8 pm, in your pod", "शुक्रवार, रात 8 बजे, आपके पॉड में", "quiz_night"),
     SUNDAY_CA("ca", "The week in scenes", "दृश्यों में हफ़्ता", "Sundays, 10 am", "रविवार, सुबह 10 बजे", "ca_ritual"),
-    COMEBACK("comeback", "Comeback", "वापसी", "After 3 quiet days", "3 शांत दिनों के बाद", "came_back");
+    COMEBACK("comeback", "Comeback", "वापसी", "After 3 quiet days", "3 शांत दिनों के बाद", "came_back"),
+    /** Opt-in and off by default (it's never in a saved set until picked). See [CheckIns]. */
+    CHECK_IN("checkin", "Chotu check-in", "Chotu चेक-इन", "Once a day at most: your plan, your week", "दिन में ज़्यादा से ज़्यादा एक बार: आपका प्लान, आपका हफ़्ता", "checkin");
 
     fun title(hindi: Boolean) = if (hindi) titleHi else title
     fun slot(hindi: Boolean) = if (hindi) slotHi else slot
@@ -55,6 +57,8 @@ object Rituals {
     private const val CHANNEL = "rituals"
     private const val OLD_WORK = "chai-nudge"
     const val EXTRA = "ritual"
+    /** Which check-in a tapped "Chotu check-in" came from: CheckIns.PLAN, BACK or WEEK. */
+    const val EXTRA_MOMENT = "checkin_moment"
     const val MAX_A_DAY = 2
     const val IGNORES_TO_WEEKLY = 3
     private val LATEST = LocalTime.of(22, 30)
@@ -99,6 +103,9 @@ object Rituals {
         Ritual.SUNDAY_CA -> listOf(DayOfWeek.SUNDAY to LocalTime.of(10, 0))
         // Checked once a day; it only sends after 3 days without opening the app.
         Ritual.COMEBACK -> listOf(null to LocalTime.of(18, 0))
+        // Mornings at chai time (8 am without one) for a plan or a return; Sunday evening for "Your week".
+        // Weekly mode keeps Sunday only.
+        Ritual.CHECK_IN -> (if (weekly) emptyList() else listOf(null to (chai ?: LocalTime.of(8, 0)))) + listOf(DayOfWeek.SUNDAY to SUNDAY_WEEK)
     }
 
     /** The next moment one of [r]'s slots comes round after [from]. */
@@ -111,7 +118,7 @@ object Rituals {
     /** The slot of [r] that is due at [now] (within its grace), if any. */
     fun dueSlot(r: Ritual, chai: LocalTime?, weekly: Boolean, now: LocalDateTime): LocalDateTime? {
         // A nudge that's very late is no longer true ("in 15 min"), so it's dropped. Chai and comeback can wait longer.
-        val grace = if (r == Ritual.CHAI || r == Ritual.COMEBACK) 120L else 45L
+        val grace = if (r == Ritual.CHAI || r == Ritual.COMEBACK || r == Ritual.CHECK_IN) 120L else 45L
         return slots(r, chai, weekly).mapNotNull { (day, at) ->
             listOf(now.toLocalDate(), now.toLocalDate().minusDays(1)).map { it.atTime(at) }
                 .firstOrNull { (day == null || it.dayOfWeek == day) && !it.isAfter(now.plusMinutes(1)) && it.isAfter(now.minusMinutes(grace)) }
@@ -179,6 +186,7 @@ object Rituals {
         }
         for (r in due) {
             if (sentToday(context) >= MAX_A_DAY) return
+            if (r == Ritual.CHECK_IN) { checkIn(context, now); continue }
             val n = content(context, r) ?: continue
             send(context, r, n.first, n.second)
         }
@@ -234,6 +242,7 @@ object Rituals {
                     if (w.free > 0) append(if (hindi) " पहला दृश्य सबके लिए खुला है।" else " The first one's open to everyone.")
                 }
             }
+            Ritual.CHECK_IN -> null
             Ritual.COMEBACK -> {
                 val last = p.getString("lastOpen", null)?.let(LocalDate::parse) ?: return null
                 if (last.isAfter(LocalDate.now().minusDays(3)) || p.getString("comebackFor", null) == last.toString()) return null
@@ -244,13 +253,48 @@ object Rituals {
         }
     }
 
+    // --- Chotu check-in ---------------------------------------------------------------------------
+
+    private val SUNDAY_WEEK: LocalTime = LocalTime.of(18, 0)
+
+    /**
+     * Which check-in is due now, or null. At most one a day, never from 23:30 to 07:00 in India (on top of [quiet]), and
+     * free members get only Sunday's "Your week" (owner, 22 Nov 2026). Sunday mornings wait for "Your week" that evening.
+     */
+    internal fun checkInMoment(context: Context, now: LocalDateTime, f: StudyFacts, plus: Boolean, lastOpen: LocalDate?, comebackOn: Boolean): String? {
+        if (Jeetu.quietNow()) return null
+        if (prefs(context).getString("checkinDay", null) == now.toLocalDate().toString()) return null
+        val sunday = now.dayOfWeek == DayOfWeek.SUNDAY
+        if (sunday && !now.toLocalTime().isBefore(SUNDAY_WEEK.minusMinutes(1))) return CheckIns.WEEK.takeIf { f.hasAnything }
+        if (!plus || sunday) return null
+        // The comeback ritual already says this; one is enough.
+        if (!comebackOn && lastOpen != null && !lastOpen.isAfter(now.toLocalDate().minusDays(3))) return CheckIns.BACK
+        if (f.checkOn != null) return CheckIns.PLAN
+        return null
+    }
+
+    /** The moment of the last check-in sent, for the chat a tap opens. */
+    fun lastCheckIn(context: Context): String = prefs(context).getString("checkinMoment", null) ?: CheckIns.WEEK
+
+    private fun checkIn(context: Context, now: LocalDateTime) {
+        val p = prefs(context)
+        val f = runCatching { EffortLog.facts(context, now.toLocalDate()) }.getOrNull() ?: return
+        val hindi = ProfileStore.load(context).persona?.language == ReadingLanguage.HINDI
+        val lastOpen = p.getString("lastOpen", null)?.let { runCatching { LocalDate.parse(it) }.getOrNull() }
+        val moment = checkInMoment(context, now, f, Chotu.plusCached(context), lastOpen, Ritual.COMEBACK in on(context)) ?: return
+        val (title, text) = CheckIns.notification(moment, f, hindi) ?: return
+        p.edit().putString("checkinDay", now.toLocalDate().toString()).putString("checkinMoment", moment).apply()
+        send(context, Ritual.CHECK_IN, title, text, moment = moment)
+    }
+
     /** Posts the push. [preview] (debug builds only) skips the counting. */
-    fun send(context: Context, r: Ritual, title: String, text: String?, preview: Boolean = false) {
+    fun send(context: Context, r: Ritual, title: String, text: String?, preview: Boolean = false, moment: String? = null) {
         val nm = NotificationManagerCompat.from(context)
         nm.createNotificationChannel(NotificationChannelCompat.Builder(CHANNEL, NotificationManagerCompat.IMPORTANCE_DEFAULT).setName("Ritual nudges").build())
         val intent = Intent(context, MainActivity::class.java).putExtra(EXTRA, r.key)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         if (r == Ritual.CHAI) intent.putExtra(Nudge.EXTRA_FROM_NUDGE, true)
+        if (moment != null) intent.putExtra(EXTRA_MOMENT, moment)
         val open = PendingIntent.getActivity(context, noteId(r), intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         val n = NotificationCompat.Builder(context, CHANNEL)
             .setSmallIcon(android.R.drawable.ic_popup_reminder)
@@ -259,6 +303,12 @@ object Rituals {
             .setContentIntent(open)
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
+            // A check-in can carry the student's own plan: on a locked screen only "Chotu check-in" shows.
+            .apply {
+                if (r == Ritual.CHECK_IN) setVisibility(NotificationCompat.VISIBILITY_PRIVATE).setPublicVersion(
+                    NotificationCompat.Builder(context, CHANNEL).setSmallIcon(android.R.drawable.ic_popup_reminder).setContentTitle(r.title).build(),
+                )
+            }
             .build()
         runCatching { nm.notify(noteId(r), n) }.onSuccess {
             if (preview) return@onSuccess
@@ -274,6 +324,14 @@ object Rituals {
 
     /** Debug builds: each ritual's push as it would read now, without the rules, to try the deep links. */
     suspend fun preview(context: Context, r: Ritual) {
+        if (r == Ritual.CHECK_IN) {
+            val f = EffortLog.facts(context)
+            val moment = if (f.checkOn != null) CheckIns.PLAN else if (f.hasAnything) CheckIns.WEEK else CheckIns.BACK
+            val (title, text) = CheckIns.notification(moment, f, false) ?: (r.title to "Preview")
+            prefs(context).edit().putString("checkinMoment", moment).apply()
+            send(context, r, title, text, preview = true, moment = moment)
+            return
+        }
         val (title, text) = content(context, r) ?: ((if (r == Ritual.COMEBACK) "Your room's still here." else r.title) to "Preview")
         send(context, r, title, text, preview = true)
     }
@@ -292,6 +350,8 @@ object Rituals {
             Ritual.COMEBACK -> System.currentTimeMillis() - p.getLong("sentAt:${r.key}", 0L) < 48 * 3_600_000L &&
                 p.getLong("rewardedAt:${r.key}", 0L) < p.getLong("sentAt:${r.key}", 0L)
             Ritual.CHAI -> chai != null && !now.toLocalTime().isBefore(chai.minusHours(1))
+            // A check-in has no reward screen: answering Chotu is the whole of it.
+            Ritual.CHECK_IN -> false
             else -> slots(r, chai, false).any { (day, _) -> day == null || day == now.dayOfWeek }
         }
         if (!today) return false
@@ -307,6 +367,7 @@ object Rituals {
         Ritual.QUIZ_NIGHT -> if (hindi) "क्विज़ खेल लिया। पॉड के स्कोर में आपका हिस्सा जुड़ गया।" else "Quiz played. Your share is in the pod's score."
         Ritual.SUNDAY_CA -> if (hindi) "हफ़्ता देख लिया, सवाल भी हो गए। करंट अफ़ेयर्स ऐसे ही याद रहते हैं।" else "Week watched, questions done. That's how current affairs stick."
         Ritual.COMEBACK -> if (hindi) "आप वापस आ गए। सबसे मुश्किल हिस्सा यही था।" else "You're back. That was the hard part, done."
+        Ritual.CHECK_IN -> ""
     }
 
     private fun noteId(r: Ritual) = 70 + r.ordinal

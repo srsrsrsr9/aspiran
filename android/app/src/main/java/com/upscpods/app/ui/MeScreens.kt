@@ -90,7 +90,7 @@ fun MeTab(
                 MeRow("Stamp book", "${staged.stamps.size} " + (if (staged.stamps.size == 1) "stamp" else "stamps") + ". None are ever lost") { onPage(MePage.STAMPS) }
                 if (room != null) MeRow("Your room", "Sleep, notes, to-dos and your journal. Private, never scored, yours to export") { onPage(MePage.ROOM) }
                 MeRow("Rhythm", "The days you closed, as dots. Not a streak") { onPage(MePage.RHYTHM) }
-                MeRow("Privacy", "Smarter ${Brand.MASCOT_SHORT}, offline ${Brand.MASCOT_SHORT}, result-day mode, what leaves the phone") { onPage(MePage.PRIVACY) }
+                MeRow("Privacy", "Smarter ${Brand.MASCOT_SHORT}, ${Brand.MASCOT_SHORT} without internet, result-day mode, what leaves the phone") { onPage(MePage.PRIVACY) }
                 if (plusOn) MeRow("Plus", "Your plan") { onPage(MePage.PLUS) }
                 MeRow("Request your language", if (langRequests.asked.isEmpty()) "The app is in English, with Hindi where it's ready. Ask for yours" else "You asked for ${LanguageRequests.REQUESTABLE.filter { it.code in langRequests.asked }.joinToString(", ") { it.name }}") { onPage(MePage.LANGUAGES) }
                 MeRow("My Path", "Reminders, pause, focus, journal, delete my data") { onPage(MePage.SETTINGS) }
