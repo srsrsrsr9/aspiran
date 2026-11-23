@@ -326,6 +326,47 @@ IST: one fixed line) and ranks, results or feelings (one fixed line each). `POST
 Chotu reports queue as "Jeetu · AI". His scripted lines live in the apps (`public/app/jeetu.js`, Android
 `data/Jeetu.kt`). Design note: `artefacts/jeetu-2026-11-14.md`. Test with `npm run test:all -- jeetu`.
 
+### Chotu facts and Jeetu plans (22 Nov 2026)
+Rules: `artefacts/chotu-jeetu-behaviour-rules-2026-11-22.md`. Chotu keeps the member accountable to their own
+commitments, points out small wins as totals (never streaks) and compares them only with their own past; Jeetu turns
+the same facts into a plan. The app does all the counting; the models only read the numbers. Code: `src/coach.ts`
+(facts, marker, plan), `src/chotu.ts`, `src/jeetu.ts`, `jeetuAccess` in `src/plus.ts`, `JEETU_ROUTES` in `src/ai.ts`.
+Web app: `public/app/coach.js`. Test: `npm run test:coach` (no server, no keys) and `npm run test:all -- jeetu`.
+**These field names are shared with the Android app; don't rename them.**
+
+- **`facts`** (request, `POST /chotu` and `POST /jeetu`, optional): one JSON object from the app. Keys are letters,
+  digits and `_` (up to 40 characters); values are strings (cut to 200 characters, one line, with `{}[]<>` and backticks
+  removed), finite numbers, booleans, null, arrays (first 12) or objects, at most 3 levels deep and 40 keys per object,
+  4,000 characters in all (keys dropped from the end past that). Anything else is dropped silently; a `facts` that isn't
+  an object is a 400. It goes into the prompt as plain lines marked as data, never instructions. Distress phrases inside
+  it get the care reply, as in a message. On result days `/chotu` leaves the facts out altogether. Keys both apps use:
+  `checkin` (`after_practice`, `morning_after`, `return`, `sunday`), `today_plan` and `yesterday_plan` (lists of
+  strings), `plan_status` (`done`, `half`, `not_yet`), `week` and `last_week` (`{minutes, questions, answers, reviews,
+  mocks, days_active}`), `wins` (strings), `trends` (`[{subject, from, to, weeks, unit}]`, 2+ weeks only),
+  `last_set` (`{kind: "practice" | "mock", questions, correct, minutes}`), `missed_plans` (number, last 2 weeks),
+  `stuck_topics` (`[{topic, accuracy, weeks}]`), `minutes_per_day`, `review_gap_days`. Android also sends
+  `week.planned_minutes`, a `month` object (same counts as `week`) and `quiet_days` (days since the last study, for the
+  "coming back" check-in, never mentioned to the member). Plus-only refusals are `403 {plusOnly: true}`.
+- **`offerJeetu: true`** (response, `/chotu`): Chotu offered Jeetu's take. The model ends such a reply with the hidden
+  marker `[[JEETU]]`, which the server always strips. The flag is only set when this member can use Jeetu
+  (`jeetuAccess`), outside quiet hours and result days. The apps show a "Want Jeetu's take?" chip; only a tap calls Jeetu.
+- **`POST /jeetu`** takes `{messages?, facts?, context: {language}}`; `messages` may be empty when `facts` is sent (the chip
+  tap). It answers `{reply, plan, ai: true, who: "Jeetu", model, lang, tasteLeft?}` where **`plan`** is
+  **`{items: [{what, when, minutes}], why}`** (1 to 3 items; `minutes` a whole number from 5 to 240; `why` one line) or
+  `null` when Jeetu answered without a plan. The model is asked for `{"reply", "plan"}` JSON; anything else becomes plain
+  `reply` text with `plan: null`. "Use this plan" and "Change it" are app-side: an accepted plan goes back in `facts` as
+  `today_plan`; "Change it" sends the member's change as the next message with the same facts.
+- **Plus only, with a taste.** Free members get `LIMITS.free.jeetuTaste` sessions (3) within `LIMITS.free.jeetuTasteDays`
+  (14) of their account being made, then `403 {plusOnly: true, error}`; Plus gets `LIMITS.plus.jeetuPerDay` (30), Plus
+  given by the owner no cap; visitors none. Enforced whatever the `plus` flag says. A session is counted only after Jeetu
+  answers (usage kind `jeetu`). Distress, quiet hours, ranks and feelings are answered before this check, for everyone.
+  `/plus/status` carries `jeetu: {available, plus, tasteLeft, tasteEndsAt}`.
+- **Models.** Jeetu uses `JEETU_ROUTES` (gpt-oss-120b on Groq with high reasoning first, then Qwen 3.8, Nemotron 3 Ultra
+  for English and Hindi, Gemini last) through `callChat` under purpose `chotu`, logged as `plus` or `free`, so the Groq
+  key and spend group follow the member.
+- Both replies pass a last check that drops sentences with guilt, empty cheer or streak talk ("you've got this",
+  "don't worry", "in a row"...), unless that would leave nothing.
+
 **AI voices (Fish Audio).** `POST /voice` (`src/voice.ts`, members only) answers with an MP3 of one Chotu or Jeetu line:
 a scripted line by key (`public/app/jeetu-lines.js`), or a reply the server signed for that member (`/chotu` and `/jeetu`
 add `voice`, an HMAC, to replies that may be spoken). Never free text, care replies, Jeetu's quiet hours or result week.

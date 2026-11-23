@@ -185,6 +185,34 @@ export const CHAT_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
   ],
 };
 
+/**
+ * Jeetu's models (owner, 22 Nov 2026: "high-quality online models only", Plus). The strongest working model first:
+ * gpt-oss-120b on Groq with more reasoning, since a plan needs thinking and the owner's 15 Nov live test rated its
+ * Hindi and Telugu well (and it costs about a fifth of Qwen). Then Qwen 3.8, then Nemotron 3 Ultra (strong, slow,
+ * Hindi and English only), then Gemini, which stays last while Google's account answers 402. Same list in every
+ * language; a provider set aside after a billing or key error is skipped as for Chotu.
+ */
+const JEETU_GPT = { reasoning_effort: "high", include_reasoning: false, max_completion_tokens: 2500 };
+export const JEETU_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
+  en: [
+    { provider: "groq", model: "openai/gpt-oss-120b", extra: JEETU_GPT, timeoutMs: 30_000 },
+    { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
+    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1500 }, timeoutMs: 30_000 },
+    { provider: "google", model: "gemini-3.8-flash", extra: { ...GEMINI_EXTRA, reasoning_effort: "medium" } },
+  ],
+  hi: [
+    { provider: "groq", model: "openai/gpt-oss-120b", extra: JEETU_GPT, timeoutMs: 30_000 },
+    { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
+    { provider: "nvidia", model: "nvidia/nemotron-3-ultra-550b-a55b", extra: { max_tokens: 1500 }, timeoutMs: 30_000 },
+    { provider: "google", model: "gemini-3.8-flash", extra: { ...GEMINI_EXTRA, reasoning_effort: "medium" } },
+  ],
+  te: [
+    { provider: "groq", model: "openai/gpt-oss-120b", extra: JEETU_GPT, timeoutMs: 30_000 },
+    { provider: "groq", model: "qwen/qwen3.8-27b", extra: QWEN_EXTRA },
+    { provider: "google", model: "gemini-3.8-flash", extra: { ...GEMINI_EXTRA, reasoning_effort: "medium" } },
+  ],
+};
+
 /** "te", "Telugu" or "తెలుగు" → "te"; the same for Hindi; anything else is English. */
 export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
   const s = String(x ?? "").trim().toLowerCase();

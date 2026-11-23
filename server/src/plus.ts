@@ -16,7 +16,12 @@ import { PLAY_PRODUCT, playConfigured } from "./play";
  * 22:30. Apps report every offer they show; one shown anywhere else is counted as a forbidden impression.
  */
 
-export const LIMITS = { free: { feedbackPerWeek: 3, mocksPerMonth: 1, cloudChotuPerDay: 15 }, plus: { feedbackPerWeek: Infinity, mocksPerMonth: Infinity, cloudChotuPerDay: 100 } };
+// Jeetu is Plus only (owner, 22 Nov 2026). Free members get a taste: jeetuTaste sessions within their first
+// jeetuTasteDays days, then none. Plus gets jeetuPerDay, a quiet ceiling against abuse, never shown.
+export const LIMITS = {
+  free: { feedbackPerWeek: 3, mocksPerMonth: 1, cloudChotuPerDay: 15, jeetuTaste: 3, jeetuTasteDays: 14 },
+  plus: { feedbackPerWeek: Infinity, mocksPerMonth: Infinity, cloudChotuPerDay: 100, jeetuPerDay: 30 },
+};
 // One price on show: a year of Plus at ₹3,999 (owner, 17 Nov 2026; was ₹9,999). Monthly stays only for test-mode purchases and gifts; it is never shown.
 export const PRICES = { monthly: { inr: 299, days: 30 }, yearly: { inr: 3999, days: 365 } } as const;
 const TRIAL_DAYS = 7;
@@ -95,6 +100,40 @@ export async function useAllowance(env: Env, memberId: string, kind: "feedback" 
   return { ok: true, left: Number.isFinite(limit) ? limit - n - 1 : null, limit: Number.isFinite(limit) ? limit : null };
 }
 
+export interface JeetuAccess { ok: boolean; plus: boolean; tasteLeft: number; tasteEndsAt: string | null; who: "plus" | "free" | "visitor" }
+
+/**
+ * Whether this member may use Jeetu now, and (with use = true) counts one session if so. Enforced whatever the plus
+ * flag says, like Answer Studio's feedback: Plus (any plan) up to LIMITS.plus.jeetuPerDay, Plus given by the owner
+ * without limit, free members only for their taste. The taste starts when the account (or, without one, the pod
+ * membership) was made. Visitors, with no member id, get none.
+ */
+export async function jeetuAccess(env: Env, memberId: unknown, use: boolean): Promise<JeetuAccess> {
+  const none: JeetuAccess = { ok: false, plus: false, tasteLeft: 0, tasteEndsAt: null, who: "visitor" };
+  if (!validId(memberId)) return none;
+  const id = String(memberId);
+  await ensureSchema(env);
+  const count = () => env.DB.prepare("INSERT INTO usage (member_id, day, kind, n) VALUES (?, ?, 'jeetu', 1) ON CONFLICT(member_id, day, kind) DO UPDATE SET n = n + 1").bind(id, istDay()).run();
+  const ent = await entitlement(env, id).catch(() => null);
+  if (ent) {
+    const today = (await env.DB.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM usage WHERE member_id = ? AND kind = 'jeetu' AND day = ?").bind(id, istDay()).first<{ n: number }>())?.n ?? 0;
+    const ok = ent.source === "staff" || today < LIMITS.plus.jeetuPerDay;
+    if (ok && use) await count();
+    return { ok, plus: true, tasteLeft: 0, tasteEndsAt: null, who: "plus" };
+  }
+  const acct = await env.DB.prepare("SELECT created_at FROM accounts WHERE member_id = ?").bind(id).first<{ created_at: string }>().catch(() => null);
+  const pod = await env.DB.prepare("SELECT joined_at FROM members WHERE member_id = ?").bind(id).first<{ joined_at: string }>().catch(() => null);
+  const starts = [acct?.created_at, pod?.joined_at].map((x) => Date.parse(String(x ?? ""))).filter(Number.isFinite);
+  const since = starts.length ? Math.min(...starts) : Date.now();
+  const endsAt = new Date(since + LIMITS.free.jeetuTasteDays * DAY);
+  const usedAll = (await env.DB.prepare("SELECT COALESCE(SUM(n), 0) AS n FROM usage WHERE member_id = ? AND kind = 'jeetu'").bind(id).first<{ n: number }>())?.n ?? 0;
+  const inWindow = Date.now() < endsAt.getTime();
+  const left = inWindow ? Math.max(0, LIMITS.free.jeetuTaste - usedAll) : 0;
+  const ok = left > 0;
+  if (ok && use) await count();
+  return { ok, plus: false, tasteLeft: ok && use ? left - 1 : left, tasteEndsAt: endsAt.toISOString(), who: "free" };
+}
+
 /**
  * Answer Studio's feedback allowance (answers.ts), enforced even with the plus flag off: free members get
  * LIMITS.free.feedbackPerWeek while total sign-ups are under the threshold, Plus is unlimited. Above the threshold
@@ -153,6 +192,7 @@ export async function plusRoute(req: Request, env: Env, path: string, url: URL):
     return json({
       enabled, testMode: !cashfreeConfigured(env), payments: await paymentsStatus(env), prices: { yearly: PRICES.yearly }, limits: LIMITS.free, plusLimits: { cloudChotuPerDay: LIMITS.plus.cloudChotuPerDay },
       plan: ent, used: validId(memberId) && enabled ? await used(env, memberId) : null,
+      jeetu: await jeetuAccess(env, memberId, false).then(({ ok, plus, tasteLeft, tasteEndsAt }) => ({ available: ok, plus, tasteLeft, tasteEndsAt })),
       trial: { days: TRIAL_DAYS, used: !!row?.trial_used, unlocked: trialUnlocked, why: trialUnlocked ? null : "The 7-day trial unlocks after your first full week in a pod." },
       refundWindowDays: 7, cancel: "Me → Plus → Cancel. Two taps, no questions.",
       // The Android app shows the Play purchase only when on and ready (and only in a build made with PLAY_BILLING).

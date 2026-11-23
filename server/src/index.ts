@@ -218,7 +218,7 @@ export default {
       return json({ ok: true });
     }
     // --- Jeetu · AI, the method coach (jeetu.ts)
-    if (path === "/jeetu" || path === "/jeetu/report") { const r = await jeetuRoute(req, env, path); if (r) return path === "/jeetu" ? withVoice(env, "jeetu", gatedMember, r) : r; }
+    if (path === "/jeetu" || path === "/jeetu/report") { const r = await jeetuRoute(req, env, path, gatedMember); if (r) return path === "/jeetu" ? withVoice(env, "jeetu", gatedMember, r) : r; }
     // --- AI voices for Chotu and Jeetu (voice.ts): one signed reply or scripted line to an MP3, made once and kept
     if (path === "/voice") { const r = await voiceRoute(req, env, path); if (r) return r; }
     // --- The website (aspiran.in): Chotu as the guide, and what visitors tell it (web.ts)
@@ -231,7 +231,7 @@ export default {
         if (!allow.ok) return json({ error: "Chotu's out of cloud turns for today. It still works offline on your phone.", limit: true, offline: true }, 429);
         ctx.waitUntil(logFirst(env, "first_chotu_chat", peek.memberId));
       }
-      return withVoice(env, "chotu", gatedMember, await chotuChat(req, env));
+      return withVoice(env, "chotu", gatedMember, await chotuChat(req, env, gatedMember));
     }
 
     // --- Pods (joining, states, moving), the Commons, the season and the matching fields: community.ts
