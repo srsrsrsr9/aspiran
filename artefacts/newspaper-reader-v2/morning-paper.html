@@ -1,0 +1,310 @@
+<title>Aspiran Morning Paper</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,800;1,6..72,400&family=Tiro+Devanagari+Hindi&family=Kalam:wght@400;700&family=Archivo+Narrow:wght@500;700&display=swap">
+<style>
+/* Layout: a single broadsheet column with a pencil margin on the right; on phones the margin notes drop under their paragraph. */
+:root{
+  --paper:#f1f1ec; --ink:#16181d; --ink2:#4b505a; --rule:#c4c5be; --graphite:#2f5597; --marker:#f6dc4a;
+  --stamp:#b3261e; --gs1:#23704a; --gs2:#5b3f9e; --gs3:#a8432b; --sheet:#fbfbf8; --shadow:rgba(20,24,30,.16);
+  --news:"Newsreader","Tiro Devanagari Hindi",Georgia,serif;
+  --deva:"Tiro Devanagari Hindi","Newsreader",serif;
+  --hand:"Kalam","Segoe Print","Comic Sans MS",cursive;
+  --label:"Archivo Narrow","Arial Narrow",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#16181c;--ink:#ebe9e3;--ink2:#a7abb3;--rule:#363940;--graphite:#93b3ea;--marker:#8a7514;--stamp:#ff8174;--gs1:#6fcf98;--gs2:#b59cf0;--gs3:#f0937c;--sheet:#1e2126;--shadow:rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#16181c;--ink:#ebe9e3;--ink2:#a7abb3;--rule:#363940;--graphite:#93b3ea;--marker:#8a7514;--stamp:#ff8174;--gs1:#6fcf98;--gs2:#b59cf0;--gs3:#f0937c;--sheet:#1e2126;--shadow:rgba(0,0,0,.5);color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--news);font-size:18px;line-height:1.55;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 120px}
+:lang(hi) body,.hi{font-family:var(--deva)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--graphite);outline-offset:3px;border-radius:4px}
+a{color:inherit}
+.paper{max-width:1000px;margin:0 auto}
+
+/* masthead */
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--label);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.lang{display:flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden}
+.lang button{padding:5px 12px;font-family:var(--label);font-size:13px;letter-spacing:.04em}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.mast{text-align:center;border-bottom:4px double var(--ink);padding:10px 0 8px;margin-top:8px}
+.mast h1{font-family:var(--news);font-weight:800;font-size:clamp(40px,8.4vw,84px);line-height:.95;margin:0;letter-spacing:-.035em}
+.mast h1 small{display:block;font-family:var(--hand);font-weight:400;font-size:clamp(15px,2.4vw,20px);letter-spacing:0;color:var(--graphite);transform:rotate(-1.5deg);margin-top:6px}
+.dateline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 16px;border-bottom:1px solid var(--ink);padding:6px 0;font-family:var(--label);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+
+/* contents strip */
+.inside{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-bottom:1px solid var(--rule)}
+.inside a{display:block;padding:12px 14px 14px;text-decoration:none;border-left:1px solid var(--rule);min-width:0}
+.inside a:first-child{border-left:0;padding-left:0}
+.inside b{display:block;font-weight:600;font-size:16px;line-height:1.25;text-wrap:balance}
+@media (max-width:720px){.inside{grid-template-columns:1fr}.inside a{border-left:0;border-top:1px solid var(--rule);padding:10px 0}.inside a:first-child{border-top:0}}
+
+.kick{font-family:var(--label);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gs3)}
+.kick.GS1{color:var(--gs1)}.kick.GS2{color:var(--gs2)}
+
+/* story */
+.story{padding:30px 0 26px;border-bottom:1px solid var(--ink)}
+.story.lead .hl{font-size:clamp(32px,5.4vw,54px)}
+.hl{font-weight:800;font-size:clamp(27px,4vw,38px);line-height:1.06;letter-spacing:-.02em;margin:6px 0 10px;text-wrap:balance;max-width:24ch}
+.hi .hl,.hl:lang(hi){letter-spacing:0;line-height:1.3;font-weight:400}
+.deck{font-style:italic;font-size:20px;color:var(--ink2);margin:0 0 6px;max-width:58ch}
+.by{font-family:var(--label);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink2);margin-bottom:18px}
+.by a{text-decoration-color:var(--rule);text-underline-offset:3px}
+.notice{font-family:var(--hand);color:var(--graphite);font-size:17px;margin:0 0 14px}
+
+.rows{display:grid;gap:14px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:28px;align-items:start}
+.row p{margin:0;max-width:62ch}
+.lead .row:first-child p::first-letter{float:left;font-size:3.4em;line-height:.82;font-weight:800;padding:6px 8px 0 0}
+.hi .lead .row:first-child p::first-letter{float:none;font-size:inherit;padding:0}
+.cut{display:inline-flex;align-items:center;gap:5px;margin-top:6px;font-family:var(--label);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);border:1px dashed var(--rule);border-radius:999px;padding:3px 10px 3px 8px}
+.cut:hover{color:var(--ink);border-color:var(--ink2)}
+.cut[aria-pressed="true"]{border-style:solid;border-color:var(--graphite);color:var(--graphite)}
+.ptext{border:1.5px dashed transparent;margin:-6px -8px;padding:6px 8px;border-radius:2px;transition:border-color .3s}
+.row.snip .ptext{border-color:var(--ink2)}
+.note{font-family:var(--hand);color:var(--graphite);font-size:17px;line-height:1.28;transform:rotate(-1.6deg);padding-top:4px;position:relative}
+.note::before{content:"";position:absolute;left:-18px;top:14px;width:12px;border-top:1.5px solid var(--graphite);transform:rotate(-8deg)}
+@media (max-width:760px){.row{grid-template-columns:1fr;gap:4px}.note{margin-left:22%;text-align:right}.note::before{display:none}}
+
+/* pencil marks */
+.c{position:relative;white-space:nowrap}
+.c svg{position:absolute;left:-10px;top:-7px;width:calc(100% + 20px);height:calc(100% + 14px);overflow:visible;pointer-events:none}
+.c svg path{fill:none;stroke:var(--graphite);stroke-width:2;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset .9s ease .2s}
+.u{background-image:linear-gradient(var(--graphite),var(--graphite));background-repeat:no-repeat;background-size:100% 2px;background-position:0 94%;transition:background-size .8s ease .3s;padding-bottom:1px}
+.h{background-image:linear-gradient(transparent 52%,var(--marker) 52%,var(--marker) 92%,transparent 92%);background-repeat:no-repeat;background-size:100% 100%;transition:background-size .8s ease .1s}
+.wait .c svg path{stroke-dashoffset:1}
+.wait .u{background-size:0 2px}
+.wait .h{background-size:0 100%}
+
+/* visuals */
+.vis{margin:22px 0 6px;max-width:640px}
+.split .bar{display:flex;height:46px;border:1.5px solid var(--ink);border-radius:2px;overflow:hidden}
+.split .own{background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:var(--label);font-weight:700;font-size:15px;min-width:52px}
+.split .rest{flex:1;background:repeating-linear-gradient(-45deg,transparent 0 6px,var(--rule) 6px 7.5px);display:grid;place-items:center;font-family:var(--label);font-weight:700;font-size:15px}
+.split .keys{display:flex;justify-content:space-between;gap:12px;font-family:var(--hand);color:var(--graphite);font-size:16px;margin-top:4px}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;font-family:var(--hand);font-size:17px;color:var(--ink)}
+.chain span{border:1.5px solid var(--graphite);border-radius:12px 10px 13px 9px;padding:4px 11px;background:var(--sheet)}
+.chain i{font-style:normal;color:var(--graphite);padding:0 8px;font-size:20px}
+.aside{margin-top:18px;max-width:640px;font-family:var(--hand);font-size:18px;color:var(--graphite);border:1.5px solid var(--graphite);border-radius:4px 14px 6px 12px;padding:10px 14px;transform:rotate(-.6deg)}
+.aside b{font-weight:700}
+
+/* asked-before stamps */
+.asked{margin-top:22px;display:grid;gap:10px;max-width:760px}
+.asked h3{margin:0;font-family:var(--label);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);font-weight:700}
+.stamps{display:flex;flex-wrap:wrap;gap:10px}
+.stamp{font-family:var(--label);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--stamp);border:2.5px solid var(--stamp);border-radius:3px;padding:6px 10px;transform:rotate(-2deg);position:relative}
+.stamp:nth-child(2n){transform:rotate(1.5deg)}
+.stamp[aria-expanded="true"]{background:var(--stamp);color:var(--paper)}
+.q{background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:16px 18px;box-shadow:0 6px 18px var(--shadow);display:grid;gap:10px}
+.q .meta{font-family:var(--label);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.q .qt{white-space:pre-line;margin:0;font-size:17px}
+.opts{display:grid;gap:6px}
+.opts button{text-align:left;border:1px solid var(--rule);border-radius:4px;padding:7px 10px;font-size:16px}
+.opts button:hover{border-color:var(--ink2)}
+.opts button.key{border-color:var(--gs1);box-shadow:inset 4px 0 0 var(--gs1)}
+.opts button.mine:not(.key){border-color:var(--stamp)}
+.why{font-size:15.5px;color:var(--ink2);margin:0}
+.q .pen{font-family:var(--hand);color:var(--graphite);font-size:17px;margin:0}
+.q .foot{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-family:var(--label);font-size:13px;color:var(--ink2)}
+
+/* end */
+.end{text-align:center;padding:46px 0 10px}
+.end p{font-weight:800;font-size:clamp(24px,4vw,34px);margin:0;letter-spacing:-.01em}
+.end small{display:block;margin-top:8px;font-family:var(--hand);color:var(--graphite);font-size:18px}
+
+/* cutting file */
+.filebtn{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:var(--ink);color:var(--paper);font-family:var(--label);font-weight:700;font-size:15px;letter-spacing:.04em;border-radius:999px;padding:11px 18px;box-shadow:0 8px 22px var(--shadow);display:flex;gap:8px;align-items:center}
+.filebtn .n{background:var(--paper);color:var(--ink);border-radius:999px;min-width:24px;padding:0 6px;text-align:center}
+.filebtn.bump{animation:bump .5s ease}
+@keyframes bump{40%{transform:scale(1.1) rotate(-2deg)}}
+.flyer{position:fixed;z-index:30;pointer-events:none;background:var(--sheet);border:1.5px dashed var(--ink2);font-size:13px;line-height:1.3;padding:6px 8px;overflow:hidden;transition:transform .6s cubic-bezier(.5,0,.6,1),opacity .6s}
+.drawer{position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end;background:rgba(10,12,16,.38)}
+.drawer[hidden]{display:none}
+.sheet{width:min(460px,100%);height:100%;background:var(--sheet);padding:20px max(18px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) 18px;overflow-y:auto;box-shadow:-10px 0 30px var(--shadow);display:flex;flex-direction:column;gap:14px}
+.sheet header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:3px double var(--ink);padding-bottom:8px}
+.sheet h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.02em}
+.sheet .close{font-family:var(--label);font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);border-radius:999px;padding:4px 12px}
+.sheet .help{font-family:var(--hand);color:var(--graphite);font-size:17px;margin:0}
+.clip{background:var(--paper);border:1.5px dashed var(--ink2);padding:12px 14px;display:grid;gap:6px;transform:rotate(var(--r,0deg))}
+.clip .src{font-family:var(--label);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);display:flex;justify-content:space-between;gap:10px}
+.clip .src span:last-child{white-space:nowrap}
+.clip p{margin:0;font-size:16px;white-space:pre-line}
+.clip .back{font-family:var(--hand);color:var(--graphite);font-size:15px}
+.clip button{justify-self:start;font-family:var(--label);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+.empty{font-family:var(--hand);font-size:18px;color:var(--ink2);text-align:center;padding:30px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="paper" id="app"></div>
+<div class="drawer" id="drawer" hidden></div>
+<button class="filebtn" id="filebtn" aria-haspopup="dialog"><span id="filelabel">Cutting file</span><span class="n" id="filecount">0</span></button>
+
+<script id="edition" type="application/json">{"schema": "aspiran/paper-edition@1", "date": "2026-11-20", "chaiDay": "2026-11-20", "note": "Built from the published Chai of 20 Nov 2026 (briefs table, production). Story text restates the Chai summary; nothing added beyond it except the pencil notes, which explain the linked past UPSC questions. Markup in text: [[c|...]] pencil circle, [[u|...]] pencil underline, [[h|...]] highlighter.", "stories": [{"id": "panchayat-finances", "chaiId": "cf5af388e71ac4012", "gs": "GS3", "alsoGs": "GS2", "tone": "neutral", "source": {"name": "Reserve Bank of India", "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64002"}, "en": {"kicker": "GS3 Economy · also GS2 Panchayati Raj", "headline": "Panchayats are spending more. They still raise only about a tenth of it themselves.", "deck": "The RBI's report on the finances of Panchayati Raj Institutions, in four paragraphs.", "paras": [{"t": "The Reserve Bank of India has released a report on the finances of Panchayati Raj Institutions. It found that Gram Panchayat finances [[u|strengthened during 2022-23 and 2023-24]]."}, {"t": "But they [[h|remain dependent on intergovernmental transfers]]. Own source revenues, the money a panchayat raises itself, came to [[c|about 10%]] of total receipts.", "note": "10% own money. The other ~90% comes as transfers from above."}, {"t": "Spending followed national schemes and missions. [[c|Water supply and sanitation]] took the largest share. Rural connectivity, electrification and community assets show notable progress, but [[u|inter-State disparities persist]].", "note": "Biggest spend: water + sanitation. Scheme-driven, not locally chosen."}, {"t": "Some Gram Panchayats are now becoming small urban local bodies. For them, the report suggests [[h|transitional fiscal support and administrative capacity building]].", "note": "Rural to urban bodies: Mains 2024 asked about exactly this."}], "aside": "Who reviews panchayat money? The State Finance Commission, set up by the Governor, not the Chief Minister (Art. 243-I). Prelims 2025 set that trap."}, "hi": null, "hiMissing": "इस ख़बर का हिंदी पाठ दोबारा तैयार हो रहा है। अभी अंग्रेज़ी में पढ़िए।", "visual": {"type": "split", "part": 10, "en": {"part": "Raised by the panchayat itself", "rest": "Transfers from Centre and State"}, "hi": {"part": "पंचायत की अपनी कमाई", "rest": "केंद्र और राज्य से हस्तांतरण"}}, "pyq": [{"ref": "csm-2018-gs2#15", "note": {"en": "Start your answer from today's number: own revenue is only about 10%.", "hi": "उत्तर आज के आँकड़े से शुरू कीजिए: अपनी कमाई सिर्फ़ लगभग 10%।"}}, {"ref": "csm-2024-gs2#5", "note": {"en": "Paragraph 4 of today's story is your 'cons' column: new urban bodies need money and staff.", "hi": "आज की ख़बर का चौथा पैराग्राफ़ 'नुकसान' वाला हिस्सा है: नए शहरी निकायों को पैसा और स्टाफ़ चाहिए।"}}, {"ref": "csp-2025-gs1#91", "note": {"en": "Read 'NOT correct' twice. The Governor sets up the State Finance Commission.", "hi": "'सही नहीं' दो बार पढ़िए। राज्य वित्त आयोग राज्यपाल बनाता है।"}}]}, {"id": "atacama-bloom", "chaiId": "c8a7fc159e97e49da", "gs": "GS1", "tone": "light", "source": {"name": "NASA Earth Observatory", "url": "https://science.nasa.gov/earth/earth-observatory/el-nino-rains-paint-the-atacama/"}, "en": {"kicker": "GS1 Geography", "headline": "One of the driest places on Earth is in flower", "deck": "El Niño rain woke seeds that had been waiting in the Atacama's soil.", "paras": [{"t": "The [[c|Atacama Desert]] in northern Chile saw a rare and extensive flowering after unusually wet winter weather."}, {"t": "The [[u|El Niño]] phenomenon brought heavy rainfall to the region. The rain [[h|woke up dormant seeds]], and the desert filled with colour.", "note": "El Niño does not only touch our monsoon. It reaches Chile too."}, {"t": "Images from [[c|Landsat 8 and 9]] captured the bloom from space: vast areas of red-purple, green and white flowers.", "note": "Seen from a satellite = remote sensing."}, {"t": "Scientists are studying the bloom to understand its effect on biodiversity and to inform land-use planning. The 2026 event is considered the most significant 'blooming desert' to date."}]}, "hi": {"kicker": "GS1 भूगोल", "headline": "एल नीनो की बारिश ने अटाकामा को रंगीन बनाया", "deck": "एल नीनो की बारिश ने मिट्टी में सोए बीज जगा दिए।", "paras": [{"t": "चिली के उत्तरी भाग में स्थित [[c|अटाकामा मरुस्थल]] में असामान्य रूप से भारी वर्षा के कारण एक दुर्लभ और व्यापक फूलने की घटना हुई।"}, {"t": "[[u|एल नीनो]] घटना ने क्षेत्र में भारी वर्षा लाई, जिससे [[h|सोए हुए बीज जागृत हो गए]] और परिणामस्वरूप रंगीन प्रदर्शन हुआ।", "note": "एल नीनो सिर्फ़ हमारे मानसून तक नहीं, चिली तक पहुँचता है।"}, {"t": "[[c|लैंडसैट 8 और 9]] के उपग्रह चित्रों ने फूलते हुए मरुस्थल को कैप्चर किया, जिसमें विशाल लाल-बैंगनी, हरे और सफेद फूल दिखाई दे रहे थे।", "note": "उपग्रह से देखना = सुदूर संवेदन (रिमोट सेंसिंग)।"}, {"t": "वैज्ञानिक जैव विविधता पर इसके प्रभाव को समझने और भूमि उपयोग योजना को सूचित करने के लिए इस फूलने का अध्ययन कर रहे हैं। 2026 की घटना को अब तक की सबसे महत्वपूर्ण 'फूलते हुए मरुस्थल' घटना माना जा रहा है।"}]}, "visual": {"type": "chain", "en": ["El Niño", "Heavy rain", "Dormant seeds wake", "Desert flowers"], "hi": ["एल नीनो", "भारी वर्षा", "सोए बीज जागे", "मरुस्थल खिला"]}, "pyq": [{"ref": "csp-2017-gs1#66", "note": {"en": "Statement 1 is the trap: the dipole is a west–east difference inside the Indian Ocean, not with the Pacific.", "hi": "कथन 1 जाल है: डाइपोल हिंद महासागर के भीतर ही पश्चिम–पूर्व का अंतर है, प्रशांत से नहीं।"}}]}, {"id": "state-securities", "chaiId": "cf77688db0d624580", "gs": "GS3", "tone": "light", "source": {"name": "Reserve Bank of India", "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64004"}, "en": {"kicker": "GS3 Economy", "headline": "States borrow ₹31,950 crore on 23 November. The RBI runs the sale.", "deck": "A routine auction that answers an old Prelims trap.", "paras": [{"t": "The Reserve Bank of India will hold an auction of [[u|state government securities]] on November 23, 2026, for an aggregate amount of [[c|₹31,950 crore]].", "note": "RBI manages State securities too. Prelims 2018 tried to trick you here."}, {"t": "The securities will be sold through the RBI's Core Banking Solution, [[c|E-Kuber]]. Both competitive and non-competitive bids can be placed electronically, and results are announced the same day."}, {"t": "The stocks will be governed by the [[h|Government Securities Act, 2006]] and the Government Securities Regulations, 2007."}]}, "hi": {"kicker": "GS3 अर्थव्यवस्था", "headline": "राज्य सरकारें 23 नवंबर को ₹31,950 करोड़ उधार लेंगी। बिक्री RBI करेगा।", "deck": "एक सामान्य नीलामी, जो प्रारंभिक परीक्षा के एक पुराने जाल का जवाब है।", "paras": [{"t": "भारतीय रिज़र्व बैंक 23 नवंबर, 2026 को [[u|राज्य सरकार प्रतिभूतियों]] की नीलामी आयोजित करेगा। नीलामी कुल [[c|₹31,950 करोड़]] के लिए होगी।", "note": "RBI राज्यों की प्रतिभूतियाँ भी संभालता है। 2018 प्रारंभिक में यहीं जाल था।"}, {"t": "प्रतिभूतियों की बिक्री भारतीय रिज़र्व बैंक कोर बैंकिंग सॉल्यूशन ([[c|ई-कुबेर]]) प्रणाली के माध्यम से की जाएगी। दोनों प्रतिस्पर्धी और गैर-प्रतिस्पर्धी बोलियां इलेक्ट्रॉनिक प्रारूप में जमा की जा सकती हैं। नीलामी के परिणाम 23 नवंबर, 2026 को घोषित किए जाएंगे।"}, {"t": "प्रतिभूतियों को [[h|सरकारी प्रतिभूति अधिनियम, 2006]] और सरकारी प्रतिभूति विनियम, 2007 के प्रावधानों द्वारा शासित किया जाएगा।"}]}, "visual": {"type": "chain", "en": ["State governments borrow", "RBI holds the auction on E-Kuber", "Competitive and non-competitive bids", "Results the same day"], "hi": ["राज्य सरकारें उधार लेती हैं", "RBI ई-कुबेर पर नीलामी करता है", "प्रतिस्पर्धी और गैर-प्रतिस्पर्धी बोलियाँ", "उसी दिन परिणाम"]}, "pyq": [{"ref": "csp-2018-gs1#56", "note": {"en": "Today's story proves statement 1 wrong: the RBI is auctioning State securities.", "hi": "आज की ख़बर कथन 1 को गलत साबित करती है: RBI राज्यों की प्रतिभूतियाँ नीलाम कर रहा है।"}}, {"ref": "csp-2022-gs1#10", "note": {"en": "Dated securities sold in auctions are a big part of internal debt.", "hi": "नीलामी में बिकने वाली दिनांकित प्रतिभूतियाँ आंतरिक ऋण का बड़ा हिस्सा हैं।"}}]}], "pyqs": {"csm-2018-gs2#15": {"exam": "mains", "year": 2018, "paper": "gs2", "n": "15", "src": "https://www.upsc.gov.in/uploads/2026/07/general-studies-paper-ii-14-1.pdf", "en": {"q": "Assess the importance of the Panchayat system in India as a part of local government. Apart from government grants, what sources the Panchayats can look out for financing developmental projects?"}, "hi": null, "marks": 15, "words": 250}, "csm-2024-gs2#5": {"exam": "mains", "year": 2024, "paper": "gs2", "n": "5", "src": "https://www.upsc.gov.in/uploads/2026/07/general-studies-paper-ii-3-1.pdf", "en": {"q": "Analyse the role of local bodies in providing good governance at local level and bring out the pros and cons merging the rural local bodies with the urban local bodies."}, "hi": {"q": "स्थानीय स्तर पर सुशासन प्रदान करने में स्थानीय निकायों की भूमिका का विश्लेषण कीजिए और ग्रामीण स्थानीय निकायों को शहरी स्थानीय निकायों में विलय करने के फायदे और नुकसान को स्पष्ट कीजिए ।"}, "marks": 10, "words": 150}, "csp-2025-gs1#91": {"exam": "prelims", "year": 2025, "paper": "prelims", "n": "91", "src": "https://www.upsc.gov.in/uploads/2026/07/QP-CSP-25-GENERAL-STUDIES-PAPER-I-26052025.pdf", "en": {"q": "Consider the following statements\nI. Panchayats at the intermediate level exist in all States.\nII. To be eligible to be a Member of a Panchayat at the intermediate level, a person should attain the age of thirty years.\nIII. The Chief Minister of a State constitutes a commission to review the financial position of Panchayats at the intermediate levels and to make recommendations regarding the distribution of net proceeds of taxes and duties, leviable by the State, between the State and Panchayats at the intermediate level.\nWhich of the statements given above are not correct?", "options": ["I and II only", "II and III only", "I and III only", "I, II and III"]}, "hi": {"q": "निम्नलिखित कथनों पर विचार कीजिए:\nI. मध्यवर्ती स्तर पर पंचायतें सभी राज्यों में विद्यमान हैं।\nII. मध्यवर्ती स्तर की पंचायत का सदस्य बनने के लिए पात्र होने हेतु व्यक्ति की आयु तीस वर्ष होनी चाहिए।\nIII. किसी राज्य का मुख्यमंत्री मध्यवर्ती स्तर की पंचायतों की वित्तीय स्थिति की समीक्षा करने और राज्य द्वारा उद्ग्रहणीय करों और शुल्कों के शुद्ध आगम के राज्य और मध्यवर्ती स्तर की पंचायतों के बीच वितरण के संबंध में सिफारिश करने के लिए एक आयोग का गठन करता है।\nउपर्युक्त कथनों में से कौन-से सही नहीं हैं?", "options": ["केवल I और II", "केवल II और III", "केवल I और III", "I, II और III"]}, "marks": 2, "words": null, "answer": 3, "why": {"en": "The question asks which are NOT correct, and all three fail. Article 243B(2): a State with a population not above twenty lakh need not have intermediate Panchayats. Article 243F: the age test is the one for the State Legislature (25 years), with 21 allowed for Panchayats, never 30. Article 243-I: the Governor, not the Chief Minister, constitutes the State Finance Commission.", "hi": "प्रश्न पूछता है कि कौन-से कथन सही नहीं हैं, और तीनों गलत हैं। अनुच्छेद 243ख(2): बीस लाख तक जनसंख्या वाले राज्य में मध्यवर्ती पंचायत बनाना ज़रूरी नहीं। अनुच्छेद 243च: आयु की शर्त राज्य विधानमंडल वाली (25 वर्ष) है, और पंचायत के लिए 21 वर्ष पर्याप्त है; 30 वर्ष कहीं नहीं। अनुच्छेद 243झ: राज्य वित्त आयोग का गठन राज्यपाल करता है, मुख्यमंत्री नहीं।"}}, "csp-2017-gs1#66": {"exam": "prelims", "year": 2017, "paper": "prelims", "n": "66", "src": "https://www.upsc.gov.in/sites/default/files/CSP-17-GS_PAPER-1-C.pdf", "en": {"q": "With reference to 'Indian Ocean Dipole (IOD)' sometimes mentioned in the news while forecasting Indian monsoon, which of the following statements is/are correct?\n1. IOD phenomenon is characterised by a difference in sea surface temperature between tropical Western Indian Ocean and tropical Eastern Pacific Ocean.\n2. An IOD phenomenon can influence an El Nino's impact on the monsoon.\nSelect the correct answer using the code given below:", "options": ["1 only", "2 only", "Both 1 and 2", "Neither 1 nor 2"]}, "hi": null, "marks": null, "words": null, "answer": 1}, "csp-2018-gs1#56": {"exam": "prelims", "year": 2018, "paper": "prelims", "n": "56", "src": "https://www.upsc.gov.in/uploads/2026/09/QP-CSP-18-GS-I-C.pdf", "en": {"q": "Consider the following statements\n1. The Reserve Bank of India manages and services Government of India Securities but not any State Government Securities.\n2. Treasury bills are issued by the Government of India and there are no treasury bills issued by the State Governments.\n3. Treasury bills offer are issued at a discount from the par value.\nWhich of the statements given above is/are correct?", "options": ["1 and 2 only", "3 only", "2 and 3 only", "1, 2 and 3"]}, "hi": null, "marks": 2, "words": null, "answer": 2}, "csp-2022-gs1#10": {"exam": "prelims", "year": 2022, "paper": "prelims", "n": "10", "src": "https://www.upsc.gov.in/uploads/2026/07/general-studies-paper-i-7-1.pdf", "en": {"q": "With reference to the Indian economy, consider the following statements:\n1. A share of the household financial savings goes towards government borrowings.\n2. Dated securities issued at market-related rates in auctions form a large component of internal debt.\nWhich of the above statements is/are correct?", "options": ["1 only", "2 only", "Both 1 and 2", "Neither 1 nor 2"]}, "hi": null, "marks": null, "words": null, "answer": 2}}}</script>
+<script>
+(function(){
+const ED = JSON.parse(document.getElementById('edition').textContent);
+const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+const store = {
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+let lang = store.get('paper.lang','en');
+let clips = store.get('paper.clips',[]);
+
+const T = {
+  en:{brand:"Aspiran Chai",sub:"the morning paper, with a pencil",stories:n=>n+" stories",inside:"Today's paper",cut:"Cut",cutDone:"In your file",file:"Cutting file",
+      asked:"Asked before by UPSC",prelims:"Prelims",mains:"Mains",paper:{gs1:"GS I",gs2:"GS II",gs3:"GS III",prelims:"GS Paper I"},
+      tryIt:"Pick one to see UPSC's official answer.",official:"Official UPSC key",marks:(m,w)=>m+" marks"+(w?" · "+w+" words":""),
+      clipQ:"Cut this question",from:"From",read:"Read the original",end:"That's today's Chai. It ends.",tomorrow:"Tomorrow's paper arrives at 07:00.",
+      fileTitle:"Your cutting file",close:"Close",fileHelp:"Everything you cut lands here. Each cutting comes back in your revision a few days later, then again after longer gaps.",
+      empty:"Nothing cut yet. Tap ✂ Cut under any paragraph.",remove:"Take out",back:"Comes back in revision",
+      noHi:"",days:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],months:["January","February","March","April","May","June","July","August","September","October","November","December"]},
+  hi:{brand:"Aspiran Chai",sub:"सुबह का अख़बार, पेंसिल के साथ",stories:n=>n+" ख़बरें",inside:"आज के अख़बार में",cut:"काटें",cutDone:"फ़ाइल में",file:"कतरन फ़ाइल",
+      asked:"UPSC पहले पूछ चुका है",prelims:"प्रारंभिक",mains:"मुख्य",paper:{gs1:"GS I",gs2:"GS II",gs3:"GS III",prelims:"GS पेपर I"},
+      tryIt:"एक विकल्प चुनिए, फिर UPSC का आधिकारिक उत्तर देखिए।",official:"UPSC की आधिकारिक कुंजी",marks:(m,w)=>m+" अंक"+(w?" · "+w+" शब्द":""),
+      clipQ:"यह प्रश्न काटें",from:"स्रोत",read:"मूल पढ़ें",end:"आज की चाय बस इतनी। यहीं ख़त्म।",tomorrow:"कल का अख़बार सुबह 07:00 बजे।",
+      fileTitle:"आपकी कतरन फ़ाइल",close:"बंद करें",fileHelp:"जो भी काटेंगे, यहाँ आएगा। हर कतरन कुछ दिन बाद रिवीज़न में लौटती है, फिर लंबे अंतराल पर।",
+      empty:"अभी कुछ नहीं काटा। किसी भी पैराग्राफ़ के नीचे ✂ काटें दबाइए।",remove:"हटाएँ",back:"रिवीज़न में लौटेगी",
+      days:["रविवार","सोमवार","मंगलवार","बुधवार","गुरुवार","शुक्रवार","शनिवार"],months:["जनवरी","फ़रवरी","मार्च","अप्रैल","मई","जून","जुलाई","अगस्त","सितंबर","अक्टूबर","नवंबर","दिसंबर"]}
+};
+const t = () => T[lang];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const plain = s => String(s).replace(/\[\[[chu]\|([^\]]+)\]\]/g,'$1');
+// Rough pencil ellipse, drawn as one stroke a little past its start.
+const ring = '<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8 22 C 6 8, 40 2, 62 4 C 88 6, 98 14, 95 24 C 92 35, 56 39, 34 37 C 12 35, 2 27, 10 15 C 14 9, 22 7, 30 6"/></svg>';
+function marks(s){
+  return esc(s).replace(/\[\[([chu])\|([^\]]+)\]\]/g,(m,k,x)=> k==='c' ? '<span class="c">'+x+ring+'</span>' : '<span class="'+k+'">'+x+'</span>');
+}
+function dateLine(iso){
+  const d=new Date(iso+'T07:00:00+05:30'), L=t();
+  const dd=d.toLocaleString('en-US',{timeZone:'Asia/Kolkata'});
+  const k=new Date(dd);
+  return L.days[k.getDay()]+', '+k.getDate()+' '+L.months[k.getMonth()]+' '+k.getFullYear();
+}
+function view(s){ return (lang==='hi' && s.hi) ? s.hi : s.en; }
+
+function pyqBlock(s,p,i){
+  const q=ED.pyqs[p.ref]; if(!q) return '';
+  const L=t(), qq=(lang==='hi'&&q.hi)?q.hi:q.en;
+  const isP=q.exam==='prelims';
+  let h='<div class="q" id="q-'+s.id+'-'+i+'" hidden><div class="meta">UPSC '+(isP?L.prelims:L.mains)+' '+q.year+' · '+L.paper[q.paper]+' · Q'+q.n+(isP?'':' · '+L.marks(q.marks,q.words))+'</div>';
+  h+='<p class="qt">'+esc(qq.q)+'</p>';
+  if(isP && qq.options){
+    h+='<div class="meta" style="text-transform:none;letter-spacing:0">'+L.tryIt+'</div><div class="opts">'+qq.options.map((o,j)=>'<button data-opt="'+j+'">('+'abcd'[j]+') '+esc(o)+'</button>').join('')+'</div>';
+    const why=q.why&&(q.why[lang]||q.why.en);
+    h+='<p class="why" hidden>'+L.official+': ('+'abcd'[q.answer]+')'+(why?' — '+esc(why):'')+'</p>';
+  }
+  h+='<p class="pen">✎ '+esc(p.note[lang]||p.note.en)+'</p>';
+  h+='<div class="foot"><button class="cut" data-clipq="'+esc(p.ref)+'" data-story="'+s.id+'" aria-pressed="'+hasClip('q:'+p.ref)+'">✂ <span>'+(hasClip('q:'+p.ref)?L.cutDone:L.clipQ)+'</span></button><a href="'+esc(q.src)+'" target="_blank" rel="noopener">upsc.gov.in</a></div></div>';
+  return h;
+}
+function visual(s){
+  const v=s.visual; if(!v) return '';
+  if(v.type==='split'){const k=v[lang]||v.en;return '<div class="vis split" aria-label="'+esc(k.part)+' '+v.part+'%"><div class="bar"><div class="own" style="width:'+v.part+'%">'+v.part+'%</div><div class="rest">~'+(100-v.part)+'%</div></div><div class="keys"><span>↑ '+esc(k.part)+'</span><span>'+esc(k.rest)+' ↑</span></div></div>';}
+  if(v.type==='chain'){const k=v[lang]||v.en;return '<div class="vis chain">'+k.map(x=>'<span>'+esc(x)+'</span>').join('<i aria-hidden="true">→</i>')+'</div>';}
+  return '';
+}
+function render(){
+  const L=t();
+  document.documentElement.lang = lang==='hi'?'hi':'en';
+  document.getElementById('app').className='paper'+(lang==='hi'?' hi':'');
+  let h='<div class="top"><span>'+L.stories(ED.stories.length)+'</span><div class="lang" role="group" aria-label="Language"><button data-lang="en" aria-pressed="'+(lang==='en')+'">English</button><button data-lang="hi" aria-pressed="'+(lang==='hi')+'">हिंदी</button></div></div>';
+  h+='<header class="mast"><h1>'+L.brand+'<small>'+L.sub+'</small></h1></header>';
+  h+='<div class="dateline"><span>'+dateLine(ED.date)+'</span><span>07:00 IST</span></div>';
+  h+='<nav class="inside" aria-label="'+L.inside+'">'+ED.stories.map(s=>{const v=view(s);return '<a href="#'+s.id+'"><span class="kick '+s.gs+'">'+esc(v.kicker)+'</span><b>'+esc(plain(v.headline))+'</b></a>'}).join('')+'</nav>';
+  ED.stories.forEach((s,si)=>{
+    const v=view(s), tragic=s.tone==='tragic';
+    h+='<article class="story'+(si===0?' lead':'')+(tragic?'':' inkable')+'" id="'+s.id+'"'+((lang==='hi'&&!s.hi)?' lang="en"':'')+'>';
+    h+='<div class="kick '+s.gs+'">'+esc(v.kicker)+'</div><h2 class="hl">'+esc(v.headline)+'</h2>';
+    if(lang==='hi'&&!s.hi&&s.hiMissing) h+='<p class="notice" lang="hi">'+esc(s.hiMissing)+'</p>';
+    h+='<p class="deck">'+esc(v.deck)+'</p><div class="by">'+L.from+': <a href="'+esc(s.source.url)+'" target="_blank" rel="noopener">'+esc(s.source.name)+'</a></div>';
+    h+='<div class="rows">'+v.paras.map((p,pi)=>{const id='p:'+s.id+':'+pi+':'+((lang==='hi'&&s.hi)?'hi':'en');const on=hasClip(id);
+      return '<div class="row'+(on?' snip':'')+'"><div><p class="ptext">'+marks(p.t)+'</p><button class="cut" data-clip="'+esc(id)+'" aria-pressed="'+on+'">✂ <span>'+(on?L.cutDone:L.cut)+'</span></button></div>'+(p.note?'<div class="note">'+esc(p.note)+'</div>':'<div></div>')+'</div>'}).join('')+'</div>';
+    h+=visual(s);
+    if(v.aside||s.en.aside) { const a=v.aside||s.en.aside; h+='<div class="aside"'+(v.aside?'':' lang="en"')+'>✎ '+esc(a)+'</div>'; }
+    if(s.pyq&&s.pyq.length){
+      h+='<section class="asked"><h3>'+L.asked+'</h3><div class="stamps">'+s.pyq.map((p,i)=>{const q=ED.pyqs[p.ref];return '<button class="stamp" aria-expanded="false" aria-controls="q-'+s.id+'-'+i+'">'+(q.exam==='prelims'?L.prelims:L.mains)+' '+q.year+'</button>'}).join('')+'</div>'+s.pyq.map((p,i)=>pyqBlock(s,p,i)).join('')+'</section>';
+    }
+    h+='</article>';
+  });
+  h+='<footer class="end"><p>'+L.end+'</p><small>'+L.tomorrow+'</small></footer>';
+  document.getElementById('app').innerHTML=h;
+  document.getElementById('filelabel').textContent=L.file;
+  count();
+  ink();
+}
+function ink(){
+  if(RM || !('IntersectionObserver' in window)) return;
+  const els=[...document.querySelectorAll('.story.inkable')];
+  els.forEach(e=>e.classList.add('wait'));
+  const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ en.target.classList.remove('wait'); io.unobserve(en.target);} }),{rootMargin:'0px 0px -25% 0px'});
+  els.forEach(e=>io.observe(e));
+  // Never leave marks undrawn: draw anything still waiting after a while.
+  setTimeout(()=>els.forEach(e=>e.classList.remove('wait')),4000);
+}
+function hasClip(id){return clips.some(c=>c.id===id)}
+function save(){store.set('paper.clips',clips);count()}
+function count(){document.getElementById('filecount').textContent=clips.length}
+function fly(fromEl){
+  if(RM||!fromEl) return;
+  const r=fromEl.getBoundingClientRect(), b=document.getElementById('filebtn').getBoundingClientRect();
+  const f=document.createElement('div'); f.className='flyer'; f.textContent=fromEl.textContent.slice(0,120);
+  Object.assign(f.style,{left:r.left+'px',top:r.top+'px',width:Math.min(r.width,360)+'px',height:Math.min(r.height,90)+'px'});
+  document.body.appendChild(f);
+  requestAnimationFrame(()=>{const dx=b.left+b.width/2-(r.left+Math.min(r.width,360)/2), dy=b.top-r.top;
+    f.style.transform='translate('+dx+'px,'+dy+'px) scale(.12) rotate(-12deg)'; f.style.opacity='.2';});
+  setTimeout(()=>f.remove(),700);
+}
+function bump(){const b=document.getElementById('filebtn');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')}
+function clipPara(btn){
+  const id=btn.dataset.clip, [_,sid,pi,lg]=id.split(':'), s=ED.stories.find(x=>x.id===sid);
+  const v=(lg==='hi'&&s.hi)?s.hi:s.en;
+  if(hasClip(id)){clips=clips.filter(c=>c.id!==id);save();render();return}
+  const row=btn.closest('.row');
+  fly(row.querySelector('.ptext'));
+  clips.unshift({id,kind:'para',story:sid,lang:lg,headline:plain(v.headline),text:plain(v.paras[+pi].t),note:v.paras[+pi].note||'',source:s.source,edition:ED.date,cutAt:new Date().toISOString()});
+  save(); row.classList.add('snip'); btn.setAttribute('aria-pressed','true'); btn.querySelector('span').textContent=t().cutDone; bump();
+}
+function clipQ(btn){
+  const ref=btn.dataset.clipq, id='q:'+ref, q=ED.pyqs[ref], s=ED.stories.find(x=>x.id===btn.dataset.story);
+  if(hasClip(id)){clips=clips.filter(c=>c.id!==id);save();btn.setAttribute('aria-pressed','false');btn.querySelector('span').textContent=t().clipQ;return}
+  const qq=(lang==='hi'&&q.hi)?q.hi:q.en;
+  fly(btn.closest('.q').querySelector('.qt'));
+  clips.unshift({id,kind:'pyq',story:s.id,lang,headline:'UPSC '+(q.exam==='prelims'?'Prelims':'Mains')+' '+q.year+' · Q'+q.n,text:qq.q+(q.exam==='prelims'&&qq.options?'\n'+qq.options.map((o,j)=>'('+'abcd'[j]+') '+o).join('\n')+'\nKey: ('+'abcd'[q.answer]+')':''),source:{name:'upsc.gov.in',url:q.src},edition:ED.date,cutAt:new Date().toISOString()});
+  save(); btn.setAttribute('aria-pressed','true'); btn.querySelector('span').textContent=t().cutDone; bump();
+}
+function openFile(){
+  const L=t(), d=document.getElementById('drawer');
+  let h='<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ft"><header><h2 id="ft">'+L.fileTitle+'</h2><button class="close" data-close>'+L.close+'</button></header><p class="help">'+L.fileHelp+'</p>';
+  if(!clips.length) h+='<div class="empty">'+L.empty+'</div>';
+  h+=clips.map((c,i)=>'<div class="clip" style="--r:'+((i%3)-1)*0.6+'deg"'+(c.lang==='hi'?' lang="hi"':'')+'><div class="src"><span>'+esc(c.headline)+'</span><span>'+esc(c.edition)+'</span></div><p>'+esc(c.text)+'</p>'+(c.note?'<div class="back">✎ '+esc(c.note)+'</div>':'')+'<div class="src"><a href="'+esc(c.source.url)+'" target="_blank" rel="noopener">'+esc(c.source.name)+'</a><span>↻ '+L.back+'</span></div><button data-unclip="'+esc(c.id)+'">'+L.remove+'</button></div>').join('');
+  h+='</div>';
+  d.innerHTML=h; d.hidden=false; d.querySelector('[data-close]').focus();
+}
+function closeFile(){const d=document.getElementById('drawer');d.hidden=true;d.innerHTML='';document.getElementById('filebtn').focus()}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button,[data-close]');
+  if(e.target.id==='drawer'){closeFile();return}
+  if(!b) return;
+  if(b.dataset.lang){lang=b.dataset.lang;store.set('paper.lang',lang);render();return}
+  if(b.dataset.clip){clipPara(b);return}
+  if(b.dataset.clipq){clipQ(b);return}
+  if(b.classList.contains('stamp')){const q=document.getElementById(b.getAttribute('aria-controls'));const open=b.getAttribute('aria-expanded')==='true';
+    b.closest('.asked').querySelectorAll('.stamp').forEach(x=>x.setAttribute('aria-expanded','false'));b.closest('.asked').querySelectorAll('.q').forEach(x=>x.hidden=true);
+    if(!open){b.setAttribute('aria-expanded','true');q.hidden=false}return}
+  if(b.dataset.opt!==undefined){const box=b.closest('.q'), ref=box.id.replace(/^q-/,''), sid=ref.slice(0,ref.lastIndexOf('-')), i=+ref.slice(ref.lastIndexOf('-')+1);
+    const s=ED.stories.find(x=>x.id===sid), q=ED.pyqs[s.pyq[i].ref];
+    box.querySelectorAll('.opts button').forEach((x,j)=>{x.classList.toggle('key',j===q.answer);x.classList.toggle('mine',x===b)});
+    box.querySelector('.why').hidden=false;return}
+  if(b.id==='filebtn'){openFile();return}
+  if(b.dataset.close!==undefined){closeFile();return}
+  if(b.dataset.unclip){clips=clips.filter(c=>c.id!==b.dataset.unclip);save();openFile();render();return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('drawer').hidden)closeFile()});
+render();
+})();
+</script>

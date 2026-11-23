@@ -1,0 +1,230 @@
+{
+  "schema": "aspiran/paper-edition@1",
+  "date": "2026-11-20",
+  "chaiDay": "2026-11-20",
+  "note": "Built from the published Chai of 20 Nov 2026 (briefs table, production). Story text restates the Chai summary; nothing added beyond it except the pencil notes, which explain the linked past UPSC questions. Markup in text: [[c|...]] pencil circle, [[u|...]] pencil underline, [[h|...]] highlighter.",
+  "stories": [
+    {
+      "id": "panchayat-finances",
+      "chaiId": "cf5af388e71ac4012",
+      "gs": "GS3",
+      "alsoGs": "GS2",
+      "tone": "neutral",
+      "source": {
+        "name": "Reserve Bank of India",
+        "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64002"
+      },
+      "en": {
+        "kicker": "GS3 Economy · also GS2 Panchayati Raj",
+        "headline": "Panchayats are spending more. They still raise only about a tenth of it themselves.",
+        "deck": "The RBI's report on the finances of Panchayati Raj Institutions, in four paragraphs.",
+        "paras": [
+          {
+            "t": "The Reserve Bank of India has released a report on the finances of Panchayati Raj Institutions. It found that Gram Panchayat finances [[u|strengthened during 2022-23 and 2023-24]]."
+          },
+          {
+            "t": "But they [[h|remain dependent on intergovernmental transfers]]. Own source revenues, the money a panchayat raises itself, came to [[c|about 10%]] of total receipts.",
+            "note": "10% own money. The other ~90% comes as transfers from above."
+          },
+          {
+            "t": "Spending followed national schemes and missions. [[c|Water supply and sanitation]] took the largest share. Rural connectivity, electrification and community assets show notable progress, but [[u|inter-State disparities persist]].",
+            "note": "Biggest spend: water + sanitation. Scheme-driven, not locally chosen."
+          },
+          {
+            "t": "Some Gram Panchayats are now becoming small urban local bodies. For them, the report suggests [[h|transitional fiscal support and administrative capacity building]].",
+            "note": "Rural to urban bodies: Mains 2024 asked about exactly this."
+          }
+        ],
+        "aside": "Who reviews panchayat money? The State Finance Commission, set up by the Governor, not the Chief Minister (Art. 243-I). Prelims 2025 set that trap."
+      },
+      "hi": null,
+      "hiMissing": "इस ख़बर का हिंदी पाठ दोबारा तैयार हो रहा है। अभी अंग्रेज़ी में पढ़िए।",
+      "visual": {
+        "type": "split",
+        "part": 10,
+        "en": {
+          "part": "Raised by the panchayat itself",
+          "rest": "Transfers from Centre and State"
+        },
+        "hi": {
+          "part": "पंचायत की अपनी कमाई",
+          "rest": "केंद्र और राज्य से हस्तांतरण"
+        }
+      },
+      "pyq": [
+        {
+          "ref": "csm-2018-gs2#15",
+          "note": {
+            "en": "Start your answer from today's number: own revenue is only about 10%.",
+            "hi": "उत्तर आज के आँकड़े से शुरू कीजिए: अपनी कमाई सिर्फ़ लगभग 10%।"
+          }
+        },
+        {
+          "ref": "csm-2024-gs2#5",
+          "note": {
+            "en": "Paragraph 4 of today's story is your 'cons' column: new urban bodies need money and staff.",
+            "hi": "आज की ख़बर का चौथा पैराग्राफ़ 'नुकसान' वाला हिस्सा है: नए शहरी निकायों को पैसा और स्टाफ़ चाहिए।"
+          }
+        },
+        {
+          "ref": "csp-2025-gs1#91",
+          "note": {
+            "en": "Read 'NOT correct' twice. The Governor sets up the State Finance Commission.",
+            "hi": "'सही नहीं' दो बार पढ़िए। राज्य वित्त आयोग राज्यपाल बनाता है।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "atacama-bloom",
+      "chaiId": "c8a7fc159e97e49da",
+      "gs": "GS1",
+      "tone": "light",
+      "source": {
+        "name": "NASA Earth Observatory",
+        "url": "https://science.nasa.gov/earth/earth-observatory/el-nino-rains-paint-the-atacama/"
+      },
+      "en": {
+        "kicker": "GS1 Geography",
+        "headline": "One of the driest places on Earth is in flower",
+        "deck": "El Niño rain woke seeds that had been waiting in the Atacama's soil.",
+        "paras": [
+          {
+            "t": "The [[c|Atacama Desert]] in northern Chile saw a rare and extensive flowering after unusually wet winter weather."
+          },
+          {
+            "t": "The [[u|El Niño]] phenomenon brought heavy rainfall to the region. The rain [[h|woke up dormant seeds]], and the desert filled with colour.",
+            "note": "El Niño does not only touch our monsoon. It reaches Chile too."
+          },
+          {
+            "t": "Images from [[c|Landsat 8 and 9]] captured the bloom from space: vast areas of red-purple, green and white flowers.",
+            "note": "Seen from a satellite = remote sensing."
+          },
+          {
+            "t": "Scientists are studying the bloom to understand its effect on biodiversity and to inform land-use planning. The 2026 event is considered the most significant 'blooming desert' to date."
+          }
+        ]
+      },
+      "hi": {
+        "kicker": "GS1 भूगोल",
+        "headline": "एल नीनो की बारिश ने अटाकामा को रंगीन बनाया",
+        "deck": "एल नीनो की बारिश ने मिट्टी में सोए बीज जगा दिए।",
+        "paras": [
+          {
+            "t": "चिली के उत्तरी भाग में स्थित [[c|अटाकामा मरुस्थल]] में असामान्य रूप से भारी वर्षा के कारण एक दुर्लभ और व्यापक फूलने की घटना हुई।"
+          },
+          {
+            "t": "[[u|एल नीनो]] घटना ने क्षेत्र में भारी वर्षा लाई, जिससे [[h|सोए हुए बीज जागृत हो गए]] और परिणामस्वरूप रंगीन प्रदर्शन हुआ।",
+            "note": "एल नीनो सिर्फ़ हमारे मानसून तक नहीं, चिली तक पहुँचता है।"
+          },
+          {
+            "t": "[[c|लैंडसैट 8 और 9]] के उपग्रह चित्रों ने फूलते हुए मरुस्थल को कैप्चर किया, जिसमें विशाल लाल-बैंगनी, हरे और सफेद फूल दिखाई दे रहे थे।",
+            "note": "उपग्रह से देखना = सुदूर संवेदन (रिमोट सेंसिंग)।"
+          },
+          {
+            "t": "वैज्ञानिक जैव विविधता पर इसके प्रभाव को समझने और भूमि उपयोग योजना को सूचित करने के लिए इस फूलने का अध्ययन कर रहे हैं। 2026 की घटना को अब तक की सबसे महत्वपूर्ण 'फूलते हुए मरुस्थल' घटना माना जा रहा है।"
+          }
+        ]
+      },
+      "visual": {
+        "type": "chain",
+        "en": [
+          "El Niño",
+          "Heavy rain",
+          "Dormant seeds wake",
+          "Desert flowers"
+        ],
+        "hi": [
+          "एल नीनो",
+          "भारी वर्षा",
+          "सोए बीज जागे",
+          "मरुस्थल खिला"
+        ]
+      },
+      "pyq": [
+        {
+          "ref": "csp-2017-gs1#66",
+          "note": {
+            "en": "Statement 1 is the trap: the dipole is a west–east difference inside the Indian Ocean, not with the Pacific.",
+            "hi": "कथन 1 जाल है: डाइपोल हिंद महासागर के भीतर ही पश्चिम–पूर्व का अंतर है, प्रशांत से नहीं।"
+          }
+        }
+      ]
+    },
+    {
+      "id": "state-securities",
+      "chaiId": "cf77688db0d624580",
+      "gs": "GS3",
+      "tone": "light",
+      "source": {
+        "name": "Reserve Bank of India",
+        "url": "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64004"
+      },
+      "en": {
+        "kicker": "GS3 Economy",
+        "headline": "States borrow ₹31,950 crore on 23 November. The RBI runs the sale.",
+        "deck": "A routine auction that answers an old Prelims trap.",
+        "paras": [
+          {
+            "t": "The Reserve Bank of India will hold an auction of [[u|state government securities]] on November 23, 2026, for an aggregate amount of [[c|₹31,950 crore]].",
+            "note": "RBI manages State securities too. Prelims 2018 tried to trick you here."
+          },
+          {
+            "t": "The securities will be sold through the RBI's Core Banking Solution, [[c|E-Kuber]]. Both competitive and non-competitive bids can be placed electronically, and results are announced the same day."
+          },
+          {
+            "t": "The stocks will be governed by the [[h|Government Securities Act, 2006]] and the Government Securities Regulations, 2007."
+          }
+        ]
+      },
+      "hi": {
+        "kicker": "GS3 अर्थव्यवस्था",
+        "headline": "राज्य सरकारें 23 नवंबर को ₹31,950 करोड़ उधार लेंगी। बिक्री RBI करेगा।",
+        "deck": "एक सामान्य नीलामी, जो प्रारंभिक परीक्षा के एक पुराने जाल का जवाब है।",
+        "paras": [
+          {
+            "t": "भारतीय रिज़र्व बैंक 23 नवंबर, 2026 को [[u|राज्य सरकार प्रतिभूतियों]] की नीलामी आयोजित करेगा। नीलामी कुल [[c|₹31,950 करोड़]] के लिए होगी।",
+            "note": "RBI राज्यों की प्रतिभूतियाँ भी संभालता है। 2018 प्रारंभिक में यहीं जाल था।"
+          },
+          {
+            "t": "प्रतिभूतियों की बिक्री भारतीय रिज़र्व बैंक कोर बैंकिंग सॉल्यूशन ([[c|ई-कुबेर]]) प्रणाली के माध्यम से की जाएगी। दोनों प्रतिस्पर्धी और गैर-प्रतिस्पर्धी बोलियां इलेक्ट्रॉनिक प्रारूप में जमा की जा सकती हैं। नीलामी के परिणाम 23 नवंबर, 2026 को घोषित किए जाएंगे।"
+          },
+          {
+            "t": "प्रतिभूतियों को [[h|सरकारी प्रतिभूति अधिनियम, 2006]] और सरकारी प्रतिभूति विनियम, 2007 के प्रावधानों द्वारा शासित किया जाएगा।"
+          }
+        ]
+      },
+      "visual": {
+        "type": "chain",
+        "en": [
+          "State governments borrow",
+          "RBI holds the auction on E-Kuber",
+          "Competitive and non-competitive bids",
+          "Results the same day"
+        ],
+        "hi": [
+          "राज्य सरकारें उधार लेती हैं",
+          "RBI ई-कुबेर पर नीलामी करता है",
+          "प्रतिस्पर्धी और गैर-प्रतिस्पर्धी बोलियाँ",
+          "उसी दिन परिणाम"
+        ]
+      },
+      "pyq": [
+        {
+          "ref": "csp-2018-gs1#56",
+          "note": {
+            "en": "Today's story proves statement 1 wrong: the RBI is auctioning State securities.",
+            "hi": "आज की ख़बर कथन 1 को गलत साबित करती है: RBI राज्यों की प्रतिभूतियाँ नीलाम कर रहा है।"
+          }
+        },
+        {
+          "ref": "csp-2022-gs1#10",
+          "note": {
+            "en": "Dated securities sold in auctions are a big part of internal debt.",
+            "hi": "नीलामी में बिकने वाली दिनांकित प्रतिभूतियाँ आंतरिक ऋण का बड़ा हिस्सा हैं।"
+          }
+        }
+      ]
+    }
+  ]
+}

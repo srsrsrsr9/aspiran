@@ -1,0 +1,149 @@
+<title>Newspaper Reader Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,800&family=Kalam:wght@400;700&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap">
+<style>
+/* Layout: three phone stills side by side, each with its pitch underneath; stacks on phones. */
+:root{
+  --bg:#eef0f3; --fg:#1b1f27; --muted:#5c6470; --card:#ffffff; --line:#d5d9e0; --accent:#0f6e6a;
+  --paper:#f3efe4; --ink:#1d1b17; --pencil:#3b5ba5; --mark:#f2d25c;
+  --night:#121826; --nightfg:#f1f3f8; --glow:#ffb547;
+  --gs1:#2f7d4f; --gs3:#b0452f;
+  --display:"Space Grotesk",system-ui,sans-serif; --body:"Inter",system-ui,sans-serif;
+  --news:"Newsreader",Georgia,serif; --hand:"Kalam","Segoe Print",cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14171c;--fg:#e8ebf0;--muted:#9aa3ae;--card:#1d2128;--line:#2e343d;--accent:#4fb7b0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14171c;--fg:#e8ebf0;--muted:#9aa3ae;--card:#1d2128;--line:#2e343d;--accent:#4fb7b0;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:grid;gap:28px}
+h1{font-family:var(--display);font-size:clamp(26px,4vw,38px);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{max-width:68ch;color:var(--muted);margin:6px 0 0;font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+.dir{display:grid;gap:14px;min-width:0}
+.tag{font-family:var(--display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pick{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:2px 10px;font-size:11px;letter-spacing:.06em;margin-left:6px;vertical-align:2px}
+.dir h2{font-family:var(--display);font-size:22px;margin:2px 0 0}
+.dir p{margin:0;font-size:14.5px;max-width:60ch}
+.dir p b{color:var(--fg)}
+.phone{border-radius:28px;border:8px solid #0d0f13;height:560px;overflow:hidden;position:relative;box-shadow:0 14px 40px rgba(10,20,40,.18)}
+.cons{font-size:13px;color:var(--muted)}
+.cons b{color:var(--fg)}
+
+/* A: the paper */
+.paper{background:var(--paper);color:var(--ink);height:100%;padding:14px 14px 0;font-family:var(--news);overflow:hidden;position:relative}
+.mast{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double var(--ink);padding-bottom:4px}
+.mast b{font-family:var(--news);font-weight:800;font-size:22px;letter-spacing:-.02em}
+.mast span{font-size:10px;text-transform:uppercase;letter-spacing:.1em}
+.kick{font-family:var(--body);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;margin-top:10px;color:var(--gs3);font-weight:600}
+.hl{font-weight:800;font-size:23px;line-height:1.08;margin:3px 0 6px;letter-spacing:-.01em}
+.dek{font-size:13.5px;line-height:1.42;margin:0}
+.circ{position:relative;white-space:nowrap}
+.circ::after{content:"";position:absolute;inset:-4px -6px;border:2px solid var(--pencil);border-radius:50%;transform:rotate(-4deg)}
+.hlite{background:linear-gradient(transparent 55%,var(--mark) 55%)}
+.note{font-family:var(--hand);color:var(--pencil);font-size:14px;line-height:1.2;margin:8px 0 0 auto;max-width:78%;transform:rotate(-2deg);text-align:right}
+.cutline{border-top:1.5px dashed var(--ink);margin:12px -14px 0;position:relative;opacity:.55}
+.cutline i{position:absolute;left:10px;top:-11px;font-style:normal;font-size:16px;background:var(--paper);padding:0 3px}
+.stamp{display:inline-block;margin-top:10px;border:2px solid var(--gs3);color:var(--gs3);font-family:var(--body);font-weight:700;font-size:10px;letter-spacing:.08em;padding:3px 7px;transform:rotate(-3deg);text-transform:uppercase}
+.small{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;border-top:1px solid var(--ink);padding-top:8px}
+.small h4{margin:0;font-size:13px;line-height:1.15;font-weight:800}
+.small .kick{margin-top:0}
+.file{position:absolute;right:10px;bottom:10px;background:var(--ink);color:var(--paper);font-family:var(--body);font-size:11px;font-weight:600;border-radius:999px;padding:6px 11px}
+
+/* B: the bulletin */
+.bul{background:var(--night);color:var(--nightfg);height:100%;padding:18px 16px;display:flex;flex-direction:column;gap:14px;font-family:var(--body)}
+.desk{display:flex;align-items:center;gap:10px}
+.face{width:46px;height:46px;border-radius:14px;background:conic-gradient(from 200deg,#ffb547,#ff7a59,#7a8cff,#ffb547);display:grid;place-items:center;font-family:var(--display);font-weight:700;color:#121826}
+.desk small{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.desk b{font-family:var(--display)}
+.onair{margin-left:auto;font-size:10px;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:3px 8px}
+.prompt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.prompt p{margin:0;font-family:var(--news);font-size:15px;line-height:1.35;opacity:.35}
+.prompt p.now{opacity:1;font-size:26px;font-weight:600;line-height:1.18}
+.prompt em{font-style:normal;color:var(--glow)}
+.ctrl{display:flex;gap:8px}
+.ctrl span{flex:1;text-align:center;border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:9px 0;font-size:12px}
+.ctrl span.go{background:var(--glow);color:#121826;border-color:var(--glow);font-weight:700}
+
+/* C: the posters */
+.post{height:100%;background:var(--gs1);color:#fff;padding:22px 18px;display:flex;flex-direction:column;font-family:var(--display);position:relative}
+.dots{display:flex;gap:4px;margin-bottom:18px}.dots i{flex:1;height:3px;background:rgba(255,255,255,.35);border-radius:2px}.dots i.on{background:#fff}
+.post small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.big{font-size:70px;font-weight:700;line-height:.95;margin:28px 0 10px;letter-spacing:-.03em}
+.post p{font-family:var(--body);font-size:15px;line-height:1.4;margin:0;max-width:26ch}
+.chain{margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;font-size:12px;font-family:var(--body)}
+.chain span{background:rgba(255,255,255,.16);border-radius:8px;padding:5px 8px}
+.save{position:absolute;right:16px;top:44px;font-size:11px;font-family:var(--body);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:4px 10px}
+.ask{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;font-size:15px}
+.ask b{font-family:var(--display)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="tag">Newspaper reader · three ways to do it · real Chai from 20 Nov 2026</div>
+    <h1>Pick one. I build a working sample of it next.</h1>
+    <p class="lede">The last try felt like a quiz wearing a newspaper costume. These three are actual readers. Each still below uses the real 20 Nov Chai stories. All three arrive every morning as server data, with no app update.</p>
+  </header>
+
+  <section class="grid">
+    <article class="dir">
+      <div class="tag">A <span class="pick">My pick</span></div>
+      <h2>The Morning Paper, with a pencil</h2>
+      <div class="phone" aria-label="Mock of direction A">
+        <div class="paper">
+          <div class="mast"><b>Aspiran Chai</b><span>Fri 20 Nov · 3 stories</span></div>
+          <div class="kick">GS3 · Economy</div>
+          <div class="hl">Panchayats spend a lot. They raise very little themselves.</div>
+          <p class="dek">An RBI report on Panchayati Raj finances: Gram Panchayat money got stronger in 2022-23 and 2023-24, but own-source revenue is only <span class="circ">about 10%</span> of receipts. <span class="hlite">The rest comes as transfers.</span></p>
+          <div class="note">UPSC asked: "Apart from government grants, what sources can Panchayats look to?" (Mains 2018)</div>
+          <span class="stamp">Asked before · GS2 2018</span>
+          <div class="cutline"><i>✂</i></div>
+          <div class="small">
+            <div><div class="kick" style="color:var(--gs1)">GS1 · Geography</div><h4>El Niño rains make the Atacama bloom</h4></div>
+            <div><div class="kick">GS3 · Economy</div><h4>States to auction ₹31,950 crore of securities</h4></div>
+          </div>
+          <div class="file">Cutting file · 2</div>
+        </div>
+      </div>
+      <p><b>A real front page you read, with a topper's pencil notes in the margin:</b> the one number circled, the line to remember underlined, and a stamp when UPSC has asked about it before (real past paper, real year). Tap the scissors and the paragraph is cut out into your <b>cutting file</b>, like the newspaper clippings every aspirant already keeps. The cutting file comes back to you later for revision.</p>
+      <p class="cons"><b>Why I pick it:</b> it is the ritual aspirants already trust (paper, pen, clippings), made smarter. It reads like news, not a test. Cheapest to fill each morning from today's Chai data.</p>
+    </article>
+
+    <article class="dir">
+      <div class="tag">B</div>
+      <h2>The Morning Bulletin, read to you</h2>
+      <div class="phone" aria-label="Mock of direction B">
+        <div class="bul">
+          <div class="desk"><div class="face">A</div><div><small>Morning bulletin</small><b>Aspiran Chai</b></div><span class="onair">Story 2 of 3</span></div>
+          <div class="prompt">
+            <p>The driest desert on Earth has turned colour.</p>
+            <p class="now">Heavy <em>El Niño</em> rain woke up seeds that had been asleep in the <em>Atacama</em>.</p>
+            <p>Landsat 8 and 9 photographed red-purple, green and white from space.</p>
+          </div>
+          <div class="ctrl"><span>Back</span><span class="go">▶ Read to me</span><span>✂ Clip line</span></div>
+        </div>
+      </div>
+      <p><b>A newsreader at a desk:</b> a friendly presence who tells you today's three stories, one big line at a time, like a teleprompter. It reads aloud only when you tap. Clip any line. Feels like a morning radio show you can also read.</p>
+      <p class="cons"><b>Catch:</b> needs fresh voice recordings every morning (another step that can fail at 07:00) and the voice rules are strict. Could be added on top of A later.</p>
+    </article>
+
+    <article class="dir">
+      <div class="tag">C</div>
+      <h2>The Poster Wall</h2>
+      <div class="phone" aria-label="Mock of direction C">
+        <div class="post">
+          <div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          <small>GS1 · Geography · Story 2</small>
+          <span class="save">✂ Save</span>
+          <div class="big">Atacama<br>blooms</div>
+          <p>The driest desert on Earth flowered after El Niño brought heavy rain.</p>
+          <div class="chain"><span>El Niño</span><span>→ heavy rain</span><span>→ seeds wake</span><span>→ desert flowers</span></div>
+        </div>
+      </div>
+      <p><b>Story-style full-screen posters</b>, tap through like Instagram stories. Each story is two or three bold posters: one giant fact, then a cause-and-effect chain. Save any poster. Fast and very visual.</p>
+      <p class="cons"><b>Catch:</b> looks like every other app, and it can feel thin for UPSC depth. Memorable for the look, less for the content.</p>
+    </article>
+  </section>
+
+  <div class="ask"><b>Your call:</b> reply A, B or C (or "A with B's voice later"). I'll then build one full working edition from the 20 Nov Chai: all three stories, real past UPSC questions, clipping that works, in English and Hindi where the Hindi is good.</div>
+</div>
