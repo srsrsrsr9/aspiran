@@ -368,7 +368,7 @@ Write down what changes. Update this protocol, the phrase lists and the training
 
 ## 8. What Chotu and automated checks may and may not do
 
-Chotu is the on-device AI helper, labelled "Chotu · AI". The automated distress check runs on the phone. Neither is a person and neither may act like one.
+Chotu is the on-device study helper. He never calls himself an AI and never claims to be a person (owner, 17 and 22 Nov 2026). The automated distress check runs on the phone. Neither is a person and neither may act like one.
 
 **The automated distress check may:**
 
@@ -390,7 +390,7 @@ Chotu is the on-device AI helper, labelled "Chotu · AI". The automated distress
 
 **Chotu may:**
 
-- Say clearly that it is an AI and that it is not the right help for this.
+- Say plainly that it is not the right help for this, without claiming to be a person.
 - Show the helplines and the "Talk to a person" button.
 - Stay calm and short, and stop its normal chat until the member chooses to go on.
 
@@ -405,10 +405,10 @@ Chotu is the on-device AI helper, labelled "Chotu · AI". The automated distress
 
 A suggested Chotu message when the check fires:
 
-> I'm an AI, so I'm not the right help for this, but I don't want you to be alone with it. If you are in danger, please call 112. Tele-MANAS is free on 14416. You can also talk to a person from our team.
+> I'm not the right help for this, but I don't want you to be alone with it. If you are in danger, please call 112. Tele-MANAS is free on 14416. You can also talk to a person from our team.
 > [Talk to a person] [See helplines]
 
-> मैं एक AI हूँ, इसलिए इसमें सही मदद नहीं कर सकता, पर मैं नहीं चाहता कि आप इसके साथ अकेले रहें। अगर आप ख़तरे में हैं, तो कृपया 112 पर कॉल कीजिए। टेली-मानस 14416 पर मुफ़्त है। आप हमारी टीम के किसी व्यक्ति से भी बात कर सकते/सकती हैं।
+> मैं इसमें सही मदद नहीं कर सकता, पर मैं नहीं चाहता कि आप इसके साथ अकेले रहें। अगर आप ख़तरे में हैं, तो कृपया 112 पर कॉल कीजिए। टेली-मानस 14416 पर मुफ़्त है। आप हमारी टीम के किसी व्यक्ति से भी बात कर सकते/सकती हैं।
 > [किसी व्यक्ति से बात करें] [हेल्पलाइन देखें]
 
 **[Product decision: Chotu's grammatical gender in Hindi. The draft uses masculine forms to match the name.]**
