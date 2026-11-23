@@ -166,6 +166,39 @@ export function spreadPick<T>(items: T[], n: number, paper: (t: T) => string): T
   return out;
 }
 
+/** The day's three papers, in the order a missing one is filled. GS1 first: the feeds supply it least (most of them are
+ * economy, polity and world news), so a GS1 draft that passes the checks must not lose its place to a second GS3. */
+export const PAPERS = ["GS1", "GS2", "GS3"] as const;
+
+/**
+ * Which item to take next for the day's three (the Desk's publish and the 07:00 automatic Chai): items are best first.
+ * The first card is the best overall; after that, the best of a paper the day doesn't have yet, GS1 first, then GS2,
+ * then GS3; when every paper is there (or nothing is left for a missing one), the best of the rest. -1 when empty.
+ */
+export function nextPick<T>(items: T[], have: Set<string>, paper: (t: T) => string): number {
+  if (!items.length) return -1;
+  if (!have.size) return 0;
+  for (const p of PAPERS) {
+    if (have.has(p)) continue;
+    const i = items.findIndex((t) => paper(t) === p);
+    if (i >= 0) return i;
+  }
+  return 0;
+}
+
+/**
+ * The order the day's queued stories are drafted in: the best of each paper first (GS1, GS2, GS3), then the next best
+ * of each, so the 05:00 slot's few drafts already hold a GS1 story when there is one, ready for 07:00.
+ */
+export function draftOrder<T extends { card_json?: string | null }>(rows: T[]): T[] {
+  const paperOfRow = (r: T) => { try { return gsOf(JSON.parse(r.card_json || "{}").gsPaper); } catch { return ""; } };
+  const rank = (p: string) => { const i = (PAPERS as readonly string[]).indexOf(p); return i < 0 ? PAPERS.length : i; };
+  // spreadPick takes the groups in the order they first appear: put the papers in GS1, GS2, GS3 order first.
+  const firsts = [...new Set(rows.map(paperOfRow))].sort((a, b) => rank(a) - rank(b));
+  const lead = firsts.map((p) => rows.find((r) => paperOfRow(r) === p)!);
+  return spreadPick([...lead, ...rows.filter((r) => !lead.includes(r))], rows.length, paperOfRow);
+}
+
 export function guessTone(text: string): Tone {
   const t = text.toLowerCase();
   // Whole words only: "war" no longer matches "warm air" (it raised a fog picture to serious), nor "dead" "deadline".
@@ -490,15 +523,15 @@ async function insertCandidate(env: Env, id: string, day: string, input: Candida
   ).bind(id, day, input.sourceName, input.sourceUrl, input.title, input.text, sc, JSON.stringify(card), JSON.stringify(flags), new Date().toISOString()).run();
 }
 
-interface WaitingRow { id: string; title: string; source_name: string; source_url: string; source_text: string; flags: string }
+interface WaitingRow { id: string; title: string; source_name: string; source_url: string; source_text: string; flags: string; card_json: string | null }
 
-/** The day's stories still waiting for an AI draft (queued, or failed once), best first. */
+/** The day's stories still waiting for a draft (queued, or failed once): each paper's best first, see draftOrder. */
 export async function waitingDrafts(env: Env, day = istDay()): Promise<WaitingRow[]> {
   const { results } = await env.DB.prepare(
-    `SELECT id, title, source_name, source_url, source_text, flags FROM candidates
+    `SELECT id, title, source_name, source_url, source_text, flags, card_json FROM candidates
      WHERE day = ? AND status = 'draft' AND (flags LIKE ? OR flags LIKE ?) ORDER BY score DESC, created_at`,
   ).bind(day, `%${WAITING}%`, `%${UNAVAILABLE} (%`).all<WaitingRow>();
-  return results.filter((r) => { try { return needsDraft(JSON.parse(r.flags || "[]")); } catch { return false; } });
+  return draftOrder(results.filter((r) => { try { return needsDraft(JSON.parse(r.flags || "[]")); } catch { return false; } }));
 }
 
 /** Drafts a queued story (fetching its page first if only the feed's line is stored), or tries a failed one again. */
