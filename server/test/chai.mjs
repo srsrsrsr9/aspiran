@@ -58,6 +58,27 @@ assert.deepEqual(P.spreadPick(pool, 3, (x) => x[1]).map((x) => x[0]), ["a", "d",
 assert.deepEqual(P.spreadPick(pool, 5, (x) => x[1]).map((x) => x[0]), ["a", "d", "e", "b", "f"]);
 step("each draft is tagged with its paper; the day's drafts are spread across GS1, GS2 and GS3");
 
+// GS1: art, culture and society stories are read as GS1 from any source; short words don't match inside longer ones.
+const un = { name: "Any source", url: "https://example.org", official: true };
+assert.equal(P.score({ title: "UNESCO inscribes manuscripts of the Mahabharata and a Chola inscription", description: "", source: un }).gs, "GS1");
+assert.equal(P.score({ title: "Census shows faster urbanisation and migration to cities", description: "", source: un }).topic, "Society");
+assert.notEqual(P.score({ title: "New aircraft orders show abundance of effort", description: "", source: un }).gs, "GS1");
+assert.equal(P.score({ title: "Tiger population rises in reserves", description: "", source: un }).topic, "Environment", "a tie keeps the earlier row");
+// The pick: the best card leads; then GS1 whenever a GS1 card is left, before a second GS3 or GS2.
+const day = [["rbi1", "GS3"], ["rbi2", "GS3"], ["prs", "GS2"], ["nasa", "GS1"]];
+const pickAll = (items, n, have = new Set()) => { const rest = [...items], out = []; while (out.length < n && rest.length) { const [x] = rest.splice(P.nextPick(rest, have, (t) => t[1]), 1); out.push(x[0]); have.add(x[1]); } return out; };
+assert.deepEqual(pickAll(day, 3), ["rbi1", "nasa", "prs"], "best first, then GS1, then GS2");
+assert.deepEqual(pickAll(day, 1, new Set(["GS3", "GS2"])), ["nasa"], "two papers there: the open slot is GS1");
+assert.deepEqual(pickAll([["rbi1", "GS3"], ["rbi2", "GS3"], ["prs", "GS2"]], 3), ["rbi1", "prs", "rbi2"], "no GS1 left: the best of the rest");
+assert.deepEqual(pickAll([["x", ""], ["rbi1", "GS3"], ["nasa", "GS1"]], 2), ["x", "nasa"], "a card with no paper still leaves GS1 missing");
+assert.equal(P.nextPick([], new Set(), (t) => t), -1);
+// Drafting order: each paper's best first, GS1 leading, so the first slot's few drafts include the GS1 story.
+const row = (id, gs) => ({ id, card_json: JSON.stringify({ gsPaper: gs }) });
+const waiting = [row("r1", "GS3"), row("r2", "GS3"), row("r3", "GS3"), row("r4", "GS3"), row("p1", "GS2"), row("n1", "GS1"), row("n2", "GS1")];
+assert.deepEqual(P.draftOrder(waiting).map((r) => r.id), ["n1", "p1", "r1", "n2", "r2", "r3", "r4"]);
+assert.ok(P.draftOrder(waiting).slice(0, P.DRAFTS_PER_RUN).some((r) => r.id === "n1"), "the 05:00 slot drafts the GS1 story");
+step("GS1: culture and society words count; the pick and the drafting order give GS1 a place whenever there is one");
+
 // The name check: "The Reserve Bank" is in "Reserve Bank of India" (it fired falsely 58 times).
 const src = "The Reserve Bank of India kept the policy repo rate at 5.5 per cent, Governor Sanjay Malhotra said.".toLowerCase();
 assert.equal(P.nameInSource("The Reserve Bank", src), true);

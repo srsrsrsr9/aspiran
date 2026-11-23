@@ -1,5 +1,8 @@
 import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
-import { whoIs } from "./plus";
+import { JEETU_MARKER, cleanFacts, factsBlock, scrub, takeJeetuMarker } from "./coach";
+import { quietHours } from "./jeetu";
+import { jeetuAccess, whoIs } from "./plus";
+import { activeResult, resultDays } from "./results";
 import PROMPT from "./chotu-prompt.txt";
 import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
@@ -139,13 +142,16 @@ export function fillPrompt(slots: Record<string, string>): string {
 
 /**
  * POST /chotu {mode: "talk" | "prep" | "plan" ("chat"/"explain" also accepted), messages: [{role, content}],
- * context: {language?, chotu_language?, notes?}}. chotu_language ("en", "hi" or "te") picks the models; without it
- * the app language does.
+ * context: {language?, chotu_language?, notes?}, facts?}. chotu_language ("en", "hi" or "te") picks the models; without it
+ * the app language does. facts is the app's record of the member's own study (coach.ts): cleaned, capped and shown to
+ * the model as data. The reply carries offerJeetu: true when Chotu offers Jeetu and this member can use him.
  * The phone checks for distress before sending; this checks again and never calls the model on a match.
  */
-export async function chotuChat(req: Request, env: Env): Promise<Response> {
+export async function chotuChat(req: Request, env: Env, member: string | null = null): Promise<Response> {
   const body = await req.json<any>().catch(() => null);
   if (!body || !Array.isArray(body.messages)) return bad("messages is required");
+  const cleaned = cleanFacts(body.facts);
+  if (!cleaned.ok) return bad(cleaned.error);
   const turns: ChatTurn[] = body.messages.slice(-MAX_TURNS)
     .map((t: any) => ({ role: t?.role === "assistant" ? "assistant" : "user", content: String(t?.content ?? t?.text ?? "").slice(0, MAX_CHARS) } as ChatTurn))
     .filter((t: ChatTurn) => t.content.trim());
@@ -161,6 +167,9 @@ export async function chotuChat(req: Request, env: Env): Promise<Response> {
   const str = (v: unknown, n: number) => String(v ?? "").replace(/[{}]/g, "").slice(0, n);
   const now = istNow();
   const lang = chatLang(ctx.chotu_language ?? ctx.language);
+  // Result days: no check-ins, wins or score trends, so the facts stay out altogether.
+  const resultDay = !!activeResult(await resultDays(env).catch(() => []));
+  const facts = resultDay ? null : cleaned.facts;
   const promptIn = (app_language: string) => fillPrompt({
     mode: ["talk", "prep", "plan"].includes(body.mode) ? body.mode : body.mode === "explain" ? "prep" : "talk",
     // Chotu answers in the language picked for it, if one was picked; otherwise in the app's.
@@ -170,21 +179,30 @@ export async function chotuChat(req: Request, env: Env): Promise<Response> {
     day_of_week: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][now.getUTCDay()],
     quiet_hours_start: "23:30",
     retrieved_notes: str(ctx.notes, 4000),
+    facts: factsBlock(facts) || "None sent. Say nothing about their numbers.",
+    result_day: resultDay ? "Today is a result day: no check-ins, no wins, no score trends." : "",
+    jeetu_marker: JEETU_MARKER,
   });
   const name = { en: "English", hi: "Hindi", te: "Telugu" }[lang];
-  const who = await whoIs(env, body.memberId);
+  const who = await whoIs(env, member ?? body.memberId);
   const ask = (app_language: string, l: keyof typeof CHAT_ROUTES, also = "") =>
     callChat(env, "chotu", [{ role: "system", content: promptIn(app_language) + also }, ...turns], CHAT_ROUTES[l], who);
+  // The marker is always stripped; offerJeetu is only set when this member can actually use Jeetu, and not at night.
+  const finish = async (raw: string) => {
+    const { text, offerJeetu } = takeJeetuMarker(raw);
+    const offer = offerJeetu && !quietHours() && !resultDay && (await jeetuAccess(env, member ?? body.memberId, false)).ok;
+    return { reply: scrub(text).text, ...(offer ? { offerJeetu: true } : {}) };
+  };
   try {
     const { text, model } = await ask(ctx.chotu_language ? name : str(ctx.language, 40), lang);
-    return json({ reply: text, model, lang, ai: true });
+    return json({ ...(await finish(text)), model, lang, ai: true });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Chotu is offline right now.", offline: true }, 503);
     // Until Google billing is on, Hindi and Telugu can time out on the free models: answer in English instead.
     if (lang !== "en") {
       try {
         const { text, model } = await ask("English", "en", "\n\nAnswer in English, even if the question is in another language.");
-        return json({ reply: text, model, lang: "en", ai: true, fallback: true, note: `${name} is busy right now, so here's the answer in English.` });
+        return json({ ...(await finish(text)), model, lang: "en", ai: true, fallback: true, note: `${name} is busy right now, so here's the answer in English.` });
       } catch { /* fall through */ }
     }
     return json({ error: "Chotu couldn't answer just now. Try again in a minute.", offline: false }, 502);

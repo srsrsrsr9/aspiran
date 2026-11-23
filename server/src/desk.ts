@@ -3,7 +3,7 @@ import { contentApi } from "./content";
 import { coverage } from "./coverage";
 import { caDeskApi } from "./ca";
 import { addNote, listNotes } from "./library";
-import { AUTO_HOPS, addCandidate, autoChecks, gsOf, readVerdict } from "./pipeline";
+import { AUTO_HOPS, addCandidate, autoChecks, gsOf, nextPick, readVerdict } from "./pipeline";
 import { type Env, bad, istDay, json } from "./shared";
 import { callChat } from "./ai";
 import { business } from "./payments";
@@ -48,7 +48,8 @@ const paperOf = (r: CandidateRow) => { try { return gsOf(JSON.parse(r.card_json)
 /**
  * The day's three. Cards an editor put in order (a position) come first, in that order. The rest are filled from the
  * approved cards (an editor's approval before the automatic check's), best first, taking a paper the brief doesn't
- * have yet whenever there is one, so a usual day reads GS2, GS3, GS1 rather than three RBI notices.
+ * have yet whenever there is one (GS1 first, see pipeline.ts nextPick), so a usual day reads GS3, GS1, GS2 rather than
+ * three RBI notices.
  */
 export function chooseThree(rows: CandidateRow[], n = CHAI_CARDS): CandidateRow[] {
   const placed = rows.filter((r) => r.position != null).sort((a, b) => (a.position ?? 0) - (b.position ?? 0)).slice(0, n);
@@ -57,9 +58,7 @@ export function chooseThree(rows: CandidateRow[], n = CHAI_CARDS): CandidateRow[
   const out = [...placed];
   const papers = new Set(out.map(paperOf));
   while (out.length < n && rest.length) {
-    let i = rest.findIndex((r) => !papers.has(paperOf(r)));
-    if (i < 0) i = 0;
-    const [r] = rest.splice(i, 1);
+    const [r] = rest.splice(nextPick(rest, papers, paperOf), 1);
     out.push(r);
     papers.add(paperOf(r));
   }
@@ -122,8 +121,9 @@ ${JSON.stringify({ headline: card.headline, summary: card.summary, whyForUpsc: c
 
 /**
  * The automatic Chai (flag chai_auto, off unless the owner switches it on): at 07:00 IST, if fewer than AUTO_CARDS
- * cards have an editor's approval for the day, the best remaining drafts go out on their own, a paper the day doesn't
- * have yet first (GS1, GS2, GS3), then the best of the rest. A draft qualifies only
+ * cards have an editor's approval for the day, the best remaining drafts go out on their own: the best draft, then a
+ * paper the day doesn't have yet (GS1 first, then GS2, GS3; pipeline.ts nextPick), then the best of the rest. If a GS1
+ * draft fails a check the next GS1 draft is tried before the slot goes to another paper. A draft qualifies only
  * if the pipeline's own checks raised no flag, its tone is light or neutral (serious and tragic always wait for a
  * person), and a second model from a different family reads the card against its source and passes it. These rows get
  * status 'auto', never an editor's name, so every app shows them as "Not yet checked by an editor". An editor can
@@ -138,9 +138,7 @@ export async function autoPick(env: Env, day = istDay()) {
   const picked: string[] = [], held: string[] = [];
   let unchecked = "";
   while (have < AUTO_CARDS && queue.length) {
-    let i = queue.findIndex((q) => !papers.has(paperOf(q)));
-    if (i < 0) i = 0;
-    const [r] = queue.splice(i, 1);
+    const [r] = queue.splice(nextPick(queue, papers, paperOf), 1);
     let card: any; let flagged: unknown[] = [];
     try { card = JSON.parse(r.card_json); flagged = JSON.parse(r.flags || "[]"); } catch { continue; }
     // A draft the second check already turned down stays down (it isn't asked about again each hour).

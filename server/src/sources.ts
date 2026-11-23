@@ -31,6 +31,17 @@ export interface Source {
  * automated reader (we don't disguise ours: PIB needs asking); MoEFCC and MEA build their press pages in the
  * browser, so there is nothing to read; IMD's only feed is weather warnings (disasters, never auto); Sansad's
  * e-Parliament library timed out. Newspapers and magazines stay out on purpose (see above).
+ *
+ * Indian GS1 sources, checked 22-23 Nov 2026 from a Worker on Cloudflare's network with the same honest user-agent.
+ * None could be added: the Ministry of Culture (indiaculture.gov.in), the National Museum and the National Archives
+ * time out; WCD, Survey of India, DD News and All India Radio fail on their certificates or time out; ASI, Sahitya
+ * Akademi, Sangeet Natak Akademi and IMD (internal.imd.gov.in press releases) put their news in PDFs we can't read;
+ * the Indian Culture portal, MoSPI and Social Justice build their pages in the browser; IGNCA and Lalit Kala have no
+ * news list worth drafting from; IMD's blog stopped in 2023; UNESCO's New Delhi office page answered 1 time in 4 and
+ * its articles never loaded; whc.unesco.org ignores its own India filter. PIB (403) is the real fix: it carries the
+ * Culture, Tribal Affairs, Social Justice and Earth Sciences releases, and needs PIB to allow our reader.
+ * Until then GS1 comes from NASA, UNESCO World Heritage and any story whose words are GS1 (SYLLABUS below), and the
+ * pick (pipeline.ts nextPick) gives a GS1 card a place whenever one passes the checks.
  */
 export const SOURCES: Source[] = [
   // GS3 Economy
@@ -68,7 +79,10 @@ export const SYLLABUS: { words: string[]; weight: number; gs: string; topic: str
   { words: ["cyclone", "flood", "earthquake", "disaster", "ndma", "ndrf"], weight: 2, gs: "GS3", topic: "Disaster management" },
   { words: ["border", "defence", "army", "navy", "air force", "cyber"], weight: 2, gs: "GS3", topic: "Security" },
   { words: ["monsoon", "glacier", "river", "delta", "volcano", "ocean current", "el nino", "la nina", "himalaya", "plateau", "desert", "coral", "landslide", "snowfall", "rainfall", "aquifer"], weight: 2, gs: "GS1", topic: "Geography" },
-  { words: ["heritage", "unesco", "archaeolog", "festival", "temple", "freedom fighter", "jayanti"], weight: 1, gs: "GS1", topic: "Art and culture" },
+  // GS1 words are listed whole where a short one would match inside another word ("dance" in "abundance", "craft" in
+  // "aircraft", "fort" in "effort"); matching is a plain substring test.
+  { words: ["heritage", "unesco", "archaeolog", "festival", "temple", "freedom fighter", "jayanti", "classical dance", "folk dance", "classical music", "folk music", "painting", "sculpture", "manuscript", "inscription", "monument", "stupa", "dynasty", "literature", "akademi", "handloom", "handicraft", "museum", "intangible", "excavation", "rock art", "harappa", "mughal", "chola", "maurya", "vijayanagara"], weight: 2, gs: "GS1", topic: "Art and culture" },
+  { words: ["population", "census", "urbanisation", "urbanization", "migration", "migrant", "diaspora", "demograph", "mother tongue", "dialect", "self-help group"], weight: 2, gs: "GS1", topic: "Society" },
   { words: ["women", "children", "tribal", "education", "health", "nutrition", "poverty"], weight: 2, gs: "GS2", topic: "Social justice" },
 ];
 

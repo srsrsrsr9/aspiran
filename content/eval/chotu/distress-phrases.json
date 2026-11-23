@@ -1,0 +1,38 @@
+{
+ "note": "Copied unchanged from the app and server on 22 Nov 2026 so the test set can say whether the phone's phrase check fires. The app code is the source of truth; re-copy if it changes.",
+ "android_source": "android/app/src/main/java/com/upscpods/app/data/DistressMatcher.kt",
+ "android": [
+  "kill myself",
+  "end my life",
+  "want to die",
+  "end it all",
+  "no reason to live",
+  "suicide",
+  "मरना चाहता",
+  "मरना चाहती",
+  "जीना नहीं चाहता",
+  "जीना नहीं चाहती",
+  "खुदकुशी",
+  "आत्महत्या",
+  "marna chahta",
+  "marna chahti",
+  "jeena nahi chahta",
+  "jeena nahi chahti",
+  "khudkushi",
+  "sab khatam kar"
+ ],
+ "server_te_draft_source": "server/src/langs.ts DRAFT_DISTRESS.te",
+ "server_te_draft": [
+  "చనిపోవాలని ఉంది",
+  "చచ్చిపోవాలని ఉంది",
+  "బతకాలని లేదు",
+  "బతికి ప్రయోజనం లేదు",
+  "ఆత్మహత్య",
+  "నన్ను నేను చంపుకుంటా",
+  "అన్నీ ముగించేస్తా",
+  "chanipovalani undi",
+  "bathakalani ledu",
+  "atmahatya",
+  "champukunta"
+ ]
+}
