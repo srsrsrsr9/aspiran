@@ -1,0 +1,520 @@
+<title>Chai Reader Sample</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel:wght@400;700;800&family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap">
+<style>
+/* Layout: one phone-width column, one screen of the edition at a time, like the app. Tokens are the web app's own. */
+:root{
+  --bg:#F7F2EA; --card:#FFFDF9; --ink:#2A1B12; --muted:#6E5A4C; --line:#E4D8C8; --brand:#9A4E0E; --brand-ink:#FFFFFF;
+  --soft:#F6E2C9; --ok:#E3EAD9; --okink:#3E5631; --bad:#F8E1DE; --badink:#8A2A1E; --focus:#4F6B3E; --redact:#2A1B12;
+  --head-font:"Martel", Georgia, "Noto Serif Devanagari", serif;
+  --ui-font:"Noto Sans", "Noto Sans Devanagari", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --read-font:Georgia, "Noto Serif", "Martel", "Noto Serif Devanagari", serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --brand-ink:#1B1205;
+  --soft:#3B2716; --ok:#26301C; --okink:#C4DCB0; --bad:#3D211D; --badink:#F2B8AE; --focus:#9DBB83; --redact:#F3E8DA; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#17100B; --card:#22180F; --ink:#F3E8DA; --muted:#BFA996; --line:#3A2B1F; --brand:#F0A04B; --brand-ink:#1B1205;
+  --soft:#3B2716; --ok:#26301C; --okink:#C4DCB0; --bad:#3D211D; --badink:#F2B8AE; --focus:#9DBB83; --redact:#F3E8DA; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--ui-font);
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.wrap{max-width:460px;margin:0 auto}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+
+.sample-note{font-size:.78rem;color:var(--muted);padding:12px 0 0;line-height:1.45}
+.bar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bar .day{font:800 1.05rem/1.2 var(--head-font);flex:1;min-width:0}
+.bar .day small{display:block;font:600 .72rem/1.3 var(--ui-font);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.pill-btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.pill-btn[aria-pressed="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.dots{display:flex;gap:6px;justify-content:center;padding:12px 0 4px}
+.dots span{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dots span.on{background:var(--brand)}
+
+.screen{display:flex;flex-direction:column;gap:16px;padding-top:12px}
+.reader{display:flex;gap:12px;align-items:flex-start}
+.reader .face{flex:none;width:42px;height:42px;border-radius:12px;background:var(--soft);display:grid;place-items:center}
+.reader p{margin:0;font:400 1rem/1.55 var(--read-font)}
+.reader .who{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.margin{font:italic .95rem/1.5 var(--read-font);color:var(--muted);border-left:2px solid var(--brand);padding-left:10px;margin:0}
+
+.eyebrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:var(--soft);color:var(--brand)}
+.tag.lens{background:transparent;border:1px solid var(--line);color:var(--muted)}
+h1,h2{font-family:var(--head-font);text-wrap:balance;margin:0}
+h1{font-size:1.5rem;line-height:1.3}
+h2{font-size:1.1rem;line-height:1.35}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.hook{background:var(--soft);border-radius:14px;padding:14px 16px}
+.hook b{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.hook p{margin:0;font:400 1.02rem/1.5 var(--read-font)}
+.label{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hint{font-size:.88rem;color:var(--muted);margin:0}
+
+.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer;background:var(--brand);color:var(--brand-ink)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn.small{padding:8px 12px;font-size:.88rem;border-radius:10px}
+.nav{display:flex;gap:10px}
+.nav .btn{flex:1}
+
+/* facts with a clip mark */
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.fact{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.fact:first-child{border-top:0}
+.fact .txt{flex:1;min-width:0;font:400 1rem/1.55 var(--read-font)}
+.clip{flex:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--muted)}
+.clip svg{width:18px;height:18px}
+.clip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+
+/* redacted file */
+.redact{background:var(--redact);color:transparent;border-radius:3px;padding:0 4px;cursor:pointer;border:0;font:inherit;line-height:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.redact.shown{background:var(--soft);color:var(--ink);cursor:default;font-weight:700}
+.file-head{display:flex;justify-content:space-between;gap:8px;font:700 .72rem/1.3 var(--ui-font);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px dashed var(--line);padding-bottom:8px}
+
+/* domino chain */
+.slots{display:flex;flex-direction:column;gap:6px}
+.slot{min-height:44px;border:1px dashed var(--line);border-radius:10px;display:flex;align-items:center;gap:10px;padding:8px 12px;font-weight:600;color:var(--muted)}
+.slot.filled{border-style:solid;background:var(--ok);color:var(--okink);border-color:transparent}
+.slot .n{font:800 .8rem/1 var(--ui-font);width:20px;text-align:center;opacity:.7}
+.arrow{text-align:center;color:var(--muted);line-height:1;font-size:.9rem;margin:-2px 0}
+.tiles{display:flex;flex-wrap:wrap;gap:8px}
+.tile{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;font-weight:600;cursor:pointer}
+.tile.nope{border-color:var(--badink);color:var(--badink)}
+
+/* comic */
+.comic{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.panel{border:2px solid var(--ink);border-radius:8px;background:var(--card);padding:6px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.panel svg{width:100%;height:auto;display:block}
+.panel p{margin:0;font-size:.82rem;line-height:1.35}
+.panel .pn{font:800 .7rem/1 var(--ui-font);color:var(--muted)}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choice{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:.95rem}
+.choice.right{background:var(--ok);color:var(--okink);border-color:transparent}
+.choice.wrong{background:var(--bad);color:var(--badink);border-color:transparent}
+.feedback{margin:0;font-size:.95rem}
+
+/* where it lives */
+.lives{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.lives .path{font-weight:700;font-size:.92rem}
+.lives p{margin:0;font:400 .98rem/1.5 var(--read-font)}
+.pyq{border-top:1px dashed var(--line);padding-top:10px;margin-top:4px;display:flex;flex-direction:column;gap:8px}
+.pyq summary{cursor:pointer;font-weight:700;font-size:.92rem;color:var(--brand)}
+.pyq .q{white-space:pre-line;font-size:.92rem;margin:0}
+.src{font-size:.82rem;color:var(--muted)}
+.src a{color:var(--brand)}
+
+.rate{display:flex;flex-wrap:wrap;gap:8px}
+textarea, input[type=text]{width:100%;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit}
+.recall-fields{display:flex;flex-direction:column;gap:8px}
+.end-title{font-size:1.7rem;text-align:center;padding-top:20px}
+
+/* clips sheet */
+.sheet{position:fixed;inset:0;z-index:20;background:color-mix(in srgb, var(--ink) 40%, transparent);display:flex;align-items:flex-end;justify-content:center}
+.sheet .panel-in{background:var(--bg);width:100%;max-width:500px;max-height:85vh;overflow:auto;border-radius:18px 18px 0 0;
+  padding:16px max(16px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));display:flex;flex-direction:column;gap:14px}
+.sheet-head{display:flex;align-items:center;gap:10px}
+.sheet-head h2{flex:1}
+.group{display:flex;flex-direction:column;gap:8px}
+.clipcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.clipcard .t{font:400 .98rem/1.5 var(--read-font);margin:0}
+.clipcard .m{font-size:.78rem;color:var(--muted)}
+.clipcard .row{display:flex;gap:8px;align-items:center}
+.clipcard .row input{flex:1;min-width:0;padding:6px 10px;font-size:.88rem}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.88rem;font-weight:600;z-index:30;max-width:calc(100% - 32px)}
+.about{font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:10px}
+.about summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.about ul{padding-left:18px;margin:8px 0}
+
+@media (prefers-reduced-motion: no-preference){
+  .screen{animation:rise .25s ease-out}
+  @keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+  .tile.nope{animation:nudge .3s}
+  @keyframes nudge{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+}
+:lang(hi) .fact .txt, :lang(hi) .reader p, :lang(hi) .hook p, :lang(hi) .lives p{font-family:"Noto Sans Devanagari", var(--ui-font)}
+</style>
+
+<div class="wrap" id="app" lang="en">
+  <p class="sample-note" id="sampleNote"></p>
+  <div class="bar">
+    <div class="day" id="barDay"></div>
+    <button class="pill-btn" id="langBtn" type="button" aria-label="Switch language">हिं</button>
+    <button class="pill-btn" id="clipsBtn" type="button"></button>
+  </div>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <main id="screen"></main>
+  <details class="about" id="about"></details>
+</div>
+<div id="sheetRoot"></div>
+
+<script>
+const CLIP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+const FACE = '<svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M7 12h15v7a6 6 0 0 1-6 6h-3a6 6 0 0 1-6-6z" fill="none" stroke="var(--brand)" stroke-width="2"/><path d="M22 14h2a3 3 0 0 1 0 6h-2" fill="none" stroke="var(--brand)" stroke-width="2"/><path d="M11 5c0 2 2 2 2 4M16 5c0 2 2 2 2 4" stroke="var(--muted)" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>';
+
+/* ---------- The edition: everything below is data. In the app this arrives from the server each morning. ---------- */
+const UI = {
+  en: { sample: "Sample edition for review. Built from the Chai published on 20 Nov 2026, with real past UPSC questions from our bank. Clips stay in this browser only.",
+        day: "Chai · Thu 20 Nov", edition: "Morning edition", clips: n => `My clips · ${n}`, next: "Next", back: "Back", start: "Start", think: "Think first",
+        lives: "Where it lives", asked: "Asked before", tryit: "Try it", reveal: "Show answer", source: "Source", clipped: "Clipped", unclipped: "Removed from clips",
+        clipLabel: "Clip this line", knew: "Knew it", partly: "Partly", notreally: "Not really", showme: "Show me", done: "Done",
+        rateBack: { knew: "Good. It comes back in a few weeks.", partly: "It comes back in a few days.", notreally: "It comes back in two days, gently." },
+        tapOrder: "Tap these in the right order.", tapRedact: "Guess, then tap each black bar.", chooseLine: "Fill the last bubble.",
+        noteHint: "Why I kept this (optional)", empty: "No clips yet. Tap the clip mark beside any line to keep it for revision.", close: "Close", remove: "Remove",
+        endTitle: "That's today's Chai. It ends.", fromLast: "From 18 Nov",
+        recallTitle: "Before you look: what were today's three?", recallHint: "A word or two for each, or just think them. Nobody sees this.",
+        recallShow: "Show today's three", lensNames: { chain: "Domino chain", redacted: "Redacted file", comic: "Finish the comic" },
+        about: "About this sample" },
+  hi: { sample: "समीक्षा के लिए नमूना। 20 नवंबर 2026 की प्रकाशित चाय से बना, हमारे बैंक के असली UPSC प्रश्नों के साथ। क्लिप केवल इसी ब्राउज़र में रहती हैं।",
+        day: "चाय · गुरु 20 नवंबर", edition: "सुबह का अंक", clips: n => `मेरी क्लिप · ${n}`, next: "आगे", back: "पीछे", start: "शुरू करें", think: "पहले सोचिए",
+        lives: "सिलेबस में कहाँ", asked: "पहले पूछा गया", tryit: "हल करें", reveal: "जवाब देखें", source: "स्रोत", clipped: "क्लिप हो गई", unclipped: "क्लिप हटाई",
+        clipLabel: "यह पंक्ति क्लिप करें", knew: "याद था", partly: "थोड़ा-बहुत", notreally: "याद नहीं था", showme: "दिखाइए", done: "हो गया",
+        rateBack: { knew: "बढ़िया। यह कुछ हफ़्तों बाद फिर आएगा।", partly: "यह कुछ दिन बाद फिर आएगा।", notreally: "यह दो दिन बाद आराम से फिर आएगा।" },
+        tapOrder: "इन्हें सही क्रम में छुएँ।", tapRedact: "अंदाज़ा लगाइए, फिर हर काली पट्टी को छुएँ।", chooseLine: "आख़िरी गुब्बारा भरिए।",
+        noteHint: "मैंने इसे क्यों रखा (चाहें तो)", empty: "अभी कोई क्लिप नहीं। किसी भी पंक्ति के पास क्लिप का निशान छुएँ, वह दोहराने के लिए रख ली जाएगी।", close: "बंद करें", remove: "हटाएँ",
+        endTitle: "आज की चाय बस इतनी। यहीं ख़त्म।", fromLast: "18 नवंबर से",
+        recallTitle: "देखने से पहले: आज की तीन ख़बरें क्या थीं?", recallHint: "हर एक के लिए एक-दो शब्द, या बस मन में सोचिए। इसे कोई नहीं देखता।",
+        recallShow: "आज की तीन दिखाएँ", lensNames: { chain: "डोमिनो कड़ी", redacted: "गुप्त फ़ाइल", comic: "कॉमिक पूरा करें" },
+        about: "इस नमूने के बारे में" }
+};
+
+const OPENER = {
+  en: { who: "Your morning reader", line: "Good morning. Three stories today: a desert in bloom, the money in a village panchayat, and a ₹31,950 crore auction. First, one from last week.",
+        q: "NASA scientists estimate how many thunderstorms are going on across Earth at any one moment?", a: "About 2,000.", gs: "GS3 · Science", src: "From the Chai of 18 Nov · NASA Earth Observatory" },
+  hi: { who: "आपका सुबह का पाठक", line: "सुप्रभात। आज तीन ख़बरें हैं: खिलता हुआ रेगिस्तान, गाँव की पंचायत का पैसा, और ₹31,950 करोड़ की एक नीलामी। पहले, पिछले हफ़्ते की एक बात।",
+        q: "नासा के वैज्ञानिकों के अनुमान के मुताबिक़, पृथ्वी पर किसी भी एक पल में लगभग कितने गरज वाले तूफ़ान चल रहे होते हैं?", a: "लगभग 2,000।", gs: "GS3 · विज्ञान", src: "18 नवंबर की चाय से · नासा अर्थ ऑब्ज़र्वेटरी" }
+};
+
+const STORIES = [
+  { id: "atacama", lens: "chain", gs: { en: "GS1 · Geography", hi: "GS1 · भूगोल" },
+    source: { name: "NASA Earth Observatory", url: "https://science.nasa.gov/earth/earth-observatory/el-nino-rains-paint-the-atacama/" },
+    en: { head: "El Niño rain paints the Atacama in flowers", note: "A light one to start. Watch the chain, not the flowers.",
+          hook: "The Atacama is one of the driest places on Earth. So why was it covered in flowers this year?",
+          chain: ["El Niño", "Heavy winter rain", "Dormant seeds wake", "The desert blooms", "Satellites record it"],
+          facts: ["El Niño brought unusually heavy winter rain to northern Chile.",
+                  "The rain woke seeds lying dormant in the soil.",
+                  "Landsat 8 and 9 photographed red-purple, green and white flowers across the desert.",
+                  "Scientists are using the bloom to study biodiversity and to plan land use."],
+          path: "GS1 · Geography › Climatology › El Niño",
+          rel: "El Niño warms the eastern Pacific. The same event that brought rain here is often linked to a weaker monsoon in India.",
+          pyqWhy: "Statement 1 is wrong: the IOD compares the western and eastern parts of the tropical Indian Ocean, not the Pacific. Statement 2 is right: a positive IOD can soften El Niño's effect on the monsoon." },
+    hi: { head: "एल नीनो की बारिश से फूलों से भरा अटाकामा", note: "शुरुआत हल्की ख़बर से। फूलों पर नहीं, कड़ी पर ध्यान दीजिए।",
+          hook: "अटाकामा पृथ्वी की सबसे सूखी जगहों में से एक है। फिर इस साल वह फूलों से कैसे भर गया?",
+          chain: ["एल नीनो", "सर्दियों में भारी बारिश", "मिट्टी में सोए बीज जागे", "रेगिस्तान में फूल खिले", "उपग्रहों ने तस्वीरें लीं"],
+          facts: ["एल नीनो ने उत्तरी चिली में सर्दियों में असामान्य रूप से भारी बारिश कराई।",
+                  "बारिश से मिट्टी में सोए पड़े बीज जाग उठे।",
+                  "लैंडसैट 8 और 9 उपग्रहों ने पूरे रेगिस्तान में लाल-बैंगनी, हरे और सफ़ेद फूलों की तस्वीरें लीं।",
+                  "वैज्ञानिक इस खिलावट से जैव विविधता और भूमि-उपयोग की योजना को समझ रहे हैं।"],
+          path: "GS1 · भूगोल › जलवायु विज्ञान › एल नीनो",
+          rel: "एल नीनो पूर्वी प्रशांत महासागर को गर्म करता है। जिस घटना ने यहाँ बारिश दी, उसे अक्सर भारत के कमज़ोर मानसून से जोड़ा जाता है।",
+          pyqWhy: "कथन 1 गलत है: IOD उष्णकटिबंधीय हिंद महासागर के पश्चिमी और पूर्वी हिस्सों की तुलना है, प्रशांत की नहीं। कथन 2 सही है: धनात्मक IOD मानसून पर एल नीनो के असर को कम कर सकता है।" },
+    pyq: { label: "Prelims 2017 · Q66", q: "With reference to 'Indian Ocean Dipole (IOD)' sometimes mentioned in the news while forecasting Indian monsoon, which of the following statements is/are correct?\n1. IOD phenomenon is characterised by a difference in sea surface temperature between tropical Western Indian Ocean and tropical Eastern Pacific Ocean.\n2. An IOD phenomenon can influence an El Nino's impact on the monsoon.",
+           options: ["1 only", "2 only", "Both 1 and 2", "Neither 1 nor 2"], answer: 1 } },
+
+  { id: "panchayat", lens: "redacted", gs: { en: "GS2 · Polity  ·  GS3 · Economy", hi: "GS2 · राजव्यवस्था  ·  GS3 · अर्थव्यवस्था" },
+    source: { name: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64002" },
+    en: { head: "Where a gram panchayat's money comes from", note: "This one is GS2 as much as GS3. One number matters most.",
+          hook: "Before you read: out of every ₹100 a gram panchayat receives, how much do you think it raises by itself?",
+          file: ["RBI REPORT", "PANCHAYAT FINANCES"],
+          lines: ["The [Reserve Bank of India] released a report on the finances of Panchayati Raj Institutions.",
+                  "Gram Panchayat finances got stronger in 2022-23 and 2023-24, but still depend on [intergovernmental transfers], money from the Centre and the state.",
+                  "Their own revenue was only about [10%] of total receipts.",
+                  "The biggest share of spending went to [water supply and sanitation].",
+                  "Gaps between states remain. Panchayats becoming small [urban local bodies] need transitional fiscal support, the report says."],
+          path: "GS2 · Polity › Panchayati Raj (Part IX, 73rd Amendment)",
+          rel: "The Constitution saw this coming. Under Article 243-I, the Governor sets up a State Finance Commission every five years to review panchayat finances.",
+          pyqWhy: "Mains has no single answer. Today's report gives you one hard fact for the second part: a panchayat raises only about a tenth of what it receives." },
+    hi: { head: "ग्राम पंचायत का पैसा कहाँ से आता है", note: "यह जितनी GS3 की है, उतनी ही GS2 की। एक संख्या सबसे अहम है।",
+          hook: "पढ़ने से पहले सोचिए: ग्राम पंचायत को मिलने वाले हर ₹100 में से कितना वह ख़ुद जुटाती है?",
+          file: ["रिज़र्व बैंक रिपोर्ट", "पंचायत वित्त"],
+          lines: ["[भारतीय रिज़र्व बैंक] ने पंचायती राज संस्थाओं के वित्त पर एक रिपोर्ट जारी की।",
+                  "ग्राम पंचायतों का वित्त 2022-23 और 2023-24 में मज़बूत हुआ, पर वे अब भी [अंतर-सरकारी हस्तांतरण] यानी केंद्र और राज्य से मिलने वाले पैसे पर निर्भर हैं।",
+                  "उनकी अपनी आय कुल प्राप्तियों का लगभग [10%] ही थी।",
+                  "ख़र्च का सबसे बड़ा हिस्सा [जल आपूर्ति और स्वच्छता] पर गया।",
+                  "राज्यों के बीच अंतर बना हुआ है। रिपोर्ट कहती है कि जो पंचायतें छोटे [शहरी स्थानीय निकाय] बन रही हैं, उन्हें बदलाव के दौर में वित्तीय सहारा चाहिए।"],
+          path: "GS2 · राजव्यवस्था › पंचायती राज (भाग IX, 73वाँ संशोधन)",
+          rel: "संविधान ने यह पहले ही सोच लिया था। अनुच्छेद 243-झ के तहत राज्यपाल हर पाँच साल में राज्य वित्त आयोग बनाता है, जो पंचायतों के वित्त की समीक्षा करता है।",
+          pyqWhy: "मुख्य परीक्षा का कोई एक जवाब नहीं होता। आज की रिपोर्ट दूसरे हिस्से के लिए एक ठोस तथ्य देती है: पंचायत जो पाती है, उसका लगभग दसवाँ हिस्सा ही ख़ुद जुटाती है।" },
+    pyq: { label: "Mains 2018 · GS2 · Q15 · 15 marks", q: "Assess the importance of the Panchayat system in India as a part of local government. Apart from government grants, what sources the Panchayats can look out for financing developmental projects?" } },
+
+  { id: "sdl", lens: "comic", gs: { en: "GS3 · Economy", hi: "GS3 · अर्थव्यवस्था" },
+    source: { name: "Reserve Bank of India", url: "https://www.rbi.org.in/scripts/BS_PressReleaseDisplay.aspx?prid=64004" },
+    en: { head: "₹31,950 crore: the RBI auctions state government securities", note: "Sounds dry, gets asked. The comic does the work.",
+          hook: "States borrow too. Who runs the sale for them?",
+          panels: ["Several states: “We need to borrow.”", "RBI: “Auction on 23 November. ₹31,950 crore in all.”", "Bids arrive on E-Kuber: competitive and non-competitive.", "Reader: “Wait. Doesn't the RBI handle only the Centre's debt?”"],
+          choices: ["No. The RBI manages states' borrowing too, by agreement with each state.", "Yes. States hold their own auctions.", "Only SEBI can sell government securities."],
+          right: "Right. Section 21A of the RBI Act lets the RBI act as banker and debt manager to a state, by agreement.",
+          wrong: "Not quite. Look at panel 2: who is holding the auction?",
+          facts: ["The RBI will auction state government securities worth ₹31,950 crore on 23 November 2026.",
+                  "Bids are made electronically on E-Kuber, the RBI's core banking system.",
+                  "Both competitive and non-competitive bids are allowed.",
+                  "The securities are governed by the Government Securities Act, 2006."],
+          path: "GS3 · Economy › Government borrowing and the RBI",
+          rel: "The same idea as the Centre's G-secs, but for states. These are often called State Development Loans (SDLs).",
+          pyqWhy: "Statement 1 is wrong: the RBI manages state government securities too, which is exactly today's story. Statements 2 and 3 are right: only the Centre issues treasury bills, and they are sold at a discount." },
+    hi: { head: "₹31,950 करोड़: रिज़र्व बैंक राज्य सरकारों की प्रतिभूतियों की नीलामी करेगा", note: "सुनने में रूखी, पर परीक्षा में पूछी जाती है। कॉमिक सब समझा देगा।",
+          hook: "राज्य भी उधार लेते हैं। उनके लिए यह बिक्री कौन कराता है?",
+          panels: ["कई राज्य: “हमें उधार चाहिए।”", "रिज़र्व बैंक: “23 नवंबर को नीलामी। कुल ₹31,950 करोड़।”", "ई-कुबेर पर बोलियाँ: प्रतिस्पर्धी और ग़ैर-प्रतिस्पर्धी।", "पाठक: “रुकिए। क्या रिज़र्व बैंक सिर्फ़ केंद्र का कर्ज़ नहीं संभालता?”"],
+          choices: ["नहीं। हर राज्य से समझौते के तहत रिज़र्व बैंक राज्यों का कर्ज़ भी संभालता है।", "हाँ। राज्य अपनी नीलामी ख़ुद करते हैं।", "सरकारी प्रतिभूतियाँ केवल सेबी बेच सकता है।"],
+          right: "सही। आरबीआई अधिनियम की धारा 21क के तहत, समझौते से रिज़र्व बैंक किसी राज्य का बैंकर और ऋण प्रबंधक बनता है।",
+          wrong: "पूरी तरह नहीं। पैनल 2 देखिए: नीलामी कौन करा रहा है?",
+          facts: ["रिज़र्व बैंक 23 नवंबर 2026 को ₹31,950 करोड़ की राज्य सरकार प्रतिभूतियों की नीलामी करेगा।",
+                  "बोलियाँ रिज़र्व बैंक की कोर बैंकिंग प्रणाली ई-कुबेर पर इलेक्ट्रॉनिक रूप से लगती हैं।",
+                  "प्रतिस्पर्धी और ग़ैर-प्रतिस्पर्धी, दोनों तरह की बोलियाँ लगाई जा सकती हैं।",
+                  "ये प्रतिभूतियाँ सरकारी प्रतिभूति अधिनियम, 2006 के तहत आती हैं।"],
+          path: "GS3 · अर्थव्यवस्था › सरकारी उधार और रिज़र्व बैंक",
+          rel: "केंद्र की जी-सेक जैसी ही, पर राज्यों के लिए। इन्हें अक्सर राज्य विकास ऋण (SDL) कहा जाता है।",
+          pyqWhy: "कथन 1 गलत है: रिज़र्व बैंक राज्य सरकार की प्रतिभूतियाँ भी संभालता है, यही आज की ख़बर है। कथन 2 और 3 सही हैं: ट्रेज़री बिल केवल केंद्र जारी करता है, और वे छूट (डिस्काउंट) पर बिकते हैं।" },
+    pyq: { label: "Prelims 2018 · Q56", q: "Consider the following statements\n1. The Reserve Bank of India manages and services Government of India Securities but not any State Government Securities.\n2. Treasury bills are issued by the Government of India and there are no treasury bills issued by the State Governments.\n3. Treasury bills offer are issued at a discount from the par value.\nWhich of the statements given above is/are correct?",
+           options: ["1 and 2 only", "3 only", "2 and 3 only", "1, 2 and 3"], answer: 2 } }
+];
+
+const CLOSING = {
+  en: ["Atacama: El Niño rain woke dormant seeds, and satellites saw the bloom.", "Panchayats: own revenue is only about 10% of receipts; the rest is transfers.", "States borrow ₹31,950 crore through an RBI auction on E-Kuber."],
+  hi: ["अटाकामा: एल नीनो की बारिश से सोए बीज जागे, और उपग्रहों ने खिलावट देखी।", "पंचायतें: अपनी आय प्राप्तियों का लगभग 10% ही है; बाक़ी हस्तांतरण से।", "राज्य रिज़र्व बैंक की नीलामी से ई-कुबेर पर ₹31,950 करोड़ उधार लेते हैं।"]
+};
+const END = {
+  en: "Your clips are kept for revision. On mornings ahead a few come back in the opening question, never more than three a day.",
+  hi: "आपकी क्लिप दोहराने के लिए रख ली गई हैं। आगे की सुबहों में कुछ क्लिप पहले सवाल में लौटेंगी, दिन में तीन से ज़्यादा कभी नहीं।"
+};
+const ABOUT = {
+  en: ["Stories, numbers and sources are from the Chai cards published on 20 Nov 2026. Past questions and answer keys are from our PYQ bank.",
+       "Shown here: the morning shape (one older card first, three stories, a closing recall, a clear end), three of the six lenses, clip a line, and My clips.",
+       "Not shown yet: the Two sides, Thread and Examiner's pick lenses, and tragic-news mode (no reader voice, no clips to share).",
+       "The Hindi here is a draft and needs a Hindi editor's check before anything like it goes to members."],
+  hi: ["ख़बरें, आँकड़े और स्रोत 20 नवंबर 2026 को प्रकाशित चाय कार्डों से हैं। पिछले प्रश्न और उत्तर-कुंजी हमारे PYQ बैंक से हैं।",
+       "यहाँ दिखाया गया है: सुबह का ढाँचा (पहले एक पुराना कार्ड, तीन ख़बरें, आख़िर में याद करना, साफ़ अंत), छह में से तीन तरीक़े, पंक्ति क्लिप करना, और मेरी क्लिप।",
+       "अभी नहीं दिखाया: दो पक्ष, धागा और परीक्षक की पसंद वाले तरीक़े, और दुखद ख़बरों का ढंग।",
+       "यहाँ की हिंदी मसौदा है; सदस्यों तक कुछ भी पहुँचने से पहले हिंदी संपादक की जाँच ज़रूरी है।"]
+};
+
+/* ---------- State ---------- */
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+                set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+let lang = store.get("chai-sample-lang", "en");
+let step = 0;
+let clips = store.get("chai-sample-clips", []);
+const S = { opener: { shown: false, rated: null }, chain: {}, redacted: {}, comic: {}, pyq: {}, closing: false };
+const STEPS = ["opener", "story:0", "story:1", "story:2", "closing", "end"];
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const t = () => UI[lang];
+
+function toast(msg){ const el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); el.textContent = msg;
+  document.body.appendChild(el); setTimeout(() => el.remove(), 1800); }
+
+function clipId(storyId, i){ return `${storyId}:${i}`; }
+function isClipped(id){ return clips.some(c => c.id === id); }
+function toggleClip(story, i, text){
+  const id = clipId(story.id, i);
+  if (isClipped(id)) { clips = clips.filter(c => c.id !== id); toast(t().unclipped); }
+  else { clips.push({ id, story: story.id, i, note: "" }); toast(`${t().clipped} · ${story.gs[lang].split("  ·  ")[0]}`); }
+  store.set("chai-sample-clips", clips); renderBar();
+  document.querySelectorAll(`[data-clip="${id}"]`).forEach(b => b.setAttribute("aria-pressed", isClipped(id)));
+}
+function clipText(c){
+  if (c.story === "opener") return OPENER[lang].q + " " + OPENER[lang].a;
+  const s = STORIES.find(x => x.id === c.story); const L = s[lang];
+  const arr = s.lens === "redacted" ? L.lines.map(x => x.replace(/\[|\]/g, "")) : L.facts;
+  return arr[c.i];
+}
+
+/* ---------- Render ---------- */
+function renderBar(){
+  $("#sampleNote").textContent = t().sample;
+  $("#barDay").innerHTML = `<small>${esc(t().edition)}</small>${esc(t().day)}`;
+  $("#langBtn").textContent = lang === "en" ? "हिं" : "EN";
+  $("#langBtn").setAttribute("aria-label", lang === "en" ? "हिंदी में पढ़ें" : "Read in English");
+  $("#clipsBtn").textContent = t().clips(clips.length);
+  $("#dots").innerHTML = STEPS.map((_, i) => `<span class="${i === step ? "on" : ""}"></span>`).join("");
+  $("#app").setAttribute("lang", lang);
+  $("#about").innerHTML = `<summary>${esc(t().about)}</summary><ul>${ABOUT[lang].map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+}
+
+function clipBtn(story, i){
+  const id = clipId(story.id, i);
+  return `<button class="clip" type="button" data-clip="${id}" data-story="${story.id}" data-i="${i}" aria-pressed="${isClipped(id)}" aria-label="${esc(t().clipLabel)}">${CLIP_ICON}</button>`;
+}
+function navHtml(nextLabel){
+  return `<div class="nav">${step > 0 ? `<button class="btn ghost" type="button" data-go="-1">${esc(t().back)}</button>` : ""}<button class="btn" type="button" data-go="1">${esc(nextLabel || t().next)}</button></div>`;
+}
+
+function renderOpener(){
+  const O = OPENER[lang], st = S.opener;
+  return `<section class="screen">
+    <div class="reader"><div class="face">${FACE}</div><div><div class="who">${esc(O.who)}</div><p>${esc(O.line)}</p></div></div>
+    <div class="card">
+      <div class="eyebrow"><span class="tag">${esc(t().fromLast)}</span><span class="tag lens">${esc(O.gs)}</span></div>
+      <h2>${esc(O.q)}</h2>
+      ${st.shown ? `<div class="fact"><div class="txt"><b>${esc(O.a)}</b></div>${clipBtn({ id: "opener" }, 0)}</div>
+        <p class="src">${esc(O.src)}</p>
+        ${st.rated ? `<p class="hint">${esc(t().rateBack[st.rated])}</p>` :
+          `<div class="rate">${["knew", "partly", "notreally"].map(k => `<button class="btn ghost small" type="button" data-rate="${k}">${esc(t()[k])}</button>`).join("")}</div>`}`
+        : `<p class="hint">${esc(t().think)}…</p><button class="btn ghost" type="button" id="openerShow">${esc(t().reveal)}</button>`}
+    </div>
+    ${navHtml(t().start)}
+  </section>`;
+}
+
+function storyHead(s){
+  const L = s[lang];
+  return `<div class="eyebrow"><span class="tag">${esc(s.gs[lang])}</span><span class="tag lens">${esc(t().lensNames[s.lens])}</span></div>
+    <h1>${esc(L.head)}</h1>
+    <p class="margin">${esc(L.note)}</p>
+    <div class="hook"><b>${esc(t().think)}</b><p>${esc(L.hook)}</p></div>`;
+}
+function factsHtml(s){
+  return `<ul class="facts">${s[lang].facts.map((f, i) => `<li class="fact"><div class="txt">${esc(f)}</div>${clipBtn(s, i)}</li>`).join("")}</ul>`;
+}
+function livesHtml(s){
+  const L = s[lang], p = s.pyq, ps = S.pyq[s.id] ?? null;
+  let pyq = `<details class="pyq" ${ps !== null ? "open" : ""}><summary>${esc(t().asked)}: ${esc(p.label)}</summary><p class="q">${esc(p.q)}</p>`;
+  if (p.options) {
+    pyq += `<div class="choices">${p.options.map((o, i) => {
+      const cls = ps === null ? "" : i === p.answer ? "right" : i === ps ? "wrong" : "";
+      return `<button class="choice ${cls}" type="button" data-pyq="${s.id}" data-o="${i}" ${ps !== null ? "disabled" : ""}>(${"abcd"[i]}) ${esc(o)}</button>`; }).join("")}</div>`;
+    if (ps !== null) pyq += `<p class="feedback">${esc(L.pyqWhy)}</p>`;
+  } else {
+    pyq += ps !== null ? `<p class="feedback">${esc(L.pyqWhy)}</p>` : `<button class="btn ghost small" type="button" data-pyq="${s.id}" data-o="0">${esc(t().tryit)}</button>`;
+  }
+  pyq += `</details>`;
+  return `<div class="lives"><span class="label">${esc(t().lives)}</span><span class="path">${esc(L.path)}</span><p>${esc(L.rel)}</p>${pyq}</div>
+    <p class="src">${esc(t().source)}: <a href="${s.source.url}" target="_blank" rel="noopener">${esc(s.source.name)}</a></p>`;
+}
+
+function chainHtml(s){
+  const L = s[lang], st = S.chain[s.id] ??= { placed: 0, order: null, nope: null };
+  if (!st.order) { const n = L.chain.length; st.order = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = (i * 7 + 3) % (i + 1); [st.order[i], st.order[j]] = [st.order[j], st.order[i]]; } }
+  const slots = L.chain.map((c, i) => `${i ? '<div class="arrow" aria-hidden="true">↓</div>' : ""}<div class="slot ${i < st.placed ? "filled" : ""}"><span class="n">${i + 1}</span>${i < st.placed ? esc(c) : ""}</div>`).join("");
+  const left = st.order.filter(i => i >= st.placed);
+  return `<div class="card"><span class="label">${esc(t().lensNames.chain)}</span>
+    ${st.placed < L.chain.length ? `<p class="hint">${esc(t().tapOrder)}</p>` : ""}
+    <div class="slots">${slots}</div>
+    ${left.length ? `<div class="tiles">${left.map(i => `<button class="tile ${st.nope === i ? "nope" : ""}" type="button" data-tile="${s.id}" data-i="${i}">${esc(L.chain[i])}</button>`).join("")}</div>
+      <button class="btn ghost small" type="button" data-chainall="${s.id}">${esc(t().showme)}</button>` : ""}
+  </div>`;
+}
+
+function redactedHtml(s){
+  const L = s[lang], st = S.redacted[s.id] ??= {};
+  const lines = L.lines.map((line, li) => {
+    let k = 0;
+    const html = esc(line).replace(/\[([^\]]+)\]/g, (_, w) => { const key = `${li}-${k++}`;
+      return st[key] ? `<span class="redact shown">${w}</span>` : `<button class="redact" type="button" data-red="${s.id}" data-key="${key}" aria-label="Hidden word">${w}</button>`; });
+    return `<li class="fact"><div class="txt">${html}</div>${clipBtn(s, li)}</li>`;
+  }).join("");
+  return `<div class="card"><div class="file-head"><span>${esc(L.file[0])}</span><span>${esc(L.file[1])}</span></div>
+    <p class="hint">${esc(t().tapRedact)}</p><ul class="facts">${lines}</ul></div>`;
+}
+
+function comicSvg(n){
+  const ink = "var(--ink)", br = "var(--brand)", mu = "var(--muted)", soft = "var(--soft)";
+  const scenes = [
+    `<rect x="14" y="30" width="40" height="40" fill="${soft}" stroke="${ink}" stroke-width="2"/><rect x="66" y="22" width="40" height="48" fill="${soft}" stroke="${ink}" stroke-width="2"/><rect x="118" y="34" width="34" height="36" fill="${soft}" stroke="${ink}" stroke-width="2"/>
+     <text x="34" y="56" text-anchor="middle" font-size="12" fill="${ink}">₹?</text><text x="86" y="52" text-anchor="middle" font-size="12" fill="${ink}">₹?</text><text x="135" y="57" text-anchor="middle" font-size="12" fill="${ink}">₹?</text>
+     <line x1="6" y1="70" x2="158" y2="70" stroke="${ink}" stroke-width="2"/>`,
+    `<path d="M40 34 L82 14 L124 34 Z" fill="${soft}" stroke="${ink}" stroke-width="2"/><rect x="46" y="34" width="72" height="36" fill="var(--card)" stroke="${ink}" stroke-width="2"/>
+     ${[56, 72, 88, 104].map(x => `<line x1="${x}" y1="38" x2="${x}" y2="66" stroke="${ink}" stroke-width="2"/>`).join("")}
+     <text x="82" y="29" text-anchor="middle" font-size="9" font-weight="700" fill="${ink}">RBI</text><line x1="6" y1="70" x2="158" y2="70" stroke="${ink}" stroke-width="2"/>`,
+    `<rect x="44" y="16" width="76" height="46" rx="4" fill="var(--card)" stroke="${ink}" stroke-width="2"/><rect x="36" y="62" width="92" height="8" rx="2" fill="${soft}" stroke="${ink}" stroke-width="2"/>
+     <rect x="52" y="24" width="40" height="7" fill="${br}"/><rect x="52" y="36" width="56" height="7" fill="${mu}"/><rect x="52" y="48" width="30" height="7" fill="${br}"/>
+     <text x="82" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="${ink}">E-KUBER</text>`,
+    `<circle cx="40" cy="46" r="14" fill="${soft}" stroke="${ink}" stroke-width="2"/><circle cx="35" cy="44" r="2" fill="${ink}"/><circle cx="45" cy="44" r="2" fill="${ink}"/><rect x="26" y="60" width="28" height="10" rx="3" fill="${soft}" stroke="${ink}" stroke-width="2"/>
+     <path d="M66 14 H152 V50 H84 L72 60 L76 50 H66 Z" fill="var(--card)" stroke="${ink}" stroke-width="2"/>
+     <text x="109" y="38" text-anchor="middle" font-size="18" font-weight="800" fill="${br}">${S.comic.sdl?.ok ? "✓" : "?"}</text>`
+  ];
+  return `<svg viewBox="0 0 164 76" role="img" aria-hidden="true">${scenes[n]}</svg>`;
+}
+function comicHtml(s){
+  const L = s[lang], st = S.comic[s.id] ??= { pick: null, ok: false };
+  const panels = L.panels.map((p, i) => `<div class="panel"><span class="pn">${i + 1}</span>${comicSvg(i)}<p>${esc(p)}</p></div>`).join("");
+  const choices = L.choices.map((c, i) => {
+    const cls = st.pick === null ? "" : i === 0 && st.ok ? "right" : i === st.pick && !st.ok ? "wrong" : "";
+    return `<button class="choice ${cls}" type="button" data-comic="${s.id}" data-o="${i}" ${st.ok ? "disabled" : ""}>${esc(c)}</button>`; }).join("");
+  return `<div class="card"><span class="label">${esc(t().lensNames.comic)}</span><div class="comic">${panels}</div>
+    <p class="hint">${esc(t().chooseLine)}</p><div class="choices">${choices}</div>
+    ${st.pick !== null ? `<p class="feedback">${esc(st.ok ? L.right : L.wrong)}</p>` : ""}</div>`;
+}
+
+function renderStory(idx){
+  const s = STORIES[idx];
+  const lens = s.lens === "chain" ? chainHtml(s) : s.lens === "redacted" ? redactedHtml(s) : comicHtml(s);
+  const facts = s.lens === "redacted" ? "" : `<div class="card">${factsHtml(s)}</div>`;
+  return `<section class="screen">${storyHead(s)}${lens}${facts}${livesHtml(s)}${navHtml()}</section>`;
+}
+
+function renderClosing(){
+  const fields = [0, 1, 2].map(i => `<input type="text" id="recall-${i}" aria-label="${i + 1}" placeholder="${i + 1}.">`).join("");
+  return `<section class="screen">
+    <div class="reader"><div class="face">${FACE}</div><div><div class="who">${esc(OPENER[lang].who)}</div><p>${esc(t().recallTitle)}</p></div></div>
+    <div class="card"><p class="hint">${esc(t().recallHint)}</p><div class="recall-fields">${fields}</div>
+      ${S.closing ? `<ul class="facts">${CLOSING[lang].map(x => `<li class="fact"><div class="txt">${esc(x)}</div></li>`).join("")}</ul>`
+                  : `<button class="btn ghost" type="button" id="closingShow">${esc(t().recallShow)}</button>`}
+    </div>${navHtml()}</section>`;
+}
+
+function renderEnd(){
+  return `<section class="screen">
+    <h1 class="end-title">${esc(t().endTitle)}</h1>
+    <div class="reader"><div class="face">${FACE}</div><div><div class="who">${esc(OPENER[lang].who)}</div><p>${esc(END[lang])}</p></div></div>
+    <div class="nav"><button class="btn ghost" type="button" data-go="-1">${esc(t().back)}</button><button class="btn" type="button" id="openClips">${esc(t().clips(clips.length))}</button></div>
+  </section>`;
+}
+
+function render(){
+  renderBar();
+  const k = STEPS[step];
+  $("#screen").innerHTML = k === "opener" ? renderOpener() : k.startsWith("story:") ? renderStory(+k.split(":")[1]) : k === "closing" ? renderClosing() : renderEnd();
+}
+
+/* ---------- My clips sheet ---------- */
+function openClips(){
+  const groups = {};
+  clips.forEach(c => { const s = STORIES.find(x => x.id === c.story);
+    const g = c.story === "opener" ? OPENER[lang].gs : s.gs[lang].split("  ·  ")[0]; (groups[g] ??= []).push(c); });
+  const keys = Object.keys(groups).sort();
+  const body = clips.length ? keys.map(g => `<div class="group"><span class="label">${esc(g)}</span>${groups[g].map(c => {
+      const s = STORIES.find(x => x.id === c.story);
+      const meta = c.story === "opener" ? OPENER[lang].src : `${s[lang].head} · ${lang === "en" ? "20 Nov" : "20 नवंबर"} · ${s[lang].path}`;
+      return `<div class="clipcard"><p class="t">${esc(clipText(c))}</p><span class="m">${esc(meta)}</span>
+        <div class="row"><input type="text" id="note-${esc(c.id)}" data-note="${esc(c.id)}" value="${esc(c.note || "")}" placeholder="${esc(t().noteHint)}"><button class="btn ghost small" type="button" data-unclip="${esc(c.id)}">${esc(t().remove)}</button></div></div>`; }).join("")}</div>`).join("")
+    : `<p class="hint">${esc(t().empty)}</p>`;
+  $("#sheetRoot").innerHTML = `<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="panel-in" lang="${lang}">
+    <div class="sheet-head"><h2 id="sheetTitle">${esc(t().clips(clips.length))}</h2><button class="pill-btn" type="button" id="closeSheet">${esc(t().close)}</button></div>${body}</div></div>`;
+  $("#closeSheet").focus();
+}
+function closeClips(){ $("#sheetRoot").innerHTML = ""; $("#clipsBtn").focus(); }
+
+/* ---------- Events ---------- */
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) { if (e.target.id === "sheet") closeClips(); return; }
+  if (b.id === "langBtn") { lang = lang === "en" ? "hi" : "en"; store.set("chai-sample-lang", lang); render(); if ($("#sheet")) openClips(); return; }
+  if (b.id === "clipsBtn" || b.id === "openClips") return openClips();
+  if (b.id === "closeSheet") return closeClips();
+  if (b.dataset.go) { step = Math.max(0, Math.min(STEPS.length - 1, step + +b.dataset.go)); render(); window.scrollTo(0, 0); $("#screen h1, #screen h2")?.setAttribute("tabindex", "-1"); return; }
+  if (b.id === "openerShow") { S.opener.shown = true; return render(); }
+  if (b.dataset.rate) { S.opener.rated = b.dataset.rate; return render(); }
+  if (b.dataset.clip) { const s = b.dataset.story === "opener" ? { id: "opener", gs: { en: OPENER.en.gs, hi: OPENER.hi.gs } } : STORIES.find(x => x.id === b.dataset.story);
+    return toggleClip(s, +b.dataset.i); }
+  if (b.dataset.unclip) { clips = clips.filter(c => c.id !== b.dataset.unclip); store.set("chai-sample-clips", clips); renderBar(); render(); return openClips(); }
+  if (b.dataset.tile) { const st = S.chain[b.dataset.tile]; const i = +b.dataset.i;
+    if (i === st.placed) { st.placed++; st.nope = null; } else st.nope = i; return render(); }
+  if (b.dataset.chainall) { const s = STORIES.find(x => x.id === b.dataset.chainall); S.chain[s.id].placed = s[lang].chain.length; return render(); }
+  if (b.dataset.red) { S.redacted[b.dataset.red][b.dataset.key] = true; return render(); }
+  if (b.dataset.comic) { const st = S.comic[b.dataset.comic]; st.pick = +b.dataset.o; st.ok = st.pick === 0; return render(); }
+  if (b.dataset.pyq) { S.pyq[b.dataset.pyq] = +b.dataset.o; return render(); }
+  if (b.id === "closingShow") { S.closing = true; return render(); }
+});
+document.addEventListener("input", e => {
+  const id = e.target.dataset?.note; if (!id) return;
+  const c = clips.find(x => x.id === id); if (c) { c.note = e.target.value.slice(0, 140); store.set("chai-sample-clips", clips); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#sheet")) closeClips(); });
+
+render();
+</script>
