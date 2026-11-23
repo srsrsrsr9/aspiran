@@ -1,0 +1,162 @@
+{
+  "id": "a1-economy-inflation-targeting",
+  "version": 1,
+  "batch": "A1",
+  "kind": "audio-study-walk",
+  "title": {
+    "en": "Who fights inflation? The RBI, the MPC and the four per cent target",
+    "hi": "महँगाई से कौन लड़ता है? रिज़र्व बैंक, मौद्रिक नीति समिति और चार प्रतिशत का लक्ष्य"
+  },
+  "node": "gs3-1",
+  "line": null,
+  "minutes": 14.8,
+  "words": {
+    "en": 1995,
+    "hi": 2263
+  },
+  "tone": "NEUTRAL",
+  "speakers": {
+    "N": "narrator",
+    "F": "friend"
+  },
+  "pastQuestions": [
+    {
+      "paper": "csp-2023-gs1",
+      "n": "22"
+    }
+  ],
+  "sources": [
+    {
+      "name": "RBI, Monetary Policy Statement 2026-27: Resolution of the Monetary Policy Committee, October 5 to 7, 2026",
+      "url": "https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742",
+      "opened": "2026-11-21",
+      "what": "Repo rate raised 25 bps to 5.50% unanimously; SDF 5.25%, MSF 5.75%; stance calibrated tightening; drivers (deficient monsoon, El Nino, onion and sugar spikes, inflation expectations); Aug 2026 CPI 4.8%, core 4.2%; Q3 projection 6.0%; MPC members, Governor as chair; next meeting Dec 2 to 4, 2026"
+    },
+    {
+      "name": "RBI, Minutes of the MPC meeting, October 5 to 7, 2026 (published October 21, 2026)",
+      "url": "https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63839",
+      "opened": "2026-11-21",
+      "what": "Vote 6-0 for the hike; MPC publishes minutes"
+    },
+    {
+      "name": "MoSPI/NSO, Press Release on CPI (Base 2024=100) for October 2026, 12 November 2026",
+      "url": "https://www.mospi.gov.in/uploads/latestreleasesfiles/1794480048335-Press%20Release%20of%20CPI%20for%20October%202026%20.pdf",
+      "opened": "2026-11-21",
+      "what": "October 2026 headline CPI 6.09%, food 8.94%; onion +116.22%, garlic, ginger, lemon up; potato and cauliflower down; base 2024; compiled by NSO, MoSPI"
+    },
+    {
+      "name": "RBI Bulletin, speech by Deputy Governor Poonam Gupta, 'Inflation Targeting in India: The Past, The Present and The Future' (May 2026)",
+      "url": "https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx?Id=24174",
+      "opened": "2026-11-21",
+      "what": "Target of 4% with plus or minus 2% band renewed through March 2031; headline CPI retained; 75 direct responses to consultation; RBI Act amended May 2016; average inflation 8.1% pre-IT decade vs 4.6% in IT period"
+    },
+    {
+      "name": "RBI, Review of Monetary Policy Framework: A Discussion Paper, August 21, 2025",
+      "url": "https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=23171",
+      "opened": "2026-11-21",
+      "what": "Central Government determines CPI inflation target once every five years (Section 45ZA); four review questions; headline vs core debate; 2022 breach, MPC meeting of November 3, 2022 and report sent to the Central Government"
+    },
+    {
+      "name": "Reserve Bank of India Act, 1934 (rbi.org.in)",
+      "url": "https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=6449",
+      "opened": "2026-11-21",
+      "what": "Preamble: primary objective price stability while keeping in mind growth; Section 2 defines inflation as year-wise change in monthly CPI; section headings 45ZA, 45ZB, 45ZN"
+    },
+    {
+      "name": "RBI press release, Additional meeting of the Monetary Policy Committee for 2022-23, October 27, 2022",
+      "url": "https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=54597",
+      "opened": "2026-11-21",
+      "what": "Additional MPC meeting on November 3, 2022 under Section 45ZN"
+    },
+    {
+      "name": "NCAER Working Paper 174, Eichengreen and Gupta (2024), hosted by NITI Aayog",
+      "url": "https://www.niti.gov.in/sites/default/files/2025-03/NCAER_WP_174_BarryEichengreen_PoonamGupta_August2024-1_0.pdf",
+      "opened": "2026-11-21",
+      "what": "Failure = outside 2 to 6% for three consecutive quarters; report gives reasons, remedial actions, time period; MPC of six with three government-appointed external members for four years; at least four meetings a year; WPI is wholesale and excludes services; breach Jan to Sep 2022"
+    }
+  ],
+  "recall": [
+    {
+      "q": {
+        "en": "Under the RBI Act, who decides the inflation target?",
+        "hi": "रिज़र्व बैंक अधिनियम के तहत मुद्रास्फीति का लक्ष्य कौन तय करता है?"
+      },
+      "options": {
+        "en": [
+          "The RBI alone",
+          "The Central Government in consultation with the RBI",
+          "The Monetary Policy Committee"
+        ],
+        "hi": [
+          "अकेले रिज़र्व बैंक",
+          "रिज़र्व बैंक से परामर्श करके केंद्र सरकार",
+          "मौद्रिक नीति समिति"
+        ]
+      },
+      "answerIndex": 1,
+      "why": {
+        "en": "Section 45ZA gives the Central Government the power, in consultation with the RBI, once every five years; the MPC only sets the repo rate.",
+        "hi": "धारा 45ZA के तहत केंद्र सरकार रिज़र्व बैंक से परामर्श करके हर पाँच साल में लक्ष्य तय करती है; समिति केवल रेपो दर तय करती है।"
+      }
+    },
+    {
+      "q": {
+        "en": "Which index does the inflation target use?",
+        "hi": "मुद्रास्फीति का लक्ष्य किस सूचकांक पर आधारित है?"
+      },
+      "options": {
+        "en": [
+          "Consumer Price Index",
+          "Wholesale Price Index",
+          "GDP deflator"
+        ],
+        "hi": [
+          "उपभोक्ता मूल्य सूचकांक",
+          "थोक मूल्य सूचकांक",
+          "जीडीपी अपस्फीतिक"
+        ]
+      },
+      "answerIndex": 0,
+      "why": {
+        "en": "The RBI Act defines inflation as the yearly change in monthly CPI; the WPI has no services and is not the target.",
+        "hi": "अधिनियम मुद्रास्फीति को मासिक सीपीआई में सालाना बदलाव मानता है; डब्ल्यूपीआई में सेवाएँ नहीं होतीं।"
+      }
+    },
+    {
+      "q": {
+        "en": "When is the RBI deemed to have failed its inflation target?",
+        "hi": "रिज़र्व बैंक को लक्ष्य में नाकाम कब माना जाता है?"
+      },
+      "options": {
+        "en": [
+          "Inflation above six per cent in any single month",
+          "Yearly average above four per cent",
+          "Average inflation outside the two to six per cent band for three consecutive quarters"
+        ],
+        "hi": [
+          "किसी एक महीने में मुद्रास्फीति छह प्रतिशत से ऊपर",
+          "सालाना औसत चार प्रतिशत से ऊपर",
+          "औसत मुद्रास्फीति लगातार तीन तिमाहियों तक दो से छह प्रतिशत के बैंड से बाहर"
+        ]
+      },
+      "answerIndex": 2,
+      "why": {
+        "en": "Failure needs three consecutive quarters outside the band; one month above six, like October 2026, is not a failure.",
+        "hi": "नाकामी के लिए लगातार तीन तिमाहियाँ बैंड से बाहर होनी चाहिए; अक्टूबर 2026 जैसा एक महीना नाकामी नहीं है।"
+      }
+    }
+  ],
+  "factsToCheck": [
+    "Exact date and Gazette number of the 2026 notification retaining the 4% (2 to 6%) target for 1 April 2026 to 31 March 2031: press reports say 25 March 2026; official Gazette/PIB text not opened, so the script gives no date (RBI speech confirms the renewal).",
+    "Full text of Sections 45ZA, 45ZB, 45ZI and 45ZN: the India Code and rbidocs PDFs did not load fully; the report contents (reasons, remedial actions, time estimate) and MPC structure are taken from RBI's discussion paper and the NCAER paper hosted by NITI Aayog.",
+    "Governor's casting vote in a tie and MPC quorum: left out, statutory text not opened.",
+    "WPI publisher (Office of the Economic Adviser, DPIIT) and new WPI base 2022-23: left out, not opened today.",
+    "CPI base year 2024 'since February 2026': base 2024 confirmed in the October 2026 MoSPI release; the February 2026 start date is from the app's note, not opened today.",
+    "The 2022 breach: script says inflation stayed above 6% for three quarters in a row from January to September 2022 (NCAER paper); RBI's discussion paper says it stayed above 6% for five consecutive quarters, Q4 2021-22 to Q4 2022-23. Both consistent; the trigger was the first three.",
+    "The repo rate is 5.50% as of 21 November 2026; the MPC meets 2 to 4 December 2026 and the figure may change after that."
+  ],
+  "notes": "The headline-versus-core debate in the 2026 review is taught as contested among economists, with both sides; it is kept out of recall. The past question csp-2023-gs1 q22 is described in paraphrase with UPSC's key (option 1: both true, II explains I). Recall answer positions 1, 0, 2 as asked by the coordinator. The script mentions the December 2026 MPC meeting only as scheduled.",
+  "review": {
+    "status": "draft"
+  }
+}

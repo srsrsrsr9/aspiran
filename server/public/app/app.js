@@ -1964,6 +1964,8 @@ const listenSubject = (it) => { const t = readSubject(it); return READ_SUBJECTS.
 const audioPieces = (lng) => [
   ...libraryOf("read").filter((it) => it.data.audio?.[lng]?.url).map((it) => ({ id: it.id, kind: "note", subject: listenSubject(it), title: bi(it.data.title), a: it.data.audio[lng], href: "#read/" + encodeURIComponent(it.id) })),
   ...libraryOf("walk-script").filter((it) => it.data.audio?.[lng]?.url).map((it) => ({ id: it.id, kind: "walk", subject: "Guided walks", title: bi(it.data.topic), a: it.data.audio[lng], href: "#walk/" + it.data.id })),
+  // Study walks (Track A): two-voice audio lectures with a single recorded file per language.
+  ...libraryOf("audio-lecture").filter((it) => it.data.audio?.[lng]?.url).map((it) => ({ id: it.id, kind: "study", subject: "Study walks", title: it.data[lng]?.title ?? it.data.en?.title, a: it.data.audio[lng], href: "#talks/" + it.data.id })),
 ];
 const audioSeconds = (list) => list.reduce((n, p) => n + (p.a.seconds ?? 0), 0);
 const hoursText = (sec) => { const m = Math.round(sec / 60); return m < 90 ? `${m} min` : `${(m / 60).toFixed(m % 60 === 0 ? 0 : 1)} hours`; };
@@ -1971,7 +1973,7 @@ const hoursText = (sec) => { const m = Math.round(sec / 60); return m < 90 ? `${
 function audioLine() {
   const en = audioPieces("en"), hi = audioPieces("hi");
   if (!en.length && !hi.length) return null;
-  return `${hoursText(audioSeconds(en) + audioSeconds(hi))} of notes and guided walks read aloud: ${en.length} in English, ${hi.length} in Hindi.`;
+  return `${hoursText(audioSeconds(en) + audioSeconds(hi))} of notes and walks read aloud: ${en.length} in English, ${hi.length} in Hindi.`;
 }
 function viewListen() {
   const has = { en: audioPieces("en").length, hi: audioPieces("hi").length };
@@ -1979,7 +1981,7 @@ function viewListen() {
   if (!has[lng]) lng = lng === "hi" ? "en" : "hi";
   const all = audioPieces(lng);
   if (!all.length) return h("div.col", h("a", { href: "#practice" }, "← Practice"), h("h1", "Listen"), h("p", Auth.signedIn() ? "Recorded readings appear here as they are made." : "Sign in to hear the recorded notes and guided walks."));
-  const order = (x) => (x === "Guided walks" ? 998 : x === "Other" ? 999 : READ_SUBJECTS.indexOf(x) < 0 ? 900 : READ_SUBJECTS.indexOf(x));
+  const order = (x) => (x === "Study walks" ? 997 : x === "Guided walks" ? 998 : x === "Other" ? 999 : READ_SUBJECTS.indexOf(x) < 0 ? 900 : READ_SUBJECTS.indexOf(x));
   const subjects = [...new Set(all.map((p) => p.subject))].sort((a, b) => order(a) - order(b));
   const pick = subjects.includes(store.get("listenSubject", "")) ? store.get("listenSubject", "") : "";
   const heard = store.get("listenHeard", {});
@@ -1997,7 +1999,7 @@ function viewListen() {
   audio.addEventListener("ended", () => { if (!current) return; const hd = store.get("listenHeard", {}); hd[current.id + "." + lng] = today(); store.set("listenHeard", hd); });
   const row = (p) => {
     const el = h("button.card.link", { style: { textAlign: "left", width: "100%" }, onclick: () => play(p) },
-      h("div.row.between", h("div", h("strong", p.title), h("div.small.muted", [p.kind === "walk" ? "Guided walk" : "Note", `${Math.max(1, Math.round((p.a.seconds ?? 0) / 60))} min`, heard[p.id + "." + lng] && "heard"].filter(Boolean).join(" · "))), h("span", { "aria-hidden": "true" }, "▶")));
+      h("div.row.between", h("div", h("strong", p.title), h("div.small.muted", [p.kind === "walk" ? "Guided walk" : p.kind === "study" ? "Study walk" : "Note", `${Math.max(1, Math.round((p.a.seconds ?? 0) / 60))} min`, heard[p.id + "." + lng] && "heard"].filter(Boolean).join(" · "))), h("span", { "aria-hidden": "true" }, "▶")));
     rows.set(p.id, el);
     return el;
   };

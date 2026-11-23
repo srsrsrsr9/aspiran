@@ -282,7 +282,7 @@ export function viewTalks(arg) {
     const s = d[lang] ?? d.en, chapters = s.chapters ?? [];
     const rec = d.recording?.[lang];
     const listen = rec?.length
-      ? h("div.card", h("strong", "Listen"), h("p.small.muted", "Recorded voice. Earphones in, or play it on a walk."), partsPlayer(rec, { onPlay: () => track("audio_play", { node: codeOf(d.id, 64), lang, kind: "talk" }),
+      ? h("div.card", h("strong", "Listen"), h("p.small.muted", "Earphones in, or play it on a walk."), partsPlayer(rec, { onPlay: () => track("audio_play", { node: codeOf(d.id, 64), lang, kind: "talk" }),
         onEnd: () => track("audio_done", { node: codeOf(d.id, 64), lang, kind: "talk", minutes: d.minutes ?? null }) }))
       : h("div.card", h("div.row.between", h("strong", "Listen"), C.readAloud(chapters.map((c) => c.title + ".\n" + c.script).join("\n"), lang)),
         h("p.small.muted", "Not recorded yet, so the device voice reads it."));

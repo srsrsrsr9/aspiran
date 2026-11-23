@@ -208,7 +208,7 @@ fun TalksScreen(library: ContentLibrary, hindi: Boolean, onClose: () -> Unit) {
             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text("Listen", style = MaterialTheme.typography.titleSmall)
                 if (rec.isNotEmpty()) {
-                    Text("Recorded voice. Earphones in, or play it on a walk.", style = MaterialTheme.typography.bodySmall)
+                    Text("Earphones in, or play it on a walk.", style = MaterialTheme.typography.bodySmall)
                     PartsPlayer(rec, d.str("id"), lang, d.str("minutes")?.toIntOrNull())
                 } else {
                     Text("Not recorded yet, so the phone's voice reads it.", style = MaterialTheme.typography.bodySmall)

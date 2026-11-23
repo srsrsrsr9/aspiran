@@ -1,0 +1,105 @@
+{
+  "batch": "A1",
+  "made": "2026-11-21",
+  "model": "Claude Opus 5.5",
+  "track": "A",
+  "files": [
+    {
+      "path": "A1/a1-economy-inflation-targeting.en.txt",
+      "id": "a1-economy-inflation-targeting",
+      "kind": "script-en"
+    },
+    {
+      "path": "A1/a1-economy-inflation-targeting.hi.txt",
+      "id": "a1-economy-inflation-targeting",
+      "kind": "script-hi"
+    },
+    {
+      "path": "A1/a1-economy-inflation-targeting.json",
+      "id": "a1-economy-inflation-targeting",
+      "kind": "episode"
+    },
+    {
+      "path": "A1/a1-history-social-reform.en.txt",
+      "id": "a1-history-social-reform",
+      "kind": "script-en"
+    },
+    {
+      "path": "A1/a1-history-social-reform.hi.txt",
+      "id": "a1-history-social-reform",
+      "kind": "script-hi"
+    },
+    {
+      "path": "A1/a1-history-social-reform.json",
+      "id": "a1-history-social-reform",
+      "kind": "episode"
+    },
+    {
+      "path": "A1/a1-polity-basic-structure.en.txt",
+      "id": "a1-polity-basic-structure",
+      "kind": "script-en"
+    },
+    {
+      "path": "A1/a1-polity-basic-structure.hi.txt",
+      "id": "a1-polity-basic-structure",
+      "kind": "script-hi"
+    },
+    {
+      "path": "A1/a1-polity-basic-structure.json",
+      "id": "a1-polity-basic-structure",
+      "kind": "episode"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "a1-economy-inflation-targeting",
+      "node": "gs3-1",
+      "line": null,
+      "title": "Who fights inflation? The RBI, the MPC and the four per cent target",
+      "minutes": 14.8,
+      "words": {
+        "en": 1995,
+        "hi": 2263
+      },
+      "tone": "NEUTRAL",
+      "sources": 8,
+      "factsToCheck": 7
+    },
+    {
+      "id": "a1-history-social-reform",
+      "node": "gs1-2",
+      "line": null,
+      "title": "From below: the Phules and nineteenth-century reform",
+      "minutes": 13.6,
+      "words": {
+        "en": 1817,
+        "hi": 2072
+      },
+      "tone": "HOPEFUL",
+      "sources": 6,
+      "factsToCheck": 5
+    },
+    {
+      "id": "a1-polity-basic-structure",
+      "node": "gs2-1",
+      "line": null,
+      "title": "The Basic Structure: How Parliament's Amending Power Found Its Limit",
+      "minutes": 14.7,
+      "words": {
+        "en": 1974,
+        "hi": 2270
+      },
+      "tone": "NEUTRAL",
+      "sources": 8,
+      "factsToCheck": 4
+    }
+  ],
+  "counts": {
+    "episodes": 3,
+    "minutes": 43.1,
+    "recall": 9,
+    "sources": 22,
+    "factsToCheck": 16
+  },
+  "voiceNotes": ""
+}
