@@ -1,0 +1,26 @@
+--- a/src/components/Home.astro
++++ b/src/components/Home.astro
+@@ -118,6 +118,11 @@
+   ['आंसर कैसे जाँचे जाते हैं?', 'पहले आप ख़ुद नंबर देते हैं। फिर Aspiran का मार्कर आपके आंसर को UPSC के अच्छे नंबर वाले आंसर से मिलाकर 5 हिस्सों पर बताता है कि आप कहाँ हैं, और हर हिस्से का एक सुधार देता है। ग़लत भी हो सकता है, इसीलिए पहले आप ख़ुद जाँचते हैं।'],
+   ['फ़ोन पर चलेगा?', 'हाँ। किसी भी फ़ोन या लैपटॉप के ब्राउज़र में चलता है, कुछ इंस्टॉल नहीं करना। Android ऐप भी जल्द Play Store पर।'],
+   ['Plus का पेमेंट कैसे?', 'ऐप में Plus खोलिए: UPI, कार्ड या नेट बैंकिंग। एक बार का पेमेंट, अपने-आप रिन्यू नहीं, 7 दिन में रिफ़ंड।'],
++  // From the K3 website words (content account, 21 Nov 2026), cleaned at import.
++  ['Aspiran बार-बार वही क्यों पूछता है जो मैं पढ़ चुका/चुकी हूँ?', 'यही तो काम है। कुछ दिन बाद याद से जवाब निकालना, दोबारा पढ़ने से कहीं ज़्यादा दिन टिकता है। इसे spaced recall कहते हैं। जो सवाल थोड़ा मुश्किल लगे, वही अपना काम कर रहा है।'],
++  ['क्या मुझे दूसरों के मुक़ाबले रैंक किया जाएगा?', 'नहीं। Aspiran में कोई लीडरबोर्ड, पब्लिक स्कोर या स्ट्रीक नहीं है। आप सिर्फ़ अपनी प्रगति देखते हैं: क्या याद रहा और किसे फिर से देखना है।'],
++  ['पॉड और पॉड फ़्रेंड क्या हैं?', 'पॉड आपके स्टेज के 6 से 8 अभ्यर्थियों का छोटा ग्रुप है, ताकि रिवीज़न अकेले न करना पड़े। पॉड फ़्रेंड ऐप के स्टडी हेल्पर हैं, पॉड के सदस्य नहीं, और उन पर "स्टडी हेल्पर" लिखा रहता है।'],
++  ['तथ्य कहाँ से आते हैं?', 'मूल स्रोतों से: संविधान, संसद के क़ानून, सुप्रीम कोर्ट के फ़ैसले, PIB, मंत्रालयों के पेज, आर्थिक सर्वेक्षण और NCERT। जो तथ्य बदलते हैं, जैसे सुप्रीम कोर्ट में जजों की संख्या या रेपो रेट, उन पर रोज़ नज़र रखी जाती है।'],
+ ] : [
+   ['Is it really free?', 'Yes, for good, not a trial. Daily revision, current affairs, notes, PYQs, your pod, 3 answers checked a week and 1 mock a month are free. No card asked. Plus (₹3,999 a year) adds unlimited answer checking and all mocks.'],
+   ['I already go to coaching, or study from YouTube. Why this too?', 'Coaching teaches it once. Aspiran makes it stay: 15 minutes a day of revision on what you have already studied, and answer writing checked in minutes. It works alongside coaching, not instead of it.'],
+@@ -125,6 +130,11 @@
+   ['How are answers marked?', "You mark your own first. Then Aspiran's marker compares it with a well-scoring UPSC answer and tells you, on 5 parts, where you stand, with one fix for each. It can be wrong, which is why you mark yours first."],
+   ['Does it work on my phone?', 'Yes. It runs in the browser on any phone or laptop, nothing to install. An Android app is coming to the Play Store soon.'],
+   ['How do I pay for Plus?', 'Open Plus in the app: UPI, card or net banking. One payment, no auto-renewal, refund within 7 days.'],
++  // From the K3 website words (content account, 21 Nov 2026), cleaned at import.
++  ['Why does Aspiran keep asking me things I already studied?', 'That is the point. Pulling an answer from memory after a gap makes it last far longer than reading it again. This is spaced recall. A question that feels slightly hard is doing its job.'],
++  ['Will I be ranked against other aspirants?', 'No. Aspiran has no leaderboards, public scores or streaks. You see your own progress: what has stuck and what needs another pass.'],
++  ['What are pods and pod friends?', 'A pod is a small group of 6 to 8 aspirants at your stage, so you are not revising alone. Pod friends are study helpers built into the app, not members, and they carry a "study helper" tag.'],
++  ['Where do the facts come from?', "Primary sources: the Constitution, Acts of Parliament, Supreme Court judgments, PIB, ministry pages, the Economic Survey and NCERT. Facts that change, like the Supreme Court's strength or the repo rate, are watched every day."],
+ ];
+ const faqLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+ const appLd = { '@type': 'WebApplication', name: 'Aspiran', url: 'https://app.aspiran.in/app/', applicationCategory: 'EducationalApplication', operatingSystem: 'Any (web), Android',
