@@ -147,6 +147,12 @@ books they use, and it puts the Aspiran name on the desk from day one.
   Preamble and Fundamental Rights chapters. **This is the current direction.**
 - `polity-revision-sample/polity-revision-notes-sample.pdf` (and `.html`): the first idea, a read-only
   A5 revision-notes book. Kept for comparison.
+- `syllabus-companion/syllabus-companion-{en,hi}.pdf` (and `.html`, `workbook.json`): the Syllabus Companion,
+  99 A4 pages each, laid out 23 Nov 2026 from the 21 Nov content delivery.
+- `polity-workbook/polity-workbook-{en,hi}.pdf` (and `.html`, `workbook.json`): the full Polity workbook,
+  12 chapters, 154 pages (English) and 152 (Hindi). Back matter still to come.
+- `NOTES-2026-11-21-B1-B2.md`: what was checked and fixed in those two books, what's missing, and how to rebuild.
+- `tools/`: the check, fix, build and print scripts. `fonts/`: the local fonts the books use.
 
 To rebuild a PDF from its HTML (macOS):
 
