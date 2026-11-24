@@ -109,8 +109,11 @@ const effortLine = (w, l) => {
 };
 const trendLine = (t) => T(`${t.subject}: ${t.from}% → ${t.to}% over ${t.weeks} weeks.`, `${t.subject}: ${t.weeks} हफ़्तों में ${t.from}% → ${t.to}%।`);
 
-/** "Your week": effort totals against your own last week, one win, one trend, and the Jeetu offer. */
-export function yourWeekCard() {
+/**
+ * "Your week": effort totals against your own last week, one win, one trend, and the Jeetu offer. Free members get it
+ * too (decisions-2026-11-24.md, website 2): counts from this browser only, no model call. onSeen adds a "Seen it" button.
+ */
+export function yourWeekCard({ onSeen = null } = {}) {
   const f = weekFacts();
   const e = effortLine(f.week, f.last_week);
   const win = f.wins?.[0], trend = f.trends?.find((t) => t.to > t.from) ?? null;
@@ -119,7 +122,8 @@ export function yourWeekCard() {
     : [h("p.small.muted", { style: { margin: "6px 0 0" } }, T("Nothing counted yet this week. A five-minute start counts.", "इस हफ़्ते अभी कुछ नहीं गिना गया। पाँच मिनट की शुरुआत भी गिनी जाती है।"))];
   return h("div.card", h("strong", T("Your week", "आपका हफ़्ता")), ...body,
     h("p.small.muted", { style: { margin: "6px 0 0" } }, T("Compared only with your own last week.", "सिर्फ़ आपके अपने पिछले हफ़्ते से तुलना।")),
-    e && jeetuChip({ facts: f }));
+    e && jeetuChip({ facts: f }),
+    onSeen && h("button.ghost.small", { style: { marginTop: "6px" }, onclick: onSeen }, T("Seen it", "देख लिया")));
 }
 
 /**
