@@ -1,5 +1,11 @@
 # Content assignment, 23 Nov 2026: "One line for your answer" (12 wisdom shorts, English and Hindi)
 
+> **Paused, 24 Nov 2026 (owner).** Pilot #121 was built (en, hi) in `content/motion/story/wisdom/`, with tools in
+> `content/tools/story/` (paint.py, voice.py, endcard.py, hook.py). The owner found the voice pronunciation off, even
+> after the Sanskrit line was made silent, and paused the series. #122 and #126 have scripts and narration but still need 6
+> pictures (OpenRouter balance under its $1 image minimum). Nothing published. Resume only when the owner asks; first
+> settle how the narration will be voiced.
+
 **What it's for.** You liked the style of a Sanskrit-wisdom Short on YouTube (one old line, soft painted pictures,
 slow motion, a calm voice). This series uses that look, with a UPSC twist: every video ends on where the line fits
 in a GS4 (Ethics) or Essay answer. They go out as YouTube Shorts and Instagram Reels from the Aspiran accounts, and
