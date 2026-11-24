@@ -34,6 +34,8 @@ import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
 import { statNightly } from "./stat";
+import { PROFILE, profileRoute, profilesNightly, pruneChats } from "./profile";
+import { pruneGuard } from "./guard";
 
 import { marketingNightly } from "./marketing";
 import { pruneWebChats, webRoute } from "./web";
@@ -225,12 +227,15 @@ export default {
     if (path === "/voice") { const r = await voiceRoute(req, env, path); if (r) return r; }
     // --- The website (aspiran.in): Chotu as the guide, and what visitors tell it (web.ts)
     if (path.startsWith("/web/")) { const r = await webRoute(req, env, path); if (r) return r; }
+    // A Plus member's study profile for the phone's Chotu, and the phone's chats (only with the member's yes): profile.ts
+    if (path === "/chotu/profile" || path === "/chotu/chats") { const r = await profileRoute(req, env, path, url, gatedMember); if (r) return r; }
     if (path === "/chotu" && req.method === "POST") {
       // Free cloud turns are counted only when Plus is switched on and the app says who's asking.
       const peek = await req.clone().json<any>().catch(() => ({}));
       if (/^[\w-]{16,64}$/.test(String(peek?.memberId ?? ""))) {
         const allow = await useAllowance(env, peek.memberId, "chotu");
-        if (!allow.ok) return json({ error: "Chotu's out of cloud turns for today. It still works offline on your phone.", limit: true, offline: true }, 429);
+        // On-phone Chotu is Plus only now (owner, 22 Nov 2026), so a free member is never told it works offline.
+        if (!allow.ok) return json({ error: "That's all of today's Chotu chats. Chotu is back tomorrow morning.", limit: true }, 429);
         ctx.waitUntil(logFirst(env, "first_chotu_chat", peek.memberId));
       }
       return withVoice(env, "chotu", gatedMember, await chotuChat(req, env, gatedMember));
@@ -309,6 +314,8 @@ export default {
     // A provider set aside after a billing or key error gets one tiny test call a day, in a run of its own, before the
     // morning's drafting and chats; if it answers it's back in every route (ai.ts checkProviders).
     if (hm === "04:30") ctx.waitUntil(checkProviders(env).then(log("providers"), fail("providers")));
+    // Plus study profiles (profile.ts): a few members per slot through the small hours, oldest profile first.
+    if (PROFILE.slots.includes(hm)) ctx.waitUntil(profilesNightly(env, at).then(log("profiles"), fail("profiles")));
     if (hm === "05:30") {
       ctx.waitUntil(createBackup(env, "daily").then((b) => console.log("backup", b.key), fail("backup")));
       ctx.waitUntil(runJob(env, "merge", at).then(log("merge"), fail("merge")).then(() => runJob(env, "states", at)).then(log("states"), fail("states")));
@@ -316,6 +323,9 @@ export default {
       ctx.waitUntil(runJob(env, "photos", at).then(log("photos"), fail("photos")));
       // Website Chotu chats go after 180 days.
       ctx.waitUntil(pruneWebChats(env).then(log("web chats"), fail("web chats")));
+      // Chotu chats kept with a yes go after 180 days; the free cut-off counts after 8.
+      ctx.waitUntil(pruneChats(env).then(log("chotu chats"), fail("chotu chats")));
+      ctx.waitUntil(pruneGuard(env).then(log("guard"), fail("guard")));
       // Purchases refunded through Google Play end the Plus they bought (does nothing until Play Billing is set up).
       ctx.waitUntil(playVoided(env).then(log("play refunds"), fail("play refunds")));
       // Facts that change over time (Supreme Court strength, RBI ratios, helplines): checked, and updated when two days agree.

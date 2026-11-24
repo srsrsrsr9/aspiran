@@ -5,6 +5,7 @@ import { logEvent } from "./metrics";
 import { cashfreeConfigured, paymentsStatus } from "./payments";
 import { caKeyFor } from "./ca";
 import { PLAY_PRODUCT, playConfigured } from "./play";
+import { CHEAP_HOPS, type Hop, PLUS_MONTHLY_USD, monthSpend } from "./ai";
 
 /**
  * Plus (spec §7), behind the "plus" flag, which is off by default. Real payments are one-time yearly Plus on the
@@ -34,7 +35,8 @@ export const FORBIDDEN_SURFACES = ["adda", "pod", "commons", "chotu_talk", "clos
 export const MOMENTS: Record<string, { title: string; body: string }> = {
   feedback_used: { title: "That was your third free feedback this week", body: "Plus gives unlimited, deeper feedback on every answer. Your free three come back on Monday either way." },
   mock_band: { title: "Want the subject breakdown?", body: "Plus adds every mock, with the subject breakdown, your trend and an error log. Your free mock and band stay free." },
-  chotu_cloud: { title: "Chotu's out of cloud turns for today", body: "It still works offline on your phone. Plus gives you 100 cloud turns a day." },
+  // On-phone Chotu is Plus only (owner, 22 Nov 2026), so a free member is never told "it works on your phone".
+  chotu_cloud: { title: "That's today's Chotu chats", body: "Chotu is back tomorrow morning. Plus gives you 100 chats a day, and Chotu on your phone too." },
   rhythm_week4: { title: "Four weeks of rhythm", body: "A preview of the Plus plan: a personal plan that rebuilds itself each week from what you actually did." },
   notification_day: { title: "UPSC notification is out", body: "A Prelims sprint: a 100-day plan with a weekly group mentor call. Only if it helps." },
   mains_sprint: { title: "Heading to Mains?", body: "A Mains sprint: a structured plan and weekly human review. Take your time deciding." },
@@ -98,6 +100,20 @@ export async function useAllowance(env: Env, memberId: string, kind: "feedback" 
   if (n >= limit) return { ok: false, left: 0, limit };
   await env.DB.prepare("INSERT INTO usage (member_id, day, kind, n) VALUES (?, ?, ?, 1) ON CONFLICT(member_id, day, kind) DO UPDATE SET n = n + 1").bind(memberId, istDay(), kind).run();
   return { ok: true, left: Number.isFinite(limit) ? limit - n - 1 : null, limit: Number.isFinite(limit) ? limit : null };
+}
+
+/**
+ * The routes a member's chat should use, after the hidden monthly limit (ai.ts PLUS_MONTHLY_USD). Free members,
+ * visitors and Plus given by the owner keep the normal routes. A Plus member past the month's limit gets CHEAP_HOPS
+ * and `over: true`, so the reply can tell their phone to answer on its own if the cheaper models fail too. Nothing
+ * about this ever reaches the member's screen.
+ */
+export async function plusRoutes(env: Env, memberId: unknown, hops: Hop[]): Promise<{ hops: Hop[]; over: boolean }> {
+  if (!validId(memberId)) return { hops, over: false };
+  const ent = await entitlement(env, String(memberId)).catch(() => null);
+  if (!ent || ent.source === "staff") return { hops, over: false };
+  const spent = await monthSpend(env, String(memberId));
+  return spent >= PLUS_MONTHLY_USD ? { hops: CHEAP_HOPS, over: true } : { hops, over: false };
 }
 
 export interface JeetuAccess { ok: boolean; plus: boolean; tasteLeft: number; tasteEndsAt: string | null; who: "plus" | "free" | "visitor" }

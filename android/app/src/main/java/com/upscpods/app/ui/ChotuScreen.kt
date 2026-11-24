@@ -137,6 +137,8 @@ fun MascotTab(
                 } else TextButton(onClick = { showModel = true }) { Text(offlineLine(s)) }
             }
         }
+        // Shown once, before any chat is uploaded (DPDP notice; members were earlier told chats stay on the phone).
+        if (!chotu.chatNoticeSeen && !typing) ChatNotice(hindi) { chotu.acknowledgeChatNotice() }
         Chat(chotu, onOpenNeedToTalk, onRemember = onRemember, onOpenPod = onOpenPod, hindi = hindi, showWeek = showWeek, onJeetu = onJeetu, onPlanChange = onPlanChange)
     }
     if (about) AlertDialog(
@@ -144,7 +146,8 @@ fun MascotTab(
         title = { Text("About ${Brand.MASCOT_SHORT}") },
         text = {
             Text(
-                "Chats here aren't saved after you close the app, and Close the Day, mood and journal never go to ${Brand.MASCOT_SHORT}. " +
+                "Your chats with ${Brand.MASCOT_SHORT} are kept by Aspiran for 180 days and used to improve the app. They are never sold or shown to coaching centres. " +
+                    "Close the Day, mood and journal never go to ${Brand.MASCOT_SHORT}. " +
                     "The numbers ${Brand.MASCOT_SHORT} mentions are counted by the app from your own practice. " +
                     "It can be wrong, it's not a counsellor, and it never predicts ranks or compares you with anyone. If something feels heavy, Need to talk is one tap away.",
             )
@@ -237,13 +240,41 @@ private fun Consent(s: ChotuState.NotDownloaded, chotu: Chotu) {
     }
 }
 
-/** Me → Privacy: the space the without-internet download takes up, and the way to remove it. */
+/** The chat notice: what is kept, why, for how long, and that no changes nothing else. Two equal buttons. */
+@Composable
+private fun ChatNotice(hindi: Boolean, onOk: () -> Unit) {
+    Column(Modifier.padding(horizontal = 16.dp, vertical = 4.dp).heightIn(max = 260.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Text(CHAT_NOTICE_TITLE.pick(hindi), style = MaterialTheme.typography.titleSmall)
+        Text(CHAT_NOTICE_BODY.pick(hindi), style = MaterialTheme.typography.bodySmall)
+        OutlinedButton(onClick = onOk) { Text(if (hindi) "ठीक है" else "OK") }
+    }
+}
+
+private fun Pair<String, String>.pick(hindi: Boolean) = if (hindi) second else first
+internal val CHAT_NOTICE_TITLE = "Your ${Brand.MASCOT_SHORT} chats now come to Aspiran" to "आपकी ${Brand.MASCOT_SHORT} वाली बातें अब Aspiran तक आएँगी"
+internal val CHAT_NOTICE_BODY =
+    ("Until now your chats with ${Brand.MASCOT_SHORT} stayed on this phone. From now on they also come to Aspiran's server, " +
+        "where we keep them safely for 180 days and use them to improve the app (and, with Plus, your study profile). " +
+        "They are never sold and never shown to coaching centres. Messages about distress follow our care steps. " +
+        "Details are in the privacy policy.") to
+        ("अब तक आपकी ${Brand.MASCOT_SHORT} वाली बातें इसी फ़ोन पर रहती थीं। अब से वे Aspiran के सर्वर तक भी आएँगी, " +
+            "जहाँ हम उन्हें 180 दिन तक सुरक्षित रखेंगे और ऐप बेहतर बनाने में इस्तेमाल करेंगे (और Plus में आपकी पढ़ाई की प्रोफ़ाइल में)। " +
+            "ये कभी बेची नहीं जातीं और किसी कोचिंग सेंटर को नहीं दिखाई जातीं। परेशानी वाली बातों पर हमारे देखभाल के कदम लागू होते हैं। " +
+            "पूरी जानकारी प्राइवेसी पॉलिसी में है।")
+
+/** Me → Privacy: what happens to Chotu chats, the without-internet download's space, and removing it. */
 @Composable
 fun OfflineChotuSettings(chotu: Chotu) {
     var confirm by remember { mutableStateOf(false) }
     val s = chotu.state
     val kept = remember(s) { chotu.downloadedSize() }
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text("${Brand.MASCOT_SHORT} chats", style = MaterialTheme.typography.titleMedium)
+        Text(
+            "Kept by Aspiran for 180 days and used to improve the app (and, with Plus, your study profile). Never sold, never " +
+                "shown to coaching centres. Deleting your account deletes them.",
+            style = MaterialTheme.typography.bodySmall,
+        )
         Text("${Brand.MASCOT_SHORT} without internet", style = MaterialTheme.typography.titleMedium)
         if (kept != null) {
             Text("Downloaded ($kept).", style = MaterialTheme.typography.bodySmall)

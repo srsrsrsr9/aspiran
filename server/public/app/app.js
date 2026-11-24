@@ -558,7 +558,7 @@ function onboarding() {
         h("p", h("label", adult, " ", tl("onboard.adult"))),
         h("p", h("label", consent, " ", tl("onboard.kind"))),
         h("details", h("summary.small", hi ? "हम क्या रखते हैं" : "What we keep"),
-          h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). Which screens you open and what you tap go to PostHog, an analytics service, with every word on the screen hidden; you can switch that off in Me → Privacy. ",
+          h("p.small.muted", "Your notes, journal and answers stay in this browser. The server gets your sign-in (your Google email or username, kept only for signing in), a member id, your pod messages, and later, only if you choose, four things for pod matching (stage, attempt band, language, study time). Your chats with Chotu are kept for 180 days and used to improve the app. Which screens you open and what you tap go to PostHog, an analytics service, with every word on the screen hidden; you can switch that off in Me → Privacy. ",
             h("a", { href: "/legal/privacy.html", target: "_blank" }, "Privacy policy"), "."))),
       h("div.card", h("div.row", kulhad("warm", 48), h("div", h("strong", "Chotu"), " ", h("span.ai-tag", "study buddy"),
         h("p.small", { style: { margin: "4px 0 0" } }, hi ? "छोटू आपका स्टडी साथी है, कोई इंसान नहीं। वह रैंक या नतीजे नहीं बताता, और मुश्किल घड़ी में असली लोगों तक पहुँचाता है।"
@@ -577,6 +577,8 @@ function finishOnboarding() {
   P.setField("lang", POD_LANG[o.lang] ?? "english", "asked");
   // A record that they agreed, and to which version (DPDP). Only the random member id, nothing else.
   fetch("/consent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId, version: config.consentVersion, purposes: ["pods", "safety"] }) }).catch(() => {});
+  // Sign-up shows how Chotu chats are used (above, and in the terms), so the one-time chat notice isn't needed again.
+  recordChatNotice(memberId);
   onboarding.state = null;
   const tj = fromTry();
   M.track("onboarding_done", tj ? { from: "try" } : {});
@@ -3011,7 +3013,23 @@ function commonsJoin(r, box) {
 // --- Chotu ---------------------------------------------------------------------------------------
 // Talk · Prep · Plan. The distress check runs here first, and nothing that matched is sent. Close the Day,
 // mood and journal text are never sent; nor are your nickname or stage. Memory notes go only if you turn
-// on "Smarter Chotu" in Me → Privacy.
+// on "Smarter Chotu" in Me → Privacy. All Chotu chats come to the server and are used to improve the app (owner,
+// 24 Nov 2026; no switch). Members were told chats stay on their device, so each sees a one-time notice first; the
+// server keeps nothing until it has a record that the notice was shown (sign-up records it too: the terms cover it).
+
+const CHAT_NOTICE = "chats-notice-2026-11"; // the server's profile.ts CHAT_NOTICE_VERSION
+const chatNoticeSeen = () => store.get("chatNoticeSeen") === true;
+function recordChatNotice(memberId = profile()?.memberId) {
+  store.set("chatNoticeSeen", true);
+  if (memberId) post("/consent", { memberId, version: CHAT_NOTICE, purposes: ["chotu_chats_notice"] });
+}
+/** Shown once, above the chat: chats now come to Aspiran, how they're used, how they're protected. One OK, no choice. */
+function chatNoticeCard(onDone) {
+  return h("div.card.soft", h("strong", "Your Chotu chats now come to Aspiran"),
+    h("p.small", "Your chats with Chotu are kept on Aspiran's server for 180 days and used to improve the app (and, with Plus, your study profile). They are never sold and never shown to coaching centres. Messages about distress follow our care steps. ",
+      h("a", { href: "/legal/privacy.html#chotu-chats", target: "_blank" }, "Privacy policy")),
+    h("div.row", h("button", { onclick: () => { recordChatNotice(); onDone(); } }, "OK")));
+}
 
 const chotu = { mode: "talk", turns: [], busy: false, care: false, offline: null };
 const CHOTU_MODES = [["talk", "Talk"], ["prep", "Prep"], ["plan", "Plan"]];
@@ -3030,6 +3048,7 @@ function viewChotu() {
       h("div.center", kulhad(toneNow({ care: chotu.care, thinking: chotu.busy }), 72)), h("p.center", h("span.ai-tag", "Chotu")),
       h("div.chips.center", { role: "tablist" }, CHOTU_MODES.map(([m, l]) => h("button.chip", { role: "tab", "aria-pressed": String(chotu.mode === m), onclick: () => { chotu.mode = m; input.placeholder = CHOTU_HINT[m]; draw(); } }, l))),
       chotu.care && careBox(),
+      !chatNoticeSeen() && chatNoticeCard(draw),
       on("jeetu") && h("p.small.center", h("a", { href: "#jeetu" }, "A question about how to study? Ask Jeetu →")),
       chotu.mode === "plan" && h("a.card.link", { href: "#roadmap" }, h("div.row.between", h("div", h("strong", store.get("roadmap") ? "Your roadmap and this week's plan" : "Build your free roadmap"),
         h("div.small.muted", "Exam year, hours and weak papers in, a one-page plan to Prelims out.")), h("span", "→"))),
@@ -3048,7 +3067,8 @@ function viewChotu() {
       talkTurns >= 15 && h("div.card.soft", h("p", "We've talked for a while. I'm glad to keep going, and your pod, or someone you trust, would be good company too."),
         h("div.row", h("a.btn", { href: "#pod" }, "Your pod"), h("a.btn", { href: "#talk" }, tr("nav.talk")))),
       h("div.row", h("div.grow", input), h("button.primary", { disabled: chotu.busy, onclick: send }, "Send")),
-      h("p.small.muted", "Chotu is not a person. It can be wrong, it doesn't predict ranks or results, and it never sees your journal, mood, nickname or stage."));
+      h("p.small.muted", "Chotu is not a person. It can be wrong, it doesn't predict ranks or results, and it never sees your journal, mood, nickname or stage. " +
+        "Your chats are kept for 180 days and used to improve the app."));
   };
   async function send() {
     const text = input.value.trim(); if (!text || chotu.busy) return;
@@ -3057,7 +3077,7 @@ function viewChotu() {
     if (distress(text)) { chotu.care = true; noteCare(); chotu.turns.push({ role: "user", content: text, care: true }); draw(); return; }
     chotu.turns.push({ role: "user", content: text }); chotu.busy = true; chotu.offline = null; draw();
     const notes = store.get("smarterChotu") ? P.memory().map((m) => "- " + m.text).join("\n") : "";
-    const body = { mode: chotu.mode, messages: chotu.turns.filter((t) => !t.care).slice(-8).map(({ role, content }) => ({ role, content })), context: { language: memberLang(), ...(notes ? { notes } : {}) } };
+    const body = { mode: chotu.mode, messages: chotu.turns.filter((t) => !t.care).slice(-8).map(({ role, content }) => ({ role, content })), context: { language: memberLang(), ...(notes ? { notes } : {}) }, installId: M.installId() };
     if (plusOn() && chotu.mode === "prep") body.memberId = profile().memberId;
     // What the app counted about your own week: Chotu uses these numbers as given and never makes one up.
     const facts = resultMode() ? null : CO.weekFacts();
@@ -3296,6 +3316,9 @@ function viewPrivacy() {
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Smarter Chotu"),
       h("label", h("input", { type: "checkbox", checked: !!store.get("smarterChotu"), onchange: (e) => { store.set("smarterChotu", e.target.checked); } }), " Send my approved notes to Chotu with each question"),
       h("p.small.muted", `Off by default. Only the ${P.memory().length} note(s) you approved in Profile, nothing else.`)),
+    h("div.card", h("h3", { style: { marginTop: 0 } }, "Chotu chats"),
+      h("p.small.muted", "Kept on Aspiran's server for 180 days and used to improve the app (and, with Plus, your study profile). Never sold, never shown to coaching centres. Deleting your account deletes them. ",
+        h("a", { href: "/legal/privacy.html#chotu-chats", target: "_blank" }, "Details"))),
     h("div.card", h("h3", { style: { marginTop: 0 } }, "Result-day mode"),
       h("p.small", "For 72 hours: the Adda shrinks to one card, Chotu stays quiet, no wins posts and no offers. It turns on by itself on UPSC result days."),
       rm && rm.until > Date.now() ? h("button", { onclick: () => { store.del("resultMode"); render(); } }, "Switch it off")

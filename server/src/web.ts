@@ -6,6 +6,7 @@ import { ensureSchema, sha256Hex } from "./staff";
 import { mailOn, sendMail } from "./mail";
 import { business } from "./payments";
 import { siteContent } from "./site-content";
+import { CUT_LINE, OFF_MARKER, guardAfter, guardBefore, takeOffMarker } from "./guard";
 
 /**
  * The website (aspiran.in) talks to two routes here:
@@ -47,6 +48,7 @@ What you never do:
 - Never respond to feelings about prep, stress or results beyond one kind line: say you're a chai cup, not a person, and their pod (real people) is where that belongs.
 - Never ask for passwords, Aadhaar, payment details or documents.
 - Never name or criticise coaching institutes or other apps.
+- If the message has nothing to do with UPSC, studying or Aspiran (for example writing code, homework for something else, film or cricket chat), say in one line that you're here for their prep, and put ${OFF_MARKER} at the very end of your reply. Never explain it or write it anywhere else.
 
 Facts about Aspiran (use only these):
 - Small pods of 6 to 8 aspirants at the same stage. Alone first, then together: you answer alone, then compare and discuss.
@@ -138,20 +140,28 @@ async function webChotu(req: Request, env: Env): Promise<Response> {
     return json({ reply: LIMIT_LINE[lang], limit: true, ai: false });
   }
 
+  // Abuse: a day-long cut-off with one calm line (guard.ts), the same rules as the app's free Chotu.
+  const guardKey = { key: "w:" + who, device: null };
+  if (await guardBefore(env, guardKey, null)) return json({ reply: CUT_LINE[lang], limit: true, resting: true, ai: false });
+
   const details = cleanDetails(body.details);
   const visitor = Object.entries(details).map(([k, v]) => `${k}: ${v}`).join("; ") || "nothing yet";
   const now = istNow();
   const system = PROMPT.replace("{{visitor}}", visitor).replace("{{time}}", now.toISOString().slice(11, 16));
   try {
-    const { text } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], WEB_ROUTES[lang], "visitor");
-    await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), lang);
-    return json({ reply: text.trim(), ai: true });
+    const raw = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], WEB_ROUTES[lang], "visitor");
+    const { text, offTopic } = takeOffMarker(raw.text);
+    await guardAfter(env, guardKey.key, offTopic);
+    await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text, lang);
+    return json({ reply: text, ai: true });
   } catch (e) {
     if (lang === "hi" && !(e instanceof AiBlocked)) {
       try {
-        const { text } = await callChat(env, "chotu", [{ role: "system", content: system + "\nAnswer in simple English." }, ...turns], WEB_ROUTES.en, "visitor");
-        await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text.trim(), "en");
-        return json({ reply: text.trim(), ai: true, fallback: true });
+        const raw = await callChat(env, "chotu", [{ role: "system", content: system + "\nAnswer in simple English." }, ...turns], WEB_ROUTES.en, "visitor");
+        const { text, offTopic } = takeOffMarker(raw.text);
+        await guardAfter(env, guardKey.key, offTopic);
+        await saveTurn(env, body.visitorId, turns[turns.length - 1].content, text, "en");
+        return json({ reply: text, ai: true, fallback: true });
       } catch { /* fall through */ }
     }
     return json({ error: "Chotu can't talk just now. Try again in a minute.", offline: true }, 503);
