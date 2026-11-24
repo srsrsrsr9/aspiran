@@ -4,6 +4,7 @@ import { forgetAccount } from "./auth";
 import { forgetInstituteMember } from "./institutes";
 import { anonymiseStatements } from "./metrics";
 import { forgetCounts, sweepPhotos } from "./rooms";
+import { crmExport, forgetCrmMember } from "./marketing";
 
 /**
  * DPDP: consent records, and a member's right to get or erase what the server holds about them.
@@ -49,7 +50,7 @@ export async function exportMember(env: Env, memberId: string, via: string, by: 
   return {
     exportedAt: new Date().toISOString(),
     note: "Everything the Aspiran server holds about this member id. Journal, mood, progress and saved cards live only on the member's own device.",
-    account, member, consents, reportsAboutTheirMessages: reports, pod, usageEvents: events, feedback,
+    account, member, consents, reportsAboutTheirMessages: reports, pod, usageEvents: events, feedback, marketingList: await crmExport(env, memberId),
   };
 }
 
@@ -82,6 +83,7 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
   await env.DB.prepare("DELETE FROM pod_merge_optouts WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await sweepPhotos(env, { member: memberId }).catch(() => null);
   await forgetInstituteMember(env, memberId).catch(() => {}); // coaching centres: their answers, doubts and messages
+  await forgetCrmMember(env, memberId); // the marketing list
   await forgetAccount(env, memberId);
   await logRequest(env, "delete", memberId, via, by);
   await bump(env, "data_deletions");

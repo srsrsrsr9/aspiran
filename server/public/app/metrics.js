@@ -126,7 +126,8 @@ export async function boot() {
     const q = new URLSearchParams(location.search);
     // The website's links say which button was pressed (utm_medium): kept as "site:hero", "site:price" and so on.
     const utm = q.get("utm_source") && (q.get("utm_source") + (q.get("utm_medium") ? ":" + q.get("utm_medium") : ""));
-    const ok = await post("/events", { events: [{ name: "first_open", props: { source: q.get("src") ?? utm, invite: q.get("invite") } }] });
+    // The whole utm set (source/medium/campaign) goes too, so a link tagged utm_campaign=<lead magnet> counts there.
+    const ok = await post("/events", { events: [{ name: "first_open", props: { source: q.get("src") ?? utm, invite: q.get("invite"), referrer: q.get("utm_source") ? location.search.slice(1) : undefined } }] });
     if (ok) { s.firstOpenSent = true; s.firstOpenDay = day(); }
   }
   if (s.lastOpen !== day()) { s.lastOpen = day(); track("app_open"); }

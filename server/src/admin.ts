@@ -25,6 +25,7 @@ import { recallFunnel, sendRecalls } from "./try-recall";
 import { DEFAULT_GROWTH, podMode } from "./rooms";
 import { DEFAULT_BUSINESS, DEFAULT_PRICING, PRICING_KEY, business, cleanBusiness, cleanPricing, listPayments, pricing, refundPayment } from "./payments";
 import { ensureInstSchema } from "./institutes";
+import { marketingRoutes } from "./marketing";
 import { INPACK, LANG_CODES, type LangStatus, clearDistressCache, distressList, goLiveGaps, isLang, langName, languageState, languageStatus } from "./langs";
 
 /**
@@ -56,6 +57,9 @@ export async function adminApi(req: Request, env: Env, path: string): Promise<Re
   }
   return bad("Not found", 404);
 }
+
+// Marketing: lead magnets, sign-ups by source, and the people list (marketing.ts).
+marketingRoutes(route);
 
 const page = (url: URL, max = 200) => Math.min(Math.max(Number(url.searchParams.get("limit")) || 100, 1), max);
 const like = (q: string) => `%${q.replace(/[%_]/g, "")}%`;

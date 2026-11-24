@@ -1,4 +1,5 @@
 import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
+import { webHit } from "./marketing";
 import { extraDistress } from "./langs";
 import { type Env, HELPLINES, bad, distress, istDay, istNow, json } from "./shared";
 import { ensureSchema, sha256Hex } from "./staff";
@@ -112,6 +113,7 @@ export async function webRoute(req: Request, env: Env, path: string): Promise<Re
   if (path === "/web/chotu" && req.method === "POST") return webChotu(req, env);
   if (path === "/web/lead" && req.method === "POST") return webLead(req, env);
   if (path === "/web/site-content" && req.method === "GET") return siteContent(env);
+  if (path === "/web/hit" && req.method === "POST") return webHit(req, env);
   return null;
 }
 
