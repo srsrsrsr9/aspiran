@@ -3,7 +3,7 @@ import { bump, ensureSchema, sha256Hex } from "./staff";
 import { forgetAccount } from "./auth";
 import { forgetInstituteMember } from "./institutes";
 import { anonymiseStatements } from "./metrics";
-import { sweepPhotos } from "./rooms";
+import { forgetCounts, sweepPhotos } from "./rooms";
 
 /**
  * DPDP: consent records, and a member's right to get or erase what the server holds about them.
@@ -76,6 +76,7 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
     await env.POD.get(env.POD.idFromName(room_id)).fetch(`https://pod/forget?pod=${encodeURIComponent(room_id)}&member=${encodeURIComponent(memberId)}`, { method: "POST" }).catch(() => null);
   }
   await env.DB.prepare("DELETE FROM room_members WHERE member_id = ?").bind(memberId).run().catch(() => {});
+  forgetCounts();
   await env.DB.prepare("DELETE FROM room_starters WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await env.DB.prepare("DELETE FROM interview_uses WHERE member_id = ?").bind(memberId).run().catch(() => {});
   await env.DB.prepare("DELETE FROM pod_merge_optouts WHERE member_id = ?").bind(memberId).run().catch(() => {});

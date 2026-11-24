@@ -32,11 +32,18 @@ const costOf = (model: string, tin: number | null, tout: number | null) => {
   return p && (tin || tout) ? ((tin ?? 0) * p[0] + (tout ?? 0) * p[1]) / 1e6 : null;
 };
 
+// A call that answered also adds to two running totals for the day (daily_counts), so the cap check in gate() reads
+// two rows instead of every call made today (24 Nov 2026, D1 read savings).
+const CALLS_OK = "llm_calls_ok", TOKENS_OK = "llm_tokens_ok";
 const logger = (env: Env, purpose: Purpose, model: string, provider: string | null = null, who: Who = "team") =>
-  (status: string, ms: number | null, tin: number | null, tout: number | null, error: string | null) =>
-    env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error, provider, who, cost_usd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
-      .bind(new Date().toISOString(), istDay(), purpose, model, status, ms, tin, tout, error?.slice(0, 200) ?? null, provider, who,
-        provider === "groq" ? costOf(model, tin, tout) : null).run().catch(() => {});
+  (status: string, ms: number | null, tin: number | null, tout: number | null, error: string | null) => {
+    const day = istDay();
+    const row = env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error, provider, who, cost_usd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+      .bind(new Date().toISOString(), day, purpose, model, status, ms, tin, tout, error?.slice(0, 200) ?? null, provider, who,
+        provider === "groq" ? costOf(model, tin, tout) : null);
+    const add = (metric: string, n: number) => env.DB.prepare("INSERT INTO daily_counts (day, metric, n) VALUES (?, ?, ?) ON CONFLICT(day, metric) DO UPDATE SET n = n + excluded.n").bind(day, metric, n);
+    return env.DB.batch(status === "ok" ? [row, add(CALLS_OK, 1), add(TOKENS_OK, (tin ?? 0) + (tout ?? 0))] : [row]).then(() => {}).catch(() => {});
+  };
 
 /** Throws AiBlocked (and logs it) if an admin switched this off or today's caps are used up. */
 async function gate(env: Env, purpose: Purpose, log: ReturnType<typeof logger>) {
@@ -46,7 +53,8 @@ async function gate(env: Env, purpose: Purpose, log: ReturnType<typeof logger>) 
   if (!c.enabled) why = "AI turned off by an admin";
   else if (!c.purposes[purpose]) why = `AI ${purpose} turned off by an admin`;
   else {
-    const today = await env.DB.prepare("SELECT COUNT(*) AS calls, COALESCE(SUM(tokens_in + tokens_out), 0) AS tokens FROM llm_calls WHERE day = ? AND status = 'ok'")
+    const today = await env.DB.prepare(`SELECT COALESCE(SUM(CASE WHEN metric = '${CALLS_OK}' THEN n END), 0) AS calls,
+      COALESCE(SUM(CASE WHEN metric = '${TOKENS_OK}' THEN n END), 0) AS tokens FROM daily_counts WHERE day = ? AND metric IN ('${CALLS_OK}', '${TOKENS_OK}')`)
       .bind(istDay()).first<{ calls: number; tokens: number }>();
     if ((today?.calls ?? 0) >= c.dailyCallCap) why = "Daily AI call limit reached";
     else if ((today?.tokens ?? 0) >= c.dailyTokenCap) why = "Daily AI token limit reached";

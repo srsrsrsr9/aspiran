@@ -3,6 +3,7 @@ import { devTokenAllowed } from "./auth-dev";
 import { type FirebaseClaims, verifyFirebaseToken } from "./firebase-token";
 import { mailOn } from "./mail";
 import { logEvent } from "./metrics";
+import { forgetCounts } from "./rooms";
 import { forgetLogin, isPasswordToken, usernameOf, verifyPasswordToken } from "./password";
 import { type Env, bad, json } from "./shared";
 import { type Staff, ensureSchema, flags, label, sha256Hex } from "./staff";
@@ -110,6 +111,7 @@ export async function upsertAccount(env: Env, who: Identity, opts: { memberHint?
     if (tomb) await writeAudit(env, who.uid, "suspend", "Signed up again after an erasure while suspended", null);
     acct = (await getAccount(env, who.uid))!;
     isNew = true;
+    forgetCounts();
   } else if (who.phone !== acct.phone || who.email !== acct.email || (appVersion && appVersion !== acct.app_version)) {
     // Firebase is the source of truth for the phone or email (they can change, e.g. a linked Google account).
     await env.DB.prepare("UPDATE accounts SET phone = ?, email = ?, provider = ?, app_version = COALESCE(?, app_version) WHERE uid = ?")

@@ -620,12 +620,12 @@ route("POST", /^results$/, "flags", async ({ env, s, body }) => {
 });
 
 /** Open pods until this many sign-ups, then matched pods switch on (rooms.ts). */
-route("GET", /^growth\/threshold$/, "flags", async ({ env }) => json(await podMode(env)));
+route("GET", /^growth\/threshold$/, "flags", async ({ env }) => json(await podMode(env, true)));
 route("POST", /^growth\/threshold$/, "flags", async ({ env, s, body }) => {
   const t = Math.round(Number(body.signupThreshold));
   if (!(t >= 0 && t <= 10_000_000)) return bad("signupThreshold must be a number of sign-ups (0 switches matched pods on now)");
   await setSetting(env, "growth", { ...(await getSetting(env, "growth", DEFAULT_GROWTH)), signupThreshold: t }, label(s));
-  return json(await podMode(env));
+  return json(await podMode(env, true));
 });
 
 // --- Feature flags --------------------------------------------------------------------------

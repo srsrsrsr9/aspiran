@@ -215,12 +215,18 @@ export async function publicLibrary(env: Env, kinds?: string[]): Promise<Respons
   // The whole library is about 12 MB of JSON: building it on every request ran out of CPU. A page that needs a few kinds
   // reads only those; the whole thing is built once per change and kept in R2 (an hour at most, in case a change slips by).
   const where = "en_editor IS NOT NULL AND status = 'approved'" + (kinds?.length ? ` AND kind IN (${kinds.map(() => "?").join(",")})` : "");
-  let mark = "";
-  if (!kinds?.length && env.MEDIA) {
-    const s = await env.DB.prepare(`SELECT count(*) n, max(updated_at) u, total(length(json)) j, total(length(en_editor) + length(coalesce(hi_editor, ''))
-      + length(coalesce(hi_checked_on, '')) + length(coalesce(approvals, '')) + length(coalesce(translations, ''))) a FROM library WHERE ${where}`)
-      .first<{ n: number; u: string | null; j: number; a: number }>();
-    mark = [s?.n, s?.u, s?.j, s?.a, live.join(","), Math.floor(Date.now() / 3_600_000)].join("|");
+  let mark = "", memoKey = "";
+  const hour = Math.floor(Date.now() / 3_600_000), rev = await libraryRev(env);
+  if (kinds?.length) {
+    // A few kinds (the website, Try one topic, the shelf): kept in this Worker until the library changes.
+    if (rev !== null) {
+      memoKey = kinds.join(",");
+      mark = [rev, live.join(","), hour].join("|");
+      const m = kindsMemo.get(memoKey);
+      if (m?.mark === mark) return new Response(m.body, { headers });
+    }
+  } else if (env.MEDIA) {
+    mark = [rev ?? await oldFingerprint(env, where), live.join(","), hour].join("|");
     const hit = await env.MEDIA.get(LIBRARY_CACHE);
     if (hit && hit.customMetadata?.mark === mark) return new Response(hit.body, { headers });
   }
@@ -249,12 +255,38 @@ export async function publicLibrary(env: Env, kinds?: string[]): Promise<Respons
     return { id: r.id, kind: r.kind, updatedAt: r.updated_at, hindi: langs.includes("hi"), languages: langs, data };
   });
   const body = JSON.stringify({ items });
-  if (mark) await env.MEDIA!.put(LIBRARY_CACHE, body, { httpMetadata: { contentType: headers["content-type"] }, customMetadata: { mark } }).catch(() => {});
+  if (memoKey) {
+    kindsMemo.delete(memoKey);
+    if (body.length < KINDS_MEMO_MAX_BYTES) kindsMemo.set(memoKey, { mark, body });
+    while (kindsMemo.size > KINDS_MEMO_ENTRIES) kindsMemo.delete(kindsMemo.keys().next().value!);
+  } else if (mark) await env.MEDIA!.put(LIBRARY_CACHE, body, { httpMetadata: { contentType: headers["content-type"] }, customMetadata: { mark } }).catch(() => {});
   return new Response(body, { headers });
 }
 
 /** The built library, kept between requests. serveMedia refuses _cache/, so it is never served at /media. */
 const LIBRARY_CACHE = "_cache/library.json";
+
+/**
+ * Has the library changed? Triggers on the library table add one to library_rev on every insert, update and delete
+ * (migrations/0017_read_savings.sql), so the answer is one row. It used to be a sum over every approved row, about
+ * 1,360 rows read on each public page that needed the library: 85% of the account's daily D1 reads (24 Nov 2026).
+ * null until that migration is applied; the whole library then falls back to the old sum.
+ */
+async function libraryRev(env: Env): Promise<number | null> {
+  const r = await env.DB.prepare("SELECT n FROM library_rev WHERE id = 1").first<{ n: number }>().catch(() => null);
+  return r ? r.n : null;
+}
+
+async function oldFingerprint(env: Env, where: string): Promise<string> {
+  const s = await env.DB.prepare(`SELECT count(*) n, max(updated_at) u, total(length(json)) j, total(length(en_editor) + length(coalesce(hi_editor, ''))
+    + length(coalesce(hi_checked_on, '')) + length(coalesce(approvals, '')) + length(coalesce(translations, ''))) a FROM library WHERE ${where}`)
+    .first<{ n: number; u: string | null; j: number; a: number }>();
+  return [s?.n, s?.u, s?.j, s?.a].join("|");
+}
+
+/** Per-kind library answers kept in this Worker (memory is shared by every request it serves, so a few small ones only). */
+const kindsMemo = new Map<string, { mark: string; body: string }>();
+const KINDS_MEMO_ENTRIES = 6, KINDS_MEMO_MAX_BYTES = 4_000_000;
 
 /** Removes every language text not in `keep` from { en, hi, te, ... } objects. */
 export function keepLangs(node: any, keep: string[]) {
