@@ -30,6 +30,8 @@ and it refuses a video longer than 120 seconds. The Fish Audio key is read from 
 On this Mac:  export FISH_API_KEY="$(security find-generic-password -a aspiran -s fish-audio-api-key -w)"
 """
 import argparse, json, os, re, subprocess, sys, tempfile, urllib.request
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import hook  # noqa: E402  the silent opening line (shots marked "hook")
 from pathlib import Path
 
 W, H, FPS = 720, 1280, 30
@@ -171,6 +173,10 @@ def build(folder, lang, no_voice):
         lines = [l.strip() for l in s.get(lang, []) if l.strip()]
         if not lines:
             sys.exit(f"Shot {i} has no {lang} lines.")
+        if s.get("hook"):   # the old line, shown without a voice (see hook.py)
+            plan.append({"img": img, "lines": lines, "take": None, "voice": hook.length(lines), "hook": True,
+                         "translit": (s.get("translit") or {}).get(lang)})
+            continue
         take = folder / "audio" / lang / f"{i:02d}.mp3"
         if not take.is_file() and not no_voice:
             fish_tts(" ".join(lines), lang, voice, take)
@@ -199,6 +205,7 @@ def build(folder, lang, no_voice):
     # 3. Captions: a shot's lines share its voice time by length.
     cues = []
     for p in plan:
+        if p.get("hook"): continue   # the line is drawn into the picture; no caption on top of it
         chars = sum(len(l) for l in p["lines"])
         at = p["speak"]
         for l in p["lines"]:
@@ -225,6 +232,11 @@ def build(folder, lang, no_voice):
             run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", str(p["img"]), "-vf",
                  f"{big},{zp}:d={frames}:s={w}x{h}:fps={FPS},format=yuv420p", "-frames:v", str(frames),
                  "-c:v", "libx264", "-preset", "medium", "-crf", "20", str(dest)])
+            if p.get("hook"):
+                lead = p["speak"] - p["start"]
+                final = tmp / f"{tag}-{i:02d}-hook.mp4"
+                hook.overlay(dest, p, w, h, scale, FPS, tmp, f"{tag}{i}", final, lead)
+                dest = final
             made.append(dest)
         return made
 
@@ -246,6 +258,7 @@ def build(folder, lang, no_voice):
     # 5. The voice track: each take placed at its shot's speaking time, then loudness evened out.
     audio = tmp / "voice.m4a"
     takes = [(p["take"], p["speak"]) for p in plan if p["take"]]
+    effects = [(hook.sfx(p, tmp, f"h{i}", p["speak"] - p["start"]), p["start"]) for i, p in enumerate(plan) if p.get("hook")]
     if takes:
         inputs, parts = [], []
         for n, (f, at) in enumerate(takes):
@@ -258,6 +271,16 @@ def build(folder, lang, no_voice):
     else:
         run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=mono", "-t", f"{total:.3f}",
              "-c:a", "aac", "-b:a", "48k", str(audio)])
+    if effects:   # hook sounds go in after the voice is levelled, so they stay under it (about 10 dB quieter)
+        voiced = tmp / "voice-only.m4a"; audio.rename(voiced)
+        inputs, parts = ["-i", str(voiced)], []
+        for n, (f, at) in enumerate(effects, 1):
+            inputs += ["-i", str(f)]
+            parts.append(f"[{n}:a]adelay={int(at * 1000)}:all=1[e{n}]")
+        mix = "[0:a]" + "".join(f"[e{n}]" for n in range(1, len(effects) + 1))
+        run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex",
+             ";".join(parts) + f";{mix}amix=inputs={len(effects) + 1}:normalize=0,alimiter=limit=0.89[a]",
+             "-map", "[a]", "-t", f"{total:.3f}", "-c:a", "aac", "-b:a", "96k", "-ar", "44100", "-ac", "1", str(audio)])
 
     # 6. The app copy: no burned captions.
     silent_video = tmp / "app.mp4"
