@@ -19,6 +19,8 @@ import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
 import { insightsReport } from "./insights";
+import { glance, hourly } from "./glance";
+import { rollCohort, rollDay } from "./stat";
 import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
 import { recallFunnel, sendRecalls } from "./try-recall";
@@ -92,7 +94,15 @@ route("GET", /^overview$/, "analytics", async ({ env }) => {
 });
 
 // Insights (analytics scope part 2): plain-sentence cards from D1 and, once POSTHOG_PERSONAL_KEY is set, PostHog.
-route("GET", /^insights$/, "analytics", async ({ env }) => json(await insightsReport(env)));
+// Insights and Growth count over the events table, so each is worked out at most once an hour (?fresh=1 for now).
+route("GET", /^insights$/, "analytics", async ({ env, url }) => json(await hourly(env, "insights", url.searchParams.get("fresh") === "1", () => insightsReport(env))));
+// Home's "How it's going": read from the nightly roll-up (stat.ts), kept an hour (glance.ts).
+route("GET", /^glance$/, "analytics", async ({ env, url }) => json(await glance(env, url.searchParams.get("fresh") === "1")));
+// Count a day into the roll-up by hand (today so far, or a past day), and that day's sign-up cohort. Counts only.
+route("POST", /^stats\/roll$/, "analytics", async ({ env, body }) => {
+  const day = /^\d{4}-\d{2}-\d{2}$/.test(String(body.day ?? "")) ? String(body.day) : istDay();
+  return json({ ...(await rollDay(env, day)), cohort: await rollCohort(env, day, istDay()) });
+});
 
 // The home dashboard: one look at people, Plus, money, content, today's Chai, helper usage, leads and coaching centres.
 // Counts only, never who. Payments show only to roles that can see the Payments section.
@@ -534,7 +544,7 @@ route("GET", /^analytics$/, "analytics", async ({ env, url }) => {
 
 route("GET", /^community$/, "analytics", async ({ env }) => json(await communityMetrics(env)));
 // Growth: installs by source, activation, return by signup week, feedback, the paid funnel and the pod test (metrics.ts).
-route("GET", /^growth$/, "analytics", async ({ env }) => json(await growthReport(env)));
+route("GET", /^growth$/, "analytics", async ({ env, url }) => json(await hourly(env, "growth", url.searchParams.get("fresh") === "1", () => growthReport(env))));
 // "Try one topic" (try.ts): what visitors answered as they went, and contacts they chose to leave. ?format=csv to download.
 route("GET", /^try\/feedback$/, "analytics", async ({ env, url }) => {
   const { rows, contacts } = await tryFeedbackRows(env, page(url, 10000));

@@ -87,7 +87,7 @@ try {
 } finally { await setFlag("sign_in_required", false); }
 step("member ids can't be borrowed (token wins; no token means install-only once sign-in is required)");
 
-const g = await admin("growth");
+const g = await admin("growth?fresh=1");
 assert.equal(g.status, 200);
 const row = g.data.installsBySource.find((x) => x.source === src);
 assert.ok(row && row.installs === 1 && row.platform === "web", "installs by source");
@@ -98,7 +98,7 @@ assert.equal((await call("/admin/api/growth")).status, 401);
 step("the admin Growth report: installs by source, invites, activation, retention, feedback, paid funnel, pod test");
 
 assert.equal((await post("/privacy/delete", { memberId: me }, tok)).status, 200);
-const after = await admin("growth");
+const after = await admin("growth?fresh=1");
 assert.equal(after.data.installsBySource.find((x) => x.source === src)?.signups ?? 0, 0, "deleting unlinks the install from the member");
 step("deleting the account unlinks its events and install");
 

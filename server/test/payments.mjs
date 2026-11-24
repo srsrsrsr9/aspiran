@@ -151,7 +151,7 @@ try {
     await admin("flags", { flags: { ...flagsBefore, plus: true } });
     step("Play: off by default, a bad body refused, 503 without the service account, nothing granted");
 
-    const g = (await admin("growth")).data.paidFunnel;
+    const g = (await admin("growth?fresh=1")).data.paidFunnel;
     assert.ok(g.checkoutStarted >= 3 && g.paid >= 2 && g.refunded >= 1);
     step("the Growth page counts checkouts, payments and refunds");
   } finally {

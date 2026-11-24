@@ -33,6 +33,7 @@ import { authRoute, isContentRoute, isMemberRoute, memberGate, publicAuthConfig 
 import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
+import { statNightly } from "./stat";
 
 import { marketingNightly } from "./marketing";
 import { pruneWebChats, webRoute } from "./web";
@@ -303,6 +304,8 @@ export default {
     if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm, true));
     // Marketing: yesterday's lead-magnet and sign-up counts, and new leads and sign-ups onto the people list (marketing.ts).
     if (hm === "00:30") ctx.waitUntil(marketingNightly(env, at).then(log("marketing"), fail("marketing")));
+    // Analytics roll-up: yesterday's events counted once into stat_daily, for Home's "How it's going" (stat.ts).
+    if (hm === "01:00") ctx.waitUntil(statNightly(env, at).then(log("stats"), fail("stats")));
     // A provider set aside after a billing or key error gets one tiny test call a day, in a run of its own, before the
     // morning's drafting and chats; if it answers it's back in every route (ai.ts checkProviders).
     if (hm === "04:30") ctx.waitUntil(checkProviders(env).then(log("providers"), fail("providers")));

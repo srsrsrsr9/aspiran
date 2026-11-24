@@ -41,7 +41,7 @@ let r = await fetch(BASE + "/events", { method: "POST", headers: { "content-type
   { name: "mock_done", props: { paper: "gs1-2025", attempted: 80, of: 100, minutes: 110, score: 92 } },
 ] }) }).then((x) => x.json());
 assert.equal(r.kept, 4, "a practice answer without right/wrong is dropped");
-let ins = await staff("/admin/api/insights");
+let ins = await staff("/admin/api/insights?fresh=1");
 assert.equal(ins.status, 200, JSON.stringify(ins.data));
 const I = ins.data;
 assert.equal(I.posthogConnected, false);
@@ -62,6 +62,30 @@ assert.ok(I.cards.health.answers >= 2);
 assert.ok(!JSON.stringify(I).includes("Free text, with spaces!"), "free text is turned into a code");
 assert.ok(!JSON.stringify(I).includes("score"), "a mock's score is never kept");
 step("Insights: staff key only; every PostHog part says not connected without the key; our numbers and codes still show");
+
+// Home → "How it's going" (src/glance.ts, src/stat.ts): read from the roll-up, staff only, kept for an hour unless asked fresh.
+assert.equal((await fetch(BASE + "/admin/api/glance")).status, 401, "glance needs a staff key");
+assert.equal((await fetch(BASE + "/admin/api/stats/roll", { method: "POST", body: "{}" })).status, 401, "rolling needs a staff key");
+const rolled = await staff("/admin/api/stats/roll", {});
+assert.equal(rolled.status, 200, JSON.stringify(rolled.data));
+assert.ok(rolled.data.events >= 4, "today's events were counted");
+let gl = await staff("/admin/api/glance?fresh=1");
+assert.equal(gl.status, 200, JSON.stringify(gl.data));
+assert.equal(gl.data.cached, false);
+assert.ok(gl.data.marketing.funnel30 && Array.isArray(gl.data.marketing.sources), "marketing: funnel and sources");
+assert.ok(gl.data.product.activation && Array.isArray(gl.data.product.features), "product: activation and features");
+assert.ok(gl.data.product.features.some((f) => f.name === "practice_answer"), "practice shows in what gets used");
+assert.ok(gl.data.content.notes.most.some((p) => p.piece === "polity-governor"), "content: the note opened above");
+assert.equal(gl.data.daysCounted, 1, "only today has been counted");
+assert.ok(gl.data.content.practice.answers >= 2, "practice answers counted");
+assert.ok(!JSON.stringify(gl.data).includes(install), "no install id in the summary");
+assert.ok(!JSON.stringify(gl.data).includes("@example.com"), "no emails in the summary");
+gl = await staff("/admin/api/glance");
+assert.equal(gl.data.cached, true, "the second look comes from the hour's copy");
+step("Home summary: from the roll-up; staff only; marketing, product and content; kept for an hour; no emails or ids");
+
+const ins2 = await staff("/admin/api/insights");
+assert.equal(ins2.data.cached, true, "Insights is kept for an hour too");
 
 // --- Coaching-centre reports -------------------------------------------------------------------------------------------
 const flagsBefore = (await staff("/admin/api/flags")).data.flags;
@@ -168,7 +192,7 @@ try {
   step("leaving takes you out; a batch that drops under 5 hides");
 
   // Insights' organisations card: the centre's students and answers, D1 only.
-  ins = (await staff("/admin/api/insights")).data;
+  ins = (await staff("/admin/api/insights?fresh=1")).data;
   const orgA = ins.cards.organisations.centres.find((c) => c.id === A.id);
   assert.equal(orgA.students, 6);
   assert.equal(orgA.setAnswers30, 8, "the student who left took their answers with them");
