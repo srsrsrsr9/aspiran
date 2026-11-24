@@ -20,6 +20,7 @@ import { staffFrom, flags, ensureSchema, sha256Hex } from "./staff";
 import { type Env, HELPLINES, bad, distress, istDay, json } from "./shared";
 import { extraDistress } from "./langs";
 import { recallRoute } from "./try-recall";
+import { forgetCrmTry } from "./marketing";
 
 type Item = { id: string; kind: string; languages: string[]; data: any };
 
@@ -55,6 +56,7 @@ async function feedback(req: Request, env: Env, path: string): Promise<Response>
     const a = await env.DB.prepare("DELETE FROM try_feedback WHERE session_id = ?").bind(b.sessionId).run();
     const c = await env.DB.prepare("DELETE FROM try_contacts WHERE session_id = ?").bind(b.sessionId).run();
     const r = await env.DB.prepare("DELETE FROM try_recall WHERE session_id = ?").bind(b.sessionId).run();
+    await forgetCrmTry(env, b.sessionId);
     return json({ ok: true, deleted: (a.meta.changes ?? 0) + (c.meta.changes ?? 0) + (r.meta.changes ?? 0) });
   }
   const pathId = str(b.pathId, 64);

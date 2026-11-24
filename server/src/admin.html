@@ -153,6 +153,7 @@ const GROUPS = [
   ["Look after people", [["safety", "Safety queue", "shield", "safety"], ["moderation", "Moderation", "flag", "moderate"], ["members", "Members", "users", "members"], ["privacy", "Data requests", "lock", "privacy"]]],
   ["Content", [["content", "Content", "book", "content"], ["announcements", "Announcements", "megaphone", "announce"], ["languages", "Languages", "globe", "staff"]]],
   ["Growth", [["insights", "Insights", "spark", "analytics"], ["analytics", "Analytics", "chart", "analytics"], ["growth", "Growth", "growth", "analytics"], ["leads", "Website leads", "inbox", "analytics"], ["trytopic", "Try one topic", "target", "analytics"], ["posts", "Daily posts", "calendar", "flags"], ["institutes", "Coaching centres", "building", "staff"]]],
+  ["Marketing", [["magnets", "Lead magnets", "target", "analytics"], ["signups", "Sign-ups", "growth", "analytics"], ["people", "People", "users", "flags"]]],
   ["Money", [["payments", "Payments", "coin", "flags"]]],
   ["Running Aspiran", [["flags", "Feature flags", "layers", "flags"], ["llm", "Helpers and usage", "activity", "llm:view"], ["incidents", "Status and incidents", "alert", "incidents"], ["backups", "Backups", "database", "backups"]]],
   ["Team", [["staff", "Staff and roles", "key", "staff"], ["audit", "Audit log", "list", "audit"]]],
@@ -816,6 +817,236 @@ views.trytopic = async () => {
     h("p.muted", {}, "Each person agreed to be contacted once, about the full app opening or what they asked for. Nothing else. They can delete it themselves from the sample's last screen."),
     d.contacts.length ? h("div.card.scroll", {}, h("table", {}, h("tr", {}, ["When", "Contact", "Consent text", "Lang"].map((x) => h("th", {}, x))),
       d.contacts.map((c) => h("tr", {}, h("td", {}, ago(c.at)), h("td.mono", {}, c.contact), h("td", {}, c.consent_text), h("td", {}, c.lang))))) : h("p.muted", {}, "None yet."),
+  ];
+};
+
+// --- Marketing (marketing.ts): lead magnets, sign-ups by where people came from, and the people list ------------------
+// Numbers come from a nightly count (00:30 IST); "Count now" adds today. Nothing here sends a message: drafts are copied
+// into WhatsApp or email by the owner.
+const MKT_STAGE = { lead: "Lead", signed_up: "Signed up", active: "Active", plus: "Plus", quiet: "Gone quiet" };
+const MKT_STAGE_TONE = { lead: "info", signed_up: "brand", active: "ok", plus: "ok", quiet: "warn" };
+const MKT_KIND = { student: "Student", centre: "Coaching centre", other: "Other" };
+const MKT_CHANNEL = { site: "Website", search: "Search", direct: "Direct", telegram: "Telegram", whatsapp: "WhatsApp", youtube: "YouTube", instagram: "Instagram", invite: "Invite code", play: "Play Store", try: "Try one topic", "day3-email": "Day-3 email", app: "App" };
+const mktChannel = (c) => MKT_CHANNEL[c] || c;
+const mktPct = (a, b) => (b ? Math.round((a / b) * 100) + "%" : "–");
+const mktDays = () => (views.magnets.days ??= 30);
+const mktDaysSeg = (id) => Kit.seg([[7, "7 days"], [30, "30 days"], [90, "90 days"]], mktDays(), (v) => { views.magnets.days = v; show(id); });
+const mktRefresh = (id) => h("button", { onclick: Kit.busy(async () => { const r = await api("marketing/refresh", { body: {} }); toast(`Counted. ${num(r.crm.added)} people brought onto the list, ${num(r.crm.restaged)} stages updated.`, "ok"); await show(id); }) }, Kit.icon("clock"), "Count now");
+const mktRefreshed = (iso) => h("p.small.muted", {}, iso ? "Last counted by hand " + Kit.ago(iso) + ". " : "", "Counted every night at 00:30 for the day before. Count now adds today so far.");
+
+views.magnets = async () => {
+  const K = Kit, d = await api("marketing/magnets?days=" + mktDays());
+  const rows = d.magnets.filter((m) => m.on || m.view || m.visit || m.lead || m.signup || m.plus);
+  const sum = (k) => rows.reduce((a, m) => a + (m[k] || 0), 0);
+  const edit = () => {
+    const list = d.magnets.filter((m) => m.id !== "other").map((m) => ({ ...m }));
+    const box = h("div");
+    const draw = () => put(box, list.map((m, i) => h("div.card", { style: "margin:8px 0" },
+      h("div.row", {}, h("label.field", {}, h("span", {}, "Name"), h("input", { value: m.name, maxlength: 60, oninput: (e) => (m.name = e.target.value) })),
+        h("label.field", {}, h("span", {}, "Short name (in links: utm_campaign)"), h("input", { value: m.id, maxlength: 24, oninput: (e) => (m.id = e.target.value) })),
+        h("label", {}, h("input", { type: "checkbox", checked: m.on, onchange: (e) => (m.on = e.target.checked) }), " Show")),
+      h("label.field", {}, h("span", {}, "Page link (optional)"), h("input", { value: m.link || "", maxlength: 200, placeholder: "https://aspiran.in/…", oninput: (e) => (m.link = e.target.value), style: "width:100%" })),
+      h("label.field", {}, h("span", {}, "Words that mark it in a link's source, comma between (e.g. pyq)"), h("input", { value: (m.match || []).join(", "), oninput: (e) => (m.match = e.target.value), style: "width:100%" })),
+      h("button.sm.ghost", { onclick: () => { list.splice(i, 1); draw(); } }, K.icon("trash"), "Remove"))),
+      h("button.sm", { onclick: () => { list.push({ id: "", name: "", link: "", match: [], on: true }); draw(); } }, K.icon("plus"), "Add a lead magnet"));
+    draw();
+    K.modal("Edit lead magnets", h("div", {}, h("p.muted", {}, "A visit or sign-up counts for the first lead magnet whose words appear in where it came from. A link with utm_campaign set to the short name always counts there."), box),
+      [(close) => h("button.primary", { onclick: K.busy(async () => { await api("marketing/magnets", { body: { magnets: list } }); close(); toast("Saved. New counts use it from the next count.", "ok"); await show("magnets"); }) }, "Save")]);
+  };
+  views.magnets.st ??= {};
+  return [
+    K.pageHead("Lead magnets", "The free things that bring people in, and how far each takes them: seen, opened the app, left a number or email, signed up, bought Plus.",
+      mktDaysSeg("magnets"), mktRefresh("magnets"), can("flags") ? h("button", { onclick: edit }, K.icon("edit"), "Edit list") : null),
+    mktRefreshed(d.refreshed),
+    h("div.tiles", {},
+      K.kpi({ label: "Seen", value: num(sum("view")), sub: "free pages and the open demo" }),
+      K.kpi({ label: "Opened the app", value: num(sum("visit")), sub: "first visits from a link" }),
+      K.kpi({ label: "Left a number or email", value: num(sum("lead")), sub: "with their yes" }),
+      K.kpi({ label: "Signed up", value: num(sum("signup")), sub: "free accounts" }),
+      K.kpi({ label: "Bought Plus", value: num(sum("plus")) })),
+    K.table([
+      { key: "name", label: "Lead magnet", render: (m) => h("div", {}, h("b", {}, m.name), m.link ? h("div.small", {}, h("a", { href: m.link, target: "_blank", rel: "noopener" }, m.link.replace(/^https:\/\//, ""))) : null, m.on ? null : h("span.chip", {}, "hidden")) },
+      { key: "view", label: "Seen", num: true, render: (m) => num(m.view) },
+      { key: "visit", label: "Opened the app", num: true, render: (m) => num(m.visit) },
+      { key: "lead", label: "Left a contact", num: true, render: (m) => num(m.lead) },
+      { key: "signup", label: "Signed up", num: true, render: (m) => num(m.signup) },
+      { key: "plus", label: "Plus", num: true, render: (m) => num(m.plus) },
+      { key: "rate", label: "Sign-ups per app visit", num: true, value: (m) => (m.visit ? m.signup / m.visit : null), render: (m) => mktPct(m.signup, m.visit) },
+    ], { rows, state: views.magnets.st, noun: "lead magnets", csv: `lead-magnets-${mktDays()}-days.csv`, sort: ["signup", "desc"],
+      empty: { icon: "target", title: "Nothing counted yet", text: "Press Count now, or wait for tonight's count." } }),
+    K.card({ title: "Make every link count" },
+      h("p", {}, "Add these to the end of any link you share, so its visits and sign-ups land on the right line above:"),
+      h("p.mono", {}, "?utm_source=whatsapp&utm_medium=group&utm_campaign=pyq"),
+      h("p.muted", {}, "utm_source: where you posted it (whatsapp, telegram, youtube, instagram). utm_campaign: the lead magnet's short name. The daily Telegram and WhatsApp posts already do this. Page views on aspiran.in count once the website sends them (see the marketing note)."),
+      h("button.sm", { onclick: () => K.copy("?utm_source=whatsapp&utm_medium=group&utm_campaign=pyq", "Copied") }, K.icon("copy"), "Copy the example")),
+  ];
+};
+
+views.signups = async () => {
+  const K = Kit, d = await api("marketing/signups?days=" + mktDays());
+  const f = d.websiteFunnel;
+  views.signups.st ??= {}; views.signups.st2 ??= {};
+  return [
+    K.pageHead("Sign-ups", "Free sign-ups day by day and where they came from, and the website's path from visitor to member.", mktDaysSeg("signups"), mktRefresh("signups")),
+    mktRefreshed(d.refreshed),
+    h("div.tiles", {},
+      K.kpi({ label: "Opened the app", value: num(d.totals.visit) }),
+      K.kpi({ label: "Left a number or email", value: num(d.totals.lead) }),
+      K.kpi({ label: "Signed up", value: num(d.totals.signup), sub: mktPct(d.totals.signup, d.totals.visit) + " of app visits", trend: d.daily.map((x) => x.n) }),
+      K.kpi({ label: "Bought Plus", value: num(d.totals.plus), sub: mktPct(d.totals.plus, d.totals.signup) + " of sign-ups" })),
+    bars("Sign-ups a day", d.daily.map((x) => ({ label: K.day(x.day), v: x.n }))),
+    K.card({ title: "From the website to a member", sub: "Each step is counted on its own (we don't follow people from the website into the app), so read it as a rough path." },
+      h("table", {}, h("tr", {}, h("th", {}, "Step"), h("th.n", {}, "People"), h("th.n", {}, "Of the step before")),
+        f.map((s, i) => h("tr", {}, h("td", {}, s.step), h("td.n", {}, num(s.n)), h("td.n", {}, i ? mktPct(s.n, f[i - 1].n) : ""))))),
+    h("h3", {}, "Sign-ups by channel, day by day"),
+    K.table([{ key: "day", label: "Day", render: (x) => K.day(x.day) }, { key: "n", label: "All", num: true },
+      ...d.channels.map((c) => ({ key: "c:" + c, label: mktChannel(c), num: true, value: (x) => x.byChannel[c] || 0 }))],
+    { rows: [...d.daily].reverse(), state: views.signups.st, noun: "days", csv: `signups-by-channel-${mktDays()}-days.csv`, pageSize: 31 }),
+    h("h3", {}, "By source"),
+    h("p.muted", {}, "The source is the link's utm_source:utm_medium (for example site:hero is the website's top button, telegram:chai the daily Chai post)."),
+    K.table([
+      { key: "source", label: "Source", render: (r) => h("span.mono", {}, r.source) },
+      { key: "channel", label: "Channel", value: (r) => mktChannel(r.channel) },
+      { key: "visit", label: "Opened the app", num: true }, { key: "lead", label: "Left a contact", num: true },
+      { key: "signup", label: "Signed up", num: true }, { key: "plus", label: "Plus", num: true },
+      { key: "rate", label: "Sign-ups per visit", num: true, value: (r) => (r.visit ? r.signup / r.visit : null), render: (r) => mktPct(r.signup, r.visit) },
+    ], { rows: d.bySource, state: views.signups.st2, search: (r) => r.source, searchLabel: "Search sources", noun: "sources", csv: `signups-by-source-${mktDays()}-days.csv`,
+      empty: { icon: "growth", title: "Nothing counted yet", text: "Press Count now, or wait for tonight's count." } }),
+  ];
+};
+
+// Message drafts: the owner copies one into WhatsApp or email and sends it. Every draft says how to stop.
+const MKT_DRAFTS = {
+  welcome: { label: "Welcome: try a topic free",
+    en: (n) => `Hello${n}, this is Aspiran. Thank you for leaving your number. You can try one whole UPSC topic free, with PYQs, no account needed: https://app.aspiran.in/app/#try\n\nReply here with any question; a person reads it. Reply STOP and we won't message again.`,
+    hi: (n) => `नमस्ते${n}, यह Aspiran है। नंबर छोड़ने के लिए धन्यवाद। UPSC का एक पूरा टॉपिक PYQs के साथ मुफ़्त आज़माइए, बिना अकाउंट के: https://app.aspiran.in/app/#try\n\nकोई सवाल हो तो यहीं जवाब दीजिए; एक व्यक्ति पढ़ता है। STOP लिखें तो हम दोबारा संदेश नहीं भेजेंगे।` },
+  nudge: { label: "Nudge: today's free PYQs and Chai",
+    en: (n) => `Hello${n}, a short note from Aspiran. Today's free PYQs and the Chai current-affairs card are up, in English and Hindi: https://app.aspiran.in/app/\n\nReply STOP and we won't message again.`,
+    hi: (n) => `नमस्ते${n}, Aspiran की ओर से छोटा सा संदेश। आज के मुफ़्त PYQs और चाय करेंट अफ़ेयर्स कार्ड आ गए हैं, हिंदी और अंग्रेज़ी में: https://app.aspiran.in/app/\n\nSTOP लिखें तो हम दोबारा संदेश नहीं भेजेंगे।` },
+  centre: { label: "Coaching centre: ask for a call",
+    en: (n) => `Hello${n}, thank you for asking about Aspiran for your centre. Could we have a 15-minute call this week? Tell us a time that suits you, and we'll show you what your students would see.\n\nAspiran`,
+    hi: (n) => `नमस्ते${n}, अपने सेंटर के लिए Aspiran के बारे में पूछने के लिए धन्यवाद। क्या इस हफ़्ते 15 मिनट बात हो सकती है? जो समय आपको ठीक लगे बताइए, हम दिखाएँगे कि आपके छात्र क्या देखेंगे।\n\nAspiran` },
+  plus: { label: "Plus: a gentle word",
+    en: (n) => `Hello${n}, glad you're studying with Aspiran. If you'd like more, Plus is ₹3,999 for a year. The free app stays free either way: https://app.aspiran.in/app/\n\nReply STOP and we won't message again.`,
+    hi: (n) => `नमस्ते${n}, ख़ुशी है कि आप Aspiran के साथ पढ़ रहे हैं। अगर और चाहिए तो Plus ₹3,999 में एक साल के लिए है। मुफ़्त ऐप हर हाल में मुफ़्त रहेगा: https://app.aspiran.in/app/\n\nSTOP लिखें तो हम दोबारा संदेश नहीं भेजेंगे।` },
+};
+const mktIn = (days) => new Date(Date.now() + 5.5 * 3600e3 + days * 864e5).toISOString().slice(0, 10);
+
+function mktMessage(p) {
+  const K = Kit;
+  const pick = h("select", {}, Object.entries(MKT_DRAFTS).map(([k, v]) => h("option", { value: k, selected: k === (p.kind === "centre" ? "centre" : p.stage === "lead" ? "welcome" : "nudge") }, v.label)));
+  const lang = h("select", {}, h("option", { value: "en", selected: p.lang !== "hi" }, "English"), h("option", { value: "hi", selected: p.lang === "hi" }, "Hindi"));
+  const area = h("textarea", { rows: 8, style: "width:100%" });
+  const fill = () => { area.value = MKT_DRAFTS[pick.value][lang.value](p.name ? " " + p.name.split(",")[0] : ""); };
+  pick.onchange = fill; lang.onchange = fill; fill();
+  const phone = p.contact_kind === "phone" ? p.contact.replace(/\D/g, "") : null, email = p.contact_kind === "email" ? p.contact : null;
+  const note = h("input", { placeholder: "What you sent (optional)", maxlength: 300, style: "width:100%" });
+  const next = h("input", { type: "date", value: mktIn(7) });
+  K.modal("Message " + (p.name || p.contact || "this person"), h("div", {},
+    p.contact ? null : h("div.banner.warn", {}, "No number or email for this person: they signed up in the app, and their sign-in details weren't given for marketing. Reach them in the app (Announcements) instead."),
+    h("p.muted", {}, "This is a draft. Nothing is sent from here: copy it, or open WhatsApp or email, check it and send it yourself. Best between 9 am and 8 pm."),
+    h("div.row", {}, pick, lang), area,
+    h("div.row", { style: "margin-top:8px" },
+      h("button.sm", { onclick: () => K.copy(area.value, "Copied") }, K.icon("copy"), "Copy"),
+      phone ? h("a.k-btn", { href: `https://wa.me/${phone}?text=${encodeURIComponent(area.value)}`, target: "_blank", rel: "noopener", onclick: (e) => { e.currentTarget.href = `https://wa.me/${phone}?text=${encodeURIComponent(area.value)}`; } }, "Open in WhatsApp") : null,
+      email ? h("a.k-btn", { href: "#", onclick: (e) => { e.preventDefault(); location.href = `mailto:${email}?subject=${encodeURIComponent("Aspiran")}&body=${encodeURIComponent(area.value)}`; } }, "Open in email") : null),
+    h("h3", {}, "After you send it"), note, h("label.field", {}, h("span", {}, "Next follow-up (clear it for none)"), next)),
+    [(close) => h("button.primary", { onclick: K.busy(async () => { await api(`crm/${p.id}/contacted`, { body: { note: note.value || MKT_DRAFTS[pick.value].label, via: phone ? "WhatsApp" : email ? "email" : "app", nextFollowUp: next.value || null } }); close(); toast("Noted.", "ok"); await show("people"); }) }, "I sent it")]);
+}
+
+function mktEdit(p) {
+  const K = Kit;
+  const stage = h("select", {}, p.member_id ? h("option", { value: "auto", selected: p.stage_by === "auto" }, "Follow the app (" + (MKT_STAGE[p.stage] || p.stage) + ")") : null,
+    Object.entries(MKT_STAGE).map(([v, l]) => h("option", { value: v, selected: p.stage_by !== "auto" && p.stage === v }, l)));
+  const kind = h("select", {}, Object.entries(MKT_KIND).map(([v, l]) => h("option", { value: v, selected: p.kind === v }, l)));
+  const name = h("input", { value: p.name || "", maxlength: 80 });
+  const lang = h("select", {}, [["en", "English"], ["hi", "Hindi"], ["te", "Telugu"]].map(([v, l]) => h("option", { value: v, selected: (p.lang || "en") === v }, l)));
+  const tags = h("input", { value: p.tags || "", placeholder: "e.g. hyderabad, prelims-2027, wants-hindi", maxlength: 240, style: "width:100%" });
+  const follow = h("input", { type: "date", value: p.next_follow_up || "" });
+  const notes = h("textarea", { rows: 6, maxlength: 2000, style: "width:100%" }); notes.value = p.notes || "";
+  K.modal("Edit " + (p.name || p.contact || "person"), h("div.fields", {},
+    h("label.field", {}, h("span", {}, "Stage"), stage), h("label.field", {}, h("span", {}, "Type"), kind),
+    h("label.field", {}, h("span", {}, "Name"), name), h("label.field", {}, h("span", {}, "Language"), lang),
+    h("label.field", {}, h("span", {}, "Tags (comma between)"), tags), h("label.field", {}, h("span", {}, "Next follow-up"), follow),
+    h("label.field", {}, h("span", {}, "Notes"), notes),
+    p.consent_text ? h("p.small.muted", {}, "How they agreed: ", p.consent_text, p.consent_at ? " (" + K.when(p.consent_at) + ")" : "") : null),
+    [(close) => h("button.primary", { onclick: K.busy(async () => {
+      await api("crm/" + p.id, { body: { stage: stage.value, kind: kind.value, name: name.value, lang: lang.value, tags: tags.value, nextFollowUp: follow.value || null, notes: notes.value } });
+      close(); toast("Saved.", "ok"); await show("people");
+    }) }, "Save")]);
+}
+
+function mktAdd() {
+  const K = Kit;
+  const f = { name: h("input", { maxlength: 80 }), contact: h("input", { maxlength: 80, placeholder: "Mobile number or email" }),
+    consent: h("input", { maxlength: 300, placeholder: "e.g. Asked us to call, at the Hyderabad seminar, 20 Nov", style: "width:100%" }),
+    kind: h("select", {}, Object.entries(MKT_KIND).map(([v, l]) => h("option", { value: v }, l))),
+    lang: h("select", {}, h("option", { value: "en" }, "English"), h("option", { value: "hi" }, "Hindi"), h("option", { value: "te" }, "Telugu")),
+    source: h("input", { maxlength: 60, placeholder: "e.g. seminar, referral, Instagram DM" }), tags: h("input", { maxlength: 240 }),
+    follow: h("input", { type: "date", value: mktIn(2) }), notes: h("textarea", { rows: 3, maxlength: 2000, style: "width:100%" }) };
+  K.modal("Add a person", h("div.fields", {},
+    h("label.field", {}, h("span", {}, "Name"), f.name), h("label.field", {}, h("span", {}, "Type"), f.kind),
+    h("label.field", {}, h("span", {}, "Contact"), f.contact), h("label.field", {}, h("span", {}, "How did they agree to hear from us? (needed with a contact)"), f.consent),
+    h("label.field", {}, h("span", {}, "Language"), f.lang), h("label.field", {}, h("span", {}, "Where they came from"), f.source),
+    h("label.field", {}, h("span", {}, "Tags (comma between)"), f.tags), h("label.field", {}, h("span", {}, "Next follow-up"), f.follow), h("label.field", {}, h("span", {}, "Notes"), f.notes)),
+    [(close) => h("button.primary", { onclick: K.busy(async () => {
+      await api("crm", { body: { name: f.name.value, contact: f.contact.value, consent: f.consent.value, kind: f.kind.value, lang: f.lang.value, source: f.source.value, tags: f.tags.value, nextFollowUp: f.follow.value || null, notes: f.notes.value } });
+      close(); toast("Added.", "ok"); await show("people");
+    }) }, "Add")]);
+}
+
+views.people = async () => {
+  const K = Kit, first = !views.people.s, st = (views.people.s ??= { show: "due", kind: "", q: "" });
+  let qs = new URLSearchParams({ show: st.show, kind: st.kind, q: st.q });
+  let d = await api("crm?" + qs);
+  // First visit: follow-ups due first; if none are due, everyone.
+  if (first && !d.rows.length) { st.show = "recent"; qs = new URLSearchParams({ show: st.show, kind: st.kind, q: st.q }); d = await api("crm?" + qs); }
+  const C = d.counts || { stages: {}, kinds: {}, due: 0, total: 0 };
+  const today = mktIn(0);
+  const go = (patch) => { Object.assign(st, patch); show("people"); };
+  const csv = async () => {
+    try {
+      const res = await api("crm?format=csv&" + qs, { raw: true });
+      const a = h("a", { href: URL.createObjectURL(await res.blob()), download: `aspiran-people-${today}.csv` }); document.body.append(a); a.click(); a.remove();
+    } catch (e) { toast(e.message, "err"); }
+  };
+  const forget = async (p) => {
+    if (!(await K.confirm({ title: `Delete ${p.name || p.contact || "this person"} everywhere?`, text: "For a data request. They come off this list, and what they left on the website or in Try one topic (answers, chats, contact) is deleted. This can't be undone." + (p.member_id ? " Their app account stays: erase it under Data requests." : ""), ok: "Delete everywhere", danger: true }))) return;
+    const r = await api(`crm/${p.id}/forget`, { body: {} }); toast(r.note, "ok"); await show("people");
+  };
+  const search = h("input", { type: "search", value: st.q, placeholder: "Name, number, email, tag or note", "aria-label": "Search everyone", onkeydown: (e) => e.key === "Enter" && go({ q: e.target.value.trim() }) });
+  views.people.st ??= {};
+  return [
+    K.pageHead("People", "Everyone who left a number or email with their yes, coaching centres that asked, and members, in one list with their stage and the next follow-up. Nothing is sent from here: you get a draft to send yourself.",
+      h("button.primary", { onclick: mktAdd }, K.icon("plus"), "Add a person"), h("button", { onclick: csv }, K.icon("download"), "Spreadsheet (CSV)")),
+    h("div.tiles", {},
+      K.kpi({ label: "Follow-ups due", value: num(C.due), tone: C.due ? "warn" : null, go: () => go({ show: "due" }) }),
+      K.kpi({ label: "Leads", value: num(C.stages.lead), go: () => go({ show: "lead" }) }),
+      K.kpi({ label: "Members", value: num((C.stages.signed_up || 0) + (C.stages.active || 0) + (C.stages.quiet || 0)), sub: `${num(C.stages.signed_up)} new · ${num(C.stages.active)} active · ${num(C.stages.quiet)} gone quiet`, go: () => go({ show: "active" }) }),
+      K.kpi({ label: "On Plus", value: num(C.stages.plus), go: () => go({ show: "plus" }) }),
+      K.kpi({ label: "Coaching centres", value: num(C.kinds.centre), go: () => go({ kind: "centre", show: "recent" }) })),
+    h("div.row", { style: "margin:8px 0;flex-wrap:wrap" },
+      K.seg([["due", "Due", C.due], ["upcoming", "All follow-ups"], ["recent", "Everyone", C.total], ...Object.entries(MKT_STAGE).map(([v, l]) => [v, l, C.stages[v] || 0])], st.show, (v) => go({ show: v })),
+      h("select", { "aria-label": "Type", onchange: (e) => go({ kind: e.target.value }) }, h("option", { value: "" }, "All types"), Object.entries(MKT_KIND).map(([v, l]) => h("option", { value: v, selected: st.kind === v }, l))),
+      h("div.k-search", {}, K.icon("search"), search), st.q ? h("button.sm.ghost", { onclick: () => go({ q: "" }) }, "Clear search") : null),
+    K.table([
+      { key: "name", label: "Name", value: (p) => p.name || p.contact || "", render: (p) => h("div", {}, h("b", {}, p.name || (p.member_id ? "Member" : "–")), " ", p.kind !== "student" ? h("span.chip.brand", {}, MKT_KIND[p.kind]) : null, p.tags ? h("div.small.muted", {}, p.tags) : null) },
+      { key: "stage", label: "Stage", render: (p) => h("span.chip." + (MKT_STAGE_TONE[p.stage] || "info"), {}, MKT_STAGE[p.stage] || p.stage) },
+      { key: "contact", label: "Contact", value: (p) => p.contact || "", render: (p) => p.contact ? h("span.mono", {}, p.contact) : h("span.muted", {}, p.member_id ? "in the app" : "–") },
+      { key: "source", label: "Came from", value: (p) => [p.magnet, p.source].filter(Boolean).join(" · "), render: (p) => h("div", {}, p.magnet ? h("div", {}, p.magnet) : null, p.source ? h("div.small.mono", {}, p.source) : null) },
+      { key: "lang", label: "Language", value: (p) => ({ hi: "Hindi", te: "Telugu" }[p.lang] || "English") },
+      { key: "next_follow_up", label: "Next follow-up", render: (p) => p.next_follow_up ? h("span" + (p.next_follow_up <= today ? ".chip.warn" : ""), {}, K.day(p.next_follow_up)) : h("span.muted", {}, "–") },
+      { key: "last_contacted", label: "Last messaged", render: (p) => p.last_contacted ? K.ago(p.last_contacted) : h("span.muted", {}, "never") },
+      { key: "notes", label: "Notes", hide: true },
+      { key: "act", label: "", sort: false, csv: false, render: (p) => h("div.row", {},
+        h("button.sm", { onclick: () => mktMessage(p) }, "Message"), h("button.sm", { onclick: () => mktEdit(p) }, "Edit"),
+        can("privacy") ? h("button.sm.ghost", { title: "For a data request", onclick: K.busy(() => forget(p)) }, K.icon("trash")) : null) },
+    ], { rows: d.rows, state: views.people.st, noun: "people", csv: "people-shown.csv",
+      empty: { icon: "users", title: st.show === "due" ? "No follow-ups due" : "Nobody here yet",
+        text: st.show === "due" ? "Set a next follow-up date on someone and they show here on the day." : "People arrive every night from website leads, Try one topic and new sign-ups. Count now (under Lead magnets) brings them in now.",
+        action: C.total ? null : h("button", { onclick: K.busy(async () => { const r = await api("crm/add-members", { body: {} }); toast(`${num(r.added)} members added, ${num(r.linked)} matched to their lead.`, "ok"); await show("people"); }) }, "Add every member now") } }),
+    h("p.small.muted", {}, "Members show without their phone or email: those were given for signing in, not for marketing. A member's contact shows only if they first left it with their yes. ",
+      d.synced ? "List brought up to date " + K.ago(d.synced) + "." : ""),
   ];
 };
 
