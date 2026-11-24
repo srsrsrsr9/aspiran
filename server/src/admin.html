@@ -27,6 +27,16 @@
   .k-mini > div { background:var(--bg); border-radius:10px; padding:8px 10px; }
   .k-mini b { display:block; font-size:20px; }
   .k-mini span { font-size:12.5px; color:var(--muted); }
+  /* Coverage and review */
+  td.zero { background:color-mix(in srgb, var(--bad) 55%, transparent); color:var(--badInk); font-weight:600; }
+  td.thin { background:color-mix(in srgb, var(--warn) 55%, transparent); }
+  .gaps li { margin:4px 0; }
+  .sbs td { vertical-align:top; white-space:pre-wrap; word-break:break-word; font-size:13.5px; }
+  .sbs td.part { color:var(--muted); font-size:12px; white-space:normal; width:14%; }
+  .sbs td.missing { color:var(--badInk); font-style:italic; }
+  .stars button { min-width:40px; font-size:16px; }
+  .stars button.on { background:var(--brand); color:#fff; border-color:var(--brand); }
+  .issues label { display:inline-flex; gap:6px; align-items:center; margin:4px 14px 4px 0; }
 </style>
 </head>
 <body>
@@ -151,7 +161,7 @@ function signInView(msg, kind = "err") {
 const GROUPS = [
   ["", [["overview", "Home", "home", "analytics"]]],
   ["Look after people", [["safety", "Safety queue", "shield", "safety"], ["moderation", "Moderation", "flag", "moderate"], ["members", "Members", "users", "members"], ["privacy", "Data requests", "lock", "privacy"]]],
-  ["Content", [["content", "Content", "book", "content"], ["announcements", "Announcements", "megaphone", "announce"], ["languages", "Languages", "globe", "staff"]]],
+  ["Content", [["content", "Content", "book", "content"], ["coverage", "Coverage and review", "check", "content"], ["announcements", "Announcements", "megaphone", "announce"], ["languages", "Languages", "globe", "staff"]]],
   ["Growth", [["insights", "Insights", "spark", "analytics"], ["analytics", "Analytics", "chart", "analytics"], ["growth", "Growth", "growth", "analytics"], ["leads", "Website leads", "inbox", "analytics"], ["trytopic", "Try one topic", "target", "analytics"], ["posts", "Daily posts", "calendar", "flags"], ["institutes", "Coaching centres", "building", "staff"]]],
   ["Money", [["payments", "Payments", "coin", "flags"]]],
   ["Running Aspiran", [["flags", "Feature flags", "layers", "flags"], ["llm", "Helpers and usage", "activity", "llm:view"], ["incidents", "Status and incidents", "alert", "incidents"], ["backups", "Backups", "database", "backups"]]],
@@ -1062,6 +1072,133 @@ views.languages = async () => {
         h("div.muted", { style: "font-family:" + l.fonts.replace(/"/g, "'") }, "Fonts: " + l.fonts));
     })];
 };
+
+// Coverage and review (content-review.ts): what exists by type, paper and language, the gaps, and the owner's reviews.
+// The counts come from a summary the server keeps for 12 hours, so this page doesn't scan the whole library on every visit.
+views.coverage = async () => {
+  const st = views.coverage.st ||= { type: "", area: "", show: "todo", q: "", limit: 40 };
+  if (st.open) return reviewPanel(st.open);
+  const [d, qd] = await Promise.all([api("review/summary"), api(`review/queue?type=${st.type}&area=${st.area}&show=${st.show}&q=${encodeURIComponent(st.q)}&limit=${st.limit}`)]);
+  views.coverage.queue = qd.rows.map((r) => r.ref);
+  const T = Object.fromEntries(d.types.map((t) => [t.id, t.name])), A = Object.fromEntries(d.areas.map((a) => [a.id, a.name]));
+  const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+  const meter = (a, b) => h("div.k-meter", {}, h("div.bar", {}, h("span", { style: `width:${pct(a, b)}%` })), h("span.muted", {}, `${pct(a, b)}%`));
+  const sum = (k) => Object.values(d.byType).reduce((n, c) => n + c[k], 0);
+  const P = d.progress;
+  const SHORT = { chai: "Chai", pyq: "PYQs", mock: "Mocks", practice: "Practice", lessons: "Lessons", videos: "Videos", audio: "Listen", walks: "Walks", other: "Other" };
+  const refresh = h("button", { onclick: async (e) => { e.target.disabled = true; put(e.target, "Counting…"); await act(() => api("review/refresh", { body: {} }), "Counted again"); } }, "Count again");
+  const stars = (r) => (r ? "★".repeat(r) + "☆".repeat(5 - r) : "");
+  const statusOf = (r) => r.status === "reviewed" && r.changed ? h("span.chip.warn", {}, "Changed since review")
+    : r.status === "reviewed" ? h("span.chip" + (r.rating <= 2 ? ".bad" : ".ok"), { title: `Reviewed by ${r.reviewer}, ${when(r.reviewedAt)}` }, stars(r.rating))
+    : r.status === "started" ? h("span.chip.warn", {}, "Started") : h("span.chip", {}, "Not reviewed");
+  const sel = (key, opts, labelText) => h("select", { "aria-label": labelText, onchange: (e) => { st[key] = e.target.value; st.limit = 40; show("coverage"); } },
+    opts.map(([v, n]) => h("option", { value: v, ...(st[key] === v ? { selected: true } : {}) }, n)));
+  const SHOW = [["todo", "To review"], ["low", "Rated 1 or 2"], ["issues", "With issues"], ["done", "Reviewed"], ["all", "Everything"]];
+  // Cells that are empty where a paper should have something are red; thin ones (under a fifth of the row's average) amber.
+  const matrixRow = (a) => {
+    const cells = d.types.map((t) => d.matrix[a.id][t.id].live);
+    const avg = cells.filter((n) => n).reduce((x, y) => x + y, 0) / Math.max(1, cells.filter((n) => n).length);
+    return h("tr", {}, h("td", {}, h("b", {}, a.name)),
+      d.types.map((t, i) => { const c = d.matrix[a.id][t.id]; const n = c.live;
+        const expected = !(t.id === "chai" && !["gs1", "gs2", "gs3", "prelims"].includes(a.id)) && !["other"].includes(t.id) && a.id !== "other" && a.id !== "optional";
+        const cls = n === 0 && c.total > 0 ? ".thin" : n === 0 && expected ? ".zero" : n > 0 && n < avg * 0.2 ? ".thin" : "";
+        return h("td.n" + cls, { title: `${t.name}: ${num(c.total)} made, ${num(n)} in the app, ${num(c.hiLive)} with Hindi` }, n ? num(n) : c.total ? `0 (${num(c.total)} drafts)` : "–"); }),
+      h("td", {}, meter(d.byArea[a.id].hiLive, d.byArea[a.id].live)),
+      h("td", {}, meter(P.byArea[a.id].reviewed, P.byArea[a.id].total), h("div.muted", {}, `${num(P.byArea[a.id].reviewed)} of ${num(P.byArea[a.id].total)}`)));
+  };
+  return [h("h2", {}, "Coverage and review"),
+    h("p.lead", {}, "What content we have, by type, by paper and by language, where the gaps are, and your review of each piece. Reviews stay inside admin: they don't change what members see."),
+    h("div.row", { style: "margin-bottom:12px" }, h("span.muted", {}, `Counted ${ago(d.builtAt)} (${when(d.builtAt)}). Counting reads every piece once, so the result is kept for ${d.maxAgeHours} hours. Reviews below are always up to date.`), refresh),
+    h("div.tiles", {},
+      h("div.tile", {}, h("div.n", {}, num(P.all.total)), h("div.l", {}, "pieces in all (not hidden)")),
+      h("div.tile", {}, h("div.n", {}, num(sum("live"))), h("div.l", {}, "in the app")),
+      h("div.tile", {}, h("div.n", {}, num(sum("hiLive"))), h("div.l", {}, "in the app with Hindi approved")),
+      h("div.tile" + (sum("teLive") ? "" : ".warn"), {}, h("div.n", {}, num(sum("teLive"))), h("div.l", {}, `with Telugu approved (${num(sum("teMade"))} translated)`)),
+      h("div.tile", {}, h("div.n", {}, `${num(P.all.reviewed)}`), h("div.l", {}, `reviewed by you, of ${num(P.all.total)}`)),
+      h("div.tile", {}, h("div.n", {}, P.all.avgRating ?? "–"), h("div.l", {}, "average rating (1 to 5)")),
+      h("div.tile" + (P.all.low ? ".warn" : ""), {}, h("div.n", {}, num(P.all.low)), h("div.l", {}, "rated 1 or 2"))),
+    h("h3", {}, "Gaps to fill"),
+    h("div.card", {}, d.gaps.length ? h("ul.gaps", {}, d.gaps.map((g) => h("li", {}, h(g.level === "info" ? "span.chip" : "span.chip." + g.level, {}, g.level === "bad" ? "Missing" : g.level === "warn" ? "Needs work" : "Note"), " ", g.text))) : h("p.muted", {}, "No gaps found.")),
+    h("h3", {}, "By type"),
+    h("div.card.scroll", {}, h("table", {},
+      h("tr", {}, h("th", {}, "Type"), h("th.n", {}, "Made"), h("th.n", {}, "In the app"), h("th", {}, "Hindi approved"), h("th.n", {}, "Telugu approved"), h("th.n", {}, "Questions"), h("th", {}, "Reviewed"), h("th.n", {}, "Avg rating")),
+      d.types.map((t) => { const c = d.byType[t.id], p = P.byType[t.id];
+        return h("tr", {}, h("td", {}, t.name), h("td.n", {}, num(c.total)), h("td.n" + (c.live ? "" : ".zero"), {}, num(c.live)), h("td", {}, meter(c.hiLive, c.live)),
+          h("td.n", {}, num(c.teLive)), h("td.n", {}, c.questions ? num(c.questions) : ""), h("td", {}, meter(p.reviewed, p.total)), h("td.n", {}, p.avgRating ?? "")); }))),
+    h("h3", {}, "By paper: pieces in the app"),
+    h("div.card.scroll", {}, h("table", {},
+      h("tr", {}, h("th", {}, "Paper"), d.types.map((t) => h("th.n", { title: t.name }, SHORT[t.id] || t.name)), h("th", {}, "Hindi approved"), h("th", {}, "Reviewed")),
+      d.areas.map(matrixRow))),
+    h("p.muted", {}, "Red: nothing at all for that paper. Amber: drafts only, or much less than the paper's other types. A piece can count under more than one paper (a mock covers several). Hover a number to see how many are made, live and in Hindi."),
+    h("h3", {}, "Chai cards by GS paper"),
+    h("div.k-mini", {}, ["gs1", "gs2", "gs3", "gs4", "none"].map((p) => h("div", {}, h("b", {}, num(d.chaiByPaper[p])), h("span", {}, p === "none" ? "no paper named" : A[p])))),
+    h("h3", {}, "Review queue"),
+    h("p.muted", {}, "Pieces you haven't reviewed come first, then the lowest rated. A piece edited after your review comes back as \"Changed since review\"."),
+    h("div.row", { style: "margin-bottom:8px;flex-wrap:wrap" },
+      sel("show", SHOW, "Which pieces"), sel("type", [["", "Every type"], ...d.types.map((t) => [t.id, t.name])], "Type"), sel("area", [["", "Every paper"], ...d.areas.map((a) => [a.id, a.name])], "Paper"),
+      h("input", { type: "search", placeholder: "Search titles", value: st.q, onchange: (e) => { st.q = e.target.value; show("coverage"); } }),
+      h("span.muted", {}, `${num(qd.total)} pieces`)),
+    h("div.card.scroll", {}, qd.rows.length ? h("table", {},
+      h("tr", {}, h("th", {}, "Piece"), h("th", {}, "Type"), h("th", {}, "Paper"), h("th", {}, "Languages"), h("th", {}, "Review"), h("th", {}, "")),
+      qd.rows.map((r) => h("tr", {}, h("td", {}, r.title, r.live ? null : h("span.chip", {}, "not in the app")), h("td", {}, T[r.type]), h("td.muted", {}, r.areas.map((a) => A[a]).join(", ")),
+        h("td", {}, r.langs.map((l) => h("span.chip", {}, l.toUpperCase()))), h("td", {}, statusOf(r), r.issues.length ? h("span.chip.warn", {}, `${r.issues.length} issue${r.issues.length > 1 ? "s" : ""}`) : null),
+        h("td", {}, h("button" + (r.status === "reviewed" && !r.changed ? "" : ".primary"), { onclick: () => { st.open = r.ref; show("coverage"); } }, r.status === "reviewed" && !r.changed ? "Open" : "Review"))))) : h("p.muted", {}, "Nothing here. Try another filter.")),
+    qd.total > qd.rows.length ? h("div.row", { style: "margin-top:8px" }, h("button", { onclick: () => { st.limit = Math.min(100, st.limit + 40); show("coverage"); } }, "Show more")) : null,
+  ];
+};
+/** "questions[2].explanation" → "Questions 2 › explanation". */
+const partName = (p) => { const t = p.replace(/\[(\d+)\]/g, " $1").replace(/\./g, " › ").replace(/([a-z])([A-Z])/g, "$1 $2").toLowerCase(); return t.charAt(0).toUpperCase() + t.slice(1); };
+/** One piece: English and Hindi side by side, then the rating, issues, note and "mark reviewed". */
+async function reviewPanel(ref) {
+  const st = views.coverage.st;
+  const back = () => { st.open = null; show("coverage"); };
+  let p;
+  try { p = await api("review/item?ref=" + encodeURIComponent(ref)); }
+  catch (e) { return [h("button", { onclick: back }, "← Back to the queue"), h("div.banner.err", {}, e.message)]; }
+  const r = p.review || {};
+  const form = { rating: r.rating || null, issues: new Set(r.issues || []), note: r.note || "" };
+  const starRow = h("div.row.stars", { role: "radiogroup", "aria-label": "Rating" });
+  const drawStars = () => put(starRow, [1, 2, 3, 4, 5].map((n) => h("button" + (form.rating === n ? ".on" : ""), { role: "radio", "aria-checked": String(form.rating === n), title: ["", "Poor: needs redoing", "Weak: several problems", "Fine: small fixes", "Good", "Excellent"][n], onclick: () => { form.rating = n; drawStars(); } }, `${n} ★`)));
+  drawStars();
+  const note = h("textarea", { rows: 3, placeholder: "What's wrong, or what to change (optional unless you tick Other)" });
+  note.value = form.note;
+  const queue = views.coverage.queue || [];
+  const next = queue[queue.indexOf(ref) + 1];
+  const save = async (reviewed, goNext) => {
+    try {
+      await api("review/save", { body: { ref, rating: form.rating, issues: [...form.issues], note: note.value, reviewed } });
+      toast(reviewed ? "Marked reviewed" : "Saved", "ok");
+      st.open = goNext && next ? next : null; show("coverage");
+    } catch (e) { toast(e.message, "err"); }
+  };
+  const showTe = p.rows.some((x) => x.te);
+  const hiMissing = p.rows.filter((x) => x.en && !x.hi).length;
+  return [h("div.row", { style: "margin-bottom:10px" }, h("button", { onclick: back }, "← Back to the queue"), next ? h("button", { onclick: () => { st.open = next; show("coverage"); } }, "Skip to the next one →") : null),
+    h("h2", {}, p.title),
+    h("div.row", { style: "margin-bottom:8px;flex-wrap:wrap" }, h("span.chip", {}, p.kind), h("span.chip" + (p.status === "approved" ? ".ok" : ""), {}, p.status === "approved" ? "in the app" : p.status),
+      p.approvals.en ? h("span.chip", {}, "English approved: " + p.approvals.en) : null, p.approvals.hi ? h("span.chip", {}, "Hindi approved: " + p.approvals.hi) : null,
+      p.approvals.te ? h("span.chip", {}, "Telugu approved: " + p.approvals.te) : null, p.source ? h("a", { href: p.source, target: "_blank", rel: "noopener" }, "Source") : null,
+      p.review && p.review.status === "reviewed" ? h("span.chip.ok", {}, `Reviewed by ${p.review.reviewer}, ${when(p.review.reviewed_at)}`) : null),
+    p.media ? h("div.card", {}, p.media.video ? h("video", { src: p.media.video, controls: true, preload: "none", poster: p.media.poster || "", style: "max-width:320px;width:100%;border-radius:8px" }) : null,
+      h("div.row", {}, p.media.captions ? h("a", { href: p.media.captions, target: "_blank" }, "English captions") : null, p.media.captionsHi ? h("a", { href: p.media.captionsHi, target: "_blank" }, "Hindi captions") : h("span.muted", {}, "No Hindi captions"))) : null,
+    hiMissing ? h("p.muted", {}, `${hiMissing} part${hiMissing > 1 ? "s have" : " has"} no Hindi (shown in red).`) : null,
+    h("div.card.scroll", { style: "max-height:60vh" }, p.rows.length ? h("table.sbs", {},
+      h("tr", {}, h("th", {}, "Part"), h("th", {}, "English"), h("th", {}, "Hindi"), showTe ? h("th", {}, "Telugu") : null),
+      p.rows.map((x) => h("tr", {}, h("td.part", {}, partName(x.path)), h("td", { lang: "en" }, x.en), x.hi ? h("td", { lang: "hi" }, x.hi) : h("td.missing", {}, x.en ? "no Hindi" : ""), showTe ? h("td", { lang: "te" }, x.te || "") : null)))
+      : h("p.muted", {}, "This piece has no text to show (a sound or picture). Open it on the desk to see it.")),
+    h("h3", {}, "Your review"),
+    h("div.card", {},
+      h("b", {}, "Rating"), starRow,
+      h("b", { style: "display:block;margin-top:10px" }, "Issues"),
+      h("div.issues", {}, p.issueNames.map((i) => h("label", {}, h("input", { type: "checkbox", checked: form.issues.has(i.id), onchange: (e) => { e.target.checked ? form.issues.add(i.id) : form.issues.delete(i.id); } }), i.name))),
+      h("b", { style: "display:block;margin-top:10px" }, "Note"), note,
+      h("div.row", { style: "margin-top:10px;flex-wrap:wrap" },
+        h("button.primary", { onclick: () => save(true, true) }, next ? "Mark reviewed and open the next" : "Mark reviewed"),
+        next ? h("button", { onclick: () => save(true, false) }, "Mark reviewed") : null,
+        h("button", { onclick: () => save(false, false) }, "Save, not finished")),
+      h("p.muted", {}, "To fix the text itself, edit it on the News desk; an edit after your review shows here as \"Changed since review\".")),
+  ];
+}
 
 views.backups = async () => {
   const d = await api("backups");

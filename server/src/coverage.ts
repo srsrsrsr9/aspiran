@@ -158,21 +158,28 @@ interface Row {
   status?: "gap" | "drafts" | "hindi" | "ok";
 }
 
-export async function coverage(env: Env) {
+/** The rows coverage reads. content-review.ts reads them once and passes them in, so a rebuild scans each table once. */
+export type CoverageRows = { lib: any[]; cards: any[] };
+export async function coverageRows(env: Env): Promise<CoverageRows> {
+  const lib = await env.DB.prepare("SELECT id, kind, title, json, status, en_editor, hi_editor, updated_at, translations, approvals FROM library").all<any>().catch(() => ({ results: [] as any[] }));
+  const cards = await env.DB.prepare("SELECT id, day, title, card_json, status, en_editor, hi_editor FROM candidates WHERE status != 'rejected'").all<any>().catch(() => ({ results: [] as any[] }));
+  return { lib: lib.results, cards: cards.results };
+}
+
+export async function coverage(env: Env, rows?: CoverageRows) {
+  const { lib, cards } = rows ?? (await coverageRows(env));
   const blank = (topic: string, subjects: string[]): Row => ({ topic, subjects, total: 0, hidden: 0, en: { approved: 0, waiting: 0 }, hi: { approved: 0, waiting: 0, missing: 0 }, kinds: {} });
   const grid = new Map(SYLLABUS.map((p) => [p.id, p.topics.map((tp) => blank(tp.name, tp.subjects))]));
   const nowhere = blank("Not under any syllabus topic", []);
 
   type Item = { kind: string; id: string; title: string; data: any; hidden: boolean; en: boolean; hiOk: boolean; hasHi: boolean; papers?: string[] };
   const items: Item[] = [];
-  const lib = await env.DB.prepare("SELECT id, kind, title, json, status, en_editor, hi_editor FROM library").all<any>().catch(() => ({ results: [] as any[] }));
-  for (const r of lib.results) {
+  for (const r of lib) {
     let data: any = {};
-    try { data = JSON.parse(r.json); } catch {}
+    if (r.data) data = r.data; else try { data = JSON.parse(r.json); } catch {}
     items.push({ kind: r.kind, id: r.id, title: r.title, data, hidden: r.status === "hidden", en: !!r.en_editor, hiOk: !!r.hi_editor, hasHi: r.json.includes('"hi"') });
   }
-  const cards = await env.DB.prepare("SELECT id, title, card_json, en_editor, hi_editor FROM candidates WHERE status != 'rejected'").all<any>().catch(() => ({ results: [] as any[] }));
-  for (const r of cards.results) {
+  for (const r of cards) {
     let c: any = {};
     try { c = JSON.parse(r.card_json); } catch {}
     const headline = c.headline || r.title || "";
