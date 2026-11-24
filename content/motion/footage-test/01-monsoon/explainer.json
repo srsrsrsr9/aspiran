@@ -1,0 +1,20 @@
+{
+ "id": "monsoon-why",
+ "title": "Why the monsoon comes",
+ "paper": "GS1 Geography",
+ "test": {"voice": "Fish · Shubh (male, calm)", "footage": "real footage + drawn diagrams", "pacing": "calm, soft fades", "captions": "lower third, no box", "sound": "voice only, no music"},
+ "voice": {"provider": "fish", "id": "e0ea460db14b4430afb6311708937b6d", "speed": 0.95},
+ "captions": "lower", "transition": "fade", "bed": "none", "whoosh": false,
+ "endcard": {"from": 1, "line": "Footage: Mathanprasath K (CC BY 4.0); NOAA/CIRA (public domain)"},
+ "segments": [
+  {"src": "../raw/w-forest.webm", "t": 0.5, "kb": "in", "say": "Every June, the wind over India turns around. And a whole country waits for it."},
+  {"anim": "heat", "say": "Through spring, the land heats up much faster than the sea. Hot air over the land rises, and the pressure there falls."},
+  {"anim": "winds", "say": "So cooler, wet air from the ocean is pulled in towards the land. That inflow is the south-west monsoon."},
+  {"src": "../raw/w-michaung.webm", "t": 0.0, "crop": [0.60, 0.55, 1.0], "say": "It usually reaches Kerala around the first of June, and covers the whole country by about the eighth of July."},
+  {"anim": "ghats", "say": "When these winds meet the Western Ghats, they rise, cool, and pour rain on the sea-facing side. The far side stays much drier. That is a rain shadow."},
+  {"anim": "share", "say": "From June to September, India gets about three-quarters of its rain for the whole year."},
+  {"src": "../raw/w-forest.webm", "t": 4.0, "kb": "out", "say": "For your answer: the land heats, pressure falls, sea winds rush in, and the hills wring out the rain."},
+  {"end": true}
+ ],
+ "sources": ["IMD: normal onset over Kerala 1 June; covers the country by 8 July (normal dates revised 2020)", "IMD: June–September brings about 75% of India's annual rainfall", "NCERT Class 11, Fundamentals of Physical Geography / India Physical Environment, chapter on climate"]
+}

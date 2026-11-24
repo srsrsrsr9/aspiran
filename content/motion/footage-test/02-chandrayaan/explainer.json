@@ -1,0 +1,110 @@
+{
+ "id": "chandrayaan-3",
+ "title": "Chandrayaan-3 in 60 seconds",
+ "paper": "GS3 Science & Tech",
+ "test": {
+  "voice": "ElevenLabs · Sumeet (male, energetic)",
+  "footage": "real mission footage (ISRO)",
+  "pacing": "fast, hook first, hard cuts",
+  "captions": "big centre words, a few at a time",
+  "sound": "whooshes on cuts + soft pulse"
+ },
+ "voice": {
+  "provider": "eleven",
+  "id": "5x75eykrmdby4c1wlkAP"
+ },
+ "captions": "pop",
+ "transition": "cut",
+ "bed": "pulse",
+ "whoosh": true,
+ "endcard": {
+  "from": 5,
+  "line": "Footage and pictures: ISRO (GODL-India)"
+ },
+ "segments": [
+  {
+   "src": "../raw/m-lpdc.webm",
+   "t": 3.0,
+   "say": "No country had ever landed this close to the Moon's south pole. Until the twenty-third of August, 2023.",
+   "crop": [
+    0.62,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "src": "../raw/m-launch.jpg",
+   "kb": "in",
+   "say": "Chandrayaan-3 lifted off from Sriharikota on the fourteenth of July, on an LVM3 rocket.",
+   "fit": "blur"
+  },
+  {
+   "src": "../raw/m-li4.webm",
+   "t": 14.0,
+   "fit": "blur",
+   "say": "Forty days later, the Vikram lander touched down.",
+   "numbers": [
+    {
+     "text": "40",
+     "sub": "days to the Moon",
+     "count": true,
+     "word": "Forty"
+    }
+   ]
+  },
+  {
+   "src": "../raw/m-ohrc.webp",
+   "kb": "in",
+   "focus": [
+    0.44,
+    0.45
+   ],
+   "say": "India became the fourth country to soft-land on the Moon, and the first near its south pole.",
+   "numbers": [
+    {
+     "text": "4th",
+     "sub": "country to soft-land",
+     "word": "fourth"
+    }
+   ]
+  },
+  {
+   "src": "../raw/m-lpdc.webm",
+   "t": 8.0,
+   "say": "Why the south pole? Some craters there never see sunlight. They may hold water ice.",
+   "crop": [
+    0.62,
+    0.5,
+    1.0
+   ]
+  },
+  {
+   "src": "../raw/m-ramp.webm",
+   "t": 9.0,
+   "fit": "blur",
+   "say": "Then the Pragyan rover rolled out. It drove about a hundred metres, and confirmed sulphur in the soil."
+  },
+  {
+   "src": "../raw/m-vikram.webp",
+   "kb": "in",
+   "say": "Vikram even hopped: it lifted about forty centimetres, and landed again.",
+   "fit": "blur"
+  },
+  {
+   "src": "../raw/m-pad.webp",
+   "kb": "out",
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "say": "The landing spot is called Shiv Shakti point. And the twenty-third of August is now National Space Day."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO Chandrayaan-3 mission page and press releases, Jul–Sep 2023: launch 14 Jul 2023 (LVM3-M4), landing 23 Aug 2023, rover traverse ~100 m, LIBS confirmed sulphur, Vikram hop 3 Sep 2023 (~40 cm)",
+  "PIB, 26 Aug 2023: landing site named Shiv Shakti point; 23 August declared National Space Day"
+ ]
+}
