@@ -104,6 +104,8 @@ fun AddaTab(
     /** A pod-matching answer was saved, so the server copy can be updated. */
     onPodAnswers: () -> Unit,
     modifier: Modifier = Modifier,
+    /** Under the greeting: the coaching centre's card, when there is one. */
+    top: @Composable () -> Unit = {},
 ) {
     if (result != null) {
         Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -134,6 +136,7 @@ fun AddaTab(
             DailyHello()
             Text(persona?.name?.takeIf { it.isNotBlank() }?.let { "Namaste, $it" } ?: "Namaste", style = MaterialTheme.typography.titleLarge)
         }
+        top()
         // Day 7: two quick questions (ui/Feedback.kt).
         CheckinCard()
         ChotuCheckIn(pod.podId != null, staged, onOpenChotu, onOpenPod, onOpenNeedToTalk)

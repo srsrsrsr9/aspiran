@@ -69,6 +69,8 @@ class AppConfig(context: Context, private val server: () -> String) {
     val plus get() = config.flags["plus"] == true
     /** Google Play Billing for Plus (data/PlayBilling.kt): off until the server says otherwise, like Plus. */
     val playBilling get() = config.flags["play_billing"] == true
+    /** Coaching centres, the student side (data/Institute.kt): off until the server says otherwise, like Plus. */
+    val institutes get() = config.flags["institutes"] == true
     /** The Listen button on Chotu's and Jeetu's messages: off until the server says voices are on. */
     val voice get() = config.voice && on("voice")
 
