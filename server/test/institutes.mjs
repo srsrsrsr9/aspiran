@@ -233,14 +233,14 @@ try {
   assert.equal((await s1.call("/inst/doubts", { text: "I feel hopeless, I want to end my life" })).data.held, true, "distress in a doubt is held too");
   step("doubts: JPEG photo, topic from the syllabus list, only you and your teachers see it, answered → open → resolved, distress held");
 
-  // AI first answer: on, the AI never answers feelings or ranks (and no key here, so it may not answer at all).
+  // The quick first answer: on, it never answers feelings or ranks (and no key here, so it may not answer at all).
   await admin.call("/inst/admin/branding", { aiFirstAnswer: true });
   r = await s3.call("/inst/doubts", { text: "What rank will I get if I score 95 in prelims?" });
   assert.equal(r.data.aiAnswered, false, "never answers ranks");
   const rd = (await s3.call(`/inst/doubts/${r.data.id}`)).data;
   assert.ok(!rd.replies.some((x) => x.role === "ai"));
   await admin.call("/inst/admin/branding", { aiFirstAnswer: false });
-  step("the AI first answer never answers ranks or results");
+  step("the quick first answer never answers ranks or results");
 
   // --- Content -------------------------------------------------------------------------------------------------------------
   const quiz = { questions: [
@@ -366,6 +366,59 @@ try {
   const csv2 = await (await fetch(`${BASE}/inst/admin/analytics.csv?batch=${batch2}`, { headers: { authorization: "Bearer " + teacher.tok } })).text();
   assert.ok(csv2.includes(`"'=HYPERLINK(1)"`), "a leading = is defused");
   step("CSV cells are defused against spreadsheet formulas");
+
+  // --- Feature switches and centre Plus (decisions-2026-11-24.md, centres 4, 9, 12) ------------------------------------------
+  let f = (await s2.call("/inst/me")).data;
+  assert.deepEqual(f.institute.features, { chat: true, doubts: true, firstAnswer: false, plans: true, content: true, pods: false }, "defaults: pods and the quick first answer off");
+  const days = (Date.parse(f.plusUntil) - Date.now()) / 86400_000;
+  assert.ok(days > 29 && days <= 30.01, "a new centre's students have Plus through the 30-day pilot");
+  assert.equal((await s2.call(`/plus/status?member=${s2.memberId}`)).data.plan?.source, "centre", "the Plus entitlement sees the centre");
+  assert.equal((await teacher.call(`/plus/status?member=${teacher.memberId}`)).data.plan, null, "teachers don't get centre Plus");
+  assert.equal((await teacher.call("/inst/me")).data.plusUntil, null);
+  r = await s2.call("/pods/join", { memberId: s2.memberId });
+  assert.equal(r.status, 403); assert.equal(r.data.code, "centre_pods_off", "pods off: a student can't join a pod");
+  assert.equal((await s2.call("/rooms/join", { memberId: s2.memberId, roomId: "x" })).data.code, "centre_pods_off", "or an open room");
+  assert.notEqual((await teacher.call("/pods/join", { memberId: teacher.memberId })).data?.code, "centre_pods_off", "teachers aren't held back");
+  assert.equal((await s2.call("/inst/admin/features", { pods: true })).status, 403, "students can't flip switches");
+  assert.equal((await teacher.call("/inst/admin/features", { pods: true })).status, 403, "teachers can't either");
+  assert.equal((await admin.call("/inst/admin/features", { nonsense: true })).status, 400, "unknown switches are refused");
+  r = await admin.call("/inst/admin/features", { chat: false, doubts: false, plans: false, content: false, extra: "x" });
+  assert.equal(r.status, 200); assert.equal(r.data.features.chat, false); assert.equal(r.data.features.extra, undefined);
+  assert.deepEqual((await admin.call("/inst/admin/features")).data.features, r.data.features);
+  r = await s2.call("/inst/chat", { text: "hello" });
+  assert.equal(r.status, 403); assert.equal(r.data.code, "feature_off");
+  for (const path of ["/inst/doubts", "/inst/plan", "/inst/content"]) assert.equal((await s2.call(path)).data.code, "feature_off", `${path} is off for students`);
+  assert.equal((await s2.call("/inst/doubts", { text: "What is Article 163 about?" })).status, 403);
+  const feedOff = (await s2.call("/inst/feed")).data;
+  assert.equal(feedOff.chat, false); assert.deepEqual(feedOff.messages, [], "chat off: no chat messages, announcements still come");
+  assert.equal((await teacher.call("/inst/chat", { text: "Test on Monday", announce: true })).status, 200, "teachers still announce");
+  assert.equal((await teacher.call("/inst/doubts")).status, 200, "teachers can still get things ready");
+  r = await admin.call("/inst/admin/features", { chat: true, doubts: true, plans: true, content: true, pods: true, firstAnswer: true });
+  assert.equal(r.data.features.firstAnswer, true);
+  assert.equal((await s2.call("/inst/me")).data.institute.aiFirstAnswer, true, "the older field follows the switch");
+  assert.notEqual((await s2.call("/pods/join", { memberId: s2.memberId })).data?.code, "centre_pods_off", "pods on: the centre lets them in");
+  await admin.call("/inst/admin/features", { pods: false, firstAnswer: false });
+  assert.equal((await s2.call("/inst/chat", { text: "back on" })).status, 200);
+  step("feature switches: admins only, students held to them, teachers still work; pods off by default; Plus through the pilot");
+
+  // The centre's plan, set by Aspiran staff: seats, paid-until, the pilot's end.
+  assert.equal((await staff(`/admin/api/institutes/${A.id}/plan`, { seats: 0 })).status, 400);
+  assert.equal((await staff(`/admin/api/institutes/${A.id}/plan`, { paidUntil: "next year" })).status, 400);
+  r = await staff(`/admin/api/institutes/${A.id}/plan`, { seats: 30, paidUntil: "2099-03-31" });
+  assert.equal(r.status, 200); assert.equal(r.data.plan, "paid"); assert.equal(r.data.seats, 30);
+  let row = (await staff("/admin/api/institutes")).data;
+  assert.equal(row.pricing.perStudentYearInr, 1200); assert.equal(row.pricing.minStudents, 25);
+  assert.equal(row.institutes.find((i) => i.id === A.id).seats, 30);
+  assert.ok((await s2.call("/inst/me")).data.plusUntil.startsWith("2099-03-31"), "paid: Plus to the end of the paid year");
+  r = await staff(`/admin/api/institutes/${A.id}/plan`, { paidUntil: null, pilotEndsAt: "2026-01-01" });
+  assert.equal(r.data.plan, "ended");
+  assert.equal((await s2.call("/inst/me")).data.plusUntil, null);
+  assert.equal((await s2.call(`/plus/status?member=${s2.memberId}`)).data.plan, null, "pilot over and unpaid: no centre Plus");
+  assert.equal((await s2.call("/admin/api/institutes/" + A.id + "/plan", { seats: 99 })).status, 401, "members can't set plans");
+  await staff(`/admin/api/institutes/${A.id}/plan`, { pilotEndsAt: new Date(Date.now() + 20 * 86400_000).toISOString().slice(0, 10) });
+  row = (await staff("/admin/api/institutes")).data.institutes.find((i) => i.id === A.id);
+  assert.equal(row.plan, "pilot"); assert.equal(row.features.pods, false);
+  step("Aspiran staff set a centre's seats, paid-until and pilot end; Plus follows them");
 
   // --- Pausing, leaving, removal, erasure -----------------------------------------------------------------------------------
   assert.equal((await staff(`/admin/api/institutes/${B.id}/status`, { status: "paused" })).status, 200);

@@ -41,6 +41,7 @@ import { tryRoute } from "./try";
 import { sendRecalls } from "./try-recall";
 import { learnRoute } from "./learn";
 import { instituteRoute } from "./institutes";
+import { podsGate } from "./inst-centre";
 import INSTITUTE_SRC from "./institute.html";
 export { PodRoom } from "./pod";
 export { CommonsRoom } from "./commons";
@@ -236,6 +237,9 @@ export default {
       return withVoice(env, "chotu", gatedMember, await chotuChat(req, env, gatedMember));
     }
 
+    // --- A coaching centre with pods off: its students can't join pods or open rooms (inst-centre.ts)
+    const centreGate = await podsGate(req, env, path);
+    if (centreGate) return centreGate;
     // --- Pods (joining, states, moving), the Commons, the season and the matching fields: community.ts
     const community = await communityRoute(req, env, path, url);
     if (community) return community;

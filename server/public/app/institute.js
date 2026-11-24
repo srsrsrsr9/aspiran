@@ -118,6 +118,17 @@ export function meCard() {
     h("div.small.muted", m ? "Announcements, your batch chat, doubts, the plan and your institute's notes" : "Joined a coaching centre that uses Aspiran? Use its code here")), h("span", "→")));
 }
 
+/** The centre's switches (server inst-centre.ts): a missing one takes its default. Pods are off unless the centre says. */
+const DEFAULTS = { chat: true, doubts: true, firstAnswer: false, plans: true, content: true, pods: false };
+const featureOn = (m, f) => ({ ...DEFAULTS, ...(m?.institute?.features ?? {}) })[f];
+/** For a student whose centre has pods off: a card in place of the pod and the open rooms (the server refuses them too). */
+export function podsOffCard() {
+  const m = current();
+  if (!m?.institute || m.paused || m.role !== "student" || featureOn(m, "pods")) return null;
+  return h("div.col", h("h1", "Pods"), h("div.card.soft", h("p", `${m.institute.name} has pods switched off for its students. Your batch is in your coaching centre.`),
+    h("a.btn.primary", { href: "#inst" }, "Open " + m.institute.name)));
+}
+
 /** White or near-black text on the institute's colour, whichever reads better. */
 function inkFor(hex) {
   if (!/^#[0-9a-f]{6}$/i.test(hex ?? "")) return null;
@@ -140,7 +151,10 @@ export function viewInst(arg = "") {
     if (!m) return put(root, joinView(arg));
     if (m.paused) return put(root, header(m), h("div.card.soft", h("p", `${m.institute.name} has paused its Aspiran space for now. Everything of yours in Aspiran itself is untouched.`)));
     if (m.role !== "student") return put(root, header(m), h("div.card", h("p", `You're ${m.role === "teacher" ? "a teacher" : "an " + m.role} at ${m.institute.name}. Your tools are in the console.`), h("a.btn.primary", { href: "/institute", target: "_blank" }, "Open the console")), leaveCard(m));
-    const TABS = [["today", "Plan"], ["chat", "Chat"], ["doubts", "Doubts"], ["content", "Notes and sets"], ["you", "Your progress"]];
+    // Only what the centre switched on. With chat off, the tab still carries announcements.
+    const TABS = [["today", "Plan", "plans"], ["chat", featureOn(m, "chat") ? "Chat" : "Announcements"], ["doubts", "Doubts", "doubts"], ["content", "Notes and sets", "content"], ["you", "Your progress"]]
+      .filter(([, , f]) => !f || featureOn(m, f));
+    if (!TABS.some(([id]) => id === tab.now)) tab.now = TABS[0][0];
     const body = h("div");
     put(root, header(m), h("div.chips", { role: "tablist" }, TABS.map(([id, label]) => h("button.chip" + (tab.now === id ? ".on" : ""), { role: "tab", "aria-selected": String(tab.now === id), onclick: () => { tab.now = id; draw(); } }, label))), body);
     const v = { today: planView, chat: chatView, doubts: doubtsView, content: contentView, you: youView }[tab.now] ?? planView;
@@ -232,6 +246,7 @@ function chatView(box, m) {
   });
   load().then((ok) => {
     if (!ok) return;
+    if (!featureOn(m, "chat")) return put(box, ann.childNodes.length ? ann : h("div.card.soft", h("p", "No announcements yet.")), h("p.small.muted", `${m.institute.name} has the batch chat switched off. Announcements from your teachers show here.`));
     put(box, ann, h("h3", m.batch?.name ?? "Your batch"), list, h("div.row", h("div.grow", input), h("button.primary", { onclick: send }, "Send")),
       h("p.small.muted", "Your batch and your teachers see this chat. Be kind; teachers can hide messages."));
     clearInterval(chatTimer);
@@ -333,6 +348,7 @@ function reviewList(qs, review, hi) {
 function youView(box, m) {
   loading(box);
   api("/inst/progress").then(({ you: s }) => put(box,
+    m.plusUntil && C.config?.()?.flags?.plus && h("div.card.soft", h("p", { style: { margin: 0 } }, h("strong", "Plus is on for you. "), `${m.institute.name} covers it while you're in the centre (until ${new Date(m.plusUntil).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} for now).`)),
     h("p.small.muted", `Only you and your teachers at ${m.institute.name} see this. Since you joined.`),
     h("div.card", h("div.row.between", h("span", "Days you used Aspiran (last 14)"), h("strong", String(s.daysActive14))),
       h("div.row.between", h("span", "Focus minutes"), h("strong", String(s.focusMinutes))),

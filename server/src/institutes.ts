@@ -7,6 +7,7 @@ import { audit, bump, flags, requireStaff } from "./staff";
 import { NODES } from "../public/app/syllabus.js";
 import { logEvent } from "./metrics";
 import { instReports, reportsCsv } from "./inst-reports";
+import { type Feature, PILOT_DAYS, cleanFeatures, featuresOf, planOf } from "./inst-centre";
 
 /**
  * Aspiran for coaching centres (artefacts/coaching-centres-plan-2026-11-14.md). Behind the `institutes` flag, off by
@@ -45,7 +46,8 @@ export type Role = "owner" | "admin" | "teacher" | "student";
 const RANK: Record<Role, number> = { student: 1, teacher: 2, admin: 3, owner: 4 };
 const atLeast = (r: Role, need: Role) => RANK[r] >= RANK[need];
 
-interface Institute { id: string; name: string; city: string | null; brand_color: string | null; logo_key: string | null; ai_first_answer: number; status: string; created_at: string }
+interface Institute { id: string; name: string; city: string | null; brand_color: string | null; logo_key: string | null; ai_first_answer: number; status: string; created_at: string;
+  features: string | null; pilot_ends_at: string | null; paid_until: string | null; seats: number | null }
 interface Membership { institute_id: string; member_id: string; role: Role; display_name: string; batch_id: string | null; status: string; joined_at: string; last_active_at: string | null }
 interface Ctx { me: string; m: Membership; inst: Institute }
 
@@ -62,7 +64,8 @@ const notFound = (what = "That") => bad(`${what} isn't here.`, 404);
 
 export const INST_SCHEMA = [
   `CREATE TABLE IF NOT EXISTS institutes (id TEXT PRIMARY KEY, name TEXT NOT NULL, city TEXT, brand_color TEXT, logo_key TEXT,
-    ai_first_answer INTEGER NOT NULL DEFAULT 0, status TEXT NOT NULL DEFAULT 'active', created_at TEXT NOT NULL, created_by TEXT)`,
+    ai_first_answer INTEGER NOT NULL DEFAULT 0, status TEXT NOT NULL DEFAULT 'active', created_at TEXT NOT NULL, created_by TEXT,
+    features TEXT, pilot_ends_at TEXT, paid_until TEXT, seats INTEGER)`,
   `CREATE TABLE IF NOT EXISTS inst_members (institute_id TEXT NOT NULL, member_id TEXT NOT NULL, role TEXT NOT NULL, display_name TEXT NOT NULL,
     batch_id TEXT, status TEXT NOT NULL DEFAULT 'active', joined_at TEXT NOT NULL, consent_at TEXT, left_at TEXT, last_active_at TEXT,
     PRIMARY KEY (institute_id, member_id))`,
@@ -97,10 +100,19 @@ export const INST_SCHEMA = [
     node_id TEXT, kind TEXT NOT NULL, right_n INTEGER NOT NULL, total INTEGER NOT NULL, answers TEXT NOT NULL, at TEXT NOT NULL)`,
   `CREATE INDEX IF NOT EXISTS inst_attempts_member ON inst_attempts(institute_id, member_id, at)`,
 ];
+/** Columns added after 0014 (migrations/0020_institute_features.sql). Each fails quietly once it's there. */
+const INST_ALTERS = [
+  "ALTER TABLE institutes ADD COLUMN features TEXT",
+  "ALTER TABLE institutes ADD COLUMN pilot_ends_at TEXT",
+  "ALTER TABLE institutes ADD COLUMN paid_until TEXT",
+  "ALTER TABLE institutes ADD COLUMN seats INTEGER",
+];
 let ready = false; // the result only, never a promise shared across requests (see ensureSchema in staff.ts)
-export function ensureInstSchema(env: Env): Promise<void> {
-  if (ready) return Promise.resolve();
-  return env.DB.batch(INST_SCHEMA.map((s) => env.DB.prepare(s))).then(() => { ready = true; });
+export async function ensureInstSchema(env: Env): Promise<void> {
+  if (ready) return;
+  await env.DB.batch(INST_SCHEMA.map((s) => env.DB.prepare(s)));
+  for (const a of INST_ALTERS) await env.DB.prepare(a).run().catch(() => {});
+  ready = true;
 }
 
 // --- Who is calling ----------------------------------------------------------------------------------------
@@ -137,7 +149,10 @@ const batchOf = (env: Env, inst: string, id: unknown) =>
 
 export const branding = (inst: Institute) => ({
   id: inst.id, name: inst.name, city: inst.city, color: inst.brand_color, logo: inst.logo_key ? `/inst/logo/${inst.id}` : null, aiFirstAnswer: !!inst.ai_first_answer,
+  features: featuresOf(inst),
 });
+/** A student asking for something the centre switched off: 403 with a code the apps can recognise. */
+const featureOff = (what: string) => json({ error: `Your coaching centre has ${what} switched off.`, code: "feature_off" }, 403);
 
 // --- Invite codes ------------------------------------------------------------------------------------------
 
@@ -296,7 +311,9 @@ export async function instituteRoute(req: Request, env: Env, path: string, url: 
     const inst = m ? await getInstitute(env, m.institute_id) : null;
     if (!m || !inst) return json({ institute: null });
     const batch = m.batch_id ? await batchOf(env, inst.id, m.batch_id) : null;
-    return json({ institute: branding(inst), paused: inst.status !== "active", role: m.role, displayName: m.display_name, batch: batch ? { id: batch.id, name: batch.name } : null, joinedAt: m.joined_at });
+    const plan = planOf(inst);
+    return json({ institute: branding(inst), paused: inst.status !== "active", role: m.role, displayName: m.display_name, batch: batch ? { id: batch.id, name: batch.name } : null, joinedAt: m.joined_at,
+      plusUntil: m.role === "student" && inst.status === "active" ? plan.plusUntil : null });
   }
   if (path === "/inst/join" && req.method === "POST") return join(env, me, body);
   if (path === "/inst/leave" && req.method === "POST") {
@@ -357,6 +374,16 @@ async function join(env: Env, me: string, body: any): Promise<Response> {
 async function memberRoute(req: Request, env: Env, path: string, url: URL, body: any, c: Ctx): Promise<Response> {
   const { me, m, inst } = c;
   const staff = atLeast(m.role, "teacher");
+  const on = featuresOf(inst);
+  // The centre's switches (inst-centre.ts). Students get 403 feature_off; teachers keep access so they can get
+  // things ready before switching them on. Announcements are part of the feed whatever chat says.
+  const gate: [RegExp, Feature, string][] = [
+    [/^\/inst\/doubts/, "doubts", "doubts"], [/^\/inst\/plan/, "plans", "study plans"], [/^\/inst\/(content|attempts)/, "content", "its own notes and questions"],
+    [/^\/inst\/chat/, "chat", "chat"],
+  ];
+  for (const [re, f, what] of gate) if (re.test(path) && !on[f] && !(staff && f !== "chat")) {
+    if (!(f === "chat" && staff && body?.announce === true)) return featureOff(what);
+  }
 
   // Chat and announcements. Students see their own batch; staff pick one.
   if (path === "/inst/feed" && req.method === "GET") {
@@ -367,10 +394,10 @@ async function memberRoute(req: Request, env: Env, path: string, url: URL, body:
     const hidden = staff ? "" : "AND hidden_at IS NULL";
     const announcements = (await env.DB.prepare(`SELECT id, batch_id, name, role, text, at FROM inst_messages WHERE institute_id = ? AND kind = 'announcement' AND (batch_id = ? OR batch_id IS NULL) ${hidden} ORDER BY at DESC LIMIT 10`)
       .bind(inst.id, batch.id).all()).results;
-    const messages = (await env.DB.prepare(`SELECT id, member_id, name, role, text, at, hidden_at, reported_at FROM inst_messages WHERE institute_id = ? AND batch_id = ? AND kind = 'chat' AND at > ? ${hidden} ORDER BY at DESC LIMIT 100`)
+    const messages = !on.chat ? [] : (await env.DB.prepare(`SELECT id, member_id, name, role, text, at, hidden_at, reported_at FROM inst_messages WHERE institute_id = ? AND batch_id = ? AND kind = 'chat' AND at > ? ${hidden} ORDER BY at DESC LIMIT 100`)
       .bind(inst.id, batch.id, after).all<any>()).results.reverse()
       .map((r) => ({ id: r.id, name: r.name, role: r.role, text: r.text, at: r.at, mine: r.member_id === me, ...(staff ? { hidden: !!r.hidden_at, reported: !!r.reported_at } : {}) }));
-    return json({ batch: { id: batch.id, name: batch.name }, announcements, messages });
+    return json({ batch: { id: batch.id, name: batch.name }, announcements, messages, chat: on.chat });
   }
   if (path === "/inst/chat" && req.method === "POST") {
     const text = str(body.text, 1000);
@@ -439,7 +466,7 @@ async function memberRoute(req: Request, env: Env, path: string, url: URL, body:
       .bind(id, inst.id, m.batch_id, me, m.display_name, node, ref, text, photoKey, t, t).run();
     await logEvent(env, "inst_doubt", { memberId: me }, { photo: photoKey ? 1 : 0 });
     let ai: string | null = null;
-    if (inst.ai_first_answer) ai = await aiFirstAnswer(env, inst, id, text, node);
+    if (on.firstAnswer) ai = await aiFirstAnswer(env, inst, id, text, node);
     return json({ ok: true, id, aiAnswered: !!ai });
   }
   const dm = path.match(/^\/inst\/doubts\/([\w-]{4,40})(\/reply|\/status|\/photo)?$/);
@@ -550,7 +577,8 @@ const review = (data: any, answers: any[]) => data.questions.map((q: any, i: num
   q: i, chosen: answers[i]?.chosen ?? null, right: !!answers[i]?.right, answerIndex: q.en.answerIndex, explanation: q.en.explanation, ...(q.hi ? { hiExplanation: q.hi.explanation } : {}),
 }));
 
-/** The optional AI first answer, labelled AI. Never at night, never on feelings, ranks or results. */
+/** The optional quick first answer, shown as "A quick first answer from Aspiran. Your teacher checks doubts too."
+ *  (decision 5, 24 Nov), never labelled "AI". Off unless the centre switches it on. Never at night, never on feelings, ranks or results. */
 async function aiFirstAnswer(env: Env, inst: Institute, doubtId: string, text: string, node: string | null): Promise<string | null> {
   if (quietHours() || has(text, RANKS) || has(text, FEELINGS)) return null;
   try {
@@ -796,6 +824,19 @@ async function adminRoute(req: Request, env: Env, sub: string, url: URL, body: a
     return json({ ok: true, role, batchId: role === "student" ? batchId : null });
   }
 
+  // Feature switches (admins): chat, doubts, firstAnswer, plans, content, pods. Send only the ones to change.
+  if (sub === "features" && GET) return json({ features: featuresOf(inst) });
+  if (sub === "features" && POST) {
+    const no = needAdmin(); if (no) return no;
+    const change = cleanFeatures(body);
+    if (!Object.keys(change).length) return bad("Send one or more of chat, doubts, firstAnswer, plans, content, pods as true or false.");
+    const next = { ...featuresOf(inst), ...change };
+    const { firstAnswer, ...rest } = next;
+    await env.DB.prepare("UPDATE institutes SET features = ?, ai_first_answer = ? WHERE id = ?").bind(JSON.stringify(rest), firstAnswer ? 1 : 0, inst.id).run();
+    await logEvent(env, "inst_features", { memberId: me }, change);
+    return json({ ok: true, features: next });
+  }
+
   // Branding (admins).
   if (sub === "branding" && POST) {
     const no = needAdmin(); if (no) return no;
@@ -973,29 +1014,35 @@ async function adminRoute(req: Request, env: Env, sub: string, url: URL, body: a
 
 // --- Aspiran staff: create and pause institutes ------------------------------------------------------------------
 
+/** The centre price (decision 9, 24 Nov): for Aspiran staff only, never on the public site. */
+const PRICING = { perStudentYearInr: 1200, minStudents: 25, pilotDays: PILOT_DAYS };
+
 async function staffRoute(req: Request, env: Env, path: string): Promise<Response | null> {
   const s = await requireStaff(req, env, "staff");
   if (s instanceof Response) return s;
   await ensureInstSchema(env);
   if (path === "/admin/api/institutes" && req.method === "GET") {
-    const rows = (await env.DB.prepare(`SELECT i.id, i.name, i.city, i.status, i.created_at,
+    const rows = (await env.DB.prepare(`SELECT i.id, i.name, i.city, i.status, i.created_at, i.features, i.ai_first_answer, i.pilot_ends_at, i.paid_until, i.seats,
       (SELECT COUNT(*) FROM inst_members m WHERE m.institute_id = i.id AND m.status = 'active' AND m.role = 'student') AS students,
       (SELECT COUNT(*) FROM inst_members m WHERE m.institute_id = i.id AND m.status = 'active' AND m.role != 'student') AS staff,
       (SELECT COUNT(*) FROM inst_members m WHERE m.institute_id = i.id AND m.status = 'active' AND m.role = 'owner') AS owners
-      FROM institutes i ORDER BY i.created_at DESC`).all()).results;
-    return json({ institutes: rows, flagOn: !!(await flags(env)).institutes });
+      FROM institutes i ORDER BY i.created_at DESC`).all<any>()).results;
+    const out = rows.map(({ features: _f, ai_first_answer: _a, pilot_ends_at: _p, paid_until: _u, seats: _s, ...r }) => ({ ...r, features: featuresOf({ features: _f, ai_first_answer: _a }),
+      ...planOf({ pilot_ends_at: _p, paid_until: _u, seats: _s, created_at: r.created_at }) }));
+    return json({ institutes: out, flagOn: !!(await flags(env)).institutes, pricing: PRICING });
   }
   if (path === "/admin/api/institutes" && req.method === "POST") {
     const b = await req.json<any>().catch(() => ({}));
     const name = str(b.name, 60);
     if (name.length < 2) return bad("The institute needs a name.");
     const id = newId("inst");
-    await env.DB.prepare("INSERT INTO institutes (id, name, city, created_at, created_by) VALUES (?, ?, ?, ?, ?)").bind(id, name, str(b.city, 60) || null, now(), s.id).run();
+    const t = now(), pilotEnds = new Date(Date.now() + PILOT_DAYS * 86400_000).toISOString();
+    await env.DB.prepare("INSERT INTO institutes (id, name, city, created_at, created_by, pilot_ends_at) VALUES (?, ?, ?, ?, ?, ?)").bind(id, name, str(b.city, 60) || null, t, s.id, pilotEnds).run();
     const code = await makeCode(env, id, "owner", null, "aspiran:" + s.id, 1, 30);
     await audit(env, s, "institute.create", id, { name });
     return json({ ok: true, id, ownerCode: showCode(code) });
   }
-  const sm = path.match(/^\/admin\/api\/institutes\/([\w-]{6,40})\/(status|owner-code)$/);
+  const sm = path.match(/^\/admin\/api\/institutes\/([\w-]{6,40})\/(status|owner-code|plan)$/);
   if (sm && req.method === "POST") {
     const inst = await getInstitute(env, sm[1]);
     if (!inst) return bad("No such institute", 404);
@@ -1005,6 +1052,23 @@ async function staffRoute(req: Request, env: Env, path: string): Promise<Respons
       return json({ ok: true, ownerCode: showCode(code) });
     }
     const b = await req.json<any>().catch(() => ({}));
+    // The centre's plan: seats, the pilot's end and paid-until (dates YYYY-MM-DD, or null to clear paid-until).
+    if (sm[2] === "plan") {
+      const date = (v: unknown) => (typeof v === "string" && DAY_RE.test(v) ? v + "T18:29:59.000Z" : null); // the end of that day in IST
+      const sets: string[] = [], args: unknown[] = [];
+      if (b.seats !== undefined) {
+        const n = b.seats === null ? null : Number(b.seats);
+        if (n !== null && !(Number.isInteger(n) && n >= 1 && n <= 100000)) return bad("Seats is a whole number of students.");
+        sets.push("seats = ?"); args.push(n);
+      }
+      if (b.pilotEndsAt !== undefined) { const d = date(b.pilotEndsAt); if (!d) return bad("Pilot end is YYYY-MM-DD."); sets.push("pilot_ends_at = ?"); args.push(d); }
+      if (b.paidUntil !== undefined) { const d = b.paidUntil === null ? null : date(b.paidUntil); if (b.paidUntil !== null && !d) return bad("Paid until is YYYY-MM-DD."); sets.push("paid_until = ?"); args.push(d); }
+      if (!sets.length) return bad("Send seats, pilotEndsAt or paidUntil.");
+      await env.DB.prepare(`UPDATE institutes SET ${sets.join(", ")} WHERE id = ?`).bind(...args, inst.id).run();
+      await audit(env, s, "institute.plan", inst.id, { seats: b.seats, pilotEndsAt: b.pilotEndsAt, paidUntil: b.paidUntil });
+      const row = (await getInstitute(env, inst.id))!;
+      return json({ ok: true, ...planOf(row) });
+    }
     const status = String(b.status);
     if (!["active", "paused"].includes(status)) return bad("status is active or paused");
     await env.DB.prepare("UPDATE institutes SET status = ? WHERE id = ?").bind(status, inst.id).run();

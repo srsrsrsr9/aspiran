@@ -2280,6 +2280,7 @@ function roomPinnedCard() {
 }
 
 function viewRooms(arg) {
+  const off = INST.podsOffCard(); if (off) return off;
   const box = h("div");
   if (arg) {
     roomOpen(arg);
@@ -2493,6 +2494,7 @@ function catchUp(since) {
 
 let podRedraw = () => {};
 function viewPod() {
+  const off = INST.podsOffCard(); if (off) return off;
   if (resultMode() && !store.get("podInResult")) {
     return h("div.col", h("h1", "Your pod"), h("div.card.soft", h("p", "It's a result week. Your pod is here, with no wins posts and no Chotu prompts until it's over."),
       h("button", { onclick: () => { store.set("podInResult", true); render(); } }, "Open the pod")));
