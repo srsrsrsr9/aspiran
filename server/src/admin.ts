@@ -2,7 +2,7 @@ import { voiceReady, voiceUsage, warmVoices } from "./voice";
 import { createBackup, listBackups, restoreBackup, safeBackupKey } from "./backups";
 import { factWatchApi } from "./factwatch";
 import { checkItem, prepareEdit, titleOf } from "./content";
-import { coverage } from "./coverage";
+import { cachedCoverage, reviewApi } from "./content-review";
 import { POST_SLOTS, dailyPost, postImageSvg, postLog, postSettings, recordSend, sendTelegram, validChat } from "./posts";
 import { autoChecks } from "./pipeline";
 import { exportMember, forgetMember } from "./privacy";
@@ -371,7 +371,11 @@ route("GET", /^content$/, "content", async ({ env, url }) => {
 // --- Fact watch (factwatch.ts): the daily check of facts that change over time ------------------
 route("GET", /^factwatch$/, "content", async ({ env }) => (await factWatchApi(env, "factwatch", "GET"))!);
 route("POST", /^factwatch\/run$/, "content", async ({ env, body }) => (await factWatchApi(env, "factwatch/run", "POST", body))!);
-route("GET", /^coverage$/, "content", async ({ env }) => json(await coverage(env)));
+// Read from the cached summary (content-review.ts), so opening Content doesn't scan the whole library each time.
+route("GET", /^coverage$/, "content", async ({ env }) => json(await cachedCoverage(env)));
+// Coverage and review (content-review.ts): counts by type, area and language, and the owner's 1-5 reviews.
+route("GET", /^review\/(summary|queue|item)$/, "content", async ({ env, s, m, url }) => reviewApi(env, s, m[1], "GET", url, {}));
+route("POST", /^review\/(save|refresh)$/, "content", async ({ env, s, m, url, body }) => reviewApi(env, s, m[1], "POST", url, body));
 route("GET", /^versions\/(card|library)\/(.+)$/, "content", async ({ env, m }) => {
   const { results } = await env.DB.prepare("SELECT id, action, actor, at, length(json) AS size FROM content_versions WHERE item_type = ? AND item_id = ? ORDER BY id DESC")
     .bind(m[1], decodeURIComponent(m[2])).all();

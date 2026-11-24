@@ -413,6 +413,14 @@ counts only, no identities), growth, website leads (searchable, with a coaching-
 payments, feature flags, announcements, status and incidents, staff, languages, backups
 and the audit log. Every change is in the audit log; keys and message text never are.
 
+**Coverage and review** (`src/content-review.ts`, `GET /admin/api/review/summary|queue|item`, `POST .../review/save|refresh`):
+content counts by type, by paper and by language (English, Hindi, Telugu), the gaps in plain words, and the owner's
+1-5 review of each piece (English and Hindi side by side, issues, a note, "mark reviewed"; table `content_reviews`,
+migration 0017). The counts come from one pass over the library, the Chai cards and the video manifests, kept in R2 at
+`_cache/content-summary.json` for 12 hours ("Count again" rebuilds it), so loading the page doesn't scan D1. The Content
+section's topic table (`GET /admin/api/coverage`) reads the same kept summary; the desk's Coverage tab still counts live.
+Reviews are internal to admin and never make a piece say it was "checked by a human editor". Test: `npm run test:reviews`.
+
 **Feature flags** are enforced by the server, so they work on old app versions too. Each one is a switch that asks
 before it changes and saves only that flag. Turning pod chat off closes every open chat.
 

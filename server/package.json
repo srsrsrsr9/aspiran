@@ -39,6 +39,7 @@
     "test:chai": "node --import ./test/dev-auth.mjs test/chai.mjs",
     "test:posts": "node --import ./test/dev-auth.mjs test/posts.mjs",
     "test:providers": "node test/providers.mjs",
+    "test:reviews": "node --import ./test/dev-auth.mjs test/reviews.mjs",
     "test:all": "zsh scripts/test-all.sh",
     "check:schema": "zsh scripts/check-schema.sh"
   },
