@@ -76,9 +76,16 @@ export async function withVoice(env: Env, who: Who, member: string | null, res: 
   return sig ? json({ ...body, voice: sig }) : res;
 }
 
-const log = (env: Env, who: Who, kind: string, bytes: number, ms: number | null, status: string, error: string | null = null) =>
-  env.DB.prepare("INSERT INTO voice_calls (at, day, who, kind, bytes, ms, status, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-    .bind(new Date().toISOString(), istDay(), who, kind, bytes, ms, status, error?.slice(0, 200) ?? null).run().catch(() => {});
+// A line that was made also adds to a running total for the day (daily_counts), so the cap check reads one row
+// instead of every line made today (24 Nov 2026, D1 read savings).
+const MADE = "voice_lines_ok";
+const log = (env: Env, who: Who, kind: string, bytes: number, ms: number | null, status: string, error: string | null = null) => {
+  const day = istDay();
+  const row = env.DB.prepare("INSERT INTO voice_calls (at, day, who, kind, bytes, ms, status, error) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+    .bind(new Date().toISOString(), day, who, kind, bytes, ms, status, error?.slice(0, 200) ?? null);
+  const made = env.DB.prepare("INSERT INTO daily_counts (day, metric, n) VALUES (?, ?, 1) ON CONFLICT(day, metric) DO UPDATE SET n = n + 1").bind(day, MADE);
+  return env.DB.batch(status === "ok" ? [row, made] : [row]).then(() => {}).catch(() => {});
+};
 
 const mp3 = (body: ReadableStream | ArrayBuffer, cached: boolean) => new Response(body, {
   headers: { "content-type": "audio/mpeg", "cache-control": "private, max-age=86400", "x-voice-cache": cached ? "hit" : "miss", "access-control-allow-origin": "*" },
@@ -118,7 +125,7 @@ export async function voiceRoute(req: Request, env: Env, path: string): Promise<
   // A new line costs money: the caps. Scripted lines are a fixed, small set, so they don't count against a member.
   await ensureSchema(env);
   const day = istDay();
-  const all = (await env.DB.prepare("SELECT COUNT(*) AS n FROM voice_calls WHERE day = ? AND status = 'ok'").bind(day).first<{ n: number }>())?.n ?? 0;
+  const all = (await env.DB.prepare("SELECT n FROM daily_counts WHERE day = ? AND metric = ?").bind(day, MADE).first<{ n: number }>())?.n ?? 0;
   if (all >= GLOBAL_DAILY) return json({ error: "Voices are resting for today. Back tomorrow.", limit: true }, 429);
   if (kind === "reply") {
     const mine = (await env.DB.prepare("SELECT n FROM usage WHERE member_id = ? AND day = ? AND kind = 'voice'").bind(member, day).first<{ n: number }>())?.n ?? 0;

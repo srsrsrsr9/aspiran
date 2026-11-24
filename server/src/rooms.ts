@@ -46,10 +46,23 @@ export const isOpenRoom = (id: string) => OPEN_ROOMS.some((r) => r.id === id);
 
 export const DEFAULT_GROWTH = { signupThreshold: 500 };
 
-/** Total sign-ups: every account ever made on the server. */
-export async function signups(env: Env): Promise<number> {
+/**
+ * Counts read on every app open (/config) and every rooms list. Counting them reads one row per account or per room
+ * membership, so at 10,000 members each open would read tens of thousands of rows. Kept for a few minutes in this
+ * Worker instead (a new sign-up or join in the same Worker clears it); other Workers catch up within KEEP_MS.
+ */
+const KEEP_MS = 5 * 60_000;
+let signupMemo: { n: number; at: number } | null = null;
+let roomMemo: { counts: Map<string, number>; at: number } | null = null;
+export const forgetCounts = () => { signupMemo = null; roomMemo = null; };
+
+/** Total sign-ups: every account ever made on the server. `fresh` for admin pages, which count again. */
+export async function signups(env: Env, fresh = false): Promise<number> {
+  if (!fresh && signupMemo && Date.now() - signupMemo.at < KEEP_MS) return signupMemo.n;
   await ensureSchema(env);
-  return (await env.DB.prepare("SELECT COUNT(*) AS n FROM accounts").first<{ n: number }>())?.n ?? 0;
+  const n = (await env.DB.prepare("SELECT COUNT(*) AS n FROM accounts").first<{ n: number }>())?.n ?? 0;
+  signupMemo = { n, at: Date.now() };
+  return n;
 }
 
 /**
@@ -72,6 +85,7 @@ async function startRooms(env: Env, memberId: string, f: MatchFields, mine: Set<
   if (!first.meta.changes) return [];
   const at = new Date().toISOString();
   await env.DB.batch(ids.map((id) => env.DB.prepare("INSERT OR IGNORE INTO room_members (member_id, room_id, joined_at) VALUES (?, ?, ?)").bind(memberId, id, at)));
+  roomMemo = null;
   await bump(env, "room_starts");
   await logEvent(env, "rooms_started", { memberId }, { rooms: ids.join(",") });
   ids.forEach((id) => mine.add(id));
@@ -79,9 +93,9 @@ async function startRooms(env: Env, memberId: string, f: MatchFields, mine: Set<
 }
 
 /** "open" below the threshold (rooms only), "matched" at or above it (matched pods on, rooms stay). */
-export async function podMode(env: Env): Promise<{ mode: "open" | "matched"; signups: number; threshold: number }> {
+export async function podMode(env: Env, fresh = false): Promise<{ mode: "open" | "matched"; signups: number; threshold: number }> {
   const g = await getSetting(env, "growth", DEFAULT_GROWTH);
-  const n = await signups(env);
+  const n = await signups(env, fresh);
   return { mode: n >= g.signupThreshold ? "matched" : "open", signups: n, threshold: g.signupThreshold };
 }
 
@@ -98,9 +112,11 @@ export const roomPost = (env: Env, id: string, what: string, body?: unknown) =>
 
 /** Real members per room (people only; Chotu and the AI friends are never counted). */
 export async function roomCounts(env: Env): Promise<Map<string, number>> {
+  if (roomMemo && Date.now() - roomMemo.at < KEEP_MS) return roomMemo.counts;
   await ensureSchema(env);
   const { results } = await env.DB.prepare("SELECT room_id, COUNT(*) AS n FROM room_members GROUP BY room_id").all<{ room_id: string; n: number }>();
-  return new Map(results.map((r) => [r.room_id, r.n]));
+  roomMemo = { counts: new Map(results.map((r) => [r.room_id, r.n])), at: Date.now() };
+  return roomMemo.counts;
 }
 
 /** In this open room, or in this matched pod. */
@@ -177,12 +193,13 @@ export async function roomsRoute(req: Request, env: Env, path: string, url: URL)
     await ensureSchema(env);
     if (path === "/rooms/leave") {
       await env.DB.prepare("DELETE FROM room_members WHERE member_id = ? AND room_id = ?").bind(body.memberId, roomId).run();
+      roomMemo = null;
       return json({ ok: true, roomId, joined: false });
     }
     if (!(await flags(env)).pod_join) return bad("Joining is paused for now. Try again later.", 503);
     const r = await env.DB.prepare("INSERT OR IGNORE INTO room_members (member_id, room_id, joined_at) VALUES (?, ?, ?)")
       .bind(body.memberId, roomId, new Date().toISOString()).run();
-    if (r.meta.changes) { await bump(env, "room_joins"); await logEvent(env, "room_joined", { memberId: body.memberId }, { room: roomId }); }
+    if (r.meta.changes) { roomMemo = null; await bump(env, "room_joins"); await logEvent(env, "room_joined", { memberId: body.memberId }, { room: roomId }); }
     return json({ ok: true, roomId, joined: true, members: (await roomCounts(env)).get(roomId) ?? 1 });
   }
   if (path === "/rooms/leaderboard" && req.method === "GET") return json(await roomBoard(env));

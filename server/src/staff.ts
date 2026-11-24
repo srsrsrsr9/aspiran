@@ -246,6 +246,7 @@ export const ADMIN_SCHEMA = [
   `CREATE TABLE IF NOT EXISTS fact_watch (id TEXT PRIMARY KEY, value TEXT NOT NULL, candidate TEXT, candidate_since TEXT, checked_at TEXT,
     status TEXT, note TEXT, quote TEXT)`,
   `CREATE TABLE IF NOT EXISTS daily_counts (day TEXT NOT NULL, metric TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (day, metric))`,
+  `CREATE INDEX IF NOT EXISTS daily_counts_metric ON daily_counts(metric, day)`,
   `CREATE TABLE IF NOT EXISTS consents (member_id TEXT NOT NULL, version TEXT NOT NULL, purposes TEXT NOT NULL, at TEXT NOT NULL,
     withdrawn_at TEXT, PRIMARY KEY (member_id, version))`,
   `CREATE TABLE IF NOT EXISTS privacy_requests (id INTEGER PRIMARY KEY AUTOINCREMENT, kind TEXT NOT NULL, member_hash TEXT NOT NULL,
