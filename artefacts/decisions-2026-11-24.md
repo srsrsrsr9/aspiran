@@ -37,11 +37,16 @@ Switching the `institutes` flag on stays with the owner (standing rule: Claude n
    any of these: more than 100 turns in a day, messages faster than one every 2 seconds for a minute, more than 3
    accounts on one device in a week, or a long run of questions that have nothing to do with study. A cut-off person gets
    a calm, plain line, never an accusation.
-3. **Uploading Chotu chats:** only after a clear notice and a yes from the member (India's DPDP Act). Until they say
-   yes, nothing is uploaded. The privacy page gets a new section first. A no keeps everything working.
+3. **Chotu chats are used to improve the app (owner, 24 Nov: "Everything is used for improving the app").** All chats
+   (web, online and on-phone) come to our server and may be used to improve Aspiran, for every member. There is no
+   opt-in and no opt-out switch. What the law still needs (India's DPDP Act) is done as a notice, not a gate: the privacy
+   policy and terms say it plainly, sign-up shows it and agreeing to the terms covers it, and existing members see a
+   one-time notice before their chats start uploading (they were earlier told chats stay on the phone). Chats are
+   handled responsibly: kept secure, never sold, never shown to coaching centres, and distress messages follow the
+   crisis protocol.
 4. **Daily study profile for Plus:** built. Once a night, a strong online model writes each Plus member's short study
-   profile from their own study counts (what they did, what's weak, their plan). Only counts and codes go in, never their
-   chats unless they said yes to point 3. The profile feeds Chotu (online and on the phone) and Jeetu.
+   profile from their own study counts (what they did, what's weak, their plan). Their study counts and their Chotu
+   chats both go in. The profile feeds Chotu (online and on the phone) and Jeetu.
 5. **On-phone model:** chosen by running the 303-case Chotu test set on the candidates and picking the best score that
    runs on a 6 GB phone. The result and the reasons go in `artefacts/`. The owner can overrule it.
 6. **Retired backup model:** Llama 4 Scout is replaced wherever it is still listed.
