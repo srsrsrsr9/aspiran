@@ -152,7 +152,7 @@ const GROUPS = [
   ["", [["overview", "Home", "home", "analytics"]]],
   ["Look after people", [["safety", "Safety queue", "shield", "safety"], ["moderation", "Moderation", "flag", "moderate"], ["members", "Members", "users", "members"], ["privacy", "Data requests", "lock", "privacy"]]],
   ["Content", [["content", "Content", "book", "content"], ["announcements", "Announcements", "megaphone", "announce"], ["languages", "Languages", "globe", "staff"]]],
-  ["Growth", [["insights", "Insights", "spark", "analytics"], ["analytics", "Analytics", "chart", "analytics"], ["growth", "Growth", "growth", "analytics"], ["leads", "Website leads", "inbox", "analytics"], ["trytopic", "Try one topic", "target", "analytics"], ["posts", "Daily posts", "calendar", "flags"], ["institutes", "Coaching centres", "building", "staff"]]],
+  ["Growth", [["insights", "Insights", "spark", "analytics"], ["analytics", "Daily counts", "chart", "analytics"], ["growth", "Growth", "growth", "analytics"], ["leads", "Website leads", "inbox", "analytics"], ["trytopic", "Try one topic", "target", "analytics"], ["posts", "Daily posts", "calendar", "flags"], ["institutes", "Coaching centres", "building", "staff"]]],
   ["Money", [["payments", "Payments", "coin", "flags"]]],
   ["Running Aspiran", [["flags", "Feature flags", "layers", "flags"], ["llm", "Helpers and usage", "activity", "llm:view"], ["incidents", "Status and incidents", "alert", "incidents"], ["backups", "Backups", "database", "backups"]]],
   ["Team", [["staff", "Staff and roles", "key", "staff"], ["audit", "Audit log", "list", "audit"]]],
@@ -237,8 +237,68 @@ views.overview = async () => {
         L.latestCentres.length ? [h("h4", { style: "margin:14px 0 4px" }, "Latest coaching centres"), K.list(L.latestCentres.map((c) => ({ icon: "building", title: c.centre, sub: [c.city, c.students && `${c.students} students`, K.ago(c.at), c.contact ? "left contact" : "no contact"].filter(Boolean).join(" · ") })))] : null),
       K.card({ title: "Coaching centres on Aspiran", sub: I.flagOn ? "The console is on." : "The console is switched off for everyone (flag: institutes).", actions: [go("institutes") && h("button.sm", { onclick: go("institutes") }, "Manage")] },
         h("div.k-mini", {}, h("div", {}, h("b", {}, num(I.total)), h("span", {}, "centres")), h("div", {}, h("b", {}, num(I.active)), h("span", {}, "active")), h("div", {}, h("b", {}, num(I.paused)), h("span", {}, "paused")), h("div", {}, h("b", {}, num(I.students)), h("span", {}, "students")), h("div", {}, h("b", {}, num(I.openDoubts)), h("span", {}, "doubts waiting"))))),
+    glanceSection(P),
   ];
 };
+
+// Home → "How it's going": marketing, product and content in one look (glance.ts). Worked out at most once an hour
+// on the server, so opening Home stays cheap. Loads after the rest of Home. Counts only, never who.
+const FEATURE_SHORT = { pod_session: "Pod", pod_message: "Pod chat", chai_read: "Chai", practice_answer: "Practice", mock_start: "Mocks", mock_done: "Mocks finished",
+  audio_play: "Listen", note_open: "Notes", video_play: "Videos", review_done: "Daily review", flashcard_session: "Flashcards", answer_submit: "Mains writing",
+  pyq_open: "Past papers", prep_minutes: "Focus time", roadmap_built: "Study plan", search: "Search", share: "Sharing" };
+const MOMENT_SHORT = { pod_joined: "Joining a pod", close_day: "Closing the day", chotu_chat: "Chotu chat", quiz: "Quiz", roadmap: "Study plan", chai: "Chai" };
+function glanceSection(P) {
+  const box = h("div.section", {}, h("h3", {}, "How it's going"), Kit.loading());
+  const fill = (fresh) => api("glance" + (fresh ? "?fresh=1" : "")).then((g) => put(box, ...glanceView(g, P, () => { put(box, h("h3", {}, "How it's going"), Kit.loading()); fill(true); })))
+    .catch((e) => put(box, h("h3", {}, "How it's going"), h("div.banner.err", {}, "Couldn't load the summary. " + e.message)));
+  fill(false);
+  return box;
+}
+function glanceView(g, P, refresh) {
+  const K = Kit, M = g.marketing, Pr = g.product, C = g.content, p = (v) => (v == null ? "–" : K.pct(v)), n = (v) => (v == null ? "–" : num(v));
+  const go = (id) => (can(SECTIONS.find((x) => x[0] === id)?.[2]) ? h("button.sm", { onclick: () => (location.hash = id) }, "Details") : null);
+  const week = (arr) => arr.reduce((s, x) => s + x.n, 0);
+  const thisWeek = week(P.signups.slice(-7)), lastWeek = week(P.signups.slice(-14, -7));
+  const f = M.funnel30;
+  const rows = (cols, list, empty) => (list.length ? h("table", { style: "margin-top:8px" }, h("tr", {}, cols.map(([l, , num]) => h(num ? "th.n" : "th", {}, l))), list.map((r) => h("tr", {}, cols.map(([, fn, num]) => h(num ? "td.n" : "td", {}, fn(r))))))
+    : h("p.muted", { style: "margin:8px 0 0" }, empty));
+  const piece = (label, x) => x.most.length ? [h("h4", { style: "margin:12px 0 0" }, label),
+    rows([["Most opened", (r) => r.piece], ["Opened by", (r) => num(r.opened), 1], ["Finished", (r) => p(r.finishedPct), 1]], x.most, ""),
+    x.lose.length ? h("p.muted", { style: "margin:4px 0 0" }, "Losing people: " + x.lose.map((r) => `${r.piece} (${p(r.finishedPct)} finish)`).join(", ")) : null] : null;
+  const anyPieces = C.notes.most.length || C.audio.most.length || C.videos.most.length;
+  return [
+    h("div.row", { style: "align-items:baseline;justify-content:space-between" }, h("h3", {}, "How it's going"),
+      h("span.muted", {}, `Worked out ${K.ago(g.at)}. Updates once an hour. `, h("button.sm.ghost", { onclick: refresh }, "Work it out now"))),
+    h("p.muted", { style: "margin-top:0" }, "Last 30 days unless it says otherwise. Counts of people, never who."),
+    h("div.grid2", { style: "margin-bottom:14px" },
+      K.card({ title: "Marketing", sub: "Where people come from and how many join", actions: [go("insights")] },
+        h("div.k-mini", {},
+          h("div", {}, h("b", {}, num(thisWeek)), h("span", {}, `sign-ups this week (${num(lastWeek)} the week before)`)),
+          h("div", {}, h("b", {}, n(f.demo)), h("span", {}, "tried the demo")),
+          h("div", {}, h("b", {}, n(f.signedUp)), h("span", {}, "signed up")),
+          h("div", {}, h("b", {}, n(f.paid)), h("span", {}, "paid for Plus"))),
+        rows([["Top sources (90 days)", (r) => r.source], ["Installs", (r) => num(r.installs), 1], ["Signed up", (r) => `${num(r.signups)} (${p(r.signupPct)})`, 1], ["Paid", (r) => num(r.paid), 1]],
+          M.sources, "No installs with a source yet. Links with ?src=telegram (and so on) fill this in."),
+        M.websiteConnected ? null : h("p.muted", { style: "margin:8px 0 0" }, "Website visitors need PostHog connected (see Insights).")),
+      K.card({ title: "Product", sub: "Do new people settle in and come back?", actions: [go("growth")] },
+        h("div.k-mini", {},
+          h("div", {}, h("b", {}, p(Pr.activation.pod?.pct)), h("span", {}, "joined a pod in week 1")),
+          h("div", {}, h("b", {}, p(Pr.activation.chotu?.pct)), h("span", {}, "talked to Chotu in week 1")),
+          h("div", {}, h("b", {}, p(Pr.returnNextDay?.pct)), h("span", {}, Pr.returnNextDay ? `came back next day (week of ${Pr.returnNextDay.week})` : "came back next day")),
+          h("div", {}, h("b", {}, p(Pr.returnSecondWeek?.pct)), h("span", {}, Pr.returnSecondWeek ? `back in week 2 (week of ${Pr.returnSecondWeek.week})` : "back in week 2"))),
+        h("p.muted", { style: "margin:8px 0 0" }, `Week 1 counts are of ${num(Pr.activation.started)} people who started in the last 30 days.`),
+        rows([["Used most", (r) => FEATURE_SHORT[r.name] || FEATURE[r.name] || r.name], ["People", (r) => num(r.people), 1], ["Times", (r) => num(r.n), 1]], Pr.features, "Nothing used yet."),
+        Pr.studiedTrend?.values ? h("div.row", { style: "align-items:center;gap:10px;margin-top:10px" }, K.spark(Pr.studiedTrend.values, { w: 160, h: 32 }), h("span.muted", {}, "members who studied each day")) : null)),
+    K.card({ title: "Content", sub: "What gets opened, what gets finished, and how it feels", actions: [go("insights")] },
+      h("div.grid2", {},
+        h("div", {}, anyPieces ? [piece("Notes", C.notes), piece("Listen", C.audio), piece("Videos", C.videos)] : h("p.muted", {}, "No notes, audio or videos opened yet.")),
+        h("div", {},
+          h("h4", { style: "margin:12px 0 0" }, "One-tap ratings (90 days)"),
+          rows([["After", (r) => MOMENT_SHORT[r.moment] || r.moment], ["Taps", (r) => num(r.n), 1], ["Helpful", (r) => p(r.n ? Math.round((r.r3 / r.n) * 100) : null), 1]], C.ratings, "No ratings yet."),
+          C.mostWrong.length ? [h("h4", { style: "margin:12px 0 0" }, "Topics most often wrong"), h("p.muted", { style: "margin:4px 0 0" }, C.mostWrong.map((r) => `${r.node} (${p(r.wrongPct)} wrong)`).join(", "))] : null,
+          C.reviewKeptPct != null ? h("p.muted", { style: "margin:8px 0 0" }, `Daily review: ${p(C.reviewKeptPct)} of items come back right.`) : null))),
+  ];
+}
 
 // Insights (insights.ts): eight cards, each with one plain sentence on what it counts. Our database always; PostHog
 // (website, screens, errors) only once its read key is set, and then fetched at most once an hour.
@@ -472,17 +532,20 @@ views.members = async () => {
     h("h3", {}, "Sign-in accounts"),
     h("p.lead", {}, "Who may use the app. Suspending switches access off on every device at its next check (the app checks on open and every few hours, and any server call refuses at once) and closes their live pod and Commons connections. Phone numbers and emails are only for finding someone here: members never see them and they are never sent to Chotu or any model."),
     h("div.row", { style: "margin-bottom:12px" }, h("input", { placeholder: "Phone, email, username, account id or member id", value: aq, style: "min-width:300px", onchange: (e) => { views.members.aq = e.target.value; show("members"); } })),
-    h("div.card.scroll", {}, accounts.length ? h("table", {}, h("tr", {}, h("th", {}, "Account"), h("th", {}, "Signed in with"), h("th", {}, "Member"), h("th", {}, "Last seen"), h("th", {}, "Access"), h("th", {}, "")),
+    h("p.muted", {}, "Each person has two codes, shown under \"Codes\": a sign-in code (from Google or our sign-in service) and a member code (a random code that ties their pod, practice and payments together without using their email). You only need them to match a support request or an export; the search box takes either. The app's own numbers about what people use are on Home and Insights, as counts, never per person."),
+    h("div.card.scroll", {}, accounts.length ? h("table", {}, h("tr", {}, h("th", {}, "Person"), h("th", {}, "Signs in with"), h("th", {}, "Uses"), h("th", {}, "Pod"), h("th", {}, "Last seen"), h("th", {}, "Access"), h("th", {}, "")),
       accounts.map((a) => h("tr", {},
-        h("td", {}, h("div", {}, a.phone || a.email || (a.username ? "@" + a.username : "(no phone or email)")), h("div.mono.muted", {}, a.uid)),
-        h("td.muted", {}, a.provider === "google.com" ? "Google" : a.provider === "password" ? "Username and password" : a.provider, a.app_version ? h("div", {}, "app " + a.app_version) : null),
-        h("td", {}, a.member_id ? h("span.mono", {}, a.member_id) : h("span.muted", {}, "—"), a.pod_id ? h("div.muted", {}, "pod " + a.pod_id) : null),
-        h("td.muted", {}, a.last_seen_at ? ago(a.last_seen_at) : "never", h("div", {}, "since " + when(a.created_at))),
+        h("td", {}, h("div", {}, personName(a)),
+          h("details", {}, h("summary.muted", {}, "Codes"), h("div.mono.muted", { title: "Sign-in code" }, "sign-in: " + a.uid), a.member_id ? h("div.mono.muted", { title: "Member code" }, "member: " + a.member_id) : h("div.muted", {}, "No member code yet (hasn't opened the app since signing in)."))),
+        h("td.muted", {}, providerName(a.provider)),
+        h("td.muted", {}, appName(a.app_version)),
+        h("td", {}, a.pod_id ? h("span", { title: "Pod " + a.pod_id }, "In a pod", h("div.mono.muted", {}, a.pod_id.slice(0, 8))) : h("span.muted", {}, "Not in a pod")),
+        h("td.muted", {}, a.last_seen_at ? ago(a.last_seen_at) : "never", h("div", {}, "joined " + when(a.created_at))),
         h("td", {}, statusChip(a), a.status_reason ? h("div.muted", {}, a.status_reason) : null),
         h("td", {}, a.status === "active"
           ? h("button.danger", { onclick: () => accountDialog(a, "suspend") }, "Suspend…")
           : h("button", { onclick: () => accountDialog(a, "restore") }, "Restore…"),
-          " ", h("button", { onclick: () => accountHistoryDialog(a) }, "History"),
+          " ", h("button", { onclick: () => accountHistoryDialog(a), title: "When access was switched off or on, and password resets" }, "Access log"),
           a.provider === "password" ? [" ", h("button", { onclick: () => resetPasswordDialog(a) }, "Reset password…")] : null)))) : h("p.muted", {}, aq ? "No account matches." : "No one has signed in yet.")),
     h("h3", {}, "Pods to join up"),
     h("p.lead", {}, "Every Monday the app pairs pods where fewer than 3 people posted that week with another thin pod of the same stage and language. Nothing moves until you approve. Approving tells both pods; the move happens 3 days later, and anyone who taps \"Keep me here\" stays."),
@@ -537,10 +600,26 @@ function resetPasswordDialog(a) {
       } catch (e) { toast(e.message || "Couldn't reset the password.", "err"); }
     } }, "Set a temporary password")));
 }
+// Plain words for the Members table: who, how they sign in, which app.
+function personName(a) { return a.email || a.phone || (a.username ? "@" + a.username : "No email or phone (signed in another way)"); }
+function providerName(p) { return { "google.com": "Google", password: "Username and password", phone: "Phone number", "dev": "Test sign-in" }[p] || p || "–"; }
+function appName(v) {
+  if (!v) return "Not known yet";
+  if (v === "web") return "Website (aspiran.in)";
+  const m = /^android-(.+)$/.exec(v);
+  return m ? `Android app, version ${m[1]}` : v;
+}
+// The access log (account_audit): only staff or safety actions on the account. What someone studies is never logged per person.
+const ACCESS_ACTION = { suspend: "Access switched off", restore: "Access restored", reset_password: "Password reset", erased: "Deleted their data" };
 async function accountHistoryDialog(a) {
-  const list = await api(`accounts/${encodeURIComponent(a.uid)}/history`);
-  dialog(h("h3", {}, "Access history"), h("p.mono", {}, a.uid),
-    list.length ? h("table", {}, list.map((x) => h("tr", {}, h("td.muted", {}, when(x.at)), h("td", {}, x.action), h("td", {}, x.reason || ""), h("td.muted", {}, x.actor)))) : h("p.muted", {}, "No changes yet."));
+  let list;
+  try { list = await api(`accounts/${encodeURIComponent(a.uid)}/history`); } catch (e) { toast(e.message, "err"); return; }
+  const rows = [...list.map((x) => [x.at, ACCESS_ACTION[x.action] || x.action, x.reason || "", x.actor || ""]), [a.created_at, "Account made", "First sign-in" + (a.provider ? " with " + providerName(a.provider) : ""), ""]];
+  dialog(h("h3", {}, "Access log: " + personName(a)),
+    h("p.muted", {}, "When this account was made, and every time staff switched access off or on or reset a password (with the reason and who did it). It doesn't show what they study: that's never kept per person."),
+    h("table", {}, h("tr", {}, ["When", "What happened", "Reason", "By"].map((x) => h("th", {}, x))), rows.map(([at, what, why, by]) => h("tr", {}, h("td.muted", {}, when(at)), h("td", {}, what), h("td", {}, why), h("td.muted", {}, by)))),
+    list.length ? null : h("p.muted", {}, "No access changes since then. That's normal: most accounts never have any."),
+    h("p.muted", {}, `Last seen: ${a.last_seen_at ? ago(a.last_seen_at) : "never"}. ${a.app_version ? "Using: " + appName(a.app_version) + "." : ""}`));
 }
 async function memberAction(m, a) {
   if (!a) return;
@@ -657,8 +736,8 @@ views.analytics = async () => {
   for (const r of d.counts) (series[r.metric] ??= {})[r.day] = r.n;
   const range = lastDays(days);
   const pub = Object.fromEntries(d.published.map((r) => [r.day, r.cards]));
-  return [h("h2", {}, "Analytics"),
-    h("p.lead", {}, "Daily totals only. Nobody is tracked: the server counts how many, never who, and nothing on members' phones is counted."),
+  return [h("h2", {}, "Daily counts"),
+    h("p.lead", {}, "Simple daily totals the server keeps as things happen (web app opens, pod messages, reports and so on), plus who approved content. For sign-ups, sources, return and what gets used, see Home (How it's going), Insights and Growth."),
     h("div.row", { style: "margin-bottom:12px" }, [7, 30, 90].map((n) => h("button", { class: n === days ? "primary" : "", onclick: () => { views.analytics.days = n; show("analytics"); } }, `${n} days`))),
     h("div.tiles", {},
       h("div.tile", {}, h("div.n", {}, num(d.pods?.members)), h("div.l", {}, `members in ${num(d.pods?.pods)} pods`)),

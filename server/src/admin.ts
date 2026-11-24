@@ -19,6 +19,7 @@ import { accountHistory, searchAccounts, setAccountStatus } from "./auth";
 import { resetPassword } from "./password";
 import { growthReport } from "./metrics";
 import { insightsReport } from "./insights";
+import { glance } from "./glance";
 import { listLeads, listWebChats, webChat } from "./web";
 import { tryFeedbackRows, tryUpdates } from "./try";
 import { recallFunnel, sendRecalls } from "./try-recall";
@@ -89,6 +90,8 @@ route("GET", /^overview$/, "analytics", async ({ env }) => {
 
 // Insights (analytics scope part 2): plain-sentence cards from D1 and, once POSTHOG_PERSONAL_KEY is set, PostHog.
 route("GET", /^insights$/, "analytics", async ({ env }) => json(await insightsReport(env)));
+// Home's "How it's going": a short summary of Insights and Growth, worked out at most once an hour (glance.ts).
+route("GET", /^glance$/, "analytics", async ({ env, url }) => json(await glance(env, url.searchParams.get("fresh") === "1")));
 
 // The home dashboard: one look at people, Plus, money, content, today's Chai, helper usage, leads and coaching centres.
 // Counts only, never who. Payments show only to roles that can see the Payments section.

@@ -63,6 +63,20 @@ assert.ok(!JSON.stringify(I).includes("Free text, with spaces!"), "free text is 
 assert.ok(!JSON.stringify(I).includes("score"), "a mock's score is never kept");
 step("Insights: staff key only; every PostHog part says not connected without the key; our numbers and codes still show");
 
+// Home → "How it's going" (src/glance.ts): staff only, the three groups, kept for an hour unless asked fresh.
+assert.equal((await fetch(BASE + "/admin/api/glance")).status, 401, "glance needs a staff key");
+let gl = await staff("/admin/api/glance?fresh=1");
+assert.equal(gl.status, 200, JSON.stringify(gl.data));
+assert.equal(gl.data.cached, false);
+assert.ok(gl.data.marketing.funnel30 && Array.isArray(gl.data.marketing.sources), "marketing: funnel and sources");
+assert.ok(gl.data.product.activation && Array.isArray(gl.data.product.features), "product: activation and features");
+assert.ok(gl.data.product.features.some((f) => f.name === "practice_answer"), "practice shows in what gets used");
+assert.ok(gl.data.content.notes.most.some((p) => p.piece === "polity-governor"), "content: the note opened above");
+assert.ok(!JSON.stringify(gl.data).includes("@example.com"), "no emails in the summary");
+gl = await staff("/admin/api/glance");
+assert.equal(gl.data.cached, true, "the second look comes from the hour's copy");
+step("Home summary: staff only; marketing, product and content; kept for an hour; no emails");
+
 // --- Coaching-centre reports -------------------------------------------------------------------------------------------
 const flagsBefore = (await staff("/admin/api/flags")).data.flags;
 await staff("/admin/api/flags", { flags: { institutes: true } });
