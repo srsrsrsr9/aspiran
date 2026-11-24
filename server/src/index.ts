@@ -33,6 +33,7 @@ import { authRoute, isContentRoute, isMemberRoute, memberGate, publicAuthConfig 
 import { passwordRoute } from "./password";
 import { logFirst, metricsRoute } from "./metrics";
 import { roadmapRoute } from "./roadmap";
+import { statNightly } from "./stat";
 
 import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
@@ -300,6 +301,8 @@ export default {
     // The day's Chai drafts get a run to themselves at 05:00: sharing 05:30 with the backup, the fact watch and the
     // rest, the run was cut short and left nothing (14 and 15 Nov 2026). The catch-up below covers a bad morning.
     if (hm === "05:00") ctx.waitUntil(chaiDrafts(env, hm, true));
+    // Analytics roll-up: yesterday's events counted once into stat_daily, for Home's "How it's going" (stat.ts).
+    if (hm === "01:00") ctx.waitUntil(statNightly(env, at).then(log("stats"), fail("stats")));
     // A provider set aside after a billing or key error gets one tiny test call a day, in a run of its own, before the
     // morning's drafting and chats; if it answers it's back in every route (ai.ts checkProviders).
     if (hm === "04:30") ctx.waitUntil(checkProviders(env).then(log("providers"), fail("providers")));

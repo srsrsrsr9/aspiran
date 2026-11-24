@@ -263,13 +263,14 @@ function glanceView(g, P, refresh) {
   const rows = (cols, list, empty) => (list.length ? h("table", { style: "margin-top:8px" }, h("tr", {}, cols.map(([l, , num]) => h(num ? "th.n" : "th", {}, l))), list.map((r) => h("tr", {}, cols.map(([, fn, num]) => h(num ? "td.n" : "td", {}, fn(r))))))
     : h("p.muted", { style: "margin:8px 0 0" }, empty));
   const piece = (label, x) => x.most.length ? [h("h4", { style: "margin:12px 0 0" }, label),
-    rows([["Most opened", (r) => r.piece], ["Opened by", (r) => num(r.opened), 1], ["Finished", (r) => p(r.finishedPct), 1]], x.most, ""),
+    rows([["Most opened", (r) => r.piece], ["Opens", (r) => num(r.opened), 1], ["Finished", (r) => p(r.finishedPct), 1]], x.most, ""),
     x.lose.length ? h("p.muted", { style: "margin:4px 0 0" }, "Losing people: " + x.lose.map((r) => `${r.piece} (${p(r.finishedPct)} finish)`).join(", ")) : null] : null;
   const anyPieces = C.notes.most.length || C.audio.most.length || C.videos.most.length;
   return [
     h("div.row", { style: "align-items:baseline;justify-content:space-between" }, h("h3", {}, "How it's going"),
       h("span.muted", {}, `Worked out ${K.ago(g.at)}. Updates once an hour. `, h("button.sm.ghost", { onclick: refresh }, "Work it out now"))),
-    h("p.muted", { style: "margin-top:0" }, "Last 30 days unless it says otherwise. Counts of people, never who."),
+    h("p.muted", { style: "margin-top:0" }, "Last 30 finished days, counted each night at 1 am, unless it says otherwise. Counts of people, never who."
+      + (g.daysCounted < 30 ? ` So far ${g.daysCounted} of those days are counted; the rest fill in over the next few nights.` : "")),
     h("div.grid2", { style: "margin-bottom:14px" },
       K.card({ title: "Marketing", sub: "Where people come from and how many join", actions: [go("insights")] },
         h("div.k-mini", {},
@@ -287,7 +288,7 @@ function glanceView(g, P, refresh) {
           h("div", {}, h("b", {}, p(Pr.returnNextDay?.pct)), h("span", {}, Pr.returnNextDay ? `came back next day (week of ${Pr.returnNextDay.week})` : "came back next day")),
           h("div", {}, h("b", {}, p(Pr.returnSecondWeek?.pct)), h("span", {}, Pr.returnSecondWeek ? `back in week 2 (week of ${Pr.returnSecondWeek.week})` : "back in week 2"))),
         h("p.muted", { style: "margin:8px 0 0" }, `Week 1 counts are of ${num(Pr.activation.started)} people who started in the last 30 days.`),
-        rows([["Used most", (r) => FEATURE_SHORT[r.name] || FEATURE[r.name] || r.name], ["People", (r) => num(r.people), 1], ["Times", (r) => num(r.n), 1]], Pr.features, "Nothing used yet."),
+        rows([["Used most", (r) => FEATURE_SHORT[r.name] || FEATURE[r.name] || r.name], ["People on the busiest day", (r) => num(r.busiestDay), 1], ["Times in 30 days", (r) => num(r.n), 1]], Pr.features, "Nothing used yet."),
         Pr.studiedTrend?.values ? h("div.row", { style: "align-items:center;gap:10px;margin-top:10px" }, K.spark(Pr.studiedTrend.values, { w: 160, h: 32 }), h("span.muted", {}, "members who studied each day")) : null)),
     K.card({ title: "Content", sub: "What gets opened, what gets finished, and how it feels", actions: [go("insights")] },
       h("div.grid2", {},
@@ -307,8 +308,13 @@ const FEATURE = { note_open: "Opened a note", note_done: "Finished a note", audi
   flashcard_session: "Finished flashcards", review_done: "Did the daily review", mock_start: "Started a mock", mock_done: "Finished a mock",
   pyq_open: "Opened past papers", answer_submit: "Wrote a Mains answer", answer_rewrite: "Rewrote an answer", prep_minutes: "Focus time",
   pod_session: "Spent time in the pod", pod_message: "Wrote in the pod", search: "Searched", share: "Shared something" };
+// Insights and Growth are worked out at most once an hour on the server (they count over every event); this says when.
+function workedOut(d, id) {
+  return d.at ? h("p.muted", {}, `Worked out ${Kit.ago(d.at)}; kept for an hour so the database isn't counted again on every visit. `,
+    h("button.sm.ghost", { onclick: () => { views[id].fresh = true; show(id); } }, "Work it out now")) : null;
+}
 views.insights = async () => {
-  const d = await api("insights");
+  const d = await api("insights" + (views.insights.fresh ? "?fresh=1" : "")); views.insights.fresh = false;
   const K = Kit, C = d.cards, n = (v) => (v == null ? "–" : num(v)), p = (v) => K.pct(v);
   const notConnected = h("div.banner.warn", {}, "PostHog isn't connected, so the website, screens and errors aren't shown. To connect it, the owner adds a read-only PostHog key with ",
     h("span.mono", {}, "npx wrangler secret put POSTHOG_PERSONAL_KEY --env production"), " (the runbook is in artefacts).");
@@ -322,6 +328,7 @@ views.insights = async () => {
   const B = C.breaks, O = C.organisations;
   return [
     K.pageHead("Insights", `Today, ${K.day(d.today)}. What's happening, in plain sentences. ${d.note}`),
+    workedOut(d, "insights"),
     d.posthogConnected ? null : notConnected,
     card(C.today,
       h("div.tiles", {}, C.today.rows.map((r) => K.kpi({ label: r.what, value: r.today == null ? "–" : num(r.today),
@@ -753,7 +760,7 @@ views.analytics = async () => {
 
 // Growth (metrics.ts): our own events only. No third-party trackers; no mood, journal or chat text is ever logged.
 views.growth = async () => {
-  const d = await api("growth");
+  const d = await api("growth" + (views.growth.fresh ? "?fresh=1" : "")); views.growth.fresh = false;
   const p = (v) => (v == null ? "–" : v + "%");
   const table = (head, rows) => h("div.card.scroll", {}, rows.length ? h("table", {}, h("tr", {}, head.map((x) => h("th", {}, x))), rows.map((r) => h("tr", {}, r.map((x) => h("td", {}, x))))) : h("p.muted", {}, "Nothing yet."));
   const t = d.podTest;
@@ -761,7 +768,7 @@ views.growth = async () => {
   const STEP = { onboarding_done: "Finished onboarding", pod_joined: "Joined a pod", first_chotu_chat: "First Chotu chat", ritual: "Did a ritual" };
   const MOMENT = { pod_joined: "After joining a pod", close_day: "After closing the day", chotu_chat: "After a Chotu chat", quiz: "After a quiz", roadmap: "After building a roadmap", chai: "After reading the Chai" };
   const f = d.paidFunnel;
-  return [h("h2", {}, "Growth"), h("p.lead", {}, d.note),
+  return [h("h2", {}, "Growth"), h("p.lead", {}, d.note), workedOut(d, "growth"),
     h("h3", {}, "The pod test"),
     h("div.tiles", {},
       h("div.tile" + (t.verdict === "stop" ? ".warn" : ""), {}, h("div.n", {}, p(t.pct)), h("div.l", {}, `of ${num(t.joined)} pod members were active in their 4th week`)),

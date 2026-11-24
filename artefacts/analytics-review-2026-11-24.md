@@ -2,17 +2,33 @@
 
 ## Decisions for you (owner)
 
-1. **Daily roll-up table (recommended, yes/no).** Insights and Growth re-count the whole events table every time
-   someone opens them. That's a big share of our daily database reads. A small nightly job would save each day's
-   totals into one table, and the pages would read that instead. Nothing new is collected. About half a day of work.
-2. **Website lead → sign-up link (recommended, yes/no).** Today we can't tell whether a visitor who chatted with Chotu
-   on aspiran.in later signed up. Passing the website's visitor code along when they tap "Join" would let us count it
-   (counts only). Small change on the website and server.
-3. **Per-person activity for support (recommended: no, for now).** Staff can't see what one member has used. We
-   could show it, but the admin page promises "counts, never who", and it isn't needed yet. Leave it off.
-4. **Merge the four analytics pages (recommended, later).** Home, Insights, Daily counts (was "Analytics") and Growth
-   overlap. Once the new Home summary has been used for a week or two, we fold Growth into Insights and keep Daily
-   counts for safety and editorial numbers only.
+Owner said "go ahead" (24 Nov) to the recommendations:
+
+1. **Daily roll-up table: yes, built.** See "Second round" below.
+2. **Website lead → sign-up link: yes, handled by the marketing session** (branch `claude/marketing-crm-f8328b`):
+   its nightly `mkt_daily` table counts website visit → lead → sign-up → Plus by source, and its people list matches a
+   lead to a member when they sign up with the same contact. Not duplicated here.
+3. **Per-person activity for support: no, for now.** The admin page promises "counts, never who".
+4. **Merge the four analytics pages: later**, after a week or two with the new Home summary.
+
+## Second round, 24 Nov: the nightly roll-up (built, not deployed)
+
+- New table `stat_daily(day, metric, key, n)` (`server/src/stat.ts`, `migrations/0018_stat_daily.sql`, plus an index
+  `events(day)`). At 01:00 IST the server counts yesterday's events once: active and studying members, use of each
+  feature, opens and finishes per note/audio/video, practice answers and topics most wrong, review, sign-ups, demo,
+  Plus page, paid. For each sign-up day it also records, once the window has passed: back next day, back in week 2,
+  back a month on, and week-1 steps (onboarding, pod, first Chotu chat, a ritual). Counts only, no ids.
+- The first nights fill in the last 40 days, 10 a night. Home says how many of the last 30 days are counted so far.
+- **Home's "How it's going" now reads only this table** (a few hundred small rows), never the events table.
+- **Insights and Growth are kept for an hour** after they're worked out, with a "Work it out now" button, so repeat
+  visits don't re-count the events table. Moving them fully onto the roll-up is the next step if reads are still high.
+- Staff can count a day by hand: `POST /admin/api/stats/roll {"day": "YYYY-MM-DD"}` (today if no day).
+- Before deploy: run `migrations/0018_stat_daily.sql` on production (building the `events(day)` index reads the
+  events table once). Migration 0017 is used by two sibling branches; 0018 is this one.
+- Small differences from Insights: "Times" and opens are summed day by day, so someone who opens the same note on two
+  days counts twice; features show "people on the busiest day" rather than distinct people over 30 days.
+- Not tested end to end: the return and week-1 numbers need real days to pass. The test covers counting today and the
+  summary reading it.
 
 ## Built on this branch (not deployed)
 
