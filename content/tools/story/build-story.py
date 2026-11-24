@@ -104,7 +104,7 @@ def caption_png_mac(text, lang, dest, scale):
     AppKit.NSBezierPath.bezierPathWithRoundedRect_xRadius_yRadius_(Foundation.NSMakeRect(x0, y0, bw, bh), 18 * scale, 18 * scale).fill()
     string.drawWithRect_options_(Foundation.NSMakeRect((w - w * 0.8) / 2, y0 + 14 * scale, w * 0.8, th), AppKit.NSStringDrawingUsesLineFragmentOrigin)
     AppKit.NSGraphicsContext.restoreGraphicsState()
-    rep.representationUsingType_properties_(AppKit.NSBitmapImageFileTypePNG, None).writeToFile_atomically_(str(dest), True)
+    rep.representationUsingType_properties_(AppKit.NSBitmapImageFileTypePNG, None).writeToFile_atomically_(str(dest), False)
 
 
 def caption_png(text, lang, dest, scale):
