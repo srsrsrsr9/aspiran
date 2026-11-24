@@ -156,6 +156,54 @@ step("feedback: stored anonymously, consent for contact, crisis text flagged, su
   assert.equal((await call(`/try/recall/${c5}`, { auth: false })).status, 404);
   assert.equal((await call("/try/recall/nope", { auth: false })).status, 404);
   step("day 3: cancel, unsubscribe and \"Delete what I sent\" all stop it");
+
+  // K4 (src/try-series.ts): five study emails only for those who tick the separate box. Days 0, 7, 14, 30 from the
+  // series; day 3 is the recall email, which then says "second of five" and carries the series' stop link.
+  const runS = (day) => call("/admin/api/try/series/run", { method: "POST", body: { day } });
+  const ob = async (to) => (await call(`/auth/password/dev/outbox?to=${encodeURIComponent(to)}`, { auth: false })).data;
+  const plus = (n) => new Date(Date.parse(today + "T12:00:00Z") + n * 86400e3).toISOString().slice(0, 10);
+  const e6 = "noseries-" + email, e7 = "series-" + email, e8 = "seriesstop-" + email, e9 = "seriescancel-" + email;
+  const m6 = await rc({ email: e6, consent: true, cards: [] }, s3 + "d");
+  assert.equal(m6.data.series, null, "no series without its own tick");
+  const m7 = await rc({ email: e7, consent: true, cards: [], series: true, seriesText: "Send me 5 short study emails." }, s3 + "e");
+  assert.match(m7.data.series, /^[a-f0-9]{32}$/);
+  const r0 = await runS(today);
+  assert.equal(r0.status, 200, JSON.stringify(r0.data));
+  assert.equal((await ob(e6))?.to, undefined, "the unticked visitor gets nothing from the series");
+  const d0 = await ob(e7);
+  assert.match(d0.subject, /You tried the demo/);
+  assert.ok(d0.text.includes(`/try/series/${m7.data.series}/stop`) && !d0.text.includes("{{"), "stop link filled in");
+  assert.ok(d0.text.includes("planned a Mains answer") && !/\bAI\b/.test(d0.text));
+  assert.equal(d0.headers["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click");
+  await runS(today);
+  assert.match((await ob(e7)).subject, /You tried the demo/, "day 0 goes once");
+  step("K4: only the ticked box signs up; day 0 goes once, with its stop link");
+
+  await run(due);
+  const d3m = await ob(e7);
+  assert.match(d3m.subject, /three days on/);
+  assert.ok(d3m.text.includes("second of your five") && d3m.text.includes(`/try/series/${m7.data.series}/stop`), "day 3 says it's part of the series");
+  assert.ok((await ob(e6)).text.includes("only email about it"), "the unticked visitor's day 3 still says it's the only one");
+  for (const [n, re] of [[7, /Why you forget/], [14, /Mains answers/], [30, /A month since/]]) {
+    await runS(plus(n - 1));
+    assert.ok(!re.test((await ob(e7)).subject), `day ${n} doesn't go early`);
+    await runS(plus(n));
+    assert.match((await ob(e7)).subject, re, `day ${n} goes on its day`);
+  }
+  const sf = (await call("/admin/api/try/series")).data;
+  assert.ok(sf.finished >= 1 && !JSON.stringify(sf).includes("@"), "finished, and Admin sees counts only");
+  step("K4: day 3 is the second of five; days 7, 14 and 30 go on their days, then the address is gone");
+
+  const m8 = await rc({ email: e8, consent: true, cards: [], series: true }, s3 + "f");
+  const stopS = await fetch(`${BASE}/try/series/${m8.data.series}/stop`);
+  assert.equal(stopS.status, 200);
+  await runS(today); await run(due);
+  assert.equal((await ob(e8))?.to, undefined, "stopping the series stops day 3 too");
+  const m9 = await rc({ email: e9, consent: true, cards: [], series: true }, s3 + "g");
+  await call(`/try/recall/${m9.data.code}/stop`, { method: "POST", auth: false });
+  await runS(today);
+  assert.equal((await ob(e9))?.to, undefined, "cancelling day 3 in the demo stops the series too");
+  step("K4: one stop link stops every email still to come");
 }
 
 await call(`/desk/api/library/${row.id}/unapprove`, { method: "POST" });

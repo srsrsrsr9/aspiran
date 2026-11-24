@@ -39,6 +39,7 @@ import { marketingNightly } from "./marketing";
 import { pruneWebChats, webRoute } from "./web";
 import { tryRoute } from "./try";
 import { sendRecalls } from "./try-recall";
+import { sendSeries } from "./try-series";
 import { learnRoute } from "./learn";
 import { instituteRoute } from "./institutes";
 import { podsGate } from "./inst-centre";
@@ -356,7 +357,7 @@ export default {
     }
     // The open demo's day-3 emails (try-recall.ts): late morning, outside the quiet hours, a few slots so a busy day
     // (or a Resend hiccup) catches up. Each run sends at most 40.
-    if (["09:00", "09:30", "10:00", "11:00", "12:00", "17:00"].includes(hm)) ctx.waitUntil(sendRecalls(env).then(log("day-3 emails"), fail("day-3 emails")));
+    if (["09:00", "09:30", "10:00", "11:00", "12:00", "17:00"].includes(hm)) ctx.waitUntil(sendRecalls(env).then(log("day-3 emails"), fail("day-3 emails")).then(() => sendSeries(env)).then(log("K4 series emails"), fail("K4 series emails")));
     // Daily posts (posts.ts, flag daily_posts, off by default): the day's Chai and a past question to the Telegram
     // channel at 07:30 IST, tried again each hour until 12:30 if the Chai came late or a send failed.
     if (POST_SLOTS.includes(hm)) ctx.waitUntil(runDailyPosts(env, istDay(), hm).then(log("daily posts"), fail("daily posts")));

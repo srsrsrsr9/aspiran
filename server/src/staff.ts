@@ -339,6 +339,12 @@ export const ADMIN_SCHEMA = [
     opened_at TEXT, answered_at TEXT, kept INTEGER, of_n INTEGER, stopped_at TEXT)`,
   `CREATE INDEX IF NOT EXISTS try_recall_due ON try_recall(due_day, sent_at)`,
   `CREATE INDEX IF NOT EXISTS try_recall_session ON try_recall(session_id)`,
+  // K4 (try-series.ts): the five study emails for visitors who ticked that box. Address deleted after the last one or on stop.
+  `CREATE TABLE IF NOT EXISTS try_series (code TEXT PRIMARY KEY, session_id TEXT NOT NULL, recall_code TEXT, email TEXT, lang TEXT NOT NULL,
+    consent_text TEXT NOT NULL, created_at TEXT NOT NULL, start_day TEXT NOT NULL, step INTEGER NOT NULL DEFAULT 0, tries INTEGER NOT NULL DEFAULT 0,
+    last_sent_at TEXT, stopped_at TEXT, done_at TEXT)`,
+  `CREATE INDEX IF NOT EXISTS try_series_session ON try_series(session_id)`,
+  `CREATE INDEX IF NOT EXISTS try_series_recall ON try_series(recall_code)`,
   `CREATE TABLE IF NOT EXISTS try_updates (id INTEGER PRIMARY KEY AUTOINCREMENT, path_id TEXT NOT NULL, text_en TEXT NOT NULL, text_hi TEXT,
     done_on TEXT NOT NULL, hidden INTEGER NOT NULL DEFAULT 0, created_by TEXT, created_at TEXT NOT NULL)`,
 ];

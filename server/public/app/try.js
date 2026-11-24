@@ -831,6 +831,7 @@ function keepCards(st, cards = st.cards) {
 // A visitor who kept cards can ask for one email, three days later, with 5 questions from the topic (their own cards
 // first). The email opens #tryback/<code>: the questions, then privately "You kept 4 of 5", then join and keep them.
 // The address is used for that one email and deleted when it's sent; cancelling here (or "Delete what I sent") deletes it.
+// A second, unticked box signs up for K4's five study emails (server/src/try-series.ts); cancelling stops those too.
 
 const D3 = {
   en: {
@@ -838,6 +839,9 @@ const D3 = {
     lead: "Three days is about when new facts start to slip. One email with the questions; answer them in your browser and see how many you kept.",
     label: "Your email", consent: (wd) => `Email me these questions once, on ${wd}.`, button: "Send them to me",
     privacy: "We use your address for this one email and delete it as soon as it's sent. No newsletter, never shared. You can cancel here until then.",
+    series: "Also send me 5 short study emails over the next month (this one is the second). Stop any time.",
+    seriesPrivacy: "If you tick the study emails, we keep your address until the last one, on day 30, then delete it. Every email has a stop link.",
+    seriesSigned: "You'll also get the 5 short study emails. Cancelling stops them all.",
     tick: "Tick the box first, so we know you want the email.", signed: (d) => `Look for an email from Aspiran on ${d}.`,
     signedNote: "One email, then your address is deleted.", cancel: "Cancel it", cancelled: "Cancelled. Your address is deleted.",
     backTitle: "Three days on: what stayed?", backLead: (t, n, d) => `On ${d} you tried ${t}. Here are ${n} of its questions again. No clock, and only you see how it went.`,
@@ -857,6 +861,9 @@ const D3 = {
     lead: "तीन दिन में नई बातें अक्सर फिसलने लगती हैं। एक ईमेल, उसमें सवाल; browser में जवाब दीजिए और देखिए कितना याद रहा।",
     label: "आपका ईमेल", consent: (wd) => `${wd} को ये सवाल मुझे एक बार ईमेल कीजिए।`, button: "मुझे भेजिए",
     privacy: "आपका पता सिर्फ़ इसी एक ईमेल के लिए है, भेजते ही मिटा दिया जाएगा। कोई newsletter नहीं, किसी को नहीं दिया जाएगा। तब तक आप यहीं रद्द कर सकते हैं।",
+    series: "अगले एक महीने में मुझे 5 छोटे पढ़ाई वाले ईमेल भी भेजिए (यह वाला दूसरा होगा)। जब चाहें बंद करें।",
+    seriesPrivacy: "पढ़ाई वाले ईमेल पर tick करें, तो हम आपका पता आख़िरी ईमेल (30वें दिन) तक रखेंगे, फिर मिटा देंगे। हर ईमेल में बंद करने का link है।",
+    seriesSigned: "आपको 5 छोटे पढ़ाई वाले ईमेल भी मिलेंगे। रद्द करने से सब बंद हो जाएँगे।",
     tick: "पहले box पर tick कीजिए, ताकि हमें पता हो कि आपको ईमेल चाहिए।", signed: (d) => `${d} को Aspiran का ईमेल देखिए।`,
     signedNote: "एक ईमेल, फिर आपका पता मिटा दिया जाएगा।", cancel: "रद्द कीजिए", cancelled: "रद्द हो गया। आपका पता मिटा दिया गया।",
     backTitle: "तीन दिन बाद: क्या याद रहा?", backLead: (t, n, d) => `${d} को आपने ${t} आज़माया था। उसके ${n} सवाल फिर से। कोई घड़ी नहीं, और नतीजा सिर्फ़ आप देखेंगे।`,
@@ -892,7 +899,7 @@ function day3Box(where) {
     const s = getA("day3:signed");
     if (s) {
       put(box, h("p", { style: { marginTop: 0 } }, h("strong", "✓ " + d3("signed", dayName(s.due, true)))),
-        h("p.small.muted", d3("signedNote"), " ", h("button.ghost.small", { onclick: async () => {
+        h("p.small.muted", s.series ? d3("seriesSigned") : d3("signedNote"), " ", h("button.ghost.small", { onclick: async () => {
           const r = await post(`/try/recall/${s.code}/stop`, {});
           if (!r?.ok) return C.toast?.(u("offline"));
           setA("day3:signed", null); track("try_day3_cancel"); drawD(d3("cancelled"));
@@ -901,20 +908,24 @@ function day3Box(where) {
     }
     const input = h("input", { type: "email", inputmode: "email", autocomplete: "email", placeholder: d3("label"), "aria-label": d3("label") });
     const consent = h("input", { type: "checkbox", id: "try-day3-" + where });
+    // K4: its own box, never ticked for the visitor; only those who tick it get the five study emails (try-series.ts).
+    const series = h("input", { type: "checkbox", id: "try-series-" + where });
     const hp = h("input", { type: "text", name: "company", tabindex: "-1", autocomplete: "off", style: { position: "absolute", left: "-9999px" }, "aria-hidden": "true" });
     const msg = h("p.small", { role: "status" }, note);
     const send3 = async () => {
       if (!input.value.trim()) return input.focus();
       if (!consent.checked) { msg.textContent = d3("tick"); return; }
-      const r = await post("/try/recall", { email: input.value.trim(), consent: true, consentText: d3("consent", dayName(due)) + " " + d3("privacy"), cards: myCardIds(), company: hp.value });
-      if (r?.ok && r.code) { setA("day3:signed", { code: r.code, due: r.due ?? due }); track("try_day3_signup", { where }); drawD(); }
+      const r = await post("/try/recall", { email: input.value.trim(), consent: true, consentText: d3("consent", dayName(due)) + " " + d3("privacy"), cards: myCardIds(), company: hp.value,
+        ...(series.checked ? { series: true, seriesText: d3("series") + " " + d3("seriesPrivacy") } : {}) });
+      if (r?.ok && r.code) { setA("day3:signed", { code: r.code, due: r.due ?? due, series: !!r.series }); track("try_day3_signup", { where }); drawD(); }
       else msg.textContent = r?.error ?? u("offline");
     };
     put(box, h("h3", { style: { marginTop: 0 } }, d3("title", n, dayName(due))), h("p.small", d3("lead")),
       h("form", { onsubmit: (e) => { e.preventDefault(); send3(); } }, input, hp,
         h("label.small", { for: "try-day3-" + where, style: { display: "block", margin: "8px 0" } }, consent, " ", d3("consent", dayName(due))),
+        h("label.small", { for: "try-series-" + where, style: { display: "block", margin: "8px 0" } }, series, " ", d3("series")),
         h("button.primary", { type: "submit" }, d3("button"))),
-      msg, h("p.small.muted", { style: { marginBottom: 0 } }, d3("privacy")));
+      msg, h("p.small.muted", { style: { marginBottom: 0 } }, d3("privacy"), " ", d3("seriesPrivacy")));
   };
   drawD();
   return box;

@@ -195,6 +195,15 @@ The first is Federalism and Centre–state relations. Screens: `server/public/ap
   (counts only) and `POST /admin/api/try/recall/run` (send what's due now; `{ day }` to act as another day). Table
   `try_recall` (migration 0015). Funnel events: `try_day3_offer`, `_signup`, `_cancel`, `_sent` (server), `_open`,
   `_done` (kept, of), `_join`.
+- **K4, five study emails** (`src/try-series.ts`, words in `src/try-series-mail.ts` from
+  `artefacts/marketing-2026-11-21/K4/email.json`): a second, unticked box in the same form, "Also send me 5 short
+  study emails". Only `series: true` on `POST /try/recall` signs up (answer has `series: <code>`). Emails on days 0, 7,
+  14 and 30 from the series, plus the day-3 email above, which then says "second of your five" and carries the series'
+  stop link. The address is kept until day 30, then deleted. `/try/series/<code>/stop` (GET page or POST) stops
+  everything still to come, day 3 included; cancelling day 3 in the demo stops the series too; "Delete what I sent" and
+  Marketing's forget delete the row. A step that can't go within 7 days of its day is skipped, never sent late. Sent
+  right after the day-3 emails in the same cron slots. Admin: `GET /admin/api/try/series` (counts only) and
+  `POST /admin/api/try/series/run` (`{ day }`). Table `try_series` (migration 0021). Event `try_series_sent` (step).
 - **First open**: `index.html` starts the topic's download and preloads the app's modules with the page, and the app
   draws a visitor's open page before sign-in setup; the offline copy installs 8 s later.
 - `npm run test:try` checks the gate, the feedback rules and the day-3 email.
