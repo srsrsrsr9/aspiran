@@ -22,7 +22,7 @@ Checked against `content/` and a read-only look at production on 24 Nov 2026.
 | **Unverified facts: notes** | 131 → **86** left in `content/syllabus` | Claude | 45 done today. 42 were checked against UPSC's 2026 notice and our past-paper file; 3 against PIB. The rest need primary sources opened. |
 | **Unverified facts: topic paths** | 41 (Polity paths gs2-1, gs2-3 to gs2-7, pre-4) | Claude | Open |
 | **Unverified facts: live copies** | 190 marks in production (72 reads, 12 mocks, 7 paths) | Claude | Drops when the notes are re-imported |
-| **Past papers** | 80 papers in the file, all 80 live (2,331 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2015 **done** (25 Nov). Still missing: Prelims GS 2014 and 2016, and CSAT papers 2016–2026 (the passage field is built). No UPSC answer key survives for Prelims 2014–16 or Mains 2013–15, so those show questions without answers. |
+| **Past papers** | 80 papers in the file, all 80 live (2,331 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2015 with UPSC's key **done** (25 Nov). Still missing: Prelims GS 2014 and 2016, and CSAT papers 2016–2026 (the passage field is built). UPSC's keys for Prelims 2014, 2015 and 2016 are in the Internet Archive (filed under odd names, e.g. `CSP_15_GS_I_AKy.pdf`); 2015's is live. Mains has no answer key in any year: UPSC never publishes one. |
 | **Audio** | 33 recordings (about 3.3 hours) now read an older version of their note | Owner, when voice work resumes | Paused (wisdom shorts are paused over pronunciation) |
 | **Video captions** | Videos 143 (coastline 7,516.6 km, re-measured 11,098.81 km), 28 (RBI corridor rates), 24 (15th Finance Commission, no "as of" date), 25 (consent managers, in the future tense), 14 (Article 117(3) should be 117(1)) | Owner (re-render) | **Not changed, on purpose.** Each caption follows the spoken voice, so editing the caption alone would make it disagree with the audio. The fix is new narration plus a re-render, and then the captions follow. |
 | **Video facts not yet checked** | 10 dated claims in the 2026-45 and 2026-46 videos (for example GDP base year, Cheetahs, balance of payments) | Claude | Open |
@@ -88,10 +88,14 @@ Written straight to the database the same way as part 1 and approved as "Aspiran
   - Undo point: bookmark `00000e27-00000000-0000512e-3d0991097b8b3fd2640379825a4d77aa`.
 - **Round 2 (1 item):**
   - Prelims 2015 GS Paper I, all 100 questions, from booklet series A. UPSC's own file came from the Internet Archive.
-  - No answer key: the archive keeps UPSC's Prelims keys only from 2017 on.
+  - Published first without answers. UPSC's key was then found in the archive as `CSP_15_GS_I_AKy.pdf` and added the
+    same day (round 3).
   - Live read-back matched byte for byte, with one history row.
   - The local dry run did not run because of a shell slip. The insert is the same form that passed its dry run in round 1.
   - Undo point: bookmark `00000e2a-00000000-0000512e-9a16ff419baff121b866b8c94ea86a58`.
+- **Round 3 (1 item):** Prelims 2015's answers from UPSC's official key (series A, no questions dropped). The script is `key-update.py`.
+  Seven answers were spot-checked against the questions. A dry run and the live read-back both matched byte for byte.
+  Undo point: bookmark `00000e36-00000000-0000512e-02ac5efa3d0a2bc4a44d68f460eef31c`.
 - **Live counts now:** 80 past papers (2,331 questions), 1,387 library items, all approved.
 - **Spot-checks** on app.aspiran.in all load:
   - `/learn/papers/csp-2015-gs1`
