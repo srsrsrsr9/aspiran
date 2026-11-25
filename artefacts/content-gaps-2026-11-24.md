@@ -11,7 +11,7 @@
   - Chai: no approved card is GS1, GS2 or GS4.
   - 33 recordings and 3 videos say outdated things. These need your recordings or re-renders.
   - The older past papers (Mains 2013–15, CSAT).
-- **Not done yet:** nothing is imported or deployed. The commands to do that are at the end.
+- **Live since 25 Nov:** the GS4 papers and the fact checks are imported and approved (see "Live" at the end).
 
 Checked against `content/` and a read-only look at production on 24 Nov 2026.
 
@@ -55,3 +55,22 @@ npm run import -- ~/Documents/app-packs/syllabus-2026-11-24
 Both checks passed on the branch.
 - **Past papers:** 64 papers and 1,948 questions. The 8 GS4 papers are new; the rest import unchanged.
 - **Syllabus:** only the `factsToCheck` lines changed, in 12 note files.
+
+## Live (25 Nov 2026)
+
+Imported to production on 25 Nov 2026 and approved as "Aspiran (owner publish)". This replaces the import commands above.
+
+- **54 items written:**
+  - The 8 GS4 papers, 2016–2023, approved in English. Hindi stays open.
+  - 46 notes in 12 files: only their `factsToCheck` changed. They stay approved in English and Hindi, re-recorded as
+    Aspiran (owner publish) on 25 Nov.
+- **Recordings kept.** A full re-import would have dropped the recorded readings on 44 notes, so the rows were written
+  straight to the database, the same way as on 21 Nov. Script: `artefacts/content-import-2026-11-25/live-import.py`.
+- **Checked:** one history row per item. A dry run on a local copy and the live read-back both matched byte for byte
+  (54 rows, 0 differences).
+- **Live counts now:** 64 past papers (was 56), 150 notes, 1,371 library items (was 1,363).
+- **Spot-checks on app.aspiran.in** (all load):
+  - `/learn/papers/csm-2016-gs4`: all 18 questions; Q14 is 25 marks, 300 words.
+  - `/learn/papers/csm-2018-gs4/12`: the Snowden case.
+  - `/learn/papers/csm-2023-gs4/1a` and the `/learn/papers` list.
+- **Undo point:** D1 bookmark `00000dd8-00000000-0000512e-4b57c11d0bb310cf730da4210421572c`, taken before the writes.
