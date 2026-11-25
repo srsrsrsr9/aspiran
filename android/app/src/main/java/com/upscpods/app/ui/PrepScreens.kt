@@ -298,8 +298,13 @@ fun LongReadsScreen(reads: List<Pair<LibraryItem, LongRead>>, prep: Prep, hindi:
     }
 }
 
-/** One recorded reading on the Listen page: a note or a guided walk that has an AI-voice recording in this language. */
-data class ListenPiece(val id: String, val subject: String, val title: String, val walk: Boolean, val seconds: Double, val data: JsonObject)
+/**
+ * One recorded reading on the Listen page: a note, a guided walk, or a study walk (a two-voice audio lecture, kind
+ * "audio-lecture" with `audio`), with a recording in this language.
+ */
+data class ListenPiece(val id: String, val subject: String, val title: String, val walk: Boolean, val seconds: Double, val data: JsonObject, val study: Boolean = false) {
+    val label get() = if (study) "Study walk" else if (walk) "Guided walk" else "Note"
+}
 
 private fun audioSeconds(data: JsonObject, lang: String): Double? {
     val a = (data["audio"] as? JsonObject)?.get(lang) as? JsonObject ?: return null
@@ -315,11 +320,17 @@ fun listenPieces(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
         val subject = readSubject(item.id, r).let { t -> READ_SUBJECTS.firstOrNull { it.equals(t, ignoreCase = true) } ?: t }
         ListenPiece(item.id, subject, r.title.pick(hi && item.hindi), false, secs, item.data)
     }
-    val guided = walks.mapNotNull { item ->
+    val guided = walks.filter { it.kind != "audio-lecture" }.mapNotNull { item ->
         val secs = audioSeconds(item.data, lang) ?: return@mapNotNull null
         ListenPiece(item.id, "Guided walks", item.data["topic"].biText(hi) ?: "", true, secs, item.data)
     }
-    return notes + guided
+    // Study walks: the title is per language ({en: {title}, hi: {title}}), the English one when Hindi has none.
+    val study = walks.filter { it.kind == "audio-lecture" }.mapNotNull { item ->
+        val secs = audioSeconds(item.data, lang) ?: return@mapNotNull null
+        fun title(l: String) = ((item.data[l] as? JsonObject)?.get("title") as? JsonPrimitive)?.contentOrNull
+        ListenPiece(item.id, "Study walks", title(lang) ?: title("en") ?: "", true, secs, item.data, study = true)
+    }
+    return notes + guided + study
 }
 
 private fun hoursText(seconds: Double): String {
@@ -327,11 +338,11 @@ private fun hoursText(seconds: Double): String {
     return if (m < 90) "$m min" else String.format(java.util.Locale.US, "%.1f hours", m / 60.0)
 }
 
-/** "20.4 hours of notes and guided walks read aloud…", or null when nothing is recorded. For the Practice tab's row. */
+/** "20.4 hours of notes and walks read aloud…", or null when nothing is recorded. For the Practice tab's row. */
 fun listenLine(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryItem>): String? {
     val en = listenPieces(reads, walks, "en"); val hi = listenPieces(reads, walks, "hi")
     if (en.isEmpty() && hi.isEmpty()) return null
-    return "${hoursText(en.sumOf { it.seconds } + hi.sumOf { it.seconds })} of notes and guided walks read aloud: ${en.size} in English, ${hi.size} in Hindi."
+    return "${hoursText(en.sumOf { it.seconds } + hi.sumOf { it.seconds })} of notes and walks read aloud: ${en.size} in English, ${hi.size} in Hindi."
 }
 
 /**
@@ -346,7 +357,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
     var lang by rememberSaveable { mutableStateOf(if (hindiPreferred && (count["hi"] ?: 0) > 0) "hi" else if ((count["en"] ?: 0) > 0) "en" else "hi") }
     val all = remember(reads, walks, lang) { listenPieces(reads, walks, lang) }
     val bySubject = remember(all) {
-        all.groupBy { it.subject }.toSortedMap(compareBy { s -> if (s == "Guided walks") 98 else READ_SUBJECTS.indexOf(s).let { i -> if (i < 0) 90 else i } })
+        all.groupBy { it.subject }.toSortedMap(compareBy { s -> if (s == "Study walks") 97 else if (s == "Guided walks") 98 else READ_SUBJECTS.indexOf(s).let { i -> if (i < 0) 90 else i } })
     }
     var pick by rememberSaveable { mutableStateOf("") }
     var playing by rememberSaveable { mutableStateOf("") }
@@ -361,7 +372,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
         }
         if (now != null) {
             Text(now.title, style = MaterialTheme.typography.titleMedium)
-            androidx.compose.runtime.key(now.id, lang) { AiVoiceAudio(now.data, lang, mediaUrl, kind = if (now.walk) "walk" else "note") }
+            androidx.compose.runtime.key(now.id, lang) { AiVoiceAudio(now.data, lang, mediaUrl, kind = if (now.study) "talk" else if (now.walk) "walk" else "note") }
             if (!now.walk) TextButton(onClick = { onOpenRead(now.id) }) { Text(if (lang == "hi") "पाठ पढ़ें" else "Read the text") }
         } else Muted("Tap a piece to choose it, then press Play. Nothing starts by itself.")
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -375,7 +386,7 @@ fun ListenScreen(reads: List<Pair<LibraryItem, LongRead>>, walks: List<LibraryIt
                 FlatCard(Modifier.clickable { playing = p.id }) {
                     Column(Modifier.padding(16.dp)) {
                         Text(p.title, style = MaterialTheme.typography.titleMedium)
-                        Muted((if (p.walk) "Guided walk" else "Note") + " · ${maxOf(1, Math.round(p.seconds / 60))} min" + if (p.id == playing) " · chosen" else "")
+                        Muted(p.label + " · ${maxOf(1, Math.round(p.seconds / 60))} min" + if (p.id == playing) " · chosen" else "")
                     }
                 }
             }

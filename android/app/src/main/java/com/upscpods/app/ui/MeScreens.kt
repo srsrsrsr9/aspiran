@@ -61,6 +61,9 @@ fun MeTab(
     langRequests: LanguageRequests,
     closedDays: List<LocalDate>,
     plusOn: Boolean,
+    /** Me → Coaching centre: its title and line, or null while centres are off. */
+    centre: Pair<String, String>? = null,
+    onCentre: () -> Unit = {},
     adminResult: Boolean,
     onOpenNeedToTalk: () -> Unit,
     /** The open page, held by the caller so the top bar can show its title and a back arrow. */
@@ -92,6 +95,7 @@ fun MeTab(
                 MeRow("Rhythm", "The days you closed, as dots. Not a streak") { onPage(MePage.RHYTHM) }
                 MeRow("Privacy", "Smarter ${Brand.MASCOT_SHORT}, ${Brand.MASCOT_SHORT} without internet, result-day mode, what leaves the phone") { onPage(MePage.PRIVACY) }
                 if (plusOn) MeRow("Plus", "Your plan") { onPage(MePage.PLUS) }
+                centre?.let { (title, sub) -> MeRow(title, sub, onCentre) }
                 MeRow("Request your language", if (langRequests.asked.isEmpty()) "The app is in English, with Hindi where it's ready. Ask for yours" else "You asked for ${LanguageRequests.REQUESTABLE.filter { it.code in langRequests.asked }.joinToString(", ") { it.name }}") { onPage(MePage.LANGUAGES) }
                 MeRow("My Path", "Reminders, pause, focus, journal, delete my data") { onPage(MePage.SETTINGS) }
                 if (onSignOut != null) AccountCard(onSignOut, onDeleteAccount = { onPage(MePage.SETTINGS) }, server = community.serverUrl())

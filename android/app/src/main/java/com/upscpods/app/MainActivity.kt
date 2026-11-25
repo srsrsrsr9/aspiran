@@ -257,7 +257,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, LISTEN, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, LISTEN, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS, CENTRE }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -408,6 +408,10 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     // AI voices: a Listen button, only when the server says so, never in result week.
     com.upscpods.app.data.Voice.enabled = config.voice && result == null; com.upscpods.app.data.Voice.server = { pod.serverUrl }
     val jeetu = remember { com.upscpods.app.data.JeetuClient { pod.serverUrl } }
+    // Coaching centres, the student side (data/Institute.kt): only while the server's institutes flag is on and signed in.
+    val institute = remember { com.upscpods.app.data.Institute(context) { pod.serverUrl } }
+    val centresOn = config.institutes && Auth.signedIn
+    LaunchedEffect(centresOn) { if (centresOn) institute.refresh() }
     val bank = remember { Practice.loadBank(context) }
     val mains = remember(brief, hindi) { Practice.mainsTask(brief, hindi) }
     var questions by remember { mutableStateOf(emptyList<PracticeQuestion>()) }
@@ -574,12 +578,12 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val plusChotu = chotu.plus || plusGate.member
     // Jeetu from Chotu's chip: Plus members and the free taste, until the server says no, while Jeetu is on and awake.
     val jeetuFromChotu = (plusChotu || jeetuTaste) && jeetu.available && com.upscpods.app.data.Jeetu.awake
-    // The 2-line debrief after a mock or a practice set (Plus; never in a result week).
+    // The 2-line debrief after a mock or a practice set: everyone, as on the web (counts only, no model); never in a result week.
     var debrief by remember { mutableStateOf<com.upscpods.app.data.StudyFacts?>(null) }
     LaunchedEffect(debriefDue) {
         if (!debriefDue) return@LaunchedEffect
         debriefDue = false
-        if (plusChotu && result == null) debrief = chotu.facts()?.takeIf { it.debrief(hindi) != null }
+        if (result == null) debrief = chotu.facts()?.takeIf { it.debrief(hindi) != null }
     }
     // Google Play Billing for Plus (data/PlayBilling.kt, server play.ts): only in a build made with PLAY_BILLING, and only while
     // the server's plus and play_billing flags are on and its Play check is set up. Otherwise nothing here runs.
@@ -768,7 +772,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             LibraryScreen(item, library, hindi, onClose = { if (item.data["play"] != null) prep.markLearnt(item.id); overlay = libraryBack })
         } ?: run { overlay = Overlay.NONE }
         Overlay.LEARN -> LearnHubScreen(library, prep, hindi, plusMember != true, onOpen = openItem, onTool = openTool, onClose = { overlay = Overlay.NONE })
-        Overlay.LISTEN -> com.upscpods.app.ui.ListenScreen(prep.reads(library), library.items.filter { it.kind == "walk-script" }, hindi, library::url,
+        Overlay.CENTRE -> com.upscpods.app.ui.InstituteScreen(institute, hindi, persona?.name, onNeedToTalk = openNeedToTalk, onClose = { overlay = Overlay.NONE })
+        Overlay.LISTEN -> com.upscpods.app.ui.ListenScreen(prep.reads(library), library.items.filter { it.kind == "walk-script" || it.kind == "audio-lecture" }, hindi, library::url,
             onOpenRead = { readId = it; overlay = Overlay.READER }, onClose = { overlay = Overlay.NONE })
         Overlay.READS -> LongReadsScreen(prep.reads(library), prep, hindi, onOpen = { readId = it; overlay = Overlay.READER }, onClose = { overlay = Overlay.NONE })
         Overlay.READER -> prep.reads(library).firstOrNull { it.first.id == readId }?.let { (item, r) ->
@@ -878,6 +883,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     onSwitchOffMine = if (config.resultNow == null && staged.myResultMode) ({ staged.setMyResultMode(false) }) else null,
                     onPodAnswers = { scope.launch { community.syncProfile(staged.synced()) } },
                     modifier = m,
+                    top = { if (centresOn) com.upscpods.app.ui.CentreAddaCard(institute) { overlay = Overlay.CENTRE } },
                 )
                 Tab.POD -> if (showRooms || (pod.podId == null && config.podsOpen)) RoomsScreen(
                     rooms, persona, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library,
@@ -1029,7 +1035,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                                         plusOn = plusMember != true, showPlusInfo = plusMember != true && !plusQuiet,
                                         onLearn = { overlay = Overlay.LEARN }, onReads = { overlay = Overlay.READS },
                                         onTool = openTool, onPlusInfo = openPlusInfo,
-                                        listen = com.upscpods.app.ui.listenLine(prep.reads(library), library.items.filter { it.kind == "walk-script" }),
+                                        listen = com.upscpods.app.ui.listenLine(prep.reads(library), library.items.filter { it.kind == "walk-script" || it.kind == "audio-lecture" }),
                                         onListen = { overlay = Overlay.LISTEN },
                                     )
                                 },
@@ -1071,6 +1077,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                 Tab.ME -> MeTab(
                     persona, staged, community, langRequests, closedDays,
                     plusOn = config.plus,
+                    centre = if (centresOn) com.upscpods.app.ui.centreMeLine(institute) else null,
+                    onCentre = { overlay = Overlay.CENTRE },
                     adminResult = config.resultNow != null,
                     onOpenNeedToTalk = openNeedToTalk,
                     page = mePage,
