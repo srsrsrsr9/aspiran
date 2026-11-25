@@ -1,22 +1,16 @@
 {
+ "n": 202,
  "id": "chandrayaan-3",
- "title": "Chandrayaan-3 in 60 seconds",
- "paper": "GS3 Science & Tech",
- "test": {
-  "voice": "ElevenLabs · Sumeet (male, energetic)",
-  "footage": "real mission footage (ISRO)",
-  "pacing": "fast, hook first, hard cuts",
-  "captions": "big centre words, a few at a time",
-  "sound": "whooshes on cuts + soft pulse"
- },
- "voice": {
-  "provider": "eleven",
-  "id": "5x75eykrmdby4c1wlkAP"
- },
- "captions": "pop",
- "transition": "cut",
- "bed": "pulse",
- "whoosh": true,
+ "title": "Chandrayaan-3 in 60 Seconds",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
  "endcard": {
   "from": 5,
   "line": "Footage and pictures: ISRO (GODL-India)"
@@ -106,5 +100,41 @@
  "sources": [
   "ISRO Chandrayaan-3 mission page and press releases, Jul–Sep 2023: launch 14 Jul 2023 (LVM3-M4), landing 23 Aug 2023, rover traverse ~100 m, LIBS confirmed sulphur, Vikram hop 3 Sep 2023 (~40 cm)",
   "PIB, 26 Aug 2023: landing site named Shiv Shakti point; 23 August declared National Space Day"
- ]
+ ],
+ "quiz": [
+  {
+   "q": "On which date did Vikram land near the Moon's south pole?",
+   "options": [
+    "23 August 2023",
+    "14 July 2023",
+    "15 August 2023",
+    "3 September 2023"
+   ],
+   "answerIndex": 0,
+   "why": "Launch was 14 July; the landing came on 23 August 2023, now National Space Day."
+  },
+  {
+   "q": "Why does the lunar south pole interest scientists?",
+   "options": [
+    "It is the Moon's hottest spot",
+    "Some craters never see sunlight and may hold water ice",
+    "It faces the Earth all the time",
+    "It has the Moon's tallest mountain"
+   ],
+   "answerIndex": 1,
+   "why": "Permanently shadowed craters may hold water ice."
+  },
+  {
+   "q": "What is the landing site called?",
+   "options": [
+    "Tiranga point",
+    "Jawahar point",
+    "Shiv Shakti point",
+    "Vikram point"
+   ],
+   "answerIndex": 2,
+   "why": "The landing spot was named Shiv Shakti point (PIB, 26 August 2023)."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's Chandrayaan-3 mission pages and PIB releases (Jul–Sep 2023). Footage is ISRO's, under GODL-India. Moving facts: none known."
 }

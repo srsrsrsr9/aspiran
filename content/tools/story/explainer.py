@@ -1,18 +1,29 @@
 #!/usr/bin/env python3
 """explainer: a 9:16 explainer short from licensed footage, stills, drawn diagrams and a narrator.
 
-    python3 content/tools/story/explainer.py <folder with explainer.json> [--no-voice]
+    python3 content/tools/story/explainer.py <folder with explainer.json> [--no-voice]     build one (or several) videos
+    python3 content/tools/story/explainer.py pack <pack folder> <explainer folders...>    copy into a shorts pack + manifest
 
-explainer.json: "voice" ({"provider": "fish"|"eleven", "id", "speed"}), "captions" (lower | box | pop),
-"transition" (fade | cut), "bed" (none | pulse | drone), "whoosh" (true on cuts), "endcard" ({"from": segment no., "line"}),
-and "segments": each has "say" (narration) and one picture source:
-  "src": a video (with "t" start, optional "crop" [cx, cy, height share], "fit": cover | blur) or a still
-         (with "kb": in | out | pan, optional "focus" [x, y], "fit": cover | blur);
-  "anim": a drawn diagram (heat | winds | ghats | share): schematic, no maps, no borders;
-  "end": true for the Aspiran end card.
-  "numbers": [{"text", "sub", "word": spoken word that brings it in, "count": true to count up}].
-Writes audio/NN.mp3 + audio/check.json (each take checked by speech-to-text), out/<id>.mp4 (1080x1920, captions burned
-in), out/<id>.jpg and out/contact.jpg. All sound effects are made here from tones and noise: nothing to license.
+explainer.json:
+  "n", "id" (kebab), "title", "format" (calm | fast | photo: sets captions, transitions and sound), "syllabusNodes",
+  "gsPaper", "tone" (NEUTRAL etc.), "sources" (list of strings), "quiz" (3 x {"q", "options" (4), "answerIndex", "why"}),
+  "reviewNote", "endcard" ({"from": segment no. for the background, "line": picture credits}).
+  "voice": "auto" (default: ElevenLabs Sumeet while the month's characters last, then Fish Shilpa) or {"provider", "id"}.
+  Optional overrides: "captions" (lower | box | pop), "transition" (fade | cut), "bed" (none | pulse | drone), "whoosh".
+  "segments": each has "say" (narration, one or two sentences) and one picture:
+    "src": a video (with "t" start, optional "crop" [cx, cy, height share], "fit": cover | blur) or a still
+           (with "kb": in | out | pan, optional "focus" [x, y], "fit": cover | blur);
+    "anim": a drawn diagram, schematic, no maps, no borders. Either a built-in name (heat | winds | ghats | share) or
+           {"type": "cards" | "flow" | "compare" | "timeline" | "bars" | "ring", "title", ...}:
+             cards/flow: "items": ["text", ...]; compare: "left"/"right": {"title", "items": [...]};
+             timeline: "items": [{"year", "text"}]; bars: "items": [{"label", "value", "show"?, "hi"?}];
+             ring: "value" (0-1), "big", "below". Items appear one by one; an item may carry "at" (seconds).
+    "end": true for the Aspiran end card (last segment, no "say").
+    "numbers": [{"text", "sub", "word": spoken word that brings it in, "count": true to count up}].
+Writes audio/NN.mp3 + audio/check.json (each take checked by speech-to-text), audio/voice.json, and in out/:
+<id>.mp4 (720x1280 app cut, no captions), <id>.vtt (its subtitles), <id>.social.mp4 (1080x1920, captions burned in),
+<id>.jpg (poster), contact.jpg (12 frames to check by eye), length.json.
+All sound effects are made here from tones and noise: nothing to license.
 Keys come from the macOS Keychain inside the process and are never printed.
 """
 import base64, json, math, re, shutil, subprocess, sys, tempfile
@@ -66,8 +77,32 @@ def fish_curl(text, v, dest):
     raise RuntimeError("Fish (curl) failed")
 
 
+SUMEET = {"provider": "eleven", "id": "5x75eykrmdby4c1wlkAP", "name": "Sumeet (ElevenLabs)"}
+SHILPA = {"provider": "fish", "id": "d96e903b57be4742b105dfb0d3e26d51", "speed": 0.95, "name": "Shilpa (Fish)"}
+
+
+def eleven_left():
+    import urllib.request
+    r = json.loads(urllib.request.urlopen(urllib.request.Request("https://api.elevenlabs.io/v1/user/subscription",
+                   headers={"xi-api-key": prov.key("elevenlabs")}), timeout=30).read())
+    return r["character_limit"] - r["character_count"]
+
+
+def pick_voice(spec, folder):
+    """"voice": "auto" (the default): ElevenLabs Sumeet while the month's characters last, then Fish Shilpa (owner, 25 Nov 2026).
+    The choice is kept in audio/voice.json so one video never mixes two voices."""
+    vf = folder / "audio" / "voice.json"
+    if vf.exists(): return json.loads(vf.read_text())
+    v = spec.get("voice", "auto")
+    if v == "auto":
+        need = sum(len(s.get("say", "")) for s in spec["segments"])
+        try: v = SUMEET if eleven_left() >= need * 1.6 + 500 else SHILPA   # room for a retake or two
+        except Exception: v = SHILPA
+    vf.parent.mkdir(exist_ok=True); vf.write_text(json.dumps(v)); return v
+
+
 def record(spec, folder):
-    v = spec["voice"]; out = folder / "audio"; out.mkdir(exist_ok=True)
+    v = pick_voice(spec, folder); out = folder / "audio"; out.mkdir(exist_ok=True)
     cp = out / "check.json"; check = json.loads(cp.read_text()) if cp.exists() else {}
     for i, s in enumerate(spec["segments"], 1):
         if "say" not in s: continue
@@ -180,7 +215,8 @@ def number_img(text, sub, accent):
 
 
 class Layer:
-    def __init__(self, img, x, y, t0, t1, fin=0.15, fout=0.15):
+    def __init__(self, img, x, y, t0, t1, fin=0.15, fout=0.15, cap=False):
+        self.cap = cap
         a = np.asarray(img.convert("RGBA"), dtype=np.float32) / 255.0
         a = a[max(0, -y):, max(0, -x):]          # a layer reaching past the top or left edge is trimmed
         self.rgb, self.a = a[..., :3] * 255.0, a[..., 3:4]
@@ -227,7 +263,108 @@ def _thermo(d, x, y, level, col, label, f):
     d.text((x, y - 345), label, font=f, anchor="mm", fill=(255, 255, 255))
 
 
+GOLD, BLUE, INK, PANEL = (255, 205, 90), (120, 190, 255), (22, 28, 50), (44, 54, 86)
+
+
+def _mix(c, a, bg=INK):
+    return tuple(int(bg[i] + (c[i] - bg[i]) * a) for i in range(3))
+
+
+def _ease(t, start, dur=0.45):
+    x = max(0.0, min(1.0, (t - start) / dur)); return 1 - (1 - x) ** 3
+
+
+def _lines(d, text, f, width):
+    return wrap(d, text, f, width)
+
+
+def generic_frame(g, t, L):
+    """Reusable diagrams, all schematic: cards, flow, compare, timeline, bars, ring. Items appear one by one over the
+    first three-quarters of the segment (or at "at" seconds). Content stays between y=230 and y=1130 so captions fit below."""
+    im = Image.new("RGB", (W, H)); d = ImageDraw.Draw(im); _sky(d, (16, 20, 36), (30, 40, 66))
+    kind, items = g["type"], g.get("items", [])
+    n = max(1, len(items)); span = max(1.0, L * 0.72 - 0.6)
+    at = lambda k: items[k].get("at", 0.5 + k * span / n) if isinstance(items[k], dict) else 0.5 + k * span / n
+    ft, fi, fs, fb = font(62, "Heavy"), font(46, "Demi Bold"), font(40, "Medium"), font(76, "Heavy")
+    top = 250
+    if g.get("title"):
+        a = _ease(t, 0.1)
+        for k, l in enumerate(_lines(d, g["title"], ft, W * 0.86)):
+            d.text((W / 2, top + k * 74), l, font=ft, anchor="mm", fill=_mix(GOLD, a))
+        top += 74 * len(_lines(d, g["title"], ft, W * 0.86)) + 40
+    txt = lambda it: it["text"] if isinstance(it, dict) else it
+    if kind == "cards":
+        h = min(190, (1130 - top) / n - 24)
+        for k, it in enumerate(items):
+            a = _ease(t, at(k)); y = top + k * (h + 24) + 30 * (1 - a)
+            if a <= 0: continue
+            d.rounded_rectangle([90, y, W - 90, y + h], radius=26, fill=_mix(PANEL, a))
+            d.rounded_rectangle([90, y, 104, y + h], radius=6, fill=_mix(GOLD, a))
+            ls = _lines(d, txt(it), fi, W - 280)[:3]
+            for j, l in enumerate(ls):
+                d.text((140, y + h / 2 + (j - (len(ls) - 1) / 2) * 56), l, font=fi, anchor="lm", fill=_mix((255, 255, 255), a, PANEL))
+    elif kind == "flow":
+        h = min(150, ((1130 - top) - (n - 1) * 70) / n)
+        for k, it in enumerate(items):
+            a = _ease(t, at(k)); y = top + k * (h + 70)
+            if a <= 0: continue
+            col = GOLD if k == n - 1 else BLUE
+            d.rounded_rectangle([140, y, W - 140, y + h], radius=30, outline=_mix(col, a), width=6, fill=_mix(PANEL, a))
+            ls = _lines(d, txt(it), fi, W - 360)[:2]
+            for j, l in enumerate(ls):
+                d.text((W / 2, y + h / 2 + (j - (len(ls) - 1) / 2) * 54), l, font=fi, anchor="mm", fill=_mix((255, 255, 255), a, PANEL))
+            if k < n - 1:
+                b = _ease(t, at(k) + 0.35)
+                if b > 0: _arrow(d, (W / 2, y + h + 8), (W / 2, y + h + 8 + 50 * b), _mix((220, 230, 245), b), 8)
+    elif kind == "compare":
+        cols = [g["left"], g["right"]]
+        for c, colspec in enumerate(cols):
+            x0 = 70 + c * 480; col = GOLD if c == 0 else BLUE
+            a = _ease(t, 0.3 + c * 0.4)
+            d.rounded_rectangle([x0, top, x0 + 460, top + 110], radius=24, fill=_mix(col, a))
+            for j, l in enumerate(_lines(d, colspec["title"], fi, 420)[:2]):
+                d.text((x0 + 230, top + 55 + (j - (min(2, len(_lines(d, colspec["title"], fi, 420))) - 1) / 2) * 50), l, font=fi, anchor="mm", fill=_mix(INK, a, INK) if a < 1 else INK)
+            rows = colspec.get("items", []); m = max(len(cols[0].get("items", [])), len(cols[1].get("items", [])), 1)
+            for k, it in enumerate(rows):
+                st = 1.0 + (k * 2 + c) * (span - 0.6) / (2 * m)
+                b = _ease(t, st); y = top + 150 + k * ((1130 - top - 150) / m)
+                if b <= 0: continue
+                for j, l in enumerate(_lines(d, it, fs, 420)[:3]):
+                    d.text((x0 + 230, y + j * 48), l, font=fs, anchor="mt", fill=_mix((240, 244, 255), b))
+    elif kind == "timeline":
+        x = 190; d.line([(x, top), (x, 1130)], fill=(80, 96, 130), width=6)
+        step = (1130 - top) / n
+        for k, it in enumerate(items):
+            a = _ease(t, at(k)); y = top + k * step + 20
+            if a <= 0: continue
+            d.ellipse([x - 18, y - 18, x + 18, y + 18], fill=_mix(GOLD, a))
+            d.text((x + 50, y), str(it["year"]), font=font(56, "Heavy"), anchor="lm", fill=_mix(GOLD, a))
+            for j, l in enumerate(_lines(d, it["text"], fs, W - x - 120)[:2]):
+                d.text((x + 50, y + 50 + j * 46), l, font=fs, anchor="lt", fill=_mix((240, 244, 255), a))
+    elif kind == "bars":
+        vmax = max(float(it["value"]) for it in items); h = min(150, (1130 - top) / n)
+        for k, it in enumerate(items):
+            a = _ease(t, at(k), 0.9); y = top + k * h
+            if a <= 0: continue
+            d.text((100, y + 20), it["label"], font=fs, anchor="lt", fill=_mix((240, 244, 255), min(1, a * 2)))
+            wbar = (W - 360) * float(it["value"]) / vmax * a
+            d.rounded_rectangle([100, y + 72, 100 + max(16, wbar), y + 72 + 50], radius=14, fill=_mix(GOLD if it.get("hi") else BLUE, min(1, a * 2)))
+            d.text((120 + max(16, wbar), y + 97), it.get("show", str(it["value"])), font=fi, anchor="lm", fill=_mix((255, 255, 255), min(1, a * 2)))
+    elif kind == "ring":
+        cx, cy, r = W / 2, top + 330, 300
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(70, 86, 120), width=64)
+        sweep = 360 * float(g["value"]) * _ease(t, 0.4, max(1.0, span * 0.6))
+        if sweep > 1: d.arc([cx - r, cy - r, cx + r, cy + r], -90, -90 + sweep, fill=BLUE, width=64)
+        d.text((cx, cy), g.get("big", ""), font=font(150, "Heavy"), anchor="mm", fill=(255, 255, 255))
+        if g.get("below"):
+            a = _ease(t, span * 0.6)
+            for j, l in enumerate(_lines(d, g["below"], fi, W * 0.8)[:2]):
+                d.text((cx, cy + r + 90 + j * 58), l, font=fi, anchor="mm", fill=_mix((240, 244, 255), a))
+    return im
+
+
 def anim_frame(kind, t, L):
+    if isinstance(kind, dict): return generic_frame(kind, t, L)
     im = Image.new("RGB", (W, H)); d = ImageDraw.Draw(im); p = min(1.0, t / max(1.0, L - 0.8))
     f, fb = font(46, "Demi Bold"), font(58, "Heavy")
     if kind in ("heat", "winds"):
@@ -378,14 +515,22 @@ def sound(spec, folder, plan, T, cuts, dest, tmp):
 
 # ---------------------------------------------------------------- build
 
+FORMATS = {   # the three formats the owner kept (25 Nov 2026); a spec may still override any of these
+    "calm":  {"captions": "lower", "transition": "fade", "bed": None, "whoosh": False},
+    "fast":  {"captions": "pop", "transition": "cut", "bed": "pulse", "whoosh": True},
+    "photo": {"captions": "box", "transition": "fade", "bed": "drone", "whoosh": False},
+}
+
+
 def build_one(folder, no_voice=False):
     spec = json.loads((folder / "explainer.json").read_text())
+    spec = {**FORMATS.get(spec.get("format"), {}), **spec}
     check = {} if no_voice else record(spec, folder)
     if no_voice: check = json.loads((folder / "audio" / "check.json").read_text())
     tmp = Path(tempfile.mkdtemp()); out = folder / "out"; out.mkdir(exist_ok=True)
     segs, t, plan, layers, cuts = spec["segments"], 0.0, [], [], []
     fade = spec.get("transition") == "fade"
-    clips = []
+    clips, cues = [], []
     # 1. lengths, voice placement, captions and numbers
     lens = []
     for i, s in enumerate(segs, 1):
@@ -399,16 +544,20 @@ def build_one(folder, no_voice=False):
             words = s["say"].split(); wt = word_times(s["say"], take, check.get(str(i), {}).get("align"))
             style = spec.get("captions", "lower")
             groups = chunks(words, 3 if style == "pop" else 7)
+            for gi, g in enumerate(chunks(words, 7)):     # subtitles for the app cut: always calm, 7 words at most
+                nxt = chunks(words, 7)[gi + 1][0] if gi + 1 < len(chunks(words, 7)) else None
+                a = t + LEAD + wt[g[0]][0]; b = t + LEAD + (wt[nxt][0] if nxt is not None else wt[g[-1]][1] + 0.3)
+                cues.append((a, b, " ".join(words[k] for k in g)))
             for gi, g in enumerate(groups):
                 a = t + LEAD + wt[g[0]][0]; b = t + LEAD + wt[g[-1]][1] + (0.12 if style == "pop" else 0.25)
                 if gi + 1 < len(groups): b = min(b, t + LEAD + wt[groups[gi + 1][0]][0])   # never two captions at once
                 img, x, y = caption_img(" ".join(words[k] for k in g), style)
                 if style == "pop":    # a quick pop: slightly larger for the first frames
                     big = img.resize((int(img.width * 1.12), int(img.height * 1.12)), Image.LANCZOS)
-                    layers.append(Layer(big, x - (big.width - img.width) // 2, y - (big.height - img.height) // 2, a, a + 0.08, 0.04, 0))
-                    layers.append(Layer(img, x, y, a + 0.08, b, 0, 0.06))
+                    layers.append(Layer(big, x - (big.width - img.width) // 2, y - (big.height - img.height) // 2, a, a + 0.08, 0.04, 0, cap=True))
+                    layers.append(Layer(img, x, y, a + 0.08, b, 0, 0.06, cap=True))
                 else:
-                    layers.append(Layer(img, x, y, a, b, 0.12, 0.12))
+                    layers.append(Layer(img, x, y, a, b, 0.12, 0.12, cap=True))
             nums = s.get("numbers", [])
             starts = []
             for k, nm in enumerate(nums):
@@ -456,12 +605,15 @@ def build_one(folder, no_voice=False):
     base = tmp / "base.mp4"; run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-c", "copy", str(base)])
     # 3. sound
     wav = tmp / "mix.wav"; sound(spec, folder, plan, T, cuts, wav, tmp)
-    # 4. captions and numbers over the pictures
-    final = out / f"{spec['id']}.mp4"
+    # 4. two cuts: social (1080x1920, captions burned in) and app (720x1280, numbers only; the app shows the VTT)
+    final, app = out / f"{spec['id']}.social.mp4", out / f"{spec['id']}.mp4"
     dec = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-i", str(base), "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], stdout=subprocess.PIPE)
-    enc = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-                            "-i", str(wav), "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "medium", "-crf", "19", "-pix_fmt", "yuv420p",
-                            "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", str(final)], stdin=subprocess.PIPE)
+    def encoder(dest, crf, scale=None):
+        return subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
+                                 "-i", str(wav), "-map", "0:v", "-map", "1:a"] + (["-vf", f"scale={scale}:flags=lanczos"] if scale else []) +
+                                ["-c:v", "libx264", "-preset", "medium", "-crf", str(crf), "-pix_fmt", "yuv420p",
+                                 "-c:a", "aac", "-b:a", "128k" if scale else "160k", "-shortest", "-movflags", "+faststart", str(dest)], stdin=subprocess.PIPE)
+    enc, enc_app = encoder(final, 19), encoder(app, 25, "720:1280")
     n = 0
     while True:
         b = dec.stdout.read(W * H * 3)
@@ -469,18 +621,63 @@ def build_one(folder, no_voice=False):
         tt = n / FPS; act = [l for l in layers if l.t0 <= tt < l.t1]
         if act:
             fr = np.frombuffer(b, np.uint8).reshape(H, W, 3).astype(np.float32)
-            for l in act: l.draw(fr, tt)
+            for l in act:
+                if not l.cap: l.draw(fr, tt)
+            enc_app.stdin.write(np.clip(fr, 0, 255).astype(np.uint8).tobytes())
+            for l in act:
+                if l.cap: l.draw(fr, tt)
             b = np.clip(fr, 0, 255).astype(np.uint8).tobytes()
+        else:
+            enc_app.stdin.write(b)
         enc.stdin.write(b); n += 1
-    enc.stdin.close(); enc.wait(); dec.wait()
+    for e in (enc, enc_app): e.stdin.close(); e.wait()
+    dec.wait()
+    stamp = lambda x: f"{int(x // 3600):02d}:{int(x % 3600 // 60):02d}:{x % 60:06.3f}"
+    (out / f"{spec['id']}.vtt").write_text("WEBVTT\n\n" + "".join(f"{k}\n{stamp(a)} --> {stamp(b)}\n{txt}\n\n" for k, (a, b, txt) in enumerate(cues, 1)))
+    (out / "length.json").write_text(json.dumps({"durationSec": round(T, 1)}))
     # 5. poster and contact sheet
-    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{lens[0] * 0.6:.2f}", "-i", str(final), "-frames:v", "1", "-q:v", "3", str(out / f"{spec['id']}.jpg")])
+    run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{lens[0] * 0.6:.2f}", "-i", str(app), "-frames:v", "1", "-q:v", "3", str(out / f"{spec['id']}.jpg")])
     run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(final), "-vf", f"fps=12/{T:.2f},scale=270:-2,tile=6x2", "-frames:v", "1", str(out / "contact.jpg")])
     shutil.rmtree(tmp, ignore_errors=True)
     print(f"{folder.name}: {T:.1f}s -> {final}")
     return final
 
 
+def pack(dest, folders, today=None):
+    """Copy built explainers into a shorts pack (content/motion/shorts/2001-NN) and write its manifest.json.
+    Each explainer.json carries n, id, title, syllabusNodes, gsPaper, format, tone, sources, quiz and reviewNote."""
+    import datetime
+    dest.mkdir(parents=True, exist_ok=True)
+    today = today or datetime.date.today().isoformat()
+    eps, voices = [], set()
+    for f in folders:
+        spec = json.loads((f / "explainer.json").read_text()); out = f / "out"; stem = f"{spec['n']:03d}-{spec['id']}"
+        for k in ("n", "id", "title", "syllabusNodes", "gsPaper", "format", "tone", "sources", "quiz", "reviewNote"):
+            if not spec.get(k): raise SystemExit(f"{f.name}: explainer.json needs {k}")
+        if len(spec["quiz"]) != 3: raise SystemExit(f"{f.name}: quiz needs 3 questions")
+        for ext in (".mp4", ".social.mp4", ".vtt", ".jpg"):
+            shutil.copy(out / f"{spec['id']}{ext}", dest / f"{stem}{ext}")
+        v = json.loads((f / "audio" / "voice.json").read_text()) if (f / "audio" / "voice.json").exists() else {}
+        voices.add("elevenlabs" if v.get("provider") == "eleven" else "fish-audio")
+        quiz = [{"id": f"{spec['id']}-q{k}", **{x: q[x] for x in ("q", "options", "answerIndex", "why")}} for k, q in enumerate(spec["quiz"], 1)]
+        eps.append({"n": spec["n"], "id": spec["id"], "title": spec["title"],
+                    "durationSec": json.loads((out / "length.json").read_text())["durationSec"],
+                    "mp4": f"{stem}.mp4", "vtt": f"{stem}.vtt", "poster": f"{stem}.jpg", "mp4Social": f"{stem}.social.mp4",
+                    "syllabusNodes": spec["syllabusNodes"], "gsPaper": spec["gsPaper"], "format": "explainer-" + spec["format"],
+                    "tone": spec["tone"], "sources": spec["sources"], "quiz": quiz, "free": True,
+                    "review": {"status": "approved", "checkedBy": "Aspiran (owner publish)", "checkedOn": today, "note": spec["reviewNote"]}})
+    eps.sort(key=lambda e: e["n"])
+    first, last = eps[0]["n"], eps[-1]["n"]
+    m = {"schema": "upsc-pods/ca-week@1", "week": dest.name, "lang": "en",
+         "generatedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+         "series": "illustrated-shorts", "title": f"Explainers, {first} to {last}", "titleHi": f"समझिए, {first} से {last}",
+         "voice": {"provider": "+".join(sorted(voices))}, "episodes": eps}
+    (dest / "manifest.json").write_text(json.dumps(m, ensure_ascii=False, indent=1) + "\n")
+    print(f"{dest.name}: {len(eps)} explainers, {first}-{last}")
+
+
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["pack"]:     # python3 explainer.py pack <pack folder> <explainer folders...>
+        pack(Path(sys.argv[2]).resolve(), [Path(a).resolve() for a in sys.argv[3:]]); sys.exit()
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     for a in args: build_one(Path(a).resolve(), "--no-voice" in sys.argv)
