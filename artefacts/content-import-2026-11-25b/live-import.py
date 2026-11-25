@@ -8,7 +8,7 @@ readings are kept. Papers are new rows, English approved. Every write adds one c
 Approvals: "Aspiran (owner publish)"."""
 import json, os, sys
 before_f, facts_f, papers_f, out = sys.argv[1:5]
-DAY, AT, WHO, ACT = "2026-11-25", "2026-11-25T12:00:00.000Z", "Aspiran (owner publish)", "import 2026-11-25b batch and approve"
+DAY, AT, WHO, ACT = os.environ.get("DAY", "2026-11-25"), os.environ.get("AT", "2026-11-25T12:00:00.000Z"), "Aspiran (owner publish)", os.environ.get("ACT", "import 2026-11-25b batch and approve")
 dump = lambda d: json.dumps(d, separators=(",", ":"), ensure_ascii=False)
 q = lambda v: "NULL" if v is None else "'" + str(v).replace("'", "''") + "'"
 before = {r["id"]: r for r in json.load(open(before_f))}
