@@ -22,7 +22,7 @@ Checked against `content/` and a read-only look at production on 24 Nov 2026.
 | **Unverified facts: notes** | 131 → **86** left in `content/syllabus` | Claude | 45 done today. 42 were checked against UPSC's 2026 notice and our past-paper file; 3 against PIB. The rest need primary sources opened. |
 | **Unverified facts: topic paths** | 41 (Polity paths gs2-1, gs2-3 to gs2-7, pre-4) | Claude | Open |
 | **Unverified facts: live copies** | 190 marks in production (72 reads, 12 mocks, 7 paths) | Claude | Drops when the notes are re-imported |
-| **Past papers** | 82 papers in the file, all 82 live (2,531 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2014, 2015 and 2016 with UPSC's keys **done** (25–26 Nov). Still missing: CSAT papers 2016–2026 (the passage field is built). UPSC's keys for Prelims 2014, 2015 and 2016 came from the Internet Archive (filed under odd names, e.g. `CSP_15_GS_I_AKy.pdf`). Mains has no answer key in any year: UPSC never publishes one. |
+| **Past papers** | 83 papers in the file, all 83 live (2,611 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2014, 2015 and 2016 with UPSC's keys **done** (25–26 Nov). CSAT 2016 **done** (26 Nov), the first CSAT paper. Still missing: CSAT 2014, 2015 and 2017–2026. UPSC's keys for Prelims 2014, 2015 and 2016 came from the Internet Archive (filed under odd names, e.g. `CSP_15_GS_I_AKy.pdf`). Mains has no answer key in any year: UPSC never publishes one. |
 | **Audio** | 33 recordings (about 3.3 hours) now read an older version of their note | Owner, when voice work resumes | Paused (wisdom shorts are paused over pronunciation) |
 | **Video captions** | Videos 143 (coastline 7,516.6 km, re-measured 11,098.81 km), 28 (RBI corridor rates), 24 (15th Finance Commission, no "as of" date), 25 (consent managers, in the future tense), 14 (Article 117(3) should be 117(1)) | Owner (re-render) | **Not changed, on purpose.** Each caption follows the spoken voice, so editing the caption alone would make it disagree with the audio. The fix is new narration plus a re-render, and then the captions follow. |
 | **Video facts not yet checked** | 10 dated claims in the 2026-45 and 2026-46 videos (for example GDP base year, Cheetahs, balance of payments) | Claude | Open |
@@ -117,5 +117,15 @@ Written straight to the database the same way as part 1 and approved as "Aspiran
   - About twenty answers were spot-checked against the questions.
   - A dry run on a local copy and the live read-back both matched byte for byte, with one history row.
   - Undo point: bookmark `00000e4d-00000000-0000512e-6ee3ef3dde18f7a57480fc1d6bb8a8ce`.
-- **Live counts now:** 82 past papers (2,531 questions). Prelims GS Paper I now runs 2014 to 2026, all with UPSC's keys.
-- **Next:** CSAT (GS Paper II) 2016–2026. UPSC's keys for CSAT 2014–2016 also look to be in the Internet Archive.
+- **CSAT 2016 (GS Paper II), 26 Nov:** all 80 questions, booklet series A, with UPSC's official key. The first CSAT paper.
+  - Both are UPSC's own files from the Internet Archive: the paper is `GENERAL_STUDIES_PAPER-II.pdf` and the key is
+    `CSP_16_GS_Paper_II.pdf`. No questions were dropped.
+  - 20 reading passages, each printed once and shared by its questions (the puzzle "directions" sets count as passages too).
+  - Every maths and reasoning answer was worked out and matches the key. No question needed a figure.
+  - The daily post now skips passage questions (deployed). The Android app shows a "Read the passage" button;
+    that needs the owner's next Android build. The web pages already show passages.
+  - A dry run on a local copy and the live read-back both matched byte for byte, with one history row.
+  - Undo point: bookmark `00000e59-00000000-0000512e-1952e5f8e488feeaf16527a27cb6155c`.
+- **Live counts now:** 83 past papers (2,611 questions).
+- **Next:** CSAT 2017–2024 (UPSC's keys found in the Internet Archive), then 2014 and 2015. Keys for 2019, 2025 and 2026
+  are still to find. Questions built on a figure will be left out and listed, never guessed.
