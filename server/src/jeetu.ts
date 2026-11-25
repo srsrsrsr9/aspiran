@@ -2,7 +2,9 @@ import { AiBlocked, type ChatTurn, JEETU_ROUTES, callChat, chatLang } from "./ai
 import { cleanFacts, factsBlock, parseJeetu, scrub } from "./coach";
 import PROMPT from "./jeetu-prompt.txt";
 import { extraDistress } from "./langs";
-import { jeetuAccess } from "./plus";
+import { jeetuAccess, plusRoutes } from "./plus";
+import { profileFor, saveFacts } from "./profile";
+import { activeResult, resultDays } from "./results";
 import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
 import { ensureSchema, flags } from "./staff";
 
@@ -98,10 +100,18 @@ export async function jeetuRoute(req: Request, env: Env, path: string, member: s
   const access = await jeetuAccess(env, id, false);
   if (!access.ok) return json({ error: LINES.plusOnly[hi], plusOnly: true, plus: access.plus, tasteEndsAt: access.tasteEndsAt }, 403);
   const who = access.who;
+  const plusId = who === "plus" && /^[\w-]{16,64}$/.test(String(id ?? "")) ? String(id) : null;
+  // Plus: the study profile goes in (not on result days), the facts are kept for tonight's profile, and past the
+  // hidden monthly limit the cheaper models answer (plus.ts plusRoutes). Never shown to the member.
+  const resultDay = !!activeResult(await resultDays(env).catch(() => []));
+  const profile = plusId && !resultDay ? await profileFor(env, plusId) : "";
+  if (plusId && facts) await saveFacts(env, plusId, facts);
+  const routes = async (l: keyof typeof JEETU_ROUTES) => plusId ? (await plusRoutes(env, plusId, JEETU_ROUTES[l])).hops : JEETU_ROUTES[l];
   const now = istNow();
   const name = { en: "English", hi: "Hindi", te: "Telugu" }[lang];
   const system = PROMPT.replace("{{app_language}}", name).replace("{{local_time_ist}}", now.toISOString().slice(11, 16) + " IST")
-    .replace("{{facts}}", factsBlock(facts) || "None sent. Don't guess their numbers; ask what they have time for if a plan needs it.");
+    .replace("{{facts}}", factsBlock(facts) || "None sent. Don't guess their numbers; ask what they have time for if a plan needs it.")
+    .replace("{{profile}}", profile.replace(/[{}]/g, "") || "None.");
   const answer = async (text: string, model: string, extraFields: Record<string, unknown> = {}) => {
     const { reply, plan } = parseJeetu(text);
     const after = await jeetuAccess(env, id, true);
@@ -109,13 +119,13 @@ export async function jeetuRoute(req: Request, env: Env, path: string, member: s
   };
   try {
     // Same switch ("chotu" in Admin → AI controls) and logging as cloud Chotu; Jeetu's own, stronger models.
-    const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], JEETU_ROUTES[lang], who);
+    const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system }, ...turns], await routes(lang), who, plusId);
     return await answer(text, model, { lang });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Jeetu is offline right now.", offline: true }, 503);
     if (lang !== "en") {
       try {
-        const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system + "\n\nWrite the text in English." }, ...turns], JEETU_ROUTES.en, who);
+        const { text, model } = await callChat(env, "chotu", [{ role: "system", content: system + "\n\nWrite the text in English." }, ...turns], await routes("en"), who, plusId);
         return await answer(text, model, { lang: "en", fallback: true });
       } catch { /* fall through */ }
     }

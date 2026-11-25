@@ -35,12 +35,12 @@ const costOf = (model: string, tin: number | null, tout: number | null) => {
 // A call that answered also adds to two running totals for the day (daily_counts), so the cap check in gate() reads
 // two rows instead of every call made today (24 Nov 2026, D1 read savings).
 const CALLS_OK = "llm_calls_ok", TOKENS_OK = "llm_tokens_ok";
-const logger = (env: Env, purpose: Purpose, model: string, provider: string | null = null, who: Who = "team") =>
+const logger = (env: Env, purpose: Purpose, model: string, provider: string | null = null, who: Who = "team", member: string | null = null) =>
   (status: string, ms: number | null, tin: number | null, tout: number | null, error: string | null) => {
     const day = istDay();
-    const row = env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error, provider, who, cost_usd) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
+    const row = env.DB.prepare("INSERT INTO llm_calls (at, day, purpose, model, status, ms, tokens_in, tokens_out, error, provider, who, cost_usd, member) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
       .bind(new Date().toISOString(), day, purpose, model, status, ms, tin, tout, error?.slice(0, 200) ?? null, provider, who,
-        provider === "groq" ? costOf(model, tin, tout) : null);
+        provider === "groq" ? costOf(model, tin, tout) : null, member);
     const add = (metric: string, n: number) => env.DB.prepare("INSERT INTO daily_counts (day, metric, n) VALUES (?, ?, ?) ON CONFLICT(day, metric) DO UPDATE SET n = n + excluded.n").bind(day, metric, n);
     return env.DB.batch(status === "ok" ? [row, add(CALLS_OK, 1), add(TOKENS_OK, (tin ?? 0) + (tout ?? 0))] : [row]).then(() => {}).catch(() => {});
   };
@@ -221,6 +221,28 @@ export const JEETU_ROUTES: Record<"en" | "hi" | "te", Hop[]> = {
   ],
 };
 
+/**
+ * The hidden monthly limit per Plus member (owner's decision, 24 Nov 2026): about $15 a year, so $1.25 a month,
+ * counted from the logged cost of their own calls (llm_calls.cost_usd, Groq list prices). Past it, their answers
+ * quietly move to CHEAP_HOPS; when those can't answer either, the phone's own Chotu takes over if they have it. Never
+ * shown to the member. The count starts again on the 1st of each month, India time.
+ */
+export const PLUS_MONTHLY_USD = 1.25;
+/** The cheaper models, in order, for a Plus member past the month's limit. Same answer rules, lower cost. */
+export const CHEAP_HOPS: Hop[] = [
+  { provider: "groq", model: "openai/gpt-oss-120b", extra: GROQ_EXTRA },
+  { provider: "groq", model: "openai/gpt-oss-20b", extra: GROQ_EXTRA },
+];
+/** "2026-11-24" → "2026-11-01": the first day of that month (days are IST days). */
+export const monthStart = (day: string) => day.slice(0, 8) + "01";
+/** What one member's calls cost so far this month (IST), in USD, from the logged estimates. */
+export async function monthSpend(env: Env, member: string, day = istDay()): Promise<number> {
+  await ensureSchema(env);
+  const r = await env.DB.prepare("SELECT COALESCE(SUM(cost_usd), 0) AS usd FROM llm_calls WHERE member = ? AND day >= ?")
+    .bind(member, monthStart(day)).first<{ usd: number }>().catch(() => null);
+  return r?.usd ?? 0;
+}
+
 /** "te", "Telugu" or "తెలుగు" → "te"; the same for Hindi; anything else is English. */
 export function chatLang(x: unknown): keyof typeof CHAT_ROUTES {
   const s = String(x ?? "").trim().toLowerCase();
@@ -244,7 +266,7 @@ export function groqKeyFor(env: Env, who: Who): string | undefined {
   return own || env.GROQ_API_KEY;
 }
 
-export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[], who: Who = "team"): Promise<{ text: string; model: string }> {
+export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTurn | VisionTurn)[], hops: Hop[], who: Who = "team", member: string | null = null): Promise<{ text: string; model: string }> {
   let last = "No AI provider answered";
   let keyed = 0;
   const down = await downProviders(env);
@@ -255,7 +277,7 @@ export async function callChat(env: ChatEnv, purpose: Purpose, messages: (ChatTu
     if (failed.has(hop.provider)) continue;
     const p = PROVIDERS[hop.provider];
     const key = hop.provider === "groq" ? groqKeyFor(env, who) : p.key(env);
-    const log = logger(env, purpose, hop.model, hop.provider, who);
+    const log = logger(env, purpose, hop.model, hop.provider, who, member);
     await gate(env, purpose, log);
     if (!key) {
       await log("unavailable", null, null, null, `${p.keyName} not set`);
@@ -363,4 +385,4 @@ export async function checkProviders(env: ChatEnv): Promise<Record<string, "back
 }
 
 /** The English route, kept for any caller that still asks for Groq by name. */
-export const callGroq = (env: Env, purpose: Purpose, messages: ChatTurn[], who: Who = "team") => callChat(env, purpose, messages, CHAT_ROUTES.en, who);
+export const callGroq = (env: Env, purpose: Purpose, messages: ChatTurn[], who: Who = "team", member: string | null = null) => callChat(env, purpose, messages, CHAT_ROUTES.en, who, member);

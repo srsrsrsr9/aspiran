@@ -26,7 +26,9 @@ const MIMES = new Set(["image/jpeg", "image/png", "image/webp"]);
 export const EVAL_HOPS: Hop[] = [
   { provider: "google", model: "gemini-3.8-flash", extra: { temperature: 0.2, reasoning_effort: "low", max_tokens: 1800 }, timeoutMs: 40_000 },
   { provider: "nvidia", model: "google/gemma-4-31b-it", extra: { temperature: 0.2, max_tokens: 1800 }, timeoutMs: 40_000 },
-  { provider: "groq", model: "meta-llama/llama-4-scout-17b-16e-instruct", extra: { temperature: 0.2, max_completion_tokens: 1800 }, timeoutMs: 30_000 },
+  // Groq shut Llama 4 Scout down on 17 Jul 2026 (console.groq.com/docs/deprecations). Qwen 3.8 27B, already Chotu's
+  // first choice, reads pictures too, so it is the last vision backup (24 Nov 2026).
+  { provider: "groq", model: "qwen/qwen3.8-27b", extra: { temperature: 0.2, reasoning_format: "hidden", max_completion_tokens: 1800 }, timeoutMs: 30_000 },
 ];
 
 /** Typed answers need no vision, so the fast text model goes first; the vision models follow as fallbacks. */
@@ -119,8 +121,8 @@ export async function answersRoute(req: Request, env: Env, path: string): Promis
     // One retry if the reply isn't usable JSON: free models sometimes wander.
     for (let i = 0; i < 2 && !fb; i++) {
       const out = img
-        ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS, who)
-        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], lang === "hi" ? HINDI_EVAL_HOPS : TYPED_EVAL_HOPS, who);
+        ? await callChat(env, "evaluate", [{ role: "user", content }], EVAL_HOPS, who, memberId)
+        : await callChat(env, "evaluate", [{ role: "user", content: content[0].type === "text" ? content[0].text : "" }], lang === "hi" ? HINDI_EVAL_HOPS : TYPED_EVAL_HOPS, who, memberId);
       fb = readFeedback(out.text, text && !img ? wordsIn(text) : null);
       model = out.model;
     }

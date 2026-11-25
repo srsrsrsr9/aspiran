@@ -199,7 +199,7 @@ export async function authRoute(req: Request, env: Env, path: string, url: URL):
 export function isMemberRoute(path: string): boolean {
   return /^\/pods\/(join|leave|me|choose|merge-stay)$/.test(path) || /^\/pods\/[\w-]+\/ws$/.test(path)
     || path === "/members/profile" || /^\/commons\/[\w-]+\/ws$/.test(path) || path === "/season/add" || path === "/mocks/band"
-    || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report"
+    || path === "/plus" || path.startsWith("/plus/") || path === "/chotu" || path === "/chotu/report" || path === "/chotu/profile" || path === "/chotu/chats"
     || path === "/jeetu" || path === "/jeetu/report" || path === "/voice"
     || path === "/consent" || /^\/privacy\/(export|delete)$/.test(path)
     || /^\/rooms\/(list|join|leave|photo)$/.test(path) || /^\/rooms\/[\w-]+\/ws$/.test(path) || /^\/rooms\/photo\/\w+$/.test(path)

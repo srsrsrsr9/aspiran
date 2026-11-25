@@ -1,7 +1,9 @@
 import { AiBlocked, CHAT_ROUTES, type ChatTurn, callChat, chatLang } from "./ai";
 import { JEETU_MARKER, cleanFacts, factsBlock, scrub, takeJeetuMarker } from "./coach";
 import { quietHours } from "./jeetu";
-import { jeetuAccess, whoIs } from "./plus";
+import { jeetuAccess, plusRoutes, whoIs } from "./plus";
+import { CUT_LINE, OFF_MARKER, guardAfter, guardBefore, guardKeys, takeOffMarker } from "./guard";
+import { profileFor, saveChat, saveFacts } from "./profile";
 import { activeResult, resultDays } from "./results";
 import PROMPT from "./chotu-prompt.txt";
 import { extraDistress } from "./langs";
@@ -14,7 +16,10 @@ import { type Env, HELPLINES, bad, distress, istNow, json } from "./shared";
  *    the dev folder (`npm run models`), then R2, then the pinned Hugging Face commit, passed straight through.
  * 2. Cloud Chotu (`POST /chotu`), for phones without the on-device model, until launch. Each language the aspirant
  *    can pick for Chotu has its own models (CHAT_ROUTES in ai.ts), so no one provider carries everything.
- *    Logs metadata only (ai.ts); the chat itself is never stored or logged.
+ *    Logs metadata only (ai.ts). A member's chat is kept (profile.ts saveChat) once they've seen the chat
+ *    notice (profile.ts CHAT_NOTICE_VERSION) and used to improve the app; a visitor's never is.
+ *    Plus members past the hidden monthly limit quietly get cheaper models (plus.ts plusRoutes); free members and
+ *    visitors can be cut off for the day for abuse (guard.ts).
  */
 
 // --- Model files ---------------------------------------------------------------------------------
@@ -182,27 +187,54 @@ export async function chotuChat(req: Request, env: Env, member: string | null = 
     facts: factsBlock(facts) || "None sent. Say nothing about their numbers.",
     result_day: resultDay ? "Today is a result day: no check-ins, no wins, no score trends." : "",
     jeetu_marker: JEETU_MARKER,
+    off_marker: OFF_MARKER,
+    profile,
   });
   const name = { en: "English", hi: "Hindi", te: "Telugu" }[lang];
-  const who = await whoIs(env, member ?? body.memberId);
-  const ask = (app_language: string, l: keyof typeof CHAT_ROUTES, also = "") =>
-    callChat(env, "chotu", [{ role: "system", content: promptIn(app_language) + also }, ...turns], CHAT_ROUTES[l], who);
+  const id: string | null = member ?? (/^[\w-]{16,64}$/.test(String(body.memberId ?? "")) ? String(body.memberId) : null);
+  const who = await whoIs(env, id);
+  const hi = lang === "hi" ? "hi" : "en";
+  // Free members and visitors: a day-long cut-off for abuse (guard.ts), with one calm line and no model call.
+  const keys = who === "plus" ? null : await guardKeys(id, req.headers.get("cf-connecting-ip") ?? "local", body.installId ?? req.headers.get("x-install-id"));
+  if (keys) {
+    const cut = await guardBefore(env, keys, id);
+    if (cut) return json({ reply: CUT_LINE[hi], resting: true, limit: true, ai: false });
+  }
+  // Plus: their study profile goes in (not on result days), the facts their app sent are kept for tonight's profile,
+  // and past the hidden monthly limit the cheaper models answer.
+  const profile = who === "plus" && !resultDay ? await profileFor(env, id) : "";
+  if (who === "plus" && id && facts) await saveFacts(env, id, facts);
+  const budget = async (l: keyof typeof CHAT_ROUTES) => who === "plus" ? plusRoutes(env, id, CHAT_ROUTES[l]) : { hops: CHAT_ROUTES[l], over: false };
+  let over = false;
+  const ask = async (app_language: string, l: keyof typeof CHAT_ROUTES, also = "") => {
+    const b = await budget(l);
+    over = b.over;
+    return callChat(env, "chotu", [{ role: "system", content: promptIn(app_language) + also }, ...turns], b.hops, who, id);
+  };
   // The marker is always stripped; offerJeetu is only set when this member can actually use Jeetu, and not at night.
-  const finish = async (raw: string) => {
-    const { text, offerJeetu } = takeJeetuMarker(raw);
-    const offer = offerJeetu && !quietHours() && !resultDay && (await jeetuAccess(env, member ?? body.memberId, false)).ok;
-    return { reply: scrub(text).text, ...(offer ? { offerJeetu: true } : {}) };
+  const finish = async (raw: string, replyLang: string) => {
+    const off = takeOffMarker(raw);
+    const { text, offerJeetu } = takeJeetuMarker(off.text);
+    if (keys) await guardAfter(env, keys.key, off.offTopic);
+    const offer = offerJeetu && !quietHours() && !resultDay && (await jeetuAccess(env, id, false)).ok;
+    const reply = scrub(text).text;
+    // Kept for every member who has seen the chat notice (profile.ts); before that, nothing is kept.
+    if (id) await saveChat(env, id, turns[turns.length - 1].content, reply, "cloud", replyLang);
+    return { reply, ...(offer ? { offerJeetu: true } : {}) };
   };
   try {
     const { text, model } = await ask(ctx.chotu_language ? name : str(ctx.language, 40), lang);
-    return json({ ...(await finish(text)), model, lang, ai: true });
+    return json({ ...(await finish(text, lang)), model, lang, ai: true });
   } catch (e) {
     if (e instanceof AiBlocked) return json({ error: "Chotu is offline right now.", offline: true }, 503);
+    // Past the monthly limit and the cheaper models couldn't answer: the phone's own Chotu takes it, if it has one.
+    // The words are the ordinary "try again" line; onDevice is for the app only.
+    if (over) return json({ error: "Chotu couldn't answer just now. Try again in a minute.", offline: false, onDevice: true }, 502);
     // Until Google billing is on, Hindi and Telugu can time out on the free models: answer in English instead.
     if (lang !== "en") {
       try {
         const { text, model } = await ask("English", "en", "\n\nAnswer in English, even if the question is in another language.");
-        return json({ ...(await finish(text)), model, lang: "en", ai: true, fallback: true, note: `${name} is busy right now, so here's the answer in English.` });
+        return json({ ...(await finish(text, "en")), model, lang: "en", ai: true, fallback: true, note: `${name} is busy right now, so here's the answer in English.` });
       } catch { /* fall through */ }
     }
     return json({ error: "Chotu couldn't answer just now. Try again in a minute.", offline: false }, 502);

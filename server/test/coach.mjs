@@ -2,7 +2,7 @@
 // plus.ts). Needs no server and no keys: the real code is bundled and run against a pretend database and a pretend
 // model that answers whatever each check needs. `node test/coach.mjs` or `npm run test:all -- coach`.
 import assert from "node:assert/strict";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -17,7 +17,10 @@ writeFileSync(entry, [
   `export { chotuChat, fillPrompt } from ${src("chotu.ts")};`,
   `export { jeetuRoute, quietHours } from ${src("jeetu.ts")};`,
   `export { jeetuAccess, LIMITS } from ${src("plus.ts")};`,
-  `export { JEETU_ROUTES, CHAT_ROUTES } from ${src("ai.ts")};`,
+  `export { JEETU_ROUTES, CHAT_ROUTES, CHEAP_HOPS, PLUS_MONTHLY_USD, monthStart } from ${src("ai.ts")};`,
+  `export { plusRoutes } from ${src("plus.ts")};`,
+  `export { GUARD, nextRow, takeOffMarker, guardKeys, CUT_LINE } from ${src("guard.ts")};`,
+  `export { cleanProfile } from ${src("profile.ts")};`,
 ].join("\n"));
 await build({ entryPoints: [entry], bundle: true, format: "esm", platform: "node", outfile: out, logLevel: "error", loader: { ".txt": "text" } });
 const A = await import(pathToFileURL(out).href);
@@ -112,8 +115,52 @@ for (const lang of ["en", "hi", "te"]) {
 assert.ok(!A.JEETU_ROUTES.te.some((h) => h.model.includes("nemotron")), "Nemotron mangles Telugu");
 step("JEETU_ROUTES: gpt-oss-120b first in every language, Google last");
 
+// --- Retired models: none left (Groq shut Llama 4 Scout down on 17 Jul 2026) -----------------------------------------
+assert.ok(!/model:\s*"[^"]*(scout|llama-4)/i.test(readFileSync("src/answers.ts", "utf8")), "Answer Studio still routes a retired model");
+for (const hops of [A.CHEAP_HOPS, ...Object.values(A.JEETU_ROUTES), ...Object.values(A.CHAT_ROUTES)])
+  for (const h of hops) assert.ok(!/scout|llama-4/i.test(h.model), "retired model still routed: " + h.model);
+step("no retired model (Llama 4 Scout) in any route");
+
+// --- Day-long cut-offs for free members and visitors (guard.ts) -------------------------------------------------------
+{
+  let row = null, cut = null;
+  const t0 = 1_800_000_000_000;
+  for (let i = 0; i < 30; i++) ({ row, cut } = A.nextRow(row, t0 + i * 1000));
+  assert.equal(cut, null, "30 quick messages in a minute is fine");
+  ({ row, cut } = A.nextRow(row, t0 + 30_000));
+  assert.equal(cut, "speed", "31 within a minute (one every 2 s or faster) cuts off");
+  row = null;
+  for (let i = 0; i < 100; i++) ({ row, cut } = A.nextRow(row, t0 + i * 60_000));
+  assert.equal(cut, null, "100 messages a day is fine");
+  assert.equal(row.n, 100);
+  ({ row, cut } = A.nextRow(row, t0 + 101 * 60_000));
+  assert.equal(cut, "volume", "the 101st cuts off for the day");
+  assert.equal(JSON.parse(row.recent).length <= A.GUARD.burst, true, "only the last few times are kept");
+  ({ cut } = A.nextRow({ n: 1, recent: "not json", offtopic: 0, cut: null }, t0));
+  assert.equal(cut, null, "a damaged row starts again");
+  const off = A.takeOffMarker("Let's get back to Polity. [[OFF]]");
+  assert.deepEqual(off, { text: "Let's get back to Polity.", offTopic: true });
+  assert.equal(A.takeOffMarker("Article 200 is about assent. [off]").text, "Article 200 is about assent.");
+  assert.equal(A.takeOffMarker("Article 200 is about assent.").offTopic, false);
+  for (const l of Object.values(A.CUT_LINE)) assert.ok(!/\b(abuse|ban|blocked|violat\w*|AI)\b/i.test(l), "the cut-off line is calm and plain");
+  const k = await A.guardKeys(null, "1.2.3.4", "../evil");
+  assert.ok(k.key.startsWith("v:") && !k.key.includes("1.2.3.4"), "visitors are keyed by a hash, never the address");
+  assert.equal(k.device, null, "a bad install id is ignored");
+  assert.ok((await A.guardKeys("member-x-00000000001", "1.2.3.4", "abcdef12-3456")).device.startsWith("d:"));
+}
+step("cut-offs: speed (31 in a minute), volume (over 100 a day), off-topic marker always stripped, calm line");
+
+// --- Study profile: dash lines only, no feelings, ranks or results -----------------------------------------------------
+{
+  const p = A.cleanProfile("Here you go:\n- 412 minutes in two weeks\n- Polity accuracy rose from 58% to 66%\n- You seem anxious lately\n- Likely rank under 500\nThanks");
+  assert.ok(p.includes("412 minutes") && p.includes("58% to 66%"));
+  assert.ok(!/anxious|rank|Here you go|Thanks/i.test(p), "feelings, ranks and chatter are dropped: " + p);
+  assert.ok(A.cleanProfile(Array.from({ length: 20 }, (_, i) => "- line " + i).join("\n")).split("\n").length <= 8);
+}
+step("study profile: at most 8 dash lines, never feelings, ranks or results");
+
 // --- A pretend database and a pretend model -------------------------------------------------------------------------
-const db = { settings: new Map(), usage: new Map(), ent: new Map(), accounts: new Map(), calls: [] };
+const db = { settings: new Map(), usage: new Map(), ent: new Map(), accounts: new Map(), calls: [], spend: new Map() };
 const DB = {
   batch: async () => [],
   prepare(sql) {
@@ -136,6 +183,7 @@ const DB = {
           return { n };
         }
         if (sql.includes("COUNT(*) AS calls")) return { calls: 0, tokens: 0 };
+        if (sql.includes("SUM(cost_usd)")) return { usd: db.spend.get(a[0]) ?? 0 };
         return null;
       },
       all: async () => ({ results: [] }),
@@ -243,3 +291,18 @@ assert.equal(st.who, "free");
 assert.equal(st.ok, true, "a member with no account row starts their taste now");
 assert.equal((await A.jeetuAccess(env, "short", false)).who, "visitor");
 step("jeetuAccess: visitor without a member id; a new free member has the taste");
+
+// --- The hidden monthly limit for Plus (plus.ts plusRoutes) -----------------------------------------------------------
+assert.equal(A.monthStart("2026-11-24"), "2026-11-01");
+assert.equal(A.PLUS_MONTHLY_USD, 1.25);
+assert.deepEqual(A.CHEAP_HOPS.map((h) => h.model), ["openai/gpt-oss-120b", "openai/gpt-oss-20b"]);
+let pr = await A.plusRoutes(env, PLUS, A.JEETU_ROUTES.en);
+assert.equal(pr.over, false);
+assert.equal(pr.hops, A.JEETU_ROUTES.en);
+db.spend.set(PLUS, 1.3);
+pr = await A.plusRoutes(env, PLUS, A.JEETU_ROUTES.en);
+assert.equal(pr.over, true);
+assert.equal(pr.hops, A.CHEAP_HOPS);
+assert.equal((await A.plusRoutes(env, OLD, A.JEETU_ROUTES.en)).over, false, "free members keep their routes");
+db.spend.delete(PLUS);
+step("Plus past $1.25 this month moves quietly to gpt-oss-120b then 20b; others unchanged");

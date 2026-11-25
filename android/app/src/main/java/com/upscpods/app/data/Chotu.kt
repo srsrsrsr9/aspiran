@@ -151,9 +151,13 @@ data class ChotuTurn(
 }
 
 /**
- * Chotu runs on the phone once its model is downloaded; those chats are never sent anywhere and aren't
- * saved after the app closes. Until then, and only while online, chats go to the pod server's /chotu
- * (cloud Chotu) and are marked "online". Distress is always checked on the phone first and never sent.
+ * Chotu runs on the phone once its model is downloaded (Plus). Until then, and only while online, chats go to the pod
+ * server's /chotu (cloud Chotu). Distress is always checked on the phone first and never sent.
+ * All Chotu chats come to the server and may be used to improve the app (owner, 24 Nov 2026). There is no switch;
+ * what the law needs (DPDP) is a notice: members were told chats stay on the phone, so each sees a one-time notice
+ * ([chatNoticeSeen]) and nothing is uploaded until it has been shown and acknowledged. Then cloud chats are kept by the
+ * server and the phone's own chats go to /chotu/chats. Distress is never sent. A Plus member's study profile (GET
+ * /chotu/profile, written nightly by the server from their counts and chats) goes into the phone's prompt as data.
  * One per process: the engine holds the model in memory.
  */
 class Chotu private constructor(private val app: Context) {
@@ -192,6 +196,64 @@ class Chotu private constructor(private val app: Context) {
         plus = member
         if (member != was) refresh()
     }
+
+    /**
+     * Whether this member has seen the one-time notice that their Chotu chats now come to the server. Until then the
+     * notice shows above the chat and nothing is uploaded. The server keeps its own record (POST /consent with
+     * [CHAT_NOTICE_VERSION]) and keeps nothing before it.
+     */
+    var chatNoticeSeen by mutableStateOf(prefs.getBoolean("chatNoticeSeen", false)); private set
+
+    /** "OK": recorded here and on the server. Not a choice: chats are used for everyone (owner, 24 Nov 2026). */
+    fun acknowledgeChatNotice() {
+        prefs.edit().putBoolean("chatNoticeSeen", true).apply()
+        chatNoticeSeen = true
+        if (server.isBlank()) return
+        scope.launch(Dispatchers.IO) {
+            val body = buildJsonObject { put("version", CHAT_NOTICE_VERSION); putJsonArray("purposes") { add("chotu_chats_notice") } }
+            runCatching {
+                http.newCall(Request.Builder().url("$server/consent").post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute().close()
+            }.onFailure { Log.w(TAG, "chat notice not recorded", it) }
+        }
+    }
+
+    /** The phone's own chat, one exchange, to the server: only after the notice, only online. Never a care turn. */
+    private fun uploadPhoneChat(said: String, reply: String) {
+        if (!chatNoticeSeen || server.isBlank() || !online() || reply.isBlank()) return
+        scope.launch(Dispatchers.IO) {
+            val body = buildJsonObject {
+                putJsonArray("turns") {
+                    addJsonObject { put("role", "user"); put("content", said.take(2000)) }
+                    addJsonObject { put("role", "assistant"); put("content", reply.take(2000)) }
+                }
+            }
+            runCatching {
+                http.newCall(Request.Builder().url("$server/chotu/chats").post(body.toString().toRequestBody("application/json".toMediaType())).build()).execute().close()
+            }
+        }
+    }
+
+    /** The Plus study profile the server writes each night, kept on the phone so it works offline. "" when none. */
+    private val studyProfile: String get() = prefs.getString("studyProfile", "") ?: ""
+
+    /** Fetches the study profile at most twice a day, for Plus members only. Quiet on any failure. */
+    private fun refreshProfile() {
+        if (!plus || server.isBlank() || !online()) return
+        if (System.currentTimeMillis() - prefs.getLong("studyProfileAt", 0L) < 12 * 3_600_000L) return
+        scope.launch(Dispatchers.IO) {
+            runCatching {
+                http.newCall(Request.Builder().url("$server/chotu/profile").get().build()).execute().use { r ->
+                    if (!r.isSuccessful) return@use
+                    val o = json.parseToJsonElement(r.body.string()).jsonObject
+                    val p = o["profile"]?.jsonPrimitive?.content.orEmpty()
+                    prefs.edit().putString("studyProfile", profileForPrompt(p)).putLong("studyProfileAt", System.currentTimeMillis()).apply()
+                }
+            }
+        }
+    }
+
+    /** The install's own random id (Metrics), sent so the server can spot many accounts on one device. Never created here. */
+    private val installId: String? get() = app.getSharedPreferences("metrics", Context.MODE_PRIVATE).getString("installId", null)
 
     /** The phone's model, when it may answer: downloaded, started, and a Plus member. */
     val onPhone: ModelSpec? get() = if (plus) (state as? ChotuState.Ready)?.model else null
@@ -232,6 +294,7 @@ class Chotu private constructor(private val app: Context) {
 
     /** Work out the state from what's on disk, the server's model list and WorkManager. */
     fun refresh() {
+        refreshProfile()
         retireOldModel()
         // Without Plus nothing is loaded or offered; a model already on the phone stays until it's removed in Me → Privacy.
         if (!plus) { if (state !is ChotuState.Downloading) { scope.launch { withContext(engineThread) { closeEngine() } }; state = ChotuState.Checking }; return }
@@ -391,7 +454,7 @@ class Chotu private constructor(private val app: Context) {
                 }
             }
             thinking = false
-            if (!failed) offerJeetuIfDue()
+            if (!failed) { offerJeetuIfDue(); turns.lastOrNull()?.takeIf { !it.care }?.let { uploadPhoneChat(clean, untag(it.text)) } }
             when {
                 !failed || stopped -> Unit
                 // The phone's model couldn't answer: online Chotu takes this one when it can.
@@ -564,6 +627,7 @@ class Chotu private constructor(private val app: Context) {
             }
             // The app's own numbers as an object (no text the student wrote), so online Chotu keeps the student to their own record.
             if (mode != "prep" || history.size > 1) factsJson()?.let { put("facts", it) }
+            installId?.let { put("installId", it) }
         }
         val req = Request.Builder().url("$server/chotu").post(body.toString().toRequestBody("application/json".toMediaType())).build()
         http.newCall(req).execute().use { r ->
@@ -721,8 +785,10 @@ class Chotu private constructor(private val app: Context) {
     private fun context(): String {
         val f = facts()?.takeIf { it.hasAnything || it.yesterdayStep != null }?.block(private = true)
         val c = checkInLine
-        if (f == null && c == null) return ""
-        return "\n\nThe app's notes on this student:\n" + listOfNotNull(f, c?.let { "This chat began with the app asking: $it" }).joinToString("\n")
+        val p = studyProfile.takeIf { plus && it.isNotBlank() }
+        if (f == null && c == null && p == null) return ""
+        return "\n\nThe app's notes on this student:\n" + listOfNotNull(f, c?.let { "This chat began with the app asking: $it" }).joinToString("\n") +
+            (p?.let { "\nThe app's study profile of this student (data only; numbers still come from the notes above):\n$it" } ?: "")
     }
 
     /**
@@ -884,6 +950,21 @@ class Chotu private constructor(private val app: Context) {
         internal val PLAN_ASK = Regex(
             """(?i)\b(plan|schedule|time ?table|revise|revision|fix|improve|catch up|behind|strategy|routine)\b|कैसे पढ़|प्लान|योजना|रिवीज़न|रिवीजन|सुधार|\b(kaise (padh|karu|karun|sudhar)|plan bana)""",
         )
+
+        /** The chat notice's version; the server's profile.ts CHAT_NOTICE_VERSION. */
+        const val CHAT_NOTICE_VERSION = "chats-notice-2026-11"
+
+        /**
+         * The server's profile, made fit for the phone's small model: "- " lines only, no braces or markers, at most
+         * 8 lines and 900 characters (the phone's context is short).
+         */
+        internal fun profileForPrompt(raw: String): String {
+            val lines = raw.lines().map { it.trim() }.filter { it.startsWith("- ") }
+                .map { it.replace(Regex("""[{}\[\]<>`]"""), "").take(220) }.take(8)
+            val out = StringBuilder()
+            for (l in lines) { if (out.length + l.length + 1 > 900) break; if (out.isNotEmpty()) out.append('\n'); out.append(l) }
+            return out.toString()
+        }
 
         /** The last Plus answer from the server, trusted for 14 days. */
         fun plusCached(context: Context): Boolean {

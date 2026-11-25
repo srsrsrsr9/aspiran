@@ -1,4 +1,5 @@
 import { type Env, json, bad } from "./shared";
+import { CHAT_NOTICE_VERSION } from "./profile";
 import { bump, ensureSchema, sha256Hex } from "./staff";
 import { forgetAccount } from "./auth";
 import { forgetInstituteMember } from "./institutes";
@@ -9,18 +10,26 @@ import { crmExport, forgetCrmMember } from "./marketing";
 /**
  * DPDP: consent records, and a member's right to get or erase what the server holds about them.
  * Most of a member's data never leaves their phone or browser; the server holds their sign-in account (phone or
- * email, status), pod membership, consent records, pod messages and private notes, and reports that mention them.
+ * email, status), pod membership, consent records, pod messages and private notes, and reports that mention them;
+ * their Chotu chats (after the chat notice); and, for Plus, their study profile.
  * Erasure keeps one line: a hash of the member id with the date, so restoring an old backup can erase them again.
  */
 
 export const CONSENT_VERSION = "2026-10";
+/**
+ * The chat notice (India's DPDP Act; owner's decision, 24 Nov 2026): Chotu chats are used to improve the app for every
+ * member, with no opt-in or opt-out. A consents row with version CHAT_NOTICE_VERSION (purpose "chotu_chats_notice")
+ * records that the member was shown it, at web sign-up or by tapping OK on the one-time notice; chats are kept only
+ * after that. It is a record of being told, not a choice, so it can't be withdrawn on its own.
+ */
 const validId = (id: unknown) => typeof id === "string" && /^[\w-]{16,64}$/.test(id);
 
 export async function recordConsent(env: Env, body: any): Promise<Response> {
   if (!validId(body?.memberId)) return bad("memberId is required");
   await ensureSchema(env);
-  const purposes = Array.isArray(body.purposes) ? body.purposes.map(String).slice(0, 10) : ["pods", "content"];
   const version = String(body.version ?? CONSENT_VERSION).slice(0, 20);
+  const purposes = version === CHAT_NOTICE_VERSION ? ["chotu_chats_notice"] : Array.isArray(body.purposes) ? body.purposes.map(String).slice(0, 10) : ["pods", "content"];
+  if (body.withdraw && version === CHAT_NOTICE_VERSION) return bad("The chat notice is a record of being told, not a choice.");
   if (body.withdraw) {
     await env.DB.prepare("UPDATE consents SET withdrawn_at = ? WHERE member_id = ? AND withdrawn_at IS NULL").bind(new Date().toISOString(), body.memberId).run();
     return json({ ok: true, withdrawn: true });
@@ -40,6 +49,9 @@ export async function exportMember(env: Env, memberId: string, via: string, by: 
   // Usage events and one-tap feedback (metrics.ts): names, days and codes only, never text.
   const events = (await env.DB.prepare("SELECT name, props, day FROM events WHERE member_id = ? ORDER BY id").bind(memberId).all()).results;
   const feedback = (await env.DB.prepare("SELECT moment, rating, day FROM feedback WHERE member_id = ? ORDER BY id").bind(memberId).all()).results;
+  // Their kept Chotu chats, and their study profile (Plus).
+  const chotuChats = (await env.DB.prepare("SELECT at, role, content, source, lang FROM chotu_chats WHERE member_id = ? ORDER BY at, id").bind(memberId).all()).results;
+  const studyProfile = await env.DB.prepare("SELECT profile, profile_at, facts, facts_at FROM study_profiles WHERE member_id = ?").bind(memberId).first();
   let pod: unknown = null;
   if (member?.pod_id) {
     const stub = env.POD.get(env.POD.idFromName(member.pod_id));
@@ -50,7 +62,7 @@ export async function exportMember(env: Env, memberId: string, via: string, by: 
   return {
     exportedAt: new Date().toISOString(),
     note: "Everything the Aspiran server holds about this member id. Journal, mood, progress and saved cards live only on the member's own device.",
-    account, member, consents, reportsAboutTheirMessages: reports, pod, usageEvents: events, feedback, marketingList: await crmExport(env, memberId),
+    account, member, consents, reportsAboutTheirMessages: reports, pod, usageEvents: events, feedback, chotuChats, studyProfile, marketingList: await crmExport(env, memberId),
   };
 }
 
@@ -66,6 +78,9 @@ export async function forgetMember(env: Env, memberId: string, via: string, by: 
     ...(member ? [env.DB.prepare("UPDATE pods SET size = MAX(size - 1, 0), lead_member = CASE WHEN lead_member = ? THEN NULL ELSE lead_member END WHERE id = ?").bind(memberId, member.pod_id)] : []),
     env.DB.prepare("DELETE FROM members WHERE member_id = ?").bind(memberId),
     env.DB.prepare("DELETE FROM consents WHERE member_id = ?").bind(memberId),
+    env.DB.prepare("DELETE FROM chotu_chats WHERE member_id = ?").bind(memberId),
+    env.DB.prepare("DELETE FROM study_profiles WHERE member_id = ?").bind(memberId),
+    env.DB.prepare("DELETE FROM device_members WHERE member_id = ?").bind(memberId),
     // Reports stay for the safety record, without the words or who wrote them.
     env.DB.prepare("UPDATE reports SET member_id = NULL, author = '(deleted member)', text = NULL WHERE member_id = ?").bind(memberId),
     // Usage counts stay; the link to the person goes.
@@ -112,6 +127,8 @@ export async function reapplyErasures(env: Env): Promise<number> {
     await env.DB.batch([
       env.DB.prepare("DELETE FROM members WHERE member_id = ?").bind(id),
       env.DB.prepare("DELETE FROM consents WHERE member_id = ?").bind(id),
+      env.DB.prepare("DELETE FROM chotu_chats WHERE member_id = ?").bind(id),
+      env.DB.prepare("DELETE FROM study_profiles WHERE member_id = ?").bind(id),
       env.DB.prepare("UPDATE reports SET member_id = NULL, author = '(deleted member)', text = NULL WHERE member_id = ?").bind(id),
       ...anonymiseStatements(env, id),
     ]);

@@ -41,3 +41,32 @@ r = await post({ mode: "chat", messages: [{ role: "user", content: "What is Arti
 const out = await r.json();
 if (r.status === 200) { assert.ok(out.reply && out.ai === true); step("cloud Chotu answered (" + out.model + ")"); }
 else { assert.ok([502, 503].includes(r.status) && out.error); step("cloud Chotu without a working key says so (" + r.status + ")"); }
+
+// --- Chotu chats: kept for every member once they've been shown the notice (owner, 24 Nov 2026; profile.ts) -------
+const ME = "chat-notice-" + Math.random().toString(36).slice(2, 10) + "-x";
+const chats = (turns) => fetch(BASE + "/chotu/chats", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: ME, turns, lang: "en" }) });
+const notice = (extra = {}) => fetch(BASE + "/consent", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: ME, version: "chats-notice-2026-11", ...extra }) });
+const exported = async () => (await (await fetch(BASE + "/privacy/export", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ memberId: ME }) })).json());
+const TURNS = [{ role: "user", content: "What is Article 200?" }, { role: "assistant", content: "Assent to state bills." }];
+
+r = await chats(TURNS);
+assert.equal(r.status, 403, "nothing is kept before the member has seen the notice");
+r = await notice();
+assert.equal(r.status, 200);
+r = await chats([...TURNS, { role: "user", content: "I want to die" }]);
+assert.equal(r.status, 200);
+assert.equal((await r.json()).kept, 2, "distress is never kept as a chat");
+const ex = await exported();
+assert.equal(ex.chotuChats.length, 2);
+assert.ok(ex.consents.some((c) => c.version === "chats-notice-2026-11" && JSON.parse(c.purposes).includes("chotu_chats_notice")));
+step("chats are kept once the notice was shown, never the distress lines, and show in the member's export");
+
+r = await notice({ withdraw: true });
+assert.equal(r.status, 400, "the notice is a record of being told, not a switch");
+assert.equal((await chats(TURNS)).status, 200);
+step("there is no opt-out switch for the chat notice");
+
+r = await fetch(BASE + "/chotu/profile?member=" + ME);
+assert.equal(r.status, 200);
+assert.deepEqual(await r.json(), { profile: "", plus: false });
+step("the study profile is for Plus members only");

@@ -341,6 +341,16 @@ export const ADMIN_SCHEMA = [
   `CREATE INDEX IF NOT EXISTS try_recall_session ON try_recall(session_id)`,
   `CREATE TABLE IF NOT EXISTS try_updates (id INTEGER PRIMARY KEY AUTOINCREMENT, path_id TEXT NOT NULL, text_en TEXT NOT NULL, text_hi TEXT,
     done_on TEXT NOT NULL, hidden INTEGER NOT NULL DEFAULT 0, created_by TEXT, created_at TEXT NOT NULL)`,
+  // AI decisions of 24 Nov 2026 (migrations/0019_ai_limits_profiles.sql): free cut-offs, chats kept with consent,
+  // and Plus study profiles.
+  `CREATE TABLE IF NOT EXISTS ai_guard (k TEXT NOT NULL, day TEXT NOT NULL, n INTEGER NOT NULL DEFAULT 0, recent TEXT,
+    offtopic INTEGER NOT NULL DEFAULT 0, cut TEXT, PRIMARY KEY (k, day))`,
+  `CREATE TABLE IF NOT EXISTS device_members (device TEXT NOT NULL, member_id TEXT NOT NULL, day TEXT NOT NULL, PRIMARY KEY (device, member_id))`,
+  `CREATE TABLE IF NOT EXISTS chotu_chats (id INTEGER PRIMARY KEY AUTOINCREMENT, member_id TEXT NOT NULL, at TEXT NOT NULL,
+    role TEXT NOT NULL, content TEXT NOT NULL, source TEXT NOT NULL, lang TEXT)`,
+  `CREATE INDEX IF NOT EXISTS chotu_chats_member ON chotu_chats(member_id, at)`,
+  `CREATE TABLE IF NOT EXISTS study_profiles (member_id TEXT PRIMARY KEY, facts TEXT, facts_at TEXT, profile TEXT,
+    profile_at TEXT, profile_day TEXT, model TEXT)`,
 ];
 
 const ALTERS = [
@@ -349,6 +359,9 @@ const ALTERS = [
   "ALTER TABLE llm_calls ADD COLUMN provider TEXT",
   "ALTER TABLE llm_calls ADD COLUMN who TEXT",
   "ALTER TABLE llm_calls ADD COLUMN cost_usd REAL",
+  // Whose call it was, for a Plus member's monthly limit (migrations/0019_ai_limits_profiles.sql).
+  "ALTER TABLE llm_calls ADD COLUMN member TEXT",
+  "CREATE INDEX IF NOT EXISTS llm_calls_member ON llm_calls(member, day)",
   "ALTER TABLE members ADD COLUMN suspend_reason TEXT",
   "ALTER TABLE pods ADD COLUMN lead_member TEXT",
   "ALTER TABLE reports ADD COLUMN member_id TEXT",
