@@ -75,7 +75,7 @@ fun AppearanceCard(context: Context) {
                     Text(m.label, Modifier.padding(start = 8.dp), style = MaterialTheme.typography.bodyLarge)
                 }
             }
-            Text("The ☀ / ☾ button at the top of every screen switches too.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text("The ⋮ menu at the top of every screen switches too.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }

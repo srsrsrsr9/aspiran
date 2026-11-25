@@ -45,7 +45,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
-import com.upscpods.app.ui.ChotuTour
+import com.upscpods.app.data.Go
+import com.upscpods.app.data.Journey
+import com.upscpods.app.data.Memory
+import com.upscpods.app.data.Starter
+import com.upscpods.app.ui.FirstFiveMinutes
+import com.upscpods.app.ui.FirstWeekPath
+import com.upscpods.app.ui.FirstWeekScreen
+import com.upscpods.app.ui.MemoryTiles
+import com.upscpods.app.ui.NextUpCard
+import com.upscpods.app.ui.NudgeStepSheet
+import com.upscpods.app.ui.StepDoneBar
 import com.upscpods.app.ui.MePage
 import com.upscpods.app.ui.TabGlyph
 import com.upscpods.app.ui.TabIcon
@@ -77,6 +87,8 @@ import com.upscpods.app.ui.SuspendedScreen
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.upscpods.app.data.Brief
 import com.upscpods.app.data.BriefRepository
 import com.upscpods.app.data.AppRepository
@@ -257,7 +269,7 @@ private enum class Tab(val label: String, val glyph: TabGlyph) {
 // Four chips (sell-first plan W2): Mocks sits inside "Practice & Mocks"; Plus opens from its banner and the locked layers.
 private enum class PrepSub(val label: String) { TODAY("Today"), SYLLABUS("Syllabus"), PRACTICE("Practice & Mocks"), MOCKS("Mocks"), PLAN("My Plan") }
 
-private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, LISTEN, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS, CENTRE }
+private enum class Overlay { NONE, CHAI, CLOSE_DAY, PRELIMS, MAINS, ANSWER_STUDIO, CARDS, LIBRARY, LAMP, REVIEW, SHOULDERS, SHELF, FOCUS, TOOL, MOCK, MOCK_RESULT, LEARN, READS, READER, LISTEN, PREP_TOOL, PLUS_INFO, CA, PYQ, ESSAY, INTERVIEW, CASE_FILE, PROGRESS, JEETU, WALK, PRINT, OPTIONAL, TERMS, SKELETONS, ETHICS, CSAT, SHEETS, TALKS, CENTRE, FIRST_WEEK }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -276,6 +288,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val effort = remember { com.upscpods.app.data.EffortLog(context) }
     val roadmap = remember { RoadmapStore(context) { pod.serverUrl } }
     val langRequests = remember { LanguageRequests(context) }
+    // The first week, step by step, and what the person has done (data/Journey.kt).
+    val journey = remember { Journey(context) }
     // Growth counts (data/Metrics.kt): first open with the Play referrer, then one app_open a day. Never any text.
     LaunchedEffect(Unit) { Metrics.init(context, { pod.serverUrl }, { Auth.session?.memberId ?: pod.memberId }); Metrics.boot() }
     // Language requests made offline (or before a server was set) go up when the server can be reached.
@@ -381,6 +395,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     LifecycleStartEffect(pod) {
         // Opening the app at all means the last nudge wasn't ignored.
         Nudge.opened(context)
+        journey.opened()
         Nudge.schedule(context)
         pod.start(persona)
         onStopOrDispose { pod.stop() }
@@ -491,6 +506,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             }
         }
         activeMock = null
+        journey.did(Starter.MOCK)
         misses = prep.misses()
         mockHistory = mocks.history()
         overlay = Overlay.MOCK_RESULT
@@ -607,6 +623,45 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     var needToTalk by rememberSaveable { mutableStateOf(false) }
     val openNeedToTalk = { needToTalk = true }
 
+    // What the person has done, read from the stores the app already keeps (nothing new leaves the phone).
+    var inReview by remember { mutableIntStateOf(0) }
+    LaunchedEffect(loaded, journey.tick, overlay) { if (loaded) inReview = repo.reviewCount() }
+    val memory = remember(journey.tick, mapTick, overlay, misses, mockHistory, day.done.size, reviewTopics, reviewQs, inReview, pod.podId, tab) {
+        val ans = effort.answers().values.flatMap { it.values }
+        Memory(
+            questions = ans.sumOf { it.getOrElse(1) { 0 } },
+            right = ans.sumOf { it.getOrElse(0) { 0 } },
+            inReview = inReview,
+            dueToday = reviewTopics.size + reviewQs.size,
+            topicsMet = syllabusMap.counts().filterKeys { it != com.upscpods.app.data.MapState.NONE }.values.sum(),
+            answers = answerLog.all().size,
+            mocks = mockHistory.size,
+            daysActive = effort.days().size,
+            misses = misses.size,
+            chaiDone = TaskId.CHAI in day.done,
+            practiceDone = TaskId.PRELIMS in day.done,
+            reviewedToday = syllabusMap.reviewedOn == LocalDate.now().toString(),
+            nudgeSet = Nudge.time(context) != null && Nudge.canNotify(context),
+            inPod = pod.podId != null,
+        )
+    }
+    var nudgeAsk by rememberSaveable { mutableStateOf(false) }
+    // Where each "Next up" goes. A step is marked done where it actually happens, not here.
+    val goTo: (Go) -> Unit = { g ->
+        when (g) {
+            Go.CHAI -> overlay = Overlay.CHAI
+            Go.NUDGE -> nudgeAsk = true
+            Go.POD -> tab = Tab.POD
+            Go.PRACTICE -> overlay = Overlay.PRELIMS
+            Go.REVIEW -> overlay = Overlay.REVIEW
+            Go.ANSWER -> { studioPyq = null; overlay = Overlay.ANSWER_STUDIO }
+            Go.MOCK -> mocks.quick(archive, bank)?.let { startMock(it) } ?: run { tab = Tab.PREP; prepSub = PrepSub.MOCKS }
+            Go.WEEK -> overlay = Overlay.FIRST_WEEK
+            Go.PREP -> { tab = Tab.PREP; prepSub = PrepSub.TODAY }
+            Go.NONE -> {}
+        }
+    }
+
     // Back from any tab goes home to the Adda first (Me's own pages step back to Me before that).
     BackHandler(enabled = overlay == Overlay.NONE && tab != Tab.ADDA) { tab = Tab.ADDA }
     BackHandler(enabled = overlay != Overlay.NONE) {
@@ -651,6 +706,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         effort.forget()
         com.upscpods.app.data.JeetuPlans.forget(context)
         staged.forget()
+        journey.forget()
         Focus.forget(context)
         Nudge.set(context, null)
         chotu.newChat()
@@ -699,14 +755,14 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         Overlay.PRELIMS -> PrelimsScreen(
             questions,
             onAnswer = answer,
-            onFinished = { day.markDone(TaskId.PRELIMS); finishPractice(); debriefDue = true },
+            onFinished = { day.markDone(TaskId.PRELIMS); finishPractice(); debriefDue = true; journey.did(Starter.QUESTIONS) },
             onClose = { overlay = Overlay.NONE; session = emptyMap() },
         )
         Overlay.REVIEW -> ReviewScreen(
             reviewTopics, reviewQs,
             onCheck = { t, g -> room.logRight(g >= com.upscpods.app.data.Fsrs.GOOD); effort.reviewed(); syllabusMap.check(t.id, g); mapTick++ },
             onAnswer = answer,
-            onFinished = { syllabusMap.reviewedOn = LocalDate.now().toString(); finishPractice() },
+            onFinished = { syllabusMap.reviewedOn = LocalDate.now().toString(); finishPractice(); journey.did(Starter.REVIEW) },
             onClose = { overlay = Overlay.NONE; scope.launch { loadReview() } },
             notesFor = room::notesFor,
         )
@@ -716,7 +772,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             hindi = hindi,
             load = { repo.draft(mains.id) },
             save = { text -> scope.launch { repo.saveDraft(mains.id, text) } },
-            onDone = { day.markDone(TaskId.MAINS) },
+            onDone = { day.markDone(TaskId.MAINS); journey.did(Starter.ANSWER) },
             onClose = { overlay = Overlay.NONE },
         )
         Overlay.ANSWER_STUDIO -> AnswerStudioScreen(
@@ -728,7 +784,7 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                 Ritual.COMEBACK -> if (hindi) "वापसी मुबारक। बस एक 7 मिनट का उत्तर।" else "Welcome back. Just one 7-minute answer."
                 else -> null
             },
-            onAnswered = { if (arrived == Ritual.COMEBACK) ritualDone(Ritual.COMEBACK); ritualDone(Ritual.ANSWER_HOUR) },
+            onAnswered = { if (arrived == Ritual.COMEBACK) ritualDone(Ritual.COMEBACK); ritualDone(Ritual.ANSWER_HOUR); journey.did(Starter.ANSWER) },
             focusArea = staged.value("rubric_weak"),
         )
         Overlay.CLOSE_DAY -> CloseTheDayScreen(
@@ -798,6 +854,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             play = if (playOn && playBilling != null) PlayBuy(playBilling.busy, playBilling.note) { (context as? Activity)?.let(playBilling::buy) } else null,
         )
         Overlay.ESSAY -> EssayScreen(library, hindi, onClose = { overlay = Overlay.NONE })
+        Overlay.FIRST_WEEK -> {
+            val showPlus = plusMember == false && !plusQuiet && result == null
+            LaunchedEffect(showPlus) { if (showPlus) Metrics.track("offer_shown", kotlinx.serialization.json.buildJsonObject { put("moment", kotlinx.serialization.json.JsonPrimitive("first_week")) }) }
+            FirstWeekScreen(memory, remember(journey.tick) { effort.days().values.count { TaskId.CHAI.name in it.done } }, hindi, showPlus,
+                onSeePlus = { journey.weekSeen(); openPlusInfo() },
+                onClose = { journey.weekSeen(); overlay = Overlay.NONE })
+        }
         Overlay.CASE_FILE -> com.upscpods.app.ui.CaseFileScreen(caseFile, onClose = { overlay = Overlay.NONE })
         Overlay.PROGRESS -> com.upscpods.app.ui.ProgressScreen(answerLog, mocks, syllabusMap, caseFile, staged.value("target_year"), onClose = { overlay = Overlay.NONE },
             rightDays = room.rightDays(), onAskJeetu = { overlay = Overlay.JEETU })
@@ -834,9 +897,23 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     title = { Text(if (inMePage) mePage.title else tab.label) },
                     navigationIcon = { if (inMePage) TextButton(onClick = { mePage = MePage.HOME }) { Text("←") } },
                     actions = {
-                        ThemeToggle(context)
-                        // Need to talk is always one tap away, on every tab.
-                        TextButton(onClick = { needToTalk = true }) { Text("Need to talk?") }
+                        // One quiet ⋮ menu on every tab (crisis protocol: "Need to talk" in the overflow menu on every
+                        // screen). It used to be a text button that sat in the bar all day; owner, 25 Nov 2026.
+                        var menu by remember { mutableStateOf(false) }
+                        Box {
+                            TextButton(onClick = { menu = true }, modifier = Modifier.semantics { contentDescription = "More" }) {
+                                Text("⋮", style = MaterialTheme.typography.titleLarge)
+                            }
+                            androidx.compose.material3.DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
+                                androidx.compose.material3.DropdownMenuItem(
+                                    text = { Text(if (hindi) "♡ किसी से बात करनी है?" else "♡ Need to talk?") },
+                                    onClick = { menu = false; needToTalk = true })
+                                val darkNow = isDark()
+                                androidx.compose.material3.DropdownMenuItem(
+                                    text = { Text(if (darkNow) "☀ Light mode" else "☾ Dark mode") },
+                                    onClick = { menu = false; ThemeChoice.set(context, if (darkNow) ThemeChoice.Mode.LIGHT else ThemeChoice.Mode.DARK) })
+                            }
+                        }
                     },
                 )
                 config.banner?.let { a ->
@@ -884,6 +961,22 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
                     onPodAnswers = { scope.launch { community.syncProfile(staged.synced()) } },
                     modifier = m,
                     top = { if (centresOn) com.upscpods.app.ui.CentreAddaCard(institute) { overlay = Overlay.CENTRE } },
+                    journey = {
+                        val next = remember(memory, journey.tick, hindi) { journey.next(memory, hindi) }
+                        val dayN = journey.dayNumber()
+                        val firstWeek = !journey.finished()
+                        NextUpCard(
+                            next,
+                            dayLabel = if (!firstWeek) null else if (dayN <= 7) (if (hindi) "पहले हफ़्ते का दिन $dayN" else "Day $dayN of your first week")
+                                else (if (hindi) "पहला हफ़्ता पूरा करें" else "Finishing your first week"),
+                            hindi = hindi,
+                            onGo = { goTo(next.go) },
+                            onSkip = next.step?.takeIf { it != Starter.CHAI && it != Starter.WEEK && next.cta != null }?.let { s -> { journey.skip(s) } },
+                            onNeedToTalk = if (next.cta == null) openNeedToTalk else null,
+                        )
+                        MemoryTiles(memory, hindi)
+                        if (firstWeek) FirstWeekPath(journey.done(), journey.skipped(), next.step, hindi) { s -> goTo(Journey.goOf(s)) }
+                    },
                 )
                 Tab.POD -> if (showRooms || (pod.podId == null && config.podsOpen)) RoomsScreen(
                     rooms, persona, openNeedToTalk, onOpenSettings = { tab = Tab.ME; mePage = MePage.SETTINGS }, modifier = m, library = library,
@@ -1156,20 +1249,30 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         onNudged()
     }
     // The ritual's actions: Today's Chai read, every quiz question answered (the others are hooked where they happen).
-    LaunchedEffect(TaskId.CHAI in day.done) { if (TaskId.CHAI in day.done) ritualDone(Ritual.CHAI) }
+    LaunchedEffect(TaskId.CHAI in day.done) { if (TaskId.CHAI in day.done) { ritualDone(Ritual.CHAI); journey.did(Starter.CHAI) } }
+    // Opening the Pod tab is meeting your pod (or, before matching, the open rooms).
+    LaunchedEffect(tab) { if (tab == Tab.POD) journey.did(Starter.POD) }
     LaunchedEffect(pod.quiz?.id, pod.quizMine.size) {
         val q = pod.quiz
         if (q != null && q.questions.isNotEmpty() && pod.quizMine.size >= q.questions.size) ritualDone(Ritual.QUIZ_NIGHT)
     }
     // One-tap rating after a key moment; never during a result week.
     if (result == null) RatingSheet(Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 88.dp))
-    if (touring && overlay == Overlay.NONE && result == null) ChotuTour(
-        onStop = { stop -> tab = Tab.valueOf(stop.tab); if (tab == Tab.PREP) prepSub = stop.sub?.let { PrepSub.valueOf(it) } ?: PrepSub.TODAY },
-        onFinish = { staged.toured = true; touring = false; tab = Tab.ADDA },
-        price = plusPrice,
-        hindi = hindi,
-        onSeePlus = openPlusInfo,
+    // Right after the welcome: the product itself, not a tour of the tabs (owner, 25 Nov 2026).
+    if (touring && overlay == Overlay.NONE && result == null) FirstFiveMinutes(
+        persona?.name, hindi, brief.items.size,
+        onStart = { staged.toured = true; touring = false; tab = Tab.ADDA; overlay = Overlay.CHAI },
+        onLater = { staged.toured = true; touring = false; tab = Tab.ADDA },
     )
+    // A first-week step done: a tick and the next step, for a few seconds, wherever you land.
+    if (overlay == Overlay.NONE && !touring) StepDoneBar(journey, remember(memory, journey.tick, hindi) { journey.next(memory, hindi) }, hindi,
+        onGo = { goTo(journey.next(memory, hindi).go) },
+        modifier = Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 88.dp))
+    if (nudgeAsk) NudgeStepSheet(memory.inReview, hindi) { t ->
+        nudgeAsk = false
+        Nudge.set(context, t)
+        if (t != null) journey.did(Starter.NUDGE) else journey.skip(Starter.NUDGE)
+    }
     }
 
     reward?.let { r ->

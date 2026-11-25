@@ -159,6 +159,9 @@ class AppRepository(context: Context) {
         recordReview(id, right)
     }
 
+    /** Every card in the review queue, due or not (the Adda's "cards on repeat"). */
+    suspend fun reviewCount(): Int = withContext(Dispatchers.IO) { dao.reviewCount() }
+
     /** Cards due for revision today, from saved cards and earlier packs. */
     suspend fun dueCards(): List<NewsItem> = withContext(Dispatchers.IO) {
         val due = dao.dueReviews(LocalDate.now().toString()).map { it.cardId }.toSet()

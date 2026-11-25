@@ -99,6 +99,9 @@ interface AppDao {
     @Query("SELECT * FROM ReviewItem WHERE cardId = :id")
     suspend fun review(id: String): ReviewItem?
 
+    @Query("SELECT COUNT(*) FROM ReviewItem")
+    suspend fun reviewCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun putReview(item: ReviewItem)
 

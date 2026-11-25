@@ -106,6 +106,8 @@ fun AddaTab(
     modifier: Modifier = Modifier,
     /** Under the greeting: the coaching centre's card, when there is one. */
     top: @Composable () -> Unit = {},
+    /** The first-week journey: Next up, the path and what you've built (ui/JourneyUi.kt). */
+    journey: @Composable () -> Unit = {},
 ) {
     if (result != null) {
         Column(modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -137,16 +139,18 @@ fun AddaTab(
             Text(persona?.name?.takeIf { it.isNotBlank() }?.let { "Namaste, $it" } ?: "Namaste", style = MaterialTheme.typography.titleLarge)
         }
         top()
+        // One thing to do next (it replaced Chotu's "How's it going?": Chotu doesn't ask about feelings).
+        journey()
         // Day 7: two quick questions (ui/Feedback.kt).
         CheckinCard()
-        ChotuCheckIn(pod.podId != null, staged, onOpenChotu, onOpenPod, onOpenNeedToTalk)
         // Day 2: Chotu's chat, one step at a time: rituals (W4), the answer rubric, then a few questions. Never in onboarding.
         if (staged.dayTwoAskDue) when (staged.dayTwoStep) {
             0 -> DayTwoRituals(staged, pod.podId != null, persona?.language == ReadingLanguage.HINDI)
             1 -> DayTwoRubric(staged, persona?.language == ReadingLanguage.HINDI)
             else -> DayTwoPersona(staged, persona?.language == ReadingLanguage.HINDI, onPodAnswers)
         }
-        TodayCard(brief, day, onOpenChai, onOpenTask, onOpenPrep)
+        // Day one has the Next up card for the Chai; the day's three tasks show from day two.
+        if (!staged.firstDay) TodayCard(brief, day, onOpenChai, onOpenTask, onOpenPrep)
         PodCard(pod, onOpenPod)
         // The three matching questions are why pods exist, so they sit right here until answered.
         ProfileAskCard(staged, "pod", quiet = day.paused, onSynced = onPodAnswers)
@@ -155,51 +159,6 @@ fun AddaTab(
     }
 }
 
-/**
- * Chotu's line for the day and, once a day, "How's it going?". Friend voice, not a therapist: a rough day gets
- * company and a way to real people (Talk, your pod, Need to talk), never advice. The answer isn't kept anywhere.
- */
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun ChotuCheckIn(
-    inPod: Boolean,
-    staged: StagedProfile,
-    onOpenChotu: (talk: Boolean) -> Unit,
-    onOpenPod: () -> Unit,
-    onOpenNeedToTalk: () -> Unit,
-) {
-    val now = LocalTime.now()
-    val late = now.hour >= 23 || now.hour < 6
-    var answer by rememberSaveable { mutableStateOf<String?>(null) }
-    when (answer) {
-        "good" -> ChotuSays("Love that. Ride it: Today's Chai is ready when you are.", ChotuMood.PROUD) {
-            TextButton(onClick = { onOpenChotu(false) }) { Text("Ask ${Brand.MASCOT_SHORT} something") }
-        }
-        "okay" -> ChotuSays("Fair enough. Okay-ish days count too. One small thing from Today, then a chai break?", ChotuMood.CALM) {
-            TextButton(onClick = { onOpenChotu(true) }) { Text("Tell me about it") }
-        }
-        "rough" -> ChotuSays("Sorry, that sounds heavy. You don't have to push through it alone. Want some company?", ChotuMood.GENTLE) {
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedButton(onClick = { onOpenChotu(true) }) { Text("Talk it out with me") }
-                OutlinedButton(onClick = onOpenPod) { Text(if (inPod) "Tell my pod" else "Find my pod") }
-            }
-            TextButton(onClick = onOpenNeedToTalk) { Text("Talk to a person now") }
-        }
-        else -> ChotuSays(hostLine(inPod) + if (!staged.checkedIn && !late) " How's it going today?" else "", toneNow().mood()) {
-            when {
-                late -> TextButton(onClick = onOpenNeedToTalk) { Text("Need to talk?") }
-                !staged.checkedIn -> FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf("good" to "Good", "okay" to "Okay-ish", "rough" to "Rough day").forEach { (k, label) ->
-                        FilterChip(selected = false, onClick = { answer = k; staged.markCheckedIn() }, label = { Text(label) })
-                    }
-                }
-                else -> TextButton(onClick = { onOpenChotu(false) }) { Text("Ask ${Brand.MASCOT_SHORT}") }
-            }
-        }
-    }
-}
-
-/** Chotu's day-2 chat: which moments of the week to nudge about. Saved or not, it's asked once; My Path changes it. */
 @Composable
 private fun DayTwoRituals(staged: StagedProfile, inPod: Boolean, hindi: Boolean) {
     val context = LocalContext.current

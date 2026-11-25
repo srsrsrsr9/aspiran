@@ -83,9 +83,10 @@ fun OnboardingScreen(
     val context = LocalContext.current
     var chaiTime by rememberSaveable { mutableStateOf(Nudge.time(context)) }
 
-    // Four screens at most (12 Nov 2026; it was six, and 44% of people left before the end): a question and the language,
-    // sign in, the consent, then name and Chotu together. The garden and the six ideas open Today for everyone anyway.
-    val steps = Step.entries.filter { it != Step.LANGUAGE && it != Step.NAME && (it != Step.SIGN_IN || signIn != null) }
+    // Three screens at most, as on the web (25 Nov 2026; it was four, and six before that, when 44% left before the end):
+    // a question and the language, sign in, then one last screen with the name, 18+ and what we keep. The chai-time
+    // question waits until there's something to bring back (the first-week "Pick when your cards come back" step).
+    val steps = Step.entries.filter { it != Step.LANGUAGE && it != Step.NAME && it != Step.MEET && (it != Step.SIGN_IN || signIn != null) }
     var pick by rememberSaveable { mutableStateOf(-1) }
     fun next() { step = steps[steps.indexOf(step) + 1] }
     fun back() { if (steps.indexOf(step) > 0) step = steps[steps.indexOf(step) - 1] }
@@ -101,7 +102,7 @@ fun OnboardingScreen(
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                if (step == Step.SIGN_IN || step == Step.MEET) TextButton(onClick = { back() }) { Text("← Back") }
+                if (step == Step.SIGN_IN || step == Step.CONSENT) TextButton(onClick = { back() }) { Text("← Back") }
                 Spacer(Modifier.weight(1f))
             }
             if (step != Step.WELCOME) StepDots(total = steps.size - 1, current = steps.indexOf(step) - 1)
@@ -167,8 +168,21 @@ fun OnboardingScreen(
                             else signIn?.invoke { next() }
                         }
                         Step.CONSENT -> {
-                            ChotuSays("Before I ask anything about you, here's the deal, in plain words.", ChotuMood.CALM)
+                            Text("One last screen", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+                            Label("What should we call you in your pod?")
+                            OutlinedTextField(
+                                value = name,
+                                onValueChange = { name = it.take(24) },
+                                placeholder = { Text("A first name or a nickname. You can leave it empty.") },
+                                singleLine = true,
+                                modifier = Modifier.fillMaxWidth(),
+                            )
                             Consent(adult) { adult = it }
+                            ChotuSays(
+                                "I'm ${Brand.MASCOT_SHORT}, your study buddy, not a person. I explain, quiz and plan a day of at most three things. " +
+                                    "I don't predict ranks, and if things feel heavy I point you to real people.",
+                                ChotuMood.PROUD,
+                            )
                         }
                         Step.NAME -> {
                             ChotuSays("What should I call you? A first name or a nickname is perfect. Your pod sees this.")
@@ -203,17 +217,10 @@ fun OnboardingScreen(
             }
 
             when (step) {
-                Step.CONSENT -> Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    // Equal visual weight for both choices (dark-pattern guidelines).
-                    OutlinedButton(
-                        onClick = { onFinish(false, null) },
-                        modifier = Modifier.weight(1f).height(MainActionHeight),
-                    ) { Text("Not now") }
-                    OutlinedButton(
-                        onClick = { next() },
-                        enabled = adult,
-                        modifier = Modifier.weight(1f).height(MainActionHeight),
-                    ) { Text("I agree") }
+                // As on the web: one button once 18+ is ticked; saying no is a plain, visible choice right under it.
+                Step.CONSENT -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    PrimaryButton("I agree, take me in", enabled = adult) { onFinish(true, persona()) }
+                    TextButton(onClick = { onFinish(false, null) }) { Text("Not now: just read today's Chai") }
                 }
                 Step.MEET -> PrimaryButton("Open the Adda") { Nudge.set(context, chaiTime); onFinish(true, persona()) }
                 Step.WELCOME -> PrimaryButton("Come in", onClick = { next() })
@@ -227,7 +234,13 @@ fun OnboardingScreen(
 
 @Composable
 private fun Consent(adult: Boolean, onAdult: (Boolean) -> Unit) {
-    FlatCard {
+    var open by rememberSaveable { mutableStateOf(false) }
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onAdult(!adult) }) {
+        Checkbox(checked = adult, onCheckedChange = onAdult)
+        Text("I'm 18 or older, and I've read what we keep", style = MaterialTheme.typography.bodyLarge)
+    }
+    TextButton(onClick = { open = !open }) { Text(if (open) "Hide what we keep" else "What we keep, in plain words") }
+    if (open) FlatCard {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Bullet("What you tell the app stays on this phone. It asks one small question at a time, only when it helps.")
             Bullet("Your sign-in (phone number or Google email) is kept only to sign you in. Your pod never sees it.")
@@ -237,14 +250,7 @@ private fun Consent(adult: Boolean, onAdult: (Boolean) -> Unit) {
             Bullet("Delete everything any time from Me, in two taps.")
         }
     }
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onAdult(!adult) }) {
-        Checkbox(checked = adult, onCheckedChange = onAdult)
-        Text("I'm 18 or older", style = MaterialTheme.typography.bodyLarge)
-    }
-    Text(
-        "Choosing “Not now” is fine. You can still read Today's Chai and use the Free Shelf, and we'll ask again only when you open your pod.",
-        style = MaterialTheme.typography.bodySmall,
-    )
+
 }
 
 @Composable

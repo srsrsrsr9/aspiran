@@ -207,7 +207,12 @@ object Rituals {
                 val today = AppDatabase.get(context).dao().day(LocalDate.now().toString())
                 if (today?.done?.split(",")?.contains(TaskId.CHAI.name) == true) return null
                 val cards = runCatching { AppRepository(context).latestBrief { BriefRepository.loadBundled(context) }.items.size }.getOrDefault(0)
-                (if (hindi) "चाय तैयार है।" else "Chai's ready.") to cards.takeIf { it > 0 }?.let { if (hindi) "आज $it कार्ड।" else "$it cards today." }
+                // What the app remembers: cards that came back today, or (first two weeks) the next first-week step.
+                val due = runCatching { AppDatabase.get(context).dao().dueReviews(LocalDate.now().toString()).size }.getOrDefault(0)
+                val more = runCatching { Journey.pushLine(context, due, hindi) }.getOrNull()
+                (if (hindi) "चाय तैयार है।" else "Chai's ready.") to listOfNotNull(
+                    cards.takeIf { it > 0 }?.let { if (hindi) "आज $it कार्ड।" else "$it cards today." }, more,
+                ).joinToString(" ").ifBlank { null }
             }
             Ritual.MONDAY_GOAL -> {
                 // Honest social proof: a real member count, seen in the last 8 days, or no number at all.
@@ -247,8 +252,16 @@ object Rituals {
                 val last = p.getString("lastOpen", null)?.let(LocalDate::parse) ?: return null
                 if (last.isAfter(LocalDate.now().minusDays(3)) || p.getString("comebackFor", null) == last.toString()) return null
                 p.edit().putString("comebackFor", last.toString()).apply()
+                // Remembered, not guilt: what they'd already built, from this phone's own record.
+                val asked = runCatching { EffortLog(context).answers().values.sumOf { m -> m.values.sumOf { it.getOrElse(1) { 0 } } } }.getOrDefault(0)
+                val kept = runCatching { AppDatabase.get(context).dao().reviewCount() }.getOrDefault(0)
+                val built = when {
+                    kept > 0 -> if (hindi) "आपके $kept कार्ड अब भी यहीं हैं। " else "Your $kept cards are still here. "
+                    asked > 0 -> if (hindi) "आप $asked सवाल हल कर चुके हैं। " else "You've answered $asked questions so far. "
+                    else -> ""
+                }
                 (if (hindi) "आपका रूम यहीं है।" else "Your room's still here.") to
-                    (if (hindi) "बस एक 7 मिनट का उत्तर, और आप वापस।" else "One 7-minute answer and you're back.")
+                    built + (if (hindi) "बस एक 7 मिनट का उत्तर, और आप वापस।" else "One 7-minute answer and you're back.")
             }
         }
     }
