@@ -1,5 +1,7 @@
 package com.upscpods.app
 
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.JsonObject
 import com.upscpods.app.ui.interleaveBy
 import com.upscpods.app.ui.LampOff
 import com.upscpods.app.ui.LibraryScreen
@@ -50,6 +52,8 @@ import com.upscpods.app.data.Journey
 import com.upscpods.app.data.Memory
 import com.upscpods.app.data.Starter
 import com.upscpods.app.ui.FirstFiveMinutes
+import com.upscpods.app.ui.FrontDoor
+import com.upscpods.app.ui.TryDemoScreen
 import com.upscpods.app.ui.FirstWeekPath
 import com.upscpods.app.ui.FirstWeekScreen
 import com.upscpods.app.ui.MemoryTiles
@@ -317,6 +321,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
     val signedIn = { s: AuthSession -> if (s.memberId.isNotBlank()) pod.adoptMemberId(s.memberId) }
     // Not signed in and offline (a first run, or after Sign out): today's Chai from the phone, public content only.
     var offlineRead by rememberSaveable { mutableStateOf(false) }
+    // A brand-new install starts at the front door; someone redoing the first run (a persona saved) goes straight in.
+    var door by rememberSaveable { mutableStateOf(if (profile.persona == null) "front" else "join") }
     if (offlineRead && Auth.suspended == null && !Auth.signedIn) {
         OfflineReader(bundled) { offlineRead = false }
         return
@@ -329,13 +335,28 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
             if (gateTalk) NeedToTalkSheet(onDial, onDismiss = { gateTalk = false })
             return
         }
-        OnboardingScreen(langRequests, community,
+        // The front door: try the open demo first, as on the web (ui/TryDemo.kt). "Redo the first-run steps" skips it.
+        if (door == "front") {
+            FrontDoor(
+                onTry = { Metrics.track("front_door", JsonObject(mapOf("pick" to JsonPrimitive("try")))); door = "demo" },
+                onJoin = { Metrics.track("front_door", JsonObject(mapOf("pick" to JsonPrimitive("join")))); door = "join" },
+                onSignIn = { Metrics.track("front_door", JsonObject(mapOf("pick" to JsonPrimitive("signin")))); door = "join" },
+            )
+            return
+        }
+        if (door == "demo") {
+            TryDemoScreen(pod.serverUrl.ifBlank { "https://app.aspiran.in" },
+                onJoin = { Metrics.track("front_door", JsonObject(mapOf("pick" to JsonPrimitive("demo_join")))); door = "join_try" },
+                onClose = { door = "front" })
+            return
+        }
+        OnboardingScreen(langRequests, community, fromDemo = door == "join_try",
             signIn = if (authOptional) null else ({ done ->
                 SignInPanel(pod.serverUrl, config.auth, pod.memberId, onRetryConfig = { config.refresh() }, onReadOffline = { offlineRead = true }) { s -> signedIn(s); done() }
             }),
             onFinish = { consented, persona ->
             ProfileStore.save(context, consented, persona)
-            Metrics.track("onboarding_done")
+            Metrics.track("onboarding_done", if (door == "join_try") JsonObject(mapOf("from" to JsonPrimitive("try"))) else JsonObject(emptyMap()))
             // The reading language is also the pod's language: one of the four matching fields.
             persona?.let { staged.set("lang", if (it.language == ReadingLanguage.HINDI) "hindi" else "english", "told") }
             profile = ProfileStore.load(context)

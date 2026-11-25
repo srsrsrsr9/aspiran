@@ -73,6 +73,8 @@ fun OnboardingScreen(
     requests: LanguageRequests,
     community: Community,
     signIn: (@Composable (onDone: () -> Unit) -> Unit)? = null,
+    /** Came from the open demo: they've felt the method already, so the first screen is only the language. */
+    fromDemo: Boolean = false,
     onFinish: (consented: Boolean, persona: Persona?) -> Unit,
 ) {
     var step by rememberSaveable { mutableStateOf(Step.WELCOME) }
@@ -120,9 +122,15 @@ fun OnboardingScreen(
                     when (s) {
                         Step.WELCOME -> {
                             // One question to answer before anything is asked of you: the method, felt in ten seconds.
+                            // Skipped for someone who just walked the demo.
+                            if (fromDemo) {
+                                Text("Welcome in.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
+                                Text("A few quick taps and you're in: your language, sign in, and one last screen.", style = ReadingText)
+                            } else {
                             Text("Remember what you read.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
                             Text("UPSC prep that sticks, and never alone. One question first:", style = ReadingText)
-                            FlatCard {
+                            }
+                            if (!fromDemo) FlatCard {
                                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                                     Text("How many times has the Preamble to the Constitution been amended?", fontWeight = FontWeight.Bold)
                                     FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

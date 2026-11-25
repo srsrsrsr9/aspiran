@@ -7,6 +7,7 @@ them to do more, and close (Plus) without it feeling like a sale. Built in Andro
 
 | Moment | What the person sees | Code |
 |---|---|---|
+| Front door (26 Nov) | "Remember what you read." and one card: "Federalism, in about 15 minutes", **Start the tour**. Then "Join free" and "I already have an account". The tour is the website's open demo (app.aspiran.in/app/#try/path-pol-federalism) in a WebView; when its Join button moves the web app off the open routes, the app opens its own sign-up. Counts: `front_door` {pick: try, join, signin, demo_join}; `onboarding_done` {from: try}. | `ui/TryDemo.kt` |
 | Welcome | One question first (the Preamble), then language. Three screens at most, as on the web. | `ui/OnboardingScreen.kt` |
 | One last screen | Name, "I'm 18 or older and I've read what we keep" (details fold open), who Chotu is. "Not now: just read today's Chai" stays visible. | same |
 | First five minutes | "Welcome, Priya." Three numbered things, one button: "Start with today's Chai". Replaces the 4-stop tab tour. | `ui/JourneyUi.kt` `FirstFiveMinutes` |
@@ -35,6 +36,7 @@ After the first week (or 14 days) the card runs the daily loop: cards due → Ch
 - `offer_shown` with moment `first_week`, and the existing `plus_view`/`paid`, show the close.
 
 ## Not done / next
-- No phone walk-through yet (no working emulator on the Mac). Step 3 of the v19 runbook is that check.
+- Demo answers and cards stay in the WebView (as they stay in a browser on the web); they don't move into the app's Review after joining yet.
+- Front door, demo and hand-over checked on the Pixel 10a emulator (26 Nov). The rest of step 3 of the v19 runbook is still the owner's check.
 - The web app could get the same Next up card and first-week path. Worth doing once Android's numbers come in.
 - Existing members within their first 14 days see the path too, with what they've done counted from now.
