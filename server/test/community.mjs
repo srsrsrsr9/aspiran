@@ -283,10 +283,11 @@ try {
   assert.equal((await post("/plus/use", { memberId: pm, kind: "chotu" })).data.ok, false);
   const limited = await post("/chotu", { memberId: pm, messages: [{ role: "user", content: "What is Article 21?" }] });
   assert.equal(limited.status, 429);
-  assert.equal(limited.data.offline, true);
+  assert.equal(limited.data.limit, true);
+  assert.equal(limited.data.offline, undefined, "on-phone Chotu is Plus only: free members aren't told it works offline");
   for (let i = 0; i < 3; i++) assert.equal((await post("/plus/use", { memberId: pm, kind: "feedback" })).data.ok, true);
   assert.equal((await post("/plus/use", { memberId: pm, kind: "feedback" })).data.ok, false);
-  step("free limits: 15 cloud Chotu turns a day (then offline Chotu), 3 feedbacks a week");
+  step("free limits: 15 cloud Chotu turns a day (then back tomorrow), 3 feedbacks a week");
 
   assert.equal((await post("/plus/purchase", { memberId: pm, plan: "monthly" })).status, 400, "no real payments");
   assert.equal((await post("/plus/trial", { memberId: pm })).status, 403, "trial unlocks after a week");
