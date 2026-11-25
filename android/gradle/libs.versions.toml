@@ -19,6 +19,7 @@ googleid = "1.2.1"
 installreferrer = "2.2"
 media3 = "1.11.1"
 playBilling = "8.0.0"
+playAppUpdate = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,8 @@ androidx-media3-database = { group = "androidx.media3", name = "media3-database"
 
 # Google Play Billing for Plus (data/PlayBilling.kt): built but off, behind BuildConfig.PLAY_BILLING and the server's play_billing flag.
 play-billing = { group = "com.android.billingclient", name = "billing-ktx", version.ref = "playBilling" }
+# Play in-app updates (data/Updates.kt): the "A new version is ready" pop-over.
+play-app-update = { group = "com.google.android.play", name = "app-update-ktx", version.ref = "playAppUpdate" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

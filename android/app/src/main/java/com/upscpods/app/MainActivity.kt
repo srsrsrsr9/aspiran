@@ -1,5 +1,8 @@
 package com.upscpods.app
 
+import com.upscpods.app.ui.UpdateBar
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.compose.rememberLauncherForActivityResult
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.JsonObject
 import com.upscpods.app.ui.interleaveBy
@@ -373,6 +376,13 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         if (gateTalk) NeedToTalkSheet(onDial, onDismiss = { gateTalk = false })
         return
     }
+    // Play's in-app updates: checked each time the app comes to the front, after the first run.
+    val updates = remember { com.upscpods.app.data.Updates(context) }
+    val updateLauncher = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { r ->
+        updates.result(r.resultCode == android.app.Activity.RESULT_OK)
+    }
+    DisposableEffect(updates) { onDispose { updates.release() } }
+    LifecycleStartEffect(updates) { updates.check(); onStopOrDispose { } }
     // Offline past the 72-hour check no longer closes the app: it reads from the phone, with a banner (OfflineBanner),
     // and pod chat stays off (pod.mayConnect) until the account is checked again.
     val day = remember { DayState() }
@@ -1287,6 +1297,9 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         onStart = { staged.toured = true; touring = false; tab = Tab.ADDA; overlay = Overlay.CHAI },
         onLater = { staged.toured = true; touring = false; tab = Tab.ADDA },
     )
+    // A new version from Play: a small pop-over, never in the middle of something (data/Updates.kt). The step bar wins.
+    if (overlay == Overlay.NONE && !touring && journey.justDone == null) UpdateBar(updates, hindi, onUpdate = { updates.start(updateLauncher) },
+        modifier = Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = 88.dp))
     // A first-week step done: a tick and the next step, for a few seconds, wherever you land.
     if (overlay == Overlay.NONE && !touring) StepDoneBar(journey, remember(memory, journey.tick, hindi) { journey.next(memory, hindi) }, hindi,
         onGo = { goTo(journey.next(memory, hindi).go) },

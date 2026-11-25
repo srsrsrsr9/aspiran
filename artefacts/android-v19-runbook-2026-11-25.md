@@ -9,6 +9,11 @@
   "Join free" button hands over to the app's sign-up, which then skips the Preamble question.
   Cards kept in the demo come with them into Review ("Join free, keep your 3 cards" now holds in the app).
   Videos in the demo go full screen.
+- **"A new version is ready" (26 Nov, your call).** When Play has a newer version, a small card at the bottom says so,
+  with Later and Update. Update downloads it in the background while the person keeps studying; then "The update is
+  ready" with Restart. Later waits 3 days before asking again. This is Google Play's own in-app update, so it only
+  appears for copies installed from Play (internal testing counts). You'll first see it when version 20 goes out
+  to a phone that has 19 from Play; a build run from Android Studio never shows it.
 - A shorter welcome: one question and your language, sign in, then one last screen (name, 18+, what we keep).
 - "Your first five minutes" right after it, instead of the tour of the tabs. One button opens today's Chai.
 - The Adda opens on one **Next up** card, a "Your first week" path of 8 steps, and "What you've built so far".
@@ -20,6 +25,7 @@
 - Chotu's "How's it going? Good / Okay-ish / Rough day" is gone. Chotu doesn't respond to feelings (standing rule).
 
 Data safety: **no change**. The new count says only which step and which day, under "App activity", which is already declared.
+Google's in-app update library talks only to the Play Store app on the phone and collects nothing.
 
 ---
 

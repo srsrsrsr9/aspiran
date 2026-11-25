@@ -171,6 +171,7 @@ dependencies {
     implementation(libs.androidx.media3.datasource)
     implementation(libs.androidx.media3.database)
     implementation(libs.play.billing)
+    implementation(libs.play.app.update)
     implementation("com.posthog:posthog-android:3.76.2")
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

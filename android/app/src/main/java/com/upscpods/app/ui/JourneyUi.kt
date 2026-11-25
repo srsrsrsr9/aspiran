@@ -335,3 +335,45 @@ fun FirstWeekScreen(mem: Memory, chaiDays: Int, hindi: Boolean, showPlus: Boolea
         }
     }
 }
+
+/**
+ * The update pop-over (data/Updates.kt): a small card at the bottom, the same shape as the step bar. "Update" opens
+ * Play's own sheet; the download runs while the app keeps working; then "Restart" finishes it.
+ */
+@Composable
+fun UpdateBar(updates: com.upscpods.app.data.Updates, hindi: Boolean, onUpdate: () -> Unit, modifier: Modifier = Modifier) {
+    val s = updates.state
+    if (s == com.upscpods.app.data.Updates.State.NONE) return
+    Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.inverseSurface, shadowElevation = 6.dp,
+        modifier = modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
+        Row(Modifier.padding(start = 16.dp, end = 4.dp, top = 6.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
+            val on = MaterialTheme.colorScheme.inverseOnSurface
+            Column(Modifier.weight(1f).padding(vertical = 6.dp)) {
+                when (s) {
+                    com.upscpods.app.data.Updates.State.OFFER -> {
+                        Text(if (hindi) "Aspiran का नया वर्ज़न आ गया है" else "A new version of Aspiran is ready", style = MaterialTheme.typography.titleSmall, color = on)
+                        Text(if (hindi) "पीछे डाउनलोड होगा, आप पढ़ते रहिए।" else "It downloads while you keep studying.", style = MaterialTheme.typography.bodySmall, color = on)
+                    }
+                    com.upscpods.app.data.Updates.State.DOWNLOADING ->
+                        Text((if (hindi) "अपडेट डाउनलोड हो रहा है" else "Downloading the update") + (if (updates.percent > 0) " · ${updates.percent}%" else "…"),
+                            style = MaterialTheme.typography.titleSmall, color = on)
+                    else -> {
+                        Text(if (hindi) "अपडेट तैयार है" else "The update is ready", style = MaterialTheme.typography.titleSmall, color = on)
+                        Text(if (hindi) "रीस्टार्ट में कुछ सेकंड लगेंगे। आपका सब कुछ सुरक्षित रहता है।" else "A restart takes a few seconds. Everything you've done stays.",
+                            style = MaterialTheme.typography.bodySmall, color = on)
+                    }
+                }
+            }
+            val accent = MaterialTheme.colorScheme.inversePrimary
+            when (s) {
+                com.upscpods.app.data.Updates.State.OFFER -> {
+                    TextButton(onClick = { updates.later() }) { Text(if (hindi) "बाद में" else "Later", color = on) }
+                    TextButton(onClick = onUpdate) { Text(if (hindi) "अपडेट" else "Update", color = accent, fontWeight = FontWeight.Bold) }
+                }
+                com.upscpods.app.data.Updates.State.READY ->
+                    TextButton(onClick = { updates.restart() }) { Text(if (hindi) "रीस्टार्ट" else "Restart", color = accent, fontWeight = FontWeight.Bold) }
+                else -> {}
+            }
+        }
+    }
+}
