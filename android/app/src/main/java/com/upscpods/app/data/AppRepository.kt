@@ -159,6 +159,18 @@ class AppRepository(context: Context) {
         recordReview(id, right)
     }
 
+    /** Cards kept in the open demo before joining, into Review (data/DemoCards.kt). Cards already here are left alone. */
+    suspend fun importDemoCards(raw: String): Int = withContext(Dispatchers.IO) {
+        var n = 0
+        DemoCards.parse(raw).forEach { c ->
+            if (dao.review(c.item.id) != null) return@forEach
+            dao.putSaved(SavedCard(c.item.id, LocalDate.now().toString(), json.encodeToString(NewsItem.serializer(), c.item)))
+            dao.putReview(ReviewItem(c.item.id, c.dueOn, c.stage, c.stability, c.difficulty, c.lastOn))
+            n++
+        }
+        n
+    }
+
     /** Every card in the review queue, due or not (the Adda's "cards on repeat"). */
     suspend fun reviewCount(): Int = withContext(Dispatchers.IO) { dao.reviewCount() }
 

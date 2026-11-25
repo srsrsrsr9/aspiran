@@ -55,6 +55,7 @@ const CLIENT_EVENTS: Record<string, (p: any) => Record<string, unknown> | null> 
   prep_minutes: (p) => { const m = count(p.minutes, 600); return m ? { minutes: m } : null; },
   offer_shown: (p) => ({ moment: code(p.moment, 30) }),
   // The Android first-week path (data/Journey.kt): which step, on which day. Nothing else.
+  demo_cards: (p) => ({ n: count(p.n, 100) }),
   front_door: (p) => (code(p.pick, 12) ? { pick: code(p.pick, 12) } : null),
   journey_step: (p) => (code(p.step, 12) ? { step: code(p.step, 12), day: count(p.day, 60) } : null),
   roadmap_built: () => ({}),

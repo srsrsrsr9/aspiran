@@ -124,7 +124,7 @@ fun OnboardingScreen(
                             // One question to answer before anything is asked of you: the method, felt in ten seconds.
                             // Skipped for someone who just walked the demo.
                             if (fromDemo) {
-                                Text("Welcome in.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
+                                Text("Nearly in.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
                                 Text("A few quick taps and you're in: your language, sign in, and one last screen.", style = ReadingText)
                             } else {
                             Text("Remember what you read.", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)

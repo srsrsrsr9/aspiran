@@ -7,6 +7,8 @@
   "Federalism, in about 15 minutes" with "Start the tour", then "Join free" and "I already have an account".
   The tour is the same Federalism demo as on the website, inside the app, with no account and no setup. Its own
   "Join free" button hands over to the app's sign-up, which then skips the Preamble question.
+  Cards kept in the demo come with them into Review ("Join free, keep your 3 cards" now holds in the app).
+  Videos in the demo go full screen.
 - A shorter welcome: one question and your language, sign in, then one last screen (name, 18+, what we keep).
 - "Your first five minutes" right after it, instead of the tour of the tabs. One button opens today's Chai.
 - The Adda opens on one **Next up** card, a "Your first week" path of 8 steps, and "What you've built so far".
@@ -34,7 +36,7 @@ File → Open → `~/Documents/app/android` (or File → Sync Project with Gradl
 - Failure "SDK 37 not installed": Tools → SDK Manager → tick Android API 37 → Apply, sync again.
 
 ## Step 3. Walk through it as a new person (15 minutes, please do this one)
-Claude checked steps 1 to 3 on the Pixel 10a emulator on 26 Nov. The rest has only had your eyes.
+Claude checked steps 1 to 6 on the Pixel 10a emulator on 26 Nov, including all ten demo chapters and the cards reaching Review ("3 cards on repeat"). The rest has only had your eyes.
 
 1. On your phone or the emulator: Settings → Apps → Aspiran → Storage → **Clear storage** (so it starts as new).
 2. In Android Studio pick your phone, choose the **debug** variant, press Run ▶.
@@ -42,13 +44,14 @@ Claude checked steps 1 to 3 on the Pixel 10a emulator on 26 Nov. The rest has on
    1. Front door: "Remember what you read.", the Federalism card, "Start the tour", "Join free", "I already have an account".
    2. Start the tour: the Federalism demo opens (as on the website), with "✕ Close" above it. Try a chapter or two.
       Phone Back goes back inside the demo, then to the front door.
-   3. In the demo, press its **Join free**: the app's own "Welcome in." screen opens (language, then Come in).
-   4. Sign in, then **One last screen**: name box, "I'm 18 or older…" tick, "What we keep" opens and closes.
+   3. In the demo, play the video in chapter 2 and press its full-screen button: it fills the screen; Back returns.
+   4. Press the demo's **Join free**: the app's own "Nearly in." screen opens (language, then Come in).
+   5. Sign in, then **One last screen**: name box, "I'm 18 or older…" tick, "What we keep" opens and closes.
       The button stays grey until the tick.
-   5. **Welcome, <name>.** with three numbered lines. Press "Start with today's Chai".
-   6. Read the cards and close. Back on the Adda: a dark bar "✓ Read today's Chai · Next: …" with "Go".
+   6. **Welcome, <name>.** with three numbered lines. Press "Start with today's Chai".
+   7. Read the cards and close. Back on the Adda: a dark bar "✓ Read today's Chai · Next: …" with "Go".
       (Between 23:30 and 07:00 the big card says "It's late." with no button: that's Chotu's quiet hours, not a fault.)
-   7. ⋮ at top right: "♡ Need to talk?" opens the Need to talk sheet (talk to someone you trust; call 112); "☾ Dark mode" switches the theme.
+   8. ⋮ at top right: "♡ Need to talk?" opens the Need to talk sheet (talk to someone you trust; call 112); "☾ Dark mode" switches the theme.
 - Success: all of the above.
 - Failure: note the step number and what you saw, tell Claude, don't upload.
 

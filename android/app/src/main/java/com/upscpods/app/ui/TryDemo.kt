@@ -1,6 +1,15 @@
 package com.upscpods.app.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ContextWrapper
+import android.view.View
+import android.webkit.WebChromeClient
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Color
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import android.content.Intent
 import android.net.Uri
 import android.webkit.WebResourceRequest
@@ -38,6 +47,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.upscpods.app.data.DemoCards
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * The front door (26 Nov 2026, owner: "the web app is better: there is a Federalism demo I can try without doing all
@@ -89,9 +102,36 @@ fun TryDemoScreen(appUrl: String, onJoin: () -> Unit, onClose: () -> Unit) {
     var web by remember { mutableStateOf<WebView?>(null) }
     var joined by remember { mutableStateOf(false) }
     val base = appUrl.trimEnd('/')
-    fun join() { if (!joined) { joined = true; onJoin() } }
-    BackHandler { val w = web; if (w != null && w.canGoBack()) w.goBack() else onClose() }
-    DisposableEffect(Unit) { onDispose { web?.destroy() } }
+    // Joining carries the demo's kept cards into the app's Review (data/DemoCards.kt), as the demo promises.
+    fun join() {
+        if (joined) return
+        joined = true
+        val w = web
+        if (w == null) { onJoin(); return }
+        w.evaluateJavascript("localStorage.getItem('upsc:reviews')") { r ->
+            runCatching { Json.parseToJsonElement(r ?: "null").jsonPrimitive.contentOrNull }.getOrNull()?.let { DemoCards.hold(context, it) }
+            onJoin()
+        }
+    }
+    // A video's full-screen button: the WebView hands us the player's view; we show it over everything, with the
+    // system bars hidden. Back (or the player's own button) brings it back. (No forced rotation: turning the screen
+    // would rebuild the activity and reload the demo.)
+    var full by remember { mutableStateOf<View?>(null) }
+    var fullDone by remember { mutableStateOf<WebChromeClient.CustomViewCallback?>(null) }
+    val activity = remember(context) { context.findActivity() }
+    DisposableEffect(full) {
+        val a = activity
+        if (full != null && a != null) {
+            val bars = WindowCompat.getInsetsController(a.window, a.window.decorView)
+            bars.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            bars.hide(WindowInsetsCompat.Type.systemBars())
+            onDispose { bars.show(WindowInsetsCompat.Type.systemBars()) }
+        } else onDispose { }
+    }
+    fun leaveFull() { fullDone?.onCustomViewHidden(); full = null; fullDone = null }
+    BackHandler { val w = web; if (full != null) leaveFull() else if (w != null && w.canGoBack()) w.goBack() else onClose() }
+    DisposableEffect(Unit) { onDispose { fullDone?.onCustomViewHidden(); web?.destroy() } }
+    Box(Modifier.fillMaxSize()) {
     Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.surface) {
         Column(Modifier.fillMaxSize().safeDrawingPadding()) {
             Row(Modifier.fillMaxWidth().padding(horizontal = 4.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -116,6 +156,13 @@ fun TryDemoScreen(appUrl: String, onJoin: () -> Unit, onClose: () -> Unit) {
                                 if (url != null && url.startsWith("$base/app") && routeOf(url) !in OPEN_ROUTES) join()
                             }
                         }
+                        webChromeClient = object : WebChromeClient() {
+                            override fun onShowCustomView(view: View, callback: CustomViewCallback) {
+                                if (full != null) { callback.onCustomViewHidden(); return }
+                                full = view; fullDone = callback
+                            }
+                            override fun onHideCustomView() { full = null; fullDone = null }
+                        }
                         loadUrl("$base/app/#try/path-pol-federalism")
                         web = this
                     }
@@ -123,4 +170,14 @@ fun TryDemoScreen(appUrl: String, onJoin: () -> Unit, onClose: () -> Unit) {
             }
         }
     }
+    full?.let { v ->
+        AndroidView(factory = { v }, modifier = Modifier.fillMaxSize().background(Color.Black))
+    }
+    }
+}
+
+private tailrec fun android.content.Context.findActivity(): Activity? = when (this) {
+    is Activity -> this
+    is ContextWrapper -> baseContext.findActivity()
+    else -> null
 }

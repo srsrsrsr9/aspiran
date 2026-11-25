@@ -44,6 +44,7 @@ const W = {
     bill: (i, n) => `Bill ${i} of ${n}`, whatDo: "What will you do?", nextBill: "Next bill", playAgain: "Play again", allowed: "Allowed", notAllowed: "Not allowed",
     tray: "Subjects", trayHint: "Drag each one into its list. Or tap it, then tap the list.", dropHere: "Drop here", check: "Check my lists",
     sortedAll: "All in the right list. Sharp.", sortedSome: (n) => `${n} to look at again. These are exactly the lookalikes Prelims uses.`, tryWrong: "Try those again", itsIn: "It's",
+    tallyNone: "You skipped these. The real papers, with the official keys, are here whenever you want them: tap back to try one.",
     tallyRight: (r, n) => `${r} of ${n} right`, sureWrong: (n) => n ? `${n} you were sure of went wrong. Those cost marks in Prelims, and they're the ones you'll now remember best.` : "Nothing you were sure of went wrong. That's calibration.",
     guessedRight: (n) => n ? `${n} pure guess${n > 1 ? "es" : ""} came good. You know more than you think.` : "", onlyYou: "Only you see this.",
     centre: "Centre", centreVotes: "Centre votes", yes: "Yes", no: "No", allYes: "All states yes", allNo: "All states no", statesYes: "States voting yes",
@@ -87,6 +88,7 @@ const W = {
     bill: (i, n) => `विधेयक ${i} / ${n}`, whatDo: "आप क्या करेंगे?", nextBill: "अगला विधेयक", playAgain: "फिर से खेलिए", allowed: "अनुमति है", notAllowed: "अनुमति नहीं",
     tray: "विषय", trayHint: "हर एक को उसकी सूची में खींचिए। या उस पर टैप कीजिए, फिर सूची पर।", dropHere: "यहाँ छोड़िए", check: "मेरी सूचियाँ जाँचिए",
     sortedAll: "सब सही सूची में। बढ़िया।", sortedSome: (n) => `${n} दोबारा देखने लायक। Prelims यही मिलते-जुलते विषय पूछता है।`, tryWrong: "इन्हें फिर से कीजिए", itsIn: "सही:",
+    tallyNone: "ये आपने छोड़ दिए। असली पेपर, आधिकारिक उत्तरों के साथ, यहीं हैं: पीछे जाकर एक आज़माइए।",
     tallyRight: (r, n) => `${n} में से ${r} सही`, sureWrong: (n) => n ? `${n} पर आप पक्के थे पर ग़लत हुए। Prelims में ये महँगे पड़ते हैं, और अब यही सबसे अच्छे से याद रहेंगे।` : "जिन पर आप पक्के थे, उनमें कोई ग़लत नहीं हुआ। यही सही अंदाज़ा है।",
     guessedRight: (n) => n ? `${n} अंदाज़े सही निकले। आपको जितना लगता है, उससे ज़्यादा पता है।` : "", onlyYou: "यह सिर्फ़ आप देखते हैं।",
     centre: "केंद्र", centreVotes: "केंद्र का वोट", yes: "हाँ", no: "ना", allYes: "सब राज्य हाँ", allNo: "सब राज्य ना", statesYes: "हाँ कहने वाले राज्य",
@@ -764,6 +766,8 @@ const CH = {
     return questionRun(st, qs.map(([, q]) => q), (n) => `${st.id}:${qs[n][0]}`, { sure: true, stall: "pyq",
       retry: (n) => (own && qs[n][0] <= 2 ? `pyq-${qs[n][0]}` : "retry"), onEach: (n) => addNote(`p:${st.id}:${qs[n][0]}`), tally: () => {
       const res = qs.map(([i, q]) => ({ pick: X.getA(`${st.id}:${i}:first`) ?? X.getA(`${st.id}:${i}:pick`), sure: X.getA(`${st.id}:${i}:sure`), ans: q.answer })).filter((r) => r.pick != null);
+      // Nothing answered (all skipped): no score and no "that's calibration" for answering nothing.
+      if (!res.length) return h("div.sc-tally", h("div", h("p", t("tallyNone"))));
       const right = res.filter((r) => r.pick === r.ans).length;
       const sw = res.filter((r) => r.sure === 2 && r.pick !== r.ans).length, gr = res.filter((r) => r.sure === 0 && r.pick === r.ans).length;
       const n = h("span.sc-big");
@@ -1083,7 +1087,7 @@ html.sc-on { scroll-padding: 80px 0 120px; }
 .sc-chips span { font-size: 12.5px; padding: 3px 10px; border-radius: 99px; background: #ffffff14; color: var(--sc-ink); }
 .sc-chips span.hot { background: #F0A04B2e; color: var(--sc-gold); font-weight: 700; }
 /* bottom bar */
-.sc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #070A18e8; backdrop-filter: blur(12px); border-top: 1px solid #ffffff16; }
+.sc-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: #070A18e8; backdrop-filter: blur(12px); border-top: 1px solid #ffffff16; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
 .sc-bar-in { position: relative; max-width: 1200px; margin: 0 auto; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .sc-bar-r { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .sc-back { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid #ffffff26; min-height: 48px; padding: 0 16px; border-radius: 99px; }

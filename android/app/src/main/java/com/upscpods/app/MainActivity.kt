@@ -430,6 +430,8 @@ private fun AppRoot(bundled: Brief, fromNudge: Boolean, ritual: Ritual?, nudged:
         // Newer pack from the pod server, if one is set and reachable. Today never waits on this.
         pod.latestBrief()?.let { raw -> runCatching { repo.cacheBrief(raw) }.getOrNull() }?.let { if (it.date >= brief.date || brief.sample) brief = it }
         repo.ensureCached(brief)
+        // Cards kept in the open demo before joining go into Review first, so the day loads them as saved.
+        com.upscpods.app.data.DemoCards.take(context)?.let { raw -> repo.importDemoCards(raw).let { n -> if (n > 0) Metrics.track("demo_cards", JsonObject(mapOf("n" to JsonPrimitive(n)))) } }
         repo.loadInto(day)
         loaded = true
         closedDays = repo.closedDays()
