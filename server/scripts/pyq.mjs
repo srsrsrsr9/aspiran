@@ -5,7 +5,9 @@
 //   node scripts/pyq.mjs pack [out folder]                                 write a library pack, then: npm run import -- <folder>
 // The papers on upsc.gov.in are scans, so questions arrive as a transcription TSV, one per line:
 //   <n> TAB <marks> TAB <words> TAB <node[,node]> TAB <question>        (Mains; "\n" in the text is a new line)
-//   <n> TAB <marks> TAB TAB <node[,node]> TAB <question> TAB <a> TAB <b> TAB <c> TAB <d>   (Prelims)
+//   <n> TAB <marks> TAB TAB <node[,node]> TAB <question> TAB <a> TAB <b> TAB <c> TAB <d> [TAB <passage id>]   (Prelims)
+//   P TAB <passage id> TAB <passage text>                                (a CSAT comprehension passage, printed once;
+//                                                                         the questions that read it name its id)
 // A key CSV is "<n>,<a|b|c|d|dropped>" per line, copied from UPSC's own answer key and no other.
 // Nothing here goes live: the pack lands on the desk as drafts, and an editor checks each paper against the PDF.
 import { createHash } from "node:crypto";
@@ -32,9 +34,16 @@ function parseId(id) {
 }
 
 function fromTsv(text, exam) {
-  return text.split(/\r?\n/).filter((l) => l.trim() && !l.startsWith("#")).map((line, i) => {
+  const passages = [], questions = [];
+  text.split(/\r?\n/).filter((l) => l.trim() && !l.startsWith("#")).forEach((line, i) => {
     const c = line.split("\t");
-    const [n, marks, words, nodes, q, ...options] = c;
+    if (c[0] === "P") {
+      if (!c[1] || !c[2]?.trim()) throw new Error(`line ${i + 1}: a passage needs an id and its text`);
+      passages.push({ id: c[1].trim(), en: { text: c[2].replace(/\\n/g, "\n").trim() } });
+      return;
+    }
+    const [n, marks, words, nodes, q, ...rest] = c;
+    const options = rest.slice(0, 4), passage = rest[4]?.trim();
     if (!n || !q) throw new Error(`line ${i + 1}: needs at least a number and the question`);
     const out = { n: n.trim(), nodes: (nodes ?? "").split(",").map((s) => s.trim()).filter(Boolean), cards: [], en: { q: q.replace(/\\n/g, "\n").trim() } };
     if (marks) out.marks = Number(marks);
@@ -43,9 +52,11 @@ function fromTsv(text, exam) {
       if (options.length !== 4) throw new Error(`line ${i + 1}: a Prelims question needs four options`);
       out.en.options = options.map((o) => o.trim().replace(/^\([a-d]\)\s*/i, ""));
       out.answer = null;
+      if (passage) out.passage = passage;
     }
-    return out;
+    questions.push(out);
   });
+  return { passages, questions };
 }
 
 function check(d) {
@@ -61,7 +72,15 @@ function check(d) {
     if (p.exam === "mains" && p.answerKey?.status !== "none") errs.push(`${at}: Mains papers have no answer key`);
     if (p.answerKey?.status === "official" && !UPSC.test(p.answerKey.url ?? "")) errs.push(`${at}: an official key needs its upsc.gov.in url`);
     const seen = new Set();
+    const passages = p.passages ?? [], pids = new Set(passages.map((x) => x.id));
+    if (p.exam === "mains" && passages.length) errs.push(`${at}: Mains papers have no passages`);
+    if (pids.size !== passages.length) errs.push(`${at}: two passages share an id`);
+    for (const x of passages) {
+      if (!x.id || !x.en?.text?.trim()) errs.push(`${at}: every passage needs an id and its English text`);
+      if (!(p.questions ?? []).some((q) => q.passage === x.id)) errs.push(`${at}: passage ${x.id} is read by no question`);
+    }
     for (const q of p.questions ?? []) {
+      if (q.passage != null && !pids.has(q.passage)) errs.push(`${at} Q${q.n}: passage ${q.passage} isn't on the paper`);
       const qa = `${at} Q${q.n}`;
       if (seen.has(q.n)) errs.push(`${qa}: number used twice`);
       seen.add(q.n);
@@ -93,7 +112,7 @@ if (cmd === "add") {
     ...(id.startsWith("sample") ? { sample: true } : {}),
     source: { publisher: "UPSC", url, fetchedOn: today(), how: "Transcribed from the scanned PDF on upsc.gov.in. English only." },
     answerKey: exam === "mains" ? { status: "none" } : old?.answerKey ?? { status: "awaiting" },
-    questions: fromTsv(readFileSync(tsv, "utf8"), exam),
+    ...(({ passages, questions }) => ({ ...(passages.length ? { passages } : {}), questions }))(fromTsv(readFileSync(tsv, "utf8"), exam)),
     review: { status: "draft", note: "Check every question against the PDF before approving." },
   };
   d.papers = [...d.papers.filter((p) => p.id !== id), entry].sort((a, b) => b.year - a.year || a.id.localeCompare(b.id));

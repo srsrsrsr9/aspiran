@@ -47,8 +47,10 @@ export async function siteContent(env: Env): Promise<Response> {
   const papers = pyq.items.map((x) => x.data).filter((p) => /^cs[pm]-\d{4}-[a-z0-9]+$/.test(p?.id ?? "") && !p.sample && Array.isArray(p.questions))
     .map((p) => ({ id: p.id, exam: p.exam === "mains" ? "mains" : "prelims", year: Number(p.year), paper: p.paper, title: p.title, sourceUrl: p.source?.url ?? "",
       key: p.answerKey ?? { status: "none" },
+      // CSAT comprehension passages, each once per paper; a question names its passage by id.
+      ...(Array.isArray(p.passages) && p.passages.length ? { passages: p.passages.filter((x: any) => typeof x?.id === "string" && x.en?.text).map((x: any) => ({ id: x.id, en: { text: x.en.text }, hi: x.hi?.text ? { text: x.hi.text } : undefined })) } : {}),
       questions: p.questions.filter((q: any) => q && typeof q.n === "string" && (q.en?.q ?? q.q)).map((q: any) => ({
-        n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, answer: q.answer ?? null,
+        n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, answer: q.answer ?? null, ...(typeof q.passage === "string" ? { passage: q.passage } : {}),
         en: { q: q.en?.q ?? q.q, options: q.en?.options }, hi: q.hi?.q ? { q: q.hi.q, options: q.hi.options } : undefined,
         explain: q.explain?.why ? { why: q.explain.why, wrong: q.explain.wrong ?? [], trap: q.explain.trap } : undefined })) }));
   const nodes = (NODES as any[]).map((n) => ({ id: n.id, name: n.name, paper: n.paper.short, learn: learnPath(n) }));

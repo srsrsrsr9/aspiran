@@ -1007,6 +1007,14 @@ function checkPyq(d: any): string[] {
   }
   if (d.exam === "mains" && qs.some((q) => q.answer != null || q.en?.options || q.en?.model)) flags.push("Mains questions carry no options or model answers");
   qs.forEach((q) => { if (!q.nodes?.length) flags.push(`Q${q.n}: no syllabus node`); });
+  // CSAT comprehension: each passage once on the paper, and every question that reads one names it.
+  const passages: any[] = Array.isArray(d.passages) ? d.passages : [];
+  const ids = new Set(passages.map((x) => x?.id));
+  if (passages.some((x) => typeof x?.id !== "string" || !x.en?.text?.trim())) flags.push("Every passage needs an id and its English text");
+  if (ids.size !== passages.length) flags.push("Two passages share an id");
+  qs.forEach((q) => { if (q.passage != null && !ids.has(q.passage)) flags.push(`Q${q.n}: its passage ${q.passage} isn't on the paper`); });
+  passages.forEach((x) => { if (!qs.some((q) => q.passage === x?.id)) flags.push(`Passage ${x?.id}: no question reads it`); });
+  if (d.exam === "mains" && passages.length) flags.push("Mains papers have no passages");
   d.shareable = false;
   return flags;
 }

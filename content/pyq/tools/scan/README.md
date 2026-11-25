@@ -14,3 +14,9 @@ Mains:
 Prelims: `pocr.sh paper.pdf pocr/<id>` (English pages, each column separately), then `../ocr-parse.py` and
 `../ocr-clean.py`. Check that question numbers line up with UPSC's key: the parser merges questions that run across
 columns. Keys go in as `n,a|b|c|d|dropped` CSVs, copied from UPSC's key for the same booklet series as the paper.
+
+CSAT (GS Paper II): comprehension questions share a passage. In the transcript TSV a passage is its own line,
+`P<TAB><id><TAB><text>` (ids p1, p2 … in printed order, "\n" for a new paragraph), and each question that reads it adds
+the id as a tenth column after option (d). `pyq.mjs check` fails a question that names a missing passage and a passage
+no question reads. Questions built on a figure or table that text cannot carry are left out and listed in the paper's
+`how` note.
