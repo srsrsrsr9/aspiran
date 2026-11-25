@@ -43,7 +43,7 @@ const KIND_WORDS: Record<string, [string, string]> = {
 
 interface Asked { paper: Paper; q: Q }
 interface Topic { node: Node; reads: Item[]; pyqs: { text: string; year: number; exam: string; n: string }[]; pyqTotal: number; byYear: Record<string, number>; asked: Asked[]; counts: Record<string, number>; hasPath: boolean }
-interface Q { n: string; nodes: string[]; marks?: number; words?: number; en: { q: string; options?: string[] }; answer?: number | null; explain?: Explain }
+interface Q { n: string; nodes: string[]; marks?: number; words?: number; en: { q: string; options?: string[] }; answer?: number | null; explain?: Explain; passage?: { id: string; text: string } }
 /** Why UPSC's keyed answer is right, written for Aspiran. Shown only beside an official key, never instead of one. */
 interface Explain { why: string; wrong: { option: number; text: string }[]; trap: string }
 interface Paper { id: string; exam: "prelims" | "mains"; year: number; paper: string; title: string; sourceUrl: string; key: { status: string; url?: string; dropped?: string[]; provisional?: boolean }; questions: Q[] }
@@ -72,8 +72,11 @@ function toExplain(x: any): Explain | undefined {
 
 function toPaper(d: any): Paper | null {
   if (!d || typeof d.id !== "string" || !/^cs[pm]-\d{4}-[a-z0-9]+$/.test(d.id) || d.sample || !Array.isArray(d.questions)) return null;
+  // CSAT comprehension: the paper carries each passage once, and a question names the passage it reads from.
+  const passages = new Map<string, string>((Array.isArray(d.passages) ? d.passages : []).filter((x: any) => typeof x?.id === "string" && en(x.en?.text)).map((x: any) => [x.id, en(x.en.text)]));
   const questions: Q[] = d.questions.filter((q: any) => q && typeof q.n === "string" && en(q.en?.q ?? q.q))
-    .map((q: any) => ({ n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, en: { q: en(q.en?.q ?? q.q), options: Array.isArray(q.en?.options) ? q.en.options : undefined }, answer: q.answer, explain: toExplain(q.explain) }));
+    .map((q: any) => ({ n: q.n, nodes: Array.isArray(q.nodes) ? q.nodes : [], marks: q.marks, words: q.words, en: { q: en(q.en?.q ?? q.q), options: Array.isArray(q.en?.options) ? q.en.options : undefined }, answer: q.answer, explain: toExplain(q.explain),
+      passage: passages.has(q.passage) ? { id: q.passage, text: passages.get(q.passage)! } : undefined }));
   return { id: d.id, exam: d.exam === "mains" ? "mains" : "prelims", year: Number(d.year), paper: d.paper, title: en(d.title), sourceUrl: d.source?.url ?? "", key: d.answerKey ?? { status: "none" }, questions };
 }
 
@@ -197,6 +200,9 @@ const explainBlock = (p: Paper, q: Q) => !q.explain || p.key.status !== "officia
 const qText = (s: string) => s.split("\n").map((l) => esc(l)).join("<br>");
 const options = (q: Q) => q.en.options?.length ? `<ol type="a">${q.en.options.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>` : "";
 const topicLinks = (q: Q) => q.nodes.map((id) => nodeById.get(id)).filter(Boolean).map((n) => `<a href="${learnPath(n!)}">${esc(n!.name)}</a>`).join(", ");
+/** A CSAT passage, printed once above the first question that reads from it. */
+const passageBlock = (q: Q) => q.passage ? `<div class="card passage"><p class="small">Passage</p><p>${qText(q.passage.text)}</p></div>` : "";
+const firstOfPassage = (p: Paper, q: Q) => !!q.passage && p.questions[p.questions.indexOf(q) - 1]?.passage?.id !== q.passage.id;
 const marksLine = (q: Q) => q.marks ? `<span class="small">${q.marks} marks${q.words ? ` · ${q.words} words` : ""}</span>` : "";
 
 function papersIndex(env: Env, papers: Paper[]): Response {
@@ -213,7 +219,7 @@ function paperPage(env: Env, p: Paper): Response {
   const body = `<p class="crumb"><a href="/learn">UPSC syllabus</a> › <a href="/learn/papers">Past papers</a> › ${p.year}</p>
 <h1>${esc(paperName(p))}</h1>
 <p>${p.questions.length} questions, word for word from <a href="${esc(p.sourceUrl)}" rel="nofollow">UPSC's question paper</a>. ${keyNote(p)}</p>${CTA()}
-${p.questions.map((q) => `<div class="card" id="q${esc(q.n)}"><h3><a href="${qPath(p, q)}">Question ${esc(q.n)}</a> ${marksLine(q)}</h3><p>${qText(q.en.q)}</p>${options(q)}${answerLine(p, q)}${q.nodes.length ? `<p class="small">Syllabus: ${topicLinks(q)}</p>` : ""}</div>`).join("")}
+${p.questions.map((q) => `${firstOfPassage(p, q) ? passageBlock(q) : ""}<div class="card" id="q${esc(q.n)}"><h3><a href="${qPath(p, q)}">Question ${esc(q.n)}</a> ${marksLine(q)}</h3><p>${qText(q.en.q)}</p>${options(q)}${answerLine(p, q)}${q.nodes.length ? `<p class="small">Syllabus: ${topicLinks(q)}</p>` : ""}</div>`).join("")}
 ${CTA("Answer these in the app, with review that brings them back")}`;
   return shell(env, { title: `${paperName(p)}: all ${p.questions.length} questions${p.key.status === "official" ? " with UPSC's answer key" : ""} | Aspiran`, desc: `${paperName(p)}, word for word from UPSC: ${p.questions.length} questions${p.exam === "prelims" && p.key.status === "official" ? ", with UPSC's official answers" : ""}, each linked to its syllabus topic.`, path: paperPath(p), canonical: sitePaper(p), body,
     ld: { "@context": "https://schema.org", "@type": "LearningResource", name: paperName(p), learningResourceType: "Past exam paper", educationalLevel: "UPSC Civil Services Examination", inLanguage: "en", isAccessibleForFree: true, provider: { "@type": "Organization", name: "Aspiran", url: "https://aspiran.in" } } });
@@ -225,7 +231,7 @@ function questionPage(env: Env, p: Paper, q: Q, topics: Map<string, Topic>): Res
     .map((t) => `<li><a href="${learnPath(t.node)}">${esc(t.node.name)}</a>: asked ${t.pyqTotal} time${t.pyqTotal === 1 ? "" : "s"} in the papers on Aspiran</li>`).join("");
   const body = `<p class="crumb"><a href="/learn/papers">Past papers</a> › <a href="${paperPath(p)}">${esc(paperName(p))}</a></p>
 <h1>${esc(paperName(p))}, question ${esc(q.n)}</h1>
-<div class="q"><p>${qText(q.en.q)}</p>${options(q)}<p>${marksLine(q)}</p></div>
+${passageBlock(q)}<div class="q"><p>${qText(q.en.q)}</p>${options(q)}<p>${marksLine(q)}</p></div>
 ${answerLine(p, q)}${explainBlock(p, q)}<p class="small">${p.exam === "prelims" ? keyNote(p) : "Word for word from UPSC's question paper."} <a href="${esc(p.sourceUrl)}" rel="nofollow">The paper on upsc.gov.in</a>.</p>
 ${asked ? `<h2>The syllabus topic it tests</h2><ul>${asked}</ul>` : ""}
 ${CTA(p.exam === "mains" ? "Write this answer in the app and mark it, free" : "Try questions like this with spaced review, free")}

@@ -41,6 +41,19 @@
           }
         },
         "sample": { "type": "boolean", "description": "True for SAMPLE entries: never packed, never shown." },
+        "passages": {
+          "type": "array",
+          "description": "CSAT comprehension passages, each printed once. A question that reads one names it in its passage field. Prelims only.",
+          "items": {
+            "type": "object",
+            "required": ["id", "en"],
+            "properties": {
+              "id": { "type": "string", "description": "p1, p2 … in the order printed." },
+              "en": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string", "description": "The passage as printed; paragraphs on new lines." } } },
+              "hi": { "type": "object", "required": ["text"], "properties": { "text": { "type": "string" } } }
+            }
+          }
+        },
         "questions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/question" } },
         "review": {
           "type": "object",
@@ -72,6 +85,7 @@
           }
         },
         "hi": { "$ref": "#/$defs/question/properties/en" },
+        "passage": { "type": "string", "description": "CSAT: the id of the paper's passage this question reads from." },
         "answer": { "type": ["integer", "null"], "minimum": 0, "maximum": 3, "description": "Prelims only, 0 = (a), and only from the official key." }
       }
     }
