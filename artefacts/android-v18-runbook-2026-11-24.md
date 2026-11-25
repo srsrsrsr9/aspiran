@@ -68,6 +68,10 @@ Check these five things:
 - Success: the release shows "Available to internal testers" within a few minutes.
 - Failure "You need to update your Data safety form" or a warning about photos: do Step 6 first, then come back.
 - Failure about a permission: copy the exact message to Claude.
+- Two yellow warnings are normal; press Save (or Next) anyway. They will come back on every release:
+  - "no deobfuscation file": the app's code isn't scrambled (R8 is off), so there is nothing to upload.
+  - "native code … debug symbols": the native parts come ready-made from libraries (the on-phone Chotu engine and two
+    Android libraries) with no symbols to upload. Tried on 25 Nov; it can't be fixed from our side.
 
 ## Step 6. Data safety: one answer changes
 Centre doubts can carry a photo, and the server keeps it so the teacher can see it. Version 17's form said photos are
