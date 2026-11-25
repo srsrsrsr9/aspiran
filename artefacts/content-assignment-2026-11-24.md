@@ -42,12 +42,16 @@ All 110 live Chai cards are GS3, so a GS1, GS2 or GS4 reader gets nothing. Make 
 
 - **Re-record 33 recordings (about 3.3 hours).** Their notes changed by more than 10%. The list is in
   `artefacts/content-import-2026-11-21.md`.
-- **Re-narrate and re-render 5 videos.** I didn't change their captions, because the captions must match the voice:
+- **Re-narrate and re-render 6 videos.** I didn't change their captions, because the captions must match the voice:
   - **143 India's dimensions:** the coastline is now 11,098.81 km (re-measured), not 7,516.6 km.
   - **28 Liquidity corridor:** check the current repo, SDF and MSF rates against the latest RBI policy.
   - **24 Finance Commission:** say "15th Finance Commission, 2021–26", and add the 16th Commission's award for 2026–31.
   - **25 DPDP Act:** consent managers are now due, so change "come a year later" to the present tense.
   - **14 Money Bill:** the rule belongs to Article 117(1), not 117(3).
+  - **12 GDP base year (added 25 Nov):** MoSPI revised the new series on 31 Aug 2026. 2023-24 growth is now 7.3%
+    (the video says 7.2) and 2024-25 is now 7.2% (the video says 7.1). Either use the new figures or say "at the
+    February 2026 release". The other 9 dated claims checked on 25 Nov still hold (census date, Indus award, budget
+    figures, inflation target, tribunals, governor's assent, cheetahs, balance of payments, WTO meeting).
 - **New videos:** make one each for GS1 world history, post-independence India and GS4 case-study method. These are the
   thinnest topics that have no video.
 
