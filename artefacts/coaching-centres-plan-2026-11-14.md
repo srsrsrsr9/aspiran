@@ -180,7 +180,18 @@ batch average shown to students, nothing public. Teachers see per-student number
 - **The institute is a data fiduciary for its students too.** The agreement must say the centre uses the data only to
   teach, and must delete exports when a student leaves.
 
-## 10. Pricing options (suggestions only)
+## 10. Pricing
+
+**Decided (24 Nov 2026, `artefacts/decisions-2026-11-24.md`, centres 9):** option A, rescaled to Plus at ₹3,999.
+**₹1,200 per student a year, minimum 25 students (₹30,000 a year)**, after a **free 30-day pilot** for one or two
+batches. Students get Plus while they are in the centre, and free during the pilot. The public website shows no price
+for centres; the price is talked through after the pilot.
+
+Built (24 Nov, `server/src/inst-centre.ts`): each centre has a pilot end (30 days from when Aspiran staff make it), a
+paid-until date and seats, set in Admin → Coaching centres → Plan. Seats are a record; nobody is cut off by them.
+Billing the centre itself (an invoice through Cashfree) is still to build; until then the paid-until date is set by hand.
+
+The options as first suggested (kept for the record):
 
 Prices in rupees, per student per year, for the institute. Students in an institute get Plus while they are in it
 (the centre pays).
@@ -191,7 +202,7 @@ Prices in rupees, per student per year, for the institute. Students in an instit
 | B. Tiers | Starter (up to 100 students): chat, doubts, plans, content, analytics. Pro (up to 500): plus AI first answers, CSV and priority help. Enterprise: own Play listing, video hosting, SSO | Starter ₹1,200, Pro ₹1,800, Enterprise quoted (own listing adds about ₹2 lakh a year) |
 | C. Seat packs | Buy seats in packs of 50, use them across batches | ₹60,000 per 50 seats a year |
 
-Against the student price of Plus (₹9,999 a year), any of these is a large discount, which is the point: the centre
+Against the student price of Plus (₹9,999 a year then; ₹3,999 since 17 Nov), any of these is a large discount, which is the point: the centre
 brings the students. A free 30-day pilot for one batch is the easiest way in.
 
 ## 11. Build order
@@ -220,11 +231,16 @@ assignment; several institutes per person.
 1. **Runtime branding only** for now (no per-centre Play app). Sales copy says the store app is "Aspiran".
 2. **One institute per person** in phase 1.
 3. **18+ only** in phase 1; no foundation-course minors until a parental-consent flow exists.
-4. **Students in an institute get Plus, paid by the centre** (not built in phase 1).
-5. **AI first answer off by default**, the centre's switch; labelled "Aspiran AI".
+4. **Students in an institute get Plus, paid by the centre**, and free during the 30-day pilot. Built 24 Nov.
+5. **Quick first answer off by default**, the centre's switch; shown as "A quick first answer from Aspiran. Your
+   teacher checks doubts too." Never "AI" (owner, 17 Nov).
 6. **Distress goes to Aspiran's moderators only**, never to the centre. Should a centre name a safety contact for tier 1?
 7. **Teachers see per-student numbers** inside their institute (students never see anyone else's).
 8. **On leaving**, answers, ticks and personal plans are deleted; doubts and messages stay with the name removed.
-9. **Pricing**: pick A, B or C (or none yet), and whether to offer a free 30-day pilot.
+9. **Pricing**: decided 24 Nov: ₹1,200 a student a year, 25 at least, after a free 30-day pilot (section 10).
 10. **Who may create institutes**: Aspiran staff only for now.
 11. **Console address**: `app.aspiran.in/institute` (that host must be in Firebase's authorised domains for Google sign-in).
+12. **Centres choose features** (decided 24 Nov, built): chat, doubts, the quick first answer, plans, own content and
+    pods each have a switch in the console (Branding and switches). Pods are off by default for centre students.
+
+All twelve were decided for the owner on 24 Nov 2026; see `artefacts/decisions-2026-11-24.md`.

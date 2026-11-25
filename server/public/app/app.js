@@ -364,6 +364,12 @@ function resultMode() {
 }
 /** Pause mode (Me → Privacy): no questions, no offers, no nudges until you come back. */
 const paused = () => (store.get("pausedUntil") ?? 0) > Date.now();
+/**
+ * Sunday "Your week" for every member, free or Plus (decisions-2026-11-24.md, website 2), on Adda and Today. Counts
+ * only, from this browser. Quiet in result mode and while paused; "Seen it" hides it until next Sunday.
+ */
+const sundayWeek = () => (new Date().getDay() === 0 && !resultMode() && !paused() && store.get("weekSeen") !== today()
+  ? CO.yourWeekCard({ onSeen: () => { store.set("weekSeen", today()); render(); } }) : null);
 
 const PAUSED = { mock: "mocks", read: "long_reads", pod: "pod_chat", prelims: "practice" };
 function banner() {
@@ -656,7 +662,7 @@ function viewToday() {
     BR.welcomeBack(gapAtOpen),
     profileAsk("today"),
     routineCard(),
-    new Date().getDay() === 0 && CO.yourWeekCard(),
+    sundayWeek(),
     nextCard,
     h("details", h("summary", "Today's full list"), tasks),
     h("div.card", h("div.row.between",
@@ -2282,6 +2288,7 @@ function roomPinnedCard() {
 }
 
 function viewRooms(arg) {
+  const off = INST.podsOffCard(); if (off) return off;
   const box = h("div");
   if (arg) {
     roomOpen(arg);
@@ -2495,6 +2502,7 @@ function catchUp(since) {
 
 let podRedraw = () => {};
 function viewPod() {
+  const off = INST.podsOffCard(); if (off) return off;
   if (resultMode() && !store.get("podInResult")) {
     return h("div.col", h("h1", "Your pod"), h("div.card.soft", h("p", "It's a result week. Your pod is here, with no wins posts and no Chotu prompts until it's over."),
       h("button", { onclick: () => { store.set("podInResult", true); render(); } }, "Open the pod")));
@@ -2933,6 +2941,7 @@ function viewAdda() {
       h("a", { href: "#me", onclick: () => setTimeout(() => document.getElementById("lang-request")?.scrollIntoView(), 50) }, "Want the app in your language?")),
     h("h1", greeting()),
     INST.addaCard(),
+    sundayWeek(),
     h("div.card.host", h("div.row", chotuLabel(null, 36), h("p.grow", { style: { margin: 0 } }, hostLine()))),
     M.checkinCard(h, profile()?.createdOn),
     rapCard(),

@@ -399,9 +399,27 @@ views.institutes = async () => {
       [(close) => h("button.primary", { onclick: K.busy(async () => { const r = await api("institutes", { body: { name: name.value, city: city.value } }); close(); toast("Centre made.", "ok"); await show("institutes"); showCode(name.value, r.ownerCode); }) }, "Make centre")]);
     setTimeout(() => name.focus(), 0);
   };
+  // The centre's plan: a free 30-day pilot, then ₹1,200 a student a year (25 at least). Staff only; the site shows no price.
+  const P = d.pricing ?? { perStudentYearInr: 1200, minStudents: 25, pilotDays: 30 };
+  const PLAN = { pilot: ["Pilot", ".ok"], paid: ["Paid", ".ok"], ended: ["Pilot over", ".warn"] };
+  const editPlan = (i) => {
+    const day = (v) => (v ? String(v).slice(0, 10) : "");
+    const seats = h("input", { type: "number", min: 1, value: i.seats ?? "", placeholder: String(P.minStudents) });
+    const pilot = h("input", { type: "date", value: day(i.pilotEndsAt) }), paid = h("input", { type: "date", value: day(i.paidUntil) });
+    const cost = h("p.small.muted", {});
+    const sum = () => { const n = Math.max(Number(seats.value) || 0, P.minStudents); cost.textContent = `${n} students × ₹${P.perStudentYearInr.toLocaleString("en-IN")} = ₹${(n * P.perStudentYearInr).toLocaleString("en-IN")} a year (${P.minStudents} students at least).`; };
+    seats.oninput = sum; sum();
+    K.modal("Plan for " + i.name, h("div", {},
+      h("p.small.muted", {}, `Students get Plus during the free ${P.pilotDays}-day pilot and while the centre is paid up. Seats are a record; nobody is cut off by them.`),
+      h("div.fields", {}, h("label.field", {}, h("span", {}, "Seats paid for"), seats), h("label.field", {}, h("span", {}, "Pilot ends"), pilot), h("label.field", {}, h("span", {}, "Paid until (blank: not paid)"), paid)), cost),
+      [(close) => h("button.primary", { onclick: K.busy(async () => {
+        await api(`institutes/${i.id}/plan`, { body: { seats: seats.value ? Number(seats.value) : null, pilotEndsAt: pilot.value || undefined, paidUntil: paid.value || null } });
+        close(); toast("Plan saved.", "ok"); await show("institutes");
+      }) }, "Save")]);
+  };
   views.institutes.st ??= {};
   return [
-    K.pageHead("Coaching centres", "Centres that run their batches on Aspiran: their own chat, doubts, plans, notes and tests, and analytics. Each one starts with an owner code from here.",
+    K.pageHead("Coaching centres", `Centres that run their batches on Aspiran: their own chat, doubts, plans, notes and tests, and analytics. Each one starts with an owner code from here. A free ${P.pilotDays}-day pilot, then ₹${P.perStudentYearInr.toLocaleString("en-IN")} a student a year, ${P.minStudents} students at least; students get Plus throughout.`,
       h("button.primary", { onclick: create }, K.icon("plus"), "New centre")),
     d.flagOn ? null : h("div.banner.warn", {}, "The coaching-centre console is switched off for everyone (feature flag “institutes”). You can set centres up now; they can't sign in until the owner switches it on under Feature flags."),
     K.table([
@@ -412,7 +430,11 @@ views.institutes = async () => {
       { key: "staff", label: "Teachers and admins", num: true },
       { key: "owners", label: "Owner", value: (i) => (i.owners ? "joined" : "not yet"), render: (i) => (i.owners ? "joined" : h("span.chip.warn", {}, "not yet")) },
       { key: "created_at", label: "Started", render: (i) => K.day(i.created_at) },
+      { key: "plan", label: "Plan", value: (i) => PLAN[i.plan]?.[0] ?? i.plan, render: (i) => h("span.chip" + (PLAN[i.plan]?.[1] ?? ""), {}, PLAN[i.plan]?.[0] ?? i.plan) },
+      { key: "pilotEndsAt", label: "Pilot ends", render: (i) => K.day(i.pilotEndsAt) },
+      { key: "seats", label: "Seats", value: (i) => i.seats ?? "", render: (i) => (i.seats ? `${i.students} of ${i.seats}` : "not set") },
       { key: "act", label: "", sort: false, csv: false, render: (i) => h("div.row", {},
+        h("button.sm", { onclick: () => editPlan(i) }, "Plan"),
         h("button.sm", { onclick: K.busy(async () => { const r = await api(`institutes/${i.id}/owner-code`, { body: {} }); showCode(i.name, r.ownerCode); }) }, "Owner code"),
         h("button.sm" + (i.status === "active" ? ".danger" : ""), { onclick: K.busy(async () => {
           const pause = i.status === "active";

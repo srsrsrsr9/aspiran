@@ -200,7 +200,7 @@ const GROUPS = [
   ["Today", [["dashboard", "Dashboard", "home"], ["doubts", "Doubts", "help"], ["chat", "Chat and announcements", "chat"]]],
   ["Students", [["batches", "Batches and invites", "layers"], ["people", "People", "users"], ["plans", "Study plans", "calendar"], ["content", "Notes and tests", "book"]]],
   ["Insight", [["reports", "Weekly report", "doc"], ["analytics", "Analytics", "chart"]]],
-  ["Settings", [["branding", "Branding", "palette", "admin"]]],
+  ["Settings", [["branding", "Branding and switches", "palette", "admin"]]],
 ];
 const allowedTabs = () => GROUPS.flatMap(([, items]) => items).filter(([, , , need]) => rank(S.ov.role) >= rank(need ?? "teacher")).map(([id]) => id);
 function drawNav() {
@@ -451,7 +451,7 @@ VIEWS.doubts = async () => {
   const pick = batchSelect(S.doubtBatch, { all: true }); pick.onchange = () => { S.doubtBatch = pick.value; drawList(); };
   drawList();
   return h("div",
-    pageHead("Doubts", S.ov.institute.aiFirstAnswer ? "Each new doubt gets a first reply from Aspiran's study helper, marked as such. Check it and add yours." : "Answer a doubt and it moves to Answered. The student or you mark it resolved."),
+    pageHead("Doubts", S.ov.institute.aiFirstAnswer ? "Each new doubt gets a quick first answer from Aspiran, shown to the student as such. Check it and add yours." : "Answer a doubt and it moves to Answered. The student or you mark it resolved."),
     h("div.row", { style: { marginBottom: "14px" } }, seg([["open", "Waiting", S.ov.counts.openDoubts], ["answered", "Answered"], ["resolved", "Resolved"]], S.doubtStatus, (v) => { S.doubtStatus = v; draw(); }),
       h("span.spacer"), h("div.k-search", icon("search"), search), pick),
     listEl);
@@ -687,7 +687,17 @@ VIEWS.branding = async () => {
   const i = S.ov.institute;
   const name = h("input", { type: "text", value: i.name, maxlength: 60 }), city = h("input", { type: "text", value: i.city ?? "", maxlength: 60 });
   const color = h("input", { type: "color", value: i.color ?? "#9A4E0E", style: { width: "64px", height: "38px", padding: "2px", border: "1px solid var(--line2)", borderRadius: "9px", background: "var(--card)" } });
-  const helper = h("input", { type: "checkbox", checked: i.aiFirstAnswer });
+  // The centre's switches (server inst-centre.ts). Pods are off by default for centre students.
+  const F = { chat: true, doubts: true, firstAnswer: false, plans: true, content: true, pods: false, ...(i.features ?? {}) };
+  const SWITCHES = [
+    ["chat", "Batch chat", "Students talk to their batch. With it off, they still see your announcements."],
+    ["doubts", "Doubts", "Students send doubts to your teachers, with a photo if they like."],
+    ["firstAnswer", "A quick first answer on doubts", "Each new doubt gets a short first answer, shown to the student as “A quick first answer from Aspiran. Your teacher checks doubts too.” Never about feelings, ranks or results; quiet from 23:30 to 07:00. Your teachers still answer."],
+    ["plans", "Study plans", "Your day-by-day plans for a batch or one student."],
+    ["content", "Your own notes and question sets", "What you publish under Content."],
+    ["pods", "Aspiran pods and open rooms", "Small study groups with aspirants outside your centre. Off unless you switch it on."],
+  ];
+  const boxes = Object.fromEntries(SWITCHES.map(([k]) => [k, h("input", { type: "checkbox", checked: !!F[k] })]));
   const logo = h("input", { type: "file", accept: "image/png,image/jpeg" });
   let logoUrl = i.logo ? i.logo + "?v=" + Date.now() : null;
   const preview = h("div");
@@ -697,12 +707,17 @@ VIEWS.branding = async () => {
   name.oninput = color.oninput = drawPreview;
   logo.onchange = () => { const f = logo.files[0]; if (f) { logoUrl = URL.createObjectURL(f); drawPreview(); } };
   drawPreview();
-  return h("div", pageHead("Branding", "Your name, colour and logo show to your students in Aspiran once they join. The app in the Play Store stays “Aspiran”."),
+  return h("div", pageHead("Branding and switches", "Your name, colour and logo show to your students in Aspiran once they join. The app in the Play Store stays “Aspiran”. Below, choose which parts your students get."),
     h("div.k-two",
       h("div",
         card({ title: "Name and colour" }, h("div.fields", h("label.field", h("span", "Institute name"), name), h("label.field", h("span", "City"), city)), h("label.field", h("span", "Colour"), color),
-          h("label.check", { style: { marginTop: "6px" } }, helper, h("span", h("b", "Study helper's first reply to new doubts"), h("div.muted", "Aspiran's study helper gives a first reply, marked “study helper”. Never about feelings, ranks or results; quiet from 23:30 to 07:00. Your teachers still answer."))),
-          h("div.row", { style: { marginTop: "12px" } }, h("button.primary", { onclick: busy(async () => { const d = await api("/inst/admin/branding", { name: name.value, city: city.value, color: color.value, aiFirstAnswer: helper.checked }); S.ov.institute = d.institute; applyBrand(d.institute); }, "Saved. Students see it the next time they open the app.") }, "Save"))),
+          h("div.row", { style: { marginTop: "12px" } }, h("button.primary", { onclick: busy(async () => { const d = await api("/inst/admin/branding", { name: name.value, city: city.value, color: color.value }); S.ov.institute = d.institute; applyBrand(d.institute); }, "Saved. Students see it the next time they open the app.") }, "Save"))),
+        card({ title: "What your students get", sub: "Switch parts on or off for all your students. Teachers keep every tool either way." },
+          SWITCHES.map(([k, label, note]) => h("label.check", { style: { marginTop: "6px" } }, boxes[k], h("span", h("b", label), h("div.muted", note)))),
+          h("div.row", { style: { marginTop: "12px" } }, h("button.primary", { onclick: busy(async () => {
+            const d = await api("/inst/admin/features", Object.fromEntries(SWITCHES.map(([k]) => [k, boxes[k].checked])));
+            S.ov.institute = { ...S.ov.institute, features: d.features, aiFirstAnswer: d.features.firstAnswer };
+          }, "Saved. Students see the change the next time they open the app.") }, "Save switches"))),
         card({ title: "Logo", sub: "PNG or JPEG, under 200 KB. Square works best." }, h("label.field", h("span", "Pick a file"), logo),
           h("button.primary", { onclick: busy(async () => {
             const f = logo.files[0]; if (!f) throw new Error("Pick a file first.");

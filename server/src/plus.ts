@@ -6,6 +6,7 @@ import { cashfreeConfigured, paymentsStatus } from "./payments";
 import { caKeyFor } from "./ca";
 import { PLAY_PRODUCT, playConfigured } from "./play";
 import { CHEAP_HOPS, type Hop, PLUS_MONTHLY_USD, monthSpend } from "./ai";
+import { centrePlus } from "./inst-centre";
 
 /**
  * Plus (spec §7), behind the "plus" flag, which is off by default. Real payments are one-time yearly Plus on the
@@ -66,7 +67,8 @@ async function entitlement(env: Env, memberId: string): Promise<{ plan: string; 
   const e = await env.DB.prepare("SELECT * FROM entitlements WHERE member_id = ?").bind(memberId).first<Ent>();
   if (e && e.ends_at > new Date().toISOString()) return { plan: e.plan, source: e.source, endsAt: e.ends_at, cancelled: !!e.cancelled_at, trial: e.source === "trial" };
   // Pod leads get no Plus of their own (owner, 13 Nov 2026): the same as every other member.
-  return null;
+  // A coaching centre's students have Plus while in it, and through its free pilot (inst-centre.ts).
+  return centrePlus(env, memberId);
 }
 
 /** Which spend group a member's model calls count under (ai.ts Who): Plus, any plan; free otherwise; no id, a visitor. */

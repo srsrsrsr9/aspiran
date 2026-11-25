@@ -535,9 +535,10 @@ export async function crmForget(env: Env, id: string) {
   const stmts = [env.DB.prepare("DELETE FROM crm_people WHERE id = ?").bind(id)];
   if (kind === "web") stmts.push(env.DB.prepare("DELETE FROM web_leads WHERE visitor_id = ?").bind(ref), env.DB.prepare("DELETE FROM web_chats WHERE visitor_id = ?").bind(ref));
   if (kind === "try") stmts.push(env.DB.prepare("DELETE FROM try_feedback WHERE session_id = ?").bind(ref), env.DB.prepare("DELETE FROM try_contacts WHERE session_id = ?").bind(ref),
-    env.DB.prepare("DELETE FROM try_recall WHERE session_id = ?").bind(ref));
+    env.DB.prepare("DELETE FROM try_recall WHERE session_id = ?").bind(ref), env.DB.prepare("DELETE FROM try_series WHERE session_id = ?").bind(ref));
   // The same contact left elsewhere (another browser, the demo) goes too.
-  if (row.contact) stmts.push(env.DB.prepare("DELETE FROM try_contacts WHERE contact = ?").bind(row.contact), env.DB.prepare("DELETE FROM web_leads WHERE contact = ?").bind(row.contact));
+  if (row.contact) stmts.push(env.DB.prepare("DELETE FROM try_contacts WHERE contact = ?").bind(row.contact), env.DB.prepare("DELETE FROM web_leads WHERE contact = ?").bind(row.contact),
+    env.DB.prepare("DELETE FROM try_series WHERE email = ?").bind(row.contact));
   const now = new Date().toISOString();
   stmts.push(env.DB.prepare("INSERT INTO privacy_requests (kind, member_hash, via, status, at, done_at, done_by) VALUES ('lead_delete', ?, 'admin', 'done', ?, ?, 'marketing')")
     .bind(await sha256Hex(row.contact || row.ref), now, now));

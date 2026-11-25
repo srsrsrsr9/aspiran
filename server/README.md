@@ -195,6 +195,15 @@ The first is Federalism and Centre–state relations. Screens: `server/public/ap
   (counts only) and `POST /admin/api/try/recall/run` (send what's due now; `{ day }` to act as another day). Table
   `try_recall` (migration 0015). Funnel events: `try_day3_offer`, `_signup`, `_cancel`, `_sent` (server), `_open`,
   `_done` (kept, of), `_join`.
+- **K4, five study emails** (`src/try-series.ts`, words in `src/try-series-mail.ts` from
+  `artefacts/marketing-2026-11-21/K4/email.json`): a second, unticked box in the same form, "Also send me 5 short
+  study emails". Only `series: true` on `POST /try/recall` signs up (answer has `series: <code>`). Emails on days 0, 7,
+  14 and 30 from the series, plus the day-3 email above, which then says "second of your five" and carries the series'
+  stop link. The address is kept until day 30, then deleted. `/try/series/<code>/stop` (GET page or POST) stops
+  everything still to come, day 3 included; cancelling day 3 in the demo stops the series too; "Delete what I sent" and
+  Marketing's forget delete the row. A step that can't go within 7 days of its day is skipped, never sent late. Sent
+  right after the day-3 emails in the same cron slots. Admin: `GET /admin/api/try/series` (counts only) and
+  `POST /admin/api/try/series/run` (`{ day }`). Table `try_series` (migration 0021). Event `try_series_sent` (step).
 - **First open**: `index.html` starts the topic's download and preloads the app's modules with the page, and the app
   draws a visitor's open page before sign-in setup; the offline copy installs 8 s later.
 - `npm run test:try` checks the gate, the feedback rules and the day-3 email.
@@ -499,22 +508,52 @@ Every table carries `institute_id`. Logos and doubt photos go in the media bucke
   card says so (`checking.available: false`).
 - `/admin/api/institutes` for Aspiran staff (the admin key, Admin role): list, create (gives back a one-time owner
   code, 30 days), `/<id>/owner-code` for a new one, `/<id>/status` to pause or resume. Paused, its members get
-  "paused for now" and its codes stop working. Each is in the audit log.
+  "paused for now" and its codes stop working. `/<id>/plan` sets `seats`, `pilotEndsAt` and `paidUntil` (YYYY-MM-DD,
+  `paidUntil: null` clears it). The list gives each centre's `features`, `plan` (pilot, paid or ended), `pilotEndsAt`,
+  `paidUntil`, `seats` and `plusUntil`, plus `pricing` (₹1,200 a student a year, 25 at least; staff only, never public).
+  Each is in the audit log.
+
+**Feature switches** (`src/inst-centre.ts`, decision 12 of `artefacts/decisions-2026-11-24.md`). A centre's admins
+choose what its students get. The Android app reads the same settings, so this is the whole API:
+
+| Switch | Default | Off means, for students |
+|---|---|---|
+| `chat` | on | `/inst/chat*` answers 403; `/inst/feed` still gives announcements, `messages: []` and `chat: false` |
+| `doubts` | on | `/inst/doubts*` answers 403 |
+| `firstAnswer` | off | no quick first answer on new doubts (the same as the older `aiFirstAnswer`, kept in step) |
+| `plans` | on | `/inst/plan*` answers 403 |
+| `content` | on | `/inst/content*` and `/inst/attempts` answer 403 |
+| `pods` | **off** | `/pods/join`, `/pods/choose` (move) and `/rooms/join` answer 403 with code `centre_pods_off` |
+
+- Read: `GET /inst/me` → `institute.features` (all six, as true or false), also in `join` and `admin/overview`. `GET /inst/admin/features` for teachers and up.
+- Write (admins): `POST /inst/admin/features` with only the switches to change, e.g. `{"pods": true, "chat": false}`.
+  Unknown keys are ignored; none known is a 400.
+- A switched-off part answers students `403 {"error": "...", "code": "feature_off"}`. Teachers and up keep every tool
+  (so they can get content ready first), except posting chat when chat is off; announcements always work.
+
+**Plus for centre students** (decisions 4 and 9). A student (not staff) in an active centre, with the `institutes`
+flag on, has Plus while the centre's free 30-day pilot runs (`pilot_ends_at`, set when the centre is made) or while it is
+paid up (`paid_until`). It comes through the normal Plus check (`plus.ts` `entitlement()` falls back to
+`inst-centre.ts` `centrePlus()`), so `/plus/status` shows `plan.source: "centre"` and every Plus limit follows.
+`GET /inst/me` gives `plusUntil` (null when there's none). Seats are a record for staff; nobody is cut off by them.
+Columns: `migrations/0020_institute_features.sql`.
 
 **The console** is `/institute` (`src/institute.html`), signed in with the person's own Aspiran account. Its left rail
 shows only what their role can use: Dashboard, Doubts, Chat and announcements, Batches and invites (codes, links and a
-ready WhatsApp message), People, Study plans, Notes and tests, Weekly report, Analytics, Branding (with a live preview). Tables search,
+ready WhatsApp message), People, Study plans, Notes and tests, Weekly report, Analytics, Branding and switches (a live
+preview, and the six feature switches). Tables search,
 sort, filter and download as CSV in the browser. Aspiran staff set centres up in Admin → Coaching centres.
 
 **The student side** is `public/app/institute.js`: `#inst` (or `#inst/<code>` from an invite link) to join, then the
 institute's name, colour and logo, announcements and batch chat, doubts, the plan, its content and their own progress.
+Tabs follow the centre's switches; with pods off, the pod and open-room screens point to the centre instead.
 
 **Roles:** owner > admin > teacher > student, one per person, one institute per person.
 
 | Role | Can |
 |---|---|
 | Owner | everything an admin can, plus invite admins and change or remove them. Can't leave and can't be changed by anyone in the institute |
-| Admin | batches, invite teachers, roster changes (move, remove, change role), branding, logo and the AI first-answer switch |
+| Admin | batches, invite teachers, roster changes (move, remove, change role), branding, logo and the feature switches |
 | Teacher | invite students, answer doubts, announcements, hide messages, see reports, content, plans, analytics and CSV |
 | Student | chat in their own batch, ask doubts, see their plan and the institute's published content, do its question sets |
 
@@ -524,7 +563,8 @@ the answers before they answer.
 **Distress guard.** Every chat message, doubt and doubt reply goes through the same distress check as pods. One that
 trips it is held, never posted: the writer gets the care box with helplines, and a `distress` report goes to Aspiran's
 own care queue (the `reports` table, `pod_id` = `inst:<institute id>`), as in `community/crisis-protocol.md`.
-The institute isn't told at all. The optional AI first answer (labelled "Aspiran AI") never runs at night
+The institute isn't told at all. The optional quick first answer (shown as "A quick first answer from Aspiran. Your teacher checks doubts too.",
+never labelled "AI") never runs at night
 (23:30 to 07:00 IST) or on feelings, ranks or results. Ten messages a minute per person across chat, doubts and replies.
 
 **Leaving and erasure.** Leaving (or being removed) deletes their answers, ticks and personal plans; their doubts and
@@ -534,7 +574,8 @@ plans, doubts (with photos and replies) and messages. Their replies on other peo
 
 **Tests:** `test/institutes.mjs`, run with `npm run test:all -- institutes`. It switches the flag on for the run and
 covers joining by code, every role limit, one institute never reaching another's data, chat and the distress guard,
-doubts with a photo, plans, content, analytics and the CSV, leaving and erasure. `test/insights.mjs` (`-- insights`)
+doubts with a photo, plans, content, analytics and the CSV, the feature switches, centre Plus and the centre's plan,
+leaving and erasure. `test/insights.mjs` (`-- insights`)
 covers Admin → Insights without a PostHog key (every PostHog part "not connected", our numbers still there, codes only)
 and the centre reports: scoping, the batch-of-5 rule, own practice never shared, leaving, and the CSV.
 

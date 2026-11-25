@@ -2,7 +2,8 @@
 // in the open demo can ask for one email, three days later, with 5 of them again. The email links to the web app
 // (#tryback/<code>), which asks the 5 questions and says privately "You kept 4 of 5", then offers to join and keep them.
 //
-//   POST /try/recall                { sessionId, pathId, email, consent: true, consentText, cards: [card ids], lang }
+//   POST /try/recall                { sessionId, pathId, email, consent: true, consentText, cards: [card ids], lang,
+//                                     series?: true, seriesText }   series: K4's five study emails, a separate tick (try-series.ts)
 //                                   → { ok, code, due }   one per browser session; asking again updates it, never a 2nd email
 //   POST /try/recall/<code>/stop    cancel before it goes, or the email's unsubscribe link (one-click, RFC 8058)
 //   GET  /try/recall/<code>/stop    the same, from a plain link: a short page that says it's done
@@ -10,7 +11,7 @@
 //   POST /try/recall/<code>/answers { picks: { cardId: optionIndex } } → { kept, of }, kept the first time only
 //
 // Privacy, as the demo says it: the address is used for this one email and deleted once it's sent (or cancelled).
-// One email, never a second, no newsletter. "Delete what I sent" in the demo deletes the row too (try.ts).
+// One email, never a second, no newsletter; unless the visitor also ticked the separate K4 box (try-series.ts). "Delete what I sent" in the demo deletes the row too (try.ts).
 // Sending: the half-hourly cron (index.ts) calls sendRecalls in the late-morning slots; Ops can run it by hand
 // (POST /admin/api/try/recall/run). At most RUN_MAX a run, to stay under Cloudflare's 50 outside calls.
 
@@ -19,6 +20,7 @@ import { sendMail } from "./mail";
 import { logEvent } from "./metrics";
 import { ensureSchema, sha256Hex } from "./staff";
 import { type Env, bad, istDay, json } from "./shared";
+import { seriesFor, seriesSignUp, seriesStopLink, stopSeries, stopSeriesForRecall } from "./try-series";
 
 /** Questions asked again on day 3: the visitor's own cards first, filled from the topic's other cards. */
 export const ASK = 5;
@@ -85,23 +87,28 @@ async function signUp(req: Request, env: Env): Promise<Response> {
   await ensureSchema(env);
   const had = await env.DB.prepare("SELECT code, sent_at FROM try_recall WHERE session_id = ? AND path_id = ?").bind(b.sessionId, path.id).first<{ code: string; sent_at: string | null }>();
   if (had?.sent_at) return json({ ok: true, code: had.code, already: "sent" }); // one email, never a second
+  // K4: only when its own box was ticked (b.series === true, never assumed).
+  const series = (code: string) => b.series === true
+    ? seriesSignUp(env, { sessionId: b.sessionId, recallCode: code, email, lang, consentText: str(b.seriesText, 600) || "Send me 5 short study emails." }).then((c) => c)
+    : Promise.resolve(null);
   if (had) {
     await env.DB.prepare("UPDATE try_recall SET email = ?, lang = ?, cards = ?, consent_text = ?, due_day = ?, stopped_at = NULL WHERE code = ?")
       .bind(email, lang, JSON.stringify(cards), str(b.consentText, 600), due, had.code).run();
-    return json({ ok: true, code: had.code, due, n: cards.length });
+    return json({ ok: true, code: had.code, due, n: cards.length, series: await series(had.code) });
   }
   const code = Array.from(crypto.getRandomValues(new Uint8Array(16)), (x) => x.toString(16).padStart(2, "0")).join("");
   await env.DB.prepare(`INSERT INTO try_recall (code, session_id, path_id, email, lang, cards, consent_text, created_at, due_day) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
     .bind(code, b.sessionId, path.id, email, lang, JSON.stringify(cards), str(b.consentText, 600), now.toISOString(), due).run();
-  return json({ ok: true, code, due, n: cards.length });
+  return json({ ok: true, code, due, n: cards.length, series: await series(code) });
 }
 
 type Row = { code: string; session_id: string; path_id: string; email: string | null; lang: string; cards: string; created_at: string; due_day: string;
   sent_at: string | null; tries: number; opened_at: string | null; answered_at: string | null; kept: number | null; of_n: number | null; stopped_at: string | null };
 const rowOf = (env: Env, code: string) => env.DB.prepare("SELECT * FROM try_recall WHERE code = ?").bind(code).first<Row>();
 
-async function stop(env: Env, code: string) {
+async function stop(env: Env, code: string, series = true) {
   await env.DB.prepare("UPDATE try_recall SET email = NULL, stopped_at = COALESCE(stopped_at, ?) WHERE code = ?").bind(new Date().toISOString(), code).run();
+  if (series) await stopSeriesForRecall(env, code); // "stop" means every email still to come
 }
 
 const STOP_PAGE = (hi: boolean) => `<!doctype html><html lang="${hi ? "hi" : "en"}"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -138,9 +145,16 @@ async function answers(req: Request, env: Env, row: Row): Promise<Response> {
 }
 
 export async function recallRoute(req: Request, env: Env, path: string): Promise<Response | null> {
-  if (path !== "/try/recall" && !path.startsWith("/try/recall/")) return null;
+  if (path !== "/try/recall" && !path.startsWith("/try/recall/") && !path.startsWith("/try/series/")) return null;
   await ensureSchema(env);
   if (path === "/try/recall") return req.method === "POST" ? signUp(req, env) : json({ error: "Use POST." }, 405);
+  const ser = path.match(/^\/try\/series\/([^/]+)\/stop$/);
+  if (ser) {
+    if (!CODE.test(ser[1])) return json({ error: "That link isn't right. It may have been cut short." }, 404);
+    const r = await env.DB.prepare("SELECT lang FROM try_series WHERE code = ?").bind(ser[1]).first<{ lang: string }>();
+    if (r) await stopSeries(env, ser[1]);
+    return req.method === "GET" ? new Response(STOP_PAGE(r?.lang === "hi"), { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } }) : json({ ok: true });
+  }
   const m = path.match(/^\/try\/recall\/([^/]+)(\/stop|\/answers)?$/);
   if (!m || !CODE.test(m[1])) return json({ error: "That link isn't right. It may have been cut short." }, 404);
   const row = await rowOf(env, m[1]);
@@ -154,8 +168,8 @@ export async function recallRoute(req: Request, env: Env, path: string): Promise
 }
 
 /** The email itself: plain text, English or Hindi, one link to answer and one to stop. */
-export function recallMail(env: Env, row: { code: string; lang: string; created_at: string }, title: string, n: number) {
-  const base = appBase(env), link = `${base}/app/#tryback/${row.code}`, stopLink = `${base}/try/recall/${row.code}/stop`;
+export function recallMail(env: Env, row: { code: string; lang: string; created_at: string }, title: string, n: number, seriesCode: string | null = null) {
+  const base = appBase(env), link = `${base}/app/#tryback/${row.code}`, stopLink = seriesCode ? seriesStopLink(env, seriesCode) : `${base}/try/recall/${row.code}/stop`;
   const hi = row.lang === "hi";
   const text = (hi ? [
     "नमस्ते,",
@@ -167,8 +181,13 @@ export function recallMail(env: Env, row: { code: string; lang: string; created_
     "",
     "अभी क्यों: जो बात भूलने से ठीक पहले फिर याद की जाए, वह ज़्यादा दिन टिकती है।",
     "",
-    "इसके बारे में यही एक ईमेल है। इसे भेजने के बाद हमने आपका पता मिटा दिया है।",
-    `नहीं चाहिए था? ${stopLink}`,
+    ...(seriesCode ? [
+      "यह पाँच छोटे ईमेल में से दूसरा है। आपका पता आख़िरी ईमेल (30वें दिन) तक रखा जाएगा, फिर मिटा दिया जाएगा।",
+      `ये ईमेल बंद करें: ${stopLink}`,
+    ] : [
+      "इसके बारे में यही एक ईमेल है। इसे भेजने के बाद हमने आपका पता मिटा दिया है।",
+      `नहीं चाहिए था? ${stopLink}`,
+    ]),
     "",
     "Aspiran",
   ] : [
@@ -181,8 +200,13 @@ export function recallMail(env: Env, row: { code: string; lang: string; created_
     "",
     "Why now: something you pull back just as it starts to fade stays with you longer than something you re-read.",
     "",
-    "This is the only email about it. Now that it's sent, we've deleted your address.",
-    `Didn't want it? ${stopLink}`,
+    ...(seriesCode ? [
+      "This is the second of your five short study emails. We keep your address until the last one, on day 30, then delete it.",
+      `Stop these emails: ${stopLink}`,
+    ] : [
+      "This is the only email about it. Now that it's sent, we've deleted your address.",
+      `Didn't want it? ${stopLink}`,
+    ]),
     "",
     "Aspiran",
   ]).join("\n");
@@ -212,10 +236,11 @@ export async function sendRecalls(env: Env, day = istDay()): Promise<{ sent: num
     if (!claim.meta.changes) continue; // another run has it
     if (!paths.has(row.path_id)) paths.set(row.path_id, await approvedPath(env, row.path_id));
     const path = paths.get(row.path_id);
-    if (!path) { await stop(env, row.code); continue; } // the topic closed: no email, address gone
+    if (!path) { await stop(env, row.code, false); continue; } // the topic closed: no day-3 email, address gone (the series carries on)
     const title = (row.lang === "hi" && (path.short?.hi || path.title.hi)) || path.short?.en || path.title.en;
     const n = (JSON.parse(row.cards) as string[]).length;
-    const ok = await sendMail(env, { to: row.email!, ...recallMail(env, row, title, n) });
+    const ser = await seriesFor(env, row.code);
+    const ok = await sendMail(env, { to: row.email!, ...recallMail(env, row, title, n, ser?.code ?? null) });
     if (ok) {
       await env.DB.prepare("UPDATE try_recall SET sent_at = ?, email = NULL WHERE code = ?").bind(new Date().toISOString(), row.code).run();
       await logEvent(env, "try_day3_sent", {}, { path: row.path_id });
