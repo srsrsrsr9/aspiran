@@ -50,6 +50,11 @@ const seen = new Set();
 for (let i = 0; i < 60; i++) { const d = new Date(Date.UTC(2026, 10, 1) + i * 864e5).toISOString().slice(0, 10); const p = P.pickPyq(papers, d); assert.ok(!p.paper.sample); seen.add(p.paper.id); }
 assert.ok(seen.size >= 5, "two months of questions come from many papers: " + [...seen].join(", "));
 assert.equal(P.pickPyq([], day), null);
+// A CSAT question that reads a shared passage never goes out without it.
+const csat = { id: "csp-2016-csat", exam: "prelims", year: 2016, paper: "csat", passages: [{ id: "p1", en: { text: "A passage." } }],
+  questions: [{ n: "1", nodes: ["csat-1"], en: { q: "What does the passage imply?", options: ["a", "b", "c", "d"] }, answer: 0, passage: "p1" },
+    { n: "2", nodes: ["csat-5"], en: { q: "What is 2 + 2?", options: ["3", "4", "5", "6"] }, answer: 1 }] };
+for (let i = 0; i < 20; i++) { const d = new Date(Date.UTC(2026, 10, 1) + i * 864e5).toISOString().slice(0, 10); assert.equal(P.pickPyq([csat], d).q.n, "2", "never a passage question"); }
 step(`past question of the day: steady within a day, new each day, ${seen.size} papers in two months, never a sample`);
 
 // A Prelims question with UPSC's official key: options in the text, the answer only in Telegram's quiz poll.

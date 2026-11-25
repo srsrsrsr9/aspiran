@@ -83,6 +83,8 @@ export function pickPyq(papers: any[], day: string): { paper: any; q: any } | nu
       // Prelims questions need their four options; questions that lean on a picture or map can't be posted as text.
       if (p.exam === "prelims" && (q?.en?.options ?? q?.options ?? []).length !== 4) continue;
       if (/\b(map|figure|diagram|image) (given|below|above|shown)\b/i.test(text)) continue;
+      // A CSAT question that reads a shared passage makes no sense in a post without it.
+      if (q?.passage != null) continue;
       all.push({ paper: p, q });
     }
   }

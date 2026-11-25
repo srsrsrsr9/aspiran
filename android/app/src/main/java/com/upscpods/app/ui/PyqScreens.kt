@@ -98,9 +98,16 @@ private fun MainsPyq(pq: Pyq, onWrite: (MainsTask) -> Unit) = FlatCard {
 private fun PrelimsPyq(pq: Pyq) = FlatCard {
     val answer = pq.paper.answerOf(pq.q)
     var picked by rememberSaveable(pq.id) { mutableIntStateOf(-1) }
+    val passage = pq.paper.passageOf(pq.q)
+    var showPassage by rememberSaveable(pq.id + "#passage") { mutableStateOf(false) }
     val context = LocalContext.current
     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         PyqHead(pq)
+        // CSAT: the shared passage, folded so a run of questions on one passage stays short.
+        if (passage != null) {
+            TextButton(onClick = { showPassage = !showPassage }) { Text(if (showPassage) "Hide the passage" else "Read the passage") }
+            if (showPassage) Text(passage, style = MaterialTheme.typography.bodyMedium)
+        }
         Text(pq.q.en.q, style = MaterialTheme.typography.bodyLarge)
         pq.q.en.options.forEachIndexed { k, opt ->
             FilterChip(selected = picked == k, onClick = { if (picked < 0) picked = k },

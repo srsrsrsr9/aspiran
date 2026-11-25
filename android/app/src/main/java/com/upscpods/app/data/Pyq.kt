@@ -20,7 +20,16 @@ data class PyqQuestion(
     val cards: List<String> = emptyList(),
     val en: PyqText,
     val answer: Int? = null,
+    /** CSAT: the id of the shared reading passage this question is about (printed once per paper). */
+    val passage: String? = null,
 )
+
+/** A CSAT comprehension passage, shared by the questions that name its id. */
+@Serializable
+data class PyqPassage(val id: String = "", val en: PyqPassageText = PyqPassageText())
+
+@Serializable
+data class PyqPassageText(val text: String = "")
 
 /** provisional: UPSC's key published right after the exam, before its final key. */
 @Serializable
@@ -40,8 +49,11 @@ data class PyqPaper(
     val answerKey: PyqKey = PyqKey(),
     val sample: Boolean = false,
     val questions: List<PyqQuestion> = emptyList(),
+    val passages: List<PyqPassage> = emptyList(),
 ) {
     val mains get() = exam == "mains"
+    /** The passage a CSAT question reads, or null; a question is never shown without the passage it names. */
+    fun passageOf(q: PyqQuestion): String? = q.passage?.let { id -> passages.firstOrNull { it.id == id }?.en?.text?.takeIf { it.isNotBlank() } }
     /** Answers only from UPSC's own key; a question UPSC dropped has none. */
     fun answerOf(q: PyqQuestion): Int? = q.answer.takeIf { answerKey.status == "official" && q.n !in answerKey.dropped }
     /** "Mains 2025 · GS1 Q7". */
@@ -67,7 +79,8 @@ object Pyqs {
         runCatching { JSON.decodeFromJsonElement<PyqPaper>(item.data) }.getOrNull()?.takeIf { !it.sample && it.questions.isNotEmpty() }
     }.sortedWith(compareByDescending<PyqPaper> { it.year }.thenBy { SYLLABUS.indexOfFirst { p -> p.id == it.paper } })
 
-    fun all(papers: List<PyqPaper>): List<Pyq> = papers.flatMap { p -> p.questions.map { Pyq(p, it) } }
+    /** Every question, leaving out any CSAT question whose passage is missing (it can't be answered without it). */
+    fun all(papers: List<PyqPaper>): List<Pyq> = papers.flatMap { p -> p.questions.filter { it.passage == null || p.passageOf(it) != null }.map { Pyq(p, it) } }
 
     /** The questions under one syllabus topic: those whose nodes name it. */
     fun forTopic(all: List<Pyq>, paper: SyllabusPaper, topic: SyllabusTopic): List<Pyq> =
