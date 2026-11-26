@@ -2,10 +2,10 @@
  "schema": "upsc-pods/ca-week@1",
  "week": "2001-20",
  "lang": "en",
- "generatedAt": "2026-11-26T02:19:02Z",
+ "generatedAt": "2026-11-26T03:05:55Z",
  "series": "illustrated-shorts",
- "title": "Explainers, 201 to 203",
- "titleHi": "समझिए, 201 से 203",
+ "title": "Explainers, 201 to 210",
+ "titleHi": "समझिए, 201 से 210",
  "voice": {
   "provider": "elevenlabs"
  },
@@ -211,6 +211,479 @@
     "checkedBy": "Aspiran (owner publish)",
     "checkedOn": "2026-11-26",
     "note": "Facts were read against the Kesavananda Bharati judgment ((1973) 4 SCC 225) and a standard polity text. Retold lines: none. Moving facts: none known."
+   }
+  },
+  {
+   "n": 204,
+   "id": "el-nino-india-rain",
+   "title": "El Niño and India's Rain",
+   "durationSec": 67.4,
+   "mp4": "204-el-nino-india-rain.mp4",
+   "vtt": "204-el-nino-india-rain.vtt",
+   "poster": "204-el-nino-india-rain.jpg",
+   "mp4Social": "204-el-nino-india-rain.social.mp4",
+   "syllabusNodes": [
+    "gs1-7"
+   ],
+   "gsPaper": [
+    "mains-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 11, India: Physical Environment, ch. 4 (Climate): El Niño, warm current off Peru, linked to weaker Indian monsoon; used in long-range forecasts",
+    "NOAA Climate.gov, 'What is the El Niño–Southern Oscillation (ENSO) in a nutshell?': trade winds weaken in El Niño, warm water shifts east; La Niña is the cool phase; episodes recur every 2–7 years",
+    "IMD, Monsoon Report 1997: all-India June–September rainfall was 102% of the long-period average despite a strong El Niño; positive Indian Ocean Dipole cited"
+   ],
+   "quiz": [
+    {
+     "id": "el-nino-india-rain-q1",
+     "q": "What happens to the Pacific trade winds in an El Niño year?",
+     "options": [
+      "They weaken",
+      "They get much stronger",
+      "They reverse to blow north",
+      "They stop only over India"
+     ],
+     "answerIndex": 0,
+     "why": "Weaker trade winds let the warm water spread east."
+    },
+    {
+     "id": "el-nino-india-rain-q2",
+     "q": "Why does El Niño often weaken India's monsoon?",
+     "options": [
+      "It cools the Bay of Bengal",
+      "It blocks the Himalayas",
+      "More air sinks over India instead of rising",
+      "It moves the Western Ghats"
+     ],
+     "answerIndex": 2,
+     "why": "With the rising air shifted east, more air sinks over India, so less rain."
+    },
+    {
+     "id": "el-nino-india-rain-q3",
+     "q": "What does 1997 show?",
+     "options": [
+      "El Niño always causes drought",
+      "A strong El Niño can still come with a normal monsoon",
+      "La Niña causes floods every year",
+      "El Niño began in 1997"
+     ],
+     "answerIndex": 1,
+     "why": "1997 had a very strong El Niño but a normal monsoon."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT's climate chapter, NOAA's ENSO explainer and IMD's 1997 monsoon figures. Diagrams are schematic, no map. Moving facts: none; the El Niño–monsoon link is a tendency, stated as one."
+   }
+  },
+  {
+   "n": 205,
+   "id": "how-a-cyclone-is-born",
+   "title": "How a Cyclone Is Born",
+   "durationSec": 75.4,
+   "mp4": "205-how-a-cyclone-is-born.mp4",
+   "vtt": "205-how-a-cyclone-is-born.vtt",
+   "poster": "205-how-a-cyclone-is-born.jpg",
+   "mp4Social": "205-how-a-cyclone-is-born.social.mp4",
+   "syllabusNodes": [
+    "gs1-9"
+   ],
+   "gsPaper": [
+    "mains-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 11, Fundamentals of Physical Geography, ch. 10 (Atmospheric Circulation and Weather Systems): conditions for tropical cyclones (sea surface above 27°C, Coriolis force, small vertical wind shear, pre-existing low-pressure disturbance); energy from latent heat of condensation; dissipate over land; the eye",
+    "IMD, Frequently Asked Questions on Tropical Cyclones: Bay of Bengal sees about four times as many cyclones as the Arabian Sea; peaks in April–May and October–December"
+   ],
+   "quiz": [
+    {
+     "id": "how-a-cyclone-is-born-q1",
+     "q": "Where does a tropical cyclone get its energy?",
+     "options": [
+      "From the Earth's core",
+      "From lightning",
+      "From heat released when water vapour condenses",
+      "From the Moon's pull"
+     ],
+     "answerIndex": 2,
+     "why": "Rising moist air condenses into cloud and releases latent heat."
+    },
+    {
+     "id": "how-a-cyclone-is-born-q2",
+     "q": "Why don't cyclones form right on the equator?",
+     "options": [
+      "The sea is too cold",
+      "The Earth's spin (Coriolis force) is too weak there to twist the air",
+      "There is no wind",
+      "It never rains there"
+     ],
+     "answerIndex": 1,
+     "why": "Without the Coriolis force, the inflowing air doesn't spiral."
+    },
+    {
+     "id": "how-a-cyclone-is-born-q3",
+     "q": "Which sea sees more cyclones?",
+     "options": [
+      "Arabian Sea, by far",
+      "Both the same",
+      "Neither has cyclones",
+      "Bay of Bengal, about four to one"
+     ],
+     "answerIndex": 3,
+     "why": "IMD gives roughly four Bay of Bengal cyclones for each Arabian Sea one."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT's chapter on weather systems and IMD's cyclone FAQ. Satellite photos are from the ISS, over open ocean, with no lines drawn. Moving facts: the four-to-one ratio is a long-term average; recent decades show more Arabian Sea cyclones."
+   }
+  },
+  {
+   "n": 206,
+   "id": "western-disturbances",
+   "title": "Western Disturbances: Winter Rain in the North",
+   "durationSec": 59.5,
+   "mp4": "206-western-disturbances.mp4",
+   "vtt": "206-western-disturbances.vtt",
+   "poster": "206-western-disturbances.jpg",
+   "mp4Social": "206-western-disturbances.social.mp4",
+   "syllabusNodes": [
+    "gs1-7"
+   ],
+   "gsPaper": [
+    "mains-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 11, India: Physical Environment, ch. 4 (Climate): western cyclonic disturbances originate over the Mediterranean Sea, are brought into India by the westerly jet stream, cause winter rainfall in the north-western plains, which is beneficial for rabi crops; snowfall in the Himalayas",
+    "IMD Glossary, 'Western Disturbance': an extra-tropical storm from the Mediterranean region bringing winter rain to north-west India"
+   ],
+   "quiz": [
+    {
+     "id": "western-disturbances-q1",
+     "q": "Where do western disturbances form?",
+     "options": [
+      "Over the Bay of Bengal",
+      "Over the Mediterranean region",
+      "Over the Thar desert",
+      "Over the Pacific"
+     ],
+     "answerIndex": 1,
+     "why": "They begin over the Mediterranean region and travel east."
+    },
+    {
+     "id": "western-disturbances-q2",
+     "q": "What carries them to India?",
+     "options": [
+      "The south-west monsoon",
+      "Sea breezes",
+      "Westerly winds high in the sky",
+      "Trade winds"
+     ],
+     "answerIndex": 2,
+     "why": "The westerly jet stream carries them east."
+    },
+    {
+     "id": "western-disturbances-q3",
+     "q": "Which crop benefits most from their rain?",
+     "options": [
+      "Rabi crops such as wheat",
+      "Kharif rice",
+      "Tea in Assam",
+      "Coffee in Karnataka"
+     ],
+     "answerIndex": 0,
+     "why": "Winter rain in the north-west waters the rabi crop."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT's climate chapter and the IMD glossary. Snow pictures are from Nepal and Gulmarg; no map. Moving facts: none."
+   }
+  },
+  {
+   "n": 207,
+   "id": "how-a-delta-grows",
+   "title": "How a Delta Grows",
+   "durationSec": 61.5,
+   "mp4": "207-how-a-delta-grows.mp4",
+   "vtt": "207-how-a-delta-grows.vtt",
+   "poster": "207-how-a-delta-grows.jpg",
+   "mp4Social": "207-how-a-delta-grows.social.mp4",
+   "syllabusNodes": [
+    "gs1-7"
+   ],
+   "gsPaper": [
+    "mains-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 11, Fundamentals of Physical Geography, ch. 7 (Landforms and their Evolution): deltas form where rivers deposit their load at the mouth; coarser material settles first; distributaries",
+    "NCERT Class 11, India: Physical Environment, ch. 3 (Drainage System): Ganga–Brahmaputra delta is the world's largest; Narmada and Tapi flow west through rift valleys and form estuaries; east-flowing peninsular rivers form deltas",
+    "UNESCO World Heritage List, The Sundarbans (Bangladesh) and Sundarbans National Park (India): largest mangrove forest in the world"
+   ],
+   "quiz": [
+    {
+     "id": "how-a-delta-grows-q1",
+     "q": "Why does a river drop its silt at the sea?",
+     "options": [
+      "The sea pushes it back up",
+      "It slows down",
+      "The water freezes",
+      "The silt dissolves"
+     ],
+     "answerIndex": 1,
+     "why": "A slower river can't carry its load, so the silt settles."
+    },
+    {
+     "id": "how-a-delta-grows-q2",
+     "q": "What are distributaries?",
+     "options": [
+      "Smaller channels a river splits into near its mouth",
+      "Rivers that join the main river",
+      "Underground streams",
+      "Canals built for irrigation"
+     ],
+     "answerIndex": 0,
+     "why": "The silt blocks the way and the river splits into distributaries."
+    },
+    {
+     "id": "how-a-delta-grows-q3",
+     "q": "Which river ends in an estuary, not a delta?",
+     "options": [
+      "Godavari",
+      "Mahanadi",
+      "Narmada",
+      "Krishna"
+     ],
+     "answerIndex": 2,
+     "why": "The Narmada and the Tapi flow west and form estuaries."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT's landforms and drainage chapters and UNESCO's Sundarbans listings. Satellite pictures show land and water only, no lines drawn; check no label shows. Moving facts: none."
+   }
+  },
+  {
+   "n": 208,
+   "id": "jet-streams",
+   "title": "Jet Streams in One Minute",
+   "durationSec": 66.4,
+   "mp4": "208-jet-streams.mp4",
+   "vtt": "208-jet-streams.vtt",
+   "poster": "208-jet-streams.jpg",
+   "mp4Social": "208-jet-streams.social.mp4",
+   "syllabusNodes": [
+    "gs1-7"
+   ],
+   "gsPaper": [
+    "mains-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 11, India: Physical Environment, ch. 4 (Climate): subtropical westerly jet south of the Himalayas in winter, bringing western disturbances; shifts north of the Himalayas in summer; tropical easterly jet over the peninsula in June; jet stream speeds of about 110 km/h in summer and 184 km/h in winter",
+    "NCERT Class 11, Fundamentals of Physical Geography, ch. 10: jet streams are narrow belts of high-altitude westerly winds in the troposphere, caused by temperature gradients"
+   ],
+   "quiz": [
+    {
+     "id": "jet-streams-q1",
+     "q": "Where are jet streams found?",
+     "options": [
+      "At ground level",
+      "High up, near the top of the lower atmosphere",
+      "Under the sea",
+      "Only over deserts"
+     ],
+     "answerIndex": 1,
+     "why": "They blow about 9 to 12 kilometres up."
+    },
+    {
+     "id": "jet-streams-q2",
+     "q": "In winter, the westerly jet over India brings…",
+     "options": [
+      "The south-west monsoon",
+      "Cyclones in the Bay of Bengal",
+      "Western disturbances and winter rain",
+      "Heatwaves in the south"
+     ],
+     "answerIndex": 2,
+     "why": "It runs south of the Himalayas and carries western disturbances in."
+    },
+    {
+     "id": "jet-streams-q3",
+     "q": "What happens to the westerly jet by early summer?",
+     "options": [
+      "It moves north of the Himalayas",
+      "It stops for good",
+      "It turns into a cyclone",
+      "It moves to the Arabian Sea"
+     ],
+     "answerIndex": 0,
+     "why": "Its shift north, with the easterly jet, is linked to the monsoon's onset."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT's climate and atmospheric-circulation chapters. Diagrams are schematic, no map. Moving facts: none; the jet–monsoon link is presented as one explanation."
+   }
+  },
+  {
+   "n": 209,
+   "id": "why-corals-turn-white",
+   "title": "Why Corals Turn White",
+   "durationSec": 70.7,
+   "mp4": "209-why-corals-turn-white.mp4",
+   "vtt": "209-why-corals-turn-white.vtt",
+   "poster": "209-why-corals-turn-white.jpg",
+   "mp4Social": "209-why-corals-turn-white.social.mp4",
+   "syllabusNodes": [
+    "pre-6"
+   ],
+   "gsPaper": [
+    "prelims-gs1"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NOAA Ocean Service, 'What is coral bleaching?': corals expel the zooxanthellae algae living in their tissues when stressed by changes such as temperature, turning white; bleached corals are not dead but are under more stress and at risk of death",
+    "NOAA Ocean Service, 'Corals' tutorial: zooxanthellae provide up to 90% of the coral's energy needs",
+    "NOAA Coral Reef Watch: bleaching risk rises when temperatures stay about 1°C above the usual maximum for weeks; NOAA confirmed the fourth global coral bleaching event on 15 April 2024",
+    "NCERT Class 11, India: Physical Environment / Ministry of Environment reports: India's major reef areas are the Gulf of Mannar, Gulf of Kachchh, Lakshadweep and the Andaman and Nicobar Islands"
+   ],
+   "quiz": [
+    {
+     "id": "why-corals-turn-white-q1",
+     "q": "What gives most corals their colour?",
+     "options": [
+      "Their limestone skeleton",
+      "Sea salt",
+      "Algae living in their tissue",
+      "Sand on the reef"
+     ],
+     "answerIndex": 2,
+     "why": "The algae give the coral its colour; without them, the white skeleton shows."
+    },
+    {
+     "id": "why-corals-turn-white-q2",
+     "q": "What mainly causes mass bleaching?",
+     "options": [
+      "Water that stays too warm for weeks",
+      "A full moon",
+      "Too many fish",
+      "Cold winter nights"
+     ],
+     "answerIndex": 0,
+     "why": "Heat stress makes corals push out their algae."
+    },
+    {
+     "id": "why-corals-turn-white-q3",
+     "q": "Which of these is NOT one of India's main reef areas?",
+     "options": [
+      "Gulf of Mannar",
+      "Lakshadweep",
+      "Gulf of Kachchh",
+      "Chilika Lake"
+     ],
+     "answerIndex": 3,
+     "why": "Chilika is a lagoon; the reefs are in Mannar, Kachchh, Lakshadweep and the Andamans."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NOAA's coral pages and Coral Reef Watch's 2024 announcement, and NCERT for India's reef areas. Photos are NOAA's, from Florida. Moving facts: the global bleaching event may be updated by NOAA."
+   }
+  },
+  {
+   "n": 210,
+   "id": "terraces-stop-soil-erosion",
+   "title": "How Terraces Stop Soil Running Away",
+   "durationSec": 62.6,
+   "mp4": "210-terraces-stop-soil-erosion.mp4",
+   "vtt": "210-terraces-stop-soil-erosion.vtt",
+   "poster": "210-terraces-stop-soil-erosion.jpg",
+   "mp4Social": "210-terraces-stop-soil-erosion.social.mp4",
+   "syllabusNodes": [
+    "gs3-6"
+   ],
+   "gsPaper": [
+    "mains-gs3"
+   ],
+   "format": "explainer-calm",
+   "tone": "NEUTRAL",
+   "sources": [
+    "NCERT Class 10, Contemporary India II, ch. 1 (Resources and Development): soil erosion by running water and wind; gullies and ravines (Chambal basin); contour ploughing, terrace cultivation in the western and central Himalayas, strip cropping, shelter belts",
+    "NCERT Class 8, Resources and Development, ch. 2: methods of soil conservation; terrace farming on steep slopes"
+   ],
+   "quiz": [
+    {
+     "id": "terraces-stop-soil-erosion-q1",
+     "q": "How do terraces slow soil erosion?",
+     "options": [
+      "They add new soil every year",
+      "Flat steps slow the water so it soaks in",
+      "They keep rain off the slope",
+      "They make the slope steeper"
+     ],
+     "answerIndex": 1,
+     "why": "On each flat step, water slows, sinks in, and leaves the soil in place."
+    },
+    {
+     "id": "terraces-stop-soil-erosion-q2",
+     "q": "What is contour ploughing?",
+     "options": [
+      "Ploughing straight down the slope",
+      "Ploughing only at night",
+      "Ploughing along the slope's contour lines",
+      "Ploughing with tractors only"
+     ],
+     "answerIndex": 2,
+     "why": "Furrows across the slope catch the water."
+    },
+    {
+     "id": "terraces-stop-soil-erosion-q3",
+     "q": "Shelter belts mainly protect against…",
+     "options": [
+      "Erosion by wind",
+      "Floods",
+      "Earthquakes",
+      "Frost"
+     ],
+     "answerIndex": 0,
+     "why": "Rows of trees break the wind."
+    }
+   ],
+   "free": true,
+   "review": {
+    "status": "approved",
+    "checkedBy": "Aspiran (owner publish)",
+    "checkedOn": "2026-11-26",
+    "note": "Facts were read against NCERT Class 8 and Class 10 chapters on resources. Terrace photos are from the Philippines and Bali, said as 'across Asia'. Moving facts: none."
    }
   }
  ]
