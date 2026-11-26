@@ -1,0 +1,149 @@
+{
+ "n": 291,
+ "id": "kailasa-at-ellora",
+ "title": "Kailasa at Ellora: Carved From the Top Down",
+ "format": "photo",
+ "syllabusNodes": [
+  "gs1-1"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Vyacheslav Argenberg (CC BY 4.0); K.Venkataramana (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/291/Ellora-Caves-India-Majestic-Kailasa-Temple.jpg",
+   "kb": "in",
+   "say": "This temple was never built. It was cut out of a hillside, from the top down."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Carved, not built",
+    "items": [
+     "Start at the top of the rock",
+     "Cut away the hill around it",
+     "Keep working downward",
+     "What remains is the temple"
+    ]
+   },
+   "say": "Carvers started at the top of the rock and dug downward, removing the hill until only the temple was left. It is a single piece of stone, the largest monolithic temple at Ellora."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Ellora: 34 caves",
+    "items": [
+     "Caves 1–12: Buddhist",
+     "Caves 13–29: Hindu, incl. Kailasa (cave 16)",
+     "Caves 30–34: Jain"
+    ]
+   },
+   "say": "Kailasa is cave sixteen of thirty-four at Ellora, in Maharashtra. Buddhist, Hindu and Jain caves sit side by side, which UNESCO reads as a sign of tolerance.",
+   "numbers": [
+    {
+     "text": "34",
+     "sub": "caves at Ellora",
+     "word": "thirty-four"
+    }
+   ]
+  },
+  {
+   "src": "../raw/291/Cave-16---Inside-view-Ellora-Caves.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "The temple is covered in sculpture. One famous panel shows Ravana trying to lift Mount Kailasa, the home of Shiva."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Who made it",
+    "items": [
+     {
+      "year": "8th century",
+      "text": "work generally credited to Rashtrakuta king Krishna I"
+     },
+     {
+      "year": "Later",
+      "text": "later Rashtrakuta rulers add to it"
+     },
+     {
+      "year": "1983",
+      "text": "Ellora becomes a World Heritage Site"
+     }
+    ]
+   },
+   "say": "Most of the work is generally credited to the Rashtrakuta king Krishna the First, in the eighth century, though no inscription on the temple itself says so."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "32.6 m",
+    "below": "from the courtyard floor to the top of the shrine"
+   },
+   "say": "The top of the shrine rises thirty-two point six metres above the courtyard, all of it carved from one rock.",
+   "numbers": [
+    {
+     "text": "32.6 m",
+     "sub": "court to shrine top",
+     "word": "thirty-two point six",
+     "count": true
+    }
+   ]
+  },
+  {
+   "src": "../raw/291/Ellora-Caves-India-Majestic-Kailasa-Temple.jpg",
+   "kb": "out",
+   "say": "For GS One, remember: Ellora, cave sixteen, the Rashtrakutas, and a temple carved from the top down."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "UNESCO World Heritage Centre, Ellora Caves (whc.unesco.org/en/list/243): 34 caves in the Charanandri hills, Maharashtra; Buddhist caves 1–12, Brahmanical caves 13–29 including Kailasa (cave 16), Jaina caves 30–34; Cave 16 the largest monolithic temple; Ravana lifting Mount Kailasa panel; spirit of tolerance; uninterrupted sequence AD 600–1000; inscribed 1983",
+  "Wikipedia, 'Kailasa temple, Ellora' (read): vertical excavation, carvers started at the top of the rock and excavated downward; no dedicatory inscription; generally attributed to the Rashtrakuta king Krishna I (8th century), attribution not completely certain; later Rashtrakuta rulers may have extended it; top of the structure over the sanctuary 32.6 m above the court"
+ ],
+ "quiz": [
+  {
+   "q": "Which dynasty is the Kailasa temple at Ellora generally credited to?",
+   "options": [
+    "Chola",
+    "Rashtrakuta",
+    "Pallava",
+    "Chalukya of Kalyani"
+   ],
+   "answerIndex": 1,
+   "why": "Generally attributed to the Rashtrakuta king Krishna I."
+  },
+  {
+   "q": "Which cave number is the Kailasa temple?",
+   "options": [
+    "Cave 10",
+    "Cave 32",
+    "Cave 16",
+    "Cave 1"
+   ],
+   "answerIndex": 2,
+   "why": "UNESCO: Kailasa is cave 16, in the Brahmanical group (13–29)."
+  },
+  {
+   "q": "Ellora's caves belong to which traditions?",
+   "options": [
+    "Buddhist, Hindu and Jain",
+    "Only Hindu",
+    "Only Buddhist",
+    "Hindu and Sikh"
+   ],
+   "answerIndex": 0,
+   "why": "Buddhist 1–12, Brahmanical 13–29, Jaina 30–34."
+  }
+ ],
+ "reviewNote": "Site facts are from UNESCO; the construction method, the Krishna I attribution and the 32.6 m height are from Wikipedia (the attribution is itself hedged there, and the script keeps the hedge). Check against ASI's Ellora page before approval. UNESCO calls Kailasa 'the largest monolithic temple' without saying 'at Ellora'; the script says 'at Ellora' to stay safe. Moving facts: none."
+}

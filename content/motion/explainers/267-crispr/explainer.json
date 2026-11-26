@@ -1,0 +1,138 @@
+{
+ "n": 267,
+ "id": "crispr",
+ "title": "CRISPR: Editing Genes",
+ "format": "fast",
+ "syllabusNodes": [
+  "pre-7"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NIH Image Gallery (public domain); PantheraLeo1359531 (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/267/DNA-Double-Helix-20468181866-.jpg",
+   "kb": "in",
+   "say": "Biology's most talked-about tool of this century was borrowed from bacteria."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How bacteria do it",
+    "items": [
+     "A virus attacks",
+     "Bacteria keep a piece of its DNA",
+     "They make RNA that matches it",
+     "Cas9 cuts the virus DNA"
+    ]
+   },
+   "say": "When a virus attacks, some bacteria save a piece of its DNA. If it returns, they make RNA that matches it, and an enzyme called Cas9 cuts the virus apart."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "In the lab",
+    "items": [
+     "Scientists write a guide RNA",
+     "It leads Cas9 to one spot",
+     "Cas9 cuts the DNA there",
+     "The cell repairs: add, delete or replace"
+    ]
+   },
+   "say": "Scientists copied the trick. They write a guide RNA for the gene they want, Cas9 cuts there, and the cell's own repair system adds, deletes or replaces DNA."
+  },
+  {
+   "src": "../raw/267/DNA-Helix-Rendering-20220603.png",
+   "kb": "pan",
+   "say": "That makes CRISPR simpler, faster and cheaper than older gene-editing methods, and more precise."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "In trials for",
+    "items": [
+     "Sickle cell disease",
+     "Haemophilia",
+     "Cystic fibrosis"
+    ]
+   },
+   "say": "It is being tested against inherited diseases such as sickle cell disease, haemophilia and cystic fibrosis. Sickle cell is a big concern in parts of India."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two kinds of edit",
+    "left": {
+     "title": "Somatic",
+     "items": [
+      "body cells",
+      "affects one person"
+     ]
+    },
+    "right": {
+     "title": "Germline",
+     "items": [
+      "eggs, sperm, embryos",
+      "passed to children",
+      "raises ethical questions"
+     ]
+    }
+   },
+   "say": "Most work edits ordinary body cells, which affects only that person. Editing eggs, sperm or embryos would pass changes to future generations, and that raises hard ethical questions."
+  },
+  {
+   "src": "../raw/267/DNA-Double-Helix-20468181866-.jpg",
+   "kb": "out",
+   "say": "For Prelims and GS Three, remember the pair: the guide RNA finds the spot, and Cas9 cuts it."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "MedlinePlus Genetics (US National Library of Medicine), 'What are genome editing and CRISPR-Cas9?': adapted from a bacterial defence; bacteria store virus DNA in CRISPR arrays, make matching RNA, and Cas9 cuts the virus DNA; researchers make a guide RNA plus Cas9 to cut a target, and the cell's repair machinery adds, deletes or replaces DNA; faster, cheaper, more accurate and more efficient than other methods; studied for cystic fibrosis, haemophilia and sickle cell disease; most changes are in somatic cells; germline editing raises ethical concerns",
+  "NHGRI, genome editing page: CRISPR is simpler, faster and cheaper than earlier methods"
+ ],
+ "quiz": [
+  {
+   "q": "In CRISPR-Cas9, what does Cas9 do?",
+   "options": [
+    "Finds the target by itself",
+    "Copies the DNA",
+    "Cuts the DNA at the target",
+    "Repairs the cut"
+   ],
+   "answerIndex": 2,
+   "why": "The guide RNA finds the spot; Cas9 cuts; the cell repairs."
+  },
+  {
+   "q": "Where did the CRISPR idea come from?",
+   "options": [
+    "A defence system in bacteria",
+    "Plant photosynthesis",
+    "Human antibodies",
+    "Viral reproduction"
+   ],
+   "answerIndex": 0,
+   "why": "It is adapted from how bacteria fight viruses."
+  },
+  {
+   "q": "Why does germline editing raise ethical concerns?",
+   "options": [
+    "It is slower than somatic editing",
+    "It only works in bacteria",
+    "It costs more",
+    "Its changes can pass to future generations"
+   ],
+   "answerIndex": 3,
+   "why": "Edits to eggs, sperm or embryos are inherited."
+  }
+ ],
+ "reviewNote": "Facts were read against MedlinePlus Genetics and NHGRI. 'Sickle cell is a big concern in parts of India' is general knowledge, not from those sources; cut it or add a source (for example the National Sickle Cell Anaemia Elimination Mission on PIB) before approval. Moving facts: approved CRISPR therapies are changing; none is named."
+}

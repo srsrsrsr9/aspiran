@@ -1,0 +1,161 @@
+{
+ "voice": "auto",
+ "n": 225,
+ "id": "green-hydrogen",
+ "title": "Green Hydrogen",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Picture: NASA Earth Observatory (public domain)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Hydrogen has colours",
+    "items": [
+     "Grey: made from natural gas",
+     "Blue: gas, with the carbon captured",
+     "Green: made from water, with clean power"
+    ]
+   },
+   "say": "Hydrogen is invisible, but people give it colours. Grey, made from natural gas. Blue, with the carbon caught. And green."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How green hydrogen is made",
+    "items": [
+     "Sun or wind makes electricity",
+     "Electricity splits water",
+     "Hydrogen and oxygen come out",
+     "No carbon dioxide"
+    ]
+   },
+   "say": "Green hydrogen is made by passing electricity from the sun or the wind through water, in a machine called an electrolyser. Out come hydrogen and oxygen, and no carbon dioxide."
+  },
+  {
+   "src": "../raw/225/Floating-Solar-in-Madhya-Pradesh-154067---50130-lrg-.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "So it needs lots of cheap clean power, like this floating solar farm on a reservoir in Madhya Pradesh."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Where it helps",
+    "items": [
+     "Fertiliser (ammonia)",
+     "Oil refining",
+     "Steel without coal",
+     "Heavy trucks and ships"
+    ]
+   },
+   "say": "Where is it useful? In places electricity alone can't easily reach: fertiliser, refineries, steel making, and heavy transport."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "National Green Hydrogen Mission",
+    "items": [
+     "Approved January 2023",
+     "Target: 5 million tonnes a year by 2030",
+     "Outlay ₹19,744 crore"
+    ]
+   },
+   "say": "India's National Green Hydrogen Mission, approved in January twenty twenty-three, aims to make five million tonnes a year by twenty thirty.",
+   "numbers": [
+    {
+     "text": "5 MMT",
+     "sub": "a year by 2030",
+     "word": "five"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "The hard part",
+    "left": {
+     "title": "Today",
+     "items": [
+      "Electrolysers are costly",
+      "Green costs more than grey"
+     ]
+    },
+    "right": {
+     "title": "The aim",
+     "items": [
+      "Cheaper solar and machines",
+      "Make it in India"
+     ]
+    }
+   },
+   "say": "The hard part is cost. Green hydrogen still costs more than grey, so the mission backs cheaper electrolysers and clean power."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Water + clean power → hydrogen",
+     "Cuts emissions in hard sectors",
+     "Mission target: 5 MMT by 2030"
+    ]
+   },
+   "say": "For GS Three: green hydrogen is hydrogen from water and clean power, and it matters most for industries that are hard to clean up."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "PIB, 4 January 2023: Union Cabinet approves the National Green Hydrogen Mission, initial outlay ₹19,744 crore; at least 5 MMT per annum green hydrogen production capacity by 2030",
+  "Ministry of New and Renewable Energy, National Green Hydrogen Mission document (2023): definitions, uses in fertilisers, refineries, steel and mobility; SIGHT programme for electrolysers",
+  "IEA, Global Hydrogen Review: hydrogen production routes; electrolysis using renewable electricity; cost gap with gas-based hydrogen",
+  "NASA Earth Observatory, 'Floating Solar in Madhya Pradesh': the picture"
+ ],
+ "quiz": [
+  {
+   "q": "How is green hydrogen made?",
+   "options": [
+    "From coal",
+    "From natural gas without capture",
+    "By splitting water with renewable electricity",
+    "From crude oil"
+   ],
+   "answerIndex": 2,
+   "why": "Electrolysis powered by sun or wind."
+  },
+  {
+   "q": "What is the Mission's 2030 production target?",
+   "options": [
+    "5 million tonnes a year",
+    "50 million tonnes a year",
+    "500 tonnes a year",
+    "1 million tonnes in total"
+   ],
+   "answerIndex": 0,
+   "why": "At least 5 MMT a year by 2030."
+  },
+  {
+   "q": "Which use is NOT typically named for green hydrogen?",
+   "options": [
+    "Fertiliser",
+    "Steel making",
+    "Charging mobile phones at home",
+    "Oil refining"
+   ],
+   "answerIndex": 2,
+   "why": "It matters for heavy industry and transport."
+  }
+ ],
+ "reviewNote": "Facts were read against the PIB Cabinet release of 4 January 2023 and MNRE's mission document. Moving facts: production and cost figures change; targets as approved in 2023."
+}

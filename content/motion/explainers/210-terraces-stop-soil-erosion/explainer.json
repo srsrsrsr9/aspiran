@@ -1,0 +1,140 @@
+{
+ "voice": "auto",
+ "n": 210,
+ "id": "terraces-stop-soil-erosion",
+ "title": "How Terraces Stop Soil Running Away",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-6"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Magalhães (public domain); Vyacheslav Argenberg (CC BY 4.0); Wilfredor (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/210/Rice-Terraces-Banaue.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "Pour a bucket of water down a hill, and it races down, taking soil with it. Now cut the hill into steps."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "On a bare slope",
+    "items": [
+     "Rain falls",
+     "Water runs off fast",
+     "It carries the topsoil away",
+     "Fields lose their richest layer"
+    ]
+   },
+   "say": "On a steep slope, rain runs off fast. It carries away the topsoil, the thin, rich layer that crops need most. A few centimetres can take centuries to form."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "On terraces",
+    "items": [
+     "Each step is flat",
+     "Water slows and sinks in",
+     "Soil stays in place",
+     "Crops get more water"
+    ]
+   },
+   "say": "Terraces turn the slope into a staircase of flat fields. On each step, water slows down and soaks in, and the soil stays where it is."
+  },
+  {
+   "src": "../raw/210/Rice-terraces-Rice-fields-Tirta-Gangga-Bali.jpg",
+   "kb": "in",
+   "say": "Farmers in hills across Asia have built terraces for centuries. In India they're common in the western and central Himalayas."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Other ways to hold soil",
+    "items": [
+     "Contour ploughing: furrows across the slope",
+     "Strip cropping: grass between crop strips",
+     "Shelter belts: rows of trees against wind"
+    ]
+   },
+   "say": "There are cousins of the same idea. Ploughing across the slope, along the contour lines. Strips of grass between crops. And rows of trees that break the wind."
+  },
+  {
+   "src": "../raw/210/onal-cracks-in-drought-dried-soil-near-La-Guardia-Margarita-Island-Venezuela.jpg",
+   "kb": "in",
+   "say": "Without such care, land is lost to gullies and ravines, like those of the Chambal valley."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "For your answer",
+    "left": {
+     "title": "Cause",
+     "items": [
+      "Running water",
+      "Wind",
+      "Steep slopes, bare soil"
+     ]
+    },
+    "right": {
+     "title": "Fix",
+     "items": [
+      "Terraces",
+      "Contour ploughing",
+      "Strip cropping, shelter belts"
+     ]
+    }
+   },
+   "say": "For GS Three: name the agent of erosion, then match it with the fix. Terraces for slopes, shelter belts for wind."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 10, Contemporary India II, ch. 1 (Resources and Development): soil erosion by running water and wind; gullies and ravines (Chambal basin); contour ploughing, terrace cultivation in the western and central Himalayas, strip cropping, shelter belts",
+  "NCERT Class 8, Resources and Development, ch. 2: methods of soil conservation; terrace farming on steep slopes"
+ ],
+ "quiz": [
+  {
+   "q": "How do terraces slow soil erosion?",
+   "options": [
+    "They add new soil every year",
+    "Flat steps slow the water so it soaks in",
+    "They keep rain off the slope",
+    "They make the slope steeper"
+   ],
+   "answerIndex": 1,
+   "why": "On each flat step, water slows, sinks in, and leaves the soil in place."
+  },
+  {
+   "q": "What is contour ploughing?",
+   "options": [
+    "Ploughing straight down the slope",
+    "Ploughing only at night",
+    "Ploughing along the slope's contour lines",
+    "Ploughing with tractors only"
+   ],
+   "answerIndex": 2,
+   "why": "Furrows across the slope catch the water."
+  },
+  {
+   "q": "Shelter belts mainly protect against…",
+   "options": [
+    "Erosion by wind",
+    "Floods",
+    "Earthquakes",
+    "Frost"
+   ],
+   "answerIndex": 0,
+   "why": "Rows of trees break the wind."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT Class 8 and Class 10 chapters on resources. Terrace photos are from the Philippines and Bali, said as 'across Asia'. Moving facts: none."
+}

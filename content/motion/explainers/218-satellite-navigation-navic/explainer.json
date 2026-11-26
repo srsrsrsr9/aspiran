@@ -1,0 +1,149 @@
+{
+ "voice": "auto",
+ "n": 218,
+ "id": "satellite-navigation-navic",
+ "title": "How Satellite Navigation Works, and NavIC",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 5,
+  "line": "Picture: 4-RAZOR 01 (CC0)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Your phone knows where you are",
+    "items": [
+     "No map signal",
+     "Just time signals from space"
+    ]
+   },
+   "say": "Your phone finds you to within a few metres. It does it by listening to clocks in space."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How it works",
+    "items": [
+     "Each satellite broadcasts its time and position",
+     "Your phone notes when each signal arrives",
+     "Delay × speed of light = distance",
+     "Distances from several satellites fix your spot"
+    ]
+   },
+   "say": "Each satellite keeps broadcasting the exact time and where it is. Your phone sees how late each signal arrives. The delay, times the speed of light, gives the distance."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "title": "Why four satellites?",
+    "value": 1.0,
+    "big": "4",
+    "below": "three for position, one to correct your phone's clock"
+   },
+   "say": "Three distances pin down your position. A fourth fixes the error in your phone's own clock, which is far less precise than the atomic clocks up there."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two kinds of system",
+    "left": {
+     "title": "Global",
+     "items": [
+      "GPS (USA)",
+      "GLONASS, Galileo, BeiDou"
+     ]
+    },
+    "right": {
+     "title": "Regional",
+     "items": [
+      "NavIC (India)",
+      "Covers India and around it"
+     ]
+    }
+   },
+   "say": "America has GPS. Russia, Europe and China have their own global systems. India built a regional one: NavIC."
+  },
+  {
+   "src": "../raw/218/IRNSSMODEL-NSPD24-TVM.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "NavIC was designed around seven satellites, high above India. It covers the country and about one thousand five hundred kilometres beyond."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why have our own?",
+    "items": [
+     "Not depending on another country in a crisis",
+     "Accuracy better than 20 metres",
+     "Used in fishing boats, trucks, phones"
+    ]
+   },
+   "say": "Why bother, when GPS is free? Because another country controls GPS, and can limit it in a crisis. With NavIC, India holds the switch."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "Position from time delays",
+     "Four satellites: 3 for place, 1 for clock",
+     "NavIC: India's regional system"
+    ]
+   },
+   "say": "For GS Three: navigation is timing; four satellites fix a point; NavIC gives India its own, strategic, signal."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO, NavIC (IRNSS) page: regional navigation system covering India and about 1,500 km beyond its boundary; designed with seven satellites (three geostationary, four geosynchronous); position accuracy better than 20 m",
+  "US government, GPS.gov 'How GPS works': receivers use the time signals of at least four satellites to work out position and correct the receiver clock",
+  "ISRO, NVS-01 launch (May 2023): second-generation NavIC satellite with an indigenous atomic clock"
+ ],
+ "quiz": [
+  {
+   "q": "How does a phone work out its distance to a satellite?",
+   "options": [
+    "From the signal's colour",
+    "From how late the time signal arrives",
+    "From the satellite's size",
+    "From the Moon's position"
+   ],
+   "answerIndex": 1,
+   "why": "Delay times the speed of light gives the distance."
+  },
+  {
+   "q": "Why is a fourth satellite needed?",
+   "options": [
+    "To correct the receiver's clock error",
+    "To send music",
+    "To light the night",
+    "It isn't needed"
+   ],
+   "answerIndex": 0,
+   "why": "Three fix the position; the fourth corrects the phone's clock."
+  },
+  {
+   "q": "What is NavIC?",
+   "options": [
+    "A global system like GPS",
+    "India's regional navigation system",
+    "A weather satellite",
+    "A rocket"
+   ],
+   "answerIndex": 1,
+   "why": "NavIC covers India and about 1,500 km around it."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's NavIC page and GPS.gov. Diagrams are schematic, no map. Moving facts: the number of working NavIC satellites changes as old ones fail and new ones launch; the script says 'designed around seven'."
+}

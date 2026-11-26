@@ -1,0 +1,150 @@
+{
+ "n": 259,
+ "id": "urban-heat-islands",
+ "title": "Urban Heat Islands",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-6"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Sawarijoshi (CC BY 4.0); NASA (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/259/Aerial-view-of-Mumbai-Central-skyline.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "say": "Myth: a city is hot only because of the weather. Fact: the city itself makes some of that heat."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Same day, two places",
+    "left": {
+     "title": "City centre",
+     "items": [
+      "concrete, asphalt, roofs",
+      "few trees"
+     ]
+    },
+    "right": {
+     "title": "Countryside",
+     "items": [
+      "fields and trees",
+      "ponds and lakes"
+     ]
+    }
+   },
+   "say": "On the same day, a city centre is often warmer than the fields around it. That warm patch is called an urban heat island."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Why cities run hot",
+    "items": [
+     "Roads and roofs soak up sunlight",
+     "They give off heat after sunset",
+     "Few trees to shade and cool",
+     "Vehicles and air conditioners add waste heat"
+    ]
+   },
+   "say": "Roads and roofs absorb more of the Sun's heat than trees and soil do, and give it off after sunset. Vehicles and air conditioners add even more."
+  },
+  {
+   "src": "../raw/259/Mumbai-aerial-view-satellite-image-India-March-2004.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Trees and lakes do the opposite. They give shade, and cool the air as water evaporates from leaves and ponds."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Warmer than outlying areas (US studies)",
+    "items": [
+     {
+      "label": "Day",
+      "value": 7,
+      "show": "1–7°F"
+     },
+     {
+      "label": "Night",
+      "value": 5,
+      "show": "2–5°F",
+      "hi": true
+     }
+    ]
+   },
+   "say": "In American studies, cities ran up to about seven degrees Fahrenheit warmer by day, and up to five at night. Warmer nights give the body less relief."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Cooling a city",
+    "items": [
+     "Plant trees",
+     "Green roofs",
+     "Cool, light-coloured roofs",
+     "Cool pavements"
+    ]
+   },
+   "say": "The fixes are simple to name: more trees, green roofs or light-coloured roofs, and pavements that reflect sunlight instead of storing it."
+  },
+  {
+   "src": "../raw/259/Aerial-view-of-Mumbai-Central-skyline.jpg",
+   "kb": "out",
+   "say": "For GS One, link this to urbanisation: how we build a city changes its climate. Quote one cause and one fix."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "US EPA, 'Learn About Heat Islands': urban areas about 1–7°F warmer by day and 2–5°F warmer at night than outlying areas (US studies); pavements and roofing absorb and emit more of the Sun's heat; trees, vegetation and water bodies cool through shade, transpiration and evaporation; human-generated waste heat adds to it",
+  "US EPA Heat Island Reduction Solutions pages: trees and vegetation, green roofs, cool roofs, cool pavements"
+ ],
+ "quiz": [
+  {
+   "q": "What is an urban heat island?",
+   "options": [
+    "An island city in the sea",
+    "A city area warmer than its surroundings",
+    "A desert oasis",
+    "A volcanic island"
+   ],
+   "answerIndex": 1,
+   "why": "Cities are often warmer than the countryside around them."
+  },
+  {
+   "q": "Which of these cools a city?",
+   "options": [
+    "Dark asphalt",
+    "More air conditioners",
+    "Trees and water bodies",
+    "More traffic"
+   ],
+   "answerIndex": 2,
+   "why": "Trees and water cool the air by shade, transpiration and evaporation."
+  },
+  {
+   "q": "Which of these is a cause of heat islands?",
+   "options": [
+    "Roads and roofs storing the Sun's heat",
+    "Too many trees",
+    "High humidity in villages",
+    "Snow cover"
+   ],
+   "answerIndex": 0,
+   "why": "Built surfaces absorb more heat and release it after sunset."
+  }
+ ],
+ "reviewNote": "Facts were read against the US EPA heat island pages. The temperature figures are from US studies and are labelled that way on screen; no Indian city figure is claimed. The bars diagram uses the top of each range. Moving facts: none known."
+}

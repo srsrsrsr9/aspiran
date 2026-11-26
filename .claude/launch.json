@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "website-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--prefix", "/Users/srinivasvedantam/Documents/aspiran-web", "astro", "dev", "--root", "/Users/srinivasvedantam/Documents/aspiran-web", "--port", "4330"],
+      "port": 4330
+    },
+    {
       "name": "website",
       "runtimeExecutable": "npx",
       "runtimeArgs": [
@@ -53,6 +59,27 @@
         "AUTH_MODE:dev"
       ],
       "port": 8797
+    },
+    {
+      "name": "inst-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/srinivasvedantam/Documents/app/server",
+        "wrangler",
+        "dev",
+        "--config",
+        "/Users/srinivasvedantam/Documents/app/server/wrangler.jsonc",
+        "--port",
+        "8795",
+        "--persist-to",
+        "/private/tmp/claude-501/-Users-srinivasvedantam--claude-spares-spare-MWlRnj/0d9a868c-842a-4124-9033-638780231f39/scratchpad/inst-db",
+        "--var",
+        "AUTH_MODE:dev",
+        "--var",
+        "EDITOR_TOKEN:dev-editor-token"
+      ],
+      "port": 8795
     }
   ]
 }

@@ -1,0 +1,146 @@
+{
+ "n": 252,
+ "id": "ocean-currents",
+ "title": "Ocean Currents in 60 Seconds",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: NASA Scientific Visualization Studio (public domain); Ocean Observatories Initiative (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/252/Perpetual-ocean2-CLOSE-093-clean-noDate-2160p60-FULL-001.webm",
+   "t": 3.0,
+   "crop": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "say": "Why are some desert coasts foggy, while western Europe stays mild in winter? The answer is rivers inside the sea."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What drives a current",
+    "items": [
+     "Heat from the Sun",
+     "Wind",
+     "Gravity",
+     "Coriolis force"
+    ]
+   },
+   "say": "Ocean currents are huge flows of water moving in a definite direction. They are set going by the Sun's heat, the wind, gravity and the Coriolis force."
+  },
+  {
+   "src": "../raw/252/Irminger-waves-without-sound-OOI-.webm",
+   "t": 2.0,
+   "fit": "blur",
+   "say": "Waves are different. In a wave the water mostly stays put, and only the wave moves on. In a current, the water itself travels."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The Coriolis turn",
+    "items": [
+     "Earth spins",
+     "Northern hemisphere: water turns right",
+     "Southern hemisphere: water turns left",
+     "Big loops form in every ocean basin"
+    ]
+   },
+   "say": "Because the Earth spins, moving water turns right in the northern hemisphere and left in the southern. That bends currents into giant loops in every ocean."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Warm and cold",
+    "left": {
+     "title": "Warm currents",
+     "items": [
+      "from the equator",
+      "east coasts, low and middle latitudes"
+     ]
+    },
+    "right": {
+     "title": "Cold currents",
+     "items": [
+      "from the poles",
+      "west coasts, low and middle latitudes"
+     ]
+    }
+   },
+   "say": "Warm currents carry tropical water towards the poles. Cold currents bring polar water towards the equator, often along the west coasts of continents, where they bring fog but little rain."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 0.1,
+    "big": "10%",
+    "below": "of ocean water is in surface currents"
+   },
+   "say": "Surface currents hold only about a tenth of the ocean's water. The other nine-tenths moves slowly in the deep."
+  },
+  {
+   "src": "../raw/252/Perpetual-ocean2-CLOSE-093-clean-noDate-2160p60-FULL-001.webm",
+   "t": 12.0,
+   "kb": "out",
+   "crop": [
+    0.5,
+    0.5,
+    1.0
+   ],
+   "say": "Where warm and cold currents meet, the water mixes, and you find the world's best fishing grounds. Remember that link for GS One."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 13 (Movements of Ocean Water): definition of currents vs waves; primary forces (solar heating, wind, gravity, Coriolis); Coriolis turns water right in the north, left in the south, making large circular currents; surface currents about 10% of ocean water, deep currents 90%; cold currents on west coasts and warm on east coasts in low and middle latitudes; west coasts bordered by cool water have fog but are arid; west coasts in middle and higher latitudes bordered by warm water have a marine climate; best fishing grounds in mixing zones",
+  "NOAA Ocean Service, 'What is the global ocean conveyor belt?': deep circulation driven by temperature and salinity"
+ ],
+ "quiz": [
+  {
+   "q": "In the northern hemisphere, the Coriolis force turns moving water to the…",
+   "options": [
+    "Left",
+    "Right",
+    "Straight down",
+    "It has no effect"
+   ],
+   "answerIndex": 1,
+   "why": "Right in the northern hemisphere, left in the southern."
+  },
+  {
+   "q": "About what share of ocean water moves in surface currents?",
+   "options": [
+    "About 10%",
+    "About 50%",
+    "About 75%",
+    "About 90%"
+   ],
+   "answerIndex": 0,
+   "why": "Surface currents hold about a tenth; deep currents hold the other nine-tenths."
+  },
+  {
+   "q": "Where are the world's best fishing grounds usually found?",
+   "options": [
+    "In the middle of warm currents",
+    "Under sea ice",
+    "Where warm and cold currents mix",
+    "Near volcanic islands only"
+   ],
+   "answerIndex": 2,
+   "why": "The video ends on the mixing zones of warm and cold currents."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT Class 11 Fundamentals of Physical Geography ch. 13 and NOAA Ocean Service's conveyor-belt page. The NASA flow visualisation shows coastlines but no national borders; crop to open ocean and check before publishing. Moving facts: none known."
+}

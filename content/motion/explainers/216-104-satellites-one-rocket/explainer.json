@@ -1,0 +1,153 @@
+{
+ "voice": "auto",
+ "n": 216,
+ "id": "104-satellites-one-rocket",
+ "title": "104 Satellites on One Rocket",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 5,
+  "line": "Picture: ISRO (CC BY 3.0)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "ring",
+    "title": "One rocket",
+    "value": 1.0,
+    "big": "104",
+    "below": "satellites, one launch"
+   },
+   "say": "One rocket. A hundred and four satellites. In February twenty seventeen, ISRO set a world record."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "PSLV-C37",
+    "items": [
+     {
+      "year": "15 Feb 2017",
+      "text": "Lift-off from Sriharikota"
+     },
+     {
+      "year": "~30 min",
+      "text": "All 104 released in orbit"
+     }
+    ]
+   },
+   "say": "On the fifteenth of February, twenty seventeen, the PSLV-C37 lifted off from Sriharikota. Within about half an hour, all one hundred and four satellites were in orbit."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Whose satellites?",
+    "items": [
+     {
+      "label": "Indian",
+      "value": 3,
+      "show": "3"
+     },
+     {
+      "label": "Foreign, from 6 countries",
+      "value": 101,
+      "show": "101",
+      "hi": true
+     }
+    ]
+   },
+   "say": "Only three were Indian. A hundred and one belonged to six other countries, most of them small nano-satellites from the United States."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How not to crash them",
+    "items": [
+     "Satellites released one after another",
+     "Set apart in time and direction",
+     "Each drifts away safely"
+    ]
+   },
+   "say": "The hard part was letting them go without collisions. They were released one by one, in a careful order, at slightly different angles."
+  },
+  {
+   "src": "../raw/216/PSLV-XL-C57-Aditya-L1-ISRO-2.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "The PSLV, seen here on a later flight, had already earned a name as ISRO's reliable workhorse. This launch also showed India could sell space rides."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why it mattered",
+    "items": [
+     "A world record at the time",
+     "Commercial launches for other countries",
+     "Small satellites, sent cheaply"
+    ]
+   },
+   "say": "The record stood for nearly four years. More importantly, it put India on the map of commercial launches."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "PSLV-C37, 15 February 2017",
+     "104 satellites, 101 foreign",
+     "Main payload: Cartosat-2 series"
+    ]
+   },
+   "say": "For GS Three: PSLV-C37, a hundred and four satellites, and the main passenger, a Cartosat-2 series Earth-observation satellite."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO, PSLV-C37 mission page and press release, 15 February 2017: 104 satellites launched in a single flight; Cartosat-2 series satellite was the primary payload; two Indian nano-satellites; 101 international customer satellites from six countries (USA, Netherlands, Switzerland, Israel, Kazakhstan, UAE)",
+  "PIB, 15 February 2017: world record for the number of satellites launched in a single mission",
+  "SpaceX Transporter-1 (24 January 2021) launched 143 satellites, surpassing the record"
+ ],
+ "quiz": [
+  {
+   "q": "How many satellites did PSLV-C37 launch?",
+   "options": [
+    "10",
+    "24",
+    "104",
+    "143"
+   ],
+   "answerIndex": 2,
+   "why": "104 satellites, on 15 February 2017."
+  },
+  {
+   "q": "How many of them were foreign?",
+   "options": [
+    "101",
+    "3",
+    "50",
+    "None"
+   ],
+   "answerIndex": 0,
+   "why": "101 belonged to six other countries."
+  },
+  {
+   "q": "What was the main payload?",
+   "options": [
+    "Chandrayaan-2",
+    "A Cartosat-2 series satellite",
+    "Aditya-L1",
+    "NavIC"
+   ],
+   "answerIndex": 1,
+   "why": "The primary passenger was a Cartosat-2 series Earth-observation satellite."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's PSLV-C37 page and the PIB release. The only photo is of a later PSLV flight and is described as such. Moving facts: the record was broken in 2021, said as 'stood for nearly four years'."
+}

@@ -1,0 +1,147 @@
+{
+ "voice": "auto",
+ "n": 220,
+ "id": "why-chips-matter",
+ "title": "Why Chips Matter: Semiconductors",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Rob Bulmahn (CC BY 2.0); Purdue Engineering (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/220/5C2A5953R---49913961083-Silicon-Wafer-20200519.jpg",
+   "kb": "in",
+   "say": "Your phone, a car, a satellite, a power grid. All of them run on chips no bigger than a fingernail."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "A chip",
+    "items": [
+     "Made on a thin disc of pure silicon",
+     "Billions of tiny switches: transistors",
+     "Each switch: on or off, one or zero"
+    ]
+   },
+   "say": "A chip is built on a thin disc of very pure silicon. On it are billions of tiny switches, called transistors. Each one is on or off: a one or a zero."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Three steps",
+    "items": [
+     "Design the chip",
+     "Fabricate it in a 'fab'",
+     "Assemble, test and package it"
+    ]
+   },
+   "say": "Making chips has three steps. Design. Fabrication, in a factory called a fab. Then assembly, testing and packaging."
+  },
+  {
+   "src": "../raw/220/A-semiconductor-wafer-being-removed-from-processing-equipment.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Fabs are among the most expensive factories on Earth. The air must be cleaner than an operating theatre, and the machines cost a fortune."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why it is strategic",
+    "items": [
+     "A few places make most advanced chips",
+     "A shortage can stop car factories",
+     "Defence and space depend on them"
+    ]
+   },
+   "say": "Only a few places make the most advanced chips. When supply broke during the pandemic, car factories around the world stopped."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "India's push",
+    "items": [
+     {
+      "year": "Dec 2021",
+      "text": "India Semiconductor Mission, ₹76,000 crore"
+     },
+     {
+      "year": "2023–24",
+      "text": "First assembly and fab projects approved"
+     }
+    ]
+   },
+   "say": "In December twenty twenty-one, India approved a seventy-six thousand crore rupee programme for chips and displays. Assembly plants and India's first big fab followed.",
+   "numbers": [
+    {
+     "text": "₹76,000 crore",
+     "sub": "India Semiconductor Mission",
+     "word": "seventy-six"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "Design, fab, assembly",
+     "Supply chain security",
+     "India Semiconductor Mission, 2021"
+    ]
+   },
+   "say": "For GS Three: know the three steps, the supply risk, and India's mission to build a chip industry at home."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "PIB, 15 December 2021: Cabinet approves programme for development of semiconductors and display manufacturing ecosystem with an outlay of ₹76,000 crore; India Semiconductor Mission",
+  "PIB, June 2023 and 29 February 2024: Cabinet approvals for an assembly, testing and packaging unit (Sanand, Gujarat) and the first commercial fab (Dholera, Gujarat)",
+  "Ministry of Electronics and IT, Semicon India programme pages: design, fabrication, ATMP (assembly, testing, marking and packaging)"
+ ],
+ "quiz": [
+  {
+   "q": "What is a transistor?",
+   "options": [
+    "A tiny switch on a chip",
+    "A kind of battery",
+    "A cooling fan",
+    "A screen"
+   ],
+   "answerIndex": 0,
+   "why": "Billions of tiny switches, each on or off."
+  },
+  {
+   "q": "What is a 'fab'?",
+   "options": [
+    "A design office",
+    "A chip fabrication factory",
+    "A shop that sells chips",
+    "A testing lab for phones"
+   ],
+   "answerIndex": 1,
+   "why": "The fab is where chips are made on silicon wafers."
+  },
+  {
+   "q": "When did India approve its semiconductor mission?",
+   "options": [
+    "2014",
+    "2019",
+    "2021",
+    "2025"
+   ],
+   "answerIndex": 2,
+   "why": "December 2021, with ₹76,000 crore."
+  }
+ ],
+ "reviewNote": "Facts were read against PIB Cabinet releases (2021, 2023, 2024) and MeitY's Semicon India pages. Wafer photos are generic, not of an Indian plant. Moving facts: new projects are approved often; the script names none by company."
+}

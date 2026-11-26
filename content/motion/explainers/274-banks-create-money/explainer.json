@@ -1,0 +1,163 @@
+{
+ "n": 274,
+ "id": "banks-create-money",
+ "title": "How Banks Create Money",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Picture: Роман Рябенко (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/274/A-pile-of-Ukrainian-currency-coins.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Most of the money in a modern economy is not notes or coins. It is numbers in bank accounts."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 0.97,
+    "big": "97%",
+    "below": "of UK broad money is bank deposits (Bank of England, 2014)"
+   },
+   "say": "The Bank of England found that bank deposits made up ninety-seven per cent of the broad money in Britain.",
+   "numbers": [
+    {
+     "text": "97%",
+     "sub": "bank deposits",
+     "word": "ninety-seven",
+     "count": true
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A loan makes a deposit",
+    "items": [
+     "A bank approves a loan",
+     "It credits the borrower's account",
+     "A new deposit, and new money, exists"
+    ]
+   },
+   "say": "Where do those deposits come from? Largely from lending. When a bank makes a loan, it credits the borrower's account, and new money is created."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The brake",
+    "items": [
+     "Banks must keep part of deposits as reserves",
+     "Cash Reserve Ratio (CRR), set by RBI"
+    ]
+   },
+   "say": "There is a brake. Banks must keep a share of their deposits as cash reserves. In India, the Reserve Bank sets this cash reserve ratio."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "NCERT example: CRR 20%, first deposit ₹100",
+    "items": [
+     {
+      "label": "Round 1",
+      "value": 100,
+      "show": "₹100"
+     },
+     {
+      "label": "Round 2",
+      "value": 80,
+      "show": "₹80"
+     },
+     {
+      "label": "Round 3",
+      "value": 64,
+      "show": "₹64"
+     },
+     {
+      "label": "Round 4",
+      "value": 51.2,
+      "show": "₹51.2"
+     }
+    ]
+   },
+   "say": "Take NCERT's example. With a reserve ratio of twenty per cent, a hundred rupees deposited lets eighty be lent. That eighty comes back as a deposit, and the chain goes on, smaller each round."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The money multiplier",
+    "items": [
+     "1 ÷ CRR",
+     "CRR 20% → multiplier 5",
+     "₹100 can support ₹500 of deposits"
+    ]
+   },
+   "say": "Add up every round, and a hundred rupees can support up to five hundred in deposits. The multiplier is one divided by the reserve ratio.",
+   "numbers": [
+    {
+     "text": "₹500",
+     "sub": "total deposits",
+     "word": "five hundred"
+    }
+   ]
+  },
+  {
+   "src": "../raw/274/A-pile-of-Ukrainian-currency-coins.jpg",
+   "kb": "out",
+   "fit": "blur",
+   "say": "For GS Three: raise the reserve ratio and banks can lend less, so money grows more slowly. That is one way RBI controls money supply."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 12, Introductory Macroeconomics, ch. 3 (Money and Banking): money comprises cash and bank deposits; banks accept deposits and lend part of them; Cash Reserve Ratio is the percentage of deposits a bank must keep as cash reserves; example with CRR 20% and deposits of Rs 100 (table of rounds 100, 80, 64…; loans cannot exceed Rs 400); RBI controls money supply through bank rate, open market operations and reserve ratios",
+  "Bank of England Quarterly Bulletin 2014 Q1, 'Money creation in the modern economy': most money is created by commercial banks making loans; whenever a bank makes a loan it simultaneously creates a matching deposit, creating new money; bank deposits are about 97% of broad money in circulation (UK)"
+ ],
+ "quiz": [
+  {
+   "q": "With a Cash Reserve Ratio of 20%, what is the money multiplier?",
+   "options": [
+    "2",
+    "5",
+    "20",
+    "80"
+   ],
+   "answerIndex": 1,
+   "why": "Multiplier = 1 ÷ CRR = 1 ÷ 0.2 = 5."
+  },
+  {
+   "q": "According to the Bank of England, when a bank makes a loan it…",
+   "options": [
+    "Prints new notes",
+    "Must first collect gold",
+    "Creates a matching deposit, which is new money",
+    "Reduces total money"
+   ],
+   "answerIndex": 2,
+   "why": "Loans create deposits."
+  },
+  {
+   "q": "If RBI raises the CRR, banks can…",
+   "options": [
+    "Lend more",
+    "Print currency",
+    "Ignore deposits",
+    "Lend less"
+   ],
+   "answerIndex": 3,
+   "why": "More must be held as reserves, so less can be lent."
+  }
+ ],
+ "reviewNote": "Facts are from NCERT Class 12 Macroeconomics ch. 3 and the Bank of England's 2014 bulletin. The 97% figure is for the UK, and the ring says so. The coin photo shows foreign coins (generic); swap it for a neutral picture if it reads oddly. No current CRR value is given. Moving facts: RBI's CRR changes."
+}

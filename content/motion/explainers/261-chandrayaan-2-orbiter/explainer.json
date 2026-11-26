@@ -1,0 +1,145 @@
+{
+ "n": 261,
+ "id": "chandrayaan-2-orbiter",
+ "title": "Chandrayaan-2's Orbiter, Still at Work",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA/GSFC/Arizona State University (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/261/LRO-WAC-South-Pole-Mosaic.jpg",
+   "kb": "in",
+   "say": "An Indian spacecraft reached the Moon in twenty nineteen and was meant to work for one year. ISRO now expects it to last about seven."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Chandrayaan-2",
+    "items": [
+     {
+      "year": "Jul 2019",
+      "text": "launched on LVM3"
+     },
+     {
+      "year": "2 Sep 2019",
+      "text": "lander Vikram separates"
+     },
+     {
+      "year": "6 Sep 2019",
+      "text": "Vikram crash-lands"
+     },
+     {
+      "year": "2023",
+      "text": "orbiter relays for Chandrayaan-3"
+     }
+    ]
+   },
+   "say": "It launched in July twenty nineteen. The lander, Vikram, separated in September, but crashed four days later after a software glitch."
+  },
+  {
+   "src": "../raw/261/Chandrayaan-2-Vikram-lander-Impact-Ratio.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "NASA's own Moon orbiter later photographed the spot where Vikram came down. The Indian orbiter, though, carried on."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The orbiter",
+    "items": [
+     "Polar orbit, about 100 km up",
+     "8 instruments",
+     "Sharpest camera of any Moon mission"
+    ]
+   },
+   "say": "It circles the Moon over the poles, about a hundred kilometres up, with eight instruments. Its camera can see details as small as thirty centimetres.",
+   "numbers": [
+    {
+     "text": "0.3 m",
+     "sub": "camera resolution",
+     "word": "thirty"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What it has found",
+    "items": [
+     "Sodium mapped across the Moon",
+     "Argon-40 in the thin lunar air",
+     "Chromium and manganese",
+     "A big solar flare watched in 2024"
+    ]
+   },
+   "say": "It has mapped sodium on the surface, detected argon-forty in the Moon's thin atmosphere, found chromium and manganese, and watched a large solar flare in twenty twenty-four."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "Relay",
+    "below": "for Chandrayaan-3's lander in 2023"
+   },
+   "say": "In twenty twenty-three it also served as a communication relay for Chandrayaan-3."
+  },
+  {
+   "src": "../raw/261/LRO-WAC-South-Pole-Mosaic.jpg",
+   "kb": "out",
+   "say": "For GS Three, remember this: a mission can miss one goal and still deliver years of science."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO, Chandrayaan-2 mission page (isro.gov.in/Chandrayaan_2.html): 100 km lunar polar orbit; Vikram separated 2 September 2019; eight orbiter instruments; OHRC has the best resolution (0.3 m) of any lunar orbiter camera; expected life of about seven years against a planned one year",
+  "Wikipedia, 'Chandrayaan-2' (summary read): launched 22 July 2019 on LVM3-M1; Vikram crashed 6 September 2019 after a software glitch; the orbiter relayed for Chandrayaan-3; CLASS mapped sodium; CHACE-2 detected argon-40; chromium and manganese detected; XSM and CLASS observed a May 2024 solar flare"
+ ],
+ "quiz": [
+  {
+   "q": "What did the Chandrayaan-2 orbiter do for Chandrayaan-3?",
+   "options": [
+    "Carried its rover",
+    "Served as a communication relay",
+    "Launched it from orbit",
+    "Brought back its samples"
+   ],
+   "answerIndex": 1,
+   "why": "In 2023 the orbiter relayed communication for the Chandrayaan-3 lander."
+  },
+  {
+   "q": "Roughly how high above the Moon does the orbiter fly?",
+   "options": [
+    "About 10 km",
+    "About 1,000 km",
+    "About 100 km",
+    "About 36,000 km"
+   ],
+   "answerIndex": 2,
+   "why": "ISRO gives a 100 km lunar polar orbit."
+  },
+  {
+   "q": "Which Chandrayaan-2 instrument is the high-resolution camera?",
+   "options": [
+    "CLASS",
+    "XSM",
+    "CHACE-2",
+    "OHRC"
+   ],
+   "answerIndex": 3,
+   "why": "OHRC, the Orbiter High Resolution Camera, resolves about 0.3 m."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's Chandrayaan-2 page; launch date, crash cause and science results come from the Wikipedia article and should be checked against ISRO before approval. The 'Relay' ring is decorative (full ring). Moving facts: the orbiter's remaining life and its science results keep changing."
+}

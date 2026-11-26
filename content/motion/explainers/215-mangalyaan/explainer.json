@@ -1,0 +1,149 @@
+{
+ "voice": "auto",
+ "n": 215,
+ "id": "mangalyaan",
+ "title": "Mangalyaan: Mars on the First Try",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: ISRO Mars Orbiter Mission data, processed by Justin Cowart (CC BY 2.0); 4-RAZOR 01 (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/215/Tharsis-and-Valles-Marineris---Mars-Orbiter-Mission-30055660701-.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Many of the world's first missions to Mars failed. India's reached Mars orbit on its very first try."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "The journey",
+    "items": [
+     {
+      "year": "Nov 2013",
+      "text": "Launch on PSLV-C25"
+     },
+     {
+      "year": "Sep 2014",
+      "text": "Enters Mars orbit"
+     }
+    ]
+   },
+   "say": "The Mars Orbiter Mission, Mangalyaan, launched on the fifth of November, twenty thirteen. On the twenty-fourth of September, twenty fourteen, it slipped into orbit around Mars."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Firsts",
+    "items": [
+     "First Asian country to reach Mars orbit",
+     "First country to do it on the first attempt"
+    ]
+   },
+   "say": "That made India the first Asian country to reach Mars orbit, and the first in the world to do it on the first attempt."
+  },
+  {
+   "src": "../raw/215/MOM1MODEL-NSPD24-TVM.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "The whole mission cost about four hundred and fifty crore rupees, famously less than some Hollywood space films.",
+   "numbers": [
+    {
+     "text": "₹450 crore",
+     "sub": "the whole mission",
+     "word": "four"
+    }
+   ]
+  },
+  {
+   "src": "../raw/215/Arsia-Mons---Mars-Orbiter-Mission-30108068296-.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Its colour camera sent back full-disc pictures of Mars, its volcanoes and its dust storms."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Planned vs actual life",
+    "items": [
+     {
+      "label": "Planned",
+      "value": 0.5,
+      "show": "6 months"
+     },
+     {
+      "label": "Actual",
+      "value": 8,
+      "show": "about 8 years",
+      "hi": true
+     }
+    ]
+   },
+   "say": "It was built to last six months. It kept working for about eight years, until contact was lost in twenty twenty-two."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "Launched 2013, Mars orbit 2014",
+     "First try, low cost",
+     "Built for 6 months, lasted ~8 years"
+    ]
+   },
+   "say": "For GS Three: Mangalyaan showed that a careful, low-cost design could reach Mars, first time."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO, Mars Orbiter Mission page: launched 5 November 2013 on PSLV-C25; Mars orbit insertion 24 September 2014; India first to reach Mars orbit on the first attempt",
+  "PIB, 24 September 2014 and Lok Sabha answers: mission cost about ₹450 crore",
+  "ISRO / national committee statement, October 2022: ground contact with the spacecraft lost; mission had far outlived its designed six-month life"
+ ],
+ "quiz": [
+  {
+   "q": "When did Mangalyaan enter Mars orbit?",
+   "options": [
+    "24 September 2014",
+    "5 November 2013",
+    "15 August 2015",
+    "23 August 2023"
+   ],
+   "answerIndex": 0,
+   "why": "Launch was November 2013; Mars orbit came on 24 September 2014."
+  },
+  {
+   "q": "What was special about India's Mars mission?",
+   "options": [
+    "It landed a rover",
+    "It reached Mars orbit on the first attempt",
+    "It carried astronauts",
+    "It went to Jupiter after Mars"
+   ],
+   "answerIndex": 1,
+   "why": "India was the first to reach Mars orbit on its first try."
+  },
+  {
+   "q": "How long was it designed to last?",
+   "options": [
+    "Ten years",
+    "One day",
+    "Twenty years",
+    "Six months"
+   ],
+   "answerIndex": 3,
+   "why": "It was built for six months and lasted about eight years."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's MOM page, PIB and the 2022 statement on loss of contact. Mars pictures are ISRO data processed by an amateur (CC BY 2.0); the model photo is CC0. Moving facts: none."
+}

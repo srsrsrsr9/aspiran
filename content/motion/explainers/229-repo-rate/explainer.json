@@ -1,0 +1,170 @@
+{
+ "voice": "auto",
+ "n": 229,
+ "id": "repo-rate",
+ "title": "The Repo Rate in 60 Seconds",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Diagrams: Aspiran"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "One number",
+    "items": [
+     "Changes your home loan EMI",
+     "Changes your FD interest",
+     "Set by the RBI"
+    ]
+   },
+   "say": "One number, set in Mumbai, can change your home loan instalment and the interest on your fixed deposit. It's called the repo rate."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "What it is",
+    "items": [
+     "A bank needs cash overnight",
+     "It borrows from the RBI",
+     "It gives government bonds as security",
+     "Pays interest: the repo rate"
+    ]
+   },
+   "say": "When a bank is short of cash, it can borrow from the Reserve Bank for a short time, giving government bonds as security. The interest it pays is the repo rate."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why 'repo'?",
+    "items": [
+     "Short for 'repurchase'",
+     "The bank sells bonds to the RBI",
+     "And buys them back later"
+    ]
+   },
+   "say": "Repo is short for repurchase. The bank sells bonds to the RBI and agrees to buy them back, a loan in disguise."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Up or down",
+    "left": {
+     "title": "Repo up",
+     "items": [
+      "Loans costlier",
+      "Spending slows",
+      "Inflation cools"
+     ]
+    },
+    "right": {
+     "title": "Repo down",
+     "items": [
+      "Loans cheaper",
+      "Spending rises",
+      "Growth gets a push"
+     ]
+    }
+   },
+   "say": "Raise the repo rate and loans get costlier, slowing spending and inflation. Cut it, and loans get cheaper, giving growth a push."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "The corridor",
+    "items": [
+     {
+      "label": "Marginal Standing Facility (ceiling)",
+      "value": 3
+     },
+     {
+      "label": "Repo rate (policy rate)",
+      "value": 2,
+      "hi": true
+     },
+     {
+      "label": "Standing Deposit Facility (floor)",
+      "value": 1
+     }
+    ]
+   },
+   "say": "The repo rate sits in a corridor. Above it, the marginal standing facility, the ceiling. Below it, the standing deposit facility, where banks park spare cash."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Who sets it",
+    "items": [
+     "Monetary Policy Committee",
+     "Meets about every two months",
+     "Majority vote; Governor breaks ties"
+    ]
+   },
+   "say": "The Monetary Policy Committee sets it, meeting about every two months. If the vote is tied, the Governor decides."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Repo: RBI lends to banks",
+     "Main policy rate",
+     "Corridor: SDF below, MSF above"
+    ]
+   },
+   "say": "For GS Three and Prelims: repo is the rate at which the RBI lends to banks, the main lever of monetary policy."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "RBI, 'Monetary Policy' and FAQ on the Liquidity Adjustment Facility (rbi.org.in): repo rate as the policy rate; collateralised by government securities; Marginal Standing Facility as the upper bound; Standing Deposit Facility as the floor of the corridor since April 2022",
+  "RBI Act, 1934, section 45ZI: MPC decisions by majority; Governor has a casting vote in a tie; at least four meetings a year (in practice six)",
+  "NCERT Class 12 Macroeconomics, ch. 3: tools of monetary policy"
+ ],
+ "quiz": [
+  {
+   "q": "The repo rate is the rate at which…",
+   "options": [
+    "Banks lend to the RBI",
+    "The RBI lends to banks against securities",
+    "Banks pay depositors",
+    "The government borrows abroad"
+   ],
+   "answerIndex": 1,
+   "why": "Banks borrow from the RBI, giving bonds as security."
+  },
+  {
+   "q": "Which is the floor of the RBI's rate corridor today?",
+   "options": [
+    "Bank rate",
+    "Marginal Standing Facility",
+    "Standing Deposit Facility",
+    "CRR"
+   ],
+   "answerIndex": 2,
+   "why": "The SDF replaced the fixed-rate reverse repo as the floor in April 2022."
+  },
+  {
+   "q": "If the MPC vote is tied, who decides?",
+   "options": [
+    "The RBI Governor",
+    "The Finance Minister",
+    "The Prime Minister",
+    "The oldest member"
+   ],
+   "answerIndex": 0,
+   "why": "The Governor has a casting vote."
+  }
+ ],
+ "reviewNote": "Facts were read against RBI's monetary policy pages and the RBI Act. The corridor bars are relative positions, not rates. Moving facts: the actual repo rate is deliberately not stated; it changes."
+}

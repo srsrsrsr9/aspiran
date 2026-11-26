@@ -1,0 +1,138 @@
+{
+ "n": 256,
+ "id": "himalayan-landslides",
+ "title": "Why Himalayan Slopes Slide",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-7"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "SERIOUS",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: Shyamal (CC0); Dfromhimalayas (CC BY 4.0). Picture: Dfromhimalayas (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/256/Himalaya-curve-road.webm",
+   "t": 1.0,
+   "say": "Why do roads in the hills keep disappearing every monsoon? Start with gravity."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A landslide",
+    "items": [
+     "Rock and debris on a slope",
+     "Something weakens it",
+     "It fails along a plane",
+     "Gravity pulls it down fast"
+    ]
+   },
+   "say": "A landslide is rock and debris moving rapidly down a slope under gravity, when the slope fails along a weak plane."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why the Himalayas",
+    "items": [
+     "Young, still-rising mountains",
+     "Steep slopes",
+     "Unstable rock",
+     "Frequent earthquakes"
+    ]
+   },
+   "say": "The Himalayas are young and still rising. Their slopes are steep, much of the rock is unstable, and earthquakes shake them often."
+  },
+  {
+   "src": "../raw/256/Landslide-Nigulsari-Kinnaur.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "say": "Then the monsoon arrives. Heavy rain soaks the slope, adds weight, and helps it give way."
+  },
+  {
+   "src": "../raw/256/Timelapse-2025-Kinnaur-Monsoon.webm",
+   "t": 4.0,
+   "fit": "blur",
+   "say": "People add to the risk too: cutting slopes for roads and dams, clearing forests, and building on unstable ground."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "What helps",
+    "left": {
+     "title": "Limit",
+     "items": [
+      "roads and dams in risky zones",
+      "big settlements on steep slopes"
+     ]
+    },
+    "right": {
+     "title": "Encourage",
+     "items": [
+      "large-scale afforestation",
+      "bunds to slow water",
+      "terrace farming"
+     ]
+    }
+   },
+   "say": "NCERT's answer is limits plus repair: restrict building in high-risk zones, plant forests, build bunds to slow the water, and farm on terraces."
+  },
+  {
+   "src": "../raw/256/Himalaya-curve-road.webm",
+   "t": 6.0,
+   "kb": "out",
+   "say": "For GS Three: young, steep and shaky slopes, soaked by rain and cut by people. That is the landslide recipe."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, India: Physical Environment, ch. 6 (Natural Hazards and Disasters): landslide defined as rapid downslope movement of rock and debris under gravity, failing along a shear plane; very high vulnerability zones are highly unstable, relatively young mountains in the Himalayas, high-rainfall steep slopes and quake-prone areas; mitigation by restricting roads, dams and large settlements in high-vulnerability zones, large-scale afforestation, bunds and terrace farming",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 5 (Geomorphic Processes): mass movements carry rock debris downslope under gravity",
+  "NCERT Class 11, India: Physical Environment, ch. 6: indiscriminate deforestation and construction add to hazards"
+ ],
+ "quiz": [
+  {
+   "q": "Which force moves the debris in a landslide?",
+   "options": [
+    "Wind",
+    "Gravity",
+    "Magnetism",
+    "Tides"
+   ],
+   "answerIndex": 1,
+   "why": "Mass movements are driven by gravity."
+  },
+  {
+   "q": "Which of these does NCERT suggest to reduce landslides?",
+   "options": [
+    "Building more roads on steep slopes",
+    "Clearing forests",
+    "Large-scale afforestation and bunds",
+    "Building large settlements in high-risk zones"
+   ],
+   "answerIndex": 2,
+   "why": "Afforestation, bunds and terraces help; building in high-risk zones should be restricted."
+  },
+  {
+   "q": "Why are the Himalayas so prone to landslides?",
+   "options": [
+    "They are young, steep, unstable and quake-prone",
+    "They are very old and worn down",
+    "They get no rain",
+    "They are made only of hard granite"
+   ],
+   "answerIndex": 0,
+   "why": "Young, steep, unstable rock that is shaken by earthquakes and soaked by rain."
+  }
+ ],
+ "reviewNote": "Tone SERIOUS (a hazard; no victims are named or shown). Facts were read against NCERT Class 11 India: Physical Environment ch. 6 and Fundamentals of Physical Geography ch. 5. Check the road clip for readable faces or number plates. Moving facts: none known."
+}

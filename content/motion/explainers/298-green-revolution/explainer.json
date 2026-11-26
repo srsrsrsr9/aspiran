@@ -1,0 +1,162 @@
+{
+ "n": 298,
+ "id": "green-revolution",
+ "title": "The Green Revolution",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-4",
+  "gs3-3"
+ ],
+ "gsPaper": [
+  "gs1",
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 2,
+  "line": "Pictures: Greenpenguin3459 (CC BY 4.0); unknown photographer (public domain)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Food grain production (million tonnes)",
+    "items": [
+     {
+      "label": "1950–51",
+      "value": 51,
+      "show": "51"
+     },
+     {
+      "label": "2021–22",
+      "value": 314,
+      "show": "314",
+      "hi": true
+     }
+    ]
+   },
+   "say": "In nineteen fifty to fifty-one, India produced fifty-one million tonnes of food grains. By twenty twenty-one to twenty-two, it was over three hundred and fourteen million.",
+   "numbers": [
+    {
+     "text": "51 → 314",
+     "sub": "million tonnes of food grains",
+     "word": "fifty-one",
+     "count": true
+    }
+   ]
+  },
+  {
+   "src": "../raw/298/Wheat-cultivation-Shangarh.jpg",
+   "kb": "in",
+   "say": "A turning point came in the mid nineteen sixties: the Green Revolution, a large rise in grain output from high-yielding seeds, mainly of wheat and rice."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "The new seeds",
+    "items": [
+     {
+      "year": "1964 on",
+      "text": "dwarf rice and wheat seed imported"
+     },
+     {
+      "year": "1966",
+      "text": "IR8 rice introduced"
+     },
+     {
+      "year": "1968",
+      "text": "'Green Revolution' named; India issues a stamp"
+     }
+    ]
+   },
+   "say": "From nineteen sixty-four, India imported seed of dwarf rice and wheat. In nineteen sixty-eight, the term Green Revolution was coined, and India marked it with a postage stamp."
+  },
+  {
+   "src": "../raw/298/Tube-well-in-India-in-1968.jpg",
+   "kb": "pan",
+   "say": "The new seeds needed reliable water, fertiliser and pesticide. Farmers who could afford them gained the most."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two phases",
+    "left": {
+     "title": "Mid-1960s to mid-1970s",
+     "items": [
+      "mainly wheat",
+      "richer states: Punjab, Andhra Pradesh, Tamil Nadu"
+     ]
+    },
+    "right": {
+     "title": "Mid-1970s to mid-1980s",
+     "items": [
+      "more states",
+      "more crops"
+     ]
+    }
+   },
+   "say": "At first, the gains stayed mostly with wheat and better-off states like Punjab, Andhra Pradesh and Tamil Nadu. In the second phase, they spread to more states and crops."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What it changed",
+    "items": [
+     "Self-sufficiency in food grains",
+     "A surplus for farmers to sell",
+     "Less reliance on other nations for food"
+    ]
+   },
+   "say": "India became self-sufficient in food grains, and no longer had to depend on other nations to feed itself."
+  },
+  {
+   "src": "../raw/298/Wheat-cultivation-Shangarh.jpg",
+   "kb": "out",
+   "say": "For GS One and GS Three, remember: high-yielding seeds, the mid nineteen sixties, wheat first, and gains that were uneven across regions."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ICAR, 'Indian Agriculture after Independence' (2022, read): food grain production rose from 51 Mt in 1950-51 to over 314 Mt in 2021-22; the Green Revolution in the mid-1960s; the term coined by William Gaud of USAID in 1968, the same year India issued a commemorative postal stamp; 1966 introduction of IR8; imports of seed of dwarf varieties of rice and wheat from 1964 onwards",
+  "NCERT Class 11, Indian Economic Development, ch. 2 (keec102, read): the green revolution refers to the large increase in food grain production from HYV seeds, especially wheat and rice; HYV seeds needed reliable irrigation and money for fertiliser and pesticide; first phase (mid-1960s to mid-1970s) restricted to more affluent states such as Punjab, Andhra Pradesh and Tamil Nadu and mainly wheat; second phase (mid-1970s to mid-1980s) spread to more states and crops; India achieved self-sufficiency in food grains; marketed surplus"
+ ],
+ "quiz": [
+  {
+   "q": "In the first phase of the Green Revolution, which crop gained most?",
+   "options": [
+    "Pulses",
+    "Cotton",
+    "Wheat",
+    "Millets"
+   ],
+   "answerIndex": 2,
+   "why": "NCERT: HYV seeds primarily benefited wheat-growing regions at first."
+  },
+  {
+   "q": "India's food grain production in 1950-51 was about…",
+   "options": [
+    "51 million tonnes",
+    "10 million tonnes",
+    "150 million tonnes",
+    "314 million tonnes"
+   ],
+   "answerIndex": 0,
+   "why": "ICAR: 51 Mt in 1950-51; over 314 Mt in 2021-22."
+  },
+  {
+   "q": "Which was NOT one of the states named for the first phase?",
+   "options": [
+    "Punjab",
+    "Andhra Pradesh",
+    "Tamil Nadu",
+    "Bihar"
+   ],
+   "answerIndex": 3,
+   "why": "NCERT names Punjab, Andhra Pradesh and Tamil Nadu."
+  }
+ ],
+ "reviewNote": "Facts are from ICAR and NCERT. The script doesn't name individual scientists (living or dead) or the environmental costs, because the sources read here don't cover them; consider a follow-up explainer for those. The 1968 tube-well photo is a period photo; check the Commons file for its source. Moving facts: the latest food grain total is updated every year."
+}

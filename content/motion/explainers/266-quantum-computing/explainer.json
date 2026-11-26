@@ -1,0 +1,143 @@
+{
+ "n": 266,
+ "id": "quantum-computing",
+ "title": "Quantum Computing, Simply",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: National Institute of Standards and Technology (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/266/Quantum-Computing-Ion-Trapping-5941055642-.jpg",
+   "kb": "in",
+   "say": "This lab hardware holds single charged atoms in place, and each atom can act as a quantum bit. Here is why that matters."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Bit and qubit",
+    "left": {
+     "title": "Bit",
+     "items": [
+      "0 or 1",
+      "one value at a time"
+     ]
+    },
+    "right": {
+     "title": "Qubit",
+     "items": [
+      "0, 1, or a blend of both",
+      "superposition"
+     ]
+    }
+   },
+   "say": "An ordinary bit is like a switch: zero or one. A qubit can be in a blend of both at once. Physicists call this superposition."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Entanglement",
+    "items": [
+     "Two qubits are linked",
+     "Measure one",
+     "You learn about the other"
+    ]
+   },
+   "say": "Qubits can also be entangled, linked so that measuring one tells you about the other. Together, these let some problems be solved in new ways."
+  },
+  {
+   "src": "../raw/266/Planar-Ion-Trap-5941086002-.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "But qubits are fragile. Heat and noise knock them out of their state, so today's machines make many errors, and many must be kept extremely cold."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Where it could help",
+    "items": [
+     "New materials",
+     "Drug discovery",
+     "Cybersecurity"
+    ]
+   },
+   "say": "They are expected to work alongside ordinary computers, not replace them, on problems like new materials, medicines and security. They could also break some of today's encryption."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "National Quantum Mission, 2023",
+    "items": [
+     "₹6,003.65 crore, to 2030-31",
+     "50 to 1,000 qubits in 8 years",
+     "Secure links over 2,000 km by satellite"
+    ]
+   },
+   "say": "India approved its National Quantum Mission in twenty twenty-three, at about six thousand crore rupees, aiming for computers of fifty to a thousand qubits within eight years.",
+   "numbers": [
+    {
+     "text": "₹6,003.65 cr",
+     "sub": "2023-24 to 2030-31",
+     "word": "six thousand"
+    }
+   ]
+  },
+  {
+   "src": "../raw/266/Quantum-Computing-Ion-Trapping-5941055642-.jpg",
+   "kb": "out",
+   "say": "For GS Three, know superposition, entanglement, and why the world is now building post-quantum cryptography."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NIST, 'Quantum computing explained': bits are 0 or 1; qubits can be in superposition; entanglement; qubits are fragile and today's machines are error-prone; many need very cold temperatures; quantum computers would work alongside classical ones on materials, drug discovery and cybersecurity; threat to current encryption and the move to post-quantum cryptography",
+  "PIB, 19 April 2023 (PRID 1917888): National Quantum Mission approved at ₹6003.65 crore for 2023-24 to 2030-31; intermediate-scale quantum computers with 50–1000 physical qubits in 8 years; satellite-based secure quantum communication over 2000 km; four thematic hubs"
+ ],
+ "quiz": [
+  {
+   "q": "What is superposition?",
+   "options": [
+    "Two computers working together",
+    "A qubit holding a blend of 0 and 1",
+    "Cooling a chip to absolute zero",
+    "A type of encryption"
+   ],
+   "answerIndex": 1,
+   "why": "A qubit can be in a combination of 0 and 1, unlike a bit."
+  },
+  {
+   "q": "What qubit range does India's National Quantum Mission target within 8 years?",
+   "options": [
+    "5 to 10",
+    "1 million or more",
+    "Exactly 100",
+    "50 to 1,000"
+   ],
+   "answerIndex": 3,
+   "why": "PIB: intermediate-scale computers with 50–1000 physical qubits."
+  },
+  {
+   "q": "Why do many quantum computers need extreme cold?",
+   "options": [
+    "Qubits are fragile and lose their state to heat and noise",
+    "To save electricity",
+    "Because they use liquid fuel",
+    "To store more data"
+   ],
+   "answerIndex": 0,
+   "why": "Heat and noise disturb qubits; cold keeps them stable."
+  }
+ ],
+ "reviewNote": "Facts were read against NIST's explainer and PIB's NQM release. The analogy 'like a switch' is a simplification NIST itself uses for bits. Moving facts: qubit counts worldwide change fast; none are quoted."
+}

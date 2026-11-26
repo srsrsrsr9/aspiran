@@ -1,0 +1,151 @@
+{
+ "voice": "auto",
+ "n": 237,
+ "id": "lok-sabha-and-rajya-sabha",
+ "title": "Lok Sabha and Rajya Sabha: Who Does What",
+ "format": "photo",
+ "syllabusNodes": [
+  "gs2-3"
+ ],
+ "gsPaper": [
+  "gs2"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Beohar Rammanohar Sinha; David Castor (public domain); MohitSingh (CC BY 3.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/k-sansad.jpg",
+   "kb": "pan",
+   "fit": "cover",
+   "say": "Parliament has two Houses. One speaks for the people, one for the states. And they don't have equal powers."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two Houses",
+    "left": {
+     "title": "Lok Sabha",
+     "items": [
+      "House of the People",
+      "Elected directly",
+      "543 seats today",
+      "Dissolved after 5 years"
+     ]
+    },
+    "right": {
+     "title": "Rajya Sabha",
+     "items": [
+      "Council of States",
+      "Elected by MLAs",
+      "Up to 250 members",
+      "Permanent; a third retire every 2 years"
+     ]
+    }
+   },
+   "say": "The Lok Sabha is elected directly by voters and lasts five years. The Rajya Sabha is elected by state MLAs, is never dissolved, and a third of its members retire every two years."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Lok Sabha's edge",
+    "items": [
+     "Money bills start only here (Art. 110)",
+     "Rajya Sabha can only delay them 14 days",
+     "Government answers to the Lok Sabha (Art. 75)",
+     "No-confidence motions only here"
+    ]
+   },
+   "say": "Money is the Lok Sabha's power. Money bills start there, and the Rajya Sabha can only hold them for fourteen days. And the government stays in office only while the Lok Sabha trusts it."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Rajya Sabha's own powers",
+    "items": [
+     "Can let Parliament make laws on a state subject (Art. 249)",
+     "Can approve new all-India services (Art. 312)"
+    ]
+   },
+   "say": "The Rajya Sabha has powers of its own: it can let Parliament legislate on a state subject, and create new all-India services."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "When they disagree",
+    "items": [
+     "An ordinary bill is stuck",
+     "President calls a joint sitting (Art. 108)",
+     "Majority of both Houses together decides",
+     "Not for money bills or amendments"
+    ]
+   },
+   "say": "If the Houses disagree on an ordinary bill, the President can call a joint sitting, where the larger Lok Sabha usually wins. Money bills and constitutional amendments can't go there."
+  },
+  {
+   "src": "../raw/k-constitution.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "For constitutional amendments, both Houses stand equal: each must pass it with a special majority."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "Money bills: Lok Sabha (Art. 110)",
+     "Joint sitting: Art. 108",
+     "Rajya Sabha: Art. 249, 312",
+     "Amendments: equal powers"
+    ]
+   },
+   "say": "For GS Two: money and confidence sit with the Lok Sabha; the Rajya Sabha guards the states; and for amendments, both are equal."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Constitution of India, Articles 79–83 (composition and duration; Article 80: Rajya Sabha up to 250, 12 nominated; Article 83: Rajya Sabha not subject to dissolution, one-third retire every second year), 75(3), 108, 109–110, 249, 312, 368",
+  "Lok Sabha Secretariat / Rajya Sabha website: present strength of 543 elected seats; powers of each House",
+  "NCERT Class 11, 'Indian Constitution at Work', ch. 5 (Legislature)"
+ ],
+ "quiz": [
+  {
+   "q": "How long can the Rajya Sabha hold a money bill?",
+   "options": [
+    "6 months",
+    "14 days",
+    "30 days",
+    "It can reject it"
+   ],
+   "answerIndex": 1,
+   "why": "Article 109: fourteen days."
+  },
+  {
+   "q": "Which Article provides for a joint sitting?",
+   "options": [
+    "Article 108",
+    "Article 110",
+    "Article 249",
+    "Article 368"
+   ],
+   "answerIndex": 0,
+   "why": "Called by the President on a deadlock over an ordinary bill."
+  },
+  {
+   "q": "Which needs both Houses equally, with no joint sitting?",
+   "options": [
+    "Money bill",
+    "No-confidence motion",
+    "Constitutional amendment",
+    "Budget"
+   ],
+   "answerIndex": 2,
+   "why": "Each House must pass it by special majority."
+  }
+ ],
+ "reviewNote": "Facts were read against the Constitution's text and the Houses' websites. Pictures are buildings. Moving facts: the Lok Sabha's seat count may change after a future delimitation."
+}

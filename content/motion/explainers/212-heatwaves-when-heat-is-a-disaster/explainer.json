@@ -1,0 +1,152 @@
+{
+ "voice": "auto",
+ "n": 212,
+ "id": "heatwaves-when-heat-is-a-disaster",
+ "title": "Heatwaves: When Does Heat Become a Disaster?",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-7"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "SERIOUS",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA Solar Dynamics Observatory; Andrew Cattoir, US National Park Service (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/212/Image-of-Sun-From-NASA-s-Solar-Dynamics-Observatory-PIA26681-.jpg",
+   "kb": "in",
+   "say": "Forty degrees in Delhi in May is normal. So when does a hot day become a heatwave? India has a rule for it."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "IMD: a heatwave needs",
+    "items": [
+     "Plains: at least 40°C",
+     "Coastal areas: at least 37°C",
+     "Hills: at least 30°C",
+     "And well above the normal for that place"
+    ]
+   },
+   "say": "First, the temperature must cross a floor: forty degrees in the plains, thirty-seven on the coast, thirty in the hills. Then it must be well above normal for that place."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Above normal by…",
+    "items": [
+     {
+      "label": "Heatwave",
+      "value": 4.5,
+      "show": "4.5 to 6.4°C"
+     },
+     {
+      "label": "Severe heatwave",
+      "value": 6.5,
+      "show": "more than 6.4°C",
+      "hi": true
+     }
+    ]
+   },
+   "say": "Four and a half to six point four degrees above normal is a heatwave. More than that is a severe heatwave."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Or simply too hot",
+    "items": [
+     "45°C or more: heatwave",
+     "47°C or more: severe heatwave"
+    ]
+   },
+   "say": "And sometimes the number alone is enough. Forty-five degrees is a heatwave anywhere in the plains; forty-seven is severe."
+  },
+  {
+   "src": "../raw/212/Dry-Cracked-Mud-4957b8b2-f52c-43b0-acc2-ead42cf6f03b-.jpg",
+   "kb": "pan",
+   "say": "Heat becomes a disaster when bodies can't cool down: outdoor workers, the old, the very young, people without water or shade, and nights that never cool."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A heat action plan",
+    "items": [
+     "Early warning from IMD",
+     "Cooling spaces and drinking water",
+     "Shifted working hours",
+     "Hospitals ready for heat illness"
+    ]
+   },
+   "say": "So cities now write heat action plans. Ahmedabad made South Asia's first in twenty thirteen. Warnings, water, shade, changed work hours and ready hospitals."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "For your answer",
+    "left": {
+     "title": "Hazard",
+     "items": [
+      "IMD's thresholds",
+      "Hot days and hot nights"
+     ]
+    },
+    "right": {
+     "title": "Disaster",
+     "items": [
+      "When people can't cope",
+      "Plans reduce the harm"
+     ]
+    }
+   },
+   "say": "For GS Three: the heat is the hazard; the disaster depends on who is exposed and how ready we are."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "IMD, 'Heat Wave' criteria (FAQ, mausam.imd.gov.in): heat wave considered when maximum temperature reaches at least 40°C in plains, 37°C in coastal stations and 30°C in hilly regions; departure from normal 4.5–6.4°C is a heat wave, above 6.4°C severe; or actual maximum ≥45°C heat wave, ≥47°C severe heat wave",
+  "NDMA, Guidelines for Preparation of Action Plan – Prevention and Management of Heat Wave (2019): vulnerable groups, heat action plans, early warning, cooling measures",
+  "Ahmedabad Municipal Corporation / NRDC, Ahmedabad Heat Action Plan (2013): the first heat action plan in South Asia"
+ ],
+ "quiz": [
+  {
+   "q": "What is the minimum temperature for a heatwave in the plains?",
+   "options": [
+    "35°C",
+    "40°C",
+    "45°C",
+    "50°C"
+   ],
+   "answerIndex": 1,
+   "why": "IMD's floor for the plains is 40°C, and the day must also be well above normal."
+  },
+  {
+   "q": "How far above normal makes a severe heatwave?",
+   "options": [
+    "1°C",
+    "2°C",
+    "3°C",
+    "More than 6.4°C"
+   ],
+   "answerIndex": 3,
+   "why": "4.5 to 6.4°C above normal is a heatwave; more than 6.4°C is severe."
+  },
+  {
+   "q": "Which city made South Asia's first heat action plan?",
+   "options": [
+    "Ahmedabad",
+    "Chennai",
+    "Shimla",
+    "Kolkata"
+   ],
+   "answerIndex": 0,
+   "why": "Ahmedabad's plan came in 2013."
+  }
+ ],
+ "reviewNote": "Facts were read against IMD's heatwave criteria, NDMA's 2019 guidelines and the Ahmedabad plan. Tone is serious: no deaths counted, no music. Moving facts: IMD may revise its criteria."
+}

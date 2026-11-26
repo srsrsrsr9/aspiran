@@ -1,0 +1,180 @@
+{
+ "n": 278,
+ "id": "reading-the-aqi",
+ "title": "Reading the AQI",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-6"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: wili hybrid (CC BY 2.0); Onewhohelps (CC BY 2.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/278/Smog-in-the-skies-of-Delhi-India.jpg",
+   "kb": "in",
+   "say": "Your phone says the air quality index is three hundred and twenty. What does that number actually mean?"
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Eight pollutants",
+    "items": [
+     "PM10 and PM2.5",
+     "Nitrogen dioxide and sulphur dioxide",
+     "Carbon monoxide and ozone",
+     "Ammonia and lead"
+    ]
+   },
+   "say": "India's index looks at eight pollutants: two sizes of particles, nitrogen dioxide, sulphur dioxide, carbon monoxide, ozone, ammonia and lead."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "One number from eight",
+    "items": [
+     "Measure each pollutant",
+     "Give each a sub-index",
+     "The worst sub-index becomes the AQI"
+    ]
+   },
+   "say": "Each pollutant gets its own score, called a sub-index. The AQI you see is simply the worst of those scores."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Six categories (top of each band)",
+    "items": [
+     {
+      "label": "Good",
+      "value": 50,
+      "show": "0–50"
+     },
+     {
+      "label": "Satisfactory",
+      "value": 100,
+      "show": "51–100"
+     },
+     {
+      "label": "Moderate",
+      "value": 200,
+      "show": "101–200"
+     },
+     {
+      "label": "Poor",
+      "value": 300,
+      "show": "201–300"
+     },
+     {
+      "label": "Very poor",
+      "value": 400,
+      "show": "301–400",
+      "hi": true
+     },
+     {
+      "label": "Severe",
+      "value": 500,
+      "show": "401–500"
+     }
+    ]
+   },
+   "say": "The scale runs from zero to five hundred, in six bands, from good to severe. So three hundred and twenty is very poor."
+  },
+  {
+   "src": "../raw/278/A-view-of-Delhi.jpg",
+   "kb": "pan",
+   "say": "Each band comes with health advice. At very poor, long exposure may cause breathing illness."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "What the bands warn",
+    "left": {
+     "title": "Moderately polluted",
+     "items": [
+      "discomfort for people with asthma or heart disease",
+      "children and older adults"
+     ]
+    },
+    "right": {
+     "title": "Severe",
+     "items": [
+      "affects even healthy people",
+      "serious for lung and heart patients"
+     ]
+    }
+   },
+   "say": "Moderately polluted air troubles people with asthma or heart disease, children and older adults. Severe air affects even healthy people."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "The index",
+    "items": [
+     {
+      "year": "Oct 2014",
+      "text": "National AQI launched"
+     },
+     {
+      "year": "Idea",
+      "text": "one number, one colour, one description"
+     }
+    ]
+   },
+   "say": "India launched this index in October twenty fourteen, with a simple aim: one number, one colour, one description."
+  },
+  {
+   "src": "../raw/278/Smog-in-the-skies-of-Delhi-India.jpg",
+   "kb": "out",
+   "say": "For GS Three, remember: eight pollutants, six categories, and the worst sub-index decides the AQI."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "PIB, 17 October 2014 (relid 110654): National Air Quality Index launched in New Delhi as 'One Number - One Colour - One Description'; eight pollutants (PM10, PM2.5, NO2, SO2, CO, O3, NH3, Pb) with short-term standards; a sub-index for each pollutant; the worst sub-index reflects the overall AQI; six categories with ranges Good (0–50), Satisfactory (51–100), Moderately polluted (101–200), Poor (201–300), Very poor (301–400), Severe (401–500), and the health impacts for each"
+ ],
+ "quiz": [
+  {
+   "q": "How is the overall AQI decided?",
+   "options": [
+    "Average of all eight pollutants",
+    "Only from PM2.5",
+    "Sum of all sub-indices",
+    "The worst sub-index"
+   ],
+   "answerIndex": 3,
+   "why": "PIB: the worst sub-index reflects the overall AQI."
+  },
+  {
+   "q": "An AQI of 250 falls in which category?",
+   "options": [
+    "Moderately polluted",
+    "Poor",
+    "Very poor",
+    "Severe"
+   ],
+   "answerIndex": 1,
+   "why": "Poor is 201–300."
+  },
+  {
+   "q": "Which of these is one of the eight AQI pollutants?",
+   "options": [
+    "Ammonia",
+    "Methane",
+    "Carbon dioxide",
+    "Radon"
+   ],
+   "answerIndex": 0,
+   "why": "The eight include NH3 (ammonia) and Pb (lead)."
+  }
+ ],
+ "reviewNote": "All facts are from the 2014 PIB launch release (it also gives health breakpoints). 'Your phone says' is an illustration. The bar labelled 'Moderate' is short for 'Moderately polluted'. Avoid any identifiable faces in the Delhi photos. Moving facts: none for the method; city AQI values are not quoted."
+}

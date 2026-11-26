@@ -1,0 +1,126 @@
+{
+ "n": 270,
+ "id": "solar-panel",
+ "title": "How a Solar Panel Makes Electricity",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Dr. Chinchu C. (CC BY 4.0); Wikideas1 (CC0). Footage: CSU/CIRA and NOAA (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/270/Rooftop-Solar-Panels-3KW.jpg",
+   "kb": "in",
+   "say": "Sunlight falls on a rooftop, and a fan in the room below starts to turn. Not one moving part made that happen."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "When light hits a cell",
+    "items": [
+     "Some bounces off",
+     "Some passes through",
+     "Some is absorbed: only this makes power"
+    ]
+   },
+   "say": "When sunlight reaches a solar cell, some of it bounces off and some passes through. Only the light that is absorbed makes electricity."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Inside the cell",
+    "items": [
+     "Light is absorbed by a semiconductor",
+     "Electrons are knocked free",
+     "They gather at the front surface",
+     "Metal contacts collect the current"
+    ]
+   },
+   "say": "A cell is made of a semiconductor. Absorbed light knocks electrons free; they gather at the front surface, and metal contacts collect them as a current."
+  },
+  {
+   "src": "../raw/270/Hexagon-solar-cells.webp",
+   "kb": "pan",
+   "say": "Many cells make a panel, also called a module. Panels wired together make an array, from a rooftop to a solar park."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "One more step",
+    "left": {
+     "title": "Panel gives",
+     "items": [
+      "direct current (DC)"
+     ]
+    },
+    "right": {
+     "title": "Homes and grid use",
+     "items": [
+      "alternating current (AC)"
+     ]
+    }
+   },
+   "say": "There is one catch. Cells make direct current, but homes and the grid use alternating current. A box called an inverter converts one into the other."
+  },
+  {
+   "src": "../raw/270/-and-Solar-Panel-Sunglint-Over-Florida-CIRA-2025-05-20---nolabels-portrait-.webm",
+   "t": 1.0,
+   "say": "Large solar farms are so big that weather satellites can see them flash in the sunlight."
+  },
+  {
+   "src": "../raw/270/Rooftop-Solar-Panels-3KW.jpg",
+   "kb": "out",
+   "say": "For GS Three, remember the chain: light, free electrons, direct current, inverter, alternating current."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "US EIA, 'Photovoltaics and electricity': PV cells are made of semiconductor material; photons are reflected, pass through or are absorbed; absorbed energy dislodges electrons, which migrate to the front surface, creating a charge imbalance; conductors collect the current; cells make panels (modules), panels make arrays; PV cells produce direct current, and inverters convert it to alternating current used by the grid"
+ ],
+ "quiz": [
+  {
+   "q": "Which sunlight makes electricity in a solar cell?",
+   "options": [
+    "The light that bounces off",
+    "The light that passes through",
+    "The light that is absorbed",
+    "All light equally"
+   ],
+   "answerIndex": 2,
+   "why": "Only absorbed photons free electrons."
+  },
+  {
+   "q": "What does an inverter do?",
+   "options": [
+    "Stores power at night",
+    "Turns the panel to face the Sun",
+    "Cleans the panel",
+    "Converts DC to AC"
+   ],
+   "answerIndex": 3,
+   "why": "Cells make direct current; inverters convert it to alternating current."
+  },
+  {
+   "q": "What is a group of solar panels wired together called?",
+   "options": [
+    "An array",
+    "A cell",
+    "A diode",
+    "A grid"
+   ],
+   "answerIndex": 0,
+   "why": "Cells make panels (modules); panels make arrays."
+  }
+ ],
+ "reviewNote": "All facts are from the US EIA photovoltaics page. 'Weather satellites can see them' is drawn from the CIRA/NOAA footage title itself; check the clip shows a solar farm glint before approval. The fan in the opening is an illustration, not a claim. Moving facts: none."
+}

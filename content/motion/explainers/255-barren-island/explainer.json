@@ -1,0 +1,142 @@
+{
+ "n": 255,
+ "id": "barren-island",
+ "title": "Barren Island: India's Live Volcano",
+ "format": "photo",
+ "syllabusNodes": [
+  "gs1-9"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA (public domain); Geological Survey of India, 1885 (public domain); 1789 drawing, unknown artist (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/255/Ile-Barren-1995.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "say": "A ring of grey rock in the Andaman Sea, about a hundred and thirty-eight kilometres from Port Blair. This is Barren Island.",
+   "numbers": [
+    {
+     "text": "138 km",
+     "sub": "north-east of Port Blair",
+     "word": "hundred"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Barren Island",
+    "items": [
+     "India's only confirmed active volcano",
+     "On a volcanic chain from Sumatra to Myanmar",
+     "The only active one on that chain"
+    ]
+   },
+   "say": "It is the only confirmed active volcano in the Indian subcontinent, and the only live one on a chain of volcanoes from Sumatra to Myanmar."
+  },
+  {
+   "src": "../raw/255/Barren-Island-1789.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "The first recorded eruption came in seventeen eighty-seven. Travellers sketched the smoking cone soon after."
+  },
+  {
+   "src": "../raw/255/Barren-Island-1885.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.4
+   ],
+   "say": "Then, after a few more eruptions, it went quiet for nearly a hundred and fifty years. Geologists still came to survey it and draw it."
+  },
+  {
+   "src": "../raw/255/Eruption-on-Barren-Island-15448-.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "In nineteen ninety-one it woke again, and that eruption lasted six months. More eruptions followed, some seen from space."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Eruptions",
+    "items": [
+     {
+      "year": "1787",
+      "text": "first recorded"
+     },
+     {
+      "year": "1852",
+      "text": "last of the early series"
+     },
+     {
+      "year": "1991",
+      "text": "six-month eruption"
+     },
+     {
+      "year": "2017–19",
+      "text": "eruptions seen again"
+     }
+    ]
+   },
+   "say": "So the record runs from seventeen eighty-seven, through a long sleep, to repeated eruptions in our own time."
+  },
+  {
+   "src": "../raw/255/Ile-Barren-1995.jpg",
+   "kb": "out",
+   "say": "For Prelims, remember: Barren Island, in the Andaman Sea, is India's only confirmed active volcano."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Wikipedia, 'Barren Island (Andaman Islands)' (which cites the Smithsonian Global Volcanism Program and the Geological Survey of India): only confirmed active volcano in the Indian subcontinent and the only active one on the Sumatra–Myanmar chain; about 138 km north-east of Port Blair; first recorded eruption 1787, further eruptions in 1789, 1795, 1803–04 and 1852; nearly a century and a half of dormancy; 1991 eruption lasting six months; eruptions 2017–2019",
+  "Commons file pages for the 1789 and 1885 illustrations (dates and makers of the drawings)"
+ ],
+ "quiz": [
+  {
+   "q": "In which sea does Barren Island lie?",
+   "options": [
+    "Arabian Sea",
+    "Andaman Sea",
+    "Laccadive Sea",
+    "Gulf of Mannar"
+   ],
+   "answerIndex": 1,
+   "why": "It is in the Andaman Sea, about 138 km from Port Blair."
+  },
+  {
+   "q": "When was Barren Island's first recorded eruption?",
+   "options": [
+    "1991",
+    "1852",
+    "1787",
+    "2005"
+   ],
+   "answerIndex": 2,
+   "why": "The record begins in 1787."
+  },
+  {
+   "q": "What makes Barren Island special?",
+   "options": [
+    "It is India's only confirmed active volcano",
+    "It is India's largest island",
+    "It has India's highest peak",
+    "It is a coral atoll"
+   ],
+   "answerIndex": 0,
+   "why": "The video calls it India's only confirmed active volcano."
+  }
+ ],
+ "reviewNote": "Facts were read against the Wikipedia article on Barren Island, which cites the Smithsonian Global Volcanism Program and GSI. The GVP page itself showed a verification wall to this computer, so check the eruption list on volcano.si.edu (vn=260010) before approval. Moving facts: eruptions continue (the summary lists one in 2025), so the script says 'repeated eruptions in our own time' rather than a latest date."
+}

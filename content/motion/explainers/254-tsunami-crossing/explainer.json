@@ -1,0 +1,147 @@
+{
+ "n": 254,
+ "id": "tsunami-crossing",
+ "title": "How a Tsunami Crosses an Ocean",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-9"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "SERIOUS",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: Ocean Observatories Initiative (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/254/Irminger-waves-without-sound-OOI-.webm",
+   "t": 1.0,
+   "say": "Five hundred miles an hour. That is how fast a tsunami can race across the deep ocean, as fast as a jet plane.",
+   "numbers": [
+    {
+     "text": "800 km/h",
+     "sub": "in deep water",
+     "word": "Five"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How it starts",
+    "items": [
+     "The sea floor jerks up or down",
+     "The whole column of water above moves",
+     "Waves spread out in every direction"
+    ]
+   },
+   "say": "It begins when an earthquake or a volcano makes the sea floor move suddenly. The whole column of water above it is pushed, and waves spread out."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "In the deep ocean",
+    "left": {
+     "title": "Wavelength",
+     "items": [
+      "about 100 to 500 km"
+     ]
+    },
+    "right": {
+     "title": "Height",
+     "items": [
+      "rarely more than about 1 m"
+     ]
+    }
+   },
+   "say": "Out in deep water, the waves are very long but very low. A ship may rise only a metre or two, so slowly that the crew hardly notices."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Near the coast",
+    "items": [
+     "Water gets shallow",
+     "The wave slows down",
+     "Its length shrinks",
+     "Its height grows"
+    ]
+   },
+   "say": "Near the coast the water gets shallow. The wave slows, its length shrinks, and its height grows, sometimes into a wall of water."
+  },
+  {
+   "src": "../raw/254/Irminger-waves-without-sound-OOI-.webm",
+   "t": 8.0,
+   "fit": "blur",
+   "say": "That is why a tsunami does little harm out at sea, and so much at the shore, where people live and work."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India's watch",
+    "items": [
+     "Indian Ocean tsunami, 26 December 2004",
+     "India joined the international warning system",
+     "Warnings from INCOIS, Hyderabad"
+    ]
+   },
+   "say": "After the Indian Ocean tsunami of December two thousand four, India joined the international warning system. Its warnings now come from INCOIS in Hyderabad."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "Fast & low",
+    "below": "in deep water; slow & high at the shore"
+   },
+   "say": "For GS One and disaster management: deep water means fast and low. Shallow water means slow and high."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NOAA/NWS Tsunami.gov FAQ: in the deep ocean tsunamis can move over 500 mph, like a jet plane, and cross oceans in less than a day; wavelength 60–300 miles; deep-ocean waves rarely more than three feet high",
+  "NCERT Class 11, India: Physical Environment, ch. 6 (Natural Hazards and Disasters): tsunamis caused by sudden sea-floor movement from earthquakes and volcanic eruptions; a ship rises only a metre or two and each rise and fall takes several minutes; in shallow water wavelength reduces and height increases; India joined the International Tsunami Warning System after the December 2004 tsunami",
+  "INCOIS (Indian National Centre for Ocean Information Services, Ministry of Earth Sciences) is in Hyderabad and runs India's tsunami early warning (Wikipedia summary of INCOIS)"
+ ],
+ "quiz": [
+  {
+   "q": "How fast can a tsunami travel in the deep ocean?",
+   "options": [
+    "About 50 km/h",
+    "About 800 km/h, like a jet",
+    "About 5 km/h",
+    "It does not move until it reaches land"
+   ],
+   "answerIndex": 1,
+   "why": "Over 500 mph (about 800 km/h) in deep water."
+  },
+  {
+   "q": "What happens to a tsunami as it enters shallow water?",
+   "options": [
+    "It speeds up and flattens",
+    "It disappears",
+    "It slows down and grows taller",
+    "It turns into a current"
+   ],
+   "answerIndex": 2,
+   "why": "Shallow water shortens the wave and raises its height."
+  },
+  {
+   "q": "Which institution issues India's tsunami warnings?",
+   "options": [
+    "IMD, New Delhi",
+    "ISRO, Bengaluru",
+    "NDMA, New Delhi",
+    "INCOIS, Hyderabad"
+   ],
+   "answerIndex": 3,
+   "why": "India's tsunami early warning comes from INCOIS in Hyderabad."
+  }
+ ],
+ "reviewNote": "Tone SERIOUS: the video names the 2004 tsunami but is about how the wave travels; it gives no death toll and shows no damage. Facts were read against NOAA's Tsunami.gov FAQ and NCERT Class 11 India: Physical Environment ch. 6. INCOIS's own portal page did not load from this computer; its role was checked on a summary page, so confirm on incois.gov.in before approval. On screen, 500 mph is shown as about 800 km/h and 60–300 miles as about 100–500 km. A NOAA tsunami-energy map was considered and left out (world map). Moving facts: none known."
+}

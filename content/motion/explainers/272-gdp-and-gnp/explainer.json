@@ -1,0 +1,139 @@
+{
+ "n": 272,
+ "id": "gdp-and-gnp",
+ "title": "GDP and GNP",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Picture: Trougnouf (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/272/-in-the-Scheldt-towards-the-Port-of-Antwerp-seen-from-Doel-Belgium-DSCF3880-.jpg",
+   "kb": "in",
+   "say": "An Indian company earns profits from a factory abroad. A foreign company earns profits from a factory in India. Which of these belongs in India's income?"
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "GDP",
+    "items": [
+     "Final goods and services",
+     "Produced inside the country",
+     "In one year"
+    ]
+   },
+   "say": "Gross domestic product measures all the final goods and services produced within the country's borders in a year, whoever produces them."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "From GDP to GNP",
+    "items": [
+     "Start with GDP",
+     "Add what Indians earn abroad",
+     "Subtract what foreigners earn here",
+     "= GNP"
+    ]
+   },
+   "say": "Gross national product starts with GDP. It adds income that Indian-owned factors earn abroad, and subtracts what foreign-owned factors earn here."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "The question each asks",
+    "left": {
+     "title": "GDP",
+     "items": [
+      "where was it produced?"
+     ]
+    },
+    "right": {
+     "title": "GNP",
+     "items": [
+      "who produced it?"
+     ]
+    }
+   },
+   "say": "So GDP asks where something was produced. GNP asks who produced it."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The bridge",
+    "items": [
+     "Net factor income from abroad",
+     "GNP = GDP + net factor income"
+    ]
+   },
+   "say": "The difference has a name: net factor income from abroad. If Indians earn more abroad than foreigners earn here, GNP is bigger than GDP. If not, it is smaller."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "One step further",
+    "items": [
+     "GNP",
+     "minus depreciation",
+     "= NNP"
+    ]
+   },
+   "say": "Take away depreciation, the wear and tear on machines and buildings, and you get net national product."
+  },
+  {
+   "src": "../raw/272/-in-the-Scheldt-towards-the-Port-of-Antwerp-seen-from-Doel-Belgium-DSCF3880-.jpg",
+   "kb": "out",
+   "say": "For GS Three, remember: GDP asks where, GNP asks who, and net factor income from abroad is the bridge between them."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 12, Introductory Macroeconomics, ch. 2 (National Income Accounting): GDP measures the aggregate production of final goods and services within the domestic economy in a year; GNP ≡ GDP + net factor income from abroad (factor income earned by domestic factors employed in the rest of the world minus factor income earned by foreign factors employed in the domestic economy); NNP ≡ GNP − depreciation"
+ ],
+ "quiz": [
+  {
+   "q": "GNP is equal to…",
+   "options": [
+    "GDP minus depreciation",
+    "GDP plus indirect taxes",
+    "GDP minus subsidies",
+    "GDP plus net factor income from abroad"
+   ],
+   "answerIndex": 3,
+   "why": "NCERT: GNP ≡ GDP + net factor income from abroad."
+  },
+  {
+   "q": "What do you subtract from GNP to get NNP?",
+   "options": [
+    "Depreciation",
+    "Exports",
+    "Taxes",
+    "Imports"
+   ],
+   "answerIndex": 0,
+   "why": "NNP ≡ GNP − depreciation."
+  },
+  {
+   "q": "Which measure counts output by where it is produced?",
+   "options": [
+    "GNP",
+    "NNP",
+    "GDP",
+    "Personal income"
+   ],
+   "answerIndex": 2,
+   "why": "GDP covers production within the domestic economy."
+  }
+ ],
+ "reviewNote": "All facts are from NCERT Class 12 Introductory Macroeconomics ch. 2. The opening uses company profits on purpose: money sent home by workers settled abroad is a transfer, not factor income, so it isn't used as an example. Moving facts: none (no figures quoted)."
+}

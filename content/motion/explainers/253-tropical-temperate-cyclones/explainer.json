@@ -1,0 +1,142 @@
+{
+ "n": 253,
+ "id": "tropical-temperate-cyclones",
+ "title": "Tropical and Temperate Cyclones",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-9"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage and pictures: CSU/CIRA and NOAA/NESDIS (public domain); NASA (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/253/ne-Kiko-From-Polar-Orbiting-Satellites-CIRA-2025-09-03---nolabels-portrait-.webm",
+   "t": 1.0,
+   "say": "Both are called cyclones. Both spin around low pressure. But one is born over a warm sea, and the other where warm and cold air collide."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "A tropical cyclone needs",
+    "items": [
+     "Sea warmer than 27°C",
+     "Coriolis force",
+     "Little change in wind with height",
+     "A low already forming"
+    ]
+   },
+   "say": "A tropical cyclone needs a large sea surface warmer than twenty-seven degrees, the Coriolis force, steady winds with height, and a weak low to start from.",
+   "numbers": [
+    {
+     "text": "27°C+",
+     "sub": "sea surface",
+     "word": "twenty-seven"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Inside the storm",
+    "items": [
+     "Eye: calm, sinking air",
+     "Eye wall: air spirals up",
+     "Rain bands spread out"
+    ]
+   },
+   "say": "At its centre is the eye, a calm patch of sinking air. Around it is the eye wall, where air spirals up to great heights."
+  },
+  {
+   "src": "../raw/253/ne-Kiko-From-Polar-Orbiting-Satellites-CIRA-2025-09-03---nolabels-portrait-.webm",
+   "t": 6.0,
+   "kb": "in",
+   "say": "It draws its power from the warm sea. Once it crosses the coast, called landfall, it is cut off from that fuel and weakens."
+  },
+  {
+   "src": "../raw/253/Extratropical-Cyclone-Ewiniar.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Temperate cyclones form outside the tropics, along the polar front, where warm and cold air meet. They have clear warm and cold fronts."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Side by side",
+    "left": {
+     "title": "Tropical",
+     "items": [
+      "only over seas",
+      "stronger winds",
+      "moves east to west",
+      "no fronts"
+     ]
+    },
+    "right": {
+     "title": "Temperate",
+     "items": [
+      "over land and sea",
+      "covers a larger area",
+      "moves west to east",
+      "warm and cold fronts"
+     ]
+    }
+   },
+   "say": "Tropical cyclones are fiercer and move from east to west. Temperate ones cover a larger area, move from west to east, and can form over land too."
+  },
+  {
+   "src": "../raw/253/ne-Kiko-From-Polar-Orbiting-Satellites-CIRA-2025-09-03---nolabels-portrait-.webm",
+   "t": 10.0,
+   "kb": "out",
+   "say": "For GS One, remember four contrasts: where they form, fronts, strength, and the direction they travel."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 9 (Atmospheric Circulation and Weather Systems): conditions for tropical cyclones (sea above 27°C, Coriolis force, small variation in vertical wind speed, pre-existing low, upper divergence); eye and eye wall; landfall; tropical cyclones dissipate on reaching land; extra-tropical cyclones form along the polar front with warm and cold fronts, cover a larger area, move west to east; tropical cyclones originate only over seas, have higher wind velocity, move east to west"
+ ],
+ "quiz": [
+  {
+   "q": "Which sea-surface temperature does NCERT give for tropical cyclones to form?",
+   "options": [
+    "Below 10°C",
+    "About 20°C",
+    "Exactly 15°C",
+    "Higher than 27°C"
+   ],
+   "answerIndex": 3,
+   "why": "A large sea surface warmer than 27°C is the first condition."
+  },
+  {
+   "q": "Which cyclones have clear warm and cold fronts?",
+   "options": [
+    "Temperate (extra-tropical) cyclones",
+    "Tropical cyclones",
+    "Both equally",
+    "Neither"
+   ],
+   "answerIndex": 0,
+   "why": "Temperate cyclones form along the polar front, with warm and cold fronts."
+  },
+  {
+   "q": "What is the calm centre of a tropical cyclone called?",
+   "options": [
+    "The front",
+    "The eye wall",
+    "The eye",
+    "The trough"
+   ],
+   "answerIndex": 2,
+   "why": "The eye is a calm region of sinking air; the eye wall surrounds it."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT Class 11 Fundamentals of Physical Geography ch. 9. Satellite pictures are over open ocean with no labels; check that no coastline or border line is drawn. Moving facts: none known."
+}

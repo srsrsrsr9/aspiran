@@ -1,0 +1,171 @@
+{
+ "voice": "auto",
+ "n": 219,
+ "id": "how-upi-moves-money",
+ "title": "How UPI Moves Money in Seconds",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Diagrams: Aspiran"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Tea, ₹10",
+    "items": [
+     "Scan",
+     "Enter PIN",
+     "Done in seconds"
+    ]
+   },
+   "say": "You buy a cup of tea, scan a code, type your PIN, and the money moves before the tea cools. What just happened?"
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Behind the scan",
+    "items": [
+     "Your app sends the request",
+     "NPCI's switch routes it",
+     "Your bank checks your PIN and debits you",
+     "The tea seller's bank credits them"
+    ]
+   },
+   "say": "Your app sends the request to NPCI, the body that runs UPI. NPCI routes it to your bank, which checks your PIN and takes the money. Then it tells the seller's bank to pay."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What makes UPI different",
+    "items": [
+     "One ID instead of an account number",
+     "Any app, any bank",
+     "Works 24 × 7, in real time"
+    ]
+   },
+   "say": "Three ideas make it work. A simple ID instead of account numbers. Any app talks to any bank. And it runs round the clock, in real time."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Growth",
+    "items": [
+     {
+      "year": "2016",
+      "text": "Launched by NPCI"
+     },
+     {
+      "year": "2024",
+      "text": "More than 100 billion payments in a year"
+     }
+    ]
+   },
+   "say": "UPI launched in twenty sixteen. By twenty twenty-four, Indians were making well over a hundred billion UPI payments a year.",
+   "numbers": [
+    {
+     "text": "100 billion+",
+     "sub": "payments a year, 2024",
+     "word": "hundred"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Who's who",
+    "left": {
+     "title": "NPCI",
+     "items": [
+      "Runs the switch",
+      "Set up by RBI and banks"
+     ]
+    },
+    "right": {
+     "title": "Banks and apps",
+     "items": [
+      "Hold your money",
+      "Give you the app"
+     ]
+    }
+   },
+   "say": "NPCI was set up under the RBI's guidance by banks. It doesn't hold your money; banks do. It is the road the money travels on."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Beyond India",
+    "items": [
+     "UPI links with other countries' systems",
+     "Indians abroad can pay with it in several countries"
+    ]
+   },
+   "say": "UPI is now linked with payment systems in several other countries, so it is part of India's foreign policy too."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Public digital infrastructure",
+     "Interoperable: any app, any bank",
+     "Real-time, low cost",
+     "Financial inclusion"
+    ]
+   },
+   "say": "For GS Three: UPI is public digital infrastructure. Interoperable, real-time and cheap, it pulled millions into digital payments."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NPCI, UPI product overview: launched in 2016; instant real-time payment system; interoperable across banks and apps; Virtual Payment Address",
+  "NPCI UPI product statistics: annual transactions exceeded 100 billion in calendar 2024 (about 172 billion)",
+  "NPCI and RBI: NPCI is an umbrella organisation for retail payments set up under the Payment and Settlement Systems Act, 2007, as an initiative of RBI and the Indian Banks' Association",
+  "NPCI International / PIB releases: UPI linkages with other countries (e.g. Singapore PayNow, 2023)"
+ ],
+ "quiz": [
+  {
+   "q": "Who runs the UPI switch?",
+   "options": [
+    "NPCI",
+    "SEBI",
+    "The Finance Commission",
+    "NITI Aayog"
+   ],
+   "answerIndex": 0,
+   "why": "The National Payments Corporation of India runs UPI."
+  },
+  {
+   "q": "What does 'interoperable' mean for UPI?",
+   "options": [
+    "It only works in cities",
+    "Any app can pay any bank",
+    "Only one bank can use it",
+    "It works offline only"
+   ],
+   "answerIndex": 1,
+   "why": "Any app, any bank: that's interoperability."
+  },
+  {
+   "q": "When was UPI launched?",
+   "options": [
+    "2010",
+    "2020",
+    "2016",
+    "2024"
+   ],
+   "answerIndex": 2,
+   "why": "UPI launched in 2016."
+  }
+ ],
+ "reviewNote": "Facts were read against NPCI's UPI pages and statistics and PIB releases on international links. No app or bank logos shown. Moving facts: transaction counts grow every month; 'over a hundred billion a year' stays true."
+}

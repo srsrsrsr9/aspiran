@@ -1,0 +1,142 @@
+{
+ "n": 281,
+ "id": "the-speakers-chair",
+ "title": "The Speaker's Chair",
+ "format": "photo",
+ "syllabusNodes": [
+  "gs2-3"
+ ],
+ "gsPaper": [
+  "gs2"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: David Castor (public domain); unknown photographer (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/281/Sansad-Bhavan-1.jpg",
+   "kb": "in",
+   "say": "Every sitting of the Lok Sabha is run from one chair. Who sits in it, and how much power does it hold?"
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Choosing the Speaker",
+    "items": [
+     "Article 93: the House chooses its Speaker",
+     "From among its own members",
+     "Stays on after dissolution until the new House meets"
+    ]
+   },
+   "say": "Under Article ninety-three, the Lok Sabha chooses its Speaker from its own members. If the House is dissolved, the Speaker stays on until the new House meets."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Voting",
+    "left": {
+     "title": "Members",
+     "items": [
+      "vote on every question"
+     ]
+    },
+    "right": {
+     "title": "Speaker",
+     "items": [
+      "no vote in the first instance",
+      "a casting vote in a tie"
+     ]
+    }
+   },
+   "say": "The Speaker does not vote in the first instance. But if the votes are equal, the Speaker has a casting vote, under Article one hundred."
+  },
+  {
+   "src": "../raw/281/A-Constituent-Assembly-of-India-meeting-in-1950.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "Two decisions carry special weight. The Speaker decides whether a bill is a Money Bill, and that decision is final."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The anti-defection law",
+    "items": [
+     "Tenth Schedule, paragraph 6",
+     "Is a member disqualified for defection?",
+     "The Speaker decides"
+    ]
+   },
+   "say": "Under the Tenth Schedule, the Speaker also decides whether a member is disqualified for defection."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Removing a Speaker",
+    "items": [
+     "14 days' notice",
+     "A resolution in the House",
+     "Passed by a majority of all the then members",
+     "The Speaker does not preside meanwhile"
+    ]
+   },
+   "say": "Removal needs fourteen days' notice and a resolution passed by a majority of all the then members. During that debate, the Speaker does not preside.",
+   "numbers": [
+    {
+     "text": "14 days",
+     "sub": "notice to remove a Speaker",
+     "word": "fourteen"
+    }
+   ]
+  },
+  {
+   "src": "../raw/281/Sansad-Bhavan-1.jpg",
+   "kb": "out",
+   "say": "For GS Two, link the Speaker to Article ninety-three, the casting vote, Money Bills and the anti-defection law."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Constitution of India, official English text (Legislative Department diglot PDF, legislative.gov.in, 'as on' 2024 edition): Art. 93 (House chooses Speaker and Deputy Speaker); Art. 94 (removal by resolution passed by a majority of all the then members, at least 14 days' notice; Speaker does not vacate office on dissolution until immediately before the first meeting of the new House); Art. 96 (not to preside while a removal resolution is under consideration); Art. 100(1) (no vote in the first instance, casting vote on equality of votes); Art. 110(3) (Speaker's decision on whether a Bill is a Money Bill is final); Tenth Schedule para 6 (Speaker decides questions of disqualification on ground of defection)"
+ ],
+ "quiz": [
+  {
+   "q": "When can the Speaker of the Lok Sabha vote on a question?",
+   "options": [
+    "On every question",
+    "Only when the votes are equal",
+    "Only on Money Bills",
+    "Never"
+   ],
+   "answerIndex": 1,
+   "why": "Art. 100(1): no vote in the first instance; a casting vote in a tie."
+  },
+  {
+   "q": "How much notice is needed to move a resolution to remove the Speaker?",
+   "options": [
+    "7 days",
+    "30 days",
+    "14 days",
+    "No notice"
+   ],
+   "answerIndex": 2,
+   "why": "Art. 94: at least fourteen days' notice."
+  },
+  {
+   "q": "Who decides whether a Bill is a Money Bill?",
+   "options": [
+    "The Speaker of the Lok Sabha",
+    "The President",
+    "The Finance Minister",
+    "The Supreme Court"
+   ],
+   "answerIndex": 0,
+   "why": "Art. 110(3): the Speaker's decision is final."
+  }
+ ],
+ "reviewNote": "All facts are from the official Constitution text. The script does not repeat Tenth Schedule paragraph 7 (the bar on courts), because courts have reviewed Speakers' decisions since; don't add it. The 1950 Assembly photo shows a crowd of members, all historical. Moving facts: none."
+}

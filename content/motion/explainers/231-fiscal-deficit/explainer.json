@@ -1,0 +1,190 @@
+{
+ "voice": "auto",
+ "n": 231,
+ "id": "fiscal-deficit",
+ "title": "The Fiscal Deficit, Explained",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-2"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Diagrams: Aspiran"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "compare",
+    "title": "A household",
+    "left": {
+     "title": "Earns",
+     "items": [
+      "Salary",
+      "Rent from a room"
+     ]
+    },
+    "right": {
+     "title": "Spends",
+     "items": [
+      "Food, fees, rent",
+      "A new scooter"
+     ]
+    }
+   },
+   "say": "Think of a family. If it spends more than it earns in a year, it must borrow the difference. For a government, that gap is the fiscal deficit."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The definition",
+    "items": [
+     "Total spending",
+     "minus total receipts (leaving out borrowing)",
+     "= what must be borrowed",
+     "= fiscal deficit"
+    ]
+   },
+   "say": "In exam words: fiscal deficit is total spending minus total receipts, not counting borrowing. It is how much the government must borrow that year."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "An example (₹, made up)",
+    "items": [
+     {
+      "label": "Spending",
+      "value": 100,
+      "show": "100"
+     },
+     {
+      "label": "Receipts (tax, other)",
+      "value": 80,
+      "show": "80"
+     },
+     {
+      "label": "Fiscal deficit",
+      "value": 20,
+      "show": "20",
+      "hi": true
+     }
+    ]
+   },
+   "say": "Say the government spends a hundred and earns eighty from taxes and other receipts. It must borrow twenty. That twenty is the fiscal deficit."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Three deficits",
+    "items": [
+     "Revenue deficit: day-to-day spending above revenue income",
+     "Fiscal deficit: total borrowing need",
+     "Primary deficit: fiscal deficit minus interest payments"
+    ]
+   },
+   "say": "Two cousins: the revenue deficit, when day-to-day spending exceeds income, and the primary deficit, which is the fiscal deficit minus interest on old loans."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Is a deficit bad?",
+    "left": {
+     "title": "Can help",
+     "items": [
+      "Builds roads, schools",
+      "Supports demand in a slowdown"
+     ]
+    },
+    "right": {
+     "title": "Can hurt",
+     "items": [
+      "Interest piles up",
+      "Less money left for private loans"
+     ]
+    }
+   },
+   "say": "Is a deficit bad? Borrowing to build roads can pay back. But too much borrowing means big interest bills and less money left for private business."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Keeping it in check",
+    "items": [
+     {
+      "year": "2003",
+      "text": "FRBM Act passed"
+     },
+     {
+      "year": "2018",
+      "text": "Act amended: debt as an anchor"
+     },
+     {
+      "year": "Budget 2021",
+      "text": "Path to below 4.5% of GDP by 2025-26"
+     }
+    ]
+   },
+   "say": "The Fiscal Responsibility and Budget Management Act of two thousand three set limits. In twenty twenty-one, the government set a path to bring the deficit below four and a half percent of GDP by twenty twenty-five, twenty-six."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Fiscal deficit = borrowing need",
+     "Primary = fiscal − interest",
+     "FRBM Act, 2003"
+    ]
+   },
+   "say": "For GS Three: fiscal deficit is the year's borrowing need, primary deficit leaves out interest, and the FRBM Act keeps watch."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Union Budget documents, 'Budget at a Glance' (indiabudget.gov.in): definitions of revenue deficit, fiscal deficit (total expenditure minus revenue receipts and non-debt capital receipts) and primary deficit (fiscal deficit minus interest payments)",
+  "Fiscal Responsibility and Budget Management Act, 2003, and its 2018 amendment (Finance Act 2018): debt and fiscal deficit targets",
+  "Budget Speech 2021-22, para on fiscal consolidation: fiscal deficit to be brought below 4.5% of GDP by 2025-26",
+  "NCERT Class 12 Macroeconomics, ch. 5 (Government Budget and the Economy)"
+ ],
+ "quiz": [
+  {
+   "q": "Fiscal deficit equals…",
+   "options": [
+    "Total spending minus receipts excluding borrowing",
+    "Imports minus exports",
+    "Revenue minus capital spending",
+    "Interest payments only"
+   ],
+   "answerIndex": 0,
+   "why": "It is the year's borrowing need."
+  },
+  {
+   "q": "Primary deficit is fiscal deficit minus…",
+   "options": [
+    "Tax revenue",
+    "Defence spending",
+    "Interest payments",
+    "Subsidies"
+   ],
+   "answerIndex": 2,
+   "why": "It shows borrowing apart from paying for old loans."
+  },
+  {
+   "q": "Which law sets India's fiscal limits?",
+   "options": [
+    "RBI Act, 1934",
+    "FRBM Act, 2003",
+    "Finance Commission Act, 1951",
+    "GST Act, 2017"
+   ],
+   "answerIndex": 1,
+   "why": "Fiscal Responsibility and Budget Management Act."
+  }
+ ],
+ "reviewNote": "Facts were read against the Budget at a Glance definitions, the FRBM Act and its 2018 amendment, and the Budget Speech 2021-22. The bar example uses made-up numbers and says so. Moving facts: actual deficit figures change every budget; none are stated beyond the 2021 target."
+}

@@ -1,0 +1,141 @@
+{
+ "n": 257,
+ "id": "glaciers-rivers",
+ "title": "Glaciers and the Rivers They Feed",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 3,
+  "line": "Footage: NASA, Jesse Allen (public domain). Pictures: Arpit Rawat (CC0); Anshulsawant (public domain); NASA Earth Observatory (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/257/Glacier-capped-Mountains-in-Tibet.ogv",
+   "t": 1.0,
+   "say": "Thirty kilometres of ice. That is the length of the Gangotri glacier, one of the largest in the Himalayas.",
+   "numbers": [
+    {
+     "text": "30.2 km",
+     "sub": "Gangotri glacier",
+     "word": "Thirty"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "What a glacier is",
+    "items": [
+     "Snow piles up year after year",
+     "It packs into ice",
+     "The ice flows slowly downhill"
+    ]
+   },
+   "say": "A glacier is a mass of ice moving slowly downhill because of gravity. It may move a few centimetres to a few metres a day."
+  },
+  {
+   "src": "../raw/257/Gangotri-Glacier.jpg",
+   "kb": "pan",
+   "say": "As it moves, it scrapes its valley into a wide U shape, and leaves heaps of rock and debris behind."
+  },
+  {
+   "src": "../raw/257/Gaumukh-gangotri-glaciar-may-28-2007.JPG",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.55
+   ],
+   "say": "At its snout, called Gaumukh, the ice melts. This is where the Bhagirathi, a headstream of the Ganga, is born."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two kinds of river",
+    "left": {
+     "title": "Himalayan",
+     "items": [
+      "fed by snow and rain",
+      "flow all year"
+     ]
+    },
+    "right": {
+     "title": "Peninsular",
+     "items": [
+      "fed mostly by rain",
+      "many shrink in the dry season"
+     ]
+    }
+   },
+   "say": "Because Himalayan rivers are fed by melting snow as well as rain, they flow all year. Geographers call them perennial."
+  },
+  {
+   "src": "../raw/257/Gangotri-Glacier-retreat-from-1780-to-2001.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "But Gangotri has been shrinking since seventeen eighty. NASA found it retreated more than eight hundred and fifty metres in twenty-five years.",
+   "numbers": [
+    {
+     "text": "850 m+",
+     "sub": "retreat in 25 years",
+     "word": "eight"
+    }
+   ]
+  },
+  {
+   "src": "../raw/257/Gangotri-Glacier.jpg",
+   "kb": "out",
+   "say": "For GS One: glaciers are slow rivers of ice, and they keep the great Himalayan rivers flowing through the dry months."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NASA Earth Observatory, 'Retreat of the Gangotri Glacier': 30.2 km long, 0.5–2.5 km wide, one of the largest in the Himalaya; receding since 1780, faster after 1971; retreated more than 850 m over the last 25 years (to 2001)",
+  "NCERT Class 11, India: Physical Environment, ch. 3 (Drainage System): the Bhagirathi rises in the Gangotri glacier near Gaumukh (3,900 m); Himalayan rivers are perennial because they are fed by melting snow and precipitation",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 6 (Landforms and their Evolution): glaciers move because of gravity, a few centimetres to a few metres a day; glacial erosion and deposition landforms"
+ ],
+ "quiz": [
+  {
+   "q": "Which river is born at Gaumukh, the snout of the Gangotri glacier?",
+   "options": [
+    "Yamuna",
+    "Alaknanda",
+    "Bhagirathi",
+    "Sutlej"
+   ],
+   "answerIndex": 2,
+   "why": "The Bhagirathi rises at Gaumukh; the Alaknanda rises at Satopanth glacier."
+  },
+  {
+   "q": "Why do Himalayan rivers flow all year?",
+   "options": [
+    "They are fed by both snow melt and rain",
+    "They are fed only by groundwater",
+    "They are dammed at the source",
+    "It rains every day in the Himalayas"
+   ],
+   "answerIndex": 0,
+   "why": "Snow melt plus rain makes them perennial."
+  },
+  {
+   "q": "What shape of valley does a glacier carve?",
+   "options": [
+    "V-shaped",
+    "Flat",
+    "Circular",
+    "U-shaped"
+   ],
+   "answerIndex": 3,
+   "why": "Glacial erosion widens valleys into a U shape."
+  }
+ ],
+ "reviewNote": "Facts were read against NASA Earth Observatory's Gangotri page and NCERT Class 11 (India: Physical Environment ch. 3; Fundamentals of Physical Geography ch. 6). The U-shaped valley is standard NCERT glacial-landform content; confirm the wording in ch. 6 if needed. The NASA retreat image shows terminus lines but no borders. Moving facts: Gangotri's length and retreat figures are from NASA's 2001-era analysis; newer studies give other numbers."
+}

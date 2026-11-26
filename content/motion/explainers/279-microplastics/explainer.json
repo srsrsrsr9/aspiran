@@ -1,0 +1,139 @@
+{
+ "n": 279,
+ "id": "microplastics",
+ "title": "Microplastics",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-6"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Gabriele85 (CC0); Martin Wagner et al. (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/279/Angel-Hair-microplastics.jpg",
+   "kb": "in",
+   "say": "Any piece of plastic smaller than five millimetres, about the size of a pencil eraser, has a name: a microplastic."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two kinds",
+    "left": {
+     "title": "Primary",
+     "items": [
+      "made small on purpose",
+      "microbeads, resin pellets"
+     ]
+    },
+    "right": {
+     "title": "Secondary",
+     "items": [
+      "broken off bigger plastic",
+      "bottles, bags, nets"
+     ]
+    }
+   },
+   "say": "Some are made small on purpose, like the microbeads once added to face washes and toothpastes. Most break off bigger things, like bottles, bags and fishing nets."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Everyday sources",
+    "items": [
+     "Tyres wearing down on roads",
+     "Washing synthetic clothes",
+     "Food packaging",
+     "Plastic litter breaking up"
+    ]
+   },
+   "say": "Everyday life adds more: tyres wearing down on roads, fibres shed when synthetic clothes are washed, and litter slowly breaking apart."
+  },
+  {
+   "src": "../raw/279/Microplastics-in-sediments.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Scientists now find them in river and sea sediments. America's ocean agency says they can harm ocean and aquatic life, though much about them is still unknown."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Getting smaller",
+    "items": [
+     "Plastic item",
+     "Microplastics, under 5 mm",
+     "Nanoplastics, too small to see"
+    ]
+   },
+   "say": "And they keep breaking down, into nanoplastics too small to see, which researchers think may risk both nature and human health."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India's ban, 1 July 2022",
+    "items": [
+     "Earbuds with plastic sticks",
+     "Plastic cutlery and straws",
+     "Thermocol decorations",
+     "Wrapping film on sweet boxes"
+    ]
+   },
+   "say": "India's answer starts at the source. Since the first of July twenty twenty-two, identified single-use plastic items with low use and high litter, like plastic cutlery and straws, are banned."
+  },
+  {
+   "src": "../raw/279/Angel-Hair-microplastics.jpg",
+   "kb": "out",
+   "say": "For GS Three, link microplastics to the plastic waste rules: the surest way to stop small plastic is to stop the big plastic it comes from."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NOAA Ocean Service, 'What are microplastics?': plastic pieces less than five millimetres long, about the size of a pencil eraser; sources include larger pieces breaking apart, resin pellets and microbeads in health and beauty products such as cleansers and toothpastes; can be harmful to the ocean and aquatic life; not much is known yet about their impacts",
+  "Wikipedia, 'Microplastics' (read): primary microplastics are manufactured small; secondary microplastics come from the breakdown of larger items such as bottles, fishing nets, bags and tyre wear; fibres from washing synthetic clothing; nanoplastics are thought to be a risk to environmental and human health",
+  "PIB, 28 June 2022 (PRID 1837518): Plastic Waste Management Amendment Rules, 2021 (notified 12 August 2021) ban manufacture, import, stocking, distribution, sale and use of identified single-use plastic items with low utility and high littering potential from 1 July 2022; the list includes earbuds with plastic sticks, plastic cutlery, straws, thermocol for decoration and wrapping film around sweet boxes"
+ ],
+ "quiz": [
+  {
+   "q": "What is the upper size limit for a microplastic?",
+   "options": [
+    "5 centimetres",
+    "5 millimetres",
+    "5 micrometres",
+    "50 millimetres"
+   ],
+   "answerIndex": 1,
+   "why": "NOAA: pieces less than five millimetres long."
+  },
+  {
+   "q": "A microplastic that breaks off a plastic bottle is called…",
+   "options": [
+    "Primary",
+    "A microbead",
+    "A resin pellet",
+    "Secondary"
+   ],
+   "answerIndex": 3,
+   "why": "Secondary microplastics come from larger items breaking down."
+  },
+  {
+   "q": "From when did India ban identified single-use plastic items?",
+   "options": [
+    "1 July 2022",
+    "2 October 2019",
+    "1 January 2021",
+    "5 June 2024"
+   ],
+   "answerIndex": 0,
+   "why": "PIB: the ban took effect on 1 July 2022."
+  }
+ ],
+ "reviewNote": "Facts are from NOAA, PIB and the Wikipedia article (for primary/secondary and nanoplastics). 'Once added to face washes' reflects that several countries have banned microbeads; the script avoids saying where. 'Food packaging' on the sources card comes from the Wikipedia list. Moving facts: research on health effects is moving fast; the script stays cautious."
+}

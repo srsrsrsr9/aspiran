@@ -1,0 +1,133 @@
+{
+ "n": 258,
+ "id": "oxbow-lake",
+ "title": "How a River Leaves an Oxbow Lake",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Koonarta5899 (CC0); USGS Landsat (public domain); Dennis Cowals, US National Archives (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/258/Oxbow-lake-as-viewed-from-Airplane.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "say": "From a plane, you sometimes see a lake shaped like a horseshoe, right beside a river. The river made it, and then left it behind."
+  },
+  {
+   "src": "../raw/258/CREEK-MEANDERS-AND-OXBOWS-TYPICAL-OF-THIS-GENERAL-AREA---NARA---550543.jpg",
+   "kb": "pan",
+   "say": "On a flat plain, a river does not run straight. It swings from side to side in loops called meanders."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two banks of a bend",
+    "left": {
+     "title": "Outer (concave) bank",
+     "items": [
+      "fast water",
+      "undercut, steep"
+     ]
+    },
+    "right": {
+     "title": "Inner (convex) bank",
+     "items": [
+      "slow water",
+      "sand and silt pile up"
+     ]
+    }
+   },
+   "say": "On the outside of each bend, the water is fast and eats into the bank. On the inside, it slows down and drops sand and silt."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A loop closes",
+    "items": [
+     "The bend grows into a deep loop",
+     "Its neck narrows",
+     "The river cuts across the neck",
+     "It takes the short cut"
+    ]
+   },
+   "say": "Year after year, the loop grows deeper and its neck gets narrower. In the end, the river cuts straight across the neck."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Left behind",
+    "items": [
+     "The old loop is sealed off",
+     "A curved lake remains",
+     "That is an oxbow lake"
+    ]
+   },
+   "say": "The old loop is sealed off. What remains is a curved lake, cut off from the river. That is an oxbow lake."
+  },
+  {
+   "src": "../raw/258/Landsat-2015---Hokkaido-Teshio-river-near-Horonobe.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Seen from a satellite, old floodplains are full of them, a record of where the river used to flow."
+  },
+  {
+   "src": "../raw/258/Oxbow-lake-as-viewed-from-Airplane.jpg",
+   "kb": "out",
+   "say": "For GS One: erosion on the concave bank, deposition on the convex bank, a cut-off, and an oxbow lake. Draw it as four steps."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 6 (Landforms and their Evolution): streams on gentle slopes develop meandering courses; active deposition along the convex bank and undercutting along the concave bank; as meanders grow into deep loops they may get cut off by erosion at the inflection points and are left as ox-bow lakes; floodplains show natural levees and oxbow lakes; channels in plains leave cut-off courses that fill up gradually"
+ ],
+ "quiz": [
+  {
+   "q": "On which bank of a meander does the river erode most?",
+   "options": [
+    "The inner, convex bank",
+    "The outer, concave bank",
+    "Both equally",
+    "Neither: meanders only deposit"
+   ],
+   "answerIndex": 1,
+   "why": "Fast water undercuts the concave (outer) bank."
+  },
+  {
+   "q": "What finally creates an oxbow lake?",
+   "options": [
+    "A drought",
+    "An earthquake",
+    "A glacier",
+    "The river cutting across the narrow neck of a loop"
+   ],
+   "answerIndex": 3,
+   "why": "The neck narrows until the river cuts across it and leaves the loop."
+  },
+  {
+   "q": "Where are oxbow lakes most common?",
+   "options": [
+    "On flat floodplains",
+    "On steep mountain slopes",
+    "In deserts",
+    "On glaciers"
+   ],
+   "answerIndex": 0,
+   "why": "Meanders and oxbows form where the gradient is gentle, on floodplains."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT Class 11 Fundamentals of Physical Geography ch. 6. Diagrams are schematic. Moving facts: none."
+}

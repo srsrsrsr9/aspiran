@@ -1,0 +1,137 @@
+{
+ "voice": "auto",
+ "n": 211,
+ "id": "groundwater-aquifers",
+ "title": "Groundwater: How an Aquifer Fills and Empties",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-8"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Kasyap (CC0); unknown photographers (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/211/Stepwell-in-Bansilalpet.jpg",
+   "kb": "in",
+   "say": "Long before tube wells, Indians built stepwells, stairs down to water hidden under the ground. That hidden water is groundwater."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How an aquifer fills",
+    "items": [
+     "Rain falls",
+     "It soaks into soil and rock",
+     "It fills the gaps in sand, gravel and cracked rock",
+     "That wet layer is an aquifer"
+    ]
+   },
+   "say": "When rain soaks into the ground, it fills the tiny gaps in sand, gravel and cracked rock. A layer that holds and gives up water like this is called an aquifer."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The water table",
+    "items": [
+     "The top of the wet layer",
+     "Rises after the monsoon",
+     "Falls when we pump more than the rain puts back"
+    ]
+   },
+   "say": "The top of that wet layer is the water table. It rises after the monsoon, and falls when we take out more than the rain puts back."
+  },
+  {
+   "src": "../raw/211/Tube-well-in-India-in-1968.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "From the nineteen sixties, cheap pumps and tube wells changed everything. Farmers could lift water from deep below, whenever they wanted."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "title": "How much we take out",
+    "value": 0.6,
+    "big": "~60%",
+    "below": "of the yearly refill is pumped out, across India"
+   },
+   "say": "Today India is the world's largest user of groundwater. Across the country, we pump out about sixty per cent of what refills each year. Most of it goes to irrigation."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Average hides the trouble",
+    "left": {
+     "title": "Safe blocks",
+     "items": [
+      "Pumping well below refill"
+     ]
+    },
+    "right": {
+     "title": "Over-exploited blocks",
+     "items": [
+      "Pumping more than refill",
+      "Water table keeps falling"
+     ]
+    }
+   },
+   "say": "But that's an average. In parts of Punjab, Haryana, Rajasthan and Tamil Nadu, more is pumped than refills, and wells must go deeper every year."
+  },
+  {
+   "src": "../raw/211/Village-well-in-North-India-in-the-1900s.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "For GS One: recharge fills the aquifer, extraction empties it, and the water table shows which one is winning."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 12, India: People and Economy, ch. 6 (Water Resources): groundwater use is high in Punjab, Haryana, Rajasthan and Tamil Nadu; tube wells and over-use; recharge",
+  "Central Ground Water Board, Dynamic Ground Water Resources of India 2023 and 2024: stage of groundwater extraction about 60% nationally; most extraction is for irrigation; blocks classed safe, semi-critical, critical and over-exploited",
+  "World Bank, 'Deep Wells and Prudence' (2010) and CGWB: India is the largest user of groundwater in the world",
+  "NCERT Class 7, Our Environment, ch. on water / Class 9 science: water table, infiltration and aquifers"
+ ],
+ "quiz": [
+  {
+   "q": "What is an aquifer?",
+   "options": [
+    "A kind of dam",
+    "A layer of rock or sand that holds and gives up water",
+    "A cloud full of rain",
+    "A pipe for irrigation"
+   ],
+   "answerIndex": 1,
+   "why": "Rainwater fills the gaps in sand, gravel or cracked rock: that layer is an aquifer."
+  },
+  {
+   "q": "Roughly what share of the yearly refill does India pump out, on average?",
+   "options": [
+    "About 10%",
+    "About 200%",
+    "About 60%",
+    "Nothing"
+   ],
+   "answerIndex": 2,
+   "why": "CGWB puts the national stage of extraction at about sixty per cent."
+  },
+  {
+   "q": "What mostly uses India's groundwater?",
+   "options": [
+    "Irrigation",
+    "Factories",
+    "Cities",
+    "Hydropower"
+   ],
+   "answerIndex": 0,
+   "why": "Most groundwater is pumped for farming."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT's water-resources chapter and CGWB's 2023 and 2024 national assessments. Photos are a modern stepwell and old public-domain photos. Moving facts: CGWB updates the extraction figure every year or two."
+}

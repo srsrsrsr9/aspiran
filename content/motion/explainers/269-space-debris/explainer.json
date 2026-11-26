@@ -1,0 +1,163 @@
+{
+ "n": 269,
+ "id": "space-debris",
+ "title": "Space Debris: Junk in Orbit",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 3,
+  "line": "Pictures: NASA (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/269/pace-debris-is-pictured-from-the-International-Space-Station-iss074e0540224-.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "say": "Nobody knows what this object is. It was photographed from the space station, one of countless bits of orbiting junk."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What counts as debris",
+    "items": [
+     "Dead satellites",
+     "Spent rocket stages",
+     "Fragments from blasts and crashes",
+     "Even flecks of paint"
+    ]
+   },
+   "say": "Space debris is anything up there that no longer works: dead satellites, spent rocket stages, fragments, even flecks of paint."
+  },
+  {
+   "src": "../raw/269/LEO-SpaceDebris-Nov2020.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "The US Space Surveillance Network has catalogued more than thirty-four thousand objects. It tracks pieces bigger than about ten centimetres; smaller ones mostly go unseen.",
+   "numbers": [
+    {
+     "text": "34,000+",
+     "sub": "catalogued objects",
+     "word": "thirty-four",
+     "count": true
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Speed (km per second)",
+    "items": [
+     {
+      "label": "In low orbit",
+      "value": 8,
+      "show": "7–8"
+     },
+     {
+      "label": "Average crash",
+      "value": 10,
+      "show": "10"
+     },
+     {
+      "label": "Fastest crashes",
+      "value": 15,
+      "show": "15",
+      "hi": true
+     }
+    ]
+   },
+   "say": "In low orbit, debris moves at seven to eight kilometres a second. Crashes happen at about ten on average, so even a tiny piece hits hard."
+  },
+  {
+   "src": "../raw/269/Debris-impacts-on-a-LDEF-panel.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "These pits were made by tiny particles, on a panel that NASA brought back from orbit."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Two big setbacks",
+    "items": [
+     {
+      "year": "2007",
+      "text": "a weather satellite destroyed on purpose"
+     },
+     {
+      "year": "2009",
+      "text": "two satellites collide by accident"
+     }
+    ]
+   },
+   "say": "Two events made it much worse: a satellite destroyed on purpose in two thousand and seven, and an accidental crash in two thousand and nine."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Living with it",
+    "items": [
+     "The ISS dodges if the risk is above 1 in 10,000",
+     "Below 600 km, debris falls back within years"
+    ]
+   },
+   "say": "The space station dodges when the risk of a hit tops one in ten thousand. Below six hundred kilometres, debris falls back within years."
+  },
+  {
+   "src": "../raw/269/LEO-SpaceDebris-Nov2020.png",
+   "kb": "out",
+   "fit": "blur",
+   "say": "For GS Three, link this to space sustainability: where dead hardware is left decides how long it stays."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NASA Orbital Debris Program Office, FAQ (orbitaldebris.jsc.nasa.gov/faq): kinds of debris (derelict spacecraft, upper stages, fragments from explosions and collisions, paint flecks); the US Space Surveillance Network had catalogued more than 34,000 objects; routinely tracks objects larger than about 10 cm; debris in low Earth orbit travels at 7–8 km/s; average impact speed about 10 km/s, up to about 15 km/s; Fengyun-1C destruction (2007) and Iridium 33–Cosmos 2251 collision (2009) greatly increased large debris; the ISS manoeuvres when collision risk exceeds 1 in 10,000 (41 times since 1999); debris below 600 km normally falls back within several years"
+ ],
+ "quiz": [
+  {
+   "q": "About how fast does debris travel in low Earth orbit?",
+   "options": [
+    "7–8 km per second",
+    "7–8 km per hour",
+    "70–80 m per second",
+    "700–800 km per second"
+   ],
+   "answerIndex": 0,
+   "why": "NASA ODPO: about 7 to 8 km per second."
+  },
+  {
+   "q": "What size of object does the US network routinely track?",
+   "options": [
+    "Smaller than 1 mm",
+    "Only whole satellites",
+    "Larger than about 10 cm",
+    "Only objects above 600 km"
+   ],
+   "answerIndex": 2,
+   "why": "Routine tracking covers objects bigger than about 10 cm."
+  },
+  {
+   "q": "What happens to debris below about 600 km?",
+   "options": [
+    "It stays for millions of years",
+    "It drifts to the Moon",
+    "It is collected by the ISS",
+    "It normally falls back within several years"
+   ],
+   "answerIndex": 3,
+   "why": "Air drag pulls low debris down within several years."
+  }
+ ],
+ "reviewNote": "All facts are from the NASA ODPO FAQ. Countries are not named on purpose. Moving facts: the catalogued count (34,000+) and the ISS manoeuvre count rise over time; the count of manoeuvres is left out of the script. No India angle was sourced in time; ISRO's debris-free missions goal could be added with a PIB source."
+}

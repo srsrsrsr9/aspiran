@@ -1,0 +1,146 @@
+{
+ "n": 280,
+ "id": "carbon-credits",
+ "title": "Carbon Credits",
+ "format": "calm",
+ "syllabusNodes": [
+  "pre-6"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Picture: Thangaraj Kumaravel (CC BY 2.0). Footage: Tom Ackroyd (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/280/A-windmill-farm-Coimbatore-Palani-South-India.jpg",
+   "kb": "in",
+   "say": "What if cutting pollution earned you something you could sell? That is the idea behind a carbon credit."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "1 tonne",
+    "below": "of CO₂ avoided or removed = 1 credit"
+   },
+   "say": "One carbon credit stands for one tonne of carbon dioxide, or its equal in other greenhouse gases, kept out of the air or taken out of it."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "Carbon markets",
+    "items": [
+     {
+      "year": "1997",
+      "text": "Kyoto Protocol sets up trading, incl. CDM"
+     },
+     {
+      "year": "2020",
+      "text": "Kyoto period ends; Paris takes over"
+     },
+     {
+      "year": "2022",
+      "text": "Energy Conservation Act amended"
+     },
+     {
+      "year": "June 2023",
+      "text": "India's Carbon Credit Trading Scheme"
+     }
+    ]
+   },
+   "say": "The first international carbon markets came from the Kyoto Protocol in nineteen ninety-seven. India set up its own Carbon Credit Trading Scheme in June twenty twenty-three, under the amended Energy Conservation Act."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two ways to earn credits",
+    "left": {
+     "title": "Compliance",
+     "items": [
+      "for big polluting industries",
+      "beat your emission-intensity target"
+     ]
+    },
+    "right": {
+     "title": "Offset",
+     "items": [
+      "for anyone else",
+      "register a project that cuts or removes emissions"
+     ]
+    }
+   },
+   "say": "It works in two ways. In the compliance mechanism, set industries must cut their emissions per unit of output. In the offset mechanism, others can register projects that cut or remove emissions."
+  },
+  {
+   "src": "../raw/280/Brooklyn-Wind-Turbine.webm",
+   "t": 1.0,
+   "say": "Either way, those who do better than required earn carbon credit certificates."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Why trade?",
+    "items": [
+     "Firm A beats its target",
+     "Firm B falls short",
+     "B buys A's credits",
+     "Emissions get a price"
+    ]
+   },
+   "say": "A firm that beats its target can sell credits to one that falls short. That puts a price on emissions, and helps India meet its climate pledges under the Paris Agreement."
+  },
+  {
+   "src": "../raw/280/A-windmill-farm-Coimbatore-Palani-South-India.jpg",
+   "kb": "out",
+   "say": "For GS Three, remember: one credit is one tonne, and India's scheme has two mechanisms, compliance and offset."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Wikipedia, 'Carbon credit' (read): one carbon credit represents the avoided or enhanced removal of one metric ton of CO2 or CO2-equivalent; the Kyoto Protocol (1997) created the first international compliance markets including the Clean Development Mechanism; Kyoto was to expire in 2020, superseded by the Paris Agreement",
+  "PIB, Parliament question on the Indian Carbon Market (PRID 2082528): framework under the Energy Conservation (Amendment) Act, 2022, section 14(w); Carbon Credit Trading Scheme notified by S.O. 2825(E) dated 28 June 2023 and amended later; compliance mechanism (obligated entities meeting GHG emission-intensity norms; those below target eligible for Carbon Credit Certificates) and offset mechanism (non-obligated entities register projects for reduction, removal or avoidance); aims to price GHG emissions and help meet India's NDCs under the Paris Agreement"
+ ],
+ "quiz": [
+  {
+   "q": "One carbon credit represents…",
+   "options": [
+    "One kilogram of any gas",
+    "One tree planted",
+    "One tonne of CO₂ (or equivalent) avoided or removed",
+    "One unit of electricity saved"
+   ],
+   "answerIndex": 2,
+   "why": "One credit = one tonne of CO2 or CO2-equivalent."
+  },
+  {
+   "q": "Under which law was India's Carbon Credit Trading Scheme notified?",
+   "options": [
+    "Energy Conservation Act (as amended in 2022)",
+    "Environment Protection Act, 1986",
+    "Forest Conservation Act",
+    "Air Act, 1981"
+   ],
+   "answerIndex": 0,
+   "why": "Section 14(w) of the amended Energy Conservation Act."
+  },
+  {
+   "q": "In India's offset mechanism, who can earn credits?",
+   "options": [
+    "Only steel plants",
+    "Only government bodies",
+    "Only foreign companies",
+    "Non-obligated entities with registered projects"
+   ],
+   "answerIndex": 3,
+   "why": "PIB: non-obligated entities can register projects for credits."
+  }
+ ],
+ "reviewNote": "Definitions are from Wikipedia; the Indian scheme is from a PIB parliamentary reply. 'Kyoto period ends; Paris takes over' simplifies the transition. The trading example in the flow is illustrative. The CC0 turbine clip is from New York; check no logo shows. Moving facts: sectors with notified targets keep growing."
+}

@@ -1,0 +1,152 @@
+{
+ "voice": "auto",
+ "n": 227,
+ "id": "what-webb-sees",
+ "title": "What the Webb Telescope Sees",
+ "format": "fast",
+ "syllabusNodes": [
+  "pre-7"
+ ],
+ "gsPaper": [
+  "prelims"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA, ESA, CSA, STScI; NASA/MSFC (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/227/Pillars-of-Creation-NIRCam-Image-.jpg",
+   "kb": "pan",
+   "fit": "cover",
+   "say": "These towers of gas and dust are where new stars are born. The James Webb Space Telescope can see right through them."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The Webb telescope",
+    "items": [
+     "Launched 25 December 2021",
+     "Built by NASA, ESA and Canada",
+     "The biggest telescope in space"
+    ]
+   },
+   "say": "Webb was launched on Christmas Day, twenty twenty-one. It is the largest telescope ever sent into space."
+  },
+  {
+   "src": "../raw/227/James-Webb-Primary-Mirror.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Its mirror is six and a half metres wide: eighteen hexagons, coated with a thin layer of gold.",
+   "numbers": [
+    {
+     "text": "6.5 m",
+     "sub": "18 gold-coated segments",
+     "word": "six"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Why infrared?",
+    "left": {
+     "title": "Visible light",
+     "items": [
+      "Blocked by dust",
+      "Light from the first galaxies is stretched"
+     ]
+    },
+    "right": {
+     "title": "Infrared",
+     "items": [
+      "Passes through dust",
+      "Catches that stretched old light"
+     ]
+    }
+   },
+   "say": "Webb sees infrared, heat light. Infrared passes through dust, and catches light from the earliest galaxies, stretched on its long journey."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Kept very cold",
+    "items": [
+     "Parks 1.5 million km from Earth",
+     "A tennis-court-sized sunshield",
+     "Mirror stays far below freezing"
+    ]
+   },
+   "say": "To see heat, it must stay very cold. It sits one and a half million kilometres away, behind a sunshield the size of a tennis court."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What it looks for",
+    "items": [
+     "The first galaxies",
+     "Stars being born",
+     "Air around faraway planets"
+    ]
+   },
+   "say": "It looks for the first galaxies, for stars being born, and even for the gases in the air of planets around other stars."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Infrared telescope",
+     "Sun–Earth L2 point",
+     "Successor to Hubble"
+    ]
+   },
+   "say": "For Prelims: Webb is an infrared telescope at the second Lagrange point, and the successor to Hubble."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NASA, webb.nasa.gov: launch 25 December 2021; partnership of NASA, ESA and the Canadian Space Agency; 6.5 m primary mirror of 18 gold-coated hexagonal segments; tennis-court-sized sunshield; orbit around Sun–Earth L2 about 1.5 million km from Earth; infrared observations of early galaxies, star formation and exoplanet atmospheres",
+  "NASA / STScI, 19 October 2022: Webb NIRCam image of the Pillars of Creation (public domain)",
+  "NASA/MSFC photo of Webb primary mirror segments (public domain)"
+ ],
+ "quiz": [
+  {
+   "q": "Which kind of light does Webb mainly see?",
+   "options": [
+    "X-rays",
+    "Infrared",
+    "Ultraviolet",
+    "Radio"
+   ],
+   "answerIndex": 1,
+   "why": "Infrared passes through dust and catches stretched early light."
+  },
+  {
+   "q": "Where is Webb placed?",
+   "options": [
+    "Low Earth orbit",
+    "On the Moon",
+    "Around the Sun–Earth L2 point",
+    "At the Sun–Earth L1 point"
+   ],
+   "answerIndex": 2,
+   "why": "About 1.5 million km away at L2."
+  },
+  {
+   "q": "What is Webb's main mirror made of?",
+   "options": [
+    "18 gold-coated hexagonal segments",
+    "One round glass disc",
+    "Silver foil",
+    "Solar panels"
+   ],
+   "answerIndex": 0,
+   "why": "6.5 m wide, 18 segments coated with gold."
+  }
+ ],
+ "reviewNote": "Facts were read against NASA's Webb mission pages. Both pictures are NASA public domain; the mirror photo shows segments only. Moving facts: none."
+}

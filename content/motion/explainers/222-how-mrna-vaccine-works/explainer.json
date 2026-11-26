@@ -1,0 +1,153 @@
+{
+ "voice": "auto",
+ "n": 222,
+ "id": "how-mrna-vaccine-works",
+ "title": "How an mRNA Vaccine Works",
+ "format": "fast",
+ "syllabusNodes": [
+  "pre-7"
+ ],
+ "gsPaper": [
+  "prelims"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Picture: NIAID (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/222/52200595641faf19a1b91o.-COVID-19-mRNA-Vaccines.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Most vaccines show your body a piece of the germ. An mRNA vaccine does something cleverer: it gives your body the recipe."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The recipe",
+    "items": [
+     "mRNA: an instruction for one protein",
+     "Wrapped in a tiny bubble of fat",
+     "Enters your cells",
+     "Cells make the germ's protein"
+    ]
+   },
+   "say": "mRNA is a short instruction for making one protein. Wrapped in a tiny bubble of fat, it slips into your cells, and they make that protein, say, the spike of a virus."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The training",
+    "items": [
+     "Immune system sees the protein",
+     "It makes antibodies and memory cells",
+     "Real virus arrives later",
+     "The body is ready"
+    ]
+   },
+   "say": "Your immune system sees the strange protein, makes antibodies, and remembers it. When the real virus comes, it is ready."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What it does NOT do",
+    "items": [
+     "It doesn't enter the nucleus",
+     "It doesn't change your DNA",
+     "It breaks down within days"
+    ]
+   },
+   "say": "The mRNA never enters the nucleus, where your DNA is kept, and it can't change your DNA. Your cells break it down within days."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Why it was fast",
+    "left": {
+     "title": "Older vaccines",
+     "items": [
+      "Grow the germ or its parts",
+      "Months of lab work"
+     ]
+    },
+    "right": {
+     "title": "mRNA",
+     "items": [
+      "Write the code",
+      "Change it quickly for new strains"
+     ]
+    }
+   },
+   "say": "Why so fast during COVID? Because once the virus's code is known, the recipe can be written and changed quickly. The work behind it won the twenty twenty-three Nobel Prize in Medicine."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India",
+    "items": [
+     "GEMCOVAC: India's first mRNA vaccine",
+     "Approved for emergency use in 2022",
+     "Stored in an ordinary fridge"
+    ]
+   },
+   "say": "India's first mRNA vaccine, GEMCOVAC, was cleared for emergency use in twenty twenty-two, and can be kept in an ordinary fridge."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "mRNA → protein → immune memory",
+     "No change to DNA",
+     "Fast to design"
+    ]
+   },
+   "say": "For Prelims: mRNA carries the recipe, cells make the protein, the body remembers, and your DNA stays untouched."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "US CDC, 'Understanding How COVID-19 Vaccines Work' / 'mRNA vaccines': mRNA instructs cells to make a harmless piece of spike protein; it never enters the nucleus and does not affect DNA; cells break down the mRNA soon after",
+  "NobelPrize.org, Nobel Prize in Physiology or Medicine 2023: awarded for nucleoside base modification discoveries that enabled effective mRNA vaccines against COVID-19",
+  "PIB / Department of Biotechnology, June 2022: GEMCOVAC-19, India's first mRNA vaccine, developed with DBT support, received emergency use authorisation; stored at 2–8°C"
+ ],
+ "quiz": [
+  {
+   "q": "What does an mRNA vaccine give your cells?",
+   "options": [
+    "A weakened virus",
+    "Instructions to make one protein",
+    "Antibodies from another person",
+    "Vitamins"
+   ],
+   "answerIndex": 1,
+   "why": "It carries the recipe; your cells make the protein."
+  },
+  {
+   "q": "Does mRNA change your DNA?",
+   "options": [
+    "Yes, permanently",
+    "Only in children",
+    "No; it never enters the nucleus and breaks down",
+    "Only the first dose"
+   ],
+   "answerIndex": 2,
+   "why": "It stays outside the nucleus and is broken down within days."
+  },
+  {
+   "q": "What is GEMCOVAC?",
+   "options": [
+    "India's first mRNA vaccine",
+    "A polio drop",
+    "A satellite",
+    "A malaria drug"
+   ],
+   "answerIndex": 0,
+   "why": "Cleared for emergency use in 2022."
+  }
+ ],
+ "reviewNote": "Facts were read against CDC's mRNA explainer, NobelPrize.org and the DBT/PIB release on GEMCOVAC. No people named or shown. Moving facts: none."
+}

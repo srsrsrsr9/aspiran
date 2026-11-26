@@ -1,0 +1,144 @@
+{
+ "n": 271,
+ "id": "lithium-electric-car",
+ "title": "Lithium and the Electric Car",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA Scientific Visualization Studio (public domain); Sevenethics (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/271/Lithium-Ponds-of-Chile-s-Salar-de-Atacama-SVS15006-.jpg",
+   "kb": "in",
+   "say": "These bright pools in a Chilean desert are drying out salty water to collect lithium, the lightest metal there is."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Why lithium",
+    "items": [
+     "The least dense metal",
+     "More energy for its weight",
+     "Recharges many times"
+    ]
+   },
+   "say": "Batteries built on lithium store more energy for their weight than other rechargeable kinds, and last for many charges. That is why phones and electric cars use them."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Inside a cell",
+    "items": [
+     "Charging: lithium ions move into one electrode",
+     "Driving: they flow back to the other",
+     "That flow powers the motor"
+    ]
+   },
+   "say": "Inside, lithium ions slip in and out of two electrode materials. Charging pushes them one way; driving lets them flow back, and that flow powers the car."
+  },
+  {
+   "src": "../raw/271/18650-and-21700-lithium-ion-battery-cell.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "Cells like these, packed by the hundreds or thousands, make up an electric car's battery."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Where lithium comes from",
+    "left": {
+     "title": "Salty brines",
+     "items": [
+      "dried in ponds",
+      "Chile: largest reserves"
+     ]
+    },
+    "right": {
+     "title": "Hard rock",
+     "items": [
+      "mined from ore",
+      "Australia: top producer"
+     ]
+    }
+   },
+   "say": "Most lithium comes from salty underground brines, like Chile's, or from hard-rock mines, like Australia's."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India's search",
+    "items": [
+     "2023: 5.9 million tonnes (inferred) found in Reasi, J&K",
+     "2024: lithium blocks taken up in Argentina"
+    ]
+   },
+   "say": "In twenty twenty-three, the Geological Survey of India reported five point nine million tonnes of inferred lithium resources in Reasi, Jammu and Kashmir. India has also taken up lithium blocks in Argentina.",
+   "numbers": [
+    {
+     "text": "5.9 mt",
+     "sub": "inferred lithium resources, Reasi",
+     "word": "five point nine"
+    }
+   ]
+  },
+  {
+   "src": "../raw/271/Lithium-Ponds-of-Chile-s-Salar-de-Atacama-SVS15006-.jpg",
+   "kb": "out",
+   "say": "For GS Three, treat lithium as a critical mineral: link it to electric mobility, imports and energy security."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Wikipedia, 'Lithium' (read): least dense metal; commonly obtained from brines; Chile estimated (2020) to have the largest reserves, Australia the highest annual production",
+  "Wikipedia, 'Lithium-ion battery' (read): rechargeable battery using reversible intercalation of lithium ions into electrode materials; higher specific energy and energy density and longer cycle life than other rechargeable types",
+  "PIB, 9 February 2023 (PRID 1897799): GSI established lithium inferred resources (G3) of 5.9 million tonnes in Salal-Haimana, Reasi district, J&K",
+  "PIB (PRID 2114466): KABIL signed an exploration and development agreement on 15 January 2024 for five brine-type lithium blocks in Catamarca, Argentina"
+ ],
+ "quiz": [
+  {
+   "q": "Where did GSI report inferred lithium resources of 5.9 million tonnes in 2023?",
+   "options": [
+    "Kolar, Karnataka",
+    "Reasi, Jammu and Kashmir",
+    "Singhbhum, Jharkhand",
+    "Kutch, Gujarat"
+   ],
+   "answerIndex": 1,
+   "why": "PIB: Salal-Haimana area of Reasi district, J&K."
+  },
+  {
+   "q": "Why are lithium-ion batteries used in electric cars?",
+   "options": [
+    "They never need charging",
+    "They are the cheapest metal batteries",
+    "They store more energy for their weight",
+    "They work without electrodes"
+   ],
+   "answerIndex": 2,
+   "why": "Higher specific energy and energy density, and a long cycle life."
+  },
+  {
+   "q": "In Chile's salt flats, lithium is mainly collected by…",
+   "options": [
+    "Evaporating brine in ponds",
+    "Deep coal-style mining",
+    "Filtering seawater at sea",
+    "Burning rock in furnaces"
+   ],
+   "answerIndex": 0,
+   "why": "Brine is pumped into ponds and left to evaporate."
+  }
+ ],
+ "reviewNote": "India facts are from two PIB releases; the battery and lithium basics are from Wikipedia and should be checked against an official source (for example USGS Mineral Commodity Summaries) before approval. 'Inferred' is a low-confidence resource class; the script keeps that word. 'Hundreds or thousands' of cells per car is general knowledge, not sourced. Moving facts: reserve and production rankings change yearly; India's lithium auctions are ongoing."
+}

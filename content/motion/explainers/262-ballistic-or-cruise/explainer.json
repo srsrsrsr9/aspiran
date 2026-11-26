@@ -1,0 +1,170 @@
+{
+ "n": 262,
+ "id": "ballistic-or-cruise",
+ "title": "Ballistic or Cruise: Two Kinds of Missile",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 4,
+  "line": "Picture: San Diego Air and Space Museum Archives (no known restrictions)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Same target, two ways",
+    "left": {
+     "title": "Ballistic",
+     "items": [
+      "Thrown like a ball"
+     ]
+    },
+    "right": {
+     "title": "Cruise",
+     "items": [
+      "Flies like a small plane"
+     ]
+    }
+   },
+   "say": "Two missiles can reach the same far-off target in very different ways. One is thrown like a ball; the other flies like a small plane."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A ballistic flight",
+    "items": [
+     "Boost: the rocket burns briefly",
+     "Mid-course: an unpowered, high arc",
+     "Terminal: it falls onto the target"
+    ]
+   },
+   "say": "A ballistic missile is powered only for a short time at the start. Most of its flight is unpowered: it coasts along a high arc and then falls onto its target."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "How high?",
+    "items": [
+     "Long-range ballistic missiles leave the atmosphere",
+     "Peak height: well over 1,000 km"
+    ]
+   },
+   "say": "An intercontinental ballistic missile climbs more than a thousand kilometres, far above the air, before it falls.",
+   "numbers": [
+    {
+     "text": "1,000+ km",
+     "sub": "peak height of a long-range ballistic missile",
+     "word": "thousand"
+    }
+   ]
+  },
+  {
+   "src": "../raw/262/air-Negative-Image---Tomahawk-missile-test-launch-from-aircraft-53806545579-.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "A cruise missile works differently. Its engine runs through the flight, wings give it lift, and it steers itself, often flying very low.",
+   "focus": [
+    0.25,
+    0.7
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Side by side",
+    "left": {
+     "title": "Ballistic",
+     "items": [
+      "powered briefly",
+      "high arc, can leave the air",
+      "falls onto target"
+     ]
+    },
+    "right": {
+     "title": "Cruise",
+     "items": [
+      "powered all the way",
+      "stays in the atmosphere",
+      "flies low, like a plane"
+     ]
+    }
+   },
+   "say": "So the ballistic missile rises high and falls fast. The cruise missile stays inside the atmosphere and is harder to spot coming."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India has both",
+    "items": [
+     "Agni: ballistic",
+     "Mission Divyastra, 2024: Agni-5 with several warheads",
+     "BrahMos: cruise, built with Russia"
+    ]
+   },
+   "say": "India has both. In March twenty twenty-four, Mission Divyastra tested Agni-Five carrying several warheads aimed at different targets. BrahMos is a cruise missile developed with Russia."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Two questions for any missile",
+    "items": [
+     "Is it powered all the way?",
+     "Does it leave the atmosphere?"
+    ]
+   },
+   "say": "For GS Three, ask two questions of any missile: is it powered all the way, and does it leave the atmosphere?"
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Wikipedia, 'Ballistic missile' (summary read): powered only for a short initial period, most of the flight unpowered; boost, mid-course and terminal phases; long-range (ICBM) trajectories peak well above 1,000 km, outside the atmosphere",
+  "Wikipedia, 'Cruise missile' (summary read): self-navigating, flies a non-ballistic, often very low path; aerodynamically guided in powered flight and stays within the atmosphere",
+  "PIB, 11 March 2024 (PRID 2013549): Mission Divyastra, the first flight test of Agni-5 with Multiple Independently Targetable Re-entry Vehicle technology, from Dr APJ Abdul Kalam Island, Odisha",
+  "DRDO, BrahMos page: BrahMos is a joint venture of DRDO (India) and NPOM (Russia); inducted into the Indian Navy and Army"
+ ],
+ "quiz": [
+  {
+   "q": "For most of its flight, a ballistic missile is…",
+   "options": [
+    "Unpowered, following an arc",
+    "Powered by a jet engine",
+    "Held up by its wings",
+    "Steered by a pilot"
+   ],
+   "answerIndex": 0,
+   "why": "It burns only briefly at the start, then coasts along a ballistic path."
+  },
+  {
+   "q": "What did Mission Divyastra (March 2024) test?",
+   "options": [
+    "A new cruise missile",
+    "Agni-5 with multiple independently targetable warheads",
+    "A missile defence shield",
+    "A ship-launched BrahMos"
+   ],
+   "answerIndex": 1,
+   "why": "PIB: the first flight test of Agni-5 with MIRV technology."
+  },
+  {
+   "q": "Which statement about cruise missiles is correct?",
+   "options": [
+    "They always leave the atmosphere",
+    "They are unpowered after launch",
+    "They stay in the atmosphere and are powered through flight",
+    "They cannot be steered"
+   ],
+   "answerIndex": 2,
+   "why": "Cruise missiles fly like small planes, powered and within the air."
+  }
+ ],
+ "reviewNote": "Physics of the two types comes from Wikipedia summaries; official confirmation is from PIB (Divyastra) and DRDO (BrahMos). No BrahMos speed is given because the figure was not read from an official page. The archive photo is from the SDASM negative collection; check it reads correctly (not an inverted negative) and that no logo shows. Only one picture was found under an allowed licence, so the video leans on diagrams. Moving facts: missile tests are frequent; check nothing newer changes the India card. The ICBM peak height was softened to 'more than a thousand kilometres', which every source agrees on."
+}

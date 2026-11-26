@@ -1,0 +1,143 @@
+{
+ "voice": "auto",
+ "n": 204,
+ "id": "el-nino-india-rain",
+ "title": "El Niño and India's Rain",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: Mostafameraji (CC0). Picture: Andrew Cattoir, US National Park Service (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/204/Ocean-surface-waves.ogv",
+   "t": 2,
+   "say": "Thousands of kilometres away, in the Pacific Ocean, a patch of sea warms up by a degree or two. And farmers in India start to worry."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "A normal year",
+    "items": [
+     "Trade winds blow west across the Pacific",
+     "Warm water piles up near Asia",
+     "Air rises there and brings rain"
+    ]
+   },
+   "say": "In a normal year, trade winds push warm surface water west across the Pacific. Warm, moist air rises over that water and brings rain."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "An El Niño year",
+    "items": [
+     "Trade winds weaken",
+     "Warm water spreads east, towards South America",
+     "Rising air shifts east too"
+    ]
+   },
+   "say": "In an El Niño year, the trade winds weaken. The warm water spreads east, towards South America, and the rising air moves with it."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What it means for India",
+    "items": [
+     "Sinking, drier air over India",
+     "Monsoon often weaker",
+     "Not every time"
+    ]
+   },
+   "say": "Over India, more air sinks instead of rising. So the monsoon is often weaker, and droughts become more likely."
+  },
+  {
+   "src": "../raw/204/Dry-Cracked-Mud-4957b8b2-f52c-43b0-acc2-ead42cf6f03b-.jpg",
+   "kb": "in",
+   "say": "But not always. In nineteen ninety-seven, a very strong El Niño came, and India's monsoon was still normal. The Indian Ocean had its own say.",
+   "numbers": [
+    {
+     "text": "1997",
+     "sub": "strong El Niño, normal monsoon",
+     "word": "nineteen"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two phases",
+    "left": {
+     "title": "El Niño",
+     "items": [
+      "Warm eastern Pacific",
+      "Monsoon often weaker"
+     ]
+    },
+    "right": {
+     "title": "La Niña",
+     "items": [
+      "Cool eastern Pacific",
+      "Monsoon often stronger"
+     ]
+    }
+   },
+   "say": "Its opposite is La Niña, when the eastern Pacific turns cooler than usual. La Niña years often bring India a good monsoon. The swing comes every two to seven years."
+  },
+  {
+   "src": "../raw/204/Ocean-surface-waves-03.ogv",
+   "t": 3,
+   "say": "For GS One: El Niño warms the eastern Pacific, weakens the trade winds, and often, but not always, weakens India's monsoon."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, India: Physical Environment, ch. 4 (Climate): El Niño, warm current off Peru, linked to weaker Indian monsoon; used in long-range forecasts",
+  "NOAA Climate.gov, 'What is the El Niño–Southern Oscillation (ENSO) in a nutshell?': trade winds weaken in El Niño, warm water shifts east; La Niña is the cool phase; episodes recur every 2–7 years",
+  "IMD, Monsoon Report 1997: all-India June–September rainfall was 102% of the long-period average despite a strong El Niño; positive Indian Ocean Dipole cited"
+ ],
+ "quiz": [
+  {
+   "q": "What happens to the Pacific trade winds in an El Niño year?",
+   "options": [
+    "They weaken",
+    "They get much stronger",
+    "They reverse to blow north",
+    "They stop only over India"
+   ],
+   "answerIndex": 0,
+   "why": "Weaker trade winds let the warm water spread east."
+  },
+  {
+   "q": "Why does El Niño often weaken India's monsoon?",
+   "options": [
+    "It cools the Bay of Bengal",
+    "It blocks the Himalayas",
+    "More air sinks over India instead of rising",
+    "It moves the Western Ghats"
+   ],
+   "answerIndex": 2,
+   "why": "With the rising air shifted east, more air sinks over India, so less rain."
+  },
+  {
+   "q": "What does 1997 show?",
+   "options": [
+    "El Niño always causes drought",
+    "A strong El Niño can still come with a normal monsoon",
+    "La Niña causes floods every year",
+    "El Niño began in 1997"
+   ],
+   "answerIndex": 1,
+   "why": "1997 had a very strong El Niño but a normal monsoon."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT's climate chapter, NOAA's ENSO explainer and IMD's 1997 monsoon figures. Diagrams are schematic, no map. Moving facts: none; the El Niño–monsoon link is a tendency, stated as one."
+}

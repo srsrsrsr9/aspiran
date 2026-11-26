@@ -1,0 +1,170 @@
+{
+ "voice": "auto",
+ "n": 230,
+ "id": "how-gst-works",
+ "title": "How GST Taxes Only the Value Added",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-2"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Diagrams: Aspiran"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "A shirt's journey",
+    "items": [
+     "Farmer grows cotton",
+     "Mill makes cloth",
+     "Tailor makes a shirt",
+     "Shop sells it to you"
+    ]
+   },
+   "say": "A shirt passes through many hands: farmer, mill, tailor, shop. If each one is taxed on the full price, tax piles on tax."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "The old problem",
+    "left": {
+     "title": "Before",
+     "items": [
+      "Tax on the full price at each step",
+      "Tax on tax: the cascade",
+      "Different taxes in each state"
+     ]
+    },
+    "right": {
+     "title": "GST",
+     "items": [
+      "Tax only on value added",
+      "Credit for tax already paid",
+      "One tax across India"
+     ]
+    }
+   },
+   "say": "That was the old problem, called cascading: tax on tax. GST fixes it by taxing only the value each step adds."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Say the rate is 10%",
+    "items": [
+     "Mill sells cloth for ₹100: tax ₹10",
+     "Tailor sells shirt for ₹150: tax ₹15",
+     "Tailor subtracts ₹10 already paid",
+     "Tailor pays only ₹5"
+    ]
+   },
+   "say": "Imagine a ten percent rate. The mill sells cloth for a hundred rupees and pays ten in tax. The tailor sells the shirt for a hundred and fifty: tax fifteen. But the tailor subtracts the ten already paid, and pays just five."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Input tax credit",
+    "items": [
+     "Each seller claims the tax already paid",
+     "Only the value they added is taxed",
+     "The full tax is paid by the final buyer"
+    ]
+   },
+   "say": "That subtraction is called input tax credit. In the end, the full tax lands on the final buyer, once."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "How it came",
+    "items": [
+     {
+      "year": "2016",
+      "text": "101st Constitutional Amendment"
+     },
+     {
+      "year": "2016",
+      "text": "GST Council set up (Article 279A)"
+     },
+     {
+      "year": "1 July 2017",
+      "text": "GST begins"
+     }
+    ]
+   },
+   "say": "GST came through the hundred-and-first Constitutional Amendment in twenty sixteen, and began on the first of July, twenty seventeen."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The GST Council",
+    "items": [
+     "Union Finance Minister chairs",
+     "Every state's finance minister",
+     "Decides rates and rules"
+    ]
+   },
+   "say": "Rates are decided by the GST Council, chaired by the Union Finance Minister, with finance ministers of all the states. A rare example of shared decision-making."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Destination-based tax on value added",
+     "Input tax credit ends cascading",
+     "GST Council: Article 279A"
+    ]
+   },
+   "say": "For GS Three: GST taxes value added, input tax credit ends tax on tax, and the GST Council under Article two seventy-nine A sets the rates. It is also a good example of cooperative federalism for GS Two."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "The Constitution (One Hundred and First Amendment) Act, 2016: Article 246A, Article 269A and Article 279A (GST Council: Union Finance Minister as chairperson, state finance ministers as members)",
+  "CBIC, GST concept and status / FAQs (cbic-gst.gov.in): GST rolled out 1 July 2017; destination-based tax on supply; input tax credit removes the cascading effect",
+  "The worked example uses an imaginary 10% rate for arithmetic only"
+ ],
+ "quiz": [
+  {
+   "q": "What does input tax credit prevent?",
+   "options": [
+    "Tax evasion",
+    "Tax on tax (cascading)",
+    "Inflation",
+    "Imports"
+   ],
+   "answerIndex": 1,
+   "why": "Each seller subtracts tax already paid."
+  },
+  {
+   "q": "Which Article creates the GST Council?",
+   "options": [
+    "Article 280",
+    "Article 360",
+    "Article 279A",
+    "Article 21A"
+   ],
+   "answerIndex": 2,
+   "why": "Inserted by the 101st Amendment, 2016."
+  },
+  {
+   "q": "When did GST begin?",
+   "options": [
+    "1 July 2017",
+    "1 April 2016",
+    "26 January 2018",
+    "15 August 2017"
+   ],
+   "answerIndex": 0,
+   "why": "Rolled out on 1 July 2017."
+  }
+ ],
+ "reviewNote": "Facts were read against the 101st Amendment Act and CBIC's GST pages. The 10% example is labelled as imaginary in the narration. Moving facts: GST rate slabs change; none are stated."
+}

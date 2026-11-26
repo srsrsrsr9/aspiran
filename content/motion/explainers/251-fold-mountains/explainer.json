@@ -1,0 +1,150 @@
+{
+ "n": 251,
+ "id": "fold-mountains",
+ "title": "How Fold Mountains Form",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-7"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: Dfromhimalayas (CC BY 4.0). Pictures: NASA (public domain); Kerk Phillips (public domain)"
+ },
+ "segments": [
+  {
+   "src": "../raw/251/Timelapse-2025-Kinnaur-Monsoon.webm",
+   "t": 2.0,
+   "kb": "in",
+   "say": "What if the highest mountains on Earth began as mud at the bottom of a sea? The Himalayas did."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Before the mountains",
+    "items": [
+     "India drifts north",
+     "A sea, the Tethys, lies between",
+     "Rivers fill it with layers of mud and sand"
+    ]
+   },
+   "say": "About two hundred million years ago, India began to drift north. Between it and Asia lay a sea, the Tethys, slowly filling with layers of sediment."
+  },
+  {
+   "src": "../raw/251/Folded-Rock-Provo-Canyon.JPG",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "Squeeze soft layers from two sides and they bend, like a rug pushed against a wall. Geographers call that folding."
+  },
+  {
+   "src": "../raw/251/ISS-43-Himalaya-range-near-the-China-India-border.jpg",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "say": "About forty to fifty million years ago, India ran into Asia. Both plates were too light to sink, so the crust between them crumpled upward.",
+   "numbers": [
+    {
+     "text": "40–50",
+     "sub": "million years ago: India meets Asia",
+     "word": "forty"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two kinds of fold",
+    "left": {
+     "title": "Anticline",
+     "items": [
+      "an upfold",
+      "layers arch up"
+     ]
+    },
+    "right": {
+     "title": "Syncline",
+     "items": [
+      "a downfold",
+      "layers sag down"
+     ]
+    }
+   },
+   "say": "The upfolds are called anticlines, and the downfolds are synclines. Together they make the long parallel ranges we see in the Himalayas."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Still rising",
+    "items": [
+     "More than 1 cm a year",
+     "Fossils of sea life in the rocks of Tibet"
+    ]
+   },
+   "say": "The push has not stopped. The Himalayas still rise by more than a centimetre a year, and their rocks still carry fossils from that old sea.",
+   "numbers": [
+    {
+     "text": "1 cm+",
+     "sub": "a year",
+     "word": "centimetre"
+    }
+   ]
+  },
+  {
+   "src": "../raw/251/Timelapse-2025-Kinnaur-Monsoon.webm",
+   "t": 9.0,
+   "kb": "out",
+   "say": "For GS One: fold mountains are young, formed where plates converge, and the Himalayas are the textbook case."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 4 (Distribution of Oceans and Continents): India collided with Asia about 40–50 million years ago causing rapid uplift of the Himalayas; the process is still continuing",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 5 (Geomorphic Processes): orogeny is mountain building through severe folding; upfolds are anticlines and downfolds synclines",
+  "NCERT Class 11, India: Physical Environment, ch. 2: the Himalayas are a series of parallel ranges with faults, folds and thrust planes",
+  "USGS, This Dynamic Earth, 'The Himalayas: Two continents collide': Tethys Sea between India and Asia; India moved north after Pangaea broke up about 200 million years ago; similar rock density so neither plate subducted; Himalayas rise more than 1 cm a year; Tethys fossils in Tibetan sandstones"
+ ],
+ "quiz": [
+  {
+   "q": "Why did the crust crumple upward when India met Asia?",
+   "options": [
+    "One plate sank quickly under the other",
+    "Both plates were too light to sink, so the crust was pushed up",
+    "A volcano erupted under the sea",
+    "The sea froze and expanded"
+   ],
+   "answerIndex": 1,
+   "why": "Both continental plates have about the same density, so neither sank and the crust rose."
+  },
+  {
+   "q": "What is a syncline?",
+   "options": [
+    "An upfold",
+    "A crack in a rock",
+    "A downfold",
+    "A volcanic cone"
+   ],
+   "answerIndex": 2,
+   "why": "Upfolds are anticlines; downfolds are synclines."
+  },
+  {
+   "q": "Roughly when did India collide with Asia?",
+   "options": [
+    "About 4–5 million years ago",
+    "About 400 million years ago",
+    "About 4,000 years ago",
+    "About 40–50 million years ago"
+   ],
+   "answerIndex": 3,
+   "why": "NCERT and USGS both give about 40 to 50 million years ago."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT Class 11 (Fundamentals of Physical Geography ch. 4 and 5; India: Physical Environment ch. 2) and the USGS 'This Dynamic Earth' page on the Himalayas. Diagrams are schematic, no map. The orbital photo is cropped to peaks; check that no place label shows. Moving facts: the uplift rate is an estimate and varies by study."
+}

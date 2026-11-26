@@ -1,0 +1,152 @@
+{
+ "voice": "auto",
+ "n": 214,
+ "id": "aditya-l1",
+ "title": "Aditya-L1: India's Sun Watcher",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: ISRO (CC0; CC BY 3.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/214/Aditya-L1-sun-image1.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Point a telescope at the Sun from Earth, and our air gets in the way. So India sent one a million and a half kilometres out."
+  },
+  {
+   "src": "../raw/214/PSLV-XL-C57-Aditya-L1-ISRO.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "Aditya-L1 lifted off on a PSLV from Sriharikota on the second of September, twenty twenty-three.",
+   "numbers": [
+    {
+     "text": "2 Sep 2023",
+     "sub": "launch, PSLV-C57",
+     "word": "second"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What is L1?",
+    "items": [
+     "A balance point between Earth and Sun",
+     "About 1.5 million km from Earth",
+     "The Sun never goes out of view"
+    ]
+   },
+   "say": "Its home is L1, a point where the pulls of the Earth and the Sun balance. From there, the Sun is never hidden, not by night, not by an eclipse.",
+   "numbers": [
+    {
+     "text": "1.5 million km",
+     "sub": "from Earth to L1",
+     "word": "million"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Its seven instruments",
+    "items": [
+     {
+      "label": "Look at the Sun",
+      "value": 4,
+      "show": "4",
+      "hi": true
+     },
+     {
+      "label": "Measure particles and fields at L1",
+      "value": 3,
+      "show": "3"
+     }
+    ]
+   },
+   "say": "It carries seven instruments. Four look straight at the Sun. Three measure the particles and magnetic fields that stream past."
+  },
+  {
+   "src": "../raw/214/Aditya-L1-sun-image10.png",
+   "kb": "in",
+   "fit": "blur",
+   "say": "It reached its orbit around L1 on the sixth of January, twenty twenty-four, and has been sending pictures of the Sun's surface since."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Why watch the Sun?",
+    "items": [
+     "Solar storms",
+     "Hit satellites and power grids",
+     "Early warning helps protect them"
+    ]
+   },
+   "say": "Why bother? Storms on the Sun can damage satellites, radio links and power grids. Watching them early gives us time to prepare."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "India's first space mission to study the Sun",
+     "Halo orbit around L1",
+     "7 instruments, space weather"
+    ]
+   },
+   "say": "For GS Three: India's first solar mission, parked at L1, studying the Sun's outer layers and space weather."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ISRO, Aditya-L1 mission page: launched 2 September 2023 on PSLV-C57 from SDSC SHAR; first Indian space-based mission to study the Sun; placed in a halo orbit around L1, about 1.5 million km from Earth; seven payloads, four remote-sensing and three in-situ",
+  "ISRO press release, 6 January 2024: Aditya-L1 inserted into its halo orbit around L1",
+  "PIB releases on Aditya-L1: objectives include coronal heating, solar wind and space weather"
+ ],
+ "quiz": [
+  {
+   "q": "About how far from Earth is L1?",
+   "options": [
+    "15,000 km",
+    "About 1.5 million km",
+    "150 million km",
+    "384,000 km"
+   ],
+   "answerIndex": 1,
+   "why": "L1 is about 1.5 million km away, about 1% of the way to the Sun."
+  },
+  {
+   "q": "Why is L1 a good place to watch the Sun?",
+   "options": [
+    "It is closer to Mars",
+    "The Sun is never blocked from view",
+    "It is inside the Sun's corona",
+    "It is cooler there"
+   ],
+   "answerIndex": 1,
+   "why": "No night and no eclipse block the view from L1."
+  },
+  {
+   "q": "How many instruments does Aditya-L1 carry?",
+   "options": [
+    "Two",
+    "Ten",
+    "Seven",
+    "Twelve"
+   ],
+   "answerIndex": 2,
+   "why": "Seven: four looking at the Sun, three measuring particles and fields."
+  }
+ ],
+ "reviewNote": "Facts were read against ISRO's Aditya-L1 page and press releases. Pictures are ISRO's own. Moving facts: mission status and data releases change over time."
+}

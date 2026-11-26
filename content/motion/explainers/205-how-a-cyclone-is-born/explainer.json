@@ -1,0 +1,138 @@
+{
+ "voice": "auto",
+ "n": 205,
+ "id": "how-a-cyclone-is-born",
+ "title": "How a Cyclone Is Born",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs1-9"
+ ],
+ "gsPaper": [
+  "gs1"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: NASA, ISS crew photographs (public domain). Footage: Mostafameraji (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/205/Cyclone-Debbie-ISS-2017-03-27-0711z.jpg",
+   "kb": "in",
+   "say": "A tropical cyclone can be hundreds of kilometres wide. And it starts with something as simple as warm sea water."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "What a cyclone needs",
+    "items": [
+     "Sea warmer than about 27°C",
+     "Distance from the equator",
+     "Little change in wind with height",
+     "A low-pressure area to start"
+    ]
+   },
+   "say": "It needs four things. A sea warmer than about twenty-seven degrees. Distance from the equator, so the Earth's spin can twist the air. Steady winds high up. And a patch of low pressure to begin."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The engine",
+    "items": [
+     "Warm water evaporates",
+     "Moist air rises and cools",
+     "Vapour condenses: heat is released",
+     "Air rises faster; more air rushes in"
+    ]
+   },
+   "say": "Warm water evaporates. The moist air rises, cools and turns into cloud, releasing heat. That heat makes the air rise faster, and more air rushes in below."
+  },
+  {
+   "src": "../raw/205/Hurricane-Isabel-eye-from-ISS-edit-1-.jpg",
+   "kb": "in",
+   "fit": "blur",
+   "say": "The Earth's spin turns this inflow into a spiral. At the centre is the eye: calm, almost clear, with the strongest winds in the wall around it."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Where India's cyclones form",
+    "items": [
+     {
+      "label": "Bay of Bengal",
+      "value": 4,
+      "show": "about 4",
+      "hi": true
+     },
+     {
+      "label": "Arabian Sea",
+      "value": 1,
+      "show": "1"
+     }
+    ]
+   },
+   "say": "Around India, the Bay of Bengal sees roughly four cyclones for every one in the Arabian Sea. The busy months are April to May, and October to December."
+  },
+  {
+   "src": "../raw/205/Ocean-surface-waves-02.ogv",
+   "t": 2,
+   "say": "Over land, a cyclone loses its warm water, its fuel, and weakens. But by then the wind, rain and storm surge have hit the coast."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "For your answer",
+    "items": [
+     "Warm sea",
+     "Rising moist air releases heat",
+     "Earth's spin makes the spiral",
+     "Land cuts the fuel"
+    ]
+   },
+   "say": "For GS One: warm sea, rising moist air that releases heat, the Earth's spin, and a cyclone that dies once it reaches land."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. 10 (Atmospheric Circulation and Weather Systems): conditions for tropical cyclones (sea surface above 27°C, Coriolis force, small vertical wind shear, pre-existing low-pressure disturbance); energy from latent heat of condensation; dissipate over land; the eye",
+  "IMD, Frequently Asked Questions on Tropical Cyclones: Bay of Bengal sees about four times as many cyclones as the Arabian Sea; peaks in April–May and October–December"
+ ],
+ "quiz": [
+  {
+   "q": "Where does a tropical cyclone get its energy?",
+   "options": [
+    "From the Earth's core",
+    "From lightning",
+    "From heat released when water vapour condenses",
+    "From the Moon's pull"
+   ],
+   "answerIndex": 2,
+   "why": "Rising moist air condenses into cloud and releases latent heat."
+  },
+  {
+   "q": "Why don't cyclones form right on the equator?",
+   "options": [
+    "The sea is too cold",
+    "The Earth's spin (Coriolis force) is too weak there to twist the air",
+    "There is no wind",
+    "It never rains there"
+   ],
+   "answerIndex": 1,
+   "why": "Without the Coriolis force, the inflowing air doesn't spiral."
+  },
+  {
+   "q": "Which sea sees more cyclones?",
+   "options": [
+    "Arabian Sea, by far",
+    "Both the same",
+    "Neither has cyclones",
+    "Bay of Bengal, about four to one"
+   ],
+   "answerIndex": 3,
+   "why": "IMD gives roughly four Bay of Bengal cyclones for each Arabian Sea one."
+  }
+ ],
+ "reviewNote": "Facts were read against NCERT's chapter on weather systems and IMD's cyclone FAQ. Satellite photos are from the ISS, over open ocean, with no lines drawn. Moving facts: the four-to-one ratio is a long-term average; recent decades show more Arabian Sea cyclones."
+}

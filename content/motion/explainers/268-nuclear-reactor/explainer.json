@@ -1,0 +1,149 @@
+{
+ "n": 268,
+ "id": "nuclear-reactor",
+ "title": "How a Nuclear Reactor Makes Power",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: Tennessee Valley Authority (public domain). Picture: Trougnouf (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/268/BWR-nuclear-power-plant-animation.webm",
+   "t": 2.0,
+   "say": "A nuclear power station boils water to spin a turbine, just like a coal one. Only the source of heat is different."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Fission",
+    "items": [
+     "A neutron hits a uranium atom",
+     "The atom splits and releases heat",
+     "It also releases more neutrons",
+     "They split more atoms: a chain reaction"
+    ]
+   },
+   "say": "Inside the core, a neutron strikes a uranium atom and splits it. That releases heat and more neutrons, which split more atoms. This is a chain reaction."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The fuel",
+    "items": [
+     "Uranium in small ceramic pellets",
+     "Pellets stacked in long fuel rods",
+     "Rods bundled in the core"
+    ]
+   },
+   "say": "The fuel is uranium, packed into small ceramic pellets, stacked in long metal rods and bundled together in the core."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Keeping it steady",
+    "left": {
+     "title": "Control rods",
+     "items": [
+      "absorb neutrons",
+      "push in to slow it",
+      "all in: it stops"
+     ]
+    },
+    "right": {
+     "title": "Moderator",
+     "items": [
+      "slows neutrons down",
+      "so they split uranium",
+      "water or heavy water"
+     ]
+    }
+   },
+   "say": "Control rods soak up neutrons: push them in to slow the reaction, all the way in to stop it. A moderator slows neutrons so they keep splitting atoms."
+  },
+  {
+   "src": "../raw/268/BWR-nuclear-power-plant-animation.webm",
+   "t": 20.0,
+   "say": "The heat turns water into steam. The steam spins a turbine, the turbine drives a generator, and the steam is cooled back into water."
+  },
+  {
+   "src": "../raw/268/windmill-and-the-nuclear-power-plant-cooling-tower-in-Doel-Belgium-DSCF3859-.jpg",
+   "kb": "in",
+   "focus": [
+    0.7,
+    0.4
+   ],
+   "say": "Cooling towers like this one, or river and sea water, do that job."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India's workhorse: the PHWR",
+    "items": [
+     "Heavy water as coolant and moderator",
+     "Natural uranium as fuel",
+     "Indian designs: 220 MW and 700 MW"
+    ]
+   },
+   "say": "Most of India's reactors are pressurised heavy-water reactors. Heavy water is such a good moderator that they can run on natural uranium, without enriching it."
+  },
+  {
+   "src": "../raw/268/BWR-nuclear-power-plant-animation.webm",
+   "t": 40.0,
+   "say": "For GS Three: fission, heat, steam, turbine. And heavy water is what lets India use natural uranium."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "US EIA, 'Nuclear power plants': fission splits uranium atoms, releasing heat and neutrons in a chain reaction; fuel is uranium ceramic pellets stacked in 12-foot fuel rods; heat makes steam that spins turbines driving generators; cooling towers or water from lakes, rivers or the ocean",
+  "US EIA, 'Types of reactors': boiling-water and pressurized-water reactors",
+  "Wikipedia, 'Control rod' (read): control rods contain neutron absorbers such as boron or cadmium; inserting them controls the chain reaction; fully inserted they shut the reactor down",
+  "Wikipedia, 'Pressurized heavy-water reactor' (read): heavy water as coolant and moderator; natural uranium fuel; IPHWR-220 and IPHWR-700 are Indian designs"
+ ],
+ "quiz": [
+  {
+   "q": "What do control rods do?",
+   "options": [
+    "Absorb neutrons to slow or stop the chain reaction",
+    "Produce steam",
+    "Carry the uranium fuel",
+    "Cool the turbine"
+   ],
+   "answerIndex": 0,
+   "why": "They soak up neutrons; fully inserted, they stop the reaction."
+  },
+  {
+   "q": "What lets India's PHWRs run on natural uranium?",
+   "options": [
+    "Very tall cooling towers",
+    "Using seawater as fuel",
+    "Heavy water as the moderator",
+    "Extra control rods"
+   ],
+   "answerIndex": 2,
+   "why": "Heavy water is an efficient moderator, so enrichment isn't needed."
+  },
+  {
+   "q": "In a nuclear power station, what spins the turbine?",
+   "options": [
+    "Neutrons",
+    "Steam",
+    "Falling water",
+    "Uranium pellets"
+   ],
+   "answerIndex": 1,
+   "why": "Fission heat makes steam; the steam spins the turbine."
+  }
+ ],
+ "reviewNote": "Basics were read against two US EIA pages; control rods and the PHWR come from Wikipedia articles because NRC and NPCIL pages didn't return readable text here. 'Most of India's reactors are PHWRs' is not stated in those sources; check it against NPCIL's plant list before approval. The TVA animation is of a boiling-water reactor, which India doesn't use; it illustrates the steam cycle only. Start times (t) were chosen blind. Moving facts: India's reactor count."
+}

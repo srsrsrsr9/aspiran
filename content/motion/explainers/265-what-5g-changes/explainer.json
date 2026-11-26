@@ -1,0 +1,165 @@
+{
+ "n": 265,
+ "id": "what-5g-changes",
+ "title": "What 5G Actually Changes",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-5"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Jeffrey Beall (CC BY 4.0); Benoit77931 (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/265/5G-cell-tower.JPG",
+   "kb": "in",
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "say": "Is 5G just faster internet on your phone? Speed is only one of three things it was designed to change."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "Three jobs for 5G",
+    "items": [
+     "Enhanced mobile broadband",
+     "Ultra-reliable, low-delay links",
+     "Massive machine connections"
+    ]
+   },
+   "say": "The global telecom body, the ITU, named three uses: much faster mobile broadband, ultra-reliable links with almost no delay, and huge numbers of connected machines."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Delay targets (milliseconds)",
+    "items": [
+     {
+      "label": "Broadband",
+      "value": 4,
+      "show": "4 ms"
+     },
+     {
+      "label": "Critical links",
+      "value": 1,
+      "show": "1 ms",
+      "hi": true
+     }
+    ]
+   },
+   "say": "Its targets include peak downloads of twenty gigabits a second, and delays of just one millisecond for critical links, fast enough for remote control of machines.",
+   "numbers": [
+    {
+     "text": "20 Gbit/s",
+     "sub": "peak download target",
+     "word": "twenty"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "1,000,000",
+    "below": "devices per square kilometre"
+   },
+   "say": "And it aims to connect a million devices in a single square kilometre.",
+   "numbers": [
+    {
+     "text": "1 million",
+     "sub": "devices per sq km",
+     "word": "million",
+     "count": true
+    }
+   ]
+  },
+  {
+   "src": "../raw/265/Antenne-de-T-l-communication.jpg",
+   "kb": "pan",
+   "fit": "blur",
+   "say": "That density is what lets factories, farms and cities link sensors and machines, not just people. This is the Internet of Things."
+  },
+  {
+   "anim": {
+    "type": "timeline",
+    "title": "5G in India",
+    "items": [
+     {
+      "year": "2018",
+      "text": "test bed with IITs, IISc and SAMEER"
+     },
+     {
+      "year": "2022",
+      "text": "spectrum auction: 51,236 MHz allotted"
+     },
+     {
+      "year": "1 Oct 2022",
+      "text": "services launched"
+     }
+    ]
+   },
+   "say": "India built a 5G test bed with the IITs from twenty eighteen, auctioned spectrum in twenty twenty-two, and launched services on the first of October that year."
+  },
+  {
+   "src": "../raw/265/5G-cell-tower.JPG",
+   "kb": "out",
+   "focus": [
+    0.5,
+    0.3
+   ],
+   "say": "For GS Three, link 5G to three words: spectrum, latency, and the Internet of Things."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "ITU-R Report M.2410-0, minimum requirements for IMT-2020: downlink peak data rate 20 Gbit/s; user-plane latency 4 ms for eMBB and 1 ms for URLLC; connection density 1,000,000 devices per km²",
+  "ITU-R Recommendation M.2083: three usage scenarios, eMBB, URLLC and mMTC",
+  "PIB (PRID 1863659): 5G launched on 1 October 2022 at India Mobile Congress, Pragati Maidan; 51,236 MHz allocated; DoT 5G test bed with IITs, IISc and SAMEER from 2018; IoT, M2M and edge-computing use cases"
+ ],
+ "quiz": [
+  {
+   "q": "Which is NOT one of ITU's three 5G usage scenarios?",
+   "options": [
+    "Enhanced mobile broadband",
+    "Ultra-reliable low-latency communication",
+    "Satellite television broadcasting",
+    "Massive machine-type communication"
+   ],
+   "answerIndex": 2,
+   "why": "The three are eMBB, URLLC and mMTC."
+  },
+  {
+   "q": "What latency target does ITU set for ultra-reliable 5G links?",
+   "options": [
+    "100 ms",
+    "50 ms",
+    "10 ms",
+    "1 ms"
+   ],
+   "answerIndex": 3,
+   "why": "1 ms user-plane latency for URLLC (4 ms for broadband)."
+  },
+  {
+   "q": "When were 5G services launched in India?",
+   "options": [
+    "1 October 2022",
+    "15 August 2020",
+    "26 January 2023",
+    "1 April 2021"
+   ],
+   "answerIndex": 0,
+   "why": "PIB: launched on 1 October 2022 at India Mobile Congress."
+  }
+ ],
+ "reviewNote": "Targets come from ITU-R M.2410-0 and M.2083, India facts from PIB. These are design targets, not speeds users see; the script says 'targets'. The 2022 auction year is inferred from the PIB launch release, which gives the spectrum allotted; check. Avoid any brand name on the tower photos. The million-devices ring is decorative (full ring). Moving facts: India's 5G coverage and user numbers (none given)."
+}

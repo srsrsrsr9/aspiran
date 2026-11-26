@@ -36,6 +36,7 @@ sys.path.insert(0, str(HERE.parent / "cartesia")); sys.path.insert(0, str(HERE))
 import prov, build, endcard  # noqa: E402
 
 W, H, FPS = 1080, 1920, 30
+VIDEO = (".webm", ".mp4", ".mov", ".ogv", ".ogg")
 LEAD, PAD, END_LEN = 0.25, 0.45, 3.6
 AV = "/System/Library/Fonts/Avenir Next.ttc"
 WEIGHT = {"Bold": 0, "Demi Bold": 2, "Medium": 5, "Regular": 7, "Heavy": 8}
@@ -206,8 +207,22 @@ def caption_img(text, style):
     return _shadowed(im, 7, 1.4), 0, 1470 - im.height
 
 
-def number_img(text, sub, accent):
-    big = font(250 if len(text) <= 3 else 170, "Heavy"); small = font(52, "Demi Bold")
+def fit_font(text, size):
+    """The biggest Heavy font up to `size` that fits the text across the screen."""
+    d = ImageDraw.Draw(Image.new("RGB", (8, 8)))
+    while size > 60 and d.textlength(text, font=font(size, "Heavy")) > W - 100: size -= 8
+    return font(size, "Heavy")
+
+
+def number_img(text, sub, accent, compact=False):
+    """compact: over a drawn diagram, the number sits below the diagram (which then ends at y=920)."""
+    if compact:
+        big = fit_font(text, 150 if len(text) <= 5 else 120); small = font(44, "Demi Bold")
+        im = Image.new("RGBA", (W, 270), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+        d.text((W / 2, 95), text, font=big, anchor="mm", fill=accent + (255,))
+        if sub: d.text((W / 2, 215), sub, font=small, anchor="mm", fill=(255, 255, 255, 255))
+        return _shadowed(im, 12, 1.4), 0, 935
+    big = fit_font(text, 250 if len(text) <= 3 else 170); small = font(52, "Demi Bold")
     im = Image.new("RGBA", (W, 420), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     d.text((W / 2, 170), text, font=big, anchor="mm", fill=accent + (255,))
     if sub: d.text((W / 2, 345), sub, font=small, anchor="mm", fill=(255, 255, 255, 255))
@@ -280,9 +295,9 @@ def _lines(d, text, f, width):
 
 def generic_frame(g, t, L):
     """Reusable diagrams, all schematic: cards, flow, compare, timeline, bars, ring. Items appear one by one over the
-    first three-quarters of the segment (or at "at" seconds). Content stays between y=230 and y=1130 so captions fit below."""
+    first three-quarters of the segment (or at "at" seconds). Content stays between y=230 and y=B so captions fit below."""
     im = Image.new("RGB", (W, H)); d = ImageDraw.Draw(im); _sky(d, (16, 20, 36), (30, 40, 66))
-    kind, items = g["type"], g.get("items", [])
+    kind, items = g["type"], g.get("items", []); B = g.get("_bottom", 1130)
     n = max(1, len(items)); span = max(1.0, L * 0.72 - 0.6)
     at = lambda k: items[k].get("at", 0.5 + k * span / n) if isinstance(items[k], dict) else 0.5 + k * span / n
     ft, fi, fs, fb = font(62, "Heavy"), font(46, "Demi Bold"), font(40, "Medium"), font(76, "Heavy")
@@ -294,7 +309,7 @@ def generic_frame(g, t, L):
         top += 74 * len(_lines(d, g["title"], ft, W * 0.86)) + 40
     txt = lambda it: it["text"] if isinstance(it, dict) else it
     if kind == "cards":
-        h = min(190, (1130 - top) / n - 24)
+        h = min(190, (B - top) / n - 24)
         for k, it in enumerate(items):
             a = _ease(t, at(k)); y = top + k * (h + 24) + 30 * (1 - a)
             if a <= 0: continue
@@ -304,7 +319,7 @@ def generic_frame(g, t, L):
             for j, l in enumerate(ls):
                 d.text((140, y + h / 2 + (j - (len(ls) - 1) / 2) * 56), l, font=fi, anchor="lm", fill=_mix((255, 255, 255), a, PANEL))
     elif kind == "flow":
-        h = min(150, ((1130 - top) - (n - 1) * 70) / n)
+        h = min(150, ((B - top) - (n - 1) * 70) / n)
         for k, it in enumerate(items):
             a = _ease(t, at(k)); y = top + k * (h + 70)
             if a <= 0: continue
@@ -327,13 +342,13 @@ def generic_frame(g, t, L):
             rows = colspec.get("items", []); m = max(len(cols[0].get("items", [])), len(cols[1].get("items", [])), 1)
             for k, it in enumerate(rows):
                 st = 1.0 + (k * 2 + c) * (span - 0.6) / (2 * m)
-                b = _ease(t, st); y = top + 150 + k * ((1130 - top - 150) / m)
+                b = _ease(t, st); y = top + 150 + k * ((B - top - 150) / m)
                 if b <= 0: continue
                 for j, l in enumerate(_lines(d, it, fs, 420)[:3]):
                     d.text((x0 + 230, y + j * 48), l, font=fs, anchor="mt", fill=_mix((240, 244, 255), b))
     elif kind == "timeline":
-        x = 190; d.line([(x, top), (x, 1130)], fill=(80, 96, 130), width=6)
-        step = (1130 - top) / n
+        x = 190; d.line([(x, top), (x, B)], fill=(80, 96, 130), width=6)
+        step = (B - top) / n
         for k, it in enumerate(items):
             a = _ease(t, at(k)); y = top + k * step + 20
             if a <= 0: continue
@@ -342,7 +357,7 @@ def generic_frame(g, t, L):
             for j, l in enumerate(_lines(d, it["text"], fs, W - x - 120)[:2]):
                 d.text((x + 50, y + 50 + j * 46), l, font=fs, anchor="lt", fill=_mix((240, 244, 255), a))
     elif kind == "bars":
-        vmax = max(float(it["value"]) for it in items); h = min(150, (1130 - top) / n)
+        vmax = max(float(it["value"]) for it in items); h = min(150, (B - top) / n)
         for k, it in enumerate(items):
             a = _ease(t, at(k), 0.9); y = top + k * h
             if a <= 0: continue
@@ -453,7 +468,7 @@ def seg_clip(folder, s, L, dest, tmp, fades):
         for n in range(int(round(L * FPS))): p.stdin.write(anim_frame(s["anim"], n / FPS, L).tobytes())
         p.stdin.close(); p.wait(); return
     src = folder / s["src"]
-    if src.suffix in (".webm", ".mp4", ".mov"):
+    if src.suffix in VIDEO:
         if s.get("fit") == "blur":
             vf = (f"split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},gblur=sigma=40,eq=brightness=-0.18[bg];"
                   f"[b]scale={W}:-2[fg];[bg][fg]overlay=0:(H-h)/2" + tail)
@@ -522,9 +537,23 @@ FORMATS = {   # the three formats the owner kept (25 Nov 2026); a spec may still
 }
 
 
+GLYPHS = {"₹": "Rs ", "→": "›", "₂": "2", "₃": "3", "⁻": "-"}     # Avenir Next has no glyph for these
+
+
+def _glyphsafe(o):
+    """Swap characters the font can't draw in on-screen text (diagrams, numbers, endcard); narration is untouched."""
+    if isinstance(o, str):
+        for a, b in GLYPHS.items(): o = o.replace(a, b)
+        return re.sub(r"Rs (?=[,.;:)\]])", "Rs", o.replace("Rs  ", "Rs "))
+    if isinstance(o, list): return [_glyphsafe(v) for v in o]
+    if isinstance(o, dict): return {k: (v if k in ("say", "src", "word") else _glyphsafe(v)) for k, v in o.items()}
+    return o
+
+
 def build_one(folder, no_voice=False):
     spec = json.loads((folder / "explainer.json").read_text())
     spec = {**FORMATS.get(spec.get("format"), {}), **spec}
+    spec["segments"], spec["endcard"] = _glyphsafe(spec["segments"]), _glyphsafe(spec.get("endcard", {}))
     check = {} if no_voice else record(spec, folder)
     if no_voice: check = json.loads((folder / "audio" / "check.json").read_text())
     tmp = Path(tempfile.mkdtemp()); out = folder / "out"; out.mkdir(exist_ok=True)
@@ -559,6 +588,8 @@ def build_one(folder, no_voice=False):
                 else:
                     layers.append(Layer(img, x, y, a, b, 0.12, 0.12, cap=True))
             nums = s.get("numbers", [])
+            compact = isinstance(s.get("anim"), dict) and bool(nums)
+            if compact: s["anim"]["_bottom"] = 900        # leave room under the diagram for the number
             starts = []
             for k, nm in enumerate(nums):
                 st = t + 0.3
@@ -574,12 +605,12 @@ def build_one(folder, no_voice=False):
                     target, steps = int(nm["text"]), 14
                     for q in range(steps):
                         v = round(target * (1 - (1 - (q + 1) / steps) ** 3))
-                        img, x, y = number_img(str(v), nm.get("sub"), accent)
+                        img, x, y = number_img(str(v), nm.get("sub"), accent, compact)
                         layers.append(Layer(img, x, y, st + q * 0.05, st + (q + 1) * 0.05, 0.05 if q == 0 else 0, 0))
-                    img, x, y = number_img(nm["text"], nm.get("sub"), accent)
+                    img, x, y = number_img(nm["text"], nm.get("sub"), accent, compact)
                     layers.append(Layer(img, x, y, st + steps * 0.05, en, 0, 0.2))
                 else:
-                    img, x, y = number_img(nm["text"], nm.get("sub"), accent)
+                    img, x, y = number_img(nm["text"], nm.get("sub"), accent, compact)
                     layers.append(Layer(img, x, y, st, en, 0.25, 0.2))
         t += L
     T = t
@@ -590,7 +621,7 @@ def build_one(folder, no_voice=False):
         if s.get("end"):
             src = segs[spec["endcard"]["from"] - 1]
             grab = tmp / "endbase.png"
-            if "src" in src and Path(src["src"]).suffix in (".webm", ".mp4"):
+            if "src" in src and Path(src["src"]).suffix in VIDEO:
                 run(["ffmpeg", "-y", "-loglevel", "error", "-ss", str(src.get("t", 0) + 1), "-i", str(folder / src["src"]), "-frames:v", "1", str(grab)])
                 Image.open(grab).convert("RGB").save(grab)
                 cover(Image.open(grab), W, H).save(grab)
@@ -643,6 +674,9 @@ def build_one(folder, no_voice=False):
     return final
 
 
+PAPER = {"gs1": "mains-gs1", "gs2": "mains-gs2", "gs3": "mains-gs3", "gs4": "mains-gs4", "prelims": "prelims-gs1", "essay": "mains-essay"}
+
+
 def pack(dest, folders, today=None):
     """Copy built explainers into a shorts pack (content/motion/shorts/2001-NN) and write its manifest.json.
     Each explainer.json carries n, id, title, syllabusNodes, gsPaper, format, tone, sources, quiz and reviewNote."""
@@ -663,14 +697,15 @@ def pack(dest, folders, today=None):
         eps.append({"n": spec["n"], "id": spec["id"], "title": spec["title"],
                     "durationSec": json.loads((out / "length.json").read_text())["durationSec"],
                     "mp4": f"{stem}.mp4", "vtt": f"{stem}.vtt", "poster": f"{stem}.jpg", "mp4Social": f"{stem}.social.mp4",
-                    "syllabusNodes": spec["syllabusNodes"], "gsPaper": spec["gsPaper"], "format": "explainer-" + spec["format"],
+                    "syllabusNodes": spec["syllabusNodes"], "gsPaper": [PAPER.get(x, x) for x in spec["gsPaper"]], "format": "explainer-" + spec["format"],
                     "tone": spec["tone"], "sources": spec["sources"], "quiz": quiz, "free": True,
                     "review": {"status": "approved", "checkedBy": "Aspiran (owner publish)", "checkedOn": today, "note": spec["reviewNote"]}})
     eps.sort(key=lambda e: e["n"])
     first, last = eps[0]["n"], eps[-1]["n"]
     m = {"schema": "upsc-pods/ca-week@1", "week": dest.name, "lang": "en",
          "generatedAt": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-         "series": "illustrated-shorts", "title": f"Explainers, {first} to {last}", "titleHi": f"समझिए, {first} से {last}",
+         "series": "illustrated-shorts", "title": f"Explainers, {first} to {last}" if first != last else f"Explainer {first}",
+         "titleHi": f"समझिए, {first} से {last}" if first != last else f"समझिए, {first}",
          "voice": {"provider": "+".join(sorted(voices))}, "episodes": eps}
     (dest / "manifest.json").write_text(json.dumps(m, ensure_ascii=False, indent=1) + "\n")
     print(f"{dest.name}: {len(eps)} explainers, {first}-{last}")

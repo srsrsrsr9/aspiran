@@ -1,0 +1,136 @@
+{
+ "voice": "auto",
+ "n": 213,
+ "id": "carbon-cycle",
+ "title": "The Carbon Cycle in 60 Seconds",
+ "format": "calm",
+ "syllabusNodes": [
+  "pre-6"
+ ],
+ "gsPaper": [
+  "prelims"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Footage: NASA Goddard and Scientific Visualization Studio (public domain); Mostafameraji (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/213/12051-Forest-Dynamics-UHD.webm",
+   "t": 3,
+   "say": "The carbon in your body was once in the air. Before that, maybe in the sea, or in a rock. Carbon is always on the move."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Into living things",
+    "items": [
+     "Plants take carbon dioxide from the air",
+     "Photosynthesis turns it into sugar",
+     "Animals eat plants"
+    ]
+   },
+   "say": "Plants pull carbon dioxide out of the air and, with sunlight, turn it into sugar. Animals eat the plants, and the carbon moves on."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Back to the air",
+    "items": [
+     "Breathing",
+     "Decay",
+     "Fire"
+    ]
+   },
+   "say": "Breathing, rotting and burning send it back into the air. For thousands of years, the flows in and out roughly balanced."
+  },
+  {
+   "src": "../raw/213/Ocean-surface-waves-05.ogv",
+   "t": 2,
+   "say": "The ocean is the biggest store of all. It soaks up carbon dioxide at its surface and slowly carries it down."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The slow store",
+    "items": [
+     "Ancient plants and plankton",
+     "Buried for millions of years",
+     "Became coal, oil and gas"
+    ]
+   },
+   "say": "Some carbon goes deep. Ancient plants and plankton, buried for millions of years, became coal, oil and gas."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Carbon dioxide in the air",
+    "items": [
+     {
+      "label": "Before 1800",
+      "value": 280,
+      "show": "about 280 ppm"
+     },
+     {
+      "label": "Today",
+      "value": 424,
+      "show": "over 420 ppm",
+      "hi": true
+     }
+    ]
+   },
+   "say": "Burning those fuels returns, in a few centuries, carbon that took millions of years to store. Forests and oceans take up about half of it. The rest builds up in the air."
+  },
+  {
+   "src": "../raw/213/50-Kilometers-of-Brazilian-Forest-Canopy.webm",
+   "t": 2,
+   "say": "For Prelims: photosynthesis and the ocean are sinks; breathing, decay and burning are sources; fossil fuels are the fast leak."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "NASA Earth Observatory, 'The Carbon Cycle': fast and slow carbon cycles; photosynthesis, respiration, decay, ocean uptake; fossil fuels formed over millions of years",
+  "NOAA Global Monitoring Laboratory, Mauna Loa CO2 record: pre-industrial about 280 ppm; annual mean above 420 ppm by 2023–24",
+  "Global Carbon Project, Global Carbon Budget 2024: land and ocean sinks together take up roughly half of CO2 emissions from human activity",
+  "NCERT Class 11, Fundamentals of Physical Geography, ch. on biosphere / NCERT Class 12 Biology ch. on ecosystems: carbon cycle"
+ ],
+ "quiz": [
+  {
+   "q": "Which of these takes carbon dioxide OUT of the air?",
+   "options": [
+    "Burning wood",
+    "Photosynthesis",
+    "Breathing",
+    "Decay"
+   ],
+   "answerIndex": 1,
+   "why": "Plants use carbon dioxide to make sugar."
+  },
+  {
+   "q": "What is the biggest active store of carbon?",
+   "options": [
+    "The air",
+    "Forests",
+    "The ocean",
+    "Farm soil"
+   ],
+   "answerIndex": 2,
+   "why": "The ocean soaks up and stores far more than the air."
+  },
+  {
+   "q": "Roughly how much of our CO2 do land and ocean sinks take up?",
+   "options": [
+    "About half",
+    "None",
+    "All of it",
+    "About a tenth"
+   ],
+   "answerIndex": 0,
+   "why": "The rest builds up in the air."
+  }
+ ],
+ "reviewNote": "Facts were read against NASA Earth Observatory's carbon-cycle feature, NOAA's Mauna Loa record and the Global Carbon Budget 2024. Footage is NASA visualisation and open sea. Moving facts: the CO2 level rises every year; 'over 420 ppm' stays true."
+}

@@ -1,0 +1,165 @@
+{
+ "voice": "auto",
+ "n": 221,
+ "id": "fast-breeder-reactor",
+ "title": "The Fast Breeder Reactor",
+ "format": "fast",
+ "syllabusNodes": [
+  "gs3-4"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "endcard": {
+  "from": 1,
+  "line": "Diagrams: Aspiran"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "cards",
+    "title": "A strange reactor",
+    "items": [
+     "It makes power",
+     "And makes more fuel than it burns"
+    ]
+   },
+   "say": "Imagine a stove that cooks your food and leaves you with more firewood than you started with. That's the idea of a breeder reactor."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "The trick",
+    "items": [
+     "Fast neutrons fly out of plutonium fuel",
+     "Some hit uranium-238 around the core",
+     "Uranium-238 turns into plutonium-239",
+     "New fuel is 'bred'"
+    ]
+   },
+   "say": "In its core, plutonium splits and throws out fast neutrons. Some hit ordinary uranium-238 placed around the core, and turn it into new plutonium. Fuel is bred."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Why 'fast'?",
+    "left": {
+     "title": "Ordinary reactor",
+     "items": [
+      "Neutrons slowed by water",
+      "Water cools the core"
+     ]
+    },
+    "right": {
+     "title": "Fast breeder",
+     "items": [
+      "Neutrons kept fast",
+      "Liquid sodium cools the core"
+     ]
+    }
+   },
+   "say": "Ordinary reactors slow their neutrons with water. A breeder keeps them fast, so it is cooled by liquid sodium metal instead."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "India's PFBR",
+    "items": [
+     "Prototype Fast Breeder Reactor",
+     "500 megawatts, at Kalpakkam, Tamil Nadu",
+     "Built by BHAVINI"
+    ]
+   },
+   "say": "India's Prototype Fast Breeder Reactor, five hundred megawatts, is at Kalpakkam in Tamil Nadu. Loading of its core began in March twenty twenty-four.",
+   "numbers": [
+    {
+     "text": "500 MW",
+     "sub": "PFBR, Kalpakkam",
+     "word": "five"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Why India cares",
+    "items": [
+     "Little uranium",
+     "Lots of thorium",
+     "Breeders build the fuel stock",
+     "That opens the door to thorium"
+    ]
+   },
+   "say": "India has little uranium but a great deal of thorium. Breeders build up the fuel and, later, can turn thorium into usable uranium-233."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The catch",
+    "items": [
+     "Sodium burns in air and water",
+     "Hard engineering",
+     "Long build times"
+    ]
+   },
+   "say": "It isn't easy. Sodium catches fire in air and reacts with water, so the engineering is demanding and the build has taken many years."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "For your answer",
+    "items": [
+     "Breeds more fissile fuel than it uses",
+     "Fast neutrons, sodium cooling",
+     "Stage 2 of India's nuclear plan"
+    ]
+   },
+   "say": "For GS Three: a fast breeder makes more fuel than it burns, and it is stage two of India's three-stage nuclear plan."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Department of Atomic Energy / PIB, 4 March 2024: commencement of core loading at the 500 MWe Prototype Fast Breeder Reactor, Kalpakkam, built by BHAVINI; the PFBR uses U-Pu mixed oxide fuel and a U-238 blanket; will produce more fuel than it consumes; second stage of the three-stage programme",
+  "Indira Gandhi Centre for Atomic Research (IGCAR) pages: sodium-cooled fast reactors; breeding of Pu-239 from U-238; later use of thorium to breed U-233",
+  "NCERT Class 12 Physics, ch. 13 (Nuclei): nuclear fission, chain reaction, moderators"
+ ],
+ "quiz": [
+  {
+   "q": "What does a breeder reactor 'breed'?",
+   "options": [
+    "Water",
+    "More fissile fuel than it uses",
+    "Electricity only",
+    "Thorium from sand"
+   ],
+   "answerIndex": 1,
+   "why": "It turns uranium-238 into plutonium-239: new fuel."
+  },
+  {
+   "q": "What cools a fast breeder reactor?",
+   "options": [
+    "Liquid sodium",
+    "Sea water",
+    "Air",
+    "Heavy water only"
+   ],
+   "answerIndex": 0,
+   "why": "Water would slow the neutrons; sodium keeps them fast."
+  },
+  {
+   "q": "Where is India's PFBR?",
+   "options": [
+    "Tarapur",
+    "Kudankulam",
+    "Kalpakkam",
+    "Rawatbhata"
+   ],
+   "answerIndex": 2,
+   "why": "The 500 MW PFBR is at Kalpakkam, Tamil Nadu."
+  }
+ ],
+ "reviewNote": "Facts were read against the DAE/PIB release of 4 March 2024 and IGCAR's pages. No photo of the plant; diagrams only. Moving facts: the reactor's later milestones (criticality, power) are not stated; check before re-using."
+}

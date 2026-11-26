@@ -1,0 +1,161 @@
+{
+ "n": 275,
+ "id": "buffer-stocks-fci",
+ "title": "Buffer Stocks and FCI",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-3"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 1,
+  "line": "Pictures: Youngbloodlab (public domain); Sai Ganesh1 (CC0)"
+ },
+ "segments": [
+  {
+   "src": "../raw/275/Wheat.jpg",
+   "kb": "in",
+   "say": "Why does the government keep millions of tonnes of grain in store, even in good years?"
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Grain into the central pool",
+    "items": [
+     "Farmers sell at the minimum support price",
+     "FCI and state agencies buy and store it",
+     "It is issued for schemes, or sold in the open market"
+    ]
+   },
+   "say": "Farmers sell wheat and rice at the minimum support price. The Food Corporation of India and state agencies buy and store it in what is called the central pool."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "A buffer has two parts",
+    "items": [
+     "Operational stock: for regular needs",
+     "Strategic reserve: 20 lakh t rice + 30 lakh t wheat"
+    ]
+   },
+   "say": "The government sets a buffer norm in two parts: an operational stock for regular needs, and a strategic reserve of twenty lakh tonnes of rice and thirty of wheat."
+  },
+  {
+   "anim": {
+    "type": "bars",
+    "title": "Buffer norm (lakh tonnes)",
+    "items": [
+     {
+      "label": "1 Apr",
+      "value": 210.4,
+      "show": "210"
+     },
+     {
+      "label": "1 Jul",
+      "value": 411.2,
+      "show": "411",
+      "hi": true
+     },
+     {
+      "label": "1 Oct",
+      "value": 307.7,
+      "show": "308"
+     },
+     {
+      "label": "1 Jan",
+      "value": 214.1,
+      "show": "214"
+     }
+    ]
+   },
+   "say": "The norm changes through the year. It is highest on the first of July, after the spring wheat purchases, at about four hundred and eleven lakh tonnes.",
+   "numbers": [
+    {
+     "text": "411 lakh t",
+     "sub": "norm on 1 July",
+     "word": "four hundred"
+    }
+   ]
+  },
+  {
+   "src": "../raw/275/FOOD-CORPORATION-OF-INDIA-Khammam.jpg",
+   "kb": "pan",
+   "focus": [
+    0.5,
+    0.6
+   ],
+   "say": "The grain is kept in warehouses and covered stacks run by FCI, the Central Warehousing Corporation and state agencies."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "1 July 2025",
+    "left": {
+     "title": "Norm",
+     "items": [
+      "411 lakh tonnes"
+     ]
+    },
+    "right": {
+     "title": "Actual stock",
+     "items": [
+      "737 lakh tonnes"
+     ]
+    }
+   },
+   "say": "Stocks often run far above it: on the first of July twenty twenty-five, about seven hundred and thirty-seven lakh tonnes. Extra grain can be sold in the open market to cool prices."
+  },
+  {
+   "src": "../raw/275/Wheat.jpg",
+   "kb": "out",
+   "say": "For GS Three, a buffer stock does two jobs: food security in a bad year, and a check on prices in any year."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "PIB, 7 February 2020 (PRID 1602455): stocking norms for the central pool (operational stock plus strategic reserve of 20 LMT rice and 30 LMT wheat), totals 210.40 LMT on 1 April, 411.20 on 1 July, 307.70 on 1 October, 214.10 on 1 January; storage capacity with FCI, CWC and state agencies including covered and plinth (CAP) storage; under OMSS(D) FCI sells excess stock in the open market at pre-determined prices, decided with reference to MSP, economic cost and surplus stocks",
+  "PIB, 22 July 2025 (PRID 2146811): buffer norm on 1 July 2025 of 411.20 lakh tonnes against central pool stocks of 736.61 lakh tonnes; stocks above buffer norms"
+ ],
+ "quiz": [
+  {
+   "q": "What is the strategic reserve in India's buffer norm?",
+   "options": [
+    "30 lakh t rice and 20 lakh t wheat",
+    "20 lakh t rice and 30 lakh t wheat",
+    "50 lakh t of pulses",
+    "100 lakh t of wheat only"
+   ],
+   "answerIndex": 1,
+   "why": "PIB: 20 LMT rice and 30 LMT wheat, on every date."
+  },
+  {
+   "q": "On which date is the buffer norm highest?",
+   "options": [
+    "1 April",
+    "1 October",
+    "1 July",
+    "1 January"
+   ],
+   "answerIndex": 2,
+   "why": "411.20 lakh tonnes on 1 July."
+  },
+  {
+   "q": "Under OMSS (Domestic), FCI…",
+   "options": [
+    "Sells surplus grain in the open market",
+    "Buys grain from abroad",
+    "Fixes the MSP",
+    "Builds ration shops"
+   ],
+   "answerIndex": 0,
+   "why": "OMSS(D) sells excess central pool stock at pre-set prices."
+  }
+ ],
+ "reviewNote": "Facts are from two PIB releases. 'After the spring wheat purchases' explains the July peak; it is an inference, not a quote. 'Issued for schemes' in the flow is general; NFSA and PMGKAY are not named because no source for them was read. The FCI depot photo may show the FCI logo on its board; crop it out. Moving facts: stock levels change monthly; the norms date from 2017."
+}

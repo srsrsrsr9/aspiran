@@ -1,0 +1,143 @@
+{
+ "n": 286,
+ "id": "rti-asking-your-government",
+ "title": "RTI: Asking Your Government",
+ "format": "photo",
+ "syllabusNodes": [
+  "gs2-7"
+ ],
+ "gsPaper": [
+  "gs2"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 2,
+  "line": "Pictures: The National Archives UK (CC BY 3.0); Ankur Panchbudhe from Pune, India (CC BY 2.0)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "ring",
+    "value": 1.0,
+    "big": "30 days",
+    "below": "to answer a request for information"
+   },
+   "say": "Ask a government office for information, and it must reply within thirty days. That promise comes from the Right to Information Act.",
+   "numbers": [
+    {
+     "text": "30 days",
+     "sub": "to reply",
+     "word": "thirty"
+    }
+   ]
+  },
+  {
+   "src": "../raw/286/A-corridor-of-files-at-The-National-Archives.jpg",
+   "kb": "in",
+   "say": "Parliament passed the Act in June two thousand five. Its aim is transparency and accountability in the working of every public authority."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "How a request moves",
+    "items": [
+     "You write to the Public Information Officer",
+     "Pay the prescribed fee",
+     "Within 30 days: the information, or reasons for refusal"
+    ]
+   },
+   "say": "You write to the office's Public Information Officer and pay the prescribed fee. Within thirty days, the officer must give the information, or refuse it for a reason the Act allows."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Deadlines",
+    "left": {
+     "title": "Ordinary request",
+     "items": [
+      "30 days"
+     ]
+    },
+    "right": {
+     "title": "Life or liberty at stake",
+     "items": [
+      "48 hours"
+     ]
+    }
+   },
+   "say": "If the information concerns someone's life or liberty, the deadline is forty-eight hours.",
+   "numbers": [
+    {
+     "text": "48 hours",
+     "sub": "life or liberty",
+     "word": "forty-eight"
+    }
+   ]
+  },
+  {
+   "src": "../raw/286/North-South-Block-New-Delhi-29473953240-.jpg",
+   "kb": "pan",
+   "say": "People below the poverty line pay no fee. And if the office misses the deadline, the information must be given free."
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "If the answer isn't good enough",
+    "items": [
+     "Appeal",
+     "Second appeal: Central or State Information Commission",
+     "Within 90 days"
+    ]
+   },
+   "say": "If you are not satisfied, you can appeal. A second appeal goes to the Central or a State Information Commission, within ninety days."
+  },
+  {
+   "src": "../raw/286/A-corridor-of-files-at-The-National-Archives.jpg",
+   "kb": "out",
+   "say": "For GS Two, remember the numbers: thirty days, forty-eight hours, and an Act from two thousand five that made information a citizen's right."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "Right to Information Act, 2005 (Act 22 of 2005), official text on cic.gov.in: enacted 15 June 2005; preamble on transparency and accountability in the working of every public authority; s.7(1) reply within thirty days, forty-eight hours where information concerns the life or liberty of a person; s.7(5) no fee from persons below the poverty line; s.7(6) information free of charge where time limits are not met; s.19(3) second appeal within ninety days to the Central or State Information Commission"
+ ],
+ "quiz": [
+  {
+   "q": "Within how long must information be given if it concerns a person's life or liberty?",
+   "options": [
+    "48 hours",
+    "7 days",
+    "30 days",
+    "90 days"
+   ],
+   "answerIndex": 0,
+   "why": "RTI Act s.7(1) proviso."
+  },
+  {
+   "q": "What happens if a public authority misses the RTI deadline?",
+   "options": [
+    "The request lapses",
+    "The applicant pays a penalty",
+    "The information must be given free of charge",
+    "The request goes to court"
+   ],
+   "answerIndex": 2,
+   "why": "s.7(6): free of charge where time limits are not met."
+  },
+  {
+   "q": "A second appeal under the RTI Act goes to…",
+   "options": [
+    "The High Court",
+    "The Information Commission",
+    "The Lokpal",
+    "The Comptroller and Auditor General"
+   ],
+   "answerIndex": 1,
+   "why": "s.19(3): the Central or State Information Commission, within ninety days."
+  }
+ ],
+ "reviewNote": "All facts are from the Act's official text. The script doesn't give the fee amount (it is set by rules, not the Act) or the first-appeal officer's details. The files photo is from the UK National Archives (a generic shelf view); swap it for an Indian office photo if one is cleared. Moving facts: the 2019 amendment on Information Commissioners' terms isn't covered here."
+}

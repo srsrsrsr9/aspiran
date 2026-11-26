@@ -1,0 +1,157 @@
+{
+ "n": 273,
+ "id": "current-account-deficit",
+ "title": "Current Account Deficit",
+ "format": "calm",
+ "syllabusNodes": [
+  "gs3-1"
+ ],
+ "gsPaper": [
+  "gs3"
+ ],
+ "tone": "NEUTRAL",
+ "voice": "auto",
+ "endcard": {
+  "from": 3,
+  "line": "Picture: Ian Kiptoo (CC BY 4.0)"
+ },
+ "segments": [
+  {
+   "anim": {
+    "type": "bars",
+    "title": "India's current account deficit (% of GDP)",
+    "items": [
+     {
+      "label": "2022-23",
+      "value": 2.0,
+      "show": "2.0%"
+     },
+     {
+      "label": "2023-24",
+      "value": 0.7,
+      "show": "0.7%",
+      "hi": true
+     }
+    ]
+   },
+   "say": "In twenty twenty-two to twenty-three, India's current account deficit was two per cent of GDP. The next year it fell to under one per cent. What moved it?",
+   "numbers": [
+    {
+     "text": "2.0% → 0.7%",
+     "sub": "of GDP",
+     "word": "two"
+    }
+   ]
+  },
+  {
+   "anim": {
+    "type": "cards",
+    "title": "The current account records",
+    "items": [
+     "Trade in goods",
+     "Trade in services",
+     "Income on investments",
+     "Transfers, such as remittances"
+    ]
+   },
+   "say": "The current account records a country's trade in goods and services with the world, income on investments, and transfers such as money sent home."
+  },
+  {
+   "src": "../raw/273/Container-ship-exiting-Mombasa-port-Kenya-01.jpg",
+   "kb": "in",
+   "say": "India usually buys more goods from abroad than it sells. That merchandise trade deficit is the main reason the current account is in the red."
+  },
+  {
+   "anim": {
+    "type": "compare",
+    "title": "Two forces",
+    "left": {
+     "title": "Pulls it down",
+     "items": [
+      "goods trade deficit",
+      "investment income paid out"
+     ]
+    },
+    "right": {
+     "title": "Pulls it up",
+     "items": [
+      "services exports",
+      "remittances"
+     ]
+    }
+   },
+   "say": "Invisibles push the other way: mainly services exports and money sent home by Indians abroad. India received about one hundred and thirty-five billion dollars in remittances in twenty twenty-four to twenty-five, the most of any country."
+  },
+  {
+   "anim": {
+    "type": "flow",
+    "title": "Paying for a deficit",
+    "items": [
+     "Current account deficit",
+     "Financed by capital inflows: investment and loans",
+     "Or by drawing on reserves"
+    ]
+   },
+   "say": "A deficit has to be paid for, by foreign investment and loans coming in, or by drawing on foreign exchange reserves."
+  },
+  {
+   "anim": {
+    "type": "ring",
+    "value": 0.35,
+    "big": "Smaller gap",
+    "below": "2023-24: lower goods deficit, higher invisibles"
+   },
+   "say": "In twenty twenty-three to twenty-four, a smaller goods deficit and stronger invisibles together cut the gap."
+  },
+  {
+   "src": "../raw/273/Container-ship-exiting-Mombasa-port-Kenya-01.jpg",
+   "kb": "out",
+   "say": "For GS Three, read any current account deficit in three parts: the goods gap, the invisibles, and how the rest is financed."
+  },
+  {
+   "end": true
+  }
+ ],
+ "sources": [
+  "RBI press release, Developments in India's Balance of Payments during Q4:2023-24: current account deficit moderated to US$23.2 billion (0.7% of GDP) in 2023-24 from US$67.0 billion (2.0% of GDP) in 2022-23 on the back of a lower merchandise trade deficit; net invisibles receipts higher, primarily services and transfers",
+  "RBI press release, BoP Q2:2022-23: the current account deficit was underlain by a wider merchandise trade deficit and higher net outgo under investment income",
+  "PIB (PRID 2219971), Economic Survey: India remained the world's largest recipient of remittances, with inflows of US$135.4 billion in FY25",
+  "Wikipedia, 'Balance of payments' (read): current account deficits are financed by capital account inflows such as loans and investments; reserves"
+ ],
+ "quiz": [
+  {
+   "q": "What is the main reason India usually runs a current account deficit?",
+   "options": [
+    "A large services deficit",
+    "Low remittances",
+    "Too much foreign investment",
+    "A merchandise (goods) trade deficit"
+   ],
+   "answerIndex": 3,
+   "why": "RBI links the deficit mainly to the merchandise trade deficit."
+  },
+  {
+   "q": "Which of these is an 'invisible' that helps India's current account?",
+   "options": [
+    "Crude oil imports",
+    "Remittances from Indians abroad",
+    "Gold imports",
+    "Foreign loans"
+   ],
+   "answerIndex": 1,
+   "why": "Services exports and remittances are invisibles; loans are in the capital account."
+  },
+  {
+   "q": "India's current account deficit in 2023-24 was about…",
+   "options": [
+    "0.7% of GDP",
+    "4.4% of GDP",
+    "2.0% of GDP",
+    "7% of GDP"
+   ],
+   "answerIndex": 0,
+   "why": "RBI: US$23.2 billion, 0.7% of GDP."
+  }
+ ],
+ "reviewNote": "Figures are from RBI BoP press releases; the remittance figure is from a PIB release on the Economic Survey. The NCERT open-economy chapter (leec106) would not download here, so the financing point comes from Wikipedia; check it against NCERT before approval. The ring is decorative (no value). Moving facts: CAD numbers for 2024-25 and 2025-26 are out; consider swapping in the latest full year."
+}
