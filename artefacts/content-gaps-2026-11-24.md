@@ -22,7 +22,7 @@ Checked against `content/` and a read-only look at production on 24 Nov 2026.
 | **Unverified facts: notes** | 131 → **86** left in `content/syllabus` | Claude | 45 done today. 42 were checked against UPSC's 2026 notice and our past-paper file; 3 against PIB. The rest need primary sources opened. |
 | **Unverified facts: topic paths** | 41 (Polity paths gs2-1, gs2-3 to gs2-7, pre-4) | Claude | Open |
 | **Unverified facts: live copies** | 190 marks in production (72 reads, 12 mocks, 7 paths) | Claude | Drops when the notes are re-imported |
-| **Past papers** | 83 papers in the file, all 83 live (2,611 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2014, 2015 and 2016 with UPSC's keys **done** (25–26 Nov). CSAT 2016 **done** (26 Nov), the first CSAT paper. Still missing: CSAT 2014, 2015 and 2017–2026. UPSC's keys for Prelims 2014, 2015 and 2016 came from the Internet Archive (filed under odd names, e.g. `CSP_15_GS_I_AKy.pdf`). Mains has no answer key in any year: UPSC never publishes one. |
+| **Past papers** | 84 papers in the file, all 84 live (2,689 questions). | Claude | GS4 2016–2023, Mains 2013–15 (all 15) and Prelims GS 2014, 2015 and 2016 with UPSC's keys **done** (25–26 Nov). CSAT 2016 and 2017 **done** (26 Nov); 2017's Q47–48 held for the owner (`artefacts/pyq-held/`). Still missing: CSAT 2014, 2015 and 2018–2026. UPSC's keys for Prelims 2014, 2015 and 2016 came from the Internet Archive (filed under odd names, e.g. `CSP_15_GS_I_AKy.pdf`). Mains has no answer key in any year: UPSC never publishes one. |
 | **Audio** | 33 recordings (about 3.3 hours) now read an older version of their note | Owner, when voice work resumes | Paused (wisdom shorts are paused over pronunciation) |
 | **Video captions** | Videos 143 (coastline 7,516.6 km, re-measured 11,098.81 km), 28 (RBI corridor rates), 24 (15th Finance Commission, no "as of" date), 25 (consent managers, in the future tense), 14 (Article 117(3) should be 117(1)) | Owner (re-render) | **Not changed, on purpose.** Each caption follows the spoken voice, so editing the caption alone would make it disagree with the audio. The fix is new narration plus a re-render, and then the captions follow. |
 | **Video facts not yet checked** | 10 dated claims in the 2026-45 and 2026-46 videos (for example GDP base year, Cheetahs, balance of payments) | Claude | Open |
@@ -126,6 +126,10 @@ Written straight to the database the same way as part 1 and approved as "Aspiran
     that needs the owner's next Android build. The web pages already show passages.
   - A dry run on a local copy and the live read-back both matched byte for byte, with one history row.
   - Undo point: bookmark `00000e59-00000000-0000512e-1952e5f8e488feeaf16527a27cb6155c`.
-- **Live counts now:** 83 past papers (2,611 questions).
-- **Next:** CSAT 2017–2024 (UPSC's keys found in the Internet Archive), then 2014 and 2015. Keys for 2019, 2025 and 2026
+- **CSAT 2017 (GS Paper II), 26 Nov:** 78 of 80 questions, booklet series A, with UPSC's official key; 31 passages and
+  direction sets shared by their questions. Q47–48 (one passage on pesticides) held back at the owner's request after the
+  chat app flagged a message; they sit in `artefacts/pyq-held/csat-2017-q47-48.tsv` for the owner to handle.
+  - Undo point: bookmark `00000e82-00000000-0000512f-e746ed51c9398d22df92520e44aec2e7`.
+- **Live counts now:** 84 past papers (2,689 questions).
+- **Next:** CSAT 2018–2024 (UPSC's keys found in the Internet Archive), then 2014 and 2015. Keys for 2019, 2025 and 2026
   are still to find. Questions built on a figure will be left out and listed, never guessed.
